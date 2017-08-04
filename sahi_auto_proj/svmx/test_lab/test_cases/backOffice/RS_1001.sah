@@ -1,0 +1,61 @@
+//_includeOnce("../../../references/references.js");
+
+
+
+//Tests are to be written here
+//==============
+//function test_cloneSFM(){
+var $RS_1001 = _testcase("$RS_1001","Verify navigation to SFM transaction designer");
+$RS_1001.start();
+_setSpeed(100);
+$bo_act_login.login($url, $un, $pwd);
+if ($bo_act_common.navigateToSfmTransactionDesigner()) {
+    _log("Navigated successfully to sfm transaction designer page");
+} else {
+    _logExceptionAsFailure("Navigation unsuccessfully to sfm transaction designer page");
+};
+//$test_001.end();
+
+//==============
+//var $test_002 = _testcase("$test_002","$Clone and create a SFM");
+//$test_002.start();
+var $date = new Date();
+var $timeStamp = $date.getTime();
+var $isCustom = true;
+var $sfmNameToBeCloned = "Manage Work Order Lines - Usage Cloned";
+var $sfmName = "Auto_"+$timeStamp;
+var $sfmTemplate = "SVMXSTD: Create Usage from Estimates";
+var $sfmTemplateSaveAsName = $sfmName;
+var $fieldName = "Problem Description";
+var $containerName = "Order Status";
+_setSpeed(3000);
+$bo_act_SFM.cloneSFM($sfmNameToBeCloned,$sfmName, $isCustom, $sfmTemplate, $sfmTemplateSaveAsName, $fieldName, $containerName);
+
+//$test_002.end();
+
+//==============
+//var $test_003 = _testcase("$test_003","Verify SFM creation");
+//$test_003.start();
+_setSpeed(3000);
+_wait(60000, _isVisible($bo_pg_sfmTransactionAndDesigner.txt_quickFindField));
+_click($bo_pg_sfmTransactionAndDesigner.btn_yourCustomSfmTransactions);
+_setValue($bo_pg_sfmTransactionAndDesigner.txt_yourCustomSfmTransactionsQuickFind, $sfmName);
+
+//_setValue(_f("main").s_textinput("searchText[2]"), $name_1);
+var $isVis = _exists(_f("main").s_label($sfmName));
+
+if ($isVis == true) {
+    _log("Pass:::::::::::::Pass");
+    _takeScreenShot();
+} else {
+    _logExceptionAsFailure("Fail::::::::::::::Fail");
+    _takeScreenShot();
+
+}
+_setSpeed(100);
+//$test_003.end();
+$RS_1001.end();
+//}
+
+
+
