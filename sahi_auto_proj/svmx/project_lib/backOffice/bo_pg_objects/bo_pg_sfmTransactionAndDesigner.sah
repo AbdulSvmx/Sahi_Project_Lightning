@@ -33,6 +33,7 @@ var $bo_pg_sfmTransactionAndDesigner = new function bo_pg_sfmTransactionAndDesig
      */
     this.selectSFM = function($sfmName, $isCustom) {
 	if ($isCustom) {
+		_wait(3000);
 	 _click($bo_pg_sfmTransactionAndDesigner.btn_yourCustomSfmTransactions);
 	}
 	_click(_f("main").s_checkbox(2).leftOf(_f("main").s_label($sfmName), 10, 10));

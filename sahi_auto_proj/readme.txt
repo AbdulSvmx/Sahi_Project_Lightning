@@ -1,18 +1,17 @@
 Git Details
 
-Clone :
-git clone <url>
-
-Commit: (From the local folder path)
-git commit -m “message”
-
-Push:
-git push origin master
-
-Pull:
-git pull
+ASSUMPTIONS : Sahi is installed on pre-defined path which will be read by script
+Or Jenkins.  (Downlaod as a Zip from Git hub URL:)
 
 
-For review:
-Raise a pull request
-Then it is written to repo
+- Download/clone in the sahipro source scripts under “/auto/sahi_pro/userdata/scripts”
+
+
+- Execute scripts
+
+
+=============
+
+
+
+
