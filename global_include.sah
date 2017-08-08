@@ -8,7 +8,7 @@ var $g_pwd = "smax@123";
 //_userDataDir().replace(/\\/g, "/");
 
 //Change this path later to match git path "/sahi_pro/userdata/scripts/Sahi_Flex_Atuo_Scripts"
-$userDataDirFullPath = "/scripts/sahi_auto_proj/svmx/project_lib";
+$userDataDirFullPath = "/scripts/Sahi_Project/svmx/project_lib";
 var $normalizedUserDir = _userDataDir().replace(/\\/g, "/")+$userDataDirFullPath;//"C:/auto/sahi_auto_proj/svmx/project_lib";
 
 var $referancePath = $normalizedUserDir;
