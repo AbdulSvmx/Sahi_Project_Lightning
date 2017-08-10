@@ -22,3 +22,25 @@ _selectWindow("Dispatch Console");
 _click(_f("DispatchConsole").button("Yes"));
 
 _setSpeed(100);
+
+
+_setSpeed(100);
+//_setSpeed(3000);
+//$wNo = "WO-00019892"
+$wNo = "WO-00000010";
+_selectWindow("Dispatch Console");
+_focusWindow();
+_setValue(_f("DispatchConsole").textinput("searchText"),$wNo);
+_wait(1000);
+_call(Sahi.DRAG_DROP_SPEED=50);
+_dragDrop(_f("DispatchConsole").uitextfield($wNo),_xy(_f("DispatchConsole").customganttsheet("sheet")),120,150);
+
+_setValue(_f("DispatchConsole").datefield("startDate"),"2017-08-10")
+
+//_click(_f("DispatchConsole").button("Yes"));
+//_selectWindow("Dispatch Console");
+//_click(_f("DispatchConsole").button("Yes"));
+//
+//_mouseOverNative(_xy(_f("DispatchConsole").uitextfield("MG Road Tech"),600,0));
+
+_setSpeed(100);
