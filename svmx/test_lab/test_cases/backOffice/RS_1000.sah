@@ -7,14 +7,16 @@
 //Tests are to be written here
 //==============
 //function test_cloneSFM(){
-var $RS_1000 = _testcase("$RS_1000","Verify navigation to SFM transaction designer");
+var $RS_1000 = _testcase("RS_1000","Verify navigation to SFM transaction designer");
 $RS_1000.start();
 _setSpeed(100);
-$bo_act_login.login($g_url, $g_un, $g_pwd);
-if ($bo_act_common.navigateToSfmTransactionDesigner()) {
+
+if ($bo_act_login.login($g_url, $g_un, $g_pwd)) {
+	$bo_act_common.navigateToSfmTransactionDesigner();
     _log("Navigated successfully to sfm transaction designer page");
 } else {
-    _logExceptionAsFailure("Navigation unsuccessfully to sfm transaction designer page");
+    _fail("Login Unsuccessfull");
+    _stopTestCase();
 };
 //$test_001.end();
 

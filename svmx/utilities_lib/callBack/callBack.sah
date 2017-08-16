@@ -1,0 +1,15 @@
+/**
+ * Functions to perform specific actions during callbacks
+ */
+
+var $callBack = new function callBack(){
+	
+	this.returnResult = function($result,$desc){
+		
+		if($result){
+			return true;
+		}else{
+			return false;
+		}
+	};
+};

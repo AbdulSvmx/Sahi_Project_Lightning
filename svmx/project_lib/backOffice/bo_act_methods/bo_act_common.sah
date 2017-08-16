@@ -1,6 +1,6 @@
 
 /**
- * Function to perform common actions
+ * Functions to perform common actions
  */
 var $bo_act_common = new function bo_act_common() {
 
@@ -10,11 +10,8 @@ var $bo_act_common = new function bo_act_common() {
      */this.navigateToHome = function() {
 	_click($bo_pg_home.btn_home);
 	_wait(60000, _isVisible($bo_pg_home.link_servicemaxSetup));
-	if (_exists($bo_pg_home.link_servicemaxSetup )) {
-	    return true;
-	} else {
-	    return false;
-	}
+	return $callBack.returnResult(_exists($bo_pg_home.link_servicemaxSetup ));
+	
     };
 
     /**
@@ -24,11 +21,8 @@ var $bo_act_common = new function bo_act_common() {
 	this.navigateToHome();
 	_click($bo_pg_home.link_servicemaxSetup );
 	_wait(3000,_isVisible($bo_pg_servicemaxSetup.btn_serviceFlowManager));
-	if (_exists($bo_pg_servicemaxSetup.btn_serviceFlowManager)) {
-	    return true;
-	} else {
-	    return false;
-	}
+	return $callBack.returnResult(_exists($bo_pg_servicemaxSetup.btn_serviceFlowManager));
+
     };
     
     /**
@@ -39,14 +33,9 @@ var $bo_act_common = new function bo_act_common() {
 	_click($bo_pg_servicemaxSetup.btn_serviceFlowManager);
 	_click($bo_pg_servicemaxSetup.btn_sfmTransactionAndDocsDesigner);
 	_setSpeed(3000);
-	if (_exists($bo_pg_sfmTransactionAndDesigner.btn_standardSfmTransaction)) {
-	    return true;
-	} else {
-	    //_log("Exceptions");
-	    //Should give control to the test designer to handle the exceptions as hey may need a false positive scenario as well
-	    return false;
-	}
+	return $callBack.returnResult(_exists($bo_pg_sfmTransactionAndDesigner.btn_standardSfmTransaction));
+
 	
     };
 
-}
+};
