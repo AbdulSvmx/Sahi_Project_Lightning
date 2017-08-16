@@ -1,4 +1,3 @@
-
 /*
 _navigateTo("http://test.salesforce.com");
 _setValue(_emailbox("username"), "dc_admin@dcmap1.com.cfg3");
@@ -11,18 +10,23 @@ _assertEqual($var1, _getText($btn_home));
 _click(_link("Dispatch Console"));
 */
 _setSpeed(3000);
+_setStrictVisibilityCheck(true, _f("DispatchConsole"));
 
-$wNo = "WO-00000010";
+$wNo = "WO-00000009";
 _selectWindow("Dispatch Console");
 _focusWindow();
 _setValue(_f("DispatchConsole").textinput("searchText"),$wNo);
 _wait(1000);
 _call(Sahi.DRAG_DROP_SPEED=50);
-_click(_f("DispatchConsole").uitextfield("MG Road Tech"));
-var $pos = _position(_f("DispatchConsole").uitextfield("MG Road Tech"));
-_dragDrop(_f("DispatchConsole").uitextfield("WO-00000010"), _xy(_f("DispatchConsole").customganttsheet("ganttSheet")), parseInt($pos[0])+150, parseInt($pos[1]));
-_setValue(_f("DispatchConsole").datefield("startDate"),"2017-08-10")
+_click(_f("DispatchConsole").label("/Expand all/"));
+_click(_f("DispatchConsole").uitextfield("/MG Road Tech/"));
+var $pos = _position(_f("DispatchConsole").uitextfield("/MG Road Tech/"));
+_dragDrop(_f("DispatchConsole").uitextfield("/"+$wNo+"/"), _xy(_f("DispatchConsole").customganttsheet("ganttSheet")), parseInt($pos[0])+150, parseInt($pos[1]));
+//_setValue(_f("DispatchConsole").datefield("startDate"),"2017-08-10")
 _click(_f("DispatchConsole").button("Save"));
+
+var $color = _fetch(_f("DispatchConsole").ganttchartholder_inlinecomponent1(0).executeFn("getStyle", "bgColor"))
+
 //_click(_f("DispatchConsole").button("Yes"));
 //_selectWindow("Dispatch Console");
 //_click(_f("DispatchConsole").button("Yes"));

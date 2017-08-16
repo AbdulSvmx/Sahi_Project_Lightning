@@ -1,0 +1,19 @@
+
+/**
+ * Function to perform common actions
+ */
+var $op_act_common = new function op_act_common() {
+
+    /**
+     * Navigates to Home  page
+     * @returns boolean
+     */this.navigateToHome = function() {
+	_click($op_pg_home.btn_home);
+	_wait(60000, _isVisible($op_pg_home.link_servicemaxSetup));
+	if (_exists($op_pg_home.link_servicemaxSetup )) {
+	    return true;
+	} else {
+	    return false;
+	}
+     }
+}
