@@ -4,9 +4,10 @@ _setValue(_emailbox("username"), "dc_admin@dcmap1.com.cfg3");
 _setValue(_password("pw"), "svmx1234");
 _click(_submit("Log In to Sandbox"));
 
+
 var $var1 = "Home"
-var $btn_home = _link("Home");
-_assertEqual($var1, _getText($btn_home));
+var $link_home = _link("Home");
+_assertEqual($var1, _getText($link_home));
 _click(_link("Dispatch Console"));
 
 _setSpeed(3000);
@@ -25,7 +26,7 @@ _dragDrop(_f("DispatchConsole").uitextfield("/"+$wNo+"/"), _xy(_f("DispatchConso
 //_setValue(_f("DispatchConsole").datefield("startDate"),"2017-08-10")
 _click(_f("DispatchConsole").button("Save"));
 
-var $color = _fetch(_f("DispatchConsole").ganttchartholder_inlinecomponent1(0).executeFn("getStyle", "bgColor"))
+var $color = _fetch(_f("DispatchConsole").ganttchartholder_inlinecomponent1(0).executeFn("getStyle", "bgColor"));
 
 //_click(_f("DispatchConsole").button("Yes"));
 //_selectWindow("Dispatch Console");

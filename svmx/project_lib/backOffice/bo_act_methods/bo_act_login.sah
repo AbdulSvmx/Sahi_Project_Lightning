@@ -2,8 +2,7 @@
 /**
  * Function to perform login work flows
  */
-var $bo_act_login = new bo_act_login();
-function bo_act_login(){
+var $bo_act_login = new function bo_act_login(){
 
     /**
      * Function to login to salesforce
@@ -21,8 +20,8 @@ _wait(60000, _isVisible($bo_pg_login.txt_email));
 _setValue($bo_pg_login.txt_email, $un);
 _setValue($bo_pg_login.txt_password, $pwd);
 _click($bo_pg_login.btn_login);
-_wait(30000,_isVisible($bo_pg_home.btn_home));
-return $callBack.returnResult(_exists($bo_pg_home.btn_home), "login");
+_wait(30000,_isVisible($bo_pg_home.link_home));
+return $callBack.returnResult(_exists($bo_pg_home.link_home), "login");
 
 // Need to return
 };

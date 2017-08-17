@@ -1,19 +1,46 @@
-
 /**
  * Function to perform common actions
  */
 var $op_act_common = new function op_act_common() {
 
-    /**
-     * Navigates to Home  page
-     * @returns boolean
-     */this.navigateToHome = function() {
-	_click($op_pg_home.btn_home);
-	_wait(60000, _isVisible($op_pg_home.link_servicemaxSetup));
-	if (_exists($op_pg_home.link_servicemaxSetup )) {
-	    return true;
-	} else {
-	    return false;
-	}
-     }
-}
+	/**
+	 * Navigates to Home  page
+	 * @returns boolean
+	 */
+	this.navigateToHome = function() {
+		_click($op_pg_home.link_home);
+		_wait(60000, _isVisible($op_pg_home.link_servicemaxSetup));
+		if (_exists($op_pg_home.link_servicemaxSetup)) {
+			return true;
+		} else {
+			return false;
+		}
+	};
+
+	/**
+	 * Used to query from sForce api calls and will return a array of results
+	 * @param $un
+	 * @param $pwd
+	 * @param $queryComplex
+	 */
+
+	this.sForceQuery = function($un, $pwd, $queryComplex) {
+
+		var $nArr;
+		_set($nArr, _fetch(sForceApiCall($un, $pwd, $queryComplex)));
+		return $nArr;
+		//<browser> 
+		function sForceApiCall($un, $pwd, $queryComplex) {
+			sforce.connection.sessionId = null;
+			sforce.connection.debuggingHeader = null; // this, too is necessary!
+			sforce.connection.login($un, $pwd);
+			//sforce.connection.login("lohitha@svmxtest.org.testpar2","maxpl0re1");
+			//var query = "select name from Account"; 
+			var records = sforce.connection.query($queryComplex);
+			var arr = records.getArray('records');
+			return arr;
+		} //</browser> 
+
+	};
+
+};

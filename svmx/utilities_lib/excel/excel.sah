@@ -1,0 +1,15 @@
+
+var $excel = new function excel(){
+	
+this.readFromCustomExcel = function($filePath, $sheetName, $includeHeader, $ignoreEmptyRows){
+	
+	_log("Reading from a excel file from "+$filePath+" from sheet "+$sheetName);
+	try{
+	var $dataRead = _readExcelFile($filePath, $sheetName, $includeHeader, $ignoreEmptyRows);
+	return $dataRead;
+	}catch($e){
+		_log("Exception caught : "+$e.toString());
+	}
+	
+};
+};

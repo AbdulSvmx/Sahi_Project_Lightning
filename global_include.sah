@@ -8,25 +8,25 @@ var $g_pwd = "smax@321";
 
 // Change this path later to match git path
 // "/sahi_pro/userdata/scripts/Sahi_Flex_Atuo_Scripts"
-var $normalizedUserDir = _userDataDir().replace(/\\/g, "/");
+var $g_normalizedUserDir = _userDataDir().replace(/\\/g, "/");
 
-$projectLibPath = $normalizedUserDir + "/scripts/Sahi_Project/svmx/project_lib";
-$utilitiesPath = $normalizedUserDir
+var $g_projectLibPath = $g_normalizedUserDir + "/scripts/Sahi_Project/svmx/project_lib";
+var $g_utilitiesPath = $g_normalizedUserDir
 		+ "/scripts/Sahi_Project/svmx/utilities_lib";
 
-var $referancePath = $normalizedUserDir;
-var $includeFilesArray = [];
+var $g_referancePath = $g_normalizedUserDir;
+var $g_includeFilesArray = [];
 var $global_referenceAdded = false;
 // This will execute only once across all the suites
 if ($global_referenceAdded === false) {
 
 	// get reference files
-	_log("Getting references from dir : " + $projectLibPath);
-	recursiveGetReferenceFiles($includeFilesArray, $projectLibPath);
-	_log("Getting references from dir : " + $utilitiesPath);
-	recursiveGetReferenceFiles($includeFilesArray, $utilitiesPath);
+	_log("Getting references from dir : " + $g_projectLibPath);
+	recursiveGetReferenceFiles($g_includeFilesArray, $g_projectLibPath);
+	_log("Getting references from dir : " + $g_utilitiesPath);
+	recursiveGetReferenceFiles($g_includeFilesArray, $g_utilitiesPath);
 
-	$includeFilesArray.forEach(function includeReferences($referencePath,
+	$g_includeFilesArray.forEach(function includeReferences($referencePath,
 			$index) {
 		_continueOnError();
 		try {

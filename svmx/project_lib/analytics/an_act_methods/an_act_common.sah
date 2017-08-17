@@ -8,7 +8,7 @@ var $an_act_common = new function bo_act_common() {
      * Navigates to Home  page
      * @returns boolean
      */this.navigateToHome = function() {
-	_click($an_pg_home.btn_home);
+	_click($an_pg_home.link_home);
 	_wait(60000, _isVisible($an_pg_home.link_servicemaxSetup));
 	if (_exists($an_pg_home.link_servicemaxSetup )) {
 	    return true;

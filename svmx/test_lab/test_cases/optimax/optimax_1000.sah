@@ -1,0 +1,26 @@
+////http://community.sahipro.com/forums/discussion/1811/how-to-include-custom-js-libraries-with-sahi
+//https://developer.salesforce.com/forums/?id=906F000000093ubIAA
+//http://www.sfdcpoint.com/salesforce/soql-query-in-javascript-example/
+//Download the files from here https://test.salesforce.com/soap/ajax/28.0/connection.js
+
+var $optimax_1000 = _testcase("optimax_1000","Verify query from sforce api");
+$optimax_1000.start();
+var $un = "govendhan@svmx-cp.org.part1";
+var $pwd = "maxpl0re1";
+//var $queryComplex = "Select Id, SVMXC__ProcessID__c, SVMXC__Name__c, SVMXC__Rule_Type__c, SVMXC__Parent_Object_Criteria__c from SVMXC__ServiceMax_Processes__c Where SVMXC__ProcessID__c = 'EXPR038' OR SVMXC__ProcessID__c = 'EXPR037'";
+var $queryFromCsv = $excel.readFromCustomExcel("../optimax/op_excleData/data.xlsx", "Sheet1","","");
+var $queryComplex = $queryFromCsv[0]["Query"];
+
+$bo_act_login.login($g_url, $un, $pwd);
+
+var $resultArr = $op_act_common.sForceQuery($un, $pwd, $queryComplex)
+
+$resultArr.forEach(function($arrValue) {
+		_log($arrValue.Id);
+		_log($arrValue.SVMXC__ProcessID__c);
+		_log($arrValue.SVMXC__Name__c);
+
+});
+
+
+$optimax_1000.end();

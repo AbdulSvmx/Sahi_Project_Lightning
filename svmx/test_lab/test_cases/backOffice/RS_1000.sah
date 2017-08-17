@@ -6,7 +6,7 @@
 
 //Tests are to be written here
 //==============
-//function test_cloneSFM(){
+
 var $RS_1000 = _testcase("RS_1000","Verify navigation to SFM transaction designer");
 $RS_1000.start();
 _setSpeed(100);
@@ -18,11 +18,7 @@ if ($bo_act_login.login($g_url, $g_un, $g_pwd)) {
     _fail("Login Unsuccessfull");
     _stopTestCase();
 };
-//$test_001.end();
 
-//==============
-//var $test_002 = _testcase("$test_002","$Clone and create a SFM");
-//$test_002.start();
 var $date = new Date();
 var $timeStamp = $date.getTime();
 var $isCustom = false;
@@ -35,17 +31,12 @@ var $containerName = "Order Status";
 _setSpeed(3000);
 $bo_act_SFM.cloneSFM($sfmNameToBeCloned,$sfmName, $isCustom, $sfmTemplate, $sfmTemplateSaveAsName, $fieldName, $containerName);
 
-//$test_002.end();
 
-//==============
-//var $test_003 = _testcase("$test_003","Verify SFM creation");
-//$test_003.start();
 _setSpeed(3000);
 _wait(60000, _isVisible($bo_pg_sfmTransactionAndDesigner.txt_quickFindField));
 _click($bo_pg_sfmTransactionAndDesigner.btn_yourCustomSfmTransactions);
 _setValue($bo_pg_sfmTransactionAndDesigner.txt_yourCustomSfmTransactionsQuickFind, $sfmName);
 
-//_setValue(_f("main").s_textinput("searchText[2]"), $name_1);
 var $isVis = _exists(_f("main").s_label($sfmName));
 
 if ($isVis == true) {
@@ -57,9 +48,8 @@ if ($isVis == true) {
 
 }
 _setSpeed(100);
-//$test_003.end();
+
 $RS_1000.end();
-//}
 
 
 
