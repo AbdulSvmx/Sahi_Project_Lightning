@@ -1,3 +1,4 @@
 
+
 cd C:/auto/sahi_pro/userdata/bin/
-testrunner.bat ..\\..\\..\\sahi_auto_proj\\svmx\\test_lab\\test_suites\\testSuite1.suite http://sahitest.com/demo/ chrome
+testrunner.bat Sahi_Project\\svmx\\test_lab\\test_suites\\backOffice\\backOffice.suite http://sahitest.com/demo/ chrome

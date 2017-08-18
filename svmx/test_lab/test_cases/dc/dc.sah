@@ -1,4 +1,4 @@
-
+/*
 _navigateTo("http://test.salesforce.com");
 _setValue(_emailbox("username"), "dc_admin@dcmap1.com.cfg3");
 _setValue(_password("pw"), "svmx1234");
@@ -9,11 +9,11 @@ var $var1 = "Home"
 var $link_home = _link("Home");
 _assertEqual($var1, _getText($link_home));
 _click(_link("Dispatch Console"));
-
+*/
 _setSpeed(3000);
 _setStrictVisibilityCheck(true, _f("DispatchConsole"));
 
-$wNo = "WO-00000009";
+$wNo = "WO-00000006";
 _selectWindow("Dispatch Console");
 _focusWindow();
 _setValue(_f("DispatchConsole").textinput("searchText"),$wNo);
@@ -22,7 +22,7 @@ _call(Sahi.DRAG_DROP_SPEED=50);
 _click(_f("DispatchConsole").label("/Expand all/"));
 _click(_f("DispatchConsole").uitextfield("/MG Road Tech/"));
 var $pos = _position(_f("DispatchConsole").uitextfield("/MG Road Tech/"));
-_dragDrop(_f("DispatchConsole").uitextfield("/"+$wNo+"/"), _xy(_f("DispatchConsole").customganttsheet("ganttSheet")), parseInt($pos[0])+150, parseInt($pos[1]));
+_dragDrop(_f("DispatchConsole").uitextfield($wNo), _xy(_f("DispatchConsole").customganttsheet("ganttSheet")), parseInt($pos[0])+150, parseInt($pos[1]));
 //_setValue(_f("DispatchConsole").datefield("startDate"),"2017-08-10")
 _click(_f("DispatchConsole").button("Save"));
 
