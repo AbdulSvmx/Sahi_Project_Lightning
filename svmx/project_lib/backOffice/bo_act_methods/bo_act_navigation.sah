@@ -1,8 +1,8 @@
 
 /**
- * Functions to perform common actions
+ * Functions to perform navigation actions
  */
-var $bo_act_common = new function bo_act_common() {
+var $bo_act_navigation = new function bo_act_navigation() {
 
     /**
      * Navigates to Home  page

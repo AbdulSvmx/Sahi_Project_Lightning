@@ -1,27 +1,14 @@
 /**
- * Function to perform common actions
+ * Function to perform sForce API Calls actions
  */
-var $op_act_common = new function op_act_common() {
-
-	/**
-	 * Navigates to Home  page
-	 * @returns boolean
-	 */
-	this.navigateToHome = function() {
-		_click($op_pg_home.link_home);
-		_wait(60000, _isVisible($op_pg_home.link_servicemaxSetup));
-		if (_exists($op_pg_home.link_servicemaxSetup)) {
-			return true;
-		} else {
-			return false;
-		}
-	};
+var $op_act_sForceApiCall = new function op_act_sForceApiCall() {
 
 	/**
 	 * Used to query from sForce api calls and will return a array of results
 	 * @param $un
 	 * @param $pwd
 	 * @param $queryComplex
+	 * @returns $nArr (Query response data array)
 	 */
 
 	this.sForceQuery = function($un, $pwd, $queryComplex) {

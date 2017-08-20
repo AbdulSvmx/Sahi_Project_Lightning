@@ -3,34 +3,32 @@
 //var $un = "bhupen@back17.com";
 //var $pwd = "smax@123";
 
-
 //Tests are to be written here
 //==============
 
-var $RS_1000 = _testcase("RS_1000","Verify navigation to SFM transaction designer");
+var $RS_1000 = _testcase("RS_1000", "Verify navigation to SFM transaction designer");
 $RS_1000.start();
 _setSpeed(100);
 
 if ($bo_act_login.login($g_url, $g_un, $g_pwd)) {
 	$bo_act_common.navigateToSfmTransactionDesigner();
-    _log("Navigated successfully to sfm transaction designer page");
+	_log("Navigated successfully to sfm transaction designer page");
 } else {
-    _fail("Login Unsuccessfull");
-    _stopTestCase();
+	_fail("Login Unsuccessfull");
+	_stopTestCase();
 };
 
 var $date = new Date();
 var $timeStamp = $date.getTime();
 var $isCustom = false;
 var $sfmNameToBeCloned = "Manage Work Order Lines - Usage";
-var $sfmName = "Auto_"+$timeStamp;
+var $sfmName = "Auto_" + $timeStamp;
 var $sfmTemplate = "SVMXSTD: Create Usage from Estimates";
 var $sfmTemplateSaveAsName = $sfmName;
 var $fieldName = "Problem Description";
 var $containerName = "Order Status";
 _setSpeed(3000);
-$bo_act_SFM.cloneSFM($sfmNameToBeCloned,$sfmName, $isCustom, $sfmTemplate, $sfmTemplateSaveAsName, $fieldName, $containerName);
-
+$bo_act_SFM.cloneSFM($sfmNameToBeCloned, $sfmName, $isCustom, $sfmTemplate, $sfmTemplateSaveAsName, $fieldName, $containerName);
 
 _setSpeed(3000);
 _wait(60000, _isVisible($bo_pg_sfmTransactionAndDesigner.txt_quickFindField));
@@ -40,16 +38,13 @@ _setValue($bo_pg_sfmTransactionAndDesigner.txt_yourCustomSfmTransactionsQuickFin
 var $isVis = _exists(_f("main").s_label($sfmName));
 
 if ($isVis == true) {
-    _log("Pass:::::::::::::Pass");
-    _takeScreenShot();
+	_log("Pass:::::::::::::Pass");
+	_takeScreenShot();
 } else {
-    _logExceptionAsFailure("Fail::::::::::::::Fail");
-    _takeScreenShot();
+	_logExceptionAsFailure("Fail::::::::::::::Fail");
+	_takeScreenShot();
 
 }
 _setSpeed(100);
 
 $RS_1000.end();
-
-
-

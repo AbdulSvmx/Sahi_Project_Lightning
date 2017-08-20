@@ -1,15 +1,26 @@
+/**
+ * Functions to perform excel actions
+ */
+var $excel = new function excel() {
 
-var $excel = new function excel(){
-	
-this.readFromCustomExcel = function($filePath, $sheetName, $includeHeader, $ignoreEmptyRows){
-	
-	_log("Reading from a excel file from "+$filePath+" from sheet "+$sheetName);
-	try{
-	var $dataRead = _readExcelFile($filePath, $sheetName, $includeHeader, $ignoreEmptyRows);
-	return $dataRead;
-	}catch($e){
-		_log("Exception caught : "+$e.toString());
-	}
-	
-};
+	/**
+	 * Function to read a excel and return a array of values
+	 * 
+	 * @param $filePath
+	 * @param $sheetName
+	 * @param $includeHeader
+	 * @param $ignoreEmptyRows
+	 */
+	this.readFromCustomExcel = function($filePath, $sheetName, $includeHeader, $ignoreEmptyRows) {
+
+		_log("Reading from a excel file from " + $filePath + " from sheet " + $sheetName);
+		try {
+			var $dataRead = _readExcelFile($filePath, $sheetName, $includeHeader, $ignoreEmptyRows);
+			return $dataRead;
+		} catch ($e) {
+			_log("Exception caught : " + $e.toString());
+			return false;
+		}
+
+	};
 };

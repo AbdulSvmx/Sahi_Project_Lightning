@@ -13,7 +13,7 @@ var $queryComplex = $queryFromCsv[0]["Query"];
 
 $bo_act_login.login($g_url, $un, $pwd);
 
-var $resultArr = $op_act_common.sForceQuery($un, $pwd, $queryComplex)
+var $resultArr = $op_act_sForceApiCall.sForceQuery($un, $pwd, $queryComplex);
 
 $resultArr.forEach(function($arrValue) {
 		_log($arrValue.Id);

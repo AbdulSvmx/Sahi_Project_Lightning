@@ -2,13 +2,20 @@
  * Functions to perform specific actions during callbacks
  */
 
-var $callBack = new function callBack(){
-	
-	this.returnResult = function($result,$desc){
-		
-		if($result){
+var $callBack = new function callBack() {
+
+	/**
+	 * Use this function to return the results from a function
+	 * 
+	 * @param $result
+	 * @param $desc
+	 * @returns boolean
+	 */
+	this.returnResult = function($result, $desc) {
+
+		if ($result) {
 			return true;
-		}else{
+		} else {
 			return false;
 		}
 	};
