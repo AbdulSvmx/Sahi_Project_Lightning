@@ -8,15 +8,28 @@ var $callBack = new function callBack() {
 	 * Use this function to return the results from a function
 	 * 
 	 * @param $result
+	 * @param $isReport
 	 * @param $desc
 	 * @returns boolean
 	 */
-	this.returnResult = function($result, $desc) {
+	this.returnResult = function($result, $isReport, $desc) {
+		if ($isReport != null && $isReport == true) {
 
-		if ($result) {
-			return true;
+			if ($result) {
+				_log("Pass:::::::::::::Pass");
+				_takeScreenShot();
+				return true;
+			} else {
+				_logExceptionAsFailure("Fail::::::::::::::Fail");
+				_takeScreenShot();
+				return false;
+			}
 		} else {
-			return false;
+			if ($result) {
+				return true;
+			} else {
+				return false;
+			}
 		}
 	};
 };

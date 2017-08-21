@@ -18,6 +18,7 @@ if ($bo_act_login.login($g_url, $g_un, $g_pwd)) {
 	_stopTestCase();
 };
 
+//Create a Sfm CLone
 var $date = new Date();
 var $timeStamp = $date.getTime();
 var $isCustom = false;
@@ -30,6 +31,7 @@ var $containerName = "Order Status";
 _setSpeed(3000);
 $bo_act_SFM.cloneSFM($sfmNameToBeCloned, $sfmName, $isCustom, $sfmTemplate, $sfmTemplateSaveAsName, $fieldName, $containerName);
 
+//Verify that the sfm is cloned
 _setSpeed(3000);
 _wait(60000, _isVisible($bo_pg_sfmTransactionAndDesigner.txt_quickFindField));
 _click($bo_pg_sfmTransactionAndDesigner.btn_yourCustomSfmTransactions);
@@ -37,14 +39,8 @@ _setValue($bo_pg_sfmTransactionAndDesigner.txt_yourCustomSfmTransactionsQuickFin
 
 var $isVis = _exists(_f("main").s_label($sfmName));
 
-if ($isVis == true) {
-	_log("Pass:::::::::::::Pass");
-	_takeScreenShot();
-} else {
-	_logExceptionAsFailure("Fail::::::::::::::Fail");
-	_takeScreenShot();
+$callBack.returnResult($isVis, true, "");
 
-}
 _setSpeed(100);
 
 $RS_1000.end();

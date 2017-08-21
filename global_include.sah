@@ -28,7 +28,7 @@ if ($global_referenceAdded === false) {
 
 	$g_includeFilesArray.forEach(function includeReferences($referencePath,
 			$index) {
-		_continueOnError();
+		//_continueOnError();
 		try {
 			_includeOnce($referencePath);
 		} catch ($e) {

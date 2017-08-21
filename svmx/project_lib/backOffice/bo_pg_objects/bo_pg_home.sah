@@ -7,7 +7,9 @@
 var $bo_pg_home = new function bo_pg_home(){
 	this.link_home = _link("Home");
 	this.link_servicemaxSetup = _link("ServiceMax Setup");
-}
+	this.btn_userName = _span("userNavLabel");
+	this.link_logOut = _link("Logout");
+};
 
 
 

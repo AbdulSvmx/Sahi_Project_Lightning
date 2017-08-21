@@ -49,7 +49,7 @@ var $bo_act_SFM = new function bo_act_SFM() {
 			$result = true;
 		}
 
-		return $callBack.returnResult($result, "cloneSfm");
+		return $callBack.returnResult($result, "","cloneSfm");
 
 		_setSpeed(100);
 	};

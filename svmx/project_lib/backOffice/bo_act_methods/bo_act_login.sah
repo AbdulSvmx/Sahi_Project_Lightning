@@ -25,5 +25,21 @@ var $bo_act_login = new function bo_act_login() {
 
 		// Need to return
 	};
+	
+
+	/**
+	 * Function to log out of salesforce
+	 * 
+	 */
+	this.logOut = function() {
+		$bo_act_navigation.navigateToHome();
+		_wait(6000, _isVisible($bo_pg_home.btn_userName));
+		_click($bo_pg_home.btn_userName);
+		_click($bo_pg_home.link_logOut);
+		_wait(30000, _isVisible($bo_pg_login.txt_email));
+		return $callBack.returnResult(_exists($bo_pg_login.txt_email), "log out");
+
+		// Need to return
+	};
 
 }
