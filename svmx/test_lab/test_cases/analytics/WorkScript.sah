@@ -1,0 +1,105 @@
+var $data = _readExcelFile("/Users/meghanarao/Desktop/Create_WO.xlsx","Sheet1",true);
+function FTF_CASE_pos()
+{
+	
+}
+
+FTF_CASE_pos ();
+
+	
+var $un = "meghana.svmxdev@servicemax.com";
+var $pwd = "salesforce201";
+var $url = "https://login.salesforce.com"
+
+var $optimax_1000 = _testcase("optimax_1000","Verify query from sforce api");
+$optimax_1000.start();
+var $un = "meghana.svmxdev@servicemax.com";
+var $pwd = "salesforce201";
+var $url = "https://login.salesforce.com"
+
+	
+$bo_act_login.login($url, $un, $pwd);
+_log( $data[1]["InsertWO"]);
+$insert_WO = $data[1]["InsertWO"] ;
+
+var $resultArr2 = $op_act_sForceApiCall.sForceQuery($un, $pwd, $insert_WO , "create");
+
+_log($resultArr2);
+
+var $query_wo = "Select Name , Id , SVMXDEV__Company__c , SVMXDEV__Component__c , SVMXDEV__Closed_On__c from SVMXDEV__Service_Order__c Order by CreatedDate DESC Limit 1";
+
+var $resultArr = $op_act_sForceApiCall.sForceQuery($un, $pwd, $query_wo,"query");
+_log($resultArr);
+var $WO_ID ;
+var $Account;
+var $ClosedOn;
+var $Account_FTF;
+var $IsFirstTimeFixed;
+
+$resultArr.forEach(function($arrValue) {
+	
+	  $WO_ID = $arrValue.Id;
+	  $Account = $arrValue.SVMXDEV__Company__c;
+	  $ClosedOn = $arrValue.SVMXDEV__Closed_On__c;
+		_log($WO_ID);
+
+});
+$optimax_1000.end();
+
+//To setup the values
+_click(_link("Home"));
+_click(_link("ServiceMax Setup"));
+_click(_div("Service Performance Metrics"));
+_click(_div("Service Performance Metrics Setup"));
+_click(_span("Business Process Config"));
+_click(_textbox("issueTracker"));
+_click(_listItem("Work Order"));
+_click(_span("Save"));
+_click(_span("OK"));
+_click(_span("Metrics"));
+_click(_span("Add"));
+_click(_button("svmx-form-field svmx-form-checkbox"));
+_setValue(_textarea("appliesTo"), "FTF-Calculation method 1");
+_click(_span("Settings"));
+_click(_span("Criteria"));
+_click(_textbox("tabPanel_0_editprocesspanel_expression_QualificationCriteriafieldset_id-inputEl"));
+_click(_listItem("SVMXSTD: Closed Work Orders"));
+_click(_span("Save"));
+_click(_span("OK"));
+_wait(300);
+
+
+// To Run the Engine
+//_include("ScheduleRun.sah");
+//ScheduleRun();
+_click(_span("Schedule & Notifications"));
+_click(_textbox("emailOnSuccess"));
+_setValue(_textbox("emailOnSuccess"), "meghana.rao@servicemax.com");
+_click(_span("Save"));
+_click(_span("OK"));
+_wait(300);
+_click(_link("Run Now"));
+_click(_span("OK"));
+
+_wait(300);
+$optimax_1000.start();
+$bo_act_login.login($url, $un, $pwd);
+var $query_FTF = "Select SVMXDEV__Is_Fixed_First_Time__c, SVMXDEV__Work_Order__c, SVMXDEV__Account__c from SVMXDEV__SPM_First_Time_Fix__c where SVMXDEV__Work_Order__c = '"+ $WO_ID +"'" ;
+var $resultArr1 = $op_act_sForceApiCall.sForceQuery($un, $pwd, $query_FTF,"query");
+_log($resultArr1);
+
+	 $resultArr1.forEach(function($arrValueFTF) {
+			$Account_FTF = $arrValueFTF.SVMXDEV__Account__c;
+			$IsFirstTimeFixed =  $arrValueFTF.SVMXDEV__Is_Fixed_First_Time__c;
+	  
+		});
+	 _assertEqual($data[1]['Account'], $Account_FTF);
+	 _assertEqual("false",$IsFirstTimeFixed);
+
+
+$optimax_1000.end();
+
+
+
+
+	
