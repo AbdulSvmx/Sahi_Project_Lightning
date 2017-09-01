@@ -10,7 +10,6 @@ Or Jenkins.  (Downlaod as a Zip from Git hub URL:)
 - Execute scripts
 - Git training
 
-New line
 
 =============
 
