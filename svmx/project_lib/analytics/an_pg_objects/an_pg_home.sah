@@ -6,4 +6,25 @@
 var $an_pg_home = new function an_pg_home(){
 	this.link_home = _link("Home");
 	this.link_servicemaxSetup = _link("ServiceMax Setup");
-}
+	this.div_serviceperformancemetrics = _div("Service Performance Metrics");
+	this.div_serviceperformancemetricsetup = _div("Service Performance Metrics Setup");
+	this.span_businessprocessconfig = _span("Business Process Config") ;
+	this.text_issuetracker = _textbox("issueTracker") ;
+	this.listItemCase = _listItem("Case");
+	this.BusinessQualificationExpr = _textbox("qualificationExpression");
+	this.closedcases = _listItem("SVMXSTD: Closed Cases");
+	this.save = _span("Save");
+	this.click_OK = _span("OK");
+	this.click_metrics = _span("Metrics");
+	this.click_add = _span("Add");
+	this.Activecheckbox = _button("svmx-form-field svmx-form-checkbox");
+	this.FTFCalmethod = _textarea("appliesTo");
+	this.clicksettings = _span("Settings");
+	this.clickCriteria = _span("Criteria");
+	this.click_FTFQualification = _textbox("tabPanel_0_editprocesspanel_expression_QualificationCriteriafieldset_id-inputEl");
+	this.select_StandardClosedWO = _listItem("SVMXSTD: Closed Work Orders");
+	this.click_Schedule_Notifications = _span("Schedule & Notifications");
+	this.text_Email_onSuccess = _textbox("emailOnSuccess");
+	this.click_run = _link("Run Now");
+	
+};
