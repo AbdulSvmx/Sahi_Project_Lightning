@@ -1,4 +1,4 @@
-var $data = _readExcelFile("/Users/meghanarao/Desktop/Create_WO.xlsx","Sheet1",true);
+var $data = _readExcelFile("../analytics/an_excleData/WorkScript.xlsx","Sheet1",true);
 function FTF_CASE_pos()
 {
 	
