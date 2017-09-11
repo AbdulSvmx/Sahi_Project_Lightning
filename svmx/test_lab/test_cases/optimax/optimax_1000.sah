@@ -12,7 +12,7 @@ var $queryFromCsv = $excel.readFromCustomExcel("../optimax/op_excleData/data.xls
 var $queryComplex = $queryFromCsv[0]["Query"];
 
 $bo_act_login.login($g_url, $un, $pwd);
-
+/*
 var $resultArr = $op_act_sForceApiCall.sForceQuery($un, $pwd, $queryComplex);
 
 $resultArr.forEach(function($arrValue) {
@@ -21,6 +21,10 @@ $resultArr.forEach(function($arrValue) {
 		_log($arrValue.SVMXC__Name__c);
 
 });
+*/
+$insert_WO = "Account acct = New Account (Name= 'ok_123');insert acct;" ;
 
+var $resultArr2 = $op_act_sForceApiCall.sForceQuery($un, $pwd, $insert_WO , "create");
+_log($resultArr2)
 
 $optimax_1000.end();
