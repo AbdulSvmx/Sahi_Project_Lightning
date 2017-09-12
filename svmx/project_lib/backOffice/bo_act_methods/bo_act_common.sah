@@ -1,0 +1,47 @@
+
+function generateRandomName($Prefix){
+  var $now = new Date();
+    var $monthday=$now.getDate();
+    var $month = $now.getMonth();
+    var $year = $now.getFullYear();
+    var $hrs = $now.getHours();
+	var $min = $now.getMinutes();
+	var $sec = $now.getSeconds()
+    var $RandomString = $Prefix+$monthday + $month+ $year+$hrs+$min+$sec; 		
+    return $RandomString;
+}
+
+function currentDate($seperator){
+    var $now = new Date();
+    var $monthday;// = $now.getDate();
+    if ($now.getDate() < 10)
+        $monthday = "0" + $now.getDate();
+    else
+        $monthday = $now.getDate();
+    var $month = $now.getMonth() + 1;
+    if ($month < 10)
+        $month = "0" + $month;
+
+    var $year = $now.getFullYear();
+    
+    var $currentDate = $monthday + $seperator + $year; 
+    return $currentDate;
+}
+
+function getfutureDate($seperator){
+	var $now = new Date();
+    var $monthday;// = $now.getDate();
+    if ($now.getDate() < 10)
+        $monthday = "0" + $now.getDate();
+    else
+        $monthday = $now.getDate();
+    var $month = $now.getMonth() + 1;
+    if ($month < 10)
+        $month = "0" + $month;
+
+    var $year = $now.getFullYear();
+	$year = $year+1;
+    
+     var $currentDate = $monthday + $seperator + $month+$seperator+$year; 
+    return $currentDate;
+}

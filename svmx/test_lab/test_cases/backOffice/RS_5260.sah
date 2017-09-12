@@ -1,0 +1,20 @@
+//_includeOnce("../../../references/references.js");
+
+
+
+//Tests are to be written here
+//==============
+
+var $RS_5260 = _testcase("$RS_5260","Create a PM Plan from Service Contract with coverage type as Account");
+$RS_5260.start();
+_setSpeed(100);
+$bo_act_login.login($g_url, $g_un, $g_pwd);
+$bo_act_accounts.createAccount();
+
+//Pre - Condition 
+var $accName = bo_act_accounts.createAccount();
+$RS_1001.end();
+//}
+
+
+

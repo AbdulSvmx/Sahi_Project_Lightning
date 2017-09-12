@@ -1,0 +1,28 @@
+/**
+ * Functions for the Accounts Object
+ */
+var $bo_act_accounts = new function bo_act_accounts() {
+
+	/**
+	 * Create an Account
+	 * 
+	 * @param $accountName
+	 */
+	this.createInstalledProduct = function($ProductName,$AccountName) {
+		var $serialNum = generateRandomName("Ser");
+		var $IBName = generateRandomName("IB_");
+		bo_act_navigation.navigateToInstalledProductPage();
+		_click(btn_new);
+		_setValue(txt_productName,$ProductName);
+		_setValue(txt_serialNumber, $serialNum);
+		_setValue(txt_accountName, $AccountName);
+		_setValue(txt_installedProductName, $IBName);
+		_click(btn_save);
+		_logOutput($accountName+ " IB is created");
+		_wait(30000, _isVisible($IBName));
+		return $IBName;
+		// Need to return
+	};
+
+	
+};

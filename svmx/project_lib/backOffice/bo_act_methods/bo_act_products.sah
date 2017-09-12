@@ -1,0 +1,24 @@
+/**
+ * Functions for the Products object
+ */
+var $$bo_act_products = new function bo_act_products() {
+
+	/**
+	 * Create a Product
+	 * 
+	 * @param $productName
+	 */
+	this.createProduct = function($prefix) {
+		//"pro"
+		var $productName = generateRandomName($prefix);
+		bo_act_navigation.navigateToProductsPage();
+		_click($bo_pg_products.btn_new);
+		_setValue($bo_pg_products.txt_productName, $productName);
+		_check($bo_pg_products.chk_active);
+		_click($bo_pg_products.btn_save);
+		_wait(30000, _isVisible($productName));
+		return $productName;
+		// Need to return
+	};
+
+};

@@ -8,6 +8,7 @@ var $bo_act_navigation = new function bo_act_navigation() {
      * Navigates to Home  page
      * @returns boolean
      */this.navigateToHome = function() {
+    	 _selectWindow();
 	_click($bo_pg_home.link_home);
 	_wait(60000, _isVisible($bo_pg_home.link_servicemaxSetup));
 	return $callBack.returnResult(_exists($bo_pg_home.link_servicemaxSetup ));
@@ -37,5 +38,74 @@ var $bo_act_navigation = new function bo_act_navigation() {
 
 	
     };
+
+//Added By BAC Team
+    this.navigateToProductsPage = function(){
+    	var $url="";
+    	$bo_act_navigation.navigateToHome();
+    	_set($url, window.location.href);
+    	$url= $url.replace("home/home.jsp","01t/o");
+    	_navigateTo($url);
+    };
+    
+    this.navigateToAccountsPage = function(){
+    	var $url="";
+    	$bo_act_navigation.navigateToHome();
+    	_set($url, window.location.href);
+    	$url= $url.replace("home/home.jsp","001/o");
+    	_navigateTo($url);
+    };
+    
+    function navigateToInstalledProductPage(){
+    	var $url="";
+    	$bo_act_navigation.navigateToHome();
+    	_set($url, window.location.href);
+    	$url= $url.replace("home/home.jsp","a0T/o");
+    	_navigateTo($url);
+    }
+
+    function NavigatetoServiceMaintenanceContract(){
+    	var $url="";
+    	$bo_act_navigation.navigateToHome();
+    	_set($url, window.location.href);
+    	$url= $url.replace("home/home.jsp","a27/o");
+    	_navigateTo($url);
+    }
+
+
+    function NavigatetoSLATerms(){
+    	var $url="";
+    	$bo_act_navigation.navigateToHome();
+    	_click(_link("ServiceMax Setup"));
+    	_set($url, window.location.href);
+    	$url = $url.replace("CONF_SetupHome?id=005c0000003XKGI","SVMXDEV__SLAT_ManageSLATerms");
+    	_navigateTo($url);
+    }
+
+    function NavigatetoPMPlanTemplatePage(){
+    	var $url="";
+    	$bo_act_navigation.navigateToHome();
+    	_set($url, window.location.href);
+    	$url= $url.replace("home/home.jsp","a0g/l");
+    	_navigateTo($url);
+    }
+
+    function navigatetopmprocess(){
+    	var $url="";
+    	$bo_act_navigation.navigateToHome();
+    	_click(_link("ServiceMax Setup"));
+    	_set($url, window.location.href);
+    	$url = $url.replace("CONF_SetupHome?id=005c0000003XKGI","SVMXDEV__CONF_ManagePMProcesses");
+    	_navigateTo($url);
+    	
+    }
+
+    function navigateToDevConsole(){
+    	$bo_act_navigation.navigateToHome();
+    	_set($url, window.location.href);
+    	$url= $url.replace("home/home.jsp","_ui/common/apex/debug/ApexCSIPage");
+    	_navigateTo($url);
+    }
+
 
 };
