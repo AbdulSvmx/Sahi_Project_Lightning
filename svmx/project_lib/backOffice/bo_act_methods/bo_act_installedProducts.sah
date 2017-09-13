@@ -9,16 +9,16 @@ var $bo_act_installedProduct = new function bo_act_installedProduct() {
 	 * @param $accountName
 	 */
 	this.createInstalledProduct = function($ProductName,$AccountName) {
-		var $serialNum = generateRandomName("Ser");
-		var $IBName = generateRandomName("IB_");
+		var $serialNum = $bo_act_common.generateRandomName("Ser");
+		var $IBName = $bo_act_common.generateRandomName("IB_");
 		bo_act_navigation.navigateToInstalledProductPage();
-		_click(btn_new);
-		_setValue(txt_productName,$ProductName);
-		_setValue(txt_serialNumber, $serialNum);
-		_setValue(txt_accountName, $AccountName);
-		_setValue(txt_installedProductName, $IBName);
-		_click(btn_save);
-		_logOutput($accountName+ " IB is created");
+		_click($bo_pg_installedProducts.btn_new);
+		_setValue($bo_pg_installedProducts.txt_productName,$ProductName);
+		_setValue($bo_pg_installedProducts.txt_serialNumber, $serialNum);
+		_setValue($bo_pg_installedProducts.txt_accountName, $AccountName);
+		_setValue($bo_pg_installedProducts.txt_installedProductName, $IBName);
+		_click($bo_pg_installedProducts.btn_save);
+		_logOutput($IBName+ " IB is created");
 		_wait(30000, _isVisible($IBName));
 		return $IBName;
 		// Need to return
