@@ -13,7 +13,7 @@ $bo_act_accounts.createAccount();
 
 //Pre - Condition 
 //var $accName = bo_act_accounts.createAccount();
-$RS_1001.end();
+$RS_5260.end();
 //}
 
 
