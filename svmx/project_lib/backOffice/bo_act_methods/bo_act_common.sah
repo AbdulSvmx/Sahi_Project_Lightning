@@ -1,15 +1,17 @@
 
-function generateRandomName($Prefix){
+var $bo_act_common = new function bo_act_common() {
+
+this.generateRandomName = function($Prefix){
   var $now = new Date();
     var $monthday=$now.getDate();
     var $month = $now.getMonth();
     var $year = $now.getFullYear();
     var $hrs = $now.getHours();
 	var $min = $now.getMinutes();
-	var $sec = $now.getSeconds()
+	var $sec = $now.getSeconds();
     var $RandomString = $Prefix+$monthday + $month+ $year+$hrs+$min+$sec; 		
     return $RandomString;
-}
+};
 
 function currentDate($seperator){
     var $now = new Date();
@@ -45,3 +47,4 @@ function getfutureDate($seperator){
      var $currentDate = $monthday + $seperator + $month+$seperator+$year; 
     return $currentDate;
 }
+};

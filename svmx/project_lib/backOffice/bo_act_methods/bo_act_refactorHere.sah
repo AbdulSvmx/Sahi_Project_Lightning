@@ -10,7 +10,7 @@ var $DEFAULT_ProdOrg = "https://login.salesforce.com"
 ///LIBRARY
 
 
-var $DEFAULT_PMProcessType = ["Time Based Preventive Maintenance","Condition Based Preventive Maintenance"];
+
 var $PMPlanSource_SCON;
 
 // Create an Account
@@ -20,77 +20,12 @@ var $PMPlanSource_SCON;
 
 
 
-function CreateSLATerms(){
-	var $SLAName = generateRandomString(8);
-	NavigatetoSLATerms();
-	_click(_button("New SLA Terms"));
-	_setValue(_textbox(0,_near(_div("SLA Terms Name"))), $SLAName);
-	_setValue(_textbox(1,_near(_div("SLA Terms Name"))), "Default");
-	_check(_checkbox(0,_under(_div("Active"))));
-	_click(_button("Save"));
-	_logOutput($SLAName+ " SLA Term is created");
-	return $SLAName;
-}
 
-function CreateServiceMaintenanceContract($accName, $slaTermName){
-	var $sconName = generateRandomString(8);
-	var $sconUrl;
-	NavigatetoServiceMaintenanceContract();
-	_click(_button(" New "));
-	_setValue(_textbox("Name"), $sconName);
-	_setValue(_textbox("*Account"), $accName);
-	_setValue(_textbox("SLA Terms"), $slaTermName);
-	_click((_link("/javascript.*/",_rightOf(_label("/.*Start Date/")))));
-	_setValue(_textbox("00N55000000orzR"), "7/25/2018");
-	_click(_submit(" Save "));
-	_set($sconUrl, window.location.href);
-	return $sconUrl;
-}
 
-function AddCoveredProductToSCON($sconUrl,$InsProduct){
-	_navigateTo($sconUrl);
-	_click(_button("New Covered Product"));
-_setValue(_textbox("Installed Product"),$InsProduct);
-	_click(_submit(" Save "));
-	_click(_link("/lookup.*/",_rightOf(_cell("Service/Maintenance Contract"))));
-}
 
-function CreateTimeBasedPMPlanTemplate($ProductName){
-	var $PMTemplateName = generateRandomString(8);
-	NavigatetoPMPlanTemplatePage();
-	_click(_button("New PM Plan Template"));
-	_setValue(_textbox("PM Plan Template Name:"),$PMTemplateName);
-	_click(_div("/trigger*/",_rightOf(_textbox("Coverage Type:"))));
-   _click(_listItem("Product (Must Have IB)"));
-_click(_div("svmx-grid-cell-inner [1]"));
-_setValue(_textbox("sfm-numbercelleditor-1062-inputEl"), "1");
-	_click(_div("svmx-grid-cell-inner [3]"));
-_setValue(_textbox("sfm-numbercelleditor-1067-inputEl"), "1");
-	_click(_div("svmx-grid-cell-inner [4]"));
-_setValue(_textbox("sfm-picklistcelleditor-1068-inputEl"),"Months")
-	_check(_div(0,_under(_span("Recurring"))));
-		_click(_span("Applicable Products"));
-	_click(_div("svmx-grid-cell-inner [7]"));
-_setValue(_textbox("svmx-text-1092-inputEl"),$ProductName);
-_click(_span("svmx-btn-icon svmx-sfmd-save-icon"));
-	return $PMTemplateName;
-}
-function CreateATimeBasedPMPlan($sconurl, $PMPTemplate,$Source){
-	var $PMPlanName = generateRandomString(8);
-	switch($Source){
-		case $PMPlanSource_SCON:
-			_navigateTo($sconurl);
-		break;
-	}
-	_selectDomain("/svmx/");
-	_click(_button("Create PM Plan"));
-	_setValue(_textbox(0,_near(_label("PM Plan Template:"))), $PMPTemplate);
-	_setValue(_textbox(0,_near(_label("PM Plan Name:"))), $PMPlanName);
-	_setValue(_textbox(0,_near(_label("Start Date:"))), currentDate("/"));
-	_setValue(_textbox(0,_near(_label("End Date:"))), getfutureDate("/"));
-	_click(_span("/svmx-sfmd-save-icon/"));
-	return $PMPlanName;	
-}
+
+
+
 
 function createPMProcess($dd_processType,$creationOfWO,$pmPlan){
 	var $PMProcessName = generateRandomString(8);

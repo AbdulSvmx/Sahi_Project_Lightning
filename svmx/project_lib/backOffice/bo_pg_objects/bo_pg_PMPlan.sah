@@ -1,0 +1,33 @@
+
+
+/**
+ * Home page object repository
+ */
+
+var $bo_pg_PMPlan = new function bo_pg_PMPlan(){
+	this.btn_createPMPlan = _button("Create PM Plan");
+	this.txt_PMPlanTemplateName = _textbox(0,_near(_label("PM Plan Template:")));
+	this.txt_PMPlanName = _textbox(0,_near(_label("PM Plan Name:")));
+	this.txt_startDate = _textbox(0,_near(_label("Start Date:")));
+	this.txt_endDate = _textbox(0,_near(_label("End Date:")));
+	this.btn_save = _span("/svmx-sfmd-save-icon/");
+};
+
+
+
+function CreateATimeBasedPMPlan($sconurl, $PMPTemplate,$Source){
+	var $PMPlanName = generateRandomName(8);
+	switch($Source){
+		case $PMPlanSource_SCON:
+			_navigateTo($sconurl);
+		break;
+	}
+	_selectDomain("/svmx/");
+	_click($bo_pg_PMPlan.btn_createPMPlan);
+	_setValue($bo_pg_PMPlan.txt_PMPlanTemplateName, $PMPTemplate);
+	_setValue($bo_pg_PMPlan.txt_PMPlanName, $PMPlanName);
+	_setValue($bo_pg_PMPlan.txt_startDate, currentDate("/"));
+	_setValue($bo_pg_PMPlan.txt_endDate, getfutureDate("/"));
+	_click($bo_pg_PMPlan.btn_save);
+	return $PMPlanName;	
+}

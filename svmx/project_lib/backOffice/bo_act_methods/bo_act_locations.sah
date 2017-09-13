@@ -1,0 +1,26 @@
+/**
+ * Functions for the Accounts Object
+ */
+var $bo_act_accounts = new function bo_act_accounts() {
+
+	/**
+	 * Create an Account
+	 * 
+	 * @param $accountName
+	 */
+
+	this.createLocation = function($street,$country,$zipCode){
+		var $locName = generateRandomName("loc");
+		$bo_act_navigation.navigateToLocations();
+		_click(btn_new);
+		_click(btn_continue);
+		_setValue(txt_locationName,$locName);
+		_setValue(txt_street,$street);
+		_setSelected(_select(0,_rightOf(_label("/Country/"))),$country);
+		_setValue(_textbox(0,_rightOf(_label("/Zip/"))),$zipCode);
+		_highlight(_submit("/Save/"));
+		return $locName;
+		};
+
+
+};

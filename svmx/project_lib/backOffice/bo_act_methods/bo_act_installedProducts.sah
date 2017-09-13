@@ -1,7 +1,7 @@
 /**
  * Functions for the Accounts Object
  */
-var $bo_act_accounts = new function bo_act_accounts() {
+var $bo_act_installedProduct = new function bo_act_installedProduct() {
 
 	/**
 	 * Create an Account

@@ -1,0 +1,20 @@
+
+
+/**
+ * Home page object repository
+ */
+
+var $bo_pg_locations = new function bo_pg_locations(){
+	this.btn_new = _button(" New ");
+	this.btn_continue = _submit("Continue");
+	this.txt_locationName = _textbox("Name");
+	this.txt_street = _textarea(0,_rightOf(_label("/Street/")));
+	this.txt_country = _select(0,_rightOf(_label("/Country/")));
+	this.txt_zip = _textbox(0,_rightOf(_label("/Zip/")));
+	this.btn_save = _submit("/Save/");
+};
+
+
+
+
+
