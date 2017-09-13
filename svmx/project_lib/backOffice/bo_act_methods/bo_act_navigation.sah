@@ -56,6 +56,17 @@ var $bo_act_navigation = new function bo_act_navigation() {
     	_navigateTo($url);
     };
     
+
+  
+    	
+     this.navigateToContactsPage = function(){
+    	var $url="";
+    	$bo_act_navigation.navigateToHome();
+    	_set($url, window.location.href);
+    	$url= $url.replace("home/home.jsp","003/o");
+    	_navigateTo($url);
+    };
+    
     this.navigateToInstalledProductPage = function(){
     	var $url="";
     	$bo_act_navigation.navigateToHome();
