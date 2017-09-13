@@ -1,0 +1,15 @@
+//Tests are to be written here
+//==============
+//_includeOnce("../../../references/references.js");
+_include("$bo_act_methods");
+var $RS_7288 = _testcase("$RS_7288","Creation of a Warranty Term and association of a Warranty to an Installed Product");
+$RS_7288.start();
+_setSpeed(100);
+$bo_act_login.login($g_url, $g_un, $g_pwd);
+var $accountName = $bo_act_accounts.createAccount();
+//var $contactName =$bo_act_contacts.createContact();
+
+//Pre - Condition 
+//var $conName = bo_act_contacts.createContact();
+$RS_7288.end();
+//}

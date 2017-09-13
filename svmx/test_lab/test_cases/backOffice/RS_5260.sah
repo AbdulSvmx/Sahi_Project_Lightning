@@ -12,7 +12,7 @@ $bo_act_login.login($g_url, $g_un, $g_pwd);
 $bo_act_accounts.createAccount();
 
 //Pre - Condition 
-var $accName = bo_act_accounts.createAccount();
+//var $accName = bo_act_accounts.createAccount();
 $RS_1001.end();
 //}
 
