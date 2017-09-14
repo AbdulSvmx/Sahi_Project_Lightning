@@ -9,16 +9,23 @@ var $bo_act_PMPlanTemplate = new function bo_act_PMPlanTemplate() {
 	 * @param 
 	 */
 	
-this.createTimeBasedPMPlanTemplate = 	function($ProductName,$coverage){
-		var $PMTemplateName = generateRandomString(8);
+this.createTimeBasedPMPlanTemplate = 	function($ProductName,$coverage,$workOrderPurpose){
+		var $PMTemplateName = $bo_act_common.generateRandomName("PMT");
 		$bo_act_navigation.navigateToPMPlanTemplatePage();
 		_click($bo_pg_PMPlanTemplate.btn_newPMPlanTemplate);
+		_wait(60000,_isVisible("Create Preventive Maintenance Plan Template"));
 		_setValue($bo_pg_PMPlanTemplate.txt_PMPlanTemplateName,$PMTemplateName);
 		_click($bo_pg_PMPlanTemplate.txt_coverageType);
 	   _click($coverage);
 	   _setStrictVisibilityCheck(true);
 	   _click($bo_pg_PMPlanTemplate.link_editIcon);
 	   _setStrictVisibilityCheck(false);
+	   _getRecentWindow();
+	   _setValue(_textbox("/Sequence:/"),1);
+	   $bo_act_common.searchfunction($workOrderPurpose);
+	   
+	   
+
 
 		return $PMTemplateName;
 	};

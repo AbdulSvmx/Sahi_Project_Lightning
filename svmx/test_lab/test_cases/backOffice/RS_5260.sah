@@ -12,15 +12,15 @@ $bo_act_login.login($g_url, $g_un, $g_pwd);
 
 
 //Pre - Condition 
-var $accName = $bo_act_accounts.createAccount();
-var $proName = $bo_act_products.createProduct();
-var $installedProduct = $bo_act_installedProduct.createInstalledProduct($proName, $accName);
-var $slaterm = $bo_act_slaTerms.createSlaTerms("Default");
-var $sconUrl = $bo_act_serviceMaintenanceContracts.createServiceMaintenanceContract($accName, $slaterm);
-$bo_act_serviceMaintenanceContracts.AddCoveredProductToSCON($sconUrl, $installedProduct);
+//var $accName = $bo_act_accounts.createAccount();
+//var $proName = $bo_act_products.createProduct();
+//var $installedProduct = $bo_act_installedProduct.createInstalledProduct($proName, $accName);
+//var $slaterm = $bo_act_slaTerms.createSlaTerms("Default");
+//var $sconUrl = $bo_act_serviceMaintenanceContracts.createServiceMaintenanceContract($accName, $slaterm);
+//$bo_act_serviceMaintenanceContracts.AddCoveredProductToSCON($sconUrl, $installedProduct);
 
 //Test Steps
-
+$bo_act_PMPlanTemplate.createTimeBasedPMPlanTemplate("test", "Product (Must Have IB)");
 
 
 //var $accName = bo_act_accounts.createAccount();
