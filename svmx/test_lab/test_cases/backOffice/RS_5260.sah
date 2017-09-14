@@ -25,7 +25,7 @@ $bo_act_serviceMaintenanceContracts.AddCoveredProductToSCON($sconUrl, $installed
 
 //var $accName = bo_act_accounts.createAccount();
 $RS_5260.end();
-
+//Test
 //}
 
 
