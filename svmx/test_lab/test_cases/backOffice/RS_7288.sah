@@ -1,16 +1,27 @@
 //Tests are to be written here
 //==============
-//_includeOnce("../../../references/references.js");
+
+//Pre - Condition Test Data
+var $recordType = ["Depot","Depot Child","Depot Parent","Standard Location"];
+var $productFamily = ["None","GeneralSolution","AdvSolution","Accessory", "Storage"];
+var $productCode = "pro01";
+
 var $RS_7288 = _testcase("$RS_7288","Creation of a Warranty Term and association of a Warranty to an Installed Product");
 $RS_7288.start();
 _setSpeed(100);
-$bo_act_login.login($g_url, $g_un, $g_pwd);
-var $recordType = ["Depot","Depot Child","Depot Parent","Standard Location"];
-var $accountName = $bo_act_accounts.createAccount();
-var $contactName =$bo_act_contacts.createContact($accountName);
-var $locationName =$bo_act_locations.createLocation($recordType[3],$accountName,"#007","India","560001");
+//$bo_act_login.login($g_url, $g_un, $g_pwd);
+//var $accountName = $bo_act_accounts.createAccount();
+var $accountName = "Acc1482017164021";
+//var $contactName = $bo_act_contacts.createContact($accountName);
+var $contactName = "Con148201716415";
+//var $locationName = $bo_act_locations.createLocation($recordType[3],$accountName,"#007","India","560001");
+//var $productName = $bo_act_products.createProduct($productCode, $productFamily[3]);
+var $productName = "pro1482017165455";
+var $IBName = $bo_act_installedProduct.createInstalledProduct($productName, $accountName, $contactName);
+
 
 //Pre - Condition 
 //var $conName = bo_act_contacts.createContact();
 $RS_7288.end();
 //}
+
