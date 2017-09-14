@@ -11,21 +11,35 @@ var $op_act_sForceApiCall = new function op_act_sForceApiCall() {
 	 * @returns $nArr (Query response data array)
 	 */
 
-	this.sForceQuery = function($un, $pwd, $queryComplex) {
+	this.sForceQuery = function($un, $pwd, $queryComplex , $queryType) {
 
 		var $nArr;
-		_set($nArr, _fetch(sForceApiCall($un, $pwd, $queryComplex)));
+		_set($nArr, _fetch(sForceApiCall($un, $pwd, $queryComplex , $queryType)));
 		return $nArr;
 		//<browser> 
-		function sForceApiCall($un, $pwd, $queryComplex) {
+		function sForceApiCall($un, $pwd, $queryComplex,$queryType) {
 			sforce.connection.sessionId = null;
 			sforce.connection.debuggingHeader = null; // this, too is necessary!
 			sforce.connection.login($un, $pwd);
 			//sforce.connection.login("lohitha@svmxtest.org.testpar2","maxpl0re1");
 			//var query = "select name from Account"; 
-			var records = sforce.connection.query($queryComplex);
+			
+    // Code changes by Meghana Rao : Date : 1st Sept 2017
+			
+	switch($queryType) {
+      case 'query':
+            var records = sforce.connection.query($queryComplex);
 			var arr = records.getArray('records');
 			return arr;
+            break;
+      case 'create':
+    	  
+    	  return records = sforce.apex.executeAnonymous($queryComplex);
+          break;
+  default:
+        	return arr;
+} 
+			
 		} //</browser> 
 
 	};

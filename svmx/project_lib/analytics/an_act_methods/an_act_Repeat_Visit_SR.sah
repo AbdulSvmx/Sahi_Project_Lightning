@@ -1,0 +1,55 @@
+/**
+ * Function to create a Repeat Visit Calculation method for Repeat Visit
+ */
+var $an_act_Repeat_Visit_SR = new function an_act_Repeat_Visit_SR() {
+
+	this.RV_USA_Calc = function($Calculationmethodname) {
+
+		// To setup the values
+		_click($an_pg_home.link_home);
+		_click($an_pg_home.link_servicemaxSetup);
+		_click($an_pg_home.div_serviceperformancemetrics);
+		_click($an_pg_home.div_serviceperformancemetricsetup);
+
+		_click($an_pg_home.span_businessprocessconfig);
+		_click($an_pg_home.text_issuetracker);
+		_click($an_pg_home.listItemCase);
+		_click($an_pg_home.BusinessQualificationExpr);
+		_click($an_pg_home.closedcases);
+		_click($an_pg_home.save);
+		_click($an_pg_home.click_OK);
+		_click($an_pg_home.click_metrics);
+		_click($an_pg_home.RepeatVisit);
+		_click($an_pg_home.AddRepeatVisit);
+		_click($an_pg_home.Activecheckbox);
+		_setValue($an_pg_home.Calmethod, $Calculationmethodname);
+		_click($an_pg_home.clicksettings);
+		_click($an_pg_home.RepeatVisit_itemsforCalc);
+		_click($an_pg_home.Account);
+		_click($an_pg_home.Location);
+		_click($an_pg_home.clickCriteria);
+		_click($an_pg_home.click_RepeatVisitQualification);
+		_click($an_pg_home.select_USA_ClosedWO);
+		_click($an_pg_home.save);
+		_click($an_pg_home.click_OK);		
+
+	};
+	
+	
+	this.RV_RunEngine = function($emailId)
+	{
+		_click($an_pg_home.RV_Schedule_Notifications);
+		_click($an_pg_home.text_Email_onSuccess);
+		_setValue($an_pg_home.text_Email_onSuccess, $emailId);
+		_click($an_pg_home.save);
+		_click($an_pg_home.click_OK);
+		_wait(300);
+		_click($an_pg_home.click_run);
+		_click($an_pg_home.click_OK);
+		_wait(1000);
+		
+	}
+	
+	
+
+};

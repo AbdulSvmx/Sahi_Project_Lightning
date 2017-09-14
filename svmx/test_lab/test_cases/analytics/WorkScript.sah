@@ -1,20 +1,11 @@
 var $data = _readExcelFile("../analytics/an_excleData/WorkScript.xlsx","Sheet1",true);
-function FTF_CASE_pos()
-{
-	
-}
 
-FTF_CASE_pos ();
 
 var $un = "meghana.svmxdev@servicemax.com";
 var $pwd = "salesforce201";
 var $url = "https://login.salesforce.com";
-
-var $optimax_1000 = _testcase("optimax_1000","Verify query from sforce api");
-$optimax_1000.start();
-var $un = "meghana.svmxdev@servicemax.com";
-var $pwd = "salesforce201";
-var $url = "https://login.salesforce.com";
+var $an_test = _testcase("POCforSPM","Verify if data is created for SPM");
+$an_test.start();
 
 $insert_case = $data[1]["InsertCase"];
 $bo_act_login.login($url, $un, $pwd);
@@ -51,48 +42,11 @@ $resultArr.forEach(function($arrValue) {
 		_log($WO_ID);
 
 });
-$optimax_1000.end();
 
-//To setup the values
-_click($an_pg_home.link_home);
-_click($an_pg_home.link_servicemaxSetup);
-_click($an_pg_home.div_serviceperformancemetrics);
-_click($an_pg_home.div_serviceperformancemetricsetup);
+$an_act_schedule.ftfSetUp("FTF-Calculation method 1");
+$an_act_schedule.runEngine("meghana.rao@servicemax.com");
 
 
-_click($an_pg_home.span_businessprocessconfig);
-_click($an_pg_home.text_issuetracker);
-_click($an_pg_home.listItemCase);
-_click($an_pg_home.BusinessQualificationExpr);
-_click($an_pg_home.closedcases);
-_click($an_pg_home.save);
-_click($an_pg_home.click_OK);
-_click($an_pg_home.click_metrics);
-_click($an_pg_home.click_add);
-_click($an_pg_home.Activecheckbox);
-_setValue($an_pg_home.FTFCalmethod ,"FTF-Calculation method 1");
-_click($an_pg_home.clicksettings);
-_click($an_pg_home.clickCriteria);
-_click($an_pg_home.FTFCalmethod);
-_click($an_pg_home.closedcases);
-_click($an_pg_home.save);
-_click($an_pg_home.click_OK);
-_wait(300);
-
-
-// To Run the Engine
-//_include("ScheduleRun.sah");
-//ScheduleRun();
-_click($an_pg_home.click_Schedule_Notifications);
-_click($an_pg_home.text_Email_onSuccess);
-_setValue($an_pg_home.text_Email_onSuccess, "meghana.rao@servicemax.com");
-_click($an_pg_home.save);
-_click($an_pg_home.click_OK);
-_wait(300);
-_click($an_pg_home.click_run);
-_click($an_pg_home.click_OK);
-_wait(1000);
-$optimax_1000.start();
 $bo_act_login.login($url, $un, $pwd);
 var $query_FTF = "Select SVMXDEV__Is_Fixed_First_Time__c, SVMXDEV__Case__c , SVMXDEV__Work_Order__c, SVMXDEV__Account__c from SVMXDEV__SPM_First_Time_Fix__c where SVMXDEV__Work_Order__c = '"+ $WO_ID +"'" ;
 var $resultArr1 = $op_act_sForceApiCall.sForceQuery($un, $pwd, $query_FTF,"query");
@@ -110,7 +64,7 @@ _log($resultArr1);
 	 
 
 
-$optimax_1000.end();
+$an_test.end();
 
 
 

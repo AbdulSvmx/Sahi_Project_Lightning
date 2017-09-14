@@ -1,0 +1,56 @@
+
+/**
+ * Function run and setuo schedules
+ */var $an_act_schedule = new function an_act_schedule() {
+/**
+ * Desc
+ * @param $ftfCalculation
+ */
+	this.FTF_Calc1 = function($ftfCalculation) {
+		// To setup the values
+		_click($an_pg_home.link_home);
+		_click($an_pg_home.link_servicemaxSetup);
+		_click($an_pg_home.div_serviceperformancemetrics);
+		_click($an_pg_home.div_serviceperformancemetricsetup);
+
+		_click($an_pg_home.span_businessprocessconfig);
+		_click($an_pg_home.text_issuetracker);
+		_click($an_pg_home.listItemCase);
+		_click($an_pg_home.BusinessQualificationExpr);
+		_click($an_pg_home.closedcases);
+		_click($an_pg_home.save);
+		_click($an_pg_home.click_OK);
+		_click($an_pg_home.click_metrics);
+		_click($an_pg_home.click_add);
+		_click($an_pg_home.Activecheckbox);
+		// "FTF-Calculation method 1"
+		_setValue($an_pg_home.Calmethod, $ftfCalculation);
+		_click($an_pg_home.clicksettings);
+		_click($an_pg_home.clickCriteria);
+		_click($an_pg_home.FTFCalmethod);
+		_click($an_pg_home.closedcases);
+		_click($an_pg_home.save);
+		_click($an_pg_home.click_OK);
+		_wait(300);
+
+	};
+
+	// To Run the Engine
+	// _include("ScheduleRun.sah");
+	// ScheduleRun();
+
+	this.FTF_RunEngine = function($emailId) {
+		_click($an_pg_home.click_Schedule_Notifications);
+		_click($an_pg_home.text_Email_onSuccess);
+		// "meghana.rao@servicemax.com"
+		_setValue($an_pg_home.text_Email_onSuccess, $emailId);
+		_click($an_pg_home.save);
+		_click($an_pg_home.click_OK);
+		_wait(300);
+		_click($an_pg_home.click_run);
+		_click($an_pg_home.click_OK);
+		_wait(1000);
+		//ScheduleRun();
+	};
+
+};
