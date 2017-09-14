@@ -1,0 +1,28 @@
+/**
+ * Functions for the Accounts Object
+ */
+var $bo_act_accounts = new function bo_act_accounts() {
+
+	/**
+	 * Create an Account
+	 * 
+	 * @param $accountName
+	 */
+	this.createAccount = function() {
+		var $accountName = $bo_act_common.generateRandomName("Acc");
+        $bo_act_navigation.navigateToAccountsPage();
+		_click($bo_pg_accounts.btn_new);
+		_setValue($bo_pg_accounts.txt_accountName, $accountName);
+		_click($bo_pg_accounts.btn_save);
+		_logOutput($accountName+ " account is created");
+		_wait(30000, _isVisible($accountName));
+return $accountName;
+		//return $callBack.returnResult([_isVisible($accountName), "Account not created",$accountName] );
+	
+		
+		// Need to return
+	};
+	
+
+
+};

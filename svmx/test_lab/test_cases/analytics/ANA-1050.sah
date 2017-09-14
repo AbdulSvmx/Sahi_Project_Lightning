@@ -33,7 +33,10 @@ var $resultArr = $op_act_sForceApiCall.sForceQuery($un, $pwd, $query_wo,"query")
 var $WO_ID ;
 var $WO_Account;
 var $WO_ClosedOn;
-
+var $RV_WO;
+var $RV_config;
+var $RV_case;
+var $Is_Repeat_visit;
 
 $resultArr.forEach(function($arrValue) {
 	
@@ -45,14 +48,14 @@ $resultArr.forEach(function($arrValue) {
 $an_act_Repeat_Visit_SR.RV_USA_Calc("Repeat Visit Calc USA");
 $an_act_Repeat_Visit_SR.RV_RunEngine("meghana.rao@servicemax.com");
 
-var $query_RV = "Select SVMXC__Work_Order__c , SVMXC__Configuration_Name__c ,SVMXC__Is_Repeat_Visit__c ,SVMXC__Case__c from SVMXC__SPM_Repeat_Visit__c where SVMXC__Work_Order__c ='"+ $WO_ID +"'";
+var $query_RV = "Select SVMXC__Work_Order__c ,SVMXC__Account__c, SVMXC__Configuration_Name__c ,SVMXC__Is_Repeat_Visit__c ,SVMXC__Case__c from SVMXC__SPM_Repeat_Visit__c where SVMXC__Work_Order__c ='"+ $WO_ID +"'";
 var $resultArr1 = $op_act_sForceApiCall.sForceQuery($un, $pwd, $query_FTF,"query");
 
-$resultArr1.forEach(function($arrValueFTF) {
-	$Account_FTF = $arrValueFTF.SVMXDEV__Account__c;
-	$IsFirstTimeFixed =  $arrValueFTF.SVMXDEV__Is_Fixed_First_Time__c;
-    $FTF_Case = $arrValueFTF.SVMXDEV__Case__c;
-
+$resultArr1.forEach(function($arrValueRV) {
+	
+	$WO_Account = $arrValueRV.SVMXC__Account__c;
+	$RV_case = $arrValueRV.SVMXC__Case__c;
+	
 });
 
 

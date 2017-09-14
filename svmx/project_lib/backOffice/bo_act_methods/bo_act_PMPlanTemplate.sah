@@ -1,0 +1,26 @@
+/**
+ * Functions for the Accounts Object
+ */
+var $bo_act_PMPlanTemplate = new function bo_act_PMPlanTemplate() {
+
+	/**
+	 * Create a Time based PM Plan Template
+	 * 
+	 * @param 
+	 */
+	
+this.createTimeBasedPMPlanTemplate = 	function($ProductName,$coverage){
+		var $PMTemplateName = generateRandomString(8);
+		$bo_act_navigation.navigateToPMPlanTemplatePage();
+		_click($bo_pg_PMPlanTemplate.btn_newPMPlanTemplate);
+		_setValue($bo_pg_PMPlanTemplate.txt_PMPlanTemplateName,$PMTemplateName);
+		_click($bo_pg_PMPlanTemplate.txt_coverageType);
+	   _click($coverage);
+	   _setStrictVisibilityCheck(true);
+	   _click($bo_pg_PMPlanTemplate.link_editIcon);
+	   _setStrictVisibilityCheck(false);
+
+		return $PMTemplateName;
+	};
+
+};
