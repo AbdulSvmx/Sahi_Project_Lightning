@@ -1,0 +1,13 @@
+
+
+/**
+ * Home page object repository
+ */
+
+var $bo_pg_products = new function bo_pg_products(){
+	this.btn_new = _button(" New ");
+	this.txt_productName = _textbox("Name");
+	this.btn_save = _submit(" Save ");
+	this.chk_active = _checkbox("IsActive");
+};
+
