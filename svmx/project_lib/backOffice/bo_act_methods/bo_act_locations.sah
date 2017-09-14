@@ -2,23 +2,25 @@
  * Functions for the Accounts Object
  */
 var $bo_act_locations = new function bo_act_locations() {
-
+	var $recordType = ["Depot","Depot Child","Depot Parent","Standard Location"];
 	/**
 	 * Create an Account
 	 * 
 	 * @param $accountName
 	 */
 
-	this.createLocation = function($street,$country,$zipCode){
-		var $locName = generateRandomName("loc");
+	this.createLocation = function($recordType,$accountName,$street,$country,$zipCode){
+		var $locName = $bo_act_common.generateRandomName("loc");
 		$bo_act_navigation.navigateToLocations();
-		_click(btn_new);
-		_click(btn_continue);
-		_setValue(txt_locationName,$locName);
-		_setValue(txt_street,$street);
-		_setSelected(_select(0,_rightOf(_label("/Country/"))),$country);
-		_setValue(_textbox(0,_rightOf(_label("/Zip/"))),$zipCode);
-		_highlight(_submit("/Save/"));
+		_click($bo_pg_locations.btn_new);
+		_setSelected($bo_pg_locations.sel_recordType, $recordType);
+		_click($bo_pg_locations.btn_continue);
+		_setValue($bo_pg_locations.txt_locationName, $locName);
+		_setValue($bo_pg_locations.txt_street, $street);
+		_setSelected($bo_pg_locations.sel_country, $country);
+		_setValue($bo_pg_locations.txt_zip, $zipCode);
+		_setValue($bo_pg_locations.txt_accountName, $accountName);
+		_highlight($bo_pg_locations.btn_save);
 		return $locName;
 		};
 

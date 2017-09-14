@@ -114,7 +114,8 @@ var $bo_act_navigation = new function bo_act_navigation() {
     	var $url="";
     	$bo_act_navigation.navigateToHome();
     	_set($url, window.location.href);
-    	$url= $url.replace("home/home.jsp","a1Z/o");
+    	//$url= $url.replace("home/home.jsp","a1Z/o");
+    	$url= $url.replace("home/home.jsp","a2P/o");
     	_navigateTo($url);
     };
     
