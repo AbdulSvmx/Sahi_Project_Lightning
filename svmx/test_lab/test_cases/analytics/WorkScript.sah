@@ -10,7 +10,7 @@ $an_test.start();
 $insert_case = $data[1]["InsertCase"];
 $bo_act_login.login($url, $un, $pwd);
 
-var $resultCase = $op_act_sForceApiCall.sForceQuery($un, $pwd, $insert_case , "create");
+var $resultCase = $op_act_sForceApiCall.sForceQuery($un, $pwd, $insert_case, "create");//$op_act_sForceApiCall.sForceQuery($un, $pwd, $insert_case , "create");
 _log($resultCase);
 var $query_case = "Select Id from Case Order by CreatedDate DESC Limit 1";
 
