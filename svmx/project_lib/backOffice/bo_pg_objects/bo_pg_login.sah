@@ -7,9 +7,13 @@
 var $bo_pg_login = new function bo_pg_login(){
 this.txt_email = _emailbox("username");
 this.txt_password = _password("pw");
+<<<<<<< HEAD
 this.btn_login = _submit("/Login/");
+=======
+this.btn_login = _submit("Log In to Sandbox");
+>>>>>>> parent of 8755ec8... first cut
 
-};
+}
 
 
 
