@@ -6,11 +6,13 @@
 
 var $bo_pg_installedProducts = new function bo_pg_installedProducts(){
 	this.btn_new = _button(" New ");
-	this.txt_productName = _textbox("*Product");
+	this.txt_productName = _textbox("/Product/");
 	this.txt_serialNumber = _textbox("Serial");
 	this.txt_accountName = _textbox("Account");
-	this.txt_installedProductName = _textbox("*Installed Product Name");
-	this.btn_save = _submit(" Save [1]");
+	this.txt_contactName = _textbox("Contact");
+	this.txt_installedProductName = _textbox("/Installed Product Name/");
+	this.txt_installedDate = _click(_link(0,_rightOf(_textbox("Date Installed"))));;
+	this.btn_save = _submit(" Save ");
 };
 
 
