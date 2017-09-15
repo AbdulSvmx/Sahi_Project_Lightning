@@ -14,6 +14,7 @@ var $op_act_sForceApiCall = new function op_act_sForceApiCall(){
 	 * @returns $nArr (Query response data array)
 	 */
 
+<<<<<<< HEAD
 
 	this.sForceQuery = function($un, $pwd, $queryComplex,$queryType) {
 
@@ -24,15 +25,25 @@ var $op_act_sForceApiCall = new function op_act_sForceApiCall(){
 
 	this.sForceQuery = function($un, $pwd, $queryComplex) {
 
+=======
+	this.sForceQuery = function($un, $pwd, $queryComplex,$queryType){
+>>>>>>> upstream/master
 		var $nArr;
-		_set($nArr, _fetch(sForceApiCall($un, $pwd, $queryComplex)));
+		_set($nArr, _fetch(sForceApiCall($un, $pwd, $queryComplex,$queryType)));
 		return $nArr;
+<<<<<<< HEAD
 		//<browser> 
 
 		function sForceApiCall($un, $pwd, $queryComplex) {
+=======
+		//<browser>
+		function sForceApiCall($un, $pwd, $queryComplex,$queryType){
+			
+>>>>>>> upstream/master
 			sforce.connection.sessionId = null;
-			sforce.connection.debuggingHeader = null; // this, too is necessary!
+			sforce.connection.debuggingHeader = null; 
 			sforce.connection.login($un, $pwd);
+<<<<<<< HEAD
 
 
 			var records[];
@@ -61,8 +72,31 @@ var $op_act_sForceApiCall = new function op_act_sForceApiCall(){
 			return arr;
 		} //</browser> 
 
+=======
+>>>>>>> upstream/master
 
-	};
+			switch($queryType){
+			case 'query':
+				var records = sforce.connection.query($queryComplex);
+				var arr = records.getArray('records');
+				return arr;
+			case 'create':
+				return records = sforce.apex.executeAnonymous($queryComplex);
+				
+			default:
+				$nArr = [null]
+				return $nArr;
+			}
+		}//</browser>
+		
+		
+	}
+
 
 };
 
+<<<<<<< HEAD
+};
+
+=======
+>>>>>>> upstream/master
