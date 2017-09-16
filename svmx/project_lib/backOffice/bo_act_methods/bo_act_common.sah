@@ -3,13 +3,13 @@ var $bo_act_common = new function bo_act_common() {
 
 this.generateRandomName = function($Prefix){
   var $now = new Date();
-    var $monthday=$now.getDate();
+    var $day=$now.getDate();
     var $month = $now.getMonth();
     var $year = $now.getFullYear();
     var $hrs = $now.getHours();
 	var $min = $now.getMinutes();
 	var $sec = $now.getSeconds();
-    var $RandomString = $Prefix+$monthday + $month+ $year+$hrs+$min+$sec; 		
+    var $RandomString = $Prefix+$day + $month+ $year+$hrs+$min+$sec; 		
     return $RandomString;
 };
 
@@ -60,4 +60,10 @@ _click(_span("/svmx-sfmd-search-icon/"));
 _click(_div("Cleaning"));
 _click(_span("Select"));
 };
+
+this.reloadPage = function(){
+	window.location.reload();
 };
+
+};
+

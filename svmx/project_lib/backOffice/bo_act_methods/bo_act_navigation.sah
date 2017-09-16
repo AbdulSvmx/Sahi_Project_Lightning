@@ -54,9 +54,6 @@ var $bo_act_navigation = new function bo_act_navigation() {
     	$url= $url.replace("home/home.jsp","001/o");
     	_navigateTo($url);
     };
-    
-
-  
     	
      this.navigateToContactsPage = function(){
     	var $url="";

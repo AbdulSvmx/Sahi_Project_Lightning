@@ -1,39 +1,53 @@
 /**
  * Functions for the Warranty Terms Records
  */
-var $bo_act_products = new function bo_act_products() {
+var $bo_act_warrantyTerms = new function bo_act_warrantyTerms() {
 
 	/**
 	 * Create a Warranty Terms
 	 * 
-	 * @param $productName
+	 * @param $warrantyTermsName
 	 */
-	this.createWarrantyTerms = function($exchangeType, $templateType, $PercentCovered, $durationOfCoverage, $unitOfTimeForCoverage) {
+	this.createWarrantyTerms = function($exchangeType,$materialPercentCovered,$durationOfMaterialCoverage,$unitOfTimeForMaterialCoverage,$laborPercentCovered,$durationOflaborCoverage,$unitOfTimeForlaborCoverage,$expensesPercentCovered,$durationOfExpensesCoverage,$unitOfTimeForExpensesCoverage,$coverageEffectiveFrom) {
 		var $warranty_Name = $bo_act_common.generateRandomName("warn");
 		$bo_act_navigation.navigateToWarrantyTermsPage();
 		_click($bo_pg_warrantyTerms.btn_new);
 		
 		_setValue($bo_pg_warrantyTerms.txt_templateName, $warranty_Name);
 		_setSelected($bo_pg_warrantyTerms.sel_exchangeType, $exchangeType);
-		_setSelected($bo_pg_warrantyTerms.sel_templateType, $templateType);
+		//_setSelected($bo_pg_warrantyTerms.sel_templateType, $templateType);
 		
-		_setValue($bo_pg_warrantyTerms.txt_materialPercentCovered, $PercentCovered);
-		_setValue($bo_pg_warrantyTerms.txt_durationOfMaterialCoverage, $durationOfCoverage);
-		_setSelected($bo_pg_warrantyTerms.sel_unitOfTimeForMaterialCoverage, $unitOfTimeForCoverage);
+		_setValue($bo_pg_warrantyTerms.txt_materialPercentCovered, $materialPercentCovered);
+		_setValue($bo_pg_warrantyTerms.txt_durationOfMaterialCoverage, $durationOfMaterialCoverage);
+		_setSelected($bo_pg_warrantyTerms.sel_unitOfTimeForMaterialCoverage, $unitOfTimeForMaterialCoverage);
 		
-		_setValue($bo_pg_warrantyTerms.txt_laborPercentCovered, $PercentCovered);
-		_setValue($bo_pg_warrantyTerms.txt_durationOfLaborCoverage, $durationOfCoverage);
-		_setSelected($bo_pg_warrantyTerms.sel_unitOfTimeForLaborCoverage, $unitOfTimeForCoverage);
+		_setValue($bo_pg_warrantyTerms.txt_laborPercentCovered, $laborPercentCovered);
+		_setValue($bo_pg_warrantyTerms.txt_durationOfLaborCoverage, $durationOflaborCoverage);
+		_setSelected($bo_pg_warrantyTerms.sel_unitOfTimeForLaborCoverage, $unitOfTimeForlaborCoverage);
 		
-		_setValue($bo_pg_warrantyTerms.txt_expensesPercentCovered, $PercentCovered);
-		_setValue($bo_pg_warrantyTerms.txt_durationOfExpensesCoverage, $durationOfCoverage);
-		_setSelected($bo_pg_warrantyTerms.sel_unitOfTimeForExpensesCoverage, $unitOfTimeForCoverage);
+		_setValue($bo_pg_warrantyTerms.txt_expensesPercentCovered, $expensesPercentCovered);
+		_setValue($bo_pg_warrantyTerms.txt_durationOfExpensesCoverage, $durationOfExpensesCoverage);
+		_setSelected($bo_pg_warrantyTerms.sel_unitOfTimeForExpensesCoverage, $unitOfTimeForExpensesCoverage);
 		
 		_click($bo_pg_products.btn_save);
 		_logOutput($warranty_Name+ " Warranty Terms is created");
 		_wait(30000, _isVisible($warranty_Name));
+		
+		//Actions for configuring Coverage "Effective From" in Warranty Terms
+		_selectDomain("/svmx/");
+		_click($bo_pg_warrantyTerms.btn_configureStartDateSFM);
+		_selectDomain();
+		_selectWindow("/a1/");
+		_wait(30000, _isVisible(_heading1("Define Warranty Coverage Start Date for")));
+		_setSelected($bo_pg_warrantyTerms.sel_CoverageEffectiveFrom, $coverageEffectiveFrom);
+		_click($bo_pg_warrantyTerms.btn_saveCoverage);
+		_wait(30000, _isVisible(_div("Success:Saved successfully!")));
+		_click($bo_pg_warrantyTerms.btn_close);
+		_selectWindow();
+		$bo_act_common.reloadPage();
+		_wait(30000, _isVisible(_div("/__Date_Installed__c/")));
+		
 		return $warranty_Name;
 	};
 
-	
 };
