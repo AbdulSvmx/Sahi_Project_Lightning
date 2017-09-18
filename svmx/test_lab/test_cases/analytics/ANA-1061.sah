@@ -87,7 +87,7 @@ $an_act_Repeat_Visit_SR.RV_RunEngine("meghana.rao@servicemax.com");
 
 _wait(30000);
 _wait(1000);
-var $query_RV2 = "Select SVMXC__Work_Order__c ,SVMXC__Account__c, SVMXC__Configuration_Name__c ,SVMXC__Is_Repeat_Visit__c ,SVMXC__Service_Request__c , SVMXC__Technician__c from SVMXC__SPM_Repeat_Visit__c where SVMXC__Work_Order__c ='"+ $WO_ID_1 +"'";
+var $query_RV2 = "Select SVMXC__Work_Order__c ,SVMXC__Account__c, SVMXC__Configuration_Name__c ,SVMXC__Is_Repeat_Visit__c ,SVMXC__Service_Request__c ,SVMXC__Technician__c from SVMXC__SPM_Repeat_Visit__c where SVMXC__Work_Order__c ='"+ $WO_ID_1 +"'";
 var $resultArr2 = $op_act_sForceApiCall.sForceQuery($un, $pwd, $query_RV,"query");
 
 _wait(1000);
