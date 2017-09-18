@@ -13,7 +13,7 @@ var $op_act_sForceApiCall = new function op_act_sForceApiCall() {
 	 */
 
 	this.sForceQuery = function($un, $pwd, $queryComplex,$queryType){
-		var $nArr;
+	    var $nArr=null;
 		_set($nArr, _fetch(sForceApiCall($un, $pwd, $queryComplex,$queryType)));
 		return $nArr;
 		//<browser>
@@ -32,7 +32,7 @@ var $op_act_sForceApiCall = new function op_act_sForceApiCall() {
 				return records = sforce.apex.executeAnonymous($queryComplex);
 				
 			default:
-				$nArr = [null]
+				$nArr = [null];
 				return $nArr;
 			}
 		}//</browser>

@@ -11,20 +11,40 @@ var $an_pg_home = new function an_pg_home(){
 	this.span_businessprocessconfig = _span("Business Process Config") ;
 	this.text_issuetracker = _textbox("issueTracker") ;
 	this.listItemCase = _listItem("Case");
+	this.listItemSR = _listItem("Service Request");
 	this.BusinessQualificationExpr = _textbox("qualificationExpression");
 	this.closedcases = _listItem("SVMXSTD: Closed Cases");
+	this.openservicerequest = _listItem("SVMXSTD: Open Service Request");
 	this.save = _span("Save");
 	this.click_OK = _span("OK");
 	this.click_metrics = _span("Metrics");
 	this.click_add = _span("Add");
-	this.Activecheckbox = _button("svmx-form-field svmx-form-checkbox");
+	this.Calmethod = _textarea("appliesTo");
 	this.FTFCalmethod = _textarea("appliesTo");
 	this.clicksettings = _span("Settings");
 	this.clickCriteria = _span("Criteria");
 	this.click_FTFQualification = _textbox("tabPanel_0_editprocesspanel_expression_QualificationCriteriafieldset_id-inputEl");
 	this.select_StandardClosedWO = _listItem("SVMXSTD: Closed Work Orders");
+	this.select_USA_ClosedWO = _listItem("Closed United States WO");
+	this.select_UK_ClosedWO = _listItem("Closed UK WO");
 	this.click_Schedule_Notifications = _span("Schedule & Notifications");
 	this.text_Email_onSuccess = _textbox("emailOnSuccess");
 	this.click_run = _link("Run Now");
+	this.RepeatVisit = _span("Repeat Visit");
+	this.Account = _listItem("Account");
+	this.Location = _listItem("Location");
+	
+	
+	// To click the Repeat visit Calcuation method values 
+	this.AddRepeatVisit = _span("Add[1]");
+	this.Activecheckbox1 = _button("svmx-form-field svmx-form-checkbox");
+	this.Activecheckbox2 = _button("checkboxfield-1335-inputEl");
+	this.click_RepeatVisitQualification = _textbox("tabPanel_7_editprocesspanel_expression_QualificationCriteriafieldset_id-inputEl");
+	this.RepeatVisit_itemsforCalc = _textbox("Select one or more fields to be considered for Repeat Visit");
+	this.Additionfieldtocheck = _label("Additional field to be considered for Repeat Visit:");
+	this.additionalfield = _textbox("Additional field to be considered for Repeat Visit");
+	this.RV_Priority = _listItem("Priority");
+	this.RV_Schedule_Notifications = _span("Schedule & Notifications[1]");
+	
 	
 };

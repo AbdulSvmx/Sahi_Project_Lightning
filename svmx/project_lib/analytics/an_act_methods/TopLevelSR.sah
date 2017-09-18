@@ -1,0 +1,24 @@
+
+var $TopLevelSR = new function TopLevelSR() {
+	
+	this.an_TopLevelSR = function()
+	
+	{
+		_click($an_pg_home.link_home);
+		_click($an_pg_home.link_servicemaxSetup);
+		_click($an_pg_home.div_serviceperformancemetrics);
+		_click($an_pg_home.div_serviceperformancemetricsetup);
+
+		_click($an_pg_home.span_businessprocessconfig);
+		_click($an_pg_home.text_issuetracker);
+		_click($an_pg_home.listItemSR);
+		_click($an_pg_home.BusinessQualificationExpr);
+		_click($an_pg_home.openservicerequest);
+		_click($an_pg_home.save);
+		_click($an_pg_home.click_OK);		
+		
+	};
+	
+	
+	
+};

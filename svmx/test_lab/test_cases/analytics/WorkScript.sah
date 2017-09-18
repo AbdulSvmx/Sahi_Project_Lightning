@@ -5,11 +5,6 @@ function FTF_CASE_pos()
 }
 
 FTF_CASE_pos ();
-
-var $un = "meghana.svmxdev@servicemax.com";
-var $pwd = "salesforce201";
-var $url = "https://login.salesforce.com";
-
 var $optimax_1000 = _testcase("optimax_1000","Verify query from sforce api");
 $optimax_1000.start();
 var $un = "meghana.svmxdev@servicemax.com";
