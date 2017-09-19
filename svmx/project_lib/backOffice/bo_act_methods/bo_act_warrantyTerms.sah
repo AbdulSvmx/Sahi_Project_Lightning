@@ -8,6 +8,7 @@ var $bo_act_warrantyTerms = new function bo_act_warrantyTerms() {
 	 * 
 	 * @param $warrantyTermsName
 	 */
+	var $warranty_Name = "warn1582017174738";
 	this.createWarrantyTerms = function($exchangeType,$materialPercentCovered,$durationOfMaterialCoverage,$unitOfTimeForMaterialCoverage,$laborPercentCovered,$durationOflaborCoverage,$unitOfTimeForlaborCoverage,$expensesPercentCovered,$durationOfExpensesCoverage,$unitOfTimeForExpensesCoverage,$coverageEffectiveFrom) {
 		var $warranty_Name = $bo_act_common.generateRandomName("warn");
 		$bo_act_navigation.navigateToWarrantyTermsPage();
@@ -49,5 +50,25 @@ var $bo_act_warrantyTerms = new function bo_act_warrantyTerms() {
 		
 		return $warranty_Name;
 	};
+	
+	//Function for Applicable product
+	this.createApplicableProducts = function($product_Name, $warranty_Name) {
+		_click($bo_pg_warrantyTerms.btn_newApplicableProduct);
+		_setValue($bo_pg_warrantyTerms.txt_product, $product_Name);
+		_click($bo_pg_warrantyTerms.btn_save);
+		_setValue($bo_pg_warrantyTerms.link_warrantyTerm, $warranty_Name);
+		//return $callBack.returnResult([_isVisible($product_Name), "Applicable Product created",$product_Name] );
+		
+	};
+	
+	//Function for create Warranty
+	this.createWarranty = function() {
+		_selectDomain("/svmx/");
+		_click($bo_pg_warrantyTerms.btn_cretaeWarrantySFM);
+		_selectDomain();
+		_check($bo_pg_warrantyTerms.sel_warranty);
+		//return $callBack.returnResult([_isVisible($$warranty_Name), "Warranty Name created",$$warranty_Name] );
+	};
+	
 
 };

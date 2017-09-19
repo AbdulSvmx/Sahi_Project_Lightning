@@ -10,7 +10,6 @@ var $unitOfTimeForCoverage = ["--None--","Days","Weeks","Months","Years"];
 var $coverageEffectiveFrom = ["--None--","Date Installed","Date Ordered","Date Shipped","Last Activity Date","Last Date Shipped","Warranty Start Date","Warranty End Date"];
 
 
-
 var $RS_7288 = _testcase("$RS_7288","Creation of a Warranty Term and association of a Warranty to an Installed Product");
 $RS_7288.start();
 _setSpeed(100);
@@ -23,8 +22,13 @@ var $contactName = "Con148201716415";
 //var $productName = $bo_act_products.createProduct($productCode, $productFamily[3]);
 //var $productName = "pro1482017165455";
 //var $IBName = $bo_act_installedProduct.createInstalledProduct($productName, $accountName, $contactName);
-var $warrantyTermsName = $bo_act_warrantyTerms.createWarrantyTerms($exchangeType[2],"10","5",$unitOfTimeForCoverage[4],"20","5",$unitOfTimeForCoverage[4],"30","5",$unitOfTimeForCoverage[4],$coverageEffectiveFrom[1]);
-
+var $IBName = "IB_148201717146";
+var $warranty_Name = "warn1582017174738";
+//var $warrantyTermsName = $bo_act_warrantyTerms.createWarrantyTerms($exchangeType[2],"10","5",$unitOfTimeForCoverage[4],"20","5",$unitOfTimeForCoverage[4],"30","5",$unitOfTimeForCoverage[4],$coverageEffectiveFrom[1]);
+//$bo_act_warrantyTerms.createApplicableProducts(productName, $warrantyTermsName); //Create Applicable product for warranty Terms
+//$bo_act_navigation.navigateToInstalledProductPage();
+$bo_act_navigation.navigateToCreatedRecordUsingGlobalSearch($IBName); 	//Navigate to Installed Product Page
+$bo_act_warrantyTerms.createWarranty();
 
 //Pre - Condition 
 //var $conName = bo_act_contacts.createContact();
