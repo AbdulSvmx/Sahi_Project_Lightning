@@ -7,62 +7,62 @@ var $an_act_Repeat_Visit_SR = new function an_act_Repeat_Visit_SR() {
 
 		// To setup the values
 
-		_click($an_pg_home.click_metrics);
-		_click($an_pg_home.RepeatVisit);
-		_click($an_pg_home.AddRepeatVisit);
-		_click($an_pg_home.Activecheckbox1);
-		_setValue($an_pg_home.Calmethod, $Calculationmethodname);
-		_click($an_pg_home.clicksettings);
-		_click($an_pg_home.RepeatVisit_itemsforCalc);
+		_click($an_pg_home.btn_click_metrics);
+		_click($an_pg_home.btn_RepeatVisit);
+		_click($an_pg_home.btn_AddRepeatVisit);
+		_click($an_pg_home.btn_Activecheckbox1);
+		_setValue($an_pg_home.txt_Calmethod, $Calculationmethodname);
+		_click($an_pg_home.btn_clicksettings);
+		_click($an_pg_home.txt_RepeatVisit_itemsforCalc);
 		_wait(200);
-		_click($an_pg_home.Account);
-		_click($an_pg_home.RepeatVisit_itemsforCalc);
+		_click($an_pg_home.list_Account);
+		_click($an_pg_home.txt_RepeatVisit_itemsforCalc);
 		_wait(200);
-		_click($an_pg_home.Location);
-		_click($an_pg_home.additionalfield);
-		_click($an_pg_home.RV_Priority);
-		_click($an_pg_home.clickCriteria);
-		_click($an_pg_home.click_RepeatVisitQualification);
-		_click($an_pg_home.select_USA_ClosedWO);
-		_click($an_pg_home.save);
-		_click($an_pg_home.click_OK);		
+		_click($an_pg_home.list_Location);
+		_click($an_pg_home.txt_additionalfield);
+		_click($an_pg_home.list_RV_Priority);
+		_click($an_pg_home.btn_clickCriteria);
+		_click($an_pg_home.btn_click_RepeatVisitQualification);
+		_click($an_pg_home.list_select_USA_ClosedWO);
+		_click($an_pg_home.btn_save);
+		_click($an_pg_home.btn_click_OK);		
 
 	};
 	
 	
 	this.RV_UK_Calc = function($Calculationmethodname) {
 		
-		_click($an_pg_home.click_metrics);
-		_click($an_pg_home.RepeatVisit);
-		_click($an_pg_home.AddRepeatVisit);
-		_click($an_pg_home.Activecheckbox1);
-		_setValue($an_pg_home.Calmethod,$Calculationmethodname);
-		_click($an_pg_home.clicksettings);
-		_click($an_pg_home.RepeatVisit_itemsforCalc);
-		_click($an_pg_home.Account);
-		_click($an_pg_home.Location);
-		_click($an_pg_home.additionalfield);
-		_click($an_pg_home.RV_Priority);
-		_click($an_pg_home.clickCriteria);
-		_click($an_pg_home.click_RepeatVisitQualification);
-		_click($an_pg_home.select_UK_ClosedWO);
-		_click($an_pg_home.save);
-		_click($an_pg_home.click_OK);		
+		_click($an_pg_home.btn_click_metrics);
+		_click($an_pg_home.btn_RepeatVisit);
+		_click($an_pg_home.btn_AddRepeatVisit);
+		_click($an_pg_home.btn_Activecheckbox1);
+		_setValue($an_pg_home.txt_Calmethod,$Calculationmethodname);
+		_click($an_pg_home.btn_clicksettings);
+		_click($an_pg_home.txt_RepeatVisit_itemsforCalc);
+		_click($an_pg_home.list_Account);
+		_click($an_pg_home.list_Location);
+		_click($an_pg_home.txt_additionalfield);
+		_click($an_pg_home.list_RV_Priority);
+		_click($an_pg_home.btn_clickCriteria);
+		_click($an_pg_home.btn_click_RepeatVisitQualification);
+		_click($an_pg_home.list_select_UK_ClosedWO);
+		_click($an_pg_home.btn_save);
+		_click($an_pg_home.btn_click_OK);		
 		
 	};
 	
 	this.RV_RunEngine = function($emailId)
 	{
-		_click($an_pg_home.click_metrics);
-		_click($an_pg_home.RepeatVisit);
-		_click($an_pg_home.RV_Schedule_Notifications);
-		_click($an_pg_home.text_Email_onSuccess);
-		_setValue($an_pg_home.text_Email_onSuccess, $emailId);
-		_click($an_pg_home.save);
-		_click($an_pg_home.click_OK);
+		_click($an_pg_home.btn_click_metrics);
+		_click($an_pg_home.btn_RepeatVisit);
+		_click($an_pg_home.btn_RV_Schedule_Notifications);
+		_click($an_pg_home.txt_Email_onSuccess);
+		_setValue($an_pg_home.txt_Email_onSuccess, $emailId);
+		_click($an_pg_home.btn_save);
+		_click($an_pg_home.btn_click_OK);
 		_wait(300);
-		_click($an_pg_home.click_run);
-		_click($an_pg_home.click_OK);
+		_click($an_pg_home.btn_click_run);
+		_click($an_pg_home.btn_click_OK);
 		_wait(1000);
 		
 	};

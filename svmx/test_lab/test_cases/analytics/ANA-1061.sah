@@ -57,8 +57,20 @@ _wait(50000);
 
 
 var $query_RV = "Select SVMXC__Work_Order__c ,SVMXC__Account__c, SVMXC__Configuration_Name__c ,SVMXC__Is_Repeat_Visit__c ,SVMXC__Service_Request__c from SVMXC__SPM_Repeat_Visit__c where SVMXC__Work_Order__c ='"+ $WO_ID_1 +"'";
+
 var $resultArr1 = $op_act_sForceApiCall.sForceQuery($un, $pwd, $query_RV,"query");
 
+for(var $i=0;$i<120;$i++){
+	
+	if(JSON.stringify($resultArr1) != "null"){
+		break;
+		
+	}else{
+		_wait(1000);
+	}
+	
+	
+}
 $resultArr1.forEach(function($arrValueRV1) {
 	
 	$WO_Account1 = $arrValueRV1.SVMXC__Account__c;
