@@ -13,14 +13,20 @@ _setSpeed(100);
 
 //Pre - Condition 
 //var $accName = $bo_act_accounts.createAccount();
+<<<<<<< HEAD
 //var $proName = $bo_act_products.createProduct("pro12", "--None--");
 
 //var $installedProduct = $bo_act_installedProduct.createInstalledProduct("pro1482017165455","Acc1582017161256","");
+=======
+var $proName = $bo_act_products.createProduct("pro01","Accessory");
+//var $installedProduct = $bo_act_installedProduct.createInstalledProduct($proName, $accName);
+>>>>>>> 1e5cd8da118cb1b1dd995866755aebefa55d6f2f
 //var $slaterm = $bo_act_slaTerms.createSlaTerms("Default");
 var $sconUrl = $bo_act_serviceMaintenanceContracts.createServiceMaintenanceContract("Acc1582017161256", "sla1582017165046");
 $bo_act_serviceMaintenanceContracts.AddCoveredProductToSCON($sconUrl, "IB_1582017163412");
 
 //Test Steps
+<<<<<<< HEAD
 var $PMPTempName = $bo_act_PMPlanTemplate.createTimeBasedPMPlanTemplate($proName, "Account (Visit Only)","");
 $bo_act_PMPlan.createATimeBasedPMPlan($sconUrl, $PMPTempName,$bo_act_PMPlan.$PMPlanSource_SCON);
 
@@ -42,6 +48,9 @@ _assertEqual($scheduledOnExpected,$scheduleOnActual,"Scheduled On Date is not ne
 
 
 
+=======
+//$bo_act_PMPlanTemplate.createTimeBasedPMPlanTemplate("test", "Product (Must Have IB)");
+>>>>>>> 1e5cd8da118cb1b1dd995866755aebefa55d6f2f
 
 
 $RS_5260.end();

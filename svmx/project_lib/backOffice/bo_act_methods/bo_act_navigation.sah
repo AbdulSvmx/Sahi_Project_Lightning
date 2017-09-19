@@ -54,9 +54,6 @@ var $bo_act_navigation = new function bo_act_navigation() {
     	$url= $url.replace("home/home.jsp","001/o");
     	_navigateTo($url);
     };
-    
-
-  
     	
      this.navigateToContactsPage = function(){
     	var $url="";
@@ -131,5 +128,22 @@ var $bo_act_navigation = new function bo_act_navigation() {
     	_navigateTo($url);
     };
     
-   
+    this.navigateToCreatedRecordUsingCreateNewView = function($viewName, $fieldName, $operator, $recordToBeSearch){
+    	_click(_link("Create New View"));
+    	_setValue(_textbox("/View Name:/"),$viewName);
+    	_setValue(_textbox("/View Unique Name:/"),$viewName);
+    	_setSelected(_select("column"), $fieldName);
+    	_setSelected(_select("operator"), $operator);
+    	_setValue(_textbox("fval1"),$recordToBeSearch);
+    	_click(_submit(" Save ")); 
+    	_click(_span($recordToBeSearch)); 
+    	_wait(30000, _isVisible($recordToBeSearch));
+    	};
+    	
+    this.navigateToCreatedRecordUsingGlobalSearch = function($recordToBeSearch){
+    	_setValue(_textbox("phSearchInput"),$recordToBeSearch);
+    	_click(_button("phSearchButton"));
+    	_click(_link("Search All"));
+    	_click(_link($recordToBeSearch));
+        };
 };
