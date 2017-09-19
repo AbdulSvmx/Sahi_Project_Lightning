@@ -143,7 +143,9 @@ var $bo_act_navigation = new function bo_act_navigation() {
     this.navigateToCreatedRecordUsingGlobalSearch = function($recordToBeSearch){
     	_setValue(_textbox("phSearchInput"),$recordToBeSearch);
     	_click(_button("phSearchButton"));
+    	_wait(10000, _isVisible($recordToBeSearch));
     	_click(_link("Search All"));
+    	_wait(10000, _isVisible($recordToBeSearch));
     	_click(_link($recordToBeSearch));
         };
 };

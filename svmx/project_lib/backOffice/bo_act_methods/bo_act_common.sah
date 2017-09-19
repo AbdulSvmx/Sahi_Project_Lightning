@@ -84,10 +84,6 @@ this.nextMonthWithoutAppendingZero= function ($seperator){
 };
 };
 
-this.reloadPage = function(){
-	window.location.reload();
-};
-
 
 
 

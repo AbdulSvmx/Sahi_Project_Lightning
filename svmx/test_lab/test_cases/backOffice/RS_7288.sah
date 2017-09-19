@@ -8,30 +8,60 @@ var $productCode = "";
 var $exchangeType = ["--None--","Advance Exchange","Return Exchange"];
 var $unitOfTimeForCoverage = ["--None--","Days","Weeks","Months","Years"];
 var $coverageEffectiveFrom = ["--None--","Date Installed","Date Ordered","Date Shipped","Last Activity Date","Last Date Shipped","Warranty Start Date","Warranty End Date"];
-
+var $materialPercentCovered = "10";
+var $laborPercentCovered = "20";
+var $expensesPercentCovered = "30";
+var $durationOfMaterialCoverage = "5";
 
 var $RS_7288 = _testcase("$RS_7288","Creation of a Warranty Term and association of a Warranty to an Installed Product");
 $RS_7288.start();
 _setSpeed(100);
-//$bo_act_login.login($g_url, $g_un, $g_pwd);
-//var $accountName = $bo_act_accounts.createAccount();
-var $accountName = "Acc1482017164021";
-//var $contactName = $bo_act_contacts.createContact($accountName);
-var $contactName = "Con148201716415";
-//var $locationName = $bo_act_locations.createLocation($recordType[3],$accountName,"#007","India","560001");
-//var $productName = $bo_act_products.createProduct($productCode, $productFamily[3]);
-//var $productName = "pro1482017165455";
-//var $IBName = $bo_act_installedProduct.createInstalledProduct($productName, $accountName, $contactName);
-var $IBName = "IB_148201717146";
-var $warranty_Name = "warn1582017174738";
-//var $warrantyTermsName = $bo_act_warrantyTerms.createWarrantyTerms($exchangeType[2],"10","5",$unitOfTimeForCoverage[4],"20","5",$unitOfTimeForCoverage[4],"30","5",$unitOfTimeForCoverage[4],$coverageEffectiveFrom[1]);
-//$bo_act_warrantyTerms.createApplicableProducts(productName, $warrantyTermsName); //Create Applicable product for warranty Terms
-//$bo_act_navigation.navigateToInstalledProductPage();
-$bo_act_navigation.navigateToCreatedRecordUsingGlobalSearch($IBName); 	//Navigate to Installed Product Page
-$bo_act_warrantyTerms.createWarranty();
+$bo_act_login.login($g_url, $g_un, $g_pwd);
+var $accountName = $bo_act_accounts.createAccount();
+//var $accountName = "Acc1482017164021";
 
-//Pre - Condition 
-//var $conName = bo_act_contacts.createContact();
+var $contactName = $bo_act_contacts.createContact($accountName);
+//var $contactName = "Con148201716415";
+
+var $locationName = $bo_act_locations.createLocation($recordType[3],$accountName,"#007","India","560001");
+
+var $productName = $bo_act_products.createProduct($productCode, $productFamily[3]);
+//var $productName = "pro1482017165455";
+
+var $IBName = $bo_act_installedProduct.createInstalledProduct($productName, $accountName, $contactName);
+//var $IBName = "IB_148201717146";
+
+//var $warranty_Name = "warn1582017174738";
+var $warranty_Name = $bo_act_warrantyTerms.createWarrantyTerms($exchangeType[2],"10","5",$unitOfTimeForCoverage[4],"20","5",$unitOfTimeForCoverage[4],"30","5",$unitOfTimeForCoverage[4],$coverageEffectiveFrom[1]);
+
+$bo_act_warrantyTerms.createApplicableProducts($productName, $warranty_Name); //Create Applicable product for warranty Terms
+
+$bo_act_navigation.navigateToCreatedRecordUsingGlobalSearch($IBName); 	//Navigate to Installed Product Page using global search
+
+$bo_act_warrantyTerms.createWarranty($warranty_Name);
+
+$bo_act_navigation.navigateToCreatedRecordUsingGlobalSearch($IBName);	//Navigate to Installed Product Page using global search
+
+var $materialPercentCoveredActulOn_IB = _getText(_cell(0,_under(_tableHeader("Material % Covered"))));
+var $timePercentCoveredActulOn_IB = _getText(_cell(0,_under(_tableHeader("Time % Covered"))));
+var $expensesPercentCoveredActulOn_IB = _getText(_cell(0,_under(_tableHeader("Expenses % Covered"))));
+
+//validation
+_assertEqual($materialPercentCovered,$materialPercentCoveredActulOn_IB,"Actual and expected Material % covered are not same");
+_assertEqual($laborPercentCovered,$timePercentCoveredActulOn_IB,"Actual and expected Time % covered are not same");
+_assertEqual($expensesPercentCovered,$expensesPercentCoveredActulOn_IB,"Actual and expected Expenses % covered are not same");
+
+var $startDateExpectedOn_IB = _getText(_div(0,_rightOf(_cell("Date Installed"))));
+var $endDateExpectedOn_IB = $startDateExpectedOn_IB + $durationOfMaterialCoverage;
+
+
+var $startDateActulOn_IB = _getText(_cell(0,_under(_tableHeader("Start Date"))));
+var $endDateActulOn_IB = _getText(_cell(0,_under(_tableHeader("End Date"))));
+
+_assertEqual($materialPercentCovered,$startDateActulOn_IB,"Actual and expected Start Dates are not same");
+_assertEqual($endDateExpectedOn_IB,$endDateActulOn_IB,"Actual and expected End Dates are not same");
+
+
 $RS_7288.end();
 //}
 
