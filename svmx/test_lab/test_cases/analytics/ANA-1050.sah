@@ -28,23 +28,23 @@ var $Site = $data[1]["Site"];
 var $Component = $data[1]["Component"];
 $bo_act_login.login($url, $un, $pwd);
 
-var $resultCase = $op_act_sForceApiCall.sForceQuery($un, $pwd, $insert_case, "create");//$op_act_sForceApiCall.sForceQuery($un, $pwd, $insert_case , "create");
-_log($resultCase);
+var $createcase = $op_act_sForceApiCall.sForceQuery($un, $pwd, $insert_case, "create");//$op_act_sForceApiCall.sForceQuery($un, $pwd, $insert_case , "create");
+_log($createcase);
 var $query_case = "Select Id from Case Order by CreatedDate DESC Limit 1";
 
 var $Case ;
-var $resultCase1 = $op_act_sForceApiCall.sForceQuery($un, $pwd, $query_case,"query");
-var $caseValue;
-$resultCase1.forEach(function($caseValue) {
-	$Case = $caseValue.Id;
+var $fetchcasequery = $op_act_sForceApiCall.sForceQuery($un, $pwd, $query_case,"query");
+var $casedummy;
+$fetchcasequery.forEach(function($casedummy) {
+	$Case = $casedummy.Id;
 		
 });
 
-var $insert_WO_1 = "SVMXC__Service_Order__c  WO = new SVMXC__Service_Order__c (SVMXC__Company__c ='"+ $Account +"', SVMXC__Product__c = '"+$Product+"' , SVMXC__Group_Member__c = '"+$Technician+"' ,SVMXC__Component__c = '"+$Component+"',SVMXC__Order_Status__c = '"+$OrderStatus+"' , SVMXC__Closed_On__c = "+$Closedon+", SVMXC__Case__c = '"+ $Case +"',SVMXC__Country__c = 'United States', SVMXC__Sub_Status__c = 'Resolved', SVMXC__Priority__c = 'High', SVMXC__Site__c = '"+$Site+"');insert WO;";
-var $query_wo_1 = "Select Name , Id  , SVMXC__Company__c , SVMXC__Component__c , SVMXC__Closed_On__c from SVMXC__Service_Order__c Order by CreatedDate DESC Limit 1";
-var $resultArr2 = $op_act_sForceApiCall.sForceQuery($un, $pwd, $insert_WO_1 , "create");
+var $insert_wo_first = "SVMXC__Service_Order__c  WO = new SVMXC__Service_Order__c (SVMXC__Company__c ='"+ $Account +"', SVMXC__Product__c = '"+$Product+"' , SVMXC__Group_Member__c = '"+$Technician+"' ,SVMXC__Component__c = '"+$Component+"',SVMXC__Order_Status__c = '"+$OrderStatus+"' , SVMXC__Closed_On__c = "+$Closedon+", SVMXC__Case__c = '"+ $Case +"',SVMXC__Country__c = 'United States', SVMXC__Sub_Status__c = 'Resolved', SVMXC__Priority__c = 'High', SVMXC__Site__c = '"+$Site+"');insert WO;";
+var $query_wo_first = "Select Name , Id  , SVMXC__Company__c , SVMXC__Component__c , SVMXC__Closed_On__c from SVMXC__Service_Order__c Order by CreatedDate DESC Limit 1";
+var $fetchwoquery = $op_act_sForceApiCall.sForceQuery($un, $pwd, $insert_wo_first , "create");
 
-var $resultArr_1 = $op_act_sForceApiCall.sForceQuery($un, $pwd, $query_wo_1,"query");
+var $store_first_wo = $op_act_sForceApiCall.sForceQuery($un, $pwd, $query_wo_first,"query");
 
 var $WO_new_1 ;
 var $WO_Account_1;
@@ -62,22 +62,24 @@ var $arr_value_1;
 var $arr_value_2;
 var $arr_value_rv_1;
 var $arr_value_rv_2;
-$resultArr_1.forEach(function($arr_value_1) {
+var $wo1;
+var $wo2;
+$store_first_wo.forEach(function($wo1) {
 	
-	  $WO_new_1 = $arr_value_1.Id;
+	  $WO_new_1 = $wo1.Id;
 
 });
 _log($WO_new_1);
 
-var $insert_WO_2 = "SVMXC__Service_Order__c  WO = new SVMXC__Service_Order__c (SVMXC__Company__c ='"+ $Account +"', SVMXC__Product__c = '"+$Product+"' , SVMXC__Group_Member__c = '"+$Technician+"' ,SVMXC__Component__c = '"+$Component+"', SVMXC__Order_Status__c = '"+$OrderStatus+"' , SVMXC__Closed_On__c = "+$Closedon+", SVMXC__Case__c = '"+ $Case +"',SVMXC__Country__c = 'United Kingdom', SVMXC__Sub_Status__c = 'Resolved', SVMXC__Priority__c = 'High', SVMXC__Site__c = '"+$Site+"' );insert WO;";
-var $query_wo_2 = "Select Name , Id  , SVMXC__Company__c , SVMXC__Component__c , SVMXC__Closed_On__c from SVMXC__Service_Order__c Order by CreatedDate DESC Limit 1";
-var $resultArr3 = $op_act_sForceApiCall.sForceQuery($un, $pwd, $insert_WO_2 , "create");
+var $insert_wo_second = "SVMXC__Service_Order__c  WO = new SVMXC__Service_Order__c (SVMXC__Company__c ='"+ $Account +"', SVMXC__Product__c = '"+$Product+"' , SVMXC__Group_Member__c = '"+$Technician+"' ,SVMXC__Component__c = '"+$Component+"', SVMXC__Order_Status__c = '"+$OrderStatus+"' , SVMXC__Closed_On__c = "+$Closedon+", SVMXC__Case__c = '"+ $Case +"',SVMXC__Country__c = 'United Kingdom', SVMXC__Sub_Status__c = 'Resolved', SVMXC__Priority__c = 'High', SVMXC__Site__c = '"+$Site+"' );insert WO;";
+var $query_wo_second = "Select Name , Id  , SVMXC__Company__c , SVMXC__Component__c , SVMXC__Closed_On__c from SVMXC__Service_Order__c Order by CreatedDate DESC Limit 1";
+var $fetchwo2query = $op_act_sForceApiCall.sForceQuery($un, $pwd, $insert_wo_second , "create");
 
-var $resultArr_2 = $op_act_sForceApiCall.sForceQuery($un, $pwd, $query_wo_2,"query");
+var $store_sec_wo = $op_act_sForceApiCall.sForceQuery($un, $pwd, $query_wo_second,"query");
 
-$resultArr_2.forEach(function($arr_value_2) {
+$store_sec_wo.forEach(function($wo2) {
 	
-	  $WO_new_2 = $arr_value_2.Id;
+	  $WO_new_2 = $wo2.Id;
 
 });
 _log($WO_new_2);
@@ -89,10 +91,10 @@ $an_act_Repeat_Visit_SR.RV_RunEngine("meghana.rao@servicemax.com");
 
 _wait(30000);
 _wait(1000);
-var $query_RV = "Select SVMXC__Work_Order__c ,SVMXC__Account__c, SVMXC__Configuration_Name__c ,SVMXC__Is_Repeat_Visit__c ,SVMXC__Case__c from SVMXC__SPM_Repeat_Visit__c where SVMXC__Work_Order__c ='"+ $WO_new_1 +"'";
-var $resultArr1 = $op_act_sForceApiCall.sForceQuery($un, $pwd, $query_RV,"query");
+var $ana_1050_query_RV1 = "Select SVMXC__Work_Order__c ,SVMXC__Account__c, SVMXC__Configuration_Name__c ,SVMXC__Is_Repeat_Visit__c ,SVMXC__Case__c from SVMXC__SPM_Repeat_Visit__c where SVMXC__Work_Order__c ='"+ $WO_new_1 +"'";
+var $store_rv1 = $op_act_sForceApiCall.sForceQuery($un, $pwd, $ana_1050_query_RV1,"query");
 
-$resultArr1.forEach(function($arr_value_rv_1) {
+$store_rv1.forEach(function($arr_value_rv_1) {
 	
 	$WO_Account_1 = $arr_value_rv_1.SVMXC__Account__c;
 	$RV_case_1 = $arr_value_rv_1.SVMXC__Case__c;
@@ -105,10 +107,10 @@ $resultArr1.forEach(function($arr_value_rv_1) {
 _log($RV_config_1);
 
 
-var $query_RV_2 = "Select SVMXC__Work_Order__c ,SVMXC__Account__c, SVMXC__Configuration_Name__c ,SVMXC__Is_Repeat_Visit__c ,SVMXC__Case__c from SVMXC__SPM_Repeat_Visit__c where SVMXC__Work_Order__c ='"+ $WO_new_2 +"'";
-var $resultArr_3 = $op_act_sForceApiCall.sForceQuery($un, $pwd, $query_RV_2,"query");
+var $ana_1050_query_RV2 = "Select SVMXC__Work_Order__c ,SVMXC__Account__c, SVMXC__Configuration_Name__c ,SVMXC__Is_Repeat_Visit__c ,SVMXC__Case__c from SVMXC__SPM_Repeat_Visit__c where SVMXC__Work_Order__c ='"+ $WO_new_2 +"'";
+var $store_rv2 = $op_act_sForceApiCall.sForceQuery($un, $pwd, $ana_1050_query_RV2,"query");
 
-$resultArr_3.forEach(function($arr_value_rv_2) {
+$store_rv2.forEach(function($arr_value_rv_2) {
 	
 	$WO_Account_2 = $arr_value_rv_2.SVMXC__Account__c;
 	$RV_case_2 = $arr_value_rv_2.SVMXC__Case__c;
@@ -120,8 +122,5 @@ $resultArr_3.forEach(function($arr_value_rv_2) {
 _log($RV_config_2);
 
 _assertNotEqual($RV_config_1, $RV_config_2);
-
-
-
 
 $an_rv_1050.end();
