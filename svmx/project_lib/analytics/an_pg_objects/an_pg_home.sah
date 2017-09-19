@@ -6,8 +6,8 @@
 var $an_pg_home = new function an_pg_home(){
 	this.link_home = _link("Home");
 	this.link_servicemaxSetup = _link("ServiceMax Setup");
-	this.btn_serviceperformancemetrics = _btn_("Service Performance Metrics");
-	this.btn_serviceperformancemetricsetup = _btn_("Service Performance Metrics Setup");
+	this.btn_serviceperformancemetrics = _div("Service Performance Metrics");
+	this.btn_serviceperformancemetricsetup = _div("Service Performance Metrics Setup");
 	this.span_businessprocessconfig = _span("Business Process Config") ;
 	this.txt_issuetracker = _textbox("issueTracker") ;
 	this.listItemCase = _listItem("Case");
@@ -45,6 +45,7 @@ var $an_pg_home = new function an_pg_home(){
 	this.txt_additionalfield = _textbox("Additional field to be considered for Repeat Visit");
 	this.list_RV_Priority = _listItem("Priority");
 	this.btn_RV_Schedule_Notifications = _span("Schedule & Notifications[1]");
+	this.list_customclosedSR = _listItem("Custom Closed SR");
 	
 	
 };
