@@ -23,10 +23,19 @@ this.createTimeBasedPMPlanTemplate = 	function($ProductName,$coverage,$workOrder
 	   _getRecentWindow();
 	   _setValue(_textbox("/Sequence:/"),1);
 	   $bo_act_common.searchfunction($workOrderPurpose);
-	   
-	   
-
-
+	   _textbox("Frequency:");
+	   _setValue(_textbox("Frequency Unit:"),"Months");
+	   _listItem("Months");
+	   _check(_button("Recurring:"));
+	   _click(_span("Update"));
+	   _click(_span("Applicable Products"));
+	   _setStrictVisibilityCheck(true);
+	   _click($bo_pg_PMPlanTemplate.link_editIcon);
+	   _setStrictVisibilityCheck(false);
+	   _getRecentWindow();
+	   $bo_act_common.searchfunction($ProductName);
+	   _click(_span("Update"));
+	   _click(_span("/svmx-sfmd-save-icon/"));
 		return $PMTemplateName;
 	};
 
