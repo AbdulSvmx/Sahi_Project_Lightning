@@ -3,7 +3,7 @@ var $bo_act_common = new function bo_act_common() {
 
 this.generateRandomName = function($Prefix){
   var $now = new Date();
-    var $day=$now.getDate();
+    var $day = $now.getDate();
     var $month = $now.getMonth();
     var $year = $now.getFullYear();
     var $hrs = $now.getHours();
@@ -82,6 +82,17 @@ this.nextMonthWithoutAppendingZero= function ($seperator){
     var $nextMonthDate = $month+ $seperator + $monthday + $seperator + $year; 
     return $nextMonthDate;
 };
+
+this.endDateCalculationForIB = function ($startDateExpectedOn_IB, $durationOfCoverage, $seperator){
+	var $dateInstalled = new Date($startDateExpectedOn_IB);
+	var $year = $dateInstalled.getFullYear();
+	var $year = $year + $durationOfCoverage;
+	var $month = $dateInstalled.getMonth();
+	var $day = $dateInstalled.getDate();
+	var $endDateCalculationForIB =  ($month+1)+$seperator+($day-1)+$seperator+$year;
+	return $endDateCalculationForIB;
+	};
+
 };
 
 

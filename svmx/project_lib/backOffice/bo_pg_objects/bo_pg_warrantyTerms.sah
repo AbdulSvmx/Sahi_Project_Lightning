@@ -40,9 +40,9 @@ var $bo_pg_warrantyTerms = new function bo_pg_warrantyTerms(){
 	/**
 	 * Selects a warranty radio
 	 */
-	this.selectWarranty = function($warranty_Name){
+	this.selectWarranty = function($warrantyName){
 		
-	_click(_radio(0,_leftOf(_link($warranty_Name,_near(_div("Template Name"))))));
+	_click(_radio(0,_leftOf(_link($warrantyName,_near(_div("Template Name"))))));
 	
 	};
 	

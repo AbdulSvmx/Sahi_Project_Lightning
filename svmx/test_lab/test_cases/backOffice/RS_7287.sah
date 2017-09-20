@@ -1,0 +1,12 @@
+//Tests are to be written here
+//==============
+
+var $RS_7287 = _testcase("$RS_7287","Verify the creation of SLA Term.");
+$RS_7287.start();
+_setSpeed(100);
+//$bo_act_login.login($g_url, $g_un, $g_pwd);
+
+$bo_act_navigation.navigateToConfigurationProfilesPage();
+
+$RS_7287.end();
+//}
