@@ -53,8 +53,9 @@ _getRecentWindow();
 _click(_span("/svmx_lookup_icon/"));
 _getRecentWindow();
 _click(_textbox("/svmx-picklist/"));
-_click(_listItem("Exact Match"));
+_click(_listItem("Contains"));
 _click(_textbox("/sfm-text/",_near(_span("/svmx-sfmd-search-icon/"))));
+_click(_span("/svmx-sfmd-search-icon/"));
 _setValue(_textbox("/sfm-text/",_near(_span("/svmx-sfmd-search-icon/"))),$searchValue);
 _click(_span("/svmx-sfmd-search-icon/"));
 _click(_div($searchValue));
@@ -70,23 +71,10 @@ this.currentDateWithoutAppendingZero= function ($seperator){
     var $currentDate = $month+ $seperator + $monthday + $seperator + $year; 
     return $currentDate;
 };
-this.nextMonthWithoutAppendingZero= function ($seperator){
-    var $now = new Date();
-    var $monthday = now.getDate();// = $now.getDate();
-    var $month = $now.getMonth();
-    if($month == 12)
-    	$month =1;
-    else
-    	$month = $now.getMonth()+1;
-    var $year = $now.getFullYear();
-    var $nextMonthDate = $month+ $seperator + $monthday + $seperator + $year; 
-    return $nextMonthDate;
-};
 };
 
-this.reloadPage = function(){
-	window.location.reload();
-};
+	
+	
 
 
 

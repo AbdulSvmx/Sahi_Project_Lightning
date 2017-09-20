@@ -40,43 +40,28 @@ var $bo_act_navigation = new function bo_act_navigation() {
 
 //Added By BAC Team
     this.navigateToProductsPage = function(){
-    	var $url="";
-    	$bo_act_navigation.navigateToHome();
-    	_set($url, window.location.href);
-    	$url= $url.replace("home/home.jsp","01t/o");
-    	_navigateTo($url);
+    	_click($bo_pg_home.btn_allTabs);
+    	_click($bo_pg_home.link_products);
     };
     
     this.navigateToAccountsPage = function(){
-    	var $url="";
-    	$bo_act_navigation.navigateToHome();
-    	_set($url, window.location.href);
-    	$url= $url.replace("home/home.jsp","001/o");
-    	_navigateTo($url);
+    	 _click($bo_pg_home.btn_allTabs);
+    	 _click($bo_pg_home.link_accounts);
     };
     	
      this.navigateToContactsPage = function(){
-    	var $url="";
-    	$bo_act_navigation.navigateToHome();
-    	_set($url, window.location.href);
-    	$url= $url.replace("home/home.jsp","003/o");
-    	_navigateTo($url);
+    	 _click($bo_pg_home.btn_allTabs);
+    	 _click($bo_pg_home.link_contacts);
     };
     
     this.navigateToInstalledProductPage = function(){
-    	var $url="";
-    	$bo_act_navigation.navigateToHome();
-    	_set($url, window.location.href);
-    	$url= $url.replace("home/home.jsp","a0T/o");
-    	_navigateTo($url);
+    	_click($bo_pg_home.btn_allTabs);
+   	    _click($bo_pg_home.link_installedProducts);
     };
 
     this.navigateToServiceMaintenanceContractPage = function(){
-    	var $url="";
-    	$bo_act_navigation.navigateToHome();
-    	_set($url, window.location.href);
-    	$url= $url.replace("home/home.jsp","a27/o");
-    	_navigateTo($url);
+    	_click($bo_pg_home.btn_allTabs);
+   	    _click($bo_pg_home.link_serviceMaintenanceContracts);
     };
 
 
@@ -88,11 +73,10 @@ var $bo_act_navigation = new function bo_act_navigation() {
     };
 
     this.navigateToPMPlanTemplatePage = function(){
-    	var $url="";
     	$bo_act_navigation.navigateToHome();
-    	_set($url, window.location.href);
-    	$url= $url.replace("home/home.jsp","a0g/l");
-    	_navigateTo($url);
+    	_click(_link("ServiceMax Setup"));
+    	_click($bo_pg_servicemaxSetup.btn_installedBaseAndPM );
+    	_click($bo_pg_servicemaxSetup.btn_PMPlanTemplate);
     };
 
     this.navigateToPMProcess = function(){
