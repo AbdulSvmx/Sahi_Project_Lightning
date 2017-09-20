@@ -20,7 +20,7 @@ var $ana_1053_query_sr = "Select Id from SVMXC__Service_Request__c Order by Crea
 var $service_request;
 var $var1;
 var $ana_1053_result_sr = $op_act_sForceApiCall.sForceQuery($un, $pwd, $ana_1053_query_sr,"query");
-
+_wait(1000);
 $ana_1053_result_sr.forEach(function($var1) {
 	$service_request = $var1.Id;
 		
@@ -31,7 +31,7 @@ var $ana_1053_query_wo = "Select Name , Id  , SVMXC__Company__c , SVMXC__Compone
 var $ana_1053_result = $op_act_sForceApiCall.sForceQuery($un, $pwd, $ana_1053_insert_WO , "create");
 
 var $ana_1053_fetch = $op_act_sForceApiCall.sForceQuery($un, $pwd, $ana_1053_query_wo,"query");
-
+_wait(1000);
 var $ana_1053_WO1 ;
 var $ana_1053_WO_Account1;
 var $ana_1053_RV_WO1;
@@ -58,7 +58,7 @@ var $ana_1053_query_wo2 = "Select Name , Id  , SVMXC__Company__c , SVMXC__Compon
 var $resultArr3 = $op_act_sForceApiCall.sForceQuery($un, $pwd, $ana_1053_insert_WO2 , "create");
 
 var $ana_1053_result2 = $op_act_sForceApiCall.sForceQuery($un, $pwd, $ana_1053_query_wo2,"query");
-
+_wait(1000);
 $ana_1053_result2.forEach(function($var3) {
 	
 	$ana_1053_WO2 = $var3.Id;
@@ -76,7 +76,7 @@ _wait(1000);
 
 var $ana_1053_query_RV1 = "Select SVMXC__Work_Order__c ,SVMXC__Account__c, SVMXC__Configuration_Name__c ,SVMXC__Is_Repeat_Visit__c ,SVMXC__Service_Request__c from SVMXC__SPM_Repeat_Visit__c where SVMXC__Work_Order__c ='"+ $ana_1053_WO1 +"'";
 var $ana_1053_resultRV1 = $op_act_sForceApiCall.sForceQuery($un, $pwd, $ana_1053_query_RV1,"query");
-
+_wait(1000);
 $ana_1053_resultRV1.forEach(function($varRV1) {
 	
 	$ana_1053_WO_Account1 = $varRV1.SVMXC__Account__c;
@@ -91,7 +91,7 @@ _log($ana_1053_Is_Repeat_visit1);
 
 var $ana_1053_query_RV2 = "Select SVMXC__Work_Order__c ,SVMXC__Account__c, SVMXC__Configuration_Name__c ,SVMXC__Is_Repeat_Visit__c ,SVMXC__Service_Request__c from SVMXC__SPM_Repeat_Visit__c where SVMXC__Work_Order__c ='"+ $ana_1053_WO2 +"'";
 var $ana_1053_resultRV2 = $op_act_sForceApiCall.sForceQuery($un, $pwd, $ana_1053_query_RV2,"query");
-
+_wait(1000);
 var $varRV2;
 $ana_1053_resultRV2.forEach(function($varRV2) {
 	

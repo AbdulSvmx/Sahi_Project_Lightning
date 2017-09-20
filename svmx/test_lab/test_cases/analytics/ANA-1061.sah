@@ -83,7 +83,7 @@ $ana_1061_result_rv.forEach(function($arrValueRV1) {
 });
 
 _assertEqual("false", $Is_Repeat_visit1);
-_assertEqual($SR,$RV_sr_1);
+_assertEqual($SR,$RV_sr1);
 
 $newAccount = $data[2]["Account"];
 $newTechnician = $data[2]["Technician"];
