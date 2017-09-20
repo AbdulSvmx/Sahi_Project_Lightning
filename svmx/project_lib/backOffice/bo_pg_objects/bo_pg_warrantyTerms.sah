@@ -35,9 +35,16 @@ var $bo_pg_warrantyTerms = new function bo_pg_warrantyTerms(){
 	
 	
 	//Objects for Create Warranty
-	//var warranty_Name = "warn1582017174738";
-	//this.bo_act_warrantyTerms.$warranty_Name
 	this.btn_cretaeWarrantySFM =_button("Create Warranty");
-	this.sel_warranty = _radio(0,_leftOf(_link($warranty_Name,_near(_div("Template Name")))));
+	
+	/**
+	 * Selects a warranty radio
+	 */
+	this.selectWarranty = function($warranty_Name){
+		
+	_click(_radio(0,_leftOf(_link($warranty_Name,_near(_div("Template Name"))))));
+	
+	};
+	
 	this.btn_cretaeWarranty =_submit("Create Warranty");
 };
