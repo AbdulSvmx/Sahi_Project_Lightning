@@ -54,6 +54,8 @@ var $arr_value_rv_1;
 var $arr_value_rv_2;
 var $wo1;
 var $wo2;
+var $customcheckbox1;
+var $customcheckbox2;
 $store_first_wo.forEach(function($wo1) {
 	
 	  $WO_new_1 = $wo1.Id;
@@ -81,7 +83,7 @@ $an_act_Repeat_Visit_SR.rv_runEngine("meghana.rao@servicemax.com");
 
 _wait(30000);
 _wait(1000);
-var $ana_1050_query_RV1 = "Select SVMXC__Work_Order__c ,SVMXC__Account__c, SVMXC__Configuration_Name__c ,SVMXC__Is_Repeat_Visit__c ,SVMXC__Case__c from SVMXC__SPM_Repeat_Visit__c where SVMXC__Work_Order__c ='"+ $WO_new_1 +"'";
+var $ana_1050_query_RV1 = "Select SVMXC__Work_Order__c ,Custom_Checkbox__c , SVMXC__Account__c, SVMXC__Configuration_Name__c ,SVMXC__Is_Repeat_Visit__c ,SVMXC__Case__c from SVMXC__SPM_Repeat_Visit__c where SVMXC__Work_Order__c ='"+ $WO_new_1 +"'";
 var $store_rv1 = $op_act_sForceApiCall.sForceQuery($un, $pwd, $ana_1050_query_RV1,"query");
 
 $store_rv1.forEach(function($arr_value_rv_1) {
@@ -90,6 +92,7 @@ $store_rv1.forEach(function($arr_value_rv_1) {
 	$RV_case_1 = $arr_value_rv_1.SVMXC__Case__c;
 	$RV_config_1 = $arr_value_rv_1.SVMXC__Configuration_Name__c;
 	$Is_Repeat_visit_1 = $arr_value_rv_1.SVMXC__Is_Repeat_Visit__c;
+	$customcheckbox1 = $arr_value_rv_1.Custom_Checkbox__c;
 	
 });
 
@@ -97,7 +100,7 @@ $store_rv1.forEach(function($arr_value_rv_1) {
 _log($RV_config_1);
 
 
-var $ana_1050_query_RV2 = "Select SVMXC__Work_Order__c ,SVMXC__Account__c, SVMXC__Configuration_Name__c ,SVMXC__Is_Repeat_Visit__c ,SVMXC__Case__c from SVMXC__SPM_Repeat_Visit__c where SVMXC__Work_Order__c ='"+ $WO_new_2 +"'";
+var $ana_1050_query_RV2 = "Select SVMXC__Work_Order__c ,Custom_Checkbox__c, SVMXC__Account__c, SVMXC__Configuration_Name__c ,SVMXC__Is_Repeat_Visit__c ,SVMXC__Case__c from SVMXC__SPM_Repeat_Visit__c where SVMXC__Work_Order__c ='"+ $WO_new_2 +"'";
 var $store_rv2 = $op_act_sForceApiCall.sForceQuery($un, $pwd, $ana_1050_query_RV2,"query");
 
 $store_rv2.forEach(function($arr_value_rv_2) {
@@ -106,11 +109,15 @@ $store_rv2.forEach(function($arr_value_rv_2) {
 	$RV_case_2 = $arr_value_rv_2.SVMXC__Case__c;
 	$RV_config_2 = $arr_value_rv_2.SVMXC__Configuration_Name__c;
 	$Is_Repeat_visit_2 = $arr_value_rv_2.SVMXC__Is_Repeat_Visit__c;
+	$customcheckbox2 = $arr_value_rv_2.Custom_Checkbox__c;
 	
 });
 
 _log($RV_config_2);
 
 _assertNotEqual($RV_config_1, $RV_config_2);
+_assertEqual("true", $customcheckbox1);
+_assertEqual("false", $customcheckbox2);
+
 
 $an_rv_1050.end();

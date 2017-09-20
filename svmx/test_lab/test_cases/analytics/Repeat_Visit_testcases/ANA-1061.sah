@@ -41,6 +41,7 @@ var $WO_Account2;
 var $RV_WO_2;
 var $RV_case_2;
 var $Is_Repeat_visit2;
+var $RV_sr1;
 var $RV_sr2;
 var $arrValue1;
 
@@ -95,7 +96,7 @@ var $ana_1061_resultArr2 = $op_act_sForceApiCall.sForceQuery($un, $pwd, $ana_106
 var $ana_1061_update_sr = "SVMXC__Service_Request__c SR_1 = new SVMXC__Service_Request__c(SVMXC__Priority__c = 'High', Id = '"+$SR+"' );update SR_1 ;";
 var $ana_1061_resultSR = $op_act_sForceApiCall.sForceQuery($un, $pwd, $ana_1061_update_sr,"create");
 
-$an_act_Repeat_Visit_SR.RV_RunEngine("meghana.rao@servicemax.com");
+$an_act_Repeat_Visit_SR.rv_runEngine("meghana.rao@servicemax.com");
 
 _wait(30000);
 _wait(1000);

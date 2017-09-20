@@ -87,13 +87,13 @@ var $ana_1044_Is_Repeat_visit2;
 
 var $ana_1044_query_RV2 = "Select SVMXC__Work_Order__c ,SVMXC__Account__c, SVMXC__Configuration_Name__c ,SVMXC__Is_Repeat_Visit__c ,SVMXC__Service_Request__c from SVMXC__SPM_Repeat_Visit__c where SVMXC__Work_Order__c ='"+ $ana_1044_WO2 +"'";
 var $ana_1044_resultRV2 = $op_act_sForceApiCall.sForceQuery($un, $pwd, $ana_1044_query_RV2,"query");
-_wait(1000);
-$ana_1044_resultRV2.forEach(function($varRV1) {
+
+_wait(2000);
+$ana_1044_resultRV2.forEach(function($varRV2) {
 	
-	$ana_1044_WO_Account2 = $varRV1.SVMXC__Account__c;
-	$ana_1044_RV_sr2 = $varRV1.SVMXC__Service_Request__c;
-	$ana_1044_Is_Repeat_visit2 = $varRV1.SVMXC__Is_Repeat_Visit__c;
-	
+	$ana_1044_WO_Account2 = $varRV2.SVMXC__Account__c;
+	$ana_1044_RV_sr2 = $varRV2.SVMXC__Service_Request__c;
+	$ana_1044_Is_Repeat_visit2 = $varRV2.SVMXC__Is_Repeat_Visit__c;
 });
 
 

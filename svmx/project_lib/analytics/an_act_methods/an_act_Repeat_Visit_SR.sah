@@ -13,6 +13,8 @@ var $an_act_Repeat_Visit_SR = new function an_act_Repeat_Visit_SR() {
 		_click($an_pg_home.btn_Activecheckbox1);
 		_setValue($an_pg_home.txt_Calmethod, $Calculationmethodname);
 		_click($an_pg_home.btn_clicksettings);
+		_click($an_pg_home.list_repeatvisit_maps);
+		_click($an_pg_home.list_rvmap_value1);
 		_click($an_pg_home.txt_RepeatVisit_itemsforCalc);
 		_wait(200);
 		_click($an_pg_home.list_Account);
@@ -49,13 +51,13 @@ var $an_act_Repeat_Visit_SR = new function an_act_Repeat_Visit_SR() {
 		_click($an_pg_home.list_Location);
 		_click($an_pg_home.txt_additionalfield);
 		_click($an_pg_home.list_RV_Priority);
+		_click($an_pg_home.list_repeatvisit_maps);
+		_click($an_pg_home.list_rvmap_value1);
 		_click($an_pg_home.btn_clickCriteria);
 		_click($an_pg_home.txt_click_RepeatVisitQualification);
 		_click($an_pg_home.list_select_USA_ClosedWO);
 		_click($an_pg_home.btn_save);
-		_click($an_pg_home.btn_click_OK);		
-		
-		
+		_click($an_pg_home.btn_click_OK);			
 		
 	};
 	
