@@ -53,8 +53,9 @@ _getRecentWindow();
 _click(_span("/svmx_lookup_icon/"));
 _getRecentWindow();
 _click(_textbox("/svmx-picklist/"));
-_click(_listItem("Exact Match"));
+_click(_listItem("Contains"));
 _click(_textbox("/sfm-text/",_near(_span("/svmx-sfmd-search-icon/"))));
+_click(_span("/svmx-sfmd-search-icon/"));
 _setValue(_textbox("/sfm-text/",_near(_span("/svmx-sfmd-search-icon/"))),$searchValue);
 _click(_span("/svmx-sfmd-search-icon/"));
 _click(_div($searchValue));
@@ -70,6 +71,7 @@ this.currentDateWithoutAppendingZero= function ($seperator){
     var $currentDate = $month+ $seperator + $monthday + $seperator + $year; 
     return $currentDate;
 };
+<<<<<<< HEAD
 this.nextMonthWithoutAppendingZero= function ($seperator){
     var $now = new Date();
     var $monthday = now.getDate();// = $now.getDate();
@@ -93,7 +95,12 @@ this.endDateCalculationForIB = function ($startDateExpectedOn_IB, $durationOfCov
 	return $endDateCalculationForIB;
 	};
 
+=======
+>>>>>>> 1e5237aba02427df706f77250273caaa7788661c
 };
+
+	
+	
 
 
 

@@ -9,8 +9,13 @@ var $bo_pg_servicemaxSetup = new function bo_pg_servicemaxSetup(){
 	this.btn_sfmTransactionAndDocsDesigner= _div("SFM Transaction & Docs Designer");
 	this.btn_warrantiesAndServiceContracts = _div("Warranties & Service Contracts");
 	this.btn_slaTerms = _div("SLA terms");
+<<<<<<< HEAD
 	this.btn_appAdministration = _div("App Administration");
 	this.btn_configurationProfiles = _div("Configuration Profiles");
+=======
+	this.btn_installedBaseAndPM = _div("Installed Base & PM");
+	this.btn_PMPlanTemplate = _div("PM Plan Templates");
+>>>>>>> 1e5237aba02427df706f77250273caaa7788661c
 
 };
 
