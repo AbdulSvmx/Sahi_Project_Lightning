@@ -1,7 +1,7 @@
 
 var $TopLevelSR = new function TopLevelSR() {
 	
-	this.an_TopLevelSR = function()
+	this.an_topLevelSR = function()
 	
 	{
 		_click($an_pg_home.link_home);
@@ -20,7 +20,7 @@ var $TopLevelSR = new function TopLevelSR() {
 	};
 	
 	
-	this.an_TopLevelSR_custom = function()
+	this.an_topLevelSR_custom = function()
 	
 	{
 		_click($an_pg_home.link_home);

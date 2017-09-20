@@ -1,7 +1,7 @@
 var $TopLevelCase = new function TopLevelCase (){
 	
 	
-this.an_TopLevelCase = function()
+this.an_toplevelcase = function()
 
 {
 	_click($an_pg_home.link_home);

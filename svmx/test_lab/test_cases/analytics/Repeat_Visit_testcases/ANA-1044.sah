@@ -62,9 +62,9 @@ $ana_1044_result2.forEach(function($var3) {
 
 });
 
-$TopLevelSR.an_TopLevelSR_custom();
-$an_act_Repeat_Visit_SR.RV_USA_Custom("Custom Field Account");
-$an_act_Repeat_Visit_SR.RV_RunEngine("meghana.rao@servicemax.com");
+$TopLevelSR.an_topLevelSR_custom();
+$an_act_Repeat_Visit_SR.rv_usa_custom("Custom Field Account");
+$an_act_Repeat_Visit_SR.rv_runEngine("meghana.rao@servicemax.com");
 
 _wait(30000);
 _wait(1000);

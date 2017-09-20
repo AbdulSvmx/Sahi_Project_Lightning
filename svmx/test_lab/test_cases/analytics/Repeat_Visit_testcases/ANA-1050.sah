@@ -2,17 +2,7 @@
  * This Test-cases verified the multiple calculation method for Repeat visit when Top-level tracker is Case
  * Owner : Meghana
  *
- */
-
-function RV_Multi_Calc()
-{
-	
-
-}
-
-RV_Multi_Calc();
-
-var $an_rv_1050 = _testcase("ANA-1050","Case Multiple calculation method check for Repeat visit");
+ */var $an_rv_1050 = _testcase("ANA-1050","Case Multiple calculation method check for Repeat visit");
 $an_rv_1050.start();
 var $un = "meghana.rao@servicemax.com";
 var $pwd = "salesforce100";
@@ -84,10 +74,10 @@ $store_sec_wo.forEach(function($wo2) {
 });
 _log($WO_new_2);
 
-$TopLevelCase.an_TopLevelCase();
-$an_act_Repeat_Visit_SR.RV_USA_Calc("Repeat Visit Calc USA");
-$an_act_Repeat_Visit_SR.RV_UK_Calc("Repeat Visit Calc UK");
-$an_act_Repeat_Visit_SR.RV_RunEngine("meghana.rao@servicemax.com");
+$TopLevelCase.an_toplevelcase();
+$an_act_Repeat_Visit_SR.rv_usa_calc("Repeat Visit Calc USA");
+$an_act_Repeat_Visit_SR.rv_uk_calc("Repeat Visit Calc UK");
+$an_act_Repeat_Visit_SR.rv_runEngine("meghana.rao@servicemax.com");
 
 _wait(30000);
 _wait(1000);

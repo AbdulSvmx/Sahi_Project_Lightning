@@ -5,7 +5,7 @@
  * Desc
  * @param $ftfCalculation
  */
-	this.FTF_Calc1 = function($ftfCalculation) {
+	this.ftf_Calc1 = function($ftfCalculation) {
 		// To setup the values
 		_click($an_pg_home.link_home);
 		_click($an_pg_home.link_servicemaxSetup);
@@ -38,7 +38,7 @@
 	// _include("ScheduleRun.sah");
 	// ScheduleRun();
 
-	this.FTF_RunEngine = function($emailId) {
+	this.ftf_runEngine = function($emailId) {
 		_click($an_pg_home.click_Schedule_Notifications);
 		_click($an_pg_home.text_Email_onSuccess);
 		// "meghana.rao@servicemax.com"
