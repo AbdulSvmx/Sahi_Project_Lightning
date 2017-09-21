@@ -1,0 +1,32 @@
+//_includeOnce("../../../references/references.js");
+
+
+
+//Tests are to be written here
+//==============
+
+var $RS_5260 = _testcase("$RS_5260","Create a PM Plan from Service Contract with coverage type as Account");
+$RS_5260.start();
+_setSpeed(100);
+$bo_act_login.login($g_url, $g_un, $g_pwd);
+
+
+//Pre - Condition 
+var $accName = $bo_act_accounts.createAccount();
+var $proName = $bo_act_products.createProduct();
+var $installedProduct = $bo_act_installedProduct.createInstalledProduct($proName, $accName);
+var $slaterm = $bo_act_slaTerms.createSlaTerms("Default");
+var $sconUrl = $bo_act_serviceMaintenanceContracts.createServiceMaintenanceContract($accName, $slaterm);
+$bo_act_serviceMaintenanceContracts.AddCoveredProductToSCON($sconUrl, $installedProduct);
+
+//Test Steps
+
+
+
+//var $accName = bo_act_accounts.createAccount();
+$RS_5260.end();
+//Test
+//}
+
+
+

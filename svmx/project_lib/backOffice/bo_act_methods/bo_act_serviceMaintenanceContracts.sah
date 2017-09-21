@@ -1,0 +1,38 @@
+/**
+ * Functions for the Accounts Object
+ */
+var $bo_act_serviceMaintenanceContracts = new function bo_act_serviceMaintenanceContracts() {
+
+	/**
+	 * Create an Account
+	 * 
+	 * @param $accountName
+	 */
+	this.createServiceMaintenanceContract = function($accName, $slaTermName) {
+			var $sconName = generateRandomString(8);
+			var $sconUrl =  "";
+			NavigatetoServiceMaintenanceContract();
+			_click($bo_pg_serviceMaintenanceContracts.btn_new);
+			_setValue($bo_pg_serviceMaintenanceContracts.txt_sconName, $sconName);
+			_setValue($bo_pg_serviceMaintenanceContracts.txt_accountName, $accName);
+			_setValue($bo_pg_serviceMaintenanceContracts.txt_slaTermName, $slaTermName);
+			_click($bo_pg_serviceMaintenanceContracts.link_startDate);
+			_setValue($bo_pg_serviceMaintenanceContracts.txt_startDate, $bo_act_common.currentDate("/"));
+			_click(btn_save);
+			_set($sconUrl, window.location.href);
+			return $sconUrl;
+		
+		//return $callBack.returnResult([_isVisible($accountName), "Account not created",$accountName] );
+		
+		// Need to return
+	};
+	 this.AddCoveredProductToSCON =  function($sconUrl,$installedProduct){
+		_navigateTo($sconUrl);
+		_click($bo_pg_serviceMaintenanceContracts.btn_newCoveredProduct);
+	_setValue($bo_pg_serviceMaintenanceContracts.txt_installedProduct,$installedProduct);
+		_click($bo_pg_serviceMaintenanceContracts.btn_save);
+		_click($bo_pg_serviceMaintenanceContracts.txt_backToScon);
+	};
+
+
+};

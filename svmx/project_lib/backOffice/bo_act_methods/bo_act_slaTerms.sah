@@ -1,0 +1,31 @@
+/**
+ * Functions for the Accounts Object
+ */
+var $bo_act_slaTerms = new function bo_act_slaTerms() {
+
+	/**
+	 * Create an Account
+	 * 
+	 * @param $accountName
+	 */
+	this.createSlaTerms = function($defaultBusinessHours) {
+			var $slaName = $bo_act_common.generateRandomName("sla");
+			bo_act_navigation.navigateToSlaTerms();
+			_click(btn_newSlaTerms);
+			_setValue(txt_slaTermName, $SlaName);
+			_setValue(txt_defaultBusinessHours, $defaultBusinessHours);
+			_check(chk_active);
+			_click(btn_save);
+			_logOutput($SlaName+ " SLA Term is created");
+			return $SLAName;
+		_wait(30000, _isVisible($accountName));
+         return $slaName;
+		//return $callBack.returnResult([_isVisible($accountName), "Account not created",$accountName] );
+	
+		
+		// Need to return
+	};
+	
+
+
+};

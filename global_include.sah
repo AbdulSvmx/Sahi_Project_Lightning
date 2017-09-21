@@ -30,7 +30,7 @@ if ($global_referenceAdded === false) {
 			$index) {
 		//_continueOnError();
 		try {
-			_includeOnce($referencePath);
+			_include($referencePath);
 		} catch ($e) {
 			_log("Reference Exception : " + $e);
 		}
