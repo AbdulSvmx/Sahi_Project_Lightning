@@ -4,18 +4,18 @@ var $TopLevelCase = new function TopLevelCase (){
 this.an_toplevelcase = function()
 
 {
-	_click($an_pg_home.link_home);
-	_click($an_pg_home.link_servicemaxSetup);
-	_click($an_pg_home.btn_serviceperformancemetrics);
-	_click($an_pg_home.btn_serviceperformancemetricsetup);
+	_click($an_pg_rv.link_home);
+	_click($an_pg_rv.link_servicemaxSetup);
+	_click($an_pg_rv.btn_serviceperformancemetrics);
+	_click($an_pg_rv.btn_serviceperformancemetricsetup);
 
-	_click($an_pg_home.span_businessprocessconfig);
-	_click($an_pg_home.txt_issuetracker);
-	_click($an_pg_home.listItemCase);
-	_click($an_pg_home.txt_businessQualificationExpr);
-	_click($an_pg_home.list_closedcases);
-	_click($an_pg_home.btn_save);
-	_click($an_pg_home.btn_click_OK);
+	_click($an_pg_rv.span_businessprocessconfig);
+	_click($an_pg_rv.txt_issuetracker);
+	_click($an_pg_rv.listItemCase);
+	_click($an_pg_rv.txt_businessQualificationExpr);
+	_click($an_pg_rv.list_closedcases);
+	_click($an_pg_rv.btn_save);
+	_click($an_pg_rv.btn_click_OK);
 	
 };
 
