@@ -1,30 +1,44 @@
-
 /**
  * Function to perform sForce API Calls actions
  */
-var $op_act_createRecord = new function op_act_createRecord() {
+var $op_act_sForceApiCall = new function op_act_sForceApiCall() {
 
-this.createWo = function(){
-var CreateRecords=[];
-for(var $i=0;$i<$queryFromFile.length;$i++)
-      {
-      var wo_list = new sforce.SObject("SVMXC__Service_Order__c");
-      wo_list.SVMXC__Street__c = $queryFromFile[$i][0];
-      wo_list.SVMXC__City__c = $queryFromFile[$i][1];
-      wo_list.SVMXC__State__c = $queryFromFile[$i][2];
-      wo_list.SVMXC__Zip__c = $queryFromFile[$i][3];
-      wo_list.SVMXC__Country__c = $queryFromFile[$i][4];
-      wo_list.SVMXC__Primary_Territory__c = $queryFromFile[$i][5];
-      wo_list.SVMXC__SM_Scheduling_Options__c = $queryFromFile[$i][6];
-      wo_list.SVMXC__Preferred_Start_Time__c = $queryFromFile[$i][7];
-      wo_list.SVMXC__Preferred_End_Time__c = $queryFromFile[$i][8];
-      wo_list.SVMXC__Apply_Business_Hours_For_OptiMax__c = $queryFromFile[$i][9];
-      wo_list.SVMXC__Preferred_Business_Hours__c = $queryFromFile[$i][10];
-      CreateRecords.push(wo_list);
-      }
-result = sforce.connection.create(CreateRecords);
-_wait(60000);
+	/**
+	 * Used to query from sForce api calls and will return a array of results
+	 * 
+	 * @param $un
+	 * @param $pwd
+	 * @param $queryComplex
+	 * @returns $nArr (Query response data array)
+	 */
+
+	this.sForceQuery = function($un, $pwd, $queryComplex,$queryType){
+	    var $nArr=null;
+		_set($nArr, _fetch(sForceApiCall($un, $pwd, $queryComplex,$queryType)));
+		return $nArr;
+		//<browser>
+		function sForceApiCall($un, $pwd, $queryComplex,$queryType){
+			
+			sforce.connection.sessionId = null;
+			sforce.connection.debuggingHeader = null; 
+			sforce.connection.login($un, $pwd);
+
+			switch($queryType){
+			case 'query':
+				var records = sforce.connection.query($queryComplex);
+				var arr = records.getArray('records');
+				return arr;
+			case 'create':
+				return records = sforce.apex.executeAnonymous($queryComplex);
+				
+			default:
+				$nArr = [null];
+				return $nArr;
+			}
+		}//</browser>
+		
+	
+	};
+
+
 };
-
-
-}
