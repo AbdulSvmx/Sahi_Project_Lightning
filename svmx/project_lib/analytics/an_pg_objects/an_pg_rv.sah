@@ -3,7 +3,7 @@
  * Home page object repository
  */
 
-var $an_pg_home = new function an_pg_home(){
+var $an_pg_rv = new function an_pg_rv(){
 	this.link_home = _link("Home");
 	this.link_servicemaxSetup = _link("ServiceMax Setup");
 	this.btn_serviceperformancemetrics = _div("Service Performance Metrics");

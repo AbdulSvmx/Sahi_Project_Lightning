@@ -1,6 +1,7 @@
 
-var an_pg_mttr = new function an_pg_mttr() {
-	
+var $an_pg_mttr = new function an_pg_mttr() {
+
+	this.btn_meantime_to_repair = _span("Mean Time To Repair");
 	this.btn_addmttr = _span("Add[1]");
 	this.btn_activecheckbox = _button("svmx-form-field svmx-form-checkbox");
 	this.txt_mttr_description = _textarea("appliesTo");
@@ -29,12 +30,13 @@ var an_pg_mttr = new function an_pg_mttr() {
 	this.btn_schedule_notification = _span("Schedule & Notifications[1]");
 	this.list_timezone = _textbox("timezone");
 	this.btn_ist_timezone = _listItem("(GMT+05:30) India Standard Time (Asia/Kolkata)");
-	this.txt_period = _textbox("period");
+	this.btn_period = _textbox("period");
 	this.btn_daily = _listItem("Daily");
 	this.list_time = _textbox("timeAt");
 	this.btn_time = _listItem("9:00 AM");
 	this.txt_emailonsuccess = _textbox("emailOnSuccess");
-	this.btn_save_sn = _span("Save");;
+	this.btn_save_sn = _span("Save");
+	this.btn_click_run = _link("Run Now");
 	this.btn_ok_sn = _div("OK");	
 	
 };
