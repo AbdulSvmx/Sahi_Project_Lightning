@@ -28,17 +28,6 @@ var $op_act_sForceApiCall = new function op_act_sForceApiCall() {
 				var records = sforce.connection.query($queryComplex);
 				var arr = records.getArray('records');
 				return arr;
-<<<<<<< HEAD
-				            break;
-				      case 'create':
-				      return records = sforce.apex.executeAnonymous($queryComplex);
-				          break;
-				  default:
-				        return arr;
-				}; 
-		}; //<browser> 
-
-=======
 			case 'create':
 				return records = sforce.apex.executeAnonymous($queryComplex);
 				
@@ -49,9 +38,7 @@ var $op_act_sForceApiCall = new function op_act_sForceApiCall() {
 		}//</browser>
 		
 	
->>>>>>> upstream/master
 	};
 
 
 };
-
