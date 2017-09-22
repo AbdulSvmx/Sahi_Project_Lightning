@@ -71,7 +71,7 @@ this.currentDateWithoutAppendingZero= function ($seperator){
     var $currentDate = $month+ $seperator + $monthday + $seperator + $year; 
     return $currentDate;
 };
-<<<<<<< HEAD
+
 this.nextMonthWithoutAppendingZero= function ($seperator){
     var $now = new Date();
     var $monthday = now.getDate();// = $now.getDate();
@@ -95,8 +95,6 @@ this.endDateCalculationForIB = function ($startDateExpectedOn_IB, $durationOfCov
 	return $endDateCalculationForIB;
 	};
 
-=======
->>>>>>> 1e5237aba02427df706f77250273caaa7788661c
 };
 
 	

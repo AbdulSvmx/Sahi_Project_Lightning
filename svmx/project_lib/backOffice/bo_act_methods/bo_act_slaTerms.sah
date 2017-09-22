@@ -6,7 +6,7 @@ var $bo_act_slaTerms = new function bo_act_slaTerms() {
 	/**
 	 * Create a SLA terms
 	 * 
-	 * @param $accountName
+	 * @param $$slaName
 	 */
 	this.createSlaTerms = function($defaultBusinessHours) {
 			var $slaName = $bo_act_common.generateRandomName("sla");
@@ -26,6 +26,48 @@ var $bo_act_slaTerms = new function bo_act_slaTerms() {
 		// Need to return
 	};
 	
+	//Create a SLA terms with Response Sets
+	this.createSlaTermsWithResponseSets = function($defaultBusinessHours,$ResponseTrackedOn,$orderType,$priority,$clockStartsFrom,$internalGoal,$customerCommitment,$businessHoursFrom) {
+		var $slaName = $bo_act_common.generateRandomName("sla");
+		$bo_act_navigation.navigateToSlaTerms();
+		_click($bo_pg_slaTerms.btn_newSlaTerms);
+		_setValue($bo_pg_slaTerms.txt_slaTermName, $slaName);
+		_setValue($bo_pg_slaTerms.txt_defaultBusinessHours, $defaultBusinessHours);
+		_check($bo_pg_slaTerms.chk_active);
+		
+		_click($bo_pg_slaTerms.btn_initialResponse);
+		_setSelected($bo_pg_slaTerms.sel_responseTrackedOn, $ResponseTrackedOn);
+		_click($bo_pg_slaTerms.btn_initialAddRecord);
+		_setSelected($bo_pg_slaTerms.sel_orderType, $orderType);
+		_setSelected($bo_pg_slaTerms.sel_priority, $priority);
+		_setSelected($bo_pg_slaTerms.sel_clockStartsFrom, $clockStartsFrom);
+		_setValue($bo_pg_slaTerms.sel_internalGoal, $internalGoal);
+		_setValue($bo_pg_slaTerms.sel_customerCommitment, $customerCommitment);
+		_setSelected($bo_pg_slaTerms.sel_businessHoursFrom, $businessHoursFrom);
+		
+		/*_click($bo_pg_slaTerms.btn_onsiteResponse);
+		_setStrictVisibilityCheck(true);
+		_setSelected($bo_pg_slaTerms.sel_responseTrackedOn, $ResponseTrackedOn);
+		_click($bo_pg_slaTerms.btn_initialAddRecord);
+		_setStrictVisibilityCheck(false);
+		_setSelected($bo_pg_slaTerms.sel_orderType, $orderType);
+		_setSelected($bo_pg_slaTerms.sel_priority, $priority);
+		_setSelected($bo_pg_slaTerms.sel_clockStartsFrom, $clockStartsFrom);
+		_setSelected($bo_pg_slaTerms.sel_internalGoal, $internalGoal);
+		_setSelected($bo_pg_slaTerms.sel_customerCommitment, $customerCommitment);
+		_setSelected($bo_pg_slaTerms.sel_businessHoursFrom, $businessHoursFrom);
+		*/
+		
+		
+		_click($bo_pg_slaTerms.btn_save);
+		_logOutput($slaName+ " SLA Term is created");
+		_wait(30000, _isVisible($slaName));
+		return $slaName;
+	//return $callBack.returnResult([_isVisible($accountName), "Account not created",$accountName] );
+
+	
+	// Need to return
+};
 
 
 };

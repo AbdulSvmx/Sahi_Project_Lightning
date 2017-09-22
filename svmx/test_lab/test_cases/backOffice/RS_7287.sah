@@ -4,9 +4,14 @@
 var $RS_7287 = _testcase("$RS_7287","Verify the creation of SLA Term.");
 $RS_7287.start();
 _setSpeed(100);
-//$bo_act_login.login($g_url, $g_un, $g_pwd);
 
-$bo_act_navigation.navigateToConfigurationProfilesPage();
+//Preconditions For Test Case
+//$bo_act_login.login($g_url, $g_un, $g_pwd);
+//$bo_act_navigation.navigateToConfigurationProfilesPage();
+
+
+//$bo_act_navigation.navigateToSlaTerms();
+var $slaTerm = $bo_act_slaTerms.createSlaTermsWithResponseSets("Default","WorkOrder","Field Service","Medium","Created Date","5","10","SLA");
 
 $RS_7287.end();
 //}
