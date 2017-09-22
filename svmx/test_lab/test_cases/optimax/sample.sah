@@ -6,20 +6,20 @@ var $pwd = "maxpl0re";
 
 
 
-_navigateTo("http://test.salesforce.com");
+/*_navigateTo("http://test.salesforce.com");
 
 _setValue(_emailbox("username"), $un);
 
 _setValue(_password("pw"), $pwd);
 
-_click(_submit("Log In to Sandbox"));
+_click(_submit("Log In to Sandbox"));*/
 
 
 
-
+//$bo_act_login.login($url, $un, $pwd)
 
 var $queryFromFile = $excel.readFromCustomExcel("../optimax/op_excleData/CA500_auto.xlsx", "CA 500","","");
-var $nArr;
+//var $nArr;
 //Calling the sforce API
 _set($callback, _fetch(callBulk($un,$pwd,$queryFromFile)));
 
@@ -27,12 +27,17 @@ _log($callback);
 
 
 
-_wait(3000);
+//_wait(3000);
 //SLA_violation($un, $pwd);
-_set($SLA, _fetch(SLA_violation($un, $pwd)));
-_log($SLA);
+/*_set($SLA, _fetch(SLA_violation($un, $pwd)));
+_log($SLA);*/
+	
+_set($login_test, _fetch($op_login.login_withoutUI("govendhan@svmx-cct5.com.cct5full", "maxpl0re")));
+_log($login_test);
+
 
 //<browser>
+
 
 function callBulk($un,$pwd,$queryFromFile){
 
@@ -40,10 +45,14 @@ sforce.connection.sessionId = null;
 
 sforce.connection.debuggingHeader = null; // this, too is necessary!
 
-sforce.connection.login($un,$pwd);
-var no_Initiate_WO = 0;
+
+
+var $login_result = sforce.connection.login($un,$pwd);
+_log("test = "+$login_result.sessionId + "sforce.connection.sessionId = "+sforce.connection.sessionId);
+
+/*var no_Initiate_WO = 0;
 var no_Pending_WO = 0;
-/*
+
 var CreateRecords=[];
 for(var $i=0;$i<$queryFromFile.length;$i++)
       {
@@ -62,9 +71,7 @@ for(var $i=0;$i<$queryFromFile.length;$i++)
       CreateRecords.push(wo_list);
       }
 result = sforce.connection.create(CreateRecords);
-_wait(60000);*/
 
-$op_act_createRecord.createWo();
 	var initiate_WO_List = sforce.connection.query("Select Id, SVMXC__OptiMax_Status__c, SVMXC__Dispatch_Process__c, SVMXC__Primary_Territory__c From SVMXC__Service_Order__c Where SVMXC__Primary_Territory__c = 'a2S18000000MP1u'");
 	var initiate_WO_Arr = initiate_WO_List.getArray("records");
 	
@@ -82,12 +89,12 @@ $op_act_createRecord.createWo();
 		}
 		_log("No of Initiated WO = "+no_Initiate_WO+" , No of Pending or Tentetive WO = "+no_Pending_WO);
 		
-return result;
+return result;*/
 }
 
 function SLA_violation($un, $pwd){
       
-      var sla_violation = 0;
+     /* var sla_violation = 0;
       
       var dispatched_WO_List = sforce.connection.query("Select Id, SVMXC__Work_Order_Scheduling_Status__c, SVMXC__Scheduled_Date_Time__c, SVMXC__Preferred_Start_Time__c, SVMXC__Preferred_End_Time__c, SVMXC__Dispatch_Process__c From SVMXC__Service_Order__c Where SVMXC__Work_Order_Scheduling_Status__c = 'Dispatched' AND SVMXC__Dispatch_Process__c = 'a1o18000000n6ty'");
       
@@ -102,13 +109,13 @@ function SLA_violation($un, $pwd){
                   sla_violation = sla_violation + 1;
             }
       }
-      return "Number of SLA Violation = "+sla_violation+", out of = "+dispatched_WO_arr.length+" Work Orders";
+      return "Number of SLA Violation = "+sla_violation+", out of = "+dispatched_WO_arr.length+" Work Orders";*/
 }
 
 function sForceApiCallLocal($queryComplex) {
                   return sforce.apex.executeAnonymous($queryComplex);
             }; 
- //<browser> 
+ //</browser> 
 
             
       
