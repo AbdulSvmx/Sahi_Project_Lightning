@@ -13,12 +13,39 @@ var $Closedon = $data[1]["ClosedOn"];
 var $Site = $data[1]["Site"];
 var $Component = $data[1]["Component"];
 $bo_act_login.login($url, $un, $pwd);
-var $create_SR = $op_act_sForceApiCall.sForceQuery($un, $pwd, $insert_sr, "create");//$op_act_sForceApiCall.sForceQuery($un, $pwd, $insert_case , "create");
+var $create_SR = $op_act_sForceApiCall.sForceQuery($un, $pwd, $insert_sr, "create");
+
+
+for(var $i=0;$i<500;$i++){
+	
+	if(JSON.stringify($create_SR) != ""){
+		break;
+		
+	}else{
+		_wait(10000);
+	}
+	
+	
+}
+///$op_act_sForceApiCall.sForceQuery($un, $pwd, $insert_case , "create");
 var $query_sr = "Select Id from SVMXC__Service_Request__c Order by CreatedDate DESC Limit 1";
 
 var $SR ;
 var $srValue;
 var $resultSR1 = $op_act_sForceApiCall.sForceQuery($un, $pwd, $query_sr,"query");
+
+
+for(var $i=0;$i<500;$i++){
+	
+	if(JSON.stringify($resultSR1) != ""){
+		break;
+		
+	}else{
+		_wait(10000);
+	}
+	
+	
+}
 
 $resultSR1.forEach(function($srValue) {
 	$SR = $srValue.Id;
@@ -29,7 +56,17 @@ var $ana_1061_insert_WO_1 = "SVMXC__Service_Order__c  WO = new SVMXC__Service_Or
 var $ana_1061_query_wo_1 = "Select Name , Id  , SVMXC__Company__c , SVMXC__Component__c , SVMXC__Closed_On__c from SVMXC__Service_Order__c Order by CreatedDate DESC Limit 1";
 var $resultArr2 = $op_act_sForceApiCall.sForceQuery($un, $pwd, $ana_1061_insert_WO_1 , "create");
 
-var $ana_1061_result = $op_act_sForceApiCall.sForceQuery($un, $pwd, $ana_1061_query_wo_1,"query");
+for(var $i=0;$i<500;$i++){
+	
+	if(JSON.stringify($resultArr2) != ""){
+		break;
+		
+	}else{
+		_wait(10000);
+	}
+	
+	
+}
 
 var $WO_ID_1 ;
 var $WO_Account1;
@@ -45,6 +82,20 @@ var $RV_sr1;
 var $RV_sr2;
 var $arrValue1;
 
+var $ana_1061_result = $op_act_sForceApiCall.sForceQuery($un, $pwd, $ana_1061_query_wo_1,"query");
+for(var $i=0;$i<500;$i++){
+	
+	if(JSON.stringify($ana_1061_result) != ""){
+		break;
+		
+	}else{
+		_wait(10000);
+	}
+	
+	
+}
+
+
 $ana_1061_result.forEach(function($arrValue1) {
 	
 	  $WO_ID_1 = $arrValue1.Id;
@@ -56,20 +107,17 @@ $TopLevelSR.an_topLevelSR();
 $an_act_Repeat_Visit_SR.rv_runEngine("meghana.rao@servicemax.com");
 
 _wait(50000);
-
-
-
 var $ana_1061_query_RV = "Select SVMXC__Work_Order__c ,SVMXC__Account__c, SVMXC__Configuration_Name__c ,SVMXC__Is_Repeat_Visit__c ,SVMXC__Service_Request__c from SVMXC__SPM_Repeat_Visit__c where SVMXC__Work_Order__c ='"+ $WO_ID_1 +"'";
 
 var $ana_1061_result_rv = $op_act_sForceApiCall.sForceQuery($un, $pwd, $ana_1061_query_RV,"query");
 
-for(var $i=0;$i<120;$i++){
+for(var $i=0;$i<500;$i++){
 	
-	if(JSON.stringify($ana_1061_result_rv) != "null"){
+	if(JSON.stringify($ana_1061_result_rv) != ""){
 		break;
 		
 	}else{
-		_wait(1000);
+		_wait(10000);
 	}
 	
 	
@@ -93,17 +141,49 @@ $newTechnician = $data[2]["Technician"];
 var $ana_1061_insert_WO_2 = "SVMXC__Service_Order__c  WO = new SVMXC__Service_Order__c (SVMXC__Company__c = '"+$newAccount+"', SVMXC__Group_Member__c = '"+$newTechnician+"',SVMXC__Country__c = 'India', SVMXC__Sub_Status__c = 'Unresolved', SVMXC__Priority__c = 'High', Id = '"+$WO_ID_1+"');update WO;";
 var $ana_1061_resultArr2 = $op_act_sForceApiCall.sForceQuery($un, $pwd, $ana_1061_insert_WO_2 , "create");
 
+for(var $i=0;$i<500;$i++){
+	
+	if(JSON.stringify($ana_1061_resultArr2) != ""){
+		break;
+		
+	}else{
+		_wait(10000);
+	}
+	
+	
+}
+
 var $ana_1061_update_sr = "SVMXC__Service_Request__c SR_1 = new SVMXC__Service_Request__c(SVMXC__Priority__c = 'High', Id = '"+$SR+"' );update SR_1 ;";
 var $ana_1061_resultSR = $op_act_sForceApiCall.sForceQuery($un, $pwd, $ana_1061_update_sr,"create");
-
+for(var $i=0;$i<500;$i++){
+	
+	if(JSON.stringify($ana_1061_resultSR) != ""){
+		break;
+		
+	}else{
+		_wait(10000);
+	}
+	
+	
+}
 $an_act_Repeat_Visit_SR.rv_runEngine("meghana.rao@servicemax.com");
 
 _wait(30000);
-_wait(1000);
+_wait(10000);
 var $ana_1061_query_RV2 = "Select SVMXC__Work_Order__c ,SVMXC__Account__c, SVMXC__Configuration_Name__c ,SVMXC__Is_Repeat_Visit__c ,SVMXC__Service_Request__c ,SVMXC__Technician__c from SVMXC__SPM_Repeat_Visit__c where SVMXC__Work_Order__c ='"+ $WO_ID_1 +"'";
 var $ana_1061_result_rv = $op_act_sForceApiCall.sForceQuery($un, $pwd, $ana_1061_query_RV2,"query");
 
-_wait(1000);
+for(var $i=0;$i<500;$i++){
+	
+	if(JSON.stringify($ana_1061_result_rv) != ""){
+		break;
+		
+	}else{
+		_wait(10000);
+	}
+	
+	
+}
 
 $ana_1061_result_rv.forEach(function($arrValueRV2) {
 	

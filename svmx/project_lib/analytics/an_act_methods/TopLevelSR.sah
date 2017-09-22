@@ -8,7 +8,6 @@ var $TopLevelSR = new function TopLevelSR() {
 		_click($an_pg_rv.link_servicemaxSetup);
 		_click($an_pg_rv.btn_serviceperformancemetrics);
 		_click($an_pg_rv.btn_serviceperformancemetricsetup);
-
 		_click($an_pg_rv.span_businessprocessconfig);
 		_click($an_pg_rv.txt_issuetracker);
 		_click($an_pg_rv.listItemSR);

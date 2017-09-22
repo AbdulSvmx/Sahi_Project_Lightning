@@ -14,13 +14,38 @@ var $Site = $data[1]["Site"];
 var $Component = $data[1]["Component"];
 $bo_act_login.login($url, $un, $pwd);
 
-var $ana_1053_sr = $op_act_sForceApiCall.sForceQuery($un, $pwd, $insert_sr, "create");//$op_act_sForceApiCall.sForceQuery($un, $pwd, $insert_case , "create");
+var $ana_1053_sr = $op_act_sForceApiCall.sForceQuery($un, $pwd, $insert_sr, "create");
+
+for(var $i=0;$i<500;$i++){
+	
+	if(JSON.stringify($ana_1053_sr) != ""){
+		break;
+		
+	}else{
+		_wait(10000);
+	}
+	
+	
+}
+
 var $ana_1053_query_sr = "Select Id from SVMXC__Service_Request__c Order by CreatedDate DESC Limit 1";
 
 var $service_request;
 var $var1;
 var $ana_1053_result_sr = $op_act_sForceApiCall.sForceQuery($un, $pwd, $ana_1053_query_sr,"query");
-_wait(1000);
+
+for(var $i=0;$i<500;$i++){
+	
+	if(JSON.stringify($ana_1053_result_sr) != ""){
+		break;
+		
+	}else{
+		_wait(10000);
+	}
+	
+	
+}
+
 $ana_1053_result_sr.forEach(function($var1) {
 	$service_request = $var1.Id;
 		
@@ -30,8 +55,17 @@ var $ana_1053_insert_WO = "SVMXC__Service_Order__c  WO = new SVMXC__Service_Orde
 var $ana_1053_query_wo = "Select Name , Id  , SVMXC__Company__c , SVMXC__Component__c , SVMXC__Closed_On__c from SVMXC__Service_Order__c Order by CreatedDate DESC Limit 1";
 var $ana_1053_result = $op_act_sForceApiCall.sForceQuery($un, $pwd, $ana_1053_insert_WO , "create");
 
-var $ana_1053_fetch = $op_act_sForceApiCall.sForceQuery($un, $pwd, $ana_1053_query_wo,"query");
-_wait(1000);
+for(var $i=0;$i<500;$i++){
+	
+	if(JSON.stringify($ana_1053_result) != ""){
+		break;
+		
+	}else{
+		_wait(10000);
+	}
+	
+	
+}
 var $ana_1053_WO1 ;
 var $ana_1053_WO_Account1;
 var $ana_1053_RV_WO1;
@@ -46,7 +80,20 @@ var $ana_1053_Is_Repeat_visit2;
 var $var3;
 var $varRV1;
 var $ana_1053_sr2;
-_wait(1000);
+var $ana_1053_fetch = $op_act_sForceApiCall.sForceQuery($un, $pwd, $ana_1053_query_wo,"query");
+
+for(var $i=0;$i<500;$i++){
+	
+	if(JSON.stringify($ana_1053_fetch) != ""){
+		break;
+		
+	}else{
+		_wait(10000);
+	}
+	
+	
+}
+
 $ana_1053_fetch.forEach(function($ana_1053_var1) {
 	
 	$ana_1053_WO1 = $ana_1053_var1.Id;
@@ -58,8 +105,32 @@ var $ana_1053_insert_WO2 = "SVMXC__Service_Order__c  WO = new SVMXC__Service_Ord
 var $ana_1053_query_wo2 = "Select Name , Id  , SVMXC__Company__c , SVMXC__Component__c , SVMXC__Closed_On__c from SVMXC__Service_Order__c Order by CreatedDate DESC Limit 1";
 var $resultArr3 = $op_act_sForceApiCall.sForceQuery($un, $pwd, $ana_1053_insert_WO2 , "create");
 
+for(var $i=0;$i<500;$i++){
+	
+	if(JSON.stringify($resultArr3) != ""){
+		break;
+		
+	}else{
+		_wait(10000);
+	}
+	
+	
+}
+
+
 var $ana_1053_result2 = $op_act_sForceApiCall.sForceQuery($un, $pwd, $ana_1053_query_wo2,"query");
-_wait(1000);
+
+for(var $i=0;$i<500;$i++){
+	
+	if(JSON.stringify($ana_1053_result2) != ""){
+		break;
+		
+	}else{
+		_wait(10000);
+	}
+	
+	
+}
 $ana_1053_result2.forEach(function($var3) {
 	
 	$ana_1053_WO2 = $var3.Id;
@@ -71,13 +142,25 @@ _log($ana_1053_insert_WO2);
 $TopLevelSR.an_topLevelSR_custom();
 $an_act_Repeat_Visit_SR.rv_runEngine("meghana.rao@servicemax.com");
 
-_wait(30000);
-_wait(1000);
-
+_wait(70000);
+_wait(70000);
+_wait(70000);
 
 var $ana_1053_query_RV1 = "Select SVMXC__Work_Order__c ,SVMXC__Account__c, SVMXC__Configuration_Name__c ,SVMXC__Is_Repeat_Visit__c ,SVMXC__Service_Request__c from SVMXC__SPM_Repeat_Visit__c where SVMXC__Work_Order__c ='"+ $ana_1053_WO1 +"'";
 var $ana_1053_resultRV1 = $op_act_sForceApiCall.sForceQuery($un, $pwd, $ana_1053_query_RV1,"query");
-_wait(1000);
+
+for(var $i=0;$i<500;$i++){
+	
+	if(JSON.stringify($ana_1053_resultRV1) != ""){
+		break;
+		
+	}else{
+		_wait(10000);
+	}
+	
+	
+}
+
 $ana_1053_resultRV1.forEach(function($varRV1) {
 	
 	$ana_1053_WO_Account1 = $varRV1.SVMXC__Account__c;
@@ -92,7 +175,18 @@ _log($ana_1053_Is_Repeat_visit1);
 
 var $ana_1053_query_RV2 = "Select SVMXC__Work_Order__c ,SVMXC__Account__c, SVMXC__Configuration_Name__c ,SVMXC__Is_Repeat_Visit__c ,SVMXC__Service_Request__c from SVMXC__SPM_Repeat_Visit__c where SVMXC__Work_Order__c ='"+ $ana_1053_WO2 +"'";
 var $ana_1053_resultRV2 = $op_act_sForceApiCall.sForceQuery($un, $pwd, $ana_1053_query_RV2,"query");
-_wait(2000);
+
+for(var $i=0;$i<500;$i++){
+	
+	if(JSON.stringify($ana_1053_resultRV2) != ""){
+		break;
+		
+	}else{
+		_wait(10000);
+	}
+	
+}
+
 var $varRV2;
 $ana_1053_resultRV2.forEach(function($varRV2) {
 	
@@ -106,6 +200,5 @@ _assertNotEqual("true", $ana_1053_Is_Repeat_visit1);
 _assertEqual("false",$ana_1053_Is_Repeat_visit2);
 _assertEqual($service_request,$ana_1053_RV_sr1);
 _assertEqual($service_request,$ana_1053_RV_sr2);
-
 $an_rv_1053.end();
 

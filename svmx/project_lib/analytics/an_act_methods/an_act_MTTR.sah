@@ -1,4 +1,4 @@
-var $an_act_MTTR = new function $an_act_MTTR(){
+var $an_act_MTTR = new function an_act_MTTR(){
 	
 	
 	this.mttr_usa_calc = function($Calculationmethodname)
@@ -62,6 +62,8 @@ var $an_act_MTTR = new function $an_act_MTTR(){
 	
 	this.mttr_runEngine = function($emailID)
 	{
+		_click($an_pg_rv.btn_click_metrics);
+		_click($an_pg_mttr.btn_meantime_to_repair);
 	    _click($an_pg_mttr.btn_schedule_notification);	
 	    _click($an_pg_mttr.list_timezone);
 	    _click($an_pg_mttr.btn_ist_timezone);
