@@ -8,7 +8,6 @@ var $g_pwd = $queryFromFile[$i][1];
 var $g_url = $queryFromFile[$i][2];
 }
 
-
 var $RS_6295 = _testcase("RS_6295", "Create New MTTS Rule");
 
 $RS_6295.start();
@@ -49,8 +48,9 @@ _setValue(_textbox("MTTSRule:RuleForm:RuleBlock:j_id119:HdrAdvOption"), "1 AND (
 _setValue(_textbox("MTTSRule:RuleForm:RuleBlock:MTTS:Minutes"), "70");
 _click(_button("Save"));
 
+_log("$MTTSName = "+$MTTSName);
 
-if(_isVisible($MTTSName))
+if(_exists($MTTSName))
 	{
 	_log("MTTS Rule Created Successfully");
 	}
