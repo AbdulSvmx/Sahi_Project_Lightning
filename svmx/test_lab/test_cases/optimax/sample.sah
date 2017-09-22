@@ -5,7 +5,7 @@ var $pwd = "maxpl0re";
 
 
 
-
+//<-- Login using UI -->
 /*_navigateTo("http://test.salesforce.com");
 
 _setValue(_emailbox("username"), $un);
@@ -17,7 +17,7 @@ _click(_submit("Log In to Sandbox"));*/
 
 
 //$bo_act_login.login($url, $un, $pwd)
-
+//<-- Getting wo data from excel file -->
 var $queryFromFile = $excel.readFromCustomExcel("../optimax/op_excleData/CA500_auto.xlsx", "CA 500","","");
 //var $nArr;
 //Calling the sforce API
@@ -32,8 +32,8 @@ _log($callback);
 /*_set($SLA, _fetch(SLA_violation($un, $pwd)));
 _log($SLA);*/
 	
-_set($login_test, _fetch($op_login.login_withoutUI("govendhan@svmx-cct5.com.cct5full", "maxpl0re")));
-_log($login_test);
+/*_set($login_test, _fetch($op_login.login_withoutUI("govendhan@svmx-cct5.com.cct5full", "maxpl0re")));
+_log($login_test);*/
 
 
 //<browser>
@@ -46,13 +46,13 @@ sforce.connection.sessionId = null;
 sforce.connection.debuggingHeader = null; // this, too is necessary!
 
 
-
+//<-- Login without UI -->
 var $login_result = sforce.connection.login($un,$pwd);
 _log("test = "+$login_result.sessionId + "sforce.connection.sessionId = "+sforce.connection.sessionId);
 
 /*var no_Initiate_WO = 0;
 var no_Pending_WO = 0;
-
+//<-- creating empty list to set data & create list for creating data -->
 var CreateRecords=[];
 for(var $i=0;$i<$queryFromFile.length;$i++)
       {
@@ -68,10 +68,12 @@ for(var $i=0;$i<$queryFromFile.length;$i++)
       wo_list.SVMXC__Preferred_End_Time__c = $queryFromFile[$i][8];
       wo_list.SVMXC__Apply_Business_Hours_For_OptiMax__c = $queryFromFile[$i][9];
       wo_list.SVMXC__Preferred_Business_Hours__c = $queryFromFile[$i][10];
+      <-- pushing the data to the list to create Wo -->
       CreateRecords.push(wo_list);
       }
+      <-- data pushed in the list we are push all those data in the sfdc-->
 result = sforce.connection.create(CreateRecords);
-
+	<-- querying the data -->
 	var initiate_WO_List = sforce.connection.query("Select Id, SVMXC__OptiMax_Status__c, SVMXC__Dispatch_Process__c, SVMXC__Primary_Territory__c From SVMXC__Service_Order__c Where SVMXC__Primary_Territory__c = 'a2S18000000MP1u'");
 	var initiate_WO_Arr = initiate_WO_List.getArray("records");
 	
