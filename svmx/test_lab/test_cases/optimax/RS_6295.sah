@@ -88,11 +88,11 @@ function create_WO ($work_Orders_Xl){
 		wo_list.SVMXC__Order_Status__c = $work_Orders_Xl[$i][1];
 		CreateRecords.push(wo_list);
 	}
-	result = sforce.connection.create(CreateRecords);
+	result = _call(sforce.connection.create(CreateRecords));
+	_log("Work Order created .. Result "+result);
 	if(result.length != 0){
-		_log("Work Orders are created");
 		for (var i=0; i<result.length; i++) {
-			var mtts_WO_List = sforce.connection.query("Select Id, SVMXC__Service_Duration__c, SVMXC__Order_Type__c, SVMXC__Order_Status__c From SVMXC__Service_Order__c Where Id = '" +result[i].id+"'");
+			var mtts_WO_List = _call(sforce.connection.query("Select Id, SVMXC__Service_Duration__c, SVMXC__Order_Type__c, SVMXC__Order_Status__c From SVMXC__Service_Order__c Where Id = '" +result[i].id+"'"));
 			var mtts_WO_arr = mtts_WO_List.getArray("records");
 			for(var $s=0;$s<mtts_WO_arr.length;$s++){
 				var mtts_WO = mtts_WO_arr[$s];
@@ -103,15 +103,13 @@ function create_WO ($work_Orders_Xl){
 				if(mtts_WO.SVMXC__Order_Type__c === 'Repair' & mtts_WO.SVMXC__Order_Status__c === 'Closed' & mtts_WO.SVMXC__Service_Duration__c === '3600.0'){
 					_log("MTTS updated as expected from Setting def value 3600 sec");
 				}
-				else{
-					_log("MTTS is not calculated. SVMXC__Service_Duration__c = "+ mtts_WO.SVMXC__Service_Duration__c);
-				}
 			}
 		}
 	}
 	else{
 		_log("Work Orders are not created");
 	}
+	return result;
 }
 
 //</browser>
