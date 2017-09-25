@@ -1,32 +1,46 @@
-//_includeOnce("../../../references/references.js");
 
 
 
-//Tests are to be written here
-//==============
+
+//author - Noor Salma Sharieff
 
 var $RS_5260 = _testcase("$RS_5260","Create a PM Plan from Service Contract with coverage type as Account");
 $RS_5260.start();
 _setSpeed(100);
-$bo_act_login.login($g_url, $g_un, $g_pwd);
-
 
 //Pre - Condition 
+$bo_act_login.login($g_url, $bac_unDev, $bac_pwdDev);
 var $accName = $bo_act_accounts.createAccount();
-var $proName = $bo_act_products.createProduct();
-var $installedProduct = $bo_act_installedProduct.createInstalledProduct($proName, $accName);
+var $proName = $bo_act_products.createProduct("pro12", "--None--");
+var $installedProduct = $bo_act_installedProduct.createInstalledProduct($proName,$accName,"");
 var $slaterm = $bo_act_slaTerms.createSlaTerms("Default");
 var $sconUrl = $bo_act_serviceMaintenanceContracts.createServiceMaintenanceContract($accName, $slaterm);
 $bo_act_serviceMaintenanceContracts.AddCoveredProductToSCON($sconUrl, $installedProduct);
 
 //Test Steps
+var $PMPTempName = $bo_act_PMPlanTemplate.createTimeBasedPMPlanTemplate($proName, "Account (Visit Only)","");
+var $PMPlan = $bo_act_PMPlan.createATimeBasedPMPlanFromScon($sconUrl, $PMPTempName,"Account (Visit Only)");
 
+//Validations
+_assertExists(_tableHeader("No records to display"),_under(_heading3("Preventive Maintenance Coverages")));
 
+var $startDate = _getText(_div(0,_rightOf(_cell("Start Date"))));
+_click(_link(0,_under(_tableHeader("Record Number",_under(_heading3("PM Schedule"))))));
+var $lastRunDate = _getText(_div(0,_rightOf(_cell("Last Run Date"))));
+var $scheduleOnActual = _getText(_div(0,_rightOf(_cell("Scheduled On"))));
+_assertEqual($startDate,$lastRunDate, "Last Run Date is not equal to start date");
 
-//var $accName = bo_act_accounts.createAccount();
+_assert($lastRunDate =! $scheduleOnActual,"Issue in Last Run Date and Scheduled On date");
+
+//Clean up function
+
+var $datacreated = [$accName,$proName,$installedProduct,$slaterm,$PMPTempName,$PMPlan];
+for (var i = 0; i < $datacreated.length; i++) {
+	$bo_act_common.cleanUpfunction($datacreated[i]);
+}
+$bo_act_serviceMaintenanceContracts.deleteServiceMaintenanceContract($sconUrl);
+
 $RS_5260.end();
-//Test
-//}
 
 
 
