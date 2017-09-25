@@ -11,6 +11,7 @@ var $bo_pg_PMPlan = new function bo_pg_PMPlan(){
 	this.txt_startDate = _textbox(0,_near(_label("Start Date:")));
 	this.txt_endDate = _textbox(0,_near(_label("End Date:")));
 	this.btn_save = _span("/svmx-sfmd-save-icon/");
+	this.sel_coverageType = _div(0,_rightOf(_label("Coverage Type:")));
 };
 
 

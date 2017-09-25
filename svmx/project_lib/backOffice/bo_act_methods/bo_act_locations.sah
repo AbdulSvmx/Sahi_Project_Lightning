@@ -2,9 +2,9 @@
  * Functions for the Accounts Object
  */
 var $bo_act_locations = new function bo_act_locations() {
-	var $recordType = ["Depot","Depot Child","Depot Parent","Standard Location"];
+	//var $recordType = ["Depot","Depot Child","Depot Parent","Standard Location"];
 	/**
-	 * Create an Account
+	 * Create a location
 	 * 
 	 * @param $accountName
 	 */
@@ -20,9 +20,9 @@ var $bo_act_locations = new function bo_act_locations() {
 		_setSelected($bo_pg_locations.sel_country, $country);
 		_setValue($bo_pg_locations.txt_zip, $zipCode);
 		_setValue($bo_pg_locations.txt_accountName, $accountName);
-		_highlight($bo_pg_locations.btn_save);
+		_click($bo_pg_locations.btn_save);
+		_logOutput($locName+ " location is created");
+		_wait(30000, _isVisible($locName));
 		return $locName;
 		};
-
-
 };
