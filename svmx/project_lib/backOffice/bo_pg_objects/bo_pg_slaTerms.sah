@@ -12,7 +12,7 @@ var $bo_pg_slaTerms = new function bo_pg_slaTerms(){
 	
 	this.btn_initialResponse = _cell("Initial Response");
 	this.sel_responseTrackedOn = _select("responseTrackedOn");
-	this.btn_initialAddRecord = _button("Add Record");
+	this.btn_AddRecord = _button("Add Record");
 	this.sel_orderType = _select(0,_near(_div("Type")));
 	this.sel_priority = _select(1,_near(_div("Type")));
 	this.sel_clockStartsFrom = _select(2,_near(_div("Type")));
@@ -28,6 +28,13 @@ var $bo_pg_slaTerms = new function bo_pg_slaTerms(){
 	this.btn_services = _click(_cell("Services"));	
 	
 	this.btn_save = _button("Save");
+	
+	this.selectSLA = function($slaName){
+		
+		_click(_checkbox(0,_leftOf(_span($slaName,_near(_div("SLA Terms Name"))))));
+		
+		};
+		this.btn_editSLA =_button("Edit");
 };
 
 

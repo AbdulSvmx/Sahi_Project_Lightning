@@ -6,12 +6,36 @@ $RS_7287.start();
 _setSpeed(100);
 
 //Preconditions For Test Case
-//$bo_act_login.login($g_url, $g_un, $g_pwd);
+$bo_act_login.login($g_url, $g_un, $g_pwd);
 //$bo_act_navigation.navigateToConfigurationProfilesPage();
 
+//Create 1st SLA Term SLA01
+$bo_act_navigation.navigateToSlaTerms();
+var $slaName = $bo_act_slaTerms.createSlaTerms("Default");
+$bo_act_slaTerms.addInitialResponseToSLA($slaName,"WorkOrder","Field Service","Medium","Created Date","5","10","SLA");
+$bo_act_slaTerms.addOnsiteResponseToSLA($slaName,"WorkOrder","Field Service","Medium","Created Date","10","15","SLA");
 
-//$bo_act_navigation.navigateToSlaTerms();
-var $slaTerm = $bo_act_slaTerms.createSlaTermsWithResponseSets("Default","WorkOrder","Field Service","Medium","Created Date","5","10","SLA");
+//validation of SLA creation
+_assertExists(_span($slaName));
+
+
+//Create 2nd SLA Term SLA02
+$bo_act_navigation.navigateToSlaTerms();
+var $slaName = $bo_act_slaTerms.createSlaTerms("Default");
+$bo_act_slaTerms.addInitialResponseToSLA($slaName,"WorkOrder","Field Service","Medium","Created Date","5","10","SLA");
+$bo_act_slaTerms.addOnsiteResponseToSLA($slaName,"WorkOrder","Field Service","Medium","Created Date","10","15","SLA");
+
+//validation of SLA creation
+_assertExists(_span($slaName));
+
+//Create 3rd SLA Term SLA03
+$bo_act_navigation.navigateToSlaTerms();
+var $slaName = $bo_act_slaTerms.createSlaTerms("Default");
+$bo_act_slaTerms.addInitialResponseToSLA($slaName,"WorkOrder","Field Service","Medium","Created Date","5","10","SLA");
+$bo_act_slaTerms.addOnsiteResponseToSLA($slaName,"WorkOrder","Field Service","Medium","Created Date","10","15","SLA");
+
+//validation of SLA creation
+_assertExists(_span($slaName));
 
 $RS_7287.end();
 //}
