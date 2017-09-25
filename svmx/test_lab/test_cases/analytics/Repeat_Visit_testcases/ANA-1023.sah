@@ -16,20 +16,8 @@ $bo_act_login.login($url, $un, $pwd);
 var $ana_1023_insert_WO = "SVMXC__Service_Order__c  WO = new SVMXC__Service_Order__c ( Custom_Account__c ='"+ $Account2 +"', SVMXC__Product__c = '"+$Product+"' , SVMXC__Group_Member__c = '"+$Technician+"' ,SVMXC__Component__c = '"+$Component+"',SVMXC__Order_Status__c = '"+$OrderStatus+"' , SVMXC__Closed_On__c = "+$Closedon+",SVMXC__Country__c = 'United States', SVMXC__Sub_Status__c = 'Resolved', SVMXC__Priority__c = 'High', SVMXC__Site__c = '"+$Site+"');insert WO;";
 var $ana_1023_query_wo = "Select Name , Id  ,Custom_Account__c , SVMXC__Component__c , SVMXC__Closed_On__c from SVMXC__Service_Order__c Order by CreatedDate DESC Limit 1";
 var $ana_1023_result = $op_act_sForceApiCall.sForceQuery($un, $pwd, $ana_1023_insert_WO , "create");
-for(var $i=0;$i<500;$i++){
-	
-	if(JSON.stringify($ana_1023_result) != ""){
-		break;
-		
-	}else{
-		_wait(10000);
-	}
-	
-	
-}
-
 var $ana_1023_fetch = $op_act_sForceApiCall.sForceQuery($un, $pwd, $ana_1023_query_wo,"query");
-_wait(10000);
+
 var $ana_1023_WO1 ;
 var $ana_1023_WO_Account1;
 var $ana_1023_RV_WO1;
@@ -37,7 +25,7 @@ var $ana_1023_Is_Repeat_visit1;
 var $ana_1023_sr1;
 var $var3;
 var $varRV1;
-_wait(10000);
+
 $ana_1023_fetch.forEach(function($ana_1023_var1) {
 	
 	$ana_1023_WO1 = $ana_1023_var1.Id;
@@ -49,30 +37,10 @@ var $ana_1023_insert_WO2 = "SVMXC__Service_Order__c  WO = new SVMXC__Service_Ord
 var $ana_1023_query_wo2 = "Select Name , Id  , SVMXC__Company__c , SVMXC__Component__c , SVMXC__Closed_On__c from SVMXC__Service_Order__c Order by CreatedDate DESC Limit 1";
 var $resultArr3 = $op_act_sForceApiCall.sForceQuery($un, $pwd, $ana_1023_insert_WO2 , "create");
 
-for(var $i=0;$i<500;$i++){
-	
-	if(JSON.stringify($resultArr3) != ""){
-		break;
-		
-	}else{
-		_wait(10000);
-	}
-	
-	
-}
+
 var $ana_1023_result2 = $op_act_sForceApiCall.sForceQuery($un, $pwd, $ana_1023_query_wo2,"query");
 
-for(var $i=0;$i<500;$i++){
-	
-	if(JSON.stringify($ana_1023_result2) != ""){
-		break;
-		
-	}else{
-		_wait(10000);
-	}
-	
-	
-}
+
 
 $ana_1023_result2.forEach(function($var3) {
 	
@@ -93,18 +61,6 @@ var $ana_1023_query_RV1 = "Select SVMXC__Work_Order__c ,SVMXC__Primary_Work_Orde
 var $ana_1023_resultRV1 = $op_act_sForceApiCall.sForceQuery($un, $pwd, $ana_1023_query_RV1,"query");
 
 
-for(var $i=0;$i<500;$i++){
-	
-	if(JSON.stringify($ana_1023_resultRV1) != ""){
-		break;
-		
-	}else{
-		_wait(10000);
-	}
-	
-	
-}
-
 
 $ana_1023_resultRV1.forEach(function($varRV1) {
 	
@@ -122,17 +78,6 @@ var $ana_1023_query_RV2 = "Select SVMXC__Work_Order__c ,SVMXC__Primary_Work_Orde
 var $ana_1023_resultRV2 = $op_act_sForceApiCall.sForceQuery($un, $pwd, $ana_1023_query_RV2,"query");
 
 
-for(var $i=0;$i<500;$i++){
-	
-	if(JSON.stringify($ana_1023_resultRV2) != ""){
-		break;
-		
-	}else{
-		_wait(10000);
-	}
-	
-	
-}
 var $ana_1023_primarywo2;
 $ana_1023_resultRV2.forEach(function($varRV2) {
 	
