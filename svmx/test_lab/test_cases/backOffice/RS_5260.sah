@@ -2,7 +2,7 @@
 
 
 
-//Author - Noor Salma Sharieff
+//author - Noor Salma Sharieff
 
 var $RS_5260 = _testcase("$RS_5260","Create a PM Plan from Service Contract with coverage type as Account");
 $RS_5260.start();
@@ -10,43 +10,37 @@ _setSpeed(100);
 
 //Pre - Condition 
 $bo_act_login.login($g_url, $bac_unDev, $bac_pwdDev);
-//var $accName = $bo_act_accounts.createAccount();
-//var $proName = $bo_act_products.createProduct("pro12", "--None--");
-//var $installedProduct = $bo_act_installedProduct.createInstalledProduct($proName,$accName,"");
-
-//var $slaterm = $bo_act_slaTerms.createSlaTerms("Default");
-//var $sconUrl = $bo_act_serviceMaintenanceContracts.createServiceMaintenanceContract($accName, $slaterm);
-//$bo_act_serviceMaintenanceContracts.AddCoveredProductToSCON($sconUrl, $installedProduct);
+var $accName = $bo_act_accounts.createAccount();
+var $proName = $bo_act_products.createProduct("pro12", "--None--");
+var $installedProduct = $bo_act_installedProduct.createInstalledProduct($proName,$accName,"");
+var $slaterm = $bo_act_slaTerms.createSlaTerms("Default");
+var $sconUrl = $bo_act_serviceMaintenanceContracts.createServiceMaintenanceContract($accName, $slaterm);
+$bo_act_serviceMaintenanceContracts.AddCoveredProductToSCON($sconUrl, $installedProduct);
 
 //Test Steps
-//var $PMPTempName = $bo_act_PMPlanTemplate.createTimeBasedPMPlanTemplate("pro2082017155025", "Account (Visit Only)","");
-$bo_act_PMPlan.createATimeBasedPMPlanFromScon("https://cs95.salesforce.com/a210x00000008eG", "PMT2082017171437");
+var $PMPTempName = $bo_act_PMPlanTemplate.createTimeBasedPMPlanTemplate($proName, "Account (Visit Only)","");
+var $PMPlan = $bo_act_PMPlan.createATimeBasedPMPlanFromScon($sconUrl, $PMPTempName,"Account (Visit Only)");
 
 //Validations
 _assertExists(_tableHeader("No records to display"),_under(_heading3("Preventive Maintenance Coverages")));
+
 var $startDate = _getText(_div(0,_rightOf(_cell("Start Date"))));
 _click(_link(0,_under(_tableHeader("Record Number",_under(_heading3("PM Schedule"))))));
-
 var $lastRunDate = _getText(_div(0,_rightOf(_cell("Last Run Date"))));
 var $scheduleOnActual = _getText(_div(0,_rightOf(_cell("Scheduled On"))));
 _assertEqual($startDate,$lastRunDate, "Last Run Date is not equal to start date");
 
-var $pos = $lastRunDate.search("/");
-var $slice =$lastRunDate.slice(0,1);
-$slice++;
-var $scheduledOnExpected = $lastRunDate.replace($lastRunDate[$pos-1],$slice);
-_assertEqual($scheduledOnExpected,$scheduleOnActual,"Scheduled On Date is not next month");
+_assert($lastRunDate =! $scheduleOnActual,"Issue in Last Run Date and Scheduled On date");
 
 //Clean up function
 
-
-;
-
-
+var $datacreated = [$accName,$proName,$installedProduct,$slaterm,$PMPTempName,$PMPlan];
+for (var i = 0; i < $datacreated.length; i++) {
+	$bo_act_common.cleanUpfunction($datacreated[i]);
+}
+$bo_act_serviceMaintenanceContracts.deleteServiceMaintenanceContract($sconUrl);
 
 $RS_5260.end();
-//Test
-//}
 
 
 

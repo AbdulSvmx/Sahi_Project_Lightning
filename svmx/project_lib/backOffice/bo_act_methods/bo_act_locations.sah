@@ -4,7 +4,7 @@
 var $bo_act_locations = new function bo_act_locations() {
 	//var $recordType = ["Depot","Depot Child","Depot Parent","Standard Location"];
 	/**
-	 * Create an Account
+	 * Create a location
 	 * 
 	 * @param $accountName
 	 */
