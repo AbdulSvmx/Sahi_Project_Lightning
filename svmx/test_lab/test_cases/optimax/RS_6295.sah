@@ -59,4 +59,6 @@ else
 	_fail("Error in Creating MTTS Rule");
 	}
 
+$bo_act_login.logOut();
+
 $RS_6295.end();
