@@ -6,7 +6,10 @@ var $an_act_Repeat_Visit_SR = new function an_act_Repeat_Visit_SR() {
 	this.rv_usa_calc = function($Calculationmethodname) {
 
 		// To setup the values
-
+		_click($an_pg_rv.link_home);
+		_click($an_pg_rv.link_servicemaxSetup);
+		_click($an_pg_rv.btn_serviceperformancemetrics);
+		_click($an_pg_rv.btn_serviceperformancemetricsetup);
 		_click($an_pg_rv.btn_click_metrics);
 		_click($an_pg_rv.btn_RepeatVisit);
 		_click($an_pg_rv.btn_AddRepeatVisit);
