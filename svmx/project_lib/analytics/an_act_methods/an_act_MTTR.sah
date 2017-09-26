@@ -10,7 +10,7 @@ var $an_act_MTTR = new function an_act_MTTR(){
 		_setValue($an_pg_mttr.txt_mttr_description, $Calculationmethodname);
 		_click($an_pg_mttr.btn_settings);
 		_click($an_pg_mttr.list_deadtime_select);
-		_click($an_pg_mttr.list_deadtime);
+		_click($an_pg_mttr.btn_custom_deadtime);
 		_click($an_pg_mttr.list_mttr_technician);
 		_click($an_pg_mttr.btn_technician);
 		_click($an_pg_mttr.list_mttr_product);
@@ -56,6 +56,36 @@ var $an_act_MTTR = new function an_act_MTTR(){
 		_click($an_pg_mttr.btn_labor_line_only);
 		_click($an_pg_mttr.btn_save);
 		_click($an_pg_mttr.btn_ok);		
+		
+		
+	};
+	
+	this.mttr_custom_expr = function($Calculationmethodname)
+	{
+		_click($an_pg_rv.btn_click_metrics);
+		_click($an_pg_mttr.btn_meantime_to_repair);
+		_click($an_pg_mttr.btn_addmttr);
+		_click($an_pg_mttr.btn_activecheckbox);
+		_setValue($an_pg_mttr.txt_mttr_description, $Calculationmethodname);
+		_click($an_pg_mttr.btn_settings);
+		_click($an_pg_mttr.list_deadtime_select);
+		_click($an_pg_mttr.list_deadtime);
+		_click($an_pg_mttr.list_mttr_technician);
+		_click($an_pg_mttr.btn_technician);
+		_click($an_pg_mttr.list_mttr_product);
+		_click($an_pg_mttr.btn_product);
+		_click($an_pg_mttr.list_account_selection);
+		_click($an_pg_mttr.btn_account);
+		_click($an_pg_mttr.list_scheduled_date);
+		_click($an_pg_mttr.btn_scheduled_date);
+		_click($an_pg_mttr.btn_criteria);
+		_click($an_pg_mttr.list_choose_qualification_wo);
+		_click($an_pg_mttr.btn_custom_wo_expr);
+		_click($an_pg_mttr.list_workdetail_qualification);
+		_click($an_pg_mttr.btn_custom_wd_expr);
+		_click($an_pg_mttr.btn_save);
+		_click($an_pg_mttr.btn_ok);		
+		
 		
 		
 	};

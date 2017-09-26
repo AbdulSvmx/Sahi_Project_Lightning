@@ -19,7 +19,7 @@ $bo_act_login.login($url, $un, $pwd);
 
 var $ana_1044_sr = $op_act_sForceApiCall.sForceQuery($un, $pwd, $insert_sr, "create");//$op_act_sForceApiCall.sForceQuery($un, $pwd, $insert_case , "create");
 
-var $ana_1044_query_sr = "Select Id from SVMXC__Service_Request__c Order by CreatedDate DESC Limit 1";
+var $ana_1044_query_sr = "Select Id from SVMXC__Service_Request__c where Createdby.Id = '005q0000003GGfP' Order by CreatedDate DESC Limit 1";
 
 var $ana_1044_service_request;
 var $var1;
@@ -31,7 +31,7 @@ $ana_1044_result_sr.forEach(function($var1) {
 });
 
 var $ana_1044_insert_WO = "SVMXC__Service_Order__c  WO = new SVMXC__Service_Order__c ( Custom_Account__c ='"+ $Account2 +"', SVMXC__Product__c = '"+$Product+"' , SVMXC__Group_Member__c = '"+$Technician+"' ,SVMXC__Component__c = '"+$Component+"',SVMXC__Order_Status__c = '"+$OrderStatus+"' , SVMXC__Closed_On__c = "+$Closedon+",SVMXC__SM_Service_Request__c = '"+ $ana_1044_service_request +"',SVMXC__Country__c = 'United States', SVMXC__Sub_Status__c = 'Resolved', SVMXC__Priority__c = 'High', SVMXC__Site__c = '"+$Site+"');insert WO;";
-var $ana_1044_query_wo = "Select Name , Id  ,Custom_Account__c , SVMXC__Component__c , SVMXC__Closed_On__c from SVMXC__Service_Order__c Order by CreatedDate DESC Limit 1";
+var $ana_1044_query_wo = "Select Name , Id  ,Custom_Account__c , SVMXC__Component__c , SVMXC__Closed_On__c from SVMXC__Service_Order__c where Createdby.Id = '005q0000003GGfP' Order by CreatedDate DESC Limit 1";
 var $ana_1044_result = $op_act_sForceApiCall.sForceQuery($un, $pwd, $ana_1044_insert_WO , "create");
 
 var $ana_1044_fetch = $op_act_sForceApiCall.sForceQuery($un, $pwd, $ana_1044_query_wo,"query");
@@ -53,7 +53,7 @@ $ana_1044_fetch.forEach(function($ana_1044_var1) {
 _log($ana_1044_WO1);
 
 var $ana_1044_insert_WO2 = "SVMXC__Service_Order__c  WO = new SVMXC__Service_Order__c (SVMXC__Company__c ='"+ $Account1 +"', SVMXC__Product__c = '"+$Product+"' , SVMXC__Group_Member__c = '"+$Technician+"' ,SVMXC__Component__c = '"+$Component+"', SVMXC__Order_Status__c = '"+$OrderStatus+"' , SVMXC__Closed_On__c = "+$Closedon+",SVMXC__SM_Service_Request__c = '"+ $ana_1044_service_request +"',SVMXC__Country__c = 'United States', SVMXC__Priority__c = 'High',SVMXC__Related_Work_Order__c ='"+$ana_1044_WO1+"', SVMXC__Site__c = '"+$Site+"' );insert WO;";
-var $ana_1044_query_wo2 = "Select Name , Id  , SVMXC__Company__c , SVMXC__Component__c , SVMXC__Closed_On__c from SVMXC__Service_Order__c Order by CreatedDate DESC Limit 1";
+var $ana_1044_query_wo2 = "Select Name , Id  , SVMXC__Company__c , SVMXC__Component__c , SVMXC__Closed_On__c from SVMXC__Service_Order__c  where Createdby.Id = '005q0000003GGfP' Order by CreatedDate DESC Limit 1";
 var $resultArr3 = $op_act_sForceApiCall.sForceQuery($un, $pwd, $ana_1044_insert_WO2 , "create");
 
 
@@ -67,7 +67,6 @@ $ana_1044_result2.forEach(function($var3) {
 });
 
 $TopLevelSR.an_topLevelSR_custom();
-//$an_act_Repeat_Visit_SR.rv_usa_custom("Custom Field Account");
 $an_act_Repeat_Visit_SR.rv_runEngine("meghana.rao@servicemax.com");
 
 _wait(50000);

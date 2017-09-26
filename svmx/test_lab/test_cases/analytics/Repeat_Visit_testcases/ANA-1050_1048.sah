@@ -40,7 +40,7 @@ var $createcase = $op_act_sForceApiCall.sForceQuery($un, $pwd, $insert_case, "cr
 var $Case ;
 var $casedummy;
 _log($createcase);
-var $query_case = "Select Id from Case Order by CreatedDate DESC Limit 1";
+var $query_case = "Select Id from Case  where Createdby.Id = '005q0000003GGfP' Order by CreatedDate DESC Limit 1";
 var $fetchcasequery = $op_act_sForceApiCall.sForceQuery($un, $pwd, $query_case,"query");
 
 $fetchcasequery.forEach(function($casedummy) {
@@ -49,7 +49,7 @@ $fetchcasequery.forEach(function($casedummy) {
 });
 
 var $insert_wo_first = "SVMXC__Service_Order__c  WO = new SVMXC__Service_Order__c (SVMXC__Company__c ='"+ $Account +"', SVMXC__Product__c = '"+$Product+"' , SVMXC__Group_Member__c = '"+$Technician+"' ,SVMXC__Component__c = '"+$Component+"',SVMXC__Order_Status__c = '"+$OrderStatus+"' , SVMXC__Closed_On__c = "+$Closedon+", SVMXC__Case__c = '"+ $Case +"',SVMXC__Country__c = 'United States', SVMXC__Sub_Status__c = 'Resolved', SVMXC__Priority__c = 'High', SVMXC__Site__c = '"+$Site+"');insert WO;";
-var $query_wo_first = "Select Name , Id  , SVMXC__Company__c , SVMXC__Component__c , SVMXC__Closed_On__c from SVMXC__Service_Order__c Order by CreatedDate DESC Limit 1";
+var $query_wo_first = "Select Name , Id  , SVMXC__Company__c , SVMXC__Component__c , SVMXC__Closed_On__c from SVMXC__Service_Order__c  where Createdby.Id = '005q0000003GGfP' Order by CreatedDate DESC Limit 1";
 var $fetchwoquery = $op_act_sForceApiCall.sForceQuery($un, $pwd, $insert_wo_first , "create");
 
 
@@ -67,7 +67,7 @@ $store_first_wo.forEach(function($wo1) {
 _log($WO_new_1);
 
 var $insert_wo_second = "SVMXC__Service_Order__c  WO = new SVMXC__Service_Order__c (SVMXC__Company__c ='"+ $Account +"', SVMXC__Product__c = '"+$Product+"' , SVMXC__Group_Member__c = '"+$Technician+"' ,SVMXC__Component__c = '"+$Component+"', SVMXC__Order_Status__c = '"+$OrderStatus+"' , SVMXC__Closed_On__c = "+$Closedon+", SVMXC__Case__c = '"+ $Case +"',SVMXC__Country__c = 'United Kingdom', SVMXC__Sub_Status__c = 'Resolved', SVMXC__Priority__c = 'High', SVMXC__Site__c = '"+$Site+"' );insert WO;";
-var $query_wo_second = "Select Name , Id  , SVMXC__Company__c , SVMXC__Component__c , SVMXC__Closed_On__c from SVMXC__Service_Order__c Order by CreatedDate DESC Limit 1";
+var $query_wo_second = "Select Name , Id  , SVMXC__Company__c , SVMXC__Component__c , SVMXC__Closed_On__c from SVMXC__Service_Order__c  where Createdby.Id = '005q0000003GGfP' Order by CreatedDate DESC Limit 1";
 var $fetchwo2query = $op_act_sForceApiCall.sForceQuery($un, $pwd, $insert_wo_second , "create");
 
 
@@ -83,8 +83,7 @@ $store_sec_wo.forEach(function($wo2) {
 _log($WO_new_2);
 
 $TopLevelCase.an_toplevelcase();
-//$an_act_Repeat_Visit_SR.rv_usa_calc("Repeat Visit Calc USA");
-//$an_act_Repeat_Visit_SR.rv_uk_calc("Repeat Visit Calc UK");
+
 $an_act_Repeat_Visit_SR.rv_runEngine("meghana.rao@servicemax.com");
 
 _wait(30000);

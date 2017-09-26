@@ -1,0 +1,3 @@
+$an_act_Repeat_Visit_SR.rv_usa_calc("Repeat Visit Calc USA");
+$an_act_Repeat_Visit_SR.rv_uk_calc("Repeat Visit Calc UK");
+$an_act_Repeat_Visit_SR.rv_usa_custom("Custom Field Account");

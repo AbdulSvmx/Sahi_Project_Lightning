@@ -39,5 +39,10 @@ var $an_pg_mttr = new function an_pg_mttr() {
 	this.btn_click_run = _link("Run Now");
 	this.btn_ok_sn = _div("OK");	
 	
+	// For custom expression
+	
+	this.btn_custom_wo_expr = _listItem("Custom WO Expr");
+	this.btn_custom_wd_expr = _listItem("Custom WD Expression");
+	this.btn_custom_deadtime =  _listItem("custom dead time");
 };
 
