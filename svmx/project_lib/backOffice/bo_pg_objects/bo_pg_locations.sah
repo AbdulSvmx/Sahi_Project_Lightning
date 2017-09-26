@@ -12,8 +12,8 @@ var $bo_pg_locations = new function bo_pg_locations(){
 	this.txt_street = _textarea(0,_rightOf(_label("/Street/")));
 	this.sel_country = _select(0,_rightOf(_label("/Country/")));
 	this.txt_zip = _textbox(0,_rightOf(_label("/Zip/")));
-	this.txt_accountName = _textbox("/Account/");
-	this.btn_save = _submit("/Save/");
+	this.txt_accountName = _textbox("/\\*Account|^Account/");
+	this.btn_save = _submit(" Save ");
 	
 };
 

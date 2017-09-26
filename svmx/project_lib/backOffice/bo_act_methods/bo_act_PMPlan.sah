@@ -2,26 +2,27 @@
  * Functions for the Accounts Object
  */
 var $bo_act_PMPlan = new function bo_act_PMPlan() {
-	var $PMPlanSource_SCON = "PMPlanSource_SCON";
+	//var $PMPlanSource_SCON = "PMPlanSource_SCON";
 	/**
 	 * Create a PM Plan
 	 * 
 	 * @param $accountName
 	 */
 	
-	this.createATimeBasedPMPlan = function($sourceurl, $PMPTemplate,$Source){
-		var $PMPlanName = generateRandomName(8);
-		switch($Source){
-			case $PMPlanSource_SCON:
+	this.createATimeBasedPMPlanFromScon = function($sconurl, $PMPTemplate,$coverageType){
+		var $PMPlanName = $bo_act_common.generateRandomName("PMPlan");
 				_navigateTo($sconurl);
-			break;
-		}
+		
 		_selectDomain("/svmx/");
 		_click($bo_pg_PMPlan.btn_createPMPlan);
+		_selectDomain();
+		_wait(60000,_isVisible("Create Preventive Maintenance Plan From Service Contract"));
 		_setValue($bo_pg_PMPlan.txt_PMPlanTemplateName, $PMPTemplate);
 		_setValue($bo_pg_PMPlan.txt_PMPlanName, $PMPlanName);
-		_setValue($bo_pg_PMPlan.txt_startDate, currentDate("/"));
-		_setValue($bo_pg_PMPlan.txt_endDate, getfutureDate("/"));
+		_click(sel_coverageType);
+		_click(_listItem($coverageType));
+		_setValue($bo_pg_PMPlan.txt_startDate, $bo_act_common.currentDate("/"));
+		_setValue($bo_pg_PMPlan.txt_endDate, $bo_act_common.getfutureDate("/"));
 		_click($bo_pg_PMPlan.btn_save);
 		return $PMPlanName;	
 	};

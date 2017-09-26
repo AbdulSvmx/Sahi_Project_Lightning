@@ -8,6 +8,14 @@ var $bo_pg_home = new function bo_pg_home(){
 	this.link_home = _link("Home");
 	this.link_servicemaxSetup = _link("ServiceMax Setup");
 	this.btn_userName = _span("userNavLabel");
+	this.btn_allTabs =_image("All Tabs");
+	this.link_accounts = _link("Accounts[1]");
+	this.link_contacts = _link("Contacts[1]");
+	this.link_products = _link("Products[1]");
+	this.link_installedProducts = _link("Installed Products[1]");
+	this.link_serviceMaintenanceContracts = _link("Service/Maintenance Contracts[1]");
+	this.link_locations = _link("Locations[1]");
+	
 	this.link_logOut = _link("Logout");
 	this.link_allTabs = _image("All Tabs");
 };

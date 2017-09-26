@@ -1,0 +1,49 @@
+
+
+//author - Noor Salma Sharieff
+
+var $RS_5258 = _testcase("$RS_5258","Create a PM Plan from Service Contract with coverage type as Location");
+$RS_5258.start();
+_setSpeed(100);
+
+//Pre - Condition 
+$bo_act_login.login($g_url, $bac_unDev, $bac_pwdDev);
+var $accName = $bo_act_accounts.createAccount();
+var $proName = $bo_act_products.createProduct("pro12", "--None--");
+var $installedProduct = $bo_act_installedProduct.createInstalledProduct($proName,$accName,"");
+var $location = $bo_act_locations.createLocation("", $accName, "MG Road", "India", "560001");
+var $slaterm = $bo_act_slaTerms.createSlaTerms("Default");
+var $sconUrl = $bo_act_serviceMaintenanceContracts.createServiceMaintenanceContract($accName, $slaterm);
+$bo_act_serviceMaintenanceContracts.AddCoveredProductToSCON($sconUrl, $installedProduct);
+$bo_act_serviceMaintenanceContracts.addCoveredLocationToSCON($sconUrl, $location);
+
+//Test Steps
+var $PMPTempName = $bo_act_PMPlanTemplate.createTimeBasedPMPlanTemplate($proName, "Location (Must Have Location)","");
+$bo_act_PMPlan.createATimeBasedPMPlanFromScon($sconUrl, $PMPTempName,"Location (Must Have Location)");
+var $startDate = _getText(_div(0,_rightOf(_cell("Start Date"))));
+
+
+//Validations for Preventive Maintenance Coverage
+_click(_link(0,_under(_tableHeader("PM Coverage Number")),_under(_heading3("Preventive Maintenance Coverages"))));
+var $actuallocation = _getText(_link(0,_rightOf(_cell("Location Name"))));
+_assertEqual($location,$actuallocation);
+
+//Validation for PM Schedule
+_click(_link(0,_under(_tableHeader("Record Number",_under(_heading3("PM Schedule"))))));
+$actualLastRunDate = _getText(_div(0,_rightOf(_cell("Last Run Date"))));
+$actualScheduledOn = _getText(_div(0,_rightOf(_cell("Scheduled On"))));
+_assertEqual($startDate,$actualLastRunDate,"Last Run Date is not equal to start date");
+_assert($actualLastRunDate =! $actualScheduledOn,"Issue in Last Run Date and Scheduled On date");
+
+
+//Clean up function
+var $datacreated = [$accName,$proName,$location,$installedProduct,$slaterm,$PMPTempName,$PMPlan];
+for (var i = 0; i < $datacreated.length; i++) {
+	$bo_act_common.cleanUpfunction($datacreated[i]);
+}
+$bo_act_serviceMaintenanceContracts.deleteServiceMaintenanceContract($sconUrl);
+
+$RS_5258.end();
+
+
+

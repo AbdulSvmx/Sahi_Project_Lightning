@@ -9,6 +9,8 @@ var $RS_1001 = _testcase("$RS_1001","Verify navigation to SFM transaction design
 $RS_1001.start();
 _setSpeed(100);
 $bo_act_login.login($g_url, $g_un, $g_pwd);
+
+
 $RS_1001.end();
 //}
 

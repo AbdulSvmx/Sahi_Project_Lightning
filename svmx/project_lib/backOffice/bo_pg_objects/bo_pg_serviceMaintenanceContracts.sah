@@ -10,18 +10,15 @@ var $bo_pg_serviceMaintenanceContracts = new function bo_pg_serviceMaintenanceCo
 	this.txt_accountName = _textbox("*Account");
 	this.txt_slaTermName = _textbox("SLA Terms");
 	this.link_startDate = _link("/javascript.*/",_rightOf(_label("/.*Start Date/")));
-	this.txt_startDate = _textbox("00N55000000orzR");
+	this.txt_startDate = _textbox("/Start Date/");
+	this.txt_endDate = _textbox("/End Date/");
 	this.btn_save = _submit(" Save ");
 	this.btn_newCoveredProduct = _button("New Covered Product");
 	this.txt_installedProduct = _textbox("Installed Product");
 	this.txt_backToScon = _link("/lookup.*/",_rightOf(_cell("Service/Maintenance Contract")));
+	this.btn_newCoveredLocation = _button("New Covered Location");
+	this.txt_location = _textbox("/Location/");
 };
 
-function AddCoveredProductToSCON($sconUrl,$installedProduct){
-	_navigateTo($sconUrl);
-	_click($bo_pg_serviceMaintenanceContracts.btn_newCoveredProduct);
-_setValue($bo_pg_serviceMaintenanceContracts.txt_installedProduct,$installedProduct);
-	_click($bo_pg_serviceMaintenanceContracts.btn_save);
-	_click($bo_pg_serviceMaintenanceContracts.txt_backToScon);
-}
+
 

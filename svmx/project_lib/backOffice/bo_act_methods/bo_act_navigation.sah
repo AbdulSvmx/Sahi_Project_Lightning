@@ -19,7 +19,7 @@ var $bo_act_navigation = new function bo_act_navigation() {
      * Navigates to Servicemax setup page
      * @returns boolean
      */this.navigateToSvmxSetup = function() {
-	this.navigateToHome();
+	 this.navigateToHome();
 	_click($bo_pg_home.link_servicemaxSetup );
 	_wait(3000,_isVisible($bo_pg_servicemaxSetup.btn_serviceFlowManager));
 	return $callBack.returnResult(_exists($bo_pg_servicemaxSetup.btn_serviceFlowManager));
@@ -36,69 +36,47 @@ var $bo_act_navigation = new function bo_act_navigation() {
 	_setSpeed(3000);
 	return $callBack.returnResult(_exists($bo_pg_sfmTransactionAndDesigner.btn_standardSfmTransaction));
 
-	
     };
 
 //Added By BAC Team
     this.navigateToProductsPage = function(){
-    	var $url="";
-    	$bo_act_navigation.navigateToHome();
-    	_set($url, window.location.href);
-    	$url= $url.replace("home/home.jsp","01t/o");
-    	_navigateTo($url);
+    	_click($bo_pg_home.btn_allTabs);
+    	_click($bo_pg_home.link_products);
     };
     
     this.navigateToAccountsPage = function(){
-    	var $url="";
-    	$bo_act_navigation.navigateToHome();
-    	_set($url, window.location.href);
-    	$url= $url.replace("home/home.jsp","001/o");
-    	_navigateTo($url);
+    	 _click($bo_pg_home.btn_allTabs);
+    	 _click($bo_pg_home.link_accounts);
     };
-    
-
-  
     	
      this.navigateToContactsPage = function(){
-    	var $url="";
-    	$bo_act_navigation.navigateToHome();
-    	_set($url, window.location.href);
-    	$url= $url.replace("home/home.jsp","003/o");
-    	_navigateTo($url);
+    	 _click($bo_pg_home.btn_allTabs);
+    	 _click($bo_pg_home.link_contacts);
     };
     
     this.navigateToInstalledProductPage = function(){
-    	var $url="";
-    	$bo_act_navigation.navigateToHome();
-    	_set($url, window.location.href);
-    	$url= $url.replace("home/home.jsp","a0T/o");
-    	_navigateTo($url);
+    	_click($bo_pg_home.btn_allTabs);
+   	    _click($bo_pg_home.link_installedProducts);
     };
 
     this.navigateToServiceMaintenanceContractPage = function(){
-    	var $url="";
-    	$bo_act_navigation.navigateToHome();
-    	_set($url, window.location.href);
-    	$url= $url.replace("home/home.jsp","a27/o");
-    	_navigateTo($url);
+    	_click($bo_pg_home.btn_allTabs);
+   	    _click($bo_pg_home.link_serviceMaintenanceContracts);
     };
 
 
     this.navigateToSlaTerms = function(){
-    	var $url="";
     	$bo_act_navigation.navigateToHome();
     	_click(_link("ServiceMax Setup"));
-    	_set($url, window.location.href);
-    	$url = $url.replace("CONF_SetupHome?id=005c0000003XKGI","SVMXDEV__SLAT_ManageSLATerms");
-    	_navigateTo($url);
+    	_click($bo_pg_servicemaxSetup.btn_warrantiesAndServiceContracts);
+    	_click($bo_pg_servicemaxSetup.btn_slaTerms);
     };
 
     this.navigateToPMPlanTemplatePage = function(){
-    	var $url="";
     	$bo_act_navigation.navigateToHome();
-    	_set($url, window.location.href);
-    	$url= $url.replace("home/home.jsp","a0g/l");
-    	_navigateTo($url);
+    	_click(_link("ServiceMax Setup"));
+    	_click($bo_pg_servicemaxSetup.btn_installedBaseAndPM );
+    	_click($bo_pg_servicemaxSetup.btn_PMPlanTemplate);
     };
 
     this.navigateToPMProcess = function(){
@@ -111,12 +89,8 @@ var $bo_act_navigation = new function bo_act_navigation() {
     };
 
     this.navigateToLocations = function(){
-    	var $url="";
-    	$bo_act_navigation.navigateToHome();
-    	_set($url, window.location.href);
-    	//$url= $url.replace("home/home.jsp","a1Z/o");
-    	$url= $url.replace("home/home.jsp","a2P/o");
-    	_navigateTo($url);
+    	_click($bo_pg_home.btn_allTabs);
+   	    _click($bo_pg_home.link_locations);
     };
     
     this.navigateToDevConsole = function(){
@@ -126,6 +100,48 @@ var $bo_act_navigation = new function bo_act_navigation() {
     	_navigateTo($url);
     };
     
-
+    this.navigateToWarrantyTermsPage = function(){
+    	var $url="";
+    	$bo_act_navigation.navigateToHome();
+    	_set($url, window.location.href);
+    	$url= $url.replace("home/home.jsp","a2M/o");
+    	_navigateTo($url);
+    };
+    
+    this.navigateToCreatedRecordUsingCreateNewView = function($viewName, $fieldName, $operator, $recordToBeSearch){
+    	_click(_link("Create New View"));
+    	_setValue(_textbox("/View Name:/"),$viewName);
+    	_setValue(_textbox("/View Unique Name:/"),$viewName);
+    	_setSelected(_select("column"), $fieldName);
+    	_setSelected(_select("operator"), $operator);
+    	_setValue(_textbox("fval1"),$recordToBeSearch);
+    	_click(_submit(" Save ")); 
+    	_click(_span($recordToBeSearch)); 
+    	_wait(30000, _isVisible($recordToBeSearch));
+    	};
+    	
+    this.navigateToCreatedRecordUsingGlobalSearch = function($recordToBeSearch){
+    	_setValue(_textbox("phSearchInput"),$recordToBeSearch);
+    	_click(_button("phSearchButton"));
+    	_wait(3000, _isVisible($recordToBeSearch));
+    	_click(_link("Search All"));
+    	_wait(3000, _isVisible($recordToBeSearch));
+    	_click(_link($recordToBeSearch));
+        };
+        
+     this.navigateToConfigurationProfilesPage = function(){
+        	$bo_act_navigation.navigateToHome();
+        	_click(_link("ServiceMax Setup"));
+        	_click($bo_pg_servicemaxSetup.btn_appAdministration);
+        	_click($bo_pg_servicemaxSetup.btn_configurationProfiles);
+        };
+        
+     this.navigateToActiveOrgWideConfigProfilePage = function($selectModule, $selectSubModule){
+    	 _click(_checkbox(0,_leftOf(_span("Active",_near(_heading2("Org-wide Configuration Settings"))))));
+    	 _click(_submit("Edit",_near(_heading2("Org-wide Configuration Settings"))));
+    	 _wait(3000,_isVisible(_heading2("Edit Configuration Profile")));
+    	 _setSelected(_select(0,_rightOf(_label("Select Module"))),"Service Level Agreement");
+    	 _setSelected(_select(0,_rightOf(_label("Select Submodule"))),"SLA Clock on Work Order");
+     };
 
 };
