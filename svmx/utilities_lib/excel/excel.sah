@@ -23,4 +23,58 @@ var $excel = new function excel() {
 		}
 
 	};
+
+	/**
+	 * Function to write to a excel file
+	 * @param $excelMode
+	 * @param $filePath
+	 * @param $sheetName
+	 * @param $excelData
+	 * @param $rowIndex
+	 * 
+	 * Useage:
+	 * var $filePath =
+	 * "/auto/sahi_pro/userdata/scripts/Sahi_Project/excelFile.xlsx" var
+	 * $sheetName = "Sheet1" var
+	 * $excelData=[["ajay","babu","cheeran"],["david","elango","frank"],
+	 * ["gokul","hari","irfan"],["jo","kumar","latha"],["mani","naraen","ojha"],
+	 * ["peter","queen","richard"],["shalini","thomas","umesh"]]; var
+	 * $insertRowData=["kathir","femina","jandir"];
+	 * var $excelMode = "insertAtIndex"; var $rowIndex = "3";
+	 * 
+	 * writeToExcel($excelMode,$filePath,$sheetName,$excelData);
+	 */
+
+	this.writeToExcel = function($excelMode, $filePath, $sheetName, $excelData, $rowIndex) {
+		var $excelHandel = _getExcel($filePath, $sheetName, $excelData);
+
+		switch ($excelMode) {
+		case "write":
+
+			$excelHandel.setData($excelData);
+
+			break;
+
+		case "insert":
+			// Insert New Row at end
+
+			$excelHandel.insertRow($excelData);
+
+			break;
+
+		case "insertAtIndex":
+			// Insert New Row at given index
+
+			$excelHandel.insertRow($excelData, $rowIndex); // will insert at
+															// index 2. Shifts
+															// other cells down
+			break;
+
+		default:
+			break;
+
+		}
+
+	}
+
 };
