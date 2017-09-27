@@ -53,6 +53,8 @@ var $an_act_MTTR = new function an_act_MTTR(){
 		_click($an_pg_mttr.btn_account);
 		_click($an_pg_mttr.list_scheduled_date);
 		_click($an_pg_mttr.btn_scheduled_date);
+		_click($an_pg_mttr.list_custom_maps);
+		_click($an_pg_mttr.btn_map_choose);
 		_click($an_pg_mttr.btn_criteria);
 		_click($an_pg_mttr.list_choose_qualification_wo);
 		_click($an_pg_mttr.btn_uk_closed_wo);
