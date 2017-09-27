@@ -73,8 +73,9 @@ _log($datevalue);
 $TopLevelWO.an_toplevelwo();
 $an_act_MTTR.mttr_custom_expr("Both Custom Expressions");
 $an_act_MTTR.mttr_runEngine("meghana.rao@servicemax.com");
-_wait(30000);
-_wait(1000);
+_wait(70000);
+_wait(70000);
+_wait(70000);
 
 var $an_870_primarywo1;
 var $ana_879_WO_Account1;
@@ -101,6 +102,6 @@ $ana_879_labortime = Math.round($ana_879_labortime);
 
 _assertEqual($datevalue ,$ana_879_labortime);
 _assertEqual($DeadTime, $ana_879_deadtime);
-_assertEqual($ana_879_primarywo1 , $ana_879_WO1);
+_assertEqual($ana_879_WO1 , $ana_879_primarywo1);
 $an_mttr_879.end();
 
