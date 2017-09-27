@@ -3,7 +3,7 @@
  * Home page object repository
  */
 
-var $an_pg_home = new function an_pg_home(){
+var $an_pg_rv = new function an_pg_rv(){
 	this.link_home = _link("Home");
 	this.link_servicemaxSetup = _link("ServiceMax Setup");
 	this.btn_serviceperformancemetrics = _div("Service Performance Metrics");
@@ -33,6 +33,7 @@ var $an_pg_home = new function an_pg_home(){
 	this.btn_RepeatVisit = _span("Repeat Visit");
 	this.list_Account = _listItem("Account");
 	this.list_Location = _listItem("Location");
+	this.list_primary_wo = _listItem("Work Order");
 	
 	
 	// To click the Repeat visit Calcuation method values 
@@ -46,6 +47,11 @@ var $an_pg_home = new function an_pg_home(){
 	this.list_RV_Priority = _listItem("Priority");
 	this.btn_RV_Schedule_Notifications = _span("Schedule & Notifications[1]");
 	this.list_customclosedSR = _listItem("Custom Closed SR");
+	this.list_customAccount = _listItem("Custom Account");
+	this.btn_Account_selection =_textbox("Select the source for Account field");
+	this.list_repeatvisit_maps = _textbox("Select an object mapping to store additional data for this metric");
+	this.list_rvmap_value1 =_listItem("SPM Maps for Repeat Visit");
+	
 	
 	
 };

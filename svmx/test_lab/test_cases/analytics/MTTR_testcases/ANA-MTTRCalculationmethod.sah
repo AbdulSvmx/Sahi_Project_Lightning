@@ -1,0 +1,7 @@
+var $un = "meghana.rao@servicemax.com";
+var $pwd = "salesforce100";
+var $url = "https://test.salesforce.com";
+$bo_act_login.login($url, $un, $pwd);
+$an_act_MTTR.mttr_usa_calc("USA Calculation method");
+$an_act_MTTR.mttr_uk_calc("UK Calculation method");
+$an_act_MTTR.mttr_custom_expr("Custom WO and WD Expression");

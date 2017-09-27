@@ -1,7 +1,7 @@
-var $TopLevelCase = new function TopLevelCase (){
+var $TopLevelWO = new function TopLevelWO (){
 	
 	
-this.an_toplevelcase = function()
+this.an_toplevelwo = function()
 
 {
 	_click($an_pg_rv.link_home);
@@ -11,9 +11,7 @@ this.an_toplevelcase = function()
 
 	_click($an_pg_rv.span_businessprocessconfig);
 	_click($an_pg_rv.txt_issuetracker);
-	_click($an_pg_rv.listItemCase);
-	_click($an_pg_rv.txt_businessQualificationExpr);
-	_click($an_pg_rv.list_closedcases);
+	_click($an_pg_rv.list_primary_wo);
 	_click($an_pg_rv.btn_save);
 	_click($an_pg_rv.btn_click_OK);
 	
