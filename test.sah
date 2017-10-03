@@ -23,4 +23,5 @@ _setSelected(_select("conf_prof:F_conf_prof:Setting_Block:j_id114:j_id115:Module
 
 
 _setSelected(_select(0,_rightOf(_label("Select Module")), "Service Level Agreement"));
-_setSelected(_select(0,_rightOf(_label("Select Submodule")), "SLA Clock on Work Order"));
+_setSelected(_select(0,_rightOf(_label("Select Submodule")), "SLA Clock on Work Order"));_click(_div("svmx-trigger-index-0 svmx-form-trigger svmx-form-arrow-trigger svmx-form-trigger-last svmx-unselectable svmx-form-trigger-over svmx-form-arrow-trigger-over svmx-form-arrow-trigger-click svmx-form-trigger-click"));
+_click(_listItem("Account (Visit Only)"));
