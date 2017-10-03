@@ -90,11 +90,6 @@ var $op_utility = new function op_utility() {
 	
 	this.search_MTTS_Rule = function($MTTSName) 
 	{
-		_click(_link("ServiceMax Setup"));
-		_wait(20000, _isVisible(_div("Dispatch Management")));
-		_click(_div("Dispatch Management"));
-		_wait(20000, _isVisible(_div("MTTS Rules")));
-		_click(_div("MTTS Rules"));
 		var $rowCount = 0;
 		_set($rowCount, _table("MTTSRule:RuleForm:RuleBlock:MTTSRuleList").rows.length);
 		_log("$rowCount = " + $rowCount);

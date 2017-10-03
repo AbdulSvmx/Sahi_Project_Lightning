@@ -13,9 +13,15 @@ var $RS_6298 = _testcase("RS_6298", "Delete an MTTS Rule");
 
 $RS_6298.start();
 
-var $MTTSName = "MTTSRule_Sun Sep 24 2017 15:10:21 GMT+0530 (IST)";
+var $MTTSName = "MTTSRule_Mon Sep 25 2017 12:31:26 GMT+0530 (IST)";
 
 $bo_act_login.login($g_url, $g_un, $g_pwd);
+
+_click(_link("ServiceMax Setup"));
+_wait(20000, _isVisible(_div("Dispatch Management")));
+_click(_div("Dispatch Management"));
+_wait(20000, _isVisible(_div("MTTS Rules")));
+_click(_div("MTTS Rules"));
 
 var $rowCount = $op_utility.search_MTTS_Rule($MTTSName);
 
