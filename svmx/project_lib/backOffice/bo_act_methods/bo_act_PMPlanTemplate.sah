@@ -38,7 +38,9 @@ this.createTimeBasedPMPlanTemplate = function($ProductName,$coverage,$workOrderP
 	   //$bo_act_common.searchfunction($ProductName);
 	   _click($bo_pg_PMPlanTemplate.btn_update);
 	   _click($bo_pg_PMPlanTemplate.btn_saveIcon);
-		return $PMTemplateName;
+	   _wait(30000, _isVisible($PMTemplateName));
+		_logOutput($PMTemplateName+ " PM Plan Template is created");
+	   return $PMTemplateName;
 	};
 
 };
