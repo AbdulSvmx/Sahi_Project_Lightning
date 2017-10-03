@@ -13,13 +13,13 @@ var $proName = $bo_act_products.createProduct("pro12", "--None--");
 var $installedProduct = $bo_act_installedProduct.createInstalledProduct($proName,$accName,"");
 var $location = $bo_act_locations.createLocation("", $accName, "MG Road", "India", "560001");
 var $slaterm = $bo_act_slaTerms.createSlaTerms("Default");
-var $sconName = $bo_act_serviceMaintenanceContracts.createServiceMaintenanceContract($accName, $slaterm);
+var $sconName = $bo_act_serviceMaintenanceContracts.createServiceMaintenanceContract($accName, $slaterm,1);
 $bo_act_serviceMaintenanceContracts.AddCoveredProductToSCON($sconName, $installedProduct);
 $bo_act_serviceMaintenanceContracts.addCoveredLocationToSCON($sconName, $location);
 
 //Test Steps
 var $PMPTempName = $bo_act_PMPlanTemplate.createTimeBasedPMPlanTemplate($proName, "Location (Must Have Location)","","Months");
-$bo_act_PMPlan.createATimeBasedPMPlanFromScon($sconUrl, $PMPTempName,"Location (Must Have Location)");
+$bo_act_PMPlan.createATimeBasedPMPlanFromScon($sconName, $PMPTempName,"Location (Must Have Location)",1);
 var $startDate = _getText(_div(0,_rightOf(_cell("Start Date"))));
 
 
@@ -37,11 +37,10 @@ _assert($actualLastRunDate =! $actualScheduledOn,"Issue in Last Run Date and Sch
 
 
 //Clean up function
-var $datacreated = [$accName,$proName,$location,$installedProduct,$slaterm,$PMPTempName,$PMPlan];
+var $datacreated = [$accName,$proName,$location,$installedProduct,$slaterm,$PMPTempName,$PMPlan,$sconName];
 for (var i = 0; i < $datacreated.length; i++) {
 	$bo_act_common.cleanUpfunction($datacreated[i]);
 }
-$bo_act_serviceMaintenanceContracts.deleteServiceMaintenanceContract($sconUrl);
 
 $RS_5258.end();
 
