@@ -66,21 +66,21 @@ _log($WO_ID_1);
 $TopLevelSR.an_topLevelSR();
 $an_act_Repeat_Visit_SR.rv_runEngine("meghana.rao@servicemax.com");
 
-_wait(50000);
+var $ana_1061_wo1 = null;
+for(var $i=0;$ana_1061_wo1 == null ; $i++ ){
 var $ana_1061_query_RV = "Select SVMXC__Work_Order__c ,SVMXC__Account__c, SVMXC__Configuration_Name__c ,SVMXC__Is_Repeat_Visit__c ,SVMXC__Service_Request__c from SVMXC__SPM_Repeat_Visit__c where SVMXC__Work_Order__c ='"+ $WO_ID_1 +"'";
 
 var $ana_1061_result_rv = $op_act_sForceApiCall.sForceQuery($un, $pwd, $ana_1061_query_RV,"query");
-
-
 $ana_1061_result_rv.forEach(function($arrValueRV1) {
 	
+	$ana_1061_wo1 = $arrValueRV1.SVMXC__Work_Order__c;
 	$WO_Account1 = $arrValueRV1.SVMXC__Account__c;
 	$RV_sr1 = $arrValueRV1.SVMXC__Service_Request__c;
 	$RV_config1 = $arrValueRV1.SVMXC__Configuration_Name__c;
 	$Is_Repeat_visit1 = $arrValueRV1.SVMXC__Is_Repeat_Visit__c;
 	
 });
-
+}
 _assertEqual("false", $Is_Repeat_visit1);
 _assertEqual($SR,$RV_sr1);
 
@@ -97,21 +97,21 @@ var $ana_1061_resultSR = $op_act_sForceApiCall.sForceQuery($un, $pwd, $ana_1061_
 
 $an_act_Repeat_Visit_SR.rv_runEngine("meghana.rao@servicemax.com");
 
-_wait(30000);
-_wait(10000);
+var $ana_1061_wo2 = null;
+for(var $i=0;$ana_1061_wo2 == null ; $i++ ){
 var $ana_1061_query_RV2 = "Select SVMXC__Work_Order__c ,SVMXC__Account__c, SVMXC__Configuration_Name__c ,SVMXC__Is_Repeat_Visit__c ,SVMXC__Service_Request__c ,SVMXC__Technician__c from SVMXC__SPM_Repeat_Visit__c where SVMXC__Work_Order__c ='"+ $WO_ID_1 +"'";
 var $ana_1061_result_rv = $op_act_sForceApiCall.sForceQuery($un, $pwd, $ana_1061_query_RV2,"query");
 
-
-
 $ana_1061_result_rv.forEach(function($arrValueRV2) {
 	
+	$ana_1061_wo2 = $arrValueRV2.SVMXC__Work_Order__c;
 	$WO_Account2 = $arrValueRV2.SVMXC__Account__c;
 	$RV_sr2 = $arrValueRV2.SVMXC__Service_Request__c;
 	$Rv_Technician2 = $arrValueRV2.SVMXC__Technician__c;
 	$Is_Repeat_visit2 = $arrValueRV2.SVMXC__Is_Repeat_Visit__c;
 	
 });
+}
 _assertEqual("false", $Is_Repeat_visit2);
 _assertEqual($SR,$RV_sr2);
 _assertNotEqual($WO_Account2, $newAccount);
