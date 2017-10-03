@@ -83,16 +83,15 @@ _log($WO_2);
 $TopLevelSR.an_topLevelSR();
 $an_act_Repeat_Visit_SR.rv_runEngine("meghana.rao@servicemax.com");
 
-_wait(70000);
-_wait(70000);
-
-
+var $ana_1042_wo1 = null;
+for(var $i=0; $ana_1042_wo1 == null; $i++){
 var $query_RV = "Select SVMXC__Work_Order__c ,SVMXC__Account__c, SVMXC__Configuration_Name__c ,SVMXC__Is_Repeat_Visit__c ,SVMXC__Service_Request__c from SVMXC__SPM_Repeat_Visit__c where SVMXC__Work_Order__c ='"+ $WO_1 +"'";
 var $resultArr1 = $op_act_sForceApiCall.sForceQuery($un, $pwd, $query_RV,"query");
 
 
 $resultArr1.forEach(function($arr_rv_1) {
 	
+	$ana_1042_wo1 = $arr_rv_1.SVMXC__Work_Order__c;
 	$WO_Account_f = $arr_rv_1.SVMXC__Account__c;
 	$RV_sr_f = $arr_rv_1.SVMXC__Service_Request__c;
 	$RV_config_f = $arr_rv_1.SVMXC__Configuration_Name__c;
@@ -100,10 +99,12 @@ $resultArr1.forEach(function($arr_rv_1) {
 	
 });
 
-
+}
 _log($Is_Repeat_visit_f);
 
+var $ana_1042_wo2 = null;
 var $Is_Repeat_visit_sec;
+for(var $i=0; $ana_1042_wo2 == null; $i++){
 var $query_RV_2 = "Select SVMXC__Work_Order__c ,SVMXC__Account__c, SVMXC__Configuration_Name__c ,SVMXC__Is_Repeat_Visit__c ,SVMXC__Service_Request__c from SVMXC__SPM_Repeat_Visit__c where SVMXC__Work_Order__c ='"+ $WO_2 +"'";
 var $resultArr_3 = $op_act_sForceApiCall.sForceQuery($un, $pwd, $query_RV_2,"query");
 
@@ -111,12 +112,14 @@ var $resultArr_3 = $op_act_sForceApiCall.sForceQuery($un, $pwd, $query_RV_2,"que
 
 $resultArr_3.forEach(function($arr_rv_2) {
 	
+	$ana_1042_wo2 = $arr_rv_2.SVMXC__Work_Order__c;
 	$WO_Account_sec = $arr_rv_2.SVMXC__Account__c;
 	$RV_sr_sec = $arr_rv_2.SVMXC__Service_Request__c;
 	$RV_config_sec = $arr_rv_2.SVMXC__Configuration_Name__c;
 	$Is_Repeat_visit_sec = $arr_rv_2.SVMXC__Is_Repeat_Visit__c;
 	
 });
+}
 _log($Is_Repeat_visit_sec);
 _assertEqual("false", $Is_Repeat_visit_f);
 _assertEqual("false", $Is_Repeat_visit_sec);

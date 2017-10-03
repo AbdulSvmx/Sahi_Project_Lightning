@@ -44,5 +44,7 @@ var $an_pg_mttr = new function an_pg_mttr() {
 	this.btn_custom_wo_expr = _listItem("Custom WO Expr");
 	this.btn_custom_wd_expr = _listItem("Custom WD Expression");
 	this.btn_custom_deadtime =  _listItem("custom dead time");
+	this.list_custom_maps = _label("Select an object mapping to store additional data for this metric:");
+	this.btn_map_choose = _listItem("custom MTTR Maps");
 };
 

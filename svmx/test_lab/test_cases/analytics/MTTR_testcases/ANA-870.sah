@@ -72,26 +72,26 @@ $TopLevelWO.an_toplevelwo();
 //$an_act_MTTR.mttr_usa_calc("MTTR Calculation for USA");
 $an_act_MTTR.mttr_runEngine("meghana.rao@servicemax.com");
 
-_wait(30000);
-_wait(70000);
-_wait(70000);
+var $ana_870_wo_id;
 var $an_870_primarywo1;
 var $ana_870_WO_Account1;
 var $ana_870_labortime;
 var $ana_870_deadtime;
 
-
+for(var $i = 0;$ana_870_wo_id == null;$i++){
 var $ana_870_query_RV1 = "Select SVMXC__Work_Order__c ,SVMXC__Primary_Work_Order__c, SVMXC__Account__c, SVMXC__Configuration_Name__c , SVMXC__Labor_Time__c , SVMXC__Dead_Time__c from SVMXC__SPM_Mean_Time_To_Repair__c where SVMXC__Work_Order__c ='"+ $ana_870_WO1 +"'";
 var $ana_870_resultRV1 = $op_act_sForceApiCall.sForceQuery($un, $pwd, $ana_870_query_RV1,"query");
 _wait(1000);
 $ana_870_resultRV1.forEach(function($varRV1) {
 	
+	$ana_870_wo_id = $varRV1.SVMXC__Work_Order__c;
 	$ana_870_WO_Account1 = $varRV1.SVMXC__Account__c;
 	$ana_870_labortime = $varRV1.SVMXC__Labor_Time__c;	
 	$an_870_primarywo1 = $varRV1.SVMXC__Primary_Work_Order__c;
 	$ana_870_deadtime = $varRV1.SVMXC__Dead_Time__c;
 	
 });
+}
 $an_870_deadtime = Math.round($ana_870_deadtime);
 $ana_870_labortime = Math.round($ana_870_labortime);
 

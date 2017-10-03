@@ -75,32 +75,32 @@ var $edate = new Date($enddate);
 _log($stdate);
 _log($edate);
 var $datevalue = (($stdate.getTime() - $edate.getTime()) / 1000) / (-60) ; 
-//var $enddate = parseInt($enddate.getHours());
+
 _log($datevalue);
 $TopLevelCase.an_toplevelcase();
 $an_act_MTTR.mttr_runEngine("meghana.rao@servicemax.com");
 
-_wait(30000);
-_wait(70000);
-_wait(100000);
+var $ana_890_wo_id = null;
 var $an_890_case;
 var $ana_890_WO_Account1;
 var $ana_890_labortime;
 var $ana_890_deadtime;
 
-
+for(var $i = 0;$ana_890_wo_id == null;$i++){
 var $ana_890_query_RV1 = "Select SVMXC__Work_Order__c ,SVMXC__Case__c , SVMXC__Account__c, SVMXC__Configuration_Name__c , SVMXC__Labor_Time__c , SVMXC__Dead_Time__c from SVMXC__SPM_Mean_Time_To_Repair__c where SVMXC__Work_Order__c ='"+$ana_890_WO1+"'";
 var $ana_890_resultRV1 = $op_act_sForceApiCall.sForceQuery($un, $pwd, $ana_890_query_RV1,"query");
 _log($ana_890_resultRV1);
 _wait(1000);
 $ana_890_resultRV1.forEach(function($varRV1) {
 	
+	$ana_890_wo_id = $varRV1.SVMXC__Work_Order__c;
 	$ana_890_WO_Account1 = $varRV1.SVMXC__Account__c;
 	$ana_890_labortime = $varRV1.SVMXC__Labor_Time__c;	
 	$an_890_case = $varRV1.SVMXC__Case__c;
 	$ana_890_deadtime = $varRV1.SVMXC__Dead_Time__c;
 	
 });
+}
 _log($an_890_case);
 
 $ana_890_deadtime = Math.round($ana_890_deadtime);
@@ -110,4 +110,3 @@ _assertEqual($datevalue ,$ana_890_labortime);
 _assertEqual($DeadTime, $ana_890_deadtime);
 _assertEqual($Case, $an_890_case);
 $an_mttr_890.end();
-
