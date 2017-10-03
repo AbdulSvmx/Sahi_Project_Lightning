@@ -22,8 +22,7 @@ var $bo_act_serviceMaintenanceContracts = new function bo_act_serviceMaintenance
 			_click($bo_pg_serviceMaintenanceContracts.btn_save);
 			_assertNotVisible(_div("/Error: Invalid Data/"));
 			_wait(30000, _isVisible($sconName));
-			_set($sconUrl, window.location.href);
-			return $sconUrl;
+			return $sconName;
 		
 		//return $callBack.returnResult([_isVisible($accountName), "Account not created",$accountName] );
 		
