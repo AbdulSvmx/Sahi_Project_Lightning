@@ -30,7 +30,7 @@ this.currentDate= function ($seperator){
     return $currentDate;
 };
 
- this.getfutureDate = function($seperator){
+ this.getfutureDate = function($futureYear, $seperator){
 	var $now = new Date();
     var $monthday;// = $now.getDate();
     if ($now.getDate() < 10)
@@ -42,7 +42,7 @@ this.currentDate= function ($seperator){
         $month = "0" + $month;
 
     var $year = $now.getFullYear();
-	$year = $year+2;
+	$year = $year+$futureYear;
     
      var $currentDate = $month+ $seperator +$monthday  + $seperator+$year; 
     return $currentDate;

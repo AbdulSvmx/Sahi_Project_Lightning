@@ -8,7 +8,7 @@ var $bo_act_serviceMaintenanceContracts = new function bo_act_serviceMaintenance
 	 * 
 	 * @param $accountName
 	 */
-	this.createServiceMaintenanceContract = function($accName, $slaTermName) {
+	this.createServiceMaintenanceContract = function($accName, $slaTermName,$futureYear) {
 			var $sconName = $bo_act_common.generateRandomName("Scon");
 			//var $sconUrl =  "";
 			$bo_act_navigation.navigateToServiceMaintenanceContractPage();
@@ -18,7 +18,7 @@ var $bo_act_serviceMaintenanceContracts = new function bo_act_serviceMaintenance
 			_setValue($bo_pg_serviceMaintenanceContracts.txt_slaTermName, $slaTermName);
 			_click($bo_pg_serviceMaintenanceContracts.link_startDate);
 			_setValue($bo_pg_serviceMaintenanceContracts.txt_startDate, $bo_act_common.currentDate("/"));
-			_setValue($bo_pg_serviceMaintenanceContracts.txt_endDate, $bo_act_common.getfutureDate("/"));
+			_setValue($bo_pg_serviceMaintenanceContracts.txt_endDate, $bo_act_common.getfutureDate($futureYear, "/"));
 			_click($bo_pg_serviceMaintenanceContracts.btn_save);
 			_assertNotVisible(_div("/Error: Invalid Data/"));
 			_wait(30000, _isVisible($sconName));
