@@ -1,7 +1,4 @@
 
-
-
-
 //author - Noor Salma Sharieff
 
 var $RS_5260 = _testcase("$RS_5260","Create a PM Plan from Service Contract with coverage type as Account");

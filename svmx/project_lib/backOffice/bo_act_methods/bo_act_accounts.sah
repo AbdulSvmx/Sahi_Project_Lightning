@@ -16,13 +16,12 @@ var $bo_act_accounts = new function bo_act_accounts() {
 		_click($bo_pg_accounts.btn_save);
 		_logOutput($accountName+ " account is created");
 		_wait(30000, _isVisible($accountName));
-return $accountName;
+		_assertNotVisible(_div("/Error: Invalid Data/"));
+    return $accountName;
 		//return $callBack.returnResult([_isVisible($accountName), "Account not created",$accountName] );
 	
 		
 		// Need to return
 	};
-	
-
 
 };

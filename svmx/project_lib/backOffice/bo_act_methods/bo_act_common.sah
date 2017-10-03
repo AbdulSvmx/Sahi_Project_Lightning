@@ -87,11 +87,17 @@ this.nextMonthWithoutAppendingZero= function ($seperator){
 
 this.endDateCalculationForIB = function ($startDateExpectedOn_IB, $durationOfCoverage, $seperator){
 	var $dateInstalled = new Date($startDateExpectedOn_IB);
+	_logOutput($dateInstalled);
 	var $year = $dateInstalled.getFullYear();
+	_logOutput($year);
 	var $year = $year + $durationOfCoverage;
+	_logOutput($year);
 	var $month = $dateInstalled.getMonth();
+	_logOutput($month);
 	var $day = $dateInstalled.getDate();
+	_logOutput($day);
 	var $endDateCalculationForIB =  ($month+1)+$seperator+($day-1)+$seperator+$year;
+	_logOutput($endDateCalculationForIB);
 	return $endDateCalculationForIB;
 	};
 
@@ -100,6 +106,7 @@ this.cleanUpfunction = function($value)
 		_setValue(_textbox("phSearchInput"),$value);
 		_click(_button("Search"));
 		_click(_link($value));
+		_wait(3000, _isVisible($value));
 		_click(_button("Delete"));
 		_logOutput($value+ " is deleted");
 		
