@@ -16,7 +16,7 @@ $bo_act_serviceMaintenanceContracts.AddCoveredProductToSCON($sconName, $installe
 
 //Test Steps
 var $PMPTempName = $bo_act_PMPlanTemplate.createTimeBasedPMPlanTemplate($proName, "Account (Visit Only)","","Months");
-var $PMPlan = $bo_act_PMPlan.createATimeBasedPMPlanFromScon($sconUrl, $PMPTempName,"Account (Visit Only)");
+var $PMPlan = $bo_act_PMPlan.createATimeBasedPMPlanFromScon($sconName, $PMPTempName,"Account (Visit Only)",1);
 
 //Validations
 _assertExists(_tableHeader("No records to display"),_under(_heading3("Preventive Maintenance Coverages")));
