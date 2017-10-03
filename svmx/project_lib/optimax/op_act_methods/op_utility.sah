@@ -142,12 +142,12 @@ var $op_utility = new function op_utility() {
 	}
 	
 	
-	this.read_file = function($dp_Id, $sfdc_sessionId) {
-		var $attachment_Id = null;
-		_set($attachment_Id, _fetch(read_file($dp_Id,$sfdc_sessionId)));
-		return $attachment_Id;
+	this.read_file = function($dp_Id, $sfdc_sessionId,$text_validation) {
+		var $no_text_count = null;
+		_set($no_text_count, _fetch(read_file($dp_Id,$sfdc_sessionId,$text_validation)));
+		return $no_text_count;
 		// <browser>
-		function read_file($dp_Id,$sfdc_sessionId) {
+		function read_file($dp_Id,$sfdc_sessionId,$text_validation) {
 			sforce.connection.sessionId = $sfdc_sessionId;
 			var svmx_Job_result = _call(sforce.connection.query("Select Id, SVMXC__SVMX_Process__c, SVMXC__OptiMax_Message__c  From SVMXC__SVMX_Jobs__c Where SVMXC__SVMX_Process__c = '"+ $dp_Id + "' ORDER BY Name DESC LIMIT 1"));
 			var records = svmx_Job_result.getArray("records");
@@ -155,21 +155,13 @@ var $op_utility = new function op_utility() {
 			if(records[0].Id != null){
 				var attachment = _call(sforce.connection.query("SELECT ParentId, Body, Id FROM Attachment WHERE ParentId = '"+records[0].Id+"' AND Name = 'Invalid WorkOrders'"));
 				var attach_Id = attachment.getArray("records");
-				_log("attachment body = "+attach_Id[0].Body);
 				var myFile=atob(attach_Id[0].Body);
 				_log("myFile = "+myFile);
-				$attachment_Id = attach_Id[0].id;
-				var count = 0;
-				_log("myFile.length = "+myFile.length);
-				for(var i = 0; i < myFile.length; i++){
-					_log("myFile[i] = "+myFile[i]);
-					if (myFile[i] === 'Invalid Service Duration') {
-			            count++;
-			        }
-				}
-				_log("count++ = "+count++);
+				$no_text_count = myFile.split($text_validation).length;
+				$no_text_count = $no_text_count - 1;
+				_log("pos = "+$no_text_count);
 			}
-			return $attachment_Id;
+			return $no_text_count;
 		}
 		// </browser>
 	}

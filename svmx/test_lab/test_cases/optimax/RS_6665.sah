@@ -29,18 +29,9 @@ $bo_act_login.login($g_url, $g_un, $g_pwd);
 _set($login_result, _fetch(login($g_un,$g_pwd)));
 _log($login_result);
 
-if($op_utility.read_file($dp_Id,$login_result.sessionId) != null){
-	_log("$op_utility.read_file($dp_Id,$login_result.sessionId) = "+$op_utility.read_file($dp_Id,$login_result.sessionId));
-	var attachment_id = $op_utility.read_file($dp_Id,$login_result.sessionId);
-	_log("serverUrl "+$login_result.serverUrl);
-	var $org_prf = $login_result.serverUrl;
-	$org_prf= $org_prf.slice(8, 12);
-	var $url = "https://"+$org_prf+".salesforce.com/"+attachment_id;
-	_log("$url "+$url);
-	_navigateTo($url);
-};
+//deleting exisiting Work Order
 
-/*$op_utility.delete_WO($dp_Id,$login_result.sessionId);
+$op_utility.delete_WO($dp_Id,$login_result.sessionId);
 
 _set($create_SD_Vio_WO, _fetch(create_Update_Wo($work_Orders_Xl)));
 _log($create_SD_Vio_WO);
@@ -62,14 +53,18 @@ else{
 		_log("job is successfully completed in 2nd verification");
 		_set($validate_SD_Vio_WO, _fetch(validate_SD_Violation($dp_Id)));
 		_log($validate_SD_Vio_WO);
+		
+		//reading the invalid data attachement to verify that Invalid service duration is added properly
+		$op_utility.read_file($dp_Id,$login_result.sessionId,"Invalid Service Duration");
+		_log(" test attach,emt = "+$op_utility.read_file($dp_Id,$login_result.sessionId,"Invalid Service Duration"));
+		if($op_utility.read_file($dp_Id,$login_result.sessionId,"Invalid Service Duration") === 15){
+			_log("15 Invalid Service Duration is added in the attachment");
+		};
 	}
 	else{
 		_log("job is failed in 2nd verification");
 	}
-}*/
-
-//deleting exisiting Work Order
-
+}
 
 
 //<browser>
@@ -102,20 +97,23 @@ function create_Update_Wo ($work_Orders_Xl){
 		wo_list.SVMXC__SERVICE_DURATION__C = $work_Orders_Xl[$i][10];
 		CreateRecords.push(wo_list);
 	}
-	result = sforce.connection.create(CreateRecords);
+	result = _call(sforce.connection.create(CreateRecords));
 	//updating wo (service duration = null) which is created above
 	if(result.length != 0){
 		for(var $s=0;$s<result.length - 3;$s++){
 			var WO_List = _call(sforce.connection.query("Select Id, SVMXC__Service_Duration__c From SVMXC__Service_Order__c Where Id = '"+result[$s].id+"'"));
+			
 			var WO_arr = WO_List.getArray("records");
 			for(var $x=0;$x<WO_arr.length;$x++){
 				var WO = WO_arr[$x];
 				WO.SVMXC__Service_Duration__c = null;
 				updateRecords.push(WO);
+				_log("result.updateRecords update = "+updateRecords);
 			}
 		}
 	}
 	var update_result = _call(sforce.connection.update(updateRecords));
+	_log("result.update_result update = "+update_result);
 }
 
 function validate_SD_Violation($dp_Id){
