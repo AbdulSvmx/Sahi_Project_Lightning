@@ -7,8 +7,8 @@
 var $bo_pg_serviceMaintenanceContracts = new function bo_pg_serviceMaintenanceContracts(){
 	this.btn_new = _button(" New ");
 	this.txt_sconName = _textbox("Name");
-	this.txt_accountName = _textbox("*Account");
-	this.txt_slaTermName = _textbox("SLA Terms");
+	this.txt_accountName = _textbox("/\\*Account|^Account/");
+	this.txt_slaTermName = _textbox("/SLA Terms/");
 	this.link_startDate = _link("/javascript.*/",_rightOf(_label("/.*Start Date/")));
 	this.txt_startDate = _textbox("/Start Date/");
 	this.txt_endDate = _textbox("/End Date/");

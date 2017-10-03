@@ -1,5 +1,5 @@
-//Tests are to be written here  [Bhupendra Singh Chouhan]
-//============== 
+//Tests are to be written here
+//==============
 
 //Pre - Condition Test Data
 var $recordType = ["Depot","Depot Child","Depot Parent","Standard Location"];
@@ -14,26 +14,43 @@ var $expensesPercentCovered = 30;
 var $durationOfCoverage = 5;
 var $seperator = "/";
 
-var $RS_7288 = _testcase("$RS_7288","Creation of a Warranty Term and association of a Warranty to an Installed Product");
-$RS_7288.start();
+var $RS_7290 = _testcase("$RS_7290","Creation of a Warranty Term and association of a Warranty to an Installed Product");
+$RS_7290.start();
 _setSpeed(100);
-$bo_act_login.login($g_url, $g_un, $g_pwd);
+/* $bo_act_login.login($g_url, $g_un, $g_pwd);
+
 var $accountName = $bo_act_accounts.createAccount();
-//var $accountName = "Acc1482017164021";
+
 
 var $contactName = $bo_act_contacts.createContact($accountName);
-//var $contactName = "Con148201716415";
 
 var $locationName = $bo_act_locations.createLocation($recordType[3],$accountName,"#007","India","560001");
 
 var $productName = $bo_act_products.createProduct($productCode, $productFamily[3]);
-//var $productName = "pro1482017165455";
 
 var $IBName = $bo_act_installedProduct.createInstalledProduct($productName, $accountName, $contactName);
-//var $IBName = "IB_148201717146";
 
-//var $warrantyName = "warn1582017174738";
-var $warrantyName = $bo_act_warrantyTerms.createWarrantyTerms($exchangeType[2],"10","5",$unitOfTimeForCoverage[4],"20","5",$unitOfTimeForCoverage[4],"30","5",$unitOfTimeForCoverage[4],$coverageEffectiveFrom[1]);
+//Create  SLA Term SLA01
+$bo_act_navigation.navigateToSlaTerms();
+var $slaName = $bo_act_slaTerms.createSlaTerms("Default");
+$bo_act_slaTerms.addInitialResponseToSLA($slaName,"WorkOrder","Field Service","Medium","Created Date","5","10","SLA");
+$bo_act_slaTerms.addOnsiteResponseToSLA($slaName,"WorkOrder","Field Service","Medium","Created Date","10","15","SLA");
+
+
+//validation of SLA creation
+_assertExists(_span($slaName01)); */
+
+var $accountName = "Acc1482017164021";
+
+var $slaName = "Acc1482017164021";
+
+// Creation of Service Contracts
+var $serviceConracts = $bo_act_serviceMaintenanceContracts.createServiceMaintenanceContract($accountName, $slaName);
+
+
+
+	
+/*var $warrantyName = $bo_act_warrantyTerms.createWarrantyTerms($exchangeType[2],"10","5",$unitOfTimeForCoverage[4],"20","5",$unitOfTimeForCoverage[4],"30","5",$unitOfTimeForCoverage[4],$coverageEffectiveFrom[1]);
 
 $bo_act_warrantyTerms.createApplicableProducts($productName, $warrantyName); //Create Applicable product for warranty Terms
 
@@ -63,15 +80,15 @@ var $endDateActulOn_IB = _getText(_cell(0,_under(_tableHeader("End Date"))));
 
 //Validating the Actual and expected Start/End Dates on IB
 _assertEqual($startDateExpectedOn_IB,$startDateActulOn_IB,"Actual and expected Start Dates are not same");
-_assertEqual($endDateExpectedOn_IB,$endDateActulOn_IB,"Actual and expected End Dates are not same");
+_assertEqual($endDateExpectedOn_IB,$endDateActulOn_IB,"Actual and expected End Dates are not same");*/
 
 //Clean up function
 
-var $datacreated = [$warrantyName,$IBName,$locationName,$productName,$contactName,$accountName,];
+/*var $datacreated = [$warrantyName,$IBName,$locationName,$productName,$contactName,$accountName,];
 for (var i = 0; i < $datacreated.length; i++) {
 	$bo_act_common.cleanUpfunction($datacreated[i]);
 }
-$bo_act_login.logOut();
+$bo_act_login.logOut();*/
 
-$RS_7288.end();
+$RS_7290.end();
 
