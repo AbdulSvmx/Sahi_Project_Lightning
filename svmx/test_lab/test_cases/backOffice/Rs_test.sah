@@ -6,11 +6,12 @@
 var $RS_test = _testcase("$RS_test","Creation of a Warranty Term and association of a Warranty to an Installed Product");
 $RS_test.start();
 _setSpeed(100);
-//$bo_act_login.login($g_url, $g_un, $g_pwd);
+$bo_act_login.login($g_url, $g_un, $g_pwd);
 //var $accountName = $bo_act_accounts.createAccount();
-var $accountName = "Acc1482017164021";
+var $IBName = "IB_392017133526";
 
-var $contactName = $bo_act_contacts.createContact($accountName);
+//var $contactName = $bo_act_contacts.createContact($accountName);
+$bo_act_navigation.navigateToCreatedRecordUsingGlobalSearch($IBName); 
 
 
 $RS_test.end();

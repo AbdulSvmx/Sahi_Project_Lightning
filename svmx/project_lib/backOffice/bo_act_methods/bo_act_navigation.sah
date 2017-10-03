@@ -121,8 +121,8 @@ var $bo_act_navigation = new function bo_act_navigation() {
     	_setValue(_textbox("phSearchInput"),$recordToBeSearch);
     	_click(_button("phSearchButton"));
     	_wait(3000, _isVisible($recordToBeSearch));
-    	_click(_link("Search All"));
-    	_wait(3000, _isVisible($recordToBeSearch));
+    //	_click(_link("Search All"));
+    //	_wait(3000, _isVisible($recordToBeSearch));
     	_click(_link($recordToBeSearch));
         };
         

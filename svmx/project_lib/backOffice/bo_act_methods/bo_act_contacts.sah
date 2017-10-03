@@ -16,9 +16,9 @@ var $bo_act_contacts = new function bo_contacts() {
 		_setValue($bo_pg_contacts.txt_contactName, $contactName);
 		_setValue($bo_pg_contacts.txt_accountName, $accountName);
 		_click($bo_pg_contacts.btn_save);
-		_logOutput($contactName+ " contact is created");
-		_wait(30000, _isVisible($contactName));
 		_assertNotVisible(_div("/Error: Invalid Data/"));
+		_wait(30000, _isVisible($contactName));
+		_logOutput($contactName+ " contact is created");
      return $contactName;
 		//return $callBack.returnResult([_isVisible($contactName), "Contact not created",$contactName] );
 	

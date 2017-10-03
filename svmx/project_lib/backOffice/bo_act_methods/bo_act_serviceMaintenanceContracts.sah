@@ -20,6 +20,8 @@ var $bo_act_serviceMaintenanceContracts = new function bo_act_serviceMaintenance
 			_setValue($bo_pg_serviceMaintenanceContracts.txt_startDate, $bo_act_common.currentDate("/"));
 			_setValue($bo_pg_serviceMaintenanceContracts.txt_endDate, $bo_act_common.getfutureDate("/"));
 			_click($bo_pg_serviceMaintenanceContracts.btn_save);
+			_assertNotVisible(_div("/Error: Invalid Data/"));
+			_wait(30000, _isVisible($sconName));
 			_set($sconUrl, window.location.href);
 			return $sconUrl;
 		
@@ -27,7 +29,8 @@ var $bo_act_serviceMaintenanceContracts = new function bo_act_serviceMaintenance
 		
 		// Need to return
 	};
-	 this.AddCoveredProductToSCON =  function($sconUrl,$installedProduct){
+	 
+	this.AddCoveredProductToSCON =  function($sconUrl,$installedProduct){
 		_navigateTo($sconUrl);
 		_click($bo_pg_serviceMaintenanceContracts.btn_newCoveredProduct);
 	_setValue($bo_pg_serviceMaintenanceContracts.txt_installedProduct,$installedProduct);
@@ -35,7 +38,7 @@ var $bo_act_serviceMaintenanceContracts = new function bo_act_serviceMaintenance
 		_click($bo_pg_serviceMaintenanceContracts.txt_backToScon);
 	};
 
-this.addCoveredLocationToSCON = function($sconUrl,$location){
+	this.addCoveredLocationToSCON = function($sconUrl,$location){
 	_navigateTo($sconUrl);
 	_click($bo_pg_serviceMaintenanceContracts.btn_newCoveredLocation);
 	_setValue($bo_pg_serviceMaintenanceContracts.txt_location,$location);
@@ -44,7 +47,7 @@ this.addCoveredLocationToSCON = function($sconUrl,$location){
 	
 };
 
-this.deleteServiceMaintenanceContract = function($sconUrl)
+	this.deleteServiceMaintenanceContract = function($sconUrl)
 {
 	_navigate($sconUrl);
 	click(_button("Delete"));
