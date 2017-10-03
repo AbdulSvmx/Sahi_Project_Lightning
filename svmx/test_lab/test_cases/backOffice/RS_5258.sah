@@ -13,12 +13,12 @@ var $proName = $bo_act_products.createProduct("pro12", "--None--");
 var $installedProduct = $bo_act_installedProduct.createInstalledProduct($proName,$accName,"");
 var $location = $bo_act_locations.createLocation("", $accName, "MG Road", "India", "560001");
 var $slaterm = $bo_act_slaTerms.createSlaTerms("Default");
-var $sconUrl = $bo_act_serviceMaintenanceContracts.createServiceMaintenanceContract($accName, $slaterm);
-$bo_act_serviceMaintenanceContracts.AddCoveredProductToSCON($sconUrl, $installedProduct);
-$bo_act_serviceMaintenanceContracts.addCoveredLocationToSCON($sconUrl, $location);
+var $sconName = $bo_act_serviceMaintenanceContracts.createServiceMaintenanceContract($accName, $slaterm);
+$bo_act_serviceMaintenanceContracts.AddCoveredProductToSCON($sconName, $installedProduct);
+$bo_act_serviceMaintenanceContracts.addCoveredLocationToSCON($sconName, $location);
 
 //Test Steps
-var $PMPTempName = $bo_act_PMPlanTemplate.createTimeBasedPMPlanTemplate($proName, "Location (Must Have Location)","");
+var $PMPTempName = $bo_act_PMPlanTemplate.createTimeBasedPMPlanTemplate($proName, "Location (Must Have Location)","","Months");
 $bo_act_PMPlan.createATimeBasedPMPlanFromScon($sconUrl, $PMPTempName,"Location (Must Have Location)");
 var $startDate = _getText(_div(0,_rightOf(_cell("Start Date"))));
 
