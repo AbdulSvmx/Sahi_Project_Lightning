@@ -25,8 +25,6 @@ var $bo_act_serviceMaintenanceContracts = new function bo_act_serviceMaintenance
 			return $sconName;
 		
 		//return $callBack.returnResult([_isVisible($accountName), "Account not created",$accountName] );
-		
-		// Need to return
 	};
 	 
 	this.AddCoveredProductToSCON =  function($sconUrl,$installedProduct){
@@ -51,4 +49,27 @@ var $bo_act_serviceMaintenanceContracts = new function bo_act_serviceMaintenance
 	_navigate($sconUrl);
 	click(_button("Delete"));
 	};
+	
+	//Actions for Activate Contract on Service/Maintenance Contract
+	
+	this.activateServiceContract = function($sconName){
+	if(_isVisible(_image("Not Checked",_rightOf(_cell("/Active/"))))){	
+	_selectDomain("/svmx/");
+	_click($bo_pg_serviceMaintenanceContracts.btn_activateContractSFM);
+	_wait(20000, _isVisible(_span("Activate Contract")));
+	_selectDomain();
+	_click($bo_pg_serviceMaintenanceContracts.btn_activateContract);
+	_wait(30000, _isVisible($sconName));
+	};
+	
+	if(_isVisible(_image("Checked",_rightOf(_cell("/Active/"))))){
+	_logOutput("Service Contract = " + $sconName+ " is Activated");	
+	}
+	else{
+		_logOutput("Service Contract = " + $sconName+ " is Not Activated");	
+	};
+	
+	};
+	
 };
+

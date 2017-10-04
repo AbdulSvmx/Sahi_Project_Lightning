@@ -1,4 +1,4 @@
-//Tests are to be written here
+//Tests are to be written here [Bhupendra Singh Chouhan]
 //==============
 
 //Pre - Condition Test Data
@@ -40,13 +40,18 @@ $bo_act_slaTerms.addOnsiteResponseToSLA($slaName,"WorkOrder","Field Service","Me
 //validation of SLA creation
 _assertExists(_span($slaName01)); */
 
-var $accountName = "Acc1482017164021";
+var $accountName = "ABC Corp";
 
-var $slaName = "Acc1482017164021";
+var $slaName = "Platinum SLA BAC";
+var $futureYear = 2;
+
 
 // Creation of Service Contracts
-var $serviceConracts = $bo_act_serviceMaintenanceContracts.createServiceMaintenanceContract($accountName, $slaName);
+//var $serviceConracts = $bo_act_serviceMaintenanceContracts.createServiceMaintenanceContract($accountName, $slaName, $futureYear);
 
+var $serviceConracts = "Scon492017125221";
+//Activating Created Service Contract
+$bo_act_serviceMaintenanceContracts.activateServiceContract($serviceConracts);
 
 
 	

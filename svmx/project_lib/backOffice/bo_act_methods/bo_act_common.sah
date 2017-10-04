@@ -48,6 +48,25 @@ this.currentDate= function ($seperator){
     return $currentDate;
 };
 
+
+this.getPastDate = function($pastYear, $seperator){
+	var $now = new Date();
+    var $monthday;// = $now.getDate();
+    if ($now.getDate() < 10)
+        $monthday = "0" + $now.getDate();
+    else
+        $monthday = $now.getDate();
+    var $month = $now.getMonth() + 1;
+    if ($month < 10)
+        $month = "0" + $month;
+
+    var $year = $now.getFullYear();
+	$year = $year-$pastYear;
+    
+     var $currentDate = $month+ $seperator +$monthday  + $seperator+$year; 
+    return $currentDate;
+};
+
 this.searchfunction = function($searchValue){
 _getRecentWindow();
 _click(_span("/svmx_lookup_icon/"));
