@@ -1,4 +1,5 @@
 var $user_credentials = $excel.readFromCustomExcel("../optimax/op_excleData/automation.xlsx", "User_Details","","");
+var $TerrData = $excel.readFromCustomExcel("../optimax/op_excleData/automation.xlsx", "Territory","","");
 
 //var $nArr;
 //Calling the sforce API
@@ -13,7 +14,9 @@ var $RS_6326 = _testcase("RS_6326", "Delete a Territory Match Rule");
 
 $RS_6326.start();
 
-var $TerrName = "Territory Match Rule";
+var $TerrName = $TerrData[0][0];
+
+_log("Territory Rule Name : " + $TerrName);
 
 $bo_act_login.login($g_url, $g_un, $g_pwd);
 
@@ -31,17 +34,31 @@ _assertEqual("Do you want to proceed?", _lastConfirm());
 _click(_div("Rule Name"));
 _windowAction("refresh");
 
-var $temp = _getText(_cell("TRTRYRule:RuleForm:RuleBlock:TrtryRuleList:" + $rowCount + ":j_id89"));
+var $rowCount1 = 0;
+_set($rowCount1, _table("TRTRYRule:RuleForm:RuleBlock:TrtryRuleList").rows.length);
+_log("RowCount : " + $rowCount);
+_log("RowCount 1 : " + $rowCount1);
 
-if (_areEqual($TerrName, $temp)) 
+$rowCount1 = $rowCount1 - 1;
+
+if ($rowCount < $rowCount1)
 	{
-	_fail("Error in deleting Territory Match Rule");
+	var $temp = _getText(_cell("TRTRYRule:RuleForm:RuleBlock:TrtryRuleList:" + $rowCount + ":j_id89"));
+
+		if (_areEqual($TerrName, $temp)) 
+		{
+			_fail("Error in deleting Territory Match Rule");
+		}	
+		else
+		{
+			_log("Territory Match Rule Deleted Successfully");
+		}
+
 	}
 else
 	{
-	_log("Territory Match Rule Deleted Successfully");
+	_log("MTTS Rule Deleted Successfully");
 	}
-
 
 $bo_act_login.logOut();
 

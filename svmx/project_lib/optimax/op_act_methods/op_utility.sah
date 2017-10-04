@@ -101,6 +101,7 @@ var $op_utility = new function op_utility() {
 			if (_areEqual($MTTSName, $temp)) 
 			{
 				$rowCount = $i;
+				_log("Row Count :" + $rowCount);
 			}
 		}
 		_check(_checkbox("MTTSRule:RuleForm:RuleBlock:MTTSRuleList:" + $rowCount
