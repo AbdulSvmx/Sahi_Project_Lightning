@@ -25,6 +25,8 @@ _click(_div("MTTS Rules"));
 
 var $rowCount = $op_utility.search_MTTS_Rule($MTTSName);
 
+
+
 _click(_button("Delete Rule"));
 _expectConfirm("Do you want to proceed?", true);
 _assertEqual("Do you want to proceed?", _lastConfirm());
