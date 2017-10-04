@@ -18,6 +18,11 @@ var $bo_pg_serviceMaintenanceContracts = new function bo_pg_serviceMaintenanceCo
 	this.txt_backToScon = _link("/lookup.*/",_rightOf(_cell("Service/Maintenance Contract")));
 	this.btn_newCoveredLocation = _button("New Covered Location");
 	this.txt_location = _textbox("/Location/");
+	
+	//Object for Activate Contract on Service/Maintenance Contract
+	this.btn_activateContractSFM = _button("Activate Contract");
+	this.btn_activateContract = _span("Activate Contract");
+	
 };
 
 
