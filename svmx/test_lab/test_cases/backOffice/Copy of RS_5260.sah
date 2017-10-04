@@ -7,16 +7,16 @@ _setSpeed(100);
 
 //Pre - Condition 
 $bo_act_login.login($g_url, $bac_unDev, $bac_pwdDev);
-var $accName = $bo_act_accounts.createAccount();
-var $proName = $bo_act_products.createProduct("pro12", "--None--");
-var $installedProduct = $bo_act_installedProduct.createInstalledProduct($proName,$accName,"");
-var $slaterm = $bo_act_slaTerms.createSlaTerms("Default");
-var $sconName = $bo_act_serviceMaintenanceContracts.createServiceMaintenanceContract($accName, $slaterm,1);
-$bo_act_serviceMaintenanceContracts.AddCoveredProductToSCON($sconName, $installedProduct);
+//var $accName = $bo_act_accounts.createAccount();
+//var $proName = $bo_act_products.createProduct("pro12", "--None--");
+//var $installedProduct = $bo_act_installedProduct.createInstalledProduct($proName,$accName,"");
+//var $slaterm = $bo_act_slaTerms.createSlaTerms("Default");
+//var $sconName = $bo_act_serviceMaintenanceContracts.createServiceMaintenanceContract($accName, $slaterm,1);
+//$bo_act_serviceMaintenanceContracts.AddCoveredProductToSCON($sconName, $installedProduct);
 
 //Test Steps
-var $PMPTempName = $bo_act_PMPlanTemplate.createTimeBasedPMPlanTemplate($proName, "Account (Visit Only)","","Months");
-var $PMPlan = $bo_act_PMPlan.createATimeBasedPMPlanFromScon($sconName, $PMPTempName,"Account (Visit Only)",1);
+//var $PMPTempName = $bo_act_PMPlanTemplate.createTimeBasedPMPlanTemplate("pro4920171161", "Account (Visit Only)","","Months");
+var $PMPlan = $bo_act_PMPlan.createATimeBasedPMPlanFromScon("Scon392017173141", "PMT2082017171437","Account (Visit Only)",1);
 
 //Validations
 _assertExists(_tableHeader("No records to display"),_under(_heading3("Preventive Maintenance Coverages")));

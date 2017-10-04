@@ -32,13 +32,13 @@ var $bo_act_serviceMaintenanceContracts = new function bo_act_serviceMaintenance
 	this.AddCoveredProductToSCON =  function($sconName,$installedProduct){
 		_click(_link($sconName));
 		_click($bo_pg_serviceMaintenanceContracts.btn_newCoveredProduct);
-	_setValue($bo_pg_serviceMaintenanceContracts.txt_installedProduct,$installedProduct);
+	    _setValue($bo_pg_serviceMaintenanceContracts.txt_installedProduct,$installedProduct);
 		_click($bo_pg_serviceMaintenanceContracts.btn_save);
 		_click($bo_pg_serviceMaintenanceContracts.txt_backToScon);
 	};
 
 	this.addCoveredLocationToSCON = function($sconName,$location){
-	_click(_link($sconName));
+	 _click(_link($sconName));
 	_click($bo_pg_serviceMaintenanceContracts.btn_newCoveredLocation);
 	_setValue($bo_pg_serviceMaintenanceContracts.txt_location,$location);
 	_click($bo_pg_serviceMaintenanceContracts.btn_save);
@@ -48,7 +48,7 @@ var $bo_act_serviceMaintenanceContracts = new function bo_act_serviceMaintenance
 
 	this.deleteServiceMaintenanceContract = function($sconName)
 {
-	_click(_link($sconName));
+	 _click(_link($sconName));
 	click(_button("Delete"));
 	};
 };

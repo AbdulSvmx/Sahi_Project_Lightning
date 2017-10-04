@@ -26,6 +26,7 @@ var $bo_act_PMPlan = new function bo_act_PMPlan() {
 		_setValue($bo_pg_PMPlan.txt_startDate, $bo_act_common.currentDate("/"));
 		_setValue($bo_pg_PMPlan.txt_endDate, $bo_act_common.getfutureDate(1, "/"));
 		_click($bo_pg_PMPlan.btn_save);
+		_wait(60000, _isVisible($PMPlanName));
 		return $PMPlanName;	
 	};
 
