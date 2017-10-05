@@ -1,0 +1,51 @@
+//@author Lakshmisha
+
+$url = "https://test.salesforce.com";
+$un = "vansys@pqtpart1.com";
+$pwd = "servicemax2";
+_setSpeed(100);
+$bo_act_login.login($url, $un, $pwd);
+$bo_act_navigation.navigateToSfmTransactionDesigner();
+_setSpeed(100);
+$sfmNameToBeCloned = "Manage Work Order Lines - Usage";
+$sfmName = "Reg_5353_001";
+$isCustom = false;
+var $sfmTemplate = "SVMXSTD: Manage WO Usage Lines";
+var $sfmTemplateSaveAsName = $sfmName;
+var $fieldName = "Problem Description";
+var $containerName = "Order Status";
+var $rulename ="5353Rule1"
+
+
+$bo_act_SFM.cloneSFM($sfmNameToBeCloned, $sfmName, $isCustom, $sfmTemplate, $sfmTemplateSaveAsName, $fieldName, $containerName);
+_click($bo_pg_sfmTransactionAndDesigner.btn_yourCustomSfmTransactions);
+_setValue($bo_pg_sfmTransactionAndDesigner.txt_yourCustomSfmTransactionsQuickFind, $sfmName);
+_click(_f("main").s_label($sfmName));
+//_click(_f("main").tab("Screen Designer"));
+
+_click($bo_pg_sfmTransactionAndDesigner.btn_screenDesigner);
+
+_click(_f("main").tab("Data Validation Rules"));
+_click(_f("main").s_button("New[5]"));
+_setSelected(_f("main").s_combobox("objCombo"), "Work Order");
+
+_setValue(_f("main").s_textinput("ruleName"), $rulename);
+_setValue(_f("main").s_textinput("ruleID"), $rulename);
+
+_setValue(_f("main").s_textarea("description"), "Actual Initial Response Not Equal Function Today, City Starts with Value M"); 
+_setSelected(_f("main").s_combobox("fieldCombo[1]"), "City");
+_setSelected(_f("main").s_dropdownlist("conditionsCombo[1]"), "Starts With");
+_setValue(_f("main").s_textinput("operandValue"), "M");
+_click(_f("main").s_button("Add a row[1]"));
+
+_setSelected(_f("main").s_combobox("fieldCombo[2]"), "Actual Initial Response");
+_setSelected(_f("main").s_dropdownlist("conditionsCombo[2]"), "Not Equal");
+_setSelected(_f("main").s_dropdownlist("operandTypeCombo[1]"), "Function");
+_setSelected(_f("main").s_combobox("picklist"), "Today");
+_setValue(_f("main").s_textinput("advExpIP"), "1 AND 2");
+_setSelected(_f("main").s_dropdownlist("msgType"), "Error");
+_setValue(_f("main").s_textarea("message"), "Actual Initial Response Not Equal Function Today, City Starts with Value M");
+_click(_f("main").s_button("Save"));
+_click(_f("main").s_button("Add To Process"))
+_click(_f("main").s_button("Quick Save"));
+_click(_f("main").s_button("Save & Close"));
