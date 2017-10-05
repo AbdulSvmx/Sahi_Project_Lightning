@@ -88,6 +88,7 @@ var $bo_act_serviceMaintenanceContracts = new function bo_act_serviceMaintenance
 		_wait(30000, _isVisible($sconName));
 		return $sconName;
 };
+
 this.AddCoveredProducToServiceContract =  function($sconName,$installedProduct,$slaName,$pastYear, $futureYear ){
 	_click($bo_pg_serviceMaintenanceContracts.btn_newCoveredProduct);
 	_wait(10000, _isVisible(_heading2("New Covered Product")));
