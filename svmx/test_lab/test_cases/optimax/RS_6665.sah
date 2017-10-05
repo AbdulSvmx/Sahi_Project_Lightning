@@ -18,6 +18,10 @@ var $dp_Id = $dispatch_Process_Xl[$i][1];
 var $dp_Territory_Id = $dispatch_Process_Xl[$i][2];
 }
 
+var $RS_6665 = _testcase("RS_6665", "Service Duration is null (SD Violation)");
+
+$RS_6665.start();
+
 var $sfdc_sessionId = null;
 
 $bo_act_login.login($g_url, $g_un, $g_pwd);
@@ -25,17 +29,12 @@ $bo_act_login.login($g_url, $g_un, $g_pwd);
 _set($login_result, _fetch(login($g_un,$g_pwd)));
 _log($login_result);
 
-<<<<<<< HEAD
 //deleting exisiting Work Order
 
 $op_utility.delete_WO($dp_Id,$login_result.sessionId);
 _wait(5000);
 
-=======
-_set($create_SD_Vio_WO, _fetch(create_Update_Wo($work_Orders_Xl)));
-_log($create_SD_Vio_WO);
->>>>>>> f1e111a5cd8dce38026004b127c91124a2fd20ac
-
+//creating 18 wo & updating SD null for 15 WO
 _set($crt_upt_WO, _fetch(crt_upt_WO($work_Orders_Xl,$dp_Id)));
 _log("test create  = "+$crt_upt_WO);
 
@@ -45,11 +44,7 @@ _wait(5000);
 
 
 //validating the job is success
-<<<<<<< HEAD
 if($op_utility.validate_Job_Success($dp_Id,$login_result.sessionId,200000)=== true){
-=======
-if($op_utility.validate_Job_Success($dp_Id,$login_result.sessionId,360000)=== true){
->>>>>>> f1e111a5cd8dce38026004b127c91124a2fd20ac
 	_log("job is successfully completed");
 	_set($validate_SD_Vio_WO, _fetch(validate_SD_Violation($dp_Id)));
 	_log($validate_SD_Vio_WO);
@@ -67,19 +62,14 @@ if($op_utility.validate_Job_Success($dp_Id,$login_result.sessionId,360000)=== tr
 	}
 }
 else{
-<<<<<<< HEAD
 	_log("job is failed in 1st verification.. so starting the 2nd verification after 5 min");
 	if($op_utility.validate_Job_Success($dp_Id,$login_result.sessionId,200000)=== true){
-=======
-	_log("job is failed in 1st verification.. so starting the 2nd verification after 1.5 min");
-	if($op_utility.validate_Job_Success($dp_Id,$login_result.sessionId,360000)=== true){
->>>>>>> f1e111a5cd8dce38026004b127c91124a2fd20ac
 		_log("job is successfully completed in 2nd verification");
-		__set($validate_SD_Vio_WO, _fetch(validate_SD_Violation($dp_Id)));
+		_set($validate_SD_Vio_WO, _fetch(validate_SD_Violation($dp_Id)));
 		_log($validate_SD_Vio_WO);
-<<<<<<< HEAD
 		if($validate_SD_Vio_WO === true){
 			_log("for 15 wo, Invalid Service Duration is added ");
+			_log("$op_utility.read_file($dp_Id,$login_result.sessionId = "+$op_utility.read_file($dp_Id,$login_result.sessionId,"Invalid Service Duration"));
 			if($op_utility.read_file($dp_Id,$login_result.sessionId,"Invalid Service Duration") === 15){
 				_log("15 Invalid Service Duration is added in the attachment");
 			}
@@ -90,8 +80,6 @@ else{
 		else{
 			_logExceptionAsFailure("Invalid Service Duration count in work order is not updated");
 		}
-=======
->>>>>>> f1e111a5cd8dce38026004b127c91124a2fd20ac
 	}
 	else{
 		_log("job is failed in 2nd verification");
@@ -115,6 +103,7 @@ function crt_upt_WO($work_Orders_Xl,$dp_Id){
 	var updateRecords=[];
 	var $isSuccess = false;
 	//creating wo from the excel sheet
+	return $isSuccess;
 	for(var $i=0;$i<$work_Orders_Xl.length;$i++)
 	{
 		var wo_list = new sforce.SObject("SVMXC__Service_Order__c");
@@ -131,7 +120,6 @@ function crt_upt_WO($work_Orders_Xl,$dp_Id){
 		wo_list.SVMXC__Service_Duration__c = $work_Orders_Xl[$i][10];
 		CreateRecords.push(wo_list);
 	}
-<<<<<<< HEAD
 	var wo_crt_result = _call(sforce.connection.create(CreateRecords));
 	_log("wo_crt_result = "+wo_crt_result.length);
 	try{
@@ -152,33 +140,17 @@ function crt_upt_WO($work_Orders_Xl,$dp_Id){
 	var update_result = _call(sforce.connection.update(updateRecords));
 	_log("update result = "+update_result.length);
 	if(update_result.length > 0){
-		result = true;
+		$isSuccess = true;
 	}
 	else{
-		result = false;
+		$isSuccess = false;
 	}
 	}catch($e){
 		_log("Error in Catch $$e = "+$e);
 
 	}
 	_log("update $isSuccess = "+$isSuccess);
-	return ;
-=======
-	result = sforce.connection.create(CreateRecords);
-	//updating wo (service duration = null) which is created above
-	if(result.length != 0){
-		for(var $s=0;$s<result.length - 3;$s++){
-			var WO_List = _call(sforce.connection.query("Select Id, SVMXC__Service_Duration__c From SVMXC__Service_Order__c Where Id = '"+result[$s].id+"'"));
-			var WO_arr = WO_List.getArray("records");
-			for(var $x=0;$x<WO_arr.length;$x++){
-				var WO = WO_arr[$x];
-				WO.SVMXC__Service_Duration__c = null;
-				updateRecords.push(WO);
-			}
-		}
-	}
-	var update_result = _call(sforce.connection.update(updateRecords));
->>>>>>> f1e111a5cd8dce38026004b127c91124a2fd20ac
+	return $isSuccess;
 }
 
 
@@ -201,3 +173,5 @@ function validate_SD_Violation($dp_Id){
 }
 
 //</browser>
+
+$RS_6665.end();
