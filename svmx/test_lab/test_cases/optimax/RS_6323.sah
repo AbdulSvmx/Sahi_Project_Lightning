@@ -23,6 +23,7 @@ $bo_act_login.login($g_url, $g_un, $g_pwd);
 var $date = "" + new Date();
 var $TerrName = "TerritoryRule_" + $date;
 var $rowCount = 0;
+var $rowIndex = 1;
 
 _click(_link("ServiceMax Setup"));
 _wait(20000,_isVisible(_div("Dispatch Management")));
@@ -53,6 +54,7 @@ _log("Territory Match Rule = "+$TerrName);
 if(_exists($TerrName))
 	{
 	_log("Territory Match Rule Created Successfully");
+	$excel.writeToExcel("insertAtIndex", "../optimax/op_excleData/automation.xlsx", "TerritoryRule", $TerrName, $rowIndex);
 	}
 else
 	{
