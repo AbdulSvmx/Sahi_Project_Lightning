@@ -1,4 +1,6 @@
 var $user_credentials = $excel.readFromCustomExcel("../optimax/op_excleData/automation.xlsx", "User_Details","","");
+var $MTTSData = $excel.readFromCustomExcel("../optimax/op_excleData/automation.xlsx", "MTTS","","");
+
 
 //var $nArr;
 //Calling the sforce API
@@ -13,7 +15,7 @@ var $RS_6296 = _testcase("RS_6298", "Edit a MTTS Rule");
 
 $RS_6296.start();
 
-var $MTTSName = "MTTSRule_Mon Sep 25 2017 11:06:27 GMT+0530 (IST)";
+var $MTTSName = $MTTSData[0][0];
 
 $bo_act_login.login($g_url, $g_un, $g_pwd);
 
@@ -41,9 +43,17 @@ _log("Row Count : " + $rowCount);
 
 _click(_button("Edit Rule"));
 
-_assertExists(_select("MTTSRule:RuleForm:RuleBlock:j_id98:j_id99:table1:3:j_id104"));
-_assertVisible(_select("MTTSRule:RuleForm:RuleBlock:j_id98:j_id99:table1:3:j_id104"));
-_assertEqual("Billing Type", _getSelectedText(_select("MTTSRule:RuleForm:RuleBlock:j_id98:j_id99:table1:3:j_id104")),"MTTS Rule Not Updated");
+var $temp = _getText(_textbox("MTTSRule:RuleForm:RuleBlock:j_id119:HdrAdvOption"));
+
+if (_areEqual("1 AND (2 OR 3 OR 4)", $temp)) 
+{
+_log("MTTS Rule Updated successfully");
+}
+else
+{
+_fail("Error in Updating MTTS Rule");
+}
+
 $bo_act_login.logOut();
 
 $RS_6296.end();

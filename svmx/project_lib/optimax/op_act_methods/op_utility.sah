@@ -165,5 +165,24 @@ var $op_utility = new function op_utility() {
 		}
 		// </browser>
 	}
+	
+	this.search_Territory_Match_Rule = function($TerrName) 
+	{
+		var $rowCount = 0;
+		_set($rowCount, _table("TRTRYRule:RuleForm:RuleBlock:TrtryRuleList").rows.length);
+		_log("$rowCount = " + $rowCount);
+		for (var $i = 0; $i < $rowCount; $i++) 
+		{
+			var $temp = _getText(_cell("TRTRYRule:RuleForm:RuleBlock:TrtryRuleList:" + $i + ":j_id89"));
+			_log("$temp = " + $temp);
+			if (_areEqual($TerrName, $temp)) 
+			{
+				$rowCount = $i;
+			}
+		}
+		_check(_checkbox("TRTRYRule:RuleForm:RuleBlock:TrtryRuleList:" + $rowCount + ":Hide_selected"));
+		return $rowCount;
+
+	}
 
 }

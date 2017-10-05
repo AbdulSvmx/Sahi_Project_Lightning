@@ -1,4 +1,5 @@
 var $user_credentials = $excel.readFromCustomExcel("../optimax/op_excleData/automation.xlsx", "User_Details","","");
+var $MTTSData = $excel.readFromCustomExcel("../optimax/op_excleData/automation.xlsx", "MTTS","","");
 
 //var $nArr;
 //Calling the sforce API
@@ -13,7 +14,9 @@ var $RS_6298 = _testcase("RS_6298", "Delete an MTTS Rule");
 
 $RS_6298.start();
 
-var $MTTSName = "MTTSRule_Mon Sep 25 2017 12:31:26 GMT+0530 (IST)";
+var $MTTSName = $MTTSData[0][0];
+
+_log("MTTS Name : " + $MTTSName);
 
 $bo_act_login.login($g_url, $g_un, $g_pwd);
 
@@ -31,18 +34,32 @@ _assertEqual("Do you want to proceed?", _lastConfirm());
 _click(_div("Rule Name"));
 _windowAction("refresh");
 
-var $temp = _getText(_cell("MTTSRule:RuleForm:RuleBlock:MTTSRuleList:" + $rowCount
-		+ ":j_id88"));
+var $rowCount1 = 0;
+_set($rowCount1, _table("MTTSRule:RuleForm:RuleBlock:MTTSRuleList").rows.length);
+_log("RowCount : " + $rowCount);
+_log("RowCount 1 : " + $rowCount1);
 
-if (_areEqual($MTTSName, $temp)) 
+$rowCount1 = $rowCount1 - 1;
+
+if ($rowCount < $rowCount1)
 	{
-	_log("Error in deleting MTTS Rule");
+	var $temp = _getText(_cell("MTTSRule:RuleForm:RuleBlock:MTTSRuleList:" + $rowCount
+			+ ":j_id88"));
+
+	if (_areEqual($MTTSName, $temp)) 
+		{
+		_fail("Error in deleting MTTS Rule");
+		}
+	else
+		{
+		_log("MTTS Rule Deleted Successfully");
+		}
+
 	}
 else
 	{
 	_log("MTTS Rule Deleted Successfully");
 	}
-
 
 $bo_act_login.logOut();
 
