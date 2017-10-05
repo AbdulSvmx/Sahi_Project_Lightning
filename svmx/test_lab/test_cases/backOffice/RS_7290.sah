@@ -47,11 +47,11 @@ var $futureYear = 2;
 
 
 // Creation of Service Contracts
-//var $serviceConracts = $bo_act_serviceMaintenanceContracts.createServiceMaintenanceContract($accountName, $slaName, $futureYear);
+//var $serviceConractName = $bo_act_serviceMaintenanceContracts.createServiceMaintenanceContract($accountName, $slaName, $futureYear);
 
-var $serviceConracts = "Scon492017125221";
+var $serviceConractName = "Scon492017125221";
 //Activating Created Service Contract
-$bo_act_serviceMaintenanceContracts.activateServiceContract($serviceConracts);
+$bo_act_serviceMaintenanceContracts.activateServiceContract($serviceConractName);
 
 
 	
