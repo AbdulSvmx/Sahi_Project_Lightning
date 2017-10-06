@@ -59,6 +59,8 @@ function createBH($businessHour_xls)
 	var bh_result = _call(sforce.connection.create(createBh));
 	_log("bh_result id = "+bh_result[0].id);
 	
+	//$excel.writeToExcel("insertAtIndex", "../optimax/op_excleData/automation.xlsx", "BusinessHours", bh_result[0].id, 17);
+	//$excel.writeToExcel("insertAtIndex", "../optimax/op_excleData/automation.xlsx", "MTTS", $MTTSName, $rowIndex);
 	return bh_result[0].id;
 }
 
