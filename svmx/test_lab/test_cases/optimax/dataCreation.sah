@@ -1,0 +1,61 @@
+var $user_credentials_xls = $excel.readFromCustomExcel("../optimax/op_excleData/automation.xlsx", "User_Details","","");
+var $businessHour_xls = $excel.readFromCustomExcel("../optimax/op_excleData/automation.xlsx", "BusinessHours","","");
+
+for(var $i=0;$i<$user_credentials_xls.length;$i++)
+{
+	var $g_un = $user_credentials_xls[$i][0];
+	var $g_pwd = $user_credentials_xls[$i][1];
+	var $g_url = $user_credentials_xls[$i][2];
+}
+
+$bo_act_login.login($g_url, $g_un, $g_pwd);
+
+_set($login_result, _fetch(login($g_un,$g_pwd)));
+_log($login_result);
+
+_set($BH_creation, _fetch(createBH($businessHour_xls)));
+_log($BH_creation);
+
+//<browser>
+
+function login($g_un,$g_pwd)
+{
+	var $login_result = sforce.connection.login($g_un,$g_pwd);
+	return $login_result;
+}
+
+function createBH($businessHour_xls)
+{
+	createBh = [];
+	var $isSuccess = false;
+	for(var $i=0;$i<$businessHour_xls.length;$i++){
+		var bh = new sforce.SObject("BusinessHours");
+		bh.Name = $businessHour_xls[$i][0];
+		bh.IsActive = $businessHour_xls[$i][1];
+		bh.TimeZoneSidKey = $businessHour_xls[$i][2];
+		bh.MondayStartTime = $businessHour_xls[$i][3];
+		bh.MondayEndTime = $businessHour_xls[$i][4];
+		bh.TuesdayStartTime = $businessHour_xls[$i][5];
+		bh.TuesdayEndTime = $businessHour_xls[$i][6];
+		bh.WednesdayStartTime  = $businessHour_xls[$i][7];
+		bh.WednesdayEndTime = $businessHour_xls[$i][8];
+		bh.ThursdayStartTime = $businessHour_xls[$i][9];
+		bh.ThursdayEndTime = $businessHour_xls[$i][10];
+		bh.FridayStartTime = $businessHour_xls[$i][11];
+		bh.FridayEndTime = $businessHour_xls[$i][12];
+		bh.SaturdayStartTime = $businessHour_xls[$i][13];
+		bh.SaturdayEndTime = $businessHour_xls[$i][14];
+		bh.SundayStartTime = $businessHour_xls[$i][15];
+		bh.SundayEndTime = $businessHour_xls[$i][16];
+		createBh.push(bh);
+	}
+	var bh_result = _call(sforce.connection.create(createBh));
+	_log("bh_result id = "+bh_result);
+	
+	
+		$excel.writeToExcel("insertAtIndex", "../optimax/op_excleData/automation.xlsx", "BusinessHours", bh_result[0].id, 17);
+	
+	
+}
+
+//</browser>
