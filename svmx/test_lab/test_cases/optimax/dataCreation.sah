@@ -1,5 +1,6 @@
 var $user_credentials_xls = $excel.readFromCustomExcel("../optimax/op_excleData/automation.xlsx", "User_Details","","");
 var $businessHour_xls = $excel.readFromCustomExcel("../optimax/op_excleData/automation.xlsx", "BusinessHours","","");
+var $work_Orders_Xl = $excel.readFromCustomExcel("../optimax/op_excleData/automation.xlsx", "RS_6665","","");
 
 for(var $i=0;$i<$user_credentials_xls.length;$i++)
 {
@@ -13,7 +14,7 @@ $bo_act_login.login($g_url, $g_un, $g_pwd);
 _set($login_result, _fetch(login($g_un,$g_pwd)));
 _log($login_result);
 
-_set($BH_creation, _fetch(createBH($businessHour_xls)));
+_set($BH_creation, _fetch(createBH($work_Orders_Xl)));
 _log($BH_creation);
 
 //<browser>
@@ -27,7 +28,7 @@ function login($g_un,$g_pwd)
 function createBH($businessHour_xls)
 {
 	createBh = [];
-	var $isSuccess = false;
+	/*var $isSuccess = false;
 	for(var $i=0;$i<$businessHour_xls.length;$i++){
 		var bh = new sforce.SObject("BusinessHours");
 		bh.Name = $businessHour_xls[$i][0];
@@ -50,10 +51,29 @@ function createBH($businessHour_xls)
 		createBh.push(bh);
 	}
 	var bh_result = _call(sforce.connection.create(createBh));
-	_log("bh_result id = "+bh_result);
+	_log("bh_result id = "+bh_result);*/
+	
+	for(var $i=0;$i<$1;$i++)
+	{
+		var wo_list = new sforce.SObject("SVMXC__Service_Order__c");
+		wo_list.SVMXC__Order_Type__c = $work_Orders_Xl[$i][0];
+		wo_list.SVMXC__Order_Status__c = $work_Orders_Xl[$i][1];
+		wo_list.SVMXC__Street__c = $work_Orders_Xl[$i][2];
+		wo_list.SVMXC__City__c = $work_Orders_Xl[$i][3];
+		wo_list.SVMXC__Zip__c = $work_Orders_Xl[$i][4];
+		wo_list.SVMXC__Country__c = $work_Orders_Xl[$i][5];
+		wo_list.SVMXC__Primary_Territory__c = $work_Orders_Xl[$i][6];
+		wo_list.SVMXC__SM_Scheduling_Options__c = $work_Orders_Xl[$i][7];
+		wo_list.SVMXC__Apply_Business_Hours_For_OptiMax__c = $work_Orders_Xl[$i][8];
+		wo_list.SVMXC__Preferred_Business_Hours__c = $work_Orders_Xl[$i][9];
+		wo_list.SVMXC__Service_Duration__c = $work_Orders_Xl[$i][10];
+		CreateRecords.push(wo_list);
+	}
+	var wo_crt_result = _call(sforce.connection.create(CreateRecords));
+	_log("wo_crt_result = "+wo_crt_result.length);
 	
 	
-		$excel.writeToExcel("insertAtIndex", "../optimax/op_excleData/automation.xlsx", "BusinessHours", bh_result[0].id, 17);
+		$excel.writeToExcel("insertAtIndex", "../optimax/op_excleData/automation.xlsx", "BusinessHours", wo_crt_result[0].id, 17);
 	
 	
 }
