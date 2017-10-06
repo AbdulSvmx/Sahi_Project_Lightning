@@ -1,5 +1,8 @@
 var $user_credentials_xls = $excel.readFromCustomExcel("../optimax/op_excleData/automation.xlsx", "User_Details","","");
 var $businessHour_xls = $excel.readFromCustomExcel("../optimax/op_excleData/automation.xlsx", "BusinessHours","","");
+var $territory_xls = $excel.readFromCustomExcel("../optimax/op_excleData/automation.xlsx", "SVMXC__Territory__c","","");
+var $team_xls = $excel.readFromCustomExcel("../optimax/op_excleData/automation.xlsx", "SVMXC__Service_Group__c","","");
+var $tech_xls = $excel.readFromCustomExcel("../optimax/op_excleData/automation.xlsx", "SVMXC__Service_Group_Members__c","","");
 
 for(var $i=0;$i<$user_credentials_xls.length;$i++)
 {
@@ -8,18 +11,36 @@ for(var $i=0;$i<$user_credentials_xls.length;$i++)
 	var $g_url = $user_credentials_xls[$i][2];
 }
 
+for(var $i=0;$i<$businessHour_xls.length;$i++)
+{
+	var $name_BH = $businessHour_xls[$i][1];
+	_log("$name_BH = "+$name_BH);
+}
+
 $bo_act_login.login($g_url, $g_un, $g_pwd);
 
-var $rowIndex = 1;
+//var $rowIndex = 1;
 
-_log($rowIndex);
+//_log($rowIndex);
 _set($login_result, _fetch(login($g_un,$g_pwd)));
 _log($login_result);
 
-_set($BH_creation, _fetch(createBH($businessHour_xls)));
+_set($BH_creation, _fetch(createBH($businessHour_xls,$name_BH)));
 _log($BH_creation);
+if($BH_creation != null){
+	_set($territory_creation, _fetch(createTerritory($territory_xls,$BH_creation)));
+	_log($territory_creation);
+	if($territory_creation != false){
+		_set($createTeam_creation, _fetch(createTeam($team_xls)));
+		_log($createTeam_creation);
+		if($createTeam_creation != false){
+			_set($createTech_creation, _fetch(createTech($territory_creation,$BH_creation,$createTeam_creation,$tech_xls)));
+			_log($createTech_creation);
+		}
+	}
+}
 
-$excel.writeToExcel("insertAtIndex", "../optimax/op_excleData/automation.xlsx", "BusinessHours", $BH_creation, $rowIndex);
+//$excel.writeToExcel("insertAtIndex", "../optimax/op_excleData/automation.xlsx", "BusinessHours", $BH_creation, $rowIndex);
 
 
 //<browser>
@@ -30,7 +51,7 @@ function login($g_un,$g_pwd)
 	return $login_result;
 }
 
-function createBH($businessHour_xls)
+function createBH($businessHour_xls,$name_BH)
 {
 	var createBh = [];
 	var $isSuccess = false;
@@ -58,10 +79,81 @@ function createBH($businessHour_xls)
 	}
 	var bh_result = _call(sforce.connection.create(createBh));
 	_log("bh_result id = "+bh_result[0].id);
-	
-	//$excel.writeToExcel("insertAtIndex", "../optimax/op_excleData/automation.xlsx", "BusinessHours", bh_result[0].id, 17);
-	//$excel.writeToExcel("insertAtIndex", "../optimax/op_excleData/automation.xlsx", "MTTS", $MTTSName, $rowIndex);
+	if(bh_result[0].id === null){
+		var list_BH = sforce.connection.queryAll("Select Id, Name From BusinessHours Where Name = '"+$name_BH+"'");
+		_log(" list_BHsize = "+list_BH.size);
+		var arr_BH = list_BH.getArray("records");
+		_log(" arr_BH Id = "+arr_BH[0].Id);
+		return arr_BH[0].Id;
+	}
 	return bh_result[0].id;
+}
+
+function createTerritory($territory_xls,$BH_creation){
+	var createTerritory = [];
+	for(var $i=0;$i<$territory_xls.length;$i++)
+	{
+		var territory = new sforce.SObject("SVMXC__Territory__c");
+		territory.Name = $territory_xls[$i][0];
+		territory.SVMXC__Active__c = $territory_xls[$i][1];
+		territory.SVMXC__Average_Speed__c = $territory_xls[$i][2];
+		territory.SVMXC__Max_Distance__c = $territory_xls[$i][3];
+		territory.SVMXC__Fixed_Cost__c = $territory_xls[$i][4];
+		territory.SVMXC__Per_Hour_Cost__c = $territory_xls[$i][5];
+		territory.SVMXC__Per_Mile_Cost__c = $territory_xls[$i][6];
+		territory.SVMXC__Territory_s_Business_Hours__c = $BH_creation;
+		createTerritory.push(territory);
+	}
+	var territory_result = _call(sforce.connection.create(createTerritory));
+	_log("territory_result = "+territory_result);
+	if(territory_result[0].id != null){
+		_log("territory_result[0].id = "+territory_result[0].id);
+		return territory_result[0].id;
+	}
+	return false;
+}
+
+function createTeam($team_xls){
+	var createTeam = [];
+	for(var $i=0;$i<$team_xls.length;$i++)
+	{
+		var team = new sforce.SObject("SVMXC__Service_Group__c");
+		team.Name = $team_xls[$i][0];
+		team.SVMXC__Active__c = $team_xls[$i][1];
+		createTeam.push(team);
+	}
+	var team_result = _call(sforce.connection.create(createTeam));
+	if(team_result[0].id != null){
+		return team_result[0].id;
+	}
+	return false;
+}
+
+function createTech($territory_creation,$BH_creation,$createTeam_creation,$tech_xls){
+	var createTech = [];
+	$isSuccess = false;
+	for(var $i=0;$i<$tech_xls.length;$i++)
+	{
+		var tech = new sforce.SObject("SVMXC__Service_Group_Members__c");
+		tech.Name = $tech_xls[$i][0];
+		tech.SVMXC__Active__c = $tech_xls[$i][1];
+		tech.SVMXC__Enable_Scheduling__c = $tech_xls[$i][2];
+		tech.SVMXC__Street__c = $tech_xls[$i][3];
+		tech.SVMXC__City__c = $tech_xls[$i][4];
+		tech.SVMXC__State__c = $tech_xls[$i][5];
+		tech.SVMXC__Zip__c = $tech_xls[$i][6];
+		tech.SVMXC__Country__c = $tech_xls[$i][7];
+		tech.SVMXC__Service_Group__c = $createTeam_creation;
+		tech.SVMXC__Service_Territory__c = $territory_creation;
+		tech.SVMXC__Working_Hours__c = $BH_creation;
+		createTech.push(tech);
+	}
+	var tech_result = _call(sforce.connection.create(createTech));
+	if(tech_result.length == 100){
+		$isSuccess = true;
+		return $isSuccess;
+	}
+	return $isSuccess;
 }
 
 //</browser>
