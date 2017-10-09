@@ -105,6 +105,19 @@ _setValue(_textbox("page1:form1:block1:tab7block1:j_id644"), $currentDate);
 _setValue(_textbox("page1:form1:block1:tab7block1:SuccessSection:SuccessItem:SuccessEmail"), "reena.jethmalani@servicemax.com");
 _setValue(_textbox("page1:form1:block1:tab7block1:SuccessSection:ErrorItem:ErrorEmail"), "reena.jethmalani@servicemax.com");
 _click(_submit("Save And Close[1]"));
+_click(_submit("Back To Dispatch Process"));
+
+var $test = _exists($DPName);
+_log($test);
+
+if($test)
+	{
+	_fail("Dispatch Process Created Successfully")
+	}
+else
+	{
+	_log("Error in Creating Dispatch Process");
+	}
 
 _set($login_result, _fetch(login($g_un,$g_pwd)));
 _log($login_result);
@@ -114,9 +127,6 @@ _log($DP_Id);
 
 _set($Terr_Id, _fetch(get_Terr_Id($PrimaryTerr)));
 _log($Terr_Id);
-
-_set($today_Date, _fetch(get_CurrentDate($separator)));
-_log($today_Date);
 
 var $insertRowData = [$DPName,$DP_Id,$Terr_Id];
 $excel.writeToExcel("insertAtIndex", "../optimax/op_excleData/automation.xlsx", "Dispatch_Process", $insertRowData, $rowIndex);
