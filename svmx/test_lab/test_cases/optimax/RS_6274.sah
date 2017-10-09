@@ -16,10 +16,10 @@ var $dp_Id = $Dispatch_Process[$i][1];
 var $dp_Terr_Id = $Dispatch_Process[$i][2];
 }
 
-var $RS_6275 = _testcase("RS_6275", "Verify StackRank");
+var $RS_6274 = _testcase("RS_6274", "MCTM in pre-calc");
 var $account = null;
 var $team = null;
-$RS_6275.start();
+$RS_6274.start();
 
 
 $bo_act_login.login($g_url, $g_un, $g_pwd);
@@ -38,6 +38,7 @@ function login($g_un,$g_pwd){
 	var $login_result = sforce.connection.login($g_un,$g_pwd);
 	return $login_result;
 }
+
 
 
 function create_Team ($dp_Terr_Id){
@@ -143,13 +144,13 @@ function create_Team ($dp_Terr_Id){
      var QTLlist_WO = QTLlist_WO_arr[$i];
      var QTLlist= QTLlist_WO.SVMXC__Qualified_Technicians__c;
      //_log("records.SVMXC__Qualified_Technicians__c = "+records.SVMXC__Qualified_Technicians__c);
-       if(QTLlist.includes("stackRank"))
+       if(QTLlist.includes("Preferred"))
        {
-         _log("StackRank is populated");
+         _log("Skill Set and QTL list is Populated");
        }
       else
          {
-	     _log("StackRank is not populated");
+	     _log("Skill Set and QTL list is not Populated");
          }
 }
     
@@ -157,4 +158,4 @@ function create_Team ($dp_Terr_Id){
 }
 
 //</browser>
-$RS_6275.end();
+$RS_6274.end();
