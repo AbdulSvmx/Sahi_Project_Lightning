@@ -109,6 +109,27 @@ var $op_utility = new function op_utility() {
 
 	}
 	
+	this.search_ActiveProfile = function() 
+	{
+		var $rowCount = 0;
+		_set($rowCount, _table("list_prof:list_prof:GloProf:j_id28").rows.length);
+		_log("$rowCount = " + $rowCount);
+		for (var $i = 0; $i < $rowCount; $i++) 
+		{
+			var $temp = _getText(_cell("list_prof:list_prof:GloProf:j_id28:" + $i
+					+ ":j_id33"));
+					
+				_log("$temp = " + $temp);
+			if (_areEqual("Active", $temp)) 
+			{
+				$rowCount = $i;
+			}
+		}
+		
+		_check(_checkbox("list_prof:list_prof:GloProf:j_id28:"+ $rowCount + ":org_selected"));
+
+	}
+	
 	this.delete_WO = function($dp_Id, $sfdc_sessionId) {
 		var $is_success = false
 		_set($is_success, _fetch(delete_WO($dp_Id,$sfdc_sessionId)));
