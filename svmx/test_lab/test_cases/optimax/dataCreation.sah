@@ -28,6 +28,7 @@ _log($login_result);
 _set($BH_creation, _fetch(createBH($businessHour_xls,$name_BH)));
 _log($BH_creation);
 if($BH_creation != null){
+	_log("business hour = "+$BH_creation);
 	_set($territory_creation, _fetch(createTerritory($territory_xls,$BH_creation)));
 	_log($territory_creation);
 	if($territory_creation != false){
@@ -90,7 +91,9 @@ function createBH($businessHour_xls,$name_BH)
 }
 
 function createTerritory($territory_xls,$BH_creation){
-	var createTerritory = [];
+	var Territories = [];
+
+	_log("$territory_xls.length = "+$territory_xls.length);
 	for(var $i=0;$i<$territory_xls.length;$i++)
 	{
 		var territory = new sforce.SObject("SVMXC__Territory__c");
@@ -101,10 +104,10 @@ function createTerritory($territory_xls,$BH_creation){
 		territory.SVMXC__Fixed_Cost__c = $territory_xls[$i][4];
 		territory.SVMXC__Per_Hour_Cost__c = $territory_xls[$i][5];
 		territory.SVMXC__Per_Mile_Cost__c = $territory_xls[$i][6];
-		territory.SVMXC__Territory_s_Business_Hours__c = $BH_creation;
-		createTerritory.push(territory);
+		//territory.SVMXC__Territory_s_Business_Hours__c = $BH_creation;
+		Territories.push(territory);
 	}
-	var territory_result = _call(sforce.connection.create(createTerritory));
+	var territory_result = _call(sforce.connection.create(Territories));
 	_log("territory_result = "+territory_result);
 	if(territory_result[0].id != null){
 		_log("territory_result[0].id = "+territory_result[0].id);
@@ -149,7 +152,7 @@ function createTech($territory_creation,$BH_creation,$createTeam_creation,$tech_
 		createTech.push(tech);
 	}
 	var tech_result = _call(sforce.connection.create(createTech));
-	if(tech_result.length == 100){
+	if(tech_result.length <= 100){
 		$isSuccess = true;
 		return $isSuccess;
 	}

@@ -51,14 +51,14 @@ if($op_utility.validate_Job_Success($dp_Id,$login_result.sessionId,200000)=== tr
 	if($validate_SD_Vio_WO === true){
 		_log("for 15 wo, Invalid Service Duration is added ");
 		if($op_utility.read_file($dp_Id,$login_result.sessionId,"Invalid Service Duration") === 15){
-			_log("15 Invalid Service Duration is added in the attachment");
+			_log("15 Invalid Service Duration violation is added in the attachment");
 		}
 		else{
-			_logExceptionAsFailure("Invalid Service Duration count in Attachment is different")
+			_logExceptionAsFailure("Invalid Service Duration violation count in Attachment is different")
 		}
 	}
 	else{
-		_logExceptionAsFailure("Invalid Service Duration count in work order is not updated");
+		_logExceptionAsFailure("Invalid Service Duration violation count in work order is not updated");
 	}
 }
 else{
@@ -68,17 +68,17 @@ else{
 		_set($validate_SD_Vio_WO, _fetch(validate_SD_Violation($dp_Id)));
 		_log($validate_SD_Vio_WO);
 		if($validate_SD_Vio_WO === true){
-			_log("for 15 wo, Invalid Service Duration is added");
+			_log("for 15 wo, Invalid Service Duration violation is added");
 			_log("$op_utility.read_file($dp_Id,$login_result.sessionId = "+$op_utility.read_file($dp_Id,$login_result.sessionId,"Invalid Service Duration"));
 			if($op_utility.read_file($dp_Id,$login_result.sessionId,"Invalid Service Duration") === 15){
-				_log("15 Invalid Service Duration is added in the attachment");
+				_log("15 Service Duration violation is added in the attachment");
 			}
 			else{
-				_logExceptionAsFailure("Invalid Service Duration count in Attachment is different")
+				_logExceptionAsFailure(" Service Duration violation count in Attachment is different")
 			}
 		}
 		else{
-			_logExceptionAsFailure("Invalid Service Duration count in work order is not updated");
+			_logExceptionAsFailure("Invalid Service Duration violation count in work order is not updated");
 		}
 	}
 	else{
