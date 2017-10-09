@@ -151,15 +151,15 @@ var $op_utility = new function op_utility() {
 			sforce.connection.sessionId = $sfdc_sessionId;
 			var svmx_Job_result = _call(sforce.connection.query("Select Id, SVMXC__SVMX_Process__c, SVMXC__OptiMax_Message__c  From SVMXC__SVMX_Jobs__c Where SVMXC__SVMX_Process__c = '"+ $dp_Id + "' ORDER BY Name DESC LIMIT 1"));
 			var records = svmx_Job_result.getArray("records");
-			_log("records size =" + records.length);
+			//_log("records size =" + records.length);
 			if(records[0].Id != null){
 				var attachment = _call(sforce.connection.query("SELECT ParentId, Body, Id FROM Attachment WHERE ParentId = '"+records[0].Id+"' AND Name = 'Invalid WorkOrders'"));
 				var attach_Id = attachment.getArray("records");
 				var myFile=atob(attach_Id[0].Body);
-				_log("myFile = "+myFile);
+				//_log("myFile = "+myFile);
 				$no_text_count = myFile.split($text_validation).length;
 				$no_text_count = $no_text_count - 1;
-				_log("pos = "+$no_text_count);
+				//_log("pos = "+$no_text_count);
 			}
 			return $no_text_count;
 		}
@@ -174,7 +174,7 @@ var $op_utility = new function op_utility() {
 		for (var $i = 0; $i < $rowCount; $i++) 
 		{
 			var $temp = _getText(_cell("TRTRYRule:RuleForm:RuleBlock:TrtryRuleList:" + $i + ":j_id89"));
-			_log("$temp = " + $temp);
+			//_log("$temp = " + $temp);
 			if (_areEqual($TerrName, $temp)) 
 			{
 				$rowCount = $i;
