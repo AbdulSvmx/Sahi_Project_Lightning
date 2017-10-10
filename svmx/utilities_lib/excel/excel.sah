@@ -26,21 +26,21 @@ var $excel = new function excel() {
 
 	/**
 	 * Function to write to a excel file
+	 * 
 	 * @param $excelMode
 	 * @param $filePath
 	 * @param $sheetName
 	 * @param $excelData
 	 * @param $rowIndex
 	 * 
-	 * Useage:
-	 * var $filePath =
+	 * Useage: var $filePath =
 	 * "/auto/sahi_pro/userdata/scripts/Sahi_Project/excelFile.xlsx" var
 	 * $sheetName = "Sheet1" var
 	 * $excelData=[["ajay","babu","cheeran"],["david","elango","frank"],
 	 * ["gokul","hari","irfan"],["jo","kumar","latha"],["mani","naraen","ojha"],
 	 * ["peter","queen","richard"],["shalini","thomas","umesh"]]; var
-	 * $insertRowData=["kathir","femina","jandir"];
-	 * var $excelMode = "insertAtIndex"; var $rowIndex = "3";
+	 * $insertRowData=["kathir","femina","jandir"]; var $excelMode =
+	 * "insertAtIndex"; var $rowIndex = "3";
 	 * 
 	 * writeToExcel($excelMode,$filePath,$sheetName,$excelData);
 	 */
@@ -51,23 +51,24 @@ var $excel = new function excel() {
 		switch ($excelMode) {
 		case "write":
 
-			$excelHandel.setData([[$excelData]]);
+			$excelHandel.setData([ [ $excelData ] ]);
 
 			break;
 
 		case "insert":
 			// Insert New Row at end
 
-			$excelHandel.insertRow([[$excelData]]);
+			$excelHandel.insertRow([ [ $excelData ] ]);
 
 			break;
 
 		case "insertAtIndex":
 			// Insert New Row at given index
 
-			$excelHandel.insertRow([[$excelData]], $rowIndex); // will insert at
-															// index 2. Shifts
-															// other cells down
+			$excelHandel.insertRow([ [ $excelData ] ], $rowIndex); // will
+			// insert at
+			// index 2. Shifts
+			// other cells down
 			break;
 
 		default:
@@ -75,6 +76,55 @@ var $excel = new function excel() {
 
 		}
 
-	}
+	};
+
+	/**
+	 * Function to insert under a column based on EOL or row index.
+	 * 
+	 * @param $columnName
+	 * @param $dataToWrite
+	 * @param $rowIndex (Optional, default row is considered as EOL)
+	 * 
+	 * Usage : insertUnderColumn("test.xlsx", "Sheet1","Name","Data");
+	 * insertUnderColumn("test.xlsx", "Sheet1","Name","Data2",2);
+	 * 
+	 */
+
+	this.insertUnderColumn = function($filePath, $sheetName,$columnName, $dataToWrite, $rowIndex) {
+
+		var $excelHandel = _getExcel($filePath, $sheetName);
+		var $dataRaw = $excelHandel.getData();
+
+		for (var $i = 0; $i < $dataRaw.length; $i++) {
+
+			for (var $j = 0; $j < $dataRaw[$i].length; $j++) {
+
+				if ($columnName == $excelHandel.get($i, $j)) {
+					try {
+						//Default EOL lenth for row
+						if ($rowIndex == null || $rowIndex == "") {
+							$rowNo = $dataRaw.length;
+						} else {
+							//Custom row index
+							$rowNo = $rowIndex;
+						}
+						$colNo = $j;
+						_log("$rowNo " + $rowNo);
+						_log("$colNo " + $colNo);
+						
+						$excelHandel.set($rowNo, $colNo, [ [ $dataToWrite ] ]);
+						
+						_log("Data After Write  " + $excelHandel.get($rowNo, $colNo));
+
+						break;
+					} catch ($e) {
+						_log("Exception In Excel " + $e);
+
+					}
+				}
+			}
+
+		}
+	};
 
 };
