@@ -14,7 +14,7 @@ var $RS_6333 = _testcase("RS_6333", "Delete a Dispatch Process");
 
 $RS_6333.start();
 
-var $DPName = "DPName_Mon Oct 09 2017 16:57:56 GMT+0530 (IST)";
+var $DPName = "DPName_Tue Oct 10 2017 11:10:10 GMT+0530 (IST)";
 
 
 $bo_act_login.login($g_url, $g_un, $g_pwd);
@@ -37,8 +37,8 @@ for (var $i = 0; $i < $rowCount; $i++)
 }
 _check(_checkbox("page1:form1:block1:j_id81:j_id82:" + $rowCount
 		+ ":j_id85"));
-_assertEqual("Do you want to delete the selected dispatch processes?", _lastConfirm());
 _click(_submit("Delete"));
+_assertEqual("Do you want to delete the selected dispatch processes?", _lastConfirm());
 _click(_cell("pbTitle"));
 _windowAction("refresh");
 

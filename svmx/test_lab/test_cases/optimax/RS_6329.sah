@@ -32,7 +32,14 @@ var $day = $now.getDate();
 var $month = $now.getMonth() + 1;
 var $year = $now.getFullYear();
 var $currentDate = $month + $separator + $day + $separator +$year;
+var $UserName = _getText(_span("userNavLabel"));
+_click(_div($UserName));
+_click(_link("My Settings"));
+_click(_span("Personal Information[1]"));
+var $email = _getText(_textbox("PersonalInformationSetup:editPage:pageBlock:email"));
+_log($email);
 
+_click(_link("Home"));
 _click(_link("ServiceMax Setup"));
 _click(_div("Dispatch Management"));
 _click(_div("Dispatch Processes"));
@@ -102,8 +109,8 @@ _check(_checkbox("page1:form1:block1:tab7block1:j_id630"));
 _check(_checkbox("page1:form1:block1:tab7block1:j_id632"));
 _check(_checkbox("page1:form1:block1:tab7block1:j_id634"));
 _setValue(_textbox("page1:form1:block1:tab7block1:j_id644"), $currentDate);
-_setValue(_textbox("page1:form1:block1:tab7block1:SuccessSection:SuccessItem:SuccessEmail"), "reena.jethmalani@servicemax.com");
-_setValue(_textbox("page1:form1:block1:tab7block1:SuccessSection:ErrorItem:ErrorEmail"), "reena.jethmalani@servicemax.com");
+_setValue(_textbox("page1:form1:block1:tab7block1:SuccessSection:SuccessItem:SuccessEmail"), $email);
+_setValue(_textbox("page1:form1:block1:tab7block1:SuccessSection:ErrorItem:ErrorEmail"), $email);
 _click(_submit("Save And Close[1]"));
 _click(_submit("Back To Dispatch Process"));
 
@@ -112,11 +119,11 @@ _log($test);
 
 if($test)
 	{
-	_fail("Dispatch Process Created Successfully")
+	_log("Dispatch Process Created Successfully")
 	}
 else
 	{
-	_log("Error in Creating Dispatch Process");
+	_fail("Error in Creating Dispatch Process");
 	}
 
 _set($login_result, _fetch(login($g_un,$g_pwd)));
