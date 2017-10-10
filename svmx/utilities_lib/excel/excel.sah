@@ -90,18 +90,18 @@ var $excel = new function excel() {
 	 * 
 	 */
 
-	this.insertUnderColumn = function($filePath, $sheetName,$columnName, $dataToWrite, $rowIndex) {
+	this.insertUnderColumn = function($filePath, $sheetName, $columnName, $dataToWrite, $rowIndex) {
 
 		var $excelHandel = _getExcel($filePath, $sheetName);
 		var $dataRaw = $excelHandel.getData();
-
+		//Traverse through the Columns
 		for (var $i = 0; $i < $dataRaw.length; $i++) {
-
+			//Traverse through the Rows
 			for (var $j = 0; $j < $dataRaw[$i].length; $j++) {
 
 				if ($columnName == $excelHandel.get($i, $j)) {
 					try {
-						//Default EOL lenth for row
+						//Default EOL length for row
 						if ($rowIndex == null || $rowIndex == "") {
 							$rowNo = $dataRaw.length;
 						} else {
@@ -111,9 +111,9 @@ var $excel = new function excel() {
 						$colNo = $j;
 						_log("$rowNo " + $rowNo);
 						_log("$colNo " + $colNo);
-						
+
 						$excelHandel.set($rowNo, $colNo, [ [ $dataToWrite ] ]);
-						
+
 						_log("Data After Write  " + $excelHandel.get($rowNo, $colNo));
 
 						break;
