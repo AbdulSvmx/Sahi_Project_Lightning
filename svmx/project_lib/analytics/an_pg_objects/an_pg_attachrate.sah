@@ -1,0 +1,15 @@
+
+var $an_pg_attachrate = new function $an_pg_attachrate()
+{
+	this.btn_attachrate_metric = _span("Attach Rate");
+	this.btn_active = _button("svmx-form-field svmx-form-checkbox svmx-form-cb-focus svmx-field-form-cb-focus svmx-field-default-form-cb-focus");
+	this.txt_description = _textarea("appliesTo");
+	this.btn_Settings = _span("Settings");
+	this.list_select_account = _label("Select the source for Account field:");
+	this.btn_Account = _listItem("Account");
+	this.btn_Criteria = _span("Criteria");
+	this.list_qualification_IB = _textbox("tabPanel_3_editprocesspanel_expression_QualificationCriteriafieldset_id-inputEl");
+
+
+
+};

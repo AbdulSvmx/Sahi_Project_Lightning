@@ -143,8 +143,8 @@ $ana_897_resultRV2.forEach(function($varRV1) {
 		
 });
 }
-$an_897_deadtime = Math.round($ana_897_deadtime2);
-$ana_897_labortime = Math.round($ana_897_labortime2);
+$ana_897_deadtime2 = Math.round($ana_897_deadtime2);
+$ana_897_labortime2 = Math.round($ana_897_labortime2);
 
 _assertEqual($datevalue ,$ana_897_labortime2);
 _assertEqual($DeadTime, $ana_897_deadtime2);
