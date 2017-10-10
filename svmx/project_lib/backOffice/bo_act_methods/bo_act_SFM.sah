@@ -18,7 +18,7 @@ var $bo_act_SFM = new function bo_act_SFM() {
 
 		$bo_pg_sfmTransactionAndDesigner.selectSFM($sfmNameToBeCloned, $isCustom);
 		_click($bo_pg_sfmTransactionAndDesigner.btn_clone);
-
+_wait(3000)
 		_wait(60000, _isVisible($bo_pg_sfmTransactionAndDesigner.txt_name));
 		_setValue($bo_pg_sfmTransactionAndDesigner.txt_name, $sfmName);
 		_setValue($bo_pg_sfmTransactionAndDesigner.txt_sfmTransactionId, "");
@@ -31,8 +31,8 @@ var $bo_act_SFM = new function bo_act_SFM() {
 		_setSelected($bo_pg_sfmTransactionAndDesigner.sel_sfmTemplate, $sfmTemplate);
 		_setValue($bo_pg_sfmTransactionAndDesigner.txt_sfmSavePageLayoutAs, $sfmTemplateSaveAsName);
 		_setValue($bo_pg_sfmTransactionAndDesigner.txt_sfmSavePageLayoutAsId, $sfmTemplateSaveAsName);
-
-		//$bo_pg_sfmTransactionAndDesigner.addField($fieldName, $containerName);
+_wait(3000);
+		$bo_pg_sfmTransactionAndDesigner.addField($fieldName, $containerName);
 
 		_click($bo_pg_sfmTransactionAndDesigner.btn_quickSave);
 
