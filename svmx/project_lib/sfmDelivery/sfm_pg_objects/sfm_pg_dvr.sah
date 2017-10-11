@@ -1,0 +1,49 @@
+/**
+* SFM  transaction & designer Data Validation Rul page object repository
+*/
+
+var $sfm_pg_dvr = new function sfm_pg_dvr() {
+	
+	this.btn_newRule = _f("main").s_button("New[5]");
+	//_f("main").s_textinput("ruleName");
+	this.txt_ruleName = _f("main").s_textinput("ruleName");
+	this.txt_ruleId = _f("main").s_textinput("ruleID");
+	this.txt_targetObject = _f("main").s_combobox("objCombo");
+	this.btn_dataValidationRules = _f("main").tab("Data Validation Rules");
+	this.txt_ruleDescription = _f("main").s_textarea("description");
+	this.txt_selectfield = _f("main").s_combobox("fieldCombo[1]");
+	this.txt_condition = _f("main").s_dropdownlist("conditionsCombo[1]");
+	this.txt_operand	= _f("main").s_dropdownlist("operandTypeCombo");
+	this.txt_value = _f("main").s_textinput("operandValue");
+	this.txt_valueFunction = _f("main").s_combobox("picklist");
+	this.txt_valueField = _f("main").s_dropdownlist("fieldOperandList");
+	this.btn_addRow = _f("main").s_button("Add a row[1]");
+	this.txt_advancedExpr = _f("main").s_textinput("advExpIP");
+	this.txt_messageType = _f("main").s_dropdownlist("msgType");
+	this.txt_messageDescription = _f("main").s_textarea("message");
+	this.btn_saveDVR = _f("main").s_button("Save");
+	this.btn_addToProcess = _f("main").s_button("Add To Process");
+	
+	this.setRule = new function($fieldname, $condition, $operand,$value){
+		_setSelected($sfm_pg_dvr.txt_selectfield,$fieldName);
+		_setSelected($sfm_pg_dvr.txt_condition,$condition);
+		
+		if($operand=='Value'){
+			_setSelected($sfm_pg_dvr.txt_operand,$operand);
+			_setSelcted($sfm_pg_dvr.txt_value,$value);
+		}
+		else if($operand=='Function'){
+			_setSelected($sfm_pg_dvr.txt_operand,$operand);
+			_setSelcted($sfm_pg_dvr.txt_valueFunction,$value);	
+		}
+		else{
+			_setSelected($sfm_pg_dvr.txt_operand,$operand);
+			_setSelcted($sfm_pg_dvr.txt_valueField,$value);	
+		}
+		
+		
+	}
+
+
+};
+
