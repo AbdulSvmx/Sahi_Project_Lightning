@@ -22,9 +22,15 @@ var $bo_act_installedProduct = new function bo_act_installedProduct() {
 		_click($bo_pg_installedProducts.btn_save);
 		_assertNotVisible(_div("/Error: Invalid Data/"));
 		_logOutput($IBName+ " IB is created");
-		_wait(30000, _isVisible($IBName));
+		_wait(15000, _isVisible($IBName));
 		return $IBName;
 		// Need to return
+	};
+	this.deleteInstalledProduct = function($IBName){
+		 $bo_act_navigation.navigateToInstalledProductPage();
+		 _click(_link($IBName));
+		  _click($bo_pg_installedProducts.btn_delete);
+		
 	};
 
 	

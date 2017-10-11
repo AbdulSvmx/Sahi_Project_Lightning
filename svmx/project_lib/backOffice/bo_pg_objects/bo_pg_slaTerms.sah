@@ -20,6 +20,7 @@ var $bo_pg_slaTerms = new function bo_pg_slaTerms(){
 	
 	this.sel_internalGoal = _textbox(0,_near(_div("Type")));
 	this.sel_customerCommitment = _textbox(1,_near(_div("Type")));
+	this.btn_deleteSLA = _submit("Delete");
 	
 	
 	this.btn_onsiteResponse = _cell("Onsite Response");

@@ -4,7 +4,7 @@ var $bo_act_common = new function bo_act_common() {
 this.generateRandomName = function($Prefix){
   var $now = new Date();
     var $day = $now.getDate();
-    var $month = $now.getMonth();
+    var $month = $now.getMonth()+1;
     var $year = $now.getFullYear();
     var $hrs = $now.getHours();
 	var $min = $now.getMinutes();
@@ -69,7 +69,9 @@ this.getPastDate = function($pastYear, $seperator){
 
 this.searchfunction = function($searchValue){
 _getRecentWindow();
-_click(_span("/svmx_lookup_icon/"));
+_setStrictVisibilityCheck(true);
+_click(_span("/svmx-button/",_near(_div("svmx-column-inner",_in(_div("svmx-panel svmx-fit-item svmx-window-item svmx-panel-default"))))));
+_setStrictVisibilityCheck(false);
 _getRecentWindow();
 _click(_textbox("/svmx-picklist/"));
 _click(_listItem("Contains"));

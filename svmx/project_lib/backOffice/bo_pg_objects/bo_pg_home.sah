@@ -19,6 +19,8 @@ var $bo_pg_home = new function bo_pg_home(){
 	
 	this.link_logOut = _link("Logout");
 	this.link_allTabs = _image("All Tabs");
+	
+	this.link_preventiveMaintenancePlans = _link("Preventive Maintenance Plans");
 };
 
 

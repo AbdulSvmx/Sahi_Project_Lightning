@@ -18,5 +18,7 @@ var $bo_pg_PMPlanTemplate = new function bo_pg_pmPlanTemplate(){
 	this.link_editIcon = _image("/svmx-sfmd-edit-icon/");
 	this.btn_saveIcon = _span("/svmx-sfmd-save-icon/");
 	this.btn_save = _submit(" Save ");
+	
+	this.btn_delete = _button("Delete");
 };
 

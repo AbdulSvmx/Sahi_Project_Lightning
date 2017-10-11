@@ -125,4 +125,10 @@ this.editSLA = function($slaName) {
 	//return $callBack.returnResult([_isVisible($$warrantyName), "Warranty Name created",$$warrantyName] );
 };
 
+this.deleteSLATerm = function($slaName){
+	$bo_act_navigation.navigateToSlaTerms();
+	$bo_pg_slaTerms.selectSLA($slaName);
+	_click($bo_pg_slaTerms.btn_deleteSLA);
+};
+
 };
