@@ -32,16 +32,25 @@ var $day = $now.getDate();
 var $month = $now.getMonth() + 1;
 var $year = $now.getFullYear();
 var $currentDate = $month + $separator + $day + $separator +$year;
-var $UserName = _getText(_span("userNavLabel"));
+
+_set($login_result, _fetch(login($g_un,$g_pwd)));
+_log($login_result);
+
+_set($email, _fetch(get_Email($g_un)));
+_log($email);
+
+/*var $UserName = _getText(_span("userNavLabel"));
 _click(_div($UserName));
 _click(_link("My Settings"));
 _click(_span("Personal Information[1]"));
 var $email = _getText(_textbox("PersonalInformationSetup:editPage:pageBlock:email"));
-_log($email);
+_log($email);*/
 
 _click(_link("Home"));
 _click(_link("ServiceMax Setup"));
+_wait(20000,_isVisible(_div("Dispatch Management")));
 _click(_div("Dispatch Management"));
+_wait(20000,_isVisible(_div("Dispatch Processes")));
 _click(_div("Dispatch Processes"));
 _click(_submit("New Process"));
 _setValue(_textbox("page1:form1:block1:tab1block1:j_id78:j_id79:name"), $DPName);
@@ -126,6 +135,7 @@ else
 	_fail("Error in Creating Dispatch Process");
 	}
 
+
 _set($login_result, _fetch(login($g_un,$g_pwd)));
 _log($login_result);
 
@@ -136,7 +146,9 @@ _set($Terr_Id, _fetch(get_Terr_Id($PrimaryTerr)));
 _log($Terr_Id);
 
 var $insertRowData = [$DPName,$DP_Id,$Terr_Id];
-$excel.writeToExcel("insertAtIndex", "../optimax/op_excleData/automation.xlsx", "Dispatch_Process", $insertRowData, $rowIndex);
+$excel.insertUnderColumn("../optimax/op_excleData/automation.xlsx", "Dispatch_Process", "Process Name", $DPName, $rowIndex);
+$excel.insertUnderColumn("../optimax/op_excleData/automation.xlsx", "Dispatch_Process", "Process Id", $DP_Id, $rowIndex);
+$excel.insertUnderColumn("../optimax/op_excleData/automation.xlsx", "Dispatch_Process", "Territory ID", $Terr_Id, $rowIndex);
 
 //<browser>
 
@@ -144,6 +156,16 @@ function login($g_un,$g_pwd){
 	
 	var $login_result = sforce.connection.login($g_un,$g_pwd);
 	return $login_result;
+}
+
+
+function get_Email ($g_un)
+{
+var Email_List = sforce.connection.query("SELECT Email,Username FROM User WHERE Username = '" + $g_un + "'");
+var Email_Arr = Email_List.getArray("records");
+var Email_Id = Email_Arr[0];
+
+return Email_Id.Email;
 }
 
 function get_DP_Id ($DPName)
