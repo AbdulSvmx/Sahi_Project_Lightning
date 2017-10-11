@@ -15,13 +15,28 @@ var $bo_pg_serviceMaintenanceContracts = new function bo_pg_serviceMaintenanceCo
 	this.btn_save = _submit(" Save ");
 	this.btn_newCoveredProduct = _button("New Covered Product");
 	this.txt_installedProduct = _textbox("Installed Product");
+<<<<<<< HEAD
 	this.txt_backToScon = _link("/lookup/",_rightOf(_cell("/Service/Maintenance Contract/")));
+=======
+	this.txt_slaTermsOnCoveredProduct = _textbox("SLA Terms");
+	this.txt_backToScon = _link("/lookup.*/",_rightOf(_cell("Service/Maintenance Contract")));
+>>>>>>> 4bab67453bb03fd303ffc7f57591c8be367bc0e1
 	this.btn_newCoveredLocation = _button("New Covered Location");
 	this.txt_location = _textbox("/Location/");
+	this.btn_newEntitledContact = _button("New Entitled Contact");
+	this.txt_contract = _textbox("/Contact/");
 	
 	//Object for Activate Contract on Service/Maintenance Contract
 	this.btn_activateContractSFM = _button("Activate Contract");
 	this.btn_activateContract = _span("Activate Contract");
+	this.chk_activeScon = _checkbox("Active");
+	
+	
+	// Click on the Warranty Terms on Applicable Product Detail Page
+	this.clickOnServiceContract = function($sconName){
+		
+		_click(_link(0,_rightOf(_cell("/labelCol/"))),$sconName,_near(_heading2("Covered Product Detail")));
+		};
 	
 };
 
