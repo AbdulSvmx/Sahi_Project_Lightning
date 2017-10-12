@@ -1,14 +1,9 @@
-Git Details
+Please go through the initial set-up process from the following links before proceeding:
 
-ASSUMPTIONS : Sahi is installed on pre-defined path which will be read by script
-Or Jenkins.  (Downlaod as a Zip from Git hub URL:)
+Installion of Sahi-Pro:
+https://servicemax.atlassian.net/wiki/spaces/QS/pages/121738657/Installation+-+Sahi-Pro
 
+Git Process:
+https://servicemax.atlassian.net/wiki/spaces/QS/pages/121971449/Repository+-+GitHub
 
-- Download/clone in the sahipro source scripts under â€œ/auto/sahi_pro/userdata/scriptsâ€�
-
-
-- Execute scripts
-- Git training
-
-New line..
-Lakshmisha
+NOTE: Download/clone in the sahipro source scripts under /auto/sahi_pro/userdata/scripts
