@@ -21,8 +21,16 @@ var $bo_act_locations = new function bo_act_locations() {
 		_setValue($bo_pg_locations.txt_zip, $zipCode);
 		_setValue($bo_pg_locations.txt_accountName, $accountName);
 		_click($bo_pg_locations.btn_save);
-		_logOutput($locName+ " location is created");
+		_assertNotVisible(_div("/Error: Invalid Data/"));
 		_wait(30000, _isVisible($locName));
+		_logOutput($locName+ " location is created");
 		return $locName;
+		};
+		
+		this.deleteLocation = function($location){
+			$bo_act_navigation.navigateToLocations();
+			_click(_link($location));
+			_click($bo_pg_locations.btn_delete);
+			
 		};
 };

@@ -4,7 +4,7 @@ var $bo_act_common = new function bo_act_common() {
 this.generateRandomName = function($Prefix){
   var $now = new Date();
     var $day = $now.getDate();
-    var $month = $now.getMonth();
+    var $month = $now.getMonth()+1;
     var $year = $now.getFullYear();
     var $hrs = $now.getHours();
 	var $min = $now.getMinutes();
@@ -30,7 +30,7 @@ this.currentDate= function ($seperator){
     return $currentDate;
 };
 
- this.getfutureDate = function($seperator){
+ this.getfutureDate = function($futureYear, $seperator){
 	var $now = new Date();
     var $monthday;// = $now.getDate();
     if ($now.getDate() < 10)
@@ -42,7 +42,26 @@ this.currentDate= function ($seperator){
         $month = "0" + $month;
 
     var $year = $now.getFullYear();
-	$year = $year+1;
+	$year = $year+$futureYear;
+    
+     var $currentDate = $month+ $seperator +$monthday  + $seperator+$year; 
+    return $currentDate;
+};
+
+
+this.getPastDate = function($pastYear, $seperator){
+	var $now = new Date();
+    var $monthday;// = $now.getDate();
+    if ($now.getDate() < 10)
+        $monthday = "0" + $now.getDate();
+    else
+        $monthday = $now.getDate();
+    var $month = $now.getMonth() + 1;
+    if ($month < 10)
+        $month = "0" + $month;
+
+    var $year = $now.getFullYear();
+	$year = $year-$pastYear;
     
      var $currentDate = $month+ $seperator +$monthday  + $seperator+$year; 
     return $currentDate;
@@ -50,7 +69,9 @@ this.currentDate= function ($seperator){
 
 this.searchfunction = function($searchValue){
 _getRecentWindow();
-_click(_span("/svmx_lookup_icon/"));
+_setStrictVisibilityCheck(true);
+_click(_span("/svmx-button/",_near(_div("svmx-column-inner",_in(_div("svmx-panel svmx-fit-item svmx-window-item svmx-panel-default"))))));
+_setStrictVisibilityCheck(false);
 _getRecentWindow();
 _click(_textbox("/svmx-picklist/"));
 _click(_listItem("Contains"));
@@ -87,11 +108,17 @@ this.nextMonthWithoutAppendingZero= function ($seperator){
 
 this.endDateCalculationForIB = function ($startDateExpectedOn_IB, $durationOfCoverage, $seperator){
 	var $dateInstalled = new Date($startDateExpectedOn_IB);
+	_logOutput($dateInstalled);
 	var $year = $dateInstalled.getFullYear();
+	_logOutput($year);
 	var $year = $year + $durationOfCoverage;
+	_logOutput($year);
 	var $month = $dateInstalled.getMonth();
+	_logOutput($month);
 	var $day = $dateInstalled.getDate();
+	_logOutput($day);
 	var $endDateCalculationForIB =  ($month+1)+$seperator+($day-1)+$seperator+$year;
+	_logOutput($endDateCalculationForIB);
 	return $endDateCalculationForIB;
 	};
 
@@ -100,10 +127,10 @@ this.cleanUpfunction = function($value)
 		_setValue(_textbox("phSearchInput"),$value);
 		_click(_button("Search"));
 		_click(_link($value));
+		_wait(3000, _isVisible($value));
 		_click(_button("Delete"));
 		_logOutput($value+ " is deleted");
-		
-		};
+	};
 
 };
 

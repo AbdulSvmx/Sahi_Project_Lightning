@@ -29,9 +29,10 @@ var $bo_act_warrantyTerms = new function bo_act_warrantyTerms() {
 		_setValue($bo_pg_warrantyTerms.txt_durationOfExpensesCoverage, $durationOfExpensesCoverage);
 		_setSelected($bo_pg_warrantyTerms.sel_unitOfTimeForExpensesCoverage, $unitOfTimeForExpensesCoverage);
 		
-		_click($bo_pg_products.btn_save);
-		_logOutput($warrantyName+ " Warranty Terms is created");
+		_click($bo_pg_warrantyTerms.btn_save);
+		_assertNotVisible(_div("/Error: Invalid Data/"));
 		_wait(30000, _isVisible($warrantyName));
+		_logOutput($warrantyName+ " Warranty Terms is created");
 		
 		//Actions for configuring Coverage "Effective From" in Warranty Terms
 		_selectDomain("/svmx/");
@@ -55,7 +56,8 @@ var $bo_act_warrantyTerms = new function bo_act_warrantyTerms() {
 		_click($bo_pg_warrantyTerms.btn_newApplicableProduct);
 		_setValue($bo_pg_warrantyTerms.txt_product, $product_Name);
 		_click($bo_pg_warrantyTerms.btn_save);
-		_click($bo_pg_warrantyTerms.link_warrantyTerm, $warrantyName);
+		_assertNotVisible(_div("/Error: Invalid Data/"));
+		$bo_pg_warrantyTerms.clickOnWarranty($warrantyName);
 		//return $callBack.returnResult([_isVisible($product_Name), "Applicable Product created",$product_Name] );
 		
 	};
@@ -73,3 +75,4 @@ var $bo_act_warrantyTerms = new function bo_act_warrantyTerms() {
 	
 
 };
+

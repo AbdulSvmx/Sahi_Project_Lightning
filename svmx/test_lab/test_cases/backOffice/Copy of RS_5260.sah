@@ -1,0 +1,43 @@
+
+//author - Noor Salma Sharieff
+
+var $RS_5260 = _testcase("$RS_5260","Create a PM Plan from Service Contract with coverage type as Account");
+$RS_5260.start();
+_setSpeed(100);
+
+//Pre - Condition 
+$bo_act_login.login($g_url, $bac_unBase, $bac_pwdBase);
+//var $accName = $bo_act_accounts.createAccount();
+//var $proName = $bo_act_products.createProduct("pro12", "--None--");
+//var $installedProduct = $bo_act_installedProduct.createInstalledProduct($proName,$accName,"");
+//var $slaterm = $bo_act_slaTerms.createSlaTerms("Default");
+//var $sconName = $bo_act_serviceMaintenanceContracts.createServiceMaintenanceContract($accName, $slaterm,1);
+//$bo_act_serviceMaintenanceContracts.AddCoveredProductToSCON($sconName, $installedProduct);
+
+//Test Steps
+var $PMPTempName = $bo_act_PMPlanTemplate.createTimeBasedPMPlanTemplate("pro69201717232", "Account (Visit Only)","","Months");
+var $PMPlan = $bo_act_PMPlan.createATimeBasedPMPlanFromScon("Scon692017172414", $PMPTempName,"Account (Visit Only)",1);
+
+//Validations
+_assertExists(_tableHeader("No records to display"),_under(_heading3("Preventive Maintenance Coverages")));
+
+var $startDate = _getText(_div(0,_rightOf(_cell("Start Date"))));
+	//_click(_link(0,_under(_tableHeader("Record Number",_under(_heading3("PM Schedule"))))));
+	_click(_link(0,_under(_tableHeader("/Record Number/",_near(_cell("PM Schedule"))))));
+var $lastRunDate = _getText(_div(0,_rightOf(_cell("Last Run Date"))));
+var $scheduleOnActual = _getText(_div(0,_rightOf(_cell("Scheduled On"))));
+_assertEqual($startDate,$lastRunDate, "Last Run Date is not equal to start date");
+
+_assert($lastRunDate =! $scheduleOnActual,"Issue in Last Run Date and Scheduled On date");
+ 
+//Clean up function
+
+var $datacreated = [$accName,$proName,$installedProduct,$slaterm,$PMPTempName,$PMPlan,$sconName];
+for (var i = 0; i < $datacreated.length; i++) {
+	$bo_act_common.cleanUpfunction($datacreated[i]);
+}
+
+$RS_5260.end();
+
+
+

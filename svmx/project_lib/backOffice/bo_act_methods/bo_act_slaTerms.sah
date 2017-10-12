@@ -16,6 +16,7 @@ var $bo_act_slaTerms = new function bo_act_slaTerms() {
 			_setValue($bo_pg_slaTerms.txt_defaultBusinessHours, $defaultBusinessHours);
 			_check($bo_pg_slaTerms.chk_active);
 			_click($bo_pg_slaTerms.btn_save);
+			_assertNotVisible(_div("/Error: Invalid Data/"));
 			_logOutput($slaName+ " SLA Term is created");
 			return $slaName;
 		  _wait(30000, _isVisible($SLAName));
@@ -38,6 +39,7 @@ var $bo_act_slaTerms = new function bo_act_slaTerms() {
 		_setValue($bo_pg_slaTerms.sel_customerCommitment, $customerCommitment);
 		_setSelected($bo_pg_slaTerms.sel_businessHoursFrom, $businessHoursFrom);
 		_click($bo_pg_slaTerms.btn_save);
+		_assertNotVisible(_div("/Error: Invalid Data/"));
 		_logOutput($slaName+ " Initial Response To SLA is Added");
 		_wait(30000, _isVisible(_button("New SLA Terms")));
 		return $slaName;
@@ -61,6 +63,7 @@ var $bo_act_slaTerms = new function bo_act_slaTerms() {
 		_setValue($bo_pg_slaTerms.sel_customerCommitment, $customerCommitment);
 		_setStrictVisibilityCheck(false);
 		_click($bo_pg_slaTerms.btn_save);
+		_assertNotVisible(_div("/Error: Invalid Data/"));
 		_logOutput($slaName+ " Onsite Response To SLA is Added");
 		_wait(30000, _isVisible(_button("New SLA Terms")));
 		return $slaName;
@@ -84,6 +87,7 @@ var $bo_act_slaTerms = new function bo_act_slaTerms() {
 		_setValue($bo_pg_slaTerms.sel_customerCommitment, $customerCommitment);
 		_setStrictVisibilityCheck(false);
 		_click($bo_pg_slaTerms.btn_save);
+		_assertNotVisible(_div("/Error: Invalid Data/"));
 		_logOutput($slaName+ " Onsite Response To SLA is Added");
 		_wait(30000, _isVisible(_button("New SLA Terms")));
 		return $slaName;
@@ -107,6 +111,7 @@ var $bo_act_slaTerms = new function bo_act_slaTerms() {
 		_setValue($bo_pg_slaTerms.sel_customerCommitment, $customerCommitment);
 		_setStrictVisibilityCheck(false);
 		_click($bo_pg_slaTerms.btn_save);
+		_assertNotVisible(_div("/Error: Invalid Data/"));
 		_logOutput($slaName+ " Onsite Response To SLA is Added");
 		_wait(30000, _isVisible(_button("New SLA Terms")));
 		return $slaName;
@@ -118,6 +123,12 @@ this.editSLA = function($slaName) {
 	_click($bo_pg_slaTerms.btn_editSLA);
 	_wait(30000, _isVisible(_cell("Initial Response")));
 	//return $callBack.returnResult([_isVisible($$warrantyName), "Warranty Name created",$$warrantyName] );
+};
+
+this.deleteSLATerm = function($slaName){
+	$bo_act_navigation.navigateToSlaTerms();
+	$bo_pg_slaTerms.selectSLA($slaName);
+	_click($bo_pg_slaTerms.btn_deleteSLA);
 };
 
 };
