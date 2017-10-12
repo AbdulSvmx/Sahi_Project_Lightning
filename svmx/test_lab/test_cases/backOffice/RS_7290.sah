@@ -60,7 +60,7 @@ var $pastYear = 2;  // Start Date for Service Contract
 var $futureYear = 2;  // End Date for Service Contract
 
 // Creation of Service Contracts
-var $serviceConractName = $bo_act_serviceMaintenanceContracts.createServiceContract($accountName, $slaName01, $futureYear, $pastYear);
+var $serviceConractName = $bo_act_serviceMaintenanceContracts.createServiceMaintenanceContract($accountName, $slaName01, $futureYear, $pastYear);
 
 //Activating Created Service Contract
 $bo_act_serviceMaintenanceContracts.activateServiceContract($serviceConractName);

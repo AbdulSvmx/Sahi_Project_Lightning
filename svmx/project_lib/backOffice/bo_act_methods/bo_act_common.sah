@@ -128,8 +128,7 @@ this.cleanUpfunction = function($value)
 		_wait(3000, _isVisible($value));
 		_click(_button("Delete"));
 		_logOutput($value+ " is deleted");
-		
-		};
+	};
 
 };
 
