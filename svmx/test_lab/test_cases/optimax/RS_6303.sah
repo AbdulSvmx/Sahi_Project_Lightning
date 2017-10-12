@@ -1,0 +1,108 @@
+	var $user_credentials = $excel.readFromCustomExcel("../optimax/op_excleData/automation.xlsx", "User_Details","","");
+    var $Dispatch_Process = $excel.readFromCustomExcel("../optimax/op_excleData/automation.xlsx", "Dispatch_Process","","");
+for(var $i=0;$i<$user_credentials.length;$i++)
+{
+var $g_un = $user_credentials[$i][0];
+var $g_pwd = $user_credentials[$i][1];
+var $g_url = $user_credentials[$i][2];
+}
+
+for(var $i=0;$i<$Dispatch_Process.length;$i++)
+{
+var $dp_Id = $Dispatch_Process[$i][1];
+var $dp_Terr_Id = $Dispatch_Process[$i][2];
+var $dp_BH = $Dispatch_Process[$i][3];
+}
+
+var $RS_6303 = _testcase("RS_6303", "Preferred Business Hours from Location");
+
+$RS_6303.start();
+	
+$bo_act_login.login($g_url, $g_un, $g_pwd);
+
+_set($login_result, _fetch(login($g_un,$g_pwd)));
+_log($login_result);
+
+_set($create_Location, _fetch(create_Location($dp_Terr_Id,$dp_BH)));
+_log($create_Location);
+
+//<browser>
+function login($g_un,$g_pwd){
+	
+	var $login_result = sforce.connection.login($g_un,$g_pwd);
+	return $login_result;
+}
+	
+function create_Location ($dp_Terr_Id,$dp_BH){
+
+    // Creating Service team
+    
+       var Team = new sforce.SObject("SVMXC__Service_Group__c");
+       Team.RecordTypeId='0123B000000CnBXQA0';
+       Team.Name="Loc_Team";
+       Team.SVMXC__Active__c='True';
+       Team.SVMXC__Country__c="India";
+       var result_Team = sforce.connection.create([Team]);
+       _log(" Team = "+result_Team[0].id);
+    
+    // Creating Technician with Service Team
+    
+        var Tech = new sforce.SObject("SVMXC__Service_Group_Members__c");
+        Tech.SVMXC__Service_Group__c=result_Team[0].id;
+        Tech.Name="Loc_Tech";
+        Tech.SVMXC__Active__c='True';
+        Tech.SVMXC__Street__c="MG road";
+        Tech.SVMXC__City__c="Bangalore";
+        Tech.SVMXC__Enable_Scheduling__c='True';
+        Tech.SVMXC__Zip__c='560034';
+        Tech.SVMXC__Country__c="India";
+        var result_Tech = sforce.connection.create([Tech]);
+       _log(" Technician = "+result_Tech[0].id);   
+
+//Creating Location With Preferred Business hour 
+
+var Loc = new sforce.SObject("SVMXC__Site__c");
+Loc.RecordTypeId='0123B000000CnBfQAK';
+Loc.Name = "Location_Auto";
+Loc.SVMXC__Preferred_Business_Hours__c=$dp_BH;
+Loc.SVMXC__Street__c = "MG Road";
+Loc.SVMXC__Country__c = "India";
+Loc.SVMXC__Zip__c='560034';
+var result_Loc = sforce.connection.create([Loc]);
+_log(" Location = "+result_Loc[0].id);
+
+
+//Creating Work order with Location
+
+var WO = new sforce.SObject("SVMXC__Service_Order__c");
+WO.SVMXC__Site__c=result_Loc[0].id;
+WO.SVMXC__Primary_Territory__c=$dp_Terr_Id;
+WO.SVMXC__Order_Type__c="Cleaning";
+WO.SVMXC__Order_Status__c='Open';	
+var result_WO = sforce.connection.create([WO]);
+_log(" Work order = "+result_WO[0].id);
+
+//Validating the Population 
+
+var wo_result = sforce.connection.query("Select Id, SVMXC__Preferred_Business_Hours__c from SVMXC__Service_Order__c Where Id = '"+result_WO[0].id+"'");
+var records = wo_result.getArray("records");
+_log("records = "+records);
+for (var i=0; i< records.length; i++) {
+var record = records[i];
+_log("record.SVMXC__Preferred_Business_Hours__c = "+record.SVMXC__Preferred_Business_Hours__c+" ,$dp_BH = "+$dp_BH);
+if(record.SVMXC__Preferred_Business_Hours__c == $dp_BH){
+_log("Preferred Business Hour is populated");
+}
+else{
+	_log("Preferred Business hour is not populated");
+}
+}
+
+return result_WO;
+
+} 
+
+
+//</browser>
+
+$RS_6303.end();

@@ -29,3 +29,6 @@ _setValue(_textbox("svmx-text-1398-inputEl"), "wee");
 _click(_span("svmx-button-1399-btnIconEl"));
 _click(_span("sfm-button-1486-btnIconEl"));
 _click(_span("Cancel[2]"));
+_selectWindow("Servicemax_Conf_Prof");
+_check(_radio("disp_setting:disp_setting:j_id1:DispSection:j_id37:j_id40[1]"));
+_check(_radio("disp_setting:disp_setting:j_id1:DispSection:j_id37:j_id40"));
