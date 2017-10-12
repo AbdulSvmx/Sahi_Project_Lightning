@@ -22,22 +22,25 @@ var $PMPTempName = $bo_act_PMPlanTemplate.createTimeBasedPMPlanTemplate($proName
 var $PMPlan = $bo_act_PMPlan.createATimeBasedPMPlanFromAcc($accName, $PMPTempName,"Location (Visit Only)");
 
 //Validations
-_assertExists(_tableHeader("No records to display"),_under(_heading3("Preventive Maintenance Coverages")));
+_assertExists($bo_pg_PMPlan.noRecordsToDisplayUnderPreventiveMaintenanceCoverages);
 
-var $startDate = _getText(_div(0,_rightOf(_cell("Start Date"))));
-_click(_link(0,_under(_tableHeader("Record Number",_under(_heading3("PM Schedule"))))));
-var $lastRunDate = _getText(_div(0,_rightOf(_cell("Last Run Date"))));
-var $scheduleOnActual = _getText(_div(0,_rightOf(_cell("Scheduled On"))));
+var $startDate = _getText($bo_pg_PMPlan.div_startDate);
+_click($bo_pg_PMPlan.link_firstLinkInPMSchedule);
+var $lastRunDate = _getText($bo_pg_PMPlan.txt_lastRunDate);
+var $scheduleOnActual = _getText($bo_pg_PMPlan.txt_scheduledOnDate);
 _assertEqual($startDate,$lastRunDate, "Last Run Date is not equal to start date");
 
 _assert($lastRunDate =! $scheduleOnActual,"Issue in Last Run Date and Scheduled On date");
 
-//Clean up function
-
-var $datacreated = [$accName,$proName,$installedProduct1,$installedProduct1,$location1,$location2,$PMPTempName,$PMPlan];
-for (var i = 0; i < $datacreated.length; i++) {
-	$bo_act_common.cleanUpfunction($datacreated[i]);
-}
+//Clean up functions
+$bo_act_accounts.deleteAccount($accName);
+$bo_act_products.deleteProduct($proName);
+$bo_act_installedProduct.deleteInstalledProduct($installedProduct1);
+$bo_act_installedProduct.deleteInstalledProduct($installedProduct2);
+$bo_act_locations.deleteLocation($location1);
+$bo_act_locations.deleteLocation($location2);
+$bo_act_PMPlanTemplate.deletePMPlanTemplate($PMPTempName);
+$bo_act_PMPlan.deletePMPlan($PMPlan);
 
 $RS_5248.end();
 

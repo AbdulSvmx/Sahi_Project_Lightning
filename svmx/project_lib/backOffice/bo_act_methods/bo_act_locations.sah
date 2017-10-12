@@ -26,4 +26,11 @@ var $bo_act_locations = new function bo_act_locations() {
 		_logOutput($locName+ " location is created");
 		return $locName;
 		};
+		
+		this.deleteLocation = function($location){
+			$bo_act_navigation.navigateToLocations();
+			_click(_link($location));
+			_click($bo_pg_locations.btn_delete);
+			
+		};
 };

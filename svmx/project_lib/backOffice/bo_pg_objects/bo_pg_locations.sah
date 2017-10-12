@@ -14,6 +14,7 @@ var $bo_pg_locations = new function bo_pg_locations(){
 	this.txt_zip = _textbox(0,_rightOf(_label("/Zip/")));
 	this.txt_accountName = _textbox("/\\*Account|^Account/");
 	this.btn_save = _submit(" Save ");
+	this.btn_delete = _button("Delete");
 	
 };
 
