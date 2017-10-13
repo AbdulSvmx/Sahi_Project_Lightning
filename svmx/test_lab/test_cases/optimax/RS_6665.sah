@@ -69,7 +69,7 @@ else{
 		_log($validate_SD_Vio_WO);
 		if($validate_SD_Vio_WO === true){
 			_log("for 15 wo, Invalid Service Duration violation is added");
-			_log("$op_utility.read_file($dp_Id,$login_result.sessionId = "+$op_utility.read_file($dp_Id,$login_result.sessionId,"Invalid Service Duration"));
+			_log("$op_utility.read_file($dp_Id,$login_result.sessionId = "+$op_utility.read_file($dp_Id,$login_result.sessionId,"Invalid Service Duration","Invalid Work Orders"));
 			if($op_utility.read_file($dp_Id,$login_result.sessionId,"Invalid Service Duration") === 15){
 				_log("15 Service Duration violation is added in the attachment");
 			}
