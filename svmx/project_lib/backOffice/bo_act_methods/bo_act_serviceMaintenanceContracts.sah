@@ -131,6 +131,8 @@ this.addEntitledContactsToServiceContract = function($sconName,$contact){
 	_assertNotVisible(_div("/Error: Invalid Data/"));
 	$bo_pg_serviceMaintenanceContracts.clickOnServiceContract($sconName);
 };
+
+
 	
 };
 
