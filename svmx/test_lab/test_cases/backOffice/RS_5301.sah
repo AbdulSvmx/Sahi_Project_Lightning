@@ -18,6 +18,11 @@ var $IBName = $bo_act_installedProduct.createInstalledProduct($proName,$accName,
 var $WONumber = $bo_act_installedProduct.createWOFromIB($IBName);
 var $slaterm = $bo_act_slaTerms.createSlaTerms("Default");
 $bo_act_slaTerms.addInitialResponseToSLA($slaterm, "WorkOrder","All", "High", "Created Date", 30, 60, "SLA");
+
+$bo_act_workOrders.editWorkOrder($WONumber);
+$bo_act_workOrders.updateTextBoxFields($bo_pg_workOrders.txt_slaTerms, $slaterm);
+$bo_act_workOrders.updateDropDownFields($bo_pg_workOrders.sel_priority, "High");
+
 //var $sconName = $bo_act_serviceMaintenanceContracts.createServiceMaintenanceContract($accName, $slaterm,1);
 //$bo_act_serviceMaintenanceContracts.AddCoveredProductToSCON($sconName, $installedProduct);
 
