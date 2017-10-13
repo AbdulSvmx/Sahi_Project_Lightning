@@ -22,6 +22,7 @@ $bo_act_slaTerms.addInitialResponseToSLA($slaterm, "WorkOrder","All", "High", "C
 $bo_act_workOrders.editWorkOrder($WONumber);
 $bo_act_workOrders.updateTextBoxFields($bo_pg_workOrders.txt_slaTerms, $slaterm);
 $bo_act_workOrders.updateDropDownFields($bo_pg_workOrders.sel_priority, "High");
+$bo_act_workOrders.saveWorkOrder();
 
 //var $sconName = $bo_act_serviceMaintenanceContracts.createServiceMaintenanceContract($accName, $slaterm,1);
 //$bo_act_serviceMaintenanceContracts.AddCoveredProductToSCON($sconName, $installedProduct);
