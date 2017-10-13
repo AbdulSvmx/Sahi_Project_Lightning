@@ -1,0 +1,117 @@
+var $an_ar_1641 = _testcase("ANA-1641","Basic of Attach Rate ");
+$an_ar_1641.start();
+var $un = "meghana.rao@servicemax.com";
+var $pwd = "salesforce100";
+var $url = "https://test.salesforce.com";
+var $data = _readExcelFile("../../analytics/an_excleData/an_Datasheet1.xlsx","Sheet1",true);
+var $Account = $data[1]["Account"];
+var $Technician = $data[1]["Technician"];
+var $Product = $data[1]["Product"];
+var $OrderStatus = $data[1]["OrderStatus"];
+var $Closedon = $data[1]["ClosedOn"];
+var $Site = $data[1]["Site"];
+var $Component = $data[1]["Component"];
+var $ScheduledDate = $data[1]["ScheduledDate"];
+$bo_act_login.login($url, $un, $pwd);
+
+// To create a SCON
+
+var $ana_1641_create_SCON = "SVMXC__Service_Contract__c SCON1 = new SVMXC__Service_Contract__c(Name = 'SCON Automation' , SVMXC__Company__c = '"+$Account+"' , SVMXC__Active__c = True, SVMXC__Start_Date__c = Date.valueOf('2017-01-01') , SVMXC__End_Date__c = Date.valueOf('2017-12-31') );insert SCON1;";
+//var $ana_1641_result = $op_act_sForceApiCall.sForceQuery($un, $pwd, $ana_1641_create_SCON , "create");
+var $ana_1641_query_SCON = "Select Id , Name from SVMXC__Service_Contract__c where Name = 'SCON Automation'";
+
+var $ana_1641_fetch_SCON  = $op_act_sForceApiCall.sForceQuery($un, $pwd, $ana_1641_query_SCON,"query");
+
+
+
+_log($ana_1641_fetch_SCON);
+
+var $ana_1641_SCON ;
+var $var3;
+var $varRV1;
+var $ana_1641_var1;
+$ana_1641_SCON  = $ana_1641_fetch_SCON[0].Id;
+var $ana_1641_SCOName = $ana_1641_fetch_SCON[0].Name;
+_log($ana_1641_SCON);
+_log($ana_1641_SCOName);
+/*$ana_1641_fetch_SCON.forEach(function($ana_1641_var1) {
+	
+	try {
+	$ana_1641_SCON = $ana_1641_var1.Id;
+	}
+	
+	catch(e) {
+		
+		
+		logMyErrors(e);
+	}
+	
+	
+	
+	
+
+});
+_log($ana_1641_SCON);
+
+// Create an IB
+
+var $ana_1641_create_IB = "SVMXC__Installed_Product__c IB01 = new SVMXC__Installed_Product__c(SVMXC__Company__c = '"+$Account+"' , Name = 'Installed Product Automation' , SVMXC__Status__c = 'Installed');insert IB01";
+var $ana_1641_result_IB  = $op_act_sForceApiCall.sForceQuery($un, $pwd, $ana_1641_create_IB , "create");
+var $ana_1641_get_IB = "Select Id from SVMXC__Installed_Product__c where Name = 'Installed Product Automation'";
+var $ana_1641_fetch_IB  = $op_act_sForceApiCall.sForceQuery($un, $pwd, $ana_1641_get_IB,"query");
+var $var2;
+var $ana_1641_IB_ID;
+$ana_1641_fetch_IB.forEach(function($var2) {
+	
+	$ana_1641_IB_ID = $var2.Id ;
+
+});
+
+_log($ana_1641_IB_ID);
+
+// Create Covered Product 
+var $ana_1641_create_CP = "SVMXC__Service_Contract_Products__c CP01 = new SVMXC__Service_Contract_Products__c(SVMXC__Installed_Product__c = '"+$ana_1641_IB_ID+"', SVMXC__Service_Contract__c = '"+$ana_1641_SCON+"', 	SVMXC__End_Date__c = System.Today() ); insert CP01;";
+var $ana_1641_result_CP = $op_act_sForceApiCall.sForceQuery($un, $pwd, $ana_1641_create_CP , "create");
+var $ana_1641_get_CP = "Select Id from SVMXC__Service_Contract_Products__c where Createdby.Id = '005q0000003GGfP' Order by CreatedDate DESC Limit 1";
+var $ana_1641_fetch_CP   = $op_act_sForceApiCall.sForceQuery($un, $pwd, $ana_1641_get_CP,"query");
+var $ana_1641_cp_ID;
+var $var3;
+$ana_1641_fetch_IB.forEach(function($var3) {
+	
+	$ana_1641_cp_ID = $var3.Id ;
+
+});
+
+/*$TopLevelWO.an_toplevelwo();
+$an_act_AttachRate.attachrate_installed_IB("ATTACH RATE 1");
+$an_act_AttachRate.ScheduleNotifications("meghana.rao@servicemax.com");
+
+var $ana_863_wo_id = null ;
+var $ana_863_service_request;
+var $ana_863_WO_Account1;
+var $ana_863_labortime;
+var $ana_863_deadtime;
+
+
+var $ana_863_query_RV1 = "Select SVMXC__Work_Order__c ,SVMXC__Service_Request__c, SVMXC__Account__c, SVMXC__Configuration_Name__c , SVMXC__Labor_Time__c , SVMXC__Dead_Time__c from SVMXC__SPM_Mean_Time_To_Repair__c where SVMXC__Work_Order__c ='"+ $ana_863_WO1 +"'";
+var $ana_863_resultRV1 = $op_act_sForceApiCall.sForceQuery($un, $pwd, $ana_863_query_RV1,"query");
+_wait(1000);
+$ana_863_resultRV1.forEach(function($varRV1) {
+	
+	$ana_863_wo_id = $varRV1.SVMXC__Work_Order__c;
+	$ana_863_WO_Account1 = $varRV1.SVMXC__Account__c;
+	$ana_863_labortime = $varRV1.SVMXC__Labor_Time__c;	
+	$ana_863_service_request = $varRV1.SVMXC__Service_Request__c;
+	$ana_863_deadtime = $varRV1.SVMXC__Dead_Time__c;
+
+	
+});
+_assertEqual(null ,$ana_863_labortime);
+_assertEqual(null, $ana_863_deadtime);
+_assertEqual(null, $ana_863_service_request); */
+$an_ar_1641.end();
+
+
+
+
+

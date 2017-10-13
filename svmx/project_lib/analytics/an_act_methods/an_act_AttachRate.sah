@@ -32,7 +32,9 @@ var $an_act_AttachRate = new function an_act_AttachRate(){
 		_click($an_pg_attachrate.btn_timechosen);
 		_setValue($an_pg_attachrate.txt_emailOnsuccess,$emailID );
 		_click($an_pg_attachrate.btn_sn_save);
+		_click($an_pg_attachrate.btn_OK);
 		_click($an_pg_attachrate.btn_run_now);
+		
 		
 	};
 	

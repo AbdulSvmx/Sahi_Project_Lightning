@@ -23,11 +23,11 @@ var $ana_897_WO1 ;
 var $var3;
 var $varRV1;
 _wait(1000);
-$ana_897_fetch.forEach(function($ana_897_var1) {
-	
-	$ana_897_WO1 = $ana_897_var1.Id;
 
-});
+	
+	$ana_897_WO1 = $ana_897_fetch[0].Id;
+
+
 _log($ana_897_WO1);
 
 var $StartDate = $data[1]['WDStartDate'];
@@ -49,14 +49,14 @@ var $enddate ;
 var $deadtime;
 var $var2;
 _wait(1000);
-$ana_897_fetch_wd.forEach(function($var2) {
+
 	
-	$ana_897_wd1 = $var2.Id ;
-	$startdate = $var2.SVMXC__Start_Date_and_Time__c;
-	$enddate = $var2.SVMXC__End_Date_and_Time__c;
-	$deadtime = $var2.custom_dead_time__c;
+	$ana_897_wd1 = $ana_897_fetch_wd[0].Id ;
+	$startdate = $ana_897_fetch_wd[0].SVMXC__Start_Date_and_Time__c;
+	$enddate = $ana_897_fetch_wd[0].SVMXC__End_Date_and_Time__c;
+	$deadtime = $ana_897_fetch_wd[0].custom_dead_time__c;
 		
-});
+
 
 // To calculate the time difference considering business hours is 24 hours
 
@@ -114,14 +114,14 @@ var $enddate ;
 var $deadtime;
 var $var2;
 _wait(1000);
-$ana_897_fetch_wd.forEach(function($var2) {
+
 	
-	$ana_897_wd1 = $var2.Id ;
-	$startdate = $var2.SVMXC__Start_Date_and_Time__c;
-	$enddate = $var2.SVMXC__End_Date_and_Time__c;
-	$deadtime = $var2.custom_dead_time__c;
+	$ana_897_wd1 = $ana_897_fetch_wd[0].Id ;
+	$startdate = $ana_897_fetch_wd[0].SVMXC__Start_Date_and_Time__c;
+	$enddate = $ana_897_fetch_wd[0].SVMXC__End_Date_and_Time__c;
+	$deadtime = $ana_897_fetch_wd[0].custom_dead_time__c;
 		
-});
+
 
 var $ana_897_wo_id2 = null;
 var $ana_897_WO_Account2;

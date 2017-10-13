@@ -17,14 +17,15 @@ var $an_pg_attachrate = new function an_pg_attachrate()
     this.btn_OK = _span("OK");
     
     this.btn_schedulenotifications = _span("Schedule & Notifications[1]");
-    this.list_timezone = _textbox("timezone[1]");
-    this.btn_ist_timezone = _listItem("(GMT+05:30) India Standard Time (Asia/Kolkata)[1]");
-    this.list_period = _textbox("period[1]");
-    this.btn_daily = _listItem("Daily[1]");
-    this.list_time_at = _textbox("timeAt[1]");
-    this.btn_timechosen = _listItem("7:00 AM[1]");
-    this.txt_emailOnsuccess = _textbox("emailOnSuccess[1]");
-    this.btn_sn_save = _span("Save[2]");
-    this.btn_run_now = _link("Run Now[1]");
+    this.list_timezone = _textbox("timezone");
+    this.btn_ist_timezone = _listItem("(GMT+05:30) India Standard Time (Asia/Kolkata)");
+    this.list_period = _textbox("period");
+    this.btn_daily = _listItem("Daily");
+    this.list_time_at = _textbox("timeAt");
+    this.btn_timechosen = _listItem("7:00 AM");
+    this.txt_emailOnsuccess = _textbox("emailOnSuccess");
+    this.btn_sn_save = _span("Save");
+    this.btn_run_now = _link("Run Now");
+    
 
 };

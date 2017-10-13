@@ -24,11 +24,10 @@ var $ana_863_WO1 ;
 var $var3;
 var $varRV1;
 _wait(1000);
-$ana_863_fetch.forEach(function($ana_863_var1) {
-	
-	$ana_863_WO1 = $ana_863_var1.Id;
 
-});
+	$ana_863_WO1 = $ana_863_fetch[0].Id;
+	
+	
 _log($ana_863_WO1);
 
 var $StartDate = $data[1]['WDStartDate'];
@@ -49,15 +48,13 @@ var $startdate ;
 var $enddate ;
 var $deadtime;
 var $var2;
-_wait(1000);
-$ana_863_fetch_wd.forEach(function($var2) {
-	
-	$ana_863_wd1 = $var2.Id ;
-	$startdate = $var2.SVMXC__Start_Date_and_Time__c;
-	$enddate = $var2.SVMXC__End_Date_and_Time__c;
-	$deadtime = $var2.custom_dead_time__c;
+
+	$ana_863_wd1 = $ana_863_fetch_wd[0].Id ;
+	$startdate = $ana_863_fetch_wd[0].SVMXC__Start_Date_and_Time__c;
+	$enddate = $ana_863_fetch_wd[0].SVMXC__End_Date_and_Time__c;
+	$deadtime = $ana_863_fetch_wd[0].custom_dead_time__c;
 		
-});
+
 
 
 $TopLevelSR.an_topLevelSR();
@@ -82,7 +79,6 @@ $ana_863_resultRV1.forEach(function($varRV1) {
 	$ana_863_service_request = $varRV1.SVMXC__Service_Request__c;
 	$ana_863_deadtime = $varRV1.SVMXC__Dead_Time__c;
 
-	
 });
 _assertEqual(null ,$ana_863_labortime);
 _assertEqual(null, $ana_863_deadtime);
