@@ -15,18 +15,12 @@ var $bo_pg_serviceMaintenanceContracts = new function bo_pg_serviceMaintenanceCo
 	this.btn_save = _submit(" Save ");
 	this.btn_newCoveredProduct = _button("New Covered Product");
 	this.txt_installedProduct = _textbox("Installed Product");
-<<<<<<< HEAD
 	this.txt_backToScon = _link("/lookup/",_rightOf(_cell("/Service/Maintenance Contract/")));
 	this.txt_slaTermsOnCoveredProduct = _textbox("SLA Terms");
 	this.txt_backToScon = _link("/lookup.*/",_rightOf(_cell("Service/Maintenance Contract")));
-=======
-
 	this.txt_backToScon = _link("/lookup/",_rightOf(_cell("/Service/Maintenance Contract/")));
-
 	this.txt_slaTermsOnCoveredProduct = _textbox("SLA Terms");
 	this.txt_backToScon = _link("/lookup.*/",_rightOf(_cell("Service/Maintenance Contract")));
-
->>>>>>> 02f4a10ae38fd8fc4a1804b9b9b3a4cb896b6e12
 	this.btn_newCoveredLocation = _button("New Covered Location");
 	this.txt_location = _textbox("/Location/");
 	this.btn_newEntitledContact = _button("New Entitled Contact");
