@@ -145,4 +145,11 @@ var $bo_act_navigation = new function bo_act_navigation() {
      	_click($bo_pg_home.btn_allTabs);
     	    _click($bo_pg_home.link_preventiveMaintenancePlans);
      };
+     
+     this.navigateToWorkOrdersTab = function(){
+    	 _click($bo_pg_home.btn_allTabs);
+    	 _setStrictVisibilityCheck(true);
+    		_click($bo_pg_home.link_customWorkOrders);
+    		_setStrictVisibilityCheck(false);
+     };
 };

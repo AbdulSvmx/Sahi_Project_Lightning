@@ -33,5 +33,14 @@ var $bo_act_installedProduct = new function bo_act_installedProduct() {
 		
 	};
 
-	
+	this.createWOFromIB = function($IBName){
+		$bo_act_navigation.navigateToInstalledProductPage();
+		_click(_link($IBName));
+		_selectDomain("/svmx/");
+		_click($bo_pg_installedProducts.btn_createWorkOrder);
+		_selectDomain();
+		_wait(60000,_isVisible("Create Work Order from Installed Product"));
+		_click($bo_pg_installedProducts.btn_sfmSave);
+		return _getText($bo_pg_installedProducts.txt_workOrderNumber);
+	};
 };

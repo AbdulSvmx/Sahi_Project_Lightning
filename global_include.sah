@@ -1,4 +1,5 @@
 // Normalized path that will work for both windows and unix
+_setSpeed(100);
 
 //Add All Global Variables here
 var $g_url = "https://test.salesforce.com/";
