@@ -1,5 +1,5 @@
-//Tests are to be written here
-//==============
+//Tests are to be written here  [Bhupendra Singh Chouhan]
+//============== 
 
 //Pre - Condition Test Data
 var $recordType = ["Depot","Depot Child","Depot Parent","Standard Location"];
@@ -53,7 +53,7 @@ _assertEqual($materialPercentCovered,$materialPercentCoveredActulOn_IB,"Actual a
 _assertEqual($laborPercentCovered,$timePercentCoveredActulOn_IB,"Actual and expected Time % covered are not same");
 _assertEqual($expensesPercentCovered,$expensesPercentCoveredActulOn_IB,"Actual and expected Expenses % covered are not same");
 
-var $startDateExpectedOn_IB = _getText(_div(0,_rightOf(_cell("Date Installed"))));
+var $startDateExpectedOn_IB = _getText(_div(0,_rightOf(_cell("/Date Installed/"))));
 
 var $endDateExpectedOn_IB =  $bo_act_common.endDateCalculationForIB($startDateExpectedOn_IB, $durationOfCoverage, $seperator);
 _logOutput($endDateExpectedOn_IB);
@@ -65,6 +65,13 @@ var $endDateActulOn_IB = _getText(_cell(0,_under(_tableHeader("End Date"))));
 _assertEqual($startDateExpectedOn_IB,$startDateActulOn_IB,"Actual and expected Start Dates are not same");
 _assertEqual($endDateExpectedOn_IB,$endDateActulOn_IB,"Actual and expected End Dates are not same");
 
+//Clean up function
+
+var $datacreated = [$warrantyName,$IBName,$locationName,$productName,$contactName,$accountName,];
+for (var i = 0; i < $datacreated.length; i++) {
+	$bo_act_common.cleanUpfunction($datacreated[i]);
+}
+$bo_act_login.logOut();
+
 $RS_7288.end();
-//}
 

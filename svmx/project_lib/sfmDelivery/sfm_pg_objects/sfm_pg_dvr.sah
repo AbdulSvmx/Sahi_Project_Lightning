@@ -1,11 +1,10 @@
 /**
-* SFM  transaction & designer Data Validation Rul page object repository
+* SFM  transaction & designer Data Validation Rule page object repository
 */
 
 var $sfm_pg_dvr = new function sfm_pg_dvr() {
 	
 	this.btn_newRule = _f("main").s_button("New[5]");
-	//_f("main").s_textinput("ruleName");
 	this.txt_ruleName = _f("main").s_textinput("ruleName");
 	this.txt_ruleId = _f("main").s_textinput("ruleID");
 	this.txt_targetObject = _f("main").s_combobox("objCombo");
@@ -24,25 +23,23 @@ var $sfm_pg_dvr = new function sfm_pg_dvr() {
 	this.btn_saveDVR = _f("main").s_button("Save");
 	this.btn_addToProcess = _f("main").s_button("Add To Process");
 	
-	this.setRule = new function($fieldname, $condition, $operand,$value){
+	this.setRule = function($fieldName, $condition, $operand,$value){
 		_setSelected($sfm_pg_dvr.txt_selectfield,$fieldName);
 		_setSelected($sfm_pg_dvr.txt_condition,$condition);
 		
 		if($operand=='Value'){
 			_setSelected($sfm_pg_dvr.txt_operand,$operand);
-			_setSelcted($sfm_pg_dvr.txt_value,$value);
+			_setValue($sfm_pg_dvr.txt_value,$value);
 		}
 		else if($operand=='Function'){
 			_setSelected($sfm_pg_dvr.txt_operand,$operand);
-			_setSelcted($sfm_pg_dvr.txt_valueFunction,$value);	
+			_setSelected($sfm_pg_dvr.txt_valueFunction,$value);	
 		}
 		else{
 			_setSelected($sfm_pg_dvr.txt_operand,$operand);
-			_setSelcted($sfm_pg_dvr.txt_valueField,$value);	
-		}
-		
-		
-	}
+			_setSelected($sfm_pg_dvr.txt_valueField,$value);	
+		}		
+	};
 
 
 };

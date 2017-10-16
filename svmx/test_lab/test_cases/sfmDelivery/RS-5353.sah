@@ -5,47 +5,86 @@ $un = "vansys@pqtpart1.com";
 $pwd = "servicemax2";
 _setSpeed(100);
 $bo_act_login.login($url, $un, $pwd);
+
 $bo_act_navigation.navigateToSfmTransactionDesigner();
 _setSpeed(100);
 $sfmNameToBeCloned = "Manage Work Order Lines - Usage";
-$sfmName = "Reg_5353_001";
+$sfmName = "RS_5353_TDM016";
 $isCustom = false;
 var $sfmTemplate = "SVMXSTD: Manage WO Usage Lines";
 var $sfmTemplateSaveAsName = $sfmName;
-var $fieldName = "Problem Description";
 var $containerName = "Order Status";
-var $rulename ="5353Rule1"
+var $rulename ="5353Rule1";
+var $targetObject ="Work Order";
+var $ruleDescription = "Actual Initial Response Not Equal Function Today, City Starts with Value M";
+var $fieldArray = ["","City","Actual Initial Response"];
+var $conditionArray = ["","Equals","Not Equal"];
+var $operandArray =["","Value", "Function", "Field"];
+var $valueArray =["","M", "Today"];
 
 
-$bo_act_SFM.cloneSFM($sfmNameToBeCloned, $sfmName, $isCustom, $sfmTemplate, $sfmTemplateSaveAsName, $fieldName, $containerName);
+//clone tmd016
+
+//$bo_act_SFM.cloneSFM($sfmNameToBeCloned, $sfmName, $isCustom, $sfmTemplate, $sfmTemplateSaveAsName, $fieldName, $containerName);
+
+// open the above created SFM
 _click($bo_pg_sfmTransactionAndDesigner.btn_yourCustomSfmTransactions);
 _setValue($bo_pg_sfmTransactionAndDesigner.txt_yourCustomSfmTransactionsQuickFind, $sfmName);
 _click(_f("main").s_label($sfmName));
-//_click(_f("main").tab("Screen Designer"));
-
 _click($bo_pg_sfmTransactionAndDesigner.btn_screenDesigner);
 
+// add actual intial response to screen designer
+/*$bo_pg_sfmTransactionAndDesigner.addField($fieldName1, $containerName);
+_click(_f("main").s_button("Save[3]"));
+_wait(6000,_isVisible(_f("main").label("Page saved")));
+*/
+//create Data validation rule
+//_click($sfm_pg_dvr.btn_dataValidationRules);
 _click(_f("main").tab("Data Validation Rules"));
-_click(_f("main").s_button("New[5]"));
-_setSelected(_f("main").s_combobox("objCombo"), "Work Order");
+_wait(6000,_isVisible($sfm_pg_dvr.btn_newRule));
+_click($sfm_pg_dvr.btn_newRule);
+_setSelected($sfm_pg_dvr.txt_targetObject, $targetObject);
+_setValue($sfm_pg_dvr.txt_ruleName, $rulename);
+_setValue($sfm_pg_dvr.txt_ruleId,"");
+_setValue($sfm_pg_dvr.txt_ruleId, $rulename);	
+_setValue($sfm_pg_dvr.txt_ruleDescription,$ruleDescription);
+_wait(3000);
 
-_setValue(_f("main").s_textinput("ruleName"), $rulename);
-_setValue(_f("main").s_textinput("ruleID"), $rulename);
+for(var $i=1; $i<=$fieldArray.length; $i++){
+	
+	_setSelected(_f("main").s_combobox("fieldCombo"+"["+$i+"]"),$fieldArray[$i]);
+	_setSelected(_f("main").s_dropdownlist("conditionsCombo"+"["+$i+"]",$conditionArray[$i]));
+	if($operandArray[$i]=='Value'){
+		_setSelected($sfm_pg_dvr.txt_operand,$operandArray[$i]);
+		_setValue($sfm_pg_dvr.txt_value,$valueArray[$i]);
+	}
+	else if($operandArray[$i]=='Function'){
+		_setSelected($sfm_pg_dvr.txt_operand,$operandArray[$i]);
+		_setSelected($sfm_pg_dvr.txt_valueFunction,$valueArray[$i]);	
+	}
+	else{
+		_setSelected($sfm_pg_dvr.txt_operand,$operandArray[$i]);
+		_setSelected($sfm_pg_dvr.txt_valueField,$valueArray[$i]);	
+	}	
+	_click($sfm_pg_dvr.btn_addRow);
+}
 
-_setValue(_f("main").s_textarea("description"), "Actual Initial Response Not Equal Function Today, City Starts with Value M"); 
-_setSelected(_f("main").s_combobox("fieldCombo[1]"), "City");
-_setSelected(_f("main").s_dropdownlist("conditionsCombo[1]"), "Starts With");
-_setValue(_f("main").s_textinput("operandValue"), "M");
-_click(_f("main").s_button("Add a row[1]"));
 
-_setSelected(_f("main").s_combobox("fieldCombo[2]"), "Actual Initial Response");
-_setSelected(_f("main").s_dropdownlist("conditionsCombo[2]"), "Not Equal");
-_setSelected(_f("main").s_dropdownlist("operandTypeCombo[1]"), "Function");
-_setSelected(_f("main").s_combobox("picklist"), "Today");
-_setValue(_f("main").s_textinput("advExpIP"), "1 AND 2");
-_setSelected(_f("main").s_dropdownlist("msgType"), "Error");
-_setValue(_f("main").s_textarea("message"), "Actual Initial Response Not Equal Function Today, City Starts with Value M");
-_click(_f("main").s_button("Save"));
-_click(_f("main").s_button("Add To Process"))
+
+
+
+//$sfm_pg_dvr.setRule($fieldName, $condition, $operand, $value);
+//_click($sfm_pg_dvr.btn_addRow);
+
+
+//$sfm_pg_dvr.setRule($fieldName1, $condition1, $operand1, $value1);
+_click($sfm_pg_dvr.btn_saveDVR);
+_click($sfm_pg_dvr.btn_addToProcess);
+//_setSelected(_f("main").s_combobox("fieldCombo"+"["+$i+"]"),"value");
+
 _click(_f("main").s_button("Quick Save"));
-_click(_f("main").s_button("Save & Close"));
+_click(_f("main").s_button("Save & Close")); 
+
+_wait(30000,_isVisible(_link("Home")));
+
+
