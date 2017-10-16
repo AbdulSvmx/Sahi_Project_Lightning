@@ -3,75 +3,107 @@
  * SFM transaction & designer page object repository
  */
 var $bo_pg_sfmTransactionAndDesigner = new function bo_pg_sfmTransactionAndDesigner() {
-	this.txt_standardSfmTransactionQuickFind = _f("main").s_textinput("searchText[2]");
-	this.btn_standardSfmTransaction = _f("main").tab("Standard SFM Transactions");
-	this.btn_yourCustomSfmTransactions = _f("main").tab("Your Custom SFM Transactions");
-	this.txt_yourCustomSfmTransactionsQuickFind = _f("main").s_textinput("searchText[1]").near(_f("main").tab("Your Custom SFM Transactions"));
-	this.btn_clone = _f("main").s_button("Clone");
-	this.txt_name = _f("main").s_textinput("pName");
-	this.txt_sfmTransactionId = _f("main").s_textinput("pId");
-	this.btn_qualifyingCriteriaAndFieldMapping = _f("main").tab("Qualifying Criteria and Field Mappings");
-	this.btn_screenDesigner = _f("main").tab("Screen Designer");
-	this.lbl_workOrder = _f("main").s_richtext("Work Order");
-	this.sel_sfmTemplate = _f("main").s_combobox("searchCombo[3]");
-	this.txt_sfmSavePageLayoutAs = _f("main").s_textinput("Save page layout as");
-	this.txt_sfmSavePageLayoutAsId = _f("main").s_textinput("advTxt");
-	this.btn_addFieldToPage = _f("main").s_button("Add Field to Page");
-	this.txt_quickFindField = _f("main").s_textinput("searchText").near(_f("main").s_button("Add Field to Page"));
-	this.btn_quickSave = _f("main").s_button("Save As[3]");
-	this.btn_saveAndclose = _f("main").s_button("Save & Close");
-	this.alert_sfm = _f("main").alert("Please enter a unique Page Name The page ID you have entered already exists. Please enter a unique ID");
-	this.btn_ok = _f("main").button("OK");
-	this.btn_backToList = _f("main").s_button("Back To List");
-	this.btn_yes = _f("main").button("Yes");
 
-	/**
-	 * Select a SFM from the SFM list, set $isCustom to select from custom SFM
-	 * list elements.
-	 * 
-	 * @param $sfmName
-	 * @param $isCustom
-	 */
-	this.selectSFM = function($sfmName, $isCustom) {
-		if ($isCustom) {
-			_wait(3000);
-			_click($bo_pg_sfmTransactionAndDesigner.btn_yourCustomSfmTransactions);
-			_setValue($bo_pg_sfmTransactionAndDesigner.txt_yourCustomSfmTransactionsQuickFind, $sfmName);
+    this.txt_standardSfmTransactionQuickFind= _f("main").s_textinput("searchText[2]");
+    this.btn_standardSfmTransaction= _f("main").tab("Standard SFM Transactions");
+    this.btn_yourCustomSfmTransactions = _f("main").tab("Your Custom Sjavascript:void(0)FM Transactions");
+    //this.btn_yourCustomSfmTransactions = _f("main").tab("Your Custom SFM Transactions");
+    this.txt_yourCustomSfmTransactionsQuickFind = _f("main").s_textinput("searchText[1]").near(_f("main").tab("Your Custom SFM Transactions"));
+    this.btn_clone = _f("main").s_button("Clone");
+    this.txt_name = _f("main").s_textinput("pName");
+    this.txt_sfmTransactionId = _f("main").s_textinput("pId");
+    this.btn_qualifyingCriteriaAndFieldMapping = _f("main").tab("Qualifying Criteria and Field Mappings");
+    this.btn_screenDesigner = _f("main").tab("Screen Designer");
+    this.lbl_workOrder = _f("main").s_richtext("Work Order");
+    this.sel_sfmTemplate = _f("main").s_combobox("searchCombo[3]");
+    this.txt_sfmSavePageLayoutAs = _f("main").s_textinput("Save page layout as");
+    this.txt_sfmSavePageLayoutAsId = _f("main").s_textinput("advTxt");
+    this.btn_addFieldToPage = _f("main").s_button("Add Field to Page");
+    this.txt_quickFindField = _f("main").s_textinput("searchText").near(_f("main").s_button("Add Field to Page"));
+    this.btn_quickSave = _f("main").s_button("Save As[3]");
+    this.btn_saveAndclose = _f("main").s_button("Save & Close");
+    this.alert_sfm = _f("main").alert("Please enter a unique Page Name The page ID you have entered already exists. Please enter a unique ID");
+    this.btn_ok = _f("main").button("OK");
+    this.btn_backToList = _f("main").s_button("Back To List");
+    this.btn_yes = _f("main").button("Yes");
+    this.btn_newSFM=_f("main").s_button("New SFM Transaction");
+	this.btn_finalQuickSave = _f("main").s_button("Quick Save");
+	this.alert_proceedAnyway=_f("main").button("Proceed Anyway");
+	
+	
+	//This code is to click on new button on custom SFM transaction
+	this.btn_newSFMTransaction=_f("main").s_button("New SFM Transaction");//duplicate
+	
+	//This function is to select a checklist SFM time from drop down
+	this.lbl_checklistOb=_f("main").s_dropdownlist("purposeCombo"), "to generate a Checklist/Survey type of Process";
 
-		} else {
-			_setValue($bo_pg_sfmTransactionAndDesigner.txt_standardSfmTransactionQuickFind, $sfmName);
+	//This function is to select workorder object from drop down
+		this.sourceComboBox=_f("main").s_combobox("objCombo1");
+	
+	//click on Ok on pop up appear after selecting work object in Propoties tab of SFm designer
+	this.btn_popUpOK=_click(_f("main").s_button("OK"));
+	
+	this.combo_CTRecord = _f("main").s_combobox("objCombo1[1]");
+	
+	this.childSource_chkBox = _f("main").s_checkbox("Work Detail (Work Order)");
+		
+	this.childCTRecord_chkBox = _f("main").s_checkbox("Work Detail (Work Order)[1]");
+	
+	//Drop Down List in Qualifying Criteria and Field Mappings
+	this.dropDownList = _f("main").s_dropdownlist("objCombo");
+	
+	this.selectComboBox = function($elementName,$elementItemName){
+			_setSelected(_f("main").s_combobox($elementName), $elementItemName);
+		
 		}
-		if (_isVisible(_f("main").s_checkbox(0).leftOf(_f("main").s_label($sfmName)))) {
-			_click(_f("main").s_checkbox(0).leftOf(_f("main").s_label($sfmName), 10, 10));
+		
+		//Enter the name of checklist type SFM transaction
+	this.setSfmName=function($sfmName){
+		_setValue(_f("main").s_textinput("pName"), ($sfmName));
+	}
+		
+	this.child_checkBox =function($orderTypeName){
+			_f("main").s_checkbox($orderTypeName);
+	}
+		
+	this.source_ctRecord_comboBox = function($comboName){
+			_f("main").s_combobox($comboName);	
+	}	
+//end here_by Mamta
 
-		} else {
-			_click(_f("main").s_checkbox(2).leftOf(_f("main").s_label($sfmName), 10, 10));
 
-		}
+    /**
+     * Select a SFM from the SFM list, set $isCustom to select from custom SFM list elements.
+     *@param $sfmName
+     *@param $isCustom
+     */
+    this.selectSFM = function($sfmName, $isCustom) {
+	if ($isCustom) {
+		_wait(3000);
+	 _click($bo_pg_sfmTransactionAndDesigner.btn_yourCustomSfmTransactions);
+	}
+	_click(_f("main").s_checkbox(2).leftOf(_f("main").s_label($sfmName), 10, 10));
+	_takePageScreenShot();
+    };
 
-		_takePageScreenShot();
-	};
+    /**
+     * Add a field in the SFM Designer page
+     * @param $fieldName
+     * @param $containerName
+     */
+    this.addField = function($fieldName, $containerName) {
+	_click(_f("main").fieldrenderer("[object Object]").near(_f("main").formitemlabel($containerName)));
+	_setValue($bo_pg_sfmTransactionAndDesigner.txt_quickFindField, $fieldName);
+	_click(_f("main").s_label($fieldName));
+	_click($bo_pg_sfmTransactionAndDesigner.btn_addFieldToPage);
+    };
 
-	/**
-	 * Add a field in the SFM Designer page
-	 * 
-	 * @param $fieldName
-	 * @param $containerName
-	 */
-	this.addField = function($fieldName, $containerName) {
-		_click(_f("main").fieldrenderer("[object Object]").near(_f("main").formitemlabel($containerName)));
-		_setValue($bo_pg_sfmTransactionAndDesigner.txt_quickFindField, $fieldName);
-		_click(_f("main").s_label($fieldName));
-		_click($bo_pg_sfmTransactionAndDesigner.btn_addFieldToPage);
-	};
-
-	/**
-	 * Delete a field from the SFM Designer page
-	 * 
-	 * @param $fieldName
-	 */
-	this.deleteField = function($fieldName) {
-		_click(_f("main").s_button("closeBtn").near(_f("main").s_richtext($fieldName)));
-	};
+    /**
+     * Delete a field  from the SFM Designer page
+     * @param $fieldName
+     */
+    this.deleteField = function($fieldName) {
+	_click(_f("main").s_button("closeBtn").near(_f("main").s_richtext($fieldName)));
+    };
 
 };

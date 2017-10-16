@@ -14,12 +14,12 @@ var $bo_act_workOrders = new function bo_act_workOrders() {
 		_click($bo_pg_workOrders.btn_editWorkOrder);
 	};
 	this.updateTextBoxFields = function($object,$objectValue){
-		_setValue($object+","+$objectValue);
+		_setValue($object,$objectValue);
 		//return $callBack.returnResult([_isVisible($accountName), "Account not created",$accountName] );
 	};
 	
 	this.updateDropDownFields = function($object,$objectValue){
-		_setSelected($object+","+$objectValue);
+		_setSelected($object,$objectValue);
 		//return $callBack.returnResult([_isVisible($accountName), "Account not created",$accountName] );
 	};
 	

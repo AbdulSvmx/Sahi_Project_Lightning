@@ -29,9 +29,9 @@ $bo_act_workOrders.saveWorkOrder();
 
 //Validations
 var $ActualInitialResponse = _getText($bo_pg_workOrders.txt_slaClockInitialResponse);
-AssertEqual($ActualInitialResponse,"Initial Response 00:00:00:00","SLA Clock Initial Response does not countdown");
-_assertEqual(_getText(_div(0,_rightOf(_span("/Initial Response Internal By/")))),"","Issue in Initial Response Internal By field");
-_assertEqual(_getText(_div(0,_rightOf(_span("/Initial Response Customer By/")))),"","Issue in Initial Response Customer By field");
+_assertEqual($ActualInitialResponse,"Initial Response 00:00:00:00","SLA Clock Initial Response does not countdown");
+_assertEqual(_getText(_div(0,_rightOf(_span("/Initial Response Internal By/"))))," ","Issue in Initial Response Internal By field");
+_assertEqual(_getText(_div(0,_rightOf(_span("/Initial Response Customer By/"))))," ","Issue in Initial Response Customer By field");
 
 //Clean up function
 

@@ -48,7 +48,7 @@ var $bo_act_installedProduct = new function bo_act_installedProduct() {
 		$bo_act_navigation.navigateToInstalledProductPage();
 		_click(_link($IBName));
 		_selectDomain("/svmx/");
-		_click($bo_pg_installedProducts.SFWcreateSupportCase);
+		_click($bo_pg_installedProducts.btn_SFWcreateSupportCase);
 		_selectDomain();
 		_wait(60000,_isVisible("Create Case from Installed Product"));
 		_setValue($bo_pg_installedProducts.txt_SFMcreateSupportCaseStatus,$status);

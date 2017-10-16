@@ -145,6 +145,33 @@ var $bo_act_navigation = new function bo_act_navigation() {
      	_click($bo_pg_home.btn_allTabs);
     	    _click($bo_pg_home.link_preventiveMaintenancePlans);
      };
+
+     /**
+      * Navigates to a SFM Wizards
+      * @returns boolean
+      */
+ 	this.navigateToSfmWizard = function() {
+ 	 this.navigateToSvmxSetup();
+ 	_click($bo_pg_servicemaxSetup.btn_serviceFlowManager);
+ 	_click($bo_pg_servicemaxSetup.btn_sfmWizard);
+ 	_setSpeed(3000);
+ 	return $callBack.returnResult(_exists($bo_pg_sfmWizard.wizardLabel));
+
+     };
+
+ 	  /**
+      * Navigates to a SFM App Permission
+      * @returns boolean
+      */this.navigateToSfmAppPermission = function() {
+ 	 this.navigateToSvmxSetup();
+ 	_click($bo_pg_servicemaxSetup.btn_serviceFlowManager);
+ 	_click($bo_pg_servicemaxSetup.btn_sfmAppPermission);
+ 	_setSpeed(3000);
+ 	return $callBack.returnResult(_exists($bo_pg_sfmWizard.wizardLabel));
+
+     };
+
+
      
      this.navigateToWorkOrdersTab = function(){
     	 _click($bo_pg_home.btn_allTabs);
@@ -152,4 +179,5 @@ var $bo_act_navigation = new function bo_act_navigation() {
     		_click($bo_pg_home.link_customWorkOrders);
     		_setStrictVisibilityCheck(false);
      };
+
 };

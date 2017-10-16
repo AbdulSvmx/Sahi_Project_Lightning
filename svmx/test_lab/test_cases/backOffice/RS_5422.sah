@@ -1,0 +1,80 @@
+//author - Mamata Rout;
+
+var $RS_5422 = _testcase("RS_5422", "On hiding all the steps of SFM wizard");
+$RS_5422.start();
+
+_setSpeed(100);
+$bo_act_login.login($g_url, $bac_unBase, $bac_pwdBase);
+	//Create a SFM orders test data
+	var $sourceName = "Work Order";
+	var $targetName = "Work Order";
+	var $QualCriteriaName = "Work Detail (Work Order)";
+	var $sfmPageLayoutName = "SFMIBTEST";
+	var $wizardSelectObjectName = "Work Order";
+	var $wizardTitleName = "SFMIBTEST1";
+	var $wizardIDName = "SFMIBTEST1"; 	
+	var $searchText1 =$custActname;
+	var $isOnlineHideRequired = true;
+	var $isOnlineRequired = false;	
+	var $workOrderName = "WO-00000000";
+	var $sfmName="My SFM";
+	var $wizardStepType="SFM";
+	var $wizardStepName=$sfmName;
+	var $executionMode="Interactive";
+	var $custActname="My Custom Action";
+	var $custActID="My_custom_Action";
+	var $url="https://www.google.co.in/";
+	var $objectName="Work Order";
+	var $actnType= "Others";
+	var $searchText2=$sfmName;
+
+	$bo_act_customAction.createNewCustomAction($custActname,$custActID,$url,$objectName,$actnType);
+	$bo_act_SFM.createNewSourceAndHeaderChildSFM($sfmName,$sourceName,$targetName,$QualCriteriaName,$sfmPageLayoutName);
+	
+	if($bo_act_navigation.navigateToSfmWizard()){
+		$bo_act_SFW.addSFMWizardGeneralInfo($wizardTitleName,$wizardIDName);
+		$bo_act_SFW.addCustomActionToWizard($actnType,$custActname);
+		$bo_act_SFW.addNewManageWizardSteps($wizardStepType,$wizardStepName,$executionMode);
+		
+	}else{
+		_fail("Navigation To SFM Wizard Failed");
+		_stopTestCase();
+	};
+
+	if($bo_act_navigation.navigateToSfmAppPermission()){
+		$bo_act_SFMAppPermission.setSFMAppPermission($searchText1,$isOnlineHideRequired,$isOnlineRequired);
+		$bo_act_SFMAppPermission.setSFMAppPermission($searchText2,$isOnlineHideRequired,$isOnlineRequired);
+
+	}else{
+		_fail("Navigation To SFM App Permission Failed");
+		_stopTestCase();
+	};
+
+	//verify if SFM display in delivery. Function returns false as it is unchecked(hide) on above step
+	if(!($bo_act_sfmVerifyWorkOrder.verifyWorkOrderOnlineDisplay($custActname,$workOrderName))){
+		
+		_log("custom action does not display!!!");
+
+		}else{
+		_fail("custom action is displayed");
+		_stopTestCase();
+	};
+if(!($bo_act_sfmVerifyWorkOrder.verifyWorkOrderOnlineDisplay($sfmName,$workOrderName))){
+		
+		_log("SFM does not display!!!");
+
+		}else{
+		_fail("SFM is displayed");
+		_stopTestCase();
+	};
+		
+
+$RS_5422.end();
+	
+	
+	
+	
+	
+	
+	
+	

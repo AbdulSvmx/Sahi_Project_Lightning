@@ -29,7 +29,7 @@ $bo_act_workOrders.saveWorkOrder();
 
 //Validations
 var $ActualInitialResponse = _getText($bo_pg_workOrders.txt_slaClockInitialResponse);
-AssertNotEqual($ActualInitialResponse,"Initial Response 00:00:00:00","SLA Clock Initial Response does not countdown");
+_assertNotEqual($ActualInitialResponse,"Initial Response 00:00:00:00","SLA Clock Initial Response does not countdown");
 _assertNotEqual(_getText(_div(0,_rightOf(_span("/Initial Response Internal By/"))))," ","Issue in Initial Response Internal By field");
 
 //Clean up function

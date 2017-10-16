@@ -1,15 +1,9 @@
+.settings
 
-<<<<<<< HEAD
 svmx/project_lib/backOffice/bo_act_methods/bo_act_serviceMaintenanceContracts.sah
 svmx/project_lib/backOffice/bo_pg_objects/bo_pg_serviceMaintenanceContracts.sah
 svmx/test_lab/test_cases/backOffice/RS_7287.sah
 svmx/test_lab/test_cases/backOffice/RS_7290.sah
-=======
-
-.settings/org.eclipse.wst.common.project.facet.core.xml
-.settings
-.DS
-.project
-AA.sah
-.settings/.jsdtscope
->>>>>>> upstream/master
+svmx/project_lib/backOffice/bo_act_methods/bo_act_navigation.sah
+svmx/project_lib/backOffice/bo_act_methods/bo_act_SFM.sah
+Rs_test11.sah

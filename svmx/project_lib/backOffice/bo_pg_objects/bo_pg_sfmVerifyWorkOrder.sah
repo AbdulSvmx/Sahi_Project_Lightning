@@ -1,0 +1,6 @@
+var $bo_pg_sfmVerifyWorkOrder= new function bo_pg_sfmVerifyWorkOrder() {
+		
+	this.imgBtn_allTab = _image("All Tabs");
+	this.link_workOrder =_link("Work Orders");
+		
+}

@@ -1,0 +1,77 @@
+//_includeOnce("../../../references/references.js");
+
+//author - Mamata Rout
+
+var $RS_5435 = _testcase("RS_5435", "Verify On hiding standard SFM[mode as interactive] & Custom SFM[mode as background]");
+$RS_5435.start();
+_setSpeed(100);
+
+$bo_act_login.login($g_url, $bac_unBase, $bac_pwdBase);
+//Create a SFM orders test data
+var $sfmName = "SFM_Interact";
+var $sourceName = "Work Order";
+var $targetName = "Work Order";
+var $QualCriteriaName = "Work Detail (Work Order)";
+var $sfmPageLayoutName = "SFMIBTEST";
+var $wizardSelectObjectName = "Work Order";
+var $wizardTitleName = "SFMIBTEST1";
+var $wizardIDName = "SFMIBTEST1"; 
+var $wizardStep1Type = "SFM"
+var $wizardStep1Name = $sfmName;
+var $executionMode1 = "Interactive";
+var $wizardStep2Type = $wizardStep1Type;
+var $wizardStep2Name = "SFM_Background";
+var $executionMode2 = "Background";
+var $searchText = $sfmName;
+var $isOnlineHideRequired = true;
+var $isOnlineRequired = false;
+var $sfmTranName = $sfmName;
+var $workOrderName = "WO-00000000";
+
+$bo_act_SFM.createNewSourceAndHeaderChildSFM ($sfmName,$sourceName,$targetName,$QualCriteriaName,$sfmPageLayoutName);
+if($bo_act_navigation.navigateToSfmWizard()){
+	$bo_act_SFM.createSFMWizard($wizardSelectObjectName,$wizardTitleName,$wizardIDName,$wizardStep1Type,$wizardStep1Name,$executionMode1,$wizardStep2Type,$wizardStep2Name,$executionMode2);
+}else{
+	_fail("Navigation To SFM Wizard Failed");
+	_stopTestCase();
+};
+
+if($bo_act_navigation.navigateToSfmAppPermission()){
+	$bo_act_SFMAppPermission.setSFMAppPermission($searchText,$isOnlineHideRequired,$isOnlineRequired);
+
+}else{
+	_fail("Navigation To SFM App Permission Failed");
+	_stopTestCase();
+};
+
+//verifyWorkOrderOnlineDisplay function returns false as it is unchecked(hide) on above step
+if(!($bo_act_sfmVerifyWorkOrder.verifyWorkOrderOnlineDisplay($sfmTranName,$workOrderName))){
+	_log("Work Order Verification Successful!!!");
+
+	}else{
+	_fail("Work Order Verification Failed");
+	_stopTestCase();
+};
+
+	//unhide the order and verify it is displaying in Online
+ $isOnlineHideRequired = false;
+ $isOnlineRequired = true;
+if($bo_act_navigation.navigateToSfmAppPermission()){
+	$bo_act_SFMAppPermission.setSFMAppPermission($searchText,$isOnlineHideRequired,$isOnlineRequired);
+
+}else{
+	_fail("Navigation To SFM App Permission Failed");
+	_stopTestCase();
+};	
+   //verifyWorkOrderOnlineDisplay function returns true as it is checked(unhide)on above steps
+	if($bo_act_sfmVerifyWorkOrder.verifyWorkOrderOnlineDisplay($sfmTranName,$workOrderName)){
+	_log("Work Order Verification Successful!!!");
+
+	}else{
+	_fail("Work Order Verification Failed");
+	_stopTestCase();
+};
+
+_setSpeed(100);
+
+$RS_5435.end();
