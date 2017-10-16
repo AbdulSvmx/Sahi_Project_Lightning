@@ -56,5 +56,13 @@ var $bo_act_SFW = new function bo_act_SFW() {
 		_click($bo_pg_sfmWizard.btn_clickEdit);
 		_click($bo_pg_sfmWizard.tab_manageWizardSteps);
 	}		
+		this.renameWizardTitle=function($wizardTitleName,$wizardIDName){
+			_click($bo_pg_sfmWizard.btn_clickEdit);
+			_setValue($bo_pg_sfmWizard.txt_wizardTitle, $wizardTitleName);
+        	_setValue($bo_pg_sfmWizard.txt_wizardID, $wizardIDName);
+			_click($bo_pg_sfmWizard.btn_sfmWizardSaveClose);
+				   
+			
+		}
 	
 }

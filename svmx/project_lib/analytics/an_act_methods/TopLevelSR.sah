@@ -1,39 +1,38 @@
 
 var $TopLevelSR = new function TopLevelSR() {
 	
-	this.an_TopLevelSR = function()
+	this.an_topLevelSR = function()
 	
 	{
-		_click($an_pg_home.link_home);
-		_click($an_pg_home.link_servicemaxSetup);
-		_click($an_pg_home.btn_serviceperformancemetrics);
-		_click($an_pg_home.btn_serviceperformancemetricsetup);
-
-		_click($an_pg_home.span_businessprocessconfig);
-		_click($an_pg_home.txt_issuetracker);
-		_click($an_pg_home.listItemSR);
-		_click($an_pg_home.txt_businessQualificationExpr);
-		_click($an_pg_home.list_openservicerequest);
-		_click($an_pg_home.btn_save);
-		_click($an_pg_home.btn_click_OK);		
+		_click($an_pg_rv.link_home);
+		_click($an_pg_rv.link_servicemaxSetup);
+		_click($an_pg_rv.btn_serviceperformancemetrics);
+		_click($an_pg_rv.btn_serviceperformancemetricsetup);
+		_click($an_pg_rv.span_businessprocessconfig);
+		_click($an_pg_rv.txt_issuetracker);
+		_click($an_pg_rv.listItemSR);
+		_click($an_pg_rv.txt_businessQualificationExpr);
+		_click($an_pg_rv.list_openservicerequest);
+		_click($an_pg_rv.btn_save);
+		_click($an_pg_rv.btn_click_OK);		
 		
 	};
 	
 	
-	this.an_TopLevelSR_custom = function()
+	this.an_topLevelSR_custom = function()
 	
 	{
-		_click($an_pg_home.link_home);
-		_click($an_pg_home.link_servicemaxSetup);
-		_click($an_pg_home.btn_serviceperformancemetrics);
-		_click($an_pg_home.btn_serviceperformancemetricsetup);
-		_click($an_pg_home.span_businessprocessconfig);
-		_click($an_pg_home.txt_issuetracker);
-		_click($an_pg_home.listItemSR);
-		_click($an_pg_home.txt_businessQualificationExpr);
-		_click($an_pg_home.list_customclosedSR);
-		_click($an_pg_home.btn_save);
-		_click($an_pg_home.btn_click_OK);
+		_click($an_pg_rv.link_home);
+		_click($an_pg_rv.link_servicemaxSetup);
+		_click($an_pg_rv.btn_serviceperformancemetrics);
+		_click($an_pg_rv.btn_serviceperformancemetricsetup);
+		_click($an_pg_rv.span_businessprocessconfig);
+		_click($an_pg_rv.txt_issuetracker);
+		_click($an_pg_rv.listItemSR);
+		_click($an_pg_rv.txt_businessQualificationExpr);
+		_click($an_pg_rv.list_customclosedSR);
+		_click($an_pg_rv.btn_save);
+		_click($an_pg_rv.btn_click_OK);
 		
 	};
 	

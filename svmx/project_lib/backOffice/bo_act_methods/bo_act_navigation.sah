@@ -145,6 +145,7 @@ var $bo_act_navigation = new function bo_act_navigation() {
      	_click($bo_pg_home.btn_allTabs);
     	    _click($bo_pg_home.link_preventiveMaintenancePlans);
      };
+
      /**
       * Navigates to a SFM Wizards
       * @returns boolean
@@ -168,6 +169,15 @@ var $bo_act_navigation = new function bo_act_navigation() {
  	_setSpeed(3000);
  	return $callBack.returnResult(_exists($bo_pg_sfmWizard.wizardLabel));
 
+     };
+
+
+     
+     this.navigateToWorkOrdersTab = function(){
+    	 _click($bo_pg_home.btn_allTabs);
+    	 _setStrictVisibilityCheck(true);
+    		_click($bo_pg_home.link_customWorkOrders);
+    		_setStrictVisibilityCheck(false);
      };
 
 };

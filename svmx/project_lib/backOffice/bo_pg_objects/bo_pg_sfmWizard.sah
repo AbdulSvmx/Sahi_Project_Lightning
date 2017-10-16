@@ -19,7 +19,7 @@ var $bo_pg_sfmWizard= new function bo_pg_sfmWizard() {
 	this.chk_wizardName=_checkbox("page1:form1:j_id1:pblock2:j_id88:j_id89:pblocktable:0:j_id91");
 
 	this.btn_clickEdit=_submit("Edit");
-
+	
 	
 	
 }
