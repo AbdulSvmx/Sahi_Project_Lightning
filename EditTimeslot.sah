@@ -1,0 +1,18 @@
+_click(_link("Home"));
+_click(_link("ServiceMax Setup"));
+_click(_div("Dispatch Management"));
+_click(_div("Ranked Appointment Booking"));
+_click(_submit("Manage Time Windows"));
+_check(_checkbox("j_id0:form:pageblock1:j_id36:j_id46:j_id47:0:j_id49"));
+_click(_button("Edit Time Window"));
+_click(_div("messageText"));
+_click(_button("Cancel"));
+_click(_button("Delete Time Window"));
+_click(_div("messageText"));
+_click(_heading4("Warning:"));
+_click(_button("Cancel"));
+_click(_div("messageText"));
+_click(_div("messageText"));
+_click(_div("messageText"));
+_click(_div("messageText"));
+_click(_div("messageText"));
