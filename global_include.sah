@@ -27,9 +27,9 @@ var $global_referenceAdded = false;
 if ($global_referenceAdded === false) {
 
 	// get reference files
-	_log("Getting references from dir : " + $g_projectLibPath);
+	//_log("Getting references from dir : " + $g_projectLibPath);
 	recursiveGetReferenceFiles($g_includeFilesArray, $g_projectLibPath);
-	_log("Getting references from dir : " + $g_utilitiesPath);
+	//_log("Getting references from dir : " + $g_utilitiesPath);
 	recursiveGetReferenceFiles($g_includeFilesArray, $g_utilitiesPath);
 
 	$g_includeFilesArray.forEach(function includeReferences($referencePath,
@@ -42,7 +42,7 @@ if ($global_referenceAdded === false) {
 		}
 		;
 
-		_log($index + " Reference Added " + $referencePath);
+		//_log($index + " Reference Added " + $referencePath);
 	});
 
 	$global_referenceAdded = true;
