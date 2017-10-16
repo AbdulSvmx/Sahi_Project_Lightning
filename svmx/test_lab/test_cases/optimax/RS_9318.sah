@@ -6,9 +6,9 @@ var $g_pwd = $user_credentials[$i][1];
 var $g_url = $user_credentials[$i][2];
 }
 
-var $RS_9317 = _testcase("RS_9317", "Validate Alert message while Deleting the time window");
+var $RS_9318 = _testcase("RS_9318", "Validate Alert message while Deleting the time window");
 
-$RS_9317.start();
+$RS_9318.start();
 
 $bo_act_login.login($g_url, $g_un, $g_pwd);
 
@@ -26,4 +26,4 @@ _click(_heading4("Warning:"));
 _click(_button("Cancel"));
 
 
-$RS_9317.end();
+$RS_9318.end();
