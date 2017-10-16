@@ -1,0 +1,7 @@
+for(var $a = 80;$a<=81;$a++){
+_click(_button(" Clone "));
+_setValue(_textbox("Name"), "Global Services Special Service Service Task"+$a);
+_setValue(_textbox("Process ID"), "Global_Services_Special_Service_Service_Task"+$a);
+_click(_submit(" Save "));
+_wait(10000);
+}
