@@ -15,6 +15,9 @@ var $bo_pg_servicemaxSetup = new function bo_pg_servicemaxSetup(){
 
 	this.btn_installedBaseAndPM = _div("Installed Base & PM");
 	this.btn_PMPlanTemplate = _div("PM Plan Templates");
+	this.btn_sfmWizard= _div("SFM Wizards");
+	this.btn_sfmAppPermission = _div("SFM App Permissions");
+	this.btn_sfmCustomAction=_div("SFM Custom Actions");
 
 
 };

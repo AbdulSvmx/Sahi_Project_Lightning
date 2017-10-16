@@ -6,7 +6,8 @@
 var $bo_pg_sfmTransactionAndDesigner = new function bo_pg_sfmTransactionAndDesigner() {
     this.txt_standardSfmTransactionQuickFind= _f("main").s_textinput("searchText[2]");
     this.btn_standardSfmTransaction= _f("main").tab("Standard SFM Transactions");
-    this.btn_yourCustomSfmTransactions = _f("main").tab("Your Custom SFM Transactions");
+    this.btn_yourCustomSfmTransactions = _f("main").tab("Your Custom Sjavascript:void(0)FM Transactions");
+    //this.btn_yourCustomSfmTransactions = _f("main").tab("Your Custom SFM Transactions");
     this.txt_yourCustomSfmTransactionsQuickFind = _f("main").s_textinput("searchText[1]").near(_f("main").tab("Your Custom SFM Transactions"));
     this.btn_clone = _f("main").s_button("Clone");
     this.txt_name = _f("main").s_textinput("pName");
@@ -25,6 +26,51 @@ var $bo_pg_sfmTransactionAndDesigner = new function bo_pg_sfmTransactionAndDesig
     this.btn_ok = _f("main").button("OK");
     this.btn_backToList = _f("main").s_button("Back To List");
     this.btn_yes = _f("main").button("Yes");
+    this.btn_newSFM=_f("main").s_button("New SFM Transaction");
+	this.btn_finalQuickSave = _f("main").s_button("Quick Save");
+	this.alert_proceedAnyway=_f("main").button("Proceed Anyway");
+	
+	
+	//This code is to click on new button on custom SFM transaction
+	this.btn_newSFMTransaction=_f("main").s_button("New SFM Transaction");//duplicate
+	
+	//This function is to select a checklist SFM time from drop down
+	this.lbl_checklistOb=_f("main").s_dropdownlist("purposeCombo"), "to generate a Checklist/Survey type of Process";
+
+	//This function is to select workorder object from drop down
+		this.sourceComboBox=_f("main").s_combobox("objCombo1");
+	
+	//click on Ok on pop up appear after selecting work object in Propoties tab of SFm designer
+	this.btn_popUpOK=_click(_f("main").s_button("OK"));
+	
+	this.combo_CTRecord = _f("main").s_combobox("objCombo1[1]");
+	
+	this.childSource_chkBox = _f("main").s_checkbox("Work Detail (Work Order)");
+		
+	this.childCTRecord_chkBox = _f("main").s_checkbox("Work Detail (Work Order)[1]");
+	
+	//Drop Down List in Qualifying Criteria and Field Mappings
+	this.dropDownList = _f("main").s_dropdownlist("objCombo");
+	
+	this.selectComboBox = function($elementName,$elementItemName){
+			_setSelected(_f("main").s_combobox($elementName), $elementItemName);
+		
+		}
+		
+		//Enter the name of checklist type SFM transaction
+	this.setSfmName=function($sfmName){
+		_setValue(_f("main").s_textinput("pName"), ($sfmName));
+	}
+		
+	this.child_checkBox =function($orderTypeName){
+			_f("main").s_checkbox($orderTypeName);
+	}
+		
+	this.source_ctRecord_comboBox = function($comboName){
+			_f("main").s_combobox($comboName);	
+	}	
+//end here_by Mamta
+
 
     /**
      * Select a SFM from the SFM list, set $isCustom to select from custom SFM list elements.

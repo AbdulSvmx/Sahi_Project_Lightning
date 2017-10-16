@@ -53,5 +53,75 @@ var $bo_act_SFM = new function bo_act_SFM() {
 
 		_setSpeed(100);
 	};
+	
+	//By Mamta
+	this.newChecklistTypeSFM=function($checklistName){
+		_click($bo_pg_sfmTransactionAndDesigner.btn_newSFMTransaction);
+		$bo_pg_sfmTransactionAndDesigner.setSfmName($checklistName);
+		_setValue($bo_pg_sfmTransactionAndDesigner.txt_sfmTransactionId, "");
+		_setSelected($bo_pg_sfmTransactionAndDesigner.lbl_checklistOb);
+		_wait(60000, _isVisible($bo_pg_sfmTransactionAndDesigner.lbl_checklistOb));
+		_setSelected($bo_pg_sfmTransactionAndDesigner.sourceComboBox);
+		_click($bo_pg_sfmTransactionAndDesigner.btn.popUpOK);		
+		_wait(6000);
+				
+	}
+	this.addQuestionToChecklist=function($questionText){
+		_click($bo_pg_formDesigner.tab_clickFormDesigner);
+		_click($bo_pg_formDesigner.btn_addNewQuestion);
+		_click($bo_pg_formDesigner.btn_selectQuestionDataType);
+		_setValue($bo_pg_formDesigner.lbl_questionText, $questionText);
+		_click($bo_pg_formDesigner.btn_addQuestionToLibraryAndForm);
+		_click($bo_pg_formDesigner.btn_closeQuestionPopUp);
+		_click($bo_pg_formDesigner.btn_quickSave);		
+	}
+	/**
+	 * Function to create New SFM Transaction from Source Object to Create New Header and Child Record
+	 * @param $sfmName
+	 * @param$sourceName
+	 * @param$targetName
+	 * @param $QualCriteriaName 
+	 * @param $sfmPageLayoutName
+	 */
+		this.createNewSourceAndHeaderChildSFM = function($sfmName,$sourceName,$targetName,$QualCriteriaName,$sfmPageLayoutName){
+		_click($bo_pg_sfmTransactionAndDesigner.btn_newSFMTransaction);
+		$bo_pg_sfmTransactionAndDesigner.setSfmName($sfmName);
+		_setValue($bo_pg_sfmTransactionAndDesigner.txt_sfmTransactionId, $sfmName);
+		_setSelected($bo_pg_sfmTransactionAndDesigner.sourceComboBox, $sourceName);
+		_wait(6000,_isVisible($bo_pg_sfmTransactionAndDesigner.childSource_chkBox));
+		_click($bo_pg_sfmTransactionAndDesigner.childSource_chkBox);
+		_setSelected($bo_pg_sfmTransactionAndDesigner.combo_CTRecord, $targetName);
+		_wait(6000,_isVisible($bo_pg_sfmTransactionAndDesigner.childCTRecord_chkBox));
+		_click($bo_pg_sfmTransactionAndDesigner.childCTRecord_chkBox );
+		_click($bo_pg_sfmTransactionAndDesigner.btn_popUpOK);
+		_click(btn_qualifyingCriteriaAndFieldMapping);
+		_setSelected(dropDownList, $QualCriteriaName);
+		_click($bo_pg_sfmTransactionAndDesigner.btn_screenDesigner);
+		_click(_f("main").fieldrenderer("[object Object]"));
+		_setValue($bo_pg_sfmTransactionAndDesigner.txt_sfmSavePageLayoutAs,$sfmPageLayoutName );
+		_click($bo_pg_sfmTransactionAndDesigner.btn_quickSave);
+		_click($bo_pg_sfmTransactionAndDesigner.btn_finalQuickSave);	
+			
+		}
+		this.createIncompleteSFM=function($sfmName,$sourceName,$targetName,$QualCriteriaName){
+		_click($bo_pg_sfmTransactionAndDesigner.btn_newSFMTransaction);
+		$bo_pg_sfmTransactionAndDesigner.setSfmName($sfmName);
+		_setValue($bo_pg_sfmTransactionAndDesigner.txt_sfmTransactionId, $sfmName);
+		_setSelected($bo_pg_sfmTransactionAndDesigner.sourceComboBox, $sourceName);
+		_wait(6000,_isVisible($bo_pg_sfmTransactionAndDesigner.childSource_chkBox));
+		_click($bo_pg_sfmTransactionAndDesigner.childSource_chkBox);
+		_setSelected($bo_pg_sfmTransactionAndDesigner.combo_CTRecord, $targetName);
+		_wait(6000,_isVisible($bo_pg_sfmTransactionAndDesigner.childCTRecord_chkBox));
+		_click($bo_pg_sfmTransactionAndDesigner.childCTRecord_chkBox );
+		_click($bo_pg_sfmTransactionAndDesigner.btn_popUpOK);
+		_click(btn_qualifyingCriteriaAndFieldMapping);
+		_setSelected(dropDownList, $QualCriteriaName);
+		_click($bo_pg_sfmTransactionAndDesigner.btn_quickSave);
+		_click($bo_pg_sfmTransactionAndDesigner.alert_proceedAnyway);
+		_click($bo_pg_sfmTransactionAndDesigner.btn_finalQuickSave);
+			
+			
+				
+			};
 
-}
+};

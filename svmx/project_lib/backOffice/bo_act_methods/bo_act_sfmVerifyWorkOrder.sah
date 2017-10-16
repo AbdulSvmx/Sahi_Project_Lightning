@@ -1,0 +1,17 @@
+var $bo_act_sfmVerifyWorkOrder= new function bo_act_sfmVerifyWorkOrder() {
+
+	this.verifyWorkOrderOnlineDisplay = function($sfmTranName,$workOrderName){
+		_click($bo_pg_sfmVerifyWorkOrder.imgBtn_allTab);
+		_click($bo_pg_sfmVerifyWorkOrder.link_workOrder);
+		this.clickSpecificWorkOrder($workOrderName);
+		_wait(7000);
+		return $callBack.returnResult(_isVisible(_button($sfmTranName)));
+
+		}
+	
+	//always keep one work order, instead need to use array index with ordername workOrderName[1]; 
+	this.clickSpecificWorkOrder = function($workOrderName){
+	_click(_link(workOrderName));
+	
+	}
+}

@@ -1,0 +1,68 @@
+//_includeOnce("../../../references/references.js");
+//author - Mamata Rout
+
+var $RS_5441 = _testcase("RS_5441", "Verify only completed SFM & active SFW are displayed on SFM App Permission page");
+$RS_5441.start();
+_setSpeed(100);
+
+$bo_act_login.login($g_url, $bac_unBase, $bac_pwdBase);
+	//Create a SFM orders test data
+	var $sfmName = "SFM_Interact";
+	var $sourceName = "Work Order";
+	var $targetName = "Work Order";
+	var $QualCriteriaName = "Work Detail (Work Order)";
+	var $sfmPageLayoutName = "SFMIBTEST";
+	var $wizardSelectObjectName = "Work Order";
+	var $wizardTitleName = "SFMIBTEST1";
+	var $wizardIDName = "SFMIBTEST1"; 
+	var $wizardStep1Type = "SFM"
+	var $wizardStep1Name = $sfmName;
+	var $executionMode1 = "Interactive";
+	//var $wizardStep2Type = $wizardStep1Type;
+	//var $wizardStep2Name = "SFM_Background";
+	//var $executionMode2 = "Background";
+	var $searchText = $sfmName;
+	var $isOnlineHideRequired = true;
+	var $isOnlineRequired = false;
+	var $sfmTranName = $sfmName;
+	var $workOrderName = "WO-00000000";
+var $wizardStatus="Inactive"
+	var $sfmName1="My Incomplete SFM"
+
+	//$bo_act_SFM.createNewSourceAndHeaderChildSFM ($sfmName,$sourceName,$targetName,$QualCriteriaName,$sfmPageLayoutName);
+	$bo_act_SFM.createIncompleteSFM($sfmName1,$sourceName,$targetName,$QualCriteriaName)
+if($bo_act_navigation.navigateToSfmWizard()){
+		$bo_act_SFM.createSFMWizard($wizardSelectObjectName,$wizardTitleName,$wizardIDName,$wizardStep1Type,$wizardStep1Name,$executionMode1);
+	}else{
+		_fail("Navigation To SFM Wizard Failed");
+		_stopTestCase();
+	};
+
+	if($bo_act_navigation.navigateToSfmAppPermission()){
+		$bo_act_SFMAppPermission.searchSFMDisplay($sfmName1);
+	}else{
+		_fail("Navigation To SFM App Permission Failed");
+		_stopTestCase();
+	};
+_click(_span("Back To Setup Home"));
+	$bo_act_SFM.createNewSourceAndHeaderChildSFM ($sfmName,$sourceName,$targetName,$QualCriteriaName,$sfmPageLayoutName);
+ 
+	if($bo_act_navigation.navigateToSfmWizard()){
+		  $bo_act_SFW.selWizardStatusAsInactive($wizardStatus);
+		$bo_act_SFM.createSFMWizard($wizardSelectObjectName,$wizardTitleName,$wizardIDName,$wizardStep1Type,$wizardStep1Name,$executionMode1);
+	}else{
+		_fail("Navigation To SFM Wizard Failed");
+		_stopTestCase();
+	};
+		
+if($bo_act_navigation.navigateToSfmAppPermission()){
+		$bo_act_SFMAppPermission.searchSFMDisplay($sfmName1);
+	}else{
+		_fail("Navigation To SFM App Permission Failed");
+		_stopTestCase();
+	};
+										 
+	$RS_5441.end();
+
+
+	

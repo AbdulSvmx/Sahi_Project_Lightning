@@ -1,0 +1,25 @@
+//author - Mamata Rout
+
+var $RS_5433 = _testcase("RS_5433", "Verify weather checklist SFM Processes are listed on SFM app Permission Page.");
+$RS_5433.start();
+_setSpeed(100);
+
+$bo_act_login.login($g_url, $bac_unBase, $bac_pwdBase);
+
+var $checklistName="My Checklist";
+var $searchText =$checklistName;
+var $$questionText="What is your name";
+	
+$bo_act_SFM.newChecklistTypeSFM($checklistName);
+$bo_act_SFM.addQuestionToChecklist($questionText)
+
+
+if($bo_act_navigation.navigateToSfmAppPermission()){
+		$bo_act_SFMAppPermission.searchSFMDisplay($checklistName);
+
+	}else{
+		_fail("Navigation To SFM App Permission Failed");
+		_stopTestCase();
+	};
+
+$RS_5433.end();

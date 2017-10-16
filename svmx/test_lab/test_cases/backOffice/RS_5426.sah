@@ -1,0 +1,8 @@
+var $RS_5426 = _testcase("RS_5426", "On Editing a existing step for a SFW which is hidden");
+$RS_5426.start();
+_setSpeed(100);
+
+
+
+
+$RS_5426.end();
