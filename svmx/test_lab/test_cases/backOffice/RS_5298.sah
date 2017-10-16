@@ -1,24 +1,26 @@
 
 //author - Noor Salma Sharieff
 
-var $RS_5301 = _testcase("$RS_5301","Verify the impact of SLA setting values on SLA clocks on Work Order Object");
-$RS_5301.start();
+var $RS_5298 = _testcase("$RS_5298","ONSITE response on WO: Clock paused/resumed without extending SLA commitment");
+$RS_5298.start();
 _setSpeed(100);
 
 //Pre - Condition 
 $bo_act_login.login($g_url, $bac_unBase, $bac_pwdBase);
 $bo_act_navigation.navigateToConfigurationProfilesPage();
 $bo_act_configurationProfiles.editGlobalProfileForBooleanSettings("Cloned Default", "Service Level Agreement", "SLA Clock on Work Order", "SET003", true);
-$bo_act_configurationProfiles.editGlobalProfileForBooleanSettings("Cloned Default", "Service Level Agreement", "SLA Clock on Work Order", "SET005", false);
+$bo_act_configurationProfiles.editGlobalProfileForBooleanSettings("Cloned Default", "Service Level Agreement", "SLA Clock on Work Order", "SET005", true);
 
 var $accName = $bo_act_accounts.createAccount();
 var $proName = $bo_act_products.createProduct("pro12", "--None--");
 var $IBName = $bo_act_installedProduct.createInstalledProduct($proName,$accName,"");
 var $contactName = $bo_act_contacts.createContact($accName); 
+var $caseNumber = $bo_act_installedProduct.createSupportCase("New");
 var $WONumber = $bo_act_installedProduct.createWOFromIB($IBName);
+
 var $slaterm = $bo_act_slaTerms.createSlaTerms("Default");
 $bo_act_slaTerms.addInitialResponseToSLA($slaterm, "WorkOrder","All", "High", "Created Date", 30, 60, "SLA");
-var $caseNumber = $bo_act_installedProduct.createSupportCase("New");
+
 
 $bo_act_workOrders.editWorkOrder($WONumber);
 $bo_act_workOrders.updateTextBoxFields($bo_pg_workOrders.txt_slaTerms, $slaterm);
@@ -39,7 +41,7 @@ for (var i = 0; i < $datacreated.length; i++) {
 	$bo_act_common.cleanUpfunction($datacreated[i]);
 }
 
-$RS_5301.end();
+$RS_5298.end();
 
 
 

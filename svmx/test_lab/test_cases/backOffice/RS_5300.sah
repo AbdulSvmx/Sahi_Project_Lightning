@@ -1,14 +1,14 @@
 
 //author - Noor Salma Sharieff
 
-var $RS_5301 = _testcase("$RS_5301","Verify the impact of SLA setting values on SLA clocks on Work Order Object");
-$RS_5301.start();
+var $RS_5300 = _testcase("$RS_5300","Verify the impact of SLA setting values SET003 on SLA clocks on WO object");
+$RS_5300.start();
 _setSpeed(100);
 
 //Pre - Condition 
 $bo_act_login.login($g_url, $bac_unBase, $bac_pwdBase);
 $bo_act_navigation.navigateToConfigurationProfilesPage();
-$bo_act_configurationProfiles.editGlobalProfileForBooleanSettings("Cloned Default", "Service Level Agreement", "SLA Clock on Work Order", "SET003", true);
+$bo_act_configurationProfiles.editGlobalProfileForBooleanSettings("Cloned Default", "Service Level Agreement", "SLA Clock on Work Order", "SET003", false);
 $bo_act_configurationProfiles.editGlobalProfileForBooleanSettings("Cloned Default", "Service Level Agreement", "SLA Clock on Work Order", "SET005", false);
 
 var $accName = $bo_act_accounts.createAccount();
@@ -29,8 +29,9 @@ $bo_act_workOrders.saveWorkOrder();
 
 //Validations
 var $ActualInitialResponse = _getText($bo_pg_workOrders.txt_slaClockInitialResponse);
-AssertNotEqual($ActualInitialResponse,"Initial Response 00:00:00:00","SLA Clock Initial Response does not countdown");
-_assertNotEqual(_getText(_div(0,_rightOf(_span("/Initial Response Internal By/"))))," ","Issue in Initial Response Internal By field");
+AssertEqual($ActualInitialResponse,"Initial Response 00:00:00:00","SLA Clock Initial Response does not countdown");
+_assertEqual(_getText(_div(0,_rightOf(_span("/Initial Response Internal By/")))),"","Issue in Initial Response Internal By field");
+_assertEqual(_getText(_div(0,_rightOf(_span("/Initial Response Customer By/")))),"","Issue in Initial Response Customer By field");
 
 //Clean up function
 
@@ -39,7 +40,7 @@ for (var i = 0; i < $datacreated.length; i++) {
 	$bo_act_common.cleanUpfunction($datacreated[i]);
 }
 
-$RS_5301.end();
+$RS_5300.end();
 
 
 
