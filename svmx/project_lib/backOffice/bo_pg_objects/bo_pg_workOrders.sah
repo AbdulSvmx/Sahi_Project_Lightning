@@ -11,6 +11,7 @@ var $bo_pg_workOrders = new function bo_pg_workOrders(){
 	this.txt_slaTerms = _textbox(0,_rightOf(_label("SLA Terms")));
 	this.sel_priority = _select(0,_rightOf(_label("Priority")));
 	this.btn_saveWorkOrder = _submit(" Save ");
+	this.btn_SFWCheckEntitlement = _button("Check Entitlement");
 	
 };
 
