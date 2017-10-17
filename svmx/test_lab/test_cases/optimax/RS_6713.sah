@@ -16,9 +16,9 @@ var $dp_Terr_Id = $Dispatch_Process[$i][2];
 }
 
 
-var $RS_6714 = _testcase("RS_6714", "Abort Button validation for Success Job");
+var $RS_6713 = _testcase("RS_6713", "Abort Button validation for Success Job");
 
-$RS_6714.start();
+$RS_6713.start();
 
 var $sfdc_sessionId = null;
 
@@ -75,4 +75,4 @@ function login($g_un,$g_pwd){
 }
 
 //</browser>
-$RS_6714.end();
+$RS_6713.end();
