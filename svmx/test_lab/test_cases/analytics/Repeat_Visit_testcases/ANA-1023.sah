@@ -14,7 +14,7 @@ var $Component = $data[2]["Component"];
 $bo_act_login.login($url, $un, $pwd);
 
 var $ana_1023_insert_WO = "SVMXC__Service_Order__c  WO = new SVMXC__Service_Order__c ( Custom_Account__c ='"+ $Account2 +"', SVMXC__Product__c = '"+$Product+"' , SVMXC__Group_Member__c = '"+$Technician+"' ,SVMXC__Component__c = '"+$Component+"',SVMXC__Order_Status__c = '"+$OrderStatus+"' , SVMXC__Closed_On__c = "+$Closedon+",SVMXC__Country__c = 'United States', SVMXC__Sub_Status__c = 'Resolved', SVMXC__Priority__c = 'High', SVMXC__Site__c = '"+$Site+"');insert WO;";
-var $ana_1023_query_wo = "Select Name , Id  ,Custom_Account__c , SVMXC__Component__c , SVMXC__Closed_On__c from SVMXC__Service_Order__c Order by CreatedDate DESC Limit 1";
+var $ana_1023_query_wo = "Select Name , Id  ,Custom_Account__c , SVMXC__Component__c , SVMXC__Closed_On__c from SVMXC__Service_Order__c where Createdby.Id = '005q0000003GGfP' Order by CreatedDate DESC Limit 1";
 var $ana_1023_result = $op_act_sForceApiCall.sForceQuery($un, $pwd, $ana_1023_insert_WO , "create");
 var $ana_1023_fetch = $op_act_sForceApiCall.sForceQuery($un, $pwd, $ana_1023_query_wo,"query");
 
@@ -34,7 +34,7 @@ $ana_1023_fetch.forEach(function($ana_1023_var1) {
 _log($ana_1023_WO1);
 
 var $ana_1023_insert_WO2 = "SVMXC__Service_Order__c  WO = new SVMXC__Service_Order__c (SVMXC__Company__c ='"+ $Account2 +"', SVMXC__Product__c = '"+$Product+"' , SVMXC__Group_Member__c = '"+$Technician+"' ,SVMXC__Component__c = '"+$Component+"', SVMXC__Order_Status__c = '"+$OrderStatus+"' , SVMXC__Closed_On__c = "+$Closedon+",SVMXC__Country__c = 'United States', SVMXC__Priority__c = 'High',SVMXC__Related_Work_Order__c ='"+$ana_1023_WO1+"', SVMXC__Site__c = '"+$Site+"' );insert WO;";
-var $ana_1023_query_wo2 = "Select Name , Id  , SVMXC__Company__c , SVMXC__Component__c , SVMXC__Closed_On__c from SVMXC__Service_Order__c Order by CreatedDate DESC Limit 1";
+var $ana_1023_query_wo2 = "Select Name , Id  , SVMXC__Company__c , SVMXC__Component__c , SVMXC__Closed_On__c from SVMXC__Service_Order__c where Createdby.Id = '005q0000003GGfP' Order by CreatedDate DESC Limit 1";
 var $resultArr3 = $op_act_sForceApiCall.sForceQuery($un, $pwd, $ana_1023_insert_WO2 , "create");
 
 
@@ -51,12 +51,11 @@ $ana_1023_result2.forEach(function($var3) {
 $TopLevelWO.an_toplevelwo();
 $an_act_Repeat_Visit_SR.rv_runEngine("meghana.rao@servicemax.com");
 
-_wait(50000);
-_wait(80000);
 
 var $an_1023_primarywo1;
 
-
+var $ana_1023_wo_1 = null;
+for (var $i =0;$ana_1023_wo_1 == null; $i++){
 var $ana_1023_query_RV1 = "Select SVMXC__Work_Order__c ,SVMXC__Primary_Work_Order__c, SVMXC__Account__c, SVMXC__Configuration_Name__c ,SVMXC__Is_Repeat_Visit__c ,SVMXC__Service_Request__c from SVMXC__SPM_Repeat_Visit__c where SVMXC__Work_Order__c ='"+ $ana_1023_WO1 +"'";
 var $ana_1023_resultRV1 = $op_act_sForceApiCall.sForceQuery($un, $pwd, $ana_1023_query_RV1,"query");
 
@@ -64,30 +63,35 @@ var $ana_1023_resultRV1 = $op_act_sForceApiCall.sForceQuery($un, $pwd, $ana_1023
 
 $ana_1023_resultRV1.forEach(function($varRV1) {
 	
+	$ana_1023_wo_1 = $varRV1.SVMXC__Work_Order__c;
 	$ana_1023_WO_Account1 = $varRV1.SVMXC__Account__c;
 	$ana_1023_Is_Repeat_visit1 = $varRV1.SVMXC__Is_Repeat_Visit__c;
 	$ana_1023_primarywo1 = $varRV1.SVMXC__Primary_Work_Order__c;
 	
 });
+}
 
+var $ana_1023_wo_2 = null;
 var $ana_1023_WO_Account2;
 var $ana_1023_RV_sr2;
 var $ana_1023_Is_Repeat_visit2;
-
+var $ana_1023_primarywo2;
+for (var $i =0;$ana_1023_wo_2 == null; $i++){
 var $ana_1023_query_RV2 = "Select SVMXC__Work_Order__c ,SVMXC__Primary_Work_Order__c ,SVMXC__Account__c, SVMXC__Configuration_Name__c ,SVMXC__Is_Repeat_Visit__c ,SVMXC__Service_Request__c from SVMXC__SPM_Repeat_Visit__c where SVMXC__Work_Order__c ='"+ $ana_1023_WO2 +"'";
 var $ana_1023_resultRV2 = $op_act_sForceApiCall.sForceQuery($un, $pwd, $ana_1023_query_RV2,"query");
 
 
-var $ana_1023_primarywo2;
+
 $ana_1023_resultRV2.forEach(function($varRV2) {
 	
+	$ana_1023_wo_2 = $varRV2.SVMXC__Work_Order__c;
 	$ana_1023_WO_Account2 = $varRV2.SVMXC__Account__c;
 	$ana_1023_Is_Repeat_visit2 = $varRV2.SVMXC__Is_Repeat_Visit__c;
 	$ana_1023_primarywo2 = $varRV2.SVMXC__Primary_Work_Order__c;
 	
 });
 
-
+}
 _log($ana_1023_Is_Repeat_visit1);
 
 _assertEqual("false", $ana_1023_Is_Repeat_visit1);
