@@ -27,29 +27,12 @@ $bo_act_login.login($g_url, $g_un, $g_pwd);
 _set($login_result, _fetch(login($g_un,$g_pwd)));
 _log($login_result);
 
-//deleting existing Work Order
-
-$op_utility.delete_WO($dp_Id,$login_result.sessionId);
 
 
 $op_utility.run_Job_Now($dp_Name);
 
 _wait(5000);
 
-//validating the job is success
-if($op_utility.validate_Job_Success($dp_Id,$login_result.sessionId,120000)=== true){
-	_log("job is successfully completed");
-}
-else{
-	_log("job is failed in 1st verification.. so starting the 2nd verification after 5 min");
-	if($op_utility.validate_Job_Success($dp_Id,$login_result.sessionId,120000)=== true){
-		_log("job is successfully completed in 2nd verification");
-		else{
-			_log("job is failed in 2nd verification");
-		}
-	}
-}
-	
 
 _click(_cell("dataCell  [30]"));
 _wait(20000, _isVisible(_div("Show Jobs")));
