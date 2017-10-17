@@ -84,16 +84,17 @@ $bo_act_serviceMaintenanceContracts.addCoveredLocationToServiceContract($service
 $bo_act_serviceMaintenanceContracts.addEntitledContactsToServiceContract($serviceConractName, $contactName);
 
 var $expecctedIBUnder_CoveredProduct =  _getText(_link(0,_under(_tableHeader("Installed Product"))));
-var $expecctedLocationUnder_CoveredLocations = _getText(_cell(0,_under(_tableHeader("Time % Covered"))));
-var $expecctedContactUnder_EntitledContacts = _getText(_cell(0,_under(_tableHeader("Expenses % Covered"))));
+var $expecctedLocationUnder_CoveredLocations =  _getText(_link(0,_under(_tableHeader("Location"))));;
+var $expecctedContactUnder_EntitledContacts =  _getText(_link(0,_under(_tableHeader("Contact"))));;
 
-/*
+
 //validation
-//Validating the Material Labor and Expenses Percent
+//Validating the Covered Products, Locations and Contacts Percent
 _assertEqual($materialPercentCovered,$materialPercentCoveredActulOn_IB,"Actual and expected Material % covered are not same");
 _assertEqual($laborPercentCovered,$timePercentCoveredActulOn_IB,"Actual and expected Time % covered are not same");
 _assertEqual($expensesPercentCovered,$expensesPercentCoveredActulOn_IB,"Actual and expected Expenses % covered are not same");
 
+/*
 var $startDateExpectedOn_IB = _getText(_div(0,_rightOf(_cell("/Date Installed/"))));
 
 var $endDateExpectedOn_IB =  $bo_act_common.endDateCalculationForIB($startDateExpectedOn_IB, $durationOfCoverage, $seperator);

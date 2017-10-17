@@ -94,7 +94,7 @@ this.AddCoveredProducToServiceContract =  function($sconName,$installedProduct,$
 };
 
 this.addCoveredLocationToServiceContract = function($sconName,$location,$slaName,$pastYear,$futureYear){
-	$bo_pg_serviceMaintenanceContracts.clickOnServiceContract($sconName);
+	//$bo_pg_serviceMaintenanceContracts.clickOnServiceContract($sconName);
 	_click($bo_pg_serviceMaintenanceContracts.btn_newCoveredLocation);
 	_setValue($bo_pg_serviceMaintenanceContracts.txt_location,$location);
 	_setValue($bo_pg_serviceMaintenanceContracts.txt_slaTermName,$slaName);
@@ -106,7 +106,7 @@ this.addCoveredLocationToServiceContract = function($sconName,$location,$slaName
 };
 
 this.addEntitledContactsToServiceContract = function($sconName,$contact){
-	$bo_pg_serviceMaintenanceContracts.clickOnServiceContract($sconName);
+	//$bo_pg_serviceMaintenanceContracts.clickOnServiceContract($sconName);
 	_click($bo_pg_serviceMaintenanceContracts.btn_newEntitledContact);
 	_setValue($bo_pg_serviceMaintenanceContracts.txt_contract,$contact);
 	/*_setValue($bo_pg_serviceMaintenanceContracts.txt_slaTermName,$slaName);
@@ -118,7 +118,7 @@ this.addEntitledContactsToServiceContract = function($sconName,$contact){
 };
 
 this.addPartsPricingToServiceContract = function($sconName, $prodName,$pricePerUnit){
-	$bo_pg_serviceMaintenanceContracts.clickOnServiceContract($sconName);
+	//$bo_pg_serviceMaintenanceContracts.clickOnServiceContract($sconName);
 	_click($bo_pg_serviceMaintenanceContracts.btn_newPartsPricing);
 	_setValue($bo_pg_serviceMaintenanceContracts.txt_product,$prodName);
 	_setValue($bo_pg_serviceMaintenanceContracts.txt_pricePerUnit,$pricePerUnit);
