@@ -16,9 +16,9 @@ var $dp_Terr_Id = $Dispatch_Process[$i][2];
 }
 
 
-var $RS_6714 = _testcase("RS_6714", "Abort In Progress Job & check the status of the Job");
+var $RS_6713 = _testcase("RS_6713", "Abort Button validation for Success Job");
 
-$RS_6714.start();
+$RS_6713.start();
 
 var $sfdc_sessionId = null;
 
@@ -35,19 +35,28 @@ $op_utility.run_Job_Now($dp_Name);
 
 _wait(5000);
 
+//validating the job is success
+if($op_utility.validate_Job_Success($dp_Id,$login_result.sessionId,120000)=== true){
+	_log("job is successfully completed");
+}
+else{
+	_log("job is failed in 1st verification.. so starting the 2nd verification after 5 min");
+	if($op_utility.validate_Job_Success($dp_Id,$login_result.sessionId,120000)=== true){
+		_log("job is successfully completed in 2nd verification");
+	}
+		else{
+			_log("job is failed in 2nd verification");
+		    }
+	                                                                           
+	}
+
 
 _click(_cell("dataCell  [30]"));
 _wait(20000, _isVisible(_div("Show Jobs")));
 _click(_submit("Show Jobs"));
 _check(_radio("Checkbox"));
-_wait(20000, _isVisible(_div("Abort Job Now")));
-_click(_submit("Abort Job Now"));
-_click(_cell("rich-tab-bottom-line "));
-_click(_submit("Abort Job Now"));
-_click(_submit("Show Jobs"));
-_wait(30000, _isVisible(_div("Aborted")));
-_click(_span("Aborted"));
-_doubleClick(_span("Aborted"));
+_click(_cell("pbTitle[1]"));
+_click(_cell("pbButton [1]"));
 
 //<browser>
 
@@ -70,6 +79,5 @@ function create_WO ($dp_Terr_Id){
 	var result_WO = sforce.connection.create([WO]);
 	_log(" Work order= "+result_WO[0].id);
 	}
-
 //</browser>
-$RS_6714.end();
+$RS_6713.end();
