@@ -33,7 +33,10 @@ var $op_act_sForceApiCall = new function op_act_sForceApiCall() {
 				}
 				return arr;
 			case 'create':
-				return records = _call(sforce.apex.executeAnonymous($queryComplex));
+				 
+				var records = _call(sforce.apex.executeAnonymous($queryComplex));
+				return records;
+				
 				
 			default:
 				$nArr = [null];
