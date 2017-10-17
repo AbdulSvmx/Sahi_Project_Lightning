@@ -17,22 +17,19 @@ var $seperator = "/";
 var $RS_7288 = _testcase("$RS_7288","Creation of a Warranty Term and association of a Warranty to an Installed Product");
 $RS_7288.start();
 _setSpeed(100);
+
+
 $bo_act_login.login($g_url, $g_un, $g_pwd);
 var $accountName = $bo_act_accounts.createAccount();
-//var $accountName = "Acc1482017164021";
 
 var $contactName = $bo_act_contacts.createContact($accountName);
-//var $contactName = "Con148201716415";
 
 var $locationName = $bo_act_locations.createLocation($recordType[3],$accountName,"#007","India","560001");
 
 var $productName = $bo_act_products.createProduct($productCode, $productFamily[3]);
-//var $productName = "pro1482017165455";
 
 var $IBName = $bo_act_installedProduct.createInstalledProduct($productName, $accountName, $contactName);
-//var $IBName = "IB_148201717146";
 
-//var $warrantyName = "warn1582017174738";
 var $warrantyName = $bo_act_warrantyTerms.createWarrantyTerms($exchangeType[2],"10","5",$unitOfTimeForCoverage[4],"20","5",$unitOfTimeForCoverage[4],"30","5",$unitOfTimeForCoverage[4],$coverageEffectiveFrom[1]);
 
 $bo_act_warrantyTerms.createApplicableProducts($productName, $warrantyName); //Create Applicable product for warranty Terms

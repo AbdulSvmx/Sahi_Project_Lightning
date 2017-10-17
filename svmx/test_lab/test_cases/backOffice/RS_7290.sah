@@ -83,10 +83,11 @@ $bo_act_serviceMaintenanceContracts.addCoveredLocationToServiceContract($service
 
 $bo_act_serviceMaintenanceContracts.addEntitledContactsToServiceContract($serviceConractName, $contactName);
 
-/*var $materialPercentCoveredActulOn_IB = _getText(_cell(0,_under(_tableHeader("Material % Covered"))));
-var $timePercentCoveredActulOn_IB = _getText(_cell(0,_under(_tableHeader("Time % Covered"))));
-var $expensesPercentCoveredActulOn_IB = _getText(_cell(0,_under(_tableHeader("Expenses % Covered"))));
+var $expecctedIBUnder_CoveredProduct =  _getText(_link(0,_under(_tableHeader("Installed Product"))));
+var $expecctedLocationUnder_CoveredLocations = _getText(_cell(0,_under(_tableHeader("Time % Covered"))));
+var $expecctedContactUnder_EntitledContacts = _getText(_cell(0,_under(_tableHeader("Expenses % Covered"))));
 
+/*
 //validation
 //Validating the Material Labor and Expenses Percent
 _assertEqual($materialPercentCovered,$materialPercentCoveredActulOn_IB,"Actual and expected Material % covered are not same");
