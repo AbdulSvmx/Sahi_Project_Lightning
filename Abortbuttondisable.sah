@@ -1,0 +1,6 @@
+_click(_cell("pbTitle[1]"));
+_uncheck(_checkbox("page1:form1:block1:j_id81:j_id82:5:j_id85"));
+_click(_submit("Show Jobs"));
+_check(_radio("Checkbox"));
+_click(_cell("pbTitle[1]"));
+_click(_cell("pbButton [1]"));
