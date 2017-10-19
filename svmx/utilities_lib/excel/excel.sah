@@ -111,7 +111,7 @@ var $excel = new function excel() {
 								// Check if the rows under a column are not null
 								// or blank and count the rows to insert at the
 								// EOL of that column length.
-								// $k is the row and %j is the length
+								// $k is the row and $j is the column
 								if ($excelHandel.get($k, $j) != null && $excelHandel.get($k, $j) != "") {
 									$rowCount++;
 								} else {
@@ -128,10 +128,13 @@ var $excel = new function excel() {
 							$rowNo = $rowIndex;
 							// _log("$rowIndex = " + $rowIndex);
 						}
+						//Assign the column number from $j
 						$colNo = $j;
-						_log("$rowNo " + $rowNo);
-						_log("$colNo " + $colNo);
 
+						//_log("$rowNo " + $rowNo);
+						//_log("$colNo " + $colNo);
+
+						//Write the data to that row,column number
 						$excelHandel.set($rowNo, $colNo, [ [ $dataToWrite ] ]);
 
 						_log("Data After Write  " + $excelHandel.get($rowNo, $colNo));
