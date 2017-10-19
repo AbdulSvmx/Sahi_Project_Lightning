@@ -32,19 +32,17 @@ var $bo_pg_serviceMaintenanceContracts = new function bo_pg_serviceMaintenanceCo
 	this.chk_activeScon = _checkbox("Active");
 	
 	
-	// Click on the Warranty Terms on Applicable Product Detail Page
-	this.clickOnServiceContract = function($sconName){
-		
-		_click(_link(0,_rightOf(_cell("/labelCol/"))),$sconName,_near(_heading2("Covered Product Detail")));
-		};
-		
+	// Click on the Service Contract Detail Page
+	this.clickServiceContractOn_DetailPage = function($sconName){
+	 _click(_link($sconName,_rightOf(_cell("/Service\\/Maintenance Contract/"))));
+	 };
+			
 		//Objects for Part Pricing in Scon
 		this.btn_newPartsPricing = _button("New Parts Pricing");
 		this.txt_product	= _textbox("Product");
 		this.txt_pricePerUnit	= _textbox("Price Per Unit");
 		this.chk_active	= _checkbox("Active");
-		
-		
+		this.link_ServiceContractOnPartsPricing = _link(0,_rightOf(_cell("Service Contract")));
 	
 };
 
