@@ -29,16 +29,21 @@ var $bo_pg_warrantyTerms = new function bo_pg_warrantyTerms(){
 	
 	//Objects for Applicable product
 	this.btn_newApplicableProduct = _button("New Applicable Product");
-	this.txt_product = _textbox("Product");
+	this.txt_product = _textbox("/\\*Product|^Product/");
 	this.btn_save = _submit(" Save ");
-	this.link_warrantyTerm = _link(0,_rightOf(_cell("Warranty Terms")));
 	
-	
+	// Click on the Warranty Terms on Applicable Product Detail Page
+	this.clickOnWarranty = function($warrantyName){
+		
+		_click(_link($warrantyName,_near(_heading2("Applicable Product Detail"))));
+		
+		};
+		
 	//Objects for Create Warranty
 	this.btn_cretaeWarrantySFM =_button("Create Warranty");
 	
 	/**
-	 * Selects a warranty radio
+	 * Selects a warranty radio button
 	 */
 	this.selectWarranty = function($warrantyName){
 		

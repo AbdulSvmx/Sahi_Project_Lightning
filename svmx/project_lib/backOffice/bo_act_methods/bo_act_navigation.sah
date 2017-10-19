@@ -101,11 +101,8 @@ var $bo_act_navigation = new function bo_act_navigation() {
     };
     
     this.navigateToWarrantyTermsPage = function(){
-    	var $url="";
-    	$bo_act_navigation.navigateToHome();
-    	_set($url, window.location.href);
-    	$url= $url.replace("home/home.jsp","a2M/o");
-    	_navigateTo($url);
+    	_click($bo_pg_home.btn_allTabs);
+   	    _click($bo_pg_home.link_warrantyTerms);
     };
     
     this.navigateToCreatedRecordUsingCreateNewView = function($viewName, $fieldName, $operator, $recordToBeSearch){
@@ -124,8 +121,8 @@ var $bo_act_navigation = new function bo_act_navigation() {
     	_setValue(_textbox("phSearchInput"),$recordToBeSearch);
     	_click(_button("phSearchButton"));
     	_wait(3000, _isVisible($recordToBeSearch));
-    	_click(_link("Search All"));
-    	_wait(3000, _isVisible($recordToBeSearch));
+    //	_click(_link("Search All"));
+    //	_wait(3000, _isVisible($recordToBeSearch));
     	_click(_link($recordToBeSearch));
         };
         
@@ -144,4 +141,8 @@ var $bo_act_navigation = new function bo_act_navigation() {
     	 _setSelected(_select(0,_rightOf(_label("Select Submodule"))),"SLA Clock on Work Order");
      };
 
+     this.navigateToPreventiveMaintenancePlans = function(){
+     	_click($bo_pg_home.btn_allTabs);
+    	    _click($bo_pg_home.link_preventiveMaintenancePlans);
+     };
 };

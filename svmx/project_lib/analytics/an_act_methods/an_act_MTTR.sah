@@ -59,7 +59,7 @@ var $an_act_MTTR = new function an_act_MTTR(){
 		_click($an_pg_mttr.list_choose_qualification_wo);
 		_click($an_pg_mttr.btn_uk_closed_wo);
 		_click($an_pg_mttr.list_workdetail_qualification);
-		_click($an_pg_mttr.btn_labor_line_only);
+		_click($an_pg_mttr.btn_parts_line_only);
 		_click($an_pg_mttr.btn_save);
 		_click($an_pg_mttr.btn_ok);		
 		

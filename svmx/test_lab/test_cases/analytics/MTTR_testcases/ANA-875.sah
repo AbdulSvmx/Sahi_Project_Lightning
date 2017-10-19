@@ -50,7 +50,7 @@ _log($ana_875_WO1);
 
 var $StartDate = $data[1]['WDStartDate'];
 var $EndDate =  $data[1]['WDEndDate'];
-var $LineType = $data[1]['LineType'];
+var $LineType = $data[2]['LineType'];
 var $RecordType = $data[1]['RecordType'];
 var $DeadTime = $data[1]['DeadTime'];
 var $ana_875_work_detail;

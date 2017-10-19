@@ -1,0 +1,117 @@
+//Tests are to be written here [Bhupendra Singh Chouhan]
+//==============
+
+//Pre - Condition Test Data
+var $recordType = ["Depot","Depot Child","Depot Parent","Standard Location"];
+var $productFamily = ["--None--","GeneralSolution","AdvSolution","Accessory", "Storage"];
+var $productCode = "";
+var $exchangeType = ["--None--","Advance Exchange","Return Exchange"];
+var $unitOfTimeForCoverage = ["--None--","Days","Weeks","Months","Years"];
+var $coverageEffectiveFrom = ["--None--","Date Installed","Date Ordered","Date Shipped","Last Activity Date","Last Date Shipped","Warranty Start Date","Warranty End Date"];
+var $seperator = "/";
+
+var $RS_7290 = _testcase("$RS_7290","Creation of a Warranty Term and association of a Warranty to an Installed Product");
+$RS_7290.start();
+_setSpeed(100);
+//$bo_act_login.login($g_url, $g_un, $g_pwd);
+
+var $accountName = $bo_act_accounts.createAccount();
+
+var $contactName = $bo_act_contacts.createContact($accountName);
+
+var $locationName = $bo_act_locations.createLocation($recordType[3],$accountName,"#007","India","560001");
+
+var $productName = $bo_act_products.createProduct($productCode, $productFamily[3]);
+
+var $IBName = $bo_act_installedProduct.createInstalledProduct($productName, $accountName, $contactName);
+
+//Create 1st SLA Term SLA01 [Platinum SLA]
+/*$bo_act_navigation.navigateToSlaTerms();
+var $slaName01 = $bo_act_slaTerms.createSlaTerms("Default");
+$bo_act_slaTerms.addInitialResponseToSLA($slaName01,"WorkOrder","Field Service","Medium","Created Date","5","10","SLA");
+$bo_act_slaTerms.addOnsiteResponseToSLA($slaName01,"WorkOrder","Field Service","Medium","Created Date","10","15","SLA");
+
+//validation of SLA creation
+_assertExists(_span($slaName01));
+
+//Create 2nd SLA Term SLA02 [Gold SLA]
+$bo_act_navigation.navigateToSlaTerms();
+var $slaName02 = $bo_act_slaTerms.createSlaTerms("Default");
+$bo_act_slaTerms.addInitialResponseToSLA($slaName02,"WorkOrder","Field Service","Medium","Created Date","5","10","SLA");
+$bo_act_slaTerms.addOnsiteResponseToSLA($slaName02,"WorkOrder","Field Service","Medium","Created Date","10","15","SLA");
+
+//validation of SLA creation
+_assertExists(_span($slaName02));
+
+//Create 3rd SLA Term SLA03 [Silver SLA]
+$bo_act_navigation.navigateToSlaTerms();
+var $slaName03 = $bo_act_slaTerms.createSlaTerms("Default");
+$bo_act_slaTerms.addInitialResponseToSLA($slaName03,"WorkOrder","Field Service","Medium","Created Date","5","10","SLA");
+$bo_act_slaTerms.addOnsiteResponseToSLA($slaName03,"WorkOrder","Field Service","Medium","Created Date","10","15","SLA");
+
+//validation of SLA creation
+_assertExists(_span($slaName03));  */
+
+var $slaName01 = "Platinum SLA BAC";
+var $slaName02 = "Platinum SLA BAC";
+var $slaName03 = "Platinum SLA BAC";
+
+var $pastYear = 2;  // Start Date for Service Contract
+var $futureYear = 2;  // End Date for Service Contract
+
+// Creation of Service Contracts
+var $serviceConractName = $bo_act_serviceMaintenanceContracts.createServiceMaintenanceContract($accountName, $slaName01, $futureYear, $pastYear);
+
+//Activating Created Service Contract
+$bo_act_serviceMaintenanceContracts.activateServiceContract($serviceConractName);
+
+// Add Covered Product to Service Contract 
+
+var $pastYear =   3;  			// Start Date 'TODAY's' Date - 3 YEARS
+var $futureYear = 3;			// End Date 'TODAY's' Date + 3 YEARS
+
+$bo_act_serviceMaintenanceContracts.AddCoveredProducToServiceContract($serviceConractName, $IBName, $slaName02, $pastYear, $futureYear);
+
+//Add Covered Location to Service Contract 
+
+var $pastYear =   5;  			// Start Date 'TODAY's' Date - 5 YEARS
+var $futureYear = 5;			//End Date 'TODAY's' Date + 5 YEARS
+
+$bo_act_serviceMaintenanceContracts.addCoveredLocationToServiceContract($serviceConractName, $locationName, $slaName03, $pastYear, $futureYear);
+
+//Add Entitled Contact to Service Contract 
+
+$bo_act_serviceMaintenanceContracts.addEntitledContactsToServiceContract($serviceConractName, $contactName);
+
+/*var $materialPercentCoveredActulOn_IB = _getText(_cell(0,_under(_tableHeader("Material % Covered"))));
+var $timePercentCoveredActulOn_IB = _getText(_cell(0,_under(_tableHeader("Time % Covered"))));
+var $expensesPercentCoveredActulOn_IB = _getText(_cell(0,_under(_tableHeader("Expenses % Covered"))));
+
+//validation
+//Validating the Material Labor and Expenses Percent
+_assertEqual($materialPercentCovered,$materialPercentCoveredActulOn_IB,"Actual and expected Material % covered are not same");
+_assertEqual($laborPercentCovered,$timePercentCoveredActulOn_IB,"Actual and expected Time % covered are not same");
+_assertEqual($expensesPercentCovered,$expensesPercentCoveredActulOn_IB,"Actual and expected Expenses % covered are not same");
+
+var $startDateExpectedOn_IB = _getText(_div(0,_rightOf(_cell("/Date Installed/"))));
+
+var $endDateExpectedOn_IB =  $bo_act_common.endDateCalculationForIB($startDateExpectedOn_IB, $durationOfCoverage, $seperator);
+_logOutput($endDateExpectedOn_IB);
+
+var $startDateActulOn_IB = _getText(_cell(0,_under(_tableHeader("Start Date"))));
+var $endDateActulOn_IB = _getText(_cell(0,_under(_tableHeader("End Date"))));
+
+//Validating the Actual and expected Start/End Dates on IB
+_assertEqual($startDateExpectedOn_IB,$startDateActulOn_IB,"Actual and expected Start Dates are not same");
+_assertEqual($endDateExpectedOn_IB,$endDateActulOn_IB,"Actual and expected End Dates are not same");*/
+
+//Clean up function
+
+/*var $datacreated = [$warrantyName,$IBName,$locationName,$productName,$contactName,$accountName,];
+for (var i = 0; i < $datacreated.length; i++) {
+	$bo_act_common.cleanUpfunction($datacreated[i]);
+}
+$bo_act_login.logOut();*/
+
+$RS_7290.end();
+
