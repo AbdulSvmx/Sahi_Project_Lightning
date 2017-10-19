@@ -11,8 +11,12 @@ var $bo_pg_workOrders = new function bo_pg_workOrders(){
 	this.txt_slaTerms = _textbox(0,_rightOf(_label("SLA Terms")));
 	this.sel_priority = _select(0,_rightOf(_label("*Priority")));
 	this.btn_saveWorkOrder = _submit(" Save ");
+<<<<<<< HEAD
 	this.txt_case = _textbox(0,_rightOf(_label("*Case")));
 	this.txt_contact = _textbox(0,_rightOf(_label("*Contact")));
+=======
+	this.btn_SFWCheckEntitlement = _button("Check Entitlement");
+>>>>>>> 4dbbaef2f3eece493ef9b824a7ebe7b1db4bf1e0
 	
 //SLA CLOCK FIELDS
 	this.txt_slaClockInitialResponse = _cell("/Initial Response/");

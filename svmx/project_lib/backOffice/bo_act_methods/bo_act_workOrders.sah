@@ -33,7 +33,14 @@ var $bo_act_workOrders = new function bo_act_workOrders() {
 		_assertNotVisible(_div("/Error: Invalid Data/"));
 		//return $callBack.returnResult([_isVisible($accountName), "Account not created",$accountName] );
 	};
+	this.checkEntitlement = function($workOrderNumber){
+		$bo_act_navigation.navigateToWorkOrdersTab();
+		_click(_link($workOrderNumber));
+		_selectDomain("/svmx/");
+		_click($bo_pg_workOrders.btn_SFWCheckEntitlement);
+		_selectDomain();
 	
+<<<<<<< HEAD
 	this.pauseSLAClock = function(){
 		_selectDomain("/svmx/");
 		_click($bo_pg_workOrders.btn_SLAPause);
@@ -50,4 +57,7 @@ var $bo_act_workOrders = new function bo_act_workOrders() {
 	};
 	
 	
+=======
+	};
+>>>>>>> 4dbbaef2f3eece493ef9b824a7ebe7b1db4bf1e0
 };

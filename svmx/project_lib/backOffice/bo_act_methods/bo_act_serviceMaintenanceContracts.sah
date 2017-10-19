@@ -94,7 +94,7 @@ this.AddCoveredProducToServiceContract =  function($sconName,$installedProduct,$
 };
 
 this.addCoveredLocationToServiceContract = function($sconName,$location,$slaName,$pastYear,$futureYear){
-	$bo_pg_serviceMaintenanceContracts.clickOnServiceContract($sconName);
+	//$bo_pg_serviceMaintenanceContracts.clickOnServiceContract($sconName);
 	_click($bo_pg_serviceMaintenanceContracts.btn_newCoveredLocation);
 	_setValue($bo_pg_serviceMaintenanceContracts.txt_location,$location);
 	_setValue($bo_pg_serviceMaintenanceContracts.txt_slaTermName,$slaName);
@@ -106,12 +106,23 @@ this.addCoveredLocationToServiceContract = function($sconName,$location,$slaName
 };
 
 this.addEntitledContactsToServiceContract = function($sconName,$contact){
-	$bo_pg_serviceMaintenanceContracts.clickOnServiceContract($sconName);
+	//$bo_pg_serviceMaintenanceContracts.clickOnServiceContract($sconName);
 	_click($bo_pg_serviceMaintenanceContracts.btn_newEntitledContact);
 	_setValue($bo_pg_serviceMaintenanceContracts.txt_contract,$contact);
 	/*_setValue($bo_pg_serviceMaintenanceContracts.txt_slaTermName,$slaName);
 	_setValue($bo_pg_serviceMaintenanceContracts.txt_startDate, $bo_act_common.getPastDate($pastYear,"/"));
 	_setValue($bo_pg_serviceMaintenanceContracts.txt_endDate, $bo_act_common.getfutureDate($futureYear, "/"));*/
+	_click($bo_pg_serviceMaintenanceContracts.btn_save);
+	_assertNotVisible(_div("/Error: Invalid Data/"));
+	$bo_pg_serviceMaintenanceContracts.clickOnServiceContract($sconName);
+};
+
+this.addPartsPricingToServiceContract = function($sconName, $prodName,$pricePerUnit){
+	//$bo_pg_serviceMaintenanceContracts.clickOnServiceContract($sconName);
+	_click($bo_pg_serviceMaintenanceContracts.btn_newPartsPricing);
+	_setValue($bo_pg_serviceMaintenanceContracts.txt_product,$prodName);
+	_setValue($bo_pg_serviceMaintenanceContracts.txt_pricePerUnit,$pricePerUnit);
+	_click($bo_pg_serviceMaintenanceContracts.chk_active);
 	_click($bo_pg_serviceMaintenanceContracts.btn_save);
 	_assertNotVisible(_div("/Error: Invalid Data/"));
 	$bo_pg_serviceMaintenanceContracts.clickOnServiceContract($sconName);
