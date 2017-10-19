@@ -4,6 +4,8 @@ var $territory_xls = $excel.readFromCustomExcel("../optimax/op_excleData/automat
 var $team_xls = $excel.readFromCustomExcel("../optimax/op_excleData/automation.xlsx", "SVMXC__Service_Group__c","","");
 var $tech_xls = $excel.readFromCustomExcel("../optimax/op_excleData/automation.xlsx", "SVMXC__Service_Group_Members__c","","");
 var $skill_xls = $excel.readFromCustomExcel("../optimax/op_excleData/automation.xlsx", "SVMXC__Skill__c","","");
+var $AccountXl = $excel.readFromCustomExcel("../optimax/op_excleData/automation.xlsx", "Account","","");
+var $rec_Pref = $excel.readFromCustomExcel("../optimax/op_excleData/automation.xlsx", "SVMXC__Resource_Preference__c","","");
 
 for(var $i=0;$i<$user_credentials_xls.length;$i++)
 {
@@ -41,6 +43,9 @@ if($BH_creation != null){
 		if($createTeam_creation != false){
 			_set($createTech_creation, _fetch(createTech($territory_creation,$BH_creation,$createTeam_creation,$tech_xls)));
 			_log($createTech_creation);
+			if($createTech_creation.length != 0){
+				_log("success");
+			}
 			//$excel.insertUnderColumn("../optimax/op_excleData/automation.xlsx", "BusinessHours", "Id", $territory_creation);
 			/*if($createTech_creation != false){
 				_set($createSkill_creation, _fetch(createSkills($skill_xls)));
@@ -143,8 +148,9 @@ function createTeam($team_xls){
 
 function createTech($territory_creation,$BH_creation,$createTeam_creation,$tech_xls){
 	var createTech = [];
-	$isSuccess = false;
-	for(var $i=0;$i<$tech_xls.length;$i++)
+	var techId = [];
+	var $isSuccess = false;
+	for(var $i=0;$i<80;$i++)
 	{
 		var tech = new sforce.SObject("SVMXC__Service_Group_Members__c");
 		tech.Name = $tech_xls[$i][0];
@@ -162,18 +168,14 @@ function createTech($territory_creation,$BH_creation,$createTeam_creation,$tech_
 	}
 	var id;
 	var $tech_result = _call(sforce.connection.create(createTech));
-	_log(" $tech_result.length = "+$tech_result.length);
-	_log(" $tech_result = "+$tech_result);
-	for(var $x=0;$x<$tech_result.length;$x++){
-		_log("$tech_result"+[$x]+".id ="+$tech_result[$x].id);
-		id = $tech_result[$x].id
-		$isSuccess = true;
-		//</browser>
-		$excel.insertUnderColumn("../optimax/op_excleData/automation.xlsx", "SVMXC__Service_Group_Members__c", "Id",id);
-		//<browser>
+	if($tech_result != 0){
+		$isSuccess = true
+		for(var $x=0;$x<$tech_result.length;$x++){
+			techId.push($tech_result[$x].id);
+		}
+		_log("techId = "+techId);
+		return techId;
 	}
-	_log("id = "+id);
-	$excel.insertUnderColumn("../optimax/op_excleData/automation.xlsx", "SVMXC__Service_Group_Members__c", "Id",id);
 	return $isSuccess;
 }
 
