@@ -45,4 +45,31 @@ this.deletePMPlanTemplate = function($PMPTempName){
 	_click($bo_pg_PMPlanTemplate.btn_delete);
 	
 };
+
+this.createUsageBasedConditionPMPTemplate = function($productName, $attribute,$operator,$frequency,$startAt,$threshold,$stopAt,$adjustmentType,$minAdj,$maxAdj,$adjValue,$adjUnit)
+{
+	var $PMTemplateName = $bo_act_common.generateRandomName("PMT");
+	$bo_act_navigation.navigateToPMPlanTemplatePage();
+	_click(_submit("Create Condition Based PM Plan Template"));
+	_setValue(_textbox("templateName"),$PMTemplateName);
+	_setValue(_textbox("product"),$productName);
+	_click(_image("/svmx-filter-icon/"));
+	_click(_div(0,_rightOf(_textbox("product"))));
+	_click(_listItem(0));
+	_click(_span("+ Add row[1]"));
+	
+	_click(_div("/svmx-grid-cell-inner/",_under(_div("Attribute[1]"))));
+	_click(_div("/svmx-trigger-index/",_under(_div("Attribute[1]"))));
+	_click(_div($attribute));
+	_click(_div("/svmx-grid-cell-inner/",_under(_div("Operator[1]"))));
+	_click(_div("/svmx-trigger-index/",_under(_div("Operator[1]"))));
+	_click(_listItem($operator));
+
+	_click(_div("/svmx-grid-cell-inner/",_under(_div("Frequency"))));
+	_click(_div("/svmx-trigger-index/",_under(_div("Frequency"))));
+	_setValue(_textbox(0,_under(_div("Frequency")),$frequency));
+	
+	
+	
+	};
 };

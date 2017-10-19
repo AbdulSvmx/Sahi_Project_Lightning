@@ -1,7 +1,3 @@
-
-
-
-
 //author - Noor Salma Sharieff
 
 var $RS_5248 = _testcase("$RS_5248","Create a PM Plan from Account with coverage type as Account");

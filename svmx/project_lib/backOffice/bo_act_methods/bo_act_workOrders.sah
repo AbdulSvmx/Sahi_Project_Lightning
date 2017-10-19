@@ -23,10 +23,30 @@ var $bo_act_workOrders = new function bo_act_workOrders() {
 		//return $callBack.returnResult([_isVisible($accountName), "Account not created",$accountName] );
 	};
 	
+	this.clickLinktoUpdateTextfields = function($object){
+		_click($object);
+		
+	};
+	
 	this.saveWorkOrder = function(){
 		_click($bo_pg_workOrders.btn_saveWorkOrder);
 		_assertNotVisible(_div("/Error: Invalid Data/"));
 		//return $callBack.returnResult([_isVisible($accountName), "Account not created",$accountName] );
+	};
+	
+	this.pauseSLAClock = function(){
+		_selectDomain("/svmx/");
+		_click($bo_pg_workOrders.btn_SLAPause);
+		_setSelected($bo_pg_workOrders.sel_ReasonSLA,"Customer Not Available");
+		_click($bo_pg_workOrders.btn_popUpPause);
+	};
+	
+	this.resumeSLAClock = function($extendingSLACommitment){
+		_selectDomain("/svmx/");
+		_click($bo_pg_workOrders.btn_SLAResume);
+		_click(_button($extendingSLACommitment));
+	//	_setSelected($bo_pg_workOrders.sel_ReasonSLA,"Customer Not Available");
+	//	_click($bo_pg_workOrders.btn_popUpPause);
 	};
 	
 	

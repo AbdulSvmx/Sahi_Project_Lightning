@@ -11,7 +11,7 @@ var $searchText =$checklistName;
 var $$questionText="What is your name";
 	
 $bo_act_SFM.newChecklistTypeSFM($checklistName);
-$bo_act_SFM.addQuestionToChecklist($questionText)
+$bo_act_SFM.addQuestionToChecklist($questionText);
 
 
 if($bo_act_navigation.navigateToSfmAppPermission()){
