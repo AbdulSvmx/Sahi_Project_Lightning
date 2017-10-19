@@ -150,7 +150,7 @@ function createTech($territory_creation,$BH_creation,$createTeam_creation,$tech_
 	var createTech = [];
 	var techId = [];
 	var $isSuccess = false;
-	for(var $i=0;$i<80;$i++)
+	for(var $i=0;$i<$tech_xls.length;$i++)
 	{
 		var tech = new sforce.SObject("SVMXC__Service_Group_Members__c");
 		tech.Name = $tech_xls[$i][0];
@@ -166,9 +166,9 @@ function createTech($territory_creation,$BH_creation,$createTeam_creation,$tech_
 		tech.SVMXC__Working_Hours__c = $BH_creation;
 		createTech.push(tech);
 	}
-	var id;
 	var $tech_result = _call(sforce.connection.create(createTech));
-	if($tech_result != 0){
+	_log("$tech_result length = "+$tech_result.length);
+	if($tech_result === $tech_xls.length){
 		$isSuccess = true
 		for(var $x=0;$x<$tech_result.length;$x++){
 			techId.push($tech_result[$x].id);
