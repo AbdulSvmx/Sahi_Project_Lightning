@@ -95,6 +95,7 @@ var $excel = new function excel() {
 		var $excelHandel = _getExcel($filePath, $sheetName);
 		var $dataRaw = $excelHandel.getData();
 		//Traverse through the Columns
+		_log("$dataRaw.length = "+$dataRaw.length);
 		for (var $i = 0; $i < $dataRaw.length; $i++) {
 			//Traverse through the Rows
 			for (var $j = 0; $j < $dataRaw[$i].length; $j++) {
@@ -103,10 +104,12 @@ var $excel = new function excel() {
 					try {
 						//Default EOL length for row
 						if ($rowIndex == null || $rowIndex == "") {
-							$rowNo = $dataRaw.length;
+							$rowNo = $dataRaw.length-1;
+							_log("$dataRaw.length = "+$dataRaw.length);
 						} else {
 							//Custom row index
 							$rowNo = $rowIndex;
+							_log("$rowIndex = "+$rowIndex);
 						}
 						$colNo = $j;
 						_log("$rowNo " + $rowNo);
