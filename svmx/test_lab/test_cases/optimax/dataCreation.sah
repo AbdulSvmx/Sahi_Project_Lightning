@@ -7,6 +7,7 @@ var $skill_xls = $excel.readFromCustomExcel("../optimax/op_excleData/automation.
 var $Account_xls = $excel.readFromCustomExcel("../optimax/op_excleData/automation.xlsx", "Account","","");
 var $rec_Pref_xls = $excel.readFromCustomExcel("../optimax/op_excleData/automation.xlsx", "SVMXC__Resource_Preference__c","","");
 var $exp_xls = $excel.readFromCustomExcel("../optimax/op_excleData/automation.xlsx", "SVMXC__Service_Group_Skills__c","","");
+var $RS_6694 = $excel.readFromCustomExcel("../optimax/op_excleData/automation.xlsx", "RS_6694","","");
 
 for(var $i=0;$i<$user_credentials_xls.length;$i++)
 {
@@ -37,9 +38,17 @@ if($acc_creation != null && $acc_creation != false){
 for(var $e=0;$e<$rec_Pref_xls.length;$e++){
 	$excel.insertUnderColumn("../optimax/op_excleData/automation.xlsx", "SVMXC__Resource_Preference__c", "SVMXC__Company__c", $acc_creation,(1+$e));
 }
+//updating the acc in RS_6694
+for(var $a=0;$a<$RS_6694.length;$a++){
+	$excel.insertUnderColumn("../optimax/op_excleData/automation.xlsx", "RS_6694", "SVMXC__Company__c", $acc_creation,(1+$a));
+}
 _set($BH_creation, _fetch(createBH($businessHour_xls,$name_BH)));
 _log($BH_creation);
-$excel.insertUnderColumn("../optimax/op_excleData/automation.xlsx", "BusinessHours", "Id", $BH_creation);
+$excel.insertUnderColumn("../optimax/op_excleData/automation.xlsx", "BusinessHours", "Id", $BH_creation, 1);
+//updating the BH in RS_6694
+for(var $b=0;$b<$RS_6694.length;$b++){
+	$excel.insertUnderColumn("../optimax/op_excleData/automation.xlsx", "RS_6694", "SVMXC__Preferred_Business_Hours__c", $BH_creation,(1+$b));
+}
 //updating bh in tech
 for(var $a=0;$a<$tech_xls.length;$a++){
 	$excel.insertUnderColumn("../optimax/op_excleData/automation.xlsx", "SVMXC__Service_Group_Members__c", "SVMXC__Working_Hours__c", $BH_creation,(1+$a));
@@ -52,15 +61,19 @@ if($BH_creation != null){
 	_log("business hour = "+$BH_creation);
 	_set($territory_creation, _fetch(createTerritory($territory_xls,$BH_creation)));
 	_log($territory_creation);
-	$excel.insertUnderColumn("../optimax/op_excleData/automation.xlsx", "SVMXC__Territory__c", "Id", $territory_creation);
+	$excel.insertUnderColumn("../optimax/op_excleData/automation.xlsx", "SVMXC__Territory__c", "Id", $territory_creation, 1);
 	//updating territory id in tech
 	for(var $b=0;$b<$tech_xls.length;$b++){
 		$excel.insertUnderColumn("../optimax/op_excleData/automation.xlsx", "SVMXC__Service_Group_Members__c", "SVMXC__Service_Territory__c", $territory_creation,(1+$b));
 	}
+	//updating the territory in RS_6694
+	for(var $a=0;$a<$RS_6694.length;$a++){
+		$excel.insertUnderColumn("../optimax/op_excleData/automation.xlsx", "RS_6694", "SVMXC__Primary_Territory__c", $territory_creation,(1+$a));
+	}
 	if($territory_creation != false){
 		_set($createTeam_creation, _fetch(createTeam($team_xls)));
 		_log($createTeam_creation);
-		$excel.insertUnderColumn("../optimax/op_excleData/automation.xlsx", "SVMXC__Service_Group__c", "Id", $createTeam_creation);
+		$excel.insertUnderColumn("../optimax/op_excleData/automation.xlsx", "SVMXC__Service_Group__c", "Id", $createTeam_creation,1);
 		//updating team id in tech
 		for(var $c=0;$c<$tech_xls.length;$c++){
 			$excel.insertUnderColumn("../optimax/op_excleData/automation.xlsx", "SVMXC__Service_Group_Members__c", "SVMXC__Service_Group__c", $createTeam_creation,(1+$c));
@@ -313,13 +326,15 @@ function createExpertise($exp_xls){
 	var expId = [];
 	for(var $i = 0;$i<$exp_xls.length;$i++){
 		var expertise = new sforce.SObject("SVMXC__Service_Group_Skills__c");
+		expertise.SVMXC__Skill_Level__c=$exp_xls[$i][0];
 		expertise.SVMXC__Group_Member__c=$exp_xls[$i][1];
 	    expertise.SVMXC__Service_Group__c=$exp_xls[$i][2];
-	    expertise.SVMXC__Skill_Level__c=$exp_xls[$i][0];
 		expertise.SVMXC__Skill__c=$exp_xls[$i][3];
 		createExp.push(expertise);
+		_log("createExp = "+createExp);
 	}
 	var exp_result = _call(sforce.connection.create(createExp));
+	_log("exp_result ="+exp_result);
 	if(exp_result.length != null){
 		$isSuccess = true;
 		for(var $x=0;$x<exp_result.length;$x++){
