@@ -62,6 +62,7 @@ _log("$TechEligibilityName = "+$TechEligibilityName);
 if(_exists($TechEligibilityName))
 	{
 	_log("Technician Eligibility Rule Created Successfully");
+	$excel.insertUnderColumn("../optimax/op_excleData/automation.xlsx", "Rules", "Eligibility Rule", $TechEligibilityName, $rowIndex);
 	}
 else
 	{
