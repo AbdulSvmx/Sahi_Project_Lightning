@@ -83,6 +83,10 @@ if($BH_creation != null){
 				for(var $g=0;$g<$exp_xls.length;$g++){
 					$excel.insertUnderColumn("../optimax/op_excleData/automation.xlsx", "SVMXC__Service_Group_Skills__c", "SVMXC__Group_Member__c", $createTech_creation[$g],(1+$g));
 				}
+				//updating tech id in prf res
+				for(var $g=0;$g<$rec_Pref_xls.length;$g++){
+					$excel.insertUnderColumn("../optimax/op_excleData/automation.xlsx", "SVMXC__Resource_Preference__c", "SVMXC__Group_Member__c", $createTech_creation[$g],(1+$g));
+				}
 				//creating skills
 					_set($createSkill_creation, _fetch(createSkills($skill_xls)));
 					_log($createSkill_creation);
@@ -92,16 +96,30 @@ if($BH_creation != null){
 						}
 						_log("skill update is done")
 						//need to look into it
-						/*for(var $h=0;$h<$exp_xls.length;$h++){
+						for(var $h=0;$h<$exp_xls.length;$h++){
 							_log("exp_xls.length = "+$exp_xls.length);
 							_log("h = "+$h);
-							if($h=0 || $h=2){
-								$excel.insertUnderColumn("../optimax/op_excleData/automation.xlsx", "SVMXC__Service_Group_Skills__c", "SVMXC__Skill__c", $createSkill_creation[0],(1+$h));
-							}
-							else{
+							if($h > 2){
 								$excel.insertUnderColumn("../optimax/op_excleData/automation.xlsx", "SVMXC__Service_Group_Skills__c", "SVMXC__Skill__c", $createSkill_creation[1],(1+$h));
 							}
-						}*/
+							else{
+								$excel.insertUnderColumn("../optimax/op_excleData/automation.xlsx", "SVMXC__Service_Group_Skills__c", "SVMXC__Skill__c", $createSkill_creation[0],(1+$h));
+							}
+						}
+						_set($createExp_creation, _fetch(createExpertise($exp_xls)));
+						_log($createExp_creation);
+						if($createExp_creation.length != 0 && $createExp_creation != false && $createExp_creation != null){
+							for(var $j=0;$j<$createExp_creation.length;$j++){
+								$excel.insertUnderColumn("../optimax/op_excleData/automation.xlsx", "SVMXC__Service_Group_Skills__c", "Id", $createExp_creation[$j],(1+$j));
+							}
+							_set($createPrfRes_creation, _fetch(createPrfRes($rec_Pref_xls)));
+							_log($createPrfRes_creation);
+							if($createPrfRes_creation.length != 0 && $createPrfRes_creation != false && $createPrfRes_creation != null){
+								for(var $k=0;$k<$createPrfRes_creation.length;$k++){
+									$excel.insertUnderColumn("../optimax/op_excleData/automation.xlsx", "SVMXC__Resource_Preference__c", "Id", $createPrfRes_creation[$k],(1+$k));
+								}
+							}
+						}
 					}
 				}
 			}
@@ -289,17 +307,52 @@ function createSkills($skill_xls){
 	return $isSuccess;
 }
 
-function createExpertise($techs, $createTeam_creation, $skills){
+function createExpertise($exp_xls){
 	var createExp = [];
 	var $isSuccess = false;
 	var expId = [];
-	var expertise = new sforce.SObject("SVMXC__Service_Group_Skills__c");
-	expertise.SVMXC__Group_Member__c=$techs;
-    expertise.SVMXC__Service_Group__c=$createTeam_creation;
-    expertise.SVMXC__Skill_Level__c=7;
-	expertise.SVMXC__Skill__c=$skills;
-	var result = sforce.connection.create([expertise]);
-	return result;
+	for(var $i = 0;$i<$exp_xls.length;$i++){
+		var expertise = new sforce.SObject("SVMXC__Service_Group_Skills__c");
+		expertise.SVMXC__Group_Member__c=$exp_xls[$i][1];
+	    expertise.SVMXC__Service_Group__c=$exp_xls[$i][2];
+	    expertise.SVMXC__Skill_Level__c=$exp_xls[$i][0];
+		expertise.SVMXC__Skill__c=$exp_xls[$i][3];
+		createExp.push(expertise);
+	}
+	var exp_result = _call(sforce.connection.create(createExp));
+	if(exp_result.length != null){
+		$isSuccess = true;
+		for(var $x=0;$x<exp_result.length;$x++){
+			expId.push(exp_result[$x].id);
+			_log("expId.push = "+expId);
+		}
+		_log("expId ids ="+expId);
+		return expId;
+	}
+	return $isSuccess;
 }
 
+function createPrfRes($rec_Pref_xls){
+	var createPrfRes = [];
+	var $isSuccess = false;
+	var prfResId = [];
+	for(var $i = 0;$i<$rec_Pref_xls.length;$i++){
+		var prfRes = new sforce.SObject("SVMXC__Resource_Preference__c");
+		prfRes.SVMXC__Company__c=$rec_Pref_xls[$i][1];
+		prfRes.SVMXC__Group_Member__c=$rec_Pref_xls[$i][2];
+		prfRes.SVMXC__Preference_Type__c=$rec_Pref_xls[$i][0];
+		createPrfRes.push(prfRes);
+	}
+	var pfrRes_result = _call(sforce.connection.create(createPrfRes));
+	if(pfrRes_result.length != null){
+		$isSuccess = true;
+		for(var $x=0;$x<pfrRes_result.length;$x++){
+			prfResId.push(pfrRes_result[$x].id);
+			_log("expId.push = "+prfResId);
+		}
+		_log("expId ids ="+prfResId);
+		return prfResId;
+	}
+	return $isSuccess;
+}
 //</browser>

@@ -96,7 +96,7 @@ var $excel = new function excel() {
 		var $excelHandel = _getExcel($filePath, $sheetName);
 		var $dataRaw = $excelHandel.getData();
 		// Traverse through the Columns
-		_log("$dataRaw.length = " + $dataRaw.length);
+		//_log("$dataRaw.length = " + $dataRaw.length);
 		for (var $i = 0; $i < $dataRaw.length; $i++) {
 			// Traverse through the Rows
 			for (var $j = 0; $j < $dataRaw[$i].length; $j++) {
@@ -121,7 +121,7 @@ var $excel = new function excel() {
 							}
 							// Assign the row count to attain the EOL of the
 							// column
-							$rowNo = $rowCount;
+							$rowNo = $rowCount-1;
 
 						} else {
 							// Custom row index
@@ -129,12 +129,12 @@ var $excel = new function excel() {
 							// _log("$rowIndex = " + $rowIndex);
 						}
 						$colNo = $j;
-						_log("$rowNo " + $rowNo);
-						_log("$colNo " + $colNo);
+						//_log("$rowNo " + $rowNo);
+						//_log("$colNo " + $colNo);
 
 						$excelHandel.set($rowNo, $colNo, [ [ $dataToWrite ] ]);
 
-						_log("Data After Write  " + $excelHandel.get($rowNo, $colNo));
+						//_log("Data After Write  " + $excelHandel.get($rowNo, $colNo));
 
 						break;
 					} catch ($e) {
