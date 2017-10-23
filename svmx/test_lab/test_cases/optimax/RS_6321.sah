@@ -1,5 +1,5 @@
 var $user_credentials = $excel.readFromCustomExcel("../optimax/op_excleData/automation.xlsx", "User_Details","","");
-var $TerrData = $excel.readFromCustomExcel("../optimax/op_excleData/automation.xlsx", "Territory","","");
+var $TerrData = $excel.readFromCustomExcel("../optimax/op_excleData/automation.xlsx", "Rules","","");
 
 //var $nArr;
 //Calling the sforce API
@@ -20,7 +20,7 @@ var $g_pwd = "maxpl0re2";*/
 
 $bo_act_login.login($g_url, $g_un, $g_pwd);
 		
-var $ParentTerr = $TerrData[0][0];
+var $ParentTerr = $TerrData[0][4];
 var $date = "" + new Date();
 var $TerrName = "AutomationChildTerritory_" + $date;
 
@@ -46,11 +46,12 @@ _setValue(_textbox("Territory:POPUPS:TerritoryBlock:j_id43:j_id44:TTBussHrs"), "
 _click(_submit("Submit"));
 _click(_link($TerrName));
 
-if(_isVisible($ParentTerr))
+if(_exists($ParentTerr))
 	{
 	_log("Child Territory: " + $TerrName + "Created Successfully for Parent Territory: " + $ParentTerr);
 	
-	$excel.writeToExcel("insertAtIndex", "../optimax/op_excleData/automation.xlsx", "ChildTerritory", $TerrName, "1");
+	//$excel.writeToExcel("insertAtIndex", "../optimax/op_excleData/automation.xlsx", "ChildTerritory", $TerrName, "1");
+	$excel.insertUnderColumn("../optimax/op_excleData/automation.xlsx", "Rules", "Child Territory", $TerrName, "1");
 	}
 else
 	{
