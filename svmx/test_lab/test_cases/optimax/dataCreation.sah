@@ -338,19 +338,21 @@ function createPrfRes($rec_Pref_xls){
 	var prfResId = [];
 	for(var $i = 0;$i<$rec_Pref_xls.length;$i++){
 		var prfRes = new sforce.SObject("SVMXC__Resource_Preference__c");
-		prfRes.SVMXC__Company__c=$rec_Pref_xls[$i][1];
-		prfRes.SVMXC__Group_Member__c=$rec_Pref_xls[$i][2];
-		prfRes.SVMXC__Preference_Type__c=$rec_Pref_xls[$i][0];
+		prfRes.SVMXC__Company__c=$rec_Pref_xls[$i][0];
+		prfRes.SVMXC__Group_Member__c=$rec_Pref_xls[$i][1];
+		prfRes.SVMXC__Preference_Type__c=$rec_Pref_xls[$i][2];
 		createPrfRes.push(prfRes);
 	}
 	var pfrRes_result = _call(sforce.connection.create(createPrfRes));
+	_log("pfrRes_result = "+pfrRes_result);
 	if(pfrRes_result.length != null){
+		_log("pfrRes_result.length = "+pfrRes_result.length);
 		$isSuccess = true;
 		for(var $x=0;$x<pfrRes_result.length;$x++){
 			prfResId.push(pfrRes_result[$x].id);
-			_log("expId.push = "+prfResId);
+			_log("pfrRes.push = "+prfResId);
 		}
-		_log("expId ids ="+prfResId);
+		_log("pfrRes ids ="+prfResId);
 		return prfResId;
 	}
 	return $isSuccess;
