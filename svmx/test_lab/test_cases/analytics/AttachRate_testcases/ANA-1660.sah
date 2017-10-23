@@ -46,7 +46,7 @@ var $ana_1660_create_IB = "SVMXC__Installed_Product__c IB01 = new SVMXC__Install
 var $ana_1660_result_IB  = $op_act_sForceApiCall.sForceQuery($un, $pwd, $ana_1660_create_IB , "create");
 
 _log($ana_1660_result_IB);
-var $ana_1660_get_IB = "Select Id from SVMXC__Installed_Product__c where Name = 'IB ANA-1660' Limit 1";
+var $ana_1660_get_IB = "Select Id , Name from SVMXC__Installed_Product__c where Name = 'IB ANA-1660' Limit 1";
 var $ana_1660_fetch_IB = null;
 for(var $i=0 ; $ana_1660_fetch_IB == null ; $i++)
 	
