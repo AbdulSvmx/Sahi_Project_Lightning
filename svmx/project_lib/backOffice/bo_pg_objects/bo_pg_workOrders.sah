@@ -33,6 +33,10 @@ var $bo_pg_workOrders = new function bo_pg_workOrders(){
 	this.txt_OnsiteResponseInternalBy = _div(0,_rightOf(_span("/Onsite Response Internal By/")));
 	this.txt_OnsiteResponseCustomerBy = _div(0,_rightOf(_cell("/Onsite Response Customer By/")));
 	this.txt_actualOnsiteResponseOnEditWO = _link(0,_rightOf(_label("Actual Onsite Response")));
+	this.txt_acknowledgedByTechnicianDateTime = _link(0,_rightOf(_label("Acknowledged By Technician Date Time")));
+
+// Activity History Related List
+	this.link_SLAClockStop = _link("SLA Clock Stop"),(_near(_tableHeader("Subject")),_under(_heading3("Activity History")));
 };
 
 

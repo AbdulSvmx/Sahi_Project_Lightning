@@ -180,4 +180,5 @@ var $bo_act_navigation = new function bo_act_navigation() {
     		_setStrictVisibilityCheck(false);
      };
 
+
 };

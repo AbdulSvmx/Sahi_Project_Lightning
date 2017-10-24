@@ -38,14 +38,14 @@ _assertNotEqual(_getText(_div(0,_rightOf(_span("/Onsite Response Internal By/"))
 _assertNotEqual(_getText(_div(0,_rightOf(_cell("/Onsite Response Customer By/"))))," ","Issue in Initial Response Customer By field");
 
 $bo_act_workOrders.pauseSLAClock();
+_assertExists($bo_pg_workOrders.link_SLAClockStop);
+$bo_act_workOrders.resumeSLAClock("No");
+_assertNotContainsText("Onsite Response 00:00:00:00",_table("/CH_dtimer1/"),"SLA Clock Issue");
 
-//Important dont delete
-//$bo_act_workOrders.editWorkOrder($WONumber);
-//$bo_act_workOrders.clickLinktoUpdateTextfields($bo_pg_workOrders.txt_actualInitialResponseOnEditWO);
-//$bo_act_workOrders.saveWorkOrder();
-
-
-//_assertNotEqual(_getText(_div(0,_rightOf(_cell("/Time to Onsite Response/")))));
+$bo_act_workOrders.editWorkOrder($WONumber);
+$bo_act_workOrders.clickLinktoUpdateTextfields($bo_pg_workOrders.txt_actualInitialResponseOnEditWO);
+$bo_act_workOrders.saveWorkOrder();
+_assertNotEqual(_getText($bo_pg_workOrders.txt_TimeToOnsiteResponse)," ", "issue in Time to Onsite Response");
 
 //Clean up function
 
