@@ -60,7 +60,7 @@ _assertEqual($startDateExpectedOn_IB,$startDateActulOn_IB,"Actual and expected S
 _assertEqual($endDateExpectedOn_IB,$endDateActulOn_IB,"Actual and expected End Dates are not same");
 
 /**
- * Create Service Contract
+ * Create SLA Terms
  * 
  */
 //Create 1st SLA Term SLA01 [Platinum SLA]
@@ -90,6 +90,10 @@ $bo_act_slaTerms.addOnsiteResponseToSLA($slaName03,"WorkOrder","Field Service","
 //validation of SLA creation
 _assertExists(_span($slaName03));
 
+/**
+ * Create Service Contract
+ * 
+ */
 var $pastYear = 2;  // Start Date for Service Contract
 var $futureYear = 2;  // End Date for Service Contract
 
@@ -133,7 +137,7 @@ _assertEqual($expecctedLocationUnder_CoveredLocations,$locationName,"Actual and 
 _assertEqual($expecctedContactUnder_EntitledContacts,$contactName,"Actual and expected Entitled Contacts are not same");
 
 /**
- * Create Auto Entitlement Rules for Wo
+ * Create Auto Entitlement Rules for Work Order
  * 
  */
 var $WOField = "Order Type";
