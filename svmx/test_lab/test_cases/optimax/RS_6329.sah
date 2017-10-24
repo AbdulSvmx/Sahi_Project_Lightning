@@ -46,7 +46,6 @@ _click(_span("Personal Information[1]"));
 var $email = _getText(_textbox("PersonalInformationSetup:editPage:pageBlock:email"));
 _log($email);*/
 
-_click(_link("Home"));
 _click(_link("ServiceMax Setup"));
 _wait(20000,_isVisible(_div("Dispatch Management")));
 _click(_div("Dispatch Management"));
