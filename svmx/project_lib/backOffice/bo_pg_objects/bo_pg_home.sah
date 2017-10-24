@@ -23,6 +23,9 @@ var $bo_pg_home = new function bo_pg_home(){
 	this.link_preventiveMaintenancePlans = _link("Preventive Maintenance Plans");
 	
 	this.link_customWorkOrders = _link("/listRelatedObject Custom/",_near(_image("Work Orders")));
+	
+	this.sel_WBEnvironment = _select(0,_rightOf(_label("Environment:")));
+	this.btn_loginWithSalesForce = _submit("Login with Salesforce");
 };
 
 
