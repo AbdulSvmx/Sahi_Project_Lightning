@@ -11,23 +11,23 @@ var $bo_pg_PMPlan = new function bo_pg_PMPlan(){
 	this.txt_startDate = _textbox(0,_near(_label("Start Date:")));
 	this.txt_endDate = _textbox(0,_near(_label("End Date:")));
 	this.btn_save = _span("/svmx-sfmd-save-icon/");
+	this.sel_coverageType = _div(0,_rightOf(_label("Coverage Type:")));
+	this.btn_delete = _button("Delete");
+	this.noRecordsToDisplayUnderPreventiveMaintenanceCoverages = _tableHeader("No records to display"),_under(_heading3("Preventive Maintenance Coverages"));
+	this.link_firstLinkInPMcoverages = _link(0,_under(_tableHeader("PM Coverage Number")),_under(_heading3("Preventive Maintenance Coverages")));
+	this.div_startDate = _div(0,_rightOf(_cell("Start Date")));
+	this.link_firstLinkInPMSchedule = _link(0,_under(_tableHeader("/Record Number/",_near(_cell("PM Schedule")))));
+	
+//PM Schedule
+	
+	this.txt_lastRunDate = _div(0,_rightOf(_cell("Last Run Date")));
+	this.txt_scheduledOnDate = _div(0,_rightOf(_cell("Scheduled On")));
+
+	
+//PM Coverages
+	this.link_locationname = _link(0,_rightOf(_cell("Location Name")));
 };
 
 
 
-function CreateATimeBasedPMPlan($sconurl, $PMPTemplate,$Source){
-	var $PMPlanName = generateRandomName(8);
-	switch($Source){
-		case $PMPlanSource_SCON:
-			_navigateTo($sconurl);
-		break;
-	}
-	_selectDomain("/svmx/");
-	_click($bo_pg_PMPlan.btn_createPMPlan);
-	_setValue($bo_pg_PMPlan.txt_PMPlanTemplateName, $PMPTemplate);
-	_setValue($bo_pg_PMPlan.txt_PMPlanName, $PMPlanName);
-	_setValue($bo_pg_PMPlan.txt_startDate, currentDate("/"));
-	_setValue($bo_pg_PMPlan.txt_endDate, getfutureDate("/"));
-	_click($bo_pg_PMPlan.btn_save);
-	return $PMPlanName;	
-}
+
