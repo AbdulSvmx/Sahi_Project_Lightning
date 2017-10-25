@@ -23,7 +23,7 @@ var $ana_1651_query_SCON = "Select Id , Name from SVMXC__Service_Contract__c whe
 var $ana_1651_fetch_SCON  = $op_act_sForceApiCall.sForceQuery($un, $pwd, $ana_1651_query_SCON,"query");
 
 
-
+_wait(5000);
 _log($ana_1651_fetch_SCON);
 
 var $ana_1651_SCON ;
@@ -54,6 +54,8 @@ for(var $i=0 ; $ana_1651_fetch_IB == null ; $i++)
 var $ana_1651_fetch_IB  = $op_act_sForceApiCall.sForceQuery($un, $pwd, $ana_1651_get_IB,"query");
 
 }
+
+_wait(5000);
 var $var2;
 var $ana_1651_IB_ID;
 
@@ -84,7 +86,7 @@ var $ana_1651_get_PW = "Select Id from SVMXC__Warranty__c where SVMXC__Installed
 var $ana_1651_fetch_PW  = $op_act_sForceApiCall.sForceQuery($un, $pwd, $ana_1651_get_PW,"query");
 var $ana_1651_pw_ID;
 
-	
+_wait(5000);
 	$ana_1651_pw_ID = $ana_1651_fetch_PW[0].Id ;
 
 

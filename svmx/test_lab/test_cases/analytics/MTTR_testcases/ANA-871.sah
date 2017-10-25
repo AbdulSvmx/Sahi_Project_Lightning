@@ -21,7 +21,7 @@ var $casedummy;
 _log($createcase);
 var $query_case = "Select Id from Case  where Createdby.Id = '005q0000003GGfP' Order by CreatedDate DESC Limit 1";
 var $fetchcasequery = $op_act_sForceApiCall.sForceQuery($un, $pwd, $query_case,"query");
-
+_wait(5000);
 
 	$Case = $fetchcasequery[0].Id;
 		
@@ -31,7 +31,7 @@ var $ana_871_query_wo = "Select Name , Id  ,SVMXC__Company__c , SVMXC__Component
 var $ana_871_result = $op_act_sForceApiCall.sForceQuery($un, $pwd, $ana_871_insert_WO , "create");
 var $ana_871_fetch = $op_act_sForceApiCall.sForceQuery($un, $pwd, $ana_871_query_wo,"query");
 var $ana_871_WO1;
-
+_wait(5000);
 	
 	$ana_871_WO1 = $ana_871_fetch[0].Id;
 
@@ -55,7 +55,7 @@ var $ana_871_query_wd = "Select Name , Id  , SVMXC__Start_Date_and_Time__c , SVM
 var $ana_871_result = $op_act_sForceApiCall.sForceQuery($un, $pwd, $ana_871_insert_WD , "create");
 
 var $ana_871_fetch_wd = $op_act_sForceApiCall.sForceQuery($un, $pwd, $ana_871_query_wd,"query");
-_wait(1000);
+_wait(5000);
 
 	
 	$ana_871_wd1 = $ana_871_fetch_wd[0].Id ;

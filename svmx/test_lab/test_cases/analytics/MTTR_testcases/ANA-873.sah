@@ -22,7 +22,7 @@ var $ana_873_fetch = $op_act_sForceApiCall.sForceQuery($un, $pwd, $ana_873_query
 var $ana_873_WO1 ;
 var $var3;
 var $varRV1;
-_wait(1000);
+_wait(5000);
 
 	
 	$ana_873_WO1 = $ana_873_fetch[0].Id;
@@ -48,7 +48,7 @@ var $startdate ;
 var $enddate ;
 var $deadtime;
 var $var2;
-_wait(1000);
+_wait(5000);
 
 	
 	$ana_873_wd1 = $ana_873_fetch_wd1[0].Id ;
@@ -70,7 +70,7 @@ var $ana_873_wd2 ;
 var $deadtime2;
 var $lineqty;
 var $var2;
-_wait(1000);
+_wait(5000);
 
 	
 	$ana_873_wd2 = $ana_873_fetch_wd2[0].Id ;
@@ -104,7 +104,7 @@ var $DeadTime2 = Math.round($deadtime2) + Math.round($deadtime);
 for(var $i = 0;$ana_873_wo_id == null;$i++){
 var $ana_873_query_RV1 = "Select SVMXC__Work_Order__c ,custom_mttr_checkbox__c , SVMXC__Primary_Work_Order__c, SVMXC__Account__c, SVMXC__Configuration_Name__c , SVMXC__Labor_Time__c , SVMXC__Dead_Time__c from SVMXC__SPM_Mean_Time_To_Repair__c where SVMXC__Work_Order__c ='"+ $ana_873_WO1 +"'";
 var $ana_873_resultRV1 = $op_act_sForceApiCall.sForceQuery($un, $pwd, $ana_873_query_RV1,"query");
-_wait(1000);
+_wait(5000);
 $ana_873_resultRV1.forEach(function($varRV1) {
 	
 	$ana_873_wo_id = $varRV1.SVMXC__Work_Order__c;

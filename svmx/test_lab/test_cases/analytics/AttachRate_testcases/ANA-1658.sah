@@ -23,7 +23,7 @@ var $ana_1658_query_SCON = "Select Id , Name from SVMXC__Service_Contract__c whe
 var $ana_1658_fetch_SCON  = $op_act_sForceApiCall.sForceQuery($un, $pwd, $ana_1658_query_SCON,"query");
 
 
-
+_wait(5000);
 _log($ana_1658_fetch_SCON);
 
 var $ana_1658_SCON ;
@@ -54,6 +54,7 @@ for(var $i=0 ; $ana_1658_fetch_IB == null ; $i++)
 var $ana_1658_fetch_IB  = $op_act_sForceApiCall.sForceQuery($un, $pwd, $ana_1658_get_IB,"query");
 
 }
+_wait(5000);
 var $var2;
 var $ana_1658_IB_ID;
 
@@ -70,7 +71,7 @@ var $ana_1658_result_CP = $op_act_sForceApiCall.sForceQuery($un, $pwd, $ana_1658
 var $ana_1658_get_CP = "Select Id from SVMXC__Service_Contract_Products__c where Createdby.Id = '005q0000003GGfP' Order by CreatedDate DESC Limit 1";
 var $ana_1658_fetch_CP   = $op_act_sForceApiCall.sForceQuery($un, $pwd, $ana_1658_get_CP,"query");
 var $ana_1658_cp_ID;
-
+_wait(5000);
 	
 	$ana_1658_cp_ID = $ana_1658_fetch_CP[0].Id ;
 
