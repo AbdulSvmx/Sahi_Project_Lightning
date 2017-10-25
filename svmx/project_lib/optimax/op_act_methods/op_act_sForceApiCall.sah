@@ -35,7 +35,6 @@ var $op_act_sForceApiCall = new function op_act_sForceApiCall() {
 				var records = _call(sforce.apex.executeAnonymous($queryComplex));
 				return records;
 				
-				
 			default:
 				$nArr = [null];
 				return $nArr;
@@ -47,4 +46,3 @@ var $op_act_sForceApiCall = new function op_act_sForceApiCall() {
 
 
 };
-

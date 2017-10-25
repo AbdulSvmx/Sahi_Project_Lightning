@@ -7,7 +7,12 @@
 var $bo_pg_products = new function bo_pg_products(){
 	this.btn_new = _button(" New ");
 	this.txt_productName = _textbox("Name");
-	this.btn_save = _submit(" Save ");
+	this.txt_productCode = _textbox("ProductCode");
+	this.sel_productFamily = _select("Family");
 	this.chk_active = _checkbox("IsActive");
+	this.chk_stockable = _checkbox("Stockable");
+	this.chk_serializedTracking = _checkbox("Enable Serialized Tracking of Stock");
+	this.btn_save = _submit(" Save ");
+	this.btn_delete = _button("Delete");
+	
 };
-

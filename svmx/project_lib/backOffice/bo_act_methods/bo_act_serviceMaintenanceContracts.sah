@@ -8,31 +8,113 @@ var $bo_act_serviceMaintenanceContracts = new function bo_act_serviceMaintenance
 	 * 
 	 * @param $accountName
 	 */
-	this.createServiceMaintenanceContract = function($accName, $slaTermName) {
-			var $sconName = generateRandomString(8);
+
+	this.createServiceMaintenanceContract = function($accName, $slaTermName,$futureYear) {
+			var $sconName = $bo_act_common.generateRandomName("Scon");
 			var $sconUrl =  "";
-			NavigatetoServiceMaintenanceContract();
+			$bo_act_navigation.navigateToServiceMaintenanceContractPage();
 			_click($bo_pg_serviceMaintenanceContracts.btn_new);
 			_setValue($bo_pg_serviceMaintenanceContracts.txt_sconName, $sconName);
 			_setValue($bo_pg_serviceMaintenanceContracts.txt_accountName, $accName);
 			_setValue($bo_pg_serviceMaintenanceContracts.txt_slaTermName, $slaTermName);
 			_click($bo_pg_serviceMaintenanceContracts.link_startDate);
 			_setValue($bo_pg_serviceMaintenanceContracts.txt_startDate, $bo_act_common.currentDate("/"));
-			_click(btn_save);
-			_set($sconUrl, window.location.href);
-			return $sconUrl;
+			_setValue($bo_pg_serviceMaintenanceContracts.txt_endDate, $bo_act_common.getfutureDate($futureYear, "/"));
+			_click($bo_pg_serviceMaintenanceContracts.btn_save);
+			_assertNotVisible(_div("/Error: Invalid Data/"));
+			_wait(15000, _isVisible($sconName));
+			return $sconName;
 		
 		//return $callBack.returnResult([_isVisible($accountName), "Account not created",$accountName] );
-		
-		// Need to return
 	};
-	 this.AddCoveredProductToSCON =  function($sconUrl,$installedProduct){
-		_navigateTo($sconUrl);
+	 
+	this.AddCoveredProductToSCON =  function($sconName,$installedProduct){
+		_click(_link($sconName));
 		_click($bo_pg_serviceMaintenanceContracts.btn_newCoveredProduct);
-	_setValue($bo_pg_serviceMaintenanceContracts.txt_installedProduct,$installedProduct);
+	    _setValue($bo_pg_serviceMaintenanceContracts.txt_installedProduct,$installedProduct);
 		_click($bo_pg_serviceMaintenanceContracts.btn_save);
+
+		_assertNotVisible(_div("/Error: Invalid Data/"));
 		_click($bo_pg_serviceMaintenanceContracts.txt_backToScon);
+
 	};
 
+	this.addCoveredLocationToSCON = function($sconName,$location){
+	 _click(_link($sconName));
+	_click($bo_pg_serviceMaintenanceContracts.btn_newCoveredLocation);
+	_setValue($bo_pg_serviceMaintenanceContracts.txt_location,$location);
+	_click($bo_pg_serviceMaintenanceContracts.btn_save);
 
+	_assertNotVisible(_div("/Error: Invalid Data/"));
+	_click($bo_pg_serviceMaintenanceContracts.txt_backToScon);
+
+	
 };
+
+	this.deleteServiceMaintenanceContract = function($sconName)
+{
+	 _click(_link($sconName));
+	_click(_button("Delete"));
+	};
+	
+	//Actions for Activate Contract on Service/Maintenance Contract
+	
+	this.activateServiceContract = function($sconName){
+	if(_isVisible(_image("Not Checked",_rightOf(_cell("/Active/"))))){	
+	_selectDomain("/svmx/");
+	_click($bo_pg_serviceMaintenanceContracts.btn_activateContractSFM);
+	_wait(30000, _isVisible(_span("Activate Contract")));
+	_selectDomain();
+	_click($bo_pg_serviceMaintenanceContracts.btn_activateContract);
+	_wait(30000, _isVisible($sconName));
+	};
+	
+	if(_isVisible(_image("Checked",_rightOf(_cell("/Active/"))))){
+	_logOutput("Service Contract = " + $sconName+ " is Activated");	
+	}
+	else{
+		_logOutput("Service Contract = " + $sconName+ " is Not Activated");	
+	};
+	
+	};
+	
+	// Function for Add child lines to the Service Contract
+	
+this.AddCoveredProducToServiceContract =  function($sconName,$installedProduct,$slaName,$pastYear, $futureYear ){
+	_click($bo_pg_serviceMaintenanceContracts.btn_newCoveredProduct);
+	_wait(10000, _isVisible(_heading2("New Covered Product")));
+    _setValue($bo_pg_serviceMaintenanceContracts.txt_installedProduct,$installedProduct);
+    _setValue($bo_pg_serviceMaintenanceContracts.txt_slaTermName,$slaName);
+    _setValue($bo_pg_serviceMaintenanceContracts.txt_startDate, $bo_act_common.getPastDate($pastYear,"/"));
+	_setValue($bo_pg_serviceMaintenanceContracts.txt_endDate, $bo_act_common.getfutureDate($futureYear, "/"));
+	_click($bo_pg_serviceMaintenanceContracts.btn_save);
+	_assertNotVisible(_div("/Error: Invalid Data/"));
+	$bo_pg_serviceMaintenanceContracts.clickOnServiceContract($sconName);
+};
+
+this.addCoveredLocationToServiceContract = function($sconName,$location,$slaName,$pastYear,$futureYear){
+	$bo_pg_serviceMaintenanceContracts.clickOnServiceContract($sconName);
+	_click($bo_pg_serviceMaintenanceContracts.btn_newCoveredLocation);
+	_setValue($bo_pg_serviceMaintenanceContracts.txt_location,$location);
+	_setValue($bo_pg_serviceMaintenanceContracts.txt_slaTermName,$slaName);
+	_setValue($bo_pg_serviceMaintenanceContracts.txt_startDate, $bo_act_common.getPastDate($pastYear,"/"));
+	_setValue($bo_pg_serviceMaintenanceContracts.txt_endDate, $bo_act_common.getfutureDate($futureYear, "/"));
+	_click($bo_pg_serviceMaintenanceContracts.btn_save);
+	_assertNotVisible(_div("/Error: Invalid Data/"));
+	$bo_pg_serviceMaintenanceContracts.clickOnServiceContract($sconName);
+};
+
+this.addEntitledContactsToServiceContract = function($sconName,$contact){
+	$bo_pg_serviceMaintenanceContracts.clickOnServiceContract($sconName);
+	_click($bo_pg_serviceMaintenanceContracts.btn_newEntitledContact);
+	_setValue($bo_pg_serviceMaintenanceContracts.txt_contract,$contact);
+	/*_setValue($bo_pg_serviceMaintenanceContracts.txt_slaTermName,$slaName);
+	_setValue($bo_pg_serviceMaintenanceContracts.txt_startDate, $bo_act_common.getPastDate($pastYear,"/"));
+	_setValue($bo_pg_serviceMaintenanceContracts.txt_endDate, $bo_act_common.getfutureDate($futureYear, "/"));*/
+	_click($bo_pg_serviceMaintenanceContracts.btn_save);
+	_assertNotVisible(_div("/Error: Invalid Data/"));
+	$bo_pg_serviceMaintenanceContracts.clickOnServiceContract($sconName);
+};
+	
+};
+
