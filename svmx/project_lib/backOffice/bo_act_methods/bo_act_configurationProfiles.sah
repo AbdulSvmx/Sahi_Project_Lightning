@@ -3,6 +3,7 @@
  */
 var $bo_act_configurationProfiles = new function bo_act_configurationProfiles() {
 
+	
 	this.editGlobalProfileForBooleanSettings = function($Module, $SubModule, $Setting, $value) {
 			
 	_check($bo_pg_configurationProfiles.chk_globalProfile);
