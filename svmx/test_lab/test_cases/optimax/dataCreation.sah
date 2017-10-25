@@ -44,7 +44,7 @@ _log($del_skills);
 
 _set($acc_creation, _fetch(createAcc($Account_xls)));
 _log($acc_creation);
-if($acc_creation.length != 0 && $acc_creation != false && $acc_creation != null){
+if($acc_creation.length != null && $acc_creation != false && $acc_creation != null){
 	//updating acc id in acc excel
 	for(var $i = 0; $i < $acc_creation.length; $i++){
 		_log("$acc_creation[i] = "+$acc_creation[$i]);
@@ -52,9 +52,7 @@ if($acc_creation.length != 0 && $acc_creation != false && $acc_creation != null)
 	}
 	//updating acc in prf resource
 	for(var $e=0;$e<$rec_Pref_xls.length;$e++){
-		_log("$e = "+$e);
 		if($e === ($rec_Pref_xls.length-1)  || $e === 0){
-			_log("inside acc");
 			$excel.insertUnderColumn("../optimax/op_excleData/automation.xlsx", "SVMXC__Resource_Preference__c", "SVMXC__Company__c", $acc_creation[0],(1+$e));
 		}
 		else{
@@ -62,6 +60,7 @@ if($acc_creation.length != 0 && $acc_creation != false && $acc_creation != null)
 		}
 	}
 }
+
 //updating the acc in RS_6694
 for(var $a=0;$a<$RS_6694.length;$a++){
 	if($a < 38){
@@ -113,7 +112,8 @@ if($BH_creation != null){
 		if($createTeam_creation != false){
 			_set($createTech_creation, _fetch(createTech($territory_creation,$BH_creation,$createTeam_creation,$tech_xls)));
 			_log($createTech_creation);
-			if($createTech_creation.length != 0 && $createTech_creation != false && $createTech_creation != null){
+			_log("$createTech_creation.length = "+$createTech_creation.length);
+			if($createTech_creation.length != null && $createTech_creation != false && $createTech_creation != null){
 				_log("$createTech_creation[i] = "+$createTech_creation.length);
 				_log("$createTech_creation[i] = "+$createTech_creation);
 				//updating tech id in tech excel
@@ -393,9 +393,9 @@ function createTech($territory_creation,$BH_creation,$createTeam_creation,$tech_
 			_log("techId.push = "+techId);
 		}
 		_log("techId = "+techId);
-		return techId;
+		//return techId;
 	}
-	return false;
+	return techId;
 }
 
 function deleteSkills(){
