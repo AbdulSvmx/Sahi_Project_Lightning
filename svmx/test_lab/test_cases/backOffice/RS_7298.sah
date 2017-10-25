@@ -17,8 +17,15 @@ var $seperator = "/";
 var $RS_7298 = _testcase("$RS_7298","Auto Entitlement based on Product:- Entitlement on a WO using Service Contract.");
 $RS_7298.start();
 _setSpeed(100);
+/**
+ * Login to the Sandbox Org
+ */
 
 $bo_act_login.login($g_url, $g_un, $g_pwd);
+
+/**
+ * Create Account, Contact, Location, Product and Installed Product
+ */
 
 var $accountName = $bo_act_accounts.createAccount();
 var $contactName = $bo_act_contacts.createContact($accountName);
@@ -91,7 +98,7 @@ $bo_act_slaTerms.addOnsiteResponseToSLA($slaName03,"WorkOrder","Field Service","
 _assertExists(_span($slaName03));
 
 /**
- * Create Service Contract
+ * Create Service Contract(with child lines) and Activate it
  * 
  */
 var $pastYear = 2;  // Start Date for Service Contract
@@ -138,7 +145,6 @@ _assertEqual($expecctedContactUnder_EntitledContacts,$contactName,"Actual and ex
 
 /**
  * Create Auto Entitlement Rules for Work Order
- * 
  */
 var $WOField = "Order Type";
 var $Operator = "Equals";
@@ -157,9 +163,43 @@ var	$p9 = "No";					// $p9 = Yes/No SLA Coverage for Entitlement
 //Navigate to Auto Entitlement Rules - Work Order
 $autoEntitlementRuleName = $bo_act_autoEntitlementRule_WO.createAutoEntitlementRule_WO($WOField, $Operator, $Value, $EntitSetting, $p1, $p2, $p3, $p4, $p5, $p6, $p7, $p8, $p9);
 
+/**
+ * Configure the Global Profile SET001
+ */
+// Global Setting SET001 - Enable Auto Entitlement For Work Order is set to True for Auto Entitlement process to trigger 
+//(This is a Global Setting and is available under Module "Entitlement Verification" and Submodule "Auto-Entitlement - Work Order") 
 
+var $Module = "Entitlement Verification";
+var $SubModule = "Auto-Entitlement-Work Order";
+var $Setting = "SET001";
+var $value = "True";
+$bo_act_configurationProfiles.editGlobalProfileForBooleanSettings($Module, $SubModule, $Setting, $value);
 
+/**
+ * Configure the Group Profile SET002
+ */
+//Ensure that the Group Setting SET002 - Auto Calculate Billing Type is set to True 
+// (This is a Group setting and is available under Module 'Entitlement Verification' and Submodule 'Auto- Entitlement-Work Order) 
 
+var $groupProfileName = "AutoBACGroup";
+var $Module1 = "Entitlement Verification";
+var $SubModule1 = "Auto-Entitlement-Work Order";
+var $Setting1 = "SET002";
+var $value1 = "True";
+$bo_act_configurationProfiles.editGroupProfileForBooleanSettings($groupProfileName, $Module1, $SubModule1, $Setting1, $value1);
+
+/**
+ * Create Case record
+ */
+
+var $caseStatus = "Escalated";
+var $casePriority = "Medium";
+var $caseOrigin = "Phone";
+var $caseNumber = $bo_act_Cases.createCase($caseStatus, $casePriority, $caseOrigin);
+
+//Edit the above case for Account, Contact and IB information
+var $caseSite = "";
+$bo_act_Cases.editCase($caseNumber, $accountName, $contactName, $IBName, $caseSite);
 
 //Clean up function
 
