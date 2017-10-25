@@ -1,0 +1,29 @@
+
+var $an_pg_attachrate = new function $an_pg_attachrate()
+{
+	this.btn_attachrate_metric = _span("Attach Rate");
+	this.btn_active = _button("svmx-form-field svmx-form-checkbox svmx-form-cb-focus svmx-field-form-cb-focus svmx-field-default-form-cb-focus");
+	this.txt_description = _textarea("appliesTo");
+	this.btn_Settings = _span("Settings");
+	this.list_select_account = _label("Select the source for Account field:");
+	this.btn_Account = _listItem("Account");
+	this.btn_Criteria = _span("Criteria");
+	this.list_qualification_IB = _textbox("tabPanel_3_editprocesspanel_expression_QualificationCriteriafieldset_id-inputEl");
+	this.btn_standard_sfmexpression_IB = _listItem("SVMXSTD: To Qualify Top-Level IBs");
+	this.list_qualification_coveredproduct = _textbox("tabPanel_3_editprocesspanel_expression_FilterCriteriafieldset_id-inputEl");
+	this.btn_standard_expression_cp = _listItem("SVMXSTD: Valid Covered Products");
+    this.btn_save = _span("Save[1]");
+    this.btn_add = _span("Add[2]");
+    
+    this.btn_schedulenotifications = _span("Schedule & Notifications[2]");
+    this.list_timezone = _textbox("timezone[1]");
+    this.btn_ist_timezone = _listItem("(GMT+05:30) India Standard Time (Asia/Kolkata)[1]");
+    this.list_period = _textbox("period[1]");
+    this.btn_daily = _listItem("Daily[1]");
+    this.list_time_at = _textbox("timeAt[1]");
+    this.btn_timechosen = _listItem("7:00 AM[1]");
+    this.txt_emailOnsuccess = _textbox("emailOnSuccess[1]");
+    this.btn_sn_save = _span("Save[2]");
+    this.btn_run_now = _link("Run Now[1]");
+
+};
