@@ -25,12 +25,10 @@ var $op_act_sForceApiCall = new function op_act_sForceApiCall() {
 
 			switch($queryType){
 			case 'query':
-				var arr = null;
-				for(var $i=0; arr == null; $i++)
-				{	
+				
 				 records = _call(sforce.connection.query($queryComplex));
 				 var arr = records.getArray('records');
-				}
+				
 				return arr;
 			case 'create':
 				 
