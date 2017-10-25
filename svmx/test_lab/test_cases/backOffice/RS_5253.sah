@@ -1,8 +1,8 @@
 
 //author - Noor Salma Sharieff
 
-var $RS_5298 = _testcase("$RS_5298","ONSITE response on WO: Clock paused/resumed without extending SLA commitment");
-$RS_5298.start();
+var $RS_5253 = _testcase("$RS_5253","RESOLUTION response on WO:Clock paused/resumed on extending SLA commitment");
+$RS_5253.start();
 _setSpeed(100);
 
 //Pre - Condition 
@@ -19,8 +19,7 @@ var $caseNumber = $bo_act_installedProduct.createSupportCase("New");
 var $WONumber = $bo_act_installedProduct.createWOFromIB($IBName);
 
 var $slaterm = $bo_act_slaTerms.createSlaTerms("Default");
-$bo_act_slaTerms.addOnsiteResponseToSLA($slaterm, "WorkOrder","All", "High", "Created Date", 30, 60, "SLA");
-
+$bo_act_slaTerms.addResolutionToSLA($slaterm, "WorkOrder","All", "High", "Created Date", 30, 60, "SLA");
 
 $bo_act_workOrders.editWorkOrder($WONumber);
 $bo_act_workOrders.updateTextBoxFields($bo_pg_workOrders.txt_slaTerms, $slaterm);
@@ -32,25 +31,21 @@ $bo_act_workOrders.saveWorkOrder();
 //Validations
 _selectDomain("/svmx/");
 _wait(3000,_isVisible(_table("/timer/")));
-_assertNotContainsText("Onsite Response 00:00:00:00",_table("/CH_dtimer1/"),"SLA Clock Issue");
+_assertNotContainsText("Resolution 00:00:00:00",_table("/CH_dtimer1/"),"SLA Clock Issue");
 _selectDomain();
-_assertNotEqual(_getText(_div(0,_rightOf(_span("/Onsite Response Internal By/"))))," ","Issue in Initial Response Internal By field");
-_assertNotEqual(_getText(_div(0,_rightOf(_cell("/Onsite Response Customer By/"))))," ","Issue in Initial Response Customer By field");
+_assertNotEqual(_getText(_div(0,_rightOf(_span("/Resolution Internal By/"))))," ","Issue in resolution Internal By field");
+_assertNotEqual(_getText(_div(0,_rightOf(_cell("/Resolution Customer By/"))))," ","Issue in resolution Response Customer By field");
 
 $bo_act_workOrders.pauseSLAClock();
-_wait(30000);
-$bo_act_workOrders.resumeSLAClock("No");
-_wait(5000);
-_call(top.location.reload());
-_wait(5000);
 _assertExists($bo_pg_workOrders.link_SLAClockStop);
+$bo_act_workOrders.resumeSLAClock("Yes");
 _assertExists($bo_pg_workOrders.link_SLAClockStart);
-_assertNotContainsText("Onsite Response 00:00:00:00",_table("/CH_dtimer1/"),"SLA Clock Issue");
+_assertNotContainsText("Resolution 00:00:00:00",_table("/CH_dtimer1/"),"SLA Clock Issue");
 
 $bo_act_workOrders.editWorkOrder($WONumber);
-$bo_act_workOrders.clickLinktoUpdateTextfields($bo_pg_workOrders.txt_actualOnsiteResponseOnEditWO);
+$bo_act_workOrders.clickLinktoUpdateTextfields($bo_pg_workOrders.txt_actualInitialResponseOnEditWO);
 $bo_act_workOrders.saveWorkOrder();
-_assertNotEqual(_getText($bo_pg_workOrders.txt_TimeToOnsiteResponse)," ", "issue in Time to Onsite Response");
+_assertNotEqual(_getText($bo_pg_workOrders.txt_TimeToResolve)," ", "issue in Time to resolve");
 
 //Clean up function
 
@@ -59,7 +54,7 @@ for (var i = 0; i < $datacreated.length; i++) {
 	$bo_act_common.cleanUpfunction($datacreated[i]);
 }
 
-$RS_5298.end();
+$RS_5253.end();
 
 
 

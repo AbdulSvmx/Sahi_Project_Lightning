@@ -39,25 +39,27 @@ var $bo_act_workOrders = new function bo_act_workOrders() {
 		_selectDomain("/svmx/");
 		_click($bo_pg_workOrders.btn_SFWCheckEntitlement);
 		_selectDomain();
-	
+	};
 
 	this.pauseSLAClock = function(){
 		_selectDomain("/svmx/");
 		_click($bo_pg_workOrders.btn_SLAPause);
 		_setSelected($bo_pg_workOrders.sel_ReasonSLA,"Customer Not Available");
 		_click($bo_pg_workOrders.btn_popUpPause);
+		_selectDomain();
 	};
 	
 	this.resumeSLAClock = function($extendingSLACommitmentYesorNo){
 		_selectDomain("/svmx/");
 		_click($bo_pg_workOrders.btn_SLAResume);
-		_click(_button($extendingSLACommitment));
+		_click(_button($extendingSLACommitmentYesorNo));
+		_selectDomain();
 	//	_setSelected($bo_pg_workOrders.sel_ReasonSLA,"Customer Not Available");
 	//	_click($bo_pg_workOrders.btn_popUpPause);
 	};
 	
 	
 
-	};
+	
 
 };

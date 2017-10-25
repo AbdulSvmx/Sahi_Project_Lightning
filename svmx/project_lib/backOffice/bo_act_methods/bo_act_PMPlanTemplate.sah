@@ -90,9 +90,34 @@ this.updateUsageConditionRulesGridWithOutAdjFields = function($attribute,$operat
 	
 };
 
-this.updateUsageConditionRulesGridWithAdjFields = function($adjType,$minAdj,$maxAdj,$adjValue,$adjUnit){
+this.updateUsageConditionRulesGridWithAdjFields = function($attribute,$operator,$frequency,$startAt,$stopAt,$adjType,$minAdj,$maxAdj,$adjValue,$adjUnit){
 	_wait(5000);
-	_click(_div("/svmx-grid-cell-inner/",_under(_div("Adjustment Type"))));
+	_click(_span("+ Add row[1]"));
+	_click(_div("/svmx-grid-cell-inner/",_under(_div("Attribute[1]"))));
+	_wait(3000,_isVisible(_div("/svmx-trigger-index/",_under(_div("Attribute[1]")))));
+	_click(_div("/svmx-trigger-index/",_under(_div("Attribute[1]"))));
+	_click(_div($attribute));
+
+	_click(_div("/svmx-grid-cell-inner/",_under(_div("Operator[1]"))));
+	_click(_div("/svmx-trigger-index/",_under(_div("Operator[1]"))));
+	_click(_listItem($operator));
+
+	_click(_div("/svmx-grid-cell-inner/",_under(_div("Frequency"))));
+	_click(_div("/svmx-trigger-index/",_under(_div("Frequency"))));
+	_setValue(_textbox(0,_under(_div("Frequency")),$frequency));
+	
+	//_highlight(_div("/svmx-grid-cell-inner/",_under(_div("Start At"))));
+	_click(_div("/svmx-grid-cell-inner/",_under(_div("Start At"))));
+	//_highlight(_textbox(0,_under(_div("Start At"))));
+	_click(_textbox(0,_under(_div("Start At"))));
+	_setValue(_textbox(0,_under(_div("Start At"))),$startAt);
+	
+	
+	_click(_div("/svmx-grid-cell-inner/",_under(_div("Stop At"))));
+	
+	_click(_textbox(0,_under(_div("Stop At"))));
+	_setValue(_textbox(0,_under(_div("Stop At"))),$stopAt);
+		_click(_div("/svmx-grid-cell-inner/",_under(_div("Adjustment Type"))));
 	_click(_div("/svmx-form-arrow-trigger/",_under(_div("Adjustment Type"))));
 	_click(_listItem($adjType));
 	_click(_div("/svmx-grid-cell-inner/",_under(_div("Minimum Adjustment"))));
