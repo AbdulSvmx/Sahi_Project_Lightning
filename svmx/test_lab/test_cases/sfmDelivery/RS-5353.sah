@@ -3,11 +3,6 @@
 $url = "https://test.salesforce.com";
 $un = "vansys@pqtpart1.com";
 $pwd = "servicemax2";
-_setSpeed(100);
-$bo_act_login.login($url, $un, $pwd);
-
-$bo_act_navigation.navigateToSfmTransactionDesigner();
-_setSpeed(100);
 $sfmNameToBeCloned = "Manage Work Order Lines - Usage";
 $sfmName = "RS_5353_TDM016";
 $isCustom = false;
@@ -17,15 +12,29 @@ var $containerName = "Order Status";
 var $rulename ="5353Rule1";
 var $targetObject ="Work Order";
 var $ruleDescription = "Actual Initial Response Not Equal Function Today, City Starts with Value M";
-var $fieldArray = ["","City","Actual Initial Response"];
-var $conditionArray = ["","Equals","Not Equal"];
-var $operandArray =["","Value", "Function", "Field"];
-var $valueArray =["","M", "Today"];
+var $fieldArray = ["City","Actual Initial Response"];
+var $conditionArray = ["Equals","Not Equal"];
+var $operandArray =["Value", "Function", "Field"];
+var $valueArray =["M", "Today"];
+var $advExpr= "1 AND 2";
+var $fieldName ="City";
+var $fieldName1="Actual Initial Response";
+var $wizardName = "SFM Delivery Auto";
+var $wizardType = "SFM";
+var $domainName = "svmxc.cs21.visual.force.com";
 
+_setSpeed(100);
+$bo_act_login.login($url, $un, $pwd);
+
+/*
+
+// Navigate to SFM designer page
+$bo_act_navigation.navigateToSfmTransactionDesigner();
+_setSpeed(100);
 
 //clone tmd016
 
-//$bo_act_SFM.cloneSFM($sfmNameToBeCloned, $sfmName, $isCustom, $sfmTemplate, $sfmTemplateSaveAsName, $fieldName, $containerName);
+$bo_act_SFM.cloneSFM($sfmNameToBeCloned, $sfmName, $isCustom, $sfmTemplate, $sfmTemplateSaveAsName, $fieldName, $containerName);
 
 // open the above created SFM
 _click($bo_pg_sfmTransactionAndDesigner.btn_yourCustomSfmTransactions);
@@ -33,14 +42,13 @@ _setValue($bo_pg_sfmTransactionAndDesigner.txt_yourCustomSfmTransactionsQuickFin
 _click(_f("main").s_label($sfmName));
 _click($bo_pg_sfmTransactionAndDesigner.btn_screenDesigner);
 
-// add actual intial response to screen designer
-/*$bo_pg_sfmTransactionAndDesigner.addField($fieldName1, $containerName);
+// add actual initial response to screen designer
+$bo_pg_sfmTransactionAndDesigner.addField($fieldName1, $containerName);
 _click(_f("main").s_button("Save[3]"));
 _wait(6000,_isVisible(_f("main").label("Page saved")));
-*/
+
 //create Data validation rule
-//_click($sfm_pg_dvr.btn_dataValidationRules);
-_click(_f("main").tab("Data Validation Rules"));
+_click($sfm_pg_dvr.btn_dataValidationRules);
 _wait(6000,_isVisible($sfm_pg_dvr.btn_newRule));
 _click($sfm_pg_dvr.btn_newRule);
 _setSelected($sfm_pg_dvr.txt_targetObject, $targetObject);
@@ -50,41 +58,102 @@ _setValue($sfm_pg_dvr.txt_ruleId, $rulename);
 _setValue($sfm_pg_dvr.txt_ruleDescription,$ruleDescription);
 _wait(3000);
 
-for(var $i=1; $i<=$fieldArray.length; $i++){
-	
-	_setSelected(_f("main").s_combobox("fieldCombo"+"["+$i+"]"),$fieldArray[$i]);
-	_setSelected(_f("main").s_dropdownlist("conditionsCombo"+"["+$i+"]",$conditionArray[$i]));
-	if($operandArray[$i]=='Value'){
-		_setSelected($sfm_pg_dvr.txt_operand,$operandArray[$i]);
-		_setValue($sfm_pg_dvr.txt_value,$valueArray[$i]);
-	}
-	else if($operandArray[$i]=='Function'){
-		_setSelected($sfm_pg_dvr.txt_operand,$operandArray[$i]);
-		_setSelected($sfm_pg_dvr.txt_valueFunction,$valueArray[$i]);	
-	}
-	else{
-		_setSelected($sfm_pg_dvr.txt_operand,$operandArray[$i]);
-		_setSelected($sfm_pg_dvr.txt_valueField,$valueArray[$i]);	
-	}	
-	_click($sfm_pg_dvr.btn_addRow);
-}
+$sfm_pg_dvr.setRule($fieldArray, $conditionArray, $operandArray, $valueArray);
 
-
-
-
-
-//$sfm_pg_dvr.setRule($fieldName, $condition, $operand, $value);
-//_click($sfm_pg_dvr.btn_addRow);
-
-
-//$sfm_pg_dvr.setRule($fieldName1, $condition1, $operand1, $value1);
+_setValue($sfm_pg_dvr.txt_advancedExpr,$advExpr);
+_setSelected($sfm_pg_dvr.txt_messageType,"Error");
+_setValue($sfm_pg_dvr.txt_messageDescription,$ruleDescription );
 _click($sfm_pg_dvr.btn_saveDVR);
+_wait(2000);
 _click($sfm_pg_dvr.btn_addToProcess);
-//_setSelected(_f("main").s_combobox("fieldCombo"+"["+$i+"]"),"value");
 
 _click(_f("main").s_button("Quick Save"));
 _click(_f("main").s_button("Save & Close")); 
-
 _wait(30000,_isVisible(_link("Home")));
+
+
+
+//Navigate to SFM wizard page
+$bo_act_navigation.navigateToSvmxSetup();
+_click(_div("Service Flow Manager"));
+_click(_div("SFM Wizards"));
+_setSelected($sfm_pg_wizards.selectObject,"Work Order");
+
+//create a sfm wizard
+$sfm_act_wizards.createSfmWizard($wizardName, $wizardType, $sfmName);
+
+//add SFM to SFM wizard
+//$sfm_act_wizards.editSfmWizard($wizardName, $wizardType, $sfmName);  
+
+*/
+/*
+//Open the WO and click on the above created SFM 
+_setValue(_textbox("str"), "WO-00000472");
+_click(_button("Search"));
+_click(_link("WO-00000472"));
+_selectDomain($domainName);
+_click(_button($sfmName));
+
+//Validate DVR
+_selectDomain();
+_setValue(_textbox("City:"),"M");
+
+//_click(_div("svmx-trigger-index-0 svmx-form-trigger svmx-form-date-trigger svmx-form-trigger-last svmx-unselectable svmx-form-trigger-over svmx-form-date-trigger-over"));
+//_click(_div("svmx-trigger-index-0 svmx-form-trigger svmx-form-date-trigger svmx-form-trigger-last svmx-unselectable svmx-form-trigger-over svmx-form-date-trigger-over"),_rightOf(_textbox("svmx-date-1038-inputEl")));
+//_click(_span("22"));
+
+
+
+if(_exists(_div("InformationPrice not calculated, because entitlement check has not been performed. OKYesNoCancelOk"))){
+	_click(_span("Ok"));
+}
+else{
+	_click(_span("svmx-btn-icon svmx-sfmd-quicksave-icon"));
+}
+
+if(_exists(_div($ruleDescription))){
+	_log("Pass");
+}else{
+	_log("Fail");
+} */
+
+ /*_set($login_result, _fetch(login($un,$pwd)));
+_log($login_result);
+
+_set($createWO, _fetch(create_WO()));
+_log($createWO);
+
+
+
+
+var $woName=_call(sforce.connection.query("SELECT Name FROM SVMXC__Service_Order__c WHERE Id = '"+$createWO+"'"));
+_log("WO ="+$woName);
+//<browser>
+function login($un,$pwd){
+	
+	var $login_result = sforce.connection.login($un,$pwd);
+	$sfdc_sessionId = $login_result.sessionId;
+	_log("$sfdc_sessionId = "+$sfdc_sessionId);
+	return $login_result;
+} 
+
+function create_WO ()
+{
+	var workorder = new sforce.SObject("SVMXC__Service_Order__c");
+	//workorder.SVMXC__Order_Type__c = $wo_type;
+	workorder.SVMXC__Order_Status__c = "Open";
+	//workorder.SVMXC__Primary_Territory__c = $dp_Territory_Id;
+	//workorder.SVMXC__Country__c = $wo_country;
+	//workorder.SVMXC__Zip__c = $wo_zip;
+	result = _call(sforce.connection.create([workorder]));
+	_log("result = "+result);
+	return result[0].id;
+	
+
+}
+
+
+//</browser> */
+
 
 

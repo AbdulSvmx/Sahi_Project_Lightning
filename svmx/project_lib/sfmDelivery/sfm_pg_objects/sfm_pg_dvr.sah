@@ -23,22 +23,32 @@ var $sfm_pg_dvr = new function sfm_pg_dvr() {
 	this.btn_saveDVR = _f("main").s_button("Save");
 	this.btn_addToProcess = _f("main").s_button("Add To Process");
 	
-	this.setRule = function($fieldName, $condition, $operand,$value){
-		_setSelected($sfm_pg_dvr.txt_selectfield,$fieldName);
-		_setSelected($sfm_pg_dvr.txt_condition,$condition);
-		
-		if($operand=='Value'){
-			_setSelected($sfm_pg_dvr.txt_operand,$operand);
-			_setValue($sfm_pg_dvr.txt_value,$value);
+	this.setRule = function($fieldArray, $conditionArray, $operandArray, $valueArray){
+		for(var $i=0; $i<$fieldArray.length; $i++){
+			
+			if($i == 0){
+				//donothing
+			}else{
+				_click($sfm_pg_dvr.btn_addRow);
+			}
+			
+			_setSelected(_f("main").s_combobox("fieldCombo"+"["+$i+"]").rightOf(_f("main").s_label("Expressions")),$fieldArray[$i]);
+			_setSelected(_f("main").s_dropdownlist("conditionsCombo"+"["+$i+"]").rightOf(_f("main").s_label("Expressions")),$conditionArray[$i]);
+			
+			if($operandArray[$i]=='Value'){
+				_setSelected(_f("main").s_dropdownlist("operandTypeCombo"+"["+$i+"]").rightOf(_f("main").s_label("Expressions")),$operandArray[$i]);
+				_setValue(_f("main").s_textinput("operandValue").rightOf(_f("main").s_label("Expressions")),$valueArray[$i]);
+			}
+			else if($operandArray[$i]=='Function'){
+				_setSelected(_f("main").s_dropdownlist("operandTypeCombo"+"["+$i+"]").rightOf(_f("main").s_label("Expressions")),$operandArray[$i]);
+				_setSelected(_f("main").s_combobox("picklist"+"["+$i+"]").rightOf(_f("main").s_label("Expressions")),$valueArray[$i]);	
+			}
+			else{
+				_setSelected(_f("main").s_dropdownlist("operandTypeCombo"+"["+$i+"]").rightOf(_f("main").s_label("Expressions")),$operandArray[$i]);
+				_setSelected(_f("main").s_dropdownlist("fieldOperandList"+"["+$i+"]").rightOf(_f("main").s_label("Expressions")),$valueArray[$i]);	
+			}	
 		}
-		else if($operand=='Function'){
-			_setSelected($sfm_pg_dvr.txt_operand,$operand);
-			_setSelected($sfm_pg_dvr.txt_valueFunction,$value);	
-		}
-		else{
-			_setSelected($sfm_pg_dvr.txt_operand,$operand);
-			_setSelected($sfm_pg_dvr.txt_valueField,$value);	
-		}		
+			
 	};
 
 
