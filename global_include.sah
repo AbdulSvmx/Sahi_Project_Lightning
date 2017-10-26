@@ -1,4 +1,4 @@
-// Normalized path that will work for both windows and unix
+//Setting the speed to 100ms to prevent the flex related pages which set the speed to 3000ms from slowind down other scripts in case they do not reset the execution speed back to 100ms
 _setSpeed(100);
 
 //Add All Global Variables here
@@ -10,20 +10,19 @@ var $bac_pwdDev = "welcome-01";
 var $bac_unBase = "orgsadmin@svmx-test4.org.test4part2";
 var $bac_pwdBase = "servicemax1";
 
-// _userDataDir().replace(/\\/g, "/");
+//_userDataDir().replace(/\\/g, "/");
 
-// Change this path later to match git path
-// "/sahi_pro/userdata/scripts/Sahi_Flex_Atuo_Scripts"
+//Change this path later to match git path
+//"/sahi_pro/userdata/scripts/Sahi_Flex_Atuo_Scripts"
 var $g_normalizedUserDir = _userDataDir().replace(/\\/g, "/");
 
 var $g_projectLibPath = $g_normalizedUserDir + "/scripts/Sahi_Project/svmx/project_lib";
-var $g_utilitiesPath = $g_normalizedUserDir
-		+ "/scripts/Sahi_Project/svmx/utilities_lib";
+var $g_utilitiesPath = $g_normalizedUserDir + "/scripts/Sahi_Project/svmx/utilities_lib";
 
 var $g_referancePath = $g_normalizedUserDir;
 var $g_includeFilesArray = [];
 var $global_referenceAdded = false;
-// This will execute only once across all the suites
+//This will execute only once across all the suites
 if ($global_referenceAdded === false) {
 
 	// get reference files
@@ -31,8 +30,8 @@ if ($global_referenceAdded === false) {
 	recursiveGetReferenceFiles($g_includeFilesArray, $g_projectLibPath);
 	//_log("Getting references from dir : " + $g_utilitiesPath);
 	recursiveGetReferenceFiles($g_includeFilesArray, $g_utilitiesPath);
-	
-	for(var $i=0;$i<$g_includeFilesArray.length;$i++){
+
+	for (var $i = 0; $i < $g_includeFilesArray.length; $i++) {
 		try {
 			_include($g_includeFilesArray[$i]);
 		} catch ($e) {
@@ -45,8 +44,8 @@ if ($global_referenceAdded === false) {
 	$global_referenceAdded = true;
 }
 
-// recursively traverses $filePath while adding files (with full path) ending in
-// .sah to $includeFilesArray
+//recursively traverses $filePath while adding files (with full path) ending in
+//.sah to $includeFilesArray
 function recursiveGetReferenceFiles($includeFilesArray, $filePath) {
 	var fileList = getFilesAndFolders($filePath);
 
@@ -63,8 +62,8 @@ function recursiveGetReferenceFiles($includeFilesArray, $filePath) {
 	}
 }
 
-// returns an array of files and folders for the given $filePath.
-// .DS_Store files will not be included
+//returns an array of files and folders for the given $filePath.
+//.DS_Store files will not be included
 function getFilesAndFolders($filePath) {
 	try {
 		var $fileList_1 = new java.io.File($filePath);
@@ -101,8 +100,7 @@ function onScriptErrorDefault($e) {
 	}
 
 	else {
-		if (_sahi.isAndroid() || _sahi.isWindows() || _sahi.isApplet()
-				|| _sahi.isJava()) {
+		if (_sahi.isAndroid() || _sahi.isWindows() || _sahi.isApplet() || _sahi.isJava()) {
 			_takeScreenShot();
 		} else {
 			// _takeScreenShot(); // uncomment this if you want a full desktop
@@ -123,8 +121,7 @@ function onScriptFailureDefault($e) {
 			dumpWindowInfo();
 		}
 	} else {
-		if (_sahi.isAndroid() || _sahi.isWindows() || _sahi.isApplet()
-				|| _sahi.isJava()) {
+		if (_sahi.isAndroid() || _sahi.isWindows() || _sahi.isApplet() || _sahi.isJava()) {
 			_takeScreenShot();
 		} else {
 			// _takeScreenShot(); // uncomment this if you want a full desktop
@@ -147,8 +144,7 @@ function dumpWindowInfo() {
 		s += "\n  derivedName:" + w.derivedName;
 		s += "\n  windowTitle:" + w.windowTitle;
 		s += "\n  windowURL:" + w.windowURL;
-		s += "\n  wasOpened:" + w.wasOpened + " ("
-				+ (w.wasOpened == 1 ? "popup window" : "base window") + ")";
+		s += "\n  wasOpened:" + w.wasOpened + " (" + (w.wasOpened == 1 ? "popup window" : "base window") + ")";
 		s += "\n  domain:" + w.domain;
 		var initDate = new Date(parseFloat(w.initialTime));
 		var lastDate = new Date(parseFloat(w.lastTime));
