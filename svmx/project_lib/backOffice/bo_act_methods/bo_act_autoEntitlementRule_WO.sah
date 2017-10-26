@@ -41,9 +41,19 @@ var $bo_act_autoEntitlementRule_WO = new function bo_act_autoEntitlementRule_WO(
 		_wait(30000, _isVisible($autoEntitlementRuleName));
 		_assertExists(_cell($autoEntitlementRuleName));
 		
-		return $autoEntitlementRuleName;
-		
+		return $autoEntitlementRuleName;	
 	};
-
+	
+	this.performAutoEntitlement_WO = function($workOrderNumber) {
+		$bo_act_workOrders.editWorkOrder($workOrderNumber);
+		_click(_checkbox("Perform Auto Entitlement"));
+		$bo_act_workOrders.saveWorkOrder();
+	};
+	
+	this.deleteAutoEntitlementRule_WO = function($autoEntitlementRule_Name) {
+		$bo_act_navigation.navigateToAutoEntitlementRulesForWO();
+		$bo_pg_autoEntitlementRule_WO.selectAutoEntitlementRule_WO($autoEntitlementRule_Name);
+		_click($bo_pg_autoEntitlementRule_WO.btn_deleteRule);
+	};
 };
 

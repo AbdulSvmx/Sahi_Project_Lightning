@@ -12,13 +12,13 @@ var $bo_act_Cases = new function bo_act_Cases() {
         $bo_act_navigation.navigateToCasesPage();
 		_click($bo_pg_Cases.btn_new);
 		_setValue($bo_pg_Cases.txt_subjectName, $caseSubject);
-		_setSelect($bo_pg_Cases.sel_selectCaseStatus,$caseStatus);
-		_setSelect($bo_pg_Cases.sel_selectCasePriority,$casePriority);
-		_setSelect($bo_pg_Cases.sel_selectCaseOrigin,$caseOrigin);
+		_setSelected($bo_pg_Cases.sel_selectCaseStatus,$caseStatus);
+		_setSelected($bo_pg_Cases.sel_selectCasePriority,$casePriority);
+		_setSelected($bo_pg_Cases.sel_selectCaseOrigin,$caseOrigin);
 		_click($bo_pg_Cases.btn_save);
 		_assertNotVisible(_div("/Error: Invalid Data/"));
+		_wait(15000, _isVisible($caseSubject));
 		var $caseNumber = _getText($bo_pg_Cases.txt_caseNumber);
-		_wait(15000, _isVisible($caseNumber));
 		_logOutput($caseNumber+ " Case is created");
     return $caseNumber;
 	};

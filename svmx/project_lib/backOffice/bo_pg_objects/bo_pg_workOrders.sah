@@ -7,13 +7,20 @@
 var $bo_pg_workOrders = new function bo_pg_workOrders(){
 	
 	this.btn_editWorkOrder = _button(" Edit ");
+	this.btn_newWorkOrder = _button(" New ");
 
 	this.txt_slaTerms = _textbox(0,_rightOf(_label("SLA Terms")));
-	this.sel_priority = _select(0,_rightOf(_label("*Priority")));
+	this.sel_priority = _select(0,_rightOf(_label("/\\*Priority|^Priority/")));
+	this.sel_orderStatus = _select(0,_rightOf(_label("/\\*Order Status|^Order Status/")));
+	this.sel_orderType = _select(0,_rightOf(_label("/\\*Order Type|^Order Type/")));
 	this.btn_saveWorkOrder = _submit(" Save ");
-	this.txt_case = _textbox(0,_rightOf(_label("*Case")));
-	this.txt_contact = _textbox(0,_rightOf(_label("*Contact")));
+	this.txt_case = _textbox(0,_rightOf(_label("/\\*Case|^Case/")));
+	this.txt_account = _textbox(0,_rightOf(_label("/\\*Account|^Account/")));
+	this.txt_contact = _textbox(0,_rightOf(_label("/\\*Contact|^Contact/")));
 	this.btn_SFWCheckEntitlement = _button("Check Entitlement");
+	this.txt_component = _textbox("/\\*Component|^Component/");
+	this.txt_workOrderDetails = _heading2("Work Order Detail");
+	this.txt_getWONumber = _heading2("/WO-/");
 	
 //SLA CLOCK FIELDS
 	this.txt_slaClockInitialResponse = _cell("/Initial Response/");

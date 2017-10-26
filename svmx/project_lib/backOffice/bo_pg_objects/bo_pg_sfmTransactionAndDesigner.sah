@@ -55,20 +55,20 @@ var $bo_pg_sfmTransactionAndDesigner = new function bo_pg_sfmTransactionAndDesig
 	this.selectComboBox = function($elementName,$elementItemName){
 			_setSelected(_f("main").s_combobox($elementName), $elementItemName);
 		
-		}
+		};
 		
 		//Enter the name of checklist type SFM transaction
 	this.setSfmName=function($sfmName){
 		_setValue(_f("main").s_textinput("pName"), ($sfmName));
-	}
+	};
 		
 	this.child_checkBox =function($orderTypeName){
 			_f("main").s_checkbox($orderTypeName);
-	}
+	};
 		
 	this.source_ctRecord_comboBox = function($comboName){
 			_f("main").s_combobox($comboName);	
-	}	
+	};	
 //end here_by Mamta
 
 
