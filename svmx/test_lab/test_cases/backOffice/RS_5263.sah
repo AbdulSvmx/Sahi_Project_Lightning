@@ -48,7 +48,7 @@ _assertExists($bo_pg_workOrders.link_SLAClockStart);
 _assertNotContainsText("Restoration 00:00:00:00",_table("/CH_dtimer1/"),"SLA Clock Issue");
 
 $bo_act_workOrders.editWorkOrder($WONumber);
-$bo_act_workOrders.clickLinktoUpdateTextfields($bo_pg_workOrders.txt_actualOnsiteResponseOnEditWO);
+$bo_act_workOrders.clickLinktoUpdateTextfields($bo_pg_workOrders.txt_actualRestorationOnEditWO);
 $bo_act_workOrders.saveWorkOrder();
 _assertNotEqual(_getText($bo_pg_workOrders.txt_TimeToRestore)," ", "issue in Time to restore");
 
