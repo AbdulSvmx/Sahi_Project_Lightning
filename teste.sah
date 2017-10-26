@@ -1,0 +1,36 @@
+
+_setValue(_f("main").s_textinput("textInput"), "Work Order");
+
+_click(_f("main").s_checkbox("chk"));
+_click(_f("main").s_checkbox("chk[1]"));
+_click(_f("main").s_checkbox("chk[2]"));
+_click(_f("main").s_checkbox("chk"));
+_click(_f("main").s_button("Clone"));
+_setValue(_f("main").s_textinput("pName"), "testebddyye");
+_setValue(_f("main").s_textinput("pId"), "");
+_setValue(_f("main").s_textinput("pName"), "testebddyye");
+_setValue(_f("main").s_textinput("searchText[2]"), "Manage Work Order Lines - Usage");
+_setValue(_f("main").s_textinput("searchText[2]"), "ffffffffffffffffffffffffffffffff");
+_setValue(_f("main").s_textinput("searchText[2]"), "manage work order line");
+_setSelected(_f("main").s_combobox("searchCombo[3]"), "SVMXSTD: Add/Edit Products Serviced");
+_click(_f("main").s_checkbox("Required"));
+_click(_f("main").s_checkbox("Required"));
+_click(_div("Service Flow Manager"));
+_click(_div("middle[24]"));
+_click(_f("main").s_button("New SFM Transaction"));
+_setValue(_f("main").s_textinput("pName"), "abcdefghhh");
+_setValue(_f("main").s_textinput("pId"), "");
+_setValue(_f("main").s_textinput("pName"), "abcdefghhh");
+_setValue(_f("main").s_textinput("pId"), "abcdefghhh");
+_setValue(_f("main").s_textinput("textInput"), "Select a source object");
+_setValue(_f("main").s_textinput("textInput"), "Work Order");
+_setSelected(_f("main").s_combobox("objCombo1"), "Work Order");
+_click(_f("main").s_button("OK"));
+_click(_f("main").s_checkbox("Work Detail (Work Order)"));
+_setSelected(_f("main").s_combobox("objCombo1[1]"), "Work Order");
+_setValue(_f("main").s_textinput("pId"), "mamatarout");
+_setSelected(_f("main").s_combobox("objCombo1"), "Work Order");
+_setValue(_f("main").s_textinput("textInput"), "Work Order");
+_click(_f("main").s_checkbox("Work Detail (Work Order)"));
+_setSelected(_f("main").s_combobox("objCombo1[1]"), "Work Order");
+_click(_f("main").s_checkbox("Work Detail (Work Order)[1]"));

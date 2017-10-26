@@ -6,68 +6,45 @@ $RS_5440.start();
 _setSpeed(100);
 $bo_act_login.login($g_url, $bac_unBase, $bac_pwdBase);
 	//Create a SFM orders test data
-	var $sourceName = "Work Order";
-	var $targetName = "Work Order";
-	var $QualCriteriaName = "Work Detail (Work Order)";
-	var $sfmPageLayoutName = "SFMIBTEST";
-	var $wizardSelectObjectName = "Work Order";
-	var $wizardTitleName = "SFMIBTEST1";
-	var $wizardIDName = "SFMIBTEST1"; 	
+	//var $sourceName = "Work Order";
+	//var $targetName = "Work Order";
+	//var $QualCriteriaName = "Work Detail (Work Order)";
+	//var $sfmPageLayoutName = "SFMIBTEST";
+	//var $wizardSelectObjectName = "Work Order";
+	var $wizardTitleName = "SFMIBTEST8";
+	var $wizardIDName = "SFMIBTEST8"; 	
 	var $searchText =$custActname;
-	var $isOnlineHideRequired = true;
-	var $isOnlineRequired = false;	
-	var $workOrderName = "WO-00000000";
-	var $custActname="My Custom Action";
-	var $custActID="My_custom_Action";
+	//var $workOrderName = "WO-00000000";
+	var $custActname="My Custom Action22";
+	var $custActID="My_custom_Action12";
 	var $url="https://www.google.co.in/";
 	var $objectName="Work Order";
-	var $actnType= "Others";
-
-	$bo_act_customAction.createNewCustomAction($custActname,$custActID,$url,$objectName,$actnType);
+var $objName="Work Order";
+	var $fieldActnType= "Others";
+	var $actnType1="URL";
+	var $actnName=$custActname;
+	var $wizardname=$custActname;
+var $sfmName=$wizardTitleName;
+var $stndSFMName="";
+	$bo_act_navigation.navigateToSfmCustomAction();
+	$bo_act_customAction.createNewCustomAction($custActname,$custActID,$url,$objectName,$actnType1);
 	if($bo_act_navigation.navigateToSfmWizard()){
-		$bo_act_SFW.addSFMWizardGeneralInfo($wizardTitleName,$wizardIDName);
-		$bo_act_SFW.addCustomActionToWizard($actnType,$custActname);
+		$bo_act_SFW.createWizardGeneralInfo($objectName,$wizardTitleName,$wizardIDName);
+		$bo_act_SFW.addCustomActionToWizard($fieldActnType,$actnName);
 		
 	}else{
 		_fail("Navigation To SFM Wizard Failed");
 		_stopTestCase();
 	};
 
-	if($bo_act_navigation.navigateToSfmAppPermission()){
-		$bo_act_SFMAppPermission.setSFMAppPermission($searchText,$isOnlineHideRequired,$isOnlineRequired);
+		$bo_act_navigation.navigateToSfmAppPermission();
+		$bo_act_SFMAppPermission.setAppPermissionForWizard($sfmName,$objName)	
+		$bo_act_sfmVerifyWorkOrder.verifyWizardOnWOObj($stndSFMName);
+		$bo_act_sfmVerifyWorkOrder.searchWizard($wizardTitleName );
 
-	}else{
-		_fail("Navigation To SFM App Permission Failed");
-		_stopTestCase();
-	};
+	
 
-	//verifyWorkOrderOnlineDisplay function returns false as it is unchecked(hide) on above step
-	if(!($bo_act_sfmVerifyWorkOrder.verifyWorkOrderOnlineDisplay($custActname,$workOrderName))){
-		_log("Work Order Verification Successful!!!");
-
-		}else{
-		_fail("Work Order Verification Failed");
-		_stopTestCase();
-	};
-
-		//unhide the order and verify it is displaying in Online
-	 $isOnlineHideRequired = false;
-	 $isOnlineRequired = true;
-	if($bo_act_navigation.navigateToSfmAppPermission()){
-		$bo_act_SFMAppPermission.setSFMAppPermission($searchText,$isOnlineHideRequired,$isOnlineRequired);
-
-	}else{
-		_fail("Navigation To SFM App Permission Failed");
-		_stopTestCase();
-	};	
-	   //verifyWorkOrderOnlineDisplay function returns true as it is checked(unhide)on above steps
-		if($bo_act_sfmVerifyWorkOrder.verifyWorkOrderOnlineDisplay($custActname,$workOrderName)){
-		_log("Verification of custom action Successful!!!");
-
-		}else{
-		_fail("Custom Action verification Failed");
-		_stopTestCase();
-	};
+	
 $RS_5440.end();
 	
 	

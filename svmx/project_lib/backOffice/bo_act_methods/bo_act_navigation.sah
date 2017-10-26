@@ -10,7 +10,7 @@ var $bo_act_navigation = new function bo_act_navigation() {
      */this.navigateToHome = function() {
     	 _selectWindow();
 	_click($bo_pg_home.link_home);
-	_wait(60000, _isVisible($bo_pg_home.link_servicemaxSetup));
+	_wait(6000, _isVisible($bo_pg_home.link_servicemaxSetup));
 	return $callBack.returnResult(_exists($bo_pg_home.link_servicemaxSetup ));
 	
     };
@@ -164,12 +164,23 @@ var $bo_act_navigation = new function bo_act_navigation() {
  	  /**
       * Navigates to a SFM App Permission
       * @returns boolean
-      */this.navigateToSfmAppPermission = function() {
+      */
+	this.navigateToSfmAppPermission = function() {
  	 this.navigateToSvmxSetup();
  	_click($bo_pg_servicemaxSetup.btn_serviceFlowManager);
  	_click($bo_pg_servicemaxSetup.btn_sfmAppPermission);
- 	_setSpeed(3000);
- 	return $callBack.returnResult(_exists($bo_pg_sfmWizard.wizardLabel));
+	_wait(30000);
+ 	
+ 
+
+     };
+	this.navigateToSfmCustomAction = function() {
+ 	 this.navigateToSvmxSetup();
+ 	_click($bo_pg_servicemaxSetup.btn_serviceFlowManager);
+ 	_click($bo_pg_servicemaxSetup.btn_sfmCustomAction);
+	_wait(30000);
+ 	
+ 
 
      };
      
