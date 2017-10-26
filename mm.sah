@@ -1,0 +1,3 @@
+_selectWindow("Confirm Custom Object Delete");
+_check(_checkbox("confirmed"));
+_uncheck(_checkbox("confirmed"));
