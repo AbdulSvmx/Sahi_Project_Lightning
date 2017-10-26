@@ -31,20 +31,17 @@ if ($global_referenceAdded === false) {
 	recursiveGetReferenceFiles($g_includeFilesArray, $g_projectLibPath);
 	//_log("Getting references from dir : " + $g_utilitiesPath);
 	recursiveGetReferenceFiles($g_includeFilesArray, $g_utilitiesPath);
-
-	$g_includeFilesArray.forEach(function includeReferences($referencePath,
-			$index) {
-		//_continueOnError();
+	
+	for(var $i=0;$i<$g_includeFilesArray.length;$i++){
 		try {
-			_include($referencePath);
+			_include($g_includeFilesArray[$i]);
 		} catch ($e) {
 			_log("Reference Exception : " + $e);
 		}
 		;
+	}
 
-		//_log($index + " Reference Added " + $referencePath);
-	});
-
+	//Set the flag to true to prevent duplicate addition of references
 	$global_referenceAdded = true;
 }
 
