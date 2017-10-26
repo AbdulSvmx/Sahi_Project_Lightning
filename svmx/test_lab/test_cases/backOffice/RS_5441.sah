@@ -15,7 +15,7 @@ $bo_act_login.login($g_url, $bac_unBase, $bac_pwdBase);
 	var $wizardSelectObjectName = "Work Order";
 	var $wizardTitleName = "SFMIBTEST1";
 	var $wizardIDName = "SFMIBTEST1"; 
-	var $wizardStep1Type = "SFM"
+	var $wizardStep1Type = "SFM";
 	var $wizardStep1Name = $sfmName;
 	var $executionMode1 = "Interactive";
 	//var $wizardStep2Type = $wizardStep1Type;
@@ -26,11 +26,11 @@ $bo_act_login.login($g_url, $bac_unBase, $bac_pwdBase);
 	var $isOnlineRequired = false;
 	var $sfmTranName = $sfmName;
 	var $workOrderName = "WO-00000000";
-var $wizardStatus="Inactive"
-	var $sfmName1="My Incomplete SFM"
+var $wizardStatus="Inactive";
+	var $sfmName1="My Incomplete SFM";
 
 	//$bo_act_SFM.createNewSourceAndHeaderChildSFM ($sfmName,$sourceName,$targetName,$QualCriteriaName,$sfmPageLayoutName);
-	$bo_act_SFM.createIncompleteSFM($sfmName1,$sourceName,$targetName,$QualCriteriaName)
+	$bo_act_SFM.createIncompleteSFM($sfmName1,$sourceName,$targetName,$QualCriteriaName);
 if($bo_act_navigation.navigateToSfmWizard()){
 		$bo_act_SFM.createSFMWizard($wizardSelectObjectName,$wizardTitleName,$wizardIDName,$wizardStep1Type,$wizardStep1Name,$executionMode1);
 	}else{

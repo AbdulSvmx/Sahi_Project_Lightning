@@ -1,6 +1,18 @@
 var $bo_pg_sfmVerifyWorkOrder= new function bo_pg_sfmVerifyWorkOrder() {
 		
-	this.imgBtn_allTab = _image("All Tabs");
-	this.link_workOrder =_link("Work Orders");
-		
+	
+		this.link_workOrder =_link("Work Orders");
+		this.lbl_workOrderDetailPage=_heading2("Work Order Detail");
+		this.img_allTab=_image("All Tabs");
+		this.lnk_objWO=_link("Work Orders");
+		this.lnk_objPMP=_link("Preventive Maintenance Plans");
+		this.lnk_pmpName=_link(/PMPlan[0-9]{13}/g);
+		this.lnk_firstLinkPMP=_link(0,_under(_tableHeader("PM Plan Name")));
+		this.lnk_firstLinkWO=_link(0,_under(_tableHeader("Work Order Number")));
+		this.wizardButtonExist=_button("Add/Edit Products Serviced");
+		this.verifyLabelSite=_label("Site:");
+	
 }
+	
+	
+			

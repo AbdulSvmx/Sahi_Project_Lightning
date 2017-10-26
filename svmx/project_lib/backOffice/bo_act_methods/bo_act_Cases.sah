@@ -51,4 +51,31 @@ var $bo_act_Cases = new function bo_act_Cases() {
 		  _wait(10000, _isVisible($caseNumber));
 		  _click($bo_pg_Cases.btn_cloneCase);
 	};
+	
+	this.editCaseOnly = function($CaseNumber){
+		$bo_act_navigation.navigateToCasesPage();
+		  _click(_link($caseNumber));
+		  _click($bo_pg_Cases.btn_editCase);
+	};
+	this.updateTextBoxFields = function($object,$objectValue){
+		_setValue($object,$objectValue);
+		//return $callBack.returnResult([_isVisible($accountName), "Account not created",$accountName] );
+	};
+	this.updateDropdownFields = function($object,$objectValue){
+		_setSelected($object,$objectValue);
+		//return $callBack.returnResult([_isVisible($accountName), "Account not created",$accountName] );
+	};
+	
+	this.clickLinktoUpdateTextfields = function($object){
+		_click($object);
+		
+	};
+	
+	this.saveCase = function(){
+		 _click($bo_pg_Cases.btn_save);
+		 _assertNotVisible(_div("/Error: Invalid Data/"));
+		 _wait(15000, _isVisible($caseNumber));
+		 _logOutput($caseNumber+ " Case is Editied");
+		
+	};
 };

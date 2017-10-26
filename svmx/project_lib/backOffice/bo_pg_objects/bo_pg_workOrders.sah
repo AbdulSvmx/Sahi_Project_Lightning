@@ -26,6 +26,7 @@ var $bo_pg_workOrders = new function bo_pg_workOrders(){
 	this.txt_slaClockInitialResponse = _cell("/Initial Response/");
 	this.txt_actualInitialResponseOnEditWO = _link(0,_rightOf(_label("Actual Initial Response")));
 	this.txt_actualRestorationOnEditWO = _link(0,_rightOf(_label("Actual Restoration")));
+	this.txt_actualResolutionOnEditWO = _link(0,_rightOf(_label("Actual Resolution")));
 	this.btn_SLAPause = _button("Pause");
 	this.sel_ReasonSLA = _select(0,_rightOf(_label("Reason")));
 	this.btn_popUpPause = _button("Pause[1]");

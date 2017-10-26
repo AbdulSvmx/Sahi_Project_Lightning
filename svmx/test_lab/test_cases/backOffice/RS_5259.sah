@@ -1,8 +1,8 @@
 
 //author - Noor Salma Sharieff
 
-var $RS_5303 = _testcase("$RS_5303","RESOLUTION response on Case:Clock paused/resumed on extending SLA commitment");
-$RS_5303.start();
+var $RS_5259 = _testcase("$RS_5259","Verify the impact of SLA setting values on SLA clocks on Case Object");
+$RS_5259.start();
 _setSpeed(100);
 
 //Pre - Condition 
@@ -12,7 +12,7 @@ $bo_act_configurationProfiles.editGlobalProfileForBooleanSettings("Service Level
 $bo_act_configurationProfiles.editGlobalProfileForBooleanSettings("Service Level Agreement", "SLA Clock on Case", "SET005", true);
 
 var $slaterm = $bo_act_slaTerms.createSlaTerms("Default");
-$bo_act_slaTerms.addResolutionToSLA($slaterm, "Case","Problem", "High", "Created Date", 30, 60, "SLA");
+$bo_act_slaTerms.addInitialResponseToSLA($slaterm, "Case","Problem", "High", "Created Date", 30, 60, "SLA");
 
 var $caseNumber = $bo_act_Cases.createCase("New", "High", "Email");
 
@@ -24,23 +24,10 @@ $bo_act_Cases.saveCase();
 //Validations
 _selectDomain("/svmx/");
 _wait(3000,_isVisible(_table("/timer/")));
-_assertNotContainsText("Resolution 00:00:00:00",_table("/CH_dtimer1/"),"SLA Clock Issue");
+_assertNotContainsText("Initial Response 00:00:00:00",_table("/CH_dtimer1/"),"SLA Clock Issue");
 _selectDomain();
-_assertNotEqual(_getText(_div(0,_rightOf(_span("/Resolution Internal By/"))))," ","Issue in Resolution Internal By field");
-_assertNotEqual(_getText(_div(0,_rightOf(_cell("/Resolution Customer By/"))))," ","Issue in Resolution Customer By field");
-
-$bo_act_workOrders.pauseSLAClock();
-_wait(60000);
-$bo_act_workOrders.resumeSLAClock("Yes");
-
-_selectDomain("/svmx/");
-_assertNotContainsText("Resolution 00:00:00:00",_table("/CH_dtimer1/"),"SLA Clock Issue");
-_selectDomain();
-
-_call(location.reload());
-_assertExists($bo_pg_workOrders.link_SLAClockStop);
-_assertExists($bo_pg_workOrders.link_SLAClockStart);
-
+_assertNotEqual(_getText(_div(0,_rightOf(_span("/Initial Response Internal By/"))))," ","Issue in Resolution Internal By field");
+_assertNotEqual(_getText(_div(0,_rightOf(_cell("/Initial Response Customer By/"))))," ","Issue in Resolution Customer By field");
 
 $bo_act_Cases.editCaseOnly($caseNumber);
 $bo_act_Cases.clickLinktoUpdateTextfields($bo_pg_Cases.txt_actualRestorationOnEdit);
@@ -50,12 +37,12 @@ _assertNotEqual(_getText($bo_pg_Cases.txt_TimeToRestore),"", "issue in Time to O
 
 //Clean up function
 
-var $datacreated = [$slaterm,$caseNumber];
+var $datacreated = [$accName,$proName,$IBName,$contactName,$WONumber,$slaterm,$caseNumber];
 for (var i = 0; i < $datacreated.length; i++) {
 	$bo_act_common.cleanUpfunction($datacreated[i]);
 }
 
-$RS_5303.end();
+$RS_5259.end();
 
 
 

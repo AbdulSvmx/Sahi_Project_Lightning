@@ -1,0 +1,17 @@
+var $RS_5430 = _testcase("RS_5430", "Test the functionality SFM App permision for a scenario");
+$RS_5430.start();
+_setSpeed(100);
+
+$bo_act_login.login($g_url, $bac_unBase, $bac_pwdBase);
+//Create a SFM orders test data
+var $sfmName = "SFM_Interact309";
+var $stndSFMName="Add/Edit Products Serviced"
+var $objName2="Preventive Maintenance Plan";
+var $objName1="Work Order";
+	var $wizardname="TestWizard200";
+	var $wizardID="TestWizard200";
+
+
+_setSpeed(100);
+
+$RS_5430.end()
