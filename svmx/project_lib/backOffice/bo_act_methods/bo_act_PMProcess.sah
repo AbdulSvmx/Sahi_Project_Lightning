@@ -13,11 +13,11 @@ var $bo_act_PMProcess = new function bo_act_PMProcess() {
 	 */
 	
 
-	createPMProcess = function($processType,$creationOfWO,$PMPlan){
-		var $PMProcessName = generateRandomString(8);
-		var $pmProcessId = generateRandomString(8);
-		var $expressionName = generateRandomString(8);
-		var $expressionId = generateRandomString(8);
+	this.createPMProcess = function($processType,$creationOfWO,$PMPlan){
+		var $PMProcessName = $bo_act_common.generateRandomName("PMProName");
+		var $pmProcessId = $bo_act_common.generateRandomName("PMProId");
+		var $expressionName = $bo_act_common.generateRandomName("ExpName");
+		var $expressionId = $bo_act_common.generateRandomName("ExpId");
 		$bo_act_navigation.navigateToPMProcess();
 		_click($bo_pg_PMProcess.btn_new);
 		_setSelected($bo_pg_PMProcess.txt_processType,$processType);
@@ -37,6 +37,7 @@ var $bo_act_PMProcess = new function bo_act_PMProcess() {
 		_click($bo_pg_PMProcess.tab_scheduleAndNotifications);
 		_setValue($bo_pg_PMProcess.txt_sendErrorNotificationsToThisEmailAddress,"noor.sharieff@servicemax.com");
 		_click($bo_pg_PMProcess.btn_quickSave);
+		return $PMProcessName;
 		//return $callBack.returnResult([_isVisible("success"), "Error in PM Processd",$accountName] );
 	};
 

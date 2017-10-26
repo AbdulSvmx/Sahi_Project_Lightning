@@ -14,6 +14,7 @@ var $installedProduct = $bo_act_installedProduct.createInstalledProduct($proName
 var $WONumber = $bo_act_installedProduct.createWOFromIB($installedProduct);
 var $sconName = $bo_act_serviceMaintenanceContracts.createServiceMaintenanceContract($accName, $slaterm,1,0);
 $bo_act_serviceMaintenanceContracts.AddCoveredProductToSCON($sconName, $installedProduct);
+
 /*
 //Creating Product
 

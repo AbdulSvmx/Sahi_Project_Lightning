@@ -2,15 +2,12 @@
 //==============
 
 //Pre - Condition Test Data
-var $recordType = ["Depot","Depot Child","Depot Parent","Standard Location"];
 var $productFamily = ["--None--","GeneralSolution","AdvSolution","Accessory", "Storage"];
 var $productCode = "";
-var $exchangeType = ["--None--","Advance Exchange","Return Exchange"];
-var $unitOfTimeForCoverage = ["--None--","Days","Weeks","Months","Years"];
 var $coverageEffectiveFrom = ["--None--","Date Installed","Date Ordered","Date Shipped","Last Activity Date","Last Date Shipped","Warranty Start Date","Warranty End Date"];
 var $seperator = "/";
 
-var $RS_7290 = _testcase("$RS_7290","Creation of a Warranty Term and association of a Warranty to an Installed Product");
+var $RS_7290 = _testcase("$RS_7290","Creation and Activation of Service Contracts");
 $RS_7290.start();
 _setSpeed(100);
 //$bo_act_login.login($g_url, $g_un, $g_pwd);
@@ -26,7 +23,7 @@ var $productName = $bo_act_products.createProduct($productCode, $productFamily[3
 var $IBName = $bo_act_installedProduct.createInstalledProduct($productName, $accountName, $contactName);
 
 //Create 1st SLA Term SLA01 [Platinum SLA]
-/*$bo_act_navigation.navigateToSlaTerms();
+$bo_act_navigation.navigateToSlaTerms();
 var $slaName01 = $bo_act_slaTerms.createSlaTerms("Default");
 $bo_act_slaTerms.addInitialResponseToSLA($slaName01,"WorkOrder","Field Service","Medium","Created Date","5","10","SLA");
 $bo_act_slaTerms.addOnsiteResponseToSLA($slaName01,"WorkOrder","Field Service","Medium","Created Date","10","15","SLA");
@@ -50,11 +47,7 @@ $bo_act_slaTerms.addInitialResponseToSLA($slaName03,"WorkOrder","Field Service",
 $bo_act_slaTerms.addOnsiteResponseToSLA($slaName03,"WorkOrder","Field Service","Medium","Created Date","10","15","SLA");
 
 //validation of SLA creation
-_assertExists(_span($slaName03));  */
-
-var $slaName01 = "Platinum SLA BAC";
-var $slaName02 = "Platinum SLA BAC";
-var $slaName03 = "Platinum SLA BAC";
+_assertExists(_span($slaName03));
 
 var $pastYear = 2;  // Start Date for Service Contract
 var $futureYear = 2;  // End Date for Service Contract
@@ -89,31 +82,23 @@ var $expecctedContactUnder_EntitledContacts =  _getText(_link(0,_under(_tableHea
 
 
 //validation
-//Validating the Covered Products, Locations and Contacts Percent
-_assertEqual($materialPercentCovered,$materialPercentCoveredActulOn_IB,"Actual and expected Material % covered are not same");
-_assertEqual($laborPercentCovered,$timePercentCoveredActulOn_IB,"Actual and expected Time % covered are not same");
-_assertEqual($expensesPercentCovered,$expensesPercentCoveredActulOn_IB,"Actual and expected Expenses % covered are not same");
+//Validating the Covered Products Percent on Scon
+_assertEqual($expecctedIBUnder_CoveredProduct,$IBName,"Actual and expected covered Products are not same");
 
-/*
-var $startDateExpectedOn_IB = _getText(_div(0,_rightOf(_cell("/Date Installed/"))));
+//Validating the Covered Locations Percent on Scon
+_assertEqual($expecctedLocationUnder_CoveredLocations,$locationName,"Actual and expected covered Locations are not same");
 
-var $endDateExpectedOn_IB =  $bo_act_common.endDateCalculationForIB($startDateExpectedOn_IB, $durationOfCoverage, $seperator);
-_logOutput($endDateExpectedOn_IB);
-
-var $startDateActulOn_IB = _getText(_cell(0,_under(_tableHeader("Start Date"))));
-var $endDateActulOn_IB = _getText(_cell(0,_under(_tableHeader("End Date"))));
-
-//Validating the Actual and expected Start/End Dates on IB
-_assertEqual($startDateExpectedOn_IB,$startDateActulOn_IB,"Actual and expected Start Dates are not same");
-_assertEqual($endDateExpectedOn_IB,$endDateActulOn_IB,"Actual and expected End Dates are not same");*/
+//Validating the Entitled Contacts Percent on Scon
+_assertEqual($expecctedContactUnder_EntitledContacts,$contactName,"Actual and expected Entitled Contacts are not same");
 
 //Clean up function
 
-/*var $datacreated = [$warrantyName,$IBName,$locationName,$productName,$contactName,$accountName,];
+//var $datacreated = [$warrantyName,$IBName,$locationName,$productName,$contactName,$accountName,];
+var $datacreated = [$serviceConractName, $slaName03, $slaName02, $slaName01, $IBName,$productName,$locationName, $contactName,$accountName,];
 for (var i = 0; i < $datacreated.length; i++) {
 	$bo_act_common.cleanUpfunction($datacreated[i]);
 }
-$bo_act_login.logOut();*/
+$bo_act_login.logOut();
 
 $RS_7290.end();
 

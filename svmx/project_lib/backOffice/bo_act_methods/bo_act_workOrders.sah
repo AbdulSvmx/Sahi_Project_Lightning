@@ -14,17 +14,23 @@ var $bo_act_workOrders = new function bo_act_workOrders() {
 		_click($bo_pg_workOrders.btn_editWorkOrder);
 	};
 	this.updateTextBoxFields = function($object,$objectValue){
-		_setValue($object+","+$objectValue);
+		_setValue($object,$objectValue);
 		//return $callBack.returnResult([_isVisible($accountName), "Account not created",$accountName] );
 	};
 	
 	this.updateDropDownFields = function($object,$objectValue){
-		_setSelected($object+","+$objectValue);
+		_setSelected($object,$objectValue);
 		//return $callBack.returnResult([_isVisible($accountName), "Account not created",$accountName] );
+	};
+	
+	this.clickLinktoUpdateTextfields = function($object){
+		_click($object);
+		
 	};
 	
 	this.saveWorkOrder = function(){
 		_click($bo_pg_workOrders.btn_saveWorkOrder);
+		_assertNotVisible(_div("/Error: Invalid Data/"));
 		//return $callBack.returnResult([_isVisible($accountName), "Account not created",$accountName] );
 	};
 	this.checkEntitlement = function($workOrderNumber){
@@ -33,6 +39,27 @@ var $bo_act_workOrders = new function bo_act_workOrders() {
 		_selectDomain("/svmx/");
 		_click($bo_pg_workOrders.btn_SFWCheckEntitlement);
 		_selectDomain();
-	
 	};
+
+	this.pauseSLAClock = function(){
+		_selectDomain("/svmx/");
+		_click($bo_pg_workOrders.btn_SLAPause);
+		_setSelected($bo_pg_workOrders.sel_ReasonSLA,"Customer Not Available");
+		_click($bo_pg_workOrders.btn_popUpPause);
+		_selectDomain();
+	};
+	
+	this.resumeSLAClock = function($extendingSLACommitmentYesorNo){
+		_selectDomain("/svmx/");
+		_click($bo_pg_workOrders.btn_SLAResume);
+		_click(_button($extendingSLACommitmentYesorNo));
+		_selectDomain();
+	//	_setSelected($bo_pg_workOrders.sel_ReasonSLA,"Customer Not Available");
+	//	_click($bo_pg_workOrders.btn_popUpPause);
+	};
+	
+	
+
+	
+
 };

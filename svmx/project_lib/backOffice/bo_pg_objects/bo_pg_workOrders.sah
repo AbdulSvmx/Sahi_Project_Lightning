@@ -9,10 +9,38 @@ var $bo_pg_workOrders = new function bo_pg_workOrders(){
 	this.btn_editWorkOrder = _button(" Edit ");
 
 	this.txt_slaTerms = _textbox(0,_rightOf(_label("SLA Terms")));
-	this.sel_priority = _select(0,_rightOf(_label("Priority")));
+	this.sel_priority = _select(0,_rightOf(_label("*Priority")));
 	this.btn_saveWorkOrder = _submit(" Save ");
+	this.txt_case = _textbox(0,_rightOf(_label("*Case")));
+	this.txt_contact = _textbox(0,_rightOf(_label("*Contact")));
 	this.btn_SFWCheckEntitlement = _button("Check Entitlement");
 	
+//SLA CLOCK FIELDS
+	this.txt_slaClockInitialResponse = _cell("/Initial Response/");
+	this.txt_actualInitialResponseOnEditWO = _link(0,_rightOf(_label("Actual Initial Response")));
+	this.txt_actualRestorationOnEditWO = _link(0,_rightOf(_label("Actual Restoration")));
+	this.btn_SLAPause = _button("Pause");
+	this.sel_ReasonSLA = _select(0,_rightOf(_label("Reason")));
+	this.btn_popUpPause = _button("Pause[1]");
+	this.btn_SLAResume = _button("Resume");
+	this.txt_slaClock = _table("/CH_dtimer1/");
+	this.txt_InitialResponseInternalBy = _div(0,_rightOf(_span("/Initial Response Internal By/")));
+	this.txt_InitialResponseCustomerBy = _div(0,_rightOf(_cell("/Initial Response Customer By/")));
+	this.txt_TimeToInitialResponse = _div(0,_rightOf(_cell("/Time to Initial Response/")));
+	this.txt_InitialResponseInternalBy = _div(0,_rightOf(_span("/Initial Response Internal By/")));
+	this.txt_InitialResponseCustomerBy = _div(0,_rightOf(_cell("/Initial Response Customer By/")));
+
+	this.txt_TimeToOnsiteResponse = _div(0,_rightOf(_cell("/Time to Onsite Response/")));
+	this.txt_TimeToRestore = _div(0,_rightOf(_cell("/Time to Restore/")));
+	this.txt_TimeToResolve = _div(0,_rightOf(_cell("/Time to Resolve/")));
+	this.txt_OnsiteResponseInternalBy = _div(0,_rightOf(_span("/Onsite Response Internal By/")));
+	this.txt_OnsiteResponseCustomerBy = _div(0,_rightOf(_cell("/Onsite Response Customer By/")));
+	this.txt_actualOnsiteResponseOnEditWO = _link(0,_rightOf(_label("Actual Onsite Response")));
+	this.txt_acknowledgedByTechnicianDateTime = _link(0,_rightOf(_label("Acknowledged By Technician Date Time")));
+
+// Activity History Related List
+	this.link_SLAClockStop = _link("SLA Clock Stop"),(_near(_tableHeader("Subject")),_under(_heading3("Activity History")));
+	this.link_SLAClockStart = _link("SLA Clock Start"),(_near(_tableHeader("Subject")),_under(_heading3("Activity History")));
 };
 
 

@@ -48,6 +48,10 @@ var $bo_act_navigation = new function bo_act_navigation() {
     	 _click($bo_pg_home.btn_allTabs);
     	 _click($bo_pg_home.link_accounts);
     };
+    this.navigateToCasesPage = function(){
+   	 _click($bo_pg_home.btn_allTabs);
+   	 _click($bo_pg_home.link_cases);
+   };
     	
      this.navigateToContactsPage = function(){
     	 _click($bo_pg_home.btn_allTabs);
@@ -181,8 +185,30 @@ var $bo_act_navigation = new function bo_act_navigation() {
  
 
      };
-
-
+     
+     /**
+      * Navigates to Auto Entitlement Rules - Work Order
+      * @returns boolean
+      */
+     this.navigateToAutoEntitlementRulesForWO = function() {
+ 	 this.navigateToSvmxSetup();
+ 	_click($bo_pg_servicemaxSetup.btn_warrantiesAndServiceContracts);
+ 	_click($bo_pg_servicemaxSetup.btn_autoEntitlementRulesWO);
+ 	_setSpeed(3000);
+ 	//return $callBack.returnResult(_exists($bo_pg_sfmWizard.wizardLabel));
+     };
+     
+     /**
+      * Navigates to Auto Entitlement Rules - Case
+      * @returns boolean
+      */
+     this.navigateToAutoEntitlementRulesForCase = function() {
+ 	 this.navigateToSvmxSetup();
+ 	_click($bo_pg_servicemaxSetup.btn_warrantiesAndServiceContracts);
+ 	_click($bo_pg_servicemaxSetup.btn_autoEntitlementRulesCase);
+ 	_setSpeed(3000);
+ 	//return $callBack.returnResult(_exists($bo_pg_sfmWizard.wizardLabel));
+     };
      
      this.navigateToWorkOrdersTab = function(){
     	 _click($bo_pg_home.btn_allTabs);
@@ -190,5 +216,6 @@ var $bo_act_navigation = new function bo_act_navigation() {
     		_click($bo_pg_home.link_customWorkOrders);
     		_setStrictVisibilityCheck(false);
      };
+
 
 };

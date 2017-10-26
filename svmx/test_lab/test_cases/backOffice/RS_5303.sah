@@ -1,0 +1,67 @@
+
+//author - Noor Salma Sharieff
+
+var $RS_5303 = _testcase("$RS_5303","RESOLUTION response on Case:Clock paused/resumed on extending SLA commitment");
+$RS_5303.start();
+_setSpeed(100);
+
+//Pre - Condition 
+$bo_act_login.login($g_url, $bac_unBase, $bac_pwdBase);
+$bo_act_navigation.navigateToConfigurationProfilesPage();
+$bo_act_configurationProfiles.editGlobalProfileForBooleanSettings("Service Level Agreement", "SLA Clock on Case", "SET003", true);
+$bo_act_configurationProfiles.editGlobalProfileForBooleanSettings("Service Level Agreement", "SLA Clock on Case", "SET005", true);
+
+//var $accName = $bo_act_accounts.createAccount();
+//var $proName = $bo_act_products.createProduct("pro12", "--None--");
+//var $IBName = $bo_act_installedProduct.createInstalledProduct($proName,$accName,"");
+//var $contactName = $bo_act_contacts.createContact($accName); 
+//var $caseNumber = $bo_act_installedProduct.createSupportCase("New");
+//var $WONumber = $bo_act_installedProduct.createWOFromIB($IBName);
+
+var $slaterm = $bo_act_slaTerms.createSlaTerms("Default");
+$bo_act_slaTerms.addResolutionToSLA($slaterm, "Case","All", "High", "Created Date", 30, 60, "SLA");
+
+//$bo_act_workOrders.editWorkOrder($WONumber);
+//$bo_act_workOrders.updateTextBoxFields($bo_pg_workOrders.txt_slaTerms, $slaterm);
+//$bo_act_workOrders.updateTextBoxFields($bo_pg_workOrders.txt_case, $caseNumber);
+//$bo_act_workOrders.updateTextBoxFields($bo_pg_workOrders.txt_contact, $contactName);
+//$bo_act_workOrders.updateDropDownFields($bo_pg_workOrders.sel_priority, "High");
+//$bo_act_workOrders.saveWorkOrder();
+/*
+//Validations
+_selectDomain("/svmx/");
+_wait(3000,_isVisible(_table("/timer/")));
+_assertNotContainsText("Restoration 00:00:00:00",_table("/CH_dtimer1/"),"SLA Clock Issue");
+_selectDomain();
+_assertNotEqual(_getText(_div(0,_rightOf(_span("/Restoration Internal By/"))))," ","Issue in Initial Response Internal By field");
+_assertNotEqual(_getText(_div(0,_rightOf(_cell("/Restoration Customer By/"))))," ","Issue in Initial Response Customer By field");
+
+$bo_act_workOrders.pauseSLAClock();
+_wait(60000);
+$bo_act_workOrders.resumeSLAClock("No");
+
+_selectDomain("/svmx/");
+_assertNotContainsText("Restoration 00:00:00:00",_table("/CH_dtimer1/"),"SLA Clock Issue");
+_selectDomain();
+
+_call(location.reload());
+_assertExists($bo_pg_workOrders.link_SLAClockStop);
+_assertExists($bo_pg_workOrders.link_SLAClockStart);
+
+
+$bo_act_workOrders.editWorkOrder($WONumber);
+$bo_act_workOrders.clickLinktoUpdateTextfields($bo_pg_workOrders.txt_actualRestorationOnEditWO);
+$bo_act_workOrders.saveWorkOrder();
+_assertNotEqual(_getText($bo_pg_workOrders.txt_TimeToRestore),"", "issue in Time to Onsite Response");
+
+//Clean up function
+
+var $datacreated = [$accName,$proName,$IBName,$contactName,$WONumber,$slaterm,$caseNumber];
+for (var i = 0; i < $datacreated.length; i++) {
+	$bo_act_common.cleanUpfunction($datacreated[i]);
+}
+*/
+$RS_5303.end();
+
+
+
