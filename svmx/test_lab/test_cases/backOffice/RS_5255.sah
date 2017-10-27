@@ -30,11 +30,11 @@ $bo_act_workOrders.saveWorkOrder();
 //Validations
 _selectDomain("/svmx/");
 _wait(3000,_isVisible(_table("/timer/")));
-_assertNotContainsText("Restoration 00:00:00:00",_table("/CH_dtimer1/"),"SLA Clock Issue");
+_assertNotContainsText("Restoration 00:00:00:00",$bo_pg_workOrders.txt_slaClock,"SLA Clock Issue");
 _selectDomain();
 
-_assertNotEqual(_getText(_div(0,_rightOf(_span("/Restoration Internal By/"))))," ","Issue in Restoration Internal By field");
-_assertNotEqual(_getText(_div(0,_rightOf(_cell("/Restoration Customer By/"))))," ","Issue in Restoration Customer By field");
+_assertNotEqual(_getText($bo_pg_workOrders.txt_RestorationInternalBy)," ","Issue in Restoration Internal By field");
+_assertNotEqual(_getText($bo_pg_workOrders.txt_RestorationCustomerBy)," ","Issue in Restoration Customer By field");
 
 $bo_act_workOrders.editWorkOrder($WONumber);
 $bo_act_workOrders.clickLinktoUpdateTextfields($bo_pg_workOrders.txt_actualRestorationOnEditWO);
