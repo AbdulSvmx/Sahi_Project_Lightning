@@ -1,13 +1,27 @@
 
-var $bo_pg_autoEntitlementRule_WO = new function $bo_pg_autoEntitlementRule_WO(){
+var $bo_pg_autoEntitlementRule_CaseAndWO = new function $bo_pg_autoEntitlementRule_CaseAndWO(){
+	
+	/**
+	 * Common Objects for Case and Work Order
+	 */
 	
 	this.btn_newRule = _submit("New Rule");
+	this.btn_deleteRule = _submit("Delete Rule");
+	this.btn_editeRule = _submit("Edit Rule");
+	this.btn_ruleSequence = _button("Rule Sequence");
 	
 	this.txt_autoEntitlementRuleName = _textbox("/CounterRule:RuleForm/");
 	this.txt_autoEntitlementRuleDescription = _textarea("/CounterRule:RuleForm/");
+	
+	// Rule 1st Row object
 	this.sel_workOrderField = _select("/CounterRuleList:0:j_id106/");
 	this.sel_workOrderFieldOperator = _select("/CounterRuleList:0:j_id110/");
 	this.sel_workOrderFieldValue = _textbox("/CounterRuleList:0:j_id114/");
+	
+	// Rule 2nd Row object
+	this.sel_CaseOrWOField2ndRow = _select("/CounterRuleList:1:j_id106/");
+	this.sel_CaseOrWOFieldOperator2ndRow = _select("/CounterRuleList:1:j_id110/");
+	this.sel_CaseOrWOFieldValue2ndRow = _textbox("/CounterRuleList:1:j_id114/");
 	
 	/**
 	 * Selects Entitlement Settings radio button
@@ -47,12 +61,16 @@ var $bo_pg_autoEntitlementRule_WO = new function $bo_pg_autoEntitlementRule_WO()
 	this.txt_durationOfExpensesCoverage = _textbox("Duration of Expenses Coverage");
 	this.sel_unitOfTimeForExpensesCoverage = _select(0,_rightOf(_label("Unit of Time for Expenses Coverage")));*/
 	
-	this.selectAutoEntitlementRule_WO = function($autoEntitlementRule_Name){
+	this.selectAutoEntitlementRule_CaseAndWO = function($autoEntitlementRule_Name){
 		
 		_click(_checkbox(0,_leftOf(_cell($autoEntitlementRule_Name,_near(_div("Rule Name"))))));
 		
 		};
-		this.btn_deleteRule = _submit("Delete Rule");
-		this.btn_editeRule = _submit("Edit Rule");
-		
+
+   //Changing the Rule Sequence
+		this.selectAutoEntitlementRule_Sequence = function($autoEntitlementRule_Name){
+			_setSelected(_select(0),$autoEntitlementRule_Name);
+			_click(_imageSubmitButton("Bottom"));
+			_click(_submit("Submit"));
+			};
 };
