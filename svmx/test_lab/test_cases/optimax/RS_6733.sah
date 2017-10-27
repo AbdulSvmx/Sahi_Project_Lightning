@@ -112,11 +112,19 @@ else
 
 // Validating the Work order's updates
 
-var wo_res = sforce.connection.query("Select Id, SVMXC__Service_Group__c,SVMXC__Group_Member__c,SVMXC__Scheduled_Date_Time__c,SVMXC__OptiMax_Status__c from SVMXC__Service_Order__c Where Id = '"+result_WO[0].id+"'");
+var wo_res = sforce.connection.query("Select Id, SVMXC__Service_Group__c,SVMXC__Group_Member__c,SVMXC__Scheduled_Date_Time__c,SVMXC__OptiMax_Status__c,SVMXC__Scheduling_Change_Token__c from SVMXC__Service_Order__c Where Id = '"+result_WO[0].id+"'");
 var records1 = wo_res.getArray("records");
 _log("records = "+records1);
 for (var i=0; i< records.length; i++) {
 var record1 = records1[i];
+var wo_token = record1.SVMXC__Scheduling_Change_Token__c;
+if(wo_token.includes("CHANGE_CANCEL_WO")){
+	_log("Scheduling token is updated");
+	}
+	else{
+		_log("Scheduling token is not updated");
+	}
+
 if(record1.SVMXC__Service_Group__c=null ){
 _log("Service Team is removed");
 }
