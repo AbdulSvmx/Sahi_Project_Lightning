@@ -32,25 +32,29 @@ $bo_act_workOrders.saveWorkOrder();
 //Validations
 _selectDomain("/svmx/");
 _wait(3000,_isVisible(_table("/timer/")));
-_assertNotContainsText("Restoration 00:00:00:00",_table("/CH_dtimer1/"),"SLA Clock Issue");
+_assertNotContainsText("Resolution 00:00:00:00",_table("/CH_dtimer1/"),"SLA Clock Issue");
 _selectDomain();
-_assertNotEqual(_getText(_div(0,_rightOf(_span("/Restoration Internal By/"))))," ","Issue in Restoration Internal By field");
-_assertNotEqual(_getText(_div(0,_rightOf(_cell("/Restoration Customer By/"))))," ","Issue in Restoration Customer By field");
+_assertNotEqual(_getText(_div(0,_rightOf(_span("/Resolution Internal By/"))))," ","Issue in Restoration Internal By field");
+_assertNotEqual(_getText(_div(0,_rightOf(_cell("/Resolution Customer By/"))))," ","Issue in Restoration Customer By field");
+
 
 $bo_act_workOrders.pauseSLAClock();
-wait(3000);
-_call(top.location.reload());
-_assertExists($bo_pg_workOrders.link_SLAClockStop);
+_wait(60000);
 $bo_act_workOrders.resumeSLAClock("No");
-wait(3000);
-_call(top.location.reload());
+
+_selectDomain("/svmx/");
+_assertNotContainsText("Resolution 00:00:00:00",_table("/CH_dtimer1/"),"SLA Clock Issue");
+_selectDomain();
+
+_call(location.reload());
+_assertExists($bo_pg_workOrders.link_SLAClockStop);
 _assertExists($bo_pg_workOrders.link_SLAClockStart);
-_assertNotContainsText("Restoration 00:00:00:00",_table("/CH_dtimer1/"),"SLA Clock Issue");
+
 
 $bo_act_workOrders.editWorkOrder($WONumber);
-$bo_act_workOrders.clickLinktoUpdateTextfields($bo_pg_workOrders.txt_actualRestorationOnEditWO);
+$bo_act_workOrders.clickLinktoUpdateTextfields($bo_pg_workOrders.txt_actualResolutionOnEditWO);
 $bo_act_workOrders.saveWorkOrder();
-_assertNotEqual(_getText($bo_pg_workOrders.txt_TimeToRestore)," ", "issue in Time to restore");
+_assertNotEqual(_getText($bo_pg_workOrders.txt_TimeToResolve)," ", "issue in Time to restore");
 
 //Clean up function
 

@@ -24,17 +24,17 @@ $bo_act_Cases.saveCase();
 //Validations
 _selectDomain("/svmx/");
 _wait(3000,_isVisible(_table("/timer/")));
-_assertNotContainsText("Resolution 00:00:00:00",_table("/CH_dtimer1/"),"SLA Clock Issue");
+_assertNotContainsText("Resolution 00:00:00:00",$bo_pg_Cases.txt_SLAClock,"SLA Clock Issue");
 _selectDomain();
-_assertNotEqual(_getText(_div(0,_rightOf(_span("/Resolution Internal By/"))))," ","Issue in Resolution Internal By field");
-_assertNotEqual(_getText(_div(0,_rightOf(_cell("/Resolution Customer By/"))))," ","Issue in Resolution Customer By field");
+_assertNotEqual(_getText($bo_pg_Cases.txt_ResolutionInternalBy)," ","Issue in Resolution Internal By field");
+_assertNotEqual(_getText($bo_pg_Cases.txt_ResolutionCustomerBy)," ","Issue in Resolution Customer By field");
 
 $bo_act_workOrders.pauseSLAClock();
 _wait(60000);
 $bo_act_workOrders.resumeSLAClock("Yes");
 
 _selectDomain("/svmx/");
-_assertNotContainsText("Resolution 00:00:00:00",_table("/CH_dtimer1/"),"SLA Clock Issue");
+_assertNotContainsText("Resolution 00:00:00:00",$bo_pg_Cases.txt_SLAClock,"SLA Clock Issue");
 _selectDomain();
 
 _call(location.reload());
@@ -43,10 +43,10 @@ _assertExists($bo_pg_workOrders.link_SLAClockStart);
 
 
 $bo_act_Cases.editCaseOnly($caseNumber);
-$bo_act_Cases.clickLinktoUpdateTextfields($bo_pg_Cases.txt_actualRestorationOnEdit);
+$bo_act_Cases.clickLinktoUpdateTextfields($bo_pg_Cases.txt_actualResolutionOnEdit);
 $bo_act_Cases.saveCase();
 
-_assertNotEqual(_getText($bo_pg_Cases.txt_TimeToRestore),"", "issue in Time to Onsite Response");
+_assertNotEqual(_getText($bo_pg_Cases.txt_TimeToResolve),"", "issue in Time to Resolve");
 
 //Clean up function
 
