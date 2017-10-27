@@ -35,6 +35,9 @@ $actualScheduledOn = _getText($bo_pg_PMPlan.txt_scheduledOnDate);
 _assertEqual($startDate,$lastRunDate,"Last Run Date is not equal to start date");
 _assert($lastRunDate != $actualScheduledOn,"Issue in Last Run Date and Scheduled On date");
 
+var $PMProcessName = $bo_act_PMProcess.createPMProcess("Time Based Preventive Maintenance", 30, $PMPlan);
+
+
 //Clean up function
 
 $bo_act_accounts.deleteAccount($accName);

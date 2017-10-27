@@ -4,22 +4,31 @@ var $RS_5433 = _testcase("RS_5433", "Verify weather checklist SFM Processes are 
 $RS_5433.start();
 _setSpeed(100);
 
-$bo_act_login.login($g_url, $bac_unBase, $bac_pwdBase);
 
 var $checklistName="My Checklist";
 var $searchText =$checklistName;
-var $$questionText="What is your name";
+var $questionText="What is your name";
+var $sfmType= "to generate a Checklist/Survey type of Process";
+var $objName="Work Order"
 	
-$bo_act_SFM.newChecklistTypeSFM($checklistName);
+<<<<<<< HEAD
+$bo_act_login.login($g_url, $bac_unBase, $bac_pwdBase);
+$bo_act_navigation.navigateToSfmTransactionDesigner();
+_wait(60000, _isVisible($bo_pg_sfmTransactionAndDesigner.btn_newSFM));	
+$bo_act_SFM.newChecklistTypeSFM($checklistName,$sfmType,$objName);
 $bo_act_SFM.addQuestionToChecklist($questionText)
+=======
+$bo_act_SFM.newChecklistTypeSFM($checklistName);
+$bo_act_SFM.addQuestionToChecklist($questionText);
+>>>>>>> d382fbc660bc828289c3fe2b22d28d70118ec1bf
 
 
-if($bo_act_navigation.navigateToSfmAppPermission()){
-		$bo_act_SFMAppPermission.searchSFMDisplay($checklistName);
-
-	}else{
-		_fail("Navigation To SFM App Permission Failed");
-		_stopTestCase();
-	};
+$bo_act_navigation.navigateToSfmAppPermission();
+$bo_act_SFMAppPermission.searchSFMDisplay($checklistName);
+	
+$bo_act_navigation.navigateToSfmTransactionDesigner();
+$bo_act_SFM.deleteSFM($sfmName);
+_wait(20000);
+_log("SFM deleted successfully");
 
 $RS_5433.end();

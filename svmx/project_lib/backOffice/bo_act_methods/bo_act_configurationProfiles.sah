@@ -3,9 +3,10 @@
  */
 var $bo_act_configurationProfiles = new function bo_act_configurationProfiles() {
 
-	this.editGlobalProfileForBooleanSettings = function($globalProfileName, $Module, $SubModule, $Setting, $value) {
-			
-	_check(_checkbox(0,_leftOf(_span($globalProfileName))));
+	
+	this.editGlobalProfileForBooleanSettings = function($Module, $SubModule, $Setting, $value) {
+	$bo_act_navigation.navigateToConfigurationProfilesPage();
+	_check($bo_pg_configurationProfiles.chk_globalProfile);
 	 _click($bo_pg_configurationProfiles.btn_edit);
 	 _setSelected($bo_pg_configurationProfiles.sel_selectModule,$Module);
 	 _setSelected($bo_pg_configurationProfiles.sel_selectSubModule,$SubModule);
@@ -20,4 +21,22 @@ var $bo_act_configurationProfiles = new function bo_act_configurationProfiles() 
 		 _selectWindow();
 		 _click($bo_pg_configurationProfiles.btn_save);
 	};
+	
+	this.editGroupProfileForBooleanSettings = function($groupProfileName, $Module, $SubModule, $Setting, $value) {
+		$bo_act_navigation.navigateToConfigurationProfilesPage();
+		_check($bo_pg_configurationProfiles.chk_groupProfile);
+		 _click($bo_pg_configurationProfiles.btn_editForGrp);
+		 _setSelected($bo_pg_configurationProfiles.sel_selectModule,$Module);
+		 _setSelected($bo_pg_configurationProfiles.sel_selectSubModule,$SubModule);
+		 _click(_link("Edit",_leftOf(_span($Setting))));
+		  _selectWindow("Servicemax_Conf_Prof");
+		 if($value == true)
+		  _check($bo_pg_configurationProfiles.chk_true);
+		 else
+			 _check($bo_pg_configurationProfiles.chk_false);
+			 _click($bo_pg_configurationProfiles.btn_popUpSave);
+			 _click($bo_pg_configurationProfiles.btn_popUpClose);
+			 _selectWindow();
+			 _click($bo_pg_configurationProfiles.btn_save);
+		};
 };

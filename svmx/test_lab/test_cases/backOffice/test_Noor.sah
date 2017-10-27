@@ -1,0 +1,17 @@
+
+//author - Noor Salma Sharieff
+
+var $RS_testNoor = _testcase("$RS_testNoor","ONSITE response on WO: Clock paused/resumed without extending SLA commitment");
+$RS_testNoor.start();
+_setSpeed(100);
+
+
+_call(location.reload());
+_wait(5000);
+//_assertExists($bo_pg_workOrders.link_SLAClockStop);
+_assertExists($bo_pg_workOrders.link_SLAClockStart);
+
+$RS_testNoor.end();
+
+
+

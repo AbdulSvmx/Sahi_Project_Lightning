@@ -163,18 +163,18 @@ var $op_utility = new function op_utility() {
 	}
 	
 	
-	this.read_file = function($dp_Id, $sfdc_sessionId,$text_validation) {
+	this.read_file = function($dp_Id, $sfdc_sessionId,$text_validation,$file_Name) {
 		var $no_text_count = null;
-		_set($no_text_count, _fetch(read_file($dp_Id,$sfdc_sessionId,$text_validation)));
+		_set($no_text_count, _fetch(read_file($dp_Id,$sfdc_sessionId,$text_validation,$file_Name)));
 		return $no_text_count;
 		// <browser>
-		function read_file($dp_Id,$sfdc_sessionId,$text_validation) {
+		function read_file($dp_Id,$sfdc_sessionId,$text_validation,$file_Name) {
 			sforce.connection.sessionId = $sfdc_sessionId;
 			var svmx_Job_result = _call(sforce.connection.query("Select Id, SVMXC__SVMX_Process__c, SVMXC__OptiMax_Message__c  From SVMXC__SVMX_Jobs__c Where SVMXC__SVMX_Process__c = '"+ $dp_Id + "' ORDER BY Name DESC LIMIT 1"));
 			var records = svmx_Job_result.getArray("records");
 			//_log("records size =" + records.length);
 			if(records[0].Id != null){
-				var attachment = _call(sforce.connection.query("SELECT ParentId, Body, Id FROM Attachment WHERE ParentId = '"+records[0].Id+"' AND Name = 'Invalid WorkOrders'"));
+				var attachment = _call(sforce.connection.query("SELECT ParentId, Body, Id FROM Attachment WHERE ParentId = '"+records[0].Id+"' AND Name = '"+$file_Name+"'"));
 				var attach_Id = attachment.getArray("records");
 				var myFile=atob(attach_Id[0].Body);
 				//_log("myFile = "+myFile);
