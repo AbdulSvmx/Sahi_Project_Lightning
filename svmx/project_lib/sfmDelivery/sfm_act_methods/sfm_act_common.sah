@@ -1,6 +1,4 @@
 
-
-
 //<browser>
 
 	function login($un,$pwd){		

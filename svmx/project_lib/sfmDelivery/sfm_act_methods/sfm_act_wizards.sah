@@ -1,5 +1,22 @@
 var $sfm_act_wizards = new function sfm_act_wizards() {
 	
+	//function to create or add step to wizard
+	this.addToWizard = function($wizardObject, $wizardName, $wizardType, $sfmName){
+		$bo_act_navigation.navigateToSvmxSetup();
+		_click(_div("Service Flow Manager"));
+		_click(_div("SFM Wizards"));
+		_setSelected($sfm_pg_wizards.selectObject,$wizardObject);
+		
+		// If wizard is already present add the step else create a new wizard and then add the step
+		if(_exists(_span($wizardName))){
+			$sfm_act_wizards.editSfmWizard($wizardName, $wizardType, $sfmName);
+		}
+		else{
+			$sfm_act_wizards.createSfmWizard($wizardName, $wizardType, $sfmName);
+		}
+	};
+	
+	
 	//function to create a new SFM wizard
 	this.createSfmWizard = function($wizardName, $wizardType, $sfmName){
 		
