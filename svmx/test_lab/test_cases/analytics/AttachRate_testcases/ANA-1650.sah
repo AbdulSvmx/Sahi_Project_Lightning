@@ -22,7 +22,7 @@ var $ana_1650_query_SCON = "Select Id , Name from SVMXC__Service_Contract__c whe
 	
 var $ana_1650_fetch_SCON  = $op_act_sForceApiCall.sForceQuery($un, $pwd, $ana_1650_query_SCON,"query");
 
-
+_wait(5000);
 
 _log($ana_1650_fetch_SCON);
 
@@ -46,14 +46,13 @@ var $ana_1650_create_IB = "SVMXC__Installed_Product__c IB01 = new SVMXC__Install
 var $ana_1650_result_IB  = $op_act_sForceApiCall.sForceQuery($un, $pwd, $ana_1650_create_IB , "create");
 
 _log($ana_1650_result_IB);
-var $ana_1650_get_IB = "Select Id from SVMXC__Installed_Product__c where Name = 'IB Automation ANA-1650' Limit 1";
-var $ana_1650_fetch_IB = null;
-for(var $i=0 ; $ana_1650_fetch_IB == null ; $i++)
+var $ana_1650_get_IB = "Select Id, Name from SVMXC__Installed_Product__c where Name = 'IB Automation ANA-1650' Limit 1";
+
 	
-{
+
 var $ana_1650_fetch_IB  = $op_act_sForceApiCall.sForceQuery($un, $pwd, $ana_1650_get_IB,"query");
 
-}
+_wait(2000);
 var $var2;
 var $ana_1650_IB_ID;
 
@@ -110,7 +109,7 @@ var $ana_1650_get_CP2 = "Select Id from SVMXC__Service_Contract_Products__c wher
 var $ana_1650_fetch_CP2   = $op_act_sForceApiCall.sForceQuery($un, $pwd, $ana_1650_get_CP2,"query");
 var $ana_1650_cp_ID2;
 
-	
+_wait(5000);	
 	$ana_1650_cp_ID2 = $ana_1650_fetch_CP2[0].Id ;
 
 
@@ -126,7 +125,7 @@ var $ana_1650_covered_product2 = "Contract";
 
 var $ana_1650_query_RV12 = "Select SVMXC__Installed_Product__c,SVMXC__Service_Contract__c,SVMXC__Covered_By__c from SVMXC__SPM_Contract_Penetration__c where SVMXC__Installed_Product__c = '"+$ana_1650_IB_ID+"'";
 var $ana_1650_resultRV12 = $op_act_sForceApiCall.sForceQuery($un, $pwd, $ana_1650_query_RV12,"query");
-
+_wait(5000);
 $ana_1650_resultRV12.forEach(function($varRV12) {
 	
 	$ana_1650_ib1_id2= $varRV12.SVMXC__Installed_Product__c;

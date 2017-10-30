@@ -1,5 +1,10 @@
 var $an_act_AttachRate = new function an_act_AttachRate(){
 	
+	/**
+	 * Write function 
+	 * @param 
+	 */
+	
 	this.attachrate_installed_IB = function($Calculationmethodname)
 	{
 		

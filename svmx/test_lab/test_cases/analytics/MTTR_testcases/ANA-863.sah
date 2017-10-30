@@ -23,7 +23,7 @@ var $ana_863_fetch = $op_act_sForceApiCall.sForceQuery($un, $pwd, $ana_863_query
 var $ana_863_WO1 ;
 var $var3;
 var $varRV1;
-_wait(1000);
+_wait(5000);
 
 	$ana_863_WO1 = $ana_863_fetch[0].Id;
 	
@@ -42,7 +42,7 @@ var $ana_863_query_wd = "Select Name , Id  , SVMXC__Start_Date_and_Time__c , SVM
 var $ana_863_result = $op_act_sForceApiCall.sForceQuery($un, $pwd, $ana_863_insert_WD , "create");
 
 var $ana_863_fetch_wd = $op_act_sForceApiCall.sForceQuery($un, $pwd, $ana_863_query_wd,"query");
-
+_wait(5000);
 var $ana_863_wd1 ;
 var $startdate ;
 var $enddate ;
@@ -61,7 +61,7 @@ $TopLevelSR.an_topLevelSR();
 //$an_act_MTTR.mttr_usa_calc("MTTR Calculation for USA");
 $an_act_MTTR.mttr_runEngine("meghana.rao@servicemax.com");
 
-var $ana_863_wo_id = null ;
+var $ana_863_wo_id;// = null ;
 var $ana_863_service_request;
 var $ana_863_WO_Account1;
 var $ana_863_labortime;
@@ -70,7 +70,7 @@ var $ana_863_deadtime;
 
 var $ana_863_query_RV1 = "Select SVMXC__Work_Order__c ,SVMXC__Service_Request__c, SVMXC__Account__c, SVMXC__Configuration_Name__c , SVMXC__Labor_Time__c , SVMXC__Dead_Time__c from SVMXC__SPM_Mean_Time_To_Repair__c where SVMXC__Work_Order__c ='"+ $ana_863_WO1 +"'";
 var $ana_863_resultRV1 = $op_act_sForceApiCall.sForceQuery($un, $pwd, $ana_863_query_RV1,"query");
-_wait(1000);
+_wait(5000);
 $ana_863_resultRV1.forEach(function($varRV1) {
 	
 	$ana_863_wo_id = $varRV1.SVMXC__Work_Order__c;

@@ -18,7 +18,7 @@ var $create_SR = $op_act_sForceApiCall.sForceQuery($un, $pwd, $insert_sr, "creat
 
 
 ///$op_act_sForceApiCall.sForceQuery($un, $pwd, $insert_case , "create");
-var $query_sr = "Select Id from SVMXC__Service_Request__c  where Createdby.Id = '005q0000003GGfP' Order by CreatedDate DESC Limit 1";
+var $query_sr = "Select Id , Name from SVMXC__Service_Request__c  where Createdby.Id = '005q0000003GGfP' Order by CreatedDate DESC Limit 1";
 
 var $SR ;
 var $srValue;
