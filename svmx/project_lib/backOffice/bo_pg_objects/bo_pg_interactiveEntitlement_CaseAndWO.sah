@@ -1,0 +1,25 @@
+
+var $bo_pg_interactiveEntitlement_CaseAndWO = new function bo_pg_interactiveEntitlement_CaseAndWO(){
+	
+	/**
+	 * Object Related to Check INTERACTIVE Entitlement for PS Line Only
+	 */
+	this.txt_checkEntitlement_WOPage = _div("Check Entitlement: Work Order");
+	this.btn_checkEntitlement = _span("Check Entitlement");
+	
+	// Click Installed Product on Check Entitlement PS line Page
+	this.clickOnInstalledProduct = function($IBName){
+		
+		_click(_div($IBName,_near(_span("Installed Product"))));
+	};
+	this.txt_selectWarrantyOrContractPage = _span("Select Warranty/Contract");
+	
+    this.selectWarrantyOrContract = function($warrantyName){
+		
+    _click(_div("/svmx-grid-radioheader/",_near(_div($warrantyName,_near(_span("Select Warranty/Contract"))))));
+  
+	};
+	this.btn_applySelection = _span("Apply Selection");
+	this.btn_saveEntitlementPSLine = _span("Save Entitlement");
+	this.btn_cancelEntitlementPSLinePage = _span("Cancel");
+};
