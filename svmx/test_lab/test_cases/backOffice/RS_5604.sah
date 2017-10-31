@@ -124,6 +124,12 @@ var $productWarranty = _getText(_link(0,_rightOf(_cell("Product Warranty"))));
 
 _assertNotNull($productWarranty, "Product Warranty is Null");
 
+if(_isVisible(_image("Checked",_rightOf(_cell("Is Entitlement Performed?"))))){
+	_logOutput("Entitlement is Performed" + " = PASS");
+	}else{
+	_fail("Entitlement is Not Performed" + " = Failed");
+	}
+
 //Clean up function
 
 var $datacreated = [$WO_Number,$caseNumber,$IBName,$productName,$contactName,$accountName,$warrantyName];

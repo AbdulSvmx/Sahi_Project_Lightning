@@ -110,24 +110,19 @@ this.addEntitledContactsToServiceContract = function($sconName,$contact){
 	$bo_pg_serviceMaintenanceContracts.clickServiceContractOn_DetailPage($sconName);
 };
 
-<<<<<<< HEAD
-this.addPartsPricingToServiceContract = function($sconName, $prodName,$pricePerUnit){
-	
-=======
+
 this.addPartsPricingToServiceContract = function($sconName, $prodName, $pricePerUnit){
->>>>>>> 0677711dd2b4c293223ebf68725a40e612e8d7c4
+
 	_click($bo_pg_serviceMaintenanceContracts.btn_newPartsPricing);
 	_setValue($bo_pg_serviceMaintenanceContracts.txt_product,$prodName);
 	_setValue($bo_pg_serviceMaintenanceContracts.txt_pricePerUnit,$pricePerUnit);
 	_click($bo_pg_serviceMaintenanceContracts.chk_active);
 	_click($bo_pg_serviceMaintenanceContracts.btn_save);
 	_assertNotVisible(_div("/Error: Invalid Data/"));
-<<<<<<< HEAD
-	};
-=======
+
 	_click($bo_pg_serviceMaintenanceContracts.link_ServiceContractOnPartsPricing);
 };
->>>>>>> 0677711dd2b4c293223ebf68725a40e612e8d7c4
+
 	
 };
 
