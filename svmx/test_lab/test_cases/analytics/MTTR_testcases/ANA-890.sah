@@ -78,13 +78,13 @@ _log($datevalue);
 $TopLevelCase.an_toplevelcase();
 $an_act_MTTR.mttr_runEngine("meghana.rao@servicemax.com");
 
-var $ana_890_wo_id = null;
+var $ana_890_wo_id;// = null;
 var $an_890_case;
 var $ana_890_WO_Account1;
 var $ana_890_labortime;
 var $ana_890_deadtime;
 
-for(var $i = 0;$ana_890_wo_id == null;$i++){
+for(var $i = 0;$ana_890_wo_id == null ;$i++){
 var $ana_890_query_RV1 = "Select SVMXC__Work_Order__c ,SVMXC__Case__c , SVMXC__Account__c, SVMXC__Configuration_Name__c , SVMXC__Labor_Time__c , SVMXC__Dead_Time__c from SVMXC__SPM_Mean_Time_To_Repair__c where SVMXC__Work_Order__c ='"+$ana_890_WO1+"'";
 var $ana_890_resultRV1 = $op_act_sForceApiCall.sForceQuery($un, $pwd, $ana_890_query_RV1,"query");
 _log($ana_890_resultRV1);
