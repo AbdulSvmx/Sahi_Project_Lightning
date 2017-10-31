@@ -5,7 +5,8 @@ var $bo_act_products = new function bo_act_products() {
 
 	/**
 	 * Create a Product
-	 * 
+	 * var $productFamily = ["--None--","GeneralSolution","AdvSolution","Accessory", "Storage"];
+	 *	var $productCode = "";
 	 * @param $productName
 	 */
 	this.createProduct = function($productCode, $productFamily) {
@@ -28,6 +29,22 @@ var $bo_act_products = new function bo_act_products() {
 		$bo_act_navigation.navigateToProductsPage();
 		_click(_link($proName));
 		  _click($bo_pg_products.btn_delete);
+	};
+	
+	this.editProduct = function($proName){
+		$bo_act_navigation.navigateToProductsPage();
+		_click(_link($proName));
+		_click($bo_pg_products.btn_editProduct);
+	};
+	this.updateTextBoxFields = function($object,$objectValue){
+		_setValue($object,$objectValue);
+		//return $callBack.returnResult([_isVisible($accountName), "Account not created",$accountName] );
+	};
+	
+	this.saveProduct = function(){
+		_click($bo_pg_products.btn_saveProduct);
+		_assertNotVisible(_div("/Error: Invalid Data/"));
+		//return $callBack.returnResult([_isVisible($accountName), "Account not created",$accountName] );
 	};
 
 };

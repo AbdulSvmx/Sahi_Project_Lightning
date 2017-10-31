@@ -12,24 +12,24 @@ var $callBack = new function callBack() {
 	 * @param $desc
 	 * @returns boolean
 	 */
-	this.returnResult = function($result, $isReport, $desc) {
-		if ($isReport != null && $isReport == true) {
+	this.returnResult = function($result, $desc) {
+		//if ($isReport != null && $isReport == true) {
 
 			if ($result) {
-				_log("Pass:::::::::::::Pass");
-				_takeScreenShot();
+				_log("Pass:::::::::::::Pass for "+$desc);
+				//_takeScreenShot();
 				return true;
 			} else {
-				_logExceptionAsFailure("Fail::::::::::::::Fail");
+				_logExceptionAsFailure("Fail::::::::::::::Fail to "+$desc);
 				_takeScreenShot();
 				return false;
 			}
-		} else {
-			if ($result) {
-				return true;
-			} else {
-				return false;
-			}
-		}
+		//} else {
+			//if ($result) {
+			//	return true;
+			//} else {
+			//	return false;
+			//}
+		//}
 	};
 };

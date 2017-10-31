@@ -45,4 +45,104 @@ this.deletePMPlanTemplate = function($PMPTempName){
 	_click($bo_pg_PMPlanTemplate.btn_delete);
 	
 };
+
+this.createUsageBasedConditionPMPTemplateNoSave = function($productName)
+{
+	var $PMTemplateName = $bo_act_common.generateRandomName("PMT");
+	$bo_act_navigation.navigateToPMPlanTemplatePage();
+	_click(_submit("Create Condition Based PM Plan Template"));
+	_wait(60000,_isVisible("Preventive Maintenance Plan Template"));
+	_setValue(_textbox("templateName"),$PMTemplateName);
+	_setValue(_textbox("product"),$productName);
+	_click(_image("/svmx-filter-icon/"));
+	_click(_div(0,_rightOf(_textbox("product"))));
+	_click(_listItem($productName));
+	return $PMTemplateName;
 };
+
+this.updateUsageConditionRulesGridWithOutAdjFields = function($attribute,$operator,$frequency,$startAt,$stopAt){
+	_wait(5000);
+	_click(_span("+ Add row[1]"));
+	_click(_div("/svmx-grid-cell-inner/",_under(_div("Attribute[1]"))));
+	_wait(3000,_isVisible(_div("/svmx-trigger-index/",_under(_div("Attribute[1]")))));
+	_click(_div("/svmx-trigger-index/",_under(_div("Attribute[1]"))));
+	_click(_div($attribute));
+
+	_click(_div("/svmx-grid-cell-inner/",_under(_div("Operator[1]"))));
+	_click(_div("/svmx-trigger-index/",_under(_div("Operator[1]"))));
+	_click(_listItem($operator));
+
+	_click(_div("/svmx-grid-cell-inner/",_under(_div("Frequency"))));
+	_click(_div("/svmx-trigger-index/",_under(_div("Frequency"))));
+	_setValue(_textbox(0,_under(_div("Frequency")),$frequency));
+	
+	//_highlight(_div("/svmx-grid-cell-inner/",_under(_div("Start At"))));
+	_click(_div("/svmx-grid-cell-inner/",_under(_div("Start At"))));
+	//_highlight(_textbox(0,_under(_div("Start At"))));
+	_click(_textbox(0,_under(_div("Start At"))));
+	_setValue(_textbox(0,_under(_div("Start At"))),$startAt);
+	
+	
+	_click(_div("/svmx-grid-cell-inner/",_under(_div("Stop At"))));
+	
+	_click(_textbox(0,_under(_div("Stop At"))));
+	_setValue(_textbox(0,_under(_div("Stop At"))),$stopAt);
+	
+};
+
+this.updateUsageConditionRulesGridWithAdjFields = function($attribute,$operator,$frequency,$startAt,$stopAt,$adjType,$minAdj,$maxAdj,$adjValue,$adjUnit){
+	_wait(5000);
+	_click(_span("+ Add row[1]"));
+	_click(_div("/svmx-grid-cell-inner/",_under(_div("Attribute[1]"))));
+	_wait(3000,_isVisible(_div("/svmx-trigger-index/",_under(_div("Attribute[1]")))));
+	_click(_div("/svmx-trigger-index/",_under(_div("Attribute[1]"))));
+	_click(_div($attribute));
+
+	_click(_div("/svmx-grid-cell-inner/",_under(_div("Operator[1]"))));
+	_click(_div("/svmx-trigger-index/",_under(_div("Operator[1]"))));
+	_click(_listItem($operator));
+
+	_click(_div("/svmx-grid-cell-inner/",_under(_div("Frequency"))));
+	_click(_div("/svmx-trigger-index/",_under(_div("Frequency"))));
+	_setValue(_textbox(0,_under(_div("Frequency")),$frequency));
+	
+	//_highlight(_div("/svmx-grid-cell-inner/",_under(_div("Start At"))));
+	_click(_div("/svmx-grid-cell-inner/",_under(_div("Start At"))));
+	//_highlight(_textbox(0,_under(_div("Start At"))));
+	_click(_textbox(0,_under(_div("Start At"))));
+	_setValue(_textbox(0,_under(_div("Start At"))),$startAt);
+	
+	
+	_click(_div("/svmx-grid-cell-inner/",_under(_div("Stop At"))));
+	
+	_click(_textbox(0,_under(_div("Stop At"))));
+	_setValue(_textbox(0,_under(_div("Stop At"))),$stopAt);
+		_click(_div("/svmx-grid-cell-inner/",_under(_div("Adjustment Type"))));
+	_click(_div("/svmx-form-arrow-trigger/",_under(_div("Adjustment Type"))));
+	_click(_listItem($adjType));
+	_click(_div("/svmx-grid-cell-inner/",_under(_div("Minimum Adjustment"))));
+	_click(_textbox("/numberfield/",_under(_div("Minimum Adjustment"))));
+	_setValue(_textbox("/numberfield/",_under(_div("Minimum Adjustment"))),$minAdj);
+	_click(_div("/svmx-grid-cell-inner/",_under(_div("Maximum Adjustment"))));
+	_click(_textbox("/numberfield/",_under(_div("Maximum Adjustment"))));
+	_setValue(_textbox("/numberfield/",_under(_div("Maximum Adjustment"))),$maxAdj);
+	if($adjType == "Fixed")
+		{
+		_click(_div("/svmx-grid-cell-inner/",_under(_div("Adjustment Value"))));
+		_click(_textbox("/numberfield/",_under(_div("Adjustment Value"))));
+		_setValue(_textbox("/numberfield/",_under(_div("Adjustment Value"))),$adjValue);
+		}
+			
+	_click(_div("/svmx-grid-cell-inner/",_under(_div("Adjustment Unit"))));
+	_click(_div("/svmx-trigger-index/",_under(_div("Adjustment Unit"))));
+	_click(_listItem($adjUnit));
+
+};
+	
+this.saveConditionBasedPM = function(){
+	_click(_span("Save"));	
+	_assertNotVisible(_span("svmx-quick-msgbox-info"));
+};
+
+	
+	};

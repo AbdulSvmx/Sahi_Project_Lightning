@@ -1,0 +1,45 @@
+var $bo_act_SFMAppPermission = new function bo_act_SFMAppPermission() {
+
+	this.setSFMAppPermission = function($searchText,$isOnlineHideRequired,$isOnlineRequired){
+	_click($bo_pg_sfmAppPermission.combo_listItemProcessType);
+	_click($bo_pg_sfmAppPermission.combo_selectObject);
+	_click($bo_pg_sfmAppPermission.scroll_selectObject);
+	_click($bo_pg_sfmAppPermission.combo_listItemSelectObject);
+	this.setSearchText($searchText);
+	if(isOnlineHideRequired)
+	{
+		this.hideProcessIDOnlineDisplay();
+	}
+	if(isOnlineRequired)
+	{
+		this.ProcessIDOnlineDisplay();
+	}
+	_click($bo_pg_sfmAppPermission.btn_Save);
+	_click($bo_pg_sfmAppPermission.btn_popupOK);
+	_click($bo_pg_sfmAppPermission.btn_backSetupHome);
+}
+	this.hideProcessIDOnlineDisplay = function(){
+	_click($bo_pg_sfmAppPermission.hideChkBox_ProcessOnline);
+	}
+		
+	this.ProcessIDOnlineDisplay = function(){
+	_click($bo_pg_sfmAppPermission.chkBox_ProcessOnline);
+	}
+		
+	this.setSearchText = function($searchText){
+	_setValue($bo_pg_sfmAppPermission.txtSearch_ProcessNameID,$searchText );
+	
+	}
+		
+		this.searchSFMDisplay=function($searchText){
+		_click($bo_pg_sfmAppPermission.combo_listItemProcessType);
+		_click($bo_pg_sfmAppPermission.combo_selectObject);
+		_click($bo_pg_sfmAppPermission.scroll_selectObject);
+		_click($bo_pg_sfmAppPermission.combo_listItemSelectObject);
+		this.setSearchText($searchText);
+		_assertEqual("", _getText(_div("gridview-1028")), "Checklist does display");
+					
+		}
+	
+	
+}
