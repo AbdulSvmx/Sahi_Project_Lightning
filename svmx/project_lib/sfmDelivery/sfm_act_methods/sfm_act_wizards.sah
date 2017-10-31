@@ -1,3 +1,7 @@
+/**
+* Functions to perform SFM wizard workflows
+*/
+
 var $sfm_act_wizards = new function sfm_act_wizards() {
 	
 	//function to create or add step to wizard

@@ -1,5 +1,5 @@
 /**
-* SFM  transaction & designer Data Validation Rule page object repository
+* SFM  transaction & designer Data Validation Rule page object repository and method to create a rule
 */
 
 var $sfm_pg_dvr = new function sfm_pg_dvr() {
@@ -23,6 +23,11 @@ var $sfm_pg_dvr = new function sfm_pg_dvr() {
 	this.btn_saveDVR = _f("main").s_button("Save");
 	this.btn_addToProcess = _f("main").s_button("Add To Process");
 	
+	/**
+	 * Function to create a data validation rule
+	 *
+	 */
+	
 	this.newRule= function($targetObject, $rulename, $ruleDescription,$fieldArray, $conditionArray, $operandArray, $valueArray, $advExpr, $messageType){
 		//create Data validation rule
 		_click($sfm_pg_dvr.btn_dataValidationRules);
@@ -45,7 +50,10 @@ var $sfm_pg_dvr = new function sfm_pg_dvr() {
 		_click($sfm_pg_dvr.btn_addToProcess);
 		
 	};
-	
+	/**
+	 * Function to set the rule in  data validation page
+	 *
+	 */
 	this.setRule = function($fieldArray, $conditionArray, $operandArray, $valueArray){
 		for(var $i=0; $i<$fieldArray.length; $i++){
 			

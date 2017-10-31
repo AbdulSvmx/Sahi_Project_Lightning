@@ -1,0 +1,37 @@
+var $url = "https://test.salesforce.com";
+var $un = "vansys@pqtpart1.com";
+var $pwd = "servicemax2";
+var $sfmNameToBeCloned = "Manage Work Order Lines - Usage";
+var $sfmName = "RS_6342_TDM016";
+var $isCustom = false;
+var $sfmTemplate = "SVMXSTD: Manage WO Usage Lines";
+var $sfmTemplateSaveAsName = $sfmName;
+var $containerName = "Billable Line Price";
+var $rulename ="6342Rule1";
+var $targetObject ="Work Detail (Work Order)";
+var $ruleDescription = "Line Qty is Greater Than 5 and Received Street Is Not Null";
+var $fieldArray = ["Line Qty","Received Street"];
+var $conditionArray = ["Greater Than","Is Not Null"];
+var $operandArray =["Value", ""];
+var $valueArray =["5", ""];
+var $advExpr= "1 AND 2";
+var $fieldName ="Line Qty";
+var $fieldName1="Received Street";
+var $wizardName = "SFM Delivery Auto";
+var $wizardType = "SFM";
+var $domainName = "svmxc.cs21.visual.force.com";
+var $wizardObject = "Work Order";
+var $messageType = "Error";
+
+_setSpeed(100);
+$bo_act_login.login($url, $un, $pwd);
+
+//clone tmd016
+$sfm_act_SFM.cloneTDM016($sfmNameToBeCloned,$sfmName,$isCustom, $sfmTemplate, $sfmTemplateSaveAsName,$fieldName1, $containerName);
+
+//create Data validation rule
+$sfm_pg_dvr.newRule($targetObject, $rulename, $ruleDescription, $fieldArray, $conditionArray, $operandArray, $valueArray, $advExpr, $messageType);
+
+_click(_f("main").s_button("Quick Save"));
+_click(_f("main").s_button("Save & Close")); 
+_wait(30000,_isVisible(_link("Home")));

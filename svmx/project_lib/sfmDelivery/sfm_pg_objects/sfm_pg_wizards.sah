@@ -3,6 +3,8 @@
 */
 
 var $sfm_pg_wizards = new function sfm_pg_wizards() {
+	this.loginresult = "";
+	this.woName = "";
 	
 	this.selectObject = _select(0,_rightOf(_span("Select Object")));
 	//Standard SFM Wizards objects

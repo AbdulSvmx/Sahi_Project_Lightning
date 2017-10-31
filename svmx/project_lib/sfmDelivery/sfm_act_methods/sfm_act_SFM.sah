@@ -1,17 +1,15 @@
+/**
+* Cloning TDM016/Manage Work Order Lines - Usage process and adding fields to screen
+*/
+
+var $sfm_act_SFM = new function sfm_act_SFM() {
+
 this.cloneTDM016= function($sfmNameToBeCloned,$sfmName,$isCustom, $sfmTemplate, $sfmTemplateSaveAsName,$fieldName, $containerName){
 	$bo_act_navigation.navigateToSfmTransactionDesigner();
 	_setSpeed(100);
 	
 	$bo_pg_sfmTransactionAndDesigner.selectSFM($sfmNameToBeCloned, $isCustom);
-/*	_setValue($bo_pg_sfmTransactionAndDesigner.txt_standardSfmTransactionQuickFind, $sfmNameToBeCloned);
-	if (_isVisible(_f("main").s_checkbox(0).leftOf(_f("main").s_label($sfmNameToBeCloned)))) {
-		_click(_f("main").s_checkbox(0).leftOf(_f("main").s_label($sfmNameToBeCloned), 10, 10));
 
-	} else {
-		_click(_f("main").s_checkbox(2).leftOf(_f("main").s_label($sfmNameToBeCloned), 10, 10));
-
-	}*/
-	
 	_click($bo_pg_sfmTransactionAndDesigner.btn_clone);
 	_wait(60000, _isVisible($bo_pg_sfmTransactionAndDesigner.txt_name));
 	_setValue($bo_pg_sfmTransactionAndDesigner.txt_name, $sfmName);
@@ -22,19 +20,24 @@ this.cloneTDM016= function($sfmNameToBeCloned,$sfmName,$isCustom, $sfmTemplate, 
 	_setValue($bo_pg_sfmTransactionAndDesigner.txt_sfmSavePageLayoutAs, $sfmTemplateSaveAsName);
 	_setValue($bo_pg_sfmTransactionAndDesigner.txt_sfmSavePageLayoutAsId, $sfmTemplateSaveAsName);
 	_wait(3000);
-	$sfm_act_SFM.addFieldToScreen($fieldName, $containerName);
-		
+	$sfm_act_SFM.addFieldToScreen($fieldName, $containerName);		
 };
-
-this addFieldToScreen = function ($fieldName, $containerName){
-	if($containerName=="Order Status"){
-		$bo_pg_sfmTransactionAndDesigner.addField($fieldName, $containerName);	
+// Based on the number of items passed in array, fields gets added to either header or child
+this.addFieldToScreen = function ($fieldName, $containerName){
+	for(var $i=0; $i<$containerName.length; $i++){
+	if($containerName[$i]=='Order Status'){
+			$bo_pg_sfmTransactionAndDesigner.addField($fieldName[$i], $containerName[$i]);
 	}
 	else{
 		_setValue(_f("main").s_hscrollbar("horizontalScrollBar[2]"), "00");
-		_click(_f("main").s_datagroup("dataGroup[3]").near(_f("main").s_richtext($containerName)));
-		_setValue(_f("main").s_textinput("searchText[4]"),$fieldName1);
-		_click(_f("main").s_label($fieldName1));
+		_click(_f("main").s_datagroup("dataGroup[3]").near(_f("main").s_richtext($containerName[$i])));
+		_setValue(_f("main").s_textinput("searchText[4]"),$fieldName[$i]);
+		_click(_f("main").s_label($fieldName[$i]));
 		_click(_f("main").s_button("Add Field"));	
 	}
+	}
+	_click($bo_pg_sfmTransactionAndDesigner.btn_quickSave);
+};
+
+
 };

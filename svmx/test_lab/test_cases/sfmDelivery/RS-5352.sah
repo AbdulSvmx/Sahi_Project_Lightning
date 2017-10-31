@@ -1,0 +1,12 @@
+
+$url = "https://test.salesforce.com";
+$un = "vansys@pqtpart1.com";
+$pwd = "servicemax2";
+_setSpeed(100);
+//$bo_act_login.login($url, $un, $pwd);
+$bo_act_login.login($url, $un, $pwd);
+$login = $sfm_act_createWorkOrder.login($un,$pwd);
+_log($login);
+var $woName;
+$woName = $sfm_act_createWorkOrder.create_WO();
+_log("WO NAME OUTSIDE "+$woName);

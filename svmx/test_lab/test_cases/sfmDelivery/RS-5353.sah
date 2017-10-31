@@ -1,11 +1,11 @@
 //@author Lakshmisha
 
-$url = "https://test.salesforce.com";
-$un = "vansys@pqtpart1.com";
-$pwd = "servicemax2";
-$sfmNameToBeCloned = "Manage Work Order Lines - Usage";
-$sfmName = "RS_5353_TDM016";
-$isCustom = false;
+var $url = "https://test.salesforce.com";
+var $un = "vansys@pqtpart1.com";
+var $pwd = "servicemax2";
+var $sfmNameToBeCloned = "Manage Work Order Lines - Usage";
+var $sfmName = "RS_5353_TDM016";
+var $isCustom = false;
 var $sfmTemplate = "SVMXSTD: Manage WO Usage Lines";
 var $sfmTemplateSaveAsName = $sfmName;
 var $containerName = "Order Status";
@@ -25,9 +25,7 @@ var $domainName = "svmxc.cs21.visual.force.com";
 
 _setSpeed(100);
 $bo_act_login.login($url, $un, $pwd);
-
-/*
-
+ /*
 // Navigate to SFM designer page
 $bo_act_navigation.navigateToSfmTransactionDesigner();
 _setSpeed(100);
@@ -79,16 +77,23 @@ _click(_div("Service Flow Manager"));
 _click(_div("SFM Wizards"));
 _setSelected($sfm_pg_wizards.selectObject,"Work Order");
 
-//create a sfm wizard
-$sfm_act_wizards.createSfmWizard($wizardName, $wizardType, $sfmName);
-
-//add SFM to SFM wizard
-//$sfm_act_wizards.editSfmWizard($wizardName, $wizardType, $sfmName);  
-
+// If wizard is already present add the step else create a new wizard and then add the step
+if(_exists(_span($wizardName))){
+	$sfm_act_wizards.editSfmWizard($wizardName, $wizardType, $sfmName);
+}
+else{
+	$sfm_act_wizards.createSfmWizard($wizardName, $wizardType, $sfmName);
+}
 */
+var $insert_WO = "SVMXC__Service_Order__c  WO = new SVMXC__Service_Order__c ( SVMXC__Order_Status__c = 'Open' ,SVMXC__Problem_Description__c= 'SahiWO' , SVMXC__Country__c = 'United States', SVMXC__Priority__c = 'High' );insert WO;";
+//var $query_woName = "Select Name from SVMXC__Service_Order__c where Id = '005q0000003GGfP'";
+var $wo_result = $op_act_sForceApiCall.sForceQuery($un, $pwd, $insert_WO,"create");
+_log($wo_result);
+//var $woName_fetch = $op_act_sForceApiCall.sForceQuery($un, $pwd, $query_woName,"query");
+
 /*
 //Open the WO and click on the above created SFM 
-_setValue(_textbox("str"), "WO-00000472");
+_setValue(_textbox("str"), ".");
 _click(_button("Search"));
 _click(_link("WO-00000472"));
 _selectDomain($domainName);
@@ -115,45 +120,9 @@ if(_exists(_div($ruleDescription))){
 	_log("Pass");
 }else{
 	_log("Fail");
-} */
-
- /*_set($login_result, _fetch(login($un,$pwd)));
-_log($login_result);
-
-_set($createWO, _fetch(create_WO()));
-_log($createWO);
-
-
-
-
-var $woName=_call(sforce.connection.query("SELECT Name FROM SVMXC__Service_Order__c WHERE Id = '"+$createWO+"'"));
-_log("WO ="+$woName);
-//<browser>
-function login($un,$pwd){
-	
-	var $login_result = sforce.connection.login($un,$pwd);
-	$sfdc_sessionId = $login_result.sessionId;
-	_log("$sfdc_sessionId = "+$sfdc_sessionId);
-	return $login_result;
-} 
-
-function create_WO ()
-{
-	var workorder = new sforce.SObject("SVMXC__Service_Order__c");
-	//workorder.SVMXC__Order_Type__c = $wo_type;
-	workorder.SVMXC__Order_Status__c = "Open";
-	//workorder.SVMXC__Primary_Territory__c = $dp_Territory_Id;
-	//workorder.SVMXC__Country__c = $wo_country;
-	//workorder.SVMXC__Zip__c = $wo_zip;
-	result = _call(sforce.connection.create([workorder]));
-	_log("result = "+result);
-	return result[0].id;
-	
-
 }
+ */
 
-
-//</browser> */
-
+ 
 
 

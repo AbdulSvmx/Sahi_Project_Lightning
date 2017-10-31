@@ -1,0 +1,56 @@
+$url = "https://test.salesforce.com";
+$un = "vansys@pqtpart1.com";
+$pwd = "servicemax2";
+$sfmNameToBeCloned = "Manage Work Order Lines - Usage";
+$sfmName = "RS_5354_TDM016";
+$isCustom = false;
+var $sfmTemplate = "SVMXSTD: Manage WO Usage Lines";
+var $sfmTemplateSaveAsName = $sfmName;
+var $containerName = "Order Status";
+var $rulename ="5354Rule1";
+var $targetObject ="Work Order";
+var $ruleDescription = "Are you sure? Component is null and Entitle not performed";
+var $fieldArray = ["Component","Is Entitlement Performed"];
+var $conditionArray = ["Is Null","Equals"];
+var $operandArray =["", "Function"];
+var $valueArray =["", "false"];
+var $advExpr= "1 AND 2";
+var $fieldName ="Component";
+var $fieldName1="Is Entitlement Performed";
+var $wizardName = "SFM Delivery Auto";
+var $wizardType = "SFM";
+var $domainName = "svmxc.cs21.visual.force.com";
+var $wizardObject = "Work Order";
+var $messageType = "Confirmation";
+
+_setSpeed(100);
+$bo_act_login.login($url, $un, $pwd);
+/*
+//Navigate to SFM designer page
+$bo_act_navigation.navigateToSfmTransactionDesigner();
+_setSpeed(100);
+
+//clone tmd016
+
+$bo_act_SFM.cloneSFM($sfmNameToBeCloned, $sfmName, $isCustom, $sfmTemplate, $sfmTemplateSaveAsName, $fieldName, $containerName);
+
+// open the above created SFM
+_click($bo_pg_sfmTransactionAndDesigner.btn_yourCustomSfmTransactions);
+_setValue($bo_pg_sfmTransactionAndDesigner.txt_yourCustomSfmTransactionsQuickFind, $sfmName);
+_click(_f("main").s_label($sfmName));
+_click($bo_pg_sfmTransactionAndDesigner.btn_screenDesigner);
+
+//add Is Entitlement Performed to screen designer
+$bo_pg_sfmTransactionAndDesigner.addField($fieldName1, $containerName);
+_click(_f("main").s_button("Save[3]"));
+_wait(6000,_isVisible(_f("main").label("Page saved")));
+
+//create Data validation rule
+$sfm_pg_dvr.newRule($targetObject, $rulename, $ruleDescription, $fieldArray, $conditionArray, $operandArray, $valueArray, $advExpr, $messageType);
+
+_click(_f("main").s_button("Quick Save"));
+_click(_f("main").s_button("Save & Close")); 
+_wait(30000,_isVisible(_link("Home")));*/
+
+//Navigate to SFM wizard page
+$sfm_act_wizards.addToWizard($wizardObject, $wizardName, $wizardType, $sfmName);
