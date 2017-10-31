@@ -1,6 +1,6 @@
 var $user_credentials = $excel.readFromCustomExcel("../optimax/op_excleData/automation.xlsx", "User_Details","","");
 var $Dispatch_Process = $excel.readFromCustomExcel("../optimax/op_excleData/automation.xlsx", "Dispatch_Process","","");
-var $RS_6694 = $excel.readFromCustomExcel("../optimax/op_excleData/automation.xlsx", "RS_6694","","");
+var $RS_6694_xl = $excel.readFromCustomExcel("../optimax/op_excleData/automation.xlsx", "RS_6694","","");
 var $AccountXl = $excel.readFromCustomExcel("../optimax/op_excleData/automation.xlsx", "Account","","");
 var $res_prf_xl = $excel.readFromCustomExcel("../optimax/op_excleData/automation.xlsx", "SVMXC__Resource_Preference__c","","");
 
@@ -41,13 +41,40 @@ $op_utility.delete_WO($dp_Id,$login_result.sessionId);
 
 _wait(5000);
 
-_set($create_WO, _fetch(create_WO($RS_6694)));
+_set($create_WO, _fetch(create_WO($RS_6694_xl)));
 _log($create_WO);
 
 $op_utility.run_Job_Now($dp_Name);
 
-_set($validate_WO, _fetch(validateMandatoryWO($dp_Id,$acc_Id)));
-_log($validate_WO);
+//validating the job is success
+if($op_utility.validate_Job_Success($dp_Id,$login_result.sessionId,200000)=== true){
+	_log("job is successfully completed");
+	_set($validate_WO, _fetch(validateMandatoryWO($dp_Id,$acc_Id)));
+	_log($validate_WO);
+	if($validate_WO === true){
+		_log("All the Work Orders are assigned to mandatory tech");
+	}
+	else{
+		_logExceptionAsFailure("Mandatory tech is not assigned to WO");
+	}
+}
+else{
+	_log("job is failed in 1st verification.. so starting the 2nd verification after 5 min");
+	if($op_utility.validate_Job_Success($dp_Id,$login_result.sessionId,200000)=== true){
+		_log("job is successfully completed in 2nd verification");
+		_set($validate_WO, _fetch(validateMandatoryWO($dp_Id,$acc_Id)));
+		_log($validate_WO);
+		if($validate_WO === true){
+			_log("All the Work Orders are assigned to mandatory tech");
+		}
+		else{
+			_logExceptionAsFailure("Mandatory tech is not assigned to WO");
+		}
+	}
+	else{
+		_log("job is failed in 2nd verification");
+	}
+}
 
 	
 //<browser>
@@ -60,29 +87,32 @@ function login($g_un,$g_pwd){
 	return $login_result;
 }
 
-function create_WO($RS_6694){
+function create_WO($RS_6694_xl){
+	_log("create work order");
 	var createRecords = [];
 	var $isSuccess = false;
-	for(var $i=0;$i<$RS_6694.length;$i++)
+	for(var $i=0;$i<$RS_6694_xl.length;$i++)
 	{
 		var wo_list = new sforce.SObject("SVMXC__Service_Order__c");
-		wo_list.SVMXC__Order_Type__c = $RS_6694[$i][0];
-		wo_list.SVMXC__Order_Status__c = $RS_6694[$i][1];
-		wo_list.SVMXC__Street__c = $RS_6694[$i][2];
-		wo_list.SVMXC__City__c = $RS_6694[$i][3];
-		wo_list.SVMXC__Zip__c = $RS_6694[$i][4];
-		wo_list.SVMXC__Country__c = $RS_6694[$i][5];
-		wo_list.SVMXC__Primary_Territory__c = $RS_6694[$i][6];
-		wo_list.SVMXC__SM_Scheduling_Options__c = $RS_6694[$i][7];
-		wo_list.SVMXC__Apply_Business_Hours_For_OptiMax__c = $RS_6694[$i][8];
-		wo_list.SVMXC__Preferred_Business_Hours__c = $RS_6694[$i][9];
-		wo_list.SVMXC__Service_Duration__c = $RS_6694[$i][10];
-		wo_list.SVMXC__Problem_Description__c = $RS_6694[$i][11];
-		wo_list.SVMXC__Company__c = $RS_6694[$i][12];
+		wo_list.SVMXC__Order_Type__c = $RS_6694_xl[$i][0];
+		wo_list.SVMXC__Order_Status__c = $RS_6694_xl[$i][1];
+		wo_list.SVMXC__Street__c = $RS_6694_xl[$i][2];
+		wo_list.SVMXC__City__c = $RS_6694_xl[$i][3];
+		wo_list.SVMXC__Zip__c = $RS_6694_xl[$i][4];
+		wo_list.SVMXC__Country__c = $RS_6694_xl[$i][5];
+		wo_list.SVMXC__Primary_Territory__c = $RS_6694_xl[$i][6];
+		wo_list.SVMXC__SM_Scheduling_Options__c = $RS_6694_xl[$i][7];
+		wo_list.SVMXC__Apply_Business_Hours_For_OptiMax__c = $RS_6694_xl[$i][8];
+		wo_list.SVMXC__Preferred_Business_Hours__c = $RS_6694_xl[$i][9];
+		wo_list.SVMXC__Service_Duration__c = $RS_6694_xl[$i][10];
+		wo_list.SVMXC__Problem_Description__c = $RS_6694_xl[$i][11];
+		wo_list.SVMXC__Company__c = $RS_6694_xl[$i][12];
 		createRecords.push(wo_list);
 	}
+	_log("createRecords = "+createRecords);
 	var wo_crt_result = _call(sforce.connection.create(createRecords));
-	_log("wo_crt_result = "+wo_crt_result.length);
+	_log("wo_crt_result = "+wo_crt_result);
+	_log("wo_crt_result.length = "+wo_crt_result.length);
 	if(wo_crt_result.length === $RS_6694.length){
 		$isSuccess = true;
 		return $isSuccess;
@@ -121,7 +151,11 @@ function validateMandatoryWO($dp_Id,$acc_Id){
 	/*if(mandatory_Tech_not_assigned > 0){
 		_logExceptionAsFailure("wo are assigned to non-mandatory technician")
 	}*/
-	return unresourced_WO +" WO are unresourced & "+mandatory_Tech+ "WO, Mandatory technian are assigned";
+	_log(unresourced_WO +" WO are unresourced & "+mandatory_Tech+ "WO, Mandatory technian are assigned");
+	if(mandatory_Tech_not_assigned > 0){
+		return false;
+	}
+	return true;
 }
     
   //</browser>
