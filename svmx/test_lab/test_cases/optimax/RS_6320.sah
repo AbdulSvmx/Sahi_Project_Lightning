@@ -9,9 +9,9 @@ var $g_pwd = $user_credentials[$i][1];
 var $g_url = $user_credentials[$i][2];
 }
 
-var $RS_6319 = _testcase("RS_6319", "Create a new Territory");
+var $RS_6320 = _testcase("RS_6320", "Edit/Delete Coverage, Dispatcher, Service Zone");
 
-$RS_6319.start();
+$RS_6320.start();
 
 /*var $g_url = "https://test.salesforce.com/";
 var $g_un = "govendhan@svmx-cct5.org.cct5part1";
@@ -65,13 +65,36 @@ if(_exists($TerrName))
 	{
 	_log("Territory Created Successfully");
 	//$excel.writeToExcel("insertAtIndex", "../optimax/op_excleData/automation.xlsx", "Territory", $TerrName, $rowIndex);
-	$excel.insertUnderColumn("../optimax/op_excleData/automation.xlsx", "Rules", "Territory", $TerrName, $rowIndex);
+	//$excel.insertUnderColumn("../optimax/op_excleData/automation.xlsx", "Rules", "Territory", $TerrName, $rowIndex);
 	}
 else
 	{
 	_fail("Error in Creating Territory");
 	}
 
+_click(_cell("Territory Coverage"));
+_check(_checkbox("Territory:selected_ID:ListTTAttribute:j_id222:j_id223:0:TAAList_selected"));
+_check(_checkbox("Territory:selected_ID:ListTTAttribute:j_id222:j_id223:1:TAAList_selected"));
+_check(_checkbox("Territory:selected_ID:ListTTAttribute:j_id222:j_id223:2:TAAList_selected"));
+_check(_checkbox("Territory:selected_ID:ListTTAttribute:j_id222:j_id223:3:TAAList_selected"));
+_expectConfirm("Do you want to proceed?", true);
+_click(_button("Delete"));
+_assertEqual("Do you want to proceed?", _lastConfirm());
+_click(_cell("Dispatcher"));
+_check(_checkbox("Territory:selected_ID:PbDispatch:DsptchrLst:0:DispList_selected"));
+_expectConfirm("Do you want to proceed?", true);
+_click(_button("Delete"));
+_assertEqual("Do you want to proceed?", _lastConfirm());
+_click(_button("Add Dispatcher"));
+_click(_image("Dispatcher Lookup (New Window)"));
+_selectWindow("lookup");
+_setValue(_textbox("lksrch"), $UserName);
+_click(_submit(" Go! "));
+_click(_link($UserName));
+_selectWindow();
+_setValue(_textbox("Territory:selected_ID:PbDispatch:DsptchrLst:0:j_id272"), $UserName);
+_click(_button("Save"));
+
 $bo_act_login.logOut();
 
-$RS_6319.end();
+$RS_6320.end();
