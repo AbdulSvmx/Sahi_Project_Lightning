@@ -5,7 +5,10 @@
  */
 
 var $bo_pg_PMPlan = new function bo_pg_PMPlan(){
+//SFM Wizards
 	this.btn_createPMPlan = _button("Create PM Plan");
+	this.btn_NewConditionBasedPMPlanfromServiceContract = _button("New Condition Based PM Plan from Service Contract");
+	
 	this.txt_PMPlanTemplateName = _textbox(0,_near(_label("PM Plan Template:")));
 	this.txt_PMPlanName = _textbox(0,_near(_label("PM Plan Name:")));
 	this.txt_startDate = _textbox(0,_near(_label("Start Date:")));
@@ -18,6 +21,7 @@ var $bo_pg_PMPlan = new function bo_pg_PMPlan(){
 	this.div_startDate = _div(0,_rightOf(_cell("Start Date")));
 	this.link_firstLinkInPMSchedule = _link(0,_under(_tableHeader("/Record Number/",_near(_cell("PM Schedule")))));
 	
+	this.link_firstLinkInWorkOrders = _link(0,_near(_tableHeader("Work Order Number")),_under(_tableHeader("Work Order Number")));
 //PM Schedule
 	
 	this.txt_lastRunDate = _div(0,_rightOf(_cell("Last Run Date")));
