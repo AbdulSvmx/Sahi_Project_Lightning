@@ -1,5 +1,5 @@
 var $user_credentials = $excel.readFromCustomExcel("../optimax/op_excleData/automation.xlsx", "User_Details","","");
-var $TerrData = $excel.readFromCustomExcel("../optimax/op_excleData/automation.xlsx", "Rules","","");
+var $DPData = $excel.readFromCustomExcel("../optimax/op_excleData/automation.xlsx", "RTO_DispatchProcess","","");
 
 //var $nArr;
 //Calling the sforce API
@@ -10,9 +10,9 @@ var $g_pwd = $user_credentials[$i][1];
 var $g_url = $user_credentials[$i][2];
 }
 
-var $RS_6329 = _testcase("RS_6329", "Create Batch Dispatch Process");
+var $RS_6708 = _testcase("RS_6708", "Create RTO Dispatch Process");
 
-$RS_6329.start();
+$RS_6708.start();
 
 /*var $g_url = "https://test.salesforce.com/";
 var $g_un = "govendhan@svmx-cct5.org.cct5part1";
@@ -20,18 +20,15 @@ var $g_pwd = "maxpl0re2";*/
 
 $bo_act_login.login($g_url, $g_un, $g_pwd);
 		
-var $PrimaryTerr = $TerrData[0][4];
+var $PrimaryTerr = $DPData[0][0];
+var $horizon = $DPData[0][1];
+var $threshold = $DPData[0][2];
+var $syncInterval = $DPData[0][3];
 var $date = "" + new Date();
-var $DPName = "DPName_" + $date;
+var $DPName = "Eco_DPName_" + $date;
 var $rowCount = 0;
-var $rowIndex = "1";
-var $separator = "/";
+var $rowIndex = "2";
 
-var $now = new Date();
-var $day = $now.getDate();
-var $month = $now.getMonth() + 1;
-var $year = $now.getFullYear();
-var $currentDate = $month + $separator + $day + $separator +$year;
 
 _set($login_result, _fetch(login($g_un,$g_pwd)));
 _log($login_result);
@@ -39,13 +36,8 @@ _log($login_result);
 _set($email, _fetch(get_Email($g_un)));
 _log($email);
 
-/*var $UserName = _getText(_span("userNavLabel"));
-_click(_div($UserName));
-_click(_link("My Settings"));
-_click(_span("Personal Information[1]"));
-var $email = _getText(_textbox("PersonalInformationSetup:editPage:pageBlock:email"));
-_log($email);*/
 
+_click(_link("Home"));
 _click(_link("ServiceMax Setup"));
 _wait(20000,_isVisible(_div("Dispatch Management")));
 _click(_div("Dispatch Management"));
@@ -53,7 +45,7 @@ _wait(20000,_isVisible(_div("Dispatch Processes")));
 _click(_div("Dispatch Processes"));
 _click(_submit("New Process"));
 _setValue(_textbox("page1:form1:block1:tab1block1:j_id78:j_id79:name"), $DPName);
-_setSelected(_select("page1:form1:block1:tab1block1:j_id78:j_id86:j_id90"), "Optimized Batch");
+_setSelected(_select("page1:form1:block1:tab1block1:j_id78:j_id86:j_id90"), "Real Time Optimization");
 _setSelected(_select("page1:form1:block1:tab1block1:j_id115:j_id116:tab1table1:0:j_id121"), "Order Status");
 _setSelected(_select("page1:form1:block1:tab1block1:j_id115:j_id116:tab1table1:0:j_id125"), "Equals");
 _setValue(_textbox("page1:form1:block1:tab1block1:j_id115:j_id116:tab1table1:0:j_id129"), "Open");
@@ -109,16 +101,11 @@ _click(_button("Cost Factors >>"));
 _setSelected(_select("page1:form1:block1:tab6block1:j_id507:j_id509:j_id510"), "Minimize Overall Cost");
 _click(_div("dhxsl_runner[4]"));
 _click(_button("Scheduling >>"));
-_click(_button("Add Schedule"));
-_setSelected(_select("page1:form1:block1:tab7block1:j_id574:j_id605:0:runAt"), "3:00 PM");
-_check(_checkbox("page1:form1:block1:tab7block1:j_id626"));
-_check(_checkbox("page1:form1:block1:tab7block1:j_id628"));
-_check(_checkbox("page1:form1:block1:tab7block1:j_id630"));
-_check(_checkbox("page1:form1:block1:tab7block1:j_id632"));
-_check(_checkbox("page1:form1:block1:tab7block1:j_id634"));
-_setValue(_textbox("page1:form1:block1:tab7block1:j_id644"), $currentDate);
-_setValue(_textbox("page1:form1:block1:tab7block1:SuccessSection:SuccessItem:SuccessEmail"), $email);
-_setValue(_textbox("page1:form1:block1:tab7block1:SuccessSection:ErrorItem:ErrorEmail"), $email);
+_setValue(_textbox("page1:form1:block1:tab8block1:LeadTimeSection:LeadTimeItem:LeadTime"), $threshold);
+_setValue(_textbox("page1:form1:block1:tab8block1:LeadTimeSection:OptimizerSyncIntervalItem:SyncTime"), $syncInterval);
+_setValue(_textbox("page1:form1:block1:tab8block1:j_id718:j_id719:j_id724"), $horizon);
+_setValue(_textbox("page1:form1:block1:tab8block1:SuccessSection:SuccessItem:SuccessEmail"), $email);
+_setValue(_textbox("page1:form1:block1:tab8block1:SuccessSection:ErrorItem:ErrorEmail"), $email);
 _click(_submit("Save And Close[1]"));
 _click(_submit("Back To Dispatch Process"));
 
@@ -189,4 +176,4 @@ return Terr_Id.Id;
 
 $bo_act_login.logOut();
 
-$RS_6329.end();
+$RS_6708.end();
