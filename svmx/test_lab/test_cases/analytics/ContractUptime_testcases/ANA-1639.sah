@@ -14,6 +14,8 @@ var $Component = $data[1]["Component"];
 var $ScheduledDate = $data[1]["ScheduledDate"];
 var $PreferredStartDate = $data[1]["PreferredStartDate"];
 var $PreferredEndDate = $data[1]["PreferredEndDate"];
+var $GuaranteedUptime = $data[1]["GuaranteedUptime"];
+var $TotalUptime = $data[1]["TotalUptime"];
 $bo_act_login.login($url, $un, $pwd);
 
 
@@ -26,7 +28,7 @@ var $ana_1639_query_SCON = "Select Id , Name from SVMXC__Service_Contract__c whe
 var $ana_1639_fetch_SCON  = $op_act_sForceApiCall.sForceQuery($un, $pwd, $ana_1639_query_SCON,"query");
 
 
-_wait(5000);
+_wait(10000);
 _log($ana_1639_fetch_SCON);
 
 var $ana_1639_SCON ;
@@ -54,7 +56,7 @@ var $ana_1639_get_IB = "Select Id from SVMXC__Installed_Product__c where Name = 
 
 var $ana_1639_fetch_IB  = $op_act_sForceApiCall.sForceQuery($un, $pwd, $ana_1639_get_IB,"query");
 
-_wait(5000);
+_wait(10000);
 var $var2;
 var $ana_1639_IB_ID;
 
@@ -107,7 +109,7 @@ _log($ana_1639_uptime_value);
 
 _assertEqual($ana_1639_IB_ID, $ana_1639_ib1_id);
 _assertEqual($ana_1639_SCON,$ana_1639_scon1_id);
-_assertEqual(43200.0,$ana_1639_guranteed_uptime);
+_assertEqual($GuaranteedUptime,$ana_1639_guranteed_uptime);
 _assertEqual(100, $ana_1639_uptime_value);
 
 // Create Work Order for the IB and SCON
@@ -117,7 +119,7 @@ _assertEqual(100, $ana_1639_uptime_value);
 	var $ana_1639_get_WO1 = "Select Id, Name from SVMXC__Service_Order__c where Createdby.Id = '005q0000003GGfP' Order by CreatedDate DESC Limit 1";
 	var $ana_1639_fetch_WO1 = $op_act_sForceApiCall.sForceQuery($un, $pwd, $ana_1639_get_WO1,"query");
 	
-_wait(5000);
+_wait(10000);
 var $ana_1639_WO_ID1 ;
 
 $ana_1639_WO_ID1 = $ana_1639_fetch_WO1[0].Id;
@@ -128,7 +130,7 @@ var $ana_1639_result_WO2 = $op_act_sForceApiCall.sForceQuery($un, $pwd, $ana_163
 var $ana_1639_get_WO2 = "Select Id, Name from SVMXC__Service_Order__c where Createdby.Id = '005q0000003GGfP' Order by CreatedDate DESC Limit 1";
 var $ana_1639_fetch_WO2 = $op_act_sForceApiCall.sForceQuery($un, $pwd, $ana_1639_get_WO2,"query");
 
-_wait(5000);
+_wait(10000);
 var $ana_1639_WO_ID2 ;
 
 $ana_1639_WO_ID2 = $ana_1639_fetch_WO2[0].Id;
@@ -144,7 +146,7 @@ var $ana_1639_total_downtime = null;
 
 var $ana_1639_query_RV2 = "Select SVMXC__Installed_Product__c,SVMXC__Total_Down_Time__c, SVMXC__Up_Time__c, SVMXC__Contract__c,SVMXC__Gauranteed_Up_Time__c from SVMXC__SPM_Contract_Up_Time__c where SVMXC__Installed_Product__c = '"+$ana_1639_IB_ID+"' AND SVMXC__Contract__c = '"+$ana_1639_SCON+"'";
 var $ana_1639_resultRV2 = $op_act_sForceApiCall.sForceQuery($un, $pwd, $ana_1639_query_RV2,"query");
-_wait(8000);
+_wait(110000);
 $ana_1639_resultRV2.forEach(function($varRV1) {
 	
 	$ana_1639_ib1_id2 = $varRV1.SVMXC__Installed_Product__c;
@@ -165,7 +167,7 @@ _log($ana_1639_uptime_value2);
 
 _assertEqual($ana_1639_IB_ID, $ana_1639_ib1_id2);
 _assertEqual($ana_1639_SCON,$ana_1639_scon1_id2);
-_assertEqual(43200.0,$ana_1639_guranteed_uptime2);
+_assertEqual($GuaranteedUptime,$ana_1639_guranteed_uptime2);
 _assertEqual(98.33, $ana_1639_uptime_value2);
 
 
