@@ -1,0 +1,17 @@
+/**
+ * Functions to perform navigation actions
+ */
+var $sfm_act_navigation = new function sfm_act_navigation() {
+	
+	  /**
+     * Navigates to a SFm transaction designer
+     * @returns boolean
+     */
+	this.navigateToSfmCustomActions = function() {
+	 $bo_act_navigation.navigateToSvmxSetup();
+	 _click($bo_pg_servicemaxSetup.btn_serviceFlowManager);
+	 _click($bo_pg_servicemaxSetup.btn_sfmCustomAction);
+
+     };
+	
+};

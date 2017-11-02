@@ -8,7 +8,7 @@ this.cloneTDM016= function($sfmNameToBeCloned,$sfmName,$isCustom, $sfmTemplate, 
 	$bo_act_navigation.navigateToSfmTransactionDesigner();
 	_setSpeed(100);
 	
-	$bo_pg_sfmTransactionAndDesigner.selectSFM($sfmNameToBeCloned, $isCustom);
+	$sfm_act_SFM.selectSFM($sfmNameToBeCloned, $isCustom);
 
 	_click($bo_pg_sfmTransactionAndDesigner.btn_clone);
 	_wait(60000, _isVisible($bo_pg_sfmTransactionAndDesigner.txt_name));
@@ -37,6 +37,24 @@ this.addFieldToScreen = function ($fieldName, $containerName){
 	}
 	}
 	_click($bo_pg_sfmTransactionAndDesigner.btn_quickSave);
+};
+
+this.selectSFM = function($sfmName, $isCustom) {
+	if ($isCustom) {
+		_wait(3000);
+		_click($bo_pg_sfmTransactionAndDesigner.btn_yourCustomSfmTransactions);
+		_setValue($bo_pg_sfmTransactionAndDesigner.txt_yourCustomSfmTransactionsQuickFind, $sfmName);
+
+	} else {
+		_setValue($bo_pg_sfmTransactionAndDesigner.txt_standardSfmTransactionQuickFind, $sfmName);
+	}
+	if (_isVisible(_f("main").s_checkbox(0).leftOf(_f("main").s_label($sfmName)))) {
+		_click(_f("main").s_checkbox(0).leftOf(_f("main").s_label($sfmName), 10, 10));
+
+	} else {
+		_click(_f("main").s_checkbox(2).leftOf(_f("main").s_label($sfmName), 10, 10));
+
+	}
 };
 
 

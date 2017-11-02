@@ -21,8 +21,20 @@ var $sfm_act_createWorkOrder = new function sfm_act_createWorkOrder() {
 
 		var $wo = null;;
 		_set($wo, _fetch(create_Wo()));
-		_wait(10000);
+	
+		//_wait(10000);
 		var $wo_name = $wo[0].Name;
+		var $count = 0;
+		while($wo_name==null){
+			_log("WO NAME WAIT"+$wo_name);
+			_wait(1000);
+			$count++;
+			
+			if($count==30){
+				
+				break;
+			}
+		}
 		_log("WONAME = "+$wo_name);
 		return $wo_name;
 		//<browser>

@@ -38,7 +38,7 @@ var $sfm_pg_dvr = new function sfm_pg_dvr() {
 		_setValue($sfm_pg_dvr.txt_ruleId,"");
 		_setValue($sfm_pg_dvr.txt_ruleId, $rulename);	
 		_setValue($sfm_pg_dvr.txt_ruleDescription,$ruleDescription);
-		_wait(3000);
+		_wait(1000);
 
 		$sfm_pg_dvr.setRule($fieldArray, $conditionArray, $operandArray, $valueArray);
 

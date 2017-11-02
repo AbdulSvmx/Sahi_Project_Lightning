@@ -1,0 +1,10 @@
+var $sfm_act_common = new function sfm_act_common() {
+	
+	this.globalSearch =function($searchText){
+		_setValue(_textbox("phSearchInput"),$searchText);
+		_focusWindow();
+		_focus(_textbox("phSearchInput"));
+		_typeKeyCodeNative(java.awt.event.KeyEvent.VK_ENTER);
+
+	};	
+};
