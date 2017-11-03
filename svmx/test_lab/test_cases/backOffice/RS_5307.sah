@@ -12,11 +12,11 @@ var $contactName = $bo_act_contacts.createContact($accName);
 var $proName = $bo_act_products.createProduct("pro12", "--None--");
 var $installedProduct = $bo_act_installedProduct.createInstalledProduct($proName,$accName,$contactName);
 var $slaTermName = $bo_act_slaTerms.createSlaTerms("Default");
-var $sconName = $bo_act_serviceMaintenanceContracts.createServiceMaintenanceContract($accName, $slaTermName, "2", "0");
+var $sconName = $bo_act_serviceMaintenanceContracts.createServiceMaintenanceContract($accName, $slaTermName, 2, 0);
 $bo_act_serviceMaintenanceContracts.activateServiceContract($sconName);
 //Adding covered product to Scon
-$bo_act_serviceMaintenanceContracts.AddCoveredProducToServiceContract($sconName, $installedProduct, $slaTermName, "2", "1");
-$bo_act_serviceMaintenanceContracts.addPartsPricingToServiceContract($sconName, $proName, "300");
+$bo_act_serviceMaintenanceContracts.AddCoveredProducToServiceContract($sconName, $installedProduct, $slaTermName, 2, 1);
+$bo_act_serviceMaintenanceContracts.addPartsPricingToServiceContract($sconName, $proName, 300);
 var $WONumber = $bo_act_installedProduct.createWOFromIB($installedProduct);
 
 // Editing the Above created WO
@@ -30,7 +30,7 @@ $bo_act_workOrders.checkEntitlement($WONumber);
 
 
 
-
+// _assertValue ( Billableline price,Line price per unit)
 //Clean up function
 
 var $datacreated = [$warrantyName,$IBName,$locationName,$productName,$contactName,$accountName,];
