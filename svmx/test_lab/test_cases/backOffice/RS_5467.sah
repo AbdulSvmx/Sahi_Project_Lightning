@@ -9,7 +9,7 @@ _setSpeed(100);
  * Login to the Sandbox Org
  */
 
-$bo_act_login.login($g_url, $g_un, $g_pwd);
+//$bo_act_login.login($g_url, $g_un, $g_pwd);
 
 //Pre - Condition Test Data
 var $recordType = ["Depot","Depot Child","Depot Parent","Standard Location"];
@@ -94,10 +94,10 @@ $bo_act_serviceMaintenanceContracts.AddCoveredProducToSConWithoutStartEndDates($
 
 //Add Covered Location to Service Contract 
 
-var $pastYear = 2;  			// Start Date 'TODAY's' Date - 2 YEARS
-var $futureYear = 2;			//End Date 'TODAY's' Date + 2 YEARS
+var $pastYear1 = 2;  			// Start Date 'TODAY's' Date - 2 YEARS
+var $futureYear1 = 2;			//End Date 'TODAY's' Date + 2 YEARS
 
-$bo_act_serviceMaintenanceContracts.addCoveredLocationToServiceContract($serviceConractName, $locationName, $slaName03, $pastYear, $futureYear);
+$bo_act_serviceMaintenanceContracts.addCoveredLocationToServiceContract($serviceConractName, $locationName, $slaName03, $pastYear1, $futureYear1);
 
 
 var $expecctedIBUnder_CoveredProduct =  _getText(_link(0,_under(_tableHeader("Installed Product"))));
@@ -147,6 +147,12 @@ var $CoveredByExpected1 = "Installed Product, Location";
 var $CoveredByActual1 = _getText(_cell("/Ins/",_near(_div("Covered By"))));
 _assertEqual($CoveredByExpected1,$CoveredByActual1,"Actual and expected Covered By is not same when location is enabled");
 
+var $StartDateExpected = $bo_act_common.getPastDate($pastYear, $seperator);  // Start Date for Service Contract
+var $EndDateExpected = $bo_act_common.getfutureDate($futureYear, $seperator);  // End Date for Service Contract
+
+var $StartDateActual = _getText(_cell(0,_rightOf(_cell($serviceConractName))));
+var $EndDateActual = _getText(_cell(1,_rightOf(_cell($serviceConractName))));
+		
 /**
  * Save Interactive Entitlement page on Case when location is enabled
  */
@@ -161,10 +167,10 @@ if(_isVisible(_image("Checked",_rightOf(_cell("/Is Entitlement Performed/"))))){
 	_fail("Entitlement is Not Performed = Failed");
 	}
 
-var $actual_ServiceContract = _getText(_link(0,_rightOf(_span("/Maintenance Contract/")))); //Need to check Again
+var $actual_ServiceContract = _getText(_link(0,_rightOf(_cell("/Service\\/Maintenance Contract/",_near(_heading2("Case Detail"))))));
 var $actual_EntitlementType = _getText(_div(0,_rightOf(_cell("/Entitlement Type/"))));
 var $actual_BillingType = _getText(_div(0,_rightOf(_cell("/Billing Type/"))));
-var $actual_SLATerms = _getText(_div(0,_rightOf(_span("/SLA Terms/"))));
+var $actual_SLATerms = _getText(_link(0,_rightOf(_cell("/SLA Terms/",_near(_heading2("Case Detail"))))));
 
 _assertEqual($actual_ServiceContract,$serviceConractName,"Actual and expected Service Contract are not same");
 _assertEqual($actual_SLATerms,$slaName02,"Actual and expected SLA Terms are not same");
