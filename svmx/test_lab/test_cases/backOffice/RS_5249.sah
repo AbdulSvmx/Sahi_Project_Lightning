@@ -38,26 +38,6 @@ $actualScheduledOn = _getText($bo_pg_PMPlan.txt_scheduledOnDate);
 _assertEqual($startDate,$lastRunDate,"Last Run Date is not equal to start date");
 _assert($lastRunDate != $actualScheduledOn,"Issue in Last Run Date and Scheduled On date");
 
-var $PMProcessId = $bo_act_PMProcess.createPMProcess("Time Based Preventive Maintenance", 30, $PMPlan);
-
-$bo_act_navigation.navigateToSetUpAndSearch("Installed Packages");
-if(_condition(_cell("SVMXC")!=null))
-var $script = "String StrSVMXProcessID = '"+$PMProcessId+"';String StrSFPMProcessID = [Select Id From SVMXC__ServiceMax_Processes__c where SVMXC__ProcessID__c =: StrSVMXProcessID AND SVMXC__Active__c = true].Id;SVMXC.PREV_Engine_Batch EngObj = new SVMXC.PREV_Engine_Batch();EngObj.setProcessIds.add(StrSFPMProcessID);ID Batch = database.executebatch(EngObj, 1);";
-else
-$script = "String StrSVMXProcessID = '"+$PMProcessId+"';String StrSFPMProcessID = [Select Id From SVMXDEV__ServiceMax_Processes__c where SVMXDEV__ProcessID__c =: StrSVMXProcessID AND SVMXDEV__Active__c = true].Id;SVMXDEV.PREV_Engine_Batch EngObj = new SVMXDEV.PREV_Engine_Batch();EngObj.setProcessIds.add(StrSFPMProcessID);ID Batch = database.executebatch(EngObj, 1);";
-
-
-$bo_act_login.loginToWorkBench($Workbenchurl, "Sandbox", $bac_un, $bac_pwd);
-$bo_act_login.runApexScriptinWB($script);
-
-$bo_act_login.login($g_url, $bac_un, $bac_pwd);
-$bo_act_navigation.navigateToPreventiveMaintenancePlans();
-_click(_link($PMPlan));
-var $WONumber = _getText($bo_pg_PMPlan.link_firstLinkInWorkOrders);
-_click($bo_pg_PMPlan.link_firstLinkInPMSchedule);
-var $actualPMScheduleStatus = _getText(_div(0,_rightOf(_cell("Status[2]"))));
-_assertEqual($actualPMScheduleStatus,"Work Order Created","Status is not equal to Work Order Created");
-
 //Clean up function
 
 $bo_act_accounts.deleteAccount($accName);

@@ -47,8 +47,7 @@ $bo_act_navigation.navigateToPreventiveMaintenancePlans();
 _click(_link($PMPlan));
 var $WONumber = _getText($bo_pg_PMPlan.link_firstLinkInWorkOrders);
 _assertNotNull($WONumber,"Work Order is not created");
-var $actualPMScheduleStatus = _getText(_div(0,_rightOf(_cell("Status[2]"))));
-_assertEqual($actualPMScheduleStatus,"Work Order Created","Status is not equal to Work Order Created");
+
 
 
 //Clean up function
