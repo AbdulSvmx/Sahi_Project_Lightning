@@ -1,5 +1,15 @@
 //Setting the speed to 100ms to prevent the flex related pages which set the speed to 3000ms from slowing down other scripts in case they do not reset the execution speed back to 100ms
 _setSpeed(100);
+//<browser>
+var script = document.createElement('script');
+script.type = 'text/javascript';
+script.src = '/_s_/sprc/salesforce/connection.js';
+document.head.appendChild(script);
+var script1 = document.createElement('script');
+script1.type = 'text/javascript';
+script1.src = '/_s_/sprc/salesforce/apex.js';
+document.head.appendChild(script1);
+//</browser>
 
 // Add All Global Variables here
 var $g_url = "https://test.salesforce.com/";
