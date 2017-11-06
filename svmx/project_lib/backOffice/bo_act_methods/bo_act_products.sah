@@ -48,7 +48,7 @@ var $bo_act_products = new function bo_act_products() {
 		_assertNotVisible(_div("/Error: Invalid Data/"));
 		//return $callBack.returnResult([_isVisible($accountName), "Account not created",$accountName] );
 	};
-	
+
 	// Add Standard Price For Product
 	
 	this.addStandardPriceForProduct = function($productName, $standardPriceValue) {
