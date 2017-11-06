@@ -18,6 +18,7 @@ var $bo_pg_configurationProfiles = new function bo_pg_configurationProfiles(){
 	this.chk_globalProfile = _checkbox("/list_prof:list_prof:GloProf:/",_leftOf(_span("Active")));
 	this.chk_groupProfile = _checkbox(0,_leftOf(_span("AutoBACGroup")));
 	this.sel_chooseOption = _select(0,_rightOf(_cell("Choose Option")));
+	this.txt_settingValues = _textbox("Value");
 	
 };
 

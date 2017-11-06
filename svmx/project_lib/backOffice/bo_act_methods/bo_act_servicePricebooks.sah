@@ -1,0 +1,45 @@
+/**
+ * Functions for the Service Pricebooks
+ */
+
+//Test Data for Functions
+var $unit = ["--None--","Per Hour","Flat Rate"];
+var $PriceBookName = "Standard Service Price Book";
+
+var $bo_act_servicePricebooks = new function bo_act_servicePricebooks() {
+	
+	this.editStandardServicePricebooks = function($PriceBookName,$unit,$activityID,$activityProduct,$regularRate){
+		 $bo_act_navigation.navigateToServicePricebooks();
+		 $bo_pg_servicePricebooks.clickOnServicePriceBook($PriceBookName);
+	     _wait(15000, _isVisible($bo_pg_servicePricebooks.txt_standardServicePriceBook));
+	     _click($bo_pg_servicePricebooks.btn_newServicePricebookEntry);
+	     _setSelected($bo_pg_servicePricebooks.sel_unit, $unit);
+	     _setValue($bo_pg_servicePricebooks.txt_activityID, $activityID);
+	     _setValue($bo_pg_servicePricebooks.txt_activityProduct, $activityProduct);
+	     _setValue($bo_pg_servicePricebooks.txt_regularRate, $regularRate);
+	     _click($bo_pg_servicePricebooks.btn_saveServicePricebookEntry);
+	     _assertNotVisible(_div("/Error: Invalid Data/"));
+	     var $ServicePricebooksEntryNumber = _getText(_heading2("pageDescription"));
+	     _click($bo_pg_servicePricebooks.link_navigateBackToServicePriceBook);
+	 	_logOutput($ServicePricebooksEntryNumber+ " Service Pricebooks Entry is created");
+	    return $ServicePricebooksEntryNumber;
+	     
+	};
+
+	this.deleteStandardServicePricebooksEntry = function($PriceBookName, $ServicePricebooksEntryNumber){
+		 $bo_act_navigation.navigateToServicePricebooks();
+		 $bo_pg_servicePricebooks.clickOnServicePriceBook($PriceBookName);
+		 $bo_pg_servicePricebooks.clickOnServicePriceBookEntry($ServicePricebooksEntryNumber);
+		  _click($bo_pg_servicePricebooks.btn_deleteServicePricebookEntry);
+	};
+	
+	/*this.editStandardServicePricebooksUsingSFM = function(){
+		 $bo_act_navigation.navigateToServicePricebooks();
+	     _click($bo_pg_servicePricebooks.btn_StandardServicePriceBook);
+		_selectDomain("/svmx/");
+		_click($bo_pg_servicePricebooks.btn_sfmEditServicePricebook);
+		_selectDomain();
+		_click($bo_pg_servicePricebooks.btn_addSingleLaborLine);
+	};*/
+	
+};

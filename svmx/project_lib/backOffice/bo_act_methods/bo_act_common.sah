@@ -133,12 +133,31 @@ this.cleanUpfunction = function($value)
 		_click(_button("Delete"));
 		_logOutput($value+ " is deleted");
 	};
+	
+	this.getStartDateWithoutZeros = function($pastYear, $seperator){
+		var $now = new Date();
+	    var $monthday = $now.getDate();
+	    var $month = $now.getMonth() + 1;
+	    var $year = $now.getFullYear();
+		$year = $year-$pastYear;
+	    
+		var $StartDate = $month+ $seperator +$monthday  + $seperator+$year; 
+	    return $StartDate;
+	};
+	
+	 this.getEndDateWithoutZeros = function($futureYear, $seperator){
+			var $now = new Date();
+		    var $monthday = $now.getDate();
+		    var $month = $now.getMonth() + 1;
+		    var $year = $now.getFullYear();
+			$year = $year+$futureYear;
+		    
+		     var $EndDate = $month+ $seperator +$monthday  + $seperator+$year; 
+		    return $EndDate;
+		};
 
 };
 
 	
-	
-
-
 
 
