@@ -14,11 +14,11 @@ var $installedProduct = $bo_act_installedProduct.createInstalledProduct($proName
 var $WONumber = $bo_act_installedProduct.createWOFromIB($installedProduct);
 var $sconName = $bo_act_serviceMaintenanceContracts.createServiceMaintenanceContract($accName,"",1,0);
 $bo_act_serviceMaintenanceContracts.AddCoveredProductToSCON($sconName, $installedProduct);
-<<<<<<< HEAD
-$bo_act_workOrders.checkEntitlement($WONumber)
-=======
 
->>>>>>> 0677711dd2b4c293223ebf68725a40e612e8d7c4
+$bo_act_workOrders.checkEntitlement($WONumber)
+
+
+
 /*
 //Creating Product
 

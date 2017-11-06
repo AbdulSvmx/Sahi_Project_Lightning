@@ -6,7 +6,7 @@ $RS_5247.start();
 _setSpeed(100);
 
 //Pre - Condition 
-$bo_act_login.login($g_url, $bac_unDev, $bac_pwdDev);
+$bo_act_login.login($g_url, $bac_un, $bac_pwd);
 $bo_act_navigation.navigateToConfigurationProfilesPage();
 $bo_act_configurationProfiles.editGlobalProfileForBooleanSettings("Service Level Agreement", "SLA Clock on Case", "SET003", false);
 $bo_act_configurationProfiles.editGlobalProfileForBooleanSettings("Service Level Agreement", "SLA Clock on Case", "SET005", false);
@@ -23,11 +23,11 @@ $bo_act_Cases.saveCase();
 
 //Validations
 _selectDomain("/svmx/");
-_wait(3000,_isVisible(_table("/timer/")));
-_assertEqual("Initial Response 00:00:00:00 Onsite Response 00:00:00:00 Restoration 00:00:00:00 Resolution 00:00:00:00",_getText(_table("/CH_dtimer1/")),"SLA Clock Issue");
+_wait(3000,_isVisible($bo_pg_Cases.txt_SLAClock));
+_assertEqual("Initial Response 00:00:00:00 Onsite Response 00:00:00:00 Restoration 00:00:00:00 Resolution 00:00:00:00",_getText($bo_pg_Cases.txt_SLAClock),"SLA Clock Issue");
 _selectDomain();
-_assertEqual(_getText(_div(0,_rightOf(_cell("/Initial Response Internal By/"))))," ","Issue in Initial Response Internal By field");
-_assertEqual(_getText(_div(0,_rightOf(_cell("/Onsite Response Customer By/"))))," ","Issue in Onsite response Customer By field");
+_assertEqual(_getText($bo_pg_Cases.txt_InitialResponseInternalBy)," ","Issue in Initial Response Internal By field");
+_assertEqual(_getText($bo_pg_Cases.txt_InitialResponseCustomerBy)," ","Issue in Initial response Customer By field");
 
 //Clean up function
 

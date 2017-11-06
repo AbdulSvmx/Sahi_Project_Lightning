@@ -6,7 +6,7 @@ $RS_5245.start();
 _setSpeed(100);
 
 //Pre - Condition 
-$bo_act_login.login($g_url, $bac_unBase, $bac_pwdBase);
+$bo_act_login.login($g_url, $bac_un, $bac_pwd);
 $bo_act_navigation.navigateToConfigurationProfilesPage();
 $bo_act_configurationProfiles.editGlobalProfileForBooleanSettings("Service Level Agreement", "SLA Clock on Work Order", "SET003", true);
 $bo_act_configurationProfiles.editGlobalProfileForBooleanSettings("Service Level Agreement", "SLA Clock on Work Order", "SET005", true);

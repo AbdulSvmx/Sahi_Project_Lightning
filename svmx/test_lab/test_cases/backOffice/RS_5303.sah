@@ -6,7 +6,7 @@ $RS_5303.start();
 _setSpeed(100);
 
 //Pre - Condition 
-$bo_act_login.login($g_url, $bac_unDev, $bac_pwdDev);
+$bo_act_login.login($g_url, $bac_un, $bac_pwd);
 $bo_act_navigation.navigateToConfigurationProfilesPage();
 $bo_act_configurationProfiles.editGlobalProfileForBooleanSettings("Service Level Agreement", "SLA Clock on Case", "SET003", true);
 $bo_act_configurationProfiles.editGlobalProfileForBooleanSettings("Service Level Agreement", "SLA Clock on Case", "SET005", true);
@@ -23,7 +23,7 @@ $bo_act_Cases.saveCase();
 
 //Validations
 _selectDomain("/svmx/");
-_wait(3000,_isVisible(_table("/timer/")));
+_wait(3000,_isVisible($bo_pg_Cases.txt_SLAClock));
 _assertNotContainsText("Resolution 00:00:00:00",$bo_pg_Cases.txt_SLAClock,"SLA Clock Issue");
 _selectDomain();
 _assertNotEqual(_getText($bo_pg_Cases.txt_ResolutionInternalBy)," ","Issue in Resolution Internal By field");
@@ -32,7 +32,7 @@ _assertNotEqual(_getText($bo_pg_Cases.txt_ResolutionCustomerBy)," ","Issue in Re
 $bo_act_workOrders.pauseSLAClock();
 _wait(60000);
 $bo_act_workOrders.resumeSLAClock("Yes");
-
+_wait(5000);
 _selectDomain("/svmx/");
 _assertNotContainsText("Resolution 00:00:00:00",$bo_pg_Cases.txt_SLAClock,"SLA Clock Issue");
 _selectDomain();

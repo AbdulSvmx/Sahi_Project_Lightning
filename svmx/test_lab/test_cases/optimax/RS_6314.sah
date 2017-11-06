@@ -98,7 +98,8 @@ _click(_button("Save"));
 if(_exists($skillRuleName))
 {
 _log("Skill Match Rule Created Successfully");
-$excel.writeToExcel("insertAtIndex", "../optimax/op_excleData/automation.xlsx", "SkillRule", $skillRuleName, $rowIndex);
+//$excel.writeToExcel("insertAtIndex", "../optimax/op_excleData/automation.xlsx", "SkillRule", $skillRuleName, $rowIndex);
+$excel.insertUnderColumn("../optimax/op_excleData/automation.xlsx", "Rules", "Skill Match Rule", $skillRuleName, $rowIndex);
 }
 else
 {

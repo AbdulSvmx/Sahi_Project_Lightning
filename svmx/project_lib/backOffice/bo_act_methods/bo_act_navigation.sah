@@ -245,5 +245,12 @@ var $bo_act_navigation = new function bo_act_navigation() {
     	 _click($bo_pg_home.btn_allTabs);
     	    _click($bo_pg_home.link_stockTransfer);
      };
+     
+     this.navigateToSetUpAndSearch = function($searchValue){
+    	 _click(_link("Setup"));
+    	 _setValue(_textbox("setupSearch"),$searchValue);
+    	 _click(_link($searchValue));
+    	 
+     };
 
 };

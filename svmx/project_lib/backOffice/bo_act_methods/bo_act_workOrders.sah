@@ -29,6 +29,10 @@ var $bo_act_workOrders = new function bo_act_workOrders() {
 		_click(_link($workOrderNumber));
 		_click($bo_pg_workOrders.btn_editWorkOrder);
 	};
+	
+	this.editWorkOrderOnWOPage = function(){
+			_click($bo_pg_workOrders.btn_editWorkOrder);
+	};
 	this.updateTextBoxFields = function($object,$objectValue){
 		_setValue($object,$objectValue);
 		//return $callBack.returnResult([_isVisible($accountName), "Account not created",$accountName] );
