@@ -55,7 +55,13 @@ function create_rto_wo($RTO_DispatchProcess){
 
 	// Wait for the Work order to get scheduled and work order is updated with scheduled information
 	 
-	 _wait(20000);
+	 var $count=0;
+	 while($count!=5000){
+		 _log(1000);
+		 
+		 $count++;
+		
+	 }
 	 
 	 // Validating the Work order scheduled info
 	 
