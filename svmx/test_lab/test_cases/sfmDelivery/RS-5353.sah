@@ -30,6 +30,7 @@ var $wizardType = "SFM";
 var $domainName = "svmxc.cs21.visual.force.com";
 var $messageType="Error";
 var $wizardObject ="Work Order";
+var $woName="WO-00000472";
 
 
 _setSpeed(100);
@@ -43,25 +44,26 @@ _wait(30000,_isVisible(_link("Home")));
 
 $sfm_act_wizards.addToWizard($wizardObject, $wizardName, $wizardType, $sfmName);
 _wait(30000,_isVisible(_link("Home")));
+_click(_link("Home"));
 
-
+/*
 $bo_act_login.login($url, $un, $pwd);
 $login = $sfm_act_createWorkOrder.login($un,$pwd);
 _log($login);
 var $woName;
 $woName = $sfm_act_createWorkOrder.create_WO();
-_log("WO NAME OUTSIDE "+$woName);
+_log("WO NAME OUTSIDE "+$woName); */
 
-/*
+
 //Open the WO and click on the above created SFM 
-_setValue(_textbox("str"), ".");
-_click(_button("Search"));
-_click(_link("WO-00000472"));
+$sfm_act_common.globalSearch($woName);
+_click(_link($woName));
 _selectDomain($domainName);
 _click(_button($sfmName));
 
 //Validate DVR
 _selectDomain();
+_wait(30000);
 _setValue(_textbox("City:"),"M");
 
 //_click(_div("svmx-trigger-index-0 svmx-form-trigger svmx-form-date-trigger svmx-form-trigger-last svmx-unselectable svmx-form-trigger-over svmx-form-date-trigger-over"));
@@ -82,7 +84,7 @@ if(_exists(_div($ruleDescription))){
 }else{
 	_log("Fail");
 }
- */
+ 
 
  
 

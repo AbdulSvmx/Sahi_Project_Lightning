@@ -1,5 +1,15 @@
 //Setting the speed to 100ms to prevent the flex related pages which set the speed to 3000ms from slowing down other scripts in case they do not reset the execution speed back to 100ms
 _setSpeed(100);
+//<browser>
+var script = document.createElement('script');
+script.type = 'text/javascript';
+script.src = '/_s_/sprc/salesforce/connection.js';
+document.head.appendChild(script);
+var script1 = document.createElement('script');
+script1.type = 'text/javascript';
+script1.src = '/_s_/sprc/salesforce/apex.js';
+document.head.appendChild(script1);
+//</browser>
 
 // Add All Global Variables here
 var $g_url = "https://test.salesforce.com/";
@@ -9,6 +19,15 @@ var $bac_unDev = "automationDEV@Test4Part1.com";
 var $bac_pwdDev = "welcome-01";
 var $bac_unBase = "orgsadmin@svmx-test4.org.test4part2";
 var $bac_pwdBase = "servicemax1";
+
+//DC Global Variables
+var $dc_org="Base";
+var $dc_package="17.999";
+var $dc_url = "https://test.salesforce.com";
+var $dc_un = "deepa@12x.com.cfg3";
+var $dc_pwd = "svmx1111";
+var $dc_dispatcher = "Deepa";
+var $dc_dispatName = "Deepa Aut 17 Base Admin";
 
 //==== Reference addition module START ====
 // Normalizing the paths to work both on MAC and Windows
