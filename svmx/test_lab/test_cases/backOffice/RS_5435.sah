@@ -8,7 +8,6 @@ _setSpeed(100);
 
 $bo_act_login.login($g_url, $bac_unBase, $bac_pwdBase);
 //Create a SFM orders test data
-<<<<<<< HEAD
 var $sfmName = "SFM_Interact309";
 var $stndSFMName="Add/Edit Products Serviced";
 var $objName2="Preventive Maintenance Plan";
@@ -18,7 +17,6 @@ var $objName1="Work Order";
 	var $fieldActnType="SFM";
 	var $actnName2=$sfmName;
 	var $actnName1=$stndSFMName;
-=======
 var $sfmName = "SFM_Interact";
 var $sourceName = "Work Order";
 var $targetName = "Work Order";
@@ -27,7 +25,6 @@ var $sfmPageLayoutName = "SFMIBTEST";
 var $wizardSelectObjectName = "Work Order";
 var $wizardTitleName = "SFMIBTEST1";
 var $wizardIDName = "SFMIBTEST1"; 
->>>>>>> d382fbc660bc828289c3fe2b22d28d70118ec1bf
 var $wizardStep1Type = "SFM";
 var $wizardStep1Name = $sfmName;
 var $wizardStep2Type = $wizardStep1Type;
