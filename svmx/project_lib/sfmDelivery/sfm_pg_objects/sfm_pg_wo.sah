@@ -1,0 +1,6 @@
+var $sfm_pg_wo = new function sfm_pg_wo() {
+	this.tab_wo = _link("Work Orders");
+	this.btn_wo_new = _button("/New/");
+	this.btn_wo_save = _submit("/Save/");
+	this.cell_wizard = _cell({title:'A0001'}) ;//_cell("A0001");
+};

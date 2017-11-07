@@ -1,0 +1,5 @@
+var $rs_6961 = _testcase("RS_6961","Verify source to target all SFM Process.");
+$rs_6961.start();
+$bo_act_login.login($g_url,$sfmUsn,$sfmPwd);
+$bo_act_navigation.navigateToSfmTransactionDesigner()();
+$rs_6961.end();

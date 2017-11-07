@@ -1,0 +1,8 @@
+var $rs_4994 = _testcase("RS_4994","Assign to a group and log in as different group member.");
+$rs_4994.start();
+$bo_act_login.login($g_url,$sfmUsn,$sfmPwd);
+$bo_act_navigation.navigateToSfmWizard();
+$sfm_act_createCustomWizard.chooseObject("Work Order");
+$sfm_act_createCustomWizard.addManageWizSteps("TestSFM002","Output Document","Work Order Service Report","Default Group Profile");
+$sfm_act_createCustomWizard.createBlankWo();
+$rs_4994.end();
