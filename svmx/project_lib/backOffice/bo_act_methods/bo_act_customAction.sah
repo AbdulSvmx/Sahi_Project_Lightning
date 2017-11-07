@@ -14,19 +14,29 @@ var $bo_act_customAction=new function bo_act_customAction(){
 		
 	};
 	
-	this.createNewCustomActionForWebService=function($custActname,$custActID,$url,$objectName,$actnType){
-		
+	this.createCustomActionForWebService=function($objectName,$className,$methodName){
+		var $actionTitle = $bo_act_common.generateRandomName("actTitle");
+		var $actionId = $bo_act_common.generateRandomName("actId");
+		$bo_act_navigation.navigateToSfmCustomAction();
 		_setSelected($bo_pg_customAction.sel_objWO, $objectName);
 			_click($bo_pg_customAction.btn_new);
-			_setSelected($bo_pg_customAction.sel_actionType,$actnType);
-			_setValue($bo_pg_customAction.txt_actionName,$custActname);
-			_setValue($bo_pg_customAction.txt_actionID,$custActID);
-			_setValue($bo_pg_customAction.txt_enterURL,$url);
+			_setSelected($bo_pg_customAction.sel_actionType,"Web Service");
+			_setValue($bo_pg_customAction.txt_actionTitle,$actionTitle);
+			_setValue($bo_pg_customAction.txt_actionID,$actionId);
+			_setValue($bo_pg_customAction.txt_className,$className);
+			_setValue($bo_pg_customAction.txt_methodName,$methodName);
 			_click($bo_pg_customAction.btn_quickSave);
-			_click($bo_pg_customAction.btn_saveAndClose);
-			_click($bo_pg_customAction.btn_backToSetUpHome);
-			
+			return $actionTitle;
 		};	
+		
+this.addParametersForWebService = function($parameterValueType, $parametervalue){
+	var $parameterName = $bo_act_common.generateRandomName("ParaName");
+	var $parameterValue = $bo_act_common.generateRandomName("ParaValue");
+	_setValue(_textbox(0,_near(_div("Parameter Name"),_under(_table("list")))),$parameterName);
+	_setSelected(_select(0,_near(_div("Parameter Value Type"),_under(_table("list")))),$parameterValueType);
+	_setValue(_textbox(1,_near(_div("Parameter Value")),_under(_table("list"))),$parametervalue);
+	_click($bo_pg_customAction.btn_quickSave);		
+};
 
 };
 

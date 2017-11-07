@@ -5,11 +5,12 @@ var $SFW_InteractiveHandoverFunctionalityForWebServices = _testcase("$SFW_Intera
 $SFW_InteractiveHandoverFunctionalityForWebServices.start();
 _setSpeed(100);
 
-var $TestWebServices = $bo_act_common.generateRandomName("TWS");
-var $codeBase = "global class" +$TestWebServices+
+var $className = $bo_act_common.generateRandomName("TWS");
+var $methodName = $bo_act_common.generateRandomName("TWM");
+var $codeBase = "global class " +$className+
 "{ \
-	global" +$TestWebServices+ "() {}\
-	webservice static SVMXC.INTF_WebServicesDef.INTF_Response test_WS(SVMXC.INTF_WebServicesDef.INTF_Request req)"+ 
+	global " +$className+ "() {}\
+	webservice static SVMXC.INTF_WebServicesDef.INTF_Response "+$methodName+"(SVMXC.INTF_WebServicesDef.INTF_Request req)"+ 
 	"{	System.debug('testing print request : '+req);"+ 
 	"SVMXC.INTF_WebServicesDef.INTF_Response obj = new SVMXC.INTF_WebServicesDef.INTF_Response();"+ 
 	"List<Account> lstobjAcc = new List<Account>();"+
@@ -27,10 +28,10 @@ var $codeBase = "global class" +$TestWebServices+
 	"obj.message = 'Accounts not inserted 1'; 	obj.success = true; 	obj.messageType = 'ERROR'; 	return obj; } }";
 
 
-var $codeDev = "global class" +$TestWebServices+
+var $codeDev = "global class " +$className+
 "{ \
-	global" +$TestWebServices+ "() {}\
-	webservice static SVMXDEV.INTF_WebServicesDef.INTF_Response test_WS(SVMXDEV.INTF_WebServicesDef.INTF_Request req)"+ 
+	global " +$className+ "() {}\
+	webservice static SVMXDEV.INTF_WebServicesDef.INTF_Response "+$methodName+"(SVMXDEV.INTF_WebServicesDef.INTF_Request req)"+ 
 	"{	System.debug('testing print request : '+req);"+ 
 	"SVMXDEV.INTF_WebServicesDef.INTF_Response obj = new SVMXDEV.INTF_WebServicesDef.INTF_Response();"+ 
 	"List<Account> lstobjAcc = new List<Account>();"+
@@ -58,8 +59,29 @@ $code = $codeDev;
 $bo_act_navigation.navigateToSetUpAndSearch("Apex Classes");
 $bo_act_salesforceSetUp.createApexClasses($code);
 
+var $actionTitle = $bo_act_customAction.createCustomActionForWebService("Work Order", $className, $methodName);
+var $parameterValue = $bo_act_common.generateRandomName("ParaValue");
+$bo_act_customAction.addParametersForWebService("Value", $parameterValue);
 
+var $wizardTitleName = $bo_act_common.generateRandomName("SFWTitle");
+var $wizardIDName = $bo_act_common.generateRandomName("SFWId");
+$bo_act_navigation.navigateToSfmWizard();
+$bo_act_SFW.createWizardGeneralInfo("Work Order", $wizardTitleName, $wizardIDName);
+$bo_act_SFW.createWizardStepwithHandOver("SFM", "Create RMA from Work Order", "Interactive",true);
+$bo_act_SFW.createWizardStepwithHandOver("Others", $actionTitle, "Interactive",false);
+$bo_act_SFW.quickSaveSFWizard();
+$bo_act_SFW.saveAndClose();
 
+var $accountName = $bo_act_accounts.createAccount();
+var $contactName = $bo_act_contacts.createContact($accountName);
+var $caseNumber = $bo_act_Cases.createCase("New", "High", "Email");
+var $productName = $bo_act_products.createProduct();
+var $$IBName = $bo_act_installedProduct.createInstalledProduct($productName, $accountName, $contactName);
+$bo_act_workOrders.createWorkOrder($caseNumber, $accountName, $contactName, $IBName, "Open", "High", "Field Service");
+_selectDomain("/svmx/");
+_assertExists(_button("/Create RMA from Work Order/",_near(_cell($wizardTitleName))));
+_click(_button("/Create RMA from Work Order/",_near(_cell($wizardTitleName))));
+_selectDomain();
 $SFW_InteractiveHandoverFunctionalityForWebServices.end();
 
 
