@@ -9,7 +9,7 @@ _setSpeed(100);
  * Login to the Sandbox Org
  */
 
-//$bo_act_login.login($g_url, $g_un, $g_pwd);
+$bo_act_login.login($g_url, $g_un, $g_pwd);
 
 //Pre - Condition Test Data
 var $recordType = ["Depot","Depot Child","Depot Parent","Standard Location"];
@@ -147,14 +147,14 @@ var $CoveredByExpected1 = "Installed Product, Location";
 var $CoveredByActual1 = _getText(_cell("/Ins/",_near(_div("Covered By"))));
 _assertEqual($CoveredByExpected1,$CoveredByActual1,"Actual and expected Covered By is not same when location is enabled");
 
-var $StartDateExpected = $bo_act_common.getPastDate($pastYear, $seperator);  // Start Date for Service Contract
-var $EndDateExpected = $bo_act_common.getfutureDate($futureYear, $seperator);  // End Date for Service Contract
+var $StartDateExpected = $bo_act_common.getStartDateWithoutZeros($pastYear, $seperator);  // Start Date for Service Contract
+var $EndDateExpected = $bo_act_common.getEndDateWithoutZeros($futureYear, $seperator);  // End Date for Service Contract
 
-/*var $StartDateActual = _getText(_cell(0,_rightOf(_cell($serviceConractName))));
+var $StartDateActual = _getText(_cell(0,_rightOf(_cell($serviceConractName))));
 var $EndDateActual = _getText(_cell(1,_rightOf(_cell($serviceConractName))));
 
 _assertEqual($StartDateExpected,$StartDateActual,"Actual and expected Covered By is not same when location is enabled");
-_assertEqual($EndDateExpected,$EndDateActual,"Actual and expected Covered By is not same when location is enabled");*/
+_assertEqual($EndDateExpected,$EndDateActual,"Actual and expected Covered By is not same when location is enabled");
 
 /**
  * Save Interactive Entitlement page on Case when location is enabled

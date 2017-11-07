@@ -17,7 +17,7 @@ var $bo_pg_home = new function bo_pg_home(){
 	this.link_serviceMaintenanceContracts = _link("Service/Maintenance Contracts");
 	this.link_locations = _link("Locations");
 	this.link_warrantyTerms =_link("Warranty Terms[2]");
-	this.link_stockTransfer =_link("Stock Transfer")
+	this.link_stockTransfer =_link("Stock Transfer");
 	this.link_logOut = _link("Logout");
 	this.link_allTabs = _image("All Tabs");
 	
