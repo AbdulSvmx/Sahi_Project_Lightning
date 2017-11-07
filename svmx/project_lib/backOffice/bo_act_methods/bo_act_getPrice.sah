@@ -1,13 +1,22 @@
 /**
  * Functions for the Work Order Object
  */
-var $bo_act_workOrders = new function bo_act_workOrders() {
+var $bo_act_getPrice = new function bo_act_getPrice() {
 
 	/**
 	 * Create an Work Order
 	 */
-	this.createWorkOrder = function($caseNumber,$accountName,$contactName,$IBName,$orderStatus,$priority,$orderType){
-		$bo_act_navigation.navigateToWorkOrdersTab();
+	this.addPartsLineToTDM016 = function($searchValue){
+		_click($bo_pg_getPrice.btn_partsLine);
+		_click($bo_pg_getPrice.btn_addSingleLine);
+		_click($bo_pg_getPrice.btn_editFirstRow);
+		$bo_act_common.searchfunction($searchValue);
+		_click($bo_pg_getPrice.btn_update);
+		_click($bo_pg_getPrice.btn_getPrice);
+		
+		
+		
+		/*$bo_act_navigation.navigateToWorkOrdersTab();
 		_click($bo_pg_workOrders.btn_newWorkOrder);
 		_setValue($bo_pg_workOrders.txt_case, $caseNumber);
 		_setValue($bo_pg_workOrders.txt_account, $accountName);
@@ -21,13 +30,15 @@ var $bo_act_workOrders = new function bo_act_workOrders() {
 		_wait(15000, _isVisible($bo_pg_workOrders.txt_workOrderDetails));
 		var $workOrderNumber =  _getText($bo_pg_workOrders.txt_getWONumber);
 		_logOutput($workOrderNumber+ " Work Order is created");
-		return $workOrderNumber;
+		return $workOrderNumber;*/
 	};
-		this.editWorkOrder = function($workOrderNumber){
-		$bo_act_navigation.navigateToWorkOrdersTab();
-		_click(_link($workOrderNumber));
-		_click($bo_pg_workOrders.btn_editWorkOrder);
-	};
+	
+		this.editPartsLineToTDM016 = function($partsName){
+			_click($bo_pg_getPrice.btn_getPrice);
+			$bo_pg_getPrice.editPartsLine($partsName);
+			
+			};
+	
 	
 	this.editWorkOrderOnWOPage = function(){
 			_click($bo_pg_workOrders.btn_editWorkOrder);
