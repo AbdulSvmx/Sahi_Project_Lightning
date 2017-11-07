@@ -1,0 +1,31 @@
+/**
+ * Function to perform login work flows
+ */
+var $bo_act_login = new function bo_act_login() {
+
+	/**
+	 * Function to login to salesforce
+	 * 
+	 * @param $url
+	 * @param $un
+	 * @param $pwd
+	 */
+	this.login = function($url, $un, $pwd) {
+		// Setting default values
+		/*
+		 * $url = $url || $g_url; $un = $un || $g_un; $pwd = $pwd || $g_pwd;
+		 */
+		_navigateTo($url);
+		_wait(5000, _isVisible(_emailbox("username")));
+		_setValue(_emailbox("username"), $un);
+		_setValue(_password("pw"), $pwd);
+		_click(_submit("Log In to Sandbox"));
+		_wait(5000);
+		//_wait(30000, _isVisible($bo_pg_home.link_home));
+		//return $callBack.returnResult(_exists($bo_pg_home.link_home), "login");
+
+		// Need to return
+	};
+	
+
+};
