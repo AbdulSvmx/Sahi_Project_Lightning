@@ -33,7 +33,7 @@ var $bo_pg_sfmTransactionAndDesigner = new function bo_pg_sfmTransactionAndDesig
 	this.btn_propoties=_f("main").tab("Properties");
 	
 	
-	
+/*	
 	this.lbl_searchSFM=_f("main").s_textinput("searchText[3]");
 	
 	//_click(_f("main").s_checkbox("chk[25]"));
@@ -73,22 +73,27 @@ var $bo_pg_sfmTransactionAndDesigner = new function bo_pg_sfmTransactionAndDesig
 	this.selectComboBox = function($elementName,$elementItemName){
 	_setSelected(_f("main").s_combobox($elementName), $elementItemName);
 		
-		}
+		};
 		
 		//Enter the name of checklist type SFM transaction
 	this.setSfmName=function($sfmName){
 		_setValue(_f("main").s_textinput("pName"), ($sfmName));
-	}
+	};
 		
 	this.child_checkBox =function($orderTypeName){
 			_f("main").s_checkbox($orderTypeName);
-	}
+	};
 		
 	this.source_ctRecord_comboBox = function($comboName){
+
+			_f("main").s_combobox($comboName);	
+	};	
+
 		_f("main").s_combobox($comboName);
 		
 		
-	}	
+	
+
 //end here_by Mamta
 
 
@@ -97,7 +102,8 @@ var $bo_pg_sfmTransactionAndDesigner = new function bo_pg_sfmTransactionAndDesig
      *@param $sfmName
      *@param $isCustom
      */
-    this.selectSFM = function($sfmName, $isCustom) {
+/*
+	this.selectSFM = function($sfmName, $isCustom) {
 	if ($isCustom) {
 		_wait(3000);
 	 _click($bo_pg_sfmTransactionAndDesigner.btn_yourCustomSfmTransactions);
@@ -111,7 +117,7 @@ var $bo_pg_sfmTransactionAndDesigner = new function bo_pg_sfmTransactionAndDesig
      * @param $fieldName
      * @param $containerName
      */
-    this.addField = function($fieldName, $containerName) {
+  /*  this.addField = function($fieldName, $containerName) {
 	_click(_f("main").fieldrenderer("[object Object]").near(_f("main").formitemlabel($containerName)));
 	_setValue($bo_pg_sfmTransactionAndDesigner.txt_quickFindField, $fieldName);
 	_click(_f("main").s_label($fieldName));
@@ -122,9 +128,10 @@ var $bo_pg_sfmTransactionAndDesigner = new function bo_pg_sfmTransactionAndDesig
      * Delete a field  from the SFM Designer page
      * @param $fieldName
      */
-    this.deleteField = function($fieldName) {
+    /*this.deleteField = function($fieldName) {
 	_click(_f("main").s_button("closeBtn").near(_f("main").s_richtext($fieldName)));
     };
+<<<<<<< HEAD
 	
 		this.tab_advancedOptions=_f("main").tab("Advanced Options")
 		this.lbl_sorting=_f("main").tab("Sorting")
@@ -144,5 +151,9 @@ var $bo_pg_sfmTransactionAndDesigner = new function bo_pg_sfmTransactionAndDesig
 		this.lbl_endDateField=_f("main").s_label("End Date and Time[1]")
 	
 	
+=======
+	*/
+
+>>>>>>> fd7ac582c04ad3a0e65a726729c8554292fcec6c
 
 };

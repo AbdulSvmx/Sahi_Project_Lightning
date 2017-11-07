@@ -7,12 +7,12 @@ var $bo_act_sfmVerifyWorkOrder= new function bo_act_sfmVerifyWorkOrder() {
 		_wait(7000);
 		return $callBack.returnResult(_isVisible(_button($sfmTranName)));
 
-		}
+		};
 	
 	//always keep one work order, instead need to use array index with ordername workOrderName[1]; 
 	this.clickSpecificWorkOrder = function($workOrderName){
-	_click(_link(workOrderName));
-	}
+	_click(_link($workOrderName));
+	};
 this.verifyWizardOnPMPObj=function($sfmName){
 	_click($bo_pg_sfmVerifyWorkOrder.img_allTab);
 	_wait(2000);
@@ -21,7 +21,7 @@ this.verifyWizardOnPMPObj=function($sfmName){
 	_click($bo_pg_sfmVerifyWorkOrder.lnk_firstLinkPMP);
 	
 		
-}
+};
 
 this.verifyWizardOnWOObj=function($sfmName){
 	_click($bo_pg_sfmVerifyWorkOrder.img_allTab);
@@ -43,6 +43,7 @@ this.verifyWizardOnWOObj=function($sfmName){
 			_selectDomain();
 				}
 		
+<<<<<<< HEAD
 		}
 		this.clkOnWizard=function($wizardButtonName){
 			_selectDomain("/svmx/");
@@ -56,6 +57,9 @@ this.verifyWizardOnWOObj=function($sfmName){
 			}
 		_selectDomain();
 		}
+=======
+		};
+>>>>>>> fd7ac582c04ad3a0e65a726729c8554292fcec6c
 		
 		this.wizardButtonNotVisible=function($wizardname){
 			
@@ -81,6 +85,7 @@ this.verifyWizardOnWOObj=function($sfmName){
 					 var $result = false; 
 				}		
 				 _selectDomain();
+<<<<<<< HEAD
 				
 			}
 				
@@ -92,7 +97,11 @@ this.verifyWizardOnWOObj=function($sfmName){
 			}
 	
 	
+=======
+			
+	return $callBack.returnResult($result, "","searchWizard");
+>>>>>>> fd7ac582c04ad3a0e65a726729c8554292fcec6c
 	
-	}
+	};
+};
 
-	
