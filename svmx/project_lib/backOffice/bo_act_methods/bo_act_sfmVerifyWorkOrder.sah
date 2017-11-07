@@ -44,6 +44,18 @@ this.verifyWizardOnWOObj=function($sfmName){
 				}
 		
 		}
+		this.clkOnWizard=function($wizardButtonName){
+			_selectDomain("/svmx/");
+			if(_assertVisible(_button($wizardButtonName))){
+				_click(_button($wizardButtonName));
+				//_wait(3000);
+			_log("User successfully launch the wizard in delivery");}
+			
+			else{
+				_log("Launching of wizard in delivery failed");
+			}
+		_selectDomain();
+		}
 		
 		this.wizardButtonNotVisible=function($wizardname){
 			
@@ -64,13 +76,22 @@ this.verifyWizardOnWOObj=function($sfmName){
 				_selectDomain("/svmx/");
 			var $textDisplay=_getText(_table("tbcontainer"));
 				if(!$wizardTitleName.indexOf($textDisplay) != -1){
-						$$result =  true ;
+						var $result =  true ;
 				}else{
-					$result = false; 
+					 var $result = false; 
 				}		
 				 _selectDomain();
+				
 			}
-	return $callBack.returnResult($result, "","searchWizard");
+				
+				this.clickOnWizardButton=function($SFMName){
+				_selectDomain("/svmx/");
+				_click(_button($SFMName));
+				_selectDomain();
+					
+			}
+	
+	
 	
 	}
 

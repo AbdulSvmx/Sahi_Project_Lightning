@@ -26,7 +26,8 @@ var $bo_pg_sfmWizard= new function bo_pg_sfmWizard() {
 	this.chk_selectCustomWizard=_checkbox(13);
 	this.btn_deleteWizard=_button("Delete");
 	this.lbl_deleteSuccessfulMsg=_div("Success:Successfully deleted the selected wizard.");
-	
+	this.chk_activeCheckboxInGeneralInfo=_checkbox("page1:form1:mainPblock:tab1:pblocksectionmain:pblocksectionitm3:sellstsecitem:isActive:hdractive");
+//	this.selectWizard= _checkbox(0,_leftOf (_cell($wizardname)));
 	
 	
 	

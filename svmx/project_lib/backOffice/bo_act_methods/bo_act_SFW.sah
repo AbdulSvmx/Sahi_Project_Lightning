@@ -23,6 +23,7 @@ var $bo_act_SFW = new function bo_act_SFW() {
 		_setValue($bo_pg_sfmWizard.txt_wizardTitle, $wizardTitleName);
         _setValue($bo_pg_sfmWizard.txt_wizardID, $wizardIDName);
 		}
+		
 	
 	this.addNewManageWizardSteps = function($wizardStepType,$wizardStepName,$executionMode){
 		_click($bo_pg_sfmWizard.tab_manageWizardSteps);
@@ -86,13 +87,14 @@ var $bo_act_SFW = new function bo_act_SFW() {
 		_wait(60000);		
 }
 		
-		this.deleteWizard=function(){
-			_click($bo_pg_sfmWizard.chk_selectCustomWizard);
+		this.deleteWizard=function($wizardname){
+			//_click($bo_pg_sfmWizard.selectWizard);
+			_click(_checkbox(0,_leftOf (_cell($wizardname))));
 			_click($bo_pg_sfmWizard.btn_deleteWizard);
 			_wait(6000);
-			
-			
-			
+			_assertEqual("Success:Successfully deleted the selected wizard.", _getText(_div("message confirmM3")));
+			_log("SFM Wizard Deleted Successfully");
 		}
-	
+			
+			
 }

@@ -17,6 +17,7 @@ var $bo_pg_sfmTransactionAndDesigner = new function bo_pg_sfmTransactionAndDesig
     this.lbl_workOrder = _f("main").s_richtext("Work Order");
     this.sel_sfmTemplate = _f("main").s_combobox("searchCombo[3]");
     this.txt_sfmSavePageLayoutAs = _f("main").s_textinput("Save page layout as");
+	this.txt_sfmSavePageLayoutID=_f("main").s_textinput("Input ID Here[3]");
     this.txt_sfmSavePageLayoutAsId = _f("main").s_textinput("advTxt");
     this.btn_addFieldToPage = _f("main").s_button("Add Field to Page");
     this.txt_quickFindField = _f("main").s_textinput("searchText").near(_f("main").s_button("Add Field to Page"));
@@ -29,6 +30,8 @@ var $bo_pg_sfmTransactionAndDesigner = new function bo_pg_sfmTransactionAndDesig
     this.btn_newSFM=_f("main").s_button("New SFM Transaction");
 	this.btn_finalQuickSave = _f("main").s_button("Quick Save");
 	this.alert_proceedAnyway=_f("main").button("Proceed Anyway");
+	this.btn_propoties=_f("main").tab("Properties");
+	
 	
 	
 	this.lbl_searchSFM=_f("main").s_textinput("searchText[3]");
@@ -43,7 +46,7 @@ var $bo_pg_sfmTransactionAndDesigner = new function bo_pg_sfmTransactionAndDesig
 		this.lbl_sfmTransactionSavedMessage=_f("main").label("SFM Transaction saved");
 	
 	
-	
+	this.btn_pageLayoutSave=_f("main").s_button("Save[3]");
 	//This code is to click on new button on custom SFM transaction
 	this.btn_newSFMTransaction=_f("main").s_button("New SFM Transaction");//duplicate
 	
@@ -122,6 +125,23 @@ var $bo_pg_sfmTransactionAndDesigner = new function bo_pg_sfmTransactionAndDesig
     this.deleteField = function($fieldName) {
 	_click(_f("main").s_button("closeBtn").near(_f("main").s_richtext($fieldName)));
     };
+	
+		this.tab_advancedOptions=_f("main").tab("Advanced Options")
+		this.lbl_sorting=_f("main").tab("Sorting")
+		this.lbl_partObj=_f("main").s_label("Parts[4]")
+		this.lbl_partField=_f("main").s_label("Part")
+		this.img_add=_f("main").s_button(">[1]")
+
+		this.lbl_laborObj=_f("main").s_label("Labor[4]")
+		this.lbl_activityTypeField=_f("main").s_label("Activity Type")
+
+
+		this.lbl_expenseObj=_f("main").s_label("Expense[3]")
+		this.lbl_lineQtyField=_f("main").s_label("Line Qty")
+
+		this.lbl_travelObj=_f("main").s_label("Travel[1]")
+		this.lbl_statDateField=_f("main").s_label("Start Date and Time")
+		this.lbl_endDateField=_f("main").s_label("End Date and Time[1]")
 	
 	
 
