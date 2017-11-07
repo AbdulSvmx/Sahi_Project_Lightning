@@ -1,0 +1,14 @@
+var $sfm_pg_sfmDesigner = new function sfm_pg_sfmDesigner() {
+	
+	this.btn_quickSaveSFM = _f("main").s_button("Quick Save");
+	this.btn_saveSFM = _f("main").s_button("Save & Close");
+	this.lnk_home = _link("Home");
+	this.lnk_workOrder = _link("Work Orders");
+	this.btn_deliveryQuickSave = _span("svmx-btn-icon svmx-sfmd-quicksave-icon");
+	this.btn_deliverySave = _span("svmx-btn-icon svmx-sfmd-save-icon");
+	this.btn_deliveryCancel = _span("svmx-btn-icon svmx-sfmd-cancel-icon");
+	this.btn_deliveryGetPrice = _span("Get Price");
+	this.btn_deliveryUserSettings = _span("svmx-btn-icon svmx-sfmd-setting-icon");
+	this.btn_deliveryHelp = _span("svmx-btn-icon svmx-sfmd-help-icon");
+	this.btn_deliveryClearCache = _span("svmx-btn-icon svmx-sfmd-cache-icon");
+};

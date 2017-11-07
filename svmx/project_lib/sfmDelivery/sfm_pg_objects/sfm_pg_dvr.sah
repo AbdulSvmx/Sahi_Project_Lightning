@@ -22,7 +22,20 @@ var $sfm_pg_dvr = new function sfm_pg_dvr() {
 	this.txt_messageDescription = _f("main").s_textarea("message");
 	this.btn_saveDVR = _f("main").s_button("Save");
 	this.btn_addToProcess = _f("main").s_button("Add To Process");
-	
+	this.chk_targetParts = _f("main").s_checkbox("Parts");
+	this.chk_targetLabor = _f("main").s_checkbox("Labor");
+	this.chk_targetExpense = _f("main").s_checkbox("Expense");
+	this.chk_targetTravel = _f("main").s_checkbox("Travel");
+	this.btn_targetOk = _f("main").s_button("OK[1]");
+	this.btn_targetCancel = _f("main").s_button("Cancel");
+	this.txt_targetChilden= _f("main").s_label("Select target children to which the selected rule is to be added");
+	this.btn_partsTab = _span("Parts");
+	this.btn_laborTab = _span("Labor");
+	this.btn_expenseTab = _span("Expenses");
+	this.btn_travelTab = _span("Travel");
+	this.btn_addRowParts = _span("svmx-btn-icon svmx-sfmd-add-line-icon");
+	this.btn_addMultiParts = _span("svmx-btn-icon svmx-sfmd-multi-add-line-icon");
+	this.btn_addChildRow = _div("sfm-button-1193");
 	/**
 	 * Function to create a data validation rule
 	 *
@@ -45,9 +58,14 @@ var $sfm_pg_dvr = new function sfm_pg_dvr() {
 		_setValue($sfm_pg_dvr.txt_advancedExpr,$advExpr);
 		_setSelected($sfm_pg_dvr.txt_messageType,$messageType);
 		_setValue($sfm_pg_dvr.txt_messageDescription,$ruleDescription );
-		_click($sfm_pg_dvr.btn_saveDVR);
+		//_click($sfm_pg_dvr.btn_saveDVR);
 		_wait(2000);
 		_click($sfm_pg_dvr.btn_addToProcess);
+		_wait(2000);
+		if(_exists($sfm_pg_dvr.txt_targetChilden)){
+			_click($sfm_pg_dvr.btn_targetOk);
+			
+		}
 		
 	};
 	/**

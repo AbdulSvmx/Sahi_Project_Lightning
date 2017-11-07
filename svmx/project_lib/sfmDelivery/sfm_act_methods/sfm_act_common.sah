@@ -2,9 +2,16 @@ var $sfm_act_common = new function sfm_act_common() {
 	
 	this.globalSearch =function($searchText){
 		_setValue(_textbox("phSearchInput"),$searchText);
-		_focusWindow();
+	/*	_focusWindow();
 		_focus(_textbox("phSearchInput"));
 		_typeKeyCodeNative(java.awt.event.KeyEvent.VK_ENTER);
+		*/
+		
+		_click(_button("Search"));
+		_wait(30000);
+
+		_click(_link("Search All"));
+		_wait(30000,_isVisible(_link($searchText)));
 
 	};	
 };

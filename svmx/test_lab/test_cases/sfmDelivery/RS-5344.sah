@@ -6,7 +6,7 @@ $sfmName = "RS_5354_TDM016";
 $isCustom = false;
 var $sfmTemplate = "SVMXSTD: Manage WO Usage Lines";
 var $sfmTemplateSaveAsName = $sfmName;
-var $containerName = "Order Status";
+var $containerName = ["Order Status","Order Status"];
 var $rulename ="5354Rule1";
 var $targetObject ="Work Order";
 var $ruleDescription = "Are you sure? Component is null and Entitle not performed";
@@ -15,8 +15,8 @@ var $conditionArray = ["Is Null","Equals"];
 var $operandArray =["", "Function"];
 var $valueArray =["", "false"];
 var $advExpr= "1 AND 2";
-var $fieldName ="Component";
-var $fieldName1="Is Entitlement Performed";
+var $fieldName =["Component","Is Entitlement Performed"];
+//var $fieldName1="Is Entitlement Performed";
 var $wizardName = "SFM Delivery Auto";
 var $wizardType = "SFM";
 var $domainName = "svmxc.cs21.visual.force.com";
@@ -25,32 +25,46 @@ var $messageType = "Confirmation";
 
 _setSpeed(100);
 $bo_act_login.login($url, $un, $pwd);
-/*
-//Navigate to SFM designer page
-$bo_act_navigation.navigateToSfmTransactionDesigner();
-_setSpeed(100);
 
-//clone tmd016
-
-$bo_act_SFM.cloneSFM($sfmNameToBeCloned, $sfmName, $isCustom, $sfmTemplate, $sfmTemplateSaveAsName, $fieldName, $containerName);
-
-// open the above created SFM
-_click($bo_pg_sfmTransactionAndDesigner.btn_yourCustomSfmTransactions);
-_setValue($bo_pg_sfmTransactionAndDesigner.txt_yourCustomSfmTransactionsQuickFind, $sfmName);
-_click(_f("main").s_label($sfmName));
-_click($bo_pg_sfmTransactionAndDesigner.btn_screenDesigner);
-
-//add Is Entitlement Performed to screen designer
-$bo_pg_sfmTransactionAndDesigner.addField($fieldName1, $containerName);
-_click(_f("main").s_button("Save[3]"));
-_wait(6000,_isVisible(_f("main").label("Page saved")));
-
-//create Data validation rule
+$sfm_act_SFM.cloneTDM016($sfmNameToBeCloned, $sfmName, $isCustom, $sfmTemplate, $sfmTemplateSaveAsName, $fieldName, $containerName);
 $sfm_pg_dvr.newRule($targetObject, $rulename, $ruleDescription, $fieldArray, $conditionArray, $operandArray, $valueArray, $advExpr, $messageType);
+_click($sfm_pg_sfmDesigner.btn_quickSaveSFM);
+_click($sfm_pg_sfmDesigner.btn_saveSFM); 
+_wait(30000,_isVisible($sfm_pg_sfmDesigner.lnk_home));
 
-_click(_f("main").s_button("Quick Save"));
-_click(_f("main").s_button("Save & Close")); 
-_wait(30000,_isVisible(_link("Home")));*/
-
-//Navigate to SFM wizard page
 $sfm_act_wizards.addToWizard($wizardObject, $wizardName, $wizardType, $sfmName);
+_wait(30000,_isVisible($sfm_pg_sfmDesigner.lnk_home)); 
+_click($sfm_pg_sfmDesigner.lnk_home);
+
+//Create WO dynamically and search that work order in global search and validate in delivery.
+$login = $sfm_act_createWorkOrder.login($un,$pwd);
+_log($login);
+var $woName;
+$woName = $sfm_act_createWorkOrder.create_WO();
+
+
+//Open the WO and click on the above created SFM 
+
+_click($sfm_pg_sfmDesigner.lnk_workOrder);
+_wait(3000);
+$sfm_act_common.globalSearch($woName);
+_click(_link($woName));
+_selectDomain($domainName);
+_click(_button($sfmName));
+
+//Validate DVR
+_selectDomain();
+_wait(20000);
+_setValue(_textbox("svmx-text-1037-inputEl",_rightOf(_label("Component:"))), "");
+_click($sfm_pg_sfmDesigner.btn_deliveryQuickSave);
+if(_exists(_span("SFM Transaction Manager"))){
+	if(_exists(_label($ruleDescription))){
+	_log("Pass ::: ");
+	}else{
+		_log("Fail");
+	}
+}
+
+
+//_click(_button("Is Entitlement Performed:",_rightOf(_label("Is Entitlement Performed:"))));
+

@@ -15,6 +15,7 @@ var $sfm_pg_customActions = new function sfm_pg_customActions() {
 	
 	//Type of CA 
 	this.sel_actionType=_select(0);
+	
 	//URL action type page objects
 	
 	this.btn_quickSaveCA=_button("Quick Save");
@@ -34,7 +35,7 @@ var $sfm_pg_customActions = new function sfm_pg_customActions() {
 	this.btn_addParameter=_button("Add");
 	this.btn_deleteParameter=_button("Delete");
 	
-	//Objects to add parameters after clicking add button
+	//Objects to add parameters after clicking add button in URL based
 	
 	this.chk_selectParameter=_checkbox("1");
 	this.txt_parameterName=_textbox(6);
@@ -42,6 +43,20 @@ var $sfm_pg_customActions = new function sfm_pg_customActions() {
 	this.txt_parameterValue=_textbox(7);
 	this.sel_parameterFieldName=_select(4);
 	
+	//Web Service type page objects
+	
+	this.txt_nameSpacePrefix = _textbox("Namespace Prefix");
+	this.txt_className = _textbox("Class Name");
+	this.txt_methodName = _textbox("Method Name");
+	this.txt_processingMessage = _textbox("Processing Message");
+	
+	//Objects to add parameters after clicking add button in URL based
+	
+	this.chk_selectParameterWS =_checkbox("1");
+	this.txt_parameterNameWS = _textbox(7);
+	this.sel_parameterValueTypeWS =_select(2);
+	this.txt_parameterValueWS =_textbox(8);
+	this.sel_parameterFieldNameWS =_select(3);
 	
 	
 

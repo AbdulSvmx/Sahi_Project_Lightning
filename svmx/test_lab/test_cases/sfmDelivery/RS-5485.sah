@@ -10,7 +10,7 @@ var $paramValueType="Value";
 var $paramValue="Servicemax";
 var $wizardName = "SFM Delivery Auto";
 var $wizardType="Others";
-var $woName="WO-00000472";
+var $woName;
 var $domainName = "svmxc.cs21.visual.force.com";
 
 
@@ -22,6 +22,13 @@ $sfm_act_navigation.navigateToSfmCustomActions();
 $sfm_act_customActions.urlCustomAction($customActionObject,$actionType, $actionId, $urlToLaunch, $paramName, $paramValueType, $paramValue);
 $sfm_act_wizards.addToWizard($customActionObject, $wizardName, $wizardType, $actionId);
 
+//Create WO dynamically and search that work order in global search and validate in delivery.
+$login = $sfm_act_createWorkOrder.login($un,$pwd);
+//_log($login);
+//var $woName;
+$woName = $sfm_act_createWorkOrder.create_WO();
+
+_wait(3000);
 $sfm_act_common.globalSearch($woName);
 _click(_link($woName));
 _selectDomain($domainName);
