@@ -1,5 +1,3 @@
-
-
 /**
  * Home page object repository 
  */
@@ -13,52 +11,34 @@ var $bo_pg_getPrice = new function bo_pg_getPrice(){
 	this.btn_update = _span("Update");
 	this.btn_getPrice = _span("Get Price");
 	this.btn_cencel = _span("/sfmd-cancel-icon/",_leftOf(_div("Get Price")));
-	this.btn_quicksave = _span("/sfmd-quicksave-icon/",_leftOf(_div("Get Price")));
+	this.btn_quickSave = _span("/sfmd-quicksave-icon/",_leftOf(_div("Get Price")));
 	this.btn_save = _span("/sfmd-save-icon/",_leftOf(_div("Get Price")));
 	
-	// Edit the Parts Line using Part Name
-	this.editPartsLine = function($partsName){
+	// Edit the Parts/Labor Line using Part/Product Name
+	this.editWOLines = function($partsName){
 		_click(_image("/svmx-sfmd-edit-icon/",_leftOf(_div($partsName))));
 	};
 	
-	
 	// Add Parts Line
 	this.btn_partsLine = _span("Parts");
+	this.txt_lineQty = _textbox(0,_rightOf(_label("/Line Qty/")));
 	
 	// Add Labor Line
 	this.btn_laborLine = _span("Labor");
+	this.txt_activityType = _textbox(0,_rightOf(_label("/Activity Type/")));
+	this.btn_startDateAndTime = _span("/sfmd-current-datetime-icon/",_rightOf(_label("/Start Date and Time/")));
+	this.btn_endDateAndTime = _span("/sfmd-current-datetime-icon/",_rightOf(_label("/End Date and Time/")));
+	
+	this.btn_HrsPickListNextToStartDateAndTime = _textbox("/svmx-trigger-noedit/",_rightOf(_label("/Start Date and Time/")));
+	this.btn_HrsPickListNextToEndDateAndTime = _textbox("/svmx-trigger-noedit/",_rightOf(_label("/End Date and Time/")));
 	
 	// Add Expenses Line
 	this.btn_expensesLine = _span("Expenses");
+	this.btn_addSingleExpensesLine = _span("svmx-btn-icon svmx-sfmd-add-line-icon[2]");
 	
 	// Add Travel Line
 	this.btn_travelLine = _span("Travel");
-	
-	
-	
-	this.btn_editWorkOrder = _button(" Edit ");
-	this.btn_newWorkOrder = _button(" New ");
-
-	this.txt_slaTerms = _textbox(0,_rightOf(_label("SLA Terms")));
-	this.sel_priority = _select(0,_rightOf(_label("/\\*Priority|^Priority/")));
-	this.sel_orderStatus = _select(0,_rightOf(_label("/\\*Order Status|^Order Status/")));
-	this.sel_orderType = _select(0,_rightOf(_label("/\\*Order Type|^Order Type/")));
-	this.btn_saveWorkOrder = _submit(" Save ");
-	this.txt_case = _textbox(0,_rightOf(_label("/\\*Case|^Case/")));
-	this.txt_account = _textbox(0,_rightOf(_label("/\\*Account|^Account/")));
-	this.txt_contact = _textbox(0,_rightOf(_label("/\\*Contact|^Contact/")));
-	this.btn_SFWCheckEntitlement = _button("Check Entitlement");
-	this.btn_SFWCheckEntitlementPS = _button("Check Entitlement PS");
-	this.btn_sfmTDM016 = _button("Manage Work Order Lines - Usage");
-	this.txt_component = _textbox("/\\*Component|^Component/");
-	this.txt_workOrderDetails = _heading2("Work Order Detail");
-	this.txt_getWONumber = _heading2("/WO-/");
-	
-	// Click Work Details Line on Work Order Page
-	this.clickOnWorkDetails = function($WDNumber){
-		
-		_click(_link($WDNumber,(0,_under(_tableHeader("Line Number")))));
-	};
+	this.btn_addSingleTravelLine = _span("svmx-btn-icon svmx-sfmd-add-line-icon[3]");
 	
 };
 

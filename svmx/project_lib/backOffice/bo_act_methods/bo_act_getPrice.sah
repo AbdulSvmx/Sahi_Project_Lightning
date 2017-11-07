@@ -6,104 +6,63 @@ var $bo_act_getPrice = new function bo_act_getPrice() {
 	/**
 	 * Create an Work Order
 	 */
-	this.addPartsLineToTDM016 = function($searchValue){
+	this.addPartsLineToSFMDelivery = function($searchValue, $lineQty){
 		_click($bo_pg_getPrice.btn_partsLine);
 		_click($bo_pg_getPrice.btn_addSingleLine);
 		_click($bo_pg_getPrice.btn_editFirstRow);
-		$bo_act_common.searchfunction($searchValue);
+		$bo_act_common.searchfunction($searchValue);	//Search Values like Parts/Product Name
+		_setValue($bo_pg_getPrice.txt_lineQty, $lineQty);
 		_click($bo_pg_getPrice.btn_update);
-		_click($bo_pg_getPrice.btn_getPrice);
-		
-		
-		
-		/*$bo_act_navigation.navigateToWorkOrdersTab();
-		_click($bo_pg_workOrders.btn_newWorkOrder);
-		_setValue($bo_pg_workOrders.txt_case, $caseNumber);
-		_setValue($bo_pg_workOrders.txt_account, $accountName);
-		_setValue($bo_pg_workOrders.txt_contact, $contactName);
-		_setSelected($bo_pg_workOrders.sel_orderStatus, $orderStatus);
-		_setSelected($bo_pg_workOrders.sel_priority, $priority);
-		_setSelected($bo_pg_workOrders.sel_orderType, $orderType);
-		_setValue($bo_pg_workOrders.txt_component, $IBName);
-		_click($bo_pg_workOrders.btn_saveWorkOrder);
-		_assertNotVisible(_div("/Error: Invalid Data/"));
-		_wait(15000, _isVisible($bo_pg_workOrders.txt_workOrderDetails));
-		var $workOrderNumber =  _getText($bo_pg_workOrders.txt_getWONumber);
-		_logOutput($workOrderNumber+ " Work Order is created");
-		return $workOrderNumber;*/
-	};
-	
-		this.editPartsLineToTDM016 = function($partsName){
-			_click($bo_pg_getPrice.btn_getPrice);
-			$bo_pg_getPrice.editPartsLine($partsName);
-			
-			};
-	
-	
-	this.editWorkOrderOnWOPage = function(){
-			_click($bo_pg_workOrders.btn_editWorkOrder);
-	};
-	this.updateTextBoxFields = function($object,$objectValue){
-		_setValue($object,$objectValue);
-		//return $callBack.returnResult([_isVisible($accountName), "Account not created",$accountName] );
-	};
-	
-	this.updateDropDownFields = function($object,$objectValue){
-		_setSelected($object,$objectValue);
-		//return $callBack.returnResult([_isVisible($accountName), "Account not created",$accountName] );
-	};
-	
-	this.clickLinktoUpdateTextfields = function($object){
-		_click($object);
-		
-	};
-	
-	this.saveWorkOrder = function(){
-		_click($bo_pg_workOrders.btn_saveWorkOrder);
-		_assertNotVisible(_div("/Error: Invalid Data/"));
-		_wait(15000, _isVisible($bo_pg_workOrders.txt_workOrderDetails));
-		//return $callBack.returnResult([_isVisible($accountName), "Account not created",$accountName] );
-	};
-	
-	this.checkEntitlement = function($workOrderNumber){
-		$bo_act_navigation.navigateToWorkOrdersTab();
-		_click(_link($workOrderNumber));
-		_selectDomain("/svmx/");
-		_click($bo_pg_workOrders.btn_SFWCheckEntitlement);
-		_selectDomain();
-	};
-	
-	this.checkEntitlementPS = function($workOrderNumber){
-		$bo_act_navigation.navigateToWorkOrdersTab();
-		_click(_link($workOrderNumber));
-		_selectDomain("/svmx/");
-		_click($bo_pg_workOrders.btn_SFWCheckEntitlementPS);
-		_selectDomain();
-	};
-	
-	this.invokeTDM016SFM = function($workOrderNumber){
-		$bo_act_navigation.navigateToWorkOrdersTab();
-		_click(_link($workOrderNumber));
-		_selectDomain("/svmx/");
-		_click($bo_pg_workOrders.btn_sfmTDM016);
-		_selectDomain();
-	};
 
-	this.pauseSLAClock = function(){
-		_selectDomain("/svmx/");
-		_click($bo_pg_workOrders.btn_SLAPause);
-		_setSelected($bo_pg_workOrders.sel_ReasonSLA,"Customer Not Available");
-		_click($bo_pg_workOrders.btn_popUpPause);
-		_selectDomain();
 	};
 	
-	this.resumeSLAClock = function($extendingSLACommitmentYesorNo){
-		_selectDomain("/svmx/");
-		_click($bo_pg_workOrders.btn_SLAResume);
-		_click(_button($extendingSLACommitmentYesorNo));
-		_selectDomain();
-	//	_setSelected($bo_pg_workOrders.sel_ReasonSLA,"Customer Not Available");
-	//	_click($bo_pg_workOrders.btn_popUpPause);
+	this.addLaborLineToSFMDelivery = function($searchValue, $activityType,$startHrs, $endHrs){
+		_click($bo_pg_getPrice.btn_laborLine);
+		_setStrictVisibilityCheck(true);
+		_click($bo_pg_getPrice.btn_addSingleLine);
+		_click($bo_pg_getPrice.btn_editFirstRow);
+		_setStrictVisibilityCheck();
+		$bo_act_common.searchfunction($searchValue);	//Search Values like Parts/Product Name
+		_setValue($bo_pg_getPrice.txt_activityType, $activityType);
+		_click($bo_pg_getPrice.btn_startDateAndTime);
+		_click($bo_pg_getPrice.btn_endDateAndTime);
+		// Configure the hours for Start Date Time
+		_click($bo_pg_getPrice.btn_HrsPickListNextToStartDateAndTime);
+		_click(_listItem($startHrs));
+		// Configure the hours for End Date Time
+		_click($bo_pg_getPrice.btn_HrsPickListNextToEndDateAndTime);
+		_click(_listItem($endHrs));
+		//_setValue($bo_pg_getPrice.txt_lineQty, $lineQty);
+		_click($bo_pg_getPrice.btn_update);
+
+	};
+	
+	this.editPartsLineToSFMDelivery = function($partsName){
+	 _click($bo_pg_getPrice.btn_partsLine);
+	 $bo_pg_getPrice.editWOLines($partsName);
+			
+	};
+	this.editLaborLineToSFMDelivery = function($partsName){
+		 _click($bo_pg_getPrice.btn_laborLine);
+		 $bo_pg_getPrice.editWOLines($partsName);
+				
+		};
+	
+	this.closeEditedWOLineToSFMDelivery = function(){
+		_click($bo_pg_getPrice.btn_update);
+				
+	};
+			
+	this.calculateGetPrice = function(){
+		_click($bo_pg_getPrice.btn_getPrice);
+	};
+	
+	this.saveSFMDelivery = function(){
+		_click($bo_pg_getPrice.btn_save);
+	};
+	
+	this.quickSaveSFMDelivery = function(){
+		_click($bo_pg_getPrice.btn_quickSave);
 	};
 	
 };

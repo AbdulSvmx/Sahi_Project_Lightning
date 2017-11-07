@@ -53,7 +53,11 @@ var $bo_act_SFW = new function bo_act_SFW() {
 		_check($bo_pg_sfmWizard.chk_wizardName);
 		_click($bo_pg_sfmWizard.btn_clickEdit);
 		_click($bo_pg_sfmWizard.tab_manageWizardSteps);
+<<<<<<< HEAD
 	};		
+=======
+	};	
+>>>>>>> 021dade396c809c227d843dbf8dc7fbe0512659f
 		this.renameWizardTitle=function($wizardTitleName,$wizardIDName){
 			_click($bo_pg_sfmWizard.btn_clickEdit);
 			_setValue($bo_pg_sfmWizard.txt_wizardTitle, $wizardTitleName);
@@ -85,11 +89,16 @@ var $bo_act_SFW = new function bo_act_SFW() {
 		_click($bo_pg_sfmWizard.btn_saveWizardStep);
 		_wait(60000);		
 };
+<<<<<<< HEAD
 		//@deprecated
+=======
+		
+>>>>>>> 021dade396c809c227d843dbf8dc7fbe0512659f
 		this.deleteWizard=function(){
 			_click($bo_pg_sfmWizard.chk_selectCustomWizard);
 			_click($bo_pg_sfmWizard.btn_deleteWizard);
 			_wait(6000);
+<<<<<<< HEAD
 		};
 		
 this.deleteWizards = function($objName,$wizardId){
@@ -103,4 +112,11 @@ this.quickSaveSFWizard = function(){
 	
 };
 
+=======
+			
+			
+			
+		};
+	
+>>>>>>> 021dade396c809c227d843dbf8dc7fbe0512659f
 };
