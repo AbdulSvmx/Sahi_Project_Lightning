@@ -33,6 +33,7 @@ $bo_act_workOrders.pauseSLAClock();
 _wait(60000);
 $bo_act_workOrders.resumeSLAClock("Yes");
 _wait(5000);
+
 _selectDomain("/svmx/");
 _assertNotContainsText("Resolution 00:00:00:00",$bo_pg_Cases.txt_SLAClock,"SLA Clock Issue");
 _selectDomain();
