@@ -6,8 +6,8 @@ var $an_pg_techutilization = new function an_pg_techutilization() {
 	this.btn_serviceperformancemetrics = _div("Service Performance Metrics");
 	this.btn_serviceperformancemetricsetup = _div("Service Performance Metrics Setup");
 	this.btn_technician_utilization = _span("Utilization");
-	this.btn_add = _span("Add[2]");
-	this.btn_active = _button("checkboxfield-1280-inputEl");
+	this.btn_add = _span("Add[1]");
+	this.btn_active = _button("svmx-form-field svmx-form-checkbox");
 	this.txt_description = _textarea("appliesTo");
 	this.btn_settings = _span("Settings");
 	this.list_productivetime_choose = _textbox("Select one or more type(s) for Non Productive Time");
@@ -19,7 +19,7 @@ var $an_pg_techutilization = new function an_pg_techutilization() {
 	this.list_qualification_metric_criteria = _textbox("tabPanel_6_editprocesspanel_expression_QualificationCriteriafieldset_id-inputEl");
 	this.btn_save = _span("Save");
 	this.btn_OK = _span("OK");
-	this.btn_schedule_notifications = _span("Schedule & Notifications[2]");
+	this.btn_schedule_notifications = _span("Schedule & Notifications[1]");
 	this.list_timezone = _textbox("timezone");
 	this.btn_ist_timezone = _listItem("(GMT+05:30) India Standard Time (Asia/Kolkata)");
 	this.list_period = _textbox("period");
@@ -27,6 +27,7 @@ var $an_pg_techutilization = new function an_pg_techutilization() {
 	this.list_choose_time = _textbox("timeAt");
 	this.btn_time_chosen = _listItem("9:00 AM");
 	this.txt_emailOnsuccess = _textbox("emailOnSuccess");
+	this.btn_run_now = _link("Run Now");
 	
 	
 	// To create Time sheet manager.

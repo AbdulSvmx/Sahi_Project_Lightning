@@ -14,6 +14,7 @@ var $Component = $data[1]["Component"];
 var $ScheduledDate = $data[1]["ScheduledDate"];
 var $PreferredStartDate = $data[1]["PreferredStartDate"];
 var $PreferredEndDate = $data[1]["PreferredEndDate"];
+var $GuaranteedUptime = $data[1]["GuaranteedUptime"];
 $bo_act_login.login($url, $un, $pwd);
 
 
@@ -100,7 +101,7 @@ _log($ana_1633_guranteed_uptime);
 
 _assertEqual($ana_1633_IB_ID, $ana_1633_ib1_id);
 _assertEqual($ana_1633_SCON,$ana_1633_scon1_id);
-_assertEqual(43200.0,$ana_1633_guranteed_uptime);
+_assertEqual($GuaranteedUptime,Math.round($ana_1633_guranteed_uptime));
 
 
 $an_cu_1633.end();
