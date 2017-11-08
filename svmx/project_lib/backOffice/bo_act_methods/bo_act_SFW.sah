@@ -91,6 +91,16 @@ var $bo_act_SFW = new function bo_act_SFW() {
 			_wait(6000);
 			
 		};
+		
+		this.deleteSFMWizard=function($objName, $SFMWizardsName){
+			$bo_act_navigation.navigateToSfmWizard();
+			_setSelected($bo_pg_sfmWizard.sel_objPrevMaintPlan,$objName	);
+			_wait(3000);
+			_assertVisible($bo_pg_sfmWizard.lbl_verifyCustWizardSection);
+			$bo_pg_sfmWizard.selectsfmWizard($SFMWizardsName);
+			_click($bo_pg_sfmWizard.btn_deleteWizard);
+			_wait(3000);
+		};
 
 		this.quickSaveSFWizard = function(){
 		_click(_button("Quick Save"));

@@ -56,5 +56,5 @@ var $bo_act_installedProduct = new function bo_act_installedProduct() {
 		_setValue($bo_pg_installedProducts.txt_SFMcreateSupportCaseStatus,$status);
 		_click($bo_pg_installedProducts.btn_sfmSave);
 		return _getText($bo_pg_installedProducts.txt_caseNumber);
-	}
+	};
 };
