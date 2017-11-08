@@ -6,7 +6,7 @@
 
 var $url = "https://test.salesforce.com";
 var $un = "vansys@pqtpart1.com";
-var $pwd = "servicemax2";
+var $pwd = "servicemax3";
 var $sfmNameToBeCloned = "Manage Work Order Lines - Usage";
 var $sfmName = "RS_5353_TDM016";
 var $isCustom = false;
