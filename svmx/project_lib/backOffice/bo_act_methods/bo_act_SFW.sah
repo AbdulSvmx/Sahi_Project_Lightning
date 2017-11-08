@@ -60,7 +60,6 @@ var $bo_act_SFW = new function bo_act_SFW() {
         	_setValue($bo_pg_sfmWizard.txt_wizardID, $wizardIDName);
 			_click($bo_pg_sfmWizard.btn_sfmWizardSaveClose);
 				   
-			
 		};
 	this.createWizardGeneralInfo=function($objName,$wizardname,$wizardID){
 	_setSelected($bo_pg_sfmWizard.sel_objPrevMaintPlan,$objName	);
@@ -91,8 +90,11 @@ var $bo_act_SFW = new function bo_act_SFW() {
 			_click($bo_pg_sfmWizard.btn_deleteWizard);
 			_wait(6000);
 			
-			
-			
+		};
+
+		this.quickSaveSFWizard = function(){
+		_click(_button("Quick Save"));
+
 		};
 	
 };

@@ -71,7 +71,6 @@ this.searchfunction = function($searchValue){
 _getRecentWindow();
 _setStrictVisibilityCheck(true);
 _click(_span("/svmx-button/",_near(_div("svmx-column-inner",_in(_div("svmx-panel svmx-fit-item svmx-window-item svmx-panel-default"))))));
-_setStrictVisibilityCheck(false);
 _getRecentWindow();
 //_click(_textbox("/svmx-picklist/"));
 //_click(_listItem("Contains"));
@@ -81,6 +80,8 @@ _setValue(_textbox("/sfm-text/",_near(_span("/svmx-sfmd-search-icon/"))),$search
 _click(_span("/svmx-sfmd-search-icon/"));
 _click(_div($searchValue));
 _click(_span("Select"));
+_setStrictVisibilityCheck(false);
+
 };
 
 
