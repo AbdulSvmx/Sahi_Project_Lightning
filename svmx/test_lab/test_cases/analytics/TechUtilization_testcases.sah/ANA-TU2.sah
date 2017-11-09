@@ -44,7 +44,7 @@ var $ana_dailysummery_working_minutes = $ana_TU1_dailysummary_fetch[0].SVMXC__SM
 
 _log($ana_dailysummary_ID);
 
-// Create a TimeEntry 1 - - Non Production
+// Create a TimeEntry 1 - - Non Productive time
 
 var $ana_TU1_time_entry1 = "SVMXC__Timesheet_Entry__c  time_entry = new SVMXC__Timesheet_Entry__c (SVMXC__Timesheet__c  = '"+ $ana_Timesheet_ID +"', SVMXC__Timesheet_Day__c  = '"+ $ana_dailysummary_ID +"' , SVMXC__SM_Type__c  = 'Training', SVMXC__Activity__c = 'Event' , SVMXC__Duration__c  = 1 , SVMXC__Start_Time__c = System.now() , SVMXC__End_Time__c = System.now()+0.166);insert time_entry;";
 var $ana_TU1_time_query1 = "Select Id, Name, SVMXC__Duration__c  from SVMXC__Timesheet_Entry__c where SVMXC__Timesheet__c = '"+$ana_Timesheet_ID+"'  AND SVMXC__Timesheet_Day__c  = '"+ $ana_dailysummary_ID +"'";
@@ -60,9 +60,10 @@ var $ana_TU1_timeentry_duration1 = $ana_TU1_time_fetch1[0].SVMXC__Duration__c;
 _log($ana_TU1_time_ID1);
 
 
-// Create a TimeEntry 2 
+// Create a TimeEntry 2 Productive time
 
-var $ana_TU1_time_entry2 = "SVMXC__Timesheet_Entry__c  time_entry = new SVMXC__Timesheet_Entry__c (SVMXC__Timesheet__c  = '"+ $ana_Timesheet_ID +"', SVMXC__Timesheet_Day__c  = '"+ $ana_dailysummary_ID +"' , SVMXC__SM_Type__c  = 'Training', SVMXC__Activity__c = 'Event' , SVMXC__Duration__c  = 1 , SVMXC__Start_Time__c = System.now() , SVMXC__End_Time__c = System.now()+0.166);insert time_entry;";
+
+var $ana_TU1_time_entry2 = "SVMXC__Timesheet_Entry__c  time_entry = new SVMXC__Timesheet_Entry__c (SVMXC__Timesheet__c  = '"+ $ana_Timesheet_ID +"', SVMXC__Timesheet_Day__c  = '"+ $ana_dailysummary_ID +"' , SVMXC__Activity__c = 'Event' , SVMXC__Duration__c  = 1 , SVMXC__Start_Time__c = System.now() , SVMXC__End_Time__c = System.now()+0.166);insert time_entry;";
 var $ana_TU1_time_query2 = "Select Id, Name, SVMXC__Duration__c  from SVMXC__Timesheet_Entry__c where SVMXC__Timesheet__c = '"+$ana_Timesheet_ID+"'  AND SVMXC__Timesheet_Day__c  = '"+ $ana_dailysummary_ID +"'";
 var $ana_TU1_time_result2 = $op_act_sForceApiCall.sForceQuery($un, $pwd, $ana_TU1_time_entry2 , "create");
 _wait(50000);
@@ -109,6 +110,6 @@ _log($ana_TU1_productive_mins);
 
 _assertEqual(($ana_TU1_timeentry_duration2 * 60), Math.round($ana_TU1_productive_mins));
 _assertEqual($ana_dailysummery_working_minutes,Math.round($ana_TU1_timesheet_working_mins));
-_assertEqual(($ana_TU1_timeentry_duration2 * 60), Math.round($ana_TU1_timesheet_non_prod_mins));
+_assertEqual(($ana_TU1_timeentry_duration1 * 60), Math.round($ana_TU1_timesheet_non_prod_mins));
 
 $an_TU1_ts.end();
