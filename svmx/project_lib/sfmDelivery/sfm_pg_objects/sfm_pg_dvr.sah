@@ -29,13 +29,7 @@ var $sfm_pg_dvr = new function sfm_pg_dvr() {
 	this.btn_targetOk = _f("main").s_button("OK[1]");
 	this.btn_targetCancel = _f("main").s_button("Cancel");
 	this.txt_targetChilden= _f("main").s_label("Select target children to which the selected rule is to be added");
-	this.btn_partsTab = _span("Parts");
-	this.btn_laborTab = _span("Labor");
-	this.btn_expenseTab = _span("Expenses");
-	this.btn_travelTab = _span("Travel");
-	this.btn_addRowParts = _span("svmx-btn-icon svmx-sfmd-add-line-icon");
-	this.btn_addMultiParts = _span("svmx-btn-icon svmx-sfmd-multi-add-line-icon");
-	this.btn_addChildRow = _div("sfm-button-1193");
+
 	/**
 	 * Function to create a data validation rule
 	 *

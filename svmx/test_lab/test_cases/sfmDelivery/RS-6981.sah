@@ -1,25 +1,33 @@
 var $url = "https://test.salesforce.com";
 var $un = "vansys@pqtpart1.com";
-var  $pwd = "servicemax2";
+var  $pwd = "servicemax3";
 var $sfmNameToBeCloned = "Manage Work Order Lines - Usage";
 var $sfmName = "RS_6981_Formulas";
 var $isCustom = false;
 var $sfmTemplate = "SVMXSTD: Manage WO Usage Lines";
 var $sfmTemplateSaveAsName = $sfmName;
-var $containerNameArray = ["Order Status","Order Status"];
-var $fieldNameArray = ["Customer Down","Problem Description"];
+var $containerNameArray = ["Order Status","Order Status","Order Status","Order Status"];
+var $fieldNameArray = ["Customer Down","Problem Description","Is Entitlement Performed","Actual Onsite Response"];
 
 
 
-var $formula ="$F.IF($F.EQUAL($D.Work_Order.SVMXC__Customer_Down__c,'true'),'Paid',$D.Work_Order.SVMXC__Billing_Type__c)";
-var $formulaTargetObject= "Work Order";
-var $formulaTargetField= "Billing Type";
-var $formulaName= "BillingTypeFormula";
-var $formulaDescription= "If customerDown is true then Billing type=Paid else as is";
+var $formulaArray =["$F.IF($F.EQUAL($D.Work_Order.SVMXC__Customer_Down__c,'true'),'Paid',$D.Work_Order.SVMXC__Billing_Type__c)",
+                    "$F.IF($F.EQUAL($D.Work_Order.SVMXC__Billing_Type__c,'Courtesy'),'true',$D.Work_Order.SVMXC__Is_Entitlement_Performed__c)",
+                    "$F.NOW()",
+                    "$F.DATE($F.YEAR($D.Work_Order.CreatedDate)+1, $F.MONTH($D.Work_Order.CreatedDate), 1)"
+                   ];
+var $formulaTargetObjectArray = ["Work Order","Work Order","Work Order","Work Order"];
+var $formulaTargetFieldArray = ["Billing Type","Is Entitlement Performed","Actual Onsite Response","Scheduled Date"];
+var $formulaNameArray = ["BillingTypeFormula","IsEntitlementPerformedFormula","ActualOnsiteResponseEqNow","ScheduledDateUpdate"];
+var $formulaDescriptionArray = ["If customerDown is true then Billing type=Paid else as is",
+                                "If Billing type is Courtesy then check the Is Entitlement performed else as is",
+                                "Actual Onsite Response Equals Now",
+                                "Scheduled Date should be set to 1st day of the created month in next year"
+                                ];
 
 
 _setSpeed(100);
 $bo_act_login.login($url, $un, $pwd);
 
 $sfm_act_SFM.cloneTDM016($sfmNameToBeCloned,$sfmName,$isCustom, $sfmTemplate, $sfmTemplateSaveAsName,$fieldNameArray, $containerNameArray);
-$sfm_pg_formula.createFormula($formulaTargetObject, $formulaTargetField, $formulaName, $formulaDescription, $formula);
+$sfm_pg_formula.createFormula($formulaTargetObjectArray, $formulaTargetFieldArray, $formulaNameArray, $formulaDescriptionArray, $formulaArray);
