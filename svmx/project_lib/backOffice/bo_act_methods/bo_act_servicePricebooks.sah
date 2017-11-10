@@ -32,7 +32,7 @@ var $bo_act_servicePricebooks = new function bo_act_servicePricebooks() {
 	     _setValue($bo_pg_servicePricebooks.txt_regularRate, $regularRate);
 	     _click($bo_pg_servicePricebooks.btn_saveServicePricebookEntry);
 	     _assertNotVisible(_div("/Error: Invalid Data/"));
-	     _click($bo_pg_servicePricebooks.navigateBackToCustomServicePriceBook($PriceBookName));
+	     ($bo_pg_servicePricebooks.navigateBackToCustomServicePriceBook($PriceBookName));
 	 	 _logOutput($PriceBookName+ " Service Pricebooks is created");
 	     return $PriceBookName;
 	     
