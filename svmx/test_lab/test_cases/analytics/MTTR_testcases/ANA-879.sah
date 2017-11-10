@@ -23,19 +23,12 @@ var $ana_879_WO1 ;
 var $var3;
 var $varRV1;
 _wait(1000);
-$ana_873_fetch.forEach(function($ana_873_var1) {
 	
-<<<<<<< HEAD:svmx/test_lab/test_cases/analytics/MTTR_testcases/ANA-879.sah
 	$ana_879_WO1 = $ana_879_fetch[0].Id;
 
 
 _log($ana_879_WO1);
-=======
-	$ana_873_WO1 = $ana_873_var1.Id;
 
-});
-_log($ana_873_WO1);
->>>>>>> upstream/master:svmx/test_lab/test_cases/analytics/MTTR_testcases/ANA-873.sah
 
 var $StartDate = $data[1]['WDStartDate'];
 var $EndDate =  $data[1]['WDEndDate'];
@@ -56,21 +49,14 @@ var $enddate ;
 var $deadtime;
 var $var2;
 _wait(1000);
-$ana_873_fetch_wd1.forEach(function($var2) {
 	
-<<<<<<< HEAD:svmx/test_lab/test_cases/analytics/MTTR_testcases/ANA-879.sah
 	$ana_879_wd1 = $ana_879_fetch_wd1[0].Id ;
 	$startdate = $ana_879_fetch_wd1[0].SVMXC__Start_Date_and_Time__c;
 	$enddate = $ana_879_fetch_wd1[0].SVMXC__End_Date_and_Time__c;
 	$deadtime = $ana_879_fetch_wd1[0].SVMXC__Dead_Time__c;
-=======
-	$ana_873_wd1 = $var2.Id ;
-	$startdate = $var2.SVMXC__Start_Date_and_Time__c;
-	$enddate = $var2.SVMXC__End_Date_and_Time__c;
-	$deadtime = $var2.SVMXC__Dead_Time__c;
->>>>>>> upstream/master:svmx/test_lab/test_cases/analytics/MTTR_testcases/ANA-873.sah
+
 		
-});
+
 
 // To create another Work Detail for Actual Quantity
 
@@ -85,19 +71,13 @@ var $deadtime2;
 var $lineqty;
 var $var2;
 _wait(1000);
-$ana_873_fetch_wd2.forEach(function($var2) {
 	
-<<<<<<< HEAD:svmx/test_lab/test_cases/analytics/MTTR_testcases/ANA-879.sah
 	$ana_879_wd2 = $ana_879_fetch_wd2[0].Id ;
 	$lineqty = $ana_879_fetch_wd2[0].SVMXC__Actual_Quantity2__c;
 	$deadtime2 = $ana_879_fetch_wd2[0].SVMXC__Dead_Time__c;
-=======
-	$ana_873_wd2 = $var2.Id ;
-	$lineqty = $var2.SVMXC__Actual_Quantity2__c;
-	$deadtime2 = $var2.SVMXC__Dead_Time__c;
->>>>>>> upstream/master:svmx/test_lab/test_cases/analytics/MTTR_testcases/ANA-873.sah
+
 		
-});
+
 _log($lineqty);
 
 // To calculate the time difference considering business hours is 24 hours
@@ -113,21 +93,7 @@ _log($datevalue);
 $TopLevelWO.an_toplevelwo();
 $an_act_MTTR.mttr_runEngine("meghana.rao@servicemax.com");
 
-<<<<<<< HEAD:svmx/test_lab/test_cases/analytics/MTTR_testcases/ANA-879.sah
-var $ana_879_wo_id; //= null ;
-var $an_879_primarywo1;
-var $ana_879_WO_Account1;
-var $ana_879_labortime;
-var $ana_879_deadtime;
-var $custom_checkbox;
-var $DeadTime2 = Math.round($deadtime2) + Math.round($deadtime);
 
-for(var $i = 0;$ana_879_wo_id == null;$i++){
-var $ana_879_query_RV1 = "Select SVMXC__Work_Order__c ,custom_mttr_checkbox__c , SVMXC__Primary_Work_Order__c, SVMXC__Account__c, SVMXC__Configuration_Name__c , SVMXC__Labor_Time__c , SVMXC__Dead_Time__c from SVMXC__SPM_Mean_Time_To_Repair__c where SVMXC__Work_Order__c ='"+ $ana_879_WO1 +"'";
-var $ana_879_resultRV1 = $op_act_sForceApiCall.sForceQuery($un, $pwd, $ana_879_query_RV1,"query");
-_wait(5000);
-$ana_879_resultRV1.forEach(function($varRV1) {
-=======
 var $ana_873_wo_id = null ;
 var $an_873_primarywo1;
 var $ana_873_WO_Account1;
@@ -141,7 +107,6 @@ var $ana_873_query_RV1 = "Select SVMXC__Work_Order__c ,custom_mttr_checkbox__c ,
 var $ana_873_resultRV1 = $op_act_sForceApiCall.sForceQuery($un, $pwd, $ana_873_query_RV1,"query");
 _wait(1000);
 $ana_873_resultRV1.forEach(function($varRV1) {
->>>>>>> upstream/master:svmx/test_lab/test_cases/analytics/MTTR_testcases/ANA-873.sah
 	
 	$ana_879_wo_id = $varRV1.SVMXC__Work_Order__c;
 	$ana_879_WO_Account1 = $varRV1.SVMXC__Account__c;
