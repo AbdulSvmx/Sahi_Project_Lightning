@@ -129,8 +129,8 @@ $bo_act_serviceMaintenanceContracts.addCoveredLocationToServiceContract($service
 $bo_act_serviceMaintenanceContracts.addEntitledContactsToServiceContract($serviceConractName, $contactName);
 
 var $expecctedIBUnder_CoveredProduct =  _getText(_link(0,_under(_tableHeader("Installed Product"))));
-var $expecctedLocationUnder_CoveredLocations =  _getText(_link(0,_under(_tableHeader("Location"))));;
-var $expecctedContactUnder_EntitledContacts =  _getText(_link(0,_under(_tableHeader("Contact"))));;
+var $expecctedLocationUnder_CoveredLocations =  _getText(_link(0,_under(_tableHeader("Location"))));
+var $expecctedContactUnder_EntitledContacts =  _getText(_link(0,_under(_tableHeader("Contact"))));
 
 
 //validation
