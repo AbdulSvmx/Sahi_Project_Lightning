@@ -27,17 +27,20 @@ var $op_act_sForceApiCall = new function op_act_sForceApiCall() {
 
 			switch($queryType){
 			case 'query':
+<<<<<<< HEAD
 
 				 records = _call(sforce.connection.query($queryComplex));
 		         
 		
                  var arr = records.getArray('records');
 				
+=======
+				var records = sforce.connection.query($queryComplex);
+				var arr = records.getArray('records');
+>>>>>>> upstream/master
 				return arr;
 			case 'create':
-				 
-				var records = _call(sforce.apex.executeAnonymous($queryComplex));
-				return records;
+				return records = sforce.apex.executeAnonymous($queryComplex);
 				
 			default:
 				$nArr = [null];
