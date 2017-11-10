@@ -56,26 +56,25 @@ var $bo_act_locations = new function bo_act_locations() {
 				_assertNotVisible(_div("/Error: Invalid Data/"));
 				_wait(15000, _isVisible($locName));
 				};
-			
+				
+			this.addInstalledProductToLocation = function($productName,$accountName,$contactName){
+			var $serialNum = $bo_act_common.generateRandomName("Ser");
+			var $IBName = $bo_act_common.generateRandomName("IB_");
+					 //$bo_act_navigation.navigateToLocations();
+					 //_click($locationName);
+			_click($bo_pg_locations.btn_NewInstalledProduct);
+			_setValue($bo_pg_installedProducts.txt_productName,$productName);
+			_setValue($bo_pg_installedProducts.txt_serialNumber, $serialNum);
+			_setValue($bo_pg_installedProducts.txt_accountName, $accountName);
+			_setValue($bo_pg_installedProducts.txt_contactName, $contactName);
+			_setValue($bo_pg_installedProducts.txt_installedProductName, $IBName);
+			_setValue($bo_pg_installedProducts.txt_installedDate);
+			_click($bo_pg_installedProducts.btn_save);
+			_assertNotVisible(_div("/Error: Invalid Data/"));
+			_logOutput($IBName+ " IB is created");
+			_wait(15000, _isVisible($IBName));
+			return $IBName;
+			};
 };
-		this.addInstalledProductToLocation = function($productName,$accountName,$contactName){
-				var $serialNum = $bo_act_common.generateRandomName("Ser");
-				var $IBName = $bo_act_common.generateRandomName("IB_");
-				 //$bo_act_navigation.navigateToLocations();
-				 //_click($locationName);
-				 _click($bo_pg_locations.btn_NewInstalledProduct);
-				_setValue($bo_pg_installedProducts.txt_productName,$productName);
-				_setValue($bo_pg_installedProducts.txt_serialNumber, $serialNum);
-				_setValue($bo_pg_installedProducts.txt_accountName, $accountName);
-				_setValue($bo_pg_installedProducts.txt_contactName, $contactName);
-				_setValue($bo_pg_installedProducts.txt_installedProductName, $IBName);
-				_setValue($bo_pg_installedProducts.txt_installedDate);
-				_click($bo_pg_installedProducts.btn_save);
-				_assertNotVisible(_div("/Error: Invalid Data/"));
-				_logOutput($IBName+ " IB is created");
-				_wait(15000, _isVisible($IBName));
-				return $IBName;
-			
-			
-		};
+		
 
