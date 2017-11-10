@@ -42,10 +42,8 @@ var $an_act_tech_util = new function an_act_tech_util() {
 		_click($an_pg_techutilization.btn_save);
 		_click($an_pg_techutilization.btn_OK);
 		_click($an_pg_techutilization.btn_run_now);
-		
-		
-		
-		
+		_wait(1000);
+		_click($an_pg_techutilization.btn_OK);
 		
 		
 		
