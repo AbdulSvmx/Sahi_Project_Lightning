@@ -140,12 +140,9 @@ if(_isVisible(_image("Checked",_rightOf(_cell("/Is Entitlement Performed/"))))){
 *Invoke TDMo16 SFM for Get Price Calculation when IB is Covered under Scon
 */
 
-<<<<<<< HEAD
-$bo_act_getPrice.navigateToSFMDeliveryPageFor_TDM016($WONumber);
-=======
 
-//Clean up function
->>>>>>> 17c20d6699ccce64954ec9fc702d8a2558d7103e
+$bo_act_getPrice.navigateToSFMDeliveryPageFor_TDM016($WONumber);
+
 
 //Add Parts Line to Above invoke TDM016 SFM
 var $searchValue = $productName;

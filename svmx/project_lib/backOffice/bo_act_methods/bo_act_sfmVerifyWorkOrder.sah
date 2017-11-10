@@ -43,7 +43,6 @@ this.verifyWizardOnWOObj=function($sfmName){
 			_selectDomain();
 				}
 		
-<<<<<<< HEAD
 		}
 		this.clkOnWizard=function($wizardButtonName){
 			_selectDomain("/svmx/");
@@ -57,9 +56,7 @@ this.verifyWizardOnWOObj=function($sfmName){
 			}
 		_selectDomain();
 		}
-=======
-		};
->>>>>>> fd7ac582c04ad3a0e65a726729c8554292fcec6c
+		
 		
 		this.wizardButtonNotVisible=function($wizardname){
 			
@@ -85,7 +82,6 @@ this.verifyWizardOnWOObj=function($sfmName){
 					 var $result = false; 
 				}		
 				 _selectDomain();
-<<<<<<< HEAD
 				
 			}
 				
@@ -94,13 +90,11 @@ this.verifyWizardOnWOObj=function($sfmName){
 				_click(_button($SFMName));
 				_selectDomain();
 					
-			}
+			
 	
 	
-=======
 			
 	return $callBack.returnResult($result, "","searchWizard");
->>>>>>> fd7ac582c04ad3a0e65a726729c8554292fcec6c
 	
 	};
 };
