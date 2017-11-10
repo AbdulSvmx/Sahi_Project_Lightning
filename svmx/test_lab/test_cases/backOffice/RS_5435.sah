@@ -22,7 +22,6 @@ var $objName1="Work Order";
 /*var $sfmName = "SFM_Interact";
 =======
 var $sfmName = "SFM_Interact";
->>>>>>> fd7ac582c04ad3a0e65a726729c8554292fcec6c
 var $sourceName = "Work Order";
 var $targetName = "Work Order";
 var $QualCriteriaName = "Work Detail (Work Order)";
