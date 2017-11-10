@@ -72,8 +72,8 @@ _getRecentWindow();
 _setStrictVisibilityCheck(true);
 _click(_span("/svmx-button/",_near(_div("svmx-column-inner",_in(_div("svmx-panel svmx-fit-item svmx-window-item svmx-panel-default"))))));
 _getRecentWindow();
-_click(_textbox("/svmx-picklist/"));
-_click(_listItem("Contains"));
+//_click(_textbox("/svmx-picklist/"));
+//_click(_listItem("Contains"));
 _click(_textbox("/sfm-text/",_near(_span("/svmx-sfmd-search-icon/"))));
 _click(_span("/svmx-sfmd-search-icon/"));
 _setValue(_textbox("/sfm-text/",_near(_span("/svmx-sfmd-search-icon/"))),$searchValue);
@@ -134,12 +134,31 @@ this.cleanUpfunction = function($value)
 		_click(_button("Delete"));
 		_logOutput($value+ " is deleted");
 	};
+	
+	this.getStartDateWithoutZeros = function($pastYear, $seperator){
+		var $now = new Date();
+	    var $monthday = $now.getDate();
+	    var $month = $now.getMonth() + 1;
+	    var $year = $now.getFullYear();
+		$year = $year-$pastYear;
+	    
+		var $StartDate = $month+ $seperator +$monthday  + $seperator+$year; 
+	    return $StartDate;
+	};
+	
+	 this.getEndDateWithoutZeros = function($futureYear, $seperator){
+			var $now = new Date();
+		    var $monthday = $now.getDate();
+		    var $month = $now.getMonth() + 1;
+		    var $year = $now.getFullYear();
+			$year = $year+$futureYear;
+		    
+		     var $EndDate = $month+ $seperator +$monthday  + $seperator+$year; 
+		    return $EndDate;
+		};
 
 };
 
 	
-	
-
-
 
 

@@ -6,7 +6,10 @@ $RS_5307.start();
 _setSpeed(100);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> parent of cab5104... Merge branch 'master' of https://github.com/noorsalmasvmx/Sahi_Project
 /**
  * Login to the Sandbox Org
  */
@@ -101,6 +104,7 @@ $bo_act_SFW.quickSaveSFWizard();
 var $WONumber = $bo_act_installedProduct.createWOFromIB($IBName);
 
 //Edit The Above created WO for few fields
+<<<<<<< HEAD
 
 =======
 //PreCondition 
@@ -119,6 +123,8 @@ var $WONumber = $bo_act_installedProduct.createWOFromIB($installedProduct);
 
 // Editing the Above created WO
 >>>>>>> parent of cbe26e5... commit
+=======
+>>>>>>> parent of cab5104... Merge branch 'master' of https://github.com/noorsalmasvmx/Sahi_Project
 $bo_act_workOrders.editWorkOrder($WONumber);
 var $accountObject = _textbox("/Account/");
 var $contactObject = _textbox("/Contact/");
@@ -130,9 +136,13 @@ $bo_act_workOrders.checkEntitlement($WONumber);
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 $bo_act_getPrice.navigateToSFMDeliveryPageFor_TDM016($WONumber);
 
+=======
+$bo_act_getPrice.navigateToSFMDeliveryPageFor_TDM016($WONumber);
+>>>>>>> parent of cab5104... Merge branch 'master' of https://github.com/noorsalmasvmx/Sahi_Project
 
 //Add Parts Line to Above invoke TDM016 SFM
 var $searchValue = $productName;

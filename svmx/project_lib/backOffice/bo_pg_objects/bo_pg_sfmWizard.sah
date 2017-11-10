@@ -34,8 +34,17 @@ this.selectsfmWizard = function($SFMWizardsName){
 	_click(_checkbox(0,_leftOf(_span($SFMWizardsName,_heading2("Custom SFM Wizards")))));
 		
 		};
+<<<<<<< HEAD
 
 
+=======
+	
+	
+	
+	
+	
+	
+>>>>>>> parent of cab5104... Merge branch 'master' of https://github.com/noorsalmasvmx/Sahi_Project
 };
 
 

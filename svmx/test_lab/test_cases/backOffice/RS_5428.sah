@@ -1,7 +1,3 @@
-//_includeOnce("../../../references/references.js");
-
-//author - Mamata Rout
-
 var $RS_5428 = _testcase("RS_5428", "Test the functionality SFM App permision for a scenario");
 $RS_5428.start();
 _setSpeed(100);
@@ -17,6 +13,10 @@ var $objName1="Work Order";
 
 
 _setSpeed(3000);
+
+
+
+
 
 if($bo_act_navigation.navigateToSfmWizard($objName1,$wizardname,$wizardID,$fieldActnType,$actnName1,$executionMode1,$stndSFMName)){
 	$bo_act_SFW.createWizardGeneralInfo($objName1,$wizardname,$wizardID);

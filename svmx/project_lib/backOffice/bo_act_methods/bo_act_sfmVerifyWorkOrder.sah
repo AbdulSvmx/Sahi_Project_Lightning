@@ -11,8 +11,8 @@ var $bo_act_sfmVerifyWorkOrder= new function bo_act_sfmVerifyWorkOrder() {
 	
 	//always keep one work order, instead need to use array index with ordername workOrderName[1]; 
 	this.clickSpecificWorkOrder = function($workOrderName){
-	_click(_link($workOrderName));
-	};
+	_click(_link(workOrderName));
+	}
 this.verifyWizardOnPMPObj=function($sfmName){
 	_click($bo_pg_sfmVerifyWorkOrder.img_allTab);
 	_wait(2000);
@@ -21,7 +21,7 @@ this.verifyWizardOnPMPObj=function($sfmName){
 	_click($bo_pg_sfmVerifyWorkOrder.lnk_firstLinkPMP);
 	
 		
-};
+}
 
 this.verifyWizardOnWOObj=function($sfmName){
 	_click($bo_pg_sfmVerifyWorkOrder.img_allTab);
@@ -43,6 +43,7 @@ this.verifyWizardOnWOObj=function($sfmName){
 			_selectDomain();
 				}
 		
+<<<<<<< HEAD
 		}
 		this.clkOnWizard=function($wizardButtonName){
 			_selectDomain("/svmx/");
@@ -57,6 +58,9 @@ this.verifyWizardOnWOObj=function($sfmName){
 		_selectDomain();
 		}
 		
+=======
+		}
+>>>>>>> parent of cab5104... Merge branch 'master' of https://github.com/noorsalmasvmx/Sahi_Project
 		
 		this.wizardButtonNotVisible=function($wizardname){
 			
@@ -77,11 +81,12 @@ this.verifyWizardOnWOObj=function($sfmName){
 				_selectDomain("/svmx/");
 			var $textDisplay=_getText(_table("tbcontainer"));
 				if(!$wizardTitleName.indexOf($textDisplay) != -1){
-						var $result =  true ;
+						$$result =  true ;
 				}else{
-					 var $result = false; 
+					$result = false; 
 				}		
 				 _selectDomain();
+<<<<<<< HEAD
 				
 			}
 				
@@ -93,6 +98,8 @@ this.verifyWizardOnWOObj=function($sfmName){
 			
 	
 	
+=======
+>>>>>>> parent of cab5104... Merge branch 'master' of https://github.com/noorsalmasvmx/Sahi_Project
 			
 	return $callBack.returnResult($result, "","searchWizard");
 	
