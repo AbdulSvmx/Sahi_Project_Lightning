@@ -13,11 +13,8 @@ var $bo_act_stockTransfer = new function bo_act_stockTransfer() {
 		_setValue(_textbox(0,_rightOf(_label("*Product"))),$product);
 		_setValue(_textbox(0,_rightOf(_label("*Qty Transferred"))),$qtyTransferred);
 	};
-<<<<<<< HEAD
 //Function for Post Inventory
-=======
 
->>>>>>> parent of cab5104... Merge branch 'master' of https://github.com/noorsalmasvmx/Sahi_Project
 	this.postToInventorySerialised = function($stockTransfer,$serNum) {
 		 var $serialNumbers = new Array();
 		 var $i;

@@ -31,24 +31,15 @@ $bo_act_workOrders.saveWorkOrder();
 
 //Validations
 _selectDomain("/svmx/");
-<<<<<<< HEAD
-_wait(3000,_isVisible($bo_pg_workOrders.txt_slaClock));
-_assertNotContainsText("Resolution 00:00:00:00",_table("/CH_dtimer1/"),"SLA Clock Issue");
-_selectDomain();
-_assertNotEqual(_getText($bo_pg_workOrders.txt_ResolutionInternalBy)," ","Issue in Restoration Internal By field");
-_assertNotEqual(_getText($bo_pg_workOrders.txt_ResolutionInternalBy)," ","Issue in Restoration Customer By field");
-=======
+
 _wait(3000,_isVisible(_table("/timer/")));
 _assertNotContainsText("Resolution 00:00:00:00",_table("/CH_dtimer1/"),"SLA Clock Issue");
 _selectDomain();
 _assertNotEqual(_getText(_div(0,_rightOf(_span("/Resolution Internal By/"))))," ","Issue in Restoration Internal By field");
 _assertNotEqual(_getText(_div(0,_rightOf(_cell("/Resolution Customer By/"))))," ","Issue in Restoration Customer By field");
->>>>>>> parent of cab5104... Merge branch 'master' of https://github.com/noorsalmasvmx/Sahi_Project
-
 
 $bo_act_workOrders.pauseSLAClock();
 _wait(60000);
-<<<<<<< HEAD
 $bo_act_workOrders.resumeSLAClock("No");
 
 _selectDomain("/svmx/");
@@ -58,8 +49,6 @@ _selectDomain();
 _call(location.reload());
 
 _assertExists($bo_pg_workOrders.link_SLAClockStop);
-=======
->>>>>>> parent of cab5104... Merge branch 'master' of https://github.com/noorsalmasvmx/Sahi_Project
 $bo_act_workOrders.resumeSLAClock("No");
 
 _selectDomain("/svmx/");

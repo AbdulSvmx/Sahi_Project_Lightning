@@ -33,7 +33,6 @@ var $bo_act_locations = new function bo_act_locations() {
 			
 		};
 		
-<<<<<<< HEAD
 		this.editLocation = function($locName){
 			$bo_act_navigation.navigateToLocations();
 			_click(_link($locName));
@@ -59,7 +58,6 @@ var $bo_act_locations = new function bo_act_locations() {
 				};
 			
 };
-=======
 		this.addInstalledProductToLocation = function($productName,$accountName,$contactName){
 				var $serialNum = $bo_act_common.generateRandomName("Ser");
 				var $IBName = $bo_act_common.generateRandomName("IB_");
@@ -80,5 +78,4 @@ var $bo_act_locations = new function bo_act_locations() {
 			
 			
 		};
-};
->>>>>>> parent of cab5104... Merge branch 'master' of https://github.com/noorsalmasvmx/Sahi_Project
+

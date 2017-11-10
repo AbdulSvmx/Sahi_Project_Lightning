@@ -53,13 +53,9 @@ var $bo_act_SFW = new function bo_act_SFW() {
 		_check($bo_pg_sfmWizard.chk_wizardName);
 		_click($bo_pg_sfmWizard.btn_clickEdit);
 		_click($bo_pg_sfmWizard.tab_manageWizardSteps);
-<<<<<<< HEAD
 
 	};		
 
-=======
-	};	
->>>>>>> parent of cab5104... Merge branch 'master' of https://github.com/noorsalmasvmx/Sahi_Project
 		this.renameWizardTitle=function($wizardTitleName,$wizardIDName){
 			_click($bo_pg_sfmWizard.btn_clickEdit);
 			_setValue($bo_pg_sfmWizard.txt_wizardTitle, $wizardTitleName);
@@ -67,10 +63,7 @@ var $bo_act_SFW = new function bo_act_SFW() {
 			_click($bo_pg_sfmWizard.btn_sfmWizardSaveClose);
 				   
 		};
-<<<<<<< HEAD
 
-=======
->>>>>>> parent of cab5104... Merge branch 'master' of https://github.com/noorsalmasvmx/Sahi_Project
 	this.createWizardGeneralInfo=function($objName,$wizardname,$wizardID){
 	_setSelected($bo_pg_sfmWizard.sel_objPrevMaintPlan,$objName	);
 	_wait(3000);
@@ -94,7 +87,6 @@ var $bo_act_SFW = new function bo_act_SFW() {
 		_click($bo_pg_sfmWizard.btn_saveWizardStep);
 		_wait(60000);		
 };
-<<<<<<< HEAD
 		//@deprecated
 		this.deleteWizard=function(){
 			_click($bo_pg_sfmWizard.chk_selectCustomWizard);
@@ -111,15 +103,13 @@ this.deleteWizards = function($objName,$wizardId){
 this.quickSaveSFWizard = function(){
 	_click($bo_pg_sfmWizard.btn_quickSave);
 }
-=======
->>>>>>> parent of cab5104... Merge branch 'master' of https://github.com/noorsalmasvmx/Sahi_Project
-		
+	
 		this.deleteWizard=function(){
 			_click($bo_pg_sfmWizard.chk_selectCustomWizard);
 			_click($bo_pg_sfmWizard.btn_deleteWizard);
 			_wait(6000);
 			
-	
+		};
 		
 		this.deleteSFMWizard=function($objName, $SFMWizardsName){
 			$bo_act_navigation.navigateToSfmWizard();
@@ -175,15 +165,8 @@ this.createOthersWizardStepwithHandOver=function($fieldActnType,$actnName,$handO
 this.saveAndClose = function(){
 	_click($bo_pg_sfmWizard.btn_sfmWizardSaveClose);
 	
-<<<<<<< HEAD
 };
 
 };
 
 	
-
-		
-
-=======
-};
->>>>>>> parent of cab5104... Merge branch 'master' of https://github.com/noorsalmasvmx/Sahi_Project
