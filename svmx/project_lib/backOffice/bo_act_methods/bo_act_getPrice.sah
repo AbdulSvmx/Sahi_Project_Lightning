@@ -27,7 +27,7 @@ var $bo_act_getPrice = new function bo_act_getPrice() {
 		_setStrictVisibilityCheck();
 
 	};
-	
+	// Add Labor Line Using Start And End Date To SFM Delivery
 	this.addLaborLineToSFMDelivery = function($searchValue, $activityType, $startHrs, $endHrs){
 		_click($bo_pg_getPrice.btn_laborLine);
 		_setStrictVisibilityCheck(true);
@@ -44,6 +44,20 @@ var $bo_act_getPrice = new function bo_act_getPrice() {
 		_click($bo_pg_getPrice.btn_HrsPickListNextToEndDateAndTime);
 		_click(_listItem($endHrs));
 		//_setValue($bo_pg_getPrice.txt_lineQty, $lineQty);
+		$bo_act_common.searchfunction($searchValue);	//Search Values like Parts/Product Name
+		_click($bo_pg_getPrice.btn_update);
+		_setStrictVisibilityCheck();
+
+	};
+	
+	this.addLaborLineUsingLintQtyToSFMDelivery = function($searchValue, $activityType, $lineQty){
+		_click($bo_pg_getPrice.btn_laborLine);
+		_setStrictVisibilityCheck(true);
+		_click($bo_pg_getPrice.btn_addSingleLine);
+		_click($bo_pg_getPrice.btn_editFirstRow);
+		_wait(5000);
+		_setValue($bo_pg_getPrice.txt_activityType, $activityType);
+		_setValue($bo_pg_getPrice.txt_lineQty, $lineQty);
 		$bo_act_common.searchfunction($searchValue);	//Search Values like Parts/Product Name
 		_click($bo_pg_getPrice.btn_update);
 		_setStrictVisibilityCheck();
