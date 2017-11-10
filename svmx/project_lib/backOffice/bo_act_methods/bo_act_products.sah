@@ -27,7 +27,10 @@ var $bo_act_products = new function bo_act_products() {
 	};
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> parent of cbe26e5... commit
 =======
 >>>>>>> parent of cbe26e5... commit
 	
@@ -48,9 +51,12 @@ var $bo_act_products = new function bo_act_products() {
 	};
 	
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 		
 >>>>>>> parent of cab5104... Merge branch 'master' of https://github.com/noorsalmasvmx/Sahi_Project
+=======
+>>>>>>> parent of cbe26e5... commit
 =======
 >>>>>>> parent of cbe26e5... commit
 	this.deleteProduct = function($proName){
