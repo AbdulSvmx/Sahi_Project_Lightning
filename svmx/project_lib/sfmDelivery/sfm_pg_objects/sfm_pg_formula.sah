@@ -36,13 +36,13 @@ var $sfm_pg_formula = new function sfm_pg_formula() {
 			_setValue($sfm_pg_formula.txt_formulaId,$formulaName[$i]);
 			_setValue($sfm_pg_formula.txt_formulaDescription,$formulaDescription[$i]);
 			_setValue($sfm_pg_formula.txt_formula,$formula[$i]);
+			_click($sfm_pg_formula.btn_saveFormula);
 			if (_exists($sfm_pg_formula.formulaAlert)) {
 				_focusWindow();
 				_takeScreenShot();
 				_logExceptionAsFailure("Formula not saved, refer screenshot for error");	
 			}
-			else{
-				 _click($sfm_pg_formula.btn_saveFormula);
+			else{		 
 				 _wait(2000, _isVisible($sfm_pg_formula.formulaSaved));
 				 _click($sfm_pg_formula.btn_addToProcess);	
 			}

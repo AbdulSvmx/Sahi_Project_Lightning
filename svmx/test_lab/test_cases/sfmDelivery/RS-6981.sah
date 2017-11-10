@@ -1,6 +1,4 @@
-var $url = "https://test.salesforce.com";
-var $un = "vansys@pqtpart1.com";
-var  $pwd = "servicemax3";
+
 var $sfmNameToBeCloned = "Manage Work Order Lines - Usage";
 var $sfmName = "RS_6981_Formulas";
 var $isCustom = false;
@@ -27,7 +25,7 @@ var $formulaDescriptionArray = ["If customerDown is true then Billing type=Paid 
 
 
 _setSpeed(100);
-$bo_act_login.login($url, $un, $pwd);
+$bo_act_login.login($g_url, $sfmUsn, $sfmPwd);
 
 $sfm_act_SFM.cloneTDM016($sfmNameToBeCloned,$sfmName,$isCustom, $sfmTemplate, $sfmTemplateSaveAsName,$fieldNameArray, $containerNameArray);
 $sfm_pg_formula.createFormula($formulaTargetObjectArray, $formulaTargetFieldArray, $formulaNameArray, $formulaDescriptionArray, $formulaArray);

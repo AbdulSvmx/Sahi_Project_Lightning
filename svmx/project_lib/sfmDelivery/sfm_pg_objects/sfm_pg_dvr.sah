@@ -80,7 +80,14 @@ var $sfm_pg_dvr = new function sfm_pg_dvr() {
 			
 			if($operandArray[$i]=='Value'){
 				_setSelected(_f("main").s_dropdownlist("operandTypeCombo"+"["+$i+"]").rightOf(_f("main").s_label("Expressions")),$operandArray[$i]);
-				_setValue(_f("main").s_textinput("operandValue").rightOf(_f("main").s_label("Expressions")),$valueArray[$i]);
+				if($fieldArray[$i]=='Expense Type'){
+					//_setValue(_f("main").s_textinput("textInput"+"["+$i+"]").rightOf(_f("main").s_label("Expressions")),$valueArray[$i]);
+					_setSelected(_f("main").s_combobox("picklist").rightOf(_f("main").s_label("Expressions")), $valueArray[$i]);
+				}
+				else{
+					_setValue(_f("main").s_textinput("operandValue"+"["+$i+"]").rightOf(_f("main").s_label("Expressions")),$valueArray[$i]);
+				
+				}
 			}
 			else if($operandArray[$i]=='Function'){
 				_setSelected(_f("main").s_dropdownlist("operandTypeCombo"+"["+$i+"]").rightOf(_f("main").s_label("Expressions")),$operandArray[$i]);

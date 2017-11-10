@@ -1,21 +1,21 @@
 var $url = "https://test.salesforce.com";
-var $un = "vansys@pqtpart1.com";
-var $pwd = "servicemax3";
+var $un = "sysadmin01@sfdautomation.com";
+var $pwd = "maxplore1";
 var $sfmNameToBeCloned = "Manage Work Order Lines - Usage";
 var $sfmName = "RS_5345_TDM016";
 var $isCustom = false;
 var $sfmTemplate = "SVMXSTD: Manage WO Usage Lines";
 var $sfmTemplateSaveAsName = $sfmName;
-var $containerName = ["Billable Line Price","Billable Line Price","Billable Line Price","Billable Line Price"];
-var $fieldName=["Received Street","Expense Type","Received City","Estimated Price Per Unit"];
+var $containerName = ["Billable Line Price","Billable Line Price","Billable Line Price"];
+var $fieldName=["Expense Type","Received City","Estimated Price Per Unit"];
 var $targetObject ="Work Detail (Work Order)";
 var $rulename ="5345Rule";
 var $ruleDescription ="Line Qty <= 5, Estimated Price Per Unit <2000, Expense Type starts with Food=Breakfast, Received City doesnot contain Mangalore";
 
-var $fieldArray = ["Line Qty","Estimated Price Per Unit","Expense Type","Received City"];
-var $conditionArray = ["Less or Equal To ","Less Than", "Starts With", "Does Not Contain"];
+var $fieldArray = ["Line Qty","Estimated Price Per Unit","Received City","Expense Type"];
+var $conditionArray = ["Less or Equal To ","Less Than", "Does Not Contain", "Starts With"];
 var $operandArray =["Value", "Value", "Value", "Value"];
-var $valueArray =["5", "2000", "Food - Breakfast", "Mangalore"];
+var $valueArray =["5", "2000", "Mangalore", "Food - Breakfast"];
 var $advExpr= "(1 AND (2 AND 3) AND 4)";
 var $messageType = "Confirmation";
 
