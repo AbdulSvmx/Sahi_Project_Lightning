@@ -1,10 +1,11 @@
-//Tests are to be written here [Bhupendra Singh Chouhan]
-//==============
+
+//author - Nagendra Prasad
 
 var $RS_5307 = _testcase("$RS_5307","Get Price on WO:IB covered under SCON and part pricing provided");
 $RS_5307.start();
 _setSpeed(100);
 
+<<<<<<< HEAD
 
 /**
  * Login to the Sandbox Org
@@ -101,45 +102,34 @@ var $WONumber = $bo_act_installedProduct.createWOFromIB($IBName);
 
 //Edit The Above created WO for few fields
 
+=======
+//PreCondition 
+$bo_act_login.login($g_url, $bac_unDev, $bac_pwdDev);
+var $accName = $bo_act_accounts.createAccount();
+var $contactName = $bo_act_contacts.createContact($accName);
+var $proName = $bo_act_products.createProduct("pro12", "--None--");
+var $installedProduct = $bo_act_installedProduct.createInstalledProduct($proName,$accName,$contactName);
+var $slaTermName = $bo_act_slaTerms.createSlaTerms("Default");
+var $sconName = $bo_act_serviceMaintenanceContracts.createServiceMaintenanceContract($accName, $slaTermName, 2, 0);
+$bo_act_serviceMaintenanceContracts.activateServiceContract($sconName);
+//Adding covered product to Scon
+$bo_act_serviceMaintenanceContracts.AddCoveredProducToServiceContract($sconName, $installedProduct, $slaTermName, 2, 1);
+$bo_act_serviceMaintenanceContracts.addPartsPricingToServiceContract($sconName, $proName, 300);
+var $WONumber = $bo_act_installedProduct.createWOFromIB($installedProduct);
+
+// Editing the Above created WO
+>>>>>>> parent of cbe26e5... commit
 $bo_act_workOrders.editWorkOrder($WONumber);
+var $accountObject = _textbox("/Account/");
+var $contactObject = _textbox("/Contact/");
+$bo_act_workOrders.updateTextBoxFields($accountObject, $accName);
+$bo_act_workOrders.updateTextBoxFields($contactObject, $contactName);
 
-// Edit WO for Case 
-var $object = _textbox("/\\*Case|^Case/");
-var $objectValue = $caseNumber;
-$bo_act_workOrders.updateTextBoxFields($object, $objectValue);
+$bo_act_workOrders.checkEntitlement($WONumber);
 
-// Edit WO for Priority
-var $object = _select(0,_rightOf(_label("/\\*Priority|^Priority/")));
-var $objectValue = "Medium";
-$bo_act_workOrders.updateDropDownFields($object, $objectValue);
 
-// Edit WO for Billing Type
-var $object = _select(0,_rightOf(_label("Billing Type")));
-var $objectValue = "Paid";
-$bo_act_workOrders.updateDropDownFields($object, $objectValue);
-$bo_act_workOrders.saveWorkOrder();     		// Save the Edited WO
 
-/**
-*Perform Interactive Entitlement on WO using Service Contract
-*/
-$bo_act_interactiveEntitlement_WO.performInteractiveEntitlementWO_UsingScon($WONumber, $serviceConractName);
-var $actual_EntitlementType = _getText(_div(0,_rightOf(_cell("/Entitlement Type/"))));
-var $ServiceContract_actual = _getText(_link(0,_rightOf(_cell("Service Contract"))));
-_assertEqual($actual_EntitlementType,"INTERACTIVE","Actual and expected Entitlement Type are not same");
-_assertEqual($ServiceContract_actual,$serviceConractName,"Actual and expected Service Conract are not same");
-
-//validation of Entitlement Parameters On Case
-
-if(_isVisible(_image("Checked",_rightOf(_cell("/Is Entitlement Performed/"))))){
-	_logOutput("Entitlement is Performed Successfully = PASS");
-	}else{
-	_fail("Entitlement is Not Performed = Failed");
-	}
-
-/**
-*Invoke TDMo16 SFM for Get Price Calculation when IB is Covered under Scon
-*/
-
+<<<<<<< HEAD
 
 $bo_act_getPrice.navigateToSFMDeliveryPageFor_TDM016($WONumber);
 
@@ -176,14 +166,16 @@ $bo_act_getPrice.saveSFMDelivery();
 */
 
 var $datacreated = [$WONumber,$caseNumber,$IBName,$productName,$contactName,$accountName,$slaName,$serviceConractName];
+=======
+// _assertValue ( Billableline price,Line price per unit)
+//Clean up function
+
+var $datacreated = [$warrantyName,$IBName,$locationName,$productName,$contactName,$accountName,];
+>>>>>>> parent of cbe26e5... commit
 for (var i = 0; i < $datacreated.length; i++) {
-$bo_act_common.cleanUpfunction($datacreated[i]);
+	$bo_act_common.cleanUpfunction($datacreated[i]);
 }
+$bo_act_login.logOut();
 
-// Delete SFM Wizard 
-$bo_act_SFW.deleteSFMWizard("Work Order", $wizardIDName);
-
-$bo_act_login.logOut(); 
-
-$RS_5307.end();
+$RS_7288.end();
 

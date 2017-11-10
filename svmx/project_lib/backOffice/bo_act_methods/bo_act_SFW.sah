@@ -73,7 +73,7 @@ var $bo_act_SFW = new function bo_act_SFW() {
 	_wait(3000);
 	_setValue($bo_pg_sfmWizard.txt_wizardName,$wizardname);
 	_setValue($bo_pg_sfmWizard.txt_wizardID,$wizardID);
-}
+};
 	this.createWizardStep=function($fieldActnType,$actnName,$executionMode){
 		_click($bo_pg_sfmWizard.tab_wizardStep);
 		_click($bo_pg_sfmWizard.btn_newWizardStep);

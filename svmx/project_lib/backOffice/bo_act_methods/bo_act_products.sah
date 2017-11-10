@@ -43,7 +43,6 @@ var $bo_act_products = new function bo_act_products() {
 		return $productName;
 	};
 	
-
 	this.deleteProduct = function($proName){
 		$bo_act_navigation.navigateToProductsPage();
 		_click(_link($proName));
