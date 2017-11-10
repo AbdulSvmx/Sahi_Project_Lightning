@@ -126,7 +126,6 @@ this.endDateCalculationForIB = function ($startDateExpectedOn_IB, $durationOfCov
 this.cleanUpfunction = function($value)
 	{
 		_setValue(_textbox("phSearchInput"),$value);
-		_wait(2000);
 		_click(_button("Search"));
 		_wait(4000);
 		_click(_link("Search All"));

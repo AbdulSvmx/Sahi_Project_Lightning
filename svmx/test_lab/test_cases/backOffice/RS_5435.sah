@@ -19,6 +19,11 @@ var $objName1="Work Order";
 	var $actnName2=$sfmName;
 	var $actnName1=$stndSFMName;
 
+<<<<<<< HEAD
+/*var $sfmName = "SFM_Interact";
+=======
+=======
+>>>>>>> parent of cab5104... Merge branch 'master' of https://github.com/noorsalmasvmx/Sahi_Project
 var $sfmName = "SFM_Interact";
 var $sourceName = "Work Order";
 var $targetName = "Work Order";
@@ -26,7 +31,12 @@ var $QualCriteriaName = "Work Detail (Work Order)";
 var $sfmPageLayoutName = "SFMIBTEST";
 var $wizardSelectObjectName = "Work Order";
 var $wizardTitleName = "SFMIBTEST1";
+<<<<<<< HEAD
+var $wizardIDName = "SFMIBTEST1"; */
+
+=======
 var $wizardIDName = "SFMIBTEST1"; 
+>>>>>>> parent of cab5104... Merge branch 'master' of https://github.com/noorsalmasvmx/Sahi_Project
 
 var $wizardStep1Type = "SFM";
 var $wizardStep1Name = $sfmName;

@@ -128,6 +128,28 @@ var $bo_pg_sfmTransactionAndDesigner = new function bo_pg_sfmTransactionAndDesig
     /*this.deleteField = function($fieldName) {
 	_click(_f("main").s_button("closeBtn").near(_f("main").s_richtext($fieldName)));
     };
+<<<<<<< HEAD
+	
+		this.tab_advancedOptions=_f("main").tab("Advanced Options")
+		this.lbl_sorting=_f("main").tab("Sorting")
+		this.lbl_partObj=_f("main").s_label("Parts[4]")
+		this.lbl_partField=_f("main").s_label("Part")
+		this.img_add=_f("main").s_button(">[1]")
+
+		this.lbl_laborObj=_f("main").s_label("Labor[4]")
+		this.lbl_activityTypeField=_f("main").s_label("Activity Type")
+
+
+		this.lbl_expenseObj=_f("main").s_label("Expense[3]")
+		this.lbl_lineQtyField=_f("main").s_label("Line Qty")
+
+		this.lbl_travelObj=_f("main").s_label("Travel[1]")
+		this.lbl_statDateField=_f("main").s_label("Start Date and Time")
+		this.lbl_endDateField=_f("main").s_label("End Date and Time[1]")
+	
+	
+=======
+>>>>>>> parent of cab5104... Merge branch 'master' of https://github.com/noorsalmasvmx/Sahi_Project
 	*/
 
 

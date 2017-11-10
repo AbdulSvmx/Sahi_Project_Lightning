@@ -43,7 +43,24 @@ this.verifyWizardOnWOObj=function($sfmName){
 			_selectDomain();
 				}
 		
+<<<<<<< HEAD
 		}
+		this.clkOnWizard=function($wizardButtonName){
+			_selectDomain("/svmx/");
+			if(_assertVisible(_button($wizardButtonName))){
+				_click(_button($wizardButtonName));
+				//_wait(3000);
+			_log("User successfully launch the wizard in delivery");}
+			
+			else{
+				_log("Launching of wizard in delivery failed");
+			}
+		_selectDomain();
+		}
+		
+=======
+		}
+>>>>>>> parent of cab5104... Merge branch 'master' of https://github.com/noorsalmasvmx/Sahi_Project
 		
 		this.wizardButtonNotVisible=function($wizardname){
 			
@@ -69,6 +86,20 @@ this.verifyWizardOnWOObj=function($sfmName){
 					$result = false; 
 				}		
 				 _selectDomain();
+<<<<<<< HEAD
+				
+			}
+				
+				this.clickOnWizardButton=function($SFMName){
+				_selectDomain("/svmx/");
+				_click(_button($SFMName));
+				_selectDomain();
+					
+			
+	
+	
+=======
+>>>>>>> parent of cab5104... Merge branch 'master' of https://github.com/noorsalmasvmx/Sahi_Project
 			
 	return $callBack.returnResult($result, "","searchWizard");
 	

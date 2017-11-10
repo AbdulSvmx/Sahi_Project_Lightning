@@ -26,18 +26,25 @@ var $bo_pg_sfmWizard= new function bo_pg_sfmWizard() {
 	this.chk_selectCustomWizard=_checkbox(13);
 	this.btn_deleteWizard=_button("Delete");
 	this.lbl_deleteSuccessfulMsg=_div("Success:Successfully deleted the selected wizard.");
+	this.chk_handOver = _checkbox(0,_rightOf(_label("Handover")));
+	this.btn_quickSave = _button("Quick Save");
 	
 this.selectsfmWizard = function($SFMWizardsName){
 		
 	_click(_checkbox(0,_leftOf(_span($SFMWizardsName,_heading2("Custom SFM Wizards")))));
 		
 		};
+<<<<<<< HEAD
+
+
+=======
 	
 	
 	
 	
 	
 	
+>>>>>>> parent of cab5104... Merge branch 'master' of https://github.com/noorsalmasvmx/Sahi_Project
 };
 
 
