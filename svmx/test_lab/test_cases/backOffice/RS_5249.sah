@@ -8,17 +8,14 @@ var $RS_5249 = _testcase("$RS_5249","Create a PM Plan from Account with coverage
 $RS_5249.start();
 _setSpeed(100);
 
-var $Workbenchurl = "https://workbench.developerforce.com/login.php";
 //Pre - Condition 
-$bo_act_login.login($g_url, $bac_un, $bac_pwd);
+$bo_act_login.login($g_url, $bac_unDev, $bac_pwdDev);
 var $accName = $bo_act_accounts.createAccount();
 var $proName = $bo_act_products.createProduct("pro12", "--None--");
-//var $installedProduct1 = $bo_act_installedProduct.createInstalledProduct($proName,$accName,"");
-//var $installedProduct2 = $bo_act_installedProduct.createInstalledProduct($proName,$accName,"");
+var $installedProduct1 = $bo_act_installedProduct.createInstalledProduct($proName,$accName,"");
+var $installedProduct2 = $bo_act_installedProduct.createInstalledProduct($proName,$accName,"");
 var $location1 = $bo_act_locations.createLocation("", $accName, "MG Road", "India", "560001");
-var $installedProduct1 =$bo_act_locations.addInstalledProductToLocation($proName,$accName,"");
 var $location2 = $bo_act_locations.createLocation("", $accName, "MG Road", "India", "560001");
-var $installedProduct2 =$bo_act_locations.addInstalledProductToLocation($proName,$accName,"");
 
 //Test Steps
 var $PMPTempName = $bo_act_PMPlanTemplate.createTimeBasedPMPlanTemplate($proName, "Location (Visit Only)","","Weeks");

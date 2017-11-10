@@ -19,6 +19,8 @@ var $objName1="Work Order";
 	var $actnName2=$sfmName;
 	var $actnName1=$stndSFMName;
 
+/*var $sfmName = "SFM_Interact";
+=======
 var $sfmName = "SFM_Interact";
 var $sourceName = "Work Order";
 var $targetName = "Work Order";
@@ -26,7 +28,8 @@ var $QualCriteriaName = "Work Detail (Work Order)";
 var $sfmPageLayoutName = "SFMIBTEST";
 var $wizardSelectObjectName = "Work Order";
 var $wizardTitleName = "SFMIBTEST1";
-var $wizardIDName = "SFMIBTEST1"; 
+var $wizardIDName = "SFMIBTEST1"; */
+
 
 var $wizardStep1Type = "SFM";
 var $wizardStep1Name = $sfmName;

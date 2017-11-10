@@ -14,7 +14,7 @@ var $Component = $data[2]["Component"];
 $bo_act_login.login($url, $un, $pwd);
 
 var $ana_1023_insert_WO = "SVMXC__Service_Order__c  WO = new SVMXC__Service_Order__c ( Custom_Account__c ='"+ $Account2 +"', SVMXC__Product__c = '"+$Product+"' , SVMXC__Group_Member__c = '"+$Technician+"' ,SVMXC__Component__c = '"+$Component+"',SVMXC__Order_Status__c = '"+$OrderStatus+"' , SVMXC__Closed_On__c = "+$Closedon+",SVMXC__Country__c = 'United States', SVMXC__Sub_Status__c = 'Resolved', SVMXC__Priority__c = 'High', SVMXC__Site__c = '"+$Site+"');insert WO;";
-var $ana_1023_query_wo = "Select Name, Id ,Custom_Account__c , SVMXC__Component__c , SVMXC__Closed_On__c from SVMXC__Service_Order__c where Createdby.Id = '005q0000003GGfP' Order by CreatedDate DESC Limit 1";
+var $ana_1023_query_wo = "Select Name , Id  ,Custom_Account__c , SVMXC__Component__c , SVMXC__Closed_On__c from SVMXC__Service_Order__c where Createdby.Id = '005q0000003GGfP' Order by CreatedDate DESC Limit 1";
 var $ana_1023_result = $op_act_sForceApiCall.sForceQuery($un, $pwd, $ana_1023_insert_WO , "create");
 var $ana_1023_fetch = $op_act_sForceApiCall.sForceQuery($un, $pwd, $ana_1023_query_wo,"query");
 
@@ -26,15 +26,15 @@ var $ana_1023_sr1;
 var $var3;
 var $varRV1;
 
-
+$ana_1023_fetch.forEach(function($ana_1023_var1) {
 	
-	$ana_1023_WO1 = $ana_1023_fetch[0].Id;
+	$ana_1023_WO1 = $ana_1023_var1.Id;
 
-
+});
 _log($ana_1023_WO1);
 
 var $ana_1023_insert_WO2 = "SVMXC__Service_Order__c  WO = new SVMXC__Service_Order__c (SVMXC__Company__c ='"+ $Account2 +"', SVMXC__Product__c = '"+$Product+"' , SVMXC__Group_Member__c = '"+$Technician+"' ,SVMXC__Component__c = '"+$Component+"', SVMXC__Order_Status__c = '"+$OrderStatus+"' , SVMXC__Closed_On__c = "+$Closedon+",SVMXC__Country__c = 'United States', SVMXC__Priority__c = 'High',SVMXC__Related_Work_Order__c ='"+$ana_1023_WO1+"', SVMXC__Site__c = '"+$Site+"' );insert WO;";
-var $ana_1023_query_wo2 = "Select Name , Id , SVMXC__Company__c , SVMXC__Component__c , SVMXC__Closed_On__c from SVMXC__Service_Order__c where Createdby.Id = '005q0000003GGfP' Order by CreatedDate DESC Limit 1";
+var $ana_1023_query_wo2 = "Select Name , Id  , SVMXC__Company__c , SVMXC__Component__c , SVMXC__Closed_On__c from SVMXC__Service_Order__c where Createdby.Id = '005q0000003GGfP' Order by CreatedDate DESC Limit 1";
 var $resultArr3 = $op_act_sForceApiCall.sForceQuery($un, $pwd, $ana_1023_insert_WO2 , "create");
 
 
@@ -42,11 +42,11 @@ var $ana_1023_result2 = $op_act_sForceApiCall.sForceQuery($un, $pwd, $ana_1023_q
 
 
 
-
+$ana_1023_result2.forEach(function($var3) {
 	
-	$ana_1023_WO2 = $ana_1023_result2[0].Id;
+	$ana_1023_WO2 = $var3.Id;
 
-
+});
 
 $TopLevelWO.an_toplevelwo();
 $an_act_Repeat_Visit_SR.rv_runEngine("meghana.rao@servicemax.com");
