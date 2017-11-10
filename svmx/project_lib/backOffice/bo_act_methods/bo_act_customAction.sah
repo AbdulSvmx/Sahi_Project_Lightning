@@ -31,11 +31,19 @@ var $bo_act_customAction=new function bo_act_customAction(){
 		
 this.addParametersForWebService = function($parameterValueType, $parametervalue){
 	var $parameterName = $bo_act_common.generateRandomName("ParaName");
-	var $parameterValue = $bo_act_common.generateRandomName("ParaValue");
-	_setValue(_textbox(0,_near(_div("Parameter Name"),_under(_table("list")))),$parameterName);
-	_setSelected(_select(0,_near(_div("Parameter Value Type"),_under(_table("list")))),$parameterValueType);
-	_setValue(_textbox(1,_near(_div("Parameter Value")),_under(_table("list"))),$parametervalue);
+	//var $parameterValue = $bo_act_common.generateRandomName("ParaValue");
+	_click(_button("Add"));
+	_setValue($bo_pg_customAction.txt_parameterName,$parameterName);
+	_setSelected($bo_pg_customAction.sel_parameterValueType,$parameterValueType);
+	_setValue($bo_pg_customAction.txt_parameterValue,$parametervalue);
 	_click($bo_pg_customAction.btn_quickSave);		
+};
+
+this.deleteCustomAction = function($objName,$actionTitle){
+	$bo_act_navigation.navigateToSfmCustomAction();
+	_setSelected($bo_pg_customAction.sel_objWO, $objName);
+	_check(_checkbox(0,_leftOf(_span($actionTitle))));
+	_click($bo_pg_customAction.btn_delete);
 };
 
 };

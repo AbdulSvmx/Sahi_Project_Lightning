@@ -5,12 +5,20 @@ var $bo_act_salesforceSetUp = new function bo_act_$bo_act_salesforceSetUp() {
 
 
 	this.createApexClasses = function($code) {
+		$bo_act_navigation.navigateToSetUpAndSearch("Apex Classes");
 		 _click(_submit("New"));
 		 _setValue(_textarea("textarea"),$code);
 		 _click(_button("Quick Save"));
 		 _wait(10000);
 		 _click(_button("Save"));
 	};
-
 	
+	this.deleteapexClasses = function($className){
+		$bo_act_navigation.navigateToSetUpAndSearch("Apex Classes");
+		 var $firstLetter = $className.charAt(0);
+		 var $upperCase = $firstLetter.toUpperCase();
+		 _click(_span($upperCase));
+		 _click(_link($className));
+		 _click(_submit("Delete"));
+	};
 };

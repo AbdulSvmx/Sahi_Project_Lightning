@@ -27,13 +27,12 @@ var $bo_pg_sfmWizard= new function bo_pg_sfmWizard() {
 	this.btn_deleteWizard=_button("Delete");
 	this.lbl_deleteSuccessfulMsg=_div("Success:Successfully deleted the selected wizard.");
 	this.chk_handOver = _checkbox(0,_rightOf(_label("Handover")));
-	this.btn_quickSave = _button("Quick Save")
+	this.btn_quickSave = _button("Quick Save");
 	
 	
 	
 	
 	
-	
-}
+};
 
 

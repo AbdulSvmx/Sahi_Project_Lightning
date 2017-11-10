@@ -107,7 +107,7 @@ this.quickSaveSFWizard = function(){
 	
 };
 
-this.createWizardStepwithHandOver=function($fieldActnType,$actnName,$executionMode,$handOver){
+this.createSFMWizardStepwithHandOver=function($fieldActnType,$actnName,$executionMode,$handOver){
 	_click($bo_pg_sfmWizard.tab_wizardStep);
 	_click($bo_pg_sfmWizard.btn_newWizardStep);
 	_assertVisible($bo_pg_sfmWizard.lbl_verifyNewWizardSection);
@@ -127,6 +127,23 @@ this.createWizardStepwithHandOver=function($fieldActnType,$actnName,$executionMo
 	_wait(60000);		
 };
 
+this.createOthersWizardStepwithHandOver=function($fieldActnType,$actnName,$handOver){
+	_click($bo_pg_sfmWizard.tab_wizardStep);
+	_click($bo_pg_sfmWizard.btn_newWizardStep);
+	_assertVisible($bo_pg_sfmWizard.lbl_verifyNewWizardSection);
+	_setSelected($bo_pg_sfmWizard.sel_wizardFieldType,$fieldActnType);
+	_wait(30000);
+	_setSelected($bo_pg_sfmWizard.sel_wizardObjectType,$actnName);
+	//_assertVisible(_label($actnName));
+		_wait(2000);
+	if($handOver == true)
+		_check($bo_pg_sfmWizard.chk_handOver);
+	else
+		_uncheck($bo_pg_sfmWizard.chk_handOver);
+
+	_click($bo_pg_sfmWizard.btn_saveWizardStep);
+	_wait(60000);		
+};
 this.saveAndClose = function(){
 	_click($bo_pg_sfmWizard.btn_sfmWizardSaveClose);
 	
