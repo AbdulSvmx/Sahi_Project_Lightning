@@ -11,8 +11,8 @@ var $bo_act_sfmVerifyWorkOrder= new function bo_act_sfmVerifyWorkOrder() {
 	
 	//always keep one work order, instead need to use array index with ordername workOrderName[1]; 
 	this.clickSpecificWorkOrder = function($workOrderName){
-	_click(_link(workOrderName));
-	}
+	_click(_link($workOrderName));
+	};
 this.verifyWizardOnPMPObj=function($sfmName){
 	_click($bo_pg_sfmVerifyWorkOrder.img_allTab);
 	_wait(2000);
@@ -21,7 +21,7 @@ this.verifyWizardOnPMPObj=function($sfmName){
 	_click($bo_pg_sfmVerifyWorkOrder.lnk_firstLinkPMP);
 	
 		
-}
+};
 
 this.verifyWizardOnWOObj=function($sfmName){
 	_click($bo_pg_sfmVerifyWorkOrder.img_allTab);
@@ -43,7 +43,23 @@ this.verifyWizardOnWOObj=function($sfmName){
 			_selectDomain();
 				}
 		
+<<<<<<< HEAD
 		}
+		this.clkOnWizard=function($wizardButtonName){
+			_selectDomain("/svmx/");
+			if(_assertVisible(_button($wizardButtonName))){
+				_click(_button($wizardButtonName));
+				//_wait(3000);
+			_log("User successfully launch the wizard in delivery");}
+			
+			else{
+				_log("Launching of wizard in delivery failed");
+			}
+		_selectDomain();
+		}
+=======
+		};
+>>>>>>> fd7ac582c04ad3a0e65a726729c8554292fcec6c
 		
 		this.wizardButtonNotVisible=function($wizardname){
 			
@@ -64,13 +80,27 @@ this.verifyWizardOnWOObj=function($sfmName){
 				_selectDomain("/svmx/");
 			var $textDisplay=_getText(_table("tbcontainer"));
 				if(!$wizardTitleName.indexOf($textDisplay) != -1){
-						$$result =  true ;
+						var $result =  true ;
 				}else{
-					$result = false; 
+					 var $result = false; 
 				}		
 				 _selectDomain();
+<<<<<<< HEAD
+				
+			}
+				
+				this.clickOnWizardButton=function($SFMName){
+				_selectDomain("/svmx/");
+				_click(_button($SFMName));
+				_selectDomain();
+					
+			}
+	
+	
+=======
 			
 	return $callBack.returnResult($result, "","searchWizard");
+>>>>>>> fd7ac582c04ad3a0e65a726729c8554292fcec6c
 	
 	};
 };

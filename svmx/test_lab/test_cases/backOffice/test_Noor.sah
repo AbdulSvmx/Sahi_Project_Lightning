@@ -4,28 +4,13 @@
 var $RS_testNoor = _testcase("$RS_testNoor","ONSITE response on WO: Clock paused/resumed without extending SLA commitment");
 $RS_testNoor.start();
 _setSpeed(100);
-//var $Workbenchurl = "https://workbench.developerforce.com/login.php";
-//$bo_act_login.login($g_url, $bac_unBase, $bac_pwdBase);
-//var $installedProduct1 =$bo_act_installedProduct.createInstalledProduct("pro311201711383","Acc2112017161025","");
-
-$bo_act_login.login($g_url, "vansys@pqtpart1.com", "servicemax2");
-var $installedProduct1 =$bo_act_installedProduct.createInstalledProduct("pro3112017113150","Acc3112017113121","");
 
 
-//_call(location.reload());
+_call(location.reload());
+_wait(5000);
 //_assertExists($bo_pg_workOrders.link_SLAClockStop);
-//_assertExists($bo_pg_workOrders.link_SLAClockStart);
+_assertExists($bo_pg_workOrders.link_SLAClockStart);
 
-
-//$bo_act_Cases.editCaseOnly("00001101");
-//$bo_act_Cases.clickLinktoUpdateTextfields($bo_pg_Cases.txt_actualResolutionOnEdit);
-//$bo_act_Cases.saveCase();
-
-//_assertNotEqual(_getText($bo_pg_Cases.txt_TimeToResolve),"", "issue in Time to Resolve");
-
-
-
-//$bo_act_PMPlanTemplate.updateUsageConditionRulesGridWithAdjFields("Months", "Every", 1, $bo_act_common.currentDate("-"), $bo_act_common.getfutureDate(1,"-"),"Fixed", 1,100, 10,"Days");
 $RS_testNoor.end();
 
 

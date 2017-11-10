@@ -1,9 +1,0 @@
-var $un = "meghana.rao@servicemax.com";
-var $pwd = "salesforce100";
-var $url = "https://test.salesforce.com";
-$bo_act_login.login($url, $un, $pwd);
-$an_act_AttachRate.attachrate_installed_IB("ATTACH RATE 1");
-$an_act_AttachRate.attachrate_custom_IB("CUSTOM ATATCH RATE 2");
-$an_act_AttachRate.attachrate_custom_CP2("CUSTOM ATATCH RATE 3");
-
-

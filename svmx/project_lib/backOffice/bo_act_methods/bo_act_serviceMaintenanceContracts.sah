@@ -86,23 +86,13 @@ this.editServiceMaintenanceContract = function($sconName, $contName) {
 	
 	// Function for Add child lines to the Service Contract
 	
-this.AddCoveredProducToServiceContract =  function($sconName,$installedProduct,$slaName,$pastYear,$futureYear ){
+this.AddCoveredProducToServiceContract =  function($sconName,$installedProduct,$slaName,$pastYear, $futureYear ){
 	_click($bo_pg_serviceMaintenanceContracts.btn_newCoveredProduct);
 	_wait(10000, _isVisible(_heading2("New Covered Product")));
     _setValue($bo_pg_serviceMaintenanceContracts.txt_installedProduct,$installedProduct);
     _setValue($bo_pg_serviceMaintenanceContracts.txt_slaTermName,$slaName);
     _setValue($bo_pg_serviceMaintenanceContracts.txt_startDate, $bo_act_common.getPastDate($pastYear,"/"));
 	_setValue($bo_pg_serviceMaintenanceContracts.txt_endDate, $bo_act_common.getfutureDate($futureYear, "/"));
-	_click($bo_pg_serviceMaintenanceContracts.btn_save);
-	_assertNotVisible(_div("/Error: Invalid Data/"));
-	$bo_pg_serviceMaintenanceContracts.clickServiceContractOn_DetailPage($sconName);
-};
-
-this.AddCoveredProducToSConWithoutStartEndDates =  function($sconName,$installedProduct,$slaName){
-	_click($bo_pg_serviceMaintenanceContracts.btn_newCoveredProduct);
-	_wait(10000, _isVisible(_heading2("New Covered Product")));
-    _setValue($bo_pg_serviceMaintenanceContracts.txt_installedProduct,$installedProduct);
-    _setValue($bo_pg_serviceMaintenanceContracts.txt_slaTermName,$slaName);
 	_click($bo_pg_serviceMaintenanceContracts.btn_save);
 	_assertNotVisible(_div("/Error: Invalid Data/"));
 	$bo_pg_serviceMaintenanceContracts.clickServiceContractOn_DetailPage($sconName);
@@ -130,9 +120,7 @@ this.addEntitledContactsToServiceContract = function($sconName,$contact){
 	$bo_pg_serviceMaintenanceContracts.clickServiceContractOn_DetailPage($sconName);
 };
 
-
 this.addPartsPricingToServiceContract = function($sconName, $prodName, $pricePerUnit){
-
 	_click($bo_pg_serviceMaintenanceContracts.btn_newPartsPricing);
 	_setValue($bo_pg_serviceMaintenanceContracts.txt_product,$prodName);
 	_setValue($bo_pg_serviceMaintenanceContracts.txt_pricePerUnit,$pricePerUnit);
@@ -141,7 +129,6 @@ this.addPartsPricingToServiceContract = function($sconName, $prodName, $pricePer
 	_assertNotVisible(_div("/Error: Invalid Data/"));
 	_click($bo_pg_serviceMaintenanceContracts.link_ServiceContractOnPartsPricing);
 };
-
 	
 };
 

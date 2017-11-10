@@ -25,7 +25,8 @@ $bo_act_SFM.addQuestionToChecklist($questionText);
 
 $bo_act_navigation.navigateToSfmAppPermission();
 $bo_act_SFMAppPermission.searchSFMDisplay($checklistName);
-	
+_assertEqual("", _getText(_div("gridview-1028")), "Checklist does display");
+
 $bo_act_navigation.navigateToSfmTransactionDesigner();
 $bo_act_SFM.deleteSFM($sfmName);
 _wait(20000);

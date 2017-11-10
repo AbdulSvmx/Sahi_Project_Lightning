@@ -14,7 +14,6 @@ var $bo_pg_installedProducts = new function bo_pg_installedProducts(){
 	this.txt_installedDate = _click(_link(0,_rightOf(_textbox("Date Installed"))));
 	this.btn_save = _submit(" Save ");
 	this.btn_delete = _button("Delete");
-	this.btn_continue = _submit("Continue");
 	
 	this.btn_createWorkOrder = _button("Create Work Order");
 	this.btn_sfmSave = _span("/svmx-sfmd-save-icon/");
