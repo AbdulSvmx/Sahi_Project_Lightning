@@ -7,6 +7,7 @@ _setSpeed(100);
 
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 =======
 >>>>>>> parent of cab5104... Merge branch 'master' of https://github.com/noorsalmasvmx/Sahi_Project
@@ -107,6 +108,8 @@ var $WONumber = $bo_act_installedProduct.createWOFromIB($IBName);
 <<<<<<< HEAD
 
 =======
+=======
+>>>>>>> parent of cbe26e5... commit
 //PreCondition 
 $bo_act_login.login($g_url, $bac_unDev, $bac_pwdDev);
 var $accName = $bo_act_accounts.createAccount();
@@ -122,9 +125,12 @@ $bo_act_serviceMaintenanceContracts.addPartsPricingToServiceContract($sconName, 
 var $WONumber = $bo_act_installedProduct.createWOFromIB($installedProduct);
 
 // Editing the Above created WO
+<<<<<<< HEAD
 >>>>>>> parent of cbe26e5... commit
 =======
 >>>>>>> parent of cab5104... Merge branch 'master' of https://github.com/noorsalmasvmx/Sahi_Project
+=======
+>>>>>>> parent of cbe26e5... commit
 $bo_act_workOrders.editWorkOrder($WONumber);
 var $accountObject = _textbox("/Account/");
 var $contactObject = _textbox("/Contact/");
@@ -132,6 +138,7 @@ $bo_act_workOrders.updateTextBoxFields($accountObject, $accName);
 $bo_act_workOrders.updateTextBoxFields($contactObject, $contactName);
 
 $bo_act_workOrders.checkEntitlement($WONumber);
+<<<<<<< HEAD
 
 
 
@@ -177,6 +184,15 @@ $bo_act_getPrice.saveSFMDelivery();
 
 var $datacreated = [$WONumber,$caseNumber,$IBName,$productName,$contactName,$accountName,$slaName,$serviceConractName];
 =======
+// _assertValue ( Billableline price,Line price per unit)
+//Clean up function
+
+var $datacreated = [$warrantyName,$IBName,$locationName,$productName,$contactName,$accountName,];
+>>>>>>> parent of cbe26e5... commit
+=======
+
+
+
 // _assertValue ( Billableline price,Line price per unit)
 //Clean up function
 
