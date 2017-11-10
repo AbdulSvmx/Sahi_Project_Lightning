@@ -23,11 +23,12 @@ var $ana_863_fetch = $op_act_sForceApiCall.sForceQuery($un, $pwd, $ana_863_query
 var $ana_863_WO1 ;
 var $var3;
 var $varRV1;
-_wait(5000);
+_wait(1000);
+$ana_863_fetch.forEach(function($ana_863_var1) {
+	
+	$ana_863_WO1 = $ana_863_var1.Id;
 
-	$ana_863_WO1 = $ana_863_fetch[0].Id;
-	
-	
+});
 _log($ana_863_WO1);
 
 var $StartDate = $data[1]['WDStartDate'];
@@ -42,26 +43,28 @@ var $ana_863_query_wd = "Select Name , Id  , SVMXC__Start_Date_and_Time__c , SVM
 var $ana_863_result = $op_act_sForceApiCall.sForceQuery($un, $pwd, $ana_863_insert_WD , "create");
 
 var $ana_863_fetch_wd = $op_act_sForceApiCall.sForceQuery($un, $pwd, $ana_863_query_wd,"query");
-_wait(5000);
+
 var $ana_863_wd1 ;
 var $startdate ;
 var $enddate ;
 var $deadtime;
 var $var2;
-
-	$ana_863_wd1 = $ana_863_fetch_wd[0].Id ;
-	$startdate = $ana_863_fetch_wd[0].SVMXC__Start_Date_and_Time__c;
-	$enddate = $ana_863_fetch_wd[0].SVMXC__End_Date_and_Time__c;
-	$deadtime = $ana_863_fetch_wd[0].custom_dead_time__c;
+_wait(1000);
+$ana_863_fetch_wd.forEach(function($var2) {
+	
+	$ana_863_wd1 = $var2.Id ;
+	$startdate = $var2.SVMXC__Start_Date_and_Time__c;
+	$enddate = $var2.SVMXC__End_Date_and_Time__c;
+	$deadtime = $var2.custom_dead_time__c;
 		
-
+});
 
 
 $TopLevelSR.an_topLevelSR();
 //$an_act_MTTR.mttr_usa_calc("MTTR Calculation for USA");
 $an_act_MTTR.mttr_runEngine("meghana.rao@servicemax.com");
 
-var $ana_863_wo_id;// = null ;
+var $ana_863_wo_id = null ;
 var $ana_863_service_request;
 var $ana_863_WO_Account1;
 var $ana_863_labortime;
@@ -70,7 +73,7 @@ var $ana_863_deadtime;
 
 var $ana_863_query_RV1 = "Select SVMXC__Work_Order__c ,SVMXC__Service_Request__c, SVMXC__Account__c, SVMXC__Configuration_Name__c , SVMXC__Labor_Time__c , SVMXC__Dead_Time__c from SVMXC__SPM_Mean_Time_To_Repair__c where SVMXC__Work_Order__c ='"+ $ana_863_WO1 +"'";
 var $ana_863_resultRV1 = $op_act_sForceApiCall.sForceQuery($un, $pwd, $ana_863_query_RV1,"query");
-_wait(5000);
+_wait(1000);
 $ana_863_resultRV1.forEach(function($varRV1) {
 	
 	$ana_863_wo_id = $varRV1.SVMXC__Work_Order__c;
@@ -79,6 +82,7 @@ $ana_863_resultRV1.forEach(function($varRV1) {
 	$ana_863_service_request = $varRV1.SVMXC__Service_Request__c;
 	$ana_863_deadtime = $varRV1.SVMXC__Dead_Time__c;
 
+	
 });
 _assertEqual(null ,$ana_863_labortime);
 _assertEqual(null, $ana_863_deadtime);

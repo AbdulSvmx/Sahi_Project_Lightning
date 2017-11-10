@@ -1,6 +1,5 @@
 
 var $bo_pg_autoEntitlementRule_WO = new function $bo_pg_autoEntitlementRule_WO(){
-	
 	this.btn_newRule = _submit("New Rule");
 	
 	this.txt_autoEntitlementRuleName = _textbox("/CounterRule:RuleForm/");
@@ -28,9 +27,8 @@ var $bo_pg_autoEntitlementRule_WO = new function $bo_pg_autoEntitlementRule_WO()
 	this.sel_multipleWarrantiesOrScon = _select(0,_rightOf(_cell("/If multiple warranties and\\/or service contracts are found/")));
 	this.sel_warrantiesOrSconSearched = _select(0,_rightOf(_cell("Should warranties and service contracts be searched using counters or validity dates or both?")));
 	this.sel_ConsiderSlaCoverageDefined = _select(0,_rightOf(_cell("/Only consider SLA coverage defined at the service contract header level rather than SLA coverage/")));
-	this.btn_save = _submit("Save");
 	
-	/*this.btn_save = _submit(" Save ");
+	this.btn_save = _submit(" Save ");
 	
 	this.sel_exchangeType = _select(0,_rightOf(_label("Exchange Type")));
 	//this.sel_templateType = _select(0,_rightOf(_label("Template Type")));
@@ -45,14 +43,8 @@ var $bo_pg_autoEntitlementRule_WO = new function $bo_pg_autoEntitlementRule_WO()
 	
 	this.txt_expensesPercentCovered = _textbox("Expenses % Covered");
 	this.txt_durationOfExpensesCoverage = _textbox("Duration of Expenses Coverage");
-	this.sel_unitOfTimeForExpensesCoverage = _select(0,_rightOf(_label("Unit of Time for Expenses Coverage")));*/
+	this.sel_unitOfTimeForExpensesCoverage = _select(0,_rightOf(_label("Unit of Time for Expenses Coverage")));
 	
-	this.selectAutoEntitlementRule_WO = function($autoEntitlementRule_Name){
-		
-		_click(_checkbox(0,_leftOf(_cell($autoEntitlementRule_Name,_near(_div("Rule Name"))))));
-		
-		};
-		this.btn_deleteRule = _submit("Delete Rule");
-		this.btn_editeRule = _submit("Edit Rule");
-		
+	this.btn_save = _submit("Save");
+	
 };
