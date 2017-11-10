@@ -1,6 +1,4 @@
-var $url = "https://test.salesforce.com";
-var $un = "vansys@pqtpart1.com";
-var $pwd = "servicemax3";
+
 var $sfmNameToBeCloned = "Manage Work Order Lines - Usage";
 var $sfmName = "RS_6342_TDM016";
 var $isCustom = false;
@@ -26,7 +24,7 @@ var $lineQuantity="6";
 var $receivedStreet="Mysuru";
 
 _setSpeed(100);
-$bo_act_login.login($url, $un, $pwd);
+$bo_act_login.login($g_url, $sfmUsn, $sfmPwd);
 
 
 //clone tmd016
@@ -45,7 +43,7 @@ _click($sfm_pg_sfmDesigner.lnk_home);
  
 
 //Create WO dynamically and search that work order in global search and validate in delivery.
-$login = $sfm_act_createWorkOrder.login($un,$pwd);
+$login = $sfm_act_createWorkOrder.login($sfmUsn, $sfmPwd);
 $woName = $sfm_act_createWorkOrder.create_WO();
 
 _wait(3000);

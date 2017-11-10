@@ -1,15 +1,13 @@
-var $url = "https://test.salesforce.com";
-var $un = "vansys@pqtpart1.com";
-var $pwd = "servicemax3";
+
 var $domainName = "svmxc.cs21.visual.force.com";
 var $sfmName = "Validate Address";
 var $woName;
 
 _setSpeed(100);
-$bo_act_login.login($url, $un, $pwd);
+$bo_act_login.login($g_url, $sfmUsn, $sfmPwd);
 
 //Create WO dynamically and search that work order in global search and validate in delivery.
-$login = $sfm_act_createWorkOrder.login($un,$pwd);
+$login = $sfm_act_createWorkOrder.login($sfmUsn, $sfmPwd);
 $woName = $sfm_act_createWorkOrder.create_WO();
 
 //Open the WO and click on the above created SFM 

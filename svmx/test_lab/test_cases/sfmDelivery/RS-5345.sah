@@ -1,6 +1,4 @@
-var $url = "https://test.salesforce.com";
-var $un = "sysadmin01@sfdautomation.com";
-var $pwd = "maxplore1";
+
 var $sfmNameToBeCloned = "Manage Work Order Lines - Usage";
 var $sfmName = "RS_5345_TDM016";
 var $isCustom = false;
@@ -21,7 +19,7 @@ var $messageType = "Confirmation";
 
 
 _setSpeed(100);
-$bo_act_login.login($url, $un, $pwd);
+$bo_act_login.login($g_url, $sfmUsn, $sfmPwd);
 
 
 //clone tmd016
