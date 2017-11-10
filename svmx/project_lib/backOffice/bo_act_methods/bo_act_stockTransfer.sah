@@ -1,0 +1,35 @@
+/**
+* Functions for the Accounts Object
+*/
+var $bo_act_stockTransfer = new function bo_act_stockTransfer() {
+
+/**
+* Create an Account
+*
+* @param $accountName
+*/
+this.createStockTransferLine = function($product,$qtyTransferred) {
+_click(_button("New Stock Transfer Line"));
+_setValue(_textbox(0,_rightOf(_label("*Product"))),$product);
+_setValue(_textbox(0,_rightOf(_label("*Qty Transferred"))),$qtyTransferred);
+};
+//Function for Post Inventory
+this.postToInventorySerialised = function($stockTransfer,$serNum) {
+var $serialNumbers = new Array();
+var $i;
+$bo_act_navigation.navigateToStockTransfers();
+_click($stockTransfer);
+_selectDomain("/svmx/");
+_click(_button("Post Inventory"));
+_selectDomain();
+for($i=0; $i>$serNum;$i++)
+{
+$serialNumbers[$i] = $bo_act_common.generateRandomName("st");
+_setValue(_textarea(0,_under(_div("Serial Number Selection[1]"))),$serialNumbers[$i]);
+_click(_button(">>"));
+}
+_click(_button("Submit"));
+
+};
+
+};
