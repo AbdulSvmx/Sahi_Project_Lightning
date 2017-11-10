@@ -102,7 +102,7 @@ this.deleteWizards = function($objName,$wizardId){
 	};
 this.quickSaveSFWizard = function(){
 	_click($bo_pg_sfmWizard.btn_quickSave);
-}
+};
 	
 		this.deleteWizard=function(){
 			_click($bo_pg_sfmWizard.chk_selectCustomWizard);

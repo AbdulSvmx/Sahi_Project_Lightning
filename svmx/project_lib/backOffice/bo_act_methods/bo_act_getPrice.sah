@@ -50,6 +50,28 @@ var $bo_act_getPrice = new function bo_act_getPrice() {
 
 	};
 	
+	this.addLaborLineUsingLintQtyToSFMDelivery = function($searchValue, $activityType, $startHrs, $endHrs){
+		_click($bo_pg_getPrice.btn_laborLine);
+		_setStrictVisibilityCheck(true);
+		_click($bo_pg_getPrice.btn_addSingleLine);
+		_click($bo_pg_getPrice.btn_editFirstRow);
+		_wait(5000);
+		_setValue($bo_pg_getPrice.txt_activityType, $activityType);
+		_click($bo_pg_getPrice.btn_startDateAndTime);
+		_click($bo_pg_getPrice.btn_endDateAndTime);
+		// Configure the hours for Start Date Time
+		_click($bo_pg_getPrice.btn_HrsPickListNextToStartDateAndTime);
+		_click(_listItem($startHrs));
+		// Configure the hours for End Date Time
+		_click($bo_pg_getPrice.btn_HrsPickListNextToEndDateAndTime);
+		_click(_listItem($endHrs));
+		//_setValue($bo_pg_getPrice.txt_lineQty, $lineQty);
+		$bo_act_common.searchfunction($searchValue);	//Search Values like Parts/Product Name
+		_click($bo_pg_getPrice.btn_update);
+		_setStrictVisibilityCheck();
+
+	};
+	
 	this.editPartsLineToSFMDelivery = function($partsName){
 	 _click($bo_pg_getPrice.btn_partsLine);
 	 $bo_pg_getPrice.editWOLines($partsName);
