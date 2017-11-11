@@ -29,6 +29,7 @@ var $seperator = "/";
 var $accountName = $bo_act_accounts.createAccount();
 var $contactName = $bo_act_contacts.createContact($accountName);
 var $productName = $bo_act_products.createProduct($productCode, $productFamily[3]);
+var $productName1 = $bo_act_products.createProduct($productCode, $productFamily[3]);
 var $IBName = $bo_act_installedProduct.createInstalledProduct($productName, $accountName, $contactName);
 
 /**
@@ -44,15 +45,14 @@ $bo_act_warrantyTerms.createWarranty($warrantyName);
 */
 var $activityType = ["--None--","Calibration","Cleanup","Installation","Repair","Service"];
 var $unit = ["--None--","Per Hour","Flat Rate"];
-//var $PriceBookName = "Standard Service Price Book";
 var $activityProduct = "";
 var $regularRate = 18.5;
+var $regularRate1 = 15.5;
 
 var $activityID = $bo_act_activityMaster.createActivityMasterUsingProduct($activityType[1], $productName);
-
-//Add New Service Price Book
+var $activityID1 = $bo_act_activityMaster.createActivityMasterUsingProduct($activityType[3], $productName1);
 var $ServicePriceBookName = $bo_act_servicePricebooks.addNewServicePricebooks($unit[1], $activityID, $activityProduct, $regularRate);
-
+var $ServicePricebooksEntryNumber = $bo_act_servicePricebooks.editStandardServicePricebooks($ServicePriceBookName, $unit[1], $activityID1, $activityProduct, $regularRate1);
 /**
  * Configure the Group Profile SET004 and SET017
  */
@@ -82,6 +82,7 @@ $bo_act_navigation.navigateToSfmWizard();
 $bo_act_SFW.createWizardGeneralInfo("Work Order", $wizardTitleName, $wizardIDName);
 $bo_act_SFW.createWizardStep("SFM", "Manage Work Order Lines - Usage", "Interactive");
 $bo_act_SFW.quickSaveSFWizard();
+
 
 //Navigate to IB and Create WO from IB
 var $WONumber = $bo_act_installedProduct.createWOFromIB($IBName);
@@ -123,7 +124,7 @@ if(_isVisible(_image("Checked",_rightOf(_cell("/Is Entitlement Performed/"))))){
 	}
 
 /**
-*Invoke TDMo16 SFM for Get Price Calculation when using "Warranty"
+*Invoke TDMo16 SFM for Get Price Calculation when "Incident Not Covered"
 */
 
 $bo_act_getPrice.navigateToSFMDeliveryPageFor_TDM016($WONumber);
@@ -145,10 +146,35 @@ var $LaborBillableLinePriceActual = _getText(_textbox(0,_rightOf(_label("/Billab
 
 var $LaborBillableLinePriceExpected = (($lineQty*$regularRate*45)/100);
 
+
 _assertEqual($LaborLinePricePerUnitActual,$regularRate,"Actual and expected Labor Line Price Per Unit are not same");
 _assertEqual($LaborBillableQtyActual,$lineQty,"Actual and expected Billable Qty are not same");
 _assertEqual($LaborBillableLinePriceActual,$LaborBillableLinePriceExpected,"Actual and expected Billable Line Price are not same");
 _assertEqual($LaborCoveredActual,"55","Actual and expected labor Covered % are not same");
+
+$bo_act_getPrice.closeEditedWOLineToSFMDelivery();
+
+//Add Second Labor Line to Above invoke TDM016 SFM
+var $searchValue1 = $productName1;
+var $activityType1 = $activityType[3];
+var $lineQty1 = "3";
+$bo_act_getPrice.addSecondLaborLineUsingLintQtyToSFMDelivery($searchValue1, $activityType1, $lineQty1);
+$bo_act_getPrice.calculateGetPrice();
+
+//Validation of Get Price for Labor lines
+$bo_act_getPrice.editSecondLaborLineToSFMDelivery($searchValue1);
+
+var $LaborLinePricePerUnitActual1 = _getText(_textbox(0,_rightOf(_label("/Line Price Per Unit/"))));
+var $LaborCoveredActual1 = _getText(_textbox(0,_rightOf(_label("/Covered %/"))));
+var $LaborBillableQtyActual1 = _getText(_textbox(0,_rightOf(_label("/Billable Qty/"))));
+var $LaborBillableLinePriceActual1 = _getText(_textbox(0,_rightOf(_label("/Billable Line Price/"))));
+
+var $LaborBillableLinePriceExpected1 = (($lineQty1*$regularRate1*45)/100);
+
+_assertEqual($LaborLinePricePerUnitActual1,$regularRate1,"Actual and expected Labor Line Price Per Unit are not same");
+_assertEqual($LaborBillableQtyActual1,$lineQty1,"Actual and expected Billable Qty are not same");
+_assertEqual($LaborBillableLinePriceActual1,$LaborBillableLinePriceExpected1,"Actual and expected Billable Line Price are not same");
+_assertEqual($LaborCoveredActual1,"55","Actual and expected labor Covered % are not same");
 
 $bo_act_getPrice.closeEditedWOLineToSFMDelivery();
 
@@ -166,6 +192,7 @@ $bo_act_common.cleanUpfunction($datacreated[i]);
 //Deleting the above created data
 
 $bo_act_activityMaster.deleteActivityMaster($activityID);
+$bo_act_activityMaster.deleteActivityMaster($activityID1);
 $bo_act_servicePricebooks.deleteCustomServicePricebooks($ServicePriceBookName);
 
 // Delete SFM Wizard 
