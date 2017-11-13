@@ -58,7 +58,7 @@ var $ana_890_query_wd = "Select Name , Id  , SVMXC__Start_Date_and_Time__c , SVM
 var $ana_890_result = $op_act_sForceApiCall.sForceQuery($un, $pwd, $ana_890_insert_WD , "create");
 
 var $ana_890_fetch_wd = $op_act_sForceApiCall.sForceQuery($un, $pwd, $ana_890_query_wd,"query");
-_wait(1000);
+
 $ana_890_fetch_wd.forEach(function($var2) {
 	
 	$ana_890_wd1 = $var2.Id ;
@@ -86,11 +86,11 @@ var $ana_890_WO_Account1;
 var $ana_890_labortime;
 var $ana_890_deadtime;
 
-for(var $i = 0;$ana_890_wo_id == null;$i++){
+
 var $ana_890_query_RV1 = "Select SVMXC__Work_Order__c ,SVMXC__Case__c , SVMXC__Account__c, SVMXC__Configuration_Name__c , SVMXC__Labor_Time__c , SVMXC__Dead_Time__c from SVMXC__SPM_Mean_Time_To_Repair__c where SVMXC__Work_Order__c ='"+$ana_890_WO1+"'";
 var $ana_890_resultRV1 = $op_act_sForceApiCall.sForceQuery($un, $pwd, $ana_890_query_RV1,"query");
 _log($ana_890_resultRV1);
-_wait(1000);
+
 $ana_890_resultRV1.forEach(function($varRV1) {
 	
 	$ana_890_wo_id = $varRV1.SVMXC__Work_Order__c;
@@ -100,7 +100,7 @@ $ana_890_resultRV1.forEach(function($varRV1) {
 	$ana_890_deadtime = $varRV1.SVMXC__Dead_Time__c;
 	
 });
-}
+
 _log($an_890_case);
 
 $ana_890_deadtime = Math.round($ana_890_deadtime);
