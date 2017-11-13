@@ -1,7 +1,7 @@
 //Tests are to be written here [Bhupendra Singh Chouhan]
 //==============
 
-var $RS_5309 = _testcase("$RS_5309","Get Price on WO:IB covered under SCON and part pricing provided");
+var $RS_5309 = _testcase("$RS_5309","When the IB of the WO is covered under a Warranty. Labor line qty is defined");
 $RS_5309.start();
 _setSpeed(100);
 
