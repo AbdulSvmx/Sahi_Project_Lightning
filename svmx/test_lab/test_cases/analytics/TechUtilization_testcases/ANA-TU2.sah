@@ -85,20 +85,21 @@ var $ana_TU1_update_timesheet_result =  $op_act_sForceApiCall.sForceQuery($un, $
 $an_act_tech_util.tu_schedule_notifications("meghana.rao@servicemax.com");
 
 
-var $ana_TU1_timesheet_working_mins ;
+var $ana_TU1_timesheet_working_mins = null ;
 var $ana_TU1_timesheet_non_prod_mins;
 var $ana_TU1_productive_mins;
 
 
-$ana_util_data_result = "Select Id ,SVMXC__Non_Productive_Time__c ,SVMXC__Working_Minutes__c,SVMXC__Utilization__c,SVMXC__Productive_Time__c from SVMXC__SPM_Utilization__c where SVMXC__Timesheet_Daily_Summary__c = '"+$ana_dailysummary_ID+"'";
+var $ana_util_data_result = "Select Id ,SVMXC__Non_Productive_Time__c ,SVMXC__Working_Minutes__c,SVMXC__Utilization__c,SVMXC__Productive_Time__c from SVMXC__SPM_Utilization__c where SVMXC__Timesheet_Daily_Summary__c = '"+$ana_dailysummary_ID+"'";
 
-$ana_util_data_query = $op_act_sForceApiCall.sForceQuery($un, $pwd, $ana_util_data_result,"query");
+var $ana_util_data_query = $op_act_sForceApiCall.sForceQuery($un, $pwd, $ana_util_data_result,"query");
 
+$ana_util_data_query.forEach(function($varRV1) {
+	$ana_TU1_timesheet_working_mins = $varRV1.SVMXC__Working_Minutes__c;
+	$ana_TU1_productive_mins = $varRV1.SVMXC__Productive_Time__c;
+	$ana_TU1_timesheet_non_prod_mins = $varRV1.SVMXC__Non_Productive_Time__c;
 
-	$ana_TU1_timesheet_working_mins = $ana_util_data_query[0].SVMXC__Working_Minutes__c;
-	$ana_TU1_productive_mins = $ana_util_data_query[0].SVMXC__Productive_Time__c;
-	$ana_TU1_timesheet_non_prod_mins = $ana_util_data_query[0].SVMXC__Non_Productive_Time__c;
-
+});
 
 
 _log($ana_TU1_timesheet_working_mins);
@@ -111,16 +112,16 @@ _assertEqual(($ana_TU1_timeentry_duration1 * 60), Math.round($ana_TU1_timesheet_
 
 // Delete data from objects
 
-$delete_time_sheet_daily_summary = "delete [Select Id from SVMXC__Timesheet_Day_Entry__c];";
+var $delete_time_sheet_daily_summary = "delete [Select Id from SVMXC__Timesheet_Day_Entry__c];";
 var $delete_data = $op_act_sForceApiCall.sForceQuery($un, $pwd, $delete_time_sheet_daily_summary , "create");
 
-$delete_timesheet = "delete [Select Id from SVMXC__Timesheet__c];";
+var $delete_timesheet = "delete [Select Id from SVMXC__Timesheet__c];";
 var $delete_data = $op_act_sForceApiCall.sForceQuery($un, $pwd, $delete_timesheet , "create");
 
-$delete_time_entries = "delete [Select Id from SVMXC__Timesheet_Entry__c];";
+var $delete_time_entries = "delete [Select Id from SVMXC__Timesheet_Entry__c];";
 var $delete_data = $op_act_sForceApiCall.sForceQuery($un, $pwd, $delete_time_entries , "create");
 
-$delete_util = "delete [Select Id from SVMXC__SPM_Utilization__c];";
+var $delete_util = "delete [Select Id from SVMXC__SPM_Utilization__c];";
 var $delete_data =  $op_act_sForceApiCall.sForceQuery($un, $pwd, $delete_util , "create");
 
 $an_TU1_ts.end();

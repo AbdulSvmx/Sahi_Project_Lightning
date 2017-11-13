@@ -1,46 +1,56 @@
 /**
- * Function to perform sForce API Calls actions
- */
+* Function to perform sForce API Calls actions
+*/
 var $op_act_sForceApiCall = new function op_act_sForceApiCall() {
 
-	/**
-	 * Used to query from sForce api calls and will return a array of results
-	 * 
-	 * @param $un
-	 * @param $pwd
-	 * @param $queryComplex
-	 * @returns $nArr (Query response data array)
-	 */
+/**
+* Used to query from sForce api calls and will return a array of results
+* 
+* @param $un
+* @param $pwd
+* @param $queryComplex
+* @returns $nArr (Query response data array)
+*/
 
-	this.sForceQuery = function($un, $pwd, $queryComplex,$queryType){
-	    var $nArr=null;
-		_set($nArr, _fetch(sForceApiCall($un, $pwd, $queryComplex,$queryType)));
-		 _wait(100000,$nArr != null && JSON.stringify($nArr).indexOf("[]") == -1);
+this.sForceQuery = function($un, $pwd, $queryComplex,$queryType){
+   var $nArr=null;
+_set($nArr, _fetch(sForceApiCall($un, $pwd, $queryComplex,$queryType)));
+if($queryType == "query"){
 
-		return $nArr;
-		//<browser>
-		function sForceApiCall($un, $pwd, $queryComplex,$queryType){
-			
-			sforce.connection.sessionId = null;
-			sforce.connection.debuggingHeader = null; 
-			sforce.connection.login($un, $pwd);
+for(var $i=0;$i<20;$i++){
+_wait(1000,$nArr != null && JSON.stringify($nArr).indexOf("[]") == -1 && JSON.stringify($nArr).indexOf("{\"column\":\"-1\"") == -1);
+if($nArr != null && JSON.stringify($nArr).indexOf("[]") == -1 && JSON.stringify($nArr).indexOf("{\"column\":\"-1\"") == -1){
+break;
+}else{
+_set($nArr, _fetch(sForceApiCall($un, $pwd, $queryComplex,$queryType)));
+}
+}
 
-			switch($queryType){
-			case 'query':
-				 records = _call(sforce.connection.query($queryComplex));
-                 var arr = records.getArray('records');
-				return arr;
-			case 'create':
-				return records = sforce.apex.executeAnonymous($queryComplex);
-				
-			default:
-				$nArr = [null];
-				return $nArr;
-			}
-		}//</browser>
-		
-	
-	};
+}
+return $nArr;
+//<browser>
+function sForceApiCall($un, $pwd, $queryComplex,$queryType){
+
+sforce.connection.sessionId = null;
+sforce.connection.debuggingHeader = null; 
+sforce.connection.login($un, $pwd);
+
+switch($queryType){
+case 'query':
+records = _call(sforce.connection.query($queryComplex));
+                var arr = records.getArray('records');
+return arr;
+case 'create':
+return records = sforce.apex.executeAnonymous($queryComplex);
+
+default:
+$nArr = [null];
+return $nArr;
+}
+}//</browser>
+
+
+};
 
 
 };
