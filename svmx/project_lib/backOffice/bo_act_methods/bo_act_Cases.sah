@@ -1,0 +1,54 @@
+/**
+ * Functions for the Cases Object
+ */
+var $bo_act_Cases = new function bo_act_Cases() {
+
+	/**
+	 * Create an Cases
+	 * 
+	 */
+	this.createCase = function($caseStatus, $casePriority, $caseOrigin ) {
+		var $caseSubject = $bo_act_common.generateRandomName("Case");
+        $bo_act_navigation.navigateToCasesPage();
+		_click($bo_pg_Cases.btn_new);
+		_setValue($bo_pg_Cases.txt_subjectName, $caseSubject);
+		_setSelect($bo_pg_Cases.sel_selectCaseStatus,$caseStatus);
+		_setSelect($bo_pg_Cases.sel_selectCasePriority,$casePriority);
+		_setSelect($bo_pg_Cases.sel_selectCaseOrigin,$caseOrigin);
+		_click($bo_pg_Cases.btn_save);
+		_assertNotVisible(_div("/Error: Invalid Data/"));
+		var $caseNumber = _getText($bo_pg_Cases.txt_caseNumber);
+		_wait(15000, _isVisible($caseNumber));
+		_logOutput($caseNumber+ " Case is created");
+    return $caseNumber;
+	};
+	
+	this.editCase = function($caseNumber, $caseAccount, $caseContact, $caseComponentSN, $caseSite) {
+		 $bo_act_navigation.navigateToCasesPage();
+		 _click(_link($caseNumber));
+		 _wait(10000, _isVisible($caseNumber));
+		 _click($bo_pg_Cases.btn_editCase);
+		 _setValue($bo_pg_Cases.txt_accountName, $caseAccount);
+		 _setValue($bo_pg_Cases.txt_contactName, $caseContact);
+		 _setValue($bo_pg_Cases.txt_componentSN_Name, $caseComponentSN);
+		 _setValue($bo_pg_Cases.txt_siteName, $caseSite);
+		 _click($bo_pg_Cases.btn_save);
+		 _assertNotVisible(_div("/Error: Invalid Data/"));
+		 _wait(15000, _isVisible($caseNumber));
+		 _logOutput($caseNumber+ " Case is Editied");
+	};
+
+	this.deleteCases = function($caseNumber){
+		  $bo_act_navigation.navigateToCasesPage();
+		  _click(_link($caseNumber));
+		  _wait(10000, _isVisible($caseNumber));
+		  _click($bo_pg_Cases.btn_deleteCase);
+	};
+	
+	this.cloneCases = function($caseNumber){
+		  $bo_act_navigation.navigateToCasesPage();
+		  _click(_link($caseNumber));
+		  _wait(10000, _isVisible($caseNumber));
+		  _click($bo_pg_Cases.btn_cloneCase);
+	};
+};

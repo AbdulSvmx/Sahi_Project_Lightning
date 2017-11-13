@@ -1,5 +1,5 @@
 var $user_credentials = $excel.readFromCustomExcel("../optimax/op_excleData/automation.xlsx", "User_Details","","");
-
+var $work_Orders_Xl = $excel.readFromCustomExcel("../optimax/op_excleData/automation.xlsx", "RS_6299_RS_6300","","");
 
 //var $nArr;
 //Calling the sforce API

@@ -14,5 +14,8 @@ var $bo_pg_products = new function bo_pg_products(){
 	this.chk_serializedTracking = _checkbox("Enable Serialized Tracking of Stock");
 	this.btn_save = _submit(" Save ");
 	this.btn_delete = _button("Delete");
+	this.btn_editProduct = _button(" Edit ");
+	this.btn_saveProduct = _submit(" Save ");
+	this.txt_businessHoursEdit = _textbox(0,_rightOf(_label("Business Hours")));
 	
 };

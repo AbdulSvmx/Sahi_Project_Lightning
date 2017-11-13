@@ -1,0 +1,34 @@
+//_includeOnce("../../../references/references.js");
+
+//author - Mamata Rout
+
+var $RS_5428 = _testcase("RS_5428", "Test the functionality SFM App permision for a scenario");
+$RS_5428.start();
+_setSpeed(100);
+
+$bo_act_login.login($g_url, $bac_unBase, $bac_pwdBase);
+//Create a SFM orders test data
+var $sfmName = "SFM_Interact309";
+var $stndSFMName="Add/Edit Products Serviced"
+var $objName2="Preventive Maintenance Plan";
+var $objName1="Work Order";
+	var $wizardname="TestWizard200";
+	var $wizardID="TestWizard200";
+
+
+_setSpeed(3000);
+
+if($bo_act_navigation.navigateToSfmWizard($objName1,$wizardname,$wizardID,$fieldActnType,$actnName1,$executionMode1,$stndSFMName)){
+	$bo_act_SFW.createWizardGeneralInfo($objName1,$wizardname,$wizardID);
+	$bo_act_SFW.createWizardStep($fieldActnType,$actnName1,$executionMode1);
+	$bo_act_sfmVerifyWorkOrder.verifyWizardOnWOObj($stndSFMName);
+	_log("SFm wizard visible");	
+}else{
+	_fail("Navigation To SFM Wizard Failed");
+	_stopTestCase();
+};
+
+
+_setSpeed(100);
+
+$RS_5428.end()
