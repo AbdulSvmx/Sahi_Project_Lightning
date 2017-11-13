@@ -101,13 +101,15 @@ var $ana_util_data_result = "Select Id ,SVMXC__Drive_Time__c ,SVMXC__Working_Min
 var $ana_util_data_query = $op_act_sForceApiCall.sForceQuery($un, $pwd, $ana_util_data_result,"query");
 
     
-   _log($ana_TU3_productive_mins);
-   _log($ana_TU3_timesheet_working_mins);
-    $ana_TU3_id = $ana_util_data_query[0].Id;
-	$ana_TU3_timesheet_working_mins = $ana_util_data_query[0].SVMXC__Working_Minutes__c;
-	$ana_TU3_productive_mins = $ana_util_data_query[0].SVMXC__Productive_Time__c;
-	$ana_TU3_timesheet_drive_mins = $ana_util_data_query[0].SVMXC__Drive_Time__c;
+$ana_util_data_query.forEach(function($varRV1) {
+    $ana_TU3_id = $varRV1.Id;
+	$ana_TU3_timesheet_working_mins = $varRV1.SVMXC__Working_Minutes__c;
+	$ana_TU3_productive_mins = $varRV1.SVMXC__Productive_Time__c;
+	$ana_TU3_timesheet_drive_mins = $varRV1.SVMXC__Drive_Time__c;
 	
+	
+});
+
 	   _log($ana_TU3_productive_mins);
 	   _log($ana_TU3_timesheet_working_mins);
 

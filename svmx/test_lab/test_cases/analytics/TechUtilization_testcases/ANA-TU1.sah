@@ -70,7 +70,7 @@ var $ana_TU1_update_timesheet_result =  $op_act_sForceApiCall.sForceQuery($un, $
 
 $an_act_tech_util.tu_schedule_notifications("meghana.rao@servicemax.com");
 
-var $ana_TU1_timesheet_working_mins ;
+var $ana_TU1_timesheet_working_mins = null ;
 var $ana_TU1_productive_mins;
 
 
@@ -78,10 +78,10 @@ var $ana_util_data_result = "Select Id ,SVMXC__Working_Minutes__c,SVMXC__Utiliza
 
 var $ana_util_data_query = $op_act_sForceApiCall.sForceQuery($un, $pwd, $ana_util_data_result,"query");
 
-
-	$ana_TU1_timesheet_working_mins = $ana_util_data_query[0].SVMXC__Working_Minutes__c;
-	$ana_TU1_productive_mins = $ana_util_data_query[0].SVMXC__Productive_Time__c;
-
+$ana_util_data_query.forEach(function($varRV1) {
+	$ana_TU1_timesheet_working_mins = $varRV1.SVMXC__Working_Minutes__c;
+	$ana_TU1_productive_mins = $varRV1.SVMXC__Productive_Time__c;
+});
 
 _log($ana_TU1_timesheet_working_mins);
 _log($ana_TU1_productive_mins);
