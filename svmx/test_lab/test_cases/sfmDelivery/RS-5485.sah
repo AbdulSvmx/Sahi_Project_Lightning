@@ -1,6 +1,4 @@
-var $url = "https://test.salesforce.com";
-var $un = "vansys@pqtpart1.com";
-var $pwd = "servicemax2";
+
 var $customActionObject = "Work Order";
 var $actionType="URL";
 var $actionId = "RS-5485URL_CA";
@@ -10,18 +8,25 @@ var $paramValueType="Value";
 var $paramValue="Servicemax";
 var $wizardName = "SFM Delivery Auto";
 var $wizardType="Others";
-var $woName="WO-00000472";
+var $woName;
 var $domainName = "svmxc.cs21.visual.force.com";
 
 
 
 
 _setSpeed(100);
-$bo_act_login.login($url, $un, $pwd);
+$bo_act_login.login($g_url, $sfmUsn, $sfmPwd);
 $sfm_act_navigation.navigateToSfmCustomActions();
 $sfm_act_customActions.urlCustomAction($customActionObject,$actionType, $actionId, $urlToLaunch, $paramName, $paramValueType, $paramValue);
 $sfm_act_wizards.addToWizard($customActionObject, $wizardName, $wizardType, $actionId);
 
+//Create WO dynamically and search that work order in global search and validate in delivery.
+$login = $sfm_act_createWorkOrder.login($sfmUsn, $sfmPwd);
+//_log($login);
+//var $woName;
+$woName = $sfm_act_createWorkOrder.create_WO();
+
+_wait(3000);
 $sfm_act_common.globalSearch($woName);
 _click(_link($woName));
 _selectDomain($domainName);

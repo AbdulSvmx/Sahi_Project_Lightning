@@ -22,7 +22,14 @@ var $sfm_pg_dvr = new function sfm_pg_dvr() {
 	this.txt_messageDescription = _f("main").s_textarea("message");
 	this.btn_saveDVR = _f("main").s_button("Save");
 	this.btn_addToProcess = _f("main").s_button("Add To Process");
-	
+	this.chk_targetParts = _f("main").s_checkbox("Parts");
+	this.chk_targetLabor = _f("main").s_checkbox("Labor");
+	this.chk_targetExpense = _f("main").s_checkbox("Expense");
+	this.chk_targetTravel = _f("main").s_checkbox("Travel");
+	this.btn_targetOk = _f("main").s_button("OK[1]");
+	this.btn_targetCancel = _f("main").s_button("Cancel");
+	this.txt_targetChilden= _f("main").s_label("Select target children to which the selected rule is to be added");
+
 	/**
 	 * Function to create a data validation rule
 	 *
@@ -45,9 +52,14 @@ var $sfm_pg_dvr = new function sfm_pg_dvr() {
 		_setValue($sfm_pg_dvr.txt_advancedExpr,$advExpr);
 		_setSelected($sfm_pg_dvr.txt_messageType,$messageType);
 		_setValue($sfm_pg_dvr.txt_messageDescription,$ruleDescription );
-		_click($sfm_pg_dvr.btn_saveDVR);
+		//_click($sfm_pg_dvr.btn_saveDVR);
 		_wait(2000);
 		_click($sfm_pg_dvr.btn_addToProcess);
+		_wait(2000);
+		if(_exists($sfm_pg_dvr.txt_targetChilden)){
+			_click($sfm_pg_dvr.btn_targetOk);
+			
+		}
 		
 	};
 	/**
@@ -68,7 +80,14 @@ var $sfm_pg_dvr = new function sfm_pg_dvr() {
 			
 			if($operandArray[$i]=='Value'){
 				_setSelected(_f("main").s_dropdownlist("operandTypeCombo"+"["+$i+"]").rightOf(_f("main").s_label("Expressions")),$operandArray[$i]);
-				_setValue(_f("main").s_textinput("operandValue").rightOf(_f("main").s_label("Expressions")),$valueArray[$i]);
+				if($fieldArray[$i]=='Expense Type'){
+					//_setValue(_f("main").s_textinput("textInput"+"["+$i+"]").rightOf(_f("main").s_label("Expressions")),$valueArray[$i]);
+					_setSelected(_f("main").s_combobox("picklist").rightOf(_f("main").s_label("Expressions")), $valueArray[$i]);
+				}
+				else{
+					_setValue(_f("main").s_textinput("operandValue"+"["+$i+"]").rightOf(_f("main").s_label("Expressions")),$valueArray[$i]);
+				
+				}
 			}
 			else if($operandArray[$i]=='Function'){
 				_setSelected(_f("main").s_dropdownlist("operandTypeCombo"+"["+$i+"]").rightOf(_f("main").s_label("Expressions")),$operandArray[$i]);

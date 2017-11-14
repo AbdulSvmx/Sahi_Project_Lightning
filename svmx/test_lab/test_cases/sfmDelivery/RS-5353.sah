@@ -4,9 +4,7 @@
 * Cloning TDM016/Manage Work Order Lines - Usage process and adding fields to screen
 */
 
-var $url = "https://test.salesforce.com";
-var $un = "vansys@pqtpart1.com";
-var $pwd = "servicemax2";
+
 var $sfmNameToBeCloned = "Manage Work Order Lines - Usage";
 var $sfmName = "RS_5353_TDM016";
 var $isCustom = false;
@@ -30,32 +28,34 @@ var $wizardType = "SFM";
 var $domainName = "svmxc.cs21.visual.force.com";
 var $messageType="Error";
 var $wizardObject ="Work Order";
-var $woName="WO-00000472";
+//var $woName="WO-00000472";
 
 
 _setSpeed(100);
-$bo_act_login.login($url, $un, $pwd);
+$bo_act_login.login($g_url, $sfmUsn, $sfmPwd);
+
 
 $sfm_act_SFM.cloneTDM016($sfmNameToBeCloned, $sfmName, $isCustom, $sfmTemplate, $sfmTemplateSaveAsName, $fieldName, $containerName);
 $sfm_pg_dvr.newRule($targetObject, $rulename, $ruleDescription, $fieldArray, $conditionArray, $operandArray, $valueArray, $advExpr, $messageType);
-_click(_f("main").s_button("Quick Save"));
-_click(_f("main").s_button("Save & Close")); 
-_wait(30000,_isVisible(_link("Home")));
+_click($sfm_pg_sfmDesigner.btn_quickSaveSFM);
+_click($sfm_pg_sfmDesigner.btn_saveSFM); 
+_wait(30000,_isVisible($sfm_pg_sfmDesigner.lnk_home));
 
 $sfm_act_wizards.addToWizard($wizardObject, $wizardName, $wizardType, $sfmName);
-_wait(30000,_isVisible(_link("Home")));
-_click(_link("Home"));
+_wait(30000,_isVisible($sfm_pg_sfmDesigner.lnk_home)); 
+_click($sfm_pg_sfmDesigner.lnk_home);
 
-/*
-$bo_act_login.login($url, $un, $pwd);
-$login = $sfm_act_createWorkOrder.login($un,$pwd);
+//Create WO dynamically and search that work order in global search and validate in delivery.
+$login = $sfm_act_createWorkOrder.login($sfmUsn, $sfmPwd);
 _log($login);
 var $woName;
 $woName = $sfm_act_createWorkOrder.create_WO();
-_log("WO NAME OUTSIDE "+$woName); */
 
 
 //Open the WO and click on the above created SFM 
+
+_click($sfm_pg_sfmDesigner.lnk_workOrder);
+_wait(3000);
 $sfm_act_common.globalSearch($woName);
 _click(_link($woName));
 _selectDomain($domainName);
@@ -63,14 +63,11 @@ _click(_button($sfmName));
 
 //Validate DVR
 _selectDomain();
-_wait(30000);
+_wait(20000);
 _setValue(_textbox("City:"),"M");
-
-//_click(_div("svmx-trigger-index-0 svmx-form-trigger svmx-form-date-trigger svmx-form-trigger-last svmx-unselectable svmx-form-trigger-over svmx-form-date-trigger-over"));
-//_click(_div("svmx-trigger-index-0 svmx-form-trigger svmx-form-date-trigger svmx-form-trigger-last svmx-unselectable svmx-form-trigger-over svmx-form-date-trigger-over"),_rightOf(_textbox("svmx-date-1038-inputEl")));
-//_click(_span("22"));
-
-
+_click(_span("svmx-btn-icon svmx-sfmd-current-datetime-icon"));
+var $pastDate=$bo_act_common.getPastDate("1", "/");
+_setValue(_textbox("svmx-date-1038-inputEl"), $pastDate);
 
 if(_exists(_div("InformationPrice not calculated, because entitlement check has not been performed. OKYesNoCancelOk"))){
 	_click(_span("Ok"));

@@ -1,25 +1,43 @@
-var $url = "https://test.salesforce.com";
-var $un = "vansys@pqtpart1.com";
-var  $pwd = "servicemax2";
+
 var $sfmNameToBeCloned = "Manage Work Order Lines - Usage";
 var $sfmName = "RS_6981_Formulas";
 var $isCustom = false;
 var $sfmTemplate = "SVMXSTD: Manage WO Usage Lines";
 var $sfmTemplateSaveAsName = $sfmName;
-var $containerNameArray = ["Order Status","Order Status"];
-var $fieldNameArray = ["Customer Down","Problem Description"];
+var $containerNameArray = ["Order Status","Order Status","Order Status","Order Status"];
+var $fieldNameArray = ["Customer Down","Problem Description","Is Entitlement Performed","Actual Onsite Response"];
 
+var $formulaTargetObjectArray = ["Work Order","Work Order","Work Order","Work Order","Labor","Labor"];
+var $formulaTargetFieldArray = ["Billing Type","Is Entitlement Performed","Actual Onsite Response","Scheduled Date", "Billable Qty", "Billable Line Price"];
+var $formulaNameArray = ["BillingTypeFormula","IsEntitlementPerformedFormula","ActualOnsiteResponseEqNow","ScheduledDateUpdate", "MonthFormula", "YearFormula"];
+var $formulaDescriptionArray = ["If customerDown is true then Billing type=Paid else as is",
+                                "If Billing type is Courtesy then check the Is Entitlement performed else as is",
+                                "Actual Onsite Response Equals Now",
+                                "Scheduled Date should be set to 1st day of the created month in next year",
+                                "Month of StartDate and Time",
+                                "Year of StartDate and Time"
+                                ];
 
-
-var $formula ="$F.IF($F.EQUAL($D.Work_Order.SVMXC__Customer_Down__c,'true'),'Paid',$D.Work_Order.SVMXC__Billing_Type__c)";
-var $formulaTargetObject= "Work Order";
-var $formulaTargetField= "Billing Type";
-var $formulaName= "BillingTypeFormula";
-var $formulaDescription= "If customerDown is true then Billing type=Paid else as is";
-
+var $formulaArray =["$F.IF($F.EQUAL($D.Work_Order.SVMXC__Customer_Down__c,'true'),'Paid',$D.Work_Order.SVMXC__Billing_Type__c)",
+                    "$F.IF($F.EQUAL($D.Work_Order.SVMXC__Billing_Type__c,'Courtesy'),'true',$D.Work_Order.SVMXC__Is_Entitlement_Performed__c)",
+                    "$F.NOW()",
+                    "$F.DATE($F.YEAR($D.Work_Order.CreatedDate)+1, $F.MONTH($D.Work_Order.CreatedDate), 1)",
+                    "$F.MONTH($D.Labor.SVMXC__Start_Date_and_Time__c)",
+                    "$F.YEAR($D.Labor.SVMXC__Start_Date_and_Time__c)"
+                   ];
 
 _setSpeed(100);
-$bo_act_login.login($url, $un, $pwd);
+$bo_act_login.login($g_url, $sfmUsn, $sfmPwd);
 
 $sfm_act_SFM.cloneTDM016($sfmNameToBeCloned,$sfmName,$isCustom, $sfmTemplate, $sfmTemplateSaveAsName,$fieldNameArray, $containerNameArray);
-$sfm_pg_formula.createFormula($formulaTargetObject, $formulaTargetField, $formulaName, $formulaDescription, $formula);
+$sfm_pg_formula.createFormula($formulaTargetObjectArray, $formulaTargetFieldArray, $formulaNameArray, $formulaDescriptionArray, $formulaArray);
+
+//Create WO dynamically and search that work order in global search and validate in delivery.
+$login = $sfm_act_createWorkOrder.login($sfmUsn, $sfmPwd);
+$woName = $sfm_act_createWorkOrder.create_WO();
+
+_wait(3000);
+$sfm_act_common.globalSearch($woName);
+_click(_link($woName));
+_selectDomain($domainName);
+_click(_button($sfmName));

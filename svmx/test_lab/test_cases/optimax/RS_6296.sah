@@ -1,5 +1,5 @@
 var $user_credentials = $excel.readFromCustomExcel("../optimax/op_excleData/automation.xlsx", "User_Details","","");
-var $MTTSData = $excel.readFromCustomExcel("../optimax/op_excleData/automation.xlsx", "Rules","","");
+var $MTTSData = $excel.readFromCustomExcel("../optimax/op_excleData/automation.xlsx", "MTTS","","");
 
 
 //var $nArr;

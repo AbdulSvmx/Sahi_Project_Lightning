@@ -1,5 +1,4 @@
 var $user_credentials = $excel.readFromCustomExcel("../optimax/op_excleData/automation.xlsx", "User_Details","","");
-var $SkillRuleData = $excel.readFromCustomExcel("../optimax/op_excleData/automation.xlsx", "Rules","","");
 
 //var $nArr;
 //Calling the sforce API
@@ -16,9 +15,7 @@ var $RS_6316 = _testcase("RS_6316", "Changing Rule Sequence of Skill Match Rule"
 $RS_6316.start();
 
 $bo_act_login.login($g_url, $g_un, $g_pwd);
-var $skillRuleName = $SkillRuleData[0][1];
-
-_log($skillRuleName);
+var $skillRuleName = "SkillMatchRule_Fri Sep 29 2017 14:33:18 GMT+0530 (IST)";
 
 _click(_link("ServiceMax Setup"));
 _wait(20000,_isVisible(_div("Dispatch Management")));
