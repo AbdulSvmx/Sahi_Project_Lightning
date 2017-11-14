@@ -1,17 +1,36 @@
 /**
- * Functions for the Accounts Object
+ * Functions for the Work Order Object
  */
 var $bo_act_workOrders = new function bo_act_workOrders() {
 
 	/**
-	 * Create an Account
-	 * 
-	 * @param $accountName
+	 * Create an Work Order
 	 */
-	this.editWorkOrder = function($workOrderNumber){
+	this.createWorkOrder = function($caseNumber,$accountName,$contactName,$IBName,$orderStatus,$priority,$orderType){
+		$bo_act_navigation.navigateToWorkOrdersTab();
+		_click($bo_pg_workOrders.btn_newWorkOrder);
+		_setValue($bo_pg_workOrders.txt_case, $caseNumber);
+		_setValue($bo_pg_workOrders.txt_account, $accountName);
+		_setValue($bo_pg_workOrders.txt_contact, $contactName);
+		_setSelected($bo_pg_workOrders.sel_orderStatus, $orderStatus);
+		_setSelected($bo_pg_workOrders.sel_priority, $priority);
+		_setSelected($bo_pg_workOrders.sel_orderType, $orderType);
+		_setValue($bo_pg_workOrders.txt_component, $IBName);
+		_click($bo_pg_workOrders.btn_saveWorkOrder);
+		_assertNotVisible(_div("/Error: Invalid Data/"));
+		_wait(15000, _isVisible($bo_pg_workOrders.txt_workOrderDetails));
+		var $workOrderNumber =  _getText($bo_pg_workOrders.txt_getWONumber);
+		_logOutput($workOrderNumber+ " Work Order is created");
+		return $workOrderNumber;
+	};
+		this.editWorkOrder = function($workOrderNumber){
 		$bo_act_navigation.navigateToWorkOrdersTab();
 		_click(_link($workOrderNumber));
 		_click($bo_pg_workOrders.btn_editWorkOrder);
+	};
+	
+	this.editWorkOrderOnWOPage = function(){
+			_click($bo_pg_workOrders.btn_editWorkOrder);
 	};
 	this.updateTextBoxFields = function($object,$objectValue){
 		_setValue($object,$objectValue);
@@ -31,13 +50,31 @@ var $bo_act_workOrders = new function bo_act_workOrders() {
 	this.saveWorkOrder = function(){
 		_click($bo_pg_workOrders.btn_saveWorkOrder);
 		_assertNotVisible(_div("/Error: Invalid Data/"));
+		_wait(15000, _isVisible($bo_pg_workOrders.txt_workOrderDetails));
 		//return $callBack.returnResult([_isVisible($accountName), "Account not created",$accountName] );
 	};
+	
 	this.checkEntitlement = function($workOrderNumber){
 		$bo_act_navigation.navigateToWorkOrdersTab();
 		_click(_link($workOrderNumber));
 		_selectDomain("/svmx/");
 		_click($bo_pg_workOrders.btn_SFWCheckEntitlement);
+		_selectDomain();
+	};
+	
+	this.checkEntitlementPS = function($workOrderNumber){
+		$bo_act_navigation.navigateToWorkOrdersTab();
+		_click(_link($workOrderNumber));
+		_selectDomain("/svmx/");
+		_click($bo_pg_workOrders.btn_SFWCheckEntitlementPS);
+		_selectDomain();
+	};
+	
+	this.invokeTDM016SFM = function($workOrderNumber){
+		$bo_act_navigation.navigateToWorkOrdersTab();
+		_click(_link($workOrderNumber));
+		_selectDomain("/svmx/");
+		_click($bo_pg_workOrders.btn_sfmTDM016);
 		_selectDomain();
 	};
 
@@ -58,8 +95,4 @@ var $bo_act_workOrders = new function bo_act_workOrders() {
 	//	_click($bo_pg_workOrders.btn_popUpPause);
 	};
 	
-	
-
-	
-
 };

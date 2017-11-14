@@ -7,3 +7,4 @@ project/*
 
 svmx/test_lab/test_cases/backOffice/test_Noor.sah
 svmx/test_lab/test_cases/backOffice/test_Noor.sah
+svmx/project_lib/backOffice/bo_pg_objects/bo_pg_sfmWizard.sah

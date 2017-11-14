@@ -34,7 +34,10 @@ this.selectsfmWizard = function($SFMWizardsName){
 	_click(_checkbox(0,_leftOf(_span($SFMWizardsName,_heading2("Custom SFM Wizards")))));
 		
 		};
+<<<<<<< HEAD
 
+=======
+>>>>>>> 3f026329b5309e8ede6d30f5771fe1ff544bc023
 };
 
 

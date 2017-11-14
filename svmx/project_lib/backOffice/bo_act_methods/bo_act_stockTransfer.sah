@@ -14,6 +14,7 @@ var $bo_act_stockTransfer = new function bo_act_stockTransfer() {
 		_setValue(_textbox(0,_rightOf(_label("*Qty Transferred"))),$qtyTransferred);
 	};
 //Function for Post Inventory
+
 	this.postToInventorySerialised = function($stockTransfer,$serNum) {
 		 var $serialNumbers = new Array();
 		 var $i;
