@@ -3,6 +3,11 @@
  */
 var $an_act_Repeat_Visit_SR = new function an_act_Repeat_Visit_SR() {
 	
+	
+	/*
+	 * This Function creates Calculation method for Repeat Visit with all Standard Fields for USA Region.
+	 * @param Calculationmethodname = The method name for the Calculation of SPM Metric
+	 */
 	this.rv_usa_calc = function($Calculationmethodname) {
 
 		// To setup the values
@@ -34,6 +39,10 @@ var $an_act_Repeat_Visit_SR = new function an_act_Repeat_Visit_SR() {
 
 	};
 	
+	/*
+	 * This Function creates Calculation method for Repeat Visit with all Custom Fields for USA Region.
+	 * @param Calculationmethodname = The method name for the Calculation of SPM Metric
+	 */
 	this.rv_usa_custom = function($Calculationmethodname){
 		
 		// To setup the values
@@ -64,6 +73,10 @@ var $an_act_Repeat_Visit_SR = new function an_act_Repeat_Visit_SR() {
 		
 	};
 	
+	/*
+	 * This Function creates Calculation method for Repeat Visit with all Standard Fields for UK Region.
+	 * @param Calculationmethodname = The method name for the Calculation of SPM Metric
+	 */
 	this.rv_uk_calc = function($Calculationmethodname) {
 		
 		_click($an_pg_rv.btn_click_metrics);
@@ -84,6 +97,11 @@ var $an_act_Repeat_Visit_SR = new function an_act_Repeat_Visit_SR() {
 		_click($an_pg_rv.btn_click_OK);		
 		
 	};
+	
+	/*
+	 * This Function runs the Engine of Repeat Visit Metrics
+	 * @param Calculationmethodname = The method name for the Calculation of SPM Metric
+	 */
 	
 	this.rv_runEngine = function($emailId)
 	{

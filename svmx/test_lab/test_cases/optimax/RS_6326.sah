@@ -1,5 +1,5 @@
 var $user_credentials = $excel.readFromCustomExcel("../optimax/op_excleData/automation.xlsx", "User_Details","","");
-var $TerrData = $excel.readFromCustomExcel("../optimax/op_excleData/automation.xlsx", "Rules","","");
+var $TerrData = $excel.readFromCustomExcel("../optimax/op_excleData/automation.xlsx", "TerritoryRule","","");
 
 //var $nArr;
 //Calling the sforce API
@@ -14,7 +14,7 @@ $RS_6326 = _testcase("RS_6326", "Delete a Territory Match Rule");
 
 $RS_6326.start();
 
-var $TerrName = $TerrData[0][2];
+var $TerrName = $TerrData[0][0];
 
 _log("Territory Rule Name : " + $TerrName);
 
@@ -56,7 +56,7 @@ if ($rowCount < $rowCount1)
 }
 else
 {
-	_log("Territory Rule Deleted Successfully");
+	_log("MTTS Rule Deleted Successfully");
 }
 $bo_act_login.logOut();
 

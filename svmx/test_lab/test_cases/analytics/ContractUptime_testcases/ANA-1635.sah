@@ -14,6 +14,8 @@ var $Component = $data[1]["Component"];
 var $ScheduledDate = $data[1]["ScheduledDate"];
 var $PreferredStartDate = $data[1]["PreferredStartDate"];
 var $PreferredEndDate = $data[1]["PreferredEndDate"];
+var $GuaranteedUptime = $data[1]["GuaranteedUptime"];
+var $TotalUptime = $data[1]["TotalUptime"];
 $bo_act_login.login($url, $un, $pwd);
 
 
@@ -22,10 +24,10 @@ $bo_act_login.login($url, $un, $pwd);
 var $ana_1635_create_SCON = "SVMXC__Service_Contract__c SCON1 = new SVMXC__Service_Contract__c(Name = 'ANA-1635-SCON' , SVMXC__Company__c = '"+$Account+"' , SVMXC__Active__c = True, SVMXC__Start_Date__c = Date.valueOf('2017-01-01') , SVMXC__End_Date__c = Date.valueOf('2017-12-31') );insert SCON1;";
 var $ana_1635_result = $op_act_sForceApiCall.sForceQuery($un, $pwd, $ana_1635_create_SCON , "create");
 var $ana_1635_query_SCON = "Select Id , Name from SVMXC__Service_Contract__c where Name = 'ANA-1635-SCON' Limit 1";
-	
+_wait(10000);
 var $ana_1635_fetch_SCON  = $op_act_sForceApiCall.sForceQuery($un, $pwd, $ana_1635_query_SCON,"query");
 
-_wait(8000);
+_wait(10000);
 
 _log($ana_1635_fetch_SCON);
 
@@ -48,12 +50,12 @@ _log($ana_1635_SCON);
 
 var $ana_1635_create_IB1 = "SVMXC__Installed_Product__c IB01 = new SVMXC__Installed_Product__c(SVMXC__Company__c = '"+$Account+"' , Name = 'ANA-1635-IB1' , SVMXC__Status__c = 'Installed');insert IB01;";
 var $ana_1635_result_IB1  = $op_act_sForceApiCall.sForceQuery($un, $pwd, $ana_1635_create_IB1 , "create");
-
+_wait(10000);
 _log($ana_1635_result_IB1);
 var $ana_1635_get_IB1 = "Select Id , Name from SVMXC__Installed_Product__c where Name = 'ANA-1635-IB1' Limit 1";
 
 var $ana_1635_fetch_IB1  = $op_act_sForceApiCall.sForceQuery($un, $pwd, $ana_1635_get_IB1,"query");
-_wait(8000);
+_wait(10000);
 
 var $ana_1635_IB_ID1;
 
@@ -69,14 +71,14 @@ var $ana_1635_IB_ID1;
 
 	var $ana_1635_create_IB2 = "SVMXC__Installed_Product__c IB01 = new SVMXC__Installed_Product__c(SVMXC__Company__c = '"+$Account+"' , Name = 'ANA-1635-IB2' , SVMXC__Status__c = 'Installed');insert IB01;";
 	var $ana_1635_result_IB2  = $op_act_sForceApiCall.sForceQuery($un, $pwd, $ana_1635_create_IB2 , "create");
-
+	_wait(10000);
 	_log($ana_1635_result_IB2);
 	var $ana_1635_get_IB2 = "Select Id, Name from SVMXC__Installed_Product__c where Name = 'ANA-1635-IB2' Limit 1";
 	
 
 	var $ana_1635_fetch_IB2  = $op_act_sForceApiCall.sForceQuery($un, $pwd, $ana_1635_get_IB2,"query");
 
-	_wait(8000);
+	_wait(10000);
 
 
 	var $ana_1635_IB_ID2;
@@ -87,10 +89,11 @@ var $ana_1635_IB_ID1;
 // Create Covered Product 1
 var $ana_1635_create_CP1 = "SVMXC__Service_Contract_Products__c CP01 = new SVMXC__Service_Contract_Products__c(SVMXC__Installed_Product__c = '"+$ana_1635_IB_ID1+"',SVMXC__Service_Contract__c = '"+$ana_1635_SCON+"',SVMXC__End_Date__c = System.Today() ); insert CP01;";
 var $ana_1635_result_CP1 = $op_act_sForceApiCall.sForceQuery($un, $pwd, $ana_1635_create_CP1 , "create");
+_wait(10000);
 var $ana_1635_get_CP1 = "Select Id , Name from SVMXC__Service_Contract_Products__c where Createdby.Id = '005q0000003GGfP' Order by CreatedDate DESC Limit 1";
 var $ana_1635_fetch_CP1  = $op_act_sForceApiCall.sForceQuery($un, $pwd, $ana_1635_get_CP1,"query");
 var $ana_1635_cp_ID1;
-_wait(8000);
+_wait(10000);
 
 	
 	$ana_1635_cp_ID1 = $ana_1635_fetch_CP1[0].Id ;
@@ -100,10 +103,11 @@ _wait(8000);
 	
 	var $ana_1635_create_CP2 = "SVMXC__Service_Contract_Products__c CP01 = new SVMXC__Service_Contract_Products__c(SVMXC__Installed_Product__c = '"+$ana_1635_IB_ID2+"',SVMXC__Service_Contract__c = '"+$ana_1635_SCON+"',SVMXC__End_Date__c = Date.valueOf('2017-01-01') ); insert CP01;";
 	var $ana_1635_result_CP2 = $op_act_sForceApiCall.sForceQuery($un, $pwd, $ana_1635_create_CP2 , "create");
+	_wait(10000);
 	var $ana_1635_get_CP2 = "Select Id , Name from SVMXC__Service_Contract_Products__c where Createdby.Id = '005q0000003GGfP' Order by CreatedDate DESC Limit 1";
 	var $ana_1635_fetch_CP2  = $op_act_sForceApiCall.sForceQuery($un, $pwd, $ana_1635_get_CP2,"query");
 	var $ana_1635_cp_ID2;
-	_wait(8000);
+	_wait(10000);
 
 		
 		$ana_1635_cp_ID2 = $ana_1635_fetch_CP2[0].Id ;	
@@ -137,14 +141,14 @@ _log($ana_1635_guranteed_uptime);
 
 _assertEqual($ana_1635_IB_ID1, $ana_1635_ib1_id);
 _assertEqual($ana_1635_SCON,$ana_1635_scon1_id);
-_assertEqual(43200.0,$ana_1635_guranteed_uptime);
+_assertEqual($GuaranteedUptime,$ana_1635_guranteed_uptime);
 
 
 // Verifying the CP 2
 
 var $ana_1635_query_RV2 = "Select Count(Id) from SVMXC__SPM_Contract_Up_Time__c where SVMXC__Contract__c = '"+$ana_1635_SCON+"'";
 var $ana_1635_resultRV2 = $op_act_sForceApiCall.sForceQuery($un, $pwd, $ana_1635_query_RV2,"query");
-_wait(8000);
+_wait(10000);
 
 _log($ana_1635_resultRV2[0].expr0);
 
