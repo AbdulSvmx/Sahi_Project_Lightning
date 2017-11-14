@@ -22,8 +22,8 @@ var $bac_pwdBase = "servicemax1";
 var $url = "https://test.salesforce.com";
 var $un = "vansys@pqtpart1.com";
 var $pwd = "servicemax2";
-var $sfmUsn = "vansys@pqtpart1.com";
-var $sfmPwd = "servicemax2";
+var $sfmUsn = "sysadmin01@sfdautomation.com";
+var $sfmPwd = "maxplore1";
 
 //DC Global Variables
 var $dc_org="Base";
