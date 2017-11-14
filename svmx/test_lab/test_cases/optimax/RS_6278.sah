@@ -16,10 +16,10 @@ var $dp_Id = $Dispatch_Process[$i][1];
 var $dp_Terr_Id = $Dispatch_Process[$i][2];
 }
 
-var $RS_6687 = _testcase("RS_6687", "Edit the Active Profile,Updating the setting value and Validating MPX list not populated");
+var $RS_6278 = _testcase("RS_6278", "Disable MCTM");
 var $account = null;
 var $team = null;
-$RS_6687.start();
+$RS_6278.start();
 
 
 $bo_act_login.login($g_url, $g_un, $g_pwd);
@@ -30,12 +30,21 @@ _log($login_result);
 _click(_link("ServiceMax Setup"));
 _wait(20000, _isVisible(_div("Configuration Profiles")));
 _click(_div("Configuration Profiles"));
-
 $op_utility.search_ActiveProfile();
 _click(_submit("Edit"));
+_setSelected(_select("conf_prof:F_conf_prof:Setting_Block:j_id114:j_id115:Modulelist"), "Common");
+_setSelected(_select("conf_prof:F_conf_prof:Setting_Block:j_id114:j_id122:SubModulelist"), "Global Settings");
+_click(_link("Edit[6]"));
+_selectWindow("Servicemax_Conf_Prof");
+_check(_radio("disp_setting:disp_setting:j_id1:DispSection:j_id37:j_id40"));
+_click(_button("Save"));
+_click(_submit("Close"));
+_selectWindow();
+_click(_button("Refresh"));
+_doubleClick(_button("Refresh"));
 _setSelected(_select("conf_prof:F_conf_prof:Setting_Block:j_id114:j_id115:Modulelist"), "OptiMax");
-_setSelected(_select("conf_prof:F_conf_prof:Setting_Block:j_id114:j_id122:SubModulelist"), "Dispatch Calculations");
-_click(_link("Edit[46]"));
+_setSelected(_select("conf_prof:F_conf_prof:Setting_Block:j_id114:j_id122:SubModulelist"), "Manage OptiMax Settings");
+_click(_link("Edit[13]"));
 _selectWindow("Servicemax_Conf_Prof");
 _check(_radio("disp_setting:disp_setting:j_id1:DispSection:j_id37:j_id40[1]"));
 _click(_button("Save"));
@@ -44,7 +53,6 @@ _selectWindow();
 _click(_button("Refresh"));
 _doubleClick(_button("Refresh"));
 _click(_submit("Save"));
-
 
 _set($login_result, _fetch(login($g_un,$g_pwd)));
 _log($login_result);
@@ -60,6 +68,7 @@ function login($g_un,$g_pwd){
 	var $login_result = sforce.connection.login($g_un,$g_pwd);
 	return $login_result;
 }
+
 
 
 function create_Team ($dp_Terr_Id){
@@ -167,11 +176,11 @@ function create_Team ($dp_Terr_Id){
      //_log("records.SVMXC__Qualified_Technicians__c = "+records.SVMXC__Qualified_Technicians__c);
        if(QTLlist_WO.SVMXC__Qualified_Technicians__c === null)
        {
-         _log("work order resource list is not populated");
+         _log("Skill Set and QTL list is not Populated");
        }
       else
          {
-	     _log("work order resource list is populated");
+	     _log("Skill Set and QTL list is Populated");
          }
 }
     
@@ -179,4 +188,4 @@ function create_Team ($dp_Terr_Id){
 }
 
 //</browser>
-$RS_6687.end();
+$RS_6278.end();
