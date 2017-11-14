@@ -18,9 +18,7 @@ this.verifyWizardOnPMPObj=function($sfmName){
 	_wait(2000);
 	_click($bo_pg_sfmVerifyWorkOrder.lnk_objPMP);
 	_wait(30000);
-	_click($bo_pg_sfmVerifyWorkOrder.lnk_firstLinkPMP);
-	
-		
+	_click($bo_pg_sfmVerifyWorkOrder.lnk_firstLinkPMP);		
 };
 
 this.verifyWizardOnWOObj=function($sfmName){
@@ -31,8 +29,7 @@ this.verifyWizardOnWOObj=function($sfmName){
 	_click($bo_pg_sfmVerifyWorkOrder.lnk_firstLinkWO);
 }
 	
-	this.wizardButtonVerification=function($wizardname){
-			
+	this.wizardButtonVerification=function($wizardname){			
 			_selectDomain("/svmx/");
 		if( _assertVisible($bo_pg_sfmVerifyWorkOrder.wizardButtonExist)){
 			_log("SFm wizard visible");
@@ -42,8 +39,6 @@ this.verifyWizardOnWOObj=function($sfmName){
 			_stopTestCase();
 			_selectDomain();
 				}
-		
-<<<<<<< HEAD
 		}
 		this.clkOnWizard=function($wizardButtonName){
 			_selectDomain("/svmx/");
@@ -56,11 +51,7 @@ this.verifyWizardOnWOObj=function($sfmName){
 				_log("Launching of wizard in delivery failed");
 			}
 		_selectDomain();
-		}
-=======
-		};
->>>>>>> fd7ac582c04ad3a0e65a726729c8554292fcec6c
-		
+		}		
 		this.wizardButtonNotVisible=function($wizardname){
 			
 			_selectDomain("/svmx/");
@@ -71,10 +62,7 @@ this.verifyWizardOnWOObj=function($sfmName){
 			_fail("SFM Wizardvisible");
 			_stopTestCase();
 			_selectDomain();
-				}
-			
-			
-		
+				}		
 		}
 			this.searchWizard=function($wizardTitleName ){
 				_selectDomain("/svmx/");
@@ -84,24 +72,16 @@ this.verifyWizardOnWOObj=function($sfmName){
 				}else{
 					 var $result = false; 
 				}		
-				 _selectDomain();
-<<<<<<< HEAD
-				
-			}
-				
+				 _selectDomain();				
+			}				
 				this.clickOnWizardButton=function($SFMName){
 				_selectDomain("/svmx/");
 				_click(_button($SFMName));
-				_selectDomain();
-					
-			}
-	
-	
-=======
-			
+				_selectDomain();					
+			}			
 	return $callBack.returnResult($result, "","searchWizard");
->>>>>>> fd7ac582c04ad3a0e65a726729c8554292fcec6c
+
 	
 	};
-};
+
 

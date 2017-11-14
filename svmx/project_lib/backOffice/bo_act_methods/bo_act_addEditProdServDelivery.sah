@@ -7,7 +7,7 @@ var $bo_act_addEditProdServDelivery=new function bo_act_addEditProdServDelivery(
 		_click(_div($selLocation));
 		_click($bo_pg_addEditProdServDelivery.btn_select);
 		_setValue($bo_pg_addEditProdServDelivery.txt_workPerform,$workPerform);	
-	}
+	};
 		
 		// This function is to add info for product serviced child ine*********
 		this.addchildlineInfo=function($selIBProd,$selPart,$selProdWarranty){//$selIBProd="Laptop"//$selPart="Keyboard",$selProdWarranty="WN-000006"
@@ -39,7 +39,7 @@ var $bo_act_addEditProdServDelivery=new function bo_act_addEditProdServDelivery(
 			_click($bo_pg_addEditProdServDelivery.btn_svmxSearchIcon);
 			_click(_div($selProdWarranty));
 			_click($bo_pg_addEditProdServDelivery.btn_select);						
-		}
+		};
 			
 			//This Function is to click on ICon named here as "AddModify Work Detail" whick appear under product Serviced****
 			this.clkAddModifyWorkDetailIcon=function(){
@@ -49,7 +49,7 @@ var $bo_act_addEditProdServDelivery=new function bo_act_addEditProdServDelivery(
 				_wait(6000);
 				_click($bo_pg_addEditProdServDelivery.lnk_addEdit);
 				_wait(60000);
-			}
+			};
 			
 				//This function is to find date of today in the format dd/mm/yyyy
 				this.findDateToday=function(){
@@ -66,7 +66,7 @@ var $bo_act_addEditProdServDelivery=new function bo_act_addEditProdServDelivery(
 					} 
 					var $today = dd+'/'+mm+'/'+yyyy;
 					return $today;
-				}
+				};
 					//This function is to find next month today date
 					this.findNextMonthTodayDate=function(){
 						var today = new Date();
@@ -81,9 +81,9 @@ var $bo_act_addEditProdServDelivery=new function bo_act_addEditProdServDelivery(
 							mm='0'+mm;
 						} 
 						var $nextMonthToday = dd+'/'+mm+'/'+yyyy;
-						return $nextMonthToday
+						return $nextMonthToday;
 						
-					} 
+					} ;
 		
 						this.addPart=function(){
 							_click($bo_pg_addEditProdServDelivery.btn_svmxAddLineIcon);
@@ -92,7 +92,7 @@ var $bo_act_addEditProdServDelivery=new function bo_act_addEditProdServDelivery(
 							_click($bo_pg_addEditProdServDelivery.btn_svmxSearchIcon);
 							_click(_div($selIBProd));
 							_click($bo_pg_addEditProdServDelivery.btn_select);							
-						}
+						};
 							
 							this.addLabor=function(){
 							_click($bo_pg_addEditProdServDelivery.lbl_labor);
@@ -103,7 +103,7 @@ var $bo_act_addEditProdServDelivery=new function bo_act_addEditProdServDelivery(
 							_click(_div($selIBProd));
 							_click($bo_pg_addEditProdServDelivery.btn_select);	
 								
-							}
+							};
 								this.addExpenses=function(){
 									_click($bo_pg_addEditProdServDelivery.lbl_expenses);
 									_click($bo_pg_addEditProdServDelivery.btn_svmxAddLineIcon);
@@ -113,11 +113,11 @@ var $bo_act_addEditProdServDelivery=new function bo_act_addEditProdServDelivery(
 									_click(_listItem("Parking"));
 									_wait(6000);
 									_click($bo_pg_addEditProdServDelivery.chk_usePriceFrom);									
-								}
+								};
 						
 									
 									this.addTravel=function(){
-									}
+									};
 							//_setValue($bo_pg_addEditProdServDelivery.txt_startDate,findDateToday());
 							
 						
@@ -126,4 +126,4 @@ var $bo_act_addEditProdServDelivery=new function bo_act_addEditProdServDelivery(
 							//}
 			
 			
-}
+};

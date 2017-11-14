@@ -1,0 +1,46 @@
+//Author Mamata Rout
+var $RS_5434 = _testcase("RS_5434", "Verify Each device is allowed to support 1000 process ID per device type");
+$RS_5434.start();
+_setSpeed(100);
+
+	var $sfmToBeCloned="manage work order lines - Usage";
+	var $sfmName="SFMTest5380_1";
+	//change  the name of $sfmTemplateSaveAsName before execution to avoid any duplication.
+	var $sfmTemplateSaveAsName="Temp5380_1";
+
+	var $objName="Work Order";
+	var $wizardname="RS-5380WizardName";
+	var $wizardID="RS-5380WizardID4";
+	var $executionMode="Interactive";
+	var $fieldActnType="SFM";
+	var $actnName=$sfmName;
+	var $stndSFMName=$sfmName
+
+			
+	
+$bo_act_login.login($g_url, $bac_unBase, $bac_pwdBase);
+
+//*****Navgate to SFm Designer and create clone of Manage WO Line Usage Services transaction********
+$bo_act_navigation.navigateToSfmTransactionDesigner();
+$bo_act_manageWOLineUsageForSorting.createManageWorkOrderLineUsageForSorting($sfmToBeCloned, $sfmName,$subTypeWO,$subTypePart,$subTypeActivityType,$subTypeExpenses,$subTypeTravel,$sfmTemplateSaveAsName);
+$bo_act_manageWOLineUsageForSorting.sorting();
+
+//*******Nagigate to SFM Wizard and Create Wizard and Add Above Transaction to it**********
+$bo_act_navigation.navigateToSfmWizard();
+$bo_act_SFW.createWizardGeneralInfo($objName,$wizardname,$wizardID);
+$bo_act_SFW.createWizardStep($fieldActnType,$actnName,$executionMode);
+
+//******Launch the SFM in delivery for WO object**************
+
+$bo_act_sfmVerifyWorkOrder.verifyWizardOnWOObj($stndSFMName);
+$bo_act_sfmVerifyWorkOrder.clkOnWizard($wizardButtonName);
+
+//Fill the details of Work Line Usage in delivery and click Save
+$bo_act_manageWOLineUsageForSorting.addPartLineInDelivery($grtDate,$midDate,$lowDate);
+$bo_act_manageWOLineUsageForSorting.addExpensesLineInDelivery($billQty1,$activityName1,$billQty2,$activityName2,$billQty3,$activityName3);
+_click($bo_pg_manageWOLineUsageForSorting.btn_Save);
+_click($bo_pg_manageWOLineUsageForSorting.alert);
+_log("The Manag Workorder Line Usage saved successfully");
+$bo_act_sfmVerifyWorkOrder.clkOnWizard();
+
+$RS_5434.end();
