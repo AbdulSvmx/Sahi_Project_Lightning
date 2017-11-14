@@ -22,6 +22,9 @@ var $bo_pg_installedProducts = new function bo_pg_installedProducts(){
 	this.btn_SFWcreateSupportCase = _button("Create Support Case");
 	this.txt_SFMcreateSupportCaseStatus = _textbox(0,_rightOf(_label("Status:")));
 	this.txt_caseNumber = _heading2(0,_near(_heading1("Case:")));
+	
+	//Added by Harish
+	this.btn_continue = _submit("Continue");
 };
 
 

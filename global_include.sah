@@ -36,6 +36,11 @@ var $bac_unDev = "automationDEV@Test4Part1.com";
 var $bac_pwdDev = "welcome-01";
 var $bac_unBase = "orgsadmin@svmx-test4.org.test4part2";
 var $bac_pwdBase = "servicemax1";
+var $url = "https://test.salesforce.com";
+var $un = "vansys@pqtpart1.com";
+var $pwd = "servicemax2";
+var $sfmUsn = "sysadmin01@sfdautomation.com";
+var $sfmPwd = "maxplore1";
 
 //DC Global Variables
 var $dc_org="Base";
