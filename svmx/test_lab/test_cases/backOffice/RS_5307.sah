@@ -88,12 +88,14 @@ var $caseNumber = $bo_act_Cases.createCase($caseStatus, $casePriority, $caseOrig
 
 var $wizardTitleName = $bo_act_common.generateRandomName("SFWTitle");
 var $wizardIDName = $bo_act_common.generateRandomName("SFWId");
+var $fieldActnType = "Others";
+var $actnName = "Check Entitlement WO";
 
 $bo_act_navigation.navigateToSfmWizard();
 $bo_act_SFW.createWizardGeneralInfo("Work Order", $wizardTitleName, $wizardIDName);
 $bo_act_SFW.createWizardStep("SFM", "Manage Work Order Lines - Usage", "Interactive");
+$bo_act_SFW.addCustomActionToWizard($fieldActnType, $actnName);
 $bo_act_SFW.quickSaveSFWizard();
-
 
 //Navigate to IB and Create WO from IB
 var $WONumber = $bo_act_installedProduct.createWOFromIB($IBName);
