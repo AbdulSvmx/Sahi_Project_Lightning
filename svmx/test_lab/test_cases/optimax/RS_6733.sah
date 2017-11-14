@@ -55,12 +55,7 @@ function create_rto_wo($RTO_DispatchProcess){
 
 	// Wait for the Work order to get scheduled and work order is updated with scheduled information
 	 
-	 var $count=0;
-	 while($count!=5000){
-		 _log(1000);
-		  $count++;
-		
-	                    }
+	 _wait(20000);
 	 
 	 // Validating the Work order scheduled info
 	 
@@ -96,7 +91,7 @@ if(record.SVMXC__OptiMax_Status__c!=null ){
 
 }
 
-_wait(150000);
+_wait(20000);
 
    // Updating Work order's Order Status to Cancelled
 if(record.SVMXC__Group_Member__c!=null)

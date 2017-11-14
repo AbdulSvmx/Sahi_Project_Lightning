@@ -5,7 +5,6 @@ var $RS_5307 = _testcase("$RS_5307","Get Price on WO:IB covered under SCON and p
 $RS_5307.start();
 _setSpeed(100);
 
-
 /**
  * Login to the Sandbox Org
  */
@@ -89,18 +88,19 @@ var $caseNumber = $bo_act_Cases.createCase($caseStatus, $casePriority, $caseOrig
 
 var $wizardTitleName = $bo_act_common.generateRandomName("SFWTitle");
 var $wizardIDName = $bo_act_common.generateRandomName("SFWId");
+var $fieldActnType = "Others";
+var $actnName = "Check Entitlement WO";
 
 $bo_act_navigation.navigateToSfmWizard();
 $bo_act_SFW.createWizardGeneralInfo("Work Order", $wizardTitleName, $wizardIDName);
 $bo_act_SFW.createWizardStep("SFM", "Manage Work Order Lines - Usage", "Interactive");
+$bo_act_SFW.addCustomActionToWizard($fieldActnType, $actnName);
 $bo_act_SFW.quickSaveSFWizard();
-
 
 //Navigate to IB and Create WO from IB
 var $WONumber = $bo_act_installedProduct.createWOFromIB($IBName);
 
 //Edit The Above created WO for few fields
-
 $bo_act_workOrders.editWorkOrder($WONumber);
 
 // Edit WO for Case 
@@ -140,9 +140,7 @@ if(_isVisible(_image("Checked",_rightOf(_cell("/Is Entitlement Performed/"))))){
 *Invoke TDMo16 SFM for Get Price Calculation when IB is Covered under Scon
 */
 
-
 $bo_act_getPrice.navigateToSFMDeliveryPageFor_TDM016($WONumber);
-
 
 //Add Parts Line to Above invoke TDM016 SFM
 var $searchValue = $productName;
