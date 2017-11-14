@@ -35,7 +35,6 @@ this.selectsfmWizard = function($SFMWizardsName){
 		
 		};
 
-
 };
 
 
