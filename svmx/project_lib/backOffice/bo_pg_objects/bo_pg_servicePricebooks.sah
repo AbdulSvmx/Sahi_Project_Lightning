@@ -6,19 +6,19 @@ var $bo_pg_servicePricebooks = new function bo_pg_servicePricebooks(){
 	// Click on Service Price Book 
 	this.clickOnServicePriceBook = function($PriceBookName){
 		
-		_click( _span($PriceBookName,_leftOf(_image("Checked"))));
+		_click( _span($PriceBookName));
 	};
 	
 	this.btn_sfmEditServicePricebook = _button("Edit Service Pricebook");
 	this.btn_addSingleLaborLine = _span("/sfmd-add-line-icon/");
-	this.txt_standardServicePriceBook = _heading2("Standard Service Price Book");
+	this.txt_standardServicePriceBook = _heading2("Service Pricebook Detail");
 	this.btn_newServicePricebookEntry = _button("New Service Pricebook Entry");
 	this.sel_unit	= _select(0,_rightOf(_label("Unit")));
 	this.txt_activityID = _textbox("Activity Id");
 	this.txt_activityProduct = _textbox("Activity Product");
 	this.txt_regularRate = _textbox("Regular Rate");
 	this.btn_saveServicePricebookEntry = _submit(" Save ");
-	this.btn_deleteServicePricebookEntry = _button("Delete");
+	this.btn_deleteServicePricebookEntry = _button("Delete"); 
 	this.btn_editServicePriceBook = _button(" Edit ");
 	this.chk_activateServicePriceBook = _checkbox("Active");
 	this.link_navigateBackToServicePriceBook = _link("/Standard Service Price Book/", _near(_heading2("Service Pricebook Entry Detail")));
@@ -28,11 +28,10 @@ var $bo_pg_servicePricebooks = new function bo_pg_servicePricebooks(){
 		_click(_link($ServicePricebooksEntryNumber,_near(_heading3("Service Pricebook Entry"))));
 	};
 	
-
-	this.navigateBackToCustomServicePriceBook = function($CustServicePricebookName){
+    this.navigateBackToCustomServicePriceBook = function($PriceBookName){
 		
-		_click(_link(0,_rightOf(_cell($CustServicePricebookName))));
-	};	
+    	_click(_link(0,_rightOf(_cell($PriceBookName,_near(_heading2("Service Pricebook Entry Detail"))))));
+	};
 	
 	// Add new Service Price Book
 	this.btn_addNewServicePricebook =_button("New Service Pricebook");

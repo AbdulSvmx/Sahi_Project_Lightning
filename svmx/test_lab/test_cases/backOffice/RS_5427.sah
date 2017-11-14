@@ -1,12 +1,9 @@
-//author - Mamata Rout
-
-
 var $RS_5427 = _testcase("RS_5427", "On deleting a SFW/SFM/CA and check SFM App Permission page for deleted process");
 $RS_5427.start();
 _setSpeed(100);
-var $sfmName = "SFM_Inter21";
-var $custActname="Cutom Action1";
-var $custActID="CustomAction_1";
+var $sfmName = "SFM_Interact701";
+var $custActname="Cutom Action 5427";
+var $custActID="CustomAction_5427";
 var $url="https://www.google.co.in/";
 var $objectName="Preventive Maintenance Plan"
 var $actnType="URL";
@@ -19,12 +16,7 @@ var $executionMode2 = "Background";
 var $wizardStepType="Others";
 var $wizardStepName= $custActname;
 $bo_act_login.login($g_url, $bac_unBase, $bac_pwdBase);
-
-
 //-----------------CREATE SFM----------------------------------------------
-//_includeOnce("../../../references/references.js");
-
-
 $bo_act_navigation.navigateToSfmTransactionDesigner();
 _wait(60000, _isVisible($bo_pg_sfmTransactionAndDesigner.btn_newSFM));
 $bo_act_SFM.renameClonesfm($sfmName);
@@ -55,29 +47,6 @@ if($bo_act_navigation.navigateToSfmWizard($objName2,$wizardname,$wizardID,$field
 	_fail("Navigation To SFM Wizard Failed");
 	_stopTestCase();
 };
-
-//----------------Navigate to SFm App Permission, Disable the wizard
-$bo_act_navigation.navigateToSfmAppPermission();
-$bo_act_sfmVerifyWorkOrder.verifyWizardOnPMPObj($sfmName);
-$bo_act_sfmVerifyWorkOrder.wizardButtonNotVisible($wizardname);
-$bo_act_sfmVerifyWorkOrder.verifyWizardOnPMPObj($sfmName);
-_log("SFM wizard is not visible");
-
-/*-----------------Navigate to SFM App Permission, Check the visibility of Wizard ON(checkbox for online should be checked). 
-and verify the wizard in delivery*/
-
-$bo_act_navigation.navigateToSfmAppPermission();
-$bo_act_SFMAppPermission.genericSearchInAppPermission($processType,$objType,$searchText);
-$bo_pg_sfmAppPermissionD.chk_clickToCheck();
-_click($bo_pg_sfmAppPermissionD.btn_clickSaveAppPermission);
-_wait(3000);
-_click($bo_pg_sfmAppPermissionD.popUpOK)
-var $isvisible = _exists(_div("App Permissions saved successfully"));
-$callBack.returnResult($isvisible, true, "App Permission is not saved successfully");
-$bo_act_sfmVerifyWorkOrder.verifyWizardOnPMPObj($sfmName);
-_log("Wizard is visible");
-
-//----------------Navigate to SFM Wizard and delete the wizard and verify in delivery------------------------
 
 $bo_act_navigation.navigateToSfmWizard($objName2,$wizardname,$wizardID,$fieldActnType,$actnName2,$executionMode2,$sfmName);
 $bo_act_SFW.deleteWizard();

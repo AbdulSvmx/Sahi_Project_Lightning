@@ -51,13 +51,9 @@ function create_rto_wo($RTO_DispatchProcess){
     _log("result_WO = "+result_WO);
 	 _log(" Work order = "+result_WO[0].id);
 
-// Wait for the Work order to get scheduled and work order is updated with scheduled information
+	// Wait for the Work order to get scheduled and work order is updated with scheduled information
 	 
-	 var $count=0;
-	 while($count!=5000){
-		 _log(1000);
-		  $count++;
-		                 }
+	 _wait(20000);
 	 
 	 // Validating the Work order scheduled info
 	 
@@ -97,7 +93,7 @@ _wait(20000);
    // Updating Work order's Information
 for(var $i=0;$i<$RTO_DispatchProcess.length;$i++)
 {
-if(record.SVMXC__Group_Member__c==null)
+if(record.SVMXC__Group_Member__c!=null)
 {
 WO.id=result_WO[0].id;
 WO.SVMXC__Order_Type__c=$RTO_DispatchProcess[$i][7];

@@ -42,5 +42,5 @@ this.btn_ok = _span("OK");
 this.btn_click_Schedule_Notifications = _span("Schedule & Notifications");
 this.txt_Email_onSuccess = _textbox("emailOnSuccess");
 this.btn_click_run = _link("Run Now");
-}; 
+};
 
