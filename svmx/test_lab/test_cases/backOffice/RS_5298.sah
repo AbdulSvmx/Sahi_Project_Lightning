@@ -42,12 +42,10 @@ _wait(30000);
 $bo_act_workOrders.resumeSLAClock("No");
 _wait(5000);
 _call(top.location.reload());
+_wait(5000);
 _assertExists($bo_pg_workOrders.link_SLAClockStop);
 _assertExists($bo_pg_workOrders.link_SLAClockStart);
-
-_selectDomain("/svmx/");
 _assertNotContainsText("Onsite Response 00:00:00:00",_table("/CH_dtimer1/"),"SLA Clock Issue");
-_selectDomain();
 
 $bo_act_workOrders.editWorkOrder($WONumber);
 $bo_act_workOrders.clickLinktoUpdateTextfields($bo_pg_workOrders.txt_actualOnsiteResponseOnEditWO);

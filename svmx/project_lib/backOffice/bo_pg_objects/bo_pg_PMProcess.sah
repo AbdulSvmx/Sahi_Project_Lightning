@@ -5,10 +5,10 @@
  */
 
 var $bo_pg_PMProcess = new function bo_pg_PMProcess(){
-	this.btn_new = _button("New");
+	this.btn_new = _button(" New ");
 	this.txt_processType = _select("/CONF_SetupPMProcess/");
 	this.txt_processName = _textbox("/CONF_SetupPMProcess:SVMX_/",_rightOf(_span("Process Name")));
-	this.txt_processId = _textbox("/CONF_SetupPMProcess:SVMX_/",_rightOf(_span("Process Id")));
+	this.txt_processId = _textbox("/CONF_SetupPMProcess:SVMX_/",_rightOf(_span("Process Name")));
 	this.chk_active = _checkbox("/CONF_SetupPMProcess:SVMX_/",_rightOf(_span("Active")));
 	this.txt_createWorkOrderNDaysBeforeScheduledDate = _textbox("/CONF_SetupPMProcess:SVMX_/",_rightOf(_span("Create Work Order 'n' days before scheduled date")));
 	this.btn_createNewExpression = _span("Create New");
@@ -23,5 +23,4 @@ var $bo_pg_PMProcess = new function bo_pg_PMProcess(){
 	this.tab_scheduleAndNotifications = _cell("Schedule & Notifications");
 	this.txt_sendErrorNotificationsToThisEmailAddress = _textbox("/CONF_SetupPMProcess:SVMX/",_rightOf(_span("Send error notifications to this email address")));
 	this.btn_quickSave = _button("Quick Save");
-	
 };

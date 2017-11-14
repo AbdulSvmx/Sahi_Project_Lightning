@@ -54,8 +54,7 @@ _log("Territory Match Rule = "+$TerrName);
 if(_exists($TerrName))
 	{
 	_log("Territory Match Rule Created Successfully");
-	//$excel.writeToExcel("insertAtIndex", "../optimax/op_excleData/automation.xlsx", "TerritoryRule", $TerrName, $rowIndex);
-	$excel.insertUnderColumn("../optimax/op_excleData/automation.xlsx", "Rules", "Territory Match Rule", $TerrName, $rowIndex);
+	$excel.writeToExcel("insertAtIndex", "../optimax/op_excleData/automation.xlsx", "TerritoryRule", $TerrName, $rowIndex);
 	}
 else
 	{
