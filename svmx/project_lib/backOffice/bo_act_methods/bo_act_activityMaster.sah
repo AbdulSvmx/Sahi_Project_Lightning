@@ -10,7 +10,6 @@ var $bo_act_activityMaster = new function bo_act_activityMaster() {
 		_click($bo_pg_activityMaster.btn_newActivityMaster);
 		_wait(5000);
 		//_call(top.location.reload());
-		//_wait(15000);
 		_setValue($bo_pg_activityMaster.txt_activityType, $activityType);
 		_setStrictVisibilityCheck(true);
 		_click($bo_pg_getPrice.btn_editFirstRow);
