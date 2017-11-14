@@ -17,8 +17,6 @@ document.head.appendChild(script1);
 var $g_url = "https://test.salesforce.com/";
 var $g_un = "bhupen@back17.com";// "bhupendra.s@dev.tool2.com";
 var $g_pwd = "smax@123";
-var $bac_un = "orgsadmin@svmx-test4.org.test4part2"; //pointing to Base
-var $bac_pwd = "servicemax1";
 var $bac_unDev = "automationDEV@Test4Part1.com";
 var $bac_pwdDev = "welcome-01";
 var $bac_unBase = "orgsadmin@svmx-test4.org.test4part2";

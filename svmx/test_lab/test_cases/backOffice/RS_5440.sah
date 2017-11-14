@@ -41,8 +41,6 @@ var $stndSFMName="";
 		$bo_act_SFMAppPermission.setAppPermissionForWizard($sfmName,$objName)	
 		$bo_act_sfmVerifyWorkOrder.verifyWizardOnWOObj($stndSFMName);
 		$bo_act_sfmVerifyWorkOrder.searchWizard($wizardTitleName );
-		$callBack.returnResult($result, true,"searchWizard failed");
-
 
 	
 

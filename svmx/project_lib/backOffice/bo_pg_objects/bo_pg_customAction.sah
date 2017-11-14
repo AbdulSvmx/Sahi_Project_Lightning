@@ -9,6 +9,5 @@ var $bo_pg_customAction = new function bo_pg_customAction() {
 	this.btn_quickSave=_button("Quick Save");
 	this.btn_saveAndClose=_submit("Save & Close");
 	this.btn_backToSetUpHome=_submit("Back To Setup Home");
-}
-	
+};
 	
