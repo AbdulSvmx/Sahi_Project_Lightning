@@ -58,12 +58,7 @@ var $op_act_sForceApiCall = new function op_act_sForceApiCall() {
 			default:
 				var arr = null;
 				return arr;
-				
-				 records = _call(sforce.connection.query($queryComplex));
-				 var arr = records.getArray('records');
-				
-				return arr;
-			
+
 			}
 		}//</browser>
 		
