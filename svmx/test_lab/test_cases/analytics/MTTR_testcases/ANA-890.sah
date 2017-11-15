@@ -85,15 +85,12 @@ var $ana_890_labortime;
 var $ana_890_deadtime;
 
 
-
 var $ana_890_query_RV1 = "Select Id ,SVMXC__Work_Order__c ,SVMXC__Case__c , SVMXC__Account__c, SVMXC__Configuration_Name__c , SVMXC__Labor_Time__c , SVMXC__Dead_Time__c from SVMXC__SPM_Mean_Time_To_Repair__c where SVMXC__Work_Order__c ='"+$ana_890_WO1+"'";
-
-
-var $ana_890_query_RV1 = "Select SVMXC__Work_Order__c ,SVMXC__Case__c , SVMXC__Account__c, SVMXC__Configuration_Name__c , SVMXC__Labor_Time__c , SVMXC__Dead_Time__c from SVMXC__SPM_Mean_Time_To_Repair__c where SVMXC__Work_Order__c ='"+$ana_890_WO1+"'";
 
 var $ana_890_resultRV1 = $op_act_sForceApiCall.sForceQuery($un, $pwd, $ana_890_query_RV1,"query");
 _log($ana_890_resultRV1);
-_wait(5000);
+
+
 $ana_890_resultRV1.forEach(function($varRV1) {
 	
 	$ana_890_wo_id = $varRV1.SVMXC__Work_Order__c;

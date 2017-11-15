@@ -30,6 +30,12 @@ var $op_act_sForceApiCall = new function op_act_sForceApiCall() {
 
 		};
 
+		
+		if ($queryType == "create")
+			{
+
+			_wait(10000);	
+			};
 		return $nArr;
 		//<browser>
 		function sForceApiCall($un, $pwd, $queryComplex,$queryType){
@@ -47,6 +53,7 @@ var $op_act_sForceApiCall = new function op_act_sForceApiCall() {
 				return arr;
 			case 'create':
 				return records = sforce.apex.executeAnonymous($queryComplex);
+				
 				
 			default:
 				var arr = null;
