@@ -90,7 +90,7 @@ var $ana_1053_resultRV1 = $op_act_sForceApiCall.sForceQuery($un, $pwd, $ana_1053
 
 $ana_1053_resultRV1.forEach(function($varRV1) {
 	
-	$ana_1053_wo1 = $ana_1053_wo1.SVMXC__Work_Order__c;
+	$ana_1053_wo1 = $varRV1.SVMXC__Work_Order__c;
 	$ana_1053_WO_Account1 = $varRV1.SVMXC__Account__c;
 	$ana_1053_RV_sr1 = $varRV1.SVMXC__Service_Request__c;
 	$ana_1053_Is_Repeat_visit1 = $varRV1.SVMXC__Is_Repeat_Visit__c;

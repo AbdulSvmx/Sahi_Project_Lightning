@@ -89,14 +89,14 @@ $TopLevelSR.an_topLevelSR();
 //$an_act_MTTR.mttr_uk_calc("MTTR Calculation for UK");
 $an_act_MTTR.mttr_runEngine("meghana.rao@servicemax.com");
 
-
+_wait(5000);
 var $ana_875_wo_id = null;
 var $ana_875_WO_Account1;
 var $ana_875_labortime;
 var $ana_875_deadtime;
 var $an_875_service_request;
 
-var $ana_875_query_MTTR1 = "Select SVMXC__Work_Order__c ,SVMXC__Service_Request__c, SVMXC__Account__c, SVMXC__Configuration_Name__c , SVMXC__Labor_Time__c , SVMXC__Dead_Time__c from SVMXC__SPM_Mean_Time_To_Repair__c where SVMXC__Work_Order__c ='"+ $ana_875_WO1 +"'";
+var $ana_875_query_MTTR1 = "Select Id, SVMXC__Work_Order__c ,SVMXC__Service_Request__c, SVMXC__Account__c, SVMXC__Configuration_Name__c , SVMXC__Labor_Time__c , SVMXC__Dead_Time__c from SVMXC__SPM_Mean_Time_To_Repair__c where SVMXC__Work_Order__c ='"+ $ana_875_WO1 +"'";
 var $ana_875_resultMTTR1 = $op_act_sForceApiCall.sForceQuery($un, $pwd, $ana_875_query_MTTR1,"query");
 
 _log($ana_875_resultMTTR1);
