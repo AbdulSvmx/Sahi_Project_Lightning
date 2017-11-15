@@ -75,7 +75,7 @@ var $datevalue = (($stdate.getTime() - $edate.getTime()) / 1000) / (-60) ;
 _log($datevalue);
 $TopLevelCase.an_toplevelcase();
 $an_act_MTTR.mttr_runEngine("meghana.rao@servicemax.com");
-
+_wait(5000);
 var $ana_871_wo_id;
 var $ana_871_case;
 var $ana_871_WO_Account1;
@@ -83,9 +83,13 @@ var $ana_871_labortime;
 var $ana_871_deadtime;
 var $an_custom_map_field;
 
-for(var $i = 0;$ana_871_wo_id == null;$i++){
+
+var $ana_871_query_RV1 = "Select Id , SVMXC__Work_Order__c ,SVMXC__Case__c , SVMXC__Account__c, custom_mttr_checkbox__c , SVMXC__Labor_Time__c , SVMXC__Dead_Time__c from SVMXC__SPM_Mean_Time_To_Repair__c where SVMXC__Work_Order__c ='"+$ana_871_WO1+"'";
+
 var $ana_871_query_RV1 = "Select SVMXC__Work_Order__c ,SVMXC__Case__c , SVMXC__Account__c, custom_mttr_checkbox__c , SVMXC__Labor_Time__c , SVMXC__Dead_Time__c from SVMXC__SPM_Mean_Time_To_Repair__c where SVMXC__Work_Order__c ='"+$ana_871_WO1+"'";
+
 var $ana_871_resultRV1 = $op_act_sForceApiCall.sForceQuery($un, $pwd, $ana_871_query_RV1,"query");
+_log($ana_871_query_RV1);
 _log($ana_871_resultRV1);
 $ana_871_resultRV1.forEach(function($varRV1) {
 	
@@ -98,7 +102,7 @@ $ana_871_resultRV1.forEach(function($varRV1) {
 	$an_custom_map_field = $varRV1.custom_mttr_checkbox__c;
 	
 });
-}
+
 _log($ana_871_case);
 
 $ana_871_deadtime = Math.round($ana_871_deadtime);
