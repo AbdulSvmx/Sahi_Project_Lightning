@@ -46,6 +46,11 @@ var $bo_pg_serviceMaintenanceContracts = new function bo_pg_serviceMaintenanceCo
 		this.txt_pricePerUnit	= _textbox("Price Per Unit");
 		this.chk_active	= _checkbox("Active");
 		this.link_ServiceContractOnPartsPricing = _link(0,_rightOf(_cell("Service Contract")));
+		
+		
+		//Objects for Part Pricing in Scon
+		this.btn_sfmLaborPricing = _button("Labor Pricing");
+		
 	
 };
 
