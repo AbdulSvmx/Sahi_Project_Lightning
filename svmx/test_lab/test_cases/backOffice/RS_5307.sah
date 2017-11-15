@@ -5,12 +5,11 @@ var $RS_5307 = _testcase("$RS_5307","Get Price on WO:IB covered under SCON and p
 $RS_5307.start();
 _setSpeed(100);
 
-
 /**
  * Login to the Sandbox Org
  */
 
-$bo_act_login.login($g_url, $g_un, $g_pwd);
+//$bo_act_login.login($g_url, $g_un, $g_pwd);
 
 //Pre - Condition Test Data
 var $productFamily = ["--None--","GeneralSolution","AdvSolution","Accessory", "Storage"];
@@ -100,7 +99,6 @@ $bo_act_SFW.quickSaveSFWizard();
 var $WONumber = $bo_act_installedProduct.createWOFromIB($IBName);
 
 //Edit The Above created WO for few fields
-
 $bo_act_workOrders.editWorkOrder($WONumber);
 
 // Edit WO for Case 
@@ -140,9 +138,7 @@ if(_isVisible(_image("Checked",_rightOf(_cell("/Is Entitlement Performed/"))))){
 *Invoke TDMo16 SFM for Get Price Calculation when IB is Covered under Scon
 */
 
-
 $bo_act_getPrice.navigateToSFMDeliveryPageFor_TDM016($WONumber);
-
 
 //Add Parts Line to Above invoke TDM016 SFM
 var $searchValue = $productName;

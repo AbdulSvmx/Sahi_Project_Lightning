@@ -1,0 +1,46 @@
+/**
+ * Home page object repository 
+ */
+
+var $bo_pg_getPrice = new function bo_pg_getPrice(){
+	
+	this.btn_addSingleLine = _span("/sfmd-add-line-icon/");
+	this.btn_addMultiLine = _span("/sfmd-multi-add-line-icon/");
+	this.btn_deleteFirstRow = _image("/sfmd-delete-icon/");
+	this.btn_editFirstRow = _image("/svmx-sfmd-edit-icon/");
+	this.btn_update = _span("Update");
+	this.btn_getPrice = _span("Get Price");
+	this.btn_cencel = _span("/sfmd-cancel-icon/",_leftOf(_div("Get Price")));
+	this.btn_quickSave = _span("/sfmd-quicksave-icon/",_leftOf(_div("Get Price")));
+	this.btn_save = _span("/sfmd-save-icon/",_leftOf(_div("Get Price")));
+	
+	// Edit the Parts/Labor Line using Part/Product Name
+	this.editWOLines = function($partsName){
+		_click(_image("/svmx-sfmd-edit-icon/",_leftOf(_div($partsName))));
+	};
+	
+	// Add Parts Line
+	this.btn_partsLine = _span("Parts");
+	this.txt_lineQty = _textbox(0,_rightOf(_label("/Line Qty/")));
+	
+	// Add Labor Line
+	this.btn_laborLine = _span("Labor");
+	this.txt_activityType = _textbox(0,_rightOf(_label("/Activity Type/")));
+	this.btn_startDateAndTime = _span("/sfmd-current-datetime-icon/",_rightOf(_label("/Start Date and Time/")));
+	this.btn_endDateAndTime = _span("/sfmd-current-datetime-icon/",_rightOf(_label("/End Date and Time/")));
+	
+	this.btn_HrsPickListNextToStartDateAndTime = _textbox("/svmx-trigger-noedit/",_rightOf(_label("/Start Date and Time/")));
+	this.btn_HrsPickListNextToEndDateAndTime = _textbox("/svmx-trigger-noedit/",_rightOf(_label("/End Date and Time/")));
+	
+	// Add Expenses Line
+	this.btn_expensesLine = _span("Expenses");
+	this.btn_addSingleExpensesLine = _span("svmx-btn-icon svmx-sfmd-add-line-icon[2]");
+	
+	// Add Travel Line
+	this.btn_travelLine = _span("Travel");
+	this.btn_addSingleTravelLine = _span("svmx-btn-icon svmx-sfmd-add-line-icon[3]");
+	
+};
+
+
+

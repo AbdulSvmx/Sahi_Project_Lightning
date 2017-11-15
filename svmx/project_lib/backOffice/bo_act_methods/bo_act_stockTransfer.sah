@@ -1,23 +1,67 @@
 /**
+<<<<<<< HEAD
 * Functions for the Accounts Object
 */
 var $bo_act_stockTransfer = new function bo_act_stockTransfer() {
 
 /**
-* Create an Account
-*
-* @param $accountName
+* Create an Stock Transfer
 */
-this.createStockTransferLine = function($product,$qtyTransferred) {
+	this.createStockTransfer = function($sourceLocation,$destinationLocation) {
+		 $bo_act_navigation.navigateToStockTransfer();
+		_click($bo_pg_stockTransfer.btn_new);
+		_setValue($bo_pg_stockTransfer.txt_sourceLocation,$sourceLocation);
+		_setValue($bo_pg_stockTransfer.txt_destinationLocation,$destinationLocation);
+		_click($bo_pg_stockTransfer.btn_save);
+	    _assertNotVisible(_div("/Error: Invalid Data/"));
+		_wait(15000, _isVisible($StockadjustmentName));
+		_logOutput($StockTransferDetail+ " Stock Transfer is created");
+   return $StockTransferDetail;
+	};
+   /**
+   * Create an Stock Transfer Line
+   */
+	
+	this.Editlines = function($productName,$QtyTransferred) {
+		$bo_act_navigation.navigateToStockTransfer();
+		_click($stockTransfer);
+		_selectDomain("/svmx/");
+		_click(_button("EDit Lines"));
+		_selectDomain();
+		_click(_span("svmx-btn-icon svmx-sfmd-add-line-icon"));
+		 _setStrictVisibilityCheck(true);
+		   _click(_image("svmx-action-col-icon svmx-action-col-0   svmx-sfmd-edit-icon"));
+		   _setStrictVisibilityCheck(false);
+		   _getRecentWindow();
+		   _setValue(_textbox(0,_rightOf(_label("Qty Transferred:"))),$QtyTransferred);
+		   $bo_act_common.searchfunction($ProductName);
+		   _click(_span("Update"));
+		   _click(_span("svmx-btn-icon svmx-sfmd-add-line-icon"));
+		   _setStrictVisibilityCheck(true);
+		   _click(_image("svmx-action-col-icon svmx-action-col-0   svmx-sfmd-edit-icon[1]"));
+		   _setStrictVisibilityCheck(false);
+		   _getRecentWindow();
+		   _setValue(_textbox(0,_rightOf(_label("Qty Transferred:"))),$QtyTransferred);
+		   $bo_act_common.searchfunction($ProductName);
+		   _click(_span("Update"));
+		    _click(_span("svmx-btn-icon svmx-sfmd-save-icon"));
+	};
+		
+/*var $bo_act_stockTransferline = new function bo_act_stockTransferline() {
+
+	this.createStockTransferLine = function($product,$qtyTransferred) {
+    
+	}
 _click(_button("New Stock Transfer Line"));
 _setValue(_textbox(0,_rightOf(_label("*Product"))),$product);
 _setValue(_textbox(0,_rightOf(_label("*Qty Transferred"))),$qtyTransferred);
-};
+};*/
+	
 //Function for Post Inventory
-this.postToInventorySerialised = function($stockTransfer,$serNum) {
+this.postToInventorySerialised1 = function($stockTransfer,$serNum) {
 var $serialNumbers = new Array();
 var $i;
-$bo_act_navigation.navigateToStockTransfers();
+$bo_act_navigation.navigateToStockTransfer();
 _click($stockTransfer);
 _selectDomain("/svmx/");
 _click(_button("Post Inventory"));
@@ -29,7 +73,43 @@ _setValue(_textarea(0,_under(_div("Serial Number Selection[1]"))),$serialNumbers
 _click(_button(">>"));
 }
 _click(_button("Submit"));
-
 };
+
+	//Function for Post Inventory
+
+	/*this.postToInventorySerialised = function($stockTransfer,$serNum) {
+		 var $serialNumbers = new Array();
+		 var $i;
+		$bo_act_navigation.navigateToStockTransfers();
+		_click($stockTransfer);
+		_selectDomain("/svmx/");
+		_click(_button("Post Inventory"));
+		_selectDomain();
+		for($i=0; $i>$serNum;$i++)
+		{
+		$serialNumbers[$i] = $bo_act_common.generateRandomName("st");
+		_setValue(_textarea(0,_under(_div("Serial Number Selection[1]"))),$serialNumbers[$i]);
+		_click(_button(">>"));
+		}
+		_click(_button("Submit"));
+	};*/
+
+
+//Function for Post Inventory
+this.postToInventorySerialised = function($stockTransfer,$serNum1,$serNum2,$serNum3) {
+$bo_act_navigation.navigateToStockTransfer();
+_click($stockTransfer);
+_selectDomain("/svmx/");
+_click(_button("Post Inventory"));
+_selectDomain();
+
+var $serialNumbers = [$serNum1, $serNum2,$serNum3];
+   for (var i = 0; i < $serialNumbers.length; i++) {
+	_setValue(_textarea(0,_under(_div("Serial Number Selection[1]"))),$serialNumbers[$i]);
+	_click(_button(">>"));
+}
+_click(_button("Submit"));
+};
+
 
 };
