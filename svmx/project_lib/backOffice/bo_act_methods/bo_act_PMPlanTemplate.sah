@@ -141,6 +141,7 @@ this.updateUsageConditionRulesGridWithAdjFields = function($attribute,$operator,
 	
 this.saveConditionBasedPM = function(){
 	_click(_span("Save"));	
+	_wait(15000);
 	_assertNotVisible(_span("svmx-quick-msgbox-info"));
 };
 

@@ -119,7 +119,7 @@ var $bo_act_addEditProdServDelivery=new function bo_act_addEditProdServDelivery(
 									this.addTravel=function(){
 									}
 							//_setValue($bo_pg_addEditProdServDelivery.txt_startDate,findDateToday());
-							
+						
 						
 						//	this.endDate=function(){
 							//	_setValue($bo_pg_addEditProdServDelivery.txt_endDate,$findNextMonthTodayDate());

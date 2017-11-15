@@ -38,7 +38,7 @@ var $bo_pg_sfmTransactionAndDesigner = new function bo_pg_sfmTransactionAndDesig
 //	this.new_sfmTransaction=_f("main").s_button("New SFM Transaction");
 	
 	
-/*	
+
 	this.lbl_searchSFM=_f("main").s_textinput("searchText[3]");
 	
 	//_click(_f("main").s_checkbox("chk[25]"));
@@ -107,7 +107,7 @@ var $bo_pg_sfmTransactionAndDesigner = new function bo_pg_sfmTransactionAndDesig
      *@param $sfmName
      *@param $isCustom
      */
-/*
+
 	this.selectSFM = function($sfmName, $isCustom) {
 	if ($isCustom) {
 		_wait(3000);
@@ -122,7 +122,7 @@ var $bo_pg_sfmTransactionAndDesigner = new function bo_pg_sfmTransactionAndDesig
      * @param $fieldName
      * @param $containerName
      */
-  /*  this.addField = function($fieldName, $containerName) {
+   this.addField = function($fieldName, $containerName) {
 	_click(_f("main").fieldrenderer("[object Object]").near(_f("main").formitemlabel($containerName)));
 	_setValue($bo_pg_sfmTransactionAndDesigner.txt_quickFindField, $fieldName);
 	_click(_f("main").s_label($fieldName));
@@ -133,7 +133,7 @@ var $bo_pg_sfmTransactionAndDesigner = new function bo_pg_sfmTransactionAndDesig
      * Delete a field  from the SFM Designer page
      * @param $fieldName
      */
-    /*this.deleteField = function($fieldName) {
+    this.deleteField = function($fieldName) {
 	_click(_f("main").s_button("closeBtn").near(_f("main").s_richtext($fieldName)));
     };
 	
@@ -155,7 +155,7 @@ var $bo_pg_sfmTransactionAndDesigner = new function bo_pg_sfmTransactionAndDesig
 		this.lbl_endDateField=_f("main").s_label("End Date and Time[1]")
 	
 	
-	*/
-//Test
+	
+
 
 };
