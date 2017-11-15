@@ -121,15 +121,15 @@ _assertEqual(($ana_TU3_timeentry_duration1 * 60), Math.round($ana_TU3_timesheet_
 
 var $delete_time_sheet_daily_summary = "delete [Select Id from SVMXC__Timesheet_Day_Entry__c];";
 var $delete_data = $op_act_sForceApiCall.sForceQuery($un, $pwd, $delete_time_sheet_daily_summary , "create");
-
+_wait(2000);
 var $delete_timesheet = "delete [Select Id from SVMXC__Timesheet__c];";
 var $delete_data = $op_act_sForceApiCall.sForceQuery($un, $pwd, $delete_timesheet , "create");
-
+_wait(2000);
 var $delete_time_entries = "delete [Select Id from SVMXC__Timesheet_Entry__c];";
 var $delete_data = $op_act_sForceApiCall.sForceQuery($un, $pwd, $delete_time_entries , "create");
-
+_wait(2000);
 var $delete_util = "delete [Select Id from SVMXC__SPM_Utilization__c];";
 var $delete_data =  $op_act_sForceApiCall.sForceQuery($un, $pwd, $delete_util , "create");
-
+_wait(2000);
 
 $an_TU3_ts.end();
