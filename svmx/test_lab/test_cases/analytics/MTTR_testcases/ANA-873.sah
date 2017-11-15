@@ -93,15 +93,13 @@ _log($datevalue);
 $TopLevelWO.an_toplevelwo();
 $an_act_MTTR.mttr_runEngine("meghana.rao@servicemax.com");
 
-var $ana_873_wo_id //= null ;
+var $ana_873_wo_id ;
 var $an_873_primarywo1;
 var $ana_873_WO_Account1;
 var $ana_873_labortime;
 var $ana_873_deadtime;
 var $custom_checkbox;
 var $DeadTime2 = Math.round($deadtime2) + Math.round($deadtime);
-
-
 var $ana_873_query_RV1 = "Select Id ,SVMXC__Work_Order__c ,custom_mttr_checkbox__c , SVMXC__Primary_Work_Order__c, SVMXC__Account__c, SVMXC__Configuration_Name__c , SVMXC__Labor_Time__c , SVMXC__Dead_Time__c from SVMXC__SPM_Mean_Time_To_Repair__c where SVMXC__Work_Order__c ='"+ $ana_873_WO1 +"'";
 
 var $ana_873_query_RV1 = "Select SVMXC__Work_Order__c ,custom_mttr_checkbox__c , SVMXC__Primary_Work_Order__c, SVMXC__Account__c, SVMXC__Configuration_Name__c , SVMXC__Labor_Time__c , SVMXC__Dead_Time__c from SVMXC__SPM_Mean_Time_To_Repair__c where SVMXC__Work_Order__c ='"+ $ana_873_WO1 +"'";
