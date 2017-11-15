@@ -123,14 +123,13 @@ this.endDateCalculationForIB = function ($startDateExpectedOn_IB, $durationOfCov
 	return $endDateCalculationForIB;
 	};
 
-this.cleanUpfunction = function($value)
-	{
+this.cleanUpfunction = function($value)	{
 		_setValue(_textbox("phSearchInput"),$value);
 		_click(_button("Search"));
 		_wait(4000);
 		_click(_link("Search All"));
 		_click(_link($value));
-		_wait(3000, _isVisible($value));
+		_wait(5000, _isVisible($value));
 		_click(_button("Delete"));
 		_logOutput($value+ " is deleted");
 	};

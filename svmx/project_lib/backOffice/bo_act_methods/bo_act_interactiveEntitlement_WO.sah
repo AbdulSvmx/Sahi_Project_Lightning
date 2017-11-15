@@ -26,9 +26,6 @@ var $bo_act_interactiveEntitlement_WO = new function bo_act_interactiveEntitleme
 		$bo_act_workOrders.checkEntitlement($WO_Number);
 		_wait(15000, _isVisible($bo_pg_interactiveEntitlement_CaseAndWO.txt_checkEntitlement_WOPage));
 		_click($bo_pg_interactiveEntitlement_CaseAndWO.btn_checkEntitlement);
-		
-		//$bo_pg_interactiveEntitlement_CaseAndWO.clickOnInstalledProduct($IBName);
-		//_wait(5000, _isVisible($bo_pg_interactiveEntitlement_CaseAndWO.txt_selectWarrantyOrContractPage));
 		$bo_pg_interactiveEntitlement_CaseAndWO.selectSConOnCheckEntmPage($sconName);
 		_click($bo_pg_interactiveEntitlement_CaseAndWO.btn_saveEntitlementPSLine);
 		_wait(15000, _isVisible($bo_pg_workOrders.txt_workOrderDetails));
@@ -45,10 +42,7 @@ var $bo_act_interactiveEntitlement_WO = new function bo_act_interactiveEntitleme
 		_wait(30000, _isVisible($bo_pg_interactiveEntitlement_CaseAndWO.txt_checkEntitlement_WOPage));
 		//_call(top.location.reload());
 		_click($bo_pg_interactiveEntitlement_CaseAndWO.btn_checkEntitlement);
-		
-		//$bo_pg_interactiveEntitlement_CaseAndWO.clickOnInstalledProduct($IBName);
-		//_wait(5000, _isVisible($bo_pg_interactiveEntitlement_CaseAndWO.txt_selectWarrantyOrContractPage));
-		$bo_pg_interactiveEntitlement_CaseAndWO.selectSConOnCheckEntmPage($warrantyName);
+		$bo_pg_interactiveEntitlement_CaseAndWO.selectWarrantyOnCheckEntmPage($warrantyName);
 		_click($bo_pg_interactiveEntitlement_CaseAndWO.btn_saveEntitlementPSLine);
 		_wait(15000, _isVisible($bo_pg_workOrders.txt_workOrderDetails));
 		

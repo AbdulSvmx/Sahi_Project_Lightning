@@ -6,7 +6,6 @@ var $bo_act_serviceMaintenanceContracts = new function bo_act_serviceMaintenance
 	/**
 	 * Create an Account
 	 * 
-	 * @param $accountName
 	 */
 	this.createServiceMaintenanceContract = function($accName, $slaTermName, $futureYear, $pastYear) {
 		var $sconName = $bo_act_common.generateRandomName("Scon");
@@ -22,6 +21,17 @@ var $bo_act_serviceMaintenanceContracts = new function bo_act_serviceMaintenance
 		_assertNotVisible(_div("/Error: Invalid Data/"));
 		_wait(30000, _isVisible($sconName));
 		return $sconName;
+};
+
+this.editServiceMaintenanceContract = function($sconName, $contactName) {
+	$bo_act_navigation.navigateToServiceMaintenanceContractPage();
+	_click(_link($sconName));
+	_click($bo_pg_serviceMaintenanceContracts.btn_edit);
+	_wait(5000, _isVisible($bo_pg_serviceMaintenanceContracts.txt_SContractEdit));
+	_setValue($bo_pg_serviceMaintenanceContracts.txt_contactName, $contactName);
+	_click($bo_pg_serviceMaintenanceContracts.btn_save);
+	_assertNotVisible(_div("/Error: Invalid Data/"));
+	_wait(30000, _isVisible($sconName));
 };
 	 
 	this.AddCoveredProductToSCON =  function($sconName,$installedProduct){
@@ -77,6 +87,8 @@ var $bo_act_serviceMaintenanceContracts = new function bo_act_serviceMaintenance
 	// Function for Add child lines to the Service Contract
 	
 this.AddCoveredProducToServiceContract =  function($sconName,$installedProduct,$slaName,$pastYear,$futureYear ){
+	$bo_act_navigation.navigateToServiceMaintenanceContractPage();
+	_click(_link($sconName));
 	_click($bo_pg_serviceMaintenanceContracts.btn_newCoveredProduct);
 	_wait(10000, _isVisible(_heading2("New Covered Product")));
     _setValue($bo_pg_serviceMaintenanceContracts.txt_installedProduct,$installedProduct);
@@ -89,6 +101,8 @@ this.AddCoveredProducToServiceContract =  function($sconName,$installedProduct,$
 };
 
 this.AddCoveredProducToSConWithoutStartEndDates =  function($sconName,$installedProduct,$slaName){
+	$bo_act_navigation.navigateToServiceMaintenanceContractPage();
+	_click(_link($sconName));
 	_click($bo_pg_serviceMaintenanceContracts.btn_newCoveredProduct);
 	_wait(10000, _isVisible(_heading2("New Covered Product")));
     _setValue($bo_pg_serviceMaintenanceContracts.txt_installedProduct,$installedProduct);
@@ -99,6 +113,8 @@ this.AddCoveredProducToSConWithoutStartEndDates =  function($sconName,$installed
 };
 
 this.addCoveredLocationToServiceContract = function($sconName,$location,$slaName,$pastYear,$futureYear){
+	$bo_act_navigation.navigateToServiceMaintenanceContractPage();
+	_click(_link($sconName));
 	_click($bo_pg_serviceMaintenanceContracts.btn_newCoveredLocation);
 	_setValue($bo_pg_serviceMaintenanceContracts.txt_location,$location);
 	_setValue($bo_pg_serviceMaintenanceContracts.txt_slaTermName,$slaName);
@@ -110,6 +126,8 @@ this.addCoveredLocationToServiceContract = function($sconName,$location,$slaName
 };
 
 this.addEntitledContactsToServiceContract = function($sconName,$contact){
+	$bo_act_navigation.navigateToServiceMaintenanceContractPage();
+	_click(_link($sconName));
 	_click($bo_pg_serviceMaintenanceContracts.btn_newEntitledContact);
 	_setValue($bo_pg_serviceMaintenanceContracts.txt_contract,$contact);
 	/*_setValue($bo_pg_serviceMaintenanceContracts.txt_slaTermName,$slaName);
@@ -122,7 +140,8 @@ this.addEntitledContactsToServiceContract = function($sconName,$contact){
 
 
 this.addPartsPricingToServiceContract = function($sconName, $prodName, $pricePerUnit){
-
+	$bo_act_navigation.navigateToServiceMaintenanceContractPage();
+	_click(_link($sconName));
 	_click($bo_pg_serviceMaintenanceContracts.btn_newPartsPricing);
 	_setValue($bo_pg_serviceMaintenanceContracts.txt_product,$prodName);
 	_setValue($bo_pg_serviceMaintenanceContracts.txt_pricePerUnit,$pricePerUnit);
@@ -132,6 +151,23 @@ this.addPartsPricingToServiceContract = function($sconName, $prodName, $pricePer
 	_click($bo_pg_serviceMaintenanceContracts.link_ServiceContractOnPartsPricing);
 };
 
+this.addLaborPricingToServiceContract = function($sconName, $prodName, $pricePerUnit){
+	$bo_act_navigation.navigateToServiceMaintenanceContractPage();
+	_click(_link($sconName));
+	_selectDomain("/svmx/");
+	_click($bo_pg_serviceMaintenanceContracts.btn_sfmLaborPricing);
+	_selectDomain();
+	
+	
+	
+	_click($bo_pg_serviceMaintenanceContracts.btn_newPartsPricing);
+	_setValue($bo_pg_serviceMaintenanceContracts.txt_product,$prodName);
+	_setValue($bo_pg_serviceMaintenanceContracts.txt_pricePerUnit,$pricePerUnit);
+	_click($bo_pg_serviceMaintenanceContracts.chk_active);
+	_click($bo_pg_serviceMaintenanceContracts.btn_save);
+	_assertNotVisible(_div("/Error: Invalid Data/"));
+	_click($bo_pg_serviceMaintenanceContracts.link_ServiceContractOnPartsPricing);
+};
 	
 };
 

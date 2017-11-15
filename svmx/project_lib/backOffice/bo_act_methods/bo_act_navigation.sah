@@ -219,7 +219,8 @@ var $bo_act_navigation = new function bo_act_navigation() {
  	 this.navigateToSvmxSetup();
  	_click($bo_pg_servicemaxSetup.btn_warrantiesAndServiceContracts);
  	_click($bo_pg_servicemaxSetup.btn_activityMaster);
- 	_setSpeed(3000);
+ 	_wait(3000);
+ 	//_setSpeed(3000);
  	//return $callBack.returnResult(_exists($bo_pg_sfmWizard.wizardLabel));
      };
      
@@ -230,7 +231,7 @@ var $bo_act_navigation = new function bo_act_navigation() {
  	 this.navigateToSvmxSetup();
  	_click($bo_pg_servicemaxSetup.btn_warrantiesAndServiceContracts);
  	_click($bo_pg_servicemaxSetup.btn_servicePricebooks);
- 	_setSpeed(3000);
+ 	//_setSpeed(3000);
  	//return $callBack.returnResult(_exists($bo_pg_sfmWizard.wizardLabel));
      };     
      
