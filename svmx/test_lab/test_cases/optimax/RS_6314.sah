@@ -60,6 +60,7 @@ $bo_act_login.login($g_url, $g_un, $g_pwd);
 
 var $date = "" + new Date();
 var $skillRuleName = "SkillMatchRule_" + $date;
+var $rowIndex = 1;
 
 _click(_link("ServiceMax Setup"));
 _wait(20000,_isVisible(_div("Dispatch Management")));
@@ -91,14 +92,14 @@ _setSelected(_select("j_id0:SVMX_FORM:SMXC_PageBLOCK1:DetailSection:j_id119:Pane
 _click(_button("Search[1]"));
 _setSelected(_select("j_id0:SVMX_FORM:SMXC_PageBLOCK1:DetailSection:j_id119:j_id134:j_id136"), ["Installation"]);
 _click(_imageSubmitButton("Add"));
-_check(_checkbox("j_id0:SVMX_FORM:SMXC_PageBLOCK1:DetailSection:j_id119:j_id145:SVMX_table2:1:j_id150"));
-_check(_checkbox("j_id0:SVMX_FORM:SMXC_PageBLOCK1:DetailSection:j_id119:j_id145:SVMX_table2:1:stdselected"));
-_setValue(_textbox("j_id0:SVMX_FORM:SMXC_PageBLOCK1:DetailSection:j_id119:j_id145:SVMX_table2:1:SkillLevel1"), "4");
 _click(_button("Save"));
+
 
 if(_exists($skillRuleName))
 {
 _log("Skill Match Rule Created Successfully");
+//$excel.writeToExcel("insertAtIndex", "../optimax/op_excleData/automation.xlsx", "SkillRule", $skillRuleName, $rowIndex);
+$excel.insertUnderColumn("../optimax/op_excleData/automation.xlsx", "Rules", "Skill Match Rule", $skillRuleName, $rowIndex);
 }
 else
 {

@@ -1,0 +1,4 @@
+_click(_div("templateMainPanel-body"));
+_click(_div("svmx-grid-cell-inner [4]"));
+_setValue(_textbox("datefield-1196-inputEl"), "10-11-2016");
+_click(_div("toolbar-1035-innerCt"));

@@ -1,0 +1,18 @@
+var $sfm_pg_screenDesigner = new function sfm_pg_screenDesigner(){
+	this.sel_createSFMTransaction= _f("main").s_dropdownlist("purposeCombo");
+	this.txt_targetObject= _f("main").s_textinput("textInput[1]");
+	this.lbl_workOrder= _f("main").s_label("Work Order[5]");
+	this.chk_workDetail= _f("main").s_checkbox("Work Detail (Work Order)");
+	this.add_field= _f("main").fieldrenderer("[object Object]");
+	this.txt_searchField= _f("main").s_textinput("searchText[4]");
+	this.lbl_billingType= _f("main").s_label("Billing Type");
+	this.lbl_account= _f("main").s_label("Account");
+	this.chk_readOnly= _f("main").s_checkbox("Read Only");
+	this.chk_required= _f("main").s_checkbox("Required");
+	this.chk_allowNew= _f("main").s_checkbox("Allow New");
+	this.chk_allowDelete= _f("main").s_checkbox("Allow Delete");
+	this.data_Group= _f("main").s_datagroup("dataGroup[3]");
+	this.lbl_part= _f("main").s_label("/Part/");
+	this.section_Parts= _f("main").s_richtext("Work Detail (Work Order)");
+	
+};

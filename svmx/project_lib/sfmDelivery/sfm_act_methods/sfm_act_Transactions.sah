@@ -1,0 +1,18 @@
+var $sfm_act_Transactions = new function sfm_act_Transactions() {
+	this.cloneAndSaveProcess = function($processName,$sfmName,$sfmPgLayoutName){
+		_setSpeed(3000);
+		$sfm_act_SFM.selectSFM($processName,false);
+		_click($bo_pg_sfmTransactionAndDesigner.btn_clone);
+		_setValue($bo_pg_sfmTransactionAndDesigner.txt_name, $sfmName);
+		_setValue($bo_pg_sfmTransactionAndDesigner.txt_sfmTransactionId, "");
+//		_setValue($bo_pg_sfmTransactionAndDesigner.txt_sfmTransactionId, $sfmName.replace(/ /g,''));
+		_click($bo_pg_sfmTransactionAndDesigner.btn_screenDesigner);
+		_setValue($bo_pg_sfmTransactionAndDesigner.txt_sfmSavePageLayoutAs, $sfmPgLayoutName);
+		_setValue($bo_pg_sfmTransactionAndDesigner.txt_sfmSavePageLayoutAsId, "");
+		_setValue($bo_pg_sfmTransactionAndDesigner.txt_sfmSavePageLayoutAsId, $sfmPgLayoutName);
+		_click($bo_pg_sfmTransactionAndDesigner.btn_pageLayoutSave);
+		_wait(3000);
+		_click($bo_pg_sfmTransactionAndDesigner.btn_finalQuickSave);
+//		_click($bo_pg_sfmTransactionAndDesigner.lbl_backToSetupHome);
+	};
+};
