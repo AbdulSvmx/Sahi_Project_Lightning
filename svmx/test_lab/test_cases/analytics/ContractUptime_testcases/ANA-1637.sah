@@ -14,8 +14,6 @@ var $Component = $data[1]["Component"];
 var $ScheduledDate = $data[1]["ScheduledDate"];
 var $PreferredStartDate = $data[1]["PreferredStartDate"];
 var $PreferredEndDate = $data[1]["PreferredEndDate"];
-var $GuaranteedUptime = $data[1]["GuaranteedUptime"];
-var $TotalUptime = $data[1]["TotalUptime"];
 $bo_act_login.login($url, $un, $pwd);
 
 
@@ -23,14 +21,13 @@ $bo_act_login.login($url, $un, $pwd);
 
 var $ana_1637_create_SCON = "SVMXC__Service_Contract__c SCON1 = new SVMXC__Service_Contract__c(Name = 'ANA-1637-SCON' , SVMXC__Company__c = '"+$Account+"' , SVMXC__Active__c = True, SVMXC__Start_Date__c = Date.valueOf('2017-01-01') , SVMXC__End_Date__c = Date.valueOf('2017-12-31') );insert SCON1;";
 var $ana_1637_result = $op_act_sForceApiCall.sForceQuery($un, $pwd, $ana_1637_create_SCON , "create");
-_wait(10000);
 var $ana_1637_query_SCON = "Select Id,Name from SVMXC__Service_Contract__c where Name = 'ANA-1637-SCON'";
 
 
 var $ana_1637_fetch_SCON  = $op_act_sForceApiCall.sForceQuery($un, $pwd, $ana_1637_query_SCON,"query");
 
 
-_wait(10000);
+_wait(1000);
 _log($ana_1637_fetch_SCON);
 
 var $ana_1637_SCON ;
@@ -51,12 +48,12 @@ _log($ana_1637_SCON);
 
 var $ana_1637_create_IB = "SVMXC__Installed_Product__c IB01 = new SVMXC__Installed_Product__c(SVMXC__Company__c = '"+$Account+"' , Name = 'ANA-1637-IB' , SVMXC__Status__c = 'Installed');insert IB01;";
 var $ana_1637_result_IB  = $op_act_sForceApiCall.sForceQuery($un, $pwd, $ana_1637_create_IB , "create");
-_wait(10000);
+
 _log($ana_1637_result_IB);
 var $ana_1637_get_IB = "Select Id , Name from SVMXC__Installed_Product__c where Name = 'ANA-1637-IB' Limit 1";
 
 var $ana_1637_fetch_IB  = $op_act_sForceApiCall.sForceQuery($un, $pwd, $ana_1637_get_IB,"query");
-_wait(10000);
+
 var $ana_1637_IB_ID;
 
 	
@@ -69,11 +66,11 @@ _log($ana_1637_IB_ID);
 // Create Covered Product 
 var $ana_1637_create_CP = "SVMXC__Service_Contract_Products__c CP01 = new SVMXC__Service_Contract_Products__c(SVMXC__Installed_Product__c = '"+$ana_1637_IB_ID+"',SVMXC__Service_Contract__c = '"+$ana_1637_SCON+"', Custom_checkbox__c = true ); insert CP01;";
 var $ana_1637_result_CP = $op_act_sForceApiCall.sForceQuery($un, $pwd, $ana_1637_create_CP , "create");
-_wait(10000);
 var $ana_1637_get_CP = "Select Id , Name from SVMXC__Service_Contract_Products__c where Createdby.Id = '005q0000003GGfP' Order by CreatedDate DESC Limit 1";
 var $ana_1637_fetch_CP   = $op_act_sForceApiCall.sForceQuery($un, $pwd, $ana_1637_get_CP,"query");
 var $ana_1637_cp_ID;
-_wait(10000);
+
+	
 	$ana_1637_cp_ID = $ana_1637_fetch_CP[0].Id ;
 
 
@@ -82,10 +79,10 @@ _wait(10000);
 
 	var $ana_1637_create_WO = "SVMXC__Service_Order__c WO1 = new SVMXC__Service_Order__c(SVMXC__Component__c = '"+$ana_1637_IB_ID+"',SVMXC__Service_Contract__c = '"+$ana_1637_SCON+"', SVMXC__Order_Status__c = 'Closed' ); insert WO1;";
 	var $ana_1637_result_WO = $op_act_sForceApiCall.sForceQuery($un, $pwd, $ana_1637_create_WO , "create");
-	_wait(10000);
 	var $ana_1637_get_WO = "Select Id, Name from SVMXC__Service_Order__c where Createdby.Id = '005q0000003GGfP' Order by CreatedDate DESC Limit 1";
 	var $ana_1637_fetch_WO = $op_act_sForceApiCall.sForceQuery($un, $pwd, $ana_1637_get_WO,"query");
-_wait(10000);
+	
+
 var $ana_1637_WO_ID ;
 
 $ana_1637_WO_ID = $ana_1637_fetch_WO[0].Id;
@@ -96,11 +93,10 @@ $ana_1637_WO_ID = $ana_1637_fetch_WO[0].Id;
 
 var $ana_1637_create_DT = "SVMXC__Down_Time__c DT1 = new SVMXC__Down_Time__c(SVMXC__Service_Order__c = '"+$ana_1637_WO_ID+"',SVMXC__Duration__c = 360,SVMXC__Start_Time__c = DateTime.valueOf('"+$PreferredStartDate+"'),SVMXC__End_Time__c = DateTime.valueOf('"+$PreferredEndDate+"')); insert DT1;";
 var $ana_1637_result_DT = $op_act_sForceApiCall.sForceQuery($un, $pwd, $ana_1637_create_DT , "create");
-_wait(10000);
 var $ana_1637_get_DT = "Select Id, Name from SVMXC__Down_Time__c where SVMXC__Service_Order__c = '"+$ana_1637_WO_ID+"' Order by CreatedDate DESC Limit 1";
 var $ana_1637_fetch_DT = $op_act_sForceApiCall.sForceQuery($un, $pwd, $ana_1637_get_DT,"query");
 
-_wait(10000);
+
 var $ana_1637_DT_ID ;
 
 $ana_1637_DT_ID = $ana_1637_fetch_DT[0].Id;
@@ -133,7 +129,7 @@ _log($ana_1637_guranteed_uptime);
 
 _assertEqual($ana_1637_IB_ID, $ana_1637_ib1_id);
 _assertEqual($ana_1637_SCON,$ana_1637_scon1_id);
-_assertEqual($GuaranteedUptime,$ana_1637_guranteed_uptime);
+_assertEqual(43200.0,$ana_1637_guranteed_uptime);
 
 
 // To verify the Downtime

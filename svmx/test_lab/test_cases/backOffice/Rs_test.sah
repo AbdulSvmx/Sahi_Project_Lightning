@@ -3,17 +3,17 @@
 
 
 
-var $RS_test = _testcase("$RS_test","Creation of a Warranty Term and association of a Warranty to an Installed Product");
+var $RS_test = _testcase("$RS_test","Creation of a PM Plan Template");
 $RS_test.start();
 _setSpeed(100);
-//$bo_act_login.login($g_url, $g_un, $g_pwd);
-////var $accountName = $bo_act_accounts.createAccount();
-//var $IBName = "IB_392017133526";
-//
-////var $contactName = $bo_act_contacts.createContact($accountName);
-//$bo_act_navigation.navigateToCreatedRecordUsingGlobalSearch($IBName); 
+$bo_act_login.login($g_url, $bac_un, $bac_pwd);
+//var $proName = $bo_act_products.createProduct("pro12", "--None--");
+//var $PMPTempName = $bo_act_PMPlanTemplate.createTimeBasedPMPlanTemplate("pro31102017123634", "Account (Visit Only)","","Months");
 
-//$excel.readFromCustomExcel("..//data.xlsx", "G", $includeHeader, $ignoreEmptyRows)
+var $PMPTemplate = $bo_act_PMPlanTemplate.createUsageBasedConditionPMPTemplateNoSave("pro31102017123634");
+$bo_act_PMPlanTemplate.updateUsageConditionRulesGridWithAdjFields("Months", "Every", 1, $bo_act_common.currentDate("-"), $bo_act_common.getfutureDate(1,"-"),"Fixed", 1,100, 10,"Days");
+$bo_act_PMPlanTemplate.saveConditionBasedPM();
+
 
 
 $RS_test.end();

@@ -1,5 +1,5 @@
 var $user_credentials = $excel.readFromCustomExcel("../optimax/op_excleData/automation.xlsx", "User_Details","","");
-var $ChildTerrData = $excel.readFromCustomExcel("../optimax/op_excleData/automation.xlsx", "ChildTerritory","","");
+var $ChildTerrData = $excel.readFromCustomExcel("../optimax/op_excleData/automation.xlsx", "Rules","","");
 
 //var $nArr;
 //Calling the sforce API
@@ -20,7 +20,7 @@ var $g_pwd = "maxpl0re2";*/
 
 $bo_act_login.login($g_url, $g_un, $g_pwd);
 		
-var $ChildTerr = $ChildTerrData[0][0];
+var $ChildTerr = $ChildTerrData[0][5];
 
 _click(_link("ServiceMax Setup"));
 _wait(20000,_isVisible(_div("Service Organization")))

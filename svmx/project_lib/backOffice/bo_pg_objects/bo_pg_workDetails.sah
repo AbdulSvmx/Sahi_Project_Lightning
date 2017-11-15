@@ -1,0 +1,25 @@
+/**
+ * Home page object repository
+ */
+
+var $bo_pg_workDetails = new function bo_pg_workDetails(){
+	this.btn_newWorkDetail = _button("New Work Detail");
+	this.txt_workDetailRecordTypePage = _heading2("Select Work Detail Record Type");
+	this.sel_workDetailsRecordType = _select(0,_rightOf(_label("/Record Type of new record/")));
+	this.btn_WDcontinue = _submit("Continue");
+	this.txt_IBSerialNumber = _textbox("/\\*IB Serial Number|^IB Serial Number/");
+	this.sel_WDActivityType = _select(0,_rightOf(_label("/Activity Type/")));
+	this.sel_WDLineType = _select(0,_rightOf(_label("/Line Type/")));
+	this.btn_saveWorkDetails = _submit(" Save ");
+	this.txt_getworkDetailsNumber = _heading2("/WL-/");
+	
+	// Click on the Work Order on Work Details record Page
+	this.clickOnWorkOrder = function($WO_Number){
+		
+		_click(_link($WO_Number,0,_rightOf(_cell("/Work Order/"))));	
+	};
+	
+};
+
+
+

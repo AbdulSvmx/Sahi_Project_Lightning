@@ -22,12 +22,12 @@ var $ana_870_fetch = $op_act_sForceApiCall.sForceQuery($un, $pwd, $ana_870_query
 var $ana_870_WO1 ;
 var $var3;
 var $varRV1;
+_wait(5000);
 
-$ana_870_fetch.forEach(function($ana_870_var1) {
 	
-	$ana_870_WO1 = $ana_870_var1.Id;
+	$ana_870_WO1 = $ana_870_fetch[0].Id;
 
-});
+
 _log($ana_870_WO1);
 
 var $StartDate = $data[1]['WDStartDate'];
@@ -48,15 +48,15 @@ var $startdate ;
 var $enddate ;
 var $deadtime;
 var $var2;
-;
-$ana_870_fetch_wd.forEach(function($var2) {
+_wait(5000);
+
 	
-	$ana_870_wd1 = $var2.Id ;
-	$startdate = $var2.SVMXC__Start_Date_and_Time__c;
-	$enddate = $var2.SVMXC__End_Date_and_Time__c;
-	$deadtime = $var2.custom_dead_time__c;
+	$ana_870_wd1 = $ana_870_fetch_wd[0].Id ;
+	$startdate = $ana_870_fetch_wd[0].SVMXC__Start_Date_and_Time__c;
+	$enddate = $ana_870_fetch_wd[0].SVMXC__End_Date_and_Time__c;
+	$deadtime = $ana_870_fetch_wd[0].custom_dead_time__c;
 		
-});
+
 
 // To calculate the time difference considering business hours is 24 hours
 
@@ -77,11 +77,14 @@ var $an_870_primarywo1;
 var $ana_870_WO_Account1;
 var $ana_870_labortime;
 var $ana_870_deadtime;
-_wait(5000);
 
 var $ana_870_query_RV1 = "Select Id , SVMXC__Work_Order__c ,SVMXC__Primary_Work_Order__c, SVMXC__Account__c, SVMXC__Configuration_Name__c , SVMXC__Labor_Time__c , SVMXC__Dead_Time__c from SVMXC__SPM_Mean_Time_To_Repair__c where SVMXC__Work_Order__c ='"+ $ana_870_WO1 +"'";
-var $ana_870_resultRV1 = $op_act_sForceApiCall.sForceQuery($un, $pwd, $ana_870_query_RV1,"query");
 
+
+var $ana_870_query_RV1 = "Select SVMXC__Work_Order__c ,SVMXC__Primary_Work_Order__c, SVMXC__Account__c, SVMXC__Configuration_Name__c , SVMXC__Labor_Time__c , SVMXC__Dead_Time__c from SVMXC__SPM_Mean_Time_To_Repair__c where SVMXC__Work_Order__c ='"+ $ana_870_WO1 +"'";
+
+var $ana_870_resultRV1 = $op_act_sForceApiCall.sForceQuery($un, $pwd, $ana_870_query_RV1,"query");
+_wait(5000);
 $ana_870_resultRV1.forEach(function($varRV1) {
 	
 	$ana_870_wo_id = $varRV1.SVMXC__Work_Order__c;
