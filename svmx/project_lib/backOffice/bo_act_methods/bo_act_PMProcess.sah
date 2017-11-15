@@ -13,7 +13,7 @@ var $bo_act_PMProcess = new function bo_act_PMProcess() {
 	 */
 	
 
-	this.createPMProcess = function($processType,$creationOfWO,$PMPlan){
+	this.createPMProcess = function($processType,$creationOfWO,$PMPlan,$numberOfWorkOrders){
 		var $PMProcessName = $bo_act_common.generateRandomName("PMProName");
 		var $pmProcessId = $bo_act_common.generateRandomName("PMProId");
 		var $expressionName = $bo_act_common.generateRandomName("ExpName");
@@ -28,19 +28,27 @@ var $bo_act_PMProcess = new function bo_act_PMProcess() {
 		_click($bo_pg_PMProcess.btn_createNewExpression);
 		_setSelected($bo_pg_PMProcess.txt_fieldName,"PM Plan Name");
 		_setSelected($bo_pg_PMProcess.txt_operator,"Equals");
-		_setValue($bo_pg_PMProcess.txt_value,$pmPlan);
+		_setValue($bo_pg_PMProcess.txt_value,$PMPlan);
 		_setValue($bo_pg_PMProcess.txt_expressionName,$expressionName);
 		_setValue($bo_pg_PMProcess.txt_expressionId,$expressionId);
 		_click($bo_pg_PMProcess.tab_workOrderRules);
-		_setSelected($bo_pg_PMProcess.txt_numberOfWorkOrder,"One Per Plan");
-		_setSelected($bo_pg_PMProcess.txt_coverageType,"SVMXSTD: Service Contract To Work Order");
+		_setSelected($bo_pg_PMProcess.txt_numberOfWorkOrder,$numberOfWorkOrders);
+		_setSelected($bo_pg_PMProcess.txt_coverageType,"/SVMXSTD/");
+		if(_condition($bo_pg_PMProcess.txt_coverageTypeLocation!=null))
+		_setSelected($bo_pg_PMProcess.txt_coverageTypeLocation,"/SVMXSTD/");
 		_click($bo_pg_PMProcess.tab_scheduleAndNotifications);
 		_setValue($bo_pg_PMProcess.txt_sendErrorNotificationsToThisEmailAddress,"noor.sharieff@servicemax.com");
 		_click($bo_pg_PMProcess.btn_quickSave);
-		return $PMProcessName;
+		return $pmProcessId;
 		//return $callBack.returnResult([_isVisible("success"), "Error in PM Processd",$accountName] );
 	};
 
+	this.deletePMProcess = function($PMProcessId){
+		$bo_act_navigation.navigateToPMProcess();
+		_check(_checkbox(0,_leftOf(_span($PMProcessId))));
+		_click($bo_pg_PMProcess.btn_delete);
+		
+	};
 
 
 };

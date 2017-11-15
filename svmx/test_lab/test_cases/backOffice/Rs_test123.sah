@@ -57,7 +57,7 @@ var $ServicePriceBookName = $bo_act_servicePricebooks.addNewServicePricebooks($u
 var $groupProfileName = "AutoBACGroup";
 var $Module = "Work Order";
 var $SubModule = "Create Work Order Lines VF";
-var $Setting = "SET004";
+var $Setting = "SET017";
 var $settingValue = $ServicePriceBookName;
 $bo_act_configurationProfiles.editGroupProfileForTextSettings($groupProfileName, $Module, $SubModule, $Setting, $settingValue);
 

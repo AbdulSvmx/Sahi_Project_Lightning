@@ -1,0 +1,11 @@
+var $rs_4985 = _testcase("RS_4985","Assign to a group and log in as same group member.");
+$rs_4985.start();
+$name = "Auto_HCS_Wiz";
+$bo_act_login.login($g_url,$sfmUsn,$sfmPwd);
+$bo_act_navigation.navigateToSfmWizard();
+$sfm_act_createCustomWizard.chooseObject("Work Order");
+$sfm_act_createCustomWizard.addManageWizSteps($name,"Output Document","Work Order Service Report","System Admin Profile");
+$sfm_act_createCustomWizard.createBlankWo();
+_wait(10000);
+_assertExists($sfm_pg_wo.cell_wizard($name),"Wizard Not Present");
+$rs_4985.end();
