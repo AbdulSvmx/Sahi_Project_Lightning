@@ -30,7 +30,7 @@ _logOutput("Value Before Reset button click", $valueBeforeReset);
 
 _setSelected($dc_pg_consoleFieldUpdates.sel_updateField2, "Invoice Number");
 _wait(1000);
-_click(_button("Reset"));
+_click(btn_Reset);
 var $valueAfterReset=_getSelectedText($dc_pg_consoleFieldUpdates.sel_updateField2Value);
 _logOutput("Value After Reset button click",$valueAfterReset); 
 

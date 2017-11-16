@@ -1,5 +1,5 @@
 var $user_credentials = $excel.readFromCustomExcel("../optimax/op_excleData/automation.xlsx", "User_Details","","");
-var $TerrData = $excel.readFromCustomExcel("../optimax/op_excleData/automation.xlsx", "TerritoryRule","","");
+var $TerrData = $excel.readFromCustomExcel("../optimax/op_excleData/automation.xlsx", "Rules","","");
 
 
 //var $nArr;
@@ -15,7 +15,7 @@ var $RS_6325 = _testcase("RS_6325", "Changing Rule Sequence of Territory Match R
 
 $RS_6325.start();
 
-var $TerrName = $TerrData[0][0];
+var $TerrName = $TerrData[0][2];
 
 /*var $g_url = "https://test.salesforce.com/";
 var $g_un = "govendhan@svmx-cct5.org.cct5part1";

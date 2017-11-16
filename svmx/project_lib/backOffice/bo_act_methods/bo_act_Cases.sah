@@ -19,7 +19,12 @@ var $bo_act_Cases = new function bo_act_Cases() {
 		_assertNotVisible(_div("/Error: Invalid Data/"));
 		_wait(15000, _isVisible($caseSubject));
 		var $caseNumber = _getText($bo_pg_Cases.txt_caseNumber);
+		
 		_logOutput($caseNumber+ " Case is created");
+		//var exactCaseNumber=extract($caseNumber, "( ) of (.*)/", true);$caseNumber
+		 
+		// $caseNumber.replace(" [View Hierarchy]", "");
+		 _log("Case Number" + $caseNumber);
     return $caseNumber;
 	};
 	
@@ -36,6 +41,8 @@ var $bo_act_Cases = new function bo_act_Cases() {
 		 _assertNotVisible(_div("/Error: Invalid Data/"));
 		 _wait(15000, _isVisible($caseNumber));
 		 _logOutput($caseNumber+ " Case is Editied");
+	
+		 _log($caseNumber[1]);
 	};
 
 	this.deleteCases = function($caseNumber){
