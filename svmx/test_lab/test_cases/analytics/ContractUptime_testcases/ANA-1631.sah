@@ -14,6 +14,7 @@ var $Component = $data[1]["Component"];
 var $ScheduledDate = $data[1]["ScheduledDate"];
 var $PreferredStartDate = $data[1]["PreferredStartDate"];
 var $PreferredEndDate = $data[1]["PreferredEndDate"];
+var $GuranteedUptime = $data[1]["GuaranteedUptime"];
 $bo_act_login.login($url, $un, $pwd);
 
 
@@ -85,8 +86,6 @@ var $ana_1631_query_SCON2 = "Select Id,Name from SVMXC__Service_Contract__c wher
 
 
 var $ana_1631_fetch_SCON2  = $op_act_sForceApiCall.sForceQuery($un, $pwd, $ana_1631_query_SCON2,"query");
-
-
 _wait(5000);
 _log($ana_1631_fetch_SCON2);
 
@@ -113,7 +112,7 @@ _log($ana_1631_result_IB2);
 var $ana_1631_get_IB2 = "Select Id , Name from SVMXC__Installed_Product__c where Name = 'ANA-1631-IB2' Limit 1";
 
 var $ana_1631_fetch_IB2  = $op_act_sForceApiCall.sForceQuery($un, $pwd, $ana_1631_get_IB2,"query");
-_wait(5000);
+
 var $ana_1631_IB_ID2;
 
 	
@@ -129,7 +128,7 @@ var $ana_1631_result_CP2 = $op_act_sForceApiCall.sForceQuery($un, $pwd, $ana_163
 var $ana_1631_get_CP2 = "Select Id , Name from SVMXC__Service_Contract_Products__c where Createdby.Id = '005q0000003GGfP' Order by CreatedDate DESC Limit 1";
 var $ana_1631_fetch_CP2  = $op_act_sForceApiCall.sForceQuery($un, $pwd, $ana_1631_get_CP2,"query");
 var $ana_1631_cp_ID2;
-_wait(5000);
+
 	
 	$ana_1631_cp_ID2 = $ana_1631_fetch_CP2[0].Id ;
 	
@@ -138,13 +137,10 @@ $an_act_Contract_Uptime.schedule_notifications("meghana.rao@servicemax.com");
 
 // FIRST ONE 
 
-
-
 var $ana_1631_guranteed_uptime1 = null;
 var $ana_1631_calculationmethod1;
 
-for(var $i=0;$ana_1631_guranteed_uptime1 == null ; $i++)
-{
+
 var $ana_1631_query_RV1 = "Select SVMXC__Installed_Product__c,SVMXC__Configuration_Name__c ,SVMXC__Contract__c,SVMXC__Gauranteed_Up_Time__c from SVMXC__SPM_Contract_Up_Time__c where SVMXC__Installed_Product__c = '"+$ana_1631_IB_ID1+"' AND SVMXC__Contract__c = '"+$ana_1631_SCON1+"'";
 var $ana_1631_resultRV1 = $op_act_sForceApiCall.sForceQuery($un, $pwd, $ana_1631_query_RV1,"query");
 
@@ -155,14 +151,13 @@ $ana_1631_resultRV1.forEach(function($varRV1) {
 	$ana_1631_calculationmethod1 = $varRV1.SVMXC__Configuration_Name__c;
 
 });
-}
+
 
 
 var $ana_1631_guranteed_uptime2 = null;
 var $ana_1631_calculationmethod2;
 
-for(var $i=0;$ana_1631_guranteed_uptime2 == null ; $i++)
-{
+
 var $ana_1631_query_RV2 = "Select SVMXC__Installed_Product__c,SVMXC__Configuration_Name__c ,SVMXC__Contract__c,SVMXC__Gauranteed_Up_Time__c from SVMXC__SPM_Contract_Up_Time__c where SVMXC__Installed_Product__c = '"+$ana_1631_IB_ID2+"' AND SVMXC__Contract__c = '"+$ana_1631_SCON2+"'";
 var $ana_1631_resultRV2 = $op_act_sForceApiCall.sForceQuery($un, $pwd, $ana_1631_query_RV2,"query");
 
@@ -173,7 +168,7 @@ $ana_1631_resultRV2.forEach(function($varRV2) {
 	$ana_1631_calculationmethod2 = $varRV2.SVMXC__Configuration_Name__c;
 
 });
-}
+
 
 _assertNotEqual($ana_1631_calculationmethod1, $ana_1631_calculationmethod2);
 $an_cu_1631.end();
