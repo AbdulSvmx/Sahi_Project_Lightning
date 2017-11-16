@@ -3,7 +3,7 @@ $an_ftf_759.start();
 var $un = "vinaya.v@servicemax.com";
 var $pwd = "servicemax12";
 var $url = "https://test.salesforce.com";
-var $data = _readExcelFile("../../analytics/an_excleData/an_Datasheet1.xlsx","Sheet1",true);
+var $data = _readExcelFile("../../analytics/an_excleData/FTF_data.xlsx","Sheet1",true);
 var $Account = $data[4]["Account"];
 var $Technician = $data[4]["Technician"];
 var $Product = $data[4]["Product"];
