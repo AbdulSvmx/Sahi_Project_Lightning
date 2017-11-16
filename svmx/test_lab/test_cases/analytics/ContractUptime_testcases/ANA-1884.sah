@@ -113,7 +113,7 @@ var $ana_1884_guranteed_uptime;
 
 var $ana_1884_query_RV1 = "Select SVMXC__Installed_Product__c,SVMXC__Contract__c,SVMXC__Gauranteed_Up_Time__c from SVMXC__SPM_Contract_Up_Time__c where SVMXC__Installed_Product__c = '"+$ana_1884_IB_ID+"' AND SVMXC__Contract__c = '"+$ana_1884_SCON+"'";
 var $ana_1884_resultRV1 = $op_act_sForceApiCall.sForceQuery($un, $pwd, $ana_1884_query_RV1,"query");
-_wait(5000);
+
 $ana_1884_resultRV1.forEach(function($varRV1) {
 	
 	$ana_1884_ib1_id = $varRV1.SVMXC__Installed_Product__c;
@@ -139,7 +139,7 @@ var $ana_1884_down_time_value = null ;
 
 var $ana_1884_query_RV1 = "Select SVMXC__Down_Time__c,SVMXC__Work_Order__c from SVMXC__SPM_Down_Time_Detail__c where SVMXC__Work_Order__c='"+$ana_1884_WO_ID+"'";
 var $ana_1884_resultRV1 = $op_act_sForceApiCall.sForceQuery($un, $pwd, $ana_1884_query_RV1,"query");
-_wait(5000);
+
 $ana_1884_resultRV1.forEach(function($varRV1) {
 	
 	$ana_1884_down_time_value = $varRV1.SVMXC__Down_Time__c;
