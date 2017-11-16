@@ -242,9 +242,14 @@ var $bo_act_navigation = new function bo_act_navigation() {
     		_setStrictVisibilityCheck(false);
      };
 
-     this.navigateToStockTransfers = function(){
+     this.navigateToStockTransfer = function(){
     	 _click($bo_pg_home.btn_allTabs);
     	    _click($bo_pg_home.link_stockTransfer);
+     };
+     
+     this.navigateToStockAdjustment = function(){
+    	 _click($bo_pg_home.btn_allTabs);
+    	    _click($bo_pg_home.link_stockAdjustment);
      };
      
      this.navigateToSetUpAndSearch = function($searchValue){
