@@ -1,4 +1,4 @@
-var $ana_mttr_871 = _testcase("ANA-871","Case as a Top level Object");
+var $ana_mttr_871 = _testcase("RS-9807","Case as a Top level Object");
 $ana_mttr_871.start();
 var $un = "meghana.rao@servicemax.com";
 var $pwd = "salesforce100";
