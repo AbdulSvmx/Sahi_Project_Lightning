@@ -1,7 +1,6 @@
-
-.settings/org.eclipse.wst.common.project.facet.core.xml
-.settings
-.DS
-.project
-AA.sah
-.settings/.jsdtscope
+settings/*
+DS.*
+project/*
+.settings/*
+.DS.*
+.project/*
