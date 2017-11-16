@@ -1,4 +1,4 @@
-var $an_rv_1061 = _testcase("ANA-1061","For Primary WO = YES and Service Request");
+var $an_rv_1061 = _testcase("RS-9806","For Primary WO = YES and Service Request");
 $an_rv_1061.start();
 var $un = "meghana.rao@servicemax.com";
 var $pwd = "salesforce100";

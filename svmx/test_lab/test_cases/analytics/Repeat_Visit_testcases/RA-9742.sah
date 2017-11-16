@@ -1,5 +1,4 @@
-var $an_rv_1044 = _testcase("ANA-1044","Custom field on the Work Order");
-
+var $an_rv_1044 = _testcase("RS-9742","Custom field Service Request");
 
 $an_rv_1044.start();
 var $un = "meghana.rao@servicemax.com";
