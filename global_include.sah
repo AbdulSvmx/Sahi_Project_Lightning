@@ -24,6 +24,11 @@ var $bac_pwdDev = "welcome-01";
 var $bac_unBase = "orgsadmin@svmx-test4.org.test4part2";
 var $bac_pwdBase = "servicemax1";
 
+//SFMD Global Variables
+
+var $sfmUsn= "sysadmin01@sfdautomation.com";
+var $sfmPwd = "maxplore1";
+
 //DC Global Variables
 var $dc_org="Base";
 var $dc_package="17.999";

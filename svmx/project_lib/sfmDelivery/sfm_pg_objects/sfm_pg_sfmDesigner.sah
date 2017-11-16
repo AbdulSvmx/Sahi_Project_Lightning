@@ -29,4 +29,10 @@ var $sfm_pg_sfmDesigner = new function sfm_pg_sfmDesigner() {
 	this.txt_eeReceivedStreet = _textarea(0,_rightOf(_label("Received Street:")));
 	this.btn_eeUpdate = _span("Update");
 	this.btn_eeCancel = _span("Cancel");
+	
+	//Extended edit page objects --Labor
+	
+	this.txt_eeStartDateTime =_textbox("svmx-date-1410-inputEl",_rightOf(_label("Start Date and Time:")));
+	this.txt_billingQty = _textbox("Billable Qty:",_rightOf(_label("Billable Qty:")));
+	this.txt_billingLinePrice = _textbox("svmx-number-1529-inputEl",_rightOf(_label("Billable Line Price:")));
 };
