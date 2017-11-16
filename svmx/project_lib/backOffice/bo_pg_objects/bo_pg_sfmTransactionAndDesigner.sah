@@ -7,7 +7,7 @@ var $bo_pg_sfmTransactionAndDesigner = new function bo_pg_sfmTransactionAndDesig
     this.txt_standardSfmTransactionQuickFind= _f("main").s_textinput("searchText[2]");
     this.btn_standardSfmTransaction= _f("main").tab("Standard SFM Transactions");
     this.btn_yourCustomSfmTransactions = _f("main").tab("Your Custom Sjavascript:void(0)FM Transactions");
-    //this.btn_yourCustomSfmTransactions = _f("main").tab("Your Custom SFM Transactions");
+    this.btn_yourCustomSfmTransactions = _f("main").tab("Your Custom SFM Transactions");
     this.txt_yourCustomSfmTransactionsQuickFind = _f("main").s_textinput("searchText[1]").near(_f("main").tab("Your Custom SFM Transactions"));
     this.btn_clone = _f("main").s_button("Clone");
     this.txt_name = _f("main").s_textinput("pName");
@@ -17,6 +17,7 @@ var $bo_pg_sfmTransactionAndDesigner = new function bo_pg_sfmTransactionAndDesig
     this.lbl_workOrder = _f("main").s_richtext("Work Order");
     this.sel_sfmTemplate = _f("main").s_combobox("searchCombo[3]");
     this.txt_sfmSavePageLayoutAs = _f("main").s_textinput("Save page layout as");
+	this.txt_sfmSavePageLayoutID=_f("main").s_textinput("Input ID Here[3]");
     this.txt_sfmSavePageLayoutAsId = _f("main").s_textinput("advTxt");
     this.btn_addFieldToPage = _f("main").s_button("Add Field to Page");
     this.txt_quickFindField = _f("main").s_textinput("searchText").near(_f("main").s_button("Add Field to Page"));
@@ -29,31 +30,53 @@ var $bo_pg_sfmTransactionAndDesigner = new function bo_pg_sfmTransactionAndDesig
     this.btn_newSFM=_f("main").s_button("New SFM Transaction");
 	this.btn_finalQuickSave = _f("main").s_button("Quick Save");
 	this.alert_proceedAnyway=_f("main").button("Proceed Anyway");
+	this.btn_propoties=_f("main").tab("Properties");
+	
+	//Added By Harish
+	this.btn_pageLayoutSave=_f("main").s_button("Save[3]");
+	this.lbl_backToSetupHome=_f("main").s_label("< Back To Setup Home");
+//	this.new_sfmTransaction=_f("main").s_button("New SFM Transaction");
 	
 	
+
+	this.lbl_searchSFM=_f("main").s_textinput("searchText[3]");
+	
+	//_click(_f("main").s_checkbox("chk[25]"));
+		this.chk_checkSFMToDelete=_f("main").s_checkbox(/chk\/^[1-9][0-9]$/);
+	// _f("main"), _leftOf(s_checkbox("Expression Name")));
+
+	
+		this.btn_clickDeleteButton=_f("main").s_button("Delete[4]");
+		this.PopUpMessageConformationForDelete=_f("main").button("Yes");
+		this.lbl_sfmTransactionSavedMessage=_f("main").label("SFM Transaction saved");
+	
+	
+	this.btn_pageLayoutSave=_f("main").s_button("Save[3]");
 	//This code is to click on new button on custom SFM transaction
 	this.btn_newSFMTransaction=_f("main").s_button("New SFM Transaction");//duplicate
 	
 	//This function is to select a checklist SFM time from drop down
-	this.lbl_checklistOb=_f("main").s_dropdownlist("purposeCombo"), "to generate a Checklist/Survey type of Process";
+	this.lbl_checklistOb=_f("main").s_dropdownlist("purposeCombo");
+
 
 	//This function is to select workorder object from drop down
 		this.sourceComboBox=_f("main").s_combobox("objCombo1");
+	this.selectSourceObj=_f("main").s_textinput("textInput");
 	
 	//click on Ok on pop up appear after selecting work object in Propoties tab of SFm designer
-	this.btn_popUpOK=_click(_f("main").s_button("OK"));
+	this.btn_popUpOK=_f("main").s_button("OK");
 	
-	this.combo_CTRecord = _f("main").s_combobox("objCombo1[1]");
-	
+	this.combo_CTRecord = _f("main").s_combobox("objCombo1[1]");	
 	this.childSource_chkBox = _f("main").s_checkbox("Work Detail (Work Order)");
 		
 	this.childCTRecord_chkBox = _f("main").s_checkbox("Work Detail (Work Order)[1]");
 	
 	//Drop Down List in Qualifying Criteria and Field Mappings
 	this.dropDownList = _f("main").s_dropdownlist("objCombo");
+	this.selectExistingPageLayout=_f("main").s_combobox("searchCombo[3]");
 	
 	this.selectComboBox = function($elementName,$elementItemName){
-			_setSelected(_f("main").s_combobox($elementName), $elementItemName);
+	_setSelected(_f("main").s_combobox($elementName), $elementItemName);
 		
 		};
 		
@@ -67,8 +90,14 @@ var $bo_pg_sfmTransactionAndDesigner = new function bo_pg_sfmTransactionAndDesig
 	};
 		
 	this.source_ctRecord_comboBox = function($comboName){
+
 			_f("main").s_combobox($comboName);	
 	};	
+
+		
+		
+	
+
 //end here_by Mamta
 
 
@@ -77,7 +106,8 @@ var $bo_pg_sfmTransactionAndDesigner = new function bo_pg_sfmTransactionAndDesig
      *@param $sfmName
      *@param $isCustom
      */
-    this.selectSFM = function($sfmName, $isCustom) {
+
+	this.selectSFM = function($sfmName, $isCustom) {
 	if ($isCustom) {
 		_wait(3000);
 	 _click($bo_pg_sfmTransactionAndDesigner.btn_yourCustomSfmTransactions);
@@ -91,7 +121,7 @@ var $bo_pg_sfmTransactionAndDesigner = new function bo_pg_sfmTransactionAndDesig
      * @param $fieldName
      * @param $containerName
      */
-    this.addField = function($fieldName, $containerName) {
+   this.addField = function($fieldName, $containerName) {
 	_click(_f("main").fieldrenderer("[object Object]").near(_f("main").formitemlabel($containerName)));
 	_setValue($bo_pg_sfmTransactionAndDesigner.txt_quickFindField, $fieldName);
 	_click(_f("main").s_label($fieldName));
@@ -105,5 +135,26 @@ var $bo_pg_sfmTransactionAndDesigner = new function bo_pg_sfmTransactionAndDesig
     this.deleteField = function($fieldName) {
 	_click(_f("main").s_button("closeBtn").near(_f("main").s_richtext($fieldName)));
     };
+	
+		this.tab_advancedOptions=_f("main").tab("Advanced Options")
+		this.lbl_sorting=_f("main").tab("Sorting")
+		this.lbl_partObj=_f("main").s_label("Parts[4]")
+		this.lbl_partField=_f("main").s_label("Part")
+		this.img_add=_f("main").s_button(">[1]")
+
+		this.lbl_laborObj=_f("main").s_label("Labor[4]")
+		this.lbl_activityTypeField=_f("main").s_label("Activity Type")
+
+
+		this.lbl_expenseObj=_f("main").s_label("Expense[3]")
+		this.lbl_lineQtyField=_f("main").s_label("Line Qty")
+
+		this.lbl_travelObj=_f("main").s_label("Travel[1]")
+		this.lbl_statDateField=_f("main").s_label("Start Date and Time")
+		this.lbl_endDateField=_f("main").s_label("End Date and Time[1]")
+	
+	
+	
+
 
 };

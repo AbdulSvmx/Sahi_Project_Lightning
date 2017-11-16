@@ -6,7 +6,7 @@ $RS_5244.start();
 _setSpeed(100);
 
 //Pre - Condition 
-$bo_act_login.login($g_url, $bac_unDev, $bac_pwdDev);
+$bo_act_login.login($g_url, $bac_un, $bac_pwd);
 var $slaterm = $bo_act_slaTerms.createSlaTerms("Default");
 $bo_act_slaTerms.addInitialResponseToSLA($slaterm, "Case","Problem", "High", "Created Date", 30, 60, "SLA");
 $bo_act_slaTerms.addOnsiteResponseToSLA($slaterm, "Case","Problem", "High", "Created Date", 30, 60, "SLA");

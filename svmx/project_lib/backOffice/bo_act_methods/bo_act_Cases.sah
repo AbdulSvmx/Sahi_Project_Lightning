@@ -85,4 +85,12 @@ var $bo_act_Cases = new function bo_act_Cases() {
 		 _logOutput($caseNumber+ " Case is Editied");
 		
 	};
+	
+	this.checkEntitlementOnCase = function($caseNumber){
+		$bo_act_navigation.navigateToCasesPage();
+		  _click(_link($caseNumber));
+		_selectDomain("/svmx/");
+		_click($bo_pg_Cases.btn_SFWCheckEntitlementOnCase);
+		_selectDomain();
+	};
 };

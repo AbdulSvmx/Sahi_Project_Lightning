@@ -30,6 +30,15 @@ var $bo_pg_PMPlan = new function bo_pg_PMPlan(){
 	
 //PM Coverages
 	this.link_locationname = _link(0,_rightOf(_cell("Location Name")));
+
+
+//Custom UI for Condition Based PM
+	this.txt_planName = _textbox("planName");
+	this.txt_planTemplateName = _textbox("planTemplateName");
+	this.txt_startDateInput = _textbox("startDate-inputEl");
+	this.txt_endDateInput = _textbox("endDate-inputEl");
+	this.btn_saveCustomUI = _span("Save");
+
 };
 
 

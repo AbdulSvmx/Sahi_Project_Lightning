@@ -1,0 +1,146 @@
+var $sfm_act_createCustomWizard = new function sfm_act_createCustomWizard() {
+//	var $title = "";
+	this.chooseObject = function($object){
+		_setSelected($sfm_pg_wizards.selectObject,$object);
+		_click($sfm_pg_wizards.btn_customNew);
+	};
+	
+	this.addManageWizSteps = function($wizStepType,$wizStepName,$profile){
+//		$title = $wizTitle;
+		$wizTitle = $bo_act_common.generateRandomName("Auto Wiz ");
+		var $wizId = $wizTitle.toLowerCase().replace(/ /g, "_");
+//		_log($wizTitle);
+//		_log($wizId);
+//		_log($title);
+		_wait(5000);
+		_setValue($sfm_pg_wizards.txt_wizardTitle,$wizTitle);
+		_setValue($sfm_pg_wizards.txt_wizardID,$wizId);
+		_click($sfm_pg_wizards.txt_manageWizSteps);
+		_click($sfm_pg_wizards.btn_newStep);
+		_setSelected($sfm_pg_wizards.btn_wizStepType,$wizStepType);
+		_setSelected($sfm_pg_wizards.btn_stepName,$wizStepName);
+		_click($sfm_pg_wizards.btn_saveStep);
+		_click($sfm_pg_wizards.txt_managePermission);
+		_setSelected($sfm_pg_wizards.select_availableGrpProfiles,$profile);
+		_click($sfm_pg_wizards.btn_add);
+		_click($sfm_pg_wizards.btn_saveClose);
+	};
+	
+	this.createBlankWo = function(){
+		$woName="";
+		_wait(5000);
+		_click($sfm_pg_wo.tab_all);
+//		_click($sfm_pg_wo.clickTab("Work Orders"));
+		_wait(3000);
+		_click($sfm_pg_wo.link_wo);
+		_click($sfm_pg_wo.btn_wo_new);
+		_click($sfm_pg_wo.btn_wo_save);
+		_wait(3000);
+		$woName= _getText($sfm_pg_wo.label_wo);
+		_selectDomain("/svmx/");
+		return $woName;
+//		_wait(10000,_isVisible($sfm_pg_wo.cell_wizard));
+//		var $txt = _isVisible($sfm_pg_wo.cell_wizard);
+//		_selectWindow();
+		
+	};
+	
+	this.newInstalledProduct = function($tabName,$productName,$accountName,$contactName) {
+		var $serialNum = $bo_act_common.generateRandomName("Ser");
+		var $IBName = $bo_act_common.generateRandomName("IB_");
+		_wait(5000);
+//		 $bo_act_navigation.navigateToInstalledProductPage();
+		$sfm_pg_wo.clickHomeTabs($tabName);
+		_click($bo_pg_installedProducts.btn_new);
+		if(_isVisible($bo_pg_installedProducts.btn_continue)){
+		_click($bo_pg_installedProducts.btn_continue);
+		}
+		_setValue($bo_pg_installedProducts.txt_productName,$productName);
+		_setValue($bo_pg_installedProducts.txt_serialNumber, $serialNum);
+		_setValue($bo_pg_installedProducts.txt_accountName, $accountName);
+		_setValue($bo_pg_installedProducts.txt_contactName, $contactName);
+		_setValue($bo_pg_installedProducts.txt_installedProductName, $IBName);
+		_setValue($bo_pg_installedProducts.txt_installedDate);
+		_click($bo_pg_installedProducts.btn_save);
+		_assertNotVisible(_div("/Error: Invalid Data/"));
+		_logOutput($IBName+ " IB is created");
+		_wait(15000, _isVisible($IBName));
+		return $IBName;
+	};
+	
+	this.clickWizardBtn = function($sfmName) {
+		_click(_button($sfmName));
+		
+	};
+	this.addProductServiced = function($part){
+		_wait(3000);
+		_selectDomain();
+		_setStrictVisibilityCheck(true);
+		_click($sfm_pg_wizardWindow.btn_addRow);
+		_click($sfm_pg_wizardWindow.btn_edit);
+		_setValue($sfm_pg_wizardWindow.txt_part,$part);
+		_click($sfm_pg_wizardWindow.btn_update);
+		_click($sfm_pg_wizardWindow.btn_downArrow);
+		_wait(3000);
+		_click($sfm_pg_wizardWindow.btn_addWorkDetails);
+	};
+	this.addParts = function($part) {
+		_wait(3000);
+		_selectDomain();
+		_setStrictVisibilityCheck(true);
+		_click($sfm_pg_wizardWindow.btn_addRow);
+		_click($sfm_pg_wizardWindow.btn_edit);
+		_wait(3000);
+		_setValue($sfm_pg_wizardWindow.txt_part1,$part);
+		_click($sfm_pg_wizardWindow.btn_update);
+	};
+	this.addLabor = function($part) {
+		_click($sfm_pg_wizardWindow.tab_labor);
+		_setStrictVisibilityCheck(true);
+		_wait(3000);
+		_click($sfm_pg_wizardWindow.btn_addRow);
+//		_wait(3000);
+		_click($sfm_pg_wizardWindow.btn_edit);
+//		_wait(3000);
+		_setValue($sfm_pg_wizardWindow.txt_part1,$part);
+//		_wait(3000);
+		_click($sfm_pg_wizardWindow.btn_update);
+	};
+	this.addExpenses = function($expense) {
+		_click($sfm_pg_wizardWindow.tab_expenses);
+		_setStrictVisibilityCheck(true);
+		_wait(3000);
+		_click($sfm_pg_wizardWindow.btn_addRow);
+		_click($sfm_pg_wizardWindow.btn_edit);
+		_setValue($sfm_pg_wizardWindow.txt_expenseType,$expense);
+		_click($sfm_pg_wizardWindow.btn_update);
+	};
+	this.addTravel = function() {
+		$todayDate = new Date();
+		$date = $todayDate.getDate();
+		$month = $todayDate.getMonth()+1;
+		$year = $todayDate.getFullYear();
+		$currentDate = $date+"/"+$month+"/"+$year;
+		_log($todayDate);
+		_log($date);
+		_log($month);
+		_log($year);
+		_click($sfm_pg_wizardWindow.tab_travel);
+		_setStrictVisibilityCheck(true);
+		_wait(3000);
+		_click($sfm_pg_wizardWindow.btn_addRow);
+//		_wait(5000);
+		_click($sfm_pg_wizardWindow.btn_edit);
+		_wait(5000);
+		_setValue($sfm_pg_wizardWindow.txt_startDate,$currentDate);
+		_wait(5000);
+		_setValue($sfm_pg_wizardWindow.txt_endDate,$currentDate+1);
+		_click($sfm_pg_wizardWindow.btn_update);
+		
+	};
+	
+	this.saveWizard = function(_) {
+		_click($sfm_pg_wizardWindow.btn_save);
+	};
+	
+};

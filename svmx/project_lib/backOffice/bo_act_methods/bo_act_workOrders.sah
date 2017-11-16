@@ -5,7 +5,6 @@ var $bo_act_workOrders = new function bo_act_workOrders() {
 
 	/**
 	 * Create an Work Order
-	 * 
 	 */
 	this.createWorkOrder = function($caseNumber,$accountName,$contactName,$IBName,$orderStatus,$priority,$orderType){
 		$bo_act_navigation.navigateToWorkOrdersTab();
@@ -29,6 +28,10 @@ var $bo_act_workOrders = new function bo_act_workOrders() {
 		_click(_link($workOrderNumber));
 		_click($bo_pg_workOrders.btn_editWorkOrder);
 	};
+	
+	this.editWorkOrderOnWOPage = function(){
+			_click($bo_pg_workOrders.btn_editWorkOrder);
+	};
 	this.updateTextBoxFields = function($object,$objectValue){
 		_setValue($object,$objectValue);
 		//return $callBack.returnResult([_isVisible($accountName), "Account not created",$accountName] );
@@ -50,11 +53,28 @@ var $bo_act_workOrders = new function bo_act_workOrders() {
 		_wait(15000, _isVisible($bo_pg_workOrders.txt_workOrderDetails));
 		//return $callBack.returnResult([_isVisible($accountName), "Account not created",$accountName] );
 	};
+	
 	this.checkEntitlement = function($workOrderNumber){
 		$bo_act_navigation.navigateToWorkOrdersTab();
 		_click(_link($workOrderNumber));
 		_selectDomain("/svmx/");
 		_click($bo_pg_workOrders.btn_SFWCheckEntitlement);
+		_selectDomain();
+	};
+	
+	this.checkEntitlementPS = function($workOrderNumber){
+		$bo_act_navigation.navigateToWorkOrdersTab();
+		_click(_link($workOrderNumber));
+		_selectDomain("/svmx/");
+		_click($bo_pg_workOrders.btn_SFWCheckEntitlementPS);
+		_selectDomain();
+	};
+	
+	this.invokeTDM016SFM = function($workOrderNumber){
+		$bo_act_navigation.navigateToWorkOrdersTab();
+		_click(_link($workOrderNumber));
+		_selectDomain("/svmx/");
+		_click($bo_pg_workOrders.btn_sfmTDM016);
 		_selectDomain();
 	};
 
