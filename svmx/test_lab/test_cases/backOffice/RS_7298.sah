@@ -69,7 +69,6 @@ _assertEqual($endDateExpectedOn_IB,$endDateActulOn_IB,"Actual and expected End D
  */
 
 //Create 1st SLA Term SLA01 [Platinum SLA]
-$bo_act_navigation.navigateToSlaTerms();
 var $slaName01 = $bo_act_slaTerms.createSlaTerms("Default");
 $bo_act_slaTerms.addInitialResponseToSLA($slaName01,"WorkOrder","Field Service","Medium","Created Date","5","10","SLA");
 $bo_act_slaTerms.addOnsiteResponseToSLA($slaName01,"WorkOrder","Field Service","Medium","Created Date","10","15","SLA");
@@ -78,7 +77,6 @@ $bo_act_slaTerms.addOnsiteResponseToSLA($slaName01,"WorkOrder","Field Service","
 _assertExists(_span($slaName01));
 
 //Create 2nd SLA Term SLA02 [Gold SLA]
-$bo_act_navigation.navigateToSlaTerms();
 var $slaName02 = $bo_act_slaTerms.createSlaTerms("Default");
 $bo_act_slaTerms.addInitialResponseToSLA($slaName02,"WorkOrder","Field Service","Medium","Created Date","5","10","SLA");
 $bo_act_slaTerms.addOnsiteResponseToSLA($slaName02,"WorkOrder","Field Service","Medium","Created Date","10","15","SLA");
@@ -87,7 +85,6 @@ $bo_act_slaTerms.addOnsiteResponseToSLA($slaName02,"WorkOrder","Field Service","
 _assertExists(_span($slaName02));
 
 //Create 3rd SLA Term SLA03 [Silver SLA]
-$bo_act_navigation.navigateToSlaTerms();
 var $slaName03 = $bo_act_slaTerms.createSlaTerms("Default");
 $bo_act_slaTerms.addInitialResponseToSLA($slaName03,"WorkOrder","Field Service","Medium","Created Date","5","10","SLA");
 $bo_act_slaTerms.addOnsiteResponseToSLA($slaName03,"WorkOrder","Field Service","Medium","Created Date","10","15","SLA");
