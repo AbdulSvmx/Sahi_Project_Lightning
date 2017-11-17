@@ -2,7 +2,7 @@
  * This Test-cases verified the multiple calculation method for Repeat visit when Top-level tracker is Case
  * Owner : Meghana
  *
- */var $an_rv_1050 = _testcase("ANA-1050","Case Multiple calculation method check for Repeat visit");
+ */var $an_rv_1050 = _testcase("RS-9745","Case Multiple calculation method check for Repeat visit");
 $an_rv_1050.start();
 var $un = "meghana.rao@servicemax.com";
 var $pwd = "salesforce100";

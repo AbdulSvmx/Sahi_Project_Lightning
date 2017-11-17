@@ -1,4 +1,4 @@
-var $an_mttr_873 = _testcase("ANA-870","Work Order as Top level Object + SPM Maps + 2 Work Details created");
+var $an_mttr_873 = _testcase("RS-9740","Work Order as Top level Object + SPM Maps + 2 Work Details created");
 $an_mttr_873.start();
 var $un = "meghana.rao@servicemax.com";
 var $pwd = "salesforce100";

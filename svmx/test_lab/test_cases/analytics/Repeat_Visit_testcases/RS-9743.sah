@@ -1,4 +1,4 @@
-var $an_rv_1042 = _testcase("ANA-1042","Service Request Additional field check ");
+var $an_rv_1042 = _testcase("RS-9743","Service Request Additional field check ");
 $an_rv_1042.start();
 var $un = "meghana.rao@servicemax.com";
 var $pwd = "salesforce100";
