@@ -1,0 +1,113 @@
+//_includeOnce("../../../references/references.js");
+
+//author - Mamata Rout
+
+var $RS_5435 = _testcase("RS_5435", "Verify On hiding standard SFM[mode as interactive] & Custom SFM[mode as background]");
+$RS_5435.start();
+_setSpeed(100);
+
+$bo_act_login.login($g_url, $bac_unBase, $bac_pwdBase);
+//Create a SFM orders test data
+
+var $sfmName = "SFM_Interact309";
+var $stndSFMName="Add/Edit Products Serviced";
+var $objName2="Preventive Maintenance Plan";
+var $objName1="Work Order";
+	var $wizardname="TestWizard200";
+	var $wizardID="TestWizard200";
+	var $fieldActnType="SFM";
+	var $actnName2=$sfmName;
+	var $actnName1=$stndSFMName;
+
+/*var $sfmName = "SFM_Interact";
+=======
+=======
+>>>>>>> parent of cab5104... Merge branch 'master' of https://github.com/noorsalmasvmx/Sahi_Project
+var $sfmName = "SFM_Interact";
+var $sourceName = "Work Order";
+var $targetName = "Work Order";
+var $QualCriteriaName = "Work Detail (Work Order)";
+var $sfmPageLayoutName = "SFMIBTEST";
+var $wizardSelectObjectName = "Work Order";
+var $wizardTitleName = "SFMIBTEST1";
+<<<<<<< HEAD
+var $wizardIDName = "SFMIBTEST1"; */
+
+var $wizardIDName = "SFMIBTEST1"; 
+
+var $wizardStep1Type = "SFM";
+var $wizardStep1Name = $sfmName;
+var $wizardStep2Type = $wizardStep1Type;
+var $wizardStep2Name = "SFM_Background";
+var $executionMode1 = "Interactive";
+var $executionMode2 = "Background";
+var $searchText = $sfmName;
+var $isOnlineHideRequired = true;
+var $isOnlineRequired = false;
+var $sfmTranName = $sfmName;
+var $workOrderName = "WO-00000000";
+
+_setSpeed(3000);
+
+
+//********************Navgating to SFM Designer and Create SFM********************************************
+
+
+if($bo_act_navigation.navigateToSfmWizard($objName1,$wizardname,$wizardID,$fieldActnType,$actnName1,$executionMode1,$stndSFMName)){
+	$bo_act_SFW.createWizardGeneralInfo($objName1,$wizardname,$wizardID);
+	$bo_act_SFW.createWizardStep($fieldActnType,$actnName1,$executionMode1);
+	$bo_act_sfmVerifyWorkOrder.verifyWizardOnWOObj($stndSFMName);
+	$bo_act_sfmVerifyWorkOrder.wizardButtonVerification($wizardname);
+}else{
+	_fail("Navigation To SFM Wizard Failed");
+	_stopTestCase();
+};
+
+//$bo_act_sfmVerifyWorkOrder.wizardButtonVerification($wizardname);
+
+//*****************************************************************
+
+//**************Navigating to App Permission and Disable the permission for online and verify if wizard display************
+$bo_act_navigation.navigateToSfmAppPermission();
+$bo_act_SFMAppPermission.appPermissionOnWOObj($stndSFMName)	;
+$bo_act_sfmVerifyWorkOrder.verifyWizardOnWOObj($stndSFMName);
+$bo_act_sfmVerifyWorkOrder.wizardButtonVerification($wizardname);
+	
+
+$bo_act_navigation.navigateToSfmTransactionDesigner();
+_wait(60000, _isVisible($bo_pg_sfmTransactionAndDesigner.btn_newSFM));
+$bo_act_SFM.renameClonesfm($sfmName);
+_wait(60000, _isVisible($bo_pg_sfmTransactionAndDesigner.btn_backToList));
+	
+if (_assertExists($bo_pg_sfmTransactionAndDesigner.btn_backToList)){
+	
+	_log("SFm created successfully");
+} else {
+	_fail("SFM creation is unsuccessfull");
+	_stopTestCase();
+};
+
+
+//************Navigating SFM wizard and Creating Wizard, adding steps to it , verify wizard display online***************
+
+if($bo_act_navigation.navigateToSfmWizard($objName2,$wizardname,$wizardID,$fieldActnType,$actnName2,$executionMode2,$sfmName)){
+	$bo_act_SFW.createWizardGeneralInfo($objName2,$wizardname,$wizardID);
+	$bo_act_SFW.createWizardStep($fieldActnType,$actnName2,$executionMode2);
+	$bo_act_sfmVerifyWorkOrder.verifyWizardOnPMPObj($sfmName);
+	$bo_act_sfmVerifyWorkOrder.wizardButtonVerification($wizardname);	
+	
+}else{
+	_fail("Navigation To SFM Wizard Failed");
+	_stopTestCase();
+};
+//*****************************************************************
+
+//**************Navigating to App Permission and Disable the permission for online and verify if wizard display************
+	$bo_act_navigation.navigateToSfmAppPermission();
+	$bo_act_SFMAppPermission.appPermissionOnPMPObj($sfmName);
+	$bo_act_sfmVerifyWorkOrder.verifyWizardOnPMPObj($sfmName);
+	$bo_act_sfmVerifyWorkOrder.wizardButtonNotVisible($wizardname);
+
+_setSpeed(100);
+
+$RS_5435.end();

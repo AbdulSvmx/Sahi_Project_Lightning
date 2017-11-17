@@ -13,8 +13,6 @@ var $bo_act_PMPlan = new function bo_act_PMPlan() {
 		var $PMPlanName = $bo_act_common.generateRandomName("PMPlan");
 		$bo_act_navigation.navigateToServiceMaintenanceContractPage();
 		_click(_link($sconName));
-		//_click($bo_pg_home.link_home);
-		//_navigateTo($sconurl);
 		_selectDomain("/svmx/");
 		_click($bo_pg_PMPlan.btn_createPMPlan);
 		_selectDomain();
@@ -38,10 +36,10 @@ var $bo_act_PMPlan = new function bo_act_PMPlan() {
 		_selectDomain("/svmx/");
 		_click($bo_pg_PMPlan.btn_createPMPlan);
 		_selectDomain();
-		_wait(60000,_isVisible("Create Preventive Maintenance Plan From Service Contract"));
+		_wait(60000,_isVisible("Create Preventive Maintenance Plan"));
 		_setValue($bo_pg_PMPlan.txt_PMPlanTemplateName, $PMPTemplate);
 		_setValue($bo_pg_PMPlan.txt_PMPlanName, $PMPlanName);
-		_click(sel_coverageType);
+		_click($bo_pg_PMPlan.sel_coverageType);
 		_click(_listItem($coverageType));
 		_setValue($bo_pg_PMPlan.txt_startDate, $bo_act_common.currentDate("/"));
 		_setValue($bo_pg_PMPlan.txt_endDate, $bo_act_common.getfutureDate(1, "/"));
@@ -55,4 +53,21 @@ var $bo_act_PMPlan = new function bo_act_PMPlan() {
 		_click($bo_pg_PMPlan.btn_delete);
 	};
 
+	this.createUsageOrFrequencyBasedPMPlan = function($PMPTemplate,$IBName){
+		var $PMPlanName = $bo_act_common.generateRandomName("PMPlan");
+		$bo_act_navigation.navigateToServiceMaintenanceContractPage();
+		_click(_link($sconName));
+		_selectDomain("/svmx/");
+		_click($bo_pg_PMPlan.btn_NewConditionBasedPMPlanfromServiceContract);
+		_selectDomain();
+		_setValue($bo_pg_PMPlan.txt_planName,$PMPlanName);
+		_click($bo_pg_PMPlan.txt_planTemplateName);
+		_click(_listItem($PMPTemplate));
+		_setValue($bo_pg_PMPlan.txt_startDateInput,$bo_act_common.currentDate("/"));
+		_setValue($bo_pg_PMPlan.txt_endDateInput,$bo_act_common.getfutureDate(1, "/"));
+		_assertExists(_div($IBName),_under(_span("Coverages")));
+		_click($bo_pg_PMPlan.btn_saveCustomUI);
+		_wait(15000, _isVisible($PMPlanName));
+		return $PMPlanName;
+	};
 };

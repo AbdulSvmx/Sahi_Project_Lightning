@@ -7,13 +7,13 @@ $RS_5258.start();
 _setSpeed(100);
 
 //Pre - Condition 
-$bo_act_login.login($g_url, $bac_unDev, $bac_pwdDev);
+$bo_act_login.login($g_url, $bac_un, $bac_pwd);
 var $accName = $bo_act_accounts.createAccount();
 var $proName = $bo_act_products.createProduct("pro12", "--None--");
 var $installedProduct = $bo_act_installedProduct.createInstalledProduct($proName,$accName,"");
 var $location = $bo_act_locations.createLocation("", $accName, "MG Road", "India", "560001");
 var $slaterm = $bo_act_slaTerms.createSlaTerms("Default");
-var $sconName = $bo_act_serviceMaintenanceContracts.createServiceMaintenanceContract($accName, $slaterm,1);
+var $sconName = $bo_act_serviceMaintenanceContracts.createServiceMaintenanceContract($accName, $slaterm,1,0);
 $bo_act_serviceMaintenanceContracts.AddCoveredProductToSCON($sconName, $installedProduct);
 $bo_act_serviceMaintenanceContracts.addCoveredLocationToSCON($sconName, $location);
 

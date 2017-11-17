@@ -1,0 +1,148 @@
+
+//author - Noor Salma Sharieff
+
+var $SFW_HandoveredFunctionalityOnWebServiceFail = _testcase("$SFW_HandoveredFunctionalityOnWebServiceFail","Check for Handovered functionality on Web service fail.");
+$SFW_HandoveredFunctionalityOnWebServiceFail.start();
+_setSpeed(100);
+
+var $className = $bo_act_common.generateRandomName("fclassName");
+var $methodName = $bo_act_common.generateRandomName("MethodName");
+
+var $codeBase = "global class " +$className+ "\n"+ 
+"{\n" +
+"global " +$className+"() {}\n"+ 
+"webservice static SVMXC.INTF_WebServicesDef.INTF_Response "+$methodName+"(SVMXC.INTF_WebServicesDef.INTF_Request req)\n"+ 
+"{\n"+ 
+"System.debug('testing print request : '+req);\n"+ 
+"SVMXC.INTF_WebServicesDef.INTF_Response obj = new SVMXC.INTF_WebServicesDef.INTF_Response();\n"+ 
+"List<Account> lstobjAcc = new List<Account>();\n"+ 
+"for(SVMXC.INTF_WebServicesDef.SVMXMap objSVXMMap : req.valueMap)\n"+ 
+"{\n"+ 
+"Account objAcc = new Account();\n"+ 
+"objAcc.Name = objSVXMMap.key+' : '+objSVXMMap.value;\n"+ 
+"if(objSVXMMap.key !='SVMX_RECORDID')\n"+ 
+"lstobjAcc.add(objAcc);\n"+ 
+"}\n"+ 
+"if(lstobjAcc != null && lstobjAcc.size() > 0)\n"+ 
+"{\n" +
+"try\n"+ 
+"{\n" +
+"insert lstobjAcc;\n" + 
+"obj.message = 'Accounts inserted successfully';\n" + 
+"obj.success = true; \n" +
+"obj.messageType = 'INFO';\n" + 
+"return obj; \n" +
+"} \n" +
+"catch(Exception ex)\n" + 
+"{ \n" +
+"obj.message = 'Accounts not inserted';\n" + 
+"obj.success = true; \n" +
+"obj.messageType = 'WARN';\n" + 
+"return obj; \n" +
+"} \n" +
+"} \n" +
+"obj.message = 'Accounts not inserted 1';\n" + 
+"obj.success = true; \n" +
+"obj.messageType = 'ERROR';\n" + 
+"return obj; \n" +
+"} \n" +
+"}";
+
+var $codeDev = "global class " +$className+ "\n"+ 
+"{\n" +
+"global " +$className+"() {}\n"+ 
+"webservice static SVMXDEV.INTF_WebServicesDef.INTF_Response "+$methodName+"(SVMXDEV.INTF_WebServicesDef.INTF_Request req)\n"+ 
+"{\n"+ 
+"System.debug('testing print request : '+req);\n"+ 
+"SVMXDEV.INTF_WebServicesDef.INTF_Response obj = new SVMXDEV.INTF_WebServicesDef.INTF_Response();\n"+ 
+"List<Account> lstobjAcc = new List<Account>();\n"+ 
+"for(SVMXDEV.INTF_WebServicesDef.SVMXMap objSVXMMap : req.valueMap)\n"+ 
+"{\n"+ 
+"Account objAcc = new Account();\n"+ 
+"objAcc.Name = objSVXMMap.key+' : '+objSVXMMap.value;\n"+ 
+"if(objSVXMMap.key !='SVMX_RECORDID')\n"+ 
+"lstobjAcc.add(objAcc);\n"+ 
+"}\n"+ 
+"if(lstobjAcc != null && lstobjAcc.size() > 0)\n"+ 
+"{\n" +
+"try\n"+ 
+"{\n" +
+"insert lstobjAcc;\n" + 
+"obj.message = 'Accounts inserted successfully';\n" + 
+"obj.success = true; \n" +
+"obj.messageType = 'INFO';\n" + 
+"return obj; \n" +
+"} \n" +
+"catch(Exception ex)\n" + 
+"{ \n" +
+"obj.message = 'Accounts not inserted';\n" + 
+"obj.success = true; \n" +
+"obj.messageType = 'WARN';\n" + 
+"return obj; \n" +
+"} \n" +
+"} \n" +
+"obj.message = 'Accounts not inserted 1';\n" + 
+"obj.success = true; \n" +
+"obj.messageType = 'ERROR';\n" + 
+"return obj; \n" +
+"} \n" +
+"}";
+
+
+$bo_act_login.login($g_url, $bac_un, $bac_pwd);
+
+$bo_act_navigation.navigateToSetUpAndSearch("Installed Packages");
+if(_condition(_cell("SVMXC")!=null))
+var $code = $codeBase;
+else
+$code = $codeDev;
+
+
+$bo_act_salesforceSetUp.createApexClasses($code);
+
+var $wrongMethodName = $bo_act_common.generateRandomName("Test");
+var $actionTitle = $bo_act_customAction.createCustomActionForWebService("Work Order", $className, $wrongMethodName);
+var $parameterValue = $bo_act_common.generateRandomName("ParaValue");
+$bo_act_customAction.addParametersForWebService("Value", $parameterValue);
+
+var $wizardTitleName = $bo_act_common.generateRandomName("SFWTitle");
+var $wizardIDName = $bo_act_common.generateRandomName("SFWId");
+$bo_act_navigation.navigateToSfmWizard();
+$bo_act_SFW.createWizardGeneralInfo("Work Order", $wizardTitleName, $wizardIDName);
+$bo_act_SFW.createSFMWizardStepwithHandOver("SFM", "Create RMA from Work Order", "Interactive",true);
+$bo_act_SFW.createOthersWizardStepwithHandOver("Others", $actionTitle,false);
+$bo_act_SFW.quickSaveSFWizard();
+$bo_act_SFW.saveAndClose();
+
+var $accountName = $bo_act_accounts.createAccount();
+var $contactName = $bo_act_contacts.createContact($accountName);
+var $caseNumber = $bo_act_Cases.createCase("New", "High", "Email");
+var $productName = $bo_act_products.createProduct();
+var $IBName = $bo_act_installedProduct.createInstalledProduct($productName, $accountName, $contactName);
+var $WONumber = $bo_act_workOrders.createWorkOrder($caseNumber, $accountName, $contactName, $IBName, "Open", "High", "Field Service");
+_selectDomain("/svmx/");
+_assertExists(_button("/Create RMA from Work Order/",_near(_cell($wizardTitleName))));
+_click(_button("/Create RMA from Work Order/",_near(_cell($wizardTitleName))));
+_selectDomain();
+
+_click($bo_pg_sfmWizard.btn_deleteicon);
+_click($bo_pg_sfmWizard.btn_saveicon);
+
+_assertExists(_heading2("/actionTitle/"));
+_assertContainsText("Your Web Service call failed",_div("messageText"));
+_assertExists(_submit("Return"));
+_click(_submit("Return"));
+
+//Clean up function
+var $datacreated = [$accountName,$contactName,$caseNumber,$productName,$IBName,$WONumber];
+for (var i = 0; i < $datacreated.length; i++) {
+	$bo_act_common.cleanUpfunction($datacreated[i]);
+}
+$bo_act_SFW.deleteWizards("Work Order", $wizardIDName);
+$bo_act_customAction.deleteCustomAction("Work Order", $actionTitle);
+$bo_act_salesforceSetUp.deleteapexClasses($className);
+
+$SFW_HandoveredFunctionalityOnWebServiceFail.end();
+
+
+

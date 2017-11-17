@@ -88,7 +88,7 @@ function create_Team ($dp_Terr_Id){
 
 	// Creating Work order's with Satisfying Skill Match Rule
 	   var CreateRecords=[];
-	   for(var $i=0;$i<10;$i++)
+	   for(var $i=0;$i<2;$i++)
 		{
 	   var WO = new sforce.SObject("SVMXC__Service_Order__c");
 	   WO.SVMXC__Primary_Territory__c=$dp_Terr_Id;
@@ -117,7 +117,7 @@ function validate_Eli_Violation($dp_Id){
 		var WO = WO_arr[$x];
 		var violation_str = WO.SVMXC__Violation_Message__c;
 		_log("Violation message="+WO.SVMXC__Violation_Message__c+",violation_st =" +violation_str);
-		if(violation_str.includes(" Eligibility")){
+		if(violation_str.includes("Tech_Elig_rule")){
 			 
 			$i = $i + 1;
 			_log("$i="+$i);

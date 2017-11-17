@@ -13,6 +13,8 @@ var $bo_act_installedProduct = new function bo_act_installedProduct() {
 		var $IBName = $bo_act_common.generateRandomName("IB_");
 		 $bo_act_navigation.navigateToInstalledProductPage();
 		_click($bo_pg_installedProducts.btn_new);
+		if(_condition(_heading2("Select Installed Product Record Type") != null))
+			_click($bo_pg_installedProducts.btn_continue); 
 		_setValue($bo_pg_installedProducts.txt_productName,$productName);
 		_setValue($bo_pg_installedProducts.txt_serialNumber, $serialNum);
 		_setValue($bo_pg_installedProducts.txt_accountName, $accountName);
@@ -33,5 +35,26 @@ var $bo_act_installedProduct = new function bo_act_installedProduct() {
 		
 	};
 
+	this.createWOFromIB = function($IBName){
+		$bo_act_navigation.navigateToInstalledProductPage();
+		_click(_link($IBName));
+		_selectDomain("/svmx/");
+		_click($bo_pg_installedProducts.btn_createWorkOrder);
+		_selectDomain();
+		_wait(60000,_isVisible("Create Work Order from Installed Product"));
+		_click($bo_pg_installedProducts.btn_sfmSave);
+		return _getText($bo_pg_installedProducts.txt_workOrderNumber);
+	};
 	
+	this.createSupportCase = function($status){
+		$bo_act_navigation.navigateToInstalledProductPage();
+		_click(_link($IBName));
+		_selectDomain("/svmx/");
+		_click($bo_pg_installedProducts.btn_SFWcreateSupportCase);
+		_selectDomain();
+		_wait(60000,_isVisible("Create Case from Installed Product"));
+		_setValue($bo_pg_installedProducts.txt_SFMcreateSupportCaseStatus,$status);
+		_click($bo_pg_installedProducts.btn_sfmSave);
+		return _getText($bo_pg_installedProducts.txt_caseNumber);
+	};
 };

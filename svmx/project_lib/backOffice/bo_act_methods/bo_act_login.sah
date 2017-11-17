@@ -42,6 +42,28 @@ var $bo_act_login = new function bo_act_login() {
 		// Need to return
 	};
 	
+this.loginToWorkBench = function($url, $environment,$un, $pwd){
+	_navigateTo($url);
+	_setSelected($bo_pg_home.sel_WBEnvironment,$environment);
+	_check(_checkbox("termsAccepted"));
+	_click($bo_pg_home.btn_loginWithSalesForce);
+	if(_condition($bo_pg_login.txt_email!=null))
+	{
+		_setValue($bo_pg_login.txt_email, $un);
+		_setValue($bo_pg_login.txt_password, $pwd);
+		_click($bo_pg_login.btn_login);
+	}else
+		_logOutput("Logged into Work bench");
+	
+};
 
+this.runApexScriptinWB = function($script){
+	_click(_span("utilities"));
+	_click(_link("Apex Execute"));
+	_setValue(_textarea("scriptInput"),$script);
+	_click(_submit("Execute"));
+	_wait(30000);
+	_assertNotVisible(_div("/COMPILE ERROR:/"));	
+};
 
 };

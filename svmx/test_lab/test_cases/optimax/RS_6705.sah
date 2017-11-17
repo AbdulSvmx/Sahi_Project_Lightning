@@ -1,0 +1,77 @@
+var $user_credentials = $excel.readFromCustomExcel("../optimax/op_excleData/automation.xlsx", "User_Details","","");
+
+//var $nArr;
+//Calling the sforce API
+for(var $i=0;$i<$user_credentials.length;$i++)
+{
+var $g_un = $user_credentials[$i][0];
+var $g_pwd = $user_credentials[$i][1];
+var $g_url = $user_credentials[$i][2];
+}
+
+var $RS_6705 = _testcase("RS_6705", "Select Territory which has inactive business hour");
+
+$RS_6705.start();
+
+$bo_act_login.login($g_url, $g_un, $g_pwd);
+
+_set($login_result, _fetch(login($g_un,$g_pwd)));
+_log($login_result);
+
+_set($create_terr_vali_dp, _fetch(create_terr_vali_dp()));
+_log($create_terr_vali_dp);
+
+//<browser>
+function login($g_un,$g_pwd){
+	
+	var $login_result = sforce.connection.login($g_un,$g_pwd);
+	return $login_result;
+                           }
+	
+function create_terr_vali_dp (){ 
+   
+	
+	// Creating Business hour
+	   
+	 var BH= new sforce.SObject("BusinessHours");
+	 BH.Name="InActive BH";
+	 var BH = sforce.connection.create([BH]);
+     _log(" result BH = "+result_BH[0].id);
+	
+	// Creating Territory
+	
+	 var Terr = new sforce.SObject("SVMXC__Territory__c");
+	 Terr.Name="Terr with inactive BH";
+	 Terr.SVMXC__Territory_s_Business_Hours__c=result_BH[0].id;
+	 var result_Terr = sforce.connection.create([Terr]);
+     _log(" result Terr = "+result_Terr[0].id);
+     
+     _click(_link("ServiceMax Setup"));
+     _wait(20000,_isVisible(_div("Dispatch Management")));
+     _click(_div("Dispatch Management"));
+     _click(_div("middle[16]"));
+     _click(_submit("New Process"));
+     _setSelected(_select("page1:form1:block1:tab1block1:j_id78:j_id86:j_id90"), "Real Time Optimization");
+     _setValue(_textbox("page1:form1:block1:tab1block1:j_id78:j_id79:name"), "Mapping Inactive Territory");
+     _setSelected(_select("page1:form1:block1:tab1block1:j_id115:j_id116:tab1table1:0:j_id121"), "Priority");
+     _setSelected(_select("page1:form1:block1:tab1block1:j_id115:j_id116:tab1table1:0:j_id125"), "Equals");
+     _setValue(_textbox("page1:form1:block1:tab1block1:j_id115:j_id116:tab1table1:0:j_id129"), "High");
+     _click(_button("Next >>"));
+     _click(_button("Add Territory"));
+     _click(_image("Territory Lookup (New Window)"));
+     _selectWindow("lookup");
+     _click(_link("Inactive Terr"));
+     _selectWindow();
+     _setValue(_textbox("page1:form1:block1:tab3block1:tab3block2:j_id323:0:j_id329"), "Inactive Terr");
+     _click(_button("Prioritization >>"));
+     _click(_cell("Scheduling"));
+     _click(_submit("Save And Close[1]"));
+     _click(_listItem("Business Hours associated with this territory is not active."));
+} 
+
+
+//</browser>
+	 
+     $RS_6705.end();
+	 
+	 

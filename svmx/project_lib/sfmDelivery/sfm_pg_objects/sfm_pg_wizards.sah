@@ -3,6 +3,8 @@
 */
 
 var $sfm_pg_wizards = new function sfm_pg_wizards() {
+	this.loginresult = "";
+	this.woName = "";
 	
 	this.selectObject = _select(0,_rightOf(_span("Select Object")));
 	//Standard SFM Wizards objects
@@ -45,5 +47,8 @@ var $sfm_pg_wizards = new function sfm_pg_wizards() {
 	this.btn_saveStep = _button("Save");
 	this.btn_cancleStep = _button("Cancel[1]");
 	
-
+	//Added By Harish
+	this.select_availableGrpProfiles =_select(0,_near(_cell("Available ServiceMax Group Profiles")));
+	this.btn_add = _image("Add");
+	this.chk_firstCustomCheckBox = _checkbox(0,_near(_heading2("Custom SFM Wizards")));
 };

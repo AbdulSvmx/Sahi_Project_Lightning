@@ -1,0 +1,22 @@
+//author - Nagendra Prasad
+
+var $RS_7019 = _testcase("$RS_7019","Verify the Stock Transfer of serialised and non seriliased products");
+$RS_7019.start();
+_setSpeed(100);
+
+//PreCondition 
+$bo_act_login.login($g_url, $bac_unDev, $bac_pwdDev);
+// Creating product with serialized stockable is active
+var $proName1 = $bo_act_products.createProduct("pro12", "--None--");
+//Creating product with non -serialized stockable is active
+var $proName2 = $bo_act_products.createProductWithoutSerialized("pro13", "--None--");
+//creating locations 
+var $Location1 = $bo_act_locations.createLocation($recordType, $accountName, $street, $country, $zipCode);
+//editing the location
+$bo_act_locations.editLocation($Location1);
+var $Location2 = $bo_act_locations.createLocation($recordType, $accountName, $street, $country, $zipCode);
+$bo_act_locations.editLocation($Location2);
+// Adding stock adjustment
+$bo_act_locations.addStockAdjustment("Location1", "ProName1","10","Excess");
+$bo_act_locations.addStockAdjustment("Location2", "ProName2","10","Excess");
+_click(_link("Stock Transfer"));

@@ -19,16 +19,16 @@ $bo_act_login.login($url, $un, $pwd);
 // To create a Service Request
 
 var $resultSR = $op_act_sForceApiCall.sForceQuery($un, $pwd, $insert_sr, "create");//$op_act_sForceApiCall.sForceQuery($un, $pwd, $insert_case , "create");
-var $query_sr = "Select Id from SVMXC__Service_Request__c where Createdby.Id = '005q0000003GGfP' Order by CreatedDate DESC Limit 1";
+var $query_sr = "Select Id, Name from SVMXC__Service_Request__c where Createdby.Id = '005q0000003GGfP' Order by CreatedDate DESC Limit 1";
 
-var $SR ;
-var $resultSR1 = $op_act_sForceApiCall.sForceQuery($un, $pwd, $query_sr,"query");
+var $result_SR1 = $op_act_sForceApiCall.sForceQuery($un, $pwd, $query_sr,"query");
 
-$resultSR1.forEach(function($srValue) {
-	$SR = $srValue.Id;
+
+_log($result_SR1);
+
+
+$SR = $result_SR1[0].Id;
 		
-});
-
 var $ana_875_insert_WO = "SVMXC__Service_Order__c  WO = new SVMXC__Service_Order__c ( SVMXC__Company__c ='"+ $Account2 +"', SVMXC__Product__c = '"+$Product+"' , SVMXC__Group_Member__c = '"+$Technician+"' ,SVMXC__Component__c = '"+$Component+"',SVMXC__Order_Status__c = '"+$OrderStatus+"' , SVMXC__Closed_On__c = "+$Closedon+",SVMXC__Country__c = 'United Kingdom', SVMXC__Sub_Status__c = 'Resolved', SVMXC__Priority__c = 'High', SVMXC__Site__c = '"+$Site+"',SVMXC__SM_Service_Request__c = '"+$SR+"', SVMXC__Scheduled_Date__c = Date.valueOf('"+$ScheduledDate+"') );insert WO;";
 var $ana_875_query_wo = "Select Name , Id  ,SVMXC__Company__c , SVMXC__Component__c , SVMXC__Closed_On__c from SVMXC__Service_Order__c where Createdby.Id = '005q0000003GGfP' Order by CreatedDate DESC Limit 1";
 var $ana_875_result = $op_act_sForceApiCall.sForceQuery($un, $pwd, $ana_875_insert_WO , "create");
@@ -41,11 +41,11 @@ var $ana_875_sr1;
 var $var3;
 var $varMTTR1;
 
-$ana_875_fetch.forEach(function($ana_875_var1) {
+_wait(5000);
 	
-	$ana_875_WO1 = $ana_875_var1.Id;
+$ana_875_WO1 = $ana_875_fetch[0].Id;
 
-});
+
 _log($ana_875_WO1);
 
 var $StartDate = $data[1]['WDStartDate'];
@@ -60,20 +60,22 @@ var $ana_875_query_wd = "Select Name , Id  , SVMXC__Start_Date_and_Time__c , SVM
 var $ana_875_result = $op_act_sForceApiCall.sForceQuery($un, $pwd, $ana_875_insert_WD , "create");
 
 var $ana_875_fetch_wd = $op_act_sForceApiCall.sForceQuery($un, $pwd, $ana_875_query_wd,"query");
+_wait(5000);
+_wait(10000);
 _log($ana_875_fetch_wd);
 var $ana_875_wd1 ;
 var $startdate ;
 var $enddate ;
 var $deadtime;
 var $var2;
-$ana_875_fetch_wd.forEach(function($var2) {
+
 	
-	$ana_875_wd1 = $var2.Id ;
-	$startdate = $var2.SVMXC__Start_Date_and_Time__c;
-	$enddate = $var2.SVMXC__End_Date_and_Time__c;
-	$deadtime = $var2.SVMXC__Dead_Time__c;
+	$ana_875_wd1 = $ana_875_fetch_wd[0].Id ;
+	$startdate = $ana_875_fetch_wd[0].SVMXC__Start_Date_and_Time__c;
+	$enddate = $ana_875_fetch_wd[0].SVMXC__End_Date_and_Time__c;
+	$deadtime = $ana_875_fetch_wd[0].SVMXC__Dead_Time__c;
 		
-});
+
 _log($ana_875_wd1);
 
 // To calculate the time difference considering business hours is 24 hours
@@ -90,27 +92,33 @@ $TopLevelSR.an_topLevelSR();
 $an_act_MTTR.mttr_runEngine("meghana.rao@servicemax.com");
 
 
-var $ana_875_wo_id = null;
+
+var $ana_875_wo_id; //= null;
+
 var $ana_875_WO_Account1;
 var $ana_875_labortime;
 var $ana_875_deadtime;
 var $an_875_service_request;
 
-for(var $i = 0;$ana_875_wo_id == null;$i++){
-var $ana_875_query_MTTR1 = "Select SVMXC__Work_Order__c ,SVMXC__Service_Request__c, SVMXC__Account__c, SVMXC__Configuration_Name__c , SVMXC__Labor_Time__c , SVMXC__Dead_Time__c from SVMXC__SPM_Mean_Time_To_Repair__c where SVMXC__Work_Order__c ='"+ $ana_875_WO1 +"'";
+
+var $ana_875_query_MTTR1 = "Select Id, SVMXC__Work_Order__c ,SVMXC__Service_Request__c, SVMXC__Account__c, SVMXC__Configuration_Name__c , SVMXC__Labor_Time__c , SVMXC__Dead_Time__c from SVMXC__SPM_Mean_Time_To_Repair__c where SVMXC__Work_Order__c ='"+ $ana_875_WO1 +"'";
+
+var $ana_875_query_MTTR1 = "Select Id , SVMXC__Work_Order__c ,SVMXC__Service_Request__c, SVMXC__Account__c, SVMXC__Configuration_Name__c , SVMXC__Labor_Time__c , SVMXC__Dead_Time__c from SVMXC__SPM_Mean_Time_To_Repair__c where SVMXC__Work_Order__c ='"+ $ana_875_WO1 +"'";
+
 var $ana_875_resultMTTR1 = $op_act_sForceApiCall.sForceQuery($un, $pwd, $ana_875_query_MTTR1,"query");
-_wait(1000);
+
 _log($ana_875_resultMTTR1);
-$ana_875_resultMTTR1.forEach(function($varMTTR1) {
-	
-	$ana_875_wo_id = $varMTTR1.SVMXC__Work_Order__c;
-	$ana_875_WO_Account1 = $varMTTR1.SVMXC__Account__c;
-	$ana_875_labortime = $varMTTR1.SVMXC__Labor_Time__c;	
-	$ana_875_deadtime = $varMTTR1.SVMXC__Dead_Time__c;
-	$an_875_service_request = $varMTTR1.SVMXC__Service_Request__c;
-	
+
+$ana_875_resultMTTR1.forEach(function($varRV1) {
+	$ana_875_wo_id = $varRV1.SVMXC__Work_Order__c;
+	$ana_875_WO_Account1 = $varRV1.SVMXC__Account__c;
+	$ana_875_labortime = $varRV1.SVMXC__Labor_Time__c;	
+	$ana_875_deadtime = $varRV1.SVMXC__Dead_Time__c;
+	$an_875_service_request = $varRV1.SVMXC__Service_Request__c;
+
 });
-}
+
+
 _log($an_875_service_request);
 _log($ana_875_labortime);
 
@@ -119,6 +127,6 @@ $ana_875_labortime = Math.round($ana_875_labortime);
 
 _assertEqual($datevalue ,$ana_875_labortime);
 _assertEqual($DeadTime,$ana_875_deadtime);
-_assertEqual($SR, $an_875_service_request);
+_assertEqual($SR, $an_875_service_request); 
 $an_mttr_875.end();
 

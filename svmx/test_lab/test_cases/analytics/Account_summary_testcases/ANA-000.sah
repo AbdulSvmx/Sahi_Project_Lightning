@@ -1,0 +1,234 @@
+var $an_ftf_000= _testcase("ANA-000","When the user selects the Case and we add a custom fields in one of the criteria");
+$an_ftf_000.start();
+
+var $un = "vinaya.v@servicemax.com";
+var $pwd = "servicemax12";
+var $url = "https://test.salesforce.com";
+var $data = _readExcelFile("../../analytics/an_excleData/MTTC_data.xlsx","Sheet1",true);
+var $insert_case = $data[4]["InsertCase"];
+var $Account1 = $data[1]["Account"];
+var $Technician1 = $data[1]["Technician"];
+var $Product1 = $data[1]["Product"];
+var $OrderStatus1 = $data[1]["OrderStatus"];
+var $Closedon1 = $data[1]["ClosedOn"];
+var $Component = $data[1]["Component"];
+var $close=$data[1]["closedon"];
+var $Account2 = $data[4]["Account"];
+var $Technician2 = $data[4]["Technician"];
+var $Product2 = $data[4]["Product"];
+var $OrderStatus2 = $data[4]["OrderStatus"];
+var $Closedon2 = $data[4]["ClosedOn"];
+var $Site=$data[1]["Site"];
+var $ScheduledDate=$data[1]["ScheduledDate"];
+$bo_act_login.login($url, $un, $pwd);
+
+//create workorder
+var $WO1;
+var $ana_var1;
+var $ana_var2;
+var $insert_wo_first1 = "SVMXC__Service_Order__c  WO1 = new SVMXC__Service_Order__c (SVMXC__Company__c ='"+ $Account1 +"', SVMXC__Product__c = '"+$Product1+"', SVMXC__Group_Member__c = '"+$Technician1+"',SVMXC__Order_Status__c = '"+$OrderStatus1+"' , SVMXC__Closed_On__c = "+$Closedon1+",SVMXC__Sub_Status__c = 'Resolved', SVMXC__Priority__c = 'High');insert WO1;";
+var $query_wo_first1 = "Select Name , Id  , SVMXC__Company__c , SVMXC__Closed_On__c from SVMXC__Service_Order__c where Createdby.Id = '005q0000003RLoJ'  Order by CreatedDate DESC Limit 1";
+var $fetchwoquery = $op_act_sForceApiCall.sForceQuery($un, $pwd, $insert_wo_first1 ,"create");
+
+var $store_first_wo1 = $op_act_sForceApiCall.sForceQuery($un, $pwd, $query_wo_first1,"query");
+_wait(1000);
+$store_first_wo1.forEach(function($ana_var1) {
+	$WO1 = $ana_var1.Id;
+});
+_log($WO1);
+
+var $WO2;
+var $insert_wo_first2 = "SVMXC__Service_Order__c  WO2 = new SVMXC__Service_Order__c (SVMXC__Company__c ='"+ $Account1 +"', SVMXC__Product__c = '"+$Product1+"', SVMXC__Group_Member__c = '"+$Technician1+"',SVMXC__Order_Status__c = '"+$OrderStatus1+"' , SVMXC__Closed_On__c = "+$Closedon1+",SVMXC__Sub_Status__c = 'Resolved', SVMXC__Priority__c = 'Low',SVMXC__Related_Work_Order__c='"+$WO1+"');insert WO2;";
+var $query_wo_first2 = "Select Name , Id  , SVMXC__Company__c , SVMXC__Closed_On__c from SVMXC__Service_Order__c where Createdby.Id = '005q0000003RLoJ'  Order by CreatedDate DESC Limit 1";
+var $fetchwoquery2 = $op_act_sForceApiCall.sForceQuery($un, $pwd, $insert_wo_first2 ,"create");
+
+var $store_first_wo2= $op_act_sForceApiCall.sForceQuery($un, $pwd, $query_wo_first2,"query");
+_wait(1000);
+
+$store_first_wo2.forEach(function($ana_var2) {
+	$WO2 = $ana_var2.Id;
+});
+_log($WO2);
+
+//create calc and save 
+$an_act_FTF.ftf_closed_wo_calc("FTF");
+
+$an_act_FTF.ftf_runEngine("vinaya.v@servicemax.com");
+
+
+var $insert_wo_first3 = "SVMXC__Service_Order__c  WO3 = new SVMXC__Service_Order__c (SVMXC__Company__c ='"+ $Account1 +"', SVMXC__Product__c = '"+$Product1+"', SVMXC__Group_Member__c = '"+$Technician1+"',SVMXC__Component__c = '"+$Component+"',SVMXC__Order_Status__c = '"+$OrderStatus1+"' , SVMXC__Closed_On__c = "+$Closedon1+",SVMXC__Country__c = 'United States',SVMXC__Sub_Status__c = 'Resolved', SVMXC__Priority__c = 'High',SVMXC__Site__c = '"+$Site+"',SVMXC__Scheduled_Date__c = Date.valueOf('"+$ScheduledDate+"'));insert WO3;";
+var $query_wo_first3 = "Select Name , Id  , SVMXC__Company__c , SVMXC__Closed_On__c from SVMXC__Service_Order__c where Createdby.Id = '005q0000003RLoJ'  Order by CreatedDate DESC Limit 1";
+var $fetchwoquery3 = $op_act_sForceApiCall.sForceQuery($un, $pwd, $insert_wo_first3 ,"create");
+
+var $store_first_wo3 = $op_act_sForceApiCall.sForceQuery($un, $pwd, $query_wo_first3,"query");
+_wait(1000);
+$store_first_wo3.forEach(function($ana_var4) {
+	$WO3 = $ana_var4.Id;
+});
+_log($WO3);
+
+var $StartDate = $data[1]['WDStartDate1'];
+var $EndDate =  $data[1]['WDEndDate1'];
+var $LineType = $data[1]['LineType'];
+var $RecordType = $data[1]['RecordType'];
+var $DeadTime = $data[1]['DeadTime'];
+var $ana_870_work_detail;
+var $ana_870_wd1 ;
+var $startdate ;
+var $enddate ;
+var $deadtime;
+var $var3;
+
+var $ana_870_insert_WD = "SVMXC__Service_Order_Line__c  WD = new SVMXC__Service_Order_Line__c ( SVMXC__Line_Type__c = '"+$LineType+"' , SVMXC__Start_Date_and_Time__c = DateTime.valueOf ('"+$StartDate+"'), SVMXC__End_Date_and_Time__c = DateTime.valueOf('"+$EndDate+"') ,custom_dead_time__c = "+$DeadTime+" ,SVMXC__Service_Order__c = '"+$WO3+"' );insert WD;";
+var $ana_870_query_wd = "Select Name , Id  , SVMXC__Start_Date_and_Time__c , SVMXC__End_Date_and_Time__c , SVMXC__Dead_Time__c from SVMXC__Service_Order_Line__c where Createdby.Id = '005q0000003RLoJ' Order by CreatedDate DESC Limit 1";
+var $ana_870_result = $op_act_sForceApiCall.sForceQuery($un, $pwd, $ana_870_insert_WD , "create");
+
+var $ana_870_fetch_wd = $op_act_sForceApiCall.sForceQuery($un, $pwd, $ana_870_query_wd,"query");
+
+$ana_870_fetch_wd.forEach(function($var3) {
+	
+	$ana_870_wd1 = $var3.Id ;
+	$startdate = $var3.SVMXC__Start_Date_and_Time__c;
+	$enddate = $var3.SVMXC__End_Date_and_Time__c;
+	$deadtime = $var3.custom_dead_time__c;
+		
+});
+
+// To calculate the time difference considering business hours is 24 hours
+
+var $stdate = new Date($startdate);
+var $edate = new Date($enddate);
+_log($stdate);
+_log($edate);
+var $datevalue = (($stdate.getTime() - $edate.getTime()) / 1000) / (-60) ; 
+//var $enddate = parseInt($enddate.getHours());
+_log($datevalue);
+
+$TopLevelWO.an_toplevelwo();
+//$an_act_MTTR.mttr_usa_calc("MTTR Calculation for USA");
+$an_act_MTTR.mttr_runEngine("vinaya.v@servicemax.com");
+
+var $ana_1023_insert_WO = "SVMXC__Service_Order__c  WO4 = new SVMXC__Service_Order__c ( Custom_Account__c ='"+ $Account2 +"', SVMXC__Product__c = '"+$Product1+"' , SVMXC__Group_Member__c = '"+$Technician1+"' ,SVMXC__Component__c = '"+$Component+"',SVMXC__Order_Status__c = '"+$OrderStatus1+"' , SVMXC__Closed_On__c = "+$close+",SVMXC__Country__c = 'United States', SVMXC__Sub_Status__c = 'Resolved', SVMXC__Priority__c = 'High', SVMXC__Site__c = '"+$Site+"');insert WO4;";
+var $ana_1023_query_wo = "Select Name , Id  ,Custom_Account__c , SVMXC__Component__c , SVMXC__Closed_On__c from SVMXC__Service_Order__c where Createdby.Id = '005q0000003RLoJ' Order by CreatedDate DESC Limit 1";
+var $ana_1023_result = $op_act_sForceApiCall.sForceQuery($un, $pwd, $ana_1023_insert_WO , "create");
+var $ana_1023_fetch = $op_act_sForceApiCall.sForceQuery($un, $pwd, $ana_1023_query_wo,"query");
+$ana_1023_fetch.forEach(function($ana_1023_var1) {
+	
+	$ana_1023_WO1 = $ana_1023_var1.Id;
+
+});
+_log($ana_1023_WO1);
+
+var $ana_1023_insert_WO2 = "SVMXC__Service_Order__c  WO5 = new SVMXC__Service_Order__c (SVMXC__Company__c ='"+ $Account2 +"', SVMXC__Product__c = '"+$Product1+"' , SVMXC__Group_Member__c = '"+$Technician1+"' ,SVMXC__Component__c = '"+$Component+"', SVMXC__Order_Status__c = '"+$OrderStatus1+"' , SVMXC__Closed_On__c = "+$close+",SVMXC__Country__c = 'United States', SVMXC__Priority__c = 'High',SVMXC__Related_Work_Order__c ='"+$ana_1023_WO1+"', SVMXC__Site__c = '"+$Site+"' );insert WO5;";
+var $ana_1023_query_wo2 = "Select Name , Id  , SVMXC__Company__c , SVMXC__Component__c , SVMXC__Closed_On__c from SVMXC__Service_Order__c where Createdby.Id = '005q0000003RLoJ' Order by CreatedDate DESC Limit 1";
+var $resultArr3 = $op_act_sForceApiCall.sForceQuery($un, $pwd, $ana_1023_insert_WO2 , "create");
+
+
+var $ana_1023_result2 = $op_act_sForceApiCall.sForceQuery($un, $pwd, $ana_1023_query_wo2,"query");
+$ana_1023_result2.forEach(function($var5) {
+	
+	$ana_1023_WO2 = $var5.Id;
+});
+_log($ana_1023_WO2);
+
+_click($an_pg_rv.link_home);
+_click($an_pg_rv.link_servicemaxSetup);
+_click($an_pg_rv.btn_serviceperformancemetrics);
+_click($an_pg_rv.btn_serviceperformancemetricsetup);
+$an_act_Repeat_Visit_SR.rv_runEngine("vinaya.v@servicemax.com");
+
+_wait(1000);
+_click(_span("Account Summary"));
+_click(_span("Schedule & Notifications[2]"));
+_setValue(_textbox("emailOnSuccess"), "vinaya.v@servicemax.com");
+_click(_span("Save[1]"));
+_click(_span("OK"));
+_click(_link("Run Now[1]"));
+_click(_span("OK"));
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
+ 
+var $i;
+var $ana_case;
+var $ana_WO1 =null;
+var $ana_WO_Account1;
+var $ana_Is_First_Time_Fix1;
+var $ana_configuration_Name1;
+var $ana_product1;
+var $ana_technician1;
+for(var $i=0;$ana_WO1==null;$i++){
+	
+var $ana_query_ftf1 = "Select SVMXC__Case__c,SVMXC__Work_Order__c , SVMXC__Account__c, SVMXC__Configuration_Name__c ,SVMXC__Is_Fixed_First_Time__c,SVMXC__Product__c,SVMXC__Technician__c from SVMXC__SPM_First_Time_Fix__c where  SVMXC__Work_Order__c='"+$WO1+"'";
+var $ana_result_ftf1 = $op_act_sForceApiCall.sForceQuery($un, $pwd, $ana_query_ftf1,"query");
+_wait(2000);
+$ana_result_ftf1.forEach(function($varftf) {
+    $ana_case=$varftf.SVMXC__Case__c;
+	$ana_WO1=$varftf.SVMXC__Work_Order__c;
+	$ana_WO_Account1 = $varftf.SVMXC__Account__c;
+	$ana_Is_First_Time_Fix1 = $varftf.SVMXC__Is_Fixed_First_Time__c;
+	$ana_configuration_Name1 = $varftf.SVMXC__Configuration_Name__c;
+	$ana_product1=$varftf.SVMXC__Product__c;
+	$ana_technician1=$varftf.SVMXC__Technician__c;
+	});
+}
+
+_log($ana_Is_First_Time_Fix1);
+_log($ana_configuration_Name1);
+_assertEqual("false", $ana_Is_First_Time_Fix1);
+_assertEqual($Account1 , $ana_WO_Account1);
+var $tech=$an_act_FTF.convertToSfdcId($Technician1);
+_assertEqual( $tech, $ana_technician1);
+_assertEqual($Case,$ana_case);
+var $pro1=$an_act_FTF.convertToSfdcId($Product1);
+_assertEqual($pro1 , $ana_product1);
+
+
+var $j;
+var $ana_WO2 =null;
+var $ana_WO_Account2;
+var $ana_Is_First_Time_Fix2;
+var $ana_configuration_Name2;
+var $ana_product2;
+var $ana_technician2;
+
+	
+var $ana_query_ftf2 = "Select SVMXC__Case__c,SVMXC__Work_Order__c , SVMXC__Account__c, SVMXC__Configuration_Name__c ,SVMXC__Is_Fixed_First_Time__c,SVMXC__Product__c,SVMXC__Technician__c from SVMXC__SPM_First_Time_Fix__c where  SVMXC__Work_Order__c='"+$WO2+"'";
+var $ana_result_ftf2 = $op_act_sForceApiCall.sForceQuery($un, $pwd, $ana_query_ftf2,"query");
+_wait(2000);
+$ana_result_ftf2.forEach(function($varftf1) {
+    $ana_case=$varftf1.SVMXC__Case__c;
+	$ana_WO2=$varftf1.SVMXC__Work_Order__c;
+	$ana_WO_Account2 = $varftf1.SVMXC__Account__c;
+	$ana_Is_First_Time_Fix2 = $varftf1.SVMXC__Is_Fixed_First_Time__c;
+	$ana_configuration_Name2 = $varftf1.SVMXC__Configuration_Name__c;
+	$ana_product2=$varftf1.SVMXC__Product__c;
+	$ana_technician2=$varftf1.SVMXC__Technician__c;
+	});
+
+_log($ana_Is_First_Time_Fix2);
+_log($ana_configuration_Name2);
+_assertEqual("true", $ana_Is_First_Time_Fix2);
+_assertEqual($Account2 , $ana_WO_Account2);
+_assertEqual( $Technician2, $ana_technician2);
+_assertEqual($Case,$ana_case);
+_assertEqual($Product2 , $ana_product2);
+*/
+
+
+$an_ftf_000.end();
+
+
+

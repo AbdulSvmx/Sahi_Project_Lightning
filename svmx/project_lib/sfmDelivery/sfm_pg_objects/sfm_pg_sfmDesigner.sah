@@ -1,0 +1,41 @@
+var $sfm_pg_sfmDesigner = new function sfm_pg_sfmDesigner() {
+	
+	this.btn_quickSaveSFM = _f("main").s_button("Quick Save");
+	this.btn_saveSFM = _f("main").s_button("Save & Close");
+	this.lnk_home = _link("Home");
+	this.lnk_workOrder = _link("Work Orders");
+	this.btn_deliveryQuickSave = _span("svmx-btn-icon svmx-sfmd-quicksave-icon");
+	this.btn_deliverySave = _span("svmx-btn-icon svmx-sfmd-save-icon");
+	this.btn_deliveryCancel = _span("svmx-btn-icon svmx-sfmd-cancel-icon");
+	this.btn_deliveryGetPrice = _span("Get Price");
+	this.btn_deliveryUserSettings = _span("svmx-btn-icon svmx-sfmd-setting-icon");
+	this.btn_deliveryHelp = _span("svmx-btn-icon svmx-sfmd-help-icon");
+	this.btn_deliveryClearCache = _span("svmx-btn-icon svmx-sfmd-cache-icon");
+	
+	
+	//SFM Delivery page objects
+	this.btn_deliveryPartsTab = _span("Parts");
+	this.btn_deliveryLaborTab = _span("Labor");
+	this.btn_deliveryExpenseTab = _span("Expenses");
+	this.btn_deliveryTravelTab = _span("Travel");
+	this.btn_deliveryAddRowParts = _span("svmx-btn-icon svmx-sfmd-add-line-icon");
+	this.btn_deliveryAddMultiParts = _span("svmx-btn-icon svmx-sfmd-multi-add-line-icon");
+	this.btn_deliveryAddChildRow = _div("sfm-button-1193");
+	this.btn_deliveryExtendedEdit = _image("/gif/", _in(_div("svmx-grid-cell-inner ")));
+	this.btn_deliveryAddRowLabor = _span("svmx-btn-icon svmx-sfmd-add-line-icon[1]");
+	
+	//Extended edit page objects --Parts
+	
+	this.txt_eeLineQty = _textbox("Line Qty:",_rightOf(_label("Line Qty:")));
+	this.txt_eeReceivedStreet = _textarea(0,_rightOf(_label("Received Street:")));
+	this.btn_eeUpdate = _span("Update");
+	this.btn_eeCancel = _span("Cancel");
+	
+	//Extended edit page objects --Labor
+	
+	this.txt_eeStartDateTime =_textbox("/svmx-date-/",_rightOf(_label("Start Date and Time:")));
+	this.txt_billingQty = _textbox("Billable Qty:",_rightOf(_label("Billable Qty:")));
+	this.txt_billingLinePrice = _textbox("/svmx-number-/",_rightOf(_label("Billable Line Price:")));
+	
+	this.txt_PriceAlert = _div("Price not calculated, because entitlement check has not been performed.");
+};

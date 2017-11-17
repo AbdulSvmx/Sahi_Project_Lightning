@@ -1,0 +1,48 @@
+var $bo_act_customAction=new function bo_act_customAction(){
+	
+	this.createNewCustomAction=function($custActname,$custActID,$url,$objectName,$actnType){
+		
+	_setSelected($bo_pg_customAction.sel_objWO, $objectName);
+		_click($bo_pg_customAction.btn_new);
+		_setSelected($bo_pg_customAction.sel_actionType,$actnType);
+		_setValue($bo_pg_customAction.txt_actionName,$custActname);
+		_setValue($bo_pg_customAction.txt_actionID,$custActID);
+		_setValue($bo_pg_customAction.txt_enterURL,$url);
+		_click($bo_pg_customAction.btn_quickSave);
+		_click($bo_pg_customAction.btn_saveAndClose);
+		_click($bo_pg_customAction.btn_backToSetUpHome);
+		
+	};
+	
+	this.createCustomActionForWebService=function($objectName,$className,$methodName){
+		var $actionTitle = $bo_act_common.generateRandomName("actTitle");
+		var $actionId = $bo_act_common.generateRandomName("actId");
+		$bo_act_navigation.navigateToSfmCustomAction();
+		_setSelected($bo_pg_customAction.sel_objWO, $objectName);
+			_click($bo_pg_customAction.btn_new);
+			_setSelected($bo_pg_customAction.sel_actionType,"Web Service");
+			_setValue($bo_pg_customAction.txt_actionTitle,$actionTitle);
+			_setValue($bo_pg_customAction.txt_actionID,$actionId);
+			_setValue($bo_pg_customAction.txt_className,$className);
+			_setValue($bo_pg_customAction.txt_methodName,$methodName);
+			_click($bo_pg_customAction.btn_quickSave);
+			return $actionTitle;
+		};	
+		
+this.addParametersForWebService = function($parameterName,$parameterValueType, $parametervalue){
+	_click(_button("Add"));
+	_setValue($bo_pg_customAction.txt_parameterName,$parameterName);
+	_setSelected($bo_pg_customAction.sel_parameterValueType,$parameterValueType);
+	_setValue($bo_pg_customAction.txt_parameterValue,$parametervalue);
+	_click($bo_pg_customAction.btn_quickSave);		
+};
+
+this.deleteCustomAction = function($objName,$actionTitle){
+	$bo_act_navigation.navigateToSfmCustomAction();
+	_setSelected($bo_pg_customAction.sel_objWO, $objName);
+	_check(_checkbox(0,_leftOf(_span($actionTitle))));
+	_click($bo_pg_customAction.btn_delete);
+};
+
+};
+
