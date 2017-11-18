@@ -4,6 +4,7 @@
 //Pre - Condition Test Data
 var $productFamily = ["--None--","GeneralSolution","AdvSolution","Accessory", "Storage"];
 var $productCode = "";
+var $recordType = ["Depot","Depot Child","Depot Parent","Standard Location"];
 var $coverageEffectiveFrom = ["--None--","Date Installed","Date Ordered","Date Shipped","Last Activity Date","Last Date Shipped","Warranty Start Date","Warranty End Date"];
 var $seperator = "/";
 
