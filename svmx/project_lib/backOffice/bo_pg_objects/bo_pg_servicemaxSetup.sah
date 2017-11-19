@@ -32,6 +32,9 @@ var $bo_pg_servicemaxSetup = new function bo_pg_servicemaxSetup(){
 	
 	//Object for Service Pricebooks
 	this.btn_servicePricebooks = _div("Service Pricebooks");
+	
+	//Object for Services Option
+	this.btn_services = _div("Services");
 
 };
 
