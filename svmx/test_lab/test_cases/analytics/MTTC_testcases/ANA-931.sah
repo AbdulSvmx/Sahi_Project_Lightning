@@ -90,10 +90,9 @@ var $ana_case;
 var $cal_method;
 var $cal_method1;
 
-for(var $i=0;$ana_WO==null;$i++){
 	var $ana_query_mttc = "Select SVMXC__Work_Order__c , SVMXC__Case__c,SVMXC__Account__c, SVMXC__Configuration_Name__c ,SVMXC__Product__c,SVMXC__Technician__c,SVMXC__Service_Delivered_On__c,SVMXC__Completion_Time__c from SVMXC__SPM_Mean_Time_To_Complete__c where SVMXC__Work_Order__c ='"+ $WO+"'";
 var $ana_result_mttc = $op_act_sForceApiCall.sForceQuery($un, $pwd, $ana_query_mttc,"query");
-_wait(2000);
+
 $ana_result_mttc.forEach(function($varmttc) {
 	$ana_case=$varmttc.SVMXC__Case__c;
 	$ana_WO=$varmttc.SVMXC__Work_Order__c;
@@ -104,7 +103,7 @@ $ana_result_mttc.forEach(function($varmttc) {
 	$ana_technician=$varmttc.SVMXC__Technician__c;
 	$cal_method=$varmttc.SVMXC__Configuration_Name__c;
 	});
-}
+
 
 var $ana_query_mttc1 = "Select SVMXC__Work_Order__c , SVMXC__Configuration_Name__c ,SVMXC__Completion_Time__c from SVMXC__SPM_Mean_Time_To_Complete__c where SVMXC__Work_Order__c ='"+ $WO1 +"'";
 var $ana_result_mttc1 = $op_act_sForceApiCall.sForceQuery($un, $pwd, $ana_query_mttc1,"query");

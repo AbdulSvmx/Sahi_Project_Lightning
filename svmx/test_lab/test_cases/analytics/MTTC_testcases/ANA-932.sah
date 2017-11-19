@@ -162,7 +162,6 @@ var $varmttc2;
 var $ana_configuration_Name1;
 var $ana_product1;
 var $ana_technician1;
-for(var $i=0;$ana_WO1==null;$i++){
 	
 var $ana_query_mttc1 = "Select SVMXC__Work_Order__c , SVMXC__Account__c, SVMXC__Configuration_Name__c ,SVMXC__Product__c,SVMXC__Technician__c,SVMXC__Service_Delivered_On__c,SVMXC__Completion_Time__c from SVMXC__SPM_Mean_Time_To_Complete__c where SVMXC__Work_Order__c ='"+ $WO1 +"'";
 var $ana_result_mttc1 = $op_act_sForceApiCall.sForceQuery($un, $pwd, $ana_query_mttc1,"query");
@@ -175,7 +174,7 @@ $ana_result_mttc1.forEach(function($varmttc1) {
 	$ana_product1=$varmttc1.SVMXC__Product__c;
 	$ana_technician1=$varmttc1.SVMXC__Technician__c;
 	});
-}
+
 _assertEqual($ana_WO1, $WO1);
 _assertEqual($Account1 , $ana_WO_Account1);
 _assertEqual( $Technician1, $ana_technician1);
@@ -184,7 +183,7 @@ _assertEqual($datevalue,1440);
 
 var $ana_query_mttc2 = "Select SVMXC__Work_Order__c,SVMXC__Completion_Time__c from SVMXC__SPM_Mean_Time_To_Complete__c where SVMXC__Work_Order__c ='"+ $WO2 +"'";
 var $ana_result_mttc2 = $op_act_sForceApiCall.sForceQuery($un, $pwd, $ana_query_mttc2,"query");
-_wait(2000);
+
 $ana_result_mttc2.forEach(function($varmttc2) {
 	$ana_WO2=$varmttc2.SVMXC__Work_Order__c;
 	$ana_Completion_Time2=$varmttc2.SVMXC__Completion_Time__c;
@@ -194,7 +193,7 @@ _assertEqual($datevalue1,360);
 
 var $ana_query_mttc3 = "Select SVMXC__Work_Order__c,SVMXC__Completion_Time__c from SVMXC__SPM_Mean_Time_To_Complete__c where SVMXC__Work_Order__c ='"+ $WO3 +"'";
 var $ana_result_mttc3 = $op_act_sForceApiCall.sForceQuery($un, $pwd, $ana_query_mttc3,"query");
-_wait(2000);
+
 $ana_result_mttc3.forEach(function($varmttc3) {
 	$ana_Completion_Time3=$varmttc3.SVMXC__Completion_Time__c;
 	$ana_WO3=$varmttc3.SVMXC__Work_Order__c;
@@ -205,16 +204,13 @@ _assertEqual($datevalue3,1440);
 
 var $ana_query_mttc4 = "Select SVMXC__Work_Order__c,SVMXC__Completion_Time__c from SVMXC__SPM_Mean_Time_To_Complete__c where SVMXC__Work_Order__c ='"+ $WO4 +"'";
 var $ana_result_mttc4 = $op_act_sForceApiCall.sForceQuery($un, $pwd, $ana_query_mttc4,"query");
-_wait(2000);
+
 $ana_result_mttc4.forEach(function($varmttc4) {
 	$ana_WO4=$varmttc4.SVMXC__Work_Order__c;
 	$ana_Completion_Time4=$varmttc4.SVMXC__Completion_Time__c;
 	});
 _assertEqual($ana_WO4, $WO4);
 _assertEqual($datevalue4,360);
-
-
-
 
 
 
