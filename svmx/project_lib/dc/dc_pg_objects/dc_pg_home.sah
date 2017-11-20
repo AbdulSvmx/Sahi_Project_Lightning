@@ -5,9 +5,6 @@
 var $dc_pg_home = new function dc_pg_home() {
 	this.link_home = _link("Home");
 	this.link_servicemaxSetup = _link("ServiceMax Setup");
-<<<<<<< HEAD
 	this.link_DispatchConsole=_link("Dispatch Console");
 	}
-=======
-}
->>>>>>> 665b4e8b68234821577efe72e1d371c86f1c6843
+

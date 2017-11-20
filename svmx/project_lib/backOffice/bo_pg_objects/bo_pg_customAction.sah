@@ -9,7 +9,6 @@ var $bo_pg_customAction = new function bo_pg_customAction() {
 	this.btn_quickSave=_button("Quick Save");
 	this.btn_saveAndClose=_submit("Save & Close");
 	this.btn_backToSetUpHome=_submit("Back To Setup Home");
-<<<<<<< HEAD
 	
 	this.txt_actionTitle = _textbox(0,_rightOf(_label("Action Title")));
 	this.txt_actionID = _textbox(0,_rightOf(_label("Action ID")));
@@ -19,7 +18,6 @@ var $bo_pg_customAction = new function bo_pg_customAction() {
 	this.txt_parameterName = _textbox(0,_near(_div("Parameter Name"),_under(_table("list"))));
 	this.sel_parameterValueType = _select(0,_near(_div("Parameter Value Type"),_under(_table("list"))));
 	this.txt_parameterValue = _select(1,_near(_div("Parameter Value")),_under(_table("list")));
-=======
->>>>>>> 665b4e8b68234821577efe72e1d371c86f1c6843
+
 };
 	

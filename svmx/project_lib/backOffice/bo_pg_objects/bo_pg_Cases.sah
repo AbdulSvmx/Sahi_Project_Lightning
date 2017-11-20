@@ -16,11 +16,8 @@ var $bo_pg_Cases = new function bo_pg_Cases(){
 	this.sel_selectCaseType = _select(0,_rightOf(_label("/\\*Type|^Type/")));
 	this.sel_selectCaseOrigin = _select(0,_rightOf(_label("/\\*Case Origin|^Case Origin/")));
 	this.btn_save = _submit(" Save ");
-<<<<<<< HEAD
     this.txt_caseNumber = _heading2("pageDescription");
-=======
-	this.txt_caseNumber = _div(0,_rightOf(_cell("Case Number")));
->>>>>>> 665b4e8b68234821577efe72e1d371c86f1c6843
+	//this.txt_caseNumber = _div(0,_rightOf(_cell("Case Number")));
 	this.btn_editCase = _button(" Edit "); 
 	this.btn_cloneCase = _button(" Clone ");
 	this.btn_deleteCase = _button("Delete");

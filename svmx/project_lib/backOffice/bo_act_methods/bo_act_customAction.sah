@@ -27,7 +27,6 @@ var $bo_act_customAction=new function bo_act_customAction(){
 			_click($bo_pg_customAction.btn_backToSetUpHome);
 			
 		};	
-<<<<<<< HEAD
 		
 this.addParametersForWebService = function($parameterName,$parameterValueType, $parametervalue){
 	_click(_button("Add"));
@@ -43,8 +42,7 @@ this.deleteCustomAction = function($objName,$actionTitle){
 	_check(_checkbox(0,_leftOf(_span($actionTitle))));
 	_click($bo_pg_customAction.btn_delete);
 };
-=======
->>>>>>> 665b4e8b68234821577efe72e1d371c86f1c6843
+
 
 };
 
