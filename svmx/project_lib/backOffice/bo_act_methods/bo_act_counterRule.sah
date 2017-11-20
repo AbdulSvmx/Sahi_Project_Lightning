@@ -13,5 +13,5 @@ this.createNewCunterRule=function($counterRuleName,$value){
 		_setValue($bo_pg_counterRule.txt_maxValue, "100");
 		_check($bo_pg_counterRule.chk_activefield);
 		_click($bo_pg_counterRule.btn_save);
-	}
-	}
+	};
+	};
