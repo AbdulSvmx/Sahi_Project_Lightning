@@ -1,18 +1,40 @@
 /**
  * Functions for the Accounts Object
  */
-var $bo_act_salesforceSetUp = new function bo_act_$bo_act_salesforceSetUp() {
+var $bo_act_salesforceSetUp = new function bo_act_salesforceSetUp() {
 
 
 	this.createApexClasses = function($code) {
-		$bo_act_navigation.navigateToSetUpAndSearch("Apex Classes");
 		 _click(_submit("New"));
-		 _setValue($bo_pg_salesforceSetUp.txt_apexClasscode,$code);
-		 _click($bo_pg_salesforceSetUp.btn_quickSave);
-		 _wait(10000);
-		 _click($bo_pg_salesforceSetUp.btn_save);
+		 _setValue(_textarea("textarea"),$code);
+		// _click(_button("Quick Save"));
+		// _wait(10000);
+		// _click(_button("Save"));
 	};
+	this.createCustomLabelForAppPermission=function ($newTransValue){
+		 _click($bo_pg_salesForceSetUP.lnk_salesforceSetUp);
+		_setValue($bo_pg_salesForceSetUP.txt_salesforceSetUpSrch,"custom label");
+		_click($bo_pg_salesForceSetUP.lnk_customLabels);
+		_wait(2000);
+		_click($bo_pg_salesForceSetUP.lnk_appPermissionProcessIDTag);
+		_click($bo_pg_salesForceSetUP.btn_newLocalTrans)
+		_setSelected($bo_pg_salesForceSetUP.sel_language);
+		_click($bo_pg_salesForceSetUP.sel_language,"English")
+		_setValue($bo_pg_salesForceSetUP.txt_newTranslatedValue,$newTransValue);
+		_click($bo_pg_salesForceSetUP.btn_save);		
+	}
+		this.deleteNewTranslatedValue=function(){
+			 _click($bo_pg_salesForceSetUP.lnk_salesforceSetUp);
+			_setValue($bo_pg_salesForceSetUP.txt_salesforceSetUpSrch,"custom label");
+			_click($bo_pg_salesForceSetUP.lnk_customLabels);
+			_wait(2000);
+			_click($bo_pg_salesForceSetUP.lnk_appPermissionProcessIDTag);
+			_click($bo_pg_salesForceSetUP.lnk_deleteNewTranslatedValue);
+			
+		}
+		
 	
+<<<<<<< HEAD
 	this.deleteapexClasses = function($className){
 		$bo_act_navigation.navigateToSetUpAndSearch("Apex Classes");
 		 var $firstLetter = $className.charAt(0);
@@ -36,4 +58,6 @@ var $bo_act_salesforceSetUp = new function bo_act_$bo_act_salesforceSetUp() {
 		var $userName = _getText($bo_pg_salesforceSetUp.txt_Name);
 		return $userName;
 	};
+=======
+>>>>>>> 665b4e8b68234821577efe72e1d371c86f1c6843
 };

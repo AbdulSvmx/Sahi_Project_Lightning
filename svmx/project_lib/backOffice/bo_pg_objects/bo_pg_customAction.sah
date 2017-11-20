@@ -2,13 +2,14 @@ var $bo_pg_customAction = new function bo_pg_customAction() {
 	
 	this.sel_objWO=_select("ManageAction:form1:j_id0:j_id28:j_id29:j_id30:j_id32");
 	this.btn_new=_submit("New");
-	this.sel_actionType= _select(0,_rightOf(_label("Action Type")));
+	this.sel_actionType=_select("j_id0:j_id1:BLOCK1:j_id7:j_id8:j_id9:j_id11");
 	this.txt_actionName=_textbox("j_id0:j_id1:BLOCK1:j_id39:j_id44:j_id45:j_id46:j_id55:j_id58");
-	//this.txt_actionID= _textbox("j_id0:j_id1:BLOCK1:j_id39:j_id44:j_id45:j_id46:j_id61:actnId");
+	this.txt_actionID= _textbox("j_id0:j_id1:BLOCK1:j_id39:j_id44:j_id45:j_id46:j_id61:actnId");
 	this.txt_enterURL=_textbox("j_id0:j_id1:BLOCK1:j_id39:j_id44:j_id68:j_id69:j_id77:j_id80");
 	this.btn_quickSave=_button("Quick Save");
 	this.btn_saveAndClose=_submit("Save & Close");
 	this.btn_backToSetUpHome=_submit("Back To Setup Home");
+<<<<<<< HEAD
 	
 	this.txt_actionTitle = _textbox(0,_rightOf(_label("Action Title")));
 	this.txt_actionID = _textbox(0,_rightOf(_label("Action ID")));
@@ -18,5 +19,7 @@ var $bo_pg_customAction = new function bo_pg_customAction() {
 	this.txt_parameterName = _textbox(0,_near(_div("Parameter Name"),_under(_table("list"))));
 	this.sel_parameterValueType = _select(0,_near(_div("Parameter Value Type"),_under(_table("list"))));
 	this.txt_parameterValue = _select(1,_near(_div("Parameter Value")),_under(_table("list")));
+=======
+>>>>>>> 665b4e8b68234821577efe72e1d371c86f1c6843
 };
 	

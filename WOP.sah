@@ -1,0 +1,8 @@
+_setValue(_f("main").s_textinput("Save page layout as"), "RSTest-5381");
+_setValue(_f("main").s_textinput("Input ID Here[3]"), "Input ID Here");
+_setValue(_f("main").s_textinput("Save page layout as"), "RSTest-5381");
+_click(_f("main").s_button("Save[3]"));
+_click(_f("main").tab("Advanced Options"));
+_click(_f("main").tab("Sorting"));
+_click(_f("main").tab("Multi-Source Configuration"));
+_click(_f("main").tab("Sorting"));

@@ -16,6 +16,7 @@ var $dc_act_navigation = new function dc_act_navigation() {
 				_exists($an_pg_home.link_servicemaxSetup), "navigateToHome");
 
 	};
+<<<<<<< HEAD
 	
 	this.navigateToDispatchConsole= function() {
 		_click($dc_pg_home.link_DispatchConsole);
@@ -58,4 +59,6 @@ var $dc_act_navigation = new function dc_act_navigation() {
 	   	_wait(60000,_isVisible($dc_pg_eventHoverRule.btn_newRule));
 	};
 	
+=======
+>>>>>>> 665b4e8b68234821577efe72e1d371c86f1c6843
 };

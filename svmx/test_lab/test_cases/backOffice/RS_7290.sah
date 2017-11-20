@@ -4,31 +4,26 @@
 //Pre - Condition Test Data
 var $productFamily = ["--None--","GeneralSolution","AdvSolution","Accessory", "Storage"];
 var $productCode = "";
-var $recordType = ["Depot","Depot Child","Depot Parent","Standard Location"];
 var $coverageEffectiveFrom = ["--None--","Date Installed","Date Ordered","Date Shipped","Last Activity Date","Last Date Shipped","Warranty Start Date","Warranty End Date"];
 var $seperator = "/";
 
 var $RS_7290 = _testcase("$RS_7290","Creation and Activation of Service Contracts");
 $RS_7290.start();
 _setSpeed(100);
-
-/**
- * Login to the Sandbox Org
- */
-
-$bo_act_login.login($g_url, $bac_un, $bac_pwd);
-
-/**
-* Create Account, Contact, Location, Product and Installed Product
-*/
+//$bo_act_login.login($g_url, $g_un, $g_pwd);
 
 var $accountName = $bo_act_accounts.createAccount();
+
 var $contactName = $bo_act_contacts.createContact($accountName);
+
 var $locationName = $bo_act_locations.createLocation($recordType[3],$accountName,"#007","India","560001");
+
 var $productName = $bo_act_products.createProduct($productCode, $productFamily[3]);
+
 var $IBName = $bo_act_installedProduct.createInstalledProduct($productName, $accountName, $contactName);
 
 //Create 1st SLA Term SLA01 [Platinum SLA]
+$bo_act_navigation.navigateToSlaTerms();
 var $slaName01 = $bo_act_slaTerms.createSlaTerms("Default");
 $bo_act_slaTerms.addInitialResponseToSLA($slaName01,"WorkOrder","Field Service","Medium","Created Date","5","10","SLA");
 $bo_act_slaTerms.addOnsiteResponseToSLA($slaName01,"WorkOrder","Field Service","Medium","Created Date","10","15","SLA");
@@ -37,6 +32,7 @@ $bo_act_slaTerms.addOnsiteResponseToSLA($slaName01,"WorkOrder","Field Service","
 _assertExists(_span($slaName01));
 
 //Create 2nd SLA Term SLA02 [Gold SLA]
+$bo_act_navigation.navigateToSlaTerms();
 var $slaName02 = $bo_act_slaTerms.createSlaTerms("Default");
 $bo_act_slaTerms.addInitialResponseToSLA($slaName02,"WorkOrder","Field Service","Medium","Created Date","5","10","SLA");
 $bo_act_slaTerms.addOnsiteResponseToSLA($slaName02,"WorkOrder","Field Service","Medium","Created Date","10","15","SLA");
@@ -45,6 +41,7 @@ $bo_act_slaTerms.addOnsiteResponseToSLA($slaName02,"WorkOrder","Field Service","
 _assertExists(_span($slaName02));
 
 //Create 3rd SLA Term SLA03 [Silver SLA]
+$bo_act_navigation.navigateToSlaTerms();
 var $slaName03 = $bo_act_slaTerms.createSlaTerms("Default");
 $bo_act_slaTerms.addInitialResponseToSLA($slaName03,"WorkOrder","Field Service","Medium","Created Date","5","10","SLA");
 $bo_act_slaTerms.addOnsiteResponseToSLA($slaName03,"WorkOrder","Field Service","Medium","Created Date","10","15","SLA");

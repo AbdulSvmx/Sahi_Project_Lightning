@@ -129,12 +129,8 @@ var $ana_897_labortime2;
 var $an_897_primarywo2;
 var $ana_897_deadtime2;
 
-
-var $ana_897_query_RV2 = "Select Id ,SVMXC__Work_Order__c ,SVMXC__Primary_Work_Order__c, SVMXC__Account__c, SVMXC__Configuration_Name__c , SVMXC__Labor_Time__c , SVMXC__Dead_Time__c from SVMXC__SPM_Mean_Time_To_Repair__c where SVMXC__Work_Order__c ='"+ $ana_897_WO1 +"'";
-
-
+for(var $i = 0;$ana_897_wo_id2 == null;$i++){
 var $ana_897_query_RV2 = "Select SVMXC__Work_Order__c ,SVMXC__Primary_Work_Order__c, SVMXC__Account__c, SVMXC__Configuration_Name__c , SVMXC__Labor_Time__c , SVMXC__Dead_Time__c from SVMXC__SPM_Mean_Time_To_Repair__c where SVMXC__Work_Order__c ='"+ $ana_897_WO1 +"'";
-
 var $ana_897_resultRV2 = $op_act_sForceApiCall.sForceQuery($un, $pwd, $ana_897_query_RV1,"query");
 _wait(5000);
 $ana_897_resultRV2.forEach(function($varRV1) {
@@ -146,7 +142,7 @@ $ana_897_resultRV2.forEach(function($varRV1) {
 		$ana_897_deadtime2 = $varRV1.SVMXC__Dead_Time__c;
 		
 });
-
+}
 $ana_897_deadtime2 = Math.round($ana_897_deadtime2);
 $ana_897_labortime2 = Math.round($ana_897_labortime2);
 

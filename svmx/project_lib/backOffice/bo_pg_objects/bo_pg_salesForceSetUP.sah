@@ -10,5 +10,9 @@ var $bo_pg_salesForceSetUP = new function bo_pg_salesForceSetUP(){
 		this.btn_save=_submit(" Save [1]");
 		this.lnk_deleteNewTranslatedValue=_link("Del");
 	
+<<<<<<< HEAD
 };
 
+=======
+}
+>>>>>>> 665b4e8b68234821577efe72e1d371c86f1c6843

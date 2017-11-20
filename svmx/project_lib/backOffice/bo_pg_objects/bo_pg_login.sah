@@ -11,7 +11,7 @@ this.txt_password = _password("pw");
 this.btn_login = _submit("/Log/");
 
 
-};
+}
 
 
 

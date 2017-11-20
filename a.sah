@@ -1,0 +1,26 @@
+
+
+var $counterRuleName=$bo_act_common.generateRandomName("RS5536_");
+var $prodCode="Product Code";
+var $operator="Contains";
+var $value=$bo_act_common.generateRandomName("value");
+var $counterName= "Miles";
+var $type="Increasing";
+var  $growsOrReducedBy="10";
+var $minValue="10";
+var $maxValue="100";
+$bo_act_login.login($g_url, $bac_un, $bac_pwd);
+var $accName = $bo_act_accounts.createAccount();
+var $proName = $bo_act_products.createProduct("pro12", "--None--");
+var $installedProduct = $bo_act_installedProduct.createInstalledProduct($proName,$accName,"");
+var $slaterm = $bo_act_slaTerms.createSlaTerms("Default");
+var $sconName = $bo_act_serviceMaintenanceContracts.createServiceMaintenanceContract($accName, $slaterm,1,0);
+$bo_act_serviceMaintenanceContracts.AddCoveredProductToSCON($sconName, $installedProduct);
+$bo_act_navigation.navigateToCounterRule();
+$bo_act_counterRule.createNewCunterRule($counterRuleName,$value)
+$bo_act_navigation.navigateToScheduledSFM();
+
+
+
+
+
