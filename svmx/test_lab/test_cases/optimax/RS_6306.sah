@@ -13,7 +13,7 @@ var $dp_Id = $Dispatch_Process[$i][1];
 var $dp_Terr_Id = $Dispatch_Process[$i][2];
 }
 
-var $RS_6306 = _testcase("RS_6306", "Preferred tech from Installed Product without qualify dispatch process);
+var $RS_6306 = _testcase("RS_6306", "Preferred tech from Installed Product without qualify dispatch process");
 
 $RS_6306.start();
 	
