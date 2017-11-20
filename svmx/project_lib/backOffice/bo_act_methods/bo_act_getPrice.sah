@@ -1,0 +1,68 @@
+/**
+ * Functions for the Work Order Object
+ */
+var $bo_act_getPrice = new function bo_act_getPrice() {
+
+	/**
+	 * Create an Work Order
+	 */
+	this.addPartsLineToSFMDelivery = function($searchValue, $lineQty){
+		_click($bo_pg_getPrice.btn_partsLine);
+		_click($bo_pg_getPrice.btn_addSingleLine);
+		_click($bo_pg_getPrice.btn_editFirstRow);
+		$bo_act_common.searchfunction($searchValue);	//Search Values like Parts/Product Name
+		_setValue($bo_pg_getPrice.txt_lineQty, $lineQty);
+		_click($bo_pg_getPrice.btn_update);
+
+	};
+	
+	this.addLaborLineToSFMDelivery = function($searchValue, $activityType,$startHrs, $endHrs){
+		_click($bo_pg_getPrice.btn_laborLine);
+		_setStrictVisibilityCheck(true);
+		_click($bo_pg_getPrice.btn_addSingleLine);
+		_click($bo_pg_getPrice.btn_editFirstRow);
+		_setStrictVisibilityCheck();
+		$bo_act_common.searchfunction($searchValue);	//Search Values like Parts/Product Name
+		_setValue($bo_pg_getPrice.txt_activityType, $activityType);
+		_click($bo_pg_getPrice.btn_startDateAndTime);
+		_click($bo_pg_getPrice.btn_endDateAndTime);
+		// Configure the hours for Start Date Time
+		_click($bo_pg_getPrice.btn_HrsPickListNextToStartDateAndTime);
+		_click(_listItem($startHrs));
+		// Configure the hours for End Date Time
+		_click($bo_pg_getPrice.btn_HrsPickListNextToEndDateAndTime);
+		_click(_listItem($endHrs));
+		//_setValue($bo_pg_getPrice.txt_lineQty, $lineQty);
+		_click($bo_pg_getPrice.btn_update);
+
+	};
+	
+	this.editPartsLineToSFMDelivery = function($partsName){
+	 _click($bo_pg_getPrice.btn_partsLine);
+	 $bo_pg_getPrice.editWOLines($partsName);
+			
+	};
+	this.editLaborLineToSFMDelivery = function($partsName){
+		 _click($bo_pg_getPrice.btn_laborLine);
+		 $bo_pg_getPrice.editWOLines($partsName);
+				
+		};
+	
+	this.closeEditedWOLineToSFMDelivery = function(){
+		_click($bo_pg_getPrice.btn_update);
+				
+	};
+			
+	this.calculateGetPrice = function(){
+		_click($bo_pg_getPrice.btn_getPrice);
+	};
+	
+	this.saveSFMDelivery = function(){
+		_click($bo_pg_getPrice.btn_save);
+	};
+	
+	this.quickSaveSFMDelivery = function(){
+		_click($bo_pg_getPrice.btn_quickSave);
+	};
+	
+};

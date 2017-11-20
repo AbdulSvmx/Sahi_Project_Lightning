@@ -1,56 +1,60 @@
-// Normalized path that will work for both windows and unix
+//Setting the speed to 100ms to prevent the flex related pages which set the speed to 3000ms from slowing down other scripts in case they do not reset the execution speed back to 100ms
+_setSpeed(100);
 
-//Add All Global Variables here
+// Add All Global Variables here
 var $g_url = "https://test.salesforce.com/";
 var $g_un = "bhupen@back17.com";// "bhupendra.s@dev.tool2.com";
 var $g_pwd = "smax@123";
+var $bac_un = "orgsadmin@svmx-test4.org.test4part2"; //pointing to Base
+var $bac_pwd = "servicemax1";
 var $bac_unDev = "automationDEV@Test4Part1.com";
 var $bac_pwdDev = "welcome-01";
 var $bac_unBase = "orgsadmin@svmx-test4.org.test4part2";
 var $bac_pwdBase = "servicemax1";
-var $sfm_unBase="sysadmin01@sfdautomation.com";
-var $sfm_pwdBase="maxplore1";
 
-// _userDataDir().replace(/\\/g, "/");
-
-// Change this path later to match git path
-// "/sahi_pro/userdata/scripts/Sahi_Flex_Atuo_Scripts"
+//==== Reference addition module START ====
+// Normalizing the paths to work both on MAC and Windows
 var $g_normalizedUserDir = _userDataDir().replace(/\\/g, "/");
 
+// Add the paths that need to be included and match it to the GitHub project
+// path
+// ===== Start of paths ====//
 var $g_projectLibPath = $g_normalizedUserDir + "/scripts/Sahi_Project/svmx/project_lib";
-var $g_utilitiesPath = $g_normalizedUserDir
-		+ "/scripts/Sahi_Project/svmx/utilities_lib";
+var $g_utilitiesPath = $g_normalizedUserDir + "/scripts/Sahi_Project/svmx/utilities_lib";
+// ===== End of paths ====
 
 var $g_referancePath = $g_normalizedUserDir;
+
+// Store the file paths retrieved in a array
 var $g_includeFilesArray = [];
+
+// Flag to prevent multiple invocations of reference files
 var $global_referenceAdded = false;
-// This will execute only once across all the suites
+
+// This should execute only once across all the suites
 if ($global_referenceAdded === false) {
 
-	// get reference files
-	//_log("Getting references from dir : " + $g_projectLibPath);
+	// Add all the paths from where we need to fetch reference files
+	// _log("Getting references from dir : " + $g_projectLibPath);
 	recursiveGetReferenceFiles($g_includeFilesArray, $g_projectLibPath);
-	//_log("Getting references from dir : " + $g_utilitiesPath);
+	// _log("Getting references from dir : " + $g_utilitiesPath);
 	recursiveGetReferenceFiles($g_includeFilesArray, $g_utilitiesPath);
 
-	$g_includeFilesArray.forEach(function includeReferences($referencePath,
-			$index) {
-		//_continueOnError();
+	for (var $i = 0; $i < $g_includeFilesArray.length; $i++) {
 		try {
-			_include($referencePath);
+			_include($g_includeFilesArray[$i]);
 		} catch ($e) {
 			_log("Reference Exception : " + $e);
 		}
 		;
+	}
 
-		//_log($index + " Reference Added " + $referencePath);
-	});
-
+	// Set the flag to true to prevent duplicate addition of references
 	$global_referenceAdded = true;
 }
 
 // recursively traverses $filePath while adding files (with full path) ending in
-// .sah to $includeFilesArray
+// ".sah" to $includeFilesArray
 function recursiveGetReferenceFiles($includeFilesArray, $filePath) {
 	var fileList = getFilesAndFolders($filePath);
 
@@ -67,16 +71,16 @@ function recursiveGetReferenceFiles($includeFilesArray, $filePath) {
 	}
 }
 
-// returns an array of files and folders for the given $filePath.
-// .DS_Store files will not be included
+// returns an array of files and folders for the given $filePath and .DS_Store
+// files will not be included
 function getFilesAndFolders($filePath) {
 	try {
 		var $fileList_1 = new java.io.File($filePath);
 		// array of files and directory
 		var $fl = $fileList_1.list();
 
-		// remove files and folders that start with "."
-		// this is mainly to remove .DS_Store files on macs
+		// remove files and folders that start with "." this is mainly to remove
+		// .DS_Store files on macs
 		$fl.forEach(function removeDots(element, index) {
 			if (element.charAt(0) === ".") {
 				$fl.splice(index, 1);
@@ -88,6 +92,10 @@ function getFilesAndFolders($filePath) {
 		Packages.java.lang.System.out.println("FILE EXCEPTION : " + $e);
 	}
 }
+
+
+//==== Reference addition module END ====
+
 
 function onScriptError($e) {
 	return onScriptErrorDefault($e);
@@ -105,8 +113,7 @@ function onScriptErrorDefault($e) {
 	}
 
 	else {
-		if (_sahi.isAndroid() || _sahi.isWindows() || _sahi.isApplet()
-				|| _sahi.isJava()) {
+		if (_sahi.isAndroid() || _sahi.isWindows() || _sahi.isApplet() || _sahi.isJava()) {
 			_takeScreenShot();
 		} else {
 			// _takeScreenShot(); // uncomment this if you want a full desktop
@@ -127,8 +134,7 @@ function onScriptFailureDefault($e) {
 			dumpWindowInfo();
 		}
 	} else {
-		if (_sahi.isAndroid() || _sahi.isWindows() || _sahi.isApplet()
-				|| _sahi.isJava()) {
+		if (_sahi.isAndroid() || _sahi.isWindows() || _sahi.isApplet() || _sahi.isJava()) {
 			_takeScreenShot();
 		} else {
 			// _takeScreenShot(); // uncomment this if you want a full desktop
@@ -151,8 +157,7 @@ function dumpWindowInfo() {
 		s += "\n  derivedName:" + w.derivedName;
 		s += "\n  windowTitle:" + w.windowTitle;
 		s += "\n  windowURL:" + w.windowURL;
-		s += "\n  wasOpened:" + w.wasOpened + " ("
-				+ (w.wasOpened == 1 ? "popup window" : "base window") + ")";
+		s += "\n  wasOpened:" + w.wasOpened + " (" + (w.wasOpened == 1 ? "popup window" : "base window") + ")";
 		s += "\n  domain:" + w.domain;
 		var initDate = new Date(parseFloat(w.initialTime));
 		var lastDate = new Date(parseFloat(w.lastTime));

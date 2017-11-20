@@ -26,7 +26,6 @@ $bo_act_login.login($g_url, $g_un, $g_pwd);
 /**
  * Create Account, Contact, Location, Product and Installed Product
  */
-
 var $accountName = $bo_act_accounts.createAccount();
 var $contactName = $bo_act_contacts.createContact($accountName);
 var $locationName = $bo_act_locations.createLocation($recordType[3],$accountName,"#007","India","560001");
@@ -35,7 +34,6 @@ var $IBName = $bo_act_installedProduct.createInstalledProduct($productName, $acc
 
 /**
  * Create 5 Year WN Template
- * 
  */
 var $warrantyName = $bo_act_warrantyTerms.createWarrantyTerms($exchangeType[2],"10","5",$unitOfTimeForCoverage[4],"20","5",$unitOfTimeForCoverage[4],"30","5",$unitOfTimeForCoverage[4],$coverageEffectiveFrom[1]);
 $bo_act_warrantyTerms.createApplicableProducts($productName, $warrantyName); //Create Applicable product for warranty Terms
@@ -68,8 +66,8 @@ _assertEqual($endDateExpectedOn_IB,$endDateActulOn_IB,"Actual and expected End D
 
 /**
  * Create SLA Terms
- * 
  */
+
 //Create 1st SLA Term SLA01 [Platinum SLA]
 $bo_act_navigation.navigateToSlaTerms();
 var $slaName01 = $bo_act_slaTerms.createSlaTerms("Default");
@@ -98,8 +96,7 @@ $bo_act_slaTerms.addOnsiteResponseToSLA($slaName03,"WorkOrder","Field Service","
 _assertExists(_span($slaName03));
 
 /**
- * Create Service Contract(with child lines) and Activate it
- * 
+ * Create Service Contract(With child lines) and Activate it
  */
 var $pastYear = 2;  // Start Date for Service Contract
 var $futureYear = 2;  // End Date for Service Contract
@@ -112,14 +109,14 @@ $bo_act_serviceMaintenanceContracts.activateServiceContract($serviceConractName)
 
 // Add Covered Product to Service Contract 
 
-var $pastYear =   3;  			// Start Date 'TODAY's' Date - 3 YEARS
+var $pastYear = 3;  			// Start Date 'TODAY's' Date - 3 YEARS
 var $futureYear = 3;			// End Date 'TODAY's' Date + 3 YEARS
 
 $bo_act_serviceMaintenanceContracts.AddCoveredProducToServiceContract($serviceConractName, $IBName, $slaName02, $pastYear, $futureYear);
 
 //Add Covered Location to Service Contract 
 
-var $pastYear =   5;  			// Start Date 'TODAY's' Date - 5 YEARS
+var $pastYear = 5;  			// Start Date 'TODAY's' Date - 5 YEARS
 var $futureYear = 5;			//End Date 'TODAY's' Date + 5 YEARS
 
 $bo_act_serviceMaintenanceContracts.addCoveredLocationToServiceContract($serviceConractName, $locationName, $slaName03, $pastYear, $futureYear);
@@ -131,7 +128,6 @@ $bo_act_serviceMaintenanceContracts.addEntitledContactsToServiceContract($servic
 var $expecctedIBUnder_CoveredProduct =  _getText(_link(0,_under(_tableHeader("Installed Product"))));
 var $expecctedLocationUnder_CoveredLocations =  _getText(_link(0,_under(_tableHeader("Location"))));;
 var $expecctedContactUnder_EntitledContacts =  _getText(_link(0,_under(_tableHeader("Contact"))));;
-
 
 //validation
 //Validating the Covered Products Percent on Scon
@@ -146,6 +142,7 @@ _assertEqual($expecctedContactUnder_EntitledContacts,$contactName,"Actual and ex
 /**
  * Create Auto Entitlement Rules for Work Order
  */
+
 var $WOField = "Order Type";
 var $Operator = "Equals";
 var $Value = "Depot Repair";
@@ -172,7 +169,7 @@ $autoEntitlementRuleName = $bo_act_autoEntitlementRule_WO.createAutoEntitlementR
 var $Module = "Entitlement Verification";
 var $SubModule = "Auto-Entitlement-Work Order";
 var $Setting = "SET001";
-var $value = "True";
+var $value = true;
 $bo_act_configurationProfiles.editGlobalProfileForBooleanSettings($Module, $SubModule, $Setting, $value);
 
 /**
@@ -185,13 +182,12 @@ var $groupProfileName = "AutoBACGroup";
 var $Module1 = "Entitlement Verification";
 var $SubModule1 = "Auto-Entitlement-Work Order";
 var $Setting1 = "SET002";
-var $value1 = "True";
+var $value1 = true;
 $bo_act_configurationProfiles.editGroupProfileForBooleanSettings($groupProfileName, $Module1, $SubModule1, $Setting1, $value1);
 
 /**
  * Create Case record
  */
-
 var $caseStatus = "Escalated";
 var $casePriority = "Medium";
 var $caseOrigin = "Phone";
@@ -199,15 +195,44 @@ var $caseNumber = $bo_act_Cases.createCase($caseStatus, $casePriority, $caseOrig
 
 //Edit the above case for Account, Contact and IB information
 var $caseSite = "";
-$bo_act_Cases.editCase($caseNumber, $accountName, $contactName, $IBName, $caseSite);
+$bo_act_Cases.editCase($caseNumber,$accountName,$contactName,$IBName,$caseSite);
+
+/**
+ * Create Work Order record
+ */
+var $orderStatus = "Open";
+var $priority = "Medium";
+var $orderType = "Depot Repair";
+var $WO_Number = $bo_act_workOrders.createWorkOrder($caseNumber,$accountName,$contactName,$IBName,$orderStatus,$priority,$orderType);
+
+//Perform Auto Entitlement on Work Order
+$bo_act_autoEntitlementRule_WO.performAutoEntitlement_WO($WO_Number);
+
+//validate the Auto Entitlement Parameters 
+var $actual_AutoEntitlementStatus = _getText(_div(0,_rightOf(_cell("Auto Entitlement Status"))));
+//var $actual_IsEntitlementPerformed = "";
+var $actual_EntitlementNotes = _getText(_div(0,_rightOf(_cell("Entitlement Notes"))));
+
+var $actual_ServiceContract = _getText(_link(0,_rightOf(_cell("Service Contract"))));
+var $actual_EntitlementType = _getText(_div(0,_rightOf(_cell("Entitlement Type"))));
+var $actual_BillingType = _getText(_div(0,_rightOf(_cell("/Billing Type/"))));
+var $actual_SLATerms = _getText(_div(0,_rightOf(_cell("SLA Terms"))));
+
+_assertEqual($actual_ServiceContract,$serviceConractName,"Actual and expected Service Contract are not same");
+_assertEqual($actual_SLATerms,$slaName02,"Actual and expected SLA Terms are not same");
+_assertEqual($actual_EntitlementType,"AUTO","Actual and expected Entitlement Type are not same");
+_assertEqual($actual_BillingType,"Contract","Actual and expected Billing Type are not same");
+_assertEqual("Success",$actual_AutoEntitlementStatus,"Auto Entitlement is failed");
+_assertNotNull($actual_EntitlementNotes, "Entitlement Notes is Null");
 
 //Clean up function
 
-//var $datacreated = [$warrantyName,$IBName,$locationName,$productName,$contactName,$accountName,];
-var $datacreated = [$serviceConractName, $slaName03, $slaName02, $slaName01, $IBName,$productName,$locationName, $contactName,$accountName,];
+var $datacreated = [$WO_Number,$caseNumber,$serviceConractName,$slaName03,$slaName02,$slaName01,$IBName,$productName,$locationName,$contactName,$accountName];
 for (var i = 0; i < $datacreated.length; i++) {
 	$bo_act_common.cleanUpfunction($datacreated[i]);
 }
+$bo_act_autoEntitlementRule_WO.deleteAutoEntitlementRule_WO($autoEntitlementRuleName);
+
 $bo_act_login.logOut(); 
 
 $RS_7298.end();

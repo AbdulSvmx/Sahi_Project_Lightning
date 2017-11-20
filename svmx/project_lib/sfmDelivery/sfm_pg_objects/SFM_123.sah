@@ -1,0 +1,8 @@
+var $ = new function bo_act_PMProcess() {
+
+
+var $SFM_123=new function SFM_123(){
+this.btn_ServSetUp=_link("ServiceMax Setup");
+this.btn_ServFlowManger=_div("Service Flow Manager");
+}
+	}
