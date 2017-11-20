@@ -1,11 +1,11 @@
 
 //author - Noor Salma Sharieff
 
-var $9802 = _testcase("9802","This scenario is to verify the wizard step's background mode of execution.");
-$9802.start();
+var $RS_9811 = _testcase("RS_9811","SFW - Wizard step - Webservice  with no Handover functionality.");
+$RS_9811.start();
 _setSpeed(100);
 
-
+//Pre - Condition 
 var $className = $bo_act_common.generateRandomName("fClassName");
 var $methodName = $bo_act_common.generateRandomName("MethodName");
 
@@ -36,13 +36,15 @@ var $codeBase = "global class "+$className+ "\n"+
          "obj.success = true;\n"+ 
          "obj.messageType = 'INFO'; \n"+ 
          "system.debug(LoggingLevel.WARN, 'obj is = ' + obj); \n"+ 
+         "obj.stringMap.add(new SVMXC.INTF_WebservicesDef.INTF_StringMap('NAVIGATETO', '/apex/SVMXC__CONF_SetupHome'));"+
          "return obj; // Return should be of INTF_Response type and \n"+ 
      "}\n"+  
      "catch(Exception ex) \n"+ 
      "{\n"+  
           "obj.message = ex.getMessage();\n"+  
          "obj.success = false; \n"+ 
-        "obj.messageType = 'ERROR';\n"+  
+        "obj.messageType = 'ERROR';\n"+
+        "obj.stringMap.add(new SVMXC.INTF_WebservicesDef.INTF_StringMap('NAVIGATETO', '/apex/SVMXC__CONF_SetupHome'));\n"+
          "return obj;\n"+  
      "}\n"+ 
 "}\n"+ 
@@ -75,6 +77,7 @@ var $codeDev = "global class "+$className+ "\n"+
          "obj.success = true;\n"+ 
          "obj.messageType = 'INFO'; \n"+ 
          "system.debug(LoggingLevel.WARN, 'obj is = ' + obj); \n"+ 
+         "obj.stringMap.add(new SVMXDEV.INTF_WebservicesDef.INTF_StringMap('NAVIGATETO', '/apex/SVMXDEV__CONF_SetupHome'));\n"+
          "return obj; // Return should be of INTF_Response type and \n"+ 
      "}\n"+  
      "catch(Exception ex) \n"+ 
@@ -82,7 +85,8 @@ var $codeDev = "global class "+$className+ "\n"+
           "obj.message = ex.getMessage();\n"+  
          "obj.success = false; \n"+ 
         "obj.messageType = 'ERROR';\n"+  
-         "return obj;\n"+  
+        "obj.stringMap.add(new SVMXDEV.INTF_WebservicesDef.INTF_StringMap('NAVIGATETO', '/apex/SVMXDEV__CONF_SetupHome'));\n"+ 
+        "return obj;\n"+  
      "}\n"+ 
 "}\n"+ 
 "}";
@@ -98,14 +102,12 @@ $code = $codeDev;
 $bo_act_salesforceSetUp.createApexClasses($code);
 
 var $actionTitle = $bo_act_customAction.createCustomActionForWebService("Work Order", $className, $methodName);
-
 $bo_act_customAction.addParametersForWebService("Owner","Field Name", "Owner ID");
 
 var $wizardTitleName = $bo_act_common.generateRandomName("SFWTitle");
 var $wizardIDName = $bo_act_common.generateRandomName("SFWId");
 $bo_act_navigation.navigateToSfmWizard();
 $bo_act_SFW.createWizardGeneralInfo("Work Order", $wizardTitleName, $wizardIDName);
-$bo_act_SFW.createWizardStepwithHandOver("SFM", "Create RMA from Work Order", "Interactive",true);
 $bo_act_SFW.createWizardStepwithHandOver("Others", $actionTitle, "Interactive",false);
 $bo_act_SFW.quickSaveSFWizard();
 $bo_act_SFW.saveAndClose();
@@ -117,12 +119,15 @@ var $productName = $bo_act_products.createProduct();
 var $IBName = $bo_act_installedProduct.createInstalledProduct($productName, $accountName, $contactName);
 $bo_act_workOrders.createWorkOrder($caseNumber, $accountName, $contactName, $IBName, "Open", "High", "Field Service");
 _selectDomain("/svmx/");
-_assertExists(_button("/Create RMA from Work Order/",_near(_cell($wizardTitleName))));
-_click(_button("/Create RMA from Work Order/",_near(_cell($wizardTitleName))));
+_assertExists(_button($actionTitle,_near(_cell($wizardTitleName))));
+_click(_button($actionTitle,_near(_cell($wizardTitleName))));
 _selectDomain();
-_click($bo_pg_sfmWizard.btn_deleteicon);
-_click($bo_pg_sfmWizard.btn_saveicon);
+_wait(30000,_isVisible(_div("messageText")));
 _assertContainsText("Work Order updated",_div("messageText"));
+_assertExists(_submit("Continue"));
+_click(_submit("Continue"));
+_wait(3000,_isVisible($bo_pg_servicemaxSetup.btn_serviceFlowManager));
+_assertExists($bo_pg_servicemaxSetup.btn_serviceFlowManager);
 
 //Clean up function
 var $datacreated = [$contactName,$accountName,$caseNumber,$productName,$IBName,$WONumber];
@@ -130,7 +135,8 @@ for (var i = 0; i < $datacreated.length; i++) {
 	$bo_act_common.cleanUpfunction($datacreated[i]);
 }
 $bo_act_SFW.deleteWizards("Work Order", $wizardIDName);
-$9802.end();
+
+$RS_9811.end();
 
 
 

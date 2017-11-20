@@ -30,9 +30,9 @@ var $bo_pg_sfmWizard= new function bo_pg_sfmWizard() {
 //	this.selectWizard= _checkbox(0,_leftOf (_cell($wizardname)));
 	
 	
+	this.chk_handover = _checkbox("/handover/");
 	
 	
-	
-}
+};
 
 
