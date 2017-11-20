@@ -1,0 +1,28 @@
+/*Service Pricebooks object repository
+ */
+
+var $bo_pg_servicePricebooks = new function bo_pg_servicePricebooks(){
+	
+	// Click on Service Price Book 
+	this.clickOnServicePriceBook = function($PriceBookName){
+		
+		_click( _span($PriceBookName,_leftOf(_image("Checked"))));
+	};
+	
+	this.btn_sfmEditServicePricebook = _button("Edit Service Pricebook");
+	this.btn_addSingleLaborLine = _span("/sfmd-add-line-icon/");
+	this.txt_standardServicePriceBook = _heading2("Standard Service Price Book");
+	this.btn_newServicePricebookEntry = _button("New Service Pricebook Entry");
+	this.sel_unit	= _select(0,_rightOf(_label("Unit")));
+	this.txt_activityID = _textbox("Activity Id");
+	this.txt_activityProduct = _textbox("Activity Product");
+	this.txt_regularRate = _textbox("Regular Rate");
+	this.btn_saveServicePricebookEntry = _submit(" Save ");
+	this.btn_deleteServicePricebookEntry = _button("Delete");
+	this.link_navigateBackToServicePriceBook = _link("/Standard Service Price Book/", _near(_heading2("Service Pricebook Entry Detail")));
+	
+	this.clickOnServicePriceBookEntry = function($ServicePricebooksEntryNumber){
+		
+		_click(_link($ServicePricebooksEntryNumber,_near(_heading3("Service Pricebook Entry"))));
+	};
+};

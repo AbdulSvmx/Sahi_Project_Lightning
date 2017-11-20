@@ -20,3 +20,4 @@ svmx/project_lib/backOffice/bo_pg_objects/bo_pg_sfmTransactionAndDesigner.sah
 svmx/test_lab/test_cases/backOffice/RS_5435.sah
 svmx/test_lab/test_cases/backOffice/RS_5435.sah
 test.sah
+svmx/test_lab/test_cases/analytics/MTTR_testcases/ANA-875.sah

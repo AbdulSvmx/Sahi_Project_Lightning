@@ -1,0 +1,70 @@
+/**
+* Functions to perform SFM wizard workflows
+*/
+
+var $sfm_act_wizards = new function sfm_act_wizards() {
+	
+	//function to create or add step to wizard
+	this.addToWizard = function($wizardObject, $wizardName, $wizardType, $sfmName){
+		$bo_act_navigation.navigateToSvmxSetup();
+		_click(_div("Service Flow Manager"));
+		_click(_div("SFM Wizards"));
+		_setSelected($sfm_pg_wizards.selectObject,$wizardObject);
+		
+		// If wizard is already present add the step else create a new wizard and then add the step
+		if(_exists(_span($wizardName))){
+			$sfm_act_wizards.editSfmWizard($wizardName, $wizardType, $sfmName);
+		}
+		else{
+			$sfm_act_wizards.createSfmWizard($wizardName, $wizardType, $sfmName);
+		}
+	};
+	
+	
+	//function to create a new SFM wizard
+	this.createSfmWizard = function($wizardName, $wizardType, $sfmName){
+		
+		_click($sfm_pg_wizards.btn_customNew);
+		_setValue($sfm_pg_wizards.txt_wizardTitle,$wizardName);
+		_setValue($sfm_pg_wizards.txt_wizardID, $wizardName);
+		$sfm_act_wizards.addStepToSfmWizard($wizardType, $sfmName);
+		_assertExists(_span($wizardName));
+	};
+	
+	//function to add a step to sfm Wizard
+	this.editSfmWizard = function($wizardName, $wizardType, $sfmName ) {
+		
+		_check(_checkbox(0,_leftOf(_span($wizardName))));
+		_click($sfm_pg_wizards.btn_customEdit);	
+		$sfm_act_wizards.addStepToSfmWizard($wizardType, $sfmName);		
+	};
+	
+	//function to delete SFM wizard -- to be completed, yet to capture buttons of confirmation
+	this.deleteSfmWizard = function() {
+			_check(_checkbox(0,_leftOf($wizardName)));
+		_click($sfm_pg_wizards.btn_customDelete);	
+	};
+	
+	//add step/SFM to wizard
+	this.addStepToSfmWizard = function($wizardType, $sfmName) {
+		_click($sfm_pg_wizards.txt_manageWizSteps);
+		_click($sfm_pg_wizards.btn_newStep);
+		_setSelected($sfm_pg_wizards.btn_wizStepType,$wizardType);
+		_setSelected($sfm_pg_wizards.btn_stepName,$sfmName);
+		_click($sfm_pg_wizards.btn_saveStep);
+		_wait(3000,_heading4("Success"));
+		if(_isVisible(_heading4("Success"))){
+			_log("Pass");
+		_click($sfm_pg_wizards.btn_quickSave);
+		_click($sfm_pg_wizards.btn_saveClose);
+		}
+		else{
+			_log("Fail");
+			_stopTestCase();
+		}
+};
+	
+	
+	
+
+};

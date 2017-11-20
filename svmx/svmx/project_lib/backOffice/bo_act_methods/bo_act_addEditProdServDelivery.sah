@@ -1,0 +1,129 @@
+var $bo_act_addEditProdServDelivery=new function bo_act_addEditProdServDelivery() {
+	
+//This function is to add header info for Add/Edit Product serviced in delivery	
+	this.headerInfo=function($selLocation,$workPerform){//$selLocation="Europe",$workPerform="Testing RS-5374"
+		_click($bo_pg_addEditProdServDelivery.btn_svmxLookUpIcon);
+		_click($bo_pg_addEditProdServDelivery.btn_svmxSearchIcon);
+		_click(_div($selLocation));
+		_click($bo_pg_addEditProdServDelivery.btn_select);
+		_setValue($bo_pg_addEditProdServDelivery.txt_workPerform,$workPerform);	
+	};
+		
+		// This function is to add info for product serviced child ine*********
+		this.addchildlineInfo=function($selIBProd,$selPart,$selProdWarranty){//$selIBProd="Laptop"//$selPart="Keyboard",$selProdWarranty="WN-000006"
+			//_click($bo_pg_addEditProdServDelivery.btn_svmxAddLineIcon);
+			_wait(3000);
+			//Adding IB Serial number from Lookup*****
+			_click($bo_pg_addEditProdServDelivery.lbl_IBSerialNumField);
+			_wait(1000);
+			_click($bo_pg_addEditProdServDelivery.btn_lookupIconForSerialNum);
+			_wait(1000);
+			_click($bo_pg_addEditProdServDelivery.btn_limitSrchCheckbox);
+			_click($bo_pg_addEditProdServDelivery.btn_svmxSearchIcon);
+			_wait(1000);
+			_click(_div($selIBProd));
+			_click($bo_pg_addEditProdServDelivery.btn_select);
+			_wait(2000);
+			
+			//Adding parts from look up****
+			_click($bo_pg_addEditProdServDelivery.lbl_partField);
+			_click($bo_pg_addEditProdServDelivery.btn_lookupIconForPart);
+			_click($bo_pg_addEditProdServDelivery.btn_svmxSearchIcon);
+			_click(_div($selPart));
+			_click($bo_pg_addEditProdServDelivery.btn_select);
+			
+			//Adding Product Warranty from look up****
+			_click($bo_pg_addEditProdServDelivery.lbl_prodWarranty);
+			_click($bo_pg_addEditProdServDelivery.btn_clickProdWarranty);
+			_click($bo_pg_addEditProdServDelivery.btn_limitSrchCheckbox);
+			_click($bo_pg_addEditProdServDelivery.btn_svmxSearchIcon);
+			_click(_div($selProdWarranty));
+			_click($bo_pg_addEditProdServDelivery.btn_select);						
+		};
+			
+			//This Function is to click on ICon named here as "AddModify Work Detail" whick appear under product Serviced****
+			this.clkAddModifyWorkDetailIcon=function(){
+				var $xy=_position(_emphasis("svmx-btn-split svmx-btn-split-right[1]"));
+				$xy[0]=(parseInt($xy[0])+8);
+				_click(_xy(_emphasis(0,_near(_span("svmx-btn-icon svmx-sfmd-detail-actions-icon"))),$xy[0],$xy[1]));
+				_wait(6000);
+				_click($bo_pg_addEditProdServDelivery.lnk_addEdit);
+				_wait(60000);
+			};
+			
+				//This function is to find date of today in the format dd/mm/yyyy
+				this.findDateToday=function(){
+					var today = new Date();
+					var dd = today.getDate();
+					var mm = today.getMonth()+1; //January is 0!
+
+					var yyyy = today.getFullYear();
+					if(dd<10){
+						dd='0'+dd;
+					} 
+					if(mm<10){
+						mm='0'+mm;
+					} 
+					var $today = dd+'/'+mm+'/'+yyyy;
+					return $today;
+				};
+					//This function is to find next month today date
+					this.findNextMonthTodayDate=function(){
+						var today = new Date();
+						var dd = today.getDate();
+						var mm =( today.getMonth()+1)%12 + 1; //January is 0!
+
+						var yyyy = today.getFullYear();
+						if(dd<10){
+							dd='0'+dd;
+						} 
+						if(mm<10){
+							mm='0'+mm;
+						} 
+						var $nextMonthToday = dd+'/'+mm+'/'+yyyy;
+						return $nextMonthToday;
+						
+					} ;
+		
+						this.addPart=function(){
+							_click($bo_pg_addEditProdServDelivery.btn_svmxAddLineIcon);
+							_click($bo_pg_addEditProdServDelivery.lbl_parts);
+							//_click($bo_pg_addEditProdServDelivery.btn_clickProdWarranty);
+							_click($bo_pg_addEditProdServDelivery.btn_svmxSearchIcon);
+							_click(_div($selIBProd));
+							_click($bo_pg_addEditProdServDelivery.btn_select);							
+						};
+							
+							this.addLabor=function(){
+							_click($bo_pg_addEditProdServDelivery.lbl_labor);
+							_click($bo_pg_addEditProdServDelivery.btn_svmxAddLineIcon);
+							_click($bo_pg_addEditProdServDelivery.lbl_parts);
+							//_click($bo_pg_addEditProdServDelivery.btn_clickProdWarranty);
+							_click($bo_pg_addEditProdServDelivery.btn_svmxSearchIcon);
+							_click(_div($selIBProd));
+							_click($bo_pg_addEditProdServDelivery.btn_select);	
+								
+							};
+								this.addExpenses=function(){
+									_click($bo_pg_addEditProdServDelivery.lbl_expenses);
+									_click($bo_pg_addEditProdServDelivery.btn_svmxAddLineIcon);
+									_click(_div("svmx-grid-cell-inner [27]"));
+									_setValue(_textbox("svmx-form-field svmx-form-text[6]"),"");
+									_setValue(_textbox("svmx-form-field svmx-form-text svmx-form-focus svmx-field-form-focus svmx-field-default-form-focus"), "Parking");
+									_click(_listItem("Parking"));
+									_wait(6000);
+									_click($bo_pg_addEditProdServDelivery.chk_usePriceFrom);									
+								};
+						
+									
+									this.addTravel=function(){
+									};
+							//_setValue($bo_pg_addEditProdServDelivery.txt_startDate,findDateToday());
+							
+						
+						//	this.endDate=function(){
+							//	_setValue($bo_pg_addEditProdServDelivery.txt_endDate,$findNextMonthTodayDate());
+							//}
+			
+			
+};

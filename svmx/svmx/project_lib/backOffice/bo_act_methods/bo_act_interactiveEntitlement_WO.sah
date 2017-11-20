@@ -1,0 +1,39 @@
+/**
+ * Functions for Interactive Entitlement WO
+ */
+var $bo_act_interactiveEntitlement_WO = new function bo_act_interactiveEntitlement_WO() {
+
+	/**
+	 * Perform Interactive Entitlement on WO Header using "Incident Not Covered" 
+	 * 
+	 */
+	this.performInteractiveEntitlementWO_IncidentNotCovered = function($WO_Number) {
+		//Navigate and click on check Entitlement WO SFM
+		$bo_act_workOrders.checkEntitlement($WO_Number);
+		_wait(15000, _isVisible($bo_pg_interactiveEntitlement_CaseAndWO.txt_checkEntitlement_WOPage));
+		_click($bo_pg_interactiveEntitlement_CaseAndWO.btn_checkEntitlement);
+		_click($bo_pg_interactiveEntitlement_CaseAndWO.chk_IncidentNotCovered);
+		_click($bo_pg_interactiveEntitlement_CaseAndWO.btn_saveEntitlementPSLine);
+		
+	};
+	
+	/**
+	 * Perform Interactive Entitlement WO PS Lines
+	 * 
+	 */
+	this.performInteractiveEntitlement_WOPSLines = function($WO_Number,$IBName,$warrantyName) {
+		//Navigate to the and click on check Entitlement PS SFM
+		$bo_act_workOrders.checkEntitlementPS($WO_Number);
+		_wait(15000, _isVisible($bo_pg_interactiveEntitlement_CaseAndWO.txt_checkEntitlement_WOPage));
+		_click($bo_pg_interactiveEntitlement_CaseAndWO.btn_checkEntitlement);
+		$bo_pg_interactiveEntitlement_CaseAndWO.clickOnInstalledProduct($IBName);
+		_wait(5000, _isVisible($bo_pg_interactiveEntitlement_CaseAndWO.txt_selectWarrantyOrContractPage));
+		$bo_pg_interactiveEntitlement_CaseAndWO.selectWarrantyOrContract($warrantyName);
+		_click($bo_pg_interactiveEntitlement_CaseAndWO.btn_applySelection);
+		_click($bo_pg_interactiveEntitlement_CaseAndWO.btn_saveEntitlementPSLine);
+		_click($bo_pg_interactiveEntitlement_CaseAndWO.btn_cancelEntitlementPSLinePage);
+		_wait(15000, _isVisible($bo_pg_workOrders.txt_workOrderDetails));
+		
+	};
+};
+

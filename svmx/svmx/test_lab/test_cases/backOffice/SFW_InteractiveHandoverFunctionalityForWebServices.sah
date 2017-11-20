@@ -1,0 +1,66 @@
+
+//author - Noor Salma Sharieff
+
+var $SFW_InteractiveHandoverFunctionalityForWebServices = _testcase("$SFW_InteractiveHandoverFunctionalityForWebServices","This scenario is to verify the wizard step's background mode of execution.");
+$SFW_InteractiveHandoverFunctionalityForWebServices.start();
+_setSpeed(100);
+
+var $TestWebServices = $bo_act_common.generateRandomName("TWS");
+var $codeBase = "global class" +$TestWebServices+
+"{ \
+	global" +$TestWebServices+ "() {}\
+	webservice static SVMXC.INTF_WebServicesDef.INTF_Response test_WS(SVMXC.INTF_WebServicesDef.INTF_Request req)"+ 
+	"{	System.debug('testing print request : '+req);"+ 
+	"SVMXC.INTF_WebServicesDef.INTF_Response obj = new SVMXC.INTF_WebServicesDef.INTF_Response();"+ 
+	"List<Account> lstobjAcc = new List<Account>();"+
+	"for(SVMXC.INTF_WebServicesDef.SVMXMap objSVXMMap : req.valueMap)"+ 
+	"{	Account objAcc = new Account();"+ 
+	"objAcc.Name = objSVXMMap.key+' : '+objSVXMMap.value;"+ 
+	"if(objSVXMMap.key !='SVMX_RECORDID')"+ 
+	"lstobjAcc.add(objAcc);	}"+ 
+	"if(lstobjAcc != null && lstobjAcc.size() > 0)"+ 
+	"{ 	try 	{"+ 
+	"insert lstobjAcc; 	obj.message = 'Accounts inserted successfully';"+ 
+	"obj.success = true;	obj.messageType = 'INFO'; 	return obj; 	}"+ 
+	"catch(Exception ex) 	{"+ 
+	"obj.message = 'Accounts not inserted'; 	obj.success = true; 	obj.messageType = 'WARN'; 	return obj; 	} }"+ 
+	"obj.message = 'Accounts not inserted 1'; 	obj.success = true; 	obj.messageType = 'ERROR'; 	return obj; } }";
+
+
+var $codeDev = "global class" +$TestWebServices+
+"{ \
+	global" +$TestWebServices+ "() {}\
+	webservice static SVMXDEV.INTF_WebServicesDef.INTF_Response test_WS(SVMXDEV.INTF_WebServicesDef.INTF_Request req)"+ 
+	"{	System.debug('testing print request : '+req);"+ 
+	"SVMXDEV.INTF_WebServicesDef.INTF_Response obj = new SVMXDEV.INTF_WebServicesDef.INTF_Response();"+ 
+	"List<Account> lstobjAcc = new List<Account>();"+
+	"for(SVMXDEV.INTF_WebServicesDef.SVMXMap objSVXMMap : req.valueMap)"+ 
+	"{	Account objAcc = new Account();"+ 
+	"objAcc.Name = objSVXMMap.key+' : '+objSVXMMap.value;"+ 
+	"if(objSVXMMap.key !='SVMX_RECORDID')"+ 
+	"lstobjAcc.add(objAcc);	}"+ 
+	"if(lstobjAcc != null && lstobjAcc.size() > 0)"+ 
+	"{ 	try 	{"+ 
+	"insert lstobjAcc; 	obj.message = 'Accounts inserted successfully';"+ 
+	"obj.success = true;	obj.messageType = 'INFO'; 	return obj; 	}"+ 
+	"catch(Exception ex) 	{"+ 
+	"obj.message = 'Accounts not inserted'; 	obj.success = true; 	obj.messageType = 'WARN'; 	return obj; 	} }"+ 
+	"obj.message = 'Accounts not inserted 1'; 	obj.success = true; 	obj.messageType = 'ERROR'; 	return obj; } }";
+
+$bo_act_login.login($g_url, $bac_un, $bac_pwd);
+
+$bo_act_navigation.navigateToSetUpAndSearch("Installed Packages");
+if(_condition(_cell("SVMXC")!=null))
+var $code = $codeBase;
+else
+$code = $codeDev;
+
+$bo_act_navigation.navigateToSetUpAndSearch("Apex Classes");
+$bo_act_salesforceSetUp.createApexClasses($code);
+
+
+
+$SFW_InteractiveHandoverFunctionalityForWebServices.end();
+
+
+

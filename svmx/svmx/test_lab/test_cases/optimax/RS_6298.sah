@@ -1,0 +1,66 @@
+var $user_credentials = $excel.readFromCustomExcel("../optimax/op_excleData/automation.xlsx", "User_Details","","");
+var $MTTSData = $excel.readFromCustomExcel("../optimax/op_excleData/automation.xlsx", "Rules","","");
+
+//var $nArr;
+//Calling the sforce API
+for(var $i=0;$i<$user_credentials.length;$i++)
+{
+var $g_un = $user_credentials[$i][0];
+var $g_pwd = $user_credentials[$i][1];
+var $g_url = $user_credentials[$i][2];
+}
+
+var $RS_6298 = _testcase("RS_6298", "Delete an MTTS Rule");
+
+$RS_6298.start();
+
+var $MTTSName = $MTTSData[0][0];
+
+_log("MTTS Name : " + $MTTSName);
+
+$bo_act_login.login($g_url, $g_un, $g_pwd);
+
+_click(_link("ServiceMax Setup"));
+_wait(20000, _isVisible(_div("Dispatch Management")));
+_click(_div("Dispatch Management"));
+_wait(20000, _isVisible(_div("MTTS Rules")));
+_click(_div("MTTS Rules"));
+
+var $rowCount = $op_utility.search_MTTS_Rule($MTTSName);
+
+_click(_button("Delete Rule"));
+_expectConfirm("Do you want to proceed?", true);
+_assertEqual("Do you want to proceed?", _lastConfirm());
+_click(_div("Rule Name"));
+_windowAction("refresh");
+
+var $rowCount1 = 0;
+_set($rowCount1, _table("MTTSRule:RuleForm:RuleBlock:MTTSRuleList").rows.length);
+_log("RowCount : " + $rowCount);
+_log("RowCount 1 : " + $rowCount1);
+
+$rowCount1 = $rowCount1 - 1;
+
+if ($rowCount < $rowCount1)
+	{
+	var $temp = _getText(_cell("MTTSRule:RuleForm:RuleBlock:MTTSRuleList:" + $rowCount
+			+ ":j_id88"));
+
+	if (_areEqual($MTTSName, $temp)) 
+		{
+		_fail("Error in deleting MTTS Rule");
+		}
+	else
+		{
+		_log("MTTS Rule Deleted Successfully");
+		}
+
+	}
+else
+	{
+	_log("MTTS Rule Deleted Successfully");
+	}
+
+$bo_act_login.logOut();
+
+$RS_6298.end();
