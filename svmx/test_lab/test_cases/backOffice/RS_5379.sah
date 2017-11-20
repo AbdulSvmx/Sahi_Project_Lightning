@@ -3,7 +3,11 @@
 //author - Mamata Rout
 
 var $RS_5379 = _testcase("RS_5379", "Linked Process - After saving linked process revert back to main process.");
+<<<<<<< HEAD
 $RS_5439.start();
+=======
+$RS_5379.start();
+>>>>>>> 665b4e8b68234821577efe72e1d371c86f1c6843
 _setSpeed(100);
 
 var $sfmToBeCloned="Add/Edit Products Serviced";

@@ -2,13 +2,6 @@
  * Functions for the Work Order Object
  */
 var $bo_act_getPrice = new function bo_act_getPrice() {
-	
-	/**
-	 * Invoke TDMo16 SFM for Get Price Calculation
-	 */
-	this.navigateToSFMDeliveryPageFor_TDM016 = function($WONumber){
-		$bo_act_workOrders.invokeTDM016SFM($WONumber);
-	};
 
 	/**
 	 * Create an Work Order
@@ -17,21 +10,19 @@ var $bo_act_getPrice = new function bo_act_getPrice() {
 		_click($bo_pg_getPrice.btn_partsLine);
 		_click($bo_pg_getPrice.btn_addSingleLine);
 		_click($bo_pg_getPrice.btn_editFirstRow);
-		_wait(3000);
-		_setStrictVisibilityCheck(true);
-		//_setValue(_textbox(0,_rightOf(_label("/Line Qty/"))),"3");
-		_setValue($bo_pg_getPrice.txt_lineQty, $lineQty);
 		$bo_act_common.searchfunction($searchValue);	//Search Values like Parts/Product Name
+		_setValue($bo_pg_getPrice.txt_lineQty, $lineQty);
 		_click($bo_pg_getPrice.btn_update);
-		_setStrictVisibilityCheck();
+
 	};
 	
-	this.addLaborLineToSFMDelivery = function($searchValue, $activityType, $startHrs, $endHrs){
+	this.addLaborLineToSFMDelivery = function($searchValue, $activityType,$startHrs, $endHrs){
 		_click($bo_pg_getPrice.btn_laborLine);
 		_setStrictVisibilityCheck(true);
 		_click($bo_pg_getPrice.btn_addSingleLine);
 		_click($bo_pg_getPrice.btn_editFirstRow);
-		_wait(3000);
+		_setStrictVisibilityCheck();
+		$bo_act_common.searchfunction($searchValue);	//Search Values like Parts/Product Name
 		_setValue($bo_pg_getPrice.txt_activityType, $activityType);
 		_click($bo_pg_getPrice.btn_startDateAndTime);
 		_click($bo_pg_getPrice.btn_endDateAndTime);
@@ -42,71 +33,24 @@ var $bo_act_getPrice = new function bo_act_getPrice() {
 		_click($bo_pg_getPrice.btn_HrsPickListNextToEndDateAndTime);
 		_click(_listItem($endHrs));
 		//_setValue($bo_pg_getPrice.txt_lineQty, $lineQty);
-		$bo_act_common.searchfunction($searchValue);	//Search Values like Parts/Product Name
 		_click($bo_pg_getPrice.btn_update);
-		_setStrictVisibilityCheck();
-	};
-	
-	this.addLaborLineUsingLintQtyToSFMDelivery = function($searchValue, $activityType, $lineQty){
-		_click($bo_pg_getPrice.btn_laborLine);
-		_setStrictVisibilityCheck(true);
-		_click($bo_pg_getPrice.btn_addSingleLine);
-		_click($bo_pg_getPrice.btn_editFirstRow);
-		_wait(3000);
-		_setValue($bo_pg_getPrice.txt_activityType, $activityType);
-		_setValue($bo_pg_getPrice.txt_lineQty, $lineQty);
-		$bo_act_common.searchfunction($searchValue);	//Search Values like Parts/Product Name
-		_click($bo_pg_getPrice.btn_update);
-		_setStrictVisibilityCheck();
-	};
-	
-	this.addSecondLaborLineUsingLintQtyToSFMDelivery = function($searchValue, $activityType, $lineQty){
-		_click($bo_pg_getPrice.btn_laborLine);
-		_setStrictVisibilityCheck(true);
-		_click($bo_pg_getPrice.btn_addSingleLine);
-		_click($bo_pg_getPrice.btn_editSecondRow);
-		_wait(3000);
-		_setValue($bo_pg_getPrice.txt_activityType, $activityType);
-		_setValue($bo_pg_getPrice.txt_lineQty, $lineQty);
-		$bo_act_common.searchfunction($searchValue);	//Search Values like Parts/Product Name
-		_click($bo_pg_getPrice.btn_update);
-		_setStrictVisibilityCheck();
-	};
-	
-	this.addExpensesLineToSFMDelivery = function($expenseType, $lineQty, $linePricePerUnit){
-		_click($bo_pg_getPrice.btn_expensesLine);
-		_setStrictVisibilityCheck(true);
-		_click($bo_pg_getPrice.btn_addSingleLine);
-		_click($bo_pg_getPrice.btn_editFirstRow);
-		_wait(3000);
-		_setValue($bo_pg_getPrice.txt_expenseType,$expenseType);
-		_setValue($bo_pg_getPrice.txt_expenseLineQty,$lineQty);
-		_setValue($bo_pg_getPrice.txt_expenseLinePricePerUnit, $linePricePerUnit);
-		_click($bo_pg_getPrice.btn_update);
-		_setStrictVisibilityCheck();
+
 	};
 	
 	this.editPartsLineToSFMDelivery = function($partsName){
-		_click($bo_pg_getPrice.btn_partsLine);
-		$bo_pg_getPrice.editWOLines($partsName);	
+	 _click($bo_pg_getPrice.btn_partsLine);
+	 $bo_pg_getPrice.editWOLines($partsName);
+			
 	};
-	
 	this.editLaborLineToSFMDelivery = function($partsName){
-		_setStrictVisibilityCheck(true);
 		 _click($bo_pg_getPrice.btn_laborLine);
 		 $bo_pg_getPrice.editWOLines($partsName);
-		_setStrictVisibilityCheck(false);	
-	};
+				
+		};
 	
-	this.editExpensesLineToSFMDelivery = function($expenseType){
-		_setStrictVisibilityCheck(true);
-		_click($bo_pg_getPrice.btn_expensesLine);
-		$bo_pg_getPrice.editWOLines($expenseType);
-		_setStrictVisibilityCheck(false);	
-	};
-		
 	this.closeEditedWOLineToSFMDelivery = function(){
-		_click($bo_pg_getPrice.btn_update);		
+		_click($bo_pg_getPrice.btn_update);
+				
 	};
 			
 	this.calculateGetPrice = function(){
@@ -115,7 +59,6 @@ var $bo_act_getPrice = new function bo_act_getPrice() {
 	
 	this.saveSFMDelivery = function(){
 		_click($bo_pg_getPrice.btn_save);
-		_wait(15000, _isVisible($bo_pg_workOrders.txt_workOrderDetails));
 	};
 	
 	this.quickSaveSFMDelivery = function(){

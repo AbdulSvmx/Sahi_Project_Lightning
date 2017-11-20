@@ -78,6 +78,6 @@ var $bo_act_autoEntitlementRule_Case = new function bo_act_autoEntitlementRule_C
 		$bo_act_navigation.navigateToAutoEntitlementRulesForCase();
 		$bo_pg_autoEntitlementRule_CaseAndWO.selectAutoEntitlementRule_CaseAndWO($autoEntitlementRule_Name);
 		_click($bo_pg_autoEntitlementRule_CaseAndWO.btn_deleteRule);
-	}; 
+	};
 };
 

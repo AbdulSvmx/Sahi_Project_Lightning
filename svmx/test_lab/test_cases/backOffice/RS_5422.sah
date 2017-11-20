@@ -6,68 +6,63 @@ $RS_5422.start();
 _setSpeed(100);
 $bo_act_login.login($g_url, $bac_unBase, $bac_pwdBase);
 	//Create a SFM orders test data
-	var $sourceName = "Work Order";
-	var $targetName = "Work Order";
-	var $QualCriteriaName = "Work Detail (Work Order)";
-	var $sfmPageLayoutName = "SFMIBTEST";
-	var $wizardSelectObjectName = "Work Order";
-	var $wizardTitleName = "SFMIBTEST1";
-	var $wizardIDName = "SFMIBTEST1"; 	
+	
+	var $wizardname =$bo_act_common.generateRandomName("SFW5422"); 
+	var $wizardID = $bo_act_common.generateRandomName("SFW5422");	
 	var $searchText1 =$custActname;
 	var $isOnlineHideRequired = true;
 	var $isOnlineRequired = false;	
 	var $workOrderName = "WO-00000000";
-	var $sfmName="My SFM";
+	var $sfmName=$bo_act_common.generateRandomName("MySFM");
 	var $wizardStepType="SFM";
 	var $wizardStepName=$sfmName;
 	var $executionMode="Interactive";
-	var $custActname="My Custom Action";
-	var $custActID="My_custom_Action";
+	var $custActname=$bo_act_common.generateRandomName("MyCustomAction");
+	var $custActID=$bo_act_common.generateRandomName("MyCustomAction");
 	var $url="https://www.google.co.in/";
-	var $objectName="Work Order";
-	var $actnType= "Others";
+	var $objName="Work Order";
+	var $fieldActnType= "Others";
+	var $actnType1= "URL";
+	var $sfmToBeCloned="Add/Edit Products Serviced";
+	var $sfmTemplateSaveAsName=$bo_act_common.generateRandomName("temp5422");
+	var $processType1="SFM Custom Actions";
+	var $processType2="SFM Transactions";
 	var $searchText2=$sfmName;
+	$bo_act_navigation.navigateToSfmCustomAction();
 
-	$bo_act_customAction.createNewCustomAction($custActname,$custActID,$url,$objectName,$actnType);
-	$bo_act_SFM.createNewSourceAndHeaderChildSFM($sfmName,$sourceName,$targetName,$QualCriteriaName,$sfmPageLayoutName);
-	
+//------------------Create Custom Action-----------------------
+	$bo_act_customAction.createNewCustomAction($custActname,$custActID,$url,$objName,$actnType1);
+	//-----------Navigate to SFM Designer->Create Custom SFM -------------
+		$bo_act_navigation.navigateToSfmTransactionDesigner();
+		_wait(60000, _isVisible($bo_pg_sfmTransactionAndDesigner.btn_newSFM));
+		$bo_act_SFM.clnStandardSFM($sfmToBeCloned,$sfmName,$sfmTemplateSaveAsName);
+// ---------Add both Custom Action and SFM to SFW---------------
 	if($bo_act_navigation.navigateToSfmWizard()){
-		$bo_act_SFW.addSFMWizardGeneralInfo($wizardTitleName,$wizardIDName);
-		$bo_act_SFW.addCustomActionToWizard($actnType,$custActname);
-		$bo_act_SFW.addNewManageWizardSteps($wizardStepType,$wizardStepName,$executionMode);
+		$bo_act_SFW.createWizardGeneralInfo($objName,$wizardname,$wizardID);
+		$bo_act_SFW.addCustomActionToWizard($fieldActnType,$custActname);
+		$bo_act_SFW.createWizardStep($wizardStepType, $wizardStepName,$executionMode);
+		$bo_act_sfmVerifyWorkOrder.verifyWizardOnWOObj($sfmName);
+		_wait(2000);
+		//-------Verify Visibility of custom action and SFm in delivery for WO object-----------
+		$bo_act_sfmVerifyWorkOrder.wizardButtonVisible($wizardStepName);
+		$bo_act_sfmVerifyWorkOrder.wizardButtonVisible($custActname);
+		
 		
 	}else{
 		_fail("Navigation To SFM Wizard Failed");
 		_stopTestCase();
-	};
+		};
+	//----------Go App Permission, remove permission for SFm and CA created for online---
+	$bo_act_navigation.navigateToSfmAppPermission();
+	$bo_act_SFMAppPermission.genericSearchInAppPermission($processType1,$objName,$searchText1);
+	$bo_act_SFMAppPermission.genericSearchInAppPermission($processType2,$objName,$searchText2)	;
 
-	if($bo_act_navigation.navigateToSfmAppPermission()){
-		$bo_act_SFMAppPermission.setSFMAppPermission($searchText1,$isOnlineHideRequired,$isOnlineRequired);
-		$bo_act_SFMAppPermission.setSFMAppPermission($searchText2,$isOnlineHideRequired,$isOnlineRequired);
+	$bo_act_sfmVerifyWorkOrder.verifyWizardOnWOObj($sfmName);
+		_wait(2000);
+		//-------Verify Visibility of custom action and SFm in delivery for WO object-----------
+		$bo_act_sfmVerifyWorkOrder.wizardButtonNotVisible($wizardStepName);
+		$bo_act_sfmVerifyWorkOrder.wizardButtonNotVisible($custActname);
 
-	}else{
-		_fail("Navigation To SFM App Permission Failed");
-		_stopTestCase();
-	};
-
-	//verify if SFM display in delivery. Function returns false as it is unchecked(hide) on above step
-	if(!($bo_act_sfmVerifyWorkOrder.verifyWorkOrderOnlineDisplay($custActname,$workOrderName))){
-		
-		_log("custom action does not display!!!");
-
-		}else{
-		_fail("custom action is displayed");
-		_stopTestCase();
-	};
-if(!($bo_act_sfmVerifyWorkOrder.verifyWorkOrderOnlineDisplay($sfmName,$workOrderName))){
-		
-		_log("SFM does not display!!!");
-
-		}else{
-		_fail("SFM is displayed");
-		_stopTestCase();
-	};
-		
 
 $RS_5422.end();
 	
