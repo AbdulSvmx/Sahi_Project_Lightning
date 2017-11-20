@@ -19,7 +19,7 @@ var $bo_act_salesforceSetUp = new function bo_act_$bo_act_salesforceSetUp() {
 		 var $upperCase = $firstLetter.toUpperCase();
 		 _click(_span($upperCase));
 		 _click(_link($className));
-		 _click($bo_pg_salesforceSetUp.btn_delete);
+		 _click($bo_pg_salesforceSetUP.btn_delete);
 	};
 	this.createUser = function(){
 		var $lastName = $bo_act_common.generateRandomName("ln");
