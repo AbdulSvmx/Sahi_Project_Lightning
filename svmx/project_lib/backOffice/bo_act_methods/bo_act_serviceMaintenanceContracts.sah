@@ -130,7 +130,6 @@ this.addPartsPricingToServiceContract = function($sconName, $prodName, $pricePer
 	_click($bo_pg_serviceMaintenanceContracts.btn_save);
 	_assertNotVisible(_div("/Error: Invalid Data/"));
 
-<<<<<<< HEAD
 //Add Single Part Pricing with Discount to Service Contract
 this.addPartPricingWithDiscountToServiceContract = function($sconName, $priceBookName, $partsDiscount, $productName){
 	$bo_act_navigation.navigateToServiceMaintenanceContractPage();
@@ -237,11 +236,9 @@ this.searchActivityProduct = function($searchValue){
 	_click(_span("Select"));
 	_setStrictVisibilityCheck(false);
 	};
-=======
 	_click($bo_pg_serviceMaintenanceContracts.link_ServiceContractOnPartsPricing);
 };
 
->>>>>>> dc3724d6abc7a11cc2664b6abfb596f3067b1261
 	
 };
 
