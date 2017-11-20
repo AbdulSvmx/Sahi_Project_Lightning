@@ -1,0 +1,14 @@
+var $sfm_pg_wo = new function sfm_pg_wo() {
+	this.tab_all = _image("All Tabs");
+	this.btn_wo_new = _button("/New/");
+	this.btn_wo_save = _submit("/Save/");
+	this.link_wo = _link("Work Orders");
+	this.cell_wizard =function($name){
+		_cell($name);
+	};
+	this.clickTab = function($tabName){
+		_click(_link($tabName));
+//		_log("I am Here");
+	};
+	this.label_wo = _heading2("pageDescription");
+};

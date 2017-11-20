@@ -87,6 +87,8 @@ this.editServiceMaintenanceContract = function($sconName, $contactName) {
 	// Function for Add child lines to the Service Contract
 	
 this.AddCoveredProducToServiceContract =  function($sconName,$installedProduct,$slaName,$pastYear,$futureYear ){
+	$bo_act_navigation.navigateToServiceMaintenanceContractPage();
+	_click(_link($sconName));
 	_click($bo_pg_serviceMaintenanceContracts.btn_newCoveredProduct);
 	_wait(10000, _isVisible(_heading2("New Covered Product")));
     _setValue($bo_pg_serviceMaintenanceContracts.txt_installedProduct,$installedProduct);
@@ -99,6 +101,8 @@ this.AddCoveredProducToServiceContract =  function($sconName,$installedProduct,$
 };
 
 this.AddCoveredProducToSConWithoutStartEndDates =  function($sconName,$installedProduct,$slaName){
+	$bo_act_navigation.navigateToServiceMaintenanceContractPage();
+	_click(_link($sconName));
 	_click($bo_pg_serviceMaintenanceContracts.btn_newCoveredProduct);
 	_wait(10000, _isVisible(_heading2("New Covered Product")));
     _setValue($bo_pg_serviceMaintenanceContracts.txt_installedProduct,$installedProduct);
@@ -109,6 +113,8 @@ this.AddCoveredProducToSConWithoutStartEndDates =  function($sconName,$installed
 };
 
 this.addCoveredLocationToServiceContract = function($sconName,$location,$slaName,$pastYear,$futureYear){
+	$bo_act_navigation.navigateToServiceMaintenanceContractPage();
+	_click(_link($sconName));
 	_click($bo_pg_serviceMaintenanceContracts.btn_newCoveredLocation);
 	_setValue($bo_pg_serviceMaintenanceContracts.txt_location,$location);
 	_setValue($bo_pg_serviceMaintenanceContracts.txt_slaTermName,$slaName);
@@ -120,6 +126,8 @@ this.addCoveredLocationToServiceContract = function($sconName,$location,$slaName
 };
 
 this.addEntitledContactsToServiceContract = function($sconName,$contact){
+	$bo_act_navigation.navigateToServiceMaintenanceContractPage();
+	_click(_link($sconName));
 	_click($bo_pg_serviceMaintenanceContracts.btn_newEntitledContact);
 	_setValue($bo_pg_serviceMaintenanceContracts.txt_contract,$contact);
 	/*_setValue($bo_pg_serviceMaintenanceContracts.txt_slaTermName,$slaName);
@@ -130,9 +138,9 @@ this.addEntitledContactsToServiceContract = function($sconName,$contact){
 	$bo_pg_serviceMaintenanceContracts.clickServiceContractOn_DetailPage($sconName);
 };
 
-
 this.addPartsPricingToServiceContract = function($sconName, $prodName, $pricePerUnit){
-
+	$bo_act_navigation.navigateToServiceMaintenanceContractPage();
+	_click(_link($sconName));
 	_click($bo_pg_serviceMaintenanceContracts.btn_newPartsPricing);
 	_setValue($bo_pg_serviceMaintenanceContracts.txt_product,$prodName);
 	_setValue($bo_pg_serviceMaintenanceContracts.txt_pricePerUnit,$pricePerUnit);
@@ -142,6 +150,90 @@ this.addPartsPricingToServiceContract = function($sconName, $prodName, $pricePer
 	_click($bo_pg_serviceMaintenanceContracts.link_ServiceContractOnPartsPricing);
 };
 
+// Add Single Labor Pricing to Service Contract
+this.addLaborPricingToServiceContract = function($sconName, $RoundingType, $unit, $minimumLaborMins, $regularRate, $activityType){
+	$bo_act_navigation.navigateToServiceMaintenanceContractPage();
+	_click(_link($sconName));
+	_selectDomain("/svmx/");
+	_click($bo_pg_serviceMaintenanceContracts.btn_sfmLaborPricing);
+	_selectDomain();
+	_wait(30000, _isVisible(_link("/Edit Service Contract Labor Pricing/")));
+	_setStrictVisibilityCheck(true);
+	_setValue($bo_pg_serviceMaintenanceContracts.txt_laborRoundingType, $RoundingType);
+	_click($bo_pg_serviceMaintenanceContracts.btn_laborPricingTab);
+	_click($bo_pg_serviceMaintenanceContracts.btn_addLaborPricingLine);
+	_click($bo_pg_serviceMaintenanceContracts.btn_editLaborPricingRow);
+	_wait(2000);
+	_setValue($bo_pg_serviceMaintenanceContracts.txt_laborPricingUnit, $unit);
+	_setValue($bo_pg_serviceMaintenanceContracts.txt_minimumLaborMins, $minimumLaborMins);
+	_setValue($bo_pg_serviceMaintenanceContracts.txt_regularRateLaborPricing, $regularRate);
+	 $bo_act_common.searchfunction($activityType);	//Search Values like Parts/Product Name
+	_click($bo_pg_serviceMaintenanceContracts.btn_updateLaborPricing);
+	_setStrictVisibilityCheck();
+	_click($bo_pg_serviceMaintenanceContracts.btn_saveLaborPricing);
+	_wait(30000, _isVisible($sconName));
+};
+
+this.addSecondLaborPricingToServiceContract = function($sconName, $RoundingType, $unit, $minimumLaborMins, $regularRate, $activityType){
+	$bo_act_navigation.navigateToServiceMaintenanceContractPage();
+	_click(_link($sconName));
+	_selectDomain("/svmx/");
+	_click($bo_pg_serviceMaintenanceContracts.btn_sfmLaborPricing);
+	_selectDomain();
+	_wait(30000, _isVisible(_link("/Edit Service Contract Labor Pricing/")));
+	_setStrictVisibilityCheck(true);
+	_setValue($bo_pg_serviceMaintenanceContracts.txt_laborRoundingType, $RoundingType);
+	_click($bo_pg_serviceMaintenanceContracts.btn_laborPricingTab);
+	_click($bo_pg_serviceMaintenanceContracts.btn_addLaborPricingLine);
+	_click($bo_pg_serviceMaintenanceContracts.btn_editSecondLaborPricingRow);
+	_wait(2000);
+	_setValue($bo_pg_serviceMaintenanceContracts.txt_laborPricingUnit, $unit);
+	_setValue($bo_pg_serviceMaintenanceContracts.txt_minimumLaborMins, $minimumLaborMins);
+	_setValue($bo_pg_serviceMaintenanceContracts.txt_regularRateLaborPricing, $regularRate);
+	 $bo_act_common.searchfunction($activityType);	//Search Values like Parts/Product Name
+	_click($bo_pg_serviceMaintenanceContracts.btn_updateLaborPricing);
+	_setStrictVisibilityCheck();
+	_click($bo_pg_serviceMaintenanceContracts.btn_saveLaborPricing);
+	_wait(30000, _isVisible($sconName));
+};
+//Add Single Labor Pricing to Service Contract using the Activity Product
+this.addLaborPricingToServiceContractUsingActivityProduct = function($sconName, $RoundingType, $unit, $minimumLaborMins, $regularRate, $activityProduct){
+	$bo_act_navigation.navigateToServiceMaintenanceContractPage();
+	_click(_link($sconName));
+	_selectDomain("/svmx/");
+	_click($bo_pg_serviceMaintenanceContracts.btn_sfmLaborPricing);
+	_selectDomain();
+	_wait(30000, _isVisible(_link("/Edit Service Contract Labor Pricing/")));
+	_setStrictVisibilityCheck(true);
+	_setValue($bo_pg_serviceMaintenanceContracts.txt_laborRoundingType, $RoundingType);
+	_click($bo_pg_serviceMaintenanceContracts.btn_laborPricingTab);
+	_click($bo_pg_serviceMaintenanceContracts.btn_addLaborPricingLine);
+	_click($bo_pg_serviceMaintenanceContracts.btn_editLaborPricingRow);
+	_wait(2000);
+	_setValue($bo_pg_serviceMaintenanceContracts.txt_laborPricingUnit, $unit);
+	_setValue($bo_pg_serviceMaintenanceContracts.txt_minimumLaborMins, $minimumLaborMins);
+	_setValue($bo_pg_serviceMaintenanceContracts.txt_regularRateLaborPricing, $regularRate);
+	$bo_act_serviceMaintenanceContracts.searchActivityProduct($activityProduct);
+	//$bo_act_common.searchfunction($activityProduct);	//Search Values Activity Product Name
+	_click($bo_pg_serviceMaintenanceContracts.btn_updateLaborPricing);
+	_setStrictVisibilityCheck();
+	_click($bo_pg_serviceMaintenanceContracts.btn_saveLaborPricing);
+	_wait(30000, _isVisible($sconName));
+};
+this.searchActivityProduct = function($searchValue){
+	_getRecentWindow();
+	_setStrictVisibilityCheck(true);
+	_click(_span("/btnIconEl/",_rightOf(_label("/Activity Product/"))));
+	//_click(_span("/svmx-button/",_near(_div("svmx-column-inner",_in(_div("svmx-panel svmx-fit-item svmx-window-item svmx-panel-default"))))));
+	_getRecentWindow();
+	_click(_textbox("/sfm-text/",_near(_span("/svmx-sfmd-search-icon/"))));
+	_click(_span("/svmx-sfmd-search-icon/"));
+	_setValue(_textbox("/sfm-text/",_near(_span("/svmx-sfmd-search-icon/"))),$searchValue);
+	_click(_span("/svmx-sfmd-search-icon/"));
+	_click(_div($searchValue));
+	_click(_span("Select"));
+	_setStrictVisibilityCheck(false);
+	};
 	
 };
 
