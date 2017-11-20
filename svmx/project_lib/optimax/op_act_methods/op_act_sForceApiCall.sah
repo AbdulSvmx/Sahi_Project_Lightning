@@ -13,7 +13,6 @@ var $op_act_sForceApiCall = new function op_act_sForceApiCall() {
 	 */
 
 	this.sForceQuery = function($un, $pwd, $queryComplex,$queryType){
-<<<<<<< HEAD
 		var $nArr = null;
 		_set($nArr, _fetch(sForceApiCall($un, $pwd, $queryComplex, $queryType)));
 
@@ -37,10 +36,6 @@ var $op_act_sForceApiCall = new function op_act_sForceApiCall() {
 
 			_wait(10000);	
 			};
-=======
-	    var $nArr=null;
-		_set($nArr, _fetch(sForceApiCall($un, $pwd, $queryComplex,$queryType)));
->>>>>>> 665b4e8b68234821577efe72e1d371c86f1c6843
 		return $nArr;
 		//<browser>
 		function sForceApiCall($un, $pwd, $queryComplex,$queryType){
@@ -51,7 +46,6 @@ var $op_act_sForceApiCall = new function op_act_sForceApiCall() {
 
 			switch($queryType){
 			case 'query':
-<<<<<<< HEAD
 				 var records = null;
 				 var arr = null;
 				 records = _call(sforce.connection.query($queryComplex));
@@ -65,21 +59,6 @@ var $op_act_sForceApiCall = new function op_act_sForceApiCall() {
 				var arr = null;
 				return arr;
 
-=======
-				
-				 records = _call(sforce.connection.query($queryComplex));
-				 var arr = records.getArray('records');
-				
-				return arr;
-			case 'create':
-				 
-				var records = _call(sforce.apex.executeAnonymous($queryComplex));
-				return records;
-				
-			default:
-				$nArr = [null];
-				return $nArr;
->>>>>>> 665b4e8b68234821577efe72e1d371c86f1c6843
 			}
 		}//</browser>
 		

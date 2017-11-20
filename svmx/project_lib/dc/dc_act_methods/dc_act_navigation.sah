@@ -58,5 +58,4 @@ var $dc_act_navigation = new function dc_act_navigation() {
 	   	_wait(60000,_isVisible($dc_pg_eventHoverRule.btn_newRule));
 	};
 	
-
 };

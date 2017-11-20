@@ -100,16 +100,12 @@ var $ana_873_labortime;
 var $ana_873_deadtime;
 var $custom_checkbox;
 var $DeadTime2 = Math.round($deadtime2) + Math.round($deadtime);
-<<<<<<< HEAD:svmx/test_lab/test_cases/analytics/MTTR_testcases/RS-9740.sah
 var $ana_873_query_RV1 = "Select Id ,SVMXC__Work_Order__c ,custom_mttr_checkbox__c , SVMXC__Primary_Work_Order__c, SVMXC__Account__c, SVMXC__Configuration_Name__c , SVMXC__Labor_Time__c , SVMXC__Dead_Time__c from SVMXC__SPM_Mean_Time_To_Repair__c where SVMXC__Work_Order__c ='"+ $ana_873_WO1 +"'";
 
-=======
-
-for(var $i = 0;$ana_873_wo_id == null;$i++){
->>>>>>> 665b4e8b68234821577efe72e1d371c86f1c6843:svmx/test_lab/test_cases/analytics/MTTR_testcases/ANA-873.sah
 var $ana_873_query_RV1 = "Select SVMXC__Work_Order__c ,custom_mttr_checkbox__c , SVMXC__Primary_Work_Order__c, SVMXC__Account__c, SVMXC__Configuration_Name__c , SVMXC__Labor_Time__c , SVMXC__Dead_Time__c from SVMXC__SPM_Mean_Time_To_Repair__c where SVMXC__Work_Order__c ='"+ $ana_873_WO1 +"'";
+
 var $ana_873_resultRV1 = $op_act_sForceApiCall.sForceQuery($un, $pwd, $ana_873_query_RV1,"query");
-_wait(5000);
+
 $ana_873_resultRV1.forEach(function($varRV1) {
 	
 	$ana_873_wo_id = $varRV1.SVMXC__Work_Order__c;
@@ -120,7 +116,7 @@ $ana_873_resultRV1.forEach(function($varRV1) {
 	$custom_checkbox = $varRV1.custom_mttr_checkbox__c;
 	
 });
-}
+
 $an_873_deadtime = Math.round($ana_873_deadtime);
 $ana_873_labortime = Math.round($ana_873_labortime);
 
