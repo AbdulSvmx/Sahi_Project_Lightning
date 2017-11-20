@@ -25,25 +25,7 @@ var $bo_act_products = new function bo_act_products() {
 		_wait(15000, _isVisible($productName));
 		return $productName;
 	};
-
 	
-	this.createProductWithoutSerialized = function($productCode, $productFamily) {
-		var $productName = $bo_act_common.generateRandomName("pro");
-		$bo_act_navigation.navigateToProductsPage();
-		_click($bo_pg_products.btn_new);
-		_setValue($bo_pg_products.txt_productName, $productName);
-		_setValue($bo_pg_products.txt_productCode, $productCode);
-		_setSelected($bo_pg_products.sel_productFamily, $productFamily);
-		_check($bo_pg_products.chk_active);
-		_check($bo_pg_products.chk_stockable);
-		_click($bo_pg_products.btn_save);
-		_assertNotVisible(_div("/Error: Invalid Data/"));
-		_logOutput($productName+ " product is created");
-		_wait(15000, _isVisible($productName));
-		return $productName;
-	};
-	
-
 	this.deleteProduct = function($proName){
 		$bo_act_navigation.navigateToProductsPage();
 		_click(_link($proName));

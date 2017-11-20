@@ -1,0 +1,141 @@
+var $bo_act_manageWOLineUsageForSorting=new function bo_act_manageWOLineUsageForSorting(){
+	this.createManageWorkOrderLineUsageForSorting=function($sfmToBeCloned, $sfmName,$subTypeWO,$subTypePart,$subTypeActivityType,$subTypeExpenses,$subTypeTravel,$sfmTemplateSaveAsName){
+			_click($bo_pg_sfmTransactionAndDesigner.txt_standardSfmTransactionQuickFind);
+			_setValue($bo_pg_sfmTransactionAndDesigner.txt_standardSfmTransactionQuickFind,$sfmToBeCloned);
+			_click(_f("main").s_checkbox("chk").leftOf(_f("main").s_label($sfmToBeCloned), 10, 10))
+			_click($bo_pg_sfmTransactionAndDesigner.btn_clone);	
+			_wait(60000, _isVisible($bo_pg_sfmTransactionAndDesigner.txt_name));
+			_setValue($bo_pg_sfmTransactionAndDesigner.txt_name, $sfmName);
+			_setValue($bo_pg_sfmTransactionAndDesigner.txt_sfmTransactionId, "");
+			_setValue($bo_pg_sfmTransactionAndDesigner.txt_sfmTransactionId, $sfmName);
+		
+			_click($bo_pg_sfmTransactionAndDesigner.btn_screenDesigner);
+			_wait(6000,_isVisible(_f("main").tab("Screen Designer")));
+			_click($bo_pg_manageWOLineUsageForSorting.btn_screenDesignerNew);
+			_click($bo_pg_manageWOLineUsageForSorting.sel_selHeaderOption);
+			_click($bo_pg_manageWOLineUsageForSorting.txt_searchItem);
+			_setValue($bo_pg_manageWOLineUsageForSorting.txt_searchItem,$subTypeWO);
+			_doubleClick($bo_pg_manageWOLineUsageForSorting.lbl_orderStatus);
+			_wait(1000);
+			_click($bo_pg_manageWOLineUsageForSorting.sel_grpPart);
+			_click($bo_pg_manageWOLineUsageForSorting.txt_searchItem);
+			_setValue($bo_pg_manageWOLineUsageForSorting.txt_searchItem,$subTypePart);
+			_doubleClick($bo_pg_manageWOLineUsageForSorting.lbl_dateReceived);
+			_wait(3000);
+			_click($bo_pg_manageWOLineUsageForSorting.sel_grpExpenses);
+			_click($bo_pg_manageWOLineUsageForSorting.txt_searchItem);
+			_setValue($bo_pg_manageWOLineUsageForSorting.txt_searchItem,$subTypeActivityType);
+			_doubleClick($bo_pg_manageWOLineUsageForSorting.lbl_activityType);
+			_wait(3000);
+			_click($bo_pg_manageWOLineUsageForSorting.sel_grpExpenses);
+			_click($bo_pg_manageWOLineUsageForSorting.txt_searchItem);
+			_setValue($bo_pg_manageWOLineUsageForSorting.txt_searchItem,$subTypeExpenses);
+			_doubleClick($bo_pg_manageWOLineUsageForSorting.lbl_billableQty);
+			_wait(3000);
+			_click($bo_pg_manageWOLineUsageForSorting.sel_grpTravel);
+			_click($bo_pg_manageWOLineUsageForSorting.txt_searchItem);
+			_setValue($bo_pg_manageWOLineUsageForSorting.txt_searchItem,$subTypeTravel);
+			_doubleClick($bo_pg_manageWOLineUsageForSorting.lbl_ConsumedFromLocation);
+			_setValue($bo_pg_sfmTransactionAndDesigner.txt_sfmSavePageLayoutAs, $sfmTemplateSaveAsName);
+			_setValue($bo_pg_sfmTransactionAndDesigner.txt_sfmSavePageLayoutAsId, $sfmTemplateSaveAsName);
+			_wait(3000);
+			_click($bo_pg_manageWOLineUsageForSorting.lbl_propertiesForPart);
+			_click($bo_pg_manageWOLineUsageForSorting.chk_allowNewLine);
+			_click($bo_pg_manageWOLineUsageForSorting.chk_allowDelete);
+		/*DO NOT DELETE BEOW COMMENTED LINES
+			_click($bo_pg_manageWOLineUsageForSorting.lbl_propertiesForLabor);
+			_click($bo_pg_manageWOLineUsageForSorting.chk_allowNewLine);
+			_click($bo_pg_manageWOLineUsageForSorting.chk_allowDelete);
+		*/
+			_click($bo_pg_manageWOLineUsageForSorting.lbl_propertiesForExpenses);
+			_click($bo_pg_manageWOLineUsageForSorting.chk_allowNewLine);
+			_click($bo_pg_manageWOLineUsageForSorting.chk_allowDelete);
+
+			_click($bo_pg_manageWOLineUsageForSorting.lbl_propertiesForTravel);
+			_click($bo_pg_manageWOLineUsageForSorting.chk_allowNewLine);
+			_click($bo_pg_manageWOLineUsageForSorting.chk_allowDelete);
+			_click($bo_pg_sfmTransactionAndDesigner.btn_pageLayoutSave);
+	}	
+		
+		this.sorting=function(){
+			_click(_f("main").tab("Advanced Options"));
+			_click($bo_pg_manageWOLineUsageForSorting.tab_sorting);
+			_click($bo_pg_manageWOLineUsageForSorting.lbl_sortingPart);
+			_click($bo_pg_manageWOLineUsageForSorting.lbl_sortingDateRec);
+			_click($bo_pg_manageWOLineUsageForSorting.btn_add);
+			_wait(2000);
+			//_click($bo_pg_manageWOLineUsageForSorting.lbl_sortingLabor);
+			_click($bo_pg_manageWOLineUsageForSorting.lbl_sortingExps);
+			_click($bo_pg_manageWOLineUsageForSorting.lbl_sortingBillQty);
+			_click($bo_pg_manageWOLineUsageForSorting.btn_add);
+			_wait(2000);
+			_click($bo_pg_manageWOLineUsageForSorting.lbl_sortingActivityType);
+			_click($bo_pg_manageWOLineUsageForSorting.btn_add);
+			_wait(2000);
+			_click($bo_pg_manageWOLineUsageForSorting.lbl_sortingTravel);
+			_click($bo_pg_manageWOLineUsageForSorting.lbl_sortingConsumedFromLoc);
+			_click($bo_pg_manageWOLineUsageForSorting.btn_add);
+			_wait(2000);
+			_click($bo_pg_sfmTransactionAndDesigner.btn_saveAndclose);
+			
+		}
+			this.addPartLineInDelivery=function($grtDate,$midDate,$lowDate){
+				_click($bo_pg_manageWOLineUsageForSorting.btn_addPartLine);
+				_click($bo_pg_manageWOLineUsageForSorting.lbl_clkOnNewLine);
+				_setValue($bo_pg_manageWOLineUsageForSorting.txt_addDate,$grtDate);
+				_click($bo_pg_manageWOLineUsageForSorting.btn_addPartLine);
+				_setValue($bo_pg_manageWOLineUsageForSorting.txt_addDate,$lowDate);
+				_click($bo_pg_manageWOLineUsageForSorting.btn_addPartLine);
+				_setValue($bo_pg_manageWOLineUsageForSorting.txt_addDate,$midDate);
+			}
+				this.addExpensesLineInDelivery=function($billQty1,$activityName1,$billQty2,$activityName2,$billQty3,$activityName3){
+					_click($bo_pg_manageWOLineUsageForSorting.tab_expenses);
+					//add line1 details under expenses
+					_click($bo_pg_manageWOLineUsageForSorting.btn_addExpenseLine);
+					_setValue($bo_pg_manageWOLineUsageForSorting.txt_addActivity,$activityName1);
+					_click($bo_pg_manageWOLineUsageForSorting.sel_activityName);					
+					_click($bo_pg_manageWOLineUsageForSorting.btn_clkBillQtyLine1);
+					_wait(2000);
+					_setValue($bo_pg_sfmTransactionAndDesigner.sel_billQty,$billQty1);
+					//add line2 details under expenses
+					_click($bo_pg_manageWOLineUsageForSorting.btn_addExpenseLine);
+					_setValue($bo_pg_manageWOLineUsageForSorting.txt_addActivity,$activityName2);
+					_click($bo_pg_manageWOLineUsageForSorting.sel_activityName);					
+					_click($bo_pg_manageWOLineUsageForSorting.btn_clkBillQtyLine2);
+					_wait(2000);
+					_setValue($bo_pg_sfmTransactionAndDesigner.sel_billQty,$billQty2);
+					//add line3 details under expenses
+					_click($bo_pg_manageWOLineUsageForSorting.btn_addExpenseLine);
+					_setValue($bo_pg_manageWOLineUsageForSorting.txt_addActivity,$activityName3);
+					_click($bo_pg_manageWOLineUsageForSorting.sel_activityName);					
+					_click($bo_pg_manageWOLineUsageForSorting.btn_clkBillQtyLine3);
+					_wait(2000);
+					_setValue($bo_pg_sfmTransactionAndDesigner.sel_billQty,$billQty3);
+					//Add Travel details
+					_click($bo_pg_manageWOLineUsageForSorting.tab_travel);
+					_click($bo_pg_manageWOLineUsageForSorting.btn_addTravelLine);
+					_click($bo_pg_manageWOLineUsageForSorting.btn_parentLookUp);
+					_click($bo_pg_manageWOLineUsageForSorting.btn_childLokkUp);
+					_click($bo_pg_manageWOLineUsageForSorting.sel_Europe);
+					_click($bo_pg_manageWOLineUsageForSorting.btn_select);
+					_click($bo_pg_manageWOLineUsageForSorting.btn_addTravelLine);
+					_click($bo_pg_manageWOLineUsageForSorting.btn_parentLookUp);
+					_click($bo_pg_manageWOLineUsageForSorting.btn_childLokkUp);
+					_click($bo_pg_manageWOLineUsageForSorting.sel_AutodromoEnzoFerrari);
+					_click($bo_pg_manageWOLineUsageForSorting.btn_select);					
+					_click($bo_pg_manageWOLineUsageForSorting.btn_addTravelLine);
+					_click($bo_pg_manageWOLineUsageForSorting.btn_parentLookUp);
+					_click($bo_pg_manageWOLineUsageForSorting.btn_childLokkUp);
+					_click($bo_pg_manageWOLineUsageForSorting.sel_BerlinDepot);
+					_click($bo_pg_manageWOLineUsageForSorting.btn_select);
+					
+					
+					
+				}
+					
+}
+
+
+
+
+	

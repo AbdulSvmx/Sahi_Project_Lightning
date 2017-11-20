@@ -1,10 +1,11 @@
 
 //author - Noor Salma Sharieff
 
-var $SFW_InteractiveHandoverFunctionalityForWebServices = _testcase("$SFW_InteractiveHandoverFunctionalityForWebServices","This scenario is to verify the wizard step's background mode of execution.");
-$SFW_InteractiveHandoverFunctionalityForWebServices.start();
+var $9802 = _testcase("9802","This scenario is to verify the wizard step's background mode of execution.");
+$9802.start();
 _setSpeed(100);
 
+$user = "svmx test4";
 var $className = $bo_act_common.generateRandomName("fClassName");
 var $methodName = $bo_act_common.generateRandomName("MethodName");
 
@@ -89,12 +90,11 @@ var $codeDev = "global class "+$className+ "\n"+
 $bo_act_login.login($g_url, $bac_un, $bac_pwd);
 
 $bo_act_navigation.navigateToSetUpAndSearch("Installed Packages");
-if(_condition(_cell("SVMXC")!=null))
+if(_getText(_cell("SVMXC"))!="SVMXDEV")
 var $code = $codeBase;
 else
 $code = $codeDev;
 
-$bo_act_navigation.navigateToSetUpAndSearch("Apex Classes");
 $bo_act_salesforceSetUp.createApexClasses($code);
 
 var $actionTitle = $bo_act_customAction.createCustomActionForWebService("Work Order", $className, $methodName);
@@ -116,17 +116,25 @@ var $caseNumber = $bo_act_Cases.createCase("New", "High", "Email");
 var $productName = $bo_act_products.createProduct();
 var $IBName = $bo_act_installedProduct.createInstalledProduct($productName, $accountName, $contactName);
 $bo_act_workOrders.createWorkOrder($caseNumber, $accountName, $contactName, $IBName, "Open", "High", "Field Service");
+_click(_link("/Change/"));
+_setValue(_textbox("*Owner"),$user);
+_click(_submit(" Save "));
+
 _selectDomain("/svmx/");
 _assertExists(_button("/Create RMA from Work Order/",_near(_cell($wizardTitleName))));
 _click(_button("/Create RMA from Work Order/",_near(_cell($wizardTitleName))));
 _selectDomain();
-
 _click($bo_pg_sfmWizard.btn_deleteicon);
 _click($bo_pg_sfmWizard.btn_saveicon);
+_assertContainsText("Work Order updated",_div("messageText"));
 
-//need to write further steps
-
-$SFW_InteractiveHandoverFunctionalityForWebServices.end();
+//Clean up function
+var $datacreated = [$contactName,$accountName,$caseNumber,$productName,$IBName,$WONumber];
+for (var i = 0; i < $datacreated.length; i++) {
+	$bo_act_common.cleanUpfunction($datacreated[i]);
+}
+$bo_act_SFW.deleteWizards("Work Order", $wizardIDName);
+$9802.end();
 
 
 

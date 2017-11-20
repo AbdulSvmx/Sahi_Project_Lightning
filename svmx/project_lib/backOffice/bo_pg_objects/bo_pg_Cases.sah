@@ -17,6 +17,7 @@ var $bo_pg_Cases = new function bo_pg_Cases(){
 	this.sel_selectCaseOrigin = _select(0,_rightOf(_label("/\\*Case Origin|^Case Origin/")));
 	this.btn_save = _submit(" Save ");
     this.txt_caseNumber = _heading2("pageDescription");
+	//this.txt_caseNumber = _div(0,_rightOf(_cell("Case Number")));
 	this.btn_editCase = _button(" Edit "); 
 	this.btn_cloneCase = _button(" Clone ");
 	this.btn_deleteCase = _button("Delete");

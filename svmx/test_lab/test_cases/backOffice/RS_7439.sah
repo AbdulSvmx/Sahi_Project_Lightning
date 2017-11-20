@@ -22,7 +22,7 @@ $bo_act_PMPlanTemplate.saveConditionBasedPM();
 
 var $sconName = $bo_act_serviceMaintenanceContracts.createServiceMaintenanceContract($accName, $slaterm,1,0);
 $bo_act_serviceMaintenanceContracts.AddCoveredProductToSCON($sconName, $IBName);
-var $PMPlan = $bo_act_PMPlan.createUsageOrFrequencyBasedPMPlan($PMPTemplate,$IBName);
+var $PMPlan = $bo_act_PMPlan.createUsageOrFrequencyBasedPMPlan($sconName,$PMPTemplate,$IBName);
 
 var $pmSchedule = _getText(_tableHeader(0,_near(_heading3("PM Schedule"))));
 _assertNotEqual("No records to display",$pmSchedule,"PM Schedules are not generated");
@@ -31,7 +31,7 @@ var $PMProcessId = $bo_act_PMProcess.createPMProcess("Condition Based Preventive
 
 //This code supports name spaces and assigns the variable with correct namespace script
 $bo_act_navigation.navigateToSetUpAndSearch("Installed Packages");
-if(_condition(_cell("SVMXC")!=null))
+if(_getText(_cell("SVMXC"))!="SVMXDEV")
 var $script = "SVMXC.PREV_Conditional_Engine_Batch batchable = new SVMXC.PREV_Conditional_Engine_Batch();String processId = '"+$PMProcessId+"';SVMXC__ServiceMax_Processes__c condtionprocess = [select id from SVMXC__ServiceMax_Processes__c where SVMXC__ProcessID__c =: processId limit 1];batchable.setProcessIds = new Set<String>{condtionprocess.Id};Database.executeBatch(batchable, 1);";
 else
 $script = "SVMXDEV.PREV_Conditional_Engine_Batch batchable = new SVMXDEV.PREV_Conditional_Engine_Batch();String processId = '"+$PMProcessId+"';SVMXDEV__ServiceMax_Processes__c condtionprocess = [select id from SVMXDEV__ServiceMax_Processes__c where SVMXDEV__ProcessID__c =: processId limit 1];batchable.setProcessIds = new Set<String>{condtionprocess.Id};Database.executeBatch(batchable, 1);";

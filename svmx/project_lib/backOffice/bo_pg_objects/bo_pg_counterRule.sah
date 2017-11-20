@@ -1,0 +1,19 @@
+var $bo_pg_counterRule=new function bo_pg_counterRule(){
+	
+		this.btn_newRule=_button("New Rule");
+		this.txt_counterRuleName=_textbox("CounterRule:RuleForm:RuleBlock:CounterRuleList:0:inputFildName");
+		this.sel_prodCode=_select("CounterRule:RuleForm:RuleBlock:j_id101:j_id102:table1:0:selFildNm");
+		this.sel_operator=_select("CounterRule:RuleForm:RuleBlock:j_id101:j_id102:table1:0:selOprtor");
+		this.sel_value=_textbox("CounterRule:RuleForm:RuleBlock:j_id101:j_id102:table1:0:inputOprend");
+		this.txt_counterName=_textbox("CounterRule:RuleForm:RuleBlock:PartsPrdct:CounterRecList:0:inputCuntrNmFild");
+		this.sel_type=_select("CounterRule:RuleForm:RuleBlock:PartsPrdct:CounterRecList:0:inputIdFildType");
+		this.txt_growsOrReducedBy=_textbox("CounterRule:RuleForm:RuleBlock:PartsPrdct:CounterRecList:0:inputGrowByFild");
+		this.txt_minValue=_textbox("CounterRule:RuleForm:RuleBlock:PartsPrdct:CounterRecList:0:inputMinValFild");
+		this.txt_maxValue=_textbox("CounterRule:RuleForm:RuleBlock:PartsPrdct:CounterRecList:0:inputMaxValFild");
+		this.chk_activefield=_checkbox("CounterRule:RuleForm:RuleBlock:PartsPrdct:CounterRecList:0:inputActivFild");
+		this.btn_save=_button("Save");
+	
+	
+	
+}
+	
