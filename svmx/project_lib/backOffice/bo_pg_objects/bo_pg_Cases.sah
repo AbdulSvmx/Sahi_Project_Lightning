@@ -29,7 +29,7 @@ var $bo_pg_Cases = new function bo_pg_Cases(){
 	this.txt_ResolutionInternalBy = _div(0,_rightOf(_cell("/Resolution Internal By/")));
 	this.txt_ResolutionCustomerBy = _div(0,_rightOf(_cell("/Resolution Customer By/")));
 	
-this.txt_InitialResponseInternalBy = _div(0,_rightOf(_cell("/Initial Response Internal By/")));
+    this.txt_InitialResponseInternalBy = _div(0,_rightOf(_cell("/Initial Response Internal By/")));
 	this.txt_InitialResponseCustomerBy = _div(0,_rightOf(_cell("/Initial Response Customer By/")));
 	
 	//Edit Case Page

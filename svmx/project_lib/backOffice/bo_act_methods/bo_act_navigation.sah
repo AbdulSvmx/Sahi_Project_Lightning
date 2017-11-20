@@ -166,7 +166,7 @@ var $bo_act_navigation = new function bo_act_navigation() {
  	_click($bo_pg_servicemaxSetup.btn_serviceFlowManager);
  	_click($bo_pg_servicemaxSetup.btn_sfmWizard);
  	_setSpeed(3000);
- 	return $callBack.returnResult(_exists($bo_pg_sfmWizard.wizardLabel));
+ 	//return $callBack.returnResult(_exists($bo_pg_sfmWizard.wizardLabel));
 
      };
 
@@ -233,7 +233,18 @@ var $bo_act_navigation = new function bo_act_navigation() {
  	_click($bo_pg_servicemaxSetup.btn_servicePricebooks);
  	//_setSpeed(3000);
  	//return $callBack.returnResult(_exists($bo_pg_sfmWizard.wizardLabel));
-     };     
+     }; 
+     
+     /**
+      * Navigates to Service Option
+      */
+     this.navigateToServiceType = function() {
+ 	 this.navigateToSvmxSetup();
+ 	_click($bo_pg_servicemaxSetup.btn_warrantiesAndServiceContracts);
+ 	_click($bo_pg_servicemaxSetup.btn_services);
+ 	//_setSpeed(3000);
+ 	//return $callBack.returnResult(_exists($bo_pg_sfmWizard.wizardLabel));
+     };
      
      this.navigateToWorkOrdersTab = function(){
     	 _click($bo_pg_home.btn_allTabs);
