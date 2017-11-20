@@ -1,0 +1,145 @@
+
+//author - Noor Salma Sharieff
+
+var $SFW_HandoveredFunctionalityOnWebServiceFail = _testcase("$SFW_HandoveredFunctionalityOnWebServiceFail","Check for Handovered functionality on Web service fail.");
+$SFW_HandoveredFunctionalityOnWebServiceFail.start();
+_setSpeed(100);
+
+var $className = $bo_act_common.generateRandomName("fclassName");
+var $methodName = $bo_act_common.generateRandomName("MethodName");
+
+var $codeBase = "global class "+$className+ "\n"+ 
+"{\n"+
+"webservice static SVMXC.INTF_WebServicesDef.INTF_Response "+$methodName+"(SVMXC.INTF_WebServicesDef.INTF_Request request)\n"+
+"{\n"+     
+     "system.debug(LoggingLevel.WARN, 'req is = ' + request); \n"+ 
+     "SVMXC.INTF_WebServicesDef.INTF_Response obj = new SVMXC.INTF_WebServicesDef.INTF_Response(); \n"+ 
+     "try\n"+  
+     "{\n"+ 
+         "String recordId; \n"+ 
+         "for(SVMXC.INTF_WebServicesDef.SVMXMap objSVXMMap : request.valueMap) \n"+ 
+         "{\n"+  
+             "if(objSVXMMap.key == 'SVMX_RECORDID') \n"+ 
+             "{\n"+  
+                  "recordId = objSVXMMap.value; \n"+ 
+             "} \n"+ 
+         "} \n"+ 
+         "SVMXC__Service_Order__c objWO = [Select Id, Name, OwnerId from SVMXC__Service_Order__c where Id=:recordId]; \n"+ 
+         "objWO.OwnerId = UserInfo.getUserId(); \n"+ 
+         "Update objWO; \n"+ 
+         "SVMXC.INTF_WebServicesDef.SVMXMap sObj = new SVMXC.INTF_WebServicesDef.SVMXMap(); \n"+ 
+         "sObj.record = objWO; \n"+  
+         "obj.valueMap = new List<SVMXC.INTF_WebServicesDef.SVMXMap>(); \n"+ 
+         "obj.valueMap.add(sObj); \n"+ 
+         "obj.message = 'Work Order updated';\n"+ 
+         "obj.success = true;\n"+ 
+         "obj.messageType = 'INFO'; \n"+ 
+         "system.debug(LoggingLevel.WARN, 'obj is = ' + obj); \n"+ 
+         "return obj; // Return should be of INTF_Response type and \n"+ 
+     "}\n"+  
+     "catch(Exception ex) \n"+ 
+     "{\n"+  
+          "obj.message = ex.getMessage();\n"+  
+         "obj.success = false; \n"+ 
+        "obj.messageType = 'ERROR';\n"+  
+         "return obj;\n"+  
+     "}\n"+ 
+"}\n"+ 
+"}";
+
+var $codeDev = "global class "+$className+ "\n"+ 
+"{\n"+
+"webservice static SVMXDEV.INTF_WebServicesDef.INTF_Response "+$methodName+"(SVMXDEV.INTF_WebServicesDef.INTF_Request request)\n"+
+"{\n"+     
+     "system.debug(LoggingLevel.WARN, 'req is = ' + request); \n"+ 
+     "SVMXDEV.INTF_WebServicesDef.INTF_Response obj = new SVMXDEV.INTF_WebServicesDef.INTF_Response(); \n"+ 
+     "try\n"+  
+     "{\n"+ 
+         "String recordId; \n"+ 
+         "for(SVMXDEV.INTF_WebServicesDef.SVMXMap objSVXMMap : request.valueMap) \n"+ 
+         "{\n"+  
+             "if(objSVXMMap.key == 'SVMX_RECORDID') \n"+ 
+             "{\n"+  
+                  "recordId = objSVXMMap.value; \n"+ 
+             "} \n"+ 
+         "} \n"+ 
+         "SVMXDEV__Service_Order__c objWO = [Select Id, Name, OwnerId from SVMXDEV__Service_Order__c where Id=:recordId]; \n"+ 
+         "objWO.OwnerId = UserInfo.getUserId(); \n"+ 
+         "Update objWO; \n"+ 
+         "SVMXDEV.INTF_WebServicesDef.SVMXMap sObj = new SVMXDEV.INTF_WebServicesDef.SVMXMap(); \n"+ 
+         "sObj.record = objWO; \n"+  
+         "obj.valueMap = new List<SVMXDEV.INTF_WebServicesDef.SVMXMap>(); \n"+ 
+         "obj.valueMap.add(sObj); \n"+ 
+         "obj.message = 'Work Order updated';\n"+ 
+         "obj.success = true;\n"+ 
+         "obj.messageType = 'INFO'; \n"+ 
+         "system.debug(LoggingLevel.WARN, 'obj is = ' + obj); \n"+ 
+         "return obj; // Return should be of INTF_Response type and \n"+ 
+     "}\n"+  
+     "catch(Exception ex) \n"+ 
+     "{\n"+  
+          "obj.message = ex.getMessage();\n"+  
+         "obj.success = false; \n"+ 
+        "obj.messageType = 'ERROR';\n"+  
+         "return obj;\n"+  
+     "}\n"+ 
+"}\n"+ 
+"}";
+
+$bo_act_login.login($g_url, $bac_un, $bac_pwd);
+
+$bo_act_navigation.navigateToSetUpAndSearch("Installed Packages");
+if(_condition(_cell("SVMXC")!=null))
+var $code = $codeBase;
+else
+$code = $codeDev;
+
+
+$bo_act_salesforceSetUp.createApexClasses($code);
+
+var $wrongMethodName = $bo_act_common.generateRandomName("Test");
+var $actionTitle = $bo_act_customAction.createCustomActionForWebService("Work Order", $className, $wrongMethodName);
+var $parameterValue = $bo_act_common.generateRandomName("ParaValue");
+$bo_act_customAction.addParametersForWebService("Value", $parameterValue);
+
+var $wizardTitleName = $bo_act_common.generateRandomName("SFWTitle");
+var $wizardIDName = $bo_act_common.generateRandomName("SFWId");
+$bo_act_navigation.navigateToSfmWizard();
+$bo_act_SFW.createWizardGeneralInfo("Work Order", $wizardTitleName, $wizardIDName);
+$bo_act_SFW.createSFMWizardStepwithHandOver("SFM", "Create RMA from Work Order", "Interactive",true);
+$bo_act_SFW.createOthersWizardStepwithHandOver("Others", $actionTitle,false);
+$bo_act_SFW.quickSaveSFWizard();
+$bo_act_SFW.saveAndClose();
+
+var $accountName = $bo_act_accounts.createAccount();
+var $contactName = $bo_act_contacts.createContact($accountName);
+var $caseNumber = $bo_act_Cases.createCase("New", "High", "Email");
+var $productName = $bo_act_products.createProduct();
+var $IBName = $bo_act_installedProduct.createInstalledProduct($productName, $accountName, $contactName);
+var $WONumber = $bo_act_workOrders.createWorkOrder($caseNumber, $accountName, $contactName, $IBName, "Open", "High", "Field Service");
+_selectDomain("/svmx/");
+_assertExists(_button("/Create RMA from Work Order/",_near(_cell($wizardTitleName))));
+_click(_button("/Create RMA from Work Order/",_near(_cell($wizardTitleName))));
+_selectDomain();
+
+_click($bo_pg_sfmWizard.btn_deleteicon);
+_click($bo_pg_sfmWizard.btn_saveicon);
+
+_assertExists(_heading2("/actionTitle/"));
+_assertContainsText("Your Web Service call failed",_div("messageText"));
+_assertExists(_submit("Return"));
+_click(_submit("Return"));
+
+//Clean up function
+var $datacreated = [$contactName,$accountName,$caseNumber,$productName,$IBName,$WONumber];
+for (var i = 0; i < $datacreated.length; i++) {
+	$bo_act_common.cleanUpfunction($datacreated[i]);
+}
+$bo_act_SFW.deleteWizards("Work Order", $wizardIDName);
+$bo_act_customAction.deleteCustomAction("Work Order", $actionTitle);
+$bo_act_salesforceSetUp.deleteapexClasses($className);
+
+$SFW_HandoveredFunctionalityOnWebServiceFail.end();
+
+
+

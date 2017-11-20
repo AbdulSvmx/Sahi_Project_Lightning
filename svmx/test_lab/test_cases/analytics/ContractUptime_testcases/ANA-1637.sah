@@ -14,6 +14,7 @@ var $Component = $data[1]["Component"];
 var $ScheduledDate = $data[1]["ScheduledDate"];
 var $PreferredStartDate = $data[1]["PreferredStartDate"];
 var $PreferredEndDate = $data[1]["PreferredEndDate"];
+var $GuranteedUptime = $data[1]["GuaranteedUptime"];
 $bo_act_login.login($url, $un, $pwd);
 
 
@@ -110,8 +111,7 @@ var $ana_1637_scon1_id ;
 var $ana_1637_uptime_value ;
 var $ana_1637_guranteed_uptime = null;
 
-for(var $i=0;$ana_1637_guranteed_uptime == null ; $i++)
-{
+
 var $ana_1637_query_RV1 = "Select SVMXC__Installed_Product__c,SVMXC__Contract__c,SVMXC__Gauranteed_Up_Time__c from SVMXC__SPM_Contract_Up_Time__c where SVMXC__Installed_Product__c = '"+$ana_1637_IB_ID+"' AND SVMXC__Contract__c = '"+$ana_1637_SCON+"'";
 var $ana_1637_resultRV1 = $op_act_sForceApiCall.sForceQuery($un, $pwd, $ana_1637_query_RV1,"query");
 
@@ -122,14 +122,14 @@ $ana_1637_resultRV1.forEach(function($varRV1) {
 	$ana_1637_guranteed_uptime = $varRV1.SVMXC__Gauranteed_Up_Time__c;
 
 });
-}
+
 _log($ana_1637_ib1_id);
 _log($ana_1637_scon1_id);
 _log($ana_1637_guranteed_uptime); 
 
 _assertEqual($ana_1637_IB_ID, $ana_1637_ib1_id);
 _assertEqual($ana_1637_SCON,$ana_1637_scon1_id);
-_assertEqual(43200.0,$ana_1637_guranteed_uptime);
+_assertEqual($GuranteedUptime,Math.round($ana_1637_guranteed_uptime));
 
 
 // To verify the Downtime
@@ -138,8 +138,7 @@ _assertEqual(43200.0,$ana_1637_guranteed_uptime);
 var $ana_1637_wo1_id ;
 var $ana_1637_down_time_value = null ;
 
-for(var $i=0;$ana_1637_down_time_value == null ; $i++)
-{
+
 var $ana_1637_query_RV1 = "Select SVMXC__Down_Time__c,SVMXC__Work_Order__c from SVMXC__SPM_Down_Time_Detail__c where SVMXC__Work_Order__c='"+$ana_1637_WO_ID+"'";
 var $ana_1637_resultRV1 = $op_act_sForceApiCall.sForceQuery($un, $pwd, $ana_1637_query_RV1,"query");
 
@@ -147,7 +146,7 @@ $ana_1637_resultRV1.forEach(function($varRV1) {
 	
 	$ana_1637_down_time_value = $varRV1.SVMXC__Down_Time__c;
 });
-}
+
 _log($ana_1637_down_time_value);
 
 

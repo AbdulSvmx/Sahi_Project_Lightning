@@ -52,9 +52,9 @@ var $bo_act_warrantyTerms = new function bo_act_warrantyTerms() {
 	};
 	
 	//Function for Applicable product
-	this.createApplicableProducts = function($productName, $warrantyName) {
+	this.createApplicableProducts = function($product_Name, $warrantyName) {
 		_click($bo_pg_warrantyTerms.btn_newApplicableProduct);
-		_setValue($bo_pg_warrantyTerms.txt_product, $productName);
+		_setValue($bo_pg_warrantyTerms.txt_product, $product_Name);
 		_click($bo_pg_warrantyTerms.btn_save);
 		_assertNotVisible(_div("/Error: Invalid Data/"));
 		$bo_pg_warrantyTerms.clickOnWarranty($warrantyName);

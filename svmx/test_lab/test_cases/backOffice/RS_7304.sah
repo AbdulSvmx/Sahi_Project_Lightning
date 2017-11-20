@@ -10,7 +10,7 @@ _setSpeed(100);
  * Login to the Sandbox Org
  */
 
-$bo_act_login.login($g_url, $bac_un, $bac_pwd);
+$bo_act_login.login($g_url, $g_un, $g_pwd);
 
 /**
  * Configure the Global Profile SET001

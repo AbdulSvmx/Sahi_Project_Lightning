@@ -27,7 +27,7 @@ var $ana_1633_query_SCON = "Select Id,Name from SVMXC__Service_Contract__c where
 var $ana_1633_fetch_SCON  = $op_act_sForceApiCall.sForceQuery($un, $pwd, $ana_1633_query_SCON,"query");
 
 
-_wait(1000);
+
 _log($ana_1633_fetch_SCON);
 
 var $ana_1633_SCON ;
@@ -81,8 +81,7 @@ var $ana_1633_scon1_id ;
 var $ana_1633_uptime_value ;
 var $ana_1633_guranteed_uptime = null;
 
-for(var $i=0;$ana_1633_guranteed_uptime == null ; $i++)
-{
+
 var $ana_1633_query_RV1 = "Select SVMXC__Installed_Product__c,SVMXC__Contract__c,SVMXC__Gauranteed_Up_Time__c from SVMXC__SPM_Contract_Up_Time__c where SVMXC__Installed_Product__c = '"+$ana_1633_IB_ID+"' AND SVMXC__Contract__c = '"+$ana_1633_SCON+"'";
 var $ana_1633_resultRV1 = $op_act_sForceApiCall.sForceQuery($un, $pwd, $ana_1633_query_RV1,"query");
 
@@ -93,7 +92,7 @@ $ana_1633_resultRV1.forEach(function($varRV1) {
 	$ana_1633_guranteed_uptime = $varRV1.SVMXC__Gauranteed_Up_Time__c;
 
 });
-}
+
 _log($ana_1633_ib1_id);
 _log($ana_1633_scon1_id);
 _log($ana_1633_guranteed_uptime); 

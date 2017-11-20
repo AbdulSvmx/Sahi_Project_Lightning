@@ -6,8 +6,6 @@
 
 var $bo_pg_serviceMaintenanceContracts = new function bo_pg_serviceMaintenanceContracts(){
 	this.btn_new = _button(" New ");
-	this.btn_edit = _button(" Edit ");
-	this.txt_SContractEdit = _heading2("/Maintenance Contract Edit/");
 	this.txt_sconName = _textbox("Name");
 	this.txt_accountName = _textbox("/\\*Account|^Account/");
 	this.txt_contactName = _textbox("/\\*Contact|^Contact/");
@@ -65,6 +63,7 @@ var $bo_pg_serviceMaintenanceContracts = new function bo_pg_serviceMaintenanceCo
 		this.txt_regularRateLaborPricing = _textbox(0,_rightOf(_label("Regular Rate:",_near(_span("Update")))));
 		this.btn_updateLaborPricing = _span("Update");
 		this.btn_saveLaborPricing = _span("/sfmd-save-icon/");
+
 	
 };
 
