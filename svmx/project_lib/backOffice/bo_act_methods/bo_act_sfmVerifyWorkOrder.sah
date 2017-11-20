@@ -27,7 +27,7 @@ this.verifyWizardOnWOObj=function($sfmName){
 	_click($bo_pg_sfmVerifyWorkOrder.link_workOrder);
 	_wait(10000);
 	_click($bo_pg_sfmVerifyWorkOrder.lnk_firstLinkWO);
-}
+};
 	
 	this.wizardButtonVerification=function($wizardname){			
 			_selectDomain("/svmx/");
@@ -39,7 +39,19 @@ this.verifyWizardOnWOObj=function($sfmName){
 			_stopTestCase();
 			_selectDomain();
 				}
-		}
+		};
+	this.verifyAddEditWizardButton=function($wizardname){			
+			_selectDomain("/svmx/");
+		var $status= _isVisible($bo_pg_sfmVerifyWorkOrder.wizardButtonExist);
+		if ($status="false") {
+			_log("SFm wizard not visible");
+            _selectDomain();			
+		}else{
+			_fail("SFM Wizard Not visible");
+			_stopTestCase();
+			_selectDomain();
+				}
+		};
 		this.clkOnWizard=function($wizardButtonName){
 			_selectDomain("/svmx/");
 			if(_assertVisible(_button($wizardButtonName))){
@@ -55,15 +67,29 @@ this.verifyWizardOnWOObj=function($sfmName){
 		this.wizardButtonNotVisible=function($wizardname){
 			
 			_selectDomain("/svmx/");
-		if( _assertVisible($bo_pg_sfmVerifyWorkOrder.wizardButtonExist)){
+			var $status= _isVisible(_button($wizardname));
+		if ($status="false") {
 			_log("SFm wizard not visible");
-            _selectDomain();
+            _selectDomain();			
 		}else{
-			_fail("SFM Wizardvisible");
+			_fail("SFM Wizard visible");
 			_stopTestCase();
 			_selectDomain();
-				}		
-		}
+				}
+		};
+	this.wizardButtonVisible=function($wizardname){
+			
+			_selectDomain("/svmx/");
+			var $status= _isVisible(_button($wizardname));
+		if ($status="true") {
+			_log("SFm wizard visible");
+            _selectDomain();			
+		}else{
+			_fail("SFM Wizard Not visible");
+			_stopTestCase();
+			_selectDomain();
+				}
+		};
 			this.searchWizard=function($wizardTitleName ){
 				_selectDomain("/svmx/");
 			var $textDisplay=_getText(_table("tbcontainer"));
@@ -79,7 +105,6 @@ this.verifyWizardOnWOObj=function($sfmName){
 				_click(_button($SFMName));
 				_selectDomain();					
 			}			
-	return $callBack.returnResult($result, "","searchWizard");
 
 	
 	};

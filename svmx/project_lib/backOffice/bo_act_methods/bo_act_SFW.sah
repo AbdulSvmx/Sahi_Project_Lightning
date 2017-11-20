@@ -22,12 +22,9 @@ var $bo_act_SFW = new function bo_act_SFW() {
 		_wait(3000,_isVisible($bo_pg_sfmWizard.tab_generalInfo));
 		_setValue($bo_pg_sfmWizard.txt_wizardTitle, $wizardTitleName);
         _setValue($bo_pg_sfmWizard.txt_wizardID, $wizardIDName);
-<<<<<<< HEAD
+
 		}
-		
-=======
-		};
->>>>>>> fd7ac582c04ad3a0e65a726729c8554292fcec6c
+
 	
 	this.addNewManageWizardSteps = function($wizardStepType,$wizardStepName,$executionMode){
 		_click($bo_pg_sfmWizard.tab_manageWizardSteps);
@@ -58,11 +55,11 @@ var $bo_act_SFW = new function bo_act_SFW() {
 		_check($bo_pg_sfmWizard.chk_wizardName);
 		_click($bo_pg_sfmWizard.btn_clickEdit);
 		_click($bo_pg_sfmWizard.tab_manageWizardSteps);
-<<<<<<< HEAD
+
 	};		
-=======
-	};	
->>>>>>> 021dade396c809c227d843dbf8dc7fbe0512659f
+
+		
+
 		this.renameWizardTitle=function($wizardTitleName,$wizardIDName){
 			_click($bo_pg_sfmWizard.btn_clickEdit);
 			_setValue($bo_pg_sfmWizard.txt_wizardTitle, $wizardTitleName);
@@ -92,13 +89,13 @@ var $bo_act_SFW = new function bo_act_SFW() {
 		_setSelected($bo_pg_sfmWizard.combo_executionMode,$executionMode);
 		_wait(2000);
 		_click($bo_pg_sfmWizard.btn_saveWizardStep);
-		_wait(60000);		
+		_wait(1000);		
 };
-<<<<<<< HEAD
+
 		//@deprecated
-=======
+
 		
-<<<<<<< HEAD
+
 		this.deleteWizard=function($wizardname){
 			//_click($bo_pg_sfmWizard.selectWizard);
 			_click(_checkbox(0,_leftOf (_cell($wizardname))));
@@ -109,14 +106,12 @@ var $bo_act_SFW = new function bo_act_SFW() {
 		}
 			
 			
-}
-=======
->>>>>>> 021dade396c809c227d843dbf8dc7fbe0512659f
+
 		this.deleteWizard=function(){
 			_click($bo_pg_sfmWizard.chk_selectCustomWizard);
 			_click($bo_pg_sfmWizard.btn_deleteWizard);
 			_wait(6000);
-<<<<<<< HEAD
+
 		};
 		
 this.deleteWizards = function($objName,$wizardId){
@@ -127,15 +122,7 @@ this.deleteWizards = function($objName,$wizardId){
 	};
 this.quickSaveSFWizard = function(){
 	_click(_button("Quick Save"));
+}	
+};			
 	
-};
 
-=======
-			
-			
-			
-		};
-	
->>>>>>> 021dade396c809c227d843dbf8dc7fbe0512659f
-};
->>>>>>> fd7ac582c04ad3a0e65a726729c8554292fcec6c

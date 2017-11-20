@@ -4,13 +4,13 @@ $RS_5434.start();
 _setSpeed(100);
 
 	var $sfmToBeCloned="manage work order lines - Usage";
-	var $sfmName="SFMTest5380_1";
+	var $sfmName=$bo_act_common.generateRandomName("SFMTest5434_");
 	//change  the name of $sfmTemplateSaveAsName before execution to avoid any duplication.
-	var $sfmTemplateSaveAsName="Temp5380_1";
+	var $sfmTemplateSaveAsName=$bo_act_common.generateRandomName("Temp");
 
 	var $objName="Work Order";
-	var $wizardname="RS-5380WizardName";
-	var $wizardID="RS-5380WizardID4";
+	var $wizardname=$bo_act_common.generateRandomName("SFW5434");
+	var $wizardID=$bo_act_common.generateRandomName("SFW5434");
 	var $executionMode="Interactive";
 	var $fieldActnType="SFM";
 	var $actnName=$sfmName;

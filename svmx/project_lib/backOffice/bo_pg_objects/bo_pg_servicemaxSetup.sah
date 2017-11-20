@@ -9,6 +9,7 @@ var $bo_pg_servicemaxSetup = new function bo_pg_servicemaxSetup(){
 	this.btn_sfmTransactionAndDocsDesigner= _div("SFM Transaction & Docs Designer");
 	this.btn_warrantiesAndServiceContracts = _div("Warranties & Service Contracts");
 	this.btn_slaTerms = _div("SLA terms");
+	this.btn_sfmSearch = _div("SFM Search");
 	
 	this.btn_appAdministration = _div("App Administration");
 	this.btn_configurationProfiles = _div("Configuration Profiles");
@@ -18,12 +19,23 @@ var $bo_pg_servicemaxSetup = new function bo_pg_servicemaxSetup(){
 	this.btn_sfmWizard= _div("SFM Wizards");
 	this.btn_sfmAppPermission = _div("SFM App Permissions");
 	this.btn_sfmCustomAction=_div("SFM Custom Actions");
+	this.btn_PMProcess = _div("PM Process");
 	
 	//Object for Auto Entitlement Rules - Work Order
 	this.btn_autoEntitlementRulesWO = _div("Auto Entitlement Rules - Work Order");
 	
 	//Object for Auto Entitlement Rules - Case
 	this.btn_autoEntitlementRulesCase = _div("Auto Entitlement Rules - Case");
+	
+	//Object for Activity Master
+	this.btn_activityMaster = _div("Activity Master"); 
+	
+	//Object for Service Pricebooks
+	this.btn_servicePricebooks = _div("Service Pricebooks");
+	this.btn_instalBaseAndPM=_div("Installed Base & PM");
+	this.btn_counterRule=_div("Counter Rules");
+	this.btn_scheduledSFM=_div("Scheduled SFM");
+	
 
 };
 
