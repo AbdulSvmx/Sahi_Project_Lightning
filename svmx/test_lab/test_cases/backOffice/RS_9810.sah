@@ -1,8 +1,8 @@
 
 //author - Noor Salma Sharieff
 
-var $9802 = _testcase("9802","This scenario is to verify the wizard step's background mode of execution.");
-$9802.start();
+var $RS_9810 = _testcase("$RS_9810","Check for Continue Button after Execution of Web service.");
+$RS_9810.start();
 _setSpeed(100);
 
 $user = "svmx test4";
@@ -105,7 +105,7 @@ var $wizardTitleName = $bo_act_common.generateRandomName("SFWTitle");
 var $wizardIDName = $bo_act_common.generateRandomName("SFWId");
 $bo_act_navigation.navigateToSfmWizard();
 $bo_act_SFW.createWizardGeneralInfo("Work Order", $wizardTitleName, $wizardIDName);
-$bo_act_SFW.createWizardStepwithHandOver("SFM", "Create RMA from Work Order", "Interactive",true);
+$bo_act_SFW.createWizardStepwithHandOver("Others", $actionTitle, "Interactive",true);
 $bo_act_SFW.createWizardStepwithHandOver("Others", $actionTitle, "Interactive",false);
 $bo_act_SFW.quickSaveSFWizard();
 $bo_act_SFW.saveAndClose();
@@ -116,16 +116,15 @@ var $caseNumber = $bo_act_Cases.createCase("New", "High", "Email");
 var $productName = $bo_act_products.createProduct();
 var $IBName = $bo_act_installedProduct.createInstalledProduct($productName, $accountName, $contactName);
 $bo_act_workOrders.createWorkOrder($caseNumber, $accountName, $contactName, $IBName, "Open", "High", "Field Service");
-_click(_link("/Change/"));
-_setValue(_textbox("*Owner"),$user);
-_click(_submit(" Save "));
 
 _selectDomain("/svmx/");
-_assertExists(_button("/Create RMA from Work Order/",_near(_cell($wizardTitleName))));
-_click(_button("/Create RMA from Work Order/",_near(_cell($wizardTitleName))));
+_assertExists(_button("/$actionTitle/",_near(_cell($wizardTitleName))));
+_click(_button("/$actionTitle/",_near(_cell($wizardTitleName))));
 _selectDomain();
-_click($bo_pg_sfmWizard.btn_deleteicon);
-_click($bo_pg_sfmWizard.btn_saveicon);
+_assertContainsText("Work Order updated",_div("messageText"));
+_assertExists(_submit("Continue"));
+_click(_submit("Continue"));
+_wait(10000,isVisible(_div("messageText")));
 _assertContainsText("Work Order updated",_div("messageText"));
 
 //Clean up function
@@ -134,7 +133,7 @@ for (var i = 0; i < $datacreated.length; i++) {
 	$bo_act_common.cleanUpfunction($datacreated[i]);
 }
 $bo_act_SFW.deleteWizards("Work Order", $wizardIDName);
-$9802.end();
+$RS_9810.end();
 
 
 

@@ -1,7 +1,7 @@
 
 //author - Noor Salma Sharieff
 
-var $RS_9801 = _testcase("$RS_9801","SFW - Wizard step - background mode of execution.");
+var $RS_9801 = _testcase("RS_9801","SFW - Wizard step - background mode of execution.");
 $RS_9801.start();
 _setSpeed(100);
 
@@ -28,10 +28,10 @@ _assertExists(_button("/Close Work Order/",_near(_cell($wizardTitleName))));
 _click(_button("/Close Work Order/",_near(_cell($wizardTitleName))));
 _selectDomain();
 
-_assertEquals("Closed",_div(0,_rightOf(_span("/Order Status/"))),"Work Order is not closed");
-//Clean up function
+_assertEqual("Closed",_getText(_div(0,_rightOf(_span("/Order Status/")))),"Work Order is not closed");
 
-var $datacreated = [$accountName,$contactName,$caseNumber,$productName,$IBName,$WONumber];
+//Clean up function
+var $datacreated = [$contactName,$accountName,$caseNumber,$productName,$IBName,$WONumber];
 for (var i = 0; i < $datacreated.length; i++) {
 	$bo_act_common.cleanUpfunction($datacreated[i]);
 }

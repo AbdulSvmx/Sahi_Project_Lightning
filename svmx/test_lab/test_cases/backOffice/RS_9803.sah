@@ -1,12 +1,11 @@
 
 //author - Noor Salma Sharieff
 
-var $9802 = _testcase("9802","This scenario is to verify the wizard step's background mode of execution.");
-$9802.start();
+var $SFW_HandoveredFunctionalityOnWebServiceFail = _testcase("$SFW_HandoveredFunctionalityOnWebServiceFail","Check for Handovered functionality on Web service fail.");
+$SFW_HandoveredFunctionalityOnWebServiceFail.start();
 _setSpeed(100);
 
-$user = "svmx test4";
-var $className = $bo_act_common.generateRandomName("fClassName");
+var $className = $bo_act_common.generateRandomName("fclassName");
 var $methodName = $bo_act_common.generateRandomName("MethodName");
 
 var $codeBase = "global class "+$className+ "\n"+ 
@@ -90,23 +89,25 @@ var $codeDev = "global class "+$className+ "\n"+
 $bo_act_login.login($g_url, $bac_un, $bac_pwd);
 
 $bo_act_navigation.navigateToSetUpAndSearch("Installed Packages");
-if(_getText(_cell("SVMXC"))!="SVMXDEV")
+if(_condition(_cell("SVMXC")!=null))
 var $code = $codeBase;
 else
 $code = $codeDev;
 
+
 $bo_act_salesforceSetUp.createApexClasses($code);
 
-var $actionTitle = $bo_act_customAction.createCustomActionForWebService("Work Order", $className, $methodName);
-
-$bo_act_customAction.addParametersForWebService("Owner","Field Name", "Owner ID");
+var $wrongMethodName = $bo_act_common.generateRandomName("Test");
+var $actionTitle = $bo_act_customAction.createCustomActionForWebService("Work Order", $className, $wrongMethodName);
+var $parameterValue = $bo_act_common.generateRandomName("ParaValue");
+$bo_act_customAction.addParametersForWebService("Value", $parameterValue);
 
 var $wizardTitleName = $bo_act_common.generateRandomName("SFWTitle");
 var $wizardIDName = $bo_act_common.generateRandomName("SFWId");
 $bo_act_navigation.navigateToSfmWizard();
 $bo_act_SFW.createWizardGeneralInfo("Work Order", $wizardTitleName, $wizardIDName);
-$bo_act_SFW.createWizardStepwithHandOver("SFM", "Create RMA from Work Order", "Interactive",true);
-$bo_act_SFW.createWizardStepwithHandOver("Others", $actionTitle, "Interactive",false);
+$bo_act_SFW.createSFMWizardStepwithHandOver("SFM", "Create RMA from Work Order", "Interactive",true);
+$bo_act_SFW.createOthersWizardStepwithHandOver("Others", $actionTitle,false);
 $bo_act_SFW.quickSaveSFWizard();
 $bo_act_SFW.saveAndClose();
 
@@ -115,18 +116,19 @@ var $contactName = $bo_act_contacts.createContact($accountName);
 var $caseNumber = $bo_act_Cases.createCase("New", "High", "Email");
 var $productName = $bo_act_products.createProduct();
 var $IBName = $bo_act_installedProduct.createInstalledProduct($productName, $accountName, $contactName);
-$bo_act_workOrders.createWorkOrder($caseNumber, $accountName, $contactName, $IBName, "Open", "High", "Field Service");
-_click(_link("/Change/"));
-_setValue(_textbox("*Owner"),$user);
-_click(_submit(" Save "));
-
+var $WONumber = $bo_act_workOrders.createWorkOrder($caseNumber, $accountName, $contactName, $IBName, "Open", "High", "Field Service");
 _selectDomain("/svmx/");
 _assertExists(_button("/Create RMA from Work Order/",_near(_cell($wizardTitleName))));
 _click(_button("/Create RMA from Work Order/",_near(_cell($wizardTitleName))));
 _selectDomain();
+
 _click($bo_pg_sfmWizard.btn_deleteicon);
 _click($bo_pg_sfmWizard.btn_saveicon);
-_assertContainsText("Work Order updated",_div("messageText"));
+
+_assertExists(_heading2("/actionTitle/"));
+_assertContainsText("Your Web Service call failed",_div("messageText"));
+_assertExists(_submit("Return"));
+_click(_submit("Return"));
 
 //Clean up function
 var $datacreated = [$contactName,$accountName,$caseNumber,$productName,$IBName,$WONumber];
@@ -134,7 +136,10 @@ for (var i = 0; i < $datacreated.length; i++) {
 	$bo_act_common.cleanUpfunction($datacreated[i]);
 }
 $bo_act_SFW.deleteWizards("Work Order", $wizardIDName);
-$9802.end();
+$bo_act_customAction.deleteCustomAction("Work Order", $actionTitle);
+$bo_act_salesforceSetUp.deleteapexClasses($className);
+
+$SFW_HandoveredFunctionalityOnWebServiceFail.end();
 
 
 

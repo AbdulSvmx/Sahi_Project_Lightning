@@ -33,7 +33,7 @@ this.addParametersForWebService = function($parameterName,$parameterValueType, $
 	_click(_button("Add"));
 	_setValue($bo_pg_customAction.txt_parameterName,$parameterName);
 	_setSelected($bo_pg_customAction.sel_parameterValueType,$parameterValueType);
-	_setValue($bo_pg_customAction.txt_parameterValue,$parametervalue);
+	_setSelected($bo_pg_customAction.txt_parameterValue,$parametervalue);
 	_click($bo_pg_customAction.btn_quickSave);		
 };
 

@@ -8,8 +8,8 @@ _setSpeed(100);
 //$bo_act_login.login($g_url, $bac_unBase, $bac_pwdBase);
 //var $installedProduct1 =$bo_act_installedProduct.createInstalledProduct("pro311201711383","Acc2112017161025","");
 
-$bo_act_login.login($g_url, "vansys@pqtpart1.com", "servicemax2");
-var $installedProduct1 =$bo_act_installedProduct.createInstalledProduct("pro3112017113150","Acc3112017113121","");
+$bo_act_login.login($g_url, $bac_unBase, $bac_pwdBase);
+var $PMPlan = $bo_act_PMPlan.createUsageOrFrequencyBasedPMPlan("Scon17112017143519","PMT1112017153825","IB17112017142831");
 
 
 //_call(location.reload());
