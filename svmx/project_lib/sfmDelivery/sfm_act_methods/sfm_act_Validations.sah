@@ -1,0 +1,45 @@
+var $sfm_act_Validations = new function sfm_act_Validations() {
+	this.validateTc7011 = function(){
+		var $count = 0;
+		// Get Contents of the table.
+		var $tableContents = _getTableContents(_table("list")); 
+		// Get Table Headers.
+		var $tableHeaders = $tableContents[0];
+		// Verify if the Table Headers contain "Line Type"
+		var $isLineTypePresent = $tableHeaders.indexOf("Line Type");
+		// If Header is present
+		if($isLineTypePresent != -1){
+			// Get Contents under the Table Header "Line Type"
+			var $lineTypes = _getTableContents(_table("list"),["Line Type"] );
+			// Convert Array to String
+			var $lineTypeString = $lineTypes.toString();
+			_log($lineTypeString);
+			// Check if Labor is Present
+			var $isLaborPresent = $lineTypeString.search("Labor");
+			if($isLaborPresent != -1){
+			$count++;
+			}
+			// Check if Parts is Present
+			var $isPartsPresent = $lineTypeString.search("Parts");
+			if($isPartsPresent != -1){
+			$count++;
+			}
+			// Check if Expenses is Present 
+			var $isExpensesPresent = $lineTypeString.search("Expenses");
+			if($isExpensesPresent != -1){
+			$count++;
+			}
+			_log($count);
+			if($count==3){
+				_log("Pass");
+				}
+				else {
+				_log("Fail");
+				}
+		}
+		else{
+			_log("Column Not Present");
+		}
+		
+	};
+};
