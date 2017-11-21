@@ -36,6 +36,7 @@ var $bo_pg_Cases = new function bo_pg_Cases(){
 	this.txt_slaTermOnEdit = _textbox(0,_rightOf(_label("SLA Terms")));
 	this.sel_TypeOnEdit = _select(0,_rightOf(_label("Type")));
 	this.txt_actualRestorationOnEdit = _link(0,_rightOf(_label("Actual Restoration")));
+	this.txt_actualInitialResponseOnEdit
 	
 };
 
