@@ -8,6 +8,7 @@ var $dc_act_navigation = new function dc_act_navigation() {
 	 * Navigates to Home  page
 	 * @returns boolean
 	 */
+	
 	this.navigateToHome = function() {
 		_click($an_pg_home.link_home);
 		_wait(60000, _isVisible($an_pg_home.link_servicemaxSetup));

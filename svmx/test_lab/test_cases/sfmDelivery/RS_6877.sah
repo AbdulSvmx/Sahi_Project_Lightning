@@ -1,0 +1,17 @@
+var $rs_6877 = _testcase("RS_6877","Verify Lookup Context Header to header.");
+$rs_6877.start();
+$sfmName = $bo_act_common.generateRandomName("SFM_Auto_");
+//$sfmName = "SFM_Auto_2011201714528";
+$wizTitle = $bo_act_common.generateRandomName("SFM Wiz");
+//$wizTitle = "sfm_wiz2011201714178";
+$sfmPgLayoutName =	$bo_act_common.generateRandomName("SFM_Auto_Page");
+$bo_act_login.login($g_url,$sfmUsn,$sfmPwd);
+$bo_act_navigation.navigateToSfmTransactionDesigner();
+$sfm_act_Transactions.newsfm6877($sfmName,$sfmPgLayoutName);
+$bo_act_navigation.navigateToSfmWizard();
+$sfm_act_createCustomWizard.chooseObject("Work Order");
+$sfm_act_createCustomWizard.addManageWizSteps($wizTitle,"SFM",$sfmName,"Sysadmin01 Group");
+$sfm_act_createCustomWizard.createBlankWo();
+$sfm_act_createCustomWizard.clickWizardBtn($sfmName);
+$sfm_act_createCustomWizard.verify6877();
+$rs_6877.end();	

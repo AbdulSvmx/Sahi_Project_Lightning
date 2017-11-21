@@ -12,7 +12,11 @@ var $sfm_pg_screenDesigner = new function sfm_pg_screenDesigner(){
 	this.chk_allowNew= _f("main").s_checkbox("Allow New");
 	this.chk_allowDelete= _f("main").s_checkbox("Allow Delete");
 	this.data_Group= _f("main").s_datagroup("dataGroup[3]");
-	this.lbl_part= _f("main").s_label("/Part/");
+	this.lbl_part= _f("main").s_label("Part");
 	this.section_Parts= _f("main").s_richtext("Work Detail (Work Order)");
+	this.sel_allowZeroLines= _f("main").s_combobox("ComboBox8505");
+	this.sel_allowMultiAdd= _f("main").s_combobox("ComboBox8513");
+	this.lbl_contact= _f("main").s_label("Contact");
+	this.lbl_autoContact= _f("main").s_label("AutoContact[1]");
 	
 };

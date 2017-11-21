@@ -3,8 +3,14 @@ var $sfm_pg_wo = new function sfm_pg_wo() {
 	this.btn_wo_new = _button("/New/");
 	this.btn_wo_save = _submit("/Save/");
 	this.link_wo = _link("Work Orders");
-	this.cell_wizard =function($name){
-		_cell($name);
+	this.assert_wizard =function($wizTitle){
+		if(_exists(_cell($wizTitle))){
+			_log("Pass");
+		}
+		else{
+			_log("Fail");
+		}
+//		_assertExists(_cell($wizTitle),"Wizard Not Present");
 	};
 	this.clickTab = function($tabName){
 		_click(_link($tabName));

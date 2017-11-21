@@ -63,10 +63,8 @@ var $sfm_act_SFM = new function sfm_act_SFM() {
 					$bo_pg_sfmTransactionAndDesigner.txt_standardSfmTransactionQuickFind,
 					$sfmName);
 		}
-		if (_isVisible(_f("main").s_checkbox(0).leftOf(
-				_f("main").s_label($sfmName)))) {
-			_click(_f("main").s_checkbox(0).leftOf(
-					_f("main").s_label($sfmName), 10, 10));
+		if (_isVisible(_f("main").s_checkbox(0).leftOf(_f("main").s_label($sfmName)))) {
+			_click(_f("main").s_checkbox(0).leftOf(_f("main").s_label($sfmName), 10, 10));
 
 		} else {
 			_setValue(
@@ -74,21 +72,16 @@ var $sfm_act_SFM = new function sfm_act_SFM() {
 					$sfmName);
 		}
 		// _setStrictVisibilityCheck(true);
-		if (_isVisible(_f("main").s_checkbox("/Chk/").leftOf(
-				_f("main").s_label($sfmName), 10, 10))) {
+		if (_isVisible(_f("main").s_checkbox("/Chk/").leftOf(_f("main").s_label($sfmName), 10, 10))) {
 			_wait(3000);
-			_click(_f("main").s_checkbox("/Chk/").leftOf(
-					_f("main").s_label($sfmName), 10, 10));
+			_click(_f("main").s_checkbox("/Chk/").leftOf(_f("main").s_label($sfmName), 10, 10));
 
-		} else if (_isVisible(_f("main").s_checkbox(2).leftOf(
-				_f("main").s_label($sfmName), 10, 10))) {
+		} else if (_isVisible(_f("main").s_checkbox(2).leftOf(_f("main").s_label($sfmName), 10, 10))) {
 			_wait(3000);
-			_click(_f("main").s_checkbox(2).leftOf(
-					_f("main").s_label($sfmName), 10, 10));
+			_click(_f("main").s_checkbox(2).leftOf(_f("main").s_label($sfmName), 10, 10));
 
 		} else {
-			_click(_f("main").s_checkbox("/CheckBox/").leftOf(
-					_f("main").s_label($sfmName), 10, 10));
+			_click(_f("main").s_checkbox("/CheckBox/").leftOf(_f("main").s_label($sfmName), 10, 10));
 		}
 		// _setStrictVisibilityCheck(false);
 
