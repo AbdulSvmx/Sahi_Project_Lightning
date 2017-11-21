@@ -3,7 +3,42 @@
  * SFM transaction & designer page object repository
  */
 var $bo_pg_sfmTransactionAndDesigner = new function bo_pg_sfmTransactionAndDesigner() {
-
+	
+	
+	/**
+	 Added by Safi
+	 */
+	this.btn_mappings = _f("main").tab("Mapping(s)");
+	this.btn_addMappings = _f("main").s_button("New[2]");
+	this.btn_toggle = _f("main").s_togglebutton("I want to choose a field from the list[4]");
+	
+	this.selMapping = _f("main").s_combobox("searchCombo[2]");
+	
+	
+	//this.txt_comboBox = _f("main").s_combobox("valuesCombo[1]");
+	
+	
+	//this.btn_dropdown = _f("main").s_combobox("valuesCombo[1]");
+	//this.lbl_tmrw = _f("main").s_label("Tomorrow");
+	
+	//this.btn_searchSelect = _f("main").s_button("Search and Select");
+	//this.txt_accountSearch = _f("main").s_textinput("lookUpSearchField");
+	//this.btn_accountSearch = _f("main").s_button("Button17181");
+	//this.lbl_select = _f("main").listbasecontentholder(11);
+	//this.btn_select = _f("main").s_button("Select");
+	this.txt_mappingName = _f("main").s_textinput("Save this map as[1]");
+	this.txt_mapID = _f("main").s_textinput("Input ID Here[2]");
+	this.btn_saveMap = _f("main").s_button("Save[2]");
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
     this.txt_standardSfmTransactionQuickFind= _f("main").s_textinput("searchText[2]");
     this.btn_standardSfmTransaction= _f("main").tab("Standard SFM Transactions");
     this.btn_yourCustomSfmTransactions = _f("main").tab("Your Custom Sjavascript:void(0)FM Transactions");
