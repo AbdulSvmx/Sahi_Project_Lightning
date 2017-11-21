@@ -5,15 +5,15 @@ var $isCustom = false;
 var $sfmTemplate = "SVMXSTD: Manage WO Usage Lines";
 var $sfmTemplateSaveAsName = $sfmName;
 var $containerName = ["Billable Line Price","Billable Line Price","Billable Line Price"];
-var $fieldName=["Expense Type","Received City","Estimated Price Per Unit"];
+var $fieldName=["Estimated Price Per Unit", "Billing Information", "Received City"];
 var $targetObject ="Work Detail (Work Order)";
 var $rulename ="5345Rule";
-var $ruleDescription ="Line Qty <= 5, Estimated Price Per Unit <2000, Expense Type starts with Food=Breakfast, Received City doesnot contain Mangalore";
+var $ruleDescription ="Line Qty <= 5, Estimated Price Per Unit <2000, ,Deleted starts with Y, Received City doesnot contain Mangalore";
 
-var $fieldArray = ["Line Qty","Estimated Price Per Unit","Received City","Expense Type"];
-var $conditionArray = ["Less or Equal To ","Less Than", "Does Not Contain", "Starts With"];
-var $operandArray =["Value", "Value", "Value", "Value"];
-var $valueArray =["5", "2000", "Mangalore", "Food - Breakfast"];
+var $fieldArray = ["Line Qty","Estimated Price Per Unit","Billing Information","Received City"];
+var $conditionArray = ["Less or Equal To ","Less Than", "Is Not Null", "Does Not Contain"];
+var $operandArray =["Value", "Value", "", "Value"];
+var $valueArray =["5", "2000", "", "Mangalore"];
 var $advExpr= "(1 AND (2 AND 3) AND 4)";
 var $messageType = "Confirmation";
 
