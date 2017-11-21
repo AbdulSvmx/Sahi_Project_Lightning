@@ -10,7 +10,6 @@ script1.src = '/_s_/sprc/salesforce/apex.js';
 document.head.appendChild(script1);
 //</browser>
 
-
 // Add All Global Variables here
 var $g_url = "https://test.salesforce.com/";
 var $g_un = "bhupen@back17.com";// "bhupendra.s@dev.tool2.com";
