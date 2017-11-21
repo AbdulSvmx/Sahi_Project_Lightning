@@ -71,7 +71,8 @@ var $an_act_FTF = new function an_act_FTF() {
 	
 	this.ftf_runEngine = function($emailId)
 	{
-	
+		_click($an_pg_ftf.metrics);
+		_click($an_pg_ftf.btn_first_time_to_fix);
 		_click($an_pg_ftf.btn_click_Schedule_Notifications);
 		_click($an_pg_mttr.list_timezone);
 	    _click($an_pg_mttr.btn_ist_timezone);
