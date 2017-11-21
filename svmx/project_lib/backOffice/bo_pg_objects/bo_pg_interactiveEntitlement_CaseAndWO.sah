@@ -20,6 +20,7 @@ var $bo_pg_interactiveEntitlement_CaseAndWO = new function bo_pg_interactiveEnti
     _click(_div("/svmx-grid-radioheader/",_near(_div($warrantyName,_near(_span("Select Warranty/Contract"))))));
   
 	};
+	
 	this.btn_applySelection = _span("Apply Selection");
 	this.btn_saveEntitlementPSLine = _span("Save Entitlement");
 	this.btn_cancelEntitlementPSLinePage = _span("Cancel");
@@ -50,5 +51,17 @@ var $bo_pg_interactiveEntitlement_CaseAndWO = new function bo_pg_interactiveEnti
 	 * WO -> Object Related to Check INTERACTIVE Entitlement On Work Order []
 	 */
 	this.chk_IncidentNotCovered = _div("/svmx-grid-radiocolumn-contentalign-undefined/",_near(_div("Not Covered")));
+	
+    this.selectSConOnCheckEntmPage = function($sconName){
+			
+    	_click(_div("/svmx-grid-radioheader/",_near(_link($sconName,_near(_span("Contract Name/Number"))))));
+		  
+		};
 		
+		this.selectWarrantyOnCheckEntmPage = function($warrantyName){
+				
+		_click(_div("/svmx-grid-radioheader/",_near(_div($warrantyName,_near(_span("/Warranty Name/"))))));
+				  
+		};
+	
 };
