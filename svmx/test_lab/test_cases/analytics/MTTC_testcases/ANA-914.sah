@@ -69,7 +69,6 @@ var $varmttc1;
 var $ana_configuration_Name1;
 var $ana_product1;
 var $ana_technician1;
-for(var $i=0;$ana_WO1==null;$i++){
 	
 var $ana_query_mttc1 = "Select SVMXC__Work_Order__c , SVMXC__Account__c, SVMXC__Configuration_Name__c ,SVMXC__Product__c,SVMXC__Technician__c,SVMXC__Service_Delivered_On__c,SVMXC__Completion_Time__c from SVMXC__SPM_Mean_Time_To_Complete__c where SVMXC__Work_Order__c ='"+ $WO1 +"'";
 var $ana_result_mttc1 = $op_act_sForceApiCall.sForceQuery($un, $pwd, $ana_query_mttc1,"query");
@@ -82,7 +81,7 @@ $ana_result_mttc1.forEach(function($varmttc1) {
 	$ana_product1=$varmttc1.SVMXC__Product__c;
 	$ana_technician1=$varmttc1.SVMXC__Technician__c;
 	});
-}
+
 _assertEqual($ana_WO1, $WO1);
 _assertEqual($Account1 , $ana_WO_Account1);
 _assertEqual( $Technician1, $ana_technician1);
@@ -129,7 +128,7 @@ _click($an_pg_rv.btn_serviceperformancemetricsetup);
 $an_act_MTTC.MTTC_runEngine("vinaya.v@servicemax.com");
 
 var $varmttc2;
-for(var $i=0;$ana_WO2==null;$i++){
+
 var $ana_query_mttc2 = "Select SVMXC__Work_Order__c,SVMXC__Completion_Time__c from SVMXC__SPM_Mean_Time_To_Complete__c where SVMXC__Work_Order__c ='"+ $WO2 +"'";
 var $ana_result_mttc2 = $op_act_sForceApiCall.sForceQuery($un, $pwd, $ana_query_mttc2,"query");
 _wait(2000);
@@ -137,7 +136,7 @@ $ana_result_mttc2.forEach(function($varmttc2) {
 	$ana_WO2=$varmttc2.SVMXC__Work_Order__c;
 	$ana_Completion_Time2=$varmttc2.SVMXC__Completion_Time__c;
 	});
-}
+
 
 
 var $ana_query_mttc1 = "Select SVMXC__Work_Order__c , SVMXC__Account__c, SVMXC__Configuration_Name__c ,SVMXC__Product__c,SVMXC__Technician__c,SVMXC__Service_Delivered_On__c,SVMXC__Completion_Time__c from SVMXC__SPM_Mean_Time_To_Complete__c where SVMXC__Work_Order__c ='"+ $WO1 +"'";

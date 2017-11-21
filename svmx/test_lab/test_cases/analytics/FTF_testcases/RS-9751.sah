@@ -62,7 +62,7 @@ _log($WO2);
 
 //create calc and save 
 $an_act_FTF.ftf_closed_wo_calc_sr();
-
+_wait(500);
 $an_act_FTF.ftf_runEngine("vinaya.v@servicemax.com");
 
 var $ana_sr1;
