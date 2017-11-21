@@ -5,9 +5,9 @@ var $sfm_act_createCustomWizard = new function sfm_act_createCustomWizard() {
 		_click($sfm_pg_wizards.btn_customNew);
 	};
 	
-	this.addManageWizSteps = function($wizStepType,$wizStepName,$profile){
+	this.addManageWizSteps = function($wizTitle,$wizStepType,$wizStepName,$profile){
 //		$title = $wizTitle;
-		$wizTitle = $bo_act_common.generateRandomName("Auto Wiz ");
+//		$wizTitle = $bo_act_common.generateRandomName("Auto Wiz ");
 		var $wizId = $wizTitle.toLowerCase().replace(/ /g, "_");
 //		_log($wizTitle);
 //		_log($wizId);
@@ -121,10 +121,10 @@ var $sfm_act_createCustomWizard = new function sfm_act_createCustomWizard() {
 		$month = $todayDate.getMonth()+1;
 		$year = $todayDate.getFullYear();
 		$currentDate = $date+"/"+$month+"/"+$year;
-		_log($todayDate);
-		_log($date);
-		_log($month);
-		_log($year);
+//		_log($todayDate);
+//		_log($date);
+//		_log($month);
+//		_log($year);
 		_click($sfm_pg_wizardWindow.tab_travel);
 		_setStrictVisibilityCheck(true);
 		_wait(3000);
@@ -134,13 +134,46 @@ var $sfm_act_createCustomWizard = new function sfm_act_createCustomWizard() {
 		_wait(5000);
 		_setValue($sfm_pg_wizardWindow.txt_startDate,$currentDate);
 		_wait(5000);
-		_setValue($sfm_pg_wizardWindow.txt_endDate,$currentDate+1);
+		_setValue($sfm_pg_wizardWindow.txt_endDate,$currentDate);
 		_click($sfm_pg_wizardWindow.btn_update);
 		
 	};
 	
-	this.saveWizard = function(_) {
+	this.saveWizard = function() {
 		_click($sfm_pg_wizardWindow.btn_save);
+	};
+	
+	this.verify6877 = function() {
+		var $count=0;
+		_selectDomain();
+		_click($sfm_pg_wizardWindow.lookup_account);
+		_wait(3000);
+		_setStrictVisibilityCheck(true);
+		_click($sfm_pg_wizardWindow.icon_search);
+		_click($sfm_pg_wizardWindow.account_option);
+		_click($sfm_pg_wizardWindow.btn_select);
+		_click($sfm_pg_wizardWindow.lookup_contact);
+		_wait(3000);
+//		_setStrictVisibilityCheck(true);
+		_click($sfm_pg_wizardWindow.icon_search);
+		var $divs= _collect("_div","/.*/",_under(_div("Account ID")));
+		_log($divs.length);
+//		var $divArray = new Array();
+		for (var $i=1; $i<$divs.length; $i++) {
+			if(_getText($divs[$i])!="Acme"){
+				$count++;
+			}
+			
+//			$divArray.push(_getText($divs[$i]));
+	}
+//		_log($divArray);
+		if($count==0){
+			_log("Pass");
+		}
+		else{
+			_log("Fail");
+		}
+			
 	};
 	
 };
