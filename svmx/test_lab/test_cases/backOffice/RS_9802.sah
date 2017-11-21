@@ -106,7 +106,7 @@ var $wizardIDName = $bo_act_common.generateRandomName("SFWId");
 $bo_act_navigation.navigateToSfmWizard();
 $bo_act_SFW.createWizardGeneralInfo("Work Order", $wizardTitleName, $wizardIDName);
 $bo_act_SFW.createWizardStepwithHandOver("SFM", "Create RMA from Work Order", "Interactive",true);
-$bo_act_SFW.createWizardStepwithHandOver("Others", $actionTitle, "Interactive",false);
+$bo_act_SFW.createOthersWizardStepwithHandOver("Others", $actionTitle,false);
 $bo_act_SFW.quickSaveSFWizard();
 $bo_act_SFW.saveAndClose();
 
@@ -120,8 +120,8 @@ _selectDomain("/svmx/");
 _assertExists(_button("/Create RMA from Work Order/",_near(_cell($wizardTitleName))));
 _click(_button("/Create RMA from Work Order/",_near(_cell($wizardTitleName))));
 _selectDomain();
-_click($bo_pg_sfmWizard.btn_deleteicon);
-_click($bo_pg_sfmWizard.btn_saveicon);
+_click(_image("/svmx-sfmd-delete-icon/"));
+_click(_span("/svmx-sfmd-save-icon/"));
 _assertContainsText("Work Order updated",_div("messageText"));
 
 //Clean up function
