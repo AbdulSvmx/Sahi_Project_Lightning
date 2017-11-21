@@ -1,7 +1,6 @@
 /**
  * Cloning TDM016/Manage Work Order Lines - Usage process and adding fields to
  * screen
- * Create a new process
  */
 
 var $sfm_act_SFM = new function sfm_act_SFM() {
@@ -38,7 +37,7 @@ var $sfm_act_SFM = new function sfm_act_SFM() {
 						$containerName[$i]);
 			} else {
 				_setValue(_f("main").s_hscrollbar("horizontalScrollBar[2]"),
-				"00");
+						"00");
 				_click(_f("main").s_datagroup("dataGroup[3]").near(
 						_f("main").s_richtext($containerName[$i])));
 				_setValue(_f("main").s_textinput("searchText[4]"),
@@ -101,25 +100,6 @@ var $sfm_act_SFM = new function sfm_act_SFM() {
 		_check(_f("main").s_checkbox("Required"));
 		_click(_f("main").s_button("Save[3]"));
 		_wait(3000, _isVisible(_f("main").label("Page saved")));
-
-	};
-
-	this.cloneSourceToTarget = function($sfmName,$sfmTransaction, $sourceHeader,  $targetHeader ){
-		$bo_act_navigation.navigateToSfmTransactionDesigner();
-		_setSpeed(500);
-		_click($bo_pg_sfmTransactionAndDesigner.btn_newSFM);
-		_wait(60000, _isVisible($bo_pg_sfmTransactionAndDesigner.txt_name));
-		_setValue($bo_pg_sfmTransactionAndDesigner.txt_name, $sfmName);
-		_setValue($bo_pg_sfmTransactionAndDesigner.txt_sfmTransactionId, "");
-		_setValue($bo_pg_sfmTransactionAndDesigner.txt_sfmTransactionId,$sfmName);
-		_setSelected($bo_pg_sfmTransactionAndDesigner.lbl_checklistOb,$sfmTransaction);
-		_setSelected(_f("main").s_combobox("objCombo1"), "Work Order");
-		//_setSelected($bo_pg_sfmTransactionAndDesigner.sourceComboBox,$sourceHeader );
-		_check($bo_pg_sfmTransactionAndDesigner.childSource_chkBox);
-		_setSelected($bo_pg_sfmTransactionAndDesigner.combo_CTRecord,$targetHeader);
-		_check($bo_pg_sfmTransactionAndDesigner.childCTRecord_chkBox);
-		
-
 
 	};
 
