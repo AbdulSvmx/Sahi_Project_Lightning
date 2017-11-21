@@ -18,6 +18,37 @@ var $bo_act_interactiveEntitlement_WO = new function bo_act_interactiveEntitleme
 	};
 	
 	/**
+	 * Perform Interactive Entitlement WO Using Service Contract
+	 * 
+	 */
+	this.performInteractiveEntitlementWO_UsingScon = function($WO_Number, $sconName) {
+		//Navigate to the and click on check Entitlement WO
+		$bo_act_workOrders.checkEntitlement($WO_Number);
+		_wait(15000, _isVisible($bo_pg_interactiveEntitlement_CaseAndWO.txt_checkEntitlement_WOPage));
+		_click($bo_pg_interactiveEntitlement_CaseAndWO.btn_checkEntitlement);
+		$bo_pg_interactiveEntitlement_CaseAndWO.selectSConOnCheckEntmPage($sconName);
+		_click($bo_pg_interactiveEntitlement_CaseAndWO.btn_saveEntitlementPSLine);
+		_wait(15000, _isVisible($bo_pg_workOrders.txt_workOrderDetails));
+		
+	};
+	
+	/**
+	 * Perform Interactive Entitlement WO Using Warranty Terms
+	 * 
+	 */
+	this.performInteractiveEntitlementWO_UsingWarranty = function($WO_Number, $warrantyName) {
+		//Navigate to the and click on check Entitlement WO
+		$bo_act_workOrders.checkEntitlement($WO_Number);
+		_wait(30000, _isVisible($bo_pg_interactiveEntitlement_CaseAndWO.txt_checkEntitlement_WOPage));
+		//_call(top.location.reload());
+		_click($bo_pg_interactiveEntitlement_CaseAndWO.btn_checkEntitlement);
+		$bo_pg_interactiveEntitlement_CaseAndWO.selectWarrantyOnCheckEntmPage($warrantyName);
+		_click($bo_pg_interactiveEntitlement_CaseAndWO.btn_saveEntitlementPSLine);
+		_wait(15000, _isVisible($bo_pg_workOrders.txt_workOrderDetails));
+		
+	};
+	
+	/**
 	 * Perform Interactive Entitlement WO PS Lines
 	 * 
 	 */
