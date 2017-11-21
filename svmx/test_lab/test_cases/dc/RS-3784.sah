@@ -1,60 +1,26 @@
 var $url= "http://test.salesforce.com" ;
 var $un = "commonuser@svmxpqt.com";
 var $pwd = "servicemax2";
+var $consoleViewName="Work Order DC3 View";
+var $consoleViewId=	"Work Order DC3 View";
+	
  
-var $RS_3785 = _testcase("RS_3784", "Setting up of DC Console Views");
-$RS_3785.start();
+var $RS_3784 = _testcase("RS_3784", "Setting up of DC Console Views");
+$RS_3784.start();
+_setSpeed(1000);
 
 $bo_act_login.login($url, $un, $pwd);
-_click($dc_pg_consoleViews.link_home);
-_click($dc_pg_consoleViews.link_servicemaxSetup);
-_wait(60000,_isVisible($dc_pg_consoleViews.link_DispatchManagement));
-_click($dc_pg_consoleViews.link_DispatchManagement);
-_wait(60000,_isVisible($dc_pg_consoleViews.link_DispatchConsoleViews));
-_click($dc_pg_consoleViews.link_DispatchConsoleViews);
-_wait(5000, _isVisible(_heading2("mainTitle")));
-_log("Dspatch Console View Page is loaded successfully");
-_assertExists($dc_pg_consoleViews.txt_manageViewHeading,"DC Console Views Page could not be loaded");
-_assertExists($dc_pg_consoleViews.txt_standardViewHeading,"DC Console Views Page could not be loaded");
-_assertExists($dc_pg_consoleViews.txt_customViewHeading,"DC Console Views Page could not be loaded");
-_click(btn_new);
+$dc_act_consoleViews.verifyDispatchConsoleViewPageLoad();
+$dc_act_consoleViews.createDispatchConsoleViewForWorkOrder($consoleViewName, $consoleViewId);
+
+$expectedMessage = "Success:Record(s) saved successfully";
+$actualMessage=_getText(_div("messageText"));
+_log($actualMessage);
+
+_assertEqual($expectedMessage,$actualMessage,"DC Console Views could not be updated");
+_click($dc_pg_consoleViews.btn_saveAndClose);
 _wait(60000,_isVisible($dc_pg_consoleViews.txt_customViewHeading));
 
+_assertExists($dc_pg_consoleViews.txtSavedConsoleView,"Created DC Console View not found");
 
-_setSelected($dc_pg_consoleViews.sel_object, "Work Order");
-_setValue(txtViewName, "Work Order DC View");
-_setValue(txtViewId, "Work Order DC View");
-_setSelected($dc_pg_consoleViews.selViewFor, "Grid And Map");
-
-
-_setSelected($dc_pg_consoleViews.sel_woFieldName, "Order Status"); 
-_setSelected($dc_pg_consoleViews.sel_woOperator, "Equal"); 
-_setValue(txt_woFieldValue, "Open");
-
-
-/*
-_wait(10000);
-$dc_pg_consoleViews.verifyDispatchConsoleFields();
-$dc_pg_consoleViews.setDispatchConsoleFields();
-_wait(10000);
-
-$expectedMessage="Success:Saved successfully";
-$actualMessage=_getText(_div("message confirmM3"));
-_log($actualMessage);
-_assertEqual($expectedMessage,$actualMessage,"DC Console Fields could not be updated");
- 
-var $valueBeforeReset=_getSelectedText($dc_pg_consoleViews.sel_updateField2Value);
-_wait(3000);
-_logOutput("Value Before Reset button click", $valueBeforeReset);
-
-_setSelected($dc_pg_consoleViews.sel_updateField2, "Invoice Number");
-_wait(1000);
-_click(_button("Reset"));
-var $valueAfterReset=_getSelectedText($dc_pg_consoleViews.sel_updateField2Value);
-_logOutput("Value After Reset button click",$valueAfterReset); 
-
-//Assert for Reset Functionality
-_assertTrue($valueAfterReset == $valueBeforeReset," Reset functionality failed");
- 
-*/
  
