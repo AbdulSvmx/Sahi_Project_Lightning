@@ -16,7 +16,16 @@ var $Location1 = $bo_act_locations.createLocation($recordType, $accountName, $st
 $bo_act_locations.editLocation($Location1);
 var $Location2 = $bo_act_locations.createLocation($recordType, $accountName, $street, $country, $zipCode);
 $bo_act_locations.editLocation($Location2);
-// Adding stock adjustment
-$bo_act_locations.addStockAdjustment("Location1", "ProName1","10","Excess");
-$bo_act_locations.addStockAdjustment("Location2", "ProName2","10","Excess");
-_click(_link("Stock Transfer"));
+// Create stock adjustments
+var $StockAdjustment1 = $bo_act_stockAdjustment.createStockAdjustment($Location1,$proName1 ,"10", "Excess");
+var $StockAdjustment2 = $bo_act_stockAdjustment.createStockAdjustment($Location1,$proName2 ,"10", "Excess");
+var $stockTransfer1 = $bo_act_stockTransfer.createStockTransfer($Location1, $Location2);
+var $Editlines = $bo_act_stockTransfer.Editlines($proName1, "3");
+var $Editlines = $bo_act_stockTransfer.Editlines($proName2, "5");
+var $posttoInventory = $bo_act_stockTransfer.postToInventorySerialised($stockTransfer1, "3");
+//Navigaet to Loc and click loc name
+_click(_link("/STK-/",_near(_tableHeader("Name"),_under(_heading3("Product Stock")))));
+_click(_link("/SHIST-/",_near(_tableHeader("Name"),_under(_heading3("Stock History (Product Stock)")))));
+_assertEqual("3.0000",_getText(_div(0,_rightOf(_span("/Transaction Qty/")))),"Qty Transferred is not matching");
+_assertEqual("5.0000",_getText(_div(0,_rightOf(_span("/Qty before change/")))),"Qty before change is not matching");
+_assertEqual("8.0000",_getText(_div(0,_rightOf(_span("/Qty after change/")))),"Qty after change is not matching");

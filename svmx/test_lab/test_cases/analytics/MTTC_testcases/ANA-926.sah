@@ -10,7 +10,7 @@ var $Product = $data[4]["Product"];
 var $OrderStatus = $data[4]["OrderStatus"];
 var $Closedon = $data[4]["ClosedOn"];
 $bo_act_login.login($url, $un, $pwd);
-_wait(1000);
+
 var $WO;
 var $created_by;
 var $closed_on;
@@ -20,7 +20,7 @@ var $query_wo_first = "Select Name , Id  , SVMXC__Closed_On__c ,CreatedDate,SVMX
 var $fetchwoquery = $op_act_sForceApiCall.sForceQuery($un, $pwd, $insert_wo_first ,"create");
 
 var $store_first_wo = $op_act_sForceApiCall.sForceQuery($un, $pwd, $query_wo_first,"query");
-_wait(1000);
+
 
 $store_first_wo.forEach(function($ana_var) {
 	$WO = $ana_var.Id;
@@ -37,9 +37,6 @@ _log($edate);
 var $datevalue = Math.round((($stdate.getTime() - $edate.getTime()) / 1000) / (-60)); 
 _log($datevalue);
 
-
- 
-
 $an_act_MTTC.MTTC_custom_Expression("MTTC_custom_Expression");
 $an_act_MTTC.MTTC_runEngine("vinaya.v@servicemax.com");
 
@@ -52,7 +49,7 @@ var $ana_configuration_Name;
 var $ana_product;
 var $custum_checkbox;
 var $ana_technician;
-for(var $i=0;$ana_WO==null;$i++){
+
 	
 var $ana_query_mttc = "Select SVMXC__Work_Order__c , SVMXC__Account__c, SVMXC__Configuration_Name__c ,SVMXC__Product__c,SVMXC__Technician__c,SVMXC__Service_Delivered_On__c,SVMXC__Completion_Time__c,Custom_checkbox__c from SVMXC__SPM_Mean_Time_To_Complete__c where SVMXC__Work_Order__c ='"+ $WO +"'";
 var $ana_result_mttc = $op_act_sForceApiCall.sForceQuery($un, $pwd, $ana_query_mttc,"query");
@@ -66,7 +63,7 @@ $ana_result_mttc.forEach(function($varmttc) {
 	$ana_product=$varmttc.SVMXC__Product__c;
 	$ana_technician=$varmttc.SVMXC__Technician__c;
 	});
-}
+
 
 _assertEqual($ana_WO, $WO);
 _assertEqual($Account , $ana_WO_Account);

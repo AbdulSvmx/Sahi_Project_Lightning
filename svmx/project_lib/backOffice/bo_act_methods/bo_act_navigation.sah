@@ -166,7 +166,7 @@ var $bo_act_navigation = new function bo_act_navigation() {
  	_click($bo_pg_servicemaxSetup.btn_serviceFlowManager);
  	_click($bo_pg_servicemaxSetup.btn_sfmWizard);
  	_setSpeed(3000);
- 	return $callBack.returnResult(_exists($bo_pg_sfmWizard.wizardLabel));
+ 	//return $callBack.returnResult(_exists($bo_pg_sfmWizard.wizardLabel));
 
      };
 
@@ -178,15 +178,21 @@ var $bo_act_navigation = new function bo_act_navigation() {
  	 this.navigateToSvmxSetup();
  	_click($bo_pg_servicemaxSetup.btn_serviceFlowManager);
  	_click($bo_pg_servicemaxSetup.btn_sfmAppPermission);
-	_wait(30000);
+	_wait(3000);
  	
     };
+	this.navigateToScheduledSFM=function(){
+		this.navigateToSvmxSetup();
+		_click($bo_pg_servicemaxSetup.btn_serviceFlowManager);
+		_click($bo_pg_servicemaxSetup.btn_scheduledSFM);
+		_wait(3000);
+	};
     
 	this.navigateToSfmCustomAction = function() {
- 	 this.navigateToSvmxSetup();
- 	_click($bo_pg_servicemaxSetup.btn_serviceFlowManager);
- 	_click($bo_pg_servicemaxSetup.btn_sfmCustomAction);
-	_wait(30000);
+		 this.navigateToSvmxSetup();
+		_click($bo_pg_servicemaxSetup.btn_serviceFlowManager);
+		_click($bo_pg_servicemaxSetup.btn_sfmCustomAction);
+		_wait(3000);
  	
     };
      
@@ -219,8 +225,7 @@ var $bo_act_navigation = new function bo_act_navigation() {
  	 this.navigateToSvmxSetup();
  	_click($bo_pg_servicemaxSetup.btn_warrantiesAndServiceContracts);
  	_click($bo_pg_servicemaxSetup.btn_activityMaster);
- 	_wait(3000);
- 	//_setSpeed(3000);
+ 	_setSpeed(3000);
  	//return $callBack.returnResult(_exists($bo_pg_sfmWizard.wizardLabel));
      };
      
@@ -231,9 +236,20 @@ var $bo_act_navigation = new function bo_act_navigation() {
  	 this.navigateToSvmxSetup();
  	_click($bo_pg_servicemaxSetup.btn_warrantiesAndServiceContracts);
  	_click($bo_pg_servicemaxSetup.btn_servicePricebooks);
+ 	_setSpeed(3000);
+ 	//return $callBack.returnResult(_exists($bo_pg_sfmWizard.wizardLabel));
+     }; 
+     
+     /**
+      * Navigates to Service Option
+      */
+     this.navigateToServiceType = function() {
+ 	 this.navigateToSvmxSetup();
+ 	_click($bo_pg_servicemaxSetup.btn_warrantiesAndServiceContracts);
+ 	_click($bo_pg_servicemaxSetup.btn_services);
  	//_setSpeed(3000);
  	//return $callBack.returnResult(_exists($bo_pg_sfmWizard.wizardLabel));
-     };     
+     };
      
      this.navigateToWorkOrdersTab = function(){
     	 _click($bo_pg_home.btn_allTabs);
@@ -253,5 +269,10 @@ var $bo_act_navigation = new function bo_act_navigation() {
     	 _click(_link($searchValue));
     	 
      };
+	this.navigateToCounterRule=function(){
+			this.navigateToSvmxSetup();
+		_click($bo_pg_servicemaxSetup.btn_instalBaseAndPM);
+		_click($bo_pg_servicemaxSetup.btn_counterRule);		
+	};
 
 };

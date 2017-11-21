@@ -17,11 +17,22 @@ var $bo_pg_Cases = new function bo_pg_Cases(){
 	this.sel_selectCaseOrigin = _select(0,_rightOf(_label("/\\*Case Origin|^Case Origin/")));
 	this.btn_save = _submit(" Save ");
     this.txt_caseNumber = _heading2("pageDescription");
+	//this.txt_caseNumber = _div(0,_rightOf(_cell("Case Number")));
 	this.btn_editCase = _button(" Edit "); 
 	this.btn_cloneCase = _button(" Clone ");
 	this.btn_deleteCase = _button("Delete");
 	this.txt_TimeToRestore = _div(0,_rightOf(_cell("/Time to Restore/")));
-//Edit Case Page
+	this.txt_TimeToResolve = _div(0,_rightOf(_cell("/Time to Resolve/")));
+	this.txt_TimeToInitialResponse = _div(0,_rightOf(_cell("/Time to Initial Response/")));
+	this.txt_SLAClock = _table("/timer/");
+	this.txt_ResolutionInternalBy = _div(0,_rightOf(_cell("/Resolution Internal By/")));
+	this.txt_ResolutionCustomerBy = _div(0,_rightOf(_cell("/Resolution Customer By/")));
+	
+    this.txt_InitialResponseInternalBy = _div(0,_rightOf(_cell("/Initial Response Internal By/")));
+	this.txt_InitialResponseCustomerBy = _div(0,_rightOf(_cell("/Initial Response Customer By/")));
+	
+	//Edit Case Page
+
 	this.txt_slaTermOnEdit = _textbox(0,_rightOf(_label("SLA Terms")));
 	this.sel_TypeOnEdit = _select(0,_rightOf(_label("Type")));
 	this.txt_actualRestorationOnEdit = _link(0,_rightOf(_label("Actual Restoration")));

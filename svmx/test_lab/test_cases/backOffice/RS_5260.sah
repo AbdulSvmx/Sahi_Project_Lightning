@@ -1,7 +1,7 @@
 
 //author - Noor Salma Sharieff
 
-var $RS_5260 = _testcase("$RS_5260","Create a PM Plan from Service Contract with coverage type as Account");
+var $RS_5260 = _testcase("RS_5260","Create a PM Plan from Service Contract with coverage type as Account");
 $RS_5260.start();
 _setSpeed(100);
 
@@ -33,7 +33,7 @@ _assert($lastRunDate != $scheduleOnActual,"Issue in Last Run Date and Scheduled 
 var $PMProcessId = $bo_act_PMProcess.createPMProcess("Time Based Preventive Maintenance", 30, $PMPlan,"One Per Plan");
 
 $bo_act_navigation.navigateToSetUpAndSearch("Installed Packages");
-if(_condition(_cell("SVMXC")!=null))
+if(_getText(_cell("SVMXC"))!="SVMXDEV")
 var $script = "String StrSVMXProcessID = '"+$PMProcessId+"';String StrSFPMProcessID = [Select Id From SVMXC__ServiceMax_Processes__c where SVMXC__ProcessID__c =: StrSVMXProcessID AND SVMXC__Active__c = true].Id;SVMXC.PREV_Engine_Batch EngObj = new SVMXC.PREV_Engine_Batch();EngObj.setProcessIds.add(StrSFPMProcessID);ID Batch = database.executebatch(EngObj, 1);";
 else
 $script = "String StrSVMXProcessID = '"+$PMProcessId+"';String StrSFPMProcessID = [Select Id From SVMXDEV__ServiceMax_Processes__c where SVMXDEV__ProcessID__c =: StrSVMXProcessID AND SVMXDEV__Active__c = true].Id;SVMXDEV.PREV_Engine_Batch EngObj = new SVMXDEV.PREV_Engine_Batch();EngObj.setProcessIds.add(StrSFPMProcessID);ID Batch = database.executebatch(EngObj, 1);";
