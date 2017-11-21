@@ -1,0 +1,18 @@
+var $bo_pg_scheduledSFM=new function bo_pg_scheduledSFM(){
+	
+this.btn_new=_button("New");
+this.lbl_processName=_textbox(1);
+this.lbl_processID=_textbox(2);
+
+this.availablePros=_select("avilablePrcess");
+this.selectedPros=_imageSubmitButton("Add");
+//_setSelected(_select("avilablePrcess"), ["Mark Work Order Complete"]);
+//_click(_imageSubmitButton("Add"));
+this.addNewServiceToSchedule=_imageSubmitButton("Add Row");
+this.sel_objName=_select("setupSFMScheduledProcess:Form1:pageBlock1:j_id29:tab1pageblock1:scheduleServicesTab:j_id79:0:j_id86");
+//_click(_div("bPageBlock brandSecondaryBrd bEditBlock secondaryPalette"));
+this.sel_qc=_select("setupSFMScheduledProcess:Form1:pageBlock1:j_id29:tab1pageblock1:scheduleServicesTab:j_id79:0:j_id94");
+this.txt_className=_textbox("setupSFMScheduledProcess:Form1:pageBlock1:j_id29:tab1pageblock1:scheduleServicesTab:j_id79:0:j_id100");
+
+};
+	

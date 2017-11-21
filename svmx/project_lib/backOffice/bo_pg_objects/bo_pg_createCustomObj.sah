@@ -8,7 +8,6 @@ this.lnk_salesforceSetUp=_link("Setup");
 	this.txt_pluralLabel=_textbox("PluralLabel");
 	this.btn_submit=_submit(" Save [1]");
 	this.lnk_delete=_link("Del");
-	
 		this.chk_confirmationChkbox=_checkbox("confirmed");
 	
 	this.button_clickDeleteButton=_submit("Delete")

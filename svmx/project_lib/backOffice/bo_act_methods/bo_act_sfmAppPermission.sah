@@ -40,10 +40,18 @@ var $bo_act_SFMAppPermission = new function bo_act_SFMAppPermission() {
 		_click($bo_pg_sfmAppPermissionD.sel_objtypeWO);
 		_wait(20000);
 		 _setValue($bo_pg_sfmAppPermissionD.txt_searchProcess,$searchText);
-		_wait(3000);
-		_assertEqual("", _getText(_div("gridview-1028")), "Checklist does display");
-					
+		_wait(3000);					
 		}
+			this.genericSearchInAppPermission=function($processType,$objType,$searchText){
+				 $bo_pg_sfmAppPermissionD.selProcessTypeInSFMAppPermission($processType);
+				 _wait(10000);
+				 $bo_pg_sfmAppPermissionD.selObjTypeInSFMAppPermission($objType);
+				_wait(20000);
+				_setValue($bo_pg_sfmAppPermissionD.txt_searchProcess,$searchText);
+				_wait(3000);			
+			}
+			
+			
 			
 	this.appPermissionOnPMPObj=function($sfmName){
 		_click($bo_pg_sfmAppPermissionD.txt_focusProcessType);
@@ -82,6 +90,24 @@ var $bo_act_SFMAppPermission = new function bo_act_SFMAppPermission() {
 		
 		  
 }
+			this.enableAppPermission=function($sfmName){
+				_click($bo_pg_sfmAppPermissionD.txt_focusProcessType);
+		_click($bo_pg_sfmAppPermissionD.sel_processType);
+		_wait(10000);
+		_setValue($bo_pg_sfmAppPermissionD.txt_enterObjType,"");
+		_setValue($bo_pg_sfmAppPermissionD.txt_enterObjType,"Work Order");
+		_click($bo_pg_sfmAppPermissionD.sel_objtypeWO);
+		_wait(20000);
+		 _setValue($bo_pg_sfmAppPermissionD.txt_searchProcess,$sfmName);
+		_wait(3000);
+			_div("svmx-grid-checkheader")
+				_click($bo_pg_sfmAppPermissionD.btn_clickSaveAppPermission);
+		_wait(3000);
+		_click($bo_pg_sfmAppPermissionD.popUpOK)
+		var $isvisible = _exists(_div("App Permissions saved successfully"));
+		$callBack.returnResult($isvisible, true, "App Permission is not saved successfully");
+			}
+				
 	this.setAppPermissionForWizard=function($sfmName,$objName){
 		_click($bo_pg_sfmAppPermissionD.txt_focusProcessType);
 		_click($bo_pg_sfmAppPermissionD.sel_processTypeWizard);

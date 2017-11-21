@@ -90,7 +90,7 @@ var $Restoration_Time;
 var $SLA_Terms;
 var $Extension_mins;
 var $Configuration_Name1;
-for(var $i=0;$ana_WO1==null;$i++){
+
 	
 var $ana_query_art = "Select SVMXC__Service_Request__c,SVMXC__Work_Order__c , SVMXC__Account__c, SVMXC__Configuration_Name__c ,SVMXC__Product__c,SVMXC__Technician__c,SVMXC__Actual_Initial_Response_Time__c,SVMXC__Actual_Onsite_Response_Time__c,SVMXC__SLA_Initial_Response_Time__c,SVMXC__SLA_Onsite_Response_Time__c,SVMXC__SLA_Resolution_Time__c,SVMXC__SLA_Restoration_Time__c,SVMXC__SLA_Terms__c,SVMXC__Extension_Time__c from SVMXC__SPM_Average_Response_Time__c where  SVMXC__Work_Order__c='"+$WO+"'";
 var $ana_result_art = $op_act_sForceApiCall.sForceQuery($un, $pwd, $ana_query_art,"query");
@@ -113,7 +113,7 @@ $ana_result_art.forEach(function($varart) {
 	$Extension_mins=$varart.SVMXC__Extension_Time__c;
 	 $Configuration_Name1=$varart.SVMXC__Configuration_Name__c;
 	});
-}
+
 
 var $Configuration_Name;
 var $ana_query_art1 = "Select SVMXC__Service_Request__c,SVMXC__Work_Order__c , SVMXC__Account__c, SVMXC__Configuration_Name__c ,SVMXC__Product__c,SVMXC__Technician__c,SVMXC__Actual_Initial_Response_Time__c,SVMXC__Actual_Onsite_Response_Time__c,SVMXC__SLA_Initial_Response_Time__c,SVMXC__SLA_Onsite_Response_Time__c,SVMXC__SLA_Resolution_Time__c,SVMXC__SLA_Restoration_Time__c,SVMXC__SLA_Terms__c,SVMXC__Extension_Time__c from SVMXC__SPM_Average_Response_Time__c where  SVMXC__Work_Order__c='"+$WO1+"'";

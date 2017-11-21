@@ -50,6 +50,7 @@ var $IBName = $bo_act_installedProduct.createInstalledProduct($productName, $acc
  */
 
 //Create 1st SLA Term SLA01 [SLA 09]
+$bo_act_navigation.navigateToSlaTerms();
 var $slaName01 = $bo_act_slaTerms.createSlaTerms("Default");
 $bo_act_slaTerms.addInitialResponseToSLA($slaName01,"Case","All","Medium","Created Date","5","10","SLA");
 $bo_act_slaTerms.addOnsiteResponseToSLA($slaName01,"Case","All","Medium","Created Date","10","15","SLA");
@@ -58,6 +59,7 @@ $bo_act_slaTerms.addOnsiteResponseToSLA($slaName01,"Case","All","Medium","Create
 _assertExists(_span($slaName01));
 
 //Create 2nd SLA Term SLA02 [SLA 10]
+$bo_act_navigation.navigateToSlaTerms();
 var $slaName02 = $bo_act_slaTerms.createSlaTerms("Default");
 $bo_act_slaTerms.addInitialResponseToSLA($slaName02,"Case","All","Medium","Created Date","5","10","SLA");
 $bo_act_slaTerms.addOnsiteResponseToSLA($slaName02,"Case","All","Medium","Created Date","10","15","SLA");
@@ -66,6 +68,7 @@ $bo_act_slaTerms.addOnsiteResponseToSLA($slaName02,"Case","All","Medium","Create
 _assertExists(_span($slaName02));
 
 //Create 3rd SLA Term SLA03 [SLA 11]
+$bo_act_navigation.navigateToSlaTerms();
 var $slaName03 = $bo_act_slaTerms.createSlaTerms("Default");
 $bo_act_slaTerms.addInitialResponseToSLA($slaName03,"Case","All","Medium","Created Date","5","10","SLA");
 $bo_act_slaTerms.addOnsiteResponseToSLA($slaName03,"Case","All","Medium","Created Date","10","15","SLA");

@@ -14,6 +14,7 @@ var $Component = $data[1]["Component"];
 var $ScheduledDate = $data[1]["ScheduledDate"];
 var $PreferredStartDate = $data[1]["PreferredStartDate"];
 var $PreferredEndDate = $data[1]["PreferredEndDate"];
+var $GuranteedUptime = $data[1]["GuaranteedUptime"];
 $bo_act_login.login($url, $un, $pwd);
 
 
@@ -135,11 +136,11 @@ _assertEqual(null,$ana_1638_guranteed_uptime);
 
 
 var $ana_1638_wo1_id ;
-var $ana_1638_down_time_value = null ;
+var $ana_1638_down_time_value;
 
 var $ana_1638_query_RV1 = "Select SVMXC__Down_Time__c,SVMXC__Work_Order__c from SVMXC__SPM_Down_Time_Detail__c where SVMXC__Work_Order__c='"+$ana_1638_WO_ID+"'";
 var $ana_1638_resultRV1 = $op_act_sForceApiCall.sForceQuery($un, $pwd, $ana_1638_query_RV1,"query");
-_wait(5000);
+
 $ana_1638_resultRV1.forEach(function($varRV1) {
 	
 	$ana_1638_down_time_value = $varRV1.SVMXC__Down_Time__c;

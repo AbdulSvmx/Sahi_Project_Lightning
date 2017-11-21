@@ -6,8 +6,6 @@
 
 var $bo_pg_serviceMaintenanceContracts = new function bo_pg_serviceMaintenanceContracts(){
 	this.btn_new = _button(" New ");
-	this.btn_edit = _button(" Edit ");
-	this.txt_SContractEdit = _heading2("/Maintenance Contract Edit/");
 	this.txt_sconName = _textbox("Name");
 	this.txt_accountName = _textbox("/\\*Account|^Account/");
 	this.txt_contactName = _textbox("/\\*Contact|^Contact/");
@@ -48,9 +46,24 @@ var $bo_pg_serviceMaintenanceContracts = new function bo_pg_serviceMaintenanceCo
 		this.link_ServiceContractOnPartsPricing = _link(0,_rightOf(_cell("Service Contract")));
 		
 		
-		//Objects for Part Pricing in Scon
+		//Objects for Part/Labor Pricing in Scon
 		this.btn_sfmLaborPricing = _button("Labor Pricing");
-		
+		this.btn_sfmPartPricing = _button("Parts Pricing");
+		this.btn_partsDiscountTab = _span("Parts Discount");
+		this.txt_defaultPartsPriceBook = _textbox(0,_rightOf(_label("/Default Parts Price Book/")));
+		this.txt_laborRoundingType = _textbox("Rounding Type (Labor):");
+		this.btn_laborPricingTab = _span("Labor Pricing");
+		this.btn_addLaborPricingLine = _span("/sfmd-add-line-icon/");
+		this.btn_editLaborPricingRow = _image("/svmx-sfmd-edit-icon/");
+		this.btn_editSecondLaborPricingRow = _image("svmx-action-col-icon svmx-action-col-0   svmx-sfmd-edit-icon[1]");
+		this.txt_laborPricingUnit = _textbox("/Unit/");
+		this.txt_partsDiscountPercent = _textbox(0,_rightOf(_label("/Discount/")));
+		this.txt_minimumLaborMins = _textbox("Minimum Labor (Mins):");
+		//this.txt_regularRateLaborPricing = _textbox(0,_rightOf(_label("Regular Rate:")));
+		this.txt_regularRateLaborPricing = _textbox(0,_rightOf(_label("Regular Rate:",_near(_span("Update")))));
+		this.btn_updateLaborPricing = _span("Update");
+		this.btn_saveLaborPricing = _span("/sfmd-save-icon/");
+
 	
 };
 

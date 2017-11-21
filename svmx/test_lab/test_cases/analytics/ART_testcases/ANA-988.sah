@@ -35,7 +35,7 @@ var $query_wo_first = "Select Name , Id  , SVMXC__Closed_On__c ,CreatedDate  fro
 var $fetchwoquery = $op_act_sForceApiCall.sForceQuery($un, $pwd, $insert_wo_first ,"create");
 
 var $store_first_wo = $op_act_sForceApiCall.sForceQuery($un, $pwd, $query_wo_first,"query");
-_wait(1000);
+
 
 $store_first_wo.forEach(function($ana_var1) {
 	$WO = $ana_var1.Id;
@@ -66,11 +66,11 @@ var $Resolution_Time;
 var $Restoration_Time;
 var $SLA_Terms;
 var $checkbox;
-for(var $i=0;$ana_WO1==null;$i++){
+
 	
 var $ana_query_art = "Select SVMXC__Case__c,SVMXC__Work_Order__c , SVMXC__Account__c, SVMXC__Configuration_Name__c ,SVMXC__Product__c,SVMXC__Technician__c,SVMXC__Actual_Initial_Response_Time__c,SVMXC__Actual_Onsite_Response_Time__c,SVMXC__Actual_Resolution_Time__c,SVMXC__Actual_Restoration_Time__c,SVMXC__SLA_Initial_Response_Time__c,SVMXC__SLA_Onsite_Response_Time__c,SVMXC__SLA_Resolution_Time__c,SVMXC__SLA_Restoration_Time__c,SVMXC__SLA_Terms__c,Custom_lookup__c from SVMXC__SPM_Average_Response_Time__c where  SVMXC__Work_Order__c='"+$WO+"'";
 var $ana_result_art = $op_act_sForceApiCall.sForceQuery($un, $pwd, $ana_query_art,"query");
-_wait(2000);
+
 $ana_result_art.forEach(function($varart) {
 	$ana_case=$varart.SVMXC__Case__c;
 	$ana_WO1=$varart.SVMXC__Work_Order__c;
@@ -88,7 +88,7 @@ $ana_result_art.forEach(function($varart) {
 	$SLA_Terms=$varart.SVMXC__SLA_Terms__c;
 	$checkbox=$varart.Custom_lookup__c;
 	});
-}
+
 
 _assertEqual($ana_case, $Case);
 _assertEqual($Account , $ana_WO_Account1);
