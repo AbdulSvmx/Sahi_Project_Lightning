@@ -10,7 +10,10 @@ var $Product = $data[4]["Product"];
 var $Closedon = $data[4]["ClosedOn"];
 var $insert_case = $data[5]["InsertCase"];
 
+
+
 $bo_act_login.login($url, $un, $pwd);
+
 //create case
 var $createcase = $op_act_sForceApiCall.sForceQuery($un, $pwd, $insert_case, "create");//$op_act_sForceApiCall.sForceQuery($un, $pwd, $insert_case , "create");
 var $query_case = "Select Id from Case Order by CreatedDate DESC Limit 1";
@@ -29,8 +32,6 @@ var $query_wo_first = "Select Name , Id  , Custom_Account__c , SVMXC__Closed_On_
 var $fetchwoquery = $op_act_sForceApiCall.sForceQuery($un, $pwd, $insert_wo_first ,"create");
 
 var $store_first_wo = $op_act_sForceApiCall.sForceQuery($un, $pwd, $query_wo_first,"query");
-_wait(1000);
-
 $store_first_wo.forEach(function($ana_var1) {
 	$WO = $ana_var1.Id;
 });
@@ -49,11 +50,10 @@ var $ana_Is_First_Time_Fix;
 var $ana_configuration_Name;
 var $ana_product;
 var $ana_technician;
-for(var $i=0;$ana_WO==null;$i++){
 	
 var $ana_query_ftf = "Select SVMXC__Case__c,SVMXC__Work_Order__c , SVMXC__Account__c, SVMXC__Configuration_Name__c ,SVMXC__Is_Fixed_First_Time__c,SVMXC__Product__c,SVMXC__Technician__c from SVMXC__SPM_First_Time_Fix__c where SVMXC__Case__c ='"+ $Case +"'";
 var $ana_result_ftf = $op_act_sForceApiCall.sForceQuery($un, $pwd, $ana_query_ftf,"query");
-_wait(2000);
+_wait(10000);
 $ana_result_ftf.forEach(function($varftf) {
     $ana_case=$varftf.SVMXC__Case__c;
 	$ana_WO=$varftf.SVMXC__Work_Order__c;
@@ -63,7 +63,7 @@ $ana_result_ftf.forEach(function($varftf) {
 	$ana_product=$varftf.SVMXC__Product__c;
 	$ana_technician=$varftf.SVMXC__Technician__c;
 	});
-}
+
 
 _log($ana_Is_First_Time_Fix);
 _log($ana_configuration_Name);

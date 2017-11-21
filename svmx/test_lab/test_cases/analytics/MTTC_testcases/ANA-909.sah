@@ -1,7 +1,7 @@
 var $an_mttc_909 = _testcase("ANA-909","When the user selects Work Order as Top-level tracker.");
 $an_mttc_909.start();
 var $un = "vinaya.v@servicemax.com";
-var $pwd = "servicemax1";
+var $pwd = "servicemax12";
 var $url = "https://test.salesforce.com";
 var $data = _readExcelFile("../../analytics/an_excleData/MTTC_data.xlsx","Sheet1",true);
 var $Account = $data[4]["Account"];
@@ -76,8 +76,7 @@ var $Service_Delivered_on;
 var $ana_configuration_Name;
 var $ana_product;
 var $ana_technician;
-for(var $i=0;$ana_WO==null;$i++){
-	
+
 var $ana_query_mttc = "Select SVMXC__Work_Order__c , SVMXC__Account__c, SVMXC__Configuration_Name__c ,SVMXC__Product__c,SVMXC__Technician__c,SVMXC__Service_Delivered_On__c,SVMXC__Completion_Time__c from SVMXC__SPM_Mean_Time_To_Complete__c where SVMXC__Work_Order__c ='"+ $WO +"'";
 var $ana_result_mttc = $op_act_sForceApiCall.sForceQuery($un, $pwd, $ana_query_mttc,"query");
 _wait(2000);
@@ -89,7 +88,6 @@ $ana_result_mttc.forEach(function($varmttc) {
 	$ana_product=$varmttc.SVMXC__Product__c;
 	$ana_technician=$varmttc.SVMXC__Technician__c;
 	});
-}
 
 _assertEqual($ana_WO, $WO);
 _assertEqual($Account , $ana_WO_Account);

@@ -62,7 +62,7 @@ var $delete_data = $op_act_sForceApiCall.sForceQuery($un, $pwd, $delete_techutil
 
 // Delete ART Calculation methods
 
-var $art = "Select Id from SVMXC__ServiceMax_Processes__c where SVMXC__ProcessID__c = 'Utilization'";
+var $art = "Select Id from SVMXC__ServiceMax_Processes__c where SVMXC__ProcessID__c = 'AverageResponseTime'";
 var $fetchart = $op_act_sForceApiCall.sForceQuery($un, $pwd, $art,"query");
 
 var $art_process = $fetchart[0].Id;
@@ -70,7 +70,7 @@ var $art_process = $fetchart[0].Id;
 $delete_art = "delete [Select Id from SVMXC__ServiceMax_Config_Data__c where SVMXC__Dispatch_Process__c = '"+$art_process+"' ];";
 var $delete_data = $op_act_sForceApiCall.sForceQuery($un, $pwd, $delete_art , "create");
 
-// Delete ART Calculation methods
+// Delete Attach Rate Calculation methods
 
 var $attachrate = "Select Id from SVMXC__ServiceMax_Processes__c where SVMXC__ProcessID__c = 'ContractPenetration'";
 var $fetchattachrate = $op_act_sForceApiCall.sForceQuery($un, $pwd, $attachrate,"query");

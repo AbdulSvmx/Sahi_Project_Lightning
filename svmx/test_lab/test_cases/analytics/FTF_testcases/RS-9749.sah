@@ -35,7 +35,7 @@ var $query_wo_first1 = "Select Name , Id  , SVMXC__Company__c , SVMXC__Closed_On
 var $fetchwoquery = $op_act_sForceApiCall.sForceQuery($un, $pwd, $insert_wo_first1 ,"create");
 
 var $store_first_wo1 = $op_act_sForceApiCall.sForceQuery($un, $pwd, $query_wo_first1,"query");
-_wait(1000);
+
 $store_first_wo1.forEach(function($ana_var1) {
 	$WO1 = $ana_var1.Id;
 });
@@ -58,7 +58,7 @@ for(var $i=0;$i<=5;$i++){
 	
 var $ana_query_ftf1 = "Select SVMXC__Service_Request__c,SVMXC__Work_Order__c , SVMXC__Account__c, SVMXC__Configuration_Name__c ,SVMXC__Is_Fixed_First_Time__c,SVMXC__Product__c,SVMXC__Technician__c from SVMXC__SPM_First_Time_Fix__c where  SVMXC__Work_Order__c='"+$WO1+"'";
 var $ana_result_ftf1 = $op_act_sForceApiCall.sForceQuery($un, $pwd, $ana_query_ftf1,"query");
-_wait(6000);
+_wait(500);
 $ana_result_ftf1.forEach(function($varftf) {
     $ana_sr1=$varftf.SVMXC__Service_Request__c;
 	$ana_WO1=$varftf.SVMXC__Work_Order__c;
@@ -74,11 +74,9 @@ _log($ana_Is_First_Time_Fix1);
 _log($ana_configuration_Name1);
 _assertNotEqual("false", $ana_Is_First_Time_Fix1);
 _assertNotEqual($Account1 , $ana_WO_Account1);
-var $tech=$an_act_FTF.convertToSfdcId($Technician1);
-_assertNotEqual( $tech, $ana_technician1);
+_assertNotEqual( $Technician1, $ana_technician1);
 _assertNotEqual($SR_first,$ana_sr1);
-var $pro1=$an_act_FTF.convertToSfdcId($Product1);
-_assertNotEqual($pro1 , $ana_product1);
+_assertNotEqual($Product1 , $ana_product1);
 
 
 

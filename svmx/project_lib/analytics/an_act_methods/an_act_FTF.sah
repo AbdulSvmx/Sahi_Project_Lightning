@@ -71,8 +71,15 @@ var $an_act_FTF = new function an_act_FTF() {
 	
 	this.ftf_runEngine = function($emailId)
 	{
-	
+		_click($an_pg_ftf.metrics);
+		_click($an_pg_ftf.btn_first_time_to_fix);
 		_click($an_pg_ftf.btn_click_Schedule_Notifications);
+		_click($an_pg_mttr.list_timezone);
+	    _click($an_pg_mttr.btn_ist_timezone);
+	    _click($an_pg_mttr.btn_period);
+	    _click($an_pg_mttr.btn_daily);
+	    _click($an_pg_mttr.list_time);
+	    _click($an_pg_mttr.btn_time);
 		_click($an_pg_ftf.txt_Email_onSuccess);
 		_setValue($an_pg_ftf.txt_Email_onSuccess, $emailId);
 		_click($an_pg_ftf.btn_save);
