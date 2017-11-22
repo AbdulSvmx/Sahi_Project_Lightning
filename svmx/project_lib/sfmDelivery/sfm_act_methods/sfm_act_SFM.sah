@@ -36,9 +36,16 @@ var $sfm_act_SFM = new function sfm_act_SFM() {
 				$bo_pg_sfmTransactionAndDesigner.addField($fieldName[$i],
 						$containerName[$i]);
 			} else {
-				_setValue(_f("main").s_hscrollbar("horizontalScrollBar[2]"),
-						"00");
-				_click(_f("main").s_datagroup("dataGroup[3]").near(
+				if($containerName[$i] == 'Parts'){
+					_setValue(_f("main").s_hscrollbar("horizontalScrollBar[2]"),"00");
+				}else if($containerName[$i] == 'Labor'){
+					_setValue(_f("main").s_hscrollbar("horizontalScrollBar[3]"),"00");
+				}else if($containerName[$i] == 'Expenses'){
+					_setValue(_f("main").s_hscrollbar("horizontalScrollBar[4]"),"00");
+				}else{
+					_setValue(_f("main").s_hscrollbar("horizontalScrollBar[5]"),"00");
+				}				
+				_click(_f("main").s_datagroup("dataGroup").near(
 						_f("main").s_richtext($containerName[$i])));
 				_setValue(_f("main").s_textinput("searchText[4]"),
 						$fieldName[$i]);
