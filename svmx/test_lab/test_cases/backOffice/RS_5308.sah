@@ -8,7 +8,6 @@ _setSpeed(100);
 /**
  * Login to the Sandbox Org
  */
-
 $bo_act_login.login($g_url, $bac_un, $bac_pwd);
 
 //Pre - Condition Test Data
@@ -106,7 +105,6 @@ if(_isVisible(_image("Checked",_rightOf(_cell("/Is Entitlement Performed/"))))){
 /**
 *Invoke TDM016 SFM for Get Price Calculation when IB is Covered under Warranty
 */
-
 $bo_act_getPrice.navigateToSFMDeliveryPageFor_TDM016($WONumber);
 
 //Add Labor Line to Above invoke TDM016 SFM
@@ -138,12 +136,10 @@ $bo_act_getPrice.saveSFMDelivery();
 /**
 *Clean up function
 */
-
 var $datacreated = [$WONumber,$caseNumber,$IBName,$productName,$contactName,$accountName,$warrantyName];
 for (var i = 0; i < $datacreated.length; i++) {
 $bo_act_common.cleanUpfunction($datacreated[i]);
 }
-
 
 // Delete SFM Wizard 
 $bo_act_SFW.deleteSFMWizard("Work Order", $wizardIDName);

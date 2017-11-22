@@ -19,15 +19,19 @@ $RS_7288.start();
 _setSpeed(100);
 
 
-$bo_act_login.login($g_url, $g_un, $g_pwd);
+/**
+* Login to the Sandbox Org
+*/
+
+$bo_act_login.login($g_url, $bac_un, $bac_pwd);
+
+/**
+ * Create Account, Contact, Location, Product and Installed Product
+ */
 var $accountName = $bo_act_accounts.createAccount();
-
 var $contactName = $bo_act_contacts.createContact($accountName);
-
 var $locationName = $bo_act_locations.createLocation($recordType[3],$accountName,"#007","India","560001");
-
 var $productName = $bo_act_products.createProduct($productCode, $productFamily[3]);
-
 var $IBName = $bo_act_installedProduct.createInstalledProduct($productName, $accountName, $contactName);
 
 var $warrantyName = $bo_act_warrantyTerms.createWarrantyTerms($exchangeType[2],"10","5",$unitOfTimeForCoverage[4],"20","5",$unitOfTimeForCoverage[4],"30","5",$unitOfTimeForCoverage[4],$coverageEffectiveFrom[1]);

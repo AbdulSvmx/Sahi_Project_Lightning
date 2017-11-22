@@ -113,7 +113,9 @@ var $bo_act_navigation = new function bo_act_navigation() {
     
     this.navigateToWarrantyTermsPage = function(){
     	_click($bo_pg_home.btn_allTabs);
+    	_setStrictVisibilityCheck(true);
    	    _click($bo_pg_home.link_warrantyTerms);
+   	    _setStrictVisibilityCheck();
     };
     
     this.navigateToCreatedRecordUsingCreateNewView = function($viewName, $fieldName, $operator, $recordToBeSearch){

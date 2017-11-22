@@ -1,8 +1,8 @@
 //Tests are to be written here [Bhupendra Singh Chouhan]
 //==============
 
-var $RS_5315 = _testcase("$RS_5315","Get Price on WO:When the IB of the WO is covered under a Warranty.Calculate Expense prices");
-$RS_5315.start();
+var $RS_5311 = _testcase("$RS_5311","SCON - Parts - when Parts pricing with discount is defined for Products");
+$RS_5311.start();
 _setSpeed(100);
 
 /**
@@ -22,17 +22,18 @@ var $seperator = "/";
 var $accountName = $bo_act_accounts.createAccount();
 var $contactName = $bo_act_contacts.createContact($accountName);
 var $productName = $bo_act_products.createProduct($productCode, $productFamily[3]);
-var $productName1 = $bo_act_products.createProduct($productCode, $productFamily[3]);
 var $IBName = $bo_act_installedProduct.createInstalledProduct($productName, $accountName, $contactName);
 
 /**
-* Create two Activity Master 
+* Add Price To Standard Price for above created Product
 */
-var $activityType = ["--None--","Calibration","Cleanup","Installation","Repair","Service"];
-var $unit = ["--None--","Per Hour","Flat Rate"];
 
-var $activityID = $bo_act_activityMaster.createActivityMasterUsingProduct($activityType[1], $productName);
-var $activityID1 = $bo_act_activityMaster.createActivityMasterUsingProduct($activityType[3], $productName1);
+var $standardPriceValue = 220;
+$bo_act_products.addStandardPriceForProduct($productName, $standardPriceValue);
+
+// Validate the Standard price for Product
+var $actual_StandardPriceValue = _getText(_tableHeader(0,_under(_tableHeader("Standard Price"))));
+_assertEqual($actual_StandardPriceValue,"$220.00","Actual and expected Standard price values are not same");
 
 /**
 * Create SLA Terms
@@ -51,33 +52,27 @@ var $pastYear = 2;  // Start Date for Service Contract
 var $futureYear = 2;  // End Date for Service Contract
 
 //Creation of Service Contracts
-var $serviceConractName = $bo_act_serviceMaintenanceContracts.createServiceMaintenanceContract($accountName, $slaName, $futureYear, $pastYear);
+var $sconName = $bo_act_serviceMaintenanceContracts.createServiceMaintenanceContract($accountName, $slaName, $futureYear, $pastYear);
 
 //Activating Created Service Contract
-$bo_act_serviceMaintenanceContracts.activateServiceContract($serviceConractName);
+$bo_act_serviceMaintenanceContracts.activateServiceContract($sconName);
 
 //Add Covered Product to Service Contract 
 
 var $pastYear = 3;  			// Start Date 'TODAY's' Date - 3 YEARS
 var $futureYear = 3;			// End Date 'TODAY's' Date + 3 YEARS
 
-$bo_act_serviceMaintenanceContracts.AddCoveredProducToServiceContract($serviceConractName, $IBName, $slaName, $pastYear, $futureYear);
+$bo_act_serviceMaintenanceContracts.AddCoveredProducToServiceContract($sconName, $IBName, $slaName, $pastYear, $futureYear);
 
 //Add Entitled Contact to Service Contract 
+$bo_act_serviceMaintenanceContracts.addEntitledContactsToServiceContract($sconName, $contactName);
 
-$bo_act_serviceMaintenanceContracts.addEntitledContactsToServiceContract($serviceConractName, $contactName);
+//Add Part Pricing with Discount to Service Contract 
+var $priceBookName = "Standard Price Book";
+var $partsDiscount = 30;
 
-//Add Labor Pricing To Service Contract using Unit as Per Hours and Activity Type as Calibration
-var $RoundingType = "Actuals";
-var $minimumLaborMins = 30;
-var $regularRate = 500;
-$bo_act_serviceMaintenanceContracts.addLaborPricingToServiceContract($serviceConractName, $RoundingType, $unit[1], $minimumLaborMins,$regularRate, $activityType[1]);
-
-
-//Add Labor Pricing To Service Contract using Unit as Flat Rate and Activity Type as Installation
-var $minimumLaborMins1 = 60;
-var $regularRate1 = 800;
-$bo_act_serviceMaintenanceContracts.addSecondLaborPricingToServiceContract($serviceConractName, $RoundingType, $unit[2], $minimumLaborMins1,$regularRate1, $activityType[3]);
+//Add Part Pricing to Service Contract with Discount
+$bo_act_serviceMaintenanceContracts.addPartPricingWithDiscountToServiceContract($sconName, $priceBookName, $partsDiscount, $productName);
 
 var $expecctedIBUnder_CoveredProduct =  _getText(_link(0,_under(_tableHeader("Installed Product"))));
 var $expecctedContactUnder_EntitledContacts =  _getText(_link(0,_under(_tableHeader("Contact"))));
@@ -88,6 +83,16 @@ _assertEqual($expecctedIBUnder_CoveredProduct,$IBName,"Actual and expected cover
 
 //Validating the Entitled Contacts Percent on Scon
 _assertEqual($expecctedContactUnder_EntitledContacts,$contactName,"Actual and expected Entitled Contacts are not same");
+
+/**
+ * Configure the Group Profile SET004
+ */
+var $groupProfileName = "AutoBACGroup";
+var $Module = "Work Order";
+var $SubModule = "Create Work Order Lines VF";
+var $Setting1 = "SET004";
+var $settingValue1 = "Standard Price Book";
+$bo_act_configurationProfiles.editGroupProfileForTextSettings($groupProfileName, $Module, $SubModule, $Setting1, $settingValue1);
 
 /**
 * Create Case record
@@ -136,11 +141,11 @@ $bo_act_workOrders.saveWorkOrder();     		// Save the Edited WO
 /**
 *Perform Interactive Entitlement on WO using Service Contract
 */
-$bo_act_interactiveEntitlement_WO.performInteractiveEntitlementWO_UsingScon($WONumber, $serviceConractName);
+$bo_act_interactiveEntitlement_WO.performInteractiveEntitlementWO_UsingScon($WONumber, $sconName);
 var $actual_EntitlementType = _getText(_div(0,_rightOf(_cell("/Entitlement Type/"))));
 var $ServiceContract_actual = _getText(_link(0,_rightOf(_cell("Service Contract"))));
 _assertEqual($actual_EntitlementType,"INTERACTIVE","Actual and expected Entitlement Type are not same");
-_assertEqual($ServiceContract_actual,$serviceConractName,"Actual and expected Service Conract are not same");
+_assertEqual($ServiceContract_actual,$sconName,"Actual and expected Service Conract are not same");
 
 //validation of Entitlement Parameters On Case
 
@@ -156,51 +161,28 @@ if(_isVisible(_image("Checked",_rightOf(_cell("/Is Entitlement Performed/"))))){
 
 $bo_act_getPrice.navigateToSFMDeliveryPageFor_TDM016($WONumber);
 
-//Add Labor Line to Above invoke TDM016 SFM
+//Add Parts Line to Above invoke TDM016 SFM
 var $searchValue = $productName;
-var $startHrs = "04";
-var $endHrs = "08";
-$bo_act_getPrice.addLaborLineToSFMDelivery($searchValue, $activityType[1], $startHrs, $endHrs);
+var $lineQty = "3";
+$bo_act_getPrice.addPartsLineToSFMDelivery($searchValue,$lineQty);
 $bo_act_getPrice.calculateGetPrice();
 
-//Validation of Get Price for Labor lines
-$bo_act_getPrice.editLaborLineToSFMDelivery($searchValue);
+//Validation of Get Price for Parts lines
+$bo_act_getPrice.editPartsLineToSFMDelivery($searchValue);
 
-var $LaborLinePricePerUnitActual = _getText(_textbox(0,_rightOf(_label("/Line Price Per Unit/"))));
-var $LaborCoveredActual = _getText(_textbox(0,_rightOf(_label("/Covered %/"))));
-var $LaborBillableQtyActual = _getText(_textbox(0,_rightOf(_label("/Billable Qty/"))));
-var $LaborBillableLinePriceActual = _getText(_textbox(0,_rightOf(_label("/Billable Line Price/"))));
+var $PartsLinePricePerUnitActual = _getText(_textbox(0,_rightOf(_label("/Line Price Per Unit/"))));
+var $PartsCoveredActual = _getText(_textbox(0,_rightOf(_label("/Covered %/"))));
+var $PartsDiscountActual = _getText(_textbox(0,_rightOf(_label("/Discount %/"))));
+var $PartsBillableQtyActual = _getText(_textbox(0,_rightOf(_label("/Billable Qty/"))));
+var $PartsBillableLinePriceActual = _getText(_textbox(0,_rightOf(_label("/Billable Line Price/"))));
 
-var $LaborBillableQtyExpected = 8-4; // $startHrs = "04" And $endHrs = "08";
-var $LaborBillableLinePriceExpected = $LaborBillableQtyExpected*$regularRate;
+var $BillableLinePriceExpected = ($lineQty*$standardPriceValue*70)/100;
 
-
-_assertEqual($LaborLinePricePerUnitActual,$regularRate,"Actual and expected Labor Line Price Per Unit are not same");
-_assertEqual($LaborBillableQtyActual,$LaborBillableQtyExpected,"Actual and expected Billable Qty are not same");
-_assertEqual($LaborBillableLinePriceActual,$LaborBillableLinePriceExpected,"Actual and expected Billable Line Price are not same");
-_assertEqual($LaborCoveredActual,"0","Actual and expected labor Covered % are not same");
-
-$bo_act_getPrice.closeEditedWOLineToSFMDelivery();
-
-//Add Second Labor Line to Above invoke TDM016 SFM
-var $searchValue1 = $productName1;
-var $activityType1 = $activityType[3];
-var $lineQty1 = "3";
-$bo_act_getPrice.addSecondLaborLineUsingLintQtyToSFMDelivery($searchValue1, $activityType1, $lineQty1);
-$bo_act_getPrice.calculateGetPrice();
-
-//Validation of Get Price for 2nd Labor lines
-$bo_act_getPrice.editLaborLineToSFMDelivery($searchValue1);
-
-var $LaborLinePricePerUnitActual1 = _getText(_textbox(0,_rightOf(_label("/Line Price Per Unit/"))));
-var $LaborCoveredActual1 = _getText(_textbox(0,_rightOf(_label("/Covered %/"))));
-var $LaborBillableQtyActual1 = _getText(_textbox(0,_rightOf(_label("/Billable Qty/"))));
-var $LaborBillableLinePriceActual1 = _getText(_textbox(0,_rightOf(_label("/Billable Line Price/"))));
-
-_assertEqual($LaborLinePricePerUnitActual1,$regularRate1,"Actual and expected Labor Line Price Per Unit are not same");
-_assertEqual($LaborBillableQtyActual1,"1","Actual and expected Billable Qty are not same");
-_assertEqual($LaborBillableLinePriceActual1,$regularRate1,"Actual and expected Billable Line Price are not same");
-_assertEqual($LaborCoveredActual1,"0","Actual and expected labor Covered % are not same");
+_assertEqual($PartsLinePricePerUnitActual,$standardPriceValue,"Actual and expected Parts Line Price Per Unit are not same");
+_assertEqual($PartsBillableQtyActual,$lineQty,"Actual and expected Parts Billable Qty are not same");
+_assertEqual($PartsBillableLinePriceActual,$BillableLinePriceExpected,"Actual and expected Parts Billable Line Price are not same");
+_assertEqual($PartsCoveredActual,"0","Actual and expected Parts Covered % are not same");
+_assertEqual($PartsDiscountActual,$partsDiscount,"Actual and expected Parts Discount % are not same");
 
 $bo_act_getPrice.closeEditedWOLineToSFMDelivery();
 
@@ -210,18 +192,14 @@ $bo_act_getPrice.saveSFMDelivery();
 *Clean up function
 */
 
-var $datacreated = [$WONumber,$caseNumber,$IBName,$productName,$productName1,$contactName,$accountName,$slaName,$serviceConractName];
+var $datacreated = [$WONumber,$caseNumber,$IBName,$productName,$contactName,$accountName,$slaName,$sconName];
 for (var i = 0; i < $datacreated.length; i++) {
 $bo_act_common.cleanUpfunction($datacreated[i]);
 }
-
-// Delete the Activity ID's Created 
-$bo_act_activityMaster.deleteActivityMaster($activityID);
-$bo_act_activityMaster.deleteActivityMaster($activityID1);
 
 //Delete SFM Wizard 
 $bo_act_SFW.deleteSFMWizard("Work Order", $wizardIDName);
 
 $bo_act_login.logOut(); 
 
-$RS_5315.end();
+$RS_5311.end();
