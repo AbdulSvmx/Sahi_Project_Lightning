@@ -23,7 +23,7 @@ var $bo_act_SFW = new function bo_act_SFW() {
 		_setValue($bo_pg_sfmWizard.txt_wizardTitle, $wizardTitleName);
         _setValue($bo_pg_sfmWizard.txt_wizardID, $wizardIDName);
 
-		}
+		};
 
 	
 	this.addNewManageWizardSteps = function($wizardStepType,$wizardStepName,$executionMode){
@@ -120,6 +120,17 @@ this.deleteWizards = function($objName,$wizardId){
 		_check(_checkbox(0,_leftOf(_span($wizardId))));
 		_click($bo_pg_sfmWizard.btn_deleteWizard);
 	};
+	
+	this.deleteSFMWizard=function($objName, $SFMWizardsName){
+		$bo_act_navigation.navigateToSfmWizard();
+		_setSelected($bo_pg_sfmWizard.sel_objPrevMaintPlan,$objName	);
+		_wait(3000);
+		_assertVisible($bo_pg_sfmWizard.lbl_verifyCustWizardSection);
+		$bo_pg_sfmWizard.selectsfmWizard($SFMWizardsName);
+		_click($bo_pg_sfmWizard.btn_deleteWizard);
+		_wait(3000);
+	};
+	
 this.quickSaveSFWizard = function(){
 	_click(_button("Quick Save"));
 };	

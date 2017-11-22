@@ -6,10 +6,10 @@ $RS_5467.start();
 _setSpeed(100);
 
 /**
- * Login to the Sandbox Org
- */
+* Login to the Sandbox Org
+*/
 
-$bo_act_login.login($g_url, $g_un, $g_pwd);
+$bo_act_login.login($g_url, $bac_un, $bac_pwd);
 
 //Pre - Condition Test Data
 var $recordType = ["Depot","Depot Child","Depot Parent","Standard Location"];

@@ -74,7 +74,6 @@ var $caseNumber = $bo_act_Cases.createCase($caseStatus, $casePriority, $caseOrig
 /**
 * Create SFM Wizard for WO with two Steps 1st-Check Entitlement and 2nd- Manage Work Order Lines - Usage(TDM016)
 */
-
 var $wizardTitleName = $bo_act_common.generateRandomName("SFWTitle");
 var $wizardIDName = $bo_act_common.generateRandomName("SFWId");
 var $fieldActnType = "Others";
@@ -85,7 +84,6 @@ $bo_act_SFW.createWizardGeneralInfo("Work Order", $wizardTitleName, $wizardIDNam
 $bo_act_SFW.createWizardStep("SFM", "Manage Work Order Lines - Usage", "Interactive");
 $bo_act_SFW.addCustomActionToWizard($fieldActnType, $actnName);
 $bo_act_SFW.quickSaveSFWizard();
-
 
 //Navigate to IB and Create WO from IB
 var $WONumber = $bo_act_installedProduct.createWOFromIB($IBName);
@@ -129,7 +127,6 @@ if(_isVisible(_image("Checked",_rightOf(_cell("/Is Entitlement Performed/"))))){
 /**
 *Invoke TDMo16 SFM for Get Price Calculation when "Incident Not Covered"
 */
-
 $bo_act_getPrice.navigateToSFMDeliveryPageFor_TDM016($WONumber);
 
 //Add Labor Line to Above invoke TDM016 SFM
@@ -148,7 +145,6 @@ var $LaborBillableQtyActual = _getText(_textbox(0,_rightOf(_label("/Billable Qty
 var $LaborBillableLinePriceActual = _getText(_textbox(0,_rightOf(_label("/Billable Line Price/"))));
 
 var $LaborBillableLinePriceExpected = (($lineQty*$regularRate*45)/100);
-
 
 _assertEqual($LaborLinePricePerUnitActual,$regularRate,"Actual and expected Labor Line Price Per Unit are not same");
 _assertEqual($LaborBillableQtyActual,$lineQty,"Actual and expected Billable Qty are not same");
@@ -186,7 +182,6 @@ $bo_act_getPrice.saveSFMDelivery();
 /**
 *Clean up function
 */
-
 var $datacreated = [$WONumber,$caseNumber,$IBName,$productName,$productName1,$contactName,$accountName,$warrantyName];
 for (var i = 0; i < $datacreated.length; i++) {
 $bo_act_common.cleanUpfunction($datacreated[i]);

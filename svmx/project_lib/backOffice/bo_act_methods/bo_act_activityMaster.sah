@@ -19,7 +19,6 @@ var $bo_act_activityMaster = new function bo_act_activityMaster() {
 		var $activityMasterNumber = _getText(_heading2("pageDescription"));
 		_logOutput($activityMasterNumber+ " Activity Master is created");
     return $activityMasterNumber;
-		//return $callBack.returnResult([_isVisible($accountName), "Account not created",$accountName] );
 	};
 
 	this.deleteActivityMaster = function($activityMasterNumber){

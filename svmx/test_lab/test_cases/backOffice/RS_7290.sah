@@ -2,6 +2,7 @@
 //==============
 
 //Pre - Condition Test Data
+var $recordType = ["Depot","Depot Child","Depot Parent","Standard Location"];
 var $productFamily = ["--None--","GeneralSolution","AdvSolution","Accessory", "Storage"];
 var $productCode = "";
 var $coverageEffectiveFrom = ["--None--","Date Installed","Date Ordered","Date Shipped","Last Activity Date","Last Date Shipped","Warranty Start Date","Warranty End Date"];
@@ -10,16 +11,19 @@ var $seperator = "/";
 var $RS_7290 = _testcase("$RS_7290","Creation and Activation of Service Contracts");
 $RS_7290.start();
 _setSpeed(100);
-//$bo_act_login.login($g_url, $g_un, $g_pwd);
+/**
+* Login to the Sandbox Org
+*/
 
+$bo_act_login.login($g_url, $bac_un, $bac_pwd);
+
+/**
+ * Create Account, Contact, Location, Product and Installed Product
+ */
 var $accountName = $bo_act_accounts.createAccount();
-
 var $contactName = $bo_act_contacts.createContact($accountName);
-
 var $locationName = $bo_act_locations.createLocation($recordType[3],$accountName,"#007","India","560001");
-
 var $productName = $bo_act_products.createProduct($productCode, $productFamily[3]);
-
 var $IBName = $bo_act_installedProduct.createInstalledProduct($productName, $accountName, $contactName);
 
 //Create 1st SLA Term SLA01 [Platinum SLA]

@@ -5,9 +5,11 @@ var $RS_7287 = _testcase("$RS_7287","Verify the creation of SLA Term.");
 $RS_7287.start();
 _setSpeed(100);
 
-//Preconditions For Test Case
-$bo_act_login.login($g_url, $g_un, $g_pwd);
-//$bo_act_navigation.navigateToConfigurationProfilesPage();
+/**
+* Login to the Sandbox Org
+*/
+
+$bo_act_login.login($g_url, $bac_un, $bac_pwd);
 
 //Create 1st SLA Term SLA01 [Platinum SLA]
 $bo_act_navigation.navigateToSlaTerms();
