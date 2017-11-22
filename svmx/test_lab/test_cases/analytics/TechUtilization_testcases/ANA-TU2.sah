@@ -107,7 +107,7 @@ _log($ana_TU1_productive_mins);
 
 _assertEqual(($ana_TU1_timeentry_duration2 * 60), Math.round($ana_TU1_productive_mins));
 _assertEqual($ana_dailysummery_working_minutes,Math.round($ana_TU1_timesheet_working_mins));
-_assertEqual(($ana_TU1_timeentry_duration1 * 60), Math.round($ana_TU1_timesheet_non_prod_mins));
+
 
 
 // Delete data from objects

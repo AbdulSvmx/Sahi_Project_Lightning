@@ -17,6 +17,8 @@ var $an_pg_techutilization = new function an_pg_techutilization() {
 	this.list_breaktime = _textbox("Select the source for Break Time field");
 	this.btn_criteria = _span("Criteria");
 	this.list_qualification_metric_criteria = _textbox("tabPanel_6_editprocesspanel_expression_QualificationCriteriafieldset_id-inputEl");
+	this.btn_custom_time_sheet = _listItem("Custom Timesheet");
+
 	this.btn_save = _span("Save");
 	this.btn_OK = _span("OK");
 	this.btn_schedule_notifications = _span("Schedule & Notifications[1]");
