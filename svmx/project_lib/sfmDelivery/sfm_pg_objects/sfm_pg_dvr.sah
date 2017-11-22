@@ -52,10 +52,10 @@ var $sfm_pg_dvr = new function sfm_pg_dvr() {
 		_setValue($sfm_pg_dvr.txt_advancedExpr,$advExpr);
 		_setSelected($sfm_pg_dvr.txt_messageType,$messageType);
 		_setValue($sfm_pg_dvr.txt_messageDescription,$ruleDescription );
-		//_click($sfm_pg_dvr.btn_saveDVR);
-		_wait(2000);
+		_click($sfm_pg_dvr.btn_saveDVR);
+		_wait(5000);
 		_click($sfm_pg_dvr.btn_addToProcess);
-		_wait(2000);
+		_wait(5000);
 		if(_exists($sfm_pg_dvr.txt_targetChilden)){
 			_click($sfm_pg_dvr.btn_targetOk);
 			

@@ -83,7 +83,7 @@ $TopLevelSR.an_topLevelSR();
 $an_act_Repeat_Visit_SR.rv_runEngine("meghana.rao@servicemax.com");
 
 var $ana_1042_wo1 = null;
-for(var $i=0; $ana_1042_wo1 == null; $i++){
+
 var $query_RV = "Select SVMXC__Work_Order__c ,SVMXC__Account__c, SVMXC__Configuration_Name__c ,SVMXC__Is_Repeat_Visit__c ,SVMXC__Service_Request__c from SVMXC__SPM_Repeat_Visit__c where SVMXC__Work_Order__c ='"+ $WO_1 +"'";
 var $resultArr1 = $op_act_sForceApiCall.sForceQuery($un, $pwd, $query_RV,"query");
 
@@ -98,7 +98,7 @@ $resultArr1.forEach(function($arr_rv_1) {
 	
 });
 
-}
+
 _log($Is_Repeat_visit_f);
 
 var $ana_1042_wo2 = null;

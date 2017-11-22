@@ -84,7 +84,6 @@ $an_act_Repeat_Visit_SR.rv_runEngine("meghana.rao@servicemax.com");
 
 _log($WO_first_1);
 var $ana_1029_wo1 = null ;
-for(var $i =0 ;$ana_1029_wo1 == null ; $i++ ){
 var $query_rv1 = "Select SVMXC__Work_Order__c ,SVMXC__Account__c, SVMXC__Configuration_Name__c ,SVMXC__Is_Repeat_Visit__c ,SVMXC__Service_Request__c from SVMXC__SPM_Repeat_Visit__c where SVMXC__Work_Order__c ='"+ $WO_first_1 +"'";
 $rv_result_1 = $op_act_sForceApiCall.sForceQuery($un, $pwd, $query_rv1,"query");
 
@@ -97,11 +96,11 @@ $rv_result_1.forEach(function($arrVal1) {
 	$Is_Repeat_visit_first = $arrVal1.SVMXC__Is_Repeat_Visit__c;
 	
 });
-}
+
 
 _log($Is_Repeat_visit_first);
 var $ana_1029_wo2 = null ;
-for(var $i =0 ;$ana_1029_wo2 == null ; $i++ ){
+
 var $query_rv2 = "Select SVMXC__Work_Order__c ,SVMXC__Account__c, SVMXC__Configuration_Name__c ,SVMXC__Is_Repeat_Visit__c ,SVMXC__Service_Request__c from SVMXC__SPM_Repeat_Visit__c where SVMXC__Work_Order__c ='"+ $WO_second_2 +"'";
 $rv_result_2 = $op_act_sForceApiCall.sForceQuery($un, $pwd, $query_rv2,"query");
 
@@ -114,7 +113,7 @@ $rv_result_2.forEach(function($arrVal2) {
 	$Is_Repeat_visit_second = $arrVal2.SVMXC__Is_Repeat_Visit__c;
 	
 });
-}
+
 _log($Is_Repeat_visit_second);
 
 _assertEqual("true", $Is_Repeat_visit_first);
