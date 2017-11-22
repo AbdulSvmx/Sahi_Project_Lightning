@@ -1,7 +1,7 @@
 //Tests are to be written here [Bhupendra Singh Chouhan]
 //==============
 
-var $RS_test123 = _testcase("$RS_5316","Get Price:Price picked for Activity type(Activity Product=ArchProd4-calibration)");
+var $RS_5316 = _testcase("$RS_5316","Get Price:Price picked for Activity type(Activity Product=ArchProd4-calibration)");
 $RS_5316.start();
 _setSpeed(100);
 
