@@ -7,10 +7,11 @@ var $RS_7304 = _testcase("$RS_7304","Creation of auto Entitlement rule for Case 
 $RS_7304.start();
 _setSpeed(100);
 /**
- * Login to the Sandbox Org
- */
+* Login to the Sandbox Org
+*/
 
-$bo_act_login.login($g_url, $g_un, $g_pwd);
+$bo_act_login.login($g_url, $bac_un, $bac_pwd);
+
 
 /**
  * Configure the Global Profile SET001
