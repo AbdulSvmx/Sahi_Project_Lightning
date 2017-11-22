@@ -30,6 +30,9 @@ var $sfm_pg_sfmDesigner = new function sfm_pg_sfmDesigner() {
 	this.txt_eeReceivedStreet = _textarea(0,_rightOf(_label("Received Street:")));
 	this.btn_eeUpdate = _span("Update");
 	this.btn_eeCancel = _span("Cancel");
+	this.txt_eeEstimatedPricePerUnit= _textbox("/svmx-number-/",_rightOf(_label("Estimated Price Per Unit:")));
+	this.txt_eeReceivedCity =_textbox("/sfm-text-/",_rightOf(_label("Received City:")));
+	this.txt_eeReferenceInformation = _textarea("/sfm-textarea-/",_rightOf(_label("Reference Information:")));
 	
 	//Extended edit page objects --Labor
 	
