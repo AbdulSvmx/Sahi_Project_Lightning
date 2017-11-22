@@ -1,13 +1,15 @@
-
 var $sfmNameToBeCloned = "Manage Work Order Lines - Usage";
-var $sfmName = "RS_5345_TDM016";
+var $sfmName = "RS_5347_TDM016";
 var $isCustom = false;
 var $sfmTemplate = "SVMXSTD: Manage WO Usage Lines";
 var $sfmTemplateSaveAsName = $sfmName;
-var $containerName = ["Parts","Parts","Parts"];
-var $fieldName=["Received City","Estimated Price Per Unit", "Reference Information"];
+var $containerName = ["Parts","Parts","Parts","Labor","Labor","Labor","Expenses","Expenses","Expenses","Travel","Travel","Travel"];
+var $fieldName=["Received City","Estimated Price Per Unit", "Reference Information",
+                "Received City","Estimated Price Per Unit", "Reference Information",
+                "Received City","Estimated Price Per Unit", "Reference Information",
+                "Received City","Estimated Price Per Unit", "Reference Information"];
 var $targetObject ="Work Detail (Work Order)";
-var $rulename ="5345Rule";
+var $rulename ="5347Rule";
 var $ruleDescription ="Line Qty <= 5, Estimated Price Per Unit <2000, Reference Information Is Not Null, Received City doesnot contain Mangalore";
 
 var $fieldArray = ["Line Qty","Estimated Price Per Unit", "Reference Information","Received City"];
@@ -23,7 +25,6 @@ var $domainName = "svmxc.cs19.visual.force.com";
 
 _setSpeed(100);
 $bo_act_login.login($g_url, $sfmUsn, $sfmPwd);
-
 
 //clone tmd016
 $sfm_act_SFM.cloneTDM016($sfmNameToBeCloned,$sfmName,$isCustom, $sfmTemplate, $sfmTemplateSaveAsName,$fieldName, $containerName);
@@ -55,40 +56,16 @@ _wait(5000);
 
 //Validate DVR on delivery
 
-//step 1 all true
+//add lines to Parts
 _click($sfm_pg_sfmDesigner.btn_deliveryPartsTab);
 _click($sfm_pg_sfmDesigner.btn_deliveryAddRowParts);
 _click($sfm_pg_sfmDesigner.btn_deliveryExtendedEdit);
-_setValue($sfm_pg_sfmDesigner.txt_eeLineQty,"5");
-_setValue($sfm_pg_sfmDesigner.txt_eeEstimatedPricePerUnit,"1500");
-_setValue($sfm_pg_sfmDesigner.txt_eeReferenceInformation,"Sahi DVR Validation");
-_setValue($sfm_pg_sfmDesigner.txt_eeReceivedCity,"Bangalore");
-_click($sfm_pg_sfmDesigner.btn_eeUpdate);
-_click($sfm_pg_sfmDesigner.btn_deliveryQuickSave);
-if(_exists($sfm_pg_sfmDesigner.txt_PriceAlert)){
-	_click(_span("Ok"));
-	_wait(10000);
-}
-if(_exists(_label("Parts: "+$ruleDescription))){
-	_log("Pass ::: Step 1 pass with all true");
-	_click(_span("Cancel"));
-}else{
-	_log("Fail ::: Step 1 fail with all true");
-}
 
-//step 2 one rule is false
-_click($sfm_pg_sfmDesigner.btn_deliveryExtendedEdit);
-_setValue($sfm_pg_sfmDesigner.txt_eeLineQty,"6");
-_click($sfm_pg_sfmDesigner.btn_eeUpdate);
-_click($sfm_pg_sfmDesigner.btn_deliveryQuickSave);
-if(_exists($sfm_pg_sfmDesigner.txt_PriceAlert)){
-	_click(_span("Ok"));
-	_wait(10000);
-}
+//add lines to Labor
+_click($sfm_pg_sfmDesigner.btn_deliveryLaborTab);
 
-if(_exists(_label("Parts: "+$ruleDescription))){
-	_log("Fail ::: Step 2 fail with one rule as false");
-	_click(_span("Cancel"));
-}else{
-	_log("Pass ::: Step 2 pass with one rule as false");
-	}
+//add lines to Expenses
+_click($sfm_pg_sfmDesigner.btn_deliveryExpenseTabTab);
+
+//add lines to Travel
+_click($sfm_pg_sfmDesigner.btn_deliveryTravelTab);
