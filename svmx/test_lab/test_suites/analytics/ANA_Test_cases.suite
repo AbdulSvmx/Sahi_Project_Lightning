@@ -1,0 +1,12 @@
+svmx/test_lab/test_suites/analytics/ana_deletecalculationmethood.suite
+svmx/test_lab/test_suites/analytics/ana_FTF.suite
+svmx/test_lab/test_suites/analytics/ana_MTTR.suite
+svmx/test_lab/test_suites/analytics/ana_MTTC.suite
+svmx/test_lab/test_suites/analytics/ana_Repeat_Visit.suite
+svmx/test_lab/test_suites/analytics/Account_summary.suite
+svmx/test_lab/test_suites/analytics/ana_ART.suite
+svmx/test_lab/test_suites/analytics/ana_AttachRate.suite
+svmx/test_lab/test_suites/analytics/ana_TechUtil.suite
+svmx/test_lab/test_suites/analytics/ana_Contract_Uptime.suite
+
+

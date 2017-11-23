@@ -105,18 +105,29 @@ var $an_act_Repeat_Visit_SR = new function an_act_Repeat_Visit_SR() {
 	
 	this.rv_runEngine = function($emailId)
 	{
+		_click($an_pg_rv.link_home);
+		_click($an_pg_rv.link_servicemaxSetup);
+		_click($an_pg_rv.btn_serviceperformancemetrics);
+		_click($an_pg_rv.btn_serviceperformancemetricsetup);
 		_click($an_pg_rv.btn_click_metrics);
 		_click($an_pg_rv.btn_RepeatVisit);
-		_click($an_pg_rv.btn_RV_Schedule_Notifications);
-		_click($an_pg_rv.txt_Email_onSuccess);
-		_setValue($an_pg_rv.txt_Email_onSuccess, $emailId);
-		_click($an_pg_rv.btn_save);
-		_click($an_pg_rv.btn_click_OK);
-		_wait(300);
-		_click($an_pg_rv.btn_click_run);
-		_click($an_pg_rv.btn_click_OK);
-		_wait(1000);
-		
+	    _click($an_pg_mttr.btn_schedule_notification);	
+	    _click($an_pg_mttr.list_timezone);
+	    _click($an_pg_mttr.btn_ist_timezone);
+	    _click($an_pg_mttr.btn_period);
+	    _click($an_pg_mttr.btn_daily);
+	    _click($an_pg_mttr.list_time);
+	    _click($an_pg_mttr.btn_time);
+	    _click($an_pg_mttr.txt_emailonsuccess);
+	    _setValue($an_pg_mttr.txt_emailonsuccess,$emailId);
+	    _click($an_pg_mttr.btn_save_sn);
+	    _wait(1000);
+	    _click($an_pg_mttr.btn_ok_sn);
+	    _wait(1000);
+	    _click($an_pg_mttr.btn_click_run);
+	    _wait(1000);
+	    _click($an_pg_mttr.btn_ok_sn);
+
 	};
 	
 	

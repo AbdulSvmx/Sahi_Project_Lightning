@@ -8,6 +8,7 @@ var $bo_act_getPrice = new function bo_act_getPrice() {
 	 */
 	this.navigateToSFMDeliveryPageFor_TDM016 = function($WONumber){
 		$bo_act_workOrders.invokeTDM016SFM($WONumber);
+		_wait(15000, _isVisible(_link("/Manage Work Order Lines/")));
 	};
 
 	/**
@@ -19,7 +20,6 @@ var $bo_act_getPrice = new function bo_act_getPrice() {
 		_click($bo_pg_getPrice.btn_editFirstRow);
 		_wait(3000);
 		_setStrictVisibilityCheck(true);
-		//_setValue(_textbox(0,_rightOf(_label("/Line Qty/"))),"3");
 		_setValue($bo_pg_getPrice.txt_lineQty, $lineQty);
 		$bo_act_common.searchfunction($searchValue);	//Search Values like Parts/Product Name
 		_click($bo_pg_getPrice.btn_update);

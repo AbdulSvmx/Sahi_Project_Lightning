@@ -14,7 +14,7 @@ var $Component = $data[1]["Component"];
 var $ScheduledDate = $data[1]["ScheduledDate"];
 var $PreferredStartDate = $data[1]["PreferredStartDate"];
 var $PreferredEndDate = $data[1]["PreferredEndDate"];
-var $GuranteedUptime = $data[1]["GuaranteedUptime"];
+
 $bo_act_login.login($url, $un, $pwd);
 
 
@@ -22,6 +22,7 @@ $bo_act_login.login($url, $un, $pwd);
 
 var $ana_1633_create_SCON = "SVMXC__Service_Contract__c SCON1 = new SVMXC__Service_Contract__c(Name = 'ANA-1633-SCON' , SVMXC__Company__c = '"+$Account+"' , SVMXC__Active__c = True, SVMXC__Start_Date__c = Date.valueOf('2017-01-01') , SVMXC__End_Date__c = Date.valueOf('2017-12-31') );insert SCON1;";
 var $ana_1633_result = $op_act_sForceApiCall.sForceQuery($un, $pwd, $ana_1633_create_SCON , "create");
+_wait(1000);
 var $ana_1633_query_SCON = "Select Id,Name from SVMXC__Service_Contract__c where Name = 'ANA-1633-SCON'";
 
 
@@ -63,7 +64,7 @@ var $ana_1633_IB_ID;
 
 
 _log($ana_1633_IB_ID);
-
+var $GuranteedUptime = $data[1]["GuranteedUptime"];
 // Create Covered Product 
 var $ana_1633_create_CP = "SVMXC__Service_Contract_Products__c CP01 = new SVMXC__Service_Contract_Products__c(SVMXC__Installed_Product__c = '"+$ana_1633_IB_ID+"',SVMXC__Service_Contract__c = '"+$ana_1633_SCON+"', Custom_checkbox__c = false , SVMXC__Is_Billable__c = true ); insert CP01;";
 var $ana_1633_result_CP = $op_act_sForceApiCall.sForceQuery($un, $pwd, $ana_1633_create_CP , "create");
@@ -100,7 +101,7 @@ _log($ana_1633_guranteed_uptime);
 
 _assertEqual($ana_1633_IB_ID, $ana_1633_ib1_id);
 _assertEqual($ana_1633_SCON,$ana_1633_scon1_id);
-_assertEqual($GuranteedUptime,$ana_1633_guranteed_uptime);
+_assertEqual($GuranteedUptime,Math.round($ana_1633_guranteed_uptime));
 
 
 $an_cu_1633.end();
