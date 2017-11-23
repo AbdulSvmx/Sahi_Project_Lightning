@@ -72,7 +72,7 @@ var $Calculation_Method=null;
 var $Metric_Value;
 var $Value;
 var $mttr;
-for(var $i=0;$Calculation_Method==null;$i++){
+
 var $ana_query_mttr = "Select SVMXC__Account__c, SVMXC__Calculation_Method__c ,SVMXC__Metric_Value__c,SVMXC__Value__c from SVMXC__SPM_Account_Summary__c where  SVMXC__Account__c='"+ $Account2 +"' and SVMXC__Calculation_Method__c='SPMREPEATVISIT: Standard' ";
 var $ana_result_mttr = $op_act_sForceApiCall.sForceQuery($un, $pwd, $ana_query_mttr,"query");
 _wait(2000);
@@ -80,15 +80,15 @@ $ana_result_mttr.forEach(function($mttr) {
 	$ana_WO_Account1 = $mttr.SVMXC__Account__c;
 	$Calculation_Method = $mttr.SVMXC__Calculation_Method__c;
 	$Metric_Value = $mttr.SVMXC__Metric_Value__c;
-	$Value=mttr.SVMXC__Value__c;
+	$Value=$mttr.SVMXC__Value__c;
 	});
-}
+
 
 _log($Calculation_Method);
 _log($Metric_Value);
-_assertEqual( $ana_WO_Account1, $Account1);
+_assertEqual( $ana_WO_Account1, $Account2);
 _assertEqual($Calculation_Method ,'SPMREPEATVISIT: Standard' );
-_assertEqual( $Metric_Value, 150);
+_assertEqual( $Metric_Value, 50);
 _assertEqual( $Value, 1);
 
 $delete1 = "delete [Select Id from SVMXC__Service_Order__c];";

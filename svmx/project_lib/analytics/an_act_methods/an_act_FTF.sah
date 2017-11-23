@@ -218,7 +218,7 @@ this.ftf_wd = function($Calculationmethodname) {
 		_wait(200);
 		_click($an_pg_ftf.btn_criteria);
 	   _click($an_pg_ftf.list_qualification_wo);
-		_click($an_pg_ftf.btn_closed_wo);
+		_click(_listItem("SVMXSTD: Work Order With Valid Component"));
 		_click($an_pg_ftf.list_fixed_on_first_visit_wd);
 	    _click(_listItem("Custom WD Expression"));
 		_click($an_pg_ftf.btn_save);

@@ -23,6 +23,8 @@ var $sfm_pg_sfmDesigner = new function sfm_pg_sfmDesigner() {
 	this.btn_deliveryAddChildRow = _div("sfm-button-1193");
 	this.btn_deliveryExtendedEdit = _image("/gif/", _in(_div("svmx-grid-cell-inner ")));
 	this.btn_deliveryAddRowLabor = _span("svmx-btn-icon svmx-sfmd-add-line-icon[1]");
+	this.btn_deliveryAddRowExpenses = _span("svmx-btn-icon svmx-sfmd-add-line-icon[2]");
+	this.btn_deliveryAddRowTravel = _span("svmx-btn-icon svmx-sfmd-add-line-icon[3]");
 	
 	//Extended edit page objects --Parts
 	

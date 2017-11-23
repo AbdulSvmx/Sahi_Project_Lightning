@@ -1,4 +1,5 @@
 //Include the salesforce js files to enable sforce API calls
+_windowAction("resize",1920,1080);
 //<browser>
 var script = document.createElement('script');
 script.type = 'text/javascript';
