@@ -34,7 +34,7 @@ var $op_act_sForceApiCall = new function op_act_sForceApiCall() {
 		if ($queryType == "create")
 			{
 
-			_wait(5000);	
+			_wait(10000);	
 			};
 		return $nArr;
 		//<browser>
