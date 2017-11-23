@@ -14,7 +14,6 @@ var $Component = $data[1]["Component"];
 var $ScheduledDate = $data[1]["ScheduledDate"];
 var $PreferredStartDate = $data[1]["PreferredStartDate"];
 var $PreferredEndDate = $data[1]["PreferredEndDate"];
-var $GuranteedUptime = $data[1]["GuaranteedUptime"];
 $bo_act_login.login($url, $un, $pwd);
 
 
@@ -97,9 +96,9 @@ $an_act_Contract_Uptime.schedule_notifications("meghana.rao@servicemax.com");
 var $ana_1636_ib1_id;
 var $ana_1636_scon1_id ;
 var $ana_1636_uptime_value ;
-var $ana_1636_guranteed_uptime = null;
+var $ana_1636_guranteed_uptime;
 
-
+var $GuranteedUptime = $data[1]["GuranteedUptime"];
 var $ana_1636_query_RV1 = "Select SVMXC__Installed_Product__c,SVMXC__Up_Time__c, SVMXC__Contract__c,SVMXC__Gauranteed_Up_Time__c from SVMXC__SPM_Contract_Up_Time__c where SVMXC__Installed_Product__c = '"+$ana_1636_IB_ID+"' AND SVMXC__Contract__c = '"+$ana_1636_SCON+"'";
 var $ana_1636_resultRV1 = $op_act_sForceApiCall.sForceQuery($un, $pwd, $ana_1636_query_RV1,"query");
 

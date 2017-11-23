@@ -14,7 +14,7 @@ var $Component = $data[1]["Component"];
 var $ScheduledDate = $data[1]["ScheduledDate"];
 var $PreferredStartDate = $data[1]["PreferredStartDate"];
 var $PreferredEndDate = $data[1]["PreferredEndDate"];
-var $GuranteedUptime = $data[1]["GuaranteedUptime"];
+
 $bo_act_login.login($url, $un, $pwd);
 
 
@@ -63,7 +63,7 @@ var $ana_1633_IB_ID;
 
 
 _log($ana_1633_IB_ID);
-
+var $GuranteedUptime = $data[1]["GuranteedUptime"];
 // Create Covered Product 
 var $ana_1633_create_CP = "SVMXC__Service_Contract_Products__c CP01 = new SVMXC__Service_Contract_Products__c(SVMXC__Installed_Product__c = '"+$ana_1633_IB_ID+"',SVMXC__Service_Contract__c = '"+$ana_1633_SCON+"', Custom_checkbox__c = false , SVMXC__Is_Billable__c = true ); insert CP01;";
 var $ana_1633_result_CP = $op_act_sForceApiCall.sForceQuery($un, $pwd, $ana_1633_create_CP , "create");
