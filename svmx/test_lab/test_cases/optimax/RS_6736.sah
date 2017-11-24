@@ -8,9 +8,9 @@ var $g_pwd = $user_credentials[$i][1];
 var $g_url = $user_credentials[$i][2];
 }
 
-var $RS_6735 = _testcase("RS_6735", "Tech Active value change ('True')");
+var $RS_6736 = _testcase("RS_6736", "Tech Enable Scheduling changes (Enable Scheduling = False)");
 
-$RS_6735.start();
+$RS_6736.start();
 	
 	
 $bo_act_login.login($g_url, $g_un, $g_pwd);
@@ -41,7 +41,7 @@ var CreateRecords=[];
 		tech.SVMXC__Service_Group__c=$RTO_DispatchProcess[$i][13];
 		tech.Name='InvalidTech';
 		tech.SVMXC__Enable_Scheduling__c='True';
-		tech.SVMXC__Active__c='False';
+		tech.SVMXC__Active__c='True';
 		tech.SVMXC__Street__c='Robin St';
 		tech.SVMXC__Zip__c='77591';
 		tech.SVMXC__Country__c='United States';
@@ -71,7 +71,8 @@ var CreateRecords=[];
 	{
 	
 	tech.id=result_tech[0].id;
-	tech.SVMXC__Active__c='True';
+	tech.SVMXC__Enable_Scheduling__c='False';
+	tech.SVMXC__Active__c='False';
 	result = sforce.connection.update([tech]);
 	_log("result "+result);
 	if (result[0].getBoolean("success")) {
@@ -82,10 +83,6 @@ var CreateRecords=[];
 
 	}
 		
-/*var tech_res = sforce.connection.query("Select Id,Name FROM SVMXC__Service_Group_Members__c WHERE Id = '"+result_tech[0].id+"'");
-var records = tech_res.getArray("records");
-
-_log("records = "+records);*/
 
 // Validating Optimizer Transactions update
 
@@ -120,4 +117,4 @@ else{
 }
 //</browser>
 
-$RS_6735.end();
+$RS_6736.end();

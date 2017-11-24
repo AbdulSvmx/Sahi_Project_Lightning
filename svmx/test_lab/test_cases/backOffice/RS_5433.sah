@@ -10,25 +10,16 @@ var $searchText =$checklistName;
 var $questionText=$bo_act_common.generateRandomName("What is your name");
 var $sfmType= "to generate a Checklist/Survey type of Process";
 var $objName="Work Order"
-<<<<<<< HEAD
-	
-=======
 var	$sfmName=$checklistName;
 //----Creating a checklist having question type text on WO object
->>>>>>> 665b4e8b68234821577efe72e1d371c86f1c6843
 $bo_act_login.login($g_url, $bac_unBase, $bac_pwdBase);
 $bo_act_navigation.navigateToSfmTransactionDesigner();
 _wait(60000, _isVisible($bo_pg_sfmTransactionAndDesigner.btn_newSFM));	
 $bo_act_SFM.newChecklistTypeSFM($checklistName,$sfmType,$objName);
 $bo_act_SFM.addQuestionToChecklist($questionText)
 
-<<<<<<< HEAD
-$bo_act_SFM.newChecklistTypeSFM($checklistName);
-$bo_act_SFM.addQuestionToChecklist($questionText);
-=======
 
 //---Verifying in App Permission page if the created checklist display---
->>>>>>> 665b4e8b68234821577efe72e1d371c86f1c6843
 
 $bo_act_navigation.navigateToSfmAppPermission();
 $bo_act_SFMAppPermission.searchSFMDisplay($checklistName);
