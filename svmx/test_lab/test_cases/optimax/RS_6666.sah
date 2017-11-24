@@ -17,15 +17,15 @@ var $dp_Id = $dispatch_Process_Xl[0][1];
 var $dp_Territory_Id = $dispatch_Process_Xl[0][2];
 
 
-var $RS_6667 = _testcase("RS_6667", "All the address fields are null(Street, City, State, County, Zip, Lat & Long)");
+var $RS_6666 = _testcase("RS_6666", "Address verification (with Street, State & Country))");
 
-$RS_6667.start();
+$RS_6666.start();
 
 var $sfdc_sessionId = null;
 
 $bo_act_login.login($g_url, $g_un, $g_pwd);
 
-/*_click(_link("ServiceMax Setup"));
+_click(_link("ServiceMax Setup"));
 _wait(20000, _isVisible(_div("Configuration Profiles")));
 _click(_div("Configuration Profiles"));
 $op_utility.search_ActiveProfile();
@@ -47,7 +47,7 @@ _selectWindow();
 _click(_button("Refresh"));
 _click(_submit("Save"));
 _click(_submit("Back To Setup Home"));
-_click(_link("Home"));*/
+_click(_link("Home"));
 
 
 _set($login_result, _fetch(login($g_un,$g_pwd)));
@@ -138,16 +138,15 @@ function create_WO ($work_Orders_Xl , $dp_Territory_Id, $dp_Id)
 	_log("Work Orders Created = "+ result.length);
 	if(result.length > 0)
 	{
-		var WO_List = _call(sforce.connection.query("Select Id, SVMXC__Dispatch_Process__c, SVMXC__Street__c, SVMXC__City__c, SVMXC__Zip__c, SVMXC__Country__c From SVMXC__Service_Order__c Where SVMXC__Dispatch_Process__c = '"+$dp_Id+"' Limit 3"));
+		var WO_List = _call(sforce.connection.query("Select Id, SVMXC__Dispatch_Process__c, SVMXC__City__c, SVMXC__Zip__c From SVMXC__Service_Order__c Where SVMXC__Dispatch_Process__c = '"+$dp_Id+"' Limit 3"));
 		_log(" Work Order size = "+WO_List.size);
 		var WO_arr = WO_List.getArray("records");
 		_log(" WO_arr = "+WO_arr);
-		for(var $x=0;$x<WO_arr.length;$x++){
+		for(var $x=0;$x<WO_arr.length;$x++)
+		{
 			var WO = WO_arr[$x];
-			WO.SVMXC__Street__c = null;
 			WO.SVMXC__City__c = null;
 			WO.SVMXC__Zip__c = null;
-			WO.SVMXC__Country__c = null;
 			UpdateWO.push(WO);
 			_log("result.updateRecords update = "+UpdateWO);
 		}
@@ -189,4 +188,4 @@ function validate_Addr_Violation($dp_Id)
 
 $bo_act_login.logOut();
 
-$RS_6667.end();
+$RS_6666.end();
