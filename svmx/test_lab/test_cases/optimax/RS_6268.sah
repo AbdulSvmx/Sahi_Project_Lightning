@@ -62,11 +62,11 @@ _log($login_result);
 $op_utility.delete_WO($dp_Id,$login_result.sessionId);
 
 _set($No_Techs, _fetch(No_Of_Techs($dp_Territory_Id)));
-_log($No_Techs);
+_log("Number Of Technicians : " + $No_Techs);
 
 _set($Horizon, _fetch(Dp_Horizon($dp_Id)));
 $Horizon = parseInt($Horizon);
-_log($Horizon);
+_log("Horizon : " + $Horizon);
 
 _set($create_WO, _fetch(create_WO($wo_type , $wo_status, $dp_Territory_Id, $wo_country, $wo_zip)));
 _log($create_WO);
@@ -80,7 +80,7 @@ _wait(5000);
 if($op_utility.validate_Job_Success($dp_Id,$login_result.sessionId,200000)=== true)
 {
 	_log("job is successfully completed");
-		if(($op_utility.read_file($dp_Id,$login_result.sessionId,"ExecutionTime_WP","Initiate Job Response1") === ($Horizon * $No_Techs * $Horizon)) & ($op_utility.read_file($dp_Id,$login_result.sessionId,"ExecutionTime_WP","Initiate Job Response2") === ($Horizon + 1)))
+		if(($op_utility.read_file($dp_Id,$login_result.sessionId,"ExecutionTime_WP:","Initiate Job Response1") === ($Horizon * $No_Techs * $Horizon)) & ($op_utility.read_file($dp_Id,$login_result.sessionId,"ExecutionTime_WP:","Initiate Job Response2") === ($Horizon + 1)))
 		{
 			_log("Working Hours are sent as per the horizon");
 		}
