@@ -26,7 +26,7 @@ var $bo_pg_getPrice = new function bo_pg_getPrice(){
 	
 	// Add Labor Line
 	this.btn_laborLine = _span("Labor");
-	this.txt_activityType = _textbox(0,_rightOf(_label("/Activity Type/")));
+	this.txt_activityType = _textbox("Activity Type:",_near(_span("Update")));
 	this.btn_startDateAndTime = _span("/sfmd-current-datetime-icon/",_rightOf(_label("/Start Date and Time/")));
 	this.btn_endDateAndTime = _span("/sfmd-current-datetime-icon/",_rightOf(_label("/End Date and Time/")));
 	

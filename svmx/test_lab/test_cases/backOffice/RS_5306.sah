@@ -67,10 +67,6 @@ var $casePriority = "Medium";
 var $caseOrigin = "Phone";
 var $caseNumber = $bo_act_Cases.createCase($caseStatus, $casePriority, $caseOrigin);
 
-//Edit the above case for Account, Contact and IB information
-var $locationName = "";
-$bo_act_Cases.editCase($caseNumber,$accountName,$contactName,$IBName,$locationName);
-
 /**
 * Create SFM Wizard for WO with two Steps 1st-Check Entitlement and 2nd- Manage Work Order Lines - Usage(TDM016)
 */
