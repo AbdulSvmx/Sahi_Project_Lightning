@@ -122,7 +122,7 @@ _log($ana_1636_uptime_value);
 _assertEqual($ana_1636_IB_ID, $ana_1636_ib1_id);
 _assertEqual($ana_1636_SCON,$ana_1636_scon1_id);
 _assertEqual($GuranteedUptime,Math.round($ana_1636_guranteed_uptime));
-_assertEqual(99.17, $ana_1636_uptime_value);
+_assertEqual(99, Math.round($ana_1636_uptime_value));
 
 
 // To verify the Downtime

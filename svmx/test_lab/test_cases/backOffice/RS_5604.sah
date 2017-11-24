@@ -75,6 +75,21 @@ var $endDateActulOn_IB = _getText(_cell(0,_under(_tableHeader("End Date"))));
 _assertEqual($startDateExpectedOn_IB,$startDateActulOn_IB,"Actual and expected Start Dates are not same");
 _assertEqual($endDateExpectedOn_IB,$endDateActulOn_IB,"Actual and expected End Dates are not same");
 
+
+/**
+* Create SFM Wizard for WO with Steps as Check Entitlement PS line
+*/
+
+var $wizardTitleName = $bo_act_common.generateRandomName("SFWTitle");
+var $wizardIDName = $bo_act_common.generateRandomName("SFWId");
+var $fieldActnType = "Others";
+var $actnName = "Check Entitlement PS";
+
+$bo_act_navigation.navigateToSfmWizard();
+$bo_act_SFW.createWizardGeneralInfo("Work Order", $wizardTitleName, $wizardIDName);
+$bo_act_SFW.addCustomActionToWizard($fieldActnType, $actnName);
+$bo_act_SFW.quickSaveSFWizard();
+
 /**
  * Create Case record
  */
@@ -138,6 +153,9 @@ var $datacreated = [$WO_Number,$caseNumber,$IBName,$productName,$contactName,$ac
 for (var i = 0; i < $datacreated.length; i++) {
 	$bo_act_common.cleanUpfunction($datacreated[i]);
 }
+
+//Delete SFM Wizard 
+$bo_act_SFW.deleteSFMWizard("Work Order", $wizardIDName);
 
 $bo_act_login.logOut(); 
 
