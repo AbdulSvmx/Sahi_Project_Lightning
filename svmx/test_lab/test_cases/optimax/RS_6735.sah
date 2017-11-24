@@ -8,7 +8,7 @@ var $g_pwd = $user_credentials[$i][1];
 var $g_url = $user_credentials[$i][2];
 }
 
-var $RS_6735 = _testcase("RS_6735", "Tech Active value change (True)");
+var $RS_6735 = _testcase("RS_6735", "Tech Active value change ('True')");
 
 $RS_6735.start();
 	
