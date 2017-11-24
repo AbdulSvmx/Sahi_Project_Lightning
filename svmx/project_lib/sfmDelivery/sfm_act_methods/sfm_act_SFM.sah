@@ -45,7 +45,7 @@ var $sfm_act_SFM = new function sfm_act_SFM() {
 				}else{
 					_setValue(_f("main").s_hscrollbar("horizontalScrollBar[5]"),"00");
 				}				
-				_click(_f("main").s_datagroup("dataGroup").near(
+				_click(_f("main").s_datagroup("dataGroup[3]").near(
 						_f("main").s_richtext($containerName[$i])));
 				_setValue(_f("main").s_textinput("searchText[4]"),
 						$fieldName[$i]);
