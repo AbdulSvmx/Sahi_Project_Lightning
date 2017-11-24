@@ -43,9 +43,9 @@ var $bo_act_SFW = new function bo_act_SFW() {
 		_setSelected($bo_pg_sfmWizard.sel_wizardObjectType,$actnName);
 		//_assertVisible(_label($actnName));
 		_wait(3000);
-		_wait(2000);
+		//_wait(2000);
 		_click($bo_pg_sfmWizard.btn_saveWizardStep);
-			_wait(60000);		
+			//_wait(60000);		
 		};
 			this.selWizardStatusAsInactive=function($wizardStatus){
 				_setSelected($bo_pg_sfmWizard.sel_wizardStatus,$wizardStatus);

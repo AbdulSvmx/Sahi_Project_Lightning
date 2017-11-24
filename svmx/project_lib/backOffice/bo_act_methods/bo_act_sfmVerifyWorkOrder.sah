@@ -15,7 +15,7 @@ var $bo_act_sfmVerifyWorkOrder= new function bo_act_sfmVerifyWorkOrder() {
 	};
 this.verifyWizardOnPMPObj=function($sfmName){
 	_click($bo_pg_sfmVerifyWorkOrder.img_allTab);
-	_wait(2000);
+	//_wait(2000);
 	_click($bo_pg_sfmVerifyWorkOrder.lnk_objPMP);
 	_wait(30000);
 	_click($bo_pg_sfmVerifyWorkOrder.lnk_firstLinkPMP);		
@@ -23,7 +23,7 @@ this.verifyWizardOnPMPObj=function($sfmName){
 
 this.verifyWizardOnWOObj=function($sfmName){
 	_click($bo_pg_sfmVerifyWorkOrder.img_allTab);
-	_wait(2000);
+	//_wait(2000);
 	_click($bo_pg_sfmVerifyWorkOrder.link_workOrder);
 	_wait(10000);
 	_click($bo_pg_sfmVerifyWorkOrder.lnk_firstLinkWO);
