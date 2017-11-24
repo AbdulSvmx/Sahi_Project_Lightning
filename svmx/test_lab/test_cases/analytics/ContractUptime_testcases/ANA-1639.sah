@@ -1,4 +1,4 @@
-wilvar $an_cu_1639 = _testcase("ANA-1639","Contract Uptime update verification with Work Orders created");
+var $an_cu_1639 = _testcase("ANA-1639","Contract Uptime update verification with Work Orders created");
 $an_cu_1639.start();
 var $un = "meghana.rao@servicemax.com";
 var $pwd = "salesforce100";
