@@ -1,4 +1,4 @@
-../../../test_lab/test_suites/analytics/ana_deletecalculationmethood.suite
+../../../test_lab/test_suites/analytics/ana_deletecalculationmethod.suite
 ../../../test_lab/test_suites/analytics/ana_FTF.suite
 ../../../test_lab/test_suites/analytics/ana_MTTR.suite
 ../../../test_lab/test_suites/analytics/ana_MTTC.suite
@@ -8,5 +8,3 @@
 ../../../test_lab/test_suites/analytics/ana_AttachRate.suite
 ../../../test_lab/test_suites/analytics/ana_TechUtil.suite
 ../../../test_lab/test_suites/analytics/ana_Contract_Uptime.suite
-
-
