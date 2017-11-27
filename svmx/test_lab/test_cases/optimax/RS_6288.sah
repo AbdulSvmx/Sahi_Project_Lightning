@@ -9,6 +9,10 @@ var $g_url = $user_credentials[$i][2];
 var $RS_6288 = _testcase("RS_6288", "Create a SLA Terms");
 
 $RS_6288.start();
+
+var $rowCount = 0;
+var $date = "" + new Date();
+var $SLAName = "SLATerms_" + $date;
 	
 $bo_act_login.login($g_url, $g_un, $g_pwd);
 
@@ -18,9 +22,13 @@ _click(_div("Warranties & Service Contracts"));
 _click(_div("middle[54]"));
 _wait(20000,_isVisible(_div("New SLA Terms")));
 _click(_button("New SLA Terms"));
-_setValue(_textbox("page1:form1:block1:j_id34:j_id35:2:j_id44"), "SLA Terms");
+_set($rowCount, _table("page1:form1:block1:j_id34:j_id35").rows.length);
+_log($rowCount);
+$rowCount=$rowCount-2;
+_log($rowCount);
+_setValue(_textbox("page1:form1:block1:j_id34:j_id35:"+$rowCount+":j_id44"), $SLAName);
 _click(_cell("dataCell[13]"));
-_check(_checkbox("page1:form1:block1:j_id34:j_id35:2:j_id52"));
+_check(_checkbox("page1:form1:block1:j_id34:j_id35:"+$rowCount+":j_id52"));
 _setSelected(_select("page1:form1:block1:DetailSection:tab1block1:j_id85:j_id86:j_id88"), "WorkOrder");
 _click(_button("Add Record"));
 _setSelected(_select("page1:form1:block1:DetailSection:tab1block1:SectionIR:Tab1_Table:0:j_id103"), "Cleaning");
