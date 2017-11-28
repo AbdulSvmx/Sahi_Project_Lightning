@@ -249,8 +249,6 @@ var $bo_act_navigation = new function bo_act_navigation() {
  	 this.navigateToSvmxSetup();
  	_click($bo_pg_servicemaxSetup.btn_warrantiesAndServiceContracts);
  	_click($bo_pg_servicemaxSetup.btn_services);
- 	//_setSpeed(3000);
- 	//return $callBack.returnResult(_exists($bo_pg_sfmWizard.wizardLabel));
      };
      
      this.navigateToWorkOrdersTab = function(){
