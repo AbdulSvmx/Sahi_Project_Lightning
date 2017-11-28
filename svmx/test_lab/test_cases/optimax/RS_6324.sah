@@ -63,4 +63,4 @@ else
 
 $bo_act_login.logOut();
 
-$RS_6323.end();
+$RS_6324.end();
