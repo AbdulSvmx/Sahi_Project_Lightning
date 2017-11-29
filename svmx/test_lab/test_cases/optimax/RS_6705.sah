@@ -56,7 +56,7 @@ _setValue(_textbox("page1:form1:block1:tab8block1:SuccessSection:ErrorItem:Error
 _click(_submit("Save And Close[1]"));
 _assertExists(_div("message errorM3"));
 _assertVisible(_div("message errorM3"));
-_assertEqual("Error:This territory does not have associated Business Hours.", _getText(_div("message errorM3")));
+_assertEqual("Error:Business Hours associated with this territory is not active.", _getText(_div("message errorM3")));
 
 
 //<browser>

@@ -64,7 +64,68 @@ var $sfm_act_wizards = new function sfm_act_wizards() {
 		}
 };
 	
+ 
+   	this.addChecklistProcessToWizard = function($wizardObject, $wizardName, $wizardType, $sfmName){
+		$bo_act_navigation.navigateToSvmxSetup();
+		_click(_div("Service Flow Manager"));
+		_click(_div("SFM Wizards"));
+		_setSelected($sfm_pg_wizards.selectObject,$wizardObject);
+		
+		// If wizard is already present add the step else create a new wizard and then add the step
+		if(_exists(_span($wizardName))){
+			$sfm_act_wizards.editChecklistWizard($wizardName, $wizardType);
+		}
+		else{
+			$sfm_act_wizards.createChecklistWizard($wizardName, $wizardType);
+		}
+	};
 	
+	
+	//function to create a new SFM wizard
+	this.createChecklistWizard = function($wizardName, $wizardType){
+		
+		_click($sfm_pg_wizards.btn_customNew);
+		_setValue($sfm_pg_wizards.txt_wizardTitle,$wizardName);
+		_setValue($sfm_pg_wizards.txt_wizardID, $wizardName);
+		$sfm_act_wizards.addChecklistStepToSfmWizard($wizardType);
+		_assertExists(_span($wizardName));
+	};
+	
+	//function to add a step to sfm Wizard
+	this.editChecklistWizard = function($wizardName, $wizardType) {
+		
+		_check(_checkbox(0,_leftOf(_span($wizardName))));
+		_click($sfm_pg_wizards.btn_customEdit);	
+		$sfm_act_wizards.addChecklistStepToSfmWizard($wizardType);		
+	};
+	
+	//function to delete SFM wizard -- to be completed, yet to capture buttons of confirmation
+	this.deleteChecklistWizard = function() {
+			_check(_checkbox(0,_leftOf($wizardName)));
+		_click($sfm_pg_wizards.btn_customDelete);	
+	};
+	
+	//add step/SFM to wizard
+	this.addChecklistStepToSfmWizard = function($wizardType) {
+		_click($sfm_pg_wizards.txt_manageWizSteps);
+		_click($sfm_pg_wizards.btn_newStep);
+		_setSelected($sfm_pg_wizards.btn_wizStepType,$wizardType);
+		_wait(3000,!isVisible(_span("Processing...[2]")));
+		_click($sfm_pg_wizards.btn_saveStep);
+		_wait(3000,_heading4("Success"));
+		if(_isVisible(_heading4("Success"))){
+			_log("Pass");
+		_click($sfm_pg_wizards.btn_quickSave);
+		_wait(4000);
+		_click($sfm_pg_wizards.btn_saveClose);
+		_wait(4000);
+		}
+		else{
+			_log("Fail");
+			_stopTestCase();
+		}
+};
+ 
 	
 
 };
