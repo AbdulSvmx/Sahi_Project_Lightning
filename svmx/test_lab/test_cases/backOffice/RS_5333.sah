@@ -31,7 +31,7 @@ $bo_act_products.addStandardPriceForProduct($productName, $standardPriceValue);
 
 // Validate the Standard price for Product
 var $actual_StandardPriceValue = _getText(_tableHeader(0,_under(_tableHeader("Standard Price"))));
-_assertEqual($actual_StandardPriceValue,"$120.00","Actual and expected Standard price values are not same");
+_assertEqual($actual_StandardPriceValue,"$1200.00","Actual and expected Standard price values are not same");
 
 /**
 * Create Service Type with QC
@@ -42,31 +42,14 @@ var $qualifyingCriteria = "SVMXSTD: Contract Field Service Work Orders";
 var $serviceName = $bo_act_servicesTypes.createServicesTypes($trackedOn, $dataType, $qualifyingCriteria);
 
 /**
-* Create Activity Master and Edit Service Price book
-*/
-var $activityType = ["--None--","Calibration","Cleanup","Installation","Repair","Service"];
-var $unit = ["--None--","Per Hour","Flat Rate"];
-var $PriceBookName = "Standard Service Price Book";
-var $activityProduct = "";
-var $regularRate = 300;
-
-/*
-var $activityID = $bo_act_activityMaster.createActivityMasterUsingProduct($activityType[4], $productName);
-var $ServicePricebooksEntryNumber = $bo_act_servicePricebooks.editStandardServicePricebooks($PriceBookName, $unit[1], $activityID, $activityProduct, $regularRate);
-*/
-
-/**
  * Configure the Group Profile SET004 and SET017
  */
 var $groupProfileName = "AutoBACGroup";
 var $Module = "Work Order";
 var $SubModule = "Create Work Order Lines VF";
 var $Setting1 = "SET004";
-var $Setting2 = "SET017";
 var $settingValue1 = "Standard Price Book";
-var $settingValue2 = "Standard Service Price Book";
 $bo_act_configurationProfiles.editGroupProfileForTextSettings($groupProfileName, $Module, $SubModule, $Setting1, $settingValue1);
-//$bo_act_configurationProfiles.editGroupProfileForTextSettings($groupProfileName, $Module, $SubModule, $Setting2, $settingValue2);
 
 /**
  * Create SLA Terms
@@ -132,11 +115,11 @@ var $wizardIDName = $bo_act_common.generateRandomName("SFWId");
 var $fieldActnType = "Others";
 var $actnName = "Check Entitlement WO";
 
-/*$bo_act_navigation.navigateToSfmWizard();
+$bo_act_navigation.navigateToSfmWizard();
 $bo_act_SFW.createWizardGeneralInfo("Work Order", $wizardTitleName, $wizardIDName);
 $bo_act_SFW.createWizardStep("SFM", "Manage Work Order Lines - Usage", "Interactive");
 $bo_act_SFW.addCustomActionToWizard($fieldActnType, $actnName);
-$bo_act_SFW.quickSaveSFWizard();*/
+$bo_act_SFW.quickSaveSFWizard();
 
 
 //Navigate to IB and Create WO from IB
@@ -190,25 +173,6 @@ var $lineQty = "4";
 $bo_act_getPrice.addPartsLineToSFMDelivery($searchValue,$lineQty);
 $bo_act_getPrice.calculateGetPrice();
 
-//Validation of Get Price for Parts lines
-/*$bo_act_getPrice.editPartsLineToSFMDelivery($searchValue);
-
-var $PartsLinePricePerUnitActual = _getText(_textbox(0,_rightOf(_label("/Line Price Per Unit/"))));
-var $PartsCoveredActual = _getText(_textbox(0,_rightOf(_label("/Covered %/"))));
-var $PartsDiscountActual = _getText(_textbox(0,_rightOf(_label("/Discount %/"))));
-var $PartsBillableQtyActual = _getText(_textbox(0,_rightOf(_label("/Billable Qty/"))));
-var $PartsBillableLinePriceActual = _getText(_textbox(0,_rightOf(_label("/Billable Line Price/"))));
-
-var $BillableLinePriceExpected = $lineQty*$standardPriceValue;
-
-_assertEqual($PartsLinePricePerUnitActual,$standardPriceValue,"Actual and expected Parts Line Price Per Unit are not same");
-_assertEqual($PartsBillableQtyActual,$lineQty,"Actual and expected Parts Billable Qty are not same");
-_assertEqual($PartsBillableLinePriceActual,$BillableLinePriceExpected,"Actual and expected Parts Billable Line Price are not same");
-_assertEqual($PartsCoveredActual,"0","Actual and expected Parts Covered % are not same");
-_assertEqual($PartsDiscountActual,"0","Actual and expected Parts Discount % are not same");
-
-$bo_act_getPrice.closeEditedWOLineToSFMDelivery();*/
-
 //Add Labor Line to Above invoke TDM016 SFM
 var $searchValue = $productName;
 var $activityType = "Repair";
@@ -216,24 +180,6 @@ var $startHrs = "04";
 var $endHrs = "08";
 $bo_act_getPrice.addLaborLineToSFMDelivery($searchValue, $activityType, $startHrs, $endHrs);
 $bo_act_getPrice.calculateGetPrice();
-
-//Validation of Get Price for Labor lines
-/*$bo_act_getPrice.editLaborLineToSFMDelivery($searchValue);
-
-var $LaborLinePricePerUnitActual = _getText(_textbox(0,_rightOf(_label("/Line Price Per Unit/"))));
-var $LaborCoveredActual = _getText(_textbox(0,_rightOf(_label("/Covered %/"))));
-var $LaborBillableQtyActual = _getText(_textbox(0,_rightOf(_label("/Billable Qty/"))));
-var $LaborBillableLinePriceActual = _getText(_textbox(0,_rightOf(_label("/Billable Line Price/"))));
-
-var $LaborBillableQtyExpected = 8-4; // $startHrs = "04" And $endHrs = "08";
-var $LaborBillableLinePriceExpected = $LaborBillableQtyExpected*$regularRate;
-
-_assertEqual($LaborLinePricePerUnitActual,$regularRate,"Actual and expected Labor Line Price Per Unit are not same");
-_assertEqual($LaborBillableQtyActual,$lineQty,"Actual and expected Billable Qty are not same");
-_assertEqual($LaborBillableLinePriceActual,$LaborBillableLinePriceExpected,"Actual and expected Billable Line Price are not same");
-_assertEqual($LaborCoveredActual,"0","Actual and expected labor Covered % are not same");
-
-$bo_act_getPrice.closeEditedWOLineToSFMDelivery();*/
 
 $bo_act_getPrice.saveSFMDelivery();
 
@@ -254,13 +200,9 @@ for (var i = 0; i < $datacreated.length; i++) {
 $bo_act_common.cleanUpfunction($datacreated[i]);
 }
 
-//Deleting the above created data
-
-/*$bo_act_activityMaster.deleteActivityMaster($activityID);
-$bo_act_servicePricebooks.deleteStandardServicePricebooksEntry($PriceBookName, $ServicePricebooksEntryNumber);*/
 
 // Delete SFM Wizard 
-//$bo_act_SFW.deleteSFMWizard("Work Order", $wizardIDName);
+$bo_act_SFW.deleteSFMWizard("Work Order", $wizardIDName);
 
 $bo_act_login.logOut(); 
 
