@@ -239,7 +239,7 @@ $bo_act_getPrice.saveSFMDelivery();
 
 var $actualRateOnWorkOrder = _getText(_div(0,_rightOf(_cell("Rate (Pricing Rule)"))));
 var $actualRateTypeOnWorkOrder = _getText(_div(0,_rightOf(_cell("Rate Type (Pricing Rule)"))));
-var $actualProformaInvoiceAmountOnWorkOrder = _getText(_div(0,_rightOf(_cell("Rate Type (Pricing Rule)"))));
+var $actualProformaInvoiceAmountOnWorkOrder = _getText(_div(0,_rightOf(_cell("/Proforma Invoice Amount/"))));
 
 _assertEqual($actualRateOnWorkOrder,"$517.000","Actual and Rate on Work Order are not same");
 _assertEqual($actualRateTypeOnWorkOrder,$rateType,"Actual and expected Rate Type on Work Order are not same");
