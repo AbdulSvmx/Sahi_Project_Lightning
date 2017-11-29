@@ -52,6 +52,26 @@ _log($login_result);
 _set($create_team, _fetch(create_Team($dp_Terr_Id)));
 _log($create_team);
 
+_click(_link("Home"));
+_click(_link("ServiceMax Setup"));
+_wait(20000, _isVisible(_div("Configuration Profiles")));
+_click(_div("Configuration Profiles"));
+$op_utility.search_ActiveProfile();
+_click(_submit("Edit"));
+_setSelected(_select("conf_prof:F_conf_prof:Setting_Block:j_id114:j_id115:Modulelist"), "Common");
+_setSelected(_select("conf_prof:F_conf_prof:Setting_Block:j_id114:j_id122:SubModulelist"), "Global Settings");
+_click(_link("Edit[6]"));
+_selectWindow("Servicemax_Conf_Prof");
+_check(_radio("disp_setting:disp_setting:j_id1:DispSection:j_id37:j_id40"));
+_click(_cell("False"));
+_click(_button("Save"));
+_click(_submit("Close"));
+_selectWindow();
+_click(_button("Refresh"));
+_doubleClick(_button("Refresh"));
+_click(_submit("Save"));
+
+
 
 //<browser>
 function login($g_un,$g_pwd){

@@ -145,9 +145,9 @@ _set($Terr_Id, _fetch(get_Terr_Id($PrimaryTerr)));
 _log($Terr_Id);
 
 var $insertRowData = [$DPName,$DP_Id,$Terr_Id];
-$excel.insertUnderColumn("../optimax/op_excleData/automation.xlsx", "Dispatch_Process", "Process Name", $DPName, $rowIndex);
-$excel.insertUnderColumn("../optimax/op_excleData/automation.xlsx", "Dispatch_Process", "Process Id", $DP_Id, $rowIndex);
-$excel.insertUnderColumn("../optimax/op_excleData/automation.xlsx", "Dispatch_Process", "Territory ID", $Terr_Id, $rowIndex);
+$excel.insertUnderColumn("../optimax/op_excleData/automation.xlsx", "RS_6329", "Process Name", $DPName, $rowIndex);
+$excel.insertUnderColumn("../optimax/op_excleData/automation.xlsx", "RS_6329", "Process Id", $DP_Id, $rowIndex);
+$excel.insertUnderColumn("../optimax/op_excleData/automation.xlsx", "RS_6329", "Territory ID", $Terr_Id, $rowIndex);
 
 //<browser>
 
