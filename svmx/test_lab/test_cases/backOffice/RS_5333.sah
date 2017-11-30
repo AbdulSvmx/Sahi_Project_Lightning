@@ -1,7 +1,7 @@
 //Tests are to be written here [Bhupendra Singh Chouhan]
 //==============
 
-var $RS_5333 = _testcase("$RS_5333","Get Price on WO:IB not covered under Warranty/SCON");
+var $RS_5333 = _testcase("$RS_5333","Get Price - When Pricing Rule of FIXED is applied.");
 $RS_5333.start();
 _setSpeed(100);
 
@@ -31,7 +31,7 @@ $bo_act_products.addStandardPriceForProduct($productName, $standardPriceValue);
 
 // Validate the Standard price for Product
 var $actual_StandardPriceValue = _getText(_tableHeader(0,_under(_tableHeader("Standard Price"))));
-_assertEqual($actual_StandardPriceValue,"$1200.00","Actual and expected Standard price values are not same");
+_assertEqual($actual_StandardPriceValue,"$1,200.00","Actual and expected Standard price values are not same");
 
 /**
 * Create Service Type with QC
@@ -189,7 +189,7 @@ var $actualProformaInvoiceAmountOnWorkOrder = _getText(_div(0,_rightOf(_cell("/P
 
 _assertEqual($actualRateOnWorkOrder,"$517.000","Actual and Rate on Work Order are not same");
 _assertEqual($actualRateTypeOnWorkOrder,$rateType,"Actual and expected Rate Type on Work Order are not same");
-_assertEqual($actualProformaInvoiceAmountOnWorkOrder,"$0.000","Actual and expected Proforma Invoice Amount On Work Order are not same");
+_assertEqual($actualProformaInvoiceAmountOnWorkOrder,"$517.000","Actual and expected Proforma Invoice Amount On Work Order are not same");
 
 /**
 *Clean up function
