@@ -1,0 +1,43 @@
+
+//author - Noor Salma Sharieff
+
+var $9824 = _testcase("9824","SFW - OPDOC in wizard step.");
+$9824.start();
+_setSpeed(100);
+
+$bo_act_login.login($g_url, $bac_un, $bac_pwd);
+
+
+var $wizardTitleName = $bo_act_common.generateRandomName("SFWTitle");
+var $wizardIDName = $bo_act_common.generateRandomName("SFWId");
+$bo_act_navigation.navigateToSfmWizard();
+$bo_act_SFW.createWizardGeneralInfo("Work Order", $wizardTitleName, $wizardIDName);
+$bo_act_SFW.createWizardStepwithHandOver("SFM", "Create RMA from Work Order", "Interactive",true);
+$bo_act_SFW.createOutputDocumentWizardStepwithSelectTemplate("Output Document","Work Order Service Report",false);
+$bo_act_SFW.quickSaveSFWizard();
+$bo_act_SFW.saveAndClose();
+
+var $accountName = $bo_act_accounts.createAccount();
+var $contactName = $bo_act_contacts.createContact($accountName);
+var $caseNumber = $bo_act_Cases.createCase("New", "High", "Email");
+var $productName = $bo_act_products.createProduct();
+var $IBName = $bo_act_installedProduct.createInstalledProduct($productName, $accountName, $contactName);
+$bo_act_workOrders.createWorkOrder($caseNumber, $accountName, $contactName, $IBName, "Open", "High", "Field Service");
+_selectDomain("/svmx/");
+_assertExists(_button("/Create RMA from Work Order/",_near(_cell($wizardTitleName))));
+_click(_button("/Create RMA from Work Order/",_near(_cell($wizardTitleName))));
+_selectDomain();
+_click(_image("/svmx-sfmd-delete-icon/"));
+_click(_span("/svmx-sfmd-save-icon/"));
+_assertContainsText("Work Order updated",_div("messageText"));
+
+//Clean up function
+var $datacreated = [$contactName,$accountName,$caseNumber,$productName,$IBName,$WONumber];
+for (var i = 0; i < $datacreated.length; i++) {
+	$bo_act_common.cleanUpfunction($datacreated[i]);
+}
+$bo_act_SFW.deleteWizards("Work Order", $wizardIDName);
+$9824.end();
+
+
+
