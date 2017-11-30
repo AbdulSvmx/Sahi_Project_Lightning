@@ -24,7 +24,7 @@ var $bo_act_installedProduct = new function bo_act_installedProduct() {
 		_click($bo_pg_installedProducts.btn_save);
 		_assertNotVisible(_div("/Error: Invalid Data/"));
 		_logOutput($IBName+ " IB is created");
-		_wait(15000, _isVisible($IBName));
+		_wait(15000, _isVisible(_heading2($IBName)));
 		return $IBName;
 		// Need to return
 	};
@@ -41,7 +41,7 @@ var $bo_act_installedProduct = new function bo_act_installedProduct() {
 		_selectDomain("/svmx/");
 		_click($bo_pg_installedProducts.btn_createWorkOrder);
 		_selectDomain();
-		_wait(60000,_isVisible("Create Work Order from Installed Product"));
+		_wait(60000,_isVisible($bo_pg_installedProducts.btn_sfmSave));
 		_click($bo_pg_installedProducts.btn_sfmSave);
 		return _getText($bo_pg_installedProducts.txt_workOrderNumber);
 	};
@@ -52,9 +52,9 @@ var $bo_act_installedProduct = new function bo_act_installedProduct() {
 		_selectDomain("/svmx/");
 		_click($bo_pg_installedProducts.btn_SFWcreateSupportCase);
 		_selectDomain();
-		_wait(60000,_isVisible("Create Case from Installed Product"));
+		_wait(60000,_isVisible($bo_pg_installedProducts.txt_SFMcreateSupportCaseStatus));
 		_setValue($bo_pg_installedProducts.txt_SFMcreateSupportCaseStatus,$status);
 		_click($bo_pg_installedProducts.btn_sfmSave);
 		return _getText($bo_pg_installedProducts.txt_caseNumber);
-	}
+	};
 };

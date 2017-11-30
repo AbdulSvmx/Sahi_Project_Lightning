@@ -26,6 +26,31 @@ var $sfm_act_createCustomWizard = new function sfm_act_createCustomWizard() {
 		_click($sfm_pg_wizards.btn_saveClose);
 	};
 	
+//Added by Safi
+	this.addWizStepWithCriteria = function($wizTitle,$wizStepType,$wizStepName,$WizCriteria,$profile){
+//		$title = $wizTitle;
+//		$wizTitle = $bo_act_common.generateRandomName("Auto Wiz ");
+		var $wizId = $wizTitle.toLowerCase().replace(/ /g, "_");
+//		_log($wizTitle);
+//		_log($wizId);
+//		_log($title);
+		_wait(5000);
+		_setValue($sfm_pg_wizards.txt_wizardTitle,$wizTitle);
+		_setValue($sfm_pg_wizards.txt_wizardID,$wizId);
+		_click($sfm_pg_wizards.txt_manageWizSteps);
+		_click($sfm_pg_wizards.btn_newStep);
+		_setSelected($sfm_pg_wizards.btn_wizStepType,$wizStepType);
+		_setSelected($sfm_pg_wizards.btn_stepName,$wizStepName);
+		_setSelected($sfm_pg_wizards.btn_stepCriteria,$WizCriteria);
+		_click($sfm_pg_wizards.btn_saveStep);
+		_click($sfm_pg_wizards.txt_managePermission);
+		_setSelected($sfm_pg_wizards.select_availableGrpProfiles,$profile);
+		_click($sfm_pg_wizards.btn_add);
+		_click($sfm_pg_wizards.btn_saveClose);		
+		
+	};	
+
+	
 	this.createBlankWo = function(){
 		$woName="";
 		_wait(5000);
@@ -44,6 +69,20 @@ var $sfm_act_createCustomWizard = new function sfm_act_createCustomWizard() {
 //		_selectWindow();
 		
 	};
+	
+//Added by Safi
+	this.createWOwithOrderStatus = function($OrdrStatus){		
+		_wait(5000);
+		_click($sfm_pg_wo.tab_all);
+		_wait(3000);
+		_click($sfm_pg_wo.link_wo);
+		_click($sfm_pg_wo.btn_wo_new);
+		_setSelected($sfm_pg_wo.btn_woStaus,$OrdrStatus);
+		_click($sfm_pg_wo.btn_wo_save);
+		_wait(3000);
+		
+	};
+	
 	
 	this.newInstalledProduct = function($tabName,$productName,$accountName,$contactName) {
 		var $serialNum = $bo_act_common.generateRandomName("Ser");
