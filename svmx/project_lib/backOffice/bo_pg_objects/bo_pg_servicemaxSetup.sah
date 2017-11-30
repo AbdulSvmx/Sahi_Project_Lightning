@@ -37,7 +37,8 @@ var $bo_pg_servicemaxSetup = new function bo_pg_servicemaxSetup(){
 	this.btn_instalBaseAndPM=_div("Installed Base & PM");
 	this.btn_counterRule=_div("Counter Rules");
 	this.btn_scheduledSFM=_div("Scheduled SFM");
-	
+	this.btn_checklistQuestionLibrary= _div("Checklist Question Library");
+	this.txt_checklistQuestionLibrary=_span("Checklist Question Library");
 
 };
 

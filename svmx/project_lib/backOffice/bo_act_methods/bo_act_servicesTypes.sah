@@ -3,9 +3,9 @@
  */
 // var = $trackedOn = case/Work order;
 
-var $bo_act_servicesTypes = new function bo_act_servicesTypes($trackedOn, $dataType, $qualifyingCriteria) {
+var $bo_act_servicesTypes = new function bo_act_servicesTypes() {
 
-	this.createServicesTypes = function() {
+	this.createServicesTypes = function($trackedOn, $dataType, $qualifyingCriteria) {
 		var $serviceTypeName = $bo_act_common.generateRandomName("SerType");
         $bo_act_navigation.navigateToServiceType();
         _wait(5000, _isVisible($bo_pg_servicesTypes.btn_newAvailableService));
