@@ -1,0 +1,164 @@
+var $sfm_act_search = new function sfm_search() {
+	this.managePermissionSearch = function($standardSearch,$button,$profile){
+		$sfm_pg_search.selectStandardSearch($standardSearch);
+		$sfm_pg_search.clickMenuOptn($button);
+		_setSelected($sfm_pg_search.sel_profile,$profile);
+		_wait(3000);
+		var $availableSearches=_getText($sfm_pg_search.availableSearches);
+		_log($availableSearches);
+		_log($availableSearches.length);
+		for(var $i=0;$i<$availableSearches.length;$i++){
+			if($availableSearches[$i]==$standardSearch){
+				_setSelected($sfm_pg_search.availableSearches,$standardSearch);
+				_click($sfm_pg_search.add_image);
+			}
+		}
+		var $selectedSearches=_getText($sfm_pg_search.selectedSearches);
+		_log($selectedSearches.length);
+		for(var $i=0;$i<$selectedSearches.length;$i++){
+			if($selectedSearches[$i]==$standardSearch){
+				break;
+			}
+		}
+		_click($sfm_pg_search.btn_save);
+	};
+
+	this.searchSfmSearches =  function ($standardSearch) {
+//		_setStrictVisibilityCheck(true);
+//		_wait(5000);
+		_selectDomain("svmxc.cs19.visual.force.com");
+//		_focus($sfm_pg_search.sel_search,$standardSearch);
+		_setSelected($sfm_pg_search.sel_search,$standardSearch);
+		_click($sfm_pg_search.btn_go);
+		_selectDomain();
+//		if(_isVisible(_span(""))){
+//		_log("Pass");
+//		}
+//		else{
+//		_log("Fail");
+//		}
+	};
+
+	this.verifyWorkOrder = function($standardSearch){
+		_click(_span($standardSearch));
+		if(_isVisible($sfm_pg_search.tab_allWo)){
+			_click($sfm_pg_search.tab_allWo);
+			var $woNumber = _getText($sfm_pg_search.link_wo);
+			_log($woNumber);
+			_log($woNumber.search);
+			if($woNumber.search("WO-")!=-1){
+				_log("Pass");
+			}
+			else{
+				_log("Fail");
+			}
+		}
+	};
+
+	this.cloneSearch = function($standardSearch,$button,$searchName,$arr){
+		$searchId = $searchName.toLowerCase();
+		$sfm_pg_search.selectStandardSearch($standardSearch);
+		$sfm_pg_search.clickMenuOptn($button);
+		_setValue($sfm_pg_search.txt_searchTitle,$searchName);
+		_setValue($sfm_pg_search.txt_searchID,$searchId);
+		_click($sfm_pg_search.tab_searchConfig);
+		_click($sfm_pg_search.btn_objDisplaySeq);
+		this.selectMultipleObject($arr);
+//		_setSelected($sfm_pg_search.sel_objects,["Case","Work Order"], true);
+//		_click($sfm_pg_search.btn_bottom);
+//		_click($sfm_pg_search.btn_objectSave);
+		_wait(5000);
+		_click($sfm_pg_search.btn_save);
+	};
+
+	this.customManagePermission = function(){
+		$sfm_pg_search.selectStandardSearch($standardSearch);
+		_click($sfm_pg_search.btn_customManagePermission);
+	};
+
+	this.selectMultipleObject = function($objArr){
+		_setSelected($sfm_pg_search.sel_objects,$objArr, true);
+		_click($sfm_pg_search.btn_bottom);
+		_click($sfm_pg_search.btn_objectSave);
+	};
+
+	this.selectFieldOrder = function($value,$fieldArr){
+		_click(_checkbox(0,_leftOf(_textbox({value:$value}))));
+		_click($sfm_pg_search.btn_fldDisplaySeq);
+		_setSelected($sfm_pg_search.sel_objects,$fieldArr, true);
+		_click($sfm_pg_search.btn_bottom);
+		_click($sfm_pg_search.btn_objectSave);
+	};
+
+	this.newCustomSearch = function($searchName,$searchObject){
+		var $searchID = $searchName.toLowerCase();
+		_click($sfm_pg_search.btn_customNew);
+		_setValue($sfm_pg_search.txt_searchTitle,$searchName);
+		_setValue($sfm_pg_search.txt_searchID,$searchID);
+		_click($sfm_pg_search.tab_searchConfig);
+		this.addNewSearchConfig($searchObject);
+	};
+
+	this.addNewSearchConfig = function($searchObject){
+		_click($sfm_pg_search.btn_new);
+		_setSelected($sfm_pg_search.sel_searchObject,$searchObject);
+	};
+
+	this.buildExpression = function($clicks,$exprsnVal,$sheetName){
+		$selectData = $excel.readFromCustomExcel("../sfmDelivery/sfmDelivery_excelData/data.xlsx",$sheetName,"","");
+		_log($selectData);
+		for(var $i=0;$i<$clicks;$i++){
+			_click($sfm_pg_search.btn_addRow);
+			_wait(2000);
+		}
+		var $rowLength = _table("list[1]").rows.length;
+		var $rowCount;
+		_set($rowCount,$rowLength);	
+		for(var $j=1;$j<$rowCount;$j++){
+			var $cellLength = _table("list[1]").rows[$i].cells.length;
+			var $cellCount;
+			_set($cellCount,$cellLength);	
+			for(var $k=1;$k<$cellCount-1;$k++){
+				var $row = $j-1;
+				var $col = $k-1;
+				if($k==3){
+					_setValue(_textbox(0,_in(_table("list[1]").rows[$j].cells[$k])),$selectData[$row][$col]);	
+				}
+				else{
+					_setSelected(_select(0,_in(_table("list[1]").rows[$j].cells[$k])),$selectData[$row][$col]);
+				}
+			}
+		}
+		_setValue($sfm_pg_search.txt_advancedExprsn, $exprsnVal);
+	};
+
+	this.addResultsToDisplay = function($clicks,$sheetName){
+		$selectData = $excel.readFromCustomExcel("../sfmDelivery/sfmDelivery_excelData/data.xlsx", $sheetName,"","");
+//		_log($selectData);
+		for(var $i=0;$i<$clicks;$i++){
+			_click($sfm_pg_search.btn_addRowResult);
+			_wait(2000);
+		}
+		var $rowLength = _table("list[2]").rows.length;
+		var $rowCount;
+		_set($rowCount,$rowLength);	
+//		_log($rowCount);
+		for(var $j=2;$j<$rowCount;$j++){
+			var $cellLength = _table("list[2]").rows[$j].cells.length;
+//			_log($cellLength);
+			var $cellCount1;
+			_set($cellCount1,$cellLength);
+//			_log($cellCount1);
+			for(var $k=1;$k<$cellCount1-1;$k++){
+				var $row = $j-2;
+//				_log($row);
+				var $col = $k-1;
+//				_log($col);
+				_setSelected(_select(0,_in(_table("list[2]").rows[$j].cells[$k])),$selectData[$row][$col]);
+			}
+			
+		}
+		_click($sfm_pg_search.btn_objectSave);
+		_click($sfm_pg_search.btn_save);
+	};
+};
