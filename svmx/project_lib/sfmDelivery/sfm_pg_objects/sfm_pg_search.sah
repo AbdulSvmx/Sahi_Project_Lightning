@@ -1,0 +1,86 @@
+var $sfm_pg_search = new function sfm_pg_search(){
+	
+	this.selectStandardSearch = function($standardSearch){
+		_click(_checkbox(0,_leftOf(_span($standardSearch))));
+	};
+	
+	this.clickMenuOptn = function($button){
+		_click(_submit($button));
+	};
+	
+	this.sel_profile = _select(0,_rightOf(_label("Select ServiceMax Profile")));
+	
+	this.availableSearches = _select(0,_near(_cell("Available Searches")));
+	
+	this.selectedSearches = _select(0,_under(_cell("Selected Searches")));
+	
+	this.add_image = _image("Add");
+	
+	this.btn_save= _button("Save & Close");
+	
+	this.btn_quickSave= _button("Quick Save");
+	
+	this.btn_cancel= _button("Cancel");
+	
+	this.sel_search= _select(0,_near(_span("Choose Search")));
+//	this.sel_search= _select("SearchId:SFMSearchFrm1:j_id2");
+	
+	this.btn_go= _link("Go");
+	
+	this.tab_allWo= _span("/All Work Orders/");
+	
+	this.link_wo= _link(0,_under(_span("Work Order Number")));
+	
+	this.txt_searchTitle = _textbox(0,_rightOf(_span("Search Title")));
+	
+	this.txt_searchID = _textbox(0,_rightOf(_span("Search ID")));
+	
+	this.btn_customManagePermission = _submit("/Manage Permissions/",_near(_heading2("Custom Searches")));
+	
+	this.tab_searchConfig = _cell("Search Configuration");
+	
+	this.btn_objDisplaySeq = _button("Object Display Sequence");
+	
+	this.sel_objects = _select("page1:form1:Sequenceblock:list1:j_id32");
+	
+	this.btn_bottom = _imageSubmitButton("Bottom");
+	
+	this.btn_objectSave = _button("Save");
+	
+	this.btn_fldDisplaySeq = _button("Field Display Sequence");
+	
+	this.sel_field = _select("page1:form1:Sequenceblock1:list1:j_id75");
+	
+	this.btn_customClone = _submit("/Clone/",_near(_heading2("Custom Searches")));
+	
+	this.btn_customNew =_submit("/New/",_near(_heading2("Custom Searches")));
+	
+	this.btn_customEdit =_submit("/Edit/",_near(_heading2("Custom Searches")));
+	
+	this.btn_new = _button("New");
+	
+	this.sel_searchObject = _select(0,_near(_tableHeader("Search Object")));
+	
+	this.btn_addRow = _imageSubmitButton("table2AddRow");
+	
+	this.sel_fieldName = _select(0,_near(_div("Field Name")));
+	
+	this.sel_operator = _select(1,_near(_div("Field Name")));
+	
+	this.txt_advancedExprsn = _textbox(0,_near(_span("Advanced Expression")));
+	
+	this.txt_value = _textbox(0,_near(_div("Field Name")));
+	
+	this.btn_addRowResult = _imageSubmitButton("table3AddRow");
+	
+//	this.verifyIfSearchVisible= function($standardSearch){
+//		_log("I am Here");
+//		if(_isVisible(_span($standardSearch))){
+//			_log("Pass");
+//		}
+//		else{
+//			_log("Fail");
+//		}
+//	
+//	};
+};

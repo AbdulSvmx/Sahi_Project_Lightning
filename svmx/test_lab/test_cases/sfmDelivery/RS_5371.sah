@@ -1,0 +1,24 @@
+var $rs_5371 = _testcase("RS_5371","Check for Date, DateTime fields at first level navigation in Displayed Under Search Result.");
+$rs_5371.start();
+
+/*
+ * Pre-Condition:
+ * The Following should be present in the page layout of the work order
+ * Date1
+ * Date2
+ * Date3
+ */
+$searchName = $bo_act_common.generateRandomName("Date_Verification_");
+$searchObject = "Work Order";
+$clicks = 6;
+$exprsnVal = "";
+$sheetName = "rs_5371";
+$bo_act_login.login($g_url,$sfmUsn,$sfmPwd);
+$bo_act_navigation.navigateToSfmSearchDesigner();
+$sfm_act_search.newCustomSearch($searchName,$searchObject);
+$sfm_act_search.buildExpression($clicks,$exprsnVal,$sheetName);
+$sfm_act_search.addResultsToDisplay(7, "Options");
+$bo_act_navigation.navigateToHome();
+$sfm_act_search.searchSfmSearches($searchName);
+_wait(5000);
+$rs_5371.end();
