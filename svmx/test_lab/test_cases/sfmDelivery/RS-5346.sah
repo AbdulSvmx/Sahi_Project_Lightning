@@ -1,0 +1,154 @@
+var $sfmNameToBeCloned = "Manage Work Order Lines - Usage";
+var $sfmName = "RS_5346_TDM016_DVR";
+var $isCustom = false;
+var $sfmTemplate = "SVMXSTD: Manage WO Usage Lines";
+var $sfmTemplateSaveAsName = $sfmName;
+var $containerName = ["Parts","Labor","Expenses","Travel"];
+var $fieldName=["Received Street","Received Street","Received Street","Received Street"];
+var $targetObject ="Work Detail (Work Order)";
+var $rulename ="5346Rule_Error";
+var $ruleDescription ="Line Qty > 5, Received Street IsNotNull";
+
+var $fieldArray = ["Line Qty","Received Street"];
+var $conditionArray = ["Greater Than ", "Is Not Null"];
+var $operandArray =["Value", ""];
+var $valueArray =["5", ""];
+var $advExpr= "1 AND 2";
+var $messageType = "Error";
+var $wizardName = "SFM Delivery Auto";
+var $wizardType = "SFM";
+var $wizardObject ="Work Order";
+var $domainName = "svmxc.cs19.visual.force.com";
+//var $woName ="WO-00000096";
+
+_setSpeed(100);
+$bo_act_login.login($g_url, $sfmUsn, $sfmPwd);
+
+//clone tmd016
+$sfm_act_SFM.cloneTDM016($sfmNameToBeCloned,$sfmName,$isCustom, $sfmTemplate, $sfmTemplateSaveAsName,$fieldName, $containerName);
+$sfm_act_SFM.partsNotMandatory();
+
+//create Data validation rule
+$sfm_pg_dvr.newRule($targetObject, $rulename, $ruleDescription, $fieldArray, $conditionArray, $operandArray, $valueArray, $advExpr, $messageType);
+_click($sfm_pg_sfmDesigner.btn_quickSaveSFM);
+_click($sfm_pg_sfmDesigner.btn_saveSFM); 
+_wait(30000,_isVisible($sfm_pg_sfmDesigner.lnk_home));
+
+
+//add the process to wizard
+$sfm_act_wizards.addToWizard($wizardObject, $wizardName, $wizardType, $sfmName);
+_wait(30000,_isVisible($sfm_pg_sfmDesigner.lnk_home)); 
+_click($sfm_pg_sfmDesigner.lnk_home);  
+
+//Create WO dynamically and search that work order in global search and validate in delivery.
+$login = $sfm_act_createWorkOrder.login($sfmUsn, $sfmPwd);
+$woName = $sfm_act_createWorkOrder.create_WO();  
+
+_wait(3000);
+$sfm_act_common.globalSearch($woName);
+_click(_link($woName));
+_selectDomain($domainName);
+_click(_button($sfmName));
+_selectDomain();
+_wait(5000,_span("Get Price"));
+
+//Add a row to all child lines
+
+//add line to Parts
+_click($sfm_pg_sfmDesigner.btn_deliveryPartsTab);
+_click($sfm_pg_sfmDesigner.btn_deliveryAddRowParts);
+_click($sfm_pg_sfmDesigner.btn_deliveryExtendedEdit);
+_setValue($sfm_pg_sfmDesigner.txt_eeLineQty,"6");
+_setValue($sfm_pg_sfmDesigner.txt_eeReceivedStreet,"MG Road");
+_click($sfm_pg_sfmDesigner.btn_eeUpdate);
+_wait(3000);
+
+//add line to Labor
+_click($sfm_pg_sfmDesigner.btn_deliveryLaborTab);
+_click($sfm_pg_sfmDesigner.btn_deliveryAddRowLabor);
+_click($sfm_pg_sfmDesigner.btn_deliveryExtendedEditLabor);
+_setValue($sfm_pg_sfmDesigner.txt_eeLineQty,"6");
+_setValue($sfm_pg_sfmDesigner.txt_eeReceivedStreet,"MG Road");
+_click($sfm_pg_sfmDesigner.btn_eeUpdate);
+_wait(3000);
+
+//add line to Expenses
+_click($sfm_pg_sfmDesigner.btn_deliveryExpenseTab);
+_click($sfm_pg_sfmDesigner.btn_deliveryAddRowExpenses);
+_click($sfm_pg_sfmDesigner.btn_deliveryExtendedEditExpenses);
+_setValue($sfm_pg_sfmDesigner.txt_eeLineQty,"6");
+_setValue($sfm_pg_sfmDesigner.txt_eeReceivedStreet,"MG Road");
+_click($sfm_pg_sfmDesigner.btn_eeUpdate);
+_wait(3000);
+
+//add line to Travel
+_click($sfm_pg_sfmDesigner.btn_deliveryTravelTab);
+_click($sfm_pg_sfmDesigner.btn_deliveryAddRowTravel);
+_click($sfm_pg_sfmDesigner.btn_deliveryExtendedEditTravel);
+_setValue($sfm_pg_sfmDesigner.txt_eeLineQty,"6");
+_setValue($sfm_pg_sfmDesigner.txt_eeReceivedStreet,"MG Road");
+_click($sfm_pg_sfmDesigner.btn_eeUpdate);
+_wait(3000);
+
+//Validate for DVR-Error when condition is true
+_click($sfm_pg_sfmDesigner.btn_deliveryQuickSave);
+if(_exists($sfm_pg_sfmDesigner.txt_PriceAlert)){
+	_click(_span("Ok"));
+	_wait(10000);
+}
+if ( (_exists(_div("Parts: "+$ruleDescription))) &&
+	(_exists(_div("Labor: "+$ruleDescription)))	 &&
+	(_exists(_div("Expenses: "+$ruleDescription))) &&
+	(_exists(_div("Travel: "+$ruleDescription))) ){
+	
+	_log("Pass ::: DVR-Error for Parts/Labor/Expenses/Travel is working");
+}else{
+	_log("Fail ::: DVR-Error for Parts/Labor/Expenses/Travel is not working ");
+}
+
+//Validate for DVR-Error when condition is false
+
+//add line to Parts
+_click($sfm_pg_sfmDesigner.btn_deliveryPartsTab);
+_click($sfm_pg_sfmDesigner.btn_deliveryExtendedEdit);
+_setValue($sfm_pg_sfmDesigner.txt_eeLineQty,"3");
+_click($sfm_pg_sfmDesigner.btn_eeUpdate);
+_wait(3000);
+
+//add line to Labor
+_click($sfm_pg_sfmDesigner.btn_deliveryLaborTab);
+_click($sfm_pg_sfmDesigner.btn_deliveryExtendedEditLabor);
+_setValue($sfm_pg_sfmDesigner.txt_eeLineQty,"3");
+_click($sfm_pg_sfmDesigner.btn_eeUpdate);
+_wait(3000);
+
+//add line to Expenses
+_click($sfm_pg_sfmDesigner.btn_deliveryExpenseTab);
+_click($sfm_pg_sfmDesigner.btn_deliveryExtendedEditExpenses);
+_setValue($sfm_pg_sfmDesigner.txt_eeLineQty,"3");
+_click($sfm_pg_sfmDesigner.btn_eeUpdate);
+_wait(3000);
+
+//add line to Travel
+_click($sfm_pg_sfmDesigner.btn_deliveryTravelTab);
+_click($sfm_pg_sfmDesigner.btn_deliveryExtendedEditTravel);
+_setValue($sfm_pg_sfmDesigner.txt_eeLineQty,"3");
+_click($sfm_pg_sfmDesigner.btn_eeUpdate);
+_wait(3000);
+
+_click($sfm_pg_sfmDesigner.btn_deliveryQuickSave);
+
+if(_exists($sfm_pg_sfmDesigner.txt_PriceAlert)){
+	_click(_span("Ok"));
+	//_wait(10000);
+}
+if((_isVisible(_div("Parts: "+$ruleDescription))) ||
+		(_isVisible(_div("Labor: "+$ruleDescription)))||
+		(_isVisible(_div("Expenses: "+$ruleDescription)))||
+		(_isVisible(_div("Travel: "+$ruleDescription)))
+		){
+	_log("Fail ::: DVR-Error is triggered");
+}else{
+	_log("Pass ::: DVT-Error is not triggered");
+}
+

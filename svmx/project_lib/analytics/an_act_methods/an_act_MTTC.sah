@@ -96,7 +96,7 @@ this.MTTC_custom_field=function($Calculationmethodname)
 	_wait(200);
 	_click($an_pg_mttc.Criteria);
 	_click($an_pg_mttc.WO_QC);
-	_click($an_pg_mttc.Closed_Work_Orders);
+	_click(_listItem("SVMXSTD: To Qualify Work Orders for FTF processing"));
 	_click($an_pg_mttc.save);
 	_click($an_pg_mttc.ok);		
 	};
@@ -127,7 +127,7 @@ this.MTTC_custom_field=function($Calculationmethodname)
 		_wait(200);
 		_click($an_pg_mttc.Criteria);
 		_click($an_pg_mttc.WO_QC);
-		_click($an_pg_mttc.UK_WO);
+		_click(_listItem("Auto_exp"));
 		_click($an_pg_mttc.save);
 		_click($an_pg_mttc.ok);		
 		};

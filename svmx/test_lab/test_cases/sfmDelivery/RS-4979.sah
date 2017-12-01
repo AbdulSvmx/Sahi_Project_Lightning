@@ -1,0 +1,61 @@
+
+var $customActionObject = "Work Order";
+var $actionType="Web Service";
+var $actionId = "RS-4979WebServices_CA_HandOver";
+var $className = "TestWebServices";
+var $methodName = "test_WS";
+var $paramName="Name";
+var $paramValueType="Value";
+var $paramValue=$actionId;
+var $processingMessage = "Account creation under process";
+var $successMessage = "Accounts inserted sucessfully";
+
+var $wizardName = "SFM Delivery Auto";
+var $wizardType="Others";
+//var $woName="WO-00000104";
+var $domainName = "svmxc.cs19.visual.force.com";
+
+
+_setSpeed(100);
+$bo_act_login.login($g_url, $sfmUsn, $sfmPwd);
+
+$sfm_act_navigation.navigateToSfmCustomActions();
+//$sfm_act_customActions.webServiceCustomAction($customActionObject, $actionType, $actionId, $className, $methodName,$processingMessage,$paramName, $paramValueType, $paramValue);
+$sfm_act_customActions.webServiceCustomAction($customActionObject, $actionType, $actionId, $className, $methodName, $processingMessage, $paramName, $paramValueType, $paramValue);
+
+$sfm_act_wizards.addToWizard($customActionObject, $wizardName, $wizardType, $actionId,"true");
+$sfm_act_wizards.addToWizard($customActionObject, $wizardName, "SFM", "Create RMA from Work Order" );
+
+
+
+//Create WO dynamically and search that work order in global search and validate in delivery.
+$login = $sfm_act_createWorkOrder.login($sfmUsn, $sfmPwd);
+$woName = $sfm_act_createWorkOrder.create_WO();
+
+
+_wait(3000);
+$sfm_act_common.globalSearch($woName);
+_click(_link($woName));
+_wait(5000,_isVisible(_button(" Edit ")));
+_selectDomain($domainName);
+_click(_button($actionId));
+_selectDomain();
+_wait(3000);
+if(_exists($processingMessage)){
+	_log("Pass ::: Account creating under process");
+}else{
+	_log("Fail");
+}
+
+if(_exists($successMessage)){
+	_log("Pass ::: Account created successfully");
+	_click(_submit("Continue"));
+	_wait(5000);
+}
+
+if (_exists(_link("Create RMA from Work Order (Work Order Number: "+$woName+")"))){
+   _log("Pass ::: Handover has happened to Create RMA from Work order process");
+}
+else{
+	_log("Fail ::: Handover has not happened to Create RMA from Work order process");
+}

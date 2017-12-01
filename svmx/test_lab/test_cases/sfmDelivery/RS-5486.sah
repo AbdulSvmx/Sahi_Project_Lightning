@@ -12,8 +12,8 @@ var $successMessage = "Accounts inserted sucessfully";
 
 var $wizardName = "SFM Delivery Auto";
 var $wizardType="Others";
-var $woName="WO-00000872";
-var $domainName = "svmxc.cs21.visual.force.com";
+//var $woName="WO-00000872";
+var $domainName = "svmxc.cs19.visual.force.com";
 
 
 _setSpeed(100);
@@ -35,6 +35,7 @@ $woName = $sfm_act_createWorkOrder.create_WO();
 _wait(3000);
 $sfm_act_common.globalSearch($woName);
 _click(_link($woName));
+_wait(5000,_isVisible(_button(" Edit ")));
 _selectDomain($domainName);
 _click(_button($actionId));
 _selectDomain();
