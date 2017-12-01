@@ -13,7 +13,7 @@ var $successMessage = "Accounts inserted sucessfully";
 var $wizardName = "SFM Delivery Auto";
 var $wizardType="Others";
 //var $woName="WO-00000872";
-var $domainName = "svmxc.cs19.visual.force.com";
+var $domainName = "/visual.force.com/";
 
 
 _setSpeed(100);

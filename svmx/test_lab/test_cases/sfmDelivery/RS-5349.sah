@@ -6,7 +6,7 @@ var $sfmTemplateSaveAsName = $sfmName;
 var $containerName = ["Order Status","Parts","Labor","Expenses","Travel"];
 var $fieldName = ["Scheduled Date","Received Street","Received Street","Received Street","Received Street"];
 
-var $domainName = "svmxc.cs19.visual.force.com";
+var $domainName = "/visual.force.com/";
 var $wizardName = "SFM Delivery Auto";
 var $wizardType = "SFM";
 var $wizardObject ="Work Order";
