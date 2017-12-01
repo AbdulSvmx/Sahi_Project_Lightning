@@ -138,7 +138,7 @@ this.updateUsageConditionRulesGridWithAdjFields = function($attribute,$operator,
 	
 this.saveConditionBasedPM = function(){
 	_click($bo_pg_PMPlanTemplate.btn_customUISave);	
-	_wait(15000);
+	_wait(15000,isVisible(_heading1("PM Plan Template:")));
 	_assertNotVisible($bo_pg_PMPlanTemplate.img_messagebox);
 };
 
