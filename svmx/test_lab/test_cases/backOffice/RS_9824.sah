@@ -1,11 +1,10 @@
 
 //author - Noor Salma Sharieff
 
-var $RS_9801 = _testcase("RS_9801","SFW - Wizard step - background mode of execution.");
-$RS_9801.start();
+var $9824 = _testcase("9824","SFW - OPDOC in wizard step.");
+$9824.start();
 _setSpeed(100);
 
-//Pre - Condition 
 $bo_act_login.login($g_url, $bac_un, $bac_pwd);
 
 
@@ -13,7 +12,8 @@ var $wizardTitleName = $bo_act_common.generateRandomName("SFWTitle");
 var $wizardIDName = $bo_act_common.generateRandomName("SFWId");
 $bo_act_navigation.navigateToSfmWizard();
 $bo_act_SFW.createWizardGeneralInfo("Work Order", $wizardTitleName, $wizardIDName);
-$bo_act_SFW.createSFMWizardStepwithHandOver("SFM", "Close Work Order", "Background",true);
+$bo_act_SFW.createWizardStepwithHandOver("SFM", "Create RMA from Work Order", "Interactive",true);
+$bo_act_SFW.createOutputDocumentWizardStepwithSelectTemplate("Output Document","Work Order Service Report",false);
 $bo_act_SFW.quickSaveSFWizard();
 $bo_act_SFW.saveAndClose();
 
@@ -22,13 +22,14 @@ var $contactName = $bo_act_contacts.createContact($accountName);
 var $caseNumber = $bo_act_Cases.createCase("New", "High", "Email");
 var $productName = $bo_act_products.createProduct();
 var $IBName = $bo_act_installedProduct.createInstalledProduct($productName, $accountName, $contactName);
-var $WONumber = $bo_act_workOrders.createWorkOrder($caseNumber, $accountName, $contactName, $IBName, "Open", "High", "Field Service");
+$bo_act_workOrders.createWorkOrder($caseNumber, $accountName, $contactName, $IBName, "Open", "High", "Field Service");
 _selectDomain("/svmx/");
-_assertExists(_button("/Close Work Order/",_near(_cell($wizardTitleName))));
-_click(_button("/Close Work Order/",_near(_cell($wizardTitleName))));
+_assertExists(_button("/Create RMA from Work Order/",_near(_cell($wizardTitleName))));
+_click(_button("/Create RMA from Work Order/",_near(_cell($wizardTitleName))));
 _selectDomain();
-
-_assertEqual("Closed",_getText(_div(0,_rightOf(_span("/Order Status/")))),"Work Order is not closed");
+_click(_image("/svmx-sfmd-delete-icon/"));
+_click(_span("/svmx-sfmd-save-icon/"));
+_assertContainsText("Work Order updated",_div("messageText"));
 
 //Clean up function
 var $datacreated = [$contactName,$accountName,$caseNumber,$productName,$IBName,$WONumber];
@@ -36,8 +37,7 @@ for (var i = 0; i < $datacreated.length; i++) {
 	$bo_act_common.cleanUpfunction($datacreated[i]);
 }
 $bo_act_SFW.deleteWizards("Work Order", $wizardIDName);
-
-$RS_9801.end();
+$9824.end();
 
 
 

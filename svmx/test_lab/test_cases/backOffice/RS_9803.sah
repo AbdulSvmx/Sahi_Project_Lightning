@@ -89,10 +89,10 @@ var $codeDev = "global class "+$className+ "\n"+
 $bo_act_login.login($g_url, $bac_un, $bac_pwd);
 
 $bo_act_navigation.navigateToSetUpAndSearch("Installed Packages");
-if(_condition(_cell("SVMXC")!=null))
-var $code = $codeBase;
-else
-$code = $codeDev;
+if(_getText(_cell("SVMXC"))!="SVMXDEV")
+	var $code = $codeBase;
+	else
+	$code = $codeDev;
 
 
 $bo_act_salesforceSetUp.createApexClasses($code);

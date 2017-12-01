@@ -9,7 +9,7 @@ var $paramValue="Servicemax";
 var $wizardName = "SFM Delivery Auto";
 var $wizardType="Others";
 var $woName;
-var $domainName = "svmxc.cs21.visual.force.com";
+var $domainName = "/visual.force.com/";
 
 
 

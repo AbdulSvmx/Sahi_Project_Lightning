@@ -1,0 +1,8 @@
+var $rs_6344 = _testcase("RS_6344","Check for the Date, DateTime fields at second level navigation in 'Displayed Under Search Result'.");
+$rs_6344.start();
+$searchName = $bo_act_common.generateRandomName("OnlineSecondLevelNavigation_");
+$searchObject = "Work Order";
+$bo_act_login.login($g_url,$sfmUsn,$sfmPwd);
+$bo_act_navigation.navigateToSfmSearchDesigner();
+$sfm_act_search.newCustomSearch($searchName,$searchObject);
+$rs_6344.end();
