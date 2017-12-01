@@ -1,4 +1,4 @@
-wilvar $an_cu_1639 = _testcase("ANA-1639","Contract Uptime update verification with Work Orders created");
+var $an_cu_1639 = _testcase("ANA-1639","Contract Uptime update verification with Work Orders created");
 $an_cu_1639.start();
 var $un = "meghana.rao@servicemax.com";
 var $pwd = "salesforce100";
@@ -176,8 +176,8 @@ _assertEqual(98.33, $ana_1639_uptime_value2);
 var $ana_1639_wo1_id ;
 var $ana_1639_down_time_value = null ;
 
-for(var $i=0;$ana_1639_down_time_value == null ; $i++)
-{
+
+
 var $ana_1639_query_RV1 = "Select SVMXC__Down_Time__c,SVMXC__Work_Order__c from SVMXC__SPM_Down_Time_Detail__c where SVMXC__Work_Order__c='"+$ana_1639_WO_ID1+"'";
 var $ana_1639_resultRV1 = $op_act_sForceApiCall.sForceQuery($un, $pwd, $ana_1639_query_RV1,"query");
 
@@ -185,7 +185,7 @@ $ana_1639_resultRV1.forEach(function($varRV1) {
 	
 	$ana_1639_down_time_value = $varRV1.SVMXC__Down_Time__c;
 });
-}
+
 _log($ana_1639_down_time_value);
 
 

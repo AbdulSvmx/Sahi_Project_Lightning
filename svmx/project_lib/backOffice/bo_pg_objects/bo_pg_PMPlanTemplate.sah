@@ -20,5 +20,37 @@ var $bo_pg_PMPlanTemplate = new function bo_pg_pmPlanTemplate(){
 	this.btn_save = _submit(" Save ");
 	
 	this.btn_delete = _button("Delete");
+	
+// Condition Based
+	
+	this.txt_templateName = _textbox("templateName");
+	this.txt_product = _textbox("product");
+	this.img_filterIcon = _image("/svmx-filter-icon/");
+	this.link_addRow = _span("+ Add row[1]");
+	this.txt_attributebox = _div("/svmx-grid-cell-inner/",_under(_div("Attribute[1]")));
+	this.txt_attribute = _div("/svmx-trigger-index/",_under(_div("Attribute[1]")));
+this.txt_operatorbox = _div("/svmx-grid-cell-inner/",_under(_div("Operator[1]")));
+this.txt_operator = _div("/svmx-trigger-index/",_under(_div("Operator[1]")));
+this.txt_frequencybox = _div("/svmx-grid-cell-inner/",_under(_div("Frequency")));
+this.txt_frequency = _div("/svmx-trigger-index/",_under(_div("Frequency")));
+this.txt_frequencytxt = _textbox(0,_under(_div("Frequency")));
+this.txt_startAtbox = _div("/svmx-grid-cell-inner/",_under(_div("Start At")));
+this.txt_startAt = _textbox(0,_under(_div("Start At")));
+this.txt_stopAtbox = _div("/svmx-grid-cell-inner/",_under(_div("Stop At")));
+this.txt_stopAt = _textbox(0,_under(_div("Stop At")));
+this.txt_adjustmentTypebox = _div("/svmx-grid-cell-inner/",_under(_div("Adjustment Type")));
+this.txt_adjustmentType = _div("/svmx-grid-cell-inner/",_under(_div("Adjustment Type")));
+this.txt_minAdjbox = _div("/svmx-grid-cell-inner/",_under(_div("Minimum Adjustment")));
+this.txt_minAdj = _textbox("/numberfield/",_under(_div("Minimum Adjustment")));
+this.txt_maxAdjbox = _div("/svmx-grid-cell-inner/",_under(_div("Maximum Adjustment")));
+this.txt_maxAdj = _textbox("/numberfield/",_under(_div("Maximum Adjustment")));
+this.txt_adjValuebox = _div("/svmx-grid-cell-inner/",_under(_div("Adjustment Value")));
+this.txt_adjValue = _textbox("/numberfield/",_under(_div("Adjustment Value")));
+
+this.txt_adjUnitbox = _div("/svmx-grid-cell-inner/",_under(_div("Adjustment Unit")));
+this.txt_adjUnit = _div("/svmx-trigger-index/",_under(_div("Adjustment Unit")));
+this.btn_customUISave = _span("Save");
+this.img_messagebox = _span("svmx-quick-msgbox-info");
+this.img_arrow = _div("/svmx-trigger-index/",_under(_div("Adjustment Type")));
 };
 

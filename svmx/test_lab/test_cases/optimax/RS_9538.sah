@@ -114,7 +114,6 @@ function create_WO ($work_Orders_Xl , $dp_Territory_Id, $dp_Id)
 function validate_ReturnTime($dp_Id)
 {
 	var $isSuccess = false;
-	var $i = 0;
 	var WO_List = _call(sforce.connection.query("Select Id From SVMXC__Service_Order__c Where SVMXC__Dispatch_Process__c = '"+$dp_Id+"'"));
 	var WO_arr = WO_List.getArray("records");
 	var WO_Id = WO_arr[0].Id;
@@ -129,9 +128,10 @@ function validate_ReturnTime($dp_Id)
 	
 	if(DriveTime > 0)
 		{
+		_log(DriveTime);
 		$isSuccess = true;
 		}
-
+_log($isSuccess);
 	return $isSuccess;
 }
 //</browser>

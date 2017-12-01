@@ -28,12 +28,12 @@ var $delete_data = $op_act_sForceApiCall.sForceQuery($un, $pwd, $delete_rv , "cr
 
 
 var $mttc = "Select Id from SVMXC__ServiceMax_Processes__c where SVMXC__ProcessID__c = 'MeanTimeToComplete'";
-var $fetchmttc = $op_act_sForceApiCall.sForceQuery($un, $pwd, $repeatvisit,"query");
+var $fetchmttc = $op_act_sForceApiCall.sForceQuery($un, $pwd, $mttc,"query");
 
 var $mttc_process = $fetchmttc[0].Id;
 
 $delete_mttc = "delete [Select Id from SVMXC__ServiceMax_Config_Data__c where SVMXC__Dispatch_Process__c = '"+$mttc_process+"'];";
-var $delete_data = $op_act_sForceApiCall.sForceQuery($un, $pwd, $delete_rv , "create");
+var $delete_data = $op_act_sForceApiCall.sForceQuery($un, $pwd, $delete_mttc , "create");
 
 
 

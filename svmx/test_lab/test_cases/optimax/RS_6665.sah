@@ -29,7 +29,7 @@ $bo_act_login.login($g_url, $g_un, $g_pwd);
 _set($login_result, _fetch(login($g_un,$g_pwd)));
 _log($login_result);
 
-//deleting exisiting Work Order
+//deleting existing Work Order
 
 $op_utility.delete_WO($dp_Id,$login_result.sessionId);
 //_wait(5000);
@@ -37,9 +37,6 @@ $op_utility.delete_WO($dp_Id,$login_result.sessionId);
 //creating 18 wo & updating SD null for 15 WO
 _set($create_WO, _fetch(crt_WO($work_Orders_Xl,$dp_Id)));
 _log("test create  = "+$create_WO);
-
-_set($upt_WO, _fetch(update_WO($dp_Id)));
-_log("test update  = "+$upt_WO);
 
 $op_utility.run_Job_Now($dp_Name);
 
@@ -101,9 +98,8 @@ function login($g_un,$g_pwd){
 
 
 function crt_WO($work_Orders_Xl,$dp_Id){
-	//sforce.connection.sessionId = $login_result.sessionId;
-	_log("sforce.connection.sessionId = "+sforce.connection.sessionId);
-	var CreateRecords=[];
+	var CreateWO=[];
+	var UpdateWO=[];
 	var $isSuccess = false;
 	//creating wo from the excel sheet
 	for(var $i=0;$i<$work_Orders_Xl.length;$i++)
@@ -120,46 +116,35 @@ function crt_WO($work_Orders_Xl,$dp_Id){
 		wo_list.SVMXC__Apply_Business_Hours_For_OptiMax__c = $work_Orders_Xl[$i][8];
 		wo_list.SVMXC__Preferred_Business_Hours__c = $work_Orders_Xl[$i][9];
 		wo_list.SVMXC__Service_Duration__c = $work_Orders_Xl[$i][10];
-		CreateRecords.push(wo_list);
+		CreateWO.push(wo_list);
 	}
-	var wo_crt_result = _call(sforce.connection.create(CreateRecords));
-	_log("wo_crt_result = "+wo_crt_result.length);
-	
-	//updating wo (service duration = null) which is created above
-	if(wo_crt_result.length > 0)
+	var result = _call(sforce.connection.create(CreateWO));
+	_log("Work Orders Created = "+ result.length);
+	if(result.length > 0)
 	{
-		$isSuccess = true;
-		return "Work Orders are created successfully";
+		var WO_List = _call(sforce.connection.query("Select Id, SVMXC__Dispatch_Process__c, SVMXC__Service_Duration__c From SVMXC__Service_Order__c Where SVMXC__Dispatch_Process__c = '"+$dp_Id+"' Limit 15"));
+		_log(" Work Order size = "+WO_List.size);
+		var WO_arr = WO_List.getArray("records");
+		_log(" WO_arr = "+WO_arr);
+		for(var $x=0;$x<WO_arr.length;$x++){
+			var WO = WO_arr[$x];
+			WO.SVMXC__Service_Duration__c = null;
+			UpdateWO.push(WO);
+			_log("result.updateRecords update = "+UpdateWO);
+		}
 	}
-	return "Work Orders are not created";
-}
-
-function update_WO($dp_Id){
-	var $isSuccess = false;
-	var updateRecords=[];
-	
-	var WO_List = _call(sforce.connection.queryAll("Select Id, SVMXC__Service_Duration__c, SVMXC__Dispatch_Process__c From SVMXC__Service_Order__c Where SVMXC__Dispatch_Process__c = '"+$dp_Id+"' Limit 15"));
-	_log(" Work Order size = "+WO_List.size);
-	var WO_arr = WO_List.getArray("records");
-	_log(" WO_arr = "+WO_arr);
-	for(var $x=0;$x<WO_arr.length;$x++){
-		var WO = WO_arr[$x];
-		WO.SVMXC__Service_Duration__c = null;
-		updateRecords.push(WO);
-		_log("result.updateRecords update = "+updateRecords);
-	}
-	var update_result = sforce.connection.update(updateRecords);
-	_log("update result = "+update_result);
-	_log("update result length = "+update_result.length);
+	var update_result = _call(sforce.connection.update(UpdateWO));
+	_log("update result = "+update_result.length);
 	if(update_result.length > 0){
 		$isSuccess = true;
-		return "Work Orders are updated";
 	}
 	else{
-		return "Work Orders are not updated";
+		$isSuccess = false;
 	}
-}
 
+	_log("update $isSuccess = "+$isSuccess);
+	return $isSuccess;
+}
 
 function validate_SD_Violation($dp_Id){
 	var $isSuccess = false;
