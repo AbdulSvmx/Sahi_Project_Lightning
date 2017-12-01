@@ -5,7 +5,7 @@
 var $sfm_act_wizards = new function sfm_act_wizards() {
 	
 	//function to create or add step to wizard
-	this.addToWizard = function($wizardObject, $wizardName, $wizardType, $sfmName){
+	this.addToWizard = function($wizardObject, $wizardName, $wizardType, $sfmName, $handOver){
 		$bo_act_navigation.navigateToSvmxSetup();
 		_click(_div("Service Flow Manager"));
 		_click(_div("SFM Wizards"));
@@ -13,30 +13,30 @@ var $sfm_act_wizards = new function sfm_act_wizards() {
 		
 		// If wizard is already present add the step else create a new wizard and then add the step
 		if(_exists(_span($wizardName))){
-			$sfm_act_wizards.editSfmWizard($wizardName, $wizardType, $sfmName);
+			$sfm_act_wizards.editSfmWizard($wizardName, $wizardType, $sfmName, $handOver);
 		}
 		else{
-			$sfm_act_wizards.createSfmWizard($wizardName, $wizardType, $sfmName);
+			$sfm_act_wizards.createSfmWizard($wizardName, $wizardType, $sfmName, $handOver);
 		}
 	};
 	
 	
 	//function to create a new SFM wizard
-	this.createSfmWizard = function($wizardName, $wizardType, $sfmName){
+	this.createSfmWizard = function($wizardName, $wizardType, $sfmName, $handOver){
 		
 		_click($sfm_pg_wizards.btn_customNew);
 		_setValue($sfm_pg_wizards.txt_wizardTitle,$wizardName);
 		_setValue($sfm_pg_wizards.txt_wizardID, $wizardName);
-		$sfm_act_wizards.addStepToSfmWizard($wizardType, $sfmName);
+		$sfm_act_wizards.addStepToSfmWizard($wizardType, $sfmName, $handOver);
 		_assertExists(_span($wizardName));
 	};
 	
 	//function to add a step to sfm Wizard
-	this.editSfmWizard = function($wizardName, $wizardType, $sfmName ) {
+	this.editSfmWizard = function($wizardName, $wizardType, $sfmName, $handOver ) {
 		
 		_check(_checkbox(0,_leftOf(_span($wizardName))));
 		_click($sfm_pg_wizards.btn_customEdit);	
-		$sfm_act_wizards.addStepToSfmWizard($wizardType, $sfmName);		
+		$sfm_act_wizards.addStepToSfmWizard($wizardType, $sfmName, $handOver);		
 	};
 	
 	//function to delete SFM wizard -- to be completed, yet to capture buttons of confirmation
@@ -46,11 +46,14 @@ var $sfm_act_wizards = new function sfm_act_wizards() {
 	};
 	
 	//add step/SFM to wizard
-	this.addStepToSfmWizard = function($wizardType, $sfmName) {
+	this.addStepToSfmWizard = function($wizardType, $sfmName, $handOver) {
 		_click($sfm_pg_wizards.txt_manageWizSteps);
 		_click($sfm_pg_wizards.btn_newStep);
 		_setSelected($sfm_pg_wizards.btn_wizStepType,$wizardType);
 		_setSelected($sfm_pg_wizards.btn_stepName,$sfmName);
+		if(($handOver=='true') && (_isChecked($sfm_pg_wizards.btn_checkboxHandover).toString()=='false')){
+			_check($sfm_pg_wizards.btn_checkboxHandover);			
+		}
 		_click($sfm_pg_wizards.btn_saveStep);
 		_wait(3000,_heading4("Success"));
 		if(_isVisible(_heading4("Success"))){

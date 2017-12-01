@@ -50,7 +50,7 @@ _click(_link($woName));
 _selectDomain($domainName);
 _click(_button($sfmName));
 _selectDomain();
-_wait(5000);
+_wait(5000,_span("Get Price"));
 
 //Add a row to all child lines
 
@@ -66,8 +66,8 @@ _wait(3000);
 //add line to Labor
 _click($sfm_pg_sfmDesigner.btn_deliveryLaborTab);
 _click($sfm_pg_sfmDesigner.btn_deliveryAddRowLabor);
-_click($sfm_pg_sfmDesigner.btn_deliveryExtendedEdit);
-setValue($sfm_pg_sfmDesigner.txt_eeLineQty,"6");
+_click($sfm_pg_sfmDesigner.btn_deliveryExtendedEditLabor);
+_setValue($sfm_pg_sfmDesigner.txt_eeLineQty,"6");
 _setValue($sfm_pg_sfmDesigner.txt_eeReceivedStreet,"MG Road");
 _click($sfm_pg_sfmDesigner.btn_eeUpdate);
 _wait(3000);
@@ -75,8 +75,8 @@ _wait(3000);
 //add line to Expenses
 _click($sfm_pg_sfmDesigner.btn_deliveryExpenseTab);
 _click($sfm_pg_sfmDesigner.btn_deliveryAddRowExpenses);
-_click($sfm_pg_sfmDesigner.btn_deliveryExtendedEdit);
-setValue($sfm_pg_sfmDesigner.txt_eeLineQty,"6");
+_click($sfm_pg_sfmDesigner.btn_deliveryExtendedEditExpenses);
+_setValue($sfm_pg_sfmDesigner.txt_eeLineQty,"6");
 _setValue($sfm_pg_sfmDesigner.txt_eeReceivedStreet,"MG Road");
 _click($sfm_pg_sfmDesigner.btn_eeUpdate);
 _wait(3000);
@@ -84,8 +84,71 @@ _wait(3000);
 //add line to Travel
 _click($sfm_pg_sfmDesigner.btn_deliveryTravelTab);
 _click($sfm_pg_sfmDesigner.btn_deliveryAddRowTravel);
-_click($sfm_pg_sfmDesigner.btn_deliveryExtendedEdit);
-setValue($sfm_pg_sfmDesigner.txt_eeLineQty,"6");
+_click($sfm_pg_sfmDesigner.btn_deliveryExtendedEditTravel);
+_setValue($sfm_pg_sfmDesigner.txt_eeLineQty,"6");
 _setValue($sfm_pg_sfmDesigner.txt_eeReceivedStreet,"MG Road");
 _click($sfm_pg_sfmDesigner.btn_eeUpdate);
 _wait(3000);
+
+//Validate for DVR-Error when condition is true
+_click($sfm_pg_sfmDesigner.btn_deliveryQuickSave);
+if(_exists($sfm_pg_sfmDesigner.txt_PriceAlert)){
+	_click(_span("Ok"));
+	_wait(10000);
+}
+if ( (_exists(_div("Parts: "+$ruleDescription))) &&
+	(_exists(_div("Labor: "+$ruleDescription)))	 &&
+	(_exists(_div("Expenses: "+$ruleDescription))) &&
+	(_exists(_div("Travel: "+$ruleDescription))) ){
+	
+	_log("Pass ::: DVR-Error for Parts/Labor/Expenses/Travel is working");
+}else{
+	_log("Fail ::: DVR-Error for Parts/Labor/Expenses/Travel is not working ");
+}
+
+//Validate for DVR-Error when condition is false
+
+//add line to Parts
+_click($sfm_pg_sfmDesigner.btn_deliveryPartsTab);
+_click($sfm_pg_sfmDesigner.btn_deliveryExtendedEdit);
+_setValue($sfm_pg_sfmDesigner.txt_eeLineQty,"3");
+_click($sfm_pg_sfmDesigner.btn_eeUpdate);
+_wait(3000);
+
+//add line to Labor
+_click($sfm_pg_sfmDesigner.btn_deliveryLaborTab);
+_click($sfm_pg_sfmDesigner.btn_deliveryExtendedEditLabor);
+_setValue($sfm_pg_sfmDesigner.txt_eeLineQty,"3");
+_click($sfm_pg_sfmDesigner.btn_eeUpdate);
+_wait(3000);
+
+//add line to Expenses
+_click($sfm_pg_sfmDesigner.btn_deliveryExpenseTab);
+_click($sfm_pg_sfmDesigner.btn_deliveryExtendedEditExpenses);
+_setValue($sfm_pg_sfmDesigner.txt_eeLineQty,"3");
+_click($sfm_pg_sfmDesigner.btn_eeUpdate);
+_wait(3000);
+
+//add line to Travel
+_click($sfm_pg_sfmDesigner.btn_deliveryTravelTab);
+_click($sfm_pg_sfmDesigner.btn_deliveryExtendedEditTravel);
+_setValue($sfm_pg_sfmDesigner.txt_eeLineQty,"3");
+_click($sfm_pg_sfmDesigner.btn_eeUpdate);
+_wait(3000);
+
+_click($sfm_pg_sfmDesigner.btn_deliveryQuickSave);
+
+if(_exists($sfm_pg_sfmDesigner.txt_PriceAlert)){
+	_click(_span("Ok"));
+	//_wait(10000);
+}
+if((_isVisible(_div("Parts: "+$ruleDescription))) ||
+		(_isVisible(_div("Labor: "+$ruleDescription)))||
+		(_isVisible(_div("Expenses: "+$ruleDescription)))||
+		(_isVisible(_div("Travel: "+$ruleDescription)))
+		){
+	_log("Fail ::: DVR-Error is triggered");
+}else{
+	_log("Pass ::: DVT-Error is not triggered");
+}
+

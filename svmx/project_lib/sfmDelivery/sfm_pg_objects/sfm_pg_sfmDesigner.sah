@@ -22,6 +22,9 @@ var $sfm_pg_sfmDesigner = new function sfm_pg_sfmDesigner() {
 	this.btn_deliveryAddMultiParts = _span("svmx-btn-icon svmx-sfmd-multi-add-line-icon");
 	this.btn_deliveryAddChildRow = _div("sfm-button-1193");
 	this.btn_deliveryExtendedEdit = _image("/gif/", _in(_div("svmx-grid-cell-inner ")));
+	this.btn_deliveryExtendedEditLabor = _image("/gif/", _near(_span("svmx-btn-icon svmx-sfmd-add-line-icon[1]")));
+	this.btn_deliveryExtendedEditExpenses = _image("/gif/", _near(_span("svmx-btn-icon svmx-sfmd-add-line-icon[2]"))) ;
+	this.btn_deliveryExtendedEditTravel = _image("/gif/", _near(_span("svmx-btn-icon svmx-sfmd-add-line-icon[3]")));
 	this.btn_deliveryAddRowLabor = _span("svmx-btn-icon svmx-sfmd-add-line-icon[1]");
 	this.btn_deliveryAddRowExpenses = _span("svmx-btn-icon svmx-sfmd-add-line-icon[2]");
 	this.btn_deliveryAddRowTravel = _span("svmx-btn-icon svmx-sfmd-add-line-icon[3]");
@@ -35,12 +38,18 @@ var $sfm_pg_sfmDesigner = new function sfm_pg_sfmDesigner() {
 	this.txt_eeEstimatedPricePerUnit= _textbox("/svmx-number-/",_rightOf(_label("Estimated Price Per Unit:")));
 	this.txt_eeReceivedCity =_textbox("/sfm-text-/",_rightOf(_label("Received City:")));
 	this.txt_eeReferenceInformation = _textarea("/sfm-textarea-/",_rightOf(_label("Reference Information:")));
+	this.txt_eeActivityType = _textbox("Activity Type:",_rightOf(_label("Activity Type:")));
 	
 	//Extended edit page objects --Labor
 	
 	this.txt_eeStartDateTime =_textbox("/svmx-date-/",_rightOf(_label("Start Date and Time:")));
 	this.txt_billingQty = _textbox("Billable Qty:",_rightOf(_label("Billable Qty:")));
 	this.txt_billingLinePrice = _textbox("/svmx-number-/",_rightOf(_label("Billable Line Price:")));
+	this.txt_eeLinePricePerUnit = _textbox("/svmx-number-/",_rightOf(_label("Line Price Per Unit:")));
+	this.txt_eeExpenseType = _textbox("Expense Type:",_rightOf(_label("Expense Type:")));
+	
+	this.txt_eeStartDateTime = _textbox("/svmx-date-/",_rightOf(_label("Start Date and Time:")));
+	this.txt_eeEndDateTime=_textbox("/svmx-date-/",_rightOf(_label("End Date and Time:")));
 	
 	this.txt_PriceAlert = _div("Price not calculated, because entitlement check has not been performed.");
 };
