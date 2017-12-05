@@ -275,4 +275,10 @@ var $bo_act_navigation = new function bo_act_navigation() {
 		_click($bo_pg_servicemaxSetup.btn_counterRule);		
 	};
 
+	this.navigateToservicePlans = function(){
+    	$bo_act_navigation.navigateToHome();
+    	_click(_link("ServiceMax Setup"));
+    	_click($bo_pg_servicemaxSetup.btn_warrantiesAndServiceContracts);
+    	_click($bo_pg_servicemaxSetup.btn_servicePlans);
+    };
 };

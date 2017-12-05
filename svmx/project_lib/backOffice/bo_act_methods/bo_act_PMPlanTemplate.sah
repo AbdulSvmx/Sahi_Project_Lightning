@@ -12,7 +12,7 @@ var $bo_act_PMPlanTemplate = new function bo_act_PMPlanTemplate() {
 this.createTimeBasedPMPlanTemplate = function($ProductName,$coverage,$workOrderPurpose,$frequencyUnit){
 		var $PMTemplateName = $bo_act_common.generateRandomName("PMT");
 		$bo_act_navigation.navigateToPMPlanTemplatePage();
-		_wait(30000,isVisible($bo_pg_PMPlanTemplate.txt_PMPlanTemplateName));
+		_wait(30000,_isVisible($bo_pg_PMPlanTemplate.btn_newPMPlanTemplate));
 		_click($bo_pg_PMPlanTemplate.btn_newPMPlanTemplate);
 		_wait(60000,_isVisible($bo_pg_PMPlanTemplate.txt_PMPlanTemplateName));
 		_setValue($bo_pg_PMPlanTemplate.txt_PMPlanTemplateName,$PMTemplateName);
@@ -22,7 +22,7 @@ this.createTimeBasedPMPlanTemplate = function($ProductName,$coverage,$workOrderP
 	   _setStrictVisibilityCheck(false);
 	   _getRecentWindow();
 	   _setValue($bo_pg_PMPlanTemplate.txt_sequence,1);
-	   $bo_act_common.searchfunction($workOrderPurpose);
+	    $bo_act_common.searchfunction($workOrderPurpose);
 	   _setValue($bo_pg_PMPlanTemplate.txt_frequency,1);
 	   _setValue($bo_pg_PMPlanTemplate.txt_frequencyUnit,$frequencyUnit);
 	   _listItem($frequencyUnit);

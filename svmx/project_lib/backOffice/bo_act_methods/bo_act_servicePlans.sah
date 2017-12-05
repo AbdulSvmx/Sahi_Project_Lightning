@@ -1,0 +1,30 @@
+/**
+ * Functions for the Accounts Object
+ */
+var $bo_act_servicePlans = new function bo_act_servicePlans() {
+
+	/**
+	 * Create an Account
+	 * 
+	 * @param $accountName
+	 */
+	this.createServicePlan = function() {
+		var $servicePlanName = $bo_act_common.generateRandomName("sp");
+        $bo_act_navigation.navigateToservicePlans();
+		_click(_button("New Service Plan"));
+		_setValue(_textbox(0,_rightOf(_label("Service Plan Name:"))),$servicePlanName);
+		_click($bo_pg_accounts.btn_save);
+		_assertNotVisible(_div("/Error: Invalid Data/"));
+		_wait(15000, _isVisible(_heading2($servicePlanName)));
+		_logOutput($servicePlanName+ " Service Plan is created");
+    return $servicePlanName;
+		//return $callBack.returnResult([_isVisible($accountName), "Account not created",$accountName] );
+	};
+	
+	this.deleteServicePlan = function($servicePlan){
+		  $bo_act_navigation.navigateToservicePlans();
+		  _click(_span($servicePlan));
+		  _click(_button("Delete"));
+	};
+
+};
