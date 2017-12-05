@@ -1,7 +1,5 @@
 var $sfm_act_Transactions = new function sfm_act_Transactions() {
 	this.cloneAndSaveProcess = function($processName,$sfmName,$sfmPgLayoutName){
-//		_wait(5000);
-//		_setSpeed(3000);
 		_setSpeed(100);
 		$sfm_act_SFM.selectSFM($processName,false);
 		_click($bo_pg_sfmTransactionAndDesigner.btn_clone);
