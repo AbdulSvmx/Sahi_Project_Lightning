@@ -1,9 +1,9 @@
 var $an_rv_1053 = _testcase("RS-9741","Custom Expression Service Request ");
 $an_rv_1053.start();
-var $un = "meghana.rao@servicemax.com";
-var $pwd = "salesforce100";
-var $url = "https://test.salesforce.com";
 var $data = _readExcelFile("../../analytics/an_excleData/an_Datasheet1.xlsx","Sheet1",true);
+var $un = $data[1]["Username"];
+var $pwd = $data[1]["pwd"];
+var $url = "https://test.salesforce.com";
 var $insert_sr = $data[2]["InsertServiceRequest"];
 var $Account = $data[1]["Account"];
 var $Technician = $data[1]["Technician"];
