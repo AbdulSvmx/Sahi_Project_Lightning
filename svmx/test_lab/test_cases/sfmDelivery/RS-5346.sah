@@ -18,7 +18,7 @@ var $messageType = "Error";
 var $wizardName = "SFM Delivery Auto";
 var $wizardType = "SFM";
 var $wizardObject ="Work Order";
-var $domainName = "svmxc.cs19.visual.force.com";
+var $domainName = "/visual.force.com/";
 //var $woName ="WO-00000096";
 
 _setSpeed(100);

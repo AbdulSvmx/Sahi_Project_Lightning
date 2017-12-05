@@ -63,7 +63,6 @@ _setSelected(_select("conf_prof:F_conf_prof:Setting_Block:j_id114:j_id122:SubMod
 _click(_link("Edit[6]"));
 _selectWindow("Servicemax_Conf_Prof");
 _check(_radio("disp_setting:disp_setting:j_id1:DispSection:j_id37:j_id40"));
-_click(_cell("False"));
 _click(_button("Save"));
 _click(_submit("Close"));
 _selectWindow();
