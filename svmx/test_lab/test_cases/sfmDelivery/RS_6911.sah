@@ -5,6 +5,7 @@ $processName = "Manage Work Order lines - Usage";
 $sfmName = $bo_act_common.generateRandomName("SFM_Auto_");
 $sfmName = "";
 $sfmPgLayoutName =	$bo_act_common.generateRandomName("SFM_Auto_Page");
+$sfmtemplate = "SVMXSTD: Manage WO Usage Lines";
 $bo_act_navigation.navigateToSfmTransactionDesigner();
-$sfm_act_Transactions.cloneAndSaveProcess($processName, $sfmName, $sfmPgLayoutName);
+$sfm_act_SFM.cloneTDM016($processName, $sfmName, false,$sfmPgLayoutName, $sfmTemplate);
 $rs_6911.end();

@@ -71,5 +71,5 @@ var $bo_act_PMPlan = new function bo_act_PMPlan() {
 		return $PMPlanName;
 	};
 	
-	this.updatingthePMPlanfields()
+	//this.updatingthePMPlanfields()
 };
