@@ -25,7 +25,7 @@ var $wizardObject ="Work Order";
 var $wizardName = "SFM Delivery Auto";
 var $wizardType = "SFM";
 
-var $domainName = "svmxc.cs21.visual.force.com";
+var $domainName = "/visual.force.com/";
 var $messageType="Error";
 var $wizardObject ="Work Order";
 //var $woName="WO-00000472";

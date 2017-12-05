@@ -1,0 +1,11 @@
+var $rs_5362 = _testcase("RS_5362","Verify cloning of Standard SFM Search.");
+$rs_5362.start();
+$standardSearch = "SVMXSTD: Account Search";
+$button = "Clone";
+$searchName = $standardSearch+Math.round(Math.random()*100000);
+$objArr = ["Case","Work Order"];
+$bo_act_login.login($g_url,$sfmUsn,$sfmPwd);
+$bo_act_navigation.navigateToSfmSearchDesigner();
+$sfm_act_search.cloneSearch($standardSearch, $button,$searchName,$objArr);
+//$sfm_act_search.customManagePermission($searchName);
+$rs_5362.end();
