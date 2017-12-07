@@ -35,12 +35,12 @@ var $op_act_sForceApiCall = new function op_act_sForceApiCall() {
 		}
 		;
 		return $nArr;
-		//<browser>
+		// <browser>
 		function sForceApiCall($un, $pwd, $queryComplex, $queryType) {
 			var records = null;
 			var arr = null;
-			//sforce.connection.sessionId = null;
-			//sforce.connection.debuggingHeader = null; 
+			// sforce.connection.sessionId = null;
+			// sforce.connection.debuggingHeader = null;
 			sforce.connection.login($un, $pwd);
 
 			switch ($queryType) {
@@ -50,7 +50,30 @@ var $op_act_sForceApiCall = new function op_act_sForceApiCall() {
 				return arr;
 
 			case 'create':
-				records = _call(sforce.apex.executeAnonymous($queryComplex));
+				var $excepFlag = false;
+				for (var $i = 0; $i < 3; $i++) {
+
+					try {
+						records = _call(sforce.apex.executeAnonymous($queryComplex));
+
+					} catch ($e) {
+						$excepFlag = true;
+						_log("Exception in Apex -- Retrying Againa");
+					}
+
+					if ($excepFlag == true) {
+						try {
+							records = _call(sforce.apex.executeAnonymous($queryComplex));
+
+						} catch ($e) {
+							$excepFlag = true;
+							_log("Exception in Apex -- Retrying Againa");
+						}
+					} else {
+						break;
+					}
+
+				}
 				return records;
 
 			default:
