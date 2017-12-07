@@ -33,15 +33,14 @@ var $op_act_sForceApiCall = new function op_act_sForceApiCall() {
 		
 		if ($queryType == "create")
 			{
-
-			_wait(10000);	
+			_wait(2000);	
 			};
 		return $nArr;
 		//<browser>
 		function sForceApiCall($un, $pwd, $queryComplex,$queryType){
 			
-			sforce.connection.sessionId = null;
-			sforce.connection.debuggingHeader = null; 
+			//sforce.connection.sessionId = null;
+			//sforce.connection.debuggingHeader = null; 
 			sforce.connection.login($un, $pwd);
 
 			switch($queryType){
