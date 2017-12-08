@@ -1,7 +1,7 @@
-//Tests are to be written here [Bhupendra Singh Chouhan]ss
+//Tests are to be written here [Bhupendra Singh Chouhan]
 
-var $RS_5334_2 = _testcase("$RS_5334_2","Get Price- When Pricing Rule of NTE is applied and [Billable line price < NTE] for Labor Line");
-$RS_5334_2.start();
+var $RS_9968 = _testcase("$RS_9968","Get Price- When Pricing Rule of Minimum is applied and [Billable Line Price >= Minimum] for Expense Line");
+$RS_9968.start();
 _setSpeed(100);
 
 /**
@@ -23,34 +23,11 @@ var $productName = $bo_act_products.createProduct($productCode, $productFamily[3
 var $IBName = $bo_act_installedProduct.createInstalledProduct($productName, $accountName, $contactName);
 
 /**
-* Create Activity Master and Edit Service Price book
-*/
-var $activityType = ["--None--","Calibration","Cleanup","Installation","Repair","Service"];
-var $unit = ["--None--","Per Hour","Flat Rate"];
-var $PriceBookName = "Standard Service Price Book";
-var $activityProduct = "";
-var $regularRate = 300;
-
-var $activityID = $bo_act_activityMaster.createActivityMasterUsingProduct($activityType[3], $productName);
-var $ServicePricebooksEntryNumber = $bo_act_servicePricebooks.editStandardServicePricebooks($PriceBookName, $unit[1], $activityID, $activityProduct, $regularRate);
-
-/**
- * Configure the Group Profile SET004 and SET017
- */
-var $groupProfileName = "AutoBACGroup";
-var $Module = "Work Order";
-var $SubModule = "Create Work Order Lines VF";
-var $Setting = "SET017";
-var $settingValue = "Standard Service Price Book";
-
-$bo_act_configurationProfiles.editGroupProfileForTextSettings($groupProfileName, $Module, $SubModule, $Setting, $settingValue);
-
-/**
 * Create Service Type with QC
 */
 var $trackedOn = "Work Order";
-var $dataType = "Number";
-var $qualifyingCriteria = "SVMXSTD: Not closed work orders";
+var $dataType = "Text";
+var $qualifyingCriteria = "SVMXSTD: Paid Depot Repair Work Orders";
 var $serviceName = $bo_act_servicesTypes.createServicesTypes($trackedOn, $dataType, $qualifyingCriteria);
 
 /**
@@ -86,9 +63,15 @@ $bo_act_serviceMaintenanceContracts.AddCoveredProducToServiceContract($sconName,
 
 $bo_act_serviceMaintenanceContracts.addEntitledContactsToServiceContract($sconName, $contactName);
 
+//Add Expense Pricing To Service Contract 
+var $expenseType = "Gas";
+var $expenseRate = 580.000;
+var $expenseRateType = "Per Unit";
+$bo_act_serviceMaintenanceContracts.addExpensePricingToServiceContract($sconName, $expenseType, $expenseRateType, $expenseRate);
+
 // Add Parts Pricing To Service Contract 
-var $rate = 1500.000;
-var $rateType = "NTE";
+var $rate = 2000.000;
+var $rateType = "Minimum";
 $bo_act_serviceMaintenanceContracts.addPricingRulesTOServiceContract($sconName, $rateType, $rate, $serviceName);
 
 var $expecctedIBUnder_CoveredProduct =  _getText(_link(0,_under(_tableHeader("Installed Product"))));
@@ -100,6 +83,14 @@ _assertEqual($expecctedIBUnder_CoveredProduct,$IBName,"Actual and expected cover
 
 //Validating the Entitled Contacts Percent on Scon
 _assertEqual($expecctedContactUnder_EntitledContacts,$contactName,"Actual and expected Entitled Contacts are not same");
+
+/**
+* Create Case record
+*/
+var $caseStatus = "New";
+var $casePriority = "Medium";
+var $caseOrigin = "Phone";
+var $caseNumber = $bo_act_Cases.createCase($caseStatus, $casePriority, $caseOrigin);
 
 /**
 * Create SFM Wizard for WO with two Steps 1st-Check Entitlement and 2nd- Manage Work Order Lines - Usage(TDM016)
@@ -136,40 +127,62 @@ if(_isVisible(_image("Checked",_rightOf(_cell("/Is Entitlement Performed/"))))){
 	}
 
 /**
-*Invoke TDM016 SFM for Get Price Calculation
+*Edit The Above created WO for few fields
 */
+$bo_act_workOrders.editWorkOrder($WONumber);
 
+// Edit WO for Case 
+var $object = _textbox("/\\*Case|^Case/");
+var $objectValue = $caseNumber;
+$bo_act_workOrders.updateTextBoxFields($object, $objectValue);
+
+// Edit WO for Priority
+var $object = _select(0,_rightOf(_label("/\\*Priority|^Priority/")));
+var $objectValue = "Medium";
+$bo_act_workOrders.updateDropDownFields($object, $objectValue);
+
+// Edit WO for Billing Type
+var $object = _select(0,_rightOf(_label("Billing Type")));
+var $objectValue = "Paid";
+$bo_act_workOrders.updateDropDownFields($object, $objectValue);
+
+//Edit WO for Order Type
+var $object = _select(0,_rightOf(_label("/\\*Order Type|^Order Type/")));
+var $objectValue = "Depot Repair";
+$bo_act_workOrders.updateDropDownFields($object, $objectValue);
+$bo_act_workOrders.saveWorkOrder();     		// Save the Edited WO
+
+/**
+*Invoke TDM016 SFM for Get Price Calculation when IB is Covered under Warranty
+*/
 $bo_act_getPrice.navigateToSFMDeliveryPageFor_TDM016($WONumber);
 
 //Add Labor Line to Above invoke TDM016 SFM
-var $searchValue = $productName;
-var $activityType = $activityType[3];
-var $startHrs = "04";
-var $endHrs = "08";
-$bo_act_getPrice.addLaborLineToSFMDelivery($searchValue, $activityType, $startHrs, $endHrs);
+var $expenseType = "Gas";
+var $lineQty = 4;
+var $linePricePerUnit = 0;
+$bo_act_getPrice.addExpensesLineToSFMDelivery($expenseType, $lineQty, $linePricePerUnit);
 $bo_act_getPrice.calculateGetPrice();
 
 //Validation of Get Price for Labor lines
-$bo_act_getPrice.editLaborLineToSFMDelivery($searchValue);
-
+$bo_act_getPrice.editExpensesLineToSFMDelivery($expenseType);
+_setStrictVisibilityCheck(true);
 var $LaborLinePricePerUnitActual = _getText(_textbox(0,_rightOf(_label("/Line Price Per Unit/"))));
 var $LaborCoveredActual = _getText(_textbox(0,_rightOf(_label("/Covered %/"))));
 var $LaborBillableQtyActual = _getText(_textbox(0,_rightOf(_label("/Billable Qty/"))));
 var $LaborBillableLinePriceActual = _getText(_textbox(0,_rightOf(_label("/Billable Line Price/"))));
 
-var $LaborBillableQtyExpected = 8-4; // $startHrs = "04" And $endHrs = "08";
-var $LaborBillableLinePriceExpected = $LaborBillableQtyExpected*$regularRate;
+var $LaborBillableLinePriceExpected = ($lineQty*$expenseRate);
 
-_assertEqual($LaborLinePricePerUnitActual,$regularRate,"Actual and expected Labor Line Price Per Unit are not same");
-_assertEqual($LaborBillableQtyActual,$LaborBillableQtyExpected,"Actual and expected Billable Qty are not same");
+_assertEqual($LaborLinePricePerUnitActual,$expenseRate,"Actual and expected Labor Line Price Per Unit are not same");
+_assertEqual($LaborBillableQtyActual,$lineQty,"Actual and expected Billable Qty are not same");
 _assertEqual($LaborBillableLinePriceActual,$LaborBillableLinePriceExpected,"Actual and expected Billable Line Price are not same");
 _assertEqual($LaborCoveredActual,"0","Actual and expected labor Covered % are not same");
 
 $bo_act_getPrice.closeEditedWOLineToSFMDelivery();
-
+_setStrictVisibilityCheck();
 $bo_act_getPrice.saveSFMDelivery();
 
-//Validation of WO's fields after save
 var $actualRateOnWorkOrder = _getText(_div(0,_rightOf(_cell("Rate (Pricing Rule)"))));
 var $actualRateTypeOnWorkOrder = _getText(_div(0,_rightOf(_cell("Rate Type (Pricing Rule)"))));
 var $actualProformaInvoiceAmountOnWorkOrder = _getText(_div(0,_rightOf(_cell("/Proforma Invoice Amount/"))));
@@ -178,18 +191,18 @@ var $actualTotalBillableAmountOnWorkOrder = _getText(_div(0,_rightOf(_cell("/Tot
 /**
 *For Total Billable Amount on WO 
 */
-//var $BillableLinePriceExpected = $lineQty*$regularRate (4*300 = 1200);
+//var $BillableLinePriceExpected = $lineQty*$standardPriceValue (4*580 = 2400);
 
-_assertEqual($actualRateOnWorkOrder,"$1,500.000","Actual and Rate on Work Order are not same");
+_assertEqual($actualRateOnWorkOrder,"$2,000.000","Actual and Rate on Work Order are not same");
 _assertEqual($actualRateTypeOnWorkOrder,$rateType,"Actual and expected Rate Type on Work Order are not same");
-_assertEqual($actualProformaInvoiceAmountOnWorkOrder,"$1,200.000","Actual and expected Proforma Invoice Amount On Work Order are not same");
-_assertEqual($actualTotalBillableAmountOnWorkOrder,"$1,200.000","Actual and expected Total Billable Amount On Work Order are not same");
+_assertEqual($actualProformaInvoiceAmountOnWorkOrder,"$2,320.000","Actual and expected Proforma Invoice Amount On Work Order are not same");
+_assertEqual($actualTotalBillableAmountOnWorkOrder,"$2,320.000","Actual and expected Total Billable Amount On Work Order are not same");
 
 /**
 *Clean up function
 */
 
-var $datacreated = [$WONumber,$IBName,$productName,$contactName,$accountName,$slaName,$serviceName];
+var $datacreated = [$WONumber,$caseNumber,$sconName,$IBName,$productName,$contactName,$accountName,$slaName,$serviceName];
 for (var i = 0; i < $datacreated.length; i++) {
 $bo_act_common.cleanUpfunction($datacreated[i]);
 }
@@ -197,11 +210,6 @@ $bo_act_common.cleanUpfunction($datacreated[i]);
 // Delete SFM Wizard 
 $bo_act_SFW.deleteSFMWizard("Work Order", $wizardIDName);
 
-//Deleting the above created data
-
-$bo_act_activityMaster.deleteActivityMaster($activityID);
-$bo_act_servicePricebooks.deleteStandardServicePricebooksEntry($PriceBookName, $ServicePricebooksEntryNumber);
-
 $bo_act_login.logOut(); 
 
-$RS_5334_2.end();
+$RS_9968.end();

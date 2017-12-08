@@ -1,7 +1,7 @@
 //Tests are to be written here [Bhupendra Singh Chouhan]
 //==============
 
-var $RS_5333 = _testcase("$RS_5333","Get Price - When Pricing Rule of FIXED is applied.");
+var $RS_5333 = _testcase("$RS_5333","Get Price - When Pricing Rule of FIXED is applied Using Service Contract");
 $RS_5333.start();
 _setSpeed(100);
 
