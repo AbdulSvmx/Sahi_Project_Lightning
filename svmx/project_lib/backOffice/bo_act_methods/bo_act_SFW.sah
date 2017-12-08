@@ -80,7 +80,7 @@ var $bo_act_SFW = new function bo_act_SFW() {
 	_wait(3000);
 	_assertVisible($bo_pg_sfmWizard.lbl_verifyCustWizardSection);
 	_click($bo_pg_sfmWizard.btn_clickNewCustomWizard);
-	_wait(3000);
+	_wait(30000,_isVisible($bo_pg_sfmWizard.txt_wizardName));
 	_setValue($bo_pg_sfmWizard.txt_wizardName,$wizardname);
 	_setValue($bo_pg_sfmWizard.txt_wizardID,$wizardID);
 };
@@ -132,7 +132,7 @@ this.createSFMWizardStepwithHandOver=function($fieldActnType,$actnName,$executio
 	_click($bo_pg_sfmWizard.btn_newWizardStep);
 	_assertVisible($bo_pg_sfmWizard.lbl_verifyNewWizardSection);
 	_setSelected($bo_pg_sfmWizard.sel_wizardFieldType,$fieldActnType);
-	_wait(30000,isVisible($bo_pg_sfmWizard.sel_wizardObjectType));
+	_wait(30000,_isVisible($bo_pg_sfmWizard.sel_wizardObjectType));
 	_setSelected($bo_pg_sfmWizard.sel_wizardObjectType,$actnName);
 	if($handOver == true)
 		_check($bo_pg_sfmWizard.chk_handover);
