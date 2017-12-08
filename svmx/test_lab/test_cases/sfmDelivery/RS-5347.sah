@@ -21,12 +21,12 @@ var $messageType = "Confirmation";
 var $wizardName = "SFM Delivery Auto";
 var $wizardType = "SFM";
 var $wizardObject ="Work Order";
-var $domainName = "svmxc.cs19.visual.force.com";
-//var $woName ="WO-00000096";
+var $domainName = "/visual.force.com/";
+var $woName ="WO-00000096";
 
 _setSpeed(100);
 $bo_act_login.login($g_url, $sfmUsn, $sfmPwd);
-
+/*
 //clone tmd016
 $sfm_act_SFM.cloneTDM016($sfmNameToBeCloned,$sfmName,$isCustom, $sfmTemplate, $sfmTemplateSaveAsName,$fieldName, $containerName);
 $sfm_act_SFM.partsNotMandatory();
@@ -45,7 +45,7 @@ _click($sfm_pg_sfmDesigner.lnk_home);
 
 //Create WO dynamically and search that work order in global search and validate in delivery.
 $login = $sfm_act_createWorkOrder.login($sfmUsn, $sfmPwd);
-$woName = $sfm_act_createWorkOrder.create_WO();  
+$woName = $sfm_act_createWorkOrder.create_WO();  */
 
 _wait(3000);
 $sfm_act_common.globalSearch($woName);
@@ -71,7 +71,7 @@ _wait(3000);
 //add line to Labor
 _click($sfm_pg_sfmDesigner.btn_deliveryLaborTab);
 _click($sfm_pg_sfmDesigner.btn_deliveryAddRowLabor);
-_click($sfm_pg_sfmDesigner.btn_deliveryExtendedEdit);
+_click($sfm_pg_sfmDesigner.btn_deliveryExtendedEditLabor);
 _setValue($sfm_pg_sfmDesigner.txt_eeLineQty,"5");
 _setValue($sfm_pg_sfmDesigner.txt_eeEstimatedPricePerUnit,"1500");
 _setValue($sfm_pg_sfmDesigner.txt_eeReferenceInformation,"Sahi DVR Validation");
@@ -82,7 +82,7 @@ _wait(3000);
 //add line to Expenses
 _click($sfm_pg_sfmDesigner.btn_deliveryExpenseTab);
 _click($sfm_pg_sfmDesigner.btn_deliveryAddRowExpenses);
-_click($sfm_pg_sfmDesigner.btn_deliveryExtendedEdit);
+_click($sfm_pg_sfmDesigner.btn_deliveryExtendedEditExpenses);
 _setValue($sfm_pg_sfmDesigner.txt_eeLineQty,"5");
 _setValue($sfm_pg_sfmDesigner.txt_eeEstimatedPricePerUnit,"1500");
 _setValue($sfm_pg_sfmDesigner.txt_eeReferenceInformation,"Sahi DVR Validation");
@@ -93,7 +93,7 @@ _wait(3000);
 //add line to Travel
 _click($sfm_pg_sfmDesigner.btn_deliveryTravelTab);
 _click($sfm_pg_sfmDesigner.btn_deliveryAddRowTravel);
-_click($sfm_pg_sfmDesigner.btn_deliveryExtendedEdit);
+_click($sfm_pg_sfmDesigner.btn_deliveryExtendedEditTravel);
 _setValue($sfm_pg_sfmDesigner.txt_eeLineQty,"5");
 _setValue($sfm_pg_sfmDesigner.txt_eeEstimatedPricePerUnit,"1500");
 _setValue($sfm_pg_sfmDesigner.txt_eeReferenceInformation,"Sahi DVR Validation");
@@ -148,15 +148,15 @@ _click($sfm_pg_sfmDesigner.btn_deliveryExtendedEdit);
 _setValue($sfm_pg_sfmDesigner.txt_eeLineQty,"6");
 
 _click($sfm_pg_sfmDesigner.btn_deliveryLaborTab);
-_click($sfm_pg_sfmDesigner.btn_deliveryExtendedEdit);
+_click($sfm_pg_sfmDesigner.btn_deliveryExtendedEditLabor);
 _setValue($sfm_pg_sfmDesigner.txt_eeLineQty,"6");
 
 _click($sfm_pg_sfmDesigner.btn_deliveryExpenseTab);
-_click($sfm_pg_sfmDesigner.btn_deliveryExtendedEdit);
+_click($sfm_pg_sfmDesigner.btn_deliveryExtendedEditExpenses);
 _setValue($sfm_pg_sfmDesigner.txt_eeLineQty,"6");
 
 _click($sfm_pg_sfmDesigner.btn_deliveryTravelTab);
-_click($sfm_pg_sfmDesigner.btn_deliveryExtendedEdit);
+_click($sfm_pg_sfmDesigner.btn_deliveryExtendedEditTravel);
 _setValue($sfm_pg_sfmDesigner.txt_eeLineQty,"6");
 _click($sfm_pg_sfmDesigner.btn_deliveryQuickSave);
 

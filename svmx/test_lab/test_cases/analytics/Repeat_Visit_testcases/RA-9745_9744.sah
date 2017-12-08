@@ -4,10 +4,10 @@
  *
  */var $an_rv_1050 = _testcase("RS-9745","Case Multiple calculation method check for Repeat visit");
 $an_rv_1050.start();
-var $un = "meghana.rao@servicemax.com";
-var $pwd = "salesforce100";
-var $url = "https://test.salesforce.com";
 var $data = _readExcelFile("../../analytics/an_excleData/an_Datasheet1.xlsx","Sheet1",true);
+var $un = $data[1]["Username"];
+var $pwd = $data[1]["pwd"];
+var $url = "https://test.salesforce.com";
 var $insert_case = $data[1]["InsertCase"];
 var $Account = $data[1]["Account"];
 var $Technician = $data[1]["Technician"];

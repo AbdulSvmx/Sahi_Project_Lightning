@@ -90,7 +90,7 @@ var $bo_act_SFW = new function bo_act_SFW() {
 		_click($bo_pg_sfmWizard.btn_newWizardStep);
 		_assertVisible($bo_pg_sfmWizard.lbl_verifyNewWizardSection);
 		_setSelected($bo_pg_sfmWizard.sel_wizardFieldType,$fieldActnType);
-		_wait(30000);
+		_wait(30000,_isVisible($bo_pg_sfmWizard.sel_wizardObjectType));
 		_setSelected($bo_pg_sfmWizard.sel_wizardObjectType,$actnName);
 		//_assertVisible(_label($actnName));
 		_wait(3000);
@@ -132,7 +132,7 @@ this.createSFMWizardStepwithHandOver=function($fieldActnType,$actnName,$executio
 	_click($bo_pg_sfmWizard.btn_newWizardStep);
 	_assertVisible($bo_pg_sfmWizard.lbl_verifyNewWizardSection);
 	_setSelected($bo_pg_sfmWizard.sel_wizardFieldType,$fieldActnType);
-	_wait(30000);
+	_wait(30000,isVisible($bo_pg_sfmWizard.sel_wizardObjectType));
 	_setSelected($bo_pg_sfmWizard.sel_wizardObjectType,$actnName);
 	if($handOver == true)
 		_check($bo_pg_sfmWizard.chk_handover);
@@ -152,7 +152,7 @@ this.createOthersWizardStepwithHandOver=function($fieldActnType,$actnName,$handO
 	_click($bo_pg_sfmWizard.btn_newWizardStep);
 	_assertVisible($bo_pg_sfmWizard.lbl_verifyNewWizardSection);
 	_setSelected($bo_pg_sfmWizard.sel_wizardFieldType,$fieldActnType);
-	_wait(30000);
+	_wait(30000,isVisible($bo_pg_sfmWizard.sel_wizardObjectType));
 	_setSelected($bo_pg_sfmWizard.sel_wizardObjectType,$actnName);
 	if($handOver == true)
 		_check($bo_pg_sfmWizard.chk_handover);
@@ -163,17 +163,17 @@ this.createOthersWizardStepwithHandOver=function($fieldActnType,$actnName,$handO
 	_wait(1000);		
 };
 
-this.createOutputDocumentWizardStepwithSelectTemplate=function($fieldActnType,$actnName,$SelectTemplate){
+this.createOutputDocumentWizardStepwithSelectTemplate=function($fieldActnType,$actnName,$selectTemplateAtRunTime){
 	_click($bo_pg_sfmWizard.tab_wizardStep);
 	_click($bo_pg_sfmWizard.btn_newWizardStep);
 	_assertVisible($bo_pg_sfmWizard.lbl_verifyNewWizardSection);
 	_setSelected($bo_pg_sfmWizard.sel_wizardFieldType,$fieldActnType);
-	_wait(30000);
+	_wait(30000,isVisisble($bo_pg_sfmWizard.sel_wizardObjectType));
 	_setSelected($bo_pg_sfmWizard.sel_wizardObjectType,$actnName);
-	if($SelectTemplate == true)
-		_check($bo_pg_sfmWizard.chk_selectTemplate);
+	if($selectTemplateAtRunTime == true)
+		_check($bo_pg_sfmWizard.chk_selectTemplateAtRunTime);
 	else
-		_uncheck($bo_pg_sfmWizard.chk_selectTemplate);
+		_uncheck($bo_pg_sfmWizard.chk_selectTemplateAtRunTime);
 	_wait(3000);
 	_click($bo_pg_sfmWizard.btn_saveWizardStep);
 	_wait(1000);		

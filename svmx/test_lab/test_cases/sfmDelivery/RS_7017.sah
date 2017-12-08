@@ -1,5 +1,6 @@
 var $rs_7017 = _testcase("RS_7017","Verify Read only, Mandatory, Allow, Delete and multi add in SFM Delivery.");
 $rs_7017.start();
+$sfmName= $bo_act_common.generateRandomName("SFM_Auto_");
 $wizTitle = $bo_act_common.generateRandomName("SFM Wiz");
 $bo_act_login.login($g_url,$sfmUsn,$sfmPwd);
 $bo_act_navigation.navigateToSfmTransactionDesigner();
@@ -7,4 +8,7 @@ $sfm_act_Transactions.newSfm7017();
 $bo_act_navigation.navigateToSfmWizard();
 $sfm_act_createCustomWizard.chooseObject("Work Order");
 $sfm_act_createCustomWizard.addManageWizSteps($wizTitle, "SFM", $sfmName, "Sysadmin01 Group");
+$sfm_act_createCustomWizard.createBlankWo();
+$sfm_act_createCustomWizard.clickWizardBtn($sfmName);
+$sfm_act_createCustomWizard.verify7017();
 $rs_7017.end();

@@ -1,0 +1,131 @@
+var $user_credentials = $excel.readFromCustomExcel("../optimax/op_excleData/automation.xlsx", "User_Details","","");
+var $RTO_DispatchProcess = $excel.readFromCustomExcel("../optimax/op_excleData/automation.xlsx", "TestAppts","","");
+var $DP_Data = $excel.readFromCustomExcel("../optimax/op_excleData/automation.xlsx", "Dispatch_Process","","");
+
+
+for(var $i=0;$i<$user_credentials.length;$i++)
+{
+var $g_un = $user_credentials[$i][0];
+var $g_pwd = $user_credentials[$i][1];
+var $g_url = $user_credentials[$i][2];
+}
+
+var $dp_Id = $DP_Data[1][1];
+
+var $RS_9405 = _testcase("RS_9405", "Validate appointment List view- GBL007: True");
+
+$RS_9405.start();
+	
+	
+$bo_act_login.login($g_url, $g_un, $g_pwd);
+
+_click(_link("ServiceMax Setup"));
+_wait(20000, _isVisible(_div("Configuration Profiles")));
+_click(_div("Configuration Profiles"));
+$op_utility.search_ActiveProfile();
+_click(_submit("Edit"));
+_setSelected(_select("conf_prof:F_conf_prof:Setting_Block:j_id114:j_id115:Modulelist"), "Common");
+_setSelected(_select("conf_prof:F_conf_prof:Setting_Block:j_id114:j_id122:SubModulelist"), "Global Settings");
+_click(_link("Edit[6]"));
+_selectWindow("Servicemax_Conf_Prof");
+_check(_radio("disp_setting:disp_setting:j_id1:DispSection:j_id37:j_id40"));
+_click(_button("Save"));
+_click(_submit("Close"));
+_selectWindow();
+_click(_button("Refresh"));
+_doubleClick(_button("Refresh"));
+_click(_submit("Save"));
+
+_set($login_result, _fetch(login($g_un,$g_pwd)));
+_log($login_result);
+
+_set($number, _fetch(create_WO ($RTO_DispatchProcess, $dp_Id)));
+_log($number);
+
+var $WOName = _getText(_heading2("pageDescription"));
+_log($WOName);
+
+// Getting domain from the Page URL
+var $url;
+_set($url, window.document.location.href);
+_log($url);
+var $string=$url.substring($url.lastIndexOf("//")+2,$url.lastIndexOf(".salesforce"));
+_log($string);
+
+//Clicking Appointments SFM
+_selectDomain("svmxc."+$string+".visual.force.com");
+_click(_button($RTO_DispatchProcess[0][13]));
+_selectDomain();
+_selectWindow("Ranked Appointment Booking");
+_wait(5000);
+_assertExists(_label($WOName));
+_assertVisible(_label($WOName));
+_assertEqual($WOName, _getText(_label($WOName)));
+
+_assertExists(_textbox("Start Date"));
+_assertVisible(_textbox("Start Date"));
+
+_assertExists(_textbox("End Date"));
+_assertVisible(_textbox("End Date"));
+
+_assertExists(_div("svmx-grid-cell-inner [1]"));
+_assertVisible(_div("svmx-grid-cell-inner [1]"));
+
+/*_click(_div("svmx-grid-cell-inner [1]"));
+_click(_span("Book"));
+_click(_span("Yes"));
+_click(_span("Yes"));
+_click(_span("OK"));*/
+
+_closeWindow(); //Closing the selected window
+_selectWindow();
+$bo_act_login.logOut();
+
+//<browser>
+function login($g_un,$g_pwd){
+	
+	var $login_result = sforce.connection.login($g_un,$g_pwd);
+	$sfdc_sessionId = $login_result.sessionId;
+	_log("$sfdc_sessionId = "+$sfdc_sessionId);
+	return $login_result;
+} 
+
+function create_WO ($RTO_DispatchProcess, $dp_Id)
+{
+	var CreateWO=[];
+	//creating wo from the excel sheet
+	for(var $i=0;$i<$RTO_DispatchProcess.length;$i++)
+	{
+		var WO = new sforce.SObject("SVMXC__Service_Order__c");
+		WO.SVMXC__Primary_Territory__c= $RTO_DispatchProcess[$i][1];
+		WO.SVMXC__Preferred_Business_Hours__c = $RTO_DispatchProcess[$i][2];
+		WO.SVMXC__Order_Type__c = $RTO_DispatchProcess[$i][3];
+		WO.SVMXC__Order_Status__c = $RTO_DispatchProcess[$i][4];
+		WO.SVMXC__Zip__c=$RTO_DispatchProcess[$i][5];
+		WO.SVMXC__Country__c=$RTO_DispatchProcess[$i][6];
+		WO.SVMXC__City__c=$RTO_DispatchProcess[$i][7];
+		WO.SVMXC__State__c=$RTO_DispatchProcess[$i][8];
+		WO.SVMXC__Street__c=$RTO_DispatchProcess[$i][9];
+		WO.SVMXC__SM_Appointment_Type__c=$RTO_DispatchProcess[$i][10];
+		WO.SVMXC__SM_Schedule_Violation_Penalty__c=$RTO_DispatchProcess[$i][11];
+		WO.SVMXC__Apply_Business_Hours_For_OptiMax__c = $RTO_DispatchProcess[$i][12];
+		CreateWO.push(WO);  
+	}
+	var result = _call(sforce.connection.create(CreateWO));
+	_log("Work Orders Created = "+ result.length);
+	_wait(20000);
+	
+		var WO_List = sforce.connection.query("Select Id, Name, SVMXC__Dispatch_Process__c, SVMXC__SM_Appointment_Type__c, SVMXC__Work_Order_Scheduling_Status__c From SVMXC__Service_Order__c Where SVMXC__Dispatch_Process__c = '"+$dp_Id+"' AND SVMXC__Work_Order_Scheduling_Status__c = 'Tentative' AND SVMXC__SM_Appointment_Type__c != null ORDER BY Id DESC limit 1");
+		var WO_arr = WO_List.getArray("records");
+		var number = WO_arr[0].Name;
+		_log(number);
+		
+		_click(_link("Work Orders"));
+		_click(_link(number));
+		
+				
+	return number;
+}
+//</browser>
+
+$RS_9405.end();

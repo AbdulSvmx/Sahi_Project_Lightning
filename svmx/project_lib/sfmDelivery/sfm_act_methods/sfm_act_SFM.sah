@@ -1,12 +1,11 @@
 /**
- * Cloning TDM016/Manage Work Order Lines - Usage process and adding fields to
- * screen
+ * Cloning TDM016/Manage Work Order Lines - Usage process and adding fields to screen
  */
 
 var $sfm_act_SFM = new function sfm_act_SFM() {
 
 	this.cloneTDM016 = function($sfmNameToBeCloned, $sfmName, $isCustom,
-			$sfmTemplate, $sfmTemplateSaveAsName, $fieldName, $containerName) {
+			 $sfmTemplateSaveAsName,$sfmTemplate, $fieldName, $containerName) {
 		$bo_act_navigation.navigateToSfmTransactionDesigner();
 		_setSpeed(100);
 
@@ -28,8 +27,11 @@ var $sfm_act_SFM = new function sfm_act_SFM() {
 		_wait(3000);
 		$sfm_act_SFM.addFieldToScreen($fieldName, $containerName);
 	};
-	// Based on the number of items passed in array, fields gets added to either
-	// header or child
+	
+	/**
+	 * Based on the number of items passed in array(ContainerName), fields gets added to either header or child
+	 * If Container is Order Status then field is added to header otherwise to Child lines
+	 */
 	this.addFieldToScreen = function($fieldName, $containerName) {
 		for (var $i = 0; $i < $containerName.length; $i++) {
 			if ($containerName[$i] == 'Order Status') {
@@ -49,8 +51,14 @@ var $sfm_act_SFM = new function sfm_act_SFM() {
 						_f("main").s_richtext($containerName[$i])));
 				_setValue(_f("main").s_textinput("searchText[4]"),
 						$fieldName[$i]);
+				if($fieldName[$i]=="AutoContact"){
+					_doubleClick($sfm_pg_screenDesigner.lbl_autoContact);
+					$sfm_act_Transactions.addLookupContext();
+				}
+				else{
 				_click(_f("main").s_label($fieldName[$i]));
 				_click(_f("main").s_button("Add Field"));
+			}
 			}
 		}
 		_click($bo_pg_sfmTransactionAndDesigner.btn_quickSave);
@@ -93,6 +101,10 @@ var $sfm_act_SFM = new function sfm_act_SFM() {
 		// _setStrictVisibilityCheck(false);
 
 	};
+	
+	/**
+	 * This function is mark the Parts field in Parts tab as Mandatory or Non Mandatory
+	 */
 	this.partsNotMandatory = function() {
 		_setValue(_f("main").s_hscrollbar("horizontalScrollBar[2]"), "00");
 		_click(_f("main").s_textinput("lblData").near(

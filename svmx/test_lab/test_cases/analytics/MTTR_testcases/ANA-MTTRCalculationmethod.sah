@@ -1,5 +1,6 @@
-var $un = "meghana.rao@servicemax.com";
-var $pwd = "salesforce100";
+var $data = _readExcelFile("../../analytics/an_excleData/an_Datasheet1.xlsx","Sheet1",true);
+var $un = $data[1]["Username"];
+var $pwd = $data[1]["pwd"];
 var $url = "https://test.salesforce.com";
 $bo_act_login.login($url, $un, $pwd);
 $an_act_MTTR.mttr_usa_calc("USA Calculation method");
