@@ -75,7 +75,6 @@ var $op_act_sForceApiCall = new function op_act_sForceApiCall() {
 				try {
 					records = _call(sforce.apex.executeAnonymous(queryString));
 					_log("Records = " + records);
-					break;
 				} catch ($e) {
 					_log("Exception in Apex -- Reincluding Apex Src and Retrying ::" + $e);
 					return "exception";
