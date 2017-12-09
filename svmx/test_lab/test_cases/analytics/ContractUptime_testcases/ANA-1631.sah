@@ -65,7 +65,7 @@ var $ana_1631_IB_ID1;
 _log($ana_1631_IB_ID1);
 
 // Create Covered Product 
-var $ana_1631_create_CP1 = "SVMXC__Service_Contract_Products__c CP01 = new SVMXC__Service_Contract_Products__c(SVMXC__Installed_Product__c = '"+$ana_1631_IB_ID1+"',SVMXC__Service_Contract__c = '"+$ana_1631_SCON1+"', Custom_checkbox__c = false , SVMXC__Is_Billable__c = true ); insert CP01;";
+var $ana_1631_create_CP1 = "SVMXC__Service_Contract_Products__c CP01 = new SVMXC__Service_Contract_Products__c(SVMXC__Installed_Product__c = '"+$ana_1631_IB_ID1+"',SVMXC__Service_Contract__c = '"+$ana_1631_SCON1+"', Custom_checkbox__c = false , SVMXC__Is_Billable__c = true , SVMXC__Start_Date__c = System.Today()  ); insert CP01;";
 var $ana_1631_result_CP1 = $op_act_sForceApiCall.sForceQuery($un, $pwd, $ana_1631_create_CP1 , "create");
 var $ana_1631_get_CP1 = "Select Id , Name from SVMXC__Service_Contract_Products__c where Createdby.Id = '005q0000003GGfP' Order by CreatedDate DESC Limit 1";
 var $ana_1631_fetch_CP1   = $op_act_sForceApiCall.sForceQuery($un, $pwd, $ana_1631_get_CP1,"query");

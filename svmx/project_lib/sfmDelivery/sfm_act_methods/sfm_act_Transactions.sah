@@ -1,7 +1,5 @@
 var $sfm_act_Transactions = new function sfm_act_Transactions() {
 	this.cloneAndSaveProcess = function($processName,$sfmName,$sfmPgLayoutName){
-//		_wait(5000);
-//		_setSpeed(3000);
 		_setSpeed(100);
 		$sfm_act_SFM.selectSFM($processName,false);
 		_click($bo_pg_sfmTransactionAndDesigner.btn_clone);
@@ -17,6 +15,13 @@ var $sfm_act_Transactions = new function sfm_act_Transactions() {
 		_wait(3000);
 		_click($bo_pg_sfmTransactionAndDesigner.btn_finalQuickSave);
 //		_click($bo_pg_sfmTransactionAndDesigner.lbl_backToSetupHome);
+	};
+	
+	this.addLookupContext = function(){
+		_click(_f("main").s_checkbox("Override Context"));
+		_setSelected(_f("main").s_combobox("/ComboBox/").rightOf(_f("main").formitemlabel("Context")),"Account");
+//		_wait(5000);
+		_setSelected(_f("main").s_combobox("/ComboBox/").rightOf(_f("main").formitemlabel("Matching Field")),"Account ID");
 	};
 	
 	this.newSfm7017 = function() {
@@ -64,7 +69,7 @@ var $sfm_act_Transactions = new function sfm_act_Transactions() {
 		_click($bo_pg_sfmTransactionAndDesigner.btn_finalQuickSave);
 	};
 	
-	this.newsfm6877 = function($sfmName,$sfmPgLayoutName){
+	this.newsfm6877 = function($sfmName,$sfmPgLayoutName,$headersToAdd,$context,$matching){
 		_wait(5000);
 		_click($bo_pg_sfmTransactionAndDesigner.btn_newSFM);
 		_setValue($bo_pg_sfmTransactionAndDesigner.txt_name, $sfmName);
@@ -80,18 +85,23 @@ var $sfm_act_Transactions = new function sfm_act_Transactions() {
 		_setValue($bo_pg_sfmTransactionAndDesigner.txt_sfmSavePageLayoutAs, $sfmPgLayoutName);
 		_setValue($bo_pg_sfmTransactionAndDesigner.txt_sfmSavePageLayoutAsId, $sfmPgLayoutName);
 		_wait(5000);
-		_click($sfm_pg_screenDesigner.add_field);
-		_click($sfm_pg_screenDesigner.txt_searchField);
-		_setValue($sfm_pg_screenDesigner.txt_searchField,"Account");
-		_doubleClick($sfm_pg_screenDesigner.lbl_account);
-		_click($sfm_pg_screenDesigner.add_field);
-		_click($sfm_pg_screenDesigner.txt_searchField);
-		_setValue($sfm_pg_screenDesigner.txt_searchField,"Contact");
-		_doubleClick($sfm_pg_screenDesigner.lbl_contact);
-		_click(_f("main").s_checkbox("Override Context"));
-		_setSelected(_f("main").s_combobox("/ComboBox/").rightOf(_f("main").formitemlabel("Context")),"Account");
+		this.addHeader($headersToAdd);
+//		_click($sfm_pg_screenDesigner.add_field);
+//		_click($sfm_pg_screenDesigner.txt_searchField);
+//		_setValue($sfm_pg_screenDesigner.txt_searchField,"Account");
+//		_doubleClick($sfm_pg_screenDesigner.lbl_account);
+//		_click($sfm_pg_screenDesigner.add_field);
+//		_click($sfm_pg_screenDesigner.txt_searchField);
+//		_setValue($sfm_pg_screenDesigner.txt_searchField,"Contact");
+//		_doubleClick($sfm_pg_screenDesigner.lbl_contact);
+//		_click(_f("main").s_checkbox("Override Context"));
+//		_setSelected(_f("main").s_combobox("/ComboBox/").rightOf(_f("main").formitemlabel("Context")),"Account");
+//		_wait(5000);
+//		_setSelected(_f("main").s_combobox("/ComboBox/").rightOf(_f("main").formitemlabel("Matching Field")),"Account ID");
+		_click($bo_pg_sfmTransactionAndDesigner.chk_override);
+		_setSelected($bo_pg_sfmTransactionAndDesigner.sel_context,$context);
 		_wait(5000);
-		_setSelected(_f("main").s_combobox("/ComboBox/").rightOf(_f("main").formitemlabel("Matching Field")),"Account ID")
+		_setSelected($bo_pg_sfmTransactionAndDesigner.sel_matchingField,$matching);
 		_click($bo_pg_sfmTransactionAndDesigner.btn_pageLayoutSave);
 		_wait(3000);
 		_click($bo_pg_sfmTransactionAndDesigner.btn_finalQuickSave);
@@ -125,8 +135,20 @@ var $sfm_act_Transactions = new function sfm_act_Transactions() {
 		_setSelected(_f("main").s_combobox("/ComboBox/").rightOf(_f("main").formitemlabel("Context")),"Account");
 		_wait(5000);
 		_setSelected(_f("main").s_combobox("/ComboBox/").rightOf(_f("main").formitemlabel("Matching Field")),"Account ID");
+		_click($sfm_pg_screenDesigner.section_Parts);
+		_click($sfm_pg_screenDesigner.chk_allowNew);
 		_click($bo_pg_sfmTransactionAndDesigner.btn_pageLayoutSave);
 		_wait(3000);
 		_click($bo_pg_sfmTransactionAndDesigner.btn_finalQuickSave);
+	};
+	this.addHeader = function($headersToAdd){
+		for(var $i=0;$i<$headersToAdd.length;$i++){
+				_click($sfm_pg_screenDesigner.add_field);
+				_click($sfm_pg_screenDesigner.txt_searchField);
+				_setValue($sfm_pg_screenDesigner.txt_searchField,$headersToAdd[$i]);
+				_doubleClick(_f("main").s_label($headersToAdd[$i]));
+		}
+		
+		
 	};
 };

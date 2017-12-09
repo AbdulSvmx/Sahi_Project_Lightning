@@ -76,7 +76,7 @@ _selectDomain();
 _wait(20000,_isVisible(_div("Checklists")));
  _click(_label("checklist1"));
 _wait(20000,_isVisible(_label("Checklist Section Title")));
-*/
+
 _click(_span("svmx-btn-icon svmx-sfmd-chklst-helpurl-icon[1]"));
 _wait(4000);
 var $recentWindow = _getRecentWindow();
@@ -94,4 +94,4 @@ _log("New WIndow URL is "+ $recentWindow.windowURL);
 //_click(_span("svmx-btn-icon svmx-sfmd-chklst-helpurl-icon[2]"));
 //_span("button-1330-btnIconEl");
 //_click(_span("/svmx-btn-icon svmx-sfmd-chklst-helpurl-icon/",_rightOf(_textbox("Text Question with http://www.google.com:"))));
- */
+ 

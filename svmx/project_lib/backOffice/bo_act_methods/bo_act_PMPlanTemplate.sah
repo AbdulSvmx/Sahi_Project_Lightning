@@ -12,7 +12,7 @@ var $bo_act_PMPlanTemplate = new function bo_act_PMPlanTemplate() {
 this.createTimeBasedPMPlanTemplate = function($ProductName,$coverage,$workOrderPurpose,$frequencyUnit){
 		var $PMTemplateName = $bo_act_common.generateRandomName("PMT");
 		$bo_act_navigation.navigateToPMPlanTemplatePage();
-		_wait(30000,isVisible($bo_pg_PMPlanTemplate.txt_PMPlanTemplateName));
+		_wait(30000,_isVisible($bo_pg_PMPlanTemplate.btn_newPMPlanTemplate));
 		_click($bo_pg_PMPlanTemplate.btn_newPMPlanTemplate);
 		_wait(60000,_isVisible($bo_pg_PMPlanTemplate.txt_PMPlanTemplateName));
 		_setValue($bo_pg_PMPlanTemplate.txt_PMPlanTemplateName,$PMTemplateName);
@@ -22,6 +22,7 @@ this.createTimeBasedPMPlanTemplate = function($ProductName,$coverage,$workOrderP
 	   _setStrictVisibilityCheck(false);
 	   _getRecentWindow();
 	   _setValue($bo_pg_PMPlanTemplate.txt_sequence,1);
+	   if($workOrderPurpose != null)
 	   $bo_act_common.searchfunction($workOrderPurpose);
 	   _setValue($bo_pg_PMPlanTemplate.txt_frequency,1);
 	   _setValue($bo_pg_PMPlanTemplate.txt_frequencyUnit,$frequencyUnit);
@@ -35,7 +36,7 @@ this.createTimeBasedPMPlanTemplate = function($ProductName,$coverage,$workOrderP
 	    $bo_act_common.searchfunction($ProductName);
 	   _click($bo_pg_PMPlanTemplate.btn_update);
 	    _click($bo_pg_PMPlanTemplate.btn_saveIcon);
-	   _wait(60000, _isVisible($PMTemplateName));
+	   _wait(60000, _isVisible(_heading2($PMTemplateName)));
 		_logOutput($PMTemplateName+ " PM Plan Template is created");
 	   return $PMTemplateName;
 	};
@@ -74,7 +75,7 @@ this.updateUsageConditionRulesGridWithOutAdjFields = function($attribute,$operat
 	_click($bo_pg_PMPlanTemplate._listItem($operator));
 
 	_click($bo_pg_PMPlanTemplate.txt_frequencybox);
-	_click($bo_pg_PMPlanTemplate.txt_frequency);
+	_click($bo_pg_PMPlanTemplate.txt_frequency1);
 	_setValue($bo_pg_PMPlanTemplate.txt_frequencytxt,$frequency);
 	
 	_click($bo_pg_PMPlanTemplate.txt_startAtbox);
@@ -99,7 +100,7 @@ this.updateUsageConditionRulesGridWithAdjFields = function($attribute,$operator,
 	_click(_listItem($operator));
 
 	_click($bo_pg_PMPlanTemplate.txt_frequencybox);
-	_click($bo_pg_PMPlanTemplate.txt_frequency);
+	_click($bo_pg_PMPlanTemplate.txt_frequency1);
 		_setValue($bo_pg_PMPlanTemplate.txt_frequency,$frequency);
 	
 		_click($bo_pg_PMPlanTemplate.txt_startAtbox);
