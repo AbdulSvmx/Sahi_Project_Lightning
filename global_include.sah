@@ -1,5 +1,5 @@
 _windowAction("resize",1920,1080);
-
+_setSpeed(100);
 // Add All Global Variables here
 var $g_url = "https://test.salesforce.com/";
 var $g_un = "bhupen@back17.com";// "bhupendra.s@dev.tool2.com";

@@ -15,11 +15,10 @@ var $op_act_sForceApiCall = new function op_act_sForceApiCall() {
 	this.sForceQuery = function($un, $pwd, $queryComplex, $queryType) {
 
 		var $nArr = null;
+		var $queryString = String($queryComplex);
 
 		if ($queryType == "query") {
-			_set($sID, _fetch(sForceLogin($un, $pwd)));
-			_wait(2000);
-			_set($nArr, _fetch(sForceApiCall($queryComplex, $queryType)));
+			_set($nArr, _fetch(sForceApiCall($un, $pwd, $queryString, $queryType)));
 
 			for (var $i = 0; $i < 10; $i++) {
 
@@ -27,14 +26,12 @@ var $op_act_sForceApiCall = new function op_act_sForceApiCall() {
 				if ($nArr != null && JSON.stringify($nArr).indexOf("[]") == -1 && JSON.stringify($nArr).indexOf("{\"column\":\"-1\"") == -1) {
 					break;
 				} else {
-					_set($nArr, _fetch(sForceApiCall($queryComplex, $queryType)));
+					_set($nArr, _fetch(sForceApiCall($un, $pwd, $queryString, $queryType)));
 				}
 			}
 
 		} else if ($queryType == "create") {
-			_set($sID, _fetch(sForceLogin($un, $pwd)));
-			_wait(2000);
-			_set($nArr, _fetch(sForceApiCall($queryComplex, $queryType)));
+			_set($nArr, _fetch(sForceApiCall($un, $pwd, $queryString, $queryType)));
 			var $i = 0;
 			var $retry = 10;
 			for ($i = 0; $i <= $retry; $i++) {
@@ -42,7 +39,7 @@ var $op_act_sForceApiCall = new function op_act_sForceApiCall() {
 					break;
 
 				} else {
-					_set($nArr, _fetch(sForceApiCall($queryComplex, $queryType)));
+					_set($nArr, _fetch(sForceApiCall($un, $pwd, $queryString, $queryType)));
 				}
 				if ($i >= $retry) {
 					_logExceptionAsFailure("Exception In Apex Call");
@@ -52,22 +49,25 @@ var $op_act_sForceApiCall = new function op_act_sForceApiCall() {
 		return $nArr;
 
 		// <browser>
-
-		function sForceLogin($un, $pwd) {
-			// sforce.connection.sessionId = null;
-			// sforce.connection.debuggingHeader = null;
-			sessionId = sforce.connection.login($un, $pwd);
-			// _log("Session ID =" + sessionId);
-		}
-		
-		function sForceApiCall($queryComplex, $queryType) {
+		var g_loggedIn = false;
+		var sessionId;
+		function sForceApiCall($un, $pwd, $queryString, $queryType) {
 			var records = null;
 			var arr = null;
-			var queryString = $queryComplex;
+
+			if (g_loggedIn == false) {
+				//sforce.connection.sessionId = null;
+				// sforce.connection.debuggingHeader = null;
+				sessionId = sforce.connection.login($un, $pwd);
+				_log("Session ID =" + sessionId);
+				g_loggedIn = true;
+			} else {
+				_log("Already loggedin via API Sid :");
+			}
 
 			switch ($queryType) {
 			case 'query':
-				records = _call(sforce.connection.query(queryString));
+				records = _call(sforce.connection.query($queryString));
 				_log("Records = " + records);
 
 				arr = records.getArray('records');
@@ -75,8 +75,9 @@ var $op_act_sForceApiCall = new function op_act_sForceApiCall() {
 
 			case 'create':
 				try {
-					records = _call(sforce.apex.executeAnonymous(queryString));
+					records = _call(sforce.apex.executeAnonymous($queryString));
 					_log("Records = " + records);
+					break;
 				} catch ($e) {
 					_log("Exception in Apex -- Reincluding Apex Src and Retrying ::" + $e);
 					return "exception";
@@ -85,7 +86,7 @@ var $op_act_sForceApiCall = new function op_act_sForceApiCall() {
 
 			default:
 				arr = [];
-				return arr;
+			return arr;
 
 			}
 		}
