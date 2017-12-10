@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!--
+/**
+ * Copyright Tyto Software Pvt. Ltd.
+ */
+-->
+<project name="demo" default="runtestschrome">
+	<taskdef name="sahi" classname="net.sf.sahi.ant.RunSahiTask" classpath="lib/ant-sahi.jar"/>
+	
+	<target name="set_timestamp">
+        <tstamp>
+            <format property="ts" pattern="yyyy_MM_dd__HH_mm_ss" locale="en, IN"/>
+        </tstamp>
+	</target>
+	
+	
+	<target name="set_properties_chrome" depends="set_timestamp">
+    	<property name="scriptDir" value="scripts/Sahi_Project/"/>
+    	<property name="scriptName" value="svmx/test_lab/test_suites/backOffice/bac_all.suite"/>
+		<property name="browser" value="chrome"/>
+		<property name="startWith" value="desktopbrowser"/>
+		<property name="sendemail" value="false"/>
+		<property name="emailtrigger" value="success,failure"/>
+		<property name="emailproperties" value="/auto/sahi_pro/userdata/config/email.properties"/>
+		<property name="sendemailperiodically" value="false"/>
+		<property name="sendemailperiodicallytime" value=""/>
+		<property name="emailPasswordHidden" value="true"/>
+		<property name="baseURL" value="http://test.salesforce.com"/>
+		<property name="host" value="localhost"/>
+		<property name="port" value="9999"/>
+		<property name="singlesession" value="true"/>
+		<property name="threads" value="27"/>
+		<property name="showPeriodicSummary" value="true"/>
+		<property name="failedSuiteName" value="op_demo_failed_${browser}.suite"/>
+		<property name="failedSuite" value="svmx/test_lab/test_suites/optimax/${failedSuiteName}"/>
+		<property name="jsCodeCoverage" value="false"/>
+	</target>
+
+	<target name="runtestschrome" depends="set_properties_chrome">
+		<sahi suite="${scriptName}"
+			browsertype="${browser}"
+			startWith="${startWith}"
+			sendemail="${sendemail}"
+	        emailtrigger="${emailtrigger}"
+	        emailproperties="${emailproperties}"
+	        sendEmailPeriodically="${sendemailperiodically}"
+			sendEmailPeriodicallyTime="${sendemailperiodicallytime}"
+			emailPasswordHidden="${emailPasswordHidden}"
+			baseurl="${baseURL}"
+			sahihost="${host}"
+			sahiport="${port}"
+			scriptsPathMaster="${scriptDir}"
+			failureproperty="sahi.failed.${browser}"
+			failedSuiteName="${failedSuiteName}"
+			haltonfailure="false"
+			singlesession="${singlesession}"
+			showPeriodicSummary="${showPeriodicSummary}"
+			threads="${threads}"
+			jsCodeCoverage="${jsCodeCoverage}">
+		</sahi>
+		<antcall target="failsahichrome"/>
+	</target>
+
+    <target name="failsahichrome" depends="set_properties_chrome" if="sahi.failed.${browser}">
+        <fail message="Sahi tests failed on browser ${browser}!"/>
+    </target>		
+</project>
