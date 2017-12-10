@@ -5,7 +5,7 @@
  */
 -->
 <project name="demo" default="runtestschrome">
-	<taskdef name="sahi" classname="net.sf.sahi.ant.RunSahiTask" classpath="lib/ant-sahi.jar"/>
+	<taskdef name="sahi" classname="net.sf.sahi.ant.RunSahiTask" classpath="/auto/sahi_pro/lib/ant-sahi.jar"/>
 	
 	<target name="set_timestamp">
         <tstamp>
