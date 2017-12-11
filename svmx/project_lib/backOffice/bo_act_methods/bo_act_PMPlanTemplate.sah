@@ -101,7 +101,7 @@ this.updateUsageConditionRulesGridWithAdjFields = function($attribute,$operator,
 
 	_click($bo_pg_PMPlanTemplate.txt_frequencybox);
 	_click($bo_pg_PMPlanTemplate.txt_frequency1);
-		_setValue($bo_pg_PMPlanTemplate.txt_frequency,$frequency);
+		_setValue($bo_pg_PMPlanTemplate.txt_frequency1,$frequency);
 	
 		_click($bo_pg_PMPlanTemplate.txt_startAtbox);
 		_click($bo_pg_PMPlanTemplate.txt_startAt);

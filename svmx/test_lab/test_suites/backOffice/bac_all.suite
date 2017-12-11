@@ -27,7 +27,6 @@
 ../../../test_lab/test_cases/backOffice/RS_5316.sah
 ../../../test_lab/test_cases/backOffice/RS_5333.sah
 ../../../test_lab/test_cases/backOffice/RS_5334.sah
-../../../test_lab/test_cases/backOffice/RS_5374.sah
 ../../../test_lab/test_cases/backOffice/RS_5379.sah
 ../../../test_lab/test_cases/backOffice/RS_5380.sah
 ../../../test_lab/test_cases/backOffice/RS_5381.sah
@@ -65,6 +64,8 @@
 ../../../test_lab/test_cases/backOffice/RS_9830.sah
 ../../../test_lab/test_cases/backOffice/RS_9831.sah
 ../../../test_lab/test_cases/backOffice/RS_9832.sah
+../../../test_lab/test_cases/backOffice/RS_9835.sah
+../../../test_lab/test_cases/backOffice/RS_9868.sah
 ../../../test_lab/test_cases/backOffice/RS_9935.sah
 ../../../test_lab/test_cases/backOffice/RS_9968.sah
 ../../../test_lab/test_cases/backOffice/RS_10011.sah

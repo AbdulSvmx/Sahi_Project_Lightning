@@ -121,10 +121,10 @@ _assertExists(_button("/Create RMA from Work Order/",_near(_cell($wizardTitleNam
 _click(_button("/Create RMA from Work Order/",_near(_cell($wizardTitleName))));
 _selectDomain();
 
-_click($bo_pg_sfmWizard.btn_deleteicon);
-_click($bo_pg_sfmWizard.btn_saveicon);
+_click(_image("/svmx-sfmd-delete-icon/"));
+_click(_span("/svmx-sfmd-save-icon/"));
 
-_assertExists(_heading2("/actionTitle/"));
+//_assertExists(_heading2("/actionTitle/"));
 _assertContainsText("Your Web Service call failed",_div("messageText"));
 _assertExists(_submit("Return"));
 _click(_submit("Return"));
