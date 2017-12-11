@@ -126,6 +126,8 @@ this.cleanUpfunction = function($value)
 	{
 		_setValue(_textbox("phSearchInput"),$value);
 		_click(_button("phSearchButton"));
+		if(_condition(_heading1("Search Results") == null))
+			_click(_button("phSearchButton"));
 		_wait(4000,_isVisible(_link("searchAll")));
 		_click(_link("searchAll"));
 		_click(_link($value));
