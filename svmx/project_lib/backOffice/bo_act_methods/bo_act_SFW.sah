@@ -152,7 +152,7 @@ this.createOthersWizardStepwithHandOver=function($fieldActnType,$actnName,$handO
 	_click($bo_pg_sfmWizard.btn_newWizardStep);
 	_assertVisible($bo_pg_sfmWizard.lbl_verifyNewWizardSection);
 	_setSelected($bo_pg_sfmWizard.sel_wizardFieldType,$fieldActnType);
-	_wait(30000,isVisible($bo_pg_sfmWizard.sel_wizardObjectType));
+	_wait(30000,_isVisible($bo_pg_sfmWizard.sel_wizardObjectType));
 	_setSelected($bo_pg_sfmWizard.sel_wizardObjectType,$actnName);
 	if($handOver == true)
 		_check($bo_pg_sfmWizard.chk_handover);

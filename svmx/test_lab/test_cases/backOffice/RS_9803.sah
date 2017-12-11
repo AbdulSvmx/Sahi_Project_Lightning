@@ -99,8 +99,7 @@ $bo_act_salesforceSetUp.createApexClasses($code);
 
 var $wrongMethodName = $bo_act_common.generateRandomName("Test");
 var $actionTitle = $bo_act_customAction.createCustomActionForWebService("Work Order", $className, $wrongMethodName);
-var $parameterValue = $bo_act_common.generateRandomName("ParaValue");
-$bo_act_customAction.addParametersForWebService("Value", $parameterValue);
+$bo_act_customAction.addParametersForWebService("Owner","Field Name", "Owner ID");
 
 var $wizardTitleName = $bo_act_common.generateRandomName("SFWTitle");
 var $wizardIDName = $bo_act_common.generateRandomName("SFWId");
