@@ -1,0 +1,17 @@
+var $bo_act_counterRule=new function bo_act_counterRule(){
+
+this.createNewCunterRule=function($counterRuleName,$value){
+		_click($bo_pg_counterRule.btn_newRule);
+		_setValue($bo_pg_counterRule.txt_counterRuleName, $counterRuleName);
+		_setSelected($bo_pg_counterRule.sel_prodCode, "Product Code");
+		_setSelected($bo_pg_counterRule.sel_operator, "Contains");
+		_setValue($bo_pg_counterRule.sel_value, $value);
+		_setValue($bo_pg_counterRule.txt_counterName, "miles");
+		_setSelected($bo_pg_counterRule.sel_type, "Increasing");
+		_setValue($bo_pg_counterRule.txt_growsOrReducedBy, "10");
+		_setValue($bo_pg_counterRule.txt_minValue, "10");
+		_setValue($bo_pg_counterRule.txt_maxValue, "100");
+		_check($bo_pg_counterRule.chk_activefield);
+		_click($bo_pg_counterRule.btn_save);
+	}
+	}

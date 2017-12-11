@@ -1,5 +1,5 @@
 
-var $domainName = "svmxc.cs21.visual.force.com";
+var $domainName = "/visual.force.com/";
 var $sfmName = "Validate Address";
 var $woName;
 

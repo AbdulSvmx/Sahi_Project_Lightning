@@ -1,0 +1,45 @@
+/**
+* SFM  Custom Actions object repository 
+*/
+
+var $sfm_pg_checklistQuestionLibrary = new function sfm_pg_checklistQuestionLibrary() {
+	this.sel_createSFMTransaction= _f("main").s_dropdownlist("purposeCombo");
+	this.txt_targetObject= _f("main").s_textinput("textInput[1]");
+	this.lbl_workOrder= _f("main").s_label("Work Order[5]");
+	
+	this.btn_backToSetupHome =_submit("Back To Setup Home");
+	this.txt_checklistQuestionLibrary=_span("Checklist Question Library");
+	this.btn_addQuestion=_div("Add");
+	this.txt_addQuestion=_span("Add Question");
+	this.txt_responseType=_textbox("Answer Type:")
+	this.sel_textAnswerType=_listItem("Text");
+	this.sel_checkBoxAnswerType= _listItem("Checkbox");
+	this.sel_radioButtonAnswerType=_listItem("Radio Button");
+	this.sel_picklistAnswerType=_listItem("Picklist");
+	this.sel_multiSelectPicklistAnswerType=_listItem("Multi-select Picklist");
+	this.sel_numberAnswerType=_listItem("Number");
+	this.sel_dateAnswerType=_listItem("Date");
+	this.sel_dateTimeAnswerType=_listItem("DateTime");
+	this.txt_questionText=_textbox("questionText");
+	this.txt_helpURL=_textbox("helpURL");
+	this.txt_responseSetName=_textbox("newResponseSetName")
+	this.txt_answerValue1=_textbox("answers");
+	this.txt_answerValue2=_textbox("answers[1]");
+	this.txt_answerValue3=_textbox("answers[2]");
+	this.txt_tagName=_textbox("TagField");
+	this.btn_addAnswer=_div("+Add Answer");
+	this.btn_saveQuestion=_span("Save");
+	this.txt_saveSucessMessage=_span("Success");
+	this.btn_okMessage=_span("OK");	
+	this.sel_dateoptionFunction=_textbox("valueFunctionCombo");
+	this_sel_dateoptionValue=_listItem("Function");
+	this.sel_dateoptionLiteral=_textbox("literalCombo");
+	this.sel_todayLiteral=_listItem("Today");	
+	this.txt_checklistQuestionSearch=_textbox(1);
+	this.btnDelete=_span("Delete");
+	this.selQuestion=_div("svmx-grid-row-checker");
+	this.seldeletionConfirm=_span("Yes");
+	this.txt_deleteSucessMessage=_div("Record(s) deleted successfully");
+	this.txt_confirmDelete=_div("Confirm Delete");
+	this.txt_successHeaderMsg=_div("Success");
+};

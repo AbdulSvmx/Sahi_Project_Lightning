@@ -1,0 +1,34 @@
+var $bo_act_scheduledSFM=new function bo_act_scheduledSFM(){
+	
+	this.newProcessNameID=function($ProcessName,$ProcessId){
+		_click($bo_pg_scheduledSFM.btn_new);
+		_setValue($bo_pg_scheduledSFM.lbl_processName,$ProcessName);
+		_setValue($bo_pg_scheduledSFM.lbl_processID,$ProcessId);
+	}
+		this.selectSFMTransactionToSchedule=function($avilPros){
+			_setSelected($bo_pg_scheduledSFM.sel_availablePros, [$avilPros]);
+			_click($bo_pg_scheduledSFM.img_selectedPros);
+			
+		}
+			this.addServiceToSchedule=function($obName,$qc,$clsName,$btchSize){
+				_click($bo_pg_scheduledSFM.img_addNewServiceToSchedule);
+				_setSelected($bo_pg_scheduledSFM.sel_objName,$obName);
+				_setSelected($bo_pg_scheduledSFM.sel_qc,$qc);
+				_setValue($bo_pg_scheduledSFM.txt_className,$clsName);
+				_setValue($bo_pg_scheduledSFM.txt_batchSize,$btchSize);
+				
+			}
+				this.chooseTimeAndDateToRunTheProcess=function($d1,$d2,$d3,$d4,$d5,$d6,$d7){
+					_click($bo_pg_scheduledSFM.tab_scheduleAndNotification);
+					_setSelected($bo_pg_scheduledSFM.sel_nameOfDays, [$d1,$d2,$d3,$d4,$d5,$d6,$d7]);
+					_click($bo_pg_scheduledSFM.btn_add);					
+				}
+			this.setUserForNotification=function($user){
+				_click($bo_pg_scheduledSFM.img_sendNotificationLookUp);		
+				_selectWindow("lookup");
+				_click($bo_pg_scheduledSFM.btn_go);
+				_click(_link($user));
+				_selectWindow();
+				_setValue($bo_pg_scheduledSFM.sel_setUser,$user);		
+			}
+}

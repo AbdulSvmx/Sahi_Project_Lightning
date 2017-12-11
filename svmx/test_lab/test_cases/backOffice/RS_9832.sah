@@ -1,0 +1,46 @@
+
+//author - Noor Salma Sharieff
+
+var $9832 = _testcase("RS-9832","SFW - Handover and Confirmation for background process.");
+$9832.start();
+_setSpeed(100);
+var $PMPlanName = $bo_act_common.generateRandomName("PMPlan");
+var $sconName = $bo_act_common.generateRandomName("Scon");
+
+$bo_act_login.login($g_url, $bac_un, $bac_pwd);
+
+var $wizardTitleName = $bo_act_common.generateRandomName("SFWTitle");
+var $wizardIDName = $bo_act_common.generateRandomName("SFWId");
+$bo_act_navigation.navigateToSfmWizard();
+$bo_act_SFW.createWizardGeneralInfo("Work Order", $wizardTitleName, $wizardIDName);
+$bo_act_SFW.createSFMWizardStepwithHandOver("SFM", "Create Shipment From Work Order", "Background",true);
+$bo_act_SFW.createSFMWizardStepwithHandOver("SFM", "Manage Work Order Lines - Usage", "Background",true);
+$bo_act_SFW.createSFMWizardStepwithHandOver("SFM", "Close Work Order", "Background",false);
+$bo_act_SFW.quickSaveSFWizard();
+$bo_act_SFW.saveAndClose();
+
+var $accountName = $bo_act_accounts.createAccount();
+var $contactName = $bo_act_contacts.createContact($accountName);
+var $caseNumber = $bo_act_Cases.createCase("New", "High", "Email");
+var $productName = $bo_act_products.createProduct();
+var $IBName = $bo_act_installedProduct.createInstalledProduct($productName, $accountName, $contactName);
+var $WONumber = $bo_act_workOrders.createWorkOrder($caseNumber, $accountName, $contactName, $IBName, "Open", "High", "Field Service");
+
+_selectDomain("/svmx/");
+_assertExists(_button("/Create Shipment From Work Order/",_near(_cell($wizardTitleName))));
+_click(_button("/Create Shipment From Work Order/",_near(_cell($wizardTitleName))));
+
+_wait(3000, _isVisible(_div(0,_rightOf(_span("/Order Status/")))));
+_assertEqual("Closed",_getText(_div(0,_rightOf(_span("/Order Status/")))),"Work Order is not closed");
+
+//Clean up function
+var $datacreated = [$contactName,$accountName,$caseNumber,$productName,$IBName,$WONumber];
+for (var i = 0; i < $datacreated.length; i++) {
+	$bo_act_common.cleanUpfunction($datacreated[i]);
+}
+$bo_act_SFW.deleteWizards("Work Order", $wizardIDName);
+
+$9832.end();
+
+
+

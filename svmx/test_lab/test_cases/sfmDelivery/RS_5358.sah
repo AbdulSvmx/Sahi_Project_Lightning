@@ -1,0 +1,14 @@
+var $rs_5358 = _testcase("RS_5358","Verify custom search with Multiple objects & advanced expression.");
+$rs_5358.start();
+$searchName = $bo_act_common.generateRandomName("Search_");
+$searchObject = "Work Order";
+$clicks = 2;
+$exprsnVal = "1 OR (2 AND 3)";
+$sheetName = "rs_5358";
+$bo_act_login.login($g_url,$sfmUsn,$sfmPwd);
+//$sfm_act_search.addResultsToDisplay();
+$bo_act_navigation.navigateToSfmSearchDesigner();
+$sfm_act_search.newCustomSearch($searchName,$searchObject);
+$sfm_act_search.buildExpression($clicks,$exprsnVal,$sheetName);
+$sfm_act_search.addResultsToDisplay(1,"searchResult");
+$rs_5358.end();

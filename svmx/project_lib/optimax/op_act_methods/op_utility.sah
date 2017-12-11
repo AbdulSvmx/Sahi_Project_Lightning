@@ -11,7 +11,7 @@ var $op_utility = new function op_utility() {
 		_click(_div("Dispatch Processes"));
 		var $rowCount = 0;
 		_set($rowCount, _table("page1:form1:block1:j_id81:j_id82").rows.length);
-		//_log("$rowCount = " + $rowCount);
+		_log("$rowCount = " + $rowCount);
 		for (var $i = 0; $i < $rowCount; $i++) {
 			var $temp = _getText(_cell("page1:form1:block1:j_id81:j_id82:" + $i
 					+ ":j_id86"));
@@ -180,7 +180,7 @@ var $op_utility = new function op_utility() {
 				//_log("myFile = "+myFile);
 				$no_text_count = myFile.split($text_validation).length;
 				$no_text_count = $no_text_count - 1;
-				//_log("pos = "+$no_text_count);
+				_log("pos = "+$no_text_count);
 			}
 			return $no_text_count;
 		}

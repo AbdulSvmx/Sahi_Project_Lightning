@@ -18,7 +18,7 @@ var $bo_act_SFM = new function bo_act_SFM() {
 
 		$bo_pg_sfmTransactionAndDesigner.selectSFM($sfmNameToBeCloned, $isCustom);
 		_click($bo_pg_sfmTransactionAndDesigner.btn_clone);
-_wait(3000);
+		_wait(3000);
 		_wait(60000, _isVisible($bo_pg_sfmTransactionAndDesigner.txt_name));
 		_setValue($bo_pg_sfmTransactionAndDesigner.txt_name, $sfmName);
 		_setValue($bo_pg_sfmTransactionAndDesigner.txt_sfmTransactionId, "");
@@ -120,7 +120,7 @@ _wait(3000);
 		_click($bo_pg_sfmTransactionAndDesigner.btn_quickSave);
 		_click($bo_pg_sfmTransactionAndDesigner.btn_finalQuickSave);	
 			
-		}
+		};
 		this.createIncompleteSFM=function($sfmName){
 		_click(_f("main").s_checkbox("chk[1]"));
 		_click($bo_pg_sfmTransactionAndDesigner.btn_clone);	
@@ -154,12 +154,11 @@ _wait(3000);
 		_wait(6000,_isVisible($bo_pg_sfmTransactionAndDesigner.btn_finalQuickSave));
 		_click($bo_pg_sfmTransactionAndDesigner.btn_finalQuickSave);
 		
-		
-	}
+	};
 		this.clnStandardSFM=function($sfmToBeCloned,$sfmName,$sfmTemplateSaveAsName){
 			_click($bo_pg_sfmTransactionAndDesigner.txt_standardSfmTransactionQuickFind);
 			_setValue($bo_pg_sfmTransactionAndDesigner.txt_standardSfmTransactionQuickFind,$sfmToBeCloned);
-			_click(_f("main").s_checkbox("chk").leftOf(_f("main").s_label($sfmToBeCloned), 10, 10))
+			_click(_f("main").s_checkbox("chk").leftOf(_f("main").s_label($sfmToBeCloned), 10, 10));
 			_click($bo_pg_sfmTransactionAndDesigner.btn_clone);	
 			_wait(60000, _isVisible($bo_pg_sfmTransactionAndDesigner.txt_name));
 			_setValue($bo_pg_sfmTransactionAndDesigner.txt_name, $sfmName);
@@ -185,9 +184,7 @@ _wait(3000);
 			_click($bo_pg_sfmTransactionAndDesigner.btn_saveAndclose);
 			$result = true;
 		}
-			
-			
-		}
+	}
 		
 		this.deleteSFM=function($sfmName){
 			_click($bo_pg_sfmTransactionAndDesigner.btn_yourCustomSfmTransactions);

@@ -56,6 +56,22 @@ _log($login_result);
 _set($create_WO, _fetch(create_WO($wo_type , $wo_status, $PrimaryTerr)));
 _log($create_WO);
 
+_click(_link("Home"));
+_click(_link("ServiceMax Setup"));
+_wait(20000, _isVisible(_div("Configuration Profiles")));
+_click(_div("Configuration Profiles"));
+$op_utility.search_ActiveProfile();
+_click(_submit("Edit"));
+_setSelected(_select("conf_prof:F_conf_prof:Setting_Block:j_id114:j_id115:Modulelist"), "OptiMax");
+_click(_div("pbBody[1]"));
+_setSelected(_select("conf_prof:F_conf_prof:Setting_Block:j_id114:j_id122:SubModulelist"), "Dispatch Calculations");
+_click(_link("Edit[40]"));
+_selectWindow("Servicemax_Conf_Prof");
+_setSelected(_select("disp_setting:disp_setting:j_id1:DispSection:j_id42:Options"), "Allow");
+_click(_button("Save"));
+_click(_submit("Close"));
+_selectWindow();
+
 
 $bo_act_login.logOut();
 

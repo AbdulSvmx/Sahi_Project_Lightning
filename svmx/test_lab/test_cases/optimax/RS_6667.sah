@@ -25,7 +25,7 @@ var $sfdc_sessionId = null;
 
 $bo_act_login.login($g_url, $g_un, $g_pwd);
 
-/*_click(_link("ServiceMax Setup"));
+_click(_link("ServiceMax Setup"));
 _wait(20000, _isVisible(_div("Configuration Profiles")));
 _click(_div("Configuration Profiles"));
 $op_utility.search_ActiveProfile();
@@ -34,20 +34,20 @@ _setSelected(_select("conf_prof:F_conf_prof:Setting_Block:j_id114:j_id115:Module
 _setSelected(_select("conf_prof:F_conf_prof:Setting_Block:j_id114:j_id122:SubModulelist"), "Dispatch Calculations");
 _click(_link("Edit[13]"));
 _selectWindow("Servicemax_Conf_Prof");
-_click(_label("True"));
+_click(_radio("disp_setting:disp_setting:j_id1:DispSection:j_id37:j_id40"));
 _click(_button("Save"));
 _click(_submit("Close"));
 _selectWindow();
 _click(_link("Edit[23]"));
 _selectWindow("Servicemax_Conf_Prof");
-_click(_label("True"));
+_click(_radio("disp_setting:disp_setting:j_id1:DispSection:j_id37:j_id40"));
 _click(_button("Save"));
 _click(_submit("Close"));
 _selectWindow();
 _click(_button("Refresh"));
 _click(_submit("Save"));
 _click(_submit("Back To Setup Home"));
-_click(_link("Home"));*/
+_click(_link("Home"));
 
 
 _set($login_result, _fetch(login($g_un,$g_pwd)));

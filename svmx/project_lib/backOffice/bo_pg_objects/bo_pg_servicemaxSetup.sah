@@ -9,7 +9,10 @@ var $bo_pg_servicemaxSetup = new function bo_pg_servicemaxSetup(){
 	this.btn_sfmTransactionAndDocsDesigner= _div("SFM Transaction & Docs Designer");
 	this.btn_warrantiesAndServiceContracts = _div("Warranties & Service Contracts");
 	this.btn_slaTerms = _div("SLA terms");
+	this.btn_servicePlans = _div("Service Plans");
 	this.btn_sfmSearch = _div("SFM Search");
+	this.btn_services = _div("Services");
+	this.btn_newAvailableService = 	_button("New Available Service");
 	
 	this.btn_appAdministration = _div("App Administration");
 	this.btn_configurationProfiles = _div("Configuration Profiles");
@@ -35,7 +38,8 @@ var $bo_pg_servicemaxSetup = new function bo_pg_servicemaxSetup(){
 	this.btn_instalBaseAndPM=_div("Installed Base & PM");
 	this.btn_counterRule=_div("Counter Rules");
 	this.btn_scheduledSFM=_div("Scheduled SFM");
-	
+	this.btn_checklistQuestionLibrary= _div("Checklist Question Library");
+	this.txt_checklistQuestionLibrary=_span("Checklist Question Library");
 
 };
 

@@ -35,7 +35,7 @@ var $sfm_pg_dvr = new function sfm_pg_dvr() {
 	 *
 	 */
 	
-	this.newRule= function($targetObject, $rulename, $ruleDescription,$fieldArray, $conditionArray, $operandArray, $valueArray, $advExpr, $messageType){
+	this.newRule= function($targetObject, $rulename, $ruleDescription,$fieldArray, $conditionArray, $operandArray, $valueArray, $advExpr, $messageType,$targetChild){
 		//create Data validation rule
 		_click($sfm_pg_dvr.btn_dataValidationRules);
 		_wait(6000,_isVisible($sfm_pg_dvr.btn_newRule));
@@ -57,8 +57,34 @@ var $sfm_pg_dvr = new function sfm_pg_dvr() {
 		_click($sfm_pg_dvr.btn_addToProcess);
 		_wait(5000);
 		if(_exists($sfm_pg_dvr.txt_targetChilden)){
-			_click($sfm_pg_dvr.btn_targetOk);
 			
+			if($targetChild =='Parts'){
+				_check($sfm_pg_dvr.chk_targetLabor);
+				_check($sfm_pg_dvr.chk_targetExpense);
+				_check($sfm_pg_dvr.chk_targetTravel);
+				_click($sfm_pg_dvr.btn_targetOk);
+			}
+			else if ($targetChild =='Labor'){
+				_check($sfm_pg_dvr.chk_targetParts);
+				_check($sfm_pg_dvr.chk_targetExpense);
+				_check($sfm_pg_dvr.chk_targetTravel);
+				_click($sfm_pg_dvr.btn_targetOk);
+			}
+			else if ($targetChild =='Expense'){
+				_check($sfm_pg_dvr.chk_targetParts);
+				_check($sfm_pg_dvr.chk_targetLabor);
+				_check($sfm_pg_dvr.chk_targetTravel);
+				_click($sfm_pg_dvr.btn_targetOk);
+			}
+			else if ($targetChild =='Travel'){
+				_check($sfm_pg_dvr.chk_targetParts);
+				_check($sfm_pg_dvr.chk_targetLabor);
+				_check($sfm_pg_dvr.chk_targetExpense);
+				_click($sfm_pg_dvr.btn_targetOk);
+			}
+			else{
+				_click($sfm_pg_dvr.btn_targetOk);	
+			}
 		}
 		
 	};
@@ -80,7 +106,7 @@ var $sfm_pg_dvr = new function sfm_pg_dvr() {
 			
 			if($operandArray[$i]=='Value'){
 				_setSelected(_f("main").s_dropdownlist("operandTypeCombo"+"["+$i+"]").rightOf(_f("main").s_label("Expressions")),$operandArray[$i]);
-				if($fieldArray[$i]=='Expense Type'){
+				if($fieldArray[$i]=='Expense Type' ||$fieldArray[$i]=='Activity Type' ){
 					//_setValue(_f("main").s_textinput("textInput"+"["+$i+"]").rightOf(_f("main").s_label("Expressions")),$valueArray[$i]);
 					_setSelected(_f("main").s_combobox("picklist").rightOf(_f("main").s_label("Expressions")), $valueArray[$i]);
 				}
