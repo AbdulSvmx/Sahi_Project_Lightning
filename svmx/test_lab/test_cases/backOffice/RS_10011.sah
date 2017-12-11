@@ -1,7 +1,7 @@
 //Tests are to be written here [Bhupendra Singh Chouhan]
 
-var $RS_9968 = _testcase("$RS_9968","Get Price- When Pricing Rule of Minimum is applied and [Billable Line Price >= Minimum] for Expense Line");
-$RS_9968.start();
+var $RS_10011 = _testcase("$RS_10011","Get Price- When Pricing Rule of Minimum is applied and [Billable Line Price < Minimum] for Expense Line");
+$RS_10011.start();
 _setSpeed(100);
 
 /**
@@ -159,7 +159,7 @@ $bo_act_getPrice.navigateToSFMDeliveryPageFor_TDM016($WONumber);
 
 //Add Labor Line to Above invoke TDM016 SFM
 var $expenseType = "Gas";
-var $lineQty = 4;
+var $lineQty = 3;
 var $linePricePerUnit = 0;
 $bo_act_getPrice.addExpensesLineToSFMDelivery($expenseType, $lineQty, $linePricePerUnit);
 $bo_act_getPrice.calculateGetPrice();
@@ -195,8 +195,8 @@ var $actualTotalBillableAmountOnWorkOrder = _getText(_div(0,_rightOf(_cell("/Tot
 
 _assertEqual($actualRateOnWorkOrder,"$2,000.000","Actual and Rate on Work Order are not same");
 _assertEqual($actualRateTypeOnWorkOrder,$rateType,"Actual and expected Rate Type on Work Order are not same");
-_assertEqual($actualProformaInvoiceAmountOnWorkOrder,"$2,320.000","Actual and expected Proforma Invoice Amount On Work Order are not same");
-_assertEqual($actualTotalBillableAmountOnWorkOrder,"$2,320.000","Actual and expected Total Billable Amount On Work Order are not same");
+_assertEqual($actualProformaInvoiceAmountOnWorkOrder,"$2,000.000","Actual and expected Proforma Invoice Amount On Work Order are not same");
+_assertEqual($actualTotalBillableAmountOnWorkOrder,"$1,740.000","Actual and expected Total Billable Amount On Work Order are not same");
 
 /**
 *Clean up function
@@ -212,4 +212,4 @@ $bo_act_SFW.deleteSFMWizard("Work Order", $wizardIDName);
 
 $bo_act_login.logOut(); 
 
-$RS_9968.end();
+$RS_10011.end();
