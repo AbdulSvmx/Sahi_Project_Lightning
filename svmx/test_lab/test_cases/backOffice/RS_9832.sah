@@ -24,11 +24,11 @@ var $contactName = $bo_act_contacts.createContact($accountName);
 var $caseNumber = $bo_act_Cases.createCase("New", "High", "Email");
 var $productName = $bo_act_products.createProduct();
 var $IBName = $bo_act_installedProduct.createInstalledProduct($productName, $accountName, $contactName);
-$bo_act_workOrders.createWorkOrder($caseNumber, $accountName, $contactName, $IBName, "Open", "High", "Field Service");
+var $WONumber = $bo_act_workOrders.createWorkOrder($caseNumber, $accountName, $contactName, $IBName, "Open", "High", "Field Service");
 
 _selectDomain("/svmx/");
-_assertExists(_button("/Create Shipment from Work Order/",_near(_cell($wizardTitleName))));
-_click(_button("/Create Shipment from Work Order/",_near(_cell($wizardTitleName))));
+_assertExists(_button("/Create Shipment From Work Order/",_near(_cell($wizardTitleName))));
+_click(_button("/Create Shipment From Work Order/",_near(_cell($wizardTitleName))));
 
 _wait(3000, _isVisible(_div(0,_rightOf(_span("/Order Status/")))));
 _assertEqual("Closed",_getText(_div(0,_rightOf(_span("/Order Status/")))),"Work Order is not closed");

@@ -105,8 +105,8 @@ var $wizardTitleName = $bo_act_common.generateRandomName("SFWTitle");
 var $wizardIDName = $bo_act_common.generateRandomName("SFWId");
 $bo_act_navigation.navigateToSfmWizard();
 $bo_act_SFW.createWizardGeneralInfo("Work Order", $wizardTitleName, $wizardIDName);
-$bo_act_SFW.createWizardStepwithHandOver("Others", $actionTitle, "Interactive",true);
-$bo_act_SFW.createWizardStepwithHandOver("Others", $actionTitle, "Interactive",false);
+$bo_act_SFW.createOthersWizardStepwithHandOver("Others", $actionTitle, "Interactive",true);
+$bo_act_SFW.createOthersWizardStepwithHandOver("Others", $actionTitle, "Interactive",false);
 $bo_act_SFW.quickSaveSFWizard();
 $bo_act_SFW.saveAndClose();
 
