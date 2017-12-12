@@ -74,6 +74,21 @@ var $bo_pg_serviceMaintenanceContracts = new function bo_pg_serviceMaintenanceCo
 	this.txt_expenseType = _textbox("Expense Type:",_near(_span("Update")));
 	this.txt_expenseRateType = _textbox("Rate Type:",_near(_span("Update")));
 	this.txt_expenseRate = _textbox(0,_rightOf(_label("Rate:",_near(_span("Update")))));
+	//Objects for Travel Policy
+	this.btn_sfmTravelPolicy = _button("Travel Policy");
+	this.btn_travelPolicyTab = _span("Travel Policy");
+	this.txt_travelPolicyUnit = _textbox("Unit:",_near(_span("Update")));
+	this.txt_travelRoundingType = _textbox("Rounding Type (Travel):");
+	this.txt_defaultTravelPrice = _textbox(0,_rightOf(_label("Default Travel Price:")));
+	this.txt_defaultTravelUnit = _textbox("Default Travel Unit:",_rightOf(_label("Default Travel Unit:")));
+	//Object For Mileage Tier
+	this.btn_travelPolicyMileageTierTab = _span("Mileage Tier");
+	this.txt_travelPolicyTierName = _textbox("Tier Name:",_near(_span("Update")));
+	this.txt_travelPolicyMinimum = _textbox("Minimum:",_near(_span("Update")));
+	this.txt_travelPolicyMaximum = _textbox("Maximum:",_near(_span("Update")));
+	this.txt_travelPolicyMaximum = _textbox("Maximum:",_near(_span("Update")));
+	this.btn_travelPolicyZonePricingTab = _span("Zone Pricing");
+	this.txt_travelPolicyZone = _textbox("Zone:",_near(_span("Update")));
 };
 
 
