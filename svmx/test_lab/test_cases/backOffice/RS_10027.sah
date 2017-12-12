@@ -1,7 +1,7 @@
 //Tests are to be written here [Bhupendra Singh Chouhan]
 
-var $RS_10027= _testcase("$RS_10027.sah","Get Price- When Pricing Rule of Surcharge is applied For Parts line");
-$RS_10027.sah.start();
+var $RS_10027= _testcase("$RS_10027","Get Price- When Pricing Rule of Surcharge is applied For Parts line");
+$RS_10027.start();
 _setSpeed(100);
 
 /**
@@ -224,4 +224,4 @@ $bo_act_SFW.deleteSFMWizard("Work Order", $wizardIDName);
 
 $bo_act_login.logOut(); 
 
-$RS_10027.sah.end();
+$RS_10027.end();
