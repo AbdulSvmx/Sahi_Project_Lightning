@@ -54,7 +54,7 @@ var $an_act_Contract_Uptime = new function an_act_Contract_Uptime() {
 		_click($an_pg_contractuptime.list_Contract_qualification_criteria);
 		_click($an_pg_contractuptime.btn_std_service_contract_expr);
 		_click($an_pg_contractuptime.list_qualifying_covered_product);
-		_click($an_pg_contractuptime.btn_std_covered_product_expr);
+		_click($an_pg_contractuptime.btn_custom_covered_product);
 		_click($an_pg_contractuptime.list_workOrder_downtime);
 		_click($an_pg_contractuptime.btn_closed_workorders);
 		_click($an_pg_contractuptime.btn_save);

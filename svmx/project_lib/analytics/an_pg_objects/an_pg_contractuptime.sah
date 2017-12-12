@@ -22,6 +22,8 @@ var $an_pg_contractuptime = new function an_pg_contractuptime()
 	this.list_qualifying_covered_product = _textbox("tabPanel_2_editprocesspanel_expression_FilterCriteriafieldset_id-inputEl");
 	this.btn_std_covered_product_expr = _listItem("SVMXSTD: Valid Covered Products");
 	this.list_workOrder_downtime = _textbox("tabPanel_2_editprocesspanel_expression_WorkOrderCriteriafieldset_id-inputEl");
+	this.btn_custom_covered_product = _listItem("Custom Covered Product EXPR");
+	
 	this.btn_closed_workorders = _listItem("SVMXSTD: Closed Work Orders");
 	this.btn_save = _span("Save");
 	this.btn_OK = _span("OK");
