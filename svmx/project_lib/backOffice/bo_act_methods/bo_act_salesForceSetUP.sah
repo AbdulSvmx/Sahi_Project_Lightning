@@ -1,0 +1,40 @@
+/**
+ * Functions for the Accounts Object
+ */
+var $bo_act_salesforceSetUp = new function bo_act_$bo_act_salesforceSetUp() {
+
+
+	this.createApexClasses = function($code) {
+		$bo_act_navigation.navigateToSetUpAndSearch("Apex Classes");
+		 _click(_submit("New"));
+		 _setValue($bo_pg_salesForceSetUP.txt_apexClasscode,$code);
+		 _click($bo_pg_salesForceSetUP.btn_quickSave);
+		 _wait(10000);
+		 _click($bo_pg_salesForceSetUP.btn_save);
+		 _wait(10000);
+	};
+	
+	this.deleteapexClasses = function($className){
+		$bo_act_navigation.navigateToSetUpAndSearch("Apex Classes");
+		 var $firstLetter = $className.charAt(0);
+		 var $upperCase = $firstLetter.toUpperCase();
+		 _click(_span($upperCase));
+		 _click(_link($className));
+		 _click($bo_pg_salesForceSetUP.btn_delete);
+	};
+	this.createUser = function(){
+		var $lastName = $bo_act_common.generateRandomName("ln");
+		var $alias = $bo_act_common.generateRandomName("a");
+		var $email = $bo_act_common.generateRandomName("e")+"@test.com";
+		$bo_act_navigation.navigateToSetUpAndSearch("Users");
+		_click($bo_pg_salesForceSetUP.btn_newUser);
+		_setValue($bo_pg_salesForceSetUP.txt_lastName,$lastName);
+		_setValue($bo_pg_salesForceSetUP.txt_alias,$alias);
+		_setValue($bo_pg_salesForceSetUP.txt_email,$email);
+		_setValue($bo_pg_salesForceSetUP.txt_userName,$email);
+		_setValue($bo_pg_salesForceSetUP.txt_nickName,$lastName);
+		_click($bo_pg_salesForceSetUP.btn_submitSave);
+		var $userName = _getText($bo_pg_salesForceSetUP.txt_Name);
+		return $userName;
+	};
+};
