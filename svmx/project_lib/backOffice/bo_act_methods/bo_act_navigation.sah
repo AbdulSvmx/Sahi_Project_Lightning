@@ -85,6 +85,8 @@ var $bo_act_navigation = new function bo_act_navigation() {
     	_click(_link("ServiceMax Setup"));
     	_click($bo_pg_servicemaxSetup.btn_warrantiesAndServiceContracts);
     	_click($bo_pg_servicemaxSetup.btn_slaTerms);
+    	_wait(1000);
+    	_call(top.location.reload());
     };
 
     this.navigateToPMPlanTemplatePage = function(){
@@ -92,6 +94,8 @@ var $bo_act_navigation = new function bo_act_navigation() {
     	_click(_link("ServiceMax Setup"));
     	_click($bo_pg_servicemaxSetup.btn_installedBaseAndPM );
     	_click($bo_pg_servicemaxSetup.btn_PMPlanTemplate);
+    	_wait(1000);
+    	_call(top.location.reload());
     };
 
     this.navigateToPMProcess = function(){
@@ -99,6 +103,8 @@ var $bo_act_navigation = new function bo_act_navigation() {
     	_click(_link("ServiceMax Setup"));
     	_click($bo_pg_servicemaxSetup.btn_installedBaseAndPM );
     	_click($bo_pg_servicemaxSetup.btn_PMProcess);
+    	_wait(1000);
+    	_call(top.location.reload());
     };
 
     this.navigateToLocations = function(){
