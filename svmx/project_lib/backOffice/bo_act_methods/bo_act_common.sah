@@ -182,7 +182,7 @@ this.cleanUpfunctionold = function($value)
 			_click(_link("searchAll"));
 			if(_isVisible(_link($value))){
 				_click(_link($value));
-				_wait(3000, _isVisible(_button("Delete")));
+				_wait(5000, _isVisible(_button("Delete")));
 				_click(_button("Delete"));
 				_logOutput($value+ " is deleted");
 
