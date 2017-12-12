@@ -15,6 +15,7 @@ var $ScheduledDate = $data[1]["ScheduledDate"];
 var $PreferredStartDate = $data[1]["PreferredStartDate"];
 var $PreferredEndDate = $data[1]["PreferredEndDate"];
 var $GuranteedUptime = $data[1]["GuranteedUptime"];
+var $Downtime_value  = $data[1]["DownTime"];
 $bo_act_login.login($url, $un, $pwd);
 
 
@@ -150,7 +151,7 @@ $ana_1637_resultRV1.forEach(function($varRV1) {
 _log($ana_1637_down_time_value);
 
 
-_assertEqual(360, $ana_1637_down_time_value);
+_assertEqual($Downtime_value, $ana_1637_down_time_value);
 
 $an_cu_1637.end();
 
