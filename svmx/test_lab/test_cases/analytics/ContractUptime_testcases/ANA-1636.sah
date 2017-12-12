@@ -89,7 +89,7 @@ var $ana_1636_WO_ID ;
 
 $ana_1636_WO_ID = $ana_1636_fetch_WO[0].Id;
 	
-	
+	_log($ana_1636_WO_ID);
 	
 $an_act_Contract_Uptime.schedule_notifications("meghana.rao@servicemax.com");
 
@@ -122,7 +122,7 @@ _log($ana_1636_uptime_value);
 _assertEqual($ana_1636_IB_ID, $ana_1636_ib1_id);
 _assertEqual($ana_1636_SCON,$ana_1636_scon1_id);
 _assertEqual($GuranteedUptime,Math.round($ana_1636_guranteed_uptime));
-_assertEqual(99, Math.round($ana_1636_uptime_value));
+_assertEqual(100, Math.round($ana_1636_uptime_value));
 
 
 // To verify the Downtime

@@ -42,7 +42,7 @@ var $an_act_Contract_Uptime = new function an_act_Contract_Uptime() {
 		_click($an_pg_contractuptime.btn_contractuptimemetric);
 		_click($an_pg_contractuptime.btn_Add);
 		_click($an_pg_contractuptime.btn_active);
-		_setValue($an_pg_contractuptime.txt_description, $Caculationmethodname);
+		_setValue($an_pg_contractuptime.txt_description, $Calculationmethodname);
 		_click($an_pg_contractuptime.btn_settings);
 		_click($an_pg_contractuptime.list_consider_downtime);
 		_click($an_pg_contractuptime.btn_downtime);
