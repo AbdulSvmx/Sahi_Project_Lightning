@@ -5,7 +5,7 @@ var $RS_5433 = _testcase("RS_5433",
 $RS_5433.start();
 _setSpeed(100);
 
-var $checklistName = $bo_act_common.generateRandomName("My Checklist");
+var $checklistName = $bo_act_common.generateRandomName("Rs5433");
 var $searchText = $checklistName;
 var $questionText = $bo_act_common.generateRandomName("What is your name");
 var $sfmType = "to generate a Checklist/Survey type of Process";
@@ -24,9 +24,7 @@ $bo_act_navigation.navigateToSfmAppPermission();
 $bo_act_SFMAppPermission.searchSFMDisplay($checklistName);
 _assertEqual("", _getText(_div("gridview-1028")), "Checklist does display");
 // -------Deleting the checklist----
-// $bo_act_navigation.navigateToSfmTransactionDesigner();
-// $bo_act_SFM.deleteSFM($sfmName);
-// _wait(20000);
-// _log("SFM deleted successfully");
+$bo_act_navigation.navigateToSfmTransactionDesigner();
+$bo_act_SFM.deleteSFM($sfmName);
 
 $RS_5433.end();

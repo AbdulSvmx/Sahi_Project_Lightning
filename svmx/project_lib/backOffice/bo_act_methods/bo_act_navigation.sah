@@ -182,6 +182,10 @@ var $bo_act_navigation = new function bo_act_navigation() {
  	_click($bo_pg_servicemaxSetup.btn_serviceFlowManager);
  	_click($bo_pg_servicemaxSetup.btn_sfmAppPermission);
 	_wait(3000);
+		while(_isVisible(_label("Select Process Type"))==false){
+			 _navigateTo(document.location.href, true);
+		}
+		
  	
     };
 	this.navigateToScheduledSFM=function(){
