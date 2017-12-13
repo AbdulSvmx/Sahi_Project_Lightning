@@ -178,8 +178,8 @@ this.cleanUpfunctionold = function($value)
 				}
 			_setValue(_textbox("secondSearchText"),$value);
 			_click(_submit("Search Again"));
-			_wait(3000, _isVisible(_link("searchAll")));
-			_click(_link("searchAll"));
+			//_wait(3000, _isVisible(_link("searchAll")));
+			//_click(_link("searchAll"));
 			if(_isVisible(_link($value))){
 				_click(_link($value));
 				_wait(5000, _isVisible(_button("Delete")));

@@ -24,9 +24,13 @@ var $servicePlan = $bo_act_servicePlans.createServicePlan();
 
 var $PMPTempName = $bo_act_PMPlanTemplate.createTimeBasedPMPlanTemplate($proName, "Location (Visit Only)","","Weeks");
 
+$bo_act_navigation.navigateToAccountsPage();
+_click(_link($accountName));
+
 _selectDomain("/svmx/");
 _assertExists(_button("/Create Preventive Maintenance Plan From Account/",_near(_cell($wizardTitleName))));
 _click(_button("/Create Preventive Maintenance Plan From Account/",_near(_cell($wizardTitleName))));
+_selectDomain();
 _wait(60000,_isVisible($bo_pg_PMPlan.txt_PMPlanName));
 _setValue($bo_pg_PMPlan.txt_PMPlanName, $PMPlanName);
 _setValue($bo_pg_PMPlan.txt_PMPlanTemplateName, $PMPTempName);
@@ -54,7 +58,7 @@ for (var i = 0; i < $datacreated.length; i++) {
 	$bo_act_common.cleanUpfunction($datacreated[i]);
 }
 $bo_act_SFW.deleteWizards("Work Order", $wizardIDName);
-
+$bo_act_servicePlans.deleteServicePlan($servicePlan);
 $9830.end();
 
 
