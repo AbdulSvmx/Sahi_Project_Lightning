@@ -22,7 +22,7 @@ var $bo_act_navigation = new function bo_act_navigation() {
 	 this.navigateToHome();
 	_click($bo_pg_home.link_servicemaxSetup );
 	_wait(3000,_isVisible($bo_pg_servicemaxSetup.btn_serviceFlowManager));
-	return $callBack.returnResult(_exists($bo_pg_servicemaxSetup.btn_serviceFlowManager));
+	//return $callBack.returnResult(_exists($bo_pg_servicemaxSetup.btn_serviceFlowManager));
 
     };
     
@@ -33,8 +33,9 @@ var $bo_act_navigation = new function bo_act_navigation() {
 	 this.navigateToSvmxSetup();
 	_click($bo_pg_servicemaxSetup.btn_serviceFlowManager);
 	_click($bo_pg_servicemaxSetup.btn_sfmTransactionAndDocsDesigner);
+		 _wait(10000);
 	_setSpeed(3000);
-	return $callBack.returnResult(_exists($bo_pg_sfmTransactionAndDesigner.btn_standardSfmTransaction));
+	//return $callBack.returnResult(_exists($bo_pg_sfmTransactionAndDesigner.btn_standardSfmTransaction));
     };
     
     /**

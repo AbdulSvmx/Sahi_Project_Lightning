@@ -107,16 +107,13 @@ var $bo_act_SFW = new function bo_act_SFW() {
 			
 			
 
-		this.deleteWizard=function(){
-			_click($bo_pg_sfmWizard.chk_selectCustomWizard);
-			_click($bo_pg_sfmWizard.btn_deleteWizard);
-			_wait(6000);
-
-		};
+	
 		
 this.deleteWizards = function($objName,$wizardId){
 		$bo_act_navigation.navigateToSfmWizard();
 		_setSelected($bo_pg_sfmWizard.sel_objPrevMaintPlan,$objName	);
+	_wait(3000);
+	_assertVisible($bo_pg_sfmWizard.lbl_verifyCustWizardSection);
 		_check(_checkbox(0,_leftOf(_span($wizardId))));
 		_click($bo_pg_sfmWizard.btn_deleteWizard);
 	};

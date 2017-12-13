@@ -7,13 +7,13 @@ $RS_5379.start();
 _setSpeed(100);
 
 var $sfmToBeCloned="Add/Edit Products Serviced";
-var $sfmName="SFMTest5374_6";
+var $sfmName=$bo_act_common.generateRandomName("SFMTest5379");
 //change  the name of $sfmTemplateSaveAsName before execution.
-var $sfmTemplateSaveAsName="Temp5374_6";
+var $sfmTemplateSaveAsName=$bo_act_common.generateRandomName("Temp5379");
 
 var $objName="Work Order";
-var $wizardname="RS-5374Wizard4";
-var $wizardID="RS-5374WizardID4";
+var $wizardname=$bo_act_common.generateRandomName("5379Wizard");
+var $wizardID=$bo_act_common.generateRandomName("5379WizardID");
 
 var $executionMode="Interactive";
 var $fieldActnType="SFM";
@@ -23,7 +23,7 @@ var $stndSFMName=$sfmName
 var $wizardButtonName=$sfmName
 	
 var $selLocation="Europe";
-var $workPerform="Testing RS-5374";
+var $workPerform="Testing RS-5379";
 var $selIBProd="Laptop";
 var $selPart="Keyboard";
 var $selProdWarranty="WN-000006";
@@ -59,22 +59,26 @@ $bo_act_addEditProdServDelivery.addPart();
 $bo_act_addEditProdServDelivery.addLabor();
 $bo_act_addEditProdServDelivery.addExpenses();
 
-_click($bo_act_addEditProdServDelivery.icon_Save);
-//Verify if user landed into main page after saving child details***************
+_click($bo_pg_addEditProdServDelivery.icon_Save);
 
+
+//Verify if user landed into main page after saving child details***************
+_wait(6000, _isVisible(_span("Work Order")));
 if(_assertExists(_span("Work Order"))){
 	_log("User successfully landed into the main process");
 }else{
 	_log("Error occurred,please refer screenshot for detail");
 	_takeScreenShot()
 		}
+
+
 //*****************Deleteing testdata************
-	
-$bo_act_navigation.navigateToSfmTransactionDesigner();
-$bo_act_SFM.deleteSFM($sfmName);
 $bo_act_navigation.navigateToSfmWizard();
 _setSelected($bo_pg_sfmWizard.wizardSelectObject,$wizardSelectObjectName);
-$bo_act_SFW.deleteWizard($wizardname);
+$bo_act_SFW.deleteWizard($wizardname);	
+$bo_act_navigation.navigateToSfmTransactionDesigner();
+$bo_act_SFM.deleteSFM($sfmName);
+
 
 _setSpeed(100);
 $RS_5379.end();

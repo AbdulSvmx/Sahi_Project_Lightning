@@ -105,7 +105,7 @@ var $bo_act_SFMAppPermission = new function bo_act_SFMAppPermission() {
 				_wait(3000);
 				_click($bo_pg_sfmAppPermissionD.popUpOK)
 				var $isvisible = _exists(_div("App Permissions saved successfully"));
-				$callBack.returnResult($isvisible, true, "App Permission is not saved successfully");
+				//$callBack.returnResult($isvisible, true, "App Permission is not saved successfully");
 			}
 				
 	this.setAppPermissionForWizard=function($sfmName,$objName){
