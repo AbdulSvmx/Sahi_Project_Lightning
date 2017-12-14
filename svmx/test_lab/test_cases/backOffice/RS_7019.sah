@@ -5,7 +5,7 @@ $RS_7019.start();
 _setSpeed(100);
 
 //PreCondition 
-$bo_act_login.login($g_url, $bac_unDev, $bac_pwdDev);
+$bo_act_login.login($g_url, $bac_un, $bac_pwd);
 // Creating product with serialized stockable is active
 var $proName1 = $bo_act_products.createProduct("pro12", "--None--");
 //Creating product with non -serialized stockable is active
