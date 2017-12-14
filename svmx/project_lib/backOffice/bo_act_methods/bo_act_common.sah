@@ -169,25 +169,23 @@ this.cleanUpfunctionold = function($value)
 
 		this.cleanUpfunction = function($value)
 		{
-			//_setValue(_textbox("phSearchInput"),$value);
-			_click(_button("phSearchButton"));
-			_wait(2000,_isVisible(_heading1("Search Results")));
-			if(_condition(_heading1("Search Results") == null))
-				{
-				_click(_button("phSearchButton"));
+			_click($bo_pg_search.btn_search);
+			_wait(5000,_isVisible($bo_pg_search.btn_searchAgain));
+			for(var $i=0;$i<=5;$i++){
+				_setValue($bo_pg_search.txt_searchText,$value);
+				_click($bo_pg_search.btn_searchAgain);
+				if(_isVisible(_link($value))){
+					_click(_link($value));
+					_wait(5000, _isVisible($bo_pg_search.btn_delete));
+					_click($bo_pg_search.btn_delete);
+					_logOutput($value+ " is deleted");
+					break;
+				}else{
+					if($i == 5){
+						_logException("The value "+$value+"is not found");
+					}
 				}
-			_setValue(_textbox("secondSearchText"),$value);
-			_click(_submit("Search Again"));
-			_wait(3000, _isVisible(_link("searchAll")));
-			_click(_link("searchAll"));
-			if(_isVisible(_link($value))){
-				_click(_link($value));
-				_wait(5000, _isVisible(_button("Delete")));
-				_click(_button("Delete"));
-				_logOutput($value+ " is deleted");
-
-			}else{
-				_logException("The value "+$value+"is not found");
+				
 			}
 			
 		};

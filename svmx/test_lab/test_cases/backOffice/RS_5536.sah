@@ -1,10 +1,12 @@
-
+var $RS_5536= _testcase("RS_5536","Verify the creation of Counter Rollups on Service Contract -1 Counter Definition");
+$RS_5536.start();
+_setSpeed(100);
 var $ProcessName= $bo_act_common.generateRandomName("pros5536");
 var $ProcessId=$bo_act_common.generateRandomName("procId5536");
 var $selectSFM1="Cancel Shipment Order";
 var	$selectSFM2="Work Order Complete";
 var $obName= "Service/Maintenance Contract";
-var $qc="SVMXSTD: Active Service Contracts Only"
+var $qc="SVMXSTD: Active Service Contracts Only";
 var $clsName="IPRD_CounterRollupService";
 var $btchSize="1";
 var $d1="Sunday";var $d2="Monday";var $d3="Tuesday";var $d4="Wednesday";var $d5="Thursday";var $d6="Friday";var $d7="Saturday";
@@ -26,7 +28,7 @@ var $slaterm = $bo_act_slaTerms.createSlaTerms("Default");
 var $sconName = $bo_act_serviceMaintenanceContracts.createServiceMaintenanceContract($accName, $slaterm,1,0);
 $bo_act_serviceMaintenanceContracts.AddCoveredProductToSCON($sconName, $installedProduct);
 $bo_act_navigation.navigateToCounterRule();
-$bo_act_counterRule.createNewCunterRule($counterRuleName,$value)
+$bo_act_counterRule.createNewCunterRule($counterRuleName,$value);
 $bo_act_navigation.navigateToScheduledSFM();
 $bo_act_scheduledSFM.newProcessNameID($ProcessName,$ProcessId);
  $bo_act_scheduledSFM.selectSFMTransactionToSchedule($selectSFM1);
@@ -39,5 +41,5 @@ _wait(9000,_isVisible($bo_pg_scheduledSFM.lbl_scheduledSFMHomePage));
 _log("Scheduled SFM successful");
 
 
-
+$RS_5536.end();
 
