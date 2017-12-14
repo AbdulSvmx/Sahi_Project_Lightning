@@ -7,7 +7,7 @@ var $bo_pg_salesForceSetUP = new function bo_pg_salesForceSetUP(){
 		this.btn_newLocalTrans=_button("New Local Translations / Overrides");
 		this.sel_language=_select("Language");
 		this.txt_newTranslatedValue=_textarea("Value");
-		this.btn_save=_submit(" Save [1]");
+		this.btn_save1=_submit(" Save ");
 		this.lnk_deleteNewTranslatedValue=_link("Del");
 		
 this.txt_apexClasscode = _textarea("textarea");
@@ -24,5 +24,6 @@ this.txt_apexClasscode = _textarea("textarea");
 	this.txt_Name = _cell(0,_rightOf(_cell("Name")));
 	
 };
+;
 
 

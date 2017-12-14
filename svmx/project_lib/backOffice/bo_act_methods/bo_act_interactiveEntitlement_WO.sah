@@ -10,8 +10,12 @@ var $bo_act_interactiveEntitlement_WO = new function bo_act_interactiveEntitleme
 	this.performInteractiveEntitlementWO_IncidentNotCovered = function($WO_Number) {
 		//Navigate and click on check Entitlement WO SFM
 		$bo_act_workOrders.checkEntitlement($WO_Number);
+<<<<<<< HEAD
 		//_wait(60000, _isVisible($bo_pg_interactiveEntitlement_CaseAndWO.txt_checkEntitlement_WOPage));
 		_wait(60000, _isVisible($bo_pg_interactiveEntitlement_CaseAndWO.btn_checkEntitlement));
+=======
+		_wait(30000, _isVisible($bo_pg_interactiveEntitlement_CaseAndWO.txt_checkEntitlement_WOPage));
+>>>>>>> 4c9c9421da7d964764afcb4efbb5e2d09d57ca75
 		_click($bo_pg_interactiveEntitlement_CaseAndWO.btn_checkEntitlement);
 		_click($bo_pg_interactiveEntitlement_CaseAndWO.chk_IncidentNotCovered);
 		_click($bo_pg_interactiveEntitlement_CaseAndWO.btn_saveEntitlementPSLine);
@@ -25,7 +29,7 @@ var $bo_act_interactiveEntitlement_WO = new function bo_act_interactiveEntitleme
 	this.performInteractiveEntitlementWO_UsingScon = function($WO_Number, $sconName) {
 		//Navigate to the and click on check Entitlement WO
 		$bo_act_workOrders.checkEntitlement($WO_Number);
-		_wait(15000, _isVisible($bo_pg_interactiveEntitlement_CaseAndWO.txt_checkEntitlement_WOPage));
+		_wait(30000, _isVisible($bo_pg_interactiveEntitlement_CaseAndWO.txt_checkEntitlement_WOPage));
 		_click($bo_pg_interactiveEntitlement_CaseAndWO.btn_checkEntitlement);
 		$bo_pg_interactiveEntitlement_CaseAndWO.selectSConOnCheckEntmPage($sconName);
 		_click($bo_pg_interactiveEntitlement_CaseAndWO.btn_saveEntitlementPSLine);

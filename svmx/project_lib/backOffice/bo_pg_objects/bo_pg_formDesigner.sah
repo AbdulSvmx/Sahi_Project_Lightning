@@ -3,7 +3,7 @@ var $bo_pg_formDesigner=new function bo_pg_formDesigner(){
 	this.tab_clickFormDesigner=_f("main").tab("Form Designer");
 	this.btn_addNewQuestion=_f("main").s_button("Add new question");
 	//Note: Below listbasecontentholder(11) value might change if org is change.
-	this.btn_selectQuestionDataType=_f("main").listbasecontentholder(11);
+	this.btn_selectQuestionDataType=_f("main").listbasecontentholder(12);
 	this.lbl_questionText=_f("main").s_textinput("questionText");
 	this.btn_addQuestionToLibraryAndForm=_f("main").s_button("Add to Library and Form");
 	this.btn_closeQuestionPopUp=_f("main").s_button("closeButton");
