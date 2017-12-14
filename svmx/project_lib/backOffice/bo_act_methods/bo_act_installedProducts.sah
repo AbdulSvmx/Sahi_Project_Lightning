@@ -12,7 +12,8 @@ var $bo_act_installedProduct = new function bo_act_installedProduct() {
 		var $serialNum = $bo_act_common.generateRandomName("Ser");
 		var $IBName = $bo_act_common.generateRandomName("IB_");
 		 $bo_act_navigation.navigateToInstalledProductPage();
-		_click($bo_pg_installedProducts.btn_new);
+		_wait(3000,_isVisible($bo_pg_installedProducts.btn_new));
+		 _click($bo_pg_installedProducts.btn_new);
 		if(_condition(_heading2("Select Installed Product Record Type") != null))
 			_click($bo_pg_installedProducts.btn_continue); 
 		_setValue($bo_pg_installedProducts.txt_productName,$productName);

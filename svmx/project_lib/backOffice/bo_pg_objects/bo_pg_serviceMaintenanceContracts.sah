@@ -26,6 +26,8 @@ var $bo_pg_serviceMaintenanceContracts = new function bo_pg_serviceMaintenanceCo
 	this.txt_location = _textbox("/Location/");
 	this.btn_newEntitledContact = _button("New Entitled Contact");
 	this.txt_contract = _textbox("/Contact/");
+	this.txt_SFMSconName = _textbox(0,_rightOf(_label("Contract Name/Number:")));
+	this.txt_SFMSconEndDate = _textbox(0,_rightOf(_label("/End Date/")));
 	
 	//Object for Activate Contract on Service/Maintenance Contract
 	this.btn_activateContractSFM = _button("Activate Contract");
