@@ -41,15 +41,19 @@ _assert($lastRunDate != $actualScheduledOn,"Issue in Last Run Date and Scheduled
 
 //Clean up functions
 
+var $datacreated = [$PMPlanName,$PMPTempName,$accName,$slaterm,$proName,$installedProduct,$location,$sconName];
+for (var i = 0; i < $datacreated.length; i++) {
+	$bo_act_common.cleanUpfunction($datacreated[i]);
+}
 
-$bo_act_accounts.deleteAccount($accName);
-$bo_act_products.deleteProduct($proName);
-$bo_act_installedProduct.deleteInstalledProduct($installedProduct);
-$bo_act_slaTerms.deleteSLATerm($slaterm);
-$bo_act_locations.deleteLocation($location);
-$bo_act_serviceMaintenanceContracts.deleteServiceMaintenanceContract($sconName);
-$bo_act_PMPlanTemplate.deletePMPlanTemplate($PMPTempName);
-$bo_act_PMPlan.deletePMPlan($PMPlanName);
+//$bo_act_accounts.deleteAccount($accName);
+//$bo_act_products.deleteProduct($proName);
+//$bo_act_installedProduct.deleteInstalledProduct($installedProduct);
+//$bo_act_slaTerms.deleteSLATerm($slaterm);
+//$bo_act_locations.deleteLocation($location);
+//$bo_act_serviceMaintenanceContracts.deleteServiceMaintenanceContract($sconName);
+//$bo_act_PMPlanTemplate.deletePMPlanTemplate($PMPTempName);
+//$bo_act_PMPlan.deletePMPlan($PMPlanName);
 
 $RS_5258.end();
 

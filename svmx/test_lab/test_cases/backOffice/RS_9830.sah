@@ -1,0 +1,65 @@
+
+//author - Noor Salma Sharieff
+
+var $9830 = _testcase("9830","SFW - Handover on multisource wizard step.");
+$9830.start();
+_setSpeed(100);
+var $PMPlanName = $bo_act_common.generateRandomName("PMPlan");
+var $sconName = $bo_act_common.generateRandomName("Scon");
+
+$bo_act_login.login($g_url, $bac_un, $bac_pwd);
+
+var $wizardTitleName = $bo_act_common.generateRandomName("SFWTitle");
+var $wizardIDName = $bo_act_common.generateRandomName("SFWId");
+$bo_act_navigation.navigateToSfmWizard();
+$bo_act_SFW.createWizardGeneralInfo("Account", $wizardTitleName, $wizardIDName);
+$bo_act_SFW.createSFMWizardStepwithHandOver("SFM", "Create Preventive Maintenance Plan From Account", "Interactive",true);
+$bo_act_SFW.createSFMWizardStepwithHandOver("SFM", "Create Service Contract From Account", "Interactive",false);
+$bo_act_SFW.quickSaveSFWizard();
+$bo_act_SFW.saveAndClose();
+
+var $accountName = $bo_act_accounts.createAccount();
+$proName = $bo_act_products.createProduct();
+var $servicePlan = $bo_act_servicePlans.createServicePlan();
+
+var $PMPTempName = $bo_act_PMPlanTemplate.createTimeBasedPMPlanTemplate($proName, "Location (Visit Only)","","Weeks");
+
+$bo_act_navigation.navigateToAccountsPage();
+_click(_link($accountName));
+
+_selectDomain("/svmx/");
+_assertExists(_button("/Create Preventive Maintenance Plan From Account/",_near(_cell($wizardTitleName))));
+_click(_button("/Create Preventive Maintenance Plan From Account/",_near(_cell($wizardTitleName))));
+_selectDomain();
+_wait(60000,_isVisible($bo_pg_PMPlan.txt_PMPlanName));
+_setValue($bo_pg_PMPlan.txt_PMPlanName, $PMPlanName);
+_setValue($bo_pg_PMPlan.txt_PMPlanTemplateName, $PMPTempName);
+_click($bo_pg_PMPlan.sel_coverageType);
+_click(_listItem("Location (Must Have Location)"));
+_setValue($bo_pg_PMPlan.txt_startDate, $bo_act_common.currentDate("/"));
+_setValue($bo_pg_PMPlan.txt_endDate, $bo_act_common.getfutureDate(1, "/"));
+_click($bo_pg_PMPlan.btn_save);
+
+_wait(60000, _isVisible(_span("Service/Maintenance Contract")));
+_setValue($bo_pg_serviceMaintenanceContracts.txt_sconName, $sconName);
+_setValue($bo_pg_serviceMaintenanceContracts.txt_endDate, $bo_act_common.getfutureDate($futureYear, "/"));
+_setValue(_textbox(0,_rightOf(_label("Service Plan:"))),$servicePlan);
+_click($bo_pg_serviceMaintenanceContracts.btn_save);
+
+$bo_act_navigation.navigateToAccountsPage();
+_click(_link($accountName));
+
+_assertExists(_link("/"+$PMPlanName+"/",_near(_heading3("Preventive Maintenance Plans"))));
+_assertExists(_link("/"+$sconName+"/",_near(_heading3("Service/Maintenance Contracts"))));
+
+//Clean up function
+var $datacreated = [$contactName,$accountName,$caseNumber,$productName,$IBName,$WONumber];
+for (var i = 0; i < $datacreated.length; i++) {
+	$bo_act_common.cleanUpfunction($datacreated[i]);
+}
+$bo_act_SFW.deleteWizards("Work Order", $wizardIDName);
+$bo_act_servicePlans.deleteServicePlan($servicePlan);
+$9830.end();
+
+
+

@@ -1,9 +1,9 @@
 var $an_cu_1637 = _testcase("ANA-1641","SCON within Coverage of Covered Product with DownTime");
 $an_cu_1637.start();
-var $un = "meghana.rao@servicemax.com";
-var $pwd = "salesforce100";
-var $url = "https://test.salesforce.com";
 var $data = _readExcelFile("../../analytics/an_excleData/an_Datasheet1.xlsx","Sheet1",true);
+var $un = $data[1]["Username"];
+var $pwd = $data[1]["pwd"];
+var $url = "https://test.salesforce.com";
 var $Account = $data[1]["Account"];
 var $Technician = $data[1]["Technician"];
 var $Product = $data[1]["Product"];
@@ -15,6 +15,7 @@ var $ScheduledDate = $data[1]["ScheduledDate"];
 var $PreferredStartDate = $data[1]["PreferredStartDate"];
 var $PreferredEndDate = $data[1]["PreferredEndDate"];
 var $GuranteedUptime = $data[1]["GuranteedUptime"];
+var $Downtime_value  = $data[1]["DownTime"];
 $bo_act_login.login($url, $un, $pwd);
 
 
@@ -150,7 +151,7 @@ $ana_1637_resultRV1.forEach(function($varRV1) {
 _log($ana_1637_down_time_value);
 
 
-_assertEqual(360, $ana_1637_down_time_value);
+_assertEqual($Downtime_value, Math.round($ana_1637_down_time_value));
 
 $an_cu_1637.end();
 

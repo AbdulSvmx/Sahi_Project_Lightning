@@ -26,6 +26,31 @@ var $sfm_act_createCustomWizard = new function sfm_act_createCustomWizard() {
 		_click($sfm_pg_wizards.btn_saveClose);
 	};
 	
+//Added by Safi
+	this.addWizStepWithCriteria = function($wizTitle,$wizStepType,$wizStepName,$WizCriteria,$profile){
+//		$title = $wizTitle;
+//		$wizTitle = $bo_act_common.generateRandomName("Auto Wiz ");
+		var $wizId = $wizTitle.toLowerCase().replace(/ /g, "_");
+//		_log($wizTitle);
+//		_log($wizId);
+//		_log($title);
+		_wait(5000);
+		_setValue($sfm_pg_wizards.txt_wizardTitle,$wizTitle);
+		_setValue($sfm_pg_wizards.txt_wizardID,$wizId);
+		_click($sfm_pg_wizards.txt_manageWizSteps);
+		_click($sfm_pg_wizards.btn_newStep);
+		_setSelected($sfm_pg_wizards.btn_wizStepType,$wizStepType);
+		_setSelected($sfm_pg_wizards.btn_stepName,$wizStepName);
+		_setSelected($sfm_pg_wizards.btn_stepCriteria,$WizCriteria);
+		_click($sfm_pg_wizards.btn_saveStep);
+		_click($sfm_pg_wizards.txt_managePermission);
+		_setSelected($sfm_pg_wizards.select_availableGrpProfiles,$profile);
+		_click($sfm_pg_wizards.btn_add);
+		_click($sfm_pg_wizards.btn_saveClose);		
+		
+	};	
+
+	
 	this.createBlankWo = function(){
 		$woName="";
 		_wait(5000);
@@ -44,6 +69,20 @@ var $sfm_act_createCustomWizard = new function sfm_act_createCustomWizard() {
 //		_selectWindow();
 		
 	};
+	
+//Added by Safi
+	this.createWOwithOrderStatus = function($OrdrStatus){		
+		_wait(5000);
+		_click($sfm_pg_wo.tab_all);
+		_wait(3000);
+		_click($sfm_pg_wo.link_wo);
+		_click($sfm_pg_wo.btn_wo_new);
+		_setSelected($sfm_pg_wo.btn_woStaus,$OrdrStatus);
+		_click($sfm_pg_wo.btn_wo_save);
+		_wait(3000);
+		
+	};
+	
 	
 	this.newInstalledProduct = function($tabName,$productName,$accountName,$contactName) {
 		var $serialNum = $bo_act_common.generateRandomName("Ser");
@@ -175,5 +214,113 @@ var $sfm_act_createCustomWizard = new function sfm_act_createCustomWizard() {
 		}
 			
 	};
+	
+	this.verify6905 = function(){
+		var $count=0;
+		_selectDomain();
+		_click($sfm_pg_wizardWindow.lookup_account);
+		_wait(3000);
+		_setStrictVisibilityCheck(true);
+		_click($sfm_pg_wizardWindow.icon_search);
+		_click($sfm_pg_wizardWindow.account_option);
+		_click($sfm_pg_wizardWindow.btn_select);
+		_click($sfm_pg_wizardWindow.btn_addRow);
+		_click($sfm_pg_wizardWindow.btn_edit);
+		_click($sfm_pg_wizardWindow.lookup_autoContact);
+		_wait(3000);
+		_click($sfm_pg_wizardWindow.icon_search);
+		var $divs= _collect("_div","/.*/",_under(_div("Account ID")));
+		_log($divs.length);
+		for (var $i=1; $i<$divs.length; $i++) {
+			if(_getText($divs[$i])!="Acme"){
+				$count++;
+			}
+	}
+		_log($count);
+		if($count==0){
+			_log("Pass");
+		}
+		else{
+			_log("Fail");
+		}
+	};
+	
+	this.verify6906 = function($accountToVerify){
+		_selectDomain();
+		_setStrictVisibilityCheck(true);
+		_click($sfm_pg_wizardWindow.btn_addRow);
+		_click($sfm_pg_wizardWindow.btn_edit);
+		_click($sfm_pg_wizardWindow.lkp_account);
+		_doubleClick($sfm_pg_wizardWindow.account_option);
+		_click($sfm_pg_wizardWindow.lkp_autoContact);
+		_click($sfm_pg_wizardWindow.icon_search);
+		this.verifyAccountsPresent($accountToVerify);
+		_wait(5000);
+	};
+	
+	this.verifyAccountsPresent = function($accountToVerify){
+		var $count=0;
+		var $divs= _collect("_div","/.*/",_under(_div("Account ID")));
+		_log($divs.length);
+		for (var $i=1; $i<$divs.length; $i++) {
+			if(_getText($divs[$i])!=$accountToVerify){
+				$count++;
+			}
+	}
+		_log($count);
+		if($count==0){
+			_log("Pass");
+		}
+		else{
+			_log("Fail");
+		}
+		
+	};
+	
+	this.verify6904 = function($account){
+		_selectDomain();
+		_setStrictVisibilityCheck(true);
+		$checkboxTxt = "";
+		_setValue($sfm_pg_wizardWindow.txt_accountPicklist,$account);
+		_click($sfm_pg_wizardWindow.lkp_contact);
+		_click($sfm_pg_wizardWindow.icon_search);
+		$checkboxTxt =_getText($sfm_pg_wizardWindow.lbl_contactLookup);
+		$isActivePicklistPresent = $checkboxTxt.search("Account Picklist");
+		_log($isActivePicklistPresent);
+		$isAccountPresent = $checkboxTxt.search($account);
+		_log($isAccountPresent);
+		if($isActivePicklistPresent==-1 || $isAccountPresent==-1){
+			_log("Fail");
+		}
+		else{
+			_log("Pass");
+		}
+	};
+	
+	this.verify7017 = function(){
+		_selectDomain();
+		_setStrictVisibilityCheck(true);
+		$readOnlyAttribute = "";
+		$actualErrorMsg = "Required field is blank: Account";
+		$readOnlyAttribute = _getAttribute($sfm_pg_wizardWindow.sel_billingType, "readonly");
+		$isReadOnlyAttribute = $readOnlyAttribute.search("readonly");
+		$expectedErrorMsg = "";
+		if($isReadOnlyAttribute==-1){
+			_log("Fail");
+		}
+		else{
+			_log("Pass");
+		}
+		_click($sfm_pg_wizardWindow.btn_quickSave);
+		$expectedErrorMsg = _getText($sfm_pg_wizardWindow.errorMsg);
+		_log($expectedErrorMsg);
+		if($actualErrorMsg==$expectedErrorMsg){
+			_log("Pass");
+		}
+		else{
+			_log("Fail");
+		}
+	};
+	
 	
 };

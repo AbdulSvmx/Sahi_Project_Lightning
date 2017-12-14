@@ -13,5 +13,16 @@ var $sfm_act_navigation = new function sfm_act_navigation() {
 	 _click($bo_pg_servicemaxSetup.btn_sfmCustomAction);
 
      };
-	
+     
+ 	this.navigateToChecklistQuestionLibrary = function() {
+ 		 $bo_act_navigation.navigateToSvmxSetup();
+ 		 _wait(20000);
+ 		 _click($bo_pg_servicemaxSetup.btn_serviceFlowManager);
+ 		 _wait(20000);
+ 		 _click($bo_pg_servicemaxSetup.btn_checklistQuestionLibrary);
+ 		_wait(3000,(_isVisible($bo_pg_servicemaxSetup.txt_checklistQuestionLibrary)));
+ 	     };
+
+
+ 		 	     
 };

@@ -1,5 +1,6 @@
 var $user_credentials = $excel.readFromCustomExcel("../optimax/op_excleData/automation.xlsx", "User_Details","","");
 var $DPData = $excel.readFromCustomExcel("../optimax/op_excleData/automation.xlsx", "RTO_DispatchProcess","","");
+var $TerrData = $excel.readFromCustomExcel("../optimax/op_excleData/automation.xlsx", "RS_6708","","");
 
 //var $nArr;
 //Calling the sforce API
@@ -20,14 +21,14 @@ var $g_pwd = "maxpl0re2";*/
 
 $bo_act_login.login($g_url, $g_un, $g_pwd);
 		
-var $PrimaryTerr = $DPData[0][0];
+var $PrimaryTerr = $TerrData[0][2];
 var $horizon = $DPData[0][1];
 var $threshold = $DPData[0][2];
 var $syncInterval = $DPData[0][3];
 var $date = "" + new Date();
 var $DPName = "Eco_DPName_" + $date;
 var $rowCount = 0;
-var $rowIndex = "2";
+var $rowIndex = "1";
 
 
 _set($login_result, _fetch(login($g_un,$g_pwd)));
@@ -131,10 +132,29 @@ _log($DP_Id);
 _set($Terr_Id, _fetch(get_Terr_Id($PrimaryTerr)));
 _log($Terr_Id);
 
-var $insertRowData = [$DPName,$DP_Id,$Terr_Id];
-$excel.insertUnderColumn("../optimax/op_excleData/automation.xlsx", "Dispatch_Process", "Process Name", $DPName, $rowIndex);
-$excel.insertUnderColumn("../optimax/op_excleData/automation.xlsx", "Dispatch_Process", "Process Id", $DP_Id, $rowIndex);
-$excel.insertUnderColumn("../optimax/op_excleData/automation.xlsx", "Dispatch_Process", "Territory ID", $Terr_Id, $rowIndex);
+$excel.insertUnderColumn("../optimax/op_excleData/automation.xlsx", "RS_6708", "Process Name", $DPName, $rowIndex);
+$excel.insertUnderColumn("../optimax/op_excleData/automation.xlsx", "RS_6708", "Process Id", $DP_Id, $rowIndex);
+//$excel.insertUnderColumn("../optimax/op_excleData/automation.xlsx", "Dispatch_Process", "Territory ID", $Terr_Id, $rowIndex);
+
+var $rowCount = 0;
+_set($rowCount, _table("page1:form1:block1:j_id81:j_id82").rows.length);
+for (var $i = 0; $i < $rowCount; $i++) 
+{
+	var $temp = _getText(_cell("page1:form1:block1:j_id81:j_id82:" + $i
+			+ ":j_id86"));
+	if (_areEqual($DPName, $temp)) 
+	{
+		$rowCount = $i;
+	}
+}
+_check(_checkbox("page1:form1:block1:j_id81:j_id82:" + $rowCount
+		+ ":j_id85"));
+_click(_submit("Delete"));
+_assertEqual("Do you want to delete the selected dispatch processes?", _lastConfirm());
+_click(_cell("pbTitle"));
+_windowAction("refresh");
+
+
 
 //<browser>
 

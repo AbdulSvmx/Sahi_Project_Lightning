@@ -17,7 +17,7 @@ var $fieldName =["Component","Is Entitlement Performed"];
 //var $fieldName1="Is Entitlement Performed";
 var $wizardName = "SFM Delivery Auto";
 var $wizardType = "SFM";
-var $domainName = "svmxc.cs21.visual.force.com";
+var $domainName = "/visual.force.com/";
 var $wizardObject = "Work Order";
 var $messageType = "Confirmation";
 

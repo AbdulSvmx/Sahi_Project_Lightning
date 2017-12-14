@@ -1,9 +1,9 @@
 var $an_cu_1631 = _testcase("ANA-1631","SCON within Coverage of Covered Product Advanced EXPR");
 $an_cu_1631.start();
-var $un = "meghana.rao@servicemax.com";
-var $pwd = "salesforce100";
-var $url = "https://test.salesforce.com";
 var $data = _readExcelFile("../../analytics/an_excleData/an_Datasheet1.xlsx","Sheet1",true);
+var $un = $data[1]["Username"];
+var $pwd = $data[1]["pwd"];
+var $url = "https://test.salesforce.com";
 var $Account = $data[1]["Account"];
 var $Technician = $data[1]["Technician"];
 var $Product = $data[1]["Product"];
@@ -65,7 +65,7 @@ var $ana_1631_IB_ID1;
 _log($ana_1631_IB_ID1);
 
 // Create Covered Product 
-var $ana_1631_create_CP1 = "SVMXC__Service_Contract_Products__c CP01 = new SVMXC__Service_Contract_Products__c(SVMXC__Installed_Product__c = '"+$ana_1631_IB_ID1+"',SVMXC__Service_Contract__c = '"+$ana_1631_SCON1+"', Custom_checkbox__c = false , SVMXC__Is_Billable__c = true ); insert CP01;";
+var $ana_1631_create_CP1 = "SVMXC__Service_Contract_Products__c CP01 = new SVMXC__Service_Contract_Products__c(SVMXC__Installed_Product__c = '"+$ana_1631_IB_ID1+"',SVMXC__Service_Contract__c = '"+$ana_1631_SCON1+"', Custom_checkbox__c = false , SVMXC__Is_Billable__c = true , SVMXC__Start_Date__c = System.Today()  ); insert CP01;";
 var $ana_1631_result_CP1 = $op_act_sForceApiCall.sForceQuery($un, $pwd, $ana_1631_create_CP1 , "create");
 var $ana_1631_get_CP1 = "Select Id , Name from SVMXC__Service_Contract_Products__c where Createdby.Id = '005q0000003GGfP' Order by CreatedDate DESC Limit 1";
 var $ana_1631_fetch_CP1   = $op_act_sForceApiCall.sForceQuery($un, $pwd, $ana_1631_get_CP1,"query");

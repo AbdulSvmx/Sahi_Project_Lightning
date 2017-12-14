@@ -12,6 +12,7 @@ var $bo_act_servicePricebooks = new function bo_act_servicePricebooks() {
 		var $PriceBookName = $bo_act_common.generateRandomName("SPBook");
 		  $bo_act_navigation.navigateToServicePricebooks();
 		  _wait(2000);
+		  _call(top.location.reload());
 		  _click($bo_pg_servicePricebooks.btn_addNewServicePricebook);
 		  _wait(2000);
 		  _wait(15000, _isVisible($bo_pg_servicePricebooks.link_createServicePriceBook));

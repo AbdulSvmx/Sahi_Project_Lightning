@@ -56,7 +56,7 @@ _assertNotEqual(_getText($bo_pg_workOrders.txt_TimeToOnsiteResponse)," ", "issue
 
 //Clean up function
 
-var $datacreated = [$accName,$proName,$IBName,$contactName,$WONumber,$slaterm,$caseNumber];
+var $datacreated = [$contactName,$accName,$proName,$IBName,$WONumber,$slaterm,$caseNumber];
 for (var i = 0; i < $datacreated.length; i++) {
 	$bo_act_common.cleanUpfunction($datacreated[i]);
 }

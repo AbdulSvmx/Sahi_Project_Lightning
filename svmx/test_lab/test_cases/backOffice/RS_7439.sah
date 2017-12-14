@@ -24,9 +24,6 @@ var $sconName = $bo_act_serviceMaintenanceContracts.createServiceMaintenanceCont
 $bo_act_serviceMaintenanceContracts.AddCoveredProductToSCON($sconName, $IBName);
 var $PMPlan = $bo_act_PMPlan.createUsageOrFrequencyBasedPMPlan($sconName,$PMPTemplate,$IBName);
 
-var $pmSchedule = _getText(_tableHeader(0,_near(_heading3("PM Schedule"))));
-_assertNotEqual("No records to display",$pmSchedule,"PM Schedules are not generated");
-
 var $PMProcessId = $bo_act_PMProcess.createPMProcess("Condition Based Preventive Maintenance", 0, $PMPlan,"One Per Product");
 
 //This code supports name spaces and assigns the variable with correct namespace script
@@ -68,7 +65,7 @@ _assertEqual($actualPMScheduleStatus,"Work Order Created","Status is not equal t
 
 //Clean up function
 
-var $datacreated = [$accName,$proName,$IBName,$contactName,$WONumber,$slaterm,$PMPTemplate,$sconName,$PMPlan];
+var $datacreated = [$contactName,$accName,$proName,$IBName,$WONumber,$slaterm,$PMPTemplate,$sconName,$PMPlan];
 for (var i = 0; i < $datacreated.length; i++) {
 	$bo_act_common.cleanUpfunction($datacreated[i]);
 }

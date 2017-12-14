@@ -496,7 +496,7 @@ function createPrfRes($rec_Pref_xls){
 			_log("pfrRes.push = "+prfResId);
 		}
 		_log("pfrRes ids ="+prfResId);
-		return prfResId;
+		//return prfResId;
 	}
 	return $isSuccess;
 }

@@ -1,9 +1,9 @@
 var $an_cu_1636 = _testcase("ANA-1641","SCON within Coverage of Covered Product with Work Order");
 $an_cu_1636.start();
-var $un = "meghana.rao@servicemax.com";
-var $pwd = "salesforce100";
-var $url = "https://test.salesforce.com";
 var $data = _readExcelFile("../../analytics/an_excleData/an_Datasheet1.xlsx","Sheet1",true);
+var $un = $data[1]["Username"];
+var $pwd = $data[1]["pwd"];
+var $url = "https://test.salesforce.com";
 var $Account = $data[1]["Account"];
 var $Technician = $data[1]["Technician"];
 var $Product = $data[1]["Product"];
@@ -14,6 +14,7 @@ var $Component = $data[1]["Component"];
 var $ScheduledDate = $data[1]["ScheduledDate"];
 var $PreferredStartDate = $data[1]["PreferredStartDate"];
 var $PreferredEndDate = $data[1]["PreferredEndDate"];
+var $Downtime_value  = $data[1]["DownTime"];
 $bo_act_login.login($url, $un, $pwd);
 
 
@@ -89,7 +90,7 @@ var $ana_1636_WO_ID ;
 
 $ana_1636_WO_ID = $ana_1636_fetch_WO[0].Id;
 	
-	
+	_log($ana_1636_WO_ID);
 	
 $an_act_Contract_Uptime.schedule_notifications("meghana.rao@servicemax.com");
 
@@ -112,7 +113,7 @@ $ana_1636_resultRV1.forEach(function($varRV1) {
 
 });
 
-
+var $expected_uptime_value = ( ($GuranteedUptime - $Downtime_value ) / $GuranteedUptime ) * 100 ;
 
 _log($ana_1636_ib1_id);
 _log($ana_1636_scon1_id);
@@ -122,7 +123,7 @@ _log($ana_1636_uptime_value);
 _assertEqual($ana_1636_IB_ID, $ana_1636_ib1_id);
 _assertEqual($ana_1636_SCON,$ana_1636_scon1_id);
 _assertEqual($GuranteedUptime,Math.round($ana_1636_guranteed_uptime));
-_assertEqual(99, Math.round($ana_1636_uptime_value));
+_assertEqual(Math.round($expected_uptime_value), Math.round($ana_1636_uptime_value));
 
 
 // To verify the Downtime
@@ -143,7 +144,7 @@ $ana_1636_resultRV1.forEach(function($varRV1) {
 _log($ana_1636_down_time_value);
 
 
-_assertEqual(360, $ana_1636_down_time_value);
+_assertEqual($Downtime_value, Math.round($ana_1636_down_time_value));
 
 $an_cu_1636.end();
 

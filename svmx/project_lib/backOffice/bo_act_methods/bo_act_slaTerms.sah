@@ -19,7 +19,7 @@ var $bo_act_slaTerms = new function bo_act_slaTerms() {
 			_assertNotVisible(_div("/Error: Invalid Data/"));
 			_logOutput($slaName+ " SLA Term is created");
 			return $slaName;
-		  _wait(30000, _isVisible($SLAName));
+		  _wait(30000, _isVisible(_span($SLAName)));
           return $slaName;
 		//return $callBack.returnResult([_isVisible($accountName), "Account not created",$accountName] );
 	    // Need to return
@@ -30,8 +30,9 @@ var $bo_act_slaTerms = new function bo_act_slaTerms() {
 		$bo_act_slaTerms.editSLA($slaName);	
 		_click($bo_pg_slaTerms.btn_initialResponse);
 		_setSelected($bo_pg_slaTerms.sel_responseTrackedOn, $ResponseTrackedOn);
-		_wait(10000);
+		_wait(10000,_isVisible($bo_pg_slaTerms.btn_AddRecord));
 		_click($bo_pg_slaTerms.btn_AddRecord);
+		_wait(10000,_isVisible($bo_pg_slaTerms.sel_orderType));
 		_setSelected($bo_pg_slaTerms.sel_orderType, $orderType);
 		_setSelected($bo_pg_slaTerms.sel_priority, $priority);
 		_setSelected($bo_pg_slaTerms.sel_clockStartsFrom, $clockStartsFrom);
@@ -52,7 +53,7 @@ var $bo_act_slaTerms = new function bo_act_slaTerms() {
 		_click($bo_pg_slaTerms.btn_onsiteResponse);
 		_setStrictVisibilityCheck(true);
 		_setSelected($bo_pg_slaTerms.sel_responseTrackedOn, $ResponseTrackedOn);
-		_wait(10000);
+		_wait(10000,_isVisible($bo_pg_slaTerms.btn_AddRecord));
 		_setStrictVisibilityCheck(true);
 		_click($bo_pg_slaTerms.btn_AddRecord);
 		_setSelected($bo_pg_slaTerms.sel_orderType, $orderType);
@@ -76,7 +77,7 @@ var $bo_act_slaTerms = new function bo_act_slaTerms() {
 		_click($bo_pg_slaTerms.btn_restoration);
 		_setStrictVisibilityCheck(true);
 		_setSelected($bo_pg_slaTerms.sel_responseTrackedOn, $ResponseTrackedOn);
-		_wait(10000);
+		_wait(10000,_isVisible($bo_pg_slaTerms.btn_AddRecord));
 		_setStrictVisibilityCheck(true);
 		_click($bo_pg_slaTerms.btn_AddRecord);
 		_setSelected($bo_pg_slaTerms.sel_orderType, $orderType);
@@ -100,7 +101,7 @@ var $bo_act_slaTerms = new function bo_act_slaTerms() {
 		_click($bo_pg_slaTerms.btn_resolution);
 		_setStrictVisibilityCheck(true);
 		_setSelected($bo_pg_slaTerms.sel_responseTrackedOn, $ResponseTrackedOn);
-		_wait(10000);
+		_wait(10000,_isVisible($bo_pg_slaTerms.btn_AddRecord));
 		_setStrictVisibilityCheck(true);
 		_click($bo_pg_slaTerms.btn_AddRecord);
 		_setSelected($bo_pg_slaTerms.sel_orderType, $orderType);
