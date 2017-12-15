@@ -1,0 +1,31 @@
+//author - Nagendra Prasad
+
+var $RS_7027 = _testcase("$RS_7027","Verify Receive Parts from Supplier for a Parts Request");
+$RS_7027.start();
+_setSpeed(100);
+
+//PreCondition 
+$bo_act_login.login($g_url, $bac_un, $bac_pwd);
+// Creating product with serialized stockable is active
+var $proName1 = $bo_act_products.createProduct("pro12", "--None--");
+//Creating product with non -serialized stockable is active
+var $proName2 = $bo_act_products.createProductWithoutSerialized("pro13", "--None--");
+//creating locations 
+var $Location1 = $bo_act_locations.createLocation($recordType, $accountName, $street, $country, $zipCode);
+//editing the location
+$bo_act_locations.editLocation($Location1);
+var $Location2 = $bo_act_locations.createLocation($recordType, $accountName, $street, $country, $zipCode);
+$bo_act_locations.editLocation($Location2);
+// Create stock adjustments
+var $StockAdjustment1 = $bo_act_stockAdjustment.createStockAdjustment($Location1,$proName1 ,"10", "Excess");
+var $StockAdjustment2 = $bo_act_stockAdjustment.createStockAdjustment($Location1,$proName2 ,"10", "Excess");
+var $stockTransfer1 = $bo_act_stockTransfer.createStockTransfer($Location1, $Location2);
+var $Editlines = $bo_act_stockTransfer.Editlines($proName1, "3");
+var $Editlines = $bo_act_stockTransfer.Editlines($proName2, "5");
+var $posttoInventory = $bo_act_stockTransfer.postToInventorySerialised($stockTransfer1, "3");
+//Navigaet to Loc and click loc name
+_click(_link("/STK-/",_near(_tableHeader("Name"),_under(_heading3("Product Stock")))));
+_click(_link("/SHIST-/",_near(_tableHeader("Name"),_under(_heading3("Stock History (Product Stock)")))));
+_assertEqual("3.0000",_getText(_div(0,_rightOf(_span("/Transaction Qty/")))),"Qty Transferred is not matching");
+_assertEqual("5.0000",_getText(_div(0,_rightOf(_span("/Qty before change/")))),"Qty before change is not matching");
+_assertEqual("8.0000",_getText(_div(0,_rightOf(_span("/Qty after change/")))),"Qty after change is not matching");
