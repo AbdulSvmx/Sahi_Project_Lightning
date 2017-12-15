@@ -43,8 +43,9 @@ var $bo_act_salesforceSetUp = new function bo_act_$bo_act_salesforceSetUp() {
 		_click(_button(" New "));
 		_setSelected(_select(0,_rightOf(_label("/Object/"))),$object);
 		_click(_image("Lookup (New Window)"));
-		_click(_link($color));
-		$color++;
+		_popup("p2MotifPickerWindow")._click(_link(5));
+		$color= $color+1;
+		_selectWindow();
 		_click(_submit(" Next "));
 		_click(_submit(" Next "));
 		_click(_submit(" Save "));
