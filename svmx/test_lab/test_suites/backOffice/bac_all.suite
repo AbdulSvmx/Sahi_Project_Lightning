@@ -1,6 +1,8 @@
-../../../test_lab/test_suites/backOffice/backOffice_TimeBasedPMPlan.suite
-../../../test_lab/test_suites/backOffice/backOffice_SLAOnWorkOrderAndCase.suite
 ../../../test_lab/test_suites/backOffice/backOffice_InventoryTestCases.suite
 ../../../test_lab/test_suites/backOffice/backOffice_EntitlementTestCases.suite
 ../../../test_lab/test_suites/backOffice/backOffice_GetPriceTestCases.suite
+../../../test_lab/test_suites/backOffice/backOffice_GetPriceTestCases.suite
+../../../test_lab/test_suites/backOffice/backOffice_TimeBasedPMPlan.suite
+../../../test_lab/test_suites/backOffice/backOffice_SLAOnWorkOrderAndCase.suite
 ../../../test_lab/test_suites/backOffice/backOffice_SFWHandOver_WebServices.suite
+../../../test_lab/test_suites/backOffice/backOffice_SFMDesigner.suite
