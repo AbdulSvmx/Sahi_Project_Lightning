@@ -34,3 +34,9 @@ _click(_link("/SHIST-/",_near(_tableHeader("Name"),_under(_heading3("Stock Histo
 _assertEqual("3.0000",_getText(_div(0,_rightOf(_span("/Transaction Qty/")))),"Qty Transferred is not matching");
 _assertEqual("5.0000",_getText(_div(0,_rightOf(_span("/Qty before change/")))),"Qty before change is not matching");
 _assertEqual("8.0000",_getText(_div(0,_rightOf(_span("/Qty after change/")))),"Qty after change is not matching");
+
+//Clean up function
+var $datacreated = [$proName1,$proName2,$Location1,$Location2,$StockAdjustment1,$StockAdjustment2,$stockTransfer1];
+for (var i = 0; i < $datacreated.length; i++) {
+	$bo_act_common.cleanUpfunction($datacreated[i]);
+}
