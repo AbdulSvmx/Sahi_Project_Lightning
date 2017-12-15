@@ -4,3 +4,5 @@ project/*
 .settings/*
 .DS.*
 .project/*
+svmx/test_lab/test_suites/backOffice/bac_all.suite
+svmx/test_lab/test_suites/backOffice/bac_all.suite
