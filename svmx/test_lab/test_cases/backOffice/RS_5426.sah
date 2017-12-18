@@ -11,9 +11,9 @@ _setSpeed(100);
 	var $sfmName =$bo_act_common.generateRandomName("5426SFM");
 	var $wizardname=$bo_act_common.generateRandomName("5426SFW");
 	var	$wizardID=$wizardname;
-	var $stndSFMName="Add/Edit Products Serviced";
+	//var $stndSFMName="Add/Edit Products Serviced";
 	var $searchText=$wizardname;
-	var $objName="Work Order";	
+	var $objName="Preventive Maintenance Plan";	
 	var $fieldActnType="SFM";
 	var $newSfmName="5426EditingWizardSteps";
 
@@ -68,7 +68,7 @@ if (_assertExists($bo_pg_sfmTransactionAndDesigner.btn_backToList)){
 //Again Launch the Wizard in Delivery, verify the visibility*****8
 	$bo_act_sfmVerifyWorkOrder.verifyWizardOnWOObj($sfmName);
 	_wait(2000);
-	$bo_act_sfmVerifyWorkOrder.wizardButtonVerification($stndSFMName);
+	$bo_act_sfmVerifyWorkOrder.wizardButtonVerification($sfmName);
 //****Delete The Wizard Created*******
 	$bo_act_SFW.deleteWizards( $objName,$wizardID);
 
