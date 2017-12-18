@@ -36,5 +36,5 @@ var $bo_act_salesforceSetUp = new function bo_act_$bo_act_salesforceSetUp() {
 		_click($bo_pg_salesForceSetUP.btn_submitSave);
 		var $userName = _getText($bo_pg_salesForceSetUP.txt_Name);
 		return $userName;
-	};
+	};	
 };
