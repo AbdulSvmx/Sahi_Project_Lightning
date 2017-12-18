@@ -170,12 +170,9 @@ this.cleanUpfunctionold = function($value)
 		this.cleanUpfunction = function($value)
 		{
 			_click($bo_pg_search.btn_search);
-			if(_condition(_heading1("Search Results") == null))
-			{
-			_click($bo_pg_search.btn_search);
-			}
 			_wait(5000,_isVisible($bo_pg_search.btn_searchAgain));
 			for(var $i=0;$i<=5;$i++){
+				_click($bo_pg_search.txt_searchText,$value);
 				_setValue($bo_pg_search.txt_searchText,$value);
 				_click($bo_pg_search.btn_searchAgain);
 				if(_isVisible(_link($value))){
