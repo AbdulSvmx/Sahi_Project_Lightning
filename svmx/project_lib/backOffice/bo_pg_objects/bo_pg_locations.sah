@@ -6,6 +6,7 @@
 
 var $bo_pg_locations = new function bo_pg_locations(){
 	this.btn_new = _button(" New ");
+	this.btn_edit = _button(" Edit ");
 	this.sel_recordType = _select(0,_rightOf(_label("/Record Type of new record/")));
 	this.btn_continue = _submit("Continue");
 	this.txt_locationName = _textbox("Name");
