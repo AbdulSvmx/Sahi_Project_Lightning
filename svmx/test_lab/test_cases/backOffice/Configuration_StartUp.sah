@@ -16,13 +16,12 @@ for (var i = 0; i < $tabs.length; i++) {
 }
 
 
-
-
 // Create BH for "OutsideBH" Only Sunday 7:00 AM to 7:30 AM
 
 
 
-//Clean up function
+
+
 
 $Configuration_StartUp.end();
 
