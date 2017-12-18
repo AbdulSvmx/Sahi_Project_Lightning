@@ -7,6 +7,15 @@ _setSpeed(100);
 
 $bo_act_login.login($g_url, $bac_un, $bac_pwd);
 
+var $color = 5;
+// Create Tabs
+var $tabs = ["Activity Master","Installed Product","PM Plan Template","Preventive Maintenance Plan","Service/Maintenance Contract","Service Plan","Service Pricebook","Service Team","SLA Term","Task Template","Warranty Term","Work Order"];
+$bo_act_navigation.navigateToSetUpAndSearch("Tabs");
+for (var i = 0; i < $tabs.length; i++) {
+	$bo_act_salesforceSetUp.createTabs($tabs[i],$color);
+}
+
+
 
 
 // Create BH for "OutsideBH" Only Sunday 7:00 AM to 7:30 AM

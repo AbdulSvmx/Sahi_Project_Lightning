@@ -1,7 +1,7 @@
 //author - Nagendra Prasad
 
-var $RS_7019 = _testcase("$RS_7019","Verify the Stock Transfer of serialised and non seriliased products");
-$RS_7019.start();
+var $RS_7018 = _testcase("$RS_7018","Verify the Stock Adjustments of Serialised and Non-Seriallised Products");
+$RS_7018.start();
 _setSpeed(100);
 
 //PreCondition 
@@ -10,20 +10,15 @@ $bo_act_login.login($g_url, $bac_un, $bac_pwd);
 var $proName1 = $bo_act_products.createProduct("pro12", "--None--");
 //Creating product with non -serialized stockable is active
 var $proName2 = $bo_act_products.createProductWithoutSerialized("pro13", "--None--");
-var $recordType = ["Depot","Depot Child","Depot Parent","Standard Location"];
-var $accountName = $bo_act_accounts.createAccount();
-var $street = "MG Road";
-var $country = "India";
-var $zipCode = 560001;
 //creating locations 
-var $Location1 = $bo_act_locations.createLocation($recordType[0], $accountName, $street, $country, $zipCode);
+var $Location1 = $bo_act_locations.createLocation($recordType, $accountName, $street, $country, $zipCode);
 //editing the location
 $bo_act_locations.editLocation($Location1);
-var $Location2 = $bo_act_locations.createLocation($recordType[0], $accountName, $street, $country, $zipCode);
+var $Location2 = $bo_act_locations.createLocation($recordType, $accountName, $street, $country, $zipCode);
 $bo_act_locations.editLocation($Location2);
 // Create stock adjustments
 var $StockAdjustment1 = $bo_act_stockAdjustment.createStockAdjustment($Location1,$proName1 ,"10", "Excess");
-var $StockAdjustment2 = $bo_act_stockAdjustment.createStockAdjustment($Location2,$proName2 ,"10", "Excess");
+var $StockAdjustment2 = $bo_act_stockAdjustment.createStockAdjustment($Location1,$proName2 ,"10", "Excess");
 var $stockTransfer1 = $bo_act_stockTransfer.createStockTransfer($Location1, $Location2);
 var $Editlines = $bo_act_stockTransfer.Editlines($proName1, "3");
 var $Editlines = $bo_act_stockTransfer.Editlines($proName2, "5");
@@ -34,3 +29,9 @@ _click(_link("/SHIST-/",_near(_tableHeader("Name"),_under(_heading3("Stock Histo
 _assertEqual("3.0000",_getText(_div(0,_rightOf(_span("/Transaction Qty/")))),"Qty Transferred is not matching");
 _assertEqual("5.0000",_getText(_div(0,_rightOf(_span("/Qty before change/")))),"Qty before change is not matching");
 _assertEqual("8.0000",_getText(_div(0,_rightOf(_span("/Qty after change/")))),"Qty after change is not matching");
+
+//Clean up function
+var $datacreated = [$proName1,$proName2,$Location1,$Location2,$StockAdjustment1,$StockAdjustment2,$stockTransfer1];
+for (var i = 0; i < $datacreated.length; i++) {
+	$bo_act_common.cleanUpfunction($datacreated[i]);
+}
