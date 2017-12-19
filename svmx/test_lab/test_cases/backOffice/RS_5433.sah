@@ -5,7 +5,7 @@ var $RS_5433 = _testcase("RS_5433",
 $RS_5433.start();
 _setSpeed(100);
 
-var $checklistName = $bo_act_common.generateRandomName("Rs5433");
+var $checklistName = $bo_act_common.generateRandomName("RS5433");
 var $searchText = $checklistName;
 var $questionText = $bo_act_common.generateRandomName("What is your name");
 var $sfmType = "to generate a Checklist/Survey type of Process";

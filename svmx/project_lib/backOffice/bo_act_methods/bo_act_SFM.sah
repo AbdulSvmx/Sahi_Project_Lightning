@@ -189,7 +189,7 @@ var $bo_act_SFM = new function bo_act_SFM() {
 			$result = true;
 		}
 	*/		
-			
+		_setSpeed(100);	
 		}
 		
 		this.deleteSFM=function($sfmName){
