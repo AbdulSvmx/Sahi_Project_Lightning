@@ -1,4 +1,5 @@
-
+var $rs_5024 = _testcase("RS_5024","");
+$rs_5024.start();
 var $domainName = "/visual.force.com/";
 var $sfmName = "Validate Address";
 var $woName;
@@ -28,3 +29,4 @@ if(_getText(_div(0,_rightOf(_span(60))))==""){
 		_log("Pass ::: Lat and Long is updated");
 	}
 }
+$rs_5024.end();

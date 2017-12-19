@@ -1,5 +1,6 @@
 //vanditha
-
+var $rs_6643 = _testcase("RS_6643","");
+$rs_6643.start();
 _setSpeed(300);
 var $questionTextArray = ["Enter the IB's location","Did you reach on time at site?","Are you aware of problem","Choose the condition of the product","Choose the state of the product","Enter the reading on IB if applicable","When was the product serviced last?","Please enter approx Date Time when issue occured"];
 var $answerTypeArray = ["Text","Checkbox", "Radio Button", "Picklist","Multi-select Picklist", "Number", "Date","DateTime"];
@@ -94,4 +95,6 @@ _log("New WIndow URL is "+ $recentWindow.windowURL);
 //_click(_span("svmx-btn-icon svmx-sfmd-chklst-helpurl-icon[2]"));
 //_span("button-1330-btnIconEl");
 //_click(_span("/svmx-btn-icon svmx-sfmd-chklst-helpurl-icon/",_rightOf(_textbox("Text Question with http://www.google.com:"))));
+
+$rs_6643.end();
  

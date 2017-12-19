@@ -1,3 +1,5 @@
+var $rs_6980 = _testcase("RS_6980","");
+$rs_6980.start();
 var $sfmNameToBeCloned = "Manage Work Order Lines - Usage";
 var $sfmName = "RS_6980_DateMathFormula";
 var $isCustom = false;
@@ -82,3 +84,4 @@ if(_getValue($sfm_pg_sfmDesigner.txt_billingLinePrice)== ((_getValue($sfm_pg_sfm
 }else{
 	_log("Fail :::BillagleLinePrice != LineQty*LinePricePerUnit ");
 }
+$rs_6980.end();

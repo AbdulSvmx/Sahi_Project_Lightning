@@ -1,4 +1,5 @@
-
+var $rs_5352 = _testcase("RS_5352","");
+$rs_5352.start();
 $url = "https://test.salesforce.com";
 $un = "vansys@pqtpart1.com";
 $pwd = "servicemax2";
@@ -10,3 +11,4 @@ _log($login);
 var $woName;
 $woName = $sfm_act_createWorkOrder.create_WO();
 _log("WO NAME OUTSIDE "+$woName);
+$rs_5352.end();

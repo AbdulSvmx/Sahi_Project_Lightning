@@ -1,4 +1,5 @@
-
+var $rs_5344 = _testcase("RS_5344","");
+$rs_5344.start();
 $sfmNameToBeCloned = "Manage Work Order Lines - Usage";
 $sfmName = "RS_5354_TDM016";
 $isCustom = false;
@@ -66,3 +67,4 @@ if(_exists(_span("SFM Transaction Manager"))){
 
 //_click(_button("Is Entitlement Performed:",_rightOf(_label("Is Entitlement Performed:"))));
 
+$rs_5344.end();

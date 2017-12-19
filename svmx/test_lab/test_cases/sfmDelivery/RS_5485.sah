@@ -1,4 +1,5 @@
-
+var $rs_5485 = _testcase("RS_5485","");
+$rs_5485.start();
 var $customActionObject = "Work Order";
 var $actionType="URL";
 var $actionId = "RS-5485URL_CA";
@@ -42,3 +43,4 @@ else{
 	_log("Fail");
 }
 
+$rs_5485.end();

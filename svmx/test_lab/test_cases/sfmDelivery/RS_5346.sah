@@ -1,3 +1,5 @@
+var $rs_5346 = _testcase("RS_5346","");
+$rs_5346.start();
 var $sfmNameToBeCloned = "Manage Work Order Lines - Usage";
 var $sfmName = "RS_5346_TDM016_DVR";
 var $isCustom = false;
@@ -151,4 +153,4 @@ if((_isVisible(_div("Parts: "+$ruleDescription))) ||
 }else{
 	_log("Pass ::: DVT-Error is not triggered");
 }
-
+$rs_5346.end();
