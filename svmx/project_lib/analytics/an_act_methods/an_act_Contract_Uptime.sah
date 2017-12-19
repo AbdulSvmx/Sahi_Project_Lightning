@@ -42,7 +42,7 @@ var $an_act_Contract_Uptime = new function an_act_Contract_Uptime() {
 		_click($an_pg_contractuptime.btn_contractuptimemetric);
 		_click($an_pg_contractuptime.btn_Add);
 		_click($an_pg_contractuptime.btn_active);
-		_setValue($an_pg_contractuptime.txt_description, $Caculationmethodname);
+		_setValue($an_pg_contractuptime.txt_description, $Calculationmethodname);
 		_click($an_pg_contractuptime.btn_settings);
 		_click($an_pg_contractuptime.list_consider_downtime);
 		_click($an_pg_contractuptime.btn_downtime);
@@ -54,7 +54,7 @@ var $an_act_Contract_Uptime = new function an_act_Contract_Uptime() {
 		_click($an_pg_contractuptime.list_Contract_qualification_criteria);
 		_click($an_pg_contractuptime.btn_std_service_contract_expr);
 		_click($an_pg_contractuptime.list_qualifying_covered_product);
-		_click($an_pg_contractuptime.btn_std_covered_product_expr);
+		_click($an_pg_contractuptime.btn_custom_covered_product);
 		_click($an_pg_contractuptime.list_workOrder_downtime);
 		_click($an_pg_contractuptime.btn_closed_workorders);
 		_click($an_pg_contractuptime.btn_save);
@@ -62,6 +62,36 @@ var $an_act_Contract_Uptime = new function an_act_Contract_Uptime() {
 		
 		
 	};
+	
+	this.contract_uptime_advanced_downtime = function($Calculationmethodname)
+	
+	{
+		_click($an_pg_contractuptime.btn_contractuptimemetric);
+		_click($an_pg_contractuptime.btn_Add);
+		_click($an_pg_contractuptime.btn_active);
+		_setValue($an_pg_contractuptime.txt_description, $Calculationmethodname);
+		_click($an_pg_contractuptime.btn_settings);
+		_click($an_pg_contractuptime.list_consider_downtime);
+		_click($an_pg_contractuptime.btn_downtime);
+		_click($an_pg_contractuptime.list_select_component);
+		_click($an_pg_contractuptime.btn_component);
+		_click($an_pg_contractuptime.list_business_hours);
+		_click($an_pg_contractuptime.btn_business_hours);
+		_click($an_pg_contractuptime.btn_criteria);
+		_click($an_pg_contractuptime.list_Contract_qualification_criteria);
+		_click($an_pg_contractuptime.btn_std_service_contract_expr);
+		_click($an_pg_contractuptime.list_qualifying_covered_product);
+		_click($an_pg_contractuptime.btn_advanced_custom_expr);
+		_click($an_pg_contractuptime.list_workOrder_downtime);
+		_click($an_pg_contractuptime.btn_closed_workorders);
+		_click($an_pg_contractuptime.btn_save);
+		_click($an_pg_contractuptime.btn_OK);
+		
+		
+	};
+	
+	
+	
 	
 	
 	this.schedule_notifications = function($EmailID)

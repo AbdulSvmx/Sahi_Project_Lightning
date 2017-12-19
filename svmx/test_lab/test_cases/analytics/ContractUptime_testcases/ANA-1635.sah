@@ -1,9 +1,9 @@
 var $an_cu_1635 = _testcase("ANA-1635","SCON within Coverage of Covered Product- Few");
 $an_cu_1635.start();
-var $un = "meghana.rao@servicemax.com";
-var $pwd = "salesforce100";
-var $url = "https://test.salesforce.com";
 var $data = _readExcelFile("../../analytics/an_excleData/an_Datasheet1.xlsx","Sheet1",true);
+var $un = $data[1]["Username"];
+var $pwd = $data[1]["pwd"];
+var $url = "https://test.salesforce.com";
 var $Account = $data[1]["Account"];
 var $Technician = $data[1]["Technician"];
 var $Product = $data[1]["Product"];
@@ -22,6 +22,7 @@ _log($GuranteedUptime);
 
 var $ana_1635_create_SCON = "SVMXC__Service_Contract__c SCON1 = new SVMXC__Service_Contract__c(Name = 'ANA-1635-SCON' , SVMXC__Company__c = '"+$Account+"' , SVMXC__Active__c = True, SVMXC__Start_Date__c = Date.valueOf('2017-01-01') , SVMXC__End_Date__c = Date.valueOf('2017-12-31') );insert SCON1;";
 var $ana_1635_result = $op_act_sForceApiCall.sForceQuery($un, $pwd, $ana_1635_create_SCON , "create");
+_wait(1000);
 var $ana_1635_query_SCON = "Select Id , Name from SVMXC__Service_Contract__c where Name = 'ANA-1635-SCON' Limit 1";
 	
 var $ana_1635_fetch_SCON  = $op_act_sForceApiCall.sForceQuery($un, $pwd, $ana_1635_query_SCON,"query");
@@ -48,7 +49,7 @@ _log($ana_1635_SCON);
 
 var $ana_1635_create_IB1 = "SVMXC__Installed_Product__c IB01 = new SVMXC__Installed_Product__c(SVMXC__Company__c = '"+$Account+"' , Name = 'ANA-1635-IB1' , SVMXC__Status__c = 'Installed');insert IB01;";
 var $ana_1635_result_IB1  = $op_act_sForceApiCall.sForceQuery($un, $pwd, $ana_1635_create_IB1 , "create");
-
+_wait(3000);
 _log($ana_1635_result_IB1);
 var $ana_1635_get_IB1 = "Select Id , Name from SVMXC__Installed_Product__c where Name = 'ANA-1635-IB1' Limit 1";
 

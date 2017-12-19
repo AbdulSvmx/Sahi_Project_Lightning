@@ -1,0 +1,23 @@
+var $bo_act_customLabel = new function bo_act_customLabel() {
+	this.createCustomLabelForAppPermission=function ($newTransValue){
+		 _click($bo_pg_salesForceSetUP.lnk_salesforceSetUp);
+		_setValue($bo_pg_salesForceSetUP.txt_salesforceSetUpSrch,"custom label");
+		_click($bo_pg_salesForceSetUP.lnk_customLabels);
+		_wait(2000);
+		_click($bo_pg_salesForceSetUP.lnk_appPermissionProcessIDTag);
+		_click($bo_pg_salesForceSetUP.btn_newLocalTrans)
+		//_setSelected($bo_pg_salesForceSetUP.sel_language);
+		_setSelected($bo_pg_salesForceSetUP.sel_language,"English")
+		_setValue($bo_pg_salesForceSetUP.txt_newTranslatedValue,$newTransValue);
+		_click($bo_pg_salesForceSetUP.btn_save1);		
+	}
+		this.deleteNewTranslatedValue=function(){
+			 _click($bo_pg_salesForceSetUP.lnk_salesforceSetUp);
+			_setValue($bo_pg_salesForceSetUP.txt_salesforceSetUpSrch,"custom label");
+			_click($bo_pg_salesForceSetUP.lnk_customLabels);
+			_wait(2000);
+			_click($bo_pg_salesForceSetUP.lnk_appPermissionProcessIDTag);
+			_click($bo_pg_salesForceSetUP.lnk_deleteNewTranslatedValue);
+			
+		}
+			}

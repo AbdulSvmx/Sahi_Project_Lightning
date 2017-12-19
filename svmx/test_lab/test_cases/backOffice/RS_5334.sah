@@ -1,7 +1,6 @@
 //Tests are to be written here [Bhupendra Singh Chouhan]
-//==============
 
-var $RS_5334 = _testcase("$RS_5334","Get Price - When Pricing Rule of NTE is applied");
+var $RS_5334 = _testcase("$RS_5334","Get Price- When Pricing Rule of NTE is applied and [Billable Line Price >= NTE] For Parts line");
 $RS_5334.start();
 _setSpeed(100);
 

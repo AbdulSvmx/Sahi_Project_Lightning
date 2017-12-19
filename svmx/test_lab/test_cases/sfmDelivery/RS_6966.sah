@@ -1,0 +1,84 @@
+
+var $rs_6966 = _testcase("RS_6966","Verify source to target child SFM Process.");
+$rs_6966.start();
+//$url = "https://test.salesforce.com";
+//$un = "shankari@fop2.com";
+//$pwd = "maxpl0re1";
+//_setSpeed(100);
+$bo_act_login.login($g_url,$sfmUsn,$sfmPwd);
+var $rs_6966 = _testcase("RS_6966","");
+$rs_6966.start();
+$url = "https://test.salesforce.com";
+$un = "shankari@fop2.com";
+$pwd = "maxpl0re1";
+_setSpeed(100);
+$bo_act_login.login($url, $un, $pwd);
+$bo_act_navigation.navigateToSfmTransactionDesigner();
+//_setSpeed(100);
+
+$sfmNameToBeCloned = "Manage Work Order Lines - Usage";
+//$sfmName = "safi1111";
+$sfmName = $bo_act_common.generateRandomName("SFM_Auto_");
+$isCustom = false;
+var $sfmTemplate = "SVMXSTD: Manage WO Usage Lines";
+var $sfmTemplateSaveAsName = $sfmName;
+var $fieldName = ["Problem Description"];
+var $containerName = ["Order Status"];
+var $wizTitle = $bo_act_common.generateRandomName("SFM Wiz");
+$sfmName = $bo_act_common.generateRandomName("SFM_Auto_");
+
+//$bo_act_SFM.cloneSFM($sfmNameToBeCloned, $sfmName, $isCustom, $sfmTemplate, $sfmTemplateSaveAsName,$fieldName, $containerName);
+$sfm_act_SFM.cloneTDM016($sfmNameToBeCloned, $sfmName, $isCustom, $sfmTemplateSaveAsName, $sfmTemplate, $fieldName, $containerName);
+_click($bo_pg_sfmTransactionAndDesigner.btn_finalQuickSave);
+_setSpeed(100);
+
+//Adding to wizard
+//$bo_act_navigation.navigateToSvmxSetup();
+$bo_act_navigation.navigateToSfmWizard();
+$sfm_act_createCustomWizard.chooseObject("Work Order");
+$sfm_act_createCustomWizard.addManageWizSteps($wizTitle,"SFM",$sfmName,"Sysadmin01 Group");
+$sfm_act_createCustomWizard.createBlankWo();
+$sfm_act_createCustomWizard.clickWizardBtn($sfmName);
+//_click(_div("Service Flow Manager"));
+//_click(_div("SFM Wizards"));
+//_setSelected(_select(0,_rightOf(_span("Select Object"))),"Work Order");
+//_check(_checkbox(0,_leftOf(_span("SA_WO_Wizard"))));
+//_click(_submit("Edit",_near(_heading2("Custom SFM Wizards"))));
+//_click(_cell("Manage Wizard Steps"));
+//_click(_button("New Step"));
+//_setSelected(_select(0,_rightOf(_label("Wizard Step Type[1]"))),"SFM");
+//_setSelected(_select(0,_rightOf(_label("Step Name[1]"))),"safi1111");
+//_wait(3000);
+//_click(_button("Save"));
+
+//if(_isVisible(_heading4("Success"))){
+////_log("Pass");
+////_click(_button("Save & Close"));
+
+//_setValue(_textbox("str"), "WO-00001565");
+//_click(_button("Search"));
+//_click(_button("phSearchButton"));
+//_click(_link("WO-00001565"));
+//_selectDomain("svmxc.cs59.visual.force.com");
+//_click(_button("safi1111"));
+//}else{
+//_log("Fail");
+//_stopTestCase();
+
+//}
+var $wizardHeading = "";
+_selectDomain();
+_setStrictVisibilityCheck(true);
+_set($wizardHeading,_getText($sfm_pg_wizardWindow.wiz_heading));
+if($wizardHeading.search($sfmName)!=-1){
+	_log("Pass");
+}
+else{
+	_log("Fail");
+}
+$rs_6966.end();
+
+
+
+
+

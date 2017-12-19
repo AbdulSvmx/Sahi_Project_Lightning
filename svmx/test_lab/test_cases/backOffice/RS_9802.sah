@@ -105,7 +105,7 @@ var $wizardTitleName = $bo_act_common.generateRandomName("SFWTitle");
 var $wizardIDName = $bo_act_common.generateRandomName("SFWId");
 $bo_act_navigation.navigateToSfmWizard();
 $bo_act_SFW.createWizardGeneralInfo("Work Order", $wizardTitleName, $wizardIDName);
-$bo_act_SFW.createWizardStepwithHandOver("SFM", "Create RMA from Work Order", "Interactive",true);
+$bo_act_SFW.createSFMWizardStepwithHandOver("SFM", "Create RMA from Work Order", "Interactive",true);
 $bo_act_SFW.createOthersWizardStepwithHandOver("Others", $actionTitle,false);
 $bo_act_SFW.quickSaveSFWizard();
 $bo_act_SFW.saveAndClose();
@@ -115,7 +115,7 @@ var $contactName = $bo_act_contacts.createContact($accountName);
 var $caseNumber = $bo_act_Cases.createCase("New", "High", "Email");
 var $productName = $bo_act_products.createProduct();
 var $IBName = $bo_act_installedProduct.createInstalledProduct($productName, $accountName, $contactName);
-$bo_act_workOrders.createWorkOrder($caseNumber, $accountName, $contactName, $IBName, "Open", "High", "Field Service");
+var $WONumber = $bo_act_workOrders.createWorkOrder($caseNumber, $accountName, $contactName, $IBName, "Open", "High", "Field Service");
 _selectDomain("/svmx/");
 _assertExists(_button("/Create RMA from Work Order/",_near(_cell($wizardTitleName))));
 _click(_button("/Create RMA from Work Order/",_near(_cell($wizardTitleName))));
@@ -130,6 +130,8 @@ for (var i = 0; i < $datacreated.length; i++) {
 	$bo_act_common.cleanUpfunction($datacreated[i]);
 }
 $bo_act_SFW.deleteWizards("Work Order", $wizardIDName);
+$bo_act_customAction.deleteCustomAction("Work Order", $actionTitle);
+$bo_act_salesforceSetUp.deleteapexClasses($className);
 $9802.end();
 
 

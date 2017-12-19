@@ -1,7 +1,7 @@
 //Tests are to be written here [Bhupendra Singh Chouhan]
 //==============
 
-var $RS_5333 = _testcase("$RS_5333","Get Price - When Pricing Rule of FIXED is applied.");
+var $RS_5333 = _testcase("$RS_5333","Get Price - When Pricing Rule of FIXED is applied Using Service Contract");
 $RS_5333.start();
 _setSpeed(100);
 
@@ -20,7 +20,7 @@ var $seperator = "/";
 */
 var $accountName = $bo_act_accounts.createAccount();
 var $contactName = $bo_act_contacts.createContact($accountName);
-var $productName = $bo_act_products.createProduct($productCode, $productFamily[3]);
+var $productName = $bo_act_products.createProduct($productCode, $productFamily[0]);
 var $IBName = $bo_act_installedProduct.createInstalledProduct($productName, $accountName, $contactName);
 
 /**
