@@ -77,6 +77,11 @@ var $bo_act_navigation = new function bo_act_navigation() {
     	_click($bo_pg_home.btn_allTabs);
    	    _click($bo_pg_home.link_serviceMaintenanceContracts);
     };
+    this.navigateToStockAdjustment = function(){
+   	 _click($bo_pg_home.btn_allTabs);
+   	    _click($bo_pg_home.link_stockAdjustment);
+    };
+    
 
 
     this.navigateToSlaTerms = function(){
