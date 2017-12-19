@@ -1,11 +1,3 @@
-.settings/
-.DS*
-project/*
-.settings/*
-.DS.*
-.project/*
-.DS_Store
-
-
-svmx/project_lib/.DS_Store
-.DS_Store
+*.settings
+*.project
+*.DS_Store
