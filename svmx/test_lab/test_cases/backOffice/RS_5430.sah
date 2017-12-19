@@ -8,7 +8,7 @@ $RS_5430.start();
 _setSpeed(100);
 
 var $newTransValue="trans-Process ID";
-var $viewName="5430ViewName";
+var $viewName="ViewName5430";
 var $viewID=$viewName;
 var $labelStartsWith="Process ID";
 var $filterLanguage="English";
@@ -43,7 +43,7 @@ $bo_act_navigation.navigateToSfmAppPermission();
 //DELETE THE TRANSLATED DATA TO REVERT BACK TO ORIGINAL
 $bo_act_customLabel.deleteNewTranslatedValue();
 _log("custom label deleted successfully");
-$bo_act_customLabel.deleteNewTranslatedValue($viewName);
+$bo_act_customLabel.deleteView($viewName);
 _setSpeed(100);
 
 $RS_5430.end()

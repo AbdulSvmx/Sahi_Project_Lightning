@@ -18,7 +18,7 @@ var $bo_act_customLabel = new function bo_act_customLabel() {
 			_click($bo_pg_salesForceSetUP.lnk_deleteNewTranslatedValue);
 			
 		};
-			};
+	
 			
 			this.createNewView=function($viewName,$viewID,$labelStartsWith,$filterLanguage){
 				_click($bo_pg_salesForceSetUP.lnk_salesforceSetUp);
@@ -43,10 +43,11 @@ var $bo_act_customLabel = new function bo_act_customLabel() {
 				_wait(2000);
 				_setSelected(_select("fcf"), $viewName);
 				_wait(2000);
-				_click(_link("Edit"));
+				_click(_link(0,_rightOf(_select("fcf"))));
 				_click(_button("Delete"));
 				if (_isVisible(_link("Create New View"))){
 				_log("Custom View successfully Deleted");
 					
 				}
 			};
+};
