@@ -68,8 +68,9 @@ if (_assertExists($bo_pg_sfmTransactionAndDesigner.btn_backToList)){
 //Again Launch the Wizard in Delivery, verify the visibility*****8
 	$bo_act_sfmVerifyWorkOrder.verifyWizardOnWOObj($sfmName);
 	_wait(2000);
-	$bo_act_sfmVerifyWorkOrder.wizardButtonVerification($sfmName);
+	$bo_act_sfmVerifyWorkOrder.wizardButtonVisible($wizardname);
 //****Delete The Wizard Created*******
 	$bo_act_SFW.deleteWizards( $objName,$wizardID);
-
+$bo_act_navigation.navigateToSfmTransactionDesigner();
+$bo_act_SFM.deleteSFM($sfmName);
 $RS_5426.end();
