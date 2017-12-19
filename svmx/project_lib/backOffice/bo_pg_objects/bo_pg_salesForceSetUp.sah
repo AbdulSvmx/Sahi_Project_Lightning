@@ -7,8 +7,11 @@ var $bo_pg_salesForceSetUP = new function bo_pg_salesForceSetUP(){
 		this.btn_newLocalTrans=_button("New Local Translations / Overrides");
 		this.sel_language=_select("Language");
 		this.txt_newTranslatedValue=_textarea("Value");
-		this.btn_save=_submit(" Save [1]");
+		this.btn_save1=_submit(" Save ");
 		this.lnk_deleteNewTranslatedValue=_link("Del");
+		this.lnk_apexJobs=_link("Apex Jobs");
+		this.lbl_status2=_cell(" dataCell  [1]");
+		this.lbl_status1=_cell(" dataCell  [9]");
 		
 this.txt_apexClasscode = _textarea("textarea");
 	this.btn_quickSave = _button("Quick Save");
@@ -23,6 +26,11 @@ this.txt_apexClasscode = _textarea("textarea");
 	this.btn_submitSave = _submit(" Save ");
 	this.txt_Name = _cell(0,_rightOf(_cell("Name")));
 	
+//Edit Layout Fields
+	this.btn_SLAVisualPage = _span("SLAT_SLAClockOnWO");
+	
 };
+
+
 
 

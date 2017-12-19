@@ -1,6 +1,3 @@
-settings/*
-DS.*
-project/*
-.settings/*
-.DS.*
-.project/*
+*.settings
+*.project
+*.DS_Store

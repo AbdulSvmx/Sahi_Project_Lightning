@@ -1,0 +1,46 @@
+var $rs_5485 = _testcase("RS_5485","");
+$rs_5485.start();
+var $customActionObject = "Work Order";
+var $actionType="URL";
+var $actionId = "RS-5485URL_CA";
+var $urlToLaunch="http://www.google.com/search";
+var $paramName="q";
+var $paramValueType="Value";
+var $paramValue="Servicemax";
+var $wizardName = "SFM Delivery Auto";
+var $wizardType="Others";
+var $woName;
+var $domainName = "/visual.force.com/";
+
+
+
+
+_setSpeed(100);
+$bo_act_login.login($g_url, $sfmUsn, $sfmPwd);
+$sfm_act_navigation.navigateToSfmCustomActions();
+$sfm_act_customActions.urlCustomAction($customActionObject,$actionType, $actionId, $urlToLaunch, $paramName, $paramValueType, $paramValue);
+$sfm_act_wizards.addToWizard($customActionObject, $wizardName, $wizardType, $actionId);
+
+//Create WO dynamically and search that work order in global search and validate in delivery.
+$login = $sfm_act_createWorkOrder.login($sfmUsn, $sfmPwd);
+//_log($login);
+//var $woName;
+$woName = $sfm_act_createWorkOrder.create_WO();
+
+_wait(3000);
+$sfm_act_common.globalSearch($woName);
+_click(_link($woName));
+_selectDomain($domainName);
+_click(_button($actionId));
+_selectDomain();
+_wait(3000);
+_selectWindow("Servicemax - Google Search");
+var $search=_getText(_textbox("Search"));
+if($search ==$paramValue ){
+	_log("Pass");
+}
+else{
+	_log("Fail");
+}
+
+$rs_5485.end();

@@ -5,15 +5,30 @@ var $Configuration_StartUp = _testcase("$Configuration_StartUp","Set up test dat
 $Configuration_StartUp.start();
 _setSpeed(100);
 
-$bo_act_login.login($g_url, $bac_un, $bac_pwd);
-
-
+var $userName = "orgsadmin@svmx-org4.org.org4part1";
+var $password = "servicemax1";
+$bo_act_login.login($g_url, $userName, $password);
+/*
+var $color = 5;
+// Create Tabs
+var $tabs = ["Installed Product","PM Plan Template","Preventive Maintenance Plan","Service/Maintenance Contract","Service Plan","Service Pricebook","Service Team","SLA Term","Task Template","Warranty Term","Work Order"];
+$bo_act_navigation.navigateToSetUpAndSearch("Tabs");
+for (var i = 0; i < $tabs.length; i++) {
+	$bo_act_salesforceSetUp.createTabs($tabs[i],$color);
+}
+*/
+//Adding Section
+$bo_act_navigation.navigateToWorkOrdersTab();
+_click(_link(0,_under(_tableHeader("Work Order Number"))));
+$bo_act_salesforceSetUp.dragAndDropSection("SLA",1);
+$bo_act_salesforceSetUp.dragAndDropVisualForcePage($bo_pg_salesForceSetUP.btn_SLAVisualPage, "SLA");
+$bo_act_salesforceSetUp.saveEditLayout();
 
 // Create BH for "OutsideBH" Only Sunday 7:00 AM to 7:30 AM
 
+//creation of SFM wizard condition based
 
 
-//Clean up function
 
 $Configuration_StartUp.end();
 

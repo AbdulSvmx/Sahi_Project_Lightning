@@ -1,0 +1,28 @@
+var $rs_7079 = _testcase("RS_7079","");
+$rs_7079.start();
+//vanditha
+
+_setSpeed(300);
+$bo_act_login.login($g_url,$sfmUsn,$sfmPwd);
+
+var $questionTextArray = ["Choose the condition of the product","When was the product serviced last?","Please enter approx Date Time when issue occured"];
+var $answerTypeArray = ["Picklist","Date","DateTime"];
+var $picklistAnswerValues = ["Good","Worse","Don't know"];
+var $helpURL1="http://www.google.com";
+var $helpURL2="https://www.google.com";
+var $helpURL3="www.google.com";
+
+
+$sfm_act_navigation.navigateToChecklistQuestionLibrary();
+$sfm_act_checklistQuestionLibrary.createPicklistQuestion($questionTextArray[0],$answerTypeArray[0],$picklistAnswerValues,$helpURL1);
+$sfm_act_checklistQuestionLibrary.verifyQuestionExists($questionTextArray[0]);
+
+$sfm_act_checklistQuestionLibrary.createDateQuestion($questionTextArray[1],$answerTypeArray[1],$helpURL2);
+$sfm_act_checklistQuestionLibrary.verifyQuestionExists($questionTextArray[1]);
+
+$sfm_act_checklistQuestionLibrary.createDateTimeQuestion($questionTextArray[2],$answerTypeArray[2],$helpURL3);
+$sfm_act_checklistQuestionLibrary.verifyQuestionExists($questionTextArray[2]);
+ 
+//Delete the created questions
+$sfm_act_checklistQuestionLibrary.deleteQuestions($questionTextArray);
+$rs_7079.end();
