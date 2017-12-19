@@ -1,13 +1,72 @@
 var $rs_6961 = _testcase("RS_6961","Verify source to target all SFM Process.");
 $rs_6961.start();
-$sfmName = "HCS Auto SFM05";
-$sfmPgLayoutName = "HCS_0011";
-$processName = "Create Work Order from Installed Product";
+//$sfmName = $bo_act_common.generateRandomName("SFM_Auto_");
+$sfmName = "SFM_Auto_18122017171926";
+$sfmPgLayoutName = $bo_act_common.generateRandomName("SFM_Auto_Page");
+$headersToAdd = ["Account"];
+$wizTitle = $bo_act_common.generateRandomName("SFM Wiz");
 $bo_act_login.login($g_url,$sfmUsn,$sfmPwd);
-$bo_act_navigation.navigateToSfmTransactionDesigner();
-$sfm_act_Transactions.cloneAndSaveProcess($processName, $sfmName, $sfmPgLayoutName);
+//$bo_act_navigation.navigateToSfmTransactionDesigner();
+//_setSpeed(100);
+//_click($bo_pg_sfmTransactionAndDesigner.btn_newSFM);
+//_setValue($bo_pg_sfmTransactionAndDesigner.txt_name, $sfmName);
+//_setValue($bo_pg_sfmTransactionAndDesigner.txt_sfmTransactionId, "");
+//_setValue(_f("main").s_textinput("textInput"),"");
+//_setValue(_f("main").s_textinput("textInput"),"Wo");
+//_click(_f("main").s_label("Work Order[5]"));
+//_click(_f("main").s_checkbox("Work Detail (Work Order)"));
+//_setValue(_f("main").s_textinput("textInput[1]"),"");
+//_setValue(_f("main").s_textinput("textInput[1]"),"Wo");
+//_click(_f("main").s_label("Work Order[5]"));
+//_click(_f("main").s_checkbox("Work Detail (Work Order)[1]"));
+//_click(_f("main").tab("Qualifying Criteria and Field Mappings"));
+//_click(_f("main").s_dropdownlist("objCombo"));
+//_setSelected(_f("main").s_dropdownlist("objCombo"), "Work Detail (Work Order)");
+////_wait(5000);
+////_setValue(_f("main").s_textinput("/TextInput/").near(_f("main").s_checkbox("Work Detail (Work Order)[1]")),"Parts");
+//_click($bo_pg_sfmTransactionAndDesigner.btn_screenDesigner);
+//_setValue($bo_pg_sfmTransactionAndDesigner.txt_sfmSavePageLayoutAs, $sfmPgLayoutName);
+//_setValue($bo_pg_sfmTransactionAndDesigner.txt_sfmSavePageLayoutAsId, $sfmPgLayoutName);
+//$sfm_act_Transactions.addHeader($headersToAdd);
+//_click($sfm_pg_screenDesigner.data_Group);
+//_click($sfm_pg_screenDesigner.txt_searchField);
+//_setValue($sfm_pg_screenDesigner.txt_searchField,"AutoContact");
+//_doubleClick($sfm_pg_screenDesigner.lbl_autoContact);
+//_setSelected(_f("main").s_combobox("/ComboBox/").rightOf(_f("main").formitemlabel("Context Source")),"Work Order");
+//_click(_f("main").s_checkbox("Override Context"));
+//_setSelected(_f("main").s_combobox("/ComboBox/").rightOf(_f("main").formitemlabel("Context")),"Account");
+//_wait(5000);
+//_setSelected(_f("main").s_combobox("/ComboBox/").rightOf(_f("main").formitemlabel("Matching Field")),"Account ID");
+//_click($sfm_pg_screenDesigner.section_Parts);
+//_click($sfm_pg_screenDesigner.chk_allowNew);
+//_click($bo_pg_sfmTransactionAndDesigner.btn_pageLayoutSave);
+//_wait(3000);
+//_click($bo_pg_sfmTransactionAndDesigner.btn_finalQuickSave);
 //$bo_act_navigation.navigateToSfmWizard();
-//$sfm_act_createCustomWizard.chooseObject("Installed Product");
-//$sfm_act_createCustomWizard.addManageWizSteps("HCS_AUTO_0011", "SFM", $sfmName, "System Admin Profile");
-//$sfm_act_createCustomWizard.newInstalledProduct("Installed Products","Audi", "Acme", "Ram");
+//$sfm_act_createCustomWizard.chooseObject("Work Order");
+//$sfm_act_createCustomWizard.addManageWizSteps($wizTitle,"SFM",$sfmName,"Sysadmin01 Group");
+$sfm_act_createCustomWizard.createBlankWo();
+$sfm_act_createCustomWizard.clickWizardBtn($sfmName);
+_selectDomain();
+_setStrictVisibilityCheck(true);
+_click($sfm_pg_wizardWindow.btn_addRow);
+_click($sfm_pg_wizardWindow.btn_edit);
+_click($sfm_pg_wizardWindow.lkp_autoContact);
+_click($sfm_pg_wizardWindow.icon_search);
+_doubleClick(_div("Alicia Jones"));
+_click($sfm_pg_wizardWindow.btn_update);
+_click($sfm_pg_wizardWindow.btn_save);
+if((_getText(_heading1("pageType"))=="Work Order:")){
+	_click(_link("Edit",_under(_heading3("Work Details"))));
+	if(_getText(_textbox(0,_rightOf(_label("AutoContact"))))=="Alicia Jones"){
+		_log("Pass");
+	}
+	else{
+		_log("Fail");
+	}
+}
+else{
+	_log("Fail");
+}
+
 $rs_6961.end();

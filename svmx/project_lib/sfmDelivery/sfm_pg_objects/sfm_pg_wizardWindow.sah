@@ -38,6 +38,19 @@ var $sfm_pg_wizardWindow = new function sfm_pg_wizardWindow(){
 	this.lbl_contactLookup = _label(0,_rightOf(_button("/svmx-form-checkbox/")));
 	this.sel_billingType = _textbox("Billing Type:");
 	this.errorMsg = _div("/error-detail/",_near(_span("Error Details")));
+	this.chk_multiSelect = _span("/svmx-column-header-text/",_leftOf(_span("Product Name")));
+	this.lkp_search = _textbox(1,_near(_span("/search-icon/")));
+	this.btn_bubble = _image("/bubble-icon/");
+	this.lbl_product = _div(0,_near(_label("Product Name:")));
+	this.wiz_heading = _link("/sfmdelivery-panel-header/");
+	this.txt_accountField = _textbox(0,_rightOf(_label("Account:")));
+	this.txt_limitSearch = _label("/Limit search to Account:/");
+	this.pl_Account = _textbox("/svmx-picklist/",_rightOf(_label("Account:")));
+	this.pl_Contact = _textbox("/svmx-picklist/",_rightOf(_label("Contact:")));
+	this.btn_recentItemsCancel = _span("/Cancel/",_near(_span("Recent Items: Contacts")));
+	this.lookup_PartsOrder = _span("/lookup_icon/",_rightOf(_label("Parts Order:")));
+//	this.txt_part = _div("/svmx-grid-cell-inner/",_under(_div("Part")));
+	
 	
 	
 };

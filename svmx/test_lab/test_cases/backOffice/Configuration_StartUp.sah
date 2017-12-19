@@ -26,6 +26,8 @@ $bo_act_salesforceSetUp.saveEditLayout();
 
 // Create BH for "OutsideBH" Only Sunday 7:00 AM to 7:30 AM
 
+//creation of SFM wizard condition based
+
 
 
 $Configuration_StartUp.end();

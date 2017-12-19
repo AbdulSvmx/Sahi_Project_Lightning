@@ -60,9 +60,11 @@ var $bo_act_interactiveEntitlement_WO = new function bo_act_interactiveEntitleme
 	this.performInteractiveEntitlement_WOPSLines = function($WO_Number,$IBName,$warrantyName) {
 		//Navigate to the and click on check Entitlement PS SFM
 		$bo_act_workOrders.checkEntitlementPS($WO_Number);
-		//_wait(50000, _isVisible($bo_pg_interactiveEntitlement_CaseAndWO.btn_checkEntitlement));
-		_wait(1000);
+		_wait(50000, _isVisible($bo_pg_interactiveEntitlement_CaseAndWO.btn_checkEntitlement));
+		if(_condition($bo_pg_interactiveEntitlement_CaseAndWO.btn_checkEntitlement == null)){
 		_call(top.location.reload());
+		_wait(50000, _isVisible($bo_pg_interactiveEntitlement_CaseAndWO.btn_checkEntitlement));
+		}
 		_click($bo_pg_interactiveEntitlement_CaseAndWO.btn_checkEntitlement);
 		$bo_pg_interactiveEntitlement_CaseAndWO.clickOnInstalledProduct($IBName);
 		_wait(5000, _isVisible($bo_pg_interactiveEntitlement_CaseAndWO.txt_selectWarrantyOrContractPage));

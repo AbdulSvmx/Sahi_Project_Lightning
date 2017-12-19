@@ -7,4 +7,6 @@ var $sfm_pg_expressions = new function sfm_pg_expressions() {
 	this.txt_input = _f("SFMExpressionBuilderSWF").s_textinput("textip");
 	this.btn_reset = _f("SFMExpressionBuilderSWF").s_button("Reset");
 	this.btn_save = _f("SFMExpressionBuilderSWF").s_button("Save");
+	this.tab_expression = _div("SFM Expressions");
+	this.lbl_ConfigureExprsns = _f("SFMExpressionBuilderSWF").s_label("Configure Expressions");
 };
