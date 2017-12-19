@@ -1,5 +1,7 @@
+var $rs_5349 = _testcase("RS_5349","");
+$rs_5349.start();
 var $sfmNameToBeCloned = "Manage Work Order Lines - Usage";
-var $sfmName = "RS_5350_TDM016_DVRPrecedence";
+var $sfmName = "RS_5349_TDM016_DVR";
 var $isCustom = false;
 var $sfmTemplate = "SVMXSTD: Manage WO Usage Lines";
 var $sfmTemplateSaveAsName = $sfmName;
@@ -13,7 +15,7 @@ var $wizardObject ="Work Order";
 
 //Variables for rule 1
 var $targetObject="Work Detail (Work Order)";
-var $rulename ="5350RuleAll";
+var $rulename ="5349RuleAll";
 var $ruleDescription ="Line Qty is Greater Than 5 and Received Street Is Not Null";
 var $fieldArray = ["Line Qty","Received Street"];
 var $conditionArray = ["Greater Than", "Is Not Null"];
@@ -23,7 +25,7 @@ var $advExpr= "1 AND 2";
 var $messageType = "Error";
 
 //Variables for rule 2
-var $rulename2 ="5350RuleLabor";
+var $rulename2 ="5349RuleLabor";
 var $ruleDescription2 ="Are you sure that activity type is Service?";
 var $fieldArray2 = ["Activity Type"];
 var $conditionArray2 = ["Equals"];
@@ -33,7 +35,7 @@ var $advExpr2= "";
 var $messageType2 = "Confirmation";
 
 //Variables for rule 3
-var $rulename3 ="5350RuleExpense";
+var $rulename3 ="5349RuleExpense";
 var $ruleDescription3 ="Expense Type cannot be Entertainment.";
 var $fieldArray3 = ["Expense Type"];
 var $conditionArray3 = ["Equals"];
@@ -43,7 +45,7 @@ var $advExpr3= "";
 var $messageType3 = "Error";
 
 //Variables for rule 4
-var $rulename4 ="5350RuleTravel";
+var $rulename4 ="5349RuleTravel";
 var $ruleDescription4 ="Start Date and Time cannot be greater than End Date and Time ";
 var $fieldArray4 = ["Start Date and Time","End Date and Time"];
 var $conditionArray4 = ["Equals","Less Than"];
@@ -52,7 +54,7 @@ var $valueArray4 =["Today","Start Date and Time"];
 var $advExpr4= "1 AND 2";
 var $messageType4 = "Error";
 
-//var $woName= "WO-00000104";
+var $woName= "WO-00000104";
 
 
 _setSpeed(100);
@@ -196,4 +198,4 @@ if(_exists($sfm_pg_sfmDesigner.txt_PriceAlert)){
 	_log("Pass ::: Save is happening from confirmation");
 	_wait(1000);
 }
-
+$rs_5349.end();

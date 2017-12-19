@@ -1,4 +1,5 @@
-
+var $rs_6342 = _testcase("RS_6342","");
+$rs_6342.start();
 var $sfmNameToBeCloned = "Manage Work Order Lines - Usage";
 var $sfmName = "RS_6342_TDM016";
 var $isCustom = false;
@@ -121,4 +122,4 @@ else{
 	 _setValue($sfm_pg_sfmDesigner.txt_eeReceivedStreet,$receivedStreet);
 	 _click($sfm_pg_sfmDesigner.btn_eeUpdate); 
  }
-
+ $rs_6342.end();

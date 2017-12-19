@@ -1,4 +1,5 @@
-
+var $rs_5345 = _testcase("RS_5345","");
+$rs_5345.start();
 var $sfmNameToBeCloned = "Manage Work Order Lines - Usage";
 var $sfmName = "RS_5345_TDM016";
 var $isCustom = false;
@@ -92,3 +93,5 @@ if(_exists(_label("Parts: "+$ruleDescription))){
 }else{
 	_log("Pass ::: Step 2 pass with one rule as false");
 	}
+
+$rs_5345.end();

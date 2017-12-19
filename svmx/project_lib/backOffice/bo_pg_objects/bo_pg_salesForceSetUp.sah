@@ -26,6 +26,9 @@ this.txt_apexClasscode = _textarea("textarea");
 	this.btn_submitSave = _submit(" Save ");
 	this.txt_Name = _cell(0,_rightOf(_cell("Name")));
 	
+//Edit Layout Fields
+	this.btn_SLAVisualPage = _span("SLAT_SLAClockOnWO");
+	
 };
 
 

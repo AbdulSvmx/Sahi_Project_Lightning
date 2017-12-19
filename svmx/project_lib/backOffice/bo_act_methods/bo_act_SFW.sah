@@ -63,9 +63,11 @@ var $bo_act_SFW = new function bo_act_SFW() {
 	this.editWizardSteps=function($newSfmName){
 		_click(_link("Edit"));
 		_wait(30000);
+		_selectWindow("/SFM Transaction Designer/");
 		_setValue($bo_pg_sfmTransactionAndDesigner.txt_name, "");
 		_setValue($bo_pg_sfmTransactionAndDesigner.txt_name,$newSfmName);
 		_click($bo_pg_sfmTransactionAndDesigner.btn_finalQuickSave);
+		_selectWindow();
 	}
 		
 	

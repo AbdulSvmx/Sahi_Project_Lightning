@@ -1,3 +1,5 @@
+var $rs_6343 = _testcase("RS_6343","");
+$rs_6343.start();
 $url = "https://test.salesforce.com";
 $un = "vansys@pqtpart1.com";
 $pwd = "servicemax2";
@@ -25,3 +27,4 @@ _setValue(_f("main").s_textinput("aliasName[62]"), "Labor");
 _click(_f("main").tab("Screen Designer"));
 
 _f("main").s_label("Work Order Resource");
+$rs_6343.end();

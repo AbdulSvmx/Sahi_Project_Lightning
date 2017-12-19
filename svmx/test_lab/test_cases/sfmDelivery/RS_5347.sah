@@ -1,3 +1,5 @@
+var $rs_5347 = _testcase("RS_5347","");
+$rs_5347.start();
 var $sfmNameToBeCloned = "Manage Work Order Lines - Usage";
 var $sfmName = "RS_5347_TDM016";
 var $isCustom = false;
@@ -167,3 +169,5 @@ if(_exists($sfm_pg_sfmDesigner.txt_PriceAlert)){
 if(_exists(_span("Saved Successfully"))){
 	_log("Pass ::: WO saved after DVR confirmation");
 }
+
+$rs_5347.end();
