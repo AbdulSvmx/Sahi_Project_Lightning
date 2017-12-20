@@ -53,5 +53,13 @@ var $bo_act_scheduledSFM=new function bo_act_scheduledSFM(){
 					_click($bo_pg_salesForceSetUP.txt_salesforceSetUpSrch);
 					_setValue($bo_pg_salesForceSetUP.txt_salesforceSetUpSrch, "Apex Jobs");
 					_click($bo_pg_salesForceSetUP.lnk_apexJobs);					
-				}			
+				}	
+					this.deleteScheduledSFM=function($ProcessName){						
+						_check(_checkbox(0,_leftOf(_cell($ProcessName))));
+						_click(_button("Delete"));
+						if (_isVisible(_div("Success:Record(s) deleted successfully"))){
+							_log("Scheduled SFM Deleted Successfully");
+						}
+						
+					}
 }

@@ -195,8 +195,17 @@ var $bo_act_SFM = new function bo_act_SFM() {
 		this.deleteSFM=function($sfmName){
 			_click($bo_pg_sfmTransactionAndDesigner.btn_yourCustomSfmTransactions);
 			_setValue(_f("main").s_textinput("searchText[3]"),$sfmName);
+			if (_isVisible(_f("main").s_checkbox("/Chk/").leftOf(_f("main").s_label($sfmName), 10, 10))) {
+			_wait(3000);
+			_click(_f("main").s_checkbox("/Chk/").leftOf(_f("main").s_label($sfmName), 10, 10));
+
+		} else if (_isVisible(_f("main").s_checkbox(2).leftOf(_f("main").s_label($sfmName), 10, 10))) {
+			_wait(3000);
 			_click(_f("main").s_checkbox(2).leftOf(_f("main").s_label($sfmName), 10, 10));
-			//_click(_f("main").s_checkbox("chk").leftOf(_f("main").s_label($sfmName), 10, 10))
+
+		} else {
+			_click(_f("main").s_checkbox("/CheckBox/").leftOf(_f("main").s_label($sfmName), 10, 10));
+		} 
 			_takePageScreenShot();
 			_click($bo_pg_sfmTransactionAndDesigner.btn_clickDeleteButton);
 			_wait(1000)
