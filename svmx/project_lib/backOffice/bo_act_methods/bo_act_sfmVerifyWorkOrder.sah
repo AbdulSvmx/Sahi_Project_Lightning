@@ -105,7 +105,19 @@ this.verifyWizardOnWOObj=function($sfmName){
 				_selectDomain("/svmx/");
 				_click(_button($SFMName));
 				_selectDomain();					
-			}			
+			}
+				this.wizardVisibility=function($wizardTitleName ){
+					_selectDomain("/svmx/");
+				var $textDisplay=_getText(_table("tbcontainer"));
+					if(!$wizardTitleName.indexOf($textDisplay) != -1){
+						_log("Wizard is visible")
+							
+					}else{
+						 _("Wizard is not visible")
+					}		
+					 _selectDomain();				
+				}			
+					
 
 	
 	};

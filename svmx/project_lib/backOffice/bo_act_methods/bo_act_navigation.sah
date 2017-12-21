@@ -291,4 +291,11 @@ var $bo_act_navigation = new function bo_act_navigation() {
     	_click($bo_pg_servicemaxSetup.btn_warrantiesAndServiceContracts);
     	_click($bo_pg_servicemaxSetup.btn_servicePlans);
     };
+	
+	//Navigate to SFM Search Configuration Screen
+    this.navigateToSfmSearchInDesigner = function() {
+   	 this.navigateToSvmxSetup();
+   	 _click($bo_pg_servicemaxSetup.btn_serviceFlowManager);
+   	 _click($bo_pg_servicemaxSetup.btn_sfmSearch);	   	 
+    };
 };

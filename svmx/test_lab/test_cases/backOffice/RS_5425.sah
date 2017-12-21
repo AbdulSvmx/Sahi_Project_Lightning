@@ -42,10 +42,10 @@ var $sfmName ="Capture Downtime";
 	_click(_div("svmx-grid-checkheader"));
 	_click($bo_pg_sfmAppPermissionD.btn_clickSaveAppPermission);
 	_wait(3000);
-	_click($bo_pg_sfmAppPermissionD.popUpOK)
+	_click($bo_pg_sfmAppPermissionD.popUpOK);
 	var $isvisible = _exists(_div("App Permissions saved successfully"));
 
-//Again Launch the Wizard in Delivery, verify the visibility*****8
+//Again Launch the Wizard in Delivery, verify the visibility*****
 	$bo_act_sfmVerifyWorkOrder.verifyWizardOnWOObj($sfmName);
 	_wait(2000);
 	$bo_act_sfmVerifyWorkOrder.wizardButtonVerification($stndSFMName);
