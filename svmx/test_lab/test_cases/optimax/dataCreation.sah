@@ -22,6 +22,8 @@ for(var $i=0;$i<$businessHour_xls.length;$i++)
 	_log("$name_BH = "+$name_BH);
 }
 
+_log("$exp_xls.length : " + $exp_xls.length);
+
 $bo_act_login.login($g_url, $g_un, $g_pwd);
 
 //var $rowIndex = 1;
@@ -166,7 +168,8 @@ if($BH_creation != null){
 				}
 			}
 		}
-		else {
+		else 
+		{
 			_logExceptionAsFailure("Tech is not created as expected");
 		}
 	}
@@ -498,6 +501,6 @@ function createPrfRes($rec_Pref_xls){
 		_log("pfrRes ids ="+prfResId);
 		//return prfResId;
 	}
-	return $isSuccess;
+	return prfResId;
 }
 //</browser>
