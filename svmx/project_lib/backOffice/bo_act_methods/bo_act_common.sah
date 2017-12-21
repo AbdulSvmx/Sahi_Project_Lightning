@@ -172,9 +172,9 @@ this.cleanUpfunctionold = function($value)
 			_click($bo_pg_search.btn_search);
 			_wait(5000,_isVisible($bo_pg_search.btn_searchAgain));
 			for(var $i=0;$i<=5;$i++){
-				_click($bo_pg_search.txt_searchText,$value);
-				_setValue($bo_pg_search.txt_searchText,$value);
-				_click($bo_pg_search.btn_searchAgain);
+					_wait(5000,_isVisible($bo_pg_search.txt_searchText));
+					_setValue($bo_pg_search.txt_searchText,$value);
+					_click($bo_pg_search.btn_searchAgain);
 				if(_isVisible(_link($value))){
 					_click(_link($value));
 					_wait(5000, _isVisible($bo_pg_search.btn_delete));
