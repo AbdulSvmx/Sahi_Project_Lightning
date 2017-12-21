@@ -71,4 +71,14 @@ var $bo_act_salesforceSetUp = new function bo_act_$bo_act_salesforceSetUp() {
 	this.saveEditLayout = function(){
 		_click(_button(" x-btn-text[1]"));
 	};
+	
+	this.readNameSpace = function(){
+		$bo_act_navigation.navigateToSetUpAndSearch("Installed Packages");
+		if(_getText(_cell("SVMXC"))!="SVMXDEV")
+			var $nameSpace = "SVMXC";
+		else
+			var $nameSpace = "SVMXDEV";
+		return $nameSpace;
+	};
 };
+
