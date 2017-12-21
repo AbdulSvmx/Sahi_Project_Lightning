@@ -18,13 +18,14 @@ var $actnName2=$sfmName;
 var $executionMode2 = "Background";
 var $wizardStepType="Others";
 var $wizardStepName= $custActname;
-$bo_act_login.login($g_url, $bac_unBase, $bac_pwdBase);
 
-
+var $processType="SFM Transactions";
+var $processTypeD="SFM Wizards";
+var $processTypeC="SFM Custom Actions";
 //-----------------CREATE SFM----------------------------------------------
 //_includeOnce("../../../references/references.js");
 
-
+$bo_act_login.login($g_url, $bac_unBase, $bac_pwdBase);
 $bo_act_navigation.navigateToSfmTransactionDesigner();
 _wait(60000, _isVisible($bo_pg_sfmTransactionAndDesigner.btn_newSFM));
 $bo_act_SFM.renameClonesfm($sfmName);
@@ -44,52 +45,31 @@ $bo_act_customAction.createNewCustomAction($custActname,$custActID,$url,$objectN
 _setSpeed(3000);
 
 //---------------------CREATE WIZARD AND ADD CUSTOM ACTION AND SFM TO IT---------------------------
-if($bo_act_navigation.navigateToSfmWizard($objName2,$wizardname,$wizardID,$fieldActnType,$actnName2,$executionMode2,$sfmName)){
+	$bo_act_navigation.navigateToSfmWizard();
 	$bo_act_SFW.createWizardGeneralInfo($objName2,$wizardname,$wizardID);
 	$bo_act_SFW.createWizardStep($fieldActnType,$actnName2,$executionMode2);
 	$bo_act_SFW.addCustomActionToWizard($wizardStepType,$wizardStepName);
 	$bo_act_sfmVerifyWorkOrder.verifyWizardOnPMPObj($sfmName);
 	_log("SFm wizard visible");	
 	
-}else{
-	_fail("Navigation To SFM Wizard Failed");
-	_stopTestCase();
-};
 
-//----------------Navigate to SFm App Permission, Disable the wizard
-$bo_act_navigation.navigateToSfmAppPermission();
-$bo_act_sfmVerifyWorkOrder.verifyWizardOnPMPObj($sfmName);
-$bo_act_sfmVerifyWorkOrder.wizardButtonNotVisible($wizardname);
-$bo_act_sfmVerifyWorkOrder.verifyWizardOnPMPObj($sfmName);
-_log("SFM wizard is not visible");
 
-/*-----------------Navigate to SFM App Permission, Check the visibility of Wizard ON(checkbox for online should be checked). 
-and verify the wizard in delivery*/
+//*********Delete Created Wizard, SFM and CA************
+	$bo_act_SFW.deleteWizards($objectName,$wizardname);
+	$bo_act_customAction.deleteCustomAction($objectName,$custActname);
+	$bo_act_navigation.navigateToSfmTransactionDesigner();
+	_wait(60000, _isVisible($bo_pg_sfmTransactionAndDesigner.btn_newSFM));
+	$bo_act_SFM.deleteSFM($sfmName);
 
 $bo_act_navigation.navigateToSfmAppPermission();
-$bo_act_SFMAppPermission.genericSearchInAppPermission($processType,$objType,$searchText);
-$bo_pg_sfmAppPermissionD.chk_clickToCheck();
-_click($bo_pg_sfmAppPermissionD.btn_clickSaveAppPermission);
-_wait(3000);
-_click($bo_pg_sfmAppPermissionD.popUpOK)
-var $isvisible = _exists(_div("App Permissions saved successfully"));
-$callBack.returnResult($isvisible, true, "App Permission is not saved successfully");
-$bo_act_sfmVerifyWorkOrder.verifyWizardOnPMPObj($sfmName);
-_log("Wizard is visible");
+$bo_act_SFMAppPermission.genericSearchInAppPermission($processType,$objectName,$sfmName);
+_wait(2000);
+_log("SFM Not found");
+$bo_act_SFMAppPermission.genericSearchInAppPermission($processTypeD,$objectName,$wizardname);
+_log("Wizard Not Found");
+$bo_act_SFMAppPermission.genericSearchInAppPermission($processTypeC,$objectName,$custActname);
+_log("Custom Action Not Found");
 
-//----------------Navigate to SFM Wizard and delete the wizard and verify in delivery------------------------
-
-$bo_act_navigation.navigateToSfmWizard($objName2,$wizardname,$wizardID,$fieldActnType,$actnName2,$executionMode2,$sfmName);
-$bo_act_SFW.deleteWizard();
-
-if (_assertExists($bo_pg_sfmWizard.lbl_deleteSuccessfulMsg)){
-	_log("Wizard deleted successfully");
-}else{
-	_fail("deletion of Wizard unsuccessful");
-	_stopTestCase();
-}
-$bo_act_sfmVerifyWorkOrder.verifyWizardOnPMPObj($sfmName);
-_log("SFM Wizard is not visible");
 
 _setSpeed(100);
 

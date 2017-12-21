@@ -113,12 +113,15 @@ this.verifyWizardOnWOObj=function($sfmName){
 						_log("Wizard is visible")
 							
 					}else{
-						 _("Wizard is not visible")
+						 _log("Wizard is not visible")
 					}		
 					 _selectDomain();				
 				}			
 					
-
+					this.showAllTab=function($tabName){
+						_click($bo_pg_sfmVerifyWorkOrder.img_allTab);
+						_click(_link($tabName));
+					}
 	
 	};
 

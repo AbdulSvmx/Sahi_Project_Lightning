@@ -2,7 +2,7 @@
 
 var $RS_5425 = _testcase("RS_5425", "On adding new step for a SFW which is hidden");
 $RS_5425.start();
-
+_setSpeed(100);
 var $sfmName ="Capture Downtime";
 	var $wizardname=$bo_act_common.generateRandomName("5425SFW");
 	var	$wizardID=$wizardname;
@@ -48,10 +48,10 @@ var $sfmName ="Capture Downtime";
 //Again Launch the Wizard in Delivery, verify the visibility*****
 	$bo_act_sfmVerifyWorkOrder.verifyWizardOnWOObj($sfmName);
 	_wait(2000);
-	$bo_act_sfmVerifyWorkOrder.wizardButtonVerification($stndSFMName);
+	$bo_act_sfmVerifyWorkOrder.wizardButtonVerification($sfmName);
 //****Delete The Wizard Created*******
 	$bo_act_SFW.deleteWizards( $objName,$wizardID);
-
+	_setSpeed(100);
 	$RS_5425.end();
 	
 	
