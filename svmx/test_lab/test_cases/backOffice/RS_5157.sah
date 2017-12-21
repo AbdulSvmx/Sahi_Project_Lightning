@@ -60,7 +60,6 @@ _log("Scheduled SFM successful");
 var $ProcessName2= $bo_act_common.generateRandomName("sfm2");
 var $ProcessId2=$bo_act_common.generateRandomName("sfm2");
 
-//$bo_act_navigation.navigateToScheduledSFM();
 $bo_act_scheduledSFM.newProcessNameID($ProcessName2,$ProcessId2);
  $bo_act_scheduledSFM.selectSFMTransactionToSchedule($sfmName2);
  $bo_act_scheduledSFM.chooseTimeAndDateToRunTheProcess($scheduleTime,$d1,$d2,$d3,$d4,$d5,$d6,$d7);
@@ -82,7 +81,12 @@ else{
 if($status2 !="Completed"){
 	_log("The SFM initiated 1st was completed 1st");
 		}
-//$bo_act_SFM.deleteSFM($sfmName);
+$bo_act_navigation.navigateToScheduledSFM();
+$bo_act_scheduledSFM.deleteScheduledSFM($ProcessName1);
+$bo_act_scheduledSFM.deleteScheduledSFM($ProcessName2);
+$bo_act_SFM.deleteSFM($sfmName1);
+_wait(2000);
+$bo_act_SFM.deleteSFM($sfmName2);
 //$bo_act_customAction.deleteCustomAction($objName2,$wizardname);
 _setSpeed(100);
 

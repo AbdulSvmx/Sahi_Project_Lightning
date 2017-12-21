@@ -4,15 +4,15 @@
 var $RS_5427 = _testcase("RS_5427", "On deleting a SFW/SFM/CA and check SFM App Permission page for deleted process");
 $RS_5427.start();
 _setSpeed(100);
-var $sfmName = "SFM_Inter21";
-var $custActname="Cutom Action1";
-var $custActID="CustomAction_1";
+var $sfmName = $bo_act_common.generateRandomName("5427SFM");
+var $custActname=$bo_act_common.generateRandomName("CA5427");
+var $custActID=$custActname;
 var $url="https://www.google.co.in/";
-var $objectName="Preventive Maintenance Plan"
+var $objectName="Preventive Maintenance Plan";
 var $actnType="URL";
 var $objName2="Preventive Maintenance Plan";
-var $wizardname="TestWizard701";
-var $wizardID="TestWizard701";
+var $wizardname=$bo_act_common.generateRandomName("SFW5427");
+var $wizardID=$wizardname;
 var $fieldActnType="SFM";
 var $actnName2=$sfmName;
 var $executionMode2 = "Background";

@@ -12,6 +12,9 @@ var $bo_pg_salesForceSetUP = new function bo_pg_salesForceSetUP(){
 		this.lnk_apexJobs=_link("Apex Jobs");
 		this.lbl_status2=_cell(" dataCell  [1]");
 		this.lbl_status1=_cell(" dataCell  [9]");
+		this.lnk_createNewView=_link("Create New View");
+		
+
 		
 this.txt_apexClasscode = _textarea("textarea");
 	this.btn_quickSave = _button("Quick Save");
