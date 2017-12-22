@@ -20,7 +20,7 @@ var $bo_act_servicePricebooks = new function bo_act_servicePricebooks() {
 		  _click($bo_pg_servicePricebooks.btn_laborLine);
 		  _click($bo_pg_servicePricebooks.btn_deleteFirstLaborLine);
 		  _click($bo_pg_servicePricebooks.btn_saveServicePricebookDelivery);
-		  _wait(3000, _isVisible(_heading2("Service Pricebook Detail")));
+		  _wait(3000, _isVisible($bo_pg_servicePricebooks.btn_editServicePriceBook));
 		  _click($bo_pg_servicePricebooks.btn_editServicePriceBook);
 		  _click($bo_pg_servicePricebooks.chk_activateServicePriceBook);
 		  _click($bo_pg_servicePricebooks.btn_saveServicePricebookEntry);
@@ -47,7 +47,7 @@ var $bo_act_servicePricebooks = new function bo_act_servicePricebooks() {
 		 _setStrictVisibilityCheck(true);
 		 $bo_pg_servicePricebooks.clickOnServicePriceBook($PriceBookName);
 		 _setStrictVisibilityCheck();
-	     _wait(15000, _isVisible($bo_pg_servicePricebooks.txt_standardServicePriceBook));
+	     _wait(15000, _isVisible($bo_pg_servicePricebooks.btn_newServicePricebookEntry));
 	     _click($bo_pg_servicePricebooks.btn_newServicePricebookEntry);
 	     _setSelected($bo_pg_servicePricebooks.sel_unit, $unit);
 	     _setValue($bo_pg_servicePricebooks.txt_activityID, $activityID);
