@@ -44,7 +44,7 @@ var $bo_act_SFW = new function bo_act_SFW() {
 		_wait(3000);
 		_wait(2000);
 		_click($bo_pg_sfmWizard.btn_saveWizardStep);
-			_wait(60000);		
+			_wait(6000);		
 		};
 			this.selWizardStatusAsInactive=function($wizardStatus){
 				_setSelected($bo_pg_sfmWizard.sel_wizardStatus,$wizardStatus);
@@ -62,7 +62,7 @@ var $bo_act_SFW = new function bo_act_SFW() {
 	};	
 	this.editWizardSteps=function($newSfmName){
 		_click(_link("Edit"));
-		_wait(30000);
+		_wait(3000);
 		_selectWindow("/SFM Transaction Designer/");
 		_setValue($bo_pg_sfmTransactionAndDesigner.txt_name, "");
 		_setValue($bo_pg_sfmTransactionAndDesigner.txt_name,$newSfmName);
