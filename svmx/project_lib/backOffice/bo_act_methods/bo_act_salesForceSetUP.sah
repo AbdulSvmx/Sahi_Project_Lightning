@@ -37,4 +37,48 @@ var $bo_act_salesforceSetUp = new function bo_act_$bo_act_salesforceSetUp() {
 		var $userName = _getText($bo_pg_salesForceSetUP.txt_Name);
 		return $userName;
 	};
+	
+
+	this.createTabs = function($object,$color){
+		_click(_button(" New "));
+		_setSelected(_select(0,_rightOf(_label("/Object/"))),$object);
+		_click(_image("Lookup (New Window)"));
+		_popup("p2MotifPickerWindow")._click(_link(5));
+		$color= $color+1;
+		_selectWindow();
+		_click(_submit(" Next "));
+		_click(_submit(" Next "));
+		_click(_submit(" Save "));
+		_assertExists(_link(_link("/Activity Products/")));
+	};
+
+//Drag and Drop
+	this.dragAndDropSection = function($sectionName,$NoOfColumn){
+		_click(_link("Edit Layout"));
+		_dragDrop(_div("Section"),_span("/section-header/"));
+		_setValue(_textbox("sectionName"),$sectionName);
+		if($NoOfColumn == 1)
+		_click(_radio("column_1"));
+		_click(_cell("OK"));
+	};
+	this.dragAndDropVisualForcePage = function($object,$sectionName){
+		_click(_div("Visualforce Pages[1]"));
+		_dragDrop($object,_span($sectionName));
+	};
+		this.dragAndDropFields = function($object,$sectionName){
+			_dragDrop($object,_span($sectionName));
+		};
+	this.saveEditLayout = function(){
+		_click(_button(" x-btn-text[1]"));
+	};
+	
+	this.readNameSpace = function(){
+		$bo_act_navigation.navigateToSetUpAndSearch("Installed Packages");
+		if(_getText(_cell("SVMXC"))!="SVMXDEV")
+			var $nameSpace = "SVMXC";
+		else
+			var $nameSpace = "SVMXDEV";
+		return $nameSpace;
+	};
 };
+

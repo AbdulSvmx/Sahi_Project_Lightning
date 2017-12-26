@@ -54,11 +54,11 @@ _assertExists($bo_pg_workOrders.link_SLAClockStart);
 $bo_act_workOrders.editWorkOrder($WONumber);
 $bo_act_workOrders.clickLinktoUpdateTextfields($bo_pg_workOrders.txt_actualResolutionOnEditWO);
 $bo_act_workOrders.saveWorkOrder();
-_assertNotEqual(_getText($bo_pg_workOrders.txt_TimeToResolve)," ", "issue in Time to restore");
+_assertNotEqual(_getText($bo_pg_workOrders.txt_TimeToResolve),"", "issue in Time to Resolve");
 
 //Clean up function
 
-var $datacreated = [$accName,$proName,$IBName,$contactName,$WONumber,$slaterm,$caseNumber];
+var $datacreated = [$proName,$IBName,$contactName,$WONumber,$slaterm,$caseNumber,$accName];
 for (var i = 0; i < $datacreated.length; i++) {
 	$bo_act_common.cleanUpfunction($datacreated[i]);
 }

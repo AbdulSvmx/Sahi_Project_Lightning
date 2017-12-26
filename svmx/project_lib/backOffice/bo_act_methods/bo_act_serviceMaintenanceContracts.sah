@@ -6,7 +6,6 @@ var $bo_act_serviceMaintenanceContracts = new function bo_act_serviceMaintenance
 	/**
 	 * Create an Account
 	 * 
-	 * @param $accountName
 	 */
 	this.createServiceMaintenanceContract = function($accName, $slaTermName, $futureYear, $pastYear) {
 		var $sconName = $bo_act_common.generateRandomName("Scon");
@@ -22,6 +21,17 @@ var $bo_act_serviceMaintenanceContracts = new function bo_act_serviceMaintenance
 		_assertNotVisible(_div("/Error: Invalid Data/"));
 		_wait(30000, _isVisible(_heading2($sconName)));
 		return $sconName;
+};
+
+this.editServiceMaintenanceContract = function($sconName, $zone) {
+	$bo_act_navigation.navigateToServiceMaintenanceContractPage();
+	_click(_link($sconName));
+	_click($bo_pg_serviceMaintenanceContracts.btn_edit);
+	_setSelected($bo_pg_serviceMaintenanceContracts.sel_ZoneName,$zone);
+	_click($bo_pg_serviceMaintenanceContracts.btn_save);
+	_assertNotVisible(_div("/Error: Invalid Data/"));
+	_wait(30000, _isVisible(_heading2($sconName)));
+	return $sconName;
 };
 	 
 	this.AddCoveredProductToSCON =  function($sconName,$installedProduct){
@@ -261,6 +271,105 @@ this.addExpensePricingToServiceContract = function($sconName, $expenseType, $exp
 	_wait(30000, _isVisible($sconName));
 };
 
+//Add Single Travel Policy to Service Contract
+this.addTravelPolicyToServiceContract = function($sconName,$defaultTravelPrice,$defaultTravelUnit,$travelRoundingType, $travelPolicyUnit, $travelPolicyRate, $serviceType){
+	$bo_act_navigation.navigateToServiceMaintenanceContractPage();
+	_click(_link($sconName));
+	_selectDomain("/svmx/");
+	_click($bo_pg_serviceMaintenanceContracts.btn_sfmTravelPolicy);
+	_selectDomain();
+	_wait(30000, _isVisible(_link("/Edit Service Contract Travel Policy/")));
+	_setValue($bo_pg_serviceMaintenanceContracts.txt_defaultTravelPrice, $defaultTravelPrice);
+	_setValue($bo_pg_serviceMaintenanceContracts.txt_defaultTravelUnit, $defaultTravelUnit);
+	_setValue($bo_pg_serviceMaintenanceContracts.txt_travelRoundingType, $travelRoundingType);
+	_click($bo_pg_serviceMaintenanceContracts.btn_travelPolicyTab);
+	_setStrictVisibilityCheck(true);
+	_click($bo_pg_serviceMaintenanceContracts.btn_addLaborPricingLine);
+	_click($bo_pg_serviceMaintenanceContracts.btn_editLaborPricingRow);
+	_wait(2000);
+	_setValue($bo_pg_serviceMaintenanceContracts.txt_travelPolicyUnit, $travelPolicyUnit);
+	_setValue($bo_pg_serviceMaintenanceContracts.txt_partsRates, $travelPolicyRate);
+	 $bo_act_common.searchfunction($serviceType);	//Search Values like Service Types Name
+	_click($bo_pg_serviceMaintenanceContracts.btn_updateLaborPricing);
+	_setStrictVisibilityCheck();
+	_click($bo_pg_serviceMaintenanceContracts.btn_saveLaborPricing);
+	_wait(30000, _isVisible($sconName));
+};
+
+//Edit Single Travel Policy to Service Contract
+this.editTravelPolicyToSCONForSecondLine = function($sconName, $travelPolicyUnit, $travelPolicyRate, $serviceType, $currencyType){
+	$bo_act_navigation.navigateToServiceMaintenanceContractPage();
+	_click(_link($sconName));
+	_selectDomain("/svmx/");
+	_click($bo_pg_serviceMaintenanceContracts.btn_sfmTravelPolicy);
+	_selectDomain();
+	_wait(30000, _isVisible(_link("/Edit Service Contract Travel Policy/")));
+	_click($bo_pg_serviceMaintenanceContracts.btn_travelPolicyTab);
+	_setStrictVisibilityCheck(true);
+	_click($bo_pg_serviceMaintenanceContracts.btn_addLaborPricingLine);
+	_click($bo_pg_serviceMaintenanceContracts.btn_editSecondLaborPricingRow);
+	_wait(2000);
+	_setValue($bo_pg_serviceMaintenanceContracts.txt_travelPolicyUnit, $travelPolicyUnit);
+	_setValue($bo_pg_serviceMaintenanceContracts.txt_partsRates, $travelPolicyRate);
+	_setValue($bo_pg_serviceMaintenanceContracts.txt_currencyISOCode, $currencyType);
+	 $bo_act_common.searchfunction($serviceType);	//Search Values like Service Types Name
+	_click($bo_pg_serviceMaintenanceContracts.btn_updateLaborPricing);
+	_setStrictVisibilityCheck();
+	_click($bo_pg_serviceMaintenanceContracts.btn_saveLaborPricing);
+	_wait(30000, _isVisible($sconName));
+};
+
+//Add Single Travel Policy with Mileage Tier to Service Contract
+this.addTravelPolicyWithMileageTierToServiceContract = function($sconName,$travelRoundingType,$defaultTravelPrice,$defaultTravelUnit,$TierName,$Minimum,$Maximum,$MileageUnit,$MileageRate){
+	$bo_act_navigation.navigateToServiceMaintenanceContractPage();
+	_click(_link($sconName));
+	_selectDomain("/svmx/");
+	_click($bo_pg_serviceMaintenanceContracts.btn_sfmTravelPolicy);
+	_selectDomain();
+	_wait(30000, _isVisible(_link("/Edit Service Contract Travel Policy/")));
+	_setValue($bo_pg_serviceMaintenanceContracts.txt_travelRoundingType, $travelRoundingType);
+	_setValue($bo_pg_serviceMaintenanceContracts.txt_defaultTravelPrice, $defaultTravelPrice);
+	_setValue($bo_pg_serviceMaintenanceContracts.txt_defaultTravelUnit, $defaultTravelUnit);
+	_click($bo_pg_serviceMaintenanceContracts.btn_travelPolicyMileageTierTab);
+	_setStrictVisibilityCheck(true);
+	_click($bo_pg_serviceMaintenanceContracts.btn_addLaborPricingLine);
+	_click($bo_pg_serviceMaintenanceContracts.btn_editLaborPricingRow);
+	_wait(2000);
+	_setValue($bo_pg_serviceMaintenanceContracts.txt_travelPolicyTierName, $TierName);
+	_setValue($bo_pg_serviceMaintenanceContracts.txt_travelPolicyMinimum, $Minimum);
+	_setValue($bo_pg_serviceMaintenanceContracts.txt_travelPolicyMaximum, $Maximum);
+	_setValue($bo_pg_serviceMaintenanceContracts.txt_travelPolicyUnit, $MileageUnit);
+	_setValue($bo_pg_serviceMaintenanceContracts.txt_partsRates, $MileageRate);
+	_click($bo_pg_serviceMaintenanceContracts.btn_updateLaborPricing);
+	_setStrictVisibilityCheck();
+	_click($bo_pg_serviceMaintenanceContracts.btn_saveLaborPricing);
+	_wait(30000, _isVisible($sconName));
+};
+
+//Add Single Travel Policy with Zone Pricing to Service Contract
+this.addTravelPolicyWithZonePricingToServiceContract = function($sconName,$travelRoundingType,$defaultTravelPrice,$defaultTravelUnit,$zoneName,$zoneRate){
+	$bo_act_navigation.navigateToServiceMaintenanceContractPage();
+	_click(_link($sconName));
+	_selectDomain("/svmx/");
+	_click($bo_pg_serviceMaintenanceContracts.btn_sfmTravelPolicy);
+	_selectDomain();
+	_wait(30000, _isVisible(_link("/Edit Service Contract Travel Policy/")));
+	_setValue($bo_pg_serviceMaintenanceContracts.txt_travelRoundingType, $travelRoundingType);
+	_setValue($bo_pg_serviceMaintenanceContracts.txt_defaultTravelPrice, $defaultTravelPrice);
+	_setValue($bo_pg_serviceMaintenanceContracts.txt_defaultTravelUnit, $defaultTravelUnit);
+	_click($bo_pg_serviceMaintenanceContracts.btn_travelPolicyZonePricingTab);
+	_setStrictVisibilityCheck(true);
+	_click($bo_pg_serviceMaintenanceContracts.btn_addLaborPricingLine);
+	_click($bo_pg_serviceMaintenanceContracts.btn_editLaborPricingRow);
+	_wait(2000);
+	_setValue($bo_pg_serviceMaintenanceContracts.txt_travelPolicyZone, $zoneName);
+	_setValue($bo_pg_serviceMaintenanceContracts.txt_partsRates, $zoneRate);
+	_click($bo_pg_serviceMaintenanceContracts.btn_updateLaborPricing);
+	_setStrictVisibilityCheck();
+	_click($bo_pg_serviceMaintenanceContracts.btn_saveLaborPricing);
+	_wait(30000, _isVisible($sconName));
+};
+
 this.searchActivityProduct = function($searchValue){
 	_getRecentWindow();
 	_setStrictVisibilityCheck(true);
@@ -277,5 +386,3 @@ this.searchActivityProduct = function($searchValue){
 
 	};
 };
-
-

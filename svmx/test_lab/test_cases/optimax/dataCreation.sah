@@ -22,6 +22,8 @@ for(var $i=0;$i<$businessHour_xls.length;$i++)
 	_log("$name_BH = "+$name_BH);
 }
 
+_log("$exp_xls.length : " + $exp_xls.length);
+
 $bo_act_login.login($g_url, $g_un, $g_pwd);
 
 //var $rowIndex = 1;
@@ -166,12 +168,44 @@ if($BH_creation != null){
 				}
 			}
 		}
-		else {
+		else 
+		{
 			_logExceptionAsFailure("Tech is not created as expected");
 		}
 	}
 }
 
+_set($delAppt, _fetch(deleteAppt()));
+_log($delAppt);
+
+_set($ApptType, _fetch(createApptType($appt_type)));
+_log($ApptType);
+
+if($ApptType != null)
+{
+	$excel.insertUnderColumn("../optimax/op_excleData/automation.xlsx", "AppointmentType", "Appointment Type Id", $ApptType,1);
+	$excel.insertUnderColumn("../optimax/op_excleData/automation.xlsx", "TestAppts", "Appointment Type", $ApptType,1);
+
+	_set($TimeWindow, _fetch(createWindow($appt_window)));
+	_log($TimeWindow);
+	_log("$TimeWindow.length = "+$TimeWindow.length);
+	if($TimeWindow.length != null && $TimeWindow != false && $TimeWindow != null)
+	{
+	_log("$TimeWindow[i] = "+$TimeWindow.length);
+	_log("$TimeWindow[i] = "+$TimeWindow);
+	//updating id in window excel
+	for(var $i = 0; $i < $TimeWindow.length; $i++)
+	{
+		_log("$TimeWindow[i] = "+$TimeWindow[$i]);
+		$excel.insertUnderColumn("../optimax/op_excleData/automation.xlsx", "AppointmentWindow", "Id", $TimeWindow[$i],(1+$i));
+	}
+	var $appt_window = $excel.readFromCustomExcel("../optimax/op_excleData/automation.xlsx", "AppointmentWindow","","");
+	var $appt_type = $excel.readFromCustomExcel("../optimax/op_excleData/automation.xlsx", "AppointmentType","","");
+
+	_set($ApptDef, _fetch(createApptDef($appt_window , $appt_type)));
+	_log($ApptDef);
+	}
+}
 
 //$excel.writeToExcel("insertAtIndex", "../optimax/op_excleData/automation.xlsx", "BusinessHours", $BH_creation, $rowIndex);
 
@@ -498,6 +532,118 @@ function createPrfRes($rec_Pref_xls){
 		_log("pfrRes ids ="+prfResId);
 		//return prfResId;
 	}
-	return $isSuccess;
+	return prfResId;
+}
+
+function createWindow($appt_window)
+{
+	var createWindow = [];
+	var WindowId = [];
+	
+	var result = _call(sforce.connection.query("SELECT Id,Name FROM RecordType WHERE Name = 'Time Window'"));
+	var Id_result= result.getArray("records");
+	_log("Id_result = "+Id_result);
+	_log("Id = "+Id_result[0].Id);
+	
+	//creating appointment window
+	
+	for(var $i = 0;$i<$appt_window.length;$i++)
+	{
+		var window = new sforce.SObject("SVMXC__SM_Appointment_Window__c");
+		window.Name = $appt_window[$i][0];
+		window.RecordTypeId = Id_result[0].Id;
+		window.SVMXC__SM_Time_Window_Name__c = $appt_window[$i][0];
+		window.SVMXC__SM_Window_Start_Time__c	= $appt_window[$i][1];
+		window.SVMXC__SM_Window_End_Time__c	= $appt_window[$i][2];
+		createWindow.push(window);
+	}	
+		
+	var $result = _call(sforce.connection.create(createWindow));
+	_log("$result length = "+$result.length);
+	
+	if($result != 0 && $result != null)
+	{
+		$isSuccess = true
+		for(var $x=0;$x<$result.length;$x++)
+		{
+			if($result[$x].id === null)
+			{
+				$isSuccess = false;
+				return $isSuccess;
+			}
+			WindowId.push($result[$x].id);
+			_log("Id.push = "+WindowId);
+		}
+		_log("WindowId = "+WindowId);
+		//return WindowId;
+	}
+	return WindowId;
+}
+
+function createApptDef($appt_window , $appt_type)
+{
+	var createDef = [];
+	var result = _call(sforce.connection.query("SELECT Id,Name FROM RecordType WHERE Name = 'Appointment Type Definition'"));
+	var Id_result= result.getArray("records");
+	_log("Id_result = "+Id_result);
+	_log("Id = "+Id_result[0].Id);
+	
+	for(var $i = 0;$i<$appt_window.length;$i++)
+	{
+	var window = new sforce.SObject("SVMXC__SM_Appointment_Window__c");
+	window.Name = $appt_type[0][0]+'-'+$appt_window[$i][0];
+	window.RecordTypeId = Id_result[0].Id;
+	window.SVMXC__SM_Appointment_Type__c = $appt_type[0][1];
+	window.SVMXC__SM_Time_Window__c	= $appt_window[$i][3];
+	createDef.push(window);
+	}
+	
+	var $result = _call(sforce.connection.create(createDef));
+	_log("$result length = "+$result.length);
+	_log("$result : "+$result);
+
+if($result.length != null){
+	return $result.length;
+}
+return false;
+}
+
+function createApptType($appt_type)
+{
+	var $Id_result = _call(sforce.connection.query("SELECT Id,Name FROM RecordType WHERE Name = 'Time Window'"));
+	_log("Id_result = "+$Id_result)
+		var type = new sforce.SObject("SVMXC__SM_Appointment_Window__c");
+		type.SVMXC__SM_Appointment_Type_Name__c = $appt_type[0][0];
+		type.Name = $appt_type[0][0];
+		
+		var result = sforce.connection.create([type]);
+		_log("result = "+result);
+	if(result[0].id != null){
+		return result[0].id;
+	}
+	return false;
+}
+
+function deleteAppt()
+{
+	var delete_Appt =[];
+	//deleting the existing team
+	var svmx_Job_result = _call(sforce.connection.query("SELECT Id,Name FROM SVMXC__SM_Appointment_Window__c WHERE Name LIKE '%Auto%'"));
+	_log("svmx_Job_result : " + svmx_Job_result);
+	var del_Appts = svmx_Job_result.getArray("records");
+	_log("del_Appts.length = "+del_Appts.length);
+	if(del_Appts.length > 0){
+		for(var $x=0;$x<del_Appts.length;$x++){
+			var appt = del_Appts[$x];
+			delete_Appt.push(appt.Id);
+		}
+		var delResult = sforce.connection.deleteIds(delete_Appt);
+		if(delResult.length < 0){
+			_log(delResult.length +" Appointments are deleted");
+		}
+	}
+	else{
+		_log("No Appointments to delete");
+	}
 }
 //</browser>

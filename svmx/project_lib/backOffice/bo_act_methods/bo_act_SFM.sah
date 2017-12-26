@@ -120,7 +120,7 @@ var $bo_act_SFM = new function bo_act_SFM() {
 		_click($bo_pg_sfmTransactionAndDesigner.btn_quickSave);
 		_click($bo_pg_sfmTransactionAndDesigner.btn_finalQuickSave);	
 			
-		};
+		}
 		this.createIncompleteSFM=function($sfmName){
 		_click(_f("main").s_checkbox("chk[1]"));
 		_click($bo_pg_sfmTransactionAndDesigner.btn_clone);	
@@ -154,11 +154,12 @@ var $bo_act_SFM = new function bo_act_SFM() {
 		_wait(6000,_isVisible($bo_pg_sfmTransactionAndDesigner.btn_finalQuickSave));
 		_click($bo_pg_sfmTransactionAndDesigner.btn_finalQuickSave);
 		
-	};
+		
+	}
 		this.clnStandardSFM=function($sfmToBeCloned,$sfmName,$sfmTemplateSaveAsName){
 			_click($bo_pg_sfmTransactionAndDesigner.txt_standardSfmTransactionQuickFind);
 			_setValue($bo_pg_sfmTransactionAndDesigner.txt_standardSfmTransactionQuickFind,$sfmToBeCloned);
-			_click(_f("main").s_checkbox("chk").leftOf(_f("main").s_label($sfmToBeCloned), 10, 10));
+			_click(_f("main").s_checkbox("chk").leftOf(_f("main").s_label($sfmToBeCloned), 10, 10))
 			_click($bo_pg_sfmTransactionAndDesigner.btn_clone);	
 			_wait(60000, _isVisible($bo_pg_sfmTransactionAndDesigner.txt_name));
 			_setValue($bo_pg_sfmTransactionAndDesigner.txt_name, $sfmName);
@@ -171,7 +172,10 @@ var $bo_act_SFM = new function bo_act_SFM() {
 			_setValue($bo_pg_sfmTransactionAndDesigner.txt_sfmSavePageLayoutAsId, $sfmTemplateSaveAsName);
 			_wait(3000);
 			_click($bo_pg_sfmTransactionAndDesigner.btn_pageLayoutSave);
-
+			_wait(2000);
+			_click($bo_pg_sfmTransactionAndDesigner.btn_saveAndclose);
+			_wait(2000);
+/*
 		if (_exists($bo_pg_sfmTransactionAndDesigner.alert_sfm)) {
 			_focusWindow();
 			_takeScreenShot();
@@ -184,12 +188,24 @@ var $bo_act_SFM = new function bo_act_SFM() {
 			_click($bo_pg_sfmTransactionAndDesigner.btn_saveAndclose);
 			$result = true;
 		}
-	}
+	*/		
+		_setSpeed(100);	
+		}
 		
 		this.deleteSFM=function($sfmName){
 			_click($bo_pg_sfmTransactionAndDesigner.btn_yourCustomSfmTransactions);
+			_setValue(_f("main").s_textinput("searchText[3]"),$sfmName);
+			if (_isVisible(_f("main").s_checkbox("/Chk/").leftOf(_f("main").s_label($sfmName), 10, 10))) {
+			_wait(3000);
+			_click(_f("main").s_checkbox("/Chk/").leftOf(_f("main").s_label($sfmName), 10, 10));
+
+		} else if (_isVisible(_f("main").s_checkbox(2).leftOf(_f("main").s_label($sfmName), 10, 10))) {
+			_wait(3000);
 			_click(_f("main").s_checkbox(2).leftOf(_f("main").s_label($sfmName), 10, 10));
-			_click(_f("main").s_checkbox("chk").leftOf(_f("main").s_label($sfmName), 10, 10))
+
+		} else {
+			_click(_f("main").s_checkbox("/CheckBox/").leftOf(_f("main").s_label($sfmName), 10, 10));
+		} 
 			_takePageScreenShot();
 			_click($bo_pg_sfmTransactionAndDesigner.btn_clickDeleteButton);
 			_wait(1000)

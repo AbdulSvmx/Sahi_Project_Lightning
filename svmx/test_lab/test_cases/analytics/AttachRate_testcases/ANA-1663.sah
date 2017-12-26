@@ -79,7 +79,7 @@ _wait(5000);
 //$an_act_AttachRate.attachrate_installed_IB("ATTACH RATE 1");
 $an_act_AttachRate.ScheduleNotifications("meghana.rao@servicemax.com");
 
-var $ana_1663_ib1_id = null ;
+var $ana_1663_ib1_id ;
 var $ana_1663_scon1_id ;
 var $ana_1663_covered_product;
 

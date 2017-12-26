@@ -1,4 +1,12 @@
 var $sfm_act_expressions = new function sfm_act_expressions() {
+	this.navigateToExpression = function(){
+		$bo_act_navigation.navigateToSvmxSetup();
+		_click($bo_pg_servicemaxSetup.btn_serviceFlowManager);
+		_click($sfm_pg_expressions.tab_expression);
+		_setSpeed(3000);
+//		_wait(5000,_isVisible($sfm_pg_expressions.lbl_ConfigureExprsns));
+	};
+	
 	this.newCustomAction = function($object){
 		_setSelected($sfm_pg_expressions.sel_object,$object);
 		_click($sfm_pg_expressions.btn_new);
@@ -8,19 +16,20 @@ var $sfm_act_expressions = new function sfm_act_expressions() {
 		for(var $i=0;$i<$clicks;$i++){
 			_click($sfm_pg_expressions.btn_plus);
 		}
+//		_setValue(_f("SFMExpressionBuilderSWF").s_textinput("textInput[2]"), "Account");
 		_setSelected($sfm_pg_expressions.sel_comboField,"Account");
 		_setSelected($sfm_pg_expressions.sel_comboConditions, "Contains");
 		_setValue($sfm_pg_expressions.txt_input,"Online");
 
 	var $rows = $clicks + 2;
 	for(var $j=1;$j<$rows;$j++){
-		if($field=="Order Status"){
-		_setSelected(_f("SFMExpressionBuilderSWF").s_combobox("fieldCombo[1]"),$field);
+		if($field[$j]=="Order Status"){
+		_setSelected(_f("SFMExpressionBuilderSWF").s_combobox("fieldCombo[1]"),$field[$j]);
 		_setSelected(_f("SFMExpressionBuilderSWF").s_dropdownlist("conditionsCombo[1]"), "Not Equal");
 		_setSelected(_f("SFMExpressionBuilderSWF").s_combobox("valuesCombo"), "Canceled");
 		}
 		else{
-		_setSelected(_f("SFMExpressionBuilderSWF").s_combobox("fieldCombo[2]"),$field);
+		_setSelected(_f("SFMExpressionBuilderSWF").s_combobox("fieldCombo[2]"),$field[$j]);
 		_setSelected(_f("SFMExpressionBuilderSWF").s_dropdownlist("conditionsCombo[2]"), "Not Equal");
 		_click(_f("SFMExpressionBuilderSWF").s_togglebutton("I want to choose a field from the list[2]"));
 		_setSelected(_f("SFMExpressionBuilderSWF").s_combobox("valuesCombo[1]"), "Today");

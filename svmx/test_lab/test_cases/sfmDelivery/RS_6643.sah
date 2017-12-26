@@ -1,0 +1,100 @@
+//vanditha
+var $rs_6643 = _testcase("RS_6643","");
+$rs_6643.start();
+_setSpeed(300);
+var $questionTextArray = ["Enter the IB's location","Did you reach on time at site?","Are you aware of problem","Choose the condition of the product","Choose the state of the product","Enter the reading on IB if applicable","When was the product serviced last?","Please enter approx Date Time when issue occured"];
+var $answerTypeArray = ["Text","Checkbox", "Radio Button", "Picklist","Multi-select Picklist", "Number", "Date","DateTime"];
+var $checkboxRadioAnswerValueArray = ["Yes","No"];
+var $picklistAnswerValueArray = ["Good","Bad","Don't know"];
+var $helpURLArray=["http://neverssl.com/", "https://www.facebook.com/", "www.samsung.com/in/","www.googlee.com"];
+var $expectedWindowNames=["NeverSSL","Facebook","Samsung India | Mobile | TV | Home Appliances","Error 404 (Not Found)!!1"];
+var $expectedWindowURLs=["http://neverssl.com/","https://www.facebook.com/", "http://samsung.co.in","http://www.googlee.com/"];
+var $checklistProcessName=$bo_act_common.generateRandomName("Checklist");
+var $wizardName = "Checklist Delivery Auto12234";
+var $wizardType = "Checklist";
+var $wizardObject="Work Order";
+
+
+//http://www.samsung.com/in/: NEW WINDOW TITLE WITH ONLY WWW.
+//WINDOW TITLE: "Samsung India | Mobile | TV | Home Appliances")
+
+//_log("New WIndow Title is " + "Error 404 (Not Found)!!1")
+//_log("New WIndow URL is " + "http://www.googlee.com/")
+//New WIndow Title is NeverSSL - helping you get online 
+
+ 
+$bo_act_login.login($g_url,$sfmUsn,$sfmPwd);
+$sfm_act_navigation.navigateToChecklistQuestionLibrary();
+$sfm_act_checklistQuestionLibrary.deleteQuestions($questionTextArray);
+$sfm_act_checklistQuestionLibrary.createAllResponseTypeofQuestions($questionTextArray,$answerTypeArray,$picklistAnswerValueArray,$checkboxRadioAnswerValueArray,$helpURLArray);
+$sfm_act_checklistTransaction.createChecklistProcess($checklistProcessName,$questionTextArray);
+
+
+_click(_f("main").tab("Form Designer"));
+ 
+	for(var $i=0; $i<$questionTextArray.length; $i++) {
+
+	_setValue(_f("main").s_textinput("searchText[2]"), $questionTextArray[$i]);
+	_wait(4000);
+	_setStrictVisibilityCheck(true);
+
+	_click(_f("main").s_label("/"+$questionTextArray[$i]+"/"));
+	_log("/"+$questionTextArray[$i]+"/");
+
+	_wait(3000);
+	 _click(_f("main").s_button("add").near(_f("main").s_label("/"+$questionTextArray[$i]+"/")));
+
+	_setStrictVisibilityCheck(false);
+	_wait(3000);
+	_setValue(_f("main").s_textinput("searchText[2]"), "");
+	_wait(6000);
+}
+ 
+
+_click(_f("main").s_button("closeButton"));
+_click(_f("main").s_button("Quick Save"));
+
+ 
+$sfm_act_wizards.addChecklistProcessToWizard($wizardObject, $wizardName, $wizardType);
+_wait(30000,_isVisible($sfm_pg_sfmDesigner.lnk_home)); 
+_click($sfm_pg_sfmDesigner.lnk_home);
+
+//Create WO    
+var $accountName = $bo_act_accounts.createAccount();
+var $contactName = $bo_act_contacts.createContact($accountName);
+var $caseNumber = $bo_act_Cases.createCase("New", "High", "Email");
+var $productName = $bo_act_products.createProduct();
+var $IBName = $bo_act_installedProduct.createInstalledProduct($productName, $accountName, $contactName);
+var $woName=$bo_act_workOrders.createWorkOrder($caseNumber, $accountName, $contactName, $IBName, "Open", "High", "Field Service");
+_wait(3000);
+_log($woName);
+ 
+_click(_link($woName));
+var $domainName = "svmxdev.cs52.visual.force.com";
+_selectDomain($domainName);
+_click(_button("Default title for Checklist"));
+_selectDomain();
+_wait(20000,_isVisible(_div("Checklists")));
+ _click(_label("checklist1"));
+_wait(20000,_isVisible(_label("Checklist Section Title")));
+
+_click(_span("svmx-btn-icon svmx-sfmd-chklst-helpurl-icon[1]"));
+_wait(4000);
+var $recentWindow = _getRecentWindow();
+_log("New WIndow Title is "+$recentWindow.windowTitle);
+_log("New WIndow URL is "+ $recentWindow.windowURL);
+ 
+_click(_span("svmx-btn-icon svmx-sfmd-chklst-helpurl-icon[1]"));
+
+var $recentWindow = _getRecentWindow();
+_log("New WIndow Title is "+$recentWindow.windowTitle);
+_log("New WIndow URL is "+ $recentWindow.windowURL);
+
+
+
+//_click(_span("svmx-btn-icon svmx-sfmd-chklst-helpurl-icon[2]"));
+//_span("button-1330-btnIconEl");
+//_click(_span("/svmx-btn-icon svmx-sfmd-chklst-helpurl-icon/",_rightOf(_textbox("Text Question with http://www.google.com:"))));
+
+$rs_6643.end();
+ 

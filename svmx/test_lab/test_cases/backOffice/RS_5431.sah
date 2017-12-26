@@ -7,12 +7,15 @@ var $RS_5431 = _testcase("RS_5431", "Verify SFM App Permission page when an obje
 $RS_5431.start();
 _setSpeed(100);
 $bo_act_login.login($g_url, $bac_unBase, $bac_pwdBase);
+
+//***********Create Custom Object which does not have any Wizard,SFM or CA*********
  $bo_act_createCustomObject.createNewcustomObj();
 _log("Custom Ovject creation is successfull");
-
+//**************Navigate to SFM Permission, Verify Search for the custom action created********
 $bo_act_navigation.navigateToSfmAppPermission();
 $bo_act_SFMAppPermission.srchCutomObject();
 
+//**********Delete Custom Object***********
  $bo_act_createCustomObject.deleteCustomObj();
 _setSpeed(100);
 
