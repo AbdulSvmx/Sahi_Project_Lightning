@@ -89,15 +89,6 @@ var $rate = 517.000;
 var $rateType = "Fixed";
 $bo_act_serviceMaintenanceContracts.addPricingRulesTOServiceContract($sconName, $rateType, $rate, $serviceName);
 
-var $expecctedIBUnder_CoveredProduct =  _getText(_link(0,_under(_tableHeader("Installed Product"))));
-var $expecctedContactUnder_EntitledContacts =  _getText(_link(0,_under(_tableHeader("Contact"))));
-
-//validation
-//Validating the Covered Products Percent on Scon
-_assertEqual($expecctedIBUnder_CoveredProduct,$IBName,"Actual and expected covered Products are not same");
-
-//Validating the Entitled Contacts Percent on Scon
-_assertEqual($expecctedContactUnder_EntitledContacts,$contactName,"Actual and expected Entitled Contacts are not same");
 
 /**
 * Create Case record

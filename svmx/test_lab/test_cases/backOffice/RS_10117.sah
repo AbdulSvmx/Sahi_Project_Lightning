@@ -54,19 +54,7 @@ var $futureYear = 3;			// End Date 'TODAY's' Date + 3 YEARS
 $bo_act_serviceMaintenanceContracts.AddCoveredProducToServiceContract($sconName, $IBName, $slaName, $pastYear, $futureYear);
 
 //Add Entitled Contact to Service Contract 
-
 $bo_act_serviceMaintenanceContracts.addEntitledContactsToServiceContract($sconName, $contactName);
-
-//Validation on SCON
-var $expecctedIBUnder_CoveredProduct =  _getText(_link(0,_under(_tableHeader("Installed Product"))));
-var $expecctedContactUnder_EntitledContacts =  _getText(_link(0,_under(_tableHeader("Contact"))));
-
-//validation
-//Validating the Covered Products Percent on Scon
-_assertEqual($expecctedIBUnder_CoveredProduct,$IBName,"Actual and expected covered Products are not same");
-
-//Validating the Entitled Contacts Percent on Scon
-_assertEqual($expecctedContactUnder_EntitledContacts,$contactName,"Actual and expected Entitled Contacts are not same");
 
 
 //Add Mileage tier To Service Contract 
