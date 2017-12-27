@@ -72,6 +72,7 @@ var $bo_pg_serviceMaintenanceContracts = new function bo_pg_serviceMaintenanceCo
 	this.txt_regularRateLaborPricing = _textbox(0,_rightOf(_label("Regular Rate:",_near(_span("Update")))));
 	this.btn_updateLaborPricing = _span("Update");
 	this.btn_saveLaborPricing = _span("/sfmd-save-icon/");
+	this.btn_quickSaveLaborPricing = _span("/sfmd-quicksave-icon/");
 	
 	//Objects for Expense Pricing and Travel Policy  in Scon
 	this.btn_sfmExpensePricing = _button("Expense Pricing");

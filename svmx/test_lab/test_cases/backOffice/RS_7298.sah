@@ -129,16 +129,6 @@ var $expecctedIBUnder_CoveredProduct =  _getText(_link(0,_under(_tableHeader("In
 var $expecctedLocationUnder_CoveredLocations =  _getText(_link(0,_under(_tableHeader("Location"))));;
 var $expecctedContactUnder_EntitledContacts =  _getText(_link(0,_under(_tableHeader("Contact"))));;
 
-//validation
-//Validating the Covered Products Percent on Scon
-_assertEqual($expecctedIBUnder_CoveredProduct,$IBName,"Actual and expected covered Products are not same");
-
-//Validating the Covered Locations Percent on Scon
-_assertEqual($expecctedLocationUnder_CoveredLocations,$locationName,"Actual and expected covered Locations are not same");
-
-//Validating the Entitled Contacts Percent on Scon
-_assertEqual($expecctedContactUnder_EntitledContacts,$contactName,"Actual and expected Entitled Contacts are not same");
-
 /**
  * Create Auto Entitlement Rules for Work Order
  */

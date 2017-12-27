@@ -1,0 +1,18 @@
+/**
+ * Functions for the Accounts Object
+ */
+var $bo_act_salesforcePages = new function bo_act_salesforcePages() {
+
+	
+this.editObject = function(){
+		_click($bo_pg_salesforcePages.btn_edit);
+};
+
+this.selectOptionFromDropdown = function($object,$objectValue){
+	_setSelected($object,$objectValue);
+};
+
+this.saveObject = function(){
+	_click($bo_pg_salesforcePages.btn_save);
+};
+};

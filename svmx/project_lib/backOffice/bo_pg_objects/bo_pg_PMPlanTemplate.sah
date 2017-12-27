@@ -52,5 +52,6 @@ this.txt_adjUnit = _div("/svmx-trigger-index/",_under(_div("Adjustment Unit")));
 this.btn_customUISave = _span("Save");
 this.img_messagebox = _span("svmx-quick-msgbox-info");
 this.img_arrow = _div("/svmx-trigger-index/",_under(_div("Adjustment Type")));
+this.txt_conditionType = _textbox("conditionType");
 };
 
