@@ -12,6 +12,8 @@ var $bo_act_interactiveEntitlement_WO = new function bo_act_interactiveEntitleme
 		$bo_act_workOrders.checkEntitlement($WO_Number);
 		_wait(30000,_isVisible($bo_pg_interactiveEntitlement_CaseAndWO.btn_checkEntitlement));
 		_call(top.location.reload());	
+		_call(top.location.reload());
+
 		_click($bo_pg_interactiveEntitlement_CaseAndWO.btn_checkEntitlement);
 		_click($bo_pg_interactiveEntitlement_CaseAndWO.chk_IncidentNotCovered);
 		_click($bo_pg_interactiveEntitlement_CaseAndWO.btn_saveEntitlementPSLine);
@@ -27,6 +29,8 @@ var $bo_act_interactiveEntitlement_WO = new function bo_act_interactiveEntitleme
 		$bo_act_workOrders.checkEntitlement($WO_Number);
 		_wait(30000,_isVisible($bo_pg_interactiveEntitlement_CaseAndWO.btn_checkEntitlement));
 		_call(top.location.reload());
+		_call(top.location.reload());
+
 		_click($bo_pg_interactiveEntitlement_CaseAndWO.btn_checkEntitlement);
 		$bo_pg_interactiveEntitlement_CaseAndWO.selectSConOnCheckEntmPage($sconName);
 		_click($bo_pg_interactiveEntitlement_CaseAndWO.btn_saveEntitlementPSLine);
@@ -43,6 +47,8 @@ var $bo_act_interactiveEntitlement_WO = new function bo_act_interactiveEntitleme
 		$bo_act_workOrders.checkEntitlement($WO_Number);
 		_wait(30000,_isVisible($bo_pg_interactiveEntitlement_CaseAndWO.btn_checkEntitlement));
 		_call(top.location.reload());
+		_call(top.location.reload());
+
 		_click($bo_pg_interactiveEntitlement_CaseAndWO.btn_checkEntitlement);
 		$bo_pg_interactiveEntitlement_CaseAndWO.selectWarrantyOnCheckEntmPage($warrantyName);
 		_click($bo_pg_interactiveEntitlement_CaseAndWO.btn_saveEntitlementPSLine);
@@ -59,6 +65,8 @@ var $bo_act_interactiveEntitlement_WO = new function bo_act_interactiveEntitleme
 		$bo_act_workOrders.checkEntitlementPS($WO_Number);
 		_wait(30000,_isVisible($bo_pg_interactiveEntitlement_CaseAndWO.btn_checkEntitlement));
 		_call(top.location.reload());
+		_call(top.location.reload());
+
 		_click($bo_pg_interactiveEntitlement_CaseAndWO.btn_checkEntitlement);
 		$bo_pg_interactiveEntitlement_CaseAndWO.clickOnInstalledProduct($IBName);
 		_wait(5000, _isVisible($bo_pg_interactiveEntitlement_CaseAndWO.txt_selectWarrantyOrContractPage));
