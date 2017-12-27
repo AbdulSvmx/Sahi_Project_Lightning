@@ -1,5 +1,7 @@
-	var $user_credentials = $excel.readFromCustomExcel("../optimax/op_excleData/automation.xlsx", "User_Details","","");
-    var $Dispatch_Process = $excel.readFromCustomExcel("../optimax/op_excleData/automation.xlsx", "Dispatch_Process","","");
+var $user_credentials = $excel.readFromCustomExcel("../optimax/op_excleData/automation.xlsx", "User_Details","","");
+var $Dispatch_Process = $excel.readFromCustomExcel("../optimax/op_excleData/automation.xlsx", "Dispatch_Process","","");
+
+
 for(var $i=0;$i<$user_credentials.length;$i++)
 {
 var $g_un = $user_credentials[$i][0];
@@ -7,11 +9,10 @@ var $g_pwd = $user_credentials[$i][1];
 var $g_url = $user_credentials[$i][2];
 }
 
-for(var $i=0;$i<$Dispatch_Process.length;$i++)
-{
-var $dp_Id = $Dispatch_Process[$i][1];
-var $dp_Terr_Id = $Dispatch_Process[$i][2];
-}
+
+var $dp_Id = $Dispatch_Process[0][1];
+var $dp_Terr_Id = $Dispatch_Process[0][2];
+
 
 var $RS_6305 = _testcase("RS_6305", "Preferred tech from Installed Product (SET050 = False)");
 
@@ -30,9 +31,9 @@ $op_utility.search_ActiveProfile();
 _click(_submit("Edit"));
 _setSelected(_select("conf_prof:F_conf_prof:Setting_Block:j_id114:j_id115:Modulelist"), "OptiMax");
 _setSelected(_select("conf_prof:F_conf_prof:Setting_Block:j_id114:j_id122:SubModulelist"), "Dispatch Calculations");
-_click(_link("Edit[45]"));
+_click(_link("Edit[47]"));
 _selectWindow("Servicemax_Conf_Prof");
-_check(_radio("disp_setting:disp_setting:j_id1:DispSection:j_id37:j_id40[1]"));
+_click(_label("False"));
 _click(_button("Save"));
 _click(_submit("Close"));
 _selectWindow();
@@ -52,13 +53,18 @@ function login($g_un,$g_pwd){
 	return $login_result;
 }
 	
-function create_prod ($dp_Terr_Id){
+function create_prod ($dp_Terr_Id)
+{
+	var result = _call(sforce.connection.query("SELECT Id,Name FROM RecordType WHERE Name = 'Technician'"));
+	var Id_result= result.getArray("records");
+	_log("Id_result = "+Id_result);
+	_log("Id = "+Id_result[0].Id);
 
     // Creating Service team
     
        var Team = new sforce.SObject("SVMXC__Service_Group__c");
-       Team.RecordTypeId='0123B000000CnBXQA0';
-       Team.Name="IB_Team";
+       Team.RecordTypeId=Id_result[0].Id;
+       Team.Name="IB_Team1";
        Team.SVMXC__Active__c='True';
        Team.SVMXC__Country__c="India";
        var result_Team = sforce.connection.create([Team]);
@@ -68,7 +74,7 @@ function create_prod ($dp_Terr_Id){
     
         var Tech = new sforce.SObject("SVMXC__Service_Group_Members__c");
         Tech.SVMXC__Service_Group__c=result_Team[0].id;
-        Tech.Name="IB_Tech";
+        Tech.Name="IB_Tech1";
         Tech.SVMXC__Active__c='True';
         Tech.SVMXC__Street__c="MG road";
         Tech.SVMXC__City__c="Bangalore";
@@ -82,24 +88,25 @@ function create_prod ($dp_Terr_Id){
     // Creating Product
     
 	var prod = new sforce.SObject("Product2");
-	prod.Name = "Iphone";
+	prod.Name = "Auto_Product1";
 	prod.IsActive= 'True';
 	var result_Prod = sforce.connection.create([prod]);
 	_log(" result id = "+result_Prod[0].id);
+
 	
 	// Creating Installed Product With product and Technician
 	
 	var IB = new sforce.SObject("SVMXC__Installed_Product__c");
 	IB.SVMXC__Product__c= result_Prod[0].id;
-	IB.SVMXC__Serial_Lot_Number__c='123456';
+	IB.SVMXC__Serial_Lot_Number__c='1234567';
 	IB.SVMXC__Status__c="Installed";
-	IB.Name="IB_Iphone";
+	IB.Name="IB_Auto_Product1";
 	IB.SVMXC__Preferred_Technician__c=result_Tech[0].id;
 	var result_IB = sforce.connection.create([IB]);
 	_log(" result id = "+result_IB[0].id);
 	
 	// Creating Work order with Installed Product
-	
+	   
 	   var WO = new sforce.SObject("SVMXC__Service_Order__c");
 	   WO.SVMXC__Component__c=result_IB[0].id;
 	   WO.SVMXC__Primary_Territory__c=$dp_Terr_Id;
