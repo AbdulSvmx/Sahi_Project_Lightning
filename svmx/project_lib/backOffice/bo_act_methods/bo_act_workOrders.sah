@@ -60,6 +60,7 @@ var $bo_act_workOrders = new function bo_act_workOrders() {
 		_selectDomain("/svmx/");
 		_click($bo_pg_workOrders.btn_SFWCheckEntitlement);
 		_selectDomain();
+		_selectWindow();
 	};
 	
 	this.checkEntitlementPS = function($workOrderNumber){
@@ -68,6 +69,8 @@ var $bo_act_workOrders = new function bo_act_workOrders() {
 		_selectDomain("/svmx/");
 		_click($bo_pg_workOrders.btn_SFWCheckEntitlementPS);
 		_selectDomain();
+		_selectWindow();
+
 	};
 	
 	this.invokeTDM016SFM = function($workOrderNumber){
@@ -76,6 +79,8 @@ var $bo_act_workOrders = new function bo_act_workOrders() {
 		_selectDomain("/svmx/");
 		_click($bo_pg_workOrders.btn_sfmTDM016);
 		_selectDomain();
+		_selectWindow();
+
 	};
 
 	this.pauseSLAClock = function(){
@@ -84,6 +89,8 @@ var $bo_act_workOrders = new function bo_act_workOrders() {
 		_setSelected($bo_pg_workOrders.sel_ReasonSLA,"Customer Not Available");
 		_click($bo_pg_workOrders.btn_popUpPause);
 		_selectDomain();
+		_selectWindow();
+
 	};
 	
 	this.resumeSLAClock = function($extendingSLACommitmentYesorNo){
@@ -91,6 +98,8 @@ var $bo_act_workOrders = new function bo_act_workOrders() {
 		_click($bo_pg_workOrders.btn_SLAResume);
 		_click(_button($extendingSLACommitmentYesorNo));
 		_selectDomain();
+		_selectWindow();
+
 	//	_setSelected($bo_pg_workOrders.sel_ReasonSLA,"Customer Not Available");
 	//	_click($bo_pg_workOrders.btn_popUpPause);
 	};
