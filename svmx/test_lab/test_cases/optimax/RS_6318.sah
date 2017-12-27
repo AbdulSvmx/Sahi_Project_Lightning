@@ -50,7 +50,7 @@ function create_WO($wo_type , $wo_status)
 	{
 		var skillset_WO = skillset_WO_arr[$s];
 		_log("SVMXC__Order_Type__c = "+skillset_WO.SVMXC__Order_Type__c+" , SVMXC__Order_Status__c = "+skillset_WO.SVMXC__Order_Status__c+" , SVMXC__Skill_Set__c = "+ skillset_WO.SVMXC__Skill_Set__c);
-		if(skillset_WO.SVMXC__Order_Type__c === 'Repair' & skillset_WO.SVMXC__Order_Status__c === 'Closed' & skillset_WO.SVMXC__Skill_Set__c === null)
+		if(skillset_WO.SVMXC__Order_Type__c === 'Cleaning' & skillset_WO.SVMXC__Order_Status__c === 'Closed' & skillset_WO.SVMXC__Skill_Set__c === null)
 		{
 			_log("Skill Set Not Calculated for the work order");
 		}
