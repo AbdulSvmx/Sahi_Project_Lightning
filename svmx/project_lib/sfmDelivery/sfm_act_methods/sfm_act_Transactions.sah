@@ -1,6 +1,5 @@
 var $sfm_act_Transactions = new function sfm_act_Transactions() {
 	this.cloneAndSaveProcess = function($processName,$sfmName,$sfmPgLayoutName){
-		_setSpeed(100);
 		$sfm_act_SFM.selectSFM($processName,false);
 		_click($bo_pg_sfmTransactionAndDesigner.btn_clone);
 		_wait(60000, _isVisible($bo_pg_sfmTransactionAndDesigner.txt_name));
@@ -11,6 +10,7 @@ var $sfm_act_Transactions = new function sfm_act_Transactions() {
 		_setValue($bo_pg_sfmTransactionAndDesigner.txt_sfmSavePageLayoutAs, $sfmPgLayoutName);
 		_setValue($bo_pg_sfmTransactionAndDesigner.txt_sfmSavePageLayoutAsId, "");
 		_setValue($bo_pg_sfmTransactionAndDesigner.txt_sfmSavePageLayoutAsId, $sfmPgLayoutName);
+		_wait(3000);
 		_click($bo_pg_sfmTransactionAndDesigner.btn_pageLayoutSave);
 		_wait(3000);
 		_click($bo_pg_sfmTransactionAndDesigner.btn_finalQuickSave);
@@ -63,7 +63,8 @@ var $sfm_act_Transactions = new function sfm_act_Transactions() {
 		_click($sfm_pg_screenDesigner.section_Parts); 
 		_click($sfm_pg_screenDesigner.chk_allowNew);
 		_click($sfm_pg_screenDesigner.chk_allowDelete);
-//		_setSelected($sfm_pg_screenDesigner.sel_allowMultiAdd, "Part");
+		_wait(5000);
+		_setSelected($sfm_pg_screenDesigner.sel_allowMultiAdd, "Part");
 		_click($bo_pg_sfmTransactionAndDesigner.btn_pageLayoutSave);
 		_wait(3000);
 		_click($bo_pg_sfmTransactionAndDesigner.btn_finalQuickSave);
@@ -146,9 +147,55 @@ var $sfm_act_Transactions = new function sfm_act_Transactions() {
 				_click($sfm_pg_screenDesigner.add_field);
 				_click($sfm_pg_screenDesigner.txt_searchField);
 				_setValue($sfm_pg_screenDesigner.txt_searchField,$headersToAdd[$i]);
-				_doubleClick(_f("main").s_label($headersToAdd[$i]));
-		}
-		
+				if($headersToAdd[$i]=="Parts"){
+					_doubleClick(_f("main").s_label("Parts Order[2]"));
+				}
+				else if ($headersToAdd[$i]=="Case"){
+					_doubleClick(_f("main").s_label("Case[2]"));
+				}
+				else{
+					_doubleClick(_f("main").s_label($headersToAdd[$i]));
+				}
+		}	
+	};
+	this.addLookupDetails = function($lookUpName){
+		_click($sfm_pg_screenDesigner.lkp_parts);
+		_wait(3000);
+		//When number of rows are 10, the number of rows displayed is more than 10
+//		_setSelected($sfm_pg_screenDesigner.sel_rowsToDisplay, $rows);
+		_setValue($sfm_pg_screenDesigner.txt_lookupName, $lookUpName);
+		_setValue($sfm_pg_screenDesigner.txt_lookupId, "");
+		_setValue($sfm_pg_screenDesigner.txt_lookupId, $lookUpName);
+		_click($sfm_pg_screenDesigner.btn_lookupSave);
+		_wait(3000);
+		_click($sfm_pg_screenDesigner.btn_lookupClose);
+		_click($bo_pg_sfmTransactionAndDesigner.btn_pageLayoutSave);
+		_wait(3000);
+		_click($bo_pg_sfmTransactionAndDesigner.btn_finalQuickSave);
+	};
+	
+	this.addSearchDisplay = function($fields){
+		var $element = "";
+		var $maximum = _fetch(_f("main").s_vscrollbar(1).get("maximum"));
+		var $val=0;
+		for(var $i=0;$i<$fields.length;$i++){
+			$element=_f("main").s_label($fields[$i]);
+			while($val< $maximum){
+			                
+			                if(_isVisible($element)){
+			                                break;
+			                }else {
+			                                $val= $val+200;
+			                _call(_f("main").s_vscrollbar(1).set("value",$val));
+			                
+			}
+
+			                
+			}
+
+			_click(_f("main").s_button("/S/").near(_f("main").s_label($fields[$i])));
+			_click(_f("main").s_button("/D/").near(_f("main").s_label($fields[$i])));
+			}
 		
 	};
 };

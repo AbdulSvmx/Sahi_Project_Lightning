@@ -1,0 +1,32 @@
+
+//author - Noor Salma Sharieff
+
+var $BulkDelete = _testcase("$BulkDelete","Delete all the records to clear up Org");
+$BulkDelete.start();
+_setSpeed(100);
+
+var $userName = "orgsadmin@svmx-test4.org.test4part2";
+var $password = "servicemax22";
+$bo_act_login.login($g_url, $userName, $password);
+
+var $nameSpace = $bo_act_salesforceSetUp.readNameSpace();
+
+//Deletes all the Work Orders
+var $delete_Query = "delete [Select Id from " +$nameSpace+"__Service_Order__c ];";
+var $delete_data = $op_act_sForceApiCall.sForceQuery($userName, $password, $delete_Query , "create");
+
+//Delete all Cases
+var $delete_Query = "delete [Select Id from Case ];";
+var $delete_data = $op_act_sForceApiCall.sForceQuery($userName, $password, $delete_Query , "create");
+
+//Delete all Activity Master
+var $delete_Query = "delete [Select Id from " +$nameSpace+"__Activity_Master__c];";
+var $delete_data = $op_act_sForceApiCall.sForceQuery($userName, $password, $delete_Query , "create");
+
+
+
+
+$BulkDelete.end();
+
+
+

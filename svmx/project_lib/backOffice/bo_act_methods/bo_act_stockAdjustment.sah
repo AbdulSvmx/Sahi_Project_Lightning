@@ -12,7 +12,7 @@ var $bo_act_stockAdjustment = new function bo_act_stockAdjustment() {
 		_setValue($bo_pg_stockAdjustment.txt_stockingLocation,$stockingLocation);
 		_setValue($bo_pg_stockAdjustment.txt_stockingProduct,$stockingProduct);
 		_setValue($bo_pg_stockAdjustment.txt_newQty,$newQty);
-		_setSelected($bo_pg_stockAdjustment.sel_adjustmentType, $adjustmentType);
+		_setSelected($bo_pg_stockAdjustment.sel_adjustmentType,$adjustmentType);
 	    _click($bo_pg_stockAdjustment.btn_save);
 	    var $StockadjustmentName = _getText(_heading2("pageDescription"));
 		_assertNotVisible(_div("/Error: Invalid Data/"));

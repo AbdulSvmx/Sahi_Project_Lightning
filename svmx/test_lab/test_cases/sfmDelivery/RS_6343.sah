@@ -1,0 +1,30 @@
+var $rs_6343 = _testcase("RS_6343","");
+$rs_6343.start();
+$url = "https://test.salesforce.com";
+$un = "vansys@pqtpart1.com";
+$pwd = "servicemax2";
+$sfmName = "RS_6343_SourceToTarget";
+$sfmTransaction= "from Source Object to create new header and child records";
+
+_setSpeed(100);
+$bo_act_login.login($url, $un, $pwd);
+
+$bo_act_navigation.navigateToSfmTransactionDesigner();
+_setSpeed(100);
+
+_click(_f("main").s_button("New SFM Transaction"));
+_setValue($bo_pg_sfmTransactionAndDesigner.txt_name,$sfmName);
+_setValue($bo_pg_sfmTransactionAndDesigner.txt_sfmTransactionId,"");
+_setValue($bo_pg_sfmTransactionAndDesigner.txt_sfmTransactionId,$sfmName);
+_setSelected(_f("main").s_dropdownlist("purposeCombo"),$sfmTransaction);
+_setSelected(_f("main").s_combobox("objCombo1"),"Work Order");
+_setValue(_f("main").s_checkbox("Work Detail (Work Order)"), "true");
+_setSelected(_f("main").s_combobox("objCombo1[1]"),"Work Order");
+_setValue(_f("main").s_checkbox("Work Detail (Work Order)[1]"), "true");
+_setValue(_f("main").s_textinput("aliasName[61]"), "Parts");
+_click(_f("main").s_button("+"));
+_setValue(_f("main").s_textinput("aliasName[62]"), "Labor");
+_click(_f("main").tab("Screen Designer"));
+
+_f("main").s_label("Work Order Resource");
+$rs_6343.end();

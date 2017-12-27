@@ -6,7 +6,6 @@ var $bo_act_locations = new function bo_act_locations() {
 	/**
 	 * Create a location
 	 * 
-	 * @param $accountName
 	 */
 
 	this.createLocation = function($recordType,$accountName,$street,$country,$zipCode){
@@ -34,6 +33,17 @@ var $bo_act_locations = new function bo_act_locations() {
 			
 		};
 		
+		this.editLocation = function($locName){
+            $bo_act_navigation.navigateToLocations();
+            _click(_link($locName));
+            _click($bo_pg_locations.btn_edit);
+          //  _click($bo_pg_locations.txt_locationName, $locName);
+            _click($bo_pg_locations.chk_stockingLocation);
+            _click($bo_pg_locations.btn_save);
+            _assertNotVisible(_div("/Error: Invalid Data/"));
+            _wait(15000, _isVisible($locName));
+            };
+            
 		this.addInstalledProductToLocation = function($productName,$accountName,$contactName){
 				var $serialNum = $bo_act_common.generateRandomName("Ser");
 				var $IBName = $bo_act_common.generateRandomName("IB_");
@@ -51,7 +61,20 @@ var $bo_act_locations = new function bo_act_locations() {
 				_logOutput($IBName+ " IB is created");
 				_wait(15000, _isVisible($IBName));
 				return $IBName;
-			
-			
 		};
+		
+		/**
+		* Create an Stock Transfer
+		*/
+		    this.createStockTransfer = function($sourceLocation,$destinationLocation) {
+		         $bo_act_navigation.navigateToStockTransfer();
+		        _click($bo_pg_stockTransfer.btn_new);
+		        _setValue($bo_pg_stockTransfer.txt_sourceLocation,$sourceLocation);
+		        _setValue($bo_pg_stockTransfer.txt_destinationLocation,$destinationLocation);
+		        _click($bo_pg_stockTransfer.btn_save);
+		        _assertNotVisible(_div("/Error: Invalid Data/"));
+		        _wait(15000, _isVisible($StockadjustmentName));
+		        _logOutput($StockTransferDetail+ " Stock Transfer is created");
+		   return $StockTransferDetail;
+		    };
 };

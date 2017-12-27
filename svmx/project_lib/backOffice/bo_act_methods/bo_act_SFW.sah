@@ -44,18 +44,32 @@ var $bo_act_SFW = new function bo_act_SFW() {
 		_wait(3000);
 		_wait(2000);
 		_click($bo_pg_sfmWizard.btn_saveWizardStep);
-			_wait(60000);		
+			_wait(6000);		
 		};
 			this.selWizardStatusAsInactive=function($wizardStatus){
 				_setSelected($bo_pg_sfmWizard.sel_wizardStatus,$wizardStatus);
 			};
 			
-	this.editWizard=function()	{
-		_check($bo_pg_sfmWizard.chk_wizardName);
+	this.editWizard=function($objName,$wizardId)	{
+		$bo_act_navigation.navigateToSfmWizard();
+		_setSelected($bo_pg_sfmWizard.sel_objPrevMaintPlan,$objName	);
+		_wait(3000);
+		_assertVisible($bo_pg_sfmWizard.lbl_verifyCustWizardSection);
+		_check(_checkbox(0,_leftOf(_span($wizardId))));
 		_click($bo_pg_sfmWizard.btn_clickEdit);
-		_click($bo_pg_sfmWizard.tab_manageWizardSteps);
+		//_click($bo_pg_sfmWizard.tab_manageWizardSteps);
 
-	};		
+	};	
+	this.editWizardSteps=function($newSfmName){
+		_click(_link("Edit"));
+		_wait(3000);
+		_selectWindow("/SFM Transaction Designer/");
+		_setValue($bo_pg_sfmTransactionAndDesigner.txt_name, "");
+		_setValue($bo_pg_sfmTransactionAndDesigner.txt_name,$newSfmName);
+		_click($bo_pg_sfmTransactionAndDesigner.btn_finalQuickSave);
+		_selectWindow();
+	}
+		
 	
 	this.deleteSFMWizard=function($objName, $SFMWizardsName){
 		$bo_act_navigation.navigateToSfmWizard();
@@ -110,17 +124,19 @@ var $bo_act_SFW = new function bo_act_SFW() {
 			_assertEqual("Success:Successfully deleted the selected wizard.", _getText(_div("message confirmM3")));
 			_log("SFM Wizard Deleted Successfully");
 		};
-			
+			/*
 		this.deleteWizard=function(){
 			_click($bo_pg_sfmWizard.chk_selectCustomWizard);
 			_click($bo_pg_sfmWizard.btn_deleteWizard);
 			_wait(6000);
 
-		};
+		};*/
 		
 this.deleteWizards = function($objName,$wizardId){
 		$bo_act_navigation.navigateToSfmWizard();
 		_setSelected($bo_pg_sfmWizard.sel_objPrevMaintPlan,$objName	);
+	_wait(3000);
+	_assertVisible($bo_pg_sfmWizard.lbl_verifyCustWizardSection);
 		_check(_checkbox(0,_leftOf(_span($wizardId))));
 		_click($bo_pg_sfmWizard.btn_deleteWizard);
 	};
@@ -152,7 +168,7 @@ this.createOthersWizardStepwithHandOver=function($fieldActnType,$actnName,$handO
 	_click($bo_pg_sfmWizard.btn_newWizardStep);
 	_assertVisible($bo_pg_sfmWizard.lbl_verifyNewWizardSection);
 	_setSelected($bo_pg_sfmWizard.sel_wizardFieldType,$fieldActnType);
-	_wait(30000,isVisible($bo_pg_sfmWizard.sel_wizardObjectType));
+	_wait(30000,_isVisible($bo_pg_sfmWizard.sel_wizardObjectType));
 	_setSelected($bo_pg_sfmWizard.sel_wizardObjectType,$actnName);
 	if($handOver == true)
 		_check($bo_pg_sfmWizard.chk_handover);
@@ -168,7 +184,7 @@ this.createOutputDocumentWizardStepwithSelectTemplate=function($fieldActnType,$a
 	_click($bo_pg_sfmWizard.btn_newWizardStep);
 	_assertVisible($bo_pg_sfmWizard.lbl_verifyNewWizardSection);
 	_setSelected($bo_pg_sfmWizard.sel_wizardFieldType,$fieldActnType);
-	_wait(30000,isVisisble($bo_pg_sfmWizard.sel_wizardObjectType));
+	_wait(30000,_isVisible($bo_pg_sfmWizard.sel_wizardObjectType));
 	_setSelected($bo_pg_sfmWizard.sel_wizardObjectType,$actnName);
 	if($selectTemplateAtRunTime == true)
 		_check($bo_pg_sfmWizard.chk_selectTemplateAtRunTime);
@@ -179,5 +195,6 @@ this.createOutputDocumentWizardStepwithSelectTemplate=function($fieldActnType,$a
 	_wait(1000);		
 };
 };			
+
 	
 

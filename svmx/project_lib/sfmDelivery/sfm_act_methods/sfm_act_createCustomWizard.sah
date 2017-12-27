@@ -4,7 +4,7 @@ var $sfm_act_createCustomWizard = new function sfm_act_createCustomWizard() {
 		_setSelected($sfm_pg_wizards.selectObject,$object);
 		_click($sfm_pg_wizards.btn_customNew);
 	};
-	
+
 	this.addManageWizSteps = function($wizTitle,$wizStepType,$wizStepName,$profile){
 //		$title = $wizTitle;
 //		$wizTitle = $bo_act_common.generateRandomName("Auto Wiz ");
@@ -25,8 +25,8 @@ var $sfm_act_createCustomWizard = new function sfm_act_createCustomWizard() {
 		_click($sfm_pg_wizards.btn_add);
 		_click($sfm_pg_wizards.btn_saveClose);
 	};
-	
-//Added by Safi
+
+//	Added by Safi
 	this.addWizStepWithCriteria = function($wizTitle,$wizStepType,$wizStepName,$WizCriteria,$profile){
 //		$title = $wizTitle;
 //		$wizTitle = $bo_act_common.generateRandomName("Auto Wiz ");
@@ -47,10 +47,10 @@ var $sfm_act_createCustomWizard = new function sfm_act_createCustomWizard() {
 		_setSelected($sfm_pg_wizards.select_availableGrpProfiles,$profile);
 		_click($sfm_pg_wizards.btn_add);
 		_click($sfm_pg_wizards.btn_saveClose);		
-		
+
 	};	
 
-	
+
 	this.createBlankWo = function(){
 		$woName="";
 		_wait(5000);
@@ -67,10 +67,10 @@ var $sfm_act_createCustomWizard = new function sfm_act_createCustomWizard() {
 //		_wait(10000,_isVisible($sfm_pg_wo.cell_wizard));
 //		var $txt = _isVisible($sfm_pg_wo.cell_wizard);
 //		_selectWindow();
-		
+
 	};
-	
-//Added by Safi
+
+//	Added by Safi
 	this.createWOwithOrderStatus = function($OrdrStatus){		
 		_wait(5000);
 		_click($sfm_pg_wo.tab_all);
@@ -80,19 +80,19 @@ var $sfm_act_createCustomWizard = new function sfm_act_createCustomWizard() {
 		_setSelected($sfm_pg_wo.btn_woStaus,$OrdrStatus);
 		_click($sfm_pg_wo.btn_wo_save);
 		_wait(3000);
-		
+
 	};
-	
-	
+
+
 	this.newInstalledProduct = function($tabName,$productName,$accountName,$contactName) {
 		var $serialNum = $bo_act_common.generateRandomName("Ser");
 		var $IBName = $bo_act_common.generateRandomName("IB_");
 		_wait(5000);
-//		 $bo_act_navigation.navigateToInstalledProductPage();
+//		$bo_act_navigation.navigateToInstalledProductPage();
 		$sfm_pg_wo.clickHomeTabs($tabName);
 		_click($bo_pg_installedProducts.btn_new);
 		if(_isVisible($bo_pg_installedProducts.btn_continue)){
-		_click($bo_pg_installedProducts.btn_continue);
+			_click($bo_pg_installedProducts.btn_continue);
 		}
 		_setValue($bo_pg_installedProducts.txt_productName,$productName);
 		_setValue($bo_pg_installedProducts.txt_serialNumber, $serialNum);
@@ -106,10 +106,10 @@ var $sfm_act_createCustomWizard = new function sfm_act_createCustomWizard() {
 		_wait(15000, _isVisible($IBName));
 		return $IBName;
 	};
-	
+
 	this.clickWizardBtn = function($sfmName) {
 		_click(_button($sfmName));
-		
+
 	};
 	this.addProductServiced = function($part){
 		_wait(3000);
@@ -175,13 +175,13 @@ var $sfm_act_createCustomWizard = new function sfm_act_createCustomWizard() {
 		_wait(5000);
 		_setValue($sfm_pg_wizardWindow.txt_endDate,$currentDate);
 		_click($sfm_pg_wizardWindow.btn_update);
-		
+
 	};
-	
+
 	this.saveWizard = function() {
 		_click($sfm_pg_wizardWindow.btn_save);
 	};
-	
+
 	this.verify6877 = function() {
 		var $count=0;
 		_selectDomain();
@@ -202,9 +202,9 @@ var $sfm_act_createCustomWizard = new function sfm_act_createCustomWizard() {
 			if(_getText($divs[$i])!="Acme"){
 				$count++;
 			}
-			
+
 //			$divArray.push(_getText($divs[$i]));
-	}
+		}
 //		_log($divArray);
 		if($count==0){
 			_log("Pass");
@@ -212,9 +212,9 @@ var $sfm_act_createCustomWizard = new function sfm_act_createCustomWizard() {
 		else{
 			_log("Fail");
 		}
-			
+
 	};
-	
+
 	this.verify6905 = function(){
 		var $count=0;
 		_selectDomain();
@@ -235,7 +235,7 @@ var $sfm_act_createCustomWizard = new function sfm_act_createCustomWizard() {
 			if(_getText($divs[$i])!="Acme"){
 				$count++;
 			}
-	}
+		}
 		_log($count);
 		if($count==0){
 			_log("Pass");
@@ -244,7 +244,7 @@ var $sfm_act_createCustomWizard = new function sfm_act_createCustomWizard() {
 			_log("Fail");
 		}
 	};
-	
+
 	this.verify6906 = function($accountToVerify){
 		_selectDomain();
 		_setStrictVisibilityCheck(true);
@@ -257,7 +257,7 @@ var $sfm_act_createCustomWizard = new function sfm_act_createCustomWizard() {
 		this.verifyAccountsPresent($accountToVerify);
 		_wait(5000);
 	};
-	
+
 	this.verifyAccountsPresent = function($accountToVerify){
 		var $count=0;
 		var $divs= _collect("_div","/.*/",_under(_div("Account ID")));
@@ -266,7 +266,7 @@ var $sfm_act_createCustomWizard = new function sfm_act_createCustomWizard() {
 			if(_getText($divs[$i])!=$accountToVerify){
 				$count++;
 			}
-	}
+		}
 		_log($count);
 		if($count==0){
 			_log("Pass");
@@ -274,9 +274,9 @@ var $sfm_act_createCustomWizard = new function sfm_act_createCustomWizard() {
 		else{
 			_log("Fail");
 		}
-		
+
 	};
-	
+
 	this.verify6904 = function($account){
 		_selectDomain();
 		_setStrictVisibilityCheck(true);
@@ -296,7 +296,7 @@ var $sfm_act_createCustomWizard = new function sfm_act_createCustomWizard() {
 			_log("Pass");
 		}
 	};
-	
+
 	this.verify7017 = function(){
 		_selectDomain();
 		_setStrictVisibilityCheck(true);
@@ -320,7 +320,150 @@ var $sfm_act_createCustomWizard = new function sfm_act_createCustomWizard() {
 		else{
 			_log("Fail");
 		}
+		_click($sfm_pg_wizardWindow.btn_addAndSearch);
+		_click($sfm_pg_wizardWindow.icon_search);
+		_click($sfm_pg_wizardWindow.chk_multiSelect);
+		var $divs= _collect("_div","/.*/",_under(_div("Product Name")));
+		_log($divs.length);
+		_click($sfm_pg_wizardWindow.btn_select);
+		var $divs1= _collect("_div","/.*/",_under(_div("Part")));
+		_log($divs1.length);
+		if($divs.length==$divs1.length){
+			_log("Pass");
+		}
+		else{
+			_log("Fail");
+		}
+		var $val = 0;
+		_set($val,_count("_image", "/.*/", _under(_div("/actioncolumn/"))));
+		for(var $i=$val-2;$i<$val;$i++){
+			
+			_click(_image("gif["+$val+"]"));
+		}
+		if(_count("_image", "/.*/", _under(_div("/actioncolumn/")))==0){
+			_log("Pass");
+		}
+		else{
+			_log("Fail");
+		}
+
 	};
 	
+	this.verify6911 = function(){
+		_selectDomain();
+		_setStrictVisibilityCheck(true);
+		_click($sfm_pg_wizardWindow.btn_addRow);
+		_wait(3000);
+		_doubleClick(_div("svmx-grid-cell-inner [1]"));
+		_click(_span("/svmx_lookup_icon/"));
+		_click($sfm_pg_wizardWindow.icon_search);
+		var $divs= _collect("_div","/.*/",_under(_div("Product Name")));
+		_log($divs.length);
+		if($divs.length<=10){
+			_log("Pass");
+		}
+		else{
+			_log("Fail");
+		}
+	};
 	
+	this.validateSearch = function($value,$searchBy){
+		var $count = 0;
+		_setValue($sfm_pg_wizardWindow.lkp_search,$value);
+		_click($sfm_pg_wizardWindow.icon_search);
+		var $result =_collect("_div",$value,_under(_div($searchBy)));
+		for(var $i=0;$i<$result.length;$i++){
+			if(_getText($result[$i])!=$value){
+				$count++;
+			}
+		}
+		if($count==0){
+			_log("Pass");
+		}
+		else{
+			_log("Fail");
+		}
+		
+	};
+	this.validateBubbleText = function($value){
+		_doubleClick(_div($value));
+		_click($sfm_pg_wizardWindow.btn_bubble);
+		var $productText ="";
+		_set($productText,_getText($sfm_pg_wizardWindow.lbl_product));
+		if($value==$productText){
+			_log("Pass");
+		}
+		else{
+			_log("Fail");
+		}
+		
+	};
+	
+	this.validateErrorMessage = function($accName,$error,$isChild){
+		_setValue($sfm_pg_wizardWindow.txt_accountField,$accName);
+		if($isChild){
+			_click($sfm_pg_wizardWindow.btn_update);
+		}
+		_click($sfm_pg_wizardWindow.btn_quickSave);
+		var $isVisible;
+		_set($isVisible,_isVisible(_span("Information")));
+		if($isVisible){
+			_click(_span("Ok",_near(_span("Information"))));
+			_wait(5000,_isVisible(_span("Saved Successfully")));
+		}
+		
+		var $errMsg = _getText($sfm_pg_wizardWindow.errorMsg);
+		_log($errMsg);
+		if($errMsg.search($error)!=-1){
+			_log("Pass");
+		}
+		else{
+			_log("Fail");
+		}
+	};
+	
+	this.validateExactMatch = function($accName,$isChild){
+		_setValue($sfm_pg_wizardWindow.txt_accountField,$accName);
+		if($isChild){
+			_click($sfm_pg_wizardWindow.btn_update);
+		}
+		_click($sfm_pg_wizardWindow.btn_quickSave);
+		var $isVisible;
+		_set($isVisible,_isVisible(_span("Information")));
+		if($isVisible){
+			_click(_span("Ok",_near(_span("Information"))));
+			_wait(5000,_isVisible(_span("Saved Successfully")));
+		}
+		if($isChild){
+			_click($sfm_pg_wizardWindow.btn_edit);
+			_click(_span("/lookup_icon/",_rightOf(_label("AutoContact:"))));
+		}
+		else
+			{
+				_click($sfm_pg_wizardWindow.lkp_contact);
+			}
+		var $limitSearch = _getText($sfm_pg_wizardWindow.txt_limitSearch);
+		if($limitSearch.search($accName)!=-1){
+			_log("Pass");
+		}
+		else{
+			_log("Fail");
+		}
+		
+	};
+	
+	this.validatePartialMatch = function(){
+//		_setValue($sfm_pg_wizardWindow.txt_accountField,$accName);
+//		_click($sfm_pg_wizardWindow.btn_quickSave);
+		var $isPickListVisible = _isVisible($sfm_pg_wizardWindow.pl_Account);
+		if($isPickListVisible==true){
+			_log("Pass");
+		}
+		else{
+			_log("Fail");
+		}
+		
+	};
+
+
 };

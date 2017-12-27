@@ -1,0 +1,9 @@
+var $rs_5454 = _testcase("RS_5454","Verify Reset Expression in SFM Delivery");
+$rs_5454.start();
+$field = ["Actual Initial Response","Order Status","Order Type"];
+$bo_act_login.login($g_url,$sfmUsn,$sfmPwd);
+$sfm_act_expressions.navigateToExpression();
+//_setSelected(_f("SFMExpressionBuilderSWF").s_combobox("Select a source object"),"Work Order");
+$sfm_act_expressions.newCustomAction("Work Order");
+$sfm_act_expressions.manageExpressions5454(2, $field);
+$rs_5454.end();

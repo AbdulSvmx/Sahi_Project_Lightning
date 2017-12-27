@@ -74,16 +74,6 @@ var $rate = 2000.000;
 var $rateType = "Minimum";
 $bo_act_serviceMaintenanceContracts.addPricingRulesTOServiceContract($sconName, $rateType, $rate, $serviceName);
 
-var $expecctedIBUnder_CoveredProduct =  _getText(_link(0,_under(_tableHeader("Installed Product"))));
-var $expecctedContactUnder_EntitledContacts =  _getText(_link(0,_under(_tableHeader("Contact"))));
-
-//validation
-//Validating the Covered Products Percent on Scon
-_assertEqual($expecctedIBUnder_CoveredProduct,$IBName,"Actual and expected covered Products are not same");
-
-//Validating the Entitled Contacts Percent on Scon
-_assertEqual($expecctedContactUnder_EntitledContacts,$contactName,"Actual and expected Entitled Contacts are not same");
-
 /**
 * Create Case record
 */
@@ -191,7 +181,7 @@ var $actualTotalBillableAmountOnWorkOrder = _getText(_div(0,_rightOf(_cell("/Tot
 /**
 *For Total Billable Amount on WO 
 */
-//var $BillableLinePriceExpected = $lineQty*$standardPriceValue (4*580 = 2400);
+//var $BillableLinePriceExpected = $lineQty*$standardPriceValue (4*580 = 2320);
 
 _assertEqual($actualRateOnWorkOrder,"$2,000.000","Actual and Rate on Work Order are not same");
 _assertEqual($actualRateTypeOnWorkOrder,$rateType,"Actual and expected Rate Type on Work Order are not same");
