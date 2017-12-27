@@ -133,6 +133,9 @@ $bo_act_getPrice.closeEditedWOLineToSFMDelivery();
 _setStrictVisibilityCheck();
 $bo_act_getPrice.saveSFMDelivery();
 
+//Delete SFM Wizard 
+$bo_act_SFW.deleteSFMWizard("Work Order", $wizardIDName);
+
 /**
 *Clean up function
 */
@@ -140,9 +143,6 @@ var $datacreated = [$WONumber,$caseNumber,$IBName,$productName,$contactName,$acc
 for (var i = 0; i < $datacreated.length; i++) {
 $bo_act_common.cleanUpfunction($datacreated[i]);
 }
-
-// Delete SFM Wizard 
-$bo_act_SFW.deleteSFMWizard("Work Order", $wizardIDName);
 
 $bo_act_login.logOut(); 
 
