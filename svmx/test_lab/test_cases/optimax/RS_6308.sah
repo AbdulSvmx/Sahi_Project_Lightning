@@ -31,14 +31,18 @@ function login($g_un,$g_pwd)
      }
 
 
-function create_Team (){
-
+function create_Team ()
+{
+	var result = _call(sforce.connection.query("SELECT Id,Name FROM RecordType WHERE Name = 'Technician'"));
+	var Id_result= result.getArray("records");
+	_log("Id_result = "+Id_result);
+	_log("Id = "+Id_result[0].Id);
 	   
 	//Creating ServiceTeam
 	
 	
 	var Team = new sforce.SObject("SVMXC__Service_Group__c");
-	Team.RecordTypeId='0123B000000CnBXQA0';
+	Team.RecordTypeId=Id_result[0].Id;
 	Team.Name="TeamMandatoryAcc";
 	Team.SVMXC__Active__c='True';
 	Team.SVMXC__Country__c="India";
@@ -46,8 +50,7 @@ function create_Team (){
 
 	$team = result_Team[0].id;
 	_log(" Team = "+$team);
-	
-	_log(" Team = "+$team);
+
 
 	  //Creating Multiple Technician,associated to the Service Team
 	var CreateRecords=[];

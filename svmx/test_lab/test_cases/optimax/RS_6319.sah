@@ -1,4 +1,5 @@
 var $user_credentials = $excel.readFromCustomExcel("../optimax/op_excleData/automation.xlsx", "User_Details","","");
+var $BH = $excel.readFromCustomExcel("../optimax/op_excleData/automation.xlsx", "BusinessHours","","");
 
 //var $nArr;
 //Calling the sforce API
@@ -17,6 +18,8 @@ $RS_6319.start();
 var $g_un = "govendhan@svmx-cct5.org.cct5part1";
 var $g_pwd = "maxpl0re2";*/
 
+var $BH_Name = $BH[0][1];
+
 $bo_act_login.login($g_url, $g_un, $g_pwd);
 		
 
@@ -30,11 +33,14 @@ _click(_div("Service Organization"));
 _click(_div("Territories"));
 _click(_button("Add Territory"));
 _setValue(_textbox("Territory:POPUPS:TerritoryBlock:j_id30:j_id31:TTname"), $TerrName);
+
+
+_setValue(_textbox("Territory:POPUPS:TerritoryBlock:j_id43:j_id44:TTBussHrs"), $BH_Name);
 _click(_image("Territory's Business Hours Lookup (New Window)"));
 _selectWindow("lookup");
-_click(_link("PST -7"));
+_click(_link($BH_Name));
 _selectWindow();
-_setValue(_textbox("Territory:POPUPS:TerritoryBlock:j_id43:j_id44:TTBussHrs"), "PST -7");
+_setValue(_textbox("Territory:POPUPS:TerritoryBlock:j_id43:j_id44:TTBussHrs"), $BH_Name);
 _click(_submit("Submit"));
 _click(_button("Add Coverage"));
 _setSelected(_select("Territory:selected_ID:ListTTAttribute:j_id222:j_id223:0:j_id230"), "State");
