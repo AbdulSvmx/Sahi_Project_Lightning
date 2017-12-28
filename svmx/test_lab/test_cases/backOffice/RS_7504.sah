@@ -19,14 +19,15 @@ $bo_act_salesforcePages.saveObject();
 _click(_link($location));
 var $installedProduct2 =$bo_act_locations.addInstalledProductToLocation($proName,$accName,"");
 $bo_act_salesforcePages.editObject();
-$bo_act_salesforcePages.selectOptionFromDropdown($bo_pg_installedProducts.editStatus, "Scrapped");
+$bo_act_salesforcePages.selectOptionFromDropdown($bo_pg_installedProducts.editStatus, "Scrap");
 $bo_act_salesforcePages.saveObject();
 _click(_link($location));
 var $installedProduct3 =$bo_act_locations.addInstalledProductToLocation($proName,$accName,"");
 
 //Create a Criteria Based PM template
 $bo_act_PMPlanTemplate.createCriteriaBasedPMTemplate($proName, "");
-
+$bo_act_PMPlanTemplate.firstCriteriaBasedCondition("Latitude", "Equals", 10);
+$bo_act_PMPlanTemplate.saveConditionBasedPM();
 
 $RS_7504.end();
 
