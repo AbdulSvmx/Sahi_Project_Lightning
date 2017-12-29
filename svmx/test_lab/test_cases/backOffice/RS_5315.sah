@@ -1,7 +1,7 @@
 //Tests are to be written here [Bhupendra Singh Chouhan]
 //==============
 
-var $RS_5315 = _testcase("$RS_5315","Get Price on WO:When the IB of the WO is covered under a Warranty.Calculate Expense prices");
+var $RS_5315 = _testcase("$RS_5315","Get Price on WO: Calculation based on labor pricing defined in SCon when Activity type(Activity ID=Calibration/Installation).");
 $RS_5315.start();
 _setSpeed(100);
 

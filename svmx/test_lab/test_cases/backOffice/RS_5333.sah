@@ -30,8 +30,8 @@ var $standardPriceValue = 1200;
 $bo_act_products.addStandardPriceForProduct($productName, $standardPriceValue);
 
 // Validate the Standard price for Product
-var $actual_StandardPriceValue = _getText(_tableHeader(0,_under(_tableHeader("Standard Price"))));
-_assertEqual($actual_StandardPriceValue,"$1,200.00","Actual and expected Standard price values are not same");
+//var $actual_StandardPriceValue = _getText(_tableHeader(0,_under(_tableHeader("Standard Price"))));
+//_assertEqual($actual_StandardPriceValue,"$1,200.00","Actual and expected Standard price values are not same");
 
 /**
 * Create Service Type with QC
