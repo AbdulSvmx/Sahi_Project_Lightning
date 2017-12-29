@@ -10,6 +10,8 @@ var $bo_act_interactiveEntitlement_WO = new function bo_act_interactiveEntitleme
 	this.performInteractiveEntitlementWO_IncidentNotCovered = function($WO_Number) {
 		//Navigate and click on check Entitlement WO SFM
 		$bo_act_workOrders.checkEntitlement($WO_Number);
+		_wait(1000);
+    	_call(top.location.reload());
 		_wait(300000,_isVisible($bo_pg_interactiveEntitlement_CaseAndWO.btn_checkEntitlement));
 		_click($bo_pg_interactiveEntitlement_CaseAndWO.btn_checkEntitlement);
 		_click($bo_pg_interactiveEntitlement_CaseAndWO.chk_IncidentNotCovered);
@@ -24,6 +26,8 @@ var $bo_act_interactiveEntitlement_WO = new function bo_act_interactiveEntitleme
 	this.performInteractiveEntitlementWO_UsingScon = function($WO_Number, $sconName) {
 		//Navigate to the and click on check Entitlement WO
 		$bo_act_workOrders.checkEntitlement($WO_Number);
+		_wait(1000);
+    	_call(top.location.reload());
 		_wait(300000,_isVisible($bo_pg_interactiveEntitlement_CaseAndWO.btn_checkEntitlement));
 		_click($bo_pg_interactiveEntitlement_CaseAndWO.btn_checkEntitlement);
 		$bo_pg_interactiveEntitlement_CaseAndWO.selectSConOnCheckEntmPage($sconName);
@@ -39,6 +43,8 @@ var $bo_act_interactiveEntitlement_WO = new function bo_act_interactiveEntitleme
 	this.performInteractiveEntitlementWO_UsingWarranty = function($WO_Number, $warrantyName) {
 		//Navigate to the and click on check Entitlement WO
 		$bo_act_workOrders.checkEntitlement($WO_Number);
+		_wait(1000);
+    	_call(top.location.reload());
 		_wait(300000,_isVisible($bo_pg_interactiveEntitlement_CaseAndWO.btn_checkEntitlement));
 		_click($bo_pg_interactiveEntitlement_CaseAndWO.btn_checkEntitlement);
 		$bo_pg_interactiveEntitlement_CaseAndWO.selectWarrantyOnCheckEntmPage($warrantyName);
@@ -54,6 +60,8 @@ var $bo_act_interactiveEntitlement_WO = new function bo_act_interactiveEntitleme
 	this.performInteractiveEntitlement_WOPSLines = function($WO_Number,$IBName,$warrantyName) {
 		//Navigate to the and click on check Entitlement PS SFM
 		$bo_act_workOrders.checkEntitlementPS($WO_Number);
+		_wait(1000);
+    	_call(top.location.reload());
 		_wait(300000,_isVisible($bo_pg_interactiveEntitlement_CaseAndWO.btn_checkEntitlement));
 		_click($bo_pg_interactiveEntitlement_CaseAndWO.btn_checkEntitlement);
 		$bo_pg_interactiveEntitlement_CaseAndWO.clickOnInstalledProduct($IBName);
