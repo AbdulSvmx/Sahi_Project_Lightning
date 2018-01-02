@@ -12,31 +12,127 @@ var $sfm_act_expressions = new function sfm_act_expressions() {
 		_click($sfm_pg_expressions.btn_new);
 	};
 	
-	this.manageExpressions5454 = function($clicks,$field){
+	this.addRows = function($clicks){
 		for(var $i=0;$i<$clicks;$i++){
 			_click($sfm_pg_expressions.btn_plus);
 		}
-//		_setValue(_f("SFMExpressionBuilderSWF").s_textinput("textInput[2]"), "Account");
+	};
+	
+	this.saveExprsn = function($exprsnName){
+		_setValue($sfm_pg_expressions.txt_saveExprsn,$exprsnName);
+		_setValue($sfm_pg_expressions.txt_inputId,$exprsnName);
+		_click($sfm_pg_expressions.btn_save);
+	};
+	
+	this.deleteExprsn = function(){
+		_click($sfm_pg_expressions.btn_delete);
+		_click($sfm_pg_expressions.btn_popup_yes);
+		if(_isVisible($sfm_pg_expressions.lbl_exprsnDeleted)){
+			_log("Pass");
+		}
+		else{
+			_log("Fail");
+			_fail("Deleting Expression Failed");
+		}
+	};
+	
+	this.saveAsExprsn = function($saveAsName){
+		_setValue($sfm_pg_expressions.txt_saveExprsn,$saveAsName);
+		_setValue($sfm_pg_expressions.txt_inputId,$saveAsName);
+		_click($sfm_pg_expressions.btn_saveAs);
+		if(_isVisible($sfm_pg_expressions.lbl_exprsnSaved)){
+			_log("Pass");
+		}
+		else{
+			_log("Fail");
+			_fail("Clone Expression Failed");
+		}
+	};
+	
+	this.manageExpressions5454 = function(){
 		_setSelected($sfm_pg_expressions.sel_comboField,"Account");
 		_setSelected($sfm_pg_expressions.sel_comboConditions, "Contains");
 		_setValue($sfm_pg_expressions.txt_input,"Online");
-
-	var $rows = $clicks + 2;
-	for(var $j=1;$j<$rows;$j++){
-		if($field[$j]=="Order Status"){
-		_setSelected(_f("SFMExpressionBuilderSWF").s_combobox("fieldCombo[1]"),$field[$j]);
-		_setSelected(_f("SFMExpressionBuilderSWF").s_dropdownlist("conditionsCombo[1]"), "Not Equal");
-		_setSelected(_f("SFMExpressionBuilderSWF").s_combobox("valuesCombo"), "Canceled");
-		}
-		else{
-		_setSelected(_f("SFMExpressionBuilderSWF").s_combobox("fieldCombo[2]"),$field[$j]);
+	    _setSelected(_f("SFMExpressionBuilderSWF").s_combobox("fieldCombo[1]"), "Actual Initial Response");
+		_click(_f("SFMExpressionBuilderSWF").s_togglebutton("I want to choose a field from the list[1]"));
+		_setSelected(_f("SFMExpressionBuilderSWF").s_combobox("valuesCombo"), "Today");
+		_setSelected(_f("SFMExpressionBuilderSWF").s_combobox("fieldCombo[2]"), "Order Status");
 		_setSelected(_f("SFMExpressionBuilderSWF").s_dropdownlist("conditionsCombo[2]"), "Not Equal");
-		_click(_f("SFMExpressionBuilderSWF").s_togglebutton("I want to choose a field from the list[2]"));
-		_setSelected(_f("SFMExpressionBuilderSWF").s_combobox("valuesCombo[1]"), "Today");
-		}
-	}
+		_setSelected(_f("SFMExpressionBuilderSWF").s_combobox("valuesCombo[1]"), "Canceled");
+		 _setSelected(_f("SFMExpressionBuilderSWF").s_combobox("fieldCombo[3]"), "Order Type");
+		_setSelected(_f("SFMExpressionBuilderSWF").s_combobox("valuesCombo[2]"), "Field Service");
+
 	_wait(3000);
 	_click($sfm_pg_expressions.btn_reset);
 	
 };
+
+	this.manageExpressions5453 = function(){
+		_setSelected($sfm_pg_expressions.sel_comboField,"Account");
+		_setSelected($sfm_pg_expressions.sel_comboConditions, "Contains");
+		_setValue($sfm_pg_expressions.txt_input,"Online");
+	    _setSelected(_f("SFMExpressionBuilderSWF").s_combobox("fieldCombo[1]"), "Actual Initial Response");
+		_click(_f("SFMExpressionBuilderSWF").s_togglebutton("I want to choose a field from the list[1]"));
+		_setSelected(_f("SFMExpressionBuilderSWF").s_combobox("valuesCombo"), "Today");
+		_setSelected(_f("SFMExpressionBuilderSWF").s_combobox("fieldCombo[2]"), "Order Status");
+		_setSelected(_f("SFMExpressionBuilderSWF").s_dropdownlist("conditionsCombo[2]"), "Not Equal");
+		_setSelected(_f("SFMExpressionBuilderSWF").s_combobox("valuesCombo[1]"), "Canceled");
+		 _setSelected(_f("SFMExpressionBuilderSWF").s_combobox("fieldCombo[3]"), "Order Type");
+		_setSelected(_f("SFMExpressionBuilderSWF").s_combobox("valuesCombo[2]"), "Field Service");
+		_setSelected(_f("SFMExpressionBuilderSWF").s_combobox("fieldCombo[4]"), "Driving Time (in Minutes)");
+		_setSelected(_f("SFMExpressionBuilderSWF").s_dropdownlist("conditionsCombo[4]"), "Greater Than");
+		_setValue(_f("SFMExpressionBuilderSWF").s_textinput("textip[1]"), "60");
+		_setSelected(_f("SFMExpressionBuilderSWF").s_combobox("fieldCombo[5]"), "Country");
+		_setSelected(_f("SFMExpressionBuilderSWF").s_dropdownlist("conditionsCombo[5]"), "Is Null");
+		_setSelected(_f("SFMExpressionBuilderSWF").s_combobox("fieldCombo[6]"), "Component");
+		_setSelected(_f("SFMExpressionBuilderSWF").s_dropdownlist("conditionsCombo[6]"), "Starts With");
+		_setValue(_f("SFMExpressionBuilderSWF").s_textinput("textip[2]"), "IB");
+		
+	};
+
+	this.verify5454 = function(){
+		var $count = 0;
+		var $isVisible = false;
+	for(var $i=0;$i<3;$i++){
+		if($i==0){
+			$isVisible = _isVisible(_f("SFMExpressionBuilderSWF").s_combobox("fieldCombo"));
+		}
+		else{
+			$isVisible = _isVisible(_f("SFMExpressionBuilderSWF").s_combobox("fieldCombo["+$i+"]"));
+		}
+		if($isVisible==true){
+			$count++;
+		}
+	}
+	_log($count);
+	if($count==2){
+		_log("Pass");
+	}
+	else{
+		_log("Fail");
+	}
+	};
+	
+	this.modifyQualifyingCriteria = function($exprsnName,$renamedExprsn,$advExprsn){
+		_click($bo_pg_sfmTransactionAndDesigner.btn_qualifyingCriteriaAndFieldMapping);
+		_setSelected($sfm_pg_expressions.sel_exprsn,$exprsnName);
+		_setValue($sfm_pg_expressions.txt_exprsnName,$renamedExprsn);
+		_setValue($sfm_pg_expressions.txt_exprsnId,$renamedExprsn);
+		_setValue($sfm_pg_expressions.txt_advancedExprsn,$advExprsn);
+		_click($sfm_pg_expressions.btn_qualifyCriteriaSaveAs);
+	};
+	
+	this.verify5448 = function($renamedExprsn,$advExprsn){
+		_setSelected($sfm_pg_expressions.dropdown_exprsn,$renamedExprsn);
+		var $actualValue = _getValue($sfm_pg_expressions.txt_advanced);
+		if($actualValue==$advExprsn){
+			_log("Pass "+$actualValue);
+		}
+		else{
+			_log("Fail "+$actualValue);
+			_fail();
+		}
+	};
+	
+	
 };
