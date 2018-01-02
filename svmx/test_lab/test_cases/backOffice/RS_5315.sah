@@ -1,7 +1,7 @@
 //Tests are to be written here [Bhupendra Singh Chouhan]
 //==============
 
-var $RS_5315 = _testcase("$RS_5315","Get Price on WO:When the IB of the WO is covered under a Warranty.Calculate Expense prices");
+var $RS_5315 = _testcase("$RS_5315","Get Price on WO: Calculation based on labor pricing defined in SCon when Activity type(Activity ID=Calibration/Installation).");
 $RS_5315.start();
 _setSpeed(100);
 
@@ -79,15 +79,6 @@ var $minimumLaborMins1 = 60;
 var $regularRate1 = 800;
 $bo_act_serviceMaintenanceContracts.addSecondLaborPricingToServiceContract($serviceConractName, $RoundingType, $unit[2], $minimumLaborMins1,$regularRate1, $activityType[3]);
 
-var $expecctedIBUnder_CoveredProduct =  _getText(_link(0,_under(_tableHeader("Installed Product"))));
-var $expecctedContactUnder_EntitledContacts =  _getText(_link(0,_under(_tableHeader("Contact"))));
-
-//validation
-//Validating the Covered Products Percent on Scon
-_assertEqual($expecctedIBUnder_CoveredProduct,$IBName,"Actual and expected covered Products are not same");
-
-//Validating the Entitled Contacts Percent on Scon
-_assertEqual($expecctedContactUnder_EntitledContacts,$contactName,"Actual and expected Entitled Contacts are not same");
 
 /**
 * Create Case record
@@ -206,6 +197,9 @@ $bo_act_getPrice.closeEditedWOLineToSFMDelivery();
 
 $bo_act_getPrice.saveSFMDelivery();
 
+//Delete SFM Wizard 
+$bo_act_SFW.deleteSFMWizard("Work Order", $wizardIDName);
+
 /**
 *Clean up function
 */
@@ -218,9 +212,6 @@ $bo_act_common.cleanUpfunction($datacreated[i]);
 // Delete the Activity ID's Created 
 $bo_act_activityMaster.deleteActivityMaster($activityID);
 $bo_act_activityMaster.deleteActivityMaster($activityID1);
-
-//Delete SFM Wizard 
-$bo_act_SFW.deleteSFMWizard("Work Order", $wizardIDName);
 
 $bo_act_login.logOut(); 
 

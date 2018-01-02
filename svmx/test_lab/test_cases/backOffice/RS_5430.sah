@@ -8,12 +8,17 @@ $RS_5430.start();
 _setSpeed(100);
 
 var $newTransValue="trans-Process ID";
+var $viewName="ViewName5430";
+var $viewID=$viewName;
+var $labelStartsWith="Process ID";
+var $filterLanguage="English";
 
 //LOGIN TO SYSTEM
 $bo_act_login.login($g_url, $bac_unBase, $bac_pwdBase);
 
 //GO TO SALESFORCE SET UP->CUSTOM LABEL AND CREATE NEW CUSTOM LABEL FOR LABEL "PROCESS ID" 
-$bo_act_salesForceSetUP.createCustomLabelForAppPermission($newTransValue);
+$bo_act_customLabel.createNewView($viewName,$viewID,$labelStartsWith,$filterLanguage)
+$bo_act_customLabel.createCustomLabelForAppPermission($newTransValue);
 _log("custom label created successfully");
 
 //NAVIGATING SFM APP PERMISSION AND SELECTING OBJECT TYPE WORK ORDER AND PROCESS TYPE SFM TRANSACTION
@@ -26,14 +31,19 @@ $bo_act_navigation.navigateToSfmAppPermission();
 		_setValue($bo_pg_sfmAppPermissionD.txt_enterObjType,"Work Order");
 		_click($bo_pg_sfmAppPermissionD.sel_objtypeWO);
 		_wait(20000);
-_assertEqual("trans-Process ID", _getText(_div(104)));
-		var $afterTrans=_getText(_div(104));
-_alert($afterTrans);
-		_assertEqual($newTransValue, $afterTrans,"Custom label translation is unsuccessful");
+		
+		var $actValue=_getText(_span("svmx-column-header-text"));
+
+		if ($newTransValue== $actValue){
+			_log("Custom Label translation is successful");
+		}else{
+			_log("Custom Label translation was unsuccessful");
+		}
 
 //DELETE THE TRANSLATED DATA TO REVERT BACK TO ORIGINAL
-$bo_act_salesForceSetUP.deleteNewTranslatedValue();
+$bo_act_customLabel.deleteNewTranslatedValue();
 _log("custom label deleted successfully");
+$bo_act_customLabel.deleteView($viewName);
 _setSpeed(100);
 
 $RS_5430.end()

@@ -1,0 +1,48 @@
+//Author - Shashikala Kamath
+
+var $BVT_TC_002_SFW = _testcase("$BVT_TC_002_SFW",
+		"Configure the SFW to include standard SFMs only");
+
+$BVT_TC_002_SFW.start();
+_setSpeed(100);
+
+//Pre - Condition 
+$bo_act_login.login("https://test.salesforce.com", "lohithaadmin@swatpart2.com", "maxpl0re1");
+var $wizardSelectObjectName = "Work Order";
+var $wizardTitleName = $bo_act_common.generateRandomName("SFWTitle");
+var $wizardIDName = $bo_act_common.generateRandomName("SFWId");
+var $wizardStep1Type = "SFM";
+var $wizardStep1Name = "Create Quote from Work Order";
+var $wizardStep2Type = "Output Document";
+var $wizardStep2Name = "Manage Work Order Lines - Usage";
+var $executionMode1 = "Interactive";
+var $executionMode2 = "Background";
+var $wizardStep3Name = "Create Usage Lines from Estimates";
+var $wizardStep4Name = "Work Order Service Report";
+var $handOver1 = true;
+var $handOver2 = false;
+var $selectTemplateAtRunTime = false;
+	
+
+$bo_act_navigation.navigateToSfmWizard();
+$bo_act_SFW.createWizardGeneralInfo($wizardSelectObjectName, $wizardTitleName, $wizardIDName);
+$bo_act_SFW.createSFMWizardStepwithHandOver($wizardStep1Type, $wizardStep1Name, $executionMode1, $handOver1);
+$bo_act_SFW.createSFMWizardStepwithHandOver($wizardStep1Type, $wizardStep2Name, $executionMode1, $handOver1);
+$bo_act_SFW.createSFMWizardStepwithHandOver($wizardStep1Type, $wizardStep3Name, $executionMode1, $handOver1);
+$bo_act_SFW.createOutputDocumentWizardStepwithSelectTemplate($wizardStep2Type, $wizardStep4Name, $selectTemplateAtRunTime);
+
+//$bo_act_SFW.createSFMWizard($wizardSelectObjectName, $wizardTitleName, $wizardIDName, $wizardStep1Type, $wizardStep1Name, $executionMode1, $wizardStep2Type, $wizardStep2Name, $executionMode2);
+//$bo_act_SFW.createWizardGeneralInfo($wizardSelectObjectName, $wizardTitleName, $wizardIDName);
+//$bo_act_SFW.createWizardStep($wizardStep1Type, $wizardStep1Name, $executionMode1);
+//$bo_act_SFW.createWizardStep($wizardStep1Type, $wizardStep2Name, $executionMode1);
+//$bo_act_SFW.createWizardStep($wizardStep1Type, $wizardStep3Name, $executionMode1);
+//$bo_act_SFW.createWizardStep($wizardStep2Type, $wizardStep4Name, // $executionMode1);
+
+
+//$swat_act_sfmSearch.launchSfmSearch($searchItem,$workOrderNo);
+ 
+$bo_act_login.logOut();
+$BVT_TC_002_SFW.end();
+
+
+

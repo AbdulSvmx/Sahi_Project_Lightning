@@ -124,7 +124,7 @@ _log("records = "+records1);
 for (var i=0; i< records.length; i++) {
 var record1 = records1[i];
 var wo_token = record1.SVMXC__Scheduling_Change_Token__c;
-if(wo_token.includes("CHANGE_SERVICE_DURATION)){
+if(wo_token.includes("CHANGE_SERVICE_DURATION")){
 	_log("Scheduling token is updated");
 	}
 	else{

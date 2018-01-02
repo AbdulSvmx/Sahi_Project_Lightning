@@ -30,7 +30,7 @@ var $scheduleOnActual = _getText($bo_pg_PMPlan.txt_scheduledOnDate);
 _assertEqual($startDate,$lastRunDate, "Last Run Date is not equal to start date");
 _assert($lastRunDate != $scheduleOnActual,"Issue in Last Run Date and Scheduled On date");
 
-var $PMProcessId = $bo_act_PMProcess.createPMProcess("Time Based Preventive Maintenance", 30, $PMPlan,"One Per Plan");
+var $PMProcessId = $bo_act_PMProcess.createPMProcess("Time Based Preventive Maintenance", 32, $PMPlan,"One Per Plan");
 
 $bo_act_navigation.navigateToSetUpAndSearch("Installed Packages");
 if(_getText(_cell("SVMXC"))!="SVMXDEV")

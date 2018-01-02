@@ -1,9 +1,9 @@
 var $an_mttr_870 = _testcase("RS-7396","Work Order as Top level Object for Edit of Work Order");
 $an_mttr_870.start();
-var $un = "meghana.rao@servicemax.com";
-var $pwd = "salesforce100";
-var $url = "https://test.salesforce.com";
 var $data = _readExcelFile("../../analytics/an_excleData/an_Datasheet1.xlsx","Sheet1",true);
+var $un = $data[1]["Username"];
+var $pwd = $data[1]["pwd"];
+var $url = "https://test.salesforce.com";
 var $Account2 = $data[2]["Account"];
 var $Technician = $data[2]["Technician"];
 var $Product = $data[2]["Product"];

@@ -13,6 +13,8 @@ this.createTimeBasedPMPlanTemplate = function($ProductName,$coverage,$workOrderP
 		var $PMTemplateName = $bo_act_common.generateRandomName("PMT");
 		$bo_act_navigation.navigateToPMPlanTemplatePage();
 		_wait(30000,_isVisible($bo_pg_PMPlanTemplate.btn_newPMPlanTemplate));
+		if(_condition($bo_pg_PMPlanTemplate.btn_newPMPlanTemplate == null))
+			window.reload();
 		_click($bo_pg_PMPlanTemplate.btn_newPMPlanTemplate);
 		_wait(60000,_isVisible($bo_pg_PMPlanTemplate.txt_PMPlanTemplateName));
 		_setValue($bo_pg_PMPlanTemplate.txt_PMPlanTemplateName,$PMTemplateName);
@@ -22,7 +24,8 @@ this.createTimeBasedPMPlanTemplate = function($ProductName,$coverage,$workOrderP
 	   _setStrictVisibilityCheck(false);
 	   _getRecentWindow();
 	   _setValue($bo_pg_PMPlanTemplate.txt_sequence,1);
-	    $bo_act_common.searchfunction($workOrderPurpose);
+	   if($workOrderPurpose != null)
+	   $bo_act_common.searchfunction($workOrderPurpose);
 	   _setValue($bo_pg_PMPlanTemplate.txt_frequency,1);
 	   _setValue($bo_pg_PMPlanTemplate.txt_frequencyUnit,$frequencyUnit);
 	   _listItem($frequencyUnit);
@@ -35,7 +38,7 @@ this.createTimeBasedPMPlanTemplate = function($ProductName,$coverage,$workOrderP
 	    $bo_act_common.searchfunction($ProductName);
 	   _click($bo_pg_PMPlanTemplate.btn_update);
 	    _click($bo_pg_PMPlanTemplate.btn_saveIcon);
-	   _wait(60000, _isVisible($PMTemplateName));
+	   _wait(60000, _isVisible(_heading2($PMTemplateName)));
 		_logOutput($PMTemplateName+ " PM Plan Template is created");
 	   return $PMTemplateName;
 	};
@@ -74,7 +77,7 @@ this.updateUsageConditionRulesGridWithOutAdjFields = function($attribute,$operat
 	_click($bo_pg_PMPlanTemplate._listItem($operator));
 
 	_click($bo_pg_PMPlanTemplate.txt_frequencybox);
-	_click($bo_pg_PMPlanTemplate.txt_frequency);
+	_click($bo_pg_PMPlanTemplate.txt_frequency1);
 	_setValue($bo_pg_PMPlanTemplate.txt_frequencytxt,$frequency);
 	
 	_click($bo_pg_PMPlanTemplate.txt_startAtbox);
@@ -99,8 +102,8 @@ this.updateUsageConditionRulesGridWithAdjFields = function($attribute,$operator,
 	_click(_listItem($operator));
 
 	_click($bo_pg_PMPlanTemplate.txt_frequencybox);
-	_click($bo_pg_PMPlanTemplate.txt_frequency);
-		_setValue($bo_pg_PMPlanTemplate.txt_frequency,$frequency);
+	_click($bo_pg_PMPlanTemplate.txt_frequency1);
+		_setValue($bo_pg_PMPlanTemplate.txt_frequency1,$frequency);
 	
 		_click($bo_pg_PMPlanTemplate.txt_startAtbox);
 		_click($bo_pg_PMPlanTemplate.txt_startAt);
@@ -137,10 +140,43 @@ this.updateUsageConditionRulesGridWithAdjFields = function($attribute,$operator,
 };
 	
 this.saveConditionBasedPM = function(){
+	_wait(5000);
 	_click($bo_pg_PMPlanTemplate.btn_customUISave);	
-	_wait(15000,isVisible(_heading1("PM Plan Template:")));
 	_assertNotVisible($bo_pg_PMPlanTemplate.img_messagebox);
+	_wait(15000,isVisible(_heading1("PM Plan Template:")));
+	_assertExist(_heading1("PM Plan Template:"));
 };
+
+this.createCriteriaBasedPMTemplate = function($productName,$workOrderPurpose)
+	{
+		var $PMTemplateName = $bo_act_common.generateRandomName("PMT");
+		$bo_act_navigation.navigateToPMPlanTemplatePage();
+		_click(_submit("Create Condition Based PM Plan Template"));
+		_wait(60000,_isVisible($bo_pg_PMPlanTemplate.txt_templateName));
+		_setValue($bo_pg_PMPlanTemplate.txt_templateName,$PMTemplateName);
+		_click($bo_pg_PMPlanTemplate.txt_conditionType);
+		_click(_listItem("Criteria/Comparison Based"));
+		_setValue($bo_pg_PMPlanTemplate.txt_product,$productName);
+		_click($bo_pg_PMPlanTemplate.img_filterIcon);
+		_click(_div(0,_rightOf($bo_pg_PMPlanTemplate.txt_product)));
+		_click(_listItem($productName));
+		return $PMTemplateName;
+	};
+	this.firstCriteriaBasedCondition = function($attribute,$operator,$value){
+		_wait(5000);
+		_click($bo_pg_PMPlanTemplate.link_addRow);
+		_click(_div("svmx-grid-cell-inner [2]"));
+		_wait(3000,_isVisible($bo_pg_PMPlanTemplate.txt_attribute));
+		_click($bo_pg_PMPlanTemplate.txt_attribute);
+		_click(_div($attribute));
+
+		_click(_div("svmx-grid-cell-inner [3]"));
+		_click($bo_pg_PMPlanTemplate.txt_operator);
+		_click(_listItem($operator));
+		
+		_click(_div("svmx-grid-cell-inner [4]"));
+		_setValue(_textbox(0,_under(_div("Value"))),$value);
+	};
 
 	
 	};

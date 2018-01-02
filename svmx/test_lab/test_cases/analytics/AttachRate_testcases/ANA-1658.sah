@@ -1,9 +1,9 @@
 var $an_ar_1658 = _testcase("ana-1658","SCON being inactive ");
 $an_ar_1658.start();
-var $un = "meghana.rao@servicemax.com";
-var $pwd = "salesforce100";
-var $url = "https://test.salesforce.com";
 var $data = _readExcelFile("../../analytics/an_excleData/an_Datasheet1.xlsx","Sheet1",true);
+var $un = $data[1]["Username"];
+var $pwd = $data[1]["pwd"];
+var $url = "https://test.salesforce.com";
 var $Account = $data[1]["Account"];
 var $Technician = $data[1]["Technician"];
 var $Product = $data[1]["Product"];
@@ -85,8 +85,7 @@ var $ana_1658_ib1_id;
 var $ana_1658_scon1_id ;
 var $ana_1658_covered_product;
 
-for(var $i=0;$ana_1658_ib1_id == null ; $i++)
-{
+
 var $ana_1658_query_RV1 = "Select SVMXC__Installed_Product__c,SVMXC__Service_Contract__c,SVMXC__Covered_By__c from SVMXC__SPM_Contract_Penetration__c where SVMXC__Installed_Product__c ='"+$ana_1658_IB_ID+"'";
 var $ana_1658_resultRV1 = $op_act_sForceApiCall.sForceQuery($un, $pwd, $ana_1658_query_RV1,"query");
 
@@ -97,7 +96,7 @@ $ana_1658_resultRV1.forEach(function($varRV1) {
 	$ana_1658_covered_product = $varRV1.SVMXC__Covered_By__c;	
 	
 });
-}
+
 _assertEqual($ana_1658_IB_ID ,$ana_1658_ib1_id);
 _assertEqual("Not Covered" ,$ana_1658_covered_product);
 $an_ar_1658.end();

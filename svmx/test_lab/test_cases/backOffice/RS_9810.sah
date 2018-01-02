@@ -105,8 +105,8 @@ var $wizardTitleName = $bo_act_common.generateRandomName("SFWTitle");
 var $wizardIDName = $bo_act_common.generateRandomName("SFWId");
 $bo_act_navigation.navigateToSfmWizard();
 $bo_act_SFW.createWizardGeneralInfo("Work Order", $wizardTitleName, $wizardIDName);
-$bo_act_SFW.createWizardStepwithHandOver("Others", $actionTitle, "Interactive",true);
-$bo_act_SFW.createWizardStepwithHandOver("Others", $actionTitle, "Interactive",false);
+$bo_act_SFW.createOthersWizardStepwithHandOver("Others", $actionTitle,true);
+$bo_act_SFW.createOthersWizardStepwithHandOver("Others", $actionTitle,false);
 $bo_act_SFW.quickSaveSFWizard();
 $bo_act_SFW.saveAndClose();
 
@@ -115,11 +115,11 @@ var $contactName = $bo_act_contacts.createContact($accountName);
 var $caseNumber = $bo_act_Cases.createCase("New", "High", "Email");
 var $productName = $bo_act_products.createProduct();
 var $IBName = $bo_act_installedProduct.createInstalledProduct($productName, $accountName, $contactName);
-$bo_act_workOrders.createWorkOrder($caseNumber, $accountName, $contactName, $IBName, "Open", "High", "Field Service");
+var $WONumber = $bo_act_workOrders.createWorkOrder($caseNumber, $accountName, $contactName, $IBName, "Open", "High", "Field Service");
 
 _selectDomain("/svmx/");
-_assertExists(_button("/$actionTitle/",_near(_cell($wizardTitleName))));
-_click(_button("/$actionTitle/",_near(_cell($wizardTitleName))));
+_assertExists(_button($actionTitle,_near(_cell($wizardTitleName))));
+_click(_button($actionTitle,_near(_cell($wizardTitleName))));
 _selectDomain();
 _assertContainsText("Work Order updated",_div("messageText"));
 _assertExists(_submit("Continue"));
@@ -128,11 +128,13 @@ _wait(10000,isVisible(_div("messageText")));
 _assertContainsText("Work Order updated",_div("messageText"));
 
 //Clean up function
-var $datacreated = [$contactName,$accountName,$caseNumber,$productName,$IBName,$WONumber];
+var $datacreated = [$contactName,$caseNumber,$accountName,$productName,$IBName,$WONumber];
 for (var i = 0; i < $datacreated.length; i++) {
 	$bo_act_common.cleanUpfunction($datacreated[i]);
 }
 $bo_act_SFW.deleteWizards("Work Order", $wizardIDName);
+$bo_act_customAction.deleteCustomAction("Work Order", $actionTitle);
+$bo_act_salesforceSetUp.deleteapexClasses($className);
 $RS_9810.end();
 
 

@@ -36,11 +36,11 @@ function login($g_un,$g_pwd){
 
 function create_Skill($s_Category, $s_Name)
 {
-	var skills_List = sforce.connection.query("SELECT Name,SVMXC__Active__c FROM SVMXC__Skill__c Where SVMXC__Skill_Category__c = 'Repair' AND Name = 'Repair'");
+	var skills_List = sforce.connection.query("SELECT Name,SVMXC__Active__c FROM SVMXC__Skill__c Where SVMXC__Skill_Category__c = '"+$s_Category+"' AND Name = '" + $s_Name+"'");
 	var skills_arr = skills_List.getArray("records");
 	if(skills_arr.length > 0)
 		{
-		return "Skill Exists"
+		return "Skill Exists";
 		}
 	else
 		{

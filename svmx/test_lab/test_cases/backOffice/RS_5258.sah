@@ -41,7 +41,7 @@ _assert($lastRunDate != $actualScheduledOn,"Issue in Last Run Date and Scheduled
 
 //Clean up functions
 
-var $datacreated = [$PMPlanName,$PMPTempName,$contactName,$accName,$slaterm,$proName,$installedProduct,$WONumber,$location,$sconName];
+var $datacreated = [$PMPlanName,$PMPTempName,$accName,$slaterm,$proName,$installedProduct,$location,$sconName];
 for (var i = 0; i < $datacreated.length; i++) {
 	$bo_act_common.cleanUpfunction($datacreated[i]);
 }
