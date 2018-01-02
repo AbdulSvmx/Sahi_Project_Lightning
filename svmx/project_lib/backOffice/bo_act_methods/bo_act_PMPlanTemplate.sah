@@ -140,10 +140,43 @@ this.updateUsageConditionRulesGridWithAdjFields = function($attribute,$operator,
 };
 	
 this.saveConditionBasedPM = function(){
+	_wait(5000);
 	_click($bo_pg_PMPlanTemplate.btn_customUISave);	
-	_wait(15000,isVisible(_heading1("PM Plan Template:")));
 	_assertNotVisible($bo_pg_PMPlanTemplate.img_messagebox);
+	_wait(15000,isVisible(_heading1("PM Plan Template:")));
+	_assertExist(_heading1("PM Plan Template:"));
 };
+
+this.createCriteriaBasedPMTemplate = function($productName,$workOrderPurpose)
+	{
+		var $PMTemplateName = $bo_act_common.generateRandomName("PMT");
+		$bo_act_navigation.navigateToPMPlanTemplatePage();
+		_click(_submit("Create Condition Based PM Plan Template"));
+		_wait(60000,_isVisible($bo_pg_PMPlanTemplate.txt_templateName));
+		_setValue($bo_pg_PMPlanTemplate.txt_templateName,$PMTemplateName);
+		_click($bo_pg_PMPlanTemplate.txt_conditionType);
+		_click(_listItem("Criteria/Comparison Based"));
+		_setValue($bo_pg_PMPlanTemplate.txt_product,$productName);
+		_click($bo_pg_PMPlanTemplate.img_filterIcon);
+		_click(_div(0,_rightOf($bo_pg_PMPlanTemplate.txt_product)));
+		_click(_listItem($productName));
+		return $PMTemplateName;
+	};
+	this.firstCriteriaBasedCondition = function($attribute,$operator,$value){
+		_wait(5000);
+		_click($bo_pg_PMPlanTemplate.link_addRow);
+		_click(_div("svmx-grid-cell-inner [2]"));
+		_wait(3000,_isVisible($bo_pg_PMPlanTemplate.txt_attribute));
+		_click($bo_pg_PMPlanTemplate.txt_attribute);
+		_click(_div($attribute));
+
+		_click(_div("svmx-grid-cell-inner [3]"));
+		_click($bo_pg_PMPlanTemplate.txt_operator);
+		_click(_listItem($operator));
+		
+		_click(_div("svmx-grid-cell-inner [4]"));
+		_setValue(_textbox(0,_under(_div("Value"))),$value);
+	};
 
 	
 	};

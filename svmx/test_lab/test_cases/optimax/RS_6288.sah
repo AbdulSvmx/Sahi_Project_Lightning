@@ -27,7 +27,7 @@ _log($rowCount);
 $rowCount=$rowCount-2;
 _log($rowCount);
 _setValue(_textbox("page1:form1:block1:j_id34:j_id35:"+$rowCount+":j_id44"), $SLAName);
-_click(_cell("dataCell[13]"));
+//_click(_cell("dataCell[13]"));
 _check(_checkbox("page1:form1:block1:j_id34:j_id35:"+$rowCount+":j_id52"));
 _setSelected(_select("page1:form1:block1:DetailSection:tab1block1:j_id85:j_id86:j_id88"), "WorkOrder");
 _click(_button("Add Record"));

@@ -188,6 +188,10 @@ _assertEqual($actualRateTypeOnWorkOrder,$rateType,"Actual and expected Rate Type
 _assertEqual($actualProformaInvoiceAmountOnWorkOrder,"$2,000.000","Actual and expected Proforma Invoice Amount On Work Order are not same");
 _assertEqual($actualTotalBillableAmountOnWorkOrder,"$1,740.000","Actual and expected Total Billable Amount On Work Order are not same");
 
+
+//Delete SFM Wizard 
+$bo_act_SFW.deleteSFMWizard("Work Order", $wizardIDName);
+
 /**
 *Clean up function
 */
@@ -196,9 +200,6 @@ var $datacreated = [$WONumber,$caseNumber,$sconName,$IBName,$productName,$contac
 for (var i = 0; i < $datacreated.length; i++) {
 $bo_act_common.cleanUpfunction($datacreated[i]);
 }
-
-// Delete SFM Wizard 
-$bo_act_SFW.deleteSFMWizard("Work Order", $wizardIDName);
 
 $bo_act_login.logOut(); 
 

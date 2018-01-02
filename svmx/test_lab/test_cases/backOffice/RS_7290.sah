@@ -79,6 +79,9 @@ $bo_act_serviceMaintenanceContracts.addCoveredLocationToServiceContract($service
 //Add Entitled Contact to Service Contract 
 
 $bo_act_serviceMaintenanceContracts.addEntitledContactsToServiceContract($serviceConractName, $contactName);
+$bo_act_navigation.navigateToServiceMaintenanceContractPage();
+_click(_link($serviceConractName));
+_wait(15000, _isVisible($bo_pg_serviceMaintenanceContracts.btn_newCoveredProduct));
 
 var $expecctedIBUnder_CoveredProduct =  _getText(_link(0,_under(_tableHeader("Installed Product"))));
 var $expecctedLocationUnder_CoveredLocations =  _getText(_link(0,_under(_tableHeader("Location"))));;

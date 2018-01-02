@@ -100,17 +100,6 @@ var $futureYear1 = 2;			//End Date 'TODAY's' Date + 2 YEARS
 $bo_act_serviceMaintenanceContracts.addCoveredLocationToServiceContract($serviceConractName, $locationName, $slaName03, $pastYear1, $futureYear1);
 
 
-var $expecctedIBUnder_CoveredProduct =  _getText(_link(0,_under(_tableHeader("Installed Product"))));
-var $expecctedLocationUnder_CoveredLocations =  _getText(_link(0,_under(_tableHeader("Location"))));;
-
-//validation
-//Validating the Covered Products Percent on Scon
-_assertEqual($expecctedIBUnder_CoveredProduct,$IBName,"Actual and expected covered Products are not same");
-
-//Validating the Covered Locations Percent on Scon
-_assertEqual($expecctedLocationUnder_CoveredLocations,$locationName,"Actual and expected covered Locations are not same");
-
-
 /**
  * Create Case record
  */
