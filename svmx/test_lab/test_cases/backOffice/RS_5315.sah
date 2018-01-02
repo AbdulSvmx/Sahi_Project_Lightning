@@ -156,7 +156,7 @@ $bo_act_getPrice.calculateGetPrice();
 
 //Validation of Get Price for Labor lines
 $bo_act_getPrice.editLaborLineToSFMDelivery($searchValue);
-
+_wait(2000);
 var $LaborLinePricePerUnitActual = _getText(_textbox(0,_rightOf(_label("/Line Price Per Unit/"))));
 var $LaborCoveredActual = _getText(_textbox(0,_rightOf(_label("/Covered %/"))));
 var $LaborBillableQtyActual = _getText(_textbox(0,_rightOf(_label("/Billable Qty/"))));
@@ -182,6 +182,7 @@ $bo_act_getPrice.calculateGetPrice();
 
 //Validation of Get Price for 2nd Labor lines
 $bo_act_getPrice.editLaborLineToSFMDelivery($searchValue1);
+_wait(2000);
 
 var $LaborLinePricePerUnitActual1 = _getText(_textbox(0,_rightOf(_label("/Line Price Per Unit/"))));
 var $LaborCoveredActual1 = _getText(_textbox(0,_rightOf(_label("/Covered %/"))));
