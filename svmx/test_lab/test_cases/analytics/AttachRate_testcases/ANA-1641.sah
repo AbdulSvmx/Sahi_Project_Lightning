@@ -16,7 +16,7 @@ $bo_act_login.login($url, $un, $pwd);
 
 // To create a SCON
 
-var $ana_1641_create_SCON = "SVMXC__Service_Contract__c SCON1 = new SVMXC__Service_Contract__c(Name = 'SCON Automation' , SVMXC__Company__c = '"+$Account+"' , SVMXC__Active__c = True, SVMXC__Start_Date__c = Date.valueOf('2017-01-01') , SVMXC__End_Date__c = Date.valueOf('2017-12-31') );insert SCON1;";
+var $ana_1641_create_SCON = "SVMXC__Service_Contract__c SCON1 = new SVMXC__Service_Contract__c(Name = 'SCON Automation' , SVMXC__Company__c = '"+$Account+"' , SVMXC__Active__c = True, SVMXC__Start_Date__c = Date.valueOf('2017-01-01') , SVMXC__End_Date__c = Date.valueOf('2018-12-31') );insert SCON1;";
 var $ana_1641_result = $op_act_sForceApiCall.sForceQuery($un, $pwd, $ana_1641_create_SCON , "create");
 var $ana_1641_query_SCON = "Select Id , Name from SVMXC__Service_Contract__c where Name = 'SCON Automation' Limit 1";
 	
