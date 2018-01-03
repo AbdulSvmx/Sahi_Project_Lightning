@@ -11,6 +11,8 @@ $bo_act_login.login("https://test.salesforce.com", "lohithaadmin@swatpart2.com",
 var $wizardSelectObjectName = "Work Order";
 var $wizardTitleName = $bo_act_common.generateRandomName("SFWTitle");
 var $wizardIDName = $bo_act_common.generateRandomName("SFWId");
+var $wizardTitleName1 = $bo_act_common.generateRandomName("Parts Order");
+var $wizardIDName1 = $bo_act_common.generateRandomName("PartsOrderID");
 var $wizardStep1Type = "SFM";
 var $wizardStep1Name = "Create Quote from Work Order";
 var $wizardStep2Type = "Output Document";
@@ -19,17 +21,23 @@ var $executionMode1 = "Interactive";
 var $executionMode2 = "Background";
 var $wizardStep3Name = "Create Usage Lines from Estimates";
 var $wizardStep4Name = "Work Order Service Report";
+var $wizardStep5Name = "Create New Shipment Order";
 var $handOver1 = true;
 var $handOver2 = false;
 var $selectTemplateAtRunTime = false;
+var $wizardSelectObjectName1 = "Parts Order";
+
 	
 
 $bo_act_navigation.navigateToSfmWizard();
+// Test
 $bo_act_SFW.createWizardGeneralInfo($wizardSelectObjectName, $wizardTitleName, $wizardIDName);
 $bo_act_SFW.createSFMWizardStepwithHandOver($wizardStep1Type, $wizardStep1Name, $executionMode1, $handOver1);
 $bo_act_SFW.createSFMWizardStepwithHandOver($wizardStep1Type, $wizardStep2Name, $executionMode1, $handOver1);
 $bo_act_SFW.createSFMWizardStepwithHandOver($wizardStep1Type, $wizardStep3Name, $executionMode1, $handOver1);
 $bo_act_SFW.createOutputDocumentWizardStepwithSelectTemplate($wizardStep2Type, $wizardStep4Name, $selectTemplateAtRunTime);
+$bo_act_SFW.saveAndClose();
+
 
 //$bo_act_SFW.createSFMWizard($wizardSelectObjectName, $wizardTitleName, $wizardIDName, $wizardStep1Type, $wizardStep1Name, $executionMode1, $wizardStep2Type, $wizardStep2Name, $executionMode2);
 //$bo_act_SFW.createWizardGeneralInfo($wizardSelectObjectName, $wizardTitleName, $wizardIDName);
@@ -40,6 +48,9 @@ $bo_act_SFW.createOutputDocumentWizardStepwithSelectTemplate($wizardStep2Type, $
 
 
 //$swat_act_sfmSearch.launchSfmSearch($searchItem,$workOrderNo);
+$bo_act_navigation.navigateToSfmWizard();
+$bo_act_SFW.createWizardGeneralInfo($wizardSelectObjectName1, $wizardTitleName1, $wizardIDName1);
+$bo_act_SFW.createSFMWizardStepwithHandOver($wizardStep1Type, $wizardStep5Name, $executionMode1, $handOver1);
  
 $bo_act_login.logOut();
 $BVT_TC_002_SFW.end();

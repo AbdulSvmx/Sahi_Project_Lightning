@@ -4,8 +4,7 @@
 var $bo_act_serviceMaintenanceContracts = new function bo_act_serviceMaintenanceContracts() {
 
 	/**
-	 * Create an Account
-	 * 
+	 * Create service Maintenance Contracts
 	 */
 	this.createServiceMaintenanceContract = function($accName, $slaTermName, $futureYear, $pastYear) {
 		var $sconName = $bo_act_common.generateRandomName("Scon");
@@ -302,7 +301,7 @@ this.addTravelPolicyToServiceContract = function($sconName,$defaultTravelPrice,$
 };
 
 //Edit Single Travel Policy to Service Contract
-this.addTravelPolicyToSCONWithTwoLines = function($sconName,$defaultTravelPrice,$defaultTravelUnit,$travelRoundingType,$travelPolicyUnit,$travelPolicyRate,$travelPolicyUnit1,$travelPolicyRate1,$serviceType, $currencyType){
+this.addTravelPolicyToSCONWithTwoLines = function($sconName,$defaultTravelPrice,$defaultTravelUnit,$travelRoundingType,$travelPolicyUnit,$travelPolicyRate,$travelPolicyUnit1,$travelPolicyRate1,$serviceType,$currencyType){
 	$bo_act_navigation.navigateToServiceMaintenanceContractPage();
 	_click(_link($sconName));
 	_selectDomain("/svmx/");
@@ -327,7 +326,9 @@ this.addTravelPolicyToSCONWithTwoLines = function($sconName,$defaultTravelPrice,
 	_wait(2000, _isVisible($bo_pg_serviceMaintenanceContracts.btn_editSecondLaborPricingRow));
 	_click($bo_pg_serviceMaintenanceContracts.btn_editSecondLaborPricingRow);
 	_wait(2000);
-	_setValue($bo_pg_serviceMaintenanceContracts.txt_currencyISOCode, $currencyType);
+	//_setValue($bo_pg_serviceMaintenanceContracts.txt_currencyISOCode, $currencyType);
+	_click(_div(0,_rightOf(_label("Currency ISO Code:",_near(_span("Update"))))));
+	_click(_listItem($currencyType));
 	_setValue($bo_pg_serviceMaintenanceContracts.txt_travelPolicyUnit, $travelPolicyUnit1);
 	_setValue($bo_pg_serviceMaintenanceContracts.txt_partsRates, $travelPolicyRate1);
 	 $bo_act_common.searchfunction($serviceType);	//Search Values like Service Types Name
