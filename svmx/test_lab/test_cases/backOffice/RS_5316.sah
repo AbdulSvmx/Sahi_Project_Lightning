@@ -73,15 +73,6 @@ var $activityProduct = (($activityType[1].concat(" : ")).concat($productName));
 
 $bo_act_serviceMaintenanceContracts.addLaborPricingToServiceContractUsingActivityProduct($sconName, $RoundingType, $unit[1], $minimumLaborMins, $regularRate, $activityProduct);
 
-var $expecctedIBUnder_CoveredProduct =  _getText(_link(0,_under(_tableHeader("Installed Product"))));
-var $expecctedContactUnder_EntitledContacts =  _getText(_link(0,_under(_tableHeader("Contact"))));
-
-//validation
-//Validating the Covered Products Percent on Scon
-_assertEqual($expecctedIBUnder_CoveredProduct,$IBName,"Actual and expected covered Products are not same");
-
-//Validating the Entitled Contacts Percent on Scon
-_assertEqual($expecctedContactUnder_EntitledContacts,$contactName,"Actual and expected Entitled Contacts are not same");
 
 /**
 * Create Case record
@@ -178,6 +169,9 @@ $bo_act_getPrice.closeEditedWOLineToSFMDelivery();
 
 $bo_act_getPrice.saveSFMDelivery();
 
+//Delete SFM Wizard 
+$bo_act_SFW.deleteSFMWizard("Work Order", $wizardIDName);
+
 /**
 *Clean up function
 */
@@ -188,10 +182,7 @@ $bo_act_common.cleanUpfunction($datacreated[i]);
 }
 
 // Delete the Activity ID's Created 
-$bo_act_activityMaster.deleteActivityMaster($activityID);
-
-//Delete SFM Wizard 
-$bo_act_SFW.deleteSFMWizard("Work Order", $wizardIDName);
+//$bo_act_activityMaster.deleteActivityMaster($activityID);
 
 $bo_act_login.logOut(); 
 

@@ -179,6 +179,9 @@ $bo_act_getPrice.closeEditedWOLineToSFMDelivery();
 
 $bo_act_getPrice.saveSFMDelivery();
 
+//Delete SFM Wizard 
+$bo_act_SFW.deleteSFMWizard("Work Order", $wizardIDName);
+
 /**
 *Clean up function
 */
@@ -189,12 +192,9 @@ $bo_act_common.cleanUpfunction($datacreated[i]);
 
 //Deleting the above created data
 
-$bo_act_activityMaster.deleteActivityMaster($activityID);
+/*$bo_act_activityMaster.deleteActivityMaster($activityID);
 $bo_act_activityMaster.deleteActivityMaster($activityID1);
-$bo_act_servicePricebooks.deleteCustomServicePricebooks($ServicePriceBookName);
-
-// Delete SFM Wizard 
-$bo_act_SFW.deleteSFMWizard("Work Order", $wizardIDName);
+$bo_act_servicePricebooks.deleteCustomServicePricebooks($ServicePriceBookName);*/
 
 $bo_act_login.logOut(); 
 

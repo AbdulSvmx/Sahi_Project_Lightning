@@ -90,7 +90,7 @@ var $an_act_MTBF = new function an_act_MTBF() {
 		_wait(200);
 		_click($an_pg_mtbf.btn_criteria);
 		_click($an_pg_mtbf.QC_IB);
-		_click(_listItem("customdowntime"));
+		_click(_listItem("Custom Inventory"));
 		_click($an_pg_mtbf.QC_WO);
 		_click(_listItem("SVMXSTD: To Qualify Work Orders for FTF processing"));
 		_click($an_pg_mtbf.btn_save);
@@ -98,6 +98,86 @@ var $an_act_MTBF = new function an_act_MTBF() {
 		
 		
 	};	
+	
+	this.mtbf_custom= function($Calculationmethodname) {
+
+		// To setup the values
+		$TopLevelWO.an_toplevelwo();
+		_click($an_pg_mtbf.metrics);
+		_click($an_pg_mtbf.mean_time_between_failure);
+		_click($an_pg_mtbf.btn_add);
+		_wait(200);
+		_click($an_pg_mtbf.btn_activecheckbox);
+		_setValue($an_pg_mtbf.txt_description, $Calculationmethodname);
+		_wait(200);
+		_click($an_pg_mtbf.btn_settings);
+		_click($an_pg_mtbf.Consider_Downtime_from);
+		_click($an_pg_mtbf.list_item_wo);
+		_click($an_pg_mtbf.txt_created_on_date_field);
+		_click(_listItem("Custom Start Time"));
+		_click($an_pg_mtbf.txt_fixed_on_date_field);
+		_click(_listItem("Custom End Time[1]"));
+		
+		_click($an_pg_mtbf.txt_Account);
+		_click(_listItem("Custom Account IB"));
+		_click($an_pg_mtbf.Installed_product_field);
+		_click(_listItem("custom_Installed_Product"));
+		_click($an_pg_mtbf.Business);
+		_click($an_pg_mtbf.BH);
+		_click($an_pg_mtbf.mapping);
+		_click($an_pg_mtbf.none);
+		_wait(200);
+		_click($an_pg_mtbf.btn_criteria);
+		_click($an_pg_mtbf.QC_IB);
+		_click($an_pg_mtbf.shipped_loan);
+		_click($an_pg_mtbf.QC_WO);
+		_click($an_pg_mtbf.closed_wo);
+		_click($an_pg_mtbf.btn_save);
+		_click($an_pg_mtbf.btn_ok);
+		
+		
+	};	
+	
+	this.mtbf_custom_mapping= function($Calculationmethodname) {
+
+		// To setup the values
+		$TopLevelWO.an_toplevelwo();
+		_click($an_pg_mtbf.metrics);
+		_click($an_pg_mtbf.mean_time_between_failure);
+		_click($an_pg_mtbf.btn_add);
+		_wait(200);
+		_click($an_pg_mtbf.btn_activecheckbox);
+		_setValue($an_pg_mtbf.txt_description, $Calculationmethodname);
+		_wait(200);
+		_click($an_pg_mtbf.btn_settings);
+		_click($an_pg_mtbf.Consider_Downtime_from);
+		_click($an_pg_mtbf.list_item_wo);
+		_click($an_pg_mtbf.txt_created_on_date_field);
+		_click(_listItem("Custom Start Time"));
+		_click($an_pg_mtbf.txt_fixed_on_date_field);
+		_click(_listItem("Custom End Time[1]"));
+		
+		_click($an_pg_mtbf.txt_Account);
+		_click(_listItem("Custom Account IB"));
+		_click($an_pg_mtbf.Installed_product_field);
+		_click(_listItem("custom_Installed_Product"));
+		_click($an_pg_mtbf.Business);
+		_click($an_pg_mtbf.BH);
+		_click($an_pg_mtbf.mapping);
+		_click(_listItem("ANA-9822"));
+		_wait(200);
+		_click($an_pg_mtbf.btn_criteria);
+		_click($an_pg_mtbf.QC_IB);
+		_click($an_pg_mtbf.shipped_loan);
+		_click($an_pg_mtbf.QC_WO);
+		_click(_listItem("ANA_9822"));
+		_click($an_pg_mtbf.btn_save);
+		_click($an_pg_mtbf.btn_ok);
+		
+		
+	};	
+	
+	
 	
 	
 	

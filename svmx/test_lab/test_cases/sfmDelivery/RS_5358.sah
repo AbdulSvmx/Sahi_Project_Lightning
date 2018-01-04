@@ -11,4 +11,28 @@ $bo_act_navigation.navigateToSfmSearchDesigner();
 $sfm_act_search.newCustomSearch($searchName,$searchObject);
 $sfm_act_search.buildExpression($clicks,$exprsnVal,$sheetName);
 $sfm_act_search.addResultsToDisplay(1,"searchResult");
+_click($sfm_pg_search.btn_save);
+$bo_act_navigation.navigateToHome();
+$sfm_act_search.searchSfmSearches($searchName);
+_click(_span($searchName));
+if(_isVisible(_link(0,_under(_span("Work Order Number"))))){
+	$windowName = _getText(_link(0,_under(_span("Work Order Number"))));
+	_log($windowName);
+	_click(_link(0,_under(_span("Work Order Number"))));
+	_wait(3000);
+	_selectWindow("/Work Order: "+$windowName+"/");
+	_wait(3000);
+	if(_getText(_div(0,_rightOf(_span("/Order Status/"))))=="Open"){
+		_log("Pass");
+	}
+	else if(_getText(_div(0,_rightOf(_span("/Account/"))))!="null"&&_getText(_div(0,_rightOf(_span("/Billing Type/"))))=="Contract"){
+		_log("Pass");
+	}
+	else{
+		_log("Fail");
+	}
+}
+else{
+	_log("No Records Retreived");
+}
 $rs_5358.end();

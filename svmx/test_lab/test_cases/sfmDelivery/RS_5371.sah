@@ -20,5 +20,6 @@ $sfm_act_search.buildExpression($clicks,$exprsnVal,$sheetName);
 $sfm_act_search.addResultsToDisplay(7, "Options");
 $bo_act_navigation.navigateToHome();
 $sfm_act_search.searchSfmSearches($searchName);
-_wait(5000);
+_click(_span($searchName));
+//$sfm_act_addDeleteMeth.deleteSearch($searchName);
 $rs_5371.end();

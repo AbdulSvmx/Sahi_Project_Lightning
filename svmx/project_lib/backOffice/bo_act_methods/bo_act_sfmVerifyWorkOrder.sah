@@ -64,6 +64,7 @@ this.verifyWizardOnWOObj=function($sfmName){
 				_fail("Launching of wizard in delivery failed");
 			}
 		_selectDomain();
+			_wait(10000);
 		}		
 		this.wizardButtonNotVisible=function($wizardname){
 			
@@ -105,8 +106,23 @@ this.verifyWizardOnWOObj=function($sfmName){
 				_selectDomain("/svmx/");
 				_click(_button($SFMName));
 				_selectDomain();					
-			}			
-
+			}
+				this.wizardVisibility=function($wizardTitleName ){
+					_selectDomain("/svmx/");
+				var $textDisplay=_getText(_table("tbcontainer"));
+					if(!$wizardTitleName.indexOf($textDisplay) != -1){
+						_log("Wizard is visible")
+							
+					}else{
+						 _log("Wizard is not visible")
+					}		
+					 _selectDomain();				
+				}			
+					
+					this.showAllTab=function($tabName){
+						_click($bo_pg_sfmVerifyWorkOrder.img_allTab);
+						_click(_link($tabName));
+					}
 	
 	};
 

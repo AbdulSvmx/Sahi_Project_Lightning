@@ -82,5 +82,15 @@ $delete_attachrate = "delete [Select Id from SVMXC__ServiceMax_Config_Data__c wh
 var $delete_data = $op_act_sForceApiCall.sForceQuery($un, $pwd, $delete_attachrate , "create");
 
 
+//Delete Mean time between failure
+
+
+var $mtbf = "Select Id from SVMXC__ServiceMax_Processes__c where SVMXC__ProcessID__c = 'ContractPenetration'";
+var $fetchmtbf = $op_act_sForceApiCall.sForceQuery($un, $pwd, $mtbf,"query");
+
+var $mtbf_process = $fetchmtbf[0].Id;
+
+$delete_mtbf = "delete [Select Id from SVMXC__ServiceMax_Config_Data__c where SVMXC__Dispatch_Process__c = '"+$mtbf_process+"' ];";
+var $delete_data = $op_act_sForceApiCall.sForceQuery($un, $pwd, $delete_mtbf , "create");
 
 

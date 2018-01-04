@@ -16,7 +16,7 @@ $bo_act_login.login($url, $un, $pwd);
 
 // To create a SCON
 
-var $ana_1641_create_SCON = "SVMXC__Service_Contract__c SCON1 = new SVMXC__Service_Contract__c(Name = 'SCON Automation' , SVMXC__Company__c = '"+$Account+"' , SVMXC__Active__c = True, SVMXC__Start_Date__c = Date.valueOf('2017-01-01') , SVMXC__End_Date__c = Date.valueOf('2017-12-31') );insert SCON1;";
+var $ana_1641_create_SCON = "SVMXC__Service_Contract__c SCON1 = new SVMXC__Service_Contract__c(Name = 'SCON Automation' , SVMXC__Company__c = '"+$Account+"' , SVMXC__Active__c = True, SVMXC__Start_Date__c = Date.valueOf('2017-01-01') , SVMXC__End_Date__c = Date.valueOf('2018-12-31') );insert SCON1;";
 var $ana_1641_result = $op_act_sForceApiCall.sForceQuery($un, $pwd, $ana_1641_create_SCON , "create");
 var $ana_1641_query_SCON = "Select Id , Name from SVMXC__Service_Contract__c where Name = 'SCON Automation' Limit 1";
 	
@@ -78,12 +78,11 @@ var $ana_1641_cp_ID;
 //$an_act_AttachRate.attachrate_installed_IB("ATTACH RATE 1");
 $an_act_AttachRate.ScheduleNotifications("meghana.rao@servicemax.com");
 
-var $ana_1641_ib1_id = null ;
+var $ana_1641_ib1_id;
 var $ana_1641_scon1_id ;
 var $ana_1641_covered_product;
 
-for(var $i=0;$ana_1641_ib1_id == null ; $i++)
-{
+
 var $ana_1641_query_RV1 = "Select SVMXC__Installed_Product__c,SVMXC__Service_Contract__c,SVMXC__Covered_By__c from SVMXC__SPM_Contract_Penetration__c where SVMXC__Installed_Product__c = '"+$ana_1641_IB_ID+"' AND SVMXC__Service_Contract__c = '"+$ana_1641_SCON+"'";
 var $ana_1641_resultRV1 = $op_act_sForceApiCall.sForceQuery($un, $pwd, $ana_1641_query_RV1,"query");
 
@@ -94,7 +93,6 @@ $ana_1641_resultRV1.forEach(function($varRV1) {
 	$ana_1641_covered_product = $varRV1.SVMXC__Covered_By__c;	
 	
 });
-}
 _assertEqual($ana_1641_IB_ID ,$ana_1641_ib1_id);
 _assertEqual($ana_1641_SCON ,$ana_1641_scon1_id);
 _assertEqual("Contract" ,$ana_1641_covered_product);

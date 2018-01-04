@@ -1,0 +1,38 @@
+var $sfm_act_addDeleteMeth = new function sfm_act_addDeleteMeth() {
+	
+	this.createAccount = function($accountName) {
+        $bo_act_navigation.navigateToAccountsPage();
+        _click($bo_pg_accounts.btn_new);
+        for(var $i =0;$i<$accountName.length;$i++){
+		_setValue($bo_pg_accounts.txt_accountName, $accountName[$i]);
+		_click($bo_pg_accounts.btn_saveAndNew);
+        }
+	};
+
+	this.deleteAccount = function($accountName){
+		  $bo_act_navigation.navigateToAccountsPage();
+		  for(var $i =0;$i<$accountName.length;$i++){
+		  _click(_link($accountName[$i]));
+		  _click($bo_pg_accounts.btn_delete);
+		  }
+	};
+	
+	this.createContact = function($accountName,$contactName) {
+        $bo_act_navigation.navigateToContactsPage();
+        _click($bo_pg_contacts.btn_new);
+        for(var $i =0;$i<$contactName.length;$i++){
+		_setValue($bo_pg_contacts.txt_contactName, $contactName[$i]);
+		_setValue($bo_pg_contacts.txt_accountName, $accountName);
+		_click($bo_pg_contacts.btn_saveAndNew);
+        }
+	};
+	
+	this.deleteSearch = function($searchName){
+		$bo_act_navigation.navigateToHome();
+		$sfm_act_search.searchSfmSearches($searchName);
+		_click(0,_leftOf(_span($searchName)));
+		_submit("Delete");
+		_div("/deleted successfully/");
+	};
+	
+};
