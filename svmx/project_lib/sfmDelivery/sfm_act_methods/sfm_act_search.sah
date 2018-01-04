@@ -160,7 +160,6 @@ var $sfm_act_search = new function sfm_search() {
 			}
 			
 		}
-		_click($sfm_pg_search.btn_objectSave);
-		_click($sfm_pg_search.btn_save);
+		_click($sfm_pg_search.btn_objectSave);	
 	};
 };
