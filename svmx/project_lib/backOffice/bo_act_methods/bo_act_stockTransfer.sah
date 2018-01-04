@@ -23,12 +23,7 @@ var $bo_act_stockTransfer = new function bo_act_stockTransfer() {
 			_setValue($bo_pg_stockTransfer.txt_sourceLocation,$sourceLocation);
 			_setValue($bo_pg_stockTransfer.txt_destinationLocation,$destinationLocation);
 			_click($bo_pg_stockTransfer.btn_save);
-		    _assertNotVisible(_div("/Error: Invalid Data/"));
-		    var StockadjustmentName = _getText(_heading2("pageDescription"));
-			_wait(15000, _isVisible($StockadjustmentName));
-			_logOutput($StockadjustmentName+ " Stock Transfer is created");
-	   return StockadjustmentName;
-		};
+		    };
 		
 		/**
 		   * Create an Stock Transfer Line
