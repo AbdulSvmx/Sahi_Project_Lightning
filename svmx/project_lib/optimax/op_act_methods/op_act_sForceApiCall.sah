@@ -56,7 +56,7 @@ var $op_act_sForceApiCall = new function op_act_sForceApiCall() {
 			var arr = null;
 
 			if (g_loggedIn == false) {
-				//sforce.connection.sessionId = null;
+				sforce.connection.sessionId = null;
 				// sforce.connection.debuggingHeader = null;
 				sessionId = sforce.connection.login($un, $pwd);
 				_log("Session ID =" + sessionId);
