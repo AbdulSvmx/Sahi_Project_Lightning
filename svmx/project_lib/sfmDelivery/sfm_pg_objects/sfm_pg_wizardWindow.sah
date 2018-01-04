@@ -49,6 +49,7 @@ var $sfm_pg_wizardWindow = new function sfm_pg_wizardWindow(){
 	this.pl_Contact = _textbox("/svmx-picklist/",_rightOf(_label("Contact:")));
 	this.btn_recentItemsCancel = _span("/Cancel/",_near(_span("Recent Items: Contacts")));
 	this.lookup_PartsOrder = _span("/lookup_icon/",_rightOf(_label("Parts Order:")));
+	this.btn_proceed = _span("Proceed");
 //	this.txt_part = _div("/svmx-grid-cell-inner/",_under(_div("Part")));
 	
 	

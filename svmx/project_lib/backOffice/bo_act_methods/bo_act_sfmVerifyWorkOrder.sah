@@ -64,6 +64,7 @@ this.verifyWizardOnWOObj=function($sfmName){
 				_fail("Launching of wizard in delivery failed");
 			}
 		_selectDomain();
+			_wait(10000);
 		}		
 		this.wizardButtonNotVisible=function($wizardname){
 			

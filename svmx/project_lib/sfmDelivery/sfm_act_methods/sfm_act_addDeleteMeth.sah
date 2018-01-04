@@ -27,4 +27,12 @@ var $sfm_act_addDeleteMeth = new function sfm_act_addDeleteMeth() {
         }
 	};
 	
+	this.deleteSearch = function($searchName){
+		$bo_act_navigation.navigateToHome();
+		$sfm_act_search.searchSfmSearches($searchName);
+		_click(0,_leftOf(_span($searchName)));
+		_submit("Delete");
+		_div("/deleted successfully/");
+	};
+	
 };

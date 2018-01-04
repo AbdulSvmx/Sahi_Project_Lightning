@@ -1,0 +1,20 @@
+var $rs_5367 = _testcase("RS_5367","For a Custom SFM Search - Verify Wizard for all SFM Types.");
+$rs_5367.start();
+$wizTitle = $bo_act_common.generateRandomName("SFM Wiz");
+$stepType = ["SFM","SFM","Output Document"];
+$stepName = ["Manage Work Order Lines - Usage","Create Follow-Up Work Order from Work Order","Work Order Service Report"];
+$title = ["SFMTDM016","OPDOC","SFMFollowUp"];
+$bo_act_login.login($g_url,$sfmUsn,$sfmPwd);
+$bo_act_navigation.navigateToSfmWizard();
+$sfm_act_createCustomWizard.chooseObject("Work Order");
+var $wizId = $wizTitle.toLowerCase().replace(/ /g, "_");
+_setValue($sfm_pg_wizards.txt_wizardTitle,$wizTitle);
+_setValue($sfm_pg_wizards.txt_wizardID,$wizId);
+_click($sfm_pg_wizards.txt_manageWizSteps);
+for(var $i=0;$i<$stepType.length;$i++){
+	_click($sfm_pg_wizards.btn_newStep);
+	_setSelected($sfm_pg_wizards.btn_wizStepType,$stepType[$i]);
+	_setSelected($sfm_pg_wizards.btn_stepName,$StepName[$i]);
+	_click($sfm_pg_wizards.btn_saveStep);
+}
+$rs_5367.end();
