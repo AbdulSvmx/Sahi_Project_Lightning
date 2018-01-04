@@ -187,10 +187,10 @@ $bo_act_Cases.editCase($caseNumber,$accountName,$contactName,$IBName,$caseSite);
 var $orderStatus = "Open";
 var $priority = "Medium";
 var $orderType = "Depot Repair";
-var $WO_Number = $bo_act_workOrders.createWorkOrder($caseNumber,$accountName,$contactName,$IBName,$orderStatus,$priority,$orderType);
+var $WONumber = $bo_act_workOrders.createWorkOrder($caseNumber,$accountName,$contactName,$IBName,$orderStatus,$priority,$orderType);
 
 //Perform Auto Entitlement on Work Order
-$bo_act_autoEntitlementRule_WO.performAutoEntitlement_WO($WO_Number);
+$bo_act_autoEntitlementRule_WO.performAutoEntitlement_WO($WONumber);
 
 //validate the Auto Entitlement Parameters 
 var $actual_AutoEntitlementStatus = _getText(_div(0,_rightOf(_cell("Auto Entitlement Status"))));
@@ -214,7 +214,7 @@ $bo_act_autoEntitlementRule_WO.deleteAutoEntitlementRule_WO($autoEntitlementRule
 
 //Clean up function
 
-var $datacreated = [$WO_Number,$caseNumber,$serviceConractName,$slaName03,$slaName02,$slaName01,$IBName,$productName,$locationName,$contactName,$accountName];
+var $datacreated = [$WONumber,$caseNumber,$serviceConractName,$slaName03,$slaName02,$slaName01,$IBName,$productName,$locationName,$contactName,$accountName,$warrantyName];
 for (var i = 0; i < $datacreated.length; i++) {
 	$bo_act_common.cleanUpfunction($datacreated[i]);
 }
