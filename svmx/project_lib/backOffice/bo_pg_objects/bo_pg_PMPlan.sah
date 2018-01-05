@@ -8,7 +8,7 @@ var $bo_pg_PMPlan = new function bo_pg_PMPlan(){
 //SFM Wizards
 	this.btn_createPMPlan = _button("Create PM Plan");
 	this.btn_NewConditionBasedPMPlanfromServiceContract = _button("New Condition Based PM Plan from Service Contract");
-	
+	this.btn_NewConditionBasedPMPlanFromLocation = _button("New Condition Based PM Plan from Location");
 	this.txt_PMPlanTemplateName = _textbox(0,_near(_label("PM Plan Template:")));
 	this.txt_PMPlanName = _textbox(0,_near(_label("PM Plan Name:")));
 	this.txt_startDate = _textbox(0,_near(_label("Start Date:")));

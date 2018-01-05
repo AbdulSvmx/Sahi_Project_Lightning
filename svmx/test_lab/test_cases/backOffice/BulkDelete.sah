@@ -9,7 +9,7 @@ var $userName = "orgsadmin@svmx-test4.org.test4part2";
 var $password = "servicemax22";
 $bo_act_login.login($g_url, $userName, $password);
 
-var $nameSpace = $bo_act_salesforceSetUp.readNameSpace();
+//var $nameSpace = $bo_act_salesforceSetUp.readNameSpace();
 /*
 //Deletes all the Work Orders
 var $delete_Query = "delete [Select Id from " +$nameSpace+"__Service_Order__c ];";
@@ -22,13 +22,23 @@ var $delete_data = $op_act_sForceApiCall.sForceQuery($userName, $password, $dele
 //Delete all Activity Master
 var $delete_Query = "delete [Select Id from " +$nameSpace+"__Activity_Master__c];";
 var $delete_data = $op_act_sForceApiCall.sForceQuery($userName, $password, $delete_Query , "create");
-*/
+
 
 //Delete all the products
 var $delete_Query = "delete [Select Id from Product2];";
 var $delete_data = $op_act_sForceApiCall.sForceQuery($userName, $password, $delete_Query , "create");
+*/
+//Delete All Custom Apex Classes
 
-
+$bo_act_navigation.navigateToSetUpAndSearch("Apex Classes");
+_click(_span("F"));
+//var $i=1;
+for(var $i=1;$i<10;$i++)
+	{
+var $str = "Del["+$i+"]";
+		_click(_link($str));
+		_wait(60000,_isVisible(_heading1("Apex Classes")));
+	}
 $BulkDelete.end();
 
 
