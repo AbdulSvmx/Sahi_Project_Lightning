@@ -13,6 +13,7 @@ var $op_act_sForceApiCall = new function op_act_sForceApiCall() {
 	 */
 
 	this.sForceQuery = function($un, $pwd, $queryComplex, $queryType) {
+    	_call(top.location.reload());
 
 		var $nArr = null;
 		var $queryString = String($queryComplex);

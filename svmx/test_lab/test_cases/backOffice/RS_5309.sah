@@ -192,10 +192,9 @@ $bo_act_common.cleanUpfunction($datacreated[i]);
 
 //Deleting the above created data
 
-$bo_act_activityMaster.deleteActivityMaster($activityID);
+/*$bo_act_activityMaster.deleteActivityMaster($activityID);
 $bo_act_activityMaster.deleteActivityMaster($activityID1);
-$bo_act_servicePricebooks.deleteCustomServicePricebooks($ServicePriceBookName);
-
+$bo_act_servicePricebooks.deleteCustomServicePricebooks($ServicePriceBookName);*/
 
 $bo_act_login.logOut(); 
 
