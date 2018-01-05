@@ -28,11 +28,18 @@ var $sfm_act_addDeleteMeth = new function sfm_act_addDeleteMeth() {
 	};
 	
 	this.deleteSearch = function($searchName){
-		$bo_act_navigation.navigateToHome();
-		$sfm_act_search.searchSfmSearches($searchName);
+		$bo_act_navigation.navigateToSfmSearchDesigner();
 		_click(0,_leftOf(_span($searchName)));
-		_submit("Delete");
-		_div("/deleted successfully/");
+		_click(_submit("Delete"));
+		_isVisible(_div("/deleted successfully/"));
+	};
+	
+	this.deleteWizard = function($wizName,$object){
+		$bo_act_navigation.navigateToSfmWizard();
+		_setSelected($sfm_pg_wizards.selectObject,$object);
+		_click(_checkbox(0,_leftOf(_span($wizName))));
+		_click(_button("Delete"));
+		_isVisible(_div("/deleted the selected wizard/"));
 	};
 	
 };
