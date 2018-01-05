@@ -1,20 +1,43 @@
 var $rs_5367 = _testcase("RS_5367","For a Custom SFM Search - Verify Wizard for all SFM Types.");
 $rs_5367.start();
+$searchName = "SVMXSTD: Account Search49105";
 $wizTitle = $bo_act_common.generateRandomName("SFM Wiz");
-$stepType = ["SFM","SFM","Output Document"];
-$stepName = ["Manage Work Order Lines - Usage","Create Follow-Up Work Order from Work Order","Work Order Service Report"];
-$title = ["SFMTDM016","OPDOC","SFMFollowUp"];
+$stepTypes = ["SFM","Output Document"];
+$stepNames = ["Manage Work Order Lines - Usage","Work Order Service Report"];
+$titles = ["SFMTDM016","OPDOC"];
+$processIds = ["SVMX_processId=TDM016","SVMX_processId=WO_ServiceReport"];
 $bo_act_login.login($g_url,$sfmUsn,$sfmPwd);
 $bo_act_navigation.navigateToSfmWizard();
 $sfm_act_createCustomWizard.chooseObject("Work Order");
-var $wizId = $wizTitle.toLowerCase().replace(/ /g, "_");
-_setValue($sfm_pg_wizards.txt_wizardTitle,$wizTitle);
-_setValue($sfm_pg_wizards.txt_wizardID,$wizId);
-_click($sfm_pg_wizards.txt_manageWizSteps);
-for(var $i=0;$i<$stepType.length;$i++){
-	_click($sfm_pg_wizards.btn_newStep);
-	_setSelected($sfm_pg_wizards.btn_wizStepType,$stepType[$i]);
-	_setSelected($sfm_pg_wizards.btn_stepName,$StepName[$i]);
-	_click($sfm_pg_wizards.btn_saveStep);
+$sfm_act_createCustomWizard.addMultipleWizSteps($wizTitle, $stepTypes, $stepNames, $titles);
+$bo_act_navigation.navigateToHome();
+$sfm_act_search.searchSfmSearches($searchName);
+_click(_span($searchName));
+_click(_div("/radioheader/",_link(0,_under(_span("/Work Order Number/")))));
+_click(_span($wizTitle));
+for(var $i=0;$i<$titles.length;$i++){
+	_click(_span($titles[$i]));
+	_wait(3000);
+	var $recentWindow = _getRecentWindow();
+	var $url = $recentWindow.windowURL;
+	_log($url);
+	if($url.search($processIds[$i])!=-1){
+		_log("Pass");
+	}
+	else{
+		-log("Fail");
+	}
+//	if($recentWindow.windowTitle!=""){
+//		_selectWindow($recentWindow.windowTitle);
+//	}
+//	else{
+//		_selectWindow($recentWindow.windowURL);
+//	}
+//	if($titles[$i]=="SFMTDM016"){
+//		if(){
+//			
+//		}
+//	}
 }
+//$sfm_act_addDeleteMeth.deleteWizard($wizTitle,"Work Order");
 $rs_5367.end();

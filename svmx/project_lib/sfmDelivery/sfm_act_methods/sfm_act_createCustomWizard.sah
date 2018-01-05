@@ -512,4 +512,21 @@ var $sfm_act_createCustomWizard = new function sfm_act_createCustomWizard() {
 		_setValue($sfm_pg_wo.txt_lineQty,$qty);
 		_click($sfm_pg_wo.btn_wo_save);
 	};
+	this.addMultipleWizSteps = function($wizTitle,$stepTypes,$stepNames,$titles){
+		var $wizId = $wizTitle.toLowerCase().replace(/ /g, "_");
+		_setValue($sfm_pg_wizards.txt_wizardTitle,$wizTitle);
+		_setValue($sfm_pg_wizards.txt_wizardID,$wizId);
+		_click($sfm_pg_wizards.txt_manageWizSteps);
+		for(var $i=0;$i<$stepTypes.length;$i++){
+			_click($sfm_pg_wizards.btn_newStep);
+			_setSelected($sfm_pg_wizards.btn_wizStepType,$stepTypes[$i]);
+			_setSelected($sfm_pg_wizards.btn_stepName,$stepNames[$i]);
+			_setValue($sfm_pg_wizards.txt_title,$titles[$i]);
+			_click($sfm_pg_wizards.btn_saveStep);
+		}
+		_click($sfm_pg_wizards.txt_managePermission);
+		_setSelected($sfm_pg_wizards.select_availableGrpProfiles,"Sysadmin01 Group");
+		_click($sfm_pg_wizards.btn_add);
+		_click($sfm_pg_wizards.btn_saveClose);
+	};
 };
