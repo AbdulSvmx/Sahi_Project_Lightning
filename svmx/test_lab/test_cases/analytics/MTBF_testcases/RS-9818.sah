@@ -94,8 +94,6 @@ _log($datevalue);
 var $Actual_Uptime=$datevalue-60;
 var $MTBF=$Actual_Uptime/1;
 
-
-
 _log($ana_9818_IB);
 _log($ana_9818_Expected_uptime);
 _log($ana_9818_downtime); 
