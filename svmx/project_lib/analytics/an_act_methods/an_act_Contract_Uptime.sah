@@ -39,6 +39,11 @@ var $an_act_Contract_Uptime = new function an_act_Contract_Uptime() {
 	this.contract_uptime_downtime = function($Calculationmethodname)
 	
 	{
+                _click($an_pg_rv.link_home);
+		_click($an_pg_rv.link_servicemaxSetup);
+		_click($an_pg_rv.btn_serviceperformancemetrics);
+		_click($an_pg_rv.btn_serviceperformancemetricsetup);
+		_click($an_pg_rv.btn_click_metrics);
 		_click($an_pg_contractuptime.btn_contractuptimemetric);
 		_click($an_pg_contractuptime.btn_Add);
 		_click($an_pg_contractuptime.btn_active);
