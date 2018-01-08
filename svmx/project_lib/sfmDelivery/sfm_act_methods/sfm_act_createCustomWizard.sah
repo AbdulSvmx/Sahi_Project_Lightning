@@ -566,4 +566,8 @@ var $sfm_act_createCustomWizard = new function sfm_act_createCustomWizard() {
 		var $dd = $yesterday.getDate();
 		return $dd;
 	};
+	
+	this.createCase = function(){
+		$bo_act_navigation.navigateToCasesPage();
+	};
 };

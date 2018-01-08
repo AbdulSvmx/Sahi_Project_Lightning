@@ -61,6 +61,7 @@ var $bo_act_navigation = new function bo_act_navigation() {
     this.navigateToCasesPage = function(){
    	 _click($bo_pg_home.btn_allTabs);
    	 _click($bo_pg_home.link_cases);
+   	 _click($sfm_pg_wo.btn_wo_new);
    };
     	
      this.navigateToContactsPage = function(){
