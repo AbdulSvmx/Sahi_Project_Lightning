@@ -569,5 +569,23 @@ var $sfm_act_createCustomWizard = new function sfm_act_createCustomWizard() {
 	
 	this.createCase = function(){
 		$bo_act_navigation.navigateToCasesPage();
+		_click($sfm_pg_wo.btn_wo_new);
+		_setSelected($sfm_pg_wo.sel_case, "Email");
+		_click($sfm_pg_wo.link_actualInitialResp);
+		_click($sfm_pg_wo.link_scheduledDate);
+		_click($sfm_pg_wo.btn_wo_save);
+		return _getText($sfm_pg_wo.label_wo);
+	};
+	
+	this.createWoFor6344 = function($caseId){
+		$bo_act_navigation.navigateToWorkOrdersTab();
+		_click($sfm_pg_wo.btn_wo_new);
+		_setValue($sfm_pg_wo.txt_case,$caseId);
+		_setSelected($sfm_pg_wo.sel_orderStatus,"Canceled");
+		_click($sfm_pg_wo.btn_wo_save);
+		_wait(3000);
+		$woName= _getText($sfm_pg_wo.label_wo);
+		return $woName;
+		
 	};
 };

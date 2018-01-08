@@ -5,14 +5,30 @@ $searchObject = "Work Order";
 $exprsnVal = "";
 $sheetName = "rs_6344";
 $bo_act_login.login($g_url,$sfmUsn,$sfmPwd);
-$sfm_act_createCustomWizard.createCase();
-//$bo_act_navigation.navigateToSfmSearchDesigner();
-//$sfm_act_search.newCustomSearch($searchName,$searchObject);
-//$sfm_act_search.buildExpression(0,$exprsnVal,$sheetName);
-//_wait(3000);
-//$sfm_act_search.addResultsToDisplay(2,"searchResult");
-//$bo_act_navigation.navigateToHome();
-//$sfm_act_search.searchSfmSearches($searchName);
-//_click(_span($searchName));
-////$sfm_act_addDeleteMeth.deleteSearch($searchName);
-//$rs_6344.end();
+$caseId = $sfm_act_createCustomWizard.createCase();
+$workOrder = $sfm_act_createCustomWizard.createWoFor6344($caseId);
+$bo_act_navigation.navigateToSfmSearchDesigner();
+$sfm_act_search.newCustomSearch($searchName,$searchObject);
+$sfm_act_search.buildExpression(0,$exprsnVal,$sheetName);
+_wait(3000);
+$sfm_act_search.addResultsToDisplay(2,"searchResult");
+$bo_act_navigation.navigateToHome();
+$sfm_act_search.searchSfmSearches($searchName);
+_click(_span($searchName));
+$workOrders = _collect("_cell","/.*/",_under(_div("Work Order Number"),10));
+$count = 0;
+for(var $i=0;$i<$workOrders.length;$i++){
+	if(_getText($workOrders[$i])==$workOrder){
+		$count++;
+		break;
+	}
+}
+_log($count);
+if($count==1){
+	_log("Pass");
+}
+else{
+	_log("Fail");
+}
+$sfm_act_addDeleteMeth.deleteSearch($searchName);
+$rs_6344.end();

@@ -40,4 +40,9 @@ var $sfm_pg_wo = new function sfm_pg_wo() {
 	this.txt_date1 = _textbox(0,_rightOf(_label("Date1")));
 	this.txt_date2 = _textbox(0, _rightOf(_label("Date2")));
 	this.txt_date3 = _textbox(0,_rightOf(_label("Date3")));
+	this.sel_case = _select(0,_rightOf(_label("*Case Origin")));
+	this.link_scheduledDate = _link(0,_rightOf(_label("Scheduled Date")));
+	this.link_actualInitialResp = _link(0,_rightOf(_label("Actual Initial Response")));
+	this.txt_case = _textbox("Case");
+	this.sel_orderStatus = _select(0,_rightOf(_label("Order Status")));
 };
