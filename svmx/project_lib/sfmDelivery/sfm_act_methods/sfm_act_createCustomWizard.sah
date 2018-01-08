@@ -529,4 +529,41 @@ var $sfm_act_createCustomWizard = new function sfm_act_createCustomWizard() {
 		_click($sfm_pg_wizards.btn_add);
 		_click($sfm_pg_wizards.btn_saveClose);
 	};
+	
+	this.createWoFor5371 = function(){
+		var $woName="";
+		_click($sfm_pg_wo.tab_all);
+		_wait(3000);
+		_click($sfm_pg_wo.link_wo);
+		_click($sfm_pg_wo.btn_wo_new);
+		var $dd = this.generateYesterday();
+		_click($sfm_pg_wo.txt_actualOnsiteResponse);
+		_click($sfm_pg_wo.cell_today);
+		_click($sfm_pg_wo.txt_actualResolution);
+		_click($sfm_pg_wo.cell_today);
+		_click($sfm_pg_wo.txt_actualInitialResponse);
+		_click(_cell("/"+$dd+"/",_leftOf(_cell("/todayDate/"))));
+		_click($sfm_pg_wo.txt_actualRestoration);
+		_click($sfm_pg_wo.cell_tomorrow);
+		_click($sfm_pg_wo.txt_date1);
+		_click($sfm_pg_wo.cell_today);
+		_click($sfm_pg_wo.txt_date2);
+		_click($sfm_pg_wo.cell_tomorrow);
+		_click($sfm_pg_wo.txt_date3);
+		_click(_cell("/"+$dd+"/",_leftOf(_cell("/todayDate/"))));
+		_click($sfm_pg_wo.btn_wo_save);
+		_wait(3000);
+		$woName= _getText($sfm_pg_wo.label_wo);
+		return $woName;
+	};
+	
+	this.generateYesterday = function(){
+		var $today = _getText($sfm_pg_wo.link_today);
+		var $yesterday = new Date($today);
+//		_log($yesterday);
+		$yesterday.setDate($yesterday.getDate()-1);
+//		_log($yesterday);
+		var $dd = $yesterday.getDate();
+		return $dd;
+	};
 };

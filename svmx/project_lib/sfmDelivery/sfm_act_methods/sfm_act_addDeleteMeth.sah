@@ -29,7 +29,7 @@ var $sfm_act_addDeleteMeth = new function sfm_act_addDeleteMeth() {
 	
 	this.deleteSearch = function($searchName){
 		$bo_act_navigation.navigateToSfmSearchDesigner();
-		_click(0,_leftOf(_span($searchName)));
+		_click(_checkbox(0,_leftOf(_span($searchName))));
 		_click(_submit("Delete"));
 		_isVisible(_div("/deleted successfully/"));
 	};
