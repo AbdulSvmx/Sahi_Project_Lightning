@@ -14,7 +14,7 @@ var $url = "https://test.salesforce.com";
 var $un = "vansys@pqtpart1.com";
 var $pwd = "servicemax2";
 var $sfmUsn = "sysadmin01@sfdautomation.com";
-var $sfmPwd = "maxplore1";
+var $sfmPwd = "maxplore2";
 
 //SFMD Global Variables
 

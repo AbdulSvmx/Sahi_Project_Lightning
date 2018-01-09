@@ -182,7 +182,7 @@ $bo_act_common.cleanUpfunction($datacreated[i]);
 }
 
 // Delete the Activity ID's Created 
-$bo_act_activityMaster.deleteActivityMaster($activityID);
+//$bo_act_activityMaster.deleteActivityMaster($activityID);
 
 $bo_act_login.logOut(); 
 

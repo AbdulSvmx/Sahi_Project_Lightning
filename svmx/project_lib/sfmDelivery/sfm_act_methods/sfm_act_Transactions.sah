@@ -418,4 +418,50 @@ var $sfm_act_Transactions = new function sfm_act_Transactions() {
 			}
 		
 	};
+	
+	this.addQualificationCriteria = function($clicks,$firstFieldValue,$fieldOptions,$clickToggle,$firstValueOptions,$valueOptions,$exprsnName,$advancedExprsn,$err){
+		_click(_f("main").s_button("New"));
+		for(var $i=0;$i<$clicks;$i++){
+		_click(_f("main").s_button("+"));
+		}
+		_setSelected(_f("main").s_combobox("fieldCombo"),$firstFieldValue);
+		var $k = 0;
+		for(var $j=0;$j<$fieldOptions.length;$j++){
+		$k = $j+1;
+		_setSelected(_f("main").s_combobox("fieldCombo["+$k+"]"),$fieldOptions[$j]);
+		}
+		for(var $l=0;$l<$clickToggle;$l++){
+		_click(_f("main").s_togglebutton("I want to choose a field from the list"));
+		}
+		_setSelected(_f("main").s_combobox("valuesCombo"),$firstValueOptions);
+		var $n = 0;
+		for(var $m=0;$m<$valueOptions.length;$m++){
+		$n = $m+1;
+		_setSelected(_f("main").s_combobox("valuesCombo["+$n+"]"), $valueOptions[$m]);
+		}
+		_setValue(_f("main").s_textinput("Save this filter as"), $exprsnName);
+		_setValue(_f("main").s_textinput("advTxt"),$advancedExprsn);
+		_setValue(_f("main").s_textarea("msgTxt"), $err);
+		};
+		this.addDateCriteria = function($clicks,$firstFieldValue,$fieldOptions,$firstValueOptions,$valueOptions,$exprsnName,$advancedExprsn,$err){
+			_click(_f("main").s_button("New"));
+			for(var $i=0;$i<$clicks;$i++){
+			_click(_f("main").s_button("+"));
+			}
+			_setSelected(_f("main").s_combobox("fieldCombo"),$firstFieldValue);
+			var $k = 0;
+			for(var $j=0;$j<$fieldOptions.length;$j++){
+			$k = $j+1;
+			_setSelected(_f("main").s_combobox("fieldCombo["+$k+"]"),$fieldOptions[$j]);
+			}
+			_setSelected(_f("main").s_combobox("valuesCombo"),$firstValueOptions);
+			var $n = 0;
+			for(var $m=0;$m<$valueOptions.length;$m++){
+			$n = $m+1;
+			_setSelected(_f("main").s_combobox("valuesCombo["+$n+"]"), $valueOptions[$m]);
+			}
+			_setValue(_f("main").s_textinput("Save this filter as"), $exprsnName);
+			_setValue(_f("main").s_textinput("advTxt"),$advancedExprsn);
+			_setValue(_f("main").s_textarea("msgTxt"), $err);
+			};
 };

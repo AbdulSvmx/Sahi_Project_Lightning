@@ -77,4 +77,5 @@ var $bo_act_locations = new function bo_act_locations() {
 		        _logOutput($StockTransferDetail+ " Stock Transfer is created");
 		   return $StockTransferDetail;
 		    };
+
 };
