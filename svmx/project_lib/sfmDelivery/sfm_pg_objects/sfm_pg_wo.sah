@@ -13,21 +13,6 @@ var $sfm_pg_wo = new function sfm_pg_wo() {
 			_log("Fail");
 		}
 		
-	this.assert_wizardStep = function($wizName) {
-		_selectDomain("/svmx/");
-		_click(_button("Create Quote from Work Order"));
-		_selectDomain();
-		_wait(6000);
-		if(_isVisible(_span("svmx-btn-icon svmx-sfmd-save-icon")))
-					  {
-					  _log("Pass:: Test Case execution is successfull");
-		   }
-		   else
-		   {
-		   _log("Fail: Test Case execution is failure");
-		}
-		
-	}
 //		_assertExists(_cell($wizTitle),"Wizard Not Present");
 	};
 	this.clickTab = function($tabName){
