@@ -19,7 +19,7 @@ var $sfmPwd = "maxplore1";
 //SFMD Global Variables
 
 var $sfmUsn= "sysadmin01@sfdautomation.com";
-var $sfmPwd = "maxplore1";
+var $sfmPwd = "maxplore2";
 
 //DC Global Variables
 var $dc_org="Base";
