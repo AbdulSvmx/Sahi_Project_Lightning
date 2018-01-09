@@ -66,11 +66,11 @@ $ana_9816_result.forEach(function($var) {
     $runon=$var.SVMXC__Run_On__c;
 });
 
+
 _log($ana_9816_IB);
 _log($ana_9816_Expected_uptime);
 _log($ana_9816_downtime); 
 _log($ana_9816_wo_count);
-
 _assertNotNull($ana_9816_IB);
 _assertNotNull($runon);
 _assertNotNull($ana_9816_Expected_uptime);

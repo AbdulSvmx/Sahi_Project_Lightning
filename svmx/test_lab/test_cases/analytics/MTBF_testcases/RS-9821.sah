@@ -93,6 +93,11 @@ _log($rundate);
 var $datevalue = Math.round((($stdate.getTime() - $rundate) / 1000) / (-60)); 
 _log($datevalue);
 
+if($datevalue!=$ana_9821_Expected_uptime)
+{
+$datevalue=$datevalue+1;
+}
+
 var $Actual_Uptime=$datevalue-$Downtime;
 var $MTBF=$Actual_Uptime/1;
 
