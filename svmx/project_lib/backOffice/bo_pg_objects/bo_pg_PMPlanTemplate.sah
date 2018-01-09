@@ -26,11 +26,11 @@ var $bo_pg_PMPlanTemplate = new function bo_pg_pmPlanTemplate(){
 	this.txt_templateName = _textbox("templateName");
 	this.txt_product = _textbox("product");
 	this.img_filterIcon = _image("/svmx-filter-icon/");
-	this.link_addRow = _span("/Add row/");
+	this.link_addRow = _span("addRowButton-btnInnerEl");
 	this.txt_attributebox = _div("/svmx-grid-cell-inner/",_under(_div("Attribute[1]")));
-	this.txt_attribute = _div("/svmx-trigger-index/",_under(_div("/Attribute/")));
-this.txt_operatorbox = _div("/svmx-grid-cell-inner/",_under(_div("/Operator/")));
-this.txt_operator = _div("/svmx-trigger-index/",_under(_div("/Operator/")));
+	this.txt_attribute = _div("/svmx-trigger-index/",_under(_div("Attribute[1]")));
+this.txt_operatorbox = _div("/svmx-grid-cell-inner/",_under(_div("Operator[1]")));
+this.txt_operator = _div("/svmx-trigger-index/",_under(_div("Operator[1]")));
 this.txt_frequencybox = _div("/svmx-grid-cell-inner/",_under(_div("Frequency")));
 this.txt_frequency1 = _div("/svmx-trigger-index/",_under(_div("Frequency")));
 this.txt_frequencytxt = _textbox(0,_under(_div("Frequency")));
@@ -53,5 +53,9 @@ this.btn_customUISave = _span("Save");
 this.img_messagebox = _span("svmx-quick-msgbox-info");
 this.img_arrow = _div("/svmx-trigger-index/",_under(_div("Adjustment Type")));
 this.txt_conditionType = _textbox("conditionType");
+// Criteria Based
+this.link_addRowCriteria = _span("addRowButton_CB-btnInnerEl");
+this.txt_attributeCriteria = _div("/svmx-trigger-index/",_under(_div("/Attribute/")));
+this.txt_operatorCriteria = _div("/svmx-trigger-index/",_under(_div("/Operator/")));
 };
 

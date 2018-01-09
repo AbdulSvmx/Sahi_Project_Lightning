@@ -196,7 +196,6 @@ for (var i = 0; i < $datacreated.length; i++) {
 $bo_act_common.cleanUpfunction($datacreated[i]);
 }
 
-
 $bo_act_login.logOut(); 
 
 $RS_5333.end();

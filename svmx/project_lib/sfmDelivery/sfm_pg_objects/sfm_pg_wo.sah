@@ -3,6 +3,7 @@ var $sfm_pg_wo = new function sfm_pg_wo() {
 	this.btn_wo_new = _button("/New/");
 	this.btn_wo_save = _submit("/Save/");
 	this.link_wo = _link("Work Orders");
+	this.btn_wo_edit = _button("/Edit/");
 	this.assert_wizard =function($wizTitle){
 		if(_exists(_cell($wizTitle))){
 			_log("Pass");
@@ -17,4 +18,31 @@ var $sfm_pg_wo = new function sfm_pg_wo() {
 //		_log("I am Here");
 	};
 	this.label_wo = _heading2("pageDescription");
+	this.txt_actualOnsiteResponse = _textbox("Actual Onsite Response");
+	this.txt_actualInitialResponse = _textbox("Actual Initial Response");
+	this.txt_actualResolution = _textbox("Actual Resolution");
+	this.txt_actualRestoration = _textbox("Actual Restoration");
+	this.cell_today = _cell("/todayDate/");
+	this.cell_tomorrow = _cell(0,_rightOf(_cell("/todayDate/")));
+	this.link_today = _link(0,_rightOf(_label("Actual Onsite Response")));
+	this.today = _link(0,_rightOf(_label("Date Custom")));
+	this.btn_newWorkDetail = _button("New Work Detail");
+	this.sel_recordType = _select(0,_rightOf(_label("*Record Type of new record")));
+	this.btn_Continue = _submit("Continue");
+	this.txt_lineQty = _textbox(0,_rightOf(_label("Line Qty")));
+	this.txt_dateCustom = _textbox(0,_rightOf(_label("Date Custom")));
+	this.txt_dateReceived = _textbox(0,_rightOf(_label("Date Received")));
+	this.txt_dateRequired = _textbox(0,_rightOf(_label("Date Required")));
+	this.sel_activityType = _select(0,_rightOf(_label("Activity Type")));
+	this.sel_lineType = _select(0,_rightOf(_label("*Line Type")));
+	this.link_workDetail = _link(0,_rightOf(_span("/Work Order/")));
+	this.link_edit_workDetail = _click(_link("Edit",_under(_tableHeader("Action",_under(_heading3("Work Details"))))));
+	this.txt_date1 = _textbox(0,_rightOf(_label("Date1")));
+	this.txt_date2 = _textbox(0, _rightOf(_label("Date2")));
+	this.txt_date3 = _textbox(0,_rightOf(_label("Date3")));
+	this.sel_case = _select(0,_rightOf(_label("*Case Origin")));
+	this.link_scheduledDate = _link(0,_rightOf(_label("Scheduled Date")));
+	this.link_actualInitialResp = _link(0,_rightOf(_label("Actual Initial Response")));
+	this.txt_case = _textbox("Case");
+	this.sel_orderStatus = _select(0,_rightOf(_label("Order Status")));
 };

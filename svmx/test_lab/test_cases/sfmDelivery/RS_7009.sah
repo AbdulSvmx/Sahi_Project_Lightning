@@ -1,0 +1,31 @@
+var $rs_7009 = _testcase("RS_7009","Verify standard and custom Multisource SFM process.");
+$rs_7009.start();
+
+$bo_act_login.login($g_url,$sfmUsn,$sfmPwd);
+$accToAdd = ["Account1132"];
+$bo_act_navigation.navigateToSfmTransactionDesigner();
+$sfm_act_Transactions.cloneAndSaveProcess("Create Service Contract From Account","test1132","sm_pg_l_1132");
+$bo_act_navigation.navigateToSfmWizard();
+$sfm_act_createCustomWizard.chooseObject("Account");
+$wizTitle = "WIZTest1132";
+$sfmName = "test1132";
+$sfm_act_createCustomWizard.addManageWizSteps($wizTitle,"SFM",$sfmName,"Sysadmin01 Group");
+$sfm_act_addDeleteMeth.createAccount($accToAdd);
+_click(_link("Accounts"));
+//_click(_link($accToAdd[1]));
+_click(_link("/"+$accToAdd[0]+"/"));
+_selectDomain("/svmx/");
+$sfm_act_createCustomWizard.clickWizardBtn($sfmName);
+_selectDomain();
+_click(_div(3,_rightOf(_label("End Date:"))));
+_click(_span("/lookup_icon/",_rightOf(_label("Service Plan:"))));
+_doubleClick(_div("Test SP Name"));
+_setValue(_textbox(0,_rightOf(_label("Contract Name/Number:"))), "1132");
+_click($sfm_pg_sfmDesigner.btn_deliverySave);
+//_click(_div(3,_rightOf(_label("Start Date:"))));
+//_click(_span("/lookup_icon/",_rightOf(_label("Account:"))));
+//_doubleClick(_div("Account1132"));
+
+
+// test01 - "/test/"
+$rs_7009.end();

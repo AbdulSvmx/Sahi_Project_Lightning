@@ -1,0 +1,11 @@
+var $rs_5453 = _testcase("RS_5453","Verify Delete of a Custom Expression, test if it's still available.");
+$rs_5453.start();
+$exprsnName = $bo_act_common.generateRandomName("Exprsn");
+$bo_act_login.login($g_url,$sfmUsn,$sfmPwd);
+$sfm_act_expressions.navigateToExpression();
+$sfm_act_expressions.newCustomAction("Work Order");
+$sfm_act_expressions.addRows(5);
+$sfm_act_expressions.manageExpressions5453();
+$sfm_act_expressions.saveExprsn($exprsnName);
+$sfm_act_expressions.deleteExprsn();
+$rs_5453.end();

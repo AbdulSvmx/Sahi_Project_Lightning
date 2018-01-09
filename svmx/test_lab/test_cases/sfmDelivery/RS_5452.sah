@@ -1,0 +1,12 @@
+var $rs_5452 = _testcase("RS_5452","Verify Save As / Clone in SFM Expressions");
+$rs_5452.start();
+$exprsnName = $bo_act_common.generateRandomName("Exprsn");
+$saveAsName = $bo_act_common.generateRandomName("RenameExp");
+$bo_act_login.login($g_url,$sfmUsn,$sfmPwd);
+$sfm_act_expressions.navigateToExpression();
+$sfm_act_expressions.newCustomAction("Work Order");
+$sfm_act_expressions.addRows(5);
+$sfm_act_expressions.manageExpressions5453();
+$sfm_act_expressions.saveExprsn($exprsnName);
+$sfm_act_expressions.saveAsExprsn($saveAsName);
+$rs_5452.end();

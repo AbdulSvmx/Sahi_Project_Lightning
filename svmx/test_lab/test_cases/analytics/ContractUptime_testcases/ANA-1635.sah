@@ -20,7 +20,7 @@ $bo_act_login.login($url, $un, $pwd);
 _log($GuranteedUptime);
 // To create a SCON
 
-var $ana_1635_create_SCON = "SVMXC__Service_Contract__c SCON1 = new SVMXC__Service_Contract__c(Name = 'ANA-1635-SCON' , SVMXC__Company__c = '"+$Account+"' , SVMXC__Active__c = True, SVMXC__Start_Date__c = Date.valueOf('2017-01-01') , SVMXC__End_Date__c = Date.valueOf('2017-12-31') );insert SCON1;";
+var $ana_1635_create_SCON = "SVMXC__Service_Contract__c SCON1 = new SVMXC__Service_Contract__c(Name = 'ANA-1635-SCON' , SVMXC__Company__c = '"+$Account+"' , SVMXC__Active__c = True, SVMXC__Start_Date__c = Date.valueOf('2017-01-01') , SVMXC__End_Date__c = Date.valueOf('2018-12-31') );insert SCON1;";
 var $ana_1635_result = $op_act_sForceApiCall.sForceQuery($un, $pwd, $ana_1635_create_SCON , "create");
 _wait(1000);
 var $ana_1635_query_SCON = "Select Id , Name from SVMXC__Service_Contract__c where Name = 'ANA-1635-SCON' Limit 1";
@@ -99,7 +99,7 @@ _wait(8000);
 
 // Create Covered Product 2
 	
-	var $ana_1635_create_CP2 = "SVMXC__Service_Contract_Products__c CP01 = new SVMXC__Service_Contract_Products__c(SVMXC__Installed_Product__c = '"+$ana_1635_IB_ID2+"',SVMXC__Service_Contract__c = '"+$ana_1635_SCON+"',SVMXC__End_Date__c = Date.valueOf('2017-01-01') ); insert CP01;";
+	var $ana_1635_create_CP2 = "SVMXC__Service_Contract_Products__c CP01 = new SVMXC__Service_Contract_Products__c(SVMXC__Installed_Product__c = '"+$ana_1635_IB_ID2+"',SVMXC__Service_Contract__c = '"+$ana_1635_SCON+"',SVMXC__End_Date__c = Date.valueOf('2018-01-01') ); insert CP01;";
 	var $ana_1635_result_CP2 = $op_act_sForceApiCall.sForceQuery($un, $pwd, $ana_1635_create_CP2 , "create");
 	var $ana_1635_get_CP2 = "Select Id , Name from SVMXC__Service_Contract_Products__c where Createdby.Id = '005q0000003GGfP' Order by CreatedDate DESC Limit 1";
 	var $ana_1635_fetch_CP2  = $op_act_sForceApiCall.sForceQuery($un, $pwd, $ana_1635_get_CP2,"query");

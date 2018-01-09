@@ -28,6 +28,5 @@ var $bo_act_activityMaster = new function bo_act_activityMaster() {
 		 _click(_div("Record Number"));
 		  _click(_link($activityMasterNumber));
 		  _click($bo_pg_activityMaster.btn_deleteActivityMaster);
-		
 	};
 };
