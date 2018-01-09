@@ -35,7 +35,8 @@ _wait(3000);
 _assertVisible(_link("Home"));      // Verification 2
 _log("Pass:: Save action on Warning Message is working properly.");
 
-_selectDomain("/svmx/")._click(_button($sfmName))
+_selectDomain("/svmx/");
+_click(_button($sfmName));
 _selectDomain();
 _click(_span("svmx-btn-icon svmx-sfmd-save-icon"));
 _click(_span("Cancel"));
