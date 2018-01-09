@@ -1,6 +1,6 @@
 var $an_mttr_875 = _testcase("RS-7395","Custom Expression 1 for WO object");
 $an_mttr_875.start();
-var $data = _readExcelFile("../../analytics/an_excleData/an_Datasheet1.xlsx","Sheet1",true);
+var $data = _readExcelFile("../../../analytics/Pre-Release/Data_Meghana.xlsx","Sheet1",true);
 var $un = $data[1]["Username"];
 var $pwd = $data[1]["pwd"];
 var $url = "https://test.salesforce.com";

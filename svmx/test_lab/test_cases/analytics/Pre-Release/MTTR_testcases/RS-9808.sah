@@ -1,6 +1,6 @@
 var $an_mttr_890 = _testcase("RS-9808","Case as a Top level Object for Dead Time custom field");
 $an_mttr_890.start();
-var $data = _readExcelFile("../../analytics/an_excleData/an_Datasheet1.xlsx","Sheet1",true);
+var $data = _readExcelFile("../../../analytics/Pre-Release/Data_Meghana.xlsx","Sheet1",true);
 var $un = $data[1]["Username"];
 var $pwd = $data[1]["pwd"];
 var $url = "https://test.salesforce.com";
@@ -13,7 +13,7 @@ var $Closedon = $data[1]["ClosedOn"];
 var $Site = $data[1]["Site"];
 var $Component = $data[2]["Component"];
 var $ScheduledDate = $data[1]["ScheduledDate"];
-var $user_meghana $data[1]["user_meghana"];
+var $user_meghana = $data[1]["user_meghana"];
 $bo_act_login.login($url, $un, $pwd);
 
 var $createcase = $op_act_sForceApiCall.sForceQuery($un, $pwd, $insert_case, "create");
