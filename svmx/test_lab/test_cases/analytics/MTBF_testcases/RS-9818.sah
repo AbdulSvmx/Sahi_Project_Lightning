@@ -39,7 +39,7 @@ _log($IB_created_date);
 $ana_9818_WO_ID = $ana_9818_fetch_WO[0].Id;
 var $created_date=$ana_9818_fetch_WO[0].CreatedDate;
 _log($ana_9818_WO_ID);	
-//_wait(30000);
+_wait(30000);
 
 var $downtime="SVMXC__Down_Time__c downtime =new SVMXC__Down_Time__c(SVMXC__Service_Order__c='"+$ana_9818_WO_ID+"',SVMXC__Duration__c=60);insert downtime;";
 var $downtime_result=$op_act_sForceApiCall.sForceQuery($un, $pwd, $downtime , "create");
