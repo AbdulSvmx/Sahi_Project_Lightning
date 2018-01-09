@@ -51,4 +51,5 @@ var $sfm_pg_wizards = new function sfm_pg_wizards() {
 	this.select_availableGrpProfiles =_select(0,_near(_cell("Available ServiceMax Group Profiles")));
 	this.btn_add = _image("Add");
 	this.chk_firstCustomCheckBox = _checkbox(0,_near(_heading2("Custom SFM Wizards")));
+	this.txt_title = _textbox(0,_rightOf(_label("Title[1]")));
 };

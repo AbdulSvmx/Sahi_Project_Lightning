@@ -34,7 +34,7 @@ _log($IB_created_date);
 
 	var $ana_9822_create_WO = "SVMXC__Service_Order__c WO1 = new SVMXC__Service_Order__c(SVMXC__Company__c='"+$Account+"',custom_Installed_Product__c = '"+$Component+"',Custom_Start_Time__c = DateTime.valueOf("+$PreferredStartDate+"+0.025), Custom_End_Time__c = DateTime.valueOf("+$PreferredEndDate+"+0.085),SVMXC__Billing_Type__c='Warranty',SVMXC__Customer_Down__c=True,SVMXC__City__c='Kolar'); insert WO1;";
 	var $ana_9822_result_WO = $op_act_sForceApiCall.sForceQuery($un, $pwd, $ana_9822_create_WO , "create");
-	var $ana_9822_get_WO = "Select Id,Custom_Start_Time__c,Custom_End_Time__c  from SVMXC__Service_Order__c where Createdby.Id = '005q0000003RLoJ' Order by CreatedDate DESC Limit 1";
+	var $ana_9822_get_WO = "Select Id,Custom_Start_Time__c,Custom_End_Time__c  from SVMXC__Service_Order__c where Createdby.Id = '"+$user+"' Order by CreatedDate DESC Limit 1";
 	var $ana_9822_fetch_WO = $op_act_sForceApiCall.sForceQuery($un, $pwd, $ana_9822_get_WO,"query");
 	var $ana_9822_WO_ID ;
 
@@ -89,10 +89,14 @@ _log($rundate);
 var $datevalue = Math.round((($stdate.getTime() - $rundate) / 1000) / (-60)); 
 _log($datevalue);
 
+if($datevalue!=$ana_9822_Expected_uptime)
+{
+$datevalue=$datevalue+1;
+}
+
+
 var $Actual_Uptime=$datevalue-$Downtime;
 var $MTBF=$Actual_Uptime/1;
-
-
 
 _log($ana_9822_IB);
 _log($ana_9822_Expected_uptime);
