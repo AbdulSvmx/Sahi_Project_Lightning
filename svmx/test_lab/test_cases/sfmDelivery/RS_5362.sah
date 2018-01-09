@@ -14,7 +14,10 @@ var $resultSet = $sfm_act_search.cloneSearch($standardSearch, $button,$searchNam
 $bo_act_navigation.navigateToHome();
 $sfm_act_search.searchSfmSearches($searchName);
 _click(_span($searchName));
-var $span = _collect("_span", "/Open/", _in(_div("svmx-box-inner svmx-horizontal-box-overflow-body[1]")));
+//var $span = _collect("_span", "open", _in(_div("svmx-box-inner svmx-horizontal-box-overflow-body[1]")));
+_setStrictVisibilityCheck(true);
+var $span= _collect("_span", "/Open/", _in(_div("/tabbar-.*/")));
+//_alert($span.length);
 var $count = 0;
 if($span.length==$resultSet.length){
 	for(var $i=0;$i<$span.length;$i++){
