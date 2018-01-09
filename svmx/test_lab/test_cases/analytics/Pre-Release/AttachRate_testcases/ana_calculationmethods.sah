@@ -1,4 +1,4 @@
-var $data = _readExcelFile("../../analytics/an_excleData/an_Datasheet1.xlsx","Sheet1",true);
+var $data = _readExcelFile("../../../analytics/Pre-Release/Data_Meghana.xlsx","Sheet1",true);
 var $un = $data[1]["Username"];
 var $pwd = $data[1]["pwd"];
 var $url = "https://test.salesforce.com";
