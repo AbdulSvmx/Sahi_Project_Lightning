@@ -16,7 +16,7 @@ var $created_by;
 var $closed_on;
 var $Customer_Down;
 var $insert_wo_first = "SVMXC__Service_Order__c  WO = new SVMXC__Service_Order__c (SVMXC__Company__c ='"+ $Account +"', SVMXC__Product__c = '"+$Product+"', SVMXC__Group_Member__c = '"+$Technician+"', SVMXC__Closed_On__c = DateTime.valueOf ("+$Closedon+"), SVMXC__Priority__c = 'High',SVMXC__Customer_Down__c=True);insert WO;";
-var $query_wo_first = "Select Name , Id  , SVMXC__Closed_On__c ,CreatedDate,SVMXC__Customer_Down__c   from SVMXC__Service_Order__c where Createdby.Id = '005q0000003RLoJ'  Order by CreatedDate DESC Limit 1";
+var $query_wo_first = "Select Name , Id  , SVMXC__Closed_On__c ,CreatedDate,SVMXC__Customer_Down__c   from SVMXC__Service_Order__c where Createdby.Id = '"+$user+"'  Order by CreatedDate DESC Limit 1";
 var $fetchwoquery = $op_act_sForceApiCall.sForceQuery($un, $pwd, $insert_wo_first ,"create");
 
 var $store_first_wo = $op_act_sForceApiCall.sForceQuery($un, $pwd, $query_wo_first,"query");
