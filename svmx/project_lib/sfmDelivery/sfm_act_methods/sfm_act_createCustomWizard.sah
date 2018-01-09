@@ -83,6 +83,42 @@ var $sfm_act_createCustomWizard = new function sfm_act_createCustomWizard() {
 
 	};
 
+// Added by Safi	WO with values/ Create Case
+	
+	this.createWOwithFieldValues = function(){
+		_wait(5000);
+		_click($sfm_pg_wo.tab_all);
+		_wait(3000);
+		_click($sfm_pg_wo.link_wo);
+		_click($sfm_pg_wo.btn_wo_new);
+		_setValue(_textbox("Auto_TextBox_c15122017142520"), "TextBox");
+		_setValue(_textbox("Auto_dateTime_c15122017142520"), "2/1/2018 11:30 PM");
+		_setValue(_textbox("Auto_number_c15122017142520"), "101010");
+		_setSelected(_select(0,_rightOf(_label("Account Picklist"))),"Value1");
+		_click($sfm_pg_wo.btn_wo_save);
+		_wait(6000);
+		_selectDomain("/svmx/");
+		
+	};	
+	
+	
+	this.createCasewithFieldValues = function(){
+		$CaseNo="";
+		_wait(5000);
+		_click($sfm_pg_wo.tab_all);
+		_wait(3000);
+		_click(_link("Cases"));
+		_click(_button(" New "));
+		_setValue(_textbox("AutoC_TextBox_c151220171507"), "TextBox");
+		_setValue(_textbox("AutoC_dateTime_c151220171507"), "2/1/2018 11:30 PM");
+		_setValue(_textbox("AutoC_number_c151220171507"), "101010");
+		_setSelected(_select(0,_rightOf(_label("Picklist1"))),"Value1");
+		_setSelected(_select(0,_rightOf(_label("*Case Origin"))),"Email");
+		_click(_submit(" Save "));
+		_wait(6000);
+		$CaseNo=_getText(_heading2("pageDescription"));
+	
+	};
 
 	this.newInstalledProduct = function($tabName,$productName,$accountName,$contactName) {
 		var $serialNum = $bo_act_common.generateRandomName("Ser");
@@ -529,4 +565,67 @@ var $sfm_act_createCustomWizard = new function sfm_act_createCustomWizard() {
 		_click($sfm_pg_wizards.btn_add);
 		_click($sfm_pg_wizards.btn_saveClose);
 	};
+	
+	this.createWoFor5371 = function(){
+		var $woName="";
+		_click($sfm_pg_wo.tab_all);
+		_wait(3000);
+		_click($sfm_pg_wo.link_wo);
+		_click($sfm_pg_wo.btn_wo_new);
+		var $dd = this.generateYesterday();
+		_click($sfm_pg_wo.txt_actualOnsiteResponse);
+		_click($sfm_pg_wo.cell_today);
+		_click($sfm_pg_wo.txt_actualResolution);
+		_click($sfm_pg_wo.cell_today);
+		_click($sfm_pg_wo.txt_actualInitialResponse);
+		_click(_cell("/"+$dd+"/",_leftOf(_cell("/todayDate/"))));
+		_click($sfm_pg_wo.txt_actualRestoration);
+		_click($sfm_pg_wo.cell_tomorrow);
+		_click($sfm_pg_wo.txt_date1);
+		_click($sfm_pg_wo.cell_today);
+		_click($sfm_pg_wo.txt_date2);
+		_click($sfm_pg_wo.cell_tomorrow);
+		_click($sfm_pg_wo.txt_date3);
+		_click(_cell("/"+$dd+"/",_leftOf(_cell("/todayDate/"))));
+		_click($sfm_pg_wo.btn_wo_save);
+		_wait(3000);
+		$woName= _getText($sfm_pg_wo.label_wo);
+		return $woName;
+	};
+	
+	this.generateYesterday = function(){
+		var $today = _getText($sfm_pg_wo.link_today);
+		var $yesterday = new Date($today);
+//		_log($yesterday);
+		$yesterday.setDate($yesterday.getDate()-1);
+//		_log($yesterday);
+		var $dd = $yesterday.getDate();
+		return $dd;
+	};
+	
+	this.createCase = function(){
+		$bo_act_navigation.navigateToCasesPage();
+		_click($sfm_pg_wo.btn_wo_new);
+		_setSelected($sfm_pg_wo.sel_case, "Email");
+		_click($sfm_pg_wo.link_actualInitialResp);
+		_click($sfm_pg_wo.link_scheduledDate);
+		_click($sfm_pg_wo.btn_wo_save);
+		return _getText($sfm_pg_wo.label_wo);
+	};
+	
+	this.createWoFor6344 = function($caseId){
+		$bo_act_navigation.navigateToWorkOrdersTab();
+		_click($sfm_pg_wo.btn_wo_new);
+		_setValue($sfm_pg_wo.txt_case,$caseId);
+		_setSelected($sfm_pg_wo.sel_orderStatus,"Canceled");
+		_click($sfm_pg_wo.btn_wo_save);
+		_wait(3000);
+		$woName= _getText($sfm_pg_wo.label_wo);
+		return $woName;
+		
+	};
 };
+
+
+
+

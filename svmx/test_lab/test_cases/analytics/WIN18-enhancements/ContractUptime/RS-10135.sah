@@ -168,7 +168,7 @@ $an_act_Contract_Uptime.schedule_notifications("meghana.rao@servicemax.com");
 
 //To verify the number of records in Contract Uptime object
 
-var $rs_10134_query_RV2 = "Select Count(Id) from SVMXC__SPM_Contract_Up_Time__c where SVMXC__Contract__c = '"+$RS_10135_SCON+"'";
+var $rs_10134_query_RV2 = "Select Count(Id) from SVMXC__SPM_Contract_Up_Time__c where SVMXC__Contract__c = '"+$ana_10135_SCON+"'";
 var $rs_10134_result_RV2 = $op_act_sForceApiCall.sForceQuery($un, $pwd, $rs_10134_query_RV2,"query");
 
 
