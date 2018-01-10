@@ -62,6 +62,7 @@ var $bo_act_salesforceSetUp = new function bo_act_$bo_act_salesforceSetUp() {
 		_click(_cell("OK"));
 	};
 	this.dragAndDropVisualForcePage = function($object,$sectionName){
+		_click(_link("Edit Layout"));
 		_click(_div("Visualforce Pages[1]"));
 		_dragDrop($object,_span($sectionName));
 	};

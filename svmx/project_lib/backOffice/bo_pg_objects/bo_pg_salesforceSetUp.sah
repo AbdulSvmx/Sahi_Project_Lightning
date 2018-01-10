@@ -31,7 +31,20 @@ this.txt_apexClasscode = _textarea("textarea");
 	
 //Edit Layout Fields
 	this.btn_SLAVisualPage = _span("SLAT_SLAClockOnWO");
-	
+	this.btn_timeToRestore = _span("/Time to Restore/");
+this.btn_timeToResolve = _span("/Time to Resolve/");
+	this.btn_timeToOnsiteResponse = _span("/Time to Onsite Re/");
+	this.btn_timeToInitialResponse = _span("Time to Initial R...");
+	this.btn_InitialResponseInternalBy = _span("Initial Response ...");
+	this.btn_InitialResponseCustomerBy = _span("Initial Response ...[1]");
+	this.btn_OnsiteResponseCustomerBy = _span("Onsite Response C...");
+	this.btn_OnsiteResponseInternalBy = _span("Onsite Response I...");
+	this.btn_resolutionCustomerBy = _span("Resolution Custom...");
+	this.btn_resolutionInternalBy = _span("Resolution Intern...");
+	this.btn_restorationInternalBy = _span("Restoration Inter...");
+	this.btn_restorationCustomerBy = _span("Restoration Custo...");
+
+
 };
 
 
