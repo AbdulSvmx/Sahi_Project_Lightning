@@ -10,7 +10,7 @@ var $bo_act_interactiveEntitlement_WO = new function bo_act_interactiveEntitleme
 	this.performInteractiveEntitlementWO_IncidentNotCovered = function($WO_Number) {
 		// Navigate and click on check Entitlement WO SFM
 		$bo_act_workOrders.checkEntitlement($WO_Number);
-		for (var $i = 0; $i < 20; $i++) {
+		for (var $i = 0; $i < 25; $i++) {
 			if (_isVisible($bo_pg_interactiveEntitlement_CaseAndWO.btn_checkEntitlement)) {
 				break;
 			}
@@ -18,7 +18,7 @@ var $bo_act_interactiveEntitlement_WO = new function bo_act_interactiveEntitleme
 			else {
 				_call(top.location.reload());
 
-				_wait(3000, _isVisible($bo_pg_interactiveEntitlement_CaseAndWO.btn_checkEntitlement));
+				_wait(10000, _isVisible($bo_pg_interactiveEntitlement_CaseAndWO.btn_checkEntitlement));
 
 			}
 		}
@@ -37,7 +37,7 @@ var $bo_act_interactiveEntitlement_WO = new function bo_act_interactiveEntitleme
 		// Navigate to the and click on check Entitlement WO
 		$bo_act_workOrders.checkEntitlement($WO_Number);
 		var $url;
-		for (var $i = 0; $i < 20; $i++) {
+		for (var $i = 0; $i < 25; $i++) {
 			if (_isVisible($bo_pg_interactiveEntitlement_CaseAndWO.btn_checkEntitlement)) {
 				break;
 			}
@@ -45,7 +45,7 @@ var $bo_act_interactiveEntitlement_WO = new function bo_act_interactiveEntitleme
 			else {
 				_call(top.location.reload());
 
-				_wait(3000, _isVisible($bo_pg_interactiveEntitlement_CaseAndWO.btn_checkEntitlement));
+				_wait(10000, _isVisible($bo_pg_interactiveEntitlement_CaseAndWO.btn_checkEntitlement));
 
 			}
 		}
@@ -63,7 +63,7 @@ var $bo_act_interactiveEntitlement_WO = new function bo_act_interactiveEntitleme
 	this.performInteractiveEntitlementWO_UsingWarranty = function($WO_Number, $warrantyName) {
 		// Navigate to the and click on check Entitlement WO
 		$bo_act_workOrders.checkEntitlement($WO_Number);
-		for (var $i = 0; $i < 20; $i++) {
+		for (var $i = 0; $i < 25; $i++) {
 			if (_isVisible($bo_pg_interactiveEntitlement_CaseAndWO.btn_checkEntitlement)) {
 				break;
 			}
@@ -71,7 +71,7 @@ var $bo_act_interactiveEntitlement_WO = new function bo_act_interactiveEntitleme
 			else {
 				_call(top.location.reload());
 
-				_wait(3000, _isVisible($bo_pg_interactiveEntitlement_CaseAndWO.btn_checkEntitlement));
+				_wait(10000, _isVisible($bo_pg_interactiveEntitlement_CaseAndWO.btn_checkEntitlement));
 
 			}
 		}
@@ -89,7 +89,7 @@ var $bo_act_interactiveEntitlement_WO = new function bo_act_interactiveEntitleme
 	this.performInteractiveEntitlement_WOPSLines = function($WO_Number, $IBName, $warrantyName) {
 		// Navigate to the and click on check Entitlement PS SFM
 		$bo_act_workOrders.checkEntitlementPS($WO_Number);
-		for (var $i = 0; $i < 20; $i++) {
+		for (var $i = 0; $i < 25; $i++) {
 			if (_isVisible($bo_pg_interactiveEntitlement_CaseAndWO.btn_checkEntitlement)) {
 				break;
 			}
@@ -97,7 +97,7 @@ var $bo_act_interactiveEntitlement_WO = new function bo_act_interactiveEntitleme
 			else {
 				_call(top.location.reload());
 
-				_wait(3000, _isVisible($bo_pg_interactiveEntitlement_CaseAndWO.btn_checkEntitlement));
+				_wait(10000, _isVisible($bo_pg_interactiveEntitlement_CaseAndWO.btn_checkEntitlement));
 
 			}
 		}

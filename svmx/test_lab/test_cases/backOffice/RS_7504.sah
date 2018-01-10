@@ -25,9 +25,14 @@ _click(_link($location));
 var $installedProduct3 =$bo_act_locations.addInstalledProductToLocation($proName,$accName,"");
 
 //Create a Criteria Based PM template
-$bo_act_PMPlanTemplate.createCriteriaBasedPMTemplate($proName, "");
+var $PMTemplate = $bo_act_PMPlanTemplate.createCriteriaBasedPMTemplate($proName, "");
 $bo_act_PMPlanTemplate.firstCriteriaBasedCondition("Latitude", "Equals", 10);
 $bo_act_PMPlanTemplate.saveConditionBasedPM();
+
+//Create Condition Based PM Plan from Location.
+$bo_act_PMPlan.createConditionBasedPMPlanFromLocation($location, $PMTemplate);
+$bo_act_PMPlan.saveConditionBasedPMPlan();
+
 
 $RS_7504.end();
 

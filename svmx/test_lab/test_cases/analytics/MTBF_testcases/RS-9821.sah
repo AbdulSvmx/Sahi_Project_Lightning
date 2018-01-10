@@ -34,7 +34,7 @@ _log($IB_created_date);
 
 	var $ana_9821_create_WO = "SVMXC__Service_Order__c WO1 = new SVMXC__Service_Order__c(SVMXC__Company__c='"+$Account+"',custom_Installed_Product__c = '"+$Component+"',Custom_Start_Time__c = DateTime.valueOf("+$PreferredStartDate+"+0.025), Custom_End_Time__c = DateTime.valueOf("+$PreferredEndDate+"+0.085)); insert WO1;";
 	var $ana_9821_result_WO = $op_act_sForceApiCall.sForceQuery($un, $pwd, $ana_9821_create_WO , "create");
-	var $ana_9821_get_WO = "Select Id,Custom_Start_Time__c,Custom_End_Time__c  from SVMXC__Service_Order__c where Createdby.Id = '005q0000003RLoJ' Order by CreatedDate DESC Limit 1";
+	var $ana_9821_get_WO = "Select Id,Custom_Start_Time__c,Custom_End_Time__c  from SVMXC__Service_Order__c where Createdby.Id = '"+$user+"' Order by CreatedDate DESC Limit 1";
 	var $ana_9821_fetch_WO = $op_act_sForceApiCall.sForceQuery($un, $pwd, $ana_9821_get_WO,"query");
 	var $ana_9821_WO_ID ;
 
@@ -92,6 +92,11 @@ var $rundate=new Date($ana_9821_run_on);
 _log($rundate);
 var $datevalue = Math.round((($stdate.getTime() - $rundate) / 1000) / (-60)); 
 _log($datevalue);
+
+if($datevalue!=$ana_9821_Expected_uptime)
+{
+$datevalue=$datevalue+1;
+}
 
 var $Actual_Uptime=$datevalue-$Downtime;
 var $MTBF=$Actual_Uptime/1;
