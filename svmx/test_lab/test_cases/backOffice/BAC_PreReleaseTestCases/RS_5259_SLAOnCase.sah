@@ -37,10 +37,6 @@ _assertNotEqual(_getText($bo_pg_Cases.txt_TimeToInitialResponse),"", "issue in T
 
 //Clean up function
 
-var $datacreated = [$slaterm,$caseNumber];
-for (var i = 0; i < $datacreated.length; i++) {
-	$bo_act_common.cleanUpfunction($datacreated[i]);
-}
 
 $RS_5259.end();
 

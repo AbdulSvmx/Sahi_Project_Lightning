@@ -50,11 +50,6 @@ $bo_act_autoEntitlementRule_WO.changingAutoEntitlementRule_Sequence($autoEntitle
 
 //Clean up function
 
-var $datacreated = [$autoEntitlementRuleName_Case1,$autoEntitlementRuleName_Case2];
-for (var i = 0; i < $datacreated.length; i++) {
-	$bo_act_autoEntitlementRule_Case.deleteAutoEntitlementRule_Case($datacreated[i]);
-}
-
 $bo_act_login.logOut(); 
 
 $RS_7304.end();

@@ -65,10 +65,7 @@ _assertEqual($actualPMScheduleStatus,"Work Order Created","Status is not equal t
 
 //Clean up function
 
-var $datacreated = [$contactName,$accName,$proName,$IBName,$WONumber,$slaterm,$PMPTemplate,$sconName,$PMPlan];
-for (var i = 0; i < $datacreated.length; i++) {
-	$bo_act_common.cleanUpfunction($datacreated[i]);
-}
+
 $bo_act_PMProcess.deletePMProcess($PMProcessId);
 
 $RS_7439.end();

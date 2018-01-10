@@ -128,10 +128,6 @@ _wait(10000,isVisible(_div("messageText")));
 _assertContainsText("Work Order updated",_div("messageText"));
 
 //Clean up function
-var $datacreated = [$contactName,$caseNumber,$accountName,$productName,$IBName,$WONumber];
-for (var i = 0; i < $datacreated.length; i++) {
-	$bo_act_common.cleanUpfunction($datacreated[i]);
-}
 $bo_act_SFW.deleteWizards("Work Order", $wizardIDName);
 $bo_act_customAction.deleteCustomAction("Work Order", $actionTitle);
 $bo_act_salesforceSetUp.deleteapexClasses($className);

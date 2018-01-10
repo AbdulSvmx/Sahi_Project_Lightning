@@ -214,10 +214,6 @@ $bo_act_autoEntitlementRule_WO.deleteAutoEntitlementRule_WO($autoEntitlementRule
 
 //Clean up function
 
-var $datacreated = [$WONumber,$caseNumber,$serviceConractName,$slaName03,$slaName02,$slaName01,$IBName,$productName,$locationName,$contactName,$accountName,$warrantyName];
-for (var i = 0; i < $datacreated.length; i++) {
-	$bo_act_common.cleanUpfunction($datacreated[i]);
-}
 
 $bo_act_login.logOut(); 
 
