@@ -207,10 +207,7 @@ $bo_act_SFW.deleteSFMWizard("Work Order", $wizardIDName);
 *Clean up function
 */
 
-var $datacreated = [$WONumber,$caseNumber,$IBName,$productName,$contactName,$accountName,$slaName,$serviceName];
-for (var i = 0; i < $datacreated.length; i++) {
-$bo_act_common.cleanUpfunction($datacreated[i]);
-}
+
 
 $bo_act_login.logOut(); 
 

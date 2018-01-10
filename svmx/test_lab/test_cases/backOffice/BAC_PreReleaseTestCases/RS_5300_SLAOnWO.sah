@@ -38,10 +38,6 @@ _assertEqual(_getText(_div(0,_rightOf(_cell("/Initial Response Customer By/"))))
 
 //Clean up function
 
-var $datacreated = [$accName,$proName,$IBName,$contactName,$WONumber,$slaterm,$caseNumber];
-for (var i = 0; i < $datacreated.length; i++) {
-	$bo_act_common.cleanUpfunction($datacreated[i]);
-}
 
 $RS_5300.end();
 

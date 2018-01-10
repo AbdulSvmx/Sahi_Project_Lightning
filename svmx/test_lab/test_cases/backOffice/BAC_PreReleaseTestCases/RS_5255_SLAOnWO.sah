@@ -41,12 +41,8 @@ $bo_act_workOrders.clickLinktoUpdateTextfields($bo_pg_workOrders.txt_actualResto
 $bo_act_workOrders.saveWorkOrder();
 _assertEqual(_getText($bo_pg_workOrders.txt_TimeToRestore)," ", "issue in Time to Restore");
 
-//Clean up function
 
-var $datacreated = [$accName,$proName,$IBName,$contactName,$WONumber,$slaterm,$caseNumber];
-for (var i = 0; i < $datacreated.length; i++) {
-	$bo_act_common.cleanUpfunction($datacreated[i]);
-}
+
 
 $RS_5255.end();
 

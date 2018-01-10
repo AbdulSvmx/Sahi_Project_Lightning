@@ -52,11 +52,6 @@ _assertNotNull($WONumber,"Work Order is not created");
 
 //Clean up function
 
-var $datacreated = [$accName,$proName,$installedProduct,$sconName,$WONumber,$slaterm,$PMPTempName,$PMPlan];
-for (var i = 0; i < $datacreated.length; i++) {
-	$bo_act_common.cleanUpfunction($datacreated[i]);
-}
-
 $RS_5260.end();
 
 
