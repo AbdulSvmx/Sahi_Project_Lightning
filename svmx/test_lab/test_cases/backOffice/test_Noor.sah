@@ -2,10 +2,7 @@
 //author - Noor Salma Sharieff
 
 $bo_act_login.login($g_url, $bac_un, $bac_pwd);
-$bo_act_PMPlanTemplate.createCriteriaBasedPMTemplate("pro412018133539", "");
-$bo_act_PMPlanTemplate.firstCriteriaBasedCondition("Latitude", "Equals", 10);
-$bo_act_PMPlanTemplate.saveConditionBasedPM();
-
+$bo_act_PMPlan.createConditionBasedPMPlanFromLocation("loc41201811653", "CriteriaTemp");
 
 
 
