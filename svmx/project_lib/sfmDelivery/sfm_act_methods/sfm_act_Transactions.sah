@@ -194,6 +194,77 @@ var $sfm_act_Transactions = new function sfm_act_Transactions() {
 			_wait(6000);
 //			_click($bo_pg_sfmTransactionAndDesigner.lbl_backToSetupHome);
 		};
+		
+	this.clonedsfm5348= function($processName,$sfmName,$sfmPgLayoutName,$dvrRuleName){
+		
+		$sfm_act_SFM.selectSFM($processName,false);
+		_click($bo_pg_sfmTransactionAndDesigner.btn_clone);
+		_wait(60000, _isVisible($bo_pg_sfmTransactionAndDesigner.txt_name));
+		_setValue($bo_pg_sfmTransactionAndDesigner.txt_name, $sfmName);
+		_setValue($bo_pg_sfmTransactionAndDesigner.txt_sfmTransactionId, "");
+		_click($bo_pg_sfmTransactionAndDesigner.btn_screenDesigner);
+
+		_click($sfm_pg_screenDesigner.add_field);
+		_click($sfm_pg_screenDesigner.txt_searchField);
+		_setValue($sfm_pg_screenDesigner.txt_searchField,"Driving Time");
+		_doubleClick(_f("main").s_label("Driving Time (in Minutes)"));
+		
+		_click($sfm_pg_screenDesigner.add_field);
+		_click($sfm_pg_screenDesigner.txt_searchField);
+		_setValue($sfm_pg_screenDesigner.txt_searchField,"Auto_TextBox");
+		_doubleClick(_f("main").s_label("Auto_TextBox_c15122017142520")); 
+	
+		_click($sfm_pg_screenDesigner.add_field);
+		_click($sfm_pg_screenDesigner.txt_searchField);
+		_setValue($sfm_pg_screenDesigner.txt_searchField,"Auto_number");
+		_doubleClick(_f("main").s_label("Auto_number_c15122017142520")); 
+		_wait(3000);
+		
+		_click(_f("main").tab("Data Validation Rules"));
+		_click(_f("main").s_button("New[5]"));
+		_wait(3000);
+		_setSelected(_f("main").s_combobox("objCombo"), "Work Order");
+		_setValue(_f("main").s_textinput("ruleName"), $dvrRuleName);
+		_setValue(_f("main").s_textinput("ruleID"), "");
+		_setValue(_f("main").s_textinput("ruleID"), $dvrRuleName);
+		_setValue(_f("main").s_textarea("description"), "dvr rule for 5348");
+		
+		_setSelected(_f("main").s_combobox("fieldCombo[1]"), "Order Status");
+		_setSelected(_f("main").s_combobox("picklist"), "Open");
+		
+		_click(_f("main").s_button("Add a row[1]"));
+		_setSelected(_f("main").s_combobox("fieldCombo[2]"), "Billing Type");
+		_setSelected(_f("main").s_combobox("picklist[1]"), "Warranty");	
+		
+		_click(_f("main").s_button("Add a row[1]"));
+		_setSelected(_f("main").s_combobox("fieldCombo[3]"), "Auto_number_c15122017142520");
+		_setValue(_f("main").s_textinput("operandValue"), "45");
+		
+		_click(_f("main").s_button("Add a row[1]"));
+		_setSelected(_f("main").s_combobox("fieldCombo[4]"), "Auto_TextBox_c15122017142520");
+		_setValue(_f("main").s_textinput("operandValue[1]"), "dvr test");
+		
+		_setValue(_f("main").s_textinput("advExpIP"), "(1 AND 2 ) OR (3 AND 4 )");
+		
+		_setValue(_f("main").s_textarea("message"), "Error: DVR Advanced Expression is not met.");
+		_click(_f("main").s_button("Save"));
+		_wait(6000);
+		_click(_f("main").s_button("Add To Process"));
+		_wait(3000);
+
+		
+		_setValue($bo_pg_sfmTransactionAndDesigner.txt_sfmSavePageLayoutAs, $sfmPgLayoutName);
+		_setValue($bo_pg_sfmTransactionAndDesigner.txt_sfmSavePageLayoutAsId, "");
+		_setValue($bo_pg_sfmTransactionAndDesigner.txt_sfmSavePageLayoutAsId, $sfmPgLayoutName);
+		_wait(3000);
+	
+		_click($bo_pg_sfmTransactionAndDesigner.btn_pageLayoutSave);
+		_wait(6000);
+		_click($bo_pg_sfmTransactionAndDesigner.btn_finalQuickSave);
+		_wait(6000);
+		
+		
+	};
 	
 	this.clonedsfm5352= function($processName,$sfmName,$sfmPgLayoutName,$dvrRuleName){
 		$sfm_act_SFM.selectSFM($processName,false);
