@@ -106,7 +106,7 @@ _assertEqual("Contract" ,$ana_1650_covered_product);
 
 var $ana_1650_create_CP2 = "SVMXC__Service_Contract_Products__c CP01 = new SVMXC__Service_Contract_Products__c(Id = '"+$ana_1650_cp_ID+"',SVMXC__End_Date__c = Date.valueOf('2017-01-01')); update CP01;";
 var $ana_1650_result_CP2 = $op_act_sForceApiCall.sForceQuery($un, $pwd, $ana_1650_create_CP2 , "create");
-var $ana_1650_get_CP2 = "Select Id from SVMXC__Service_Contract_Products__c where Createdby.Id = '005q0000003GGfP' Order by CreatedDate DESC Limit 1";
+var $ana_1650_get_CP2 = "Select Id from SVMXC__Service_Contract_Products__c where Createdby.Id = '"+$user_meghana+"' Order by CreatedDate DESC Limit 1";
 var $ana_1650_fetch_CP2   = $op_act_sForceApiCall.sForceQuery($un, $pwd, $ana_1650_get_CP2,"query");
 var $ana_1650_cp_ID2;
 
