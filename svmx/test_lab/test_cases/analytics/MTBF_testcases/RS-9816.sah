@@ -29,7 +29,7 @@ var $delete_data1 = $op_act_sForceApiCall.sForceQuery($un, $pwd, $delete2 , "cre
 
 $ana_9816_WO_ID = $ana_9816_fetch_WO[0].Id;
 _log($ana_9816_WO_ID);	
-//_wait(30000);
+_wait(30000);
 
 
 

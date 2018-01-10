@@ -12,8 +12,9 @@ var $sfm_act_Transactions = new function sfm_act_Transactions() {
 		_setValue($bo_pg_sfmTransactionAndDesigner.txt_sfmSavePageLayoutAsId, $sfmPgLayoutName);
 		_wait(3000);
 		_click($bo_pg_sfmTransactionAndDesigner.btn_pageLayoutSave);
-		_wait(3000);
+		_wait(6000);
 		_click($bo_pg_sfmTransactionAndDesigner.btn_finalQuickSave);
+		_wait(3000);
 //		_click($bo_pg_sfmTransactionAndDesigner.lbl_backToSetupHome);
 	};
 	
@@ -95,7 +96,7 @@ var $sfm_act_Transactions = new function sfm_act_Transactions() {
 			_click($sfm_pg_screenDesigner.add_field);
 			_click($sfm_pg_screenDesigner.txt_searchField);
 			_setValue($sfm_pg_screenDesigner.txt_searchField,"Account Pick");
-			_doubleClick(_f("main").s_label("Account Picklist[1]"));
+			_doubleClick(_f("main").s_label("Account Picklist"));
 			
 			_click($sfm_pg_screenDesigner.add_field);
 			_click($sfm_pg_screenDesigner.txt_searchField);

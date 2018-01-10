@@ -79,21 +79,21 @@ var $sfm_act_createCustomWizard = new function sfm_act_createCustomWizard() {
 		_click($sfm_pg_wo.btn_wo_new);
 		_setSelected($sfm_pg_wo.btn_woStaus,$OrdrStatus);
 		_click($sfm_pg_wo.btn_wo_save);
-		_wait(3000);
+		_wait(5000);
 
 	};
 
 // Added by Safi	WO with values/ Create Case
 	
-	this.createWOwithFieldValues = function(){
+	this.createWOwithFieldValues = function($value){
 		_wait(5000);
 		_click($sfm_pg_wo.tab_all);
 		_wait(3000);
 		_click($sfm_pg_wo.link_wo);
 		_click($sfm_pg_wo.btn_wo_new);
-		_setValue(_textbox("Auto_TextBox_c15122017142520"), "TextBox");
+		_setValue(_textbox("Auto_TextBox_c15122017142520"), "TextBox01");
 		_setValue(_textbox("Auto_dateTime_c15122017142520"), "2/1/2018 11:30 PM");
-		_setValue(_textbox("Auto_number_c15122017142520"), "101010");
+		_setValue(_textbox("Auto_number_c15122017142520"), $value);
 		_setSelected(_select(0,_rightOf(_label("Account Picklist"))),"Value1");
 		_click($sfm_pg_wo.btn_wo_save);
 		_wait(6000);
@@ -102,16 +102,16 @@ var $sfm_act_createCustomWizard = new function sfm_act_createCustomWizard() {
 	};	
 	
 	
-	this.createCasewithFieldValues = function(){
+	this.createCasewithFieldValues = function($value){
 		$CaseNo="";
 		_wait(5000);
 		_click($sfm_pg_wo.tab_all);
 		_wait(3000);
 		_click(_link("Cases"));
 		_click(_button(" New "));
-		_setValue(_textbox("AutoC_TextBox_c151220171507"), "TextBox");
+		_setValue(_textbox("AutoC_TextBox_c151220171507"), "TextBox01");
 		_setValue(_textbox("AutoC_dateTime_c151220171507"), "2/1/2018 11:30 PM");
-		_setValue(_textbox("AutoC_number_c151220171507"), "101010");
+		_setValue(_textbox("AutoC_number_c151220171507"), $value);
 		_setSelected(_select(0,_rightOf(_label("Picklist1"))),"Value1");
 		_setSelected(_select(0,_rightOf(_label("*Case Origin"))),"Email");
 		_click(_submit(" Save "));

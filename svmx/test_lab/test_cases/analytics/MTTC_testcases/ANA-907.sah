@@ -1,8 +1,10 @@
 var $an_mttc_907 = _testcase("ANA-907","Case as Top-level1");
 $an_mttc_907.start();
-var $un = "vinaya.v@servicemax.com";
-var $pwd = "servicemax12";
-var $url = "https://test.salesforce.com";
+var $cred = _readExcelFile("../../analytics/an_excleData/credentials.xlsx","Sheet1",true);
+var $un = $cred[1]["UserName"];
+var $pwd =$cred[1]["Password"];
+var $url =$cred[1]["url"];
+var $user =$cred[1]["User"];
 var $data = _readExcelFile("../../analytics/an_excleData/MTTC_data.xlsx","Sheet1",true);
 var $Account = $data[4]["Account"];
 var $Technician = $data[4]["Technician"];
