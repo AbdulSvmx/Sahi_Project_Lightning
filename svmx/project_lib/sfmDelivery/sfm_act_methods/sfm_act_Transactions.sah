@@ -111,22 +111,21 @@ var $sfm_act_Transactions = new function sfm_act_Transactions() {
 			_wait(3000);
 			_setSelected(_f("main").s_combobox("searchCombo[4]"), "SVMXSTD: Case Lookup");
 			
-			
+		
 			_click(_f("main").s_button("Add a row[1]"));
-			_click(_f("main").s_textinput("textInput[66]"));
+			//_click(_f("main").s_textinput("textInput[66]"));
 			_setSelected(_f("main").s_combobox("fieldCombo[1]"), "AutoC_TextBox_c151220171507");
 			_setValue(_f("main").s_textinput("operandValue"), "SVMX.CURRENTRECORD.Auto_TextBox_c15122017142520__c");
 			_click(_f("main").s_button("Add a row[1]"));
-			_click(_f("main").s_textinput("textInput[66]"));
+			//_click(_f("main").s_textinput("textInput[66]"));
 			_setSelected(_f("main").s_combobox("fieldCombo[2]"), "Picklist1");
-			_click(_f("main").s_textinput("textInput[68]"));
+			//_click(_f("main").s_textinput("textInput[68]"));
 			_setSelected(_f("main").s_combobox("picklist"), "SVMX.CURRENTRECORD.Account_Picklist__c");
 			_click(_f("main").s_button("Add a row[1]"));
-			_click(_f("main").s_textinput("textInput[67]"));
+			//_click(_f("main").s_textinput("textInput[67]"));
 			_setSelected(_f("main").s_combobox("fieldCombo[3]"), "AutoC_number_c151220171507");
 			_setValue(_f("main").s_textinput("operandValue[1]"), "SVMX.CURRENTRECORD.Auto_number_c15122017142520__c");
-			
-			
+		
 			
 			_click(_f("main").s_textinput("advExpIP"));
 			_setValue(_f("main").s_textinput("advExpIP"), "1 AND 2 AND 3");
