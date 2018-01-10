@@ -62,7 +62,7 @@ $bo_act_login.login($g_url, $sfmUsn, $sfmPwd);
 
 
 //clone tmd016
-$sfm_act_SFM.cloneTDM016($sfmNameToBeCloned,$sfmName,$isCustom, $sfmTemplate, $sfmTemplateSaveAsName,$fieldName, $containerName);
+$sfm_act_SFM.cloneTDM016($sfmNameToBeCloned,$sfmName,$isCustom, $sfmTemplateSaveAsName, $sfmTemplate, $fieldName, $containerName);
 $sfm_act_SFM.partsNotMandatory();
 
 //create Data validation rule
