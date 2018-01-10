@@ -12,8 +12,9 @@ var $sfm_act_Transactions = new function sfm_act_Transactions() {
 		_setValue($bo_pg_sfmTransactionAndDesigner.txt_sfmSavePageLayoutAsId, $sfmPgLayoutName);
 		_wait(3000);
 		_click($bo_pg_sfmTransactionAndDesigner.btn_pageLayoutSave);
-		_wait(3000);
+		_wait(6000);
 		_click($bo_pg_sfmTransactionAndDesigner.btn_finalQuickSave);
+		_wait(3000);
 //		_click($bo_pg_sfmTransactionAndDesigner.lbl_backToSetupHome);
 	};
 	

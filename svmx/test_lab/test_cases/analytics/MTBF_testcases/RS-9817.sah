@@ -43,7 +43,7 @@ var $stdate_diff = new Date($starttime);
 var $enddate_diff=new Date($endtime);
 var $Downtime=Math.round((($enddate_diff-$stdate_diff)/1000)/(60));
 _log($Downtime);
-//_wait(30000);
+_wait(30000);
 
 $an_act_MTBF.mtbf_closed_wo_calc("CAL-ANA-9817");
 $an_act_MTBF.MTBF_runEngine("vinaya.v@ge.com");
