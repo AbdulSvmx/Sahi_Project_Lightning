@@ -17,7 +17,10 @@ $sfm_act_createCustomWizard.createBlankWo();
 $sfm_act_createCustomWizard.clickWizardBtn($sfmName);
 //$sfm_act_createCustomWizard.verify6932();
 
+//Verification
+
 var $count=0;
+var $temp=0;
 _selectDomain();
 _click(_span("/lookup_icon/",_rightOf(_label("Product:"))));
 _wait(3000);
@@ -33,6 +36,8 @@ for($i=0;$i<$divs1.length;$i++){
 	{
 		$count++;
 	}
+	
+}
 	if($count==0){
 			_log("TestResult:: Step 1:: Pass");
 		}
@@ -41,9 +46,6 @@ for($i=0;$i<$divs1.length;$i++){
 			_log("TestResult:: Step 1:: Fail");
 		}
 	
-}
-
-var temp=0;
 _click(_button("SVMXSTD:Limit Items to My Trunk Stock"));
 _click(_span("/search-icon/"));
 
@@ -51,8 +53,9 @@ var $divs2= _collect("_cell","/.*/",_under(_div("Product Name")))
 //_alert( $divs2.length);
 for($j=0;$j<$divs2.length;$j++){
 if(_getText($divs2[$j])!="Windows")
-{
+	{
 	$temp++;
+	}
 }
 if($temp!=0){
 		_log("TestResult:: Step 1:: Pass");
@@ -61,9 +64,6 @@ if($temp!=0){
 		{
 		_log("TestResult:: Step 1:: Fail");
 	}
-
-}
-
 
 $rs_6932.end();
 
