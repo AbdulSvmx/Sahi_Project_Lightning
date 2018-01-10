@@ -56,8 +56,7 @@ $bo_act_salesforceSetUp.dragAndDropFields($bo_pg_salesForceSetUP.btn_resolutionI
 $bo_act_salesforceSetUp.dragAndDropFields($bo_pg_salesForceSetUP.btn_restorationInternalBy, "SLA Fields");
 $bo_act_salesforceSetUp.dragAndDropFields($bo_pg_salesForceSetUP.btn_restorationCustomerBy, "SLA Fields");
 $bo_act_salesforceSetUp.saveEditLayout();
-
-
+*/
 
 //Drag and drop all the SLA related fields in Case Object
 /*
@@ -78,6 +77,17 @@ $bo_act_salesforceSetUp.dragAndDropFields($bo_pg_salesForceSetUP.btn_restoration
 $bo_act_salesforceSetUp.dragAndDropFields($bo_pg_salesForceSetUP.btn_restorationCustomerBy, "SLA Fields");
 $bo_act_salesforceSetUp.saveEditLayout();
 */
+
+
+//Enable the Activate PM Setting
+$bo_act_navigation.navigateToConfigurationProfilesPage();
+$bo_act_configurationProfiles.editGlobalProfileForBooleanSettings("Preventive Maintenance", "Manage PM Plan", "SET002", true);
+
+//Extra fields in WO
+$bo_act_navigation.navigateToWorkOrdersTab();
+_click(_link(0,_under(_tableHeader("Work Order Number"))));
+$bo_act_salesforceSetUp.dragAndDropFields($bo_pg_salesForceSetUP.btn_totalBillableAmount, "SLA Fields");
+
 
 $Configuration_StartUp.end();
 

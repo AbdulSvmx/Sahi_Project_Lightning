@@ -43,7 +43,7 @@ this.btn_timeToResolve = _span("/Time to Resolve/");
 	this.btn_resolutionInternalBy = _span("Resolution Intern...");
 	this.btn_restorationInternalBy = _span("Restoration Inter...");
 	this.btn_restorationCustomerBy = _span("Restoration Custo...");
-
+	 this.btn_totalBillableAmount = _span("Total Billable Am...");
 
 };
 
