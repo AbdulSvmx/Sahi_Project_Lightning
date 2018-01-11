@@ -388,8 +388,9 @@ var $sfm_act_createCustomWizard = new function sfm_act_createCustomWizard() {
 	this.verify6911 = function(){
 		_selectDomain();
 		_setStrictVisibilityCheck(true);
+		_wait(3000,_isVisible($sfm_pg_wizardWindow.btn_addRow));
+
 		_click($sfm_pg_wizardWindow.btn_addRow);
-		_wait(3000);
 		_doubleClick(_div("svmx-grid-cell-inner [1]"));
 		_click(_span("/svmx_lookup_icon/"));
 		_click($sfm_pg_wizardWindow.icon_search);
