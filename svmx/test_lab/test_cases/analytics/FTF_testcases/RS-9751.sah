@@ -5,7 +5,7 @@ var $cred = _readExcelFile("../../analytics/an_excleData/credentials.xlsx","Shee
 var $un = $cred[1]["UserName"];
 var $pwd =$cred[1]["Password"];
 var $url =$cred[1]["url"];
-var $user $cred[1]["User"];
+var $user= $cred[1]["User"];
 var $data = _readExcelFile("../../analytics/an_excleData/FTF_data.xlsx","Sheet1",true);
 var $insert_sr = $data[4]["InsertServiceRequest"];
 var $Account1 = $data[1]["Account"];

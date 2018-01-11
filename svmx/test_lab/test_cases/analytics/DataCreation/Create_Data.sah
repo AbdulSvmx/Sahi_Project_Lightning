@@ -1,0 +1,5 @@
+var $ana_create_data = _testcase("Create Data and write into sheet","Write data into sheet");
+var $data = _readExcelFile("../../analytics/an_excleData/new_sheet.xlsx","Sheet1",true);
+
+var $excelfile = new ActiveXObject("Excel.Application");
+$excelfile.Workbook.Open("../../analytics/an_excleData/new_sheet.xlsx");

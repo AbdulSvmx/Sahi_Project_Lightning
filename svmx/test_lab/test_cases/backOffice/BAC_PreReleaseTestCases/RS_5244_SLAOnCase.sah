@@ -1,0 +1,33 @@
+
+//author - Noor Salma Sharieff
+
+var $RS_5244 = _testcase("$RS_5244","Create SLA terms based on Case and Work Order");
+$RS_5244.start();
+_setSpeed(100);
+
+//Pre - Condition 
+$bo_act_login.login($g_url, $bac_PRTun, $bac_PRTpwd);
+var $slaterm = $bo_act_slaTerms.createSlaTerms("Default");
+$bo_act_slaTerms.addInitialResponseToSLA($slaterm, "Case","Problem", "High", "Created Date", 30, 60, "SLA");
+$bo_act_slaTerms.addOnsiteResponseToSLA($slaterm, "Case","Problem", "High", "Created Date", 30, 60, "SLA");
+$bo_act_slaTerms.addRestorationToSLA($slaterm, "Case","Problem", "High", "Created Date", 30, 60, "SLA");
+$bo_act_slaTerms.addResolutionToSLA($slaterm, "Case","Problem", "High", "Created Date", 30, 60, "SLA");
+
+var $slaterm1 = $bo_act_slaTerms.createSlaTerms("Default");
+$bo_act_slaTerms.addInitialResponseToSLA($slaterm1, "WorkOrder","All", "High", "Created Date", 30, 60, "SLA");
+$bo_act_slaTerms.addOnsiteResponseToSLA($slaterm1, "WorkOrder","All", "High", "Created Date", 30, 60, "SLA");
+$bo_act_slaTerms.addRestorationToSLA($slaterm1, "WorkOrder","All", "High", "Created Date", 30, 60, "SLA");
+$bo_act_slaTerms.addResolutionToSLA($slaterm1, "WorkOrder","All", "High", "Created Date", 30, 60, "SLA");
+
+
+//Clean up function
+var $delete_Query = "DELETE[SELECT NAME FROM SVMXC__Service_Level__c WHERE NAME = '"+$slaterm+"';";
+var $delete_data = $op_act_sForceApiCall.sForceQuery($bac_PRTun, $bac_PRTpwd, $delete_Query , "create");
+
+var $delete_Query = "DELETE[SELECT NAME FROM SVMXC__Service_Level__c WHERE NAME = '"+$slaterm1+"';";
+var $delete_data = $op_act_sForceApiCall.sForceQuery($bac_PRTun, $bac_PRTpwd, $delete_Query , "create");
+
+$RS_5244.end();
+
+
+
