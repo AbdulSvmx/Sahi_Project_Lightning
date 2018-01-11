@@ -303,7 +303,26 @@ var $sfm_act_Transactions = new function sfm_act_Transactions() {
 //		_click($bo_pg_sfmTransactionAndDesigner.lbl_backToSetupHome);
 	};
 
-	
+	this.clonedsfm7012= function($processName,$sfmName,$sfmPgLayoutName,$sfmMapping){
+		$sfm_act_SFM.selectSFM($processName,false);
+		_click($bo_pg_sfmTransactionAndDesigner.btn_clone);
+		_wait(60000, _isVisible($bo_pg_sfmTransactionAndDesigner.txt_name));
+		_setValue($bo_pg_sfmTransactionAndDesigner.txt_name, $sfmName);
+		_setValue($bo_pg_sfmTransactionAndDesigner.txt_sfmTransactionId, "");	
+		_click($bo_pg_sfmTransactionAndDesigner.btn_qualifyingCriteriaAndFieldMapping);
+		_click($bo_pg_sfmTransactionAndDesigner.btn_mappings);  // add 1
+		_setSelected($bo_pg_sfmTransactionAndDesigner.selMapping, $sfmMapping); //add 2
+		_wait(3000);
+		_click($bo_pg_sfmTransactionAndDesigner.btn_screenDesigner);	
+		_setValue($bo_pg_sfmTransactionAndDesigner.txt_sfmSavePageLayoutAs, $sfmPgLayoutName);
+		_setValue($bo_pg_sfmTransactionAndDesigner.txt_sfmSavePageLayoutAsId, "");
+		_setValue($bo_pg_sfmTransactionAndDesigner.txt_sfmSavePageLayoutAsId, $sfmPgLayoutName);
+		_wait(3000);	
+		_click($bo_pg_sfmTransactionAndDesigner.btn_pageLayoutSave);
+		_wait(6000);
+		_click($bo_pg_sfmTransactionAndDesigner.btn_finalQuickSave);
+		_wait(6000);
+	};
 	
 	
 // End Safi
