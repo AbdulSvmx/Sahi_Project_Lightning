@@ -8,6 +8,8 @@ _setSpeed(100);
 var $userName = "orgsadmin@svmx-org4.org.org4part1";
 var $password = "servicemax1";
 $bo_act_login.login($g_url, $bac_PRTun, $bac_PRTpwd);
+var $sectionName = "Automation Fields";
+
 /*
 var $color = 5;
 // Create Tabs
@@ -39,45 +41,59 @@ $bo_act_salesforceSetUp.saveEditLayout();
 
 
 //Drag and drop all the SLA related fields in WO Object
-
+/*
 $bo_act_navigation.navigateToWorkOrdersTab();
 _click(_link(0,_under(_tableHeader("Work Order Number"))));
-$bo_act_salesforceSetUp.dragAndDropSection("SLA Fields",1);
-$bo_act_salesforceSetUp.dragAndDropFields($bo_pg_salesForceSetUP.btn_timeToRestore, "SLA Fields");
-$bo_act_salesforceSetUp.dragAndDropFields($bo_pg_salesForceSetUP.btn_timeToResolve, "SLA Fields");
-$bo_act_salesforceSetUp.dragAndDropFields($bo_pg_salesForceSetUP.btn_timeToOnsiteResponse, "SLA Fields");
-$bo_act_salesforceSetUp.dragAndDropFields($bo_pg_salesForceSetUP.btn_timeToInitialResponse, "SLA Fields");	
-$bo_act_salesforceSetUp.dragAndDropFields($bo_pg_salesForceSetUP.btn_InitialResponseInternalBy, "SLA Fields");
-$bo_act_salesforceSetUp.dragAndDropFields($bo_pg_salesForceSetUP.btn_InitialResponseCustomerBy, "SLA Fields");
-$bo_act_salesforceSetUp.dragAndDropFields($bo_pg_salesForceSetUP.btn_OnsiteResponseCustomerBy, "SLA Fields");
-$bo_act_salesforceSetUp.dragAndDropFields($bo_pg_salesForceSetUP.btn_OnsiteResponseInternalBy, "SLA Fields");
-$bo_act_salesforceSetUp.dragAndDropFields($bo_pg_salesForceSetUP.btn_resolutionCustomerBy, "SLA Fields");
+$bo_act_salesforceSetUp.dragAndDropSection($sectionName,1);
+$bo_act_salesforceSetUp.dragAndDropFields($bo_pg_salesForceSetUP.btn_timeToRestore, $sectionName);
+$bo_act_salesforceSetUp.dragAndDropFields($bo_pg_salesForceSetUP.btn_timeToResolve, $sectionName);
+$bo_act_salesforceSetUp.dragAndDropFields($bo_pg_salesForceSetUP.btn_timeToOnsiteResponse, $sectionName);
+$bo_act_salesforceSetUp.dragAndDropFields($bo_pg_salesForceSetUP.btn_timeToInitialResponse, $sectionName);	
+$bo_act_salesforceSetUp.dragAndDropFields($bo_pg_salesForceSetUP.btn_InitialResponseInternalBy, $sectionName);
+$bo_act_salesforceSetUp.dragAndDropFields($bo_pg_salesForceSetUP.btn_InitialResponseCustomerBy, $sectionName);
+$bo_act_salesforceSetUp.dragAndDropFields($bo_pg_salesForceSetUP.btn_OnsiteResponseCustomerBy, $sectionName);
+$bo_act_salesforceSetUp.dragAndDropFields($bo_pg_salesForceSetUP.btn_OnsiteResponseInternalBy, $sectionName);
+$bo_act_salesforceSetUp.dragAndDropFields($bo_pg_salesForceSetUP.btn_resolutionCustomerBy, $sectionName);
 $bo_act_salesforceSetUp.dragAndDropFields($bo_pg_salesForceSetUP.btn_resolutionInternalBy, "SLA Fields");
 $bo_act_salesforceSetUp.dragAndDropFields($bo_pg_salesForceSetUP.btn_restorationInternalBy, "SLA Fields");
 $bo_act_salesforceSetUp.dragAndDropFields($bo_pg_salesForceSetUP.btn_restorationCustomerBy, "SLA Fields");
-$bo_act_salesforceSetUp.saveEditLayout();
-
-
-
-//Drag and drop all the SLA related fields in Case Object
-/*
-$bo_act_navigation.navigateToCasesPage();
-_click(_link(0,_under(_tableHeader("Case Number"))));
-$bo_act_salesforceSetUp.dragAndDropSection("SLA Fields",1);
-$bo_act_salesforceSetUp.dragAndDropFields($bo_pg_salesForceSetUP.btn_timeToRestore, "SLA Fields");
-$bo_act_salesforceSetUp.dragAndDropFields($bo_pg_salesForceSetUP.btn_timeToResolve, "SLA Fields");
-$bo_act_salesforceSetUp.dragAndDropFields($bo_pg_salesForceSetUP.btn_timeToOnsiteResponse, "SLA Fields");
-$bo_act_salesforceSetUp.dragAndDropFields($bo_pg_salesForceSetUP.btn_timeToInitialResponse, "SLA Fields");	
-$bo_act_salesforceSetUp.dragAndDropFields($bo_pg_salesForceSetUP.btn_InitialResponseInternalBy, "SLA Fields");
-$bo_act_salesforceSetUp.dragAndDropFields($bo_pg_salesForceSetUP.btn_InitialResponseCustomerBy, "SLA Fields");
-$bo_act_salesforceSetUp.dragAndDropFields($bo_pg_salesForceSetUP.btn_OnsiteResponseCustomerBy, "SLA Fields");
-$bo_act_salesforceSetUp.dragAndDropFields($bo_pg_salesForceSetUP.btn_OnsiteResponseInternalBy, "SLA Fields");
-$bo_act_salesforceSetUp.dragAndDropFields($bo_pg_salesForceSetUP.btn_resolutionCustomerBy, "SLA Fields");
-$bo_act_salesforceSetUp.dragAndDropFields($bo_pg_salesForceSetUP.btn_resolutionInternalBy, "SLA Fields");
-$bo_act_salesforceSetUp.dragAndDropFields($bo_pg_salesForceSetUP.btn_restorationInternalBy, "SLA Fields");
-$bo_act_salesforceSetUp.dragAndDropFields($bo_pg_salesForceSetUP.btn_restorationCustomerBy, "SLA Fields");
+//Extra Fields
+$bo_act_salesforceSetUp.dragAndDropFields($bo_pg_salesForceSetUP.btn_totalBillableAmount, "SLA Fields");
 $bo_act_salesforceSetUp.saveEditLayout();
 */
+
+//Drag and drop all the SLA related fields in Case Object
+
+$bo_act_navigation.navigateToCasesPage();
+_click(_link(0,_under(_tableHeader("Case Number"))));
+$bo_act_salesforceSetUp.dragAndDropSection($sectionName,1);
+$bo_act_salesforceSetUp.dragAndDropFields($bo_pg_salesForceSetUP.btn_timeToRestore, $sectionName);
+$bo_act_salesforceSetUp.dragAndDropFields($bo_pg_salesForceSetUP.btn_timeToResolve, $sectionName);
+$bo_act_salesforceSetUp.dragAndDropFields($bo_pg_salesForceSetUP.btn_timeToOnsiteResponse, $sectionName);
+$bo_act_salesforceSetUp.dragAndDropFields($bo_pg_salesForceSetUP.btn_timeToInitialResponse, $sectionName);	
+$bo_act_salesforceSetUp.dragAndDropFields($bo_pg_salesForceSetUP.btn_InitialResponseInternalBy, $sectionName);
+$bo_act_salesforceSetUp.dragAndDropFields($bo_pg_salesForceSetUP.btn_InitialResponseCustomerBy, $sectionName);
+$bo_act_salesforceSetUp.dragAndDropFields($bo_pg_salesForceSetUP.btn_OnsiteResponseCustomerBy, $sectionName);
+$bo_act_salesforceSetUp.dragAndDropFields($bo_pg_salesForceSetUP.btn_OnsiteResponseInternalBy, $sectionName);
+$bo_act_salesforceSetUp.dragAndDropFields($bo_pg_salesForceSetUP.btn_resolutionCustomerBy, $sectionName);
+$bo_act_salesforceSetUp.dragAndDropFields($bo_pg_salesForceSetUP.btn_resolutionInternalBy, $sectionName);
+$bo_act_salesforceSetUp.dragAndDropFields($bo_pg_salesForceSetUP.btn_restorationInternalBy, $sectionName);
+$bo_act_salesforceSetUp.dragAndDropFields($bo_pg_salesForceSetUP.btn_restorationCustomerBy, $sectionName);
+$bo_act_salesforceSetUp.dragAndDropFields($bo_pg_salesForceSetUP.btn_actualInitialResponse, $sectionName);
+$bo_act_salesforceSetUp.dragAndDropFields($bo_pg_salesForceSetUP.btn_actualOnsiteResponse, $sectionName);
+$bo_act_salesforceSetUp.dragAndDropFields($bo_pg_salesForceSetUP.btn_actualResolution, $sectionName);
+$bo_act_salesforceSetUp.dragAndDropFields($bo_pg_salesForceSetUP.btn_actualRestoration, $sectionName);
+$bo_act_salesforceSetUp.saveEditLayout();
+
+
+
+//Enable the Activate PM Setting
+$bo_act_navigation.navigateToConfigurationProfilesPage();
+$bo_act_configurationProfiles.editGlobalProfileForBooleanSettings("Preventive Maintenance", "Manage PM Plan", "SET002", true);
+
+
+
+
 
 $Configuration_StartUp.end();
 
