@@ -49,12 +49,15 @@ $bo_act_sfmVerifyWorkOrder.clkOnWizard($wizardButtonName);
 //****Enter detail info in the main page and click Add/Modify Work detail**********
  $bo_act_addEditProdServDelivery.headerInfo($selLocation,$workPerform);
  $bo_act_addEditProdServDelivery.addchildlineInfo($selIBProd,$selPart,$selProdWarranty);
+	_click($bo_pg_addEditProdServDelivery.icon_Save);
+$bo_act_sfmVerifyWorkOrder.clkOnWizard($wizardButtonName);
+
  $bo_act_addEditProdServDelivery.clkAddModifyWorkDetailIcon();
 
 //*****Enter child details parts,labor,expenses and save*********
 _setValue(_textbox(0,_rightOf(_label("Start Date and Time:"))),$bo_act_addEditProdServDelivery.findDateToday());
 _setValue(_textbox(0,_rightOf(_label("End Date and Time:"))),$bo_act_addEditProdServDelivery.findNextMonthTodayDate());
-
+		
 $bo_act_addEditProdServDelivery.addPart();
 $bo_act_addEditProdServDelivery.addLabor();
 $bo_act_addEditProdServDelivery.addExpenses();
@@ -71,14 +74,12 @@ if(_assertExists(_span("Work Order"))){
 	_takeScreenShot()
 		}
 
-
+//*****************Deleteing testdata************
 //*****************Deleteing testdata************
 $bo_act_navigation.navigateToSfmWizard();
-_setSelected($bo_pg_sfmWizard.wizardSelectObject,$wizardSelectObjectName);
+_setSelected($bo_pg_sfmWizard.sel_objPrevMaintPlan,$objName	);
 $bo_act_SFW.deleteWizard($wizardname);	
 $bo_act_navigation.navigateToSfmTransactionDesigner();
 $bo_act_SFM.deleteSFM($sfmName);
-
-
 _setSpeed(100);
 $RS_5379.end();

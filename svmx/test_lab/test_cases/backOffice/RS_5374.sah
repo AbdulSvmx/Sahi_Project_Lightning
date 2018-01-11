@@ -57,7 +57,7 @@ $bo_act_sfmVerifyWorkOrder.clkOnWizard($wizardButtonName);
 //*****Enter child details parts,labor,expenses and save*********
 _setValue(_textbox(0,_rightOf(_label("Start Date and Time:"))),$bo_act_addEditProdServDelivery.findDateToday());
 _setValue(_textbox(0,_rightOf(_label("End Date and Time:"))),$bo_act_addEditProdServDelivery.findNextMonthTodayDate());
-
+		
 $bo_act_addEditProdServDelivery.addPart();
 $bo_act_addEditProdServDelivery.addLabor();
 $bo_act_addEditProdServDelivery.addExpenses();
@@ -86,7 +86,7 @@ if(_assertExists(_heading2("Work Order Detail"))){
 
 //*****************Deleteing testdata************
 $bo_act_navigation.navigateToSfmWizard();
-_setSelected($bo_pg_sfmWizard.wizardSelectObject,$wizardSelectObjectName);
+_setSelected($bo_pg_sfmWizard.sel_objPrevMaintPlan,$objName	);
 $bo_act_SFW.deleteWizard($wizardname);	
 $bo_act_navigation.navigateToSfmTransactionDesigner();
 $bo_act_SFM.deleteSFM($sfmName);
