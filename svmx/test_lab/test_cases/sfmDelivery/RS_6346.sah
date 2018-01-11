@@ -1,0 +1,146 @@
+var $rs_6346 = _testcase("RS_6346","Verify Confirmation type on Child when simple expressions is configured - Source to Target Save");
+$rs_6346.start();
+var $sfmNameToBeCloned = "Create Usage Lines from Estimates";
+var $sfmName = "RS_6346_1127";
+var $isCustom = false;
+var $sfmTemplate = "SVMXSTD: Create Usage from Estimates";
+var $sfmTemplateSaveAsName = $sfmName;
+var $containerName = ["Parts","Labor","Expenses","Travel"];
+var $fieldName=["Received City",
+                "Received City",
+                "Received City",
+                "Received City"];
+var $targetObject ="Work Detail (Work Order)";
+var $rulename ="RS_6346_1127";
+var $ruleDescription ="Received City should not be Panaji";
+
+var $fieldArray = ["Received City"];
+var $conditionArray = ["Equals"];
+var $operandArray =["Value"];
+var $valueArray =["Panaji"];
+var $advExpr= "";
+var $messageType = "Confirmation";
+var $wizardName = "SFM Delivery Auto";
+var $wizardType = "SFM";
+var $wizardObject ="Work Order";
+var $domainName = "/visual.force.com/";
+var $woName ="WO-00000096";
+
+_setSpeed(100);
+var $sfmPwd = "maxplore2";
+$bo_act_login.login($g_url, $sfmUsn, $sfmPwd);
+
+
+//clone tmd016
+$sfm_act_SFM.cloneTDM016($sfmNameToBeCloned,$sfmName,$isCustom, $sfmTemplateSaveAsName,$sfmTemplate,$fieldName, $containerName);
+$sfm_act_SFM.partsNotMandatory();
+
+//create Data validation rule
+$sfm_pg_dvr.newRule($targetObject, $rulename, $ruleDescription, $fieldArray, $conditionArray, $operandArray, $valueArray, $advExpr, $messageType);
+_click($sfm_pg_sfmDesigner.btn_quickSaveSFM);
+//_click($sfm_pg_sfmDesigner.btn_saveSFM); 
+
+_wait(30000,_isVisible($sfm_pg_sfmDesigner.lnk_home));
+
+
+//add the process to wizard
+$sfm_act_wizards.addToWizard($wizardObject, $wizardName, $wizardType, $sfmName);
+_wait(30000,_isVisible($sfm_pg_sfmDesigner.lnk_home)); 
+_click($sfm_pg_sfmDesigner.lnk_home);  
+
+//Create WO dynamically and search that work order in global search and validate in delivery.
+//$login = $sfm_act_createWorkOrder.login($sfmUsn, $sfmPwd);
+//$woName = $sfm_act_createWorkOrder.create_WO();  
+
+//$sfm_act_createCustomWizard.chooseObject("Work Order");
+//$wizTitle = "RS_6346_1117";
+//$sfm_act_createCustomWizard.addManageWizSteps($wizTitle,"SFM",$sfmName,"Sysadmin01 Group");
+
+_wait(3000);
+$sfm_act_common.globalSearch($woName);
+_click(_link($woName));
+_selectDomain($domainName);
+_click(_button($sfmName));
+_selectDomain();
+_wait(5000);
+
+
+//Add a row to all child lines
+
+//add line to Parts
+_click($sfm_pg_sfmDesigner.btn_deliveryPartsTab);
+_click($sfm_pg_sfmDesigner.btn_deliveryAddRowParts);
+_click($sfm_pg_sfmDesigner.btn_deliveryExtendedEdit);
+_setValue($sfm_pg_sfmDesigner.txt_eeLineQty,"5");
+_setValue($sfm_pg_sfmDesigner.txt_eeReceivedCity,"Panaji");
+_click($sfm_pg_sfmDesigner.btn_eeUpdate);
+_wait(3000);
+
+//add line to Labor
+_click($sfm_pg_sfmDesigner.btn_deliveryLaborTab);
+_click($sfm_pg_sfmDesigner.btn_deliveryAddRowLabor);
+_click($sfm_pg_sfmDesigner.btn_deliveryExtendedEditLabor);
+_setValue($sfm_pg_sfmDesigner.txt_eeLineQty,"5");
+_setValue($sfm_pg_sfmDesigner.txt_eeReceivedCity,"Panaji");
+_click($sfm_pg_sfmDesigner.btn_eeUpdate);
+_wait(3000);
+
+//add line to Expenses
+_click($sfm_pg_sfmDesigner.btn_deliveryExpenseTab);
+_click($sfm_pg_sfmDesigner.btn_deliveryAddRowExpenses);
+_click($sfm_pg_sfmDesigner.btn_deliveryExtendedEditExpenses);
+_setValue($sfm_pg_sfmDesigner.txt_eeLineQty,"5");
+_setValue($sfm_pg_sfmDesigner.txt_eeReceivedCity,"Panaji");
+_click($sfm_pg_sfmDesigner.btn_eeUpdate);
+_wait(3000);
+
+//add line to Travel
+_click($sfm_pg_sfmDesigner.btn_deliveryTravelTab);
+_click($sfm_pg_sfmDesigner.btn_deliveryAddRowTravel);
+_click($sfm_pg_sfmDesigner.btn_deliveryExtendedEditTravel);
+_setValue($sfm_pg_sfmDesigner.txt_eeReceivedCity,"Panaji");
+_click($sfm_pg_sfmDesigner.btn_eeUpdate);
+_wait(3000);
+
+//Validate the DVR Step1 & 2 to validate whether rule is triggering or not
+_click($sfm_pg_sfmDesigner.btn_deliverySave);
+if(_exists(_span("SFM Transaction Manager"))){
+	if(_exists(_label("Parts: "+$ruleDescription))){
+		_log("Pass ::: DVR Confirmation for Parts is working");
+		_click(_span("Next"));
+	}else{
+		_log("Fail ::: DVR Confirmation for Parts is not working");
+	}
+	if(_exists(_label("Labor: "+$ruleDescription))){
+		_log("Pass ::: DVR Confirmation for Labor is working");
+		_click(_span("Next"));
+	}else{
+		_log("Fail ::: DVR Confirmation for Labor is not working");
+	}
+	if(_exists(_label("Expenses: "+$ruleDescription))){
+		_log("Pass ::: DVR Confirmation for Expenses is working");
+		_click(_span("Next"));
+	}else{
+		_log("Fail ::: DVR Confirmation for Expenses is not working");
+	}
+	if(_exists(_label("Travel: "+$ruleDescription))){
+		_log("Pass ::: DVR Confirmation for Travel is working");
+		_click(_span("Save"));
+	}else{
+		_log("Fail ::: DVR Confirmation for Travel is not working");
+	}
+	
+}else{
+	_log("Fail ::: DVR Confirmation is not working");
+}
+if(_exists($sfm_pg_sfmDesigner.txt_PriceAlert)){
+	_click(_span("Ok"));
+	_wait(10000);
+}
+
+if(_exists(_span("Saved Successfully"))){
+	_log("Pass ::: WO saved after DVR confirmation");
+}
+
+
+$rs_6346.end();
