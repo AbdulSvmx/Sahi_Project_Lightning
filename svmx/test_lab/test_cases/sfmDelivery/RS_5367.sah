@@ -25,7 +25,7 @@ for(var $i=0;$i<$titles.length;$i++){
 		_log("Pass");
 	}
 	else{
-		-log("Fail");
+		_log("Fail");
 	}
 //	if($recentWindow.windowTitle!=""){
 //		_selectWindow($recentWindow.windowTitle);

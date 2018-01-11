@@ -1,11 +1,39 @@
 var $rs_5362 = _testcase("RS_5362","Verify cloning of Standard SFM Search.");
 $rs_5362.start();
+// After Cloning when a user changes the object sequence/field sequence and saves the search, 
+// the search criteria goes missing theri is an existing bug confirmed with Bhupendra
+//So commenting the code for changing object sequence.
 $standardSearch = "SVMXSTD: Account Search";
 $button = "Clone";
 $searchName = $standardSearch+Math.round(Math.random()*100000);
 $objArr = ["Case","Work Order"];
 $bo_act_login.login($g_url,$sfmUsn,$sfmPwd);
 $bo_act_navigation.navigateToSfmSearchDesigner();
-$sfm_act_search.cloneSearch($standardSearch, $button,$searchName,$objArr);
+var $resultSet = $sfm_act_search.cloneSearch($standardSearch, $button,$searchName,$objArr);
 //$sfm_act_search.customManagePermission($searchName);
+$bo_act_navigation.navigateToHome();
+$sfm_act_search.searchSfmSearches($searchName);
+_click(_span($searchName));
+//var $span = _collect("_span", "open", _in(_div("svmx-box-inner svmx-horizontal-box-overflow-body[1]")));
+_setStrictVisibilityCheck(true);
+var $span= _collect("_span", "/Open/", _in(_div("/tabbar-.*/")));
+//_alert($span.length);
+var $count = 0;
+if($span.length==$resultSet.length){
+	for(var $i=0;$i<$span.length;$i++){
+		var $txt = _getText($span[$i]);
+		var $altered = $txt.substring(0,$txt.indexOf("(")).trim();
+		if($altered==$resultSet[$i]){
+			$count++;
+		}
+	
+	}
+	}
+if($count==$span.length){
+	_log("Pass");
+}
+else{
+	_log("Fail");
+}
+$sfm_act_addDeleteMeth.deleteSearch($searchName);
 $rs_5362.end();

@@ -7,7 +7,7 @@ var $sfm_act_SFM = new function sfm_act_SFM() {
 	this.cloneTDM016 = function($sfmNameToBeCloned, $sfmName, $isCustom,
 			 $sfmTemplateSaveAsName,$sfmTemplate, $fieldName, $containerName) {
 		$bo_act_navigation.navigateToSfmTransactionDesigner();
-		_setSpeed(100);
+//		_setSpeed(100);
 
 		$sfm_act_SFM.selectSFM($sfmNameToBeCloned, $isCustom);
 

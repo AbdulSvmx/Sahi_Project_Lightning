@@ -1,6 +1,7 @@
 var $sfm_pg_wo = new function sfm_pg_wo() {
 	this.tab_all = _image("All Tabs");
 	this.btn_wo_new = _button("/New/");
+	this.btn_woStaus = _select(0,_rightOf(_label("Order Status")));
 	this.btn_wo_save = _submit("/Save/");
 	this.link_wo = _link("Work Orders");
 	this.btn_wo_edit = _button("/Edit/");
@@ -11,6 +12,7 @@ var $sfm_pg_wo = new function sfm_pg_wo() {
 		else{
 			_log("Fail");
 		}
+		
 //		_assertExists(_cell($wizTitle),"Wizard Not Present");
 	};
 	this.clickTab = function($tabName){
