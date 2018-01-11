@@ -82,13 +82,13 @@ $bo_act_serviceMaintenanceContracts.AddCoveredProducToServiceContract($sconName,
 //Add Entitled Contact to Service Contract 
 
 $bo_act_serviceMaintenanceContracts.addEntitledContactsToServiceContract($sconName, $contactName);
-
+_setSpeed(500);
 // Add Parts Pricing To Service Contract 
 var $rate = 1500.000;
 var $rateType = "NTE";
 $bo_act_serviceMaintenanceContracts.addPricingRulesTOServiceContract($sconName, $rateType, $rate, $serviceName);
 
-
+_setSpeed(100);
 /**
 * Create Case record
 */
@@ -157,7 +157,7 @@ $bo_act_workOrders.saveWorkOrder();     		// Save the Edited WO
 */
 
 $bo_act_getPrice.navigateToSFMDeliveryPageFor_TDM016($WONumber);
-
+_setSpeed(500);
 //Add Parts Line to Above invoke TDM016 SFM
 var $searchValue = $productName;
 var $lineQty = "4";
@@ -199,15 +199,13 @@ _assertEqual($actualRateOnWorkOrder,"$1,500.000","Actual and Rate on Work Order 
 _assertEqual($actualRateTypeOnWorkOrder,$rateType,"Actual and expected Rate Type on Work Order are not same");
 _assertEqual($actualProformaInvoiceAmountOnWorkOrder,"$1,500.000","Actual and expected Proforma Invoice Amount On Work Order are not same");
 _assertEqual($actualTotalBillableAmountOnWorkOrder,"$2,400.000","Actual and expected Total Billable Amount On Work Order are not same");
-
+_setSpeed(100);
 //Delete SFM Wizard 
 $bo_act_SFW.deleteSFMWizard("Work Order", $wizardIDName);
 
 /**
 *Clean up function
 */
-
-
 
 $bo_act_login.logOut(); 
 

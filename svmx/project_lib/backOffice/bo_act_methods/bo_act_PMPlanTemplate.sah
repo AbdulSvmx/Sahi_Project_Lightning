@@ -54,7 +54,7 @@ this.createUsageBasedConditionPMPTemplateNoSave = function($productName)
 {
 	var $PMTemplateName = $bo_act_common.generateRandomName("PMT");
 	$bo_act_navigation.navigateToPMPlanTemplatePage();
-	_click(_submit("Create Condition Based PM Plan Template"));
+	_click($bo_pg_PMPlanTemplate.btn_createConditionBasedPMPTemplate);
 	_wait(60000,_isVisible($bo_pg_PMPlanTemplate.txt_templateName));
 	_setValue($bo_pg_PMPlanTemplate.txt_templateName,$PMTemplateName);
 	_setValue($bo_pg_PMPlanTemplate.txt_product,$productName);

@@ -63,7 +63,7 @@ $bo_act_serviceMaintenanceContracts.AddCoveredProducToServiceContract($sconName,
 
 $bo_act_serviceMaintenanceContracts.addEntitledContactsToServiceContract($sconName, $contactName);
 
-
+_setSpeed(500);
 // Add Travel Policy To Service Contract 
 var $defaultTravelPrice = 1200;
 var $defaultTravelUnit = "Flat Rate";
@@ -71,7 +71,7 @@ var $travelRoundingType = "Actuals";
 var $travelPolicyUnit = "Flat Rate";
 var $travelPolicyRate = 122.000;
 $bo_act_serviceMaintenanceContracts.addTravelPolicyToServiceContract($sconName, $defaultTravelPrice, $defaultTravelUnit, $travelRoundingType, $travelPolicyUnit, $travelPolicyRate, $serviceType);
-
+_setSpeed(100);
 /**
 * Create SFM Wizard for WO with two Steps 1st-Check Entitlement and 2nd- Manage Work Order Lines - Usage(TDM016)
 */
@@ -111,7 +111,7 @@ if(_isVisible(_image("Checked",_rightOf(_cell("/Is Entitlement Performed/"))))){
 */
 
 $bo_act_getPrice.navigateToSFMDeliveryPageFor_TDM016($WONumber);
-
+_setSpeed(500);
 //Add Travel Line to Above invoke TDM016 SFM
 var $startHrs = "04";
 var $endHrs = "08";
@@ -135,7 +135,7 @@ _assertEqual($actualTravelRateOnWorkOrder,"$122.000","Actual and Rate on Work Or
 _assertEqual($actualTravelUnitOnWorkOrder,$travelPolicyUnit,"Actual and expected Rate Type on Work Order are not same");
 _assertEqual($actualProformaInvoiceAmountOnWorkOrder,"$122.000","Actual and expected Proforma Invoice Amount On Work Order are not same");
 _assertEqual($actualTotalBillableAmountOnWorkOrder,"$0.000","Actual and expected Total Billable Amount On Work Order are not same");
-
+_setSpeed(100);
 //Delete SFM Wizard 
 $bo_act_SFW.deleteSFMWizard("Work Order", $wizardIDName);
 
