@@ -1,0 +1,16 @@
+//Function to verify formfill in SFM Delivery(Classic)
+
+var $sfm_act_verifySFDFormfill = new function sfm_act_verifySFDFormfill(){
+	this.verifyFormfill = function($caseNo) {
+		 _click(_span(1,_rightOf(_label("Case:"))));
+		_setValue(_textbox("sfm-text-1318-inputEl"),$caseNo);
+		_click(_span("/search-icon/"));
+		_wait(3000);
+		_click(_div("/"+$caseNo+"/",_under(_div("Case Number"))));
+		_click(_span("Select"));
+		_wait(3000);
+	};
+		
+		
+		
+	};
