@@ -1,25 +1,22 @@
-var $rs_6346 = _testcase("RS_6346","Verify Confirmation type on Child when simple expressions is configured - Source to Target Save");
-$rs_6346.start();
+var $rs_6345 = _testcase("RS_6345","Verify Error type on Child when simple expressions is configured - Source to Target Save");
+$rs_6345.start();
 var $sfmNameToBeCloned = "Create Usage Lines from Estimates";
-var $sfmName = "RS_6346_1128";
+var $sfmName = "RS_6345_1117";
 var $isCustom = false;
 var $sfmTemplate = "SVMXSTD: Create Usage from Estimates";
 var $sfmTemplateSaveAsName = $sfmName;
-var $containerName = ["Parts","Labor","Expenses","Travel"];
-var $fieldName=["Received City",
-                "Received City",
-                "Received City",
-                "Received City"];
+var $containerName = ["Parts","Expenses","Travel"];
+var $fieldName=["Activity Type","Activity Type","Activity Type"];
 var $targetObject ="Work Detail (Work Order)";
-var $rulename ="RS_6346_1128";
-var $ruleDescription ="Received City should not be Panaji";
+var $rulename ="RS_6345_1117";
+var $ruleDescription ="Activity Type should not be Cleanup";
 
-var $fieldArray = ["Received City"];
+var $fieldArray = ["Activity Type"];
 var $conditionArray = ["Equals"];
 var $operandArray =["Value"];
-var $valueArray =["Panaji"];
+var $valueArray =["Cleanup"];
 var $advExpr= "";
-var $messageType = "Confirmation";
+var $messageType = "Error";
 var $wizardName = "SFM Delivery Auto";
 var $wizardType = "SFM";
 var $wizardObject ="Work Order";
@@ -37,8 +34,7 @@ $sfm_act_SFM.partsNotMandatory();
 
 //create Data validation rule
 $sfm_pg_dvr.newRule($targetObject, $rulename, $ruleDescription, $fieldArray, $conditionArray, $operandArray, $valueArray, $advExpr, $messageType);
-_click($sfm_pg_sfmDesigner.btn_quickSaveSFM);
-//_click($sfm_pg_sfmDesigner.btn_saveSFM); 
+_click($sfm_pg_sfmDesigner.btn_quickSaveSFM); 
 
 _wait(30000,_isVisible($sfm_pg_sfmDesigner.lnk_home));
 
@@ -48,7 +44,7 @@ $sfm_act_wizards.addToWizard($wizardObject, $wizardName, $wizardType, $sfmName);
 _wait(30000,_isVisible($sfm_pg_sfmDesigner.lnk_home)); 
 _click($sfm_pg_sfmDesigner.lnk_home);  
 
-//click the Process on the WO provided for which the process is to be launched
+//launch the process for the WO given in the script
 _wait(3000);
 $sfm_act_common.globalSearch($woName);
 _click(_link($woName));
@@ -65,7 +61,7 @@ _click($sfm_pg_sfmDesigner.btn_deliveryPartsTab);
 _click($sfm_pg_sfmDesigner.btn_deliveryAddRowParts);
 _click($sfm_pg_sfmDesigner.btn_deliveryExtendedEdit);
 _setValue($sfm_pg_sfmDesigner.txt_eeLineQty,"5");
-_setValue($sfm_pg_sfmDesigner.txt_eeReceivedCity,"Panaji");
+_setValue($sfm_pg_sfmDesigner.txt_eeActivityType,"Cleanup");
 _click($sfm_pg_sfmDesigner.btn_eeUpdate);
 _wait(3000);
 
@@ -74,7 +70,7 @@ _click($sfm_pg_sfmDesigner.btn_deliveryLaborTab);
 _click($sfm_pg_sfmDesigner.btn_deliveryAddRowLabor);
 _click($sfm_pg_sfmDesigner.btn_deliveryExtendedEditLabor);
 _setValue($sfm_pg_sfmDesigner.txt_eeLineQty,"5");
-_setValue($sfm_pg_sfmDesigner.txt_eeReceivedCity,"Panaji");
+_setValue($sfm_pg_sfmDesigner.txt_eeActivityType,"Calibration");
 _click($sfm_pg_sfmDesigner.btn_eeUpdate);
 _wait(3000);
 
@@ -83,7 +79,7 @@ _click($sfm_pg_sfmDesigner.btn_deliveryExpenseTab);
 _click($sfm_pg_sfmDesigner.btn_deliveryAddRowExpenses);
 _click($sfm_pg_sfmDesigner.btn_deliveryExtendedEditExpenses);
 _setValue($sfm_pg_sfmDesigner.txt_eeLineQty,"5");
-_setValue($sfm_pg_sfmDesigner.txt_eeReceivedCity,"Panaji");
+_setValue($sfm_pg_sfmDesigner.txt_eeActivityType,"Calibration");
 _click($sfm_pg_sfmDesigner.btn_eeUpdate);
 _wait(3000);
 
@@ -91,49 +87,34 @@ _wait(3000);
 _click($sfm_pg_sfmDesigner.btn_deliveryTravelTab);
 _click($sfm_pg_sfmDesigner.btn_deliveryAddRowTravel);
 _click($sfm_pg_sfmDesigner.btn_deliveryExtendedEditTravel);
-_setValue($sfm_pg_sfmDesigner.txt_eeReceivedCity,"Panaji");
+_setValue($sfm_pg_sfmDesigner.txt_eeActivityType,"Calibration");
 _click($sfm_pg_sfmDesigner.btn_eeUpdate);
 _wait(3000);
 
-//Validate the DVR Step1 & 2 to validate whether rule is triggering or not
+//Validate that the DVR is triggering or not
 _click($sfm_pg_sfmDesigner.btn_deliverySave);
-if(_exists(_span("SFM Transaction Manager"))){
-	if(_exists(_label("Parts: "+$ruleDescription))){
-		_log("Pass ::: DVR Confirmation for Parts is working");
-		_click(_span("Next"));
+
+	if(_assertExists(_div("Parts: "+$ruleDescription))){
+		_log("Pass ::: DVR Error for child line is working");
+		_click($sfm_pg_sfmDesigner.btn_deliveryPartsTab);
+		_click($sfm_pg_sfmDesigner.btn_deliveryAddRowParts);
+        _click($sfm_pg_sfmDesigner.btn_deliveryExtendedEdit);
+        _setValue($sfm_pg_sfmDesigner.txt_eeActivityType,"Calibration");
+		_click($sfm_pg_sfmDesigner.btn_eeUpdate);
+		_wait(3000);	
 	}else{
-		_log("Fail ::: DVR Confirmation for Parts is not working");
+		_log("Fail ::: DVR Confirmation for child line is not working");
 	}
-	if(_exists(_label("Labor: "+$ruleDescription))){
-		_log("Pass ::: DVR Confirmation for Labor is working");
-		_click(_span("Next"));
-	}else{
-		_log("Fail ::: DVR Confirmation for Labor is not working");
-	}
-	if(_exists(_label("Expenses: "+$ruleDescription))){
-		_log("Pass ::: DVR Confirmation for Expenses is working");
-		_click(_span("Next"));
-	}else{
-		_log("Fail ::: DVR Confirmation for Expenses is not working");
-	}
-	if(_exists(_label("Travel: "+$ruleDescription))){
-		_log("Pass ::: DVR Confirmation for Travel is working");
-		_click(_span("Save"));
-	}else{
-		_log("Fail ::: DVR Confirmation for Travel is not working");
-	}
-	
-}else{
-	_log("Fail ::: DVR Confirmation is not working");
-}
+	_click($sfm_pg_sfmDesigner.btn_deliverySave);
+
 if(_exists($sfm_pg_sfmDesigner.txt_PriceAlert)){
 	_click(_span("Ok"));
 	_wait(10000);
 }
 
 if(_exists(_span("Saved Successfully"))){
-	_log("Pass ::: WO saved after DVR confirmation");
+	_log("Pass ::: WO saved after fixing DVR Error");
 }
 
 
-$rs_6346.end();
+$rs_6345.end();

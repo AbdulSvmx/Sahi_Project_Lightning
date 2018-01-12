@@ -1,39 +1,46 @@
 var $rs_7009 = _testcase("RS_7009","Verify standard and custom Multisource SFM process.");
 $rs_7009.start();
-$sfmPwd = "maxplore2";
+var $processName = "Create Service Contract From Account";
+var $sfmName = "RS7009_1150";
+var $sfmPgLayoutName = "sm_pg_l_1150";
+var $wizTitle = "WIZTest1150";
+var $sfmPwd = "maxplore2";
 $bo_act_login.login($g_url,$sfmUsn,$sfmPwd);
-$accToAdd = ["Account1133"];
+$accToAdd = ["Account1150"];
+
+//Clone the Standard Multi-source SFM Process - Create Service Contract from Account
 $bo_act_navigation.navigateToSfmTransactionDesigner();
-$sfm_act_Transactions.cloneAndSaveProcess("Create Service Contract From Account","test1133","sm_pg_l_1133");
+$sfm_act_Transactions.cloneAndSaveProcess($processName,$sfmName,$sfmPgLayoutName);
+
+
+//Add the process to SFM Wizard in Account
 $bo_act_navigation.navigateToSfmWizard();
 $sfm_act_createCustomWizard.chooseObject("Account");
-$wizTitle = "WIZTest1133";
-$sfmName = "test1133";
 $sfm_act_createCustomWizard.addManageWizSteps($wizTitle,"SFM",$sfmName,"Sysadmin01 Group");
+
+
+//Create a New Account
 $sfm_act_addDeleteMeth.createAccount($accToAdd);
 _click(_link("Accounts"));
 _click(_link("/"+$accToAdd[0]+"/"));
 _selectDomain("/svmx/");
 $sfm_act_createCustomWizard.clickWizardBtn($sfmName);
 _selectDomain();
+
+//Launch the Process in Delivery and fill the Mandatory details
 _click(_div(3,_rightOf(_label("End Date:"))));
 _click(_span("/lookup_icon/",_rightOf(_label("Service Plan:"))));
 _click(_span("/search-icon/"));
 _doubleClick(_div("Test SP Name"));
 _setValue(_textbox(0,_rightOf(_label("Contract Name/Number:"))), "1133");
 _click($sfm_pg_sfmDesigner.btn_deliverySave);
-//_click(_div(3,_rightOf(_label("Start Date:"))));
-//_click(_span("/lookup_icon/",_rightOf(_label("Account:"))));
-//_setValue(_textbox(0,_leftOf(_span("/search-icon/"))), "Account1133");
-//_click(_span("/search-icon/"));
-//_doubleClick(_div("Account1132"));
 
+
+//To validate if the SFM process is saved successfully
 if(_exists(_span("Saved Successfully"))){
 	_log("Pass ::: Service/Maintenance Contract created successfully");
 	}else{
 	_log("Fail ::: SFM Process failed");
 	};
 
-
-// test01 - "/test/"
 $rs_7009.end();
