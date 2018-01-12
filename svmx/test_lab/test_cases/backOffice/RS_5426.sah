@@ -46,6 +46,9 @@ if (_assertExists($bo_pg_sfmTransactionAndDesigner.btn_backToList)){
 //*******Navigate to SFM App Permission and disable the permission for SFM wizard created above**********
 	$bo_act_navigation.navigateToSfmAppPermission();
 	 $bo_act_SFMAppPermission.genericSearchInAppPermission($processType,$objName,$searchText);
+if(_isVisible(_div("svmx-grid-checkheader"))){
+	_click(_div("svmx-grid-checkheader"));
+}
 	$bo_act_SFMAppPermission.disableAppPermission();
 
 //Navigate back to SFM Wizard and edit a new step to existing Wizard created above*****
@@ -71,6 +74,8 @@ if (_assertExists($bo_pg_sfmTransactionAndDesigner.btn_backToList)){
 	$bo_act_sfmVerifyWorkOrder.wizardButtonVisible($wizardname);
 //****Delete The Wizard Created*******
 	$bo_act_SFW.deleteWizards( $objName,$wizardID);
-$bo_act_navigation.navigateToSfmTransactionDesigner();
-$bo_act_SFM.deleteSFM($sfmName);
+	/*$bo_act_navigation.navigateToSfmTransactionDesigner();
+	_wait(60000, _isVisible($bo_pg_sfmTransactionAndDesigner.btn_newSFM));
+	$bo_act_SFM.deleteSFM($sfmName);*/
+_setSpeed(100);
 $RS_5426.end();
