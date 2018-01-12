@@ -91,9 +91,9 @@ var $sfm_act_createCustomWizard = new function sfm_act_createCustomWizard() {
 		_wait(3000);
 		_click($sfm_pg_wo.link_wo);
 		_click($sfm_pg_wo.btn_wo_new);
-		_setValue(_textbox("Auto_TextBox_c15122017142520"), "TextBox01");
+		_setValue(_textbox("Auto_TextBox_c15122017142520"), $value);
 		_setValue(_textbox("Auto_dateTime_c15122017142520"), "2/1/2018 11:30 PM");
-		_setValue(_textbox("Auto_number_c15122017142520"), $value);
+		_setValue(_textbox("Auto_number_c15122017142520"), "10001");
 		_setSelected(_select(0,_rightOf(_label("Account Picklist"))),"Value1");
 		_click($sfm_pg_wo.btn_wo_save);
 		_wait(6000);
@@ -109,9 +109,9 @@ var $sfm_act_createCustomWizard = new function sfm_act_createCustomWizard() {
 		_wait(3000);
 		_click(_link("Cases"));
 		_click(_button(" New "));
-		_setValue(_textbox("AutoC_TextBox_c151220171507"), "TextBox01");
+		_setValue(_textbox("AutoC_TextBox_c151220171507"), $value);
 		_setValue(_textbox("AutoC_dateTime_c151220171507"), "2/1/2018 11:30 PM");
-		_setValue(_textbox("AutoC_number_c151220171507"), $value);
+		_setValue(_textbox("AutoC_number_c151220171507"), "10001");
 		_setSelected(_select(0,_rightOf(_label("Picklist1"))),"Value1");
 		_setSelected(_select(0,_rightOf(_label("*Case Origin"))),"Email");
 		_click(_submit(" Save "));
@@ -388,8 +388,9 @@ var $sfm_act_createCustomWizard = new function sfm_act_createCustomWizard() {
 	this.verify6911 = function(){
 		_selectDomain();
 		_setStrictVisibilityCheck(true);
+		_wait(3000,_isVisible($sfm_pg_wizardWindow.btn_addRow));
+
 		_click($sfm_pg_wizardWindow.btn_addRow);
-		_wait(3000);
 		_doubleClick(_div("svmx-grid-cell-inner [1]"));
 		_click(_span("/svmx_lookup_icon/"));
 		_click($sfm_pg_wizardWindow.icon_search);

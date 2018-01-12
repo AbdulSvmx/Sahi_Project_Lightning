@@ -1,0 +1,27 @@
+var $ana_create_data = _testcase("Create Data and write into sheet","Write data into sheet");
+var $data = _readExcelFile("../../analytics/an_excleData/new_sheet.xlsx","Sheet1",true);
+/*
+var $excelfile = new ActiveXObject("Excel.Application");
+$excelfile.Workbook.Open("../../analytics/an_excleData/new_sheet.xlsx");
+
+*/
+var $data = _readExcelFile("../../analytics/an_excleData/an_Datasheet1.xlsx","Sheet1",true);
+var $un = $data[1]["Username"];
+var $pwd = $data[1]["pwd"];
+var $user_meghana = $data[1]["user_meghana"];
+var $url = "https://test.salesforce.com";
+
+$bo_act_login.login($url, $un, $pwd);
+var $create_account1 = "Account ac1 = new Account (Name = 'UltrasoundEquipmentInc', Type = 'Customer');create ac1;";
+var $create_acc = $op_act_sForceApiCall.sForceQuery($un, $pwd, $create_account1 , "create");
+
+// to get the ID
+var $query_accountID = "Select Id, Name from Account where Createdby.Id = '"+$user_meghana+"' Order by CreatedDate DESC Limit 1";
+var $accountID_Fetch = $op_act_sForceApiCall.sForceQuery($un, $pwd, $query_accountID,"query");
+
+var $accountID1 ;
+$accountID1 = $accountID_Fetch[0].Id;
+
+$excel.insertUnderColumn("../../analytics/an_excleData/new_sheet.xlsx", "Sheet1", "", ""+$accountID1+"","");
+
+
