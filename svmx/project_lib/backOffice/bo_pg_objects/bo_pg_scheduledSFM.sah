@@ -16,7 +16,7 @@ var $bo_pg_scheduledSFM=new function bo_pg_scheduledSFM(){
 		this.txt_batchSize=_textbox("setupSFMScheduledProcess:Form1:pageBlock1:j_id29:tab1pageblock1:scheduleServicesTab:j_id79:0:j_id104");
 		this.tab_scheduleAndNotification=_cell("Schedule & Notifications");
 		this.sel_runAt=_select("setupSFMScheduledProcess:Form1:pageBlock1:j_id29:tab4pageblock1:tab4pblock1sec1:j_id117:schedulefrequenciestable:0:j_id123");
-		this.sel_nameOfDays=_select(5);
+		this.sel_nameOfDays=_select(7);
 		this.btn_add=_image("Add");
 	
 		this.img_sendNotificationLookUp=_image("Assign To Dispatcher Lookup (New Window)");

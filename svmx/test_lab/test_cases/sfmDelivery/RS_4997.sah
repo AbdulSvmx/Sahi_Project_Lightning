@@ -1,23 +1,22 @@
 
 
-//Author:Mamata
-	var $RS_10029 = _testcase("RS_10029", "Field level: On Exit Webservice Child Field");
-	$RS_10029.start();
+//Author:Mamata RS-4997
+	var $RS_4997 = _testcase("RS_4997", "Verify Web Service call After Save/Insert.");
+	$RS_4997.start();
 	_setSpeed(100);
 
 	var $sfmToBeCloned="Create Usage Lines from Estimates";
-	var $sfmName=$bo_act_common.generateRandomName("SFMRS10029")
+	var $sfmName=$bo_act_common.generateRandomName("4997SFM")
 	//change  the name of $sfmTemplateSaveAsName before execution to avoid any duplication.
-	var $sfmTemplateSaveAsName=$bo_act_common.generateRandomName("Temp10029");
+	var $sfmTemplateSaveAsName=$bo_act_common.generateRandomName("4997Temp");
 
 	var $objName="Work Order";
-	var $wizardname=$bo_act_common.generateRandomName("WizardRS10029");
+	var $wizardname=$bo_act_common.generateRandomName("4997Wizard");
 	var $wizardID= $wizardname;
 	var $executionMode="Interactive";
 	var $fieldActnType="SFM";
 	var $actnName=$sfmName;
 	var $stndSFMName=$sfmName
-	var $wizardSelectObjectName=$objName;
 
 	var $subTypeWO="Order Status";
 	var $subTypePart="Date Received";
@@ -28,10 +27,9 @@
 	var $d_unBase="noor.sharieff@Tools2.com";
 	var $d_pwdBase="welcome-03";
 	var $wizardButtonName=$sfmName;
-	var $enteredMinOC=15;
-	var $enteredOTOC="Depot Repair-Tr";
-	var $enteredZipOC=560063;
-
+	var $enteredMinBS=60;
+	var $enteredOTBS="Field Service-Tr";
+	var $enteredZipBS=560065;
 
 		
 	$bo_act_login.login($d_url, $d_unBase, $d_pwdBase);
@@ -40,7 +38,7 @@
 //*****Navgate to SFm Designer and create clone of Manage WO Line Usage Services transaction********
 $bo_act_navigation.navigateToSfmTransactionDesigner();
 $bo_act_WebServices.createSFmForWebServices($sfmToBeCloned, $sfmName,$subTypePart,$subTypeActivityType,$subTypeExpenses,$subTypeTravel,$sfmTemplateSaveAsName);
-$bo_act_WebServices.enableOnExitForChildLabelField();
+$bo_act_WebServices.enableBeforeSave();
 
 $bo_act_WebServices.saveAndClose();
 //*******Nagigate to SFM Wizard and Create Wizard and Add Above Transaction to it**********
@@ -53,12 +51,12 @@ $bo_act_SFW.createWizardStep($fieldActnType,$actnName,$executionMode);
 $bo_act_sfmVerifyWorkOrder.verifyWizardOnWOObj($stndSFMName);
 $bo_act_sfmVerifyWorkOrder.clkOnWizard($wizardButtonName);
 _wait(30000);
-$bo_act_WebServices.verifyOnExitForChildField($enteredMinOC,$enteredOTOC,$enteredZipOC);
+$bo_act_WebServices.verifyBeforeSaveUpdate($enteredMinBS,$enteredOTBS,$enteredZipBS);
 
-//*****************Deleteing testdata************
+//********Deleting test Data***************
 $bo_act_SFW.deleteWizards($objName,$wizardID);
 _wait(3000);
 $bo_act_navigation.navigateToSfmTransactionDesigner();
 $bo_act_SFM.deleteSFM($sfmName);
-
-$RS_10029.end();
+_setSpeed(100);
+$RS_4997.end();

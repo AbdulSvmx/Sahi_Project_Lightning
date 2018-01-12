@@ -62,14 +62,14 @@ var $bo_act_PMPlan = new function bo_act_PMPlan() {
 		{
 			_selectDomain();
 			var $wizardTitleName = "Condition Based PM";
-			var $wizardIDName = "ConditionBasedPM";
+			var $wizardIDName = $bo_act_common.generateRandomName("Wid");
 			$bo_act_navigation.navigateToSfmWizard();
-			$bo_act_SFW.createWizardGeneralInfo("Location", $wizardTitleName, $wizardIDName);
-			$bo_act_SFW.createOthersWizardStepwithHandOver("Others", "New Condition Based PM Plan from Location",false);
+			$bo_act_SFW.createWizardGeneralInfo("Service/Maintenance Contract", $wizardTitleName, $wizardIDName);
+			$bo_act_SFW.createOthersWizardStepwithHandOver("Others", "New Condition Based PM Plan from Service Contract",false);
 			$bo_act_SFW.quickSaveSFWizard();
 			$bo_act_SFW.saveAndClose();
-			$bo_act_navigation.navigateToLocations();
-			_click(_link($location));
+			$bo_act_navigation.navigateToServiceMaintenanceContractPage();
+			_click(_link($sconName));
 
 		}else
 		_wait(1000);
@@ -97,7 +97,7 @@ var $bo_act_PMPlan = new function bo_act_PMPlan() {
 		{
 			_selectDomain();
 			var $wizardTitleName = "Condition Based PM";
-			var $wizardIDName = "ConditionBasedPM";
+			var $wizardIDName = $bo_act_common.generateRandomName("Wid");
 			$bo_act_navigation.navigateToSfmWizard();
 			$bo_act_SFW.createWizardGeneralInfo("Location", $wizardTitleName, $wizardIDName);
 			$bo_act_SFW.createOthersWizardStepwithHandOver("Others", "New Condition Based PM Plan from Location",false);

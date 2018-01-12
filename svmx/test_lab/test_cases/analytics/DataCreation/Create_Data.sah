@@ -1,5 +1,69 @@
 var $ana_create_data = _testcase("Create Data and write into sheet","Write data into sheet");
-var $data = _readExcelFile("../../analytics/an_excleData/new_sheet.xlsx","Sheet1",true);
+var $data = _readExcelFile("../../analytics/an_excleData/an_Datasheet1.xlsx","Sheet1",true);
+var $un = $data[1]["Username"];
+var $pwd = $data[1]["pwd"];
+var $user_meghana = $data[1]["user_meghana"];
+var $url = "https://test.salesforce.com";
 
-var $excelfile = new ActiveXObject("Excel.Application");
-$excelfile.Workbook.Open("../../analytics/an_excleData/new_sheet.xlsx");
+$bo_act_login.login($url, $un, $pwd);
+var $create_account1 = "Account ac1 = new Account (Name = 'UltrasoundEquipmentInc', Type = 'Customer');create ac1;";
+var $create_acc = $op_act_sForceApiCall.sForceQuery($un, $pwd, $create_account1 , "create");
+
+// To Create The Account and put them in the sheet
+var $query_accountID = "Select Id, Name from Account where Createdby.Id = '"+$user_meghana+"' Order by CreatedDate DESC Limit 1";
+var $accountID_Fetch = $op_act_sForceApiCall.sForceQuery($un, $pwd, $query_accountID,"query");
+
+var $accountID1 ;
+$accountID1 = $accountID_Fetch[0].Id;
+
+$excel.insertUnderColumn("../../analytics/an_excleData/new_sheet.xlsx", "Sheet1", "Account", ""+$accountID1+"","");
+
+$bo_act_login.login($url, $un, $pwd);
+var $create_account2 = "Account ac1 = new Account (Name = 'UltrasoundEquipmentInc', Type = 'Customer');create ac1;";
+var $create_acc = $op_act_sForceApiCall.sForceQuery($un, $pwd, $create_account2 , "create");
+
+// to get the ID
+var $query_accountID2 = "Select Id, Name from Account where Createdby.Id = '"+$user_meghana+"' Order by CreatedDate DESC Limit 1";
+var $accountID_Fetch2 = $op_act_sForceApiCall.sForceQuery($un, $pwd, $query_accountID2,"query");
+
+
+var $accountID2 ;
+$accountID2 = $accountID_Fetch2[0].Id;
+
+
+$excel.insertUnderColumn("../../analytics/an_excleData/new_sheet.xlsx", "Sheet1", "Account", ""+$accountID2+"","");
+
+// To Create the Products and put them in the sheet
+var $productID1;
+var $productID2;
+
+var $create_prodouct1 = "Product product1 = new Product (Name = 'Bike', IsActive = true);create product1;";
+var $create_product = $op_act_sForceApiCall.sForceQuery($un, $pwd, $create_prodouct1 , "create");
+
+
+var $query_productID = "Select Id, Name from Product where Createdby.Id = '"+$user_meghana+"' Order by CreatedDate DESC Limit 1";
+var $productID_Fetch = $op_act_sForceApiCall.sForceQuery($un, $pwd, $query_productID,"query");
+
+
+$productID1 = $productID_Fetch[0].Id;
+
+$excel.insertUnderColumn("../../analytics/an_excleData/new_sheet.xlsx", "Sheet1", "Product", ""+$productID1+"","");
+
+$bo_act_login.login($url, $un, $pwd);
+var $create_product2 = "Product product2 = new Product (Name = 'Car', IsActive = true);create product2;";
+var $create_product = $op_act_sForceApiCall.sForceQuery($un, $pwd, $create_product2 , "create");
+
+// to get the ID
+var $query_productID2 = "Select Id, Name from Product where Createdby.Id = '"+$user_meghana+"' Order by CreatedDate DESC Limit 1";
+var $productID_Fetch2 = $op_act_sForceApiCall.sForceQuery($un, $pwd, $query_productID2,"query");
+
+$productID2 = $productID_Fetch2[0].Id;
+
+$excel.insertUnderColumn("../../analytics/an_excleData/new_sheet.xlsx", "Sheet1", "Product", ""+$productID2+"","");
+
+
+// To create Technician and put them in the sheet
+
+// To create Component and put them in the sheet
+
+// To create Site and put them in the sheet

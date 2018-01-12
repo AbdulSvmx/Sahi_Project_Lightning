@@ -18,7 +18,7 @@ var $sfmName ="Capture Downtime";
 	var $processType="SFM Wizards";
 	_setSpeed(100);
 	$bo_act_login.login($g_url, $bac_unBase, $bac_pwdBase);
-
+//_div("svmx-grid-checkheader")
 	//***Navigate SFm Wizard->Create new Wizard->add standard SFM-*************
 	$bo_act_navigation.navigateToSfmWizard();
 	$bo_act_SFW.createWizardGeneralInfo($objName,$wizardname,$wizardID);
@@ -27,6 +27,9 @@ var $sfmName ="Capture Downtime";
 //*******Navigate to SFM App Permission and disable the permission for SFM wizard created above**********
 	$bo_act_navigation.navigateToSfmAppPermission();
 	 $bo_act_SFMAppPermission.genericSearchInAppPermission($processType,$objName,$searchText);
+if(_isVisible(_div("svmx-grid-checkheader"))){
+	_click(_div("svmx-grid-checkheader"));
+}
 	$bo_act_SFMAppPermission.disableAppPermission();
 //Navigate back to SFM Wizard and Add a new step to existing Wizard created above*****
 	$bo_act_SFW.editWizard($objName,$wizardID);
@@ -48,8 +51,10 @@ var $sfmName ="Capture Downtime";
 //Again Launch the Wizard in Delivery, verify the visibility*****
 	$bo_act_sfmVerifyWorkOrder.verifyWizardOnWOObj($sfmName);
 	_wait(2000);
-	$bo_act_sfmVerifyWorkOrder.wizardButtonVerification($sfmName);
+	$bo_act_sfmVerifyWorkOrder.wizardButtonVisible($sfmName);
+	
 //****Delete The Wizard Created*******
+
 	$bo_act_SFW.deleteWizards( $objName,$wizardID);
 	_setSpeed(100);
 	$RS_5425.end();

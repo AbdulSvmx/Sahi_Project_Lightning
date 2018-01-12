@@ -54,12 +54,12 @@ var $bo_pg_manageWOLineUsageForSorting=new function bo_pg_manageWOLineUsageForSo
 		//this.sel_billQty=_textbox("svmx-form-field svmx-form-text[1]");
 		this.sel_billQty=_textbox("/sfm-numbercelleditor-/");
 		//this.btn_clkBillQtyLine1=_div("svmx-grid-cell-inner [8]");
-		this.btn_clkBillQtyLine1=_div("svmx-grid-cell-inner [2]");
+		this.btn_clkBillQtyLine1=_div("svmx-grid-cell-inner [3]");
 		this.sel_activityName=_listItem("Calibration");
 		this.sel_activityName1=_listItem("Installation");
 		this.sel_activityName2=_listItem("Cleanup");
-		this.btn_clkBillQtyLine2=_div("svmx-grid-cell-inner [5]");
-		this.btn_clkBillQtyLine3=_div("svmx-grid-cell-inner [8]");
+		this.btn_clkBillQtyLine2=_div("svmx-grid-cell-inner [7]");
+		this.btn_clkBillQtyLine3=_div("svmx-grid-cell-inner [11]");
 	//Travel
 		this.btn_addTravelLine=_span("svmx-btn-icon svmx-sfmd-add-line-icon");
 		this.btn_parentLookUp=_span("svmx-btn-icon svmx_lookup_icon");
@@ -78,16 +78,21 @@ var $bo_pg_manageWOLineUsageForSorting=new function bo_pg_manageWOLineUsageForSo
 	//Alert Message while saving
 		this.alert=_span("Ok");
 
-		this.txt_get1stLineValueOfPart=_div("svmx-grid-cell-inner [1]");
-		this.txt_get2ndLineValueOfPart=_div("svmx-grid-cell-inner [3]");
-		this.txt_get3rdLineValueOfPart=_div("svmx-grid-cell-inner [5]");
+		this.txt_get1stLineValueOfPart=_div("svmx-grid-cell-inner [3]");
+		this.txt_get2ndLineValueOfPart=_div("svmx-grid-cell-inner [6]");
+		this.txt_get3rdLineValueOfPart=_div("svmx-grid-cell-inner [9]");
 
-		this.txt_get1stLineValueOfExpenses=_div("svmx-grid-cell-inner [1]");
-		this.txt_get2ndLineValueOfExpenses=_div("svmx-grid-cell-inner [3]");
-		this.txt_get3rdLineValueOfExpenses=_div("svmx-grid-cell-inner [5]");
+		this.txt_get1stLineValueOfExpenses=_div("svmx-grid-cell-inner [4]");
+		this.txt_get2ndLineValueOfExpenses=_div("svmx-grid-cell-inner [7]");
+		this.txt_get3rdLineValueOfExpenses=_div("svmx-grid-cell-inner [10]");
+		this.txt_getBillQty1=_div("svmx-grid-cell-inner [5]");
+		this.txt_getBillQty2=_div("svmx-grid-cell-inner [8]");
+		this.txt_getBillQty3=_div("svmx-grid-cell-inner [11]");
+	
 		this.txt_get1stLineValueOfTravel=_div("svmx-grid-cell-inner [1]");
 		this.txt_get2ndLineValueOfTravel=_div("svmx-grid-cell-inner [3]");
 		this.txt_get3rdLineValueOfTravel=_div("svmx-grid-cell-inner [5]");
+		this.txt_getBillQty=_div("svmx-grid-cell-inner [5]");
 	
 	
 	

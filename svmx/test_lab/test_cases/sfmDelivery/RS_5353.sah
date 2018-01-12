@@ -36,7 +36,7 @@ _setSpeed(100);
 $bo_act_login.login($g_url, $sfmUsn, $sfmPwd);
 
 
-$sfm_act_SFM.cloneTDM016($sfmNameToBeCloned, $sfmName, $isCustom, $sfmTemplate, $sfmTemplateSaveAsName, $fieldName, $containerName);
+$sfm_act_SFM.cloneTDM016($sfmNameToBeCloned, $sfmName, $isCustom, $sfmTemplateSaveAsName,$sfmTemplate, $fieldName, $containerName);
 $sfm_pg_dvr.newRule($targetObject, $rulename, $ruleDescription, $fieldArray, $conditionArray, $operandArray, $valueArray, $advExpr, $messageType);
 _click($sfm_pg_sfmDesigner.btn_quickSaveSFM);
 _click($sfm_pg_sfmDesigner.btn_saveSFM); 
