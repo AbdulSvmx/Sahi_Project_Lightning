@@ -4,7 +4,7 @@ $RS_5381.start();
 _setSpeed(100);
 
 	var $sfmToBeCloned="manage work order lines - Usage";
-	var $sfmName=$bo_act_common.generateRandomName("5381SFM)";
+	var $sfmName=$bo_act_common.generateRandomName("5381SFM");
 	//change  the name of $sfmTemplateSaveAsName before execution to avoid any duplication.
 	var $sfmTemplateSaveAsName=$bo_act_common.generateRandomName("5381Temp");
 
