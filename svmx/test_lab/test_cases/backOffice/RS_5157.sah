@@ -66,7 +66,7 @@ $bo_act_scheduledSFM.newProcessNameID($ProcessName2,$ProcessId2);
  $bo_act_scheduledSFM.setUserForNotification($user);
  _click($bo_pg_scheduledSFM.btn_saveAndClose);
 _wait(3000,_isVisible($bo_pg_scheduledSFM.lbl_scheduledSFMHomePage));
-_log("Scheduled SFM successful");
+//_log("Scheduled SFM successful");
 
 $bo_act_scheduledSFM.clickRunNow($ProcessName1,$ProcessName2);
 $bo_act_scheduledSFM.navigateApexJobsPage();
@@ -84,10 +84,12 @@ if($status2 !="Completed"){
 $bo_act_navigation.navigateToScheduledSFM();
 $bo_act_scheduledSFM.deleteScheduledSFM($ProcessName1);
 $bo_act_scheduledSFM.deleteScheduledSFM($ProcessName2);
+//*****************Deleteing testdata************
+/*
+$bo_act_navigation.navigateToSfmTransactionDesigner();
+_wait(60000, _isVisible($bo_pg_sfmTransactionAndDesigner.btn_newSFM));
 $bo_act_SFM.deleteSFM($sfmName1);
-_wait(2000);
-$bo_act_SFM.deleteSFM($sfmName2);
-//$bo_act_customAction.deleteCustomAction($objName2,$wizardname);
+$bo_act_SFM.deleteSFM($sfmName2);*/
 _setSpeed(100);
 
 $RS_5157.end();

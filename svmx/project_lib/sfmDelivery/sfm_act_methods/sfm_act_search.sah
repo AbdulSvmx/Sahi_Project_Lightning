@@ -45,7 +45,7 @@ var $sfm_act_search = new function sfm_search() {
 			_click($sfm_pg_search.tab_allWo);
 			var $woNumber = _getText($sfm_pg_search.link_wo);
 			_log($woNumber);
-			_log($woNumber.search);
+//			_log($woNumber.search);
 			if($woNumber.search("WO-")!=-1){
 				_log("Pass");
 			}

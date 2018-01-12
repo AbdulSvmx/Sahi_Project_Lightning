@@ -2,7 +2,23 @@ var $bo_act_manageWOLineUsageForSorting=new function bo_act_manageWOLineUsageFor
 	this.createManageWorkOrderLineUsageForSorting=function($sfmToBeCloned, $sfmName,$subTypeWO,$subTypePart,$subTypeActivityType,$subTypeExpenses,$subTypeTravel,$sfmTemplateSaveAsName){
 			_click($bo_pg_sfmTransactionAndDesigner.txt_standardSfmTransactionQuickFind);
 			_setValue($bo_pg_sfmTransactionAndDesigner.txt_standardSfmTransactionQuickFind,$sfmToBeCloned);
-			_click(_f("main").s_checkbox("chk").leftOf(_f("main").s_label($sfmToBeCloned), 10, 10))
+			if (_isVisible(_f("main").s_checkbox("/Chk/").leftOf(_f("main").s_label($sfmToBeCloned), 10, 10))) {
+			_wait(3000);
+			_click(_f("main").s_checkbox("/Chk/").leftOf(_f("main").s_label($sfmToBeCloned), 10, 10));
+				
+			}else if(_isVisible(_f("main").s_checkbox("/chk/").leftOf(_f("main").s_label($sfmToBeCloned), 10, 10))) {
+			_wait(3000);
+			_click(_f("main").s_checkbox("/chk/").leftOf(_f("main").s_label($sfmToBeCloned), 10, 10));
+
+		} else if (_isVisible(_f("main").s_checkbox(2).leftOf(_f("main").s_label($sfmToBeCloned), 10, 10))) {
+			_wait(3000);
+			_click(_f("main").s_checkbox(2).leftOf(_f("main").s_label($sfmToBeCloned), 10, 10));
+
+		} else if (_isVisible(_f("main").s_checkbox(16))){
+			_click(_f("main").s_checkbox(16));
+		}else{
+			_click(_f("main").s_checkbox("/CheckBox/").leftOf(_f("main").s_label($sfmToBeCloned), 10, 10));
+		} 
 			_click($bo_pg_sfmTransactionAndDesigner.btn_clone);	
 			_wait(60000, _isVisible($bo_pg_sfmTransactionAndDesigner.txt_name));
 			_setValue($bo_pg_sfmTransactionAndDesigner.txt_name, $sfmName);
@@ -22,12 +38,14 @@ var $bo_act_manageWOLineUsageForSorting=new function bo_act_manageWOLineUsageFor
 			_setValue($bo_pg_manageWOLineUsageForSorting.txt_searchItem,$subTypePart);
 			_doubleClick($bo_pg_manageWOLineUsageForSorting.lbl_dateReceived);
 			_wait(3000);
-			_click($bo_pg_manageWOLineUsageForSorting.sel_grpExpenses);
+			//_click($bo_pg_manageWOLineUsageForSorting.sel_grplabor);
+			_click($bo_pg_manageWOLineUsageForSorting.sel_grpPart);
 			_click($bo_pg_manageWOLineUsageForSorting.txt_searchItem);
 			_setValue($bo_pg_manageWOLineUsageForSorting.txt_searchItem,$subTypeActivityType);
 			_doubleClick($bo_pg_manageWOLineUsageForSorting.lbl_activityType);
 			_wait(3000);
-			_click($bo_pg_manageWOLineUsageForSorting.sel_grpExpenses);
+			//_click($bo_pg_manageWOLineUsageForSorting.sel_grplabor);
+			_click($bo_pg_manageWOLineUsageForSorting.sel_grpPart);
 			_click($bo_pg_manageWOLineUsageForSorting.txt_searchItem);
 			_setValue($bo_pg_manageWOLineUsageForSorting.txt_searchItem,$subTypeExpenses);
 			_doubleClick($bo_pg_manageWOLineUsageForSorting.lbl_billableQty);
@@ -42,11 +60,11 @@ var $bo_act_manageWOLineUsageForSorting=new function bo_act_manageWOLineUsageFor
 			_click($bo_pg_manageWOLineUsageForSorting.lbl_propertiesForPart);
 			_click($bo_pg_manageWOLineUsageForSorting.chk_allowNewLine);
 			_click($bo_pg_manageWOLineUsageForSorting.chk_allowDelete);
-		/*DO NOT DELETE BEOW COMMENTED LINES
+		//DO NOT DELETE BEOW COMMENTED LINES
 			_click($bo_pg_manageWOLineUsageForSorting.lbl_propertiesForLabor);
 			_click($bo_pg_manageWOLineUsageForSorting.chk_allowNewLine);
 			_click($bo_pg_manageWOLineUsageForSorting.chk_allowDelete);
-		*/
+		
 			_click($bo_pg_manageWOLineUsageForSorting.lbl_propertiesForExpenses);
 			_click($bo_pg_manageWOLineUsageForSorting.chk_allowNewLine);
 			_click($bo_pg_manageWOLineUsageForSorting.chk_allowDelete);
@@ -65,7 +83,7 @@ var $bo_act_manageWOLineUsageForSorting=new function bo_act_manageWOLineUsageFor
 			_click($bo_pg_manageWOLineUsageForSorting.btn_add);
 			_wait(2000);
 			//_click($bo_pg_manageWOLineUsageForSorting.lbl_sortingLabor);
-			_click($bo_pg_manageWOLineUsageForSorting.lbl_sortingExps);
+			//_click($bo_pg_manageWOLineUsageForSorting.lbl_sortingLabor);
 			_click($bo_pg_manageWOLineUsageForSorting.lbl_sortingBillQty);
 			_click($bo_pg_manageWOLineUsageForSorting.btn_add);
 			_wait(2000);
@@ -80,54 +98,111 @@ var $bo_act_manageWOLineUsageForSorting=new function bo_act_manageWOLineUsageFor
 			
 		}
 			this.addPartLineInDelivery=function($grtDate,$midDate,$lowDate){
+				while(_isVisible(_image("svmx-action-col-icon svmx-action-col-1   svmx-sfmd-delete-icon"))==true){
+					_click(_image("svmx-action-col-icon svmx-action-col-1   svmx-sfmd-delete-icon"));
+				}
+				_setStrictVisibilityCheck(true)
 				_click($bo_pg_manageWOLineUsageForSorting.btn_addPartLine);
 				_click($bo_pg_manageWOLineUsageForSorting.lbl_clkOnNewLine);
 				_setValue($bo_pg_manageWOLineUsageForSorting.txt_addDate,$grtDate);
+				_click(_div("svmx-grid-cell-inner [2]"));
+				_setValue($bo_pg_manageWOLineUsageForSorting.txt_addActivity,$activityName1);
+				_click($bo_pg_manageWOLineUsageForSorting.sel_activityName);
+				_click($bo_pg_manageWOLineUsageForSorting.btn_clkBillQtyLine1);
+				_wait(1000);
+				_setValue($bo_pg_manageWOLineUsageForSorting.sel_billQty,$billQty1)
+				
 				_click($bo_pg_manageWOLineUsageForSorting.btn_addPartLine);
 				_setValue($bo_pg_manageWOLineUsageForSorting.txt_addDate,$lowDate);
+				_click(_div("svmx-grid-cell-inner [6]"));
+				_setValue($bo_pg_manageWOLineUsageForSorting.txt_addActivity,$activityName2);
+				_click($bo_pg_manageWOLineUsageForSorting.sel_activityName1);
+				_click($bo_pg_manageWOLineUsageForSorting.btn_clkBillQtyLine2);
+				_wait(1000);
+				_setValue($bo_pg_manageWOLineUsageForSorting.sel_billQty,$billQty2);
+				
 				_click($bo_pg_manageWOLineUsageForSorting.btn_addPartLine);
 				_setValue($bo_pg_manageWOLineUsageForSorting.txt_addDate,$midDate);
+				_click(_div("svmx-grid-cell-inner [10]"));
+				_setValue($bo_pg_manageWOLineUsageForSorting.txt_addActivity,$activityName3);
+				_click($bo_pg_manageWOLineUsageForSorting.sel_activityName2);					
+				_click($bo_pg_manageWOLineUsageForSorting.btn_clkBillQtyLine3);
+				_wait(1000);
+				_setValue($bo_pg_manageWOLineUsageForSorting.sel_billQty,$billQty3);
+				
+				
 			}
 				this.addExpensesLineInDelivery=function($billQty1,$activityName1,$billQty2,$activityName2,$billQty3,$activityName3){
-					_click($bo_pg_manageWOLineUsageForSorting.tab_expenses);
+					
+					/*var $i=0;
+					for($i=0;$i<=11;$i++){
+					if (_isVisible(_image("/delete-icon/",_near(_button("Labor"))))==true)
+					{
+						_click(_image("/delete-icon/",_near(_button("Labor"))));
+
+					}	}*/
+				/*	_click($bo_pg_manageWOLineUsageForSorting.tab_labour);
+					_setStrictVisibilityCheck(true)
+				
+				
 					//add line1 details under expenses
 					_click($bo_pg_manageWOLineUsageForSorting.btn_addExpenseLine);
 					_setValue($bo_pg_manageWOLineUsageForSorting.txt_addActivity,$activityName1);
 					_click($bo_pg_manageWOLineUsageForSorting.sel_activityName);					
 					_click($bo_pg_manageWOLineUsageForSorting.btn_clkBillQtyLine1);
-					_wait(2000);
-					_setValue($bo_pg_sfmTransactionAndDesigner.sel_billQty,$billQty1);
+					_wait(1000);
+					_setValue($bo_pg_manageWOLineUsageForSorting.sel_billQty,$billQty1);
 					//add line2 details under expenses
 					_click($bo_pg_manageWOLineUsageForSorting.btn_addExpenseLine);
 					_setValue($bo_pg_manageWOLineUsageForSorting.txt_addActivity,$activityName2);
-					_click($bo_pg_manageWOLineUsageForSorting.sel_activityName);					
+					_click($bo_pg_manageWOLineUsageForSorting.sel_activityName1);					
 					_click($bo_pg_manageWOLineUsageForSorting.btn_clkBillQtyLine2);
 					_wait(2000);
-					_setValue($bo_pg_sfmTransactionAndDesigner.sel_billQty,$billQty2);
+					_setValue($bo_pg_manageWOLineUsageForSorting.sel_billQty,$billQty2);
 					//add line3 details under expenses
 					_click($bo_pg_manageWOLineUsageForSorting.btn_addExpenseLine);
 					_setValue($bo_pg_manageWOLineUsageForSorting.txt_addActivity,$activityName3);
-					_click($bo_pg_manageWOLineUsageForSorting.sel_activityName);					
+					_click($bo_pg_manageWOLineUsageForSorting.sel_activityName2);					
 					_click($bo_pg_manageWOLineUsageForSorting.btn_clkBillQtyLine3);
 					_wait(2000);
-					_setValue($bo_pg_sfmTransactionAndDesigner.sel_billQty,$billQty3);
+					_setValue($bo_pg_manageWOLineUsageForSorting.sel_billQty,$billQty3);*/
+					
 					//Add Travel details
 					_click($bo_pg_manageWOLineUsageForSorting.tab_travel);
+					_setStrictVisibilityCheck(true)
+			
+					var $i=0;
+					for($i=0;$i<=9;$i++){
+					if (_isVisible(_image("/delete-icon/",_near(_button("Travel"))))==true)
+					{
+						_click(_image("/delete-icon/",_near(_button("Travel"))));
+
+					}	}
+					
+					
+					//Add Travel details
+					//_click($bo_pg_manageWOLineUsageForSorting.tab_travel);				
 					_click($bo_pg_manageWOLineUsageForSorting.btn_addTravelLine);
-					_click($bo_pg_manageWOLineUsageForSorting.btn_parentLookUp);
-					_click($bo_pg_manageWOLineUsageForSorting.btn_childLokkUp);
-					_click($bo_pg_manageWOLineUsageForSorting.sel_Europe);
-					_click($bo_pg_manageWOLineUsageForSorting.btn_select);
+					_setStrictVisibilityCheck(true);
+                   _click(_image("svmx-action-col-icon svmx-action-col-0   svmx-sfmd-edit-icon"));
+                   _setStrictVisibilityCheck(false);
+                   _getRecentWindow();
+					$bo_act_common.searchfunction("Europe");
+					_click($bo_pg_PMPlanTemplate.btn_update);
+					_setStrictVisibilityCheck(true);
 					_click($bo_pg_manageWOLineUsageForSorting.btn_addTravelLine);
-					_click($bo_pg_manageWOLineUsageForSorting.btn_parentLookUp);
-					_click($bo_pg_manageWOLineUsageForSorting.btn_childLokkUp);
-					_click($bo_pg_manageWOLineUsageForSorting.sel_AutodromoEnzoFerrari);
-					_click($bo_pg_manageWOLineUsageForSorting.btn_select);					
+					 _click(_image("svmx-action-col-icon svmx-action-col-0   svmx-sfmd-edit-icon[1]"));
+                   	_setStrictVisibilityCheck(false);
+                   	_getRecentWindow();					
+					$bo_act_common.searchfunction("Autodromo Enzo e Dino Ferrari");
+					_click($bo_pg_PMPlanTemplate.btn_update);
+					_setStrictVisibilityCheck(true);
 					_click($bo_pg_manageWOLineUsageForSorting.btn_addTravelLine);
-					_click($bo_pg_manageWOLineUsageForSorting.btn_parentLookUp);
-					_click($bo_pg_manageWOLineUsageForSorting.btn_childLokkUp);
-					_click($bo_pg_manageWOLineUsageForSorting.sel_BerlinDepot);
-					_click($bo_pg_manageWOLineUsageForSorting.btn_select);
+					_click(_image("svmx-action-col-icon svmx-action-col-0   svmx-sfmd-edit-icon[2]"));
+                   _setStrictVisibilityCheck(false);
+                   _getRecentWindow();
+					$bo_act_common.searchfunction("Berlin_Depot");
+					_click($bo_pg_PMPlanTemplate.btn_update);
 					
 					
 					

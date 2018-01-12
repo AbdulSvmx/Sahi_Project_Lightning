@@ -12,6 +12,7 @@ var $Closedon = $data[1]["ClosedOn"];
 var $Site = $data[1]["Site"];
 var $Component = $data[1]["Component"];
 var $ScheduledDate = $data[1]["ScheduledDate"];
+var $user_meghana = $data[1]["user_meghana"];
 $bo_act_login.login($url, $un, $pwd);
 
 // To create a SCON
@@ -65,7 +66,7 @@ _log($ana_1663_IB_ID);
 // Create Covered Product 
 var $ana_1663_create_CP = "SVMXC__Service_Contract_Products__c CP01 = new SVMXC__Service_Contract_Products__c(SVMXC__Installed_Product__c = '"+$ana_1663_IB_ID+"',SVMXC__Service_Contract__c = '"+$ana_1663_SCON+"',Custom_checkbox__c = false ,SVMXC__Is_Billable__c = true); insert CP01;";
 var $ana_1663_result_CP = $op_act_sForceApiCall.sForceQuery($un, $pwd, $ana_1663_create_CP , "create");
-var $ana_1663_get_CP = "Select Id , Name from SVMXC__Service_Contract_Products__c where Createdby.Id = '005q0000003GGfP' Order by CreatedDate DESC Limit 1";
+var $ana_1663_get_CP = "Select Id , Name from SVMXC__Service_Contract_Products__c where Createdby.Id = '"+$user_meghana+"' Order by CreatedDate DESC Limit 1";
 var $ana_1663_fetch_CP = $op_act_sForceApiCall.sForceQuery($un, $pwd, $ana_1663_get_CP,"query");
 var $ana_1663_cp_ID;
 _wait(5000);

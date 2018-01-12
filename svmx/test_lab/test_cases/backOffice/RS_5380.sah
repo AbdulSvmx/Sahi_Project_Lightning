@@ -4,12 +4,12 @@ $RS_5380.start();
 _setSpeed(100);
 
 	var $sfmToBeCloned="manage work order lines - Usage";
-	var $sfmName=$bo_act_common.generateRandomName("SFM5380");
+	var $sfmName=$bo_act_common.generateRandomName("5380SFM");
 	//change  the name of $sfmTemplateSaveAsName before execution to avoid any duplication.
-	var $sfmTemplateSaveAsName=$bo_act_common.generateRandomName("Temp5380");
+	var $sfmTemplateSaveAsName=$bo_act_common.generateRandomName("5380Temp");
 
 	var $objName="Work Order";
-	var $wizardname=$bo_act_common.generateRandomName("5380WizardName");
+	var $wizardname=$bo_act_common.generateRandomName("5380SFW");
 	var $wizardID=$wizardname;
 	var $executionMode="Interactive";
 	var $fieldActnType="SFM";
@@ -54,23 +54,43 @@ $bo_act_sfmVerifyWorkOrder.clkOnWizard($wizardButtonName);
 $bo_act_manageWOLineUsageForSorting.addPartLineInDelivery($grtDate,$midDate,$lowDate);
 $bo_act_manageWOLineUsageForSorting.addExpensesLineInDelivery($billQty1,$activityName1,$billQty2,$activityName2,$billQty3,$activityName3);
 _click($bo_pg_manageWOLineUsageForSorting.btn_Save);
-_click($bo_pg_manageWOLineUsageForSorting.alert);
+//_click($bo_pg_manageWOLineUsageForSorting.alert);
 _log("The Manag Workorder Line Usage saved successfully");
-$bo_act_sfmVerifyWorkOrder.clkOnWizard();
+$bo_act_sfmVerifyWorkOrder.clkOnWizard($wizardButtonName);
 //Getting the value displayed under 1st 2nd and 3rd row of Part(Date Received) section and verify if it is sorted
-_assertEqual($lowDate,_getText($bo_pg_manageWOLineUsageForSorting.txt_get1stLineValueOfPart),"Date are not matching So Sorting is not Working");
+_assertEqual($grtDate,_getText($bo_pg_manageWOLineUsageForSorting.txt_get1stLineValueOfPart),"Date are not matching So Sorting is not Working");
 _assertEqual($midDate,_getText($bo_pg_manageWOLineUsageForSorting.txt_get2ndLineValueOfPart),"Date are not matching So Sorting is not Working");
-_assertEqual($grtDate,_getText($bo_pg_manageWOLineUsageForSorting.txt_get3rdLineValueOfPart),"Date are not matching So Sorting is not Working");
+_assertEqual($lowDate,_getText($bo_pg_manageWOLineUsageForSorting.txt_get3rdLineValueOfPart),"Date are not matching So Sorting is not Working");
 
 //Getting the value displayed under 1st 2nd and 3rd row of Expenses(Activity Type) section and verify if it is sorted
-_click($bo_pg_manageWOLineUsageForSorting.tab_expenses);
+//_click($bo_pg_manageWOLineUsageForSorting.tab_expenses);
 _assertEqual( $activityName1,_getText($bo_pg_manageWOLineUsageForSorting.txt_get1stLineValueOfExpenses),"Expected Activity Type is not displaying");
 _assertEqual ($activityName3,_getText($bo_pg_manageWOLineUsageForSorting.txt_get2ndLineValueOfExpenses),"Expected Activity Type is not displaying");
 _assertEqual( $activityName2,_getText($bo_pg_manageWOLineUsageForSorting.txt_get3rdLineValueOfExpenses),"Expected Activity Type is not displaying");
+//Fetch the billable Qty displayed under 1st,2nd and 3rd row and verify if sorted
+var $actualbillQty1=Math.round(_getText($bo_pg_manageWOLineUsageForSorting.txt_getBillQty1));
+var $actualbillQty2=Math.round(_getText($bo_pg_manageWOLineUsageForSorting.txt_getBillQty2));
+var $actualbillQty3=Math.round(_getText($bo_pg_manageWOLineUsageForSorting.txt_getBillQty3));
+_assertEqual( "9",$actualbillQty1,"Expected Billable is not displaying");
+_assertEqual( "5",$actualbillQty2,"Expected Billable is not displaying");
+_assertEqual( "2",$actualbillQty3,"Expected Billable is not displaying");
 //Getting the value displayed under 1st 2nd and 3rd row of Travel(From Location) section and verify if it is sorted
 _click($bo_pg_manageWOLineUsageForSorting.tab_travel);
+_setStrictVisibilityCheck(true);
 _assertEqual( "Autodromo Enzo e Dino Ferrari",_getText($bo_pg_manageWOLineUsageForSorting.txt_get1stLineValueOfTravel),"Expected From Location is not displaying");
 _assertEqual ("Berlin_Depot",_getText($bo_pg_manageWOLineUsageForSorting.txt_get2ndLineValueOfTravel),"Expected From Location is not displaying");
 _assertEqual( "Europe",_getText($bo_pg_manageWOLineUsageForSorting.txt_get3rdLineValueOfTravel),"Expected From Location is not displaying");
+
+//*****************Deleteing testdata************
+$bo_act_navigation.navigateToSfmWizard();
+_setSelected($bo_pg_sfmWizard.sel_objPrevMaintPlan,$objName	);
+$bo_act_SFW.deleteWizard($wizardname);	
+$bo_act_navigation.navigateToSfmTransactionDesigner();
+$bo_act_SFM.deleteSFM($sfmName);
+
+
+_setSpeed(100);
+
+
 
 $RS_5380.end();
