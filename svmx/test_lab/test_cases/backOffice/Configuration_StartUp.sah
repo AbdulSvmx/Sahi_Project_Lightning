@@ -41,10 +41,11 @@ $bo_act_salesforceSetUp.saveEditLayout();
 
 
 //Drag and drop all the SLA related fields in WO Object
-/*
+
 $bo_act_navigation.navigateToWorkOrdersTab();
 _click(_link(0,_under(_tableHeader("Work Order Number"))));
 $bo_act_salesforceSetUp.dragAndDropSection($sectionName,1);
+_continueOnError();
 $bo_act_salesforceSetUp.dragAndDropFields($bo_pg_salesForceSetUP.btn_timeToRestore, $sectionName);
 $bo_act_salesforceSetUp.dragAndDropFields($bo_pg_salesForceSetUP.btn_timeToResolve, $sectionName);
 $bo_act_salesforceSetUp.dragAndDropFields($bo_pg_salesForceSetUP.btn_timeToOnsiteResponse, $sectionName);
@@ -53,20 +54,50 @@ $bo_act_salesforceSetUp.dragAndDropFields($bo_pg_salesForceSetUP.btn_InitialResp
 $bo_act_salesforceSetUp.dragAndDropFields($bo_pg_salesForceSetUP.btn_InitialResponseCustomerBy, $sectionName);
 $bo_act_salesforceSetUp.dragAndDropFields($bo_pg_salesForceSetUP.btn_OnsiteResponseCustomerBy, $sectionName);
 $bo_act_salesforceSetUp.dragAndDropFields($bo_pg_salesForceSetUP.btn_OnsiteResponseInternalBy, $sectionName);
+
+//Fields added by Bhupendra Singh
+$bo_act_salesforceSetUp.dragAndDropFields($bo_pg_salesForceSetUP.btn_RatePricingRule, $sectionName);
+$bo_act_salesforceSetUp.dragAndDropFields($bo_pg_salesForceSetUP.btn_RateType, $sectionName);
+$bo_act_salesforceSetUp.dragAndDropFields($bo_pg_salesForceSetUP.btn_TravelRate, $sectionName);
+$bo_act_salesforceSetUp.dragAndDropFields($bo_pg_salesForceSetUP.btn_TravelUnit, $sectionName);
+$bo_act_salesforceSetUp.dragAndDropFields($bo_pg_salesForceSetUP.btn_ProformaInvoceAmount, $sectionName);
+$bo_act_salesforceSetUp.dragAndDropFields($bo_pg_salesForceSetUP.btn_TotalBillableAmount, $sectionName);
+$bo_act_salesforceSetUp.dragAndDropFields($bo_pg_salesForceSetUP.btn_autoEntitlement, $sectionName);
+$bo_act_salesforceSetUp.dragAndDropFields($bo_pg_salesForceSetUP.btn_performAutoEntitlement, $sectionName);
+$bo_act_salesforceSetUp.dragAndDropFields($bo_pg_salesForceSetUP.btn_isEntitlementPerform, $sectionName);
+$bo_act_salesforceSetUp.dragAndDropFields($bo_pg_salesForceSetUP.btn_entitlementType, $sectionName);
+$bo_act_salesforceSetUp.dragAndDropFields($bo_pg_salesForceSetUP.btn_entitlementNotes, $sectionName);
+$bo_act_salesforceSetUp.dragAndDropFields($bo_pg_salesForceSetUP.btn_ServiceContract, $sectionName);
+$bo_act_salesforceSetUp.dragAndDropFields($bo_pg_salesForceSetUP.btn_Warranty, $sectionName);
+
 $bo_act_salesforceSetUp.dragAndDropFields($bo_pg_salesForceSetUP.btn_resolutionCustomerBy, $sectionName);
 $bo_act_salesforceSetUp.dragAndDropFields($bo_pg_salesForceSetUP.btn_resolutionInternalBy, "SLA Fields");
 $bo_act_salesforceSetUp.dragAndDropFields($bo_pg_salesForceSetUP.btn_restorationInternalBy, "SLA Fields");
 $bo_act_salesforceSetUp.dragAndDropFields($bo_pg_salesForceSetUP.btn_restorationCustomerBy, "SLA Fields");
 //Extra Fields
 $bo_act_salesforceSetUp.dragAndDropFields($bo_pg_salesForceSetUP.btn_totalBillableAmount, "SLA Fields");
+_stopOnError();
 $bo_act_salesforceSetUp.saveEditLayout();
-*/
+
+
+//Drag and drop all the GetPrice related fields on SCON Object
+$bo_act_navigation.navigateToServiceMaintenanceContractPage();
+_click(_link(0,_under(_tableHeader("Contract Name/Number"))));
+$bo_act_salesforceSetUp.dragAndDropSection($sectionName,1);
+
+//Fields added by Bhupendra Singh
+_continueOnError();
+$bo_act_salesforceSetUp.dragAndDropFields($bo_pg_salesForceSetUP.btn_zone, $sectionName);
+_stopOnError();
+$bo_act_salesforceSetUp.saveEditLayout();
+
 
 //Drag and drop all the SLA related fields in Case Object
 
 $bo_act_navigation.navigateToCasesPage();
 _click(_link(0,_under(_tableHeader("Case Number"))));
 $bo_act_salesforceSetUp.dragAndDropSection($sectionName,1);
+_continueOnError();
 $bo_act_salesforceSetUp.dragAndDropFields($bo_pg_salesForceSetUP.btn_timeToRestore, $sectionName);
 $bo_act_salesforceSetUp.dragAndDropFields($bo_pg_salesForceSetUP.btn_timeToResolve, $sectionName);
 $bo_act_salesforceSetUp.dragAndDropFields($bo_pg_salesForceSetUP.btn_timeToOnsiteResponse, $sectionName);
@@ -83,6 +114,7 @@ $bo_act_salesforceSetUp.dragAndDropFields($bo_pg_salesForceSetUP.btn_actualIniti
 $bo_act_salesforceSetUp.dragAndDropFields($bo_pg_salesForceSetUP.btn_actualOnsiteResponse, $sectionName);
 $bo_act_salesforceSetUp.dragAndDropFields($bo_pg_salesForceSetUP.btn_actualResolution, $sectionName);
 $bo_act_salesforceSetUp.dragAndDropFields($bo_pg_salesForceSetUP.btn_actualRestoration, $sectionName);
+_stopOnError();
 $bo_act_salesforceSetUp.saveEditLayout();
 
 
@@ -90,9 +122,6 @@ $bo_act_salesforceSetUp.saveEditLayout();
 //Enable the Activate PM Setting
 $bo_act_navigation.navigateToConfigurationProfilesPage();
 $bo_act_configurationProfiles.editGlobalProfileForBooleanSettings("Preventive Maintenance", "Manage PM Plan", "SET002", true);
-
-
-
 
 
 $Configuration_StartUp.end();
