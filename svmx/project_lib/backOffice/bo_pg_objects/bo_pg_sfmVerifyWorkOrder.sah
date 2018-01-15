@@ -11,8 +11,30 @@ var $bo_pg_sfmVerifyWorkOrder= new function bo_pg_sfmVerifyWorkOrder() {
 		this.lnk_firstLinkWO=_link(0,_under(_tableHeader("Work Order Number")));
 		this.wizardButtonExist=_button("Add/Edit Products Serviced");
 		this.verifyLabelSite=_label("Site:");
+		this.getDisplayedAccount=_link(0,_rightOf(_span("ContactsfdcPage.setHelp('01I0x0000000B2G.00N0x000000Ga1r', 'Name of the contact person from the customer account for this service order. Is a lookup to an existing salesforce contact record');")));
+		this.getDisplayContact=_link(0,_rightOf(_span("ContactsfdcPage.setHelp('01I0x0000000B2G.00N0x000000Ga1r', 'Name of the contact person from the customer account for this service order. Is a lookup to an existing salesforce contact record');")));
+		this.firstAssignedDateTime=_div(0,_rightOf(_span("First Assigned DateTimesfdcPage.setHelp('01I0x0000000B2G.00N0x000000Ga2C', 'Datetimestamp the work order was assigned to a technician for the very first time.');")));
+		this.problemDescription=_div(0,_rightOf(_span("Problem DescriptionsfdcPage.setHelp('01I0x0000000B2G.00N0x000000Ga34', 'Detailed description of the problem as reported by the customer');")));
+		this.describeProblem=_textarea(0);
+		this.btn_ok=_button("OK");
+	this.orderStatus=_div(0,_rightOf(_span("Order StatussfdcPage.setHelp('01I0x0000000B2G.00N0x000000Ga2o', 'Current status of the service order');")));
+	this.changeOrderStatus=_select(0);
+	this.isExportedBeforeClick=_image(0,_rightOf(_cell("Is Exported")));
+	this.isExportedAfterClick=_checkbox(0,_rightOf(_cell("Is Exported")));
+	this.btn_save=_button(" Save ");
+	this.serviceDuration=_div(0,_rightOf(_cell("Service Duration (in Seconds)")));
+	this.accountValueInConsole=_textbox(0,_rightOf(_label("Account:")));
+	this.contactValueInConsole=_textbox(0,_rightOf(_label("Contact:")));
+	this.servDurationInConsole=_textbox(0,_rightOf(_label("Service Duration (in Seconds):")));
+	this.probDescripInConsole=_textarea(0,_rightOf(_label("Problem Description:")));
+	this.ordStatusInConsole=_textbox(0,_rightOf(_label("Order Status:")));
+	this.fstAssnedDateTimeInConsole=_textbox(0,_rightOf(_label("First Assigned DateTime:")));
 	
-}
+			
+			
+			}
+	
+	
 	
 	
 			

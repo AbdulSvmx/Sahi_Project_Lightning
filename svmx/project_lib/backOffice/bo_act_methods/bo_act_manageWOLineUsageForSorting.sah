@@ -95,7 +95,7 @@ var $bo_act_manageWOLineUsageForSorting=new function bo_act_manageWOLineUsageFor
 			_click($bo_pg_manageWOLineUsageForSorting.btn_add);
 			_wait(2000);
 			_click($bo_pg_sfmTransactionAndDesigner.btn_saveAndclose);
-			
+			_wait(3000);
 		}
 			this.addPartLineInDelivery=function($grtDate,$midDate,$lowDate){
 				while(_isVisible(_image("svmx-action-col-icon svmx-action-col-1   svmx-sfmd-delete-icon"))==true){
