@@ -58,9 +58,43 @@ this.cloneSFMforheaderFormfill = function($sfmNameToBeCloned,$sfmName,$isCustom,
 		_click(_f("main").s_button("Save & Close"));
 		_wait(10000);
 	};
+	this.childconfiguremapping = function($selectmapping){
+		_click(_f("main").s_textinput("lblData"));
+		_wait(3000);
+		_setSelected(_f("main").s_combobox("/ComboBox/").rightOf(_f("main").formitemlabel("Object Mapping")),$selectmapping);
+		_wait(1000);
 
-
-}
+		};
+	this.onlycloneSFM = function($sfmNameToBeCloned, $sfmName, $isCustom,
+			 $sfmTemplateSaveAsName,$sfmTemplate,$selectmapping) {
+		$bo_act_navigation.navigateToSfmTransactionDesigner();
+		$sfm_act_SFM.selectSFM($sfmNameToBeCloned, $isCustom);
+		_click($bo_pg_sfmTransactionAndDesigner.btn_clone);
+		_wait(60000, _isVisible($bo_pg_sfmTransactionAndDesigner.txt_name));
+		_setValue($bo_pg_sfmTransactionAndDesigner.txt_name, $sfmName);
+		_setValue($bo_pg_sfmTransactionAndDesigner.txt_sfmTransactionId, "");
+		_setValue($bo_pg_sfmTransactionAndDesigner.txt_sfmTransactionId,
+				$sfmName);
+		_click($bo_pg_sfmTransactionAndDesigner.btn_screenDesigner);
+		_setSelected($bo_pg_sfmTransactionAndDesigner.sel_sfmTemplate,
+				$sfmTemplate);
+		_setValue($bo_pg_sfmTransactionAndDesigner.txt_sfmSavePageLayoutAs,
+				$sfmTemplateSaveAsName);
+		_setValue($bo_pg_sfmTransactionAndDesigner.txt_sfmSavePageLayoutAsId,
+				$sfmTemplateSaveAsName);
+		//$bo_act_workDetails.createWorkDetails($WO_Number, $WDrecordType, $IBName, $WDActivityType, $WDLineType);
+		$sfm_act_cloneSfmAddNewFields.childconfiguremapping($selectmapping);
+		_wait(5000);
+		_click(_f("main").s_button("Save As[3]"));
+		_wait(5000);
+		_click(_f("main").s_button("Save[3]"));
+		_wait(5000);
+		_click(_f("main").s_button("Save & Close"));
+		_wait(10000);
+	};
+	
+	
+};
 
 
 	

@@ -1,4 +1,4 @@
-var $set011_contractuptime = _testcase("SET011_ContractUptime","To change the setting of Contract Uptime to TRUE");
+var $set011_contractuptime = _testcase("SET011_ContractUptime","To change the setting of Contract Uptime to FALSE");
 $set011_contractuptime.start();
 var $data = _readExcelFile("../../analytics/an_excleData/an_Datasheet1.xlsx","Sheet1",true);
 var $un = $data[1]["Username"];
