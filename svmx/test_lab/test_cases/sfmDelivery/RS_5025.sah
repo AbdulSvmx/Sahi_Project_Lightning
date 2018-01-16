@@ -6,7 +6,6 @@ var $RS_5025 = _testcase("RS_5025", "Verify Field Map for existing records - Hea
 $RS_5025.start();
 _setSpeed(100);
 
-
 var $sfmName=$bo_act_common.generateRandomName("5025SFM");
 //change  the name of $sfmTemplateSaveAsName before execution.
 var $sfmTemplateSaveAsName=$bo_act_common.generateRandomName("5025Temp");
@@ -18,7 +17,7 @@ var $wizardID=$wizardname;
 var $executionMode="Interactive";
 var $fieldActnType="SFM";
 var $actnName=$sfmName;
-var $wizardButtonName=$sfmName
+var $wizardButtonName=$sfmName;
 	
 
 

@@ -19,8 +19,8 @@ var $executionMode="Interactive";
 var $fieldActnType="SFM";
 var $actnName=$sfmName;
 
-var $stndSFMName=$sfmName
-var $wizardButtonName=$sfmName
+var $stndSFMName=$sfmName;
+var $wizardButtonName=$sfmName;
 	
 var $selLocation="Europe";
 var $workPerform="Testing RS-5379";
@@ -71,7 +71,7 @@ if(_assertExists(_span("Work Order"))){
 	_log("User successfully landed into the main process");
 }else{
 	_log("Error occurred,please refer screenshot for detail");
-	_takeScreenShot()
+	_takeScreenShot();
 		}
 
 //verify is user landed into WO page after saving main process************
@@ -81,7 +81,7 @@ if(_assertExists(_heading2("Work Order Detail"))){
 	_log("User successfully landed in work order detail page");
 }else{
 	_log("Error occurred, please ref screenshot for details");
-	_takeScreenShot()
+	_takeScreenShot();
 		}
 
 //*****************Deleteing testdata************
