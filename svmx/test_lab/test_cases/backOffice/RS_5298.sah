@@ -31,7 +31,7 @@ $bo_act_workOrders.saveWorkOrder();
 
 //Validations
 _selectDomain("/svmx/");
-_wait(3000,_isVisible(_table("/timer/")));
+_wait(3000,_isVisible($bo_pg_workOrders.txt_slaClock));
 _assertNotContainsText("Onsite Response 00:00:00:00",$bo_pg_workOrders.txt_slaClock,"SLA Clock Issue");
 _selectDomain();
 _assertNotEqual(_getText($bo_pg_workOrders.txt_OnsiteResponseInternalBy)," ","Issue in Initial Response Internal By field");

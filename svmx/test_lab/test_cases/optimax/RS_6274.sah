@@ -54,7 +54,7 @@ function create_Team ($dp_Terr_Id){
 	
 	// Creating Team
 	var Team = new sforce.SObject("SVMXC__Service_Group__c");
-	Team.RecordTypeId='0123B000000CnBXQA0';
+	//Team.RecordTypeId='0123B000000CnBXQA0';
 	Team.Name="ResPreference_Team";
 	Team.SVMXC__Active__c='True';
 	Team.SVMXC__Country__c="India";

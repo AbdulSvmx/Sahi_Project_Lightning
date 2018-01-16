@@ -1,13 +1,34 @@
 // Author: Safi Ahmed
 
 var $rs_4982 = _testcase("RS_4982","Verify the criteria to show sfm wizard");
-$rs_5023.start();
-$wizTitle = $bo_act_common.generateRandomName("SA Wiz ");
+$rs_4982.start();
+$OrdrStatus = "Open";
+$sfmName = $bo_act_common.generateRandomName("RS4982 ");
+$sfmPgLayoutName =	$bo_act_common.generateRandomName("SFM_Auto_Page");
+$processName = "Manage Work Order Lines - Usage";
+$wizTitle = $bo_act_common.generateRandomName("RS4982 ");
 $bo_act_login.login($g_url,$sfmUsn,$sfmPwd);
+
+$bo_act_navigation.navigateToSfmTransactionDesigner();
+$sfm_act_Transactions.cloneAndSaveProcess($processName,$sfmName,$sfmPgLayoutName);
 $bo_act_navigation.navigateToSfmWizard();
 $sfm_act_createCustomWizard.chooseObject("Work Order");
-$sfm_act_createCustomWizard.addWizStepWithCriteria($wizTitle,"SFM","Create Quote from Work Order","EXPR002-SVMXSTD: Open Work Orders","Default Group Profile");
-$sfm_act_createCustomWizard.createWOwithOrderStatus("Closed");
-_wait(1000);
-$sfm_pg_wo.assert_wizardStep("Create Quote from Work Order");
+$sfm_act_createCustomWizard.addWizStepWithCriteria($wizTitle,"SFM",$sfmName,"EXPR002-SVMXSTD: Open Work Orders","Sysadmin01 Group");
+$sfm_act_createCustomWizard.createWOwithOrderStatus($OrdrStatus);
+//$sfm_pg_wo.assert_wizardStep($sfmName);
+
+// Verification
+_selectDomain("/svmx/");
+_click(_button($sfmName));
+_selectDomain();
+_wait(6000);
+if(_isVisible(_span("svmx-btn-icon svmx-sfmd-save-icon")))
+	{
+	_log("Pass:: Test Case execution is successfull");
+	 }
+   else
+   {
+   _log("Fail: Test Case execution is failure");
+   }
+
 $rs_4982.end();

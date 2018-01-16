@@ -31,3 +31,12 @@ _wait(1000);
 
 $delete6 = "delete [Select Id from 	SVMXC__SPM_Down_Time_Detail__c];";
 var $delete_data = $op_act_sForceApiCall.sForceQuery($un, $pwd, $delete6 , "create");
+
+_wait(1000);
+$delete7 = "delete [Select Id from SVMXC__Installed_Product__c where Createdby.Id = '005q0000003GGfP' AND Name like ‘%RS%’];";
+var $delete_data = $op_act_sForceApiCall.sForceQuery($un, $pwd, $delete7 , "create");
+
+_wait(1000);
+
+$delete8 = "delete [Select Id from SVMXC__Service_Contract__c where Createdby.Id = '005q0000003GGfP' AND Name like ‘%RS%’];";
+var $delete_data = $op_act_sForceApiCall.sForceQuery($un, $pwd, $delete8 , "create");

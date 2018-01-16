@@ -1,7 +1,7 @@
 //Tests are to be written here [Bhupendra Singh Chouhan]
 //==============
 
-var $RS_5315 = _testcase("$RS_5315","Get Price on WO:When the IB of the WO is covered under a Warranty.Calculate Expense prices");
+var $RS_5315 = _testcase("$RS_5315","Get Price on WO: Calculation based on labor pricing defined in SCon when Activity type(Activity ID=Calibration/Installation).");
 $RS_5315.start();
 _setSpeed(100);
 
@@ -66,7 +66,7 @@ $bo_act_serviceMaintenanceContracts.AddCoveredProducToServiceContract($serviceCo
 //Add Entitled Contact to Service Contract 
 
 $bo_act_serviceMaintenanceContracts.addEntitledContactsToServiceContract($serviceConractName, $contactName);
-
+_setSpeed(300);
 //Add Labor Pricing To Service Contract using Unit as Per Hours and Activity Type as Calibration
 var $RoundingType = "Actuals";
 var $minimumLaborMins = 30;
@@ -78,16 +78,7 @@ $bo_act_serviceMaintenanceContracts.addLaborPricingToServiceContract($serviceCon
 var $minimumLaborMins1 = 60;
 var $regularRate1 = 800;
 $bo_act_serviceMaintenanceContracts.addSecondLaborPricingToServiceContract($serviceConractName, $RoundingType, $unit[2], $minimumLaborMins1,$regularRate1, $activityType[3]);
-
-var $expecctedIBUnder_CoveredProduct =  _getText(_link(0,_under(_tableHeader("Installed Product"))));
-var $expecctedContactUnder_EntitledContacts =  _getText(_link(0,_under(_tableHeader("Contact"))));
-
-//validation
-//Validating the Covered Products Percent on Scon
-_assertEqual($expecctedIBUnder_CoveredProduct,$IBName,"Actual and expected covered Products are not same");
-
-//Validating the Entitled Contacts Percent on Scon
-_assertEqual($expecctedContactUnder_EntitledContacts,$contactName,"Actual and expected Entitled Contacts are not same");
+_setSpeed(100);
 
 /**
 * Create Case record
@@ -155,7 +146,7 @@ if(_isVisible(_image("Checked",_rightOf(_cell("/Is Entitlement Performed/"))))){
 */
 
 $bo_act_getPrice.navigateToSFMDeliveryPageFor_TDM016($WONumber);
-
+_setSpeed(300);
 //Add Labor Line to Above invoke TDM016 SFM
 var $searchValue = $productName;
 var $startHrs = "04";
@@ -165,12 +156,13 @@ $bo_act_getPrice.calculateGetPrice();
 
 //Validation of Get Price for Labor lines
 $bo_act_getPrice.editLaborLineToSFMDelivery($searchValue);
-
+_wait(2000);
+_setStrictVisibilityCheck(true);
 var $LaborLinePricePerUnitActual = _getText(_textbox(0,_rightOf(_label("/Line Price Per Unit/"))));
 var $LaborCoveredActual = _getText(_textbox(0,_rightOf(_label("/Covered %/"))));
 var $LaborBillableQtyActual = _getText(_textbox(0,_rightOf(_label("/Billable Qty/"))));
 var $LaborBillableLinePriceActual = _getText(_textbox(0,_rightOf(_label("/Billable Line Price/"))));
-
+_setStrictVisibilityCheck(false);
 var $LaborBillableQtyExpected = 8-4; // $startHrs = "04" And $endHrs = "08";
 var $LaborBillableLinePriceExpected = $LaborBillableQtyExpected*$regularRate;
 
@@ -191,11 +183,13 @@ $bo_act_getPrice.calculateGetPrice();
 
 //Validation of Get Price for 2nd Labor lines
 $bo_act_getPrice.editLaborLineToSFMDelivery($searchValue1);
-
+_wait(2000);
+_setStrictVisibilityCheck(true);
 var $LaborLinePricePerUnitActual1 = _getText(_textbox(0,_rightOf(_label("/Line Price Per Unit/"))));
 var $LaborCoveredActual1 = _getText(_textbox(0,_rightOf(_label("/Covered %/"))));
 var $LaborBillableQtyActual1 = _getText(_textbox(0,_rightOf(_label("/Billable Qty/"))));
 var $LaborBillableLinePriceActual1 = _getText(_textbox(0,_rightOf(_label("/Billable Line Price/"))));
+_setStrictVisibilityCheck(false);
 
 _assertEqual($LaborLinePricePerUnitActual1,$regularRate1,"Actual and expected Labor Line Price Per Unit are not same");
 _assertEqual($LaborBillableQtyActual1,"1","Actual and expected Billable Qty are not same");
@@ -205,6 +199,9 @@ _assertEqual($LaborCoveredActual1,"0","Actual and expected labor Covered % are n
 $bo_act_getPrice.closeEditedWOLineToSFMDelivery();
 
 $bo_act_getPrice.saveSFMDelivery();
+_setSpeed(100);
+//Delete SFM Wizard 
+$bo_act_SFW.deleteSFMWizard("Work Order", $wizardIDName);
 
 /**
 *Clean up function
@@ -216,11 +213,8 @@ $bo_act_common.cleanUpfunction($datacreated[i]);
 }
 
 // Delete the Activity ID's Created 
-$bo_act_activityMaster.deleteActivityMaster($activityID);
-$bo_act_activityMaster.deleteActivityMaster($activityID1);
-
-//Delete SFM Wizard 
-$bo_act_SFW.deleteSFMWizard("Work Order", $wizardIDName);
+/*$bo_act_activityMaster.deleteActivityMaster($activityID);
+$bo_act_activityMaster.deleteActivityMaster($activityID1);*/
 
 $bo_act_login.logOut(); 
 

@@ -32,8 +32,8 @@ var $standardPriceValue = 220;
 $bo_act_products.addStandardPriceForProduct($productName, $standardPriceValue);
 
 // Validate the Standard price for Product
-var $actual_StandardPriceValue = _getText(_tableHeader(0,_under(_tableHeader("Standard Price"))));
-_assertEqual($actual_StandardPriceValue,"$220.00","Actual and expected Standard price values are not same");
+/*var $actual_StandardPriceValue = _getText(_tableHeader(0,_under(_tableHeader("Standard Price"))));
+_assertEqual($actual_StandardPriceValue,"$220.00","Actual and expected Standard price values are not same");*/
 
 /**
 * Create SLA Terms
@@ -74,15 +74,6 @@ var $partsDiscount = 30;
 //Add Part Pricing to Service Contract with Discount
 $bo_act_serviceMaintenanceContracts.addPartPricingWithDiscountToServiceContract($sconName, $priceBookName, $partsDiscount, $productName);
 
-var $expecctedIBUnder_CoveredProduct =  _getText(_link(0,_under(_tableHeader("Installed Product"))));
-var $expecctedContactUnder_EntitledContacts =  _getText(_link(0,_under(_tableHeader("Contact"))));
-
-//validation
-//Validating the Covered Products Percent on Scon
-_assertEqual($expecctedIBUnder_CoveredProduct,$IBName,"Actual and expected covered Products are not same");
-
-//Validating the Entitled Contacts Percent on Scon
-_assertEqual($expecctedContactUnder_EntitledContacts,$contactName,"Actual and expected Entitled Contacts are not same");
 
 /**
  * Configure the Group Profile SET004
@@ -188,6 +179,9 @@ $bo_act_getPrice.closeEditedWOLineToSFMDelivery();
 
 $bo_act_getPrice.saveSFMDelivery();
 
+//Delete SFM Wizard 
+$bo_act_SFW.deleteSFMWizard("Work Order", $wizardIDName);
+
 /**
 *Clean up function
 */
@@ -196,9 +190,6 @@ var $datacreated = [$WONumber,$caseNumber,$IBName,$productName,$contactName,$acc
 for (var i = 0; i < $datacreated.length; i++) {
 $bo_act_common.cleanUpfunction($datacreated[i]);
 }
-
-//Delete SFM Wizard 
-$bo_act_SFW.deleteSFMWizard("Work Order", $wizardIDName);
 
 $bo_act_login.logOut(); 
 

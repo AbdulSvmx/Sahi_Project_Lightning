@@ -63,7 +63,7 @@ $bo_act_serviceMaintenanceContracts.AddCoveredProducToServiceContract($sconName,
 //Add Entitled Contact to Service Contract 
 
 $bo_act_serviceMaintenanceContracts.addEntitledContactsToServiceContract($sconName, $contactName);
-
+_setSpeed(300);
 //Add Labor Pricing To Service Contract using Unit as Per Hours and Activity Type as Calibration
 var $RoundingType = "Actuals";
 var $unit = ["--None--","Per Hour","Flat Rate"];
@@ -72,16 +72,7 @@ var $regularRate = 500;
 var $activityProduct = (($activityType[1].concat(" : ")).concat($productName));
 
 $bo_act_serviceMaintenanceContracts.addLaborPricingToServiceContractUsingActivityProduct($sconName, $RoundingType, $unit[1], $minimumLaborMins, $regularRate, $activityProduct);
-
-var $expecctedIBUnder_CoveredProduct =  _getText(_link(0,_under(_tableHeader("Installed Product"))));
-var $expecctedContactUnder_EntitledContacts =  _getText(_link(0,_under(_tableHeader("Contact"))));
-
-//validation
-//Validating the Covered Products Percent on Scon
-_assertEqual($expecctedIBUnder_CoveredProduct,$IBName,"Actual and expected covered Products are not same");
-
-//Validating the Entitled Contacts Percent on Scon
-_assertEqual($expecctedContactUnder_EntitledContacts,$contactName,"Actual and expected Entitled Contacts are not same");
+_setSpeed(100);
 
 /**
 * Create Case record
@@ -150,7 +141,7 @@ if(_isVisible(_image("Checked",_rightOf(_cell("/Is Entitlement Performed/"))))){
 */
 
 $bo_act_getPrice.navigateToSFMDeliveryPageFor_TDM016($WONumber);
-
+_setSpeed(300);
 //Add Labor Line to Above invoke TDM016 SFM
 var $searchValue = $productName;
 var $startHrs = "03";
@@ -177,6 +168,10 @@ _assertEqual($LaborCoveredActual,"0","Actual and expected labor Covered % are no
 $bo_act_getPrice.closeEditedWOLineToSFMDelivery();
 
 $bo_act_getPrice.saveSFMDelivery();
+_setSpeed(100);
+
+//Delete SFM Wizard 
+$bo_act_SFW.deleteSFMWizard("Work Order", $wizardIDName);
 
 /**
 *Clean up function
@@ -188,10 +183,7 @@ $bo_act_common.cleanUpfunction($datacreated[i]);
 }
 
 // Delete the Activity ID's Created 
-$bo_act_activityMaster.deleteActivityMaster($activityID);
-
-//Delete SFM Wizard 
-$bo_act_SFW.deleteSFMWizard("Work Order", $wizardIDName);
+//$bo_act_activityMaster.deleteActivityMaster($activityID);
 
 $bo_act_login.logOut(); 
 

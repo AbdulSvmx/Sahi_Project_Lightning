@@ -31,8 +31,8 @@ var $standardPriceValue = 120;
 $bo_act_products.addStandardPriceForProduct($productName, $standardPriceValue);
 
 // Validate the Standard price for Product
-var $actual_StandardPriceValue = _getText(_tableHeader(0,_under(_tableHeader("Standard Price"))));
-_assertEqual($actual_StandardPriceValue,"$120.00","Actual and expected Standard price values are not same");
+/*var $actual_StandardPriceValue = _getText(_tableHeader(0,_under(_tableHeader("Standard Price"))));
+_assertEqual($actual_StandardPriceValue,"$120.00","Actual and expected Standard price values are not same");*/
 
 /**
 * Create Activity Master and Edit Service Price book
@@ -178,6 +178,9 @@ $bo_act_getPrice.closeEditedWOLineToSFMDelivery();
 
 $bo_act_getPrice.saveSFMDelivery();
 
+//Delete SFM Wizard 
+$bo_act_SFW.deleteSFMWizard("Work Order", $wizardIDName);
+
 /**
 *Clean up function
 */
@@ -189,11 +192,8 @@ $bo_act_common.cleanUpfunction($datacreated[i]);
 
 //Deleting the above created data
 
-$bo_act_activityMaster.deleteActivityMaster($activityID);
-$bo_act_servicePricebooks.deleteStandardServicePricebooksEntry($PriceBookName, $ServicePricebooksEntryNumber);
-
-// Delete SFM Wizard 
-$bo_act_SFW.deleteSFMWizard("Work Order", $wizardIDName);
+//$bo_act_activityMaster.deleteActivityMaster($activityID);
+//$bo_act_servicePricebooks.deleteStandardServicePricebooksEntry($PriceBookName, $ServicePricebooksEntryNumber);
 
 $bo_act_login.logOut(); 
 

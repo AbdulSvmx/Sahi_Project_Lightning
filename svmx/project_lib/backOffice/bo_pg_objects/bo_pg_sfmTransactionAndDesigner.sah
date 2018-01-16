@@ -32,14 +32,7 @@ var $bo_pg_sfmTransactionAndDesigner = new function bo_pg_sfmTransactionAndDesig
 	
 	
 	
-	
-	
-	
-	
-	
-	
-	
-    this.txt_standardSfmTransactionQuickFind= _f("main").s_textinput("searchText[2]");
+	 this.txt_standardSfmTransactionQuickFind= _f("main").s_textinput("searchText[2]");
     this.btn_standardSfmTransaction= _f("main").tab("Standard SFM Transactions");
     this.btn_yourCustomSfmTransactions = _f("main").tab("Your Custom Sjavascript:void(0)FM Transactions");
     this.btn_yourCustomSfmTransactions = _f("main").tab("Your Custom SFM Transactions");
@@ -99,7 +92,17 @@ var $bo_pg_sfmTransactionAndDesigner = new function bo_pg_sfmTransactionAndDesig
 	this.lbl_lineQtyField=_f("main").s_label("Line Qty")
 	this.lbl_travelObj=_f("main").s_label("Travel[1]")
 	this.lbl_statDateField=_f("main").s_label("Start Date and Time")
-	this.lbl_endDateField=_f("main").s_label("End Date and Time[1]")
+	this.lbl_endDateField=_f("main").s_label("End Date and Time[1]")	
+	this.sel_targetObjFld=_f("main").s_textinput(3);
+	this.lbl_clkHeaderInQcPage=_f("main").s_label("Work Order");
+	this.saveTheMap=_f("main").s_textinput("Save this map as");
+	this.clkNewMap=_f("main").s_button("New[1]");
+	this.clkNewMapID=_f("main").s_textinput("Input ID Here[1]");
+	this.clkMapSave=_f("main").s_button("Save[1]");
+	
+	
+	
+		
 	
 	this.selectComboBox = function($elementName,$elementItemName){
 	_setSelected(_f("main").s_combobox($elementName), $elementItemName);

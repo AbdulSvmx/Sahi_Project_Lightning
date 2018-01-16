@@ -1,0 +1,40 @@
+
+//author - Noor Salma Sharieff
+
+var $RS_7504 = _testcase("RS_7504","CLONE - Verify adding a new coverage manually and saving the pm plan from Location.");
+$RS_7504.start();
+_setSpeed(100);
+
+//Pre - Condition 
+$bo_act_login.login($g_url, $bac_un, $bac_pwd);
+
+//Test Data Creation
+var $accName = $bo_act_accounts.createAccount();
+var $proName = $bo_act_products.createProduct("pro12", "--None--");
+var $location = $bo_act_locations.createLocation("", $accName, "MG Road", "India", "560001");
+var $installedProduct1 =$bo_act_locations.addInstalledProductToLocation($proName,$accName,"");
+$bo_act_salesforcePages.editObject();
+$bo_act_salesforcePages.selectOptionFromDropdown($bo_pg_installedProducts.editStatus, "Shipped");
+$bo_act_salesforcePages.saveObject();
+_click(_link($location));
+var $installedProduct2 =$bo_act_locations.addInstalledProductToLocation($proName,$accName,"");
+$bo_act_salesforcePages.editObject();
+$bo_act_salesforcePages.selectOptionFromDropdown($bo_pg_installedProducts.editStatus, "Scrap");
+$bo_act_salesforcePages.saveObject();
+_click(_link($location));
+var $installedProduct3 =$bo_act_locations.addInstalledProductToLocation($proName,$accName,"");
+
+//Create a Criteria Based PM template
+var $PMTemplate = $bo_act_PMPlanTemplate.createCriteriaBasedPMTemplate($proName, "");
+$bo_act_PMPlanTemplate.firstCriteriaBasedCondition("Latitude", "Equals", 10);
+$bo_act_PMPlanTemplate.saveConditionBasedPM();
+
+//Create Condition Based PM Plan from Location.
+$bo_act_PMPlan.createConditionBasedPMPlanFromLocation($location, $PMTemplate);
+$bo_act_PMPlan.saveConditionBasedPMPlan();
+
+
+$RS_7504.end();
+
+
+

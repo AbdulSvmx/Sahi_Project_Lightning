@@ -69,7 +69,6 @@ _assertEqual($endDateExpectedOn_IB,$endDateActulOn_IB,"Actual and expected End D
  */
 
 //Create 1st SLA Term SLA01 [Platinum SLA]
-$bo_act_navigation.navigateToSlaTerms();
 var $slaName01 = $bo_act_slaTerms.createSlaTerms("Default");
 $bo_act_slaTerms.addInitialResponseToSLA($slaName01,"WorkOrder","Field Service","Medium","Created Date","5","10","SLA");
 $bo_act_slaTerms.addOnsiteResponseToSLA($slaName01,"WorkOrder","Field Service","Medium","Created Date","10","15","SLA");
@@ -78,7 +77,6 @@ $bo_act_slaTerms.addOnsiteResponseToSLA($slaName01,"WorkOrder","Field Service","
 _assertExists(_span($slaName01));
 
 //Create 2nd SLA Term SLA02 [Gold SLA]
-$bo_act_navigation.navigateToSlaTerms();
 var $slaName02 = $bo_act_slaTerms.createSlaTerms("Default");
 $bo_act_slaTerms.addInitialResponseToSLA($slaName02,"WorkOrder","Field Service","Medium","Created Date","5","10","SLA");
 $bo_act_slaTerms.addOnsiteResponseToSLA($slaName02,"WorkOrder","Field Service","Medium","Created Date","10","15","SLA");
@@ -87,7 +85,6 @@ $bo_act_slaTerms.addOnsiteResponseToSLA($slaName02,"WorkOrder","Field Service","
 _assertExists(_span($slaName02));
 
 //Create 3rd SLA Term SLA03 [Silver SLA]
-$bo_act_navigation.navigateToSlaTerms();
 var $slaName03 = $bo_act_slaTerms.createSlaTerms("Default");
 $bo_act_slaTerms.addInitialResponseToSLA($slaName03,"WorkOrder","Field Service","Medium","Created Date","5","10","SLA");
 $bo_act_slaTerms.addOnsiteResponseToSLA($slaName03,"WorkOrder","Field Service","Medium","Created Date","10","15","SLA");
@@ -125,19 +122,6 @@ $bo_act_serviceMaintenanceContracts.addCoveredLocationToServiceContract($service
 
 $bo_act_serviceMaintenanceContracts.addEntitledContactsToServiceContract($serviceConractName, $contactName);
 
-var $expecctedIBUnder_CoveredProduct =  _getText(_link(0,_under(_tableHeader("Installed Product"))));
-var $expecctedLocationUnder_CoveredLocations =  _getText(_link(0,_under(_tableHeader("Location"))));;
-var $expecctedContactUnder_EntitledContacts =  _getText(_link(0,_under(_tableHeader("Contact"))));;
-
-//validation
-//Validating the Covered Products Percent on Scon
-_assertEqual($expecctedIBUnder_CoveredProduct,$IBName,"Actual and expected covered Products are not same");
-
-//Validating the Covered Locations Percent on Scon
-_assertEqual($expecctedLocationUnder_CoveredLocations,$locationName,"Actual and expected covered Locations are not same");
-
-//Validating the Entitled Contacts Percent on Scon
-_assertEqual($expecctedContactUnder_EntitledContacts,$contactName,"Actual and expected Entitled Contacts are not same");
 
 /**
  * Create Auto Entitlement Rules for Work Order
@@ -158,7 +142,7 @@ var	$p8 = "Validity dates";     // $p8 = Validity dates/Counters/Both
 var	$p9 = "No";					// $p9 = Yes/No SLA Coverage for Entitlement
 
 //Navigate to Auto Entitlement Rules - Work Order
-$autoEntitlementRuleName = $bo_act_autoEntitlementRule_WO.createAutoEntitlementRule_WO($WOField, $Operator, $Value, $EntitSetting, $p1, $p2, $p3, $p4, $p5, $p6, $p7, $p8, $p9);
+$autoEntitlementRuleName = $bo_act_autoEntitlementRule_WO.createAutoEntitlementRuleWithSCON_WO($WOField, $Operator, $Value, $EntitSetting, $p1, $p2, $p3, $p4, $p5, $p6, $p7, $p8, $p9);
 
 /**
  * Configure the Global Profile SET001
@@ -203,10 +187,10 @@ $bo_act_Cases.editCase($caseNumber,$accountName,$contactName,$IBName,$caseSite);
 var $orderStatus = "Open";
 var $priority = "Medium";
 var $orderType = "Depot Repair";
-var $WO_Number = $bo_act_workOrders.createWorkOrder($caseNumber,$accountName,$contactName,$IBName,$orderStatus,$priority,$orderType);
+var $WONumber = $bo_act_workOrders.createWorkOrder($caseNumber,$accountName,$contactName,$IBName,$orderStatus,$priority,$orderType);
 
 //Perform Auto Entitlement on Work Order
-$bo_act_autoEntitlementRule_WO.performAutoEntitlement_WO($WO_Number);
+$bo_act_autoEntitlementRule_WO.performAutoEntitlement_WO($WONumber);
 
 //validate the Auto Entitlement Parameters 
 var $actual_AutoEntitlementStatus = _getText(_div(0,_rightOf(_cell("Auto Entitlement Status"))));
@@ -225,13 +209,15 @@ _assertEqual($actual_BillingType,"Contract","Actual and expected Billing Type ar
 _assertEqual("Success",$actual_AutoEntitlementStatus,"Auto Entitlement is failed");
 _assertNotNull($actual_EntitlementNotes, "Entitlement Notes is Null");
 
+// Delete the Auto Entitlemet Rule created on WO
+$bo_act_autoEntitlementRule_WO.deleteAutoEntitlementRule_WO($autoEntitlementRuleName);
+
 //Clean up function
 
-var $datacreated = [$WO_Number,$caseNumber,$serviceConractName,$slaName03,$slaName02,$slaName01,$IBName,$productName,$locationName,$contactName,$accountName];
+var $datacreated = [$WONumber,$caseNumber,$serviceConractName,$slaName03,$slaName02,$slaName01,$IBName,$productName,$locationName,$contactName,$accountName,$warrantyName];
 for (var i = 0; i < $datacreated.length; i++) {
 	$bo_act_common.cleanUpfunction($datacreated[i]);
 }
-$bo_act_autoEntitlementRule_WO.deleteAutoEntitlementRule_WO($autoEntitlementRuleName);
 
 $bo_act_login.logOut(); 
 

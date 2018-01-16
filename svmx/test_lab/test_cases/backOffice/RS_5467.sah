@@ -100,17 +100,6 @@ var $futureYear1 = 2;			//End Date 'TODAY's' Date + 2 YEARS
 $bo_act_serviceMaintenanceContracts.addCoveredLocationToServiceContract($serviceConractName, $locationName, $slaName03, $pastYear1, $futureYear1);
 
 
-var $expecctedIBUnder_CoveredProduct =  _getText(_link(0,_under(_tableHeader("Installed Product"))));
-var $expecctedLocationUnder_CoveredLocations =  _getText(_link(0,_under(_tableHeader("Location"))));;
-
-//validation
-//Validating the Covered Products Percent on Scon
-_assertEqual($expecctedIBUnder_CoveredProduct,$IBName,"Actual and expected covered Products are not same");
-
-//Validating the Covered Locations Percent on Scon
-_assertEqual($expecctedLocationUnder_CoveredLocations,$locationName,"Actual and expected covered Locations are not same");
-
-
 /**
  * Create Case record
  */
@@ -121,6 +110,19 @@ var $caseNumber = $bo_act_Cases.createCase($caseStatus, $casePriority, $caseOrig
 
 //Edit the above case for Account, Contact and IB information
 $bo_act_Cases.editCase($caseNumber,$accountName,$contactName,$IBName,$locationName);
+
+/**
+* Create SFM Wizard for Case with 1 Steps as Check Entitlement.
+*/
+var $wizardTitleName = $bo_act_common.generateRandomName("SFWTitle");
+var $wizardIDName = $bo_act_common.generateRandomName("SFWId");
+var $fieldActnType = "Others";
+var $actnName = "Check Entitlement";
+
+$bo_act_navigation.navigateToSfmWizard();
+$bo_act_SFW.createWizardGeneralInfo("Case", $wizardTitleName, $wizardIDName);
+$bo_act_SFW.addCustomActionToWizard($fieldActnType, $actnName);
+$bo_act_SFW.quickSaveSFWizard();
 
 
 /**
@@ -179,6 +181,10 @@ _assertEqual($actual_ServiceContract,$serviceConractName,"Actual and expected Se
 _assertEqual($actual_SLATerms,$slaName02,"Actual and expected SLA Terms are not same");
 _assertEqual($actual_EntitlementType,"INTERACTIVE","Actual and expected Entitlement Type are not same");
 _assertEqual($actual_BillingType,"Contract","Actual and expected Billing Type are not same");
+
+
+//Delete SFM Wizard 
+$bo_act_SFW.deleteSFMWizard("Case", $wizardIDName);
 
 
 //Clean up function

@@ -11,7 +11,7 @@ var $bo_act_navigation = new function bo_act_navigation() {
     	 _selectWindow();
 	_click($bo_pg_home.link_home);
 	_wait(6000, _isVisible($bo_pg_home.link_servicemaxSetup));
-	return $callBack.returnResult(_exists($bo_pg_home.link_servicemaxSetup ));
+	//return $callBack.returnResult(_exists($bo_pg_home.link_servicemaxSetup ));
 	
     };
 
@@ -77,6 +77,11 @@ var $bo_act_navigation = new function bo_act_navigation() {
     	_click($bo_pg_home.btn_allTabs);
    	    _click($bo_pg_home.link_serviceMaintenanceContracts);
     };
+    this.navigateToStockAdjustment = function(){
+   	 _click($bo_pg_home.btn_allTabs);
+   	    _click($bo_pg_home.link_stockAdjustment);
+    };
+    
 
 
     this.navigateToSlaTerms = function(){
@@ -270,6 +275,7 @@ var $bo_act_navigation = new function bo_act_navigation() {
      
      this.navigateToSetUpAndSearch = function($searchValue){
     	 _click(_link("Setup"));
+    	 _wait(50000,_isVisible(_textbox("setupSearch")));
     	 _setValue(_textbox("setupSearch"),$searchValue);
     	 _click(_link($searchValue));
     	 
@@ -285,5 +291,12 @@ var $bo_act_navigation = new function bo_act_navigation() {
     	_click(_link("ServiceMax Setup"));
     	_click($bo_pg_servicemaxSetup.btn_warrantiesAndServiceContracts);
     	_click($bo_pg_servicemaxSetup.btn_servicePlans);
+    };
+	
+	//Navigate to SFM Search Configuration Screen
+    this.navigateToSfmSearchInDesigner = function() {
+   	 this.navigateToSvmxSetup();
+   	 _click($bo_pg_servicemaxSetup.btn_serviceFlowManager);
+   	 _click($bo_pg_servicemaxSetup.btn_sfmSearch);	   	 
     };
 };

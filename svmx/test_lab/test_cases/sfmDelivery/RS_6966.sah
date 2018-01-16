@@ -1,0 +1,36 @@
+
+var $rs_6966 = _testcase("RS_6966","Verify source to target child SFM Process.");
+$rs_6966.start();
+$sfmNameToBeCloned = "Manage Work Order Lines - Usage";
+$sfmName = $bo_act_common.generateRandomName("SFM_Auto_");
+$isCustom = false;
+var $sfmTemplate = "SVMXSTD: Manage WO Usage Lines";
+var $sfmTemplateSaveAsName = $sfmName;
+var $fieldName = ["Problem Description"];
+var $containerName = ["Order Status"];
+var $wizTitle = $bo_act_common.generateRandomName("SFM Wiz");
+$bo_act_login.login($g_url,$sfmUsn,$sfmPwd);
+$sfm_act_SFM.cloneTDM016($sfmNameToBeCloned, $sfmName, $isCustom, $sfmTemplateSaveAsName, $sfmTemplate, $fieldName, $containerName);
+_click($bo_pg_sfmTransactionAndDesigner.btn_finalQuickSave);
+_setSpeed(100);
+$bo_act_navigation.navigateToSfmWizard();
+$sfm_act_createCustomWizard.chooseObject("Work Order");
+$sfm_act_createCustomWizard.addManageWizSteps($wizTitle,"SFM",$sfmName,"Sysadmin01 Group");
+$sfm_act_createCustomWizard.createBlankWo();
+$sfm_act_createCustomWizard.clickWizardBtn($sfmName);
+var $wizardHeading = "";
+_selectDomain();
+_setStrictVisibilityCheck(true);
+_set($wizardHeading,_getText($sfm_pg_wizardWindow.wiz_heading));
+if($wizardHeading.search($sfmName)!=-1){
+	_log("Pass");
+}
+else{
+	_log("Fail");
+}
+$rs_6966.end();
+
+
+
+
+

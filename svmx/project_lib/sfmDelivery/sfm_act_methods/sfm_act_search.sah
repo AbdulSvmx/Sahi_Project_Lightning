@@ -45,7 +45,7 @@ var $sfm_act_search = new function sfm_search() {
 			_click($sfm_pg_search.tab_allWo);
 			var $woNumber = _getText($sfm_pg_search.link_wo);
 			_log($woNumber);
-			_log($woNumber.search);
+//			_log($woNumber.search);
 			if($woNumber.search("WO-")!=-1){
 				_log("Pass");
 			}
@@ -62,16 +62,26 @@ var $sfm_act_search = new function sfm_search() {
 		_setValue($sfm_pg_search.txt_searchTitle,$searchName);
 		_setValue($sfm_pg_search.txt_searchID,$searchId);
 		_click($sfm_pg_search.tab_searchConfig);
-		_click($sfm_pg_search.btn_objDisplaySeq);
-		this.selectMultipleObject($arr);
+		_wait(5000);
+		var $resultTitle = _collect("_textbox","/.*/",_under(_tableHeader("Result Section Title")));
+		var $resSet =[];
+		for(var $i=0;$i<$resultTitle.length;$i++){
+			 $resSet[$i] = _getValue($resultTitle[$i]);
+			
+		}
+//		_click($sfm_pg_search.tab_searchConfig);
+//		_click($sfm_pg_search.btn_objDisplaySeq);
+//		this.selectMultipleObject($arr);
 //		_setSelected($sfm_pg_search.sel_objects,["Case","Work Order"], true);
 //		_click($sfm_pg_search.btn_bottom);
 //		_click($sfm_pg_search.btn_objectSave);
-		_wait(5000);
+//		_wait(5000);
 		_click($sfm_pg_search.btn_save);
+		
+		return $resSet;
 	};
 
-	this.customManagePermission = function(){
+	this.customManagePermission = function($standardSearch){
 		$sfm_pg_search.selectStandardSearch($standardSearch);
 		_click($sfm_pg_search.btn_customManagePermission);
 	};
@@ -79,7 +89,9 @@ var $sfm_act_search = new function sfm_search() {
 	this.selectMultipleObject = function($objArr){
 		_setSelected($sfm_pg_search.sel_objects,$objArr, true);
 		_click($sfm_pg_search.btn_bottom);
+		_wait(5000);
 		_click($sfm_pg_search.btn_objectSave);
+	
 	};
 
 	this.selectFieldOrder = function($value,$fieldArr){
@@ -158,7 +170,6 @@ var $sfm_act_search = new function sfm_search() {
 			}
 			
 		}
-		_click($sfm_pg_search.btn_objectSave);
-		_click($sfm_pg_search.btn_save);
+		_click($sfm_pg_search.btn_objectSave);	
 	};
 };

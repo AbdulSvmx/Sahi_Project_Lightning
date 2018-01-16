@@ -78,7 +78,7 @@ _click(_textbox("/sfm-text/",_near(_span("/svmx-sfmd-search-icon/"))));
 _click(_span("/svmx-sfmd-search-icon/"));
 _setValue(_textbox("/sfm-text/",_near(_span("/svmx-sfmd-search-icon/"))),$searchValue);
 _click(_span("/svmx-sfmd-search-icon/"));
-_click(_div($searchValue));
+_click(_div($searchValue,_near(_span("Select"))));
 _click(_span("Select"));
 _setStrictVisibilityCheck(false);
 };
@@ -170,14 +170,11 @@ this.cleanUpfunctionold = function($value)
 		this.cleanUpfunction = function($value)
 		{
 			_click($bo_pg_search.btn_search);
-			if(_condition(_heading1("Search Results") == null))
-			{
-			_click($bo_pg_search.btn_search);
-			}
 			_wait(5000,_isVisible($bo_pg_search.btn_searchAgain));
 			for(var $i=0;$i<=5;$i++){
-				_setValue($bo_pg_search.txt_searchText,$value);
-				_click($bo_pg_search.btn_searchAgain);
+					_wait(5000,_isVisible($bo_pg_search.txt_searchText));
+					_setValue($bo_pg_search.txt_searchText,$value);
+					_click($bo_pg_search.btn_searchAgain);
 				if(_isVisible(_link($value))){
 					_click(_link($value));
 					_wait(5000, _isVisible($bo_pg_search.btn_delete));
@@ -193,7 +190,15 @@ this.cleanUpfunctionold = function($value)
 			}
 			
 		};
-
-
+		
+		this.deleteWorkOrder = function($userName,$password,$value,$nameSpace){
+			var $delete_Query = "delete [Select Id from " +$nameSpace+"__Service_Order__c where Name = "+$value+"];";
+			var $delete_data = $op_act_sForceApiCall.sForceQuery($userName, $password, $delete_Query , "create");
+		};
+		
+		this.deleteActivityMaster = function($userName,$password,$value,$nameSpace){
+			var $delete_Query = "delete[Select Id from " +$nameSpace+"__Activity_Master__c where Name = '"+$value+"'];";
+			var $delete_data = $op_act_sForceApiCall.sForceQuery($userName, $password, $delete_Query , "create");
+		};
 
 };

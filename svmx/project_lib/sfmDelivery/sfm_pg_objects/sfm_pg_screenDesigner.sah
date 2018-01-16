@@ -7,6 +7,13 @@ var $sfm_pg_screenDesigner = new function sfm_pg_screenDesigner(){
 	this.txt_searchField= _f("main").s_textinput("searchText[4]");
 	this.lbl_billingType= _f("main").s_label("Billing Type");
 	this.lbl_account= _f("main").s_label("Account");
+	
+	this.lbl_addproduct = _f("main").s_label("Product[1]"); 
+	this.btn_ConfLookup = _f("main").s_button("Configure Lookup");
+	this.sel_LkupTemplate = _f("main").s_combobox("searchCombo[4]");
+	this.btn_Select = _f("main").s_button("Select");
+	
+	
 	this.chk_readOnly= _f("main").s_checkbox("Read Only");
 	this.chk_required= _f("main").s_checkbox("Required");
 	this.chk_allowNew= _f("main").s_checkbox("Allow New");
@@ -15,8 +22,14 @@ var $sfm_pg_screenDesigner = new function sfm_pg_screenDesigner(){
 	this.lbl_part= _f("main").s_label("Part");
 	this.section_Parts= _f("main").s_richtext("Work Detail (Work Order)");
 	this.sel_allowZeroLines= _f("main").s_combobox("ComboBox8505");
-	this.sel_allowMultiAdd= _f("main").s_combobox("ComboBox8513");
+	this.sel_allowMultiAdd= _f("main").s_combobox("/ComboBox/").near(_f("main").formitemlabel("Allow Multi Add Using"));
 	this.lbl_contact= _f("main").s_label("Contact");
 	this.lbl_autoContact= _f("main").s_label("AutoContact[1]");
+	this.lkp_parts = _f("main").s_button("refBtn");
+	this.sel_rowsToDisplay = _f("main").s_combobox("noOfRec");
+	this.txt_lookupName = _f("main").s_textinput("Save this Lookup as");
+	this.txt_lookupId = _f("main").s_textinput("Input ID Here[4]");
+	this.btn_lookupSave = _f("main").s_button("Save As[8]");
+	this.btn_lookupClose = _f("main").s_button("closeButton");
 	
 };

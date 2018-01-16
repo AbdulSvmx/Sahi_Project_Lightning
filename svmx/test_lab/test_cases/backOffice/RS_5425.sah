@@ -2,76 +2,62 @@
 
 var $RS_5425 = _testcase("RS_5425", "On adding new step for a SFW which is hidden");
 $RS_5425.start();
-
 _setSpeed(100);
-$bo_act_login.login($g_url, $bac_unBase, $bac_pwdBase);
-	//Create a SFM orders test data
-	var $sourceName = "Work Order";
-	var $targetName = "Work Order";
-	var $QualCriteriaName = "Work Detail (Work Order)";
-	var $sfmPageLayoutName = "SFMIBTEST";
-	var $wizardSelectObjectName = "Work Order";
-	var $wizardTitleName = "SFMIBTEST1";
-	var $wizardIDName = "SFMIBTEST1"; 	
-	var $searchText1 =$custActname;
-	var $isOnlineHideRequired = true;
-	var $isOnlineRequired = false;	
-	var $workOrderName = "WO-00000000";
-	var $sfmName="My SFM";
-	var $wizardStepType="SFM";
-	var $wizardStepName=$sfmName;
-	var $executionMode="Interactive";
-	var $custActname="My Custom Action";
-	var $custActID="My_custom_Action";
-	var $url="https://www.google.co.in/";
-	var $objectName="Work Order";
-	var $actnType= "Others";
-	var $searchText2=$sfmName;
-	
-	$bo_act_customAction.createNewCustomAction($custActname,$custActID,$url,$objectName,$actnType);
-	$bo_act_SFM.createNewSourceAndHeaderChildSFM($sfmName,$sourceName,$targetName,$QualCriteriaName,$sfmPageLayoutName);
-	
-	if($bo_act_navigation.navigateToSfmWizard()){
-		$bo_act_SFW.addSFMWizardGeneralInfo($wizardTitleName,$wizardIDName);
-		//$bo_act_SFW.addCustomActionToWizard($actnType,$custActname);
-		$bo_act_SFW.addNewManageWizardSteps($wizardStepType,$wizardStepName,$executionMode);
-		
-	}else{
-		_fail("Navigation To SFM Wizard Failed");
-		_stopTestCase();
-	};
+var $sfmName ="Capture Downtime";
+	var $wizardname=$bo_act_common.generateRandomName("5425SFW");
+	var	$wizardID=$wizardname;
+	var $stndSFMName="Add/Edit Products Serviced";
+	var $searchText=$wizardname;
+	var $objName="Work Order";	
+	var $fieldActnType="SFM";
 
-	if($bo_act_navigation.navigateToSfmAppPermission()){
-		$bo_act_SFMAppPermission.setSFMAppPermission($wizardTitleName,$isOnlineHideRequired,$isOnlineRequired);
-
-	}else{
-		_fail("Navigation To SFM App Permission Failed");
-		_stopTestCase();
-	};
-
-	
-if(!($bo_act_sfmVerifyWorkOrder.verifyWorkOrderOnlineDisplay($sfmName,$workOrderName))){
-		
-		_log("SFM does not display!!!");
-
-		}else{
-		_fail("SFM is displayed");
-		_stopTestCase();
-	};
+	var $actnName2=$sfmName;
+	var $actnName1=$stndSFMName;
+	var $actnName2=$sfmName;
+	var $executionMode = "Interactive";
+	var $processType="SFM Wizards";
+	_setSpeed(100);
+	$bo_act_login.login($g_url, $bac_unBase, $bac_pwdBase);
+//_div("svmx-grid-checkheader")
+	//***Navigate SFm Wizard->Create new Wizard->add standard SFM-*************
 	$bo_act_navigation.navigateToSfmWizard();
-	$bo_act_SFW.editWizard();
-	$bo_act_SFW.addCustomActionToWizard($actnType,$custActname);
-if(!($bo_act_sfmVerifyWorkOrder.verifyWorkOrderOnlineDisplay($custActname,$workOrderName))){
-		
-		_log("custom action does not display!!!");
+	$bo_act_SFW.createWizardGeneralInfo($objName,$wizardname,$wizardID);
+	$bo_act_SFW.createWizardStep($fieldActnType,$actnName1,$executionMode);
+	_wait(2000);
+//*******Navigate to SFM App Permission and disable the permission for SFM wizard created above**********
+	$bo_act_navigation.navigateToSfmAppPermission();
+	 $bo_act_SFMAppPermission.genericSearchInAppPermission($processType,$objName,$searchText);
+if(_isVisible(_div("svmx-grid-checkheader"))){
+	_click(_div("svmx-grid-checkheader"));
+}
+	$bo_act_SFMAppPermission.disableAppPermission();
+//Navigate back to SFM Wizard and Add a new step to existing Wizard created above*****
+	$bo_act_SFW.editWizard($objName,$wizardID);
+	$bo_act_SFW.createWizardStep($fieldActnType,$actnName2,$executionMode);
 
-		}else{
-		_fail("custom action is displayed");
-		_stopTestCase();
-	}
+//*****Launch the Wizard in delivery and verify its visibility**********
+	$bo_act_sfmVerifyWorkOrder.verifyWizardOnWOObj($sfmName);
+	_wait(2000);
+	$bo_act_sfmVerifyWorkOrder.wizardButtonNotVisible($sfmName);
+//****SFM App Permission->Enable to App permission for the wizard created above****
+	$bo_act_navigation.navigateToSfmAppPermission();
+	 $bo_act_SFMAppPermission.genericSearchInAppPermission($processType,$objName,$searchText);
+	_click(_div("svmx-grid-checkheader"));
+	_click($bo_pg_sfmAppPermissionD.btn_clickSaveAppPermission);
+	_wait(3000);
+	_click($bo_pg_sfmAppPermissionD.popUpOK);
+	var $isvisible = _exists(_div("App Permissions saved successfully"));
 
+//Again Launch the Wizard in Delivery, verify the visibility*****
+	$bo_act_sfmVerifyWorkOrder.verifyWizardOnWOObj($sfmName);
+	_wait(2000);
+	$bo_act_sfmVerifyWorkOrder.wizardButtonVisible($sfmName);
+	
+//****Delete The Wizard Created*******
 
-$RS_5425.end();
+	$bo_act_SFW.deleteWizards( $objName,$wizardID);
+	_setSpeed(100);
+	$RS_5425.end();
 	
 	
 	

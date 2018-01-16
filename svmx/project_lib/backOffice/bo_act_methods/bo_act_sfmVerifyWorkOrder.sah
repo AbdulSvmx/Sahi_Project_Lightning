@@ -13,7 +13,7 @@ var $bo_act_sfmVerifyWorkOrder= new function bo_act_sfmVerifyWorkOrder() {
 	this.clickSpecificWorkOrder = function($workOrderName){
 	_click(_link($workOrderName));
 	};
-this.verifyWizardOnPMPObj=function($sfmName){
+	this.verifyWizardOnPMPObj=function($sfmName){
 	_click($bo_pg_sfmVerifyWorkOrder.img_allTab);
 	//_wait(2000);
 	_click($bo_pg_sfmVerifyWorkOrder.lnk_objPMP);
@@ -32,14 +32,15 @@ this.verifyWizardOnWOObj=function($sfmName){
 	this.wizardButtonVerification=function($wizardname){			
 			_selectDomain("/svmx/");
 		if( _assertVisible($bo_pg_sfmVerifyWorkOrder.wizardButtonExist)){
-			//_log("SFm wizard visible");
+			_log("SFm wizard visible");
             _selectDomain();
 		}else{
-			_fail("SFM Wizard Not visible");
-			_stopTestCase();
+			//_fail("SFM Wizard Not visible");
+			//_stopTestCase();
 			_selectDomain();
 				}
 		};
+	
 	this.verifyAddEditWizardButton=function($wizardname){			
 			_selectDomain("/svmx/");
 		var $status= _isVisible($bo_pg_sfmVerifyWorkOrder.wizardButtonExist);
@@ -63,6 +64,7 @@ this.verifyWizardOnWOObj=function($sfmName){
 				_fail("Launching of wizard in delivery failed");
 			}
 		_selectDomain();
+			_wait(10000);
 		}		
 		this.wizardButtonNotVisible=function($wizardname){
 			
@@ -104,8 +106,23 @@ this.verifyWizardOnWOObj=function($sfmName){
 				_selectDomain("/svmx/");
 				_click(_button($SFMName));
 				_selectDomain();					
-			}			
-
+			}
+				this.wizardVisibility=function($wizardTitleName ){
+					_selectDomain("/svmx/");
+				var $textDisplay=_getText(_table("tbcontainer"));
+					if(!$wizardTitleName.indexOf($textDisplay) != -1){
+						_log("Wizard is visible")
+							
+					}else{
+						 _log("Wizard is not visible")
+					}		
+					 _selectDomain();				
+				}			
+					
+					this.showAllTab=function($tabName){
+						_click($bo_pg_sfmVerifyWorkOrder.img_allTab);
+						_click(_link($tabName));
+					}
 	
 	};
 
