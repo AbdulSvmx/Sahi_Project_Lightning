@@ -75,7 +75,7 @@ var $bo_act_addEditProdServDelivery=new function bo_act_addEditProdServDelivery(
 					if(mm<10){
 						mm='0'+mm;
 					} 
-					var $today = dd+'/'+mm+'/'+yyyy;
+					var $today = mm+'/'+dd+'/'+yyyy;
 					return $today;
 				};
 					//This function is to find next month today date
@@ -97,7 +97,7 @@ var $bo_act_addEditProdServDelivery=new function bo_act_addEditProdServDelivery(
 						if(mm<10){
 							mm='0'+mm;
 						} 
-						var $nextMonthToday = dd+'/'+mm+'/'+yyyy;
+						var $nextMonthToday = mm+'/'+dd+'/'+yyyy;
 						return $nextMonthToday;
 						
 					} ;		

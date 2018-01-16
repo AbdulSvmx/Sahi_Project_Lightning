@@ -60,7 +60,7 @@ _setValue(_textbox(0,_rightOf(_label("End Date and Time:"))),$bo_act_addEditProd
 		
 $bo_act_addEditProdServDelivery.addPart();
 $bo_act_addEditProdServDelivery.addLabor();
-$bo_act_addEditProdServDelivery.addExpenses();
+$bo_act_addEditProdServDelivery.addExpenses(); 
 
 _click($bo_pg_addEditProdServDelivery.icon_Save);
 
@@ -74,7 +74,16 @@ if(_assertExists(_span("Work Order"))){
 	_takeScreenShot()
 		}
 
-//*****************Deleteing testdata************
+//verify is user landed into WO page after saving main process************
+_click($bo_pg_addEditProdServDelivery.icon_Save);
+_wait(6000, _isVisible(_heading2("Work Order Detail")));
+if(_assertExists(_heading2("Work Order Detail"))){
+	_log("User successfully landed in work order detail page");
+}else{
+	_log("Error occurred, please ref screenshot for details");
+	_takeScreenShot()
+		}
+
 //*****************Deleteing testdata************
 $bo_act_navigation.navigateToSfmWizard();
 _setSelected($bo_pg_sfmWizard.sel_objPrevMaintPlan,$objName	);
