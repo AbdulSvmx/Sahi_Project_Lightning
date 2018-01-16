@@ -242,5 +242,70 @@ var $bo_act_SFM = new function bo_act_SFM() {
 		_click($bo_pg_sfmTransactionAndDesigner.btn_saveAndclose)
 		
 	}
+		this.selectTypeOfSfmTranToBeCreated=function($nameOfTranType){
+			_setSelected($bo_pg_sfmTransactionAndDesigner.lbl_checklistOb,$nameOfTranType);
+		}
+		this.createNewSFM=function($sfmName){
+			_click($bo_pg_sfmTransactionAndDesigner.btn_newSFMTransaction);
+			_wait(2000);
+			_setValue($bo_pg_sfmTransactionAndDesigner.txt_name,$sfmName);
+			_click($bo_pg_sfmTransactionAndDesigner.txt_sfmTransactionId);
+		}
+			this.enterSourceDetail=function($sourceObjName){
+			_click($bo_pg_sfmTransactionAndDesigner.selectSourceObj);
+			_setValue($bo_pg_sfmTransactionAndDesigner.selectSourceObj,"");
+			_wait(3000);
+			_setValue($bo_pg_sfmTransactionAndDesigner.selectSourceObj,$sourceObjName);
+			_setSelected($bo_pg_sfmTransactionAndDesigner.sourceComboBox,$sourceObjName);
+			_wait(3000);
+			_click($bo_pg_sfmTransactionAndDesigner.btn_popUpOK);
+			_wait(2000);
+			_click($bo_pg_sfmTransactionAndDesigner.childSource_chkBox);				
+				_wait(2000);
+			}
+				
+				
+				this.enterTargetDetail=function($targetObjName){
+					_click($bo_pg_sfmTransactionAndDesigner.sel_targetObjFld);
+					_setValue($bo_pg_sfmTransactionAndDesigner.sel_targetObjFld,"");
+					_setSelected($bo_pg_sfmTransactionAndDesigner.combo_CTRecord,$targetObjName);
+					_click($bo_pg_sfmTransactionAndDesigner.childCTRecord_chkBox);
+					_click(_f("main").s_textinput("aliasName[58]"));
+					_setValue(_f("main").s_textinput("aliasName[58]"),"parts");
+					_wait(2000);					
+				}
+			
+					this.qualifyingCriteriaHeaderFieldMap=function($mapName){
+						_click($bo_pg_sfmTransactionAndDesigner.dropDownList);
+						_setStrictVisibilityCheck(true);
+						_setSelected($bo_pg_sfmTransactionAndDesigner.dropDownList,"Work Detail (Work Order)");
+						_setStrictVisibilityCheck(false);
+						_click($bo_pg_sfmTransactionAndDesigner.btn_mappings);
+						_wait(1000);
+						_click($bo_pg_sfmTransactionAndDesigner.lbl_clkHeaderInQcPage)
+						_click($bo_pg_sfmTransactionAndDesigner.clkNewMap);	
+						_wait(2000)
+						_click($bo_pg_sfmTransactionAndDesigner.saveTheMap);
+						_setValue($bo_pg_sfmTransactionAndDesigner.saveTheMap,$mapName);
+						_click($bo_pg_sfmTransactionAndDesigner.clkNewMapID);
+						_click($bo_pg_sfmTransactionAndDesigner.clkMapSave);
+						_wait(3000);
+								  
+					}
+						
+						this.editCustomWizard=function($sfmName){
+							_click($bo_pg_sfmTransactionAndDesigner.btn_yourCustomSfmTransactions);
+							_setValue(_f("main").s_textinput("searchText[3]"),$sfmName);
+							_click(_f("main").s_label($sfmName));
+							_click($bo_pg_sfmTransactionAndDesigner.btn_screenDesigner);
+						_wait(6000,_isVisible(_f("main").tab("Screen Designer")));			
+						}
+							this.addFieldToHeaderOfScreenDesigner=function($fldName){
+								_click($bo_pg_manageWOLineUsageForSorting.sel_selHeaderOption);
+								_click($bo_pg_manageWOLineUsageForSorting.txt_searchItem);
+								_setValue($bo_pg_manageWOLineUsageForSorting.txt_searchItem,$fldName);
+								_doubleClick(_f("main").s_label($fldName));
+								_wait(1000);
+							}
 
 };

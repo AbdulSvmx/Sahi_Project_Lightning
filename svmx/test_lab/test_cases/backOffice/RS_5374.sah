@@ -60,7 +60,7 @@ _setValue(_textbox(0,_rightOf(_label("End Date and Time:"))),$bo_act_addEditProd
 		
 $bo_act_addEditProdServDelivery.addPart();
 $bo_act_addEditProdServDelivery.addLabor();
-//$bo_act_addEditProdServDelivery.addExpenses(); will be added later
+$bo_act_addEditProdServDelivery.addExpenses(); 
 
 _click($bo_pg_addEditProdServDelivery.icon_Save);
 
