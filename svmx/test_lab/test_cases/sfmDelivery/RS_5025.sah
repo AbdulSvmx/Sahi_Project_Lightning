@@ -6,7 +6,6 @@ var $RS_5025 = _testcase("RS_5025", "Verify Field Map for existing records - Hea
 $RS_5025.start();
 _setSpeed(100);
 
-
 var $sfmName=$bo_act_common.generateRandomName("5025SFM");
 //change  the name of $sfmTemplateSaveAsName before execution.
 var $sfmTemplateSaveAsName=$bo_act_common.generateRandomName("5025Temp");
@@ -18,7 +17,7 @@ var $wizardID=$wizardname;
 var $executionMode="Interactive";
 var $fieldActnType="SFM";
 var $actnName=$sfmName;
-var $wizardButtonName=$sfmName
+var $wizardButtonName=$sfmName;
 	
 
 
@@ -91,18 +90,21 @@ if(_isVisible($bo_pg_sfmVerifyWorkOrder.orderStatus)){
 }
 
 if(_isVisible($bo_pg_sfmVerifyWorkOrder.isExportedBeforeClick)){
-	_doubleClick($bo_pg_sfmVerifyWorkOrder.isExportedBeforeClick);
-	var $isExported1=_getText($bo_pg_sfmVerifyWorkOrder.isExportedAfterClick);	
+	//_doubleClick($bo_pg_sfmVerifyWorkOrder.isExportedBeforeClick);
+	var $isExported1=_getText($bo_pg_sfmVerifyWorkOrder.isExportedBeforeClick);	
 }
 if(_isVisible($bo_pg_sfmVerifyWorkOrder.serviceDuration)){
-	var $servDuration1=_getText($bo_pg_sfmVerifyWorkOrder.serviceDuration);
+	var $temp=_getText($bo_pg_sfmVerifyWorkOrder.serviceDuration);	
+		var $res = $temp.replace(",", "");
+		var $servDuration1=Math.round($res);	
 }
 //****Click on Wizard and Save it without entering anything			
 			$bo_act_sfmVerifyWorkOrder.clkOnWizard($wizardButtonName);
-			while(_isVisible(_image("gif[2]"))==true){
-				_click(_image("gif[3]"));
+//if(_isVisible(_image("svmx-action-col-icon svmx-action-col-0   svmx-sfmd-edit-icon")==true)){
+			while(_isVisible(_image("svmx-action-col-icon svmx-action-col-0   svmx-sfmd-edit-icon"))==true){
+				_click(_image("svmx-action-col-icon svmx-action-col-1   svmx-sfmd-delete-icon"));
 			}
-	
+//}
 			_click($bo_pg_addEditProdServDelivery.icon_Save);
 			_wait(6000, _isVisible(_heading2("Work Order Detail")));
 
@@ -111,7 +113,7 @@ if(_isVisible($bo_pg_sfmVerifyWorkOrder.serviceDuration)){
 
 //***********Get Value of fields account ,contact,First Assigned Date,problem description,order status,Is exported,service duration after saving Wizard in Delivery***********
 if(_isVisible($bo_pg_sfmVerifyWorkOrder.getDisplayedAccount)){
-			var $accountNum2=_getText($bo_pg_sfmVerifyWorkOrder.getDisplayedAccount);
+	var $accountNum2=_getText($bo_pg_sfmVerifyWorkOrder.getDisplayedAccount);
 }
 
 if(_isVisible($bo_pg_sfmVerifyWorkOrder.getDisplayContact)){
@@ -127,11 +129,13 @@ if(_isVisible($bo_pg_sfmVerifyWorkOrder.orderStatus)){
 	var $orderStatus2=_getText($bo_pg_sfmVerifyWorkOrder.orderStatus);
 }
 if(_isVisible($bo_pg_sfmVerifyWorkOrder.isExportedBeforeClick)){
-	_doubleClick($bo_pg_sfmVerifyWorkOrder.isExportedBeforeClick);
-	var $isExported2=_getText($bo_pg_sfmVerifyWorkOrder.isExportedAfterClick);	
+	//_doubleClick($bo_pg_sfmVerifyWorkOrder.isExportedBeforeClick);
+	var $isExported2=_getText($bo_pg_sfmVerifyWorkOrder.isExportedBeforeClick);	
 }
 if(_isVisible($bo_pg_sfmVerifyWorkOrder.serviceDuration)){
-	var $servDuration2=_getText($bo_pg_sfmVerifyWorkOrder.serviceDuration);
+	var $temp=_getText($bo_pg_sfmVerifyWorkOrder.serviceDuration);	
+		var $res = $temp.replace(",", "");
+		var $servDuration2=Math.round($res);
 }
 
 //Verify Work Order and it corresponding fields(Created above) for scenario of before Save and after save
@@ -171,7 +175,12 @@ if(_isVisible($bo_pg_sfmVerifyWorkOrder.serviceDuration)){
 		_wait(6000,_isVisible(_f("main").tab("Screen Designer")));
 		$bo_act_SFM.addFieldToHeaderOfScreenDesigner("Contact");
 		$bo_act_SFM.addFieldToHeaderOfScreenDesigner("First Assigned DateTime");
-		$bo_act_SFM.addFieldToHeaderOfScreenDesigner("Service Duration (in Seconds)");
+		_click($bo_pg_manageWOLineUsageForSorting.sel_selHeaderOption);
+		_click($bo_pg_manageWOLineUsageForSorting.txt_searchItem);
+		_setValue($bo_pg_manageWOLineUsageForSorting.txt_searchItem,"Service Duration");
+		_doubleClick(_f("main").s_label("Service Duration (in Seconds)"));
+		_wait(1000);
+		
 		$bo_act_SFM.addFieldToHeaderOfScreenDesigner("Problem Description");
 		$bo_act_SFM.addFieldToHeaderOfScreenDesigner("Order Status");
 		$bo_act_SFM.addFieldToHeaderOfScreenDesigner("Is Exported");
@@ -181,24 +190,47 @@ if(_isVisible($bo_pg_sfmVerifyWorkOrder.serviceDuration)){
 		_click($bo_pg_sfmTransactionAndDesigner.btn_saveAndclose);
 		_wait(3000);
 
-
+//Go to Wizard, Click in Wizard, Fetch the data displayed on specified fields and save
 $bo_act_sfmVerifyWorkOrder.verifyWizardOnWOObj($wizardButtonName);
 $bo_act_sfmVerifyWorkOrder.clkOnWizard($wizardButtonName);
-			while(_isVisible(_image("gif[2]"))==true){
-				_click(_image("gif[3]"));
-			}
-	
+
+var $actValConsole=_getText($bo_pg_sfmVerifyWorkOrder.accountValueInConsole);
+var $contValConsole=_getText($bo_pg_sfmVerifyWorkOrder.contactValueInConsole);	
+var $srvDurValConsole=_getText($bo_pg_sfmVerifyWorkOrder.servDurationInConsole);
+
+var $prbDesValConsole=_getText($bo_pg_sfmVerifyWorkOrder.probDescripInConsole);
+var $ordStaValConsole=_getText($bo_pg_sfmVerifyWorkOrder.ordStatusInConsole);
+var $fstAssignedValConsole=_getText($bo_pg_sfmVerifyWorkOrder.fstAssnedDateTimeInConsole);
+_click($bo_pg_addEditProdServDelivery.icon_Save);
+_wait(6000, _isVisible(_heading2("Work Order Detail")));
+
+//*******Compare the abve fetched data with before saving data and after saving data.****
+//_assertEqual( $actValConsole,$accountNum1,"Account Num not Matching");
+_assertEqual( $contValConsole,$contactNum1,"Contact Num not Matching");
+_assertEqual($srvDurValConsole,$servDuration1,"Service duration not Matching");
+_assertEqual($prbDesValConsole,$probDes1,"Problem Description is not Matching");
+_assertEqual($ordStaValConsole,$orderStatus1,"Order Status is not Matching");
+_assertEqual($fstAssignedValConsole,$firstAsignedDate1,"First Assigned Date is not Matching");
+//_assertEqual( $actValConsole,$accountNum2,"Account Num not Matching");
+_assertEqual( $contValConsole,$contactNum2,"Contact Num not Matching");
+_assertEqual($srvDurValConsole,$servDuration2,"Service duration not Matching");
+_assertEqual($prbDesValConsole,$probDes2,"Problem Description is not Matching");
+_assertEqual($ordStaValConsole,$orderStatus2,"Order Status is not Matching");
+_assertEqual($fstAssignedValConsole,$firstAsignedDate2,"First Assigned Date is not Matching");
 
 
-			_click($bo_pg_addEditProdServDelivery.icon_Save);
-			_wait(6000, _isVisible(_heading2("Work Order Detail")));
+//*****************Deleteing testdata************
+$bo_act_navigation.navigateToSfmWizard();
+_setSelected($bo_pg_sfmWizard.sel_objPrevMaintPlan,$objName	);
+$bo_act_SFW.deleteWizard($wizardname);	
+$bo_act_navigation.navigateToSfmTransactionDesigner();
+$bo_act_SFM.deleteSFM($sfmName);
+_setSpeed(100);
+
+$RS_5025.end();
 
 
-if ( $workOderNum1!=$workOderNum2){
-					_log("New WorkOrder Created");
-				}else{
-					_log("New WO is not generated");
-				}
+
 
 
 

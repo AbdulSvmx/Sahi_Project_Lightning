@@ -1,0 +1,64 @@
+var $rs_6960 = _testcase("RS-6960","Verify lookup form-fill functionality in Multi Add");
+$rs_6960.start();
+//Login to Servicemax Org
+$bo_act_login.login("https://test.salesforce.com/","sysadmin01@sfdautomation.com","maxplore2");
+//Clone and add fields in Workdetail 
+var $SFMProcessName = $bo_act_common.generateRandomName("SFDProcess_Automation_RA");
+var $SFMPagelayouName = $bo_act_common.generateRandomName("Pagelayout_Automation_RA");
+var $SFMWizardName = $bo_act_common.generateRandomName("WOWizard_Automation_RA");
+var $mappingName = $bo_act_common.generateRandomName("Mapping");
+$sfm_act_configureSFMmapping.navigateToSfmMappings($mappingName);
+$sfm_act_cloneSfmAddNewFields.onlycloneSFM("Manage Work Order Lines - Usage",$SFMProcessName,false,$SFMPagelayouName,"SVMXSTD: Manage WO Usage Lines",$mappingName);
+//Create New SFM Wizard
+$bo_act_navigation.navigateToSfmWizard();
+_wait(3000);
+$sfm_act_createCustomWizard.chooseObject("Work Order");
+_wait(3000);
+$sfm_act_createCustomWizard.addManageWizSteps($SFMWizardName,"SFM",$SFMProcessName,"Sysadmin01 Group");
+_wait(3000);
+//Create a new Product
+$productCode=["Prod001","Prod002"];
+$productFamily=["Laptop","Laptop"];
+$productCost=["75000","10000"];
+var $productDesc = $bo_act_common.generateRandomName("Product Description_Aumation");
+var $productDesc1 = $bo_act_common.generateRandomName("Product Description");
+var $prodName=$sfm_act_configureSFMmapping.createNewProduct($productCode[0], $productFamily[0],$productDesc, $productCost[0]);
+var $prod2Name=$sfm_act_configureSFMmapping.createNewProduct($productCode[1], $productFamily[1],$productDesc1, $productCost[1]);
+//Create new blank WO	
+$sfm_act_createCustomWizard.createBlankWo();
+_wait(10000);
+//Launch process
+$sfm_act_createCustomWizard.clickWizardBtn($SFMProcessName);
+//Select the created Product in workdetail
+_selectDomain();
+$sfm_act_verifySFDFormfill.verifyExtendedEditFormfill($prodName);
+if($workDes==$productDesc && $billableprice==$productCost[0])
+	 
+{
+	_click(_span("Cancel"));
+	_click(_span("svmx-btn-icon svmx-sfmd-quicksave-icon"));
+	_wait(10000);
+	_click(_image("svmx-action-col-icon svmx-action-col-0   svmx-sfmd-edit-icon"));
+	_wait(3000);
+	 _click(_span("svmx-btn-icon svmx_lookup_icon[1]"));
+	 _setValue(_textbox("sfm-text-1279-inputEl"),$prod2Name);
+	_wait(3000);
+		_click(_span("sfm-button-1281-btnIconEl"));
+		_wait(3000);
+		_click(_div("svmx-grid-row-checker"));
+		_wait(1000);
+		_click(_span("Select"));
+		if($workDes==$productDesc[1] && $billableprice==$productCost[1])
+			 
+		{
+			_log("Passed");
+		}
+		else{
+		_log("Failed");
+		}
+}
+else{
+_log("Failed");
+}
+
+$rs_6960.end();
