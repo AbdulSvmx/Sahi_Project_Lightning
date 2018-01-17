@@ -247,7 +247,7 @@ var $bo_act_SFM = new function bo_act_SFM() {
 		}
 		this.createNewSFM=function($sfmName){
 			_click($bo_pg_sfmTransactionAndDesigner.btn_newSFMTransaction);
-			_wait(2000);
+			_wait(10000);
 			_setValue($bo_pg_sfmTransactionAndDesigner.txt_name,$sfmName);
 			_click($bo_pg_sfmTransactionAndDesigner.txt_sfmTransactionId);
 		}
@@ -293,6 +293,18 @@ var $bo_act_SFM = new function bo_act_SFM() {
 								  
 					}
 						
+						this.qcExistingValueMap=function($mapName){
+							_click($bo_pg_sfmTransactionAndDesigner.dropDownList);
+						_setStrictVisibilityCheck(true);
+						_setSelected($bo_pg_sfmTransactionAndDesigner.dropDownList,"Work Detail (Work Order)");
+						_setStrictVisibilityCheck(false);
+						_click($bo_pg_sfmTransactionAndDesigner.btn_mappings);
+						_wait(1000);
+						_click($bo_pg_sfmTransactionAndDesigner.lbl_clkHeaderInQcPage)
+							_setSelected(_f("main").s_combobox("searchCombo[1]"), $mapName);
+							_wait(5000);
+						}
+						
 						this.editCustomWizard=function($sfmName){
 							_click($bo_pg_sfmTransactionAndDesigner.btn_yourCustomSfmTransactions);
 							_setValue(_f("main").s_textinput("searchText[3]"),$sfmName);
@@ -306,6 +318,41 @@ var $bo_act_SFM = new function bo_act_SFM() {
 								_setValue($bo_pg_manageWOLineUsageForSorting.txt_searchItem,$fldName);
 								_doubleClick(_f("main").s_label($fldName));
 								_wait(1000);
+							}
+								
+								this.qualifyingCriteriaHeaderValueMapTypeTextBox=function($srchFld,$srchValue){
+									_setValue(_f("main").s_textinput("filterInput"), $srchFld);
+									if(_isVisible(_f("main").s_togglebutton(54))){
+									   _click(_f("main").s_togglebutton(54));
+									_wait(5000);
+									_setValue(_f("main").s_textinput(130),$srchValue)
+									}else if(_isVisible(_f("main").s_togglebutton(3))){
+									   _click(_f("main").s_togglebutton(3));
+									_setValue(_f("main").s_textinput(130),$srchValue)
+									}else{
+										_click(_f("main").s_togglebutton(56));
+										_setValue(_f("main").s_textinput(130),$srchValue)
+											_click($bo_pg_sfmTransactionAndDesigner.clkMapSave);
+											_wait(3000);
+										}	
+								}
+									
+							this.qualifyingCriteriaHeaderValueMapTypeDropdown=function($srchFld,$srchValue){
+								_setValue(_f("main").s_textinput("filterInput"), $srchFld);
+									if(_isVisible(_f("main").s_togglebutton(54))){
+									   _click(_f("main").s_togglebutton(54));
+									_wait(5000);
+									_setSelected(_f("main").s_combobox("valuesCombo[53]"), $srchValue);
+									}else if(_isVisible(_f("main").s_togglebutton(3))){
+									   _click(_f("main").s_togglebutton(3));
+									_setSelected(_f("main").s_combobox("valuesCombo[53]"), $srchValue);
+									}else{
+									_click(_f("main").s_togglebutton(56));
+									_setSelected(_f("main").s_combobox("valuesCombo[53]"), $srchValue);
+										_click($bo_pg_sfmTransactionAndDesigner.clkMapSave);
+										_wait(3000);
+		}
+								
 							}
 
 };
