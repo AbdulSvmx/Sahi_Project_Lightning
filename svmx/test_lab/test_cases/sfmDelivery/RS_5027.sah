@@ -2,7 +2,7 @@
 
 //author - Mamata Rout
 
-var $RS_5027 = _testcase("RS_5027", "Verify Value Map for existing records - Header");
+var $RS_5027 = _testcase("RS_5027", "Verify Value Map for NEW records - Header");
 $RS_5027.start();
 _setSpeed(100);
 

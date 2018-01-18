@@ -29,6 +29,12 @@ var $bo_pg_sfmVerifyWorkOrder= new function bo_pg_sfmVerifyWorkOrder() {
 	this.probDescripInConsole=_textarea(0,_rightOf(_label("Problem Description:")));
 	this.ordStatusInConsole=_textbox(0,_rightOf(_label("Order Status:")));
 	this.fstAssnedDateTimeInConsole=_textbox(0,_rightOf(_label("First Assigned DateTime:")));
+	this.mapping=_f("main").tab("Mapping(s)")
+	this.fieldMapForExistingChild=_f("main").tab("Field Map For Existing Records")
+	this.valueMapForNewRecordChild=_f("main").tab("Value Map For New Records")
+	this.newValueMap=_click(_f("main").s_button("New[1]"));
+	
+		
 	
 			
 			
