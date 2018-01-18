@@ -1,23 +1,25 @@
 //_includeOnce("../../../references/references.js");
 
-//author - Mamata Rout
+//author - Mamata Rout *This testcase will be updated later as there is some issue in BO, which I discussed with team and 
+//As per BO team, the issue is still under discussion(not yet confirmed that the issue is valid or invalid
 
-var $RS_5025 = _testcase("RS_5025", "Verify Field Map for existing records - Header");
-$RS_5025.start();
+var $RS_5029 = _testcase("RS_5029", "Verify Value Map for NEW records in Child.");
+$RS_5029.start();
 _setSpeed(100);
 
-var $sfmName=$bo_act_common.generateRandomName("5025SFM");
+
+var $sfmName=$bo_act_common.generateRandomName("5029SFM");
 //change  the name of $sfmTemplateSaveAsName before execution.
-var $sfmTemplateSaveAsName=$bo_act_common.generateRandomName("5025Temp");
-var $mapName=$bo_act_common.generateRandomName("5025Map");
+var $sfmTemplateSaveAsName=$bo_act_common.generateRandomName("5029Temp");
+var $mapName=$bo_act_common.generateRandomName("5029Map");
 var $objName="Work Order";
-var $wizardname=$bo_act_common.generateRandomName("5025Wizard");
+var $wizardname=$bo_act_common.generateRandomName("5029Wizard");
 var $wizardID=$wizardname;
 
 var $executionMode="Interactive";
 var $fieldActnType="SFM";
 var $actnName=$sfmName;
-var $wizardButtonName=$sfmName;
+var $wizardButtonName=$sfmName
 	
 
 
@@ -31,8 +33,18 @@ $bo_act_login.login($g_url, $bac_unBase, $bac_pwdBase);
 			$bo_act_SFM.enterTargetDetail($objName);
 //**********IN QC creating header field map of all field data type**************
 			_click($bo_pg_sfmTransactionAndDesigner.btn_qualifyingCriteriaAndFieldMapping);
+			_click(_f("main").tab("Mapping(s)"));
+			$bo_act_SFM.qcExistingValueMap("5029Mapping");
+
+
+/* ****************PLEASE DO NOT DELETE THIS CODE***********************************************
 
 			$bo_act_SFM.qualifyingCriteriaHeaderFieldMap($mapName);
+			$bo_act_SFM.qualifyingCriteriaHeaderValueMapTypeTextBox("Service Duration","3589")
+				$bo_act_SFM.qualifyingCriteriaHeaderValueMapTypeTextBox("Problem Description","No Problem")
+			$bo_act_SFM.qualifyingCriteriaHeaderValueMapTypeDropdown("First Assigned DateTime","Today")
+				$bo_act_SFM.qualifyingCriteriaHeaderValueMapTypeDropdown("Order Status","Open")
+***********************************************************************************************/
 
 
 //********** Create a new template and add field Account to its header and save the template and SFM process************
@@ -69,30 +81,18 @@ $bo_act_login.login($g_url, $bac_unBase, $bac_pwdBase);
 if(_isVisible($bo_pg_sfmVerifyWorkOrder.getDisplayedAccount)){
 		var $accountNum1=_getText($bo_pg_sfmVerifyWorkOrder.getDisplayedAccount);
 }
-if(_isVisible($bo_pg_sfmVerifyWorkOrder.getDisplayContact)){
-	var $contactNum1=_getText($bo_pg_sfmVerifyWorkOrder.getDisplayContact);
-}
+
 if(_isVisible($bo_pg_sfmVerifyWorkOrder.firstAssignedDateTime)){
 	var $firstAsignedDate1=_getText($bo_pg_sfmVerifyWorkOrder.firstAssignedDateTime);
 }
 if(_isVisible($bo_pg_sfmVerifyWorkOrder.problemDescription)){
-	var $probDes1=_getText($bo_pg_sfmVerifyWorkOrder.problemDescription);
-	if($probDes1=""){
-		_doubleClick($bo_pg_sfmVerifyWorkOrder.problemDescription);
-		_setValue($bo_pg_sfmVerifyWorkOrder.describeProblem,"No Problem");
-		_click($bo_pg_sfmVerifyWorkOrder.btn_ok);
-		_click($bo_pg_sfmVerifyWorkOrder.btn_save);
-	}
-		
+	var $probDes1=_getText($bo_pg_sfmVerifyWorkOrder.problemDescription);		
 }
 if(_isVisible($bo_pg_sfmVerifyWorkOrder.orderStatus)){
 	var $orderStatus1=_getText($bo_pg_sfmVerifyWorkOrder.orderStatus);
 }
 
-if(_isVisible($bo_pg_sfmVerifyWorkOrder.isExportedBeforeClick)){
-	//_doubleClick($bo_pg_sfmVerifyWorkOrder.isExportedBeforeClick);
-	var $isExported1=_getText($bo_pg_sfmVerifyWorkOrder.isExportedBeforeClick);	
-}
+
 if(_isVisible($bo_pg_sfmVerifyWorkOrder.serviceDuration)){
 	var $temp=_getText($bo_pg_sfmVerifyWorkOrder.serviceDuration);	
 		var $res = $temp.replace(",", "");
@@ -116,22 +116,33 @@ if(_isVisible($bo_pg_sfmVerifyWorkOrder.getDisplayedAccount)){
 	var $accountNum2=_getText($bo_pg_sfmVerifyWorkOrder.getDisplayedAccount);
 }
 
-if(_isVisible($bo_pg_sfmVerifyWorkOrder.getDisplayContact)){
-	var $contactNum2=_getText($bo_pg_sfmVerifyWorkOrder.getDisplayContact);
-}
+
 if(_isVisible($bo_pg_sfmVerifyWorkOrder.firstAssignedDateTime)){
 	var $firstAsignedDate2=_getText($bo_pg_sfmVerifyWorkOrder.firstAssignedDateTime);
+	var res = $firstAsignedDate2.split(" ");
+	
+	var $res = $firstAsignedDate2.split(" ");
+	var $temp=$res[0];
+	var $temp1=$temp.split("/");
+	var $temp2=$temp1[0];
+	var $temp3=$temp1[1];
+
+	if($temp2<10){
+	$temp2='0'+$temp1[0];
+	}
+	if($temp3<10){
+	$temp3='0'+$temp1[1];
+	}
+	$firstAsignedDate2=$temp2+"/"+$temp3+"/"+$temp1[2];	
 }
+
 if(_isVisible($bo_pg_sfmVerifyWorkOrder.problemDescription)){
 	var $probDes2=_getText($bo_pg_sfmVerifyWorkOrder.problemDescription);
 }
 if(_isVisible($bo_pg_sfmVerifyWorkOrder.orderStatus)){
 	var $orderStatus2=_getText($bo_pg_sfmVerifyWorkOrder.orderStatus);
 }
-if(_isVisible($bo_pg_sfmVerifyWorkOrder.isExportedBeforeClick)){
-	//_doubleClick($bo_pg_sfmVerifyWorkOrder.isExportedBeforeClick);
-	var $isExported2=_getText($bo_pg_sfmVerifyWorkOrder.isExportedBeforeClick);	
-}
+
 if(_isVisible($bo_pg_sfmVerifyWorkOrder.serviceDuration)){
 	var $temp=_getText($bo_pg_sfmVerifyWorkOrder.serviceDuration);	
 		var $res = $temp.replace(",", "");
@@ -141,28 +152,18 @@ if(_isVisible($bo_pg_sfmVerifyWorkOrder.serviceDuration)){
 //Verify Work Order and it corresponding fields(Created above) for scenario of before Save and after save
 				if ( $workOderNum1!=$workOderNum2){
 					_log("New WorkOrder Created");
-					if($accountNum1==$accountNum2){
+					if($accountNum1!=$accountNum2){
 						_log("Account Matched");
-					}
-					if($contactNum1==$contactNum2){
-						_log("Contact Num Matched");
-					}
-					if($firstAsignedDate1==$firstAsignedDate2){
+					}					
+					if($firstAsignedDate1!=$firstAsignedDate2){
 						_log("First Assigned Date Matched");
 					}
-					if($probDes1==$probDes2){
+					if($probDes1!=$probDes2){
 						_log("Problem Description Matched");
 					}
 					if($orderStatus1==$orderStatus2){
 						_log("Order Status Matched");
-					}
-					if($isExported1==$isExported2){
-						_log("Is Exported value Matched");
-					}
-					if($servDuration1==$servDuration1){
-						_log("Service duration Matched");
-					}
-						
+					}						
 				}else{
 					_log("New WO is not generated");
 				}
@@ -173,7 +174,7 @@ if(_isVisible($bo_pg_sfmVerifyWorkOrder.serviceDuration)){
 		$bo_act_navigation.navigateToSfmTransactionDesigner();
 		$bo_act_SFM.editCustomWizard($sfmName);
 		_wait(6000,_isVisible(_f("main").tab("Screen Designer")));
-		$bo_act_SFM.addFieldToHeaderOfScreenDesigner("Contact");
+		//$bo_act_SFM.addFieldToHeaderOfScreenDesigner("Contact");
 		$bo_act_SFM.addFieldToHeaderOfScreenDesigner("First Assigned DateTime");
 		_click($bo_pg_manageWOLineUsageForSorting.sel_selHeaderOption);
 		_click($bo_pg_manageWOLineUsageForSorting.txt_searchItem);
@@ -183,19 +184,18 @@ if(_isVisible($bo_pg_sfmVerifyWorkOrder.serviceDuration)){
 		
 		$bo_act_SFM.addFieldToHeaderOfScreenDesigner("Problem Description");
 		$bo_act_SFM.addFieldToHeaderOfScreenDesigner("Order Status");
-		$bo_act_SFM.addFieldToHeaderOfScreenDesigner("Is Exported");
+	
 		
 		
 		_click($bo_pg_sfmTransactionAndDesigner.btn_pageLayoutSave);
 		_click($bo_pg_sfmTransactionAndDesigner.btn_saveAndclose);
 		_wait(3000);
 
-//Go to Wizard, Click in Wizard, Fetch the data displayed on specified fields and save
+
 $bo_act_sfmVerifyWorkOrder.verifyWizardOnWOObj($wizardButtonName);
 $bo_act_sfmVerifyWorkOrder.clkOnWizard($wizardButtonName);
 
-var $actValConsole=_getText($bo_pg_sfmVerifyWorkOrder.accountValueInConsole);
-var $contValConsole=_getText($bo_pg_sfmVerifyWorkOrder.contactValueInConsole);	
+	
 var $srvDurValConsole=_getText($bo_pg_sfmVerifyWorkOrder.servDurationInConsole);
 
 var $prbDesValConsole=_getText($bo_pg_sfmVerifyWorkOrder.probDescripInConsole);
@@ -204,16 +204,12 @@ var $fstAssignedValConsole=_getText($bo_pg_sfmVerifyWorkOrder.fstAssnedDateTimeI
 _click($bo_pg_addEditProdServDelivery.icon_Save);
 _wait(6000, _isVisible(_heading2("Work Order Detail")));
 
-//*******Compare the abve fetched data with before saving data and after saving data.****
-//_assertEqual( $actValConsole,$accountNum1,"Account Num not Matching");
-_assertEqual( $contValConsole,$contactNum1,"Contact Num not Matching");
-_assertEqual($srvDurValConsole,$servDuration1,"Service duration not Matching");
+
 _assertEqual($prbDesValConsole,$probDes1,"Problem Description is not Matching");
 _assertEqual($ordStaValConsole,$orderStatus1,"Order Status is not Matching");
 _assertEqual($fstAssignedValConsole,$firstAsignedDate1,"First Assigned Date is not Matching");
-//_assertEqual( $actValConsole,$accountNum2,"Account Num not Matching");
-_assertEqual( $contValConsole,$contactNum2,"Contact Num not Matching");
-_assertEqual($srvDurValConsole,$servDuration2,"Service duration not Matching");
+
+
 _assertEqual($prbDesValConsole,$probDes2,"Problem Description is not Matching");
 _assertEqual($ordStaValConsole,$orderStatus2,"Order Status is not Matching");
 _assertEqual($fstAssignedValConsole,$firstAsignedDate2,"First Assigned Date is not Matching");
@@ -227,5 +223,4 @@ $bo_act_navigation.navigateToSfmTransactionDesigner();
 $bo_act_SFM.deleteSFM($sfmName);
 _setSpeed(100);
 
-$RS_5025.end();
-
+$RS_5029.end();
