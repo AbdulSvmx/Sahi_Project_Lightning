@@ -22,6 +22,7 @@ var $wizardButtonName=$sfmName;
 	
 
 
+
 //*************Login to Servicemax App***********
 $bo_act_login.login($g_url, $bac_unBase, $bac_pwdBase);
 
@@ -117,9 +118,7 @@ if(_isVisible($bo_pg_sfmVerifyWorkOrder.getDisplayedAccount)){
 	var $accountNum2=_getText($bo_pg_sfmVerifyWorkOrder.getDisplayedAccount);
 }
 
-if(_isVisible($bo_pg_sfmVerifyWorkOrder.getDisplayContact)){
-	var $contactNum2=_getText($bo_pg_sfmVerifyWorkOrder.getDisplayContact);
-}
+
 if(_isVisible($bo_pg_sfmVerifyWorkOrder.firstAssignedDateTime)){
 	var $firstAsignedDate2=_getText($bo_pg_sfmVerifyWorkOrder.firstAssignedDateTime);
 }
@@ -145,9 +144,26 @@ if(_isVisible($bo_pg_sfmVerifyWorkOrder.serviceDuration)){
 					if($accountNum1==$accountNum2){
 						_log("Account Matched");
 					}
-					if($contactNum1==$contactNum2){
-						_log("Contact Num Matched");
-					}
+					
+					
+					if(_isVisible($bo_pg_sfmVerifyWorkOrder.firstAssignedDateTime)){
+						var $firstAsignedDate2=_getText($bo_pg_sfmVerifyWorkOrder.firstAssignedDateTime);
+						var res = $firstAsignedDate2.split(" ");
+
+						var $res = $firstAsignedDate2.split(" ");
+						var $temp=$res[0];
+						var $temp1=$temp.split("/");
+						var $temp2=$temp1[0];
+						var $temp3=$temp1[1];
+
+						if($temp2<10){
+						$temp2='0'+$temp1[0];
+						}
+						if($temp3<10){
+						$temp3='0'+$temp1[1];
+						}
+							$firstAsignedDate2=$temp2+"/"+$temp3+"/"+$temp1[2];	
+						}
 					if($firstAsignedDate1==$firstAsignedDate2){
 						_log("First Assigned Date Matched");
 					}
@@ -174,7 +190,7 @@ if(_isVisible($bo_pg_sfmVerifyWorkOrder.serviceDuration)){
 		$bo_act_navigation.navigateToSfmTransactionDesigner();
 		$bo_act_SFM.editCustomWizard($sfmName);
 		_wait(6000,_isVisible(_f("main").tab("Screen Designer")));
-		$bo_act_SFM.addFieldToHeaderOfScreenDesigner("Contact");
+		//$bo_act_SFM.addFieldToHeaderOfScreenDesigner("Contact");
 		$bo_act_SFM.addFieldToHeaderOfScreenDesigner("First Assigned DateTime");
 		_click($bo_pg_manageWOLineUsageForSorting.sel_selHeaderOption);
 		_click($bo_pg_manageWOLineUsageForSorting.txt_searchItem);
@@ -196,7 +212,7 @@ $bo_act_sfmVerifyWorkOrder.verifyWizardOnWOObj($wizardButtonName);
 $bo_act_sfmVerifyWorkOrder.clkOnWizard($wizardButtonName);
 
 var $actValConsole=_getText($bo_pg_sfmVerifyWorkOrder.accountValueInConsole);
-var $contValConsole=_getText($bo_pg_sfmVerifyWorkOrder.contactValueInConsole);	
+//var $contValConsole=_getText($bo_pg_sfmVerifyWorkOrder.contactValueInConsole);	
 var $srvDurValConsole=_getText($bo_pg_sfmVerifyWorkOrder.servDurationInConsole);
 
 var $prbDesValConsole=_getText($bo_pg_sfmVerifyWorkOrder.probDescripInConsole);
@@ -209,9 +225,9 @@ _wait(6000, _isVisible(_heading2("Work Order Detail")));
 //_assertEqual( $actValConsole,$accountNum1,"Account Num not Matching");
 //_assertEqual( $contValConsole,$contactNum1,"Contact Num not Matching");
 _assertEqual($srvDurValConsole,$servDuration1,"Service duration not Matching");
-_assertEqual($prbDesValConsole,$probDes1,"Problem Description is not Matching");
+_assertNotEqual($prbDesValConsole,$probDes1,"Problem Description is Matching");
 _assertEqual($ordStaValConsole,$orderStatus1,"Order Status is not Matching");
-_assertEqual($fstAssignedValConsole,$firstAsignedDate1,"First Assigned Date is not Matching");
+_assertNotEqual($fstAssignedValConsole,$firstAsignedDate1,"First Assigned Date is Matching");
 //_assertEqual( $actValConsole,$accountNum2,"Account Num not Matching");
 //_assertEqual( $contValConsole,$contactNum2,"Contact Num not Matching");
 _assertEqual($srvDurValConsole,$servDuration2,"Service duration not Matching");
@@ -227,6 +243,5 @@ $bo_act_SFW.deleteWizard($wizardname);
 $bo_act_navigation.navigateToSfmTransactionDesigner();
 $bo_act_SFM.deleteSFM($sfmName);
 _setSpeed(100);
-
 $RS_5028.end();
 

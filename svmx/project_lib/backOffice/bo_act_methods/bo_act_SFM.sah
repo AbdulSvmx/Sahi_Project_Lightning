@@ -341,7 +341,8 @@ var $bo_act_SFM = new function bo_act_SFM() {
 						_click($bo_pg_sfmTransactionAndDesigner.btn_mappings);
 						_wait(1000);
 						_click($bo_pg_sfmTransactionAndDesigner.lbl_clkHeaderInQcPage)
-							_setSelected(_f("main").s_combobox("searchCombo[1]"), $mapName);
+							_click(_f("main").s_combobox("searchCombo[1]"));
+							_setSelected(_f("main").s_combobox("searchCombo[1]"), "5026Mapping");
 							_wait(5000);
 						}
 						

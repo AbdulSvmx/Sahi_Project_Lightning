@@ -21,7 +21,6 @@ var $actnName=$sfmName;
 var $wizardButtonName=$sfmName
 	
 
-
 //*************Login to Servicemax App***********
 $bo_act_login.login($g_url, $bac_unBase, $bac_pwdBase);
 
@@ -204,9 +203,9 @@ _click($bo_pg_addEditProdServDelivery.icon_Save);
 _wait(6000, _isVisible(_heading2("Work Order Detail")));
 
 
-_assertEqual($prbDesValConsole,$probDes1,"Problem Description is not Matching");
+//_assertNotEqual($prbDesValConsole,$probDes1,"Problem Description is Matching");
 _assertEqual($ordStaValConsole,$orderStatus1,"Order Status is not Matching");
-_assertEqual($fstAssignedValConsole,$firstAsignedDate1,"First Assigned Date is not Matching");
+_assertNotEqual($fstAssignedValConsole,$firstAsignedDate1,"First Assigned Date is Matching");
 
 
 _assertEqual($prbDesValConsole,$probDes2,"Problem Description is not Matching");
