@@ -106,7 +106,7 @@ $store_rv1.forEach(function($arr_value_rv_1) {
 
 _log($RV_config_1);
 
-var $ana_1050_1048_wo2= null;
+var $ana_1050_1048_wo2;
 var $arr_value_rv_2;
 
 var $ana_1050_query_RV2 = "Select SVMXC__Work_Order__c ,Custom_Checkbox__c, SVMXC__Account__c, SVMXC__Configuration_Name__c ,SVMXC__Is_Repeat_Visit__c ,SVMXC__Case__c from SVMXC__SPM_Repeat_Visit__c where SVMXC__Work_Order__c ='"+ $WO_new_2 +"'";
