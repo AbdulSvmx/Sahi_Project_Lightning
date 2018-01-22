@@ -17,7 +17,7 @@ var $accountID_Fetch = $op_act_sForceApiCall.sForceQuery($un, $pwd, $query_accou
 var $accountID1 ;
 $accountID1 = $accountID_Fetch[0].Id;
 
-$excel.insertUnderColumn("../../analytics/an_excleData/new_sheet.xlsx", "Sheet1", "Account", ""+$accountID1+"","");
+$excel.insertUnderColumn("../../analytics/an_excleData/an_Datasheet1.xlsx", "Sheet1", "Account", ""+$accountID1+"","");
 
 $bo_act_login.login($url, $un, $pwd);
 var $create_account2 = "Account ac1 = new Account (Name = 'AcmeUrgentCare', Type = 'Customer');insert ac1;";
@@ -32,7 +32,7 @@ var $accountID2 ;
 $accountID2 = $accountID_Fetch2[0].Id;
 
 
-$excel.insertUnderColumn("../../analytics/an_excleData/new_sheet.xlsx", "Sheet1", "Account", ""+$accountID2+"","");
+$excel.insertUnderColumn("../../analytics/an_excleData/an_Datasheet1.xlsx", "Sheet1", "Account", ""+$accountID2+"","");
 
 // To Create the Products and put them in the sheet
 var $productID1;
@@ -48,10 +48,10 @@ var $productID_Fetch = $op_act_sForceApiCall.sForceQuery($un, $pwd, $query_produ
 
 $productID1 = $productID_Fetch[0].Id;
 
-$excel.insertUnderColumn("../../analytics/an_excleData/new_sheet.xlsx", "Sheet1", "Product", ""+$productID1+"","");
+$excel.insertUnderColumn("../../analytics/an_excleData/an_Datasheet1.xlsx", "Sheet1", "Product", ""+$productID1+"","");
 
 $bo_act_login.login($url, $un, $pwd);
-var $create_product2 = "Product2 prod2 = new Product (Name = 'Car', IsActive = true);insert prod2;";
+var $create_product2 = "Product2 prod2 = new Product2 (Name = 'Car', IsActive = true);insert prod2;";
 var $create_product = $op_act_sForceApiCall.sForceQuery($un, $pwd, $create_product2 , "create");
 
 // to get the ID
@@ -60,7 +60,7 @@ var $productID_Fetch2 = $op_act_sForceApiCall.sForceQuery($un, $pwd, $query_prod
 
 $productID2 = $productID_Fetch2[0].Id;
 
-$excel.insertUnderColumn("../../analytics/an_excleData/new_sheet.xlsx", "Sheet1", "Product", ""+$productID2+"","");
+$excel.insertUnderColumn("../../analytics/an_excleData/an_Datasheet1.xlsx", "Sheet1", "Product", ""+$productID2+"","");
 
 // To create Technician and put them in the sheet
 
@@ -77,7 +77,7 @@ var $techID_Fetch = $op_act_sForceApiCall.sForceQuery($un, $pwd, $query_techID,"
 
 $technician1 = $techID_Fetch[0].Id;
 
-$excel.insertUnderColumn("../../analytics/an_excleData/new_sheet.xlsx", "Sheet1", "Technician", ""+$technician1+"","");
+$excel.insertUnderColumn("../../analytics/an_excleData/an_Datasheet1.xlsx", "Sheet1", "Technician", ""+$technician1+"","");
 
 var $create_tech2 = "SVMXC__Service_Group_Members__c tech1 = new SVMXC__Service_Group_Members__c (Name = 'Micheal 2', 	SVMXC__Active__c = true ,SVMXC__Working_Hours__c = '"+$workinghours+"' );insert tech1;";
 var $create_t2 = $op_act_sForceApiCall.sForceQuery($un, $pwd, $create_tech2 , "create");
@@ -89,7 +89,7 @@ var $techID_Fetch2 = $op_act_sForceApiCall.sForceQuery($un, $pwd, $query_techID2
 
 $technician2 = $techID_Fetch2[0].Id;
 
-$excel.insertUnderColumn("../../analytics/an_excleData/new_sheet.xlsx", "Sheet1", "Technician", ""+$technician2+"","");
+$excel.insertUnderColumn("../../analytics/an_excleData/an_Datasheet1.xlsx", "Sheet1", "Technician", ""+$technician2+"","");
 
 
 // To create Component and put them in the sheet
@@ -106,7 +106,7 @@ var $ibID_Fetch = $op_act_sForceApiCall.sForceQuery($un, $pwd, $query_ibID,"quer
 
 $installedproductID1 = $ibID_Fetch[0].Id;
 
-$excel.insertUnderColumn("../../analytics/an_excleData/new_sheet.xlsx", "Sheet1", "Component", ""+$installedproductID1+"","");
+$excel.insertUnderColumn("../../analytics/an_excleData/an_Datasheet1.xlsx", "Sheet1", "Component", ""+$installedproductID1+"","");
 
 var $create_ib2 = "SVMXC__Installed_Product__c ib2 = new SVMXC__Installed_Product__c (Name = 'IB Automation_2',SVMXC__Company__c = '"+$accountID1+"',SVMXC__Status__c = 'Inventory',SVMXC__Country__c = 'Algeria', SVMXC__Product__c = '"+$productID2+"');insert ib2;";
 var $create_ib = $op_act_sForceApiCall.sForceQuery($un, $pwd, $create_ib2 , "create");
@@ -117,7 +117,7 @@ var $ibID_Fetch2 = $op_act_sForceApiCall.sForceQuery($un, $pwd, $query_ibID2,"qu
 
 $installedproductID2 = $ibID_Fetch2[0].Id;
 
-$excel.insertUnderColumn("../../analytics/an_excleData/new_sheet.xlsx", "Sheet1", "Component", ""+$installedproductID2+"","");
+$excel.insertUnderColumn("../../analytics/an_excleData/an_Datasheet1.xlsx", "Sheet1", "Component", ""+$installedproductID2+"","");
 
 // To create Site and put them in the sheet
 var $locationID1;
@@ -132,7 +132,7 @@ var $locationID_Fetch = $op_act_sForceApiCall.sForceQuery($un, $pwd, $query_loca
 
 $locationID1 = $locationID_Fetch[0].Id;
 
-$excel.insertUnderColumn("../../analytics/an_excleData/new_sheet.xlsx", "Sheet1", "Site", ""+$locationID1+"","");
+$excel.insertUnderColumn("../../analytics/an_excleData/an_Datasheet1.xlsx", "Sheet1", "Site", ""+$locationID1+"","");
 
 
 var $create_location2 = "SVMXC__Site__c site2 = new SVMXC__Site__c (Name = 'Location Automation_2');insert site2;";
@@ -143,4 +143,4 @@ var $locationID2_Fetch = $op_act_sForceApiCall.sForceQuery($un, $pwd, $query_loc
 
 $locationID2 = $locationID2_Fetch[0].Id;
 
-$excel.insertUnderColumn("../../analytics/an_excleData/new_sheet.xlsx", "Sheet1", "Site", ""+$locationID2+"","");
+$excel.insertUnderColumn("../../analytics/an_excleData/an_Datasheet1.xlsx", "Sheet1", "Site", ""+$locationID2+"","");
