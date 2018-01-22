@@ -61,8 +61,11 @@ $productID2 = $productID_Fetch2[0].Id;
 
 $excel.insertUnderColumn("../../analytics/an_excleData/new_sheet.xlsx", "Sheet1", "Product", ""+$productID2+"","");
 
-
 // To create Technician and put them in the sheet
+
+var $technician1;
+var $technician2;
+
 
 // To create Component and put them in the sheet
 
