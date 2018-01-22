@@ -2,10 +2,12 @@ var $sfm_act_addDeleteMeth = new function sfm_act_addDeleteMeth() {
 	
 	this.createAccount = function($accountName) {
         $bo_act_navigation.navigateToAccountsPage();
-        _click($bo_pg_accounts.btn_new);
-        for(var $i =0;$i<$accountName.length;$i++){
-		_setValue($bo_pg_accounts.txt_accountName, $accountName[$i]);
-		_click($bo_pg_accounts.btn_saveAndNew);
+//        _setSelected(_select("title"),"My Accounts");
+//        if(!_isVisible(_span($accountName[0]))){
+          _click($bo_pg_accounts.btn_new);
+          for(var $i =0;$i<$accountName.length;$i++){
+  		_setValue($bo_pg_accounts.txt_accountName, $accountName[$i]);
+  		_click($bo_pg_accounts.btn_saveAndNew);
         }
 	};
 
@@ -41,5 +43,16 @@ var $sfm_act_addDeleteMeth = new function sfm_act_addDeleteMeth() {
 		_click(_button("Delete"));
 		_isVisible(_div("/deleted the selected wizard/"));
 	};
-	
+	this.verifyAndCreateAccount = function($accountName){
+        $bo_act_navigation.navigateToAccountsPage();
+        
+      //_setSelected(_select(0,_near(_label("*View:"))),$chooseView);
+
+      if(!_isVisible(_link($accountName))){
+    	  _click(_button("/New/"));
+    	  _setValue($bo_pg_accounts.txt_accountName, $accountName);
+    	  _click(_submit("/Save/"));
+    	  
+      }
+      };
 };
