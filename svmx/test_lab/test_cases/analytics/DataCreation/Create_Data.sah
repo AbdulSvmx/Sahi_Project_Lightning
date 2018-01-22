@@ -1,5 +1,5 @@
 var $ana_create_data = _testcase("Create Data and write into sheet","Write data into sheet");
-var $data = _readExcelFile("../../analytics/an_excleData/an_Datasheet1.xlsx","Sheet1",true);
+var $data = _readExcelFile("../../analytics/an_excleData/new_sheet.xlsx","Sheet1",true);
 var $un = $data[1]["Username"];
 var $pwd = $data[1]["pwd"];
 var $user_meghana = $data[1]["user_meghana"];
@@ -66,8 +66,70 @@ $excel.insertUnderColumn("../../analytics/an_excleData/new_sheet.xlsx", "Sheet1"
 var $technician1;
 var $technician2;
 
+var $create_tech1 = "SVMXC__Service_Group_Members__c tech1 = new SVMXC__Service_Group_Members__c (Name = 'Roni Malek', 	SVMXC__Active__c = true ,SVMXC__Working_Hours__c = '01mo0000000K7kC' );insert tech1;";
+var $create_tech = $op_act_sForceApiCall.sForceQuery($un, $pwd, $create_tech1 , "create");
+
+
+var $query_techID = "Select Id, Name from SVMXC__Service_Group_Members__c where Createdby.Id = '"+$user_meghana+"' AND Name = 'Roni Malek' Order by CreatedDate DESC Limit 1";
+var $techID_Fetch = $op_act_sForceApiCall.sForceQuery($un, $pwd, $query_techID,"query");
+
+
+$technician1 = $techID_Fetch[0].Id;
+
+$excel.insertUnderColumn("../../analytics/an_excleData/new_sheet.xlsx", "Sheet1", "Technician", ""+$technician1+"","");
+
+var $create_tech2 = "SVMXC__Service_Group_Members__c tech1 = new SVMXC__Service_Group_Members__c (Name = 'Micheal 2', 	SVMXC__Active__c = true ,SVMXC__Working_Hours__c = '01mo0000000K7kC' );insert tech1;";
+var $create_t2 = $op_act_sForceApiCall.sForceQuery($un, $pwd, $create_tech2 , "create");
+
+
+var $query_techID2 = "Select Id, Name from SVMXC__Service_Group_Members__c where Createdby.Id = '"+$user_meghana+"' AND Name = 'Roni Malek' Order by CreatedDate DESC Limit 1";
+var $techID_Fetch2 = $op_act_sForceApiCall.sForceQuery($un, $pwd, $query_techID2,"query");
+
+
+$technician2 = $techID_Fetch2[0].Id;
+
+$excel.insertUnderColumn("../../analytics/an_excleData/new_sheet.xlsx", "Sheet1", "Technician", ""+$technician2+"","");
 
 
 // To create Component and put them in the sheet
 
+var $installedproductID1;
+var $installedproductID2;
+
+var $create_ib1 = "SVMXC__Installed_Product__c ib1 = new SVMXC__Installed_Product__c (Name = 'IB Automation_1',SVMXC__Company__c = '"+$accountID1+"',SVMXC__Status__c = 'Installed', SVMXC__Product__c = '"+$productID1+"');insert ib1;";
+var $create_ib = $op_act_sForceApiCall.sForceQuery($un, $pwd, $create_ib1 , "create");
+
+
+var $query_ibID = "Select Id, Name from SVMXC__Installed_Product__c where Createdby.Id = '"+$user_meghana+"' AND Name = 'IB Automation_1' Order by CreatedDate DESC Limit 1";
+var $ibID_Fetch = $op_act_sForceApiCall.sForceQuery($un, $pwd, $query_ibID,"query");
+
+$installedproductID1 = $ibID_Fetch[0].Id;
+
+$excel.insertUnderColumn("../../analytics/an_excleData/new_sheet.xlsx", "Sheet1", "Component", ""+$installedproductID1+"","");
+
+var $create_ib2 = "SVMXC__Installed_Product__c ib2 = new SVMXC__Installed_Product__c (Name = 'IB Automation_2',SVMXC__Company__c = '"+$accountID1+"',SVMXC__Status__c = 'Inventory',SVMXC__Country__c = 'Algeria', SVMXC__Product__c = '"+$productID2+"');insert ib2;";
+var $create_ib = $op_act_sForceApiCall.sForceQuery($un, $pwd, $create_ib2 , "create");
+
+
+var $query_ibID2 = "Select Id, Name from SVMXC__Installed_Product__c where Createdby.Id = '"+$user_meghana+"' AND Name = 'IB Automation_1' Order by CreatedDate DESC Limit 1";
+var $ibID_Fetch2 = $op_act_sForceApiCall.sForceQuery($un, $pwd, $query_ibID2,"query");
+
+$installedproductID2 = $ibID_Fetch2[0].Id;
+
+$excel.insertUnderColumn("../../analytics/an_excleData/new_sheet.xlsx", "Sheet1", "Component", ""+$installedproductID2+"","");
+
 // To create Site and put them in the sheet
+var $locationID1;
+var $locationID2;
+
+var $create_location1 = "SVMXC__Site__c site1 = new SVMXC__Site__c (Name = 'Location Automation_1');insert site1;";
+var $create_location = $op_act_sForceApiCall.sForceQuery($un, $pwd, $create_location1 , "create");
+
+
+var $query_location1 = "Select Id, Name from SVMXC__Site__c where Createdby.Id = '"+$user_meghana+"' AND Name = 'Location Automation_1' Order by CreatedDate DESC Limit 1";
+var $locationID_Fetch = $op_act_sForceApiCall.sForceQuery($un, $pwd, $query_location1,"query");
+
+$locationID1 = $locationID_Fetch[0].Id;
+
+$excel.insertUnderColumn("../../analytics/an_excleData/new_sheet.xlsx", "Sheet1", "Site", ""+$locationID1+"","");
+
