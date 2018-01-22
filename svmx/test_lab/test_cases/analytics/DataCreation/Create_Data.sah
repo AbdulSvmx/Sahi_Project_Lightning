@@ -1,8 +1,9 @@
 var $ana_create_data = _testcase("Create Data and write into sheet","Write data into sheet");
-var $data = _readExcelFile("../../analytics/an_excleData/new_sheet.xlsx","Sheet1",true);
+var $data = _readExcelFile("../../analytics/an_excleData/an_Datasheet1.xlsx","Sheet1",true);
 var $un = $data[1]["Username"];
 var $pwd = $data[1]["pwd"];
 var $user_meghana = $data[1]["user_meghana"];
+var $workinghours = $data[1]["workinghours"];
 var $url = "https://test.salesforce.com";
 
 $bo_act_login.login($url, $un, $pwd);
@@ -66,7 +67,7 @@ $excel.insertUnderColumn("../../analytics/an_excleData/new_sheet.xlsx", "Sheet1"
 var $technician1;
 var $technician2;
 
-var $create_tech1 = "SVMXC__Service_Group_Members__c tech1 = new SVMXC__Service_Group_Members__c (Name = 'Roni Malek', 	SVMXC__Active__c = true ,SVMXC__Working_Hours__c = '01mo0000000K7kC' );insert tech1;";
+var $create_tech1 = "SVMXC__Service_Group_Members__c tech1 = new SVMXC__Service_Group_Members__c (Name = 'Roni Malek', 	SVMXC__Active__c = true ,SVMXC__Working_Hours__c = '"+$workinghours+"' );insert tech1;";
 var $create_tech = $op_act_sForceApiCall.sForceQuery($un, $pwd, $create_tech1 , "create");
 
 
@@ -78,7 +79,7 @@ $technician1 = $techID_Fetch[0].Id;
 
 $excel.insertUnderColumn("../../analytics/an_excleData/new_sheet.xlsx", "Sheet1", "Technician", ""+$technician1+"","");
 
-var $create_tech2 = "SVMXC__Service_Group_Members__c tech1 = new SVMXC__Service_Group_Members__c (Name = 'Micheal 2', 	SVMXC__Active__c = true ,SVMXC__Working_Hours__c = '01mo0000000K7kC' );insert tech1;";
+var $create_tech2 = "SVMXC__Service_Group_Members__c tech1 = new SVMXC__Service_Group_Members__c (Name = 'Micheal 2', 	SVMXC__Active__c = true ,SVMXC__Working_Hours__c = '"+$workinghours+"' );insert tech1;";
 var $create_t2 = $op_act_sForceApiCall.sForceQuery($un, $pwd, $create_tech2 , "create");
 
 
@@ -133,3 +134,13 @@ $locationID1 = $locationID_Fetch[0].Id;
 
 $excel.insertUnderColumn("../../analytics/an_excleData/new_sheet.xlsx", "Sheet1", "Site", ""+$locationID1+"","");
 
+
+var $create_location2 = "SVMXC__Site__c site2 = new SVMXC__Site__c (Name = 'Location Automation_2');insert site2;";
+var $create_location = $op_act_sForceApiCall.sForceQuery($un, $pwd, $create_location2 , "create");
+
+var $query_location2 = "Select Id, Name from SVMXC__Site__c where Createdby.Id = '"+$user_meghana+"' AND Name = 'Location Automation_1' Order by CreatedDate DESC Limit 1";
+var $locationID2_Fetch = $op_act_sForceApiCall.sForceQuery($un, $pwd, $query_location2,"query");
+
+$locationID2 = $locationID2_Fetch[0].Id;
+
+$excel.insertUnderColumn("../../analytics/an_excleData/new_sheet.xlsx", "Sheet1", "Site", ""+$locationID2+"","");
