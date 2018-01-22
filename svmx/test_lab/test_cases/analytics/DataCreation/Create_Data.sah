@@ -19,7 +19,6 @@ $accountID1 = $accountID_Fetch[0].Id;
 
 $excel.insertUnderColumn("../../analytics/an_excleData/an_Datasheet1.xlsx", "Sheet1", "Account", ""+$accountID1+"","");
 
-$bo_act_login.login($url, $un, $pwd);
 var $create_account2 = "Account ac1 = new Account (Name = 'AcmeUrgentCare', Type = 'Customer');insert ac1;";
 var $create_acc = $op_act_sForceApiCall.sForceQuery($un, $pwd, $create_account2 , "create");
 

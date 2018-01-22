@@ -18,8 +18,8 @@ $accountID1 = $accountID_Fetch[0].Id;
 
 $excel.insertUnderColumn("../../analytics/an_excleData/vinaya_data.xlsx", "Sheet1", "Account", ""+$accountID1+"","");
 
-$bo_act_login.login($url, $un, $pwd);
-var $create_account2 = "Account ac1 = new Account (Name = 'AcmeUrgentCare', Type = 'Customer');insert ac1;";
+
+/*var $create_account2 = "Account ac1 = new Account (Name = 'AcmeUrgentCare', Type = 'Customer');insert ac1;";
 var $create_acc = $op_act_sForceApiCall.sForceQuery($un, $pwd, $create_account2 , "create");
 
 // to get the ID
@@ -72,22 +72,28 @@ $excel.insertUnderColumn("../../analytics/an_excleData/vinaya_data.xlsx", "Sheet
 
 // To create Technician and put them in the sheet
 var $serviceteamID1;
-var $create_serviceteam = "SVMXC__Service_Group__c ST = new SVMXC__Service_Group__c (Name = 'California Team', SVMXC__Active__c = true,SVMXC__Group_Type__c='Internal',SVMXC__Country__c='United State');insert ST;";
-var $create_serviceteam = $op_act_sForceApiCall.sForceQuery($un, $pwd, $create_serviceteam , "create");
+var $create_serviceteam1 = "SVMXC__Service_Group__c ST = new SVMXC__Service_Group__c (Name = 'California Team', SVMXC__Active__c = true,SVMXC__Group_Type__c='Internal',SVMXC__Country__c='United State');insert ST;";
+var $create_serviceteam = $op_act_sForceApiCall.sForceQuery($un, $pwd, $create_serviceteam1 , "create");
 var $query_serviceteam = "Select Id, Name from SVMXC__Service_Group__c  where Createdby.Id = '"+$user+"' Order by CreatedDate DESC Limit 1";
 var $serviceteamID_Fetch = $op_act_sForceApiCall.sForceQuery($un, $pwd, $query_serviceteam,"query");
 $serviceteamID1 = $serviceteamID_Fetch[0].Id;
-$excel.insertUnderColumn("../../analytics/an_excleData/vinaya_data.xlsx", "Sheet1", "Product", ""+$serviceteamID1+"","");
+//$excel.insertUnderColumn("../../analytics/an_excleData/vinaya_data.xlsx", "Sheet1", "Product", ""+$serviceteamID1+"","");
 var $technician1;
 var $technician2;
 
-var $create_tech1 = "SVMXC__Service_Group_Members__c tech = new SVMXC__Service_Group_Members__c (Name = 'Roni Malek', SVMXC__Active__c = true,SVMXC__Service_Group__c='"+$serviceteamID1+"',SVMXC__Enable_Scheduling__c=true,SVMXC__Role__c='Technician',SVMXC__Country__c='United State');insert ST;";
-var $create_serviceteam = $op_act_sForceApiCall.sForceQuery($un, $pwd, $create_serviceteam , "create");
-var $query_serviceteam = "Select Id, Name from SVMXC__Service_Group__c  where Createdby.Id = '"+$user+"' Order by CreatedDate DESC Limit 1";
-var $serviceteamID_Fetch = $op_act_sForceApiCall.sForceQuery($un, $pwd, $query_serviceteam,"query");
-$serviceteamID1 = $serviceteamID_Fetch[0].Id;
-$excel.insertUnderColumn("../../analytics/an_excleData/vinaya_data.xlsx", "Sheet1", "Product", ""+$serviceteamID1+"","");
+var $create_tech1 = "SVMXC__Service_Group_Members__c tech = new SVMXC__Service_Group_Members__c (Name = 'Roni Malek', SVMXC__Active__c = true,SVMXC__Service_Group__c='"+$serviceteamID1+"',SVMXC__Enable_Scheduling__c=true,SVMXC__Role__c='Technician',SVMXC__Street__c='ZERYO #344',SVMXC__Zip__c='34475',SVMXC__Country__c='United State');insert tech;";
+var $create_$technician1 = $op_act_sForceApiCall.sForceQuery($un, $pwd, $create_tech1 , "create");
+var $query_tech = "Select Id, Name from SVMXC__Service_Group_Members__c  where Createdby.Id = '"+$user+"' Order by CreatedDate DESC Limit 1";
+var $techID_Fetch = $op_act_sForceApiCall.sForceQuery($un, $pwd, $query_tech,"query");
+$technician1 = $techID_Fetch[0].Id;
+$excel.insertUnderColumn("../../analytics/an_excleData/vinaya_data.xlsx", "Sheet1", "Technician", ""+$technician1+"","");
 
+var $create_tech2 = "SVMXC__Service_Group_Members__c tech2 = new SVMXC__Service_Group_Members__c (Name = 'Michael Smith', SVMXC__Active__c = true,SVMXC__Service_Group__c='"+$serviceteamID1+"',SVMXC__Enable_Scheduling__c=true,SVMXC__Role__c='Technician',SVMXC__Street__c='#344',SVMXC__Zip__c='56677',SVMXC__Country__c='United State');insert tech2;";
+var $create_$technician2 = $op_act_sForceApiCall.sForceQuery($un, $pwd, $create_tech2 , "create");
+var $query_tech2 = "Select Id, Name from SVMXC__Service_Group_Members__c  where Createdby.Id = '"+$user+"' Order by CreatedDate DESC Limit 1";
+var $techID_Fetch2 = $op_act_sForceApiCall.sForceQuery($un, $pwd, $query_tech2,"query");
+$technician1 = $techID_Fetch2[0].Id;
+$excel.insertUnderColumn("../../analytics/an_excleData/vinaya_data.xlsx", "Sheet1", "Technician", ""+$technician1+"","");
 
 
 // To create Component and put them in the sheet
@@ -96,5 +102,5 @@ $excel.insertUnderColumn("../../analytics/an_excleData/vinaya_data.xlsx", "Sheet
 
 
 
-
+*/
 
