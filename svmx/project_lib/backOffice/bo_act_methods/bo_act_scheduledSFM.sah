@@ -21,7 +21,11 @@ var $bo_act_scheduledSFM=new function bo_act_scheduledSFM(){
 				this.chooseTimeAndDateToRunTheProcess=function($scheduleTime,$d1,$d2,$d3,$d4,$d5,$d6,$d7){
 					_click($bo_pg_scheduledSFM.tab_scheduleAndNotification);
 					_setSelected($bo_pg_scheduledSFM.sel_runAt,$scheduleTime)
-					_setSelected($bo_pg_scheduledSFM.sel_nameOfDays, [$d1,$d2,$d3,$d4,$d5,$d6,$d7]);
+						//if(_isVisible($bo_pg_scheduledSFM.sel_nameOfDays2)){
+							_setSelected($bo_pg_scheduledSFM.sel_nameOfDays2, [$d1,$d2,$d3,$d4,$d5,$d6,$d7]);
+						 //  }else{
+						  // _setSelected($bo_pg_scheduledSFM.sel_nameOfDays1, [$d1,$d2,$d3,$d4,$d5,$d6,$d7]);
+						  // }
 					_click($bo_pg_scheduledSFM.btn_add);					
 				}
 			this.setUserForNotification=function($user){

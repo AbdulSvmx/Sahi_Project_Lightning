@@ -106,9 +106,9 @@ $store_rv1.forEach(function($arr_value_rv_1) {
 
 _log($RV_config_1);
 
-var $ana_1050_1048_wo2= null;
+var $ana_1050_1048_wo2;
 var $arr_value_rv_2;
-for(var $i=0 ; $ana_1050_1048_wo2 ==null ; $i++){
+
 var $ana_1050_query_RV2 = "Select SVMXC__Work_Order__c ,Custom_Checkbox__c, SVMXC__Account__c, SVMXC__Configuration_Name__c ,SVMXC__Is_Repeat_Visit__c ,SVMXC__Case__c from SVMXC__SPM_Repeat_Visit__c where SVMXC__Work_Order__c ='"+ $WO_new_2 +"'";
 var $store_rv2 = $op_act_sForceApiCall.sForceQuery($un, $pwd, $ana_1050_query_RV2,"query");
 
@@ -122,7 +122,7 @@ $store_rv2.forEach(function($arr_value_rv_2) {
 	$customcheckbox2 = $arr_value_rv_2.Custom_Checkbox__c;
 	
 });
-}
+
 _log($RV_config_2);
 
 _assertNotEqual($RV_config_1, $RV_config_2);

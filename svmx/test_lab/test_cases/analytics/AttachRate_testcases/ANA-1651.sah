@@ -81,7 +81,7 @@ var $ana_1651_cp_ID;
 // To create Product Warranty
 	
 	
-var $ana_1651_create_PW = "SVMXC__Warranty__c WT = new SVMXC__Warranty__c (SVMXC__Installed_Product__c = '"+$ana_1651_IB_ID+"' , SVMXC__Service_Template__c = 'a1Wq0000002XpiJ',SVMXC__Start_Date__c = Date.valueOf('2017-01-01'), SVMXC__End_Date__c = Date.valueOf('2017-12-30') );insert WT;";
+var $ana_1651_create_PW = "SVMXC__Warranty__c WT = new SVMXC__Warranty__c (SVMXC__Installed_Product__c = '"+$ana_1651_IB_ID+"' , SVMXC__Service_Template__c = 'a1Wq0000002XpiJ',SVMXC__Start_Date__c = Date.valueOf('2018-01-01'), SVMXC__End_Date__c = Date.valueOf('2018-12-30') );insert WT;";
 var $ana_1651_result_PW = $op_act_sForceApiCall.sForceQuery($un, $pwd, $ana_1651_create_PW , "create");
 var $ana_1651_get_PW = "Select Id from SVMXC__Warranty__c where SVMXC__Installed_Product__c = '"+$ana_1651_IB_ID+"' Order by CreatedDate DESC Limit 1";
 var $ana_1651_fetch_PW  = $op_act_sForceApiCall.sForceQuery($un, $pwd, $ana_1651_get_PW,"query");

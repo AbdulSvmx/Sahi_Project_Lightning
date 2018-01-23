@@ -55,6 +55,10 @@ var $sfm_act_SFM = new function sfm_act_SFM() {
 					_doubleClick($sfm_pg_screenDesigner.lbl_autoContact);
 					$sfm_act_Transactions.addLookupContext();
 				}
+				else if($fieldName[$i]=="Activity Type"){
+					_click(_f("main").s_label("Activity Type[1]"));
+					_click(_f("main").s_button("Add Field"));
+				}
 				else{
 				_click(_f("main").s_label($fieldName[$i]));
 				_click(_f("main").s_button("Add Field"));

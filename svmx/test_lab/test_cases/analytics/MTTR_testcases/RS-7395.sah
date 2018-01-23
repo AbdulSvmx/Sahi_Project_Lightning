@@ -16,6 +16,7 @@ var $ScheduledDate = $data[1]["ScheduledDate"];
 var $user_meghana = $data[1]["user_meghana"];
 $bo_act_login.login($url, $un, $pwd);
 
+$an_act_MTTR.mttr_uk_calc("UK Calculation method");
 
 // To create a Service Request
 

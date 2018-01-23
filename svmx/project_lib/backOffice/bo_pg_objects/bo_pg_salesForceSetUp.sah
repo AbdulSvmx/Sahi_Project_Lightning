@@ -14,9 +14,8 @@ var $bo_pg_salesForceSetUP = new function bo_pg_salesForceSetUP(){
 		this.lbl_status1=_cell(" dataCell  [9]");
 		this.lnk_createNewView=_link("Create New View");
 		
-
 		
-this.txt_apexClasscode = _textarea("textarea");
+	this.txt_apexClasscode = _textarea("textarea");
 	this.btn_quickSave = _button("Quick Save");
 	this.btn_save = _button("Save");
 	this.btn_delete = _submit("Delete");
@@ -32,7 +31,7 @@ this.txt_apexClasscode = _textarea("textarea");
 //Edit Layout Fields
 	this.btn_SLAVisualPage = _span("SLAT_SLAClockOnWO");
 	this.btn_timeToRestore = _span("/Time to Restore/");
-this.btn_timeToResolve = _span("/Time to Resolve/");
+	this.btn_timeToResolve = _span("/Time to Resolve/");
 	this.btn_timeToOnsiteResponse = _span("/Time to Onsite Re/");
 	this.btn_timeToInitialResponse = _span("Time to Initial R...");
 	this.btn_InitialResponseInternalBy = _span("Initial Response ...");
@@ -48,7 +47,26 @@ this.btn_timeToResolve = _span("/Time to Resolve/");
 	 this.btn_actualOnsiteResponse = _span("Actual Onsite Res...");
 	 this.btn_actualResolution = _span("Actual Resolution");
 	 this.btn_actualRestoration = _span("Actual Restoration");
-
+	 
+	//Edit Page Layout for get Price Fields on WO
+	 this.btn_RatePricingRule = _span("Rate (Pricing Rule)");
+	 this.btn_RateType = _span("Rate Type (Pricin...");
+	 this.btn_TravelRate = _span("Travel Rate");
+	 this.btn_TravelUnit = _span("Travel Unit");
+	 this.btn_ProformaInvoceAmount = _span("Proforma Invoice ...");
+	 this.btn_TotalBillableAmount = _span("Total Billable Am...");
+	 
+	//Edit Page Layout for get Price Fields on SCON
+	 this.btn_zone = _span("Zone");
+	 
+	//Edit Page Layout for Entitlement Fields on SCON
+	 this.btn_autoEntitlement = _span("Auto Entitlement ...");
+	 this.btn_performAutoEntitlement = _span("Perform Auto Enti...");
+	 this.btn_isEntitlementPerform = _span("Is Entitlement Pe...");
+	 this.btn_entitlementType = _span("Entitlement Type");
+	 this.btn_entitlementNotes = _span("Entitlement Notes");
+	 this.btn_ServiceContract = _span("Service Contract");
+	 this.btn_Warranty = _span("Warranty");
 };
 
 

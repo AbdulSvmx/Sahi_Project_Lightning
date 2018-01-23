@@ -60,7 +60,7 @@ _setValue(_textbox(0,_rightOf(_label("End Date and Time:"))),$bo_act_addEditProd
 		
 $bo_act_addEditProdServDelivery.addPart();
 $bo_act_addEditProdServDelivery.addLabor();
-$bo_act_addEditProdServDelivery.addExpenses();
+$bo_act_addEditProdServDelivery.addExpenses(); 
 
 _click($bo_pg_addEditProdServDelivery.icon_Save);
 
@@ -90,11 +90,7 @@ _setSelected($bo_pg_sfmWizard.sel_objPrevMaintPlan,$objName	);
 $bo_act_SFW.deleteWizard($wizardname);	
 $bo_act_navigation.navigateToSfmTransactionDesigner();
 $bo_act_SFM.deleteSFM($sfmName);
-/*if(_isVisible(_image("svmx-action-col-icon svmx-action-col-1   svmx-sfmd-delete-icon"))){
-	_alert("Not null value");}
-else{
-	_click(_span("svmx-btn-icon svmx-sfmd-add-line-icon"));	
-}*/
+
 
 _setSpeed(100);
 $RS_5374.end();
