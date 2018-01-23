@@ -56,6 +56,8 @@ _click(_link(0,_under(_tableHeader("Work Order Number"))));
 <<<<<<< HEAD
 //$bo_act_salesforceSetUp.dragAndDropSection($sectionName,1);
 _click(_link("Edit Layout"));
+$bo_act_salesforceSetUp.dragAndDropFields(_span("Time to Resolve (..."), _span("Service Location"));
+$bo_act_salesforceSetUp.dragAndDropFields(_span("Time to Restore (..."), _span("Service Location"));
 $bo_act_salesforceSetUp.dragAndDropFields($bo_pg_salesForceSetUP.btn_timeToRestore, _span("Service Location"));
 $bo_act_salesforceSetUp.dragAndDropFields($bo_pg_salesForceSetUP.btn_timeToResolve, _span("Service Location"));
 $bo_act_salesforceSetUp.dragAndDropFields($bo_pg_salesForceSetUP.btn_timeToOnsiteResponse, _span("Service Location"));
@@ -182,6 +184,9 @@ $bo_act_salesforceSetUp.saveEditLayout();
 //Enable the Activate PM Setting
 $bo_act_configurationProfiles.editGlobalProfileForBooleanSettings("Preventive Maintenance", "Manage PM Plan", "SET002", true);
 
+
+
+//Include SFM Search in Home Page Layout
 
 $Configuration_StartUp.end();
 

@@ -14,7 +14,6 @@
 ../../../test_lab/test_cases/backOffice/BAC_PreReleaseTestCases/RS_7019_Inventory.sah
 ../../../test_lab/test_cases/backOffice/BAC_PreReleaseTestCases/RS_7027_Inventory.sah
 ../../../test_lab/test_cases/backOffice/BAC_PreReleaseTestCases/RS_7298_AutoEntitlementForWO.sah
-../../../test_lab/test_cases/backOffice/BAC_PreReleaseTestCases/RS_7298_WarrantyTerms.sah
 ../../../test_lab/test_cases/backOffice/BAC_PreReleaseTestCases/RS_7304_AutoEntitlementForCase.sah
 ../../../test_lab/test_cases/backOffice/BAC_PreReleaseTestCases/RS_7439_ConditionBasedPM.sah
 ../../../test_lab/test_cases/backOffice/BAC_PreReleaseTestCases/RS_7441_AppAdministration.sah
