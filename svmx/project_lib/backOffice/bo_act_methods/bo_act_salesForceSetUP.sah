@@ -67,7 +67,7 @@ var $bo_act_salesforceSetUp = new function bo_act_$bo_act_salesforceSetUp() {
 		_dragDrop($object,_span($sectionName));
 	};
 		this.dragAndDropFields = function($object,$sectionName){
-			_dragDrop($object,_span($sectionName));
+			_dragDrop($object,$sectionName);
 		};
 	this.saveEditLayout = function(){
 		_click(_button(" x-btn-text[1]"));
