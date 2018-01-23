@@ -18,7 +18,7 @@ var $wizardID=$wizardname;
 var $executionMode="Interactive";
 var $fieldActnType="SFM";
 var $actnName=$sfmName;
-var $wizardButtonName=$sfmName
+var $wizardButtonName=$sfmName;
 	
 
 
