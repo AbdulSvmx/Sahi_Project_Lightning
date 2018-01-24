@@ -31,6 +31,16 @@ var $qualifyingCriteria = "SVMXSTD: Contract Field Service Work Orders";
 var $serviceType = $bo_act_servicesTypes.createServicesTypes($trackedOn, $dataType, $qualifyingCriteria);
 
 /**
+ * Configure the Group Profile SET025
+ */
+var $groupProfileName = "AutoBACGroup";
+var $Module = "Entitlement Verification";
+var $SubModule = "Work Order Entitlement VF";
+var $Setting = "SET025";
+var $value = true;
+$bo_act_configurationProfiles.editGroupProfileForBooleanSettings($groupProfileName, $Module, $SubModule, $Setting, $value);
+
+/**
  * Create SLA Terms
  */
 var $slaName = $bo_act_slaTerms.createSlaTerms("Default");

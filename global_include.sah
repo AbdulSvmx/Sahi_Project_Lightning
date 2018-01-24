@@ -15,7 +15,7 @@ var $un = "vansys@pqtpart1.com";
 var $pwd = "servicemax2";
 var $sfmUsn = "sysadmin01@sfdautomation.com";
 var $sfmPwd = "maxplore2";
-var $bac_PRTun = "commonuser@sf1.com.full1";
+var $bac_PRTun = "commonuser@sf2.com.full2"; //Most Used Customer
 var $bac_PRTpwd = "servicemax1";
 
 //SFMD Global Variables

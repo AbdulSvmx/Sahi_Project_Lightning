@@ -95,7 +95,7 @@ if(_getText(_cell("SVMXC"))!="SVMXDEV")
 	$code = $codeDev;
 
 
-$bo_act_salesforceSetUp.createApexClasses($code);
+$bo_act_salesforcePageSetUp.createApexClasses($code);
 
 var $wrongMethodName = $bo_act_common.generateRandomName("Test");
 var $actionTitle = $bo_act_customAction.createCustomActionForWebService("Work Order", $className, $wrongMethodName);
@@ -136,7 +136,7 @@ for (var i = 0; i < $datacreated.length; i++) {
 }
 $bo_act_SFW.deleteWizards("Work Order", $wizardIDName);
 $bo_act_customAction.deleteCustomAction("Work Order", $actionTitle);
-$bo_act_salesforceSetUp.deleteapexClasses($className);
+$bo_act_salesforcePageSetUp.deleteapexClasses($className);
 
 $SFW_HandoveredFunctionalityOnWebServiceFail.end();
 

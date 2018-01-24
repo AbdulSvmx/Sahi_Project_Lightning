@@ -5,7 +5,7 @@ var $bo_act_customAction=new function bo_act_customAction(){
 	_setSelected($bo_pg_customAction.sel_objWO, $objectName);
 		_click($bo_pg_customAction.btn_new);
 		_setSelected($bo_pg_customAction.sel_actionType,$actnType);
-		_setValue($bo_pg_customAction.txt_actionName,$custActname);
+		_setValue($bo_pg_customAction.txt_actionTitle,$custActname);
 		_setValue($bo_pg_customAction.txt_actionID,$custActID);
 		_setValue($bo_pg_customAction.txt_enterURL,$url);
 		_click($bo_pg_customAction.btn_quickSave);

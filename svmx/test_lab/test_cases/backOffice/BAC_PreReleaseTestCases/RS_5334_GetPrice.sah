@@ -19,7 +19,7 @@ var $seperator = "/";
 */
 var $accountName = $bo_act_accounts.createAccount();
 var $contactName = $bo_act_contacts.createContact($accountName);
-var $productName = $bo_act_products.createProduct($productCode, $productFamily[3]);
+var $productName = $bo_act_products.createProduct($productCode, $productFamily[0]);
 var $IBName = $bo_act_installedProduct.createInstalledProduct($productName, $accountName, $contactName);
 
 /**
@@ -49,6 +49,15 @@ var $SubModule = "Create Work Order Lines VF";
 var $Setting1 = "SET004";
 var $settingValue1 = "Standard Price Book";
 $bo_act_configurationProfiles.editGroupProfileForTextSettings($groupProfileName, $Module, $SubModule, $Setting1, $settingValue1);
+
+/**
+ * Configure the Group Profile SET025
+ */
+var $Module = "Entitlement Verification";
+var $SubModule = "Work Order Entitlement VF";
+var $Setting = "SET025";
+var $value = true;
+$bo_act_configurationProfiles.editGroupProfileForBooleanSettings($groupProfileName, $Module, $SubModule, $Setting, $value);
 
 /**
  * Create SLA Terms

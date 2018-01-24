@@ -175,20 +175,7 @@ var $bo_act_SFM = new function bo_act_SFM() {
 			_wait(10000);
 			_click($bo_pg_sfmTransactionAndDesigner.btn_saveAndclose);
 			_wait(2000);
-/*
-		if (_exists($bo_pg_sfmTransactionAndDesigner.alert_sfm)) {
-			_focusWindow();
-			_takeScreenShot();
-			_click($bo_pg_sfmTransactionAndDesigner.btn_ok);
-			_logExceptionAsFailure("Page not saved, refer screenshot for error");
-			_click($bo_pg_sfmTransactionAndDesigner.btn_backToList);
-			_click($bo_pg_sfmTransactionAndDesigner.btn_yes);
-			$result = false;
-		} else {
-			_click($bo_pg_sfmTransactionAndDesigner.btn_saveAndclose);
-			$result = true;
-		}
-	*/		
+
 		_setSpeed(100);	
 		}
 		
@@ -246,8 +233,9 @@ var $bo_act_SFM = new function bo_act_SFM() {
 			_setSelected($bo_pg_sfmTransactionAndDesigner.lbl_checklistOb,$nameOfTranType);
 		}
 		this.createNewSFM=function($sfmName){
+			_wait(60000,_isVisible($bo_pg_sfmTransactionAndDesigner.btn_newSFMTransaction));
 			_click($bo_pg_sfmTransactionAndDesigner.btn_newSFMTransaction);
-			_wait(10000);
+			_wait(30000,_isVisible($bo_pg_sfmTransactionAndDesigner.txt_name));
 			_setValue($bo_pg_sfmTransactionAndDesigner.txt_name,$sfmName);
 			_click($bo_pg_sfmTransactionAndDesigner.txt_sfmTransactionId);
 		}
@@ -292,16 +280,39 @@ var $bo_act_SFM = new function bo_act_SFM() {
 						_wait(3000);
 								  
 					}
-						this.qualifyinCriteriaChildFieldMap=function($selectExistingValueMap){
+						this.qualifyinCriteriaChildValueMap=function($selectExistingValueMap){
 							_click($bo_pg_sfmTransactionAndDesigner.dropDownList);
 							_setStrictVisibilityCheck(true);
 							_setSelected($bo_pg_sfmTransactionAndDesigner.dropDownList,"Work Detail (Work Order)");
 							_setStrictVisibilityCheck(false);
 							_click(_f("main").tab("Mapping(s)"));
 							_click(_f("main").tab("Value Map For New Records"));
-							_setSelected(_f("main").s_combobox("searchCombo[1]"), $selectExistingValueMap);
+							_setSelected(_f("main").s_combobox("searchCombo[2]"), $selectExistingValueMap);
+							_wait(6000);
 						}
+							this.qualifyinCriteriaChildFieldMap=function($mapName){
+							_click($bo_pg_sfmTransactionAndDesigner.dropDownList);
+							_setStrictVisibilityCheck(true);
+							_setSelected($bo_pg_sfmTransactionAndDesigner.dropDownList,"Work Detail (Work Order)");
+							_setStrictVisibilityCheck(false);
+							_click(_f("main").tab("Mapping(s)"));
+							_click(_f("main").s_button("New[1]"));
+								_wait(6000);
+								_setValue(_f("main").s_textinput("Save this map as"),"$mapName")
+							_click(_f("main").s_textinput("Input ID Here[1]"));
+							_click(_f("main").s_button("Save[1]"));
+							_wait(5000);
+							}
 							
+							this.addHeaderFromLookupInDelivery=function(){
+								_click(_span("svmx-btn-icon svmx_lookup_icon"));
+								_wait(2000);
+								_click(_span("svmx-btn-icon svmx-sfmd-search-icon "));
+								_wait(3000);
+								_click(_div("svmx-grid-cell-inner [1]"));
+								_click(_span("Select"));
+								
+							}
 							this.addFieldToChildSection=function(){
 							_click(_f("main").s_datagroup("dataGroup[3]"));
 							_click(_f("main").s_textinput("searchText[4]"));
@@ -321,12 +332,7 @@ var $bo_act_SFM = new function bo_act_SFM() {
 							_click(_f("main").s_datagroup("dataGroup[3]"));
 							_click(_f("main").s_textinput("searchText[4]"));
 								_setValue(_f("main").s_textinput("searchText[4]"),"Covered");
-							_doubleClick(_f("main").s_label("Covered %[1]"));
-
-							_click(_f("main").s_datagroup("dataGroup[3]"));
-							_click(_f("main").s_textinput("searchText[4]"));
-								_setValue(_f("main").s_textinput("searchText[4]"),"Consumed From Location");
-							_doubleClick(_f("main").s_label("Consumed From Location[1]"));
+							_doubleClick(_f("main").s_label("Covered %[1]"));							
 
 							_click(_f("main").s_datagroup("dataGroup[3]"));
 							_click(_f("main").s_textinput("searchText[4]"));

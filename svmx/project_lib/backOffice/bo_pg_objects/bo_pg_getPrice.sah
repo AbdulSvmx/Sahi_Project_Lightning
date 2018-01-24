@@ -22,7 +22,7 @@ var $bo_pg_getPrice = new function bo_pg_getPrice(){
 	
 	// Add Parts Line
 	this.btn_partsLine = _span("Parts");
-	this.txt_lineQty = _textbox(0,_rightOf(_label("/Line Qty/")));
+	this.txt_lineQty = _textbox("/Line Qty/",_rightOf(_label("/Line Qty/")));
 	
 	// Add Labor Line
 	this.btn_laborLine = _span("Labor");
