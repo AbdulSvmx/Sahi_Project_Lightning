@@ -1,7 +1,7 @@
 /**
  * Functions for the Accounts Object
  */
-var $bo_act_salesforceSetUp = new function bo_act_$bo_act_salesforceSetUp() {
+var $bo_act_salesforcePageSetUp = new function bo_act_$bo_act_salesforcePageSetUp() {
 
 
 	this.createApexClasses = function($code) {

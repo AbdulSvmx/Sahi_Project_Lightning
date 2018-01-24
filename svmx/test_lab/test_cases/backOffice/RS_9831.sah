@@ -95,7 +95,7 @@ var $code = $codeBase;
 else
 $code = $codeDev;
 
-$bo_act_salesforceSetUp.createApexClasses($code);
+$bo_act_salesforcePageSetUp.createApexClasses($code);
 
 var $actionTitle = $bo_act_customAction.createCustomActionForWebService("Work Order", $className, $methodName);
 $bo_act_customAction.addParametersForWebService("Owner","Field Name", "Owner ID");
@@ -136,7 +136,7 @@ for (var i = 0; i < $datacreated.length; i++) {
 }
 $bo_act_SFW.deleteWizards("Work Order", $wizardIDName);
 $bo_act_customAction.deleteCustomAction("Work Order", $actionTitle);
-$bo_act_salesforceSetUp.deleteapexClasses($className);
+$bo_act_salesforcePageSetUp.deleteapexClasses($className);
 $RS_9831.end();
 
 
