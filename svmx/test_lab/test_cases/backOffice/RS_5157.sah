@@ -72,11 +72,11 @@ $bo_act_scheduledSFM.clickRunNow($ProcessName1,$ProcessName2);
 $bo_act_scheduledSFM.navigateApexJobsPage();
 
 
-	var	$status1=_getText($bo_pg_salesForceSetUP.lbl_status1);
+	var	$status1=_getText($bo_pg_salesforcePageSetUp.lbl_status1);
 if ($status1!="Completed"){
 	_navigateTo(document.location.href, true);}
 else{
-	var $status2=_getText($bo_pg_salesForceSetUP.lbl_status2);
+	var $status2=_getText($bo_pg_salesforcePageSetUp.lbl_status2);
 		}
 if($status2 !="Completed"){
 	_log("The SFM initiated 1st was completed 1st");

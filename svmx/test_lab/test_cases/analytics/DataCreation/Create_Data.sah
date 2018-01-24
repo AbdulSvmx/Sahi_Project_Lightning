@@ -63,10 +63,10 @@ $excel.insertUnderColumn("../../analytics/an_excleData/an_Datasheet1.xlsx", "She
 
 // To create Technician and put them in the sheet
 
-var $technician1;
+/*var $technician1;
 var $technician2;
 
-var $create_tech1 = "SVMXC__Service_Group_Members__c tech1 = new SVMXC__Service_Group_Members__c (Name = 'Roni Malek', 	SVMXC__Active__c = true ,SVMXC__Working_Hours__c = '"+$workinghours+"' );insert tech1;";
+var $create_tech1 = "SVMXC__Service_Group_Members__c tech1 = new SVMXC__Service_Group_Members__c (Name = 'Roni Malek',SVMXC__Active__c = true ,SVMXC__Working_Hours__c = '"+$workinghours+"' );insert tech1;";
 var $create_tech = $op_act_sForceApiCall.sForceQuery($un, $pwd, $create_tech1 , "create");
 
 
@@ -78,7 +78,7 @@ $technician1 = $techID_Fetch[0].Id;
 
 $excel.insertUnderColumn("../../analytics/an_excleData/an_Datasheet1.xlsx", "Sheet1", "Technician", ""+$technician1+"","");
 
-var $create_tech2 = "SVMXC__Service_Group_Members__c tech1 = new SVMXC__Service_Group_Members__c (Name = 'Micheal 2', 	SVMXC__Active__c = true ,SVMXC__Working_Hours__c = '"+$workinghours+"' );insert tech1;";
+var $create_tech2 = "SVMXC__Service_Group_Members__c tech1 = new SVMXC__Service_Group_Members__c (Name = 'Micheal 2',SVMXC__Active__c = true ,SVMXC__Working_Hours__c = '"+$workinghours+"' );insert tech1;";
 var $create_t2 = $op_act_sForceApiCall.sForceQuery($un, $pwd, $create_tech2 , "create");
 
 
@@ -90,7 +90,7 @@ $technician2 = $techID_Fetch2[0].Id;
 
 $excel.insertUnderColumn("../../analytics/an_excleData/an_Datasheet1.xlsx", "Sheet1", "Technician", ""+$technician2+"","");
 
-
+*/
 // To create Component and put them in the sheet
 
 var $installedproductID1;

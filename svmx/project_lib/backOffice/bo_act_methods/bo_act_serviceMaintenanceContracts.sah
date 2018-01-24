@@ -327,6 +327,7 @@ this.addTravelPolicyToSCONWithTwoLines = function($sconName,$defaultTravelPrice,
 	_click($bo_pg_serviceMaintenanceContracts.btn_editSecondLaborPricingRow);
 	_wait(2000);
 	//_setValue($bo_pg_serviceMaintenanceContracts.txt_currencyISOCode, $currencyType);
+	_setValue($bo_pg_serviceMaintenanceContracts.txt_travelPolicyUnit, $travelPolicyUnit1);
 	_click(_div(0,_rightOf(_label("Currency ISO Code:",_near(_span("Update"))))));
 	_click(_listItem($currencyType));
 	_setValue($bo_pg_serviceMaintenanceContracts.txt_travelPolicyUnit, $travelPolicyUnit1);
