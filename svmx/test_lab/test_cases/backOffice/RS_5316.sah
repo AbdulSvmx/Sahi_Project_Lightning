@@ -21,7 +21,7 @@ var $seperator = "/";
 */
 var $accountName = $bo_act_accounts.createAccount();
 var $contactName = $bo_act_contacts.createContact($accountName);
-var $productName = $bo_act_products.createProduct($productCode, $productFamily[3]);
+var $productName = $bo_act_products.createProduct($productCode, $productFamily[0]);
 var $IBName = $bo_act_installedProduct.createInstalledProduct($productName, $accountName, $contactName);
 
 /**
@@ -63,7 +63,7 @@ $bo_act_serviceMaintenanceContracts.AddCoveredProducToServiceContract($sconName,
 //Add Entitled Contact to Service Contract 
 
 $bo_act_serviceMaintenanceContracts.addEntitledContactsToServiceContract($sconName, $contactName);
-
+_setSpeed(300);
 //Add Labor Pricing To Service Contract using Unit as Per Hours and Activity Type as Calibration
 var $RoundingType = "Actuals";
 var $unit = ["--None--","Per Hour","Flat Rate"];
@@ -72,7 +72,7 @@ var $regularRate = 500;
 var $activityProduct = (($activityType[1].concat(" : ")).concat($productName));
 
 $bo_act_serviceMaintenanceContracts.addLaborPricingToServiceContractUsingActivityProduct($sconName, $RoundingType, $unit[1], $minimumLaborMins, $regularRate, $activityProduct);
-
+_setSpeed(100);
 
 /**
 * Create Case record
@@ -141,7 +141,7 @@ if(_isVisible(_image("Checked",_rightOf(_cell("/Is Entitlement Performed/"))))){
 */
 
 $bo_act_getPrice.navigateToSFMDeliveryPageFor_TDM016($WONumber);
-
+_setSpeed(300);
 //Add Labor Line to Above invoke TDM016 SFM
 var $searchValue = $productName;
 var $startHrs = "03";
@@ -168,6 +168,7 @@ _assertEqual($LaborCoveredActual,"0","Actual and expected labor Covered % are no
 $bo_act_getPrice.closeEditedWOLineToSFMDelivery();
 
 $bo_act_getPrice.saveSFMDelivery();
+_setSpeed(100);
 
 //Delete SFM Wizard 
 $bo_act_SFW.deleteSFMWizard("Work Order", $wizardIDName);

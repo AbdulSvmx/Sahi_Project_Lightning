@@ -1,7 +1,7 @@
 
 
 //Author:Mamata
-	var $RS_10029 = _testcase("RS_10029", "Field level: On Change Webservice Child Field");
+	var $RS_10029 = _testcase("RS_10029", "Field level: On Exit Webservice Child Field");
 	$RS_10029.start();
 	_setSpeed(100);
 

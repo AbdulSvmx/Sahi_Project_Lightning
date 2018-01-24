@@ -1,2 +1,2 @@
-svmx/project_lib/analytics/an_act_methods/an_act_MTTC.sah
-svmx/test_lab/test_suites/analytics/ana_MTTC.suite
+svmx/test_lab/test_cases/analytics/ART_testcases/ANA-980.sah
+svmx/test_lab/test_suites/analytics/ana_AttachRate.suite

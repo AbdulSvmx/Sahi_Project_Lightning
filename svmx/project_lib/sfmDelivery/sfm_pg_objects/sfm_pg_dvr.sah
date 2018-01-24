@@ -29,6 +29,7 @@ var $sfm_pg_dvr = new function sfm_pg_dvr() {
 	this.btn_targetOk = _f("main").s_button("OK[1]");
 	this.btn_targetCancel = _f("main").s_button("Cancel");
 	this.txt_targetChilden= _f("main").s_label("Select target children to which the selected rule is to be added");
+	this.txt_dvrExists = _f("main").label("The Data Validation/Formula ID you have entered already exists. Please enter a unique ID.");
 
 	/**
 	 * Function to create a data validation rule
@@ -54,6 +55,12 @@ var $sfm_pg_dvr = new function sfm_pg_dvr() {
 		_setValue($sfm_pg_dvr.txt_messageDescription,$ruleDescription );
 		_click($sfm_pg_dvr.btn_saveDVR);
 		_wait(5000);
+		if(_exists($sfm_pg_dvr.txt_dvrExists)){
+			_focusWindow();
+			_takeScreenShot();
+			_logExceptionAsFailure("DVR already exists, refer screenshot for error");
+						
+		}
 		_click($sfm_pg_dvr.btn_addToProcess);
 		_wait(5000);
 		if(_exists($sfm_pg_dvr.txt_targetChilden)){

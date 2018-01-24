@@ -1,9 +1,11 @@
 var $an_ftf_002= _testcase("ANA-000","When the user selects the Case and we add a custom fields in one of the criteria");
 $an_ftf_002.start();
 
-var $un = "vinaya.v@servicemax.com";
-var $pwd = "servicemax12";
-var $url = "https://test.salesforce.com";
+var $cred = _readExcelFile("../../analytics/an_excleData/credentials.xlsx","Sheet1",true);
+var $un = $cred[1]["UserName"];
+var $pwd =$cred[1]["Password"];
+var $url =$cred[1]["url"];
+var $user =$cred[1]["User"];
 var $data = _readExcelFile("../../analytics/an_excleData/MTTC_data.xlsx","Sheet1",true);
 var $insert_case = $data[4]["InsertCase"];
 var $Account1 = $data[1]["Account"];

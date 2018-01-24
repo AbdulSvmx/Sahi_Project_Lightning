@@ -4,12 +4,13 @@ var $cred = _readExcelFile("../../analytics/an_excleData/credentials.xlsx","Shee
 var $un = $cred[1]["UserName"];
 var $pwd =$cred[1]["Password"];
 var $url =$cred[1]["url"];
+var $user =$cred[1]["User"];
 var $data = _readExcelFile("../../analytics/an_excleData/MTTC_data.xlsx","Sheet1",true);
 var $Account = $data[1]["Account"];
 var $Technician = $data[1]["Technician"];
 var $Product = $data[1]["Product"];
 var $OrderStatus = $data[1]["OrderStatus"];
-var $Component = $data[3]["Component"];
+var $Component = $data[4]["Component"];
 var $PreferredStartDate = $data[5]["PreferredStartDate"];
 var $PreferredEndDate = $data[5]["PreferredEndDate"];
 $bo_act_login.login($url, $un, $pwd);

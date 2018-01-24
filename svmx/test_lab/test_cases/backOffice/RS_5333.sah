@@ -52,6 +52,15 @@ var $settingValue1 = "Standard Price Book";
 $bo_act_configurationProfiles.editGroupProfileForTextSettings($groupProfileName, $Module, $SubModule, $Setting1, $settingValue1);
 
 /**
+ * Configure the Global Profile SET013
+ */
+var $Module = "Work Order";
+var $SubModule = "Create Work Order Lines VF";
+var $Setting = "SET013";
+var $value = false;
+$bo_act_configurationProfiles.editGlobalProfileForBooleanSettings($Module, $SubModule, $Setting, $value);
+
+/**
  * Create SLA Terms
  */
 var $slaName = $bo_act_slaTerms.createSlaTerms("Default");

@@ -12,7 +12,8 @@ var $bo_pg_sfmWizard= new function bo_pg_sfmWizard() {
 	this.chk_wizardName=_checkbox("page1:form1:j_id1:pblock2:j_id88:j_id89:pblocktable:0:j_id91");
 	this.btn_clickEdit=_submit("Edit");
 	
-	this.sel_objPrevMaintPlan=_select("page1:form1:j_id1:j_id2:j_id3:ObjectSelect");
+	//this.sel_objPrevMaintPlan=_select("page1:form1:j_id1:j_id2:j_id3:ObjectSelect");
+	this.sel_objPrevMaintPlan= _select(0);
 	this.lbl_verifyCustWizardSection=_heading2("Custom SFM Wizards");
 	this.btn_clickNewCustomWizard=_submit("New");
 	this.txt_wizardName=_textbox("page1:form1:mainPblock:tab1:pblocksectionmain:j_id50:j_id54:hdrname");
