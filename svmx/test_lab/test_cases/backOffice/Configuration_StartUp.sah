@@ -9,6 +9,7 @@ var $userName = "orgsadmin@svmx-org4.org.org4part1";
 var $password = "servicemax1";
 $bo_act_login.login($g_url, $bac_PRTun, $bac_PRTpwd);
 var $sectionName = _span("Service Location");
+var $SectionAuto = "Automation Section";
 var $sectionNameCase = _span("Description Information(Header visible on edit only)");
 /*
 var $accountName = $bo_act_accounts.createAccount();
@@ -47,15 +48,15 @@ $bo_act_salesforcePageSetUp.dragAndDropVisualForcePage($bo_pg_salesforcePageSetU
 $bo_act_salesforcePageSetUp.saveEditLayout();
 
 */
-/*
+
 
 //Drag and drop all the SLA related fields in WO Object
 
 $bo_act_navigation.navigateToWorkOrdersTab();
 _click(_link(0,_under(_tableHeader("Work Order Number"))));
-<<<<<<< HEAD
 //$bo_act_salesforcePageSetUp.dragAndDropSection($sectionName,1);
 _click(_link("Edit Layout"));
+_continueOnError();
 $bo_act_salesforcePageSetUp.dragAndDropFields(_span("Time to Resolve (..."), _span("Service Location"));
 $bo_act_salesforcePageSetUp.dragAndDropFields(_span("Time to Restore (..."), _span("Service Location"));
 $bo_act_salesforcePageSetUp.dragAndDropFields($bo_pg_salesforcePageSetUp.btn_timeToRestore, _span("Service Location"));
@@ -72,11 +73,6 @@ $bo_act_salesforcePageSetUp.dragAndDropFields($bo_pg_salesforcePageSetUp.btn_res
 $bo_act_salesforcePageSetUp.dragAndDropFields($bo_pg_salesforcePageSetUp.btn_restorationCustomerBy, _span("Service Location"));
 //Extra Fields
 $bo_act_salesforcePageSetUp.dragAndDropFields($bo_pg_salesforcePageSetUp.btn_totalBillableAmount, _span("Service Location"));
-$bo_act_salesforcePageSetUp.saveEditLayout();
-
-=======
-$bo_act_salesforcePageSetUp.dragAndDropSection($sectionName,1);
-_continueOnError();
 $bo_act_salesforcePageSetUp.dragAndDropFields($bo_pg_salesforcePageSetUp.btn_timeToRestore, $sectionName);
 $bo_act_salesforcePageSetUp.dragAndDropFields($bo_pg_salesforcePageSetUp.btn_timeToResolve, $sectionName);
 $bo_act_salesforcePageSetUp.dragAndDropFields($bo_pg_salesforcePageSetUp.btn_timeToOnsiteResponse, $sectionName);
@@ -100,7 +96,6 @@ $bo_act_salesforcePageSetUp.dragAndDropFields($bo_pg_salesforcePageSetUp.btn_ent
 $bo_act_salesforcePageSetUp.dragAndDropFields($bo_pg_salesforcePageSetUp.btn_entitlementNotes, $sectionName);
 $bo_act_salesforcePageSetUp.dragAndDropFields($bo_pg_salesforcePageSetUp.btn_ServiceContract, $sectionName);
 $bo_act_salesforcePageSetUp.dragAndDropFields($bo_pg_salesforcePageSetUp.btn_Warranty, $sectionName);
-
 $bo_act_salesforcePageSetUp.dragAndDropFields($bo_pg_salesforcePageSetUp.btn_resolutionCustomerBy, $sectionName);
 $bo_act_salesforcePageSetUp.dragAndDropFields($bo_pg_salesforcePageSetUp.btn_resolutionInternalBy, "SLA Fields");
 $bo_act_salesforcePageSetUp.dragAndDropFields($bo_pg_salesforcePageSetUp.btn_restorationInternalBy, "SLA Fields");
@@ -114,23 +109,21 @@ $bo_act_salesforcePageSetUp.saveEditLayout();
 //Drag and drop all the GetPrice related fields on SCON Object
 $bo_act_navigation.navigateToServiceMaintenanceContractPage();
 _click(_link(0,_under(_tableHeader("Contract Name/Number"))));
-$bo_act_salesforcePageSetUp.dragAndDropSection($sectionName,1);
+$bo_act_salesforcePageSetUp.dragAndDropSection($SectionAuto,1);
 
 //Fields added by Bhupendra Singh
 _continueOnError();
-$bo_act_salesforcePageSetUp.dragAndDropFields($bo_pg_salesforcePageSetUp.btn_zone, $sectionName);
+$bo_act_salesforcePageSetUp.dragAndDropFields($bo_pg_salesforcePageSetUp.btn_zone, $SectionAuto);
 _stopOnError();
 $bo_act_salesforcePageSetUp.saveEditLayout();
-
->>>>>>> e77fe7c492f013fc8473dd3911869c5b43433102
 
 //Drag and drop all the SLA related fields in Case Object
 
 $bo_act_navigation.navigateToCasesPage();
 _click(_link(0,_under(_tableHeader("Case Number"))));
-<<<<<<< HEAD
 //$bo_act_salesforcePageSetUp.dragAndDropSection($sectionName,1);
 _click(_link("Edit Layout"));
+_continueOnError();
 $bo_act_salesforcePageSetUp.dragAndDropFields($bo_pg_salesforcePageSetUp.btn_timeToRestore, _span("Description Information(Header visible on edit only)"));
 $bo_act_salesforcePageSetUp.dragAndDropFields($bo_pg_salesforcePageSetUp.btn_timeToResolve, _span("Description Information(Header visible on edit only)"));
 $bo_act_salesforcePageSetUp.dragAndDropFields($bo_pg_salesforcePageSetUp.btn_timeToOnsiteResponse, _span("Description Information(Header visible on edit only)"));
@@ -148,27 +141,32 @@ $bo_act_salesforcePageSetUp.dragAndDropFields($bo_pg_salesforcePageSetUp.btn_act
 $bo_act_salesforcePageSetUp.dragAndDropFields($bo_pg_salesforcePageSetUp.btn_actualResolution, _span("Description Information(Header visible on edit only)"));
 $bo_act_salesforcePageSetUp.dragAndDropFields($bo_pg_salesforcePageSetUp.btn_actualRestoration, _span("Description Information(Header visible on edit only)"));
 $bo_act_salesforcePageSetUp.dragAndDropFields(_span("SLA Terms"), _span("Description Information(Header visible on edit only)"));
-=======
-$bo_act_salesforcePageSetUp.dragAndDropSection($sectionName,1);
-_continueOnError();
-$bo_act_salesforcePageSetUp.dragAndDropFields($bo_pg_salesforcePageSetUp.btn_timeToRestore, $sectionName);
-$bo_act_salesforcePageSetUp.dragAndDropFields($bo_pg_salesforcePageSetUp.btn_timeToResolve, $sectionName);
-$bo_act_salesforcePageSetUp.dragAndDropFields($bo_pg_salesforcePageSetUp.btn_timeToOnsiteResponse, $sectionName);
-$bo_act_salesforcePageSetUp.dragAndDropFields($bo_pg_salesforcePageSetUp.btn_timeToInitialResponse, $sectionName);	
-$bo_act_salesforcePageSetUp.dragAndDropFields($bo_pg_salesforcePageSetUp.btn_InitialResponseInternalBy, $sectionName);
-$bo_act_salesforcePageSetUp.dragAndDropFields($bo_pg_salesforcePageSetUp.btn_InitialResponseCustomerBy, $sectionName);
-$bo_act_salesforcePageSetUp.dragAndDropFields($bo_pg_salesforcePageSetUp.btn_OnsiteResponseCustomerBy, $sectionName);
-$bo_act_salesforcePageSetUp.dragAndDropFields($bo_pg_salesforcePageSetUp.btn_OnsiteResponseInternalBy, $sectionName);
-$bo_act_salesforcePageSetUp.dragAndDropFields($bo_pg_salesforcePageSetUp.btn_resolutionCustomerBy, $sectionName);
-$bo_act_salesforcePageSetUp.dragAndDropFields($bo_pg_salesforcePageSetUp.btn_resolutionInternalBy, $sectionName);
-$bo_act_salesforcePageSetUp.dragAndDropFields($bo_pg_salesforcePageSetUp.btn_restorationInternalBy, $sectionName);
-$bo_act_salesforcePageSetUp.dragAndDropFields($bo_pg_salesforcePageSetUp.btn_restorationCustomerBy, $sectionName);
-$bo_act_salesforcePageSetUp.dragAndDropFields($bo_pg_salesforcePageSetUp.btn_actualInitialResponse, $sectionName);
-$bo_act_salesforcePageSetUp.dragAndDropFields($bo_pg_salesforcePageSetUp.btn_actualOnsiteResponse, $sectionName);
-$bo_act_salesforcePageSetUp.dragAndDropFields($bo_pg_salesforcePageSetUp.btn_actualResolution, $sectionName);
-$bo_act_salesforcePageSetUp.dragAndDropFields($bo_pg_salesforcePageSetUp.btn_actualRestoration, $sectionName);
+
+$bo_act_salesforcePageSetUp.dragAndDropFields($bo_pg_salesforcePageSetUp.btn_timeToRestore, $sectionNameCase);
+$bo_act_salesforcePageSetUp.dragAndDropFields($bo_pg_salesforcePageSetUp.btn_timeToResolve, $sectionNameCase);
+$bo_act_salesforcePageSetUp.dragAndDropFields($bo_pg_salesforcePageSetUp.btn_timeToOnsiteResponse, $sectionNameCase);
+$bo_act_salesforcePageSetUp.dragAndDropFields($bo_pg_salesforcePageSetUp.btn_timeToInitialResponse, $sectionNameCase);	
+$bo_act_salesforcePageSetUp.dragAndDropFields($bo_pg_salesforcePageSetUp.btn_InitialResponseInternalBy, $sectionNameCase);
+$bo_act_salesforcePageSetUp.dragAndDropFields($bo_pg_salesforcePageSetUp.btn_InitialResponseCustomerBy, $sectionNameCase);
+$bo_act_salesforcePageSetUp.dragAndDropFields($bo_pg_salesforcePageSetUp.btn_OnsiteResponseCustomerBy, $sectionNameCase);
+$bo_act_salesforcePageSetUp.dragAndDropFields($bo_pg_salesforcePageSetUp.btn_OnsiteResponseInternalBy, $sectionNameCase);
+$bo_act_salesforcePageSetUp.dragAndDropFields($bo_pg_salesforcePageSetUp.btn_resolutionCustomerBy, $sectionNameCase);
+$bo_act_salesforcePageSetUp.dragAndDropFields($bo_pg_salesforcePageSetUp.btn_resolutionInternalBy, $sectionNameCase);
+$bo_act_salesforcePageSetUp.dragAndDropFields($bo_pg_salesforcePageSetUp.btn_restorationInternalBy, $sectionNameCase);
+$bo_act_salesforcePageSetUp.dragAndDropFields($bo_pg_salesforcePageSetUp.btn_restorationCustomerBy, $sectionNameCase);
+$bo_act_salesforcePageSetUp.dragAndDropFields($bo_pg_salesforcePageSetUp.btn_actualInitialResponse, $sectionNameCase);
+$bo_act_salesforcePageSetUp.dragAndDropFields($bo_pg_salesforcePageSetUp.btn_actualOnsiteResponse, $sectionNameCase);
+$bo_act_salesforcePageSetUp.dragAndDropFields($bo_pg_salesforcePageSetUp.btn_actualResolution, $sectionNameCase);
+$bo_act_salesforcePageSetUp.dragAndDropFields($bo_pg_salesforcePageSetUp.btn_actualRestoration, $sectionNameCase);
+$bo_act_salesforcePageSetUp.dragAndDropFields($bo_pg_salesforcePageSetUp.btn_autoEntitlement, $sectionNameCase);
+$bo_act_salesforcePageSetUp.dragAndDropFields($bo_pg_salesforcePageSetUp.btn_performAutoEntitlement, $sectionNameCase);
+$bo_act_salesforcePageSetUp.dragAndDropFields($bo_pg_salesforcePageSetUp.btn_isEntitlementPerform, $sectionNameCase);
+$bo_act_salesforcePageSetUp.dragAndDropFields($bo_pg_salesforcePageSetUp.btn_entitlementType, $sectionNameCase);
+$bo_act_salesforcePageSetUp.dragAndDropFields($bo_pg_salesforcePageSetUp.btn_entitlementNotes, $sectionNameCase);
+$bo_act_salesforcePageSetUp.dragAndDropFields($bo_pg_salesforcePageSetUp.btn_ServiceContract, $sectionNameCase);
+$bo_act_salesforcePageSetUp.dragAndDropFields($bo_pg_salesforcePageSetUp.btn_Warranty, $sectionNameCase);
+
 _stopOnError();
->>>>>>> e77fe7c492f013fc8473dd3911869c5b43433102
 $bo_act_salesforcePageSetUp.saveEditLayout();
 
 //Drag and Drop fields for PRODUCT object
@@ -180,11 +178,8 @@ _dragDrop(_div("Stockable"),_span("Product Information(Header visible on edit on
 _dragDrop(_span("Enable Serialized..."),_span("Product Information(Header visible on edit only)"));
 $bo_act_salesforcePageSetUp.saveEditLayout();
 
-*/
 //Enable the Activate PM Setting
 $bo_act_configurationProfiles.editGlobalProfileForBooleanSettings("Preventive Maintenance", "Manage PM Plan", "SET002", true);
-
-
 
 //Include SFM Search in Home Page Layout
 
