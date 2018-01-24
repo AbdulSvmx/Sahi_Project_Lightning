@@ -111,6 +111,19 @@ var $caseNumber = $bo_act_Cases.createCase($caseStatus, $casePriority, $caseOrig
 //Edit the above case for Account, Contact and IB information
 $bo_act_Cases.editCase($caseNumber,$accountName,$contactName,$IBName,$locationName);
 
+/**
+* Create SFM Wizard for Case with 1 Steps as Check Entitlement.
+*/
+var $wizardTitleName = $bo_act_common.generateRandomName("SFWTitle");
+var $wizardIDName = $bo_act_common.generateRandomName("SFWId");
+var $fieldActnType = "Others";
+var $actnName = "Check Entitlement";
+
+$bo_act_navigation.navigateToSfmWizard();
+$bo_act_SFW.createWizardGeneralInfo("Case", $wizardTitleName, $wizardIDName);
+$bo_act_SFW.addCustomActionToWizard($fieldActnType, $actnName);
+$bo_act_SFW.quickSaveSFWizard();
+
 
 /**
  * Perform Interactive Entitlement on Case
