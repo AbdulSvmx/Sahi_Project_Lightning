@@ -67,6 +67,7 @@ var $bo_pg_salesforcePageSetUp = new function bo_pg_salesforcePageSetUp(){
 	 this.btn_entitlementNotes = _span("Entitlement Notes");
 	 this.btn_ServiceContract = _span("Service Contract");
 	 this.btn_Warranty = _span("Warranty");
+	 this.btn_currency = _span("Currency");
 };
 
 

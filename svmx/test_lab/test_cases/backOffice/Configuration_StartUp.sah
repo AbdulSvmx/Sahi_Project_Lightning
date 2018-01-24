@@ -96,6 +96,8 @@ $bo_act_salesforcePageSetUp.dragAndDropFields($bo_pg_salesforcePageSetUp.btn_ent
 $bo_act_salesforcePageSetUp.dragAndDropFields($bo_pg_salesforcePageSetUp.btn_entitlementNotes, $sectionName);
 $bo_act_salesforcePageSetUp.dragAndDropFields($bo_pg_salesforcePageSetUp.btn_ServiceContract, $sectionName);
 $bo_act_salesforcePageSetUp.dragAndDropFields($bo_pg_salesforcePageSetUp.btn_Warranty, $sectionName);
+$bo_act_salesforcePageSetUp.dragAndDropFields($bo_pg_salesforcePageSetUp.btn_currency, $sectionName);
+
 $bo_act_salesforcePageSetUp.dragAndDropFields($bo_pg_salesforcePageSetUp.btn_resolutionCustomerBy, $sectionName);
 $bo_act_salesforcePageSetUp.dragAndDropFields($bo_pg_salesforcePageSetUp.btn_resolutionInternalBy, "SLA Fields");
 $bo_act_salesforcePageSetUp.dragAndDropFields($bo_pg_salesforcePageSetUp.btn_restorationInternalBy, "SLA Fields");
