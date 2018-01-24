@@ -15,6 +15,7 @@ var $ScheduledDate = $data[1]["ScheduledDate"];
 var $PreferredStartDate = $data[1]["PreferredStartDate"];
 var $PreferredEndDate = $data[1]["PreferredEndDate"];
 var $GuranteedUptime = $data[1]["GuranteedUptime"];
+var $user_meghana = $data[1]["user_meghana"];
 $bo_act_login.login($url, $un, $pwd);
 
 
@@ -67,7 +68,7 @@ _log($ana_1631_IB_ID1);
 // Create Covered Product 
 var $ana_1631_create_CP1 = "SVMXC__Service_Contract_Products__c CP01 = new SVMXC__Service_Contract_Products__c(SVMXC__Installed_Product__c = '"+$ana_1631_IB_ID1+"',SVMXC__Service_Contract__c = '"+$ana_1631_SCON1+"', Custom_checkbox__c = false , SVMXC__Is_Billable__c = true , SVMXC__Start_Date__c = System.Today()  ); insert CP01;";
 var $ana_1631_result_CP1 = $op_act_sForceApiCall.sForceQuery($un, $pwd, $ana_1631_create_CP1 , "create");
-var $ana_1631_get_CP1 = "Select Id , Name from SVMXC__Service_Contract_Products__c where Createdby.Id = '005q0000003GGfP' Order by CreatedDate DESC Limit 1";
+var $ana_1631_get_CP1 = "Select Id , Name from SVMXC__Service_Contract_Products__c where Createdby.Id = '"+$user_meghana+"' Order by CreatedDate DESC Limit 1";
 var $ana_1631_fetch_CP1   = $op_act_sForceApiCall.sForceQuery($un, $pwd, $ana_1631_get_CP1,"query");
 var $ana_1631_cp_ID1;
 _wait(5000);
@@ -125,7 +126,7 @@ _log($ana_1631_IB_ID2);
 //Create Covered Product 
 var $ana_1631_create_CP2 = "SVMXC__Service_Contract_Products__c CP01 = new SVMXC__Service_Contract_Products__c(SVMXC__Installed_Product__c = '"+$ana_1631_IB_ID2+"',SVMXC__Service_Contract__c = '"+$ana_1631_SCON2+"', Custom_checkbox__c = true); insert CP01;";
 var $ana_1631_result_CP2 = $op_act_sForceApiCall.sForceQuery($un, $pwd, $ana_1631_create_CP2 , "create");
-var $ana_1631_get_CP2 = "Select Id , Name from SVMXC__Service_Contract_Products__c where Createdby.Id = '005q0000003GGfP' Order by CreatedDate DESC Limit 1";
+var $ana_1631_get_CP2 = "Select Id , Name from SVMXC__Service_Contract_Products__c where Createdby.Id = '"+$user_meghana+"' Order by CreatedDate DESC Limit 1";
 var $ana_1631_fetch_CP2  = $op_act_sForceApiCall.sForceQuery($un, $pwd, $ana_1631_get_CP2,"query");
 var $ana_1631_cp_ID2;
 
