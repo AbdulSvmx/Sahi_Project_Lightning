@@ -1,4 +1,4 @@
-var $bo_pg_salesForceSetUP = new function bo_pg_salesForceSetUP(){
+var $bo_pg_salesforcePageSetUp = new function bo_pg_salesforcePageSetUp(){
 	
 		this.lnk_salesforceSetUp=_link("Setup");
 		this.txt_salesforceSetUpSrch=_textbox("setupSearch");

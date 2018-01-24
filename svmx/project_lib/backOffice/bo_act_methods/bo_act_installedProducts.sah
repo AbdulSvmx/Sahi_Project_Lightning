@@ -6,7 +6,6 @@ var $bo_act_installedProduct = new function bo_act_installedProduct() {
 	/**
 	 * Create an Account
 	 * 
-	 * @param $accountName
 	 */
 	this.createInstalledProduct = function($productName,$accountName,$contactName) {
 		var $serialNum = $bo_act_common.generateRandomName("Ser");
