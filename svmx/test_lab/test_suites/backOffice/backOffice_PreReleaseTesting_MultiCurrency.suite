@@ -13,6 +13,6 @@
 ../../../test_lab/test_cases/backOffice/BAC_PreReleaseTestCases/RS_5331_GetPriceMultiCurrency.sah
 ../../../test_lab/test_cases/backOffice/BAC_PreReleaseTestCases/RS_7019_Inventory.sah
 ../../../test_lab/test_cases/backOffice/BAC_PreReleaseTestCases/RS_7027_Inventory.sah
-//../../../test_lab/test_cases/backOffice/BAC_PreReleaseTestCases/RS_7439_ConditionBasedPM.sah
-//../../../test_lab/test_cases/backOffice/BAC_PreReleaseTestCases/RS_7441_AppAdministration.sah
+../../../test_lab/test_cases/backOffice/BAC_PreReleaseTestCases/RS_7439_ConditionBasedPM.sah
+../../../test_lab/test_cases/backOffice/BAC_PreReleaseTestCases/RS_7441_AppAdministration.sah
 ../../../test_lab/test_cases/backOffice/BAC_PreReleaseTestCases/RS_9810_SFMWizardHandOver.sah
