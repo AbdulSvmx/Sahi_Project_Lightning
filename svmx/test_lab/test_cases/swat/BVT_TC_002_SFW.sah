@@ -7,11 +7,9 @@ $BVT_TC_002_SFW.start();
 _setSpeed(100);
 
 
-/*
 
 //Pre - Condition 
 $bo_act_login.login("https://test.salesforce.com", "lohithaadmin@swatpart2.com", "maxpl0re2");
-
 
  
  
@@ -45,7 +43,7 @@ var $productName =$bo_act_products.createProduct();
 /**
  * Add Price To Standard Price for above created Product
 */ 
-/*n
+
  var $standardPriceValue = 120;
  $bo_act_products.addStandardPriceForProduct($productName, $standardPriceValue);
 
@@ -90,13 +88,10 @@ $workOrderNo = $swat_act_workOrders.createWorkOrder($caseNumber, $accountName, $
 //_isVisible(_cell({title: ""+$wizardTitleName+""}));
 //_assertVisible(_cell({title:""+$wizardTitleName+""}),"Pass");
 
- 
- /**
-  * Create SLA Terms
-  */
-
- /*n
- 
+  
+  // Create SLA Terms
+  
+  
  var $slaName = $bo_act_slaTerms.createSlaTerms("Default");
  $bo_act_slaTerms.addInitialResponseToSLA($slaName,"WorkOrder","Field Service","Medium","Created Date","5","10","SLA");
  $bo_act_slaTerms.addOnsiteResponseToSLA($slaName,"WorkOrder","Field Service","Medium","Created Date","10","15","SLA");
@@ -150,10 +145,12 @@ _click(_link($workOrderNo));
 //_selectDomain("/visual.force.com/");
  _selectDomain("/svmx/"); 
  
-_isVisible(_cell({title: "SFWTitle31201814166"}));
-_assertVisible(_cell({title:"SFWTitle31201814166"}),"Pass");
+// _isVisible(_cell({title: "SFWTitle31201814166"}));
+// _assertVisible(_cell({title:"SFWTitle31201814166"}),"Pass");
 
 
+_isVisible(_cell({title: $wizardTitleName}));
+_assertVisible(_cell({title:$wizardTitleName}),"Pass");
 
 //_click(_near(_cell({title: "SFWTitle31201814166"})_button("Create Quote from Work Order[1]")));
 _click(_button("Create Quote from Work Order[1]"));
@@ -219,14 +216,18 @@ _click(_span("svmx-btn-icon svmx-sfmd-save-icon"));
 //_selectDomain();
 
 //Add Parts Line to Above invoked TDM016 SFM
+//$productName = "pro161201812055";
 
-*/
-$productName = "pro161201812055";
+
+// After saving 'Create Quote from Work Order' process, Handover takes place. Hence
+// 'TDM016 - Manage Work Order Lines - Usage' process will be launched.
+
+
 var $searchValue = $productName;
 var $lineQty = "5";
 var $pricePerUnit = 120;
-//n   $bo_act_getPrice.addPartsLineToSFMDelivery($searchValue,$lineQty);
-//n   $bo_act_getPrice.calculateGetPrice();
+$bo_act_getPrice.addPartsLineToSFMDelivery($searchValue,$lineQty);
+$bo_act_getPrice.calculateGetPrice();
 
 //Validation of Get Price for Parts lines
 
@@ -250,10 +251,11 @@ _assertEqual($PartsDiscountActual,"0","Actual and expected Parts Discount % are 
 $bo_act_getPrice.closeEditedWOLineToSFMDelivery();
 
 $bo_act_getPrice.saveSFMDelivery();
+
 /**
 *Clean up function
 */
-/* n
+
 //var $datacreated = [$WONumber,$caseNumber,$IBName,$productName,$contactName,$accountName,$slaName,$serviceConractName];
 //for (var i = 0; i < $datacreated.length; i++) {
 //$bo_act_common.cleanUpfunction($datacreated[i]);
@@ -261,15 +263,15 @@ $bo_act_getPrice.saveSFMDelivery();
 
 //$bo_act_login.logOut();
 
-*/
+
 
 //$bo_act_getPrice.closeEditedWOLineToSFMDelivery();
 
-//n   $bo_act_getPrice.saveSFMDelivery();
+ $bo_act_getPrice.saveSFMDelivery();
 
 //Add Parts Line to Above invoked TDM015 SFM
 //Add a Parts Line
-/*Needed
+
 _click(_span("svmx-btn-icon svmx-sfmd-add-line-icon"));
 _click(_image("svmx-action-col-icon svmx-action-col-0   svmx-sfmd-edit-icon"));
 
@@ -281,33 +283,21 @@ _setValue(_textbox("Line Qty:"), "5");
 _click(_span("Update"));
 
 //Add a Labor Line
-
 $bo_act_getPrice.addLaborLineToSFMDelivery($searchValue, "service", "03", "05");
 
 
 //Add a Expense Line
-
 $bo_act_getPrice.addExpensesLineToSFMDelivery("Phone", "03", "3000");
 
-*/
 
 //Add a Travel Line
-
 $bo_act_getPrice.addTravelLineToSFMDeliveryUsingStartEndDate("01", "03");
-//_click(_span("Expense"));
-//_click(_span("sfm-button-1172-btnIconEl"));
-//_click(_span("svmx-btn-icon svmx-sfmd-add-line-icon[2]"));
-//_click(_image("svmx-action-col-icon svmx-action-col-0   svmx-sfmd-edit-icon[1]"));
-//_click(_image("svmx-action-col-icon svmx-action-col-0   svmx-sfmd-edit-icon[2]"));
-//_setValue(_textbox("Qty:"), "7");
-//_setValue(_textbox("svmx-form-field svmx-form-required-field svmx-form-text svmx-form-invalid-field"), "8500");
-//_click(_span("Update"));
-//_click(_span("svmx-btn-icon svmx-sfmd-save-icon"));
 
 _click(_span("svmx-btn-icon svmx-sfmd-save-icon"));
 
 _wait(30000, _isVisible(_button("Finalize")));
 _click(_button("Finalize"));
+_wait(30000, _isVisible(_link(0)));
 
 $BVT_TC_002_SFW.end();
 
