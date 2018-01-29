@@ -423,5 +423,70 @@ var $bo_act_SFM = new function bo_act_SFM() {
 		}
 								
 							}
-
+								this.selectOpenWOInQC=function(){
+									_click(_f("main").tab("Qualifying Criteria and Field Mappings"))
+									_setSelected(_f("main").s_combobox("searchCombo"), "SVMXSTD: Open Work Orders");
+								}
+									this.selectMappingINQC=function(){
+									_click(_f("main").tab("Mapping(s)"));
+									_setSelected(_f("main").s_combobox("searchCombo[1]"), "SVMXSTD: Map Work Order to Checklist");
+									}
+										this.sourceObjUpdate=function(){
+											_click(_f("main").tab("Source Object Update"));
+											_wait(3000);
+											_setStrictVisibilityCheck(true);
+											_click(_f("main").s_label("Work Order[2]"));
+											_click(_f("main").s_button("Add a row"));
+											_click(_f("main").s_togglebutton("I want to enter a specific value for this field[1]"));
+											_setStrictVisibilityCheck(false);
+											_click(_f("main").s_label("Click to add field"));
+											_click(_f("main").s_textinput("searchText[5]"))
+											_setValue(_f("main").s_textinput("searchText[5]"), "Priority");
+											_click(_f("main").s_button("Add Field"));
+											_doubleClick(_f("main").s_label("Priority"));
+											_click(_f("main").s_togglebutton("I want to enter a specific value for this field[1]"));
+											_wait(2000);
+											_setSelected(_f("main").s_combobox("valuesCombo[2]"), "High")								
+								}
+											this.addQuestion=function(){
+												_click(_f("main").tab("Form Designer"));
+												_click(_f("main").s_button("Add new question"));
+												_click(_f("main").listbasecontentholder(12));
+												
+											}
+												this.addAttachment=function($txtQsn,$qsndataType,$urlName){
+													_setSelected(_f("main").s_dropdownlist("ansType"), $qsndataType);
+													_click(_f("main").s_textinput("questionText"));
+													_setValue(_f("main").s_textinput("questionText"),$txtQsn);													
+													_setValue(_f("main").s_textinput("helpUrl"),$urlName);
+													//_f("main").s_button("Add to Library Only")
+													_click(_f("main").s_button("Add to Library and Form"));
+												}
+													this.addTextOrNumber=function($qsndataType,$isPrefillEnabled,$defaultAns,$urlName){
+														_setSelected(_f("main").s_dropdownlist("ansType"), $qsndataType);
+														_click(_f("main").s_textinput("questionText"));
+														if($isPrefillEnabled="true"){
+															_click(_f("main").s_checkbox("Prefill with value from Work Order"));
+														}
+														_setValue(_f("main").s_textinput("defaultResponseIdTxtInp"),$defaultAns);
+														_setValue(_f("main").s_textinput("helpUrl"),$urlName);
+														_click(_f("main").s_button("Add to Library and Form"));
+													}
+													this.addDateOrDateTimeQsn=function($qsndataType,$isPrefillEnabled,$isLiteral, $literalName,$urlName){
+														_setSelected(_f("main").s_dropdownlist("ansType"), $qsndataType);
+														_click(_f("main").s_textinput("questionText"));
+														if($isPrefillEnabled="true"){
+															_click(_f("main").s_checkbox("Prefill with value from Work Order"));
+														}
+														if($isLiteral="true"){
+															_setSelected(_f("main").s_dropdownlist("operandTypeCombo"), "Function");
+															_setSelected(_f("main").s_combobox("picklist"), $literalName);
+														}else{
+															_setSelected(_f("main").s_dropdownlist("operandTypeCombo"), "Value");
+															//somecode should be here to select the constanct date
+															
+														}
+														_setValue(_f("main").s_textinput("helpUrl"),$urlName);
+														_click(_f("main").s_button("Add to Library and Form"));
+													}
 };
