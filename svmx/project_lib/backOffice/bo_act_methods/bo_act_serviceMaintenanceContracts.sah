@@ -292,6 +292,7 @@ this.addTravelPolicyToServiceContract = function($sconName,$defaultTravelPrice,$
 	_click($bo_pg_serviceMaintenanceContracts.btn_editLaborPricingRow);
 	_wait(2000);
 	_setValue($bo_pg_serviceMaintenanceContracts.txt_travelPolicyUnit, $travelPolicyUnit);
+	_wait(1000);
 	_setValue($bo_pg_serviceMaintenanceContracts.txt_partsRates, $travelPolicyRate);
 	 $bo_act_common.searchfunction($serviceType);	//Search Values like Service Types Name
 	_click($bo_pg_serviceMaintenanceContracts.btn_updateLaborPricing);
@@ -326,13 +327,15 @@ this.addTravelPolicyToSCONWithTwoLines = function($sconName,$defaultTravelPrice,
 	_wait(2000, _isVisible($bo_pg_serviceMaintenanceContracts.btn_editSecondLaborPricingRow));
 	_click($bo_pg_serviceMaintenanceContracts.btn_editSecondLaborPricingRow);
 	_wait(2000);
-	//_setValue($bo_pg_serviceMaintenanceContracts.txt_currencyISOCode, $currencyType);
-	_click(_div(0,_rightOf(_label("Currency ISO Code:",_near(_span("Update"))))));
+	_setSpeed(300);
+	_setValue($bo_pg_serviceMaintenanceContracts.txt_currencyISOCode, $currencyType);
+	//_click(_div(0,_rightOf(_label("Currency ISO Code:",_near(_span("Update"))))));
 	_click(_listItem($currencyType));
 	_setValue($bo_pg_serviceMaintenanceContracts.txt_travelPolicyUnit, $travelPolicyUnit1);
 	_setValue($bo_pg_serviceMaintenanceContracts.txt_partsRates, $travelPolicyRate1);
 	 $bo_act_common.searchfunction($serviceType);	//Search Values like Service Types Name
 	_click($bo_pg_serviceMaintenanceContracts.btn_updateLaborPricing);
+	_setSpeed(100);
 	_setStrictVisibilityCheck();
 	_click($bo_pg_serviceMaintenanceContracts.btn_saveLaborPricing);
 	_wait(30000, _isVisible($sconName));

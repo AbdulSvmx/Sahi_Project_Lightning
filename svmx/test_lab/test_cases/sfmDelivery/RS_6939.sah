@@ -11,7 +11,9 @@ $wizTitle = $bo_act_common.generateRandomName("SFM Wiz");
 $context = "Account";
 $matching = "Account ID";
 $bo_act_login.login($g_url,$sfmUsn,$sfmPwd);
-$sfm_act_addDeleteMeth.createAccount($accountName);
+$sfm_act_addDeleteMeth.verifyAndCreateAccount("Auto Global Inc");
+$sfm_act_addDeleteMeth.verifyAndCreateAccount("Auto Global Media");
+//$sfm_act_addDeleteMeth.createAccount($accountName);
 $sfm_act_addDeleteMeth.createContact($accountName[0], $contactName1);
 $sfm_act_addDeleteMeth.createContact($accountName[1], $contactName2);
 $bo_act_navigation.navigateToSfmTransactionDesigner();
@@ -27,5 +29,5 @@ $sfm_act_createCustomWizard.validateErrorMessage("Globe", "No matching record",f
 $sfm_act_createCustomWizard.validateExactMatch("Auto Global Inc",false);
 $sfm_act_createCustomWizard.validateErrorMessage("Global", "Multiple items found",false);
 $sfm_act_createCustomWizard.validatePartialMatch();
-$sfm_act_addDeleteMeth.deleteAccount($accountName);
+//$sfm_act_addDeleteMeth.deleteAccount($accountName);
 $rs_6939.end();
