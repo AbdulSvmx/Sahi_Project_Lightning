@@ -1,14 +1,14 @@
 var $rs_6345 = _testcase("RS_6345","Verify Error type on Child when simple expressions is configured - Source to Target Save");
 $rs_6345.start();
 var $sfmNameToBeCloned = "Create Usage Lines from Estimates";
-var $sfmName = "RS_6345_1117";
+var $sfmName = "RS_6345_1151";
 var $isCustom = false;
 var $sfmTemplate = "SVMXSTD: Create Usage from Estimates";
 var $sfmTemplateSaveAsName = $sfmName;
 var $containerName = ["Parts","Expenses","Travel"];
 var $fieldName=["Activity Type","Activity Type","Activity Type"];
 var $targetObject ="Work Detail (Work Order)";
-var $rulename ="RS_6345_1117";
+var $rulename ="RS_6345_1151";
 var $ruleDescription ="Activity Type should not be Cleanup";
 
 var $fieldArray = ["Activity Type"];
