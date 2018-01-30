@@ -2,7 +2,7 @@ var $rs_5485 = _testcase("RS_5485","");
 $rs_5485.start();
 var $customActionObject = "Work Order";
 var $actionType="URL";
-var $actionId = "RS-5485URL_CA";
+var $actionId = $bo_act_common.generateRandomName("RS-5485URL_CA");
 var $urlToLaunch="http://www.google.com/search";
 var $paramName="q";
 var $paramValueType="Value";
