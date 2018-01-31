@@ -2,7 +2,7 @@ var $rs_4979 = _testcase("RS_4982","");
 $rs_4979.start();
 var $customActionObject = "Work Order";
 var $actionType="Web Service";
-var $actionId = "RS-4979WebServices_CA_HandOver";
+var $actionId = $bo_act_common.generateRandomName("RS-4979WS_CA_HandOver");
 var $className = "TestWebServices";
 var $methodName = "test_WS";
 var $paramName="Name";
@@ -13,7 +13,7 @@ var $successMessage = "Accounts inserted sucessfully";
 
 var $wizardName = "SFM Delivery Auto";
 var $wizardType="Others";
-var $woName="WO-00000104";
+//var $woName="WO-00000104";
 var $domainName = "/visual.force.com/";
 
 

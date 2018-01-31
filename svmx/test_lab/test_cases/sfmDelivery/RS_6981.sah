@@ -1,7 +1,7 @@
 var $rs_6981 = _testcase("RS_6981","");
 $rs_6981.start();
 var $sfmNameToBeCloned = "Manage Work Order Lines - Usage";
-var $sfmName = "RS_6981_Formulas";
+var $sfmName = $bo_act_common.generateRandomName("RS_6981_");
 var $isCustom = false;
 var $sfmTemplate = "SVMXSTD: Manage WO Usage Lines";
 var $sfmTemplateSaveAsName = $sfmName;
@@ -14,7 +14,7 @@ var $wizardObject ="Work Order";
 
 var $formulaTargetObjectArray = ["Work Order","Work Order","Work Order","Work Order","Labor","Labor"];
 var $formulaTargetFieldArray = ["Billing Type","Is Entitlement Performed","Actual Onsite Response","Scheduled Date", "Billable Qty", "Billable Line Price"];
-var $formulaNameArray = ["BillingTypeFormula","IsEntitlementPerformedFormula","ActualOnsiteResponseEqNow","ScheduledDateUpdate", "MonthFormula", "YearFormula"];
+var $formulaNameArray = [$sfmName+"BillingTypeFormula",$sfmName+"IsEntitlementPerformedFormula",$sfmName+"ActualOnsiteResponseEqNow",$sfmName+"ScheduledDateUpdate", $sfmName+"MonthFormula", $sfmName+"YearFormula"];
 var $formulaDescriptionArray = ["If customerDown is true then Billing type=Paid else as is",
                                 "If Billing type is Courtesy then check Is Entitlement performed else as is",
                                 "Actual Onsite Response Equals Now",
@@ -34,7 +34,7 @@ var $formulaArray =["$F.IF($F.EQUAL($D.Work_Order.SVMXC__Customer_Down__c,'true'
 _setSpeed(100);
 $bo_act_login.login($g_url, $sfmUsn, $sfmPwd);
 
-$sfm_act_SFM.cloneTDM016($sfmNameToBeCloned,$sfmName,$isCustom, $sfmTemplate, $sfmTemplateSaveAsName,$fieldNameArray, $containerNameArray);
+$sfm_act_SFM.cloneTDM016($sfmNameToBeCloned,$sfmName,$isCustom, $sfmTemplateSaveAsName,$sfmTemplate, $fieldNameArray, $containerNameArray);
 $sfm_pg_formula.createFormula($formulaTargetObjectArray, $formulaTargetFieldArray, $formulaNameArray, $formulaDescriptionArray, $formulaArray);
 _click($sfm_pg_sfmDesigner.btn_quickSaveSFM);
 _click($sfm_pg_sfmDesigner.btn_saveSFM); 
