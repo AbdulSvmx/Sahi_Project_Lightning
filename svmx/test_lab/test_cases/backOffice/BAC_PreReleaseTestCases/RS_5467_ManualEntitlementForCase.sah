@@ -42,7 +42,7 @@ $bo_act_configurationProfiles.editGlobalProfileForPicklistSettings($Module, $Sub
 var $accountName = $bo_act_accounts.createAccount();
 var $contactName = $bo_act_contacts.createContact($accountName);
 var $locationName = $bo_act_locations.createLocation($recordType[3],$accountName,"#007","India","560001");
-var $productName = $bo_act_products.createProduct($productCode, $productFamily[3]);
+var $productName = $bo_act_products.createProduct($productCode, $productFamily[0]);
 var $IBName = $bo_act_installedProduct.createInstalledProduct($productName, $accountName, $contactName);
 
 /**
@@ -50,7 +50,6 @@ var $IBName = $bo_act_installedProduct.createInstalledProduct($productName, $acc
  */
 
 //Create 1st SLA Term SLA01 [SLA 09]
-$bo_act_navigation.navigateToSlaTerms();
 var $slaName01 = $bo_act_slaTerms.createSlaTerms("Default");
 $bo_act_slaTerms.addInitialResponseToSLA($slaName01,"Case","All","Medium","Created Date","5","10","SLA");
 $bo_act_slaTerms.addOnsiteResponseToSLA($slaName01,"Case","All","Medium","Created Date","10","15","SLA");
@@ -59,7 +58,6 @@ $bo_act_slaTerms.addOnsiteResponseToSLA($slaName01,"Case","All","Medium","Create
 _assertExists(_span($slaName01));
 
 //Create 2nd SLA Term SLA02 [SLA 10]
-$bo_act_navigation.navigateToSlaTerms();
 var $slaName02 = $bo_act_slaTerms.createSlaTerms("Default");
 $bo_act_slaTerms.addInitialResponseToSLA($slaName02,"Case","All","Medium","Created Date","5","10","SLA");
 $bo_act_slaTerms.addOnsiteResponseToSLA($slaName02,"Case","All","Medium","Created Date","10","15","SLA");
@@ -68,7 +66,6 @@ $bo_act_slaTerms.addOnsiteResponseToSLA($slaName02,"Case","All","Medium","Create
 _assertExists(_span($slaName02));
 
 //Create 3rd SLA Term SLA03 [SLA 11]
-$bo_act_navigation.navigateToSlaTerms();
 var $slaName03 = $bo_act_slaTerms.createSlaTerms("Default");
 $bo_act_slaTerms.addInitialResponseToSLA($slaName03,"Case","All","Medium","Created Date","5","10","SLA");
 $bo_act_slaTerms.addOnsiteResponseToSLA($slaName03,"Case","All","Medium","Created Date","10","15","SLA");
@@ -110,6 +107,19 @@ var $caseNumber = $bo_act_Cases.createCase($caseStatus, $casePriority, $caseOrig
 
 //Edit the above case for Account, Contact and IB information
 $bo_act_Cases.editCase($caseNumber,$accountName,$contactName,$IBName,$locationName);
+
+/**
+* Create SFM Wizard for Case with 1 Steps as Check Entitlement.
+*/
+var $wizardTitleName = $bo_act_common.generateRandomName("SFWTitle");
+var $wizardIDName = $bo_act_common.generateRandomName("SFWId");
+var $fieldActnType = "Others";
+var $actnName = "Check Entitlement";
+
+$bo_act_navigation.navigateToSfmWizard();
+$bo_act_SFW.createWizardGeneralInfo("Case", $wizardTitleName, $wizardIDName);
+$bo_act_SFW.addCustomActionToWizard($fieldActnType, $actnName);
+$bo_act_SFW.quickSaveSFWizard();
 
 
 /**

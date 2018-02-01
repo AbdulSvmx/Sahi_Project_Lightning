@@ -6,7 +6,7 @@ var $productFamily = ["--None--","GeneralSolution","AdvSolution","Accessory", "S
 var $productCode = "";
 var $seperator = "/";
 
-var $RS_10138 = _testcase("$RS_10138","Auto Entitlement based on Product:- Entitlement on a WO using Service Contract.");
+var $RS_10138 = _testcase("$RS_10138","Verify the functionality of Auto Entitlement on WO's PS lines using Service Contract.");
 $RS_10138.start();
 _setSpeed(100);
 /**
@@ -20,7 +20,7 @@ $bo_act_login.login($g_url, $bac_un, $bac_pwd);
  */
 var $accountName = $bo_act_accounts.createAccount();
 var $contactName = $bo_act_contacts.createContact($accountName);
-var $productName = $bo_act_products.createProduct($productCode, $productFamily[3]);
+var $productName = $bo_act_products.createProduct($productCode, $productFamily[0]);
 var $IBName = $bo_act_installedProduct.createInstalledProduct($productName, $accountName, $contactName);
 
 /**

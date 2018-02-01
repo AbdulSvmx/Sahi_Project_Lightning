@@ -1,16 +1,16 @@
 
-//author -
+//Author - Shashikala Kamath
 
-var $BVT_TC_003_SFM_STD_Delivery = _testcase("$BVT_TC_002_SFMSearch",
-		"Launch the SFM Search and check whether the records are listed as per the configuration");
+var $BVT_TC_003_SFW_with_cloned_Wiz_steps = _testcase("BVT_TC_003_SFW_with_cloned_Wiz_steps",
+		"Configure the SFW to include cloned/custom SFMs and launch the same in delivery");
 
-$BVT_TC_002_SFMSearch.start();
+$BVT_TC_003_SFW_with_cloned_Wiz_steps.start();
 _setSpeed(100);
 
 //Pre - Condition 
-$bo_act_login.login("https://test.salesforce.com", "lohithaadmin@swatpart2.com", "maxpl0re1");
+$bo_act_login.login("https://test.salesforce.com", "lohithaadmin@swatpart2.com", "maxpl0re2");
 
-//$swat_act_sfmSearch.launchSfmSearch($searchItem,$workOrderNo);
+
  
 $bo_act_navigation.navigateToSfmTransactionDesigner();
 _wait(60000, _isVisible($bo_pg_sfmTransactionAndDesigner.btn_newSFM));
@@ -25,7 +25,7 @@ if (_assertExists($bo_pg_sfmTransactionAndDesigner.btn_backToList)){
 	_stopTestCase();
 };
 
-$BVT_TC_003_SFM_STD_Delivery.end();
+$BVT_TC_003_SFW_with_cloned_Wiz_steps.end();
 
 
 

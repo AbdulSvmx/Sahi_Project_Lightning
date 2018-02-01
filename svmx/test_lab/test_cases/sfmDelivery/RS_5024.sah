@@ -12,14 +12,15 @@ $login = $sfm_act_createWorkOrder.login($sfmUsn, $sfmPwd);
 $woName = $sfm_act_createWorkOrder.create_WO();
 
 //Open the WO and click on the above created SFM 
-_click($sfm_pg_sfmDesigner.lnk_workOrder);
+//_click($sfm_pg_sfmDesigner.lnk_workOrder);
+_click($sfm_pg_sfmDesigner.lnk_home);
 _wait(3000);
 $sfm_act_common.globalSearch($woName);
 _click(_link($woName));
 
 
-if(_getText(_div(0,_rightOf(_span(60))))==""){
-	_log("Fail ::: Zip is empty");
+if(_getText(_div(0,_rightOf(_span("/ZipsfdcPage/"))))==""){
+	_log("Fail ::: Zip is empty, cannot validate address");
 }else{
 	_selectDomain($domainName);
 	_click(_button($sfmName));

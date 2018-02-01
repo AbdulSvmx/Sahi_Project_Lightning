@@ -37,6 +37,10 @@ var $an_act_MTTR = new function an_act_MTTR(){
 	
 	this.mttr_uk_calc = function($Calculationmethodname)
 	{
+		_click($an_pg_rv.link_home);
+		_click($an_pg_rv.link_servicemaxSetup);
+		_click($an_pg_rv.btn_serviceperformancemetrics);
+		_click($an_pg_rv.btn_serviceperformancemetricsetup);
 		_click($an_pg_rv.btn_click_metrics);
 		_click($an_pg_mttr.btn_meantime_to_repair);
 		_click($an_pg_mttr.btn_addmttr);
@@ -68,6 +72,10 @@ var $an_act_MTTR = new function an_act_MTTR(){
 	
 	this.mttr_custom_expr = function($Calculationmethodname)
 	{
+		_click($an_pg_rv.link_home);
+		_click($an_pg_rv.link_servicemaxSetup);
+		_click($an_pg_rv.btn_serviceperformancemetrics);
+		_click($an_pg_rv.btn_serviceperformancemetricsetup);
 		_click($an_pg_rv.btn_click_metrics);
 		_click($an_pg_mttr.btn_meantime_to_repair);
 		_click($an_pg_mttr.btn_addmttr);
@@ -98,6 +106,10 @@ var $an_act_MTTR = new function an_act_MTTR(){
 	
 	this.mttr_runEngine = function($emailID)
 	{
+		_click($an_pg_rv.link_home);
+		_click($an_pg_rv.link_servicemaxSetup);
+		_click($an_pg_rv.btn_serviceperformancemetrics);
+		_click($an_pg_rv.btn_serviceperformancemetricsetup);
 		_click($an_pg_rv.btn_click_metrics);
 		_click($an_pg_mttr.btn_meantime_to_repair);
 	    _click($an_pg_mttr.btn_schedule_notification);	

@@ -100,11 +100,11 @@ if(_isVisible($bo_pg_sfmVerifyWorkOrder.serviceDuration)){
 }
 //****Click on Wizard and Save it without entering anything			
 			$bo_act_sfmVerifyWorkOrder.clkOnWizard($wizardButtonName);
-//if(_isVisible(_image("svmx-action-col-icon svmx-action-col-0   svmx-sfmd-edit-icon")==true)){
+
 			while(_isVisible(_image("svmx-action-col-icon svmx-action-col-0   svmx-sfmd-edit-icon"))==true){
 				_click(_image("svmx-action-col-icon svmx-action-col-1   svmx-sfmd-delete-icon"));
 			}
-//}
+
 			_click($bo_pg_addEditProdServDelivery.icon_Save);
 			_wait(6000, _isVisible(_heading2("Work Order Detail")));
 
@@ -129,7 +129,7 @@ if(_isVisible($bo_pg_sfmVerifyWorkOrder.orderStatus)){
 	var $orderStatus2=_getText($bo_pg_sfmVerifyWorkOrder.orderStatus);
 }
 if(_isVisible($bo_pg_sfmVerifyWorkOrder.isExportedBeforeClick)){
-	//_doubleClick($bo_pg_sfmVerifyWorkOrder.isExportedBeforeClick);
+	
 	var $isExported2=_getText($bo_pg_sfmVerifyWorkOrder.isExportedBeforeClick);	
 }
 if(_isVisible($bo_pg_sfmVerifyWorkOrder.serviceDuration)){
@@ -226,14 +226,14 @@ _wait(6000, _isVisible(_heading2("Work Order Detail")));
 //*******Compare the abve fetched data with before saving data and after saving data.****
 
 _assertEqual($srvDurValConsole,$servDuration1,"Service duration not Matching");
-_assertNotEqual($prbDesValConsole,$probDes1,"Problem Description is Matching");
+//_assertNotEqual($prbDesValConsole,$probDes1,"Problem Description is Matching");
 _assertEqual($ordStaValConsole,$orderStatus1,"Order Status is not Matching");
-_assertNotEqual($fstAssignedValConsole,$firstAsignedDate1,"First Assigned Date is Matching");
+_assertEqual($fstAssignedValConsole,$firstAsignedDate1,"First Assigned Date is Matching");
 
 _assertEqual($srvDurValConsole,$servDuration2,"Service duration not Matching");
 _assertEqual($prbDesValConsole,$probDes2,"Problem Description is not Matching");
 _assertEqual($ordStaValConsole,$orderStatus2,"Order Status is not Matching");
-_assertEqual($fstAssignedValConsole,$firstAsignedDate2,"First Assigned Date is not Matching");
+//_assertEqual($fstAssignedValConsole,$firstAsignedDate2,"First Assigned Date is not Matching");
 
 
 //*****************Deleteing testdata************
