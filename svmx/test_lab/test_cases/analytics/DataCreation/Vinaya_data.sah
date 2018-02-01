@@ -100,24 +100,24 @@ $excel.insertUnderColumn("../../analytics/an_excleData/MTTC_data.xlsx", "Sheet1"
 // To create Component and put them in the sheet
 var $installedproductID1;
 var $installedproductID2;
-
-var $create_ib1 = "SVMXC__Installed_Product__c ib1 = new SVMXC__Installed_Product__c (Name = 'IB Automation_1',SVMXC__Status__c = 'Installed', SVMXC__Product__c = '"+$productID1+"');insert ib1;";
+var $installedproductID3;
+var $create_ib1 = "SVMXC__Installed_Product__c ib1 = new SVMXC__Installed_Product__c (Name = 'IB Automation_1',SVMXC__Status__c = 'Installed', SVMXC__Product__c = '"+$productID1+"',SVMXC__Company__c='"+$accountID1+"');insert ib1;";
 var $create_ib = $op_act_sForceApiCall.sForceQuery($un, $pwd, $create_ib1 , "create");
 var $query_ibID = "Select Id, Name from SVMXC__Installed_Product__c where Createdby.Id = '"+$user+"' AND Name = 'IB Automation_1' Order by CreatedDate DESC Limit 1";
 var $ibID_Fetch = $op_act_sForceApiCall.sForceQuery($un, $pwd, $query_ibID,"query");
 $installedproductID1 = $ibID_Fetch[0].Id;
 $excel.insertUnderColumn("../../analytics/an_excleData/MTTC_data.xlsx", "Sheet1", "Component", ""+$installedproductID1+"","1");
 
-var $create_ib2 = "SVMXC__Installed_Product__c ib2 = new SVMXC__Installed_Product__c (Name = 'IB Automation_2',Custom_Account_IB__c = '"+$accountID2+"',SVMXC__Status__c = 'Installed', SVMXC__Product__c = '"+$productID1+"');insert ib2;";
-var $create_ib = $op_act_sForceApiCall.sForceQuery($un, $pwd, $create_ib2 , "create");
-var $query_ibID2 = "Select Id, Name from SVMXC__Installed_Product__c where Createdby.Id = '"+$user+"' AND Name = 'IB Automation_1' Order by CreatedDate DESC Limit 1";
+var $create_ib2 = "SVMXC__Installed_Product__c ib2 = new SVMXC__Installed_Product__c (Name = 'IB Automation_2',Custom_Account_IB__c = '"+$accountID1+"',SVMXC__Status__c = 'Installed', SVMXC__Product__c = '"+$productID1+"');insert ib2;";
+var $create_ib_2 = $op_act_sForceApiCall.sForceQuery($un, $pwd, $create_ib2 , "create");
+var $query_ibID2 = "Select Id, Name from SVMXC__Installed_Product__c where Createdby.Id = '"+$user+"' AND Name = 'IB Automation_2' Order by CreatedDate DESC Limit 1";
 var $ibID_Fetch2 = $op_act_sForceApiCall.sForceQuery($un, $pwd, $query_ibID2,"query");
 $installedproductID2 = $ibID_Fetch2[0].Id;
 $excel.insertUnderColumn("../../analytics/an_excleData/MTTC_data.xlsx", "Sheet1", "Component", ""+$installedproductID2+"","4");
 
-var $create_ib3 = "SVMXC__Installed_Product__c ib3 = new SVMXC__Installed_Product__c (Name = 'IB Automation_2',Custom_Account_IB__c = '"+$accountID2+"',SVMXC__Status__c = 'Installed', SVMXC__Product__c = '"+$productID1+"');insert ib3;";
-var $create_ib3 = $op_act_sForceApiCall.sForceQuery($un, $pwd, $create_ib3 , "create");
-var $query_ibID3 = "Select Id, Name from SVMXC__Installed_Product__c where Createdby.Id = '"+$user+"' AND Name = 'IB Automation_1' Order by CreatedDate DESC Limit 1";
+var $create_ib3 = "SVMXC__Installed_Product__c ib3 = new SVMXC__Installed_Product__c (Name = 'IB Automation_3',SVMXC__Company__c = '"+$accountID1+"',SVMXC__Status__c = 'Inventory', SVMXC__Product__c = '"+$productID1+"',SVMXC__Country__c='Algeria');insert ib3;";
+var $create_ib_3 = $op_act_sForceApiCall.sForceQuery($un, $pwd, $create_ib3 , "create");
+var $query_ibID3 = "Select Id, Name from SVMXC__Installed_Product__c where Createdby.Id = '"+$user+"' AND Name = 'IB Automation_3' Order by CreatedDate DESC Limit 1";
 var $ibID_Fetch3 = $op_act_sForceApiCall.sForceQuery($un, $pwd, $query_ibID3,"query");
 $installedproductID3 = $ibID_Fetch3[0].Id;
 $excel.insertUnderColumn("../../analytics/an_excleData/MTTC_data.xlsx", "Sheet1", "Component", ""+$installedproductID3+"","5");
