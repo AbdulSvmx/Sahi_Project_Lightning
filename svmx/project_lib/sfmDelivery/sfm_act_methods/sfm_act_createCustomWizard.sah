@@ -265,7 +265,7 @@ var $sfm_act_createCustomWizard = new function sfm_act_createCustomWizard() {
 		_click($sfm_pg_wizardWindow.lookup_autoContact);
 		_wait(3000);
 		_click($sfm_pg_wizardWindow.icon_search);
-		var $divs= _collect("_div","/.*/",_under(_div("Account ID")));
+		var $divs= _collect("_div","/.*/",_under(_div("Account Name")));
 		_log($divs.length);
 		for (var $i=1; $i<$divs.length; $i++) {
 			if(_getText($divs[$i])!="Acme"){
@@ -287,11 +287,11 @@ var $sfm_act_createCustomWizard = new function sfm_act_createCustomWizard() {
 		_click($sfm_pg_wizardWindow.btn_addRow);
 		_click($sfm_pg_wizardWindow.btn_edit);
 		_click($sfm_pg_wizardWindow.lkp_account);
+		_click($sfm_pg_wizardWindow.icon_search);
 		_doubleClick($sfm_pg_wizardWindow.account_option);
 		_click($sfm_pg_wizardWindow.lkp_autoContact);
 		_click($sfm_pg_wizardWindow.icon_search);
 		this.verifyAccountsPresent($accountToVerify);
-		_wait(5000);
 	};
 
 	this.verifyAccountsPresent = function($accountToVerify){
