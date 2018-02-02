@@ -265,7 +265,7 @@ var $sfm_act_createCustomWizard = new function sfm_act_createCustomWizard() {
 		_click($sfm_pg_wizardWindow.lookup_autoContact);
 		_wait(3000);
 		_click($sfm_pg_wizardWindow.icon_search);
-		var $divs= _collect("_div","/.*/",_under(_div("Account Name")));
+		var $divs= _collect("_div","/.*/",_under(_div("Account ID")));
 		_log($divs.length);
 		for (var $i=1; $i<$divs.length; $i++) {
 			if(_getText($divs[$i])!="Acme"){
