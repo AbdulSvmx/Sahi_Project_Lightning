@@ -34,6 +34,7 @@
 		<property name="failedSuiteName" value="op_demo_failed_${browser}.suite"/>
 		<property name="failedSuite" value="svmx/test_lab/test_suites/optimax/${failedSuiteName}"/>
 		<property name="jsCodeCoverage" value="false"/>
+		
 	</target>
 
 	<target name="runtestschrome" depends="set_properties_chrome">
@@ -57,6 +58,8 @@
 			showPeriodicSummary="${showPeriodicSummary}"
 			threads="${threads}"
 			jsCodeCoverage="${jsCodeCoverage}">
+			<!-- Offline reports -->
+			<report type="html" logdir="C://jenkins_sahi//logs//"/>
 		</sahi>
 		<antcall target="failsahichrome"/>
 	</target>
