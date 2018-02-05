@@ -5,93 +5,100 @@
  */
 -->
 
-<project name="demo" default="drundiffmasterchrome">
-    <taskdef name="sahid" classname="in.co.sahi.ant.DAntRunner" classpath="/auto/sahi_pro/lib/ant-sahi.jar"/>
-    <taskdef name="sahisync" classname="in.co.sahi.ant.DAntSync" classpath="/auto/sahi_pro/lib/ant-sahi.jar"/>
-	<taskdef name="sahipull" classname="in.co.sahi.ant.DAntPull" classpath="/auto/sahi_pro/lib/ant-sahi.jar"/>
-	<taskdef name="sahidelete" classname="in.co.sahi.ant.DAntDelete" classpath="/auto/sahi_pro/lib/ant-sahi.jar"/>
 
-	<target name="set_timestamp">
-        <tstamp>
-            <format property="ts" pattern="yyyy_MM_dd__HH_mm_ss" locale="en, IN"/>
-        </tstamp>
-	</target>
+	<?xml version="1.0" encoding="ISO-8859-1"?>
+	<!--
+	/**
+	 * Copyright Tyto Software Pvt. Ltd.
+	 */
+	-->
+	<project name="demo" default="drundiffmasterchrome">
+	    <taskdef name="sahid" classname="in.co.sahi.ant.DAntRunner" classpath="/auto/sahi_pro/lib/ant-sahi.jar"/>
+	    <taskdef name="sahisync" classname="in.co.sahi.ant.DAntSync" classpath="/auto/sahi_pro/lib/ant-sahi.jar"/>
+		<taskdef name="sahipull" classname="in.co.sahi.ant.DAntPull" classpath="/auto/sahi_pro/lib/ant-sahi.jar"/>
+		<taskdef name="sahidelete" classname="in.co.sahi.ant.DAntDelete" classpath="/auto/sahi_pro/lib/ant-sahi.jar"/>
+
+		<target name="set_timestamp">
+	        <tstamp>
+	            <format property="ts" pattern="yyyy_MM_dd__HH_mm_ss" locale="en, IN"/>
+	        </tstamp>
+		</target>
+		
+		<target name="set_properties_common" depends="set_timestamp">
+	    	<property name="scriptDir" value="/auto/sahi_pro/userdata/scripts/Sahi_Project/"/>
+			<property name="masterhost" value="sahi1.servicemax.com"/>
+			<property name="masterport" value="9999"/>
+		</target>	
+		
+
+		
+		<target name="set_properties_chrome" depends="set_properties_common">
+			<property name="scriptName" value="svmx/test_lab/test_suites/tempExec/temp.suite"/>	
+			<property name="browser" value="chrome"/>
+			<property name="startWith" value="desktopbrowser"/>
+			<property name="sendemail" value="false"/>
+			<property name="emailtrigger" value="success,failure"/>
+			<property name="emailproperties" value="/auto/sahi_pro/userdata/config/email.properties"/>
+			<property name="sendemailperiodically" value="false"/>
+			<property name="sendemailperiodicallytime" value=""/>
+			<property name="emailPasswordHidden" value="true"/>
+			<property name="baseURL" value="https://test.salesforce.com"/>
+			<property name="failedSuiteName" value="temp_failed_${browser}.suite"/>
+			<property name="failedSuite" value="svmx/test_lab/test_suites/tempExec/${failedSuiteName}"/>
+			<property name="threads" value="1"/>
+			<property name="showPeriodicSummary" value="true"/>
+			<property name="jsCodeCoverage" value="false"/>
+		</target>
+
+	    <target name="drundiffmasterchrome" depends="set_properties_chrome, set_timestamp">
+	    	<!-- Sync suite to Master staging folder -->
+			<sahisync originFolder="${scriptDir}" destFolder="temp/scripts/staging/${ts}_${browser}" ignorePattern=".*(svn|copied).*" suitePath="${scriptDir}${scriptName}" csvSeparator="," scriptExtensions="sah;sahi;js" scenarioExtensions=".s.csv;xls;xlsx">
+		    	<node host="${masterhost}" port="${masterport}"/>
+			</sahisync>
+
+	    	<sahid suite="${scriptName}"
+				sendEmail="${sendemail}"
+				emailtrigger="${emailtrigger}"
+				emailProperties="${emailproperties}"
+				sendEmailPeriodically="${sendemailperiodically}"
+				sendEmailPeriodicallyTime="${sendemailperiodicallytime}"
+				emailPasswordHidden="${emailPasswordHidden}"
+				baseurl="${baseURL}"
+				sahihost="${masterhost}"
+				sahiport="${masterport}"
+				failureproperty="sahi.failed.${browser}"
+				failedSuiteName="${failedSuiteName}"
+				haltonfailure="false"
+				browsertype="${browser}"
+				startWith="${startWith}"
+				scriptsPathMaster="temp/scripts/staging/${ts}_${browser}/"
+				scriptsPathInitiator="${scriptDir}"
+				threads="${threads}"
+				jsCodeCoverage="${jsCodeCoverage}"
+				showPeriodicSummary="${showPeriodicSummary}"
+				isDifferentMaster="true"
+				ignorePattern=".*(svn|copied).*">
+				<!-- Scripts will be distributed across all the nodes. The nodes may or may not include the Master machine -->
+				<node host="sahi1.servicemax.com" port="9999"/>
+				<node host="192.168.1.120" port="9999"/>
+				<!-- Offline reports -->
+				<report type="html" logdir="logs/temp/html/${ts}"/>
+	    	</sahid>
+	    	
+	    	<!-- Delete suite from Master staging folder -->
+			<sahidelete host="${masterhost}"
+	    		port="${masterport}" 
+	    		filePath="temp/scripts/staging/${ts}_${browser}">
+	    	</sahidelete>
+			<!-- Pull the logs from the Master onto the Initiator machine -->
+			<sahipull sourceHost="sahi1.servicemax.com" sourcePort="9999" originFolder="logs/temp/html/${ts}" destFolder="C://auto//Jenkins/logs" ignorePattern=".*(svn|copied).*"/>
+			<antcall target="failsahichrome"/>
+	    </target>
+
+	    <target name="failsahichrome" depends="set_properties_chrome" if="sahi.failed.${browser}">
+	        <fail message="Sahi tests failed on browser ${browser}!"/>
+	    </target>
+		
+	</project>
 	
-	<target name="set_properties_common" depends="set_timestamp">
-    	<property name="scriptDir" value="/auto/sahi_pro/userdata/scripts/Sahi_Project/"/>
-	  	<!--<property name="scriptDir" value="scripts/Sahi_Project/"/>-->
-
-		<property name="masterhost" value="sahi1.servicemax.com"/>
-		<property name="masterport" value="9999"/>
-	</target>	
 	
-
-	
-	<target name="set_properties_chrome" depends="set_properties_common">
-	    	<property name="scriptName" value="svmx/test_lab/test_suites/tempExec/temp.suite"/>
-
-		<property name="browser" value="chrome"/>
-		<property name="startWith" value="desktopbrowser"/>
-		<property name="sendemail" value="false"/>
-		<property name="emailtrigger" value="success,failure"/>
-		<property name="emailproperties" value="/auto/sahi_pro/userdata/config/email.properties"/>
-		<property name="sendemailperiodically" value="false"/>
-		<property name="sendemailperiodicallytime" value=""/>
-		<property name="emailPasswordHidden" value="true"/>
-		<property name="baseURL" value="https://test.salesforce.com"/>
-		<property name="failedSuiteName" value="selectedScripts_failed_${browser}.suite"/>
-		<property name="failedSuite" value="/${failedSuiteName}"/>
-		<property name="threads" value="1"/>
-		<property name="showPeriodicSummary" value="true"/>
-		<property name="jsCodeCoverage" value="false"/>
-	</target>
-
-    <target name="drundiffmasterchrome" depends="set_properties_chrome, set_timestamp">
-    	<!-- Sync suite to Master staging folder -->
-		<sahisync originFolder="${scriptDir}" destFolder="temp/scripts/staging/${ts}_${browser}" ignorePattern=".*(svn|copied).*" suitePath="${scriptDir}${scriptName}" csvSeparator="," scriptExtensions="sah;sahi;js" scenarioExtensions=".s.csv;xls;xlsx">
-	    	<node host="${masterhost}" port="${masterport}"/>
-		</sahisync>
-
-    	<sahid suite="${scriptName}"
-			sendEmail="${sendemail}"
-			emailtrigger="${emailtrigger}"
-			emailProperties="${emailproperties}"
-			sendEmailPeriodically="${sendemailperiodically}"
-			sendEmailPeriodicallyTime="${sendemailperiodicallytime}"
-			emailPasswordHidden="${emailPasswordHidden}"
-			baseurl="${baseURL}"
-			sahihost="${masterhost}"
-			sahiport="${masterport}"
-			failureproperty="sahi.failed.${browser}"
-			failedSuiteName="${failedSuiteName}"
-			haltonfailure="false"
-			browsertype="${browser}"
-			startWith="${startWith}"
-			scriptsPathMaster="temp/scripts/staging/${ts}_${browser}/"
-			scriptsPathInitiator="${scriptDir}"
-			threads="${threads}"
-			jsCodeCoverage="${jsCodeCoverage}"
-			showPeriodicSummary="${showPeriodicSummary}"
-			isDifferentMaster="true"
-			ignorePattern=".*(svn|copied).*">
-			<!-- Scripts will be distributed across all the nodes. The nodes may or may not include the Master machine -->
-			<node host="sahi1.servicemax.co" port="9999"/>
-			
-    		
-			<report type="html" logdir="C://jenkins_sahi//logs//"/>
-
-    	</sahid>
-    	
-    	<!-- Delete suite from Master staging folder -->
-		<sahidelete host="${masterhost}"
-    		port="${masterport}" 
-    		filePath="temp/scripts/staging/${ts}_${browser}">
-    	</sahidelete>
-		<antcall target="failsahichrome"/>
-    </target>
-
-    <target name="failsahichrome" depends="set_properties_chrome" if="sahi.failed.${browser}">
-        <fail message="Sahi tests failed on browser ${browser}!"/>
-    </target>
-	
-</project>
