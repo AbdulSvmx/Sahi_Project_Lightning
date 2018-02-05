@@ -1,17 +1,9 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <!--
 /**
- * Copyright Tyto Software Pvt. Ltd.
- */
--->
-
-
-	<?xml version="1.0" encoding="ISO-8859-1"?>
-	<!--
-	/**
 	 * Copyright Tyto Software Pvt. Ltd.
 	 */
-	-->
+-->
 	<project name="demo" default="drundiffmasterchrome">
 	    <taskdef name="sahid" classname="in.co.sahi.ant.DAntRunner" classpath="/auto/sahi_pro/lib/ant-sahi.jar"/>
 	    <taskdef name="sahisync" classname="in.co.sahi.ant.DAntSync" classpath="/auto/sahi_pro/lib/ant-sahi.jar"/>
