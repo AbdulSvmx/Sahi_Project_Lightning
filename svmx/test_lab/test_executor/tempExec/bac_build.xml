@@ -13,6 +13,11 @@
         </tstamp>
 	</target>
 	
+	<target name="set_properties_common" depends="set_timestamp">
+	    	<property name="scriptDir" value="/auto/sahi_pro/userdata/scripts/Sahi_Project/"/>
+			<property name="host" value="localhost"/>
+			<property name="port" value="9999"/>
+		</target>
 	
 	<target name="set_properties_chrome" depends="set_timestamp">
     	<property name="scriptDir" value="scripts/Sahi_Project/"/>
@@ -60,6 +65,8 @@
 			jsCodeCoverage="${jsCodeCoverage}">
 			<!-- Offline reports -->
 			<report type="html" logdir="C://jenkins_sahi//logs//"/>
+			showPeriodicSummary="${showPeriodicSummary}"
+					ignorePattern=".*(svn|copied).*">
 			<!-- Scripts will be distributed across all the nodes. The nodes may or may not include the Master machine -->
 			<node host="192.168.1.100" port="9999"/>
 		</sahi>
