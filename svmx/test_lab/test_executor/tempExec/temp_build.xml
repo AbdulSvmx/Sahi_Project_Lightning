@@ -28,7 +28,7 @@
 
 	
 	<target name="set_properties_chrome" depends="set_properties_common">
-	  	<property name="scriptDir" value="scripts/Sahi_Project/"/>
+	  	<property name="scriptDir" value="/auto/sahi_pro/userdata/scripts/Sahi_Project/"/>
 	    	<property name="scriptName" value="svmx/test_lab/test_suites/tempExec/temp.suite"/>
 
 		<property name="browser" value="chrome"/>
