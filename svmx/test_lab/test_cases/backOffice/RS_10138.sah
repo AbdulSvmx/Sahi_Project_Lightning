@@ -6,7 +6,7 @@ var $productFamily = ["--None--","GeneralSolution","AdvSolution","Accessory", "S
 var $productCode = "";
 var $seperator = "/";
 
-var $RS_10138 = _testcase("$RS_10138","Auto Entitlement based on Product:- Entitlement on a WO using Service Contract.");
+var $RS_10138 = _testcase("$RS_10138","Verify the functionality of Auto Entitlement on WO's PS lines using Service Contract.");
 $RS_10138.start();
 _setSpeed(100);
 /**

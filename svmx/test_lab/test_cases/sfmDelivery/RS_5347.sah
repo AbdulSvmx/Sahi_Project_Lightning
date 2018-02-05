@@ -1,7 +1,7 @@
 var $rs_5347 = _testcase("RS_5347","");
 $rs_5347.start();
 var $sfmNameToBeCloned = "Manage Work Order Lines - Usage";
-var $sfmName = "RS_5347_TDM016";
+var $sfmName = $bo_act_common.generateRandomName("RS_5347_");
 var $isCustom = false;
 var $sfmTemplate = "SVMXSTD: Manage WO Usage Lines";
 var $sfmTemplateSaveAsName = $sfmName;
@@ -11,7 +11,7 @@ var $fieldName=["Received City","Estimated Price Per Unit", "Reference Informati
                 "Received City","Estimated Price Per Unit", "Reference Information",
                 "Received City","Estimated Price Per Unit", "Reference Information"];
 var $targetObject ="Work Detail (Work Order)";
-var $rulename ="5347Rule";
+var $rulename = $sfmName;  //"5347Rule";
 var $ruleDescription ="Line Qty <= 5, Estimated Price Per Unit <2000, Reference Information Is Not Null, Received City doesnot contain Mangalore";
 
 var $fieldArray = ["Line Qty","Estimated Price Per Unit", "Reference Information","Received City"];
@@ -24,13 +24,13 @@ var $wizardName = "SFM Delivery Auto";
 var $wizardType = "SFM";
 var $wizardObject ="Work Order";
 var $domainName = "/visual.force.com/";
-var $woName ="WO-00000096";
+//var $woName ="WO-00000096";
 
 _setSpeed(100);
 $bo_act_login.login($g_url, $sfmUsn, $sfmPwd);
-/*
+
 //clone tmd016
-$sfm_act_SFM.cloneTDM016($sfmNameToBeCloned,$sfmName,$isCustom, $sfmTemplate, $sfmTemplateSaveAsName,$fieldName, $containerName);
+$sfm_act_SFM.cloneTDM016($sfmNameToBeCloned,$sfmName,$isCustom, $sfmTemplateSaveAsName, $sfmTemplate, $fieldName, $containerName);
 $sfm_act_SFM.partsNotMandatory();
 
 //create Data validation rule
@@ -47,7 +47,7 @@ _click($sfm_pg_sfmDesigner.lnk_home);
 
 //Create WO dynamically and search that work order in global search and validate in delivery.
 $login = $sfm_act_createWorkOrder.login($sfmUsn, $sfmPwd);
-$woName = $sfm_act_createWorkOrder.create_WO();  */
+$woName = $sfm_act_createWorkOrder.create_WO();  
 
 _wait(3000);
 $sfm_act_common.globalSearch($woName);

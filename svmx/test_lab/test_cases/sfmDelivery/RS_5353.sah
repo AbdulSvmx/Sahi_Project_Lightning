@@ -7,16 +7,16 @@ $rs_5353.start();
 
 
 var $sfmNameToBeCloned = "Manage Work Order Lines - Usage";
-var $sfmName = "RS_5353_TDM016";
+var $sfmName = $bo_act_common.generateRandomName("RS_5353_");
 var $isCustom = false;
 var $sfmTemplate = "SVMXSTD: Manage WO Usage Lines";
 var $sfmTemplateSaveAsName = $sfmName;
 var $containerName = ["Order Status","Order Status"];
-var $rulename ="5353Rule1";
+var $rulename = $sfmName;
 var $targetObject ="Work Order";
 var $ruleDescription = "Actual Initial Response Not Equal Function Today, City Starts with Value M";
 var $fieldArray = ["City","Actual Initial Response"];
-var $conditionArray = ["Equals","Not Equal"];
+var $conditionArray = ["Starts With","Not Equal"];
 var $operandArray =["Value", "Function", "Field"];
 var $valueArray =["M", "Today"];
 var $advExpr= "1 AND 2";
