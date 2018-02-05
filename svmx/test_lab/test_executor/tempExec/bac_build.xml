@@ -6,10 +6,10 @@
 -->
 
 <project name="demo" default="drundiffmasterchrome">
-    <taskdef name="sahid" classname="in.co.sahi.ant.DAntRunner" classpath="lib/ant-sahi.jar"/>
-    <taskdef name="sahisync" classname="in.co.sahi.ant.DAntSync" classpath="lib/ant-sahi.jar"/>
-	<taskdef name="sahipull" classname="in.co.sahi.ant.DAntPull" classpath="lib/ant-sahi.jar"/>
-	<taskdef name="sahidelete" classname="in.co.sahi.ant.DAntDelete" classpath="lib/ant-sahi.jar"/>
+    <taskdef name="sahid" classname="in.co.sahi.ant.DAntRunner" classpath="/auto/sahi_pro/lib/ant-sahi.jar"/>
+    <taskdef name="sahisync" classname="in.co.sahi.ant.DAntSync" classpath="/auto/sahi_pro/lib/ant-sahi.jar"/>
+	<taskdef name="sahipull" classname="in.co.sahi.ant.DAntPull" classpath="/auto/sahi_pro/lib/ant-sahi.jar"/>
+	<taskdef name="sahidelete" classname="in.co.sahi.ant.DAntDelete" classpath="/auto/sahi_pro/lib/ant-sahi.jar"/>
 
 	<target name="set_timestamp">
         <tstamp>
