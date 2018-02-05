@@ -60,6 +60,8 @@
 			jsCodeCoverage="${jsCodeCoverage}">
 			<!-- Offline reports -->
 			<report type="html" logdir="C://jenkins_sahi//logs//"/>
+			<!-- Scripts will be distributed across all the nodes. The nodes may or may not include the Master machine -->
+			<node host="192.168.1.100" port="9999"/>
 		</sahi>
 		<antcall target="failsahichrome"/>
 	</target>
