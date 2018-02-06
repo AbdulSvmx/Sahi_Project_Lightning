@@ -24,10 +24,8 @@ var $formulaArray =["$F.SUMOF($D.Labor,'SVMXC__Billable_Line_Price__c')",
                     "$F.MULTIPLY($D.Labor.SVMXC__Actual_Quantity2__c,$D.Labor.SVMXC__Actual_Price2__c)"
                     ];
 
-//Proforma Invoice Amount
-
 _setSpeed(100);
-$bo_act_login.login($g_url, $sfmUsn, $sfmPwd);
+$bo_act_login.login($g_url, $sfmUsn, $sfmPwd); 
 $sfm_act_SFM.cloneTDM016($sfmNameToBeCloned, $sfmName, $isCustom, $sfmTemplateSaveAsName, $sfmTemplate, $fieldNameArray, $containerNameArray);
 $sfm_pg_formula.createFormula($formulaTargetObjectArray, $formulaTargetFieldArray, $formulaNameArray, $formulaDescriptionArray, $formulaArray);
 _click($sfm_pg_sfmDesigner.btn_quickSaveSFM);
@@ -42,7 +40,8 @@ _click($sfm_pg_sfmDesigner.lnk_home);
 
 //create WO and open the same for validation
 $login = $sfm_act_createWorkOrder.login($sfmUsn, $sfmPwd);
-$woName = $sfm_act_createWorkOrder.create_WO(); 
+$woName = $sfm_act_createWorkOrder.create_WO();  
+
 
 _wait(3000);
 $sfm_act_common.globalSearch($woName);
@@ -77,10 +76,13 @@ if(_exists($sfm_pg_sfmDesigner.txt_PriceAlert)){
 
 _click($sfm_pg_sfmDesigner.btn_deliveryExtendedEditLabor);
 var $laborBlp1 = parseInt(_getText($sfm_pg_sfmDesigner.txt_billingLinePrice));
+_log($laborBlp1);
+_click($sfm_pg_sfmDesigner.btn_eeCancel);
 _click(_image("gif[3]"));
 var $laborBlp2 = parseInt(_getText($sfm_pg_sfmDesigner.txt_billingLinePrice));
-
-if(_getText($sfm_pg_sfmDesigner.txt_proformaIAmt)== ($laborBlp1+$laborBlp2)){
+_log($laborBlp2);
+_click($sfm_pg_sfmDesigner.btn_eeCancel);
+if( parseInt(_getText($sfm_pg_sfmDesigner.txt_proformaIAmt))== ($laborBlp1+$laborBlp2)){
 	
 	_log("Pass ::: SumOf rollup formula is working");
 }else{
