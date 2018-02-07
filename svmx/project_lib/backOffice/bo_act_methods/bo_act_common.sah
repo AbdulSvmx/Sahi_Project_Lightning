@@ -2,6 +2,7 @@
 var $bo_act_common = new function bo_act_common() {
 
 this.generateRandomName = function($Prefix){
+	 _wait(1000);
   var $now = new Date();
     var $day = $now.getDate();
     var $month = $now.getMonth()+1;
@@ -9,7 +10,8 @@ this.generateRandomName = function($Prefix){
     var $hrs = $now.getHours();
 	var $min = $now.getMinutes();
 	var $sec = $now.getSeconds();
-    var $RandomString = $Prefix+$day + $month+ $year+$hrs+$min+$sec; 		
+    var $RandomString = $Prefix+$day + $month+ $year+$hrs+$min+$sec; 	
+    _log("Num Gen = ",$RandomString);
     return $RandomString;
 };
 

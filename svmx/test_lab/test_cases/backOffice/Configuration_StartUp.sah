@@ -7,7 +7,7 @@ _setSpeed(100);
 
 var $userName = "orgsadmin@svmx-org4.org.org4part1";
 var $password = "servicemax1";
-$bo_act_login.login($g_url, $bac_PRTun, $bac_PRTpwd);
+//$bo_act_login.login($g_url, $bac_PRTun, $bac_PRTpwd);
 var $sectionName = _span("Service Location");
 var $SectionAuto = "Automation Section";
 var $sectionNameCase = _span("Description Information(Header visible on edit only)");
@@ -97,6 +97,7 @@ $bo_act_salesforcePageSetUp.dragAndDropFields($bo_pg_salesforcePageSetUp.btn_ent
 $bo_act_salesforcePageSetUp.dragAndDropFields($bo_pg_salesforcePageSetUp.btn_ServiceContract, $sectionName);
 $bo_act_salesforcePageSetUp.dragAndDropFields($bo_pg_salesforcePageSetUp.btn_Warranty, $sectionName);
 $bo_act_salesforcePageSetUp.dragAndDropFields($bo_pg_salesforcePageSetUp.btn_currency, $sectionName);
+$bo_act_salesforcePageSetUp.dragAndDropFields($bo_pg_salesforcePageSetUp.btn_billingType, $sectionName);
 
 $bo_act_salesforcePageSetUp.dragAndDropFields($bo_pg_salesforcePageSetUp.btn_resolutionCustomerBy, $sectionName);
 $bo_act_salesforcePageSetUp.dragAndDropFields($bo_pg_salesforcePageSetUp.btn_resolutionInternalBy, "SLA Fields");

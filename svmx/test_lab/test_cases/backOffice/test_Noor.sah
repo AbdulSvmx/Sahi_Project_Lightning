@@ -4,9 +4,7 @@
 //$bo_act_login.login($g_url, $bac_un, $bac_pwd);
 var $slaterm = "sla101201814140";
 //$bo_act_PMPlan.createConditionBasedPMPlanFromLocation("loc41201811653", "CriteriaTemp");
-var $delete_Query = "Delete[SELECT NAME FROM SVMXC__Service_Level__c WHERE NAME = '"+$slaterm+"';";
-var $delete_data = $op_act_sForceApiCall.sForceQuery($bac_PRTun, $bac_PRTpwd, $delete_Query , "create");
-
+var $PMPlan = $bo_act_PMPlan.createUsageOrFrequencyBasedPMPlan("Scon912018161445",$PMPTemplate,$IBName);
 
 
 
