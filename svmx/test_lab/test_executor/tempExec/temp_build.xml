@@ -47,7 +47,7 @@
 
 	    <target name="drundiffmasterchrome" depends="set_properties_chrome, set_timestamp">
 	    	<!-- Sync suite to Master staging folder -->
-			<sahisync originFolder="${scriptDir}" destFolder="temp/scripts/staging/${ts}_${browser}" ignorePattern=".*(svn|copied).*" suitePath="${scriptDir}${scriptName}" csvSeparator="," scriptExtensions="sah;sahi;js" scenarioExtensions=".s.csv;xls;xlsx">
+			<sahisync originFolder="${scriptDir}" destFolder="temp/scripts/staging/${ts}_${browser}" ignorePattern=".*(svn|copied).*" suitePath="${scriptDirLocal}${scriptName}" csvSeparator="," scriptExtensions="sah;sahi;js" scenarioExtensions=".s.csv;xls;xlsx">
 		    	<node host="${masterhost}" port="${masterport}"/>
 			</sahisync>
 
