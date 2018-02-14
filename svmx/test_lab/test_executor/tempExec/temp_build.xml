@@ -17,7 +17,7 @@
 		</target>
 		
 		<target name="set_properties_common" depends="set_timestamp">
-	    	<property name="scriptDir" value="/auto/sahi_pro/userdata/scripts/Sahi_Project"/>
+	    	<property name="scriptDir" value="/auto/sahi_pro/userdata/scripts/Sahi_Project/"/>
 			<property name="masterhost" value="sahi1.servicemax.com"/>
 			<property name="masterport" value="9999"/>
 		</target>	
