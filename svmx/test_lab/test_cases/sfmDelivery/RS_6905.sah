@@ -14,5 +14,4 @@ $sfm_act_createCustomWizard.addManageWizSteps($wizTitle,"SFM",$sfmName,"Sysadmin
 $sfm_act_createCustomWizard.createBlankWo();
 $sfm_act_createCustomWizard.clickWizardBtn($sfmName);
 $sfm_act_createCustomWizard.verify6905();
-_wait(5000);
 $rs_6905.end();	

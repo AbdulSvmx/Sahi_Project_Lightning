@@ -2,7 +2,7 @@ var $rs_6906 = _testcase("RS_6906","Verify Lookup Context Child to Child.");
 $rs_6906.start();
 $wizTitle = $bo_act_common.generateRandomName("SFM Wiz");
 $sfmName = $bo_act_common.generateRandomName("SFM_Auto_");
-//$sfmName = "SFM_Auto_4122017104542";
+//$sfmName = "SFM_Auto_1220181634";
 $sfmPgLayoutName =	$bo_act_common.generateRandomName("SFM_Auto_Page");
 $processName = "Manage Work Order Lines - Usage";
 $containerName = ["Parts","Parts"];

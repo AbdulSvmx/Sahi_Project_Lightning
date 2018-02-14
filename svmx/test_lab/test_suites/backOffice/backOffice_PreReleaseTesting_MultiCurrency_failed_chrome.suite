@@ -1,0 +1,9 @@
+../../test_cases/backOffice/BAC_PreReleaseTestCases/BAC_SFMSearch.sah https://test.salesforce.com
+../../test_cases/backOffice/BAC_PreReleaseTestCases/RS_5422_SFM.sah https://test.salesforce.com
+../../test_cases/backOffice/BAC_PreReleaseTestCases/RS_5255_SLAOnWO.sah https://test.salesforce.com
+../../test_cases/backOffice/BAC_PreReleaseTestCases/RS_5258_TimeBasedPM.sah https://test.salesforce.com
+../../test_cases/backOffice/BAC_PreReleaseTestCases/RS_5259_SLAOnCase.sah https://test.salesforce.com
+../../test_cases/backOffice/BAC_PreReleaseTestCases/RS_7298_AutoEntitlementForWO.sah https://test.salesforce.com
+../../test_cases/backOffice/BAC_PreReleaseTestCases/RS_5467_ManualEntitlementForCase.sah https://test.salesforce.com
+../../test_cases/backOffice/BAC_PreReleaseTestCases/RS_5331_GetPriceMultiCurrency.sah https://test.salesforce.com
+../../test_cases/backOffice/BAC_PreReleaseTestCases/RS_7439_ConditionBasedPM.sah https://test.salesforce.com
