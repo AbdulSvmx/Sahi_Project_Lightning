@@ -63,7 +63,7 @@ this.runApexScriptinWB = function($script){
 	_click(_link("Apex Execute"));
 	_setValue(_textarea("scriptInput"),$script);
 	_click(_submit("Execute"));
-	_wait(30000);
+	_wait(30000,_isVisible(_div("mainBlock")));
 	_assertNotVisible(_div("/COMPILE ERROR:/"));	
 };
 

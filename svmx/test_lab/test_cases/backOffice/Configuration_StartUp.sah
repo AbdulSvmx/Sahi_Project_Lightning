@@ -5,9 +5,9 @@ var $Configuration_StartUp = _testcase("$Configuration_StartUp","Set up test dat
 $Configuration_StartUp.start();
 _setSpeed(100);
 
-var $userName = "orgsadmin@svmx-org4.org.org4part1";
-var $password = "servicemax1";
-//$bo_act_login.login($g_url, $bac_PRTun, $bac_PRTpwd);
+var $userName = "bac_automationdev@ge.com";
+var $password = "welcome-01";
+$bo_act_login.login($g_url, $userName, $password);
 var $sectionName = _span("Service Location");
 var $SectionAuto = "Automation Section";
 var $sectionNameCase = _span("Description Information(Header visible on edit only)");
@@ -48,7 +48,7 @@ $bo_act_salesforcePageSetUp.dragAndDropVisualForcePage($bo_pg_salesforcePageSetU
 $bo_act_salesforcePageSetUp.saveEditLayout();
 
 */
-
+/*
 
 //Drag and drop all the SLA related fields in WO Object
 
@@ -107,7 +107,7 @@ $bo_act_salesforcePageSetUp.dragAndDropFields($bo_pg_salesforcePageSetUp.btn_res
 $bo_act_salesforcePageSetUp.dragAndDropFields($bo_pg_salesforcePageSetUp.btn_totalBillableAmount, "SLA Fields");
 _stopOnError();
 $bo_act_salesforcePageSetUp.saveEditLayout();
-
+*/
 
 //Drag and drop all the GetPrice related fields on SCON Object
 $bo_act_navigation.navigateToServiceMaintenanceContractPage();
