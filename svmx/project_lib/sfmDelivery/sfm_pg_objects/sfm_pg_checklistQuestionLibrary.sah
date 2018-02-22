@@ -8,6 +8,7 @@ var $sfm_pg_checklistQuestionLibrary = new function sfm_pg_checklistQuestionLibr
 	this.lbl_workOrder= _f("main").s_label("Work Order[5]");
 	
 	this.btn_backToSetupHome =_submit("Back To Setup Home");
+	
 	this.txt_checklistQuestionLibrary=_span("Checklist Question Library");
 	this.btn_addQuestion=_div("Add");
 	this.txt_addQuestion=_span("Add Question");

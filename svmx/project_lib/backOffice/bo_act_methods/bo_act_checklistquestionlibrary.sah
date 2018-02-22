@@ -1,0 +1,32 @@
+/**
+ * Function for Checklist Question Library
+
+ * Owner is Meghana Rao P 
+ **/
+var $bo_act_questionlibrary = new function bo_act_questionlibrary() {
+	
+	
+	
+	this.edit_question_in_library = function($questiontext, $changedquestiontext, $responsesetname)
+	{
+		
+		_click($bo_pg_formDesigner.btn_gobacktoSetupHome);
+		_click($bo_pg_servicemaxSetup.btn_serviceFlowManager);
+		_click($bo_pg_servicemaxSetup.btn_checklistQuestionLibrary);
+		_assertEqual(true, _isVisible(_div($questiontext)));
+		_doubleClick(_div($questiontext));
+		_setValue($sfm_pg_checklistQuestionLibrary.txt_questionText, $changedquestiontext);
+		_click($sfm_pg_checklistQuestionLibrary.txt_responseType);
+		_click($sfm_pg_checklistQuestionLibrary.sel_radioButtonAnswerType);
+		_setValue($sfm_pg_checklistQuestionLibrary.txt_responseSetName,$responsesetname);
+		_setValue($sfm_pg_checklistQuestionLibrary.txt_answerValue1, "Answer 1");
+		_click($sfm_pg_checklistQuestionLibrary.btn_addAnswer);
+		_setValue($sfm_pg_checklistQuestionLibrary.txt_answerValue2, "Answer 2");
+		_click($sfm_pg_checklistQuestionLibrary.btn_saveQuestion);
+		
+		
+		
+	};
+	
+	
+};
