@@ -1,0 +1,83 @@
+/**
+ * Function for POC of Checklist
+ * 
+ **/
+var $bo_act_checklistdesigner = new function $bo_act_checklistdesigner() {
+	
+this.newChecklistTypeSFM = function($checklistName,$sfmType,$objName)
+{
+		_click($bo_pg_sfmTransactionAndDesigner.btn_newSFMTransaction);
+		$bo_pg_sfmTransactionAndDesigner.setSfmName($checklistName);
+		_setValue($bo_pg_sfmTransactionAndDesigner.txt_sfmTransactionId, "");
+		_setSelected($bo_pg_sfmTransactionAndDesigner.lbl_checklistOb,$sfmType);
+		_wait(60000, _isVisible($bo_pg_sfmTransactionAndDesigner.lbl_checklistOb));
+		_setValue($bo_pg_sfmTransactionAndDesigner.selectSourceObj,"");
+		_wait(10000);
+		_setValue($bo_pg_sfmTransactionAndDesigner.selectSourceObj,$objName);
+		_wait(20000);
+		
+		_setSelected($bo_pg_sfmTransactionAndDesigner.sourceComboBox, $objName);
+		_wait(5000);
+		
+		_click($bo_pg_sfmTransactionAndDesigner.btn_popUpOK);		
+		_wait(6000);
+		
+		
+				
+	};
+	
+	
+this.re_openChecklistTypeSFM = function($checklistName)
+
+{
+	_click($bo_pg_formDesigner.btn_re_open_checklist)
+	
+};
+	
+	
+	this.addQuestionToChecklist1=function($questionText, $tag1){
+		_click($bo_pg_formDesigner.tab_clickFormDesigner);
+		_click($bo_pg_formDesigner.btn_addNewQuestion);
+		_click($bo_pg_formDesigner.btn_selectQuestionDataType);
+		_setValue($bo_pg_formDesigner.lbl_questionText, $questionText);
+		_setValue($bo_pg_formDesigner.txt_data_entry,$tag1);
+		_wait(300);
+		_click($bo_pg_formDesigner.btn_addQuestionToLibraryAndForm);
+		_click($bo_pg_formDesigner.btn_closeQuestionPopUp);
+		_click($bo_pg_formDesigner.btn_delete1);
+		_click($bo_pg_formDesigner.btn_quickSave);		
+	};
+	
+	// Find the values in the Checklist fields pop window.
+	this.findthevaluesinChecklist = function($questionText,$helpurl255) {
+
+		_click($bo_pg_formDesigner.tab_clickFormDesigner);
+		_click($bo_pg_formDesigner.btn_addNewQuestion);
+		_click($bo_pg_formDesigner.btn_selectQuestionDataType);
+		_assertEqual(true, _isVisible($sfm_pg_checklistTransaction.txt_questionText1));
+		_assertEqual(true, _isVisible($sfm_pg_checklistTransaction.txt_helpURL2));
+		_assertEqual(true, _isVisible($sfm_pg_checklistTransaction.txt_tagName2));
+		
+		_assertEqual("Attachment" , _getValue($sfm_pg_checklistTransaction.picklist_answertype2)); 
+		_setValue($bo_pg_formDesigner.lbl_questionText, $questionText);
+		_setValue($sfm_pg_checklistTransaction.txt_helpurltextfield,$helpurl255);
+		_click($bo_pg_formDesigner.btn_addQuestionToLibraryAndForm);
+		_assertEqual(true , _isVisible($sfm_pg_checklistTransaction.field_stringtoolong));
+	
+	};
+	
+	
+	this.addQuestionToChecklist2=function($questionText, $tag1){
+		_click($bo_pg_formDesigner.tab_clickFormDesigner);
+		_click($bo_pg_formDesigner.btn_addNewQuestion);
+		_click($bo_pg_formDesigner.btn_selectQuestionDataType);
+		_setValue($bo_pg_formDesigner.lbl_questionText, $questionText);
+		_setValue($bo_pg_formDesigner.txt_data_entry,$tag1);
+		_wait(300);
+		_click($bo_pg_formDesigner.btn_addQuestionToLibraryAndForm);
+		_click($bo_pg_formDesigner.btn_closeQuestionPopUp);
+		_click($bo_pg_formDesigner.btn_delete1);
+		_click($bo_pg_formDesigner.btn_quickSave);		
+	};
+
+};
