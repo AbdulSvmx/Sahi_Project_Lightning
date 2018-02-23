@@ -1,7 +1,7 @@
 // Author Meghana Rao P
 /*
- * This test-case verifies the new Attachment Question , HELP URL Field Limitation
- * Alphanumeric and special characters in Question text
+ * This test-case searches on the Checklist Designer with Group by Tag being OFF
+ * Searching for tags , Questions and common value among them
  */
 var $RS_9842 = _testcase("RS_9842", "To create a new Checklist SFM Designer");
 $RS_9842.start();
@@ -16,7 +16,7 @@ $number1 = Math.floor(Math.random() * 10);
 $bo_act_navigation.navigateToSvmxSetup();
 $bo_act_questionlibrary.createDateTimeQuestion("A RS_9842 Question", "Date" , "https://www.google.com", "RS9842TAG"+",");
 
-// To search the Tag with only TAG Name
+
 
 $bo_act_navigation.navigateToSfmTransactionDesigner();
 _wait(60000, _isVisible($bo_pg_sfmTransactionAndDesigner.btn_newSFM));

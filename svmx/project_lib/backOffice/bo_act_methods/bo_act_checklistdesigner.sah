@@ -118,16 +118,53 @@ this.re_openChecklistTypeSFM = function($checklistName, $isCustom)
 	{
 		_click($bo_pg_formDesigner.tab_clickFormDesigner);
 		_setValue($sfm_pg_checklistTransaction.txt_formDesignerSearch, $tagname);
+		// No Tag name must be visible - For Tag search
 		_assertEqual(false, _isVisible(_f("main").s_label($tagname)) );
 		_setValue($sfm_pg_checklistTransaction.txt_formDesignerSearch, "");
 		_setValue($sfm_pg_checklistTransaction.txt_formDesignerSearch, $questiontext);
+		// Only Question and no tag must be visible for the Question search
+		_assertEqual(false, _isVisible(_f("main").s_label($tagname)) );
 		_assertEqual(true, _isVisible(_f("main").s_label($questiontext)));
+		
+	
 		_setValue($sfm_pg_checklistTransaction.txt_formDesignerSearch, "");
 		_setValue($sfm_pg_checklistTransaction.txt_formDesignerSearch, $commonvalue);
+		// Only question and no tag must be visible for common search
+		_assertEqual(false, _isVisible(_f("main").s_label($tagname)) );
 		_assertEqual(true, _isVisible(_f("main").s_label($questiontext)));
 		
 		
 		
 	};
+
+	this.searchthevaluesinchecklist_groupbytagon = function($questiontext, $tagname, $commonvalue)
+	{
+		_click($bo_pg_formDesigner.tab_clickFormDesigner);
+		_click($bo_pg_formDesigner.btn_groupbytag);
+		_setValue($sfm_pg_checklistTransaction.txt_formDesignerSearch, $tagname);
+		// Tag header must be visible for the UI
+		_assertEqual(true, _isVisible(_f("main").s_label($tagname)) );
+		_assertEqual(false, _isVisible(_f("main").s_label($questiontext)));
+		
+		_setValue($sfm_pg_checklistTransaction.txt_formDesignerSearch, "");
+		_setValue($sfm_pg_checklistTransaction.txt_formDesignerSearch, $questiontext);
+		// Both Tag and Questions must be visible - For Question Search
+		_assertEqual(true, _isVisible(_f("main").s_label($tagname)) );
+		_assertEqual(true, _isVisible(_f("main").s_label($questiontext)));
+	
+		
+		_setValue($sfm_pg_checklistTransaction.txt_formDesignerSearch, "");
+		_setValue($sfm_pg_checklistTransaction.txt_formDesignerSearch, $commonvalue);
+		
+		// Both Tag and question must be Visible for Common Search
+		_assertEqual(true, _isVisible(_f("main").s_label($tagname)) );
+		_assertEqual(true, _isVisible(_f("main").s_label($questiontext)));
+		
+		
+		
+	};
+	
+	
+	
 	
 };
