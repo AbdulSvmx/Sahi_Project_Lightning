@@ -114,6 +114,20 @@ this.re_openChecklistTypeSFM = function($checklistName, $isCustom)
 			
 	};
 	
-	
+	this.searchthevaluesinchecklist = function($questiontext, $tagname, $commonvalue)
+	{
+		_click($bo_pg_formDesigner.tab_clickFormDesigner);
+		_setValue($sfm_pg_checklistTransaction.txt_formDesignerSearch, $tagname);
+		_assertEqual(false, _isVisible(_f("main").s_label($tagname)) );
+		_setValue($sfm_pg_checklistTransaction.txt_formDesignerSearch, "");
+		_setValue($sfm_pg_checklistTransaction.txt_formDesignerSearch, $questiontext);
+		_assertEqual(true, _isVisible(_f("main").s_label($questiontext)));
+		_setValue($sfm_pg_checklistTransaction.txt_formDesignerSearch, "");
+		_setValue($sfm_pg_checklistTransaction.txt_formDesignerSearch, $commonvalue);
+		_assertEqual(true, _isVisible(_f("main").s_label($questiontext)));
+		
+		
+		
+	};
 	
 };

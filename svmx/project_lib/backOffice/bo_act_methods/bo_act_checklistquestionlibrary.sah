@@ -28,5 +28,34 @@ var $bo_act_questionlibrary = new function bo_act_questionlibrary() {
 		
 	};
 	
+	this.createDateTimeQuestion = function($questionText,$answerType,$helpURL3,$tagname)
+	{
+		
+		_click($bo_pg_servicemaxSetup.btn_serviceFlowManager);
+		_click($bo_pg_servicemaxSetup.btn_checklistQuestionLibrary);
+		_click($sfm_pg_checklistQuestionLibrary.btn_addQuestion);
+		_wait(3000,(_isVisible($sfm_pg_checklistQuestionLibrary.txt_addQuestion)));
+		_click($sfm_pg_checklistQuestionLibrary.txt_responseType);
+		_click($sfm_pg_checklistQuestionLibrary.sel_dateTimeAnswerType);
+		_setValue($sfm_pg_checklistQuestionLibrary.txt_questionText, $questionText);
+		_setValue($sfm_pg_checklistQuestionLibrary.txt_helpURL,$helpURL3);
+		_setValue($sfm_pg_checklistQuestionLibrary.txt_tagName, $tagname);
+		_wait(4000);
+		_click($sfm_pg_checklistQuestionLibrary.btn_saveQuestion);
+		_wait(4000);
+		_wait(2000,_isVisible($sfm_pg_checklistQuestionLibrary.txt_saveSucessMessage));
+
+		
+		if(_assert(_isVisible($sfm_pg_checklistQuestionLibrary.txt_saveSucessMessage)))
+		{
+			_log("Date Time Question Created successfully");
+		}else{		
+			_log("Error while creating Date Time Question");
+			}
+
+		_click($sfm_pg_checklistQuestionLibrary.btn_okMessage);
+
+	} ;
+	
 	
 };
