@@ -114,7 +114,7 @@ this.re_openChecklistTypeSFM = function($checklistName, $isCustom)
 			
 	};
 	
-	this.searchthevaluesinchecklist = function($questiontext, $tagname, $commonvalue)
+	this.searchthevaluesinchecklist_groupbytagoff = function($questiontext, $tagname, $commonvalue)
 	{
 		_click($bo_pg_formDesigner.tab_clickFormDesigner);
 		_setValue($sfm_pg_checklistTransaction.txt_formDesignerSearch, $tagname);
