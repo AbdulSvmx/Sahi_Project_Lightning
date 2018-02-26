@@ -57,5 +57,28 @@ var $bo_act_questionlibrary = new function bo_act_questionlibrary() {
 
 	} ;
 	
+	this.createCheckboxQuestion = function($questionText , $answerType, $helpURL, $responseName)
+	
+	{
+		_click($bo_pg_servicemaxSetup.btn_serviceFlowManager);
+		_click($bo_pg_servicemaxSetup.btn_checklistQuestionLibrary);
+		_wait(2000);
+		_isVisible(3000,$sfm_pg_checklistQuestionLibrary.btn_addQuestion);
+		_click($sfm_pg_checklistQuestionLibrary.btn_addQuestion);
+		_wait(3000,(_isVisible($sfm_pg_checklistQuestionLibrary.txt_addQuestion)));
+		_click($sfm_pg_checklistQuestionLibrary.txt_responseType);
+		_click($sfm_pg_checklistQuestionLibrary.sel_checkBoxAnswerType);
+		_setValue($sfm_pg_checklistQuestionLibrary.txt_questionText, $questionText);
+		_setValue($sfm_pg_checklistQuestionLibrary.txt_helpURL,$helpURL);
+		_setValue($sfm_pg_checklistQuestionLibrary.txt_responseSetName,$responseName);
+		_setValue($sfm_pg_checklistQuestionLibrary.txt_answerValue1, "Answer 1");
+		_click($sfm_pg_checklistQuestionLibrary.btn_addAnswer);
+		_setValue($sfm_pg_checklistQuestionLibrary.txt_answerValue2, "Answer 2");
+		_click($sfm_pg_checklistQuestionLibrary.btn_checklistdefaultbutton1);
+		_click($sfm_pg_checklistQuestionLibrary.btn_saveQuestion);	
+		
+	};
+	
+	
 	
 };

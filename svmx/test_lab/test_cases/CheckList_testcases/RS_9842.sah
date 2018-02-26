@@ -6,10 +6,7 @@
 var $RS_9842 = _testcase("RS_9842", "To create a new Checklist SFM Designer");
 $RS_9842.start();
 
-var $un = "meghana.rao@servicemax.com";
-var $pwd ="cloud_101";
-var $url ="https://test.salesforce.com";
-$bo_act_login.login($url, $un, $pwd);
+$bo_act_login.login($url_checklist, $un_checklist, $pwd_checklist);
 
 
 $number1 = Math.floor(Math.random() * 10);

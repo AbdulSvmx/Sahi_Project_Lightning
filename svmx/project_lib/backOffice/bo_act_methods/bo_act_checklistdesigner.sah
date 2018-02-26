@@ -16,7 +16,6 @@ this.newChecklistTypeSFM = function($checklistName,$sfmType,$objName)
 		_wait(10000);
 		_setValue($bo_pg_sfmTransactionAndDesigner.selectSourceObj,$objName);
 		_wait(20000);
-		
 		_setSelected($bo_pg_sfmTransactionAndDesigner.sourceComboBox, $objName);
 		_wait(5000);
 		
@@ -108,9 +107,11 @@ this.re_openChecklistTypeSFM = function($checklistName, $isCustom)
 		_assertEqual(true, _isVisible(_f("main").s_label($questin_txt)));
 		_click(_f("main").s_label($questin_txt));
 		_click($bo_pg_formDesigner.btn_addquestion_toform);
+		_wait(10000);
 		_click($bo_pg_formDesigner.btn_quickSave);	
 		_wait(10000);
 		_click($bo_pg_formDesigner.btn_save_close);
+		_wait(10000);
 			
 	};
 	
@@ -165,6 +166,29 @@ this.re_openChecklistTypeSFM = function($checklistName, $isCustom)
 	};
 	
 	
+	this.edit_checklist_process_checkbox = function($questiontext)
+	{
+		_click($bo_pg_formDesigner.tab_clickFormDesigner);
+		_assertEqual(true,_isVisible(_f("main").s_label($questiontext)) );
+		_click($sfm_pg_checklistTransaction.btn_editQuestion);
+		_click($sfm_pg_checklistTransaction.btn_defaultcheckbox);
+		_click($sfm_pg_checklistTransaction.btn_defaultcheckbox2);
+		_click($sfm_pg_checklistTransaction.btn_saveFilter);
+		_click($bo_pg_formDesigner.btn_quickSave);	
+		_click($bo_pg_formDesigner.btn_save_close);
+		
+	};
+	
+	this.verifythechangesinquestion = function($questiontext)
+	{
+		
+		_click($bo_pg_formDesigner.tab_clickFormDesigner);
+		_assertEqual(true, _isVisible(_f("main").s_label($questiontext)));
+		_click($sfm_pg_checklistTransaction.btn_editQuestion);
+		_assertEqual(true,$sfm_pg_checklistTransaction.btn_defaultcheckbox2.get("selected"));
+		_assertEqual(true,$sfm_pg_checklistTransaction.btn_defaultcheckbox2.get("selected"));
+		
+	}
 	
 	
 };

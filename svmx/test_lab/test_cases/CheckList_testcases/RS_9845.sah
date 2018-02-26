@@ -5,11 +5,7 @@
  */
 var $RS_9845 = _testcase("RS_9845", "To create a new Checklist SFM Designer");
 $RS_9845.start();
-
-var $un = "meghana.rao@servicemax.com";
-var $pwd ="cloud_101";
-var $url ="https://test.salesforce.com";
-$bo_act_login.login($url, $un, $pwd);
+$bo_act_login.login($url_checklist, $un_checklist, $pwd_checklist);
 
 $bo_act_navigation.navigateToSfmTransactionDesigner();
 _wait(60000, _isVisible($bo_pg_sfmTransactionAndDesigner.btn_newSFM));
