@@ -57,7 +57,7 @@ var $bo_act_questionlibrary = new function bo_act_questionlibrary() {
 
 	} ;
 	
-	this.createCheckboxQuestion = function($questionText , $answerType, $helpURL, $responseName)
+	this.createCheckbox_RadioQuestion = function($questionText , $answerType, $helpURL, $responseName)
 	
 	{
 		_click($bo_pg_servicemaxSetup.btn_serviceFlowManager);
@@ -67,7 +67,17 @@ var $bo_act_questionlibrary = new function bo_act_questionlibrary() {
 		_click($sfm_pg_checklistQuestionLibrary.btn_addQuestion);
 		_wait(3000,(_isVisible($sfm_pg_checklistQuestionLibrary.txt_addQuestion)));
 		_click($sfm_pg_checklistQuestionLibrary.txt_responseType);
+		if($answerType == "Checkbox")
+			{
 		_click($sfm_pg_checklistQuestionLibrary.sel_checkBoxAnswerType);
+		
+			}
+		else if($answerType == "Radio Button")
+			
+			{
+			_click($sfm_pg_checklistQuestionLibrary.sel_radioButtonAnswerType);
+			
+			}
 		_setValue($sfm_pg_checklistQuestionLibrary.txt_questionText, $questionText);
 		_setValue($sfm_pg_checklistQuestionLibrary.txt_helpURL,$helpURL);
 		_setValue($sfm_pg_checklistQuestionLibrary.txt_responseSetName,$responseName);
@@ -79,6 +89,8 @@ var $bo_act_questionlibrary = new function bo_act_questionlibrary() {
 		
 	};
 	
+	
+
 	
 	
 };
