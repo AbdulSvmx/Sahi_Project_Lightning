@@ -223,6 +223,8 @@ var $sfm_act_Transactions = new function sfm_act_Transactions() {
 		_setValue($bo_pg_sfmTransactionAndDesigner.txt_sfmSavePageLayoutAsId, "");
 		_setValue($bo_pg_sfmTransactionAndDesigner.txt_sfmSavePageLayoutAsId, $sfmPgLayoutName);
 		_wait(3000);
+		_click($bo_pg_sfmTransactionAndDesigner.btn_pageLayoutSave);
+		_wait(6000);
 		
 		_click(_f("main").tab("Data Validation Rules"));
 		_click(_f("main").s_button("New[5]"));
