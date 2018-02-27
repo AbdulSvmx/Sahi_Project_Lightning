@@ -60,6 +60,8 @@ var $swat_pg_sfmSearch = new function swat_pg_sfmSearch(){
 	
 	// Click on Go button
 		this.link_go =  _link("Go");
+		this.txt_search = _textbox(1); // Owner Meghana Rao
+		this.workorder_search = _span(64); // Owner Meghana Rao
 		
 	// Once the SFM Search is launched, click on "Go" button
 	   this.btn_go = _span("Go");
