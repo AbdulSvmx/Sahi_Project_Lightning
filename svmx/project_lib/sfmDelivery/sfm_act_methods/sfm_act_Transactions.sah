@@ -291,7 +291,7 @@ var $sfm_act_Transactions = new function sfm_act_Transactions() {
 		_click(_f("main").s_button("Add To Process"));
 		_wait(3000);
 
-		
+		_click($bo_pg_sfmTransactionAndDesigner.btn_screenDesigner);
 		_setValue($bo_pg_sfmTransactionAndDesigner.txt_sfmSavePageLayoutAs, $sfmPgLayoutName);
 		_setValue($bo_pg_sfmTransactionAndDesigner.txt_sfmSavePageLayoutAsId, "");
 		_setValue($bo_pg_sfmTransactionAndDesigner.txt_sfmSavePageLayoutAsId, $sfmPgLayoutName);
