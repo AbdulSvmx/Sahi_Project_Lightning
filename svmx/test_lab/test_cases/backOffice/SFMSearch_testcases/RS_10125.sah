@@ -1,0 +1,19 @@
+// Author Meghana Rao P
+/*
+ * This test case verifies the Output of a Standard Search Functionality
+ */
+var $RS_10125 = _testcase("RS_10125", "To create a new Checklist SFM Designer");
+$RS_10125.start();
+
+
+var $data = _readExcelFile("../../backOffice/bo_excleData/SFMSearchDatasheet.xlsx","Sheet1",true);
+var $createwoquery = $data[1]["CreateWorkOrder"];
+
+// create a Work Order
+
+var $ana_870_insert_WO = "$createwoquery";
+
+$bo_act_login.login($url_checklist, $un_checklist, $pwd_checklist);
+
+$number1 = Math.floor(Math.random() * 10);
+$bo_act_sfmsearchdelivery.standardsfmsearch("SVMXSTD: Account Search", "WO-00010235");

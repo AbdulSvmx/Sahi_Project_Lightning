@@ -1,0 +1,43 @@
+/**
+ * Functions for the Search Configurations
+ */
+var $bo_act_sfmsearch = new function bo_act_sfmsearch() {
+
+	
+this.createdfmsearch = function($searchId1, $searchTitle1,$objectName,$fieldName1,$value1,$operator){
+	
+	var $searchTitle = $bo_act_common.generateRandomName("Search");
+		var $searchId = $bo_act_common.generateRandomName("SearchId");
+        $bo_act_navigation.navigateToSfmSearchInDesigner();
+		_click($swat_pg_sfmSearch.btn_new);
+		
+		//General Info		
+		_setValue($swat_pg_sfmSearch.txt_searchTitle,$searchTitle1);
+		_setValue($swat_pg_sfmSearch.txt_searchId,$searchId1);
+		
+		//Search Configuration
+		_click($swat_pg_sfmSearch.tab_searchConfiguration);
+		_click($swat_pg_sfmSearch.btn_sub_new);
+		
+		//Include one or more objects to be included in the scope of this search
+		_setSelected($swat_pg_sfmSearch.picklist_searchObject,$objectName);
+		
+		/* Using the expression builder below, define a filter criteria to 
+		   always apply on this object's records */
+		_setSelected($swat_pg_sfmSearch.picklist_fieldName,$fieldName1);
+		_setSelected($swat_pg_sfmSearch.picklist_operator,$operator);
+		_setValue($swat_pg_sfmSearch.txt_value,$value1);
+		
+		//Click on Save button
+		_click($swat_pg_sfmSearch.btn_save);
+		
+		//Click on save and close
+		_click($swat_pg_sfmSearch.btn_save_and_close);
+		
+		return($searchTitle);
+	
+		
+};
+
+
+};
