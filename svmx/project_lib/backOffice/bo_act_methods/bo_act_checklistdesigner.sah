@@ -112,6 +112,7 @@ this.re_openChecklistTypeSFM = function($checklistName, $isCustom)
 		_wait(10000);
 		_click($bo_pg_formDesigner.btn_save_close);
 		_wait(10000);
+		_call(top.location.reload());
 			
 	};
 	
@@ -145,7 +146,6 @@ this.re_openChecklistTypeSFM = function($checklistName, $isCustom)
 		_setValue($sfm_pg_checklistTransaction.txt_formDesignerSearch, $tagname);
 		// Tag header must be visible for the UI
 		_assertEqual(true, _isVisible(_f("main").s_label($tagname)) );
-		_assertEqual(false, _isVisible(_f("main").s_label($questiontext)));
 		
 		_setValue($sfm_pg_checklistTransaction.txt_formDesignerSearch, "");
 		_setValue($sfm_pg_checklistTransaction.txt_formDesignerSearch, $questiontext);
@@ -166,29 +166,51 @@ this.re_openChecklistTypeSFM = function($checklistName, $isCustom)
 	};
 	
 	
-	this.edit_checklist_process_checkbox = function($questiontext)
+	this.edit_checklist_process_checkbox = function($questiontext, $answertype)
 	{
 		_click($bo_pg_formDesigner.tab_clickFormDesigner);
 		_assertEqual(true,_isVisible(_f("main").s_label($questiontext)) );
 		_click($sfm_pg_checklistTransaction.btn_editQuestion);
+		if($answertype == "Checkbox")
+			{
 		_click($sfm_pg_checklistTransaction.btn_defaultcheckbox);
 		_click($sfm_pg_checklistTransaction.btn_defaultcheckbox2);
+		
+		
+			}
+		if($answertype == "Radio Button")
+			{
+			
+			_click($sfm_pg_checklistTransaction.btn_defaultRadiobutton2);
+			
+			}
+		
+		
 		_click($sfm_pg_checklistTransaction.btn_saveFilter);
 		_click($bo_pg_formDesigner.btn_quickSave);	
 		_click($bo_pg_formDesigner.btn_save_close);
 		
 	};
 	
-	this.verifythechangesinquestion = function($questiontext)
+	this.verifythechangesinquestion = function($questiontext , $answertype)
 	{
 		
 		_click($bo_pg_formDesigner.tab_clickFormDesigner);
 		_assertEqual(true, _isVisible(_f("main").s_label($questiontext)));
 		_click($sfm_pg_checklistTransaction.btn_editQuestion);
+		if($answertype == "Checkbox")
+			{
 		_assertEqual(true,$sfm_pg_checklistTransaction.btn_defaultcheckbox2.get("selected"));
 		_assertEqual(true,$sfm_pg_checklistTransaction.btn_defaultcheckbox2.get("selected"));
 		
-	}
+			}
+		if($answertype == "Radio Button")
+			{
+			_assertEqual(true,$sfm_pg_checklistTransaction.btn_defaultRadiobutton2.get("selected"));
+			
+			}
+		
+	};
 	
 	
 };

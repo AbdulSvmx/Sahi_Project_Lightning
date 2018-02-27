@@ -46,4 +46,5 @@ var $sfm_pg_checklistQuestionLibrary = new function sfm_pg_checklistQuestionLibr
 	// Owner Meghana Rao
 	this.btn_checklistdefaultbutton1 = _button(3);
 	this.btn_checklistdefaultbutton2 = _button(4);
+
 };
