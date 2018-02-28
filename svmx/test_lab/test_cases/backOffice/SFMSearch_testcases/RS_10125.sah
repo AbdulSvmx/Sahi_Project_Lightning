@@ -7,7 +7,7 @@ $RS_10125.start();
 
 
 var $data = _readExcelFile("../../backOffice/bo_excleData/SFMSearchDatasheet.xlsx","Sheet1",true);
-var $createwoquery = $data[1]["CreateWorkOrder"];
+var $createwoquery = $data[1]["CreateWorkOrderOpen"];
 var $fetchwo = $data[1]["fetchwo"];
 
 // create a Work Order
@@ -18,9 +18,9 @@ var $rs_10125_query_wo = $fetchwo;
 var $rs_10125_fetch = $op_act_sForceApiCall.sForceQuery($un_checklist, $pwd_checklist, $rs_10125_query_wo ,"query");
 
 $rs_10125_WO1 = $rs_10125_fetch[0].Name;
-$bo_act_login.login($url_checklist, $un_checklist, $pwd_checklist);
+
 
 $number1 = Math.floor(Math.random() * 10);
-$bo_act_sfmsearchdelivery.sfmsearch("SVMXSTD: Account Search",$rs_10125_WO1);
+$bo_act_sfmsearchdelivery.sfmsearch("SVMXSTD: Account Search",$rs_10125_WO1, true);
 
 $RS_10125.end();

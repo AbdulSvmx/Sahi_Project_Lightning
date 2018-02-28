@@ -10,6 +10,11 @@ var $swat_pg_sfmSearch = new function swat_pg_sfmSearch(){
 	//this.btn_save = _submit(" Save ");
 	//this.btn_delete = _button("Delete");
 	
+	// Buttons to Clone a SFM Search with Object Work Order : owner : Meghana Rao
+	this.btn_clone_customsearch = _submit("Clone[1]");
+	this.btn_edit_values = _submit("Edit");
+	this.txt_object = _textbox(1);
+	this.btn_edit_sfm_config = _button("Edit");
 	
 	this.btn_new = _submit("New");
 	this.txt_searchTitle = _textbox(0,_rightOf(_span("Search Title")));

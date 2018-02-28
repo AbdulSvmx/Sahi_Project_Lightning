@@ -40,9 +40,7 @@ this.createsfmsearch = function($searchId1, $searchTitle1,$objectName,$fieldName
 		//Click on save and close
 		_click($swat_pg_sfmSearch.btn_save);
 		_click($swat_pg_sfmSearch.btn_save_and_close);
-		}
-		return($searchTitle);
-	
+		}	
 		
 };
 
@@ -91,12 +89,29 @@ this.sfmsearch_advancedexpression = function($searchId1, $searchTitle1,$objectNa
 	_click($swat_pg_sfmSearch.btn_save);
 	_click($swat_pg_sfmSearch.btn_save_and_close);
 	}
-	return($searchTitle);
-	
-	
-	
+
 	
 };
 
+this.clonesfmsearch = function($searchTitle ,$objectName,$value2, $sectiontitle)
+{
+	 $bo_act_navigation.navigateToSfmSearchInDesigner();
+	 _click(_checkbox(0,_near(_span($searchTitle))));
+	 _click($swat_pg_sfmSearch.btn_edit_values);
+	 _click($swat_pg_sfmSearch.tab_searchConfiguration);
+	 if(_getValue($swat_pg_sfmSearch.txt_object) == $sectiontitle)
+		 {
+	 _click(_checkbox(0,_near($swat_pg_sfmSearch.txt_object)));
+	 _click($swat_pg_sfmSearch.btn_edit_sfm_config);
+	
+		 }
+
+	 _setValue($swat_pg_sfmSearch.txt_value1,$value2);
+	 _click($swat_pg_sfmSearch.btn_save);
+	_click($swat_pg_sfmSearch.btn_quicksave);
+	_click($swat_pg_sfmSearch.btn_save_and_close);
+
+
+};
 
 };

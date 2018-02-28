@@ -1,26 +1,48 @@
 // Author Meghana Rao P
 /*
- * This test case verifies the Output of a Standard Search Functionality
+ * This test case verifies the quick save of SFM search and checking the SFM Search Delivery
  */
-var $RS_10125 = _testcase("RS_10125", "To create a new Checklist SFM Designer");
-$RS_10125.start();
+var $RS_10123 = _testcase("RS_10123", "quick save and checking the delivery");
+$RS_10123.start();
 
+// To generate Random names for SearchTitle and Search ID
+var $searchTitle = $bo_act_common.generateRandomName("Search");
+var $searchId = $bo_act_common.generateRandomName("SearchId");
 
 var $data = _readExcelFile("../../backOffice/bo_excleData/SFMSearchDatasheet.xlsx","Sheet1",true);
-var $createwoquery = $data[1]["CreateWorkOrder"];
-var $fetchwo = $data[1]["fetchwo"];
+var $createwoquery1 = $data[1]["CreateWorkOrderOpen"];
+var $fetchwo1 = $data[1]["fetchwo"];
 
 // create a Work Order
 $bo_act_login.login($url_checklist, $un_checklist, $pwd_checklist);
 
-var $rs_10125_result = $op_act_sForceApiCall.sForceQuery($un_checklist, $pwd_checklist, $createwoquery ,"create");
-var $rs_10125_query_wo = $fetchwo;
-var $rs_10125_fetch = $op_act_sForceApiCall.sForceQuery($un_checklist, $pwd_checklist, $rs_10125_query_wo ,"query");
+_wait(10000);
+var $rs_10123_result1 = $op_act_sForceApiCall.sForceQuery($un_checklist, $pwd_checklist, $createwoquery1 ,"create");
+var $rs_10123_query_wo1 = $fetchwo1;
+var $rs_10123_fetch1 = $op_act_sForceApiCall.sForceQuery($un_checklist, $pwd_checklist, $rs_10123_query_wo1 ,"query");
 
-$rs_10125_WO1 = $rs_10125_fetch[0].Name;
-$bo_act_login.login($url_checklist, $un_checklist, $pwd_checklist);
+$rs_10123_WO1 = $rs_10123_fetch1[0].Name;
 
-$number1 = Math.floor(Math.random() * 10);
-$bo_act_sfmsearchdelivery.sfmsearch("SVMXSTD: Account Search",$rs_10125_WO1);
+// To create a Custom SFM Search value
+// createsfmsearch = For Single Expression
+$bo_act_sfmsearch.sfmsearch_advancedexpression($searchId, $searchTitle, "Work Order", "Priority", "High", "Equals", "Order Status", "Open", "10123");
+$bo_act_sfmsearchdelivery.sfmsearch($searchTitle, $rs_10123_WO1, false);
 
-$RS_10125.end();
+
+// to create a Canceled Work Order
+
+var $createwoquery2 = $data[1]["CreateWorkOrderCanceled"];
+
+var $rs_10123_result2 = $op_act_sForceApiCall.sForceQuery($un_checklist, $pwd_checklist, $createwoquery2 ,"create");
+var $rs_10123_query_wo2 = $fetchwo1;
+var $rs_10123_fetch2 = $op_act_sForceApiCall.sForceQuery($un_checklist, $pwd_checklist, $rs_10123_query_wo2 ,"query");
+
+$rs_10123_WO2 = $rs_10123_fetch2[0].Name;
+
+
+
+// To clone a  SFM Search and verify the results in the UI
+$bo_act_sfmsearch.clonesfmsearch($searchTitle, "Work Order", "Canceled", "Work Orders");
+$bo_act_sfmsearchdelivery.sfmsearch($searchTitle, $rs_10123_WO2, false);
+
+$RS_10123.end();
