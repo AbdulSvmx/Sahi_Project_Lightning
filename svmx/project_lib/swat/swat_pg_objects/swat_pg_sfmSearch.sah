@@ -49,7 +49,7 @@ var $swat_pg_sfmSearch = new function swat_pg_sfmSearch(){
 	
 	this.picklist_searchOrder = _select(2,_near( _div("Search Order")));
 	
-	 
+	this.btn_quicksave = _button("Quick Save"); // Owner Meghana Rao
 	this.btn_save =  _button("Save");
 	this.btn_save_and_close = _button("Save & Close");
 	

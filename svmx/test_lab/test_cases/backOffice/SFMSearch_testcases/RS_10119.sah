@@ -2,7 +2,7 @@
 /*
  * This test case verifies the Error messages when mandatory fields are not filled in SFM Search
  */
-var $RS_10118 = _testcase("RS_10118", "To create a new Checklist SFM Designer");
+var $RS_10118 = _testcase("RS_10119", "To verify the Error messages in the SFM Search");
 $RS_10118.start();
 
 

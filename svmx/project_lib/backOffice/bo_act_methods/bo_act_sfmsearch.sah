@@ -4,10 +4,9 @@
 var $bo_act_sfmsearch = new function bo_act_sfmsearch() {
 
 	
-this.createdfmsearch = function($searchId1, $searchTitle1,$objectName,$fieldName1,$value1,$operator){
+this.createsfmsearch = function($searchId1, $searchTitle1,$objectName,$fieldName1,$value1,$operator, $testcase){
 	
-	var $searchTitle = $bo_act_common.generateRandomName("Search");
-		var $searchId = $bo_act_common.generateRandomName("SearchId");
+
         $bo_act_navigation.navigateToSfmSearchInDesigner();
 		_click($swat_pg_sfmSearch.btn_new);
 		
@@ -28,15 +27,75 @@ this.createdfmsearch = function($searchId1, $searchTitle1,$objectName,$fieldName
 		_setSelected($swat_pg_sfmSearch.picklist_operator,$operator);
 		_setValue($swat_pg_sfmSearch.txt_value,$value1);
 		
+		
+		if($testcase == "10126")
+			{
 		//Click on Save button
 		_click($swat_pg_sfmSearch.btn_save);
+		_click($swat_pg_sfmSearch.btn_quicksave);
 		
+			}
+		else 
+		{
 		//Click on save and close
+		_click($swat_pg_sfmSearch.btn_save);
 		_click($swat_pg_sfmSearch.btn_save_and_close);
-		
+		}
 		return($searchTitle);
 	
 		
+};
+
+
+this.sfmsearch_advancedexpression = function($searchId1, $searchTitle1,$objectName,$fieldName1,$value1,$operator, $fieldname2,$value2, $testcase){
+	
+
+    $bo_act_navigation.navigateToSfmSearchInDesigner();
+	_click($swat_pg_sfmSearch.btn_new);
+	
+	//General Info		
+	_setValue($swat_pg_sfmSearch.txt_searchTitle,$searchTitle1);
+	_setValue($swat_pg_sfmSearch.txt_searchId,$searchId1);
+	
+	//Search Configuration
+	_click($swat_pg_sfmSearch.tab_searchConfiguration);
+	_click($swat_pg_sfmSearch.btn_sub_new);
+	
+	//Include one or more objects to be included in the scope of this search
+	_setSelected($swat_pg_sfmSearch.picklist_searchObject,$objectName);
+	
+	/* Using the expression builder below, define a filter criteria to 
+	   always apply on this object's records */
+	_setSelected($swat_pg_sfmSearch.picklist_fieldName,$fieldName1);
+	_setSelected($swat_pg_sfmSearch.picklist_operator,$operator);
+	_setValue($swat_pg_sfmSearch.txt_value,$value1);
+	
+	_click($swat_pg_sfmSearch.btn_add);
+	_setSelected($swat_pg_sfmSearch.picklist_fieldName1,$fieldname2);
+	_setSelected($swat_pg_sfmSearch.picklist_operator1,$operator);
+	_setValue($swat_pg_sfmSearch.txt_value1,$value2);
+	
+	//Advanced Expression
+	_setValue($swat_pg_sfmSearch.txt_advanced_expression,"1 AND 2");
+	
+	if($testcase == "10126")
+		{
+	//Click on Save button
+	_click($swat_pg_sfmSearch.btn_save);
+	_click($swat_pg_sfmSearch.btn_quicksave);
+	
+		}
+	else 
+	{
+	//Click on save and close
+	_click($swat_pg_sfmSearch.btn_save);
+	_click($swat_pg_sfmSearch.btn_save_and_close);
+	}
+	return($searchTitle);
+	
+	
+	
+	
 };
 
 
