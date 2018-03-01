@@ -1,9 +1,9 @@
 // Author Meghana Rao P
 /*
- * This test case verifies the cloning of Standard SFM Search and verifying the changes
+ * This test case verifies the cloning of Standard SFM Search without any changes
  */
-var $RS_10120 = _testcase("RS_10120", "To verify the cloning of Standard SFM search and making changes");
-$RS_10120.start();
+var $RS_10119 = _testcase("RS_10119", "To verify the cloning of SFM Search without any changes");
+$RS_10119.start();
 
 
 $bo_act_login.login($url_checklist, $un_checklist, $pwd_checklist);
@@ -14,18 +14,18 @@ var $data = _readExcelFile("../../backOffice/bo_excleData/SFMSearchDatasheet.xls
 var $createwoquery1 = $data[1]["CreateWorkOrderOpen"];
 var $fetchwo1 = $data[1]["fetchwo"];
 // Create a Work Order with reference to standard SFM Search
-var $rs_10120_result2 = $op_act_sForceApiCall.sForceQuery($un_checklist, $pwd_checklist, $createwoquery1 ,"create");
-var $rs_10120_query_wo2 = $fetchwo1;
-var $rs_10120_fetch2 = $op_act_sForceApiCall.sForceQuery($un_checklist, $pwd_checklist, $rs_10120_query_wo2 ,"query");
+var $rs_10119_result2 = $op_act_sForceApiCall.sForceQuery($un_checklist, $pwd_checklist, $createwoquery1 ,"create");
+var $rs_10119_query_wo2 = $fetchwo1;
+var $rs_10119_fetch2 = $op_act_sForceApiCall.sForceQuery($un_checklist, $pwd_checklist, $rs_10119_query_wo2 ,"query");
 
-$rs_10120_WO2 = $rs_10120_fetch2[0].Name;
+$rs_10119_WO2 = $rs_10119_fetch2[0].Name;
 
 $number1 = Math.floor(Math.random() * 10);
 $bo_act_navigation.navigateToSvmxSetup();
 var $searchTitle = $bo_act_common.generateRandomName("Search");
 var $searchId = $bo_act_common.generateRandomName("SearchId");
 // Cloning a Standard SFM Search with account search and modify it 
-$bo_act_sfmsearch.clonesfmsearch("SVMXSTD: Account Search",$searchTitle2,$searchId2,"Work Order", "Open", "Open Work Orders", true);
-$bo_act_sfmsearchdelivery.sfmsearchvaluenotfound($searchTitle2, $rs_10120_WO2, true);
+$bo_act_sfmsearch.clonesfmsearch_nochanges("SVMXSTD: Account Search",$searchTitle2,$searchId2,true);
+$bo_act_sfmsearchdelivery.sfmsearch($searchTitle, $rs_10119_WO2, true);
 // Set to true because it is cloned from Standard SFM Search
-$RS_10120.end();
+$RS_10119.end();
