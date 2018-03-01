@@ -58,7 +58,7 @@
 			threads="${threads}"
 			jsCodeCoverage="${jsCodeCoverage}">
 			<!-- Offline reports -->
-			<report type="html" logdir="C://jenkins_sahi//logs//"/>
+			<report type="junit" logdir="C://jenkins_sahi//logs//"/>
 		</sahi>
 		<antcall target="failsahichrome"/>
 	</target>

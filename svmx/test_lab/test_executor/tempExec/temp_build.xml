@@ -46,7 +46,7 @@
 
 	    <target name="drundiffmasterchrome" depends="set_properties_chrome, set_timestamp">
 	    	<!-- Sync suite to Master staging folder -->
-			<sahisync originFolder="${scriptDir}" destFolder="temp/scripts/staging/${ts}_${browser}" ignorePattern=".*(svn|copied).*" suitePath="${scriptName}" csvSeparator="," scriptExtensions="sah;sahi;js" scenarioExtensions=".s.csv;xls;xlsx">
+			<sahisync originFolder="${scriptDir}" destFolder="temp/scripts/staging/${ts}_${browser}" ignorePattern=".*(svn|copied).*" suitePath="${scriptDir}${scriptName}" csvSeparator="," scriptExtensions="sah;sahi;js" scenarioExtensions=".s.csv;xls;xlsx">
 		    	<node host="${masterhost}" port="${masterport}"/>
 			</sahisync>
 
@@ -74,9 +74,7 @@
 				ignorePattern=".*(svn|copied).*">
 				<!-- Scripts will be distributed across all the nodes. The nodes may or may not include the Master machine -->
 				<node host="sahi2.servicemax.com" port="9999"/>
-				<node host="sahi3.servicemax.com" port="9999"/>
-				<node host="sahi4.servicemax.com" port="9999"/>
-				<node host="sahi5.servicemax.com" port="9999"/>
+				
 
 				<!-- Offline reports -->
 				<report type="html" logdir="logs/temp/html/${ts}"/>
