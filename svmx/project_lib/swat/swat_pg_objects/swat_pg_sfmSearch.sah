@@ -11,9 +11,15 @@ var $swat_pg_sfmSearch = new function swat_pg_sfmSearch(){
 	//this.btn_delete = _button("Delete");
 	
 	// Buttons to Clone a SFM Search with Object Work Order : owner : Meghana Rao
+	this.btn_clone_stdsearch = _submit("Clone");
 	this.btn_clone_customsearch = _submit("Clone[1]");
 	this.btn_edit_values = _submit("Edit");
-	this.txt_object = _textbox(1);
+	this.txt_object_custom1 = _textbox(1);
+	this.txt_object_standard1 = _textbox(3);
+	this.txt_object_standard2 =  _textbox(5);
+	this.txt_object_standard3 =  _textbox(7);
+	
+	
 	this.btn_edit_sfm_config = _button("Edit");
 	
 	this.btn_new = _submit("New");
@@ -66,7 +72,7 @@ var $swat_pg_sfmSearch = new function swat_pg_sfmSearch(){
 	// Click on Go button
 		this.link_go =  _link("Go");
 		this.txt_search = _textbox(1); // Owner Meghana Rao
-		this.workorder_search = _span(64); // Owner Meghana Rao
+		this.workorder_search = _span("/Open Work Orders/"); // Owner Meghana Rao
 		
 	// Once the SFM Search is launched, click on "Go" button
 	   this.btn_go = _span("Go");

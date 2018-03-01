@@ -93,11 +93,56 @@ this.sfmsearch_advancedexpression = function($searchId1, $searchTitle1,$objectNa
 	
 };
 
-this.clonesfmsearch = function($searchTitle ,$objectName,$value2, $sectiontitle)
+
+this.clonesfmsearch = function($searchTitle,$searchTitle2, $searchId2,$objectName,$value, $sectiontitle, $isstandardtrue)
+{
+	
+	 
+	 // cloning a Standard SFM Search
+	 if($isstandardtrue == true && $sectiontitle == "Open Work Orders")
+	 {
+		 $bo_act_navigation.navigateToSfmSearchInDesigner();
+		 _click(_checkbox(0,_near(_span($searchTitle))));
+		 _click($swat_pg_sfmSearch.btn_clone_stdsearch);
+		 _setValue($swat_pg_sfmSearch.txt_searchTitle,$searchTitle2);
+		 _setValue($swat_pg_sfmSearch.txt_searchId,$searchId2);
+		 _click($swat_pg_sfmSearch.tab_searchConfiguration);
+		 _click(_checkbox(0,_near($swat_pg_sfmSearch.txt_object_standard1)));
+		 _click($swat_pg_sfmSearch.btn_edit_sfm_config);
+		 _setValue($swat_pg_sfmSearch.txt_value,$value);
+
+	 }
+
+	 // cloning a custom SFM Search
+	 if($isstandardtrue == false && $sectiontitle == "Work Orders")
+		 
+	{
+		 $bo_act_navigation.navigateToSfmSearchInDesigner();
+		 _click(_checkbox(0,_near(_span($searchTitle))));
+		 _click($swat_pg_sfmSearch.btn_clone_customsearch);
+		 _setValue($swat_pg_sfmSearch.txt_searchTitle,$searchTitle2);
+		 _setValue($swat_pg_sfmSearch.txt_searchId,$searchId2);
+		 _click($swat_pg_sfmSearch.tab_searchConfiguration);
+		 
+		 _click(_checkbox(0,_near($swat_pg_sfmSearch.txt_object_custom1)));
+		 _click($swat_pg_sfmSearch.btn_edit_sfm_config);
+		 _setValue($swat_pg_sfmSearch.txt_value1,$value);
+		 
+	}
+	 
+	 _click($swat_pg_sfmSearch.btn_save);
+	 _click($swat_pg_sfmSearch.btn_quicksave);	
+	 _click($swat_pg_sfmSearch.btn_save_and_close);
+		
+};
+
+
+this.editsfmsearch = function($searchTitle ,$objectName,$value2, $sectiontitle)
 {
 	 $bo_act_navigation.navigateToSfmSearchInDesigner();
 	 _click(_checkbox(0,_near(_span($searchTitle))));
 	 _click($swat_pg_sfmSearch.btn_edit_values);
+
 	 _click($swat_pg_sfmSearch.tab_searchConfiguration);
 	 if(_getValue($swat_pg_sfmSearch.txt_object) == $sectiontitle)
 		 {

@@ -11,8 +11,19 @@ this.sfmsearch = function($standardsfmsearchname, $workOrderNo, $isstandardtrue)
 	_click($swat_pg_sfmSearch.link_go);
 	
 	_selectDomain();
-	_wait(6000);
-	_wait(10000,_isVisible($swat_pg_sfmSearch.txt_search));
+	
+	// To reload a page if the field is not visible
+	
+	for (var $i = 0; $i < 50; $i++) {
+		if (_isVisible($swat_pg_sfmSearch.txt_search)) {
+			break;
+
+		} else {
+			_call(top.location.reload());
+
+			_wait(10000, _isVisible($swat_pg_sfmSearch.txt_search));
+		}
+	}
 	_setValue($swat_pg_sfmSearch.txt_search, $standardsfmsearchname);
 	_click(_div($standardsfmsearchname));
 	_wait(10000);
@@ -40,6 +51,41 @@ this.sfmsearch = function($standardsfmsearchname, $workOrderNo, $isstandardtrue)
 	}
 		
 };
+
+
+this.sfmsearchvaluenotfound = function($standardsfmsearchname, $workOrderNo, $isstandardtrue){
+	
+	_click($bo_pg_home.link_home);
+	_selectDomain("/svmx/");
+	_setSelected($swat_pg_sfmSearch.picklist_searchItem,$standardsfmsearchname);
+	_click($swat_pg_sfmSearch.link_go);
+	
+	_selectDomain();
+	_wait(6000);
+	_wait(10000,_isVisible($swat_pg_sfmSearch.txt_search));
+	_setValue($swat_pg_sfmSearch.txt_search, $standardsfmsearchname);
+	_click(_div($standardsfmsearchname));
+	_wait(10000);
+	
+	if($isstandardtrue == true)
+	{
+	_click($swat_pg_sfmSearch.workorder_search);
+	_setValue($swat_pg_sfmSearch.txt_SearchArea,$workOrderNo);
+	_click($swat_pg_sfmSearch.btn_go);
+	_wait(10000);
+	_assertEqual(false ,_isVisible(_link($workOrderNo)));
+	}
+	
+	else if ($isstandardtrue == false)
+	{
+	_setValue($swat_pg_sfmSearch.txt_SearchArea,$workOrderNo);
+	_click($swat_pg_sfmSearch.btn_go);
+	_wait(10000);
+	_assertEqual(false ,_isVisible(_link($workOrderNo)));
+	}
+	
+	
+}
 
 
 
