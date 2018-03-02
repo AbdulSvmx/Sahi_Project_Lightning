@@ -74,4 +74,23 @@ var $bo_act_servicePricebooks = new function bo_act_servicePricebooks() {
 		 _click($bo_pg_servicePricebooks.btn_deleteServicePricebookEntry);
 	};
 	
+	this.activateStandardPriceBook = function($PriceBookName){
+		$bo_act_navigation.navigateToStandardPriceBook();
+		  $bo_pg_servicePricebooks.clickOnServicePriceBook($PriceBookName);
+		if(_isVisible(_image("Not Checked",_rightOf(_cell("/Active/"))))){	
+			 _click($bo_pg_servicePricebooks.btn_editServicePriceBook);
+			 _click($bo_pg_servicePricebooks.chk_activateServicePriceBook);
+			 _click($bo_pg_servicePricebooks.btn_saveServicePricebookEntry);
+		_wait(10000, _isVisible($PriceBookName));
+		};
+		
+		if(_isVisible(_image("Checked",_rightOf(_cell("/Active/"))))){
+		_logOutput("Standard Price Book = " + $PriceBookName+ " is Activated");	
+		}
+		else{
+			_logOutput("Standard Price Book = " + $sconName+ " is Not Activated");	
+		};
+		
+		};
+	
 };

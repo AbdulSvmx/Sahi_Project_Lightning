@@ -33,7 +33,7 @@ var $bo_act_navigation = new function bo_act_navigation() {
 	 this.navigateToSvmxSetup();
 	_click($bo_pg_servicemaxSetup.btn_serviceFlowManager);
 	_click($bo_pg_servicemaxSetup.btn_sfmTransactionAndDocsDesigner);
-		 _wait(10000);
+		 _wait(10000);	 
 	_setSpeed(3000);
 	//return $callBack.returnResult(_exists($bo_pg_sfmTransactionAndDesigner.btn_standardSfmTransaction));
     };
@@ -82,7 +82,11 @@ var $bo_act_navigation = new function bo_act_navigation() {
    	    _click($bo_pg_home.link_stockAdjustment);
     };
     
-
+    this.navigateToStandardPriceBook = function(){
+      	 _click($bo_pg_home.btn_allTabs);
+      	 _click($bo_pg_home.link_priceBooks);
+      	 _click($bo_pg_home.btn_go);
+      };
 
     this.navigateToSlaTerms = function(){
     	$bo_act_navigation.navigateToHome();
