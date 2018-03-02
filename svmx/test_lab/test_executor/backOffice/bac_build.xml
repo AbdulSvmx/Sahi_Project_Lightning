@@ -32,7 +32,7 @@
 		<property name="threads" value="1"/>
 		<property name="showPeriodicSummary" value="true"/>
 		<property name="failedSuiteName" value="op_demo_failed_${browser}.suite"/>
-		<property name="failedSuite" value="svmx/test_lab/test_suites/optimax/${failedSuiteName}"/>
+		<property name="failedSuite" value="svmx/test_lab/test_suites/backOffice/${failedSuiteName}"/>
 		<property name="jsCodeCoverage" value="false"/>
 	</target>
 
