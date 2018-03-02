@@ -66,20 +66,20 @@ $bo_act_sfmsearchdelivery.sfmsearch_multipleobjects($searchTitle,"Work Orders", 
 if ($orgdetails == "SVMXC")
 	
 {
-	$delete_sc = "delete [Select Id from SVMXC__Service_Contract__c where Name = 'SCON RS_1022' AND Createdby.Id = '"+$username+"'];";
-	var $delete_data = $op_act_sForceApiCall.sForceQuery($un, $pwd, $delete_sc , "create");
+	$delete_sc = "delete[Select Id from SVMXC__Service_Contract__c where Name = 'SCON RS_1022' AND Createdby.Id = '"+$username+"'];";
+	var $delete_data = $op_act_sForceApiCall.sForceQuery($un_checklist, $pwd_checklist, $delete_sc , "create");
 	_wait(500);
 	$delete_wo =  "delete [Select Id from SVMXC__Service_Order__c where Createdby.Id = '"+$username+"'];";
-	var $delete_data = $op_act_sForceApiCall.sForceQuery($un, $pwd, $delete_wo , "create");
+	var $delete_data = $op_act_sForceApiCall.sForceQuery($un_checklist, $pwd_checklist, $delete_wo , "create");
 }
 
 if ($orgdetails == "SVMXDEV")
 	{
 	$delete_sc = "delete [Select Id from SVMXDEV__Service_Contract__c where Name = 'SCON RS_1022' AND Createdby.Id = '"+$username+"'];";
-	var $delete_data = $op_act_sForceApiCall.sForceQuery($un, $pwd, $delete_sc , "create");
+	var $delete_data = $op_act_sForceApiCall.sForceQuery($un_checklist, $pwd_checklist, $delete_sc , "create");
 	_wait(500);
 	$delete_wo =  "delete [Select Id from SVMXDEV__Service_Order__c where Createdby.Id = '"+$username+"'];";
-	var $delete_data = $op_act_sForceApiCall.sForceQuery($un, $pwd, $delete_wo , "create");
+	var $delete_data = $op_act_sForceApiCall.sForceQuery($un_checklist, $pwd_checklist, $delete_wo , "create");
 	
 	}
 $RS_10122.end();
