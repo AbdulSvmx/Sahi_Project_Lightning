@@ -29,6 +29,7 @@ var $swat_pg_sfmSearch = new function swat_pg_sfmSearch(){
 	this.btn_sub_new = _button("New");
 	
 	this.picklist_searchObject = _select(0,_near(_div("Search Object")));
+	this.picklist_secondobject = _select(1);
 	this.picklist_fieldName = _select(0,_near(_div("Field Name")));
 	this.picklist_operator = _select(1,_near(_div("Operator")));
 	this.txt_value = _textbox(0,_near(_div("Value")));
