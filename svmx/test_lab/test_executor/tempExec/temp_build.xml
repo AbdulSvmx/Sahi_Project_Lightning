@@ -60,7 +60,7 @@
 				jsCodeCoverage="${jsCodeCoverage}">
 				<!-- Offline reports -->
 				<!--<report type="excel" logdir="C://jenkins_sahi//logs//"/>-->
-				<report type="xml" logdir="C://var//lib//jenkins//workspace//sahi_executions//logs"/>
+				<report type="junit" logdir="C://var//lib//jenkins//workspace//sahi_executions//logs"/>
 			</sahi>
 			<antcall target="failsahichrome"/>
 		</target>
