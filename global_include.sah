@@ -28,8 +28,15 @@ var $url_checklist ="https://test.salesforce.com";
 
 //SFMD Global Variables
 
-var $sfmUsn= "sysadmin01@sfdautomation.com";
-var $sfmPwd = "maxplore2";
+var $sfmUsn= "svmx-sfdtest@svmx-sfdtest.org.sfdtest1";
+var $sfmPwd = "servicemax1";
+
+//SFMD Dev Org
+
+//var $sfmDevUsn = "sysadmin01@sfdautomation.com";
+//var $sfmDevPwd = "maxplore2";
+var $sfmDevUsn = "sysadmin01@sfdautomation.com";
+var $sfmDevPwd = "maxplore2";
 
 //DC Global Variables
 var $dc_org="Base";
