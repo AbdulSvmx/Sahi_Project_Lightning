@@ -1,14 +1,14 @@
 var $rs_6345 = _testcase("RS_6345","Verify Error type on Child when simple expressions is configured - Source to Target Save");
 $rs_6345.start();
 var $sfmNameToBeCloned = "Create Usage Lines from Estimates";
-var $sfmName = "RS_6345_1151";
+var $sfmName = $bo_act_common.generateRandomName("RS_6345_");
 var $isCustom = false;
 var $sfmTemplate = "SVMXSTD: Create Usage from Estimates";
 var $sfmTemplateSaveAsName = $sfmName;
 var $containerName = ["Parts","Expenses","Travel"];
 var $fieldName=["Activity Type","Activity Type","Activity Type"];
 var $targetObject ="Work Detail (Work Order)";
-var $rulename ="RS_6345_1151";
+var $rulename =$sfmName;
 var $ruleDescription ="Activity Type should not be Cleanup";
 
 var $fieldArray = ["Activity Type"];
@@ -65,6 +65,7 @@ _setValue($sfm_pg_sfmDesigner.txt_eeActivityType,"Cleanup");
 _click($sfm_pg_sfmDesigner.btn_eeUpdate);
 _wait(3000);
 
+/*
 //add line to Labor
 _click($sfm_pg_sfmDesigner.btn_deliveryLaborTab);
 _click($sfm_pg_sfmDesigner.btn_deliveryAddRowLabor);
@@ -73,6 +74,7 @@ _setValue($sfm_pg_sfmDesigner.txt_eeLineQty,"5");
 _setValue($sfm_pg_sfmDesigner.txt_eeActivityType,"Calibration");
 _click($sfm_pg_sfmDesigner.btn_eeUpdate);
 _wait(3000);
+
 
 //add line to Expenses
 _click($sfm_pg_sfmDesigner.btn_deliveryExpenseTab);
@@ -91,14 +93,15 @@ _setValue($sfm_pg_sfmDesigner.txt_eeActivityType,"Calibration");
 _click($sfm_pg_sfmDesigner.btn_eeUpdate);
 _wait(3000);
 
+*/
 //Validate that the DVR is triggering or not
 _click($sfm_pg_sfmDesigner.btn_deliverySave);
 
 	if(_assertExists(_div("Parts: "+$ruleDescription))){
 		_log("Pass ::: DVR Error for child line is working");
 		_click($sfm_pg_sfmDesigner.btn_deliveryPartsTab);
-		_click($sfm_pg_sfmDesigner.btn_deliveryAddRowParts);
-        _click($sfm_pg_sfmDesigner.btn_deliveryExtendedEdit);
+		//_click($sfm_pg_sfmDesigner.btn_deliveryAddRowParts);
+		_click($sfm_pg_sfmDesigner.btn_deliveryExtendedEdit);
         _setValue($sfm_pg_sfmDesigner.txt_eeActivityType,"Calibration");
 		_click($sfm_pg_sfmDesigner.btn_eeUpdate);
 		_wait(3000);	

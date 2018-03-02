@@ -1,0 +1,17 @@
+../../test_cases/backOffice/BAC_PreReleaseTestCases/BAC_SFMSearch.sah https://test.salesforce.com
+../../test_cases/backOffice/BAC_PreReleaseTestCases/RS_5422_SFM.sah https://test.salesforce.com
+../../test_cases/backOffice/BAC_PreReleaseTestCases/RS_5244_SLAOnCase.sah https://test.salesforce.com
+../../test_cases/backOffice/BAC_PreReleaseTestCases/RS_5255_SLAOnWO.sah https://test.salesforce.com
+../../test_cases/backOffice/BAC_PreReleaseTestCases/RS_5258_TimeBasedPM.sah https://test.salesforce.com
+../../test_cases/backOffice/BAC_PreReleaseTestCases/RS_5259_SLAOnCase.sah https://test.salesforce.com
+../../test_cases/backOffice/BAC_PreReleaseTestCases/RS_5260_TimeBasedPM.sah https://test.salesforce.com
+../../test_cases/backOffice/BAC_PreReleaseTestCases/RS_5328_ManualEntitlementForWO.sah https://test.salesforce.com
+../../test_cases/backOffice/BAC_PreReleaseTestCases/RS_5333_GetPrice.sah https://test.salesforce.com
+../../test_cases/backOffice/BAC_PreReleaseTestCases/RS_5334_GetPrice.sah https://test.salesforce.com
+../../test_cases/backOffice/BAC_PreReleaseTestCases/RS_5440_SFM.sah https://test.salesforce.com
+../../test_cases/backOffice/BAC_PreReleaseTestCases/RS_5467_ManualEntitlementForCase.sah https://test.salesforce.com
+../../test_cases/backOffice/BAC_PreReleaseTestCases/RS_7298_AutoEntitlementForWO.sah https://test.salesforce.com
+../../test_cases/backOffice/BAC_PreReleaseTestCases/RS_7298_WarrantyTerms.sah https://test.salesforce.com
+../../test_cases/backOffice/BAC_PreReleaseTestCases/RS_7439_ConditionBasedPM.sah https://test.salesforce.com
+../../test_cases/backOffice/BAC_PreReleaseTestCases/RS_7441_AppAdministration.sah https://test.salesforce.com
+../../test_cases/backOffice/BAC_PreReleaseTestCases/RS_9810_SFMWizardHandOver.sah https://test.salesforce.com

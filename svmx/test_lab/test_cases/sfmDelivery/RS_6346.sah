@@ -1,7 +1,7 @@
 var $rs_6346 = _testcase("RS_6346","Verify Confirmation type on Child when simple expressions is configured - Source to Target Save");
 $rs_6346.start();
 var $sfmNameToBeCloned = "Create Usage Lines from Estimates";
-var $sfmName = "RS_6346_1151";
+var $sfmName = $bo_act_common.generateRandomName("RS_6346_");
 var $isCustom = false;
 var $sfmTemplate = "SVMXSTD: Create Usage from Estimates";
 var $sfmTemplateSaveAsName = $sfmName;
@@ -11,7 +11,7 @@ var $fieldName=["Received City",
                 "Received City",
                 "Received City"];
 var $targetObject ="Work Detail (Work Order)";
-var $rulename ="RS_6346_1151";
+var $rulename =$sfmName;
 var $ruleDescription ="Received City should not be Panaji";
 
 var $fieldArray = ["Received City"];

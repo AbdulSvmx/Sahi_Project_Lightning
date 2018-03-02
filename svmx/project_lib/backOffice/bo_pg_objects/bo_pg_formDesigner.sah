@@ -8,8 +8,21 @@ var $bo_pg_formDesigner=new function bo_pg_formDesigner(){
 	this.btn_addQuestionToLibraryAndForm=_f("main").s_button("Add to Library and Form");
 	this.btn_closeQuestionPopUp=_f("main").s_button("closeButton");
 	this.btn_quickSave=_f("main").s_button("Quick Save");
+	this.btn_save_close = _f("main").s_button("Save & Close");
+	this.btn_delete1 = _f("main").s_button("Remove Question");
+	this.btn_delete2 = _f("main").s_button("Remove Question[1]");
+	this.btn_groupbytag = _f("main").s_checkbox("Group by Tag");
+	this.btn_addquestion_toform = _f("main").s_button("Add question to form");
+	this.btn_gobacktoSetupHome = _f("main").s_label("< Back To Setup Home");
+	
+	// Addition of fields by Meghana Rao P
+	
+	this.picklist_responseset1_cb = _f("main").s_label("Response-Set-1[1]");
+	this.txt_data_entry = _f("main").uitextfield(2);
+	
 
 };
+
 //this code to generate a random number with defined length	
 	this.generateRandomNumber=function generateRandomNumber($len)
 		{

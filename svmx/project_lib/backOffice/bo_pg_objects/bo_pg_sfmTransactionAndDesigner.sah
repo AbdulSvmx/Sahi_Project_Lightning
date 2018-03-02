@@ -100,13 +100,12 @@ var $bo_pg_sfmTransactionAndDesigner = new function bo_pg_sfmTransactionAndDesig
 	this.clkNewMapID=_f("main").s_textinput("Input ID Here[1]");
 	this.clkMapSave=_f("main").s_button("Save[1]");
 	this.QCFieldMapQuickFind=_f("main").s_textinput("filterInput").rightOf(_f("main").s_label("Quick Find"),10,10)
-		
-	
-	
-		
+
 	
 	this.selectComboBox = function($elementName,$elementItemName){
 	_setSelected(_f("main").s_combobox($elementName), $elementItemName);
+	
+
 		
 		};
 		
@@ -128,6 +127,20 @@ var $bo_pg_sfmTransactionAndDesigner = new function bo_pg_sfmTransactionAndDesig
      *@param $sfmName
      *@param $isCustom
      */
+	
+	// Owner : Meghana Rao P
+	
+	this.clickSFM = function($sfmName , $isCustom) {
+		if ($isCustom) {
+			_wait(3000);
+			 _click($bo_pg_sfmTransactionAndDesigner.btn_yourCustomSfmTransactions);
+			 
+		}
+		
+		_click(_f("main").s_label($sfmName));
+	};
+	
+	// Done
 
 	this.selectSFM = function($sfmName, $isCustom) {
 	if ($isCustom) {

@@ -1,0 +1,96 @@
+/**
+ * Function for Checklist Question Library
+
+ * Owner is Meghana Rao P 
+ **/
+var $bo_act_questionlibrary = new function bo_act_questionlibrary() {
+	
+	
+	
+	this.edit_question_in_library = function($questiontext, $changedquestiontext, $responsesetname)
+	{
+		
+		_click($bo_pg_formDesigner.btn_gobacktoSetupHome);
+		_click($bo_pg_servicemaxSetup.btn_serviceFlowManager);
+		_click($bo_pg_servicemaxSetup.btn_checklistQuestionLibrary);
+		_assertEqual(true, _isVisible(_div($questiontext)));
+		_doubleClick(_div($questiontext));
+		_setValue($sfm_pg_checklistQuestionLibrary.txt_questionText, $changedquestiontext);
+		_click($sfm_pg_checklistQuestionLibrary.txt_responseType);
+		_click($sfm_pg_checklistQuestionLibrary.sel_radioButtonAnswerType);
+		_setValue($sfm_pg_checklistQuestionLibrary.txt_responseSetName,$responsesetname);
+		_setValue($sfm_pg_checklistQuestionLibrary.txt_answerValue1, "Answer 1");
+		_click($sfm_pg_checklistQuestionLibrary.btn_addAnswer);
+		_setValue($sfm_pg_checklistQuestionLibrary.txt_answerValue2, "Answer 2");
+		_click($sfm_pg_checklistQuestionLibrary.btn_saveQuestion);
+		
+		
+		
+	};
+	
+	this.createDateTimeQuestion = function($questionText,$answerType,$helpURL3,$tagname)
+	{
+		
+		_click($bo_pg_servicemaxSetup.btn_serviceFlowManager);
+		_click($bo_pg_servicemaxSetup.btn_checklistQuestionLibrary);
+		_click($sfm_pg_checklistQuestionLibrary.btn_addQuestion);
+		_wait(3000,(_isVisible($sfm_pg_checklistQuestionLibrary.txt_addQuestion)));
+		_click($sfm_pg_checklistQuestionLibrary.txt_responseType);
+		_click($sfm_pg_checklistQuestionLibrary.sel_dateTimeAnswerType);
+		_setValue($sfm_pg_checklistQuestionLibrary.txt_questionText, $questionText);
+		_setValue($sfm_pg_checklistQuestionLibrary.txt_helpURL,$helpURL3);
+		_setValue($sfm_pg_checklistQuestionLibrary.txt_tagName, $tagname);
+		_wait(4000);
+		_click($sfm_pg_checklistQuestionLibrary.btn_saveQuestion);
+		_wait(4000);
+		_wait(2000,_isVisible($sfm_pg_checklistQuestionLibrary.txt_saveSucessMessage));
+
+		
+		if(_assert(_isVisible($sfm_pg_checklistQuestionLibrary.txt_saveSucessMessage)))
+		{
+			_log("Date Time Question Created successfully");
+		}else{		
+			_log("Error while creating Date Time Question");
+			}
+
+		_click($sfm_pg_checklistQuestionLibrary.btn_okMessage);
+
+	} ;
+	
+	this.createCheckbox_RadioQuestion = function($questionText , $answerType, $helpURL, $responseName)
+	
+	{
+		_click($bo_pg_servicemaxSetup.btn_serviceFlowManager);
+		_click($bo_pg_servicemaxSetup.btn_checklistQuestionLibrary);
+		_wait(2000);
+		_isVisible(3000,$sfm_pg_checklistQuestionLibrary.btn_addQuestion);
+		_click($sfm_pg_checklistQuestionLibrary.btn_addQuestion);
+		_wait(3000,(_isVisible($sfm_pg_checklistQuestionLibrary.txt_addQuestion)));
+		_click($sfm_pg_checklistQuestionLibrary.txt_responseType);
+		if($answerType == "Checkbox")
+			{
+		_click($sfm_pg_checklistQuestionLibrary.sel_checkBoxAnswerType);
+		
+			}
+		else if($answerType == "Radio Button")
+			
+			{
+			_click($sfm_pg_checklistQuestionLibrary.sel_radioButtonAnswerType);
+			
+			}
+		_setValue($sfm_pg_checklistQuestionLibrary.txt_questionText, $questionText);
+		_setValue($sfm_pg_checklistQuestionLibrary.txt_helpURL,$helpURL);
+		_setValue($sfm_pg_checklistQuestionLibrary.txt_responseSetName,$responseName);
+		_setValue($sfm_pg_checklistQuestionLibrary.txt_answerValue1, "Answer 1");
+		_click($sfm_pg_checklistQuestionLibrary.btn_addAnswer);
+		_setValue($sfm_pg_checklistQuestionLibrary.txt_answerValue2, "Answer 2");
+		_click($sfm_pg_checklistQuestionLibrary.btn_checklistdefaultbutton1);
+		_click($sfm_pg_checklistQuestionLibrary.btn_saveQuestion);	
+		
+	};
+	
+	
+
+	
+	
+};

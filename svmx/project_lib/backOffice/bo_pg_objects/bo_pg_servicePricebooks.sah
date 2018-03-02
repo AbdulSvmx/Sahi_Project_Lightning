@@ -6,7 +6,7 @@ var $bo_pg_servicePricebooks = new function bo_pg_servicePricebooks(){
 	// Click on Service Price Book 
 	this.clickOnServicePriceBook = function($PriceBookName){
 		
-		_click( _span($PriceBookName));
+		_click(_span($PriceBookName));
 	};
 	
 	this.btn_sfmEditServicePricebook = _button("Edit Service Pricebook");

@@ -82,7 +82,11 @@ var $bo_act_navigation = new function bo_act_navigation() {
    	    _click($bo_pg_home.link_stockAdjustment);
     };
     
-
+    this.navigateToStandardPriceBook = function(){
+      	 _click($bo_pg_home.btn_allTabs);
+      	 _click($bo_pg_home.link_priceBooks);
+      	 _click($bo_pg_home.btn_go);
+      };
 
     this.navigateToSlaTerms = function(){
     	$bo_act_navigation.navigateToHome();
@@ -114,6 +118,7 @@ var $bo_act_navigation = new function bo_act_navigation() {
     this.navigateToLocations = function(){
     	_click($bo_pg_home.btn_allTabs);
    	    _click($bo_pg_home.link_locations);
+   	 _setSelected(_select("hotlist_mode"),"Recently Created");
     };
     
     this.navigateToDevConsole = function(){

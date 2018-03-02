@@ -11,19 +11,57 @@ _setSpeed(100);
 $bo_act_login.login("https://test.salesforce.com", "lohithaadmin@swatpart2.com", "maxpl0re2");
 
 
- 
-$bo_act_navigation.navigateToSfmTransactionDesigner();
-_wait(60000, _isVisible($bo_pg_sfmTransactionAndDesigner.btn_newSFM));
-$bo_act_SFM.renameClonesfm($sfmName);
-_wait(60000, _isVisible($bo_pg_sfmTransactionAndDesigner.btn_backToList));
+var $sfmToBeCloned1 = "Create Quote from Work Order";
+var $sfmName1 = $bo_act_common.generateRandomName("Create_Quote_from_Work_Order");
+var $sfmTemplateSaveAsName1 = $sfmName1;	
+var $sfmTemplate1 = "SVMXSTD: Manage Quote Lines";
+var $isCustom = false;
+
+var $sfmToBeCloned2 = "Manage Work Order Lines - Usage";
+var $sfmName2 = $bo_act_common.generateRandomName("Manage_WO_Lines_Usage");
+var $sfmTemplateSaveAsName2 = $sfmName2;
+var $sfmTemplate2 = "SVMXSTD: Manage WO Usage Lines";
+
+var $sfmToBeCloned3 ="Create Usage Lines from Estimates";
+var $sfmName3 = $bo_act_common.generateRandomName("Create_Usage_Lines_from_Estimates");
+var $sfmTemplateSaveAsName3 = $sfmName3;
+var $sfmTemplate3 = "SVMXSTD: Create Usage from Estimates";
+
+
+
+//var $fieldName =["Created Date","Service Quote"];
+//var $containerName = ["Service Quote","Parts"];
+//$sfm_act_SFM.cloneTDM016($sfmToBeCloned, $sfmName, $isCustom, $sfmTemplateSaveAsName, $sfmTemplate, $fieldName, $containerName);
+$sfm_act_SFM.cloneTDM016($sfmToBeCloned1, $sfmName1, $isCustom, $sfmTemplateSaveAsName1, $sfmTemplate1, "", "");
+$sfm_act_SFM.cloneTDM016($sfmToBeCloned2, $sfmName2, $isCustom, $sfmTemplateSaveAsName2, $sfmTemplate2, "", "");
+$sfm_act_SFM.cloneTDM016($sfmToBeCloned3, $sfmName3, $isCustom, $sfmTemplateSaveAsName3, $sfmTemplate3, "", "");
+
+
+_click(_f("main").s_label("< Back To Setup Home"));
+//_click($sfm_pg_screenDesigner.);
+//_click($sfm_pg_sfmDesigner.btn_saveSFM);
+//$bo_act_SFM.clnStandardSFM($sfmToBeCloned, $sfmName, $sfmTemplateSaveAsName);
+
+
+//$bo_act_SFM.clnStandardSFM($sfmToBeCloned,$sfmName,$sfmTemplateSaveAsName);
+
+//$bo_act_SFM.cloneSFM($sfmNameToBeCloned, $sfmName, $isCustom, $sfmTemplate, $sfmTemplateSaveAsName, $fieldName, $containerName);
+
+//$bo_act_SFM.cloneSFM($sfmNameToBeCloned, $sfmName, $isCustom, $sfmTemplate, $sfmTemplateSaveAsName, $fieldName, $containerName)
+//_wait(60000, _isVisible($bo_pg_sfmTransactionAndDesigner.btn_backToList));
 	
-if (_assertExists($bo_pg_sfmTransactionAndDesigner.btn_backToList)){
+/*if (_assertExists($bo_pg_sfmTransactionAndDesigner.btn_backToList)){
 	
 	_log("SFm created successfully");
 } else {
 	_fail("SFM creation is unsuccessfull");
 	_stopTestCase();
 };
+
+//$sfm_act_cloneSfmAddNewFields.onlycloneSFM($sfmNameToBeCloned, $sfmName, $isCustom, $sfmTemplateSaveAsName, $sfmTemplate, $selectmapping);		
+
+*/
+
 
 $BVT_TC_003_SFW_with_cloned_Wiz_steps.end();
 
