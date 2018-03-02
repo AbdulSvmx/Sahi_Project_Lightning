@@ -22,10 +22,13 @@ $bo_act_slaTerms.addResolutionToSLA($slaterm1, "WorkOrder","All", "High", "Creat
 
 //Clean up function
 
-var $datacreated = [$slaterm,$slaterm1];
-for (var i = 0; i < $datacreated.length; i++) {
-	$bo_act_common.cleanUpfunction($datacreated[i]);
-}
+//var $datacreated = [$slaterm,$slaterm1];
+//for (var i = 0; i < $datacreated.length; i++) {
+	//$bo_act_common.cleanUpfunction($datacreated[i]);
+//}
+$bo_act_slaTerms.deleteSLATerm($slaterm);
+$bo_act_slaTerms.deleteSLATerm($slaterm1);
+
 
 $RS_5244.end();
 
