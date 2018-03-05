@@ -6,7 +6,7 @@ $BVT_TC_001_SFMSearch.start();
 _setSpeed(100);
 
 
-$bo_act_login.login("https://test.salesforce.com", "lohithaadmin@swatpart2.com", "maxpl0re1");
+$bo_act_login.login("https://test.salesforce.com", "lohithaadmin@swatpart2.com", "maxpl0re2");
 var $objectName = "Work Order";
 var $fieldName ="Order Status";
 var $operator ="Equals";
