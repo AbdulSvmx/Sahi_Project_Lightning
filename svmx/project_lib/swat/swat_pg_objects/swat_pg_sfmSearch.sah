@@ -31,8 +31,8 @@ var $swat_pg_sfmSearch = new function swat_pg_sfmSearch(){
 	this.btn_edit_sfm_config = _button("Edit");
 	
 	this.btn_new = _submit("New");
-	this.txt_searchTitle = _textbox(0,_rightOf(_span("Search Title")));
-	this.txt_searchId = _textbox(0,_rightOf(_span("Search ID")));
+	this.txt_searchTitle = _textbox(0,_rightOf(_cell("Search Title")));		//_span is changed to _cell
+	this.txt_searchId = _textbox(0,_rightOf(_cell("Search ID")));			//_span is changed to _cell
 	this.tab_searchConfiguration = _cell("Search Configuration");
 	this.btn_sub_new = _button("New");
 	

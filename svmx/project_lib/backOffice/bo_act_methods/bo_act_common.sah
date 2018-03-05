@@ -72,6 +72,7 @@ this.getPastDate = function($pastYear, $seperator){
 this.searchfunction = function($searchValue){
 _getRecentWindow();
 _setStrictVisibilityCheck(true);
+_wait(15000);
 _click(_span("/svmx-button/",_near(_div("svmx-column-inner",_in(_div("svmx-panel svmx-fit-item svmx-window-item svmx-panel-default"))))));
 _getRecentWindow();
 //_click(_textbox("/svmx-picklist/"));
