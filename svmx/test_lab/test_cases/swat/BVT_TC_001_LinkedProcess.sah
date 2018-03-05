@@ -11,7 +11,7 @@
 */
 var $rs_7011 = _testcase("$BVT_TC_004_LinkedProcess","Verify linked Process.");
 $rs_7011.start();
-/*
+
 		$woName="";
 		var $g_url="https://test.salesforce.com";
 		var $sfmUsn="lohithaadmin@swatpart2.com";
@@ -59,15 +59,17 @@ $rs_7011.start();
 		$woName=$sfm_act_createCustomWizard.createBlankWo();
 		_log($woName);
 		$sfm_act_createCustomWizard.clickWizardBtn($sfmName);
+		
+		
 		$sfm_act_createCustomWizard.addProductServiced($productName1);
 		
 
-*/
+
 	// Delete below var
-	var $productName2="pro232018164517";
-	var $woName="WO-00000139";
-	_wait(15000,_isVisible(_span("Work Detail")));
-/*
+	//var $productName2="pro232018164517";
+	//var $woName="WO-00000139";
+	//_wait(15000,_isVisible(_span("Work Detail")));
+
 		$sfm_act_createCustomWizard.addParts($productName2);
 		$sfm_act_createCustomWizard.addLabor($productName2);
 		$sfm_act_createCustomWizard.addExpenses("Airfare");
@@ -79,6 +81,5 @@ $rs_7011.start();
 		$sfm_act_common.globalSearch($woName);
 		_click(_link($woName));
 		
-*/
 		$sfm_act_Validations.validateTc7011();
 $rs_7011.end();
