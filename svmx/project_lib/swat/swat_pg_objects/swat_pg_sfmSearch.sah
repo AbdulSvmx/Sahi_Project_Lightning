@@ -10,6 +10,17 @@ var $swat_pg_sfmSearch = new function swat_pg_sfmSearch(){
 	//this.btn_save = _submit(" Save ");
 	//this.btn_delete = _button("Delete");
 	
+	// Buttons to Clone a SFM Search with Object Work Order : owner : Meghana Rao
+	this.btn_clone_stdsearch = _submit("Clone");
+	this.btn_clone_customsearch = _submit("Clone[1]");
+	this.btn_edit_values = _submit("Edit");
+	this.txt_object_custom1 = _textbox(1);
+	this.txt_object_standard1 = _textbox(3);
+	this.txt_object_standard2 =  _textbox(5);
+	this.txt_object_standard3 =  _textbox(7);
+	
+	
+	this.btn_edit_sfm_config = _button("Edit");
 	
 	this.btn_new = _submit("New");
 	this.txt_searchTitle = _textbox(0,_rightOf(_cell("Search Title")));		//_span is changed to _cell
@@ -18,6 +29,7 @@ var $swat_pg_sfmSearch = new function swat_pg_sfmSearch(){
 	this.btn_sub_new = _button("New");
 	
 	this.picklist_searchObject = _select(0,_near(_div("Search Object")));
+	this.picklist_secondobject = _select(1);
 	this.picklist_fieldName = _select(0,_near(_div("Field Name")));
 	this.picklist_operator = _select(1,_near(_div("Operator")));
 	this.txt_value = _textbox(0,_near(_div("Value")));
@@ -49,7 +61,7 @@ var $swat_pg_sfmSearch = new function swat_pg_sfmSearch(){
 	
 	this.picklist_searchOrder = _select(2,_near( _div("Search Order")));
 	
-	 
+	this.btn_quicksave = _button("Quick Save"); // Owner Meghana Rao
 	this.btn_save =  _button("Save");
 	this.btn_save_and_close = _button("Save & Close");
 	
@@ -60,6 +72,8 @@ var $swat_pg_sfmSearch = new function swat_pg_sfmSearch(){
 	
 	// Click on Go button
 		this.link_go =  _link("Go");
+		this.txt_search = _textbox(1); // Owner Meghana Rao
+		this.workorder_search = _span("/Open Work Orders/"); // Owner Meghana Rao
 		
 	// Once the SFM Search is launched, click on "Go" button
 	   this.btn_go = _span("Go");

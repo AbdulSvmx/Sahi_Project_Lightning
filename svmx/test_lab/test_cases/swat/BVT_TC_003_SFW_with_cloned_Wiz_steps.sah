@@ -12,9 +12,67 @@ var $BVT_TC_003_SFW_with_cloned_Wiz_steps = _testcase("BVT_TC_003_SFW_with_clone
 $BVT_TC_003_SFW_with_cloned_Wiz_steps.start();
 _setSpeed(100);
 
+<<<<<<< HEAD
 	//Pre - Condition 
 	$bo_act_login.login("https://test.salesforce.com", "lohithaadmin@swatpart2.com", "maxpl0re2");
 
+=======
+//Pre - Condition 
+$bo_act_login.login("https://test.salesforce.com", "lohithaadmin@swatpart2.com", "maxpl0re2");
+
+var $wizardObject = "Work Order";
+var $wizardName = "Swat Smoke Test BVT_TC_003";
+var $sfmWiz = "SFM";
+var $opDocWiz = "Output Document";
+var $handOver = false;
+var $isCustom = false;
+
+
+var $sfmToBeCloned1 = "Create Quote from Work Order";
+var $sfmName1 = $bo_act_common.generateRandomName("Create_Quote_from_Work_Order");
+var $sfmTemplateSaveAsName1 = $sfmName1;	
+var $sfmTemplate1 = "SVMXSTD: Manage Quote Lines";   
+
+
+var $sfmToBeCloned2 = "Manage Work Order Lines - Usage";
+var $sfmName2 = $bo_act_common.generateRandomName("Manage_WO_Lines_Usage");
+var $sfmTemplateSaveAsName2 = $sfmName2;
+var $sfmTemplate2 = "SVMXSTD: Manage WO Usage Lines"; 
+
+var $sfmToBeCloned3 ="Create Usage Lines from Estimates";
+var $sfmName3 = $bo_act_common.generateRandomName("Create_Usage_Lines_from_Estimates");
+var $sfmTemplateSaveAsName3 = $sfmName3;
+var $sfmTemplate3 = "SVMXSTD: Create Usage from Estimates";    
+
+var $sfmToBeCloned4 ="Work Order Service Report";
+var $sfmName4 = $bo_act_common.generateRandomName("Work_Order_Service_Report");
+var $sfmTemplateSaveAsName4 = $sfmName4;
+var $sfmTemplate4 = "Work Order Service Report";
+
+
+///var $fieldName =["Created Date","Service Quote"];
+////var $containerName = ["Service Quote","Parts"];
+$sfm_act_SFM.cloneTDM016($sfmToBeCloned, $sfmName, $isCustom, $sfmTemplateSaveAsName, $sfmTemplate, $fieldName, $containerName);
+$sfm_act_SFM.cloneTDM016($sfmToBeCloned1, $sfmName1, $isCustom, $sfmTemplateSaveAsName1, $sfmTemplate1, "", "");
+$sfm_act_SFM.cloneTDM016($sfmToBeCloned2, $sfmName2, $isCustom, $sfmTemplateSaveAsName2, $sfmTemplate2, "", "");
+$sfm_act_SFM.cloneTDM016($sfmToBeCloned3, $sfmName3, $isCustom, $sfmTemplateSaveAsName3, $sfmTemplate3, "", "");
+$swat_act_workOrderServiceReport.cloneWOServiceReport($sfmToBeCloned4, $sfmName4, $isCustom, $sfmTemplateSaveAsName4, $sfmTemplate4, "", "");
+
+_click(_link("Home"));
+//_click(_f("main").s_label("< Back To Setup Home"));
+
+//Create SFM Wizard and add the above created SFM process to the wizard steps
+
+//$sfm_act_wizards.addToWizard($wizardObject, $wizardName, $sfmWiz, $sfmName1, $handOver);
+//$sfm_act_wizards.addToWizard($wizardObject, $wizardName, $sfmWiz, $sfmName2, $handOver);
+$sfm_act_wizards.addToWizard($wizardObject, $wizardName, $sfmWiz, $sfmName3, $handOver);
+$sfm_act_wizards.addToWizard($wizardObject, $wizardName, $opDocWiz, $sfmName4, $handOver);
+
+
+//_click($sfm_pg_screenDesigner.);
+//_click($sfm_pg_sfmDesigner.btn_saveSFM);
+//$bo_act_SFM.clnStandardSFM($sfmToBeCloned, $sfmName, $sfmTemplateSaveAsName);
+>>>>>>> c64bdd0c53609bcf471f53fa80af69fc2e6ba513
 
 	var $sfmToBeCloned = "Create Quote from Work Order";
 	var $sfmName = $bo_act_common.generateRandomName($sfmToBeCloned);
