@@ -95,7 +95,8 @@ $workOrderNo = $swat_act_workOrders.createWorkOrder($caseNumber, $accountName, $
  var $slaName = $bo_act_slaTerms.createSlaTerms("Default");
  $bo_act_slaTerms.addInitialResponseToSLA($slaName,"WorkOrder","Field Service","Medium","Created Date","5","10","SLA");
  $bo_act_slaTerms.addOnsiteResponseToSLA($slaName,"WorkOrder","Field Service","Medium","Created Date","10","15","SLA");
-
+//	this.addOnsiteResponseToSLA = function($slaName,$ResponseTrackedOn,$orderType,$priority,$clockStartsFrom,$internalGoal,$customerCommitment,$businessHoursFrom)
+ 
  //validation of SLA creation
  _assertExists(_span($slaName));
  
@@ -153,7 +154,7 @@ _isVisible(_cell({title: $wizardTitleName}));
 _assertVisible(_cell({title:$wizardTitleName}),"Pass");
 
 //_click(_near(_cell({title: "SFWTitle31201814166"})_button("Create Quote from Work Order[1]")));
-_click(_button("Create Quote from Work Order[1]"));
+_click(_button("Create Quote from Work Order"));
 _selectDomain();
 
 
