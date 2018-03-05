@@ -17,7 +17,7 @@ _setSpeed(100);
 	//Pre - Condition 
 	$bo_act_login.login("https://test.salesforce.com", "lohithaadmin@swatpart2.com", "maxpl0re2");
  
-<<<<<<< HEAD
+//<<<<<<< HEAD
 	var $wizardSelectObjectName = "Work Order";
 	var $wizardTitleName = $bo_act_common.generateRandomName("SFWTitle");
 	var $wizardIDName = $bo_act_common.generateRandomName("SFWId");
@@ -99,7 +99,7 @@ _setSpeed(100);
 
 	//validation of SLA creation
 	_assertExists(_span($slaName));
-=======
+//=======
 var $wizardSelectObjectName = "Work Order";
 var $wizardTitleName = $bo_act_common.generateRandomName("SFWTitle");
 var $wizardIDName = $bo_act_common.generateRandomName("SFWId");
@@ -184,7 +184,7 @@ $workOrderNo = $swat_act_workOrders.createWorkOrder($caseNumber, $accountName, $
  
  //validation of SLA creation
  _assertExists(_span($slaName));
->>>>>>> c64bdd0c53609bcf471f53fa80af69fc2e6ba513
+//>>>>>>> c64bdd0c53609bcf471f53fa80af69fc2e6ba513
  
  
 	// Create Service Contract(With child lines) and Activate it
@@ -229,7 +229,7 @@ $workOrderNo = $swat_act_workOrders.createWorkOrder($caseNumber, $accountName, $
 	//_selectDomain("/visual.force.com/");
 	 _selectDomain("/svmx/"); 
  
-<<<<<<< HEAD
+//<<<<<<< HEAD
 	 _isVisible(_cell({title: $wizardTitleName}));
 	 _assertVisible(_cell({title:$wizardTitleName}),"Pass");
 
