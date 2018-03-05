@@ -35,8 +35,6 @@ var $wizardSelectObjectName1 = "Parts Order";
 
 
 var $caseNumber = $bo_act_Cases.createCase("New", "High", "Email");
-
-
 var $accountName = $bo_act_accounts.createAccount();
 var $contactName = $bo_act_contacts.createContact($accountName);
 var $productName =$bo_act_products.createProduct();
