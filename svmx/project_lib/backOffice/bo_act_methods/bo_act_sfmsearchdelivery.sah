@@ -145,6 +145,38 @@ this.sfmsearchvaluenotfound = function($standardsfmsearchname, $recordname, $iss
 	
 }
 
+this.sfmsearch_verify_sequence= function($sfmsearchname, $objectname, $valuesearch)
+{
+	
+	_click($bo_pg_home.link_home);
+	_selectDomain("/svmx/");
+	_setSelected($swat_pg_sfmSearch.picklist_searchItem,$sfmsearchname);
+	_click($swat_pg_sfmSearch.link_go);
+	
+	_selectDomain();
+	
+	// To reload a page if the field is not visible
+	
+	for (var $i = 0; $i < 50; $i++) {
+		if (_isVisible($swat_pg_sfmSearch.txt_search)) {
+			break;
+
+		} else {
+			_call(top.location.reload());
+
+			_wait(10000, _isVisible($swat_pg_sfmSearch.txt_search));
+		}
+	}
+	_setValue($swat_pg_sfmSearch.txt_search, $sfmsearchname);
+	_click(_div($sfmsearchname));
+	_wait(10000);
+	
+	_assertEqual(true, _containsText($swat_pg_sfmSearch.link_span1,$valuesearch));
+	
+	
+	
+
+};
 
 
 
