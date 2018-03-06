@@ -24,7 +24,6 @@ var $wizardName = "SFM Delivery Auto";
 var $wizardType = "SFM";
 var $wizardObject ="Work Order";
 var $domainName = "/visual.force.com/";
-//var $woName ="WO-00000096";
 
 _setSpeed(100);
 $bo_act_login.login($g_url, $sfmUsn, $sfmPwd);
@@ -45,13 +44,9 @@ $sfm_act_wizards.addToWizard($wizardObject, $wizardName, $wizardType, $sfmName);
 _wait(30000,_isVisible($sfm_pg_sfmDesigner.lnk_home)); 
 _click($sfm_pg_sfmDesigner.lnk_home);  
 
-//Create WO dynamically and search that work order in global search and validate in delivery.
-$login = $sfm_act_createWorkOrder.login($sfmUsn, $sfmPwd);
-$woName = $sfm_act_createWorkOrder.create_WO();  
+//Create WO through UI for the validatiion
+$sfm_act_createCustomWizard.createBlankWo();
 
-_wait(3000);
-$sfm_act_common.globalSearch($woName);
-_click(_link($woName));
 _selectDomain($domainName);
 _click(_button($sfmName));
 _selectDomain();
@@ -63,44 +58,29 @@ _wait(5000);
 _click($sfm_pg_sfmDesigner.btn_deliveryPartsTab);
 _click($sfm_pg_sfmDesigner.btn_deliveryAddRowParts);
 _click($sfm_pg_sfmDesigner.btn_deliveryExtendedEdit);
-_setValue($sfm_pg_sfmDesigner.txt_eeLineQty,"5");
-_setValue($sfm_pg_sfmDesigner.txt_eeEstimatedPricePerUnit,"1500");
-_setValue($sfm_pg_sfmDesigner.txt_eeReferenceInformation,"Sahi DVR Validation");
-_setValue($sfm_pg_sfmDesigner.txt_eeReceivedCity,"Bangalore");
-_click($sfm_pg_sfmDesigner.btn_eeUpdate);
+addLineItems("5", "1500", "Sahi DVR Validation", "Bangalore");
+
 _wait(3000);
 
 //add line to Labor
 _click($sfm_pg_sfmDesigner.btn_deliveryLaborTab);
 _click($sfm_pg_sfmDesigner.btn_deliveryAddRowLabor);
 _click($sfm_pg_sfmDesigner.btn_deliveryExtendedEditLabor);
-_setValue($sfm_pg_sfmDesigner.txt_eeLineQty,"5");
-_setValue($sfm_pg_sfmDesigner.txt_eeEstimatedPricePerUnit,"1500");
-_setValue($sfm_pg_sfmDesigner.txt_eeReferenceInformation,"Sahi DVR Validation");
-_setValue($sfm_pg_sfmDesigner.txt_eeReceivedCity,"Bangalore");
-_click($sfm_pg_sfmDesigner.btn_eeUpdate);
+addLineItems("5", "1500", "Sahi DVR Validation", "Bangalore");
 _wait(3000);
 
 //add line to Expenses
 _click($sfm_pg_sfmDesigner.btn_deliveryExpenseTab);
 _click($sfm_pg_sfmDesigner.btn_deliveryAddRowExpenses);
 _click($sfm_pg_sfmDesigner.btn_deliveryExtendedEditExpenses);
-_setValue($sfm_pg_sfmDesigner.txt_eeLineQty,"5");
-_setValue($sfm_pg_sfmDesigner.txt_eeEstimatedPricePerUnit,"1500");
-_setValue($sfm_pg_sfmDesigner.txt_eeReferenceInformation,"Sahi DVR Validation");
-_setValue($sfm_pg_sfmDesigner.txt_eeReceivedCity,"Bangalore");
-_click($sfm_pg_sfmDesigner.btn_eeUpdate);
+addLineItems("5", "1500", "Sahi DVR Validation", "Bangalore");
 _wait(3000);
 
 //add line to Travel
 _click($sfm_pg_sfmDesigner.btn_deliveryTravelTab);
 _click($sfm_pg_sfmDesigner.btn_deliveryAddRowTravel);
 _click($sfm_pg_sfmDesigner.btn_deliveryExtendedEditTravel);
-_setValue($sfm_pg_sfmDesigner.txt_eeLineQty,"5");
-_setValue($sfm_pg_sfmDesigner.txt_eeEstimatedPricePerUnit,"1500");
-_setValue($sfm_pg_sfmDesigner.txt_eeReferenceInformation,"Sahi DVR Validation");
-_setValue($sfm_pg_sfmDesigner.txt_eeReceivedCity,"Bangalore");
-_click($sfm_pg_sfmDesigner.btn_eeUpdate);
+addLineItems("5", "1500", "Sahi DVR Validation", "Bangalore");
 _wait(3000);
 
 //Validate the DVR Step1 & 2 to validate whether rule is triggering or not
@@ -134,8 +114,8 @@ if(_exists(_span("SFM Transaction Manager"))){
 }else{
 	_log("Fail ::: DVR Confirmation is not working");
 }
-if(_exists($sfm_pg_sfmDesigner.txt_PriceAlert)){
-	_click(_span("Ok"));
+if(_exists($sfm_pg_sfmDesigner.txt_priceAlert)){
+	_click($sfm_pg_sfmDesigner.btn_priceAlertOk);
 	_wait(10000);
 }
 
@@ -147,27 +127,35 @@ if(_exists(_span("Saved Successfully"))){
 
 _click($sfm_pg_sfmDesigner.btn_deliveryPartsTab);
 _click($sfm_pg_sfmDesigner.btn_deliveryExtendedEdit);
-_setValue($sfm_pg_sfmDesigner.txt_eeLineQty,"6");
+addLineItems("6");
 
 _click($sfm_pg_sfmDesigner.btn_deliveryLaborTab);
 _click($sfm_pg_sfmDesigner.btn_deliveryExtendedEditLabor);
-_setValue($sfm_pg_sfmDesigner.txt_eeLineQty,"6");
+addLineItems("6");
 
 _click($sfm_pg_sfmDesigner.btn_deliveryExpenseTab);
 _click($sfm_pg_sfmDesigner.btn_deliveryExtendedEditExpenses);
-_setValue($sfm_pg_sfmDesigner.txt_eeLineQty,"6");
+addLineItems("6");
 
 _click($sfm_pg_sfmDesigner.btn_deliveryTravelTab);
 _click($sfm_pg_sfmDesigner.btn_deliveryExtendedEditTravel);
-_setValue($sfm_pg_sfmDesigner.txt_eeLineQty,"6");
+addLineItems("6");
 _click($sfm_pg_sfmDesigner.btn_deliveryQuickSave);
 
-if(_exists($sfm_pg_sfmDesigner.txt_PriceAlert)){
-	_click(_span("Ok"));
+if(_exists($sfm_pg_sfmDesigner.txt_priceAlert)){
+	_click($sfm_pg_sfmDesigner.btn_priceAlertOk);
 	_wait(10000);
 }
 if(_exists(_span("Saved Successfully"))){
 	_log("Pass ::: WO saved after DVR confirmation");
+}
+
+function addLineItems($lineQuantity,$estPricePerUnit, $refInfo, $receivedCity){
+	_setValue($sfm_pg_sfmDesigner.txt_eeLineQty,$lineQuantity);
+	_setValue($sfm_pg_sfmDesigner.txt_eeEstimatedPricePerUnit,$estPricePerUnit);
+	_setValue($sfm_pg_sfmDesigner.txt_eeReferenceInformation,$refInfo);
+	_setValue($sfm_pg_sfmDesigner.txt_eeReceivedCity,$receivedCity);
+	_click($sfm_pg_sfmDesigner.btn_eeUpdate);
 }
 
 $rs_5347.end();

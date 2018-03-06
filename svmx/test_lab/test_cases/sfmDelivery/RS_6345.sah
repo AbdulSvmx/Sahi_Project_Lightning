@@ -110,7 +110,7 @@ _click($sfm_pg_sfmDesigner.btn_deliverySave);
 	}
 	_click($sfm_pg_sfmDesigner.btn_deliverySave);
 
-if(_exists($sfm_pg_sfmDesigner.txt_PriceAlert)){
+if(_exists($sfm_pg_sfmDesigner.txt_priceAlert)){
 	_click(_span("Ok"));
 	_wait(10000);
 }
