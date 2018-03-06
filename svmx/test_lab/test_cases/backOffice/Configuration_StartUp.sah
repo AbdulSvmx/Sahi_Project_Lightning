@@ -107,10 +107,9 @@ $bo_act_salesforcePageSetUp.dragAndDropFields($bo_pg_salesforcePageSetUp.btn_res
 $bo_act_salesforcePageSetUp.dragAndDropFields($bo_pg_salesforcePageSetUp.btn_totalBillableAmount, "SLA Fields");
 _stopOnError();
 $bo_act_salesforcePageSetUp.saveEditLayout();
-<<<<<<< HEAD
+
 /**/
-=======
->>>>>>> c64bdd0c53609bcf471f53fa80af69fc2e6ba513
+
 
 //Drag and drop all the GetPrice related fields on SCON Object
 $bo_act_navigation.navigateToServiceMaintenanceContractPage();

@@ -22,8 +22,6 @@ $rs_10119_WO2 = $rs_10119_fetch2[0].Name;
 
 $number1 = Math.floor(Math.random() * 10);
 $bo_act_navigation.navigateToSvmxSetup();
-var $searchTitle = $bo_act_common.generateRandomName("Search");
-var $searchId = $bo_act_common.generateRandomName("SearchId");
 // Cloning a Standard SFM Search with account search and modify it 
 $bo_act_sfmsearch.clonesfmsearch_nochanges("SVMXSTD: Account Search",$searchTitle2,$searchId2,true);
 $bo_act_sfmsearchdelivery.sfmsearch($searchTitle2, $rs_10119_WO2, true);
