@@ -59,9 +59,21 @@ $rs_7011.start();
 		$woName=$sfm_act_createCustomWizard.createBlankWo();
 		_log($woName);
 		$sfm_act_createCustomWizard.clickWizardBtn($sfmName);
+		
+		
 		$sfm_act_createCustomWizard.addProductServiced($productName1);
 		
+<<<<<<< HEAD:svmx/test_lab/test_cases/swat/BVT_TC_005_CustomLinkedProcess.sah
 		_wait(10000);
+=======
+
+
+	// Delete below var
+	//var $productName2="pro232018164517";
+	//var $woName="WO-00000139";
+	//_wait(15000,_isVisible(_span("Work Detail")));
+
+>>>>>>> 4a9d90084085fd89fa82960a46fd2adfa56783d1:svmx/test_lab/test_cases/swat/BVT_TC_001_LinkedProcess.sah
 		$sfm_act_createCustomWizard.addParts($productName2);
 		$sfm_act_createCustomWizard.addLabor($productName2);
 		$sfm_act_createCustomWizard.addExpenses("Airfare");
@@ -73,6 +85,10 @@ $rs_7011.start();
 		$sfm_act_common.globalSearch($woName);
 		_click(_link($woName));
 		
+<<<<<<< HEAD:svmx/test_lab/test_cases/swat/BVT_TC_005_CustomLinkedProcess.sah
 
 		//$sfm_act_Validations.validateTc7011();
+=======
+		$sfm_act_Validations.validateTc7011();
+>>>>>>> 4a9d90084085fd89fa82960a46fd2adfa56783d1:svmx/test_lab/test_cases/swat/BVT_TC_001_LinkedProcess.sah
 $rs_7011.end();
