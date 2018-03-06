@@ -1,0 +1,7 @@
+_wait(3000);
+_setValue(_f("main").uitextfield("UITextField12966"),"Tag")
+	//_selectTextRange(_f("main").uitextfield("UITextField12966"),"/.*/")
+		_wait(500)
+		_typeKeyCodeNative(java.awt.event.KeyEvent.VK_SPACE)
+			_wait(500)
+	_typeKeyCodeNative(java.awt.event.KeyEvent.VK_ENTER)

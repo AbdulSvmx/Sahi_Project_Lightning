@@ -22,8 +22,8 @@ var $bac_PRTpwd = "servicemax@123";
 
 // Checklist Global Variables
 
-var $un_checklist = "automationDEV@Test4Part1.com"; // Pointing to Automation Dummy Org
-var $pwd_checklist = "welcome-02";
+var $un_checklist = "meghana.rao@servicemax.com"; // Pointing to Automation Dummy Org
+var $pwd_checklist = "cloud_102";
 var $url_checklist ="https://test.salesforce.com";
 
 //SFMD Global Variables

@@ -43,6 +43,54 @@ var $bo_act_PMProcess = new function bo_act_PMProcess() {
 		//return $callBack.returnResult([_isVisible("success"), "Error in PM Processd",$accountName] );
 	};
 	
+	
+	// Owner Meghana Rao P
+	
+	this.verifyUIfieldsonPMProcess = function($processheader, $isstandard, $isstdchanged)
+	
+	{
+		$bo_act_navigation.navigateToPMProcess();
+		
+		_wait(6000, _isVisible(_heading2($processheader)));
+		
+		_assertEqual(true,_isVisible(_heading2($processheader)));
+		if($isstandard == true && $isstdchanged == false)
+			{
+			
+			_assertEqual(true,_isVisible($bo_pg_PMProcess.btn_std_view));
+			_assertEqual(true,_isVisible($bo_pg_PMProcess.btn_std_clone));
+			__assertEqual(true,_isVisible($bo_pg_PMProcess.btn_std_backtosetuphome));
+			
+			};
+			
+			
+			if($isstandard == false && $isstdchanged == false)
+			{
+			
+			_assertEqual(true,_isVisible($bo_pg_PMProcess.btn_custom_backtosetuphome));
+			_assertEqual(true,_isVisible($bo_pg_PMProcess.btn_custom_delete));
+			_assertEqual(true,_isVisible($bo_pg_PMProcess.btn_custom_clone));
+			_assertEqual(true,_isVisible($bo_pg_PMProcess.btn_custom_edit));
+			_assertEqual(true,_isVisible($bo_pg_PMProcess.btn_custom_new));
+	
+			
+			};	
+		
+			
+			if($isstdchanged == true)
+				
+				{
+				_call(top.location.reload());
+				_assertEqual(true,_isVisible(_heading2($processheader)));
+				_assertEqual(false,_isVisible($bo_pg_PMProcess.btn_std_view));
+				_assertEqual(false,_isVisible($bo_pg_PMProcess.btn_std_clone));
+				
+				}
+	};
+	
+	
+	
+	
 	this.clonePMProcess  = function($creationOfWO,$PMPlan,$numberOfWorkOrders){
 		var $PMProcessName = $bo_act_common.generateRandomName("PMProName");
 		var $pmProcessId = $bo_act_common.generateRandomName("PMProId");
