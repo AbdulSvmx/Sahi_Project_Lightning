@@ -127,7 +127,7 @@ if(_exists(_span("SFM Transaction Manager"))){
 	_log("Fail ::: DVR Confirmation is not working");
 }
 if(_exists($sfm_pg_sfmDesigner.txt_priceAlert)){
-	_click(_span("Ok"));
+	_click($sfm_pg_sfmDesigner.btn_priceAlertOk);
 	_wait(10000);
 }
 
