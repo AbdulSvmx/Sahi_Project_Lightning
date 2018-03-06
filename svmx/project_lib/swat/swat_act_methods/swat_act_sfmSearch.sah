@@ -18,6 +18,7 @@ var $swat_act_sfmSearch = new function swat_act_sfmSearch() {
 		_click($swat_pg_sfmSearch.btn_new);
 		
 		//General Info		
+		_wait(5000);
 		_setValue($swat_pg_sfmSearch.txt_searchTitle,$searchTitle);
 		_setValue($swat_pg_sfmSearch.txt_searchId,$searchId);
 		

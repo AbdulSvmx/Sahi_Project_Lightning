@@ -27,6 +27,30 @@ this.newChecklistTypeSFM = function($checklistName,$sfmType,$objName)
 	};
 	
 	
+this.create_newquestion_tag_in_designer = function($questionText, $tag1, $istagnew)
+
+{
+	_click($bo_pg_formDesigner.tab_clickFormDesigner);
+	_click($bo_pg_formDesigner.btn_addNewQuestion);
+	_click($bo_pg_formDesigner.btn_selectQuestionDataType);
+	_setValue($bo_pg_formDesigner.lbl_questionText, $questionText);
+	_setValue($bo_pg_formDesigner.txt_data_entry,$tag1);
+	_wait(300);
+	_click($bo_pg_formDesigner.btn_addQuestionToLibraryAndForm);
+	
+	if($istagnew == true)
+		
+		{
+		
+		
+		}
+	_click($bo_pg_formDesigner.btn_closeQuestionPopUp);
+	_click($bo_pg_formDesigner.btn_quickSave);		
+	_wait(10000);
+	_click($bo_pg_formDesigner.btn_save_close);
+
+
+};
 this.verifythechangesinchecklistformdesigner = function($changedquestiontext, $answer1 , $answer2 , $answertype)
 
 {

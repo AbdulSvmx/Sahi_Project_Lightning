@@ -9,7 +9,7 @@ var $swat_act_sfmSearch = new function swat_act_sfmSearch() {
 	 * @param $fieldName
 	 *
 	 * The following function creates Search Configuration
-	 
+	 */
 	this.createSfmSearch = function($objectName,$fieldName,$operator,$fieldName1)
 	{
 		var $searchTitle = $bo_act_common.generateRandomName("Search");
@@ -17,19 +17,20 @@ var $swat_act_sfmSearch = new function swat_act_sfmSearch() {
         $bo_act_navigation.navigateToSfmSearchInDesigner();
 		_click($swat_pg_sfmSearch.btn_new);
 		
-		//General Info		
+		//General Info Tab		
 		_setValue($swat_pg_sfmSearch.txt_searchTitle,$searchTitle);
 		_setValue($swat_pg_sfmSearch.txt_searchId,$searchId);
 		
-		//Search Configuration
+		//Search Configuration Tab
 		_click($swat_pg_sfmSearch.tab_searchConfiguration);
+		_wait(5000,_isVisible($swat_pg_sfmSearch.btn_sub_new));
 		_click($swat_pg_sfmSearch.btn_sub_new);
 		
 		//Include one or more objects to be included in the scope of this search
 		_setSelected($swat_pg_sfmSearch.picklist_searchObject,$objectName);
 		
 		/* Using the expression builder below, define a filter criteria to 
-		   always apply on this object's records 
+		   always apply on this object's records */
 		_setSelected($swat_pg_sfmSearch.picklist_fieldName,$fieldName);
 		_setSelected($swat_pg_sfmSearch.picklist_operator,$operator);
 		_setValue($swat_pg_sfmSearch.txt_value,"Open");
@@ -75,6 +76,6 @@ var $swat_act_sfmSearch = new function swat_act_sfmSearch() {
 			
 	};
 
-*/
+
 	
 };
