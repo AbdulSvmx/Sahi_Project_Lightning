@@ -74,17 +74,17 @@ _click(_span("svmx-btn-icon svmx-sfmd-current-datetime-icon"));
 var $pastDate=$bo_act_common.getPastDate("1", "/");
 _setValue(_textbox("svmx-date-1038-inputEl"), $pastDate);
 
-if(_exists(_div("InformationPrice not calculated, because entitlement check has not been performed. OKYesNoCancelOk"))){
-	_click(_span("Ok"));
+if(_exists($sfm_pg_sfmDesigner.txt_priceAlert)){
+	_click($sfm_pg_sfmDesigner.btn_priceAlertOk);
 }
 else{
-	_click(_span("svmx-btn-icon svmx-sfmd-quicksave-icon"));
+	_click($sfm_pg_sfmDesigner.btn_quickSaveSFM);
 }
 
 if(_exists(_div($ruleDescription))){
-	_log("Pass");
+	_log("Pass ::: DVR on header is working");
 }else{
-	_log("Fail");
+	_log("Fail ::: DVR on header is not working");
 }
  
 $rs_5353.end();
