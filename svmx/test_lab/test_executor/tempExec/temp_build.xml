@@ -61,6 +61,7 @@
 			<report type="junit" logdir="C://var//lib//jenkins//workspace//sahi_executions//logs//junit"/>	
 			<report type="html" logdir="C://var//lib//jenkins//workspace//sahi_executions//logs//html"/>
 			<report type="excel" logdir="C://var//lib//jenkins//workspace//sahi_executions//logs//excel"/>		
+			<report type="xml" logdir="C://var//lib//jenkins//workspace//sahi_executions//logs//xml"/>	
 
 
 			</sahi>
