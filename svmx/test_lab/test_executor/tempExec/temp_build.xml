@@ -58,7 +58,11 @@
 			threads="${threads}"
 			jsCodeCoverage="${jsCodeCoverage}">
 			<!-- Offline reports -->
-			<report type="junit" logdir="C://var//lib//jenkins//workspace//sahi_executions//logs"/>		
+			<report type="junit" logdir="C://var//lib//jenkins//workspace//sahi_executions//logs//junit"/>	
+			<report type="html" logdir="C://var//lib//jenkins//workspace//sahi_executions//logs//html"/>
+			<report type="excel" logdir="C://var//lib//jenkins//workspace//sahi_executions//logs//excel"/>		
+
+
 			</sahi>
 		<antcall target="failsahichrome"/>
 	</target>
