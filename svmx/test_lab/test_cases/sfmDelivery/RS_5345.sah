@@ -66,7 +66,7 @@ _setValue($sfm_pg_sfmDesigner.txt_eeReferenceInformation,"Sahi DVR Validation");
 _setValue($sfm_pg_sfmDesigner.txt_eeReceivedCity,"Bangalore");
 _click($sfm_pg_sfmDesigner.btn_eeUpdate);
 _click($sfm_pg_sfmDesigner.btn_deliveryQuickSave);
-if(_exists($sfm_pg_sfmDesigner.txt_PriceAlert)){
+if(_exists($sfm_pg_sfmDesigner.txt_priceAlert)){
 	_click(_span("Ok"));
 	_wait(10000);
 }
@@ -82,7 +82,7 @@ _click($sfm_pg_sfmDesigner.btn_deliveryExtendedEdit);
 _setValue($sfm_pg_sfmDesigner.txt_eeLineQty,"6");
 _click($sfm_pg_sfmDesigner.btn_eeUpdate);
 _click($sfm_pg_sfmDesigner.btn_deliveryQuickSave);
-if(_exists($sfm_pg_sfmDesigner.txt_PriceAlert)){
+if(_exists($sfm_pg_sfmDesigner.txt_priceAlert)){
 	_click(_span("Ok"));
 	_wait(10000);
 }

@@ -69,8 +69,8 @@ _setValue($sfm_pg_sfmDesigner.txt_eeLinePricePerUnit,"50");
 _click($sfm_pg_sfmDesigner.btn_eeUpdate);
 
 _click($sfm_pg_sfmDesigner.btn_deliveryQuickSave);
-if(_exists($sfm_pg_sfmDesigner.txt_PriceAlert)){
-	_click(_span("Ok"));
+if(_exists($sfm_pg_sfmDesigner.txt_priceAlert)){
+	_click($sfm_pg_sfmDesigner.btn_priceAlertOk);
 	_wait(10000);
 }
 _click($sfm_pg_sfmDesigner.btn_deliveryExtendedEditLabor);

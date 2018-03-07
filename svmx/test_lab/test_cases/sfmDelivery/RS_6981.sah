@@ -63,7 +63,7 @@ if(_style(_button("Customer Down:"),"background-position")=="0% 0%"){
 	_click(_button("Customer Down:",_rightOf(_label("Customer Down:"))));	
 }
 _click($sfm_pg_sfmDesigner.btn_deliveryQuickSave);
-if(_exists($sfm_pg_sfmDesigner.txt_PriceAlert)){
+if(_exists($sfm_pg_sfmDesigner.txt_priceAlert)){
 	_click(_span("Ok"));
 	_wait(10000);
 }
@@ -80,7 +80,7 @@ if(_style(_button("Customer Down:"),"background-position")!="0% 0%"){
 }
 _setValue(_textbox("Billing Type:",_rightOf(_label("Billing Type:"))),"Courtesy");
 _click($sfm_pg_sfmDesigner.btn_deliveryQuickSave);
-if(_exists($sfm_pg_sfmDesigner.txt_PriceAlert)){
+if(_exists($sfm_pg_sfmDesigner.txt_priceAlert)){
 	_click(_span("Ok"));
 	_wait(10000);
 }
@@ -124,8 +124,8 @@ _click($sfm_pg_sfmDesigner.btn_deliveryExtendedEdit);
 _setValue($sfm_pg_sfmDesigner.txt_eeStartDateTime,$bo_act_common.currentDate("/"));
 _click($sfm_pg_sfmDesigner.btn_eeUpdate);
 _click($sfm_pg_sfmDesigner.btn_deliveryQuickSave);
-if(_exists($sfm_pg_sfmDesigner.txt_PriceAlert)){
-	_click(_span("Ok"));
+if(_exists($sfm_pg_sfmDesigner.txt_priceAlert)){
+	_click($sfm_pg_sfmDesigner.btn_priceAlertOk);
 	_wait(10000);
 }
 

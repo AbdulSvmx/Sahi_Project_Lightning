@@ -11,8 +11,6 @@ var $bac_pwdDev = "welcome-01";
 var $bac_unBase = "orgsadmin@svmx-test4.org.test4part2";
 var $bac_pwdBase = "servicemax22";
 var $url = "https://test.salesforce.com";
-var $un = "vansys@pqtpart1.com";	
-var $pwd = "servicemax2";
 var $sfmUsn = "sysadmin01@sfdautomation.com";
 var $sfmPwd = "maxplore2";
 var $bac_PRTun = "bhupendra.auto@upgrade.com"; //Most Used Customer
@@ -23,13 +21,15 @@ var $bac_PRTpwd = "servicemax@123";
 // Checklist Global Variables
 
 var $un_checklist = "meghana.rao@servicemax.com"; // Pointing to Automation Dummy Org
-var $pwd_checklist = "cloud_101";
+var $pwd_checklist = "cloud_102";
 var $url_checklist ="https://test.salesforce.com";
 
 //SFMD Global Variables
 
-var $sfmUsn= "svmx-sfdtest@svmx-sfdtest.org.sfdtest1";
-var $sfmPwd = "servicemax1";
+//var $sfmUsn= "svmx-sfdtest@svmx-sfdtest.org.sfdtest1";
+//var $sfmPwd = "servicemax1";
+var $sfmUsn = "sysadmin01@sfdautomation.com";
+var $sfmPwd = "maxplore2";
 
 //SFMD Dev Org
 
