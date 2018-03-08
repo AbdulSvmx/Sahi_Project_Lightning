@@ -1,6 +1,6 @@
 
 
-var $swat_act_sfmWizard = new function swat_act_sfmWizard() {
+var $swat_act_pageLoadWait = new function swat_act_pageLoadWait() {
 	
 	
 	this.waitTillPageLoads = function($Object){
