@@ -1,3 +1,0 @@
-_click(_f("main").tab("Linked Process"));
-_click(_f("main").listbasecontentholder("ListBaseContentHolder1347"));
-_click(_f("main").s_button("Remove[1]"));
