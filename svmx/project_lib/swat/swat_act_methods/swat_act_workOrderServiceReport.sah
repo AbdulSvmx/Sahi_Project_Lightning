@@ -21,6 +21,7 @@ var $swat_act_workOrderServiceReport = new function swat_act_workOrderServiceRep
 				
 		_setValue($bo_pg_sfmTransactionAndDesigner.txt_sfmSaveTemplateAs,$sfmTemplateSaveAsName);
 		_setValue($bo_pg_sfmTransactionAndDesigner.txt_sfmSaveTemplateLayoutID,$sfmTemplateSaveAsName);
+		_click($bo_pg_sfmTransactionAndDesigner.btn_quickSave);
 		_wait(3000);
 		_click($bo_pg_sfmTransactionAndDesigner.btn_saveAndclose);
 	};
