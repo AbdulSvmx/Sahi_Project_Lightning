@@ -44,6 +44,35 @@ this.createsfmsearch = function($searchId1, $searchTitle1,$objectName,$fieldName
 		
 };
 
+this.sfmsearch_displayfields = function($searchTitle ,$sectiontitle, $object , $field1 , $field2)
+
+{
+	
+	
+	 $bo_act_navigation.navigateToSfmSearchInDesigner();
+	 _click(_checkbox(0,_near(_span($searchTitle))));
+	 _click($swat_pg_sfmSearch.btn_edit_values);
+
+	 _click($swat_pg_sfmSearch.tab_searchConfiguration);
+	 if(_getValue($swat_pg_sfmSearch.txt_object_standard1) == $sectiontitle)
+	 {
+		 _click(_checkbox(0,_near($swat_pg_sfmSearch.txt_object_standard1)));
+		 _click($swat_pg_sfmSearch.btn_edit_sfm_config);
+
+	 }
+	 
+
+	 _click($swat_pg_sfmSearch.btn_add2);
+	 _setSelected($swat_pg_sfmSearch.picklist_searchObject2, $object);
+	 _setSelected($swat_pg_sfmSearch.picklist_fieldName2, $field1);
+	 _click($swat_pg_sfmSearch.btn_add2);
+	 _setSelected($swat_pg_sfmSearch.picklist_searchObject3, $object);
+	 _setSelected($swat_pg_sfmSearch.picklist_fieldName3, $field2);
+	 _click($swat_pg_sfmSearch.btn_save);
+	 _click($swat_pg_sfmSearch.btn_save_and_close);	
+
+};
+
 
 this.sfmsearch_advancedexpression = function($searchId1, $searchTitle1,$objectName,$fieldName1,$value1,$operator, $fieldname2,$value2, $testcase){
 	
@@ -269,9 +298,9 @@ this.editsfmsearch = function($searchTitle ,$objectName,$value2, $sectiontitle)
 	 _click($swat_pg_sfmSearch.btn_edit_values);
 
 	 _click($swat_pg_sfmSearch.tab_searchConfiguration);
-	 if(_getValue($swat_pg_sfmSearch.txt_object) == $sectiontitle)
+	 if(_getValue($swat_pg_sfmSearch.txt_object_standard1) == $sectiontitle)
 		 {
-	 _click(_checkbox(0,_near($swat_pg_sfmSearch.txt_object)));
+	 _click(_checkbox(0,_near($swat_pg_sfmSearch.txt_object_standard1)));
 	 _click($swat_pg_sfmSearch.btn_edit_sfm_config);
 	
 		 }
