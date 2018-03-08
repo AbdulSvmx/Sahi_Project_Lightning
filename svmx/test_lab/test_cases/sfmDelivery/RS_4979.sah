@@ -29,15 +29,9 @@ $sfm_act_wizards.addToWizard($customActionObject, $wizardName, "SFM", "Create RM
 
 
 
-//Create WO dynamically and search that work order in global search and validate in delivery.
-$login = $sfm_act_createWorkOrder.login($sfmUsn, $sfmPwd);
-$woName = $sfm_act_createWorkOrder.create_WO();
+//Create WO through UI for the validatiion
+$sfm_act_createCustomWizard.createBlankWo();
 
-
-_wait(3000);
-$sfm_act_common.globalSearch($woName);
-_click(_link($woName));
-_wait(5000,_isVisible(_button(" Edit ")));
 _selectDomain($domainName);
 _click(_button($actionId));
 _selectDomain();

@@ -6,6 +6,7 @@ var $sfm_pg_wo = new function sfm_pg_wo() {
 	this.btn_wo_save = _submit("/Save/");
 	this.link_wo = _link("Work Orders");
 	this.btn_wo_edit = _button("/Edit/");
+	this.txt_wo_zip = _textbox("Zip");
 	this.assert_wizard =function($wizTitle){
 		if(_exists(_cell($wizTitle))){
 			_log("Pass");
