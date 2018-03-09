@@ -108,6 +108,9 @@ $bo_act_salesforcePageSetUp.dragAndDropFields($bo_pg_salesforcePageSetUp.btn_tot
 _stopOnError();
 $bo_act_salesforcePageSetUp.saveEditLayout();
 
+/**/
+
+
 //Drag and drop all the GetPrice related fields on SCON Object
 $bo_act_navigation.navigateToServiceMaintenanceContractPage();
 _click(_link(0,_under(_tableHeader("Contract Name/Number"))));

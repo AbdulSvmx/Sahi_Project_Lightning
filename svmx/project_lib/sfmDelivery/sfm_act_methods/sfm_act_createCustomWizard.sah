@@ -59,6 +59,10 @@ var $sfm_act_createCustomWizard = new function sfm_act_createCustomWizard() {
 		_wait(3000);
 		_click($sfm_pg_wo.link_wo);
 		_click($sfm_pg_wo.btn_wo_new);
+		if(_exists($sfm_pg_wo.btn_Continue)){
+			_click($sfm_pg_wo.btn_Continue);
+			
+		}
 		_click($sfm_pg_wo.btn_wo_save);
 		_wait(3000);
 		$woName= _getText($sfm_pg_wo.label_wo);
@@ -160,7 +164,7 @@ var $sfm_act_createCustomWizard = new function sfm_act_createCustomWizard() {
 		_click($sfm_pg_wizardWindow.btn_addWorkDetails);
 	};
 	this.addParts = function($part) {
-		_wait(3000);
+		_wait(5000);
 		_selectDomain();
 		_setStrictVisibilityCheck(true);
 		_click($sfm_pg_wizardWindow.btn_addRow);

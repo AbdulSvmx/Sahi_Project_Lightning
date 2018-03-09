@@ -14,6 +14,7 @@ var $bo_pg_formDesigner=new function bo_pg_formDesigner(){
 	this.btn_groupbytag = _f("main").s_checkbox("Group by Tag");
 	this.btn_addquestion_toform = _f("main").s_button("Add question to form");
 	this.btn_gobacktoSetupHome = _f("main").s_label("< Back To Setup Home");
+	this.tag_btn_txt  = _f("main").uitextfield(2);
 	
 	// Addition of fields by Meghana Rao P
 	

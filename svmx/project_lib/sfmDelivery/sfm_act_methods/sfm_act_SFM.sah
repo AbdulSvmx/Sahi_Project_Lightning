@@ -12,17 +12,20 @@ var $sfm_act_SFM = new function sfm_act_SFM() {
 		$sfm_act_SFM.selectSFM($sfmNameToBeCloned, $isCustom);
 
 		_click($bo_pg_sfmTransactionAndDesigner.btn_clone);
-		_wait(60000, _isVisible($bo_pg_sfmTransactionAndDesigner.txt_name));
+		_wait(40000, _isVisible($bo_pg_sfmTransactionAndDesigner.txt_name));
 		_setValue($bo_pg_sfmTransactionAndDesigner.txt_name, $sfmName);
 		_setValue($bo_pg_sfmTransactionAndDesigner.txt_sfmTransactionId, "");
 		_setValue($bo_pg_sfmTransactionAndDesigner.txt_sfmTransactionId, $sfmName);
 		_click($bo_pg_sfmTransactionAndDesigner.btn_screenDesigner);
+		_wait(5000);
 		_setSelected($bo_pg_sfmTransactionAndDesigner.sel_sfmTemplate,
 				$sfmTemplate);
 		_setValue($bo_pg_sfmTransactionAndDesigner.txt_sfmSavePageLayoutAs,
 				$sfmTemplateSaveAsName);
 		_setValue($bo_pg_sfmTransactionAndDesigner.txt_sfmSavePageLayoutAsId,
 				$sfmTemplateSaveAsName);
+		_wait(2000);
+		_click($bo_pg_sfmTransactionAndDesigner.btn_quickSave1);
 		_wait(3000);
 		$sfm_act_SFM.addFieldToScreen($fieldName, $containerName);
 	};

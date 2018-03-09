@@ -18,17 +18,28 @@ var $swat_pg_sfmSearch = new function swat_pg_sfmSearch(){
 	this.txt_object_standard1 = _textbox(3);
 	this.txt_object_standard2 =  _textbox(5);
 	this.txt_object_standard3 =  _textbox(7);
+	this.btn_objectdisplaysequence = _button("Object Display Sequence");
+	this.btn_top_popup = _imageSubmitButton("Top");
+	this.btn_popup_save = _button("Save");
+	this.link_span1 = _span("svmx-tab-inner");
+	this.link_span2 = _span("svmx-tab-inner[1]");
+	this.link_span3 = _span("svmx-tab-inner[2]");
+	this.link_span4 = _span("svmx-tab-inner[3]");
+	this.pop_up_value = _select("/Sequenceblock/");
+	
+	
 	
 	
 	this.btn_edit_sfm_config = _button("Edit");
 	
 	this.btn_new = _submit("New");
-	this.txt_searchTitle = _textbox(0,_rightOf(_span("Search Title")));
-	this.txt_searchId = _textbox(0,_rightOf(_span("Search ID")));
+	this.txt_searchTitle = _textbox(0,_rightOf(_cell("Search Title")));		//_span is changed to _cell
+	this.txt_searchId = _textbox(0,_rightOf(_cell("Search ID")));			//_span is changed to _cell
 	this.tab_searchConfiguration = _cell("Search Configuration");
 	this.btn_sub_new = _button("New");
 	
 	this.picklist_searchObject = _select(0,_near(_div("Search Object")));
+	this.picklist_secondobject = _select(1);
 	this.picklist_fieldName = _select(0,_near(_div("Field Name")));
 	this.picklist_operator = _select(1,_near(_div("Operator")));
 	this.txt_value = _textbox(0,_near(_div("Value")));

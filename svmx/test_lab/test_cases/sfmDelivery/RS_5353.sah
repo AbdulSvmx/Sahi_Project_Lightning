@@ -46,6 +46,9 @@ $sfm_act_wizards.addToWizard($wizardObject, $wizardName, $wizardType, $sfmName);
 _wait(30000,_isVisible($sfm_pg_sfmDesigner.lnk_home)); 
 _click($sfm_pg_sfmDesigner.lnk_home);
 
+//Create WO through UI for the validatiion
+$sfm_act_createCustomWizard.createBlankWo();
+/*
 //Create WO dynamically and search that work order in global search and validate in delivery.
 $login = $sfm_act_createWorkOrder.login($sfmUsn, $sfmPwd);
 _log($login);
@@ -58,7 +61,8 @@ $woName = $sfm_act_createWorkOrder.create_WO();
 _click($sfm_pg_sfmDesigner.lnk_workOrder);
 _wait(3000);
 $sfm_act_common.globalSearch($woName);
-_click(_link($woName));
+_click(_link($woName)); */
+
 _selectDomain($domainName);
 _click(_button($sfmName));
 
@@ -70,17 +74,17 @@ _click(_span("svmx-btn-icon svmx-sfmd-current-datetime-icon"));
 var $pastDate=$bo_act_common.getPastDate("1", "/");
 _setValue(_textbox("svmx-date-1038-inputEl"), $pastDate);
 
-if(_exists(_div("InformationPrice not calculated, because entitlement check has not been performed. OKYesNoCancelOk"))){
-	_click(_span("Ok"));
+if(_exists($sfm_pg_sfmDesigner.txt_priceAlert)){
+	_click($sfm_pg_sfmDesigner.btn_priceAlertOk);
 }
 else{
-	_click(_span("svmx-btn-icon svmx-sfmd-quicksave-icon"));
+	_click($sfm_pg_sfmDesigner.btn_quickSaveSFM);
 }
 
 if(_exists(_div($ruleDescription))){
-	_log("Pass");
+	_log("Pass ::: DVR on header is working");
 }else{
-	_log("Fail");
+	_log("Fail ::: DVR on header is not working");
 }
  
 $rs_5353.end();

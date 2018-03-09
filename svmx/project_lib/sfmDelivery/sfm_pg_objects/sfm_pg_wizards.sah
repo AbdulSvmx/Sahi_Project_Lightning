@@ -6,7 +6,7 @@ var $sfm_pg_wizards = new function sfm_pg_wizards() {
 	this.loginresult = "";
 	this.woName = "";
 	
-	this.selectObject = _select(0,_rightOf(_span("Select Object")));
+	this.selectObject = _select(0,_rightOf(_cell("Select Object")));
 	//Standard SFM Wizards objects
 	this.btn_stdView = _submit("View",_near(_heading2("Standard SFM Wizards")));
 	this.btn_stdClone = _submit("Clone",_near(_heading2("Standard SFM Wizards")));
