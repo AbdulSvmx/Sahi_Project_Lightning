@@ -15,7 +15,7 @@ $BVT_TC_002_SFW_with_standard_Wiz_steps.start();
 _setSpeed(100);
 
 	//Pre - Condition 
-	$bo_act_login.login("https://test.salesforce.com", "lohithaadmin@swatpart2.com", "maxpl0re2");
+	$bo_act_login.login("https://test.salesforce.com", "lohithaadmin@ref5.com.cfg4", "maxpl0re2");
  
 //<<<<<<< HEAD
 	var $wizardSelectObjectName = "Work Order";
