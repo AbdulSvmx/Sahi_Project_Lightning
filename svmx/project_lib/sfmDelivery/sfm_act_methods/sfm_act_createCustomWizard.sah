@@ -164,7 +164,7 @@ var $sfm_act_createCustomWizard = new function sfm_act_createCustomWizard() {
 		_click($sfm_pg_wizardWindow.btn_addWorkDetails);
 	};
 	this.addParts = function($part) {
-		_wait(3000);
+		_wait(5000);
 		_selectDomain();
 		_setStrictVisibilityCheck(true);
 		_click($sfm_pg_wizardWindow.btn_addRow);

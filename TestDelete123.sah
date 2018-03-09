@@ -1,0 +1,3 @@
+_click(_f("main").tab("Linked Process"));
+_click(_f("main").s_button("Add[2]"));
+_setSelected(_f("main").s_list("targetObjects"), "[object ProcessNode]");
