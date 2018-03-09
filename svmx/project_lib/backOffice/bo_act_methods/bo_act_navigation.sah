@@ -304,4 +304,10 @@ var $bo_act_navigation = new function bo_act_navigation() {
    	 _click($bo_pg_servicemaxSetup.btn_serviceFlowManager);
    	 _click($bo_pg_servicemaxSetup.btn_sfmSearch);	   	 
     };
+    
+    this.navigateTodepotAndStockingLocations = function() {
+    	 this.navigateToSvmxSetup();
+    	_click($bo_pg_servicemaxSetup.btn_reverseLogistics);
+    	_click($bo_pg_servicemaxSetup.btn_depotAndStockingLocations);
+       };
 };

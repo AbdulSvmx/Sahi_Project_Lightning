@@ -53,12 +53,23 @@ _assertExists(_link("/"+$PMPlanName+"/",_near(_heading3("Preventive Maintenance 
 _assertExists(_link("/"+$sconName+"/",_near(_heading3("Service/Maintenance Contracts"))));
 
 //Clean up function
-var $datacreated = [$proName,$accountName];
-for (var i = 0; i < $datacreated.length; i++) {
-	$bo_act_common.cleanUpfunction($datacreated[i]);
-}
+//var $datacreated = [$proName,$accountName];
+//for (var i = 0; i < $datacreated.length; i++) {
+	//$bo_act_common.cleanUpfunction($datacreated[i]);
+//}
+
 $bo_act_SFW.deleteWizards("Account", $wizardIDName);
 $bo_act_servicePlans.deleteServicePlan($servicePlan);
+
+var $Workbenchurl = "https://workbench.developerforce.com/login.php";
+var $nameSpace = $bo_act_salesforcePages.checkNameSpace();
+
+var $delscript =
+	"DELETE[SELECT id FROM Contact WHERE Name = '"+$proName+"'];\n"+
+	"DELETE[SELECT id FROM Account WHERE Name = '"+$accountName+"'];\n";
+	
+$bo_act_login.loginToWorkBench($Workbenchurl,"Sandbox", $bac_un, $bac_pwd);
+$bo_act_login.runApexScriptinWB($delscript);
 $9830.end();
 
 
