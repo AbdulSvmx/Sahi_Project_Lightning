@@ -31,8 +31,8 @@
 	var $enteredOTBS="Field Service-Tr";
 	var $enteredZipBS=560065;
 
-		
-	$bo_act_login.login($d_url, $d_unBase, $d_pwdBase);
+	$bo_act_login.login($g_url,$sfmUsn,$sfmPwd);	
+	//$bo_act_login.login($d_url, $d_unBase, $d_pwdBase);
 //$bo_act_login.login($g_url, $bac_un, $bac_pwd);
 
 //*****Navgate to SFm Designer and create clone of Manage WO Line Usage Services transaction********
