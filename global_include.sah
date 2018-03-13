@@ -16,7 +16,9 @@ var $sfmPwd = "maxplore2";
 var $bac_PRTun = "bhupendra.auto@upgrade.com"; //Most Used Customer
 var $bac_PRTpwd = "servicemax@123";
 
+// Flag to decide whether Dev or Base
 
+var $orgtype = "Base";
 
 // Checklist Global Variables
 
