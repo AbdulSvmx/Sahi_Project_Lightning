@@ -26,6 +26,9 @@ var $swat_pg_sfmSearch = new function swat_pg_sfmSearch(){
 	this.link_span3 = _span("svmx-tab-inner[2]");
 	this.link_span4 = _span("svmx-tab-inner[3]");
 	this.pop_up_value = _select("/Sequenceblock/");
+	this.newtab = "/MaxConsole/";
+	this.savebutton = _span("/svmx-sfmd-save-icon/");
+	this.checklist_closebutton = _span("/sfm-button-/");
 	
 	
 	

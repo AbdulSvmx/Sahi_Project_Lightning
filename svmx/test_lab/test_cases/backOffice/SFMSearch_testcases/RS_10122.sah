@@ -8,7 +8,7 @@ $bo_act_login.login($url_checklist, $un_checklist, $pwd_checklist);
 _wait(10000);
 
 // To create Service Contract for the Given Test case
-var $data1 = _readExcelFile("../../backOffice/bo_excleData/BORegressionDatasheet.xlsx","Sheet1",true);
+var $data1 = _readExcelFile("../../backOffice/bo_excleData/BORegressionDatasheet.xlsx",$orgtype,true);
 var $createservice_contract = $data1[1]["CreateServiceContract"];
 var $fetch_sc = $data1[1]["FetchServiceContract"];
 var $Account = $data1[1]["Account"];
