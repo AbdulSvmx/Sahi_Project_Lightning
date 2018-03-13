@@ -41,6 +41,17 @@ var $bo_pg_servicemaxSetup = new function bo_pg_servicemaxSetup(){
 	this.btn_scheduledSFM=_div("Scheduled SFM");
 	this.btn_checklistQuestionLibrary= _div("Checklist Question Library");
 	this.txt_checklistQuestionLibrary=_span("Checklist Question Library");
+//Object for Reverse Logistics
+	this.btn_reverseLogistics = _div("Reverse Logistics");
+	this.btn_depotAndStockingLocations = _div("Depot & Stocking Locations");
+	this.btn_returnsProcess = _div("Returns Process");
+	this.btn_deliveryRules = _div("Delivery Rules");
+	this.btn_shippingProcess = _div("Shipping Process");
+	this.btn_productSubstitutionMatrix = _div("Product Substitution Matrix");
+	this.btn_routesAndStops = _div("Routes & Stops");
+	this.btn_receivingProcess = _div("Receiving Process");
+		this.btn_repairShipmentPreparation = _div("Repair Shipment Preparation");
+				this.btn_sourcingRules = _div("Sourcing Rules");
 
 };
 

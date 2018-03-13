@@ -118,12 +118,12 @@ var $WDLineType = ["--None--","Parts","Labor","Expenses"];
 var $WDNumber = $bo_act_workDetails.createWorkDetails($WO_Number, $WDrecordType[1], $IBName, $WDActivityType[1], $WDLineType[2]);
 
 // Validation for Work Details Work Order record
-var $actualWDNumber_onWO = _getText(_link(0,_under(_tableHeader("Line Number"))));
+/*var $actualWDNumber_onWO = _getText(_link(0,_under(_tableHeader("Line Number"))));
 var $actualWDRecordType_onWO = _getText(_cell(0,_under(_tableHeader("Record Type"))));
 
 _assertEqual($actualWDNumber_onWO, $WDNumber,"Actual and expected work details number not Same");
 _assertEqual($actualWDRecordType_onWO, $WDrecordType[1],"Actual and expected work detail's Record Type not Same");
-
+*/
 /**
  * Perform Interactive Entitlement on WO PS line
  */

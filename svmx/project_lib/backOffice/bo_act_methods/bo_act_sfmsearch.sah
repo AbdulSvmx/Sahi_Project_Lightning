@@ -44,6 +44,35 @@ this.createsfmsearch = function($searchId1, $searchTitle1,$objectName,$fieldName
 		
 };
 
+this.sfmsearch_displayfields = function($searchTitle ,$sectiontitle, $object , $field1 , $field2)
+
+{
+	
+	
+	 $bo_act_navigation.navigateToSfmSearchInDesigner();
+	 _click(_checkbox(0,_near(_span($searchTitle))));
+	 _click($swat_pg_sfmSearch.btn_edit_values);
+
+	 _click($swat_pg_sfmSearch.tab_searchConfiguration);
+	 if(_getValue($swat_pg_sfmSearch.txt_object_standard1) == $sectiontitle)
+	 {
+		 _click(_checkbox(0,_near($swat_pg_sfmSearch.txt_object_standard1)));
+		 _click($swat_pg_sfmSearch.btn_edit_sfm_config);
+
+	 }
+	 
+
+	 _click($swat_pg_sfmSearch.btn_add2);
+	 _setSelected($swat_pg_sfmSearch.picklist_searchObject2, $object);
+	 _setSelected($swat_pg_sfmSearch.picklist_fieldName2, $field1);
+	 _click($swat_pg_sfmSearch.btn_add2);
+	 _setSelected($swat_pg_sfmSearch.picklist_searchObject3, $object);
+	 _setSelected($swat_pg_sfmSearch.picklist_fieldName3, $field2);
+	 _click($swat_pg_sfmSearch.btn_save);
+	 _click($swat_pg_sfmSearch.btn_save_and_close);	
+
+};
+
 
 this.sfmsearch_advancedexpression = function($searchId1, $searchTitle1,$objectName,$fieldName1,$value1,$operator, $fieldname2,$value2, $testcase){
 	
@@ -193,6 +222,37 @@ this.clonesfmsearch = function($searchTitle,$searchTitle2, $searchId2,$objectNam
 		
 };
 
+
+this.clonesfmsearch_objectdisplay = function ($searchTitle,$searchTitle2, $searchId2,$objectName,$value, $sectiontitle, $isstandardtrue)
+
+{
+	 
+	 // cloning a Standard SFM Search
+	 if($isstandardtrue == true && $sectiontitle == "Open Work Orders")
+	 {
+		 $bo_act_navigation.navigateToSfmSearchInDesigner();
+		 _click(_checkbox(0,_near(_span($searchTitle))));
+		 _click($swat_pg_sfmSearch.btn_clone_stdsearch);
+		 _setValue($swat_pg_sfmSearch.txt_searchTitle,$searchTitle2);
+		 _setValue($swat_pg_sfmSearch.txt_searchId,$searchId2);
+		 _click($swat_pg_sfmSearch.tab_searchConfiguration);
+		 _click(_checkbox(0,_near($swat_pg_sfmSearch.txt_object_standard2)));
+		 _click($swat_pg_sfmSearch.btn_edit_sfm_config);
+		 _setValue($swat_pg_sfmSearch.txt_value,$value);
+		 _click($swat_pg_sfmSearch.btn_save);
+	 }
+	 _click($swat_pg_sfmSearch.btn_objectdisplaysequence);
+	_setSelected($swat_pg_sfmSearch.pop_up_value, $objectName);
+	 _click($swat_pg_sfmSearch.btn_top_popup);
+	 _wait(1000);
+	 _click($swat_pg_sfmSearch.btn_popup_save);
+	 _wait(1000);
+	 _click($swat_pg_sfmSearch.btn_save);
+	 _click($swat_pg_sfmSearch.btn_quicksave);	
+	 _click($swat_pg_sfmSearch.btn_save_and_close);
+
+};
+
 // Cloning an SFM search and making no changes to it - Both Standard and custom
 this.clonesfmsearch_nochanges = function($searchTitle,$searchTitle2, $searchId2,$isstandardtrue)
 
@@ -238,9 +298,9 @@ this.editsfmsearch = function($searchTitle ,$objectName,$value2, $sectiontitle)
 	 _click($swat_pg_sfmSearch.btn_edit_values);
 
 	 _click($swat_pg_sfmSearch.tab_searchConfiguration);
-	 if(_getValue($swat_pg_sfmSearch.txt_object) == $sectiontitle)
+	 if(_getValue($swat_pg_sfmSearch.txt_object_standard1) == $sectiontitle)
 		 {
-	 _click(_checkbox(0,_near($swat_pg_sfmSearch.txt_object)));
+	 _click(_checkbox(0,_near($swat_pg_sfmSearch.txt_object_standard1)));
 	 _click($swat_pg_sfmSearch.btn_edit_sfm_config);
 	
 		 }
