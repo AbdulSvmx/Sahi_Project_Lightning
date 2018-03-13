@@ -16,7 +16,7 @@ $sfm_act_Transactions.cloneAndSaveProcess($processName,$sfmName,$sfmPgLayoutName
 //Add the process to SFM Wizard in Account
 $bo_act_navigation.navigateToSfmWizard();
 $sfm_act_createCustomWizard.chooseObject("Account");
-$sfm_act_createCustomWizard.addManageWizSteps($wizTitle,"SFM",$sfmName,"Sysadmin01 Group");
+$sfm_act_createCustomWizard.addManageWizSteps($wizTitle,"SFM",$sfmName);
 
 
 //Create a New Account

@@ -44,7 +44,7 @@ $BVT_TC_001_SFMSearch.start();
 	var $fieldName1 = "Order Type";
 	var $workOrderNo;
 
-	$bo_act_login.login("https://test.salesforce.com","shashikala.svmx@ge.com", "maxpl0re");
+	$bo_act_login.login("https://test.salesforce.com","lohithaadmin@swatpart2.com", "maxpl0re2");
 	var $searchItem = $swat_act_sfmSearch.createSfmSearch($objectName, $fieldName, $operator, $fieldName1);
 
 	
@@ -55,11 +55,11 @@ $BVT_TC_001_SFMSearch.start();
 	var $IBName = $bo_act_installedProduct.createInstalledProduct($productName, $accountName, $contactName);
 	$workOrderNo = $swat_act_workOrders.createWorkOrder($caseNumber, $accountName,$contactName, $IBName, "Open", "High", "Field Service");
 	
-	_setSpeed(100);
+	
 	//	Creation of SFM Search and validation //
 	$swat_act_sfmSearch.launchSfmSearch($searchItem, $workOrderNo);
 
-
-//$bo_act_login.logOut();
-
+	
+	// $bo_act_login.logOut();
+	
 $BVT_TC_001_SFMSearch.end();

@@ -14,7 +14,7 @@ $sfm_act_Transactions.clonedsfm6343($processName,$sfmName,$sfmPgLayoutName,$dvrR
 
 $bo_act_navigation.navigateToSfmWizard();
 $sfm_act_createCustomWizard.chooseObject("Work Order");
-$sfm_act_createCustomWizard.addManageWizSteps($wizTitle, "SFM", $sfmName, "Sysadmin01 Group");
+$sfm_act_createCustomWizard.addManageWizSteps($wizTitle, "SFM", $sfmName);
 $sfm_act_createCustomWizard.createBlankWo();
 $sfm_act_createCustomWizard.clickWizardBtn($sfmName);
 

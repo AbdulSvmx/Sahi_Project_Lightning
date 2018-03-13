@@ -1,9 +1,9 @@
 // Author Meghana Rao P
 /*
- * This test case verifies the quick save of SFM search and checking the SFM Search Delivery
+ * Verify Date format, currency format displays by changing the locale
  */
-var $RS_10133 = _testcase("RS_10133", "quick save and checking the delivery");
-$RS_10133.start();
+var $RS_10127 = _testcase("RS_10127", "qVerify Date format, currency format displays by changing the locale");
+$RS_10127.start();
 
 // To generate Random names for SearchTitle and Search ID
 var $searchTitle = $bo_act_common.generateRandomName("Search");
@@ -13,9 +13,13 @@ var $data = _readExcelFile("../../backOffice/bo_excleData/BORegressionDatasheet.
 var $createwoquery = $data[1]["CreateWorkOrderOpen"];
 var $fetchwo = $data[1]["fetchwo"];
 
-// create a Work Order
+// To change the Locale of the User to German 
 $bo_act_login.login($url_checklist, $un_checklist, $pwd_checklist);
 
+var $userapexscript = "User user_edit = [Select ID , LocaleSidKey from User Where Id =:UserInfo.getUserId() LIMIT 1];user_edit.LocaleSidKey = 'de_DE';update user_edit;";
+var $user_query = $op_act_sForceApiCall.sForceQuery($un_checklist, $pwd_checklist, $userapexscript ,"create");
+
+// create a Work Order
 var $rs_10133_result = $op_act_sForceApiCall.sForceQuery($un_checklist, $pwd_checklist, $createwoquery ,"create");
 var $rs_10133_query_wo = $fetchwo;
 var $rs_10133_fetch = $op_act_sForceApiCall.sForceQuery($un_checklist, $pwd_checklist, $rs_10133_query_wo ,"query");
@@ -30,5 +34,10 @@ var $rs_10133_actual_onsite = $rs_10133_fetch[0].SVMXC__Actual_Onsite_Response__
 $bo_act_sfmsearch.sfmsearch_advancedexpression($searchId, $searchTitle, "Work Order", "Actual Initial Response", "TODAY", "Equals", "Actual Onsite Response", "YESTERDAY", "10133");
 
 $bo_act_sfmsearch.sfmsearch_displayfields($searchTitle, "Work Orders", "Work Order", "Actual Initial Response", "Actual Onsite Response");
-$bo_act_sfmsearchdelivery.verifyfieldspresent_withrecord($searchTitle,$rs_10133_WO1, "Actual Initial Response", $rs_10133_actual_initial, "/");
-$RS_10133.end();
+$bo_act_sfmsearchdelivery.verifyfieldspresent_withrecord($searchTitle,$rs_10133_WO1, "Actual Initial Response", "12.03.2018 05:30", ".");
+
+// To change the locale back to English for the User
+
+var $userapexscript1 = "User user_edit = [Select ID , LocaleSidKey from User Where Id =:UserInfo.getUserId() LIMIT 1];user_edit.LocaleSidKey = 'en_US';update user_edit;";
+var $user_query = $op_act_sForceApiCall.sForceQuery($un_checklist, $pwd_checklist, $userapexscript1 ,"create");
+$RS_10127.end();
