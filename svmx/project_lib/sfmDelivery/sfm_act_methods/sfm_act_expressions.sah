@@ -22,13 +22,14 @@ var $sfm_act_expressions = new function sfm_act_expressions() {
 		_setValue($sfm_pg_expressions.txt_saveExprsn,$exprsnName);
 		_setValue($sfm_pg_expressions.txt_inputId,$exprsnName);
 		_click($sfm_pg_expressions.btn_save);
+		_wait(3000,isVisible($sfm_pg_expressions.lbl_exprsnSaved));
 	};
 	
 	this.deleteExprsn = function(){
 		_click($sfm_pg_expressions.btn_delete);
 		_click($sfm_pg_expressions.btn_popup_yes);
 		if(_isVisible($sfm_pg_expressions.lbl_exprsnDeleted)){
-			_log("Pass");
+			_log("Pass ::: Expression deleted");
 		}
 		else{
 			_log("Fail");
