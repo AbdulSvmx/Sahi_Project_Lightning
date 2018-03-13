@@ -3,7 +3,7 @@ $rs_6923.start();
 
 // Pre-Condition: Should have atleast 1 Part Order with the Pre-filter mentioned.
 $sfmName = $bo_act_common.generateRandomName("SFM_Auto_");
-//$sfmName = "SFM_Auto_1912201711441";
+$sfmName = "SFM_Auto_1220187946";
 $sfmPgLayoutName =	$bo_act_common.generateRandomName("SFM_Auto_Page");
 $headersToAdd = ["Parts"];
 $lookUpName = $bo_act_common.generateRandomName("Part_lkp_");
@@ -11,6 +11,7 @@ $wizTitle = $bo_act_common.generateRandomName("SFM Wiz");
 $bo_act_login.login($g_url,$sfmUsn,$sfmPwd);
 $bo_act_navigation.navigateToSfmTransactionDesigner();
 _click($bo_pg_sfmTransactionAndDesigner.btn_newSFM);
+_wait(10000);
 _setValue($bo_pg_sfmTransactionAndDesigner.txt_name, $sfmName);
 _setValue($bo_pg_sfmTransactionAndDesigner.txt_sfmTransactionId, "");
 _setSelected($sfm_pg_screenDesigner.sel_createSFMTransaction, "as Standalone for the purpose of editing an existing record");

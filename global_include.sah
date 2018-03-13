@@ -17,6 +17,8 @@ var $sfmUsn = "sysadmin01@sfdautomation.com";
 var $sfmPwd = "maxplore2";
 var $bac_PRTun = "bhupendra.auto@upgrade.com"; //Most Used Customer
 var $bac_PRTpwd = "servicemax@123";
+var $bac_unDev = "automationDEV@Test4Part1.com";
+var $bac_pwdDev = "welcome-02";
 
 
 
