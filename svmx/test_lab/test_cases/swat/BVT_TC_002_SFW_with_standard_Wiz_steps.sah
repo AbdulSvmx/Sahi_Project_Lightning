@@ -74,14 +74,6 @@ _setSpeed(100);
 	//$bo_act_SFW.createWizardStep($wizardStep2Type, $wizardStep4Name, // $executionMode1);
 	//$swat_act_sfmSearch.launchSfmSearch($searchItem,$workOrderNo);
 
-	$bo_act_navigation.navigateToSfmWizard();
-	$bo_act_SFW.createWizardGeneralInfo($wizardSelectObjectName1, $wizardTitleName1, $wizardIDName1);
-	$bo_act_SFW.createSFMWizardStepwithHandOver($wizardStep1Type, $wizardStep5Name, $executionMode1, $handOver1);
-
-	//Launch in delivery
-	$workOrderNo = $swat_act_workOrders.createWorkOrder($caseNumber, $accountName, $contactName, $IBName, "Open", "High", "Field Service");
-	 
-
 	// Check - Below code are added for dry run. Should we remove them?
 	//_wait(3000);
 	//$sfm_act_common.globalSearch($workOrderNo);
@@ -100,92 +92,14 @@ _setSpeed(100);
 	//validation of SLA creation
 	_assertExists(_span($slaName));
 //=======
-var $wizardSelectObjectName = "Work Order";
-var $wizardTitleName = $bo_act_common.generateRandomName("SFWTitle");
-var $wizardIDName = $bo_act_common.generateRandomName("SFWId");
-var $wizardTitleName1 = $bo_act_common.generateRandomName("Parts Order");
-var $wizardIDName1 = $bo_act_common.generateRandomName("PartsOrderID");
-var $wizardStep1Type = "SFM";
-var $wizardStep1Name = "Create Quote from Work Order";
-var $wizardStep2Type = "Output Document";
-var $wizardStep2Name = "Manage Work Order Lines - Usage";
-var $executionMode1 = "Interactive";
-var $executionMode2 = "Background";
-var $wizardStep3Name = "Create Usage Lines from Estimates";
-var $wizardStep4Name = "Work Order Service Report";
-var $wizardStep5Name = "Create New Shipment Order";
-var $handOver1 = true;
-var $handOver2 = false;
-var $selectTemplateAtRunTime = false;
-var $wizardSelectObjectName1 = "Parts Order";
 
-
-
-var $caseNumber = $bo_act_Cases.createCase("New", "High", "Email");
-var $accountName = $bo_act_accounts.createAccount();
-var $contactName = $bo_act_contacts.createContact($accountName);
-var $productName =$bo_act_products.createProduct();
 /**
  * Add Price To Standard Price for above created Product
 */ 
 
- var $standardPriceValue = 120;
- $bo_act_products.addStandardPriceForProduct($productName, $standardPriceValue);
-
-var $IBName = $bo_act_installedProduct.createInstalledProduct($productName,$accountName,$contactName);
-
-
-$bo_act_navigation.navigateToSfmWizard();
-$bo_act_SFW.createWizardGeneralInfo($wizardSelectObjectName, $wizardTitleName, $wizardIDName);
-$bo_act_SFW.createSFMWizardStepwithHandOver($wizardStep1Type, $wizardStep1Name, $executionMode1, $handOver1);
-$bo_act_SFW.createSFMWizardStepwithHandOver($wizardStep1Type, $wizardStep2Name, $executionMode1, $handOver1);
-$bo_act_SFW.createSFMWizardStepwithHandOver($wizardStep1Type, $wizardStep3Name, $executionMode1, $handOver1);
-$bo_act_SFW.createOutputDocumentWizardStepwithSelectTemplate($wizardStep2Type, $wizardStep4Name, $selectTemplateAtRunTime);
-var $fieldActnType = "Others";
-var $actnName = "Check Entitlement WO";
-$bo_act_SFW.addCustomActionToWizard($fieldActnType, $actnName);
-$bo_act_SFW.quickSaveSFWizard();
-$bo_act_SFW.saveAndClose();
-
-
-//$bo_act_SFW.createSFMWizard($wizardSelectObjectName, $wizardTitleName, $wizardIDName, $wizardStep1Type, $wizardStep1Name, $executionMode1, $wizardStep2Type, $wizardStep2Name, $executionMode2);
-//$bo_act_SFW.createWizardGeneralInfo($wizardSelectObjectName, $wizardTitleName, $wizardIDName);
-//$bo_act_SFW.createWizardStep($wizardStep1Type, $wizardStep1Name, $executionMode1);
-//$bo_act_SFW.createWizardStep($wizardStep1Type, $wizardStep2Name, $executionMode1);
-//$bo_act_SFW.createWizardStep($wizardStep1Type, $wizardStep3Name, $executionMode1);
-//$bo_act_SFW.createWizardStep($wizardStep2Type, $wizardStep4Name, // $executionMode1);
-//$swat_act_sfmSearch.launchSfmSearch($searchItem,$workOrderNo);
-
-$bo_act_navigation.navigateToSfmWizard();
-$bo_act_SFW.createWizardGeneralInfo($wizardSelectObjectName1, $wizardTitleName1, $wizardIDName1);
-$bo_act_SFW.createSFMWizardStepwithHandOver($wizardStep1Type, $wizardStep5Name, $executionMode1, $handOver1);
-
 //Launch in delivery
 $workOrderNo = $swat_act_workOrders.createWorkOrder($caseNumber, $accountName, $contactName, $IBName, "Open", "High", "Field Service");
 //$woName = 
-
-
-//_wait(3000);
-//$sfm_act_common.globalSearch($workOrderNo);
-//_click(_link($workOrderNo));
-//_selectDomain("/svmx/"); 
-//_selectDomain("/visual.force.com/");
-//_isVisible(_cell({title: ""+$wizardTitleName+""}));
-//_assertVisible(_cell({title:""+$wizardTitleName+""}),"Pass");
-
-  
-  // Create SLA Terms
-  
-  
- var $slaName = $bo_act_slaTerms.createSlaTerms("Default");
- $bo_act_slaTerms.addInitialResponseToSLA($slaName,"WorkOrder","Field Service","Medium","Created Date","5","10","SLA");
- $bo_act_slaTerms.addOnsiteResponseToSLA($slaName,"WorkOrder","Field Service","Medium","Created Date","10","15","SLA");
-//	this.addOnsiteResponseToSLA = function($slaName,$ResponseTrackedOn,$orderType,$priority,$clockStartsFrom,$internalGoal,$customerCommitment,$businessHoursFrom)
- 
- //validation of SLA creation
- _assertExists(_span($slaName));
-//>>>>>>> c64bdd0c53609bcf471f53fa80af69fc2e6ba513
- 
  
 	// Create Service Contract(With child lines) and Activate it
 	var $pastYear = 2;  // Start Date for Service Contract
@@ -220,8 +134,6 @@ $workOrderNo = $swat_act_workOrders.createWorkOrder($caseNumber, $accountName, $
 	_assertEqual($actual_EntitlementType,"INTERACTIVE","Actual and expected Entitlement Type are not same");
 	_assertEqual($ServiceContract_actual,$serviceContractName,"Actual and expected Service Conract are not same");
  
-
-	
 	_wait(20000);
 	$sfm_act_common.globalSearch($workOrderNo);
 	_click(_link($workOrderNo));
@@ -271,70 +183,6 @@ $workOrderNo = $swat_act_workOrders.createWorkOrder($caseNumber, $accountName, $
 	_click(_span("Update"));
 	_click(_span("svmx-btn-icon svmx-sfmd-save-icon"));
 
-
-
-
-	//_click(_link("WO-00000088"));	
-	//_click(_link($workOrderNo));
-	// Invoke TDM016 Process
-	//_selectDomain("/visual.force.com/");
-	//_selectDomain("/svmx/"); 
-	
-	//_isVisible(_cell({title: "SFWTitle1112018113658"}));
-	
-	//_assertVisible(_cell({title:"SFWId1112018113658"}),"Pass");
-	
-	//_click(_button("Manage Work Order Lines - Usage")); 
-	
-	//_wait(3000,_isVisible( _label("Order Status:")));
-	
-	//_selectDomain();
-	
-	//Add Parts Line to Above invoked TDM016 SFM
-	//$productName = "pro161201812055";
-	
-	
-	// After saving 'Create Quote from Work Order' process, Handover takes place. Hence
-	// 'TDM016 - Manage Work Order Lines - Usage' process will be launched.
-
-
-
-	//Validation of Get Price for Parts lines
-	
-	/*
-	$bo_act_getPrice.editPartsLineToSFMDelivery($searchValue);
-	
-	var $PartsLinePricePerUnitActual = _getText(_textbox(0,_rightOf(_label("/Line Price Per Unit/"))));
-	var $PartsCoveredActual = _getText(_textbox(0,_rightOf(_label("/Covered %/"))));
-	var $PartsDiscountActual = _getText(_textbox(0,_rightOf(_label("/Discount %/"))));
-	var $PartsBillableQtyActual = _getText(_textbox(0,_rightOf(_label("/Billable Qty/"))));
-	var $PartsBillableLinePriceActual = _getText(_textbox(0,_rightOf(_label("/Billable Line Price/"))));
-	
-	var $BillableLinePriceExpected = $lineQty*$pricePerUnit;
-	
-	_assertEqual($PartsLinePricePerUnitActual,$pricePerUnit,"Actual and expected Parts Line Price Per Unit are not same");
-	_assertEqual($PartsBillableQtyActual,$lineQty,"Actual and expected Parts Billable Qty are not same");
-	_assertEqual($PartsBillableLinePriceActual,$BillableLinePriceExpected,"Actual and expected Parts Billable Line Price are not same");
-	_assertEqual($PartsCoveredActual,"0","Actual and expected Parts Covered % are not same");
-	_assertEqual($PartsDiscountActual,"0","Actual and expected Parts Discount % are not same");
-	
-	$bo_act_getPrice.closeEditedWOLineToSFMDelivery();
-	
-	$bo_act_getPrice.saveSFMDelivery();
-	
-	/**
-	*Clean up function
-	*/
-	
-	//var $datacreated = [$WONumber,$caseNumber,$IBName,$productName,$contactName,$accountName,$slaName,$serviceConractName];
-	//for (var i = 0; i < $datacreated.length; i++) {
-	//$bo_act_common.cleanUpfunction($datacreated[i]);
-	//}
-	
-	//$bo_act_login.logOut();
-
-
-
 	//$bo_act_getPrice.closeEditedWOLineToSFMDelivery();
 
 	$bo_act_getPrice.saveSFMDelivery();
@@ -378,27 +226,11 @@ $workOrderNo = $swat_act_workOrders.createWorkOrder($caseNumber, $accountName, $
 	_wait(15000, _isVisible(_image("svmx-action-col-icon svmx-action-col-0   svmx-sfmd-edit-icon")));
 	_click(_image("svmx-action-col-icon svmx-action-col-0   svmx-sfmd-edit-icon"));
 
-/* Below Set of code is repetation of above code. As once we click on the save button it goes to report creation.
- * 
-	$bo_act_common.searchfunction($productName);
-	_setValue(_textbox("Line Qty:"), "5");
-	//_setValue(_textbox("svmx-form-field svmx-form-required-field svmx-form-text svmx-form-focus svmx-field-form-focus svmx-field-default-form-focus"), "5");
-	//_setValue(_textbox("svmx-form-field svmx-form-required-field svmx-form-text svmx-form-invalid-field"), "4000");
-	_click(_span("Update"));
-	_wait(15000);
-	//Add a Labor Line
-	$bo_act_getPrice.addLaborLineToSFMDelivery($searchValue, "service", "03", "05");
-
-
-	//Add a Expense Line
-	$bo_act_getPrice.addExpensesLineToSFMDelivery("Phone", "03", "3000");
-
-
 	//Add a Travel Line
 	$bo_act_getPrice.addTravelLineToSFMDeliveryUsingStartEndDate("01", "03");
 	_wait(15000, _isVisible(_span("svmx-btn-icon svmx-sfmd-save-icon")));
 	_click(_span("svmx-btn-icon svmx-sfmd-save-icon"));
-=======
+
 // _isVisible(_cell({title: "SFWTitle31201814166"}));
 // _assertVisible(_cell({title:"SFWTitle31201814166"}),"Pass");
 
@@ -451,32 +283,6 @@ _click(_span("Update"));
 _click(_span("svmx-btn-icon svmx-sfmd-save-icon"));
 
 
-
-
-//_click(_link("WO-00000088"));	
-//_click(_link($workOrderNo));
-// Invoke TDM016 Process
-//_selectDomain("/visual.force.com/");
-//_selectDomain("/svmx/"); 
-
-//_isVisible(_cell({title: "SFWTitle1112018113658"}));
-
-//_assertVisible(_cell({title:"SFWId1112018113658"}),"Pass");
-
-//_click(_button("Manage Work Order Lines - Usage")); 
-
-//_wait(3000,_isVisible( _label("Order Status:")));
-
-//_selectDomain();
-
-//Add Parts Line to Above invoked TDM016 SFM
-//$productName = "pro161201812055";
-
-
-// After saving 'Create Quote from Work Order' process, Handover takes place. Hence
-// 'TDM016 - Manage Work Order Lines - Usage' process will be launched.
-
-
 var $searchValue = $productName;
 var $lineQty = "5";
 var $pricePerUnit = 120;
@@ -484,17 +290,6 @@ $bo_act_getPrice.addPartsLineToSFMDelivery($searchValue,$lineQty);
 $bo_act_getPrice.calculateGetPrice();
 
 //Validation of Get Price for Parts lines
-
-/*
-$bo_act_getPrice.editPartsLineToSFMDelivery($searchValue);
-
-var $PartsLinePricePerUnitActual = _getText(_textbox(0,_rightOf(_label("/Line Price Per Unit/"))));
-var $PartsCoveredActual = _getText(_textbox(0,_rightOf(_label("/Covered %/"))));
-var $PartsDiscountActual = _getText(_textbox(0,_rightOf(_label("/Discount %/"))));
-var $PartsBillableQtyActual = _getText(_textbox(0,_rightOf(_label("/Billable Qty/"))));
-var $PartsBillableLinePriceActual = _getText(_textbox(0,_rightOf(_label("/Billable Line Price/"))));
-
-var $BillableLinePriceExpected = $lineQty*$pricePerUnit;
 
 _assertEqual($PartsLinePricePerUnitActual,$pricePerUnit,"Actual and expected Parts Line Price Per Unit are not same");
 _assertEqual($PartsBillableQtyActual,$lineQty,"Actual and expected Parts Billable Qty are not same");
