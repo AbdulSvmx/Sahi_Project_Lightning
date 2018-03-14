@@ -1,0 +1,4 @@
+_setSelected(_f("SFMExpressionBuilderSWF").s_combobox("sourceCombo"), "--None--");
+_setSelected(_f("SFMExpressionBuilderSWF").s_combobox("targetCombo"), "Work Order");
+_setSelected(_f("SFMExpressionBuilderSWF").s_combobox("searchCombo[1]"), "Use an existing map");
+_click(_cell("bodyCell"));

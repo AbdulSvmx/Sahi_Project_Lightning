@@ -1,0 +1,5 @@
+_setValue(_f("main").s_textinput("Save template as"), "Tester");
+_setValue(_f("main").s_textinput("Input ID Here[4]"), "Tester");
+_click(_div("logo-title"));
+_setValue(_f("main").s_textinput("Input ID Here[4]"), "Tester");
+_click(_f("main").s_button("Select"));

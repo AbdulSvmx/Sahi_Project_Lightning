@@ -1,0 +1,13 @@
+_setValue(_f("main").s_textinput("textInput[59]"), "JavaScript");
+_setSelected(_f("main").s_combobox("ComboBox13249"), "Webservice");
+_setValue(_f("main").s_textinput("txtip[1]"), "test");
+_setValue(_f("main").s_textinput("textInput[59]"), "Webservice");
+_setValue(_f("main").s_textinput("textInput[59]"), "Webservice");
+_setValue(_f("main").s_textinput("Input ID Here[3]"), "PAG016");
+_click(_div("Service Flow Manager"));
+_click(_div("SFM Transaction & Docs Designer"));
+_setValue(_f("main").s_textinput("searchText[2]"), "manage work ord");
+_click(_f("main").s_checkbox("chk[9]"));
+_click(_f("main").s_button("Clone"));
+_click(_f("main").tab("Screen Designer"));
+_click(_f("main").s_button("refBtn"));
