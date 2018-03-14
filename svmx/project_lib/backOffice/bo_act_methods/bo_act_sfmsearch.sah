@@ -54,14 +54,9 @@ this.sfmsearch_displayfields = function($searchTitle ,$sectiontitle, $object , $
 	 _click($swat_pg_sfmSearch.btn_edit_values);
 
 	 _click($swat_pg_sfmSearch.tab_searchConfiguration);
-	 if(_getValue($swat_pg_sfmSearch.txt_object_standard1) == $sectiontitle)
-	 {
-		 _click(_checkbox(0,_near($swat_pg_sfmSearch.txt_object_standard1)));
-		 _click($swat_pg_sfmSearch.btn_edit_sfm_config);
 
-	 }
-	 
-
+	 _click(_checkbox(0,_near($swat_pg_sfmSearch.txt_object_custom1)));
+	 _click($swat_pg_sfmSearch.btn_edit_sfm_config);
 	 _click($swat_pg_sfmSearch.btn_add2);
 	 _setSelected($swat_pg_sfmSearch.picklist_searchObject2, $object);
 	 _setSelected($swat_pg_sfmSearch.picklist_fieldName2, $field1);
