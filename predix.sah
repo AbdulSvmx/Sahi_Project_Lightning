@@ -1,0 +1,19 @@
+//_navigateTo("http://eng24.servicemax.io");
+//_setValue(_textbox("username"), "test");
+//_setPassword(_password("password"), "NQkaFw==");
+//_click(_submit("Login"));
+//_click(_image("io_default_s128x128"));
+//_click(_image("latest[1]"));
+//_click(_div("React UI"));
+//
+
+_dragDropXY(_section("items"),0,15);
+_wait(1000)
+_call(_paragraph("Activities").click());
+_call(_paragraph("Events").click());
+_click(_div("button[1]"));
+_click(_div("Create"));
+_setValue(_textbox("Name"), "testSahi");
+_setValue(_telephonebox(0), "02");
+_setValue(_telephonebox(1), "06");
+_setValue(_telephonebox(2), "1990");
