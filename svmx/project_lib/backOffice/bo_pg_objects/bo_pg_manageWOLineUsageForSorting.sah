@@ -23,7 +23,7 @@ var $bo_pg_manageWOLineUsageForSorting=new function bo_pg_manageWOLineUsageForSo
 		this.lbl_billableQty=_f("main").s_label("Billable Qty[1]");
 
 		this.sel_grpTravel=_f("main").s_datagroup("dataGroup[6]");
-		this.lbl_ConsumedFromLocation=_f("main").s_label("Consumed From Location[1]");
+		this.lbl_ConsumedFromLocation=_f("main").s_label("/Consumed From Location/").near(_f("main").s_button("Add Field"));
 		this.lbl_propertiesForPart=_f("main").s_richtext("Parts");
 		this.lbl_propertiesForLabor=_f("main").s_richtext("Labor");
 		this.lbl_propertiesForExpenses=_f("main").s_richtext("Expense");

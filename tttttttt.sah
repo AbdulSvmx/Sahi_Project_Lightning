@@ -1,0 +1,11 @@
+_setSelected(_f("main").s_combobox("fieldCombo"), "Date Custom");
+_setSelected(_f("main").s_combobox("fieldCombo[1]"), "Date Received");
+_click(_f("main").s_button("+"));
+_setSelected(_f("main").s_combobox("fieldCombo[2]"), "Date Required");
+_click(_f("main").s_button("+"));
+_setSelected(_f("main").s_combobox("fieldCombo[3]"), "Activity Type");
+_setValue(_f("main").s_textinput("textInput[10]"), "Calibration");
+_click(_f("main").s_navigatorcontent("Qualification Criteria"));
+_click(_button(" New "));
+_click(_submit(" Save "));
+_click(_button("New Work Detail"));

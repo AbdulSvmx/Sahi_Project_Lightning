@@ -1,0 +1,18 @@
+_click(_f("main").s_button("Save[3]"));
+_click(_f("main").s_button("Quick Save"));
+_click(_f("main").s_button("Save[3]"));
+_click(_f("main").s_button("Save & Close"));
+_click(_f("main").s_checkbox("chk[9]"));
+_click(_f("main").s_button("Clone"));
+_setValue(_f("main").s_textinput("pName"), "Tester00001");
+_setValue(_f("main").s_textinput("pId"), "Tester000001");
+_click(_f("main").tab("Screen Designer"));
+_click(_f("main").s_button("refBtn"));
+_setSelected(_f("main").s_combobox("noOfRec"), "50");
+_setValue(_f("main").s_textinput("Save this Lookup as"), "hcs_000009");
+_setValue(_f("main").s_textinput("Input ID Here[4]"), "hcs_01111111");
+_click(_f("main").s_button("Save As[10]"));
+_click(_f("main").s_button("closeButton"));
+_click(_f("main").s_button("Save[3]"));
+_click(_f("main").s_button("Quick Save"));
+_click(_f("main").button("Cancel"));

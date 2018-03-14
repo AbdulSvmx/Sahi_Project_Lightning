@@ -1,0 +1,50 @@
+/**
+ * Functions for the Accounts Object
+ */
+var $bo_act_servicemaxSetup = new function bo_act_servicemaxSetup() {
+
+	this.createADepotStockingLocation = function($depotName,$level,$depot1Name){
+		$bo_act_navigation.navigateTodepotAndStockingLocations();
+		_click(_button("Add Top Level"));
+		_setValue(_textbox(0,_rightOf(_label("Level/Depot Name"))),$depotName);
+		_click(_button("Quick Save"));
+		_click(_link($depotName));
+		_click(_button("Add Level"));
+		_setValue(_textbox(0,_rightOf(_label("Level/Depot Name"))),$level);
+		_click(_button("Quick Save"));
+		_click(_link($depotName));
+		_click(_link($level));
+		_click(_button("Add Depot"));
+		_setValue(_textbox(0,_rightOf(_label("Level/Depot Name"))),$depot1Name);
+		_setValue(_textbox(0,_under(__div("Name"))),$level);
+		_setSelected(_select(0,_under(__div("Function"))),1);
+		_click(_button("Quick Save"));
+		_click(_submit("Save and Close"));
+		};
+		
+		this.createOutBoundRouting = function($depotName){
+			_click(_submit("Outbound Routing"));
+			_assertExists(_heading2("Manage Repair Shipment Preparation Rules"));
+			_setValue(_textbox(0,_rightOf(_span("Name"))),$depotName);
+			_click(_button("Save"));
+			_assertExists(_div("Success:Process saved."));
+		};
+this.createDeliveryRule = function($object,$field,$operator,$value){
+	var $deliveryruleDescription = $bo_act_common.generateRandomName("Del");
+	var $ruleName = $bo_act_common.generateRandomName("rule");
+	_click(_submit("Delivery Rule"));
+	_setValue(_textbox(0,_rightOf(_label("Description"))),$deliveryruleDescription);
+	_click(_button("New"));
+	_setValue(_textbox(0,_rightOf(_label("Rule Name"))),$ruleName);
+	_setSelected(_select(0,_near(_div("Object Name"))),$object);
+	_setSelected(_select(1,_near(_div("Field Name"))),$field);
+	_setSelected(_select(2,_near(_div("Operator"))),$operator);
+	_setValue(_textbox(0,_near(_div("Value"))),$value);
+	_click(_button("Save"));
+	_assertExists(_div("Success:Delivery Rule saved"));
+	
+};
+
+
+
+};

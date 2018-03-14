@@ -131,7 +131,8 @@ this.addEntitledContactsToServiceContract = function($sconName,$contact){
 this.addPartsPricingToServiceContract = function($sconName, $prodName, $pricePerUnit){
 	$bo_act_navigation.navigateToServiceMaintenanceContractPage();
 	_click(_link($sconName));
-	_click($bo_pg_serviceMaintenanceContracts.btn_newPartsPricing);
+	_wait(10000);
+	_click($bo_pg_serviceMaintenanceContracts.btn_sfmPartPricing);
 	_setValue($bo_pg_serviceMaintenanceContracts.txt_product,$prodName);
 	_setValue($bo_pg_serviceMaintenanceContracts.txt_pricePerUnit,$pricePerUnit);
 	_click($bo_pg_serviceMaintenanceContracts.chk_active);

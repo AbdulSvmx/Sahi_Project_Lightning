@@ -1,0 +1,26 @@
+
+$bo_act_login.login($url_checklist, $un_checklist, $pwd_checklist);
+var $query = "Select Name , Id, FORMAT(SVMXC__Actual_Initial_Response__c) from SVMXC__Service_Order__c where Createdby.Id = '005q0000003GGfP' Order by CreatedDate DESC Limit 1";
+var $rs_10133_fetch = $op_act_sForceApiCall.sForceQuery($un_checklist, $pwd_checklist, $query ,"query");
+
+
+_log($rs_10133_fetch[0].SVMXC__Actual_Initial_Response__c);
+
+var $value = $rs_10133_fetch[0].SVMXC__Actual_Initial_Response__c;
+var $dateformat1 = "AM";
+var $dateformat2 = "PM";
+
+if($value.match($dateformat1) || $value.match($dateformat2))
+	{
+	
+	_log("YESSSS");
+	
+	
+	}
+
+
+else
+	{
+	
+	_log("NOOOOO");
+	}

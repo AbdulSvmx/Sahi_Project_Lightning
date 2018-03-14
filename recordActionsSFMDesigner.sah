@@ -1,0 +1,2 @@
+_click(_f("main").s_checkbox("chk"));
+_click(_f("main").s_button("Clone"));
