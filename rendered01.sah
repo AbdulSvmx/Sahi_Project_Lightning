@@ -1,0 +1,21 @@
+//_click(_f("main").s_label("From Zip"))
+//_click(_xy(_f("main").s_vscrollbar("verticalScrollBar[1]"),0,10));
+////_typeKeyCodeNative(java.awt.event.KeyEvent.VK_PAGE_UP); 
+
+var $maximum = _fetch(_f("main").s_vscrollbar(1).get("maximum"));
+
+var $el = _f("main").s_label("Owner ID");
+
+var $i=0;
+while($i< $maximum){
+	
+	if(_isVisible($el)){
+		break;
+	}else {
+		$i= $i+200;
+	_call(_f("main").s_vscrollbar(1).set("value",$i));
+	
+}
+
+	
+}

@@ -1,0 +1,5 @@
+/*SFM Delivery page Objects */
+
+var $swat_pg_sfmDelivery = new function swat_pg_sfmDelivery(){
+	
+}

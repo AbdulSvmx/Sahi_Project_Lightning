@@ -7,27 +7,22 @@ var $woName;
 _setSpeed(100);
 $bo_act_login.login($g_url, $sfmUsn, $sfmPwd);
 
-//Create WO dynamically and search that work order in global search and validate in delivery.
-$login = $sfm_act_createWorkOrder.login($sfmUsn, $sfmPwd);
-$woName = $sfm_act_createWorkOrder.create_WO();
-
-//Open the WO and click on the above created SFM 
-//_click($sfm_pg_sfmDesigner.lnk_workOrder);
-_click($sfm_pg_sfmDesigner.lnk_home);
-_wait(3000);
-$sfm_act_common.globalSearch($woName);
-_click(_link($woName));
-
+//Create WO through UI for the validatiion
+$sfm_act_createCustomWizard.createBlankWo();
+_selectDomain();
 
 if(_getText(_div(0,_rightOf(_span("/ZipsfdcPage/"))))==""){
-	_log("Fail ::: Zip is empty, cannot validate address");
-}else{
+	_log(" Zip is empty, cannot validate address");
+	_click($sfm_pg_wo.btn_wo_edit);
+	_setValue($sfm_pg_wo.txt_wo_zip,"560001");
+	_click($sfm_pg_wo.btn_wo_save);
+}
 	_selectDomain($domainName);
 	_click(_button($sfmName));
 	_selectDomain();
 	_wait(20000,_isVisible(_button(" Edit ")));
 	if((_getText(_div(0, _rightOf(_cell("Latitude"))))!="") && (_getText(_div(0, _rightOf(_cell("Longitude"))))!="")){
 		_log("Pass ::: Lat and Long is updated");
-	}
+	
 }
 $rs_5024.end();

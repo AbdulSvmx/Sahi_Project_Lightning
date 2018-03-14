@@ -12,7 +12,8 @@ $bo_act_login.login($g_url, $bac_un, $bac_pwd);
 
 $bo_act_navigation.navigateToSetUpAndSearch("Installed Packages");
 _wait(60000,_isVisible(_heading1("Installed Packages")));
-if(_getText(_cell("SVMXC"))!="SVMXDEV")
+_click(_link("ServiceMax"));
+if(_getText(_cell(0,_rightOf(_cell("Namespace Prefix"))))!="SVMXDEV")
 var $nameSpace = "SVMXC";
 else
 $nameSpace = "SVMXDEV";

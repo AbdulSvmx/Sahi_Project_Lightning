@@ -1,0 +1,79 @@
+
+//author - Noor Salma Sharieff
+
+var $BAC_3701 = _testcase("BAC_3701","SFW - Wizard step - background mode of execution.");
+$BAC_3701.start();
+_setSpeed(100);
+
+//Pre - Condition 
+$bo_act_login.login($g_url, $bac_un, $bac_pwd);
+var $depotName=$bo_act_common.generateRandomName("Depot");
+var $level=$bo_act_common.generateRandomName("level");
+var $depot1Name=$bo_act_common.generateRandomName("Depot");
+
+
+$bo_act_servicemaxSetup.createADepotStockingLocation($depotName,$level,$depot1Name);
+
+$bo_act_navigation.navigateTodepotAndStockingLocations();
+_click(_link($depotName));
+_click(_link($level));
+_click(_link($depot1Name));
+
+$bo_act_servicemaxSetup.createOutBoundRouting($depotName);
+_click(_submit("Back"));
+
+_click(_link($depotName));
+_click(_link($level));
+_click(_link($depot1Name));
+
+$bo_act_servicemaxSetup.createDeliveryRule("Account","AccountName","Contains","Acc"); 
+//_assertNotExists()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+$bo_act_SFW.createWizardGeneralInfo("Work Order", $wizardTitleName, $wizardIDName);
+$bo_act_SFW.createSFMWizardStepwithHandOver("SFM", "Close Work Order", "Background",true);
+$bo_act_SFW.quickSaveSFWizard();
+$bo_act_SFW.saveAndClose();
+
+var $accountName = $bo_act_accounts.createAccount();
+var $contactName = $bo_act_contacts.createContact($accountName);
+var $caseNumber = $bo_act_Cases.createCase("New", "High", "Email");
+var $productName = $bo_act_products.createProduct();
+var $IBName = $bo_act_installedProduct.createInstalledProduct($productName, $accountName, $contactName);
+var $WONumber = $bo_act_workOrders.createWorkOrder($caseNumber, $accountName, $contactName, $IBName, "Open", "High", "Field Service");
+_selectDomain("/svmx/");
+_assertExists(_button("/Close Work Order/",_near(_cell($wizardTitleName))));
+_click(_button("/Close Work Order/",_near(_cell($wizardTitleName))));
+_selectDomain();
+
+_assertEqual("Closed",_getText(_div(0,_rightOf(_span("/Order Status/")))),"Work Order is not closed");
+
+//Clean up function
+var $datacreated = [$contactName,$accountName,$caseNumber,$productName,$IBName,$WONumber];
+for (var i = 0; i < $datacreated.length; i++) {
+	$bo_act_common.cleanUpfunction($datacreated[i]);
+}
+$bo_act_SFW.deleteWizards("Work Order", $wizardIDName);
+
+$BAC_3701.end();
+
+
+
