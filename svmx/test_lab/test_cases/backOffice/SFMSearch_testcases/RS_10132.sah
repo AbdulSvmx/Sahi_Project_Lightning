@@ -35,6 +35,6 @@ $bo_act_sfmsearch.sfmsearch_displayfields($searchTitle ,"Work Orders", "Work Ord
 $bo_act_sfmsearchdelivery.sfmsearch($searchTitle, $rs_10132_WO1, false);
 
 _assertEqual(true, _isVisible(_div("Last Modified By ID")));
-_assertEqual(true, _isVisible(_link("/"+$username_rs_10132+"/")));
+_assertEqual(true, _isVisible(_link($username_rs_10132)));
 
 $RS_10132.end();
