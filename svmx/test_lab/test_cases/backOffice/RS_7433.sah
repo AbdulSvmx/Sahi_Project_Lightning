@@ -3,19 +3,23 @@ $rs_7433.start();
 var $productName = "";
 $templateName = $bo_act_common.generateRandomName("temp");
 $taskTitle = $bo_act_common.generateRandomName("task");
+$pmPlanName = $bo_act_common.generateRandomName("pmPlan");
 var $PMTemplateName = $bo_act_common.generateRandomName("PMT");
-$bo_act_login.login($g_url,$bac_unDev,$bac_pwdDev);
+$bo_act_login.login($g_url,$bac_unBase,"welcome-02");
 $bo_act_navigation.navigateToTaskTemplatePage();
 // Save Task Template
 $bo_act_taskTemplate.createTaskTemplate($templateName);
 $bo_act_taskTemplate.addTask("1", $taskTitle, "Tasks","Low");
 $productName = $bo_act_taskTemplate.addRequiredParts("1");
 _click(_span("/save-icon/"));
-_wait(3000);
+//_wait(3000);
 //Save PM Plan Template
 $bo_act_PMPlanTemplate.createCriteriaBasedPMTemplate($PMTemplateName,$productName);
 $bo_act_PMPlanTemplate.addRow("City", "Equals", "Bangalore");
-_click(_span("Save"));
-$bo_act_navigation.navigateToInstalledProductPage();
-$bo_act_installedProduct.createInstalledProduct($productName,"Acc822018195141","");
+//_click(_span("Save"));
+//$bo_act_navigation.navigateToInstalledProductPage();
+//$bo_act_installedProduct.createInstalledProduct($productName,"Acc822018195141","");
+//_selectDomain("/svmx/");
+//_click(_button("New Condition Based PM Plan from IB"));
+//_setValue(_textbox("planName"),$pmPlanName);
 $rs_7433.end();
