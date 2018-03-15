@@ -49,7 +49,7 @@ _wait(5000);
 _click($bo_pg_sfmTransactionAndDesigner.btn_finalQuickSave);
 $bo_act_navigation.navigateToSfmWizard();
 $sfm_act_createCustomWizard.chooseObject("Work Order");
-$sfm_act_createCustomWizard.addManageWizSteps($wizTitle, "SFM", $sfmName, "Sysadmin01 Group");
+$sfm_act_createCustomWizard.addManageWizSteps($wizTitle, "SFM", $sfmName);
 $sfm_act_createCustomWizard.createWoWithValues();
 _selectDomain("/svmx/");
 $sfm_act_createCustomWizard.clickWizardBtn($sfmName);

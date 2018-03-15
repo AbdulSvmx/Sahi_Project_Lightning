@@ -1,12 +1,12 @@
 var $rs_5344 = _testcase("RS_5344","");
 $rs_5344.start();
 $sfmNameToBeCloned = "Manage Work Order Lines - Usage";
-$sfmName = $bo_act_common.generateRandomName("RS_5354_");
+$sfmName = $bo_act_common.generateRandomName("RS_5344_");
 $isCustom = false;
 var $sfmTemplate = "SVMXSTD: Manage WO Usage Lines";
 var $sfmTemplateSaveAsName = $sfmName;
 var $containerName = ["Order Status","Order Status"];
-var $rulename = $sfmName;//"5354Rule1";
+var $rulename = $sfmName;
 var $targetObject ="Work Order";
 var $ruleDescription = "Are you sure? Component is null and Entitlement not performed";
 var $fieldArray = ["Component","Is Entitlement Performed"];
@@ -15,7 +15,6 @@ var $operandArray =["", "Function"];
 var $valueArray =["", "false"];
 var $advExpr= "1 AND 2";
 var $fieldName =["Component","Is Entitlement Performed"];
-//var $fieldName1="Is Entitlement Performed";
 var $wizardName = "SFM Delivery Auto";
 var $wizardType = "SFM";
 var $domainName = "/visual.force.com/";
@@ -28,6 +27,7 @@ $bo_act_login.login($g_url, $sfmUsn, $sfmPwd);
 $sfm_act_SFM.cloneTDM016($sfmNameToBeCloned, $sfmName, $isCustom,$sfmTemplateSaveAsName, $sfmTemplate,  $fieldName, $containerName);
 $sfm_pg_dvr.newRule($targetObject, $rulename, $ruleDescription, $fieldArray, $conditionArray, $operandArray, $valueArray, $advExpr, $messageType);
 _click($sfm_pg_sfmDesigner.btn_quickSaveSFM);
+_wait(3000);
 _click($sfm_pg_sfmDesigner.btn_saveSFM); 
 _wait(30000,_isVisible($sfm_pg_sfmDesigner.lnk_home));
 
@@ -39,8 +39,7 @@ _click($sfm_pg_sfmDesigner.lnk_home);
 $sfm_act_createCustomWizard.createBlankWo();
 
 _selectDomain($domainName);
-_click(_button("RS_5354_732018113255"));
-//_click(_button($sfmName));
+_click(_button($sfmName));
 
 //Validate DVR
 _selectDomain();

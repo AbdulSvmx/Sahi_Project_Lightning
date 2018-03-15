@@ -24,8 +24,8 @@ var $idealTime="99";
 var $invoiceNumber="INV999";
 
 //*************Login to Servicemax App***********
-$bo_act_login.login($g_url, $bac_unBase, $bac_pwdBase);
-
+//$bo_act_login.login($g_url, $bac_unBase, $bac_pwdBase);
+$bo_act_login.login($g_url,$sfmUsn,$sfmPwd);
 //*****Navgate to SFm Designer and create a new SFM of type source to Target All ********
 			$bo_act_navigation.navigateToSfmTransactionDesigner();
 			$bo_act_SFM.createNewSFM($sfmName);

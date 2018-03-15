@@ -9,7 +9,7 @@ $RS_10126.start();
 var $searchTitle = $bo_act_common.generateRandomName("Search");
 var $searchId = $bo_act_common.generateRandomName("SearchId");
 
-var $data = _readExcelFile("../../backOffice/bo_excleData/BORegressionDatasheet.xlsx","Sheet1",true);
+var $data = _readExcelFile("../../backOffice/bo_excleData/BORegressionDatasheet.xlsx",$orgtype,true);
 var $createwoquery = $data[1]["CreateWorkOrderOpen"];
 var $fetchwo = $data[1]["fetchwo"];
 
