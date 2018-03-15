@@ -33,7 +33,7 @@ var $bo_act_navigation = new function bo_act_navigation() {
 	 this.navigateToSvmxSetup();
 	_click($bo_pg_servicemaxSetup.btn_serviceFlowManager);
 	_click($bo_pg_servicemaxSetup.btn_sfmTransactionAndDocsDesigner);
-		 _wait(10000);
+		 _wait(10000);	 
 	_setSpeed(3000);
 	//return $callBack.returnResult(_exists($bo_pg_sfmTransactionAndDesigner.btn_standardSfmTransaction));
     };
@@ -82,7 +82,11 @@ var $bo_act_navigation = new function bo_act_navigation() {
    	    _click($bo_pg_home.link_stockAdjustment);
     };
     
-
+    this.navigateToStandardPriceBook = function(){
+      	 _click($bo_pg_home.btn_allTabs);
+      	 _click($bo_pg_home.link_priceBooks);
+      	 _click($bo_pg_home.btn_go);
+      };
 
     this.navigateToSlaTerms = function(){
     	$bo_act_navigation.navigateToHome();
@@ -98,7 +102,7 @@ var $bo_act_navigation = new function bo_act_navigation() {
     	_click(_link("ServiceMax Setup"));
     	_click($bo_pg_servicemaxSetup.btn_installedBaseAndPM );
     	_click($bo_pg_servicemaxSetup.btn_PMPlanTemplate);
-    	_wait(1000);
+    	_wait(10000);
     	_call(top.location.reload());
     };
 
@@ -114,6 +118,7 @@ var $bo_act_navigation = new function bo_act_navigation() {
     this.navigateToLocations = function(){
     	_click($bo_pg_home.btn_allTabs);
    	    _click($bo_pg_home.link_locations);
+   	 _setSelected(_select("hotlist_mode"),"Recently Created");
     };
     
     this.navigateToDevConsole = function(){
@@ -299,4 +304,18 @@ var $bo_act_navigation = new function bo_act_navigation() {
    	 _click($bo_pg_servicemaxSetup.btn_serviceFlowManager);
    	 _click($bo_pg_servicemaxSetup.btn_sfmSearch);	   	 
     };
+    
+    this.navigateToTaskTemplatePage = function(){
+//    	$bo_act_navigation.navigateToHome();
+    	_click(_link("ServiceMax Setup"));
+    	_click($bo_pg_servicemaxSetup.btn_installedBaseAndPM );
+    	_click($bo_pg_servicemaxSetup.btn_TaskTemplate);
+    	_wait(10000);
+    	_call(top.location.reload());
+    };
+    this.navigateTodepotAndStockingLocations = function() {
+    	 this.navigateToSvmxSetup();
+    	_click($bo_pg_servicemaxSetup.btn_reverseLogistics);
+    	_click($bo_pg_servicemaxSetup.btn_depotAndStockingLocations);
+       };
 };

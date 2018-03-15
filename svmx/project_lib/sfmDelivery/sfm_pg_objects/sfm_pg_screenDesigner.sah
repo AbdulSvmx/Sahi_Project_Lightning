@@ -1,7 +1,7 @@
 var $sfm_pg_screenDesigner = new function sfm_pg_screenDesigner(){
 	this.sel_createSFMTransaction= _f("main").s_dropdownlist("purposeCombo");
-	this.txt_targetObject= _f("main").s_textinput("textInput[1]");
-	this.lbl_workOrder= _f("main").s_label("Work Order[5]");
+	this.txt_targetObject= _f("main").s_textinput("textInput[1]").near(_f("main").s_label("...to create these records"));
+	this.lbl_workOrder= _f("main").s_label("/Work Order/").near(_f("main").s_label("Work Order Dependency"));
 	this.chk_workDetail= _f("main").s_checkbox("Work Detail (Work Order)");
 	this.add_field= _f("main").fieldrenderer("[object Object]");
 	this.txt_searchField= _f("main").s_textinput("searchText[4]");

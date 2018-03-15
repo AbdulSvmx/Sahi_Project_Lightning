@@ -153,13 +153,12 @@ var $bo_act_SFM = new function bo_act_SFM() {
 		_setSelected(_f("main").s_combobox("searchCombo[3]"), "PAG_CR_PM_FromLocatin");
 		_wait(6000,_isVisible($bo_pg_sfmTransactionAndDesigner.btn_finalQuickSave));
 		_click($bo_pg_sfmTransactionAndDesigner.btn_finalQuickSave);
-		
-		
+				
 	}
 		this.clnStandardSFM=function($sfmToBeCloned,$sfmName,$sfmTemplateSaveAsName){
 			_click($bo_pg_sfmTransactionAndDesigner.txt_standardSfmTransactionQuickFind);
 			_setValue($bo_pg_sfmTransactionAndDesigner.txt_standardSfmTransactionQuickFind,$sfmToBeCloned);
-			_click(_f("main").s_checkbox("chk").leftOf(_f("main").s_label($sfmToBeCloned), 10, 10))
+			_click(_f("main").s_checkbox("chk").leftOf(_f("main").s_label($sfmToBeCloned), 10, 10));
 			_click($bo_pg_sfmTransactionAndDesigner.btn_clone);	
 			_wait(60000, _isVisible($bo_pg_sfmTransactionAndDesigner.txt_name));
 			_setValue($bo_pg_sfmTransactionAndDesigner.txt_name, $sfmName);
@@ -329,27 +328,27 @@ var $bo_act_SFM = new function bo_act_SFM() {
 							this.addFieldToChildSection=function(){
 							_click(_f("main").s_datagroup("dataGroup[3]"));
 							_click(_f("main").s_textinput("searchText[4]"));
-								_setValue(_f("main").s_textinput("searchText[4]"),"Billable Qty");
+							_setValue(_f("main").s_textinput("searchText[4]"),"Billable Qty");
 							_doubleClick(_f("main").s_label("Billable Qty[1]"));
 
 							_click(_f("main").s_datagroup("dataGroup[3]"));
 							_click(_f("main").s_textinput("searchText[4]"));
-								_setValue(_f("main").s_textinput("searchText[4]"),"Activity Type");
+							_setValue(_f("main").s_textinput("searchText[4]"),"Activity Type");
 							_doubleClick(_f("main").s_label("Activity Type"));
 
 							_click(_f("main").s_datagroup("dataGroup[3]"));
 							_click(_f("main").s_textinput("searchText[4]"));
-								_setValue(_f("main").s_textinput("searchText[4]"),"Billable Line Price");
+							_setValue(_f("main").s_textinput("searchText[4]"),"Billable Line Price");
 							_doubleClick(_f("main").s_label("Billable Line Price[1]"));
 
 							_click(_f("main").s_datagroup("dataGroup[3]"));
 							_click(_f("main").s_textinput("searchText[4]"));
-								_setValue(_f("main").s_textinput("searchText[4]"),"Covered");
+							_setValue(_f("main").s_textinput("searchText[4]"),"Covered");
 							_doubleClick(_f("main").s_label("Covered %[1]"));							
 
 							_click(_f("main").s_datagroup("dataGroup[3]"));
 							_click(_f("main").s_textinput("searchText[4]"));
-								_setValue(_f("main").s_textinput("searchText[4]"),"Date Received");
+							_setValue(_f("main").s_textinput("searchText[4]"),"Date Received");
 							_doubleClick(_f("main").s_label("Date Received"));}
 						
 						this.qcExistingValueMap=function($mapName){
@@ -423,30 +422,33 @@ var $bo_act_SFM = new function bo_act_SFM() {
 		}
 								
 							}
-								this.selectOpenWOInQC=function(){
+								this.selectOpenWOInQC=function($qualificationCriteria){
 									_click(_f("main").tab("Qualifying Criteria and Field Mappings"))
-									_setSelected(_f("main").s_combobox("searchCombo"), "SVMXSTD: Open Work Orders");
+									_setSelected(_f("main").s_combobox("searchCombo"), $qualificationCriteria);
 								}
-									this.selectMappingINQC=function(){
+									this.selectMappingINQC=function($fldMap){
 									_click(_f("main").tab("Mapping(s)"));
-									_setSelected(_f("main").s_combobox("searchCombo[1]"), "SVMXSTD: Map Work Order to Checklist");
+									_setSelected(_f("main").s_combobox("searchCombo[1]"), $fldMap);
 									}
-										this.sourceObjUpdate=function(){
+										this.sourceObjUpdate=function($srchTxt,$srchValue){
 											_click(_f("main").tab("Source Object Update"));
 											_wait(3000);
 											_setStrictVisibilityCheck(true);
-											_click(_f("main").s_label("Work Order[2]"));
-											_click(_f("main").s_button("Add a row"));
-											_click(_f("main").s_togglebutton("I want to enter a specific value for this field[1]"));
+											_click(_f("main").s_label("Work Order[1]"));
+											_click(_f("main").s_button("Add a row[1]"));
 											_setStrictVisibilityCheck(false);
-											_click(_f("main").s_label("Click to add field"));
+											if(_isVisible(_f("main").s_label("Field updates required for Work Order")))
+											_setStrictVisibilityCheck(true);
+											_click(_f("main").s_togglebutton("/I want to enter a specific value for this field/"));											
+											_click(_f("main").s_label("Click to add field[2]"));
 											_click(_f("main").s_textinput("searchText[5]"))
-											_setValue(_f("main").s_textinput("searchText[5]"), "Priority");
+											_setValue(_f("main").s_textinput("searchText[5]"), $srchTxt);
 											_click(_f("main").s_button("Add Field"));
 											_doubleClick(_f("main").s_label("Priority"));
-											_click(_f("main").s_togglebutton("I want to enter a specific value for this field[1]"));
+											_click(_f("main").s_togglebutton("/I want to enter a specific value for this field/"));
 											_wait(2000);
-											_setSelected(_f("main").s_combobox("valuesCombo[2]"), "High")								
+											_setSelected(_f("main").s_combobox("valuesCombo[2]"), $srchValue);
+											_setStrictVisibilityCheck(false);						
 								}
 											this.addQuestion=function(){
 												_click(_f("main").tab("Form Designer"));

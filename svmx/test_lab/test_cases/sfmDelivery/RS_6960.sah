@@ -1,7 +1,8 @@
 var $rs_6960 = _testcase("RS-6960","Verify lookup form-fill functionality in Multi Add");
 $rs_6960.start();
 //Login to Servicemax Org
-$bo_act_login.login("https://test.salesforce.com/","sysadmin01@sfdautomation.com","maxplore2");
+//$bo_act_login.login("https://test.salesforce.com/","sysadmin01@sfdautomation.com","maxplore2");
+$bo_act_login.login($g_url,$sfmUsn,$sfmPwd);
 //Clone and add fields in Workdetail 
 var $SFMProcessName = $bo_act_common.generateRandomName("SFDProcess_Automation_RA");
 var $SFMPagelayouName = $bo_act_common.generateRandomName("Pagelayout_Automation_RA");
@@ -14,7 +15,7 @@ $bo_act_navigation.navigateToSfmWizard();
 _wait(3000);
 $sfm_act_createCustomWizard.chooseObject("Work Order");
 _wait(3000);
-$sfm_act_createCustomWizard.addManageWizSteps($SFMWizardName,"SFM",$SFMProcessName,"Sysadmin01 Group");
+$sfm_act_createCustomWizard.addManageWizSteps($SFMWizardName,"SFM",$SFMProcessName);
 _wait(3000);
 //Create a new Product
 $productCode="Prod001";

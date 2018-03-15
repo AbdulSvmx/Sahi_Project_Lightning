@@ -72,6 +72,7 @@ this.getPastDate = function($pastYear, $seperator){
 this.searchfunction = function($searchValue){
 _getRecentWindow();
 _setStrictVisibilityCheck(true);
+_wait(15000);
 _click(_span("/svmx-button/",_near(_div("svmx-column-inner",_in(_div("svmx-panel svmx-fit-item svmx-window-item svmx-panel-default"))))));
 _getRecentWindow();
 //_click(_textbox("/svmx-picklist/"));
@@ -119,8 +120,17 @@ this.endDateCalculationForIB = function ($startDateExpectedOn_IB, $durationOfCov
 	_logOutput($month);
 	var $day = $dateInstalled.getDate();
 	_logOutput($day);
+	if($day== 1 && ($month== 1 || 2 || 4 || 6 || 8 || 9 || 11 )){
+		var $endDateCalculationForIB =  ($month)+$seperator+("31")+$seperator+$year;
+		_logOutput($endDateCalculationForIB);
+	}
+	else if($day== 1 && ($month== 3 || 5 || 7 || 10 || 12)){
+		var $endDateCalculationForIB =  ($month)+$seperator+("30")+$seperator+$year;
+		_logOutput($endDateCalculationForIB);
+	}else{
 	var $endDateCalculationForIB =  ($month+1)+$seperator+($day-1)+$seperator+$year;
 	_logOutput($endDateCalculationForIB);
+	}
 	return $endDateCalculationForIB;
 	};
 

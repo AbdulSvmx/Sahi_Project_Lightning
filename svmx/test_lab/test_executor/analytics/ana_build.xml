@@ -32,7 +32,7 @@
 		<property name="threads" value="1"/>
 		<property name="showPeriodicSummary" value="true"/>
 		<property name="failedSuiteName" value="op_demo_failed_${browser}.suite"/>
-		<property name="failedSuite" value="svmx/test_lab/test_suites/optimax/${failedSuiteName}"/>
+		<property name="failedSuite" value="svmx/test_lab/test_suites/analyticsx/${failedSuiteName}"/>
 		<property name="jsCodeCoverage" value="false"/>
 	</target>
 
@@ -57,6 +57,10 @@
 			showPeriodicSummary="${showPeriodicSummary}"
 			threads="${threads}"
 			jsCodeCoverage="${jsCodeCoverage}">
+			<!-- Offline reports -->
+			<report type="junit" logdir="C://var//lib//jenkins//workspace//sahi_executions//logs//junit"/>	
+			<report type="html" logdir="C://var//lib//jenkins//workspace//sahi_executions//logs//html"/>
+			<report type="excel" logdir="C://var//lib//jenkins//workspace//sahi_executions//logs//excel"/>	
 		</sahi>
 		<antcall target="failsahichrome"/>
 	</target>

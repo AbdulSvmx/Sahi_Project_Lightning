@@ -22,17 +22,20 @@ var $bo_act_salesforcePageSetUp = new function bo_act_$bo_act_salesforcePageSetU
 		 _click(_link($className));
 		 _click($bo_pg_salesforcePageSetUp.btn_delete);
 	};
-	this.createUser = function(){
+	this.createUser = function($UserLicense,$profile){
 		var $lastName = $bo_act_common.generateRandomName("ln");
 		var $alias = $bo_act_common.generateRandomName("a");
 		var $email = $bo_act_common.generateRandomName("e")+"@test.com";
-		$bo_act_navigation.navigateToSetUpAndSearch("Users");
+		$bo_act_navigation.navigateToSetUpAndSearch("Manage Users");
+		_click(_link("/Add or edit users and set user quotas/"));
 		_click($bo_pg_salesforcePageSetUp.btn_newUser);
 		_setValue($bo_pg_salesforcePageSetUp.txt_lastName,$lastName);
 		_setValue($bo_pg_salesforcePageSetUp.txt_alias,$alias);
 		_setValue($bo_pg_salesforcePageSetUp.txt_email,$email);
 		_setValue($bo_pg_salesforcePageSetUp.txt_userName,$email);
 		_setValue($bo_pg_salesforcePageSetUp.txt_nickName,$lastName);
+		_setSelected(_select("user_license_id"),$UserLicense);
+		_setSelected(_select("Profile"),$profile);
 		_click($bo_pg_salesforcePageSetUp.btn_submitSave);
 		var $userName = _getText($bo_pg_salesforcePageSetUp.txt_Name);
 		return $userName;

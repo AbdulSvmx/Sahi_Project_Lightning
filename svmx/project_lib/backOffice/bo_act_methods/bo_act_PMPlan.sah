@@ -117,7 +117,7 @@ var $bo_act_PMPlan = new function bo_act_PMPlan() {
 		_click(_listItem($PMPTemplate));
 		_setValue($bo_pg_PMPlan.txt_startDateInput,$bo_act_common.currentDate("/"));
 		_setValue($bo_pg_PMPlan.txt_endDateInput,$bo_act_common.getfutureDate(1, "/"));
-		_assertExists(_div($IBName),_under(_span("Coverages")));
+		
 		
 	};
 	this.saveConditionBasedPMPlan = function(){

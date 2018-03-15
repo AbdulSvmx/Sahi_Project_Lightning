@@ -1,14 +1,14 @@
 var $rs_6345 = _testcase("RS_6345","Verify Error type on Child when simple expressions is configured - Source to Target Save");
 $rs_6345.start();
 var $sfmNameToBeCloned = "Create Usage Lines from Estimates";
-var $sfmName = "RS_6345_1151";
+var $sfmName = $bo_act_common.generateRandomName("RS_6345_");
 var $isCustom = false;
 var $sfmTemplate = "SVMXSTD: Create Usage from Estimates";
 var $sfmTemplateSaveAsName = $sfmName;
 var $containerName = ["Parts","Expenses","Travel"];
 var $fieldName=["Activity Type","Activity Type","Activity Type"];
 var $targetObject ="Work Detail (Work Order)";
-var $rulename ="RS_6345_1151";
+var $rulename =$sfmName;
 var $ruleDescription ="Activity Type should not be Cleanup";
 
 var $fieldArray = ["Activity Type"];
@@ -21,7 +21,7 @@ var $wizardName = "SFM Delivery Auto";
 var $wizardType = "SFM";
 var $wizardObject ="Work Order";
 var $domainName = "/visual.force.com/";
-var $woName ="WO-00000724";
+
 
 _setSpeed(100);
 var $sfmPwd = "maxplore2";
@@ -44,10 +44,8 @@ $sfm_act_wizards.addToWizard($wizardObject, $wizardName, $wizardType, $sfmName);
 _wait(30000,_isVisible($sfm_pg_sfmDesigner.lnk_home)); 
 _click($sfm_pg_sfmDesigner.lnk_home);  
 
-//launch the process for the WO given in the script
-_wait(3000);
-$sfm_act_common.globalSearch($woName);
-_click(_link($woName));
+//Create WO through UI for the validatiion
+$sfm_act_createCustomWizard.createBlankWo();
 _selectDomain($domainName);
 _click(_button($sfmName));
 _selectDomain();
@@ -65,6 +63,7 @@ _setValue($sfm_pg_sfmDesigner.txt_eeActivityType,"Cleanup");
 _click($sfm_pg_sfmDesigner.btn_eeUpdate);
 _wait(3000);
 
+/*
 //add line to Labor
 _click($sfm_pg_sfmDesigner.btn_deliveryLaborTab);
 _click($sfm_pg_sfmDesigner.btn_deliveryAddRowLabor);
@@ -73,6 +72,7 @@ _setValue($sfm_pg_sfmDesigner.txt_eeLineQty,"5");
 _setValue($sfm_pg_sfmDesigner.txt_eeActivityType,"Calibration");
 _click($sfm_pg_sfmDesigner.btn_eeUpdate);
 _wait(3000);
+
 
 //add line to Expenses
 _click($sfm_pg_sfmDesigner.btn_deliveryExpenseTab);
@@ -91,14 +91,15 @@ _setValue($sfm_pg_sfmDesigner.txt_eeActivityType,"Calibration");
 _click($sfm_pg_sfmDesigner.btn_eeUpdate);
 _wait(3000);
 
+*/
 //Validate that the DVR is triggering or not
 _click($sfm_pg_sfmDesigner.btn_deliverySave);
 
 	if(_assertExists(_div("Parts: "+$ruleDescription))){
 		_log("Pass ::: DVR Error for child line is working");
 		_click($sfm_pg_sfmDesigner.btn_deliveryPartsTab);
-		_click($sfm_pg_sfmDesigner.btn_deliveryAddRowParts);
-        _click($sfm_pg_sfmDesigner.btn_deliveryExtendedEdit);
+		//_click($sfm_pg_sfmDesigner.btn_deliveryAddRowParts);
+		_click($sfm_pg_sfmDesigner.btn_deliveryExtendedEdit);
         _setValue($sfm_pg_sfmDesigner.txt_eeActivityType,"Calibration");
 		_click($sfm_pg_sfmDesigner.btn_eeUpdate);
 		_wait(3000);	
@@ -107,8 +108,8 @@ _click($sfm_pg_sfmDesigner.btn_deliverySave);
 	}
 	_click($sfm_pg_sfmDesigner.btn_deliverySave);
 
-if(_exists($sfm_pg_sfmDesigner.txt_PriceAlert)){
-	_click(_span("Ok"));
+if(_exists($sfm_pg_sfmDesigner.txt_priceAlert)){
+	_click($sfm_pg_sfmDesigner.btn_priceAlertOk);
 	_wait(10000);
 }
 

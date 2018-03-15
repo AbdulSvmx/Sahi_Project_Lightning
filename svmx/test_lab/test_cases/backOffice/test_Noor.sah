@@ -1,12 +1,18 @@
 
 //author - Noor Salma Sharieff
 
-//$bo_act_login.login($g_url, $bac_un, $bac_pwd);
-var $slaterm = "sla101201814140";
-//$bo_act_PMPlan.createConditionBasedPMPlanFromLocation("loc41201811653", "CriteriaTemp");
-var $delete_Query = "Delete[SELECT NAME FROM SVMXC__Service_Level__c WHERE NAME = '"+$slaterm+"';";
-var $delete_data = $op_act_sForceApiCall.sForceQuery($bac_PRTun, $bac_PRTpwd, $delete_Query , "create");
+$bo_act_login.login($g_url, $bac_un, $bac_pwd);
+//for(var $i=0; $i<5;$i++){
+	//$bo_act_salesforcePageSetUp.createUser('Salesforce', 'System Administrator');
+//}
+
+$bo_act_navigation.navigateToSetUpAndSearch("Installed Packages");
+_click(_link("ServiceMax"));
+if(_getText(_cell(0,_rightOf(_cell("Namespace Prefix"))))!="SVMXDEV")
+var $script = "String StrSVMXProcessID = '"+$PMProcessId+"';String StrSFPMProcessID = [Select Id From SVMXC__ServiceMax_Processes__c where SVMXC__ProcessID__c =: StrSVMXProcessID AND SVMXC__Active__c = true].Id;SVMXC.PREV_Engine_Batch EngObj = new SVMXC.PREV_Engine_Batch();EngObj.setProcessIds.add(StrSFPMProcessID);ID Batch = database.executebatch(EngObj, 1);";
+else
+$script = "String StrSVMXProcessID = '"+$PMProcessId+"';String StrSFPMProcessID = [Select Id From SVMXDEV__ServiceMax_Processes__c where SVMXDEV__ProcessID__c =: StrSVMXProcessID AND SVMXDEV__Active__c = true].Id;SVMXDEV.PREV_Engine_Batch EngObj = new SVMXDEV.PREV_Engine_Batch();EngObj.setProcessIds.add(StrSFPMProcessID);ID Batch = database.executebatch(EngObj, 1);";
 
 
-
-
+$bo_act_login.loginToWorkBench($Workbenchurl, "Sandbox", $bac_un, $bac_pwd);
+$bo_act_login.runApexScriptinWB($script);

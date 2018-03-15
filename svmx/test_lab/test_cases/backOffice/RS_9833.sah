@@ -1,0 +1,24 @@
+var $rs_9833 = _testcase("RS_9833","Verify the search functionality using Quick Find on Template Designer for Smart Doc Type Process.");
+$rs_9833.start();
+$processName = "Service Quote Report";
+$searchString = "contact";
+$templateName = $bo_act_common.generateRandomName("Temp"); 
+$actual = "";
+$expected = "Template Saved";
+$bo_act_login.login($g_url,$bac_unDev,$bac_pwdDev);
+$bo_act_navigation.navigateToSfmTransactionDesigner();
+$sfm_act_SFM.selectSFM($processName,false);
+_click($bo_pg_sfmTransactionAndDesigner.btn_clone);
+_click(_f("main").tab("Template Designer"));
+_setValue(_textbox("expressionFilter"),$searchString);
+var $searchedItems= _collectAttributes("_link", "/jstree-search/","sahiText",_in(_listItem("jstree-open")));
+for(var $i=0; $i<$searchedItems.length; $i++){
+_assertTrue($searchedItems[$i].toLowerCase().indexOf($searchString)!=-1);
+}
+_setValue(_f("main").s_textinput("Save template as"),$templateName);
+_setValue(_f("main").s_textinput("Input ID Here[4]"),$templateName);
+_click(_f("main").s_button("Save[4]"));
+_wait(3000);
+$actual =  _getValue(_f("main").label("Template saved"));
+_assertTrue($actual,$expected);
+$rs_9833.end();

@@ -1,0 +1,16 @@
+var $rs_9649 = _testcase("RS_9649","Validation of transferring -ve stock quantity  (non serialized product).");
+$rs_9649.start();
+var $productName = $bo_act_common.generateRandomName("pro");
+$bo_act_login.login($g_url,$bac_unDev,$bac_pwdDev);
+$src = $bo_act_locations.addLocation("Src","Standard Location", "Acc1232018101339", "Esteem Mall", "India", "560028");
+$dest = $bo_act_locations.addLocation("Dest","Standard Location", "Acc1232018101339", "Sigma Mall", "India", "560068");
+$bo_act_navigation.navigateToProductsPage();
+_click($bo_pg_products.btn_new);
+_setValue($bo_pg_products.txt_productName, $productName);
+_check($bo_pg_products.chk_active);
+_check($bo_pg_products.chk_stockable);
+_check($bo_pg_products.chk_serializedTracking);
+_click($bo_pg_products.btn_save);
+$bo_act_locations.deleteLocation($src);
+$bo_act_locations.deleteLocation($dest);
+$rs_9649.end();
