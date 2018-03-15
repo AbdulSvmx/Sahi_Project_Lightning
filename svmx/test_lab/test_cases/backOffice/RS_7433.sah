@@ -5,7 +5,7 @@ $templateName = $bo_act_common.generateRandomName("temp");
 $taskTitle = $bo_act_common.generateRandomName("task");
 $pmPlanName = $bo_act_common.generateRandomName("pmPlan");
 var $PMTemplateName = $bo_act_common.generateRandomName("PMT");
-$bo_act_login.login($g_url,$bac_unBase,"welcome-02");
+$bo_act_login.login($g_url,$bac_un,$bac_pwd);
 $bo_act_navigation.navigateToTaskTemplatePage();
 // Save Task Template
 $bo_act_taskTemplate.createTaskTemplate($templateName);

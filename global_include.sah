@@ -5,24 +5,22 @@ _setSpeed(100);
 var $orgtype = "Base";
 
 // Add All Global Variables here
+var $url = "https://test.salesforce.com";
 var $g_url = "https://test.salesforce.com/";
 var $g_un = "bhupen@back17.com";// "bhupendra.s@dev.tool2.com";
 var $g_pwd = "smax@123";
 //var $bac_un = "automationDEV@Test4Part1.com";  //pointing to DEV
 //var $bac_pwd = "welcome-02";
-var $bac_un = "meghana.rao@servicemax.com";  //pointing to DEV
-var $bac_pwd = "cloud_102";
-var $bac_unDev = "automationDEV@Test4Part1.com";
-var $bac_pwdDev = "welcome-01";
-var $bac_unBase = "orgsadmin@svmx-test4.org.test4part2";
-var $bac_pwdBase = "servicemax22";
-var $url = "https://test.salesforce.com";
+//var $bac_un = "meghana.rao@servicemax.com"; 
+//var $bac_pwd = "cloud_102";
+//var $bac_un = "bac_automationdev@ge.com"; 
+//var $bac_pwd = "welcome-01";
+var $bac_un = "orgsadmin@svmx-test4.org.test4part2";  //pointing to Base
+var $bac_pwd = "servicemax22";
 var $sfmUsn = "sysadmin01@sfdautomation.com";
 var $sfmPwd = "maxplore2";
 var $bac_PRTun = "bhupendra.auto@upgrade.com"; //Most Used Customer
 var $bac_PRTpwd = "servicemax@123";
-var $bac_unDev = "automationDEV@Test4Part1.com";
-var $bac_pwdDev = "welcome-02";
 
 // Checklist Global Variables
 var $un_checklist = "meghana.rao@servicemax.com"; // Pointing to Automation Dummy Org
