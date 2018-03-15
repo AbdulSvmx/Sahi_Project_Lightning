@@ -13,7 +13,7 @@ var $bo_act_serviceMaintenanceContracts = new function bo_act_serviceMaintenance
 		_setValue($bo_pg_serviceMaintenanceContracts.txt_sconName, $sconName);
 		_setValue($bo_pg_serviceMaintenanceContracts.txt_accountName, $accName);
 		_setValue($bo_pg_serviceMaintenanceContracts.txt_slaTermName, $slaTermName);
-		//_click($bo_pg_serviceMaintenanceContracts.chk_activeScon);	 //Uncomment to create Active Service Contract
+		_click($bo_pg_serviceMaintenanceContracts.chk_activeScon);	 //Uncomment to create Active Service Contract
 		_setValue($bo_pg_serviceMaintenanceContracts.txt_startDate, $bo_act_common.getPastDate($pastYear,"/"));
 		_setValue($bo_pg_serviceMaintenanceContracts.txt_endDate, $bo_act_common.getfutureDate($futureYear, "/"));
 		_click($bo_pg_serviceMaintenanceContracts.btn_save);

@@ -108,14 +108,35 @@ this.re_openChecklistTypeSFM = function($checklistName, $isCustom)
 		_click($bo_pg_formDesigner.tab_clickFormDesigner);
 		_click($bo_pg_formDesigner.btn_addNewQuestion);
 		_click($bo_pg_formDesigner.btn_selectQuestionDataType);
+		/*
+		 * To  create a particular Tag under the given Question
+		 */
 		_setValue($bo_pg_formDesigner.lbl_questionText, $questionText);
 		_setValue($bo_pg_formDesigner.txt_data_entry,$tag1);
+		_keyDown(_f("main").uitextfield(2),[13,13]);
+		_keyUp(_f("main").uitextfield(2),[13.13]);
 		_wait(300);
 		_click($bo_pg_formDesigner.btn_addQuestionToLibraryAndForm);
 		_click($bo_pg_formDesigner.btn_closeQuestionPopUp);
 		_click($bo_pg_formDesigner.btn_quickSave);		
 		_wait(10000);
 		_click($bo_pg_formDesigner.btn_save_close);
+		
+	};
+	
+	// To verify if a Given question is present under the particular Tag
+	this.verifyquestion_undertags = function($questionText,$tagname)
+	{
+		_click($bo_pg_formDesigner.tab_clickFormDesigner);
+		_click($bo_pg_formDesigner.btn_delete1);
+		_click($bo_pg_formDesigner.btn_groupbytag);
+		// To click under the Untagged list of questions
+		_focusWindow();
+		_lockWindow();
+		_clickNative(_xy(_f("main").questionlisttreeitemrendererm($tagname),10,10));
+		_unlockWindow();
+		_wait(10000);
+		_assertEqual(true, _isVisible(_f("main").s_label($questionText)));
 		
 	};
 	

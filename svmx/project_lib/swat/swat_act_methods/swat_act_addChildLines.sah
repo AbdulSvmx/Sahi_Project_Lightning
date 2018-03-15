@@ -12,14 +12,17 @@ this.createQuoteFromWOChildLines = function($productName){
 	_click(_div("sfm-button-1059"));
 
 	//Add a Parts Line
-	_click(_span("sfm-button-1103-btnIconEl"));
-	_click(_image("gif[5]"));
+	_click(_span("svmx-btn-icon svmx-sfmd-add-line-icon"));//_click(_span("sfm-button-1103-btnIconEl"));
+	_click(_image("gif[4]"));
+	_click(_span("svmx-btn-icon svmx_lookup_icon[3]"));
 
-	_click(_span("svmx-button-1208-btnIconEl"));
+	_setValue(((_textbox("/sfm-text/",_near(_span("/svmx-sfmd-search-icon/"))))),$productName);
 	_click(_span("svmx-btn-icon svmx-sfmd-search-icon "));
+	
+	_click(_div($productName));
+	_click(_span("Select"));
 
-	$bo_act_common.searchfunction($productName);
-	_setValue(_textbox("Qty:"), "2");
+	_setValue(_textbox("Qty:"), "6");
 	_setValue(_textbox("svmx-form-field svmx-form-required-field svmx-form-text svmx-form-invalid-field"), "4000");
 	_click(_span("Update"));
 
@@ -33,8 +36,8 @@ this.createQuoteFromWOChildLines = function($productName){
 
 	//Add a Expense Line
 	_click(_span("Expense"));
-	_click(_span("sfm-button-1172-btnIconEl"));
-	_click(_image("svmx-action-col-icon svmx-action-col-0   svmx-sfmd-edit-icon[2]"));
+	_click(_span("svmx-btn-icon svmx-sfmd-add-line-icon[2]"));//_click(_span("sfm-button-1172-btnIconEl"));
+	_click(_image("gif[8]"));//_click(_image("svmx-action-col-icon svmx-action-col-0   svmx-sfmd-edit-icon[2]"));
 	_setValue(_textbox("Qty:"), "4");
 	_setValue(_textbox("svmx-form-field svmx-form-required-field svmx-form-text svmx-form-invalid-field"), "8500");
 	_click(_span("Update"));
