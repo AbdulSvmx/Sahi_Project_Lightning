@@ -1,2 +1,0 @@
-_setSelected(_f("SFMExpressionBuilderSWF").s_combobox("sourceCombo"), "Account");
-_setSelected(_f("SFMExpressionBuilderSWF").s_combobox("targetCombo"), "Activity Master");

@@ -1,2 +1,0 @@
-_setSelected(_f("SFMExpressionBuilderSWF").s_combobox("Select a source object"), "Activity Master");
-_setSelected(_f("SFMExpressionBuilderSWF").s_combobox("searchCombo"), "Select expression");

@@ -1,4 +1,0 @@
-_click(_span("sfm-button-1255-btnIconEl"));
-_click(_div("Information"));
-_click(_span("Ok"));
-_click(_div("_svmx_cmp_load_mask_2"));
