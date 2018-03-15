@@ -9,7 +9,7 @@ var $SFMPagelayouName = $bo_act_common.generateRandomName("Pagelayout_Automation
 var $SFMWizardName = $bo_act_common.generateRandomName("WOWizard_Automation_RA");
 var $mappingName = $bo_act_common.generateRandomName("Mapping");
 $sfm_act_configureSFMmapping.navigateToSfmMappings($mappingName);
-$sfm_act_cloneSfmAddNewFields.onlycloneSFM("Manage Work Order Lines - Usage",$SFMProcessName,false,$SFMPagelayouName,"SVMXSTD: Manage WO Usage Lines",$mappingName);
+$sfm_act_cloneSfmAddNewFields.cloneAndAddchildFieldsSFM("Manage Work Order Lines - Usage",$SFMProcessName,false,$SFMPagelayouName,"SVMXSTD: Manage WO Usage Lines",$mappingName);
 //Create New SFM Wizard
 $bo_act_navigation.navigateToSfmWizard();
 _wait(3000);

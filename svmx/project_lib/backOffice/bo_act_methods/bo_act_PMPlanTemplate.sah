@@ -148,9 +148,8 @@ this.saveConditionBasedPM = function(){
 	//_assertExist(_heading1("PM Plan Template:"));
 };
 
-this.createCriteriaBasedPMTemplate = function($productName,$workOrderPurpose)
+this.createCriteriaBasedPMTemplate = function($PMTemplateName,$productName)
 	{
-		var $PMTemplateName = $bo_act_common.generateRandomName("PMT");
 		$bo_act_navigation.navigateToPMPlanTemplatePage();
 		_wait(60000,_isVisible(_submit("Create Condition Based PM Plan Template")));
 		_click(_submit("Create Condition Based PM Plan Template"));
@@ -179,6 +178,17 @@ this.createCriteriaBasedPMTemplate = function($productName,$workOrderPurpose)
 		_click(_listItem($operator));
 		
 		_click(_div("svmx-grid-cell-inner [4]"));
+		_setValue(_textbox(0,_under(_div("Value"))),$value);
+	};
+	this.addRow = function($attribute,$operator,$value){
+		_click(_span("+ Add row"));
+		_click(_div("/svmx-grid-cell-inner/",_under(_div("Attribute"))));
+		_click(_div("/svmx-trigger-index/",_under(_div("Attribute"))));
+		_click(_div($attribute));
+		_click(_div("/svmx-grid-cell-inner/",_under(_div("Operator"))));
+		_click(_div("/svmx-trigger-index/",_under(_div("Operator"))));
+		_click(_listItem($operator));
+		_doubleClick(_div("/svmx-grid-cell-inner/",_under(_div("Value"))));
 		_setValue(_textbox(0,_under(_div("Value"))),$value);
 	};
 
