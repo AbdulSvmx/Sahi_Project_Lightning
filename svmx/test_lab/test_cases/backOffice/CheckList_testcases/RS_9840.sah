@@ -14,7 +14,7 @@ _wait(1000);
 //To verify the Boundary value of HELP URL text
 
 
-$number1 = Math.floor(Math.random() * 10);
+$number1 = Math.floor(Math.random() * 3.5);
 var $transactioname = "A RS_9840 Process 1"+$number1+"";
 $bo_act_checklistdesigner.newChecklistTypeSFM($transactioname,"to generate a Checklist/Survey type of Process", "Work Order");
 

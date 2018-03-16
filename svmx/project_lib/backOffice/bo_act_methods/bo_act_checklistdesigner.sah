@@ -122,11 +122,11 @@ this.re_openChecklistTypeSFM = function($checklistName, $isCustom)
 		else
 			
 		{
-			setValue($bo_pg_formDesigner.txt_data_entry,$tag1);
-			_keyDown(_f("main").uitextfield(2),[13,13]);
-			_wait(30000);
-			_keyUp(_f("main").uitextfield(2),[13.13]);
-			_wait(300);
+			_setValue($bo_pg_formDesigner.txt_data_entry,$tag1);
+			_typeKeyCodeNative(java.awt.event.KeyEvent.VK_SPACE);
+			_focusWindow();
+			_typeKeyCodeNative(java.awt.event.KeyEvent.VK_SPACE);
+			_click($bo_pg_formDesigner.tagbutton);
 			
 		}
 		_click($bo_pg_formDesigner.btn_addQuestionToLibraryAndForm);
