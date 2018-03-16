@@ -129,11 +129,6 @@ this.re_openChecklistTypeSFM = function($checklistName, $isCustom)
 			_wait(300);
 			
 		}
-		
-		_setValue($bo_pg_formDesigner.txt_data_entry,$tag1);
-		_keyDown(_f("main").uitextfield(2),[13,13]);
-		_keyUp(_f("main").uitextfield(2),[13.13]);
-		_wait(300);
 		_click($bo_pg_formDesigner.btn_addQuestionToLibraryAndForm);
 		_click($bo_pg_formDesigner.btn_closeQuestionPopUp);
 		_click($bo_pg_formDesigner.btn_quickSave);		
