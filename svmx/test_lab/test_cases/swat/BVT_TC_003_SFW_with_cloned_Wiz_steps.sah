@@ -137,14 +137,12 @@ $workOrderNo = $swat_act_workOrders.createWorkOrder($caseNumber, $accountName, $
 $bo_act_interactiveEntitlement_WO.performInteractiveEntitlementWO_UsingScon($workOrderNo, $serviceContractName);
 var $actual_EntitlementType = _getText(_div(0,_rightOf(_cell("/Entitlement Type/"))));
 var $ServiceContract_actual = _getText(_link(0,_rightOf(_cell("Service Contract"))));
-_assertEqual($actual_EntitlementType,"INTERACTIVE","Actual and expected Entitlement Type are not same");
-_assertEqual($ServiceContract_actual,$serviceContractName,"Actual and expected Service Conract are not same");
-
-
+_assertEqual($actual_EntitlementType,"INTERACTIVE","Actual and expected Entitlement Type are same");
+_assertEqual($ServiceContract_actual,$serviceContractName,"Actual and expected Service Conract are same");
 _wait(3000);
 //$sfm_act_common.globalSearch($workOrderNo);
-$sfm_act_common.globalSearch($workOrderNo);
-_click(_link($workOrderNo));
+//$sfm_act_common.globalSearch($workOrderNo);
+//_click(_link($workOrderNo));
 
 
 _selectDomain("/svmx/"); 
@@ -159,6 +157,7 @@ _wait(10000);
 _selectDomain();
 
 $swat_act_addChildLines.createQuoteFromWOChildLines($productName);
+
 
 
 //Add Parts Line to Above invoked TDM016 SFM

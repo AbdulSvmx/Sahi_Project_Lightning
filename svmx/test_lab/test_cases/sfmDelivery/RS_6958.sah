@@ -1,5 +1,5 @@
-var $rs_6960 = _testcase("RS-6960","Verify lookup form-fill functionality in Multi Add");
-$rs_6960.start();
+var $rs_6958 = _testcase("RS-6958","Verify form fill functionality in child lines and in extended edit");
+$rs_6958.start();
 //Login to Servicemax Org
 //$bo_act_login.login("https://test.salesforce.com/","sysadmin01@sfdautomation.com","maxplore2");
 $bo_act_login.login($g_url,$sfmUsn,$sfmPwd);
@@ -9,7 +9,7 @@ var $SFMPagelayouName = $bo_act_common.generateRandomName("Pagelayout_Automation
 var $SFMWizardName = $bo_act_common.generateRandomName("WOWizard_Automation_RA");
 var $mappingName = $bo_act_common.generateRandomName("Mapping");
 $sfm_act_configureSFMmapping.navigateToSfmMappings($mappingName);
-$sfm_act_cloneSfmAddNewFields.onlycloneSFM("Manage Work Order Lines - Usage",$SFMProcessName,false,$SFMPagelayouName,"SVMXSTD: Manage WO Usage Lines",$mappingName);
+$sfm_act_cloneSfmAddNewFields.cloneAndAddchildFieldsSFM("Manage Work Order Lines - Usage",$SFMProcessName,false,$SFMPagelayouName,"SVMXSTD: Manage WO Usage Lines",$mappingName);
 //Create New SFM Wizard
 $bo_act_navigation.navigateToSfmWizard();
 _wait(3000);
@@ -33,6 +33,8 @@ $sfm_act_createCustomWizard.clickWizardBtn($SFMProcessName);
 //Select the created Product in workdetail
 _selectDomain();
 $sfm_act_verifySFDFormfill.verifyExtendedEditFormfill($prodName);
+var $workDes= _getText(_textarea(0,_rightOf(_label("Work Description:"))));
+var $billableprice=_getText(_textbox(0,_rightOf(_label("Billable Line Price:"))));
 if($workDes==$productDesc && $billableprice==$productCost[0])
 	 
 {
@@ -62,4 +64,4 @@ else{
 _log("Failed");
 }
 
-$rs_6960.end();
+$rs_6958.end();

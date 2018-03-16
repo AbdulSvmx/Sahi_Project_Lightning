@@ -111,11 +111,24 @@ this.re_openChecklistTypeSFM = function($checklistName, $isCustom)
 		/*
 		 * To  create a particular Tag under the given Question
 		 */
+		
 		_setValue($bo_pg_formDesigner.lbl_questionText, $questionText);
-		_setValue($bo_pg_formDesigner.txt_data_entry,$tag1);
-		_keyDown(_f("main").uitextfield(2),[13,13]);
-		_keyUp(_f("main").uitextfield(2),[13.13]);
-		_wait(300);
+		if ($tag1 == "")
+		{
+			_setValue($bo_pg_formDesigner.txt_data_entry,$tag1);
+			
+		}
+		
+		else
+			
+		{
+			setValue($bo_pg_formDesigner.txt_data_entry,$tag1);
+			_keyDown(_f("main").uitextfield(2),[13,13]);
+			_wait(30000);
+			_keyUp(_f("main").uitextfield(2),[13.13]);
+			_wait(300);
+			
+		}
 		_click($bo_pg_formDesigner.btn_addQuestionToLibraryAndForm);
 		_click($bo_pg_formDesigner.btn_closeQuestionPopUp);
 		_click($bo_pg_formDesigner.btn_quickSave);		
