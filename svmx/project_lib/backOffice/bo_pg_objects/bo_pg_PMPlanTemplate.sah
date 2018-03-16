@@ -26,7 +26,8 @@ var $bo_pg_PMPlanTemplate = new function bo_pg_pmPlanTemplate(){
 	
 	this.txt_templateName = _textbox("templateName");
 	this.txt_product = _textbox("product");
-	this.img_filterIcon = _image("/svmx-filter-icon/");
+//	this.img_filterIcon = _image("/svmx-filter-icon/");
+	this.img_filterIcon = _click(_image("gif"));
 	this.link_addRow = _span("addRowButton-btnInnerEl");
 	this.txt_attributebox = _div("/svmx-grid-cell-inner/",_under(_div("Attribute[1]")));
 	this.txt_attribute = _div("/svmx-trigger-index/",_under(_div("Attribute[1]")));
