@@ -28,16 +28,10 @@ var $pwd_checklist = $bac_pwd//"cloud_102";
 var $url_checklist ="https://test.salesforce.com";
 
 //SFMD Global Variables
-//var $sfmUsn= "svmx-sfdtest@svmx-sfdtest.org.sfdtest1";
+//var $sfmUsn= "svmx-sfdtest@svmx-sfdtest.org.sfdtest1"; //base
 //var $sfmPwd = "servicemax1";
-var $sfmUsn = "sysadmin01@sfdautomation.com";
+var $sfmUsn = "sysadmin01@sfdautomation.com"; // base 
 var $sfmPwd = "maxplore2";
-
-//SFMD Dev Org
-//var $sfmDevUsn = "sysadmin01@sfdautomation.com";
-//var $sfmDevPwd = "maxplore2";
-var $sfmDevUsn = "sysadmin01@sfdautomation.com";
-var $sfmDevPwd = "maxplore2";
 
 //DC Global Variables
 var $dc_org="Base";
