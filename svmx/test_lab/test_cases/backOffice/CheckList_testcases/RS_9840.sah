@@ -19,7 +19,7 @@ var $transactioname = "A RS_9840 Process 1"+$number1+"";
 $bo_act_checklistdesigner.newChecklistTypeSFM($transactioname,"to generate a Checklist/Survey type of Process", "Work Order");
 
 var $questiontext = "A RS_9840 Question "+$number1+"";
-$bo_act_checklistdesigner.addQuestionToChecklist1($questiontext, "");
+$bo_act_checklistdesigner.addQuestionToChecklist1($questiontext, "AutomationTag");
 $bo_act_checklistdesigner.re_openChecklistTypeSFM($transactioname, true);
 $bo_act_checklistdesigner.verifyquestion_undertags($questiontext, "Untagged");
 _wait(10000);
