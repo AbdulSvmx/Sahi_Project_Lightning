@@ -24,12 +24,14 @@ $bo_act_checklistdesigner.create_newquestion_tag_in_designer("RS_9837 with TAG Q
 
 
 // To delete the Question from the Checklist Library
-$bo_act_questionlibrary.deletequestionlibrary("A RS_9837 Process 1"+$number1+"");
+$bo_act_questionlibrary.deletequestionlibrary("RS_9837 with TAG Question1"+$number1+"");
+$bo_act_questionlibrary.deletequestionlibrary("RS_9837 with TAG Question2"+$number1+"");
 
 _call(top.location.reload());
 // Re open the Checklist and verify the Questions . They must not be Present
 
 $bo_act_checklistdesigner.re_openChecklistTypeSFM("A RS_9837 Process 1"+$number1+"", true);
 
-$bo_act_checklistdesigner.verifyquestionnotpresent("A RS_9837 Process 1"+$number1+"","RS_9837TAG");
+$bo_act_checklistdesigner.verifyquestionnotpresent("RS_9837 with TAG Question1"+$number1+"","RS_9837TAG");
+
 $RS_9837.end();
