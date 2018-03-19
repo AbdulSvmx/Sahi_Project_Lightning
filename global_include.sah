@@ -1,5 +1,5 @@
 _windowAction("resize",1920,1080);
-_setSpeed(100);
+_setSpeed(400);
 
 //Flag to decide whether Dev or Base
 var $orgtype = "Base";
