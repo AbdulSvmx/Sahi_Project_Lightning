@@ -6,7 +6,7 @@
  */
 var $RS_9838 = _testcase("RS_9838", "To create a new Checklist SFM Designer");
 $RS_9838.start();
-//$bo_act_login.login($url_checklist, $un_checklist, $pwd_checklist);
+$bo_act_login.login($url_checklist, $un_checklist, $pwd_checklist);
 
 $bo_act_navigation.navigateToSfmTransactionDesigner();
 _wait(60000, _isVisible($bo_pg_sfmTransactionAndDesigner.btn_newSFM));
