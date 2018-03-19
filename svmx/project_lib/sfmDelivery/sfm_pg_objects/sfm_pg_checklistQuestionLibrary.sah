@@ -43,6 +43,7 @@ var $sfm_pg_checklistQuestionLibrary = new function sfm_pg_checklistQuestionLibr
 	this.txt_deleteSucessMessage=_div("Record(s) deleted successfully");
 	this.txt_confirmDelete=_div("Confirm Delete");
 	this.txt_successHeaderMsg=_div("Success");
+	this.btn_yes = _span("Yes");
 	// Owner Meghana Rao
 	this.btn_checklistdefaultbutton1 = _button(3);
 	this.btn_checklistdefaultbutton2 = _button(4);

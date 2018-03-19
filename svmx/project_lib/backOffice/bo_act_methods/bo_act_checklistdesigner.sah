@@ -63,6 +63,24 @@ var $bo_act_checklistdesigner = new function bo_act_checklistdesigner() {
 		_assertEqual(true,_isVisible(_f("main").s_label($question)));
 	
 	};
+	
+	this.verifyquestionnotpresent = function($question, $tagname)
+	{
+
+		_click($bo_pg_formDesigner.tab_clickFormDesigner);
+		_click($bo_pg_formDesigner.btn_groupbytag);
+		_setValue($sfm_pg_checklistTransaction.txt_formDesignerSearch, $tagname);
+		_focusWindow();
+		_lockWindow();
+		_clickNative(_xy(_f("main").questionlisttreeitemrendererm($tagname),10, 10));
+		_unlockWindow();
+		_wait(10000);
+		_click(_f("main").s_label($question));
+		_assertEqual(false,_isVisible(_f("main").s_label($question)));
+		
+		
+	};
+	
 
 	// This method is to verify the questions on the UI and then add them to the FORM
 	this.verifythechanges_addquestion_toform = function($question,$tagname) {

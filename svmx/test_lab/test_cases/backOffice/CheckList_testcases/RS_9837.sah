@@ -1,0 +1,35 @@
+// Author Meghana Rao P
+/*
+ * Create Questions with tags and delete them and verify the UI.
+ */
+var $RS_9837 = _testcase("RS_9837", "To create a new Checklist SFM Designer");
+$RS_9837.start();
+
+
+$bo_act_login.login($url_checklist, $un_checklist, $pwd_checklist);
+$number1 = Math.floor(Math.random() * 10);
+$bo_act_navigation.navigateToSvmxSetup();
+// To create a Checkbox Question with default checklist number 1
+
+$bo_act_navigation.navigateToSfmTransactionDesigner();
+_wait(60000, _isVisible($bo_pg_sfmTransactionAndDesigner.btn_newSFM));
+_wait(1000);
+
+// To create Checklist Process 1
+$bo_act_checklistdesigner.newChecklistTypeSFM("A RS_9837 Process 1"+$number1+"","to generate a Checklist/Survey type of Process", "Work Order");
+
+$bo_act_checklistdesigner.create_newquestion_tag_in_designer("RS_9837 with TAG Question1"+$number1+"", "RS_9837TAG");
+
+$bo_act_checklistdesigner.create_newquestion_tag_in_designer("RS_9837 with TAG Question2"+$number1+"", "RS_9837TAG");
+
+
+// To delete the Question from the Checklist Library
+$bo_act_questionlibrary.deletequestionlibrary("A RS_9837 Process 1"+$number1+"");
+
+_call(top.location.reload());
+// Re open the Checklist and verify the Questions . They must not be Present
+
+$bo_act_checklistdesigner.re_openChecklistTypeSFM("A RS_9837 Process 1"+$number1+"", true);
+
+$bo_act_checklistdesigner.verifyquestionnotpresent("A RS_9837 Process 1"+$number1+"","RS_9837TAG");
+$RS_9837.end();
