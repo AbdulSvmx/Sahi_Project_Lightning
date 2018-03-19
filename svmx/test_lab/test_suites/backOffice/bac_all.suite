@@ -1,3 +1,4 @@
+../../../test_lab/test_cases/backOffice/UserProfileEdit.sah
 ../../../test_lab/test_suites/backOffice/backOffice_GetPriceTestCases.suite
 ../../../test_lab/test_suites/backOffice/backOffice_EntitlementTestCases.suite
 ../../../test_lab/test_suites/backOffice/backOffice_TimeBasedPMPlan.suite

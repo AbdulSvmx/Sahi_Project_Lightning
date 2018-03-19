@@ -93,7 +93,9 @@ var $bo_act_questionlibrary = new function bo_act_questionlibrary() {
 
 	this.deletequestionlibrary = function($questionname)
 	
+	
 	{
+		_click($bo_pg_formDesigner.btn_gobacktoSetupHome);
 		_click($bo_pg_servicemaxSetup.btn_serviceFlowManager);
 		_click($bo_pg_servicemaxSetup.btn_checklistQuestionLibrary);
 		_wait(2000);
