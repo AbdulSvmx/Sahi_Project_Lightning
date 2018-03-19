@@ -1,20 +1,15 @@
 
 // Author Meghana Rao P
 /*
- * This test-case verifies the new Attachment Question , HELP URL Field Limitation
- * Alphanumeric and special characters in Question text
+ * To create new questions under the same tag and add them to the Form Designer
  */
-var $RS_9838 = _testcase("RS_9838", "To create a new Checklist SFM Designer");
+var $RS_9838 = _testcase("RS_9838", "To create new questions under the same tag and add them to the Form Designer");
 $RS_9838.start();
 $bo_act_login.login($url_checklist, $un_checklist, $pwd_checklist);
 
 $bo_act_navigation.navigateToSfmTransactionDesigner();
 _wait(60000, _isVisible($bo_pg_sfmTransactionAndDesigner.btn_newSFM));
 _wait(1000);
-
-// To verify the new Question type Attachment
-//To verify the Boundary value of HELP URL text
-
 
 
 $number1 = Math.random() * 3.5;
