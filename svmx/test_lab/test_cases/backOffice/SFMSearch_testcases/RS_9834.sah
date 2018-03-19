@@ -1,0 +1,27 @@
+
+// Author Meghana Rao P
+/*
+ * To verify if the questions are allowed to be deleted from the Form designer
+ */
+var $RS_9834 = _testcase("RS_9834", "To verify if the questions are allowed to be deleted from the Form Designer");
+$RS_9834.start();
+$bo_act_login.login($url_checklist, $un_checklist, $pwd_checklist);
+
+$bo_act_navigation.navigateToSfmTransactionDesigner();
+_wait(60000, _isVisible($bo_pg_sfmTransactionAndDesigner.btn_newSFM));
+_wait(1000);
+
+// To verify the new Question type Attachment
+//To verify the Boundary value of HELP URL text
+
+
+
+$number1 = Math.random() * 3.5;
+
+$bo_act_checklistdesigner.newChecklistTypeSFM("A RS_9834 Process 1"+$number1+"","to generate a Checklist/Survey type of Process", "Work Order");
+
+$bo_act_checklistdesigner.create_newquestion_tag_in_designer("RS_9834 with TAG Question1"+$number1+"", "");
+
+$bo_act_checklistdesigner.create_newquestion_tag_in_designer("RS_9834 with TAG Question2"+$number1+"", "RS_9834TAG");
+
+
