@@ -29,7 +29,8 @@ $bo_act_questionlibrary.deletequestionlibrary("RS_9837 with TAG Question2"+$numb
 
 _call(top.location.reload());
 // Re open the Checklist and verify the Questions . They must not be Present
-
+$bo_act_navigation.navigateToSvmxSetup();
+$bo_act_navigation.navigateToSfmTransactionDesigner();
 $bo_act_checklistdesigner.re_openChecklistTypeSFM("A RS_9837 Process 1"+$number1+"", true);
 
 $bo_act_checklistdesigner.verifyquestionnotpresent("RS_9837 with TAG Question1"+$number1+"","RS_9837TAG");
