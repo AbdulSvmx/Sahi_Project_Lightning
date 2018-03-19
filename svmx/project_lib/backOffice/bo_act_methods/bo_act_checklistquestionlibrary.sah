@@ -95,7 +95,7 @@ var $bo_act_questionlibrary = new function bo_act_questionlibrary() {
 	
 	
 	{
-		_click($bo_pg_formDesigner.btn_gobacktoSetupHome);
+		$bo_act_navigation.navigateToSvmxSetup();
 		_click($bo_pg_servicemaxSetup.btn_serviceFlowManager);
 		_click($bo_pg_servicemaxSetup.btn_checklistQuestionLibrary);
 		_wait(2000);
