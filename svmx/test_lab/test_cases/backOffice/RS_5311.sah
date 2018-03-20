@@ -3,7 +3,7 @@
 
 var $RS_5311 = _testcase("$RS_5311","SCON - Parts - when Parts pricing with discount is defined for Products");
 $RS_5311.start();
-_setSpeed(100);
+_setSpeed($g_stepSpeed);
 
 /**
 * Login to the Sandbox Org

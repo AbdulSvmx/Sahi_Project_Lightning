@@ -2,7 +2,7 @@
 
 var $swat_createcon = _testcase("swat_createcon","create contacts");
 $swat_createcon.start();
-_setSpeed(100);
+_setSpeed($g_stepSpeed);
 
 var $user_credentials_xls = $excel.readFromCustomExcel("../swat/swat_excelData/swatdata.xlsx", "USer_Details","","");
 var $accountdata_xls = $excel.readFromCustomExcel("../swat/swat_excelData/swatdata.xlsx", "Account","","");

@@ -3,7 +3,7 @@
 
 var $RS_5415 = _testcase("RS_5415", "On hiding multiple standard & user define CA from Online for a standard Object");
 $RS_5415.start();
-_setSpeed(100);
+_setSpeed($g_stepSpeed);
 
 var $custActname=$bo_act_common.generateRandomName("5415CA");
 var $custActID=$custActname;
@@ -17,7 +17,7 @@ var $wizardStepType="Others";
 var $wizardStepName = "Create Warranty";
 var $tabName="Installed Products";
 //**********Login to APP************************
-$bo_act_login.login($g_url, $bac_unBase, $bac_pwdBase);
+$bo_act_login.login($g_url, $bac_un, $bac_pwd);
 //------------------------------------CREATE CUSTOM ACTION----------------------
 $bo_act_navigation.navigateToSfmCustomAction();
 $bo_act_customAction.createNewCustomAction($custActname,$custActID,$url,$objectName,$actnType);		
@@ -56,7 +56,7 @@ $bo_act_navigation.navigateToSfmAppPermission();
 
 
 
-_setSpeed(100);
+_setSpeed($g_stepSpeed);
 
 $RS_5415.end();
 

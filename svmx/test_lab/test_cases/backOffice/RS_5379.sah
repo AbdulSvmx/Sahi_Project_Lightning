@@ -4,7 +4,7 @@
 
 var $RS_5379 = _testcase("RS_5379", "Linked Process - After saving linked process revert back to main process.");
 $RS_5379.start();
-_setSpeed(100);
+_setSpeed($g_stepSpeed);
 
 var $sfmToBeCloned="Add/Edit Products Serviced";
 var $sfmName=$bo_act_common.generateRandomName("SFMTest5379");
@@ -30,7 +30,7 @@ var $selProdWarranty="WN-000006";
 var $wizardSelectObjectName=$objName;
 
 //*************Login to Servicemax App***********
-$bo_act_login.login($g_url, $bac_unBase, $bac_pwdBase);
+$bo_act_login.login($g_url, $bac_un, $bac_pwd);
 
 //*****Navgate to SFm Designer and create clone of Add/Edit product Services transaction********
 $bo_act_navigation.navigateToSfmTransactionDesigner();
@@ -90,5 +90,5 @@ _setSelected($bo_pg_sfmWizard.sel_objPrevMaintPlan,$objName	);
 $bo_act_SFW.deleteWizard($wizardname);	
 $bo_act_navigation.navigateToSfmTransactionDesigner();
 $bo_act_SFM.deleteSFM($sfmName);
-_setSpeed(100);
+_setSpeed($g_stepSpeed);
 $RS_5379.end();

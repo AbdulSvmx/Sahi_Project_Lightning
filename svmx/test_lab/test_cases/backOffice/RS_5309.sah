@@ -3,7 +3,7 @@
 
 var $RS_5309 = _testcase("$RS_5309","When the IB of the WO is covered under a Warranty. Labor line qty is defined");
 $RS_5309.start();
-_setSpeed(100);
+_setSpeed($g_stepSpeed);
 
 /**
  * Login to the Sandbox Org

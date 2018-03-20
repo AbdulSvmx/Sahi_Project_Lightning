@@ -10,5 +10,8 @@ svmx/test_lab/test_suites/analytics/ana_Repeat_Visit_failed_chrome.suite
 svmx/test_lab/test_cases/analytics/an_excleData/~$an_Datasheet1.xlsx
 svmx/test_lab/test_cases/analytics/an_excleData/~$an_Datasheet1.xlsx
 svmx/test_lab/test_suites/analytics/ana_Contract_Uptime_failed_chrome.suite
+<<<<<<< HEAD
 test.sah
+=======
+>>>>>>> 9c998aec78c1dde8004e2c458da581119cd81d78
 /bin

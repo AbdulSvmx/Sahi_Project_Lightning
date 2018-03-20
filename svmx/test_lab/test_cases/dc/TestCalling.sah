@@ -1,6 +1,6 @@
 var $RS_9362 = _testcase("RS_9362", "Creation of Event Subject Rule");
 $RS_9362.start();
-_setSpeed(100);
+_setSpeed($g_stepSpeed);
 
 var $url = "https://test.salesforce.com";
 var $un = "commonuser@svmxpqt.com";

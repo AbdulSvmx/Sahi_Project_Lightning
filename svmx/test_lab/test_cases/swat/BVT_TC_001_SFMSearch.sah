@@ -36,7 +36,7 @@
 var $BVT_TC_001_SFMSearch = _testcase("$BVT_TC_001_SFMSearch","Create SFM Search in configuration screen");
 $BVT_TC_001_SFMSearch.start();
 
-	_setSpeed(100);
+	_setSpeed($g_stepSpeed);
 	
 	var $objectName = "Work Order";
 	var $fieldName = "Order Status";
@@ -44,7 +44,9 @@ $BVT_TC_001_SFMSearch.start();
 	var $fieldName1 = "Order Type";
 	var $workOrderNo;
 
-	$bo_act_login.login("https://test.salesforce.com","lohithaadmin@swatpart2.com", "maxpl0re2");
+	//$bo_act_login.login("https://test.salesforce.com","lohithaadmin@swatpart2.com", "maxpl0re2");
+	 
+	 $bo_act_login.login("https://test.salesforce.com","lohitha@svmxtest.org.testpar2", "maxpl0re3");
 	var $searchItem = $swat_act_sfmSearch.createSfmSearch($objectName, $fieldName, $operator, $fieldName1);
 
 	

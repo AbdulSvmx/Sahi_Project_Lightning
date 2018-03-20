@@ -3,7 +3,7 @@
 
 var $9832 = _testcase("RS-9832","SFW - Handover and Confirmation for background process.");
 $9832.start();
-_setSpeed(100);
+_setSpeed($g_stepSpeed);
 var $PMPlanName = $bo_act_common.generateRandomName("PMPlan");
 var $sconName = $bo_act_common.generateRandomName("Scon");
 

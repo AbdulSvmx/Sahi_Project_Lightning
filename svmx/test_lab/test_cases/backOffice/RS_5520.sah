@@ -3,7 +3,7 @@
 
 var $RS_5520 = _testcase("RS_5520", "Verify creation of counter rollups - 2 service contracts have 1 covered product");
 $RS_5520.start();
-_setSpeed(100);
+_setSpeed($g_stepSpeed);
 var $ProcessName= $bo_act_common.generateRandomName("5520pros");
 var $ProcessId=$bo_act_common.generateRandomName("5520procId");
 var $selectSFM1="Cancel Shipment Order";
@@ -49,7 +49,7 @@ $bo_act_scheduledSFM.newProcessNameID($ProcessName,$ProcessId);
 _wait(9000,_isVisible($bo_pg_scheduledSFM.lbl_scheduledSFMHomePage));
 _log("Counter Roll up created successfully");
 
-_setSpeed(100);
+_setSpeed($g_stepSpeed);
 $RS_5520.end();
 
 

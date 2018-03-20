@@ -3,7 +3,7 @@
 
 var $RS_5333 = _testcase("$RS_5333","Get Price - When Pricing Rule of FIXED is applied Using Service Contract");
 $RS_5333.start();
-_setSpeed(100);
+_setSpeed($g_stepSpeed);
 
 /**
  * Login to the Sandbox Org
@@ -106,7 +106,7 @@ _setSpeed(500);
 var $rate = 517.000;
 var $rateType = "Fixed";
 $bo_act_serviceMaintenanceContracts.addPricingRulesTOServiceContract($sconName, $rateType, $rate, $serviceName);
-_setSpeed(100);
+_setSpeed($g_stepSpeed);
 
 /**
 * Create Case record
@@ -201,7 +201,7 @@ _assertEqual($actualRateOnWorkOrder,"$517.000","Actual and Rate on Work Order ar
 _assertEqual($actualRateTypeOnWorkOrder,$rateType,"Actual and expected Rate Type on Work Order are not same");
 _assertEqual($actualProformaInvoiceAmountOnWorkOrder,"$517.000","Actual and expected Proforma Invoice Amount On Work Order are not same");
 _assertEqual($actualTotalBillableAmountOnWorkOrder,"$0.000","Actual and expected Total Billable Amount On Work Order are not same");
-_setSpeed(100);
+_setSpeed($g_stepSpeed);
 //Delete SFM Wizard 
 $bo_act_SFW.deleteSFMWizard("Work Order", $wizardIDName);
 

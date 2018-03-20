@@ -3,7 +3,7 @@
 
 var $RS_5298 = _testcase("$RS_5298","ONSITE response on WO: Clock paused/resumed without extending SLA commitment");
 $RS_5298.start();
-_setSpeed(100);
+_setSpeed($g_stepSpeed);
 
 //Pre - Condition 
 $bo_act_login.login($g_url, $bac_un, $bac_pwd);

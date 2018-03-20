@@ -3,7 +3,7 @@
 //Author:Mamata
 	var $RS_10029 = _testcase("RS_10029", "Field level: On Exit Webservice Child Field");
 	$RS_10029.start();
-	_setSpeed(100);
+	_setSpeed($g_stepSpeed);
 
 	var $sfmToBeCloned="Create Usage Lines from Estimates";
 	var $sfmName=$bo_act_common.generateRandomName("SFMRS10029")

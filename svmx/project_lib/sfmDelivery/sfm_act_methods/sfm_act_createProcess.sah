@@ -59,7 +59,7 @@ var $sfm_act_createProcess = new function sfm_act_createProcess() {
 
 		return $callBack.returnResult($result, "","cloneSfm");
 
-		_setSpeed(100);  
+		_setSpeed($g_stepSpeed);  
 		*/
 	
 	};

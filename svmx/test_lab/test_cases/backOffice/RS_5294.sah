@@ -3,7 +3,7 @@
 
 var $RS_5294 = _testcase("$RS_5294","Verify Initial response timestamps on WO Object when 24/7 SLA is considered");
 $RS_5294.start();
-_setSpeed(100);
+_setSpeed($g_stepSpeed);
 
 //Pre - Condition 
 $bo_act_login.login($g_url, $bac_un, $bac_pwd);

@@ -2,7 +2,7 @@
 
 var $SWAT_BVT_TC001_SFMdelivery = _testcase("$SWAT_BVT_TC001_SFMdelivery","create quote from work order, save and validate the records");
 $SWAT_BVT_TC001_SFMdelivery.start();
-_setSpeed(100);
+_setSpeed($g_stepSpeed);
 
 //Pre - Condition 
 $bo_act_login.login($swat_url, $swat_un, $swat_pwd);

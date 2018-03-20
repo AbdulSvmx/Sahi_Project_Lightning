@@ -3,7 +3,7 @@
 
 var $RS_10045 = _testcase("$RS_10045","Get Price(SCON-Travel)-Price taken from Service Type(Travel Policy)-Per Hour");
 $RS_10045.start();
-_setSpeed(100);
+_setSpeed($g_stepSpeed);
 
 /**
  * Login to the Sandbox Org

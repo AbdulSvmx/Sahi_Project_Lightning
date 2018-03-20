@@ -10,7 +10,7 @@ var $seperator = "/";
 
 var $RS_7290 = _testcase("$RS_7290","Creation and Activation of Service Contracts");
 $RS_7290.start();
-_setSpeed(100);
+_setSpeed($g_stepSpeed);
 /**
 * Login to the Sandbox Org
 */

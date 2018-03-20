@@ -91,6 +91,22 @@ var $bo_act_questionlibrary = new function bo_act_questionlibrary() {
 	
 	
 
+	this.deletequestionlibrary = function($questionname)
+	
+	
+	{
+		$bo_act_navigation.navigateToSvmxSetup();
+		_click($bo_pg_servicemaxSetup.btn_serviceFlowManager);
+		_click($bo_pg_servicemaxSetup.btn_checklistQuestionLibrary);
+		_wait(2000);
+		_assertEqual(true, _isVisible(_div($questionname)));
+		_click(_div($questionname));
+		_click($sfm_pg_checklistQuestionLibrary.btnDelete);
+		_click($sfm_pg_checklistQuestionLibrary.btn_yes);
+		_wait(10000);
+
+		
+	};
 	
 	
 };

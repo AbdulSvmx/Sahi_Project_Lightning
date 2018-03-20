@@ -1,0 +1,5 @@
+var $rs_7432 = _testcase("RS_7432","Verify adjustments are not performed, if the WO is not closed.");
+$rs_7432.start();
+$bo_act_login.login($g_url,$bac_un,$bac_pwd);
+$bo_act_navigation.navigateToTaskTemplatePage();
+$rs_7432.end();

@@ -3,7 +3,7 @@
 
 var $RS_5441 = _testcase("RS_5441", "Verify only completed SFM & active SFW are displayed on SFM App Permission page");
 $RS_5441.start();
-_setSpeed(100);
+_setSpeed($g_stepSpeed);
 
 $bo_act_login.login($g_url, $bac_un, $bac_pwd);
 var $sfmName= $bo_act_common.generateRandomName("5441SFM");
@@ -48,7 +48,7 @@ _wait(60000, _isVisible($bo_pg_sfmTransactionAndDesigner.btn_newSFM));
 
 $bo_act_SFM.deleteSFM($sfmName);
 _log("SFM deleted successfully");
-_setSpeed(100);
+_setSpeed($g_stepSpeed);
 
 										 
 $RS_5441.end();

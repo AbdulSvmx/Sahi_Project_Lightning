@@ -1,7 +1,7 @@
 var $rs_9647 = _testcase("RS_9647","Validation of duplicate Serialized stock");
 $rs_9647.start();
 var $productName = $bo_act_common.generateRandomName("pro");
-$bo_act_login.login($g_url,$bac_unBase,"welcome-02");
+$bo_act_login.login($g_url,$bac_un,$bac_pwd);
 $src = $bo_act_locations.addLocation("Src","Standard Location", "", "Esteem Mall", "India", "560028");
 $dest = $bo_act_locations.addLocation("Dest","Standard Location", "", "Sigma Mall", "India", "560068");
 $bo_act_navigation.navigateToProductsPage();

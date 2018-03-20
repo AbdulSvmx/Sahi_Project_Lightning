@@ -40,9 +40,9 @@ $rs_7011.start();
 		
 		//Creation of main SFM Process
 		$bo_act_navigation.navigateToSfmTransactionDesigner();
-		_wait(5000,_isVisible($bo_pg_sfmTransactionAndDesigner.lbl_ServiceFlowManager));
+		_wait(10000,_isVisible($bo_pg_sfmTransactionAndDesigner.lbl_ServiceFlowManager));
 		$sfm_act_SFM.selectSFM($processName,false);
-		_wait(3000,_isVisble($bo_pg_sfmTransactionAndDesigner.btn_clone));
+		_wait(5000,_isVisble($bo_pg_sfmTransactionAndDesigner.btn_clone));
 		_click($bo_pg_sfmTransactionAndDesigner.btn_clone);
 		_wait(60000, _isVisible($bo_pg_sfmTransactionAndDesigner.txt_name));
 		_setValue($bo_pg_sfmTransactionAndDesigner.txt_name, $sfmName);

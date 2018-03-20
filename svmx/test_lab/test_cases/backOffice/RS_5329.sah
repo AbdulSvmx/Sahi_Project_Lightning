@@ -3,7 +3,7 @@
 
 var $RS_5329 = _testcase("$RS_5329","Get Price (SCON - Travel) - when price is taken from the Zone price of SCON");
 $RS_5329.start();
-_setSpeed(100);
+_setSpeed($g_stepSpeed);
 
 /**
  * Login to the Sandbox Org

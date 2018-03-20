@@ -5,7 +5,7 @@ $searchString = "contact";
 $templateName = $bo_act_common.generateRandomName("Temp"); 
 $actual = "";
 $expected = "Template Saved";
-$bo_act_login.login($g_url,$bac_unDev,$bac_pwdDev);
+$bo_act_login.login($g_url,$bac_un,$bac_pwd);
 $bo_act_navigation.navigateToSfmTransactionDesigner();
 $sfm_act_SFM.selectSFM($processName,false);
 _click($bo_pg_sfmTransactionAndDesigner.btn_clone);

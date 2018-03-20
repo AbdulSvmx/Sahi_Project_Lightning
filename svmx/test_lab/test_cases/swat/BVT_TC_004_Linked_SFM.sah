@@ -6,9 +6,8 @@ var $BVT_TC_004_Linked_SFM = _testcase("BVT_TC_004_Linked_SFM",
 		"Add child lines is main process and linked process and save.");
 
 $BVT_TC_004_Linked_SFM.start();
-_setSpeed(100);
+_setSpeed($g_stepSpeed);
 
-/* Needed
 //Pre - Condition 
 $bo_act_login.login("https://test.salesforce.com", "lohithaadmin@swatpart2.com", "maxpl0re2");
 
@@ -36,15 +35,15 @@ $bo_act_SFW.saveAndClose();
 
 //Create a Work Order record
 $workOrderNo = $swat_act_workOrders.createWorkOrder($caseNumber, $accountName, $contactName, $IBName, "Open", "High", "Field Service");
-*/
+
 
 $workOrderNo = "WO-00000138";
 //_click($workOrderNo);
 _selectDomain("/svmx/"); 
-var $wizardTitleName = "SFWTitle232018153750";
+var $wizardTitleName = "SFM Wiz53201814355";
 _isVisible(_cell({title: $wizardTitleName}));
 _assertVisible(_cell({title:$wizardTitleName}),"Pass");
-_click(_button("Add/Edit Products Serviced[2]"));
+_click(_button("Add/Edit Products Serviced"));
 _selectDomain();
 
 _wait(10000,_isVisible(_label("Site:")));
@@ -52,12 +51,13 @@ _wait(10000,_isVisible(_label("Site:")));
 // Add a Product Serviced Line
 // The following function adds a part and launches the Linked Process
 
-$sfm_act_createCustomWizard.addProductServiced($productName);
 
-//Add lines in the linked process and save the lonked process followe by the main process
+$sfm_act_createCustomWizard.addProductServiced("Ciaz");
 
-$sfm_act_createCustomWizard.addParts($productName2);
-$sfm_act_createCustomWizard.addLabor($productName2);
+//Add lines in the linked process and save the linked process followe by the main process
+_wait(6000);
+$sfm_act_createCustomWizard.addParts("Ciaz");
+$sfm_act_createCustomWizard.addLabor("Ciaz");
 $sfm_act_createCustomWizard.addExpenses("Airfare");
 $sfm_act_createCustomWizard.addTravel();
 $sfm_act_createCustomWizard.saveWizard();
