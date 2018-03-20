@@ -54,7 +54,7 @@ $dc_pg_salesforce.navigateSFHome();  //Base State
 		_set($dc_pg_salesforce.workOrder, _fetch(createImmediateDispatchWO()));
 		_log($dc_pg_salesforce.workOrder);
 		_click($dc_pg_salesforce.link_WorkOrdersTab);
-		_setSpeed(100);
+		_setSpeed($g_stepSpeed);
 		_setValue(_textbox("sbstr"), $dc_act_salesforce.workOrder);
 		_click(_submit(" Go! "));
 		_wait(5000);

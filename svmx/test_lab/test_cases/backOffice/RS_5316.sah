@@ -3,7 +3,7 @@
 
 var $RS_5316 = _testcase("$RS_5316","Get Price:Price picked for Activity type(Activity Product=ArchProd4-calibration)");
 $RS_5316.start();
-_setSpeed(100);
+_setSpeed($g_stepSpeed);
 
 /**
 * Login to the Sandbox Org
@@ -72,7 +72,7 @@ var $regularRate = 500;
 var $activityProduct = (($activityType[1].concat(" : ")).concat($productName));
 
 $bo_act_serviceMaintenanceContracts.addLaborPricingToServiceContractUsingActivityProduct($sconName, $RoundingType, $unit[1], $minimumLaborMins, $regularRate, $activityProduct);
-_setSpeed(100);
+_setSpeed($g_stepSpeed);
 
 /**
 * Create Case record
@@ -168,7 +168,7 @@ _assertEqual($LaborCoveredActual,"0","Actual and expected labor Covered % are no
 $bo_act_getPrice.closeEditedWOLineToSFMDelivery();
 
 $bo_act_getPrice.saveSFMDelivery();
-_setSpeed(100);
+_setSpeed($g_stepSpeed);
 
 //Delete SFM Wizard 
 $bo_act_SFW.deleteSFMWizard("Work Order", $wizardIDName);

@@ -10,7 +10,7 @@
 var $BVT_TC_003_SFW_with_cloned_Wiz_steps = _testcase("BVT_TC_003_SFW_with_cloned_Wiz_steps",
 		"Configure the SFW to include cloned/custom SFMs and launch the same in delivery");
 $BVT_TC_003_SFW_with_cloned_Wiz_steps.start();
-_setSpeed(100);
+_setSpeed($g_stepSpeed);
 
 
 

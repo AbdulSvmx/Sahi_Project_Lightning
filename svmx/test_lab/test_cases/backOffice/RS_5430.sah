@@ -5,7 +5,7 @@
 
 var $RS_5430 = _testcase("RS_5430", "Validate the page on translating the custom labels");
 $RS_5430.start();
-_setSpeed(100);
+_setSpeed($g_stepSpeed);
 
 var $newTransValue="trans-Process ID";
 var $viewName="ViewName5430";
@@ -44,6 +44,6 @@ $bo_act_navigation.navigateToSfmAppPermission();
 $bo_act_customLabel.deleteNewTranslatedValue();
 _log("custom label deleted successfully");
 $bo_act_customLabel.deleteView($viewName);
-_setSpeed(100);
+_setSpeed($g_stepSpeed);
 
 $RS_5430.end()

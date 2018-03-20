@@ -3,7 +3,7 @@
 
 var $9824 = _testcase("9824","SFW - OPDOC in wizard step.");
 $9824.start();
-_setSpeed(100);
+_setSpeed($g_stepSpeed);
 
 $bo_act_login.login($g_url, $bac_un, $bac_pwd);
 

@@ -3,7 +3,7 @@
 
 var $SFW_HandoveredFunctionalityOnWebServiceFail = _testcase("$SFW_HandoveredFunctionalityOnWebServiceFail","Check for Handovered functionality on Web service fail.");
 $SFW_HandoveredFunctionalityOnWebServiceFail.start();
-_setSpeed(100);
+_setSpeed($g_stepSpeed);
 
 var $className = $bo_act_common.generateRandomName("fclassName");
 var $methodName = $bo_act_common.generateRandomName("MethodName");

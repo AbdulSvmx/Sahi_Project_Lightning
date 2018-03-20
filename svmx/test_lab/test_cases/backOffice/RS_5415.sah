@@ -3,7 +3,7 @@
 
 var $RS_5415 = _testcase("RS_5415", "On hiding multiple standard & user define CA from Online for a standard Object");
 $RS_5415.start();
-_setSpeed(100);
+_setSpeed($g_stepSpeed);
 
 var $custActname=$bo_act_common.generateRandomName("5415CA");
 var $custActID=$custActname;
@@ -56,7 +56,7 @@ $bo_act_navigation.navigateToSfmAppPermission();
 
 
 
-_setSpeed(100);
+_setSpeed($g_stepSpeed);
 
 $RS_5415.end();
 

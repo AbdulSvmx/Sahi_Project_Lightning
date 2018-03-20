@@ -57,7 +57,7 @@ var $messageType4 = "Error";
 //var $woName= "WO-00000104";
 
 
-_setSpeed(100);
+_setSpeed($g_stepSpeed);
 $bo_act_login.login($g_url, $sfmUsn, $sfmPwd);
 
 

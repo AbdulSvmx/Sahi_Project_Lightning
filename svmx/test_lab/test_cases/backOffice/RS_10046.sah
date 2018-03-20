@@ -3,7 +3,7 @@
 
 var $RS_10046 = _testcase("$RS_10046","Get Price(SCON-Travel)-Price taken from SCON(Default Travel price)-Flat Rate when WO doesn't meet the QC defined in Service Type");
 $RS_10046.start();
-_setSpeed(100);
+_setSpeed($g_stepSpeed);
 
 /**
  * Login to the Sandbox Org

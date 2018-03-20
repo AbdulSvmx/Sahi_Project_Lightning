@@ -3,7 +3,7 @@
 //Author:Mamata RS-5000
 	var $RS_10028 = _testcase("RS_10028", "Field level: On Change Webservice Child Field");
 	$RS_10028.start();
-	_setSpeed(100);
+	_setSpeed($g_stepSpeed);
 
 	var $sfmToBeCloned="Create Usage Lines from Estimates";
 	var $sfmName=$bo_act_common.generateRandomName("SFMRS10028")

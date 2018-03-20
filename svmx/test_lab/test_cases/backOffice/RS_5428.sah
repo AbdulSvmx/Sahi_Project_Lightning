@@ -4,7 +4,7 @@
 
 var $RS_5428 = _testcase("RS_5428", "Test the functionality SFM App permision for a scenario");
 $RS_5428.start();
-_setSpeed(100);
+_setSpeed($g_stepSpeed);
 
 var $checklistName = $bo_act_common.generateRandomName("RS5428");
 var $searchText = $checklistName;
@@ -27,6 +27,6 @@ _assertEqual("", _getText(_div("gridview-1028")), "Checklist does display");
 $bo_act_navigation.navigateToSfmTransactionDesigner();
 $bo_act_SFM.deleteSFM($sfmName);
 
-_setSpeed(100);
+_setSpeed($g_stepSpeed);
 
 $RS_5428.end()

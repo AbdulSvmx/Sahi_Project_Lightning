@@ -4,7 +4,7 @@
 
 var $RS_5027 = _testcase("RS_5027", "Verify Value Map for NEW records - Header");
 $RS_5027.start();
-_setSpeed(100);
+_setSpeed($g_stepSpeed);
 
 
 var $sfmName=$bo_act_common.generateRandomName("5027SFM");
@@ -220,7 +220,7 @@ _setSelected($bo_pg_sfmWizard.sel_objPrevMaintPlan,$objName	);
 $bo_act_SFW.deleteWizard($wizardname);	
 $bo_act_navigation.navigateToSfmTransactionDesigner();
 $bo_act_SFM.deleteSFM($sfmName);
-_setSpeed(100);
+_setSpeed($g_stepSpeed);
 
 $RS_5027.end();
 

@@ -2,7 +2,7 @@
 
 var $swat_createproducts = _testcase("$swat_createproducts","create products");
 $swat_createproducts.start();
-_setSpeed(100);
+_setSpeed($g_stepSpeed);
 
 var $user_credentials_xls = $excel.readFromCustomExcel("../swat/swat_excelData/swatdata.xlsx", "USer_Details","","");
 var $productdata_xls = $excel.readFromCustomExcel("../swat/swat_excelData/swatdata.xlsx", "Product","","");

@@ -336,7 +336,7 @@ this.addTravelPolicyToSCONWithTwoLines = function($sconName,$defaultTravelPrice,
 	_setValue($bo_pg_serviceMaintenanceContracts.txt_partsRates, $travelPolicyRate1);
 	 $bo_act_common.searchfunction($serviceType);	//Search Values like Service Types Name
 	_click($bo_pg_serviceMaintenanceContracts.btn_updateLaborPricing);
-	_setSpeed(100);
+	_setSpeed($g_stepSpeed);
 	_setStrictVisibilityCheck();
 	_click($bo_pg_serviceMaintenanceContracts.btn_saveLaborPricing);
 	_wait(30000, _isVisible($sconName));

@@ -3,7 +3,7 @@
 
 var $RS_7439 = _testcase("$RS_7439","Verify adjustments are not performed when SET004(Condition based Adj) is set to False.");
 $RS_7439.start();
-_setSpeed(100);
+_setSpeed($g_stepSpeed);
 var $Workbenchurl = "https://workbench.developerforce.com/login.php";
 //Pre - Condition 
 $bo_act_login.login($g_url, $bac_un, $bac_pwd);

@@ -1,0 +1,13 @@
+_click(_div("_svmx_cmp_load_mask_0"));
+_check(_checkbox("IsActive"));
+_check(_checkbox("IsActive"));
+_check(_checkbox("page1:form1:block1:j_id34:j_id35:1:j_id52"));
+_check(_checkbox("IsActive"));
+_check(_checkbox("page1:form1:block1:j_id34:j_id35:2:j_id52"));
+_selectWindow("_sTocs67_salesforce_com");
+_click(_button("Logout"));
+_selectWindow();
+_check(_checkbox("IsActive"));
+_check(_checkbox("page1:form1:block1:j_id34:j_id35:4:j_id52"));
+_click(_div("Acc932018142814[1]"));
+_click(_cell("sidebarCell"));

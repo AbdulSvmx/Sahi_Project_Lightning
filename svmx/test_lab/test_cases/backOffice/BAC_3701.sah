@@ -3,7 +3,7 @@
 
 var $BAC_3701 = _testcase("BAC_3701","SFW - Wizard step - background mode of execution.");
 $BAC_3701.start();
-_setSpeed(100);
+_setSpeed($g_stepSpeed);
 
 //Pre - Condition 
 $bo_act_login.login($g_url, $bac_un, $bac_pwd);

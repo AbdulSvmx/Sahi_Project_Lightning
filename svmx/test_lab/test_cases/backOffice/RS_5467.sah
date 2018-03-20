@@ -3,7 +3,7 @@
 
 var $RS_5467 = _testcase("$RS_5467","Interactive Entitlement-Case:- Covd Contract, Covd Loc, Covd Prod has Valid SLA but with Empty Dates and SLA");
 $RS_5467.start();
-_setSpeed(100);
+_setSpeed($g_stepSpeed);
 
 /**
 * Login to the Sandbox Org

@@ -3,7 +3,7 @@
 
 var $BulkDelete = _testcase("$BulkDelete","Delete all the records to clear up Org");
 $BulkDelete.start();
-_setSpeed(100);
+_setSpeed($g_stepSpeed);
 
 var $userName = "orgsadmin@svmx-test4.org.test4part2";
 var $password = "servicemax22";

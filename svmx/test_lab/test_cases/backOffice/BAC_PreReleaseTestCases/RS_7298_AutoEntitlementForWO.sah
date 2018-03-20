@@ -16,7 +16,7 @@ var $seperator = "/";
 
 var $RS_7298 = _testcase("$RS_7298","Auto Entitlement based on Product:- Entitlement on a WO using Service Contract.");
 $RS_7298.start();
-_setSpeed(100);
+_setSpeed($g_stepSpeed);
 /**
 * Login to the Sandbox Org
 */
