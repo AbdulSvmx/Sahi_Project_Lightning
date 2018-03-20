@@ -40,3 +40,5 @@ _setSpeed(100);
 	_click(_button("Save & Close"));
 
 $SWAT_BVT_TC001_SFMDesigner.end();
+
+
