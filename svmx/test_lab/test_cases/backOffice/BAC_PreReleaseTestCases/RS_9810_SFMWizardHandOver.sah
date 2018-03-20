@@ -3,7 +3,7 @@
 
 var $RS_9810 = _testcase("$RS_9810","Check for Continue Button after Execution of Web service.");
 $RS_9810.start();
-_setSpeed(100);
+_setSpeed($g_stepSpeed);
 
 $user = "svmx test4";
 var $className = $bo_act_common.generateRandomName("fClassName");

@@ -2,7 +2,7 @@
 
 var $RS_5328 = _testcase("$RS_5328","Get Price(SCON-Travel)-Price taken from Service Type(Travel Policy)-Flat rate");
 $RS_5328.start();
-_setSpeed(100);
+_setSpeed($g_stepSpeed);
 
 /**
  * Login to the Sandbox Org

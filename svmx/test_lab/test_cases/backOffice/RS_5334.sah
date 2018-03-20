@@ -2,7 +2,7 @@
 
 var $RS_5334 = _testcase("$RS_5334","Get Price- When Pricing Rule of NTE is applied and [Billable Line Price >= NTE] For Parts line");
 $RS_5334.start();
-_setSpeed(100);
+_setSpeed($g_stepSpeed);
 
 /**
  * Login to the Sandbox Org

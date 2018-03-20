@@ -4,7 +4,7 @@
 
 var $RS_5027 = _testcase("RS_5027", "Verify Value Map for NEW records - Header");
 $RS_5027.start();
-_setSpeed(100);
+_setSpeed($g_stepSpeed);
 
 
 var $sfmName=$bo_act_common.generateRandomName("5027SFM");
@@ -22,7 +22,7 @@ var $wizardButtonName=$sfmName
 	
 
 //*************Login to Servicemax App***********
-//$bo_act_login.login($g_url, $bac_unBase, $bac_pwdBase);
+//$bo_act_login.login($g_url, $bac_un,$bac_pwd);
 $bo_act_login.login($g_url,$sfmUsn,$sfmPwd);
 
 //*****Navgate to SFm Designer and create a new SFM of type source to Target All ********
@@ -220,7 +220,7 @@ _setSelected($bo_pg_sfmWizard.sel_objPrevMaintPlan,$objName	);
 $bo_act_SFW.deleteWizard($wizardname);	
 $bo_act_navigation.navigateToSfmTransactionDesigner();
 $bo_act_SFM.deleteSFM($sfmName);
-_setSpeed(100);
+_setSpeed($g_stepSpeed);
 
 $RS_5027.end();
 

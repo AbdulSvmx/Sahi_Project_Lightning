@@ -126,6 +126,31 @@ var $bo_act_PMProcess = new function bo_act_PMProcess() {
 		_click($bo_pg_PMProcess.btn_delete);
 		
 	};
-
+	
+	this.addNewPMProcess = function($processType,$PMProcessName,$pmProcessId,$creationOfWO){
+		_click($bo_pg_PMProcess.btn_new);
+		_setSelected($bo_pg_PMProcess.txt_processType,$processType);
+		_setValue($bo_pg_PMProcess.txt_processName,$PMProcessName);
+		_setValue($bo_pg_PMProcess.txt_processId,$pmProcessId);
+		_setValue($bo_pg_PMProcess.txt_createWorkOrderNDaysBeforeScheduledDate,$creationOfWO);
+		_click($bo_pg_PMProcess.tab_workOrderRules);
+		_setSelected($bo_pg_PMProcess.txt_coverageType,"/SVMXSTD/");
+		if(_condition($bo_pg_PMProcess.txt_coverageTypeLocation!=null))
+		_setSelected($bo_pg_PMProcess.txt_coverageTypeLocation,"/SVMXSTD/");
+		_setSelected(_select("/CONF_SetupPMProcess:SVMX/",_rightOf(_span("Select task object"))),"Task");
+		_setSelected(_select("/CONF_SetupPMProcess:SVMX/",_rightOf(_label("Task map to use"))),"/SVMXSTD/");
+		_setSelected(_select("/CONF_SetupPMProcess:SVMX/",_rightOf(_label("Required Parts map to use"))),"/SVMXSTD/");
+		_click($bo_pg_PMProcess.tab_scheduleAndNotifications);
+		_setValue($bo_pg_PMProcess.txt_sendErrorNotificationsToThisEmailAddress,"harish.cs@ge.com");
+		_click($bo_pg_PMProcess.btn_quickSave);
+	};
+	this.fetchRecordId = function($pmProcessId){
+		_click(_checkbox(0,_leftOf((_span($pmProcessId)))));
+		_click(_button("Edit"));
+		var $url="";
+		_set($url, window.location.href);
+		$recordId = $url.slice($url.lastIndexOf("=")+1);
+		return $recordId;
+	};
 
 };

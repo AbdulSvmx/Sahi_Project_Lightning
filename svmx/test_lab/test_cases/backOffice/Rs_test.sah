@@ -3,7 +3,7 @@
 
 var $RS_test = _testcase("$RS_test","Get Price (SCON - Travel) - when price is taken from the Mileage tier of SCON with unit as Per Mile/Km.");
 $RS_test.start();
-_setSpeed(100);
+_setSpeed($g_stepSpeed);
 
 /**
  * Login to the Sandbox Org

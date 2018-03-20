@@ -2,7 +2,7 @@
 
 var $RS_10027= _testcase("$RS_10027","Get Price- When Pricing Rule of Surcharge is applied For Parts line");
 $RS_10027.start();
-_setSpeed(100);
+_setSpeed($g_stepSpeed);
 
 /**
  * Login to the Sandbox Org

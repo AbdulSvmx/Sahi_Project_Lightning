@@ -12,7 +12,7 @@ var $wizTitle = $bo_act_common.generateRandomName("SFM Wiz");
 $bo_act_login.login($g_url,$sfmUsn,$sfmPwd);
 $sfm_act_SFM.cloneTDM016($sfmNameToBeCloned, $sfmName, $isCustom, $sfmTemplateSaveAsName, $sfmTemplate, $fieldName, $containerName);
 _click($bo_pg_sfmTransactionAndDesigner.btn_finalQuickSave);
-_setSpeed(100);
+_setSpeed($g_stepSpeed);
 $bo_act_navigation.navigateToSfmWizard();
 $sfm_act_createCustomWizard.chooseObject("Work Order");
 $sfm_act_createCustomWizard.addManageWizSteps($wizTitle,"SFM",$sfmName);

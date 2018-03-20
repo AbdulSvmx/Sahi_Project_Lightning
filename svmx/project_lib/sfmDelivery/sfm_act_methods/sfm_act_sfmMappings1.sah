@@ -77,7 +77,7 @@ _wait(3000);
 
 		return $callBack.returnResult($result, "","cloneSfm");
 
-		_setSpeed(100);
+		_setSpeed($g_stepSpeed);
 		
 		*/
 	};

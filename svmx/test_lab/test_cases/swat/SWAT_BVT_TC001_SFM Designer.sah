@@ -2,7 +2,7 @@
 
 var $SWAT_BVT_TC001_SFMDesigner = _testcase("$SWAT_BVT_TC001_SFMDesigner","Clone create quote from WO SFM in designer");
 $SWAT_BVT_TC001_SFMDesigner.start();
-_setSpeed(100);
+_setSpeed($g_stepSpeed);
 
 	var $objectName = "Work Order";
 	//Pre - Condition 

@@ -3,7 +3,7 @@
 //Author:Mamata RS-4998
 	var $RS_4998 = _testcase("RS_4998", "Verify Web Service call On Change");
 	$RS_4998.start();
-	_setSpeed(100);
+	_setSpeed($g_stepSpeed);
 
 	var $sfmToBeCloned="Create Usage Lines from Estimates";
 	var $sfmName=$bo_act_common.generateRandomName("4998SFM")
@@ -58,5 +58,5 @@ $bo_act_SFW.deleteWizards($objName,$wizardID);
 _wait(3000);
 $bo_act_navigation.navigateToSfmTransactionDesigner();
 $bo_act_SFM.deleteSFM($sfmName);
-_setSpeed(100);
+_setSpeed($g_stepSpeed);
 $RS_4998.end();

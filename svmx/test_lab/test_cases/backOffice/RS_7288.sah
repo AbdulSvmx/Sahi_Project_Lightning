@@ -16,7 +16,7 @@ var $seperator = "/";
 
 var $RS_7288 = _testcase("$RS_7288","Creation of a Warranty Term and association of a Warranty to an Installed Product");
 $RS_7288.start();
-_setSpeed(100);
+_setSpeed($g_stepSpeed);
 
 
 /**

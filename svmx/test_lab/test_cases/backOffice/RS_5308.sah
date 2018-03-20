@@ -3,7 +3,7 @@
 
 var $RS_5308 = _testcase("$RS_5308","Get Price on WO:When the IB of the WO is covered under a Warranty.Calculate Expense prices");
 $RS_5308.start();
-_setSpeed(100);
+_setSpeed($g_stepSpeed);
 
 /**
  * Login to the Sandbox Org

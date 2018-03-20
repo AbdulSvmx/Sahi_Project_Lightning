@@ -5,7 +5,7 @@
 
 var $RS_9636 = _testcase("$RS_9636","Creation of auto Entitlement for Case and then verifying the data");
 $RS_9636.start();
-_setSpeed(100);
+_setSpeed($g_stepSpeed);
 /**
 * Login to the Sandbox Org
 */

@@ -3,7 +3,7 @@
 
 var $RS_5330 = _testcase("$RS_5330","Get Price (SCON - Travel) - when price is taken from the Mileage tier of SCON with unit as Flat Rate.");
 $RS_5330.start();
-_setSpeed(100);
+_setSpeed($g_stepSpeed);
 
 /**
  * Login to the Sandbox Org

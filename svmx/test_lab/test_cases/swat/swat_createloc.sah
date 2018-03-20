@@ -2,7 +2,7 @@
 
 var $swat_createloc = _testcase("swat_createloc","create locations");
 $swat_createloc.start();
-_setSpeed(100);
+_setSpeed($g_stepSpeed);
 
 var $user_credentials_xls = $excel.readFromCustomExcel("../swat/swat_excelData/swatdata.xlsx", "USer_Details","","");
 var $accountdata_xls = $excel.readFromCustomExcel("../swat/swat_excelData/swatdata.xlsx", "Account","","");

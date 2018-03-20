@@ -3,7 +3,7 @@
 
 var $RS_5260 = _testcase("RS_5260","Create a PM Plan from Service Contract with coverage type as Account");
 $RS_5260.start();
-_setSpeed(100);
+_setSpeed($g_stepSpeed);
 
 var $Workbenchurl = "https://workbench.developerforce.com/login.php";
 //Pre - Condition 

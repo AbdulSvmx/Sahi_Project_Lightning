@@ -32,6 +32,7 @@ var $bo_pg_sfmTransactionAndDesigner = new function bo_pg_sfmTransactionAndDesig
 	
 	
 	
+	
 	 this.txt_standardSfmTransactionQuickFind= _f("main").s_textinput("searchText[2]");
     this.btn_standardSfmTransaction= _f("main").tab("Standard SFM Transactions");
     this.btn_yourCustomSfmTransactions = _f("main").tab("Your Custom Sjavascript:void(0)FM Transactions");
@@ -141,6 +142,7 @@ var $bo_pg_sfmTransactionAndDesigner = new function bo_pg_sfmTransactionAndDesig
 			 _click($bo_pg_sfmTransactionAndDesigner.btn_yourCustomSfmTransactions);
 			 
 		}
+		_setValue($bo_pg_sfmTransactionAndDesigner.txt_yourCustomSfmTransactionsQuickFind, $sfmName); // Owner Meghana 
 		
 		_click(_f("main").s_label($sfmName));
 	};
