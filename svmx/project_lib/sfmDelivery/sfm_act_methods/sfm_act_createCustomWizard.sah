@@ -580,6 +580,7 @@ var $sfm_act_createCustomWizard = new function sfm_act_createCustomWizard() {
 		_click($sfm_pg_wo.link_wo);
 		_click($sfm_pg_wo.btn_wo_new);
 		var $dd = this.generateYesterday();
+		_log($dd);
 		_click($sfm_pg_wo.txt_actualOnsiteResponse);
 		_click($sfm_pg_wo.cell_today);
 		_click($sfm_pg_wo.txt_actualResolution);
