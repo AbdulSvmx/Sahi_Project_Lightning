@@ -40,3 +40,5 @@ _setSpeed($g_stepSpeed);
 	_click(_button("Save & Close"));
 
 $SWAT_BVT_TC001_SFMDesigner.end();
+
+

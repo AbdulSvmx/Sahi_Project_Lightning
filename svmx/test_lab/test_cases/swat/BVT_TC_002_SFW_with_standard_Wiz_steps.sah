@@ -15,9 +15,10 @@ $BVT_TC_002_SFW_with_standard_Wiz_steps.start();
 _setSpeed($g_stepSpeed);
 
 	//Pre - Condition 
-	$bo_act_login.login("https://test.salesforce.com", "lohithaadmin@ref5.com.cfg4", "maxpl0re2");
+	//$bo_act_login.login("https://test.salesforce.com", "lohithaadmin@ref5.com.cfg4", "maxpl0re2");
  
-//<<<<<<< HEAD
+	$bo_act_login.login("https://test.salesforce.com","lohitha@svmxtest.org.testpar2", "maxpl0re3");
+
 	var $wizardSelectObjectName = "Work Order";
 	var $wizardTitleName = $bo_act_common.generateRandomName("SFWTitle");
 	var $wizardIDName = $bo_act_common.generateRandomName("SFWId");
@@ -91,15 +92,15 @@ _setSpeed($g_stepSpeed);
 
 	//validation of SLA creation
 	_assertExists(_span($slaName));
-//=======
 
-/**
- * Add Price To Standard Price for above created Product
-*/ 
 
-//Launch in delivery
-$workOrderNo = $swat_act_workOrders.createWorkOrder($caseNumber, $accountName, $contactName, $IBName, "Open", "High", "Field Service");
-//$woName = 
+	/**
+ 	* Add Price To Standard Price for above created Product
+ 	*/ 
+
+	//Launch in delivery
+	$workOrderNo = $swat_act_workOrders.createWorkOrder($caseNumber, $accountName, $contactName, $IBName, "Open", "High", "Field Service");
+	//$woName = 
  
 	// Create Service Contract(With child lines) and Activate it
 	var $pastYear = 2;  // Start Date for Service Contract
@@ -126,8 +127,11 @@ $workOrderNo = $swat_act_workOrders.createWorkOrder($caseNumber, $accountName, $
 
 
 	// Perform Interactive Entitlement on WO using Service Contract
- 
+
 	// Use $WONumber in place of "WO-00000068"
+	//_selectDomain("/svmx/"); 
+	
+		
 	$bo_act_interactiveEntitlement_WO.performInteractiveEntitlementWO_UsingScon($workOrderNo, $serviceContractName);
 	var $actual_EntitlementType = _getText(_div(0,_rightOf(_cell("/Entitlement Type/"))));
 	var $ServiceContract_actual = _getText(_link(0,_rightOf(_cell("Service Contract"))));
@@ -139,9 +143,9 @@ $workOrderNo = $swat_act_workOrders.createWorkOrder($caseNumber, $accountName, $
 	_click(_link($workOrderNo));
 
 	//_selectDomain("/visual.force.com/");
-	 _selectDomain("/svmx/"); 
+	 
  
-//<<<<<<< HEAD
+
 	 _isVisible(_cell({title: $wizardTitleName}));
 	 _assertVisible(_cell({title:$wizardTitleName}),"Pass");
 

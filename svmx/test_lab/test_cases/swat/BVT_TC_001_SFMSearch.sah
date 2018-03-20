@@ -44,7 +44,9 @@ $BVT_TC_001_SFMSearch.start();
 	var $fieldName1 = "Order Type";
 	var $workOrderNo;
 
-	$bo_act_login.login("https://test.salesforce.com","lohithaadmin@swatpart2.com", "maxpl0re2");
+	//$bo_act_login.login("https://test.salesforce.com","lohithaadmin@swatpart2.com", "maxpl0re2");
+	 
+	 $bo_act_login.login("https://test.salesforce.com","lohitha@svmxtest.org.testpar2", "maxpl0re3");
 	var $searchItem = $swat_act_sfmSearch.createSfmSearch($objectName, $fieldName, $operator, $fieldName1);
 
 	
@@ -63,3 +65,6 @@ $BVT_TC_001_SFMSearch.start();
 	// $bo_act_login.logOut();
 	
 $BVT_TC_001_SFMSearch.end();
+
+
+
