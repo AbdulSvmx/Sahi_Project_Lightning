@@ -51,7 +51,7 @@ var $bo_act_SFM = new function bo_act_SFM() {
 
 		return $callBack.returnResult($result, "","cloneSfm");
 
-		_setSpeed(100);
+		_setSpeed($g_stepSpeed);
 	};
 	
 	//By Mamta
@@ -175,7 +175,7 @@ var $bo_act_SFM = new function bo_act_SFM() {
 			_click($bo_pg_sfmTransactionAndDesigner.btn_saveAndclose);
 			_wait(2000);
 
-		_setSpeed(100);	
+			_setSpeed($g_stepSpeed);	
 		}
 		
 		this.deleteSFM=function($sfmName){

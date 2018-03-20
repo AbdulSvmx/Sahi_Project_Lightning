@@ -4,7 +4,7 @@
 
 var $RS_7080 = _testcase("RS_7080", "Verify Save functionality on a Checklist Process");
 $RS_7080.start();
-_setSpeed(100);
+_setSpeed($g_stepSpeed);
 
 
 var $checklistName=$bo_act_common.generateRandomName("7080Chklist");

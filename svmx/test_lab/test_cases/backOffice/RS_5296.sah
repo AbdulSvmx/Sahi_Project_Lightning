@@ -3,7 +3,7 @@
 
 var $RS_5296 = _testcase("$RS_5296","Initial response on WO created within BH and updated after the commitment time");
 $RS_5296.start();
-_setSpeed(100);
+_setSpeed($g_stepSpeed);
 
 //Pre - Condition 
 $bo_act_login.login($g_url, $bac_un, $bac_pwd);

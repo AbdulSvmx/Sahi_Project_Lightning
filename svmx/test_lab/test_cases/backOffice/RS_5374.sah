@@ -4,7 +4,7 @@
 
 var $RS_5374 = _testcase("RS_5374", "Linked Process -After saving main process revert back to work order page");
 $RS_5374.start();
-_setSpeed(100);
+_setSpeed($g_stepSpeed);
 
 var $sfmToBeCloned="Add/Edit Products Serviced";
 var $sfmName=$bo_act_common.generateRandomName("SFMTest5374");
@@ -92,5 +92,5 @@ $bo_act_navigation.navigateToSfmTransactionDesigner();
 $bo_act_SFM.deleteSFM($sfmName);
 
 
-_setSpeed(100);
+_setSpeed($g_stepSpeed);
 $RS_5374.end();

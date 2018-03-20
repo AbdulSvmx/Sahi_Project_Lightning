@@ -3,7 +3,7 @@
 var $RS_5433 = _testcase("RS_5433",
 		"Verify weather checklist SFM Processes are listed on SFM app Permission Page.");
 $RS_5433.start();
-_setSpeed(100);
+_setSpeed($g_stepSpeed);
 
 var $checklistName = $bo_act_common.generateRandomName("RS5433");
 var $searchText = $checklistName;

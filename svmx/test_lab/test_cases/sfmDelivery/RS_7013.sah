@@ -12,7 +12,7 @@ Above six fields should be added to workorder page layout before launching the w
 */
 var $RS_7013 = _testcase("RS_7013", "Verify current record literals in map");
 $RS_7013.start();
-_setSpeed(100);
+_setSpeed($g_stepSpeed);
 
 
 var $sfmName=$bo_act_common.generateRandomName("7013SFM");
@@ -123,7 +123,7 @@ $bo_act_login.login($g_url,$sfmUsn,$sfmPwd);
 		$bo_act_SFW.deleteWizard($wizardname);	
 		$bo_act_navigation.navigateToSfmTransactionDesigner();
 		$bo_act_SFM.deleteSFM($sfmName);
-		_setSpeed(100);
+		_setSpeed($g_stepSpeed);
 
 $RS_7013.end();
 

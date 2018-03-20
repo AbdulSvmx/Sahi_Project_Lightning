@@ -3,7 +3,7 @@
 
 var $RS_5427 = _testcase("RS_5427", "On deleting a SFW/SFM/CA and check SFM App Permission page for deleted process");
 $RS_5427.start();
-_setSpeed(100);
+_setSpeed($g_stepSpeed);
 var $sfmName = $bo_act_common.generateRandomName("5427SFM");
 var $custActname=$bo_act_common.generateRandomName("CA5427");
 var $custActID=$custActname;
@@ -71,7 +71,7 @@ $bo_act_SFMAppPermission.genericSearchInAppPermission($processTypeC,$objectName,
 _log("Custom Action Not Found");
 
 
-_setSpeed(100);
+_setSpeed($g_stepSpeed);
 
 $RS_5427.end();
 

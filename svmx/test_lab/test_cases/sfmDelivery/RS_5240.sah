@@ -4,7 +4,7 @@
 
 var $RS_5240 = _testcase("RS_5240", "Verify All features of map in standalone mapping");
 $RS_5240.start();
-_setSpeed(100);
+_setSpeed($g_stepSpeed);
 
 
 var $sfmName=$bo_act_common.generateRandomName("5240SFM");
@@ -102,7 +102,7 @@ _setSelected(_f("main").s_combobox("searchCombo[2]"), $selectMapping);
 		$bo_act_SFW.deleteWizard($wizardname);	
 		$bo_act_navigation.navigateToSfmTransactionDesigner();
 		$bo_act_SFM.deleteSFM($sfmName);
-		_setSpeed(100);
+		_setSpeed($g_stepSpeed);
 
 $RS_5240.end();
 

@@ -2,7 +2,7 @@
 
 var $RS_7019 = _testcase("$RS_7019","Verify the Stock Transfer of serialised and non seriliased products");
 $RS_7019.start();
-_setSpeed(100);
+_setSpeed($g_stepSpeed);
 
 //PreCondition 
 $bo_act_login.login($g_url, $bac_PRTun, $bac_PRTpwd);

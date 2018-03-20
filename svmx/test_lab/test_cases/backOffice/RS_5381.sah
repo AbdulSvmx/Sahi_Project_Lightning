@@ -1,7 +1,7 @@
 
 var $RS_5381 = _testcase("RS_5381", "When there are 3 fields included for sorting (use picklist, Date, Number)");
 $RS_5381.start();
-_setSpeed(100);
+_setSpeed($g_stepSpeed);
 
 	var $sfmToBeCloned="manage work order lines - Usage";
 	var $sfmName=$bo_act_common.generateRandomName("5381SFM");
@@ -85,5 +85,5 @@ _setSelected($bo_pg_sfmWizard.sel_objPrevMaintPlan,$objName	);
 $bo_act_SFW.deleteWizard($wizardname);	
 $bo_act_navigation.navigateToSfmTransactionDesigner();
 $bo_act_SFM.deleteSFM($sfmName);
-_setSpeed(100);
+_setSpeed($g_stepSpeed);
 $RS_5381.end();

@@ -3,7 +3,7 @@
 
 var $RS_5306 = _testcase("$RS_5306","Get Price on WO:IB not covered under Warranty/SCON");
 $RS_5306.start();
-_setSpeed(100);
+_setSpeed($g_stepSpeed);
 
 /**
  * Login to the Sandbox Org

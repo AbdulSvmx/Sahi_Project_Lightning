@@ -2,7 +2,7 @@
 
 var $RS_10011 = _testcase("$RS_10011","Get Price- When Pricing Rule of Minimum is applied and [Billable Line Price < Minimum] for Expense Line");
 $RS_10011.start();
-_setSpeed(100);
+_setSpeed($g_stepSpeed);
 
 /**
  * Login to the Sandbox Org

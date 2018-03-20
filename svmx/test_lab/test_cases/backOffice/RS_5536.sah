@@ -1,6 +1,6 @@
 var $RS_5536= _testcase("RS_5536","Verify the creation of Counter Rollups on Service Contract -1 Counter Definition");
 $RS_5536.start();
-_setSpeed(100);
+_setSpeed($g_stepSpeed);
 var $ProcessName= $bo_act_common.generateRandomName("5536pros");
 var $ProcessId=$bo_act_common.generateRandomName("5536procId");
 var $selectSFM1="Cancel Shipment Order";
@@ -52,6 +52,6 @@ if(_isVisible(_link("Del"))){
 	_log("Counter roll Up created successfully");
 }
 
-_setSpeed(100);
+_setSpeed($g_stepSpeed);
 $RS_5536.end();
 

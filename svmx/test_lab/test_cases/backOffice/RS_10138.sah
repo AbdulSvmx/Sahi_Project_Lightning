@@ -8,7 +8,7 @@ var $seperator = "/";
 
 var $RS_10138 = _testcase("$RS_10138","Verify the functionality of Auto Entitlement on WO's PS lines using Service Contract.");
 $RS_10138.start();
-_setSpeed(100);
+_setSpeed($g_stepSpeed);
 /**
 * Login to the Sandbox Org
 */

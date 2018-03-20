@@ -3,7 +3,7 @@
 
 var $RS_5307 = _testcase("$RS_5307","Get Price on WO:IB covered under SCON and part pricing provided");
 $RS_5307.start();
-_setSpeed(100);
+_setSpeed($g_stepSpeed);
 
 /**
  * Login to the Sandbox Org

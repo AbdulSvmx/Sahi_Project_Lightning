@@ -1,7 +1,7 @@
 
 var $RS_5380 = _testcase("RS_5380", "Verify when there is one-level of SFM sorting.");
 $RS_5380.start();
-_setSpeed(100);
+_setSpeed($g_stepSpeed);
 
 	var $sfmToBeCloned="manage work order lines - Usage";
 	var $sfmName=$bo_act_common.generateRandomName("5380SFM");
@@ -89,7 +89,7 @@ $bo_act_navigation.navigateToSfmTransactionDesigner();
 $bo_act_SFM.deleteSFM($sfmName);
 
 
-_setSpeed(100);
+_setSpeed($g_stepSpeed);
 
 
 

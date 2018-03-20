@@ -3,7 +3,7 @@
 
 var $RS_7287 = _testcase("$RS_7287","Verify the creation of SLA Term.");
 $RS_7287.start();
-_setSpeed(100);
+_setSpeed($g_stepSpeed);
 
 /**
 * Login to the Sandbox Org

@@ -3,7 +3,7 @@
 
 var $RS_5333 = _testcase("$RS_5333","Get Price - When Pricing Rule of FIXED is applied Using Service Contract");
 $RS_5333.start();
-_setSpeed(100);
+_setSpeed($g_stepSpeed);
 
 /**
  * Login to the Sandbox Org
