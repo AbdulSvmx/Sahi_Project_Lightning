@@ -11,7 +11,7 @@
 //
 //Steps		:-	
 //				1. Navigate to Servicemax SetUp> Service Flow Manager> SFM Search.
-//				2. Create New Customer SFM Search with below Criteria
+//				2. Create New Custom SFM Search with below Criteria
 //					Object Type=Work Order
 //					filter criteria
 //						Order Status=Open

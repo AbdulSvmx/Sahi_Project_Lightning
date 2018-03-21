@@ -16,7 +16,7 @@ _setSpeed($g_stepSpeed);
 
 	//Pre - Condition 
 	//$bo_act_login.login("https://test.salesforce.com", "lohithaadmin@ref5.com.cfg4", "maxpl0re2");
- 
+/* 
 	$bo_act_login.login("https://test.salesforce.com","lohitha@svmxtest.org.testpar2", "maxpl0re3");
 
 	var $wizardSelectObjectName = "Work Order";
@@ -46,7 +46,7 @@ _setSpeed($g_stepSpeed);
 	/**
 	 * Add Price To Standard Price for above created Product
 	 */ 
-	var $standardPriceValue = 120;
+/*	var $standardPriceValue = 120;
 	$bo_act_products.addStandardPriceForProduct($productName, $standardPriceValue);
 
 	var $IBName = $bo_act_installedProduct.createInstalledProduct($productName,$accountName,$contactName);
@@ -99,7 +99,7 @@ _setSpeed($g_stepSpeed);
  	*/ 
 
 	//Launch in delivery
-	$workOrderNo = $swat_act_workOrders.createWorkOrder($caseNumber, $accountName, $contactName, $IBName, "Open", "High", "Field Service");
+/*	$workOrderNo = $swat_act_workOrders.createWorkOrder($caseNumber, $accountName, $contactName, $IBName, "Open", "High", "Field Service");
 	//$woName = 
  
 	// Create Service Contract(With child lines) and Activate it
@@ -145,53 +145,71 @@ _setSpeed($g_stepSpeed);
 	//_selectDomain("/visual.force.com/");
 	 
  
+*/
+	 //_isVisible(_cell({title: $wizardTitleName}));
 
-	 _isVisible(_cell({title: $wizardTitleName}));
-	 _assertVisible(_cell({title:$wizardTitleName}),"Pass");
+/*
+	
+	_selectDomain("/svmx/");
+	_wait(15000,_isVisible(_cell($wizardTitleName)));
+	 //_assertVisible(_cell($wizardTitleName),"true");
 
-	 _click(_button("Create Quote from Work Order[1]"));
+	 
+	 //_click(_button("/Create Quote from Work Order/",_in(_cell($wizardTitleName))));
+	 
+	 
+	 _click(_button("Create Quote from Work Order", _in(_cell("SFWTitle203201815549"))));
+	 
 	 _selectDomain();
-
 	 _wait(20000,_isVisible(_label("Status:")));
 	 _setValue(_textbox("Status:"), "Presented");
-	 _click(_div("sfm-button-1059"));
+	 _click(_div("/sfm-button-/", _near(_label("Valid Until:"))));
 
 	 // Add a Parts Line
-	 _click(_span("sfm-button-1103-btnIconEl"));
-	 _click(_image("gif[5]"));
-	 _click(_span("svmx-button-1208-btnIconEl"));
+	 _click(_span("/svmx-sfmd-add-line-icon/"));
+	 _click(_image("/svmx-sfmd-edit-icon/"));
+	 
 	 //_click(_span("sfm-button-1251-btnIconEl"));
-	 _click(_span("svmx-btn-icon svmx-sfmd-search-icon "));
+	 //_click(_span("svmx-btn-icon svmx-sfmd-search-icon "));
+	 _wait(10000,_isVisible(_span("/svmx_lookup_icon/")));
+	 _click(_span("/svmx_lookup_icon/", _near(_label("Product:"))));
 	 $bo_act_common.searchfunction($productName);
 	 _setValue(_textbox("Qty:"), "2");
 	 _setValue(_textbox("svmx-form-field svmx-form-required-field svmx-form-text svmx-form-invalid-field"), "4000");
 	 _click(_span("Update"));
+	
 
-	 
+*/
+/*
+
 	//Add a Labor Line
 	_click(_span("Labor"));
-	_click(_span("svmx-btn-icon svmx-sfmd-add-line-icon[1]"));
-	_click(_image("svmx-action-col-icon svmx-action-col-0   svmx-sfmd-edit-icon[1]"));
+	_setStrictVisibilityCheck(true);
+	_click(_span("/svmx-sfmd-add-line-icon/"));
+	_click(_image("/svmx-sfmd-edit-icon/"));
+	_setStrictVisibilityCheck(false);
+	//_click(_image("svmx-action-col-icon svmx-action-col-0   svmx-sfmd-edit-icon[1]"));
 	_setValue(_textbox("Qty:"), "3");
-	_setValue(_textbox("svmx-form-field svmx-form-required-field svmx-form-text svmx-form-invalid-field"), "6000");
+	_setValue(_textbox("/svmx-form-required-field/", _rightOf(_label("Unit Price:"))),"6000");
 	_click(_span("Update"));
 
 	//Add a Expense Line
 	_click(_span("Expense"));
-	_click(_span("sfm-button-1172-btnIconEl"));
-	//_click(_span("svmx-btn-icon svmx-sfmd-add-line-icon[2]"));
-	//_click(_image("svmx-action-col-icon svmx-action-col-0   svmx-sfmd-edit-icon[1]"));
-	_click(_image("svmx-action-col-icon svmx-action-col-0   svmx-sfmd-edit-icon[2]"));
+	_setStrictVisibilityCheck(true);
+	_click(_span("/svmx-sfmd-add-line-icon/"));
+	_click(_image("/svmx-sfmd-edit-icon/"));
+	_setStrictVisibilityCheck(false);
 	_setValue(_textbox("Qty:"), "4");
-	_setValue(_textbox("svmx-form-field svmx-form-required-field svmx-form-text svmx-form-invalid-field"), "8500");
+	_setValue(_textbox("/svmx-form-required-field/", _near(_label("Unit Price:"))),"8500");
 	_click(_span("Update"));
 	_click(_span("svmx-btn-icon svmx-sfmd-save-icon"));
 
 	//$bo_act_getPrice.closeEditedWOLineToSFMDelivery();
 
-	$bo_act_getPrice.saveSFMDelivery();
+	//$bo_act_getPrice.saveSFMDelivery();
 
 	//Add Parts Line to Above invoked TDM015 SFM
+	
 	//Add a Parts Line
 	
 	 _wait(15000, _isVisible(_span("svmx-btn-icon svmx-sfmd-add-line-icon")));
@@ -207,6 +225,15 @@ _setSpeed($g_stepSpeed);
 	_click(_span("Update"));
 	_wait(15000);
 	
+*/
+
+	var $wizardTitleName="SFWTitle203201815549";
+	var $searchValue="pro2032018122012";
+	var $lineQty=10;
+	
+	$bo_act_getPrice.addPartsLineToSFMDelivery($searchValue, $lineQty);
+	_wait(15000);
+	
 	//Add a Labor Line
 	$bo_act_getPrice.addLaborLineToSFMDelivery($searchValue, "service", "03", "05");
 	_wait(15000);
@@ -219,10 +246,11 @@ _setSpeed($g_stepSpeed);
 	$bo_act_getPrice.addTravelLineToSFMDeliveryUsingStartEndDate("01", "03");
 	_wait(15000);
 	
+	//
 	_click(_span("svmx-btn-icon svmx-sfmd-save-icon"));
 
 	//Create Usage from Estimate 
-
+/*
 	$bo_act_getPrice.addPartsLineToSFMDelivery($searchValue,$lineQty);
 	//Add a Parts Line
 	_wait(15000, _isVisible(_span("svmx-btn-icon svmx-sfmd-add-line-icon")));
@@ -309,8 +337,10 @@ $bo_act_getPrice.saveSFMDelivery();
 *Clean up function
 >>>>>>> c64bdd0c53609bcf471f53fa80af69fc2e6ba513
 */
-	_wait(30000, _isVisible(_button("Finalize")));
+
+	 
+/*	 _wait(30000, _isVisible(_button("Finalize")));
 	_click(_button("Finalize"));
 	_wait(30000, _isVisible(_link(0)));
-
+*/
 $BVT_TC_002_SFW_with_standard_Wiz_steps.end();
