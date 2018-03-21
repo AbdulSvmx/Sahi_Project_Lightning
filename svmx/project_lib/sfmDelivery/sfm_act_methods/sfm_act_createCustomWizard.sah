@@ -567,9 +567,9 @@ var $sfm_act_createCustomWizard = new function sfm_act_createCustomWizard() {
 			_setValue($sfm_pg_wizards.txt_title,$titles[$i]);
 			_click($sfm_pg_wizards.btn_saveStep);
 		}
-		_click($sfm_pg_wizards.txt_managePermission);
-		_setSelected($sfm_pg_wizards.select_availableGrpProfiles,"Sysadmin01 Group");
-		_click($sfm_pg_wizards.btn_add);
+//		_click($sfm_pg_wizards.txt_managePermission);
+//		_setSelected($sfm_pg_wizards.select_availableGrpProfiles,"Sysadmin01 Group");
+//		_click($sfm_pg_wizards.btn_add);
 		_click($sfm_pg_wizards.btn_saveClose);
 	};
 	
@@ -618,7 +618,14 @@ var $sfm_act_createCustomWizard = new function sfm_act_createCustomWizard() {
 		_click($sfm_pg_wo.link_actualInitialResp);
 		_click($sfm_pg_wo.link_scheduledDate);
 		_click($sfm_pg_wo.btn_wo_save);
-		return _getText($sfm_pg_wo.label_wo);
+		$case = "";
+		if(_isVisible(_span("/efhpCenterValue/"))){
+			$case = _getText(_span("/efhpCenterValue/"));
+		}
+		else{
+			$case = _getText($sfm_pg_wo.label_wo);
+		}
+		return $case;
 	};
 	
 	this.createWoFor6344 = function($caseId){
