@@ -25,5 +25,5 @@ $rs_10130_WO1 = $rs_10130_fetch[0].Name;
 // To create a Custom SFM Search value
 // createsfmsearch = For Single Expression
 $bo_act_sfmsearch.sfmsearch_advancedexpression($searchId, $searchTitle, "Work Order", "Priority", "High", "Equals", "Order Status", "Open", "10130");
-$bo_act_sfmsearchdelivery.sfmsearch_clickwizards($searchTitle, $rs_10130_WO1, "Cancel Work Order", "Work Order Toolbox", "Generate Invoice");
+$bo_act_sfmsearchdelivery.sfmsearch_clickwizards($searchTitle, $rs_10130_WO1, "Cancel Work Order","Field Service","Work Order Toolbox", "Generate Invoice");
 $RS_10130.end();
