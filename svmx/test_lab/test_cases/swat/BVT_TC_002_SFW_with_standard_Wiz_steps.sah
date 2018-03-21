@@ -15,8 +15,6 @@ $BVT_TC_002_SFW_with_standard_Wiz_steps.start();
 _setSpeed($g_stepSpeed);
 
 	//Pre - Condition 
-	//$bo_act_login.login("https://test.salesforce.com", "lohithaadmin@ref5.com.cfg4", "maxpl0re2");
- 
 	$bo_act_login.login("https://test.salesforce.com","lohitha@svmxtest.org.testpar2", "maxpl0re3");
 
 	var $wizardSelectObjectName = "Work Order";
@@ -37,7 +35,10 @@ _setSpeed($g_stepSpeed);
 	var $handOver2 = false;
 	var $selectTemplateAtRunTime = false;
 	var $wizardSelectObjectName1 = "Parts Order";
-
+	
+	/**
+	 * Creation of Case, Account, Contact, Product
+	 */
 	var $caseNumber = $bo_act_Cases.createCase("New", "High", "Email");
 	var $accountName = $bo_act_accounts.createAccount();
 	var $contactName = $bo_act_contacts.createContact($accountName);
@@ -52,7 +53,6 @@ _setSpeed($g_stepSpeed);
 	var $IBName = $bo_act_installedProduct.createInstalledProduct($productName,$accountName,$contactName);
 
 	
-	
 	// Steps to create SFM Wizard on WO Object
 	$bo_act_navigation.navigateToSfmWizard();
 	$bo_act_SFW.createWizardGeneralInfo($wizardSelectObjectName, $wizardTitleName, $wizardIDName);
@@ -65,25 +65,6 @@ _setSpeed($g_stepSpeed);
 	$bo_act_SFW.addCustomActionToWizard($fieldActnType, $actnName);
 	$bo_act_SFW.quickSaveSFWizard();
 	$bo_act_SFW.saveAndClose();
-
-	// Check - Below code are repeate of above set of codes. Should we remove them?
-	//$bo_act_SFW.createSFMWizard($wizardSelectObjectName, $wizardTitleName, $wizardIDName, $wizardStep1Type, $wizardStep1Name, $executionMode1, $wizardStep2Type, $wizardStep2Name, $executionMode2);
-	//$bo_act_SFW.createWizardGeneralInfo($wizardSelectObjectName, $wizardTitleName, $wizardIDName);
-	//$bo_act_SFW.createWizardStep($wizardStep1Type, $wizardStep1Name, $executionMode1);
-	//$bo_act_SFW.createWizardStep($wizardStep1Type, $wizardStep2Name, $executionMode1);
-	//$bo_act_SFW.createWizardStep($wizardStep1Type, $wizardStep3Name, $executionMode1);
-	//$bo_act_SFW.createWizardStep($wizardStep2Type, $wizardStep4Name, // $executionMode1);
-	//$swat_act_sfmSearch.launchSfmSearch($searchItem,$workOrderNo);
-
-	// Check - Below code are added for dry run. Should we remove them?
-	//_wait(3000);
-	//$sfm_act_common.globalSearch($workOrderNo);
-	//_click(_link($workOrderNo));
-	//_selectDomain("/svmx/"); 
-	//_selectDomain("/visual.force.com/");
-	//_isVisible(_cell({title: ""+$wizardTitleName+""}));
-	//_assertVisible(_cell({title:""+$wizardTitleName+""}),"Pass");
-
   
 	// Create SLA Terms
 	var $slaName = $bo_act_slaTerms.createSlaTerms("Default");
@@ -125,13 +106,7 @@ _setSpeed($g_stepSpeed);
 	var $pricePerUnit = 150;
 	$bo_act_serviceMaintenanceContracts.addPartsPricingToServiceContract($serviceContractName, $productName, $pricePerUnit);
 
-
-	// Perform Interactive Entitlement on WO using Service Contract
-
-	// Use $WONumber in place of "WO-00000068"
-	//_selectDomain("/svmx/"); 
 	
-		
 	$bo_act_interactiveEntitlement_WO.performInteractiveEntitlementWO_UsingScon($workOrderNo, $serviceContractName);
 	var $actual_EntitlementType = _getText(_div(0,_rightOf(_cell("/Entitlement Type/"))));
 	var $ServiceContract_actual = _getText(_link(0,_rightOf(_cell("Service Contract"))));
@@ -140,76 +115,70 @@ _setSpeed($g_stepSpeed);
  
 	_wait(20000);
 	$sfm_act_common.globalSearch($workOrderNo);
+	
 	_click(_link($workOrderNo));
 
-	//_selectDomain("/visual.force.com/");
-	 
- 
+	
+	_selectDomain("/svmx/");
+	_wait(15000,_isVisible(_cell($wizardTitleName)));
 
-	 _isVisible(_cell({title: $wizardTitleName}));
-	 _assertVisible(_cell({title:$wizardTitleName}),"Pass");
-
-	 _click(_button("Create Quote from Work Order[1]"));
+	
+	//SFM - Create Quote from Work Order 
+	 _click(_button("/Create Quote from Work Order/", _in(_cell($wizardTitleName))));
 	 _selectDomain();
-
 	 _wait(20000,_isVisible(_label("Status:")));
 	 _setValue(_textbox("Status:"), "Presented");
-	 _click(_div("sfm-button-1059"));
+	 _click(_div("/sfm-button-/", _near(_label("Valid Until:"))));
 
 	 // Add a Parts Line
-	 _click(_span("sfm-button-1103-btnIconEl"));
-	 _click(_image("gif[5]"));
-	 _click(_span("svmx-button-1208-btnIconEl"));
-	 //_click(_span("sfm-button-1251-btnIconEl"));
-	 _click(_span("svmx-btn-icon svmx-sfmd-search-icon "));
+	 _click(_span("/svmx-sfmd-add-line-icon/"));
+	 _click(_image("/svmx-sfmd-edit-icon/"));
+	 _wait(10000,_isVisible(_span("/svmx_lookup_icon/")));
+	 _click(_span("/svmx_lookup_icon/", _near(_label("Product:"))));
 	 $bo_act_common.searchfunction($productName);
 	 _setValue(_textbox("Qty:"), "2");
 	 _setValue(_textbox("svmx-form-field svmx-form-required-field svmx-form-text svmx-form-invalid-field"), "4000");
 	 _click(_span("Update"));
 
-	 
 	//Add a Labor Line
 	_click(_span("Labor"));
-	_click(_span("svmx-btn-icon svmx-sfmd-add-line-icon[1]"));
-	_click(_image("svmx-action-col-icon svmx-action-col-0   svmx-sfmd-edit-icon[1]"));
+	_setStrictVisibilityCheck(true);
+	_click(_span("/svmx-sfmd-add-line-icon/"));
+	_click(_image("/svmx-sfmd-edit-icon/"));
+	_setStrictVisibilityCheck(false);
 	_setValue(_textbox("Qty:"), "3");
-	_setValue(_textbox("svmx-form-field svmx-form-required-field svmx-form-text svmx-form-invalid-field"), "6000");
+	_setValue(_textbox("/svmx-form-required-field/", _rightOf(_label("Unit Price:"))),"6000");
 	_click(_span("Update"));
 
 	//Add a Expense Line
 	_click(_span("Expense"));
-	_click(_span("sfm-button-1172-btnIconEl"));
-	//_click(_span("svmx-btn-icon svmx-sfmd-add-line-icon[2]"));
-	//_click(_image("svmx-action-col-icon svmx-action-col-0   svmx-sfmd-edit-icon[1]"));
-	_click(_image("svmx-action-col-icon svmx-action-col-0   svmx-sfmd-edit-icon[2]"));
+	_setStrictVisibilityCheck(true);
+	_click(_span("/svmx-sfmd-add-line-icon/"));
+	_click(_image("/svmx-sfmd-edit-icon/"));
+	_setStrictVisibilityCheck(false);
 	_setValue(_textbox("Qty:"), "4");
-	_setValue(_textbox("svmx-form-field svmx-form-required-field svmx-form-text svmx-form-invalid-field"), "8500");
+	_setValue(_textbox("/svmx-form-required-field/", _near(_label("Unit Price:"))),"8500");
 	_click(_span("Update"));
 	_click(_span("svmx-btn-icon svmx-sfmd-save-icon"));
 
-	//$bo_act_getPrice.closeEditedWOLineToSFMDelivery();
-
-	$bo_act_getPrice.saveSFMDelivery();
-
-	//Add Parts Line to Above invoked TDM015 SFM
-	//Add a Parts Line
-	
-	 _wait(15000, _isVisible(_span("svmx-btn-icon svmx-sfmd-add-line-icon")));
-	_click(_span("svmx-btn-icon svmx-sfmd-add-line-icon"));
-	_wait(10000, _isVisible(_image("svmx-action-col-icon svmx-action-col-0   svmx-sfmd-edit-icon")));
-	_click(_image("svmx-action-col-icon svmx-action-col-0   svmx-sfmd-edit-icon"));
 	
 	
-	$bo_act_common.searchfunction($productName);
-	_setValue(_textbox("Line Qty:"), "5");
-	//_setValue(_textbox("svmx-form-field svmx-form-required-field svmx-form-text svmx-form-focus svmx-field-form-focus svmx-field-default-form-focus"), "5");
-	//_setValue(_textbox("svmx-form-field svmx-form-required-field svmx-form-text svmx-form-invalid-field"), "4000");
-	_click(_span("Update"));
+	//Create usage lines from estimate & Get Price Calculation for Part and Labor
+	var $lineQty=10;
+	var $searchValue=$productName;
+	
+	// Add a Parts Line
+	$bo_act_getPrice.addPartsLineToSFMDelivery($searchValue, $lineQty);
 	_wait(15000);
 	
 	//Add a Labor Line
 	$bo_act_getPrice.addLaborLineToSFMDelivery($searchValue, "service", "03", "05");
 	_wait(15000);
+	_setStrictVisibilityCheck(true);
+	_click(_div("/svmx-grid-checkheader-checked/", _near(_span("/Use Price From Pricebook/"))));
+	_click(_div("/svmx-grid-cell-inner/",_under(_div("/Line Price Per Unit/"))));
+	_setValue(_textbox("/svmx-form-field svmx-form-text/",_under(_div("/Line Price Per Unit/"))),"1200");
+	_setStrictVisibilityCheck(false);
 	
 	//Add a Expense Line
 	$bo_act_getPrice.addExpensesLineToSFMDelivery("Phone", "03", "3000");
@@ -219,98 +188,46 @@ _setSpeed($g_stepSpeed);
 	$bo_act_getPrice.addTravelLineToSFMDeliveryUsingStartEndDate("01", "03");
 	_wait(15000);
 	
-	_click(_span("svmx-btn-icon svmx-sfmd-save-icon"));
+	//assert on get Price Calculation 
+	_click($bo_pg_getPrice.btn_getPrice);
+	_wait(5000);
+	_click($bo_pg_getPrice.btn_partsLine);
+	_setStrictVisibilityCheck(true);
+	var $actualPRice=_getCellText(_div("/svmx-grid-cell-inner/", _under(_div("gridcolumn-1071-titleEl"))));
+	_assertEqual("1,500.000",$actualPRice,"Assertion Passl");
+	_click($bo_pg_getPrice.btn_laborLine);
+	var $actualPRice=_getCellText(_div("/svmx-grid-cell-inner/", _under(_div("gridcolumn-1135-titleEl"))));
+	_assertEqual("2,400.000",$actualPRice,"Assertion Pass");
+	_click($bo_pg_getPrice.btn_save);
 
-	//Create Usage from Estimate 
 
+	//SFM - Create Usage from Estimate 
+	
+	// Add a Parts Line
 	$bo_act_getPrice.addPartsLineToSFMDelivery($searchValue,$lineQty);
-	//Add a Parts Line
-	_wait(15000, _isVisible(_span("svmx-btn-icon svmx-sfmd-add-line-icon")));
-	_click(_span("svmx-btn-icon svmx-sfmd-add-line-icon"));
-	_wait(15000, _isVisible(_image("svmx-action-col-icon svmx-action-col-0   svmx-sfmd-edit-icon")));
-	_click(_image("svmx-action-col-icon svmx-action-col-0   svmx-sfmd-edit-icon"));
+	
+	//Add a Labor Line
+	$bo_act_getPrice.addLaborLineToSFMDelivery($searchValue, "service", "03", "05");
 
+	//Add a Expense Line
+	$bo_act_getPrice.addExpensesLineToSFMDelivery("Phone", "03", "3000");
+	_wait(15000);
+	
 	//Add a Travel Line
 	$bo_act_getPrice.addTravelLineToSFMDeliveryUsingStartEndDate("01", "03");
+	
 	_wait(15000, _isVisible(_span("svmx-btn-icon svmx-sfmd-save-icon")));
-	_click(_span("svmx-btn-icon svmx-sfmd-save-icon"));
-
-// _isVisible(_cell({title: "SFWTitle31201814166"}));
-// _assertVisible(_cell({title:"SFWTitle31201814166"}),"Pass");
+	_click($bo_pg_getPrice.btn_save);
 
 
-_isVisible(_cell({title: $wizardTitleName}));
-_assertVisible(_cell({title:$wizardTitleName}),"Pass");
-
-//_click(_near(_cell({title: "SFWTitle31201814166"})_button("Create Quote from Work Order[1]")));
-_click(_button("Create Quote from Work Order"));
-_selectDomain();
-
-
-//_wait(9000);
-//_label("Status:")
-_wait(10000,_isVisible(_label("Status:")));
-
-_setValue(_textbox("Status:"), "Presented");
-_click(_div("sfm-button-1059"));
-
-//Add a Parts Line
-_click(_span("sfm-button-1103-btnIconEl"));
-_click(_image("gif[5]"));
-
-_click(_span("svmx-button-1208-btnIconEl"));
-//_click(_span("sfm-button-1251-btnIconEl"));
-_click(_span("svmx-btn-icon svmx-sfmd-search-icon "));
-
-$bo_act_common.searchfunction($productName);
-_setValue(_textbox("Qty:"), "2");
-_setValue(_textbox("svmx-form-field svmx-form-required-field svmx-form-text svmx-form-invalid-field"), "4000");
-_click(_span("Update"));
-
-//Add a Labor Line
-_click(_span("Labor"));
-_click(_span("svmx-btn-icon svmx-sfmd-add-line-icon[1]"));
-_click(_image("svmx-action-col-icon svmx-action-col-0   svmx-sfmd-edit-icon[1]"));
-_setValue(_textbox("Qty:"), "3");
-_setValue(_textbox("svmx-form-field svmx-form-required-field svmx-form-text svmx-form-invalid-field"), "6000");
-_click(_span("Update"));
-
-//Add a Expense Line
-_click(_span("Expense"));
-_click(_span("sfm-button-1172-btnIconEl"));
-//_click(_span("svmx-btn-icon svmx-sfmd-add-line-icon[2]"));
-//_click(_image("svmx-action-col-icon svmx-action-col-0   svmx-sfmd-edit-icon[1]"));
-_click(_image("svmx-action-col-icon svmx-action-col-0   svmx-sfmd-edit-icon[2]"));
-_setValue(_textbox("Qty:"), "4");
-_setValue(_textbox("svmx-form-field svmx-form-required-field svmx-form-text svmx-form-invalid-field"), "8500");
-_click(_span("Update"));
-_click(_span("svmx-btn-icon svmx-sfmd-save-icon"));
-
-
-var $searchValue = $productName;
-var $lineQty = "5";
-var $pricePerUnit = 120;
-$bo_act_getPrice.addPartsLineToSFMDelivery($searchValue,$lineQty);
-$bo_act_getPrice.calculateGetPrice();
-
-//Validation of Get Price for Parts lines
-
-_assertEqual($PartsLinePricePerUnitActual,$pricePerUnit,"Actual and expected Parts Line Price Per Unit are not same");
-_assertEqual($PartsBillableQtyActual,$lineQty,"Actual and expected Parts Billable Qty are not same");
-_assertEqual($PartsBillableLinePriceActual,$BillableLinePriceExpected,"Actual and expected Parts Billable Line Price are not same");
-_assertEqual($PartsCoveredActual,"0","Actual and expected Parts Covered % are not same");
-_assertEqual($PartsDiscountActual,"0","Actual and expected Parts Discount % are not same");
-
-$bo_act_getPrice.closeEditedWOLineToSFMDelivery();
-
-$bo_act_getPrice.saveSFMDelivery();
-
-/**
-*Clean up function
->>>>>>> c64bdd0c53609bcf471f53fa80af69fc2e6ba513
-*/
+	// SFM - Output Document creation
 	_wait(30000, _isVisible(_button("Finalize")));
 	_click(_button("Finalize"));
 	_wait(30000, _isVisible(_link(0)));
+	_click(_link(0));
+	
+	
+	_wait(15000,_isVisible($bo_pg_workOrders.txt_workOrderDetails));
+	_assertVisible(_cell("Edit | View | Del", _near(_heading3("Notes & Attachments"))),"Service Report is attached to Work Order: ");
 
 $BVT_TC_002_SFW_with_standard_Wiz_steps.end();

@@ -52,7 +52,7 @@ this.sfmsearch = function($standardsfmsearchname, $recordname, $isstandardtrue){
 		
 };
 
-this.sfmsearch_clickwizards = function($sfmsearchname, $recordname, $wizardname1, $wizardboxname, $wizardname2)
+this.sfmsearch_clickwizards = function($sfmsearchname, $recordname, $wizardname1, $wizardboxname1,$wizardboxname2, $wizardname2)
 
 {
 	_click($bo_pg_home.link_home);
@@ -87,6 +87,7 @@ this.sfmsearch_clickwizards = function($sfmsearchname, $recordname, $wizardname1
 	_setStrictVisibilityCheck(true);
 	
 	// To verify "Close Work Order" by clicking on them
+	_click(_span($wizardboxname1));
 	_click(_span($wizardname1));
 	_title();
 	_selectWindow($swat_pg_sfmSearch.newtab);
@@ -96,7 +97,7 @@ this.sfmsearch_clickwizards = function($sfmsearchname, $recordname, $wizardname1
 	
 	// To verify "Checklists" Standard Wizard by clicking on it
 	_selectWindow();
-	_click(_span($wizardboxname));
+	_click(_span($wizardboxname2));
 	_click(_span($wizardname2));
 	_title();
 	_selectWindow($swat_pg_sfmSearch.newtab);
