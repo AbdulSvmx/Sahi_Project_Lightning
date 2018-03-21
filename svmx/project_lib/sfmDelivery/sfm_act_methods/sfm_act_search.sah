@@ -26,7 +26,8 @@ var $sfm_act_search = new function sfm_search() {
 	this.searchSfmSearches =  function ($standardSearch) {
 //		_setStrictVisibilityCheck(true);
 //		_wait(5000);
-		_selectDomain("svmxc.cs19.visual.force.com");
+//		_selectDomain("svmxc.cs19.visual.force.com");
+		_selectDomain("/svmx/");
 //		_focus($sfm_pg_search.sel_search,$standardSearch);
 		_setSelected($sfm_pg_search.sel_search,$standardSearch);
 		_click($sfm_pg_search.btn_go);
@@ -43,6 +44,7 @@ var $sfm_act_search = new function sfm_search() {
 		_click(_span($standardSearch));
 		if(_isVisible($sfm_pg_search.tab_allWo)){
 			_click($sfm_pg_search.tab_allWo);
+			_setStrictVisibilityCheck(true);
 			var $woNumber = _getText($sfm_pg_search.link_wo);
 			_log($woNumber);
 //			_log($woNumber.search);
