@@ -9,7 +9,7 @@ var $BVT_TC_004_Linked_SFM = _testcase("BVT_TC_004_Linked_SFM",
 	_setSpeed($g_stepSpeed);
 	
 	//Pre - Condition 
-	$bo_act_login.login("https://test.salesforce.com", "lohithaadmin@swatpart2.com", "maxpl0re2");
+	$bo_act_login.login("https://test.salesforce.com","lohitha@svmxtest.org.testpar2", "maxpl0re3");
 	
 	var $wizardSelectObjectName = "Work Order";
 	var $wizardTitleName = $bo_act_common.generateRandomName("SFWTitle");
@@ -21,10 +21,28 @@ var $BVT_TC_004_Linked_SFM = _testcase("BVT_TC_004_Linked_SFM",
 	
 	
 	var $caseNumber = $bo_act_Cases.createCase("New", "High", "Email");
-	var $accountName = $bo_act_accounts.createAccount();
-	var $contactName = $bo_act_contacts.createContact($accountName);
-	var $productName =$bo_act_products.createProduct();
-	var $IBName = $bo_act_installedProduct.createInstalledProduct($productName,$accountName,$contactName);
+	//$excel.writeToExcel("write", "../swatdata.xlsx", "readData", $caseNumber, 1)
+	
+	//Uncomment below code while running this script alone
+//	var $accountName = $bo_act_accounts.createAccount();
+//	var $contactName = $bo_act_contacts.createContact($accountName);
+//	var $productName =$bo_act_products.createProduct();
+//	var $IBName = $bo_act_installedProduct.createInstalledProduct($productName,$accountName,$contactName);
+	
+	
+	/**
+	 * Read data from swatdata.xlsx - Reading data which are created in testscript1 -BVT_TC_001_SFMSearch.sah
+	 */
+	var $runData = $excel.readFromCustomExcel("/Swat_excelData/swatdata.xlsx",  "runData", true, true);
+	var $caseNumber=$runData[1]["Case"];
+	var $accountName=$runData[1]["Account"];
+	var $contactName=$runData[1]["Contact"];
+	var $productName=$runData[1]["Product"];
+	var $IBName=$runData[1]["InstalledProduct"];
+	_log("Case: "+$caseNumber);
+	_log("Account: "+$accountName);
+	_log("Contact: "+$contactName);
+	_log("Product: "+$productName);
 	
 	
 	$bo_act_navigation.navigateToSfmWizard();
@@ -48,12 +66,12 @@ var $BVT_TC_004_Linked_SFM = _testcase("BVT_TC_004_Linked_SFM",
 	// The following function adds a part and launches the Linked Process
 	
 	
-	$sfm_act_createCustomWizard.addProductServiced("Ciaz");
+	$sfm_act_createCustomWizard.addProductServiced($productName);
 	
 	//Add lines in the linked process and save the linked process followe by the main process
 	_wait(15000);
-	$sfm_act_createCustomWizard.addParts("Ciaz");
-	$sfm_act_createCustomWizard.addLabor("Ciaz");
+	$sfm_act_createCustomWizard.addParts($productName);
+	$sfm_act_createCustomWizard.addLabor($productName);
 	$sfm_act_createCustomWizard.addExpenses("Airfare");
 	$sfm_act_createCustomWizard.addTravel();
 	$sfm_act_createCustomWizard.saveWizard();

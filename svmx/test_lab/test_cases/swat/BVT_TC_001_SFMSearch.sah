@@ -35,7 +35,6 @@
 
 var $BVT_TC_001_SFMSearch = _testcase("$BVT_TC_001_SFMSearch","Create SFM Search in configuration screen");
 $BVT_TC_001_SFMSearch.start();
-
 	_setSpeed($g_stepSpeed);
 	
 	var $objectName = "Work Order";
@@ -43,19 +42,27 @@ $BVT_TC_001_SFMSearch.start();
 	var $operator = "Equals";
 	var $fieldName1 = "Order Type";
 	var $workOrderNo;
-
-	//$bo_act_login.login("https://test.salesforce.com","lohithaadmin@swatpart2.com", "maxpl0re2");
-	 
-	 $bo_act_login.login("https://test.salesforce.com","lohitha@svmxtest.org.testpar2", "maxpl0re3");
-	var $searchItem = $swat_act_sfmSearch.createSfmSearch($objectName, $fieldName, $operator, $fieldName1);
-
 	
+	$bo_act_login.login("https://test.salesforce.com","lohitha@svmxtest.org.testpar2", "maxpl0re3");
+
+	// Creation of case, account,contact,product,IBName
 	var $caseNumber = $bo_act_Cases.createCase("New", "High", "Email");
 	var $accountName = $bo_act_accounts.createAccount();
 	var $contactName = $bo_act_contacts.createContact($accountName);
 	var $productName = $bo_act_products.createProduct();
 	var $IBName = $bo_act_installedProduct.createInstalledProduct($productName, $accountName, $contactName);
 	$workOrderNo = $swat_act_workOrders.createWorkOrder($caseNumber, $accountName,$contactName, $IBName, "Open", "High", "Field Service");
+
+	
+
+	//Write to data to excel for run time usage
+	$excel.insertUnderColumn("/Swat_excelData/swatdata.xlsx",  "runData", "Case", $caseNumber, 1);
+	$excel.insertUnderColumn("/Swat_excelData/swatdata.xlsx",  "runData", "Account", $accountName, 1);
+	$excel.insertUnderColumn("/Swat_excelData/swatdata.xlsx",  "runData", "Contact", $contactName, 1);
+	$excel.insertUnderColumn("/Swat_excelData/swatdata.xlsx",  "runData", "Product", $productName, 1);
+	$excel.insertUnderColumn("/Swat_excelData/swatdata.xlsx",  "runData", "InstalledProduct", $IBName, 1);
+	
+	var $searchItem = $swat_act_sfmSearch.createSfmSearch($objectName, $fieldName, $operator, $fieldName1);
 	
 	
 	//	Creation of SFM Search and validation //
@@ -63,7 +70,7 @@ $BVT_TC_001_SFMSearch.start();
 
 	
 	// $bo_act_login.logOut();
-	
+
 $BVT_TC_001_SFMSearch.end();
 
 
