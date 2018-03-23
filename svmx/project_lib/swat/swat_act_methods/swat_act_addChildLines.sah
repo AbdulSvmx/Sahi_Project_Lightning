@@ -69,14 +69,6 @@ this.manageWOLinesUsage = function($productName){
 	//Add Parts Line to Above invoked TDM015 SFM
 	//Add a Parts Line
 
-	_click(_span("svmx-btn-icon svmx-sfmd-add-line-icon"));
-	_click(_image("svmx-action-col-icon svmx-action-col-0   svmx-sfmd-edit-icon"));
-
-
-	$bo_act_common.searchfunction($productName);
-	_setValue(_textbox("Line Qty:"), "5");
-	_click(_span("Update"));
-
 	//Add a Labor Line
 	$bo_act_getPrice.addLaborLineToSFMDelivery($searchValue, "service", "03", "05");
 
@@ -116,7 +108,7 @@ this.manageWOLinesUsage = function($productName){
 	$bo_act_getPrice.addTravelLineToSFMDeliveryUsingStartEndDate("01", "03");
 
 	_click(_span("svmx-btn-icon svmx-sfmd-save-icon"));
-
+	//OP Doc
 	_wait(30000, _isVisible(_button("Finalize")));
 	_click(_button("Finalize"));
 	_wait(30000, _isVisible(_link(0)));
