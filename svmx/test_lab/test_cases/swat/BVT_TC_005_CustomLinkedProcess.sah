@@ -9,14 +9,14 @@
 //
 ///////////////////////////////////
 */
-var $rs_7011 = _testcase("$BVT_TC_004_LinkedProcess","Verify linked Process.");
+var $rs_7011 = _testcase("$BVT_TC_005_LinkedProcess","Verify linked Process.");
 $rs_7011.start();
 
 
 		$woName="";
 		var $url="https://test.salesforce.com";
-		var $sfmUsn="lohithaadmin@swatpart2.com";
-		var $sfmPwd="maxpl0re2";
+		var $sfmUsn="lohitha@svmxtest.org.testpar2";
+		var $sfmPwd="maxpl0re3";
 
 		//Variables Declarations
 		$LinkedprocessName = "Manage Work Details for Products Serviced";
@@ -64,7 +64,7 @@ $rs_7011.start();
 		//_click($bo_pg_sfmTransactionAndDesigner.btn_LinkedProcess);
 		_wait(10000,_isVisble($bo_pg_sfmTransactionAndDesigner.lbl_productServiced));
 		_click(_f("main").s_label("Products Serviced[3]"));
-		//_click($bo_pg_sfmTransactionAndDesigner.lbl_productServiced);
+		_click($bo_pg_sfmTransactionAndDesigner.lbl_productServiced);
 		_wait(5000,_isVisible(_f("main").s_label($LinkedsfmName)));
 		//_click(_f("main").listbasecontentholder("/ListBaseContentHolder.*/"));
 		//_wait(5000);		

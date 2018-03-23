@@ -93,7 +93,7 @@ var $swat_act_sfmSearch = new function swat_act_sfmSearch() {
 		_setSelected($swat_pg_sfmSearch.picklist_searchItem,$searchItem);
 		_click($swat_pg_sfmSearch.link_go);
 		_selectDomain();
-		_wait(6000);
+		_wait(15000);
 		
 		_setValue($swat_pg_sfmSearch.txt_SearchArea,$workOrderNo);
 		_click($swat_pg_sfmSearch.btn_go);
