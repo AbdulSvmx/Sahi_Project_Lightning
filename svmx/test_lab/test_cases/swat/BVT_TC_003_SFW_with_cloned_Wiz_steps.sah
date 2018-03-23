@@ -134,6 +134,7 @@ var $pricePerUnit = 150;
 $bo_act_serviceMaintenanceContracts.addPartsPricingToServiceContract($serviceContractName, $productName, $pricePerUnit);
 
 
+
 $bo_act_interactiveEntitlement_WO.performInteractiveEntitlementWO_UsingScon($workOrderNo, $serviceContractName);
 var $actual_EntitlementType = _getText(_div(0,_rightOf(_cell("/Entitlement Type/"))));
 var $ServiceContract_actual = _getText(_link(0,_rightOf(_cell("Service Contract"))));
@@ -147,11 +148,11 @@ _click(_link($workOrderNo));
 
 
 _selectDomain("/svmx/");
-_wait(15000,_isVisible(_cell($wizardIDName)));
+_wait(15000,_isVisible(_cell($wizardTitleName)));
 
 
 //SFM - Create Quote from Work Order 
- _click(_button($sfmName1, _in(_cell($wizardIDName))));
+ _click(_button("/Create Quote from Work Order/", _in(_cell($wizardTitleName))));
  _selectDomain();
  _wait(20000,_isVisible(_label("Status:")));
  _setValue(_textbox("Status:"), "Presented");
