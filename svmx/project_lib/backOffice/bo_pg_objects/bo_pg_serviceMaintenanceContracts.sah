@@ -53,6 +53,7 @@ var $bo_pg_serviceMaintenanceContracts = new function bo_pg_serviceMaintenanceCo
 	//Objects for Part/Labor Pricing in Scon
 	this.btn_sfmLaborPricing = _button("Labor Pricing");
 	this.btn_sfmPartPricing = _button("New Parts Pricing");
+	this.btn_sfmnewPartsPricing = _button("Parts Pricing");
 	this.btn_sfmPricingRule = _button("Pricing Rule");
 	this.btn_partsDiscountTab = _span("Parts Discount");
 	this.btn_pricingRuleTab = _button("Pricing Rule");
