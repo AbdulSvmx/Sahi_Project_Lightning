@@ -27,7 +27,7 @@ var $excel = new function excel() {
 	/**
 	 * Function to write to a excel file
 	 * 
-	 * @param $excelMode
+	 * @param $excelMode read, write, insert
 	 * @param $filePath
 	 * @param $sheetName
 	 * @param $excelData

@@ -35,15 +35,31 @@ _setSpeed($g_stepSpeed);
 	var $handOver2 = false;
 	var $selectTemplateAtRunTime = false;
 	var $wizardSelectObjectName1 = "Parts Order";
-	
+
 	/**
 	 * Creation of Case, Account, Contact, Product
 	 */
-	var $caseNumber = $bo_act_Cases.createCase("New", "High", "Email");
-	var $accountName = $bo_act_accounts.createAccount();
-	var $contactName = $bo_act_contacts.createContact($accountName);
-	var $productName =$bo_act_products.createProduct();
-
+//	var $caseNumber = $bo_act_Cases.createCase("New", "High", "Email");
+//	var $accountName = $bo_act_accounts.createAccount();
+//	var $contactName = $bo_act_contacts.createContact($accountName);
+//	var $productName =$bo_act_products.createProduct();
+	
+	
+	/**
+	 * Read data from swatdata.xlsx - Reading data which are created in testscript1 -BVT_TC_001_SFMSearch.sah
+	 */
+	var $runData = $excel.readFromCustomExcel("/Swat_excelData/swatdata.xlsx",  "runData", true, true);
+	var $caseNumber=$runData[1]["Case"];
+	var $accountName=$runData[1]["Account"];
+	var $contactName=$runData[1]["Contact"];
+	var $productName=$runData[1]["Product"];
+	_log("Case: "+$caseNumber);
+	_log("Account: "+$accountName);
+	_log("Contact: "+$contactName);
+	_log("Product: "+$productName);
+	
+	
+	
 	/**
 	 * Add Price To Standard Price for above created Product
 	 */ 
@@ -114,9 +130,12 @@ _setSpeed($g_stepSpeed);
 	_assertEqual($ServiceContract_actual,$serviceContractName,"Actual and expected Service Conract are not same");
  
 	_wait(20000);
-	$sfm_act_common.globalSearch($workOrderNo);
 	
-	_click(_link($workOrderNo));
+	/**
+	 * Temp commenting below statement as global search is not working
+	 */
+	//$sfm_act_common.globalSearch($workOrderNo);
+	//_click(_link($workOrderNo));
 
 	
 	_selectDomain("/svmx/");
@@ -159,17 +178,30 @@ _setSpeed($g_stepSpeed);
 	_setValue(_textbox("Qty:"), "4");
 	_setValue(_textbox("/svmx-form-required-field/", _near(_label("Unit Price:"))),"8500");
 	_click(_span("Update"));
+	_wait(5000);
 	_click(_span("svmx-btn-icon svmx-sfmd-save-icon"));
-
+	_wait(15000);
 	
 	
 	//Create usage lines from estimate & Get Price Calculation for Part and Labor
+	
 	var $lineQty=10;
 	var $searchValue=$productName;
 	
 	// Add a Parts Line
 	$bo_act_getPrice.addPartsLineToSFMDelivery($searchValue, $lineQty);
 	_wait(15000);
+	
+	//isBillable check box selection validation. 
+	_setStrictVisibilityCheck(true);
+	var $isBillableCheckBoxStatus = _isVisible(_div("/svmx-grid-checkheader-unchecked/",_under(_span("Is Billable"))));
+		if ($isBillableCheckBoxStatus==true) {
+			_log("inside If isBillableCheckBoxStatus loop");
+			_check(_div("/svmx-grid-checkheader-unchecked/",_under(_span("Is Billable"))));
+		}
+	_setStrictVisibilityCheck(false);
+	
+	
 	
 	//Add a Labor Line
 	$bo_act_getPrice.addLaborLineToSFMDelivery($searchValue, "service", "03", "05");
@@ -178,26 +210,39 @@ _setSpeed($g_stepSpeed);
 	_click(_div("/svmx-grid-checkheader-checked/", _near(_span("/Use Price From Pricebook/"))));
 	_click(_div("/svmx-grid-cell-inner/",_under(_div("/Line Price Per Unit/"))));
 	_setValue(_textbox("/svmx-form-field svmx-form-text/",_under(_div("/Line Price Per Unit/"))),"1200");
+	
+	//isBillable check box selection validation. 
+	var $isBillableCheckBoxStatus = _isVisible(_div("/svmx-grid-checkheader-unchecked/",_under(_span("Is Billable"))));
+		if ($isBillableCheckBoxStatus==true) {
+			_check(_div("/svmx-grid-checkheader-unchecked/",_under(_span("Is Billable"))));
+		}
 	_setStrictVisibilityCheck(false);
+	
+	
 	
 	//Add a Expense Line
 	$bo_act_getPrice.addExpensesLineToSFMDelivery("Phone", "03", "3000");
 	_wait(15000);
 
+	
+	
 	//Add a Travel Line
 	$bo_act_getPrice.addTravelLineToSFMDeliveryUsingStartEndDate("01", "03");
 	_wait(15000);
+	
 	
 	//assert on get Price Calculation 
 	_click($bo_pg_getPrice.btn_getPrice);
 	_wait(5000);
 	_click($bo_pg_getPrice.btn_partsLine);
 	_setStrictVisibilityCheck(true);
-	var $actualPRice=_getCellText(_div("/svmx-grid-cell-inner/", _under(_div("gridcolumn-1071-titleEl"))));
-	_assertEqual("1,500.000",$actualPRice,"Assertion Passl");
+	//var $actualPRice=_getCellText(_div("/svmx-grid-cell-inner/", _under(_div("gridcolumn-1071-titleEl"))));
+	var $actualPartPrice=_getCellText(_div("/svmx-grid-cell-inner/",_under(_div("/svmx-column-header-inner/",_near(_div("Billable Line Price"))))));
+	_assertEqual("1,500.000",$actualPartPrice,"Assertion Passl");
 	_click($bo_pg_getPrice.btn_laborLine);
-	var $actualPRice=_getCellText(_div("/svmx-grid-cell-inner/", _under(_div("gridcolumn-1135-titleEl"))));
-	_assertEqual("2,400.000",$actualPRice,"Assertion Pass");
+	//var $actualPRice=_getCellText(_div("/svmx-grid-cell-inner/", _under(_div("gridcolumn-1135-titleEl"))));
+	var $actualLaborPrice=_getCellText(_div("/svmx-grid-cell-inner/",_under(_div("/svmx-column-header-inner/",_near(_div("Billable Line Price"))))));
+	_assertEqual("2,400.000",$actualLaborPrice,"Assertion Pass");
 	_click($bo_pg_getPrice.btn_save);
 
 

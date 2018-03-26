@@ -22,7 +22,7 @@ $bo_act_PMPlanTemplate.createCriteriaBasedPMTemplate($PMTemplateName,$productNam
 $bo_act_PMPlanTemplate.addRow("City", "Equals", "Bangalore");
 _click(_span("Save"));
 //Create IB
-$bo_act_navigation.navigateToInstalledProductPage();
+//$bo_act_navigation.navigateToInstalledProductPage();
 $bo_act_installedProduct.createInstalledProduct($productName,"Acc822018195141","");
 //Create PMPlan From IB
 _selectDomain("/svmx/");

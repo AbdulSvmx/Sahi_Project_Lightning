@@ -22,7 +22,7 @@ var $sfm_act_createCustomWizard = new function sfm_act_createCustomWizard() {
 		_click($sfm_pg_wizards.btn_saveStep);
 		_click($sfm_pg_wizards.txt_managePermission);
 		_setSelected($sfm_pg_wizards.select_availableGrpProfiles,$profile);
-		_click($sfm_pg_wizards.btn_add);
+//		_click($sfm_pg_wizards.btn_add);
 		_click($sfm_pg_wizards.btn_saveClose);
 	};
 
@@ -158,8 +158,10 @@ var $sfm_act_createCustomWizard = new function sfm_act_createCustomWizard() {
 		_click($sfm_pg_wizardWindow.btn_addRow);
 		_click($sfm_pg_wizardWindow.btn_edit);
 		_setValue($sfm_pg_wizardWindow.txt_part,$part);
+		_click(_span("/lookup_icon/",_rightOf(_label("Part:"))));
+		_doubleClick(_cell(0,_under(_div("Product Name"))));
 		_click($sfm_pg_wizardWindow.btn_update);
-		_click($sfm_pg_sfmDesigner.btn_deliveryQuickSave)
+		_click($sfm_pg_sfmDesigner.btn_deliveryQuickSave);
 		_wait(10000);
 		_click($sfm_pg_wizardWindow.btn_downArrow);
 		_wait(3000);
