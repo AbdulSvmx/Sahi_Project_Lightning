@@ -1,0 +1,48 @@
+//*******************************//
+//
+//Author	:- 	Shruthi Shanthappa
+//Pre-Req	:-	
+//Steps		:-	
+//
+//*******************************//
+
+
+var $ChecklistVerification = _testcase("Checklist",
+		"Creating a checklist process in designer and verifying it in delivery");
+$ChecklistVerification.start();
+_setSpeed($g_stepSpeed);
+
+//Pre - Condition 
+$bo_act_login.login("https://test.salesforce.com", "shashikala.svmx@ge.com", "maxpl0re");
+
+$number1 =(Math.random() * 10);
+$bo_act_navigation.navigateToSvmxSetup();
+$tag = "SWAT";
+$sfmName1 = "to generate a Checklist/Survey type of Process";
+$objectName = "Work Order";
+$dateQuestion = $bo_act_common.generateRandomName("SwatDateQuestion");
+$textQuestion = $bo_act_common.generateRandomName("SwatTextQuestion");
+$timeQuestion = $bo_act_common.generateRandomName("SwatTimeQuestion");
+$numberQuestion = $bo_act_common.generateRandomName("SwatNumberQuestion");
+$checkboxQuestion = $bo_act_common.generateRandomName("SwatCheckboxQuestion");
+$checkboxResponse = $bo_act_common.generateRandomName("SwatCheckboxResponse");
+
+//Create DateTimeQuestion in Library
+
+$bo_act_questionlibrary.createDateTimeQuestion($dateQuestion, "Date" , "https://www.google.com", "SWAT");
+//$bo_act_questionlibrary.createTextQuestion($textQuestion, "Text" , "https://www.google.com", "SWAT" , "Default Text");
+//_click($bo_pg_servicemaxSetup.btn_backToSetupHome);
+//$bo_act_questionlibrary.createCheckbox_RadioQuestion($checkboxQuestion, "Checkbox", "https://www.google.com", $checkboxResponse);
+//$bo_act_questionlibrary.createNumberQuestion($numberQuestion, "Number" , "https://www.google.com", "SWAT", '6');
+
+//To create Checklist Process 1
+$bo_act_navigation.navigateToSfmTransactionDesigner();
+_wait(60000, _isVisible($bo_pg_sfmTransactionAndDesigner.btn_newSFM));
+_wait(1000);
+$bo_act_checklistdesigner.newChecklistTypeSFM("Swat Checklist"+$number1, $sfmName1 ,$objectName);
+$bo_act_checklistdesigner.verifythechanges_addquestion_toform($dateQuestion, "");
+
+
+
+
+$ChecklistVerification.end();
