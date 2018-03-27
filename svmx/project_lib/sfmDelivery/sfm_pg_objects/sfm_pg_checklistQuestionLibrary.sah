@@ -28,6 +28,7 @@ var $sfm_pg_checklistQuestionLibrary = new function sfm_pg_checklistQuestionLibr
 	this.txt_answerValue2=_textbox("answers[1]");
 	this.txt_answerValue3=_textbox("answers[2]");
 	this.txt_tagName=_textbox("TagField");
+	this.txt_defaultText=_textbox("defaultResponseText"); //added by Shruthi Shanthappa
 	this.btn_addAnswer=_div("+Add Answer");
 	this.btn_saveQuestion=_span("Save");
 	this.txt_saveSucessMessage=_span("Success");
