@@ -152,6 +152,47 @@ var $bo_act_questionlibrary = new function bo_act_questionlibrary() {
 		_click($sfm_pg_checklistQuestionLibrary.btn_okMessage);
 
 	} ;
+	
+	//added by Shruthi Shanthappa
+	this.createDefaultDateTimeQuestion = function($questionText,$answerType,$helpURL3,$defaultAnswer,$defaultDateTime)
+	{
+		
+		_click($bo_pg_servicemaxSetup.btn_serviceFlowManager);
+		_click($bo_pg_servicemaxSetup.btn_checklistQuestionLibrary);
+		$swat_act_pageLoadWait.waitTillPageLoads($sfm_pg_checklistQuestionLibrary.btn_addQuestion);
+		_click($sfm_pg_checklistQuestionLibrary.btn_addQuestion);
+		_wait(3000,(_isVisible($sfm_pg_checklistQuestionLibrary.txt_addQuestion)));
+		_click($sfm_pg_checklistQuestionLibrary.txt_responseType);
+		_click($sfm_pg_checklistQuestionLibrary.sel_dateTimeAnswerType);
+		_setValue($sfm_pg_checklistQuestionLibrary.txt_dateTimeType,$defaultAnswer);
+		
+		if($defaultAnswer = "Value"){
+			_click($sfm_pg_checklistQuestionLibrary.sel_datePickerIcon);
+			_click($sfm_pg_checklistQuestionLibrary.sel_datePicker);
+			_click($sfm_pg_checklistQuestionLibrary.sel_todayDate);
+		}
+		else{
+			
+		}
+		_setValue($sfm_pg_checklistQuestionLibrary.txt_questionText, $questionText);
+		_setValue($sfm_pg_checklistQuestionLibrary.txt_helpURL,$helpURL3);
+		_setValue()
+		_wait(4000);
+		_click($sfm_pg_checklistQuestionLibrary.btn_saveQuestion);
+		_wait(4000);
+		_wait(2000,_isVisible($sfm_pg_checklistQuestionLibrary.txt_saveSucessMessage));
+
+		
+		if(_assert(_isVisible($sfm_pg_checklistQuestionLibrary.txt_saveSucessMessage)))
+		{
+			_log("Date Time Question Created successfully");
+		}else{		
+			_log("Error while creating Date Time Question");
+			}
+
+		_click($sfm_pg_checklistQuestionLibrary.btn_okMessage);
+
+	} ;
 
 	
 	this.deletequestionlibrary = function($questionname)

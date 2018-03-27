@@ -18,6 +18,12 @@ $bo_act_login.login("https://test.salesforce.com", "shashikala.svmx@ge.com", "ma
 $number1 =(Math.random() * 10);
 $bo_act_navigation.navigateToSvmxSetup();
 $tag = "SWAT";
+var $wizardObject = "Work Order";
+var $wizardIDName = $bo_act_common.generateRandomName("Swat Checklist");
+var $wizardIDName1 = $bo_act_common.generateRandomName("Swat Checklist");
+var $wizardStepType = "Checklist";
+$stepIDTitle = $bo_act_common.generateRandomName("Swat Checklist Step");
+$selectTemplateAtRunTime = true; 
 $sfmName1 = "to generate a Checklist/Survey type of Process";
 $objectName = "Work Order";
 $dateQuestion = $bo_act_common.generateRandomName("SwatDateQuestion");
@@ -26,11 +32,15 @@ $timeQuestion = $bo_act_common.generateRandomName("SwatTimeQuestion");
 $numberQuestion = $bo_act_common.generateRandomName("SwatNumberQuestion");
 $checkboxQuestion = $bo_act_common.generateRandomName("SwatCheckboxQuestion");
 $checkboxResponse = $bo_act_common.generateRandomName("SwatCheckboxResponse");
+var $defaultText = "Default Text";
+var $defaultNumber = '6';
+var dateTime = new Date("March 27, 2018 11:13:00");
+
 
 //Create DateTimeQuestion in Library
 
 $bo_act_questionlibrary.createDateTimeQuestion($dateQuestion, "Date" , "https://www.google.com", "SWAT");
-//$bo_act_questionlibrary.createTextQuestion($textQuestion, "Text" , "https://www.google.com", "SWAT" , "Default Text");
+$bo_act_questionlibrary.createTextQuestion($textQuestion, "Text" , "https://www.google.com", "SWAT" , $defaultText);
 //_click($bo_pg_servicemaxSetup.btn_backToSetupHome);
 //$bo_act_questionlibrary.createCheckbox_RadioQuestion($checkboxQuestion, "Checkbox", "https://www.google.com", $checkboxResponse);
 //$bo_act_questionlibrary.createNumberQuestion($numberQuestion, "Number" , "https://www.google.com", "SWAT", '6');
@@ -40,9 +50,26 @@ $bo_act_navigation.navigateToSfmTransactionDesigner();
 _wait(60000, _isVisible($bo_pg_sfmTransactionAndDesigner.btn_newSFM));
 _wait(1000);
 $bo_act_checklistdesigner.newChecklistTypeSFM("Swat Checklist"+$number1, $sfmName1 ,$objectName);
-$bo_act_checklistdesigner.verifythechanges_addquestion_toform($dateQuestion, "");
+$bo_act_checklistdesigner.addChecklistQuestionToForm($dateQuestion);
+$bo_act_checklistdesigner.addChecklistQuestionToForm($textQuestion);
+$bo_pg_formDesigner.btn_save_close;
 
+$bo_pg_formDesigner.tab_homeScreen;
+$bo_act_navigation.navigateToSfmWizard();
+$bo_act_SFW.createWizardGeneralInfo($wizardObject, $wizardIDName, $wizardIDName1);
+$bo_act_SFW.createChecklistWizardStep($wizardStepType, $stepIDTitle);
+//$bo_act_SFW.quickSaveSFWizard();
+$bo_act_SFW.saveAndClose();
+$bo_pg_formDesigner.tab_homeScreen;
+_wait(1000);
 
+$workOrderNo = $swat_act_workOrders.createWorkOrder("", "", "", "", "Open", "High", "Field Service");
+
+_selectDomain("/svmx/");
+_wait(15000,_isVisible(_cell($wizardIDName)));
+_click(_button($stepIDTitle, _in(_cell($wizardIDName))));
+_selectDomain();
+_click(_label("Swat Checklist"+$number1));
 
 
 $ChecklistVerification.end();
