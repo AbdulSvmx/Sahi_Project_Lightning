@@ -167,7 +167,8 @@ this.addPartPricingWithDiscountToServiceContract = function($sconName, $priceBoo
 	$bo_act_navigation.navigateToServiceMaintenanceContractPage();
 	_click(_link($sconName));
 	_selectDomain("/svmx/");
-	_click($bo_pg_serviceMaintenanceContracts.btn_sfmPartPricing);
+	//_click($bo_pg_serviceMaintenanceContracts.btn_sfmPartPricing);
+	_click($bo_pg_serviceMaintenanceContracts.btn_sfmnewPartsPricing); // Changes made by Meghana Rao
 	_selectDomain();
 	_wait(30000, _isVisible(_div("/Edit Service Contract Parts Pricing/")));
 	_setValue($bo_pg_serviceMaintenanceContracts.txt_defaultPartsPriceBook, $priceBookName);
