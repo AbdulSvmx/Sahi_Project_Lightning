@@ -1,0 +1,2 @@
+$bo_act_login.login($g_url, $bac_un, $bac_pwd);
+$bo_act_interactiveEntitlement_WO.performInteractiveEntitlementWO_IncidentNotCovered("WO-00000406");
