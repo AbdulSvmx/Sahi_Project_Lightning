@@ -31,6 +31,7 @@ var $url_checklist ="https://test.salesforce.com";
 //var $sfmPwd = "servicemax1";
 var $sfmUsn = "sysadmin01@sfdautomation.com"; // base 
 var $sfmPwd = "maxplore2";
+var $swatOrgType = "Base";
 
 //DC Global Variables
 var $dc_org="Base";
@@ -40,6 +41,12 @@ var $dc_un = "deepa@12x.com.cfg3";
 var $dc_pwd = "svmx1111";
 var $dc_dispatcher = "Deepa";
 var $dc_dispatName = "Deepa Aut 17 Base Admin";
+
+//Swat Global Variables
+var $swatOrg = "Base";
+var $swatUsn = "shashikala.svmx@ge.com";
+var $swatPwd = "maxpl0re";
+var $swatUrl = "https://test.salesforce.com";
 
 //==== Reference addition module START ====
 //Include the salesforce js files to enable sforce API calls

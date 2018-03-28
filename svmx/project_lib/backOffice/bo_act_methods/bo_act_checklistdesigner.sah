@@ -292,7 +292,7 @@ var $bo_act_checklistdesigner = new function bo_act_checklistdesigner() {
 	//added by Shruthi Shanthappa
 	this.addChecklistQuestionToForm = function($questionText) {
 		_click($bo_pg_formDesigner.tab_clickFormDesigner);
-		//_setValue($bo_pg_formDesigner.txt_searchQuestion,$questionText);
+		_setValue($bo_pg_formDesigner.txt_searchQuestion,$questionText);
 		_assertEqual(true, _isVisible(_f("main").s_label($questionText)));
 		_click(_f("main").s_label($questionText));
 		_click($bo_pg_formDesigner.btn_addquestion_toform);
