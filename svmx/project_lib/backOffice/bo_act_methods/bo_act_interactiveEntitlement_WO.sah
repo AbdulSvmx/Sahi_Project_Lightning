@@ -10,21 +10,18 @@ var $bo_act_interactiveEntitlement_WO = new function bo_act_interactiveEntitleme
 	
 	this.clickCheckEntitlement = function(){
 		for (var $i = 0; $i < 25; $i++) {
-			_selectDomain("/svmx/");
 			if (_isVisible($bo_pg_interactiveEntitlement_CaseAndWO.btn_checkEntitlement)) {
 				break;
 			}
 
 			else {
 				_call(top.location.reload());
-				_selectDomain("/svmx/");
 				_wait(10000, _isVisible($bo_pg_interactiveEntitlement_CaseAndWO.btn_checkEntitlement));
 
 			}
 		}
 
 		_click($bo_pg_interactiveEntitlement_CaseAndWO.btn_checkEntitlement);
-		_selectDomain();
 
 	};
 	
