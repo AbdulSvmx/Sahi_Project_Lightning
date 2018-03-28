@@ -8,7 +8,7 @@ _setSpeed($g_stepSpeed);
 /**
  * Login to the Sandbox Org
  */
-//$bo_act_login.login($g_url, $bac_un, $bac_pwd);
+$bo_act_login.login($g_url, $bac_un, $bac_pwd);
 
 //Pre - Condition Test Data
 var $productFamily = ["--None--","GeneralSolution","AdvSolution","Accessory", "Storage"];
