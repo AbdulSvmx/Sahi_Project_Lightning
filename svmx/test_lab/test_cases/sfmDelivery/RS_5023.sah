@@ -23,7 +23,7 @@ $bo_act_navigation.navigateToSfmTransactionDesigner();
 $sfm_act_Transactions.cloneAndSaveProcess($processName,$sfmName,$sfmPgLayoutName);
 $bo_act_navigation.navigateToSfmWizard();
 $sfm_act_createCustomWizard.chooseObject("Work Order");
-$sfm_act_createCustomWizard.addWizStepWithCriteria($wizTitle,"SFM",$sfmName,"EXPR002-SVMXSTD: Open Work Orders","Sysadmin01 Group");
+$sfm_act_createCustomWizard.addWizStepWithCriteria($wizTitle,"SFM",$sfmName,"EXPR002-SVMXSTD: Open Work Orders");
 $sfm_act_createCustomWizard.createWOwithOrderStatus($OrdrStatus);
 //$sfm_pg_wo.assert_wizardStep($sfmName);
 
