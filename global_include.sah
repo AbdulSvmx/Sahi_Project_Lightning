@@ -92,7 +92,7 @@ if ($global_referenceAdded === false) {
 		}
 		;
 	}
-
+	//
 	// Set the flag to true to prevent duplicate addition of references
 	$global_referenceAdded = true;
 }
