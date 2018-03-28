@@ -27,10 +27,10 @@ var $pwd_checklist = $bac_pwd//"cloud_102";
 var $url_checklist ="https://test.salesforce.com";
 
 //SFMD Global Variables
-var $sfmUsn= "svmx-sfdtest@svmx-sfdtest.org.sfdtest1"; //dev
-var $sfmPwd = "servicemax1";
-//var $sfmUsn = "sysadmin01@sfdautomation.com"; // base 
-//var $sfmPwd = "maxplore2";
+//var $sfmUsn= "svmx-sfdtest@svmx-sfdtest.org.sfdtest1"; //dev
+//var $sfmPwd = "servicemax1";
+var $sfmUsn = "sysadmin01@sfdautomation.com"; // base 
+var $sfmPwd = "maxplore2";
 
 //DC Global Variables
 var $dc_org="Base";
@@ -92,7 +92,7 @@ if ($global_referenceAdded === false) {
 		}
 		;
 	}
-	//
+
 	// Set the flag to true to prevent duplicate addition of references
 	$global_referenceAdded = true;
 }
