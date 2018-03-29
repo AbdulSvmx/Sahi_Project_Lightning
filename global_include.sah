@@ -1,4 +1,5 @@
 _windowAction("resize",1920,1080);
+_call(top.location.reload(true));
 var $g_stepSpeed = 400;
 _setSpeed($g_stepSpeed);
 
