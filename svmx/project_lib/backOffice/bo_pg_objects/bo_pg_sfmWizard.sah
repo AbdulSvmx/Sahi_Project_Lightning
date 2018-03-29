@@ -28,6 +28,7 @@ var $bo_pg_sfmWizard= new function bo_pg_sfmWizard() {
 	this.btn_deleteWizard=_button("Delete");
 	this.lbl_deleteSuccessfulMsg=_div("Success:Successfully deleted the selected wizard.");
 	this.chk_activeCheckboxInGeneralInfo=_checkbox("page1:form1:mainPblock:tab1:pblocksectionmain:pblocksectionitm3:sellstsecitem:isActive:hdractive");
+	this.txt_checklistStepIDTitle= _textbox("page1:form1:mainPblock:tab2mainpblock:j_id149:j_id153:j_id181:actntitle");//added by Shruthi Shanthappa
 //	this.selectWizard= _checkbox(0,_leftOf (_cell($wizardname)));
    this.selectsfmWizard = function($SFMWizardsName){
 		

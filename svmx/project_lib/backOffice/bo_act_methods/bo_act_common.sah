@@ -182,7 +182,7 @@ this.cleanUpfunctionold = function($value)
 		this.cleanUpfunction = function($value)
 		{
 			_click(_link("Home")); // Changes added by Meghana
-			_click($bo_pg_search.btn_search);
+			_doubleClick($bo_pg_search.btn_search);
 			_wait(5000,_isVisible($bo_pg_search.btn_searchAgain));
 			for(var $i=0;$i<=5;$i++){
 					_wait(5000,_isVisible($bo_pg_search.txt_searchText));
