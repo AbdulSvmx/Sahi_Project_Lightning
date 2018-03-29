@@ -204,7 +204,7 @@ this.cleanUpfunctionold = function($value)
 			
 		};
 		
-		this.deleteWorkOrder = function($userName,$password,$value,$namespace){
+		this.deleteWorkOrder = function($userName,$password,$namespace,$value){
 			var $delete_Query = "delete [Select Id from "+$namespace+"__Service_Order__c where Name = '"+$value+"'];";
 			var $delete_data = $op_act_sForceApiCall.sForceQuery($userName, $password, $delete_Query , "create");
 		};
