@@ -41,8 +41,6 @@ _assertExists(_span($slaName03));
 
 
 //Clean up function
-
-
 $bo_act_common.deleteSLA($bac_un, $bac_pwd, $orgnamespace, $slaName01);
 $bo_act_common.deleteSLA($bac_un, $bac_pwd, $orgnamespace, $slaName02);
 $bo_act_common.deleteSLA($bac_un, $bac_pwd, $orgnamespace, $slaName03);
