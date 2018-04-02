@@ -51,6 +51,7 @@ $sfm_act_createCustomWizard.createBlankWo();
 
 _selectDomain($domainName);
 _click(_button($sfmName));
+//_click(_button("RS_6981_24201816252"));
 _selectDomain();
 _wait(5000);
 
@@ -94,10 +95,13 @@ var $curDate= new Date();
 var $curYear = $curDate.getFullYear()+1;
 var $curMonth=$curDate.getMonth()+1;
 var $curDay= $curDate.getDay();
-var $schDate=$curMonth+"/01/"+$curYear;
-//_setValue(_textbox("svmx-date-1048-inputEl"),$schDate);
-
-if(_getText(_textbox("svmx-date-1048-inputEl"))==$schDate){
+var $schDate="0"+$curMonth+"/01/"+$curYear;
+//_log($schDate);
+var $val =0;
+_set($val,_getValue(_textbox("svmx-date-1048-inputEl")));
+//_log($val);
+//_log($schDate.indexOf($val));
+if($schDate.indexOf($val)!=-1){
 	_log("Pass ::: Scheduled Date is set to 1st day of the created month in next year");
 }
 else{
