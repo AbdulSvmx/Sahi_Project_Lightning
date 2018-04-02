@@ -214,10 +214,24 @@ $bo_act_autoEntitlementRule_WO.deleteAutoEntitlementRule_WO($autoEntitlementRule
 
 //Clean up function
 
-var $datacreated = [$WONumber,$caseNumber,$serviceConractName,$slaName03,$slaName02,$slaName01,$IBName,$productName,$locationName,$contactName,$accountName,$warrantyName];
-for (var i = 0; i < $datacreated.length; i++) {
-	$bo_act_common.cleanUpfunction($datacreated[i]);
-}
+$bo_act_common.deleteCase($bac_un, $bac_pwd,$caseNumber);
+$bo_act_common.deleteAccount($bac_un, $bac_pwd, $accountName);
+$bo_act_common.deleteContact($bac_un, $bac_pwd, $contactName);
+$bo_act_common.deleteIB($bac_un, $bac_pwd, $orgnamespace,$IBName);
+$bo_act_common.deleteProduct($bac_un, $bac_pwd,$productName);
+$bo_act_common.deleteWorkOrder($bac_un, $bac_pwd, $orgnamespace,$WONumber);
+$bo_act_common.deleteSLA($bac_un, $bac_pwd, $orgnamespace, $slaName03);
+$bo_act_common.deleteSLA($bac_un, $bac_pwd, $orgnamespace, $slaName02);
+$bo_act_common.deleteSLA($bac_un, $bac_pwd, $orgnamespace, $slaName01);
+$bo_act_common.deleteSCON($bac_un, $bac_pwd, $orgnamespace,$serviceConractName);
+$bo_act_common.deleteLocation($bac_un, $bac_pwd, $orgnamespace,$locationName);
+$bo_act_common.deleteWarranty($bac_un, $bac_pwd, $orgnamespace,$warrantyName);
+
+
+//var $datacreated = [$WONumber,$caseNumber,$serviceConractName,$slaName03,$slaName02,$slaName01,$IBName,$productName,$locationName,$contactName,$accountName,$warrantyName];
+//for (var i = 0; i < $datacreated.length; i++) {
+//	$bo_act_common.cleanUpfunction($datacreated[i]);
+//}
 
 $bo_act_login.logOut(); 
 

@@ -242,16 +242,28 @@ this.cleanUpfunctionold = function($value)
 			var $delete_Query = "delete [Select Id from "+$namespace+"__Installed_Product__c where Name = '"+$value+"'];";
 			var $delete_data = $op_act_sForceApiCall.sForceQuery($userName, $password, $delete_Query , "create");
 			
+		};
+
+		// Delete SLA Terms
+		
+		this.deleteSLA = function($userName,$password,$namespace,$value){
+			var $delete_Query = "delete [Select Id from "+$namespace+"__Service_Level__c where Name = '"+$value+"'];";
+			var $delete_data = $op_act_sForceApiCall.sForceQuery($userName, $password, $delete_Query , "create");
 			
 		};
-
+		
+		
+		// Delete Location
+		this.deleteLocation = function($userName,$password,$namespace,$value){
+			var $delete_Query = "delete [Select Id from "+$namespace+"__Site__c where Name = '"+$value+"'];";
+			var $delete_data = $op_act_sForceApiCall.sForceQuery($userName, $password, $delete_Query , "create");
+			
+		};
+		
+		
+		
 		this.deleteActivityMaster = function($userName,$password,$nameSpace,$value){
 			var $delete_Query = "delete[Select Id from " +$nameSpace+"__Activity_Master__c where Name = '"+$value+"'];";
-			var $delete_data = $op_act_sForceApiCall.sForceQuery($userName, $password, $delete_Query , "create");
-		};
-
-		this.deleteSLA = function($userName,$password,$nameSpace,$value){
-			var $delete_Query = "delete[Select Id from " +$nameSpace+"SVMXC__Service_Level__c where Name = '"+$value+"'];";
 			var $delete_data = $op_act_sForceApiCall.sForceQuery($userName, $password, $delete_Query , "create");
 		};
 		

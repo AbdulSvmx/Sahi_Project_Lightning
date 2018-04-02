@@ -68,10 +68,17 @@ _assertEqual($endDateExpectedOn_IB,$endDateActulOn_IB,"Actual and expected End D
 
 //Clean up function
 
-var $datacreated = [$warrantyName,$IBName,$locationName,$productName,$contactName,$accountName,];
-for (var i = 0; i < $datacreated.length; i++) {
-	$bo_act_common.cleanUpfunction($datacreated[i]);
-}
+$bo_act_common.deleteAccount($bac_un, $bac_pwd, $accountName);
+$bo_act_common.deleteContact($bac_un, $bac_pwd, $contactName);
+$bo_act_common.deleteIB($bac_un, $bac_pwd, $orgnamespace,$IBName);
+$bo_act_common.deleteProduct($bac_un, $bac_pwd,$productName);
+$bo_act_common.deleteLocation($bac_un, $bac_pwd, $orgnamespace,$locationName);
+$bo_act_common.deleteWarranty($bac_un, $bac_pwd, $orgnamespace,$warrantyName);
+
+//var $datacreated = [$warrantyName,$IBName,$locationName,$productName,$contactName,$accountName,];
+//for (var i = 0; i < $datacreated.length; i++) {
+//	$bo_act_common.cleanUpfunction($datacreated[i]);
+//}
 $bo_act_login.logOut();
 
 $RS_7288.end();
