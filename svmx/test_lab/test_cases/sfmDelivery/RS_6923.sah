@@ -3,7 +3,7 @@ $rs_6923.start();
 
 // Pre-Condition: Should have atleast 1 Part Order with the Pre-filter mentioned.
 $sfmName = $bo_act_common.generateRandomName("SFM_Auto_");
-$sfmName = "SFM_Auto_1220187946";
+//$sfmName = "SFM_Auto_1220187946";
 $sfmPgLayoutName =	$bo_act_common.generateRandomName("SFM_Auto_Page");
 $headersToAdd = ["Parts"];
 $lookUpName = $bo_act_common.generateRandomName("Part_lkp_");
@@ -23,7 +23,7 @@ _click($sfm_pg_screenDesigner.lbl_workOrder);
 _click($bo_pg_sfmTransactionAndDesigner.btn_screenDesigner);
 _setValue($bo_pg_sfmTransactionAndDesigner.txt_sfmSavePageLayoutAs, $sfmPgLayoutName);
 _setValue($bo_pg_sfmTransactionAndDesigner.txt_sfmSavePageLayoutAsId, $sfmPgLayoutName);
-_wait(5000);
+_wait(10000);
 $sfm_act_Transactions.addHeader($headersToAdd);
 _click(_f("main").s_button("Configure Lookup"));
 _wait(5000);

@@ -1,23 +1,30 @@
 _windowAction("resize",1920,1080);
+_call(top.location.reload(true));
 var $g_stepSpeed = 400;
 _setSpeed($g_stepSpeed);
 
-//Flag to decide whether Dev or Base
-var $orgtype = "Dev";
+//PLease CHANGE the Flag to decide whether Dev or Base
+var $orgtype = "Base";
+
+if($orgtype == "Dev"){
+var $orgnamespace = "SVMXDEV";
+}else{
+	$orgnamespace = "SVMXC";
+}
 
 // Add All Global Variables here
 var $url = "https://test.salesforce.com";
 var $g_url = "https://test.salesforce.com/";
 var $g_un = "bhupen@back17.com";// "bhupendra.s@dev.tool2.com";
 var $g_pwd = "smax@123";
-var $bac_un = "automationDEV@Test4Part1.com";  //pointing to DEV
-var $bac_pwd = "welcome-02";
+//var $bac_un = "automationDEV@Test4Part1.com";  //pointing to DEV
+//var $bac_pwd = "welcome-02";
 //var $bac_un = "meghana.rao@servicemax.com"; 
 //var $bac_pwd = "cloud_102";
 //var $bac_un = "bac_automationdev@ge.com"; 
 //var $bac_pwd = "welcome-01";
-//var $bac_un = "orgsadmin@svmx-test4.org.test4part2";  //pointing to Base
-//var $bac_pwd = "welcome-02";
+var $bac_un = "orgsadmin@svmx-test4.org.test4part2";  //pointing to Base
+var $bac_pwd = "welcome-02";
 var $bac_PRTun = "bhupendra.auto@upgrade.com"; //Most Used Customer
 var $bac_PRTpwd = "servicemax@123";
 
@@ -27,26 +34,19 @@ var $pwd_checklist = $bac_pwd//"cloud_102";
 var $url_checklist ="https://test.salesforce.com";
 
 //SFMD Global Variables
-//var $sfmUsn= "svmx-sfdtest@svmx-sfdtest.org.sfdtest1"; //dev
-//var $sfmPwd = "servicemax1";
-var $sfmUsn = "sysadmin01@sfdautomation.com"; // base 
-var $sfmPwd = "maxplore2";
-var $swatOrgType = "Base";
+var $sfmUsn= "svmx-sfdtest@svmx-sfdtest.org.sfdtest1"; //dev
+var $sfmPwd = "servicemax1";
+//var $sfmUsn = "sysadmin01@sfdautomation.com"; // base 
+//var $sfmPwd = "maxplore2";
 
 //DC Global Variables
-var $dc_org="Base";
+var $dc_org=$orgtype;
 var $dc_package="17.999";
 var $dc_url = "https://test.salesforce.com";
 var $dc_un = "deepa@12x.com.cfg3";
 var $dc_pwd = "svmx1111";
 var $dc_dispatcher = "Deepa";
 var $dc_dispatName = "Deepa Aut 17 Base Admin";
-
-//Swat Global Variables
-var $swatOrg = "Base";
-var $swatUsn = "shashikala.svmx@ge.com";
-var $swatPwd = "maxpl0re";
-var $swatUrl = "https://test.salesforce.com";
 
 //==== Reference addition module START ====
 //Include the salesforce js files to enable sforce API calls
