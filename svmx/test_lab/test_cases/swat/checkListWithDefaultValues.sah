@@ -15,6 +15,7 @@ _setSpeed($g_stepSpeed);
 //Pre - Condition 
 $bo_act_login.login($swatUrl, $swatUsn, $swatPwd);
 
+// NEW ADDITION UP
 $number1 =(Math.random() * 10);
 $bo_act_navigation.navigateToSvmxSetup();
 $tag = "SWAT";
@@ -35,21 +36,6 @@ $checkboxResponse = $bo_act_common.generateRandomName("SwatCheckboxResponse");
 $defaultText = "Default Text";
 $defaultNumber = '6';
 
-
-//create account
-var $data1 = _readExcelFile("../../test_lab/test_cases/swat/swat_excelData/SwatRegressionDatasheet.xlsx",$swatOrgType,true);
-var $createAccount = $data1[1]["CreateAccount"];
-var $fetchAccount = $data1[1]["fetchaccount"];
-_log($fetchAccount);
-var $createwoquery1 = $data[1]["CreateWorkOrderOpen"];
-var $fetchwo1 = $data[1]["fetchwo"];
-var $rs_10119_result2 = $op_act_sForceApiCall.sForceQuery($swatUsr, $swatPwd, $createwoquery1 ,"create");
-var $rs_10119_query_wo2 = $fetchwo1;
-var $rs_10119_fetch2 = $op_act_sForceApiCall.sForceQuery($swatUsr, $swatPwd, $rs_10119_query_wo2 ,"query");
-_log($rs_10119_fetch2);
-
-//Create DateTimeQuestion in Library
-
 $bo_act_questionlibrary.createDefaultDateTimeQuestion($dateQuestion, "DateTime", "Value");
 //$bo_act_questionlibrary.createTextQuestion($textQuestion, "Text" , "https://www.google.com", "SWAT" , $defaultText);
 //_click($bo_pg_servicemaxSetup.btn_backToSetupHome);
@@ -57,7 +43,7 @@ $bo_act_questionlibrary.createDefaultDateTimeQuestion($dateQuestion, "DateTime",
 //$bo_act_questionlibrary.createNumberQuestion($numberQuestion, "Number" , "https://www.google.com", "SWAT", '6');
 
 
-/*
+
 //To create Checklist Process 1
 $bo_act_navigation.navigateToSfmTransactionDesigner();
 _wait(60000, _isVisible($bo_pg_sfmTransactionAndDesigner.btn_newSFM));
@@ -84,5 +70,5 @@ _click(_button($stepIDTitle, _in(_cell($wizardIDName))));
 _selectDomain();
 _click(_label("Swat Checklist"+$number1));
 
-*/
+
 $ChecklistVerification.end();
