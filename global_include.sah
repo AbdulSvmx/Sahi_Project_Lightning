@@ -51,7 +51,7 @@ var $dc_dispatName = "Deepa Aut 17 Base Admin";
 //SWAT Global Variables
 var $swatUrl = "https://test.salesforce.com";
 var $swatUsn = "lohithaadmin@swatpart2.com";
-var $swatPwd = "maxpl0re2";
+var $swatPwd = "maxpl0re3";
 
 //==== Reference addition module START ====
 //Include the salesforce js files to enable sforce API calls
