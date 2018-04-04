@@ -92,10 +92,10 @@ if ($global_referenceAdded === false) {
 
 	// Add all the paths from where we need to fetch reference files
 	// _log("Getting references from dir : " + $g_projectLibPath);
-	recursiveGetReferenceFiles($g_includeFilesArray, $g_projectLibPath);
+	recursiveGetReferenceFiles($g_projectLibPath);
 	// _log("Getting references from dir : " + $g_utilitiesPath);
-	recursiveGetReferenceFiles($g_includeFilesArray, $g_utilitiesPath);
-
+	recursiveGetReferenceFiles($g_utilitiesPath);
+_log("File Array Count = "+$g_includeFilesArray.length)
 	for (var $i = 0; $i < $g_includeFilesArray.length; $i++) {
 		try {
 			_include($g_includeFilesArray[$i]);
@@ -110,18 +110,18 @@ if ($global_referenceAdded === false) {
 }
 
 // recursively traverses $filePath while adding files (with full path) ending in
-// ".sah" to $includeFilesArray
-function recursiveGetReferenceFiles($includeFilesArray, $filePath) {
+// ".sah" to $g_includeFilesArray
+function recursiveGetReferenceFiles($filePath) {
 	var fileList = getFilesAndFolders($filePath);
 
 	if (fileList) {
-		fileList.forEach(function(fileOrFolder, index) {
-			fileOrFolder = $filePath + "/" + fileOrFolder;
+		fileList.forEach(function pushToArrayIfFile(fileOrFolder, index) {
+			var $fileOrFolderPath = $filePath + "/" + fileOrFolder;
 
-			if (fileOrFolder.substr(fileOrFolder.length - 4) === ".sah") {
-				$includeFilesArray.push(fileOrFolder);
+			if ($fileOrFolderPath.substr($fileOrFolderPath.length - 4) === ".sah") {
+				$g_includeFilesArray.push($fileOrFolderPath);
 			} else {
-				recursiveGetReferenceFiles($includeFilesArray, fileOrFolder);
+				recursiveGetReferenceFiles($fileOrFolderPath);
 			}
 		});
 	}
@@ -131,19 +131,19 @@ function recursiveGetReferenceFiles($includeFilesArray, $filePath) {
 // files will not be included
 function getFilesAndFolders($filePath) {
 	try {
-		var $fileList_1 = new java.io.File($filePath);
+		var $files = new java.io.File($filePath);
 		// array of files and directory
-		var $fl = $fileList_1.list();
+		var $fileList = $files.list();
 
 		// remove files and folders that start with "." this is mainly to remove
 		// .DS_Store files on macs
-		$fl.forEach(function removeDots(element, index) {
+		$fileList.forEach(function removeDots(element, index) {
 			if (element.charAt(0) === ".") {
-				$fl.splice(index, 1);
+				$fileList.splice(index, 1);
 			}
 		});
 
-		return $fl;
+		return $fileList;
 	} catch ($e) {
 		Packages.java.lang.System.out.println("FILE EXCEPTION : " + $e);
 	}
