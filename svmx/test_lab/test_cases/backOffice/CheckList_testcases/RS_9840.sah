@@ -24,7 +24,9 @@ $bo_act_checklistdesigner.re_openChecklistTypeSFM($transactioname, true);
 $bo_act_checklistdesigner.verifyquestion_undertags($questiontext, "Untagged");
 _wait(10000);
 
-_call(top.location.reload());
+
+$bo_act_navigation.navigateToSfmTransactionDesigner();
+$bo_act_SFM.deleteSFM("A RS_9840 Process 1"+$number1+"");
 // To create another Checklist with Same Question
 
 $RS_9840.end();

@@ -23,4 +23,7 @@ $bo_act_checklistdesigner.newChecklistTypeSFM("A RS_9841 Process 1"+$number1+"",
 $bo_act_checklistdesigner.searchthevaluesinchecklist_groupbytagon("A RS_9841 Question", "RS9841TAG" , "9841");
 
 
+
+$bo_act_navigation.navigateToSfmTransactionDesigner();
+$bo_act_SFM.deleteSFM("A RS_9841 Question");
 $RS_9841.end();
