@@ -3,7 +3,7 @@
 
 var $RS_5316 = _testcase("$RS_5316","Get Price:Price picked for Activity type(Activity Product=ArchProd4-calibration)");
 $RS_5316.start();
-_setSpeed(100);
+_setSpeed($g_stepSpeed);
 
 /**
 * Login to the Sandbox Org
@@ -21,7 +21,7 @@ var $seperator = "/";
 */
 var $accountName = $bo_act_accounts.createAccount();
 var $contactName = $bo_act_contacts.createContact($accountName);
-var $productName = $bo_act_products.createProduct($productCode, $productFamily[3]);
+var $productName = $bo_act_products.createProduct($productCode, $productFamily[0]);
 var $IBName = $bo_act_installedProduct.createInstalledProduct($productName, $accountName, $contactName);
 
 /**
@@ -63,7 +63,7 @@ $bo_act_serviceMaintenanceContracts.AddCoveredProducToServiceContract($sconName,
 //Add Entitled Contact to Service Contract 
 
 $bo_act_serviceMaintenanceContracts.addEntitledContactsToServiceContract($sconName, $contactName);
-
+_setSpeed(300);
 //Add Labor Pricing To Service Contract using Unit as Per Hours and Activity Type as Calibration
 var $RoundingType = "Actuals";
 var $unit = ["--None--","Per Hour","Flat Rate"];
@@ -72,7 +72,7 @@ var $regularRate = 500;
 var $activityProduct = (($activityType[1].concat(" : ")).concat($productName));
 
 $bo_act_serviceMaintenanceContracts.addLaborPricingToServiceContractUsingActivityProduct($sconName, $RoundingType, $unit[1], $minimumLaborMins, $regularRate, $activityProduct);
-
+_setSpeed($g_stepSpeed);
 
 /**
 * Create Case record
@@ -141,7 +141,7 @@ if(_isVisible(_image("Checked",_rightOf(_cell("/Is Entitlement Performed/"))))){
 */
 
 $bo_act_getPrice.navigateToSFMDeliveryPageFor_TDM016($WONumber);
-
+_setSpeed(300);
 //Add Labor Line to Above invoke TDM016 SFM
 var $searchValue = $productName;
 var $startHrs = "03";
@@ -168,6 +168,7 @@ _assertEqual($LaborCoveredActual,"0","Actual and expected labor Covered % are no
 $bo_act_getPrice.closeEditedWOLineToSFMDelivery();
 
 $bo_act_getPrice.saveSFMDelivery();
+_setSpeed($g_stepSpeed);
 
 //Delete SFM Wizard 
 $bo_act_SFW.deleteSFMWizard("Work Order", $wizardIDName);
@@ -176,10 +177,20 @@ $bo_act_SFW.deleteSFMWizard("Work Order", $wizardIDName);
 *Clean up function
 */
 
-var $datacreated = [$WONumber,$caseNumber,$IBName,$productName,$contactName,$accountName,$slaName,$sconName];
-for (var i = 0; i < $datacreated.length; i++) {
-$bo_act_common.cleanUpfunction($datacreated[i]);
-}
+
+$bo_act_common.deleteCase($bac_un, $bac_pwd,$caseNumber);
+$bo_act_common.deleteAccount($bac_un, $bac_pwd, $accountName);
+$bo_act_common.deleteContact($bac_un, $bac_pwd, $contactName);
+$bo_act_common.deleteIB($bac_un, $bac_pwd, $orgnamespace,$IBName);
+$bo_act_common.deleteProduct($bac_un, $bac_pwd,$productName);
+$bo_act_common.deleteWorkOrder($bac_un, $bac_pwd, $orgnamespace,$WONumber);
+$bo_act_common.deleteSLA($bac_un, $bac_pwd, $orgnamespace, $slaName);
+$bo_act_common.deleteSCON($bac_un, $bac_pwd, $orgnamespace,$sconName);
+
+//var $datacreated = [$WONumber,$caseNumber,$IBName,$productName,$contactName,$accountName,$slaName,$sconName];
+//for (var i = 0; i < $datacreated.length; i++) {
+//$bo_act_common.cleanUpfunction($datacreated[i]);
+//}
 
 // Delete the Activity ID's Created 
 //$bo_act_activityMaster.deleteActivityMaster($activityID);

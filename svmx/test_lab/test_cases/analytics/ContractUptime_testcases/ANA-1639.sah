@@ -17,6 +17,7 @@ var $PreferredEndDate = $data[1]["PreferredEndDate"];
 var $GuranteedUptime = $data[1]["GuranteedUptime"];
 var $Downtime_value  = $data[1]["DownTime"];
 var $UptimeValue = $data[1]["UptimeValue"];
+var $user_meghana = $data[1]["user_meghana"];
 $bo_act_login.login($url, $un, $pwd);
 
 
@@ -71,7 +72,7 @@ _log($ana_1639_IB_ID);
 // Create Covered Product 
 var $ana_1639_create_CP = "SVMXC__Service_Contract_Products__c CP01 = new SVMXC__Service_Contract_Products__c(SVMXC__Installed_Product__c = '"+$ana_1639_IB_ID+"',SVMXC__Service_Contract__c = '"+$ana_1639_SCON+"',SVMXC__End_Date__c = System.Today() ); insert CP01;";
 var $ana_1639_result_CP = $op_act_sForceApiCall.sForceQuery($un, $pwd, $ana_1639_create_CP , "create");
-var $ana_1639_get_CP = "Select Id from SVMXC__Service_Contract_Products__c where Createdby.Id = '005q0000003GGfP' Order by CreatedDate DESC Limit 1";
+var $ana_1639_get_CP = "Select Id from SVMXC__Service_Contract_Products__c where Createdby.Id = '"+$user_meghana+"' Order by CreatedDate DESC Limit 1";
 var $ana_1639_fetch_CP   = $op_act_sForceApiCall.sForceQuery($un, $pwd, $ana_1639_get_CP,"query");
 var $ana_1639_cp_ID;
 
@@ -117,7 +118,7 @@ _assertEqual(Math.round($UptimeValue), Math.round($ana_1639_uptime_value));
 
 	var $ana_1639_create_WO1 = "SVMXC__Service_Order__c WO1 = new SVMXC__Service_Order__c(SVMXC__Component__c = '"+$ana_1639_IB_ID+"',SVMXC__Service_Contract__c = '"+$ana_1639_SCON+"', SVMXC__Preferred_Start_Time__c = DateTime.valueOf('"+$PreferredStartDate+"'), SVMXC__Preferred_End_Time__c = DateTime.valueOf('"+$PreferredEndDate+"'), SVMXC__Order_Status__c = 'Closed' ); insert WO1;";
 	var $ana_1639_result_WO1 = $op_act_sForceApiCall.sForceQuery($un, $pwd, $ana_1639_create_WO1 , "create");
-	var $ana_1639_get_WO1 = "Select Id, Name from SVMXC__Service_Order__c where Createdby.Id = '005q0000003GGfP' Order by CreatedDate DESC Limit 1";
+	var $ana_1639_get_WO1 = "Select Id, Name from SVMXC__Service_Order__c where Createdby.Id = '"+$user_meghana+"' Order by CreatedDate DESC Limit 1";
 	var $ana_1639_fetch_WO1 = $op_act_sForceApiCall.sForceQuery($un, $pwd, $ana_1639_get_WO1,"query");
 	
 _wait(5000);
@@ -128,7 +129,7 @@ $ana_1639_WO_ID1 = $ana_1639_fetch_WO1[0].Id;
 
 var $ana_1639_create_WO2 = "SVMXC__Service_Order__c WO1 = new SVMXC__Service_Order__c(SVMXC__Component__c = '"+$ana_1639_IB_ID+"',SVMXC__Service_Contract__c = '"+$ana_1639_SCON+"', SVMXC__Preferred_Start_Time__c = DateTime.valueOf('"+$PreferredStartDate+"'), SVMXC__Preferred_End_Time__c = DateTime.valueOf('"+$PreferredEndDate+"'), SVMXC__Order_Status__c = 'Closed' ); insert WO1;";
 var $ana_1639_result_WO2 = $op_act_sForceApiCall.sForceQuery($un, $pwd, $ana_1639_create_WO2 , "create");
-var $ana_1639_get_WO2 = "Select Id, Name from SVMXC__Service_Order__c where Createdby.Id = '005q0000003GGfP' Order by CreatedDate DESC Limit 1";
+var $ana_1639_get_WO2 = "Select Id, Name from SVMXC__Service_Order__c where Createdby.Id = '"+$user_meghana+"' Order by CreatedDate DESC Limit 1";
 var $ana_1639_fetch_WO2 = $op_act_sForceApiCall.sForceQuery($un, $pwd, $ana_1639_get_WO2,"query");
 
 _wait(5000);

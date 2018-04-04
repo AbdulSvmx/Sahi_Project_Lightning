@@ -27,7 +27,7 @@ var $excel = new function excel() {
 	/**
 	 * Function to write to a excel file
 	 * 
-	 * @param $excelMode
+	 * @param $excelMode read, write, insert
 	 * @param $filePath
 	 * @param $sheetName
 	 * @param $excelData
@@ -121,12 +121,12 @@ var $excel = new function excel() {
 							}
 							// Assign the row count to attain the EOL of the
 							// column
-							$rowNo = $rowCount-1;
+							$rowNo = $rowCount;
 
 						} else {
 							// Custom row index
 							$rowNo = $rowIndex;
-							// _log("$rowIndex = " + $rowIndex);
+							 //_log("$rowIndex = " + $rowIndex);
 						}
 						//Assign the column number from $j
 						$colNo = $j;

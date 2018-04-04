@@ -32,7 +32,7 @@
 		<property name="threads" value="1"/>
 		<property name="showPeriodicSummary" value="true"/>
 		<property name="failedSuiteName" value="op_demo_failed_${browser}.suite"/>
-		<property name="failedSuite" value="svmx/test_lab/test_suites/optimax/${failedSuiteName}"/>
+		<property name="failedSuite" value="svmx/test_lab/test_suites/analyticsx/${failedSuiteName}"/>
 		<property name="jsCodeCoverage" value="false"/>
 	</target>
 
@@ -57,11 +57,41 @@
 			showPeriodicSummary="${showPeriodicSummary}"
 			threads="${threads}"
 			jsCodeCoverage="${jsCodeCoverage}">
+			<!-- Offline reports -->
+			<report type="junit" logdir="C://var//lib//jenkins//workspace//sahi_executions//logs//junit"/>	
+			<report type="html" logdir="C://var//lib//jenkins//workspace//sahi_executions//logs//html"/>
+			<report type="excel" logdir="C://var//lib//jenkins//workspace//sahi_executions//logs//excel"/>	
 		</sahi>
-		<antcall target="failsahichrome"/>
-	</target>
+		<antcall target="retryfailedchrome"/>
+					</target>
 
-    <target name="failsahichrome" depends="set_properties_chrome" if="sahi.failed.${browser}">
-        <fail message="Sahi tests failed on browser ${browser}!"/>
-    </target>		
+					<target name="retryfailedchrome" depends="set_properties_chrome" if="sahi.failed.${browser}">
+						<sahi suite="${failedSuite}"
+							browsertype="${browser}"
+							startWith="${startWith}"
+							baseurl="${baseURL}"
+							sahihost="${host}"
+							sahiport="${port}"
+							scriptsPathMaster="${scriptDir}"
+							failureproperty="sahi.retry.failed.${browser}"
+							haltonfailure="false"
+							sendemail="${sendemail}"
+					        emailtrigger="${emailtrigger}"
+					        emailproperties="${emailproperties}"
+					       	sendEmailPeriodically="${sendemailperiodically}"
+							sendEmailPeriodicallyTime="${sendemailperiodicallytime}"
+							emailPasswordHidden="${emailPasswordHidden}"
+							singlesession="${singlesession}"
+							showPeriodicSummary="${showPeriodicSummary}"
+							threads="1"
+							jsCodeCoverage="${jsCodeCoverage}">
+							<!-- Offline reports -->
+							<report type="html" logdir="C://var//lib//jenkins//workspace//sahi_executions//logs//html//retry"/>
+						</sahi>
+						<antcall target="failsahichrome"/>
+					</target>
+
+				    <target name="failsahichrome" depends="set_properties_chrome" if="sahi.retry.failed.${browser}">
+				        <fail message="Sahi tests failed on browser ${browser}!"/>
+				    </target>			
 </project>

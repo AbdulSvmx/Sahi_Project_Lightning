@@ -4,12 +4,13 @@ var $cred = _readExcelFile("../../analytics/an_excleData/credentials.xlsx","Shee
 var $un = $cred[1]["UserName"];
 var $pwd =$cred[1]["Password"];
 var $url =$cred[1]["url"];
+var $user =$cred[1]["User"];
 var $data = _readExcelFile("../../analytics/an_excleData/MTTC_data.xlsx","Sheet1",true);
 var $Account = $data[1]["Account"];
 var $Technician = $data[1]["Technician"];
 var $Product = $data[1]["Product"];
 var $OrderStatus = $data[1]["OrderStatus"];
-var $Component = $data[3]["Component"];
+var $Component = $data[4]["Component"];
 var $PreferredStartDate = $data[5]["PreferredStartDate"];
 var $PreferredEndDate = $data[5]["PreferredEndDate"];
 $bo_act_login.login($url, $un, $pwd);
@@ -34,7 +35,7 @@ _log($IB_created_date);
 
 	var $ana_9821_create_WO = "SVMXC__Service_Order__c WO1 = new SVMXC__Service_Order__c(SVMXC__Company__c='"+$Account+"',custom_Installed_Product__c = '"+$Component+"',Custom_Start_Time__c = DateTime.valueOf("+$PreferredStartDate+"+0.025), Custom_End_Time__c = DateTime.valueOf("+$PreferredEndDate+"+0.085)); insert WO1;";
 	var $ana_9821_result_WO = $op_act_sForceApiCall.sForceQuery($un, $pwd, $ana_9821_create_WO , "create");
-	var $ana_9821_get_WO = "Select Id,Custom_Start_Time__c,Custom_End_Time__c  from SVMXC__Service_Order__c where Createdby.Id = '005q0000003RLoJ' Order by CreatedDate DESC Limit 1";
+	var $ana_9821_get_WO = "Select Id,Custom_Start_Time__c,Custom_End_Time__c  from SVMXC__Service_Order__c where Createdby.Id = '"+$user+"' Order by CreatedDate DESC Limit 1";
 	var $ana_9821_fetch_WO = $op_act_sForceApiCall.sForceQuery($un, $pwd, $ana_9821_get_WO,"query");
 	var $ana_9821_WO_ID ;
 

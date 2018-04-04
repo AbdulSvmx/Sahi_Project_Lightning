@@ -8,13 +8,17 @@ var $bo_act_addEditProdServDelivery=new function bo_act_addEditProdServDelivery(
 		_click($bo_pg_addEditProdServDelivery.btn_select);
 		_setValue($bo_pg_addEditProdServDelivery.txt_workPerform,$workPerform);	
 	};
+	
+	
+	
 		
 		// This function is to add info for product serviced child ine*********
 		this.addchildlineInfo=function($selIBProd,$selPart,$selProdWarranty){//$selIBProd="Laptop"//$selPart="Keyboard",$selProdWarranty="WN-000006"
-			/*
-			if(_assertExists(_image("svmx-action-col-icon svmx-action-col-1   svmx-sfmd-delete-icon"))){
+			if(_isVisible(_image("svmx-action-col-icon svmx-action-col-1   svmx-sfmd-delete-icon"))){
+			_log("child line already added");	
 				_click(_image("svmx-action-col-icon svmx-action-col-1   svmx-sfmd-delete-icon"));
-				}*/
+				_wait(3000);
+					}
 			_click($bo_pg_addEditProdServDelivery.btn_svmxAddLineIcon);
 			_wait(3000);
 			//Adding IB Serial number from Lookup*****
@@ -23,6 +27,7 @@ var $bo_act_addEditProdServDelivery=new function bo_act_addEditProdServDelivery(
 			_click($bo_pg_addEditProdServDelivery.btn_lookupIconForSerialNum);
 			_wait(1000);
 			_click($bo_pg_addEditProdServDelivery.btn_limitSrchCheckbox);
+			//_setValue(_textbox("svmx-form-field svmx-form-text[3]"),"");
 			_click($bo_pg_addEditProdServDelivery.btn_svmxSearchIcon);
 			_wait(1000);
 			_click(_div("svmx-grid-cell-inner [5]"));
@@ -32,9 +37,11 @@ var $bo_act_addEditProdServDelivery=new function bo_act_addEditProdServDelivery(
 			//Adding parts from look up****
 			_click($bo_pg_addEditProdServDelivery.lbl_partField);
 			_click($bo_pg_addEditProdServDelivery.btn_lookupIconForPart);
+			//_setValue(_textbox("svmx-form-field svmx-form-text[4]"),"");
 			_click($bo_pg_addEditProdServDelivery.btn_svmxSearchIcon);
 			_click(_div("svmx-grid-cell-inner [5]"));
 			_click($bo_pg_addEditProdServDelivery.btn_select);
+			
 		/* //Do not delete these lines please****	
 			//Adding Product Warranty from look up****
 			_click($bo_pg_addEditProdServDelivery.lbl_prodWarranty);
@@ -52,7 +59,7 @@ var $bo_act_addEditProdServDelivery=new function bo_act_addEditProdServDelivery(
 				_click(_xy(_emphasis(0,_near(_span("svmx-btn-icon svmx-sfmd-detail-actions-icon"))),$xy[0],$xy[1]));
 				_wait(6000);
 				_click($bo_pg_addEditProdServDelivery.lnk_addEdit);
-				_wait(60000);
+				_wait(20000);
 			};
 			
 				//This function is to find date of today in the format dd/mm/yyyy
@@ -68,7 +75,7 @@ var $bo_act_addEditProdServDelivery=new function bo_act_addEditProdServDelivery(
 					if(mm<10){
 						mm='0'+mm;
 					} 
-					var $today = dd+'/'+mm+'/'+yyyy;
+					var $today = mm+'/'+dd+'/'+yyyy;
 					return $today;
 				};
 					//This function is to find next month today date
@@ -90,18 +97,21 @@ var $bo_act_addEditProdServDelivery=new function bo_act_addEditProdServDelivery(
 						if(mm<10){
 							mm='0'+mm;
 						} 
-						var $nextMonthToday = dd+'/'+mm+'/'+yyyy;
+						var $nextMonthToday = mm+'/'+dd+'/'+yyyy;
 						return $nextMonthToday;
 						
-					} ;
-		
+					} ;		
 						this.addPart=function(){
-							/*var a=_assertExists(_image("svmx-action-col-icon svmx-action-col-1   svmx-sfmd-delete-icon"));
-							if( a="true"){
-								_click(_image("svmx-action-col-icon svmx-action-col-1   svmx-sfmd-delete-icon"));
-							}*/
-							_click($bo_pg_addEditProdServDelivery.btn_svmxAddLineIcon);
+							
+							
+							if(_isVisible(_image("svmx-action-col-icon svmx-action-col-1   svmx-sfmd-delete-icon[1]"))){
+							_log("child line already added");																
+							_click(_image("svmx-action-col-icon svmx-action-col-1   svmx-sfmd-delete-icon[1]"));
+								_wait(3000);
+							}
+							_click(_span("svmx-btn-icon svmx-sfmd-add-line-icon"));
 							_click(_span("svmx-btn-icon svmx_lookup_icon[3]"));
+							//_setValue(_textbox("svmx-form-field svmx-form-text[5]"),"");
 							_click(_span("svmx-btn-icon svmx-sfmd-search-icon "));
 							_click(_div("svmx-grid-cell-inner [26]"));
 							_click($bo_pg_addEditProdServDelivery.btn_select);							
@@ -113,17 +123,22 @@ var $bo_act_addEditProdServDelivery=new function bo_act_addEditProdServDelivery(
 							//_click(_div("svmx-grid-cell-inner [13]"));
 							_click(_span("svmx-btn-icon svmx_lookup_icon[4]"));
 							_click(_span("svmx-btn-icon svmx-sfmd-search-icon "));
-							_click(_div("svmx-grid-cell-inner [26]"));
+							_click(_div("/pro/"));
 							_click($bo_pg_addEditProdServDelivery.btn_select);	
 								
 							};
 								this.addExpenses=function(){
 									_click($bo_pg_addEditProdServDelivery.lbl_expenses);
 									_click(_span("svmx-btn-icon svmx-sfmd-add-line-icon[2]"));
-									_click(_div("svmx-grid-cell-inner [27]"));
-									_setValue(_textbox("svmx-form-field svmx-form-text[6]"),"");
-									_setValue(_textbox("svmx-form-field svmx-form-text svmx-form-focus svmx-field-form-focus svmx-field-default-form-focus"), "Parking");
-									_click(_listItem("Parking"));
+									
+								if(_isVisible(_textbox("svmx-form-field svmx-form-text[6]"))){
+										_setValue(_textbox("svmx-form-field svmx-form-text[6]"),"Parking");
+								}else if(_isVisible(_textbox("svmx-form-field svmx-form-text svmx-form-focus svmx-field-form-focus svmx-field-default-form-focus"))){
+										_setValue(_textbox("svmx-form-field svmx-form-text svmx-form-focus svmx-field-form-focus svmx-field-default-form-focus"),"Parking")
+								}else{
+										_setValue(_textbox("sfm-picklistcelleditor-1297-inputEl"),"Parking");
+								}
+										_click(_listItem("Parking"));
 									_wait(6000);
 									//_click($bo_pg_addEditProdServDelivery.chk_usePriceFrom);									
 								};

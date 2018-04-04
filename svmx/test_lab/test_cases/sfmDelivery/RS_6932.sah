@@ -1,0 +1,76 @@
+//Author: Safi Ahmed
+var $rs_6932 = _testcase("RS_6932","Verify Lookup advanced filter - User Trunk literal");
+$rs_6932.start();
+$sfmName = $bo_act_common.generateRandomName("RS6932_");
+$userTrunk = "Windows";
+$sfmPgLayoutName =	$bo_act_common.generateRandomName("SFM_Auto_Page");
+$processName = "Manage Work Order Lines - Usage";
+$lookUpName = $bo_act_common.generateRandomName("Prod_lkp_");
+$wizTitle = $bo_act_common.generateRandomName("SFM Wiz");
+$bo_act_login.login($g_url,$sfmUsn,$sfmPwd);
+$bo_act_navigation.navigateToSfmTransactionDesigner();
+$sfm_act_Transactions.clonedsfm6932($processName,$sfmName,$sfmPgLayoutName);
+$bo_act_navigation.navigateToSfmWizard();
+$sfm_act_createCustomWizard.chooseObject("Work Order");
+$sfm_act_createCustomWizard.addManageWizSteps($wizTitle, "SFM", $sfmName);
+$sfm_act_createCustomWizard.createBlankWo();
+$sfm_act_createCustomWizard.clickWizardBtn($sfmName);
+//$sfm_act_createCustomWizard.verify6932();
+
+//Verification
+
+var $count=0;
+var $temp=0;
+_selectDomain();
+_click(_span("/lookup_icon/",_rightOf(_label("Product:"))));
+_wait(3000);
+_setStrictVisibilityCheck(true);
+_click(_span("/lookup-advfilter-expand-icon/"));
+_click(_button("SVMXSTD:Limit Items to My Trunk Stock"));
+_click(_span("/search-icon/"));
+
+var $divs1= _collect("_cell","/.*/",_under(_div("Product Name")))
+	//_alert( $divs1.length);
+for($i=0;$i<$divs1.length;$i++){
+	if(_getText($divs1[$i])!="Windows")
+	{
+		$count++;
+	}
+	
+}
+	if($count==0){
+			_log("TestResult:: Step 1:: Pass");
+		}
+		else
+			{
+			_log("TestResult:: Step 1:: Fail");
+		}
+	
+_click(_button("SVMXSTD:Limit Items to My Trunk Stock"));
+_click(_span("/search-icon/"));
+
+var $divs2= _collect("_cell","/.*/",_under(_div("Product Name")))
+//_alert( $divs2.length);
+for($j=0;$j<$divs2.length;$j++){
+if(_getText($divs2[$j])!="Windows")
+	{
+	$temp++;
+	}
+}
+if($temp!=0){
+		_log("TestResult:: Step 1:: Pass");
+	}
+	else
+		{
+		_log("TestResult:: Step 1:: Fail");
+	}
+
+$rs_6932.end();
+
+
+
+
+
+
+
+

@@ -2,6 +2,7 @@
 var $bo_act_common = new function bo_act_common() {
 
 this.generateRandomName = function($Prefix){
+	 _wait(1000);
   var $now = new Date();
     var $day = $now.getDate();
     var $month = $now.getMonth()+1;
@@ -9,7 +10,8 @@ this.generateRandomName = function($Prefix){
     var $hrs = $now.getHours();
 	var $min = $now.getMinutes();
 	var $sec = $now.getSeconds();
-    var $RandomString = $Prefix+$day + $month+ $year+$hrs+$min+$sec; 		
+    var $RandomString = $Prefix+$day + $month+ $year+$hrs+$min+$sec; 	
+    _log("Num Gen = ",$RandomString);
     return $RandomString;
 };
 
@@ -70,6 +72,7 @@ this.getPastDate = function($pastYear, $seperator){
 this.searchfunction = function($searchValue){
 _getRecentWindow();
 _setStrictVisibilityCheck(true);
+_wait(15000);
 _click(_span("/svmx-button/",_near(_div("svmx-column-inner",_in(_div("svmx-panel svmx-fit-item svmx-window-item svmx-panel-default"))))));
 _getRecentWindow();
 //_click(_textbox("/svmx-picklist/"));
@@ -117,8 +120,17 @@ this.endDateCalculationForIB = function ($startDateExpectedOn_IB, $durationOfCov
 	_logOutput($month);
 	var $day = $dateInstalled.getDate();
 	_logOutput($day);
+	if($day== 1 && ($month== 1 || 2 || 4 || 6 || 8 || 9 || 11 )){
+		var $endDateCalculationForIB =  ($month)+$seperator+("31")+$seperator+$year;
+		_logOutput($endDateCalculationForIB);
+	}
+	else if($day== 1 && ($month== 3 || 5 || 7 || 10 || 12)){
+		var $endDateCalculationForIB =  ($month)+$seperator+("30")+$seperator+$year;
+		_logOutput($endDateCalculationForIB);
+	}else{
 	var $endDateCalculationForIB =  ($month+1)+$seperator+($day-1)+$seperator+$year;
 	_logOutput($endDateCalculationForIB);
+	}
 	return $endDateCalculationForIB;
 	};
 
@@ -169,7 +181,9 @@ this.cleanUpfunctionold = function($value)
 
 		this.cleanUpfunction = function($value)
 		{
-			_click($bo_pg_search.btn_search);
+			_call(top.location.reload(true));
+			_click(_link("Home")); // Changes added by Meghana
+			_doubleClick($bo_pg_search.btn_search);
 			_wait(5000,_isVisible($bo_pg_search.btn_searchAgain));
 			for(var $i=0;$i<=5;$i++){
 					_wait(5000,_isVisible($bo_pg_search.txt_searchText));
@@ -191,14 +205,87 @@ this.cleanUpfunctionold = function($value)
 			
 		};
 		
-		this.deleteWorkOrder = function($userName,$password,$value,$nameSpace){
-			var $delete_Query = "delete [Select Id from " +$nameSpace+"__Service_Order__c where Name = "+$value+"];";
+		this.deleteWorkOrder = function($userName,$password,$namespace,$value){
+			var $delete_Query = "delete [Select Id from "+$namespace+"__Service_Order__c where Name = '"+$value+"'];";
 			var $delete_data = $op_act_sForceApiCall.sForceQuery($userName, $password, $delete_Query , "create");
 		};
 		
-		this.deleteActivityMaster = function($userName,$password,$value,$nameSpace){
+		// Changes added by Meghana
+		
+		this.deleteCase = function($userName,$password,$value){
+			var $delete_Query = "delete [Select Id from Case where Name = '"+$value+"'];";
+			var $delete_data = $op_act_sForceApiCall.sForceQuery($userName, $password, $delete_Query , "create");	
+			
+		};
+		
+		
+		this.deleteProduct = function($userName,$password,$value){
+			var $delete_Query = "delete [Select Id from Product2 where Name = '"+$value+"'];";
+			var $delete_data = $op_act_sForceApiCall.sForceQuery($userName, $password, $delete_Query , "create");
+			
+			
+		};
+		
+		this.deleteAccount = function($userName,$password,$value){
+			var $delete_Query = "delete [Select Id from Account where Name = '"+$value+"'];";
+			var $delete_data = $op_act_sForceApiCall.sForceQuery($userName, $password, $delete_Query , "create");
+			
+		};
+		
+		this.deleteContact = function($userName,$password,$value){
+			var $delete_Query = "delete [Select Id from Contact where Name = '"+$value+"'];";
+			var $delete_data = $op_act_sForceApiCall.sForceQuery($userName, $password, $delete_Query , "create");
+			
+			
+		};
+		
+		this.deleteIB = function($userName,$password,$namespace,$value){
+			var $delete_Query = "delete [Select Id from "+$namespace+"__Installed_Product__c where Name = '"+$value+"'];";
+			var $delete_data = $op_act_sForceApiCall.sForceQuery($userName, $password, $delete_Query , "create");
+			
+		};
+
+		// Delete SLA Terms
+		
+		this.deleteSLA = function($userName,$password,$namespace,$value){
+			var $delete_Query = "delete [Select Id from "+$namespace+"__Service_Level__c where Name = '"+$value+"'];";
+			var $delete_data = $op_act_sForceApiCall.sForceQuery($userName, $password, $delete_Query , "create");
+			
+		};
+		
+		
+		// Delete Location
+		this.deleteLocation = function($userName,$password,$namespace,$value){
+			var $delete_Query = "delete [Select Id from "+$namespace+"__Site__c where Name = '"+$value+"'];";
+			var $delete_data = $op_act_sForceApiCall.sForceQuery($userName, $password, $delete_Query , "create");
+			
+		};
+		
+		
+		
+		this.deleteActivityMaster = function($userName,$password,$nameSpace,$value){
 			var $delete_Query = "delete[Select Id from " +$nameSpace+"__Activity_Master__c where Name = '"+$value+"'];";
 			var $delete_data = $op_act_sForceApiCall.sForceQuery($userName, $password, $delete_Query , "create");
 		};
-
+		
+		this.deleteSCON = function($userName,$password,$nameSpace,$value){
+			var $delete_Query = "delete[Select Id from " +$nameSpace+"__Service_Contract__c where Name = '"+$value+"'];";
+			var $delete_data = $op_act_sForceApiCall.sForceQuery($userName, $password, $delete_Query , "create");
+		};
+		
+		this.deleteWarranty = function($userName,$password,$nameSpace,$value){
+			var $delete_Query = "delete[Select Id from " +$nameSpace+"__Service_Template__c where Name = '"+$value+"'];";
+			var $delete_data = $op_act_sForceApiCall.sForceQuery($userName, $password, $delete_Query , "create");
+		};
+		
+		
+		this.deletePMPlantemplate = function($userName,$password,$nameSpace,$value){
+			var $delete_Query = "delete[Select Id from " +$nameSpace+"__PM_Plan_Template__c where Name = '"+$value+"'];";
+			var $delete_data = $op_act_sForceApiCall.sForceQuery($userName, $password, $delete_Query , "create");
+		};
+		
+		this.deletePMPlan = function($userName,$password,$nameSpace,$value){
+			var $delete_Query = "delete[Select Id from " +$nameSpace+"__PM_Plan__c where Name = '"+$value+"'];";
+			var $delete_data = $op_act_sForceApiCall.sForceQuery($userName, $password, $delete_Query , "create");
+		};
 };

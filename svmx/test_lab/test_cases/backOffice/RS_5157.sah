@@ -3,7 +3,7 @@
 
 var $RS_5157 = _testcase("RS_5157", "Batching : Run Now when there are requests in queue");
 $RS_5157.start();
-_setSpeed(100);
+_setSpeed($g_stepSpeed);
 var $sfmName1 = $bo_act_common.generateRandomName("5157SFM1");
 var $sfmName2 = $bo_act_common.generateRandomName("5157SFM2");
 var $d1="Sunday";var $d2="Monday";var $d3="Tuesday";var $d4="Wednesday";var $d5="Thursday";var $d6="Friday";var $d7="Saturday";
@@ -66,17 +66,17 @@ $bo_act_scheduledSFM.newProcessNameID($ProcessName2,$ProcessId2);
  $bo_act_scheduledSFM.setUserForNotification($user);
  _click($bo_pg_scheduledSFM.btn_saveAndClose);
 _wait(3000,_isVisible($bo_pg_scheduledSFM.lbl_scheduledSFMHomePage));
-_log("Scheduled SFM successful");
+//_log("Scheduled SFM successful");
 
 $bo_act_scheduledSFM.clickRunNow($ProcessName1,$ProcessName2);
 $bo_act_scheduledSFM.navigateApexJobsPage();
 
 
-	var	$status1=_getText($bo_pg_salesForceSetUP.lbl_status1);
+	var	$status1=_getText($bo_pg_salesforcePageSetUp.lbl_status1);
 if ($status1!="Completed"){
 	_navigateTo(document.location.href, true);}
 else{
-	var $status2=_getText($bo_pg_salesForceSetUP.lbl_status2);
+	var $status2=_getText($bo_pg_salesforcePageSetUp.lbl_status2);
 		}
 if($status2 !="Completed"){
 	_log("The SFM initiated 1st was completed 1st");
@@ -84,11 +84,14 @@ if($status2 !="Completed"){
 $bo_act_navigation.navigateToScheduledSFM();
 $bo_act_scheduledSFM.deleteScheduledSFM($ProcessName1);
 $bo_act_scheduledSFM.deleteScheduledSFM($ProcessName2);
+//*****************Deleteing testdata************
+/*
+$bo_act_navigation.navigateToSfmTransactionDesigner();
+_wait(60000, _isVisible($bo_pg_sfmTransactionAndDesigner.btn_newSFM));
 $bo_act_SFM.deleteSFM($sfmName1);
-_wait(2000);
-$bo_act_SFM.deleteSFM($sfmName2);
-//$bo_act_customAction.deleteCustomAction($objName2,$wizardname);
-_setSpeed(100);
+$bo_act_SFM.deleteSFM($sfmName2);*/
+_setSpeed($g_stepSpeed);
+
 
 $RS_5157.end();
 

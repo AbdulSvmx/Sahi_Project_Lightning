@@ -6,9 +6,9 @@ var $productFamily = ["--None--","GeneralSolution","AdvSolution","Accessory", "S
 var $productCode = "";
 var $seperator = "/";
 
-var $RS_10138 = _testcase("$RS_10138","Auto Entitlement based on Product:- Entitlement on a WO using Service Contract.");
+var $RS_10138 = _testcase("$RS_10138","Verify the functionality of Auto Entitlement on WO's PS lines using Service Contract.");
 $RS_10138.start();
-_setSpeed(100);
+_setSpeed($g_stepSpeed);
 /**
 * Login to the Sandbox Org
 */
@@ -20,7 +20,7 @@ $bo_act_login.login($g_url, $bac_un, $bac_pwd);
  */
 var $accountName = $bo_act_accounts.createAccount();
 var $contactName = $bo_act_contacts.createContact($accountName);
-var $productName = $bo_act_products.createProduct($productCode, $productFamily[3]);
+var $productName = $bo_act_products.createProduct($productCode, $productFamily[0]);
 var $IBName = $bo_act_installedProduct.createInstalledProduct($productName, $accountName, $contactName);
 
 /**
@@ -163,10 +163,20 @@ $bo_act_autoEntitlementRule_WO.deleteAutoEntitlementRule_WO($autoEntitlementRule
 
 //Clean up function
 
-var $datacreated = [$WONumber,$caseNumber,$IBName,$serviceConractName,$slaName,$productName,$contactName,$accountName];
-for (var i = 0; i < $datacreated.length; i++) {
-	$bo_act_common.cleanUpfunction($datacreated[i]);
-}
+$bo_act_common.deleteCase($bac_un, $bac_pwd,$caseNumber);
+$bo_act_common.deleteAccount($bac_un, $bac_pwd, $accountName);
+$bo_act_common.deleteContact($bac_un, $bac_pwd, $contactName);
+$bo_act_common.deleteIB($bac_un, $bac_pwd, $orgnamespace,$IBName);
+$bo_act_common.deleteProduct($bac_un, $bac_pwd,$productName);
+$bo_act_common.deleteSLA($bac_un, $bac_pwd, $orgnamespace, $slaName);
+$bo_act_common.deleteSCON($bac_un, $bac_pwd, $orgnamespace,$serviceConractName);
+$bo_act_common.deleteWorkOrder($bac_un, $bac_pwd, $orgnamespace,$WONumber);
+
+
+//var $datacreated = [$WONumber,$caseNumber,$IBName,$serviceConractName,$slaName,$productName,$contactName,$accountName];
+//for (var i = 0; i < $datacreated.length; i++) {
+//	$bo_act_common.cleanUpfunction($datacreated[i]);
+//}
 
 $bo_act_login.logOut(); 
 

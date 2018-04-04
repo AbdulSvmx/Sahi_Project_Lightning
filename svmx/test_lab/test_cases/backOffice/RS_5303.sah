@@ -3,7 +3,7 @@
 
 var $RS_5303 = _testcase("$RS_5303","RESOLUTION response on Case:Clock paused/resumed on extending SLA commitment");
 $RS_5303.start();
-_setSpeed(100);
+_setSpeed($g_stepSpeed);
 
 //Pre - Condition 
 $bo_act_login.login($g_url, $bac_un, $bac_pwd);
@@ -51,10 +51,12 @@ _assertNotEqual(_getText($bo_pg_Cases.txt_TimeToResolve),"", "issue in Time to R
 
 //Clean up function
 
-var $datacreated = [$slaterm,$caseNumber];
-for (var i = 0; i < $datacreated.length; i++) {
-	$bo_act_common.cleanUpfunction($datacreated[i]);
-}
+//var $datacreated = [$slaterm,$caseNumber];
+//for (var i = 0; i < $datacreated.length; i++) {
+	//$bo_act_common.cleanUpfunction($datacreated[i]);
+//}
+
+$bo_act_slaTerms.deleteSLATerm($slaterm);
 
 $RS_5303.end();
 

@@ -1,90 +1,31 @@
 //Author- Safi Ahmed
-var $rs_7012 = _testcase("RS_7012","");
+// Precondition:: "UserTrunk" mapping should be present in org to get selected for this test case.
+var $rs_7012 = _testcase("RS_7012","Verify user trunk and current user literals in map");
 $rs_7012.start();
-$url = "https://test.salesforce.com";
-$un = "shankari@fop2.com";
-$pwd = "maxpl0re1";
-_setSpeed(100);
-$bo_act_login.login($url, $un, $pwd);
-
+$sfmName = $bo_act_common.generateRandomName("RS7012 ");
+$sfmMapping = "UserTrunk";
+$sfmPgLayoutName =	$bo_act_common.generateRandomName("SFM_Auto_Page");
+$processName = "Manage Work Order Lines - Usage";
+//$lookUpName = $bo_act_common.generateRandomName("Prod_lkp_");
+$wizTitle = $bo_act_common.generateRandomName("RS7012_");
+$bo_act_login.login($g_url,$sfmUsn,$sfmPwd);
 $bo_act_navigation.navigateToSfmTransactionDesigner();
-_setSpeed(100);
+$sfm_act_Transactions.clonedsfm7012($processName,$sfmName,$sfmPgLayoutName,$sfmMapping);
+$bo_act_navigation.navigateToSfmWizard();
+$sfm_act_createCustomWizard.chooseObject("Work Order");
+$sfm_act_createCustomWizard.addManageWizSteps($wizTitle, "SFM", $sfmName);
+$sfm_act_createCustomWizard.createBlankWo();
+$sfm_act_createCustomWizard.clickWizardBtn($sfmName);
 
-$sfmNameToBeCloned = "Manage Work Order Lines - Usage";
-$sfmName = "testMappingRS7012119";
-$isCustom = false;
-var $sfmTemplate = "SVMXSTD: View Work Order";
-var $sfmTemplateSaveAsName = $sfmName;
-var $fieldName = "Problem Description";
-var $containerName = "Order Status";
-var $sfmMapping = "UserTrunk";
-var $sfmName = "testMappingRS7012119";
-
-//Create SFM Process with Mapping applied(inbuilt)
-
-$sfm_act_createProcess.cloneSFM($sfmNameToBeCloned, $sfmName,$sfmMapping, $isCustom, $sfmTemplate, $sfmTemplateSaveAsName);
-
-
-
-
-// Add SFM process to Wizard
-
-$bo_act_navigation.navigateToSvmxSetup();
-_click(_div("Service Flow Manager"));
-_click(_div("SFM Wizards"));
-_setSelected(_select(0,_rightOf(_span("Select Object"))),"Work Order");
-_check(_checkbox(0,_leftOf(_span("SA_WO_Wizard"))));
-_click(_submit("Edit",_near(_heading2("Custom SFM Wizards"))));
-_click(_cell("Manage Wizard Steps"));
-_click(_button("New Step"));
-_setSelected(_select(0,_rightOf(_label("Wizard Step Type[1]"))),"SFM");
-_setSelected(_select(0,_rightOf(_label("Step Name[1]"))),$sfmName);
-_wait(3000);
-_click(_button("Save"));
-_wait(3000);
-if(_isVisible(_heading4("Success"))){
-	_log("Pass");
-	_click(_button("Save & Close"));
-	/*
-	_setValue(_textbox("str"), "WO-00001565");
-	_click(_button("Search"));
-	_click(_button("phSearchButton"));
-	_click(_link("WO-00001565"));
-	_selectDomain("svmxc.cs59.visual.force.com");
-	_click(_button("safi1111"));
-	*/
-}else{
-	_log("Fail");
-	_stopTestCase();
-
-}
-
-//Create WO
-
-_click(_link("Work Orders"));
-_click(_button(" New "));
-_click(_submit(" Save "));
-_wait(3000);
-
-
-
-//Invoke SFM process from wizard
-
-_selectDomain("svmxc.cs59.visual.force.com");
-_click(_button("testMappingRS7012119"));
-_wait(6000);
 _selectDomain("");
-_click(_span(24));
-
+_click(_span("svmx-btn-icon svmx-sfmd-save-icon"));
+_click(_span("Ok"));
 _wait(6000);
-
 
 //Validate Mappings applied as per RS-7012
 
-
-var $userClient = _getText(_link(0,_rightOf(_cell("User client"))));	
-var $site = _getText(_link(0, _rightOf(_cell("Site"))))
-_assertEqual("Shan",$userClient,"Current user literals is not mapped")
-_assertEqual($site, "SVMX Location", 'User trunk literal is not mapped')
-
+var $userClient = _getText(_link(0,_rightOf(_cell("User Client"))));	
+var $site = _getText(_link(0, _rightOf(_cell("Site"))));
+_assertEqual("SVMX Test01",$userClient,"Current user literals is not mapped")
+_assertEqual($site, "Test Loc", 'User trunk literal is not mapped')
 $rs_7012.end();

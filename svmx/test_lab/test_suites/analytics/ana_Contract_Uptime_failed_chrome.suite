@@ -1,2 +1,6 @@
-../../test_cases/analytics/ContractUptime_testcases/ANA-1635.sah https://test.salesforce.com
-../../test_cases/analytics/ContractUptime_testcases/ANA-1636.sah https://test.salesforce.com
+<<<<<<< HEAD
+../../test_cases/analytics/ContractUptime_testcases/DeleteData_ContractUptime.sah https://test.salesforce.com
+=======
+../../test_cases/analytics/ContractUptime_testcases/DeleteData_ContractUptime.sah http://test.salesforce.com
+../../test_cases/analytics/ContractUptime_testcases/ANA-ContractuptimeCalc.sah http://test.salesforce.com
+>>>>>>> faf5bdf1ad3690a4fc4f960152ec374a9ec3f2cf

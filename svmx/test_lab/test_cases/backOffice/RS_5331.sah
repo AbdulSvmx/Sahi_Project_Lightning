@@ -4,13 +4,13 @@
 
 var $RS_5331 = _testcase("$RS_5331","Get Price - when Header currency is different.");
 $RS_5331.start();
-_setSpeed(100);
+_setSpeed($g_stepSpeed);
 
 /**
  * Login to the Sandbox Org
  */
 
-//$bo_act_login.login($g_url, $bac_un, $bac_pwd);
+$bo_act_login.login($g_url, $bac_un, $bac_pwd);
 
 //Pre - Condition Test Data
 var $productFamily = ["--None--","GeneralSolution","AdvSolution","Accessory", "Storage"];
@@ -177,10 +177,17 @@ $bo_act_SFW.deleteSFMWizard("Work Order", $wizardIDName);
 *Clean up function
 */
 
-var $datacreated = [$WONumber,$caseNumber,$IBName,$productName,$contactName,$accountName,$slaName,$serviceName];
-for (var i = 0; i < $datacreated.length; i++) {
-$bo_act_common.cleanUpfunction($datacreated[i]);
-}
+$bo_act_common.deleteCase($bac_un, $bac_pwd,$caseNumber);
+$bo_act_common.deleteAccount($bac_un, $bac_pwd, $accountName);
+$bo_act_common.deleteContact($bac_un, $bac_pwd, $contactName);
+$bo_act_common.deleteIB($bac_un, $bac_pwd, $orgnamespace,$IBName);
+$bo_act_common.deleteProduct($bac_un, $bac_pwd,$productName);
+$bo_act_common.deleteWorkOrder($bac_un, $bac_pwd, $orgnamespace,$WONumber);
+$bo_act_common.deleteSLA($bac_un, $bac_pwd, $orgnamespace, $slaName);
+//var $datacreated = [$WONumber,$caseNumber,$IBName,$productName,$contactName,$accountName,$slaName,$serviceName];
+//for (var i = 0; i < $datacreated.length; i++) {
+//$bo_act_common.cleanUpfunction($datacreated[i]);
+//}
 
 $bo_act_login.logOut(); 
 

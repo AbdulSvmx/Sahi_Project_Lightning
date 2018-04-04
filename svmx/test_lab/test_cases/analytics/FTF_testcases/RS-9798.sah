@@ -1,9 +1,11 @@
 var $an_ftf_834 = _testcase("ANA-834","Case as Top-level (Few WD match and few don't)");
 $an_ftf_834.start();
-var $un = "vinaya.v@servicemax.com";
-var $pwd = "servicemax12";
-var $url = "https://test.salesforce.com";
-var $data = _readExcelFile("../../analytics/an_excleData/FTF_data.xlsx","Sheet1",true);
+var $cred = _readExcelFile("../../analytics/an_excleData/credentials.xlsx","Sheet1",true);
+var $un = $cred[1]["UserName"];
+var $pwd =$cred[1]["Password"];
+var $url =$cred[1]["url"];
+var $user= $cred[1]["User"];
+var $data = _readExcelFile("../../analytics/an_excleData/MTTC_data.xlsx","Sheet1",true);
 var $Account = $data[4]["Account"];
 var $Technician = $data[4]["Technician"];
 var $Product = $data[4]["Product"];
@@ -28,7 +30,7 @@ _log($Case);
 //create workorder
 var $WO;
 var $insert_wo_first = "SVMXC__Service_Order__c  WO = new SVMXC__Service_Order__c (SVMXC__Case__c='"+$Case+"',SVMXC__Company__c ='"+ $Account +"', SVMXC__Product__c = '"+$Product+"', SVMXC__Group_Member__c = '"+$Technician+"', SVMXC__Closed_On__c = "+$Closedon+", SVMXC__Priority__c = 'High',SVMXC__Order_Type__c='Depot Repair',SVMXC__Billing_Type__c='Loan');insert WO;";
-var $query_wo_first = "Select Name , Id  , SVMXC__Company__c , SVMXC__Closed_On__c from SVMXC__Service_Order__c where Createdby.Id = '005q0000003RLoJ'  Order by CreatedDate DESC Limit 1";
+var $query_wo_first = "Select Name , Id  , SVMXC__Company__c , SVMXC__Closed_On__c from SVMXC__Service_Order__c where Createdby.Id = '"+$user+"'  Order by CreatedDate DESC Limit 1";
 var $fetchwoquery = $op_act_sForceApiCall.sForceQuery($un, $pwd, $insert_wo_first ,"create");
 
 var $store_first_wo = $op_act_sForceApiCall.sForceQuery($un, $pwd, $query_wo_first,"query");
@@ -44,7 +46,7 @@ var $WD;
 var $WD2;
 var $insert_wd1 = "SVMXC__Service_Order_Line__c  WD = new SVMXC__Service_Order_Line__c ( SVMXC__Line_Type__c = 'Labor',SVMXC__Start_Date_and_Time__c = DateTime.valueOf ('2017-10-12 10:00:00.000+0000'), SVMXC__End_Date_and_Time__c = DateTime.valueOf('2017-10-12 00:00:00.000+0000') ,SVMXC__Service_Order__c = '"+$WO+"' );insert WD;";
 
-var $query_wd1="Select Id from SVMXC__Service_Order_Line__c where Createdby.Id = '005q0000003RLoJ'  Order by CreatedDate DESC Limit 1";
+var $query_wd1="Select Id from SVMXC__Service_Order_Line__c where Createdby.Id = '"+$user+"'  Order by CreatedDate DESC Limit 1";
 var $fetchWd1query=$op_act_sForceApiCall.sForceQuery($un, $pwd, $insert_wd1 ,"create");
 
 
@@ -59,7 +61,7 @@ _log($WD);
 
 var $insert_wd2 = "SVMXC__Service_Order_Line__c  WD2 = new SVMXC__Service_Order_Line__c ( SVMXC__Line_Type__c = 'Parts',SVMXC__Start_Date_and_Time__c = DateTime.valueOf ('2017-10-16 00:00:00.000+0000'), SVMXC__End_Date_and_Time__c = DateTime.valueOf('2017-10-16 14:00:00.000+0000') ,SVMXC__Service_Order__c = '"+$WO+"' );insert WD2;";
 
-var $query_wd2="Select Id from SVMXC__Service_Order_Line__c where Createdby.Id = '005q0000003RLoJ'  Order by CreatedDate DESC Limit 1";
+var $query_wd2="Select Id from SVMXC__Service_Order_Line__c where Createdby.Id = '"+$user+"'  Order by CreatedDate DESC Limit 1";
 var $fetchWd1query=$op_act_sForceApiCall.sForceQuery($un, $pwd, $insert_wd2 ,"create");
 
 
@@ -72,7 +74,7 @@ $store_first_wd2.forEach(function($ana_var3) {
 _log($WD2);
 
 var $insert_wd3 = "SVMXC__Service_Order_Line__c  WD3 = new SVMXC__Service_Order_Line__c ( SVMXC__Line_Type__c = 'Labor',SVMXC__Start_Date_and_Time__c = DateTime.valueOf ('2017-10-14 00:00:00.000+0000'), SVMXC__End_Date_and_Time__c = DateTime.valueOf('2017-10-12 13:00:00.000+0000') ,SVMXC__Service_Order__c = '"+$WO+"' );insert WD3;";
-var $query_wd3="Select Id from SVMXC__Service_Order_Line__c where Createdby.Id = '005q0000003RLoJ'  Order by CreatedDate DESC Limit 1";
+var $query_wd3="Select Id from SVMXC__Service_Order_Line__c where Createdby.Id = '"+$user+"'  Order by CreatedDate DESC Limit 1";
 var $fetchWd1query=$op_act_sForceApiCall.sForceQuery($un, $pwd, $insert_wd3 ,"create");
 var $store_first_wd3 = $op_act_sForceApiCall.sForceQuery($un, $pwd, $query_wd3,"query");
 

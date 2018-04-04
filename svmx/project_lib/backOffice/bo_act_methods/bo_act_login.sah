@@ -22,6 +22,8 @@ var $bo_act_login = new function bo_act_login() {
 		_click($bo_pg_login.btn_login);
 		//_wait(30000);
 		_wait(30000, _isVisible($bo_pg_home.link_home));
+		_call(top.location.reload(true));
+
 		return $callBack.returnResult(_exists($bo_pg_home.link_home), "login");
 
 		// Need to return
@@ -38,7 +40,9 @@ var $bo_act_login = new function bo_act_login() {
 		_click($bo_pg_home.btn_userName);
 		_click($bo_pg_home.link_logOut);
 		_wait(30000, _isVisible($bo_pg_login.txt_email));
-		return $callBack.returnResult(_exists($bo_pg_login.txt_email), "log out");
+		_call(top.location.reload(true));
+
+		return $callBack.returnResult(!_exists($bo_pg_home.link_home), "log out");
 
 		// Need to return
 	};
@@ -63,7 +67,7 @@ this.runApexScriptinWB = function($script){
 	_click(_link("Apex Execute"));
 	_setValue(_textarea("scriptInput"),$script);
 	_click(_submit("Execute"));
-	_wait(30000);
+	_wait(30000,_isVisible(_div("mainBlock")));
 	_assertNotVisible(_div("/COMPILE ERROR:/"));	
 };
 

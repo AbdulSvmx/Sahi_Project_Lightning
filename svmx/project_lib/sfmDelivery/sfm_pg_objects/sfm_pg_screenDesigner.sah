@@ -1,12 +1,19 @@
 var $sfm_pg_screenDesigner = new function sfm_pg_screenDesigner(){
 	this.sel_createSFMTransaction= _f("main").s_dropdownlist("purposeCombo");
-	this.txt_targetObject= _f("main").s_textinput("textInput[1]");
-	this.lbl_workOrder= _f("main").s_label("Work Order[5]");
+	this.txt_targetObject= _f("main").s_textinput("textInput[1]").near(_f("main").s_label("...to create these records"));
+	this.lbl_workOrder= _f("main").s_label("/Work Order/").near(_f("main").s_label("Work Order Dependency"));
 	this.chk_workDetail= _f("main").s_checkbox("Work Detail (Work Order)");
 	this.add_field= _f("main").fieldrenderer("[object Object]");
 	this.txt_searchField= _f("main").s_textinput("searchText[4]");
 	this.lbl_billingType= _f("main").s_label("Billing Type");
 	this.lbl_account= _f("main").s_label("Account");
+	
+	this.lbl_addproduct = _f("main").s_label("Product[1]"); 
+	this.btn_ConfLookup = _f("main").s_button("Configure Lookup");
+	this.sel_LkupTemplate = _f("main").s_combobox("searchCombo[4]");
+	this.btn_Select = _f("main").s_button("Select");
+	
+	
 	this.chk_readOnly= _f("main").s_checkbox("Read Only");
 	this.chk_required= _f("main").s_checkbox("Required");
 	this.chk_allowNew= _f("main").s_checkbox("Allow New");

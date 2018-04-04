@@ -2,7 +2,7 @@
 
 var $RS_5425 = _testcase("RS_5425", "On adding new step for a SFW which is hidden");
 $RS_5425.start();
-_setSpeed(100);
+_setSpeed($g_stepSpeed);
 var $sfmName ="Capture Downtime";
 	var $wizardname=$bo_act_common.generateRandomName("5425SFW");
 	var	$wizardID=$wizardname;
@@ -16,9 +16,9 @@ var $sfmName ="Capture Downtime";
 	var $actnName2=$sfmName;
 	var $executionMode = "Interactive";
 	var $processType="SFM Wizards";
-	_setSpeed(100);
-	$bo_act_login.login($g_url, $bac_unBase, $bac_pwdBase);
-
+	_setSpeed($g_stepSpeed);
+	$bo_act_login.login($g_url, $bac_un, $bac_pwd);
+//_div("svmx-grid-checkheader")
 	//***Navigate SFm Wizard->Create new Wizard->add standard SFM-*************
 	$bo_act_navigation.navigateToSfmWizard();
 	$bo_act_SFW.createWizardGeneralInfo($objName,$wizardname,$wizardID);
@@ -27,6 +27,9 @@ var $sfmName ="Capture Downtime";
 //*******Navigate to SFM App Permission and disable the permission for SFM wizard created above**********
 	$bo_act_navigation.navigateToSfmAppPermission();
 	 $bo_act_SFMAppPermission.genericSearchInAppPermission($processType,$objName,$searchText);
+if(_isVisible(_div("svmx-grid-checkheader"))){
+	_click(_div("svmx-grid-checkheader"));
+}
 	$bo_act_SFMAppPermission.disableAppPermission();
 //Navigate back to SFM Wizard and Add a new step to existing Wizard created above*****
 	$bo_act_SFW.editWizard($objName,$wizardID);
@@ -48,10 +51,12 @@ var $sfmName ="Capture Downtime";
 //Again Launch the Wizard in Delivery, verify the visibility*****
 	$bo_act_sfmVerifyWorkOrder.verifyWizardOnWOObj($sfmName);
 	_wait(2000);
-	$bo_act_sfmVerifyWorkOrder.wizardButtonVerification($sfmName);
+	$bo_act_sfmVerifyWorkOrder.wizardButtonVisible($sfmName);
+	
 //****Delete The Wizard Created*******
+
 	$bo_act_SFW.deleteWizards( $objName,$wizardID);
-	_setSpeed(100);
+	_setSpeed($g_stepSpeed);
 	$RS_5425.end();
 	
 	

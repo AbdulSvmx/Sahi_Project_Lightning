@@ -1,14 +1,41 @@
-var $rs_5352 = _testcase("RS_5352","");
+// Author: Safi Ahmed
+
+var $rs_5352 = _testcase("RS_5352","Verify Data Validation Error type on Header when simple expressions is configured - Source to Target");
 $rs_5352.start();
-$url = "https://test.salesforce.com";
-$un = "vansys@pqtpart1.com";
-$pwd = "servicemax2";
-_setSpeed(100);
-//$bo_act_login.login($url, $un, $pwd);
-$bo_act_login.login($g_url, $sfmUsn, $sfmPwd);
-$login = $sfm_act_createWorkOrder.login($sfmUsn, $sfmPwd);
-_log($login);
-var $woName;
-$woName = $sfm_act_createWorkOrder.create_WO();
-_log("WO NAME OUTSIDE "+$woName);
+$sfmName = $bo_act_common.generateRandomName("RS5352_");
+//$userTrunk = "Windows";
+$sfmPgLayoutName =	$bo_act_common.generateRandomName("SFM_Auto_Page");
+$processName = "Create Usage Lines from Estimates";
+$dvrRuleName = $bo_act_common.generateRandomName("dvr_");
+$wizTitle = $bo_act_common.generateRandomName("RS5352_");
+$bo_act_login.login($g_url,$sfmUsn,$sfmPwd);
+$bo_act_navigation.navigateToSfmTransactionDesigner();
+
+$sfm_act_Transactions.clonedsfm5352($processName,$sfmName,$sfmPgLayoutName,$dvrRuleName);
+
+$bo_act_navigation.navigateToSfmWizard();
+$sfm_act_createCustomWizard.chooseObject("Work Order");
+$sfm_act_createCustomWizard.addManageWizSteps($wizTitle, "SFM", $sfmName);
+$sfm_act_createCustomWizard.createBlankWo();
+$sfm_act_createCustomWizard.clickWizardBtn($sfmName);
+
+//$sfm_act_createCustomWizard.verify5352();
+
+//Verification
+
+_selectDomain();
+_setValue(_textbox("Billing Type:"), "Empowerment");  
+_click(_span("svmx-btn-icon svmx-sfmd-save-icon"));
+_wait(3000);
+_assertExists(_div("Billing Type should not be Empowerment."));      // verification
+_log("Pass:: Error Validation is successful.");
+_setValue(_textbox("Billing Type:"), "Loan");  
+_click(_span("svmx-btn-icon svmx-sfmd-save-icon"));
+_click(_span("Ok"));
+_wait(3000);
+_assertVisible(_link("Home"));										//verification
+_log("Pass:: Error Validation is successful.");
+
+
+
 $rs_5352.end();

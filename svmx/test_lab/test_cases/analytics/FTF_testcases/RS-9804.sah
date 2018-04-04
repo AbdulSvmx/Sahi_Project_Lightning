@@ -1,9 +1,11 @@
 var $an_ftf_839 = _testcase("ANA-839","To verify the Target object records fields when Work Order is top-level tracker");
 $an_ftf_839.start();
-var $un = "vinaya.v@servicemax.com";
-var $pwd = "servicemax12";
-var $url = "https://test.salesforce.com";
-var $data = _readExcelFile("../../analytics/an_excleData/FTF_data.xlsx","Sheet1",true);
+var $cred = _readExcelFile("../../analytics/an_excleData/credentials.xlsx","Sheet1",true);
+var $un = $cred[1]["UserName"];
+var $pwd =$cred[1]["Password"];
+var $url =$cred[1]["url"];
+var $user= $cred[1]["User"];
+var $data = _readExcelFile("../../analytics/an_excleData/MTTC_data.xlsx","Sheet1",true);
 var $Account = $data[1]["Account"];
 var $Technician = $data[1]["Technician"];
 var $Product = $data[1]["Product"];
@@ -18,7 +20,7 @@ _log($Account);
 
 var $WO;
 var $insert_wo_first = "SVMXC__Service_Order__c  WO = new SVMXC__Service_Order__c (SVMXC__Company__c ='"+ $Account +"', SVMXC__Product__c = '"+$Product+"', SVMXC__Group_Member__c = '"+$Technician+"',SVMXC__Order_Status__c = '"+$OrderStatus+"' , SVMXC__Closed_On__c = "+$Closedon+",SVMXC__Sub_Status__c = 'Resolved', SVMXC__Priority__c = 'High');insert WO;";
-var $query_wo_first = "Select Name , Id  , SVMXC__Company__c , SVMXC__Closed_On__c from SVMXC__Service_Order__c where Createdby.Id = '005q0000003RLoJ'  Order by CreatedDate DESC Limit 1";
+var $query_wo_first = "Select Name , Id  , SVMXC__Company__c , SVMXC__Closed_On__c from SVMXC__Service_Order__c where Createdby.Id = '"+$user+"'  Order by CreatedDate DESC Limit 1";
 var $fetchwoquery = $op_act_sForceApiCall.sForceQuery($un, $pwd, $insert_wo_first ,"create");
 
 var $store_first_wo = $op_act_sForceApiCall.sForceQuery($un, $pwd, $query_wo_first,"query");

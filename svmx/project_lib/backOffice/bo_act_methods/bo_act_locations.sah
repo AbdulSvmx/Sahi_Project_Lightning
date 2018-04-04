@@ -77,5 +77,23 @@ var $bo_act_locations = new function bo_act_locations() {
 		        _logOutput($StockTransferDetail+ " Stock Transfer is created");
 		   return $StockTransferDetail;
 		    };
+		    
+		    this.addLocation = function($locName,$recordType,$accountName,$street,$country,$zipCode){
+				var $locName = $bo_act_common.generateRandomName($locName);
+				$bo_act_navigation.navigateToLocations();
+				_click($bo_pg_locations.btn_new);
+				_setSelected($bo_pg_locations.sel_recordType, $recordType);
+				_click($bo_pg_locations.btn_continue);
+				_setValue($bo_pg_locations.txt_locationName, $locName);
+				_setValue($bo_pg_locations.txt_street, $street);
+				_setSelected($bo_pg_locations.sel_country, $country);
+				_setValue($bo_pg_locations.txt_zip, $zipCode);
+				_setValue($bo_pg_locations.txt_accountName, $accountName);
+				_click($bo_pg_locations.btn_save);
+				_assertNotVisible(_div("/Error: Invalid Data/"));
+				_wait(15000, _isVisible(_heading2($locName)));
+				_logOutput($locName+ " location is created");
+				return $locName;
+				};
 
 };

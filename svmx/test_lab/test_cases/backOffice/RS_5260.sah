@@ -3,7 +3,7 @@
 
 var $RS_5260 = _testcase("RS_5260","Create a PM Plan from Service Contract with coverage type as Account");
 $RS_5260.start();
-_setSpeed(100);
+_setSpeed($g_stepSpeed);
 
 var $Workbenchurl = "https://workbench.developerforce.com/login.php";
 //Pre - Condition 
@@ -33,7 +33,8 @@ _assert($lastRunDate != $scheduleOnActual,"Issue in Last Run Date and Scheduled 
 var $PMProcessId = $bo_act_PMProcess.createPMProcess("Time Based Preventive Maintenance", 32, $PMPlan,"One Per Plan");
 
 $bo_act_navigation.navigateToSetUpAndSearch("Installed Packages");
-if(_getText(_cell("SVMXC"))!="SVMXDEV")
+_click(_link("ServiceMax"));
+if(_getText(_cell(0,_rightOf(_cell("Namespace Prefix"))))!="SVMXDEV")
 var $script = "String StrSVMXProcessID = '"+$PMProcessId+"';String StrSFPMProcessID = [Select Id From SVMXC__ServiceMax_Processes__c where SVMXC__ProcessID__c =: StrSVMXProcessID AND SVMXC__Active__c = true].Id;SVMXC.PREV_Engine_Batch EngObj = new SVMXC.PREV_Engine_Batch();EngObj.setProcessIds.add(StrSFPMProcessID);ID Batch = database.executebatch(EngObj, 1);";
 else
 $script = "String StrSVMXProcessID = '"+$PMProcessId+"';String StrSFPMProcessID = [Select Id From SVMXDEV__ServiceMax_Processes__c where SVMXDEV__ProcessID__c =: StrSVMXProcessID AND SVMXDEV__Active__c = true].Id;SVMXDEV.PREV_Engine_Batch EngObj = new SVMXDEV.PREV_Engine_Batch();EngObj.setProcessIds.add(StrSFPMProcessID);ID Batch = database.executebatch(EngObj, 1);";
@@ -52,10 +53,20 @@ _assertNotNull($WONumber,"Work Order is not created");
 
 //Clean up function
 
-var $datacreated = [$accName,$proName,$installedProduct,$sconName,$WONumber,$slaterm,$PMPTempName,$PMPlan];
-for (var i = 0; i < $datacreated.length; i++) {
-	$bo_act_common.cleanUpfunction($datacreated[i]);
-}
+
+$bo_act_common.deleteAccount($bac_un, $bac_pwd, $accName);
+$bo_act_common.deleteIB($bac_un, $bac_pwd, $orgnamespace,$installedProduct);
+$bo_act_common.deleteProduct($bac_un, $bac_pwd,$proName);
+$bo_act_common.deleteWorkOrder($bac_un, $bac_pwd, $orgnamespace,$WONumber);
+$bo_act_common.deleteSLA($bac_un, $bac_pwd, $orgnamespace, $slaterm);
+$bo_act_common.deleteSCON($bac_un, $bac_pwd, $orgnamespace, $sconName);
+$bo_act_common.deletePMPlantemplate($bac_un, $bac_pwd, $orgnamespace,$PMPTempName);
+$bo_act_common.deletePMPlan($bac_un, $bac_pwd, $orgnamespace,$PMPlan);
+
+//var $datacreated = [$accName,$proName,$installedProduct,$sconName,$WONumber,$slaterm,$PMPTempName,$PMPlan];
+//for (var i = 0; i < $datacreated.length; i++) {
+//	$bo_act_common.cleanUpfunction($datacreated[i]);
+//}
 
 $RS_5260.end();
 

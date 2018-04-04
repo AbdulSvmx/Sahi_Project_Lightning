@@ -3,7 +3,7 @@
 
 var $RS_5306 = _testcase("$RS_5306","Get Price on WO:IB not covered under Warranty/SCON");
 $RS_5306.start();
-_setSpeed(100);
+_setSpeed($g_stepSpeed);
 
 /**
  * Login to the Sandbox Org
@@ -20,7 +20,7 @@ var $seperator = "/";
 */
 var $accountName = $bo_act_accounts.createAccount();
 var $contactName = $bo_act_contacts.createContact($accountName);
-var $productName = $bo_act_products.createProduct($productCode, $productFamily[3]);
+var $productName = $bo_act_products.createProduct($productCode, $productFamily[0]);
 var $IBName = $bo_act_installedProduct.createInstalledProduct($productName, $accountName, $contactName);
 
 /**
@@ -58,6 +58,15 @@ var $settingValue1 = "Standard Price Book";
 var $settingValue2 = "Standard Service Price Book";
 $bo_act_configurationProfiles.editGroupProfileForTextSettings($groupProfileName, $Module, $SubModule, $Setting1, $settingValue1);
 $bo_act_configurationProfiles.editGroupProfileForTextSettings($groupProfileName, $Module, $SubModule, $Setting2, $settingValue2);
+
+/**
+ * Configure the Group Profile SET025
+ */
+var $Module = "Entitlement Verification";
+var $SubModule = "Work Order Entitlement VF";
+var $Setting = "SET025";
+var $value = true;
+$bo_act_configurationProfiles.editGroupProfileForBooleanSettings($groupProfileName, $Module, $SubModule, $Setting, $value);
 
 /**
 * Create Case record
@@ -185,10 +194,18 @@ $bo_act_SFW.deleteSFMWizard("Work Order", $wizardIDName);
 *Clean up function
 */
 
-var $datacreated = [$WONumber,$caseNumber,$IBName,$productName,$contactName,$accountName];
-for (var i = 0; i < $datacreated.length; i++) {
-$bo_act_common.cleanUpfunction($datacreated[i]);
-}
+
+$bo_act_common.deleteCase($bac_un, $bac_pwd,$caseNumber);
+$bo_act_common.deleteAccount($bac_un, $bac_pwd, $accountName);
+$bo_act_common.deleteContact($bac_un, $bac_pwd, $contactName);
+$bo_act_common.deleteIB($bac_un, $bac_pwd, $orgnamespace,$IBName);
+$bo_act_common.deleteProduct($bac_un, $bac_pwd,$productName);
+$bo_act_common.deleteWorkOrder($bac_un, $bac_pwd, $orgnamespace,$WONumber);
+
+//var $datacreated = [$WONumber,$caseNumber,$IBName,$productName,$contactName,$accountName];
+//for (var i = 0; i < $datacreated.length; i++) {
+//$bo_act_common.cleanUpfunction($datacreated[i]);
+//}
 
 //Deleting the above created data
 

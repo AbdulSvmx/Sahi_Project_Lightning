@@ -6,7 +6,7 @@
 
 var $RS_5249 = _testcase("$RS_5249","Create a PM Plan from Account with coverage location");
 $RS_5249.start();
-_setSpeed(100);
+_setSpeed($g_stepSpeed);
 
 var $Workbenchurl = "https://workbench.developerforce.com/login.php";
 //Pre - Condition 

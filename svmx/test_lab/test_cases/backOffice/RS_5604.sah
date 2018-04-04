@@ -3,7 +3,7 @@
 
 var $RS_5604 = _testcase("$RS_5604","Verify the functionality of Interactive Entitlement on WO's PS lines using warranty");
 $RS_5604.start();
-_setSpeed(100);
+_setSpeed($g_stepSpeed);
 
 /**
  * Login to the Sandbox Org
@@ -40,7 +40,7 @@ $bo_act_configurationProfiles.editGroupProfileForBooleanSettings($groupProfileNa
  */
 var $accountName = $bo_act_accounts.createAccount();
 var $contactName = $bo_act_contacts.createContact($accountName);
-var $productName = $bo_act_products.createProduct($productCode, $productFamily[3]);
+var $productName = $bo_act_products.createProduct($productCode, $productFamily[0]);
 var $IBName = $bo_act_installedProduct.createInstalledProduct($productName, $accountName, $contactName);
 
 /**
@@ -118,12 +118,12 @@ var $WDLineType = ["--None--","Parts","Labor","Expenses"];
 var $WDNumber = $bo_act_workDetails.createWorkDetails($WO_Number, $WDrecordType[1], $IBName, $WDActivityType[1], $WDLineType[2]);
 
 // Validation for Work Details Work Order record
-var $actualWDNumber_onWO = _getText(_link(0,_under(_tableHeader("Line Number"))));
+/*var $actualWDNumber_onWO = _getText(_link(0,_under(_tableHeader("Line Number"))));
 var $actualWDRecordType_onWO = _getText(_cell(0,_under(_tableHeader("Record Type"))));
 
 _assertEqual($actualWDNumber_onWO, $WDNumber,"Actual and expected work details number not Same");
 _assertEqual($actualWDRecordType_onWO, $WDrecordType[1],"Actual and expected work detail's Record Type not Same");
-
+*/
 /**
  * Perform Interactive Entitlement on WO PS line
  */
@@ -149,10 +149,19 @@ if(_isVisible(_image("Checked",_rightOf(_cell("/Is Entitlement Performed/"))))){
 
 //Clean up function
 
-var $datacreated = [$WO_Number,$caseNumber,$IBName,$productName,$contactName,$accountName,$warrantyName];
-for (var i = 0; i < $datacreated.length; i++) {
-	$bo_act_common.cleanUpfunction($datacreated[i]);
-}
+
+$bo_act_common.deleteAccount($bac_un, $bac_pwd, $accountName);
+$bo_act_common.deleteContact($bac_un, $bac_pwd, $contactName);
+$bo_act_common.deleteProduct($bac_un, $bac_pwd,$productName);
+$bo_act_common.deleteWorkOrder($bac_un, $bac_pwd, $orgnamespace,$WO_Number);
+$bo_act_common.deleteLocation($bac_un, $bac_pwd, $orgnamespace,$locationName);
+$bo_act_common.deleteWarranty($bac_un, $bac_pwd, $orgnamespace,$warrantyName);
+$bo_act_common.deleteCase($bac_un, $bac_pwd,$caseNumber);
+//
+//var $datacreated = [$WO_Number,$caseNumber,$IBName,$productName,$contactName,$accountName,$warrantyName];
+//for (var i = 0; i < $datacreated.length; i++) {
+//	$bo_act_common.cleanUpfunction($datacreated[i]);
+//}
 
 //Delete SFM Wizard 
 $bo_act_SFW.deleteSFMWizard("Work Order", $wizardIDName);

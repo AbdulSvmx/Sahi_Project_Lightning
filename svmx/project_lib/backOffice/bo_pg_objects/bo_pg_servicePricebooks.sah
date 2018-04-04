@@ -6,7 +6,7 @@ var $bo_pg_servicePricebooks = new function bo_pg_servicePricebooks(){
 	// Click on Service Price Book 
 	this.clickOnServicePriceBook = function($PriceBookName){
 		
-		_click( _span($PriceBookName));
+		_click(_span($PriceBookName));
 	};
 	
 	this.btn_sfmEditServicePricebook = _button("Edit Service Pricebook");
@@ -31,6 +31,7 @@ var $bo_pg_servicePricebooks = new function bo_pg_servicePricebooks(){
     this.navigateBackToCustomServicePriceBook = function($PriceBookName){
 		
     	_click(_link(0,_rightOf(_cell($PriceBookName,_near(_heading2("Service Pricebook Entry Detail"))))));
+    	_closeWindow();
 	};
 	
 	// Add new Service Price Book

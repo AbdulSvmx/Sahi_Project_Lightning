@@ -1,9 +1,9 @@
 
 
-//Author:Mamata
+//Author:Mamata 
 	var $RS_10023 = _testcase("RS_10023", "Before Save/Insert: Webservice Test In Delivery");
 	$RS_10023.start();
-	_setSpeed(100);
+	_setSpeed($g_stepSpeed);
 
 	var $sfmToBeCloned="Create Usage Lines from Estimates";
 	var $sfmName=$bo_act_common.generateRandomName("SFMRS10023")
@@ -32,8 +32,8 @@
 	var $enteredZipBS=560065;
 
 		
-	$bo_act_login.login($d_url, $d_unBase, $d_pwdBase);
-//$bo_act_login.login($g_url, $bac_un, $bac_pwd);
+	//$bo_act_login.login($d_url, $d_unBase, $d_pwdBase);
+$bo_act_login.login($g_url, $bac_un, $bac_pwd);
 
 //*****Navgate to SFm Designer and create clone of Manage WO Line Usage Services transaction********
 $bo_act_navigation.navigateToSfmTransactionDesigner();

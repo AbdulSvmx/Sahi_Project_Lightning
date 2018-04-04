@@ -7,6 +7,7 @@ $sheetName = "rs_6344";
 $bo_act_login.login($g_url,$sfmUsn,$sfmPwd);
 $caseId = $sfm_act_createCustomWizard.createCase();
 $workOrder = $sfm_act_createCustomWizard.createWoFor6344($caseId);
+_log($workOrder);
 $bo_act_navigation.navigateToSfmSearchDesigner();
 $sfm_act_search.newCustomSearch($searchName,$searchObject);
 $sfm_act_search.buildExpression(0,$exprsnVal,$sheetName);
@@ -15,7 +16,9 @@ $sfm_act_search.addResultsToDisplay(2,"searchResult");
 $bo_act_navigation.navigateToHome();
 $sfm_act_search.searchSfmSearches($searchName);
 _click(_span($searchName));
+_setStrictVisibilityCheck(true);
 $workOrders = _collect("_cell","/.*/",_under(_div("Work Order Number"),10));
+_log($workOrders.length);
 $count = 0;
 for(var $i=0;$i<$workOrders.length;$i++){
 	if(_getText($workOrders[$i])==$workOrder){
@@ -31,4 +34,5 @@ else{
 	_log("Fail");
 }
 $sfm_act_addDeleteMeth.deleteSearch($searchName);
+$sfm_act_addDeleteMeth.deleteWo($workOrder);
 $rs_6344.end();

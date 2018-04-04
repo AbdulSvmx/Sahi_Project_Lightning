@@ -3,7 +3,7 @@
 
 var $RS_5247 = _testcase("$RS_5247","Verify the impact of SLA setting values SET003 on SLA clocks on Case object");
 $RS_5247.start();
-_setSpeed(100);
+_setSpeed($g_stepSpeed);
 
 //Pre - Condition 
 $bo_act_login.login($g_url, $bac_un, $bac_pwd);
@@ -31,10 +31,12 @@ _assertEqual(_getText($bo_pg_Cases.txt_InitialResponseCustomerBy)," ","Issue in 
 
 //Clean up function
 
-var $datacreated = [$slaterm,$caseNumber];
-for (var i = 0; i < $datacreated.length; i++) {
-	$bo_act_common.cleanUpfunction($datacreated[i]);
-}
+//var $datacreated = [$slaterm,$caseNumber];
+//for (var i = 0; i < $datacreated.length; i++) {
+	//$bo_act_common.cleanUpfunction($datacreated[i]);
+//}
+
+$bo_act_slaTerms.deleteSLATerm($slaterm);
 
 $RS_5247.end();
 

@@ -15,13 +15,15 @@ var $bo_act_getPrice = new function bo_act_getPrice() {
 	 * Create an Work Order
 	 */
 	this.addPartsLineToSFMDelivery = function($searchValue, $lineQty){
+		//_wait(15000, _isVisible($bo_pg_getPrice.btn_partsLine));
 		_click($bo_pg_getPrice.btn_partsLine);
 		_click($bo_pg_getPrice.btn_addSingleLine);
 		_click($bo_pg_getPrice.btn_editFirstRow);
-		_wait(3000);
+		_wait(10000);
 		_setStrictVisibilityCheck(true);
-		_setValue($bo_pg_getPrice.txt_lineQty, $lineQty);
+		//_setValue($bo_pg_getPrice.txt_lineQty, $lineQty);
 		$bo_act_common.searchfunction($searchValue);	//Search Values like Parts/Product Name
+		_setValue($bo_pg_getPrice.txt_lineQty, $lineQty);
 		_click($bo_pg_getPrice.btn_update);
 		_setStrictVisibilityCheck();
 	};

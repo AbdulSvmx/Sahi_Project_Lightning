@@ -3,7 +3,7 @@
 
 var $RS_7439 = _testcase("$RS_7439","Verify adjustments are not performed when SET004(Condition based Adj) is set to False.");
 $RS_7439.start();
-_setSpeed(100);
+_setSpeed($g_stepSpeed);
 var $Workbenchurl = "https://workbench.developerforce.com/login.php";
 //Pre - Condition 
 $bo_act_login.login($g_url, $bac_un, $bac_pwd);
@@ -28,7 +28,8 @@ var $PMProcessId = $bo_act_PMProcess.createPMProcess("Condition Based Preventive
 
 //This code supports name spaces and assigns the variable with correct namespace script
 $bo_act_navigation.navigateToSetUpAndSearch("Installed Packages");
-if(_getText(_cell("SVMXC"))!="SVMXDEV")
+_click(_link("ServiceMax"));
+if(_getText(_cell(0,_rightOf(_cell("Namespace Prefix"))))!="SVMXDEV")
 var $script = "SVMXC.PREV_Conditional_Engine_Batch batchable = new SVMXC.PREV_Conditional_Engine_Batch();String processId = '"+$PMProcessId+"';SVMXC__ServiceMax_Processes__c condtionprocess = [select id from SVMXC__ServiceMax_Processes__c where SVMXC__ProcessID__c =: processId limit 1];batchable.setProcessIds = new Set<String>{condtionprocess.Id};Database.executeBatch(batchable, 1);";
 else
 $script = "SVMXDEV.PREV_Conditional_Engine_Batch batchable = new SVMXDEV.PREV_Conditional_Engine_Batch();String processId = '"+$PMProcessId+"';SVMXDEV__ServiceMax_Processes__c condtionprocess = [select id from SVMXDEV__ServiceMax_Processes__c where SVMXDEV__ProcessID__c =: processId limit 1];batchable.setProcessIds = new Set<String>{condtionprocess.Id};Database.executeBatch(batchable, 1);";
@@ -65,10 +66,21 @@ _assertEqual($actualPMScheduleStatus,"Work Order Created","Status is not equal t
 
 //Clean up function
 
-var $datacreated = [$contactName,$accName,$proName,$IBName,$WONumber,$slaterm,$PMPTemplate,$sconName,$PMPlan];
-for (var i = 0; i < $datacreated.length; i++) {
-	$bo_act_common.cleanUpfunction($datacreated[i]);
-}
+
+$bo_act_common.deleteAccount($bac_un, $bac_pwd, $accName);
+$bo_act_common.deleteContact($bac_un, $bac_pwd, $contactName);
+$bo_act_common.deleteIB($bac_un, $bac_pwd, $orgnamespace,$IBName);
+$bo_act_common.deleteProduct($bac_un, $bac_pwd,$proName);
+$bo_act_common.deleteWorkOrder($bac_un, $bac_pwd, $orgnamespace,$WONumber);
+$bo_act_common.deleteSLA($bac_un, $bac_pwd, $orgnamespace, $slaterm);
+$bo_act_common.deleteSCON($bac_un, $bac_pwd, $orgnamespace, $sconName);
+$bo_act_common.deletePMPlantemplate($bac_un, $bac_pwd, $orgnamespace,$PMPTempName);
+$bo_act_common.deletePMPlan($bac_un, $bac_pwd, $orgnamespace,$PMPlan);
+
+//var $datacreated = [$contactName,$accName,$proName,$IBName,$WONumber,$slaterm,$PMPTemplate,$sconName,$PMPlan];
+//for (var i = 0; i < $datacreated.length; i++) {
+//	$bo_act_common.cleanUpfunction($datacreated[i]);
+//}
 $bo_act_PMProcess.deletePMProcess($PMProcessId);
 
 $RS_7439.end();

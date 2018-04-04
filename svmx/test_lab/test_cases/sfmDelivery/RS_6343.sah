@@ -1,30 +1,49 @@
-var $rs_6343 = _testcase("RS_6343","");
+// Author: Safi Ahmed
+var $rs_6343 = _testcase("RS_6343","Verify confirmation type on Header when simple expressions is configured - Source to Target");
 $rs_6343.start();
-$url = "https://test.salesforce.com";
-$un = "vansys@pqtpart1.com";
-$pwd = "servicemax2";
-$sfmName = "RS_6343_SourceToTarget";
-$sfmTransaction= "from Source Object to create new header and child records";
-
-_setSpeed(100);
-$bo_act_login.login($url, $un, $pwd);
-
+$sfmName = $bo_act_common.generateRandomName("RS6343_");
+//$userTrunk = "Windows";
+$sfmPgLayoutName =	$bo_act_common.generateRandomName("SFM_Auto_Page");
+$processName = "Create Usage Lines from Estimates";
+$dvrRuleName = $bo_act_common.generateRandomName("dvr_");
+$wizTitle = $bo_act_common.generateRandomName("RS6343_");
+$bo_act_login.login($g_url,$sfmUsn,$sfmPwd);
 $bo_act_navigation.navigateToSfmTransactionDesigner();
-_setSpeed(100);
 
-_click(_f("main").s_button("New SFM Transaction"));
-_setValue($bo_pg_sfmTransactionAndDesigner.txt_name,$sfmName);
-_setValue($bo_pg_sfmTransactionAndDesigner.txt_sfmTransactionId,"");
-_setValue($bo_pg_sfmTransactionAndDesigner.txt_sfmTransactionId,$sfmName);
-_setSelected(_f("main").s_dropdownlist("purposeCombo"),$sfmTransaction);
-_setSelected(_f("main").s_combobox("objCombo1"),"Work Order");
-_setValue(_f("main").s_checkbox("Work Detail (Work Order)"), "true");
-_setSelected(_f("main").s_combobox("objCombo1[1]"),"Work Order");
-_setValue(_f("main").s_checkbox("Work Detail (Work Order)[1]"), "true");
-_setValue(_f("main").s_textinput("aliasName[61]"), "Parts");
-_click(_f("main").s_button("+"));
-_setValue(_f("main").s_textinput("aliasName[62]"), "Labor");
-_click(_f("main").tab("Screen Designer"));
+$sfm_act_Transactions.clonedsfm6343($processName,$sfmName,$sfmPgLayoutName,$dvrRuleName);
 
-_f("main").s_label("Work Order Resource");
+$bo_act_navigation.navigateToSfmWizard();
+$sfm_act_createCustomWizard.chooseObject("Work Order");
+$sfm_act_createCustomWizard.addManageWizSteps($wizTitle, "SFM", $sfmName);
+$sfm_act_createCustomWizard.createBlankWo();
+$sfm_act_createCustomWizard.clickWizardBtn($sfmName);
+
+//$sfm_act_createCustomWizard.verify6343();
+
+//Verification
+
+_selectDomain();
+_setValue(_textbox("Driving Time (in Minutes):"), "45");
+_click(_span("svmx-btn-icon svmx-sfmd-save-icon"));
+_assertVisible(_label("Driving time is less than 1 hour!"));   // verification 1
+_log("Pass:: Warning Message is displayed.");
+
+
+_click(_span("Save"));
+_click(_span("Ok"));
+_wait(3000);
+_assertVisible(_link("Home"));      // Verification 2
+_log("Pass:: Save action on Warning Message is working properly.");
+
+_selectDomain("/svmx/");
+_click(_button($sfmName));
+_selectDomain();
+_click(_span("svmx-btn-icon svmx-sfmd-save-icon"));
+_click(_span("Cancel"));
+_wait(3000);
+_assertVisible(_span("svmx-btn-icon svmx-sfmd-save-icon"));
+_log("Pass:: Cancel action on Warning Message is working properly.");
+
+
+
 $rs_6343.end();

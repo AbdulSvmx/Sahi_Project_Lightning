@@ -15,4 +15,14 @@ this.selectOptionFromDropdown = function($object,$objectValue){
 this.saveObject = function(){
 	_click($bo_pg_salesforcePages.btn_save);
 };
+this.checkNameSpace = function(){
+$bo_act_navigation.navigateToSetUpAndSearch("Installed Packages");
+_wait(60000,_isVisible(_heading1("Installed Packages")));
+_click(_link("ServiceMax"));
+if(_getText(_cell(0,_rightOf(_cell("Namespace Prefix"))))!="SVMXDEV")
+var $nameSpace = "SVMXC";
+else
+$nameSpace = "SVMXDEV";
+return $nameSpace
+};
 };

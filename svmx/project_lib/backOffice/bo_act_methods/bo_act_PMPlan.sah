@@ -58,6 +58,22 @@ var $bo_act_PMPlan = new function bo_act_PMPlan() {
 		$bo_act_navigation.navigateToServiceMaintenanceContractPage();
 		_click(_link($sconName));
 		_selectDomain("/svmx/");
+		if(_condition($bo_pg_PMPlan.btn_NewConditionBasedPMPlanFromLocation == null))
+		{
+			_selectDomain();
+			var $wizardTitleName = "Condition Based PM";
+			var $wizardIDName = $bo_act_common.generateRandomName("Wid");
+			$bo_act_navigation.navigateToSfmWizard();
+			$bo_act_SFW.createWizardGeneralInfo("Service/Maintenance Contract", $wizardTitleName, $wizardIDName);
+			$bo_act_SFW.createOthersWizardStepwithHandOver("Others", "New Condition Based PM Plan from Service Contract",false);
+			$bo_act_SFW.quickSaveSFWizard();
+			$bo_act_SFW.saveAndClose();
+			$bo_act_navigation.navigateToServiceMaintenanceContractPage();
+			_click(_link($sconName));
+
+		}else
+		_wait(1000);
+		_selectDomain("/svmx/");
 		_click($bo_pg_PMPlan.btn_NewConditionBasedPMPlanfromServiceContract);
 		_selectDomain();
 		_wait(60000,_isVisible($bo_pg_PMPlan.txt_planName));
@@ -81,7 +97,7 @@ var $bo_act_PMPlan = new function bo_act_PMPlan() {
 		{
 			_selectDomain();
 			var $wizardTitleName = "Condition Based PM";
-			var $wizardIDName = "ConditionBasedPM";
+			var $wizardIDName = $bo_act_common.generateRandomName("Wid");
 			$bo_act_navigation.navigateToSfmWizard();
 			$bo_act_SFW.createWizardGeneralInfo("Location", $wizardTitleName, $wizardIDName);
 			$bo_act_SFW.createOthersWizardStepwithHandOver("Others", "New Condition Based PM Plan from Location",false);
@@ -92,6 +108,7 @@ var $bo_act_PMPlan = new function bo_act_PMPlan() {
 
 		}else
 		_wait(1000);
+		_selectDomain("/svmx/");
 		_click($bo_pg_PMPlan.btn_NewConditionBasedPMPlanFromLocation);
 		_selectDomain();
 		_wait(60000,_isVisible($bo_pg_PMPlan.txt_planName));
@@ -100,7 +117,7 @@ var $bo_act_PMPlan = new function bo_act_PMPlan() {
 		_click(_listItem($PMPTemplate));
 		_setValue($bo_pg_PMPlan.txt_startDateInput,$bo_act_common.currentDate("/"));
 		_setValue($bo_pg_PMPlan.txt_endDateInput,$bo_act_common.getfutureDate(1, "/"));
-		_assertExists(_div($IBName),_under(_span("Coverages")));
+		
 		
 	};
 	this.saveConditionBasedPMPlan = function(){

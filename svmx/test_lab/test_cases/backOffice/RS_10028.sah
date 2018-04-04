@@ -1,9 +1,9 @@
 
 
-//Author:Mamata
+//Author:Mamata RS-5000
 	var $RS_10028 = _testcase("RS_10028", "Field level: On Change Webservice Child Field");
 	$RS_10028.start();
-	_setSpeed(100);
+	_setSpeed($g_stepSpeed);
 
 	var $sfmToBeCloned="Create Usage Lines from Estimates";
 	var $sfmName=$bo_act_common.generateRandomName("SFMRS10028")
@@ -34,8 +34,8 @@
 
 
 		
-	$bo_act_login.login($d_url, $d_unBase, $d_pwdBase);
-//$bo_act_login.login($g_url, $bac_un, $bac_pwd);
+	//$bo_act_login.login($d_url, $d_unBase, $d_pwdBase);
+$bo_act_login.login($g_url, $bac_un, $bac_pwd);
 
 //*****Navgate to SFm Designer and create clone of Manage WO Line Usage Services transaction********
 $bo_act_navigation.navigateToSfmTransactionDesigner();

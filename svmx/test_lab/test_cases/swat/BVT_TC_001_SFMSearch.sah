@@ -1,41 +1,77 @@
+/*
+ * 
 
-//Author - Shashikala Kamath
+///////////////////////////////////
+//
+//Author	:- 	Shashikala Kamath
+//Reviewer	:- 	
+//Pre-Req	:-	
+//				1. Create Case, Account, Contact, Product, Installed Base.
+// 				2. Create WO with "Order status=Open", "Priority=High", "Type=Field Service"
+//
+//Steps		:-	
+//				1. Navigate to Servicemax SetUp> Service Flow Manager> SFM Search.
+//				2. Create New Custom SFM Search with below Criteria
+//					Object Type=Work Order
+//					filter criteria
+//						Order Status=Open
+//						Order Type=Field Service
+//					fields to be displayed
+//						Order Status
+//						Order Type
+//						Account Type
+//				Field on which Search is applied
+//						WO Number
+//						Order Status
+//						Order Type
+//				Sorting By
+//				Work Order Number=Ascending
+//				3. Navigate to Home Page and select above created SFM Search and click on GO. 
+//				
+//				Verify WO with mentioned Criteria are displaying and search for WO create and verify object search is in the search result list.
+//
+///////////////////////////////////
+*/
 
 var $BVT_TC_001_SFMSearch = _testcase("$BVT_TC_001_SFMSearch","Create SFM Search in configuration screen");
 $BVT_TC_001_SFMSearch.start();
-_setSpeed(100);
+	_setSpeed($g_stepSpeed);
+	
+	var $objectName = "Work Order";
+	var $fieldName = "Order Status";
+	var $operator = "Equals";
+	var $fieldName1 = "Order Type";
+	var $workOrderNo;
+	
+	$bo_act_login.login("https://test.salesforce.com","lohitha@svmxtest.org.testpar2", "maxpl0re3");
 
+	// Creation of case, account,contact,product,IBName
+	var $caseNumber = $bo_act_Cases.createCase("New", "High", "Email");
+	var $accountName = $bo_act_accounts.createAccount();
+	var $contactName = $bo_act_contacts.createContact($accountName);
+	var $productName = $bo_act_products.createProduct();
+	var $IBName = $bo_act_installedProduct.createInstalledProduct($productName, $accountName, $contactName);
+	$workOrderNo = $swat_act_workOrders.createWorkOrder($caseNumber, $accountName,$contactName, $IBName, "Open", "High", "Field Service");
 
-$bo_act_login.login("https://test.salesforce.com", "lohithaadmin@swatpart2.com", "maxpl0re1");
-var $objectName = "Work Order";
-var $fieldName ="Order Status";
-var $operator ="Equals";
-var $fieldName1="Order Type";
+	
 
-var $workOrderNo;
+	//Write to data to excel for run time usage
+	$excel.insertUnderColumn("/Swat_excelData/swatdata.xlsx",  "runData", "Case", $caseNumber, 1);
+	$excel.insertUnderColumn("/Swat_excelData/swatdata.xlsx",  "runData", "Account", $accountName, 1);
+	$excel.insertUnderColumn("/Swat_excelData/swatdata.xlsx",  "runData", "Contact", $contactName, 1);
+	$excel.insertUnderColumn("/Swat_excelData/swatdata.xlsx",  "runData", "Product", $productName, 1);
+	$excel.insertUnderColumn("/Swat_excelData/swatdata.xlsx",  "runData", "InstalledProduct", $IBName, 1);
+	
+	var $searchItem = $swat_act_sfmSearch.createSfmSearch($objectName, $fieldName, $operator, $fieldName1);
+	
+	
+	//	Creation of SFM Search and validation //
+	$swat_act_sfmSearch.launchSfmSearch($searchItem, $workOrderNo);
 
-var $searchItem = $swat_act_sfmSearch.createSfmSearch($objectName,$fieldName,$operator,$fieldName1);
+	
+	// $bo_act_login.logOut();
 
-
-//$searchItem = "Search12122017114624";
-var $caseNumber = $bo_act_Cases.createCase("New", "High", "Email");
-var $accountName = $bo_act_accounts.createAccount();
-var $contactName = $bo_act_contacts.createContact($accountName);
-var $productName =$bo_act_products.createProduct();
-
-var $IBName = $bo_act_installedProduct.createInstalledProduct($productName,$accountName,$contactName);
-
-
-$workOrderNo = $swat_act_workOrders.createWorkOrder($caseNumber, $accountName, $contactName, $IBName, "Open", "High", "Field Service");
-
-//$workOrderNo = "WO-00000056";
-
-$swat_act_sfmSearch.launchSfmSearch($searchItem,$workOrderNo);
-
-//$bo_act_login.logOut();
 $BVT_TC_001_SFMSearch.end();
-
-
 
 
 

@@ -1,9 +1,9 @@
 
 
-//Author:Mamata
+//Author:Mamata RS-4999
 	var $RS_10026 = _testcase("RS_10026", "Field level:Webservice Header Field test On Exit");
 	$RS_10026.start();
-	_setSpeed(100);
+	_setSpeed($g_stepSpeed);
 
 	var $sfmToBeCloned="Create Usage Lines from Estimates";
 	var $sfmName=$bo_act_common.generateRandomName("SFMRS10026");
@@ -33,8 +33,8 @@
 
 
 		
-	$bo_act_login.login($d_url, $d_unBase, $d_pwdBase);
-//$bo_act_login.login($g_url, $bac_un, $bac_pwd);
+	//$bo_act_login.login($d_url, $d_unBase, $d_pwdBase);
+$bo_act_login.login($g_url, $bac_un, $bac_pwd);
 
 //*****Navgate to SFm Designer and create clone of Manage WO Line Usage Services transaction********
 $bo_act_navigation.navigateToSfmTransactionDesigner();

@@ -1,0 +1,49 @@
+// Author: Safi Ahmed
+var $rs_5348 = _testcase("RS_5348","Verify Advanced Data validation rule");
+$rs_5348.start();
+$sfmName = $bo_act_common.generateRandomName("RS5348_");
+//$userTrunk = "Windows";
+$sfmPgLayoutName =	$bo_act_common.generateRandomName("SFM_Auto_Page");
+$processName = "Create Usage Lines from Estimates";
+$dvrRuleName = $bo_act_common.generateRandomName("dvr_");
+$wizTitle = $bo_act_common.generateRandomName("RS5348_");
+$bo_act_login.login($g_url,$sfmUsn,$sfmPwd);
+$bo_act_navigation.navigateToSfmTransactionDesigner();
+
+$sfm_act_Transactions.clonedsfm5348($processName,$sfmName,$sfmPgLayoutName,$dvrRuleName);
+
+$bo_act_navigation.navigateToSfmWizard();
+$sfm_act_createCustomWizard.chooseObject("Work Order");
+$sfm_act_createCustomWizard.addManageWizSteps($wizTitle, "SFM", $sfmName);
+$sfm_act_createCustomWizard.createBlankWo();
+$sfm_act_createCustomWizard.clickWizardBtn($sfmName);
+
+//Verification
+
+_selectDomain();
+//_setValue(_textbox("Driving Time (in Minutes):"), "45");
+_setValue(_textbox("Billing Type:"), "Warranty");
+_setValue(_textbox("Auto_number_c15122017142520:"), "45");
+_setValue(_textbox("Auto_TextBox_c15122017142520:"), "test");
+_click(_span("svmx-btn-icon svmx-sfmd-save-icon"));
+
+_assertExists(_div("Error: DVR Advanced Expression is not met."));  // verification
+_log("Pass:: Error Validation is successful.");
+_click(_image("gif[1]"));
+_setValue(_textbox("Billing Type:"), "Loan");
+_setValue(_textbox("Auto_number_c15122017142520:"), "45");
+_setValue(_textbox("Auto_TextBox_c15122017142520:"), "dvr test");
+_click(_span("svmx-btn-icon svmx-sfmd-save-icon"));
+_assertExists(_div("Error: DVR Advanced Expression is not met."));  // verification
+_log("Pass:: Error Validation is successful.");
+_click(_image("gif[1]"));
+_setValue(_textbox("Billing Type:"), "Loan");
+_setValue(_textbox("Auto_number_c15122017142520:"), "45");
+_setValue(_textbox("Auto_TextBox_c15122017142520:"), "dvr pass");
+_click(_span("svmx-btn-icon svmx-sfmd-save-icon"));
+_click(_span("Ok"));
+_wait(3000);
+_assertVisible(_link("Home"));										
+_log("Pass:: Error Validation is successful.");						//verification
+
+$rs_5348.end();

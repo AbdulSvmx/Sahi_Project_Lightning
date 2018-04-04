@@ -6,7 +6,6 @@ var $bo_act_installedProduct = new function bo_act_installedProduct() {
 	/**
 	 * Create an Account
 	 * 
-	 * @param $accountName
 	 */
 	this.createInstalledProduct = function($productName,$accountName,$contactName) {
 		var $serialNum = $bo_act_common.generateRandomName("Ser");
@@ -22,6 +21,7 @@ var $bo_act_installedProduct = new function bo_act_installedProduct() {
 		_setValue($bo_pg_installedProducts.txt_contactName, $contactName);
 		_setValue($bo_pg_installedProducts.txt_installedProductName, $IBName);
 		_setValue($bo_pg_installedProducts.txt_installedDate);
+		_setValue(_textbox("City"),"Bangalore");
 		_click($bo_pg_installedProducts.btn_save);
 		_assertNotVisible(_div("/Error: Invalid Data/"));
 		_logOutput($IBName+ " IB is created");

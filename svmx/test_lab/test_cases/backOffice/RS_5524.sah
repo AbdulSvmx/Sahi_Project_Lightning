@@ -3,17 +3,18 @@
 
 var $RS_5524 = _testcase("RS_5524", "Initial Counter Readings creation for IBs");
 $RS_5524.start();
-_setSpeed(100);
-var $ProcessName= $bo_act_common.generateRandomName("pros5536");
-var $ProcessId=$bo_act_common.generateRandomName("procId5536");
+_setSpeed($g_stepSpeed);
+var $ProcessName= $bo_act_common.generateRandomName("5524pros");
+var $ProcessId=$bo_act_common.generateRandomName("5524procId");
 var $selectSFM1="Cancel Shipment Order";
 var	$selectSFM2="Work Order Complete";
 var $obName= "Service/Maintenance Contract";
 var $qc="SVMXSTD: Active Service Contracts Only";
 var $clsName="IPRD_CounterRollupService";
 var $btchSize="1";
+var $scheduleTime="12:00 AM";
 var $d1="Sunday";var $d2="Monday";var $d3="Tuesday";var $d4="Wednesday";var $d5="Thursday";var $d6="Friday";var $d7="Saturday";
-var $counterRuleName=$bo_act_common.generateRandomName("RS5536_");
+var $counterRuleName=$bo_act_common.generateRandomName("5524RuleName");
 var $prodCode="Product Code";
 var $operator="Contains";
 var $value=$bo_act_common.generateRandomName("value");
@@ -31,19 +32,24 @@ var $slaterm = $bo_act_slaTerms.createSlaTerms("Default");
 var $sconName = $bo_act_serviceMaintenanceContracts.createServiceMaintenanceContract($accName, $slaterm,1,0);
 $bo_act_serviceMaintenanceContracts.AddCoveredProductToSCON($sconName, $installedProduct);
 $bo_act_navigation.navigateToCounterRule();
+while(_isVisible(_checkbox("CounterRule:RuleForm:RuleBlock:CounterRuleList:0:Hide_selected")))
+{
+	_click(_checkbox("CounterRule:RuleForm:RuleBlock:CounterRuleList:0:Hide_selected"));
+	_click(_button("Delete Rule"));
+}
 $bo_act_counterRule.createNewCunterRule($counterRuleName,$value);
 $bo_act_navigation.navigateToScheduledSFM();
 $bo_act_scheduledSFM.newProcessNameID($ProcessName,$ProcessId);
  $bo_act_scheduledSFM.selectSFMTransactionToSchedule($selectSFM1);
 // $bo_act_scheduledSFM.selectSFMTransactionToSchedule($selectSFM2);
  $bo_act_scheduledSFM.addServiceToSchedule($obName,$qc,$clsName,$btchSize);
- $bo_act_scheduledSFM.chooseTimeAndDateToRunTheProcess($d1,$d2,$d3,$d4,$d5,$d6,$d7);
+ $bo_act_scheduledSFM.chooseTimeAndDateToRunTheProcess($scheduleTime,$d1,$d2,$d3,$d4,$d5,$d6,$d7);
  $bo_act_scheduledSFM.setUserForNotification($user);
  _click($bo_pg_scheduledSFM.btn_saveAndClose);
 _wait(9000,_isVisible($bo_pg_scheduledSFM.lbl_scheduledSFMHomePage));
-_log("Scheduled SFM successful");
 
-_setSpeed(100);
+//_log("Counter Roll up created successfully");
+_setSpeed($g_stepSpeed);
 
 $RS_5524.end();
 

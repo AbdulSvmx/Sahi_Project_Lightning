@@ -50,6 +50,8 @@ var $sfm_pg_sfmDesigner = new function sfm_pg_sfmDesigner() {
 	
 	this.txt_eeStartDateTime = _textbox("/svmx-date-/",_rightOf(_label("Start Date and Time:")));
 	this.txt_eeEndDateTime=_textbox("/svmx-date-/",_rightOf(_label("End Date and Time:")));
+	this.txt_proformaIAmt = _textbox("/svmx-number/",_rightOf(_label("Proforma Invoice Amount:")));
 	
-	this.txt_PriceAlert = _div("Price not calculated, because entitlement check has not been performed.");
+	this.txt_priceAlert = _div("Price not calculated, because entitlement check has not been performed.");
+	this.btn_priceAlertOk = _span("Ok");
 };

@@ -5,7 +5,7 @@ var $bo_pg_interactiveEntitlement_CaseAndWO = new function bo_pg_interactiveEnti
 	 * Work Order -> Object Related to Check INTERACTIVE Entitlement for PS Line Only
 	 */
 	this.txt_checkEntitlement_WOPage = _div("Check Entitlement: Work Order");
-	this.btn_checkEntitlement = _span("Check Entitlement");
+	this.btn_checkEntitlement = _span("/Check Entitlement/");//_button("/Check Entitlement/");
 	
 	// Click Installed Product on Check Entitlement PS line Page
 	this.clickOnInstalledProduct = function($IBName){
@@ -22,7 +22,7 @@ var $bo_pg_interactiveEntitlement_CaseAndWO = new function bo_pg_interactiveEnti
 	};
 	
 	this.btn_applySelection = _span("Apply Selection");
-	this.btn_saveEntitlementPSLine = _span("Save Entitlement");
+	this.btn_saveEntitlementPSLine = _button("Save Entitlement");
 	this.btn_cancelEntitlementPSLinePage = _span("Cancel");
 	
 	/**
@@ -54,8 +54,9 @@ var $bo_pg_interactiveEntitlement_CaseAndWO = new function bo_pg_interactiveEnti
 	
     this.selectSConOnCheckEntmPage = function($sconName){
 			
-    	_click(_div("/svmx-grid-radioheader/",_near(_link($sconName,_near(_span("Contract Name/Number"))))));
-		  
+    	_click(_div("/svmx-grid-radioheader/",_near(_link($sconName,_near(_span("Contract Name/Number")))))); // Working as expected it is radio button
+    	//_click(_checkbox("/CaseEntitlement/",_near(_cell($sconName)))); //added by Shruthi Shanthappa  
+    	
 		};
 		
 	this.selectWarrantyOnCheckEntmPage = function($warrantyName){

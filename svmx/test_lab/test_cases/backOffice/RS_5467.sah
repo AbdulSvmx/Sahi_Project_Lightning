@@ -3,7 +3,7 @@
 
 var $RS_5467 = _testcase("$RS_5467","Interactive Entitlement-Case:- Covd Contract, Covd Loc, Covd Prod has Valid SLA but with Empty Dates and SLA");
 $RS_5467.start();
-_setSpeed(100);
+_setSpeed($g_stepSpeed);
 
 /**
 * Login to the Sandbox Org
@@ -42,7 +42,7 @@ $bo_act_configurationProfiles.editGlobalProfileForPicklistSettings($Module, $Sub
 var $accountName = $bo_act_accounts.createAccount();
 var $contactName = $bo_act_contacts.createContact($accountName);
 var $locationName = $bo_act_locations.createLocation($recordType[3],$accountName,"#007","India","560001");
-var $productName = $bo_act_products.createProduct($productCode, $productFamily[3]);
+var $productName = $bo_act_products.createProduct($productCode, $productFamily[0]);
 var $IBName = $bo_act_installedProduct.createInstalledProduct($productName, $accountName, $contactName);
 
 /**
@@ -111,6 +111,19 @@ var $caseNumber = $bo_act_Cases.createCase($caseStatus, $casePriority, $caseOrig
 //Edit the above case for Account, Contact and IB information
 $bo_act_Cases.editCase($caseNumber,$accountName,$contactName,$IBName,$locationName);
 
+/**
+* Create SFM Wizard for Case with 1 Steps as Check Entitlement.
+*/
+var $wizardTitleName = $bo_act_common.generateRandomName("SFWTitle");
+var $wizardIDName = $bo_act_common.generateRandomName("SFWId");
+var $fieldActnType = "Others";
+var $actnName = "Check Entitlement";
+
+$bo_act_navigation.navigateToSfmWizard();
+$bo_act_SFW.createWizardGeneralInfo("Case", $wizardTitleName, $wizardIDName);
+$bo_act_SFW.addCustomActionToWizard($fieldActnType, $actnName);
+$bo_act_SFW.quickSaveSFWizard();
+
 
 /**
  * Perform Interactive Entitlement on Case
@@ -170,12 +183,27 @@ _assertEqual($actual_EntitlementType,"INTERACTIVE","Actual and expected Entitlem
 _assertEqual($actual_BillingType,"Contract","Actual and expected Billing Type are not same");
 
 
+//Delete SFM Wizard 
+$bo_act_SFW.deleteSFMWizard("Case", $wizardIDName);
+
+
 //Clean up function
 
-var $datacreated = [$caseNumber,$IBName,$productName,$contactName,$accountName,$slaName01,$slaName02,$slaName03,$locationName,$serviceConractName];
-for (var i = 0; i < $datacreated.length; i++) {
-	$bo_act_common.cleanUpfunction($datacreated[i]);
-}
+$bo_act_common.deleteCase($bac_un, $bac_pwd,$caseNumber);
+$bo_act_common.deleteAccount($bac_un, $bac_pwd, $accountName);
+$bo_act_common.deleteContact($bac_un, $bac_pwd, $contactName);
+$bo_act_common.deleteIB($bac_un, $bac_pwd, $orgnamespace,$IBName);
+$bo_act_common.deleteProduct($bac_un, $bac_pwd,$productName);
+$bo_act_common.deleteSLA($bac_un, $bac_pwd, $orgnamespace, $slaName03);
+$bo_act_common.deleteSLA($bac_un, $bac_pwd, $orgnamespace, $slaName02);
+$bo_act_common.deleteSLA($bac_un, $bac_pwd, $orgnamespace, $slaName01);
+$bo_act_common.deleteSCON($bac_un, $bac_pwd, $orgnamespace,$serviceConractName);
+$bo_act_common.deleteLocation($bac_un, $bac_pwd, $orgnamespace,$locationName);
+
+//var $datacreated = [$caseNumber,$IBName,$productName,$contactName,$accountName,$slaName01,$slaName02,$slaName03,$locationName,$serviceConractName];
+//for (var i = 0; i < $datacreated.length; i++) {
+//	$bo_act_common.cleanUpfunction($datacreated[i]);
+//}
 
 $bo_act_login.logOut(); 
 
