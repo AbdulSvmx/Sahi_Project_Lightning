@@ -4,7 +4,7 @@ var $g_stepSpeed = 400;
 _setSpeed($g_stepSpeed);
 
 // PLease CHANGE the Flag to decide whether Dev or Base
-var $orgtype = "Dev";
+var $orgtype = "Base";
 
 if ($orgtype == "Dev") {
 	var $orgnamespace = "SVMXDEV";
