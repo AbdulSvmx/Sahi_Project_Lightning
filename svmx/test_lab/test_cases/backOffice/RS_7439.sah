@@ -66,10 +66,21 @@ _assertEqual($actualPMScheduleStatus,"Work Order Created","Status is not equal t
 
 //Clean up function
 
-var $datacreated = [$contactName,$accName,$proName,$IBName,$WONumber,$slaterm,$PMPTemplate,$sconName,$PMPlan];
-for (var i = 0; i < $datacreated.length; i++) {
-	$bo_act_common.cleanUpfunction($datacreated[i]);
-}
+
+$bo_act_common.deleteAccount($bac_un, $bac_pwd, $accName);
+$bo_act_common.deleteContact($bac_un, $bac_pwd, $contactName);
+$bo_act_common.deleteIB($bac_un, $bac_pwd, $orgnamespace,$IBName);
+$bo_act_common.deleteProduct($bac_un, $bac_pwd,$proName);
+$bo_act_common.deleteWorkOrder($bac_un, $bac_pwd, $orgnamespace,$WONumber);
+$bo_act_common.deleteSLA($bac_un, $bac_pwd, $orgnamespace, $slaterm);
+$bo_act_common.deleteSCON($bac_un, $bac_pwd, $orgnamespace, $sconName);
+$bo_act_common.deletePMPlantemplate($bac_un, $bac_pwd, $orgnamespace,$PMPTempName);
+$bo_act_common.deletePMPlan($bac_un, $bac_pwd, $orgnamespace,$PMPlan);
+
+//var $datacreated = [$contactName,$accName,$proName,$IBName,$WONumber,$slaterm,$PMPTemplate,$sconName,$PMPlan];
+//for (var i = 0; i < $datacreated.length; i++) {
+//	$bo_act_common.cleanUpfunction($datacreated[i]);
+//}
 $bo_act_PMProcess.deletePMProcess($PMProcessId);
 
 $RS_7439.end();
