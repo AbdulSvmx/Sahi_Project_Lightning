@@ -27,4 +27,9 @@ _call(top.location.reload());
 $bo_act_checklistdesigner.verifythequestionsonUI("RS_9865 with TAG Question1"+$number1+"", "Untagged");
 
 $bo_act_checklistdesigner.verifythequestionsonUI("RS_9865 with TAG Question2"+$number1+"", "RS_9865TAG");
+
+
+
+$bo_act_navigation.navigateToSfmTransactionDesigner();
+$bo_act_SFM.deleteSFM("A RS_9865 Process 1"+$number1+"");
 $RS_9865.end();
