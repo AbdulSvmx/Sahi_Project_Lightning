@@ -24,15 +24,15 @@ var $BVT_TC_004_Linked_SFM = _testcase("BVT_TC_004_Linked_SFM",
 	//$excel.writeToExcel("write", "../swatdata.xlsx", "readData", $caseNumber, 1)
 	
 	//Uncomment below code while running this script alone
-//	var $accountName = $bo_act_accounts.createAccount();
-//	var $contactName = $bo_act_contacts.createContact($accountName);
-//	var $productName =$bo_act_products.createProduct();
-//	var $IBName = $bo_act_installedProduct.createInstalledProduct($productName,$accountName,$contactName);
+var $accountName = $bo_act_accounts.createAccount();
+var $contactName = $bo_act_contacts.createContact($accountName);
+var $productName =$bo_act_products.createProduct();
+var $IBName = $bo_act_installedProduct.createInstalledProduct($productName,$accountName,$contactName);
 	
 	
 	/**
 	 * Read data from swatdata.xlsx - Reading data which are created in testscript1 -BVT_TC_001_SFMSearch.sah
-	 */
+	 
 	var $runData = $excel.readFromCustomExcel("/Swat_excelData/swatdata.xlsx",  "runData", true, true);
 	var $caseNumber=$runData[1]["Case"];
 	var $accountName=$runData[1]["Account"];
@@ -43,7 +43,7 @@ var $BVT_TC_004_Linked_SFM = _testcase("BVT_TC_004_Linked_SFM",
 	_log("Account: "+$accountName);
 	_log("Contact: "+$contactName);
 	_log("Product: "+$productName);
-	
+	*/
 	
 	$bo_act_navigation.navigateToSfmWizard();
 	$bo_act_SFW.createWizardGeneralInfo($wizardSelectObjectName, $wizardTitleName, $wizardIDName);

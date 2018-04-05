@@ -35,9 +35,7 @@ var $bo_act_interactiveEntitlement_WO = new function bo_act_interactiveEntitleme
 
 			else {
 				_call(top.location.reload());
-				_selectDomain("/svmx/");
 				_wait(10000, _isVisible($bo_pg_interactiveEntitlement_CaseAndWO.btn_checkEntitlement));
-				_selectDomain();
 
 			}
 		}
@@ -59,7 +57,6 @@ var $bo_act_interactiveEntitlement_WO = new function bo_act_interactiveEntitleme
 		$bo_act_workOrders.checkEntitlement($WO_Number);
 		var $url;
 		for (var $i = 0; $i < 25; $i++) {
-			_selectDomain("/svmx/");
 
 			if (_isVisible($bo_pg_interactiveEntitlement_CaseAndWO.btn_checkEntitlement)) {
 				break;
@@ -67,7 +64,6 @@ var $bo_act_interactiveEntitlement_WO = new function bo_act_interactiveEntitleme
 
 			else {
 				_call(top.location.reload());
-				_selectDomain("/svmx/");
 				_wait(10000, _isVisible($bo_pg_interactiveEntitlement_CaseAndWO.btn_checkEntitlement));
 				
 
@@ -96,7 +92,6 @@ var $bo_act_interactiveEntitlement_WO = new function bo_act_interactiveEntitleme
 
 			else {
 				_call(top.location.reload());
-				_selectDomain("/svmx/");
 				_wait(10000, _isVisible($bo_pg_interactiveEntitlement_CaseAndWO.btn_checkEntitlement));
 
 			}
@@ -124,7 +119,6 @@ var $bo_act_interactiveEntitlement_WO = new function bo_act_interactiveEntitleme
 
 			else {
 				_call(top.location.reload());
-				_selectDomain("/svmx/");
 				_wait(10000, _isVisible($bo_pg_interactiveEntitlement_CaseAndWO.btn_checkEntitlement));
 
 			}
