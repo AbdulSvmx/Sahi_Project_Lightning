@@ -15,7 +15,7 @@ _setSpeed($g_stepSpeed);
 
 
 //Pre - Condition 
-$bo_act_login.login("https://test.salesforce.com", "lohithaadmin@swatpart2.com", "maxpl0re2");
+$bo_act_login.login("https://test.salesforce.com", "shashikala.svmx@ge.com", "maxpl0re");
 
 var $wizardObject = "Work Order";//remove later
 var $caseNumber = $bo_act_Cases.createCase("New", "High", "Email");
