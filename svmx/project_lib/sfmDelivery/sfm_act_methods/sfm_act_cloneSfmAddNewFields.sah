@@ -68,8 +68,6 @@ this.cloneSFMforheaderFormfill = function($sfmNameToBeCloned,$sfmName,$isCustom,
 		_click(_f("main").s_textinput("lblData"));
 		_wait(3000);
 		_setSelected(_f("main").s_combobox("/ComboBox/").rightOf(_f("main").formitemlabel("Object Mapping")),$selectmapping);
-		_wait(1000);
-
 		};
 	this.cloneAndAddchildFieldsSFM = function($sfmNameToBeCloned, $sfmName, $isCustom,
 			 $sfmTemplateSaveAsName,$sfmTemplate,$selectmapping) {
@@ -93,9 +91,7 @@ this.cloneSFMforheaderFormfill = function($sfmNameToBeCloned,$sfmName,$isCustom,
 		_wait(5000);
 		_click(_f("main").s_button("Save As[3]"));
 		_wait(5000);
-		_click(_f("main").s_button("Save[3]"));
-		_wait(5000);
-		_click(_f("main").s_button("Save & Close"));
+		_click(_f("main").s_button("Quick Save"));
 		_wait(10000);
 	};
 	
