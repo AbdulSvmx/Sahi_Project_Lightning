@@ -22,14 +22,15 @@ var $caseNumber = $bo_act_Cases.createCase("New", "High", "Email");
 var $accountName = $bo_act_accounts.createAccount();
 var $contactName = $bo_act_contacts.createContact($accountName);
 
-/*var $runData = $excel.readFromCustomExcel("/Swat_excelData/swatdata.xlsx",  "runData", true, true);
-var $caseNumber=$runData[1]["Case"];
-var $accountName=$runData[1]["Account"];
-var $contactName=$runData[1]["Contact"];
+	/*var $runData = $excel.readFromCustomExcel("/Swat_excelData/swatdata.xlsx",  "runData", true, true);
+	var $caseNumber=$runData[1]["Case"];
+	var $accountName=$runData[1]["Account"];
+	var $contactName=$runData[1]["Contact"];
 
-_log("Case: "+$caseNumber);
-_log("Account: "+$accountName);
-_log("Contact: "+$contactName); */
+	_log("Case: "+$caseNumber);
+	_log("Account: "+$accountName);
+	_log("Contact: "+$contactName); 
+	*/
 
 
 var $productName =$bo_act_products.createProduct();
