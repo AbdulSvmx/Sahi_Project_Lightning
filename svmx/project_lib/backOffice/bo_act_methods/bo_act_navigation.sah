@@ -238,10 +238,14 @@ var $bo_act_navigation = new function bo_act_navigation() {
       */
      this.navigateToActivityMaster = function() {
  	 this.navigateToSvmxSetup();
+ 	
  	_click($bo_pg_servicemaxSetup.btn_warrantiesAndServiceContracts);
  	_click($bo_pg_servicemaxSetup.btn_activityMaster);
  	_wait(1000);
 	_call(top.location.reload());
+	_wait(1000);
+	_call(top.location.reload());
+	
      };
      
      /**
@@ -252,6 +256,8 @@ var $bo_act_navigation = new function bo_act_navigation() {
  	_click($bo_pg_servicemaxSetup.btn_warrantiesAndServiceContracts);
  	_click($bo_pg_servicemaxSetup.btn_servicePricebooks);
  	_wait(1000);
+	_call(top.location.reload());
+	_wait(1000);
 	_call(top.location.reload());
      }; 
      

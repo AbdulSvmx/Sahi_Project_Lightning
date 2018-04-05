@@ -189,10 +189,21 @@ $bo_act_SFW.deleteSFMWizard("Case", $wizardIDName);
 
 //Clean up function
 
-var $datacreated = [$caseNumber,$IBName,$productName,$contactName,$accountName,$slaName01,$slaName02,$slaName03,$locationName,$serviceConractName];
-for (var i = 0; i < $datacreated.length; i++) {
-	$bo_act_common.cleanUpfunction($datacreated[i]);
-}
+$bo_act_common.deleteCase($bac_un, $bac_pwd,$caseNumber);
+$bo_act_common.deleteAccount($bac_un, $bac_pwd, $accountName);
+$bo_act_common.deleteContact($bac_un, $bac_pwd, $contactName);
+$bo_act_common.deleteIB($bac_un, $bac_pwd, $orgnamespace,$IBName);
+$bo_act_common.deleteProduct($bac_un, $bac_pwd,$productName);
+$bo_act_common.deleteSLA($bac_un, $bac_pwd, $orgnamespace, $slaName03);
+$bo_act_common.deleteSLA($bac_un, $bac_pwd, $orgnamespace, $slaName02);
+$bo_act_common.deleteSLA($bac_un, $bac_pwd, $orgnamespace, $slaName01);
+$bo_act_common.deleteSCON($bac_un, $bac_pwd, $orgnamespace,$serviceConractName);
+$bo_act_common.deleteLocation($bac_un, $bac_pwd, $orgnamespace,$locationName);
+
+//var $datacreated = [$caseNumber,$IBName,$productName,$contactName,$accountName,$slaName01,$slaName02,$slaName03,$locationName,$serviceConractName];
+//for (var i = 0; i < $datacreated.length; i++) {
+//	$bo_act_common.cleanUpfunction($datacreated[i]);
+//}
 
 $bo_act_login.logOut(); 
 

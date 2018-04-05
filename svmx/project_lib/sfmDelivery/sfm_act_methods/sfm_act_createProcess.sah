@@ -16,7 +16,7 @@ var $sfm_act_createProcess = new function sfm_act_createProcess() {
 
 	this.cloneSFM = function($sfmNameToBeCloned, $sfmName,$sfmMapping, $isCustom, $sfmTemplate, $sfmTemplateSaveAsName, $fieldName, $containerName) {
 
-		$bo_pg_sfmTransactionAndDesigner.selectSFM($sfmNameToBeCloned, $isCustom);
+		$sfm_act_SFM.selectSFM($sfmNameToBeCloned, $isCustom);
 		_click($bo_pg_sfmTransactionAndDesigner.btn_clone);
 		_wait(3000);
 		_wait(60000, _isVisible($bo_pg_sfmTransactionAndDesigner.txt_name));

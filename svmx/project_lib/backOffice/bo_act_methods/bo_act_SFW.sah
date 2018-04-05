@@ -194,6 +194,20 @@ this.createOutputDocumentWizardStepwithSelectTemplate=function($fieldActnType,$a
 	_click($bo_pg_sfmWizard.btn_saveWizardStep);
 	_wait(1000);		
 };
+
+this.createChecklistWizardStep=function($wizardStepType,$stepIDTitle){
+	_click($bo_pg_sfmWizard.tab_wizardStep);
+	_click($bo_pg_sfmWizard.btn_newWizardStep);
+	_assertVisible($bo_pg_sfmWizard.lbl_verifyNewWizardSection);
+	_setSelected($bo_pg_sfmWizard.sel_wizardFieldType,$wizardStepType);
+	_wait(30000,_isVisible($bo_pg_sfmWizard.sel_wizardObjectType));
+	_setValue($bo_pg_sfmWizard.txt_checklistStepIDTitle,$stepIDTitle);
+	//_setSelected($bo_pg_sfmWizard.sel_wizardObjectType,$actnName);
+	_wait(3000);
+	_click($bo_pg_sfmWizard.btn_saveWizardStep);
+	_wait(1000);		
+};
+
 };			
 
 	

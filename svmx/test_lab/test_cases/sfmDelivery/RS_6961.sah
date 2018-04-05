@@ -1,7 +1,7 @@
 var $rs_6961 = _testcase("RS_6961","Verify source to target all SFM Process.");
 $rs_6961.start();
-//$sfmName = $bo_act_common.generateRandomName("SFM_Auto_");
-$sfmName = "SFM_Auto_18122017171926";
+$sfmName = $bo_act_common.generateRandomName("SFM_Auto_");
+//$sfmName = "SFM_Auto_18122017171926";
 $sfmPgLayoutName = $bo_act_common.generateRandomName("SFM_Auto_Page");
 $headersToAdd = ["Account"];
 $wizTitle = $bo_act_common.generateRandomName("SFM Wiz");

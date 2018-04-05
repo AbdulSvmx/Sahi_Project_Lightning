@@ -1,4 +1,4 @@
-var $rs_4979 = _testcase("RS_4982","");
+var $rs_4979 = _testcase("RS_4979","");
 $rs_4979.start();
 var $customActionObject = "Work Order";
 var $actionType="Web Service";

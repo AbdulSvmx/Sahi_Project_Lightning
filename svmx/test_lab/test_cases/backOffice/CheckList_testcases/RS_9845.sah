@@ -48,4 +48,12 @@ _wait(10000);
 $bo_act_checklistdesigner.verifythechangesinchecklistformdesigner("Changed A RS_9845 Question '"+$number1+"'", "Answer 1", "Answer 2", "Radio Button");
 
 
+
+$bo_act_navigation.navigateToSfmTransactionDesigner();
+$bo_act_SFM.deleteSFM("A RS_9845 Process 1"+$number1+"");
+
+
+$bo_act_navigation.navigateToSfmTransactionDesigner();
+$bo_act_SFM.deleteSFM("A RS_9845 Process 2"+$number1+"");
+
 $RS_9845.end();

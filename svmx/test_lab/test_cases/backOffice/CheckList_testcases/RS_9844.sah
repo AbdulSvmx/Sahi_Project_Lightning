@@ -38,4 +38,13 @@ $bo_act_checklistdesigner.edit_checklist_process_checkbox("RS_9844 Question", "C
 // To verify the changes in Checklist Process 2
 $bo_act_checklistdesigner.re_openChecklistTypeSFM("A RS_9844 Process 2"+$number1+"", true);
 $bo_act_checklistdesigner.verifythechangesinquestion("RS_9844 Question", "Checkbox");
+
+
+
+
+$bo_act_navigation.navigateToSfmTransactionDesigner();
+$bo_act_SFM.deleteSFM("A RS_9844 Process 1"+$number1+"");
+
+$bo_act_navigation.navigateToSfmTransactionDesigner();
+$bo_act_SFM.deleteSFM("A RS_9844 Process 2"+$number1+"");
 $RS_9844.end();

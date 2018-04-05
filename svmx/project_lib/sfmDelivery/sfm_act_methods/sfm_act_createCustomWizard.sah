@@ -45,7 +45,7 @@ var $sfm_act_createCustomWizard = new function sfm_act_createCustomWizard() {
 		_click($sfm_pg_wizards.btn_saveStep);
 		_click($sfm_pg_wizards.txt_managePermission);
 		_setSelected($sfm_pg_wizards.select_availableGrpProfiles,$profile);
-		_click($sfm_pg_wizards.btn_add);
+//		_click($sfm_pg_wizards.btn_add);
 		_click($sfm_pg_wizards.btn_saveClose);		
 
 	};	
@@ -107,7 +107,7 @@ var $sfm_act_createCustomWizard = new function sfm_act_createCustomWizard() {
 	
 	
 	this.createCasewithFieldValues = function($value){
-		$CaseNo="";
+		$case="";
 		_wait(5000);
 		_click($sfm_pg_wo.tab_all);
 		_wait(3000);
@@ -120,7 +120,13 @@ var $sfm_act_createCustomWizard = new function sfm_act_createCustomWizard() {
 		_setSelected(_select(0,_rightOf(_label("*Case Origin"))),"Email");
 		_click(_submit(" Save "));
 		_wait(6000);
-		$CaseNo=_getText(_heading2("pageDescription"));
+		if(_isVisible(_span("/efhpCenterValue/"))){
+			$case = _getText(_span("/efhpCenterValue/"));
+		}
+		else{
+			$case = _getText($sfm_pg_wo.label_wo);
+		}
+		return $case;
 	
 	};
 
@@ -402,8 +408,12 @@ var $sfm_act_createCustomWizard = new function sfm_act_createCustomWizard() {
 		_doubleClick(_div("svmx-grid-cell-inner [1]"));
 		_click(_span("/svmx_lookup_icon/"));
 		_click($sfm_pg_wizardWindow.icon_search);
-		var $divs= _collect("_div","/.*/",_under(_div("Product Name")));
+		var $divs= _collect("_cell","/.*/",_under(_div("Product Name")));
+//		var $divs= _collect("_div","/[^ ][^ ]*/",_under(_div("Product Name")));
 		_log($divs.length);
+//		for($p=0;$p<$divs.length;$p++){
+//			_alert(_getText($divs[$p]));
+//		}
 		if($divs.length<=10){
 			_log("Pass");
 		}
