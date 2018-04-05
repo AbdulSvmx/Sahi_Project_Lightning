@@ -24,6 +24,7 @@ var $sfm_pg_checklistQuestionLibrary = new function sfm_pg_checklistQuestionLibr
 	this.sel_datePickerIcon=_div("/svmx-form-date-trigger svmx-form-trigger-last svmx-unselectable/");//added by Shruthi Shanthappa
 	this.sel_datePicker=_div("/datepicker/");//added by Shruthi Shanthappa
 	this.sel_todayDate=_span("Today");//added by Shruthi Shanthappa
+	this.btn_submitChecklist =_span("Submit"); //added by Shruthi Shanthappa
 	this.txt_defaultResponseDate=_textbox("defaultResponseDate");//added by Shruthi Shanthappa
 	this.txt_questionText=_textbox("questionText");
 	this.txt_helpURL=_textbox("helpURL");

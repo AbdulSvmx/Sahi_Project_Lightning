@@ -14,7 +14,7 @@ $sfm_act_Transactions.clonedsfm7015($processName,$sfmName,$sfmPgLayoutName);
 $bo_act_navigation.navigateToSfmWizard();
 $sfm_act_createCustomWizard.chooseObject("Work Order");
 $sfm_act_createCustomWizard.addManageWizSteps($wizTitle, "SFM", $sfmName);
-$sfm_act_createCustomWizard.createCasewithFieldValues($value);
+$caseNo = $sfm_act_createCustomWizard.createCasewithFieldValues($value);
 $sfm_act_createCustomWizard.createWOwithFieldValues($value);
 $sfm_act_createCustomWizard.clickWizardBtn($sfmName);
 //$sfm_act_createCustomWizard.verify7015();
@@ -30,7 +30,7 @@ _wait(3000);
 var $divs= _collect("_cell","/.*/",_under(_div("Case Number")))
 	//_alert( $divs.length);
 for($i=0;$i<$divs.length;$i++){
-	if(_getText($divs[$i])!=$CaseNo)
+	if(_getText($divs[$i])!=$caseNo)
 	{
 		$count++;
 	}

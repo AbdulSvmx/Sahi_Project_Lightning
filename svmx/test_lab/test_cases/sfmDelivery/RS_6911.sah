@@ -1,7 +1,7 @@
 var $rs_6911 = _testcase("RS_6911","Verify Lookup configuration for Search, Display, Bubble, No of records to display.");
 $rs_6911.start();
 $sfmName = $bo_act_common.generateRandomName("SFM_Auto_");
-//$sfmName = "SFM_Auto_7122017104254";
+//$sfmName = "SFM_Auto_44201811021";
 $value = "Dell";
 $sfmPgLayoutName =	$bo_act_common.generateRandomName("SFM_Auto_Page");
 $processName = "Manage Work Order Lines - Usage";
@@ -15,6 +15,7 @@ $bo_act_navigation.navigateToSfmWizard();
 $sfm_act_createCustomWizard.chooseObject("Work Order");
 $sfm_act_createCustomWizard.addManageWizSteps($wizTitle, "SFM", $sfmName);
 $sfm_act_createCustomWizard.createBlankWo();
+//_selectDomain("/svmx/");
 $sfm_act_createCustomWizard.clickWizardBtn($sfmName);
 $sfm_act_createCustomWizard.verify6911();
 $sfm_act_createCustomWizard.validateSearch("Desktop", "Product Line");
