@@ -33,6 +33,8 @@ var $contactName = $bo_act_contacts.createContact($accountName);
 	*/
 
 
+
+
 var $productName =$bo_act_products.createProduct();
 
 var $standardPriceValue = 120;
@@ -81,7 +83,6 @@ var $sfmTemplateSaveAsName5 = $sfmName5;
 var $sfmTemplate5 = "SVMXSTD: Create New Shipment Order";    
 
 
-
 $sfm_act_SFM.cloneTDM016($sfmToBeCloned1, $sfmName1, $isCustom, $sfmTemplateSaveAsName1, $sfmTemplate1, "", "");
 $sfm_act_SFM.cloneTDM016($sfmToBeCloned2, $sfmName2, $isCustom, $sfmTemplateSaveAsName2, $sfmTemplate2, "", "");
 $sfm_act_SFM.cloneTDM016($sfmToBeCloned3, $sfmName3, $isCustom, $sfmTemplateSaveAsName3, $sfmTemplate3, "", "");
@@ -120,6 +121,9 @@ _assertExists(_span($slaName));
 	*/ 
 
 //Launch in delivery
+ 
+ 
+
 $workOrderNo = $swat_act_workOrders.createWorkOrder($caseNumber, $accountName, $contactName, $IBName, "Open", "High", "Field Service");
 //$woName = 
 
@@ -167,7 +171,7 @@ _wait(15000,_isVisible(_cell($wizardIDName)));
 
 
 //SFM - Create Quote from Work Order 
- _click(_button("/Create Quote from Work Order/", _in(_cell($wizardIDName))));
+ _click(_button("/Create_Quote_from_Work/", _in(_cell($wizardIDName))));
  _selectDomain();
  _wait(20000,_isVisible(_label("Status:")));
  _setValue(_textbox("Status:"), "Presented");
@@ -282,6 +286,8 @@ $bo_act_getPrice.addLaborLineToSFMDelivery($searchValue, "service", "03", "05");
 //Add a Expense Line
 $bo_act_getPrice.addExpensesLineToSFMDelivery("Phone", "03", "3000");
 _wait(15000);
+
+
 
 //Add a Travel Line
 $bo_act_getPrice.addTravelLineToSFMDeliveryUsingStartEndDate("01", "03");
