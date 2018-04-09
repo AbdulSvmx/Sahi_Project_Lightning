@@ -34,6 +34,7 @@ var $bo_pg_PMPlan = new function bo_pg_PMPlan(){
 
 //Custom UI for Condition Based PM
 	this.txt_planName = _textbox("planName");
+	this.btn_cancel_IB = _span("Cancel[1]"); // Owner Meghana Rao
 	this.txt_planTemplateName = _textbox("planTemplateName");
 	this.txt_startDateInput = _textbox("startDate-inputEl");
 	this.txt_endDateInput = _textbox("endDate-inputEl");
