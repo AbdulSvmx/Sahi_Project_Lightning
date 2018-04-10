@@ -181,6 +181,10 @@ var $sfm_act_createCustomWizard = new function sfm_act_createCustomWizard() {
 		_click($sfm_pg_wizardWindow.btn_edit);
 		_wait(3000);
 		_setValue($sfm_pg_wizardWindow.txt_part1,$part);
+//		_click($sfm_pg_wizardWindow.lookup_Part);
+		_click(_span("/lookup_icon/",_rightOf(_label("Part:[1]"))));
+		_wait(3000);
+		_doubleClick(_cell(0,_near(_div("Product Name"))));
 		_click($sfm_pg_wizardWindow.btn_update);
 	};
 	this.addLabor = function($part) {
@@ -192,7 +196,10 @@ var $sfm_act_createCustomWizard = new function sfm_act_createCustomWizard() {
 		_click($sfm_pg_wizardWindow.btn_edit);
 //		_wait(3000);
 		_setValue($sfm_pg_wizardWindow.txt_part1,$part);
-//		_wait(3000);
+//		_click($sfm_pg_wizardWindow.lookup_Part);
+		_click(_span("/lookup_icon/",_rightOf(_label("Part:[1]"))));
+		_doubleClick(_cell(0,_near(_div("Product Name"))));
+		_wait(3000);
 		_click($sfm_pg_wizardWindow.btn_update);
 	};
 	this.addExpenses = function($expense) {

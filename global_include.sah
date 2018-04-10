@@ -38,7 +38,7 @@ var $url_checklist = "https://test.salesforce.com";
 var $sfmUsn = "svmx-sfdtest@svmx-sfdtest.org.sfdtest1"; // dev
 var $sfmPwd = "servicemax1";
 // var $sfmUsn = "sysadmin01@sfdautomation.com"; // base
-// var $sfmPwd = "maxplore2";
+// var $sfmPwd = "Maxplore3";
 
 // DC Global Variables
 var $dc_org = $orgtype;
