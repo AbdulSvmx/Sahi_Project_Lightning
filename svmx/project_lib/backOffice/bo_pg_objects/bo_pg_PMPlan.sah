@@ -38,11 +38,13 @@ var $bo_pg_PMPlan = new function bo_pg_PMPlan(){
 	this.btn_addcoverage = _span("Add coverage");
 	this.txt_addIB = _textbox("coveredIBName");
 	this.btn_cancel_IB = _span("Cancel[1]"); // Owner Meghana Rao
+	this.btn_save_IB = _span("Save[1]");
 	this.txt_planTemplateName = _textbox("planTemplateName");
 	this.txt_startDateInput = _textbox("startDate-inputEl");
 	this.txt_endDateInput = _textbox("endDate-inputEl");
 	this.btn_saveCustomUI = _span("Save");
 
+	this.btn_yes= _span("Yes");
 };
 
 

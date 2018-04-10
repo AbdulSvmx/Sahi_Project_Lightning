@@ -29,10 +29,7 @@ var $bo_pg_sfmTransactionAndDesigner = new function bo_pg_sfmTransactionAndDesig
 	this.txt_mappingName = _f("main").s_textinput("Save this map as[1]");
 	this.txt_mapID = _f("main").s_textinput("Input ID Here[2]");
 	this.btn_saveMap = _f("main").s_button("Save[2]");
-	
-	
-	
-	
+
 	 this.txt_standardSfmTransactionQuickFind= _f("main").s_textinput("searchText[2]");
     this.btn_standardSfmTransaction= _f("main").tab("Standard SFM Transactions");
     this.btn_yourCustomSfmTransactions = _f("main").tab("Your Custom Sjavascript:void(0)FM Transactions");
