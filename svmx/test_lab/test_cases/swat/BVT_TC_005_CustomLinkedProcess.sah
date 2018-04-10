@@ -15,8 +15,11 @@ $rs_7011.start();
 
 		$woName="";
 		var $url="https://test.salesforce.com";
-		var $sfmUsn="lohitha@svmxtest.org.testpar2";
-		var $sfmPwd="maxpl0re3";
+		//var $sfmUsn="lohitha@svmxtest.org.testpar2";
+		//var $sfmPwd="maxpl0re3";
+		
+		var $sfmUsn="shashikala.svmx@ge.com";
+		var $sfmPwd="maxpl0re";
 
 		//Variables Declarations
 		$LinkedprocessName = "Manage Work Details for Products Serviced";
