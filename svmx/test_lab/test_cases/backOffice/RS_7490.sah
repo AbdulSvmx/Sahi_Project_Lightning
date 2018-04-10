@@ -9,35 +9,33 @@ var $Workbenchurl = "https://workbench.developerforce.com/login.php";
 $bo_act_login.login($g_url, $bac_un, $bac_pwd);
 
 // To set SET002 to TRUE 
-var $Module = "Preventive Maintenance";
-var $SubModule = "Manage PM Plan";
-var $Setting = "SET002";
-var $value = true;
-$bo_act_configurationProfiles.editGlobalProfileForBooleanSettings($Module, $SubModule, $Setting, $value);
+//var $Module = "Preventive Maintenance";
+//var $SubModule = "Manage PM Plan";
+//var $Setting = "SET002";
+//var $value = true;
+//$bo_act_configurationProfiles.editGlobalProfileForBooleanSettings($Module, $SubModule, $Setting, $value);
+//
+////Test Data Creation
+//var $accName = $bo_act_accounts.createAccount();
+//var $proName = $bo_act_products.createProduct("pro12", "--None--");
+//var $IBName = $bo_act_installedProduct.createInstalledProduct($proName,$accName,"");
+//var $contactName = $bo_act_contacts.createContact($accName);
+//var $slaterm = $bo_act_slaTerms.createSlaTerms("Default");
+//var $caseNumber = $bo_act_installedProduct.createSupportCase("New");
+//
+//
+//
+//var $PMPTemplate = $bo_act_PMPlanTemplate.createUsageBasedConditionPMPTemplateNoSave($proName);
+//$bo_act_PMPlanTemplate.updateUsageConditionRulesGridWithAdjFields("Months", "Every", 1, $bo_act_common.currentDate("-"), $bo_act_common.getfutureDate(1,"-"),"Fixed", 1,100, 10,"Days");
+//$bo_act_PMPlanTemplate.saveConditionBasedPM();
+//
+//var $sconName = $bo_act_serviceMaintenanceContracts.createServiceMaintenanceContract($accName, $slaterm,1,0);
+//$bo_act_serviceMaintenanceContracts.AddCoveredProductToSCON($sconName, $IBName);
+//var $PMPlan = $bo_act_PMPlan.createUsageOrFrequencyBasedPMPlan($sconName,$PMPTemplate,$IBName);
 
-//Test Data Creation
-var $accName = $bo_act_accounts.createAccount();
-var $proName = $bo_act_products.createProduct("pro12", "--None--");
-var $IBName = $bo_act_installedProduct.createInstalledProduct($proName,$accName,"");
-var $contactName = $bo_act_contacts.createContact($accName);
-var $slaterm = $bo_act_slaTerms.createSlaTerms("Default");
-var $caseNumber = $bo_act_installedProduct.createSupportCase("New");
-
-
-
-var $PMPTemplate = $bo_act_PMPlanTemplate.createUsageBasedConditionPMPTemplateNoSave($proName);
-$bo_act_PMPlanTemplate.updateUsageConditionRulesGridWithAdjFields("Months", "Every", 1, $bo_act_common.currentDate("-"), $bo_act_common.getfutureDate(1,"-"),"Fixed", 1,100, 10,"Days");
-$bo_act_PMPlanTemplate.saveConditionBasedPM();
-
-var $sconName = $bo_act_serviceMaintenanceContracts.createServiceMaintenanceContract($accName, $slaterm,1,0);
-$bo_act_serviceMaintenanceContracts.AddCoveredProductToSCON($sconName, $IBName);
-var $PMPlan = $bo_act_PMPlan.createUsageOrFrequencyBasedPMPlan($sconName,$PMPTemplate,$IBName);
-
-
+$PMPlan = "PMPlan104201813058";
 $bo_act_navigation.navigateToPreventiveMaintenancePlans();
 _click(_link($PMPlan));
-_click($bo_pg_PMPlan.link_firstLinkInPMSchedule);
-var $actualPMScheduleStatus = _getText(_div(0,_rightOf(_cell("/Status/"))));
 _assertEqual("Active", _getText(_div(0,_rightOf(_cell("Status"))))); // To verify if Status is Active
 
 //Clean up function
