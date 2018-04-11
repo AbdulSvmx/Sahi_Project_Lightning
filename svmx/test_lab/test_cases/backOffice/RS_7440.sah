@@ -23,7 +23,7 @@ var $Module = "Preventive Maintenance";
 var $SubModule = "PM Actions";
 var $Setting = "SET004";
 var $value = true;
-$bo_act_configurationProfiles.editGlobalProfileForBooleanSettings($Module, $SubModule, $Setting, $value)
+$bo_act_configurationProfiles.editGlobalProfileForBooleanSettings($Module, $SubModule, $Setting, $value);
 
 var $PMPTemplate = $bo_act_PMPlanTemplate.createUsageBasedConditionPMPTemplateNoSave($proName);
 $bo_act_PMPlanTemplate.updateUsageConditionRulesGridWithAdjFields("Months", "Every", 1, $bo_act_common.currentDate("-"), $bo_act_common.getfutureDate(1,"-"),"Fixed", 1,100, 10,"Days");
