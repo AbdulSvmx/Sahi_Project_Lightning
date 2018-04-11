@@ -1,8 +1,8 @@
 
 //author - Meghana Rao P
 
-var $RS_7440 = _testcase("$RS_7440","Verify adjustments are not performed when SET004(Condition based Adj) is set to False.");
-$RS_7440.start();
+var $RS_7478 = _testcase("$RS_7478","Verify When Start date or End Date is changed before PM plan is saved to DB");
+$RS_7478.start();
 _setSpeed($g_stepSpeed);
 var $Workbenchurl = "https://workbench.developerforce.com/login.php";
 //Pre - Condition 
@@ -17,13 +17,6 @@ var $slaterm = $bo_act_slaTerms.createSlaTerms("Default");
 var $caseNumber = $bo_act_installedProduct.createSupportCase("New");
 
 
-// Change the SET004 to TRUE
-
-var $Module = "Preventive Maintenance";
-var $SubModule = "PM Actions";
-var $Setting = "SET004";
-var $value = true;
-$bo_act_configurationProfiles.editGlobalProfileForBooleanSettings($Module, $SubModule, $Setting, $value);
 
 var $PMPTemplate = $bo_act_PMPlanTemplate.createUsageBasedConditionPMPTemplateNoSave($proName);
 $bo_act_PMPlanTemplate.updateUsageConditionRulesGridWithAdjFields("Months", "Every", 1, $bo_act_common.currentDate("-"), $bo_act_common.getfutureDate(1,"-"),"Fixed", 1,100, 10,"Days");
@@ -33,8 +26,11 @@ var $sconName = $bo_act_serviceMaintenanceContracts.createServiceMaintenanceCont
 $bo_act_serviceMaintenanceContracts.AddCoveredProductToSCON($sconName, $IBName);
 var $PMPlan = $bo_act_PMPlan.createUsageOrFrequencyBasedPMPlan($sconName,$PMPTemplate,$IBName);
 
-var $PMProcessId = $bo_act_PMProcess.createPMProcess("Condition Based Preventive Maintenance", 0, $PMPlan,"One Per Product");
 
+// To edit the PLan and change the Start Date and End date and verify the changes
+$bo_act_PMPlan.editConditionBasedPMPlan($IBName);
+
+var $PMProcessId = $bo_act_PMProcess.createPMProcess("Condition Based Preventive Maintenance", 0, $PMPlan,"One Per Product");
 //This code supports name spaces and assigns the variable with correct namespace script
 $bo_act_navigation.navigateToSetUpAndSearch("Installed Packages");
 _click(_link("ServiceMax"));
@@ -70,8 +66,7 @@ $bo_act_navigation.navigateToPreventiveMaintenancePlans();
 _click(_link($PMPlan));
 _click($bo_pg_PMPlan.link_firstLinkInPMSchedule);
 var $actualPMScheduleStatus = _getText(_div(0,_rightOf(_cell("/Status/"))));
-_assertEqual($actualPMScheduleStatus,"Work Order Done","Status is not equal to Work Order Created");
-
+_assertEqual($actualPMScheduleStatus,"Work Order Created","Status is not equal to Work Order Created");
 
 //Clean up function
 
@@ -92,7 +87,7 @@ $bo_act_common.deletePMPlan($bac_un, $bac_pwd, $orgnamespace,$PMPlan);
 //}
 $bo_act_PMProcess.deletePMProcess($PMProcessId);
 
-$RS_7440.end();
+$RS_7478.end();
 
 
 

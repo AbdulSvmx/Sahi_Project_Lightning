@@ -148,8 +148,9 @@ this.saveConditionBasedPM = function(){
 	//_assertExist(_heading1("PM Plan Template:"));
 };
 
-this.createCriteriaBasedPMTemplate = function($PMTemplateName,$productName)
+this.createCriteriaBasedPMTemplate = function($productName)
 	{
+		var $PMTemplateName = $bo_act_common.generateRandomName("PMT");
 		$bo_act_navigation.navigateToPMPlanTemplatePage();
 		_wait(60000,_isVisible(_submit("Create Condition Based PM Plan Template")));
 		_click(_submit("Create Condition Based PM Plan Template"));
@@ -181,8 +182,13 @@ this.createCriteriaBasedPMTemplate = function($PMTemplateName,$productName)
 		_click(_listItem($operator));
 		
 		_click(_div("svmx-grid-cell-inner [4]"));
-		_setValue(_textbox(0,_under(_div("Value"))),$value);
+		_click($bo_pg_PMPlanTemplate.txt_valueCriteria); // Changed by Meghana Rao
+		_click(_listItem($value));
+		//_setValue(_textbox(0,_under(_div("Value"))),$value);
 	};
+	/*
+	 * This is only for Picklist values to be added as Rows
+	 */
 	this.addRow = function($attribute,$operator,$value){
 		_click(_span("+ Add row"));
 		_click(_div("/svmx-grid-cell-inner/",_under(_div("Attribute"))));
@@ -192,9 +198,9 @@ this.createCriteriaBasedPMTemplate = function($PMTemplateName,$productName)
 		_click(_div("/svmx-trigger-index/",_under(_div("Operator"))));
 		_click(_listItem($operator));
 //		_doubleClick(_div("/svmx-grid-cell-inner/",_under(_div("Value"))));
-		_click(_div("/svmx-grid/",_under(_div("Value"),10)));
-//		_setValue(_textbox(0,_under(_div("Value"))),$value);
-		_setValue(_textbox("/textfield/",_under(_div("Value"),10)),"Bangalore");
+		_click(_div("/svmx-grid-cell-inner/",_under(_div("Value"))));
+		_click(_div("/svmx-trigger-index/",_under(_div("Value"))));
+		_click(_listItem($value));
 	};
 	this.createPmPlan = function($pmPlanName,$PMTemplateName,$templateName){
 		_selectDomain();
@@ -212,6 +218,23 @@ this.createCriteriaBasedPMTemplate = function($PMTemplateName,$productName)
 		_setValue(_textbox("/startDate/"),$startDate);
 		_setValue(_textbox("/endDate/"),$endDate);
 		_click(_span("Save"));
+	};
+	
+	
+	/*
+	 * Author: Meghana Rao
+	 * This method will create criteria based PM Plan
+	 */
+	this.verifytheadvancedexpression = function($ExpressionName){
+		
+		_setValue($bo_pg_PMPlanTemplate.txt_advanced_expression,$ExpressionName);
+		_click(_span("Condition Rules"));
+		_wait(20000);
+		_click($bo_pg_PMPlanTemplate.btn_save);
+		
+		_assertEqual(true,_isVisible($bo_pg_PMPlanTemplate.expression_notvalid)); // To verify if an expression is invalid
+
+		
 	};
 	
 	};

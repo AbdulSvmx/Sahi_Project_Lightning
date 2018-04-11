@@ -2,7 +2,8 @@ var $sfm_act_Validations = new function sfm_act_Validations() {
 	this.validateTc7011 = function(){
 		var $count = 0;
 		// Get Contents of the table.
-		var $tableContents = _getTableContents(_table("list")); 
+//		var $tableContents = _getTableContents(_table("list")); 
+		var $tableContents = _getTableContents(_table("/list/",_near(_heading3("Work Details"))));
 		// Get Table Headers.
 		var $tableHeaders = $tableContents[0];
 		// Verify if the Table Headers contain "Line Type"
