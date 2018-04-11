@@ -228,8 +228,10 @@ this.createCriteriaBasedPMTemplate = function($productName)
 	this.verifytheadvancedexpression = function($ExpressionName){
 		
 		_setValue($bo_pg_PMPlanTemplate.txt_advanced_expression,$ExpressionName);
-		_click($bo_pg_PMPlanTemplate.btn_save);
+		_click(_span("Condition Rules"));
 		_wait(20000);
+		_click($bo_pg_PMPlanTemplate.btn_save);
+		
 		_assertEqual(true,_isVisible($bo_pg_PMPlanTemplate.expression_notvalid)); // To verify if an expression is invalid
 
 		
