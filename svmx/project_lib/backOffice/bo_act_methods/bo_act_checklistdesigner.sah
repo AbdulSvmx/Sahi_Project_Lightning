@@ -296,7 +296,7 @@ var $bo_act_checklistdesigner = new function bo_act_checklistdesigner() {
 		_assertEqual(true, _isVisible(_f("main").s_label($questionText)));
 		_click(_f("main").s_label($questionText));
 		_click($bo_pg_formDesigner.btn_addquestion_toform);
-		_wait(10000);
+		_wait(2000);
 		_click($bo_pg_formDesigner.btn_quickSave);
 
 	};
