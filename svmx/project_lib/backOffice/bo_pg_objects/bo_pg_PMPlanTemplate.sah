@@ -21,6 +21,7 @@ var $bo_pg_PMPlanTemplate = new function bo_pg_pmPlanTemplate(){
 	this.txt_advanced_expression = _textbox("advancedExpression");
 	this.btn_save = _span("Save");
 	this.expression_notvalid = _span("Advanced Expression is not valid");
+	this.btn_today = _span("Today");
 	
 	this.btn_delete = _button("Delete");
 	
