@@ -18,6 +18,10 @@ var $bo_pg_PMPlanTemplate = new function bo_pg_pmPlanTemplate(){
 	this.link_editIcon = _image("/svmx-sfmd-edit-icon/");
 	this.btn_saveIcon = _span("/svmx-sfmd-save-icon/");
 	this.btn_save = _submit(" Save ");
+	this.txt_advanced_expression = _textbox("advancedExpression");
+	this.btn_save = _span("Save");
+	this.expression_notvalid = _span("Advanced Expression is not valid");
+	this.btn_today = _span("Today");
 	
 	this.btn_delete = _button("Delete");
 	
@@ -59,5 +63,6 @@ this.txt_conditionType = _textbox("conditionType");
 this.link_addRowCriteria = _span("addRowButton_CB-btnInnerEl");
 this.txt_attributeCriteria = _div("/svmx-trigger-index/",_under(_div("/Attribute/")));
 this.txt_operatorCriteria = _div("/svmx-trigger-index/",_under(_div("/Operator/")));
+this.txt_valueCriteria = _div("/svmx-trigger-index/",_under(_div("/Value/")));
 };
 

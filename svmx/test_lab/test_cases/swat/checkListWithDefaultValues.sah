@@ -27,21 +27,22 @@ $stepIDTitle = $bo_act_common.generateRandomName("Swat Checklist Step");
 $selectTemplateAtRunTime = true; 
 $sfmName1 = "to generate a Checklist/Survey type of Process";
 $objectName = "Work Order";
+var checklist_lnk = _link("Checklists");
 $dateQuestion = $bo_act_common.generateRandomName("SwatDateQuestion");
-$textQuestion = $bo_act_common.generateRandomName("SwatTextQuestion");
-$timeQuestion = $bo_act_common.generateRandomName("SwatTimeQuestion");
-$numberQuestion = $bo_act_common.generateRandomName("SwatNumberQuestion");
-$checkboxQuestion = $bo_act_common.generateRandomName("SwatCheckboxQuestion");
-$checkboxResponse = $bo_act_common.generateRandomName("SwatCheckboxResponse");
+//$textQuestion = $bo_act_common.generateRandomName("SwatTextQuestion");
+//$timeQuestion = $bo_act_common.generateRandomName("SwatTimeQuestion");
+//$numberQuestion = $bo_act_common.generateRandomName("SwatNumberQuestion");
+//$checkboxQuestion = $bo_act_common.generateRandomName("SwatCheckboxQuestion");
+//$checkboxResponse = $bo_act_common.generateRandomName("SwatCheckboxResponse");
 $defaultText = "Default Text";
 $defaultNumber = '6';
 var $checklistName = "Swat Checklist"+$number1;
 
 $bo_act_questionlibrary.createDefaultDateTimeQuestion($dateQuestion, "DateTime", "Value");
-$bo_act_questionlibrary.createTextQuestion($textQuestion, "Text" , "https://www.google.com", "SWAT" , $defaultText);
-_click($bo_pg_servicemaxSetup.btn_backToSetupHome);
-$bo_act_questionlibrary.createCheckbox_RadioQuestion($checkboxQuestion, "Checkbox", "https://www.google.com", $checkboxResponse);
-$bo_act_questionlibrary.createNumberQuestion($numberQuestion, "Number" , "https://www.google.com", "SWAT", '6');
+//$bo_act_questionlibrary.createTextQuestion($textQuestion, "Text" , "https://www.google.com", "SWAT" , $defaultText);
+//_click($bo_pg_servicemaxSetup.btn_backToSetupHome);
+//$bo_act_questionlibrary.createCheckbox_RadioQuestion($checkboxQuestion, "Checkbox", "https://www.google.com", $checkboxResponse);
+//$bo_act_questionlibrary.createNumberQuestion($numberQuestion, "Number" , "https://www.google.com", "SWAT", '6');
 
 
 
@@ -51,10 +52,13 @@ _wait(60000, _isVisible($bo_pg_sfmTransactionAndDesigner.btn_newSFM));
 _wait(1000);
 $bo_act_checklistdesigner.newChecklistTypeSFM($checklistName, $sfmName1 ,$objectName);
 $bo_act_checklistdesigner.addChecklistQuestionToForm($dateQuestion);
-$bo_act_checklistdesigner.addChecklistQuestionToForm($textQuestion);
-$bo_act_checklistdesigner.addChecklistQuestionToForm($timeQuestion);
-$bo_act_checklistdesigner.addChecklistQuestionToForm($numberQuestion);
-$bo_act_checklistdesigner.addChecklistQuestionToForm($checkboxQuestion);
+//$bo_act_checklistdesigner.addChecklistQuestionToForm($textQuestion);
+//$bo_act_checklistdesigner.addChecklistQuestionToForm($numberQuestion);
+//$bo_act_checklistdesigner.addChecklistQuestionToForm($checkboxQuestion);
+//adding attachment type question to Checklist process
+_click($bo_pg_formDesigner.btn_addNewQuestion);
+_click($bo_pg_formDesigner.btn_selectQuestionFromList);
+_setSelected(_f("main").s_dropdownlist("ansType"), "Attachment");
 
 $bo_pg_formDesigner.btn_save_close;
 
@@ -70,17 +74,28 @@ _wait(1000);
 $workOrderNo = $swat_act_workOrders.createWorkOrder("", "", "", "", "Open", "High", "Field Service");
 
 _selectDomain("/svmx/");
-_wait(15000,_isVisible(_cell($wizardIDName)));
+_wait(10000,_isVisible(_cell($wizardIDName)));
 _click(_button($stepIDTitle, _in(_cell($wizardIDName))));
 _selectDomain();
+$swat_act_pageLoadWait.waitTillPageLoads(checklist_lnk);
 _click(_label($checklistName));
-_wait(15000,_isVisible(_label($textQuestion)));
+_wait(10000,_isVisible(_label($dateQuestion)));
+//_wait(15000,_isVisible(_label($textQuestion)));
 
 _click($sfm_pg_checklistQuestionLibrary.btn_submitChecklist);
 if(_isVisible(_label("/Completed/"),_rightOf(_label($checklistName))))
 	_log("The checklist is completed");
 else
 	_log("The checklist is not completed");
+
+
+
+$bo_act_SFW.deleteSFMWizard($wizardObject, $wizardIDName);
+$bo_act_SFM.deleteSFM($checklistName);
+$bo_act_questionlibrary.deletequestionlibrary($dateQuestion);
+//$bo_act_questionlibrary.deletequestionlibrary($textQuestion);
+//$bo_act_questionlibrary.deletequestionlibrary($numberQuestion);
+//$bo_act_questionlibrary.deletequestionlibrary($checkboxQuestion);
 
 
 $ChecklistVerification.end();
