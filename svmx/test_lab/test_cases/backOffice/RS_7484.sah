@@ -31,6 +31,10 @@ else
 //To verify if Use Current Field Value is set to True by default
 _assertEqual("true",$CurrentFielValue);
 
+// CleanUp function
+$bo_act_common.deleteProduct($bac_un, $bac_pwd,$proName);
+$bo_act_common.deletePMPlantemplate($bac_un, $bac_pwd, $orgnamespace,$PMPTemplate);
+
 
 $RS_7484.end();
 
