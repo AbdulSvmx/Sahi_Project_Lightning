@@ -37,8 +37,8 @@ this.selectContactlookup = function(){
 		_wait(1000);
 	_click(_submit(" Go! "));
 	_wait(3000);
-	$Compname = _getText(_link(0,_under(_tableHeader("Installed Product ID"))));
-		_click(_link(0,_under(_tableHeader("Installed Product ID"))));
+	$Compname = _getText(_link(0,_under(_tableHeader("Installed Product Name"))));
+		_click(_link(0,_under(_tableHeader("Installed Product Name"))));
 		_selectWindow();
 		return $Compname;
 		};
@@ -61,9 +61,16 @@ this.createCase = function($casePriority,$caseBillingType,$caseDescription,$case
 	_setValue($sfm_pg_caseCreationFields.case_Description,$caseDescription);
 	_setSelected($sfm_pg_caseCreationFields.case_Origin,$caseOrigin);
 	_click($bo_pg_Cases.btn_save);
-	_assertNotVisible(_div("/Error: Invalid Data/"));
-	_wait(15000, _isVisible(_heading2("Case Detail")));
-	var $caseNumber = _getText($bo_pg_Cases.txt_caseNumber);
+//	_assertNotVisible(_div("/Error: Invalid Data/"));
+//	_wait(15000, _isVisible(_heading2("Case Detail")));
+	var $caseNumber = "";
+	if(_isVisible($bo_pg_Cases.txt_caseNumber)){
+		$caseNumber = _getText($bo_pg_Cases.txt_caseNumber);	
+	}
+	else{
+		$caseNumber = _getText(_span("efhpCenterValue  "));
+	}
+	
 	_logOutput($caseNumber+ " Case is created");
 //return $caseNumber;
 return [$caseNumber,$contactName,$accName,$componentname];
