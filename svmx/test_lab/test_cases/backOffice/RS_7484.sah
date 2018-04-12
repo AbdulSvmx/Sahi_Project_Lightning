@@ -18,12 +18,18 @@ $bo_act_PMPlanTemplate.saveConditionBasedPM();
 // Getting the values via API
 var $pmPlatevalue = "Select "+$orgnamespace+"__SM_Use_Current_Field_Value__c  from "+$orgnamespace+"__PM_Plan_Template__c where Name = '"+$PMPTemplate+"'";
 var $fetchquery = $op_act_sForceApiCall.sForceQuery($bac_un, $bac_pwd, $pmPlatevalue ,"query");
+if($orgnamespace == "SVMXC")
+{
+var $CurrentFielValue = $fetchquery[0].SVMXC__SM_Use_Current_Field_Value__c;
 
-var $CurrentFielValue = $fetchquery[0].$orgnamespace+__SM_Use_Current_Field_Value__c;
-
-
+}
+else
+{
+	
+	var $CurrentFielValue = $fetchquery[0].SVMXDEV__SM_Use_Current_Field_Value__c;
+}
 //To verify if Use Current Field Value is set to True by default
-_assertEqual(true,$CurrentFielValue);
+_assertEqual("true",$CurrentFielValue);
 
 
 $RS_7484.end();
