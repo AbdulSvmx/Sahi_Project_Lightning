@@ -89,7 +89,6 @@ else
 	_log("The checklist is not completed");
 
 
-
 $bo_act_SFW.deleteSFMWizard($wizardObject, $wizardIDName);
 $bo_act_SFM.deleteSFM($checklistName);
 $bo_act_questionlibrary.deletequestionlibrary($dateQuestion);

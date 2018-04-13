@@ -15,3 +15,8 @@ test.sah
 =======
 >>>>>>> 9c998aec78c1dde8004e2c458da581119cd81d78
 /bin
+.project
+svmx/test_lab/test_cases/swat/BVT_TC_002_SFW_with_standard_Wiz_steps.sah
+svmx/test_lab/test_cases/swat/BVT_TC_004_Linked_SFM.sah
+svmx/test_lab/test_cases/swat/BVT_TC_005_CustomLinkedProcess.sah
+svmx/test_lab/test_cases/swat/swat_excelData/swatdata.xlsx
