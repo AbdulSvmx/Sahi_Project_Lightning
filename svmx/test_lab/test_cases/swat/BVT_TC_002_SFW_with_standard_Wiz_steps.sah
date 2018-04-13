@@ -166,7 +166,7 @@ _setSpeed($g_stepSpeed);
 	_click(_image("/svmx-sfmd-edit-icon/"));
 	_setStrictVisibilityCheck(false);
 	_setValue(_textbox("Qty:"), "3");
-	_setValue(_textbox("/svmx-form-required-field/", _rightOf(_label("Unit Price:"))),"6000");
+	_setValue(_textbox("/svmx-form-required-field/", _rightOf(_label("/Unit Price/"))),"6000");
 	_click(_span("Update"));
 
 	//Add a Expense Line
@@ -176,7 +176,7 @@ _setSpeed($g_stepSpeed);
 	_click(_image("/svmx-sfmd-edit-icon/"));
 	_setStrictVisibilityCheck(false);
 	_setValue(_textbox("Qty:"), "4");
-	_setValue(_textbox("/svmx-form-required-field/", _near(_label("Unit Price:"))),"8500");
+	_setValue(_textbox("/svmx-form-required-field/", _near(_label("/Unit Price/"))),"8500");
 	_click(_span("Update"));
 	_wait(5000);
 	_click(_span("svmx-btn-icon svmx-sfmd-save-icon"));
