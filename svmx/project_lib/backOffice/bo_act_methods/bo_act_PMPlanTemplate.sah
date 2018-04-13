@@ -201,7 +201,48 @@ this.createCriteriaBasedPMTemplate = function($productName)
 		_click(_div("/svmx-grid-cell-inner/",_under(_div("Value"))));
 		_click(_div("/svmx-trigger-index/",_under(_div("Value"))));
 		_click(_listItem($value));
+		
 	};
+	
+	/*
+	 * Author : Meghana Rao
+	 * Adding multiple values to the Rows - For Picklsit Values
+	 */
+	
+	this.addpicklistvalues_advancedexpression= function($attribute,$operator,$value, $rownumber){
+		_click(_span("+ Add row"));
+		_click(_div("/svmx-grid-cell-inner/",_rightOf(_div($rownumber)),_under(_div("Attribute"))));
+		_click(_div("/svmx-trigger-index/",_rightOf(_div($rownumber)),_under(_div("Attribute"))));
+		_click(_div($attribute));
+		_click(_div("/svmx-grid-cell-inner/",_rightOf(_div($rownumber)),_under(_div("Operator"))));
+		_click(_div("/svmx-trigger-index/",_rightOf(_div($rownumber)),_under(_div("Operator"))));
+		_click(_listItem($operator));
+		
+		_click(_div("/svmx-grid-cell-inner/",_rightOf(_div($rownumber)),_under(_div("Value"))));
+		_click(_div("/svmx-trigger-index/",_rightOf(_div($rownumber)),_under(_div("Value"))));
+		_click(_listItem($value));
+	};
+	
+	/*
+	 * Author : Meghana Rao
+	 * Adding multiple values to the Rows - For Text Values
+	 */
+	this.adddatevalues_advancedexpression = function($attribute,$operator,$rownumber){
+		_click(_span("+ Add row"));
+		_click(_div("/svmx-grid-cell-inner/",_rightOf(_div($rownumber)),_under(_div("Attribute"))));
+		_click(_div("/svmx-trigger-index/",_rightOf(_div($rownumber)),_under(_div("Attribute"))));
+		_click(_div($attribute));
+		_click(_div("/svmx-grid-cell-inner/",_rightOf(_div($rownumber)),_under(_div("Operator"))));
+		_click(_div("/svmx-trigger-index/",_rightOf(_div($rownumber)),_under(_div("Operator"))));
+		_click(_listItem($operator));
+		_click(_div("/svmx-grid-cell-inner/",_rightOf(_div($rownumber)),_under(_div("Value"))));
+		_click(_div("/svmx-trigger-index/",_rightOf(_div($rownumber)),_under(_div("Value"))));
+		_click($bo_pg_PMPlanTemplate.btn_today);
+		_click(_div("Equals"));
+		
+	};
+	
+	
 	this.createPmPlan = function($pmPlanName,$PMTemplateName,$templateName){
 		_selectDomain();
 		_setValue(_textbox("planName"),$pmPlanName);
@@ -232,8 +273,20 @@ this.createCriteriaBasedPMTemplate = function($productName)
 		_wait(20000);
 		_click($bo_pg_PMPlanTemplate.btn_save);
 		
+		
 		_assertEqual(true,_isVisible($bo_pg_PMPlanTemplate.expression_notvalid)); // To verify if an expression is invalid
 
+		
+	};
+	
+	this.saveadvancedexpression = function($ExpressionName){
+		
+		_setValue($bo_pg_PMPlanTemplate.txt_advanced_expression,$ExpressionName);
+		_click(_span("Condition Rules"));
+		_wait(20000);
+		_click($bo_pg_PMPlanTemplate.btn_save);
+		_assertEqual(false,_isVisible($bo_pg_PMPlanTemplate.expression_notvalid)); // To verify if an expression is invalid
+		
 		
 	};
 	
