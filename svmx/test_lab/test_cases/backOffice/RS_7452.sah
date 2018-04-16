@@ -27,7 +27,7 @@ var $proName = $bo_act_products.createProduct("pro12", "--None--");
 
 // To set The SET007 to The given Map Name
 
-$bo_act_configurationProfiles.editGroupProfileForTextSettings("AutoBACGroup", "Preventive Maintenance", "Manage PM Plan", "SET007", $MapName);
+$bo_act_configurationProfiles.editGroupProfileForTextSettings($group_profilename, "Preventive Maintenance", "Manage PM Plan", "SET007", $MapName);
 
 var $PMPTemplate = $bo_act_PMPlanTemplate.createUsageBasedConditionPMPTemplateNoSave($proName);
 $bo_act_PMPlanTemplate.updateUsageConditionRulesGridWithAdjFields("Months", "Every", 1, $bo_act_common.currentDate("-"), $bo_act_common.getfutureDate(1,"-"),"Fixed", 1,100, 10,"Days");
