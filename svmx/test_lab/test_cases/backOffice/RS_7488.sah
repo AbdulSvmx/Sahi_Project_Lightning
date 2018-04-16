@@ -33,7 +33,7 @@ var $pmplan_fetch_query1 = $op_act_sForceApiCall.sForceQuery($bac_un, $bac_pwd, 
 
 var $PMPlantemplateID = $pmplan_fetch_query1[0].Id;
 
-var $pmplanquery = "Select Count(Id) mycount from "+$orgnamespace+"__PM_Schedule_Template__c where Name = '"+$PMPTemplate+"'";
+var $pmplanquery = "Select Count(Id) mycount from "+$orgnamespace+"__PM_Schedule_Template__c where  "+$orgnamespace+"__PM_Plan_Template__c = '"+$PMPlantemplateID+"'";
 var $pmplan_fetch_query = $op_act_sForceApiCall.sForceQuery($bac_un, $bac_pwd, $pmplanquery,"query");
 
 var $valuecount = $pmplan_fetch_query[0].mycount;
