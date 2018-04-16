@@ -34,7 +34,7 @@ $timeQuestion = $bo_act_common.generateRandomName("SwatTimeQuestion");
 $numberQuestion = $bo_act_common.generateRandomName("SwatNumberQuestion");
 $checkboxQuestion = $bo_act_common.generateRandomName("SwatCheckboxQuestion");
 $checkboxResponse = $bo_act_common.generateRandomName("SwatCheckboxResponse");
-$defaultText = "Default Text";
+var $defaultText = "Default Text";
 $defaultNumber = '6';
 var $checklistName = "Swat Checklist"+$number1;
 
