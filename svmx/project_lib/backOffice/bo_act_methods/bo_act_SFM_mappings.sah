@@ -36,6 +36,7 @@ var $bo_act_SFM_mappings = new function bo_act_SFM_mappings() {
 		_assertEqual(true,_isVisible($bo_pg_sfmMappings.verify_mapsaved));
 
 	};
+
 	
 	this.deleteSFMMappings = function($MapName, $sourceobject, $targetobject)
 	{	
