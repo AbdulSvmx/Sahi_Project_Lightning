@@ -26,7 +26,11 @@ var $bo_act_contacts = new function bo_contacts() {
 		// Need to return
 	};
 	
-
+	this.deleteContact = function($contactName){
+		  $bo_act_navigation.navigateToContactsPage();
+		  _click(_link($contactName));
+		  _click($bo_pg_contacts.btn_delete);
+	};
 
 };
 
