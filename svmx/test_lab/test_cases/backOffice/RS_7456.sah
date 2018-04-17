@@ -42,7 +42,7 @@ var $PMPlan = $bo_act_PMPlan.overwrite_mappedvalue($newAccountName, $parentaccNa
  */
 
 
-var $PMPlanQuery = "Select "+$orgnamespace+"__Account__r.Name from "+$orgnamespace+"__PM_Plan__c where Name = 'PMPlan174201812398'";
+var $PMPlanQuery = "Select "+$orgnamespace+"__Account__r.Name from "+$orgnamespace+"__PM_Plan__c where Name = '"+$PMPlan+"'";
 var $pmplanqueryfetch =  $op_act_sForceApiCall.sForceQuery($bac_un, $bac_pwd, $PMPlanQuery , "query");
 
 if($orgnamespace == "SVMXC")
