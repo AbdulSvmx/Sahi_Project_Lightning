@@ -350,6 +350,11 @@ var $bo_act_PMPlan = new function bo_act_PMPlan() {
 		_setValue($bo_pg_PMPlan.txt_planName,$PMPlanName);
 		_click($bo_pg_PMPlan.txt_planTemplateName);
 		_click(_listItem($PMPTemplate));
+		_setValue($bo_pg_PMPlan.txt_startDateInput,$bo_act_common.currentDate("/"));
+		_setValue($bo_pg_PMPlan.txt_endDateInput,$bo_act_common.getfutureDate(1, "/"));
+		_wait(10000);
+		_click($bo_pg_PMPlan.btn_saveCustomUI);
+		return $PMPlanName;
 		
 	
 	};

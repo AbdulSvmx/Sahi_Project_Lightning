@@ -21,5 +21,9 @@ var $bo_pg_sfmMappings = new function bo_pg_sfmMappings() {
 	 this.sourcecombobox = _f("SFMExpressionBuilderSWF").s_combobox("sourceCombo");
 	 this.combo_account = _f("SFMExpressionBuilderSWF").s_combobox("valuesCombo[1]");
 	 this.verify_mapsaved = _f("SFMExpressionBuilderSWF").label("Map saved");
-	
+	 this.txt_map_search = _f("SFMExpressionBuilderSWF").s_textinput("textInput[2]");
+	 this.mapssearch = _f("SFMExpressionBuilderSWF").s_combobox("searchCombo");
+	this.btn_delete = _f("SFMExpressionBuilderSWF").s_button("Delete");
+	this.pop_yes = _f("SFMExpressionBuilderSWF").button("Yes");
+	this.map_deleted_verificqtion = _f("SFMExpressionBuilderSWF").label("Map deleted");
 };
