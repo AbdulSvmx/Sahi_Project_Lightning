@@ -1,10 +1,10 @@
 
-$bo_act_login.login($url_checklist, $un_checklist, $pwd_checklist);
+$bo_act_login.login($g_url, $bac_un, $bac_pwd);
 
 /*
  * Deleting the Checklist questions from the org
  */
 var $delete_Query = "delete[Select Id from "+$orgnamespace+"__Question_Bank__c where "+$orgnamespace+"__Question__c like '%A RS_%'];";
-var $delete_data = $op_act_sForceApiCall.sForceQuery($userName, $password, $delete_Query , "create");
+var $delete_data = $op_act_sForceApiCall.sForceQuery($bac_un, $bac_pwd, $delete_Query , "create");
 
 
