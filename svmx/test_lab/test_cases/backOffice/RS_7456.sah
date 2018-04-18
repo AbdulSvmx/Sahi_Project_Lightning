@@ -1,7 +1,7 @@
 
 //author - Meghana Rao
 
-var $RS_7456 = _testcase("$RS_7456","Verify adding a new coverage and saving the pm plan from Account");
+var $RS_7456 = _testcase("$RS_7456","Verify the user entered value takes precedence over mapping");
 $RS_7456.start();
 _setSpeed($g_stepSpeed);
 var $Workbenchurl = "https://workbench.developerforce.com/login.php";

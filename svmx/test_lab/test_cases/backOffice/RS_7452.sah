@@ -1,7 +1,7 @@
 
 //author - Meghana Rao
 
-var $RS_7452 = _testcase("$RS_7452","Verify adding a new coverage and saving the pm plan from Account");
+var $RS_7452 = _testcase("$RS_7452","Verify the mapping from Account to PM Plan with PM Template mapping.");
 $RS_7452.start();
 _setSpeed($g_stepSpeed);
 var $Workbenchurl = "https://workbench.developerforce.com/login.php";
