@@ -1,7 +1,7 @@
 
 //author - Meghana Rao P
 
-var $RS_7490 = _testcase("$RS_7490","Verify When Start date or End Date is changed before PM plan is saved to DB");
+var $RS_7490 = _testcase("$RS_7490","Veify PM Plan Status when 'Save' is done with Coverages and SET002 is TRUE");
 $RS_7490.start();
 _setSpeed($g_stepSpeed);
 var $Workbenchurl = "https://workbench.developerforce.com/login.php";

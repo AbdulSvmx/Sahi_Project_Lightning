@@ -175,7 +175,7 @@ var $bo_act_PMPlan = new function bo_act_PMPlan() {
 		
 		_click($bo_pg_PMPlan.btn_save_IB);
 		_click($bo_pg_PMPlan.btn_saveCustomUI);
-		
+		return $PMPlanName;
 		
 	};
 	// Author Meghana Rao
