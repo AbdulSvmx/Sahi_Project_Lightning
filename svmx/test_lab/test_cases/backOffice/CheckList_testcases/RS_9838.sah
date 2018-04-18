@@ -29,7 +29,3 @@ $bo_act_checklistdesigner.verifythechanges_addquestion_toform("RS_9838 with TAG 
 $bo_act_checklistdesigner.re_openChecklistTypeSFM("A RS_9838 Process 1"+$number1+"", true);
 $bo_act_checklistdesigner.verifythechanges_addquestion_toform("RS_9838 with TAG Question2"+$number1+"", "RS_9838TAG");
 
-
-// To delete SFM
-$bo_act_navigation.navigateToSfmTransactionDesigner();
-$bo_act_SFM.deleteSFM("A RS_9838 Process 1"+$number1+"");
