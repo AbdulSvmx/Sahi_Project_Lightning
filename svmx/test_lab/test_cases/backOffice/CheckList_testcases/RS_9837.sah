@@ -37,11 +37,6 @@ $bo_act_checklistdesigner.verifyquestionnotpresent("RS_9837 with TAG Question1"+
 
 
 
-// To delete the SFM
-
-$bo_act_navigation.navigateToSfmTransactionDesigner();
-$bo_act_SFM.deleteSFM("A RS_9837 Process 1"+$number1+"");
-
 
 
 $RS_9837.end();

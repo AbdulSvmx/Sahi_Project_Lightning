@@ -49,11 +49,4 @@ $bo_act_checklistdesigner.verifythechangesinchecklistformdesigner("Changed A RS_
 
 
 
-$bo_act_navigation.navigateToSfmTransactionDesigner();
-$bo_act_SFM.deleteSFM("A RS_9845 Process 1"+$number1+"");
-
-
-$bo_act_navigation.navigateToSfmTransactionDesigner();
-$bo_act_SFM.deleteSFM("A RS_9845 Process 2"+$number1+"");
-
 $RS_9845.end();

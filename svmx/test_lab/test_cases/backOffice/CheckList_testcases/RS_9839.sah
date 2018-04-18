@@ -29,7 +29,4 @@ $bo_act_checklistdesigner.verifythequestionsonUI("RS_9839 with TAG Question2"+$n
 
 
 
-$bo_act_navigation.navigateToSfmTransactionDesigner();
-$bo_act_SFM.deleteSFM("A RS_9839 Process 10.5080865691996577");
-
 

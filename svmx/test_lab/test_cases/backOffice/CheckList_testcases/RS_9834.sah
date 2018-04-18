@@ -20,9 +20,5 @@ $bo_act_checklistdesigner.create_newquestion_tag_in_designer("RS_9834 with TAG Q
 
 $bo_act_checklistdesigner.create_newquestion_tag_in_designer("RS_9834 with TAG Question2"+$number1+"", "RS_9834TAG");
 
-// To delete SFM
-
-$bo_act_navigation.navigateToSfmTransactionDesigner();
-$bo_act_SFM.deleteSFM("A RS_9834 Process 1"+$number1+"");
 
 

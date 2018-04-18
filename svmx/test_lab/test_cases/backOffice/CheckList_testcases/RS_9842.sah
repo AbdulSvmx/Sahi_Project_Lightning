@@ -22,6 +22,5 @@ _wait(1000);
 $bo_act_checklistdesigner.newChecklistTypeSFM("A RS_9842 Process 1"+$number1+"","to generate a Checklist/Survey type of Process", "Work Order");
 $bo_act_checklistdesigner.searchthevaluesinchecklist_groupbytagoff("A RS_9842 Question", "RS9842TAG" , "9842");
 
-$bo_act_navigation.navigateToSfmTransactionDesigner();
-$bo_act_SFM.deleteSFM("A RS_9842 Process 1"+$number1+"");
+
 $RS_9842.end();
