@@ -25,7 +25,4 @@ $bo_act_checklistdesigner.findthevaluesinChecklist("Attachment@#%_Question!!!!",
 
 
 
-$bo_act_navigation.navigateToSfmTransactionDesigner();
-$bo_act_SFM.deleteSFM("Rs_9856 Checklist Process "+$number1+"");
-
 $RS_9856.end();

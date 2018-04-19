@@ -234,7 +234,7 @@ this.cleanUpfunctionold = function($value)
 		// Changes added by Meghana
 		
 		this.deleteCase = function($userName,$password,$value){
-			var $delete_Query = "delete [Select Id from Case where Name = '"+$value+"'];";
+			var $delete_Query = "delete [Select Id from Case where Name ='"+$value+"'];";
 			var $delete_data = $op_act_sForceApiCall.sForceQuery($userName, $password, $delete_Query , "create");	
 			
 		};
