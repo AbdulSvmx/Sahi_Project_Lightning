@@ -64,6 +64,30 @@ this.createUsageBasedConditionPMPTemplateNoSave = function($productName)
 	return $PMTemplateName;
 };
 
+/*
+ * Author : Meghana Rao
+ * To create a PM Plan Template with different Date time in Activity Date
+ * 
+ */
+
+this.createUsageBasedCondition_DifferentDate = function($productName,$DateTime)
+{
+	
+	var $PMTemplateName = $bo_act_common.generateRandomName("PMT");
+	$bo_act_navigation.navigateToPMPlanTemplatePage();
+	_click($bo_pg_PMPlanTemplate.btn_createConditionBasedPMPTemplate);
+	_wait(60000,_isVisible($bo_pg_PMPlanTemplate.txt_templateName));
+	_setValue($bo_pg_PMPlanTemplate.txt_templateName,$PMTemplateName);
+	_setValue($bo_pg_PMPlanTemplate.txt_product,$productName);
+	_click($bo_pg_PMPlanTemplate.img_filterIcon);
+	_click(_div(0,_rightOf($bo_pg_PMPlanTemplate.txt_product)));
+	_click(_listItem($productName));
+	_click($bo_pg_PMPlanTemplate.txt_activitydate);
+	_click(_listItem($DateTime));
+	return $PMTemplateName;
+
+};
+
 this.updateUsageConditionRulesGridWithOutAdjFields = function($attribute,$operator,$frequency,$startAt,$stopAt){
 	_wait(5000);
 	_click($bo_pg_PMPlanTemplate.link_addRow);

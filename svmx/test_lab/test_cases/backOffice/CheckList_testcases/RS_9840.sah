@@ -14,19 +14,15 @@ _wait(1000);
 //To verify the Boundary value of HELP URL text
 
 
-$number1 = Math.floor(Math.random() * 3.5);
-var $transactioname = "A RS_9840 Process 1"+$number1+"";
-$bo_act_checklistdesigner.newChecklistTypeSFM($transactioname,"to generate a Checklist/Survey type of Process", "Work Order");
+var $QuestionName = $bo_act_common.generateRandomName("A RS_9840");
+var $Process1 = $bo_act_common.generateRandomName("A_RS_9840_Pro1");
+$bo_act_checklistdesigner.newChecklistTypeSFM($Process1,"to generate a Checklist/Survey type of Process", "Work Order");
 
-var $questiontext = "A RS_9840 Question "+$number1+"";
-$bo_act_checklistdesigner.addQuestionToChecklist1($questiontext, "");
-$bo_act_checklistdesigner.re_openChecklistTypeSFM($transactioname, true);
-$bo_act_checklistdesigner.verifyquestion_undertags($questiontext, "Untagged");
+$bo_act_checklistdesigner.addQuestionToChecklist1($QuestionName, "");
+$bo_act_checklistdesigner.re_openChecklistTypeSFM($Process1, true);
+$bo_act_checklistdesigner.verifyquestion_undertags($QuestionName, "Untagged");
 _wait(10000);
 
 
-$bo_act_navigation.navigateToSfmTransactionDesigner();
-$bo_act_SFM.deleteSFM("A RS_9840 Process 1"+$number1+"");
-// To create another Checklist with Same Question
 
 $RS_9840.end();

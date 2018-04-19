@@ -20,10 +20,9 @@ $bo_act_serviceMaintenanceContracts.AddCoveredProductToSCON($sconName, $IBName);
 var $PMPlan = $bo_act_PMPlan.createConditionBasedPlanwithoutPMPlanTemplate($sconName,$IBName, "Months", "Every", 1, $bo_act_common.currentDate("-"), $bo_act_common.getfutureDate(1,"-"),"Fixed", 1,100, 10,"Days");
 
 
-
 // CleanUp Function
 
-$bo_act_common.cleanUpfunctionold($PMPlan);
+$bo_act_common.cleanUpfunction($PMPlan);
 
 $bo_act_common.deleteAccount($bac_un, $bac_pwd, $accName);
 $bo_act_common.deleteContact($bac_un, $bac_pwd, $contactName);

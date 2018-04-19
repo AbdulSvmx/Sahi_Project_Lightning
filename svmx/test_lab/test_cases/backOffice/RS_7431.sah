@@ -24,3 +24,5 @@ $bo_act_PMProcess.verifyUIfieldsonPMProcess("Preventive Maintenance Processes",f
 var $data = _readExcelFile("../../backOffice/bo_excleData/BORegressionDatasheet.xlsx","Sheet1",true);
 var $rs_7431_create = $data[1]["PMProcess_changestandard"];
 var $rs_7431_value = $op_act_sForceApiCall.sForceQuery($un_checklist, $pwd_checklist, $rs_7431_create ,"create");
+
+$RS_7431.end();
