@@ -23,7 +23,7 @@ var $g_pwd = "smax@123";
 // var $bac_pwd = "cloud_102";
 // var $bac_un = "bac_automationdev@ge.com";
 // var $bac_pwd = "welcome-01";
- var $bac_un = "orgsadmin@svmx-test4.org.test4part2"; //pointing to Base
+ var $bac_un = "orgsadmin@svmx-test4.org.test4part2"; //pointing to Dev
  var $bac_pwd = "welcome-02";
 var $bac_PRTun = "bhupendra.auto@upgrade.com"; // Most Used Customer
 var $bac_PRTpwd = "servicemax@123";
@@ -36,7 +36,7 @@ var $url_checklist = "https://test.salesforce.com";
 
 // SFMD Global Variables
 var $sfmUsn = "svmx-sfdtest@svmx-sfdtest.org.sfdtest1"; // dev
-var $sfmPwd = "servicemax1";
+var $sfmPwd = "servicemax2";
 // var $sfmUsn = "sysadmin01@sfdautomation.com"; // base
 // var $sfmPwd = "Maxplore3";
 
