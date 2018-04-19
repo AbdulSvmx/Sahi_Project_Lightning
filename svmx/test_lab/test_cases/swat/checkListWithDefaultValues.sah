@@ -28,21 +28,21 @@ $selectTemplateAtRunTime = true;
 $sfmName1 = "to generate a Checklist/Survey type of Process";
 $objectName = "Work Order";
 var checklist_lnk = _link("Checklists");
-$dateQuestion = $bo_act_common.generateRandomName("SwatDateQuestion");
-$textQuestion = $bo_act_common.generateRandomName("SwatTextQuestion");
-$timeQuestion = $bo_act_common.generateRandomName("SwatTimeQuestion");
-$numberQuestion = $bo_act_common.generateRandomName("SwatNumberQuestion");
-$checkboxQuestion = $bo_act_common.generateRandomName("SwatCheckboxQuestion");
-$checkboxResponse = $bo_act_common.generateRandomName("SwatCheckboxResponse");
-var $defaultText = "Default Text";
-$defaultNumber = '6';
+//$dateQuestion = $bo_act_common.generateRandomName("SwatDateQuestion");
+//$textQuestion = $bo_act_common.generateRandomName("SwatTextQuestion");
+//$timeQuestion = $bo_act_common.generateRandomName("SwatTimeQuestion");
+//$numberQuestion = $bo_act_common.generateRandomName("SwatNumberQuestion");
+//$checkboxQuestion = $bo_act_common.generateRandomName("SwatCheckboxQuestion");
+//$checkboxResponse = $bo_act_common.generateRandomName("SwatCheckboxResponse");
+//var $defaultText = "Default Text";
+//$defaultNumber = '6';
 var $checklistName = "Swat Checklist"+$number1;
 
-$bo_act_questionlibrary.createDefaultDateTimeQuestion($dateQuestion, "DateTime", "Value");
-$bo_act_questionlibrary.createTextQuestion($textQuestion, "Text" , "https://www.google.com", "SWAT" , $defaultText);
-_click($bo_pg_servicemaxSetup.btn_backToSetupHome);
-$bo_act_questionlibrary.createCheckbox_RadioQuestion($checkboxQuestion, "Checkbox", "https://www.google.com", $checkboxResponse);
-$bo_act_questionlibrary.createNumberQuestion($numberQuestion, "Number" , "https://www.google.com", "SWAT", '6');
+//$bo_act_questionlibrary.createDefaultDateTimeQuestion($dateQuestion, "DateTime", "Value");
+//$bo_act_questionlibrary.createTextQuestion($textQuestion, "Text" , "https://www.google.com", "SWAT" , $defaultText);
+//_click($bo_pg_servicemaxSetup.btn_backToSetupHome);
+//$bo_act_questionlibrary.createCheckbox_RadioQuestion($checkboxQuestion, "Checkbox", "https://www.google.com", $checkboxResponse);
+//$bo_act_questionlibrary.createNumberQuestion($numberQuestion, "Number" , "https://www.google.com", "SWAT", '6');
 
 
 
@@ -51,14 +51,15 @@ $bo_act_navigation.navigateToSfmTransactionDesigner();
 _wait(60000, _isVisible($bo_pg_sfmTransactionAndDesigner.btn_newSFM));
 _wait(1000);
 $bo_act_checklistdesigner.newChecklistTypeSFM($checklistName, $sfmName1 ,$objectName);
-$bo_act_checklistdesigner.addChecklistQuestionToForm($dateQuestion);
-$bo_act_checklistdesigner.addChecklistQuestionToForm($textQuestion);
-$bo_act_checklistdesigner.addChecklistQuestionToForm($numberQuestion);
-$bo_act_checklistdesigner.addChecklistQuestionToForm($checkboxQuestion);
+//$bo_act_checklistdesigner.addChecklistQuestionToForm($dateQuestion);
+//$bo_act_checklistdesigner.addChecklistQuestionToForm($textQuestion);
+//$bo_act_checklistdesigner.addChecklistQuestionToForm($numberQuestion);
+//$bo_act_checklistdesigner.addChecklistQuestionToForm($checkboxQuestion);
 //adding attachment type question to Checklist process
-//_click($bo_pg_formDesigner.btn_addNewQuestion);
-//_select($bo_pg_formDesigner.btn_selectQuestionFromList);
-//_setValue(_f("main").s_dropdownlist("ansType"), "Attachment");
+_click($bo_pg_formDesigner.tab_clickFormDesigner); //comment it later
+_click($bo_pg_formDesigner.btn_addNewQuestion);
+_select($bo_pg_formDesigner.btn_selectQuestionFromList);
+_click($bo_pg_formDesigner.btn_selectAttachmentType);
 
 $bo_pg_formDesigner.btn_save_close;
 
@@ -95,6 +96,7 @@ $bo_act_questionlibrary.deletequestionlibrary($dateQuestion);
 $bo_act_questionlibrary.deletequestionlibrary($textQuestion);
 $bo_act_questionlibrary.deletequestionlibrary($numberQuestion);
 $bo_act_questionlibrary.deletequestionlibrary($checkboxQuestion);
+$swat_act_workOrders.deleteWorkOrder($workOrderNo);
 
 
 $ChecklistVerification.end();
