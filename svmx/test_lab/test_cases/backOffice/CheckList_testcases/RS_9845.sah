@@ -24,7 +24,7 @@ var $Responset = $bo_act_common.generateRandomName("AResponse_9845");
 $bo_act_checklistdesigner.newChecklistTypeSFM($Process1,"to generate a Checklist/Survey type of Process", "Work Order");
 
 
-$bo_act_checklistdesigner.addQuestionToChecklist1($Process1, "");
+$bo_act_checklistdesigner.addQuestionToChecklist1($QuestionName, "");
 _wait(10000);
 
 _call(top.location.reload());

@@ -15,8 +15,8 @@ var $bo_act_installedProduct = new function bo_act_installedProduct() {
 		 _click($bo_pg_installedProducts.btn_new);
 		if(_condition(_heading2("Select Installed Product Record Type") != null))
 			_click($bo_pg_installedProducts.btn_continue); 
-		_setValue($bo_pg_installedProducts.txt_productName,$productName);
-		_setValue($bo_pg_installedProducts.txt_serialNumber, $serialNum);
+			_setValue($bo_pg_installedProducts.txt_productName,$productName);
+			_setValue($bo_pg_installedProducts.txt_serialNumber, $serialNum);
 		_setValue($bo_pg_installedProducts.txt_accountName, $accountName);
 		_setValue($bo_pg_installedProducts.txt_contactName, $contactName);
 		_setValue($bo_pg_installedProducts.txt_installedProductName, $IBName);
@@ -28,6 +28,29 @@ var $bo_act_installedProduct = new function bo_act_installedProduct() {
 		_wait(15000, _isVisible(_heading2($IBName)));
 		return $IBName;
 		// Need to return
+	};
+	this.createIB_Statusvalue =  function($productName,$accountName,$contactName, $status) {
+		var $serialNum = $bo_act_common.generateRandomName("Ser");
+		var $IBName = $bo_act_common.generateRandomName("IB_");
+		 $bo_act_navigation.navigateToInstalledProductPage();
+		_wait(5000,_isVisible($bo_pg_installedProducts.btn_new));
+		 _click($bo_pg_installedProducts.btn_new);
+		if(_condition(_heading2("Select Installed Product Record Type") != null))
+			_click($bo_pg_installedProducts.btn_continue); 
+		_setValue($bo_pg_installedProducts.txt_productName,$productName);
+		_setValue($bo_pg_installedProducts.txt_serialNumber, $serialNum);
+		_setValue($bo_pg_installedProducts.txt_accountName, $accountName);
+		_setValue($bo_pg_installedProducts.txt_contactName, $contactName);
+		
+		_setValue($bo_pg_installedProducts.txt_installedProductName, $IBName);
+		_setValue($bo_pg_installedProducts.txt_installedDate);
+		_setValue(_textbox("City"),"Bangalore");
+		_click($bo_pg_installedProducts.btn_save);
+		_assertNotVisible(_div("/Error: Invalid Data/"));
+		_logOutput($IBName+ " IB is created");
+		_wait(15000, _isVisible(_heading2($IBName)));
+		return $IBName;
+	
 	};
 	
 	this.createIB_DistributorAccount = function($productName,$distributoraccountName,$contactName, $accountName){
@@ -85,9 +108,6 @@ var $bo_act_installedProduct = new function bo_act_installedProduct() {
 		return _getText($bo_pg_installedProducts.txt_caseNumber);
 	};
 	
-// Edit Installed Product
-	
-
 
 
 };
