@@ -43,8 +43,8 @@ var $casePriority = "High";// $p4 = Warranties/Scon/Both for Entitlement check?
 var $pastYear = 2;  // Start Date for Service Contract
 var $futureYear = 2;
 //Navigate to Auto Entitlement Rules - Case Rule1
-//$autoEntitlementRuleName_Case1 = $bo_act_autoEntitlementRule_Case.createAutoEntitlementRule_Case($CaseField1, $Operator, $Value1, $CaseField2, $Value2, $p1, $p2);
-//_assertExists(_span($autoEntitlementRuleName_Case1));
+$autoEntitlementRuleName_Case1 = $bo_act_autoEntitlementRule_Case.createAutoEntitlementRule_Case($CaseField1, $Operator, $Value1, $CaseField2, $Value2, $p1, $p2);
+_assertExists(_span($autoEntitlementRuleName_Case1));
 
 
 
