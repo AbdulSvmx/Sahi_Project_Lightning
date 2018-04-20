@@ -80,7 +80,7 @@ _setSpeed($g_stepSpeed);
 	var $sfmToBeCloned5 ="Create New Shipment Order";
 	var $sfmName5 = $bo_act_common.generateRandomName("Create New Shipment Order");
 	var $sfmTemplateSaveAsName5 = $sfmName5;
-	var $sfmTemplate5 = "SVMXSTD: Create New Shipment Order";    
+	var $sfmTemplate5 = "SVMXSTD: Create Shipment from RMA";    
 	
 	
 	$sfm_act_SFM.cloneTDM016($sfmToBeCloned1, $sfmName1, $isCustom, $sfmTemplateSaveAsName1, $sfmTemplate1, "", "");
