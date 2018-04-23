@@ -1,10 +1,10 @@
 var $rs_7009 = _testcase("RS_7009","Verify standard and custom Multisource SFM process.");
 $rs_7009.start();
 var $processName = "Create Service Contract From Account";
-var $sfmName = "RS7009_1150";
-var $sfmPgLayoutName = "sm_pg_l_1150";
-var $wizTitle = "WIZTest1150";
-var $sfmPwd = "maxplore2";
+var $sfmName = $bo_act_common.generateRandomName("SFM_Auto_");
+var $sfmPgLayoutName = $bo_act_common.generateRandomName("SFM_Auto_Page");
+var $wizTitle = $bo_act_common.generateRandomName("SFM Wiz");
+//var $sfmPwd = "maxplore2";
 $bo_act_login.login($g_url,$sfmUsn,$sfmPwd);
 $accToAdd = ["Account1150"];
 
@@ -16,7 +16,7 @@ $sfm_act_Transactions.cloneAndSaveProcess($processName,$sfmName,$sfmPgLayoutName
 //Add the process to SFM Wizard in Account
 $bo_act_navigation.navigateToSfmWizard();
 $sfm_act_createCustomWizard.chooseObject("Account");
-$sfm_act_createCustomWizard.addManageWizSteps($wizTitle,"SFM",$sfmName,"Sysadmin01 Group");
+$sfm_act_createCustomWizard.addManageWizSteps($wizTitle,"SFM",$sfmName);
 
 
 //Create a New Account

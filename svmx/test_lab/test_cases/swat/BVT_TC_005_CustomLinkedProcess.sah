@@ -9,14 +9,14 @@
 //
 ///////////////////////////////////
 */
-var $rs_7011 = _testcase("$BVT_TC_004_LinkedProcess","Verify linked Process.");
+var $rs_7011 = _testcase("$BVT_TC_005_LinkedProcess","Verify linked Process.");
 $rs_7011.start();
 
 
 		$woName="";
 		var $url="https://test.salesforce.com";
-		var $sfmUsn="lohithaadmin@swatpart2.com";
-		var $sfmPwd="maxpl0re2";
+		var $sfmUsn="shashikala.svmx@ge.com";
+		var $sfmPwd="maxpl0re";
 
 		//Variables Declarations
 		$LinkedprocessName = "Manage Work Details for Products Serviced";
@@ -31,6 +31,7 @@ $rs_7011.start();
 		
 		// Creation of Linked SFM Process
 		$bo_act_login.login($url,$sfmUsn,$sfmPwd);
+		
 		$bo_act_navigation.navigateToSfmTransactionDesigner();
 		_wait(20000,_isVisible($bo_pg_sfmTransactionAndDesigner.lbl_ServiceFlowManager));
 		$sfm_act_Transactions.cloneAndSaveProcess($LinkedprocessName, $LinkedsfmName, $LinkedsfmPgLayoutName);
@@ -40,9 +41,9 @@ $rs_7011.start();
 		
 		//Creation of main SFM Process
 		$bo_act_navigation.navigateToSfmTransactionDesigner();
-		_wait(5000,_isVisible($bo_pg_sfmTransactionAndDesigner.lbl_ServiceFlowManager));
+		_wait(10000,_isVisible($bo_pg_sfmTransactionAndDesigner.lbl_ServiceFlowManager));
 		$sfm_act_SFM.selectSFM($processName,false);
-		_wait(3000,_isVisble($bo_pg_sfmTransactionAndDesigner.btn_clone));
+		_wait(5000,_isVisble($bo_pg_sfmTransactionAndDesigner.btn_clone));
 		_click($bo_pg_sfmTransactionAndDesigner.btn_clone);
 		_wait(60000, _isVisible($bo_pg_sfmTransactionAndDesigner.txt_name));
 		_setValue($bo_pg_sfmTransactionAndDesigner.txt_name, $sfmName);
@@ -72,8 +73,8 @@ $rs_7011.start();
 		//_wait(5000);
 		_click(_f("main").s_label($LinkedsfmName));
 		_wait(5000,_isVisible($bo_pg_sfmTransactionAndDesigner.btn_moveToRight));
-		_click(_f("main").s_button("Add[2]"));
-		//_click($bo_pg_sfmTransactionAndDesigner.btn_moveToRight);
+		//_click(_f("main").s_button("Add[2]"));
+		_click($bo_pg_sfmTransactionAndDesigner.btn_moveToRight);
 		_wait(5000,_isVisible($bo_pg_sfmTransactionAndDesigner.btn_finalQuickSave));
 		_click($bo_pg_sfmTransactionAndDesigner.btn_finalQuickSave);
 		_wait(5000,_isVisible($bo_pg_sfmTransactionAndDesigner.btn_saveAndclose));
@@ -127,6 +128,9 @@ $rs_7011.start();
 		_click($sfm_pg_wizardWindow.btn_edit);
 		_setValue($sfm_pg_wizardWindow.txt_part,$productName1);
 		_click($sfm_pg_wizardWindow.btn_update);
+		_wait(10000);
+		_click($sfm_pg_wizardWindow.btn_quickSave);
+		_wait(30000,_isVisible($sfm_pg_wizardWindow.btn_downArrow));
 		_click($sfm_pg_wizardWindow.btn_downArrow);
 		_wait(10000);
 		_click(_span($LinkedsfmName));

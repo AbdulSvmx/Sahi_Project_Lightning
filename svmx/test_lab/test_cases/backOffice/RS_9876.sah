@@ -5,7 +5,7 @@
 	//Author:Mamata
 	var $RS_9876 = _testcase("RS_9876", "On Load : Web service Test In Delivery");
 	$RS_9876.start();
-	_setSpeed(100);
+	_setSpeed($g_stepSpeed);
 
 	var $sfmToBeCloned="Create Usage Lines from Estimates";
 	var $sfmName=$bo_act_common.generateRandomName("SFMRS9876");

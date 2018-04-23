@@ -3,7 +3,7 @@
 //Author:Mamata 
 	var $RS_10023 = _testcase("RS_10023", "Before Save/Insert: Webservice Test In Delivery");
 	$RS_10023.start();
-	_setSpeed(100);
+	_setSpeed($g_stepSpeed);
 
 	var $sfmToBeCloned="Create Usage Lines from Estimates";
 	var $sfmName=$bo_act_common.generateRandomName("SFMRS10023")

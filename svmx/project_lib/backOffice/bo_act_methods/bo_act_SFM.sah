@@ -16,7 +16,7 @@ var $bo_act_SFM = new function bo_act_SFM() {
 
 	this.cloneSFM = function($sfmNameToBeCloned, $sfmName, $isCustom, $sfmTemplate, $sfmTemplateSaveAsName, $fieldName, $containerName) {
 
-		$bo_pg_sfmTransactionAndDesigner.selectSFM($sfmNameToBeCloned, $isCustom);
+		$sfm_act_SFM.selectSFM($sfmNameToBeCloned, $isCustom);
 		_click($bo_pg_sfmTransactionAndDesigner.btn_clone);
 		_wait(3000);
 		_wait(60000, _isVisible($bo_pg_sfmTransactionAndDesigner.txt_name));
@@ -51,7 +51,7 @@ var $bo_act_SFM = new function bo_act_SFM() {
 
 		return $callBack.returnResult($result, "","cloneSfm");
 
-		_setSpeed(100);
+		_setSpeed($g_stepSpeed);
 	};
 	
 	//By Mamta
@@ -175,31 +175,22 @@ var $bo_act_SFM = new function bo_act_SFM() {
 			_click($bo_pg_sfmTransactionAndDesigner.btn_saveAndclose);
 			_wait(2000);
 
-		_setSpeed(100);	
+			_setSpeed($g_stepSpeed);	
 		}
 		
 		this.deleteSFM=function($sfmName){
+			$bo_act_navigation.navigateToSfmTransactionDesigner();
 			_click($bo_pg_sfmTransactionAndDesigner.btn_yourCustomSfmTransactions);
 			_setValue(_f("main").s_textinput("searchText[3]"),$sfmName);
-			if (_isVisible(_f("main").s_checkbox("/Chk/").leftOf(_f("main").s_label($sfmName), 10, 10))) {
-			_wait(3000);
-			_click(_f("main").s_checkbox("/Chk/").leftOf(_f("main").s_label($sfmName), 10, 10));
-
-		} else if (_isVisible(_f("main").s_checkbox(2).leftOf(_f("main").s_label($sfmName), 10, 10))) {
-			_wait(3000);
-			_click(_f("main").s_checkbox(2).leftOf(_f("main").s_label($sfmName), 10, 10));
-
-		} 	else if (_isVisible(_f("main").s_checkbox("/chk/").leftOf(_f("main").s_label($sfmName), 10, 10))) {
-			_wait(3000);
-			_click(_f("main").s_checkbox("/chk/").leftOf(_f("main").s_label($sfmName), 10, 10));
-
-		}else {
-			_click(_f("main").s_checkbox("/CheckBox/").leftOf(_f("main").s_label($sfmName), 10, 10));
-		} 
+			_wait(3000)
+			_setStrictVisibilityCheck(true);
+			$sfm_act_SFM.selectSFM($sfmName,true);
 			_takePageScreenShot();
 			_click($bo_pg_sfmTransactionAndDesigner.btn_clickDeleteButton);
 			_wait(1000)
 			_click($bo_pg_sfmTransactionAndDesigner.PopUpMessageConformationForDelete);
+			_setStrictVisibilityCheck(false);
+
 		}
 			this.backToSfmList=function(){
 				_click($bo_pg_sfmTransactionAndDesigner.btn_backToList);
@@ -344,7 +335,9 @@ var $bo_act_SFM = new function bo_act_SFM() {
 							_click(_f("main").s_datagroup("dataGroup[3]"));
 							_click(_f("main").s_textinput("searchText[4]"));
 							_setValue(_f("main").s_textinput("searchText[4]"),"Covered");
-							_doubleClick(_f("main").s_label("Covered %[1]"));							
+							//_doubleClick(_f("main").s_label("Covered %[1]"));	
+							_click(_f("main").s_label("Covered %[1]"))
+							_click(_f("main").s_button("Add Field"));
 
 							_click(_f("main").s_datagroup("dataGroup[3]"));
 							_click(_f("main").s_textinput("searchText[4]"));

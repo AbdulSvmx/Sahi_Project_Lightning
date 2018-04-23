@@ -4,7 +4,7 @@
 
 var $RS_5258 = _testcase("$RS_5258","Create a PM Plan from Service Contract with coverage type as Location");
 $RS_5258.start();
-_setSpeed(100);
+_setSpeed($g_stepSpeed);
 
 //Pre - Condition 
 $bo_act_login.login($g_url, $bac_un, $bac_pwd);
@@ -39,12 +39,21 @@ _assertEqual($startDate,$lastRunDate,"Last Run Date is not equal to start date")
 _assert($lastRunDate != $actualScheduledOn,"Issue in Last Run Date and Scheduled On date");
 
 
+$bo_act_common.deleteAccount($bac_un, $bac_pwd, $accName);
+$bo_act_common.deleteIB($bac_un, $bac_pwd, $orgnamespace,$installedProduct);
+$bo_act_common.deleteProduct($bac_un, $bac_pwd,$proName);
+$bo_act_common.deleteSLA($bac_un, $bac_pwd, $orgnamespace, $slaterm);
+$bo_act_common.deleteSCON($bac_un, $bac_pwd, $orgnamespace, $sconName);
+$bo_act_common.deletePMPlantemplate($bac_un, $bac_pwd, $orgnamespace,$PMPTempName);
+$bo_act_common.deletePMPlan($bac_un, $bac_pwd, $orgnamespace,$PMPlanName);
+$bo_act_common.deleteLocation($bac_un, $bac_pwd, $orgnamespace,$location);
+
 //Clean up functions
 
-var $datacreated = [$PMPlanName,$PMPTempName,$accName,$slaterm,$proName,$installedProduct,$location,$sconName];
-for (var i = 0; i < $datacreated.length; i++) {
-	$bo_act_common.cleanUpfunction($datacreated[i]);
-}
+//var $datacreated = [$PMPlanName,$PMPTempName,$accName,$slaterm,$proName,$installedProduct,$location,$sconName];
+//for (var i = 0; i < $datacreated.length; i++) {
+//	$bo_act_common.cleanUpfunction($datacreated[i]);
+//}
 
 //$bo_act_accounts.deleteAccount($accName);
 //$bo_act_products.deleteProduct($proName);

@@ -1,6 +1,6 @@
 var $rs_5367 = _testcase("RS_5367","For a Custom SFM Search - Verify Wizard for all SFM Types.");
 $rs_5367.start();
-$searchName = "SVMXSTD: Account Search49105";
+$searchName = "Search5367";
 $wizTitle = $bo_act_common.generateRandomName("SFM Wiz");
 $stepTypes = ["SFM","Output Document"];
 $stepNames = ["Manage Work Order Lines - Usage","Work Order Service Report"];

@@ -2,6 +2,15 @@
 // Precondition:: "UserTrunk" mapping should be present in org to get selected for this test case.
 var $rs_7012 = _testcase("RS_7012","Verify user trunk and current user literals in map");
 $rs_7012.start();
+var $env = "Dev";
+var $expectedSite = "";
+if($env=="Dev"){
+	$expectedSite = "SVMX Bangalore";
+	
+}
+else{
+	$expectedSite = "Test Loc";
+}
 $sfmName = $bo_act_common.generateRandomName("RS7012 ");
 $sfmMapping = "UserTrunk";
 $sfmPgLayoutName =	$bo_act_common.generateRandomName("SFM_Auto_Page");
@@ -9,11 +18,13 @@ $processName = "Manage Work Order Lines - Usage";
 //$lookUpName = $bo_act_common.generateRandomName("Prod_lkp_");
 $wizTitle = $bo_act_common.generateRandomName("RS7012_");
 $bo_act_login.login($g_url,$sfmUsn,$sfmPwd);
+$expectedUserClient = _getText(_span("menuButtonLabel"));
+_log($expectedUserClient);
 $bo_act_navigation.navigateToSfmTransactionDesigner();
 $sfm_act_Transactions.clonedsfm7012($processName,$sfmName,$sfmPgLayoutName,$sfmMapping);
 $bo_act_navigation.navigateToSfmWizard();
 $sfm_act_createCustomWizard.chooseObject("Work Order");
-$sfm_act_createCustomWizard.addManageWizSteps($wizTitle, "SFM", $sfmName, "Sysadmin01 Group");
+$sfm_act_createCustomWizard.addManageWizSteps($wizTitle, "SFM", $sfmName);
 $sfm_act_createCustomWizard.createBlankWo();
 $sfm_act_createCustomWizard.clickWizardBtn($sfmName);
 
@@ -26,6 +37,6 @@ _wait(6000);
 
 var $userClient = _getText(_link(0,_rightOf(_cell("User Client"))));	
 var $site = _getText(_link(0, _rightOf(_cell("Site"))));
-_assertEqual("SVMX Test01",$userClient,"Current user literals is not mapped")
-_assertEqual($site, "Test Loc", 'User trunk literal is not mapped')
+_assertEqual($expectedUserClient,$userClient,"Current user literals is not mapped")
+_assertEqual($site, $expectedSite, 'User trunk literal is not mapped')
 $rs_7012.end();

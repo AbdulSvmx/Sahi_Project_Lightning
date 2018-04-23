@@ -3,7 +3,7 @@
 
 var $RS_5604 = _testcase("$RS_5604","Verify the functionality of Interactive Entitlement on WO's PS lines using warranty");
 $RS_5604.start();
-_setSpeed(100);
+_setSpeed($g_stepSpeed);
 
 /**
  * Login to the Sandbox Org
@@ -149,10 +149,19 @@ if(_isVisible(_image("Checked",_rightOf(_cell("/Is Entitlement Performed/"))))){
 
 //Clean up function
 
-var $datacreated = [$WO_Number,$caseNumber,$IBName,$productName,$contactName,$accountName,$warrantyName];
-for (var i = 0; i < $datacreated.length; i++) {
-	$bo_act_common.cleanUpfunction($datacreated[i]);
-}
+
+$bo_act_common.deleteAccount($bac_un, $bac_pwd, $accountName);
+$bo_act_common.deleteContact($bac_un, $bac_pwd, $contactName);
+$bo_act_common.deleteProduct($bac_un, $bac_pwd,$productName);
+$bo_act_common.deleteWorkOrder($bac_un, $bac_pwd, $orgnamespace,$WO_Number);
+$bo_act_common.deleteLocation($bac_un, $bac_pwd, $orgnamespace,$locationName);
+$bo_act_common.deleteWarranty($bac_un, $bac_pwd, $orgnamespace,$warrantyName);
+$bo_act_common.deleteCase($bac_un, $bac_pwd,$caseNumber);
+//
+//var $datacreated = [$WO_Number,$caseNumber,$IBName,$productName,$contactName,$accountName,$warrantyName];
+//for (var i = 0; i < $datacreated.length; i++) {
+//	$bo_act_common.cleanUpfunction($datacreated[i]);
+//}
 
 //Delete SFM Wizard 
 $bo_act_SFW.deleteSFMWizard("Work Order", $wizardIDName);

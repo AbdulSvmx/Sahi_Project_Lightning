@@ -3,7 +3,7 @@
 
 var $RS_5295 = _testcase("$RS_5295","Verify the impact of SLA setting values on SLA clocks on Work Order Object");
 $RS_5295.start();
-_setSpeed(100);
+_setSpeed($g_stepSpeed);
 
 //Pre - Condition 
 $bo_act_login.login($g_url, $bac_un, $bac_pwd);

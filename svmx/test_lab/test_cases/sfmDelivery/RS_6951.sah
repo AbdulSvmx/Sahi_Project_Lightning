@@ -1,6 +1,6 @@
 var $rs_6951 = _testcase("RS-6951","Verify form fill functionality on header");
 $rs_6951.start();
-$bo_act_login.login("https://test.salesforce.com/","orgsadmin@servicemax.com.svmxfop2","servicemax1");
+$bo_act_login.login($g_url, $sfmUsn, $sfmPwd);
 $bo_act_navigation.navigateToSfmTransactionDesigner(); 
 
 //Clone SFM and Add new fields in pagelayout
@@ -18,7 +18,7 @@ $bo_act_navigation.navigateToSfmWizard();
 _wait(3000);
 $sfm_act_createCustomWizard.chooseObject("Work Order");
 _wait(3000);
-$sfm_act_createCustomWizard.addManageWizSteps($SFMWizardName,"SFM",$SFMProcessName,"Safi Group");
+$sfm_act_createCustomWizard.addManageWizSteps($SFMWizardName,"SFM",$SFMProcessName);
 _wait(3000);
 
 //New Case creation and fetching field values

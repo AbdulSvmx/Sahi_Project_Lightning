@@ -5,7 +5,7 @@
 
 var $RS_7304 = _testcase("$RS_7304","Creation of auto Entitlement rule for Case with multiple fields and rule sequence");
 $RS_7304.start();
-_setSpeed(100);
+_setSpeed($g_stepSpeed);
 /**
 * Login to the Sandbox Org
 */

@@ -18,6 +18,7 @@ var $swat_pg_sfmSearch = new function swat_pg_sfmSearch(){
 	this.txt_object_standard1 = _textbox(3);
 	this.txt_object_standard2 =  _textbox(5);
 	this.txt_object_standard3 =  _textbox(7);
+	this.btn_firstcheckbox = _checkbox("1");
 	this.btn_objectdisplaysequence = _button("Object Display Sequence");
 	this.btn_top_popup = _imageSubmitButton("Top");
 	this.btn_popup_save = _button("Save");
@@ -26,6 +27,9 @@ var $swat_pg_sfmSearch = new function swat_pg_sfmSearch(){
 	this.link_span3 = _span("svmx-tab-inner[2]");
 	this.link_span4 = _span("svmx-tab-inner[3]");
 	this.pop_up_value = _select("/Sequenceblock/");
+	this.newtab = "/MaxConsole/";
+	this.savebutton = _span("/svmx-sfmd-save-icon/");
+	this.checklist_closebutton = _span("/sfm-button-/");
 	
 	
 	

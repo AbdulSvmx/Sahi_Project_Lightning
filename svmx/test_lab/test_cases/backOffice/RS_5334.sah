@@ -2,7 +2,7 @@
 
 var $RS_5334 = _testcase("$RS_5334","Get Price- When Pricing Rule of NTE is applied and [Billable Line Price >= NTE] For Parts line");
 $RS_5334.start();
-_setSpeed(100);
+_setSpeed($g_stepSpeed);
 
 /**
  * Login to the Sandbox Org
@@ -206,11 +206,18 @@ $bo_act_SFW.deleteSFMWizard("Work Order", $wizardIDName);
 /**
 *Clean up function
 */
+$bo_act_common.deleteCase($bac_un, $bac_pwd,$caseNumber);
+$bo_act_common.deleteAccount($bac_un, $bac_pwd, $accountName);
+$bo_act_common.deleteContact($bac_un, $bac_pwd, $contactName);
+$bo_act_common.deleteIB($bac_un, $bac_pwd, $orgnamespace,$IBName);
+$bo_act_common.deleteProduct($bac_un, $bac_pwd,$productName);
+$bo_act_common.deleteWorkOrder($bac_un, $bac_pwd, $orgnamespace,$WONumber);
+$bo_act_common.deleteSLA($bac_un, $bac_pwd, $orgnamespace, $slaName);
 
-var $datacreated = [$WONumber,$caseNumber,$IBName,$productName,$contactName,$accountName,$slaName,$serviceName];
-for (var i = 0; i < $datacreated.length; i++) {
-$bo_act_common.cleanUpfunction($datacreated[i]);
-}
+//var $datacreated = [$WONumber,$caseNumber,$IBName,$productName,$contactName,$accountName,$slaName,$serviceName];
+//for (var i = 0; i < $datacreated.length; i++) {
+//$bo_act_common.cleanUpfunction($datacreated[i]);
+//}
 
 $bo_act_login.logOut(); 
 

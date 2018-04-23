@@ -4,7 +4,7 @@
 
 var $RS_5331 = _testcase("$RS_5331","Get Price - when Header currency is different.");
 $RS_5331.start();
-_setSpeed(100);
+_setSpeed($g_stepSpeed);
 
 /**
  * Login to the Sandbox Org

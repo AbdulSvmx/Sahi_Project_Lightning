@@ -10,7 +10,7 @@ var $seperator = "/";
 
 var $RS_7290 = _testcase("$RS_7290","Creation and Activation of Service Contracts");
 $RS_7290.start();
-_setSpeed(100);
+_setSpeed($g_stepSpeed);
 /**
 * Login to the Sandbox Org
 */
@@ -100,11 +100,21 @@ _assertEqual($expecctedContactUnder_EntitledContacts,$contactName,"Actual and ex
 
 //Clean up function
 
+$bo_act_common.deleteAccount($bac_un, $bac_pwd, $accountName);
+$bo_act_common.deleteContact($bac_un, $bac_pwd, $contactName);
+$bo_act_common.deleteIB($bac_un, $bac_pwd, $orgnamespace,$IBName);
+$bo_act_common.deleteProduct($bac_un, $bac_pwd,$productName);
+$bo_act_common.deleteSLA($bac_un, $bac_pwd, $orgnamespace, $slaName03);
+$bo_act_common.deleteSLA($bac_un, $bac_pwd, $orgnamespace, $slaName02);
+$bo_act_common.deleteSLA($bac_un, $bac_pwd, $orgnamespace, $slaName01);
+$bo_act_common.deleteLocation($bac_un, $bac_pwd, $orgnamespace,$locationName);
+$bo_act_common.deleteSCON($bac_un, $bac_pwd, $orgnamespace,$serviceConractName);
+
 //var $datacreated = [$warrantyName,$IBName,$locationName,$productName,$contactName,$accountName,];
-var $datacreated = [$serviceConractName, $slaName03, $slaName02, $slaName01, $IBName,$productName,$locationName, $contactName,$accountName,];
-for (var i = 0; i < $datacreated.length; i++) {
-	$bo_act_common.cleanUpfunction($datacreated[i]);
-}
+//var $datacreated = [$serviceConractName, $slaName03, $slaName02, $slaName01, $IBName,$productName,$locationName, $contactName,$accountName,];
+//for (var i = 0; i < $datacreated.length; i++) {
+//	$bo_act_common.cleanUpfunction($datacreated[i]);
+//}
 $bo_act_login.logOut();
 
 $RS_7290.end();

@@ -22,7 +22,7 @@ var $sfm_act_createCustomWizard = new function sfm_act_createCustomWizard() {
 		_click($sfm_pg_wizards.btn_saveStep);
 		_click($sfm_pg_wizards.txt_managePermission);
 		_setSelected($sfm_pg_wizards.select_availableGrpProfiles,$profile);
-		_click($sfm_pg_wizards.btn_add);
+//		_click($sfm_pg_wizards.btn_add);
 		_click($sfm_pg_wizards.btn_saveClose);
 	};
 
@@ -45,7 +45,7 @@ var $sfm_act_createCustomWizard = new function sfm_act_createCustomWizard() {
 		_click($sfm_pg_wizards.btn_saveStep);
 		_click($sfm_pg_wizards.txt_managePermission);
 		_setSelected($sfm_pg_wizards.select_availableGrpProfiles,$profile);
-		_click($sfm_pg_wizards.btn_add);
+//		_click($sfm_pg_wizards.btn_add);
 		_click($sfm_pg_wizards.btn_saveClose);		
 
 	};	
@@ -63,6 +63,7 @@ var $sfm_act_createCustomWizard = new function sfm_act_createCustomWizard() {
 			_click($sfm_pg_wo.btn_Continue);
 			
 		}
+		_setSelected($bo_pg_workOrders.sel_priority, "High");
 		_click($sfm_pg_wo.btn_wo_save);
 		_wait(3000);
 		$woName= _getText($sfm_pg_wo.label_wo);
@@ -107,7 +108,7 @@ var $sfm_act_createCustomWizard = new function sfm_act_createCustomWizard() {
 	
 	
 	this.createCasewithFieldValues = function($value){
-		$CaseNo="";
+		$case="";
 		_wait(5000);
 		_click($sfm_pg_wo.tab_all);
 		_wait(3000);
@@ -120,7 +121,13 @@ var $sfm_act_createCustomWizard = new function sfm_act_createCustomWizard() {
 		_setSelected(_select(0,_rightOf(_label("*Case Origin"))),"Email");
 		_click(_submit(" Save "));
 		_wait(6000);
-		$CaseNo=_getText(_heading2("pageDescription"));
+		if(_isVisible(_span("/efhpCenterValue/"))){
+			$case = _getText(_span("/efhpCenterValue/"));
+		}
+		else{
+			$case = _getText($sfm_pg_wo.label_wo);
+		}
+		return $case;
 	
 	};
 
@@ -158,10 +165,15 @@ var $sfm_act_createCustomWizard = new function sfm_act_createCustomWizard() {
 		_click($sfm_pg_wizardWindow.btn_addRow);
 		_click($sfm_pg_wizardWindow.btn_edit);
 		_setValue($sfm_pg_wizardWindow.txt_part,$part);
+		_click(_span("/lookup_icon/",_rightOf(_label("Part:"))));
+		_doubleClick(_cell(0,_under(_div("Product Name"))));
 		_click($sfm_pg_wizardWindow.btn_update);
+		_click($sfm_pg_sfmDesigner.btn_deliveryQuickSave);
+		_wait(10000);
 		_click($sfm_pg_wizardWindow.btn_downArrow);
 		_wait(3000);
 		_click($sfm_pg_wizardWindow.btn_addWorkDetails);
+		_setStrictVisibilityCheck(false);
 	};
 	this.addParts = function($part) {
 		_wait(5000);
@@ -169,9 +181,13 @@ var $sfm_act_createCustomWizard = new function sfm_act_createCustomWizard() {
 		_setStrictVisibilityCheck(true);
 		_click($sfm_pg_wizardWindow.btn_addRow);
 		_click($sfm_pg_wizardWindow.btn_edit);
-		_wait(3000);
 		_setValue($sfm_pg_wizardWindow.txt_part1,$part);
+//		_click($sfm_pg_wizardWindow.lookup_Part);
+		_click(_span("/lookup_icon/",_rightOf(_label("Part:[1]"))));
+		_click(_cell(0,_near(_div("Product Name"))));
+		_click(_button("Select"));
 		_click($sfm_pg_wizardWindow.btn_update);
+		_setStrictVisibilityCheck(false);
 	};
 	this.addLabor = function($part) {
 		_click($sfm_pg_wizardWindow.tab_labor);
@@ -182,9 +198,15 @@ var $sfm_act_createCustomWizard = new function sfm_act_createCustomWizard() {
 		_click($sfm_pg_wizardWindow.btn_edit);
 //		_wait(3000);
 		_setValue($sfm_pg_wizardWindow.txt_part1,$part);
-//		_wait(3000);
+//		_click($sfm_pg_wizardWindow.lookup_Part);
+		_click(_span("/lookup_icon/",_rightOf(_label("Part:[1]"))));
+		_click(_cell(0,_near(_div("Product Name"))));
+		_click(_button("Select"));
+		_wait(3000);
 		_click($sfm_pg_wizardWindow.btn_update);
+		_setStrictVisibilityCheck(false);
 	};
+	
 	this.addExpenses = function($expense) {
 		_click($sfm_pg_wizardWindow.tab_expenses);
 		_setStrictVisibilityCheck(true);
@@ -193,6 +215,7 @@ var $sfm_act_createCustomWizard = new function sfm_act_createCustomWizard() {
 		_click($sfm_pg_wizardWindow.btn_edit);
 		_setValue($sfm_pg_wizardWindow.txt_expenseType,$expense);
 		_click($sfm_pg_wizardWindow.btn_update);
+		_setStrictVisibilityCheck(false);
 	};
 	this.addTravel = function() {
 		$todayDate = new Date();
@@ -215,19 +238,20 @@ var $sfm_act_createCustomWizard = new function sfm_act_createCustomWizard() {
 		_wait(5000);
 		_setValue($sfm_pg_wizardWindow.txt_endDate,$currentDate);
 		_click($sfm_pg_wizardWindow.btn_update);
-
+		_setStrictVisibilityCheck(false);
 	};
 
 	this.saveWizard = function() {
 		_click($sfm_pg_wizardWindow.btn_save);
 	};
 
-	this.verify6877 = function() {
+	this.verify6877 = function($value) {
 		var $count=0;
 		_selectDomain();
 		_click($sfm_pg_wizardWindow.lookup_account);
 		_wait(3000);
 		_setStrictVisibilityCheck(true);
+		_setValue($sfm_pg_wizardWindow.lkp_search,$value);
 		_click($sfm_pg_wizardWindow.icon_search);
 		_click($sfm_pg_wizardWindow.account_option);
 		_click($sfm_pg_wizardWindow.btn_select);
@@ -261,6 +285,7 @@ var $sfm_act_createCustomWizard = new function sfm_act_createCustomWizard() {
 		_click($sfm_pg_wizardWindow.lookup_account);
 		_wait(3000);
 		_setStrictVisibilityCheck(true);
+		_setValue($sfm_pg_wizardWindow.lkp_search,"Acme");
 		_click($sfm_pg_wizardWindow.icon_search);
 		_click($sfm_pg_wizardWindow.account_option);
 		_click($sfm_pg_wizardWindow.btn_select);
@@ -291,6 +316,7 @@ var $sfm_act_createCustomWizard = new function sfm_act_createCustomWizard() {
 		_click($sfm_pg_wizardWindow.btn_addRow);
 		_click($sfm_pg_wizardWindow.btn_edit);
 		_click($sfm_pg_wizardWindow.lkp_account);
+		_setValue($sfm_pg_wizardWindow.lkp_search,$accountToVerify);
 		_click($sfm_pg_wizardWindow.icon_search);
 		_doubleClick($sfm_pg_wizardWindow.account_option);
 		_click($sfm_pg_wizardWindow.lkp_autoContact);
@@ -395,11 +421,16 @@ var $sfm_act_createCustomWizard = new function sfm_act_createCustomWizard() {
 		_wait(3000,_isVisible($sfm_pg_wizardWindow.btn_addRow));
 
 		_click($sfm_pg_wizardWindow.btn_addRow);
-		_doubleClick(_div("svmx-grid-cell-inner [1]"));
+		_wait(5000);
+	//	_doubleClick(_div("svmx-grid-cell-inner [1]"));
 		_click(_span("/svmx_lookup_icon/"));
 		_click($sfm_pg_wizardWindow.icon_search);
-		var $divs= _collect("_div","/.*/",_under(_div("Product Name")));
+		var $divs= _collect("_cell","/.*/",_under(_div("Product Name")));
+//		var $divs= _collect("_div","/[^ ][^ ]*/",_under(_div("Product Name")));
 		_log($divs.length);
+//		for($p=0;$p<$divs.length;$p++){
+//			_alert(_getText($divs[$p]));
+//		}
 		if($divs.length<=10){
 			_log("Pass");
 		}
@@ -565,9 +596,9 @@ var $sfm_act_createCustomWizard = new function sfm_act_createCustomWizard() {
 			_setValue($sfm_pg_wizards.txt_title,$titles[$i]);
 			_click($sfm_pg_wizards.btn_saveStep);
 		}
-		_click($sfm_pg_wizards.txt_managePermission);
-		_setSelected($sfm_pg_wizards.select_availableGrpProfiles,"Sysadmin01 Group");
-		_click($sfm_pg_wizards.btn_add);
+//		_click($sfm_pg_wizards.txt_managePermission);
+//		_setSelected($sfm_pg_wizards.select_availableGrpProfiles,"Sysadmin01 Group");
+//		_click($sfm_pg_wizards.btn_add);
 		_click($sfm_pg_wizards.btn_saveClose);
 	};
 	
@@ -578,6 +609,7 @@ var $sfm_act_createCustomWizard = new function sfm_act_createCustomWizard() {
 		_click($sfm_pg_wo.link_wo);
 		_click($sfm_pg_wo.btn_wo_new);
 		var $dd = this.generateYesterday();
+		_log($dd);
 		_click($sfm_pg_wo.txt_actualOnsiteResponse);
 		_click($sfm_pg_wo.cell_today);
 		_click($sfm_pg_wo.txt_actualResolution);
@@ -615,7 +647,14 @@ var $sfm_act_createCustomWizard = new function sfm_act_createCustomWizard() {
 		_click($sfm_pg_wo.link_actualInitialResp);
 		_click($sfm_pg_wo.link_scheduledDate);
 		_click($sfm_pg_wo.btn_wo_save);
-		return _getText($sfm_pg_wo.label_wo);
+		$case = "";
+		if(_isVisible(_span("/efhpCenterValue/"))){
+			$case = _getText(_span("/efhpCenterValue/"));
+		}
+		else{
+			$case = _getText($sfm_pg_wo.label_wo);
+		}
+		return $case;
 	};
 	
 	this.createWoFor6344 = function($caseId){

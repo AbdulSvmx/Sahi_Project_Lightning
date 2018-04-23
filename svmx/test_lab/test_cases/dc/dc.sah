@@ -52,4 +52,4 @@ var $color = _fetch(_f("DispatchConsole").ganttchartholder_inlinecomponent1(0).e
 //
 //_mouseOverNative(_xy(_f("DispatchConsole").uitextfield("MG Road Tech"),600,0));
 
-_setSpeed(100);
+_setSpeed($g_stepSpeed);

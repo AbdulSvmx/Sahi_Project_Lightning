@@ -3,7 +3,7 @@
 
 var $RS_9811 = _testcase("RS_9811","SFW - Wizard step - Webservice  with no Handover functionality.");
 $RS_9811.start();
-_setSpeed(100);
+_setSpeed($g_stepSpeed);
 
 //Pre - Condition 
 var $className = $bo_act_common.generateRandomName("fClassName");

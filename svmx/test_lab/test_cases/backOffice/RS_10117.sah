@@ -3,7 +3,7 @@
 
 var $RS_10117 = _testcase("$RS_10117","Get Price (SCON - Travel) - when price is taken from the Mileage tier of SCON with unit as Per Mile/Km.");
 $RS_10117.start();
-_setSpeed(100);
+_setSpeed($g_stepSpeed);
 
 /**
  * Login to the Sandbox Org
@@ -133,10 +133,19 @@ $bo_act_SFW.deleteSFMWizard("Work Order", $wizardIDName);
 *Clean up function
 */
 
-var $datacreated = [$WONumber,$IBName,$productName,$contactName,$accountName,$slaName];
-for (var i = 0; i < $datacreated.length; i++) {
-$bo_act_common.cleanUpfunction($datacreated[i]);
-}
+
+$bo_act_common.deleteAccount($bac_un, $bac_pwd, $accountName);
+$bo_act_common.deleteContact($bac_un, $bac_pwd, $contactName);
+$bo_act_common.deleteIB($bac_un, $bac_pwd, $orgnamespace,$IBName);
+$bo_act_common.deleteProduct($bac_un, $bac_pwd,$productName);
+$bo_act_common.deleteWorkOrder($bac_un, $bac_pwd, $orgnamespace,$WONumber);
+$bo_act_common.deleteSLA($bac_un, $bac_pwd, $orgnamespace, $slaName);
+
+
+//var $datacreated = [$WONumber,$IBName,$productName,$contactName,$accountName,$slaName];
+//for (var i = 0; i < $datacreated.length; i++) {
+//$bo_act_common.cleanUpfunction($datacreated[i]);
+//}
 
 $bo_act_login.logOut(); 
 

@@ -3,7 +3,7 @@
 
 var $RS_7504 = _testcase("RS_7504","CLONE - Verify adding a new coverage manually and saving the pm plan from Location.");
 $RS_7504.start();
-_setSpeed(100);
+_setSpeed($g_stepSpeed);
 
 var $Workbenchurl = "https://workbench.developerforce.com/login.php";
 var $un = $bac_un;

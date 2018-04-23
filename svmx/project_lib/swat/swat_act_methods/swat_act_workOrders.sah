@@ -78,6 +78,10 @@ var $swat_act_workOrders = new function swat_act_workOrders() {
 	//	_click($bo_pg_workOrders.btn_popUpPause);
 	};
 	
-	
+	this.deleteWorkOrder = function($workOrderNumber){
+		$bo_act_navigation.navigateToWorkOrdersTab();
+		_click(_link($workOrderNumber));
+		_click($bo_pg_workOrders.btn_deleteWorkOrder);
+	};
 	
 };
