@@ -4,10 +4,10 @@ _setSpeed(100);
 var $g_url = "https://test.salesforce.com/";
 var $g_un = "bhupen@back17.com";// "bhupendra.s@dev.tool2.com";
 var $g_pwd = "smax@123";
-var $bac_un = "automationDEV@Test4Part1.com";  //pointing to DEV
+var $bac_un = "orgsadmin@svmx-test4.org.test4part2";  //pointing to DEV
 var $bac_pwd = "welcome-02";
 var $bac_unDev = "automationDEV@Test4Part1.com";
-var $bac_pwdDev = "welcome-01";
+var $bac_pwdDev = "welcome-03";
 var $bac_unBase = "orgsadmin@svmx-test4.org.test4part2";
 var $bac_pwdBase = "servicemax22";
 var $url = "https://test.salesforce.com";

@@ -89,6 +89,17 @@ var $swat_act_sfmSearch = new function swat_act_sfmSearch() {
 	{
 		
 		_click($bo_pg_home.link_home);
+		
+		if(_condition($bo_pg_home.label_serviceMaxSFMSearch == null))
+			{
+			$bo_act_navigation.navigateToSetUpAndSearchfromUserNavlabel("Home Page Layouts");
+			_click($bo_pg_salesforcePages.link_dashboardHomePageDefault);
+			_click($bo_pg_salesforcePages.btn_edit);
+			_check($bo_pg_salesforcePages.chk_ServiceMaxSFMSearch);
+			_click($bo_pg_salesforcePages.btn_next);
+			_click($bo_pg_salesforcePages.btn_save);
+			_click($bo_pg_home.link_home);
+			}
 		_selectDomain("/svmx/");
 		_setSelected($swat_pg_sfmSearch.picklist_searchItem,$searchItem);
 		_click($swat_pg_sfmSearch.link_go);

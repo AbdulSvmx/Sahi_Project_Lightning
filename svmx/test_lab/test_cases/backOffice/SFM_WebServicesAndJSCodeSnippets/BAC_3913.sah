@@ -1,0 +1,20 @@
+
+//Author - Noor Salma Sharieff
+
+var $BAC_3913 = _testcase("Verify standard SFM Web Services.");
+$BAC_3913.start();
+_setSpeed(100);
+$bo_act_login.login($g_url, $bac_unDev, $bac_pwdDev);
+
+	var $accName = $bo_act_accounts.createAccount();
+	var $slaterm = $bo_act_slaTerms.createSlaTerms("Default");
+	var $sconName = $bo_act_serviceMaintenanceContracts.createServiceMaintenanceContract($accName, $slaterm,1,0);
+	
+
+
+$BAC_3913.end();
+
+
+
+
+
