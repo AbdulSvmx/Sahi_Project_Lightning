@@ -4,6 +4,8 @@
 var $RS_7472 = _testcase("$RS_7472","Verify if the Number condition is met, then the Preferred Start Date must be WO creation date");
 $RS_7472.start();
 _setSpeed($g_stepSpeed);
+var $Workbenchurl = "https://workbench.developerforce.com/login.php";
+_setSpeed($g_stepSpeed);
 //Pre - Condition 
 $bo_act_login.login($g_url, $bac_un, $bac_pwd);
 
