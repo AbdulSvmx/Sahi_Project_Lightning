@@ -17,7 +17,7 @@ var $url = "https://test.salesforce.com";
 var $g_url = "https://test.salesforce.com/";
 var $g_un = "bhupen@back17.com";// "bhupendra.s@dev.tool2.com";
 var $g_pwd = "smax@123";
-<<<<<<< HEAD
+
 var $bac_un = "orgsadmin@svmx-test4.org.test4part2";  //pointing to DEV
 var $bac_pwd = "welcome-02";
 var $bac_unDev = "automationDEV@Test4Part1.com";
@@ -28,7 +28,7 @@ var $url = "https://test.salesforce.com";
 var $sfmUsn = "sysadmin01@sfdautomation.com";
 var $sfmPwd = "maxplore2";
 var $bac_PRTun = "bhupendra.auto@upgrade.com"; //Most Used Customer
-=======
+
 //var $bac_un = "automationDEV@Test4Part1.com"; // pointing to DEV
 //var $bac_pwd = "welcome-02";
 // var $bac_un = "meghana.rao@servicemax.com";
@@ -38,7 +38,7 @@ var $bac_PRTun = "bhupendra.auto@upgrade.com"; //Most Used Customer
  var $bac_un = "orgsadmin@svmx-test4.org.test4part2"; //pointing to Dev
  var $bac_pwd = "welcome-02";
 var $bac_PRTun = "bhupendra.auto@upgrade.com"; // Most Used Customer
->>>>>>> b51c3617a84d56351e7cb2ebb574b3e71322a713
+
 var $bac_PRTpwd = "servicemax@123";
 var $group_profilename = "AutoBACGroup";
 
@@ -245,3 +245,4 @@ function dumpWindowInfo() {
 	s += "</pre>";
 	_sahi._log(s);
 }
+
