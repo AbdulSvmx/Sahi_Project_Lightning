@@ -1,8 +1,8 @@
 
 //author - Meghana Rao P
 
-var $RS_7472 = _testcase("$RS_7472","Verify if the Number condition is met, then the Preferred Start Date must be WO creation date");
-$RS_7472.start();
+var $RS_7470 = _testcase("$RS_7470","Verify if both the Date & Number condition is met, then the Preferred Start Date must be the PM Schedule date for which the WO is created.");
+$RS_7470.start();
 _setSpeed($g_stepSpeed);
 var $Workbenchurl = "https://workbench.developerforce.com/login.php";
 _setSpeed($g_stepSpeed);
@@ -127,7 +127,7 @@ $bo_act_common.deletePMPlan($bac_un, $bac_pwd, $orgnamespace,$PMPlan);
 //}
 $bo_act_PMProcess.deletePMProcess($PMProcessId);
 
-$RS_7472.end();
+$RS_7470.end();
 
 
 
