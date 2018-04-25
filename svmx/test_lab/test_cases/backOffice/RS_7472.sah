@@ -33,7 +33,6 @@ $bo_act_PMPlanTemplate.saveConditionBasedPM();
 var $sconName = $bo_act_serviceMaintenanceContracts.createServiceMaintenanceContract($accName, $slaterm,1,0);
 $bo_act_serviceMaintenanceContracts.AddCoveredProductToSCON($sconName, $IBName);
 var $PMPlan = $bo_act_PMPlan.createUsageOrFrequencyBasedPMPlan($sconName,$PMPTemplate,$IBName);
-
 var $PMProcessId = $bo_act_PMProcess.createPMProcess("Condition Based Preventive Maintenance", 0, $PMPlan,"One Per Product");
 
 //This code supports name spaces and assigns the variable with correct namespace script
