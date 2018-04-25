@@ -153,7 +153,7 @@ this.updateUsageConditionRulesGridWithAdjFields = function($attribute,$operator,
 
 	_setValue($bo_pg_PMPlanTemplate.txt_startAt,$startAt);
 	
-	
+	_wait(1000);
 	_click($bo_pg_PMPlanTemplate.txt_stopAtbox);
 	_click($bo_pg_PMPlanTemplate.txt_stopAt);
 	_setValue($bo_pg_PMPlanTemplate.txt_stopAt,$stopAt);
