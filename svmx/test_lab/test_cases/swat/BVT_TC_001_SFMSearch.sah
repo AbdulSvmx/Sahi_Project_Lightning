@@ -69,13 +69,13 @@ $BVT_TC_001_SFMSearch.start();
 	$swat_act_sfmSearch.launchSfmSearch($searchItem, $workOrderNo);
 
 	
-	//deleting data
-	$bo_act_installedProduct.deleteInstalledProduct($IBName);
-	$bo_act_Cases.deleteCases($caseNumber);
-	$bo_act_accounts.deleteAccount($accountName);
-	$bo_act_contacts.deleteContact($contactName);
-	$swat_act_workOrders.deleteWorkOrder($workOrderNo);
-	
+//	//deleting data
+//	$bo_act_installedProduct.deleteInstalledProduct($IBName);
+//	$bo_act_Cases.deleteCases($caseNumber);
+//	$bo_act_accounts.deleteAccount($accountName);
+//	$bo_act_contacts.deleteContact($contactName);
+//	$swat_act_workOrders.deleteWorkOrder($workOrderNo);
+//	
 	
 	
 	// $bo_act_login.logOut();

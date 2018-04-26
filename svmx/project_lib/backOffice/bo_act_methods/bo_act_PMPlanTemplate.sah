@@ -64,6 +64,25 @@ this.createUsageBasedConditionPMPTemplateNoSave = function($productName)
 	return $PMTemplateName;
 };
 
+
+this.createUsageBasedConditionPMPTemplateNoSave_withIBCondition = function($productName, $ib_criteria)
+{
+	var $PMTemplateName = $bo_act_common.generateRandomName("PMT");
+	$bo_act_navigation.navigateToPMPlanTemplatePage();
+	_click($bo_pg_PMPlanTemplate.btn_createConditionBasedPMPTemplate);
+	_wait(60000,_isVisible($bo_pg_PMPlanTemplate.txt_templateName));
+	_setValue($bo_pg_PMPlanTemplate.txt_templateName,$PMTemplateName);
+	_setValue($bo_pg_PMPlanTemplate.txt_product,$productName);
+	_click($bo_pg_PMPlanTemplate.img_filterIcon);
+	_click(_div(0,_rightOf($bo_pg_PMPlanTemplate.txt_product)));
+	_click(_listItem($productName));
+	_click($bo_pg_PMPlanTemplate.picklist_IB_filter);
+	_click(_listItem($ib_criteria));
+	return $PMTemplateName;
+};
+
+
+
 /*
  * Author : Meghana Rao
  * To create a PM Plan Template with different Date time in Activity Date
@@ -134,7 +153,7 @@ this.updateUsageConditionRulesGridWithAdjFields = function($attribute,$operator,
 
 	_setValue($bo_pg_PMPlanTemplate.txt_startAt,$startAt);
 	
-	
+	_wait(1000);
 	_click($bo_pg_PMPlanTemplate.txt_stopAtbox);
 	_click($bo_pg_PMPlanTemplate.txt_stopAt);
 	_setValue($bo_pg_PMPlanTemplate.txt_stopAt,$stopAt);
@@ -223,9 +242,51 @@ this.createCriteriaBasedPMTemplate = function($productName)
 		_click(_listItem($operator));
 //		_doubleClick(_div("/svmx-grid-cell-inner/",_under(_div("Value"))));
 		_click(_div("/svmx-grid-cell-inner/",_under(_div("Value"))));
-		_click(_div("/svmx-trigger-index/",_under(_div("Value"))));
-		_click(_listItem($value));
-		
+//		_click(_div("/svmx-trigger-index/",_under(_div("Value"))));
+		if(_isVisible(_listItem($value))){
+			_click(_listItem($value));
+		}
+		else{
+			_setValue(_textbox(0,_under(_div("Value"))),"Bangalore");
+		}
+	
+	};
+	this.addRowUsageBased = function($attribute,$operator,$frequency,$adjType,$minAdj,$maxAdj,$adjUnit){
+		$todayDate = new Date();
+		$date = $todayDate.getDate();
+		$month = $todayDate.getMonth()+1;
+		$year = $todayDate.getFullYear();
+		$prevDate = $month+"-"+$date+"-"+($year-1);
+		$futureDate = $month+"-"+$date+"-"+($year+1);
+		if($prevDate.length==9){
+			$prevDate = "0"+$prevDate;
+		}
+		if($futureDate.length==9){
+			$futureDate ="0"+$futureDate;
+		}
+		_click(_span("+ Add row"));
+		_click(_div("/svmx-grid-cell-inner/",_under(_div("Attribute"))));
+		_click(_div("/svmx-trigger-index/",_under(_div("Attribute"))));
+		_click(_div($attribute));
+		_click(_div("/svmx-grid-cell-inner/",_under(_div("Operator"))));
+		_click(_div("/svmx-trigger-index/",_under(_div("Operator"))));
+		_click(_listItem($operator));
+		_click(_div("/svmx-grid-cell-inner/",_under(_div("Frequency"))));
+		_setValue(_textbox(0,_under(_div("Frequency"))),$frequency);
+		_click(_div("/svmx-grid-cell-inner/",_under(_div("Start At"))));
+		_setValue(_textbox(0,_under(_div("Start At"))),$prevDate);
+		_click(_div("/svmx-grid-cell-inner/",_under(_div("Stop At"))));
+		_setValue(_textbox(0,_under(_div("Stop At"))),$futureDate);
+		_click(_div("/svmx-grid-cell-inner/",_under(_div("Adjustment Type"))));
+		_click(_div("/svmx-trigger-index/",_under(_div("Adjustment Type"))));
+		_click(_listItem($adjType));
+		_click(_div("/svmx-grid-cell-inner/",_under(_div("Minimum Adjustment"))));
+		_setValue(_textbox(0,_under(_div("Minimum Adjustment"))),$minAdj);
+		_click(_div("/svmx-grid-cell-inner/",_under(_div("Maximum Adjustment"))));
+		_setValue(_textbox(0,_under(_div("Maximum Adjustment"))),$maxAdj);
+		_click(_div("/svmx-grid-cell-inner/",_under(_div("Adjustment Unit"))));
+		_click(_div("/svmx-trigger-index/",_under(_div("Adjustment Unit"))));
+		_click(_listItem($adjUnit));
 	};
 	
 	/*
@@ -284,8 +345,7 @@ this.createCriteriaBasedPMTemplate = function($productName)
 		_setValue(_textbox("/endDate/"),$endDate);
 		_click(_span("Save"));
 	};
-	
-	
+		
 	/*
 	 * Author: Meghana Rao
 	 * This method will create criteria based PM Plan

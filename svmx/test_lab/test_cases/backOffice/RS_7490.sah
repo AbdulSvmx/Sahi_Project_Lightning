@@ -34,9 +34,12 @@ $bo_act_serviceMaintenanceContracts.AddCoveredProductToSCON($sconName, $IBName);
 var $PMPlan = $bo_act_PMPlan.createUsageOrFrequencyBasedPMPlan($sconName,$PMPTemplate,$IBName);
 
 
+
+
 $bo_act_navigation.navigateToPreventiveMaintenancePlans();
 _click(_link($PMPlan));
-_assertEqual("Active", _getText(_div(0,_rightOf(_cell("Status"))))); // To verify if Status is Active
+var $statusvalue = _getText(_div(0,_rightOf(_cell("Status"))));
+_assertEqual("Active", $statusvalue); // To verify if Status is Active
 
 //Clean up function
 
