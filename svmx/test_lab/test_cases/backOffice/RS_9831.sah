@@ -3,7 +3,7 @@
 
 var $RS_9831 = _testcase("RS_9831","SFW - Interactive Handover Functionality for the SFM from Web-services.");
 $RS_9831.start();
-_setSpeed(100);
+_setSpeed($g_stepSpeed);
 
 $user = "svmx test4";
 var $className = $bo_act_common.generateRandomName("fClassName");

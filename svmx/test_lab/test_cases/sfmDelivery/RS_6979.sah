@@ -24,7 +24,7 @@ var $formulaArray =["$F.SUMOF($D.Labor,'SVMXC__Billable_Line_Price__c')",
                     "$F.MULTIPLY($D.Labor.SVMXC__Actual_Quantity2__c,$D.Labor.SVMXC__Actual_Price2__c)"
                     ];
 
-_setSpeed(100);
+_setSpeed($g_stepSpeed);
 $bo_act_login.login($g_url, $sfmUsn, $sfmPwd); 
 $sfm_act_SFM.cloneTDM016($sfmNameToBeCloned, $sfmName, $isCustom, $sfmTemplateSaveAsName, $sfmTemplate, $fieldNameArray, $containerNameArray);
 $sfm_pg_formula.createFormula($formulaTargetObjectArray, $formulaTargetFieldArray, $formulaNameArray, $formulaDescriptionArray, $formulaArray);

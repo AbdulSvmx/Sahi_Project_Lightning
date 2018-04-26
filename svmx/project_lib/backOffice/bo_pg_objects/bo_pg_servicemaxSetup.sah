@@ -13,6 +13,7 @@ var $bo_pg_servicemaxSetup = new function bo_pg_servicemaxSetup(){
 	this.btn_sfmSearch = _div("SFM Search");
 	this.btn_services = _div("Services");
 	this.btn_newAvailableService = 	_button("New Available Service");
+	this.btn_backToSetupHome = _span("Back To Setup Home");
 	
 	this.btn_appAdministration = _div("App Administration");
 	this.btn_configurationProfiles = _div("Configuration Profiles");
@@ -52,7 +53,12 @@ var $bo_pg_servicemaxSetup = new function bo_pg_servicemaxSetup(){
 	this.btn_receivingProcess = _div("Receiving Process");
 		this.btn_repairShipmentPreparation = _div("Repair Shipment Preparation");
 				this.btn_sourcingRules = _div("Sourcing Rules");
-
+				this.btn_receivingProcess = _div("Receiving Process");
+				//Owner Narendra babu
+				this.btn_mobileAndOffline = _div("Mobile & Offline");
+				this.btn_mobileconfiguration = _div("Mobile Configuration");
+				this.listselectprofile = _select(0);
+				
 };
 
 

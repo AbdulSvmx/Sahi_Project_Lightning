@@ -3,7 +3,7 @@
 
 var $RS_5315 = _testcase("$RS_5315","Get Price on WO: Calculation based on labor pricing defined in SCon when Activity type(Activity ID=Calibration/Installation).");
 $RS_5315.start();
-_setSpeed(100);
+_setSpeed($g_stepSpeed);
 
 /**
 * Login to the Sandbox Org
@@ -78,7 +78,7 @@ $bo_act_serviceMaintenanceContracts.addLaborPricingToServiceContract($serviceCon
 var $minimumLaborMins1 = 60;
 var $regularRate1 = 800;
 $bo_act_serviceMaintenanceContracts.addSecondLaborPricingToServiceContract($serviceConractName, $RoundingType, $unit[2], $minimumLaborMins1,$regularRate1, $activityType[3]);
-_setSpeed(100);
+_setSpeed($g_stepSpeed);
 
 /**
 * Create Case record
@@ -199,7 +199,7 @@ _assertEqual($LaborCoveredActual1,"0","Actual and expected labor Covered % are n
 $bo_act_getPrice.closeEditedWOLineToSFMDelivery();
 
 $bo_act_getPrice.saveSFMDelivery();
-_setSpeed(100);
+_setSpeed($g_stepSpeed);
 //Delete SFM Wizard 
 $bo_act_SFW.deleteSFMWizard("Work Order", $wizardIDName);
 
@@ -207,10 +207,20 @@ $bo_act_SFW.deleteSFMWizard("Work Order", $wizardIDName);
 *Clean up function
 */
 
-var $datacreated = [$WONumber,$caseNumber,$IBName,$productName,$productName1,$contactName,$accountName,$slaName,$serviceConractName];
-for (var i = 0; i < $datacreated.length; i++) {
-$bo_act_common.cleanUpfunction($datacreated[i]);
-}
+$bo_act_common.deleteCase($bac_un, $bac_pwd,$caseNumber);
+$bo_act_common.deleteAccount($bac_un, $bac_pwd, $accountName);
+$bo_act_common.deleteContact($bac_un, $bac_pwd, $contactName);
+$bo_act_common.deleteIB($bac_un, $bac_pwd, $orgnamespace,$IBName);
+$bo_act_common.deleteProduct($bac_un, $bac_pwd,$productName);
+$bo_act_common.deleteProduct($bac_un, $bac_pwd,$productName1);
+$bo_act_common.deleteWorkOrder($bac_un, $bac_pwd, $orgnamespace,$WONumber);
+$bo_act_common.deleteSLA($bac_un, $bac_pwd, $orgnamespace, $slaName);
+$bo_act_common.deleteSCON($bac_un, $bac_pwd, $orgnamespace,$serviceConractName);
+
+//var $datacreated = [$WONumber,$caseNumber,$IBName,$productName,$productName1,$contactName,$accountName,$slaName,$serviceConractName];
+//for (var i = 0; i < $datacreated.length; i++) {
+//$bo_act_common.cleanUpfunction($datacreated[i]);
+//}
 
 // Delete the Activity ID's Created 
 /*$bo_act_activityMaster.deleteActivityMaster($activityID);

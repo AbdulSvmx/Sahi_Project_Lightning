@@ -23,6 +23,27 @@ var $bo_act_Cases = new function bo_act_Cases() {
     return $caseNumber;
 	};
 	
+	this.createcase_checkentitlement = function($caseStatus, $casePriority, $caseOrigin, $CaseReason, $IBName) {
+		var $caseSubject = $bo_act_common.generateRandomName("Case");
+        $bo_act_navigation.navigateToCasesPage();
+		_click($bo_pg_Cases.btn_new);
+		_setValue($bo_pg_Cases.txt_subjectName, $caseSubject);
+		_setSelected($bo_pg_Cases.sel_selectCaseStatus,$caseStatus);
+		_setSelected($bo_pg_Cases.sel_selectCasePriority,$casePriority);
+		_setSelected($bo_pg_Cases.sel_selectCaseOrigin,$caseOrigin);
+		_setSelected($bo_pg_Cases.sel_casereason, $CaseReason);
+
+		_setValue($bo_pg_Cases.txt_componentSN_Name, $IBName);
+		_click($bo_pg_Cases.sel_checkentitlement);
+		_click($bo_pg_Cases.btn_save);
+		_assertNotVisible(_div("/Error: Invalid Data/"));
+		_wait(15000, _isVisible(_heading2("Case Detail")));
+		var $caseNumber = _getText($bo_pg_Cases.txt_caseNumber);
+		_logOutput($caseNumber+ " Case is created");
+    return $caseNumber;
+	};
+	
+	
 	this.editCase = function($caseNumber, $caseAccount, $caseContact, $caseComponentSN, $caseSite) {
 		 $bo_act_navigation.navigateToCasesPage();
 		 _click(_link($caseNumber));

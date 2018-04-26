@@ -2,7 +2,7 @@
 
 var $RS_5328 = _testcase("$RS_5328","Get Price(SCON-Travel)-Price taken from Service Type(Travel Policy)-Flat rate");
 $RS_5328.start();
-_setSpeed(100);
+_setSpeed($g_stepSpeed);
 
 /**
  * Login to the Sandbox Org
@@ -81,7 +81,7 @@ var $travelRoundingType = "Actuals";
 var $travelPolicyUnit = "Flat Rate";
 var $travelPolicyRate = 122.000;
 $bo_act_serviceMaintenanceContracts.addTravelPolicyToServiceContract($sconName, $defaultTravelPrice, $defaultTravelUnit, $travelRoundingType, $travelPolicyUnit, $travelPolicyRate, $serviceType);
-_setSpeed(100);
+_setSpeed($g_stepSpeed);
 /**
 * Create SFM Wizard for WO with two Steps 1st-Check Entitlement and 2nd- Manage Work Order Lines - Usage(TDM016)
 */
@@ -145,7 +145,7 @@ _assertEqual($actualTravelRateOnWorkOrder,"$122.000","Actual and Rate on Work Or
 _assertEqual($actualTravelUnitOnWorkOrder,$travelPolicyUnit,"Actual and expected Rate Type on Work Order are not same");
 _assertEqual($actualProformaInvoiceAmountOnWorkOrder,"$122.000","Actual and expected Proforma Invoice Amount On Work Order are not same");
 _assertEqual($actualTotalBillableAmountOnWorkOrder,"$0.000","Actual and expected Total Billable Amount On Work Order are not same");
-_setSpeed(100);
+_setSpeed($g_stepSpeed);
 //Delete SFM Wizard 
 $bo_act_SFW.deleteSFMWizard("Work Order", $wizardIDName);
 

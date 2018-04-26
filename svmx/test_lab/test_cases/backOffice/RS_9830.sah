@@ -3,7 +3,7 @@
 
 var $9830 = _testcase("9830","SFW - Handover on multisource wizard step.");
 $9830.start();
-_setSpeed(100);
+_setSpeed($g_stepSpeed);
 var $PMPlanName = $bo_act_common.generateRandomName("PMPlan");
 var $sconName = $bo_act_common.generateRandomName("Scon");
 

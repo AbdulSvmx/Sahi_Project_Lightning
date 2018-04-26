@@ -32,7 +32,7 @@ var $wizardObject ="Work Order";
 //var $woName="WO-00000472";
 
 
-_setSpeed(100);
+_setSpeed($g_stepSpeed);
 $bo_act_login.login($g_url, $sfmUsn, $sfmPwd);
 
 

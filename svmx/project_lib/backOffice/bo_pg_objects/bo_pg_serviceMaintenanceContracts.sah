@@ -30,7 +30,9 @@ var $bo_pg_serviceMaintenanceContracts = new function bo_pg_serviceMaintenanceCo
 	this.txt_contract = _textbox("/Contact/");
 	this.txt_SFMSconName = _textbox(0,_rightOf(_label("Contract Name/Number:")));
 	this.txt_SFMSconEndDate = _textbox(0,_rightOf(_label("/End Date/")));
-	
+	this.head_serviceContract = _heading1("Service/Maintenance Contract:");
+	this.activateContractSFM = _button("Activate Contract");
+	this.btn_activateContract = _span("Activate Contract");
 	//Object for Activate Contract on Service/Maintenance Contract
 	this.btn_activateContractSFM = _button("Activate Contract");
 	this.btn_activateContract = _span("Activate Contract");
@@ -52,7 +54,8 @@ var $bo_pg_serviceMaintenanceContracts = new function bo_pg_serviceMaintenanceCo
 	
 	//Objects for Part/Labor Pricing in Scon
 	this.btn_sfmLaborPricing = _button("Labor Pricing");
-	this.btn_sfmPartPricing = _button("svmxbtn smallbtn enabledbtn[2]");//this.btn_sfmPartPricing = _button("Parts Pricing");
+	this.btn_sfmPartPricing = _button("New Parts Pricing");
+	this.btn_sfmnewPartsPricing = _button("Parts Pricing");
 	this.btn_sfmPricingRule = _button("Pricing Rule");
 	this.btn_partsDiscountTab = _span("Parts Discount");
 	this.btn_pricingRuleTab = _button("Pricing Rule");
@@ -65,7 +68,7 @@ var $bo_pg_serviceMaintenanceContracts = new function bo_pg_serviceMaintenanceCo
 	this.txt_laborPricingUnit = _textbox("/Unit/");
 	this.txt_partsDiscountPercent = _textbox(0,_rightOf(_label("/Discount/")));
 	this.txt_partsRateType = _textbox("Rate Type:");
-	this.txt_partsRates = _textbox("/svmx/",_rightOf(_label("/Rate/",_near(_button("Update")))));
+	this.txt_partsRates = _textbox("/svmx/",_rightOf(_label("Rate:",_near(_button("Update")))));
 	this.txt_currencyISOCode = _textbox("Currency ISO Code:");
 	this.txt_minimumLaborMins = _textbox("Minimum Labor (Mins):");
 	//this.txt_regularRateLaborPricing = _textbox(0,_rightOf(_label("Regular Rate:")));
@@ -95,6 +98,10 @@ var $bo_pg_serviceMaintenanceContracts = new function bo_pg_serviceMaintenanceCo
 	this.txt_travelPolicyMaximum = _textbox("Maximum:",_near(_span("Update")));
 	this.btn_travelPolicyZonePricingTab = _span("Zone Pricing");
 	this.txt_travelPolicyZone = _textbox("Zone:",_near(_span("Update")));
+
+//Page object on Edit page
+ this.chkActiveEdit = _checkbox(0,_rightOf(_label("Active")));
+
 };
 
 

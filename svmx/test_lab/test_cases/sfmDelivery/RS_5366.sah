@@ -4,9 +4,9 @@ var $standardSearch = "SVMXSTD: Timesheet Manager";
 $button = "Manage Permissions";
 $profile = "Sysadmin01 Group";
 $bo_act_login.login($g_url,$sfmUsn,$sfmPwd);
-$bo_act_navigation.navigateToSfmSearchDesigner();
-$sfm_act_search.managePermissionSearch($standardSearch, $button);
-$bo_act_navigation.navigateToHome();
+//$bo_act_navigation.navigateToSfmSearchDesigner();
+//$sfm_act_search.managePermissionSearch($standardSearch, $button);
+//$bo_act_navigation.navigateToHome();
 $sfm_act_search.searchSfmSearches($standardSearch);
 if(_isVisible(_span($standardSearch))){
 	_log("Pass");

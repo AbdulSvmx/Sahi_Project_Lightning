@@ -13,7 +13,7 @@ var $bo_act_serviceMaintenanceContracts = new function bo_act_serviceMaintenance
 		_setValue($bo_pg_serviceMaintenanceContracts.txt_sconName, $sconName);
 		_setValue($bo_pg_serviceMaintenanceContracts.txt_accountName, $accName);
 		_setValue($bo_pg_serviceMaintenanceContracts.txt_slaTermName, $slaTermName);
-		//_click($bo_pg_serviceMaintenanceContracts.chk_activeScon);	 //Uncomment to create Active Service Contract
+		_click($bo_pg_serviceMaintenanceContracts.chk_activeScon);	 //Uncomment to create Active Service Contract
 		_setValue($bo_pg_serviceMaintenanceContracts.txt_startDate, $bo_act_common.getPastDate($pastYear,"/"));
 		_setValue($bo_pg_serviceMaintenanceContracts.txt_endDate, $bo_act_common.getfutureDate($futureYear, "/"));
 		_click($bo_pg_serviceMaintenanceContracts.btn_save);
@@ -167,7 +167,8 @@ this.addPartPricingWithDiscountToServiceContract = function($sconName, $priceBoo
 	$bo_act_navigation.navigateToServiceMaintenanceContractPage();
 	_click(_link($sconName));
 	_selectDomain("/svmx/");
-	_click($bo_pg_serviceMaintenanceContracts.btn_sfmPartPricing);
+	//_click($bo_pg_serviceMaintenanceContracts.btn_sfmPartPricing);
+	_click($bo_pg_serviceMaintenanceContracts.btn_sfmnewPartsPricing); // Changes made by Meghana Rao
 	_selectDomain();
 	_wait(30000, _isVisible(_div("/Edit Service Contract Parts Pricing/")));
 	_setValue($bo_pg_serviceMaintenanceContracts.txt_defaultPartsPriceBook, $priceBookName);
@@ -336,7 +337,7 @@ this.addTravelPolicyToSCONWithTwoLines = function($sconName,$defaultTravelPrice,
 	_setValue($bo_pg_serviceMaintenanceContracts.txt_partsRates, $travelPolicyRate1);
 	 $bo_act_common.searchfunction($serviceType);	//Search Values like Service Types Name
 	_click($bo_pg_serviceMaintenanceContracts.btn_updateLaborPricing);
-	_setSpeed(100);
+	_setSpeed($g_stepSpeed);
 	_setStrictVisibilityCheck();
 	_click($bo_pg_serviceMaintenanceContracts.btn_saveLaborPricing);
 	_wait(30000, _isVisible($sconName));
@@ -408,4 +409,25 @@ this.searchActivityProduct = function($searchValue){
 	_setStrictVisibilityCheck(false);
 
 	};
+	
+
+	this.editServiceContract = function(){
+		_click($bo_pg_workOrders.btn_editWorkOrder);
 };
+
+this.updateCheckbox = function($object,$objectValue){
+	if($objectValue == true)
+		_check($object);
+	else
+		_uncheck($object);
+};
+
+this.saveServiceContract = function(){
+	_click($bo_pg_workOrders.btn_saveWorkOrder);
+	_assertNotVisible(_div("/Error: Invalid Data/"));
+	_wait(15000, _isVisible($bo_pg_serviceMaintenanceContracts.head_serviceContract));
+	//return $callBack.returnResult([_isVisible($accountName), "Account not created",$accountName] );
+};
+
+};
+

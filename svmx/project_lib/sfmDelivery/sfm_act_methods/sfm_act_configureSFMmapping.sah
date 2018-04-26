@@ -7,18 +7,10 @@ var $sfm_act_configureSFMmapping = new function sfm_act_configureSFMmapping(){
 		  _setSelected(_f("SFMExpressionBuilderSWF").s_combobox("sourceCombo"), "Product");
 		 _setSelected(_f("SFMExpressionBuilderSWF").s_combobox("targetCombo"), "Work Detail");
 		 _click(_f("SFMExpressionBuilderSWF").s_button("New"));
-		 _setSelected(_f("SFMExpressionBuilderSWF").s_combobox("valuesCombo[32]"), "Stockable");
-		 _setSelected(_f("SFMExpressionBuilderSWF").s_combobox("valuesCombo[7]"), "100");
-		 _setSelected(_f("SFMExpressionBuilderSWF").s_combobox("valuesCombo[69]"), "Product Description");
-		 _setSelected(_f("SFMExpressionBuilderSWF").s_combobox("valuesCombo[5]"), "Product Cost");
-		 _setSelected(_f("SFMExpressionBuilderSWF").s_combobox("valuesCombo[7]"), "Product Description");
-		 _click(_f("SFMExpressionBuilderSWF").listbasecontentholder("ListBaseContentHolder145"));
-		 _setSelected(_f("SFMExpressionBuilderSWF").s_combobox("valuesCombo[2]"), "Product Family");
-		 _setSelected(_f("SFMExpressionBuilderSWF").s_combobox("valuesCombo[8]"), "Created By ID");
-		 _setSelected(_f("SFMExpressionBuilderSWF").s_combobox("valuesCombo[9]"), "Created Date");
-		 _setSelected(_f("SFMExpressionBuilderSWF").s_combobox("valuesCombo[36]"), "Product Type");
-		 _setSelected(_f("SFMExpressionBuilderSWF").s_combobox("valuesCombo[37]"), "Product Line");
-		 _click(_f("SFMExpressionBuilderSWF").listbasecontentholder("ListBaseContentHolder145"));
+		 _setSelected(_f("SFMExpressionBuilderSWF").s_combobox("valuesCombo[5]"), "Product Cost");//Billing Line Price(r)
+		 _setSelected(_f("SFMExpressionBuilderSWF").s_combobox("valuesCombo[9]"), "Created Date");//Canceled On(r)
+		 _setSelected(_f("SFMExpressionBuilderSWF").s_combobox("valuesCombo[27]"), "Stockable");//Is Billable(r)
+		 _setSelected(_f("SFMExpressionBuilderSWF").s_combobox("valuesCombo[67]"), "Product Description");//Work Description(r)
 		 _setValue(_f("SFMExpressionBuilderSWF").s_textinput("Save this map as"),$mappingName);
 		 _click(_f("SFMExpressionBuilderSWF").s_button("Save As"));
 		 _wait(3000);

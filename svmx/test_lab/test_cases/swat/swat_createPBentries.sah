@@ -2,7 +2,7 @@
 
 var $swat_createPBentries = _testcase("$swat_createPBentries","create price book entries");
 $swat_createPBentries.start();
-_setSpeed(100);
+_setSpeed($g_stepSpeed);
 
 var $user_credentials_xls = $excel.readFromCustomExcel("../swat/swat_excelData/swatdata.xlsx", "USer_Details","","");
 var $standardpricedata_xls = $excel.readFromCustomExcel("../swat/swat_excelData/swatdata.xlsx", "Standard Price","","");

@@ -1,16 +1,16 @@
-//Tests are to be written here [Meghana Rao P]
+//Tests are to be written here [Meghana Rao]
 //==============
 
 //Pre - Condition Test Data
 
-var $RS_9635 = _testcase("$RS_9635","Creation of auto Entitlement rule for Case with multiple fields and rule sequence");
+var $RS_9635 = _testcase("$RS_9635","Creation of auto Entitlement for Case and then verifying the data when Setting is FALSE");
 $RS_9635.start();
-_setSpeed(100);
+_setSpeed($g_stepSpeed);
 /**
 * Login to the Sandbox Org
 */
 
-$bo_act_login.login($g_url, $un_checklist, $pwd_checklist);
+$bo_act_login.login($g_url, $bac_un, $bac_pwd);
 
 
 /**
@@ -33,12 +33,15 @@ var $CaseField1 = "Case Origin";
 var $Operator = "Equals";
 var $Value1 = "Email";
 var $CaseField2 = "Case Reason";
-var $Value2 = "New Problem";
+var $Value2 = "New problem";
 var	$p1 = "Service Contracts";	// $p4 = Warranties/Scon/Both for Entitlement check?
 var	$p2 = "Both";     // $p8 = Validity dates/Counters/Both
-var	$p3 = "Warranties";	// $p4 = Warranties/Scon/Both for Entitlement check?
+var	$p3 = "Warranties";
+var $caseStatus = "New";
+var $casePriority = "High";// $p4 = Warranties/Scon/Both for Entitlement check?
 
-var $data = _readExcelFile("../backOffice/bo_excleData/BORegressionDatasheet.xlsx","Sheet1",true);
+var $pastYear = 2;  // Start Date for Service Contract
+var $futureYear = 2;
 //Navigate to Auto Entitlement Rules - Case Rule1
 $autoEntitlementRuleName_Case1 = $bo_act_autoEntitlementRule_Case.createAutoEntitlementRule_Case($CaseField1, $Operator, $Value1, $CaseField2, $Value2, $p1, $p2);
 _assertExists(_span($autoEntitlementRuleName_Case1));
@@ -47,116 +50,35 @@ _assertExists(_span($autoEntitlementRuleName_Case1));
 
 // To create Service/Maintainence Contract and IB
 
-var $RS_9635_create_SCON = $data[1]["CreateServiceContract"];
-var $RS_9635_result = $op_act_sForceApiCall.sForceQuery($un_checklist, $pwd_checklist, $RS_9635_create_SCON , "create");
-var $RS_9635_query_SCON = $data[1]["FetchServiceContract"];
-var $orgdetails = $data[1]["OrgDetails"];
-var $Account = $data[1]["Account"];
-var $username = $data[1]["Username"];
-	
-var $RS_9635_fetch_SCON  = $op_act_sForceApiCall.sForceQuery($un_checklist, $pwd_checklist, $RS_9635_query_SCON,"query");
-var $RS_9635_SCON  = $RS_9635_fetch_SCON[0].Id;
+var $accountName = $bo_act_accounts.createAccount();
+var $contactName = $bo_act_contacts.createContact($accountName);
+
+var $productName = $bo_act_products.createProduct();
+var $IBName = $bo_act_installedProduct.createInstalledProduct($productName, $accountName, $contactName);
+var $slaterm = $bo_act_slaTerms.createSlaTerms("Default");
+var $ServiceContract = $bo_act_serviceMaintenanceContracts.createServiceMaintenanceContract($accountName, $slaterm, $futureYear, $pastYear);
+$bo_act_serviceMaintenanceContracts.activateServiceContract($ServiceContract);
+
+var $coveredproduct = $bo_act_serviceMaintenanceContracts.AddCoveredProductToSCON($ServiceContract, $IBName);
+var $Casename = $bo_act_Cases.createcase_checkentitlement($caseStatus, $casePriority, $Value1, $Value2,$IBName);
 
 
 
-// This is for Base Org test-cases
-if($orgdetails == "SVMXC")
-	{
-	
-	// To create IB
-	var $RS_9635_create_IB = "SVMXC__Installed_Product__c IB01 = new SVMXC__Installed_Product__c(SVMXC__Company__c = '"+$Account+"' , Name = 'RS-9636-IB' , SVMXC__Status__c = 'Installed');insert IB01;";
-	var $RS_9635_result_IB  = $op_act_sForceApiCall.sForceQuery($un_checklist, $pwd_checklist, $RS_9635_create_IB , "create");
-	var $RS_9635_get_IB = "Select Id from SVMXC__Installed_Product__c where Name = 'RS-9636-IB' Limit 1";
-	var $RS_9635_fetch_IB  = $op_act_sForceApiCall.sForceQuery($un_checklist, $pwd_checklist, $RS_9635_get_IB,"query");
-	
-	var $RS_9635_IB_ID = $RS_9635_fetch_IB[0].Id ;
-	
-	
-	// To create a Covered Product
-	
-	
-	var $RS_9635_create_CP = "SVMXC__Service_Contract_Products__c CP01 = new SVMXC__Service_Contract_Products__c(SVMXC__Installed_Product__c = '"+$RS_9635_IB_ID+"',SVMXC__Service_Contract__c = '"+$RS_9635_SCON+"',SVMXC__End_Date__c = System.Today() ); insert CP01;";
-	var $RS_9635_result_CP = $op_act_sForceApiCall.sForceQuery($un_checklist, $pwd_checklist, $RS_9635_create_CP , "create");
-	var $RS_9635_get_CP = "Select Id, Name from SVMXC__Service_Contract_Products__c where Createdby.Id = '"+$username+"' Order by CreatedDate DESC Limit 1";
-	var $RS_9635_fetch_CP   = $op_act_sForceApiCall.sForceQuery($un_checklist, $pwd_checklist, $RS_9635_get_CP,"query");
-	
-	
-		
-		var $RS_9635_cp_ID = $RS_9635_fetch_CP[0].Id ;
-	
-	
-	// To create a CASE
-		
-	var $RS_9635_case = "Case case_9636 = new Case (SVMXC__Component__c = '"+$RS_9635_IB_ID+"',SVMXC__Is_Entitlement_Performed__c = true);insert case_9636;";
-	var $RS_9635_result_case = $op_act_sForceApiCall.sForceQuery($un_checklist, $pwd_checklist, $RS_9635_case , "create");
-	var $RS_9635_get_case = "Select Id ,SVMXC__Auto_Entitlement_Status__c , SVMXC__Service_Contract__c from Case where Createdby.Id = '"+$username+"' Order by CreatedDate DESC Limit 1";
-	var $RS_9635_fetch_case   = $op_act_sForceApiCall.sForceQuery($un_checklist, $pwd_checklist, $RS_9635_get_case,"query");
-	
-	 var $RS_9635_case_ID = $RS_9635_fetch_case[0].Id;
-	 var $RS_9635_case_auto_entitlement_status = $RS_9635_fetch_case[0].SVMXC__Auto_Entitlement_Status__c;
-	 var $RS_9635_case_SC = $RS_9635_fetch_case[0].SVMXC__Service_Contract__c;
+var $RS_9635_get_case = "Select Id ,"+$orgnamespace+"__Auto_Entitlement_Status__c , "+$orgnamespace+"__Service_Contract__c from Case where CaseNumber ='"+$Casename+"'";
+var $RS_9635_fetch_case   = $op_act_sForceApiCall.sForceQuery($bac_un, $bac_pwd,$RS_9635_get_case,"query");
 
-	
-
-	};
-
-	
-// This is for DEV Org test-cases
-	if($orgdetails == "SVMXDEV")
-	{
-	
-	// To create IB
-	var $RS_9635_create_IB = "SVMXDEV__Installed_Product__c IB01 = new SVMXDEV__Installed_Product__c(SVMXDEV__Company__c = '"+$Account+"' , Name = 'RS-9636-IB' , SVMXDEV__Status__c = 'Installed');insert IB01;";
-	var $RS_9635_result_IB  = $op_act_sForceApiCall.sForceQuery($un_checklist, $pwd_checklist, $RS_9635_create_IB , "create");
-	var $RS_9635_get_IB = "Select Id from SVMXDEV__Installed_Product__c where Name = 'RS-9636-IB' Limit 1";
-	var $RS_9635_fetch_IB  = $op_act_sForceApiCall.sForceQuery($un_checklist, $pwd_checklist, $RS_9635_get_IB,"query");
-	
-	var $RS_9635_IB_ID = $RS_9635_fetch_IB[0].Id ;
-	
-	
-	// To create a Covered Product
-	
-	
-	var $RS_9635_create_CP = "SVMXDEV__Service_Contract_Products__c CP01 = new SVMXDEV__Service_Contract_Products__c(SVMXDEV__Installed_Product__c = '"+$RS_9635_IB_ID+"',SVMXDEV__Service_Contract__c = '"+$RS_9635_SCON+"',SVMXDEV__End_Date__c = System.Today() ); insert CP01;";
-	var $RS_9635_result_CP = $op_act_sForceApiCall.sForceQuery($un_checklist, $pwd_checklist, $RS_9635_create_CP , "create");
-	var $RS_9635_get_CP = "Select Id, Name from SVMXDEV__Service_Contract_Products__c where Createdby.Id = '"+$username+"' Order by CreatedDate DESC Limit 1";
-	var $RS_9635_fetch_CP   = $op_act_sForceApiCall.sForceQuery($un_checklist, $pwd_checklist, $RS_9635_get_CP,"query");
-	
-	
-		
-		var $RS_9635_cp_ID = $RS_9635_fetch_CP[0].Id ;
-	
-	
-	// To create a CASE
-		
-	var $RS_9635_case = "Case case_9636 = new Case (SVMXDEV__Component__c = '"+$RS_9635_IB_ID+"',SVMXDEV__Is_Entitlement_Performed__c = true);insert case_9636;";
-	var $RS_9635_result_case = $op_act_sForceApiCall.sForceQuery($un_checklist, $pwd_checklist, $RS_9635_case , "create");
-	var $RS_9635_get_case = "Select Id, SVMXDEV__Auto_Entitlement_Status__c , SVMXDEV__Service_Contract__c from Case where Createdby.Id = '"+$username+"' Order by CreatedDate DESC Limit 1";
-	var $RS_9635_fetch_case   = $op_act_sForceApiCall.sForceQuery($un_checklist, $pwd_checklist, $RS_9635_get_case,"query");
-	
-	 var $RS_9635_case_ID = $RS_9635_fetch_case[0].Id;
-	 var $RS_9635_case_auto_entitlement_status = $RS_9635_fetch_case[0].SVMXDEV__Auto_Entitlement_Status__c;
-	 var $RS_9635_case_SC = $RS_9635_fetch_case[0].SVMXDEV__Service_Contract__c;
-	_log($RS_9635_case_auto_entitlement_status);
-	
-
-	};
-	
-	
+ var $RS_9635_case_ID = $RS_9635_fetch_case[0].Id;
+ var $RS_9635_case_auto_entitlement_status = $RS_9635_fetch_case[0].SVMXC__Auto_Entitlement_Status__c;
+ var $RS_9635_case_SC = $RS_9635_fetch_case[0].SVMXC__Service_Contract__c;
 // to verify if the Case was Auto Entitled 
 	
 _assertEqual(null, $RS_9635_case_auto_entitlement_status);
-_assertNotEqual($RS_9635_SCON, $RS_9635_case_SC);
-
 
 //Clean up function
 
 var $datacreated = $autoEntitlementRuleName_Case1;
 
-	$bo_act_autoEntitlementRule_Case.deleteAutoEntitlementRule_Case($datacreated);
-
-
-
+$bo_act_autoEntitlementRule_Case.deleteAutoEntitlementRule_Case($datacreated);
 
 $bo_act_login.logOut(); 
 

@@ -42,7 +42,7 @@ var $sfm_act_sfmMappings1 = new function sfm_act_sfmMappings1() {
 	
      /**
 
-		$bo_pg_sfmTransactionAndDesigner.selectSFM($sfmNameToBeCloned, $isCustom);
+		$sfm_act_SFM.selectSFM($sfmNameToBeCloned, $isCustom);
 		_click($bo_pg_sfmTransactionAndDesigner.btn_clone);
 		_wait(3000)
 		_wait(60000, _isVisible($bo_pg_sfmTransactionAndDesigner.txt_name));
@@ -77,7 +77,7 @@ _wait(3000);
 
 		return $callBack.returnResult($result, "","cloneSfm");
 
-		_setSpeed(100);
+		_setSpeed($g_stepSpeed);
 		
 		*/
 	};

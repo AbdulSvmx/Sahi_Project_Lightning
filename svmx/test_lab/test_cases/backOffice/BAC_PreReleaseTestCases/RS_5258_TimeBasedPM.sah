@@ -4,7 +4,7 @@
 
 var $RS_5258 = _testcase("$RS_5258","Create a PM Plan from Service Contract with coverage type as Location");
 $RS_5258.start();
-_setSpeed(100);
+_setSpeed($g_stepSpeed);
 
 //Pre - Condition 
 $bo_act_login.login($g_url, $bac_PRTun, $bac_PRTpwd);

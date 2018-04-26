@@ -30,6 +30,7 @@ var $bo_pg_home = new function bo_pg_home(){
 	
 	this.sel_WBEnvironment = _select(0,_rightOf(_label("Environment:")));
 	this.btn_loginWithSalesForce = _submit("Login with Salesforce");
+	this.label_serviceMaxSFMSearch = _heading2("ServiceMax SFM Search");
 };
 
 

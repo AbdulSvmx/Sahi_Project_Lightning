@@ -1,26 +1,28 @@
-
+// Author Meghana Rao P
+/*
+ * To verify that an Untagged question comes under the group "Untagged"
+ */
+var $RS_9840 = _testcase("RS_9840", "o verify that an Untagged question comes under the group Untagged");
+$RS_9840.start();
 $bo_act_login.login($url_checklist, $un_checklist, $pwd_checklist);
-var $query = "Select Name , Id, FORMAT(SVMXC__Actual_Initial_Response__c) from SVMXC__Service_Order__c where Createdby.Id = '005q0000003GGfP' Order by CreatedDate DESC Limit 1";
-var $rs_10133_fetch = $op_act_sForceApiCall.sForceQuery($un_checklist, $pwd_checklist, $query ,"query");
+
+$bo_act_navigation.navigateToSfmTransactionDesigner();
+_wait(60000, _isVisible($bo_pg_sfmTransactionAndDesigner.btn_newSFM));
+_wait(1000);
+
+// To verify the new Question type Attachment
+//To verify the Boundary value of HELP URL text
 
 
-_log($rs_10133_fetch[0].SVMXC__Actual_Initial_Response__c);
+var $QuestionName = $bo_act_common.generateRandomName("A RS_9840");
+var $Process1 = $bo_act_common.generateRandomName("A_RS_9840_Pro1");
+$bo_act_checklistdesigner.newChecklistTypeSFM($Process1,"to generate a Checklist/Survey type of Process", "Work Order");
 
-var $value = $rs_10133_fetch[0].SVMXC__Actual_Initial_Response__c;
-var $dateformat1 = "AM";
-var $dateformat2 = "PM";
-
-if($value.match($dateformat1) || $value.match($dateformat2))
-	{
-	
-	_log("YESSSS");
-	
-	
-	}
+$bo_act_checklistdesigner.addQuestionToChecklist1($QuestionName, "");
+$bo_act_checklistdesigner.re_openChecklistTypeSFM($Process1, true);
+$bo_act_checklistdesigner.verifyquestion_undertags($QuestionName, "Untagged");
+_wait(10000);
 
 
-else
-	{
-	
-	_log("NOOOOO");
-	}
+
+$RS_9840.end();
