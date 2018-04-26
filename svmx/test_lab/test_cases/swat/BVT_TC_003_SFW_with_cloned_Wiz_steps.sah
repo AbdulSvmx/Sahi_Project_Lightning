@@ -83,12 +83,12 @@ _setSpeed($g_stepSpeed);
 	var $sfmTemplate5 = "SVMXSTD: Create Shipment from RMA";    
 	
 	
-	$sfm_act_SFM.cloneTDM016($sfmToBeCloned1, $sfmName1, $isCustom, $sfmTemplateSaveAsName1, $sfmTemplate1, "", "");
-	$sfm_act_SFM.cloneTDM016($sfmToBeCloned2, $sfmName2, $isCustom, $sfmTemplateSaveAsName2, $sfmTemplate2, "", "");
+	//$sfm_act_SFM.cloneTDM016($sfmToBeCloned1, $sfmName1, $isCustom, $sfmTemplateSaveAsName1, $sfmTemplate1, "", "");
+	//$sfm_act_SFM.cloneTDM016($sfmToBeCloned2, $sfmName2, $isCustom, $sfmTemplateSaveAsName2, $sfmTemplate2, "", "");
 	$sfm_act_SFM.cloneTDM016($sfmToBeCloned3, $sfmName3, $isCustom, $sfmTemplateSaveAsName3, $sfmTemplate3, "", "");
 	$sfm_act_SFM.cloneTDM016($sfmToBeCloned5, $sfmName5, $isCustom, $sfmTemplateSaveAsName5, $sfmTemplate5, "", "");
 	$swat_act_workOrderServiceReport.cloneWOServiceReport($sfmToBeCloned4, $sfmName4, $isCustom, $sfmTemplateSaveAsName4, $sfmTemplate4, "", "");
-	
+/*	
 	_click(_link("Home"));
 	
 	//Create SFM Wizard and add the above created SFM process to the wizard steps
@@ -124,7 +124,7 @@ _setSpeed($g_stepSpeed);
 	 
 	 
 	
-	$workOrderNo = $swat_act_workOrders.createWorkOrder($caseNumber, $accountName, $contactName, $IBName, "Open", "High", "Field Service");
+/*	$workOrderNo = $swat_act_workOrders.createWorkOrder($caseNumber, $accountName, $contactName, $IBName, "Open", "High", "Field Service");
 	//$woName = 
 	
 	//Create Service Contract(With child lines) and Activate it
