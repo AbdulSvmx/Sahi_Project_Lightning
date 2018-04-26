@@ -31,9 +31,7 @@ $bo_act_PMPlanTemplate.saveConditionBasedPM();
 
 // To goto the Location and verify PM Plan template
 
-//var $PMPlan = $bo_act_PMPlan.createConditionBasedPMPlanFromAccount($accName, $PMPTemplate,$IBName1,$IBName2);
-var $PMPlan = $bo_act_PMPlan.createConditionBasedPMPlanFromAccount("Acc942018152039", "PMT942018152435","IB_942018152313","IB_942018152358");
-
+var $PMPlan = $bo_act_PMPlan.createConditionBasedPMPlanFromAccount($accName, $PMPTemplate,$IBName1,$IBName2);
 
 // Search the PM Plan Name
 $bo_act_common.cleanUpfunctionold($PMPlan);

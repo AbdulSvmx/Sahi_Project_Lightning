@@ -38,6 +38,19 @@ var $bo_act_navigation = new function bo_act_navigation() {
 	//return $callBack.returnResult(_exists($bo_pg_sfmTransactionAndDesigner.btn_standardSfmTransaction));
     };
     
+    
+    /**
+     * NAvigate to SFM Maps
+     */
+    
+    this.navigatetoSFMMaps = function(){
+    	
+    	 this.navigateToSvmxSetup();
+    	 _click($bo_pg_servicemaxSetup.btn_serviceFlowManager);
+    		_click($bo_pg_sfmMappings.btn_sfmmappings);
+   		 _wait(10000);	 
+   		_setSpeed(3000);
+    };
     /**
      * Navigates to a SFm Search designer
      * @returns boolean
@@ -70,11 +83,21 @@ var $bo_act_navigation = new function bo_act_navigation() {
     
     this.navigateToInstalledProductPage = function(){
     	_click($bo_pg_home.btn_allTabs);
+    	if(_condition($bo_pg_home.link_installedProducts == null))
+    		{
+    		$bo_act_navigation.navigateToSetUpAndSearchfromUserNavlabel("Tabs");
+    		$bo_act_salesforcePageSetUp.createTabs("Installed Product",5);
+    		}
    	    _click($bo_pg_home.link_installedProducts);
     };
 
     this.navigateToServiceMaintenanceContractPage = function(){
     	_click($bo_pg_home.btn_allTabs);
+    	if(_condition($bo_pg_home.link_serviceMaintenanceContracts == null))
+		{
+		$bo_act_navigation.navigateToSetUpAndSearchfromUserNavlabel("Tabs");
+		$bo_act_salesforcePageSetUp.createTabs("Service/Maintenance Contract",4);
+		}
    	    _click($bo_pg_home.link_serviceMaintenanceContracts);
     };
     this.navigateToStockAdjustment = function(){
@@ -288,9 +311,16 @@ var $bo_act_navigation = new function bo_act_navigation() {
     	 _click(_link("Setup"));
     	 _wait(50000,_isVisible(_textbox("setupSearch")));
     	 _setValue(_textbox("setupSearch"),$searchValue);
-    	 _click(_link($searchValue));
-    	 
+    	 _click(_link($searchValue)); 
      };
+     this.navigateToSetUpAndSearchfromUserNavlabel = function($searchValue){
+     _click(_span("userNavLabel"));
+     _click(_link("Setup"));
+     _wait(50000,_isVisible(_textbox("setupSearch")));
+	 _setValue(_textbox("setupSearch"),$searchValue);
+	 _click(_link($searchValue)); 
+     };
+ 
 	this.navigateToCounterRule=function(){
 			this.navigateToSvmxSetup();
 		_click($bo_pg_servicemaxSetup.btn_instalBaseAndPM);

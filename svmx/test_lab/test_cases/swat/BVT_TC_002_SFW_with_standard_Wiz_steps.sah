@@ -126,8 +126,8 @@ _setSpeed($g_stepSpeed);
 	$bo_act_interactiveEntitlement_WO.performInteractiveEntitlementWO_UsingScon($workOrderNo, $serviceContractName);
 	var $actual_EntitlementType = _getText(_div(0,_rightOf(_cell("/Entitlement Type/"))));
 	var $ServiceContract_actual = _getText(_link(0,_rightOf(_cell("Service Contract"))));
-	_assertEqual($actual_EntitlementType,"INTERACTIVE","Actual and expected Entitlement Type are not same");
-	_assertEqual($ServiceContract_actual,$serviceContractName,"Actual and expected Service Conract are not same");
+	_assertEqual($actual_EntitlementType,"INTERACTIVE","Actual and expected Entitlement Type are same");
+	_assertEqual($ServiceContract_actual,$serviceContractName,"Actual and expected Service Conract are same");
  
 	_wait(20000);
 	
@@ -166,7 +166,7 @@ _setSpeed($g_stepSpeed);
 	_click(_image("/svmx-sfmd-edit-icon/"));
 	_setStrictVisibilityCheck(false);
 	_setValue(_textbox("Qty:"), "3");
-	_setValue(_textbox("/svmx-form-required-field/", _rightOf(_label("Unit Price:"))),"6000");
+	_setValue(_textbox("/svmx-form-required-field/", _rightOf(_label("/Unit Price/"))),"6000");
 	_click(_span("Update"));
 
 	//Add a Expense Line
@@ -176,7 +176,7 @@ _setSpeed($g_stepSpeed);
 	_click(_image("/svmx-sfmd-edit-icon/"));
 	_setStrictVisibilityCheck(false);
 	_setValue(_textbox("Qty:"), "4");
-	_setValue(_textbox("/svmx-form-required-field/", _near(_label("Unit Price:"))),"8500");
+	_setValue(_textbox("/svmx-form-required-field/", _near(_label("/Unit Price/"))),"8500");
 	_click(_span("Update"));
 	_wait(5000);
 	_click(_span("svmx-btn-icon svmx-sfmd-save-icon"));

@@ -106,7 +106,7 @@ var $bo_act_questionlibrary = new function bo_act_questionlibrary() {
 		_setValue($sfm_pg_checklistQuestionLibrary.txt_tagName, $tagname);
 		
 		if(_isVisible($sfm_pg_checklistQuestionLibrary.txt_defaultText)){
-			_setValue($sfm_pg_checklistQuestionLibrary.txt_defaultText, $defaultValue);
+			_setValue($sfm_pg_checklistQuestionLibrary.txt_defaultText, $defaultText);
 		}
 		else{
 			_log("This Org does not have a default text field in Checklist Question Library");

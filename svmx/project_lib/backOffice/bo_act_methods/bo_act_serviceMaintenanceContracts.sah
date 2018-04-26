@@ -409,4 +409,25 @@ this.searchActivityProduct = function($searchValue){
 	_setStrictVisibilityCheck(false);
 
 	};
+	
+
+	this.editServiceContract = function(){
+		_click($bo_pg_workOrders.btn_editWorkOrder);
 };
+
+this.updateCheckbox = function($object,$objectValue){
+	if($objectValue == true)
+		_check($object);
+	else
+		_uncheck($object);
+};
+
+this.saveServiceContract = function(){
+	_click($bo_pg_workOrders.btn_saveWorkOrder);
+	_assertNotVisible(_div("/Error: Invalid Data/"));
+	_wait(15000, _isVisible($bo_pg_serviceMaintenanceContracts.head_serviceContract));
+	//return $callBack.returnResult([_isVisible($accountName), "Account not created",$accountName] );
+};
+
+};
+

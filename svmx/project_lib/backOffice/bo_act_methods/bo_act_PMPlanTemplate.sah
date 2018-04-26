@@ -64,6 +64,49 @@ this.createUsageBasedConditionPMPTemplateNoSave = function($productName)
 	return $PMTemplateName;
 };
 
+
+this.createUsageBasedConditionPMPTemplateNoSave_withIBCondition = function($productName, $ib_criteria)
+{
+	var $PMTemplateName = $bo_act_common.generateRandomName("PMT");
+	$bo_act_navigation.navigateToPMPlanTemplatePage();
+	_click($bo_pg_PMPlanTemplate.btn_createConditionBasedPMPTemplate);
+	_wait(60000,_isVisible($bo_pg_PMPlanTemplate.txt_templateName));
+	_setValue($bo_pg_PMPlanTemplate.txt_templateName,$PMTemplateName);
+	_setValue($bo_pg_PMPlanTemplate.txt_product,$productName);
+	_click($bo_pg_PMPlanTemplate.img_filterIcon);
+	_click(_div(0,_rightOf($bo_pg_PMPlanTemplate.txt_product)));
+	_click(_listItem($productName));
+	_click($bo_pg_PMPlanTemplate.picklist_IB_filter);
+	_click(_listItem($ib_criteria));
+	return $PMTemplateName;
+};
+
+
+
+/*
+ * Author : Meghana Rao
+ * To create a PM Plan Template with different Date time in Activity Date
+ * 
+ */
+
+this.createUsageBasedCondition_DifferentDate = function($productName,$DateTime)
+{
+	
+	var $PMTemplateName = $bo_act_common.generateRandomName("PMT");
+	$bo_act_navigation.navigateToPMPlanTemplatePage();
+	_click($bo_pg_PMPlanTemplate.btn_createConditionBasedPMPTemplate);
+	_wait(60000,_isVisible($bo_pg_PMPlanTemplate.txt_templateName));
+	_setValue($bo_pg_PMPlanTemplate.txt_templateName,$PMTemplateName);
+	_setValue($bo_pg_PMPlanTemplate.txt_product,$productName);
+	_click($bo_pg_PMPlanTemplate.img_filterIcon);
+	_click(_div(0,_rightOf($bo_pg_PMPlanTemplate.txt_product)));
+	_click(_listItem($productName));
+	_click($bo_pg_PMPlanTemplate.txt_activitydate);
+	_click(_listItem($DateTime));
+	return $PMTemplateName;
+
+};
+
 this.updateUsageConditionRulesGridWithOutAdjFields = function($attribute,$operator,$frequency,$startAt,$stopAt){
 	_wait(5000);
 	_click($bo_pg_PMPlanTemplate.link_addRow);
@@ -110,7 +153,7 @@ this.updateUsageConditionRulesGridWithAdjFields = function($attribute,$operator,
 
 	_setValue($bo_pg_PMPlanTemplate.txt_startAt,$startAt);
 	
-	
+	_wait(1000);
 	_click($bo_pg_PMPlanTemplate.txt_stopAtbox);
 	_click($bo_pg_PMPlanTemplate.txt_stopAt);
 	_setValue($bo_pg_PMPlanTemplate.txt_stopAt,$stopAt);
@@ -148,8 +191,9 @@ this.saveConditionBasedPM = function(){
 	//_assertExist(_heading1("PM Plan Template:"));
 };
 
-this.createCriteriaBasedPMTemplate = function($PMTemplateName,$productName)
+this.createCriteriaBasedPMTemplate = function($productName)
 	{
+		var $PMTemplateName = $bo_act_common.generateRandomName("PMT");
 		$bo_act_navigation.navigateToPMPlanTemplatePage();
 		_wait(60000,_isVisible(_submit("Create Condition Based PM Plan Template")));
 		_click(_submit("Create Condition Based PM Plan Template"));
@@ -181,8 +225,13 @@ this.createCriteriaBasedPMTemplate = function($PMTemplateName,$productName)
 		_click(_listItem($operator));
 		
 		_click(_div("svmx-grid-cell-inner [4]"));
-		_setValue(_textbox(0,_under(_div("Value"))),$value);
+		_click($bo_pg_PMPlanTemplate.txt_valueCriteria); // Changed by Meghana Rao
+		_click(_listItem($value));
+		//_setValue(_textbox(0,_under(_div("Value"))),$value);
 	};
+	/*
+	 * This is only for Picklist values to be added as Rows
+	 */
 	this.addRow = function($attribute,$operator,$value){
 		_click(_span("+ Add row"));
 		_click(_div("/svmx-grid-cell-inner/",_under(_div("Attribute"))));
@@ -192,10 +241,93 @@ this.createCriteriaBasedPMTemplate = function($PMTemplateName,$productName)
 		_click(_div("/svmx-trigger-index/",_under(_div("Operator"))));
 		_click(_listItem($operator));
 //		_doubleClick(_div("/svmx-grid-cell-inner/",_under(_div("Value"))));
-		_click(_div("/svmx-grid/",_under(_div("Value"),10)));
-//		_setValue(_textbox(0,_under(_div("Value"))),$value);
-		_setValue(_textbox("/textfield/",_under(_div("Value"),10)),"Bangalore");
+		_click(_div("/svmx-grid-cell-inner/",_under(_div("Value"))));
+//		_click(_div("/svmx-trigger-index/",_under(_div("Value"))));
+		if(_isVisible(_listItem($value))){
+			_click(_listItem($value));
+		}
+		else{
+			_setValue(_textbox(0,_under(_div("Value"))),"Bangalore");
+		}
+	
 	};
+	this.addRowUsageBased = function($attribute,$operator,$frequency,$adjType,$minAdj,$maxAdj,$adjUnit){
+		$todayDate = new Date();
+		$date = $todayDate.getDate();
+		$month = $todayDate.getMonth()+1;
+		$year = $todayDate.getFullYear();
+		$prevDate = $month+"-"+$date+"-"+($year-1);
+		$futureDate = $month+"-"+$date+"-"+($year+1);
+		if($prevDate.length==9){
+			$prevDate = "0"+$prevDate;
+		}
+		if($futureDate.length==9){
+			$futureDate ="0"+$futureDate;
+		}
+		_click(_span("+ Add row"));
+		_click(_div("/svmx-grid-cell-inner/",_under(_div("Attribute"))));
+		_click(_div("/svmx-trigger-index/",_under(_div("Attribute"))));
+		_click(_div($attribute));
+		_click(_div("/svmx-grid-cell-inner/",_under(_div("Operator"))));
+		_click(_div("/svmx-trigger-index/",_under(_div("Operator"))));
+		_click(_listItem($operator));
+		_click(_div("/svmx-grid-cell-inner/",_under(_div("Frequency"))));
+		_setValue(_textbox(0,_under(_div("Frequency"))),$frequency);
+		_click(_div("/svmx-grid-cell-inner/",_under(_div("Start At"))));
+		_setValue(_textbox(0,_under(_div("Start At"))),$prevDate);
+		_click(_div("/svmx-grid-cell-inner/",_under(_div("Stop At"))));
+		_setValue(_textbox(0,_under(_div("Stop At"))),$futureDate);
+		_click(_div("/svmx-grid-cell-inner/",_under(_div("Adjustment Type"))));
+		_click(_div("/svmx-trigger-index/",_under(_div("Adjustment Type"))));
+		_click(_listItem($adjType));
+		_click(_div("/svmx-grid-cell-inner/",_under(_div("Minimum Adjustment"))));
+		_setValue(_textbox(0,_under(_div("Minimum Adjustment"))),$minAdj);
+		_click(_div("/svmx-grid-cell-inner/",_under(_div("Maximum Adjustment"))));
+		_setValue(_textbox(0,_under(_div("Maximum Adjustment"))),$maxAdj);
+		_click(_div("/svmx-grid-cell-inner/",_under(_div("Adjustment Unit"))));
+		_click(_div("/svmx-trigger-index/",_under(_div("Adjustment Unit"))));
+		_click(_listItem($adjUnit));
+	};
+	
+	/*
+	 * Author : Meghana Rao
+	 * Adding multiple values to the Rows - For Picklsit Values
+	 */
+	
+	this.addpicklistvalues_advancedexpression= function($attribute,$operator,$value, $rownumber){
+		_click(_span("+ Add row"));
+		_click(_div("/svmx-grid-cell-inner/",_rightOf(_div($rownumber)),_under(_div("Attribute"))));
+		_click(_div("/svmx-trigger-index/",_rightOf(_div($rownumber)),_under(_div("Attribute"))));
+		_click(_div($attribute));
+		_click(_div("/svmx-grid-cell-inner/",_rightOf(_div($rownumber)),_under(_div("Operator"))));
+		_click(_div("/svmx-trigger-index/",_rightOf(_div($rownumber)),_under(_div("Operator"))));
+		_click(_listItem($operator));
+		
+		_click(_div("/svmx-grid-cell-inner/",_rightOf(_div($rownumber)),_under(_div("Value"))));
+		_click(_div("/svmx-trigger-index/",_rightOf(_div($rownumber)),_under(_div("Value"))));
+		_click(_listItem($value));
+	};
+	
+	/*
+	 * Author : Meghana Rao
+	 * Adding multiple values to the Rows - For Text Values
+	 */
+	this.adddatevalues_advancedexpression = function($attribute,$operator,$rownumber){
+		_click(_span("+ Add row"));
+		_click(_div("/svmx-grid-cell-inner/",_rightOf(_div($rownumber)),_under(_div("Attribute"))));
+		_click(_div("/svmx-trigger-index/",_rightOf(_div($rownumber)),_under(_div("Attribute"))));
+		_click(_div($attribute));
+		_click(_div("/svmx-grid-cell-inner/",_rightOf(_div($rownumber)),_under(_div("Operator"))));
+		_click(_div("/svmx-trigger-index/",_rightOf(_div($rownumber)),_under(_div("Operator"))));
+		_click(_listItem($operator));
+		_click(_div("/svmx-grid-cell-inner/",_rightOf(_div($rownumber)),_under(_div("Value"))));
+		_click(_div("/svmx-trigger-index/",_rightOf(_div($rownumber)),_under(_div("Value"))));
+		_click($bo_pg_PMPlanTemplate.btn_today);
+		_click(_div("Equals"));
+		
+	};
+	
+	
 	this.createPmPlan = function($pmPlanName,$PMTemplateName,$templateName){
 		_selectDomain();
 		_setValue(_textbox("planName"),$pmPlanName);
@@ -212,6 +344,34 @@ this.createCriteriaBasedPMTemplate = function($PMTemplateName,$productName)
 		_setValue(_textbox("/startDate/"),$startDate);
 		_setValue(_textbox("/endDate/"),$endDate);
 		_click(_span("Save"));
+	};
+		
+	/*
+	 * Author: Meghana Rao
+	 * This method will create criteria based PM Plan
+	 */
+	this.verifytheadvancedexpression = function($ExpressionName){
+		
+		_setValue($bo_pg_PMPlanTemplate.txt_advanced_expression,$ExpressionName);
+		_click(_span("Condition Rules"));
+		_wait(20000);
+		_click($bo_pg_PMPlanTemplate.btn_save);
+		
+		
+		_assertEqual(true,_isVisible($bo_pg_PMPlanTemplate.expression_notvalid)); // To verify if an expression is invalid
+
+		
+	};
+	
+	this.saveadvancedexpression = function($ExpressionName){
+		
+		_setValue($bo_pg_PMPlanTemplate.txt_advanced_expression,$ExpressionName);
+		_click(_span("Condition Rules"));
+		_wait(20000);
+		_click($bo_pg_PMPlanTemplate.btn_save);
+		_assertEqual(false,_isVisible($bo_pg_PMPlanTemplate.expression_notvalid)); // To verify if an expression is invalid
+		
+		
 	};
 	
 	};

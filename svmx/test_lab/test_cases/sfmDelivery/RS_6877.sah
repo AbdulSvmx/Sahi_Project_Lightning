@@ -14,5 +14,5 @@ $sfm_act_createCustomWizard.chooseObject("Work Order");
 $sfm_act_createCustomWizard.addManageWizSteps($wizTitle,"SFM",$sfmName);
 $sfm_act_createCustomWizard.createBlankWo();
 $sfm_act_createCustomWizard.clickWizardBtn($sfmName);
-$sfm_act_createCustomWizard.verify6877();
+$sfm_act_createCustomWizard.verify6877("Acme");
 $rs_6877.end();	

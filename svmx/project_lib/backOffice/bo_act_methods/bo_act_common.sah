@@ -15,6 +15,27 @@ this.generateRandomName = function($Prefix){
     return $RandomString;
 };
 
+this.setDate = function($seperator){
+	
+	
+    var $now = new Date();
+    var $monthday;// = $now.getDate();
+    if ($now.getDate() < 10)
+        $monthday = "0" + $now.getDate();
+    else
+        $monthday = $now.getDate();
+    var $month = $now.getMonth() + 1;
+    if ($month < 10)
+      $month = "0" + $month;
+
+    var $year = $now.getFullYear();
+ 
+    $monthday = $monthday-1;
+    var $currentDate = $month+ $seperator + $monthday + $seperator + $year; 
+    return $currentDate;
+	
+};
+
 this.currentDate= function ($seperator){
     var $now = new Date();
     var $monthday;// = $now.getDate();
@@ -213,7 +234,7 @@ this.cleanUpfunctionold = function($value)
 		// Changes added by Meghana
 		
 		this.deleteCase = function($userName,$password,$value){
-			var $delete_Query = "delete [Select Id from Case where Name = '"+$value+"'];";
+			var $delete_Query = "delete [Select Id from Case where CaseNumber ='"+$value+"'];";
 			var $delete_data = $op_act_sForceApiCall.sForceQuery($userName, $password, $delete_Query , "create");	
 			
 		};
