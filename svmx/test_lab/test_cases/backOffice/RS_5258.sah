@@ -45,7 +45,7 @@ $bo_act_common.deleteProduct($bac_un, $bac_pwd,$proName);
 $bo_act_common.deleteSLA($bac_un, $bac_pwd, $orgnamespace, $slaterm);
 $bo_act_common.deleteSCON($bac_un, $bac_pwd, $orgnamespace, $sconName);
 $bo_act_common.deletePMPlantemplate($bac_un, $bac_pwd, $orgnamespace,$PMPTempName);
-$bo_act_common.deletePMPlan($bac_un, $bac_pwd, $orgnamespace,$PMPlan);
+$bo_act_common.deletePMPlan($bac_un, $bac_pwd, $orgnamespace,$PMPlanName);
 $bo_act_common.deleteLocation($bac_un, $bac_pwd, $orgnamespace,$location);
 
 //Clean up functions

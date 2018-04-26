@@ -64,6 +64,25 @@ this.createUsageBasedConditionPMPTemplateNoSave = function($productName)
 	return $PMTemplateName;
 };
 
+
+this.createUsageBasedConditionPMPTemplateNoSave_withIBCondition = function($productName, $ib_criteria)
+{
+	var $PMTemplateName = $bo_act_common.generateRandomName("PMT");
+	$bo_act_navigation.navigateToPMPlanTemplatePage();
+	_click($bo_pg_PMPlanTemplate.btn_createConditionBasedPMPTemplate);
+	_wait(60000,_isVisible($bo_pg_PMPlanTemplate.txt_templateName));
+	_setValue($bo_pg_PMPlanTemplate.txt_templateName,$PMTemplateName);
+	_setValue($bo_pg_PMPlanTemplate.txt_product,$productName);
+	_click($bo_pg_PMPlanTemplate.img_filterIcon);
+	_click(_div(0,_rightOf($bo_pg_PMPlanTemplate.txt_product)));
+	_click(_listItem($productName));
+	_click($bo_pg_PMPlanTemplate.picklist_IB_filter);
+	_click(_listItem($ib_criteria));
+	return $PMTemplateName;
+};
+
+
+
 /*
  * Author : Meghana Rao
  * To create a PM Plan Template with different Date time in Activity Date
@@ -134,7 +153,7 @@ this.updateUsageConditionRulesGridWithAdjFields = function($attribute,$operator,
 
 	_setValue($bo_pg_PMPlanTemplate.txt_startAt,$startAt);
 	
-	
+	_wait(1000);
 	_click($bo_pg_PMPlanTemplate.txt_stopAtbox);
 	_click($bo_pg_PMPlanTemplate.txt_stopAt);
 	_setValue($bo_pg_PMPlanTemplate.txt_stopAt,$stopAt);

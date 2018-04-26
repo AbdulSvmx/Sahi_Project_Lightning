@@ -44,6 +44,7 @@ var $bo_act_PMPlan = new function bo_act_PMPlan() {
 		_setValue($bo_pg_PMPlan.txt_startDate, $bo_act_common.currentDate("/"));
 		_setValue($bo_pg_PMPlan.txt_endDate, $bo_act_common.getfutureDate(1, "/"));
 		_click($bo_pg_PMPlan.btn_save);
+		return $PMPlanName;
 	
 	};
 	
@@ -80,6 +81,7 @@ var $bo_act_PMPlan = new function bo_act_PMPlan() {
 		_setValue($bo_pg_PMPlan.txt_planName,$PMPlanName);
 		_click($bo_pg_PMPlan.txt_planTemplateName);
 		_click(_listItem($PMPTemplate));
+		_wait(1000);
 		_setValue($bo_pg_PMPlan.txt_startDateInput,$bo_act_common.currentDate("/"));
 		_setValue($bo_pg_PMPlan.txt_endDateInput,$bo_act_common.getfutureDate(1, "/"));
 		_assertExists(_div($IBName),_under(_span("Coverages")));
@@ -87,6 +89,77 @@ var $bo_act_PMPlan = new function bo_act_PMPlan() {
 		_wait(15000, _isVisible(_heading2($PMPlanName)));
 		return $PMPlanName;
 	};
+	
+	
+	this.verify_conditionbasedPMPlan_SCON = function($sconName,$PMPTemplate,$IBName){
+		var $PMPlanName = $bo_act_common.generateRandomName("PMPlan");
+		$bo_act_navigation.navigateToServiceMaintenanceContractPage();
+		_click(_link($sconName));
+		_selectDomain("/svmx/");
+		if(_condition($bo_pg_PMPlan.btn_NewConditionBasedPMPlanfromServiceContract == null))
+		{
+			_selectDomain();
+			var $wizardTitleName = "Condition Based PM";
+			var $wizardIDName = $bo_act_common.generateRandomName("Wid");
+			$bo_act_navigation.navigateToSfmWizard();
+			$bo_act_SFW.createWizardGeneralInfo("Service/Maintenance Contract", $wizardTitleName, $wizardIDName);
+			$bo_act_SFW.createOthersWizardStepwithHandOver("Others", "New Condition Based PM Plan from Service Contract",false);
+			$bo_act_SFW.quickSaveSFWizard();
+			$bo_act_SFW.saveAndClose();
+			$bo_act_navigation.navigateToServiceMaintenanceContractPage();
+			_click(_link($sconName));
+
+		}else
+		_wait(1000);
+		_selectDomain("/svmx/");
+		_click($bo_pg_PMPlan.btn_NewConditionBasedPMPlanfromServiceContract);
+		_selectDomain();
+		_wait(60000,_isVisible($bo_pg_PMPlan.txt_planName));
+		_setValue($bo_pg_PMPlan.txt_planName,$PMPlanName);
+		_click($bo_pg_PMPlan.txt_planTemplateName);
+		_click(_listItem($PMPTemplate));
+		_setValue($bo_pg_PMPlan.txt_startDateInput,$bo_act_common.currentDate("/"));
+		_setValue($bo_pg_PMPlan.txt_endDateInput,$bo_act_common.getfutureDate(1, "/"));
+		_assertExists(_div($IBName),_under(_span("Coverages")));
+		
+	};
+	
+	/*
+	 * To verofy if an IB which doesn't meet the criteria is not present in the coverage
+	 */
+	this.verify_conditionbasedPMPlan_negative = function($sconName,$PMPTemplate,$IBName){
+		var $PMPlanName = $bo_act_common.generateRandomName("PMPlan");
+		$bo_act_navigation.navigateToServiceMaintenanceContractPage();
+		_click(_link($sconName));
+		_selectDomain("/svmx/");
+		if(_condition($bo_pg_PMPlan.btn_NewConditionBasedPMPlanfromServiceContract == null))
+		{
+			_selectDomain();
+			var $wizardTitleName = "Condition Based PM";
+			var $wizardIDName = $bo_act_common.generateRandomName("Wid");
+			$bo_act_navigation.navigateToSfmWizard();
+			$bo_act_SFW.createWizardGeneralInfo("Service/Maintenance Contract", $wizardTitleName, $wizardIDName);
+			$bo_act_SFW.createOthersWizardStepwithHandOver("Others", "New Condition Based PM Plan from Service Contract",false);
+			$bo_act_SFW.quickSaveSFWizard();
+			$bo_act_SFW.saveAndClose();
+			$bo_act_navigation.navigateToServiceMaintenanceContractPage();
+			_click(_link($sconName));
+
+		}else
+		_wait(1000);
+		_selectDomain("/svmx/");
+		_click($bo_pg_PMPlan.btn_NewConditionBasedPMPlanfromServiceContract);
+		_selectDomain();
+		_wait(60000,_isVisible($bo_pg_PMPlan.txt_planName));
+		_setValue($bo_pg_PMPlan.txt_planName,$PMPlanName);
+		_click($bo_pg_PMPlan.txt_planTemplateName);
+		_click(_listItem($PMPTemplate));
+		_setValue($bo_pg_PMPlan.txt_startDateInput,$bo_act_common.currentDate("/"));
+		_setValue($bo_pg_PMPlan.txt_endDateInput,$bo_act_common.getfutureDate(1, "/"));
+		_assertNotExists(_div($IBName),_under(_span("Coverages")));
+		
+	};
+	
 	
 	/*
 	 * Author: Meghana Rao
@@ -236,6 +309,7 @@ var $bo_act_PMPlan = new function bo_act_PMPlan() {
 		_setValue($bo_pg_PMPlan.txt_endDateInput,$bo_act_common.getfutureDate(2, "/"));
 		_assertEqual(true,_isVisible(_div("Any changes made to PM Plan might lead to changes in future schedules and they will be regenerated (Please click on coverages to confirm the changes). Do you want to continue?")));
 		_click($bo_pg_PMPlan.btn_yes);
+		_setValue($bo_pg_PMPlan.txt_startDateInput,$bo_act_common.currentDate("/"));
 		_click($bo_pg_PMPlan.btn_saveCustomUI);
 
 		

@@ -20,12 +20,15 @@ $bo_act_slaTerms.addRestorationToSLA($slaterm1, "WorkOrder","All", "High", "Crea
 $bo_act_slaTerms.addResolutionToSLA($slaterm1, "WorkOrder","All", "High", "Created Date", 30, 60, "SLA");
 
 
-//Clean up function
-var $delete_Query = "DELETE[SELECT NAME FROM SVMXC__Service_Level__c WHERE NAME = '"+$slaterm+"';";
-var $delete_data = $op_act_sForceApiCall.sForceQuery($bac_PRTun, $bac_PRTpwd, $delete_Query , "create");
+$bo_act_slaTerms.deleteSLATerm($slaterm);
+$bo_act_slaTerms.deleteSLATerm($slaterm1);
 
-var $delete_Query = "DELETE[SELECT NAME FROM SVMXC__Service_Level__c WHERE NAME = '"+$slaterm1+"';";
-var $delete_data = $op_act_sForceApiCall.sForceQuery($bac_PRTun, $bac_PRTpwd, $delete_Query , "create");
+//Clean up function
+//var $delete_Query = "DELETE[SELECT NAME FROM SVMXC__Service_Level__c WHERE NAME = '"+$slaterm+"';";
+//var $delete_data = $op_act_sForceApiCall.sForceQuery($bac_PRTun, $bac_PRTpwd, $delete_Query , "create");
+
+//var $delete_Query = "DELETE[SELECT NAME FROM SVMXC__Service_Level__c WHERE NAME = '"+$slaterm1+"';";
+//var $delete_data = $op_act_sForceApiCall.sForceQuery($bac_PRTun, $bac_PRTpwd, $delete_Query , "create");
 
 $RS_5244.end();
 

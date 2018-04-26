@@ -30,7 +30,9 @@ var $bo_pg_serviceMaintenanceContracts = new function bo_pg_serviceMaintenanceCo
 	this.txt_contract = _textbox("/Contact/");
 	this.txt_SFMSconName = _textbox(0,_rightOf(_label("Contract Name/Number:")));
 	this.txt_SFMSconEndDate = _textbox(0,_rightOf(_label("/End Date/")));
-	
+	this.head_serviceContract = _heading1("Service/Maintenance Contract:");
+	this.activateContractSFM = _button("Activate Contract");
+	this.btn_activateContract = _span("Activate Contract");
 	//Object for Activate Contract on Service/Maintenance Contract
 	this.btn_activateContractSFM = _button("Activate Contract");
 	this.btn_activateContract = _span("Activate Contract");
@@ -96,6 +98,10 @@ var $bo_pg_serviceMaintenanceContracts = new function bo_pg_serviceMaintenanceCo
 	this.txt_travelPolicyMaximum = _textbox("Maximum:",_near(_span("Update")));
 	this.btn_travelPolicyZonePricingTab = _span("Zone Pricing");
 	this.txt_travelPolicyZone = _textbox("Zone:",_near(_span("Update")));
+
+//Page object on Edit page
+ this.chkActiveEdit = _checkbox(0,_rightOf(_label("Active")));
+
 };
 
 
