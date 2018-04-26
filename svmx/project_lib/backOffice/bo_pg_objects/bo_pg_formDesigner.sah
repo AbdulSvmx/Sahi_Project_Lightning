@@ -20,6 +20,7 @@ var $bo_pg_formDesigner=new function bo_pg_formDesigner(){
 	this.tab_homeScreen = _link("Home");
 	this.btn_selectQuestionFromList=_f("main").listbasecontentholder("/ListBaseContentHolder/");
 	this.btn_selectAttachmentType=_f("main").uiftetextfield("Attachment");
+	this.txt_attachmentDescription=_textbox("/inputEl/");
 
 	
 	

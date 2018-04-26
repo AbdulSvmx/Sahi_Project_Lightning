@@ -28,40 +28,41 @@ $selectTemplateAtRunTime = true;
 $sfmName1 = "to generate a Checklist/Survey type of Process";
 $objectName = "Work Order";
 var checklist_lnk = _link("Checklists");
-//$dateQuestion = $bo_act_common.generateRandomName("SwatDateQuestion");
-//$textQuestion = $bo_act_common.generateRandomName("SwatTextQuestion");
-//$timeQuestion = $bo_act_common.generateRandomName("SwatTimeQuestion");
-//$numberQuestion = $bo_act_common.generateRandomName("SwatNumberQuestion");
-//$checkboxQuestion = $bo_act_common.generateRandomName("SwatCheckboxQuestion");
-//$checkboxResponse = $bo_act_common.generateRandomName("SwatCheckboxResponse");
-//var $defaultText = "Default Text";
-//$defaultNumber = '6';
+$dateQuestion = $bo_act_common.generateRandomName("SwatDateQuestion");
+$textQuestion = $bo_act_common.generateRandomName("SwatTextQuestion");
+$timeQuestion = $bo_act_common.generateRandomName("SwatTimeQuestion");
+$numberQuestion = $bo_act_common.generateRandomName("SwatNumberQuestion");
+$checkboxQuestion = $bo_act_common.generateRandomName("SwatCheckboxQuestion");
+$checkboxResponse = $bo_act_common.generateRandomName("SwatCheckboxResponse");
+var $defaultText = "Default Text";
+$defaultNumber = '6';
 var $checklistName = "Swat Checklist"+$number1;
+var $attachmentName = $bo_act_common.generateRandomName("Attachment"); 
 
-//$bo_act_questionlibrary.createDefaultDateTimeQuestion($dateQuestion, "DateTime", "Value");
-//$bo_act_questionlibrary.createTextQuestion($textQuestion, "Text" , "https://www.google.com", "SWAT" , $defaultText);
-//_click($bo_pg_servicemaxSetup.btn_backToSetupHome);
-//$bo_act_questionlibrary.createCheckbox_RadioQuestion($checkboxQuestion, "Checkbox", "https://www.google.com", $checkboxResponse);
-//$bo_act_questionlibrary.createNumberQuestion($numberQuestion, "Number" , "https://www.google.com", "SWAT", '6');
-
-
+$bo_act_questionlibrary.createDefaultDateTimeQuestion($dateQuestion, "DateTime", "Value");
+$bo_act_questionlibrary.createTextQuestion($textQuestion, "Text" , "https://www.google.com", "SWAT" , $defaultText);
+_click($bo_pg_servicemaxSetup.btn_backToSetupHome);
+$bo_act_questionlibrary.createCheckbox_RadioQuestion($checkboxQuestion, "Checkbox", "https://www.google.com", $checkboxResponse);
+$bo_act_questionlibrary.createNumberQuestion($numberQuestion, "Number" , "https://www.google.com", "SWAT", '6');
 
 //To create Checklist Process 1
 $bo_act_navigation.navigateToSfmTransactionDesigner();
 _wait(60000, _isVisible($bo_pg_sfmTransactionAndDesigner.btn_newSFM));
 _wait(1000);
 $bo_act_checklistdesigner.newChecklistTypeSFM($checklistName, $sfmName1 ,$objectName);
-//$bo_act_checklistdesigner.addChecklistQuestionToForm($dateQuestion);
-//$bo_act_checklistdesigner.addChecklistQuestionToForm($textQuestion);
-//$bo_act_checklistdesigner.addChecklistQuestionToForm($numberQuestion);
-//$bo_act_checklistdesigner.addChecklistQuestionToForm($checkboxQuestion);
-//adding attachment type question to Checklist process
-_click($bo_pg_formDesigner.tab_clickFormDesigner); //comment it later
-_click($bo_pg_formDesigner.btn_addNewQuestion);
-_select($bo_pg_formDesigner.btn_selectQuestionFromList);
-_click($bo_pg_formDesigner.btn_selectAttachmentType);
+$bo_act_checklistdesigner.addChecklistQuestionToForm($dateQuestion);
+$bo_act_checklistdesigner.addChecklistQuestionToForm($textQuestion);
+$bo_act_checklistdesigner.addChecklistQuestionToForm($numberQuestion);
+$bo_act_checklistdesigner.addChecklistQuestionToForm($checkboxQuestion);
 
-$bo_pg_formDesigner.btn_save_close;
+//adding attachment type question to Checklist process
+_click($bo_pg_formDesigner.btn_addNewQuestion);
+_click($bo_pg_formDesigner.btn_selectAttachmentType);
+_setValue($bo_pg_formDesigner.lbl_questionText,$attachmentName);
+_click($bo_pg_formDesigner.btn_addQuestionToLibraryAndForm);
+_click($bo_pg_formDesigner.btn_closeQuestionPopUp);	
+_click($bo_pg_formDesigner.btn_quickSave);
+_click($bo_pg_formDesigner.btn_save_close);
 
 $bo_pg_formDesigner.tab_homeScreen;
 $bo_act_navigation.navigateToSfmWizard();
@@ -82,7 +83,8 @@ $swat_act_pageLoadWait.waitTillPageLoads(checklist_lnk);
 _click(_label($checklistName));
 _wait(10000,_isVisible(_label($dateQuestion)));
 _wait(15000,_isVisible(_label($textQuestion)));
-
+_setFile2(_file("/fileInputEl/"), "C:\\auto\\sahi_pro\\userdata\\P1.png", "", true, true);
+_setValue($bo_pg_formDesigner.txt_attachmentDescription,"Attachment");
 _click($sfm_pg_checklistQuestionLibrary.btn_submitChecklist);
 if(_isVisible(_label("/Completed/"),_rightOf(_label($checklistName))))
 	_log("The checklist is completed");
