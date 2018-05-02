@@ -10,7 +10,6 @@ var $bo_act_navigation = new function bo_act_navigation() {
      */this.navigateToHome = function() {
     	 _selectWindow();
 	_click($bo_pg_home.link_home);
-	_wait(6000, _isVisible($bo_pg_home.link_servicemaxSetup));
 	//return $callBack.returnResult(_exists($bo_pg_home.link_servicemaxSetup ));
 	
     };
@@ -20,7 +19,17 @@ var $bo_act_navigation = new function bo_act_navigation() {
      * @returns boolean
      */this.navigateToSvmxSetup = function() {
 	 this.navigateToHome();
-	_click($bo_pg_home.link_servicemaxSetup );
+		if(_isVisible($bo_pg_home.link_servicemaxSetup) == null )
+		{
+		_click($bo_pg_home.link_more); 
+		_wait(6000, _isVisible($bo_pg_home.link_servicemaxSetup));
+		_click($bo_pg_home.link_servicemaxSetup);
+		}
+		else
+		{
+			_click($bo_pg_home.link_servicemaxSetup);
+			
+		}
 	_wait(3000,_isVisible($bo_pg_servicemaxSetup.btn_serviceFlowManager));
 	//return $callBack.returnResult(_exists($bo_pg_servicemaxSetup.btn_serviceFlowManager));
 
@@ -257,7 +266,7 @@ var $bo_act_navigation = new function bo_act_navigation() {
       */
      this.navigateToActivityMaster = function() {
  	 this.navigateToSvmxSetup();
- 	
+ 	 _wait(1000);
  	_click($bo_pg_servicemaxSetup.btn_warrantiesAndServiceContracts);
  	_click($bo_pg_servicemaxSetup.btn_activityMaster);
  	_wait(1000);
