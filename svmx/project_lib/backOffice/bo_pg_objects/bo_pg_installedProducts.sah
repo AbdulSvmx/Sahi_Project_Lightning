@@ -5,17 +5,18 @@
  */
 
 var $bo_pg_installedProducts = new function bo_pg_installedProducts(){
-	this.btn_new = _button(" New ");
-	this.txt_productName = _textbox("/Product/");
-	this.txt_serialNumber = _textbox("/Serial/");
-	this.txt_accountName = _textbox("/\\*Account|^Account/");
-	this.txt_distributor_account = _textbox("/Distributor Account/");
-	this.txt_contactName = _textbox("/\\*Contact|^Contact/");
-	this.txt_installedProductName = _textbox("/\\*Installed Product Name|^\\*Installed Product ID/");
-	this.txt_installedDate = _click(_link(0,_rightOf(_textbox("Date Installed"))));
-	this.btn_save = _submit(" Save ");
+	this.btn_new = _div("New");
+	this.txt_productName = _textbox("Product Name of the product. This is a lookup to an existing salesforce product record.*");
+	this.txt_serialNumber = __textbox("Serial/Lot Number Unique identification of this product. This information is Required if the product’s tracking is Serialized or Lot/Batch Tracked in the product record*");
+	this.txt_accountName = _textbox("Account Name of the customer account for this installed product. Lookup to an existing salesforce account record");
+	this.txt_distributor_account = _textbox("Distributor Account Name of the distributor company if applicable");
+	this.txt_contactName = _textbox("Contact Name of the primary contact for this installed product at the customer’s location. Lookup to an existing salesforce contact record");
+	this.txt_installedProductName = _textbox("Installed Product ID*");
+	this.txt_installedDate = _click(_link(0,_rightOf(_textbox("Date Installed Date on which the product was installed at the customer location"))));
+	this.btn_save = _span("Save[1]");
 	this.btn_delete = _button("Delete");
 	this.btn_continue = _submit("Continue");
+	this.txt_city = _textbox("City “City” part of the physical location address");
 	
 	this.btn_createWorkOrder = _button("Create Work Order");
 	this.btn_sfmSave = _span("/svmx-sfmd-save-icon/");

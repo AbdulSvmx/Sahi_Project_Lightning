@@ -63,12 +63,10 @@ var $bo_act_navigation = new function bo_act_navigation() {
     
 //Added By BAC Team
     this.navigateToProductsPage = function(){
-    	_click($bo_pg_home.btn_allTabs);
     	_click($bo_pg_home.link_products);
     };
     
     this.navigateToAccountsPage = function(){
-    	 _click($bo_pg_home.btn_allTabs);
     	 _click($bo_pg_home.link_accounts);
     };
     this.navigateToCasesPage = function(){
@@ -77,17 +75,15 @@ var $bo_act_navigation = new function bo_act_navigation() {
    };
     	
      this.navigateToContactsPage = function(){
-    	 _click($bo_pg_home.btn_allTabs);
     	 _click($bo_pg_home.link_contacts);
     };
     
     this.navigateToInstalledProductPage = function(){
-    	_click($bo_pg_home.btn_allTabs);
-    	if(_condition($bo_pg_home.link_installedProducts == null))
-    		{
-    		$bo_act_navigation.navigateToSetUpAndSearchfromUserNavlabel("Tabs");
-    		$bo_act_salesforcePageSetUp.createTabs("Installed Product",5);
-    		}
+//    	if(_condition($bo_pg_home.link_installedProducts == null))
+//    		{
+//    		$bo_act_navigation.navigateToSetUpAndSearchfromUserNavlabel("Tabs");
+//    		$bo_act_salesforcePageSetUp.createTabs("Installed Product",5);
+//    		}
    	    _click($bo_pg_home.link_installedProducts);
     };
 

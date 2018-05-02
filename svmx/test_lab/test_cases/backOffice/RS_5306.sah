@@ -11,7 +11,7 @@ _setSpeed($g_stepSpeed);
 $bo_act_login.login($g_url, $bac_un, $bac_pwd);
 
 //Pre - Condition Test Data
-var $productFamily = ["--None--","GeneralSolution","AdvSolution","Accessory", "Storage"];
+var $productFamily = ["Laptop","Vehicle","Electric"];
 var $productCode = "";
 var $seperator = "/";
 
@@ -19,9 +19,20 @@ var $seperator = "/";
 * Create Account, Contact, Location, Product and Installed Product
 */
 var $accountName = $bo_act_accounts.createAccount();
+
+//
+//var $delete_Query = "delete [Select Id from Account where Name = 'Acc252018122528'];";
+//var $delete_data = $op_act_sForceApiCall.sForceQuery($bac_un, $bac_pwd, $delete_Query , "create");
+	
+
+
 var $contactName = $bo_act_contacts.createContact($accountName);
 var $productName = $bo_act_products.createProduct($productCode, $productFamily[0]);
+
+
 var $IBName = $bo_act_installedProduct.createInstalledProduct($productName, $accountName, $contactName);
+
+
 
 /**
 * Add Price To Standard Price for above created Product

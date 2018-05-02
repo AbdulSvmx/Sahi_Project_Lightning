@@ -11,6 +11,7 @@ var $bo_act_login = new function bo_act_login() {
 	 * @param $pwd
 	 */
 	this.login = function($url, $un, $pwd) {
+		
 		// Setting default values
 		/*
 		 * $url = $url || $g_url; $un = $un || $g_un; $pwd = $pwd || $g_pwd;
@@ -21,9 +22,8 @@ var $bo_act_login = new function bo_act_login() {
 		_setValue($bo_pg_login.txt_password, $pwd);
 		_click($bo_pg_login.btn_login);
 		//_wait(30000);
-		_wait(30000, _isVisible($bo_pg_home.link_home));
+		_wait(3000, _isVisible($bo_pg_home.link_home));
 		_call(top.location.reload(true));
-
 		return $callBack.returnResult(_exists($bo_pg_home.link_home), "login");
 
 		// Need to return

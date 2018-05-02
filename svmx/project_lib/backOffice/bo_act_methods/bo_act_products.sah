@@ -28,14 +28,13 @@ var $bo_act_products = new function bo_act_products() {
 		_click($bo_pg_products.btn_new);
 		_setValue($bo_pg_products.txt_productName, $productName);
 		_setValue($bo_pg_products.txt_productCode, $productCode);
-		_setSelected($bo_pg_products.sel_productFamily, $productFamily);
+		_click($bo_pg_products.sel_productFamily);
+		_click(_link($productFamily));
 		_check($bo_pg_products.chk_active);
-		_check($bo_pg_products.chk_stockable);
-		_check($bo_pg_products.chk_serializedTracking);
 		_click($bo_pg_products.btn_save);
-		_assertNotVisible(_div("/Error: Invalid Data/"));
+		_assertNotVisible(_span("Review the errors on this page."));
+		_wait(15000, _isVisible(_span($productName)));
 		_logOutput($productName+ " product is created");
-		_wait(15000, _isVisible(_heading2($productName)));
 		return $productName;
 	};
 	
@@ -84,10 +83,10 @@ var $bo_act_products = new function bo_act_products() {
 	this.addStandardPriceForProduct = function($productName, $standardPriceValue) {
 		$bo_act_navigation.navigateToProductsPage();
 		_click(_link($productName));
+		_click($bo_pg_products.btn_related_list);
 		_click($bo_pg_products.btn_addStandardPrice);
 		_setValue($bo_pg_products.txt_enterStandardPrice, $standardPriceValue);
 		_click($bo_pg_products.btn_saveStandardPrice);
-		_wait(15000, _isVisible($bo_pg_products.txt_productDetailPage));
 	};
 
 };

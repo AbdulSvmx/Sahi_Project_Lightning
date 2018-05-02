@@ -5,11 +5,11 @@
  */
 
 var $bo_pg_accounts = new function bo_pg_accounts(){
-	this.btn_new = _button(" New ");
-	this.txt_accountName = _textbox("acc2");
-	this.btn_save = _submit(" Save ");
+	this.btn_new = _div("New");
+	this.txt_accountName = _textbox("Account Name*");
+	this.btn_save = _span("Save[1]")
 	this.btn_delete = _button("Delete");
-	this.btn_saveAndNew = _submit("Save & New");
+	this.btn_saveAndNew = _span("Save & New");
 	this.newInstalledProduct = _button("New Installed Product");
 	this.txt_parentaccount = _textbox("Parent Account");
 	
