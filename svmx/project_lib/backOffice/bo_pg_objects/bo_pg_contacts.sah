@@ -4,10 +4,10 @@
 
 var $bo_pg_contacts = new function bo_pg_contacts(){
 	this.btn_new = _div("New");
-	this.txt_contactName = _textbox("Last Name*");
-	this.txt_accountName = _textbox("Account Name*");
-	this.btn_save = _span("Save[1]");
-	this.btn_saveAndNew = _span("Save & New");
+	this.txt_contactName = _textbox("/Last Name/");
+	this.txt_accountName = _textbox("/Account Name/");
+	this.btn_save = _button("Save[1]");
+	this.btn_saveAndNew = _button("Save & New");
 	this.btn_delete = _button("Delete");
 };
 
