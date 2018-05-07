@@ -26,6 +26,7 @@ var $sfm_act_configChanges = new function sfm_act_configChanges() {
 					_selectWindow("Servicemax_Conf_Prof");
 					_setSelected(_select(0,_near(_label("Choose Option"))),"Lightning");
 					_click(_button("Save"));
+					_closeWindow();
 				}
 				break;
 			}
