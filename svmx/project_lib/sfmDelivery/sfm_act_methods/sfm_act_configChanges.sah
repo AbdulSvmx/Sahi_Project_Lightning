@@ -1,0 +1,36 @@
+var $sfm_act_configChanges = new function sfm_act_configChanges() {
+	
+	this.switchToLightning = function($profileName,$selectedProfile){
+		if(_isVisible($bo_pg_home.link_servicemaxSetup) == false )
+		{
+		_click($bo_pg_home.link_more); 
+		_wait(6000, _isVisible($bo_pg_home.link_servicemaxSetup));
+		_click($bo_pg_home.link_servicemaxSetup);
+		}
+		else
+		{
+			_click($bo_pg_home.link_servicemaxSetup);
+			
+		}
+		_click(_div("Configuration Profiles"));
+		_click(_checkbox(0,_leftOf(_span($profileName))));
+		_click(_submit("/Edit/",_near(_heading2("Group-wide Configuration Settings"))));
+		var $profiles = _getText(_select("selectedProfil1"));
+		for(var $i=0;$i<$profiles.length;$i++){
+			if($profiles[$i]==$selectedProfile){
+				_setSelected(_select(0,_rightOf(_label("Select Module"))),"SFM Transaction Manager");
+				_setSelected(_select(0,_rightOf(_label("Select Submodule"))),"SFM Transaction Delivery Engine");
+				var $settingId = _getText(_cell(0,_under(_tableHeader("Setting ID"))));
+				if($settingId=="SET004"){
+					_click(_link("Edit",_near(_cell("SET004"))));
+					_selectWindow("Servicemax_Conf_Prof");
+					_setSelected(_select(0,_near(_label("Choose Option"))),"Lightning");
+					_click(_button("Save"));
+					_closeWindow();
+				}
+				break;
+			}
+		}
+	};
+	
+};
