@@ -79,7 +79,7 @@ var $bo_act_navigation = new function bo_act_navigation() {
     	 _click($bo_pg_home.link_accounts);
     };
     this.navigateToCasesPage = function(){
-   	 _click($bo_pg_home.btn_allTabs);
+   	 _click($bo_pg_home.link_applauncher);
    	 _click($bo_pg_home.link_cases);
    };
     	
@@ -187,6 +187,7 @@ var $bo_act_navigation = new function bo_act_navigation() {
      this.navigateToConfigurationProfilesPage = function(){
         	$bo_act_navigation.navigateToHome();
         	$bo_act_navigation.navigateToSvmxSetup();
+			_selectDomain("/svmx/");
         	_click($bo_pg_servicemaxSetup.btn_appAdministration);
         	_click($bo_pg_servicemaxSetup.btn_configurationProfiles);
         };
