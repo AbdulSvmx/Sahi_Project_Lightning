@@ -51,6 +51,7 @@ var $bo_act_configurationProfiles = new function bo_act_configurationProfiles() 
 		
 		this.editGroupProfileForTextSettings = function($groupProfileName, $Module, $SubModule, $Setting, $settingValue) {
 			$bo_act_navigation.navigateToConfigurationProfilesPage();
+			_selectDomain("/svmx/");
 			_check($bo_pg_configurationProfiles.chk_groupProfile);
 			 _click($bo_pg_configurationProfiles.btn_editForGrp);
 			 _wait(1000);

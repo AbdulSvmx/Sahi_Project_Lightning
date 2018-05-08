@@ -5,23 +5,26 @@ var $bo_pg_servicePricebooks = new function bo_pg_servicePricebooks(){
 	
 	// Click on Service Price Book 
 	this.clickOnServicePriceBook = function($PriceBookName){
-		
-		_click(_span($PriceBookName));
+		_click(_span("Recently Viewed"));
+		_doubleClick (_span("All Service Pricebook"));
+		_click(_link($PriceBookName));
 	};
 	
 	this.btn_sfmEditServicePricebook = _button("Edit Service Pricebook");
 	this.btn_addSingleLaborLine = _span("/sfmd-add-line-icon/");
 	this.txt_standardServicePriceBook = _heading2("Service Pricebook Detail");
-	this.btn_newServicePricebookEntry = _button("New Service Pricebook Entry");
-	this.sel_unit	= _select(0,_rightOf(_label("Unit")));
+	this.btn_newServicePricebookEntry = _div("New");
+	this.sel_unit	= _link("Per Hour");
 	this.txt_activityID = _textbox("Activity Id");
 	this.txt_activityProduct = _textbox("Activity Product");
 	this.txt_regularRate = _textbox("Regular Rate");
-	this.btn_saveServicePricebookEntry = _submit(" Save ");
+	this.btn_saveServicePricebookEntry = _span("Save");
 	this.btn_deleteServicePricebookEntry = _button("Delete"); 
 	this.btn_editServicePriceBook = _button(" Edit ");
 	this.chk_activateServicePriceBook = _checkbox("Active");
 	this.link_navigateBackToServicePriceBook = _link("/Standard Service Price Book/", _near(_heading2("Service Pricebook Entry Detail")));
+	this.link_related = _span("Related");
+	
 	
 	this.clickOnServicePriceBookEntry = function($ServicePricebooksEntryNumber){
 		
