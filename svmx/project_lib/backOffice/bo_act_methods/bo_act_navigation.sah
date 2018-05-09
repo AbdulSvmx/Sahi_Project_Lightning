@@ -77,8 +77,16 @@ var $bo_act_navigation = new function bo_act_navigation() {
     	_click($bo_pg_home.link_products);
     };
     
-    this.navigateToAccountsPage = function(){
-    	 _click($bo_pg_home.link_accounts);
+    this.navigateToAccountsPage = function(){ //Modified for Lightning
+    	if(_isVisible ($bo_pg_home.link_accounts)==true){
+    		_click($bo_pg_home.link_accounts);
+    	}
+    	else{
+    		_click($bo_pg_home.link_more);
+    		_click(_link("Accounts[1]"));
+    		_click($bo_pg_home.link_accounts);
+    	}
+ 
     };
     this.navigateToCasesPage = function(){
     	this.navigateToHome();
@@ -87,19 +95,29 @@ var $bo_act_navigation = new function bo_act_navigation() {
    	 	_click(_span("/Cases/",_near($bo_pg_home.btn_heading_allitems)));
    };
     	
-     this.navigateToContactsPage = function(){
-    	 _click($bo_pg_home.link_contacts);
+     this.navigateToContactsPage = function(){ //Modified for Lightning
+    	 if(_isVisible ($bo_pg_home.link_contacts)==true){
+     		_click($bo_pg_home.link_contacts);
+     	}
+     	else{
+     		_click($bo_pg_home.link_more);
+     		_click(_link("Contacts[1]"));
+     		_click($bo_pg_home.link_contacts);
+     	}
     };
     
-    //Changes made for Lightning
-    this.navigateToInstalledProductPage = function(){   		
-    	if(_isVisible($bo_pg_home.link_installedProducts)== false)
-    	{
-    	_click($bo_pg_home.link_installedProducts, _near(_span("More")));
-    	}
-    	
-   	    _click($bo_pg_home.link_installedProducts);
-    };
+
+    this.navigateToInstalledProductPage = function(){ //Modified for Lightning
+    	 if(_isVisible ($bo_pg_home.link_installedProducts)==true){
+      		_click($bo_pg_home.link_installedProducts);
+      	}
+      	else{
+      		_click($bo_pg_home.link_more);
+      		_click(_link("Installed Products[1]"));
+      		_click($bo_pg_home.link_installedProducts);
+      	}
+};
+
 
     this.navigateToServiceMaintenanceContractPage = function(){
     	_click($bo_pg_home.btn_allTabs);
