@@ -5,10 +5,10 @@
  */
 
 var $bo_pg_home = new function bo_pg_home(){
-	this.link_home = _link("Home");
+	this.link_home = _span("Home");
 	this.link_more = _span("More");
 	this.drpdn_servicemaxSetup = _link("ServiceMax Setup[1]");
-	this.link_servicemaxSetup = _link("ServiceMax Setup");
+	this.link_servicemaxSetup = _span("/ServiceMax Setup/i");
 	this.btn_userName = _span("userNavLabel");
 	this.btn_allTabs =_image("All Tabs");
 	this.link_accounts = _link("Accounts"); //Modified for Lightning
@@ -26,11 +26,10 @@ var $bo_pg_home = new function bo_pg_home(){
 	this.link_logOut = _link("Logout");
 	this.link_allTabs = _image("All Tabs");
 	this.link_more = _link("/Show More/"); //Added for Lightning
-	
+	this.link_applauncher = _div("App Launcher");
+	this.btn_heading_allitems = _heading3("All Items");
 	this.link_preventiveMaintenancePlans = _link("Preventive Maintenance Plans");
-	
 	this.link_customWorkOrders = _link("/listRelatedObject Custom/",_near(_image("Work Orders")));
-	
 	this.sel_WBEnvironment = _select(0,_rightOf(_label("Environment:")));
 	this.btn_loginWithSalesForce = _submit("Login with Salesforce");
 	this.label_serviceMaxSFMSearch = _heading2("ServiceMax SFM Search");

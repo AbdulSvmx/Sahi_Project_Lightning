@@ -19,7 +19,7 @@ var $bo_act_navigation = new function bo_act_navigation() {
      * @returns boolean
      */this.navigateToSvmxSetup = function() {
 	 this.navigateToHome();
-		if(_isVisible($bo_pg_home.link_servicemaxSetup) == null )
+		if(_isVisible($bo_pg_home.link_servicemaxSetup) == false )
 		{
 		_click($bo_pg_home.link_more); 
 		_wait(6000, _isVisible($bo_pg_home.link_servicemaxSetup));
@@ -87,8 +87,8 @@ var $bo_act_navigation = new function bo_act_navigation() {
  
     };
     this.navigateToCasesPage = function(){
-   	 _click($bo_pg_home.btn_allTabs);
-   	 _click($bo_pg_home.link_cases);
+   	 _click($bo_pg_home.link_applauncher);
+   	 _click(_span("/Cases/",_near($bo_pg_home.btn_heading_allitems)));
    };
     	
      this.navigateToContactsPage = function(){ //Modified for Lightning
@@ -111,7 +111,7 @@ var $bo_act_navigation = new function bo_act_navigation() {
       		_click(_link("Installed Products[1]"));
       		_click($bo_pg_home.link_installedProducts);
       	}
-    };
+};
 
     this.navigateToServiceMaintenanceContractPage = function(){
     	_click($bo_pg_home.btn_allTabs);
@@ -203,7 +203,8 @@ var $bo_act_navigation = new function bo_act_navigation() {
         
      this.navigateToConfigurationProfilesPage = function(){
         	$bo_act_navigation.navigateToHome();
-        	_click(_link("ServiceMax Setup"));
+        	$bo_act_navigation.navigateToSvmxSetup();
+			_selectDomain("/svmx/");
         	_click($bo_pg_servicemaxSetup.btn_appAdministration);
         	_click($bo_pg_servicemaxSetup.btn_configurationProfiles);
         };
@@ -227,8 +228,10 @@ var $bo_act_navigation = new function bo_act_navigation() {
       */
  	this.navigateToSfmWizard = function() {
  	 this.navigateToSvmxSetup();
+ 	 _selectDomain("/svmx/");
  	_click($bo_pg_servicemaxSetup.btn_serviceFlowManager);
  	_click($bo_pg_servicemaxSetup.btn_sfmWizard);
+ 	_selectDomain();
     };
 
  	  /**
@@ -283,13 +286,12 @@ var $bo_act_navigation = new function bo_act_navigation() {
       */
      this.navigateToActivityMaster = function() {
  	 this.navigateToSvmxSetup();
- 	 _wait(1000);
+ 	 _selectDomain("/svmx/");
  	_click($bo_pg_servicemaxSetup.btn_warrantiesAndServiceContracts);
  	_click($bo_pg_servicemaxSetup.btn_activityMaster);
- 	_wait(1000);
+	_selectDomain();
 	_call(top.location.reload());
-	_wait(1000);
-	_call(top.location.reload());
+	
 	
      };
      
@@ -298,8 +300,10 @@ var $bo_act_navigation = new function bo_act_navigation() {
       */
      this.navigateToServicePricebooks = function() {
  	 this.navigateToSvmxSetup();
+ 	 _selectDomain("/svmx/");
  	_click($bo_pg_servicemaxSetup.btn_warrantiesAndServiceContracts);
  	_click($bo_pg_servicemaxSetup.btn_servicePricebooks);
+ 	_selectDomain();
  	_wait(1000);
 	_call(top.location.reload());
 	_wait(1000);
@@ -318,10 +322,9 @@ var $bo_act_navigation = new function bo_act_navigation() {
      };
      
      this.navigateToWorkOrdersTab = function(){
-    	 _click($bo_pg_home.btn_allTabs);
-    	 _setStrictVisibilityCheck(true);
-    		_click($bo_pg_home.link_customWorkOrders);
-    		_setStrictVisibilityCheck(false);
+    	 _click($bo_pg_home.link_applauncher);
+       	 _click(_span("/Work Orders/",_near($bo_pg_home.btn_heading_allitems)));
+
      };
 
      this.navigateToStockTransfers = function(){

@@ -26,28 +26,39 @@ var $bo_act_SFW = new function bo_act_SFW() {
 		};
 	
 	this.addNewManageWizardSteps = function($wizardStepType,$wizardStepName,$executionMode){
+		_selectDomain("/svmx/");
 		_click($bo_pg_sfmWizard.tab_manageWizardSteps);
 		_click($bo_pg_sfmWizard.btn_manageWizardSteps_newStep);
 		_wait(3000,_isVisible($bo_pg_sfmWizard.combo_wizardStepType));
 		_setSelected($bo_pg_sfmWizard.combo_wizardStepType, $wizardStepType);
 		_setSelected($bo_pg_sfmWizard.combo_wizardStepName, $wizardStepName);
 		_setSelected($bo_pg_sfmWizard.combo_executionMode,$executionMode);
+		_selectDomain();
 	};
-		this.addCustomActionToWizard=function($fieldActnType,$actnName){
+		this.addCustomActionToWizard=function($fieldActnType,$actnName, $customwizardTitle){
+		_wait(10000);
 		_click($bo_pg_sfmWizard.tab_wizardStep);
+		_wait(10000);
 		_click($bo_pg_sfmWizard.btn_newWizardStep);
+		_wait(10000);
 		_assertVisible($bo_pg_sfmWizard.lbl_verifyNewWizardSection);
+		_wait(1000);
 		_setSelected($bo_pg_sfmWizard.sel_wizardFieldType,$fieldActnType);
 		_wait(30000);
 		_setSelected($bo_pg_sfmWizard.sel_wizardObjectType,$actnName);
+		
 		//_assertVisible(_label($actnName));
 		_wait(3000);
 		_wait(2000);
+		__setValue($bo_pg_sfmWizard.txt_customwizard_title, $customwizardTitle);
+		_wait(2000);
 		_click($bo_pg_sfmWizard.btn_saveWizardStep);
-			_wait(6000);		
+			_wait(6000);	
 		};
 			this.selWizardStatusAsInactive=function($wizardStatus){
+				_selectDomain("/svmx/");
 				_setSelected($bo_pg_sfmWizard.sel_wizardStatus,$wizardStatus);
+				_selectDomain();
 			};
 			
 	this.editWizard=function($objName,$wizardId)	{
@@ -90,6 +101,7 @@ var $bo_act_SFW = new function bo_act_SFW() {
 		};
 		
 	this.createWizardGeneralInfo=function($objName,$wizardname,$wizardID){
+	_selectDomain("/svmx/");
 	_setSelected($bo_pg_sfmWizard.sel_objPrevMaintPlan,$objName	);
 	_wait(3000);
 	_assertVisible($bo_pg_sfmWizard.lbl_verifyCustWizardSection);
@@ -97,9 +109,11 @@ var $bo_act_SFW = new function bo_act_SFW() {
 	_wait(30000,_isVisible($bo_pg_sfmWizard.txt_wizardName));
 	_setValue($bo_pg_sfmWizard.txt_wizardName,$wizardname);
 	_setValue($bo_pg_sfmWizard.txt_wizardID,$wizardID);
+	_selectDomain();
 };
 
 	this.createWizardStep=function($fieldActnType,$actnName,$executionMode){
+		_selectDomain("/svmx/");
 		_click($bo_pg_sfmWizard.tab_wizardStep);
 		_click($bo_pg_sfmWizard.btn_newWizardStep);
 		_assertVisible($bo_pg_sfmWizard.lbl_verifyNewWizardSection);
@@ -141,7 +155,9 @@ this.deleteWizards = function($objName,$wizardId){
 		_click($bo_pg_sfmWizard.btn_deleteWizard);
 	};
 this.quickSaveSFWizard = function(){
+	_selectDomain("/svmx/");
 	_click(_button("Quick Save"));
+	_selectDomain();
 };	
 this.createSFMWizardStepwithHandOver=function($fieldActnType,$actnName,$executionMode,$handOver){
 	_click($bo_pg_sfmWizard.tab_wizardStep);
