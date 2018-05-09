@@ -51,16 +51,21 @@ var $bo_act_configurationProfiles = new function bo_act_configurationProfiles() 
 		
 		this.editGroupProfileForTextSettings = function($groupProfileName, $Module, $SubModule, $Setting, $settingValue) {
 			$bo_act_navigation.navigateToConfigurationProfilesPage();
-			_check(_checkbox(0,_leftOf(_span($groupProfileName))));
+			 _wait(1000);
+			 _check(_checkbox(0,_leftOf(_span($groupProfileName))));
 			 _click($bo_pg_configurationProfiles.btn_editForGrp);
 			 _wait(1000);
 			 _setSelected($bo_pg_configurationProfiles.sel_selectModule,$Module);
+			 _wait(1000);
 			 _setSelected($bo_pg_configurationProfiles.sel_selectSubModule,$SubModule);
+			 _wait(1000);
 			 _click(_link("Edit",_leftOf(_span($Setting))));
 			 _selectDomain();
+			 _wait(1000);
 			 _selectWindow("/Servicemax_Conf_Prof/");
 			 _setValue($bo_pg_configurationProfiles.txt_settingValues,$settingValue);
 			 _click($bo_pg_configurationProfiles.btn_popUpSave);
+			 _wait(1000);
 			 _click($bo_pg_configurationProfiles.btn_popUpClose);
 			 _selectWindow();
 			 _selectDomain("/svmx/");

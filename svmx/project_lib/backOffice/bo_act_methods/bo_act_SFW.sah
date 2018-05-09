@@ -35,20 +35,25 @@ var $bo_act_SFW = new function bo_act_SFW() {
 		_setSelected($bo_pg_sfmWizard.combo_executionMode,$executionMode);
 		_selectDomain();
 	};
-		this.addCustomActionToWizard=function($fieldActnType,$actnName){
-		_selectDomain("/svmx/");
+		this.addCustomActionToWizard=function($fieldActnType,$actnName, $customwizardTitle){
+		_wait(10000);
 		_click($bo_pg_sfmWizard.tab_wizardStep);
+		_wait(10000);
 		_click($bo_pg_sfmWizard.btn_newWizardStep);
+		_wait(10000);
 		_assertVisible($bo_pg_sfmWizard.lbl_verifyNewWizardSection);
+		_wait(1000);
 		_setSelected($bo_pg_sfmWizard.sel_wizardFieldType,$fieldActnType);
 		_wait(30000);
 		_setSelected($bo_pg_sfmWizard.sel_wizardObjectType,$actnName);
+		
 		//_assertVisible(_label($actnName));
 		_wait(3000);
 		_wait(2000);
+		__setValue($bo_pg_sfmWizard.txt_customwizard_title, $customwizardTitle);
+		_wait(2000);
 		_click($bo_pg_sfmWizard.btn_saveWizardStep);
 			_wait(6000);	
-			_selectDomain();
 		};
 			this.selWizardStatusAsInactive=function($wizardStatus){
 				_selectDomain("/svmx/");
@@ -120,7 +125,6 @@ var $bo_act_SFW = new function bo_act_SFW() {
 		_setSelected($bo_pg_sfmWizard.combo_executionMode,$executionMode);
 		_wait(2000);
 		_click($bo_pg_sfmWizard.btn_saveWizardStep);
-		_selectDomain();
 		_wait(1000);		
 };
 
@@ -151,7 +155,9 @@ this.deleteWizards = function($objName,$wizardId){
 		_click($bo_pg_sfmWizard.btn_deleteWizard);
 	};
 this.quickSaveSFWizard = function(){
+	_selectDomain("/svmx/");
 	_click(_button("Quick Save"));
+	_selectDomain();
 };	
 this.createSFMWizardStepwithHandOver=function($fieldActnType,$actnName,$executionMode,$handOver){
 	_click($bo_pg_sfmWizard.tab_wizardStep);

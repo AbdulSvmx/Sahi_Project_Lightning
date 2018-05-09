@@ -23,6 +23,7 @@ var $bo_pg_sfmWizard= new function bo_pg_sfmWizard() {
 	this.lbl_verifyNewWizardSection=_label("Wizard Step Type[1]");
 	this.sel_wizardFieldType=_select("page1:form1:mainPblock:tab2mainpblock:j_id149:j_id153:j_id154:actnFieldtype");
 	this.sel_wizardObjectType=_select("page1:form1:mainPblock:tab2mainpblock:j_id149:j_id153:j_id159:actntype");
+	this.txt_customwizard_title = _textbox("page1:form1:mainPblock:tab2mainpblock:j_id149:j_id153:j_id181:actntitle");
 	this.btn_saveWizardStep=_button("Save");
 	this.chk_selectCustomWizard=_checkbox(13);
 	this.btn_deleteWizard=_button("Delete");

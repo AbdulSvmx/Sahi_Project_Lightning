@@ -18,9 +18,9 @@ var $bo_pg_installedProducts = new function bo_pg_installedProducts(){
 	this.btn_continue = _submit("Continue");
 	this.txt_city = _textbox("City “City” part of the physical location address");
 	
-	this.btn_createWorkOrder = _button("Create Work Order");
-	this.btn_sfmSave = _span("/svmx-sfmd-save-icon/");
-	this.txt_workOrderNumber = _heading2("/WO/");
+	this.btn_createWorkOrder = _button("/Create Work Order/");
+	this.btn_sfmSave = _span("Save");
+	this.txt_workOrderNumber = _paragraph("Work Order");
 	this.btn_SFWcreateSupportCase = _button("Create Support Case");
 	this.txt_SFMcreateSupportCaseStatus = _textbox(0,_rightOf(_label("Status:")));
 	this.txt_caseNumber = _heading2(0,_near(_heading1("Case:")));

@@ -10,16 +10,23 @@ var $bo_act_workOrders = new function bo_act_workOrders() {
 		$bo_act_navigation.navigateToWorkOrdersTab();
 		_click($bo_pg_workOrders.btn_newWorkOrder);
 		_setValue($bo_pg_workOrders.txt_case, $caseNumber);
+		_click($caseNumber);
 		_setValue($bo_pg_workOrders.txt_account, $accountName);
+		_click($accountName);
 		_setValue($bo_pg_workOrders.txt_contact, $contactName);
-		_setSelected($bo_pg_workOrders.sel_orderStatus, $orderStatus);
-		_setSelected($bo_pg_workOrders.sel_priority, $priority);
-		_setSelected($bo_pg_workOrders.sel_orderType, $orderType);
-		_setValue($bo_pg_workOrders.txt_component, $IBName);
+		_click($contactName);
+		_click($bo_pg_workOrders.sel_orderStatus);
+		_click($orderStatus);
+		_click($bo_pg_workOrders.sel_priority);
+		_click($priority);
+		_click($bo_pg_workOrders.sel_orderType);
+		_click($orderType)
+		_click($bo_pg_workOrders.txt_component);
+		_click($IBName);
 		_click($bo_pg_workOrders.btn_saveWorkOrder);
-		_assertNotVisible(_div("/Error: Invalid Data/"));
-		_wait(15000, _isVisible($bo_pg_workOrders.txt_workOrderDetails));
-		var $workOrderNumber =  _getText($bo_pg_workOrders.txt_getWONumber);
+		_assertNotVisible(span("Review the errors on this page."));
+		_wait(15000, _isVisible($bo_pg_workOrders.txt_getWONumber));
+		var $workOrderNumber =  _getText(_span(0,_near($bo_pg_workOrders.txt_getWONumber)));
 		_logOutput($workOrderNumber+ " Work Order is created");
 		return $workOrderNumber;
 	};
@@ -34,11 +41,13 @@ var $bo_act_workOrders = new function bo_act_workOrders() {
 	};
 	this.updateTextBoxFields = function($object,$objectValue){
 		_setValue($object,$objectValue);
+		_click($objectValue);
 		//return $callBack.returnResult([_isVisible($accountName), "Account not created",$accountName] );
 	};
 	
 	this.updateDropDownFields = function($object,$objectValue){
-		_setSelected($object,$objectValue);
+		_setValue($object,$objectValue);
+		_click($objectValue);
 		//return $callBack.returnResult([_isVisible($accountName), "Account not created",$accountName] );
 	};
 	
@@ -49,8 +58,8 @@ var $bo_act_workOrders = new function bo_act_workOrders() {
 	
 	this.saveWorkOrder = function(){
 		_click($bo_pg_workOrders.btn_saveWorkOrder);
-		_assertNotVisible(_div("/Error: Invalid Data/"));
-		_wait(15000, _isVisible($bo_pg_workOrders.txt_workOrderDetails));
+		_assertNotVisible(span("Review the errors on this page."));
+		_wait(15000, _isVisible($bo_pg_workOrders.txt_getWONumber));
 		//return $callBack.returnResult([_isVisible($accountName), "Account not created",$accountName] );
 	};
 	

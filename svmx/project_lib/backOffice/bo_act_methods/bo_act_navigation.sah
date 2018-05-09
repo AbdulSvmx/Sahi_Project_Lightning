@@ -87,12 +87,12 @@ var $bo_act_navigation = new function bo_act_navigation() {
     	 _click($bo_pg_home.link_contacts);
     };
     
-    this.navigateToInstalledProductPage = function(){
-//    	if(_condition($bo_pg_home.link_installedProducts == null))
-//    		{
-//    		$bo_act_navigation.navigateToSetUpAndSearchfromUserNavlabel("Tabs");
-//    		$bo_act_salesforcePageSetUp.createTabs("Installed Product",5);
-//    		}
+    this.navigateToInstalledProductPage = function(){   		
+    	if(_isVisible($bo_pg_home.link_installedProducts)== false)
+    	{
+    	_click($bo_pg_home.link_installedProducts, _near(_span("More")));
+    	}
+    	
    	    _click($bo_pg_home.link_installedProducts);
     };
 
@@ -305,10 +305,9 @@ var $bo_act_navigation = new function bo_act_navigation() {
      };
      
      this.navigateToWorkOrdersTab = function(){
-    	 _click($bo_pg_home.btn_allTabs);
-    	 _setStrictVisibilityCheck(true);
-    		_click($bo_pg_home.link_customWorkOrders);
-    		_setStrictVisibilityCheck(false);
+    	 _click($bo_pg_home.link_applauncher);
+       	 _click(_span("/Work Orders/",_near($bo_pg_home.btn_heading_allitems)));
+
      };
 
      this.navigateToStockTransfers = function(){
