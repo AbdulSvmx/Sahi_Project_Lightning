@@ -75,25 +75,42 @@ var $bo_act_navigation = new function bo_act_navigation() {
     	_click($bo_pg_home.link_products);
     };
     
-    this.navigateToAccountsPage = function(){
-    	 _click($bo_pg_home.link_accounts);
+    this.navigateToAccountsPage = function(){ //Modified for Lightning
+    	if(_isVisible ($bo_pg_home.link_accounts)==true){
+    		_click($bo_pg_home.link_accounts);
+    	}
+    	else{
+    		_click($bo_pg_home.link_more);
+    		_click(_link("Accounts[1]"));
+    		_click($bo_pg_home.link_accounts);
+    	}
+ 
     };
     this.navigateToCasesPage = function(){
    	 _click($bo_pg_home.btn_allTabs);
    	 _click($bo_pg_home.link_cases);
    };
     	
-     this.navigateToContactsPage = function(){
-    	 _click($bo_pg_home.link_contacts);
+     this.navigateToContactsPage = function(){ //Modified for Lightning
+    	 if(_isVisible ($bo_pg_home.link_contacts)==true){
+     		_click($bo_pg_home.link_contacts);
+     	}
+     	else{
+     		_click($bo_pg_home.link_more);
+     		_click(_link("Contacts[1]"));
+     		_click($bo_pg_home.link_contacts);
+     	}
     };
     
-    this.navigateToInstalledProductPage = function(){
-//    	if(_condition($bo_pg_home.link_installedProducts == null))
-//    		{
-//    		$bo_act_navigation.navigateToSetUpAndSearchfromUserNavlabel("Tabs");
-//    		$bo_act_salesforcePageSetUp.createTabs("Installed Product",5);
-//    		}
-   	    _click($bo_pg_home.link_installedProducts);
+    this.navigateToInstalledProductPage = function(){ //Modified for Lightning
+    	 if(_isVisible ($bo_pg_home.link_installedProducts)==true){
+      		_click($bo_pg_home.link_installedProducts);
+      	}
+      	else{
+      		_click($bo_pg_home.link_more);
+      		_click(_link("Installed Products[1]"));
+      		_click($bo_pg_home.link_installedProducts);
+      	}
     };
 
     this.navigateToServiceMaintenanceContractPage = function(){

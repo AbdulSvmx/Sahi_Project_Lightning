@@ -7,7 +7,7 @@ var $bo_act_installedProduct = new function bo_act_installedProduct() {
 	 * Create an Account
 	 * 
 	 */
-	this.createInstalledProduct = function($productName,$accountName,$contactName) {
+	this.createInstalledProduct = function($productName,$accountName,$contactName,$date) {
 		var $serialNum = $bo_act_common.generateRandomName("Ser");
 		var $IBName = $bo_act_common.generateRandomName("IB_");
 		 $bo_act_navigation.navigateToInstalledProductPage();
@@ -24,8 +24,8 @@ var $bo_act_installedProduct = new function bo_act_installedProduct() {
 		_setValue($bo_pg_installedProducts.txt_contactName, $contactName);
 		_click(_mark($contactName));
 		_setValue($bo_pg_installedProducts.txt_installedProductName, $IBName);
-		_setValue($bo_pg_installedProducts.txt_installedDate);
-		_click(_span("Today"));
+		_setValue($bo_pg_installedProducts.txt_installedDate,$date);
+//		_click(_span("Today"));
 		_setValue($bo_pg_installedProducts.txt_city,"Bangalore");
 		_click($bo_pg_installedProducts.btn_save);
 		_assertNotVisible(_span("Review the errors on this page."));
@@ -34,7 +34,7 @@ var $bo_act_installedProduct = new function bo_act_installedProduct() {
 		return $IBName;
 		// Need to return
 	};
-	this.createIB_Statusvalue =  function($productName,$accountName,$contactName, $status) {
+	this.createIB_Statusvalue =  function($productName,$accountName,$contactName,$status,$date) {
 		var $serialNum = $bo_act_common.generateRandomName("Ser");
 		var $IBName = $bo_act_common.generateRandomName("IB_");
 		 $bo_act_navigation.navigateToInstalledProductPage();
@@ -48,7 +48,7 @@ var $bo_act_installedProduct = new function bo_act_installedProduct() {
 		_setValue($bo_pg_installedProducts.txt_contactName, $contactName);
 		_setSelected($bo_pg_installedProducts.editStatus, $status);
 		_setValue($bo_pg_installedProducts.txt_installedProductName, $IBName);
-		_setValue($bo_pg_installedProducts.txt_installedDate);
+		_setValue($bo_pg_installedProducts.txt_installedDate,$date);
 		_setValue($bo_pg_installedProducts.txt_city,"Bangalore");
 		_click($bo_pg_installedProducts.btn_save);
 		_assertNotVisible(_span("Review the errors on this page."));
@@ -58,7 +58,7 @@ var $bo_act_installedProduct = new function bo_act_installedProduct() {
 	
 	};
 	
-	this.createIB_DistributorAccount = function($productName,$distributoraccountName,$contactName, $accountName){
+	this.createIB_DistributorAccount = function($productName,$distributoraccountName,$contactName,$accountName,$date){
 		
 		var $serialNum = $bo_act_common.generateRandomName("Ser");
 		var $IBName = $bo_act_common.generateRandomName("IB_");
@@ -73,7 +73,7 @@ var $bo_act_installedProduct = new function bo_act_installedProduct() {
 		_setValue($bo_pg_installedProducts.txt_accountName, $accountName);
 		_setValue($bo_pg_installedProducts.txt_contactName, $contactName);
 		_setValue($bo_pg_installedProducts.txt_installedProductName, $IBName);
-		_setValue($bo_pg_installedProducts.txt_installedDate);
+		_setValue($bo_pg_installedProducts.txt_installedDate,$date);
 		_setValue(_textbox("City"),"Bangalore");
 		_click($bo_pg_installedProducts.btn_save);
 		_assertNotVisible(_div("/Error: Invalid Data/"));

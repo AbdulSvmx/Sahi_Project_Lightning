@@ -1,6 +1,8 @@
 /**
  * Functions for the Accounts Object
+
  */
+// Modified the functions for lightning
 var $bo_act_accounts = new function bo_act_accounts() {
 
 	/**
@@ -8,6 +10,7 @@ var $bo_act_accounts = new function bo_act_accounts() {
 	 * 
 	 * @param $accountName
 	 */
+	
 	this.createAccount = function() {
 		var $accountName = $bo_act_common.generateRandomName("Acc");
         $bo_act_navigation.navigateToAccountsPage();
@@ -34,7 +37,8 @@ var $bo_act_accounts = new function bo_act_accounts() {
 			_setValue($bo_pg_accounts.txt_accountName, $accountName);
 			_setValue($bo_pg_accounts.txt_parentaccount, $parentaccount);
 			_click($bo_pg_accounts.btn_save);
-			_assertNotVisible(_div("/Error: Invalid Data/"));
+//			_assertNotVisible(_div("/Error: Invalid Data/"));
+			_assertNotVisible(_span("Review the errors on this page."));
 			_wait(15000, _isVisible(_heading2($accountName)));
 			_logOutput($accountName+ " account is created");
 			return $accountName;		
@@ -47,7 +51,7 @@ var $bo_act_accounts = new function bo_act_accounts() {
 	
 	// Owner Meghana Rao
 	
-	this.addIBtoAccounts = function($productName,$accountName,$contactName) {
+	this.addIBtoAccounts = function($productName,$accountName,$contactName,$installedDate) {
 		
 		
 		var $serialNum = $bo_act_common.generateRandomName("Ser");
@@ -61,7 +65,7 @@ var $bo_act_accounts = new function bo_act_accounts() {
 		_setValue($bo_pg_installedProducts.txt_accountName, $accountName);
 		_setValue($bo_pg_installedProducts.txt_contactName, $contactName);
 		_setValue($bo_pg_installedProducts.txt_installedProductName, $IBName);
-		_setValue($bo_pg_installedProducts.txt_installedDate);
+		_setValue($bo_pg_installedProducts.txt_installedDate,$installedDate);
 		_click($bo_pg_installedProducts.btn_save);
 		_assertNotVisible(_div("/Error: Invalid Data/"));
 		_logOutput($IBName+ " IB is created");

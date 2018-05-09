@@ -11,13 +11,13 @@ var $bo_pg_home = new function bo_pg_home(){
 	this.link_servicemaxSetup = _link("ServiceMax Setup");
 	this.btn_userName = _span("userNavLabel");
 	this.btn_allTabs =_image("All Tabs");
-	this.link_accounts = _span("Accounts");
+	this.link_accounts = _link("Accounts"); //Modified for Lightning
 	this.link_cases = _link("/\\Cases[1]|^Cases/");
 	this.link_priceBooks = _link("Price Books");
 	this.btn_go = _button(" Go! ");
-	this.link_contacts = _span("Contacts");
-	this.link_products = _span("Products");
-	this.link_installedProducts = _span("Installed Products");
+	this.link_contacts = _link("Contacts");//Modified for Lightning
+	this.link_products = _link("Products");//Modified for Lightning
+	this.link_installedProducts = _link("Installed Products");//Modified for Lightning
 	this.link_serviceMaintenanceContracts = _link("Service/Maintenance Contracts");
 	this.link_locations = _link("Locations");
 	this.link_warrantyTerms = _link("Warranty Terms");
@@ -25,6 +25,7 @@ var $bo_pg_home = new function bo_pg_home(){
 	this.link_stockAdjustment =_link("Stock Adjustments");
 	this.link_logOut = _link("Logout");
 	this.link_allTabs = _image("All Tabs");
+	this.link_more = _link("/Show More/"); //Added for Lightning
 	
 	this.link_preventiveMaintenancePlans = _link("Preventive Maintenance Plans");
 	
