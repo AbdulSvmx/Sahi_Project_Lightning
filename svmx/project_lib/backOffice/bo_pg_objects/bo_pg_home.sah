@@ -26,6 +26,7 @@ var $bo_pg_home = new function bo_pg_home(){
 	this.link_logOut = _link("Logout");
 	this.link_allTabs = _image("All Tabs");
 	this.link_applauncher = _div("App Launcher");
+	this.btn_heading_allitems = _heading3("All Items");
 	
 	this.link_preventiveMaintenancePlans = _link("Preventive Maintenance Plans");
 	

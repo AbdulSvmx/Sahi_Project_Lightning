@@ -80,7 +80,7 @@ var $bo_act_navigation = new function bo_act_navigation() {
     };
     this.navigateToCasesPage = function(){
    	 _click($bo_pg_home.link_applauncher);
-   	 _click($bo_pg_home.link_cases);
+   	 _click(_span("/Cases/",_near($bo_pg_home.btn_heading_allitems)));
    };
     	
      this.navigateToContactsPage = function(){
@@ -211,8 +211,10 @@ var $bo_act_navigation = new function bo_act_navigation() {
       */
  	this.navigateToSfmWizard = function() {
  	 this.navigateToSvmxSetup();
+ 	 _selectDomain("/svmx/");
  	_click($bo_pg_servicemaxSetup.btn_serviceFlowManager);
  	_click($bo_pg_servicemaxSetup.btn_sfmWizard);
+ 	_selectDomain();
     };
 
  	  /**
