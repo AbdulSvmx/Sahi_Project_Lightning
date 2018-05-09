@@ -17,6 +17,7 @@ var $bo_act_navigation = new function bo_act_navigation() {
     /**
      * Navigates to Servicemax setup page
      * @returns boolean
+     * Changes made for Lightning
      */this.navigateToSvmxSetup = function() {
 	 this.navigateToHome();
 		if(_isVisible($bo_pg_home.link_servicemaxSetup) == false )
@@ -38,6 +39,7 @@ var $bo_act_navigation = new function bo_act_navigation() {
     /**
      * Navigates to a SFm transaction designer
      * @returns boolean
+     * Changes made for Lightning
      */this.navigateToSfmTransactionDesigner = function() {
 	 this.navigateToSvmxSetup();
 	_click($bo_pg_servicemaxSetup.btn_serviceFlowManager);
@@ -79,14 +81,17 @@ var $bo_act_navigation = new function bo_act_navigation() {
     	 _click($bo_pg_home.link_accounts);
     };
     this.navigateToCasesPage = function(){
-   	 _click($bo_pg_home.link_applauncher);
-   	 _click(_span("/Cases/",_near($bo_pg_home.btn_heading_allitems)));
+    	this.navigateToHome();
+    	_wait(1000);
+   	 	_click($bo_pg_home.link_applauncher);
+   	 	_click(_span("/Cases/",_near($bo_pg_home.btn_heading_allitems)));
    };
     	
      this.navigateToContactsPage = function(){
     	 _click($bo_pg_home.link_contacts);
     };
     
+    //Changes made for Lightning
     this.navigateToInstalledProductPage = function(){   		
     	if(_isVisible($bo_pg_home.link_installedProducts)== false)
     	{

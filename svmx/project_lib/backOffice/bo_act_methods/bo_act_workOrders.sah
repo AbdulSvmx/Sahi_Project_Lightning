@@ -5,6 +5,7 @@ var $bo_act_workOrders = new function bo_act_workOrders() {
 
 	/**
 	 * Create an Work Order
+	 * Changes made for Lightning
 	 */
 	this.createWorkOrder = function($caseNumber,$accountName,$contactName,$IBName,$orderStatus,$priority,$orderType){
 		$bo_act_navigation.navigateToWorkOrdersTab();
@@ -30,21 +31,27 @@ var $bo_act_workOrders = new function bo_act_workOrders() {
 		_logOutput($workOrderNumber+ " Work Order is created");
 		return $workOrderNumber;
 	};
+	
+	// Changes made for Lightning
 		this.editWorkOrder = function($workOrderNumber){
 		$bo_act_navigation.navigateToWorkOrdersTab();
 		_click(_link($workOrderNumber));
 		_click($bo_pg_workOrders.btn_editWorkOrder);
 	};
 	
+	
 	this.editWorkOrderOnWOPage = function(){
 			_click($bo_pg_workOrders.btn_editWorkOrder);
 	};
+	
+	// Changes made for Lightning
 	this.updateTextBoxFields = function($object,$objectValue){
 		_setValue($object,$objectValue);
 		_click($objectValue);
 		//return $callBack.returnResult([_isVisible($accountName), "Account not created",$accountName] );
 	};
 	
+	//Changes made for Lightning
 	this.updateDropDownFields = function($object,$objectValue){
 		_setValue($object,$objectValue);
 		_click($objectValue);
@@ -55,7 +62,7 @@ var $bo_act_workOrders = new function bo_act_workOrders() {
 		_click($object);
 		
 	};
-	
+	// Changes made for Lightning
 	this.saveWorkOrder = function(){
 		_click($bo_pg_workOrders.btn_saveWorkOrder);
 		_assertNotVisible(span("Review the errors on this page."));
