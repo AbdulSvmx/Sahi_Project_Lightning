@@ -25,7 +25,7 @@ var $bo_act_SFW = new function bo_act_SFW() {
 
 		};
 	
-	this.addNewManageWizardSteps = function($wizardStepType,$wizardStepName,$executionMode){
+	this.addNewManageWizardSteps = function($wizardStepType,$wizardStepName,$executionMode){ // Changes made for Lightning
 		_selectDomain("/svmx/");
 		_click($bo_pg_sfmWizard.tab_manageWizardSteps);
 		_click($bo_pg_sfmWizard.btn_manageWizardSteps_newStep);
@@ -35,7 +35,7 @@ var $bo_act_SFW = new function bo_act_SFW() {
 		_setSelected($bo_pg_sfmWizard.combo_executionMode,$executionMode);
 		_selectDomain();
 	};
-		this.addCustomActionToWizard=function($fieldActnType,$actnName, $customwizardTitle){
+		this.addCustomActionToWizard=function($fieldActnType,$actnName, $customwizardTitle){ // Changes made for Lightning
 		_wait(10000);
 		_click($bo_pg_sfmWizard.tab_wizardStep);
 		_wait(10000);
@@ -100,7 +100,7 @@ var $bo_act_SFW = new function bo_act_SFW() {
 			
 		};
 		
-	this.createWizardGeneralInfo=function($objName,$wizardname,$wizardID){
+	this.createWizardGeneralInfo=function($objName,$wizardname,$wizardID){ // Changes made for Lightning
 	_selectDomain("/svmx/");
 	_setSelected($bo_pg_sfmWizard.sel_objPrevMaintPlan,$objName	);
 	_wait(3000);
@@ -112,7 +112,7 @@ var $bo_act_SFW = new function bo_act_SFW() {
 	_selectDomain();
 };
 
-	this.createWizardStep=function($fieldActnType,$actnName,$executionMode){
+	this.createWizardStep=function($fieldActnType,$actnName,$executionMode){ // Changes made for Lightning
 		_selectDomain("/svmx/");
 		_click($bo_pg_sfmWizard.tab_wizardStep);
 		_click($bo_pg_sfmWizard.btn_newWizardStep);
@@ -154,7 +154,7 @@ this.deleteWizards = function($objName,$wizardId){
 		_check(_checkbox(0,_leftOf(_span($wizardId))));
 		_click($bo_pg_sfmWizard.btn_deleteWizard);
 	};
-this.quickSaveSFWizard = function(){
+this.quickSaveSFWizard = function(){ // Changes made for Lightning
 	_selectDomain("/svmx/");
 	_click(_button("Quick Save"));
 	_selectDomain();

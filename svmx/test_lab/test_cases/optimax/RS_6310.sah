@@ -20,7 +20,7 @@ var $bo_act_products = new function bo_act_products() {
 	 */
 	this.createProduct = function() {
 		//"pro"
-		var $productName = $bo_act_common.generateRandomName("Laptop");
+		var $productName = $bo_act_common.generateRandomName("Laptop"); // Changes made for Lightning
 		$bo_act_navigation.navigateToProductsPage();
 		_click($bo_pg_products.btn_new);
 		_setValue($bo_pg_products.txt_productName, $productName);

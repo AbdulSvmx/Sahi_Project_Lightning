@@ -232,7 +232,7 @@ var $bo_act_navigation = new function bo_act_navigation() {
       * Navigates to a SFM Wizards
       * @returns boolean
       */
- 	this.navigateToSfmWizard = function() {
+ 	this.navigateToSfmWizard = function() { // Changes made for Lightning
  	 this.navigateToSvmxSetup();
  	 _selectDomain("/svmx/");
  	_click($bo_pg_servicemaxSetup.btn_serviceFlowManager);
