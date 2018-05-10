@@ -28,6 +28,7 @@ var $bo_act_interactiveEntitlement_WO = new function bo_act_interactiveEntitleme
 	this.performInteractiveEntitlementWO_IncidentNotCovered = function($WO_Number) {
 	
 		$bo_act_workOrders.checkEntitlement($WO_Number);
+		_selectDomain("/svmx/");
 		for (var $i = 0; $i < 25; $i++) {
 			if (_isVisible($bo_pg_interactiveEntitlement_CaseAndWO.btn_checkEntitlement)) {
 				break;
@@ -38,6 +39,8 @@ var $bo_act_interactiveEntitlement_WO = new function bo_act_interactiveEntitleme
 				_wait(10000, _isVisible($bo_pg_interactiveEntitlement_CaseAndWO.btn_checkEntitlement));
 
 			}
+			
+		_selectDomain();
 		}
 
 		_click($bo_pg_interactiveEntitlement_CaseAndWO.btn_checkEntitlement);

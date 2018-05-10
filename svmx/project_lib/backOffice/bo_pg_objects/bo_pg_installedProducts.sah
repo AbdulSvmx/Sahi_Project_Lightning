@@ -6,17 +6,17 @@
 
 var $bo_pg_installedProducts = new function bo_pg_installedProducts(){
 	this.btn_new = _div("New");
-	this.txt_productName = _textbox("Product*");//Modified for lightning
-	this.txt_serialNumber = _textbox("Serial");//Modified for lightning
-	this.txt_accountName = _textbox("Account");//Modified for lightning
-	this.txt_distributor_account = _textbox("Distributor Account");//Modified for lightning
-	this.txt_contactName = _textbox("Contact");//Modified for lightning
-	this.txt_installedProductName = _textbox("Installed Product Name*");//Modified for lightning
-	this.txt_installedDate = _textbox("Date Installed");//Modified for lightning
+	this.txt_productName = _textbox("/Product/", _near(_div("/modal-header/")));//Modified for lightning - Meghana
+	this.txt_serialNumber = _textbox("/Lot Number/", _near(_div("/modal-header/")));//Modified for lightning - Meghana
+	this.txt_accountName = _textbox("/Account/", _near(_div("/modal-header/")));//Modified for lightning - Meghana
+	this.txt_distributor_account = _textbox("/Distributor Account/", _near(_div("/modal-header/")));//Modified for lightning
+	this.txt_contactName = _textbox("/Contact/", _near(_div("/modal-header/")));//Modified for lightning - Meghana
+	this.txt_installedProductName = _textbox("/Installed Product ID/", _near(_div("/modal-header/")));//Modified for lightning - Meghana
+	this.txt_installedDate =_textbox("/Date Installed/", _near(_div("/modal-header/")));//Modified for lightning
 	this.btn_save = _span("Save[1]");
 	this.btn_delete = _button("Delete");
 	this.btn_continue = _submit("Continue");
-	this.txt_city = _textbox(0,_near(_label("City")));//Modified for lightning
+	this.txt_city = _textbox("/City/", _near(_div("/modal-header/")));//Modified for lightning
 	
 	this.btn_createWorkOrder = _button("/Create Work Order/");
 	this.btn_sfmSave = _span("Save");
