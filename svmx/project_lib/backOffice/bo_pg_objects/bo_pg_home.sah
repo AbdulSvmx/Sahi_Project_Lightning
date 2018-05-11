@@ -6,9 +6,10 @@
 
 var $bo_pg_home = new function bo_pg_home(){
 	this.link_home = _span("Home");
-	this.link_more = _span("More");
-	this.drpdn_servicemaxSetup = _link("ServiceMax Setup[1]");
-	this.link_servicemaxSetup = _span("/ServiceMax Setup/i");
+	this.span_more = _span("More"); //Added for lightning.
+	this.button_allLinks = _submit("App Launcher"); //Added for lightning.
+	this.drpdn_servicemaxSetup = _link("ServiceMax Setup Home[1]");//Added for lightning.
+	this.link_servicemaxSetup = _link("Servicemax SetUp Home");//Modified for lightning.
 	this.btn_userName = _span("userNavLabel");
 	this.btn_allTabs =_image("All Tabs");
 	this.link_accounts = _link("Accounts"); //Modified for Lightning
@@ -33,6 +34,9 @@ var $bo_pg_home = new function bo_pg_home(){
 	this.sel_WBEnvironment = _select(0,_rightOf(_label("Environment:")));
 	this.btn_loginWithSalesForce = _submit("Login with Salesforce");
 	this.label_serviceMaxSFMSearch = _heading2("ServiceMax SFM Search");
+	this.link_switchToLightning = _link("Switch to Lightning Experience");
+	this.link_switchToSalesforce = _link("Switch to Salesforce Classic");
+	this.circular_image = _div("/small circular/");//Added for Lightning
 };
 
 
