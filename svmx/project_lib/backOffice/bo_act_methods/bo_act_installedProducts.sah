@@ -96,9 +96,9 @@ var $bo_act_installedProduct = new function bo_act_installedProduct() {
 		_click(_link($IBName));
 		_selectDomain("/svmx/");
 		_click($bo_pg_installedProducts.btn_createWorkOrder);
-		_selectDomain();
 		_wait(60000,_isVisible($bo_pg_installedProducts.btn_sfmSave));
 		_click($bo_pg_installedProducts.btn_sfmSave);
+		_selectDomain();
 		_wait(10000);
 		return _getText(_span(0,_near($bo_pg_installedProducts.txt_workOrderNumber)));
 	};

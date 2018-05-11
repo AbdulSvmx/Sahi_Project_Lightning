@@ -1,7 +1,6 @@
-_setXHRReadyStatesToWaitFor("2");
-_windowAction("resize", 1920, 1080);
 _call(top.location.reload(true));
-var $g_stepSpeed = 400;
+_windowAction("resize", 1920, 1080);
+var $g_stepSpeed = 100;
 _setSpeed($g_stepSpeed);
 
 // PLease CHANGE the Flag to decide whether Dev or Base
@@ -32,7 +31,8 @@ var $bac_un = "meghana.rao@servicemax.com";
 var $bac_pwd = "cloud_102";
 var $bac_PRTun = "bhupendra.auto@upgrade.com"; // Most Used Customer
 var $bac_PRTpwd = "servicemax@123";
-var $group_profilename = "AutoBACGroup";
+//var $group_profilename = "AutoBACGroup";
+var $group_profilename = "Cloned Profile";
 
 // Checklist Global Variables
 var $un_checklist = $bac_un// "meghana.rao@servicemax.com"; // Pointing to
