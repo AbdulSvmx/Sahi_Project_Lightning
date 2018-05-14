@@ -1,9 +1,9 @@
 var $sfm_pg_wo = new function sfm_pg_wo() {
-	this.tab_all = _image("All Tabs");
-	this.btn_wo_new = _button("/New/");
+	this.tab_all = _submit("App Launcher");//Changed for lightning
+	this.btn_wo_new = _link("New");//Changed for lightning
 	this.btn_wo_continue= _submit("Continue");
-	this.btn_woStaus = _select(0,_rightOf(_label("Order Status")));
-	this.btn_wo_save = _submit("/Save/");
+	this.btn_woStatus = _select(0,_rightOf(_label("Order Status")));
+	this.btn_wo_save = _button("Save");//Changed for lightning
 	this.link_wo = _link("Work Orders");
 	this.btn_wo_edit = _button("/Edit/");
 	this.txt_wo_zip = _textbox("Zip");
@@ -21,7 +21,7 @@ var $sfm_pg_wo = new function sfm_pg_wo() {
 		_click(_link($tabName));
 //		_log("I am Here");
 	};
-	this.label_wo = _heading2("pageDescription");
+	this.label_wo = _heading1(0,_near(_image("Work Order"))); //Changed for Lightning
 	this.txt_actualOnsiteResponse = _textbox("Actual Onsite Response");
 	this.txt_actualInitialResponse = _textbox("Actual Initial Response");
 	this.txt_actualResolution = _textbox("Actual Resolution");
@@ -32,7 +32,7 @@ var $sfm_pg_wo = new function sfm_pg_wo() {
 	this.today = _link(0,_rightOf(_label("Date Custom")));
 	this.btn_newWorkDetail = _button("New Work Detail");
 	this.sel_recordType = _select(0,_rightOf(_label("*Record Type of new record")));
-	this.btn_Continue = _submit("Continue");
+	this.btn_Continue = _button("Next"); //Changed for lightning
 	this.txt_lineQty = _textbox(0,_rightOf(_label("Line Qty")));
 	this.txt_dateCustom = _textbox(0,_rightOf(_label("Date Custom")));
 	this.txt_dateReceived = _textbox(0,_rightOf(_label("Date Received")));

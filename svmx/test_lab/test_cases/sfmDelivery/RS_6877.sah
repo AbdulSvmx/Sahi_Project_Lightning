@@ -6,7 +6,7 @@ $wizTitle = $bo_act_common.generateRandomName("SFM Wiz");
 //$wizTitle = "sfm_wiz2011201714178";
 $headersToAdd = ["Account","Contact"];
 $sfmPgLayoutName =	$bo_act_common.generateRandomName("SFM_Auto_Page");
-$bo_act_login.login($g_url,$sfmUsn,$sfmPwd);
+$bo_act_login.login($g_url,$bac_un,$bac_pwd);
 $bo_act_navigation.navigateToSfmTransactionDesigner();
 $sfm_act_Transactions.newsfm6877($sfmName,$sfmPgLayoutName,$headersToAdd,"Account","Account ID");
 $bo_act_navigation.navigateToSfmWizard();

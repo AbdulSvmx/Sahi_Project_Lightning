@@ -13,7 +13,7 @@ var $sfm_act_configChanges = new function sfm_act_configChanges() {
 			}
 			else{
 				_click($bo_pg_home.button_allLinks);
-				_click(_span("/Servicemax SetUp Home/",_near(_div("/modal-body/"))));
+				_click($bo_pg_home.link_servicemaxSetup);
 			}
 			
 			

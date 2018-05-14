@@ -13,19 +13,20 @@ var $bo_pg_workOrders = new function bo_pg_workOrders(){
 	this.btn_newWorkOrder = _div("New[1]");
 	this.btn_deleteWorkOrder = _div("Delete");
 	this.txt_slaTerms = _textbox("SLA Terms");
-	this.sel_priority = _link(0, _near(_span("Priority", _near(_div("/modal-body/")))));
-	this.sel_orderStatus = _link(0, _near(_span("Order status", _near(_div("/modal-body/")))));
-	this.sel_orderType = _link(0, _near(_span("Order Type", _near(_div("/modal-body/")))));
-	this.btn_saveWorkOrder = _span("/Save/",  _near(_div("/modal-body/")));
+	this.sel_priority = _link(0, _near(_span("Priority", _near(_div("/modal-body/")))));//Changed for lightning
+	this.sel_orderStatus = _link(0, _near(_span("Order status", _near(_div("/modal-body/")))));//Changed for lightning
+	this.sel_orderType = _link(0, _near(_span("Order Type", _near(_div("/modal-body/")))));//Changed for lightning
+	this.btn_saveWorkOrder = _span("/Save/",  _near(_div("/modal-body/")));//Changed for lightning
+	this.txt_account = _textbox(0, _near(_span("/Account/", _near(_div("/modal-body/")))));//Changed for lightning
 	
 	
-	this.txt_case = _textbox(0,_near(_span("/Case/", _near(_div("/modal-body/")))));
-	this.txt_account = _textbox(0,_near(_span("/Account/", _near(_div("/modal-body/")))));
-	this.txt_contact =  _textbox(0,_near(_span("/Contact/", _near(_div("/modal-body/")))));
+	this.txt_case = _textbox(0,_near(_span("/Case/", _near(_div("/modal-body/")))));//Changed for lightning
+	this.txt_account = _textbox(0,_near(_span("/Account/", _near(_div("/modal-body/")))));//Changed for lightning
+	this.txt_contact =  _textbox(0,_near(_span("/Contact/", _near(_div("/modal-body/")))));//Changed for lightning
 	this.btn_SFWCheckEntitlement = _button("/Check Entitlement/");
 	this.btn_SFWCheckEntitlementPS = _button("Check Entitlement PS");
 	this.btn_sfmTDM016 = _button("Manage Work Order Lines - Usage");
-	this.txt_component = _textbox(0,_near(_span("/Component/", _near(_div("/modal-body/")))));
+	this.txt_component = _textbox(0,_near(_span("/Component/", _near(_div("/modal-body/")))));//Changed for lightning
 	this.txt_workOrderDetails = _span("Work Details");
 	this.txt_getWONumber = _paragraph("Work Order");
 	

@@ -1,6 +1,7 @@
 var $sfm_act_createCustomWizard = new function sfm_act_createCustomWizard() {
 //	var $title = "";
 	this.chooseObject = function($object){
+		_wait(3000);
 		_setSelected($sfm_pg_wizards.selectObject,$object);
 		_click($sfm_pg_wizards.btn_customNew);
 	};
@@ -52,7 +53,10 @@ var $sfm_act_createCustomWizard = new function sfm_act_createCustomWizard() {
 
 
 	this.createBlankWo = function(){
-		$woName="";
+		$woName = "";
+		$accNum = "Acc1152018154814";
+		$priority = "High";
+		_selectDomain();
 		_wait(5000);
 		_click($sfm_pg_wo.tab_all);
 //		_click($sfm_pg_wo.clickTab("Work Orders"));
@@ -63,7 +67,11 @@ var $sfm_act_createCustomWizard = new function sfm_act_createCustomWizard() {
 			_click($sfm_pg_wo.btn_Continue);
 			
 		}
-		_setSelected($bo_pg_workOrders.sel_priority, "High");
+		_wait(5000,_isVisible($bo_pg_workOrders.sel_priority));
+		_click($bo_pg_workOrders.sel_priority);
+		_click(_link($priority));
+		_click($bo_pg_workOrders.txt_account);
+		_click(_div($accNum));
 		_click($sfm_pg_wo.btn_wo_save);
 		_wait(3000);
 		$woName= _getText($sfm_pg_wo.label_wo);
