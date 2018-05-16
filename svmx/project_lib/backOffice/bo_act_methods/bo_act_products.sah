@@ -27,8 +27,8 @@ var $bo_act_products = new function bo_act_products() {
 		$bo_act_navigation.navigateToProductsPage();
 		_click($bo_pg_products.btn_new);
 		_setValue($bo_pg_products.txt_productName, $productName);
-		_setValue($bo_pg_products.txt_productCode, $productCode);
-		_click($bo_pg_products.sel_productFamily);
+		_setValue($bo_pg_products.txt_productCode,$productCode);
+		_click($bo_pg_products.link_productFamily);
 		_click(_link($productFamily));
 		_check($bo_pg_products.chk_active);
 		_click($bo_pg_products.btn_save);
