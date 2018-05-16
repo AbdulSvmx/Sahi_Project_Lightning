@@ -42,6 +42,7 @@ var $bo_act_servicePricebooks = new function bo_act_servicePricebooks() {
 	};
 	
 	this.editStandardServicePricebooks = function($PriceBookName,$unit,$activityID,$activityProduct,$regularRate){
+		// Made changes for Lightning - please donot change this
 		 $bo_act_navigation.navigateToServicePricebooks();
 		 _wait(2000);
 		 _setStrictVisibilityCheck(true);
