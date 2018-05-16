@@ -28,6 +28,7 @@ var $bo_pg_workOrders = new function bo_pg_workOrders(){
 	this.btn_sfmTDM016 = _button("Manage Work Order Lines - Usage");
 	this.txt_component = _textbox(0,_near(_span("/Component/", _near(_div("/modal-body/")))));//Changed for lightning
 	this.txt_workOrderDetails = _span("Work Details");
+	this.btn_details = _span("Details");
 	this.txt_getWONumber = _paragraph("Work Order");
 	
 	// Click Work Details Line on Work Order Page

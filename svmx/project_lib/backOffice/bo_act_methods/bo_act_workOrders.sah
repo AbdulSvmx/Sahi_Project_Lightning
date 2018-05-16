@@ -7,13 +7,13 @@ var $bo_act_workOrders = new function bo_act_workOrders() {
 	 * Create an Work Order
 	 * Changes made for Lightning
 	 */
-	this.createWorkOrder = function($caseNumber,$accountName,$contactName,$IBName,$orderStatus,$priority,$orderType){
+	this.createWorkOrder = function($caseNumber,$accountName,$contactName,$IBName,$orderStatus,$priority,$orderType){ // Modified for Lightning changes
 		$bo_act_navigation.navigateToWorkOrdersTab();
 		_click($bo_pg_workOrders.btn_newWorkOrder);
 		_setValue($bo_pg_workOrders.txt_case, $caseNumber);
-		_click($caseNumber);
+		_click(_mark($caseNumber));
 		_setValue($bo_pg_workOrders.txt_account, $accountName);
-		_click($accountName);
+		_click(_mark($accountName));
 		_setValue($bo_pg_workOrders.txt_contact, $contactName);
 		_click($contactName);
 		_click($bo_pg_workOrders.sel_orderStatus);
@@ -47,19 +47,19 @@ var $bo_act_workOrders = new function bo_act_workOrders() {
 	// Changes made for Lightning
 	this.updateTextBoxFields = function($object,$objectValue){
 		_setValue($object,$objectValue);
-		_click($objectValue);
+		_click(_mark($objectValue));
 		//return $callBack.returnResult([_isVisible($accountName), "Account not created",$accountName] );
 	};
 	
 	//Changes made for Lightning
 	this.updateDropDownFields = function($object,$objectValue){
 		_setValue($object,$objectValue);
-		_click($objectValue);
+		_click(_link($objectValue));
 		//return $callBack.returnResult([_isVisible($accountName), "Account not created",$accountName] );
 	};
 	
 	this.clickLinktoUpdateTextfields = function($object){
-		_click($object);
+		_click(_mark($object));
 		
 	};
 	// Changes made for Lightning

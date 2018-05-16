@@ -96,11 +96,21 @@ var $bo_act_installedProduct = new function bo_act_installedProduct() {
 		_click(_link($IBName));
 		_selectDomain("/svmx/");
 		_click($bo_pg_installedProducts.btn_createWorkOrder);
-		_wait(60000,_isVisible($bo_pg_installedProducts.btn_sfmSave));
+		if(_isVisible($bo_pg_installedProducts.btn_sfmSave == true))
+		
+		{
+			_wait(20000);
 		_click($bo_pg_installedProducts.btn_sfmSave);
-		_selectDomain();
-		_wait(10000);
-		return _getText(_span(0,_near($bo_pg_installedProducts.txt_workOrderNumber)));
+		
+		}
+		else
+		
+			_wait(20000);
+			_click($bo_pg_installedProducts.btn_sfmSave);
+		
+			_selectDomain();
+			_wait(10000);
+			return _getText(_span(0,_near($bo_pg_installedProducts.txt_workOrderNumber)));
 	};
 	
 	this.createSupportCase = function($status){

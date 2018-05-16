@@ -25,7 +25,7 @@ var $bo_act_interactiveEntitlement_WO = new function bo_act_interactiveEntitleme
 
 	};
 	
-	this.performInteractiveEntitlementWO_IncidentNotCovered = function($WO_Number) {
+	this.performInteractiveEntitlementWO_IncidentNotCovered = function($WO_Number) { // Modified for Lightning - Meghana. Please dont change it
 	
 		$bo_act_workOrders.checkEntitlement($WO_Number);
 		_selectDomain("/svmx/");
@@ -46,9 +46,11 @@ var $bo_act_interactiveEntitlement_WO = new function bo_act_interactiveEntitleme
 		_click($bo_pg_interactiveEntitlement_CaseAndWO.btn_checkEntitlement);
 		
 		this.clickCheckEntitlement();
+		_wait(10000, _isVisible($bo_pg_interactiveEntitlement_CaseAndWO.chk_IncidentNotCovered));
 		_click($bo_pg_interactiveEntitlement_CaseAndWO.chk_IncidentNotCovered);
 		_click($bo_pg_interactiveEntitlement_CaseAndWO.btn_saveEntitlementPSLine);
-		_wait(15000, _isVisible($bo_pg_workOrders.txt_workOrderDetails));
+		_selectDomain();
+		_wait(15000, _isVisible($bo_pg_workOrders.btn_details));
 	};
 
 	/**
