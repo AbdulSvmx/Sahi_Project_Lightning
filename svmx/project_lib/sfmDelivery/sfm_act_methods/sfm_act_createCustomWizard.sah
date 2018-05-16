@@ -54,7 +54,7 @@ var $sfm_act_createCustomWizard = new function sfm_act_createCustomWizard() {
 
 	this.createBlankWo = function(){
 		$woName = "";
-		$accNum = "Acc1152018154814";
+		$accNum = "Acc165201813051";
 		$priority = "High";
 		_selectDomain();
 		_wait(5000);

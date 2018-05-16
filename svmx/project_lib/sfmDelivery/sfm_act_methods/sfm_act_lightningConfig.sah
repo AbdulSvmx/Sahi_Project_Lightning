@@ -1,4 +1,4 @@
-var $sfm_act_configChanges = new function sfm_act_configChanges() {
+var $sfm_act_lightningConfig = new function sfm_act_lightningConfig() {
 	
 	this.switchToLightningInConfig = function($profileName,$selectedProfile){
 		if(_isVisible($bo_pg_home.link_servicemaxSetup) == true )
