@@ -151,13 +151,14 @@ var $bo_act_navigation = new function bo_act_navigation() {
       	 _click($bo_pg_home.btn_go);
       };
 
-    this.navigateToSlaTerms = function(){
-    	$bo_act_navigation.navigateToHome();
-    	_click(_link("ServiceMax Setup"));
-    	_click($bo_pg_servicemaxSetup.btn_warrantiesAndServiceContracts);
-    	_click($bo_pg_servicemaxSetup.btn_slaTerms);
-    	_wait(1000);
-    	_call(top.location.reload());
+    this.navigateToSlaTerms = function(){ // Modified for Lightning
+    	 this.navigateToSvmxSetup();
+    	 _selectDomain("/svmx/");
+    	 _click($bo_pg_servicemaxSetup.btn_warrantiesAndServiceContracts);
+    	 _click($bo_pg_servicemaxSetup.btn_slaTerms);
+    	 _wait(1000);
+    	 _selectDomain();
+    	 _call(top.location.reload());
     };
 
     this.navigateToPMPlanTemplatePage = function(){
