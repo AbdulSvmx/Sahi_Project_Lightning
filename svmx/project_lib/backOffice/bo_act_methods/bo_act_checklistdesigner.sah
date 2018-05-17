@@ -29,6 +29,7 @@ var $bo_act_checklistdesigner = new function bo_act_checklistdesigner() {
 	this.create_newquestion_tag_in_designer = function($questionText, $tag1)
 
 	{
+		_selectDomain("/svmx/");
 		_click($bo_pg_formDesigner.tab_clickFormDesigner);
 		_click($bo_pg_formDesigner.btn_addNewQuestion);
 		_click($bo_pg_formDesigner.btn_selectQuestionDataType);
@@ -50,11 +51,12 @@ var $bo_act_checklistdesigner = new function bo_act_checklistdesigner() {
 		_click($bo_pg_formDesigner.btn_delete1);
 		_click($bo_pg_formDesigner.btn_quickSave);
 		_wait(10000);
+		_selectDomain();
 	};
 	
 	this.verifythequestionsonUI = function($question,$tagname)
 	{
-		
+		_selectDomain("/svmx/");
 		_click($bo_pg_formDesigner.tab_clickFormDesigner);
 		_click($bo_pg_formDesigner.btn_groupbytag);
 		_setValue($sfm_pg_checklistTransaction.txt_formDesignerSearch, $tagname);
@@ -65,6 +67,7 @@ var $bo_act_checklistdesigner = new function bo_act_checklistdesigner() {
 		_wait(10000);
 		_click(_f("main").s_label($question));
 		_assertEqual(true,_isVisible(_f("main").s_label($question)));
+		_selectDomain();
 	
 	};
 	
@@ -274,23 +277,28 @@ var $bo_act_checklistdesigner = new function bo_act_checklistdesigner() {
 	};
 
 	this.edit_checklist_process_checkbox = function($questiontext, $answertype) {
+		_selectDomain("/svmx/");
 		_click($bo_pg_formDesigner.tab_clickFormDesigner);
 		_assertEqual(true, _isVisible(_f("main").s_label($questiontext)));
 		_click($sfm_pg_checklistTransaction.btn_editQuestion);
 		if ($answertype == "Checkbox") {
+			_selectDomain("/svmx/");
 			_click($sfm_pg_checklistTransaction.btn_defaultcheckbox);
 			_click($sfm_pg_checklistTransaction.btn_defaultcheckbox2);
+			_selectDomain();
 
 		}
 		if ($answertype == "Radio Button") {
-
+			_selectDomain("/svmx/");
 			_click($sfm_pg_checklistTransaction.btn_defaultRadiobutton2);
+			_selectDomain();
 
 		}
 
 		_click($sfm_pg_checklistTransaction.btn_saveFilter);
 		_click($bo_pg_formDesigner.btn_quickSave);
 		_click($bo_pg_formDesigner.btn_save_close);
+		_selectDomain();
 
 	};
 
