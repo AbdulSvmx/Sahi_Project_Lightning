@@ -26,7 +26,7 @@ var $bo_act_checklistdesigner = new function bo_act_checklistdesigner() {
 
 	};
 
-	this.create_newquestion_tag_in_designer = function($questionText, $tag1)
+	this.create_newquestion_tag_in_designer = function($questionText, $tag1) // Modified for Lightning
 
 	{
 		_selectDomain("/svmx/");
@@ -54,7 +54,7 @@ var $bo_act_checklistdesigner = new function bo_act_checklistdesigner() {
 		_selectDomain();
 	};
 	
-	this.verifythequestionsonUI = function($question,$tagname)
+	this.verifythequestionsonUI = function($question,$tagname) // Modified for Lightning
 	{
 		_selectDomain("/svmx/");
 		_click($bo_pg_formDesigner.tab_clickFormDesigner);
@@ -71,7 +71,7 @@ var $bo_act_checklistdesigner = new function bo_act_checklistdesigner() {
 	
 	};
 	
-	this.verifyquestionnotpresent = function($question, $tagname)
+	this.verifyquestionnotpresent = function($question, $tagname) // Modified for Lightning
 	{
 		_selectDomain("/svmx/");
 		_click($bo_pg_formDesigner.tab_clickFormDesigner);
@@ -90,8 +90,8 @@ var $bo_act_checklistdesigner = new function bo_act_checklistdesigner() {
 	
 
 	// This method is to verify the questions on the UI and then add them to the FORM
-	this.verifythechanges_addquestion_toform = function($question,$tagname) {
-
+	this.verifythechanges_addquestion_toform = function($question,$tagname) { // Modified for Lightning
+		_selectDomain("/svmx/");
 		_click($bo_pg_formDesigner.tab_clickFormDesigner);
 		_click($bo_pg_formDesigner.btn_groupbytag);
 		_setValue($sfm_pg_checklistTransaction.txt_formDesignerSearch, $tagname);
@@ -104,17 +104,20 @@ var $bo_act_checklistdesigner = new function bo_act_checklistdesigner() {
 		_click($bo_pg_formDesigner.btn_addquestion_toform);
 		_click($bo_pg_formDesigner.btn_groupbytag);
 		_click($bo_pg_formDesigner.btn_quickSave);
+		_selectDomain();
 
 	};
-	this.verifythechangesinchecklistformdesigner = function(
-			$changedquestiontext, $answer1, $answer2, $answertype)
+	this.verifythechangesinchecklistformdesigner = function($changedquestiontext, $answer1, $answer2, $answertype)
 
 	{
+		_selectDomain("/svmx/");
 		_click($bo_pg_formDesigner.tab_clickFormDesigner);
 		_assertEqual(true, _isVisible(_f("main").s_label($changedquestiontext)));
 		_assertEqual(true, _isVisible(_f("main").s_label($answer1)));
 		_assertEqual(true, _isVisible(_f("main").s_label($answer2)));
 		_assertEqual(true, _isVisible(_f("main").s_label($answertype)));
+		_selectDomain();
+
 
 	};
 
@@ -129,9 +132,11 @@ var $bo_act_checklistdesigner = new function bo_act_checklistdesigner() {
 	};
 
 	this.addQuestionToChecklist1 = function($questionText, $tag1) {
+		_selectDomain("/svmx/");
 		_click($bo_pg_formDesigner.tab_clickFormDesigner);
 		_click($bo_pg_formDesigner.btn_addNewQuestion);
 		_click($bo_pg_formDesigner.btn_selectQuestionDataType);
+		
 		/*
 		 * To create a particular Tag under the given Question
 		 */
@@ -157,11 +162,13 @@ var $bo_act_checklistdesigner = new function bo_act_checklistdesigner() {
 		_click($bo_pg_formDesigner.btn_quickSave);
 		_wait(10000);
 		_click($bo_pg_formDesigner.btn_save_close);
+		_selectDomain();
 
 	};
 
 	// To verify if a Given question is present under the particular Tag
 	this.verifyquestion_undertags = function($questionText, $tagname) {
+		_selectDomain("/svmx/");
 		_click($bo_pg_formDesigner.tab_clickFormDesigner);
 		_click($bo_pg_formDesigner.btn_delete1);
 		_click($bo_pg_formDesigner.btn_groupbytag);
@@ -172,12 +179,14 @@ var $bo_act_checklistdesigner = new function bo_act_checklistdesigner() {
 		_unlockWindow();
 		_wait(10000);
 		_assertEqual(true, _isVisible(_f("main").s_label($questionText)));
+		_selectDomain();
 
 	};
 
 	// Find the values in the Checklist fields pop window.
 	this.findthevaluesinChecklist = function($questionText, $helpurl255) {
-
+		
+		_selectDomain("/svmx/");
 		_click($bo_pg_formDesigner.tab_clickFormDesigner);
 		_click($bo_pg_formDesigner.btn_addNewQuestion);
 		_click($bo_pg_formDesigner.btn_selectQuestionDataType);
@@ -196,10 +205,12 @@ var $bo_act_checklistdesigner = new function bo_act_checklistdesigner() {
 		_click($bo_pg_formDesigner.btn_addQuestionToLibraryAndForm);
 		_assertEqual(true,
 				_isVisible($sfm_pg_checklistTransaction.field_stringtoolong));
+		_selectDomain();
 
 	};
 
 	this.addQuestionToChecklist2 = function($questionText, $tag1) {
+		_selectDomain("/svmx/");
 		_click($bo_pg_formDesigner.tab_clickFormDesigner);
 		_click($bo_pg_formDesigner.btn_addNewQuestion);
 		_click($bo_pg_formDesigner.btn_selectQuestionDataType);
@@ -210,12 +221,15 @@ var $bo_act_checklistdesigner = new function bo_act_checklistdesigner() {
 		_click($bo_pg_formDesigner.btn_closeQuestionPopUp);
 		// _click($bo_pg_formDesigner.btn_quickSave);
 		_click($bo_pg_formDesigner.btn_save_close);
+		_selectDomain();
 	};
 
 	// Add the same Question into the Checklist Question set
 
 	this.addsamequestion_tochecklist = function($questiontext) {
+		
 		var $questin_txt = $questiontext;
+		_selectDomain("/svmx/");
 		_click($bo_pg_formDesigner.tab_clickFormDesigner);
 		_assertEqual(true, _isVisible(_f("main").s_label($questin_txt)));
 		_click(_f("main").s_label($questin_txt));
@@ -225,12 +239,13 @@ var $bo_act_checklistdesigner = new function bo_act_checklistdesigner() {
 		_wait(10000);
 		_click($bo_pg_formDesigner.btn_save_close);
 		_wait(10000);
+		_selectDomain();
 		_call(top.location.reload());
 
 	};
 
-	this.searchthevaluesinchecklist_groupbytagoff = function($questiontext,
-			$tagname, $commonvalue) {
+	this.searchthevaluesinchecklist_groupbytagoff = function($questiontext,$tagname, $commonvalue) {
+		_selectDomain("/svmx/");
 		_click($bo_pg_formDesigner.tab_clickFormDesigner);
 		_setValue($sfm_pg_checklistTransaction.txt_formDesignerSearch, $tagname);
 		// No Tag name must be visible - For Tag search
@@ -248,11 +263,12 @@ var $bo_act_checklistdesigner = new function bo_act_checklistdesigner() {
 		// Only question and no tag must be visible for common search
 		_assertEqual(false, _isVisible(_f("main").s_label($tagname)));
 		_assertEqual(true, _isVisible(_f("main").s_label($questiontext)));
+		_selectDomain();
 
 	};
 
-	this.searchthevaluesinchecklist_groupbytagon = function($questiontext,
-			$tagname, $commonvalue) {
+	this.searchthevaluesinchecklist_groupbytagon = function($questiontext,$tagname, $commonvalue) {
+		_selectDomain("/svmx/");
 		_click($bo_pg_formDesigner.tab_clickFormDesigner);
 		_click($bo_pg_formDesigner.btn_groupbytag);
 		_setValue($sfm_pg_checklistTransaction.txt_formDesignerSearch, $tagname);
@@ -260,23 +276,22 @@ var $bo_act_checklistdesigner = new function bo_act_checklistdesigner() {
 		_assertEqual(true, _isVisible(_f("main").s_label($tagname)));
 
 		_setValue($sfm_pg_checklistTransaction.txt_formDesignerSearch, "");
-		_setValue($sfm_pg_checklistTransaction.txt_formDesignerSearch,
-				$questiontext);
+		_setValue($sfm_pg_checklistTransaction.txt_formDesignerSearch,$questiontext);
 		// Both Tag and Questions must be visible - For Question Search
 		_assertEqual(true, _isVisible(_f("main").s_label($tagname)));
 		_assertEqual(true, _isVisible(_f("main").s_label($questiontext)));
 
 		_setValue($sfm_pg_checklistTransaction.txt_formDesignerSearch, "");
-		_setValue($sfm_pg_checklistTransaction.txt_formDesignerSearch,
-				$commonvalue);
+		_setValue($sfm_pg_checklistTransaction.txt_formDesignerSearch,$commonvalue);
 
 		// Both Tag and question must be Visible for Common Search
 		_assertEqual(true, _isVisible(_f("main").s_label($tagname)));
 		_assertEqual(true, _isVisible(_f("main").s_label($questiontext)));
+		_selectDomain();
 
 	};
 
-	this.edit_checklist_process_checkbox = function($questiontext, $answertype) {
+	this.edit_checklist_process_checkbox = function($questiontext, $answertype) { // Modified for Lightning
 		_selectDomain("/svmx/");
 		_click($bo_pg_formDesigner.tab_clickFormDesigner);
 		_assertEqual(true, _isVisible(_f("main").s_label($questiontext)));
