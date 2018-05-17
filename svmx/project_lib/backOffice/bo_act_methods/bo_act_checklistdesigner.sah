@@ -4,8 +4,9 @@
  * Owner is Meghana Rao P
  */
 var $bo_act_checklistdesigner = new function bo_act_checklistdesigner() {
-
-	this.newChecklistTypeSFM = function($checklistName, $sfmType, $objName) {
+ 
+	this.newChecklistTypeSFM = function($checklistName, $sfmType, $objName) { // Modified for Lightning
+		_selectDomain("/svmx/");
 		_click($bo_pg_sfmTransactionAndDesigner.btn_newSFMTransaction);
 		$bo_pg_sfmTransactionAndDesigner.setSfmName($checklistName);
 		_setValue($bo_pg_sfmTransactionAndDesigner.txt_sfmTransactionId, "");
@@ -21,6 +22,7 @@ var $bo_act_checklistdesigner = new function bo_act_checklistdesigner() {
 
 		_click($bo_pg_sfmTransactionAndDesigner.btn_popUpOK);
 		_wait(6000);
+		_selectDomain();
 
 	};
 
