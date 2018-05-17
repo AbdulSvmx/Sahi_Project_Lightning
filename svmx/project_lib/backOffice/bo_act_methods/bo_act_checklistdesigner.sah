@@ -68,7 +68,7 @@ var $bo_act_checklistdesigner = new function bo_act_checklistdesigner() {
 	
 	this.verifyquestionnotpresent = function($question, $tagname)
 	{
-
+		_selectDomain("/svmx/");
 		_click($bo_pg_formDesigner.tab_clickFormDesigner);
 		_click($bo_pg_formDesigner.btn_groupbytag);
 		_setValue($sfm_pg_checklistTransaction.txt_formDesignerSearch, $tagname);
@@ -78,6 +78,7 @@ var $bo_act_checklistdesigner = new function bo_act_checklistdesigner() {
 		_unlockWindow();
 		_wait(10000);
 		_assertEqual(false,_isVisible(_f("main").s_label($question)));
+		_selectDomain();
 		
 		
 	};
@@ -116,7 +117,9 @@ var $bo_act_checklistdesigner = new function bo_act_checklistdesigner() {
 
 	{
 		_call(top.location.reload());
+		_selectDomain("/svmx/");
 		$bo_pg_sfmTransactionAndDesigner.clickSFM($checklistName, $isCustom);
+		_selectDomain();
 
 	};
 
