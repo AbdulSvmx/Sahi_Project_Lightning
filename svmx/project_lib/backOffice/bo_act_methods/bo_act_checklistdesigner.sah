@@ -334,10 +334,7 @@ var $bo_act_checklistdesigner = new function bo_act_checklistdesigner() {
 		_assertEqual(true, _isVisible(_f("main").s_label($questiontext)));
 		_click($sfm_pg_checklistTransaction.btn_editQuestion);
 		if ($answertype == "Checkbox") {
-			_assertEqual(true,
-					$sfm_pg_checklistTransaction.btn_defaultcheckbox2.get("selected"));
-			_assertEqual(true,
-					$sfm_pg_checklistTransaction.btn_defaultcheckbox2.get("selected"));
+			_assertEqual(true,_getValue($sfm_pg_checklistTransaction.btn_defaultcheckbox2));
 
 		}
 		if ($answertype == "Radio Button") {
