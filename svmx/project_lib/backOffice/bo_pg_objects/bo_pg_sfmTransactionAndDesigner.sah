@@ -135,14 +135,16 @@ var $bo_pg_sfmTransactionAndDesigner = new function bo_pg_sfmTransactionAndDesig
 	// Owner : Meghana Rao P
 	
 	this.clickSFM = function($sfmName , $isCustom) {
+		
 		if ($isCustom) {
+			_selectDomain("/svmx/");
 			_wait(3000);
 			 _click($bo_pg_sfmTransactionAndDesigner.btn_yourCustomSfmTransactions);
 			 
 		}
 		_setValue($bo_pg_sfmTransactionAndDesigner.txt_yourCustomSfmTransactionsQuickFind, $sfmName); // Owner Meghana 
-		
 		_click(_f("main").s_label($sfmName));
+		_selectDomain();
 	};
 	
 	// Done
