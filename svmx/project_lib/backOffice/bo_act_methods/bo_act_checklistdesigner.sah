@@ -184,7 +184,7 @@ var $bo_act_checklistdesigner = new function bo_act_checklistdesigner() {
 	};
 
 	// Find the values in the Checklist fields pop window.
-	this.findthevaluesinChecklist = function($questionText, $helpurl255) {
+	this.findthevaluesinChecklist = function($questionText, $helpurl255) { // Modified for Lightning
 		
 		_selectDomain("/svmx/");
 		_click($bo_pg_formDesigner.tab_clickFormDesigner);
@@ -209,7 +209,7 @@ var $bo_act_checklistdesigner = new function bo_act_checklistdesigner() {
 
 	};
 
-	this.addQuestionToChecklist2 = function($questionText, $tag1) {
+	this.addQuestionToChecklist2 = function($questionText, $tag1) { // Modified for Lightning
 		_selectDomain("/svmx/");
 		_click($bo_pg_formDesigner.tab_clickFormDesigner);
 		_click($bo_pg_formDesigner.btn_addNewQuestion);
@@ -226,7 +226,7 @@ var $bo_act_checklistdesigner = new function bo_act_checklistdesigner() {
 
 	// Add the same Question into the Checklist Question set
 
-	this.addsamequestion_tochecklist = function($questiontext) {
+	this.addsamequestion_tochecklist = function($questiontext) { // Modified for Lightning
 		
 		var $questin_txt = $questiontext;
 		_selectDomain("/svmx/");
@@ -244,7 +244,7 @@ var $bo_act_checklistdesigner = new function bo_act_checklistdesigner() {
 
 	};
 
-	this.searchthevaluesinchecklist_groupbytagoff = function($questiontext,$tagname, $commonvalue) {
+	this.searchthevaluesinchecklist_groupbytagoff = function($questiontext,$tagname, $commonvalue) { // Modified for Lightning
 		_selectDomain("/svmx/");
 		_click($bo_pg_formDesigner.tab_clickFormDesigner);
 		_setValue($sfm_pg_checklistTransaction.txt_formDesignerSearch, $tagname);
@@ -267,7 +267,7 @@ var $bo_act_checklistdesigner = new function bo_act_checklistdesigner() {
 
 	};
 
-	this.searchthevaluesinchecklist_groupbytagon = function($questiontext,$tagname, $commonvalue) {
+	this.searchthevaluesinchecklist_groupbytagon = function($questiontext,$tagname, $commonvalue) { // Modified for Lightning
 		_selectDomain("/svmx/");
 		_click($bo_pg_formDesigner.tab_clickFormDesigner);
 		_click($bo_pg_formDesigner.btn_groupbytag);
@@ -327,8 +327,9 @@ var $bo_act_checklistdesigner = new function bo_act_checklistdesigner() {
 
 	};
 	
-	this.verifythechangesinquestion = function($questiontext, $answertype) {
+	this.verifythechangesinquestion = function($questiontext, $answertype) { // Modified for Lightning
 
+		_selectDomain("/svmx/");
 		_click($bo_pg_formDesigner.tab_clickFormDesigner);
 		_assertEqual(true, _isVisible(_f("main").s_label($questiontext)));
 		_click($sfm_pg_checklistTransaction.btn_editQuestion);
@@ -344,6 +345,8 @@ var $bo_act_checklistdesigner = new function bo_act_checklistdesigner() {
 					$sfm_pg_checklistTransaction.btn_defaultRadiobutton2.get("selected"));
 
 		}
+		
+		_selectDomain();
 
 	};
 
