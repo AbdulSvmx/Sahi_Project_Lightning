@@ -297,17 +297,14 @@ var $bo_act_checklistdesigner = new function bo_act_checklistdesigner() {
 		_assertEqual(true, _isVisible(_f("main").s_label($questiontext)));
 		_click($sfm_pg_checklistTransaction.btn_editQuestion);
 		if ($answertype == "Checkbox") {
-			_selectDomain("/svmx/");
 			_click($sfm_pg_checklistTransaction.btn_defaultcheckbox);
 			_click($sfm_pg_checklistTransaction.btn_defaultcheckbox2);
-			_selectDomain();
+	
 
 		}
 		if ($answertype == "Radio Button") {
-			_selectDomain("/svmx/");
 			_click($sfm_pg_checklistTransaction.btn_defaultRadiobutton2);
-			_selectDomain();
-
+		
 		}
 
 		_click($sfm_pg_checklistTransaction.btn_saveFilter);
