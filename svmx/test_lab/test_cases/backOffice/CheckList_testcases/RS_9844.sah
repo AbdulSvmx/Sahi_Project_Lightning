@@ -38,6 +38,9 @@ $bo_act_checklistdesigner.edit_checklist_process_checkbox($QuestionName, "Checkb
 
 
 // To verify the changes in Checklist Process 2
+$bo_act_navigation.navigateToSvmxSetup();
+
+$bo_act_navigation.navigateToSfmTransactionDesigner();
 $bo_act_checklistdesigner.re_openChecklistTypeSFM($Process2, true);
 $bo_act_checklistdesigner.verifythechangesinquestion($QuestionName, "Checkbox");
 
