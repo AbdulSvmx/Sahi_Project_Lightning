@@ -26,8 +26,8 @@ $bo_act_checklistdesigner.create_newquestion_tag_in_designer($QuestionName1, "")
 $bo_act_checklistdesigner.create_newquestion_tag_in_designer($QuestionName2, "RS_9865TAG");
 
 _call(top.location.reload());
-$bo_act_checklistdesigner.verifythequestionsonUI("RS_9865 with TAG Question1"+$number1+"", "Untagged");
+$bo_act_checklistdesigner.verifythequestionsonUI($QuestionName1, "Untagged");
 
-$bo_act_checklistdesigner.verifythequestionsonUI("RS_9865 with TAG Question2"+$number1+"", "RS_9865TAG");
+$bo_act_checklistdesigner.verifythequestionsonUI($QuestionName2, "RS_9865TAG");
 
 $RS_9865.end();
