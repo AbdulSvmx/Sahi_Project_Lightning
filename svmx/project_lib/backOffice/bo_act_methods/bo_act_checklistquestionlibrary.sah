@@ -11,6 +11,7 @@ var $bo_act_questionlibrary = new function bo_act_questionlibrary() {
 	{
 		
 		_click($bo_pg_formDesigner.btn_gobacktoSetupHome);
+		_selectDomain("/svmx/");
 		_click($bo_pg_servicemaxSetup.btn_serviceFlowManager);
 		_click($bo_pg_servicemaxSetup.btn_checklistQuestionLibrary);
 		_assertEqual(true, _isVisible(_div($questiontext)));
@@ -23,6 +24,7 @@ var $bo_act_questionlibrary = new function bo_act_questionlibrary() {
 		_click($sfm_pg_checklistQuestionLibrary.btn_addAnswer);
 		_setValue($sfm_pg_checklistQuestionLibrary.txt_answerValue2, "Answer 2");
 		_click($sfm_pg_checklistQuestionLibrary.btn_saveQuestion);
+		_selectDomain();
 		
 		
 		
@@ -31,6 +33,7 @@ var $bo_act_questionlibrary = new function bo_act_questionlibrary() {
 	this.createDateTimeQuestion = function($questionText,$answerType,$helpURL3,$tagname)
 	{
 		
+		_selectDomain("/svmx/");
 		_click($bo_pg_servicemaxSetup.btn_serviceFlowManager);
 		_click($bo_pg_servicemaxSetup.btn_checklistQuestionLibrary);
 		$swat_act_pageLoadWait.waitTillPageLoads($sfm_pg_checklistQuestionLibrary.btn_addQuestion);//added by Shruthi Shanthappa
@@ -55,12 +58,14 @@ var $bo_act_questionlibrary = new function bo_act_questionlibrary() {
 			}
 
 		_click($sfm_pg_checklistQuestionLibrary.btn_okMessage);
+		_selectDomain();
 
 	} ;
 	
 	this.createCheckbox_RadioQuestion = function($questionText , $answerType, $helpURL, $responseName)
 	
 	{
+		_selectDomain("/svmx/");
 		_click($bo_pg_servicemaxSetup.btn_serviceFlowManager);
 		_click($bo_pg_servicemaxSetup.btn_checklistQuestionLibrary);
 		//_wait(4000);
@@ -88,13 +93,16 @@ var $bo_act_questionlibrary = new function bo_act_questionlibrary() {
 		_setValue($sfm_pg_checklistQuestionLibrary.txt_answerValue2, "Answer 2");
 		_click($sfm_pg_checklistQuestionLibrary.btn_checklistdefaultbutton1);
 		_click($sfm_pg_checklistQuestionLibrary.btn_saveQuestion);	
+		_selectDomain();
 		
 	};
 	
 	//added by Shruthi Shanthappa
 	this.createTextQuestion = function($questionText,$answerType,$helpURL3,$tagname,$defaultText)
 	{
+		
 		_click($bo_pg_servicemaxSetup.btn_backToSetupHome);
+
 		_click($bo_pg_servicemaxSetup.btn_serviceFlowManager);
 		_click($bo_pg_servicemaxSetup.btn_checklistQuestionLibrary);
 		$swat_act_pageLoadWait.waitTillPageLoads($sfm_pg_checklistQuestionLibrary.btn_addQuestion);
@@ -125,6 +133,7 @@ var $bo_act_questionlibrary = new function bo_act_questionlibrary() {
 			}
 
 		_click($sfm_pg_checklistQuestionLibrary.btn_okMessage);
+	
 
 	} ;
 
