@@ -26,6 +26,8 @@ $bo_act_checklistdesigner.create_newquestion_tag_in_designer($QuestionName1, "")
 $bo_act_checklistdesigner.create_newquestion_tag_in_designer($QuestionName2, "RS_9865TAG");
 
 _call(top.location.reload());
+
+$bo_act_checklistdesigner.re_openChecklistTypeSFM($Process1, true);
 $bo_act_checklistdesigner.verifythequestionsonUI($QuestionName1, "Untagged");
 
 $bo_act_checklistdesigner.verifythequestionsonUI($QuestionName2, "RS_9865TAG");
