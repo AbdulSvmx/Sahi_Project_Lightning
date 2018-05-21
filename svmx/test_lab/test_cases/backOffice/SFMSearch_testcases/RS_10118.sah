@@ -13,7 +13,8 @@ $number1 = Math.floor(Math.random() * 10);
 $bo_act_navigation.navigateToSvmxSetup();
 $bo_act_sfmsearch.createsfmsearch("", "", "Work Order", "Priority", "High", "Equals");
 // To verify the Error messages when mandatory fields are not filled
+_selectDomain("/svmx/");
 _assertEqual(true, _isVisible(_listItem("Please enter a valid ID for this Search Configuration")));
 _assertEqual(true, _isVisible(_listItem("Please enter a valid name for this Search Configuration")));
-
+_selectDomain();
 $RS_10118.end();
