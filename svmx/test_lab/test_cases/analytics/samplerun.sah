@@ -4,8 +4,6 @@
  * This code is to push the data from Salesforce REST API calls from back end in Lightning
  */
 
-
-
 $bo_act_login.login($g_url, $bac_un, $bac_pwd);
 
 
