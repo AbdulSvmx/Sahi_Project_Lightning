@@ -1,0 +1,60 @@
+
+/*
+ * Owner : Meghana Rao
+ * This code is to push the data from Salesforce REST API calls from back end in Lightning
+ */
+
+
+
+$bo_act_login.login($g_url, $bac_un, $bac_pwd);
+
+
+     var $username = "meghana.rao@servicemax.com";
+     var $password = "cloud_102";
+     var $clientId = "3MVG9zZht._ZaMulZsbNptzpIDmNd6xyt0zAOuNU_dtpTTg4DHSn9UmdBySUZS3_VOGeiWttaj3moLMuLIrje";
+     var $consumerSecret = "1938983484606764552";
+     //Authorization endpoint
+     var $authEndPoint = "https://test.salesforce.com/services/oauth2/token";
+     //response_type must be set to token
+     var $responseType = "token";
+     //This is the callback URL from the connected app
+     var $redirectURI = "https://cs21.lightning.force.com";
+     //Construct the URL with the required parameters
+     var $requestURL = ""+$authEndPoint+"?grant_type=password&client_id="+$clientId+"&client_secret="+$consumerSecret+"&username="+$username+"&password="+$password+"&response_type="+$responseType+"&redirect_uri="+$redirectURI+"";
+  
+     	_log($requestURL);
+$request = new RESTRequest();
+
+ $request.setURL($requestURL);
+
+	$response = $request.submit("post");
+	_log("Auth Token: "+$response);
+
+	var $AuthCode = $response.getBodyAsString(); //returns the content of the body using UTF-8 encoding
+	var $AuthCode2 = $response.getBodyAsString("ISO-8859-1"); //returns the content of the body using ISO-8859-1 encoding
+	_log($AuthCode);
+
+	_log($AuthCode2);
+	
+
+	$request1 = new RESTRequest();
+	$request1.setURL("https://cs21.salesforce.com/services/data/v39.0/sobjects/Account/?");
+	$request1.setCredentials("meghana.rao@servicemax.com", "cloud_102");
+	$request1.setHeader("Authorization", "OAuth 00Dq0000000933B!AQUAQFbDrRNVKdxxwoTifgG1EZ8Djy5AR2lBXC88EVZyRKCU3GEjnu4VJ7m79tf7QQvy8Ze5QWZ7rb7a63gv9SCITERdX8j3");
+	$request1.setHeader("Content-Type", "application/json");
+	
+var $json = {
+	
+	
+	"Name": "Automation new"
+}
+	var $jsonString = JSON.stringify($json);
+
+$request1.setBody($jsonString);
+$response1 = $request1.submit("post");
+
+var $AuthCode_data = $response1.getBodyAsString(); //returns the content of the body using UTF-8 encoding
+var $AuthCode_data2 = $response1.getBodyAsString("ISO-8859-1");
+
+_log($AuthCode_data2);
+
