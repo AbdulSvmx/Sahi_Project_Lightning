@@ -26,7 +26,6 @@ $request = new RESTRequest();
  $request.setURL($requestURL);
 
 	$response = $request.submit("post");
-	_log("Auth Token: "+$response);
 
 	var $AuthCode = $response.getBodyAsString(); //returns the content of the body using UTF-8 encoding
 	var $AuthCode2 = $response.getBodyAsString("ISO-8859-1"); //returns the content of the body using ISO-8859-1 encoding
@@ -34,6 +33,22 @@ $request = new RESTRequest();
 
 	_log($AuthCode2);
 	
+	// To get only the access token from the data
+
+        var pageUrls = $AuthCode2.split('#');
+        var sURLVariables = pageUrls[1].split('&');
+        for (var i = 0; i < sURLVariables.length; i++) 
+          {
+            var sParameterName = sURLVariables[i].split('=');
+            if (sParameterName[0] == sParam) 
+              {
+                _log(sParameterName[1]);
+                }
+            }
+         
+	  
+
+
 
 	$request1 = new RESTRequest();
 	$request1.setURL("https://cs21.salesforce.com/services/data/v39.0/sobjects/Account/?");
