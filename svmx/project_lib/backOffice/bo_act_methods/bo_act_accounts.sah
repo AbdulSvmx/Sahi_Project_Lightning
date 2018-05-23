@@ -14,12 +14,14 @@ var $bo_act_accounts = new function bo_act_accounts() {
 	this.createAccount = function() {
 		var $accountName = $bo_act_common.generateRandomName("Acc");
         $bo_act_navigation.navigateToAccountsPage();
+        _setStrictVisibilityCheck(true);
 		_click($bo_pg_accounts.btn_new);
 		_setValue($bo_pg_accounts.txt_accountName, $accountName);
 		_click($bo_pg_accounts.btn_save);
 		_assertNotVisible(_span("Review the errors on this page."));
 		_wait(15000, _isVisible(_span($accountName)));
 		_logOutput($accountName+ " account is created");
+		_setStrictVisibilityCheck();
     return $accountName;
 		//return $callBack.returnResult([_isVisible($accountName), "Account not created",$accountName] );
 	};

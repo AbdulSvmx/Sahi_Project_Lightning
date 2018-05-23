@@ -180,10 +180,15 @@ var $bo_act_navigation = new function bo_act_navigation() {
     	_call(top.location.reload());
     };
 
-    this.navigateToLocations = function(){
-    	_click($bo_pg_home.btn_allTabs);
-   	    _click($bo_pg_home.link_locations);
-   	 _setSelected(_select("hotlist_mode"),"Recently Created");
+    this.navigateToLocations = function(){ // Modified for Lightning
+    	
+    	if(_isVisible ($bo_pg_home.link_locations)==true){
+      		_click($bo_pg_home.link_locations);
+      	}
+      	else{
+      		_click($bo_pg_home.link_more);
+      		_click($bo_pg_home.link_locations);
+      	}
     };
     
     this.navigateToDevConsole = function(){

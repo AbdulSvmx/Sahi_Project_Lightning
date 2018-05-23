@@ -8,20 +8,25 @@ var $bo_act_locations = new function bo_act_locations() {
 	 * 
 	 */
 
-	this.createLocation = function($recordType,$accountName,$street,$country,$zipCode){
+	this.createLocation = function($recordType,$accountName,$street,$country,$zipCode){ // Modified for Lightning
 		var $locName = $bo_act_common.generateRandomName("loc");
 		$bo_act_navigation.navigateToLocations();
+		
 		_click($bo_pg_locations.btn_new);
-		_setSelected($bo_pg_locations.sel_recordType, $recordType);
+		
+		_click(_span($recordType));
+		
 		_click($bo_pg_locations.btn_continue);
 		_setValue($bo_pg_locations.txt_locationName, $locName);
 		_setValue($bo_pg_locations.txt_street, $street);
-		_setSelected($bo_pg_locations.sel_country, $country);
+		_click($bo_pg_locations.sel_country);
+		_click(_link($country));
 		_setValue($bo_pg_locations.txt_zip, $zipCode);
-		_setValue($bo_pg_locations.txt_accountName, $accountName);
+		_setValue($bo_pg_locations.txt_accountName,$accountName);
+		_click(_div($accountName));
 		_click($bo_pg_locations.btn_save);
-		_assertNotVisible(_div("/Error: Invalid Data/"));
-		_wait(15000, _isVisible(_heading2($locName)));
+		_assertNotVisible(_span("Review the errors on this page."));
+		_wait(15000, _isVisible(_span("Details")));
 		_logOutput($locName+ " location is created");
 		return $locName;
 		};
@@ -44,22 +49,27 @@ var $bo_act_locations = new function bo_act_locations() {
             _wait(15000, _isVisible(_heading2($locName)));
             };
             
-		this.addInstalledProductToLocation = function($productName,$accountName,$contactName){
+		this.addInstalledProductToLocation = function($productName,$accountName,$contactName){ // Modified for Lightning
 				var $serialNum = $bo_act_common.generateRandomName("Ser");
 				var $IBName = $bo_act_common.generateRandomName("IB_");
-				 //$bo_act_navigation.navigateToLocations();
-				 //_click($locationName);
+				 $bo_act_navigation.navigateToLocations();
+				 _click($locationName);
+				 _setStrictVisibilityCheck(true);
+				 _click($bo_pg_locations.btn_relatedvalue);
 				 _click($bo_pg_locations.btn_NewInstalledProduct);
 				_setValue($bo_pg_installedProducts.txt_productName,$productName);
+				_click(_link($productName));
 				_setValue($bo_pg_installedProducts.txt_serialNumber, $serialNum);
 				_setValue($bo_pg_installedProducts.txt_accountName, $accountName);
+				_click(_link($accountName));
 				_setValue($bo_pg_installedProducts.txt_contactName, $contactName);
+				_click(_link($contactName));
 				_setValue($bo_pg_installedProducts.txt_installedProductName, $IBName);
 				_setValue($bo_pg_installedProducts.txt_installedDate);
 				_click($bo_pg_installedProducts.btn_save);
-				_assertNotVisible(_div("/Error: Invalid Data/"));
+				_assertNotVisible(_span("Review the errors on this page."));
 				_logOutput($IBName+ " IB is created");
-				_wait(15000, _isVisible(_heading2($IBName)));
+				_wait(15000, _isVisible(_span("Details")));
 				return $IBName;
 		};
 		
