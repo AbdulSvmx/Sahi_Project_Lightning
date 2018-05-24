@@ -406,7 +406,7 @@ var $bo_act_PMPlan = new function bo_act_PMPlan() {
 		_selectDomain("/svmx/");
 		if(_condition($bo_pg_PMPlan.btn_NewConditionBasedPMPlanFromLocation == null))
 		{
-			_selectDomain();
+			_selectDomain("/svmx/");
 			var $wizardTitleName = "Condition Based PM";
 			var $wizardIDName = $bo_act_common.generateRandomName("Wid");
 			$bo_act_navigation.navigateToSfmWizard();
@@ -416,6 +416,7 @@ var $bo_act_PMPlan = new function bo_act_PMPlan() {
 			$bo_act_SFW.saveAndClose();
 			$bo_act_navigation.navigateToLocations();
 			_click(_link($location));
+			
 
 		}else
 		_wait(1000);
@@ -434,6 +435,7 @@ var $bo_act_PMPlan = new function bo_act_PMPlan() {
 		_click($bo_pg_PMPlan.btn_cancel_IB);
 		_wait(10000);
 		_click($bo_pg_PMPlan.btn_saveCustomUI);
+		_selectDomain();
 		return $PMPlanName;
 	};
 	
