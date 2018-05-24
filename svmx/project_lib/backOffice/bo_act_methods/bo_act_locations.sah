@@ -11,11 +11,19 @@ var $bo_act_locations = new function bo_act_locations() {
 	this.createLocation = function($recordType,$accountName,$street,$country,$zipCode){ // Modified for Lightning
 		var $locName = $bo_act_common.generateRandomName("loc");
 		$bo_act_navigation.navigateToLocations();
-		
+		_setStrictVisibilityCheck(true);
+		_wait(1000);
 		_click($bo_pg_locations.btn_new);
-		
+		_wait(1000);
+
+		if(!_isVisible($bo_pg_locations.btn_save)){
+			_click(_button("Close this window"));
+			_click($bo_pg_locations.btn_new);
+	
+		}
+
 		_click(_span($recordType));
-		
+		_wait(1000);
 		_click($bo_pg_locations.btn_continue);
 		_setValue($bo_pg_locations.txt_locationName, $locName);
 		_setValue($bo_pg_locations.txt_street, $street);
@@ -23,11 +31,13 @@ var $bo_act_locations = new function bo_act_locations() {
 		_click(_link($country));
 		_setValue($bo_pg_locations.txt_zip, $zipCode);
 		_setValue($bo_pg_locations.txt_accountName,$accountName);
-		_click(_div($accountName));
+		_wait(1000);
+		_click(_mark($accountName));
 		_click($bo_pg_locations.btn_save);
 		_assertNotVisible(_span("Review the errors on this page."));
 		_wait(15000, _isVisible(_span("Details")));
 		_logOutput($locName+ " location is created");
+		_setStrictVisibilityCheck();
 		return $locName;
 		};
 		
@@ -49,21 +59,22 @@ var $bo_act_locations = new function bo_act_locations() {
             _wait(15000, _isVisible(_heading2($locName)));
             };
             
-		this.addInstalledProductToLocation = function($productName,$accountName,$contactName){ // Modified for Lightning
+		this.addInstalledProductToLocation = function($productName,$accountName,$contactName, $locationName){ // Modified for Lightning
 				var $serialNum = $bo_act_common.generateRandomName("Ser");
 				var $IBName = $bo_act_common.generateRandomName("IB_");
 				 $bo_act_navigation.navigateToLocations();
-				 _click($locationName);
+				 _click(_link($locationName));
 				 _setStrictVisibilityCheck(true);
 				 _click($bo_pg_locations.btn_relatedvalue);
 				 _click($bo_pg_locations.btn_NewInstalledProduct);
 				_setValue($bo_pg_installedProducts.txt_productName,$productName);
-				_click(_link($productName));
+				_click(_mark($productName));
 				_setValue($bo_pg_installedProducts.txt_serialNumber, $serialNum);
 				_setValue($bo_pg_installedProducts.txt_accountName, $accountName);
-				_click(_link($accountName));
+				_wait(1000);
+				_click(_mark($accountName));
 				_setValue($bo_pg_installedProducts.txt_contactName, $contactName);
-				_click(_link($contactName));
+				_click(_mark($contactName));
 				_setValue($bo_pg_installedProducts.txt_installedProductName, $IBName);
 				_setValue($bo_pg_installedProducts.txt_installedDate);
 				_click($bo_pg_installedProducts.btn_save);

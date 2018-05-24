@@ -50,17 +50,24 @@ this.deletePMPlanTemplate = function($PMPTempName){
 	
 };
 
-this.createUsageBasedConditionPMPTemplateNoSave = function($productName)
+this.createUsageBasedConditionPMPTemplateNoSave = function($productName) // Modified for Lightning
 {
 	var $PMTemplateName = $bo_act_common.generateRandomName("PMT");
 	$bo_act_navigation.navigateToPMPlanTemplatePage();
+	_click(_span("Recently Viewed"));
+	_wait(1000);
+	_click(_link("SelectedAll"));
+	_doubleClick(_link("SelectedAll"));
+	_wait(1000);
 	_click($bo_pg_PMPlanTemplate.btn_createConditionBasedPMPTemplate);
+	_selectDomain("/svmx/");
 	_wait(60000,_isVisible($bo_pg_PMPlanTemplate.txt_templateName));
 	_setValue($bo_pg_PMPlanTemplate.txt_templateName,$PMTemplateName);
 	_setValue($bo_pg_PMPlanTemplate.txt_product,$productName);
 	_click($bo_pg_PMPlanTemplate.img_filterIcon);
 	_click(_div(0,_rightOf($bo_pg_PMPlanTemplate.txt_product)));
 	_click(_listItem($productName));
+	_selectDomain();
 	return $PMTemplateName;
 };
 
@@ -132,13 +139,15 @@ this.updateUsageConditionRulesGridWithOutAdjFields = function($attribute,$operat
 	_setValue($bo_pg_PMPlanTemplate.txt_stopAt,$stopAt);
 	
 };
-
+// Modified for Lightning
 this.updateUsageConditionRulesGridWithAdjFields = function($attribute,$operator,$frequency,$startAt,$stopAt,$adjType,$minAdj,$maxAdj,$adjValue,$adjUnit){
 	_wait(5000);
+	_selectDomain("/svmx/");
 	_click($bo_pg_PMPlanTemplate.link_addRow);
 	_click($bo_pg_PMPlanTemplate.txt_attributebox);
 	_wait(3000,_isVisible($bo_pg_PMPlanTemplate.txt_attribute));
-	_click($bo_pg_PMPlanTemplate.txt_attribute);_click(_div($attribute));
+	_click($bo_pg_PMPlanTemplate.txt_attribute);
+	_click(_div($attribute));
 
 	_click($bo_pg_PMPlanTemplate.txt_operatorbox);
 	_click($bo_pg_PMPlanTemplate.txt_operator);
@@ -179,13 +188,16 @@ this.updateUsageConditionRulesGridWithAdjFields = function($attribute,$operator,
 	_click($bo_pg_PMPlanTemplate.txt_adjUnitbox);
 	_click($bo_pg_PMPlanTemplate.txt_adjUnit);
 	_click(_listItem($adjUnit));
+	_selectDomain();
 
 };
 	
 this.saveConditionBasedPM = function(){
+	_selectDomain("/svmx/");
 	_click(_label("Advanced Expression"));
 	_wait(5000);
 	_click($bo_pg_PMPlanTemplate.btn_customUISave);	
+	_selectDomain();
 	//_assertNotVisible($bo_pg_PMPlanTemplate.img_messagebox);
 	//_wait(15000,_isVisible(_heading1("PM Plan Template:")));
 	//_assertExist(_heading1("PM Plan Template:"));
