@@ -20,4 +20,7 @@ var $sfm_pg_lightningSFMD = new function sfm_pg_lightningSFMD() {
 	this.close_accountWindow = _div("/close/");
 	this.link_contact = _link(0,_under(_div("Full Name")));
 	this.chkBx_limitSearch = _checkbox("/Limit search to Account:/");
+	this.link_productServiced = _link("/Add Products Serviced/");
+	this.btn_add = _link("add");
+	
 };

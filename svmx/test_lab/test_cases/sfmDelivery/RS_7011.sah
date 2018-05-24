@@ -5,7 +5,7 @@ $processName = "Add/Edit Products Serviced";
 $sfmName = $bo_act_common.generateRandomName("SFM_Auto_");
 $sfmPgLayoutName =	$bo_act_common.generateRandomName("SFM_Auto_Page");
 $wizTitle = $bo_act_common.generateRandomName("SFM Wiz");
-$bo_act_login.login($g_url,$sfmUsn,$sfmPwd);
+$bo_act_login.login($g_url,$bac_un,$bac_pwd);
 $bo_act_navigation.navigateToSfmTransactionDesigner();
 $sfm_act_Transactions.cloneAndSaveProcess($processName, $sfmName, $sfmPgLayoutName);
 $bo_act_navigation.navigateToSfmWizard();

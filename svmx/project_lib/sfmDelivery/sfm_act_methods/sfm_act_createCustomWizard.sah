@@ -54,7 +54,7 @@ var $sfm_act_createCustomWizard = new function sfm_act_createCustomWizard() {
 
 	this.createBlankWo = function(){
 		$woName = "";
-		$accNum = "Acc165201813051";
+		$accNum = "/HCSAccountForTesting/";
 		$priority = "High";
 		_selectDomain();
 		_wait(5000);
@@ -71,7 +71,7 @@ var $sfm_act_createCustomWizard = new function sfm_act_createCustomWizard() {
 		_click($bo_pg_workOrders.sel_priority);
 		_click(_link($priority));
 		_click($bo_pg_workOrders.txt_account);
-		_click(_div($accNum));
+		_click(_link($accNum,_near(_label("/Account/"))));
 		_click($sfm_pg_wo.btn_wo_save);
 		_wait(3000);
 		$woName= _getText($sfm_pg_wo.label_wo);
