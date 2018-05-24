@@ -163,7 +163,6 @@ var $bo_act_navigation = new function bo_act_navigation() {
     };
 
     this.navigateToPMPlanTemplatePage = function(){ // Modified For Lightning
-    	$bo_act_navigation.navigateToHome();
     	this.navigateToSvmxSetup();
     	_selectDomain("/svmx/");
     	_click($bo_pg_servicemaxSetup.btn_installedBaseAndPM );

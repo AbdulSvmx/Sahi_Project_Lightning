@@ -420,9 +420,7 @@ var $bo_act_PMPlan = new function bo_act_PMPlan() {
 
 		}else
 		_wait(1000);
-		_selectDomain("/svmx/");
 		_click($bo_pg_PMPlan.btn_NewConditionBasedPMPlanFromLocation);
-		_selectDomain();
 		_wait(60000,_isVisible($bo_pg_PMPlan.txt_planName));
 		_setValue($bo_pg_PMPlan.txt_planName,$PMPlanName);
 		_click($bo_pg_PMPlan.txt_planTemplateName);
