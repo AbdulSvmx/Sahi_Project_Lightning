@@ -47,7 +47,7 @@ var $bo_act_navigation = new function bo_act_navigation() {
 	_click($bo_pg_servicemaxSetup.btn_sfmTransactionAndDocsDesigner);
 		 _wait(10000);	 
 	_setSpeed(3000);
-	_selectDomain();
+//	_selectDomain();
 	//return $callBack.returnResult(_exists($bo_pg_sfmTransactionAndDesigner.btn_standardSfmTransaction));
     };
     
