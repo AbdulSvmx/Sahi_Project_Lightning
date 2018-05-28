@@ -12,6 +12,8 @@ var $bo_act_contacts = new function bo_contacts() {
 	this.createContact = function($accountName) {
 		var $contactName = $bo_act_common.generateRandomName("Con");
         $bo_act_navigation.navigateToContactsPage();
+        _wait(1000);
+        _setStrictVisibilityCheck(true);
 		_click($bo_pg_contacts.btn_new);
 		_setValue($bo_pg_contacts.txt_contactName, $contactName);
 		_setValue($bo_pg_contacts.txt_accountName, $accountName);
@@ -20,6 +22,7 @@ var $bo_act_contacts = new function bo_contacts() {
 		_assertNotVisible(_span("Review the errors on this page."));
 		_wait(15000, _isVisible(_span($contactName)));
 		_logOutput($contactName+ " contact is created");
+		 _setStrictVisibilityCheck(false);
      return $contactName;
 		//return $callBack.returnResult([_isVisible($contactName), "Contact not created",$contactName] );
 	

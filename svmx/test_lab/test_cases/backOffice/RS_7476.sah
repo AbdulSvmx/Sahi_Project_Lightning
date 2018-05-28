@@ -4,6 +4,7 @@
 var $RS_7476 = _testcase("$RS_7476","Verify adding a new coverage and saving the pm plan from Account");
 $RS_7476.start();
 _setSpeed($g_stepSpeed);
+_setStrictVisibilityCheck(true);
 var $Workbenchurl = "https://workbench.developerforce.com/login.php";
 //Pre - Condition 
 $bo_act_login.login($g_url, $bac_un, $bac_pwd);
@@ -22,7 +23,7 @@ var $IBName1 = $bo_act_accounts.addIBtoAccounts($proName, $accName, $contactName
 
 $bo_act_navigation.navigateToAccountsPage();
 _click(_link($accName2));
-var $IBName2 = $bo_act_installedProduct.createInstalledProduct($proName, $accName2, $contactName)
+var $IBName2 = $bo_act_installedProduct.createInstalledProduct($proName, $accName2, $contactName);
 
 
 var $PMPTemplate = $bo_act_PMPlanTemplate.createUsageBasedConditionPMPTemplateNoSave($proName);
@@ -43,7 +44,7 @@ $bo_act_common.deleteIB($bac_un, $bac_pwd, $orgnamespace,$IBName1);
 $bo_act_common.deleteProduct($bac_un, $bac_pwd,$proName);
 $bo_act_common.deletePMPlantemplate($bac_un, $bac_pwd, $orgnamespace,$PMPTemplate);
 
-
+_setStrictVisibilityCheck(false);
 $RS_7476.end();
 
 
