@@ -34,15 +34,16 @@ $bo_act_PMPlanTemplate.saveConditionBasedPM();
 
 var $PMPlan = $bo_act_PMPlan.createConditionBasedPMPlanFromAccount($accName, $PMPTemplate,$IBName1,$IBName2);
 
+_wait(60000);
 // Search the PM Plan Name
 $bo_act_common.cleanUpfunctionold($PMPlan);
 
 // CleanUp Function
-$bo_act_common.deleteAccount($bac_un, $bac_pwd, $accName);
-$bo_act_common.deleteContact($bac_un, $bac_pwd, $contactName);
-$bo_act_common.deleteIB($bac_un, $bac_pwd, $orgnamespace,$IBName1);
-$bo_act_common.deleteProduct($bac_un, $bac_pwd,$proName);
-$bo_act_common.deletePMPlantemplate($bac_un, $bac_pwd, $orgnamespace,$PMPTemplate);
+//$bo_act_common.deleteAccount($bac_un, $bac_pwd, $accName);
+//$bo_act_common.deleteContact($bac_un, $bac_pwd, $contactName);
+//$bo_act_common.deleteIB($bac_un, $bac_pwd, $orgnamespace,$IBName1);
+//$bo_act_common.deleteProduct($bac_un, $bac_pwd,$proName);
+//$bo_act_common.deletePMPlantemplate($bac_un, $bac_pwd, $orgnamespace,$PMPTemplate);
 
 _setStrictVisibilityCheck(false);
 $RS_7476.end();
