@@ -4,15 +4,16 @@
 var $RS_7476 = _testcase("$RS_7476","Verify adding a new coverage and saving the pm plan from Account");
 $RS_7476.start();
 _setSpeed($g_stepSpeed);
-_setStrictVisibilityCheck(true);
+
 var $Workbenchurl = "https://workbench.developerforce.com/login.php";
 //Pre - Condition 
 $bo_act_login.login($g_url, $bac_un, $bac_pwd);
 
 //Test Data Creation
 
-
+_setStrictVisibilityCheck(true);
 var $accName = $bo_act_accounts.createAccount();
+_wait(1000);
 var $accName2 = $bo_act_accounts.createAccount();
 
 var $contactName = $bo_act_contacts.createContact($accName);
@@ -37,7 +38,7 @@ var $PMPlan = $bo_act_PMPlan.createConditionBasedPMPlanFromAccount($accName, $PM
 _wait(60000);
 // Search the PM Plan Name
 $bo_act_common.cleanUpfunctionold($PMPlan);
-
+_setStirctVisibilityCheck(false);
 // CleanUp Function
 //$bo_act_common.deleteAccount($bac_un, $bac_pwd, $accName);
 //$bo_act_common.deleteContact($bac_un, $bac_pwd, $contactName);

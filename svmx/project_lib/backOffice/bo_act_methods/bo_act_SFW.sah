@@ -176,10 +176,13 @@ this.createSFMWizardStepwithHandOver=function($fieldActnType,$actnName,$executio
 	_click($bo_pg_sfmWizard.btn_saveWizardStep);
 	_wait(1000);		
 };
-this.saveAndClose = function(){
+this.saveAndClose = function(){ // Modified for Lightning
+	_selectDomain("/svmx/");
 	_click(_button("Save & Close"));
+	_selectDomain();
 };
-this.createOthersWizardStepwithHandOver=function($fieldActnType,$actnName,$handOver){
+this.createOthersWizardStepwithHandOver=function($fieldActnType,$actnName,$handOver){ // Modified for Lightning
+	_selectDomain("/svmx/");
 	_click($bo_pg_sfmWizard.tab_wizardStep);
 	_click($bo_pg_sfmWizard.btn_newWizardStep);
 	_assertVisible($bo_pg_sfmWizard.lbl_verifyNewWizardSection);
@@ -193,6 +196,7 @@ this.createOthersWizardStepwithHandOver=function($fieldActnType,$actnName,$handO
 	_wait(3000);
 	_click($bo_pg_sfmWizard.btn_saveWizardStep);
 	_wait(1000);		
+	_selectDomain();
 };
 
 this.createOutputDocumentWizardStepwithSelectTemplate=function($fieldActnType,$actnName,$selectTemplateAtRunTime){
