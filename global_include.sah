@@ -1,5 +1,8 @@
 _windowAction("resize", 1920, 1080);
+
+var project_dir = "Sahi_Project_Lightning";
 _call(top.location.reload(true));
+_setXHRReadyStatesToWaitFor("2");
 var $g_stepSpeed = 400;
 _setSpeed($g_stepSpeed);
 
@@ -82,9 +85,9 @@ var $g_normalizedUserDir = _userDataDir().replace(/\\/g, "/");
 // path
 // ===== Start of paths ====//
 var $g_projectLibPath = $g_normalizedUserDir
-		+ "/scripts/Sahi_Project/svmx/project_lib";
+		+ "/scripts/"+project_dir+"/svmx/project_lib";
 var $g_utilitiesPath = $g_normalizedUserDir
-		+ "/scripts/Sahi_Project/svmx/utilities_lib";
+		+ "/scripts/"+project_dir+"/svmx/utilities_lib";
 // ===== End of paths ====
 
 var $g_referancePath = $g_normalizedUserDir;
