@@ -5,13 +5,16 @@ var $sfm_pg_wizardWindow = new function sfm_pg_wizardWindow(){
 	this.lookup_contact= _div("/search/",_near(_span("Contact")));//Changed for Lightning
 	this.account_option= _link("Acme");//Changed for Lightning
 	this.popUpTxt_account = _textbox(1,_in(_div("/ControlSearchAccount/")));//Added for Lightning
+	this.link_addWorkDetail = _link("+ Add Work Detail (Work Order)");//Added for Lightning
 	this.txt_account =  _textbox(0,_near(_span("Account")));//Changed for Lightning
+	this.icon_Edit = _div("/edit-icon/");//Added for Lightning
+	this.link_edit=_link("Edit");//Changed for Lightning
 	
 	
 	this.txt_site=_textbox(0,_rightOf(_label("/Site/")));
 	this.btn_addAndSearch=_span("/multi-add-line-icon/");
 	this.btn_addRow=_span("/add-line-icon/");
-	this.btn_edit=_image("/edit-icon/");
+	
 	this.btn_downArrow= _xy(_span("/svmx-sfmd-detail-actions-icon/"),30,20);
 	this.txt_serialNo= _textbox(0,_rightOf(_label("/IB Serial Number:/")));
 	this.txt_part= _textbox(0,_rightOf(_label("/Part/")));
