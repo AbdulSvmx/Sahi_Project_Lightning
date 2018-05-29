@@ -61,13 +61,17 @@ this.createUsageBasedConditionPMPTemplateNoSave = function($productName) // Modi
 	_wait(1000);
 	_click($bo_pg_PMPlanTemplate.btn_createConditionBasedPMPTemplate);
 	_selectDomain("/svmx/");
+	_setStrictVisibilityCheck(true);
 	_wait(60000,_isVisible($bo_pg_PMPlanTemplate.txt_templateName));
 	_setValue($bo_pg_PMPlanTemplate.txt_templateName,$PMTemplateName);
 	_setValue($bo_pg_PMPlanTemplate.txt_product,$productName);
 	_click($bo_pg_PMPlanTemplate.img_filterIcon);
+	_wait(1000);
 	_click(_div(0,_rightOf($bo_pg_PMPlanTemplate.txt_product)));
+	_wait(1000);
 	_click(_listItem($productName));
 	_selectDomain();
+	_setStrictVisibilityCheck();
 	return $PMTemplateName;
 };
 

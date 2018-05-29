@@ -53,25 +53,28 @@ var $bo_act_accounts = new function bo_act_accounts() {
 	
 	// Owner Meghana Rao
 	
-	this.addIBtoAccounts = function($productName,$accountName,$contactName,$installedDate) {
+	this.addIBtoAccounts = function($productName,$accountName,$contactName,$installedDate) { // Modified for Lightning
 		
 		
 		var $serialNum = $bo_act_common.generateRandomName("Ser");
 		var $IBName = $bo_act_common.generateRandomName("IB_");
-		
-		 //$bo_act_navigation.navigateToLocations();
-		 //_click($locationName);
-		 _click($bo_pg_accounts.newInstalledProduct);
+		_setStrictVisibilityCheck(true);
+		_wait(5000,_isVisible($bo_pg_installedProducts.btn_new));
+		_click($bo_pg_installedProducts.btn_new);
+		_wait(10000);
 		_setValue($bo_pg_installedProducts.txt_productName,$productName);
+		_click(_mark($productName));
 		_setValue($bo_pg_installedProducts.txt_serialNumber, $serialNum);
 		_setValue($bo_pg_installedProducts.txt_accountName, $accountName);
+		_click(_mark($accountName));
 		_setValue($bo_pg_installedProducts.txt_contactName, $contactName);
+		_click(_mark($contactName));
 		_setValue($bo_pg_installedProducts.txt_installedProductName, $IBName);
 		_setValue($bo_pg_installedProducts.txt_installedDate,$installedDate);
 		_click($bo_pg_installedProducts.btn_save);
-		_assertNotVisible(_div("/Error: Invalid Data/"));
-		_logOutput($IBName+ " IB is created");
-		_wait(15000, _isVisible(_heading2($IBName)));
+		_assertNotVisible(_span("Review the errors on this page."));
+		_wait(15000, _isVisible(_span($IBName)));
+		_setStrictVisibilityCheck(false);
 		return $IBName;
 	
 		
