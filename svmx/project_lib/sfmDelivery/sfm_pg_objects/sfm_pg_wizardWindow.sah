@@ -8,7 +8,8 @@ var $sfm_pg_wizardWindow = new function sfm_pg_wizardWindow(){
 	this.link_addWorkDetail = _link("+ Add Work Detail (Work Order)");//Added for Lightning
 	this.txt_account =  _textbox(0,_near(_span("Account")));//Changed for Lightning
 	this.icon_Edit = _div("/edit-icon/");//Added for Lightning
-	this.link_edit=_link("Edit");//Changed for Lightning
+	this.link_Edit=_link("Edit");//Changed for Lightning
+	this.lkp_autoContact = _div("/search/",_near(_span("AutoContact[1]")));//Changed for Lightning
 	
 	
 	this.txt_site=_textbox(0,_rightOf(_label("/Site/")));
@@ -40,7 +41,6 @@ var $sfm_pg_wizardWindow = new function sfm_pg_wizardWindow(){
 	this.btn_select= _span("Select");
 	this.txt_autoContact = _div("/svmx-grid-cell-inner/",_under(_div("AutoContact")));
 	this.lkp_account = _div("/svmx-button/",_rightOf(_textbox(0,_rightOf(_label("Account:")))));
-	this.lkp_autoContact = _div("/svmx-button/",_rightOf(_textbox(0,_rightOf(_label("AutoContact:")))));
 	this.txt_accountPicklist = _textbox(0,_rightOf(_label("Account Picklist:")));
 	this.lkp_contact = _span("/lookup_icon/",_rightOf(_label("Contact:")));
 	this.lbl_contactLookup = _label(0,_rightOf(_button("/svmx-form-checkbox/")));

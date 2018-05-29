@@ -26,6 +26,7 @@ var $bo_act_navigation = new function bo_act_navigation() {
 		}
 		else
 		{
+			_selectDomain();
 			_click($bo_pg_home.button_allLinks); 
 			if(!_isVisible(_heading2("App Launcher"))){
 				_click($bo_pg_home.button_allLinks); 

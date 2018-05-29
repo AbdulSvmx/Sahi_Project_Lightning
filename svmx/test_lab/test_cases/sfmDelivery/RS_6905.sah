@@ -1,6 +1,7 @@
 var $rs_6905 = _testcase("RS_6905","Verify Lookup Context Header to Child.");
 
 //Pre-Requisites: Create a custom lookup field contact for child.
+$acc = "Acme";
 $sfmName= $bo_act_common.generateRandomName("SFM_Auto_");
 $sfmPgLayoutName= $bo_act_common.generateRandomName("SFM Wiz");
 $wizTitle = $bo_act_common.generateRandomName("SFM Wiz");
@@ -14,11 +15,15 @@ $sfm_act_createCustomWizard.chooseObject("Work Order");
 $sfm_act_createCustomWizard.addManageWizSteps($wizTitle,"SFM",$sfmName);
 $sfm_act_createCustomWizard.createBlankWo();
 $sfm_act_createCustomWizard.clickWizardBtn($sfmName);
-_setValue($sfm_pg_wizardWindow.txt_account,"Acme");
+_setValue($sfm_pg_wizardWindow.txt_account,$acc);
 _click($sfm_pg_wizardWindow.lookup_account);
 _click($sfm_pg_wizardWindow.account_option);
 _click($sfm_pg_wizardWindow.link_addWorkDetail);
 _click($sfm_pg_wizardWindow.icon_Edit);
-_click($sfm_pg_wizardWindow.link_edit);
+_click($sfm_pg_wizardWindow.link_Edit);
+_click($sfm_pg_wizardWindow.lkp_autoContact);
+_click($sfm_pg_wizardWindow.btn_search);
+var $divs= _collect("_div","/.*/",_under(_div("AccountId")));
+_log($divs.length);
 //$sfm_act_createCustomWizard.verify6905();
 $rs_6905.end();	
