@@ -146,6 +146,7 @@ this.updateUsageConditionRulesGridWithOutAdjFields = function($attribute,$operat
 // Modified for Lightning
 this.updateUsageConditionRulesGridWithAdjFields = function($attribute,$operator,$frequency,$startAt,$stopAt,$adjType,$minAdj,$maxAdj,$adjValue,$adjUnit){
 	_wait(5000);
+	_setStrictVisibilityCheck(true);
 	_selectDomain("/svmx/");
 	_click($bo_pg_PMPlanTemplate.link_addRow);
 	_click($bo_pg_PMPlanTemplate.txt_attributebox);
@@ -193,6 +194,7 @@ this.updateUsageConditionRulesGridWithAdjFields = function($attribute,$operator,
 	_click($bo_pg_PMPlanTemplate.txt_adjUnit);
 	_click(_listItem($adjUnit));
 	_selectDomain();
+	_setStrictVisibilityCheck(false);
 
 };
 	
