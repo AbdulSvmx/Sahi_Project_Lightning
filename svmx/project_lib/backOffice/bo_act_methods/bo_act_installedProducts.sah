@@ -117,14 +117,15 @@ var $bo_act_installedProduct = new function bo_act_installedProduct() {
 			return _getText(_span(0,_near($bo_pg_installedProducts.txt_workOrderNumber)));
 	};
 	
-	this.createSupportCase = function($status){
+	this.createSupportCase = function($status){ // Modified for Lightning - Meghana Rao P
 		$bo_act_navigation.navigateToInstalledProductPage();
 		_click(_link($IBName));
 		_selectDomain("/svmx/");
 		_click($bo_pg_installedProducts.btn_SFWcreateSupportCase);
 		_selectDomain();
 		_wait(60000,_isVisible($bo_pg_installedProducts.txt_SFMcreateSupportCaseStatus));
-		_setValue($bo_pg_installedProducts.txt_SFMcreateSupportCaseStatus,$status);
+		_click($bo_pg_installedProducts.txt_SFMcreateSupportCaseStatus,$status);
+		_click(_listItem($status));
 		_click($bo_pg_installedProducts.btn_sfmSave);
 		return _getText($bo_pg_installedProducts.txt_caseNumber);
 	};

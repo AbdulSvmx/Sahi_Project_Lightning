@@ -7,12 +7,13 @@ _setSpeed($g_stepSpeed);
 var $Workbenchurl = "https://workbench.developerforce.com/login.php";
 //Pre - Condition 
 $bo_act_login.login($g_url, $bac_un, $bac_pwd);
-
+_setStrictVisibilityCheck(true);
 //Test Data Creation
 var $accName = $bo_act_accounts.createAccount();
-var $proName = $bo_act_products.createProduct("pro12", "--None--");
-var $IBName = $bo_act_installedProduct.createInstalledProduct($proName,$accName,"");
 var $contactName = $bo_act_contacts.createContact($accName);
+var $proName = $bo_act_products.createProduct("pro12", "--None--");
+var $IBName = $bo_act_installedProduct.createInstalledProduct($proName,$accName,$contactName);
+
 var $slaterm = $bo_act_slaTerms.createSlaTerms("Default");
 var $caseNumber = $bo_act_installedProduct.createSupportCase("New");
 
@@ -85,6 +86,8 @@ $bo_act_common.deletePMPlan($bac_un, $bac_pwd, $orgnamespace,$PMPlan);
 //for (var i = 0; i < $datacreated.length; i++) {
 //	$bo_act_common.cleanUpfunction($datacreated[i]);
 //}
+
+_setStrictVisibilityCheck(false);
 $bo_act_PMProcess.deletePMProcess($PMProcessId);
 
 $RS_7478.end();

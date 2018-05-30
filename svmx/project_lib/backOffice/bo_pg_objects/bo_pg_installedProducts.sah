@@ -19,11 +19,11 @@ var $bo_pg_installedProducts = new function bo_pg_installedProducts(){
 	this.txt_city = _textbox("/City/", _near(_div("/modal-header/")));//Modified for lightning
 	
 	this.btn_createWorkOrder = _button("/Create Work Order/");
-	this.btn_sfmSave = _span("Save");
+	this.btn_sfmSave = _link("Save");
 	this.txt_workOrderNumber = _paragraph("Work Order");
 	this.btn_SFWcreateSupportCase = _button("Create Support Case");
-	this.txt_SFMcreateSupportCaseStatus = _textbox(0,_rightOf(_label("Status:")));
-	this.txt_caseNumber = _heading2(0,_near(_heading1("Case:")));
+	this.txt_SFMcreateSupportCaseStatus = _textbox("Status");
+	this.txt_caseNumber = _span(0,_under(_span("Case Number")));
 	
 	//Sales Force Edit Page
 	this.editStatus = _select(0,_rightOf(_label("/Status/")));
