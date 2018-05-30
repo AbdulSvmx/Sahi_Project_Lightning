@@ -61,7 +61,13 @@ var $sfm_act_createCustomWizard = new function sfm_act_createCustomWizard() {
 		_click($sfm_pg_wo.tab_all);
 //		_click($sfm_pg_wo.clickTab("Work Orders"));
 		_wait(3000);
-		_click($sfm_pg_wo.link_wo);
+		if(_isVisible($sfm_pg_wo.link_wo)){
+			_click($sfm_pg_wo.link_wo);
+		}
+		else{
+			_click(_link("Work Orders[1]"));
+		}
+		
 		_click($sfm_pg_wo.btn_wo_new);
 		if(_exists($sfm_pg_wo.btn_Continue)){
 			_click($sfm_pg_wo.btn_Continue);

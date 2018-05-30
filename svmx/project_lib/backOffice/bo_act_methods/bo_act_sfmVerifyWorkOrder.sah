@@ -22,6 +22,7 @@ var $bo_act_sfmVerifyWorkOrder= new function bo_act_sfmVerifyWorkOrder() {
 };
 
 this.verifyWizardOnWOObj=function($sfmName){
+	_selectDomain();
 	_click($bo_pg_sfmVerifyWorkOrder.img_allTab);
 	//_wait(2000);
 	_click($bo_pg_sfmVerifyWorkOrder.link_workOrder);
@@ -63,7 +64,7 @@ this.verifyWizardOnWOObj=function($sfmName){
 			else{
 				_fail("Launching of wizard in delivery failed");
 			}
-		_selectDomain();
+//		_selectDomain();
 			_wait(10000);
 		}		
 		this.wizardButtonNotVisible=function($wizardname){
