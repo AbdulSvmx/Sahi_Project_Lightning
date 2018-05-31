@@ -80,59 +80,33 @@ var $bo_act_navigation = new function bo_act_navigation() {
     
 //Added By BAC Team
     this.navigateToProductsPage = function(){
-    	_click($bo_pg_home.link_products);
+    	 _click($bo_pg_home.link_applauncher);
+    	 _click(_link("Products[1]"));
     };
     
     this.navigateToAccountsPage = function(){ //Modified for Lightning
-    	if(_isVisible ($bo_pg_home.link_accounts)==true){
-    		_click($bo_pg_home.link_accounts);
-    	}
-    	else{
-    		_click($bo_pg_home.link_more);
-    		_click(_link("Accounts[1]"));
-    		_click($bo_pg_home.link_accounts);
-    	}
+    	 _click($bo_pg_home.link_applauncher);
+    	 _click(_span("/Accounts/",_near($bo_pg_home.btn_heading_allitems)));
  
     };
     this.navigateToCasesPage = function(){ // Modified for lightning
     	_wait(10000);
     	
-    	_click($bo_pg_home.button_allLinks); 
-    	
-   	 	if(_isVisible(_span("/Cases/",_near($bo_pg_home.btn_heading_allitems))) == true)
-   	 	{
-   	 	_click(_span("/Cases/",_near($bo_pg_home.btn_heading_allitems)));
-   	 	
-   	 	}
-   	 	else
-   	    {
    	 	_click($bo_pg_home.button_allLinks); 
-   	 	
    	 	_click(_span("/Cases/",_near($bo_pg_home.btn_heading_allitems)));
-   	    }
+
    };
     	
      this.navigateToContactsPage = function(){ //Modified for Lightning
-    	 if(_isVisible ($bo_pg_home.link_contacts)==true){
-     		_click($bo_pg_home.link_contacts);
-     	}
-     	else{
-     		_click($bo_pg_home.link_more);
-     		_click(_link("Contacts[1]"));
-     		_click($bo_pg_home.link_contacts);
-     	}
+    	 _click($bo_pg_home.link_applauncher);
+    	 _click(_span("/Contacts/",_near($bo_pg_home.btn_heading_allitems)));
     };
     
 
     this.navigateToInstalledProductPage = function(){ //Modified for Lightning
-    	 if(_isVisible ($bo_pg_home.link_installedProducts)==true){
-      		_click($bo_pg_home.link_installedProducts);
-      	}
-      	else{
-      		_click($bo_pg_home.link_more);
-      		_click(_link("Installed Products[1]"));
-      		_click($bo_pg_home.link_installedProducts);
-      	}
+    	
+    	 _click($bo_pg_home.link_applauncher);
+    	 _click(_span("/Installed Products/",_near($bo_pg_home.btn_heading_allitems)));
 };
 
 
@@ -153,7 +127,7 @@ var $bo_act_navigation = new function bo_act_navigation() {
     this.navigateToStandardPriceBook = function(){
       	 _click($bo_pg_home.btn_allTabs);
       	 _click($bo_pg_home.link_priceBooks);
-      	 _click($bo_pg_home.btn_go);
+//      	 _click($bo_pg_home.btn_go);
       };
 
     this.navigateToSlaTerms = function(){ // Modified for Lightning
@@ -175,8 +149,8 @@ var $bo_act_navigation = new function bo_act_navigation() {
     };
 
     this.navigateToPMProcess = function(){
-    	$bo_act_navigation.navigateToHome();
-    	_click(_link("ServiceMax Setup"));
+    	this.navigateToSvmxSetup();
+    	_selectDomain("/svmx/");
     	_click($bo_pg_servicemaxSetup.btn_installedBaseAndPM );
     	_click($bo_pg_servicemaxSetup.btn_PMProcess);
     	_wait(1000);
@@ -184,14 +158,9 @@ var $bo_act_navigation = new function bo_act_navigation() {
     };
 
     this.navigateToLocations = function(){ // Modified for Lightning
+    	_click($bo_pg_home.link_applauncher);
+   	 _click(_span("/Locations/",_near($bo_pg_home.btn_heading_allitems)));
     	
-    	if(_isVisible ($bo_pg_home.link_locations)==true){
-      		_click($bo_pg_home.link_locations);
-      	}
-      	else{
-      		_click($bo_pg_home.link_more);
-      		_click($bo_pg_home.link_locations);
-      	}
     };
     
     this.navigateToDevConsole = function(){

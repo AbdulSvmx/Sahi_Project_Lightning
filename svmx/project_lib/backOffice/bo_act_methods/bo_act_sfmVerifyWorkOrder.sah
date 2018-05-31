@@ -21,7 +21,7 @@ var $bo_act_sfmVerifyWorkOrder= new function bo_act_sfmVerifyWorkOrder() {
 	_click($bo_pg_sfmVerifyWorkOrder.lnk_firstLinkPMP);		
 };
 
-this.verifyWizardOnWOObj=function($sfmName){
+this.verifyWizardOnWOObj=function(){
 	_selectDomain();
 	_click($bo_pg_sfmVerifyWorkOrder.img_allTab);
 	//_wait(2000);
