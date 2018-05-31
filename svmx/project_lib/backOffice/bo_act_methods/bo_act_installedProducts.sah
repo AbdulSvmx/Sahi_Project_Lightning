@@ -123,9 +123,13 @@ var $bo_act_installedProduct = new function bo_act_installedProduct() {
 		_selectDomain("/svmx/");
 		_click($bo_pg_installedProducts.btn_SFWcreateSupportCase);
 		_wait(60000,_isVisible($bo_pg_installedProducts.txt_SFMcreateSupportCaseStatus));
+		_wait(10000);
 		_click($bo_pg_installedProducts.txt_SFMcreateSupportCaseStatus);
+		_wait(10000);
 		_click(_listItem($status));
+		_wait(10000);
 		_click($bo_pg_installedProducts.btn_sfmSave);
+		_wait(10000);
 		_selectDomain();
 		return _getText($bo_pg_installedProducts.txt_caseNumber);
 	};

@@ -63,8 +63,8 @@ var $bo_act_locations = new function bo_act_locations() {
 				var $serialNum = $bo_act_common.generateRandomName("Ser");
 				var $IBName = $bo_act_common.generateRandomName("IB_");
 				 $bo_act_navigation.navigateToLocations();
-				 _click(_link($locationName));
 				 _setStrictVisibilityCheck(true);
+				 _click(_link($locationName));
 				 _click($bo_pg_locations.btn_relatedvalue);
 				 _click($bo_pg_locations.btn_NewInstalledProduct);
 				_setValue($bo_pg_installedProducts.txt_productName,$productName);
