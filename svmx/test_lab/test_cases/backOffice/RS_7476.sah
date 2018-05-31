@@ -4,13 +4,10 @@
 var $RS_7476 = _testcase("$RS_7476","Verify adding a new coverage and saving the pm plan from Account");
 $RS_7476.start();
 _setSpeed($g_stepSpeed);
-
-var $Workbenchurl = "https://workbench.developerforce.com/login.php";
 //Pre - Condition 
 $bo_act_login.login($g_url, $bac_un, $bac_pwd);
 
 //Test Data Creation
-
 _setStrictVisibilityCheck(true);
 var $accName = $bo_act_accounts.createAccount();
 _wait(1000);
@@ -33,13 +30,19 @@ $bo_act_PMPlanTemplate.saveConditionBasedPM();
 
 // To goto the Location and verify PM Plan template
 
-var $PMPlan = $bo_act_PMPlan.createConditionBasedPMPlanFromAccount($accName, $PMPTemplate,$IBName1,$IBName2);
+var $PMPlan = $bo_act_PMPlan.createConditionBasedPMPlanFromAccount($accName,$PMPTemplate,$IBName1,$IBName2);
 
 _wait(60000);
-// Search the PM Plan Name
+//CleanUp Function
 $bo_act_common.cleanUpfunctionold($PMPlan);
-_setStirctVisibilityCheck(false);
-// CleanUp Function
+_wait(10000);
+$bo_act_common.cleanUpfunctionold($IBName1);
+_wait(10000);
+$bo_act_common.cleanUpfunctionold($accName);
+_wait(10000);
+$bo_act_common.cleanUpfunctionold($proName);
+_wait(10000);
+$bo_act_common.cleanUpfunctionold($PMPTemplate);
 //$bo_act_common.deleteAccount($bac_un, $bac_pwd, $accName);
 //$bo_act_common.deleteContact($bac_un, $bac_pwd, $contactName);
 //$bo_act_common.deleteIB($bac_un, $bac_pwd, $orgnamespace,$IBName1);

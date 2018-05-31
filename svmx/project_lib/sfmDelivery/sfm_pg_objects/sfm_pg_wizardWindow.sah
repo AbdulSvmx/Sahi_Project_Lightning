@@ -10,12 +10,15 @@ var $sfm_pg_wizardWindow = new function sfm_pg_wizardWindow(){
 	this.icon_Edit = _div("/edit-icon/");//Added for Lightning
 	this.link_Edit=_link("Edit");//Changed for Lightning
 	this.lkp_autoContact = _div("/search/",_near(_span("AutoContact[1]")));//Changed for Lightning
+	this.txt_accountPicklist = _textbox(0,_near(_span("Account Picklist")));//Changed for Lightning
+	this.lkp_contact = _div("/search/",_near(_span("Contact"))); //Changed for Lightning
+	this.lbl_contactLookup = _label(0,_near(_span("/checkbox/"))); //Changed for Lightning
+	
 	
 	
 	this.txt_site=_textbox(0,_rightOf(_label("/Site/")));
 	this.btn_addAndSearch=_span("/multi-add-line-icon/");
 	this.btn_addRow=_span("/add-line-icon/");
-	
 	this.btn_downArrow= _xy(_span("/svmx-sfmd-detail-actions-icon/"),30,20);
 	this.txt_serialNo= _textbox(0,_rightOf(_label("/IB Serial Number:/")));
 	this.txt_part= _textbox(0,_rightOf(_label("/Part/")));
@@ -41,9 +44,6 @@ var $sfm_pg_wizardWindow = new function sfm_pg_wizardWindow(){
 	this.btn_select= _span("Select");
 	this.txt_autoContact = _div("/svmx-grid-cell-inner/",_under(_div("AutoContact")));
 	this.lkp_account = _div("/svmx-button/",_rightOf(_textbox(0,_rightOf(_label("Account:")))));
-	this.txt_accountPicklist = _textbox(0,_rightOf(_label("Account Picklist:")));
-	this.lkp_contact = _span("/lookup_icon/",_rightOf(_label("Contact:")));
-	this.lbl_contactLookup = _label(0,_rightOf(_button("/svmx-form-checkbox/")));
 	this.sel_billingType = _textbox("Billing Type:");
 	this.errorMsg = _div("/error-detail/",_near(_span("Error Details")));
 	this.chk_multiSelect = _span("/svmx-column-header-text/",_leftOf(_span("Product Name")));

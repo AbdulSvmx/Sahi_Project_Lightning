@@ -357,9 +357,11 @@ var $bo_act_PMPlan = new function bo_act_PMPlan() {
 		_click(_link($AccountName));
 		_wait(10000);
 		_click(_span("Details"));
+		
+		_wait(10000);
 		_selectDomain("/svmx/");
 		_setStrictVisibilityCheck(true);
-		if(_condition($bo_pg_PMPlan.btn_NewConditionBasedPMPlanFromAccount == null))
+		if(_isVisible($bo_pg_PMPlan.btn_NewConditionBasedPMPlanFromAccount) == false)
 		{
 			
 			var $wizardTitleName = "Condition Based PM";
@@ -375,8 +377,10 @@ var $bo_act_PMPlan = new function bo_act_PMPlan() {
 			_click(_link($AccountName));
 			_wait(1000);
 			_click(_span("Details"));
+			_wait(1000);
 
 		}else
+		
 		_selectDomain("/svmx/");
 		_click($bo_pg_PMPlan.btn_NewConditionBasedPMPlanFromAccount);
 		_wait(60000,_isVisible($bo_pg_PMPlan.txt_planName));

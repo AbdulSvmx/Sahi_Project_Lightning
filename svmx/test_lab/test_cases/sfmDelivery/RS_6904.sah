@@ -16,5 +16,22 @@ $sfm_act_createCustomWizard.chooseObject("Work Order");
 $sfm_act_createCustomWizard.addManageWizSteps($wizTitle,"SFM",$sfmName);
 $sfm_act_createCustomWizard.createBlankWo();
 $sfm_act_createCustomWizard.clickWizardBtn($sfmName);
-$sfm_act_createCustomWizard.verify6904($account);
+_wait(3000);
+$checkboxTxt = "";
+_click($sfm_pg_wizardWindow.txt_accountPicklist);
+_click(_listItem($account));
+_click($sfm_pg_wizardWindow.lkp_contact);
+$checkboxTxt =_getText($sfm_pg_wizardWindow.lbl_contactLookup);
+//_log($checkboxTxt);
+$isActivePicklistPresent = $checkboxTxt.search("Account Picklist");
+//_log($isActivePicklistPresent);
+$isAccountPresent = $checkboxTxt.search($account);
+//_log($isAccountPresent);
+if($isActivePicklistPresent!=-1 || $isAccountPresent!=-1){
+	_log("Pass");
+}
+else{
+	_fail("fail");
+}
+//$sfm_act_createCustomWizard.verify6904($account);
 $rs_6904.end();
