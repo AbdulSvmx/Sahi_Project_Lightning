@@ -37,12 +37,15 @@ this.editServiceMaintenanceContract = function($sconName, $zone) {
 	return $sconName;
 };
 	 
-	this.AddCoveredProductToSCON =  function($sconName,$installedProduct){
-		_click(_link($sconName));
+	this.AddCoveredProductToSCON =  function($sconName,$installedProduct){// Modified for Lightning
+		_click(_span("Related"));
+		_setStrictVisibilityCheck(true);
+		_click($bo_pg_serviceMaintenanceContracts.link_coveredproducts);
 		_click($bo_pg_serviceMaintenanceContracts.btn_newCoveredProduct);
 	    _setValue($bo_pg_serviceMaintenanceContracts.txt_installedProduct,$installedProduct);
+	    _click(_mark($installedProduct));
 		_click($bo_pg_serviceMaintenanceContracts.btn_save);
-		_assertNotVisible(_div("/Error: Invalid Data/"));
+		_assertNotVisible(_span("Review the errors on this page."));
 		//_click($bo_pg_serviceMaintenanceContracts.txt_backToScon);
 
 	};
