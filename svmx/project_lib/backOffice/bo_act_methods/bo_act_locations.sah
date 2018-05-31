@@ -62,10 +62,13 @@ var $bo_act_locations = new function bo_act_locations() {
 		this.addInstalledProductToLocation = function($productName,$accountName,$contactName, $locationName){ // Modified for Lightning
 				var $serialNum = $bo_act_common.generateRandomName("Ser");
 				var $IBName = $bo_act_common.generateRandomName("IB_");
+				 
+				 _setStrictVisibilityCheck(true);
 				 $bo_act_navigation.navigateToLocations();
 				 _click(_link($locationName));
-				 _setStrictVisibilityCheck(true);
+				 _wait(10000);
 				 _click($bo_pg_locations.btn_relatedvalue);
+				 _wait(10000);
 				 _click($bo_pg_locations.btn_NewInstalledProduct);
 				_setValue($bo_pg_installedProducts.txt_productName,$productName);
 				_click(_mark($productName));

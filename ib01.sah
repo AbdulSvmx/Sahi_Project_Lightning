@@ -1,3 +1,0 @@
-_click(_div("New"));
-_click(_div("inputWrapper slds-grid slds-grid_vertical-align-center slds-p-right_x-small"));
-_click(_button("Close this window"));

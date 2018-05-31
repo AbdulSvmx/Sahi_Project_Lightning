@@ -9,8 +9,9 @@ var $bo_act_serviceMaintenanceContracts = new function bo_act_serviceMaintenance
 	this.createServiceMaintenanceContract = function($accName, $slaTermName, $futureYear, $pastYear) { // Modified for Lightning
 		var $sconName = $bo_act_common.generateRandomName("Scon");
 		$bo_act_navigation.navigateToServiceMaintenanceContractPage();
-		_click($bo_pg_serviceMaintenanceContracts.btn_new);
+		_wait(10000);
 		_setStrictVisibilityCheck(true);
+		_click($bo_pg_serviceMaintenanceContracts.btn_new);
 		_setValue($bo_pg_serviceMaintenanceContracts.txt_sconName, $sconName);
 		_setValue($bo_pg_serviceMaintenanceContracts.txt_accountName, $accName);
 		_click(_mark($accName));
@@ -37,12 +38,18 @@ this.editServiceMaintenanceContract = function($sconName, $zone) {
 	return $sconName;
 };
 	 
-	this.AddCoveredProductToSCON =  function($sconName,$installedProduct){
-		_click(_link($sconName));
+	this.AddCoveredProductToSCON =  function($sconName,$installedProduct){// Modified for Lightning
+		_setStrictVisibilityCheck(true);
+		_click(_span("Related"));
+		_click($bo_pg_serviceMaintenanceContracts.link_coveredproducts);
 		_click($bo_pg_serviceMaintenanceContracts.btn_newCoveredProduct);
+		_wait(10000);
 	    _setValue($bo_pg_serviceMaintenanceContracts.txt_installedProduct,$installedProduct);
+	    _wait(10000);
+	    _click(_mark($installedProduct));
 		_click($bo_pg_serviceMaintenanceContracts.btn_save);
-		_assertNotVisible(_div("/Error: Invalid Data/"));
+		_assertNotVisible(_span("Review the errors on this page."));
+		_setStrictVisibilityCheck(false);
 		//_click($bo_pg_serviceMaintenanceContracts.txt_backToScon);
 
 	};

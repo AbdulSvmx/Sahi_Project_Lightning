@@ -5,7 +5,7 @@
  */
 
 var $bo_pg_products = new function bo_pg_products(){
-	this.btn_new = _div("New");
+	this.btn_new = _link("New",_near(_heading1("/ProductsRecently Viewed/")));
 	this.txt_productName = _textbox("/Product Name/", _near(_div("/modal-header/")));//Modified for Lightning
 	this.txt_productCode = _textbox("/Product Code/", _near(_div("/modal-header/")));//Modified for Lightning
 	this.link_productFamily = _link("/None/",_near(_span("/Product Family/",_near(_div("/modal-header/")))));//Modified for Lightning

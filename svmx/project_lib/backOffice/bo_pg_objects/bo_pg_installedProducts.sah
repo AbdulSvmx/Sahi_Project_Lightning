@@ -5,7 +5,7 @@
  */
 
 var $bo_pg_installedProducts = new function bo_pg_installedProducts(){
-	this.btn_new = _div("New");
+	this.btn_new = _div("New", _near(_heading1("/Installed ProductsRecently Viewed/")));
 	this.txt_productName = _textbox("/Product/", _near(_div("/modal-header/")));//Modified for lightning - Meghana
 	this.txt_serialNumber = _textbox("/Lot Number/", _near(_div("/modal-header/")));//Modified for lightning - Meghana
 	this.txt_accountName = _textbox("/Account/", _near(_div("/modal-header/")));//Modified for lightning - Meghana
