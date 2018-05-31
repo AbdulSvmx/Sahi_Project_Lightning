@@ -5,14 +5,14 @@
  */
 
 var $bo_pg_products = new function bo_pg_products(){
-	this.btn_new = _div("New");
+	this.btn_new = _link("New",_near(_heading1("/ProductsRecently Viewed/")));
 	this.txt_productName = _textbox("/Product Name/", _near(_div("/modal-header/")));//Modified for Lightning
 	this.txt_productCode = _textbox("/Product Code/", _near(_div("/modal-header/")));//Modified for Lightning
 	this.link_productFamily = _link("/None/",_near(_span("/Product Family/",_near(_div("/modal-header/")))));//Modified for Lightning
 	this.chk_active = _checkbox("Active");
 	this.chk_stockable = _checkbox("/Stockable/");//Modified for Lightning
 	this.chk_serializedTracking = _checkbox("/Enable Serialized Tracking of Stock/");//Modified for Lightning
-	this.btn_save =_link("New",_near(_heading1("/ProductsRecently Viewed/")));//Modified for Lightning
+	this.btn_save =_button("Save",_near(_div("/modal-header/")));//Modified for Lightning
 	this.btn_delete = _div("Delete");
 	this.btn_editProduct = _div("Edit");
 	this.btn_saveProduct = _span("Save[1]");

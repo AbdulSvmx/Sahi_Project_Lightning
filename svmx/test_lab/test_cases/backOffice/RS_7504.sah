@@ -33,12 +33,19 @@ var $PMPlan = $bo_act_PMPlan.createConditionBasedPMPlanFromLoc_addCoverage($loca
 $bo_act_common.cleanUpfunctionold($PMPlan);
 
 // CleanUp Function
-$bo_act_common.deleteAccount($bac_un, $bac_pwd, $accName);
-$bo_act_common.deleteContact($bac_un, $bac_pwd, $contactName);
-$bo_act_common.deleteIB($bac_un, $bac_pwd, $orgnamespace,$IBName1);
-$bo_act_common.deleteProduct($bac_un, $bac_pwd,$proName);
-$bo_act_common.deleteLocation($bac_un, $bac_pwd, $orgnamespace,$locationName);
-$bo_act_common.deletePMPlantemplate($bac_un, $bac_pwd, $orgnamespace,$PMPTemplate);
+$bo_act_common.cleanUpfunctionold($accName);
+$bo_act_common.cleanUpfunctionold($contactName);
+$bo_act_common.cleanUpfunctionold($IBName1);
+$bo_act_common.cleanUpfunctionold($proName);
+$bo_act_common.cleanUpfunctionold($locationName);
+$bo_act_common.cleanUpfunctionold($PMPTemplate);
+
+//$bo_act_common.deleteAccount($bac_un, $bac_pwd, $accName);
+//$bo_act_common.deleteContact($bac_un, $bac_pwd, $contactName);
+//$bo_act_common.deleteIB($bac_un, $bac_pwd, $orgnamespace,$IBName1);
+//$bo_act_common.deleteProduct($bac_un, $bac_pwd,$proName);
+//$bo_act_common.deleteLocation($bac_un, $bac_pwd, $orgnamespace,$locationName);
+//$bo_act_common.deletePMPlantemplate($bac_un, $bac_pwd, $orgnamespace,$PMPTemplate);
 
 
 $RS_7504.end();

@@ -89,7 +89,7 @@ var $bo_act_navigation = new function bo_act_navigation() {
     	}
     	else{
     		_click($bo_pg_home.link_more);
-    		_click(_link("Accounts[1]"));
+    		_click(_link("Accounts"));
     		_click($bo_pg_home.link_accounts);
     	}
  
