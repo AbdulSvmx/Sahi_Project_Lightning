@@ -1,0 +1,13 @@
+$bo_act_login.login($g_url, "vinod.tharavath@ge.com","svmx123#");
+_click($bo_pg_home.link_applauncher);
+	 _click(_link("Work Orders[1]"));
+_setStrictVisibilityCheck (true);
+_click(_link("WO-00005081"));
+_click(_span("Related"));
+_wait(5000);
+if(_isVisible(_link("BlueLake Men Watch",_rightOf(_link("WL-00004458",_in(_div("listViewContent"))))))){
+	_log("Pass");
+}
+else{
+	_fail("Fail");
+}
