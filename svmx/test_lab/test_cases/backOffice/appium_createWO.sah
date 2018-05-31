@@ -1,5 +1,5 @@
 _writeFile("", "/auto/appium/Appium_Project/FSAAID/src/test/java/FSAID/FSAAID/workBench/resultCommon.txt", true);
-$bo_act_login.login($g_url, "vinod.tharavath@ge.com","svmx123#");
+$bo_act_login.login($g_url, $appiumAdminUn,$appiumAdminPwd);
 var $productFamily = ["Laptop","Vehicle","Electric"];
 var $productCode = "";
 var $seperator = "/";
