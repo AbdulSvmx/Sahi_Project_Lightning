@@ -28,7 +28,7 @@ $bo_act_PMPlanTemplate.saveConditionBasedPM();
 // To goto the Location and add Coverage manually
 
 var $PMPlan = $bo_act_PMPlan.createConditionBasedPMPlanFromLoc_addCoverage($locationName, $PMPTemplate, $IBName1, $IBName2);
-
+_wait(60000);
 // Search the PM Plan Name
 $bo_act_common.cleanUpfunctionold($PMPlan);
 
