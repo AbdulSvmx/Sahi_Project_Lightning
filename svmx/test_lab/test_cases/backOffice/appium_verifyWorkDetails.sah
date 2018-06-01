@@ -1,3 +1,5 @@
+	_writeFile("", "/auto/appium/Appium_Project/FSAAID/src/test/java/FSAID/FSAAID/workBench/resultCommon.txt", true);
+
 $bo_act_login.login($g_url, "vinod.tharavath@ge.com","svmx123#");
 _click($bo_pg_home.link_applauncher);
 	 _click(_link("Work Orders[1]"));
@@ -7,7 +9,10 @@ _click(_span("Related"));
 _wait(5000);
 if(_isVisible(_link("BlueLake Men Watch",_rightOf(_link("WL-00004458",_in(_div("listViewContent"))))))){
 	_log("Pass");
+	_writeFile("true", "/auto/appium/Appium_Project/FSAAID/src/test/java/FSAID/FSAAID/workBench/resultCommon.txt", true);
 }
 else{
 	_fail("Fail");
+	_writeFile("false", "/auto/appium/Appium_Project/FSAAID/src/test/java/FSAID/FSAAID/workBench/resultCommon.txt", true);
+
 }
