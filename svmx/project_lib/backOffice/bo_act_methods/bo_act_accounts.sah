@@ -15,10 +15,11 @@ var $bo_act_accounts = new function bo_act_accounts() {
 		var $accountName = $bo_act_common.generateRandomName("Acc");
         $bo_act_navigation.navigateToAccountsPage();
         _setStrictVisibilityCheck(true);
+        _wait(5000,_isVisible($bo_pg_accounts.btn_new));
 		_click($bo_pg_accounts.btn_new);
-		_wait(10000);
+		_wait(6000,_isVisible($bo_pg_accounts.txt_accountName));
 		_setValue($bo_pg_accounts.txt_accountName, $accountName);
-		_wait(10000);
+		_wait(3000);
 		_click($bo_pg_accounts.btn_save);
 		_assertNotVisible(_span("Review the errors on this page."));
 		_wait(15000, _isVisible(_span($accountName)));
