@@ -24,8 +24,7 @@ var $domainName = "/visual.force.com/";
 
 
 _setSpeed($g_stepSpeed);
-var $sfmPwd = "maxplore2";
-$bo_act_login.login($g_url, $sfmUsn, $sfmPwd);
+$bo_act_login.login($g_url, $bac_un, $bac_pwd);
 
 
 //clone Source to Target Child Process
