@@ -1,5 +1,5 @@
 _call(top.location.reload(true));
-_setXHRReadyStatesToWaitFor("2,3")
+//_setXHRReadyStatesToWaitFor("2,3")
 _windowAction("resize", 1920, 1080);
 var $g_stepSpeed = 100;
 _setSpeed($g_stepSpeed);
@@ -28,8 +28,8 @@ var $g_pwd = "smax@123";
 //var $bac_pwd = "cloud_102";
 //var $bac_un = "bac_automationdev@ge.com";
 //var $bac_pwd = "welcome-01";
-var $bac_un = "meghana.rao@servicemax.com";
-var $bac_pwd = "cloud_102";
+var $bac_un = "orgsadmin@svmx-test4.org.test4part2";
+var $bac_pwd = "welcome-03";
 var $bac_PRTun = "bhupendra.auto@upgrade.com"; // Most Used Customer
 var $bac_PRTpwd = "servicemax@123";
 //var $group_profilename = "AutoBACGroup";

@@ -11,7 +11,7 @@ $bo_act_login.login($g_url, $bac_un, $bac_pwd);
 var $accName = $bo_act_accounts.createAccount();
 _wait(10000);
 var $accName2 = $bo_act_accounts.createAccount();
-_wait(10000);
+_wait(20000);
 var $proName = $bo_act_products.createProduct("pro12", "--None--");
 var $contactName = $bo_act_contacts.createContact($accName);
 _wait(10000);
@@ -34,7 +34,6 @@ $bo_act_common.cleanUpfunctionold($PMPlan);
 
 // CleanUp Function
 $bo_act_common.cleanUpfunctionold($accName);
-$bo_act_common.cleanUpfunctionold($contactName);
 $bo_act_common.cleanUpfunctionold($IBName1);
 $bo_act_common.cleanUpfunctionold($proName);
 $bo_act_common.cleanUpfunctionold($locationName);
