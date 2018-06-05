@@ -1,16 +1,21 @@
+_setXHRReadyStatesToWaitFor("2,3");
+
 var $contents = _readFile("/auto/appium/Appium_Project/FSAAID/src/test/java/FSAID/FSAAID/workBench/appiumResultCommon.txt");
 var $readContent = $contents.split(",");
 var $woNum = $readContent[1];	
 _writeFile("", "/auto/appium/Appium_Project/FSAAID/src/test/java/FSAID/FSAAID/workBench/sahResultCommon.txt", true);
 
-$bo_act_login.login($g_url, "vinod.tharavath@ge.com","svmx123#");
-_click($bo_pg_home.link_applauncher);
+$bo_act_login.login($g_url, $appiumAdminUn,$appiumAdminPwd);
+_click(_div("slds-icon-waffle"));
+//_click($bo_pg_home.link_applauncher);
 	 _click(_link("Work Orders[1]"));
 _setStrictVisibilityCheck (true);
+_wait(5000);
+
 _click(_link($woNum));
 _click(_span("Related"));
 _wait(5000);
-if(_isVisible(_link("BlueLake Men Watch",_rightOf(_link($woNum,_in(_div("listViewContent"))))))){
+if(_isVisible(_link("new event"))){
 	_log("Pass");
 	_writeFile("true", "/auto/appium/Appium_Project/FSAAID/src/test/java/FSAID/FSAAID/workBench/sahResultCommon.txt", true);
 }
