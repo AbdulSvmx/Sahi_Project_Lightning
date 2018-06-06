@@ -1,5 +1,5 @@
 _call(top.location.reload(true));
-//_setXHRReadyStatesToWaitFor("2,3")
+_setXHRReadyStatesToWaitFor("2,3")
 _windowAction("resize", 1920, 1080);
 var $g_stepSpeed = 100;
 _setSpeed($g_stepSpeed);
@@ -68,7 +68,7 @@ var $appiumAdminUn="pqtadmin@bugbash.com";
 var $appiumAdminPwd="servicemax3";
 
 var $appiumUn="vinod.tharavath@ge.com";
-var $$appiumPwd="svmx123#";
+var $appiumPwd="svmx123#";
 
 // ==== Reference addition module START ====
 // Include the salesforce js files to enable sforce API calls
