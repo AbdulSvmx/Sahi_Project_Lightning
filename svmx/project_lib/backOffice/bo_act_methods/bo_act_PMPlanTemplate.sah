@@ -54,14 +54,14 @@ this.createUsageBasedConditionPMPTemplateNoSave = function($productName) // Modi
 {
 	var $PMTemplateName = $bo_act_common.generateRandomName("PMT");
 	$bo_act_navigation.navigateToPMPlanTemplatePage();
+	_setStrictVisibilityCheck(true);
 	_click(_span("Recently Viewed"));
 	_wait(1000);
-	_click(_link("SelectedAll"));
-	_doubleClick(_link("SelectedAll"));
+	_click(_link("/All/"));
+	_doubleClick(_link("/All/"));
 	_wait(1000);
 	_click($bo_pg_PMPlanTemplate.btn_createConditionBasedPMPTemplate);
 	_selectDomain("/svmx/");
-	_setStrictVisibilityCheck(true);
 	_wait(60000,_isVisible($bo_pg_PMPlanTemplate.txt_templateName));
 	_setValue($bo_pg_PMPlanTemplate.txt_templateName,$PMTemplateName);
 	_setValue($bo_pg_PMPlanTemplate.txt_product,$productName);

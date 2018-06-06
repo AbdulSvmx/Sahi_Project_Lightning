@@ -81,7 +81,7 @@ var $bo_act_navigation = new function bo_act_navigation() {
 //Added By BAC Team
     this.navigateToProductsPage = function(){
     	 _click($bo_pg_home.link_applauncher);
-    	 _click(_link("Products[1]"));
+    	 _click(_link("Products",_near($bo_pg_home.btn_heading_allitems)));
     };
     
     this.navigateToAccountsPage = function(){ //Modified for Lightning
@@ -103,7 +103,7 @@ var $bo_act_navigation = new function bo_act_navigation() {
     
 
     this.navigateToInstalledProductPage = function(){ //Modified for Lightning
-    	
+    	$bo_act_navigation.navigateToHome();
     	 _click($bo_pg_home.link_applauncher);
     	 _click(_span("/Installed Products/",_near($bo_pg_home.btn_heading_allitems)));
 };
@@ -153,7 +153,7 @@ var $bo_act_navigation = new function bo_act_navigation() {
 
     this.navigateToLocations = function(){ // Modified for Lightning
     	_click($bo_pg_home.link_applauncher);
-   	 _click(_span("/Locations/",_near($bo_pg_home.btn_heading_allitems)));
+   	 _click(_span("Locations",_near($bo_pg_home.btn_heading_allitems)));
     	
     };
     
