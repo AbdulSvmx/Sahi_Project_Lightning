@@ -17,11 +17,13 @@ var $value = true;
 $bo_act_configurationProfiles.editGlobalProfileForBooleanSettings($Module, $SubModule, $Setting, $value);
 
 //Test Data Creation
+_wait(10000);
 var $accName = $bo_act_accounts.createAccount();
 var $proName = $bo_act_products.createProduct("pro12", "--None--");
 var $contactName = $bo_act_contacts.createContact($accName);
 var $IBName = $bo_act_installedProduct.createInstalledProduct($proName,$accName,$contactName);
 var $slaterm = $bo_act_slaTerms.createSlaTerms("Default");
+
 var $caseNumber = $bo_act_installedProduct.createSupportCase("New");
 
 var $PMPTemplate = $bo_act_PMPlanTemplate.createUsageBasedConditionPMPTemplateNoSave($proName);
