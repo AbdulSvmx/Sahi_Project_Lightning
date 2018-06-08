@@ -21,7 +21,7 @@ var $sfm_pg_wo = new function sfm_pg_wo() {
 		_click(_link($tabName));
 //		_log("I am Here");
 	};
-	this.label_wo = _heading1(0,_near(_image("Work Order"))); //Changed for Lightning
+	this.label_wo = _heading1("/WO-/"); //Changed for Lightning
 	this.txt_actualOnsiteResponse = _textbox("Actual Onsite Response");
 	this.txt_actualInitialResponse = _textbox("Actual Initial Response");
 	this.txt_actualResolution = _textbox("Actual Resolution");

@@ -316,6 +316,7 @@ var $bo_act_navigation = new function bo_act_navigation() {
      };
      
      this.navigateToWorkOrdersTab = function(){
+    	 _selectDomain();
     	 _click($bo_pg_home.link_applauncher);
        	 _click(_span("/Work Orders/",_near($bo_pg_home.btn_heading_allitems)));
 

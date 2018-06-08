@@ -7,9 +7,11 @@ var $sfm_act_wizards = new function sfm_act_wizards() {
 	//function to create or add step to wizard
 	this.addToWizard = function($wizardObject, $wizardName, $wizardType, $sfmName, $handOver){
 		$bo_act_navigation.navigateToSvmxSetup();
+		_selectDomain("/svmx/");
 		_click(_div("Service Flow Manager"));
 		_click(_div("SFM Wizards"));
 		_setSelected($sfm_pg_wizards.selectObject,$wizardObject);
+		_wait(3000);
 		
 		// If wizard is already present add the step else create a new wizard and then add the step
 		if(_exists(_span($wizardName))){
@@ -55,14 +57,14 @@ var $sfm_act_wizards = new function sfm_act_wizards() {
 			_check($sfm_pg_wizards.btn_checkboxHandover);			
 		}
 		_click($sfm_pg_wizards.btn_saveStep);
-		_wait(3000,_heading4("Success"));
+		_wait(6000,_heading4("Success"));
 		if(_isVisible(_heading4("Success"))){
 			_log("Pass");
 		_click($sfm_pg_wizards.btn_quickSave);
 		_click($sfm_pg_wizards.btn_saveClose);
 		}
 		else{
-			_log("Fail");
+			_fail("Fail");
 			_stopTestCase();
 		}
 };

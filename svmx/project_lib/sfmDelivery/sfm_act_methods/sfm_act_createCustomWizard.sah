@@ -81,7 +81,13 @@ var $sfm_act_createCustomWizard = new function sfm_act_createCustomWizard() {
 		_wait(3000,_isVisible(_link($accNum,_near(_label("/Account/")))));
 		_click(_link($accNum,_near(_label("/Account/"))));
 		_click($sfm_pg_wo.btn_wo_save);
-		_wait(3000);
+		_wait(2000);
+		if(_isVisible(_button("OK",_near(_heading2("Sorry to interrupt"))))){
+			_click(_button("OK",_near(_heading2("Sorry to interrupt"))));
+			_setStrictVisibilityCheck (true);
+			_click($sfm_pg_wo.btn_wo_save);
+		}
+		_wait(5000);
 		$woName= _getText($sfm_pg_wo.label_wo);
 		_selectDomain("/svmx/");
 		return $woName;
