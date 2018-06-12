@@ -4,11 +4,11 @@
  * This code is to push the data from Salesforce REST API calls from back end in Lightning
  */
 
-$bo_act_login.login($g_url, $bac_un, $bac_pwd);
+$bo_act_login.login($g_url, "meghana.rao@servicemax.com", "cloud_103");
 
 
      var $username = "meghana.rao@servicemax.com";
-     var $password = "cloud_102";
+     var $password = "cloud_103";
      var $clientId = "3MVG9zZht._ZaMulZsbNptzpIDmNd6xyt0zAOuNU_dtpTTg4DHSn9UmdBySUZS3_VOGeiWttaj3moLMuLIrje";
      var $consumerSecret = "1938983484606764552";
      //Authorization endpoint
@@ -31,29 +31,15 @@ $request = new RESTRequest();
 	var $AuthCode2 = $response.getBodyAsString("ISO-8859-1"); //returns the content of the body using ISO-8859-1 encoding
 	_log($AuthCode);
 
-	_log($AuthCode2);
+	var $access_token = JSON.parse($AuthCode);
 	
-	// To get only the access token from the data
-
-        var pageUrls = $AuthCode2.split('#');
-        var sURLVariables = pageUrls[1].split('&');
-        for (var i = 0; i < sURLVariables.length; i++) 
-          {
-            var sParameterName = sURLVariables[i].split('=');
-            if (sParameterName[0] == sParam) 
-              {
-                _log(sParameterName[1]);
-                }
-            }
+	_log($access_token['access_token']);
+	
          
-	  
-
-
-
-	$request1 = new RESTRequest();
-	$request1.setURL("https://cs21.salesforce.com/services/data/v39.0/sobjects/Account/?");
+	$request1 = new RESTRequest();	
+	$request1.setURL("https://cs21.salesforce.com/services/v20.0/query/?q=SELECT+name+from+Accountt");
 	$request1.setCredentials("meghana.rao@servicemax.com", "cloud_102");
-	$request1.setHeader("Authorization", "OAuth 00Dq0000000933B!AQUAQFbDrRNVKdxxwoTifgG1EZ8Djy5AR2lBXC88EVZyRKCU3GEjnu4VJ7m79tf7QQvy8Ze5QWZ7rb7a63gv9SCITERdX8j3");
+	$request1.setHeader("Authorization", "OAuth '"+$access_token+"'");
 	$request1.setHeader("Content-Type", "application/json");
 	
 var $json = {
