@@ -35,25 +35,24 @@ $request = new RESTRequest();
 	
 	_log($access_token['access_token']);
 	
+// Sample execution of Delete operation
+	
+// First lets get the ID from the Account value we need
+	
+	
+	//var $accountname = "Acc462018101230";
+	var $query = "Select+Id+from+Account where Name='Acc462018101230'";
          
 	$request1 = new RESTRequest();	
-	$request1.setURL("https://cs21.salesforce.com/services/v20.0/query/?q=SELECT+name+from+Accountt");
-	$request1.setCredentials("meghana.rao@servicemax.com", "cloud_102");
-	$request1.setHeader("Authorization", "OAuth '"+$access_token+"'");
-	$request1.setHeader("Content-Type", "application/json");
-	
-var $json = {
-	
-	
-	"Name": "Automation new"
-}
-	var $jsonString = JSON.stringify($json);
-
-$request1.setBody($jsonString);
-$response1 = $request1.submit("post");
+	$request1.setURL("https://cs21.salesforce.com/services/data/v20.0/query/?q=Select+Id+from+Account+where+Name='Acc462018101230'");
+	$request1.setCredentials("meghana.rao@servicemax.com", "cloud_103");
+	$request1.setHeader("Authorization", "OAuth "+$access_token+"");
+	//$request1.setHeader("Content-Type", "application/json");
+	$response1 = $request1.submit("GET");
 
 var $AuthCode_data = $response1.getBodyAsString(); //returns the content of the body using UTF-8 encoding
 var $AuthCode_data2 = $response1.getBodyAsString("ISO-8859-1");
-
-_log($AuthCode_data2);
+_log($AuthCode_data);
+var $AccountId = JSON.parse($AuthCode_data);
+_log($AccountId['Id']);
 
