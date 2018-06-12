@@ -33,7 +33,8 @@ $request = new RESTRequest();
 
 	var $access_token = JSON.parse($AuthCode);
 	
-	_log($access_token['access_token']);
+	var $access_value = $access_token['access_token'];
+	_log($access_value);
 	
 // Sample execution of Delete operation
 	
@@ -44,9 +45,9 @@ $request = new RESTRequest();
 	var $query = "Select+Id+from+Account where Name='Acc462018101230'";
          
 	$request1 = new RESTRequest();	
-	$request1.setURL("https://cs21.salesforce.com/services/data/v20.0/query/?q=Select+Id+from+Account+where+Name='Acc462018101230'");
+	$request1.setURL("https://cs21.salesforce.com/services/data/v20.0/query/?q=Select Id from Account where Name='Acc462018101230'");
 	$request1.setCredentials("meghana.rao@servicemax.com", "cloud_103");
-	$request1.setHeader("Authorization", "OAuth "+$access_token+"");
+	$request1.setHeader("Authorization", "OAuth "+$access_value);
 	//$request1.setHeader("Content-Type", "application/json");
 	$response1 = $request1.submit("GET");
 
