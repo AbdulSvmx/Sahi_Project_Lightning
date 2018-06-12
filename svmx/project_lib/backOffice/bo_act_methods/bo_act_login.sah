@@ -72,4 +72,27 @@ this.runApexScriptinWB = function($script){
 	_assertNotVisible(_div("/COMPILE ERROR:/"));	
 };
 
+this.runSoqlQueryInWB = function($script){
+	_click(_span("queries"));
+	_click(_link("SOQL Query"));
+	_setValue(_textarea("soql_query"),$script);
+	_click(_submit("Query"));
+	_wait(30000,_isVisible(_div("mainBlock")));
+	_assertNotVisible(_div("/COMPILE ERROR:/"));
+};
+
+this.getQueryResults = function(){
+	var $rows = "";
+	var $cells = "";
+	_set($rows,_table("query_results").rows);
+	var $arr = new Array($rows.length-1);
+	for(var $i=1;$i<$rows.length;$i++){
+		_set($cells,$rows[$i].cells);
+		$arr[$i-1] = new Array($cells.length);
+		for(var $j=0;$j<$cells.length;$j++){
+			$arr[$i-1][$j] = _getText($cells[$j]);
+		}
+	}
+	return $arr;
+};
 };
