@@ -41,11 +41,11 @@ $request = new RESTRequest();
 // First lets get the ID from the Account value we need
 	
 	
-	//var $accountname = "Acc462018101230";
+	var $accountname = "Acc462018101230";
 	var $query = "Select+Id+from+Account where Name='Acc462018101230'";
          
 	$request1 = new RESTRequest();	
-	$request1.setURL("https://cs21.salesforce.com/services/data/v20.0/query/?q=Select Id from Account where Name='Acc462018101230'");
+	$request1.setURL("https://cs21.salesforce.com/services/data/v20.0/query/?q=Select Id from Account where Name=Acc462018101230");
 	$request1.setCredentials("meghana.rao@servicemax.com", "cloud_103");
 	$request1.setHeader("Authorization", "OAuth "+$access_value);
 	//$request1.setHeader("Content-Type", "application/json");
