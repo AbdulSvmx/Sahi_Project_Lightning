@@ -22,5 +22,9 @@ var $sfm_pg_lightningSFMD = new function sfm_pg_lightningSFMD() {
 	this.chkBx_limitSearch = _checkbox("/Limit search to Account:/");
 	this.link_productServiced = _link("/Add Products Serviced/");
 	this.btn_add = _link("add");
-	
+	this.link_switchtoLightning = _link("switch-to-lightning");
+	this.link_MoreLightning = _span("More");
+	this.link_svmxSetupLightning = _span("Servicemax SetUp Home");
+	this.link_ServiceFlowManagerLightning = _div("Service Flow Manager");
+	this.link_SFM_TxandDocDesignerLightning = _div("SFM Transaction & Docs Designer");
 };
