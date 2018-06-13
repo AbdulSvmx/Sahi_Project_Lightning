@@ -42,10 +42,11 @@ $request = new RESTRequest();
 	
 	
 	var $accountname = "Acc462018101230";
-	var $query = "Select+Id+from+Account where Name='Acc462018101230'";
+	var $objectname = "Account";
+	var $query = "Select+Id+from+"+$objectname+"+where+Name+=+'"+$accountname+"'";
          
 	$request1 = new RESTRequest();	
-	$request1.setURL("https://cs21.salesforce.com/services/data/v20.0/query/?q=Select Id from Account where Name=Acc462018101230");
+	$request1.setURL("https://cs21.salesforce.com/services/data/v20.0/query/?q="+$query+"");
 	$request1.setCredentials("meghana.rao@servicemax.com", "cloud_103");
 	$request1.setHeader("Authorization", "OAuth "+$access_value);
 	//$request1.setHeader("Content-Type", "application/json");
@@ -53,7 +54,9 @@ $request = new RESTRequest();
 
 var $AuthCode_data = $response1.getBodyAsString(); //returns the content of the body using UTF-8 encoding
 var $AuthCode_data2 = $response1.getBodyAsString("ISO-8859-1");
-_log($AuthCode_data);
-var $AccountId = JSON.parse($AuthCode_data);
-_log($AccountId['Id']);
+var $json_value = JSON.parse($AuthCode_data);
+var $AccountId = $json_value['records'];
+_log($AccountId);
+//var $IDvalue = $AccountId['Id'];
+//_log($IDvalue);
 
