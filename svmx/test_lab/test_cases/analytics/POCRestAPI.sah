@@ -46,7 +46,7 @@ $request = new RESTRequest();
 	var $query = "Select+Id+from+"+$objectname+"+where+Name+=+'"+$accountname+"'";
          
 	$request1 = new RESTRequest();	
-	$request1.setURL("https://cs21.salesforce.com/services/data/v20.0/query/?q="+$query+"");
+	$request1.setURL("https://cs21.salesforce.com/services/data/v42.0/query/?q="+$query+"");
 	$request1.setCredentials("meghana.rao@servicemax.com", "cloud_103");
 	$request1.setHeader("Authorization", "OAuth "+$access_value);
 	//$request1.setHeader("Content-Type", "application/json");
@@ -60,3 +60,15 @@ _log($AccountId);
 //var $IDvalue = $AccountId['Id'];
 //_log($IDvalue);
 
+// DELETE REST Method
+
+
+// Lets assume that the ID is extracted
+var $Idvalue = "001q000000qMnCFAA0";
+
+$request_delete = new RESTRequest();	
+$request_delete.setURL("https://cs21.salesforce.com/services/data/v42.0/sobjects/"+$objectname+"/"+$Idvalue+"");
+$request_delete.setCredentials("meghana.rao@servicemax.com", "cloud_103");
+$request_delete.setHeader("Authorization", "OAuth "+$access_value);
+//$request1.setHeader("Content-Type", "application/json");
+$response_delete = $request_delete.submit("DELETE");
