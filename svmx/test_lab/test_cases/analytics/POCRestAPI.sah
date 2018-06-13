@@ -50,7 +50,7 @@ var $rest_api_call = new function rest_api_call()
 		var $AccountId = $json_value['records'];
 		_log($AccountId); // PENDING WORK
 
-		var $Idvalue = "001q000000qMnCFAA0"; 	
+		var $Idvalue = "001q000000qMnCFAA0"; 	// This value must be extracted from the JSON
 	
 		$request_delete = new RESTRequest();	
 		$request_delete.setURL("https://cs21.salesforce.com/services/data/v42.0/sobjects/"+$objectname+"/"+$Idvalue+"");
