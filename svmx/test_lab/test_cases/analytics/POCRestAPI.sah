@@ -4,71 +4,59 @@
  * This code is to push the data from Salesforce REST API calls from back end in Lightning
  */
 
-$bo_act_login.login($g_url, "meghana.rao@servicemax.com", "cloud_103");
 
+var $rest_api_call = new function rest_api_call()
 
-     var $username = "meghana.rao@servicemax.com";
-     var $password = "cloud_103";
-     var $clientId = "3MVG9zZht._ZaMulZsbNptzpIDmNd6xyt0zAOuNU_dtpTTg4DHSn9UmdBySUZS3_VOGeiWttaj3moLMuLIrje";
-     var $consumerSecret = "1938983484606764552";
-     //Authorization endpoint
-     var $authEndPoint = "https://test.salesforce.com/services/oauth2/token";
-     //response_type must be set to token
-     var $responseType = "token";
-     //This is the callback URL from the connected app
-     var $redirectURI = "https://cs21.lightning.force.com";
-     //Construct the URL with the required parameters
-     var $requestURL = ""+$authEndPoint+"?grant_type=password&client_id="+$clientId+"&client_secret="+$consumerSecret+"&username="+$username+"&password="+$password+"&response_type="+$responseType+"&redirect_uri="+$redirectURI+"";
-  
-     	_log($requestURL);
-$request = new RESTRequest();
-
- $request.setURL($requestURL);
-
-	$response = $request.submit("post");
-
-	var $AuthCode = $response.getBodyAsString(); //returns the content of the body using UTF-8 encoding
-	var $AuthCode2 = $response.getBodyAsString("ISO-8859-1"); //returns the content of the body using ISO-8859-1 encoding
-	_log($AuthCode);
-
-	var $access_token = JSON.parse($AuthCode);
+{
+	// This function applies for objects which contains Names
+	this.delete_function = function($bac_un, $bac_pwd, $valuename, $objectname){
+		$bo_act_login.login($g_url, $bac_un, $bac_pwd);
+	     var $username = $bac_pwd;
+	     var $password = $bac_pwd;
+	     var $clientId = "3MVG9zZht._ZaMulZsbNptzpIDmNd6xyt0zAOuNU_dtpTTg4DHSn9UmdBySUZS3_VOGeiWttaj3moLMuLIrje";
+	     var $consumerSecret = "1938983484606764552";
+	     //Authorization endpoint
+	     var $authEndPoint = "https://test.salesforce.com/services/oauth2/token";
+	     //response_type must be set to token
+	     var $responseType = "token";
+	     //This is the callback URL from the connected app
+	     var $redirectURI = "https://cs21.lightning.force.com";
+	     //Construct the URL with the required parameters
+	     var $requestURL = ""+$authEndPoint+"?grant_type=password&client_id="+$clientId+"&client_secret="+$consumerSecret+"&username="+$username+"&password="+$password+"&response_type="+$responseType+"&redirect_uri="+$redirectURI+"";
+	  
+	     	
+	     $request = new RESTRequest();
+	     $request.setURL($requestURL);
+	     $response = $request.submit("post");
+	     var $AuthCode = $response.getBodyAsString(); //returns the content of the body using UTF-8 encoding
+	     var $AuthCode2 = $response.getBodyAsString("ISO-8859-1"); //returns the content of the body using ISO-8859-1 encoding
+	     _log($AuthCode);
+	     var $access_token = JSON.parse($AuthCode);
+	     var $access_value = $access_token['access_token'];
+	     _log($access_value);
+	     
+	     
+		var $query = "Select+Id+from+"+$objectname+"+where+Name+=+'"+$valuename+"'";    
+		$request1 = new RESTRequest();	
+		$request1.setURL("https://cs21.salesforce.com/services/data/v42.0/query/?q="+$query+"");
+		$request1.setCredentials($bac_un, $bac_pwd);
+		$request1.setHeader("Authorization", "OAuth "+$access_value);
+		//$request1.setHeader("Content-Type", "application/json");
+		$response1 = $request1.submit("GET");
 	
-	var $access_value = $access_token['access_token'];
-	_log($access_value);
+		var $AuthCode_data = $response1.getBodyAsString(); //returns the content of the body using UTF-8 encoding
+		var $AuthCode_data2 = $response1.getBodyAsString("ISO-8859-1");
+		var $json_value = JSON.parse($AuthCode_data);
+		var $AccountId = $json_value['records'];
+		_log($AccountId); // PENDING WORK
+
+		var $Idvalue = "001q000000qMnCFAA0"; 	
 	
-// Sample execution of Delete operation
-	
-// First lets get the ID from the Account value we need
-	
-	
-	var $accountname = "Acc462018101230";
-	var $objectname = "Account";
-	var $query = "Select+Id+from+"+$objectname+"+where+Name+=+'"+$accountname+"'";
-         
-	$request1 = new RESTRequest();	
-	$request1.setURL("https://cs21.salesforce.com/services/data/v42.0/query/?q="+$query+"");
-	$request1.setCredentials("meghana.rao@servicemax.com", "cloud_103");
-	$request1.setHeader("Authorization", "OAuth "+$access_value);
-	//$request1.setHeader("Content-Type", "application/json");
-	$response1 = $request1.submit("GET");
+		$request_delete = new RESTRequest();	
+		$request_delete.setURL("https://cs21.salesforce.com/services/data/v42.0/sobjects/"+$objectname+"/"+$Idvalue+"");
+		$request_delete.setCredentials("meghana.rao@servicemax.com", "cloud_103");
+		$request_delete.setHeader("Authorization", "OAuth "+$access_value);
+		$response_delete = $request_delete.submit("DELETE");
+};
 
-var $AuthCode_data = $response1.getBodyAsString(); //returns the content of the body using UTF-8 encoding
-var $AuthCode_data2 = $response1.getBodyAsString("ISO-8859-1");
-var $json_value = JSON.parse($AuthCode_data);
-var $AccountId = $json_value['records'];
-_log($AccountId);
-//var $IDvalue = $AccountId['Id'];
-//_log($IDvalue);
-
-// DELETE REST Method
-
-
-// Lets assume that the ID is extracted
-var $Idvalue = "001q000000qMnCFAA0";
-
-$request_delete = new RESTRequest();	
-$request_delete.setURL("https://cs21.salesforce.com/services/data/v42.0/sobjects/"+$objectname+"/"+$Idvalue+"");
-$request_delete.setCredentials("meghana.rao@servicemax.com", "cloud_103");
-$request_delete.setHeader("Authorization", "OAuth "+$access_value);
-//$request1.setHeader("Content-Type", "application/json");
-$response_delete = $request_delete.submit("DELETE");
+};
