@@ -30,7 +30,8 @@
 	     var $access_token = JSON.parse($AuthCode);
 	     var $access_value = $access_token['access_token'];
 	     _log($access_value);
-	     
+	     var $objectname = "Account";
+	     var $valuename = "Acc462018103238";
 	     
 		var $query = "Select+Id+from+"+$objectname+"+where+Name+=+'"+$valuename+"'";    
 		$request1 = new RESTRequest();	
@@ -43,6 +44,7 @@
 		var $AuthCode_data = $response1.getBodyAsString(); //returns the content of the body using UTF-8 encoding
 		var $AuthCode_data2 = $response1.getBodyAsString("ISO-8859-1");
 		var $json_value = JSON.parse($AuthCode_data);
+		_log($AuthCode_data);
 		var $AccountId = $json_value['records'];
 		_log("The op is "+$AccountId); // PENDING WORK
 
