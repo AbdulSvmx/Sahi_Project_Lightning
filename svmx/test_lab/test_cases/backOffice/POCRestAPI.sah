@@ -26,10 +26,8 @@
 	     $response = $request.submit("post");
 	     var $AuthCode = $response.getBodyAsString(); //returns the content of the body using UTF-8 encoding
 	     var $AuthCode2 = $response.getBodyAsString("ISO-8859-1"); //returns the content of the body using ISO-8859-1 encoding
-	     _log($AuthCode);
 	     var $access_token = JSON.parse($AuthCode);
 	     var $access_value = $access_token['access_token'];
-	     _log($access_value);
 	     var $objectname = "Account";
 	     var $valuename = "Acc462018103238";
 	     
@@ -44,11 +42,10 @@
 		var $AuthCode_data = $response1.getBodyAsString(); //returns the content of the body using UTF-8 encoding
 		var $AuthCode_data2 = $response1.getBodyAsString("ISO-8859-1");
 		var $json_value = JSON.parse($AuthCode_data);
-		_log($AuthCode_data);
-		var $AccountId = $json_value['records'];
-		_log("The op is "+$AccountId); // PENDING WORK
-
-		var $Idvalue = "001q000000qMnCFAA0"; 	// This value must be extracted from the JSON
+		var $records = $json_value['records'];
+		var $strRecord = JSON.stringify($records);
+		var $Idvalue = $strRecord.replace(/\[|\]/g,"").substring($strRecord.lastIndexOf(":\"")+1,$strRecord.lastIndexOf("\"")-1);
+		_log($Idvalue);	// This value must be extracted from the JSON
 	
 		$request_delete = new RESTRequest();	
 		$request_delete.setURL("https://cs21.salesforce.com/services/data/v42.0/sobjects/"+$objectname+"/"+$Idvalue+"");
