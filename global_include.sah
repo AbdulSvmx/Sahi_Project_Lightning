@@ -14,7 +14,7 @@ if ($orgtype == "Dev") {
 }
 
 // Add All Global Variables here
-var $url = "https://test.salesforce.com";
+var $url_new = "https://test.salesforce.com";
 var $g_url = "https://test.salesforce.com/";
 var $g_un = "bhupen@back17.com";// "bhupendra.s@dev.tool2.com";
 var $g_pwd = "smax@123";
