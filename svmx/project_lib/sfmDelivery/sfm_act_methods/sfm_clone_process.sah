@@ -1,0 +1,37 @@
+////Login to Salesforce and switch to Lightning mode if SFDC mode is classic.
+////Note: If the SFDC mode is already Lightning, then script does not do anything.
+//var $url= "http://test.salesforce.com" ;
+//var $un = "meghana.rao@servicemax.com";
+//var $pwd = "cloud_103";
+//var $sel_domain = "svmxc.csxy.visual.force.com";
+//_setValue(_emailbox("username"),$un);
+//_setValue(_password("pw"),$pwd);
+//_click(_submit("Log In to Sandbox"));
+////_set($url, window.location.href);
+//_log($url);
+//if (!$url.includes("lightning")){
+//	_click($sfm_pg_lightningSFMD.link_switchtoLightning);
+//}
+//
+//
+//if (_isVisible($sfm_pg_lightningSFMD.link_svmxSetupLightning)== true) {
+//		_click($sfm_pg_lightningSFMD.link_svmxSetupLightning);
+//	}
+//else
+//	{
+//	 	_click($sfm_pg_lightningSFMD.link_MoreLightning);
+//	 	_click($sfm_pg_lightningSFMD.link_svmxSetupLightning);
+//	}
+////_wait(5000,(_isVisible($sfm_pg_lightningSFMD.link_ServiceFlowManagerLightning)== true));
+//_click(_link("More Show More"));
+//_wait(5000);
+////Making it work in all organizations by changing org ids.
+//var $n = $url.search(["[0-9][0-9]"]);
+//var $pos = $url.charAt($n) + $url.charAt($n+1);
+//var $sel_domain_new = $sel_domain.replace("xy",$pos);
+//_log($sel_domain_new);
+//_selectDomain($sel_domain_new);
+//_click(_div("Service Flow Manager"));
+//_click($sfm_pg_lightningSFMD.link_SFM_TxandDocDesignerLightning);
+//
+//
