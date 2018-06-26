@@ -19,8 +19,5 @@ var $sfm_pg_sfSetup = new function sfm_pg_sfSetup() {
 	this.link_cases = _link("Cases");
 	this.link_addCustomField = _link("Add a custom field to cases");
 	this.btn_caseCustomFieldNew = _button("/New/",_near(_heading3("Case Custom Fields & Relationships")));
-	
-	
-	
-	
+		
 };
