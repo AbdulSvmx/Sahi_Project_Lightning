@@ -559,53 +559,34 @@ var $sfm_act_createCustomWizard = new function sfm_act_createCustomWizard() {
 		
 	};
 	this.createWoWithValues = function(){
-		 var $woName="";
-		_click($sfm_pg_wo.tab_all);
-//		_click($sfm_pg_wo.clickTab("Work Orders"));
-		_wait(3000);
-		_click($sfm_pg_wo.link_wo);
-		_click($sfm_pg_wo.btn_wo_new);
-		_click($sfm_pg_wo.txt_actualOnsiteResponse);
-		_click($sfm_pg_wo.cell_today);
-		_click($sfm_pg_wo.txt_actualInitialResponse);
-		_click($sfm_pg_wo.cell_today);
-		_click($sfm_pg_wo.txt_actualRestoration);
-		_click($sfm_pg_wo.cell_tomorrow);
-		_click($sfm_pg_wo.txt_actualResolution);
-//		var $todayDate = _getValue($sfm_pg_wo.cell_today);
-		var $today = _getText($sfm_pg_wo.link_today);
-		var $yesterday = new Date($today);
-//		_log($yesterday);
-		$yesterday.setDate($yesterday.getDate()-1);
-//		_log($yesterday);
-		var $dd = $yesterday.getDate();
-//		_log($dd);
-		_click(_cell("/"+$dd+"/",_leftOf(_cell("/todayDate/"))));
-		_click($sfm_pg_wo.btn_wo_save);
-		_wait(3000);
-		$woName= _getText($sfm_pg_wo.label_wo);
-		return $woName;
-	};
-	this.createWorkDetails = function($lineType,$activityType,$qty){
-		_selectDomain();
-		_click($sfm_pg_wo.btn_newWorkDetail);
-		_setSelected($sfm_pg_wo.sel_recordType,"Usage/Consumption");
-		_click($sfm_pg_wo.btn_Continue);
-		_setSelected($sfm_pg_wo.sel_lineType,$lineType);
-		_setSelected($sfm_pg_wo.sel_activityType,$activityType);
-		_click($sfm_pg_wo.txt_dateCustom);
-		var $today = _getText($sfm_pg_wo.today);
-		var $yesterday = new Date($today);
-		$yesterday.setDate($yesterday.getDate()-1);
-		var $dd = $yesterday.getDate();
-		_click(_cell("/"+$dd+"/",_leftOf(_cell("/todayDate/"))));
-		_click($sfm_pg_wo.txt_dateRequired);
-		_click($sfm_pg_wo.cell_today);
-		_click($sfm_pg_wo.txt_dateReceived);
-		_click($sfm_pg_wo.cell_tomorrow);
-		_setValue($sfm_pg_wo.txt_lineQty,$qty);
-		_click($sfm_pg_wo.btn_wo_save);
-	};
+        var $woName="";
+        _click($sfm_pg_wo.tab_all);
+//      _click($sfm_pg_wo.clickTab("Work Orders"));
+        _wait(3000);
+        _click($sfm_pg_wo.link_wo);
+        _click($sfm_pg_wo.btn_wo_new);
+        _click($sfm_pg_wo.txt_actualOnsiteResponse);
+        _click($sfm_pg_wo.cell_today);
+        _click($sfm_pg_wo.txt_actualInitialResponse);
+        _click($sfm_pg_wo.cell_today);
+        _click($sfm_pg_wo.txt_actualRestoration);
+        _click($sfm_pg_wo.cell_tomorrow);
+        _click($sfm_pg_wo.txt_actualResolution);
+//      var $todayDate = _getValue($sfm_pg_wo.cell_today);
+        var $today = _getText($sfm_pg_wo.link_today);
+        var $yesterday = new Date($today);
+//      _log($yesterday);
+        $yesterday.setDate($yesterday.getDate()-1);
+//      _log($yesterday);
+        var $dd = $yesterday.getDate();
+//      _log($dd);
+        _click(_cell("/"+$dd+"/",_leftOf(_cell("/todayDate/"))));
+        _click($sfm_pg_wo.btn_wo_save);
+        _wait(3000);
+        $woName= _getText($sfm_pg_wo.label_wo);
+        return $woName;
+  };
+
 	this.addMultipleWizSteps = function($wizTitle,$stepTypes,$stepNames,$titles){
 		var $wizId = $wizTitle.toLowerCase().replace(/ /g, "_");
 		_setValue($sfm_pg_wizards.txt_wizardTitle,$wizTitle);
@@ -690,6 +671,22 @@ var $sfm_act_createCustomWizard = new function sfm_act_createCustomWizard() {
 		return $woName;
 		
 	};
+	
+	//Creates work order without values in lightning.
+	this.createWowithoutvalues = function() {
+		_click($sfm_pg_wo.tab_all);
+		_wait(3000);
+		_click($sfm_pg_wo.link_wo);
+		_click($sfm_pg_wo.btn_wo_new);
+		_click($sfm_pg_wo.btn_wo_save);
+		
+	};
+	
+	this.clickWizardlinks = function($sfmname){
+		
+	};
+
+	
 };
 
 
