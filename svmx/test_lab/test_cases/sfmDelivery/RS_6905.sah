@@ -23,7 +23,19 @@ _click($sfm_pg_wizardWindow.icon_Edit);
 _click($sfm_pg_wizardWindow.link_Edit);
 _click($sfm_pg_wizardWindow.lkp_autoContact);
 _click($sfm_pg_wizardWindow.btn_search);
-var $divs= _collect("_div","/.*/",_under(_div("AccountId")));
+var $divs= _collectAttributes("_div","/cell/","sahiText",_under(_div("AccountId"),20));
 _log($divs.length);
+for (var $i=1; $i<$divs.length; $i++) {
+	if(_getText($divs[$i])!="Acme"){
+		$count++;
+	}
+}
+_log($count);
+if($count==0){
+	_log("Pass");
+}
+else{
+	_fail("Fail");
+}
 //$sfm_act_createCustomWizard.verify6905();
 $rs_6905.end();	
