@@ -711,7 +711,7 @@ var $sfm_act_createCustomWizard = new function sfm_act_createCustomWizard() {
 	
 	this.clickWizardlinks = function($sfmname){
 		
-	}
+	};
 
 	
 };
