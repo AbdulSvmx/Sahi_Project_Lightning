@@ -6,24 +6,18 @@
 var $pre_requisite= _testcase("scenario1_pre","Testing Create SFM");
 $pre_requisite.start();
 _setSpeed($g_stepSpeed);
-
-/**
- * Login to the Sandbox Org
- */
 $bo_act_login.login($g_url, $bac_un, $bac_pwd);
-/*
- * Defining the variable values.
- */
 
-//var $sfmName = "Create New Work Order";
-//var $transactiontype = "as Standalone for the purpose of creating a new record";
-//var $targetObjectName = "Work Order";
-//
-//// This will create a Standalone SFM Transaction Designer for Create Work Order for FSA.
-//$bo_act_SFM.createstandaloneSFM($sfmName, $transactiontype, $targetObjectName);
 
-// Clone TDM016 with attachment enabled
+//This will create a Standalone SFM Transaction Designer for Create Work Order for FSA.
+var $sfmName = "Create New Work Order";
+var $transactiontype = "as Standalone for the purpose of creating a new record";
+var $targetObjectName = "Work Order";
+$bo_act_SFM.createstandaloneSFM($sfmName, $transactiontype, $targetObjectName);
 
+
+
+// Clone TDM016 with attachment enabled for FSA Automation
 var $sfmToBeCloned = "Manage Work Order Lines - Usage";
 var $sfmName = "EditWoAuto-Timesstamp";
 var $sfmTemplateSaveAsName = "Pagelayout: Manage WO Usage Lines";
