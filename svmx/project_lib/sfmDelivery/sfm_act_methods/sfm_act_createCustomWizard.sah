@@ -281,7 +281,7 @@ var $sfm_act_createCustomWizard = new function sfm_act_createCustomWizard() {
 		_wait(3000);
 //		_setStrictVisibilityCheck(true);
 		_click($sfm_pg_wizardWindow.icon_search);
-		var $divs= _collect("_div","/.*/",_under(_div("Account ID")));
+		var $divs= _collectAttributes("_div","/cell/","sahiText",_under(_div("AccountId"),20));//Changed for Lightning
 		_log($divs.length);
 //		var $divArray = new Array();
 		for (var $i=1; $i<$divs.length; $i++) {
@@ -328,7 +328,7 @@ var $sfm_act_createCustomWizard = new function sfm_act_createCustomWizard() {
 			_log("Pass");
 		}
 		else{
-			_log("Fail");
+			_fail("Fail");
 		}
 	};
 
@@ -457,7 +457,7 @@ var $sfm_act_createCustomWizard = new function sfm_act_createCustomWizard() {
 			_log("Pass");
 		}
 		else{
-			_log("Fail");
+			_fail("Fail");
 		}
 	};
 	
@@ -475,7 +475,7 @@ var $sfm_act_createCustomWizard = new function sfm_act_createCustomWizard() {
 			_log("Pass");
 		}
 		else{
-			_log("Fail");
+			_fail("Fail");
 		}
 		
 	};
