@@ -1,7 +1,7 @@
 //Meghana Rao
 
 /*
- * PRE Requisites to be run in the org before running other scripts.
+ * PRE Requisites to be run in the org before running other scripts - LIGHTNING CODE
  */
 var $pre_requisite= _testcase("scenario1_pre","Testing Create SFM");
 $pre_requisite.start();
