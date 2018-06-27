@@ -39,7 +39,7 @@ $bo_act_navigation.navigateToSfmWizard();
 $sfm_act_createCustomWizard.chooseObject("Work Order");
 $sfm_act_createCustomWizard.addManageWizSteps($wizTitle, "SFM", $sfmName);
 _selectDomain();
-$sfm_act_createCustomWizard.createWoWithValues();
+$sfm_act_createCustomWizard.createWowithdateliterals();
 $sfm_act_createCustomWizard.clickWizardBtn($sfmName);
 _selectDomain();
 if(_isVisible(_link("/"+$sfmName+"/"))){

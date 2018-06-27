@@ -23,11 +23,20 @@ var $sfm_pg_wo = new function sfm_pg_wo() {
 //		_log("I am Here");
 	};
 	this.label_wo = _heading1("/WO-/"); //Changed for Lightning
+	this.btn_next = _span("Next"); //Added for Lightning
+	this.lkup_account = _textbox(0,_near(_span("Account[1]")));//Added for Lightning
+	this.link_wopriority = _link(0,_near(_span("Priority")));//Added for Lighting
 	this.txt_actualOnsiteResponse = _textbox(0,_near(_span("Actual Onsite Response")));//Changed for Lightning,Corrected.
 	this.txt_actualInitialResponse = _textbox(0,_near(_span("Actual Initial Response")));//Changed for Lightning,corrected.
-	this.txt_actualResolution = _textbox("Actual Resolution");
-	this.txt_actualRestoration = _textbox("Actual Restoration");
+	this.txt_actualResolution = _textbox(0,_near(_span("Actual Resolution")));//Changed for Lightning
+	this.txt_actualOnsiteResponsetimebox = _textbox(1,_near(_span("Actual Onsite Response")));//Changed for Lightning,Corrected.
+	this.txt_actualInitialResponsetimebox = _textbox(1,_near(_span("Actual Initial Response")));//Changed for Lightning,corrected.
+	this.txt_actualResolutiontimebox = _textbox(1,_near(_span("Actual Resolution")));//Changed for Lightning
+	
+	this.txt_actualRestoration = _textbox(0,_near(_span("Actual Restoration")));//Changed for Lightning
+	this.txt_actualRestorationtimebox = _textbox(1,_near(_span("Actual Restoration")));//Changed for Lightning
 	this.cell_today = _span("Today")//Changed for Lightning
+	this.link_showmore = _link("show-link show-more-link"); //Changed for Lightning
 	this.cell_tomorrow = _cell(0,_rightOf(_cell("/todayDate/")));
 	this.link_today = _link(0,_rightOf(_label("Actual Onsite Response")));
 	this.today = _link(0,_rightOf(_label("Date Custom")));
