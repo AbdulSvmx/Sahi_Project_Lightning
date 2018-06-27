@@ -2,13 +2,16 @@ var $sfm_act_createCustomWizard = new function sfm_act_createCustomWizard() {
 //	var $title = "";
 	this.chooseObject = function($object){
 		_wait(3000);
+		_selectDomain("/svmx/");
 		_setSelected($sfm_pg_wizards.selectObject,$object);
 		_click($sfm_pg_wizards.btn_customNew);
+		_selectDomain();
 	};
 
 	this.addManageWizSteps = function($wizTitle,$wizStepType,$wizStepName,$profile){
 //		$title = $wizTitle;
 //		$wizTitle = $bo_act_common.generateRandomName("Auto Wiz ");
+		_selectDomain("/svmx/");
 		var $wizId = $wizTitle.toLowerCase().replace(/ /g, "_");
 //		_log($wizTitle);
 //		_log($wizId);
@@ -25,6 +28,7 @@ var $sfm_act_createCustomWizard = new function sfm_act_createCustomWizard() {
 		_setSelected($sfm_pg_wizards.select_availableGrpProfiles,$profile);
 //		_click($sfm_pg_wizards.btn_add);
 		_click($sfm_pg_wizards.btn_saveClose);
+		_selectDomain();
 	};
 
 //	Added by Safi
@@ -608,6 +612,34 @@ var $sfm_act_createCustomWizard = new function sfm_act_createCustomWizard() {
 		_setValue($sfm_pg_wo.txt_lineQty,$qty);
 		_click($sfm_pg_wo.btn_wo_save);
 	};
+        var $woName="";
+        _click($sfm_pg_wo.tab_all);
+//      _click($sfm_pg_wo.clickTab("Work Orders"));
+        _wait(3000);
+        _click($sfm_pg_wo.link_wo);
+        _click($sfm_pg_wo.btn_wo_new);
+        _click($sfm_pg_wo.txt_actualOnsiteResponse);
+        _click($sfm_pg_wo.cell_today);
+        _click($sfm_pg_wo.txt_actualInitialResponse);
+        _click($sfm_pg_wo.cell_today);
+        _click($sfm_pg_wo.txt_actualRestoration);
+        _click($sfm_pg_wo.cell_tomorrow);
+        _click($sfm_pg_wo.txt_actualResolution);
+//      var $todayDate = _getValue($sfm_pg_wo.cell_today);
+        var $today = _getText($sfm_pg_wo.link_today);
+        var $yesterday = new Date($today);
+//      _log($yesterday);
+        $yesterday.setDate($yesterday.getDate()-1);
+//      _log($yesterday);
+        var $dd = $yesterday.getDate();
+//      _log($dd);
+        _click(_cell("/"+$dd+"/",_leftOf(_cell("/todayDate/"))));
+        _click($sfm_pg_wo.btn_wo_save);
+        _wait(3000);
+        $woName= _getText($sfm_pg_wo.label_wo);
+        return $woName;
+  };
+
 	this.addMultipleWizSteps = function($wizTitle,$stepTypes,$stepNames,$titles){
 		var $wizId = $wizTitle.toLowerCase().replace(/ /g, "_");
 		_setValue($sfm_pg_wizards.txt_wizardTitle,$wizTitle);
@@ -741,6 +773,7 @@ var $sfm_act_createCustomWizard = new function sfm_act_createCustomWizard() {
 		_click(_span($sfmname));
 		};
 
+	
 	
 };
 
