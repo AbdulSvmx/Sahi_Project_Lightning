@@ -2,13 +2,16 @@ var $sfm_act_createCustomWizard = new function sfm_act_createCustomWizard() {
 //	var $title = "";
 	this.chooseObject = function($object){
 		_wait(3000);
+		_selectDomain("/svmx/");
 		_setSelected($sfm_pg_wizards.selectObject,$object);
 		_click($sfm_pg_wizards.btn_customNew);
+		_selectDomain();
 	};
 
 	this.addManageWizSteps = function($wizTitle,$wizStepType,$wizStepName,$profile){
 //		$title = $wizTitle;
 //		$wizTitle = $bo_act_common.generateRandomName("Auto Wiz ");
+		_selectDomain("/svmx/");
 		var $wizId = $wizTitle.toLowerCase().replace(/ /g, "_");
 //		_log($wizTitle);
 //		_log($wizId);
@@ -25,6 +28,7 @@ var $sfm_act_createCustomWizard = new function sfm_act_createCustomWizard() {
 		_setSelected($sfm_pg_wizards.select_availableGrpProfiles,$profile);
 //		_click($sfm_pg_wizards.btn_add);
 		_click($sfm_pg_wizards.btn_saveClose);
+		_selectDomain();
 	};
 
 //	Added by Safi
