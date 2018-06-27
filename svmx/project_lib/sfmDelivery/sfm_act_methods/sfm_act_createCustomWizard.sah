@@ -559,41 +559,35 @@ var $sfm_act_createCustomWizard = new function sfm_act_createCustomWizard() {
 		
 	};
 	this.createWoWithValues = function(){
-		 var $woName="";
-		_click($sfm_pg_wo.tab_all);
-		_wait(3000);
-		_click($sfm_pg_wo.link_wo);
-		_click($sfm_pg_wo.btn_wo_new);
-		_click($sfm_pg_wo.txt_actualOnsiteResponse);
-		_click($sfm_pg_wo.cell_today);
-		var $today = _getText($sfm_pg_wo.link_today);
-		var $today_date = new Date($today);
-		_log($today_date);
-		
-//		var $yesterday = new Date($today_date - 1);
-//		_log($yesterday);
-		var $tomorrow = new Date($today_date+1);
-//		log($tomorrow);
-		var $tom_date_component = tomorrow.getDate();
-		
-		
-		_click($sfm_pg_wo.txt_actualInitialResponse);
-		_click(_span($tom_date_component));
-		_click($sfm_pg_wo.txt_actualRestoration);
-		_click($sfm_pg_wo.cell_tomorrow);
-		_click($sfm_pg_wo.txt_actualResolution);
-		
-		var $yesterday = new Date($today);
-		_log($yesterday);
-		//$yesterday.setDate($yesterday.getDate()-1)		_log($yesterday);
-		//var $dd = $yesterday.getDate();
-//		_log($dd);
-		//_click(_cell("/"+$dd+"/",_leftOf(_cell("/todayDate/"))));
-		_click($sfm_pg_wo.btn_wo_save);
-		_wait(3000);
-		$woName= _getText($sfm_pg_wo.label_wo);
-		return $woName;
-	};
+        var $woName="";
+        _click($sfm_pg_wo.tab_all);
+//      _click($sfm_pg_wo.clickTab("Work Orders"));
+        _wait(3000);
+        _click($sfm_pg_wo.link_wo);
+        _click($sfm_pg_wo.btn_wo_new);
+        _click($sfm_pg_wo.txt_actualOnsiteResponse);
+        _click($sfm_pg_wo.cell_today);
+        _click($sfm_pg_wo.txt_actualInitialResponse);
+        _click($sfm_pg_wo.cell_today);
+        _click($sfm_pg_wo.txt_actualRestoration);
+        _click($sfm_pg_wo.cell_tomorrow);
+        _click($sfm_pg_wo.txt_actualResolution);
+//      var $todayDate = _getValue($sfm_pg_wo.cell_today);
+        var $today = _getText($sfm_pg_wo.link_today);
+        var $yesterday = new Date($today);
+//      _log($yesterday);
+        $yesterday.setDate($yesterday.getDate()-1);
+//      _log($yesterday);
+        var $dd = $yesterday.getDate();
+//      _log($dd);
+        _click(_cell("/"+$dd+"/",_leftOf(_cell("/todayDate/"))));
+        _click($sfm_pg_wo.btn_wo_save);
+        _wait(3000);
+        $woName= _getText($sfm_pg_wo.label_wo);
+        return $woName;
+  };
+
+
 	this.createWorkDetails = function($lineType,$activityType,$qty){
 		_selectDomain();
 		_click($sfm_pg_wo.btn_newWorkDetail);
@@ -709,9 +703,43 @@ var $sfm_act_createCustomWizard = new function sfm_act_createCustomWizard() {
 		
 	};
 	
+	//Create work order with date literals in lightning.
+	this.createWowithdateliterals = function()
+	{
+		$accNum = "HCSAccountForTesting";
+		_click($sfm_pg_wo.tab_all);
+		_wait(3000);
+		_click($sfm_pg_wo.link_wo);
+		_click($sfm_pg_wo.btn_wo_new);
+		_click($sfm_pg_wo.btn_next);
+		_click($sfm_pg_wo.txt_actualOnsiteResponse);
+		_click($sfm_pg_wo.cell_today);
+		var $today = _getText($sfm_pg_wo.txt_actualOnsiteResponse);
+		var $yesterday = new Date($today);
+        $yesterday.setDate($yesterday.getDate()-1);
+        $yesterday = $yesterday.getMonth() + "/" + $yesterday.getDate() + "/" + $yesterday.getFullYear();
+        var $tomorrow = new Date($today);
+        $tomorrow.setDate($tomorrow.getDate()+1);
+        $tomorrow = $tomorrow.getMonth() + "/" + $tomorrow.getDate() + "/" + $tomorrow.getFullYear();
+        _setValue($sfm_pg_wo.txt_actualResolution,$tomorrow);
+        _setValue($sfm_pg_wo.txt_actualResolutiontimebox,"12:00 AM");
+        _setValue($sfm_pg_wo.txt_actualRestoration,$yesterday);
+        _setValue($sfm_pg_wo.txt_actualRestorationtimebox,"12:00 AM");
+        _setValue($sfm_pg_wo.lkup_account,$accNum);
+        _click(_mark($accNum));
+        _click($sfm_pg_wo.link_wopriority);
+        _click(_link("Medium"));
+		_click($sfm_pg_wo.btn_wo_save);
+		$woId= _getText($sfm_pg_wo.label_wo);
+		return $woId;
+	}
+	
 	this.clickWizardlinks = function($sfmname){
-		
-	};
+		_click(_link($sfm_pg_wo.link_showmore));
+		//Check if the SFM process link exists
+		_assertExists(_span($sfmname));
+		_click(_span($sfmname));
+		};
 
 	
 };
