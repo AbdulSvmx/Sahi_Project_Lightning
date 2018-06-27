@@ -24,3 +24,6 @@ var $sfmTemplateSaveAsName = "Pagelayout: Manage WO Usage Lines";
 $bo_act_SFM.clnStandardSFM_attachment($sfmToBeCloned, $sfmName, $sfmTemplateSaveAsName);
 
 
+// Setup App Permissions for Mobile App for the SFM Process created
+var $profilename = $group_profilename;
+$bo_act_SFMAppPermission.set_mobileapp_permissions($profilename, $targetObjectName, $sfmName);

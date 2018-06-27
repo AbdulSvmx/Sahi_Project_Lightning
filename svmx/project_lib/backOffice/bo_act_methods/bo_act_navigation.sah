@@ -385,9 +385,16 @@ var $bo_act_navigation = new function bo_act_navigation() {
        	_click($bo_pg_servicemaxSetup.btn_mobileAndOffline);
        	_click($bo_pg_servicemaxSetup.btn_mobileconfiguration);
        	_setSelected($bo_pg_servicemaxSetup.listselectprofile,$Profilename);
-
-       	
-      	    
+       	    
       	  
+       };
+       
+       
+       this.navigatetoMobileOfflinePermission = function(){
+    	   _selectDomain("/svmx/");
+    	   _click($bo_pg_servicemaxSetup.btn_mobileAndOffline);
+    	   _click($bo_pg_servicemaxSetup.btn_mobileofflinepermissions);
+    	   _selectDomain();
+    	   
        };
 };
