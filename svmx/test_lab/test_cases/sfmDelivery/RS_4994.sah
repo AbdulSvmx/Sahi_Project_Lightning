@@ -1,5 +1,9 @@
 var $rs_4994 = _testcase("RS_4994","Assign to a group and log in as different group member.");
 $rs_4994.start();
+/* Logging in with a different group member cannot be validated because 
+ * The step to add permission in addManageWizSteps function was commented out
+ * while modifying the codes to run on both Dev as well as Base.
+ */
 $wizTitle = $bo_act_common.generateRandomName("Auto Wiz ");
 $bo_act_login.login($g_url,$sfmUsn,$sfmPwd);
 $bo_act_navigation.navigateToSfmWizard();

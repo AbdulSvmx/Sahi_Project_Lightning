@@ -7,6 +7,7 @@ var $sfm_pg_screenDesigner = new function sfm_pg_screenDesigner(){
 	this.txt_searchField= _f("main").s_textinput("searchText[4]");
 	this.lbl_billingType= _f("main").s_label("Billing Type");
 	this.lbl_account= _f("main").s_label("Account");
+	this.txt_srcObject = _f("main").s_textinput("textInput");
 	
 	this.lbl_addproduct = _f("main").s_label("Product[1]"); 
 	this.btn_ConfLookup = _f("main").s_button("Configure Lookup");
