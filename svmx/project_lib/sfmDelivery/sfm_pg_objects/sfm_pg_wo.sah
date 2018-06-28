@@ -6,12 +6,14 @@ var $sfm_pg_wo = new function sfm_pg_wo() {
 	this.btn_wo_save = _span("Save[1]");//Changed for lightning
 	this.link_wo = _span("Work Orders[1]");//Changed to hit the correct Work orders link in Lightning
 
-	this.btn_wo_edit = _div("Edit");//Changed for Lightning.
-	this.txt_wo_zip = _textbox("Zip");
+
+//	this.btn_wo_edit = _div("Edit");//Changed for Lightning.
+//	this.txt_wo_zip = _textbox("Zip");
 
 	this.btn_wo_edit = _div("Edit");//Changed for lightning
 	this.txt_wo_zip = _textbox("/part of the/",_near(_span("/Zip/",_in(_div("modal-container slds-modal__container")))));//changed for lightning for zip textbox with in edit WO modal window
 	this.btn_wo_edit_save = _span("/Save/", _rightOf(_span("Save & New"))); // new one added for lightning for save button within editWO modal window
+
 
 	this.assert_wizard =function($wizTitle){
 		if(_exists(_cell($wizTitle))){
