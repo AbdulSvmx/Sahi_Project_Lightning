@@ -1,0 +1,21 @@
+/**
+ * Function to perform actions on transaction list view
+ */
+
+
+var $sfmrdz_act_trnListView= new function sfmrdz_act_trnListView(){
+	
+	this.searchTransaction=function($trnName){
+		_setValue($sfmrdz_pg_transactionListView.txt_listFilter,$trnName);
+
+	};
+	
+	
+	this.transactionTypePicklist=function($trnType){
+		_click($sfmrdz_pg_transactionListView.txt_trnPicklist);
+		_wait(3000);
+		_click(_link($trnType));
+	};
+	
+	
+};

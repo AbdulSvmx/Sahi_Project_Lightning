@@ -19,29 +19,21 @@ $SFMRDZ_TC001_TransactionListView.start();
 	var $url="http://test.salesforce.com";
 	var $un="designer2@test.com";
 	var $pwd="designer@2";
-	var $transactionULR;
+	//var $transactionULR;
 
-	$bo_act_login.login("http://test.salesforce.com","designer2@test.com", "designer@2");
-	//$bo_act_login.login($url,$un,$pwd);
-	_wait(2000);
-	
-	_set($transactionULR, window.location.href);
-	_log($transactionULR);
-	
-	_click(_div("Setup"));
-	_wait(2000);
-	_click(_span("Setup for current app"));
-	_wait(5000,_isVisible(_link("Object Manager")));
-	
-	_setValue (_searchbox("Quick Find"),"Visualforce Pages");
-	_click(_link("Visualforce Pages"));
-	_click(_span("S"));
-	_click(_link("SFM_Designer"));
-	_wait(10000,_isVisible(_heading2("SVMXDEV__SFM_Designer")));
-	_click(_button("Preview"));
-	_wait(10000,_isVisible(_div("Transactions")));
+	//$bo_act_login.login("http://test.salesforce.com","designer2@test.com", "designer@2");
+	$bo_act_login.login($url,$un,$pwd);
 	
 	
+	this.LaunchListViewWindow= function($viewName){
+		_set($currentHomePageULR, window.location.href);
+		_log($currentHomePageULR);
+		var $orgId=$transactionULR.substring(8,12);
+		_log($orgId);
+		var $ListViewWindow="https://svmxdev."+$orgId+".visual.force.com/apex/SFM_Designer#/"+$viewName+"-list";
+		_log($ListViewWindow);
+		_navigateTo($ListViewWindow);
+	};
 	
 	
 	
