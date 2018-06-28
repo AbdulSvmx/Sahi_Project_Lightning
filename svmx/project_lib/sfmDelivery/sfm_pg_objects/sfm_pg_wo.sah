@@ -3,9 +3,8 @@ var $sfm_pg_wo = new function sfm_pg_wo() {
 	this.btn_wo_new = _link("New");//Changed for lightning
 	this.btn_wo_continue= _submit("Continue");
 	this.btn_woStatus = _select(0,_rightOf(_label("Order Status")));
-	this.btn_wo_save = _span("Save[1]");//Changed for lightning
-	this.link_wo = _span("Work Orders[1]");//Changed to hit the correct Work orders link in Lightning
-
+	this.btn_wo_save = _span("Save");//Changed for lightning
+	this.link_wo = _link("Work Orders");//Changed to hit the correct Work orders link in Lightning - JJ
 
 //	this.btn_wo_edit = _div("Edit");//Changed for Lightning.
 //	this.txt_wo_zip = _textbox("Zip");
@@ -13,6 +12,7 @@ var $sfm_pg_wo = new function sfm_pg_wo() {
 	this.btn_wo_edit = _div("Edit");//Changed for lightning
 	this.txt_wo_zip = _textbox("/part of the/",_near(_span("/Zip/",_in(_div("modal-container slds-modal__container")))));//changed for lightning for zip textbox with in edit WO modal window
 	this.btn_wo_edit_save = _span("/Save/", _rightOf(_span("Save & New"))); // new one added for lightning for save button within editWO modal window
+
 
 
 	this.assert_wizard =function($wizTitle){
@@ -39,7 +39,7 @@ var $sfm_pg_wo = new function sfm_pg_wo() {
 	this.txt_actualOnsiteResponsetimebox = _textbox(1,_near(_span("Actual Onsite Response")));//Changed for Lightning,Corrected.
 	this.txt_actualInitialResponsetimebox = _textbox(1,_near(_span("Actual Initial Response")));//Changed for Lightning,corrected.
 	this.txt_actualResolutiontimebox = _textbox(1,_near(_span("Actual Resolution")));//Changed for Lightning
-	
+	this.btn_OK_popup = _span("OK",_in(_div("/toolbar-footer/"))); //Added by Janaki for OK button in pop up.
 	this.txt_actualRestoration = _textbox(0,_near(_span("Actual Restoration")));//Changed for Lightning
 	this.txt_actualRestorationtimebox = _textbox(1,_near(_span("Actual Restoration")));//Changed for Lightning
 	this.cell_today = _span("Today");//Changed for Lightning
