@@ -1,4 +1,4 @@
-var $rs_5445 = _testcase("RS_5445","Verify Date and DateTime literals as expressions in Header.");
+var $rs_5445 = _testcase("RS_5445","Verify Date and DateTime literals as expressions in Header.(Lightning");
 $rs_5445.start();
 $sfmName = $bo_act_common.generateRandomName("SFM_Auto_");
 //$sfmName = "SFM_Auto_27122017162526";
@@ -13,7 +13,7 @@ var $valueOptions = ["Today","Tomorrow","Yesterday","Open"];
 var $exprsnName = $bo_act_common.generateRandomName("Header_Exprsn");
 var $advancedExprsn = "1 and ((2 or 3) and (4 or 5))";
 var $err = "This record does not satisfy the qualification criteria.";
-$bo_act_login.login($g_url,$sfmUsn,$sfmPwd);
+$bo_act_login.login($g_url,$bac_un,$bac_pwd);
 $sfm_act_lightningConfig.switchToLightning();
 $bo_act_navigation.navigateToSfmTransactionDesigner();
 $sfm_act_SFM.selectSFM($processName,false);
@@ -39,32 +39,29 @@ $bo_act_navigation.navigateToSfmWizard();
 $sfm_act_createCustomWizard.chooseObject("Work Order");
 $sfm_act_createCustomWizard.addManageWizSteps($wizTitle, "SFM", $sfmName);
 _selectDomain();
-$sfm_act_createCustomWizard.createWoWithValues();
-$sfm_act_createCustomWizard.clickWizardBtn($sfmName);
-_selectDomain();
-if(_isVisible(_link("/"+$sfmName+"/"))){
-	_log("Pass");
-}
-else{
-	_fail("Fail");
-}
+$sfm_act_createCustomWizard.createWowithdateliterals();
+$sfm_act_createCustomWizard.clickWizardlinks($sfmname);
+_selectDomain("/visual.force.com/");
+_wait(5000);
+//_wait(10000, _isVisible($sfm_pg_wizardWindow.btn_cancel));
 _click($sfm_pg_wizardWindow.btn_cancel);
 _click($sfm_pg_wizardWindow.btn_proceed);
 _click($sfm_pg_wo.btn_wo_edit);
-_click($sfm_pg_wo.txt_actualOnsiteResponse);
-var $today = _getText($sfm_pg_wo.link_today);
-var $yesterday = new Date($today);
-$yesterday.setDate($yesterday.getDate()-1);
-var $dd = $yesterday.getDate();
-_click(_cell("/"+$dd+"/",_leftOf(_cell("/todayDate/"))));
+var $today = new Date();
+$new_date = $sfm_act_createCustomWizard.addsubtractdates($today,7);
+_setValue($sfm_pg_wo.txt_actualInitialResponse,$new_date);
+_setValue($sfm_pg_wo.txt_actualInitialResponsetimebox,"12:00 AM");
 _click($sfm_pg_wo.btn_wo_save);
-_selectDomain("/svmx/");
-$sfm_act_createCustomWizard.clickWizardBtn($sfmName);
-_selectDomain();
-if(_isVisible(_div("/"+$err+"/"))){
-	_log("Pass");
-}
-else{
-	_fail("Fail");
-}
+$sfm_act_createCustomWizard.clickWizardlinks($sfmname);
+_assertVisible(_div($err));
+_setStrictVisibilityCheck (true);
+_click($sfm_pg_wo.btn_OK_popup);
+_click($sfm_pg_wo.btn_wo_edit);
+_setValue($sfm_pg_wo.txt_actualOnsiteResponse,$new_date);
+_setValue($sfm_pg_wo.txt_actualOnsiteResponsetimebox,"12:00 AM");
+_click($sfm_pg_wo.btn_wo_save);
+$sfm_act_createCustomWizard.clickWizardlinks($sfmname);
+_assertVisible(_div($err));
+_setStrictVisibilityCheck (true);
+_click($sfm_pg_wo.btn_OK_popup);
 $rs_5445.end();

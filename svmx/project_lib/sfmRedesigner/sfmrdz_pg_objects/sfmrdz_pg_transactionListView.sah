@@ -1,0 +1,14 @@
+/**
+ * 
+ */
+
+
+
+var $sfmrdz_pg_transactionListView=new function sfmrdz_pg_transactionListView(){
+	
+	this.txt_listFilter=_textbox("ListFilter");
+	this.txt_trnPicklist=_textbox("Input Picklist__input slds-input slds-combobox__input");
+	this.btn_heading_transaction=_div("Transactions");
+
+	
+};
