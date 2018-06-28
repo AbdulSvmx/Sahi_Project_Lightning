@@ -40,27 +40,15 @@ $sfm_act_createCustomWizard.chooseObject("Work Order");
 $sfm_act_createCustomWizard.addManageWizSteps($wizTitle, "SFM", $sfmName);
 _selectDomain();
 $sfm_act_createCustomWizard.createWowithdateliterals();
-$sfm_act_createCustomWizard.clickWizardBtn($sfmName);
-_selectDomain();
-if(_isVisible(_link("/"+$sfmName+"/"))){
-	_log("Pass");
-}
-else{
-	_fail("Fail");
-}
+$sfm_act_createCustomWizard.clickWizardlinks($sfmname);
 _click($sfm_pg_wizardWindow.btn_cancel);
 _click($sfm_pg_wizardWindow.btn_proceed);
 _click($sfm_pg_wo.btn_wo_edit);
-_click($sfm_pg_wo.txt_actualOnsiteResponse);
-var $today = _getText($sfm_pg_wo.link_today);
-var $yesterday = new Date($today);
-$yesterday.setDate($yesterday.getDate()-1);
-var $dd = $yesterday.getDate();
-_click(_cell("/"+$dd+"/",_leftOf(_cell("/todayDate/"))));
-_click($sfm_pg_wo.btn_wo_save);
-_selectDomain("/svmx/");
-$sfm_act_createCustomWizard.clickWizardBtn($sfmName);
-_selectDomain();
+var $today = new Date();
+$new_date = $sfm_act_createCustomWizard.addsubtractdates($today,7);
+_setValue($sfm_pg_wo.txt_actualInitialResponse,$new_date);
+_setValue($sfm_pg_wo.txt_actualInitialResponsetimebox,"12:00 AM");
+
 if(_isVisible(_div("/"+$err+"/"))){
 	_log("Pass");
 }

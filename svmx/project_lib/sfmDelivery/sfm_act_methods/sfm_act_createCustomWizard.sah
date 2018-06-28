@@ -728,10 +728,17 @@ var $sfm_act_createCustomWizard = new function sfm_act_createCustomWizard() {
 	};
 	
 	//Creates work order without values in lightning.
+	//Lakshmisha- Updated the function to check for the WO link in app launcher and then click on the parent element of WO link
 	this.createWowithoutvalues = function() {
 		_click($sfm_pg_wo.tab_all);
 		_wait(3000);
-		_click($sfm_pg_wo.link_wo);
+		if(_isVisible($sfm_pg_wo.link_wo)){
+			_click($sfm_pg_wo.link_wo);
+		}
+		else{
+			_click(_link("Work Orders[1]"));
+		}
+		//_click($sfm_pg_wo.link_wo);
 		_click($sfm_pg_wo.btn_wo_new);
 		_click($sfm_pg_wo.btn_wo_save);
 		
@@ -751,10 +758,10 @@ var $sfm_act_createCustomWizard = new function sfm_act_createCustomWizard() {
 		var $today = _getText($sfm_pg_wo.txt_actualOnsiteResponse);
 		var $yesterday = new Date($today);
         $yesterday.setDate($yesterday.getDate()-1);
-        $yesterday = $yesterday.getMonth() + "/" + $yesterday.getDate() + "/" + $yesterday.getFullYear();
+        $yesterday = ($yesterday.getMonth()) + "/" + $yesterday.getDate() + "/" + $yesterday.getFullYear();
         var $tomorrow = new Date($today);
         $tomorrow.setDate($tomorrow.getDate()+1);
-        $tomorrow = $tomorrow.getMonth() + "/" + $tomorrow.getDate() + "/" + $tomorrow.getFullYear();
+        $tomorrow = ($tomorrow.getMonth()) + "/" + $tomorrow.getDate() + "/" + $tomorrow.getFullYear();
         _setValue($sfm_pg_wo.txt_actualResolution,$tomorrow);
         _setValue($sfm_pg_wo.txt_actualResolutiontimebox,"12:00 AM");
         _setValue($sfm_pg_wo.txt_actualRestoration,$yesterday);
@@ -774,6 +781,17 @@ var $sfm_act_createCustomWizard = new function sfm_act_createCustomWizard() {
 		_assertExists(_span($sfmname));
 		_click(_span($sfmname));
 		};
+		
+		this.addsubtractdates = function($given_date,$num_of_days) {
+			//This function adds or subtracts calendar days from a given date and returns in the
+			//form of MM/DD/YYYY
+			var $result_date = new Date($given_date);
+	        $result_date.setDate($given_date.getDate()+$num_of_days);
+	        $result_date = ($result_date.getMonth()+1) + "/" + $result_date.getDate() + "/" + $result_date.getFullYear();
+	        return $result_date;
+		};
+		
+	
 
 	
 	
