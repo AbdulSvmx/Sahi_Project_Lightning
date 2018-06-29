@@ -9,6 +9,7 @@ var $sfm_act_navigation = new function sfm_act_navigation() {
      */
 	this.navigateToSfmCustomActions = function() {
 	 $bo_act_navigation.navigateToSvmxSetup();
+	 _selectDomain("/visual.force.com/");
 	 _click($bo_pg_servicemaxSetup.btn_serviceFlowManager);
 	 _click($bo_pg_servicemaxSetup.btn_sfmCustomAction);
 

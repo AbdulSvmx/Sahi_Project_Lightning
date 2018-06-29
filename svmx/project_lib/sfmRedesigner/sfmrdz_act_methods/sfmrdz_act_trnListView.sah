@@ -5,17 +5,119 @@
 
 var $sfmrdz_act_trnListView= new function sfmrdz_act_trnListView(){
 	
-	this.searchTransaction=function($trnName){
-		_setValue($sfmrdz_pg_transactionListView.txt_listFilter,$trnName);
+	/**
+	 * Function to launch the list views
+	 * chage wait based on $viewName
+	 */
+	this.LaunchListViewWindow= function($viewName){
+		_set($currentHomePageULR, window.location.href);
+		_log($currentHomePageULR);
+		var $orgId=$currentHomePageULR.substring(8,12);
+		_log($orgId);
+		var $ListViewWindow="https://svmxdev."+$orgId+".visual.force.com/apex/SFM_Designer#/"+$viewName+"-list";
+		_log($ListViewWindow);
+		_navigateTo($ListViewWindow);
+		_wait(15000);
+		//_wait(15000,_isVisible($sfmrdz_pg_trnListView.btn_heading_transaction));
+	};
+	
+	
+	/**
+	 * Function to search Transactions
+	 */
+	this.searchTrn=function($trnName){
+		_setValue($sfmrdz_pg_trnListView.txt_listFilter,$trnName);
+		_wait(10000,_isVisible(_link($trnName)));
+	};
+	
+	
+	/**
+	 * Function to select transaction Picklist/trnFilter
+	 */
+	this.trnTypePicklist=function($trnType){
+		_click($sfmrdz_pg_trnListView.txt_trnPicklist);
+		_wait(5000,_isVisible(_link($trnType)));
+		_click(_link($trnType));
+		_wait(10000);
+	};
+	
+	/**
+	 * Sorting on Transaction list View
+	 * common
+	*/
+	this.ColSort=function($colName){
+		var $linkList = _collect("_link","/.*/",_under(_div($colName)));
+		var $linkListSorted=$linkList.sort();
+		var $retVal=true;
+		for(var $i=0;$i<$linkList.length;$i++){
+			if($linkList[i]==$linkListSorted[i]){
+				$retVal=true;
+			}else{
+				_log("Actual link is: "+$linkList[i]);
+				_log("Expected link is: "+$linkListSorted[i]);
+				$retVal=false;
+				break;
+			}	
+		}
+		_assertTrue($retVal, "Links on "+$colName+" column are not sorted in order");
+		/* 
+		if($retVal==true){
+			_log("Links on" +$colName+" column are sorted in order");
+		}else{
+			_log("Links on "+$colName+" column are not sorted in order");
+		}*/
+	};
+	
+	/**
+	 * Search and click the action menu for mentioned object
+	 */
+	this.clickActionMenu=function($trnName){
+		$sfmrdz_act_trnListView.searchTrn($trnName);
+		$trnVal=_assertVisible(_link($trnName));
+		if($trnVal==true){
+			_click(_button("/Button Dropdown/",_near(_link($trnName))));
+		}else{
+			_log($trnName+" - not found.");
+			_assertTrue($trnVal,$trnName+" - not found.");
+		}
+		_wait(5000,_isVisible($sfmrdz_pg_trnListView.lnk_delete));
+	};
+	
+	/**
+	 * Delete transaction
+	 * Parameter: 
+	 * 			$trnType: is transaction standard or custom 
+	 * 			$trnName: Name of transaction
+	 */			
+	this.deleteCustomTrn=function($trnName){
+		// Search and Delete transaction
+		$sfmrdz_act_trnListView.clickActionMenu($trnName);
+		_click($sfmrdz_pg_trnListView.lnk_delete);
+		_wait(10000,_isVisible($sfmrdz_pg_trnListView.heading_confirmationAlert));
+		_assertExists($sfmrdz_pg_trnListView.heading_confirmationAlert);
+		_click($sfmrdz_pg_trnListView.btn_msgConfirm);
+		_wait(10000,_isVisible($sfmrdz_pg_trnListView.btn_closeTrnDeleteSucessMsg));
+		
+		//Assert Deletion
+		_assertExists($sfmrdz_pg_trnListView.btn_trnDeleteSucessMsg);
+		_click($sfmrdz_pg_trnListView.btn_closeTrnDeleteSucessMsg);
+		$sfmrdz_act_trnListView.clickActionMenu($trnName);
+		_AssertExists($sfmrdz_pg_trnListView.btn_msgNoResult);
 
 	};
 	
-	
-	this.transactionTypePicklist=function($trnType){
-		_click($sfmrdz_pg_transactionListView.txt_trnPicklist);
-		_wait(3000);
-		_click(_link($trnType));
+	/**
+	 * Search and clone transaction
+	 * Note: Yet to complete
+	 */
+	this.cloneTrn=function($trnName,$newTrnName){
+		$sfmrdz_act_trnListView.clickActionMenu($trnName);
+		_click($sfmrdz_pg_trnListView.lnk_clone);
+		_wait(5000,_isVisible($sfmrdz_pg_trnListView.heading_cloneTrn));
+		
 	};
+	
+	
 	
 	
 };

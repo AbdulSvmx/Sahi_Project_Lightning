@@ -66,14 +66,14 @@ var $sfm_act_customActions = new function sfm_act_customActions() {
 		_setValue($sfm_pg_customActions.txt_processingMessage,$processingMessage);
 		
 		_click($sfm_pg_customActions.btn_addParameter);
-		_setValue($sfm_pg_customActions.txt_parameterNameWS,$paramName);
-		_setSelected($sfm_pg_customActions.sel_parameterValueTypeWS,$paramValueType);
+		_setValue($sfm_pg_customActions.txt_parameterName,$paramName);
+		_setSelected($sfm_pg_customActions.sel_parameterValueType,$paramValueType);
 		if($paramValueType=='Value'){
 			
-			_setValue($sfm_pg_customActions.txt_parameterValueWS,$paramValue);
+			_setValue($sfm_pg_customActions.txt_parameterValue,$paramValue);
 			
 		}else{
-			_setSelected($sfm_pg_customActions.sel_parameterFieldNameWS,$paramValue);
+			_setSelected($sfm_pg_customActions.sel_parameterFieldName,$paramValue);
 		}
 		_click($sfm_pg_customActions.btn_saveCloseCA);
 		_assertExists(_span($actionId));
