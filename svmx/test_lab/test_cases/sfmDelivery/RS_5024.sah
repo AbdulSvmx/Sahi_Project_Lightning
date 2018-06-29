@@ -20,8 +20,8 @@ if(_getText(_span("/field-value/",_near(_span("Zip"))))==""){
 	_click($sfm_pg_wo.btn_wo_edit_save);
 	_wait(20000,isVisible($sfm_pg_wo.btn_wo_edit));
 }
-	_selectDomain($domainName);
-	_click(_button($sfmName));
+	//_selectDomain($domainName);
+	_click(_span($sfmName));
 	_selectDomain();
 	_wait(20000,_isVisible($sfm_pg_wo.btn_wo_edit));
 	if((_getText(_span("/field-value/",_near(_span("Longitude"))))!="") && (_getText(_span("/field-value/",_near(_span("Latitude"))))!="")){
