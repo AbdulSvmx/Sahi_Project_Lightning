@@ -59,4 +59,16 @@ var $sfm_act_lightningConfig = new function sfm_act_lightningConfig() {
 			_log("The Url is in classic");
 		}
 	};
+	this.navigateToObjectsInLightning = function($object_name) {
+		//Added by JJ
+		//This function navigates to the Object Manager in Lightning and then to a given object.
+		//This is Lightning specific.
+		_click($sfm_pg_wo.link_lightning_setup);
+		_click($sfm_pg_wo.link_object_manager);
+		_setValue($sfm_pg_wo.txt_quick_find,$object_name);
+		_assertVisible(_link($object_name));
+		_click(_link($object_name));
+		
+		
+	};
 };
