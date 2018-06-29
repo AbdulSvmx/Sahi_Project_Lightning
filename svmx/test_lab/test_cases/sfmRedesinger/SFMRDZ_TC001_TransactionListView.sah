@@ -27,9 +27,9 @@ $SFMRDZ_TC001_TransactionListView.start();
 	
 	//$sfmrdz_act_trnListView.searchTransaction("Account to Contact");
 	
-	$sfmrdz_act_trnListView.transactionTypePicklist("Recents (Edited in Last 7 days)");
+	$sfmrdz_act_trnListView.trnTypePicklist("Recents (Edited in Last 7 days)");
 	
-	$sfmrdz_act_trnListView.ColSort("TRANSACTION NAME");
+	$sfmrdz_act_trnListView.ColSort("Last Edited");
 	
 	
 	
