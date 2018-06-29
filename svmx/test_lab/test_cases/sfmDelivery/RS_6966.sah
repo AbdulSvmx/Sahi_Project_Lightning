@@ -28,6 +28,13 @@ if($wizardHeading.search($sfmName)!=-1){
 else{
 	_log("Fail");
 }
+_wait(3000);
+if(_exists(_span("Parts"))&&_exists(_span("Labor"))&&_exists(_span("Expenses"))&&_exists(_span("Travel"))){
+	_log("Pass::Child lines are displayed Correctly");
+}
+else{
+	_fail("Fail");
+}
 $rs_6966.end();
 
 

@@ -67,6 +67,7 @@ var $swatUsn = "shashikala.svmx@ge.com";
 var $swatPwd = "maxpl0re";
 
 
+
 // Appium
 
 var $appiumAdminUn="pqtadmin@bugbash.com";

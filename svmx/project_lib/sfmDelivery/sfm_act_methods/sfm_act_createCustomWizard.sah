@@ -758,19 +758,21 @@ var $sfm_act_createCustomWizard = new function sfm_act_createCustomWizard() {
 		_click($sfm_pg_wo.btn_next);
 		_click($sfm_pg_wo.txt_actualOnsiteResponse);
 		_click($sfm_pg_wo.cell_today);
+		_click($sfm_pg_wo.txt_actualInitialResponse);
+		_click($sfm_pg_wo.cell_today);
 		var $today = _getText($sfm_pg_wo.txt_actualOnsiteResponse);
 		var $yesterday = new Date($today);
         $yesterday.setDate($yesterday.getDate()-1);
-        $yesterday = $yesterday.getMonth() + "/" + $yesterday.getDate() + "/" + $yesterday.getFullYear();
+        $yesterday = ($yesterday.getMonth()+1) + "/" + $yesterday.getDate() + "/" + $yesterday.getFullYear();
         var $tomorrow = new Date($today);
         $tomorrow.setDate($tomorrow.getDate()+1);
-        $tomorrow = $tomorrow.getMonth() + "/" + $tomorrow.getDate() + "/" + $tomorrow.getFullYear();
+        $tomorrow = ($tomorrow.getMonth()+1) + "/" + $tomorrow.getDate() + "/" + $tomorrow.getFullYear();
         _setValue($sfm_pg_wo.txt_actualResolution,$tomorrow);
         _setValue($sfm_pg_wo.txt_actualResolutiontimebox,"12:00 AM");
         _setValue($sfm_pg_wo.txt_actualRestoration,$yesterday);
         _setValue($sfm_pg_wo.txt_actualRestorationtimebox,"12:00 AM");
         _setValue($sfm_pg_wo.lkup_account,$accNum);
-        _click(_mark($accNum));
+        _click(_div($accNum));
         _click($sfm_pg_wo.link_wopriority);
         _click(_link("Medium"));
 		_click($sfm_pg_wo.btn_wo_save);
@@ -784,6 +786,17 @@ var $sfm_act_createCustomWizard = new function sfm_act_createCustomWizard() {
 		_assertExists(_span($sfmname));
 		_click(_span($sfmname));
 		};
+		
+		this.addsubtractdates = function($given_date,$num_of_days) {
+			//This function adds or subtracts calendar days from a given date and returns in the
+			//form of MM/DD/YYYY
+			var $result_date = new Date($given_date);
+	        $result_date.setDate($given_date.getDate()+$num_of_days);
+	        $result_date = ($result_date.getMonth()+1) + "/" + $result_date.getDate() + "/" + $result_date.getFullYear();
+	        return $result_date;
+		};
+		
+	
 
 	
 	
