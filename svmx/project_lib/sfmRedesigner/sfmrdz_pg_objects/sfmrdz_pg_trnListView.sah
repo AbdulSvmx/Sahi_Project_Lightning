@@ -1,0 +1,72 @@
+/**
+ * Transaction list view page object repository
+ */
+
+
+
+var $sfmrdz_pg_trnListView=new function sfmrdz_pg_trnListView(){
+	
+	this.txt_listFilter=_textbox("ListFilter");
+	this.txt_trnPicklist=_textbox("Input Picklist__input slds-input slds-combobox__input");
+	this.btn_heading_transaction=_div("Transactions");
+	
+	
+	this.btn_heading_trnCol=_div("TRANSACTION NAME");
+	this.btn_heading_SourceObjCol=_div("Source Object");
+	this.btn_heading_TDTOCol=_div("TODO_TARGET_OBJECT");
+	this.btn_heading_typeCol=_div("Type");
+	this.btn_heading_tagsOCol=_div("Tags");
+	this.btn_heading_whereUsedCol=_div("Where Used");
+	this.btn_heading_statusCol=_div("Status");
+	this.btn_heading_lastEditedCol=_div("Last Edited");		
+	this.btn_NewTrn=_button("New SFM Transaction");
+	this.btn_backtoSetup=_button("Back To Setup Home");
+	this.btn_heading_sfmTrnHome=_div("SFM Transaction & Docs DesignerHome");
+	this.btn_sfmTrnHomeIcon=_div("MediaObject__figure slds-media__figure");
+	this.btn_help=_link("/.*/",_near(this.btn_backtoSetup));
+	
+	//Action menu items
+	this.lnk_clone=_link("Clone");
+	this.lnk_delete=_link("Delete");
+	this.btn_msgNoResult=_div("No results have been found.");
+	
+	
+	//Confirmation message items on delete window 
+	this.heading_confirmationAlert=_heading2("Are you sure you want to delete this Transactions?");
+	this.heading_usedTrnMessage=_div("Below are the different areas where this transaction is being used:");
+	this.btn_msgCancel=_button("Cancel");
+	this.btn_msgConfirm=_button("Confirm");
+	this.btn_msgClose=_button("Close");
+	
+	//Confirmation message items on tranction window 
+	this.btn_trnDeleteSucessMsg=_heading2("SFM TODO_TAG");
+	this.btn_closeTrnDeleteSucessMsg=_highlight(_button("Close",_near(this.$btn_trnDeleteSucessMsg)));
+	
+	//Clone Window items
+	this.heading_cloneTrn=_heading2("/Clone: /");
+	this.label_trnType=_label("Type");
+	this.label_trnDescription=_label("Description");
+	this.label_trnTags=_span("Tags");
+	this.txt_trnType=_textbox("entitySubType");
+	this.txt_trnDescription=_textarea("entityDescription");
+	this.txt_searchTag=_textbox("entitySearch");
+	this.btn_trnCloneCancel=_button("Cancel");
+	this.btn_trnCloneSave=_button("Save");
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+};

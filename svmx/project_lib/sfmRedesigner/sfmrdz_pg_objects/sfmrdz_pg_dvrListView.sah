@@ -1,0 +1,12 @@
+/**
+* Data validation page object reporsitory
+*/
+
+
+var $sfmrdz_pg_dvrListView = new function sfmrdz_pg_dvrListView(){
+	
+	this.btn_Heading_drvHeader=_div("Data Validation Rules");
+	this.btn_dvrFilter =_textbox("/combobox__input/");
+	this.link_RecentlyUsed=_link("Recently Used");
+	
+};
