@@ -18,20 +18,23 @@ $SFMRDZ_TC001_TransactionListView.start();
 	var $url="http://test.salesforce.com";
 	var $un="designer2@test.com";
 	var $pwd="designer@2";
-	//var $transactionULR;
+
 
 	$bo_act_login.login($url,$un,$pwd);
 	
-	$sfmrdz_act_trnListView.LaunchListViewWindow("dvr");
-	_wait(5000);
-	
-	$sfmrdz_act
-	//$sfmrdz_act_trnListView.searchTransaction("Account to Contact");
-	
-	//$sfmrdz_act_trnListView.trnTypePicklist("Standard Expression");
-	
-	//$sfmrdz_act_trnListView.ColSort("DATA VALIDATION RULES NAME");
-	
+	$sfmrdz_act_common.LaunchListViewWindow("transaction");
 
+	
+	//$sfmrdz_act_dvrListView.selectFilter();
+	//$sfmrdz_act_common.searchObj("Account to Contact");
+	
+	$sfmrdz_act_common.typePicklist("Recents (Edited in Last 7 days)");
+	
+	$sfmrdz_act_common.colSort("TRANSACTION NAME");
+	
+	//$sfmrdz_act_common.clickActionMenu("Adjusted Value Required");
+
+	$sfmrdz_act_trnListView.deleteCustomObj("Cloned_TDM016");
+	
 
 $SFMRDZ_TC001_TransactionListView.end();
