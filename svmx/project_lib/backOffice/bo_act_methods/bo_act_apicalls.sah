@@ -1,0 +1,96 @@
+
+/*
+ * Owner : Meghana Rao
+ * This code is to push the data from Salesforce REST API calls from back end in Lightning
+ */
+
+var $bo_apicalls = new function bo_apicalls() {
+
+	/**
+	 * This function will create the Access token for the given org.
+	 */
+	this.create_accesstoken = function()
+	
+	{
+	     var $username = $bac_un;
+	     var $password = $bac_pwd;
+	     var $clientId = $client_id;
+	     var $consumerSecret = $client_secret;
+	     //Authorization endpoint
+	     var $authEndPoint = "https://test.salesforce.com/services/oauth2/token";
+	     //response_type must be set to token
+	     var $responseType = "token";
+	     //This is the callback URL from the connected app
+	     var $redirectURI = "https://"+$orginstance+".lightning.force.com";
+	     //Construct the URL with the required parameters
+	     var $requestURL = ""+$authEndPoint+"?grant_type=password&client_id="+$clientId+"&client_secret="+$consumerSecret+"&username="+$username+"&password="+$password+"&response_type="+$responseType+"&redirect_uri="+$redirectURI+"";
+		 $request = new RESTRequest();
+		 $request.setURL($requestURL);
+		 $response = $request.submit("post");
+		 var $AuthCode = $response.getBodyAsString(); //returns the content of the body using UTF-8 encoding
+		 var $access_token = JSON.parse($AuthCode);
+		 var $access_value = $access_token['access_token'];
+	     _log($access_value);	
+	     return $access_value;
+		
+	};
+	
+	
+	/**
+	 * This function will create data from REST API calls for the given org.
+	 */
+	this.createdata_fromAPI = function($objectname, $body, $access_value){	     
+	     	$request1 = new RESTRequest();	
+			$request1.setURL("https://"+$orginstance+".salesforce.com/services/data/v39.0/sobjects/"+$objectname+"");
+			$request1.setCredentials($bac_un, $bac_pwd);
+			$request1.setHeader("Authorization","OAuth "+$access_value+"");
+			$request1.setHeader("Content-Type", "application/json");
+			$request1.setBody($body);
+			$response1 = $request1.submit("POST");
+	     
+			// To get the ID value from the Response.
+			var $AuthCode_data = $response1.getBodyAsString(); //returns the content of the body using UTF-8 encoding
+			var $AuthCode_data2 = $response1.getBodyAsString("ISO-8859-1");
+			var $json_value = JSON.parse($AuthCode_data);
+			var $Idvalue = $json_value['id'];
+			_log($Idvalue);
+		
+			return $Idvalue;
+		
+	};
+	/**
+	 * This function will DELETE data from ORG using REST API calls.
+	 */
+	
+	this.deletedata_fromAPI = function($objectname,$valuename,$access_value){
+		
+		var $query = "Select+Id+from+"+$objectname+"+where+Name+=+'"+$valuename+"'";    
+		_log($query);
+		
+		$request1 = new RESTRequest();	
+		$request1.setURL("https://"+$orginstance+".salesforce.com/services/data/v49.0/query/?q="+$query+"");
+		$request1.setCredentials($bac_un, $bac_pwd);
+		$request1.setHeader("Authorization","OAuth "+$access_value+"");
+		$request1.setHeader("Content-Type", "application/json");
+		$request1.setBody($body);
+		$response1 = $request1.submit("get");
+		
+		var $AuthCode_data = $response1.getBodyAsString(); //returns the content of the body using UTF-8 encoding
+		var $AuthCode_data2 = $response1.getBodyAsString("ISO-8859-1");
+		var $json_value = JSON.parse($AuthCode_data);
+		var $records = $json_value['records'];
+		var $strRecord = JSON.stringify($records);
+		var $Idvalue = $strRecord.replace(/\[|\]/g,"").substring($strRecord.lastIndexOf(":\"")+1,$strRecord.lastIndexOf("\"")-1);
+		_log($Idvalue);	// This value must be extracted from the JSON
+	
+		// Sample Delete operation for the REST API
+		$request_delete = new RESTRequest();	
+		$request_delete.setURL("https://"+$orginstance+".salesforce.com/services/data/v42.0/sobjects/"+$objectname+"/"+$Idvalue+"");
+		$request_delete.setCredentials("meghana.rao@servicemax.com", "cloud_103");
+		$request_delete.setHeader("Authorization", "OAuth "+$access_value);
+		$response_delete = $request_delete.submit("DELETE");
+
+		
+	};
+
+};
