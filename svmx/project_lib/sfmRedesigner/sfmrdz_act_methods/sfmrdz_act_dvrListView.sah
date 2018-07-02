@@ -1,0 +1,17 @@
+/**
+*
+
+*/
+
+var $sfmrdz_act_dvrListView = new function sfmrdz_act_dvrListView(){
+	
+
+	this.selectFilter=new function(){
+		_click($sfmrdz_pg_dvrListView.btn_dvrFilter);
+		_wait(5000);
+		_click($sfmrdz_pg_dvrListView.link_RecentlyUsed);
+		
+	}
+	
+	
+};

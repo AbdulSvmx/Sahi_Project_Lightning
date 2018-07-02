@@ -21,7 +21,7 @@ var $sfmrdz_act_trnListView= new function sfmrdz_act_trnListView(){
 		_wait(15000);
 		//_wait(15000,_isVisible($sfmrdz_pg_trnListView.btn_heading_transaction));
 	};
-	
+
 	
 	/**
 	 * Function to search Transactions

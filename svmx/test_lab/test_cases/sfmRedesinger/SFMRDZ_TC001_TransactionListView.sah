@@ -23,12 +23,14 @@ $SFMRDZ_TC001_TransactionListView.start();
 	$bo_act_login.login($url,$un,$pwd);
 	
 	$sfmrdz_act_trnListView.LaunchListViewWindow("dvr");
+	_wait(5000);
 	
+	$sfmrdz_act
 	//$sfmrdz_act_trnListView.searchTransaction("Account to Contact");
 	
-	$sfmrdz_act_trnListView.trnTypePicklist("Standard Expression");
+	//$sfmrdz_act_trnListView.trnTypePicklist("Standard Expression");
 	
-	$sfmrdz_act_trnListView.ColSort("DATA VALIDATION RULES NAME");
+	//$sfmrdz_act_trnListView.ColSort("DATA VALIDATION RULES NAME");
 	
 
 
