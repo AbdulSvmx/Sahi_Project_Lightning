@@ -1,6 +1,5 @@
-/*
+/**
  * 
-
 ///////////////////////////////////
 //
 //Author	:- 	Anand Kakhandaki
@@ -23,17 +22,16 @@ $SFMRDZ_TC001_TransactionListView.start();
 
 	$bo_act_login.login($url,$un,$pwd);
 	
-	$sfmrdz_act_trnListView.LaunchListViewWindow("transaction");
+	$sfmrdz_act_trnListView.LaunchListViewWindow("dvr");
+	_wait(5000);
 	
+	$sfmrdz_act
 	//$sfmrdz_act_trnListView.searchTransaction("Account to Contact");
 	
-	$sfmrdz_act_trnListView.trnTypePicklist("Recents (Edited in Last 7 days)");
+	//$sfmrdz_act_trnListView.trnTypePicklist("Standard Expression");
 	
-	$sfmrdz_act_trnListView.ColSort("Last Edited");
+	//$sfmrdz_act_trnListView.ColSort("DATA VALIDATION RULES NAME");
 	
-	
-	
-	//_closeWindow();
 
 
 $SFMRDZ_TC001_TransactionListView.end();

@@ -21,6 +21,9 @@ var $sfmrdz_pg_trnListView=new function sfmrdz_pg_trnListView(){
 	this.btn_heading_lastEditedCol=_div("Last Edited");		
 	this.btn_NewTrn=_button("New SFM Transaction");
 	this.btn_backtoSetup=_button("Back To Setup Home");
+	this.btn_heading_sfmTrnHome=_div("SFM Transaction & Docs DesignerHome");
+	this.btn_sfmTrnHomeIcon=_div("MediaObject__figure slds-media__figure");
+	this.btn_help=_link("/.*/",_near(this.btn_backtoSetup));
 	
 	//Action menu items
 	this.lnk_clone=_link("Clone");
@@ -37,7 +40,7 @@ var $sfmrdz_pg_trnListView=new function sfmrdz_pg_trnListView(){
 	
 	//Confirmation message items on tranction window 
 	this.btn_trnDeleteSucessMsg=_heading2("SFM TODO_TAG");
-	this.btn_closeTrnDeleteSucessMsg=_highlight(_button("Close",_near($btn_TrnDeleteSucessMsg)));
+	this.btn_closeTrnDeleteSucessMsg=_highlight(_button("Close",_near(this.$btn_trnDeleteSucessMsg)));
 	
 	//Clone Window items
 	this.heading_cloneTrn=_heading2("/Clone: /");
