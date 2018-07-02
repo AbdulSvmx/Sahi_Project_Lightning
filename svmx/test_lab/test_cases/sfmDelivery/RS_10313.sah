@@ -17,9 +17,32 @@ var $wo_picklist = "order status";
 $bo_act_login.login($g_url,$bac_un,$bac_pwd);
 $sfm_act_lightningConfig.switchToLightning();
 
+
 //Navigate to Object manager and navigate to work order object.
 $sfm_act_lightningConfig.navigateToObjectsInLightning($object_name);
+_selectWindow("Work Order | Salesforce");
 _click(_link("Fields & Relationships"));
-_setValue(_searchbox("globalQuickfind"), "$wo_picklist");
 
+
+_setValue(_searchbox("globalQuickfind"),$wo_picklist);
+_click(_link($wo_picklist));
+_selectDomain("lightningautomation--cfg2.cs21.my.salesforce.com");
+_selectWindow();
+//Delete existing dependencies and create new one.
+if (assertExists($sfm_pg_wo.ordertype_dependency))
+{
+	_click($sfm_pg_wo.delete_link_picklist);
+	   
+	_expectConfirm($sfm_pg_wo.delete_link_picklist);
+   
+}
+_click(_button(" New "));
+_setSelected($sfm_pg_wo.picklist_controller, "Order Status");
+_setSelected($sfm_pg_wo.picklist_dependent, "Order Type");
+_click($sfm_pg_wo.btn_continue);
+$sfm_act_lightningConfig.addDependentControllingPicklistValues($wo_picklist,"Open", "Depot Repair");
+$sfm_act_lightningConfig.addDependentControllingPicklistValues($wo_picklist,"Open", "Field Service");
+$sfm_act_lightningConfig.addDependentControllingPicklistValues($wo_picklist,"Closed", "Field Service");
+_expectConfirm($sfm_pg_wo.btn_save_dep_picklist);
+_click($sfm_pg_wo.btn_save_dep_picklist);
 

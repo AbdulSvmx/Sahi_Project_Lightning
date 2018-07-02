@@ -69,9 +69,17 @@ var $sfm_pg_wo = new function sfm_pg_wo() {
 	
 	//Added by JJ for Object Manager navigations in Lightning.
 	this.link_lightning_setup = _div("Setup");
+	this.link_currentapp_setup = _div("Setup for current app");
 	this.link_object_manager = _span("Object Manager");
 	this.txt_quick_find = _searchbox("globalQuickfind");
 	this.link_wo_object = _link("/Work Order/");
-	
+	this.ordertype_dependency = tableHeader("Order Type",_under(_tableHeader("Dependent Field")));
+	this.delete_link_picklist = _link("Del",_leftOf(_tableHeader("Order Type")));
+	this.btn_new_fielddependency = _button("New",_near(_heading3("Field Dependencies")));
+	this.picklist_controller = _select("controller");
+	this.picklist_dependent = _select("dependent");
+	this.btn_continue = _submit("Continue");
+	this.btn_include_values = _button("Include Values");
+	this.btn_save_dep_picklist = _submit(" Save ");
 	
 };

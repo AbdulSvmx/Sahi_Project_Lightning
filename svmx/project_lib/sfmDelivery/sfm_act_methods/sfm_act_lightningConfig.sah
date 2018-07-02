@@ -64,11 +64,26 @@ var $sfm_act_lightningConfig = new function sfm_act_lightningConfig() {
 		//This function navigates to the Object Manager in Lightning and then to a given object.
 		//This is Lightning specific.
 		_click($sfm_pg_wo.link_lightning_setup);
+		_click($sfm_pg_wo.link_currentapp_setup);
+		_selectWindow("Home | Salesforce");
+		_wait(3000,isVisible($sfm_pg_wo.link_object_manager));
 		_click($sfm_pg_wo.link_object_manager);
+		_selectWindow("/Object Manager/");
 		_setValue($sfm_pg_wo.txt_quick_find,$object_name);
-		_assertVisible(_link($object_name));
 		_click(_link($object_name));
 		
 		
 	};
+	this.addDependentControllingPicklistValues = function($ctrl_picklist_name,$ctrl_picklist_value,$dep_picklist_value) {
+		//Added by JJ.
+		//This function adds a dependent picklist value to the controlling picklist value.
+		
+		var $header_row = _getText(_row("/"+$ctrl_picklist_name+":/"));
+		var $header_list = $header_row.split(" ");
+		
+		var $index = $header_list.indexOf($ctrl_picklist_value);
+		var $index = $index - 2;
+		_click(_cell($dep_picklist_value+"["+$index+"]"));
+		_click($sfm_pg_wo.btn_include_values);
+	}
 };
