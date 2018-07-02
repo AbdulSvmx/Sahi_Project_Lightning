@@ -3,7 +3,8 @@
 
 */
 
-var $sfmrdz_act_dvrListView = new function sfmrdz_act_dvrListView(){
+/*
+ var $sfmrdz_act_dvrListView = new function sfmrdz_act_dvrListView(){
 	
 
 	this.selectFilter=new function(){
@@ -15,3 +16,4 @@ var $sfmrdz_act_dvrListView = new function sfmrdz_act_dvrListView(){
 	
 	
 };
+*/

@@ -34,11 +34,12 @@ for (var int = 0; int < $urlArray.length; int++) {
 		try {
 			if(skipFlag != 1){
 			_click($span[$s]);
+			_log("in Span ******************* "+$span[$s]+"****");
 			}
 		} catch (e) {
 
 		}
-		_log("in spoan ******************* ");
+		
 		_setStrictVisibilityCheck(true);
 		if (_isVisible(_span("Add"))) {
 			_click(_span("Add"));
@@ -119,17 +120,17 @@ for (var int = 0; int < $urlArray.length; int++) {
 	}
 	_wait(3000)
 	
-	_log("SCANNED PAGE : " + $urlArray[int]
-			+ " : ************************************")
+	_log("************************************");
 	var $allAlerts = _lastAlert(true);
 	if ($allAlerts == null || $allAlerts == "") {
-		_log("SCANNED PAGE : "+$urlArray[int]+"No Alerts Caught")
+		_log("SCANNED PAGE : "+$urlArray[int]+" No Alerts Caught")
 	} else {
 		_logExceptionAsFailure("SCANNED PAGE : "+$urlArray[int]+"Alerts Caught : " + $allAlerts);
 		 _takeScreenShot();
 		_clearLastAlert();
 
 	}
+	_log("************************************");
 	//	_assertEqual("AttackConfirmed", _lastAlert()); // verify the actual confirm message
 
 }
