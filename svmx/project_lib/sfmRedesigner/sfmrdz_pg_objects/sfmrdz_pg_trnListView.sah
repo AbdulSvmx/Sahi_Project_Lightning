@@ -37,7 +37,7 @@ var $sfmrdz_pg_trnListView=new function sfmrdz_pg_trnListView(){
 	
 	//Confirmation message items on tranction window 
 	this.btn_trnDeleteSucessMsg=_heading2("SFM TODO_TAG");
-	this.btn_closeTrnDeleteSucessMsg=_highlight(_button("Close",_near($btn_TrnDeleteSucessMsg)));
+	this.btn_closeTrnDeleteSucessMsg=_highlight(_button("Close",_near(this.$btn_trnDeleteSucessMsg)));
 	
 	//Clone Window items
 	this.heading_cloneTrn=_heading2("/Clone: /");

@@ -29,7 +29,7 @@ $SFMRDZ_TC001_TransactionListView.start();
 	
 	$sfmrdz_act_trnListView.trnTypePicklist("Recents (Edited in Last 7 days)");
 	
-	$sfmrdz_act_trnListView.ColSort("Last Edited");
+	$sfmrdz_act_trnListView.ColSort("TRANSACTION NAME");
 	
 	
 	

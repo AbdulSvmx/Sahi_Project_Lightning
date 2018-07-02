@@ -17,7 +17,8 @@ var $sfmrdz_act_trnListView= new function sfmrdz_act_trnListView(){
 		var $ListViewWindow="https://svmxdev."+$orgId+".visual.force.com/apex/SFM_Designer#/"+$viewName+"-list";
 		_log($ListViewWindow);
 		_navigateTo($ListViewWindow);
-		_wait(15000,_isVisible($sfmrdz_pg_trnListView.btn_heading_transaction));
+		_wait(15000);
+		//_wait(15000,_isVisible($sfmrdz_pg_trnListView.btn_heading_transaction));
 	};
 	
 	
@@ -46,10 +47,16 @@ var $sfmrdz_act_trnListView= new function sfmrdz_act_trnListView(){
 	*/
 	this.ColSort=function($colName){
 		var $linkList = _collect("_link","/.*/",_under(_div($colName)));
-		var $linkListSorted=$linkList.sort();
-		var $retVal=true;
+		var $linkListName=new Array($linkList.length);
 		for(var $i=0;$i<$linkList.length;$i++){
-			if($linkList[i]==$linkListSorted[i]){
+			$linkListName[$i]=_getText($linkList[$i]);
+			_log($linkListName[$i]);
+		}
+		var $linkListSorted=$linkListName.sort();
+		var $retVal=false;
+
+		for(var $i=0;$i<$linkListName.length;$i++){			
+			if($linkListName[i]==$linkListSorted[i]){;
 				$retVal=true;
 			}else{
 				_log("Actual link is: "+$linkList[i]);
@@ -59,12 +66,7 @@ var $sfmrdz_act_trnListView= new function sfmrdz_act_trnListView(){
 			}	
 		}
 		_assertTrue($retVal, "Links on "+$colName+" column are not sorted in order");
-		/* 
-		if($retVal==true){
-			_log("Links on" +$colName+" column are sorted in order");
-		}else{
-			_log("Links on "+$colName+" column are not sorted in order");
-		}*/
+
 	};
 	
 	/**
