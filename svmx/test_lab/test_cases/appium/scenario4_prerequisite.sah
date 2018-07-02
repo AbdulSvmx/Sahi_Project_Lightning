@@ -1,0 +1,36 @@
+//Meghana Rao
+
+/*
+ * PRE Requisites to be run in the org before running other scripts - LIGHTNING CODE
+ */
+var $pre_requisite= _testcase("scenario4_pre","Creating Pre-Requisite Data in the Org");
+$pre_requisite.start();
+_setSpeed($g_stepSpeed);
+$bo_act_login.login($g_url, $bac_un, $bac_pwd);
+var $access_value = $bo_apicalls.create_accesstoken();
+
+
+//This will create the Account for the given org
+var $account_object = "Account";
+var $accountname = $bo_act_common.generateRandomName("Account");
+var $account_body = "{\"Name\": \""+$accountname+"\" }";
+
+var $account_id = $bo_apicalls.createdata_fromAPI($account_object,$account_body, $access_value);
+
+// Create Location under the given account
+
+var $location_object = "SVMXC__Site__c";
+var $locname = $bo_act_common.generateRandomName("Loc");
+var $loc_body = "{\"SVMXC__Account__c\": \""+$account_id+"\", \"Name\": \""+$locname+"\", \"SVMXC__Street__c\": \"Bangalore Area\",\"SVMXC__Country__c\": \"India\"}";
+
+var $location_id = $bo_apicalls.createdata_fromAPI($location_object,$loc_body, $access_value);
+
+
+// Create Installed Product under the given Account and Location
+
+var $IB_object = "SVMXC__Installed_Product__c";
+var $IBname = $bo_act_common.generateRandomName("IB");
+var $IBnumber = $bo_act_common.generateRandomName("IBnum");
+var $IB_body = "{\"SVMXC__Company__c\": \""+$account_id+"\", \"Name\": \""+$IBname+"\", \"SVMXC__Serial_Lot_Number__c\": \""+$IBnumber+"\",\"SVMXC__Country__c\": \"India\", \"SVMXC__Site__c\": \""+$location_id+"\" }";
+
+var $IB_id = $bo_apicalls.createdata_fromAPI($IB_object,$IB_body, $access_value);

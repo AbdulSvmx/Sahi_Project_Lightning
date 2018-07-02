@@ -19,6 +19,10 @@ var $g_url = "https://test.salesforce.com/";
 var $g_un = "bhupen@back17.com";// "bhupendra.s@dev.tool2.com";
 var $g_pwd = "smax@123";
 
+// THIS IS SPECIFIC TO A GIVEN ORG - DONOT TOUCH
+var $client_id = "3MVG9zZht._ZaMulZsbNptzpIDmNd6xyt0zAOuNU_dtpTTg4DHSn9UmdBySUZS3_VOGeiWttaj3moLMuLIrje";
+var $client_secret = "1938983484606764552";
+var $orginstance = "cs21";
 
 // PLEASE DO NOT Use separate names for DEV and Base UN and PWD , instead just change the base/dev credentials in $bac_un & $bac_pwd, while committing to jenkins, also follow the same procedures.
 
