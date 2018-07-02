@@ -66,4 +66,12 @@ var $sfm_pg_wo = new function sfm_pg_wo() {
 	this.link_actualInitialResp = _link(0,_rightOf(_label("Actual Initial Response")));
 	this.txt_case = _textbox("Case");
 	this.sel_orderStatus = _select(0,_rightOf(_label("Order Status")));
+	
+	//Added by JJ for Object Manager navigations in Lightning.
+	this.link_lightning_setup = _div("Setup");
+	this.link_object_manager = _span("Object Manager");
+	this.txt_quick_find = _searchbox("globalQuickfind");
+	this.link_wo_object = _link("/Work Order/");
+	
+	
 };

@@ -772,7 +772,8 @@ var $sfm_act_createCustomWizard = new function sfm_act_createCustomWizard() {
         _setValue($sfm_pg_wo.txt_actualRestoration,$yesterday);
         _setValue($sfm_pg_wo.txt_actualRestorationtimebox,"12:00 AM");
         _setValue($sfm_pg_wo.lkup_account,$accNum);
-        _click(_div($accNum));
+        _keyPress($sfm_pg_wo.lkup_account,13);
+        _click(_link($accNum));
         _click($sfm_pg_wo.link_wopriority);
         _click(_link("Medium"));
 		_click($sfm_pg_wo.btn_wo_save);
