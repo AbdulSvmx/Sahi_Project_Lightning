@@ -7,7 +7,8 @@ var $sfmrdz_act_trnListView= new function sfmrdz_act_trnListView(){
 	
 	/**
 	 * Function to launch the list views
-	 * chage wait based on $viewName
+	 * change wait based on $viewName
+	 * Move to common
 	 */
 	this.LaunchListViewWindow= function($viewName){
 		_set($currentHomePageULR, window.location.href);
@@ -24,6 +25,7 @@ var $sfmrdz_act_trnListView= new function sfmrdz_act_trnListView(){
 	
 	/**
 	 * Function to search Transactions
+	 * Move to Common
 	 */
 	this.searchTrn=function($trnName){
 		_setValue($sfmrdz_pg_trnListView.txt_listFilter,$trnName);
@@ -33,6 +35,7 @@ var $sfmrdz_act_trnListView= new function sfmrdz_act_trnListView(){
 	
 	/**
 	 * Function to select transaction Picklist/trnFilter
+	 * Move to common
 	 */
 	this.trnTypePicklist=function($trnType){
 		_click($sfmrdz_pg_trnListView.txt_trnPicklist);
@@ -43,7 +46,7 @@ var $sfmrdz_act_trnListView= new function sfmrdz_act_trnListView(){
 	
 	/**
 	 * Sorting on Transaction list View
-	 * common
+	 * Move to common
 	*/
 	this.ColSort=function($colName){
 		var $linkList = _collect("_link","/.*/",_under(_div($colName)));
@@ -66,7 +69,6 @@ var $sfmrdz_act_trnListView= new function sfmrdz_act_trnListView(){
 			}	
 		}
 		_assertTrue($retVal, "Links on "+$colName+" column are not sorted in order");
-
 	};
 	
 	/**
