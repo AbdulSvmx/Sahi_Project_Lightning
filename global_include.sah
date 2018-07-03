@@ -56,6 +56,7 @@ var $url_checklist = "https://test.salesforce.com";
  var $sfmUsn = "sysadmin01@sfdautomation.com"; // base
  var $sfmPwd = "Maxplore3";
  var $domain_name = "lightningautomation";
+ var $wizard_name = "SFMD Lightning Automation";
 
 // DC Global Variables
 var $dc_org = $orgtype;

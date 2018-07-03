@@ -397,4 +397,17 @@ var $bo_act_navigation = new function bo_act_navigation() {
     	   _selectDomain();
     	   
        };
+       
+       this.findIfCustomProcessExists = function($processName){
+    	   _click($bo_pg_sfmTransactionAndDesigner.btn_yourCustomSfmTransactions);
+    	   _setValue($bo_pg_sfmTransactionAndDesigner.txt_yourCustomSfmTransactionsQuickFind,$processName);
+    	   _wait(10000);
+    	   if (_exists(_f("main").s_label($processName))){
+    		   return true;
+    	   }
+    	   else {
+    		   return false;
+    	   }
+			
+       };
 };
