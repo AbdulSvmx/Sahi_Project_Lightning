@@ -140,8 +140,10 @@ function captureAttack() {
 	} else {
 		_logExceptionAsFailure("SCANNED PAGE : " + $urlArray[int]
 		+ "Alerts Caught : " + $allAlerts);
+		_lockWindow();
 		_focusWindow();
-		_takeScreenShot();
+		_takePageScreenShot();
+		_unlockWindow();
 		_clearLastAlert();
 
 	}
