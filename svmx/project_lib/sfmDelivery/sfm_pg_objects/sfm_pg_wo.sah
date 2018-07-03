@@ -1,5 +1,5 @@
 var $sfm_pg_wo = new function sfm_pg_wo() {
-	this.tab_all = _div("App Launcher");//Changed for lightning 21st June 2018
+	this.tab_all = _submit("App Launcher")//_div("App Launcher");//Changed for lightning 21st June 2018
 	this.btn_wo_new = _link("New");//Changed for lightning
 	this.btn_wo_continue= _submit("Continue");
 	this.btn_woStatus = _select(0,_rightOf(_label("Order Status")));
