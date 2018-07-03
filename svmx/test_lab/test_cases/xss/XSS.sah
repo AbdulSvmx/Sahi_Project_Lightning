@@ -2,18 +2,20 @@
 var $attackTag = "<img  src=p onerror=alert(AttackConfirmed)>";
 
 //Pass the URl/Page Locations
-var $urlArray = [
-"https://svmxc.na40.visual.force.com/apex/CONF_QuestionBankManager",
-		"https://svmxc.na40.visual.force.com/apex/SVMXC__ProductIQSetup",
-		"https://svmxc.na40.visual.force.com/apex/TMST_TimesheetManager",
-		
-		"https://svmxc.na40.visual.force.com/apex/PREV_SetupPMPlanTemplate" ];
+var $urlArray = $excel.readFromCustomExcel("../xss/xss_excelData/xssData.xlsx", "Sheet1", false, true)
+
+//[
+//"https://svmxc.na40.visual.force.com/apex/CONF_QuestionBankManager",
+//		"https://svmxc.na40.visual.force.com/apex/SVMXC__ProductIQSetup",
+//		"https://svmxc.na40.visual.force.com/apex/TMST_TimesheetManager",
+//		
+//		"https://svmxc.na40.visual.force.com/apex/PREV_SetupPMPlanTemplate" ];
 
 $bo_act_login.login("https://login.salesforce.com", "yadav.thyagaraj@ge.com",
 		"Svmx123#")
 
 for (var int = 0; int < $urlArray.length; int++) {
-	_navigateTo($urlArray[int]);
+	_navigateTo($urlArray[int]["URL"]);
 	_wait(5000);
 	_continueOnError();
 
