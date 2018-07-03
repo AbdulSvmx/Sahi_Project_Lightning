@@ -28,13 +28,13 @@ $SFMRDZ_TC001_TransactionListView.start();
 	//$sfmrdz_act_dvrListView.selectFilter();
 	//$sfmrdz_act_common.searchObj("Account to Contact");
 	
-	$sfmrdz_act_common.typePicklist("Recents (Edited in Last 7 days)");
+	//$sfmrdz_act_common.typePicklist("Recents (Edited in Last 7 days)");
 	
-	$sfmrdz_act_common.colSort("TRANSACTION NAME");
+	//$sfmrdz_act_common.colSort("TRANSACTION NAME");
 	
-	//$sfmrdz_act_common.clickActionMenu("Adjusted Value Required");
+	//$sfmrdz_act_common.clickActionMenu("Cloned_TDM016");
 
-	$sfmrdz_act_trnListView.deleteCustomObj("Cloned_TDM016");
+	//$sfmrdz_act_trnListView.deleteCustomObj("Cloned_TDM016");
 	
 
 $SFMRDZ_TC001_TransactionListView.end();

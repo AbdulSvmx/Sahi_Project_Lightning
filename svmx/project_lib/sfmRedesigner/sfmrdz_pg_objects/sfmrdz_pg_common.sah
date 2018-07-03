@@ -13,8 +13,8 @@ var $sfmrdz_pg_common=new function sfmrdz_pg_common(){
 	
 	
 	//Action menu items
-	this.lnk_clone=_link("Clone");
-	this.lnk_delete=_link("Delete");
+	this.link_clone=_link("Clone");
+	this.link_delete=_link("Delete");
 	
 	
 	//Confirmation message items on delete window
