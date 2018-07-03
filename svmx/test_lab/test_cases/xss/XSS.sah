@@ -2,130 +2,148 @@
 var $attackTag = "<img  src=p onerror=alert(AttackConfirmed)>";
 
 //Pass the URl/Page Locations
-var $urlArray = $excel.readFromCustomExcel("../xss/xss_excelData/xssData.xlsx", "Sheet1", false, true)
+var $urlArray = $excel.readFromCustomExcel("../xss/xss_excelData/xssData.xlsx",
+		"Sheet1", false, true)
 
-$bo_act_login.login("https://login.salesforce.com", "yadav.thyagaraj@ge.com",
+		$bo_act_login.login("https://login.salesforce.com", "yadav.thyagaraj@ge.com",
 		"Svmx123#")
 
-for (var int = 0; int < $urlArray.length; int++) {
-	_navigateTo($urlArray[int]["URL"]);
-	_wait(5000);
-	_continueOnError();
+		for (var int = 0; int < $urlArray.length; int++) {
+			_navigateTo($urlArray[int]["URL"]);
+			_wait(5000);
+			_continueOnError();
+			captureAttack();
 
-	//	Collect and naviagte throug Tabs if present and set all the fields for each page
-	var $span = _collect("_span", "/x-tab-inner/");
-	_log("Collected Spans = " + $span.length);
-	//	To avoid Tabbing in non tabbed pages
-	if ($span.length == 0) {
-		var $tabs = 1;
-		var skipFlag = 1;
-	} else {
-		var $tabs = $span.length;
-		var skipFlag = 0;
-	}
-
-	//	Select a Tab
-	for (var $s = 0; $s < $tabs; $s++) {
-		try {
-			if(skipFlag != 1){
-			_click($span[$s]);
-			_log("in Span ******************* "+$span[$s]+"****");
+			// Collect and naviagte throug Tabs if present and set all the fields for
+			// each page
+			var $span = _collect("_span", "/x-tab-inner/");
+			_log("Collected Spans = " + $span.length);
+			// To avoid Tabbing in non tabbed pages
+			if ($span.length == 0) {
+				var $tabs = 1;
+				var skipFlag = 1;
+			} else {
+				var $tabs = $span.length;
+				var skipFlag = 0;
 			}
-		} catch (e) {
 
-		}
-		
-		_setStrictVisibilityCheck(true);
-		if (_isVisible(_span("Add"))) {
-			_click(_span("Add"));
-			_setStrictVisibilityCheck(false);
-		}
-		_setStrictVisibilityCheck(false);
+			// Select a Tab
+			for (var $s = 0; $s < $tabs; $s++) {
+				try {
+					if (skipFlag != 1) {
+						_click($span[$s]);
+						_log("in Span ******************* " + $span[$s] + "****");
+					}
+				} catch (e) {
 
-		if (_isVisible(_textbox("Select a profile:"))) {
-			_click(_textbox("Select a profile:"));
-			_click(_listItem("Default Group Profile"));
-
-		}
-
-		_setStrictVisibilityCheck(true);
-		if (_isVisible(_span("Add"))) {
-			_click(_span("Add"));
-			_setStrictVisibilityCheck(false);
-		}
-		_setStrictVisibilityCheck(false);
-
-		var $textboxes = _collect("_textbox",
-				"/svmx-textfield||svmx-form-text/");
-		_log("Collected $textboxes = " + $textboxes.length);
-
-		// Iterate and set values on all textboxes
-		for (var $i = 0; $i < $textboxes.length; $i++) {
-			try {
-				_setValue($textboxes[$i], $attackTag);
-			} catch (e) {
-
-			}
-		}
-
-		var $textarea = _collect("_textarea", "/.*/");
-		_log("Collected $textarea = " + $textarea.length);
-
-		// Iterate and set values on all text areas
-		for (var $i = 0; $i < $textarea.length; $i++) {
-			try {
-				_setValue($textarea[$i], $attackTag);
-			} catch (e) {
-
-			}
-		}
-
-		_setStrictVisibilityCheck(true);
-		if (_isVisible(_span("Add"))) {
-			_click(_span("Add"));
-			_setStrictVisibilityCheck(false);
-		}
-
-		var $cell = _collect("_cell", "/x-grid-cell/");
-		_log("Collected $cell = " + $cell.length);
-
-		// Iterate and set values on all textboxes
-		for (var $i = 0; $i < $cell.length; $i++) {
-			try {
-
-				if (_doubleClick($cell[$i])) {
-					_call($cell[$i].innerHTML = $attackTag);
 				}
 
-			} catch (e) {
+				// Initial check
+				captureAttack();
+
+				_setStrictVisibilityCheck(true);
+				if (_isVisible(_span("Add"))) {
+					_click(_span("Add"));
+					_setStrictVisibilityCheck(false);
+				}
+				_setStrictVisibilityCheck(false);
+				captureAttack();
+				if (_isVisible(_textbox("Select a profile:"))) {
+					_click(_textbox("Select a profile:"));
+					_click(_listItem("Default Group Profile"));
+
+				}
+				captureAttack();
+				_setStrictVisibilityCheck(true);
+				if (_isVisible(_span("Add"))) {
+					_click(_span("Add"));
+					_setStrictVisibilityCheck(false);
+				}
+				_setStrictVisibilityCheck(false);
+				captureAttack();
+				var $textboxes = _collect("_textbox",
+				"/svmx-textfield||svmx-form-text/");
+				_log("Collected $textboxes = " + $textboxes.length);
+
+				// Iterate and set values on all textboxes
+				for (var $i = 0; $i < $textboxes.length; $i++) {
+					try {
+						_setValue($textboxes[$i], $attackTag);
+					} catch (e) {
+
+					}
+					captureAttack();
+				}
+
+				var $textarea = _collect("_textarea", "/.*/");
+				_log("Collected $textarea = " + $textarea.length);
+
+				// Iterate and set values on all text areas
+				for (var $i = 0; $i < $textarea.length; $i++) {
+					try {
+						_setValue($textarea[$i], $attackTag);
+					} catch (e) {
+
+					}
+					captureAttack();
+				}
+
+				_setStrictVisibilityCheck(true);
+				if (_isVisible(_span("Add"))) {
+					_click(_span("Add"));
+					_setStrictVisibilityCheck(false);
+				}
+
+				var $cell = _collect("_cell", "/x-grid-cell/");
+				_log("Collected $cell = " + $cell.length);
+
+				// Iterate and set values on all editable selections
+				for (var $i = 0; $i < $cell.length; $i++) {
+					try {
+
+						if (_doubleClick($cell[$i])) {
+							_call($cell[$i].innerHTML = $attackTag);
+						}
+
+					} catch (e) {
+
+					}
+					captureAttack();
+
+				}
+
+				captureAttack();
+			}
+
+			if (_isVisible(_image("svmx-tool-close"))) {
+				_click(_image("svmx-tool-close"));
 
 			}
 
+			if (_isVisible(_span("Save"))) {
+				_click(_span("Save"));
+
+			}
+			_wait(3000)
+
+			// _assertEqual("AttackConfirmed", _lastAlert()); // verify the actual
+			// confirm message
+
+			
+
 		}
-	}
-
-	if (_isVisible(_image("svmx-tool-close"))) {
-		_click(_image("svmx-tool-close"));
-
-	}
-	
-	if (_isVisible(_span("Save"))) {
-		_click(_span("Save"));
-
-	}
-	_wait(3000)
-	
+function captureAttack() {
 	_log("************************************");
 	var $allAlerts = _lastAlert(true);
 	if ($allAlerts == null || $allAlerts == "") {
-		_log("SCANNED PAGE : "+$urlArray[int]+" No Alerts Caught")
+		_log("SCANNED PAGE : " + $urlArray[int] + " No Alerts Caught")
 	} else {
-		_logExceptionAsFailure("SCANNED PAGE : "+$urlArray[int]+"Alerts Caught : " + $allAlerts);
-		 _takeScreenShot();
+		_logExceptionAsFailure("SCANNED PAGE : " + $urlArray[int]
+		+ "Alerts Caught : " + $allAlerts);
+		_focusWindow();
+		_takeScreenShot();
 		_clearLastAlert();
 
 	}
 	_log("************************************");
-	//	_assertEqual("AttackConfirmed", _lastAlert()); // verify the actual confirm message
-
 }
