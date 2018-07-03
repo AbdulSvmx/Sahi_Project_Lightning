@@ -4,13 +4,13 @@ var $sfm_pg_sfmDesigner = new function sfm_pg_sfmDesigner() {
 	this.btn_saveSFM = _f("main").s_button("Save & Close");
 	this.lnk_home = _link("Home");
 	this.lnk_workOrder = _link("Work Orders");
-	this.btn_deliveryQuickSave = _span("svmx-btn-icon svmx-sfmd-quicksave-icon");
-	this.btn_deliverySave = _span("svmx-btn-icon svmx-sfmd-save-icon");
-	this.btn_deliveryCancel = _span("svmx-btn-icon svmx-sfmd-cancel-icon");
-	this.btn_deliveryGetPrice = _span("Get Price");
-	this.btn_deliveryUserSettings = _span("svmx-btn-icon svmx-sfmd-setting-icon");
-	this.btn_deliveryHelp = _span("svmx-btn-icon svmx-sfmd-help-icon");
-	this.btn_deliveryClearCache = _span("svmx-btn-icon svmx-sfmd-cache-icon");
+	this.btn_deliveryQuickSave = _span("Quick Save",_rightOf(_span("Save")));//updated for lightning
+	this.btn_deliverySave = _span("Save",_leftOf(_span("Quick Save")));//updated for lightning
+	this.btn_deliveryCancel = _span("Cancel",_rightOf(_span("Quick Save")));//updated for lightning
+	this.btn_deliveryGetPrice = _span("Get Price",_rightOf(_span("Cancel")));//updated for lightning
+	this.btn_deliveryUserSettings = _span("User Settings",_leftOf(_span("Help")));//updated for lightning
+	this.btn_deliveryHelp = _span("Help",_leftOf(_span("Clear ServiceMax Cache")));//updated for lightning
+	this.btn_deliveryClearCache = _span("Clear ServiceMax Cache",_rightOf(_span("Help")));//updated for lightning
 	
 	
 	//SFM Delivery page objects
@@ -31,10 +31,10 @@ var $sfm_pg_sfmDesigner = new function sfm_pg_sfmDesigner() {
 	
 	//Extended edit page objects --Parts
 	
-	this.txt_eeLineQty = _textbox("Line Qty:",_rightOf(_label("Line Qty:")));
+	this.txt_eeLineQty = _textbox("Line Qty:",_near(_label("Line Qty:",_in(_div("/sfm-window/"))))); //updated for lightning
 	this.txt_eeReceivedStreet = _textarea(0,_rightOf(_label("Received Street:")));
 	this.btn_eeUpdate = _span("Update");
-	this.btn_eeCancel = _span("Cancel");
+	this.btn_eeCancel = _span("/Cancel/",_rightOf(_span("Update")));//updated for lightning
 	this.txt_eeEstimatedPricePerUnit= _textbox("/svmx-number-/",_rightOf(_label("Estimated Price Per Unit:")));
 	this.txt_eeReceivedCity =_textbox("/sfm-text-/",_rightOf(_label("Received City:")));
 	this.txt_eeReferenceInformation = _textarea("/sfm-textarea-/",_rightOf(_label("Reference Information:")));
@@ -44,13 +44,13 @@ var $sfm_pg_sfmDesigner = new function sfm_pg_sfmDesigner() {
 	
 	this.txt_eeStartDateTime =_textbox("/svmx-date-/",_rightOf(_label("Start Date and Time:")));
 	this.txt_billingQty = _textbox("Billable Qty:",_rightOf(_label("Billable Qty:")));
-	this.txt_billingLinePrice = _textbox("/svmx-number-/",_rightOf(_label("Billable Line Price:")));
-	this.txt_eeLinePricePerUnit = _textbox("/svmx-number-/",_rightOf(_label("Line Price Per Unit:")));
+	this.txt_billingLinePrice = _textbox(0,_near(_label("Billable Line Price:",_in(_div("/sfm-window/")))));//updated for lightning
+	this.txt_eeLinePricePerUnit = _textbox(0,_near(_label("Line Price Per Unit:",_in(_div("/sfm-window/")))));//updated for lightning
 	this.txt_eeExpenseType = _textbox("Expense Type:",_rightOf(_label("Expense Type:")));
 	
 	this.txt_eeStartDateTime = _textbox("/svmx-date-/",_rightOf(_label("Start Date and Time:")));
 	this.txt_eeEndDateTime=_textbox("/svmx-date-/",_rightOf(_label("End Date and Time:")));
-	this.txt_proformaIAmt = _textbox("/svmx-number/",_rightOf(_label("Proforma Invoice Amount:")));
+	this.txt_proformaIAmt = _textbox(0,_near(_label("Proforma Invoice Amount:")));//updated for lightning
 	
 	this.txt_priceAlert = _div("Price not calculated, because entitlement check has not been performed.");
 	this.btn_priceAlertOk = _span("Ok");
