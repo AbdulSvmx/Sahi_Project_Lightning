@@ -3,12 +3,14 @@ $rs_10313.start();
 
 //Variables used
 var $object_name = "Work Order";
-var $wo_picklist = "order status";
-
-
-
-
-
+var $wo_picklist = "Order Status";
+var $processName = "RS_10313_process";
+var $process_to_clone = "TDM016";
+var $dependent_picklist = "Order Type";
+var $ctrl_unique_values = ["Open","Closed"];
+var $ctrl_picklist_values = ["Open","Open","Closed"];
+var $dep_picklist_values = ["Depot Repair","Field Service","Field Service"];
+var $ctr = 0;
 
 
 
@@ -29,20 +31,77 @@ _click(_link($wo_picklist));
 _selectDomain("lightningautomation--cfg2.cs21.my.salesforce.com");
 _selectWindow();
 //Delete existing dependencies and create new one.
-if (assertExists($sfm_pg_wo.ordertype_dependency))
-{
-	_click($sfm_pg_wo.delete_link_picklist);
-	   
+if (_exists($sfm_pg_wo.ordertype_dependency))
+{	
+   
 	_expectConfirm($sfm_pg_wo.delete_link_picklist);
+	_click($sfm_pg_wo.delete_link_picklist);
    
 }
-_click(_button(" New "));
+_click($sfm_pg_wo.btn_new_field_dependency);
 _setSelected($sfm_pg_wo.picklist_controller, "Order Status");
 _setSelected($sfm_pg_wo.picklist_dependent, "Order Type");
 _click($sfm_pg_wo.btn_continue);
-$sfm_act_lightningConfig.addDependentControllingPicklistValues($wo_picklist,"Open", "Depot Repair");
-$sfm_act_lightningConfig.addDependentControllingPicklistValues($wo_picklist,"Open", "Field Service");
-$sfm_act_lightningConfig.addDependentControllingPicklistValues($wo_picklist,"Closed", "Field Service");
+for(var $i=0;i<$ctrl_picklist_values.length;i++){
+	$sfm_act_lightningConfig.addDependentControllingPicklistValues($wo_picklist,$ctrl_picklist_values[$i],$dep_picklist_values[$i]);
+}
+
 _expectConfirm($sfm_pg_wo.btn_save_dep_picklist);
 _click($sfm_pg_wo.btn_save_dep_picklist);
+//Navigate to servicemax setup.
+$bo_act_navigation.navigateToSfmTransactionDesigner();
+if(!$bo_act_navigation.findIfCustomProcessExists($processName)) {
+	$sfm_act_SFM.selectSFM(process_to_clone,false);
+	_click($bo_pg_sfmTransactionAndDesigner.btn_clone);
+	_wait(60000, _isVisible($bo_pg_sfmTransactionAndDesigner.txt_name));
+	_setValue($bo_pg_sfmTransactionAndDesigner.txt_name,$processName);
+	_setValue($bo_pg_sfmTransactionAndDesigner.txt_sfmTransactionId,$processName);
+	_click($bo_pg_sfmTransactionAndDesigner.btn_screenDesigner);
+	$bo_pg_sfmTransactionAndDesigner.addField($dependent_picklist,$object_name);
+	var $sfmPgLayoutName = $processName + "pglayout";
+	_setValue($bo_pg_sfmTransactionAndDesigner.txt_sfmSavePageLayoutAs, $sfmPgLayoutName);
+	_setValue($bo_pg_sfmTransactionAndDesigner.txt_sfmSavePageLayoutAsId,$sfmPgLayoutName);
+	_setValue($bo_pg_sfmTransactionAndDesigner.txt_sfmSavePageLayoutAsId, $sfmPgLayoutName);
+	_wait(3000);
+	_click($bo_pg_sfmTransactionAndDesigner.btn_pageLayoutSave);
+	_wait(3000, _isVisible(_f("main").label("Page saved")));
+	_wait(3000);
+	_click($bo_pg_sfmTransactionAndDesigner.btn_finalQuickSave);
+	$bo_act_navigation.navigateToSfmWizard();
+	$sfm_act_wizards.addToWizard($object_name,"SFM",$wizard_name);
+	_selectDomain();
+	$sfm_act_createCustomWizard.createWowithoutvalues();
+	$sfm_act_createCustomWizard.clickWizardlinks($processName);
+	_selectDomain("/visual.force.com/");
+	_wait(5000);
+	//Add steps to set order status
+	
+	//Launch SFM delivery and verify values.
+	$sfm_act_createCustomWizard.clickWizardlinks($processName);
+	_click(_textbox("/sfm-picklist/",_in(_div($dependent_picklist))));
+	_selectDomain("/visual.force.com/");
+	_wait(5000);
+	//Verify the count of values first
+	var $no_of_values = _count("_listItem", "/.*/", _under(_div($wo_picklist)));
+	$no_of_values = $no_of_values - 1;//Decrement one for the 'None' option.
+	var $actual_list = [];
+	for($ctr = 1;$ctr <= $no_of_values;$ctr++ ){
+		$actual_list.push(_getText(_listItem($ctr), _under(_div($dependent_picklist))));
+	}
+	
+	//Verify the values one by one.
+	for($ctr = 0;$ctr < $ctrl_unique_values.length;$ctr++){
+	 var $i = 0;var $j = 0;
+	 for ($j=0;$j<$ctrl_picklist_values.length;$j++) {
+	 	if($ctrl_picklist_values[j] === $ctrl_unique_values[$ctr]) {
+	 		$i = $i+1;
+	 		$expected_list.push($dep_picklist_values[$j]);
+	 	}
+	 }
+	}
+	_assertEqualArrays($expected_list, $actual_list,"FAIL");
+	
+	$rs_10313.end();	
+}
+
 
