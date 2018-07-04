@@ -1,5 +1,5 @@
 _call(top.location.reload(true));
-_setXHRReadyStatesToWaitFor("2")
+_setXHRReadyStatesToWaitFor("2,3")
 _windowAction("resize", 1920, 1080);
 var $g_stepSpeed = 400;
 _setSpeed($g_stepSpeed);
@@ -59,6 +59,7 @@ var $url_checklist = "https://test.salesforce.com";
  var $sfmUsn = "sysadmin01@sfdautomation.com"; // base
  var $sfmPwd = "Maxplore3";
  var $domain_name = "lightningautomation";
+ var $wizard_name = "SFMD Lightning Automation";
 
 // DC Global Variables
 var $dc_org = $orgtype;

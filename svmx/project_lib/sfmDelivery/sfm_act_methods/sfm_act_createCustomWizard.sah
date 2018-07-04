@@ -62,7 +62,7 @@ var $sfm_act_createCustomWizard = new function sfm_act_createCustomWizard() {
 		$priority = "High";
 		_selectDomain();
 		_wait(5000);
-		_click($sfm_pg_wo.tab_all);
+		$sfm_pg_wo.openAppLauncher();
 //		_click($sfm_pg_wo.clickTab("Work Orders"));
 		_wait(3000);
 		if(_isVisible($sfm_pg_wo.link_wo)){
@@ -104,7 +104,7 @@ var $sfm_act_createCustomWizard = new function sfm_act_createCustomWizard() {
 //	Added by Safi
 	this.createWOwithOrderStatus = function($OrdrStatus){		
 		_wait(5000);
-		_click($sfm_pg_wo.tab_all);
+		$sfm_pg_wo.openAppLauncher();
 		_wait(3000);
 		_click($sfm_pg_wo.link_wo);
 		_click($sfm_pg_wo.btn_wo_new);
@@ -118,7 +118,7 @@ var $sfm_act_createCustomWizard = new function sfm_act_createCustomWizard() {
 	
 	this.createWOwithFieldValues = function($value){
 		_wait(5000);
-		_click($sfm_pg_wo.tab_all);
+		$sfm_pg_wo.openAppLauncher();
 		_wait(3000);
 		_click($sfm_pg_wo.link_wo);
 		_click($sfm_pg_wo.btn_wo_new);
@@ -136,7 +136,7 @@ var $sfm_act_createCustomWizard = new function sfm_act_createCustomWizard() {
 	this.createCasewithFieldValues = function($value){
 		$case="";
 		_wait(5000);
-		_click($sfm_pg_wo.tab_all);
+		$sfm_pg_wo.openAppLauncher();
 		_wait(3000);
 		_click(_link("Cases"));
 		_click(_button(" New "));
@@ -564,7 +564,7 @@ var $sfm_act_createCustomWizard = new function sfm_act_createCustomWizard() {
 	};
 	this.createWoWithValues = function(){
         var $woName="";
-        _click($sfm_pg_wo.tab_all);
+        $sfm_pg_wo.openAppLauncher();
 //      _click($sfm_pg_wo.clickTab("Work Orders"));
         _wait(3000);
         _click($sfm_pg_wo.link_wo);
@@ -591,7 +591,7 @@ var $sfm_act_createCustomWizard = new function sfm_act_createCustomWizard() {
         return $woName;
         
 //        var $woName="";
-//        _click($sfm_pg_wo.tab_all);
+//        $sfm_pg_wo.openAppLauncher();
 ////      _click($sfm_pg_wo.clickTab("Work Orders"));
 //        _wait(3000);
 //        _click($sfm_pg_wo.link_wo);
@@ -662,7 +662,7 @@ var $sfm_act_createCustomWizard = new function sfm_act_createCustomWizard() {
 	
 	this.createWoFor5371 = function(){
 		var $woName="";
-		_click($sfm_pg_wo.tab_all);
+		$sfm_pg_wo.openAppLauncher();
 		_wait(3000);
 		_click($sfm_pg_wo.link_wo);
 		_click($sfm_pg_wo.btn_wo_new);
@@ -730,7 +730,7 @@ var $sfm_act_createCustomWizard = new function sfm_act_createCustomWizard() {
 	//Creates work order without values in lightning.
 	//Lakshmisha- Updated the function to check for the WO link in app launcher and then click on the parent element of WO link
 	this.createWowithoutvalues = function() {
-		_click($sfm_pg_wo.tab_all);
+		$sfm_pg_wo.openAppLauncher();
 		_wait(3000);
 		$woName = "";
 //		if(_isVisible($sfm_pg_wo.link_wo)){
@@ -742,6 +742,7 @@ var $sfm_act_createCustomWizard = new function sfm_act_createCustomWizard() {
 		_click(_link("Work Orders[1]"));
 		_click($sfm_pg_wo.btn_wo_new);
 		_click($sfm_pg_wo.btn_wo_edit_save);
+		_wait(3000);
 		$woName= _getText($sfm_pg_wo.label_wo);
 		return $woName;
 		
@@ -751,7 +752,7 @@ var $sfm_act_createCustomWizard = new function sfm_act_createCustomWizard() {
 	this.createWowithdateliterals = function()
 	{
 		$accNum = "HCSAccountForTesting";
-		_click($sfm_pg_wo.tab_all);
+		$sfm_pg_wo.openAppLauncher();
 		_wait(3000);
 		_click($sfm_pg_wo.link_wo);
 		_click($sfm_pg_wo.btn_wo_new);

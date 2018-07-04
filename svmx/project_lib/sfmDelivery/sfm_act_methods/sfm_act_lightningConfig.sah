@@ -87,3 +87,4 @@ var $sfm_act_lightningConfig = new function sfm_act_lightningConfig() {
 		_click($sfm_pg_wo.btn_include_values);
 	}
 };
+

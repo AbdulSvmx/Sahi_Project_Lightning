@@ -26,24 +26,22 @@ var $formulaArray =["$F.SUMOF($D.Labor,'SVMXC__Billable_Line_Price__c')",
 
 _setSpeed($g_stepSpeed);
 $bo_act_login.login($g_url, $sfmUsn, $sfmPwd);
-$sfm_act_lightningConfig.switchToLightning();
+$sfm_act_lightningConfig.switchToLightning(); 
 $sfm_act_SFM.cloneTDM016($sfmNameToBeCloned, $sfmName, $isCustom, $sfmTemplateSaveAsName, $sfmTemplate, $fieldNameArray, $containerNameArray);
 $sfm_pg_formula.createFormula($formulaTargetObjectArray, $formulaTargetFieldArray, $formulaNameArray, $formulaDescriptionArray, $formulaArray);
 _click($sfm_pg_sfmDesigner.btn_quickSaveSFM);
 _click($sfm_pg_sfmDesigner.btn_saveSFM); 
-//_wait(30000,_isVisible($sfm_pg_sfmDesigner.lnk_home)); 
-
 
 //add the process to wizard
 $sfm_act_wizards.addToWizard($wizardObject, $wizardName, $wizardType, $sfmName);
-_wait(30000,_isVisible($sfm_pg_sfmDesigner.lnk_home)); 
+_wait(10000,_isVisible($sfm_pg_sfmDesigner.lnk_home)); 
 
 
 //Create WO through UI for the validatiion
 _selectDomain();
 $sfm_act_createCustomWizard.createWowithoutvalues();
 _click(_span($sfmName));
-_wait(5000);
+_wait(20000,_isVisible($sfm_pg_sfmDesigner.btn_deliveryLaborTab));
 
 //Perform validation in delivery
 _selectDomain($domainName);

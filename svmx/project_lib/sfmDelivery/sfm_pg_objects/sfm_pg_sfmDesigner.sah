@@ -54,4 +54,5 @@ var $sfm_pg_sfmDesigner = new function sfm_pg_sfmDesigner() {
 	
 	this.txt_priceAlert = _div("Price not calculated, because entitlement check has not been performed.");
 	this.btn_priceAlertOk = _span("Ok");
+	this.txt_scheduledDate = _textbox(0,_near(_label("Scheduled Date"))); // added for lightning
 };
