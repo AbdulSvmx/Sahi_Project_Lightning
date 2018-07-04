@@ -40,7 +40,7 @@ var $urlArray = $excel.readFromCustomExcel("../xss/xss_excelData/xssData.xlsx",
 
 				// Initial check
 				captureAttack();
-
+				
 				_setStrictVisibilityCheck(true);
 				if (_isVisible(_span("Add"))) {
 					_click(_span("Add"));
@@ -93,7 +93,7 @@ var $urlArray = $excel.readFromCustomExcel("../xss/xss_excelData/xssData.xlsx",
 					_click(_span("Add"));
 					_setStrictVisibilityCheck(false);
 				}
-
+				captureAttack();
 				var $cell = _collect("_cell", "/x-grid-cell/");
 				_log("Collected $cell = " + $cell.length);
 
@@ -109,28 +109,20 @@ var $urlArray = $excel.readFromCustomExcel("../xss/xss_excelData/xssData.xlsx",
 
 					}
 					captureAttack();
-
 				}
-
 				captureAttack();
 			}
 
 			if (_isVisible(_image("svmx-tool-close"))) {
 				_click(_image("svmx-tool-close"));
-
 			}
-
+			captureAttack();
 			if (_isVisible(_span("Save"))) {
 				_click(_span("Save"));
-
 			}
-			_wait(3000)
 
-			// _assertEqual("AttackConfirmed", _lastAlert()); // verify the actual
-			// confirm message
-
-			
-
+			_wait(3000);
+			captureAttack();
 		}
 function captureAttack() {
 	_log("************************************");
@@ -138,12 +130,16 @@ function captureAttack() {
 	if ($allAlerts == null || $allAlerts == "") {
 		_log("SCANNED PAGE : " + $urlArray[int] + " No Alerts Caught")
 	} else {
-		_logExceptionAsFailure("SCANNED PAGE : " + $urlArray[int]
-		+ "Alerts Caught : " + $allAlerts);
+		
+		_lockWindow();
 		_focusWindow();
-		_takeScreenShot();
+		_takePageScreenShot();
+		_unlockWindow();
 		_clearLastAlert();
+		var $logStr = "SCANNED PAGE : [" + $urlArray[int]+ " ]Alerts Caught : " + $allAlerts;
+		_logOutput($logStr);
+		_logExceptionAsFailure($logStr);
 
 	}
 	_log("************************************");
-}
+} 
