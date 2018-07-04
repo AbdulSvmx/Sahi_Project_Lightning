@@ -410,4 +410,18 @@ var $bo_act_navigation = new function bo_act_navigation() {
     	   }
 			
        };
+       
+       //Function to design screen for header
+       this.designHeaderScreen = function($pg_layout_name,$fields_array){
+    	   var $i = 0;
+    	   for($i=0;$i<$fields_array.length;$i++){
+    		   _click(_f("main").fieldrenderer("[object Object]"));
+    			_setValue(_f("main").s_textinput("searchText[4]"), $fields_array[$i]);
+    			_doubleClick(_f("main").s_label($fields_array[$i]));
+    	   }
+    			_setValue($bo_pg_sfmTransactionAndDesigner.txt_sfmSavePageLayoutAs, $pg_layout_name);
+    			_click($bo_pg_sfmTransactionAndDesigner.btn_pageLayoutSave);
+    			_assertExists($bo_pg_sfmTransactionAndDesigner.page_saved);
+    	   
+    	   };
 };

@@ -91,6 +91,5 @@ var $sfm_pg_wo = new function sfm_pg_wo() {
 			_click(_div("App Launcher"));
 
 		}
-//		_log("I am Here");
-	};
-};
+	}}
+//		_log("I am Here");};
