@@ -1,8 +1,8 @@
-var $rs_10455 = _testcase("RS_10455","");
-$rs_10455.start();
+var $rs_5486 = _testcase("RS_5486","");
+$rs_5486.start();
 var $customActionObject = "Work Order";
 var $actionType="Web Service";
-var $actionId = $bo_act_common.generateRandomName("RS-10455WebServices_CA");
+var $actionId = $bo_act_common.generateRandomName("RS-5486WebServices_CA");
 var $className = "TestWebServices";
 var $methodName = "test_WS";
 var $paramName="Name";
@@ -43,4 +43,4 @@ if(_exists($successMessage)){
 	_log("Fail ::: Account is not created");
 }
 
-$rs_10455.end();
+$rs_5486.end();

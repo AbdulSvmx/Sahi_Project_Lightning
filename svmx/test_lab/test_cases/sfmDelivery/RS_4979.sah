@@ -1,8 +1,8 @@
-var $rs_10483 = _testcase("RS_10483","");
-$rs_10483.start();
+var $rs_4979 = _testcase("RS_4979","");
+$rs_4979.start();
 var $customActionObject = "Work Order";
 var $actionType="Web Service";
-var $actionId = $bo_act_common.generateRandomName("RS-10483WS_CA_HandOver");
+var $actionId = $bo_act_common.generateRandomName("RS-4979WS_CA_HandOver");
 var $className = "TestWebServices";
 var $methodName = "test_WS";
 var $paramName="Name";
@@ -46,11 +46,11 @@ if(_exists($successMessage)){
 	_wait(5000);
 }
 
-if (_exists(_div("Create RMA from Work Order"))){
+if (_exists(_link("Create RMA from Work Order (Work Order Number: "+$woName+")"))){
    _log("Pass ::: Handover has happened to Create RMA from Work order process");
 }
 else{
 	_log("Fail ::: Handover has not happened to Create RMA from Work order process");
 }
 
-$rs_10483.end();
+$rs_4979.end();
