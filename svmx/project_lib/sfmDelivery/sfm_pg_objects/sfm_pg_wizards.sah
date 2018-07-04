@@ -48,6 +48,7 @@ var $sfm_pg_wizards = new function sfm_pg_wizards() {
 	this.btn_stepCriteria = _select(5); //_rightOf(_label("Criteria To Enable This Step")));
 	this.btn_saveStep = _button("Save");
 	this.btn_cancleStep = _button("Cancel[1]");
+	this.lbl_stepId = _label(0,_rightOf(_label("Step ID[1]")));
 	
 	//Added By Harish
 	this.select_availableGrpProfiles =_select(0,_near(_cell("Available ServiceMax Group Profiles")));

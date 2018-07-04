@@ -742,7 +742,7 @@ var $sfm_act_createCustomWizard = new function sfm_act_createCustomWizard() {
 		_click(_link("Work Orders[1]"));
 		_click($sfm_pg_wo.btn_wo_new);
 		_click($sfm_pg_wo.btn_wo_edit_save);
-		_wait(3000);
+		_wait(5000,_isVisible($sfm_pg_wo.label_wo));
 		$woName= _getText($sfm_pg_wo.label_wo);
 		return $woName;
 		

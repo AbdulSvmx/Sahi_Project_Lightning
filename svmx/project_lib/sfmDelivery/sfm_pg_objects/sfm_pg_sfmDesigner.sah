@@ -25,9 +25,9 @@ var $sfm_pg_sfmDesigner = new function sfm_pg_sfmDesigner() {
 	this.btn_deliveryExtendedEditLabor = _image("/gif/", _near(_span("svmx-btn-icon svmx-sfmd-add-line-icon[1]")));
 	this.btn_deliveryExtendedEditExpenses = _image("/gif/", _near(_span("svmx-btn-icon svmx-sfmd-add-line-icon[2]"))) ;
 	this.btn_deliveryExtendedEditTravel = _image("/gif/", _near(_span("svmx-btn-icon svmx-sfmd-add-line-icon[3]")));
-	this.btn_deliveryAddRowLabor = _span("svmx-btn-icon svmx-sfmd-add-line-icon[1]");
-	this.btn_deliveryAddRowExpenses = _span("svmx-btn-icon svmx-sfmd-add-line-icon[2]");
-	this.btn_deliveryAddRowTravel = _span("svmx-btn-icon svmx-sfmd-add-line-icon[3]");
+	this.btn_deliveryAddRowLabor = _span("+ Add Labor");//Changed for Lightning;
+	this.btn_deliveryAddRowExpenses = _span("+ Add Expenses");//Changed for Lightning;
+	this.btn_deliveryAddRowTravel = _span("+ Add Expenses");//Changed for Lightning;
 	
 	//Extended edit page objects --Parts
 	
