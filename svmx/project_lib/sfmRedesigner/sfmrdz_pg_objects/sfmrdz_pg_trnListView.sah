@@ -27,7 +27,7 @@ var $sfmrdz_pg_trnListView=new function sfmrdz_pg_trnListView(){
 	this.heading_usedTrnMessage=_div("Below are the different areas where this transaction is being used:");
 
 	
-	//Confirmation message items on tranction window 
+	//Confirmation message items on transaction window 
 	this.btn_trnDeleteSucessMsg=_heading2("SFM TODO_TAG");
 	this.btn_closeTrnDeleteSucessMsg=_button("Close",_near(this.$btn_trnDeleteSucessMsg));
 	

@@ -10,7 +10,7 @@ var $sfmrdz_pg_common=new function sfmrdz_pg_common(){
 	this.btn_backtoSetup=_button("Back To Setup Home");
 	this.btn_help=_link("/.*/",_near(this.btn_backtoSetup));
 	this.btn_msgNoResult=_div("No results have been found.");
-	
+	this.btn_actionMenu=_button("/slds-button Button--type-icon-border/");
 	
 	//Action menu items
 	this.link_clone=_link("Clone");

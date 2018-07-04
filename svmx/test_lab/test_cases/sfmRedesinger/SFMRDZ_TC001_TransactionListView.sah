@@ -22,15 +22,17 @@ $SFMRDZ_TC001_TransactionListView.start();
 
 	$bo_act_login.login($url,$un,$pwd);
 	
-	$sfmrdz_act_common.LaunchListViewWindow("transaction");
+	$sfmrdz_act_common.LaunchListViewWindow("expression");
 
 	
 	//$sfmrdz_act_dvrListView.selectFilter();
 	//$sfmrdz_act_common.searchObj("Account to Contact");
 	
-	//$sfmrdz_act_common.typePicklist("Recents (Edited in Last 7 days)");
+	$sfmrdz_act_common.typePicklist("Standard Expression");
 	
-	//$sfmrdz_act_common.colSort("TRANSACTION NAME");
+
+	
+	$sfmrdz_act_common.colSort("Object","ascending");
 	
 	//$sfmrdz_act_common.clickActionMenu("Cloned_TDM016");
 
