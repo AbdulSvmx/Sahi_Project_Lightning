@@ -19,7 +19,10 @@ var $g_url = "https://test.salesforce.com/";
 var $g_un = "bhupen@back17.com";// "bhupendra.s@dev.tool2.com";
 var $g_pwd = "smax@123";
 
-
+// THIS IS SPECIFIC TO A GIVEN ORG - DONOT TOUCH
+var $client_id = "3MVG9ifmAKCHISbZGXS_tYaEGdq5pFNz6ZhYTkrLMlM9toUZC8UIDIt.2R4KYqLXKL5yc8HjHPh5NYoUERETS";
+var $client_secret = "3810777216167697283";
+var $orginstance = "cs77";
 // PLEASE DO NOT Use separate names for DEV and Base UN and PWD , instead just change the base/dev credentials in $bac_un & $bac_pwd, while committing to jenkins, also follow the same procedures.
 
 //var $bac_un = "automationDEV@Test4Part1.com"; // pointing to DEV
@@ -28,9 +31,13 @@ var $g_pwd = "smax@123";
 //var $bac_pwd = "cloud_102";
 //var $bac_un = "bac_automationdev@ge.com";
 //var $bac_pwd = "welcome-01";
+//
+//var $bac_un = "meghana.rao@servicemax.com";
+//var $bac_pwd = "cloud_103";
 
-var $bac_un = "meghana.rao@servicemax.com";
-var $bac_pwd = "cloud_103";
+var $bac_un = "meghana.automation@servicemax.com";
+var $bac_pwd = "servicemax01";
+
 
 //var $bac_un = "orgsadmin@svmx-test4.org.test4part2";
 //var $bac_pwd = "welcome-03";
@@ -51,6 +58,8 @@ var $url_checklist = "https://test.salesforce.com";
 //var $sfmPwd = "servicemax2";
  var $sfmUsn = "sysadmin01@sfdautomation.com"; // base
  var $sfmPwd = "Maxplore3";
+ var $domain_name = "lightningautomation";
+ var $wizard_name = "SFMD Lightning Automation";
 
 // DC Global Variables
 var $dc_org = $orgtype;
