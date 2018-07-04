@@ -10,4 +10,5 @@ var $sfmrdz_pg_opdocListView = new function sfmrdz_pg_opdocListView(){
 	this.btn_heading_lastEditedCol=_div("Last Edited");	
 	
 	this.btn_newOPdoc=_button("New TODO_TAG");
+	
 };

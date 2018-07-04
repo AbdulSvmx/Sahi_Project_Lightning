@@ -1,0 +1,38 @@
+
+var $SFMDZ_150=_testcase("$SFMDZ-150","Launch Transaction List View - Using URL");
+$SFMDZ_150.start();
+_setSpeed($g_stepSpeed);
+	
+	/**
+	 * Global Variable declairation
+	 */
+
+	
+	var $url="http://test.salesforce.com";
+	var $un="designer2@test.com";
+	var $pwd="designer@2";
+	var $viewName="transaction";
+	/**
+	 * Login to the Sandbox Org and launching Transaction list view
+	 */
+	
+	$bo_act_login.login($url, $un, $pwd);
+
+	var $homecurrentHomePageULR =$sfmrdz_act_common.LaunchListViewWindow($viewName);
+	
+	//Assertions on transaction list view
+	_assertExists($sfmrdz_pg_trnListView.btn_heading_transaction);
+	_assertExists($sfmrdz_pg_common.btn_backtoSetup);
+	_assertExists($sfmrdz_pg_common.btn_help);
+	_assertExists($sfmrdz_pg_trnListView.btn_heading_trnCol);
+	_assertExists($sfmrdz_pg_trnListView.btn_heading_SourceObjCol);
+	_assertExists($sfmrdz_pg_trnListView.btn_heading_TDTOCol);
+	_assertExists($sfmrdz_pg_trnListView.btn_heading_typeCol);
+	_assertExists($sfmrdz_pg_trnListView.btn_heading_tagsOCol);
+	_assertExists($sfmrdz_pg_trnListView.btn_heading_whereUsedCol);
+	_assertExists($sfmrdz_pg_trnListView.btn_heading_statusCol);
+	_assertExists($sfmrdz_pg_trnListView.btn_heading_lastEditedCol);
+	
+	$sfmrdz_act_common.launchHomeWindow($homecurrentHomePageULR);
+	$bo_act_login.logOut();
+$SFMDZ_150.end();

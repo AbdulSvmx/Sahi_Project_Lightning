@@ -17,10 +17,24 @@ var $sfmrdz_act_common= new function sfmrdz_act_common(){
 		var $ListViewWindow="https://svmxdev."+$orgId+".visual.force.com/apex/SFM_Designer#/"+$viewName+"-list";
 		_log($ListViewWindow);
 		_navigateTo($ListViewWindow);
-		_wait(15000,_isVisible($sfmrdz_pg_common.txt_listFilter));
-		//_wait(15000,_isVisible($sfmrdz_pg_trnListView.btn_heading_transaction));
+		_wait(15000,_isVisible($sfmrdz_pg_common.btn_actionMenu));
+		return $currentHomePageULR;
 	};
-
+	
+	/**
+	 * Function to launch the home viw
+	 */
+	
+	this.launchHomeWindow=function($homeURL){
+		//var $currentListURL=null;
+		//_set($currentListURL, window.location.href);
+		//var $orgId=$currentListURL.subString(16,20);
+		//_log($orgId);
+		//var $homeURL="https://"+$orgId+".lightning.force.com/lightning/page/home";
+		//_log($homeURL);
+		_navigateTo($homeURL);
+		_wait(10000,_isVisible($bo_pg_home.circular_image));
+	};
 	
 	/**
 	 * Function to search Object
