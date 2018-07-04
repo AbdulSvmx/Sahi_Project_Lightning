@@ -1,6 +1,5 @@
-/*
+/**
  * 
-
 ///////////////////////////////////
 //
 //Author	:- 	Anand Kakhandaki
@@ -19,26 +18,25 @@ $SFMRDZ_TC001_TransactionListView.start();
 	var $url="http://test.salesforce.com";
 	var $un="designer2@test.com";
 	var $pwd="designer@2";
-	//var $transactionULR;
 
-	//$bo_act_login.login("http://test.salesforce.com","designer2@test.com", "designer@2");
+
 	$bo_act_login.login($url,$un,$pwd);
 	
-	
-	this.LaunchListViewWindow= function($viewName){
-		_set($currentHomePageULR, window.location.href);
-		_log($currentHomePageULR);
-		var $orgId=$transactionULR.substring(8,12);
-		_log($orgId);
-		var $ListViewWindow="https://svmxdev."+$orgId+".visual.force.com/apex/SFM_Designer#/"+$viewName+"-list";
-		_log($ListViewWindow);
-		_navigateTo($ListViewWindow);
-	};
-	
-	
-	
-	
-	//_closeWindow();
+	$sfmrdz_act_common.LaunchListViewWindow("expression");
 
+	
+	//$sfmrdz_act_dvrListView.selectFilter();
+	//$sfmrdz_act_common.searchObj("Account to Contact");
+	
+	$sfmrdz_act_common.typePicklist("Standard Expression");
+	
+
+	
+	$sfmrdz_act_common.colSort("Object","ascending");
+	
+	//$sfmrdz_act_common.clickActionMenu("Cloned_TDM016");
+
+	//$sfmrdz_act_trnListView.deleteCustomObj("Cloned_TDM016");
+	
 
 $SFMRDZ_TC001_TransactionListView.end();

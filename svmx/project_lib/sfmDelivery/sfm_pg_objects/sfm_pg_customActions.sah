@@ -23,9 +23,9 @@ var $sfm_pg_customActions = new function sfm_pg_customActions() {
 	this.btn_cancelCA=_submit("Cancel");
 	
 	this.txt_actionTitle=_textbox("Action Title");
-	this.txt_actionId=_textbox(2);
-	this.txt_actionDescription=_textarea(0);
-	this.sel_openUrlIn=_select(2);
+	this.txt_actionId=_textbox(0,_rightOf(_label("Action ID")));
+	this.txt_actionDescription=_textarea(0,_rightOf(_label("Description")));
+	this.sel_openUrlIn=_select(0,_rightOf(_label("Open URL in")));
 	this.txt_urlToLaunch=_textbox("URL To Launch");
 	this.chk_fullWindow=_checkbox("Open As Full Window");
 	this.txt_windowHeight=_textbox("Window Height");
@@ -37,11 +37,11 @@ var $sfm_pg_customActions = new function sfm_pg_customActions() {
 	
 	//Objects to add parameters after clicking add button in URL based
 	
-	this.chk_selectParameter=_checkbox("1");
-	this.txt_parameterName=_textbox(6);
-	this.sel_parameterValueType=_select(3);
-	this.txt_parameterValue=_textbox(7);
-	this.sel_parameterFieldName=_select(4);
+	this.chk_selectParameter=_checkbox(0,_near(_div("Select")));
+	this.txt_parameterName=_textbox(0,_near(_div("Parameter Name")));
+	this.sel_parameterValueType=_select(0,_near(_div("Parameter Value Type")));
+	this.txt_parameterValue=_textbox(0,_rightOf(_select(0,_near(_div("Parameter Value Type")))));
+	this.sel_parameterFieldName=_select(0,_rightOf(_select(0,_near(_div("Parameter Value Type")))));
 	
 	//Web Service type page objects
 	
@@ -49,15 +49,4 @@ var $sfm_pg_customActions = new function sfm_pg_customActions() {
 	this.txt_className = _textbox("Class Name");
 	this.txt_methodName = _textbox("Method Name");
 	this.txt_processingMessage = _textbox("Processing Message");
-	
-	//Objects to add parameters after clicking add button in URL based
-	
-	this.chk_selectParameterWS =_checkbox("1");
-	this.txt_parameterNameWS = _textbox(7);
-	this.sel_parameterValueTypeWS =_select(2);
-	this.txt_parameterValueWS =_textbox(8);
-	this.sel_parameterFieldNameWS =_select(3);
-	
-	
-
 };

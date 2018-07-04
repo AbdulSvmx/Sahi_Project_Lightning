@@ -1,0 +1,129 @@
+/**
+ * Function to perform actions on list view
+ */
+
+
+var $sfmrdz_act_common= new function sfmrdz_act_common(){
+	
+	/**
+	 * Function to launch the list views
+	 * change wait based on $viewName
+	 */
+	this.LaunchListViewWindow= function($viewName){
+		_set($currentHomePageULR, window.location.href);
+		_log($currentHomePageULR);
+		var $orgId=$currentHomePageULR.substring(8,12);
+		//_log($orgId);
+		var $ListViewWindow="https://svmxdev."+$orgId+".visual.force.com/apex/SFM_Designer#/"+$viewName+"-list";
+		_log($ListViewWindow);
+		_navigateTo($ListViewWindow);
+		_wait(15000,_isVisible($sfmrdz_pg_common.btn_actionMenu));
+		return $currentHomePageULR;
+	};
+	
+	/**
+	 * Function to launch the home viw
+	 */
+	
+	this.launchHomeWindow=function($homeURL){
+		//var $currentListURL=null;
+		//_set($currentListURL, window.location.href);
+		//var $orgId=$currentListURL.subString(16,20);
+		//_log($orgId);
+		//var $homeURL="https://"+$orgId+".lightning.force.com/lightning/page/home";
+		//_log($homeURL);
+		_navigateTo($homeURL);
+		_wait(10000,_isVisible($bo_pg_home.circular_image));
+	};
+	
+	/**
+	 * Function to search Object
+	 * 
+	 */
+	this.searchObj=function($objName){
+		_setValue($sfmrdz_pg_common.txt_listFilter,$objName);
+		_keyPress($sfmrdz_pg_common.txt_listFilter, 13);
+		_wait(10000,_isVisible(_link($objName)));
+	};
+	
+
+	
+	/**
+	 * Function to select Picklist/Filter
+	 * 
+	 */
+	this.typePicklist=function($Type){
+		_click($sfmrdz_pg_common.txt_listViewPicklist);
+		_wait(5000,_isVisible(_link($Type)));
+		_click(_link($Type));
+		_wait(10000,_isVisible($sfmrdz_pg_common.btn_actionMenu));
+	};
+	
+	/**
+	 * Sorting on list View
+	 * 
+	*/
+	this.colSort=function($colName,$order){
+		//Collection All element under mentioned column
+		var $list=null;
+			if ($colName=="TRANSACTION NAME" || $colName=="DATA VALIDATION RULES NAME" || $colName=="Expression Name") {
+				$list = _collect("_link","/.*/",_under(_div($colName)));
+			}else if ($colName=="Source Object" || $colName=="TODO_TARGET_OBJECT" || $colName=="Object") {
+				$list = _collect("_span","/.*/",_under(_div($colName)));
+			}
+			_log($list.length);
+		var $listName=new Array($list.length);
+		
+		//extracting element text and saving in array
+		for(var $i=0;$i<$list.length;$i++){
+			$listName[$i]=_getText($list[$i]);
+		}
+		
+		//Generating Original copy
+		var $orgList=new Array($listName.length);
+		for(var $i=0;$i<$listName.length;$i++){
+			$orgList[$i]=$listName[$i];
+		}
+		
+		//Sorting based on Ascending or descending
+		var $linkListAscSorted=$listName.sort();
+		var $linkListSorted=null;
+		if($order=="ascending"){
+			$linkListSorted=$linkListAscSorted;
+		}else {
+			$linkListSorted=$linkListAscSorted.reverse();
+		}
+
+		var $retVal=false;
+		for(var $i=0;$i<$linkListSorted.length;$i++){	
+			if($orgList[$i]==$linkListSorted[$i]){;
+				$retVal=true;
+			}else{
+				_log("Actual object is: "+$orgList[$i]);
+				_log("Expected object is: "+$linkListSorted[$i]);
+				$retVal=false;
+				break;
+			}	
+		}
+		_assertTrue($retVal, "Links on "+$colName+" column are not sorted in order");
+
+	};
+	
+	/**
+	 * Search and click the action menu for mentioned object
+	 */
+	this.clickActionMenu=function($objName){
+		$sfmrdz_act_common.searchObj($objName);
+		$trnVal=_assertVisible(_link($objName));
+		if($trnVal==true){
+			_click(_button("/Button Dropdown/",_near(_link($objName))));
+		}else{
+			_log($objName+" - Object not found.");
+			_assertTrue($trnVal,$trnName+" - not found.");
+		}
+		_wait(5000,_isVisible($sfmrdz_pg_common.link_clone));
+	};
+	
+
+	
+};
