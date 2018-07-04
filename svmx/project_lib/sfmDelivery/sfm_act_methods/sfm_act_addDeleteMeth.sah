@@ -57,7 +57,7 @@ var $sfm_act_addDeleteMeth = new function sfm_act_addDeleteMeth() {
       };
       
       this.deleteWo = function($workOrder){
-    	  $sfm_pg_wo.openAppLauncher();
+    	  _click($sfm_pg_wo.tab_all);
   		_wait(3000);
   		_click($sfm_pg_wo.link_wo);
   		_click(_link($workOrder));

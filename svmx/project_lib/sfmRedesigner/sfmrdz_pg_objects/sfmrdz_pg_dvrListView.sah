@@ -1,12 +1,26 @@
 /**
-* Data validation page object reporsitory
+* Data validation page object repository
 */
-
 
 var $sfmrdz_pg_dvrListView = new function sfmrdz_pg_dvrListView(){
 	
-	this.btn_Heading_drvHeader=_div("Data Validation Rules");
-	this.btn_dvrFilter =_textbox("/combobox__input/");
-	this.link_RecentlyUsed=_link("Recently Used");
+	this.btn_Heading_DVR=_div("Data Validation Rules");
+	this.btn_newDVR=_button("New Validation Rule");
 	
+	
+	this.btn_heading_dvrNameCol=_div("DATA VALIDATION RULES NAME");
+	this.btn_heading_objCol=_div("Object");
+	this.btn_heading_typeCol=_div("Type");
+	this.btn_heading_whereUsedCol=_div("Where Used");
+	this.btn_heading_lastEditedCol=_div("Last Edited");
+	
+	
+	//DVR Filter Drop down items
+	this.sel_dvrFilterList= _list("Menu__list slds-dropdown__list");
+	this.btn_defaultViews=_span("DEFAULT VIEWS");
+	this.link_showAll=_link("Show All");
+	this.link_recentlyUsed=_link("Recently Used");
+	this.link_stdExpression=_link("Standard Expression");
+	
+
 };

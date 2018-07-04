@@ -346,5 +346,25 @@ var $bo_act_checklistdesigner = new function bo_act_checklistdesigner() {
 		_selectDomain();
 
 	};
+	
+	this.addQuestion = function($dataType,$questionText){
+		_selectDomain("/svmx/");
+		_click($bo_pg_formDesigner.tab_clickFormDesigner);
+		_click($bo_pg_formDesigner.btn_addNewQuestion);
+		if($dataType == "Text"){
+			_click(_f("main").uiftetextfield("Text[1]"));
+		}
+		else{
+			_click(_f("main").uiftetextfield($dataType));
+		}
+		_setValue($bo_pg_formDesigner.lbl_questionText, $questionText);
+		_click($bo_pg_formDesigner.btn_addQuestionToLibraryAndForm);
+		_click($bo_pg_formDesigner.btn_closeQuestionPopUp);
+		_click($bo_pg_formDesigner.btn_quickSave);
+		_wait(10000);
+		_click($bo_pg_formDesigner.btn_save_close);
+		_selectDomain();
+		
+	};
 
 };
