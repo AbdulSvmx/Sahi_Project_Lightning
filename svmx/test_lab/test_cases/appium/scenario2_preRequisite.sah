@@ -1,7 +1,8 @@
 var $scenario2_preRequisite = _testcase("scenario1_pre","Testing Create SFM");
 $scenario2_preRequisite.start();
 _setSpeed($g_stepSpeed);
-var $sfmName = "Tester";
+var $sfmName = "Tester00001";
+var $dataType = "Checkbox";
 $bo_act_login.login($g_url, $bac_un, $bac_pwd);
 $sfm_act_lightningConfig.switchToLightning();
 $bo_act_navigation.navigateToSfmTransactionDesigner();
@@ -20,4 +21,5 @@ _click($bo_pg_sfmTransactionAndDesigner.btn_qualifyingCriteriaAndFieldMapping);
 _click($bo_pg_sfmTransactionAndDesigner.btn_mappings);
 _setValue(_f("main").s_textinput("/textInput/").near(_f("main").tab("Field Map For Existing Records")),"SVMX");
 _click(_f("main").s_label("SVMXSTD: Map Work Order to Checklist"));
+$bo_act_checklistdesigner.addQuestion($dataType,"testCheckbox1");
 $scenario2_preRequisite.end();
