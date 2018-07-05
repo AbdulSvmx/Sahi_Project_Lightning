@@ -1,7 +1,7 @@
-var $rs_6979 = _testcase("RS_6979","");
-$rs_6979.start();
+var $rs_10439 = _testcase("RS_10439","");
+$rs_10439.start();
 var $sfmNameToBeCloned = "Manage Work Order Lines - Usage";
-var $sfmName = $bo_act_common.generateRandomName("RS_6979_RollupFormula");
+var $sfmName = $bo_act_common.generateRandomName("RS_10439_RollupFormula");
 var $isCustom = false;
 var $sfmTemplate = "SVMXSTD: Manage WO Usage Lines";
 var $sfmTemplateSaveAsName = $sfmName;
@@ -94,4 +94,4 @@ if( parseInt(_getText($sfm_pg_sfmDesigner.txt_proformaIAmt))== ($laborBlp1+$labo
 	_log("Fail ::: SumOf rollup formula is not working");
 }
 
-$rs_6979.end();
+$rs_10439.end();
