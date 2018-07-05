@@ -1,17 +1,22 @@
+/**
+ * Author	: Anand Kakhandaki
+ * Reviewer	: 
+ * 
+ */
 
 var $SFMDZ_150=_testcase("$SFMDZ-150","Launch Transaction List View - Using URL");
 $SFMDZ_150.start();
 _setSpeed($g_stepSpeed);
 	
 	/**
-	 * Global Variable declairation
+	 * Global Variable declaration
 	 */
 
-	
 	var $url="http://test.salesforce.com";
 	var $un="designer2@test.com";
 	var $pwd="designer@2";
 	var $viewName="transaction";
+	
 	/**
 	 * Login to the Sandbox Org and launching Transaction list view
 	 */
