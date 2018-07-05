@@ -1,8 +1,8 @@
-var $rs_10456 = _testcase("RS_10456","");
-$rs_10456.start();
+var $rs_5485 = _testcase("RS_5485","");
+$rs_5485.start();
 var $customActionObject = "Work Order";
 var $actionType="URL";
-var $actionId = $bo_act_common.generateRandomName("RS-10456URL_CA");
+var $actionId = $bo_act_common.generateRandomName("RS-5485URL_CA");
 var $urlToLaunch="http://www.google.com/search";
 var $paramName="q";
 var $paramValueType="Value";
@@ -36,4 +36,4 @@ else{
 	_log("Fail ::: URL based CA is not working");
 }
 
-$rs_10456.end();
+$rs_5485.end();

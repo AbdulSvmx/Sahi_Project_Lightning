@@ -1,5 +1,5 @@
 var $sfm_pg_wo = new function sfm_pg_wo() {
-	this.tab_all = _div("App Launcher");//Changed for lightning 21st June 2018
+	this.tab_all = _submit("App Launcher");//_div("App Launcher");//Changed for lightning 21st June 2018
 	this.btn_wo_new = _link("New");//Changed for lightning
 	this.btn_wo_continue= _submit("Continue");
 	this.btn_woStatus = _select(0,_rightOf(_label("Order Status")));
@@ -78,9 +78,27 @@ var $sfm_pg_wo = new function sfm_pg_wo() {
 	
 	//Added by JJ for Object Manager navigations in Lightning.
 	this.link_lightning_setup = _div("Setup");
+	this.link_currentapp_setup = _div("Setup for current app");
 	this.link_object_manager = _span("Object Manager");
 	this.txt_quick_find = _searchbox("globalQuickfind");
 	this.link_wo_object = _link("/Work Order/");
+	this.ordertype_dependency = _tableHeader("Order Type",_under(_tableHeader("Dependent Field")));
+	this.delete_link_picklist = _link("Del",_leftOf(_tableHeader("Order Type")));
+	this.picklist_controller = _select("controller");
+	this.picklist_dependent = _select("dependent");
+	this.btn_continue = _submit("Continue");
+	this.btn_include_values = _button("Include Values");
+	this.btn_save_dep_picklist = _submit(" Save ");
+	this.btn_new_field_dependency = _button(0,_near(_heading3("Field Dependencies")));
+
 	
-	
-};
+	this.openAppLauncher = function(){
+		if(_isVisible(_submit("App Launcher"))){
+			_click(_submit("App Launcher"));
+
+		}else{
+			_click(_div("App Launcher"));
+
+		}
+	}}
+//		_log("I am Here");};
