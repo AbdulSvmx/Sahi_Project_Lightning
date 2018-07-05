@@ -36,7 +36,10 @@ var $sfm_pg_sfmDesigner = new function sfm_pg_sfmDesigner() {
 	this.btn_deliveryExtendedEditLabor = _div("/x-sfmd-edit-icon/");//Changed for Lightning;
 	this.btn_deliveryExtendedEditExpenses = _image("/gif/", _near(_span("svmx-btn-icon svmx-sfmd-add-line-icon[2]"))) ;
 	this.btn_deliveryExtendedEditTravel = _image("/gif/", _near(_span("svmx-btn-icon svmx-sfmd-add-line-icon[3]")));
-	this.txt_scheduledDate = _textbox(0,_near(_span("Scheduled Date")));
+	this.txt_scheduledDate = _textbox(0,_near(_span("Scheduled Date"))); // Added for lightning
+	this.chk_customerDown = _checkbox(0,_near(_span("Customer Down"))); // Added for lightning
+	this.txt_billingType = _textbox("Billing Type",_near(_span("Billing Type"))); // Added for lightning
+	this.chk_isEntitlementPerformed = _checkbox(0,_near(_span("Is Entitlement Performed"))); // Added for lightning
 
 	
 	//Extended edit page objects --Parts
@@ -69,4 +72,6 @@ var $sfm_pg_sfmDesigner = new function sfm_pg_sfmDesigner() {
 	this.txt_priceAlert = _div("/Price not calculated, because entitlement check has not been performed/");
 	this.btn_priceAlertOk = _span("Ok");
 	this.txt_scheduledDate = _textbox(0,_near(_label("Scheduled Date"))); // added for lightning
+	
+	
 };
