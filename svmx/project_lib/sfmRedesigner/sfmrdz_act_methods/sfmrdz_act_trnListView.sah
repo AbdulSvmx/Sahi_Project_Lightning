@@ -66,8 +66,9 @@ var $sfmrdz_act_trnListView=new function sfmrdz_act_trnListView(){
 				}
 			}
 		}
-		_assertTrue($retVal,$search+" text is not available in "+$rowNotContaingText);
+		return [$retVal,$rowNotContaingText];
+		//_assertTrue($retVal,$search+" text is not available in "+$rowNotContaingText);
+		
 	};
-	
 	
 };

@@ -42,6 +42,11 @@ var $sfmrdz_pg_trnListView=new function sfmrdz_pg_trnListView(){
 	this.btn_trnCloneCancel=_button("Cancel");
 	this.btn_trnCloneSave=_button("Save");
 	
+	//Recent Item div
+	this.btn_recentSearchDiv=_div("/Recent Items/");
+	this.lbl_recentItem=_listItem("Recent Items");
+	
+	
 	
 
 	

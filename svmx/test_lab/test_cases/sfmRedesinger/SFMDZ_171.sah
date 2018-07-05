@@ -17,17 +17,29 @@ _setSpeed($g_stepSpeed);
 	var $pwd="designer@2";
 	var $viewName="transaction";
 	var $search="Contract";
+	var $objName="Activate Contract";
 
 	/**
 	 * Login to the Sandbox Org and launching Transaction list view
 	 */
 	$bo_act_login.login($url, $un, $pwd);
 	$sfmrdz_act_common.LaunchListViewWindow($viewName);
-	$sfmrdz_act_trnListView.contentSearch($search);
+	//var $contentSort=$sfmrdz_act_trnListView.contentSearch($search);
+	//_assertTrue($contentSort[0],$search+" text is not available in "+$contentSort[1]);
 	
 	
+	//_click($sfmrdz_pg_trnListView.btn_heading_trnCol);
+	_wait(2000);
+	
 
-
+	//Verification of Recent Item
+	_click(_link($objName));
+	_click($sfmrdz_pg_common.txt_listFilter);
+	_wait(5000,$sfmrdz_pg_trnListView.btn_recentSearchDiv);
+	_assertExists($sfmrdz_pg_trnListView.lbl_recentItem);
+	_assertExists(_link($objName));
+	
+	_deleteCookie("/.*/");
 
 
 $SFMDZ_171.end();
