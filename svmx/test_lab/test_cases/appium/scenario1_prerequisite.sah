@@ -13,7 +13,7 @@ $bo_act_login.login($g_url, $bac_un, $bac_pwd);
 var $sfmName_1 = "Create New Work Order";
 var $transactiontype = "as Standalone for the purpose of creating a new record";
 var $targetObjectName = "Work Order";
-$bo_act_SFM.createstandaloneSFM($sfmName_1, $transactiontype, $targetObjectName);
+//$bo_act_SFM.createstandaloneSFM($sfmName_1, $transactiontype, $targetObjectName);
 
 
 
@@ -21,7 +21,7 @@ $bo_act_SFM.createstandaloneSFM($sfmName_1, $transactiontype, $targetObjectName)
 var $sfmToBeCloned = "Manage Work Order Lines - Usage";
 var $sfmName_2 = "EditWoAutoTimesstamp";
 var $sfmTemplateSaveAsName = "Pagelayout ManageWOUsageLines";
-$bo_act_SFM.clnStandardSFM_attachment($sfmToBeCloned, $sfmName_2, $sfmTemplateSaveAsName);
+//$bo_act_SFM.clnStandardSFM_attachment($sfmToBeCloned, $sfmName_2, $sfmTemplateSaveAsName);
 
 
 // Setup App Permissions for Mobile App for the SFM Process created

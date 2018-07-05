@@ -184,5 +184,7 @@ var $bo_pg_sfmTransactionAndDesigner = new function bo_pg_sfmTransactionAndDesig
     this.sel_context = _f("main").s_combobox("/ComboBox/").rightOf(_f("main").formitemlabel("Context"));
     this.sel_matchingField = _f("main").s_combobox("/ComboBox/").rightOf(_f("main").formitemlabel("Matching Field"));
 	
-	
+	//Added by JJ
+    this.page_saved = _f("main").label("Page saved");
+    this.btn_proceed_anyways = _f("main").button("Proceed Anyway");
 };

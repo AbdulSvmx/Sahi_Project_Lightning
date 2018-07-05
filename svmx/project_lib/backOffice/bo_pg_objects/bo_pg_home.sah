@@ -7,11 +7,10 @@
 var $bo_pg_home = new function bo_pg_home(){
 	this.link_home = _span("Home");
 	this.span_more = _span("More"); //Added for lightning.
-	//this.button_allLinks = _submit("App Launcher"); //Added for lightning.
-	this.button_allLinks = _div("App Launcher"); //Added for lightning.
+	this.button_allLinks = _submit("App Launcher"); //Added for lightning.
 	this.drpdn_servicemaxSetup = _link("/Servicemax SetUp Home/",_in(_div("/slds-dropdown--right/")));//Added for lightning.
 
-	this.link_servicemaxSetup = _link("/Servicemax Setup/",_near(_div("/modal-body/")));//Modified for lightning.
+	this.link_servicemaxSetup = _link("/Servicemax SetUp/",_near(_div("/modal-body/")));//Modified for lightning.
 
 	this.btn_userName = _span("userNavLabel");
 	this.btn_allTabs =_submit("App Launcher"); //Added for lightning.

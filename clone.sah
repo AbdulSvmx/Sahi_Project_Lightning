@@ -1,4 +1,0 @@
-_click(_div("slds-r3"));
-_click(_div("modal-body scrollable slds-modal__content slds-p-around--medium"));
-_click(_div("modal-body scrollable slds-modal__content slds-p-around--medium"));
-_click(_button("Close this window"));
