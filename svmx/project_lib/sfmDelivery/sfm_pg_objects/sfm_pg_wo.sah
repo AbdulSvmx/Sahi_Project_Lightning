@@ -81,6 +81,9 @@ var $sfm_pg_wo = new function sfm_pg_wo() {
 	this.btn_include_values = _button("Include Values");
 	this.btn_save_dep_picklist = _submit(" Save ");
 	this.btn_new_field_dependency = _button(0,_near(_heading3("Field Dependencies")));
+	
+//Added by JJ for SFM Delivery components
+	this.link_delivery_save = _link("Save");
 
 	
 	this.openAppLauncher = function(){
