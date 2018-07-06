@@ -29,6 +29,15 @@ var $sfm_pg_wo = new function sfm_pg_wo() {
 		_click(_link($tabName));
 //		_log("I am Here");
 	};
+	//function to launch app launcher
+	this.openAppLauncher = function(){
+		if(_isVisible(_div("App Launcher"))){
+			_click(_div("App Launcher"));
+		}else{
+			_click(_link("App Launcher"));
+		}
+		
+	}
 	this.label_wo = _heading1("/WO-/"); //Changed for Lightning
 	this.btn_next = _span("Next"); //Added for Lightning
 	this.lkup_account = _textbox(0,_near(_span("Account[1]")));//Added for Lightning

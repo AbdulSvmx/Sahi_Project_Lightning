@@ -65,13 +65,27 @@ var $urlArray = $excel.readFromCustomExcel("../xss/xss_excelData/xssData.xlsx",
 				"/svmx-textfield||svmx-form-text/");
 				_log("Collected $textboxes = " + $textboxes.length);
 
-				// Iterate and set values on all textboxes
+				// Iterate and set values on all textboxes and also textcombo/selection boxes
 				for (var $i = 0; $i < $textboxes.length; $i++) {
+					
+					
 					try {
 						_setValue($textboxes[$i], $attackTag);
 					} catch (e) {
 
 					}
+					captureAttack();
+
+					//For Selection/ComboBox
+					try {
+						if(_isVisible(_listItem($attackTag))){
+							_click(_listItem($attackTag));
+						}
+						
+					} catch (e) {
+
+					}
+					
 					captureAttack();
 				}
 

@@ -53,6 +53,7 @@ var $sfm_act_wizards = new function sfm_act_wizards() {
 		_click($sfm_pg_wizards.btn_newStep);
 		_setSelected($sfm_pg_wizards.btn_wizStepType,$wizardType);
 		_setSelected($sfm_pg_wizards.btn_stepName,$sfmName);
+		_wait(3000,_label($sfmName,_rightOf(_label("Step ID[1]"))));
 		if(($handOver=='true') && (_isChecked($sfm_pg_wizards.btn_checkboxHandover).toString()=='false')){
 			_check($sfm_pg_wizards.btn_checkboxHandover);			
 		}
