@@ -57,7 +57,7 @@ var $sfm_pg_sfmDesigner = new function sfm_pg_sfmDesigner() {
 	
 	//Extended edit page objects --Labor
 	
-	this.txt_eeStartDateTime =_textbox("/svmx-date-/",_rightOf(_label("Start Date and Time:")));
+	this.txt_eeStartDateTime =_textbox(0,_near(_span("/Start Date and Time/",_in(_div("/sfm-window/")))));//Changed for Lightning;
 	this.txt_billingQty = _textbox("Billable Qty",_in(_div("/sfm-window/")));//Changed for Lightning;
 	this.txt_billingLinePrice = _textbox(0,_near(_span("/Billable Line Price/",_in(_div("/sfm-window/")))));//Changed for Lightning;
 	this.txt_eeLinePricePerUnit = _textbox(0,_near(_span("/Line Price Per Unit/",_in(_div("/sfm-window/")))));//Changed for Lightning;
@@ -72,6 +72,6 @@ var $sfm_pg_sfmDesigner = new function sfm_pg_sfmDesigner() {
 	this.txt_priceAlert = _div("/Price not calculated, because entitlement check has not been performed/");
 	this.btn_priceAlertOk = _span("Ok");
 	this.txt_scheduledDate = _textbox(0,_near(_label("Scheduled Date"))); // added for lightning
-	
+	this.txt_actualOnsiteResponse = _textbox(0,_near(_span("Actual Onsite Response"))); // added for lightning
 	
 };
