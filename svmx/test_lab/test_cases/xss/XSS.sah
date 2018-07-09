@@ -1,8 +1,9 @@
 //Pass the Attack Values
 var $attackTag = "<img  src=p onerror=alert(AttackConfirmed)>";
 
-//Pass the URl/Page Locations
-var $urlArray = $excel.readFromCustomExcel("../xss/xss_excelData/xssData.xlsx","Sheet1", false, true)
+// Pass the URl/Page Locations
+var $urlArray = $excel.readFromCustomExcel("../xss/xss_excelData/xssData.xlsx",
+		"Sheet1", false, true)
 
 $bo_act_login.login("https://login.salesforce.com", "yadav.thyagaraj@ge.com",
 		"Svmx123#")
@@ -15,15 +16,14 @@ for (var int = 0; int < $urlArray.length; int++) {
 
 	// Collect and naviagte throug Tabs if present and set all the fields for
 	// each page
-	
-	if(_isVisible(_span(/x-tab-inner/))){
+
+	if (_isVisible(_span(/x-tab-inner/))) {
 		var $tabbing = _collect("_span", "/x-tab-inner/");
-		
-	}else{
-		
+
+	} else {
+
 		var $tabbing = _collect("_cell", "/rich-tab-header/");
 	}
-	
 
 	_log("Collected Spans = " + $tabbing.length);
 	// To avoid Tabbing in non tabbed pages
@@ -40,7 +40,8 @@ for (var int = 0; int < $urlArray.length; int++) {
 		try {
 			if (skipFlag != 1) {
 				_click($tabbing[$s]);
-				_log("in TAB ******************* " + _getText($tabbing[$s]) + "****");
+				_log("in TAB ******************* " + _getText($tabbing[$s])
+						+ "****");
 			}
 		} catch (e) {
 
@@ -48,7 +49,6 @@ for (var int = 0; int < $urlArray.length; int++) {
 
 		// Initial check
 		captureAttack();
-
 		_setStrictVisibilityCheck(true);
 		if (_isVisible(_span("New"))) {
 			_click(_span("New"));
@@ -71,7 +71,6 @@ for (var int = 0; int < $urlArray.length; int++) {
 		if (_isVisible(_textbox("Select a profile:"))) {
 			_click(_textbox("Select a profile:"));
 			_click(_listItem("Default Group Profile"));
-
 		}
 		captureAttack();
 		_setStrictVisibilityCheck(true);
@@ -81,45 +80,11 @@ for (var int = 0; int < $urlArray.length; int++) {
 		}
 		_setStrictVisibilityCheck(false);
 		captureAttack();
-		var $textboxes = _collect("_textbox",
-				"/svmx-textfield||svmx-form-text/");
-		_log("Collected $textboxes = " + $textboxes.length);
 
-		// Iterate and set values on all textboxes and also textcombo/selection boxes
-		for (var $i = 0; $i < $textboxes.length; $i++) {
-
-			try {
-				_setValue($textboxes[$i], $attackTag);
-			} catch (e) {
-
-			}
-			captureAttack();
-
-			//For Selection/ComboBox
-			try {
-				if (_isVisible(_listItem($attackTag))) {
-					_click(_listItem($attackTag));
-				}
-
-			} catch (e) {
-
-			}
-
-			captureAttack();
-		}
-
-		var $textarea = _collect("_textarea", "/.*/");
-		_log("Collected $textarea = " + $textarea.length);
-
-		// Iterate and set values on all text areas
-		for (var $i = 0; $i < $textarea.length; $i++) {
-			try {
-				_setValue($textarea[$i], $attackTag);
-			} catch (e) {
-
-			}
-			captureAttack();
-		}
+		attackTextbox();
+		attackTextArea();
+		attackSelection();
+		attackSelectionEditable();
 
 		_setStrictVisibilityCheck(true);
 		if (_isVisible(_span("Add"))) {
@@ -127,51 +92,36 @@ for (var int = 0; int < $urlArray.length; int++) {
 			_setStrictVisibilityCheck(false);
 		}
 		captureAttack();
-		var $cell = _collect("_cell", "/x-grid-cell/");
-		_log("Collected $cell = " + $cell.length);
 
-		// Iterate and set values on all editable selections
-		for (var $i = 0; $i < $cell.length; $i++) {
-			try {
+		attackTextbox();
+		attackTextArea();
+		attackSelection();
+		attackSelectionEditable();
 
-				if (_doubleClick($cell[$i])) {
-					_call($cell[$i].innerHTML = $attackTag);
-				}
-
-			} catch (e) {
-
-			}
-			captureAttack();
+		if (_isVisible(_image("svmx-tool-close"))) {
+			_click(_image("svmx-tool-close"));
 		}
 		captureAttack();
+
+		if (_isVisible(_span("Save"))) {
+			_click(_span("Save"));
+		}
+		captureAttack();
+
+		if (_isVisible(_button("Quick Save"))) {
+			_click(_button("Quick Save"));
+		}
+
+		captureAttack();
+		if (_isVisible(_button("Save"))) {
+			_click(_button("Save"));
+		}
+
+		captureAttack();
+		_wait(3000);
+
 	}
-
-	if (_isVisible(_image("svmx-tool-close"))) {
-		_click(_image("svmx-tool-close"));
-	}
-	captureAttack();
-
-	if (_isVisible(_span("Save"))) {
-		_click(_span("Save"));
-	}
-	captureAttack();
-
-	if (_isVisible(_button("Quick Save"))) {
-		_click(_button("Quick Save"));
-	}
-
-	captureAttack();
-
-	if (_isVisible(_button("Save"))) {
-		_click(_button("Save"));
-	}
-
-	captureAttack();
-
-	_wait(3000);
-
 }
-
 
 function captureAttack() {
 	_log("************************************");
@@ -192,4 +142,87 @@ function captureAttack() {
 
 	}
 	_log("************************************");
+}
+
+function attackTextbox() {
+	var $textboxes = _collect("_textbox", "/svmx-textfield||svmx-form-text/");
+	_log("Collected $textboxes = " + $textboxes.length);
+	// Iterate and set values on all textboxes and also textcombo/selection
+	// boxes
+	for (var $i = 0; $i < $textboxes.length; $i++) {
+
+		try {
+			_setValue($textboxes[$i], $attackTag);
+		} catch (e) {
+
+		}
+		captureAttack();
+
+		// For Selection/ComboBox
+		try {
+			if (_isVisible(_listItem($attackTag))) {
+				_click(_listItem($attackTag));
+			}
+
+		} catch (e) {
+
+		}
+
+		captureAttack();
+	}
+}
+
+function attackTextArea() {
+	var $textarea = _collect("_textarea", "/.*/");
+	_log("Collected $textarea = " + $textarea.length);
+
+	// Iterate and set values on all text areas
+	for (var $i = 0; $i < $textarea.length; $i++) {
+		try {
+			_setValue($textarea[$i], $attackTag);
+		} catch (e) {
+
+		}
+		captureAttack();
+	}
+}
+
+function attackSelectionEditable() {
+	var $cell = _collect("_cell", "/x-grid-cell/");
+	_log("Collected $cell = " + $cell.length);
+
+	// Iterate and set values on all editable selections
+	for (var $i = 0; $i < $cell.length; $i++) {
+		try {
+
+			if (_doubleClick($cell[$i])) {
+				_call($cell[$i].innerHTML = $attackTag);
+			}
+
+		} catch (e) {
+
+		}
+		captureAttack();
+	}
+	captureAttack();
+}
+
+function attackSelection() {
+	var $select = _collect("_select", "/.*/");
+	_log("Collected $select = " + $select.length);
+
+	// Iterate and set values on all editable selections
+	for (var $i = 0; $i < $select.length; $i++) {
+		try {
+
+			if (_isVisible($select[$i])) {
+				_setSelected($select[$i], $attackTag);
+			}
+
+		} catch (e) {
+
+		}
+		captureAttack();
+	}
+	captureAttack();
 }
