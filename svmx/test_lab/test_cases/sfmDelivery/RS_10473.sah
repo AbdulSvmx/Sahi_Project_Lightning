@@ -1,5 +1,5 @@
-var $rs_5024 = _testcase("RS_5024","");
-$rs_5024.start();
+var $rs_10473 = _testcase("RS_10473","");
+$rs_10473.start();
 var $domainName = "/visual.force.com/";
 var $sfmName = "Validate Address";
 var $woName;
@@ -31,4 +31,4 @@ if(_getText(_span("/field-value/",_near(_span("Zip"))))==""){
    }else{
 		_log("Fail ::: Lat and Long are not updated");
 	}
-$rs_5024.end();
+$rs_10473.end();

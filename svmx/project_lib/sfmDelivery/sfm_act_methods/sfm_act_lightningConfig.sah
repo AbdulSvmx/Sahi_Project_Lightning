@@ -85,6 +85,18 @@ var $sfm_act_lightningConfig = new function sfm_act_lightningConfig() {
 		var $index = $index - 2;
 		_click(_cell($dep_picklist_value+"["+$index+"]"));
 		_click($sfm_pg_wo.btn_include_values);
-	}
-};
+	};
 
+
+this.checkIfWizardLinkExists = function($process_name){
+	_click(_link($sfm_pg_wo.link_showmore));
+	//Check if the SFM process link exists
+	if(_exists(_span($process_name))){
+		return true;
+	}
+	else {
+		return false;
+	}
+
+};
+};

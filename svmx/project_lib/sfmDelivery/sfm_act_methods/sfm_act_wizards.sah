@@ -53,21 +53,18 @@ var $sfm_act_wizards = new function sfm_act_wizards() {
 		_click($sfm_pg_wizards.btn_newStep);
 		_setSelected($sfm_pg_wizards.btn_wizStepType,$wizardType);
 		_setSelected($sfm_pg_wizards.btn_stepName,$sfmName);
+		_wait(3000,_label($sfmName,_rightOf(_label("Step ID[1]"))));
 		if(($handOver=='true') && (_isChecked($sfm_pg_wizards.btn_checkboxHandover).toString()=='false')){
 			_check($sfm_pg_wizards.btn_checkboxHandover);			
 		}
 		_click($sfm_pg_wizards.btn_saveStep);
-		_wait(6000,_heading4("Success"));
-		if(_isVisible(_heading4("Success"))){
-			_log("Pass");
+		//_wait(6000,_heading4("Success"));
+		//if(_isVisible(_heading4("Success"))){
+			//_log("Pass");
 		_click($sfm_pg_wizards.btn_quickSave);
 		_wait(5000,_isVisible(_span("Object")));
 		_click($sfm_pg_wizards.btn_saveClose);
-		}
-		else{
-			_fail("Fail");
-			_stopTestCase();
-		}
+		
 };
 	
  
