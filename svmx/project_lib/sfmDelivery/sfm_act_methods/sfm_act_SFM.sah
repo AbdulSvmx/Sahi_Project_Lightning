@@ -74,16 +74,17 @@ var $sfm_act_SFM = new function sfm_act_SFM() {
 	this.selectSFM = function($sfmName, $isCustom) {
 		if ($isCustom) {
 			_wait(10000);
+			_setStrictVisibilityCheck(true);
 			_click($bo_pg_sfmTransactionAndDesigner.btn_yourCustomSfmTransactions);
 			_setValue(
 					$bo_pg_sfmTransactionAndDesigner.txt_yourCustomSfmTransactionsQuickFind,
 					$sfmName);
 
 		} else {
-			_setValue(
-					$bo_pg_sfmTransactionAndDesigner.txt_standardSfmTransactionQuickFind,
+			_setValue($bo_pg_sfmTransactionAndDesigner.txt_standardSfmTransactionQuickFind,
 					$sfmName);
 		}
+		_setStrictVisibilityCheck(false);
 //		_setStrictVisibilityCheck(true);
 //		_click(_f("main").s_checkbox("/CheckBox/").leftOf(_f("main").processlistitemrenderer($sfmName)),10,10);
 //		_setStrictVisibilityCheck(false);
