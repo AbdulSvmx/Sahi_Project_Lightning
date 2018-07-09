@@ -47,8 +47,8 @@ var $sfm_pg_sfmDesigner = new function sfm_pg_sfmDesigner() {
 	this.txt_eeDelect = _span("Delete"); //Added for lightning- for extended edit dropdown
 	this.txt_eeLineQty = _textbox("Line Qty",_in(_div("/sfm-window/")));//Changed for Lightning;
 	this.txt_eeReceivedStreet = _textarea(0,_rightOf(_label("Received Street:")));
-	this.btn_eeUpdate = _span("Update",_in(_div("/sfm-window/")));
-	this.btn_eeCancel = _span("/Cancel/",_in(_div("/sfm-window/")));
+	this.btn_eeUpdate = _span("Update",_in(_div("/sfm-window/"))); //Changed for Lightning;
+	this.btn_eeCancel = _span("/Cancel/",_in(_div("/sfm-window/"))); //Changed for Lightning;
 
 	this.txt_eeEstimatedPricePerUnit= _textbox("/svmx-number-/",_rightOf(_label("Estimated Price Per Unit:")));
 	this.txt_eeReceivedCity =_textbox("/sfm-text-/",_rightOf(_label("Received City:")));
@@ -57,21 +57,21 @@ var $sfm_pg_sfmDesigner = new function sfm_pg_sfmDesigner() {
 	
 	//Extended edit page objects --Labor
 	
-	this.txt_eeStartDateTime =_textbox("/svmx-date-/",_rightOf(_label("Start Date and Time:")));
+	this.txt_eeStartDateTime =_textbox(0,_near(_span("/Start Date and Time/",_in(_div("/sfm-window/")))));//Changed for Lightning
 	this.txt_billingQty = _textbox("Billable Qty",_in(_div("/sfm-window/")));//Changed for Lightning;
-	this.txt_billingLinePrice = _textbox(0,_near(_span("/Billable Line Price/",_in(_div("/sfm-window/")))));//Changed for Lightning;
-	this.txt_eeLinePricePerUnit = _textbox(0,_near(_span("/Line Price Per Unit/",_in(_div("/sfm-window/")))));//Changed for Lightning;
+	this.txt_billingLinePrice = _textbox(0,_near(_span("/Billable Line Price/",_in(_div("/sfm-window/")))));//Changed for Lightning
+	this.txt_eeLinePricePerUnit = _textbox(0,_near(_span("/Line Price Per Unit/",_in(_div("/sfm-window/")))));//Changed for Lightning
 
-	this.txt_eeExpenseType = _textbox("Expense Type:",_rightOf(_label("Expense Type:")));
+	this.txt_eeExpenseType = _textbox("Expense Type",_near(_span("/Expense Type/",_in(_div("/sfm-window/"))))); //Changed for Lightning
 	
-	this.txt_eeStartDateTime = _textbox("/svmx-date-/",_rightOf(_label("Start Date and Time:")));
-	this.txt_eeEndDateTime=_textbox("/svmx-date-/",_rightOf(_label("End Date and Time:")));
+	this.txt_eeEndDateTime=_textbox(0,_near(_span("/End Date and Time/",_in(_div("/sfm-window/"))))); //Changed for Lightning
 
 	this.txt_proformaIAmt = _textbox(0,_near(_label("Proforma Invoice Amount:")));//updated for lightning
 	
 	this.txt_priceAlert = _div("/Price not calculated, because entitlement check has not been performed/");
 	this.btn_priceAlertOk = _span("Ok");
 	this.txt_scheduledDate = _textbox(0,_near(_label("Scheduled Date"))); // added for lightning
-	
+	this.txt_actualOnsiteResponse = _textbox(0,_near(_span("Actual Onsite Response"))); // added for lightning
+	this.txt_component = _textbox(0,_near(_span("Component"))); // added for lightning
 	
 };
