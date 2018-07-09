@@ -1,0 +1,43 @@
+
+var $SFMDZ_172=_testcase("Search Transaction","Search the transaction");
+$SFMDZ_172.start();
+_setSpeed($g_stepSpeed);
+	
+		/**
+		 * Global Variable declaration
+		 */
+		
+		var $url="http://test.salesforce.com";
+		var $un="designer2@test.com";
+		var $pwd="designer@2";
+		var $viewName="transaction";
+		
+		var $trnName="Activate Contract";
+		var $sourceObjName="Installed Product";
+		var $targetObjName="Activity Master";
+		var $tagName="TAG Belongs to Aviation";
+		/**
+		 * Login to the Sandbox Org and launching Transaction list view
+		 */
+		$bo_act_login.login($url, $un, $pwd);
+		$sfmrdz_act_common.LaunchListViewWindow($viewName);
+		/*
+		//Transaction Search
+		var $trnRetVal=$sfmrdz_act_common.searchObj($trnName);
+		_assertTrue($trnRetVal,$trnName+" is not available");
+		
+		//Source Object Search
+		var $sourceObjretVal=$sfmrdz_act_trnListView.contentSearch($sourceObjName);
+		_assertTrue($sourceObjretVal[0],$sourceObjName+" is not available");
+		
+		
+		//Target Object Search
+		var $targetObjretVal=$sfmrdz_act_trnListView.contentSearch($targetObjName);
+		_assertTrue($targetObjretVal[0],$targetObjName+" is not available");
+		*/
+		//Tags Search
+		var $tagObjretVal=$sfmrdz_act_trnListView.contentSearch($tagName);
+		_assertTrue($tagObjretVal[0],$tagName+" is not available");
+		
+		
+$SFMDZ_172.end();
