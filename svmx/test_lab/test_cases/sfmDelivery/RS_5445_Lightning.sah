@@ -48,7 +48,7 @@ _click($sfm_pg_wizardWindow.btn_proceed);
 _selectDomain();
 _click($sfm_pg_wo.btn_wo_edit);
 var $today = new Date();
-$new_date = $sfm_act_createCustomWizard.addsubtractdates($today,7);
+$new_date = $sfm_act_createCustomWizard.addSubtractDates($today,7);
 _setValue($sfm_pg_wo.txt_actualInitialResponse,$new_date);
 _setValue($sfm_pg_wo.txt_actualInitialResponsetimebox,"12:00 AM");
 _click($sfm_pg_wo.btn_wo_save);

@@ -789,7 +789,7 @@ var $sfm_act_createCustomWizard = new function sfm_act_createCustomWizard() {
 		_click(_span($sfmname));
 		};
 		
-		this.addsubtractdates = function($given_date,$num_of_days) {
+		this.addSubtractDates = function($given_date,$num_of_days) {
 			//This function adds or subtracts calendar days from a given date and returns in the
 			//form of MM/DD/YYYY
 			var $result_date = new Date($given_date);
@@ -798,7 +798,7 @@ var $sfm_act_createCustomWizard = new function sfm_act_createCustomWizard() {
 	        return $result_date;
 		};
 		
-	
+	  
 
 	
 	

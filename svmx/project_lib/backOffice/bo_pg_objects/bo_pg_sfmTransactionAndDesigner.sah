@@ -187,4 +187,5 @@ var $bo_pg_sfmTransactionAndDesigner = new function bo_pg_sfmTransactionAndDesig
 	//Added by JJ
     this.page_saved = _f("main").label("Page saved");
     this.btn_proceed_anyways = _f("main").button("Proceed Anyway");
+    this.btn_newLineForQc = s_button("+");
 };
