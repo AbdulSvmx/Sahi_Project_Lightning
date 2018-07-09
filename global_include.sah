@@ -54,7 +54,7 @@ var $url_checklist = "https://test.salesforce.com";
 //var $sfmUsn = "svmx-sfdtest@svmx-sfdtest.org.sfdtest1"; // dev
 //var $sfmPwd = "servicemax2";
  var $sfmUsn = "sysadmin01@sfdautomation.com"; // base
- var $sfmPwd = "Maxplore3";
+ var $sfmPwd = "Maxplore4";
  var $domainName = "/svmx/";
  var $wizardName = ["SFMDAuto_Ltng_DVR", "SFMDAuto_Ltng_WebServices","SFMDAuto_Ltng_Process","SFMDAuto_Ltng_LookUP","SFMDAuto_Ltng_Mappings",
                      "SFMDAuto_Ltng_Formula","SFMDAuto_Ltng_Expression"];

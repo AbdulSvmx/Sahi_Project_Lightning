@@ -1,14 +1,14 @@
-var $rs_5344 = _testcase("RS_5344","");
-$rs_5344.start();
+var $rs_10496 = _testcase("RS_10496","");
+$rs_10496.start();
 $sfmNameToBeCloned = "Manage Work Order Lines - Usage";
-$sfmName = $bo_act_common.generateRandomName("RS_5344_");
+$sfmName = $bo_act_common.generateRandomName("RS_10496_");
 $isCustom = false;
 var $sfmTemplate = "SVMXSTD: Manage WO Usage Lines";
 var $sfmTemplateSaveAsName = $sfmName;
 var $containerName = ["Order Status","Order Status"];
 var $rulename = $sfmName;
 var $targetObject ="Work Order";
-var $ruleDescription = "Are you sure? Component is null and Entitlement not performed";
+var $ruleDescription = "Are you sure, Component is null and Entitlement not performed";
 var $fieldArray = ["Component","Is Entitlement Performed"];
 var $conditionArray = ["Is Null","Equals"];
 var $operandArray =["", "Function"];
@@ -43,28 +43,23 @@ _wait(8000,_div($sfmName));
 //Validate DVR
 _setValue($sfm_pg_sfmDesigner.txt_component , "");
 _click($sfm_pg_sfmDesigner.btn_deliveryQuickSave);
-if(_exists(_span("SFM Transaction Manager"))){
-	if(_exists(_div($ruleDescription))){
+	if(_isVisible(_div("/"+$ruleDescription+"/"))){
 	_log("Pass ::: DVR confirmation on header is working");
 	}else{
 		_log("Fail ::: DVR confirmation on header is not working");
 	}
-}
-
 //Validate step 2 - when one condtion is false
-_click($sfm_pg_sfmDesigner.btn_eeCancel);
+
 _click($sfm_pg_sfmDesigner.chk_isEntitlementPerformed);
 _click($sfm_pg_sfmDesigner.btn_deliveryQuickSave);
-if(_exists(_span("SFM Transaction Manager"))){
-	if(_exists(_label($ruleDescription))){
+	if(_isVisible(_div("/"+$ruleDescription+"/"))){
 		_log("Fail ::: DVR confirmation on header is trigerred when not to be");
 	
 	}else{
 		_log("Pass ::: DVR confirmation on header is not trigerred as expected");
 	}
-}
 if(_exists($sfm_pg_sfmDesigner.txt_priceAlert)){
 	_click($sfm_pg_sfmDesigner.btn_priceAlertOk);
 	_wait(10000);
 }
-$rs_5344.end();
+$rs_10496.end();

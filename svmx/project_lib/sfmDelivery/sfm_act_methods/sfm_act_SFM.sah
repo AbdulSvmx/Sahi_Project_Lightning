@@ -127,5 +127,15 @@ var $sfm_act_SFM = new function sfm_act_SFM() {
 		_wait(3000, _isVisible(_f("main").label("Page saved")));
 
 	};
+	
+	/**
+	 * This function is mark the Parts line multi add to none or select 
+	 */	
+	this.partsMultiAdd = function($multiAdd){
+		_click(_f("main").s_richtext("Parts"));
+		_setValue(_f("main").s_textinput(0).rightOf(_f("main").uiftetextfield("Allow Multi Add Using")), $multiAdd);
+		_click(_f("main").s_button("Save[3]"));
+		_wait(3000, _isVisible(_f("main").label("Page saved")));		
+	};
 
 };

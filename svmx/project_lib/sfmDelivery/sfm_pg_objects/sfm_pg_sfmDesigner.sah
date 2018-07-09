@@ -50,9 +50,9 @@ var $sfm_pg_sfmDesigner = new function sfm_pg_sfmDesigner() {
 	this.btn_eeUpdate = _span("Update",_in(_div("/sfm-window/"))); //Changed for Lightning;
 	this.btn_eeCancel = _span("/Cancel/",_in(_div("/sfm-window/"))); //Changed for Lightning;
 
-	this.txt_eeEstimatedPricePerUnit= _textbox("/svmx-number-/",_rightOf(_label("Estimated Price Per Unit:")));
-	this.txt_eeReceivedCity =_textbox("/sfm-text-/",_rightOf(_label("Received City:")));
-	this.txt_eeReferenceInformation = _textarea("/sfm-textarea-/",_rightOf(_label("Reference Information:")));
+	this.txt_eeEstimatedPricePerUnit= _textbox(0,_near(_span("/Estimated Price Per Unit/",_in(_div("/sfm-window/")))));//Changed for Lightning
+	this.txt_eeReceivedCity =_textbox("Received City",_in(_div("/sfm-window/")));//Changed for Lightning
+	this.txt_eeReferenceInformation =_textarea(0,_near(_span("Reference Information",_in(_div("/sfm-window/"))))); //Changed for Lightning
 	this.txt_eeActivityType = _textbox("Activity Type:",_rightOf(_label("Activity Type:")));
 	
 	//Extended edit page objects --Labor
