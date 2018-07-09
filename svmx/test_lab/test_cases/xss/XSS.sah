@@ -50,17 +50,24 @@ for (var int = 0; int < $urlArray.length; int++) {
 		// Initial check
 		captureAttack();
 		_setStrictVisibilityCheck(true);
+		if (_isVisible(_button("/New/"))) {
+			_click(_button("/New/"));
+			_setStrictVisibilityCheck(false);
+		}
+		captureAttack();
+		captureAttack();
+		_setStrictVisibilityCheck(true);
 		if (_isVisible(_span("New"))) {
 			_click(_span("New"));
 			_setStrictVisibilityCheck(false);
 		}
-
+		captureAttack();
 		_setStrictVisibilityCheck(true);
 		if (_isVisible(_span("Add New"))) {
 			_click(_span("Add New"));
 			_setStrictVisibilityCheck(false);
 		}
-
+		captureAttack();
 		_setStrictVisibilityCheck(true);
 		if (_isVisible(_span("Add"))) {
 			_click(_span("Add"));
