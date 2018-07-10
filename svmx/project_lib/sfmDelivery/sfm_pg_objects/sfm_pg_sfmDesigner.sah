@@ -37,6 +37,7 @@ var $sfm_pg_sfmDesigner = new function sfm_pg_sfmDesigner() {
 	this.chk_customerDown = _checkbox(0,_near(_span("Customer Down"))); // Added for lightning
 	this.txt_billingType = _textbox("Billing Type",_near(_span("Billing Type"))); // Added for lightning
 	this.chk_isEntitlementPerformed = _checkbox(0,_near(_span("Is Entitlement Performed"))); // Added for lightning
+	this.txt_dvrConfirmationMessage = _div("/sfm-lightningerrorcomponent/");
 
 	
 	//Extended edit page objects --Parts

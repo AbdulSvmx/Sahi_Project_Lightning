@@ -1,6 +1,7 @@
+_setSpeed(100);
 //Pass the Attack Values
-var $attackTag = "<img  src=p onerror=alert(AttackConfirmed)>";
-
+var $attackTag = "<img  src=p onerror=alert(123)>";
+var $attackTagSelectionField = "/img src=p/"
 // Pass the URl/Page Locations
 var $urlArray = $excel.readFromCustomExcel("../xss/xss_excelData/xssData.xlsx","Sheet1", false, true)
 
@@ -15,7 +16,7 @@ for (var int = 0; int < $urlArray.length; int++) {
 
 	// Collect and naviagte throug Tabs if present and set all the fields for
 	// each page
-
+	_selectWindow();
 	if (_isVisible(_span(/x-tab-inner/))) {
 		var $tabbing = _collect("_span", "/x-tab-inner/");
 
@@ -39,8 +40,8 @@ for (var int = 0; int < $urlArray.length; int++) {
 		try {
 			if (skipFlag != 1) {
 				_click($tabbing[$s]);
-				_log("in TAB ******************* " + _getText($tabbing[$s])
-						+ "****");
+				var $t = _getText($tabbing[$s]);
+				_log("in TAB ******************* " + $t + "****");
 			}
 		} catch (e) {
 
@@ -52,52 +53,56 @@ for (var int = 0; int < $urlArray.length; int++) {
 		if (_isVisible(_button("/New/"))) {
 			_click(_button("/New/"));
 			_setStrictVisibilityCheck(false);
+			captureAttack();
 		}
-		captureAttack();
+		
 		_setStrictVisibilityCheck(true);
 		if (_isVisible(_span("New"))) {
 			_click(_span("New"));
 			_setStrictVisibilityCheck(false);
+			captureAttack();
 		}
-		captureAttack();
+		
 		_setStrictVisibilityCheck(true);
 		if (_isVisible(_span("Add New"))) {
 			_click(_span("Add New"));
 			_setStrictVisibilityCheck(false);
+			captureAttack();
 		}
-		captureAttack();
+		
 		_setStrictVisibilityCheck(true);
 		if (_isVisible(_span("Add"))) {
 			_click(_span("Add"));
 			_setStrictVisibilityCheck(false);
+			captureAttack();
 		}
-		_setStrictVisibilityCheck(false);
-		captureAttack();
+		_setStrictVisibilityCheck(true);
+		if (_isVisible(_button("/Add/"))) {
+			_click(_button("/Add/"));
+			_setStrictVisibilityCheck(false);
+			captureAttack();
+		}
 		if (_isVisible(_textbox("Select a profile:"))) {
 			_click(_textbox("Select a profile:"));
 			_click(_listItem("Default Group Profile"));
+			captureAttack();
 		}
-		captureAttack();
+		
 		_setStrictVisibilityCheck(true);
 		if (_isVisible(_span("Add"))) {
 			_click(_span("Add"));
 			_setStrictVisibilityCheck(false);
+			captureAttack();
 		}
-		_setStrictVisibilityCheck(false);
-		captureAttack();
-
-		attackTextbox();
-		attackTextArea();
-		attackSelection();
-		attackSelectionEditable();
+	
 
 		_setStrictVisibilityCheck(true);
 		if (_isVisible(_span("Add"))) {
 			_click(_span("Add"));
 			_setStrictVisibilityCheck(false);
+			captureAttack();
 		}
-		captureAttack();
-
+	
 		attackTextbox();
 		attackTextArea();
 		attackSelection();
@@ -105,26 +110,33 @@ for (var int = 0; int < $urlArray.length; int++) {
 
 		if (_isVisible(_image("svmx-tool-close"))) {
 			_click(_image("svmx-tool-close"));
-		}
-		captureAttack();
+			captureAttack();
 
+		}
+		
 		if (_isVisible(_span("Save"))) {
 			_click(_span("Save"));
+			captureAttack();
 		}
-		captureAttack();
+		
 
 		if (_isVisible(_button("Quick Save"))) {
 			_click(_button("Quick Save"));
+			captureAttack();
 		}
 
-		captureAttack();
 		if (_isVisible(_button("Save"))) {
 			_click(_button("Save"));
+			captureAttack();
 		}
 
-		captureAttack();
 		_wait(3000);
 
+	}
+	//Close a pop up window
+	if(_windowExists("/handshake alert/")){
+	_selectWindow("/handshake alert/");
+	_closeWindow();
 	}
 }
 
@@ -147,6 +159,7 @@ function captureAttack() {
 
 	}
 	_log("************************************");
+	
 }
 
 function attackTextbox() {
@@ -158,22 +171,24 @@ function attackTextbox() {
 
 		try {
 			_setValue($textboxes[$i], $attackTag);
+				captureAttack();
+			
 		} catch (e) {
 
 		}
-		captureAttack();
+		
 
 		// For Selection/ComboBox
 		try {
 			if (_isVisible(_listItem($attackTag))) {
 				_click(_listItem($attackTag));
+				captureAttack();
 			}
 
 		} catch (e) {
 
 		}
 
-		captureAttack();
 	}
 }
 
@@ -185,10 +200,13 @@ function attackTextArea() {
 	for (var $i = 0; $i < $textarea.length; $i++) {
 		try {
 			_setValue($textarea[$i], $attackTag);
+				captureAttack();
+			
+			
 		} catch (e) {
 
 		}
-		captureAttack();
+		
 	}
 }
 
@@ -199,17 +217,18 @@ function attackSelectionEditable() {
 	// Iterate and set values on all editable selections
 	for (var $i = 0; $i < $cell.length; $i++) {
 		try {
-
-			if (_doubleClick($cell[$i])) {
+			if (_isVisible($select[$i])) {
+			_doubleClick($cell[$i]) ;
 				_call($cell[$i].innerHTML = $attackTag);
+				captureAttack();
+			
 			}
 
 		} catch (e) {
 
 		}
-		captureAttack();
+		
 	}
-	captureAttack();
 }
 
 function attackSelection() {
@@ -220,14 +239,15 @@ function attackSelection() {
 	for (var $i = 0; $i < $select.length; $i++) {
 		try {
 
-			if (_isVisible($select[$i])) {
-				_setSelected($select[$i], $attackTag);
+			if(_isVisible($select[$i])) {
+				_setSelected($select[$i], $attackTagSelectionField);
+					captureAttack();
+				
 			}
 
 		} catch (e) {
 
 		}
-		captureAttack();
+		
 	}
-	captureAttack();
 }
