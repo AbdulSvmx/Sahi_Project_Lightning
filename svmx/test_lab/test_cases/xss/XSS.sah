@@ -76,7 +76,12 @@ for (var int = 0; int < $urlArray.length; int++) {
 			_setStrictVisibilityCheck(false);
 			captureAttack();
 		}
-	
+		_setStrictVisibilityCheck(true);
+		if (_isVisible(_button("/Add/"))) {
+			_click(_button("/Add/"));
+			_setStrictVisibilityCheck(false);
+			captureAttack();
+		}
 		if (_isVisible(_textbox("Select a profile:"))) {
 			_click(_textbox("Select a profile:"));
 			_click(_listItem("Default Group Profile"));
