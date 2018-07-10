@@ -55,7 +55,6 @@ for (var int = 0; int < $urlArray.length; int++) {
 			_setStrictVisibilityCheck(false);
 		}
 		captureAttack();
-		captureAttack();
 		_setStrictVisibilityCheck(true);
 		if (_isVisible(_span("New"))) {
 			_click(_span("New"));
