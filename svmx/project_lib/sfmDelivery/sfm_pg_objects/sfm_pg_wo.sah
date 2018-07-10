@@ -64,7 +64,7 @@ var $sfm_pg_wo = new function sfm_pg_wo() {
 	this.btn_include_values = _button("Include Values");
 	this.btn_save_dep_picklist = _submit(" Save ");
 	this.btn_new_field_dependency = _button(0,_near(_heading3("Field Dependencies")));
-	this.link_profileImageRightCorner = div("profileTrigger branding-user-profile bgimg branding-profile_default-small circular forceEntityIcon");
+	this.link_profileImageRightCorner = _div("profileTrigger branding-user-profile bgimg branding-profile_default-small circular forceEntityIcon");
 	this.link_lightningLogout = _link("Log Out");
 	
 //Added by JJ for SFM Delivery components
