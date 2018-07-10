@@ -1,7 +1,7 @@
 var $sfm_pg_expressions = new function sfm_pg_expressions() {
 	this.sel_object = _f("SFMExpressionBuilderSWF").s_combobox("Select a source object");
 	this.btn_new = _f("SFMExpressionBuilderSWF").s_button("New");
-	this.btn_plus = _f("SFMExpressionBuilderSWF").s_button("+");
+	this.btn_plus = _f("SFMExpressionBuilderSWF").s_button("\+");
 	this.sel_comboField = _f("SFMExpressionBuilderSWF").s_combobox("fieldCombo");
 	this.sel_comboConditions = _f("SFMExpressionBuilderSWF").s_dropdownlist("conditionsCombo");
 	this.txt_input = _f("SFMExpressionBuilderSWF").s_textinput("textip");

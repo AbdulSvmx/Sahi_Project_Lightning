@@ -36,6 +36,9 @@ var $orginstance = "cs21";
 var $bac_un = "meghana.rao@servicemax.com";
 var $bac_pwd = "cloud_103";
 
+var $tech_un = "lightning_tech@gmail.com";
+var $tech_pwd = "servicemax0"
+
 //var $bac_un = "orgsadmin@svmx-test4.org.test4part2";
 //var $bac_pwd = "welcome-03";
 
@@ -55,7 +58,11 @@ var $url_checklist = "https://test.salesforce.com";
 //var $sfmPwd = "servicemax2";
  var $sfmUsn = "sysadmin01@sfdautomation.com"; // base
  var $sfmPwd = "Maxplore3";
+ var $domainName = "/svmxc/";
+
+ var $sfmPwd = "Maxplore4";
  var $domainName = "/svmx/";
+
  var $wizardName = ["SFMDAuto_Ltng_DVR", "SFMDAuto_Ltng_WebServices","SFMDAuto_Ltng_Process","SFMDAuto_Ltng_LookUP","SFMDAuto_Ltng_Mappings",
                      "SFMDAuto_Ltng_Formula","SFMDAuto_Ltng_Expression"];
  var $wizardType = ["None","SFM","Inventory","Others","Output Document"];
