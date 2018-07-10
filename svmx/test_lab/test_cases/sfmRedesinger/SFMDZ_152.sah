@@ -8,62 +8,63 @@ var $SFMDZ_152=_testcase("Source and Target Column Sort","Source and Target Colu
 $SFMDZ_152.start();
 _setSpeed($g_stepSpeed);
 
-	/**
-	 * Global Variable declaration
-	 */
-	
-	var $url="http://test.salesforce.com";
-	var $un="designer2@test.com";
-	var $pwd="designer@2";
-	var $viewName="transaction";
-	var $colName="Source Object";
-	var $order="ascending";
-	var $Type="To create and map child lines only";
-	
-	/**
-	 * Login to the Sandbox Org and launching Transaction list view
-	 */
-	
-	$bo_act_login.login($url, $un, $pwd);
-	
-	var $homecurrentHomePageULR =$sfmrdz_act_common.LaunchListViewWindow($viewName);
-	
-	$sfmrdz_act_common.typePicklist($Type);
-	_wait(5000,_isVisible($sfmrdz_pg_common.btn_actionMenu));
-	
-	/**
-	 * Source object column sorting
-	 */
-	//Ascending Order
-	
-	_click($sfmrdz_pg_trnListView.btn_heading_SourceObjCol);
-	_wait(5000,_isVisible($sfmrdz_pg_common.btn_actionMenu));
-	var $sortStatus=$sfmrdz_act_common.colSort($colName, $order);
-	_assertTrue($sortStatus, "Links on "+$colName+" column are not sorted in order");
-	
-	//descending
-	_click($sfmrdz_pg_trnListView.btn_heading_SourceObjCol);
-	_wait(5000,_isVisible($sfmrdz_pg_common.btn_actionMenu));
-	var $sortStatus=$sfmrdz_act_common.colSort($colName, "descending");
-	_assertTrue($sortStatus, "Links on "+$colName+" column are not sorted in order");
-	
-	
-	/**
-	 * Target Object Column sorting
-	 */
-	//Ascending Order
-	_click($sfmrdz_pg_trnListView.btn_heading_TDTOCol);
-	_wait(5000,_isVisible($sfmrdz_pg_common.btn_actionMenu));
-	var $sortStatus=$sfmrdz_act_common.colSort("TODO_TARGET_OBJECT", "ascending");
-	_assertTrue($sortStatus, "Links on "+$colName+" column are not sorted in order");
-	
-	//descending
-	_click($sfmrdz_pg_trnListView.btn_heading_TDTOCol);
-	_wait(5000,_isVisible($sfmrdz_pg_common.btn_actionMenu));
-	var $sortStatus=$sfmrdz_act_common.colSort("TODO_TARGET_OBJECT", "descending");
-	_assertTrue($sortStatus, "Links on "+$colName+" column are not sorted in order");
+		/**
+		 * Global Variable declaration
+		 */
+		var $url="http://test.salesforce.com";
+		var $un="designer2@test.com";
+		var $pwd="designer@2";
+		var $viewName="transaction";
 
+		var $Type="To create and map child lines only";
+		/**
+		 * Login to the Sandbox Org and launching Transaction list view
+		 */
+		$bo_act_login.login($url, $un, $pwd);
+		var $homecurrentHomePageULR =$sfmrdz_act_common.LaunchListViewWindow($viewName);
+		
+		$sfmrdz_act_common.typePicklist($Type);
+		_wait(5000,_isVisible($sfmrdz_pg_common.btn_actionMenu));
+		
+		/**
+		 * Source object column sorting
+		 */
+		var $colName="Source Object";
+		var $order="ascending";
+		
+		//Ascending Order
+		_click($sfmrdz_pg_trnListView.btn_heading_SourceObjCol);
+		_wait(5000,_isVisible($sfmrdz_pg_common.btn_actionMenu));
+		var $sortStatus=$sfmrdz_act_common.colSort($colName, $order);
+		_assertTrue($sortStatus, "Links on "+$colName+" column are not sorted in order");
+		
+		//descending
+		$order="descending";
+		_click($sfmrdz_pg_trnListView.btn_heading_SourceObjCol);
+		_wait(5000,_isVisible($sfmrdz_pg_common.btn_actionMenu));
+		var $sortStatus=$sfmrdz_act_common.colSort($colName, $order);
+		_assertTrue($sortStatus, "Links on "+$colName+" column are not sorted in order");
+		
+		
+		/**
+		 * Target Object Column sorting
+		 */
+		$colName="TODO_TARGET_OBJECT";
+		$order="ascending";
+		//Ascending Order
+		_click($sfmrdz_pg_trnListView.btn_heading_TDTOCol);
+		_wait(5000,_isVisible($sfmrdz_pg_common.btn_actionMenu));
+		var $sortStatus=$sfmrdz_act_common.colSort($colName, $order);
+		_assertTrue($sortStatus, "Links on "+$colName+" column are not sorted in order");
+		
+		//descending
+		$order="descending";
+		_click($sfmrdz_pg_trnListView.btn_heading_TDTOCol);
+		_wait(5000,_isVisible($sfmrdz_pg_common.btn_actionMenu));
+		var $sortStatus=$sfmrdz_act_common.colSort($colName, $order);
+		_assertTrue($sortStatus, "Links on "+$colName+" column are not sorted in order");
 	
-	//$sfmrdz_act_common.launchHomeWindow($homecurrentHomePageULR);
-	//$bo_act_login.logOut();
+		
+		//$sfmrdz_act_common.launchHomeWindow($homecurrentHomePageULR);
+		//$bo_act_login.logOut();
 $SFMDZ_152.end();

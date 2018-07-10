@@ -22,6 +22,11 @@ var $sfmrdz_pg_common=new function sfmrdz_pg_common(){
 	this.btn_msgConfirm=_button("Confirm");
 	this.btn_msgClose=_button("Close");
 	
+	//last Column Edited mouse hover div items
+	this.btn_lastEditMouseOverDiv=_div("PopoverBody slds-popover__body");
+	this.btn_lastModItem=_div("/Last Modified By.*/");
+	this.btn_createdDate=_div("/Created By: .*/");
+	this.btn_createdBy=_div("/Created By: Ab.*/");
 	
 	
 	

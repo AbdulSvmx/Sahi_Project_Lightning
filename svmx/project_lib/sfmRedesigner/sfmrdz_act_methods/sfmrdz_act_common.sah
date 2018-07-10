@@ -135,6 +135,28 @@ var $sfmrdz_act_common= new function sfmrdz_act_common(){
 		_wait(5000,_isVisible($sfmrdz_pg_common.link_clone));
 	};
 	
-
+	/**
+	 * Mouse Hover on column item in given row
+	 */
+	this.mouseOver=function($row,$column,$Type){
+		var $element=null;
+		if ($column=="Last Edited") {
+			$element=_div("/Text slds-text-body.*/",_near(_link($row)));
+		}else if ($column=="Status") {
+			var $statusDiv=_div("/rt-td DataTableCell--align-center/",_near(_link($row)),_under(_parentNode(_div($column),"DIV",1)));
+			$element=_svg_icon("/slds-icon-text/",_in($statusDiv));
+		}else if ($column=="Lock") {
+			$element=_svg_icon("/slds-icon-text/",_near(_link($row)));
+		}else if ($column=="Lock") {
+			if ($Type=="To create Source to Target records") {
+				var $typeDiv=_div("/rt-td DataTableCell--align-center/",_near(_link($row)),_under(_parentNode(_div($column),"DIV",1)));
+				$element=_svg_icon("/timesheet-entry/",_in($typeDiv));
+			}
+		}
+		_mouseOver($element);
+		_wait(1000,_isVisible($sfmrdz_pg_common.btn_lastEditMouseOverDiv));
+		return $callBack.returnResult(_exists($sfmrdz_pg_common.btn_lastEditMouseOverDiv), " mouse hover div on "+$column+" column for "+$row+" row not exists");
+		
+	};
 	
 };
