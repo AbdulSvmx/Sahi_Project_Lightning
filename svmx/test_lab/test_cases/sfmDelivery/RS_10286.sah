@@ -27,7 +27,10 @@ $bo_act_login.login($g_url,$bac_un,$bac_pwd);
 $sfm_act_lightningConfig.switchToLightning();
 //Clone the standard process and add it to wizard for testing with custom process.
 
+//Logout as admin and login as technician
+
 //Launch SFM designer for standard process without adding Feature permissions
+
 var $wo_number = $sfm_act_createCustomWizard.createWowithdateliterals();
 $bo_act_navigation.navigateToCreatedRecordUsingGlobalSearch($wo_number);
 $sfm_act_createCustomWizard.clickWizardlinks($Std_Sfm_process);

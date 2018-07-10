@@ -187,8 +187,12 @@ var $bo_pg_sfmTransactionAndDesigner = new function bo_pg_sfmTransactionAndDesig
 	//Added by JJ
     this.page_saved = _f("main").label("Page saved");
     this.btn_proceed_anyways = _f("main").button("Proceed Anyway");
+<<<<<<< HEAD
     this.btn_newLineForQc = s_button("+");
     this.btn_editExprSave = _f("main").s_button("Save");
     this.label_exprSaved = _f("main").label("Expression saved");
     this.label_sfmTxnSaved = _f("main").label("SFM Transaction saved");
+=======
+    this.btn_newLineForQc = s_button("\+");
+>>>>>>> 855fc16e59e71021aa5983ace17f25962e35806c
 };
