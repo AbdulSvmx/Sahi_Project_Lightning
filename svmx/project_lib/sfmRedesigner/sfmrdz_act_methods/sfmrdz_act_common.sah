@@ -43,9 +43,7 @@ var $sfmrdz_act_common= new function sfmrdz_act_common(){
 	this.searchObj=function($objName){
 		_setValue($sfmrdz_pg_common.txt_listFilter,$objName);
 		_keyPress($sfmrdz_pg_common.txt_listFilter, 13);
-		_wait(10000,!_isVisible(_link($objName)));
-		return $callBack.returnResult(!_exists($sfmrdz_pg_common.btn_msgNoResult), "\" "+$objName+" \" "+"Search");
-		
+		_wait(10000,_isVisible(_link($objName)));
 	};
 	
 		
@@ -70,10 +68,8 @@ var $sfmrdz_act_common= new function sfmrdz_act_common(){
 		//Collection All element under mentioned column
 		var $list=null;
 			if ($colName=="TRANSACTION NAME" || $colName=="DATA VALIDATION RULES NAME" || $colName=="Expression Name") {
-				_log("Under if loop: ");
 				$list = _collect("_link","/.*/",_under(_div($colName)));
 			}else if ($colName=="Source Object" || $colName=="TODO_TARGET_OBJECT" || $colName=="Object") {
-				_log("Under else loop: ");
 				$list = _collect("_span","/.*/",_under(_div($colName)));
 			}
 			_log($list.length);
@@ -81,10 +77,7 @@ var $sfmrdz_act_common= new function sfmrdz_act_common(){
 		
 		//extracting element text and saving in array
 		for(var $i=0;$i<$list.length;$i++){
-			if (_getText($list[$i])!=="") {
-				$listName[$i]=_getText($list[$i]);
-			}
-			
+			$listName[$i]=_getText($list[$i]);
 		}
 		
 		//Generating Original copy
@@ -113,8 +106,8 @@ var $sfmrdz_act_common= new function sfmrdz_act_common(){
 				break;
 			}	
 		}
-		//_assertTrue($retVal, "Links on "+$colName+" column are not sorted in order");
-		return $retVal;
+		_assertTrue($retVal, "Links on "+$colName+" column are not sorted in order");
+
 	};
 	
 	/**

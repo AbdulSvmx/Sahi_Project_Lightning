@@ -30,8 +30,8 @@ var $bo_pg_sfmTransactionAndDesigner = new function bo_pg_sfmTransactionAndDesig
 	this.txt_mapID = _f("main").s_textinput("Input ID Here[2]");
 	this.btn_saveMap = _f("main").s_button("Save[2]");
 
-	 this.txt_standardSfmTransactionQuickFind= _f("main").s_textinput("searchText[2]");
-    this.btn_standardSfmTransaction= _f("main").tab("Standard SFM Transactions");
+	this.txt_standardSfmTransactionQuickFind = _f("main").s_textinput("searchText[2]");
+    this.btn_standardSfmTransaction = _f("main").tab("Standard SFM Transactions");
     this.btn_yourCustomSfmTransactions = _f("main").tab("Your Custom Sjavascript:void(0)FM Transactions");
     this.btn_yourCustomSfmTransactions = _f("main").tab("Your Custom SFM Transactions");
     this.txt_yourCustomSfmTransactionsQuickFind = _f("main").s_textinput("searchText[1]").near(_f("main").tab("Your Custom SFM Transactions"));
@@ -84,19 +84,19 @@ var $bo_pg_sfmTransactionAndDesigner = new function bo_pg_sfmTransactionAndDesig
 	//Drop Down List in Qualifying Criteria and Field Mappings
 	this.dropDownList = _f("main").s_dropdownlist("objCombo");
 	this.selectExistingPageLayout=_f("main").s_combobox("searchCombo[3]");
-	this.tab_advancedOptions=_f("main").tab("Advanced Options")
-	this.lbl_sorting=_f("main").tab("Sorting")
-	this.lbl_partObj=_f("main").s_label("Parts[4]")
-	this.lbl_partField=_f("main").s_label("Part")
-	this.img_add=_f("main").s_button(">[1]")
+	this.tab_advancedOptions=_f("main").tab("Advanced Options");
+	this.lbl_sorting=_f("main").tab("Sorting");
+	this.lbl_partObj=_f("main").s_label("Parts[4]");
+	this.lbl_partField=_f("main").s_label("Part");
+	this.img_add=_f("main").s_button(">[1]");
 
-	this.lbl_laborObj=_f("main").s_label("Labor[4]")
-	this.lbl_activityTypeField=_f("main").s_label("Activity Type")
-	this.lbl_expenseObj=_f("main").s_label("Expense[3]")
-	this.lbl_lineQtyField=_f("main").s_label("Line Qty")
-	this.lbl_travelObj=_f("main").s_label("Travel[1]")
-	this.lbl_statDateField=_f("main").s_label("Start Date and Time")
-	this.lbl_endDateField=_f("main").s_label("End Date and Time[1]")	
+	this.lbl_laborObj=_f("main").s_label("Labor[4]");
+	this.lbl_activityTypeField=_f("main").s_label("Activity Type");
+	this.lbl_expenseObj=_f("main").s_label("Expense[3]");
+	this.lbl_lineQtyField=_f("main").s_label("Line Qty");
+	this.lbl_travelObj=_f("main").s_label("Travel[1]");
+	this.lbl_statDateField=_f("main").s_label("Start Date and Time");
+	this.lbl_endDateField=_f("main").s_label("End Date and Time[1]");	
 	this.sel_targetObjFld=_f("main").s_textinput(3);
 	this.lbl_clkHeaderInQcPage=_f("main").s_label("Work Order");
 	this.saveTheMap=_f("main").s_textinput("Save this map as");
@@ -187,5 +187,8 @@ var $bo_pg_sfmTransactionAndDesigner = new function bo_pg_sfmTransactionAndDesig
 	//Added by JJ
     this.page_saved = _f("main").label("Page saved");
     this.btn_proceed_anyways = _f("main").button("Proceed Anyway");
-    this.btn_newLineForQc = s_button("\+");
+    this.btn_newLineForQc = s_button("+");
+    this.btn_editExprSave = _f("main").s_button("Save");
+    this.label_exprSaved = _f("main").label("Expression saved");
+    this.label_sfmTxnSaved = _f("main").label("SFM Transaction saved");
 };

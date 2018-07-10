@@ -12,32 +12,6 @@ var $sfm_pg_wo = new function sfm_pg_wo() {
 	this.btn_wo_edit = _div("Edit");//Changed for lightning
 	this.txt_wo_zip = _textbox("/part of the/",_near(_span("/Zip/",_in(_div("modal-container slds-modal__container")))));//changed for lightning for zip textbox with in edit WO modal window
 	this.btn_wo_edit_save = _span("/Save/", _rightOf(_span("Save & New"))); // new one added for lightning for save button within editWO modal window
-
-
-
-	this.assert_wizard =function($wizTitle){
-		if(_exists(_cell($wizTitle))){
-			_log("Pass");
-		}
-		else{
-			_log("Fail");
-		}
-		
-//		_assertExists(_cell($wizTitle),"Wizard Not Present");
-	};
-	this.clickTab = function($tabName){
-		_click(_link($tabName));
-//		_log("I am Here");
-	};
-	//function to launch app launcher
-	this.openAppLauncher = function(){
-		if(_isVisible(_div("App Launcher"))){
-			_click(_div("App Launcher"));
-		}else{
-			_click(_link("App Launcher"));
-		}
-		
-	}
 	this.label_wo = _heading1("/WO-/"); //Changed for Lightning
 	this.btn_next = _span("Next"); //Added for Lightning
 	this.lkup_account = _textbox(0,_near(_span("Account[1]")));//Added for Lightning
@@ -90,10 +64,14 @@ var $sfm_pg_wo = new function sfm_pg_wo() {
 	this.btn_include_values = _button("Include Values");
 	this.btn_save_dep_picklist = _submit(" Save ");
 	this.btn_new_field_dependency = _button(0,_near(_heading3("Field Dependencies")));
+	this.link_profileImageRightCorner = div("profileTrigger branding-user-profile bgimg branding-profile_default-small circular forceEntityIcon");
+	this.link_lightningLogout = _link("Log Out");
 	
 //Added by JJ for SFM Delivery components
 	this.link_delivery_save = _link("Save");
-
+    this.btn_arrowNextToGetPrice = _span("/btnWrap/",_rightOf(_div("Quick SaveGet Price")));
+    this.link_launchSfmDesigner = _span("Launch SFM Designer");
+};
 	
 	this.openAppLauncher = function(){
 		if(_isVisible(_submit("App Launcher"))){
@@ -103,5 +81,28 @@ var $sfm_pg_wo = new function sfm_pg_wo() {
 			_click(_div("App Launcher"));
 
 		}
-	}}
+	};
+	this.assert_wizard =function($wizTitle){
+		if(_exists(_cell($wizTitle))){
+			_log("Pass");
+		}
+		else{
+			_log("Fail");
+		}
+		
+//		_assertExists(_cell($wizTitle),"Wizard Not Present");
+	};
+	this.clickTab = function($tabName){
+		_click(_link($tabName));
+//		_log("I am Here");
+	};
+	//function to launch app launcher
+	this.openAppLauncher = function(){
+		if(_isVisible(_div("App Launcher"))){
+			_click(_div("App Launcher"));
+		}else{
+			_click(_link("App Launcher"));
+		}
+		
+	};
 //		_log("I am Here");};
