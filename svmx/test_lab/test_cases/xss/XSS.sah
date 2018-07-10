@@ -2,8 +2,7 @@
 var $attackTag = "<img  src=p onerror=alert(AttackConfirmed)>";
 
 // Pass the URl/Page Locations
-var $urlArray = $excel.readFromCustomExcel("../xss/xss_excelData/xssData.xlsx",
-		"Sheet1", false, true)
+var $urlArray = $excel.readFromCustomExcel("../xss/xss_excelData/xssData.xlsx","Sheet1", false, true)
 
 $bo_act_login.login("https://login.salesforce.com", "yadav.thyagaraj@ge.com",
 		"Svmx123#")
