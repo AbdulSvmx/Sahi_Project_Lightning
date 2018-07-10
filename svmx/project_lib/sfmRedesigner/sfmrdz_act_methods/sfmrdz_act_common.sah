@@ -75,17 +75,19 @@ var $sfmrdz_act_common= new function sfmrdz_act_common(){
 			}else if ($colName=="Source Object" || $colName=="TODO_TARGET_OBJECT" || $colName=="Object") {
 				_log("Under else loop: ");
 				$list = _collect("_span","/.*/",_under(_div($colName)));
-			}
-			_log($list.length);
+			}			
+		
+		//new array declaration
 		var $listName=new Array($list.length);
 		
-		//extracting element text and saving in array
-		for(var $i=0;$i<$list.length;$i++){
-			if (_getText($list[$i])!=="") {
-				$listName[$i]=_getText($list[$i]);
-			}
-			
-		}
+		//fetching element text to array
+		for (var $i = 0; $i < $list.length; $i++) {
+			$listName[$i]=_getText($list[$i]);
+		}	
+		
+
+		// filtering array to remove space
+		$listName=$listName.filter(Boolean);
 		
 		//Generating Original copy
 		var $orgList=new Array($listName.length);
@@ -102,6 +104,7 @@ var $sfmrdz_act_common= new function sfmrdz_act_common(){
 			$linkListSorted=$linkListAscSorted.reverse();
 		}
 
+		
 		var $retVal=false;
 		for(var $i=0;$i<$linkListSorted.length;$i++){	
 			if($orgList[$i]==$linkListSorted[$i]){;
