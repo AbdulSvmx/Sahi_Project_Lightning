@@ -20,11 +20,11 @@ _setSpeed($g_stepSpeed);
 		 * Login to the Sandbox Org and launching Transaction list view
 		 */
 		$bo_act_login.login($url, $un, $pwd);
-		$sfmrdz_act_common.LaunchListViewWindow($viewName);
-		/*
+		var $homecurrentHomePageULR=$sfmrdz_act_common.LaunchListViewWindow($viewName);
+		
 		//Transaction Search
 		var $trnRetVal=$sfmrdz_act_common.searchObj($trnName);
-		_assertTrue($trnRetVal,$trnName+" is not available");
+		_assertExists(_link($trnName),$trnName+" is not available");
 		
 		//Source Object Search
 		var $sourceObjretVal=$sfmrdz_act_trnListView.contentSearch($sourceObjName);
@@ -34,10 +34,12 @@ _setSpeed($g_stepSpeed);
 		//Target Object Search
 		var $targetObjretVal=$sfmrdz_act_trnListView.contentSearch($targetObjName);
 		_assertTrue($targetObjretVal[0],$targetObjName+" is not available");
-		*/
+		
 		//Tags Search
 		var $tagObjretVal=$sfmrdz_act_trnListView.contentSearch($tagName);
 		_assertTrue($tagObjretVal[0],$tagName+" is not available");
 		
+		//$sfmrdz_act_common.launchHomeWindow($homecurrentHomePageULR);
+		//$bo_act_login.logOut();
 		
 $SFMDZ_172.end();

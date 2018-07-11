@@ -16,30 +16,67 @@ _setSpeed($g_stepSpeed);
 	var $un="designer2@test.com";
 	var $pwd="designer@2";
 	var $viewName="transaction";
-	var $search="Contract";
-	var $objName="Activate Contract";
+
 
 	/**
 	 * Login to the Sandbox Org and launching Transaction list view
 	 */
 	$bo_act_login.login($url, $un, $pwd);
-	$sfmrdz_act_common.LaunchListViewWindow($viewName);
-	//var $contentSort=$sfmrdz_act_trnListView.contentSearch($search);
-	//_assertTrue($contentSort[0],$search+" text is not available in "+$contentSort[1]);
+	var $homecurrentHomePageULR=$sfmrdz_act_common.LaunchListViewWindow($viewName);
 	
-	
-	//_click($sfmrdz_pg_trnListView.btn_heading_trnCol);
-	_wait(2000);
-	
+	//Content Search
+	var $search="Contract";
 
-	//Verification of Recent Item
-	_click(_link($objName));
-	_click($sfmrdz_pg_common.txt_listFilter);
-	_wait(5000,$sfmrdz_pg_trnListView.btn_recentSearchDiv);
-	_assertExists($sfmrdz_pg_trnListView.lbl_recentItem);
-	_assertExists(_link($objName));
+	var $contentSort=$sfmrdz_act_trnListView.contentSearch($search);
+	_assertTrue($contentSort[0],$search+" text is not available in "+$contentSort[1]);
 	
-	_deleteCookie("/.*/");
+	//just to avoid browser hang filtering result by standart object
+	$sfmrdz_act_common.typePicklist("Standard SFM Transactions");
+	
+	//Lock icon mouse Hover
+	$sfmrdz_act_common.mouseOver("Activate Contract", "Lock", "");
+	_assertVisible($sfmrdz_pg_common.btn_lockIcon);
 
+	//Transaction Type - To create and manage child lines
+	$sfmrdz_act_common.mouseOver("Activate Contract", "Type", "To create and manage child lines");
+	_assertVisible($sfmrdz_pg_common.btn_createManageChildLine);
+	
+	//Transaction Type - To create Source to Target records
+	$sfmrdz_act_common.mouseOver("Create Service Contract Renewal", "Type", "To create Source to Target records");
+	_assertVisible($sfmrdz_pg_common.btn_sourceToTarget);
+	
+	$sfmrdz_act_common.typePicklist("To create and map child lines only");
+	$sfmrdz_act_common.searchObj("");
+	_wait(5000,_isVisible($sfmrdz_pg_common.btn_actionMenu));
+	
+	//Transaction Type - To create Source to Target records
+	$sfmrdz_act_common.mouseOver("Create Usage Lines from Estimates", "Type", "To create and map child lines only");
+	_assertVisible($sfmrdz_pg_common.btn_createMapChildLine);
+	
+	//Status Icon mouse Hover
+	$sfmrdz_act_common.mouseOver("Create Usage Lines from Estimates", "Status", "");
+	_assertVisible($sfmrdz_pg_common.btn_completedIcon);
+	
+	//reset
+	$sfmrdz_act_common.typePicklist("Show All");
+	
+	//Last edited column mouse hover item check
+	$sfmrdz_act_common.searchObj("Activate");
+	_wait(5000,_isVisible($sfmrdz_pg_common.btn_actionMenu));
+	
+	$sfmrdz_act_common.mouseOver("Activate Preventive Maintenance Plan","Last Edited");
+	_wait(1000,_isVisible($sfmrdz_pg_common.btn_lastEditMouseOverDiv));
+	_assertExists($sfmrdz_pg_common.btn_lastEditMouseOverDiv);
+	_assertExists($sfmrdz_pg_common.btn_createdBy);
+	_assertExists($sfmrdz_pg_common.btn_createdDate);
+	
+	//Delete option for Standard SFM
+	$sfmrdz_act_common.searchObj("Activate Preventive Maintenance Plan");
+	_click($sfmrdz_pg_common.btn_actionMenu);
+	_wait(5000,_isVisible($sfmrdz_pg_common.link_clone));
+	_assertNotVisible($sfmrdz_pg_common.link_delete, "delete action link is available on ");
+
+	//$sfmrdz_act_common.launchHomeWindow($homecurrentHomePageULR);
+	//$bo_act_login.logOut();
 
 $SFMDZ_171.end();

@@ -43,7 +43,7 @@ var $sfmrdz_act_common= new function sfmrdz_act_common(){
 	this.searchObj=function($objName){
 		_setValue($sfmrdz_pg_common.txt_listFilter,$objName);
 		_keyPress($sfmrdz_pg_common.txt_listFilter, 13);
-		_wait(10000,!_isVisible(_link($objName)));
+		_wait(10000,_isVisible($sfmrdz_pg_common.btn_actionMenu));
 		return $callBack.returnResult(!_exists($sfmrdz_pg_common.btn_msgNoResult), "\" "+$objName+" \" "+"Search");
 		
 	};
@@ -75,17 +75,19 @@ var $sfmrdz_act_common= new function sfmrdz_act_common(){
 			}else if ($colName=="Source Object" || $colName=="TODO_TARGET_OBJECT" || $colName=="Object") {
 				_log("Under else loop: ");
 				$list = _collect("_span","/.*/",_under(_div($colName)));
-			}
-			_log($list.length);
+			}			
+		
+		//new array declaration
 		var $listName=new Array($list.length);
 		
-		//extracting element text and saving in array
-		for(var $i=0;$i<$list.length;$i++){
-			if (_getText($list[$i])!=="") {
-				$listName[$i]=_getText($list[$i]);
-			}
-			
-		}
+		//fetching element text to array
+		for (var $i = 0; $i < $list.length; $i++) {
+			$listName[$i]=_getText($list[$i]);
+		}	
+		
+
+		// filtering array to remove space
+		$listName=$listName.filter(Boolean);
 		
 		//Generating Original copy
 		var $orgList=new Array($listName.length);
@@ -102,6 +104,7 @@ var $sfmrdz_act_common= new function sfmrdz_act_common(){
 			$linkListSorted=$linkListAscSorted.reverse();
 		}
 
+		
 		var $retVal=false;
 		for(var $i=0;$i<$linkListSorted.length;$i++){	
 			if($orgList[$i]==$linkListSorted[$i]){;
@@ -132,6 +135,69 @@ var $sfmrdz_act_common= new function sfmrdz_act_common(){
 		_wait(5000,_isVisible($sfmrdz_pg_common.link_clone));
 	};
 	
+	/**
+	 * Mouse Hover on column item in given row
+	 */
+	this.mouseOver=function($row,$column,$Type){
+		var $element=null;
+		if ($column=="Last Edited") {
+			$element=_div("/Text slds-text-body.*/",_near(_link($row)));
+		}else if ($column=="Status") {
+			var $statusDiv=_div("/rt-td DataTableCell--align-center/",_near(_link($row)),_under(_parentNode(_div($column),"DIV",1)));
+			$element=_svg_icon("/slds-icon-text/",_in($statusDiv));
+		}else if ($column=="Lock") {
+			$element=_svg_icon("/slds-icon-text/",_near(_link($row)));
+		}else if ($column=="Type") {
+			var $typeDiv=_div("/rt-td DataTableCell--align-center/",_near(_link($row)));
+			if ($Type=="To create Source to Target records") {
+				$element=_svg_icon("/timesheet/",_in($typeDiv));
+			}else if ($Type=="To create and map child lines only") {
+				$element=_svg_icon("/timesheet-entry/",_in($typeDiv));
+			}else if ($Type=="To create and manage child lines") {
+				$element=_svg_icon("/timeslot/",_in($typeDiv));
+			}
+		}
+		_mouseOver($element);
+		_wait(1000,_isVisible($sfmrdz_pg_common.btn_lastEditMouseOverDiv));
+		return $callBack.returnResult(_exists($sfmrdz_pg_common.btn_lastEditMouseOverDiv), " mouse hover div on "+$column+" column for "+$row+" row not exists");
+		
+	};
+	
+	//Secondary sort fn
+	this.secondarySort=function(){
+	
+		var $whereUsedList=_collect("_svg_icon","/.*/",_under(_div("Where Used")));
+		_log("total no of where used objects: "+$whereUsedList.length);
+		var $linkNames=new Array($whereUsedList.length);
 
+		//extracting link text
+		for(var $i=0;$i<$whereUsedList.length;$i++){
+			$linkNames[$i]=_getText(_link("/.*/",_near($whereUsedList[$i])));
+		}
+		_log("linkName count: "+$linkNames.length);
+		
+		//creating Original array copy
+		var $orgList=new Array();
+		for(var $i=0;$i<$linkNames.length;$i++){
+			$orgList[$i]=$linkNames[$i];
+		}
+		
+		//sorting link name array
+		$linkNames=$linkNames.sort();
+		$retVal=false;
+		
+		for(var $i=0;$i<$linkNames.length;$i++){
+			if($linkNames[$i]==$orgList[$i]){
+				$retVal=true;
+			}else{
+				$retVal=false;
+				_log("element visible on secondary sort col is : "+$orgList[$i]);
+				_log("element expected on secondary sort col is : "+$linkNames[$i]);
+				break;
+			}
+		}
+		return $callBack.returnResult($retVal);
+
+	};
 	
 };
