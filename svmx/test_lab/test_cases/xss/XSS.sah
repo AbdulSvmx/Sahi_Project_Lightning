@@ -22,11 +22,9 @@ pritnStatus();
 function runScan(){
 	
 for (int = 0; int < $urlArray.length; int++) {
-
-
 	
 	$urlCount =int;
-	$url = $urlArray[int]//$urlArray[int]["URL"];
+	$url = $urlArray[int]["URL"];
 	_navigateTo($url);
 	_call(top.location.reload(true));
 	_wait(2000);
