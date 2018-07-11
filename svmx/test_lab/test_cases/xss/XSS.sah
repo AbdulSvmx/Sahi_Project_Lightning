@@ -3,8 +3,8 @@ _setSpeed(100);
 var $attackTag = "<img  src=p onerror=alert(123)>";
 var $attackTagSelectionField = "/img src=p/"
 // Pass the URl/Page Locations
-var $urlArray = $excel.readFromCustomExcel("../xss/xss_excelData/xssData.xlsx","Sheet1", false, true)
-	//var $urlArray = ["https://svmxc.na40.visual.force.com/apex/SVMXC__SPM_configuration"];
+//var $urlArray = $excel.readFromCustomExcel("../xss/xss_excelData/xssData.xlsx","Sheet1", false, true)
+	var $urlArray = ["https://svmxc.na40.visual.force.com/apex/SVMXC__SPM_configuration"];
 $bo_act_login.login("https://login.salesforce.com", "yadav.thyagaraj@ge.com",
 		"Svmx123#")
 	
@@ -26,7 +26,7 @@ for (int = 0; int < $urlArray.length; int++) {
 
 	
 	$urlCount =int;
-	$url = $urlArray[int]["URL"];
+	$url = $urlArray[int]//$urlArray[int]["URL"];
 	_navigateTo($url);
 	_call(top.location.reload(true));
 	_wait(2000);
@@ -42,11 +42,11 @@ for (int = 0; int < $urlArray.length; int++) {
 	// each page
 	_selectWindow();
 	if (_isVisible(_span("/svmx-tab/"))) {
-		var $tabbing = _collect("_span", "/svmx-tab/");
+		var $tabbing =  _collect("_span", "/svmx-tab/");
 
 	} else {
 
-		var $tabbing = _collect("_cell", "/rich-tab-header/");
+		var $tabbing =  _collect("_cell", "/rich-tab-header/");
 	}
 
 	_log("Collected Spans = " + $tabbing.length);
@@ -62,15 +62,18 @@ for (int = 0; int < $urlArray.length; int++) {
 	// Select a Tab
 	for (var $s = 0; $s < $tabs; $s++) {
 		_setStrictVisibilityCheck(true);
-		try {
-			if (skipFlag != 1) {
-				_click($tabbing[$s]);
-				var $t = _getText($tabbing[$s]);
-				_log("in TAB ******************* " + $t + "****");
-			}
-		} catch (e) {
+		
+			try {
+				if (skipFlag != 1) {
+					//Getting the names or iDS so use _span
+					_click($tabbing[$s]);
+				
+					_log("in TAB ******************* " + $t + "****");
+				}
+			} catch (e) {
 
-		}
+			}
+		
 		_setStrictVisibilityCheck(false);
 		killWindow();
 		// Initial check
@@ -173,18 +176,19 @@ $test.end();
 }
 
 function killWindow(){
-	try {
+	
 		var $recentWindowId = _getRecentWindow().sahiWinId;
+		if(_windowExists($recentWindowId, 10)){
+			try{
 		_selectWindow($recentWindowId);
 		_closeWindow();
-		
 		}catch(e){
-			
+		}
 		}
 	
-		
 		_selectWindow();
 		_focusWindow();
+
 }
 
 function captureAttack() {
