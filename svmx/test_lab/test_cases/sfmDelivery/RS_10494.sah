@@ -42,9 +42,9 @@ $sfm_act_wizards.addToWizard($wizardObject, $wizardName[0], $wizardType[1], $sfm
 _selectDomain();
 $sfm_act_createCustomWizard.createWowithoutvalues();
 
-_click(_span("RS_10494_107201816544"));
+_click(_span($sfmName));
 _selectDomain($domainName);
-_wait(8000,_div("RS_10494_107201816544"));
+_wait(8000,_div($sfmName));
 
 //Add a row to all child lines
 
