@@ -24,7 +24,7 @@ var $sfm_act_sfmDesigner = new function sfm_act_sfmDesigner() {
 			_wait(3000,_isVisible($sfm_pg_sfmDesigner.btn_deliveryAddRowTravel));
 			_click($sfm_pg_sfmDesigner.btn_deliveryAddRowTravel);
 		}
-		$sfm_act_common.navToExtendedEdit();
+		$sfm_act_sfmDesigner.navToExtendedEdit();
 		_click($sfm_pg_sfmDesigner.txt_eeEdit);
 		
 		//_click();
