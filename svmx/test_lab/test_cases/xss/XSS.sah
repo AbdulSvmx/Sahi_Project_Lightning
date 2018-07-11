@@ -174,14 +174,14 @@ $test.end();
 
 function killWindow(){
 	try {
-		var $winEx = _windowExists("/handshake alert/");
-		if($winEx){
-		_selectWindow("/handshake alert/");
+		var $recentWindowId = _getRecentWindow().sahiWinId;
+		_selectWindow($recentWindowId);
 		_closeWindow();
-		}
+		
 		}catch(e){
 			
 		}
+	
 		
 		_selectWindow();
 		_focusWindow();
