@@ -30,12 +30,41 @@ _setSpeed($g_stepSpeed);
 	var $contentSort=$sfmrdz_act_trnListView.contentSearch($search);
 	_assertTrue($contentSort[0],$search+" text is not available in "+$contentSort[1]);
 	
+	//just to avoid browser hang filtering result by standart object
+	$sfmrdz_act_common.typePicklist("Standard SFM Transactions");
+	
+	//Lock icon mouse Hover
+	$sfmrdz_act_common.mouseOver("Activate Contract", "Lock", "");
+	_assertVisible($sfmrdz_pg_common.btn_lockIcon);
 
+	//Transaction Type - To create and manage child lines
+	$sfmrdz_act_common.mouseOver("Activate Contract", "Type", "To create and manage child lines");
+	_assertVisible($sfmrdz_pg_common.btn_createManageChildLine);
+	
+	//Transaction Type - To create Source to Target records
+	$sfmrdz_act_common.mouseOver("Create Service Contract Renewal", "Type", "To create Source to Target records");
+	_assertVisible($sfmrdz_pg_common.btn_sourceToTarget);
+	
+	$sfmrdz_act_common.typePicklist("To create and map child lines only");
+	$sfmrdz_act_common.searchObj("");
+	_wait(5000,_isVisible($sfmrdz_pg_common.btn_actionMenu));
+	
+	//Transaction Type - To create Source to Target records
+	$sfmrdz_act_common.mouseOver("Create Usage Lines from Estimates", "Type", "To create and map child lines only");
+	_assertVisible($sfmrdz_pg_common.btn_createMapChildLine);
+	
+	//Status Icon mouse Hover
+	$sfmrdz_act_common.mouseOver("Create Usage Lines from Estimates", "Status", "");
+	_assertVisible($sfmrdz_pg_common.btn_completedIcon);
+	
+	//reset
+	$sfmrdz_act_common.typePicklist("Show All");
+	
 	//Last edited column mouse hover item check
 	$sfmrdz_act_common.searchObj("Activate");
 	_wait(5000,_isVisible($sfmrdz_pg_common.btn_actionMenu));
 	
-	$sfmrdz_act_common.mouseOver("Last Edited","Activate Preventive Maintenance Plan");
+	$sfmrdz_act_common.mouseOver("Activate Preventive Maintenance Plan","Last Edited");
 	_wait(1000,_isVisible($sfmrdz_pg_common.btn_lastEditMouseOverDiv));
 	_assertExists($sfmrdz_pg_common.btn_lastEditMouseOverDiv);
 	_assertExists($sfmrdz_pg_common.btn_createdBy);

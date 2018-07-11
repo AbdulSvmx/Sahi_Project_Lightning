@@ -43,7 +43,7 @@ var $sfmrdz_act_common= new function sfmrdz_act_common(){
 	this.searchObj=function($objName){
 		_setValue($sfmrdz_pg_common.txt_listFilter,$objName);
 		_keyPress($sfmrdz_pg_common.txt_listFilter, 13);
-		_wait(10000,!_isVisible(_link($objName)));
+		_wait(10000,_isVisible($sfmrdz_pg_common.btn_actionMenu));
 		return $callBack.returnResult(!_exists($sfmrdz_pg_common.btn_msgNoResult), "\" "+$objName+" \" "+"Search");
 		
 	};
@@ -147,10 +147,14 @@ var $sfmrdz_act_common= new function sfmrdz_act_common(){
 			$element=_svg_icon("/slds-icon-text/",_in($statusDiv));
 		}else if ($column=="Lock") {
 			$element=_svg_icon("/slds-icon-text/",_near(_link($row)));
-		}else if ($column=="Lock") {
+		}else if ($column=="Type") {
+			var $typeDiv=_div("/rt-td DataTableCell--align-center/",_near(_link($row)));
 			if ($Type=="To create Source to Target records") {
-				var $typeDiv=_div("/rt-td DataTableCell--align-center/",_near(_link($row)),_under(_parentNode(_div($column),"DIV",1)));
+				$element=_svg_icon("/timesheet/",_in($typeDiv));
+			}else if ($Type=="To create and map child lines only") {
 				$element=_svg_icon("/timesheet-entry/",_in($typeDiv));
+			}else if ($Type=="To create and manage child lines") {
+				$element=_svg_icon("/timeslot/",_in($typeDiv));
 			}
 		}
 		_mouseOver($element);
