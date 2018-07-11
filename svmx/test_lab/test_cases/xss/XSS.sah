@@ -64,7 +64,12 @@ for (int = 0; int < $urlArray.length; int++) {
 			try {
 				if (skipFlag != 1) {
 					//Getting the names or iDS so use _span
-					_click($tabbing[$s]);
+					
+					if(_isVisible($tabbing[$s])){
+						
+						_click($tabbing[$s]);
+					}
+					
 				
 					_log("in TAB ******************* " + $t + "****");
 				}
