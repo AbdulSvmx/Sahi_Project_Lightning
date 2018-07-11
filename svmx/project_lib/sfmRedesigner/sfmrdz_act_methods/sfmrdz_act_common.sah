@@ -163,4 +163,41 @@ var $sfmrdz_act_common= new function sfmrdz_act_common(){
 		
 	};
 	
+	//Secondary sort fn
+	this.secondarySort=function(){
+	
+		var $whereUsedList=_collect("_svg_icon","/.*/",_under(_div("Where Used")));
+		_log("total no of where used objects: "+$whereUsedList.length);
+		var $linkNames=new Array($whereUsedList.length);
+
+		//extracting link text
+		for(var $i=0;$i<$whereUsedList.length;$i++){
+			$linkNames[$i]=_getText(_link("/.*/",_near($whereUsedList[$i])));
+		}
+		_log("linkName count: "+$linkNames.length);
+		
+		//creating Original array copy
+		var $orgList=new Array();
+		for(var $i=0;$i<$linkNames.length;$i++){
+			$orgList[$i]=$linkNames[$i];
+		}
+		
+		//sorting link name array
+		$linkNames=$linkNames.sort();
+		$retVal=false;
+		
+		for(var $i=0;$i<$linkNames.length;$i++){
+			if($linkNames[$i]==$orgList[$i]){
+				$retVal=true;
+			}else{
+				$retVal=false;
+				_log("element visible on secondary sort col is : "+$orgList[$i]);
+				_log("element expected on secondary sort col is : "+$linkNames[$i]);
+				break;
+			}
+		}
+		return $callBack.returnResult($retVal);
+
+	};
+	
 };
