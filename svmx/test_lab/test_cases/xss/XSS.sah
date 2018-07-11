@@ -138,6 +138,7 @@ for (var int = 0; int < $urlArray.length; int++) {
 	_selectWindow("/handshake alert/");
 	_closeWindow();
 	}
+	_logOutput("URL Scanned : "+int+"Of Total : "+$urlArray.length);
 }
 
 function captureAttack() {

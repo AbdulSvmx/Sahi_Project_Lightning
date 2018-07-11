@@ -777,6 +777,9 @@ var $sfm_act_createCustomWizard = new function sfm_act_createCustomWizard() {
         _click(_link($accNum));
         _click($sfm_pg_wo.link_wopriority);
         _click(_link("Medium"));
+        _click($sfm_pg_wo.sel_orderType);
+        //Just for selection of mandatory fields
+        _click(_link("Field Service"));
 		_click($sfm_pg_wo.btn_wo_save);
 		$woId= _getText($sfm_pg_wo.label_wo);
 		return $woId;
