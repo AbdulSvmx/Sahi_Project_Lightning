@@ -15,7 +15,7 @@ runScan();
 pritnStatus();
 
 		function pritnStatus(){
-			_logOutput("URL Scanned : "+ $urlCount +"Of Total : "+$urlArray.length);
+			_logOutput(" \n\r URL Scanned : "+ $urlCount +"Of Total : "+$urlArray.length);
 		}
 		
 		
@@ -31,7 +31,7 @@ for (int = 0; int < $urlArray.length; int++) {
 	_continueOnError();
 	
 	
-	var $test = _testcase($url,"SCANNED");
+	var $test = _testcase(" SCANNED NO : ["+int+"]",$url);
 	$test.start();
 	
 	captureAttack();
@@ -64,13 +64,9 @@ for (int = 0; int < $urlArray.length; int++) {
 			try {
 				if (skipFlag != 1) {
 					//Getting the names or iDS so use _span
-					
 					if(_isVisible($tabbing[$s])){
-						
 						_click($tabbing[$s]);
 					}
-					
-				
 					_log("in TAB ******************* " + $t + "****");
 				}
 			} catch (e) {
