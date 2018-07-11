@@ -184,11 +184,18 @@ var $bo_act_navigation = new function bo_act_navigation() {
     	
     //Changed by Janaki to Lightning flow.
     	this.navigateToCreatedRecordUsingGlobalSearch = function($recordToBeSearch){
+    	_click(_link("Home"));
     	_setValue(_textbox("Search Salesforce"),$recordToBeSearch);
     	_keyPress(_textbox("Search Salesforce"),13);
     	_wait(3000, _isVisible($recordToBeSearch));
     	_click(_link("/"+$recordToBeSearch+"/",_near(_heading1("Search Results"))));
         };
+        
+     this.navigateToFeaturePermissionsPage = function() {
+    	 $bo_act_navigation.navigateToSvmxSetup();
+		_selectDomain("/svmx/");
+		_click($bo_pg_servicemaxSetup.btn_featurePermissions);
+	 };
         
      this.navigateToConfigurationProfilesPage = function(){
         	$bo_act_navigation.navigateToHome();
@@ -438,8 +445,20 @@ var $bo_act_navigation = new function bo_act_navigation() {
        this.getCurrentTimeStamp = function(){
         	//This function returns the current date and time in the form - DD-MM-YYYY_HR:MIN:SEC
              var stamp = new Date();
-             var timeStamp = stamp.getDate() + "-" + (stamp.getMonth()+1) + "-" + stamp.getFullYear() + "_" + stamp.getHours() + ":" + stamp.getMinutes() + ":" + stamp.getSeconds();
+             var timeStamp = stamp.getDate() + "_" + (stamp.getMonth()+1) + "_" + stamp.getFullYear() + "_" + stamp.getHours() + "_" + stamp.getMinutes() + "_" + stamp.getSeconds();
         	 return timeStamp;
 
         		  };
+        this.addSfmDesignerPermissionToUser = function($userName,$groupProfile){
+        //This function adds the SFM Designer launching permission to the given user in the given group profile.
+        	_click(_listItem($groupProfile));
+        	_setValue($bo_pg_servicemaxSetup.txt_featurePermissionSearch,$userName);
+        	_click($bo_pg_servicemaxSetup.btn_featurePermissionUserSearch);
+        	//Click the SFM designer checkbox. Only one search result is expected as the username is unique.
+        	_click(_div("svmx-grid-checkheader[1]"));
+        	//Add step to click on 'Save' button as it is not visible in Lightning experience.
+        	
+        	
+        	
+        };
 };

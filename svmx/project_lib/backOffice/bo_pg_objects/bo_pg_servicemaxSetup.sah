@@ -59,6 +59,11 @@ var $bo_pg_servicemaxSetup = new function bo_pg_servicemaxSetup(){
 				this.btn_mobileAndOffline = _div("Mobile & Offline");
 				this.btn_mobileconfiguration = _div("Mobile Configuration");
 				this.listselectprofile = _select(0);
+	//Added by JJ for Feature Permissions page
+	this.btn_featurePermissions = _div("Feature Permission");
+	this.txt_featurePermissionSearch = _textbox("/searchtextfield/");
+	this.btn_featurePermissionUserSearch = _span("Search");
+	
 				
 };
 

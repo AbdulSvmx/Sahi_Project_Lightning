@@ -28,9 +28,10 @@ $sfm_act_lightningConfig.switchToLightning();
 //Clone the standard process and add it to wizard for testing with custom process.
 
 //Logout as admin and login as technician
-
+$sfm_act_lightningConfig.logoutInLightning();
+$bo_act_login.login($g_url,$tech_un,$tech_pwd);
+$sfm_act_lightningConfig.switchToLightning();
 //Launch SFM designer for standard process without adding Feature permissions
-
 var $wo_number = $sfm_act_createCustomWizard.createWowithdateliterals();
 $bo_act_navigation.navigateToCreatedRecordUsingGlobalSearch($wo_number);
 $sfm_act_createCustomWizard.clickWizardlinks($Std_Sfm_process);
@@ -47,7 +48,12 @@ _assertNotVisible($sfm_pg_wo.link_launchSfmDesigner);
 _click($sfm_pg_wo.link_delivery_save);
 _selectDomain();
 //Add the SFM Designer feature permission to the logged in technician user
-//by loggin in as admin.
+//by logging in as admin.
+$sfm_act_lightningConfig.logoutInLightning();
+$bo_act_login.login($g_url,$bac_un,$bac_pwd);
+$sfm_act_lightningConfig.switchToLightning();
+$bo_act_navigation.navigateToFeaturePermissionsPage();
+
 
 
 //Launch SFM designer by cloning the same process after adding Feature permissions

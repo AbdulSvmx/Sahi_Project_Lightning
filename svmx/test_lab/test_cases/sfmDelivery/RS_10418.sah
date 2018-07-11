@@ -5,7 +5,6 @@ $RS_10418.start();
 var $object_name = "Work Order";
 var $wo_picklist = "Order Status";
 var $processName = "RS_10418";
-var $pageLayoutName = "RS_10313_pagelayout"
 var $process_to_clone = "Manage Work Order Lines - Usage";
 var $dependent_picklist = "Order Type";
 var $ctrl_unique_values = ["Open","Closed"];
@@ -14,12 +13,13 @@ var $dep_picklist_values = ["Depot Repair","Field Service","Field Service"];
 var $ctr = 0;
 var $fields_array = [];
 $fields_array.push($dependent_picklist);
+var $currentWizardName = $wizardName[2];
 
 //Appending current timestamp to process name to make it unique.
 
 var $timeStamp = $bo_act_navigation.getCurrentTimeStamp();
 $processName = $processName + "_" + $timeStamp;
-
+var $pageLayoutName = $processName + "pg";
 //**************************************************************************************
 //Login and switch to lightning
 $bo_act_login.login($g_url,$bac_un,$bac_pwd);
@@ -66,7 +66,7 @@ _selectDomain();
 	_click($bo_pg_sfmTransactionAndDesigner.btn_clone);
 	_wait(60000, _isVisible($bo_pg_sfmTransactionAndDesigner.txt_name));
 	_setValue($bo_pg_sfmTransactionAndDesigner.txt_name,$processName);
-	_setValue($bo_pg_sfmTransactionAndDesigner.txt_sfmTransactionId,$processName);
+	//_setValue($bo_pg_sfmTransactionAndDesigner.txt_sfmTransactionId,$processName);
 	_click($bo_pg_sfmTransactionAndDesigner.btn_finalQuickSave);
 	_click($bo_pg_sfmTransactionAndDesigner.btn_proceed_anyways);
 	_click($bo_pg_sfmTransactionAndDesigner.btn_qualifyingCriteriaAndFieldMapping);
@@ -76,22 +76,27 @@ _selectDomain();
 	_setSelected(_f("main").s_combobox("fieldCombo[1]"), "Order Status");
 	_setSelected(_f("main").s_combobox("valuesCombo[1]"), "Closed");
 	_setValue($bo_pg_sfmTransactionAndDesigner.txt_sfmSavePageLayoutAsId, "1 OR 2");
-	_click($bo_pg_sfmTransactionAndDesigner.btn_editExprSave);
+	_setValue($bo_pg_sfmTransactionAndDesigner.txt_saveExprAs, $processName);;
+	_setValue($bo_pg_sfmTransactionAndDesigner.txt_inputIdAs, $processName);
+	_click(_f("main").s_button("Save As"));
 	_assertVisible($bo_pg_sfmTransactionAndDesigner.label_exprSaved);
 	_click($bo_pg_sfmTransactionAndDesigner.btn_quickSave1);
+	if(_condition(_isVisible($bo_pg_sfmTransactionAndDesigner.btn_proceed_anyways))){
+		_click($bo_pg_sfmTransactionAndDesigner.btn_proceed_anyways);
+	}
 	_assertVisible($bo_pg_sfmTransactionAndDesigner.label_sfmTxnSaved);
 	_click($bo_pg_sfmTransactionAndDesigner.btn_screenDesigner);
 	$bo_act_navigation.designHeaderScreen($pageLayoutName, $fields_array);
 	_click($bo_pg_sfmTransactionAndDesigner.btn_finalQuickSave);
 
 	$bo_act_navigation.navigateToSfmWizard();
-	$sfm_act_wizards.addToWizard($object_name,"SFM",$wizard_name);
+	$sfm_act_wizards.addToWizard($object_name,$currentWizardName,"SFM",$processName);
 	_selectDomain();
 	//test from here.
 	var $wo_number = $sfm_act_createCustomWizard.createWowithdateliterals();
 	var $result = $sfm_act_lightningConfig.checkIfWizardLinkExists($processName);
 	if (!$result){
-		$sfm_act_wizards.addToWizard("Work Order",$wizard_name,"SFM",$processName);
+		$sfm_act_wizards.addToWizard("Work Order",$currentWizardName,"SFM",$processName);
 	}
     _selectDomain();
 	//Launch SFM delivery
