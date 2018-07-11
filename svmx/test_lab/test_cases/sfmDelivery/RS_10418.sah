@@ -14,12 +14,13 @@ var $ctr = 0;
 var $fields_array = [];
 $fields_array.push($dependent_picklist);
 var $currentWizardName = $wizardName[2];
-
+var $success_message = "Work Order was saved.";
 //Appending current timestamp to process name to make it unique.
 
 var $timeStamp = $bo_act_navigation.getCurrentTimeStamp();
 $processName = $processName + "_" + $timeStamp;
 var $pageLayoutName = $processName + "pg";
+var $myDomain = "/lightningautomation/";
 //**************************************************************************************
 //Login and switch to lightning
 $bo_act_login.login($g_url,$bac_un,$bac_pwd);
@@ -28,13 +29,13 @@ $sfm_act_lightningConfig.switchToLightning();
 
 //Navigate to Object manager and navigate to work order object.
 $sfm_act_lightningConfig.navigateToObjectsInLightning($object_name);
-_selectWindow("Work Order | Salesforce");
+_selectWindow("/"+$object_name+"/");
 _click(_link("Fields & Relationships"));
 
 
 _setValue(_searchbox("globalQuickfind"),$wo_picklist);
 _click(_link($wo_picklist));
-_selectDomain("/lightningautomation/");
+_selectDomain($myDomain);
 _selectWindow();
 
 //Delete existing dependencies and create new one.
@@ -56,12 +57,14 @@ for(var $i=0;$i<$ctrl_picklist_values.length;$i++){
 _expectConfirm($sfm_pg_wo.btn_save_dep_picklist);
 _click($sfm_pg_wo.btn_save_dep_picklist);
 _selectDomain();
+_closeWindow();
+-selectWindow();
 
 
 //Navigate to servicemax setup and setup required process.
     $bo_act_navigation.navigateToSvmxSetup();
 	$bo_act_navigation.navigateToSfmTransactionDesigner();
-	//_selectDomain("/lightningautomation/");
+	//_selectDomain();
 	$sfm_act_SFM.selectSFM($process_to_clone,false);
 	_click($bo_pg_sfmTransactionAndDesigner.btn_clone);
 	_wait(60000, _isVisible($bo_pg_sfmTransactionAndDesigner.txt_name));
@@ -106,19 +109,18 @@ _selectDomain();
 		
 		//add steps to edit wo and save
 		_click($sfm_pg_wo.btn_wo_edit);
-		_click(_link("select",_near(_div("/"+$wo_picklist+"/"))));
+		_click(_link(0,_near(_span("/"+$wo_picklist+"/",_in(_div("/modal-container/"))))));
 		_click(_link($ctrl_unique_values[$z]));
-		_click(_link("/select/",_near(_span($dependent_picklist)))); 
+		//_click(_link("/select/",_near(_span($dependent_picklist)))); 
 		//Selecting first option just for saving wo. No other validation at this point.
-		var $temp = $ctrl_picklist_values.indexOf($ctrl_unique_values[$z]);
-		var $temp_to_select = $dep_picklist_values[$temp];
-		_click(_link($temp_to_select));
-		_click($sfm_pg_wo.btn_wo_save);
+		//var $temp = $ctrl_picklist_values.indexOf($ctrl_unique_values[$z]);
+		//var $temp_to_select = $dep_picklist_values[$temp];
+		//_click(_link($temp_to_select));
+		_click($sfm_pg_wo.btn_wo_edit_save);
 		_assertVisible(_span($success_message));
 		$sfm_act_createCustomWizard.clickWizardlinks($processName);
-		_selectDomain("/"+$domainName+"/");
-		_wait(5000,_isVisible(_textbox("/sfm-picklist/",_in(_div($dependent_picklist)))));
-		_click(_textbox("/sfm-picklist/",_in(_div($dependent_picklist))));
+		_selectDomain($domainName);
+		_click(_div("/sfm-picklist/",_rightOf(_div($dependent_picklist))));
 		_wait(5000);
 		//Verify the count of values first
 		var $no_of_values = _count("_listItem", "/.*/", _under(_div($dependent_picklist)));
@@ -154,10 +156,13 @@ _click(_f("main").s_label($processName));
 _click($bo_pg_sfmTransactionAndDesigner.btn_screenDesigner);
 $fields_array = [];
 $fields_array.push($wo_picklist);
-$bo_act_navigation.editHeaderScreen($fields_array);	
+$bo_act_navigation.editHeaderScreen($fields_array,$dependent_picklist);	
 _click($bo_pg_sfmTransactionAndDesigner.btn_finalQuickSave);
+_selectDomain();
 $bo_act_navigation.navigateToCreatedRecordUsingGlobalSearch($wo_number);
 $sfm_act_createCustomWizard.clickWizardlinks($processName);
+_selectDomain($domainName);
+var $actual_list = [];
 for(var $z=0;$z<$ctrl_unique_values.length;$z++){
 	_click(_div("/sfm-picklist/",_rightOf(_div($wo_picklist))));
 	_click(_listItem($ctrl_unique_values[$z]));
@@ -165,7 +170,7 @@ for(var $z=0;$z<$ctrl_unique_values.length;$z++){
 	var $x = _count("_listItem","/.*/");
 	//_log($x);
 	var $i = 0;
-	var $actual_list = [];
+	
 	for($i=0;$i<$x;$i++){
 		if(_condition(_isVisible(_listItem($i)))){
 			$actual_list.push(_getText(_listItem($i)));
@@ -182,10 +187,13 @@ for(var $z=0;$z<$ctrl_unique_values.length;$z++){
 	 	}
 	 }
 	 _assertEqualArrays($expected_list, $actual_list,"Dependent values are as expected");	
+	 
 }
+_selectDomain();
+$RS_10418.end();
 //***********************************************************************************************************
 
-	$RS_10418.end();	
+		
 
 
 

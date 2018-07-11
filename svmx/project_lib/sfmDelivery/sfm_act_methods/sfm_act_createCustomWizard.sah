@@ -780,7 +780,11 @@ var $sfm_act_createCustomWizard = new function sfm_act_createCustomWizard() {
         _click($sfm_pg_wo.sel_orderType);
         //Just for selection of mandatory fields
         _click(_link("Field Service"));
-		_click($sfm_pg_wo.btn_wo_save);
+        
+		_click($sfm_pg_wo.btn_wo_edit_save);
+		//To overcome temporary sfdc problem
+		//_click(_span("OK"));
+		//_click($sfm_pg_wo.btn_wo_save);
 		$woId= _getText($sfm_pg_wo.label_wo);
 		return $woId;
 	};
