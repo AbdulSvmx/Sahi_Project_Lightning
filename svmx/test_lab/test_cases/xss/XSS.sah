@@ -17,7 +17,7 @@ runScan();
 pritnStatus();
 
 function pritnStatus() {
-	_logOutput(" \n\t URL Scanned : " + $urlCount + " Of Total : "
+	_logOutput(" | URL Scanned : " + $urlCount + " Of Total : "
 			+ $urlArray.length);
 }
 
@@ -32,7 +32,7 @@ function runScan() {
 		_wait(2000);
 		_continueOnError();
 
-		var $test = _testcase(" SCANNED NO : [" + int + "]", $url);
+		var $test = _testcase("SCANNED NO : [" + int + "]", $url);
 		$test.start();
 
 		captureAttack();
@@ -53,7 +53,7 @@ function runScan() {
 		// To avoid Tabbing in non tabbed pages
 		if ($tabbing.length == 0) {
 			var $tabs = 1;
-			var skipFlag = 1;
+			var skipFlag = 1;	
 		} else {
 			var $tabs = $tabbing.length;
 			var skipFlag = 0;
@@ -202,7 +202,7 @@ function captureAttack() {
 		_takePageScreenShot();
 		_unlockWindow();
 		_clearLastAlert();
-		var $logStr = "\n\t SCANNED PAGE : [ " + $urlArray[int]
+		var $logStr = " | SCANNED PAGE : [ " + $urlArray[int]
 		+ " ] Alerts Caught : " + $allAlerts;
 		_logOutput($logStr);
 		_logExceptionAsFailure($logStr);
@@ -226,6 +226,7 @@ function attackTextbox() {
 			
 
 		} catch (e) {
+			_enableDefaultErrorLogging();
 
 		}
 		captureAttack();
@@ -239,6 +240,7 @@ function attackTextbox() {
 			}
 
 		} catch (e) {
+			_enableDefaultErrorLogging();
 
 		}
 		captureAttack();
@@ -260,6 +262,7 @@ function attackTextArea() {
 			
 
 		} catch (e) {
+			_enableDefaultErrorLogging();
 
 		}
 		captureAttack();
@@ -283,8 +286,8 @@ function attackSelectionEditable() {
 			}
 
 		} catch (e) {
-
-		}
+			_enableDefaultErrorLogging();
+}
 		captureAttack();
 	}
 }
@@ -305,6 +308,7 @@ function attackSelection() {
 			}
 
 		} catch (e) {
+			_enableDefaultErrorLogging();
 
 		}
 		captureAttack();
