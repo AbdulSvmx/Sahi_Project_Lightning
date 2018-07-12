@@ -61,7 +61,7 @@ var $sfm_pg_sfmDesigner = new function sfm_pg_sfmDesigner() {
 	this.txt_billingLinePrice = _textbox(0,_near(_span("/Billable Line Price/",_in(_div("/sfm-window/")))));//Changed for Lightning
 	this.txt_eeLinePricePerUnit = _textbox(0,_near(_span("/Line Price Per Unit/",_in(_div("/sfm-window/")))));//Changed for Lightning
 
-	this.txt_eeExpenseType = _textbox("Expense Type",_near(_span("/Expense Type/",_in(_div("/sfm-window/"))))); //Changed for Lightning
+	this.txt_eeExpenseType = _textbox("/sfm-picklist/",_near(_span("Expense Type",_in(_div("/sfm-window/"))))); //Changed for Lightning -- this needs to clicked and then click on the list item to set activity type
 	
 	this.txt_eeEndDateTime=_textbox(0,_near(_span("/End Date and Time/",_in(_div("/sfm-window/"))))); //Changed for Lightning
 

@@ -733,7 +733,7 @@ var $sfm_act_createCustomWizard = new function sfm_act_createCustomWizard() {
 		$sfm_pg_wo.openAppLauncher();
 		_wait(3000);
 		$woName = "";
-		clickSvmxWoLink();
+		this.clickSvmxWoLink();
 		_click($sfm_pg_wo.btn_wo_new);
 		_click($sfm_pg_wo.btn_wo_edit_save);
 		_wait(5000,_isVisible($sfm_pg_wo.label_wo)); 
