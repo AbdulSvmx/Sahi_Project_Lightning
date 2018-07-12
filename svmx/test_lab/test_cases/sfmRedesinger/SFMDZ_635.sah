@@ -41,6 +41,11 @@ _setSpeed($g_stepSpeed);
 		_assertVisible($sfmrdz_pg_trnListView.link_createMapChildLine);
 		_assertVisible($sfmrdz_pg_trnListView.link_createManageChildLine);
 		_assertVisible($sfmrdz_pg_trnListView.btn_trnNameAscSort);
+		
+		//Page refresh
+		_call(top.location.reload(true));
+		_wait(30000, _isVisible($sfmrdz_pg_common.btn_actionMenu));
+		_assertEqual("Show All",_getText($sfmrdz_pg_trnListView.link_showAll),"Default text in type filter is not Show All");
 
 		
 		//$sfmrdz_act_common.launchHomeWindow($homecurrentHomePageULR);

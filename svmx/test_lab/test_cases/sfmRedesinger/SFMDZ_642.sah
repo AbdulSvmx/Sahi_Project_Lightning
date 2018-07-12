@@ -1,0 +1,55 @@
+/**
+ * Author	: Anand Kakhandaki
+ * Reviewer	: 
+ * 
+ */
+
+var $SFMDZ_635=_testcase("Type Filter List-Standard Transactions","Selecting 'Standard Transactions' in Type pick list and ensure that all standrd sfm are listed");
+$SFMDZ_635.start();
+_setSpeed($g_stepSpeed);
+	
+		/**
+		 * Global Variable declaration
+		 */
+		
+		var $url="http://test.salesforce.com";
+		var $un="designer2@test.com";
+		var $pwd="designer@2";
+		var $viewName="transaction";
+		
+		/**
+		 * Login to the Sandbox Org and launching Transaction list view
+		 */
+		$bo_act_login.login($url, $un, $pwd);
+		var $homecurrentHomePageULR=$sfmrdz_act_common.LaunchListViewWindow($viewName);
+
+		$sfmrdz_act_common.typePicklist($sfmrdz_pg_trnListView.link_stdTransaction);
+		
+		var $linkName=new Array();
+		//collect all the div under the 'TRANSACTION NAME' column
+		//note: here i am first collecting all the div under Transaction column and selecting links then again taking div containing link so on execution if any scroll happens script will not fail
+		var $linkDivElements=_collect("_div","/.*/",_under(_parentNode(_div("TRANSACTION NAME"),"DIV",1)));
+
+		//fetching name link that div contains
+		for(var $i=0;$i<$linkDivElements.length;$i++){
+			$linkName[$i]=_getText($linkDivElements[$i]);
+		}
+
+		var $retVal=false;
+		var $nonStdTransaction=null;
+
+		//Asserting all the lock icon left of each links
+		for(var $i=0;$i<$linkDivElements.length;$i++){
+			if(_assertExists(_svg_icon("/.*/",_leftOf(_div($linkName[$i]))))){
+				$retVal=true;
+			}else{
+				$retVal=false;
+				$nonStdTransaction=$linkDivElements[$i];
+				_log($nonStdTransaction+" not containing lock icon");
+			}
+		}
+		_assertTrue($retVal,$nonStdTransaction+" transaction is not having lock icon");
+		
+		
+		
+$SFMDZ_635.end();
