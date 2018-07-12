@@ -65,6 +65,6 @@ _setSpeed($g_stepSpeed);
 		_assertTrue($sortStatus, "Links on "+$colName+" column are not sorted in order");
 	
 		
-		//$sfmrdz_act_common.launchHomeWindow($homecurrentHomePageULR);
+		$sfmrdz_act_common.launchHomeWindow($homecurrentHomePageULR);
 		//$bo_act_login.logOut();
 $SFMDZ_152.end();
