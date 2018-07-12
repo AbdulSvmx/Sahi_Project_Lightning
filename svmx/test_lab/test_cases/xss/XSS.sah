@@ -167,11 +167,11 @@ function runScan() {
 			_wait(3000);
 
 		}
-		// Close a pop up window
-
+		
+		$test.end();
 	}
 
-	$test.end();
+	
 }
 
 function killWindow() {
