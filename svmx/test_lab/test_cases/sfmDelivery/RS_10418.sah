@@ -108,25 +108,19 @@ _selectWindow();
 	$bo_act_navigation.navigateToCreatedRecordUsingGlobalSearch($wo_number);
 	for($z=0;$z<$ctrl_unique_values.length;$z++){
 		
-		//add steps to edit wo and save
+		//Steps to edit wo and save
 		_click($sfm_pg_wo.btn_wo_edit);
 		_click(_link(0,_near(_span("/"+$wo_picklist+"/",_in(_div("/modal-container/"))))));
 		_click(_link($ctrl_unique_values[$z]));
-		//_click(_link("/select/",_near(_span($dependent_picklist)))); 
-		//Selecting first option just for saving wo. No other validation at this point.
-		//var $temp = $ctrl_picklist_values.indexOf($ctrl_unique_values[$z]);
-		//var $temp_to_select = $dep_picklist_values[$temp];
-		//_click(_link($temp_to_select));
 		_click($sfm_pg_wo.btn_wo_edit_save);
 		_assertVisible(_span($success_message));
 		$sfm_act_createCustomWizard.clickWizardlinks($processName);
 		_selectDomain($domainName);
 		_click(_div("/sfm-picklist/",_rightOf(_div($dependent_picklist))));
 		_wait(5000);
+		var $actual_list = [];
 		//Verify the count of values first
 		var $no_of_values = _count("_listItem", "/.*/", _under(_div($dependent_picklist)));
-		$no_of_values = $no_of_values - 1;//Decrement one for the 'None' option.
-		var $actual_list = [];
 		for($ctr = 1;$ctr <= $no_of_values;$ctr++ ){
 			$actual_list.push(_getText(_listItem($ctr), _under(_div($dependent_picklist))));
 		}
