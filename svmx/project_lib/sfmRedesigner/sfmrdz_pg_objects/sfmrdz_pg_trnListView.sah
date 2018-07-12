@@ -6,7 +6,7 @@
 
 var $sfmrdz_pg_trnListView=new function sfmrdz_pg_trnListView(){
 
-	
+	// Transaction table column items
 	this.btn_heading_transaction=_div("Transactions");
 	this.btn_heading_trnCol=_div("TRANSACTION NAME");
 	this.btn_heading_SourceObjCol=_div("Source Object");
@@ -17,6 +17,8 @@ var $sfmrdz_pg_trnListView=new function sfmrdz_pg_trnListView(){
 	this.btn_heading_statusCol=_div("Status");
 	this.btn_heading_lastEditedCol=_div("Last Edited");		
 	this.btn_NewTrn=_button("New SFM Transaction");
+	
+	this.btn_trnNameAscSort=_div("/sort-asc/");
 
 	this.btn_heading_sfmTrnHome=_div("SFM Transaction & Docs DesignerHome");
 	this.btn_sfmTrnHomeIcon=_div("MediaObject__figure slds-media__figure");
@@ -47,6 +49,8 @@ var $sfmrdz_pg_trnListView=new function sfmrdz_pg_trnListView(){
 	this.lbl_recentItem=_listItem("Recent Items");
 	
 	//Type Picklist items
+	this.btn_heading_defaultView=_span("DEFAULT VIEWS");
+	this.btn_pickListMenu=_div("/Menu Picklist__menu/");
 	this.link_showAll=_link("Show All");
 	this.link_recent=_link("Recents (Edited in Last 7 days)");
 	this.link_stdTransaction=_link("Standard SFM Transactions");
