@@ -226,6 +226,7 @@ function attackTextbox() {
 			
 
 		} catch (e) {
+			_enableDefaultErrorLogging();
 
 		}
 		captureAttack();
@@ -239,6 +240,7 @@ function attackTextbox() {
 			}
 
 		} catch (e) {
+			_enableDefaultErrorLogging();
 
 		}
 		captureAttack();
@@ -260,6 +262,7 @@ function attackTextArea() {
 			
 
 		} catch (e) {
+			_enableDefaultErrorLogging();
 
 		}
 		captureAttack();
@@ -283,8 +286,8 @@ function attackSelectionEditable() {
 			}
 
 		} catch (e) {
-
-		}
+			_enableDefaultErrorLogging();
+}
 		captureAttack();
 	}
 }
@@ -305,6 +308,7 @@ function attackSelection() {
 			}
 
 		} catch (e) {
+			_enableDefaultErrorLogging();
 
 		}
 		captureAttack();
