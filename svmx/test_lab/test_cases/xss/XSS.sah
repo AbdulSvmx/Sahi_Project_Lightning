@@ -222,18 +222,20 @@ function attackTextbox() {
 		try {
 			_disableDefaultErrorLogging();
 			_setValue($textboxes[$i], $attackTag);
-			captureAttack();
+			_enableDefaultErrorLogging();
+			
 
 		} catch (e) {
 
 		}
-
+		captureAttack();
 		// For Selection/ComboBox
 		try {
 			if (_isVisible(_listItem($attackTag))) {
 				_disableDefaultErrorLogging();
 				_click(_listItem($attackTag));
-				captureAttack();
+				_enableDefaultErrorLogging();
+				
 			}
 
 		} catch (e) {
@@ -254,7 +256,8 @@ function attackTextArea() {
 		try {
 			_disableDefaultErrorLogging();
 			_setValue($textarea[$i], $attackTag);
-			captureAttack();
+			_enableDefaultErrorLogging();
+			
 
 		} catch (e) {
 
@@ -275,6 +278,7 @@ function attackSelectionEditable() {
 				_disableDefaultErrorLogging();
 				_doubleClick($cell[$i]);
 				_call($cell[$i].innerHTML = $attackTag);
+				_enableDefaultErrorLogging();
 
 			}
 
@@ -297,7 +301,7 @@ function attackSelection() {
 			if (_isVisible($select[$i])) {
 				_disableDefaultErrorLogging();
 				_setSelected($select[$i], $attackTagSelectionField);
-
+				_enableDefaultErrorLogging();
 			}
 
 		} catch (e) {
