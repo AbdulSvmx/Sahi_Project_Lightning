@@ -754,7 +754,7 @@ var $sfm_act_createCustomWizard = new function sfm_act_createCustomWizard() {
 		$accNum = "HCSAccountForTesting";
 		$sfm_pg_wo.openAppLauncher();
 		_wait(3000);
-		_click($sfm_pg_wo.link_wo);
+		$sfm_act_createCustomWizard.clickSvmxWoLink();
 		_click($sfm_pg_wo.btn_wo_new);
 		_click($sfm_pg_wo.btn_next);
 		_click($sfm_pg_wo.txt_actualOnsiteResponse);
@@ -782,10 +782,7 @@ var $sfm_act_createCustomWizard = new function sfm_act_createCustomWizard() {
         _click(_link("Field Service"));
         
 		_click($sfm_pg_wo.btn_wo_edit_save);
-		//To overcome temporary sfdc problem
-		//_click(_span("OK"));
-		//_click($sfm_pg_wo.btn_wo_save);
-		$woId= _getText($sfm_pg_wo.label_wo);
+		 $woId= _getText($sfm_pg_wo.label_wo);
 		return $woId;
 	};
 	
@@ -804,7 +801,16 @@ var $sfm_act_createCustomWizard = new function sfm_act_createCustomWizard() {
 	        $result_date = ($result_date.getMonth()+1) + "/" + $result_date.getDate() + "/" + $result_date.getFullYear();
 	        return $result_date;
 		};
-		
+		this.clickSvmxWoLink = function() {
+		//THis function finds out the Servicemax Work order link and clicks on it.	
+			_click(_link("Work Orders"));
+			 var $url;
+			_set($url, window.location.href);
+			 if(!$url.includes("SVMX")){
+				$sfm_pg_wo.openAppLauncher();
+				_click(_link("Work Orders[1]"));
+			 }
+};
 	  
 
 	

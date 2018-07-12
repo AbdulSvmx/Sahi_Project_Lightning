@@ -27,7 +27,7 @@ $sfm_act_lightningConfig.switchToLightning();
 
 //Clone the standard process and add it to wizard for testing with custom process.
 $sfm_act_SFM.cloneTDM016($sfmNameToBeCloned,$processName,$isCustom,$sfmTemplateSaveAsName, $sfmTemplate, $fieldName, $containerName);
-
+_selectDomain();
 
 //Logout as admin and login as technician
 $sfm_act_lightningConfig.logoutInLightning();
@@ -60,7 +60,7 @@ $sfm_act_lightningConfig.logoutInLightning();
 $bo_act_login.login($g_url,$bac_un,$bac_pwd);
 $sfm_act_lightningConfig.switchToLightning();
 $bo_act_navigation.navigateToFeaturePermissionsPage();
-$bo_act_navigation.addSfmDesignerPermissionToUser($$tech_un,$group_profilename);
+$bo_act_navigation.addSfmDesignerPermissionToUser($tech_un,$group_profilename);
 
 //Yet to be completed for lightning as the page is still not certified
 $sfm_act_lightningConfig.logoutInLightning();
@@ -72,7 +72,7 @@ $bo_act_navigation.navigateToCreatedRecordUsingGlobalSearch($wo_number);
 
 //Launch Standard process and launch SFM designer
 $sfm_act_createCustomWizard.clickWizardlinks($Std_Sfm_process);
-_selectDomain("/"+$domainName+"/");
+_selectDomain($domainName);
 _click($sfm_pg_wo.btn_arrowNextToGetPrice);
 _assertVisible($sfm_pg_wo.link_launchSfmDesigner);
 _click($sfm_pg_wo.link_launchSfmDesigner);
@@ -81,13 +81,13 @@ _assertVisible(_f("main").s_label($Std_Sfm_process),"Launched process is same");
 _log("PASS:RS-10422");
 _closeWindow();
 _selectWindow("/Service Delivery/");
-_selectDomain("/"+$domainName+"/");
+_selectDomain($domainName);
 _click($sfm_pg_wo.link_delivery_save);
 _selectDomain();
 
 //Launch custom process and launch SFM designer
 $sfm_act_createCustomWizard.clickWizardlinks($processName);
-_selectDomain("/"+$domainName+"/");
+_selectDomain($domainName);
 _click($sfm_pg_wo.btn_arrowNextToGetPrice);
 _assertVisible($sfm_pg_wo.link_launchSfmDesigner);
 _click($sfm_pg_wo.link_launchSfmDesigner);
@@ -97,7 +97,7 @@ _assertVisible(_f("main").s_label($processName));
 _log("PASS:10422");
 _closeWindow();
 _selectWindow("/Service Delivery/");
-_selectDomain("/"+$domainName+"/");
+_selectDomain($domainName);
 _click($sfm_pg_wo.link_delivery_save);
 _selectDomain();
 $RS_10422.end();
