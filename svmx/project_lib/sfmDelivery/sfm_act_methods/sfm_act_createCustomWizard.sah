@@ -756,7 +756,9 @@ var $sfm_act_createCustomWizard = new function sfm_act_createCustomWizard() {
 		_wait(3000);
 		$sfm_act_createCustomWizard.clickSvmxWoLink();
 		_click($sfm_pg_wo.btn_wo_new);
-		_click($sfm_pg_wo.btn_next);
+		if(_isVisible($sfm_pg_wo.btn_next)){
+			_click($sfm_pg_wo.btn_next);
+		}
 		_click($sfm_pg_wo.txt_actualOnsiteResponse);
 		_click($sfm_pg_wo.cell_today);
 		_click($sfm_pg_wo.txt_actualInitialResponse);

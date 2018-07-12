@@ -22,7 +22,8 @@ var $sfmTemplateSaveAsName = $processName + "pg";
 //********************************************************
 
 //Login as admin and switch to lightning
-$bo_act_login.login($g_url,$bac_un,$bac_pwd);
+//$bo_act_login.login($g_url,$bac_un,$bac_pwd);
+$bo_act_login.login($g_url,$sfmUsn,$sfmPwd);
 $sfm_act_lightningConfig.switchToLightning();
 
 //Clone the standard process and add it to wizard for testing with custom process.
@@ -38,7 +39,7 @@ $sfm_act_lightningConfig.switchToLightning();
 var $wo_number = $sfm_act_createCustomWizard.createWowithdateliterals();
 $bo_act_navigation.navigateToCreatedRecordUsingGlobalSearch($wo_number);
 $sfm_act_createCustomWizard.clickWizardlinks($Std_Sfm_process);
-_selectDomain("/"+$domainName+"/");
+_selectDomain($domainName);
 _click($sfm_pg_wo.btn_arrowNextToGetPrice);
 _assertNotVisible($sfm_pg_wo.link_launchSfmDesigner);
 _log("PASS:RS-10427");
