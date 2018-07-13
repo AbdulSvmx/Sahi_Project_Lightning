@@ -1,7 +1,4 @@
 
-
-
-
 //Author:Mamata RS-4998
 	var $RS_4998 = _testcase("RS_4998", "Verify Web Service call On Change");
 	$RS_4998.start();
@@ -32,18 +29,22 @@
 	var $enteredMinOC=30;
 	var $enteredOTOC="Depot Repair-Tr";
 	var $enteredZipOC=560064;
-var $onChangeValue="Extended Warranty-Tr";
+	var $onChangeValue="Extended Warranty-Tr";
 
 		
 	$bo_act_login.login($g_url, $sfmUsn, $sfmPwd);
+	$sfm_act_lightningConfig.switchToLightning();
 //$bo_act_login.login($g_url, $bac_un, $bac_pwd);
+	$bo_act_navigation.navigateServicemaxSetUpInLightening();
 
-//*****Navgate to SFm Designer and create clone of Manage WO Line Usage Services transaction********
+//*****Navigate to SFm Designer and create clone of Manage WO Line Usage Services transaction********
 $bo_act_navigation.navigateToSfmTransactionDesigner();
+_wait(20000);
 $bo_act_WebServices.createSFmForWebServices($sfmToBeCloned, $sfmName,$subTypePart,$subTypeActivityType,$subTypeExpenses,$subTypeTravel,$sfmTemplateSaveAsName);
 $bo_act_WebServices.enableOnChange();
 
 $bo_act_WebServices.saveAndClose();
+_click($bo_pg_home.link_backToSetUpHome);
 //*******Nagigate to SFM Wizard and Create Wizard and Add Above Transaction to it**********
 $bo_act_navigation.navigateToSfmWizard();
 $bo_act_SFW.createWizardGeneralInfo($objName,$wizardname,$wizardID);

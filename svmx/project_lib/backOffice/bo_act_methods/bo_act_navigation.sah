@@ -218,7 +218,7 @@ var $bo_act_navigation = new function bo_act_navigation() {
       * @returns boolean
       */
  	this.navigateToSfmWizard = function() { // Changes made for Lightning
- 	 this.navigateToSvmxSetup();
+ 	 //this.navigateToSvmxSetup();
  	 _selectDomain("/svmx/");
  	_click($bo_pg_servicemaxSetup.btn_serviceFlowManager);
  	_click($bo_pg_servicemaxSetup.btn_sfmWizard);
@@ -441,4 +441,14 @@ var $bo_act_navigation = new function bo_act_navigation() {
         	 return timeStamp;
 
         		  };
+        this.navigateServicemaxSetUpInLightening=function(){
+        	_click($bo_pg_home.button_allLinks);
+        	_setValue($bo_pg_home.txtbox_findAnApp,"servicemax SetUp");
+        	if(_isVisible($bo_pg_home.link_servicemaxSetUp)){
+        		_click($bo_pg_home.link_servicemaxSetUp); 
+        	}else{ 
+        		_click($bo_pg_home.link_servicemaxSetUpHome);
+        }
+        };	
+        
 };

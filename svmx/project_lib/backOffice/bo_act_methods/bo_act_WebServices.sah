@@ -87,25 +87,25 @@ var $bo_act_WebServices=new function bo_act_WebServices(){
 			_click($bo_pg_manageWOLineUsageForSorting.chk_allowDelete);
 			_click($bo_pg_sfmTransactionAndDesigner.btn_pageLayoutSave);
 		
-	}			
+	};			
 		
 		this.saveAndClose=function(){
 			_click(_f("main").s_button("Save & Close"));
 			_wait(10000);
-		}
+		};
 			this.enableOnload=function(){
 				_click($bo_pg_sfmTransactionAndDesigner.txt_sfmSavePageLayoutAsId);
 				_wait(1000);
 				_click(_f("main").s_textinput("textInput[18]"));
 				_setValue(_f("main").s_textinput("textInput[18]"),"");
 				_setValue(_f("main").s_textinput("textInput[18]"), "We");
-				_setSelected(_f("main").s_combobox(10),"Webservice");
+				_setSelected(_f("main").s_combobox("/ComboBox/"), "Webservice");
 				
 				_wait(1000);
 				_setValue(_f("main").s_textinput("txtip"), "objWebService.onLoad");
 				_wait(1000);
 				_click($bo_pg_sfmTransactionAndDesigner.btn_pageLayoutSave);
-			}
+			};
 				this.enableBeforeSave=function(){
 				_click($bo_pg_sfmTransactionAndDesigner.txt_sfmSavePageLayoutAsId);
 				_wait(1000);
@@ -118,20 +118,21 @@ var $bo_act_WebServices=new function bo_act_WebServices(){
 				_setValue(_f("main").s_textinput("txtip[1]"), "objWebService.beforeSaveOrUpdate");
 				_wait(1000);
 				_click($bo_pg_sfmTransactionAndDesigner.btn_pageLayoutSave);
-			}
+			};
 					this.enableOnChange=function(){
 					_click(_f("main").s_textinput("textInput[9]"));
 					_wait(1000);
-					_click(_f("main").s_textinput("textInput[18]"));
-					_setValue(_f("main").s_textinput("textInput[18]"),"");
-					_setValue(_f("main").s_textinput("textInput[18]"), "We");
-					_setSelected(_f("main").s_combobox(10),"Webservice");
+					_click(_f("main").s_textinput("textInput[17]"));
+					_setValue(_f("main").s_textinput("textInput[17]"),"");
+					_setValue(_f("main").s_textinput("textInput[17]"), "We");
+					//_setSelected(_f("main").s_combobox(/[0-9]/), "Webservice");
 
-					_wait(1000);
+					//_wait(1000);
+					_click(_f("main").s_textinput("txtip"));
 					_setValue(_f("main").s_textinput("txtip"), "objWebService.onChange");
 					_wait(1000);
 					_click($bo_pg_sfmTransactionAndDesigner.btn_pageLayoutSave);
-			}
+			};
 						this.enableOnExit=function(){
 							_click(_f("main").s_textinput("txtIp[1]"));
 							_wait(1000);
@@ -139,12 +140,11 @@ var $bo_act_WebServices=new function bo_act_WebServices(){
 							_setValue(_f("main").s_textinput("textInput[18]"),"");
 							_setValue(_f("main").s_textinput("textInput[18]"), "We");
 							_setSelected(_f("main").s_combobox(10),"Webservice");
-
 							_wait(1000);
 							_setValue(_f("main").s_textinput("txtip"), "objWebService.onExit");
 							_wait(1000);
 							_click($bo_pg_sfmTransactionAndDesigner.btn_pageLayoutSave);
-						}
+						};
 							this.enableOnChangeForChildLabelField=function(){
 								_click(_f("main").s_textinput("textInput[14]"));
 								_wait(1000);
@@ -157,7 +157,7 @@ var $bo_act_WebServices=new function bo_act_WebServices(){
 								_setValue(_f("main").s_textinput("txtip"), "objWebService.onChange");
 								_wait(1000);
 								_click($bo_pg_sfmTransactionAndDesigner.btn_pageLayoutSave);								
-							}
+							};
 								
 							this.enableOnExitForChildLabelField=function(){
 								_click(_f("main").s_textinput("lblData"));
