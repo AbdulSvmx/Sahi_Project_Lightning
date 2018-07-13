@@ -116,12 +116,13 @@ _selectWindow();
 		_assertVisible(_span($success_message));
 		$sfm_act_createCustomWizard.clickWizardlinks($processName);
 		_selectDomain($domainName);
-		_click(_div("/sfm-picklist/",_rightOf(_div($dependent_picklist))));
-		_wait(5000);
 		var $actual_list = [];
 		//Verify the count of values first
+		_wait(2000);
+        _click(_div("/sfm-picklist/",_rightOf(_div($dependent_picklist))));
 		var $no_of_values = _count("_listItem", "/.*/", _under(_div($dependent_picklist)));
-		for($ctr = 1;$ctr <= $no_of_values;$ctr++ ){
+		
+		for($ctr = 1;$ctr < $no_of_values;$ctr++ ){
 			$actual_list.push(_getText(_listItem($ctr), _under(_div($dependent_picklist))));
 		}
 		var $expected_list = [];

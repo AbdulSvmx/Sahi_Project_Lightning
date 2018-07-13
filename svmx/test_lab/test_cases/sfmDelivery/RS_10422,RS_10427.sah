@@ -6,7 +6,7 @@ var $RS_10422 = _testcase("RS_10422,RS_10427","Verify SFM Launch Designer featur
 $RS_10422.start();
 //Variables used
 var $Std_Sfm_process = "Create Estimates";
-var $processName = "RS-10422";
+var $processName = "RS_10422";
 var $sfmNameToBeCloned = "Manage Work Order Lines - Usage";
 var $isCustom = false;
 var $sfmTemplate = "SVMXSTD: Manage WO Usage Lines";
@@ -30,9 +30,12 @@ $sfm_act_lightningConfig.switchToLightning();
 $sfm_act_SFM.cloneTDM016($sfmNameToBeCloned,$processName,$isCustom,$sfmTemplateSaveAsName, $sfmTemplate, $fieldName, $containerName);
 _selectDomain();
 
+//Add the custom process to SFM wizard.
+
+
 //Logout as admin and login as technician
 $sfm_act_lightningConfig.logoutInLightning();
-$bo_act_login.login($g_url,$tech_un,$tech_pwd);
+$bo_act_login.login($g_url,$sfmUsn,$sfmPwd);
 $sfm_act_lightningConfig.switchToLightning();
 
 //Launch SFM designer for standard process without adding Feature permissions
@@ -57,11 +60,11 @@ _selectDomain();
 
 //Add the SFM Designer feature permission to the logged in technician user
 //by logging in as admin.
-$sfm_act_lightningConfig.logoutInLightning();
-$bo_act_login.login($g_url,$bac_un,$bac_pwd);
-$sfm_act_lightningConfig.switchToLightning();
+//$sfm_act_lightningConfig.logoutInLightning();
+//$bo_act_login.login($g_url,$bac_un,$bac_pwd);
+//$sfm_act_lightningConfig.switchToLightning();
 $bo_act_navigation.navigateToFeaturePermissionsPage();
-$bo_act_navigation.addSfmDesignerPermissionToUser($tech_un,$group_profilename);
+$bo_act_navigation.addSfmDesignerPermissionToUser($sfmUsn,$group_profilename);
 
 //Yet to be completed for lightning as the page is still not certified
 $sfm_act_lightningConfig.logoutInLightning();
