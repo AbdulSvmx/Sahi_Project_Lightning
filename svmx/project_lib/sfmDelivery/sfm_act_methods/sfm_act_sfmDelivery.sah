@@ -11,7 +11,7 @@ var $sfm_act_sfmDesigner = new function sfm_act_sfmDesigner() {
 	this.addChildLine = function($childName){
 		if($childName == 'Parts'){
 			_click($sfm_pg_sfmDesigner.btn_deliveryPartsTab);
-			_wait(3000,_isVisible($sfm_pg_sfmDesigner.btn_deliveryAddRowParts));
+			_wait(5000,_isVisible($sfm_pg_sfmDesigner.btn_deliveryAddRowParts));
 			_click($sfm_pg_sfmDesigner.btn_deliveryAddRowParts);
 		}else if($childName == 'Labor'){
 			_click($sfm_pg_sfmDesigner.btn_deliveryLaborTab);
