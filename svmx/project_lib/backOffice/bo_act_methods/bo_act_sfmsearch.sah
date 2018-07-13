@@ -8,6 +8,7 @@ this.createsfmsearch = function($searchId1, $searchTitle1,$objectName,$fieldName
 	
 
         $bo_act_navigation.navigateToSfmSearchInDesigner();
+        _selectDomain("/svmx/");
 		_click($swat_pg_sfmSearch.btn_new);
 		
 		//General Info		
@@ -42,6 +43,8 @@ this.createsfmsearch = function($searchId1, $searchTitle1,$objectName,$fieldName
 		_click($swat_pg_sfmSearch.btn_save_and_close);
 		}	
 		
+		_selectDomain();
+		
 };
 
 this.sfmsearch_displayfields = function($searchTitle ,$sectiontitle, $object , $field1 , $field2)
@@ -49,7 +52,9 @@ this.sfmsearch_displayfields = function($searchTitle ,$sectiontitle, $object , $
 {
 	
 	
+	
 	 $bo_act_navigation.navigateToSfmSearchInDesigner();
+	 _selectDomain("/svmx/");
 	 _click(_checkbox(0,_near(_span($searchTitle))));
 	 _click($swat_pg_sfmSearch.btn_edit_values);
 
@@ -65,6 +70,7 @@ this.sfmsearch_displayfields = function($searchTitle ,$sectiontitle, $object , $
 	 _setSelected($swat_pg_sfmSearch.picklist_fieldName3, $field2);
 	 _click($swat_pg_sfmSearch.btn_save);
 	 _click($swat_pg_sfmSearch.btn_save_and_close);	
+	 _selectDomain();
 
 };
 
@@ -73,6 +79,7 @@ this.sfmsearch_advancedexpression = function($searchId1, $searchTitle1,$objectNa
 	
 
     $bo_act_navigation.navigateToSfmSearchInDesigner();
+    _selectDomain("/svmx/");
 	_click($swat_pg_sfmSearch.btn_new);
 	
 	//General Info		
@@ -115,7 +122,7 @@ this.sfmsearch_advancedexpression = function($searchId1, $searchTitle1,$objectNa
 	_click($swat_pg_sfmSearch.btn_save_and_close);
 	}
 
-	
+	 _selectDomain();
 };
 
 // Creating SFM Search for Multiple Objects in Scope of Search
@@ -124,6 +131,7 @@ this.sfmsearch_multipleobjects = function($searchId1, $searchTitle1,$objectName1
 {
 	
 	 $bo_act_navigation.navigateToSfmSearchInDesigner();
+	 	_selectDomain("/svmx/");
 		_click($swat_pg_sfmSearch.btn_new);
 		
 		//General Info		
@@ -167,6 +175,7 @@ this.sfmsearch_multipleobjects = function($searchId1, $searchTitle1,$objectName1
 		//Click on save and close
 		_click($swat_pg_sfmSearch.btn_save);
 		_click($swat_pg_sfmSearch.btn_save_and_close);
+		 _selectDomain();
 		
 
 };
@@ -177,12 +186,13 @@ this.sfmsearch_multipleobjects = function($searchId1, $searchTitle1,$objectName1
 
 this.clonesfmsearch = function($searchTitle,$searchTitle2, $searchId2,$objectName,$value, $sectiontitle, $isstandardtrue)
 {
-	
+	 _selectDomain("/svmx/");
 	 
 	 // cloning a Standard SFM Search
 	 if($isstandardtrue == true && $sectiontitle == "Open Work Orders")
 	 {
 		 $bo_act_navigation.navigateToSfmSearchInDesigner();
+		 
 		 _click(_checkbox(0,_near(_span($searchTitle))));
 		 _click($swat_pg_sfmSearch.btn_clone_stdsearch);
 		 _setValue($swat_pg_sfmSearch.txt_searchTitle,$searchTitle2);
@@ -214,14 +224,14 @@ this.clonesfmsearch = function($searchTitle,$searchTitle2, $searchId2,$objectNam
 	 _click($swat_pg_sfmSearch.btn_save);
 	 _click($swat_pg_sfmSearch.btn_quicksave);	
 	 _click($swat_pg_sfmSearch.btn_save_and_close);
-		
+	 _selectDomain();
 };
 
 
 this.clonesfmsearch_objectdisplay = function ($searchTitle,$searchTitle2, $searchId2,$objectName,$value, $sectiontitle, $isstandardtrue)
 
 {
-	 
+	 _selectDomain("/svmx/");
 	 // cloning a Standard SFM Search
 	 if($isstandardtrue == true && $sectiontitle == "Open Work Orders")
 	 {
@@ -245,6 +255,7 @@ this.clonesfmsearch_objectdisplay = function ($searchTitle,$searchTitle2, $searc
 	 _click($swat_pg_sfmSearch.btn_save);
 	 _click($swat_pg_sfmSearch.btn_quicksave);	
 	 _click($swat_pg_sfmSearch.btn_save_and_close);
+	 _selectDomain();
 
 };
 
@@ -252,7 +263,7 @@ this.clonesfmsearch_objectdisplay = function ($searchTitle,$searchTitle2, $searc
 this.clonesfmsearch_nochanges = function($searchTitle,$searchTitle2, $searchId2,$isstandardtrue)
 
 {
-	 
+	 _selectDomain("/svmx/");
 	 // cloning a Standard SFM Search
 	 if($isstandardtrue == true)
 	 {
@@ -282,13 +293,14 @@ this.clonesfmsearch_nochanges = function($searchTitle,$searchTitle2, $searchId2,
 	 _click($swat_pg_sfmSearch.btn_quicksave);	
 	 _click($swat_pg_sfmSearch.btn_save_and_close);
 		
-
+	 _selectDomain();
 
 
 };
 this.editsfmsearch = function($searchTitle ,$objectName,$value2, $sectiontitle)
 {
 	 $bo_act_navigation.navigateToSfmSearchInDesigner();
+	 _selectDomain("/svmx/");
 	 _click(_checkbox(0,_near(_span($searchTitle))));
 	 _click($swat_pg_sfmSearch.btn_edit_values);
 
@@ -304,6 +316,7 @@ this.editsfmsearch = function($searchTitle ,$objectName,$value2, $sectiontitle)
 	 _click($swat_pg_sfmSearch.btn_save);
 	_click($swat_pg_sfmSearch.btn_quicksave);
 	_click($swat_pg_sfmSearch.btn_save_and_close);
+	 _selectDomain();
 
 
 };

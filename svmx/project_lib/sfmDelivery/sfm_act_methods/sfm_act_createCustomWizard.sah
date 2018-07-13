@@ -1,13 +1,17 @@
 var $sfm_act_createCustomWizard = new function sfm_act_createCustomWizard() {
 //	var $title = "";
 	this.chooseObject = function($object){
+		_wait(3000);
+		_selectDomain("/svmx/");
 		_setSelected($sfm_pg_wizards.selectObject,$object);
 		_click($sfm_pg_wizards.btn_customNew);
+		_selectDomain();
 	};
 
 	this.addManageWizSteps = function($wizTitle,$wizStepType,$wizStepName,$profile){
 //		$title = $wizTitle;
 //		$wizTitle = $bo_act_common.generateRandomName("Auto Wiz ");
+		_selectDomain("/svmx/");
 		var $wizId = $wizTitle.toLowerCase().replace(/ /g, "_");
 //		_log($wizTitle);
 //		_log($wizId);
@@ -24,6 +28,7 @@ var $sfm_act_createCustomWizard = new function sfm_act_createCustomWizard() {
 		_setSelected($sfm_pg_wizards.select_availableGrpProfiles,$profile);
 //		_click($sfm_pg_wizards.btn_add);
 		_click($sfm_pg_wizards.btn_saveClose);
+		_selectDomain();
 	};
 
 //	Added by Safi
@@ -52,20 +57,41 @@ var $sfm_act_createCustomWizard = new function sfm_act_createCustomWizard() {
 
 
 	this.createBlankWo = function(){
-		$woName="";
+		$woName = "";
+		$accNum = "/HCSAccountForTesting/";
+		$priority = "High";
+		_selectDomain();
 		_wait(5000);
-		_click($sfm_pg_wo.tab_all);
+		$sfm_pg_wo.openAppLauncher();
 //		_click($sfm_pg_wo.clickTab("Work Orders"));
 		_wait(3000);
-		_click($sfm_pg_wo.link_wo);
+		if(_isVisible($sfm_pg_wo.link_wo)){
+			_click($sfm_pg_wo.link_wo);
+		}
+		else{
+			_click(_link("Work Orders[1]"));
+		}
+		
 		_click($sfm_pg_wo.btn_wo_new);
 		if(_exists($sfm_pg_wo.btn_Continue)){
 			_click($sfm_pg_wo.btn_Continue);
 			
 		}
-		_setSelected($bo_pg_workOrders.sel_priority, "High");
+		_wait(5000,_isVisible($bo_pg_workOrders.sel_priority));
+		_click($bo_pg_workOrders.sel_priority);
+		_click(_link($priority));
+		_click($bo_pg_workOrders.txt_account);
+		_setValue($bo_pg_workOrders.txt_account,"HCS");
+		_wait(3000,_isVisible(_link($accNum,_near(_label("/Account/")))));
+		_click(_link($accNum,_near(_label("/Account/"))));
 		_click($sfm_pg_wo.btn_wo_save);
-		_wait(3000);
+		_wait(2000);
+		if(_isVisible(_button("OK",_near(_heading2("Sorry to interrupt"))))){
+			_click(_button("OK",_near(_heading2("Sorry to interrupt"))));
+			_setStrictVisibilityCheck (true);
+			_click($sfm_pg_wo.btn_wo_save);
+		}
+		_wait(5000);
 		$woName= _getText($sfm_pg_wo.label_wo);
 		_selectDomain("/svmx/");
 		return $woName;
@@ -78,7 +104,7 @@ var $sfm_act_createCustomWizard = new function sfm_act_createCustomWizard() {
 //	Added by Safi
 	this.createWOwithOrderStatus = function($OrdrStatus){		
 		_wait(5000);
-		_click($sfm_pg_wo.tab_all);
+		$sfm_pg_wo.openAppLauncher();
 		_wait(3000);
 		_click($sfm_pg_wo.link_wo);
 		_click($sfm_pg_wo.btn_wo_new);
@@ -92,7 +118,7 @@ var $sfm_act_createCustomWizard = new function sfm_act_createCustomWizard() {
 	
 	this.createWOwithFieldValues = function($value){
 		_wait(5000);
-		_click($sfm_pg_wo.tab_all);
+		$sfm_pg_wo.openAppLauncher();
 		_wait(3000);
 		_click($sfm_pg_wo.link_wo);
 		_click($sfm_pg_wo.btn_wo_new);
@@ -110,7 +136,7 @@ var $sfm_act_createCustomWizard = new function sfm_act_createCustomWizard() {
 	this.createCasewithFieldValues = function($value){
 		$case="";
 		_wait(5000);
-		_click($sfm_pg_wo.tab_all);
+		$sfm_pg_wo.openAppLauncher();
 		_wait(3000);
 		_click(_link("Cases"));
 		_click(_button(" New "));
@@ -259,7 +285,7 @@ var $sfm_act_createCustomWizard = new function sfm_act_createCustomWizard() {
 		_wait(3000);
 //		_setStrictVisibilityCheck(true);
 		_click($sfm_pg_wizardWindow.icon_search);
-		var $divs= _collect("_div","/.*/",_under(_div("Account ID")));
+		var $divs= _collectAttributes("_div","/cell/","sahiText",_under(_div("AccountId"),20));//Changed for Lightning
 		_log($divs.length);
 //		var $divArray = new Array();
 		for (var $i=1; $i<$divs.length; $i++) {
@@ -306,7 +332,7 @@ var $sfm_act_createCustomWizard = new function sfm_act_createCustomWizard() {
 			_log("Pass");
 		}
 		else{
-			_log("Fail");
+			_fail("Fail");
 		}
 	};
 
@@ -435,7 +461,7 @@ var $sfm_act_createCustomWizard = new function sfm_act_createCustomWizard() {
 			_log("Pass");
 		}
 		else{
-			_log("Fail");
+			_fail("Fail");
 		}
 	};
 	
@@ -453,7 +479,7 @@ var $sfm_act_createCustomWizard = new function sfm_act_createCustomWizard() {
 			_log("Pass");
 		}
 		else{
-			_log("Fail");
+			_fail("Fail");
 		}
 		
 	};
@@ -537,33 +563,63 @@ var $sfm_act_createCustomWizard = new function sfm_act_createCustomWizard() {
 		
 	};
 	this.createWoWithValues = function(){
-		 var $woName="";
-		_click($sfm_pg_wo.tab_all);
-//		_click($sfm_pg_wo.clickTab("Work Orders"));
-		_wait(3000);
-		_click($sfm_pg_wo.link_wo);
-		_click($sfm_pg_wo.btn_wo_new);
-		_click($sfm_pg_wo.txt_actualOnsiteResponse);
-		_click($sfm_pg_wo.cell_today);
-		_click($sfm_pg_wo.txt_actualInitialResponse);
-		_click($sfm_pg_wo.cell_today);
-		_click($sfm_pg_wo.txt_actualRestoration);
-		_click($sfm_pg_wo.cell_tomorrow);
-		_click($sfm_pg_wo.txt_actualResolution);
-//		var $todayDate = _getValue($sfm_pg_wo.cell_today);
-		var $today = _getText($sfm_pg_wo.link_today);
-		var $yesterday = new Date($today);
-//		_log($yesterday);
-		$yesterday.setDate($yesterday.getDate()-1);
-//		_log($yesterday);
-		var $dd = $yesterday.getDate();
-//		_log($dd);
-		_click(_cell("/"+$dd+"/",_leftOf(_cell("/todayDate/"))));
-		_click($sfm_pg_wo.btn_wo_save);
-		_wait(3000);
-		$woName= _getText($sfm_pg_wo.label_wo);
-		return $woName;
-	};
+        var $woName="";
+        $sfm_pg_wo.openAppLauncher();
+//      _click($sfm_pg_wo.clickTab("Work Orders"));
+        _wait(3000);
+        _click($sfm_pg_wo.link_wo);
+        _click($sfm_pg_wo.btn_wo_new);
+        _click($sfm_pg_wo.txt_actualOnsiteResponse);
+        _click($sfm_pg_wo.cell_today);
+        _click($sfm_pg_wo.txt_actualInitialResponse);
+        _click($sfm_pg_wo.cell_today);
+        _click($sfm_pg_wo.txt_actualRestoration);
+        _click($sfm_pg_wo.cell_tomorrow);
+        _click($sfm_pg_wo.txt_actualResolution);
+//      var $todayDate = _getValue($sfm_pg_wo.cell_today);
+        var $today = _getText($sfm_pg_wo.link_today);
+        var $yesterday = new Date($today);
+//      _log($yesterday);
+        $yesterday.setDate($yesterday.getDate()-1);
+//      _log($yesterday);
+        var $dd = $yesterday.getDate();
+//      _log($dd);
+        _click(_cell("/"+$dd+"/",_leftOf(_cell("/todayDate/"))));
+        _click($sfm_pg_wo.btn_wo_save);
+        _wait(3000);
+        $woName= _getText($sfm_pg_wo.label_wo);
+        return $woName;
+        
+//        var $woName="";
+//        $sfm_pg_wo.openAppLauncher();
+////      _click($sfm_pg_wo.clickTab("Work Orders"));
+//        _wait(3000);
+//        _click($sfm_pg_wo.link_wo);
+//        _click($sfm_pg_wo.btn_wo_new);
+//        _click($sfm_pg_wo.txt_actualOnsiteResponse);
+//        _click($sfm_pg_wo.cell_today);
+//        _click($sfm_pg_wo.txt_actualInitialResponse);
+//        _click($sfm_pg_wo.cell_today);
+//        _click($sfm_pg_wo.txt_actualRestoration);
+//        _click($sfm_pg_wo.cell_tomorrow);
+//        _click($sfm_pg_wo.txt_actualResolution);
+////      var $todayDate = _getValue($sfm_pg_wo.cell_today);
+//        var $today = _getText($sfm_pg_wo.link_today);
+//        var $yesterday = new Date($today);
+////      _log($yesterday);
+//        $yesterday.setDate($yesterday.getDate()-1);
+////      _log($yesterday);
+//        var $dd = $yesterday.getDate();
+////      _log($dd);
+//        _click(_cell("/"+$dd+"/",_leftOf(_cell("/todayDate/"))));
+//        _click($sfm_pg_wo.btn_wo_save);
+//        _wait(3000);
+//        $woName= _getText($sfm_pg_wo.label_wo);
+//        return $woName;
+
+  };
+
+
 	this.createWorkDetails = function($lineType,$activityType,$qty){
 		_selectDomain();
 		_click($sfm_pg_wo.btn_newWorkDetail);
@@ -584,6 +640,8 @@ var $sfm_act_createCustomWizard = new function sfm_act_createCustomWizard() {
 		_setValue($sfm_pg_wo.txt_lineQty,$qty);
 		_click($sfm_pg_wo.btn_wo_save);
 	};
+       
+
 	this.addMultipleWizSteps = function($wizTitle,$stepTypes,$stepNames,$titles){
 		var $wizId = $wizTitle.toLowerCase().replace(/ /g, "_");
 		_setValue($sfm_pg_wizards.txt_wizardTitle,$wizTitle);
@@ -604,7 +662,7 @@ var $sfm_act_createCustomWizard = new function sfm_act_createCustomWizard() {
 	
 	this.createWoFor5371 = function(){
 		var $woName="";
-		_click($sfm_pg_wo.tab_all);
+		$sfm_pg_wo.openAppLauncher();
 		_wait(3000);
 		_click($sfm_pg_wo.link_wo);
 		_click($sfm_pg_wo.btn_wo_new);
@@ -668,6 +726,92 @@ var $sfm_act_createCustomWizard = new function sfm_act_createCustomWizard() {
 		return $woName;
 		
 	};
+	
+	//Creates work order without values in lightning.
+	//Lakshmisha- Updated the function to check for the WO link in app launcher and then click on the parent element of WO link
+	this.createWowithoutvalues = function() {
+		$sfm_pg_wo.openAppLauncher();
+		_wait(3000);
+		$woName = "";
+		this.clickSvmxWoLink();
+		_wait(5000,isVisible($sfm_pg_wo.btn_wo_new));
+		_click($sfm_pg_wo.btn_wo_new);
+		_click($sfm_pg_wo.btn_wo_edit_save);
+		_wait(5000,_isVisible($sfm_pg_wo.label_wo)); 
+		$woName= _getText($sfm_pg_wo.label_wo);
+		return $woName;
+		
+	};
+	
+	//Create work order with date literals in lightning.
+	this.createWowithdateliterals = function()
+	{
+		$accNum = "HCSAccountForTesting";
+		$sfm_pg_wo.openAppLauncher();
+		_wait(3000);
+		$sfm_act_createCustomWizard.clickSvmxWoLink();
+		_click($sfm_pg_wo.btn_wo_new);
+		if(_isVisible($sfm_pg_wo.btn_next)){
+			_click($sfm_pg_wo.btn_next);
+		}
+		_click($sfm_pg_wo.txt_actualOnsiteResponse);
+		_click($sfm_pg_wo.cell_today);
+		_click($sfm_pg_wo.txt_actualInitialResponse);
+		_click($sfm_pg_wo.cell_today);
+		var $today = _getText($sfm_pg_wo.txt_actualOnsiteResponse);
+		var $yesterday = new Date($today);
+        $yesterday.setDate($yesterday.getDate()-1);
+        $yesterday = ($yesterday.getMonth()+1) + "/" + $yesterday.getDate() + "/" + $yesterday.getFullYear();
+        var $tomorrow = new Date($today);
+        $tomorrow.setDate($tomorrow.getDate()+1);
+        $tomorrow = ($tomorrow.getMonth()+1) + "/" + $tomorrow.getDate() + "/" + $tomorrow.getFullYear();
+        _setValue($sfm_pg_wo.txt_actualResolution,$tomorrow);
+        _setValue($sfm_pg_wo.txt_actualResolutiontimebox,"12:00 AM");
+        _setValue($sfm_pg_wo.txt_actualRestoration,$yesterday);
+        _setValue($sfm_pg_wo.txt_actualRestorationtimebox,"12:00 AM");
+        _setValue($sfm_pg_wo.lkup_account,$accNum);
+        _keyPress($sfm_pg_wo.lkup_account,13);
+        _click(_link($accNum));
+        _click($sfm_pg_wo.link_wopriority);
+        _click(_link("Medium"));
+        _click($sfm_pg_wo.sel_orderType);
+        //Just for selection of mandatory fields
+        _click(_link("Field Service"));
+        
+		_click($sfm_pg_wo.btn_wo_edit_save);
+		 $woId= _getText($sfm_pg_wo.label_wo);
+		return $woId;
+	};
+	
+	this.clickWizardlinks = function($sfmname){
+		_click(_link($sfm_pg_wo.link_showmore));
+		//Check if the SFM process link exists
+		_assertExists(_span($sfmname));
+		_click(_span($sfmname));
+		};
+		
+		this.addSubtractDates = function($given_date,$num_of_days) {
+			//This function adds or subtracts calendar days from a given date and returns in the
+			//form of MM/DD/YYYY
+			var $result_date = new Date($given_date);
+	        $result_date.setDate($given_date.getDate()+$num_of_days);
+	        $result_date = ($result_date.getMonth()+1) + "/" + $result_date.getDate() + "/" + $result_date.getFullYear();
+	        return $result_date;
+		};
+		this.clickSvmxWoLink = function() {
+		//THis function finds out the Servicemax Work order link and clicks on it.	
+			_click(_link("Work Orders"));
+			 var $url;
+			_set($url, window.location.href);
+			 if(!$url.includes("SVMX")){
+				$sfm_pg_wo.openAppLauncher();
+				_click(_link("Work Orders[1]"));
+			 }
+};
+	  
+
+	
+	
 };
 
 

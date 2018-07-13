@@ -1,3 +1,137 @@
+_click(_div("Setup"));
+_click(_span("/Setup/"));
+_selectWindow("Home | Salesforce");
+_setValue(_searchbox("Quick Find"), "apex classes");
+_click(_mark("Apex Classe"));
+_wait(10000);
+_selectWindow();
+
+_selectDomain("/my.salesforce.com/");
+_click(_span("O"));
+if(_isVisible(_link("objWebService"))){
+_click(_link("objWebService"));}
+else
+{
+_click(_submit("New"));
+_setValue(_textarea("textarea"), "sdd");
+}
+
+/*
+ 
+ //Please make sure below webservices is added in apex class with version 28 before running this testcase
+ //If you are running in base org please change SVMXDEV with SVMXC
+global class objWebService{
+
+
+
+global objWebService(){}
+    
+    webservice static SVMXDEV.SFM_WrapperDef.SFM_PageData onLoad(SVMXDEV.SFM_WrapperDef.SFM_TargetRecord sfmtargetrec){
+        SVMXDEV.SFM_ServicesDef serdev = new SVMXDEV.SFM_ServicesDef();
+        map<String,List<Sobject>> detailSobjectMap = new map<String,List<Sobject>>();
+        map<String,Schema.SObjectType> Allobj = new map<String,Schema.SObjectType>();   
+        Schema.sObjectType site1 = SVMXDEV__Service_Order__c.sObjectType;       
+        Allobj.put('SVMXDEV__Service_Order__c',site1);         
+        Sobject Header = serdev.SFM_Page_GetHeaderRecord(sfmtargetrec,Allobj);
+            
+        SVMXDEV__Service_Order__c obj = (SVMXDEV__Service_Order__c) Header ;
+           
+            obj.SVMXDEV__Driving_Time__c = 120;
+            obj.SVMXDEV__Order_Type__c = 'Depot Repair';
+            obj.SVMXDEV__Zip__c = '560066';
+            obj.SVMXDEV__Is_Entitlement_Performed__c = true;
+            
+        
+        return serdev.SFM_Page_BuildResponse(sfmtargetrec,Header,detailSobjectMap);
+    }
+    webservice static SVMXDEV.SFM_WrapperDef.SFM_PageData beforeSaveOrUpdate(SVMXDEV.SFM_WrapperDef.SFM_TargetRecord sfmtargetrec){
+        SVMXDEV.SFM_ServicesDef serdev = new SVMXDEV.SFM_ServicesDef();
+        map<String,List<Sobject>> detailSobjectMap = new map<String,List<Sobject>>();
+        map<String,Schema.SObjectType> Allobj = new map<String,Schema.SObjectType>();   
+        Schema.sObjectType site1 = SVMXDEV__Service_Order__c.sObjectType;       
+        Allobj.put('SVMXDEV__Service_Order__c',site1);         
+        Sobject Header = serdev.SFM_Page_GetHeaderRecord(sfmtargetrec,Allobj);
+            
+        SVMXDEV__Service_Order__c obj = (SVMXDEV__Service_Order__c) Header ;
+       
+       
+            obj.SVMXDEV__Driving_Time__c = 60;
+            obj.SVMXDEV__Order_Type__c = 'Field Service';
+            obj.SVMXDEV__Zip__c = '560065';
+            obj.SVMXDEV__Is_Entitlement_Performed__c = false;
+            
+        
+        return serdev.SFM_Page_BuildResponse(sfmtargetrec,Header,detailSobjectMap);
+    }
+    webservice static SVMXDEV.SFM_WrapperDef.SFM_PageData afterSaveOrUpdate(SVMXDEV.SFM_WrapperDef.SFM_TargetRecord sfmtargetrec){
+        SVMXDEV.SFM_ServicesDef serdev = new SVMXDEV.SFM_ServicesDef();
+        map<String,List<Sobject>> detailSobjectMap = new map<String,List<Sobject>>();
+        map<String,Schema.SObjectType> Allobj = new map<String,Schema.SObjectType>();   
+        Schema.sObjectType site1 = SVMXDEV__Service_Order__c.sObjectType;       
+        Allobj.put('SVMXDEV__Service_Order__c',site1);         
+        Sobject Header = serdev.SFM_Page_GetHeaderRecord(sfmtargetrec,Allobj);
+            
+        SVMXDEV__Service_Order__c obj = (SVMXDEV__Service_Order__c) Header ;
+       
+       string[] Addresses = new string[]{'shashikala.kamath@servicemax.com'};
+       Messaging.SingleEmailMessage QuoteMail = new Messaging.SingleEmailMessage ();
+       QuoteMail.setSaveAsActivity(true);
+       QuoteMail.setToAddresses(Addresses);
+       QuoteMail.setReplyTo('shashikala.kamath@servicemax.com');  
+       QuoteMail.setSenderDisplayName('QA');
+       QuoteMail.setSubject('Web Service testing After Save');
+       QuoteMail.setPlainTextBody('Web Service testing After Save');
+       Messaging.sendEmail(new Messaging.SingleEmailMessage[] {QuoteMail});
+        
+        return serdev.SFM_Page_BuildResponse(sfmtargetrec,Header,detailSobjectMap);
+    }
+    
+    webservice static SVMXDEV.SFM_WrapperDef.SFM_PageData onChange(SVMXDEV.SFM_WrapperDef.SFM_TargetRecord sfmtargetrec){
+        SVMXDEV.SFM_ServicesDef serdev = new SVMXDEV.SFM_ServicesDef();
+        map<String,List<Sobject>> detailSobjectMap = new map<String,List<Sobject>>();
+        map<String,Schema.SObjectType> Allobj = new map<String,Schema.SObjectType>();   
+        Schema.sObjectType site1 = SVMXDEV__Service_Order__c.sObjectType;       
+        Allobj.put('SVMXDEV__Service_Order__c',site1);         
+        Sobject Header = serdev.SFM_Page_GetHeaderRecord(sfmtargetrec,Allobj);
+            
+        SVMXDEV__Service_Order__c obj = (SVMXDEV__Service_Order__c) Header ;
+       
+       
+            obj.SVMXDEV__Driving_Time__c = 30;
+            obj.SVMXDEV__Order_Type__c = 'Depot Repair';
+            obj.SVMXDEV__Zip__c = '560064';
+            obj.SVMXDEV__Is_Entitlement_Performed__c = true;
+            
+        
+        return serdev.SFM_Page_BuildResponse(sfmtargetrec,Header,detailSobjectMap);
+    }
+    
+    webservice static SVMXDEV.SFM_WrapperDef.SFM_PageData onExit(SVMXDEV.SFM_WrapperDef.SFM_TargetRecord sfmtargetrec){
+        SVMXDEV.SFM_ServicesDef serdev = new SVMXDEV.SFM_ServicesDef();
+        map<String,List<Sobject>> detailSobjectMap = new map<String,List<Sobject>>();
+        map<String,Schema.SObjectType> Allobj = new map<String,Schema.SObjectType>();   
+        Schema.sObjectType site1 = SVMXDEV__Service_Order__c.sObjectType;       
+        Allobj.put('SVMXDEV__Service_Order__c',site1);         
+        Sobject Header = serdev.SFM_Page_GetHeaderRecord(sfmtargetrec,Allobj);
+            
+        SVMXDEV__Service_Order__c obj = (SVMXDEV__Service_Order__c) Header ;
+       
+       
+            obj.SVMXDEV__Driving_Time__c = 15;
+            obj.SVMXDEV__Order_Type__c = 'Depot Repair';
+            obj.SVMXDEV__Zip__c = '560063';
+            obj.SVMXDEV__Is_Entitlement_Performed__c = false;
+            
+        
+        return serdev.SFM_Page_BuildResponse(sfmtargetrec,Header,detailSobjectMap);
+    }    
+}
+ 
+ */
+
+
+
+
 
 
 //Author:Mamata RS-4999

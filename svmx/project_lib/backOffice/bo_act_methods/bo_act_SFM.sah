@@ -13,6 +13,47 @@ var $bo_act_SFM = new function bo_act_SFM() {
 	 * @param $fieldName
 	 * @param $containerName
 	 */
+	
+	
+	/*
+	 * Author: Meghana Rao
+	 */
+	
+	this.createstandaloneSFM = function($sfmName, $nameOfTranType, $targetObjName){ // Lightning 
+		
+		var $sfmPageLayoutName = "SVMXSTD: Create WO from IB";
+		
+		$bo_act_navigation.navigateToSvmxSetup();
+		var $pagelayoutName = $bo_act_common.generateRandomName("PAG_");
+		var $pagelayoutId = $bo_act_common.generateRandomName("PAGID");
+		_selectDomain("/svmx/");
+		_click($bo_pg_servicemaxSetup.btn_serviceFlowManager);
+		_click($bo_pg_servicemaxSetup.btn_sfmTransactionAndDocsDesigner);
+		_wait(60000,_isVisible($bo_pg_sfmTransactionAndDesigner.btn_newSFMTransaction));
+		_wait(10000);
+		_click($bo_pg_sfmTransactionAndDesigner.btn_newSFMTransaction);
+		_wait(30000,_isVisible($bo_pg_sfmTransactionAndDesigner.txt_name));
+		_setValue($bo_pg_sfmTransactionAndDesigner.txt_name,$sfmName);
+		_click($bo_pg_sfmTransactionAndDesigner.txt_sfmTransactionId);
+		_setSelected($bo_pg_sfmTransactionAndDesigner.lbl_checklistOb,$nameOfTranType);
+		_setSelected($bo_pg_sfmTransactionAndDesigner.combo_CTRecord,$targetObjName);
+		_click($bo_pg_sfmTransactionAndDesigner.btn_screenDesigner);
+		_setSelected($bo_pg_sfmTransactionAndDesigner.selectExistingPageLayout,$sfmPageLayoutName);
+		_wait(10000);
+		_click($bo_pg_manageWOLineUsageForSorting.sel_selHeaderOption2);
+		_setValue($bo_pg_manageWOLineUsageForSorting.txt_searchItem, "Proforma Invoice");
+		_doubleClick($bo_pg_manageWOLineUsageForSorting.btn_proformainvoice);
+		_setValue($bo_pg_manageWOLineUsageForSorting.txt_pagelayoutName, $pagelayoutName);
+		_setValue($bo_pg_manageWOLineUsageForSorting.txt_pagelayoutID, $pagelayoutId);
+		_click($bo_pg_manageWOLineUsageForSorting.btn_save_as);
+		_wait(10000);
+		_click($bo_pg_sfmTransactionAndDesigner.btn_quickSave1);
+		_wait(10000);
+		_click($bo_pg_sfmTransactionAndDesigner.btn_saveAndclose);
+		_selectDomain();
+		
+		
+	};
 
 	this.cloneSFM = function($sfmNameToBeCloned, $sfmName, $isCustom, $sfmTemplate, $sfmTemplateSaveAsName, $fieldName, $containerName) {
 
@@ -178,6 +219,40 @@ var $bo_act_SFM = new function bo_act_SFM() {
 			_setSpeed($g_stepSpeed);	
 		}
 		
+		
+		// Author : Meghana Rao P - Cloning Standard SFM for Attachment Enable
+		
+		this.clnStandardSFM_attachment=function($sfmToBeCloned,$sfmName,$sfmTemplateSaveAsName){ // Lightning Changes
+			$bo_act_navigation.navigateToSvmxSetup();
+			_selectDomain("/svmx/");
+			_click($bo_pg_servicemaxSetup.btn_serviceFlowManager);
+			_wait(10000);
+			_click($bo_pg_servicemaxSetup.btn_sfmTransactionAndDocsDesigner);
+			_click($bo_pg_sfmTransactionAndDesigner.txt_standardSfmTransactionQuickFind);
+			$sfm_act_SFM.selectSFM($sfmToBeCloned, false);
+			_click($bo_pg_sfmTransactionAndDesigner.btn_clone);
+			_wait(3000);
+			_wait(60000, _isVisible($bo_pg_sfmTransactionAndDesigner.txt_name));
+			_setValue($bo_pg_sfmTransactionAndDesigner.txt_name, $sfmName);
+			_setValue($bo_pg_sfmTransactionAndDesigner.txt_sfmTransactionId, "");
+			_setValue($bo_pg_sfmTransactionAndDesigner.txt_sfmTransactionId, $sfmName);
+			_click($bo_pg_sfmTransactionAndDesigner.btn_screenDesigner);
+			_wait(6000,_isVisible(_f("main").tab("Screen Designer")));
+			_setValue($bo_pg_sfmTransactionAndDesigner.txt_sfmSavePageLayoutAs, $sfmTemplateSaveAsName);
+			_setValue($bo_pg_sfmTransactionAndDesigner.txt_sfmSavePageLayoutAsId, $sfmTemplateSaveAsName);
+			_wait(3000);
+			_click($bo_pg_sfmTransactionAndDesigner.btn_pageLayoutSave);
+			_wait(10000);
+			_click($bo_pg_sfmTransactionAndDesigner.btn_advanced_options);
+			_wait(10000);
+			_click($bo_pg_sfmTransactionAndDesigner.chkbox_work_order);
+			_click($bo_pg_sfmTransactionAndDesigner.btn_saveAndclose);
+			_wait(2000);
+			_selectDomain();
+			_setSpeed($g_stepSpeed);	
+		};
+		
+		
 		this.deleteSFM=function($sfmName){
 			$bo_act_navigation.navigateToSfmTransactionDesigner();
 			_click($bo_pg_sfmTransactionAndDesigner.btn_yourCustomSfmTransactions);
@@ -244,12 +319,14 @@ var $bo_act_SFM = new function bo_act_SFM() {
 				
 				
 				this.enterTargetDetail=function($targetObjName){
-					_click($bo_pg_sfmTransactionAndDesigner.sel_targetObjFld);
-					_setValue($bo_pg_sfmTransactionAndDesigner.sel_targetObjFld,"");
+//					_click($bo_pg_sfmTransactionAndDesigner.sel_targetObjFld);
+//					_setValue($bo_pg_sfmTransactionAndDesigner.sel_targetObjFld,"");
 					_setSelected($bo_pg_sfmTransactionAndDesigner.combo_CTRecord,$targetObjName);
 					_click($bo_pg_sfmTransactionAndDesigner.childCTRecord_chkBox);
-					_click(_f("main").s_textinput("aliasName[58]"));
-					_setValue(_f("main").s_textinput("aliasName[58]"),"parts");
+//					_click(_f("main").s_textinput("aliasName[58]"));
+//					_setValue(_f("main").s_textinput("aliasName[58]"),"parts");
+					_click(_f("main").s_textinput("/aliasName/").rightOf(_f("main").s_checkbox("Work Detail (Work Order)[1]")));
+					_setValue(_f("main").s_textinput("/aliasName/").rightOf(_f("main").s_checkbox("Work Detail (Work Order)[1]")),"Parts");
 					_wait(2000);					
 				}
 			

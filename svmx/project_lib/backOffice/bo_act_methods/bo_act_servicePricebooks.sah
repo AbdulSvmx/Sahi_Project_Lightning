@@ -42,21 +42,23 @@ var $bo_act_servicePricebooks = new function bo_act_servicePricebooks() {
 	};
 	
 	this.editStandardServicePricebooks = function($PriceBookName,$unit,$activityID,$activityProduct,$regularRate){
+		// Made changes for Lightning - please donot change this
 		 $bo_act_navigation.navigateToServicePricebooks();
 		 _wait(2000);
 		 _setStrictVisibilityCheck(true);
 		 $bo_pg_servicePricebooks.clickOnServicePriceBook($PriceBookName);
-		 _setStrictVisibilityCheck();
+		 _click($bo_pg_servicePricebooks.link_related);
 	     _wait(15000, _isVisible($bo_pg_servicePricebooks.btn_newServicePricebookEntry));
 	     _click($bo_pg_servicePricebooks.btn_newServicePricebookEntry);
-	     _setSelected($bo_pg_servicePricebooks.sel_unit, $unit);
+	     _click($bo_pg_servicePricebooks.sel_unit);
+	     _setSelected(_link($unit));
 	     _setValue($bo_pg_servicePricebooks.txt_activityID, $activityID);
+	     _click(_mark($activityID));
 	     _setValue($bo_pg_servicePricebooks.txt_activityProduct, $activityProduct);
 	     _setValue($bo_pg_servicePricebooks.txt_regularRate, $regularRate);
 	     _click($bo_pg_servicePricebooks.btn_saveServicePricebookEntry);
-	     _assertNotVisible(_div("/Error: Invalid Data/"));
-	     var $ServicePricebooksEntryNumber = _getText(_heading2("pageDescription"));
-	     ($bo_pg_servicePricebooks.navigateBackToCustomServicePriceBook($PriceBookName));
+	     _assertNotVisible(_span("Review the errors on this page."));
+	     var $ServicePricebooksEntryNumber = _getText(_link(0,_under(_tableHeader("Record Number"))));
 	 	_logOutput($ServicePricebooksEntryNumber+ " Service Pricebooks Entry is created");
 	    return $ServicePricebooksEntryNumber;
 	};

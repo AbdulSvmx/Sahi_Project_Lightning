@@ -8,9 +8,8 @@ var $bo_act_navigation = new function bo_act_navigation() {
      * Navigates to Home  page
      * @returns boolean
      */this.navigateToHome = function() {
-    	 _selectWindow();
+    _selectDomain();
 	_click($bo_pg_home.link_home);
-	_wait(6000, _isVisible($bo_pg_home.link_servicemaxSetup));
 	//return $callBack.returnResult(_exists($bo_pg_home.link_servicemaxSetup ));
 	
     };
@@ -18,9 +17,24 @@ var $bo_act_navigation = new function bo_act_navigation() {
     /**
      * Navigates to Servicemax setup page
      * @returns boolean
+     * Changes made for Lightning
      */this.navigateToSvmxSetup = function() {
-	 this.navigateToHome();
-	_click($bo_pg_home.link_servicemaxSetup );
+	 //this.navigateToHome();
+		if(_isVisible($bo_pg_home.link_servicemaxSetup) == true )
+		{
+			_click($bo_pg_home.link_servicemaxSetup);
+		}
+		else
+		{
+			_selectDomain();
+			_click($bo_pg_home.button_allLinks); 
+			if(!_isVisible(_heading2("App Launcher"))){
+				_click($bo_pg_home.button_allLinks); 
+		
+			} 
+			_wait(6000, _isVisible($bo_pg_home.link_servicemaxSetup));
+			_click($bo_pg_home.link_servicemaxSetup);
+		}
 	_wait(3000,_isVisible($bo_pg_servicemaxSetup.btn_serviceFlowManager));
 	//return $callBack.returnResult(_exists($bo_pg_servicemaxSetup.btn_serviceFlowManager));
 
@@ -29,12 +43,15 @@ var $bo_act_navigation = new function bo_act_navigation() {
     /**
      * Navigates to a SFm transaction designer
      * @returns boolean
+     * Changes made for Lightning
      */this.navigateToSfmTransactionDesigner = function() {
-	 this.navigateToSvmxSetup();
+    	 this.navigateToSvmxSetup();
+	 _selectDomain("/svmx/");
 	_click($bo_pg_servicemaxSetup.btn_serviceFlowManager);
 	_click($bo_pg_servicemaxSetup.btn_sfmTransactionAndDocsDesigner);
 		 _wait(10000);	 
 	_setSpeed(3000);
+//	_selectDomain();
 	//return $callBack.returnResult(_exists($bo_pg_sfmTransactionAndDesigner.btn_standardSfmTransaction));
     };
     
@@ -63,41 +80,37 @@ var $bo_act_navigation = new function bo_act_navigation() {
     
 //Added By BAC Team
     this.navigateToProductsPage = function(){
-    	_click($bo_pg_home.btn_allTabs);
-    	_click($bo_pg_home.link_products);
+    	 _click($bo_pg_home.link_applauncher);
+    	 _click(_link("Products",_near($bo_pg_home.btn_heading_allitems)));
     };
     
-    this.navigateToAccountsPage = function(){
-    	 _click($bo_pg_home.btn_allTabs);
-    	 _click($bo_pg_home.link_accounts);
+    this.navigateToAccountsPage = function(){ //Modified for Lightning
+    	 _click($bo_pg_home.link_applauncher);
+    	 _click(_span("/Accounts/",_near($bo_pg_home.btn_heading_allitems)));
     };
-    this.navigateToCasesPage = function(){
-   	 _click($bo_pg_home.btn_allTabs);
-   	 _click($bo_pg_home.link_cases);
+    this.navigateToCasesPage = function(){ // Modified for lightning
+    	_wait(10000);
+    	
+   	 	_click($bo_pg_home.button_allLinks); 
+   	 	_click(_span("/Cases/",_near($bo_pg_home.btn_heading_allitems)));
+
    };
     	
-     this.navigateToContactsPage = function(){
-    	 _click($bo_pg_home.btn_allTabs);
-    	 _click($bo_pg_home.link_contacts);
+     this.navigateToContactsPage = function(){ //Modified for Lightning
+    	 _click($bo_pg_home.link_applauncher);
+    	 _click(_span("/Contacts/",_near($bo_pg_home.btn_heading_allitems)));
     };
     
-    this.navigateToInstalledProductPage = function(){
-    	_click($bo_pg_home.btn_allTabs);
-    	if(_condition($bo_pg_home.link_installedProducts == null))
-    		{
-    		$bo_act_navigation.navigateToSetUpAndSearchfromUserNavlabel("Tabs");
-    		$bo_act_salesforcePageSetUp.createTabs("Installed Product",5);
-    		}
-   	    _click($bo_pg_home.link_installedProducts);
-    };
 
-    this.navigateToServiceMaintenanceContractPage = function(){
+    this.navigateToInstalledProductPage = function(){ //Modified for Lightning
+    	$bo_act_navigation.navigateToHome();
+    	 _click($bo_pg_home.link_applauncher);
+    	 _click(_span("/Installed Products/",_near($bo_pg_home.btn_heading_allitems)));
+};
+
+
+    this.navigateToServiceMaintenanceContractPage = function(){ // Modified for Lightning
     	_click($bo_pg_home.btn_allTabs);
-    	if(_condition($bo_pg_home.link_serviceMaintenanceContracts == null))
-		{
-		$bo_act_navigation.navigateToSetUpAndSearchfromUserNavlabel("Tabs");
-		$bo_act_salesforcePageSetUp.createTabs("Service/Maintenance Contract",4);
-		}
    	    _click($bo_pg_home.link_serviceMaintenanceContracts);
     };
     this.navigateToStockAdjustment = function(){
@@ -108,40 +121,39 @@ var $bo_act_navigation = new function bo_act_navigation() {
     this.navigateToStandardPriceBook = function(){
       	 _click($bo_pg_home.btn_allTabs);
       	 _click($bo_pg_home.link_priceBooks);
-      	 _click($bo_pg_home.btn_go);
+//      	 _click($bo_pg_home.btn_go);
       };
 
-    this.navigateToSlaTerms = function(){
-    	$bo_act_navigation.navigateToHome();
-    	_click(_link("ServiceMax Setup"));
-    	_click($bo_pg_servicemaxSetup.btn_warrantiesAndServiceContracts);
-    	_click($bo_pg_servicemaxSetup.btn_slaTerms);
-    	_wait(1000);
-    	_call(top.location.reload());
+    this.navigateToSlaTerms = function(){ // Modified for Lightning
+    	 this.navigateToSvmxSetup();
+    	 _selectDomain("/svmx/");
+    	 _click($bo_pg_servicemaxSetup.btn_warrantiesAndServiceContracts);
+    	 _click($bo_pg_servicemaxSetup.btn_slaTerms);
+    	 _wait(1000);
+    	 _selectDomain();
+    	 _call(top.location.reload());
     };
 
-    this.navigateToPMPlanTemplatePage = function(){
-    	$bo_act_navigation.navigateToHome();
-    	_click(_link("ServiceMax Setup"));
+    this.navigateToPMPlanTemplatePage = function(){ // Modified For Lightning
+    	this.navigateToSvmxSetup();
+    	_selectDomain("/svmx/");
     	_click($bo_pg_servicemaxSetup.btn_installedBaseAndPM );
     	_click($bo_pg_servicemaxSetup.btn_PMPlanTemplate);
-    	_wait(10000);
-    	_call(top.location.reload());
+    	_selectDomain();
     };
 
     this.navigateToPMProcess = function(){
-    	$bo_act_navigation.navigateToHome();
-    	_click(_link("ServiceMax Setup"));
+    	this.navigateToSvmxSetup();
+    	_selectDomain("/svmx/");
     	_click($bo_pg_servicemaxSetup.btn_installedBaseAndPM );
     	_click($bo_pg_servicemaxSetup.btn_PMProcess);
     	_wait(1000);
-    	_call(top.location.reload());
     };
 
-    this.navigateToLocations = function(){
-    	_click($bo_pg_home.btn_allTabs);
-   	    _click($bo_pg_home.link_locations);
-   	 _setSelected(_select("hotlist_mode"),"Recently Created");
+    this.navigateToLocations = function(){ // Modified for Lightning
+    	_click($bo_pg_home.link_applauncher);
+   	 _click(_span("Locations",_near($bo_pg_home.btn_heading_allitems)));
+    	
     };
     
     this.navigateToDevConsole = function(){
@@ -170,28 +182,38 @@ var $bo_act_navigation = new function bo_act_navigation() {
     	_wait(30000, _isVisible($recordToBeSearch));
     	};
     	
-    this.navigateToCreatedRecordUsingGlobalSearch = function($recordToBeSearch){
-    	_setValue(_textbox("phSearchInput"),$recordToBeSearch);
-    	_click(_button("phSearchButton"));
+    //Changed by Janaki to Lightning flow.
+    	this.navigateToCreatedRecordUsingGlobalSearch = function($recordToBeSearch){
+    	_click(_link("Home"));
+    	_setValue(_textbox("Search Salesforce"),$recordToBeSearch);
+    	_keyPress(_textbox("Search Salesforce"),13);
     	_wait(3000, _isVisible($recordToBeSearch));
-    //	_click(_link("Search All"));
-    //	_wait(3000, _isVisible($recordToBeSearch));
-    	_click(_link($recordToBeSearch));
+    	_click(_link("/"+$recordToBeSearch+"/",_near(_heading1("Search Results"))));
         };
+        
+     this.navigateToFeaturePermissionsPage = function() {
+    	 $bo_act_navigation.navigateToSvmxSetup();
+		_selectDomain("/svmx/");
+		_click($bo_pg_servicemaxSetup.btn_featurePermissions);
+	 };
         
      this.navigateToConfigurationProfilesPage = function(){
         	$bo_act_navigation.navigateToHome();
-        	_click(_link("ServiceMax Setup"));
+        	$bo_act_navigation.navigateToSvmxSetup();
+			_selectDomain("/svmx/");
         	_click($bo_pg_servicemaxSetup.btn_appAdministration);
         	_click($bo_pg_servicemaxSetup.btn_configurationProfiles);
+        	_selectDomain();
         };
         
      this.navigateToActiveOrgWideConfigProfilePage = function($selectModule, $selectSubModule){
+    	 _selectDomain("/svmx/");
     	 _click(_checkbox(0,_leftOf(_span("Active",_near(_heading2("Org-wide Configuration Settings"))))));
     	 _click(_submit("Edit",_near(_heading2("Org-wide Configuration Settings"))));
     	 _wait(3000,_isVisible(_heading2("Edit Configuration Profile")));
     	 _setSelected(_select(0,_rightOf(_label("Select Module"))),$selectModule);
     	 _setSelected(_select(0,_rightOf(_label("Select Submodule"))),$selectSubModule);
+    	 _selectDomain();
      };
 
      this.navigateToPreventiveMaintenancePlans = function(){
@@ -203,10 +225,12 @@ var $bo_act_navigation = new function bo_act_navigation() {
       * Navigates to a SFM Wizards
       * @returns boolean
       */
- 	this.navigateToSfmWizard = function() {
+ 	this.navigateToSfmWizard = function() { // Changes made for Lightning
  	 this.navigateToSvmxSetup();
+ 	 _selectDomain("/svmx/");
  	_click($bo_pg_servicemaxSetup.btn_serviceFlowManager);
  	_click($bo_pg_servicemaxSetup.btn_sfmWizard);
+	_selectDomain();
     };
 
  	  /**
@@ -261,13 +285,12 @@ var $bo_act_navigation = new function bo_act_navigation() {
       */
      this.navigateToActivityMaster = function() {
  	 this.navigateToSvmxSetup();
- 	
+ 	 _selectDomain("/svmx/");
  	_click($bo_pg_servicemaxSetup.btn_warrantiesAndServiceContracts);
  	_click($bo_pg_servicemaxSetup.btn_activityMaster);
- 	_wait(1000);
+	_selectDomain();
 	_call(top.location.reload());
-	_wait(1000);
-	_call(top.location.reload());
+	
 	
      };
      
@@ -276,8 +299,10 @@ var $bo_act_navigation = new function bo_act_navigation() {
       */
      this.navigateToServicePricebooks = function() {
  	 this.navigateToSvmxSetup();
+ 	 _selectDomain("/svmx/");
  	_click($bo_pg_servicemaxSetup.btn_warrantiesAndServiceContracts);
  	_click($bo_pg_servicemaxSetup.btn_servicePricebooks);
+ 	_selectDomain();
  	_wait(1000);
 	_call(top.location.reload());
 	_wait(1000);
@@ -296,10 +321,10 @@ var $bo_act_navigation = new function bo_act_navigation() {
      };
      
      this.navigateToWorkOrdersTab = function(){
-    	 _click($bo_pg_home.btn_allTabs);
-    	 _setStrictVisibilityCheck(true);
-    		_click($bo_pg_home.link_customWorkOrders);
-    		_setStrictVisibilityCheck(false);
+    	 _selectDomain();
+    	 _click($bo_pg_home.link_applauncher);
+       	 _click(_span("/Work Orders/",_near($bo_pg_home.btn_heading_allitems)));
+
      };
 
      this.navigateToStockTransfers = function(){
@@ -307,10 +332,14 @@ var $bo_act_navigation = new function bo_act_navigation() {
     	    _click($bo_pg_home.link_stockTransfer);
      };
      
-     this.navigateToSetUpAndSearch = function($searchValue){
-    	 _click(_link("Setup"));
-    	 _wait(50000,_isVisible(_textbox("setupSearch")));
-    	 _setValue(_textbox("setupSearch"),$searchValue);
+     this.navigateToSetUpAndSearch = function($searchValue){// Modified for Lightning
+    	 _selectDomain();
+    	 _wait(50000,_isVisible(_div("Setup")));
+    	 _click(_div("Setup"));
+    	 _click(_div("Setup for current app"));
+    	 //_selectDomain("/popup/");
+    	 //_wait(10000,_isVisible(_link("Setup Home")));
+    	 _setValue(_searchbox("Quick Find"),$searchValue);
     	 _click(_link($searchValue)); 
      };
      this.navigateToSetUpAndSearchfromUserNavlabel = function($searchValue){
@@ -337,8 +366,10 @@ var $bo_act_navigation = new function bo_act_navigation() {
 	//Navigate to SFM Search Configuration Screen
     this.navigateToSfmSearchInDesigner = function() {
    	 this.navigateToSvmxSetup();
+   	 _selectDomain("/svmx/");
    	 _click($bo_pg_servicemaxSetup.btn_serviceFlowManager);
-   	 _click($bo_pg_servicemaxSetup.btn_sfmSearch);	   	 
+   	 _click($bo_pg_servicemaxSetup.btn_sfmSearch);	
+   	 _selectDomain();
     };
     
     this.navigateToTaskTemplatePage = function(){
@@ -360,9 +391,74 @@ var $bo_act_navigation = new function bo_act_navigation() {
        	_click($bo_pg_servicemaxSetup.btn_mobileAndOffline);
        	_click($bo_pg_servicemaxSetup.btn_mobileconfiguration);
        	_setSelected($bo_pg_servicemaxSetup.listselectprofile,$Profilename);
-
-       	
-      	    
+       	    
       	  
        };
+       
+       
+       this.navigatetoMobileOfflinePermission = function(){
+    	   _selectDomain("/svmx/");
+    	   _click($bo_pg_servicemaxSetup.btn_mobileAndOffline);
+    	   _click($bo_pg_servicemaxSetup.btn_mobileofflinepermissions);
+    	   _selectDomain();
+    	   
+       };
+       
+       this.findIfCustomProcessExists = function($processName){
+    	   _click($bo_pg_sfmTransactionAndDesigner.btn_yourCustomSfmTransactions);
+    	   _setValue($bo_pg_sfmTransactionAndDesigner.txt_yourCustomSfmTransactionsQuickFind,$processName);
+    	   _wait(10000);
+    	   if (_exists(_f("main").s_label($processName))){
+    		   return true;
+    	   }
+    	   else {
+    		   return false;
+    	   }
+			
+       };
+       
+       //Function to design screen for header
+       this.designHeaderScreen = function($pg_layout_name,$fields_array){
+    	   var $i = 0;
+    	   for($i=0;$i<$fields_array.length;$i++){
+    		   _click(_f("main").fieldrenderer("[object Object]"));
+    			_setValue(_f("main").s_textinput("searchText[4]"), $fields_array[$i]);
+    			_doubleClick(_f("main").s_label($fields_array[$i]));
+    	   }
+    			_setValue($bo_pg_sfmTransactionAndDesigner.txt_sfmSavePageLayoutAs, $pg_layout_name);
+    			_click($bo_pg_sfmTransactionAndDesigner.btn_pageLayoutSave);
+    			_assertExists($bo_pg_sfmTransactionAndDesigner.page_saved);
+    	   
+    	   };
+    //Function to edit existing screen designer.
+    	   this.editHeaderScreen = function($fields_array,$containerName){
+        	   var $i = 0;
+        	   for($i=0;$i<$fields_array.length;$i++){
+        		   _click(_f("main").fieldrenderer("[object Object]").near(_f("main").formitemlabel($containerName)));
+        			_setValue(_f("main").s_textinput("searchText[4]"), $fields_array[$i]);
+        			_doubleClick(_f("main").s_label($fields_array[$i]));
+        	   }
+        			_click($bo_pg_sfmTransactionAndDesigner.btn_pageLayoutSave);
+        			_assertExists($bo_pg_sfmTransactionAndDesigner.page_saved);
+        	   
+        	   };
+       this.getCurrentTimeStamp = function(){
+        	//This function returns the current date and time in the form - DD-MM-YYYY_HR:MIN:SEC
+             var stamp = new Date();
+             var timeStamp = stamp.getDate() + "_" + (stamp.getMonth()+1) + "_" + stamp.getFullYear() + "_" + stamp.getHours() + "_" + stamp.getMinutes() + "_" + stamp.getSeconds();
+        	 return timeStamp;
+
+        		  };
+        this.addSfmDesignerPermissionToUser = function($userName,$groupProfile){
+        //This function adds the SFM Designer launching permission to the given user in the given group profile.
+        	_click(_listItem($groupProfile));
+        	_setValue($bo_pg_servicemaxSetup.txt_featurePermissionSearch,$userName);
+        	_click($bo_pg_servicemaxSetup.btn_featurePermissionUserSearch);
+        	//Click the SFM designer checkbox. Only one search result is expected as the username is unique.
+        	_click(_div("svmx-grid-checkheader[1]"));
+        	//Add step to click on 'Save' button as it is not visible in Lightning experience.
+        	
+        	
+        	
+        };
 };

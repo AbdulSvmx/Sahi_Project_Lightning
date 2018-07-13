@@ -1,9 +1,7 @@
-_windowAction("resize", 1920, 1080);
-
-var project_dir = "Sahi_Project_Lightning";
 _call(top.location.reload(true));
-_setXHRReadyStatesToWaitFor("2");
-var $g_stepSpeed = 400;
+_setXHRReadyStatesToWaitFor("2,3")
+_windowAction("resize", 1920, 1080);
+var $g_stepSpeed = 300;
 _setSpeed($g_stepSpeed);
 
 // PLease CHANGE the Flag to decide whether Dev or Base
@@ -16,11 +14,15 @@ if ($orgtype == "Dev") {
 }
 
 // Add All Global Variables here
-var $url = "https://test.salesforce.com";
+var $url_new = "https://test.salesforce.com";
 var $g_url = "https://test.salesforce.com/";
 var $g_un = "bhupen@back17.com";// "bhupendra.s@dev.tool2.com";
 var $g_pwd = "smax@123";
 
+// THIS IS SPECIFIC TO A GIVEN ORG - DONOT TOUCH
+var $client_id = "3MVG9zZht._ZaMulZsbNptzpIDmNd6xyt0zAOuNU_dtpTTg4DHSn9UmdBySUZS3_VOGeiWttaj3moLMuLIrje";
+var $client_secret = "1938983484606764552";
+var $orginstance = "cs21";
 
 // PLEASE DO NOT Use separate names for DEV and Base UN and PWD , instead just change the base/dev credentials in $bac_un & $bac_pwd, while committing to jenkins, also follow the same procedures.
 
@@ -30,11 +32,20 @@ var $g_pwd = "smax@123";
 //var $bac_pwd = "cloud_102";
 //var $bac_un = "bac_automationdev@ge.com";
 //var $bac_pwd = "welcome-01";
-var $bac_un = "orgsadmin@svmx-test4.org.test4part2"; //pointing to Dev
-var $bac_pwd = "welcome-02";
+
+var $bac_un = "meghana.rao@servicemax.com";
+var $bac_pwd = "cloud_103";
+
+var $tech_un = "lightning_tech@gmail.com";
+var $tech_pwd = "servicemax0"
+
+//var $bac_un = "orgsadmin@svmx-test4.org.test4part2";
+//var $bac_pwd = "welcome-03";
+
 var $bac_PRTun = "bhupendra.auto@upgrade.com"; // Most Used Customer
 var $bac_PRTpwd = "servicemax@123";
-var $group_profilename = "AutoBACGroup";
+//var $group_profilename = "AutoBACGroup";
+var $group_profilename = "Cloned Profile";
 
 // Checklist Global Variables
 var $un_checklist = $bac_un// "meghana.rao@servicemax.com"; // Pointing to
@@ -43,10 +54,15 @@ var $pwd_checklist = $bac_pwd// "cloud_102";
 var $url_checklist = "https://test.salesforce.com";
 
 // SFMD Global Variables
-var $sfmUsn = "svmx-sfdtest@svmx-sfdtest.org.sfdtest1"; // dev
-var $sfmPwd = "servicemax2";
-// var $sfmUsn = "sysadmin01@sfdautomation.com"; // base
-// var $sfmPwd = "Maxplore3";
+//var $sfmUsn = "svmx-sfdtest@svmx-sfdtest.org.sfdtest1"; // dev
+//var $sfmPwd = "servicemax2";
+ var $sfmUsn = "sysadmin01@sfdautomation.com"; // base
+ var $sfmPwd = "Maxplore4";
+ var $domainName = "/svmx/";
+
+ var $wizardName = ["SFMDAuto_Ltng_DVR", "SFMDAuto_Ltng_WebServices","SFMDAuto_Ltng_Process","SFMDAuto_Ltng_LookUP","SFMDAuto_Ltng_Mappings",
+                     "SFMDAuto_Ltng_Formula","SFMDAuto_Ltng_Expression"];
+ var $wizardType = ["None","SFM","Inventory","Others","Output Document"];
 
 // DC Global Variables
 var $dc_org = $orgtype;
@@ -62,18 +78,29 @@ var $swatUrl = "https://test.salesforce.com";
 var $swatUsn = "shashikala.svmx@ge.com";
 var $swatPwd = "maxpl0re";
 
+
+
+// Appium
+
+var $appiumAdminUn="pqtadmin@bugbash.com";
+var $appiumAdminPwd="servicemax3";
+
+var $appiumUn="vinod.tharavath@ge.com";
+var $appiumPwd="svmx123#";
+
 // ==== Reference addition module START ====
 // Include the salesforce js files to enable sforce API calls
 init_sForce_api();
 function init_sForce_api() {
 	// <browser>
+	
 	var script = document.createElement('script');
 	script.type = 'text/javascript';
-	script.src = '/soap/ajax/41.0/connection.js';
+	script.src = '/soap/ajax/39.0/connection.js';
 	document.head.appendChild(script);
 	var script1 = document.createElement('script');
 	script1.type = 'text/javascript';
-	script1.src = '/soap/ajax/41.0/apex.js';
+	script1.src = '/soap/ajax/39.0/apex.js';
 	document.head.appendChild(script1);
 	// </browser>
 }
@@ -85,9 +112,9 @@ var $g_normalizedUserDir = _userDataDir().replace(/\\/g, "/");
 // path
 // ===== Start of paths ====//
 var $g_projectLibPath = $g_normalizedUserDir
-		+ "/scripts/"+project_dir+"/svmx/project_lib";
+		+ "/scripts/Sahi_Project_Lightning/svmx/project_lib";
 var $g_utilitiesPath = $g_normalizedUserDir
-		+ "/scripts/"+project_dir+"/svmx/utilities_lib";
+		+ "/scripts/Sahi_Project_Lightning/svmx/utilities_lib";
 // ===== End of paths ====
 
 var $g_referancePath = $g_normalizedUserDir;

@@ -1,9 +1,24 @@
 var $sfm_pg_wizardWindow = new function sfm_pg_wizardWindow(){
 	
+	this.btn_search = _link("Search",_in(_div("Search ControlSearch")));//Added for Lightning
+	this.lookup_account= _div("/search/",_near(_span("Account")));//Changed for Lightning
+	this.lookup_contact= _div("/search/",_near(_span("Contact")));//Changed for Lightning
+	this.account_option= _link("Acme");//Changed for Lightning
+	this.popUpTxt_account = _textbox(1,_in(_div("/ControlSearchAccount/")));//Added for Lightning
+	this.link_addWorkDetail = _link("+ Add Work Detail (Work Order)");//Added for Lightning
+	this.txt_account =  _textbox(0,_near(_span("Account")));//Changed for Lightning
+	this.icon_Edit = _div("/edit-icon/");//Added for Lightning
+	this.link_Edit=_link("Edit");//Changed for Lightning
+	this.lkp_autoContact = _div("/search/",_near(_span("AutoContact[1]")));//Changed for Lightning
+	this.txt_accountPicklist = _textbox(0,_near(_span("Account Picklist")));//Changed for Lightning
+	this.lkp_contact = _div("/search/",_near(_span("Contact"))); //Changed for Lightning
+	this.lbl_contactLookup = _label(0,_near(_span("/checkbox/"))); //Changed for Lightning
+	
+	
+	
 	this.txt_site=_textbox(0,_rightOf(_label("/Site/")));
 	this.btn_addAndSearch=_span("/multi-add-line-icon/");
 	this.btn_addRow=_span("/add-line-icon/");
-	this.btn_edit=_image("/edit-icon/");
 	this.btn_downArrow= _xy(_span("/svmx-sfmd-detail-actions-icon/"),30,20);
 	this.txt_serialNo= _textbox(0,_rightOf(_label("/IB Serial Number:/")));
 	this.txt_part= _textbox(0,_rightOf(_label("/Part/")));
@@ -22,21 +37,13 @@ var $sfm_pg_wizardWindow = new function sfm_pg_wizardWindow(){
 	this.txt_endDate= _textbox(0,_near(_label("End Date and Time:[1]")));
 	this.btn_save= _span("/save-icon/");
 	this.btn_quickSave= _span("/quicksave-icon/");
-	this.btn_cancel= _span("/cancel-icon/");
-	this.lookup_account= _span("/lookup_icon/",_rightOf(_label("Account:")));
-	this.lookup_contact= _span("/lookup_icon/",_rightOf(_label("Contact:")));
+	this.btn_cancel= _span("Cancel");//Changed for Lightning
 //	this.lookup_autoContact= _span("/lookup_icon/",_rightOf(_label("AutoContact:")));
 	this.lookup_autoContact= _span("/lookup_icon/",_near(_label("AutoContact:")));
 	this.icon_search= _span("/search-icon/");
-	this.account_option= _div("Acme");
 	this.btn_select= _span("Select");
-	this.txt_account = _div("/svmx-grid-cell-inner/",_under(_div("Account")));
 	this.txt_autoContact = _div("/svmx-grid-cell-inner/",_under(_div("AutoContact")));
 	this.lkp_account = _div("/svmx-button/",_rightOf(_textbox(0,_rightOf(_label("Account:")))));
-	this.lkp_autoContact = _div("/svmx-button/",_rightOf(_textbox(0,_rightOf(_label("AutoContact:")))));
-	this.txt_accountPicklist = _textbox(0,_rightOf(_label("Account Picklist:")));
-	this.lkp_contact = _span("/lookup_icon/",_rightOf(_label("Contact:")));
-	this.lbl_contactLookup = _label(0,_rightOf(_button("/svmx-form-checkbox/")));
 	this.sel_billingType = _textbox("Billing Type:");
 	this.errorMsg = _div("/error-detail/",_near(_span("Error Details")));
 	this.chk_multiSelect = _span("/svmx-column-header-text/",_leftOf(_span("Product Name")));

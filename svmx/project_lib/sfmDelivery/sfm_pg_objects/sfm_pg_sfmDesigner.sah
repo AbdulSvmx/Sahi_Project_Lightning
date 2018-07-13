@@ -4,13 +4,21 @@ var $sfm_pg_sfmDesigner = new function sfm_pg_sfmDesigner() {
 	this.btn_saveSFM = _f("main").s_button("Save & Close");
 	this.lnk_home = _link("Home");
 	this.lnk_workOrder = _link("Work Orders");
-	this.btn_deliveryQuickSave = _span("svmx-btn-icon svmx-sfmd-quicksave-icon");
-	this.btn_deliverySave = _span("svmx-btn-icon svmx-sfmd-save-icon");
-	this.btn_deliveryCancel = _span("svmx-btn-icon svmx-sfmd-cancel-icon");
-	this.btn_deliveryGetPrice = _span("Get Price");
-	this.btn_deliveryUserSettings = _span("svmx-btn-icon svmx-sfmd-setting-icon");
-	this.btn_deliveryHelp = _span("svmx-btn-icon svmx-sfmd-help-icon");
-	this.btn_deliveryClearCache = _span("svmx-btn-icon svmx-sfmd-cache-icon");
+	this.btn_deliveryQuickSave = _span("Quick Save",_leftOf(_span("Get Price"))); //Changed for Lightning
+	this.btn_deliverySave = _span("Save",_rightOf(_span("Cancel")));//Changed for Lightning
+	this.btn_deliveryCancel = _span("Cancel",_leftOf(_span("Save")));//Changed for Lightning
+	this.btn_deliveryGetPrice = _span("Get Price",_rightOf(_span("Quick Save"))); //Changed for Lightning
+	this.btn_deliveryUserSettings = _span("User Settings"); //Changed for Lightning
+	this.btn_deliveryHelp = _div("/toolEl/", _near(_link("Quick Save")));//Changed for Lightning
+	this.btn_deliveryClearCache = _span("Clear ServiceMax Cache");//Changed for Lightning
+	this.btn_deliveryDropdown = _span("/btnWrap/",_rightOf(_span("Get Price")));//Changed for Lightning
+	this.btn_deliveryQuickSave = _span("Quick Save",_rightOf(_span("Save")));//updated for lightning
+	this.btn_deliverySave = _span("Save",_leftOf(_span("Quick Save")));//updated for lightning
+	this.btn_deliveryCancel = _span("Cancel",_rightOf(_span("Quick Save")));//updated for lightning
+	this.btn_deliveryGetPrice = _span("Get Price",_rightOf(_span("Cancel")));//updated for lightning
+	this.btn_deliveryUserSettings = _span("User Settings",_leftOf(_span("Help")));//updated for lightning
+	this.btn_deliveryHelp = _span("Help",_leftOf(_span("Clear ServiceMax Cache")));//updated for lightning
+	this.btn_deliveryClearCache = _span("Clear ServiceMax Cache",_rightOf(_span("Help")));//updated for lightning
 	
 	
 	//SFM Delivery page objects
@@ -18,40 +26,52 @@ var $sfm_pg_sfmDesigner = new function sfm_pg_sfmDesigner() {
 	this.btn_deliveryLaborTab = _span("Labor");
 	this.btn_deliveryExpenseTab = _span("Expenses");
 	this.btn_deliveryTravelTab = _span("Travel");
-	this.btn_deliveryAddRowParts = _span("svmx-btn-icon svmx-sfmd-add-line-icon");
+	this.btn_deliveryAddRowParts = _span("+ Add Parts");//Changed for Lightning;
+	this.btn_deliveryAddRowLabor = _span("+ Add Labor");//Changed for Lightning;
+	this.btn_deliveryAddRowExpenses = _span("+ Add Expenses");//Changed for Lightning;
+	this.btn_deliveryAddRowTravel = _span("+ Add Travel");//Changed for Lightning;
 	this.btn_deliveryAddMultiParts = _span("svmx-btn-icon svmx-sfmd-multi-add-line-icon");
 	this.btn_deliveryAddChildRow = _div("sfm-button-1193");
-	this.btn_deliveryExtendedEdit = _image("/gif/", _in(_div("svmx-grid-cell-inner ")));
-	this.btn_deliveryExtendedEditLabor = _image("/gif/", _near(_span("svmx-btn-icon svmx-sfmd-add-line-icon[1]")));
-	this.btn_deliveryExtendedEditExpenses = _image("/gif/", _near(_span("svmx-btn-icon svmx-sfmd-add-line-icon[2]"))) ;
-	this.btn_deliveryExtendedEditTravel = _image("/gif/", _near(_span("svmx-btn-icon svmx-sfmd-add-line-icon[3]")));
-	this.btn_deliveryAddRowLabor = _span("svmx-btn-icon svmx-sfmd-add-line-icon[1]");
-	this.btn_deliveryAddRowExpenses = _span("svmx-btn-icon svmx-sfmd-add-line-icon[2]");
-	this.btn_deliveryAddRowTravel = _span("svmx-btn-icon svmx-sfmd-add-line-icon[3]");
+	this.btn_deliveryExtendedEdit = _div("/x-sfmd-edit-icon/");//Changed for Lightning;
+	this.txt_scheduledDate = _textbox(0,_near(_span("Scheduled Date"))); // Added for lightning
+	this.chk_customerDown = _checkbox(0,_near(_span("Customer Down"))); // Added for lightning
+	this.txt_billingType = _textbox("Billing Type",_near(_span("Billing Type"))); // Added for lightning
+	this.chk_isEntitlementPerformed = _checkbox(0,_near(_span("Is Entitlement Performed"))); // Added for lightning
+	this.txt_dvrConfirmationMessage = _div("/sfm-lightningerrorcomponent/");// Added for lightning
+	this.txt_dvrMultipleConfirmation = _div("/Review the/");// Added for lightning
+
 	
 	//Extended edit page objects --Parts
-	
-	this.txt_eeLineQty = _textbox("Line Qty:",_rightOf(_label("Line Qty:")));
-	this.txt_eeReceivedStreet = _textarea(0,_rightOf(_label("Received Street:")));
-	this.btn_eeUpdate = _span("Update");
-	this.btn_eeCancel = _span("Cancel");
-	this.txt_eeEstimatedPricePerUnit= _textbox("/svmx-number-/",_rightOf(_label("Estimated Price Per Unit:")));
-	this.txt_eeReceivedCity =_textbox("/sfm-text-/",_rightOf(_label("Received City:")));
-	this.txt_eeReferenceInformation = _textarea("/sfm-textarea-/",_rightOf(_label("Reference Information:")));
-	this.txt_eeActivityType = _textbox("Activity Type:",_rightOf(_label("Activity Type:")));
+	this.txt_eeEdit = _span("Edit"); //Added for lightning- for extended edit dropdown
+	this.txt_eeDelect = _span("Delete"); //Added for lightning- for extended edit dropdown
+	this.txt_eeLineQty = _textbox("Line Qty",_in(_div("/sfm-window/")));//Changed for Lightning;
+	this.txt_eeReceivedStreet = _textarea(0,_near(_span("Received Street",_in(_div("/sfm-window/")))));//Changed for Lightning
+	this.btn_eeUpdate = _span("Update",_in(_div("/sfm-window/"))); //Changed for Lightning;
+	this.btn_eeCancel = _span("/Cancel/",_in(_div("/sfm-window/"))); //Changed for Lightning;
+
+	this.txt_eeEstimatedPricePerUnit= _textbox(0,_near(_span("/Estimated Price Per Unit/",_in(_div("/sfm-window/")))));//Changed for Lightning
+	this.txt_eeReceivedCity =_textbox("Received City",_in(_div("/sfm-window/")));//Changed for Lightning
+	this.txt_eeReferenceInformation =_textarea(0,_near(_span("Reference Information",_in(_div("/sfm-window/"))))); //Changed for Lightning
+	this.txt_eeActivityType = _textbox("/sfm-picklist/",_near(_span("Activity Type",_in(_div("/sfm-window/"))))); //Changed for Lightning -- this needs to clicked and then click on the list item to set activity type
 	
 	//Extended edit page objects --Labor
 	
-	this.txt_eeStartDateTime =_textbox("/svmx-date-/",_rightOf(_label("Start Date and Time:")));
-	this.txt_billingQty = _textbox("Billable Qty:",_rightOf(_label("Billable Qty:")));
-	this.txt_billingLinePrice = _textbox("/svmx-number-/",_rightOf(_label("Billable Line Price:")));
-	this.txt_eeLinePricePerUnit = _textbox("/svmx-number-/",_rightOf(_label("Line Price Per Unit:")));
-	this.txt_eeExpenseType = _textbox("Expense Type:",_rightOf(_label("Expense Type:")));
+	this.txt_eeStartDateTime =_textbox(0,_near(_span("/Start Date and Time/",_in(_div("/sfm-window/")))));//Changed for Lightning
+	this.txt_billingQty = _textbox("Billable Qty",_in(_div("/sfm-window/")));//Changed for Lightning;
+	this.txt_billingLinePrice = _textbox(0,_near(_span("/Billable Line Price/",_in(_div("/sfm-window/")))));//Changed for Lightning
+	this.txt_eeLinePricePerUnit = _textbox(0,_near(_span("/Line Price Per Unit/",_in(_div("/sfm-window/")))));//Changed for Lightning
+
+	this.txt_eeExpenseType = _textbox("/sfm-picklist/",_near(_span("Expense Type",_in(_div("/sfm-window/"))))); //Changed for Lightning -- this needs to clicked and then click on the list item to set activity type
 	
-	this.txt_eeStartDateTime = _textbox("/svmx-date-/",_rightOf(_label("Start Date and Time:")));
-	this.txt_eeEndDateTime=_textbox("/svmx-date-/",_rightOf(_label("End Date and Time:")));
-	this.txt_proformaIAmt = _textbox("/svmx-number/",_rightOf(_label("Proforma Invoice Amount:")));
+	this.txt_eeEndDateTime=_textbox(0,_near(_span("/End Date and Time/",_in(_div("/sfm-window/"))))); //Changed for Lightning
+
+	this.txt_proformaIAmt = _textbox(0,_near(_label("Proforma Invoice Amount:")));//updated for lightning
 	
-	this.txt_priceAlert = _div("Price not calculated, because entitlement check has not been performed.");
+	this.txt_priceAlert = _div("/Price not calculated, because entitlement check has not been performed/");
 	this.btn_priceAlertOk = _span("Ok");
+	this.txt_scheduledDate = _textbox(0,_near(_label("Scheduled Date"))); // added for lightning
+	this.txt_actualOnsiteResponse = _textbox(0,_near(_span("Actual Onsite Response"))); // added for lightning
+	this.txt_component = _textbox(0,_near(_span("Component"))); // added for lightning
+	
+	
 };

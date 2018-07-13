@@ -1,0 +1,35 @@
+var $RS_10421 = _testcase("RS_10421","Verify inline validation message for Email,Date,Datetime fields with invalid entries in header in lightning theme");
+$RS_10421.start();
+//Variables used
+var $processName = "RS-10421";
+var $sfmNameToBeCloned = "Manage Work Order Lines - Usage";
+var $isCustom = false;
+var $sfmTemplate = "SVMXSTD: Manage WO Usage Lines";
+var $containerName = ["Order Status","Order Status","Order Status"];
+var $fieldName=["Group Email","Age", "Account"];
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+$RS_10421.end();

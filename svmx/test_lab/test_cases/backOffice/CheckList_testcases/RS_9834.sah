@@ -5,6 +5,10 @@
  */
 
 
+/*
+ * Changes made for Lightning - Meghana Rao 
+ */
+
 
 var $RS_9834 = _testcase("RS_9834", "To verify if the questions are allowed to be deleted from the Form Designer");
 $RS_9834.start();

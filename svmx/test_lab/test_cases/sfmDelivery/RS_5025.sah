@@ -4,7 +4,7 @@
 
 var $RS_5025 = _testcase("RS_5025", "Verify Field Map for existing records - Header");
 $RS_5025.start();
-_setSpeed($g_stepSpeed);
+//_setSpeed($g_stepSpeed);
 
 var $sfmName=$bo_act_common.generateRandomName("5025SFM");
 //change  the name of $sfmTemplateSaveAsName before execution.
@@ -23,7 +23,8 @@ var $wizardButtonName=$sfmName;
 
 //*************Login to Servicemax App***********
 //$bo_act_login.login($g_url, $bac_unBase, $bac_pwdBase);
-$bo_act_login.login($g_url,$sfmUsn,$sfmPwd);
+$bo_act_login.login($g_url,$bac_un,$bac_pwd);
+$sfm_act_lightningConfig.switchToLightning();
 
 //*****Navgate to SFm Designer and create a new SFM of type source to Target All ********
 			$bo_act_navigation.navigateToSfmTransactionDesigner();
@@ -41,7 +42,7 @@ $bo_act_login.login($g_url,$sfmUsn,$sfmPwd);
 			_wait(6000,_isVisible(_f("main").tab("Screen Designer")));
 			_click($bo_pg_manageWOLineUsageForSorting.btn_screenDesignerNew);
 			$bo_act_SFM.addFieldToHeaderOfScreenDesigner("Account");
-			_click(_f("main").s_richtext("parts"));
+			_click(_f("main").s_richtext("Parts"));
 			_click(_f("main").s_checkbox("Allow New"));
 			_click(_f("main").s_checkbox("Allow Delete"));
 			_setValue($bo_pg_sfmTransactionAndDesigner.txt_sfmSavePageLayoutAs, $sfmTemplateSaveAsName);
@@ -64,30 +65,39 @@ $bo_act_login.login($g_url,$sfmUsn,$sfmPwd);
 			$bo_act_sfmVerifyWorkOrder.verifyWizardOnWOObj($wizardButtonName);
 
 //getting work order number diplayed
-		var $workOderNum1=_getText(_heading2("/WO-/"));
+		var	$workOderNum1= _getText(_heading1("/WO-/")); //Modified for Lightning
+		_log("wo1 "+$workOderNum1);
+		
+		_wait(3000);
 
 ////********Get Value of fields account ,contact ,First Assigned Date, problem description,order status,Is exported,service duration  from before saving Wizard in delivery
 if(_isVisible($bo_pg_sfmVerifyWorkOrder.getDisplayedAccount)){
 		var $accountNum1=_getText($bo_pg_sfmVerifyWorkOrder.getDisplayedAccount);
+		_log($accountNum1);
 }
 if(_isVisible($bo_pg_sfmVerifyWorkOrder.getDisplayContact)){
 	var $contactNum1=_getText($bo_pg_sfmVerifyWorkOrder.getDisplayContact);
+	_log($contactNum1);
 }
 if(_isVisible($bo_pg_sfmVerifyWorkOrder.firstAssignedDateTime)){
 	var $firstAsignedDate1=_getText($bo_pg_sfmVerifyWorkOrder.firstAssignedDateTime);
+	_log($firstAsignedDate1);
 }
 if(_isVisible($bo_pg_sfmVerifyWorkOrder.problemDescription)){
 	var $probDes1=_getText($bo_pg_sfmVerifyWorkOrder.problemDescription);
+	_log($probDes1);
 	if($probDes1=""){
 		_doubleClick($bo_pg_sfmVerifyWorkOrder.problemDescription);
+		_setStrictVisibilityCheck(true);
 		_setValue($bo_pg_sfmVerifyWorkOrder.describeProblem,"No Problem");
-		_click($bo_pg_sfmVerifyWorkOrder.btn_ok);
+//		_click($bo_pg_sfmVerifyWorkOrder.btn_ok);
 		_click($bo_pg_sfmVerifyWorkOrder.btn_save);
 	}
 		
 }
 if(_isVisible($bo_pg_sfmVerifyWorkOrder.orderStatus)){
 	var $orderStatus1=_getText($bo_pg_sfmVerifyWorkOrder.orderStatus);
+	_log($orderStatus1);
 }
 
 if(_isVisible($bo_pg_sfmVerifyWorkOrder.isExportedBeforeClick)){
@@ -95,7 +105,8 @@ if(_isVisible($bo_pg_sfmVerifyWorkOrder.isExportedBeforeClick)){
 	var $isExported1=_getText($bo_pg_sfmVerifyWorkOrder.isExportedBeforeClick);	
 }
 if(_isVisible($bo_pg_sfmVerifyWorkOrder.serviceDuration)){
-	var $temp=_getText($bo_pg_sfmVerifyWorkOrder.serviceDuration);	
+	var $temp=_getText($bo_pg_sfmVerifyWorkOrder.serviceDuration);
+	_log($temp);
 		var $res = $temp.replace(",", "");
 		var $servDuration1=Math.round($res);	
 }
@@ -107,27 +118,33 @@ if(_isVisible($bo_pg_sfmVerifyWorkOrder.serviceDuration)){
 			}
 
 			_click($bo_pg_addEditProdServDelivery.icon_Save);
-			_wait(6000, _isVisible(_heading2("Work Order Detail")));
+			_selectDomain();
+			_wait(6000, _isVisible(_heading1("/WO-/"))); //Modified for Lightning
 
 //Getting WO after saving SFM wizard in Delivery
-			var $workOderNum2=_getText(_heading2("/WO-/"));
+			var $workOderNum2=_getText(_heading1("/WO-/")); //Modified for Lightning
 
 //***********Get Value of fields account ,contact,First Assigned Date,problem description,order status,Is exported,service duration after saving Wizard in Delivery***********
 if(_isVisible($bo_pg_sfmVerifyWorkOrder.getDisplayedAccount)){
 	var $accountNum2=_getText($bo_pg_sfmVerifyWorkOrder.getDisplayedAccount);
+	_log($accountNum2);
 }
 
 if(_isVisible($bo_pg_sfmVerifyWorkOrder.getDisplayContact)){
 	var $contactNum2=_getText($bo_pg_sfmVerifyWorkOrder.getDisplayContact);
+	_log($contactNum2);
 }
 if(_isVisible($bo_pg_sfmVerifyWorkOrder.firstAssignedDateTime)){
 	var $firstAsignedDate2=_getText($bo_pg_sfmVerifyWorkOrder.firstAssignedDateTime);
+	_log($firstAsignedDate2);
 }
 if(_isVisible($bo_pg_sfmVerifyWorkOrder.problemDescription)){
 	var $probDes2=_getText($bo_pg_sfmVerifyWorkOrder.problemDescription);
+	_log($probDes2);
 }
 if(_isVisible($bo_pg_sfmVerifyWorkOrder.orderStatus)){
 	var $orderStatus2=_getText($bo_pg_sfmVerifyWorkOrder.orderStatus);
+	_log($orderStatus2);
 }
 if(_isVisible($bo_pg_sfmVerifyWorkOrder.isExportedBeforeClick)){
 	
@@ -135,6 +152,7 @@ if(_isVisible($bo_pg_sfmVerifyWorkOrder.isExportedBeforeClick)){
 }
 if(_isVisible($bo_pg_sfmVerifyWorkOrder.serviceDuration)){
 	var $temp=_getText($bo_pg_sfmVerifyWorkOrder.serviceDuration);	
+	_log($temp);
 		var $res = $temp.replace(",", "");
 		var $servDuration2=Math.round($res);
 }
@@ -142,6 +160,7 @@ if(_isVisible($bo_pg_sfmVerifyWorkOrder.serviceDuration)){
 //Verify Work Order and it corresponding fields(Created above) for scenario of before Save and after save
 				if ( $workOderNum1!=$workOderNum2){
 					_log("New WorkOrder Created");
+				}
 					if($accountNum1==$accountNum2){
 						_log("Account Matched");
 					}
@@ -149,24 +168,25 @@ if(_isVisible($bo_pg_sfmVerifyWorkOrder.serviceDuration)){
 						_log("Contact Num Matched");
 					}
 					
-					if(_isVisible($bo_pg_sfmVerifyWorkOrder.firstAssignedDateTime)){
-						var $firstAsignedDate2=_getText($bo_pg_sfmVerifyWorkOrder.firstAssignedDateTime);
-						var res = $firstAsignedDate2.split(" ");
-
-						var $res = $firstAsignedDate2.split(" ");
-						var $temp=$res[0];
-						var $temp1=$temp.split("/");
-						var $temp2=$temp1[0];
-						var $temp3=$temp1[1];
-
-						if($temp2<10){
-						$temp2='0'+$temp1[0];
-						}
-						if($temp3<10){
-						$temp3='0'+$temp1[1];
-						}
-							$firstAsignedDate2=$temp2+"/"+$temp3+"/"+$temp1[2];	
-						}
+//					if(_isVisible($bo_pg_sfmVerifyWorkOrder.firstAssignedDateTime)){
+//						var $firstAsignedDate2=_getText($bo_pg_sfmVerifyWorkOrder.firstAssignedDateTime);
+//						var res = $firstAsignedDate2.split(" ");
+//
+//						var $res = $firstAsignedDate2.split(" ");
+//						var $temp=$res[0];
+//						var $temp1=$temp.split("/");
+//						var $temp2=$temp1[0];
+//						var $temp3=$temp1[1];
+//
+//						if($temp2<10){
+//						$temp2='0'+$temp1[0];
+//						}
+//						if($temp3<10){
+//						$temp3='0'+$temp1[1];
+//						}
+//							$firstAsignedDate2=$temp2+"/"+$temp3+"/"+$temp1[2];	
+//						}
+					
 					if($firstAsignedDate1==$firstAsignedDate2){
 						_log("First Assigned Date Matched");
 					}
@@ -183,13 +203,12 @@ if(_isVisible($bo_pg_sfmVerifyWorkOrder.serviceDuration)){
 						_log("Service duration Matched");
 					}
 						
-				}else{
-					_log("New WO is not generated");
-				}
 
 //******Go Back Template Designer page of SFM and add different data type fields to its header section*******				
-		_click(_link("Home"));
-		_wait(2000);
+//		_click(_link("Home"));
+//		_wait(2000);
+		$bo_act_login.login($g_url,$bac_un,$bac_pwd);
+		$sfm_act_lightningConfig.switchToLightning();
 		$bo_act_navigation.navigateToSfmTransactionDesigner();
 		$bo_act_SFM.editCustomWizard($sfmName);
 		_wait(6000,_isVisible(_f("main").tab("Screen Designer")));
@@ -211,18 +230,23 @@ if(_isVisible($bo_pg_sfmVerifyWorkOrder.serviceDuration)){
 		_wait(3000);
 
 //Go to Wizard, Click in Wizard, Fetch the data displayed on specified fields and save
-$bo_act_sfmVerifyWorkOrder.verifyWizardOnWOObj($wizardButtonName);
+$bo_act_sfmVerifyWorkOrder.verifyWizardOnWOObj();
 $bo_act_sfmVerifyWorkOrder.clkOnWizard($wizardButtonName);
 
 //var $actValConsole=_getText($bo_pg_sfmVerifyWorkOrder.accountValueInConsole);
 //var $contValConsole=_getText($bo_pg_sfmVerifyWorkOrder.contactValueInConsole);	
 var $srvDurValConsole=_getText($bo_pg_sfmVerifyWorkOrder.servDurationInConsole);
-
+_log($srvDurValConsole);
 var $prbDesValConsole=_getText($bo_pg_sfmVerifyWorkOrder.probDescripInConsole);
+_log($prbDesValConsole);
 var $ordStaValConsole=_getText($bo_pg_sfmVerifyWorkOrder.ordStatusInConsole);
-var $fstAssignedValConsole=_getText($bo_pg_sfmVerifyWorkOrder.fstAssnedDateTimeInConsole);
+_log($ordStaValConsole);
+var $fstAssignedDateConsole=_getText($bo_pg_sfmVerifyWorkOrder.fstAssnedDateInConsole);
+var $fstAssignedTimeConsole=_getText($bo_pg_sfmVerifyWorkOrder.fstAssnedTimeInConsole);
+var $fstAssignedValConsole = $fstAssignedDateConsole+" "+$fstAssignedTimeConsole;
+_log($fstAssignedValConsole);
 _click($bo_pg_addEditProdServDelivery.icon_Save);
-_wait(6000, _isVisible(_heading2("Work Order Detail")));
+_wait(6000, _isVisible(_heading1("/WO-/"))); //Modified for Lightning
 
 //*******Compare the abve fetched data with before saving data and after saving data.****
 

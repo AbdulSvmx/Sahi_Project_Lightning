@@ -17,8 +17,7 @@ var $sfm_act_common = new function sfm_act_common() {
 					_logException("The value " + $searchText + "is not found");
 				}
 			}
-
 		}
-
 	};
+	
 };

@@ -7,12 +7,13 @@ _setSpeed($g_stepSpeed);
 var $Workbenchurl = "https://workbench.developerforce.com/login.php";
 //Pre - Condition 
 $bo_act_login.login($g_url, $bac_un, $bac_pwd);
-
+_setStrictVisibilityCheck(true);
 //Test Data Creation
 var $accName = $bo_act_accounts.createAccount();
-var $proName = $bo_act_products.createProduct("pro12", "--None--");
-var $IBName = $bo_act_installedProduct.createInstalledProduct($proName,$accName,"");
 var $contactName = $bo_act_contacts.createContact($accName);
+var $proName = $bo_act_products.createProduct("pro12", "--None--");
+var $IBName = $bo_act_installedProduct.createInstalledProduct($proName,$accName,$contactName);
+
 var $slaterm = $bo_act_slaTerms.createSlaTerms("Default");
 var $caseNumber = $bo_act_installedProduct.createSupportCase("New");
 
@@ -22,13 +23,13 @@ var $PMPTemplate = $bo_act_PMPlanTemplate.createUsageBasedConditionPMPTemplateNo
 $bo_act_PMPlanTemplate.updateUsageConditionRulesGridWithAdjFields("Months", "Every", 1, $bo_act_common.currentDate("-"), $bo_act_common.getfutureDate(1,"-"),"Fixed", 1,100, 10,"Days");
 $bo_act_PMPlanTemplate.saveConditionBasedPM();
 
-var $sconName = $bo_act_serviceMaintenanceContracts.createServiceMaintenanceContract($accName, $slaterm,1,0);
+var $sconName = $bo_act_serviceMaintenanceContracts.createServiceMaintenanceContract($accName,$slaterm,1,0);
 $bo_act_serviceMaintenanceContracts.AddCoveredProductToSCON($sconName, $IBName);
-var $PMPlan = $bo_act_PMPlan.createUsageOrFrequencyBasedPMPlan($sconName,$PMPTemplate,$IBName);
+var $PMPlan = $bo_act_PMPlan.createUsageOrFrequencyBasedPMPlan($sconName,$PMPTemplate,"IB_3152018132336");
 
 
 // To edit the PLan and change the Start Date and End date and verify the changes
-$bo_act_PMPlan.editConditionBasedPMPlan($IBName);
+$bo_act_PMPlan.editConditionBasedPMPlan("IB_3152018132336");
 
 var $PMProcessId = $bo_act_PMProcess.createPMProcess("Condition Based Preventive Maintenance", 0, $PMPlan,"One Per Product");
 //This code supports name spaces and assigns the variable with correct namespace script
@@ -85,6 +86,8 @@ $bo_act_common.deletePMPlan($bac_un, $bac_pwd, $orgnamespace,$PMPlan);
 //for (var i = 0; i < $datacreated.length; i++) {
 //	$bo_act_common.cleanUpfunction($datacreated[i]);
 //}
+
+_setStrictVisibilityCheck(false);
 $bo_act_PMProcess.deletePMProcess($PMProcessId);
 
 $RS_7478.end();

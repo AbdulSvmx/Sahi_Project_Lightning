@@ -1,0 +1,110 @@
+var $sfm_act_lightningConfig = new function sfm_act_lightningConfig() {
+	
+	this.switchToLightningInConfig = function($profileName,$selectedProfile){
+		if(_isVisible($bo_pg_home.link_servicemaxSetup) == true )
+		{
+			_click($bo_pg_home.link_servicemaxSetup);
+		}
+		else
+		{
+			_click($bo_pg_home.link_more); 
+			if(_isVisible($bo_pg_home.link_servicemaxSetup)==true){
+				_click($bo_pg_home.link_servicemaxSetup);
+			}
+			else{
+				_click($bo_pg_home.button_allLinks);
+				_click($bo_pg_home.link_servicemaxSetup);
+			}
+			
+			
+		}
+		_click(_div("Configuration Profiles"));
+		_click(_checkbox(0,_leftOf(_span($profileName))));
+		_click(_submit("/Edit/",_near(_heading2("Group-wide Configuration Settings"))));
+		var $profiles = _getText(_select("selectedProfil1"));
+		for(var $i=0;$i<$profiles.length;$i++){
+			if($profiles[$i]==$selectedProfile){
+				_setSelected(_select(0,_rightOf(_label("Select Module"))),"SFM Transaction Manager");
+				_setSelected(_select(0,_rightOf(_label("Select Submodule"))),"SFM Transaction Delivery Engine");
+				var $settingId = _getText(_cell(0,_under(_tableHeader("Setting ID"))));
+				if($settingId=="SET004"){
+					_click(_link("Edit",_near(_cell("SET004"))));
+					_selectWindow("Servicemax_Conf_Prof");
+					_setSelected(_select(0,_near(_label("Choose Option"))),"Lightning");
+					_click(_button("Save"));
+					_closeWindow();
+				}
+				break;
+			}
+		}
+	};
+	this.switchToLightning = function(){
+		if(_isVisible($bo_pg_home.link_switchToLightning)==true){
+			_click($bo_pg_home.link_switchToLightning);
+		}
+	};
+	this.switchToClassic = function(){
+		if(_isVisible($bo_pg_home.circular_image)==true){
+			_click($bo_pg_home.circular_image);
+			_click($bo_pg_home.link_switchToSalesforce);
+		}
+	};
+	this.verifyUrlForLightning = function(){
+		var $url = "";
+		_set($url,window.document.location.href);
+		if($url.indexOf("lightning")!=-1){
+			_log("The Url is in Lightning");
+		}
+		else{
+			_log("The Url is in classic");
+		}
+	};
+	this.navigateToObjectsInLightning = function($object_name) {
+		//Added by JJ
+		//This function navigates to the Object Manager in Lightning and then to a given object.
+		//This is Lightning specific.
+		_click($sfm_pg_wo.link_lightning_setup);
+		_click($sfm_pg_wo.link_currentapp_setup);
+		_selectWindow("Home | Salesforce");
+		_wait(3000,isVisible($sfm_pg_wo.link_object_manager));
+		_click($sfm_pg_wo.link_object_manager);
+		_selectWindow("/Object Manager/");
+		_setValue($sfm_pg_wo.txt_quick_find,$object_name);
+		_click(_link($object_name));
+		
+		
+	};
+	this.addDependentControllingPicklistValues = function($ctrl_picklist_name,$ctrl_picklist_value,$dep_picklist_value) {
+		//Added by JJ.
+		//This function adds a dependent picklist value to the controlling picklist value.
+		
+		var $header_row = _getText(_row("/"+$ctrl_picklist_name+":/"));
+		var $header_list = $header_row.split(" ");
+		
+		var $index = $header_list.indexOf($ctrl_picklist_value);
+		var $index = $index - 2;
+		_click(_cell($dep_picklist_value+"["+$index+"]"));
+		_click($sfm_pg_wo.btn_include_values);
+	};
+
+
+this.checkIfWizardLinkExists = function($process_name){
+	_click(_link($sfm_pg_wo.link_showmore));
+	//Check if the SFM process link exists
+	if(_exists(_span($process_name))){
+		return true;
+	}
+	else {
+		return false;
+	}
+
+};
+
+this.logoutInLightning = function() {
+	//Added by JJ
+	//This function logs out of Salesforce in Lightning experience
+	_click($sfm_pg_wo.link_profileImageRightCorner);
+	_click($sfm_pg_wo.link_lightningLogout);
+	
+};
+};

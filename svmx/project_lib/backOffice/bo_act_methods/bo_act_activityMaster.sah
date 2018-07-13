@@ -5,20 +5,21 @@
 
 var $bo_act_activityMaster = new function bo_act_activityMaster() {
 	
-	this.createActivityMasterUsingProduct = function($activityType, $activityProductName) {
+	this.createActivityMasterUsingProduct = function($activityType, $activityProductName) { // Modified for Lightning - Meghana
         $bo_act_navigation.navigateToActivityMaster();
 		_click($bo_pg_activityMaster.btn_newActivityMaster);
+		_selectDomain("/svmx/");
 		_wait(30000, _isVisible($bo_pg_activityMaster.txt_activityType));
-		_setValue($bo_pg_activityMaster.txt_activityType, $activityType);
-		_setStrictVisibilityCheck(true);
+		_click($bo_pg_activityMaster.txt_activityType);
+		_click(_listItem($activityType));
 		_click($bo_pg_activityMaster.btn_editFirstRowOfActivityProduct);
-		_wait(3000,_isVisible($bo_pg_activityMaster.btn_update));
-		$bo_act_common.searchfunction($activityProductName);	//Search Values like Parts/Product Name
+		_click($bo_pg_activityMaster.btn_edit);
+		_setValue($bo_pg_activityMaster.txt_product,$activityProductName);
 		_click($bo_pg_activityMaster.btn_update);
-		_setStrictVisibilityCheck();
-		_click($bo_pg_activityMaster.btn_saveActivityMaster);
-		_wait(15000, _isVisible($bo_pg_activityMaster.txt_ActivityMasterPage));
-		var $activityMasterNumber = _getText(_heading2("pageDescription"));
+		_click($bo_pg_activityMaster.btn_save);
+		_selectDomain();
+		_wait(15000, _isVisible($bo_pg_activityMaster.btn_details));
+		var $activityMasterNumber = _getText(_span(0,_under(_span("Record Number"))));
 		_logOutput($activityMasterNumber+ " Activity Master is created");
    return $activityMasterNumber;
 	};

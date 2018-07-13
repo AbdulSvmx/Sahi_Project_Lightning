@@ -8,14 +8,16 @@ var $bo_pg_manageWOLineUsageForSorting=new function bo_pg_manageWOLineUsageForSo
 		this.sel_selHeaderOption3=_f("main").fieldrenderer("[object Object][3]");
 		this.txt_searchItem=_f("main").s_textinput("searchText[4]");
 		this.lbl_orderStatus=_f("main").s_label("Order Status");
+		this.btn_proformainvoice = _f("main").s_label("Proforma Invoice[1]");
 		this.lbl_drivingTime=_f("main").s_label("Driving Time (in Minutes)");
-	this.lbl_orderType=_f("main").s_label("Order Type");
-	this.lbl_zip=_f("main").s_label("Zip");
-	this.lbl_isEntitlementPrform=_f("main").s_label("Is Entitlement Performed");
-
+		this.lbl_orderType=_f("main").s_label("Order Type");
+		this.lbl_zip=_f("main").s_label("Zip");
+		this.lbl_isEntitlementPrform=_f("main").s_label("Is Entitlement Performed");
+		this.txt_pagelayoutName = _f("main").s_textinput("Save page layout as");
+		this.txt_pagelayoutID = _f("main").s_textinput("advTxt");
 		this.sel_grpPart=_f("main").s_datagroup("dataGroup[3]");
 		this.lbl_dateReceived=_f("main").s_label("/Date Received/");
-
+		this.btn_save_as = _f("main").s_button("Save As[3]");
 		this.sel_grplabor=_f("main").s_datagroup("dataGroup[4]");
 		this.lbl_activityType=_f("main").s_label("/Activity Type/");
 

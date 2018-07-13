@@ -91,20 +91,13 @@ this.getPastDate = function($pastYear, $seperator){
 };
 
 this.searchfunction = function($searchValue){
-_getRecentWindow();
-_setStrictVisibilityCheck(true);
-_wait(15000);
-_click(_span("/svmx-button/",_near(_div("svmx-column-inner",_in(_div("svmx-panel svmx-fit-item svmx-window-item svmx-panel-default"))))));
-_getRecentWindow();
-//_click(_textbox("/svmx-picklist/"));
-//_click(_listItem("Contains"));
-_click(_textbox("/sfm-text/",_near(_span("/svmx-sfmd-search-icon/"))));
-_click(_span("/svmx-sfmd-search-icon/"));
-_setValue(_textbox("/sfm-text/",_near(_span("/svmx-sfmd-search-icon/"))),$searchValue);
-_click(_span("/svmx-sfmd-search-icon/"));
-_click(_div($searchValue,_near(_span("Select"))));
-_click(_span("Select"));
-_setStrictVisibilityCheck(false);
+// Modifying for Lightning
+_selectDomain("/svmx/");
+_setValue(_textbox("/sfm-text/", _near(_label("Search Control"))), $searchValue);
+_click(_span("Search"));
+_click(_span("/x-grid-checkcolumn/", _near(_div($searchValue))));
+_click(_span("Add"));
+_selectDomain();
 };
 
 
@@ -155,25 +148,21 @@ this.endDateCalculationForIB = function ($startDateExpectedOn_IB, $durationOfCov
 	return $endDateCalculationForIB;
 	};
 
-this.cleanUpfunctionold = function($value)
+this.cleanUpfunctionold = function($value) // Modified for Lightning
 	{
-		_setValue(_textbox("phSearchInput"),$value);
-		_click(_button("phSearchButton"));
-		if(_condition(_heading1("Search Results") == null))
-			{
-			_click(_button("phSearchButton"));
-			}
-		_wait(3000, _isVisible(_link("searchAll")));
-		_click(_link("searchAll"));
-		if(_isVisible(_link($value))){
-			_click(_link($value));
-			_wait(3000, _isVisible(_button("Delete")));
-			_click(_button("Delete"));
-			_logOutput($value+ " is deleted");
-
-		}else{
-			_logException("The value "+$value+"is not found")
-		}
+		_setStrictVisibilityCheck(true);
+		_setValue(_textbox("Search Salesforce"),$value);
+		_wait(10000);
+		_click(_mark($value));
+		_wait(20000);
+		_click(_link("Show more actions"));
+		_click(_link("Delete"));
+		_wait(10000, _isVisible(_div("CancelDelete")));
+		_click(_span("Delete"));
+		_wait(10000);
+		_setStrictVisibilityCheck(false);
+		_logOutput($value+ " is deleted");
+		_wait(10000);
 		
 	};
 	
@@ -246,6 +235,9 @@ this.cleanUpfunctionold = function($value)
 			
 			
 		};
+		
+	
+		
 		
 		this.deleteAccount = function($userName,$password,$value){
 			var $delete_Query = "delete [Select Id from Account where Name = '"+$value+"'];";

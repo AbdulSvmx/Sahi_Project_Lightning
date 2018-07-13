@@ -11,45 +11,49 @@ _setSpeed($g_stepSpeed);
 $bo_act_login.login($g_url, $bac_un, $bac_pwd);
 
 //Pre - Condition Test Data
-var $productFamily = ["--None--","GeneralSolution","AdvSolution","Accessory", "Storage"];
-var $productCode = "";
-var $seperator = "/";
-
-/**
-* Create Account, Contact, Location, Product and Installed Product
-*/
-var $accountName = $bo_act_accounts.createAccount();
-var $contactName = $bo_act_contacts.createContact($accountName);
-var $productName = $bo_act_products.createProduct($productCode, $productFamily[0]);
-var $IBName = $bo_act_installedProduct.createInstalledProduct($productName, $accountName, $contactName);
-
-/**
-* Add Price To Standard Price for above created Product
-*/
-
-var $standardPriceValue = 120;
-$bo_act_products.addStandardPriceForProduct($productName, $standardPriceValue);
-
-// Validate the Standard price for Product
-/*var $actual_StandardPriceValue = _getText(_tableHeader(0,_under(_tableHeader("Standard Price"))));
-_assertEqual($actual_StandardPriceValue,"$120.00","Actual and expected Standard price values are not same");*/
-
-/**
-* Create Activity Master and Edit Service Price book
-*/
-var $activityType = ["--None--","Calibration","Cleanup","Installation","Repair","Service"];
-var $unit = ["--None--","Per Hour","Flat Rate"];
-var $PriceBookName = "Standard Service Price Book";
-var $activityProduct = "";
-var $regularRate = 300;
-
-var $activityID = $bo_act_activityMaster.createActivityMasterUsingProduct($activityType[4], $productName);
-var $ServicePricebooksEntryNumber = $bo_act_servicePricebooks.editStandardServicePricebooks($PriceBookName, $unit[1], $activityID, $activityProduct, $regularRate);
+//var $productFamily = ["Laptop","Vehicle","Electric"];
+//var $productCode = "";
+//var $seperator = "/";
+//
+///**
+//* Create Account, Contact, Location, Product and Installed Product
+//*/
+//var $accountName = $bo_act_accounts.createAccount();
+//var $contactName = $bo_act_contacts.createContact($accountName);
+//var $productName = $bo_act_products.createProduct($productCode, $productFamily[0]);
+//
+//
+//var $IBName = $bo_act_installedProduct.createInstalledProduct($productName, $accountName, $contactName);
+//
+//
+//
+///**
+//* Add Price To Standard Price for above created Product
+//*/
+//
+//var $standardPriceValue = 120;
+//$bo_act_products.addStandardPriceForProduct($productName, $standardPriceValue);
+//
+//// Validate the Standard price for Product
+///*var $actual_StandardPriceValue = _getText(_tableHeader(0,_under(_tableHeader("Standard Price"))));
+//_assertEqual($actual_StandardPriceValue,"$120.00","Actual and expected Standard price values are not same");*/
+//
+///**
+//* Create Activity Master and Edit Service Price book
+//*/
+//var $activityType = ["--None--","Calibration","Cleanup","Installation","Repair","Service"];
+//var $unit = ["--None--","Per Hour","Flat Rate"];
+//var $PriceBookName = "Standard Service Price Book";
+//var $activityProduct = "";
+//var $regularRate = 300;
+//
+//var $activityID = $bo_act_activityMaster.createActivityMasterUsingProduct($activityType[4], $productName);
+//var $ServicePricebooksEntryNumber = $bo_act_servicePricebooks.editStandardServicePricebooks($PriceBookName, $unit[1], $activityID, $activityProduct, $regularRate);
 
 /**
  * Configure the Group Profile SET004 and SET017
  */
-var $groupProfileName = "AutoBACGroup";
+var $groupProfileName = $group_profilename ;
 var $Module = "Work Order";
 var $SubModule = "Create Work Order Lines VF";
 var $Setting1 = "SET004";

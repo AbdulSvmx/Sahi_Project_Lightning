@@ -1,0 +1,30 @@
+var $sfm_pg_lightningSFMD = new function sfm_pg_lightningSFMD() {
+	
+	this.btn_save = _link("Save");
+	this.btn_cancel = _link("Cancel");
+	this.btn_quickSave = _link("Quick Save");
+	this.btn_userSettings = _link("User Settings");
+	this.lbl_workOrder = _label("/header-title/");
+	this.lbl_wizard = _div("/header-title/");
+	this.btn_clear = _div("/clear/");
+	this.txt_quickFind = _textbox(0,_near(_link("Work Detail (Work Order)")));
+	this.txt_account = _textbox(0,_under(_label("Account")));
+	this.txt_contact = _textbox(0,_under(_label("Contact")));
+	this.btn_accountSearch = _div("/search/",_under(_label("Account")));
+	this.btn_ContactSearch = _div("/search/",_under(_label("Contact")));
+	this.btn_search = _link("Search");
+	this.btn_cancelAccountWindow = _link("/Cancel/",_under(_div("/lightninglookupslidingwindow/")));
+	this.txt_contains = _textbox({value:"Contains"});
+	this.txt_accountInAccWindow = _textbox(0,_rightOf(_textbox({value:"Contains"})));
+	this.link_account = _link(0,_under(_div("Account Name")));
+	this.close_accountWindow = _div("/close/");
+	this.link_contact = _link(0,_under(_div("Full Name")));
+	this.chkBx_limitSearch = _checkbox("/Limit search to Account:/");
+	this.link_productServiced = _link("/Add Products Serviced/");
+	this.btn_add = _link("add");
+	this.link_switchtoLightning = _link("switch-to-lightning");
+	this.link_MoreLightning = _span("More");
+	this.link_svmxSetupLightning = _span("Servicemax SetUp Home");
+	this.link_ServiceFlowManagerLightning = _div("Service Flow Manager");
+	this.link_SFM_TxandDocDesignerLightning = _div("SFM Transaction & Docs Designer");
+};

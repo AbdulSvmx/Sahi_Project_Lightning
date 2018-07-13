@@ -5,56 +5,73 @@ var $bo_act_workOrders = new function bo_act_workOrders() {
 
 	/**
 	 * Create an Work Order
+	 * Changes made for Lightning
 	 */
-	this.createWorkOrder = function($caseNumber,$accountName,$contactName,$IBName,$orderStatus,$priority,$orderType){
+	this.createWorkOrder = function($caseNumber,$accountName,$contactName,$IBName,$orderStatus,$priority,$orderType){ // Modified for Lightning changes
 		$bo_act_navigation.navigateToWorkOrdersTab();
 		_click($bo_pg_workOrders.btn_newWorkOrder);
 		_setValue($bo_pg_workOrders.txt_case, $caseNumber);
+		_click(_mark($caseNumber));
 		_setValue($bo_pg_workOrders.txt_account, $accountName);
+		_click(_mark($accountName));
 		_setValue($bo_pg_workOrders.txt_contact, $contactName);
-		_setSelected($bo_pg_workOrders.sel_orderStatus, $orderStatus);
-		_setSelected($bo_pg_workOrders.sel_priority, $priority);
-		_setSelected($bo_pg_workOrders.sel_orderType, $orderType);
-		_setValue($bo_pg_workOrders.txt_component, $IBName);
+		_click($contactName);
+		_click($bo_pg_workOrders.sel_orderStatus);
+		_click($orderStatus);
+		_click($bo_pg_workOrders.sel_priority);
+		_click($priority);
+		_click($bo_pg_workOrders.sel_orderType);
+		_click($orderType)
+		_click($bo_pg_workOrders.txt_component);
+		_click($IBName);
 		_click($bo_pg_workOrders.btn_saveWorkOrder);
-		_assertNotVisible(_div("/Error: Invalid Data/"));
-		_wait(15000, _isVisible($bo_pg_workOrders.txt_workOrderDetails));
-		var $workOrderNumber =  _getText($bo_pg_workOrders.txt_getWONumber);
+		_assertNotVisible(span("Review the errors on this page."));
+		_wait(15000, _isVisible($bo_pg_workOrders.txt_getWONumber));
+		var $workOrderNumber =  _getText(_span(0,_near($bo_pg_workOrders.txt_getWONumber)));
 		_logOutput($workOrderNumber+ " Work Order is created");
 		return $workOrderNumber;
 	};
+	
+	// Changes made for Lightning
 		this.editWorkOrder = function($workOrderNumber){
 		$bo_act_navigation.navigateToWorkOrdersTab();
 		_click(_link($workOrderNumber));
 		_click($bo_pg_workOrders.btn_editWorkOrder);
 	};
 	
+	
 	this.editWorkOrderOnWOPage = function(){
 			_click($bo_pg_workOrders.btn_editWorkOrder);
 	};
+	
+	// Changes made for Lightning
 	this.updateTextBoxFields = function($object,$objectValue){
 		_setValue($object,$objectValue);
+		_click(_mark($objectValue));
 		//return $callBack.returnResult([_isVisible($accountName), "Account not created",$accountName] );
 	};
 	
+	//Changes made for Lightning
 	this.updateDropDownFields = function($object,$objectValue){
-		_setSelected($object,$objectValue);
+		_click($object);
+		_click(_link($objectValue));
 		//return $callBack.returnResult([_isVisible($accountName), "Account not created",$accountName] );
 	};
 	
 	this.clickLinktoUpdateTextfields = function($object){
-		_click($object);
+		_click(_mark($object));
 		
 	};
-	
+	// Changes made for Lightning
 	this.saveWorkOrder = function(){
 		_click($bo_pg_workOrders.btn_saveWorkOrder);
-		_assertNotVisible(_div("/Error: Invalid Data/"));
-		_wait(15000, _isVisible($bo_pg_workOrders.txt_workOrderDetails));
+		_assertNotVisible(span("Review the errors on this page."));
+		_wait(15000, _isVisible($bo_pg_workOrders.txt_getWONumber));
 		//return $callBack.returnResult([_isVisible($accountName), "Account not created",$accountName] );
 	};
 	
-	this.checkEntitlement = function($workOrderNumber){
+	
+	this.checkEntitlement = function($workOrderNumber){ // Meghana Changes made for lightning
 		$bo_act_navigation.navigateToWorkOrdersTab();
 		_click(_link($workOrderNumber));
 		_selectDomain("/svmx/");

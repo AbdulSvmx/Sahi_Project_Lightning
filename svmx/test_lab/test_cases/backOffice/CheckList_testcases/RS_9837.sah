@@ -26,7 +26,7 @@ $bo_act_checklistdesigner.create_newquestion_tag_in_designer($QuestionName1, "RS
 $bo_act_checklistdesigner.create_newquestion_tag_in_designer($QuestionName2, "RS_9837TAG");
 
 
-// To delete the Question from the Checklist Library
+//To delete the Question from the Checklist Library
 $bo_act_questionlibrary.deletequestionlibrary($QuestionName1);
 $bo_act_questionlibrary.deletequestionlibrary($QuestionName2);
 

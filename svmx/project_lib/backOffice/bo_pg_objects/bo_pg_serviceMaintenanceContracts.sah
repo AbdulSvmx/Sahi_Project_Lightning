@@ -5,19 +5,20 @@
  */
 
 var $bo_pg_serviceMaintenanceContracts = new function bo_pg_serviceMaintenanceContracts(){
-	this.btn_new = _button(" New ");
+	this.btn_new = __div("New");
 	this.btn_edit = _button(" Edit ");
-	this.txt_sconName = _textbox("Name");
-	this.txt_accountName = _textbox("/\\*Account|^Account/");
-	this.txt_contactName = _textbox("/\\*Contact|^Contact/");
+	this.txt_sconName = _textbox("Contract Name/Number*");
+	this.txt_accountName = _textbox("/Account/",_near(_div("/modal-header/")));
+	this.txt_contactName =_textbox("/Contact/",_near(_div("/modal-header/")));
 	this.sel_ZoneName = _select(0,_rightOf(_label("Zone")));
-	this.txt_slaTermName = _textbox("/SLA Terms/");
+	this.txt_slaTermName = _textbox("/SLA Terms/",_near(_div("/modal-header/")));
 	this.link_startDate = _link("/javascript.*/",_rightOf(_label("/.*Start Date/")));
 	this.txt_startDate = _textbox("/Start Date/");
 	this.txt_endDate = _textbox("/End Date/");
-	this.btn_save = _submit(" Save ");
-	this.btn_newCoveredProduct = _button("New Covered Product");
-	this.txt_installedProduct = _textbox("Installed Product");
+	this.btn_save = _span("Save");
+	this.link_coveredproducts = _span("/Covered Products/");
+	this.btn_newCoveredProduct = _div("New");
+	this.txt_installedProduct = _textbox("/Installed Product/", _near(_div("/modal-header/")));
 	this.txt_backToScon = _link("/lookup/",_rightOf(_cell("/Service/Maintenance Contract/")));
 	this.txt_slaTermsOnCoveredProduct = _textbox("SLA Terms");
 	this.txt_backToScon = _link("/lookup.*/",_rightOf(_cell("Service/Maintenance Contract")));
@@ -36,7 +37,7 @@ var $bo_pg_serviceMaintenanceContracts = new function bo_pg_serviceMaintenanceCo
 	//Object for Activate Contract on Service/Maintenance Contract
 	this.btn_activateContractSFM = _button("Activate Contract");
 	this.btn_activateContract = _span("Activate Contract");
-	this.chk_activeScon = _checkbox("Active");
+	this.chk_activeScon = _checkbox("/Active/");
 	
 	
 	// Click on the Service Contract Detail Page

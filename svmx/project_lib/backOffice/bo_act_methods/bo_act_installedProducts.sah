@@ -7,29 +7,38 @@ var $bo_act_installedProduct = new function bo_act_installedProduct() {
 	 * Create an Account
 	 * 
 	 */
-	this.createInstalledProduct = function($productName,$accountName,$contactName) {
+	this.createInstalledProduct = function($productName,$accountName,$contactName,$date) { // Modified for Lightning - Meghana
 		var $serialNum = $bo_act_common.generateRandomName("Ser");
 		var $IBName = $bo_act_common.generateRandomName("IB_");
-		 $bo_act_navigation.navigateToInstalledProductPage();
-		_wait(5000,_isVisible($bo_pg_installedProducts.btn_new));
-		 _click($bo_pg_installedProducts.btn_new);
-		if(_condition(_heading2("Select Installed Product Record Type") != null))
-			_click($bo_pg_installedProducts.btn_continue); 
+		_setStrictVisibilityCheck(true);
+		$bo_act_navigation.navigateToInstalledProductPage();
+		 _wait(5000,_isVisible($bo_pg_installedProducts.btn_new));
+			_click($bo_pg_installedProducts.btn_new);
+			_wait(5000);
+			if(_isVisible(_span("Next"))){
+				_click(_span("Next"));
+			}
 			_setValue($bo_pg_installedProducts.txt_productName,$productName);
+			_click(_mark($productName));
 			_setValue($bo_pg_installedProducts.txt_serialNumber, $serialNum);
+			
 		_setValue($bo_pg_installedProducts.txt_accountName, $accountName);
+		_click(_mark($accountName));
 		_setValue($bo_pg_installedProducts.txt_contactName, $contactName);
+		_click(_mark($contactName));
 		_setValue($bo_pg_installedProducts.txt_installedProductName, $IBName);
-		_setValue($bo_pg_installedProducts.txt_installedDate);
-		_setValue(_textbox("City"),"Bangalore");
+		_setValue($bo_pg_installedProducts.txt_installedDate,$date);
+//		_click(_span("Today"));
+		_setValue($bo_pg_installedProducts.txt_city,"Bangalore");
 		_click($bo_pg_installedProducts.btn_save);
-		_assertNotVisible(_div("/Error: Invalid Data/"));
+		_assertNotVisible(_span("Review the errors on this page."));
+		_wait(15000, _isVisible(_span($IBName)));
 		_logOutput($IBName+ " IB is created");
-		_wait(15000, _isVisible(_heading2($IBName)));
 		return $IBName;
+		_setStrictVisibilityCheck(false);
 		// Need to return
 	};
-	this.createIB_Statusvalue =  function($productName,$accountName,$contactName, $status) {
+	this.createIB_Statusvalue =  function($productName,$accountName,$contactName,$status,$date) {
 		var $serialNum = $bo_act_common.generateRandomName("Ser");
 		var $IBName = $bo_act_common.generateRandomName("IB_");
 		 $bo_act_navigation.navigateToInstalledProductPage();
@@ -43,17 +52,17 @@ var $bo_act_installedProduct = new function bo_act_installedProduct() {
 		_setValue($bo_pg_installedProducts.txt_contactName, $contactName);
 		_setSelected($bo_pg_installedProducts.editStatus, $status);
 		_setValue($bo_pg_installedProducts.txt_installedProductName, $IBName);
-		_setValue($bo_pg_installedProducts.txt_installedDate);
-		_setValue(_textbox("City"),"Bangalore");
+		_setValue($bo_pg_installedProducts.txt_installedDate,$date);
+		_setValue($bo_pg_installedProducts.txt_city,"Bangalore");
 		_click($bo_pg_installedProducts.btn_save);
-		_assertNotVisible(_div("/Error: Invalid Data/"));
+		_assertNotVisible(_span("Review the errors on this page."));
+		_wait(15000, _isVisible(_span($IBName)));
 		_logOutput($IBName+ " IB is created");
-		_wait(15000, _isVisible(_heading2($IBName)));
 		return $IBName;
 	
 	};
 	
-	this.createIB_DistributorAccount = function($productName,$distributoraccountName,$contactName, $accountName){
+	this.createIB_DistributorAccount = function($productName,$distributoraccountName,$contactName,$accountName,$date){
 		
 		var $serialNum = $bo_act_common.generateRandomName("Ser");
 		var $IBName = $bo_act_common.generateRandomName("IB_");
@@ -68,7 +77,7 @@ var $bo_act_installedProduct = new function bo_act_installedProduct() {
 		_setValue($bo_pg_installedProducts.txt_accountName, $accountName);
 		_setValue($bo_pg_installedProducts.txt_contactName, $contactName);
 		_setValue($bo_pg_installedProducts.txt_installedProductName, $IBName);
-		_setValue($bo_pg_installedProducts.txt_installedDate);
+		_setValue($bo_pg_installedProducts.txt_installedDate,$date);
 		_setValue(_textbox("City"),"Bangalore");
 		_click($bo_pg_installedProducts.btn_save);
 		_assertNotVisible(_div("/Error: Invalid Data/"));
@@ -85,26 +94,43 @@ var $bo_act_installedProduct = new function bo_act_installedProduct() {
 		
 	};
 
+	// Changes made for Lightning
 	this.createWOFromIB = function($IBName){
 		$bo_act_navigation.navigateToInstalledProductPage();
 		_click(_link($IBName));
 		_selectDomain("/svmx/");
 		_click($bo_pg_installedProducts.btn_createWorkOrder);
-		_selectDomain();
-		_wait(60000,_isVisible($bo_pg_installedProducts.btn_sfmSave));
+		if(_isVisible($bo_pg_installedProducts.btn_sfmSave == true))
+		
+		{
+			_wait(20000);
 		_click($bo_pg_installedProducts.btn_sfmSave);
-		return _getText($bo_pg_installedProducts.txt_workOrderNumber);
+		
+		}
+		else
+		
+			_wait(20000);
+			_click($bo_pg_installedProducts.btn_sfmSave);
+		
+			_selectDomain();
+			_wait(10000);
+			return _getText(_span(0,_near($bo_pg_installedProducts.txt_workOrderNumber)));
 	};
 	
-	this.createSupportCase = function($status){
+	this.createSupportCase = function($status){ // Modified for Lightning - Meghana Rao P
 		$bo_act_navigation.navigateToInstalledProductPage();
 		_click(_link($IBName));
 		_selectDomain("/svmx/");
 		_click($bo_pg_installedProducts.btn_SFWcreateSupportCase);
-		_selectDomain();
 		_wait(60000,_isVisible($bo_pg_installedProducts.txt_SFMcreateSupportCaseStatus));
-		_setValue($bo_pg_installedProducts.txt_SFMcreateSupportCaseStatus,$status);
+		_wait(10000);
+		_click($bo_pg_installedProducts.txt_SFMcreateSupportCaseStatus);
+		_wait(10000);
+		_click(_listItem($status));
+		_wait(10000);
 		_click($bo_pg_installedProducts.btn_sfmSave);
+		_wait(10000);
+		_selectDomain();
 		return _getText($bo_pg_installedProducts.txt_caseNumber);
 	};
 	

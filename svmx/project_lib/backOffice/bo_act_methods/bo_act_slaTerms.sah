@@ -8,9 +8,10 @@ var $bo_act_slaTerms = new function bo_act_slaTerms() {
 	 * 
 	 * @param $$slaName
 	 */
-	this.createSlaTerms = function($defaultBusinessHours) {
+	this.createSlaTerms = function($defaultBusinessHours) { // Modified for Lightning
 			var $slaName = $bo_act_common.generateRandomName("sla");
 			$bo_act_navigation.navigateToSlaTerms();
+			_selectDomain("/svmx/");
 			_click($bo_pg_slaTerms.btn_newSlaTerms);
 			_setValue($bo_pg_slaTerms.txt_slaTermName, $slaName);
 			_setValue($bo_pg_slaTerms.txt_defaultBusinessHours, $defaultBusinessHours);
@@ -18,11 +19,8 @@ var $bo_act_slaTerms = new function bo_act_slaTerms() {
 			_click($bo_pg_slaTerms.btn_save);
 			_assertNotVisible(_div("/Error: Invalid Data/"));
 			_logOutput($slaName+ " SLA Term is created");
-			return $slaName;
-		  _wait(30000, _isVisible(_span($SLAName)));
-          return $slaName;
-		//return $callBack.returnResult([_isVisible($accountName), "Account not created",$accountName] );
-	    // Need to return
+			_selectDomain();
+		  return $slaName;
 	};
 	
 	//Add Initial Response for existing SLA terms
@@ -96,8 +94,9 @@ var $bo_act_slaTerms = new function bo_act_slaTerms() {
 	};
 	
 	//Add Resolution for existing SLA terms
-	this.addResolutionToSLA = function($slaName,$ResponseTrackedOn,$orderType,$priority,$clockStartsFrom,$internalGoal,$customerCommitment,$businessHoursFrom) {
-		$bo_act_slaTerms.editSLA($slaName);	
+	this.addResolutionToSLA = function($slaName,$ResponseTrackedOn,$orderType,$priority,$clockStartsFrom,$internalGoal,$customerCommitment,$businessHoursFrom) { 
+		_selectDomain("/svmx/");
+		$bo_act_slaTerms.editSLA($slaName);	// MODIFIED FOR LIGHTNING
 		_click($bo_pg_slaTerms.btn_resolution);
 		_setStrictVisibilityCheck(true);
 		_setSelected($bo_pg_slaTerms.sel_responseTrackedOn, $ResponseTrackedOn);
@@ -119,10 +118,12 @@ var $bo_act_slaTerms = new function bo_act_slaTerms() {
 	//return $callBack.returnResult([_isVisible($accountName), "Account not created",$accountName] );
 	};
 
-this.editSLA = function($slaName) {
+this.editSLA = function($slaName) { // MODIFIED FOR LIGHTNING
+	_selectDomain("/svmx/");
 	$bo_pg_slaTerms.selectSLA($slaName);
 	_click($bo_pg_slaTerms.btn_editSLA);
 	_wait(30000, _isVisible(_cell("Initial Response")));
+	_selectDomain();
 	//return $callBack.returnResult([_isVisible($$warrantyName), "Warranty Name created",$$warrantyName] );
 };
 

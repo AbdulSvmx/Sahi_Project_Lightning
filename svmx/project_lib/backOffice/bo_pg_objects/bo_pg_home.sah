@@ -5,32 +5,40 @@
  */
 
 var $bo_pg_home = new function bo_pg_home(){
-	this.link_home = _link("Home");
-	this.link_servicemaxSetup = _link("ServiceMax Setup");
+	this.link_home = _span("Home");
+	this.span_more = _span("More"); //Added for lightning.
+	this.button_allLinks = _submit("App Launcher"); //Added for lightning.
+	this.drpdn_servicemaxSetup = _link("/Servicemax SetUp Home/",_in(_div("/slds-dropdown--right/")));//Added for lightning.
+
+	this.link_servicemaxSetup = _link("/Servicemax SetUp/",_near(_div("/modal-body/")));//Modified for lightning.
+
 	this.btn_userName = _span("userNavLabel");
-	this.btn_allTabs =_image("All Tabs");
-	this.link_accounts = _link("/\\Accounts[1]|^Accounts/");
+	this.btn_allTabs =_submit("App Launcher"); //Added for lightning.
+	this.link_accounts = _link("Accounts"); //Modified for Lightning
 	this.link_cases = _link("/\\Cases[1]|^Cases/");
 	this.link_priceBooks = _link("Price Books");
 	this.btn_go = _button(" Go! ");
-	this.link_contacts = _link("/\\Contacts[1]|^Contacts/");
-	this.link_products = _link("/\\Products[1]|^Products/");
-	this.link_installedProducts = _link("Installed Products");
-	this.link_serviceMaintenanceContracts = _link("Service/Maintenance Contracts");
+	this.link_contacts = _link("Contacts");//Modified for Lightning
+	this.link_products = _link("Products");//Modified for Lightning
+	this.link_installedProducts = _link("Installed Products");//Modified for Lightning
+	this.link_serviceMaintenanceContracts = _span("Service/Maintenance Contracts"); // Modified for Lightning
 	this.link_locations = _link("Locations");
 	this.link_warrantyTerms = _link("Warranty Terms");
 	this.link_stockTransfer = _link("Stock Transfer");
 	this.link_stockAdjustment =_link("Stock Adjustments");
 	this.link_logOut = _link("Logout");
 	this.link_allTabs = _image("All Tabs");
-	
+	this.link_more = _link("/Show More/"); //Added for Lightning
+	this.link_applauncher = _submit("App Launcher");
+	this.btn_heading_allitems = _heading3("All Items");
 	this.link_preventiveMaintenancePlans = _link("Preventive Maintenance Plans");
-	
 	this.link_customWorkOrders = _link("/listRelatedObject Custom/",_near(_image("Work Orders")));
-	
 	this.sel_WBEnvironment = _select(0,_rightOf(_label("Environment:")));
 	this.btn_loginWithSalesForce = _submit("Login with Salesforce");
 	this.label_serviceMaxSFMSearch = _heading2("ServiceMax SFM Search");
+	this.link_switchToLightning = _link("Switch to Lightning Experience");
+	this.link_switchToSalesforce = _link("Switch to Salesforce Classic");
+	this.circular_image = _div("/small circular/");//Added for Lightning
 };
 
 

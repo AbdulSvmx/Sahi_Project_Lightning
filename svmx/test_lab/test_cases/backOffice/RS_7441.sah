@@ -4,15 +4,17 @@
 var $RS_7441 = _testcase("$RS_7441","Verify the default value of setting SET004(Condition based adjustment) must be False");
 $RS_7441.start();
 _setSpeed($g_stepSpeed);
-
 //Pre - Condition 
 $bo_act_login.login($g_url, $bac_un, $bac_pwd);
+_setStrictVisibilityCheck(true);
+_selectDomain("/svmx/");
 $bo_act_navigation.navigateToConfigurationProfilesPage();
 $bo_act_navigation.navigateToActiveOrgWideConfigProfilePage("Preventive Maintenance", "PM Actions");
-
-_assertEqual("False",_getText(_span("False",_under(_tableHeader("Default Value")),_near(_span("SET004")))),"Adjustment setting is not false by default");
-
+_wait(3000);
+_selectDomain("/svmx/");
+var $value = "";
+_set($value,_getText(_cell(4,_rightOf(_cell("SET004")))));
+_assertEqual("False",$value,"Adjustment setting is not false by default");
+_selectDomain();
+_setStrictVisibilityCheck(false);
 $RS_7441.end();
-
-
-

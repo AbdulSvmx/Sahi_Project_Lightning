@@ -1,0 +1,43 @@
+/**
+* Function to perform actions on list view
+*/
+
+var $sfmrdz_act_dvrListView = new function sfmrdz_act_dvrListView(){
+	
+	/**
+	 * Delete transaction
+	 * Parameter: 
+	 * 			$trnType: is transaction standard or custom 
+	 * 			$trnName: Name of transaction
+	 */			
+	this.deleteCustomDVR=function($dvrName){
+		
+		// Search and Delete transaction
+		$sfmrdz_act_common.clickActionMenu($dvrName);
+		_click($sfmrdz_pg_common.link_delete);
+		_wait(10000,_isVisible($sfmrdz_pg_trnListView.heading_confirmationAlert));
+		//_assertExists($sfmrdz_pg_trnListView.heading_confirmationAlert);
+		_click($sfmrdz_pg_common.btn_msgConfirm);
+		//_wait(10000,_isVisible($sfmrdz_pg_trnListView.btn_closeTrnDeleteSucessMsg));
+		
+		//Assert Deletion
+		//_assertExists($sfmrdz_pg_trnListView.btn_trnDeleteSucessMsg);
+		//_click($sfmrdz_pg_trnListView.btn_closeTrnDeleteSucessMsg);
+		$sfmrdz_act_common.searchObj($trnName);
+		_AssertExists($sfmrdz_pg_trnListView.btn_msgNoResult);
+	};
+
+	/**
+	 * Search and clone transaction
+	 * Note: Yet to complete
+	 */
+	this.cloneTrn=function($trnName,$newTrnName){
+		$sfmrdz_act_common.clickActionMenu($trnName);
+		_click($sfmrdz_pg_common.link_clone);
+		_wait(5000,_isVisible($sfmrdz_pg_trnListView.heading_cloneTrn));
+		
+	};
+
+	
+	
+};

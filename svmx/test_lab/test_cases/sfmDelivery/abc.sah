@@ -1,5 +1,5 @@
 _navigateTo("http://test.salesforce.com");
-_setValue(_emailbox("username"), "vansys@pqtpart1.com");
-_setValue(_password("pw"), "servicemax2");
-_click(_submit("Log In to Sandbox"))
+_setValue(_emailbox("username"), "scarface.fop2@admin.com");
+_setValue(_password("pw"), "servicemax90");
+_click(_submit("Log In to Sandbox"));
 _wait(50000);

@@ -22,8 +22,8 @@ var $sfm_pg_wizards = new function sfm_pg_wizards() {
 	this.btn_customBackToSetupHome= _submit("Back To Setup Home[2]",_near(_heading2("Custom SFM Wizards")));
 	
 	//create SFM wizard objects
-	this.txt_wizardTitle = _textbox(1); //,_rightOf(_span("Wizard Title")));
-	this.txt_wizardID = _textbox(2); //,_rightOf(_label("Wizard ID")));
+	this.txt_wizardTitle = _textbox(0,_span(_label("Wizard Title"))); //,_rightOf(_span("Wizard Title")));
+	this.txt_wizardID = _textbox(0,_rightOf(_label("Wizard ID"))); //,_rightOf(_label("Wizard ID")));
 	this.txt_wizardDescription = _textarea(0); //,_rightOf(_label("Description")));
 	this.btn_showCriteria = _select(1); //,_rightOf(_label("Criteria To Show Wizard")));
 	this.txt_activeCheckbox = _checkbox(0); //,_rightOf(_label("Active?")));
@@ -38,8 +38,10 @@ var $sfm_pg_wizards = new function sfm_pg_wizards() {
 	
 	//Manage wizard steps objects
 	this.btn_newStep = _button("New Step");
-	this.btn_wizStepType = _select(2); //,_rightOf(_label("Wizard Step Type[1]")));
-	this.btn_stepName = _select(3); //,_rightOf(_label("Step Name[1]")));
+//	this.btn_wizStepType = _select(2); //,_rightOf(_label("Wizard Step Type[1]")));
+	this.btn_wizStepType = _select(0,_rightOf(_label("Wizard Step Type[1]")));
+//	this.btn_stepName = _select(3); //,_rightOf(_label("Step Name[1]")));
+	this.btn_stepName = _select(0,_rightOf(_label("Step Name[1]")));
 	this.btn_checkboxHandover = _checkbox("on",_rightOf(_label("Handover"))); //,_rightOf(_label("Handover")));
 	this.txt_confirmMessage = _textbox(4); //,_rightOf(_label("Confirmation Message")));
 	this.btn_modeOfExec = _select(4); //,_rightOf(_label("Mode Of Execution"));

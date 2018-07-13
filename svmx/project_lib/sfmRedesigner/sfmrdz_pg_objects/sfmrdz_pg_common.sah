@@ -1,0 +1,38 @@
+/**
+ * SFM designer common page repository
+ */
+
+var $sfmrdz_pg_common=new function sfmrdz_pg_common(){
+	
+	
+	this.txt_listFilter=_textbox("ListFilter");
+	this.txt_listViewPicklist=_textbox("/slds-combobox__input/");
+	this.btn_backtoSetup=_button("Back To Setup Home");
+	this.btn_help=_link("/.*/",_near(this.btn_backtoSetup));
+	this.btn_msgNoResult=_div("No results have been found.");
+	this.btn_actionMenu=_button("/slds-button Button--type-icon-border/");
+	
+	//Action menu items
+	this.link_clone=_link("Clone");
+	this.link_delete=_link("Delete");
+	
+	
+	//Confirmation message items on delete window
+	this.btn_msgCancel=_button("Cancel");
+	this.btn_msgConfirm=_button("Confirm");
+	this.btn_msgClose=_button("Close");
+	
+	//last Column Edited mouse hover div items
+	this.btn_lastEditMouseOverDiv=_div("PopoverBody slds-popover__body");
+	this.btn_lastModItem=_div("/Last Modified By.*/");
+	this.btn_createdDate=_div("/Created By: .*/");
+	this.btn_createdBy=_div("/Created By: Ab.*/");
+	
+	//icons
+	this.btn_lockIcon=_div("Standard SFM Transactions: Cannot be Edited");
+	this.btn_completedIcon=_div("Completed");
+	this.btn_createManageChildLine=_div("To create and manage child lines");
+	this.btn_sourceToTarget=_div("To create Source to Target records");
+	this.btn_createMapChildLine=_div("To create and map child lines only");
+	
+};
