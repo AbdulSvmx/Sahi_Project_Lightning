@@ -12,7 +12,7 @@ var $attackTagSelectionField = "/img src=p/"
 
 			var $urlCount = 0;
 var int = 0;
-
+_disableInfoLogging();
 runScan();
 pritnStatus();
 
@@ -131,12 +131,21 @@ function runScan() {
 				_setStrictVisibilityCheck(false);
 				captureAttack();
 			}
+			
+			_setStrictVisibilityCheck(true);
+			if (_isVisible(_image("/edit-icon/"))) {
+				_click(_image("/edit-icon/"));
+				_setStrictVisibilityCheck(false);
+				captureAttack();
+			}
+			
 
 			attackTextbox();
 			attackTextArea();
 			attackSelection();
 			attackSelectionEditable();
 			killWindow();
+			
 			if (_isVisible(_image("svmx-tool-close"))) {
 				_click(_image("svmx-tool-close"));
 				captureAttack();
@@ -162,6 +171,17 @@ function runScan() {
 				_click(_span("OK"));
 				captureAttack();
 			}
+			
+			if (_isVisible(_span("Update"))) {
+				_click(_span("Update"));
+				captureAttack();
+			}
+			
+			if (_isVisible(_span("Cancel"))) {
+				_click(_span("Cancel"));
+				captureAttack();
+			}
+			
 			killWindow();
 
 			_wait(3000);
@@ -204,8 +224,9 @@ function captureAttack() {
 		_clearLastAlert();
 		var $logStr = " | SCANNED PAGE : [ " + $urlArray[int]
 		+ " ] Alerts Caught : " + $allAlerts;
+		_log($logStr,"FAILURE")
 		_logOutput($logStr);
-		_logExceptionAsFailure($logStr);
+		//_logExceptionAsFailure($logStr);
 
 	}
 	_log("************************************");
@@ -221,7 +242,9 @@ function attackTextbox() {
 
 		try {
 			_disableDefaultErrorLogging();
+			_maskLogs();
 			_setValue($textboxes[$i], $attackTag);
+			_unmaskLogs();
 			_enableDefaultErrorLogging();
 			
 
@@ -234,7 +257,9 @@ function attackTextbox() {
 		try {
 			if (_isVisible(_listItem($attackTag))) {
 				_disableDefaultErrorLogging();
+				_maskLogs();
 				_click(_listItem($attackTag));
+				_unmaskLogs();
 				_enableDefaultErrorLogging();
 				
 			}
@@ -257,7 +282,9 @@ function attackTextArea() {
 
 		try {
 			_disableDefaultErrorLogging();
+			_maskLogs();
 			_setValue($textarea[$i], $attackTag);
+			_unmaskLogs();
 			_enableDefaultErrorLogging();
 			
 
@@ -279,8 +306,10 @@ function attackSelectionEditable() {
 		try {
 			if (_isVisible($select[$i])) {
 				_disableDefaultErrorLogging();
+				_maskLogs();
 				_doubleClick($cell[$i]);
 				_call($cell[$i].innerHTML = $attackTag);
+				_unmaskLogs();
 				_enableDefaultErrorLogging();
 
 			}
@@ -303,7 +332,9 @@ function attackSelection() {
 
 			if (_isVisible($select[$i])) {
 				_disableDefaultErrorLogging();
+				_maskLogs();
 				_setSelected($select[$i], $attackTagSelectionField);
+				_unmaskLogs();
 				_enableDefaultErrorLogging();
 			}
 
@@ -314,3 +345,4 @@ function attackSelection() {
 		captureAttack();
 	}
 }
+
