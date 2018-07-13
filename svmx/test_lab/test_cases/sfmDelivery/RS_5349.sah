@@ -124,28 +124,14 @@ if(_isVisible($sfm_pg_sfmDesigner.txt_dvrMultipleConfirmation)){
 			(_isVisible(_div("/"+"Expenses: "+$ruleDescription+"/"))) &&
 			(_isVisible(_div("/"+"Travel: "+$ruleDescription+"/"))) ){
 		_log("Pass ::: DVR-Error for Parts/Labor/Expenses/Travel is working");
+		}else{
+			_log("Fail ::: DVR-Error for Parts/Labor/Expenses/Travel is not working ");
 		}
+
 	}else{
 	_log("Fail ::: DVR-Error for Parts/Labor/Expenses/Travel is not working ");
 	}
-//Change expense type to Airfare and update end date and time to >start date and time and check for confirmation step 2
 
-_click($sfm_pg_sfmDesigner.btn_deliveryExpenseTab);
-$sfm_act_sfmDesigner.navToExtendedEdit();
-_click($sfm_pg_sfmDesigner.txt_eeExpenseType);
-_click(_listItem("Airfare"));
-_click($sfm_pg_sfmDesigner.btn_eeUpdate);
-
-_click($sfm_pg_sfmDesigner.btn_deliveryTravelTab);
-$sfm_act_sfmDesigner.navToExtendedEdit();;
-_setValue($sfm_pg_sfmDesigner.txt_eeEndDateTime,$bo_act_common.currentDate("/"));
-_click($sfm_pg_sfmDesigner.btn_eeUpdate);
-_click($sfm_pg_sfmDesigner.btn_deliveryQuickSave);
-	if(_isVisible(_div("/"+"Labor: "+$ruleDescription2+"/"))){
-		_log("Pass ::: DVR Confirmation for Labor is working");
-	}else{
-		_log("Fail ::: DVR Confirmation for Labor is not working ");
-	}
 
 // Change the Line qty <6 step 3 & 4
 
@@ -172,12 +158,32 @@ _click($sfm_pg_sfmDesigner.btn_eeUpdate);
 _click($sfm_pg_sfmDesigner.btn_deliveryQuickSave);
 if(_isVisible($sfm_pg_sfmDesigner.txt_dvrMultipleConfirmation)){
 	_click($sfm_pg_sfmDesigner.txt_dvrMultipleConfirmation);
+	_click($sfm_pg_sfmDesigner.txt_dvrMultipleConfirmation);
 	if ( (_isVisible(_div("/"+"Expenses: "+$ruleDescription3+"/"))) &&
 		(_isVisible(_div("/"+"Travel: "+$ruleDescription4+"/"))) ){
 				_log("Pass ::: "+$ruleDescription3 +" and "+$ruleDescription4);
 	}
 }else{
 		_log("Fail ::: DVR-Error Expenses/Travel is not working ");
+	}
+
+//Change expense type to Airfare and update end date and time to >start date and time and check for confirmation step 2
+
+_click($sfm_pg_sfmDesigner.btn_deliveryExpenseTab);
+$sfm_act_sfmDesigner.navToExtendedEdit();
+_click($sfm_pg_sfmDesigner.txt_eeExpenseType);
+_click(_listItem("Airfare"));
+_click($sfm_pg_sfmDesigner.btn_eeUpdate);
+
+_click($sfm_pg_sfmDesigner.btn_deliveryTravelTab);
+$sfm_act_sfmDesigner.navToExtendedEdit();;
+_setValue($sfm_pg_sfmDesigner.txt_eeEndDateTime,$bo_act_common.currentDate("/"));
+_click($sfm_pg_sfmDesigner.btn_eeUpdate);
+_click($sfm_pg_sfmDesigner.btn_deliveryQuickSave);
+	if(_isVisible(_div("/"+"Labor: "+$ruleDescription2+"/"))){
+		_log("Pass ::: DVR Confirmation for Labor is working");
+	}else{
+		_log("Fail ::: DVR Confirmation for Labor is not working ");
 	}
 
 
