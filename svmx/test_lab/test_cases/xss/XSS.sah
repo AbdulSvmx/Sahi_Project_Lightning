@@ -262,9 +262,12 @@ function captureAttack() {
 		_focusWindow();
 		_takePageScreenShot();
 		_unlockWindow();
-		_clearLastAlert();
+		
 		var $logStr = " | SCANNED PAGE : [ " + $urlArray[int]
 		+ " ] Alerts Caught : " + $allAlerts;
+		
+		_clearLastAlert();
+		
 		_log($logStr,"FAILURE")
 		_logOutput($logStr);
 		_logExceptionAsFailure($logStr);
