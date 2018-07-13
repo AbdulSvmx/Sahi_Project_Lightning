@@ -23,17 +23,17 @@ function pritnStatus() {
 
 function runScan() {
 
-	for (int = 0; int < $urlArray.length; int++) {
+	for (int = 0; int <=$urlArray.length; int++) {
 
 		$urlCount = int;
 		$url = $urlArray[int]["URL"];
+		_log("SCANNED PAGE : [ " + $url + " ]");
 		_navigateTo($url);
 		_call(top.location.reload(true));
 		_wait(2000);
 		_continueOnError();
 
-		var $test = _testcase("SCANNED NO : [" + int + "]", $url);
-		$test.start();
+		
 
 		captureAttack();
 
@@ -68,6 +68,7 @@ function runScan() {
 					// Getting the names or iDS so use _span
 					if (_isVisible($tabbing[$s])) {
 						_click($tabbing[$s]);
+						captureAttack();
 					}
 					_log("in TAB ******************* " + $t + "****");
 				}
@@ -86,9 +87,17 @@ function runScan() {
 				captureAttack();
 			}
 
+		
 			_setStrictVisibilityCheck(true);
-			if (_isVisible(_span("New"))) {
-				_click(_span("New"));
+			if (_isVisible(_span("/New/"))) {
+				_click(_span("/New/"));
+				_setStrictVisibilityCheck(false);
+				captureAttack();
+			}
+
+			_setStrictVisibilityCheck(true);
+			if (_isVisible(_link("/New/"))) {
+				_click(_link("/New/"));
 				_setStrictVisibilityCheck(false);
 				captureAttack();
 			}
@@ -101,20 +110,28 @@ function runScan() {
 			}
 
 			_setStrictVisibilityCheck(true);
-			if (_isVisible(_span("Add"))) {
-				_click(_span("Add"));
+			if (_isVisible(_span("/Add/"))) {
+				_click(_span("/Add/"));
 				_setStrictVisibilityCheck(false);
 				captureAttack();
 			}
+			
+			_setStrictVisibilityCheck(true);
+			if (_isVisible(_link("/Add/"))) {
+				_click(_link("/Add/"));
+				_setStrictVisibilityCheck(false);
+				captureAttack();
+			}
+			
 			_setStrictVisibilityCheck(true);
 			if (_isVisible(_button("/Add/"))) {
 				_click(_button("/Add/"));
 				_setStrictVisibilityCheck(false);
 				captureAttack();
 			}
-			if (_isVisible(_textbox("Select a profile:"))) {
-				_click(_textbox("Select a profile:"));
-				_click(_listItem("Default Group Profile"));
+			if (_isVisible(_textbox("/Select a profile/"))) {
+				_click(_textbox("/Select a profile/"));
+				_click(_listItem("/Default/"));
 				captureAttack();
 			}
 
@@ -124,10 +141,17 @@ function runScan() {
 				_setStrictVisibilityCheck(false);
 				captureAttack();
 			}
-
+			
 			_setStrictVisibilityCheck(true);
-			if (_isVisible(_span("Add"))) {
-				_click(_span("Add"));
+			if (_isVisible(_link("/Add/"))) {
+				_click(_link("/Add/"));
+				_setStrictVisibilityCheck(false);
+				captureAttack();
+			}
+			
+			_setStrictVisibilityCheck(true);
+			if (_isVisible(_span("/Add/"))) {
+				_click(_span("/Add/"));
 				_setStrictVisibilityCheck(false);
 				captureAttack();
 			}
@@ -146,41 +170,58 @@ function runScan() {
 			attackSelectionEditable();
 			killWindow();
 			
-			if (_isVisible(_image("svmx-tool-close"))) {
-				_click(_image("svmx-tool-close"));
-				captureAttack();
+			_setStrictVisibilityCheck(true);
+			if (_isVisible(_span("/Update/"))) {
+				_click(_span("/Update/"));
+				_setStrictVisibilityCheck(false);
 
-			}
-
-			if (_isVisible(_span("Save"))) {
-				_click(_span("Save"));
 				captureAttack();
 			}
+			
+		
+			_setStrictVisibilityCheck(true);
+			if (_isVisible(_span("/Save/"))) {
+				_click(_span("/Save/"));
+				_setStrictVisibilityCheck(false);
 
+				captureAttack();
+			}
+
+			_setStrictVisibilityCheck(true);
 			if (_isVisible(_button("Quick Save"))) {
 				_click(_button("Quick Save"));
+				_setStrictVisibilityCheck(false);
+
 				captureAttack();
 			}
 
-			if (_isVisible(_button("Save"))) {
-				_click(_button("Save"));
+			_setStrictVisibilityCheck(true);
+			if (_isVisible(_button("/Save/"))) {
+				_click(_button("/Save/"));
+				_setStrictVisibilityCheck(false);
+
 				captureAttack();
 			}
 
+			_setStrictVisibilityCheck(true);
 			if (_isVisible(_span("OK"))) {
 				_click(_span("OK"));
+				_setStrictVisibilityCheck(false);
+
 				captureAttack();
 			}
 			
-			if (_isVisible(_span("Update"))) {
-				_click(_span("Update"));
+			_setStrictVisibilityCheck(true);
+			if (_isVisible(_image("svmx-tool-close"))) {
+				_click(_image("svmx-tool-close"));
+				_setStrictVisibilityCheck(false);
+
 				captureAttack();
+
 			}
 			
-			if (_isVisible(_span("Cancel"))) {
-				_click(_span("Cancel"));
-				captureAttack();
-			}
+			
+			
 			
 			killWindow();
 
@@ -188,7 +229,7 @@ function runScan() {
 
 		}
 		
-		$test.end();
+		
 	}
 
 	
@@ -214,9 +255,9 @@ function captureAttack() {
 	_log("************************************");
 	var $allAlerts = _lastAlert(true);
 	if ($allAlerts == null || $allAlerts == "") {
-		_log("SCANNED PAGE : [ " + $urlArray[int] + " ] No Alerts Caught")
+		//_log("SCANNED PAGE : [ " + $urlArray[int] + " ] No Alerts Caught")
 	} else {
-
+		_enableDefaultErrorLogging();
 		_lockWindow();
 		_focusWindow();
 		_takePageScreenShot();
@@ -226,7 +267,7 @@ function captureAttack() {
 		+ " ] Alerts Caught : " + $allAlerts;
 		_log($logStr,"FAILURE")
 		_logOutput($logStr);
-		//_logExceptionAsFailure($logStr);
+		_logExceptionAsFailure($logStr);
 
 	}
 	_log("************************************");
@@ -238,7 +279,7 @@ function attackTextbox() {
 	_log("Collected $textboxes = " + $textboxes.length);
 	// Iterate and set values on all textboxes and also textcombo/selection
 	// boxes
-	for (var $i = 0; $i < $textboxes.length; $i++) {
+	for (var $i = 0; $i <= $textboxes.length; $i++) {
 
 		try {
 			_disableDefaultErrorLogging();
@@ -278,7 +319,7 @@ function attackTextArea() {
 	_log("Collected $textarea = " + $textarea.length);
 
 	// Iterate and set values on all text areas
-	for (var $i = 0; $i < $textarea.length; $i++) {
+	for (var $i = 0; $i <= $textarea.length; $i++) {
 
 		try {
 			_disableDefaultErrorLogging();
@@ -301,7 +342,7 @@ function attackSelectionEditable() {
 	_log("Collected $cell = " + $cell.length);
 
 	// Iterate and set values on all editable selections
-	for (var $i = 0; $i < $cell.length; $i++) {
+	for (var $i = 0; $i <= $cell.length; $i++) {
 
 		try {
 			if (_isVisible($select[$i])) {
@@ -326,7 +367,7 @@ function attackSelection() {
 	_log("Collected $select = " + $select.length);
 
 	// Iterate and set values on all editable selections
-	for (var $i = 0; $i < $select.length; $i++) {
+	for (var $i = 0; $i <= $select.length; $i++) {
 
 		try {
 
