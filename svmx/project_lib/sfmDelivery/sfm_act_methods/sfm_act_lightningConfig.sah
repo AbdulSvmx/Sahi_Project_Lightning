@@ -100,7 +100,7 @@ this.checkIfWizardLinkExists = function($process_name){
 
 };
 
-this.logoutInLIghtning = function() {
+this.logoutInLightning = function() {
 	//Added by JJ
 	//This function logs out of Salesforce in Lightning experience
 	_click($sfm_pg_wo.link_profileImageRightCorner);

@@ -1,152 +1,280 @@
+_setSpeed(100);
 //Pass the Attack Values
-var $attackTag = "<img  src=p onerror=alert(AttackConfirmed)>";
+var $attackTag = "<img  src=p onerror=alert(123)>";
+var $attackTagSelectionField = "/img src=p/"
+//	Pass the URl/Page Locations
+	var $urlArray = $excel.readFromCustomExcel("../xss/xss_excelData/xssData.xlsx",
+			"Sheet1", false, true)
+//			var $urlArray =
+//			["https://svmxc.na40.visual.force.com/apex/SVMXC__SPM_configuration"];
+			$bo_act_login.login("https://login.salesforce.com", "yadav.thyagaraj@ge.com",
+			"Svmx123#")
 
-// Pass the URl/Page Locations
-var $urlArray = $excel.readFromCustomExcel("../xss/xss_excelData/xssData.xlsx","Sheet1", false, true)
+			var $urlCount = 0;
+var int = 0;
+_disableInfoLogging();
+runScan();
+pritnStatus();
 
-$bo_act_login.login("https://login.salesforce.com", "yadav.thyagaraj@ge.com",
-		"Svmx123#")
+function pritnStatus() {
+	_logOutput(" | URL Scanned : " + $urlCount + " Of Total : "
+			+ $urlArray.length);
+}
 
-for (var int = 0; int < $urlArray.length; int++) {
-	_navigateTo($urlArray[int]["URL"]);
-	_wait(5000);
-	_continueOnError();
-	captureAttack();
+function runScan() {
 
-	// Collect and naviagte throug Tabs if present and set all the fields for
-	// each page
+	for (int = 0; int <=$urlArray.length; int++) {
 
-	if (_isVisible(_span(/x-tab-inner/))) {
-		var $tabbing = _collect("_span", "/x-tab-inner/");
+		$urlCount = int;
+		$url = $urlArray[int]["URL"];
+		_log("SCANNED PAGE : [ " + $url + " ]");
+		_navigateTo($url);
+		_call(top.location.reload(true));
+		_wait(2000);
+		_continueOnError();
 
-	} else {
+		
 
-		var $tabbing = _collect("_cell", "/rich-tab-header/");
-	}
+		captureAttack();
 
-	_log("Collected Spans = " + $tabbing.length);
-	// To avoid Tabbing in non tabbed pages
-	if ($tabbing.length == 0) {
-		var $tabs = 1;
-		var skipFlag = 1;
-	} else {
-		var $tabs = $tabbing.length;
-		var skipFlag = 0;
-	}
+		// Collect and naviagte through Tabs if present and set all the fields
+		// for
+		// each page
+		_selectWindow();
+		if (_isVisible(_span("/svmx-tab/"))) {
+			var $tabbing = _collect("_span", "/svmx-tab/");
 
-	// Select a Tab
-	for (var $s = 0; $s < $tabs; $s++) {
-		try {
-			if (skipFlag != 1) {
-				_click($tabbing[$s]);
-				_log("in TAB ******************* " + _getText($tabbing[$s])
-						+ "****");
+		} else {
+
+			var $tabbing = _collect("_cell", "/rich-tab-header/");
+		}
+
+		_log("Collected Spans = " + $tabbing.length);
+		// To avoid Tabbing in non tabbed pages
+		if ($tabbing.length == 0) {
+			var $tabs = 1;
+			var skipFlag = 1;	
+		} else {
+			var $tabs = $tabbing.length;
+			var skipFlag = 0;
+		}
+
+		// Select a Tab
+		for (var $s = 0; $s < $tabs; $s++) {
+			_setStrictVisibilityCheck(true);
+
+			try {
+				if (skipFlag != 1) {
+					// Getting the names or iDS so use _span
+					if (_isVisible($tabbing[$s])) {
+						_click($tabbing[$s]);
+						captureAttack();
+					}
+					_log("in TAB ******************* " + $t + "****");
+				}
+			} catch (e) {
+
 			}
-		} catch (e) {
 
-		}
-
-		// Initial check
-		captureAttack();
-		_setStrictVisibilityCheck(true);
-		if (_isVisible(_button("/New/"))) {
-			_click(_button("/New/"));
 			_setStrictVisibilityCheck(false);
-		}
-		captureAttack();
-		_setStrictVisibilityCheck(true);
-		if (_isVisible(_span("New"))) {
-			_click(_span("New"));
-			_setStrictVisibilityCheck(false);
-		}
-		captureAttack();
-		_setStrictVisibilityCheck(true);
-		if (_isVisible(_span("Add New"))) {
-			_click(_span("Add New"));
-			_setStrictVisibilityCheck(false);
-		}
-		captureAttack();
-		_setStrictVisibilityCheck(true);
-		if (_isVisible(_span("Add"))) {
-			_click(_span("Add"));
-			_setStrictVisibilityCheck(false);
-		}
-		_setStrictVisibilityCheck(false);
-		captureAttack();
-		if (_isVisible(_textbox("Select a profile:"))) {
-			_click(_textbox("Select a profile:"));
-			_click(_listItem("Default Group Profile"));
-		}
-		captureAttack();
-		_setStrictVisibilityCheck(true);
-		if (_isVisible(_span("Add"))) {
-			_click(_span("Add"));
-			_setStrictVisibilityCheck(false);
-		}
-		_setStrictVisibilityCheck(false);
-		captureAttack();
+			killWindow();
+			// Initial check
+			captureAttack();
+			_setStrictVisibilityCheck(true);
+			if (_isVisible(_button("/New/"))) {
+				_click(_button("/New/"));
+				_setStrictVisibilityCheck(false);
+				captureAttack();
+			}
 
-		attackTextbox();
-		attackTextArea();
-		attackSelection();
-		attackSelectionEditable();
+		
+			_setStrictVisibilityCheck(true);
+			if (_isVisible(_span("/New/"))) {
+				_click(_span("/New/"));
+				_setStrictVisibilityCheck(false);
+				captureAttack();
+			}
 
-		_setStrictVisibilityCheck(true);
-		if (_isVisible(_span("Add"))) {
-			_click(_span("Add"));
-			_setStrictVisibilityCheck(false);
+			_setStrictVisibilityCheck(true);
+			if (_isVisible(_link("/New/"))) {
+				_click(_link("/New/"));
+				_setStrictVisibilityCheck(false);
+				captureAttack();
+			}
+
+			_setStrictVisibilityCheck(true);
+			if (_isVisible(_span("Add New"))) {
+				_click(_span("Add New"));
+				_setStrictVisibilityCheck(false);
+				captureAttack();
+			}
+
+			_setStrictVisibilityCheck(true);
+			if (_isVisible(_span("/Add/"))) {
+				_click(_span("/Add/"));
+				_setStrictVisibilityCheck(false);
+				captureAttack();
+			}
+			
+			_setStrictVisibilityCheck(true);
+			if (_isVisible(_link("/Add/"))) {
+				_click(_link("/Add/"));
+				_setStrictVisibilityCheck(false);
+				captureAttack();
+			}
+			
+			_setStrictVisibilityCheck(true);
+			if (_isVisible(_button("/Add/"))) {
+				_click(_button("/Add/"));
+				_setStrictVisibilityCheck(false);
+				captureAttack();
+			}
+			if (_isVisible(_textbox("/Select a profile/"))) {
+				_click(_textbox("/Select a profile/"));
+				_click(_listItem("/Default/"));
+				captureAttack();
+			}
+
+			_setStrictVisibilityCheck(true);
+			if (_isVisible(_span("Add"))) {
+				_click(_span("Add"));
+				_setStrictVisibilityCheck(false);
+				captureAttack();
+			}
+			
+			_setStrictVisibilityCheck(true);
+			if (_isVisible(_link("/Add/"))) {
+				_click(_link("/Add/"));
+				_setStrictVisibilityCheck(false);
+				captureAttack();
+			}
+			
+			_setStrictVisibilityCheck(true);
+			if (_isVisible(_span("/Add/"))) {
+				_click(_span("/Add/"));
+				_setStrictVisibilityCheck(false);
+				captureAttack();
+			}
+			
+			_setStrictVisibilityCheck(true);
+			if (_isVisible(_image("/edit-icon/"))) {
+				_click(_image("/edit-icon/"));
+				_setStrictVisibilityCheck(false);
+				captureAttack();
+			}
+			
+
+			attackTextbox();
+			attackTextArea();
+			attackSelection();
+			attackSelectionEditable();
+			killWindow();
+			
+			_setStrictVisibilityCheck(true);
+			if (_isVisible(_span("/Update/"))) {
+				_click(_span("/Update/"));
+				_setStrictVisibilityCheck(false);
+
+				captureAttack();
+			}
+			
+		
+			_setStrictVisibilityCheck(true);
+			if (_isVisible(_span("/Save/"))) {
+				_click(_span("/Save/"));
+				_setStrictVisibilityCheck(false);
+
+				captureAttack();
+			}
+
+			_setStrictVisibilityCheck(true);
+			if (_isVisible(_button("Quick Save"))) {
+				_click(_button("Quick Save"));
+				_setStrictVisibilityCheck(false);
+
+				captureAttack();
+			}
+
+			_setStrictVisibilityCheck(true);
+			if (_isVisible(_button("/Save/"))) {
+				_click(_button("/Save/"));
+				_setStrictVisibilityCheck(false);
+
+				captureAttack();
+			}
+
+			_setStrictVisibilityCheck(true);
+			if (_isVisible(_span("OK"))) {
+				_click(_span("OK"));
+				_setStrictVisibilityCheck(false);
+
+				captureAttack();
+			}
+			
+			_setStrictVisibilityCheck(true);
+			if (_isVisible(_image("svmx-tool-close"))) {
+				_click(_image("svmx-tool-close"));
+				_setStrictVisibilityCheck(false);
+
+				captureAttack();
+
+			}
+			
+			
+			
+			
+			killWindow();
+
+			_wait(3000);
+
 		}
-		captureAttack();
-
-		attackTextbox();
-		attackTextArea();
-		attackSelection();
-		attackSelectionEditable();
-
-		if (_isVisible(_image("svmx-tool-close"))) {
-			_click(_image("svmx-tool-close"));
-		}
-		captureAttack();
-
-		if (_isVisible(_span("Save"))) {
-			_click(_span("Save"));
-		}
-		captureAttack();
-
-		if (_isVisible(_button("Quick Save"))) {
-			_click(_button("Quick Save"));
-		}
-
-		captureAttack();
-		if (_isVisible(_button("Save"))) {
-			_click(_button("Save"));
-		}
-
-		captureAttack();
-		_wait(3000);
-
+		
+		
 	}
+
+	
+}
+
+function killWindow() {
+
+	var $recentWindowId = _getRecentWindow().sahiWinId;
+	if (_windowExists($recentWindowId, 10)) {
+		try {
+			_selectWindow($recentWindowId);
+			_closeWindow();
+		} catch (e) {
+		}
+	}
+
+	_selectWindow();
+	_focusWindow();
+
 }
 
 function captureAttack() {
 	_log("************************************");
 	var $allAlerts = _lastAlert(true);
 	if ($allAlerts == null || $allAlerts == "") {
-		_log("SCANNED PAGE : [ " + $urlArray[int] + " ] No Alerts Caught")
+		//_log("SCANNED PAGE : [ " + $urlArray[int] + " ] No Alerts Caught")
 	} else {
-
+		_enableDefaultErrorLogging();
 		_lockWindow();
 		_focusWindow();
 		_takePageScreenShot();
 		_unlockWindow();
+		
+		var $logStr = " | SCANNED PAGE : [ " + $urlArray[int]
+		+ " ] Alerts Caught : " + $allAlerts;
+		
 		_clearLastAlert();
-		var $logStr = "SCANNED PAGE : [ " + $urlArray[int]
-				+ " ] Alerts Caught : " + $allAlerts;
+		
+		_log($logStr,"FAILURE")
 		_logOutput($logStr);
 		_logExceptionAsFailure($logStr);
 
 	}
 	_log("************************************");
+
 }
 
 function attackTextbox() {
@@ -154,26 +282,38 @@ function attackTextbox() {
 	_log("Collected $textboxes = " + $textboxes.length);
 	// Iterate and set values on all textboxes and also textcombo/selection
 	// boxes
-	for (var $i = 0; $i < $textboxes.length; $i++) {
+	for (var $i = 0; $i <= $textboxes.length; $i++) {
 
 		try {
+			_disableDefaultErrorLogging();
+			_maskLogs();
 			_setValue($textboxes[$i], $attackTag);
+			_unmaskLogs();
+			_enableDefaultErrorLogging();
+			
+
 		} catch (e) {
+			_enableDefaultErrorLogging();
 
 		}
 		captureAttack();
-
 		// For Selection/ComboBox
 		try {
 			if (_isVisible(_listItem($attackTag))) {
+				_disableDefaultErrorLogging();
+				_maskLogs();
 				_click(_listItem($attackTag));
+				_unmaskLogs();
+				_enableDefaultErrorLogging();
+				
 			}
 
 		} catch (e) {
+			_enableDefaultErrorLogging();
 
 		}
-
 		captureAttack();
+
 	}
 }
 
@@ -182,10 +322,18 @@ function attackTextArea() {
 	_log("Collected $textarea = " + $textarea.length);
 
 	// Iterate and set values on all text areas
-	for (var $i = 0; $i < $textarea.length; $i++) {
+	for (var $i = 0; $i <= $textarea.length; $i++) {
+
 		try {
+			_disableDefaultErrorLogging();
+			_maskLogs();
 			_setValue($textarea[$i], $attackTag);
+			_unmaskLogs();
+			_enableDefaultErrorLogging();
+			
+
 		} catch (e) {
+			_enableDefaultErrorLogging();
 
 		}
 		captureAttack();
@@ -197,19 +345,24 @@ function attackSelectionEditable() {
 	_log("Collected $cell = " + $cell.length);
 
 	// Iterate and set values on all editable selections
-	for (var $i = 0; $i < $cell.length; $i++) {
-		try {
+	for (var $i = 0; $i <= $cell.length; $i++) {
 
-			if (_doubleClick($cell[$i])) {
+		try {
+			if (_isVisible($select[$i])) {
+				_disableDefaultErrorLogging();
+				_maskLogs();
+				_doubleClick($cell[$i]);
 				_call($cell[$i].innerHTML = $attackTag);
+				_unmaskLogs();
+				_enableDefaultErrorLogging();
+
 			}
 
 		} catch (e) {
-
-		}
+			_enableDefaultErrorLogging();
+}
 		captureAttack();
 	}
-	captureAttack();
 }
 
 function attackSelection() {
@@ -217,17 +370,23 @@ function attackSelection() {
 	_log("Collected $select = " + $select.length);
 
 	// Iterate and set values on all editable selections
-	for (var $i = 0; $i < $select.length; $i++) {
+	for (var $i = 0; $i <= $select.length; $i++) {
+
 		try {
 
 			if (_isVisible($select[$i])) {
-				_setSelected($select[$i], $attackTag);
+				_disableDefaultErrorLogging();
+				_maskLogs();
+				_setSelected($select[$i], $attackTagSelectionField);
+				_unmaskLogs();
+				_enableDefaultErrorLogging();
 			}
 
 		} catch (e) {
+			_enableDefaultErrorLogging();
 
 		}
 		captureAttack();
 	}
-	captureAttack();
 }
+

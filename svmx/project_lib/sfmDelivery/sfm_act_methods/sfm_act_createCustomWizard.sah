@@ -733,13 +733,8 @@ var $sfm_act_createCustomWizard = new function sfm_act_createCustomWizard() {
 		$sfm_pg_wo.openAppLauncher();
 		_wait(3000);
 		$woName = "";
-//		if(_isVisible($sfm_pg_wo.link_wo)){
-//			_click($sfm_pg_wo.link_wo);
-//		}
-//		else{
-//			_click(_link("Work Orders[1]"));
-//		}
-		_click(_link("Work Orders[1]"));
+		this.clickSvmxWoLink();
+		_wait(5000,isVisible($sfm_pg_wo.btn_wo_new));
 		_click($sfm_pg_wo.btn_wo_new);
 		_click($sfm_pg_wo.btn_wo_edit_save);
 		_wait(5000,_isVisible($sfm_pg_wo.label_wo)); 
@@ -754,9 +749,11 @@ var $sfm_act_createCustomWizard = new function sfm_act_createCustomWizard() {
 		$accNum = "HCSAccountForTesting";
 		$sfm_pg_wo.openAppLauncher();
 		_wait(3000);
-		_click($sfm_pg_wo.link_wo);
+		$sfm_act_createCustomWizard.clickSvmxWoLink();
 		_click($sfm_pg_wo.btn_wo_new);
-		_click($sfm_pg_wo.btn_next);
+		if(_isVisible($sfm_pg_wo.btn_next)){
+			_click($sfm_pg_wo.btn_next);
+		}
 		_click($sfm_pg_wo.txt_actualOnsiteResponse);
 		_click($sfm_pg_wo.cell_today);
 		_click($sfm_pg_wo.txt_actualInitialResponse);
@@ -777,8 +774,12 @@ var $sfm_act_createCustomWizard = new function sfm_act_createCustomWizard() {
         _click(_link($accNum));
         _click($sfm_pg_wo.link_wopriority);
         _click(_link("Medium"));
-		_click($sfm_pg_wo.btn_wo_save);
-		$woId= _getText($sfm_pg_wo.label_wo);
+        _click($sfm_pg_wo.sel_orderType);
+        //Just for selection of mandatory fields
+        _click(_link("Field Service"));
+        
+		_click($sfm_pg_wo.btn_wo_edit_save);
+		 $woId= _getText($sfm_pg_wo.label_wo);
 		return $woId;
 	};
 	
@@ -797,7 +798,16 @@ var $sfm_act_createCustomWizard = new function sfm_act_createCustomWizard() {
 	        $result_date = ($result_date.getMonth()+1) + "/" + $result_date.getDate() + "/" + $result_date.getFullYear();
 	        return $result_date;
 		};
-		
+		this.clickSvmxWoLink = function() {
+		//THis function finds out the Servicemax Work order link and clicks on it.	
+			_click(_link("Work Orders"));
+			 var $url;
+			_set($url, window.location.href);
+			 if(!$url.includes("SVMX")){
+				$sfm_pg_wo.openAppLauncher();
+				_click(_link("Work Orders[1]"));
+			 }
+};
 	  
 
 	

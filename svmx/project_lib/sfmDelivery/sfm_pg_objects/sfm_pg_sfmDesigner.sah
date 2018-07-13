@@ -37,20 +37,22 @@ var $sfm_pg_sfmDesigner = new function sfm_pg_sfmDesigner() {
 	this.chk_customerDown = _checkbox(0,_near(_span("Customer Down"))); // Added for lightning
 	this.txt_billingType = _textbox("Billing Type",_near(_span("Billing Type"))); // Added for lightning
 	this.chk_isEntitlementPerformed = _checkbox(0,_near(_span("Is Entitlement Performed"))); // Added for lightning
+	this.txt_dvrConfirmationMessage = _div("/sfm-lightningerrorcomponent/");// Added for lightning
+	this.txt_dvrMultipleConfirmation = _div("/Review the/");// Added for lightning
 
 	
 	//Extended edit page objects --Parts
 	this.txt_eeEdit = _span("Edit"); //Added for lightning- for extended edit dropdown
 	this.txt_eeDelect = _span("Delete"); //Added for lightning- for extended edit dropdown
 	this.txt_eeLineQty = _textbox("Line Qty",_in(_div("/sfm-window/")));//Changed for Lightning;
-	this.txt_eeReceivedStreet = _textarea(0,_rightOf(_label("Received Street:")));
+	this.txt_eeReceivedStreet = _textarea(0,_near(_span("Received Street",_in(_div("/sfm-window/")))));//Changed for Lightning
 	this.btn_eeUpdate = _span("Update",_in(_div("/sfm-window/"))); //Changed for Lightning;
 	this.btn_eeCancel = _span("/Cancel/",_in(_div("/sfm-window/"))); //Changed for Lightning;
 
 	this.txt_eeEstimatedPricePerUnit= _textbox(0,_near(_span("/Estimated Price Per Unit/",_in(_div("/sfm-window/")))));//Changed for Lightning
 	this.txt_eeReceivedCity =_textbox("Received City",_in(_div("/sfm-window/")));//Changed for Lightning
 	this.txt_eeReferenceInformation =_textarea(0,_near(_span("Reference Information",_in(_div("/sfm-window/"))))); //Changed for Lightning
-	this.txt_eeActivityType = _textbox("Activity Type:",_rightOf(_label("Activity Type:")));
+	this.txt_eeActivityType = _textbox("/sfm-picklist/",_near(_span("Activity Type",_in(_div("/sfm-window/"))))); //Changed for Lightning -- this needs to clicked and then click on the list item to set activity type
 	
 	//Extended edit page objects --Labor
 	
@@ -59,7 +61,7 @@ var $sfm_pg_sfmDesigner = new function sfm_pg_sfmDesigner() {
 	this.txt_billingLinePrice = _textbox(0,_near(_span("/Billable Line Price/",_in(_div("/sfm-window/")))));//Changed for Lightning
 	this.txt_eeLinePricePerUnit = _textbox(0,_near(_span("/Line Price Per Unit/",_in(_div("/sfm-window/")))));//Changed for Lightning
 
-	this.txt_eeExpenseType = _textbox("Expense Type",_near(_span("/Expense Type/",_in(_div("/sfm-window/"))))); //Changed for Lightning
+	this.txt_eeExpenseType = _textbox("/sfm-picklist/",_near(_span("Expense Type",_in(_div("/sfm-window/"))))); //Changed for Lightning -- this needs to clicked and then click on the list item to set activity type
 	
 	this.txt_eeEndDateTime=_textbox(0,_near(_span("/End Date and Time/",_in(_div("/sfm-window/"))))); //Changed for Lightning
 
@@ -70,5 +72,6 @@ var $sfm_pg_sfmDesigner = new function sfm_pg_sfmDesigner() {
 	this.txt_scheduledDate = _textbox(0,_near(_label("Scheduled Date"))); // added for lightning
 	this.txt_actualOnsiteResponse = _textbox(0,_near(_span("Actual Onsite Response"))); // added for lightning
 	this.txt_component = _textbox(0,_near(_span("Component"))); // added for lightning
+	
 	
 };

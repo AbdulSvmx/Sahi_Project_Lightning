@@ -45,6 +45,7 @@ var $bo_act_navigation = new function bo_act_navigation() {
      * @returns boolean
      * Changes made for Lightning
      */this.navigateToSfmTransactionDesigner = function() {
+    	 this.navigateToSvmxSetup();
 	 _selectDomain("/svmx/");
 	_click($bo_pg_servicemaxSetup.btn_serviceFlowManager);
 	_click($bo_pg_servicemaxSetup.btn_sfmTransactionAndDocsDesigner);
@@ -183,11 +184,18 @@ var $bo_act_navigation = new function bo_act_navigation() {
     	
     //Changed by Janaki to Lightning flow.
     	this.navigateToCreatedRecordUsingGlobalSearch = function($recordToBeSearch){
+    	_click(_link("Home"));
     	_setValue(_textbox("Search Salesforce"),$recordToBeSearch);
     	_keyPress(_textbox("Search Salesforce"),13);
     	_wait(3000, _isVisible($recordToBeSearch));
     	_click(_link("/"+$recordToBeSearch+"/",_near(_heading1("Search Results"))));
         };
+        
+     this.navigateToFeaturePermissionsPage = function() {
+    	 $bo_act_navigation.navigateToSvmxSetup();
+		_selectDomain("/svmx/");
+		_click($bo_pg_servicemaxSetup.btn_featurePermissions);
+	 };
         
      this.navigateToConfigurationProfilesPage = function(){
         	$bo_act_navigation.navigateToHome();
@@ -423,10 +431,10 @@ var $bo_act_navigation = new function bo_act_navigation() {
     	   
     	   };
     //Function to edit existing screen designer.
-    	   this.editHeaderScreen = function($fields_array){
+    	   this.editHeaderScreen = function($fields_array,$containerName){
         	   var $i = 0;
         	   for($i=0;$i<$fields_array.length;$i++){
-        		   _click(_f("main").fieldrenderer("[object Object]"));
+        		   _click(_f("main").fieldrenderer("[object Object]").near(_f("main").formitemlabel($containerName)));
         			_setValue(_f("main").s_textinput("searchText[4]"), $fields_array[$i]);
         			_doubleClick(_f("main").s_label($fields_array[$i]));
         	   }
@@ -437,10 +445,11 @@ var $bo_act_navigation = new function bo_act_navigation() {
        this.getCurrentTimeStamp = function(){
         	//This function returns the current date and time in the form - DD-MM-YYYY_HR:MIN:SEC
              var stamp = new Date();
-             var timeStamp = stamp.getDate() + "-" + (stamp.getMonth()+1) + "-" + stamp.getFullYear() + "_" + stamp.getHours() + ":" + stamp.getMinutes() + ":" + stamp.getSeconds();
+             var timeStamp = stamp.getDate() + "_" + (stamp.getMonth()+1) + "_" + stamp.getFullYear() + "_" + stamp.getHours() + "_" + stamp.getMinutes() + "_" + stamp.getSeconds();
         	 return timeStamp;
 
         		  };
+<<<<<<< HEAD
         this.navigateServicemaxSetUpInLightening=function(){
         	_click($bo_pg_home.button_allLinks);
         	_setValue($bo_pg_home.txtbox_findAnApp,"servicemax SetUp");
@@ -451,4 +460,18 @@ var $bo_act_navigation = new function bo_act_navigation() {
         }
         };	
         
+=======
+        this.addSfmDesignerPermissionToUser = function($userName,$groupProfile){
+        //This function adds the SFM Designer launching permission to the given user in the given group profile.
+        	_click(_listItem($groupProfile));
+        	_setValue($bo_pg_servicemaxSetup.txt_featurePermissionSearch,$userName);
+        	_click($bo_pg_servicemaxSetup.btn_featurePermissionUserSearch);
+        	//Click the SFM designer checkbox. Only one search result is expected as the username is unique.
+        	_click(_div("svmx-grid-checkheader[1]"));
+        	//Add step to click on 'Save' button as it is not visible in Lightning experience.
+        	
+        	
+        	
+        };
+>>>>>>> 34f198bfe86e71febadc042c6a2ba886deb87920
 };

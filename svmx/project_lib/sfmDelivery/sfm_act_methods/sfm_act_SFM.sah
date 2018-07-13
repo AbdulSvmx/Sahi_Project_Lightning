@@ -13,9 +13,12 @@ var $sfm_act_SFM = new function sfm_act_SFM() {
 
 		_click($bo_pg_sfmTransactionAndDesigner.btn_clone);
 		_wait(50000, _isVisible($bo_pg_sfmTransactionAndDesigner.txt_name));
+		_setValue($bo_pg_sfmTransactionAndDesigner.txt_name, "");
 		_setValue($bo_pg_sfmTransactionAndDesigner.txt_name, $sfmName);
 		_setValue($bo_pg_sfmTransactionAndDesigner.txt_sfmTransactionId, "");
 		_setValue($bo_pg_sfmTransactionAndDesigner.txt_sfmTransactionId, $sfmName);
+		_setValue($bo_pg_sfmTransactionAndDesigner.txt_name, "");
+		_setValue($bo_pg_sfmTransactionAndDesigner.txt_name, $sfmName);
 		_click($bo_pg_sfmTransactionAndDesigner.btn_screenDesigner);
 		_wait(15000);
 		_setSelected($bo_pg_sfmTransactionAndDesigner.sel_sfmTemplate,
@@ -134,7 +137,9 @@ var $sfm_act_SFM = new function sfm_act_SFM() {
 	 */	
 	this.partsMultiAdd = function($multiAdd){
 		_click(_f("main").s_richtext("Parts"));
-		_setValue(_f("main").s_textinput(0).rightOf(_f("main").uiftetextfield("Allow Multi Add Using")), $multiAdd);
+		_setValue(_f("main").s_textinput(0).rightOf(_f("main").uiftetextfield("Allow Multi Add Using")), "");
+		_setValue(_f("main").s_textinput(0).rightOf(_f("main").uiftetextfield("Allow Multi Add Using")), "Select");
+		_click(_f("main").s_label("--None--"));
 		_click(_f("main").s_button("Save[3]"));
 		_wait(3000, _isVisible(_f("main").label("Page saved")));		
 	};

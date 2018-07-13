@@ -39,5 +39,6 @@ _setSpeed($g_stepSpeed);
 	_assertExists($sfmrdz_pg_trnListView.btn_heading_lastEditedCol);
 	
 	$sfmrdz_act_common.launchHomeWindow($homecurrentHomePageULR);
-	$bo_act_login.logOut();
+	//$bo_act_login.logOut();
+	
 $SFMDZ_150.end();
