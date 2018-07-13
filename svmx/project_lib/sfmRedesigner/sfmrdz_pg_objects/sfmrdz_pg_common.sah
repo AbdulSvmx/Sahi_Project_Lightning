@@ -31,6 +31,8 @@ var $sfmrdz_pg_common=new function sfmrdz_pg_common(){
 	//icons
 	this.btn_lockIcon=_div("Standard SFM Transactions: Cannot be Edited");
 	this.btn_completedIcon=_div("Completed");
+	
+	//move to trn Page
 	this.btn_createManageChildLine=_div("To create and manage child lines");
 	this.btn_sourceToTarget=_div("To create Source to Target records");
 	this.btn_createMapChildLine=_div("To create and map child lines only");

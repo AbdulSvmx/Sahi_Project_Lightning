@@ -1,0 +1,33 @@
+/**
+ * Author	: Anand Kakhandaki
+ * Reviewer	: 
+ * 
+ */
+
+var $SFMDZ_156=_testcase("$SFMDZ-156","Launch Transaction List View - Using URL");
+$SFMDZ_156.start();
+_setSpeed($g_stepSpeed);
+	
+	/**
+	 * Global Variable declaration
+	 */
+
+	var $url="http://test.salesforce.com";
+	var $un="designer2@test.com";
+	var $pwd="designer@2";
+	var $viewName="transaction";
+	
+	/**
+	 * Login to the Sandbox Org and launching Transaction list view
+	 */
+	
+	$bo_act_login.login($url, $un, $pwd);
+
+	var $homecurrentHomePageULR =$sfmrdz_act_common.LaunchListViewWindow($viewName);
+	
+	$sfmrdz_act_common.typePicklist("To create and manage child lines");
+	
+	var $retVal=$sfmrdz_act_common.sortLastEditedCol("TRANSACTION NAME");
+	
+	
+	$SFMDZ_156.end();
