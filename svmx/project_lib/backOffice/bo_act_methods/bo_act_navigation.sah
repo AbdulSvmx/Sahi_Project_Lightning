@@ -449,7 +449,6 @@ var $bo_act_navigation = new function bo_act_navigation() {
         	 return timeStamp;
 
         		  };
-<<<<<<< HEAD
         this.navigateServicemaxSetUpInLightening=function(){
         	_click($bo_pg_home.button_allLinks);
         	_setValue($bo_pg_home.txtbox_findAnApp,"servicemax SetUp");
@@ -460,7 +459,6 @@ var $bo_act_navigation = new function bo_act_navigation() {
         }
         };	
         
-=======
         this.addSfmDesignerPermissionToUser = function($userName,$groupProfile){
         //This function adds the SFM Designer launching permission to the given user in the given group profile.
         	_click(_listItem($groupProfile));
@@ -473,5 +471,4 @@ var $bo_act_navigation = new function bo_act_navigation() {
         	
         	
         };
->>>>>>> 34f198bfe86e71febadc042c6a2ba886deb87920
 };

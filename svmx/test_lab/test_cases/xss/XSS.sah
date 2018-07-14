@@ -10,7 +10,7 @@ $bo_act_login.login("https://login.salesforce.com", "yadav.thyagaraj@ge.com","Sv
 
 var $urlCount = 0;
 var int = 0;
-
+var $url ;
 runScan();
 pritnStatus();
 
@@ -76,19 +76,19 @@ function runScan() {
 			_enableDefaultErrorLogging();
 			
 			captureAttack();
-			_setStrictVisibilityCheck(true);
+		
 			killWindow();
 			// Initial check
 			captureAttack();
 			outerNewPageActions();
-			innerNewPageActions()
+			innerNewPageActions();
 			attackTextbox();
 			attackTextArea();
 			attackSelection();
 			attackSelectionEditable();
 			postPageActions();
 			killWindow();
-
+			captureAttack();
 			_wait(3000);
 
 		}
@@ -101,59 +101,31 @@ function outerNewPageActions() {
 	$buttonArray = [ "/New/", "/Add/", "/edit-icon/" ];
 
 	$buttonArray.forEach(function newPageActions($buttonName, $index) {
-		_log("Outer Page Acting on Button : "+$buttonName);
+		_log("Outer Page Action on Button : "+$buttonName);
+		_setStrictVisibilityCheck(true);
+
+		captureAttack();
 		//This is 1st set of if-else
 		if (_isVisible(_button($buttonName))) {
 			_click(_button($buttonName));
-			captureAttack();
 		}
 
 		else if (_isVisible(_span($buttonName))) {
 			_click(_span($buttonName));
-			captureAttack();
 		}
 
 		else if (_isVisible(_link($buttonName))) {
 			_click(_link($buttonName));
-			captureAttack();
 		}
 
 		else if (_isVisible(_image($buttonName))) {
 			_click(_image($buttonName));
-			captureAttack();
 		}
 
 		
-		//After selecting a profile new set of buttons will appear
-		if (_isVisible(_textbox("/Select a profile/"))) {
-			_click(_textbox("/Select a profile/"));
-			_click(_listItem("/Default/"));
-			captureAttack();
-		}else{
-			//do nothing
-		}
-
-		//This is 2nd set of if-else
-		 if (_isVisible(_button($buttonName))) {
-			_click(_button($buttonName));
-			captureAttack();
-		}
-
-		else if (_isVisible(_span($buttonName))) {
-			_click(_span($buttonName));
-			captureAttack();
-		}
-
-		else if (_isVisible(_link($buttonName))) {
-			_click(_link($buttonName));
-			captureAttack();
-		}
-
-		else if (_isVisible(_image($buttonName))) {
-			_click(_image($buttonName));
-			captureAttack();
-		}
+	
 		_setStrictVisibilityCheck(false);
+		captureAttack();
 	})
 
 }
@@ -162,39 +134,37 @@ function innerNewPageActions() {
 	$buttonArray = [ "/New/", "/Add/", "/edit-icon/" ];
 
 	$buttonArray.forEach(function newPageActions($buttonName, $index) {
-		_log("Inner Page Acting on Button : "+$buttonName);
-		
+		_log("Inner Page Action on Button : "+$buttonName);
+		captureAttack();
+		_setStrictVisibilityCheck(true);	
 		
 		//After selecting a profile new set of buttons will appear
 		if (_isVisible(_textbox("/Select a profile/"))) {
 			_click(_textbox("/Select a profile/"));
 			_click(_listItem("/Default/"));
-			captureAttack();
 		}else{
 			//do nothing
 		}
-
+		captureAttack();
+		
 		//This is 2nd set of if-else
 		 if (_isVisible(_button($buttonName))) {
 			_click(_button($buttonName));
-			captureAttack();
 		}
 
 		else if (_isVisible(_span($buttonName))) {
 			_click(_span($buttonName));
-			captureAttack();
 		}
 
 		else if (_isVisible(_link($buttonName))) {
 			_click(_link($buttonName));
-			captureAttack();
 		}
 
 		else if (_isVisible(_image($buttonName))) {
 			_click(_image($buttonName));
-			captureAttack();
 		}
 		_setStrictVisibilityCheck(false);
+		captureAttack();
 	})
 
 }
@@ -205,51 +175,30 @@ function postPageActions() {
 	                 "svmx-tool-close" ];
 
 	$buttonArray.forEach(function newPageActions($buttonName, $index) {
-		_log("Acting on Button : "+$buttonName);
+		captureAttack();
+		_log("Post Page Action on Button : "+$buttonName);
 		_setStrictVisibilityCheck(true);
 		if (_isVisible(_span($buttonName))) {
 			_click(_span($buttonName));
 
-			captureAttack();
-		}
-
-		else if (_isVisible(_span($buttonName))) {
-			_click(_span($buttonName));
-
-			captureAttack();
 		}
 
 		else if (_isVisible(_button($buttonName))) {
 			_click(_button($buttonName));
 
-			captureAttack();
-		}
-
-		else if (_isVisible(_button($buttonName))) {
-			_click(_button($buttonName));
-
-			captureAttack();
 		}
 
 		else if (_isVisible(_link($buttonName))) {
 			_click(_link($buttonName));
 
-			captureAttack();
-		} else if (_isVisible(_span($buttonName))) {
-			_click(_span($buttonName));
-
-			captureAttack();
-		}
-
+		} 
 		else if (_isVisible(_image($buttonName))) {
 			_click(_image($buttonName));
-
-			captureAttack();
 
 		}
 		_setStrictVisibilityCheck(false);
 
-	}
+		captureAttack();	}
 
 	)
 
@@ -271,13 +220,15 @@ function killWindow() {
 }
 
 function captureAttack() {
+	_enableDefaultErrorLogging();
+
 	_log("************************************");
 	var $allAlerts = _lastAlert(true);
 	if ($allAlerts == null || $allAlerts == "") {
-		//_log("SCANNED PAGE : [ " + $urlArray[int] + " ] No Alerts Caught")
+		_log("SCANNED PAGE : [ " + $url  + " ] No Alerts Caught","CUSTOM2")
 	} else {
 
-		var $logStr = " | SCANNED PAGE : [ " + $urlArray[int]
+		var $logStr = " | SCANNED PAGE : [ " + $url 
 		+ " ] Alerts Caught : " + $allAlerts;
 		_log($logStr, "FAILURE")
 		_logOutput($logStr);
@@ -290,6 +241,7 @@ function captureAttack() {
 	}
 	_log("************************************");
 	killWindow();
+	_disableDefaultErrorLogging();
 
 }
 
@@ -353,7 +305,7 @@ function attackSelectionEditable() {
 	for (var $i = 0; $i < $cell.length; $i++) {
 
 		
-			if (_isVisible($select[$i])) {
+			if (_isVisible($cell[$i])) {
 				_disableDefaultErrorLogging();
 				_maskLogs();
 				_doubleClick($cell[$i]);
