@@ -1,6 +1,6 @@
 _setSpeed(100);
 //Pass the Attack Values
-var $attackTag = "<img  src=p onerror=alert(123)>";
+var $attackTag = "<img  src=p onerror=alert(ಆಕ್ರಮಣ)>";
 var $attackTagSelectionField = "/img src=p/"
 //	Pass the URl/Page Locations
 var $urlArray = $excel.readFromCustomExcel("../xss/xss_excelData/xssData.xlsx","Sheet1", false, true)
@@ -11,18 +11,19 @@ $bo_act_login.login("https://login.salesforce.com", "yadav.thyagaraj@ge.com","Sv
 var $urlCount = 0;
 var int = 0;
 var $url ;
+//Create a table for output report
+_logOutput("<style> table, th, td { border: 1px solid black;}</style>  <tr><td>URL Scanned </td>      <td>Attacks Caught </td>          <td>Count </td></tr> ");
+
 runScan();
 pritnStatus();
 
-function pritnStatus() {
-	_logOutput(" | URL Scanned : " + $urlCount + 1 + " Of Total : "
-			+ $urlArray.length);
-}
+_logOutput("URL Scanned " + $urlCount + 1 + " Of Total : "+ $urlArray.length);
+
 
 function runScan() {
 
 	for (int = 0; int < $urlArray.length; int++) {
-
+		
 		$urlCount = int;
 		$url = $urlArray[int]["URL"];
 		_log("SCANNED PAGE : [ " + $url + " ]");
@@ -220,28 +221,37 @@ function killWindow() {
 }
 
 function captureAttack() {
-	_enableDefaultErrorLogging();
 
+	_enableDefaultErrorLogging();
 	_log("************************************");
 	var $allAlerts = _lastAlert(true);
 	if ($allAlerts == null || $allAlerts == "") {
-		_log("SCANNED PAGE : [ " + $url  + " ] No Alerts Caught","CUSTOM2")
+		_log("SCANNED PAGE : [ " + $url  + " ] No Alerts Caught","CUSTOM5");
+
 	} else {
 
 		var $logStr = " | SCANNED PAGE : [ " + $url 
 		+ " ] Alerts Caught : " + $allAlerts;
 		_log($logStr, "FAILURE")
-		_logOutput($logStr);
+		//_logOutput($logStr);
+		_selectWindow();
 		_lockWindow();
 		_focusWindow();
 		_takePageScreenShot();
 		_unlockWindow();
-		_clearLastAlert();
+		pritnStatus($allAlerts);
 
 	}
 	_log("************************************");
+	_clearLastAlert();
 	killWindow();
 	_disableDefaultErrorLogging();
+
+}
+
+
+function pritnStatus($allertVal) {
+	_logOutput("<tr> <td><b>"+$url+"</b></td>  <td>"+$allertVal+" </td> <td>"+$urlCount+" </td> </tr>");
 
 }
 
