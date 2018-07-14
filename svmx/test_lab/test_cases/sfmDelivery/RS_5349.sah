@@ -162,6 +162,8 @@ if(_isVisible($sfm_pg_sfmDesigner.txt_dvrMultipleConfirmation)){
 	if ( (_isVisible(_div("/"+"Expenses: "+$ruleDescription3+"/"))) &&
 		(_isVisible(_div("/"+"Travel: "+$ruleDescription4+"/"))) ){
 				_log("Pass ::: "+$ruleDescription3 +" and "+$ruleDescription4);
+	}else{
+		_log("Fail ::: DVR-Error Expenses/Travel is not working ");
 	}
 }else{
 		_log("Fail ::: DVR-Error Expenses/Travel is not working ");
