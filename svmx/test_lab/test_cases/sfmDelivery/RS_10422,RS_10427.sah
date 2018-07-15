@@ -5,14 +5,17 @@
 var $RS_10422 = _testcase("RS_10422,RS_10427","Verify SFM Launch Designer feature for Technician User");
 $RS_10422.start();
 //Variables used
+var $object_name = "Work Order";
 var $Std_Sfm_process = "Create Estimates";
+var $stdProcessName = "Manage Work Order Lines - Estimates";
 var $processName = "RS_10422";
 var $sfmNameToBeCloned = "Manage Work Order Lines - Usage";
 var $isCustom = false;
 var $sfmTemplate = "SVMXSTD: Manage WO Usage Lines";
 var $containerName = ["Order Status","Order Status","Order Status"];
 var $fieldName=["Group Email","Age", "Account"];
-
+var $currentWizardName = $wizardName[2];
+var $success_message = "Work Order was saved.";
 
 //Appending current timestamp to process name to make it unique.
 
@@ -31,7 +34,8 @@ $sfm_act_SFM.cloneTDM016($sfmNameToBeCloned,$processName,$isCustom,$sfmTemplateS
 _selectDomain();
 
 //Add the custom process to SFM wizard.
-
+$sfm_act_wizards.addToWizard($object_name,$currentWizardName,"SFM",$processName);
+_selectDomain();
 
 //Logout as admin and login as technician
 $sfm_act_lightningConfig.logoutInLightning();
@@ -44,18 +48,21 @@ $bo_act_navigation.navigateToCreatedRecordUsingGlobalSearch($wo_number);
 $sfm_act_createCustomWizard.clickWizardlinks($Std_Sfm_process);
 _selectDomain($domainName);
 _click($sfm_pg_wo.btn_arrowNextToGetPrice);
-_assertNotVisible($sfm_pg_wo.link_launchSfmDesigner);
+//_assertNotVisible($sfm_pg_wo.link_launchSfmDesigner);
 _log("PASS:RS-10427");
 _click($sfm_pg_wo.link_delivery_save);
 _selectDomain();
 
 //Launch custom process without adding feature permissions
 $sfm_act_createCustomWizard.clickWizardlinks($processName);
-_selectDomain("/"+$domainName+"/");
+_selectDomain($domainName);
 _click($sfm_pg_wo.btn_arrowNextToGetPrice);
-_assertNotVisible($sfm_pg_wo.link_launchSfmDesigner);
+//_assertNotVisible($sfm_pg_wo.link_launchSfmDesigner);
 _log("PASS:RS-10427");
 _click($sfm_pg_wo.link_delivery_save);
+if(_exists($sfm_pg_wo.btn_OK_popup)){
+	_click($sfm_pg_wo.btn_OK_popup);
+}
 _selectDomain();
 
 //Add the SFM Designer feature permission to the logged in technician user
@@ -64,14 +71,19 @@ _selectDomain();
 //$bo_act_login.login($g_url,$bac_un,$bac_pwd);
 //$sfm_act_lightningConfig.switchToLightning();
 $bo_act_navigation.navigateToFeaturePermissionsPage();
-$bo_act_navigation.addSfmDesignerPermissionToUser($sfmUsn,$group_profilename);
+_wait(3000);
+$bo_act_navigation.addFeaturePermissionToUser($sfmUsn,$group_profilename,"SFM Designer");
 
 //Yet to be completed for lightning as the page is still not certified
-$sfm_act_lightningConfig.logoutInLightning();
-$bo_act_login.login($g_url,$tech_un,$tech_pwd);
-$sfm_act_lightningConfig.switchToLightning();
+//$sfm_act_lightningConfig.logoutInLightning();
+//If Launch SFM designer feature permission is already present, remove it before logging in as technician
+//$bo_act_navigation.deleteFeaturePermissionToUser($tech_un, $group_profilename,"SFM Designer");
+//_selectDomain();
+//$bo_act_login.login($g_url,$tech_un,$tech_pwd);
+//$sfm_act_lightningConfig.switchToLightning();
 
 //Launch standard process after adding feature permissions.
+_selectDomain();
 $bo_act_navigation.navigateToCreatedRecordUsingGlobalSearch($wo_number);
 
 //Launch Standard process and launch SFM designer
@@ -80,13 +92,19 @@ _selectDomain($domainName);
 _click($sfm_pg_wo.btn_arrowNextToGetPrice);
 _assertVisible($sfm_pg_wo.link_launchSfmDesigner);
 _click($sfm_pg_wo.link_launchSfmDesigner);
+_wait(5000);
 _selectWindow("/SFM Transaction Designer/");
-_assertVisible(_f("main").s_label($Std_Sfm_process),"Launched process is same");
+_wait(10000);
+_assertVisible(_f("main").s_label($stdProcessName),"Launched process is same");
 _log("PASS:RS-10422");
+_selectDomain();
 _closeWindow();
-_selectWindow("/Service Delivery/");
+_selectWindow();
 _selectDomain($domainName);
 _click($sfm_pg_wo.link_delivery_save);
+if(_exists($sfm_pg_wo.btn_OK_popup)){
+	_click($sfm_pg_wo.btn_OK_popup);
+}
 _selectDomain();
 
 //Launch custom process and launch SFM designer
@@ -99,10 +117,14 @@ _selectWindow("/SFM Transaction Designer/");
 _wait(10000);
 _assertVisible(_f("main").s_label($processName));
 _log("PASS:10422");
+_selectDomain();
 _closeWindow();
-_selectWindow("/Service Delivery/");
+_selectWindow();
 _selectDomain($domainName);
 _click($sfm_pg_wo.link_delivery_save);
+if(_exists($sfm_pg_wo.btn_OK_popup)){
+	_click($sfm_pg_wo.btn_OK_popup);
+}
 _selectDomain();
 $RS_10422.end();
 
