@@ -210,11 +210,11 @@ function postPageActions() {
 
 function killWindow() {
 	_selectWindow();
-	var $recentWindowId = _getRecentWindow().windowTitle;
-	_log("Recent Windows : "+$recentWindowId);
-	if (_windowExists($recentWindowId) == true && $recentWindowId !="promos" ) {
+	var $recWin = _getRecentWindow().windowTitle;
+	_log("Recent Windows : "+$recWin);
+	if (_windowExists($recWin,3) == true && $recWin !="promos" ) {
 		try{
-			_selectWindow($recentWindowId);
+			_selectWindow(""+$recWin);
 			_closeWindow();
 		}catch(e){}
 	}
@@ -236,10 +236,10 @@ function captureAttack() {
 		var $logStr = " <br>  SCANNED PAGE : [ " + $url + " ] Location = "+$t+" : REFER SCREENSHOTS : Alerts Caught : " + $allAlerts+"</br> ";
 		_log($logStr, "FAILURE");
 		_logExceptionAsFailure($logStr);
-		_lockWindow();
-		_focusWindow();
-		_takePageScreenShot();
-		_unlockWindow();
+//		_lockWindow();
+//		_focusWindow();
+//		_takePageScreenShot();
+//		_unlockWindow();
 		_logOutput($logStr);
 		_clearLastAlert();
 
