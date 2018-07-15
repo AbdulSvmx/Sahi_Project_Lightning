@@ -3,37 +3,32 @@ _setSpeed(100);
 var $attackTag = "<img  src=p onerror=alert(123)>";
 var $attackTagSelectionField = "/img src=p/"
 //	Pass the URl/Page Locations
-	var $urlArray = $excel.readFromCustomExcel("../xss/xss_excelData/xssData.xlsx",
-			"Sheet1", false, true)
-//			var $urlArray =
-//			["https://svmxc.na40.visual.force.com/apex/SVMXC__SPM_configuration"];
-			$bo_act_login.login("https://login.salesforce.com", "yadav.thyagaraj@ge.com",
-			"Svmx123#")
+var $urlArray = $excel.readFromCustomExcel("../xss/xss_excelData/xssData.xlsx","Sheet1", false, true)
+//var $urlArray =["https://svmxc.na40.visual.force.com/apex/SVMXC__SPM_configuration"];
+$bo_act_login.login("https://login.salesforce.com", "yadav.thyagaraj@ge.com","Svmx123#")
 
-			var $urlCount = 0;
+var $urlCount = 0;
 var int = 0;
-_disableInfoLogging();
-runScan();
-pritnStatus();
+var $url ;
+var $t;
+//Create a table for output report
 
-function pritnStatus() {
-	_logOutput(" | URL Scanned : " + $urlCount + " Of Total : "
-			+ $urlArray.length);
-}
+runScan();
+
+_logOutput("URL Scanned " + $urlCount + 1 + " Of Total : "+ $urlArray.length);
+
 
 function runScan() {
 
 	for (int = 0; int < $urlArray.length; int++) {
-
+		
 		$urlCount = int;
 		$url = $urlArray[int]["URL"];
+		_log("SCANNED PAGE : [ " + $url + " ]");
 		_navigateTo($url);
 		_call(top.location.reload(true));
 		_wait(2000);
 		_continueOnError();
-
-		var $test = _testcase("SCANNED NO : [" + int + "]", $url);
-		$test.start();
 
 		captureAttack();
 
@@ -41,7 +36,7 @@ function runScan() {
 		// for
 		// each page
 		_selectWindow();
-		if (_isVisible(_span("/svmx-tab/"))) {
+		if (_exists(_span("/svmx-tab/"))) {
 			var $tabbing = _collect("_span", "/svmx-tab/");
 
 		} else {
@@ -53,7 +48,7 @@ function runScan() {
 		// To avoid Tabbing in non tabbed pages
 		if ($tabbing.length == 0) {
 			var $tabs = 1;
-			var skipFlag = 1;	
+			var skipFlag = 1;
 		} else {
 			var $tabs = $tabbing.length;
 			var skipFlag = 0;
@@ -62,249 +57,270 @@ function runScan() {
 		// Select a Tab
 		for (var $s = 0; $s < $tabs; $s++) {
 			_setStrictVisibilityCheck(true);
-
-			try {
+			
+		
+				_disableDefaultErrorLogging();
+				_maskLogs();
 				if (skipFlag != 1) {
-					// Getting the names or iDS so use _span
-					if (_isVisible($tabbing[$s])) {
+					if (_exists($tabbing[$s])) {
+						try{
+						$t = _getText($tabbing[$s]);
 						_click($tabbing[$s]);
+						
+						captureAttack( $t);
+						_log("in TAB ******************* " + $t + "****");
+						}catch(e){}
 					}
-					_log("in TAB ******************* " + $t + "****");
+					
 				}
-			} catch (e) {
+			
+			_unmaskLogs();
+			_enableDefaultErrorLogging();
 
-			}
-
-			_setStrictVisibilityCheck(false);
-			killWindow();
 			// Initial check
 			captureAttack();
-			_setStrictVisibilityCheck(true);
-			if (_isVisible(_button("/New/"))) {
-				_click(_button("/New/"));
-				_setStrictVisibilityCheck(false);
-				captureAttack();
-			}
+				outerNewPageActions();
+			captureAttack();
+				innerNewPageActions();
+			captureAttack();
+				attackTextbox();
+				attackTextArea();
+				attackSelection();
+				attackSelectionEditable();
+				postPageActions();
+			captureAttack();
 
-			_setStrictVisibilityCheck(true);
-			if (_isVisible(_span("New"))) {
-				_click(_span("New"));
-				_setStrictVisibilityCheck(false);
-				captureAttack();
-			}
+		}
 
-			_setStrictVisibilityCheck(true);
-			if (_isVisible(_span("Add New"))) {
-				_click(_span("Add New"));
-				_setStrictVisibilityCheck(false);
-				captureAttack();
-			}
+	}
 
-			_setStrictVisibilityCheck(true);
-			if (_isVisible(_span("Add"))) {
-				_click(_span("Add"));
-				_setStrictVisibilityCheck(false);
-				captureAttack();
-			}
-			_setStrictVisibilityCheck(true);
-			if (_isVisible(_button("/Add/"))) {
-				_click(_button("/Add/"));
-				_setStrictVisibilityCheck(false);
-				captureAttack();
-			}
-			if (_isVisible(_textbox("Select a profile:"))) {
-				_click(_textbox("Select a profile:"));
-				_click(_listItem("Default Group Profile"));
-				captureAttack();
-			}
+}
 
-			_setStrictVisibilityCheck(true);
-			if (_isVisible(_span("Add"))) {
-				_click(_span("Add"));
-				_setStrictVisibilityCheck(false);
-				captureAttack();
-			}
+function outerNewPageActions() {
+	$buttonArray = [ "/New/", "/Add/", "/edit-icon/" ];
 
-			_setStrictVisibilityCheck(true);
-			if (_isVisible(_span("Add"))) {
-				_click(_span("Add"));
-				_setStrictVisibilityCheck(false);
-				captureAttack();
-			}
-			
-			_setStrictVisibilityCheck(true);
-			if (_isVisible(_image("/edit-icon/"))) {
-				_click(_image("/edit-icon/"));
-				_setStrictVisibilityCheck(false);
-				captureAttack();
-			}
-			
+	$buttonArray.forEach(function newPageActions($buttonName, $index) {
+		_log("Outer Page Action on Button : "+$buttonName);
+		_setStrictVisibilityCheck(true);
+try{
+		captureAttack();
+		//This is 1st set of if-else
+		if (_exists(_button($buttonName))) {
+			_click(_button($buttonName));
+		}
 
-			attackTextbox();
-			attackTextArea();
-			attackSelection();
-			attackSelectionEditable();
-			killWindow();
-			
-			if (_isVisible(_image("svmx-tool-close"))) {
-				_click(_image("svmx-tool-close"));
-				captureAttack();
+		else if (_exists(_span($buttonName))) {
+			_click(_span($buttonName));
+		}
 
-			}
+		else if (_exists(_link($buttonName))) {
+			_click(_link($buttonName));
+		}
 
-			if (_isVisible(_span("Save"))) {
-				_click(_span("Save"));
-				captureAttack();
-			}
+		else if (_exists(_image($buttonName))) {
+			_click(_image($buttonName));
+		}
+}catch(e){}
 
-			if (_isVisible(_button("Quick Save"))) {
-				_click(_button("Quick Save"));
-				captureAttack();
-			}
+		
+	
+		_setStrictVisibilityCheck(false);
 
-			if (_isVisible(_button("Save"))) {
-				_click(_button("Save"));
-				captureAttack();
-			}
+	});
+	captureAttack();
+}
 
-			if (_isVisible(_span("OK"))) {
-				_click(_span("OK"));
-				captureAttack();
-			}
-			
-			if (_isVisible(_span("Update"))) {
-				_click(_span("Update"));
-				captureAttack();
-			}
-			
-			if (_isVisible(_span("Cancel"))) {
-				_click(_span("Cancel"));
-				captureAttack();
-			}
-			
-			killWindow();
+function innerNewPageActions() {
+	$buttonArray = [ "/New/", "/Add/", "/edit-icon/" ];
 
-			_wait(3000);
+	$buttonArray.forEach(function newPageActions($buttonName, $index) {
+		_log("Inner Page Action on Button : "+$buttonName);
+	
+		_setStrictVisibilityCheck(true);	
+	try{	
+		//After selecting a profile new set of buttons will appear
+		if (_exists(_textbox("/Select a profile/"))) {
+			_click(_textbox("/Select a profile/"));
+			_click(_listItem("/Default/"));
+		}else{
+			//do nothing
+		}
+		
+		
+		//This is 2nd set of if-else
+		 if (_exists(_button($buttonName))) {
+			_click(_button($buttonName));
+		}
+
+		else if (_exists(_span($buttonName))) {
+			_click(_span($buttonName));
+		}
+
+		else if (_exists(_link($buttonName))) {
+			_click(_link($buttonName));
+		}
+
+		else if (_exists(_image($buttonName))) {
+			_click(_image($buttonName));
+		}
+	}catch(e){}
+
+		_setStrictVisibilityCheck(false);
+		
+	});
+	captureAttack();
+}
+
+function postPageActions() {
+
+	$buttonArray = [ "/Update/", "/Save/", "Quick Save", "OK", "Ok",
+	                 "svmx-tool-close" ];
+
+	$buttonArray.forEach(function newPageActions($buttonName, $index) {
+		try{
+		_log("Post Page Action on Button : "+$buttonName);
+		_setStrictVisibilityCheck(true);
+		if (_exists(_span($buttonName))) {
+			_click(_span($buttonName));
+
+		}
+
+		else if (_exists(_button($buttonName))) {
+			_click(_button($buttonName));
+
+		}
+
+		else if (_exists(_link($buttonName))) {
+			_click(_link($buttonName));
+
+		} 
+		else if (_exists(_image($buttonName))) {
+			_click(_image($buttonName));
 
 		}
 		
-		$test.end();
-	}
+		}catch(e){}
 
-	
+		_setStrictVisibilityCheck(false);
+
+			});
+	captureAttack();
+
 }
 
 function killWindow() {
-
-	var $recentWindowId = _getRecentWindow().sahiWinId;
-	if (_windowExists($recentWindowId, 10)) {
-		try {
-			_selectWindow($recentWindowId);
+	_selectWindow();
+	var $recWin = _getRecentWindow().windowTitle;
+	var $winExists = _windowExists($recWin,500);
+	_log("Recent Windows : "+$recWin+" Win Exits = "+$winExists);
+	
+	if ($winExists) {
+		try{
+			_selectWindow(""+$recWin);
 			_closeWindow();
-		} catch (e) {
-		}
+		}catch(e){}
 	}
-
+	
 	_selectWindow();
 	_focusWindow();
 
 }
 
 function captureAttack() {
+	
 	_log("************************************");
 	var $allAlerts = _lastAlert(true);
 	if ($allAlerts == null || $allAlerts == "") {
-		_log("SCANNED PAGE : [ " + $urlArray[int] + " ] No Alerts Caught")
+		_log("SCANNED PAGE : [ " + $url  + " ] No Alerts Caught","CUSTOM2");
+
 	} else {
 
-		_lockWindow();
-		_focusWindow();
-		_takePageScreenShot();
-		_unlockWindow();
-		_clearLastAlert();
-		var $logStr = " | SCANNED PAGE : [ " + $urlArray[int]
-		+ " ] Alerts Caught : " + $allAlerts;
-		_log($logStr,"FAILURE")
+		var $logStr = " <br>  SCANNED PAGE : [ " + $url + " ] Location = "+$t+" : REFER SCREENSHOTS : Alerts Caught : " + $allAlerts+"</br> ";
+		_log($logStr, "FAILURE");
+		_logExceptionAsFailure($logStr);
+//		_lockWindow();
+//		_focusWindow();
+//		_takePageScreenShot();
+//		_unlockWindow();
 		_logOutput($logStr);
-		//_logExceptionAsFailure($logStr);
+		_clearLastAlert();
 
 	}
 	_log("************************************");
+	
+	killWindow();
 
 }
 
+
+
 function attackTextbox() {
+	_selectWindow();
+
 	var $textboxes = _collect("_textbox", "/svmx-textfield||svmx-form-text/");
 	_log("Collected $textboxes = " + $textboxes.length);
 	// Iterate and set values on all textboxes and also textcombo/selection
 	// boxes
 	for (var $i = 0; $i < $textboxes.length; $i++) {
-
-		try {
+try{
+	
 			_disableDefaultErrorLogging();
 			_maskLogs();
 			_setValue($textboxes[$i], $attackTag);
 			_unmaskLogs();
 			_enableDefaultErrorLogging();
-			
 
-		} catch (e) {
-			_enableDefaultErrorLogging();
-
-		}
-		captureAttack();
+	
 		// For Selection/ComboBox
-		try {
-			if (_isVisible(_listItem($attackTag))) {
+		
+			if (_exists(_listItem($attackTag))) {
 				_disableDefaultErrorLogging();
 				_maskLogs();
 				_click(_listItem($attackTag));
 				_unmaskLogs();
 				_enableDefaultErrorLogging();
-				
+
 			}
-
-		} catch (e) {
-			_enableDefaultErrorLogging();
-
-		}
-		captureAttack();
+}catch(e){}
+	
 
 	}
+
 }
 
 function attackTextArea() {
+	_selectWindow();
+
 	var $textarea = _collect("_textarea", "/.*/");
 	_log("Collected $textarea = " + $textarea.length);
 
 	// Iterate and set values on all text areas
 	for (var $i = 0; $i < $textarea.length; $i++) {
-
-		try {
+try{
+		
 			_disableDefaultErrorLogging();
 			_maskLogs();
 			_setValue($textarea[$i], $attackTag);
 			_unmaskLogs();
 			_enableDefaultErrorLogging();
-			
 
-		} catch (e) {
-			_enableDefaultErrorLogging();
-
-		}
-		captureAttack();
+	}catch(e){}
+		
 	}
+
 }
 
 function attackSelectionEditable() {
+	_selectWindow();
+
 	var $cell = _collect("_cell", "/x-grid-cell/");
 	_log("Collected $cell = " + $cell.length);
 
 	// Iterate and set values on all editable selections
 	for (var $i = 0; $i < $cell.length; $i++) {
-
-		try {
-			if (_isVisible($select[$i])) {
+try{
+		
+			if (_exists($cell[$i])) {
 				_disableDefaultErrorLogging();
 				_maskLogs();
 				_doubleClick($cell[$i]);
@@ -313,24 +329,24 @@ function attackSelectionEditable() {
 				_enableDefaultErrorLogging();
 
 			}
-
-		} catch (e) {
-			_enableDefaultErrorLogging();
-}
-		captureAttack();
+}catch(e){}
+	
 	}
+
 }
 
 function attackSelection() {
+	_selectWindow();
+
 	var $select = _collect("_select", "/.*/");
 	_log("Collected $select = " + $select.length);
 
 	// Iterate and set values on all editable selections
 	for (var $i = 0; $i < $select.length; $i++) {
+try{
+		
 
-		try {
-
-			if (_isVisible($select[$i])) {
+			if (_exists($select[$i])) {
 				_disableDefaultErrorLogging();
 				_maskLogs();
 				_setSelected($select[$i], $attackTagSelectionField);
@@ -338,11 +354,7 @@ function attackSelection() {
 				_enableDefaultErrorLogging();
 			}
 
-		} catch (e) {
-			_enableDefaultErrorLogging();
-
-		}
-		captureAttack();
+}catch(e){}
 	}
-}
 
+}
