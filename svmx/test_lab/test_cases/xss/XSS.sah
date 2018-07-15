@@ -211,8 +211,10 @@ function postPageActions() {
 function killWindow() {
 	_selectWindow();
 	var $recWin = _getRecentWindow().windowTitle;
-	_log("Recent Windows : "+$recWin);
-	if (_windowExists($recWin,3000) == true && $recWin !="promos" ) {
+	var $winExists = _windowExists($recWin,5000);
+	_log("Recent Windows : "+$recWin+" Win Exits = "+$winExists);
+	
+	if ($winExists) {
 		try{
 			_selectWindow(""+$recWin);
 			_closeWindow();
