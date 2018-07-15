@@ -211,7 +211,7 @@ function postPageActions() {
 function killWindow() {
 	_selectWindow();
 	var $recWin = _getRecentWindow().windowTitle;
-	var $winExists = _windowExists($recWin,1000);
+	var $winExists = _windowExists($recWin,500);
 	_log("Recent Windows : "+$recWin+" Win Exits = "+$winExists);
 	
 	if ($winExists) {
