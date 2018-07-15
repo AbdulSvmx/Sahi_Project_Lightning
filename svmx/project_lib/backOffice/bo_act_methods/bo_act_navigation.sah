@@ -449,13 +449,7 @@ var $bo_act_navigation = new function bo_act_navigation() {
         	 return timeStamp;
 
         		  };
-<<<<<<< HEAD
-        this.addFeaturePermissionToUser = function($userName,$groupProfile,$designerType){
-        //This function adds the given feature permission to the given user in the given group profile.
-        //If the feature permission is already added, then the function skips doing that.
-        //Note: $designerType should either be "SFM Designer" or "Checklist Designer" (Case sensitive)
-        	 _click($bo_pg_servicemaxSetup.btn_dropDownForGrpProfile);
-=======
+
         this.navigateServicemaxSetUpInLightening=function(){
         	_click($bo_pg_home.button_allLinks);
         	_setValue($bo_pg_home.txtbox_findAnApp,"servicemax SetUp");
@@ -468,7 +462,6 @@ var $bo_act_navigation = new function bo_act_navigation() {
         
         this.addSfmDesignerPermissionToUser = function($userName,$groupProfile){
         //This function adds the SFM Designer launching permission to the given user in the given group profile.
->>>>>>> 29395836efe7218b1c8ec0e0d5b01d337cdfa543
         	_click(_listItem($groupProfile));
         	_setValue($bo_pg_servicemaxSetup.txt_featurePermissionSearch,$userName);
         	_click($bo_pg_servicemaxSetup.btn_featurePermissionUserSearch);
@@ -483,6 +476,7 @@ var $bo_act_navigation = new function bo_act_navigation() {
         	
         	
         };
+        
         this.deleteFeaturePermissionToUser = function($userName,$groupProfile,$designerType){
             //This function removes the specified feature permission to the given user in the given group profile.
             //If the feature permission is already not present, then the function skips doing that.
