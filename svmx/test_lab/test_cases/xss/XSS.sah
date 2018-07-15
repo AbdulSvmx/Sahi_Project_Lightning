@@ -212,7 +212,7 @@ function killWindow() {
 	_selectWindow();
 	var $recWin = _getRecentWindow().windowTitle;
 	_log("Recent Windows : "+$recWin);
-	if (_windowExists($recWin,3) == true && $recWin !="promos" ) {
+	if (_windowExists($recWin,3000) == true && $recWin !="promos" ) {
 		try{
 			_selectWindow(""+$recWin);
 			_closeWindow();
