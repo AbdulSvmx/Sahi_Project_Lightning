@@ -24,12 +24,10 @@ var $fieldName =["City","Actual Initial Response"];
 var $fieldName1="Actual Initial Response";
 var $wizardObject ="Work Order";
 var $messageType="Error";
-var $wizardObject ="Work Order";
-//var $woName="WO-00000472";
-
 
 _setSpeed($g_stepSpeed);
 $bo_act_login.login($g_url, $sfmUsn, $sfmPwd);
+$sfm_act_lightningConfig.switchToLightning();
 
 
 $sfm_act_SFM.cloneTDM016($sfmNameToBeCloned, $sfmName, $isCustom, $sfmTemplateSaveAsName,$sfmTemplate, $fieldName, $containerName);
@@ -49,22 +47,20 @@ _selectDomain($domainName);
 _wait(8000,_div($sfmName));
 
 
-_setValue(_textbox("City:"),"M");
-_click(_span("svmx-btn-icon svmx-sfmd-current-datetime-icon"));
+_setValue($sfm_pg_sfmDesigner.txt_city,"M");
+//_click(_span("svmx-btn-icon svmx-sfmd-current-datetime-icon"));
 var $pastDate=$bo_act_common.getPastDate("1", "/");
-_setValue(_textbox("svmx-date-1038-inputEl"), $pastDate);
-
-if(_exists($sfm_pg_sfmDesigner.txt_priceAlert)){
-	_click($sfm_pg_sfmDesigner.btn_priceAlertOk);
-}
-else{
+_setValue($sfm_pg_sfmDesigner.txt_acutalIntialResponse, $pastDate);
 	_click($sfm_pg_sfmDesigner.btn_deliveryQuickSave);
-}
 
 if(_isVisible("/"+_div($ruleDescription+"/"))){
 	_log("Pass ::: DVR on header is working");
 }else{
 	_log("Fail ::: DVR on header is not working");
+}
+
+if(_exists($sfm_pg_sfmDesigner.txt_priceAlert)){
+	_click($sfm_pg_sfmDesigner.btn_priceAlertOk);
 }
  
 $rs_5353.end();
