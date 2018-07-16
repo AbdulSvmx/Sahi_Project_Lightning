@@ -98,11 +98,7 @@ _selectWindow();
 	_selectDomain();
 	//test from here.
 	var $wo_number = $sfm_act_createCustomWizard.createWowithdateliterals();
-	var $result = $sfm_act_lightningConfig.checkIfWizardLinkExists($processName);
-	if (!$result){
-		$sfm_act_wizards.addToWizard("Work Order",$currentWizardName,"SFM",$processName);
-	}
-    _selectDomain();
+	_selectDomain();
 	//Launch SFM delivery
 
 	$bo_act_navigation.navigateToCreatedRecordUsingGlobalSearch($wo_number);
@@ -118,8 +114,9 @@ _selectWindow();
 		_selectDomain($domainName);
 		var $actual_list = [];
 		//Verify the count of values first
-		_wait(2000);
+		_wait(4000);
         _click(_div("/sfm-picklist/",_rightOf(_div($dependent_picklist))));
+        _wait(1000);
 		var $no_of_values = _count("_listItem", "/.*/", _under(_div($dependent_picklist)));
 		
 		for($ctr = 1;$ctr < $no_of_values;$ctr++ ){
@@ -162,7 +159,9 @@ var $actual_list = [];
 for(var $z=0;$z<$ctrl_unique_values.length;$z++){
 	_click(_div("/sfm-picklist/",_rightOf(_div($wo_picklist))));
 	_click(_listItem($ctrl_unique_values[$z]));
+	_wait(1000);
 	_click(_div("/sfm-picklist/",_rightOf(_div($dependent_picklist))));
+	_wait(1000);
 	var $x = _count("_listItem","/.*/");
 	//_log($x);
 	var $i = 0;

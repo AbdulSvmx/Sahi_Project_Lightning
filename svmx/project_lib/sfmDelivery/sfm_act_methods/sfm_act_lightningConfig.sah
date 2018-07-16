@@ -104,6 +104,7 @@ this.logoutInLightning = function() {
 	//Added by JJ
 	//This function logs out of Salesforce in Lightning experience
 	_click($sfm_pg_wo.link_profileImageRightCorner);
+	_wait(1000);
 	_click($sfm_pg_wo.link_lightningLogout);
 	
 };

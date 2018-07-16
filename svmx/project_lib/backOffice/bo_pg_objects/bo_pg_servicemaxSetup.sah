@@ -63,6 +63,7 @@ var $bo_pg_servicemaxSetup = new function bo_pg_servicemaxSetup(){
 	this.btn_featurePermissions = _div("Feature Permission");
 	this.txt_featurePermissionSearch = _textbox("/searchtextfield/");
 	this.btn_featurePermissionUserSearch = _span("Search");
+	this.btn_dropDownForGrpProfile = _div("/svmx-trigger/",_rightOf(_label("Profile:")));
 	
 				
 };
