@@ -12,13 +12,7 @@ var $sfm_pg_sfmDesigner = new function sfm_pg_sfmDesigner() {
 	this.btn_deliveryHelp = _div("/toolEl/", _near(_link("Quick Save")));//Changed for Lightning
 	this.btn_deliveryClearCache = _span("Clear ServiceMax Cache");//Changed for Lightning
 	this.btn_deliveryDropdown = _span("/btnWrap/",_rightOf(_span("Get Price")));//Changed for Lightning
-	this.btn_deliveryQuickSave = _span("Quick Save",_rightOf(_span("Save")));//updated for lightning
-	this.btn_deliverySave = _span("Save",_leftOf(_span("Quick Save")));//updated for lightning
-	this.btn_deliveryCancel = _span("Cancel",_rightOf(_span("Quick Save")));//updated for lightning
-	this.btn_deliveryGetPrice = _span("Get Price",_rightOf(_span("Cancel")));//updated for lightning
-	this.btn_deliveryUserSettings = _span("User Settings",_leftOf(_span("Help")));//updated for lightning
-	this.btn_deliveryHelp = _span("Help",_leftOf(_span("Clear ServiceMax Cache")));//updated for lightning
-	this.btn_deliveryClearCache = _span("Clear ServiceMax Cache",_rightOf(_span("Help")));//updated for lightning
+	
 	
 	
 	//SFM Delivery page objects
