@@ -72,6 +72,8 @@ var $sfm_pg_sfmDesigner = new function sfm_pg_sfmDesigner() {
 	this.txt_scheduledDate = _textbox(0,_near(_label("Scheduled Date"))); // added for lightning
 	this.txt_actualOnsiteResponse = _textbox(0,_near(_span("Actual Onsite Response"))); // added for lightning
 	this.txt_component = _textbox(0,_near(_span("Component"))); // added for lightning
+	this.txt_city = _textbox("City",_near(_span("City")));
+	this.txt_acutalIntialResponse = _textbox(0,_near(_span("Actual Initial Response"))) ;
 	
 	
 };
