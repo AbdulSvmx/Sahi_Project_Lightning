@@ -53,10 +53,12 @@ var $bo_act_WebServices=new function bo_act_WebServices(){
 			_setValue($bo_pg_manageWOLineUsageForSorting.txt_searchItem,$subTypePart);
 			_doubleClick($bo_pg_manageWOLineUsageForSorting.lbl_dateReceived);
 			_wait(3000);
+			
 			_click($bo_pg_manageWOLineUsageForSorting.sel_grpExpenses);
 			_click($bo_pg_manageWOLineUsageForSorting.txt_searchItem);
 			_setValue($bo_pg_manageWOLineUsageForSorting.txt_searchItem,$subTypeActivityType);
 			_doubleClick($bo_pg_manageWOLineUsageForSorting.lbl_activityType);
+			//_doubleClick($bo_pg_manageWOLineUsageForSorting.lbl_activityType);
 			_wait(3000);
 			_click($bo_pg_manageWOLineUsageForSorting.sel_grpExpenses);
 			_click($bo_pg_manageWOLineUsageForSorting.txt_searchItem);
@@ -261,7 +263,7 @@ var $bo_act_WebServices=new function bo_act_WebServices(){
 						_log("Entered Zip is matching with On Exit Zip");
 					}
 					
-				}
+				};
 					this.verifyOnChangeForChildField=function($enteredMinOC,$enteredOTOC,$enteredZipOC){
 					_click(_span("Expense"));
 					_click(_span("svmx-btn-icon svmx-sfmd-add-line-icon[1]"));
@@ -283,7 +285,7 @@ var $bo_act_WebServices=new function bo_act_WebServices(){
 						_log("Entered Zip is matching with On Change Zip after child field is updated");
 					}
 					
-				}
+				};
 					this.verifyOnExitForChildField=function($enteredMinOC,$enteredOTOC,$enteredZipOC){
 					_click(_span("Expense"));
 					_click(_span("svmx-btn-icon svmx-sfmd-add-line-icon[1]"));
