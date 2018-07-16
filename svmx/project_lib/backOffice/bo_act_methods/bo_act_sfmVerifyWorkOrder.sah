@@ -28,7 +28,8 @@ this.verifyWizardOnWOObj=function(){
 	//_wait(2000);
 	_click($bo_pg_sfmVerifyWorkOrder.link_workOrder);
 	_wait(10000);
-	_click($bo_pg_sfmVerifyWorkOrder.lnk_firstLinkWO);
+	_click($bo_pg_sfmVerifyWorkOrder.btn_newWO);
+	_click($bo_pg_sfmVerifyWorkOrder.btn_newWOSave);
 };
 	
 	this.wizardButtonVerification=function($wizardname){			

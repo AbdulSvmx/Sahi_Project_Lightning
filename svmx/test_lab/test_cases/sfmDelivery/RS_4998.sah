@@ -27,9 +27,9 @@
 	var $d_pwdBase="welcome-03";
 	var $wizardButtonName=$sfmName;
 	var $enteredMinOC=30;
-	var $enteredOTOC="Depot Repair-Tr";
+	var $enteredOTOC="Depot Repair";
 	var $enteredZipOC=560064;
-	var $onChangeValue="Extended Warranty-Tr";
+	var $onChangeValue="Field Service";
 
 		
 	$bo_act_login.login($g_url, $sfmUsn, $sfmPwd);
@@ -45,7 +45,7 @@ $bo_act_WebServices.enableOnChange();
 
 $bo_act_WebServices.saveAndClose();
 _click($bo_pg_home.link_backToSetUpHome);
-//*******Nagigate to SFM Wizard and Create Wizard and Add Above Transaction to it**********
+//*******Navigate to SFM Wizard and Create Wizard and Add Above Transaction to it**********
 $bo_act_navigation.navigateToSfmWizard();
 $bo_act_SFW.createWizardGeneralInfo($objName,$wizardname,$wizardID);
 $bo_act_SFW.createWizardStep($fieldActnType,$actnName,$executionMode);
@@ -57,9 +57,13 @@ $bo_act_sfmVerifyWorkOrder.clkOnWizard($wizardButtonName);
 _wait(30000);
 $bo_act_WebServices.verifyOnChange($enteredMinOC,$enteredOTOC,$enteredZipOC,$onChangeValue);
 //********Deleting test Data***************
+/*
+$bo_act_navigation.navigateServicemaxSetUpInLightening();
 $bo_act_SFW.deleteWizards($objName,$wizardID);
 _wait(3000);
+$bo_act_navigation.navigateServicemaxSetUpInLightening();
 $bo_act_navigation.navigateToSfmTransactionDesigner();
 $bo_act_SFM.deleteSFM($sfmName);
+*/
 _setSpeed($g_stepSpeed);
 $RS_4998.end();

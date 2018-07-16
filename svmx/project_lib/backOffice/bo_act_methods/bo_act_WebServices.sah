@@ -217,16 +217,18 @@ var $bo_act_WebServices=new function bo_act_WebServices(){
 			if( $isEntitlementPrf='false'){
 			_log("Is Entitlement Perform is matching with BeforeSaveUpdate Value");
 }*/
-	}
+	};
 				
 				this.verifyOnChange=function($enteredMinOC,$enteredOTOC,$enteredZipOC,$onChangeValue){
-					_setValue(_textbox("Order Type:"),"");
-					_setValue(_textbox("Order Type:"),"Ex");
+					_click(_textbox("/sfm-picklist/"));
+					//_click(_listItem("Depot Repair"));
 					_click(_listItem($onChangeValue));
-					_click(_span("Work Order"));
-					var $drMin=_getText(_textbox("Driving Time (in Minutes):"));
-					var $orderTy=_getText(_textbox("Order Type:"));
-					var $zip=_getText(_textbox("Zip:"));
+					//_click(_span("Work Order"));
+					_wait(6000);
+					var $drMin=_getText(_textbox("/sfm-number/"));
+					
+					var $orderTy=_getText(_textbox("/sfm-picklist/"));
+					var $zip=_getText(_textbox("/sfm-text/"));
 					//var $isEntitlementPrfOL=_getText(_checkbox("x-form-cb-input"));
 
 					if ( $enteredMinOC== $drMin){
