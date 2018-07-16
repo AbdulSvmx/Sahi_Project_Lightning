@@ -1,13 +1,13 @@
 //@author Lakshmisha
-var $rs_5353 = _testcase("RS_5353","");
-$rs_5353.start();
+var $rs_10488 = _testcase("RS_10488","");
+$rs_10488.start();
 /**
 * Cloning TDM016/Manage Work Order Lines - Usage process and adding fields to screen
 */
 
 
 var $sfmNameToBeCloned = "Manage Work Order Lines - Usage";
-var $sfmName = $bo_act_common.generateRandomName("RS_5353_");
+var $sfmName = $bo_act_common.generateRandomName("RS_10488_");
 var $isCustom = false;
 var $sfmTemplate = "SVMXSTD: Manage WO Usage Lines";
 var $sfmTemplateSaveAsName = $sfmName;
@@ -46,24 +46,33 @@ _click(_span($sfmName));
 _selectDomain($domainName);
 _wait(8000,_div($sfmName));
 
-
+// check whether DVR gets triggered or not when condition is met
 _setValue($sfm_pg_sfmDesigner.txt_city,"M");
 //_click(_span("svmx-btn-icon svmx-sfmd-current-datetime-icon"));
 var $pastDate=$bo_act_common.getPastDate("1", "/");
 _setValue($sfm_pg_sfmDesigner.txt_acutalIntialResponse, $pastDate);
 	_click($sfm_pg_sfmDesigner.btn_deliveryQuickSave);
 
-if(_isVisible("/"+_div($ruleDescription+"/"))){
+if(_isVisible(_div("/"+$ruleDescription+"/"))){
 	_log("Pass ::: DVR on header is working");
 }else{
 	_log("Fail ::: DVR on header is not working");
 }
 
+
+//check whether DVR gets triggered or not when condition is  not met
+_setValue($sfm_pg_sfmDesigner.txt_acutalIntialResponse, $bo_act_common.currentDate("/"));
+_click($sfm_pg_sfmDesigner.btn_deliveryQuickSave);
+if(_isVisible(_div("/"+$ruleDescription+"/"))){
+	_log("Fail ::: DVR on header is triggered when not supposed to be");
+}else{
+	_log("Pass ::: DVR on header is working as expected");
+}
 if(_exists($sfm_pg_sfmDesigner.txt_priceAlert)){
 	_click($sfm_pg_sfmDesigner.btn_priceAlertOk);
 }
  
-$rs_5353.end();
+$rs_10488.end();
  
 
 
