@@ -59,6 +59,7 @@ var $sfm_pg_wo = new function sfm_pg_wo() {
 	this.link_wo_object = _link("/Work Order/");
 	this.ordertype_dependency = _tableHeader("Order Type",_under(_tableHeader("Dependent Field")));
 	this.delete_link_picklist = _link("Del",_leftOf(_tableHeader("Order Type")));
+	this.delete_link_costCategory = _link("Del",_leftOf(_tableHeader("Cost Category")));
 	this.picklist_controller = _select("controller");
 	this.picklist_dependent = _select("dependent");
 	this.btn_continue = _submit("Continue");
@@ -68,10 +69,16 @@ var $sfm_pg_wo = new function sfm_pg_wo() {
 	this.link_profileImageRightCorner = _div("/user-profile/");
 	this.link_lightningLogout = _link("Log Out");
 	
-//Added by JJ for SFM Delivery components
+//Added by JJ for SFM Delivery components . All are Lightning ready.
 	this.link_delivery_save = _link("Save");
     this.btn_arrowNextToGetPrice = _span("/btnWrap/",_rightOf(_div("Quick SaveGet Price")));
     this.link_launchSfmDesigner = _span("Launch SFM Designer");
+    this.btn_newButtonForWorkDetail = _link("New",_near(_heading2("/Work Details/")));
+    this.btn_nextForWorkDetailRecordType = _button("Next",_in(_div("modal-footer slds-modal__footer")));
+    this.link_relatedListsTab = _span("Related");
+    this.link_lineTypeArrow = _link(0,_near(_span("Line Type")));
+    this.link_viewAllWorkDetails = _span("View AllWork Details");
+    this.btn_editActivityType = _button("Edit Activity Type");
 
 	
 	this.openAppLauncher = function(){
@@ -97,6 +104,7 @@ var $sfm_pg_wo = new function sfm_pg_wo() {
 		_click(_link($tabName));
 //		_log("I am Here");
 	};
-	
 };
+		
+
 //		_log("I am Here");};
