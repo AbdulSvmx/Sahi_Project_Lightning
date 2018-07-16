@@ -7,10 +7,8 @@ var $urlToLaunch="http://www.google.com/search";
 var $paramName="q";
 var $paramValueType="Value";
 var $paramValue="Servicemax";
-var $wizardName = "SFM Delivery Auto";
-var $wizardType="Others";
 var $woName;
-var $domainName = "/visual.force.com/";
+
 
 
 
@@ -20,7 +18,7 @@ $bo_act_login.login($g_url, $sfmUsn, $sfmPwd);
 $sfm_act_lightningConfig.switchToLightning();
 $sfm_act_navigation.navigateToSfmCustomActions();
 $sfm_act_customActions.urlCustomAction($customActionObject,$actionType, $actionId, $urlToLaunch, $paramName, $paramValueType, $paramValue);
-$sfm_act_wizards.addToWizard($customActionObject, $wizardName, $wizardType, $actionId);
+$sfm_act_wizards.addToWizard($customActionObject, $wizardName[1], $wizardType[3], $actionId);
 
 //Create WO through UI for the validatiion
 _selectDomain();
