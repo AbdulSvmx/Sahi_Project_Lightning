@@ -45,7 +45,7 @@ var $bo_act_navigation = new function bo_act_navigation() {
      * @returns boolean
      * Changes made for Lightning
      */this.navigateToSfmTransactionDesigner = function() {
-    	 this.navigateToSvmxSetup();
+    	 //this.navigateToSvmxSetup();
 	 _selectDomain("/svmx/");
 	_click($bo_pg_servicemaxSetup.btn_serviceFlowManager);
 	_click($bo_pg_servicemaxSetup.btn_sfmTransactionAndDocsDesigner);

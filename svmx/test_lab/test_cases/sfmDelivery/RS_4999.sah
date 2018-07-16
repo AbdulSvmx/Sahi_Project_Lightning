@@ -1,20 +1,3 @@
-_click(_div("Setup"));
-_click(_span("/Setup/"));
-_selectWindow("Home | Salesforce");
-_setValue(_searchbox("Quick Find"), "apex classes");
-_click(_mark("Apex Classe"));
-_wait(10000);
-_selectWindow();
-
-_selectDomain("/my.salesforce.com/");
-_click(_span("O"));
-if(_isVisible(_link("objWebService"))){
-_click(_link("objWebService"));}
-else
-{
-_click(_submit("New"));
-_setValue(_textarea("textarea"), "sdd");
-}
 
 /*
  
@@ -129,11 +112,6 @@ global objWebService(){}
  
  */
 
-
-
-
-
-
 //Author:Mamata RS-4999
 	var $RS_4999 = _testcase("RS_4999", "Field level:Webservice Header Field test On Exit");
 	$RS_4999.start();
@@ -145,7 +123,7 @@ global objWebService(){}
 	var $sfmTemplateSaveAsName=$bo_act_common.generateRandomName("4999Temp9");
 
 	var $objName="Work Order";
-	var $wizardname=$bo_act_common.generateRandomName("4999Wizard");
+	var $wizardname="SFM Delivery Auto";
 	var $wizardID= $wizardname;
 	var $executionMode="Interactive";
 	var $fieldActnType="SFM";
@@ -162,24 +140,24 @@ global objWebService(){}
 	var $d_pwdBase="welcome-03";
 	var $wizardButtonName=$sfmName;
 	var $enteredMinOE=15;
-	var $enteredOTOE="Depot Repair-Tr";
+	var $enteredOTOE="Depot Repair";
 	var $enteredZipOE=560063;
 
 
-	$bo_act_login.login($g_url,$sfmUsn,$sfmPwd);	
-	//$bo_act_login.login($d_url, $d_unBase, $d_pwdBase);
-//$bo_act_login.login($g_url, $bac_un, $bac_pwd);
+	$bo_act_login.login($g_url, $sfmUsn, $sfmPwd);
+	$sfm_act_lightningConfig.switchToLightning();
+	$bo_act_navigation.navigateServicemaxSetUpInLightening();
 
-//*****Navgate to SFm Designer and create clone of Manage WO Line Usage Services transaction********
+//*****Navigate to SFm Designer and create clone of Manage WO Line Usage Services transaction********
 $bo_act_navigation.navigateToSfmTransactionDesigner();
+_wait(20000);
 $bo_act_WebServices.createSFmForWebServices($sfmToBeCloned, $sfmName,$subTypePart,$subTypeActivityType,$subTypeExpenses,$subTypeTravel,$sfmTemplateSaveAsName);
 $bo_act_WebServices.enableOnExit();
 
 $bo_act_WebServices.saveAndClose();
+_click($bo_pg_home.link_backToSetUpHome);
 //*******Nagigate to SFM Wizard and Create Wizard and Add Above Transaction to it**********
-$bo_act_navigation.navigateToSfmWizard();
-$bo_act_SFW.createWizardGeneralInfo($objName,$wizardname,$wizardID);
-$bo_act_SFW.createWizardStep($fieldActnType,$actnName,$executionMode);
+$sfm_act_wizards.addToWizard($objName, $wizardname, $fieldActnType, $actnName);
 
 //******Launch the SFM in delivery for WO object**************
 
@@ -189,9 +167,9 @@ _wait(30000);
 $bo_act_WebServices.verifyOnExit($enteredMinOE,$enteredOTOE,$enteredZipOE);
 
 //********Deleting test Data***************
-$bo_act_SFW.deleteWizards($objName,$wizardID);
-_wait(3000);
-$bo_act_navigation.navigateToSfmTransactionDesigner();
-$bo_act_SFM.deleteSFM($sfmName);
+//$bo_act_SFW.deleteWizards($objName,$wizardID);
+//_wait(3000);
+//$bo_act_navigation.navigateToSfmTransactionDesigner();
+//$bo_act_SFM.deleteSFM($sfmName);
 _setSpeed($g_stepSpeed);
 $RS_4999.end();
