@@ -138,7 +138,8 @@ this.createWorkDetailInLightning = function($recordType,$lineType){
 	_click($sfm_pg_wo.btn_wo_edit_save);
 	_wait(1000);
 	_assertVisible(_span("Work Detail was created."));
-	$lineNumber = _getText(_link("/WL-/"));
+	_click($sfm_pg_wo.link_workDetailAfterCreation);
+	$lineNumber = _getText(_heading1("/WL-/"));
 	return $lineNumber;
 };
 

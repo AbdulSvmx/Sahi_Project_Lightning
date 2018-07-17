@@ -10,6 +10,7 @@ var $ctrl_unique_values = ["Repair","Installation"];
 var $ctrl_picklist_values = ["Repair","Repair","Repair","Installation"];
 var $dep_picklist_values = ["Straight","On Call","Double Time","Double Time"];
 var $sfmTemplate = "SVMXSTD: Manage WO Usage Lines";
+var $isCustom = false;
 var $ctr = 0;
 var $i = 0;
 var $fields_array = [];
@@ -17,8 +18,9 @@ $fields_array.push($dependentPicklist);
 var $currentWizardName = $wizardName[2];
 var $success_message = "Work Order was saved.";
 var $containerName = ["Order Status","Order Status","Order Status","Labor"];
-var $fieldName=["Group Email","Age", "Account","Activity Type"];
+var $fieldName=["Group Email","Age", "Account","Cost Category"];
 var $lineType = "Labor";
+var $z = 0;
 
 //Appending current timestamp to process name to make it unique.
 var $timeStamp = $bo_act_navigation.getCurrentTimeStamp();
@@ -65,63 +67,93 @@ _closeWindow();
 _selectWindow();
 
 //Clone standard process and add the dependent picklist in the screen designer
-$sfm_act_SFM.cloneTDM016($sfmNameToBeCloned,$processName,"false",$pageLayoutName, $sfmTemplate, $fieldName, $containerName);
+$sfm_act_SFM.cloneTDM016($sfmNameToBeCloned,$processName,$isCustom,$pageLayoutName, $sfmTemplate, $fieldName, $containerName);
+_click($bo_pg_sfmTransactionAndDesigner.btn_quickSave1);
 _selectDomain();
 
 //Add the custom process to SFM wizard.
-$sfm_act_wizards.addToWizard($object_name,$currentWizardName,"SFM",$processName);
+$sfm_act_wizards.addToWizard("Work Order",$currentWizardName,"SFM",$processName);
 _selectDomain();
 
 //Create Work order and then Work detail to select Activity type.
 var $wo_number = $sfm_act_createCustomWizard.createWowithdateliterals();
-var $wlNumber = $sfm_act_lightningConfig.createWorkDetailInLightning("Estimate",$lineType);
-
+var $wlNumber = $sfm_act_lightningConfig.createWorkDetailInLightning("Usage",$lineType);
+$bo_act_navigation.navigateToCreatedRecordUsingGlobalSearch($wo_number);
 //Select Activity Type and check the SFM delivery.
-for($i = 0;$i<$ctrl_unique_values.length;$i++){
-	_click(_link($wo_number));
+for($z = 0;$z<$ctrl_unique_values.length;$z++){
 	_click($sfm_pg_wo.link_relatedListsTab);
 	_click($sfm_pg_wo.link_viewAllWorkDetails);
 	_click(_link("/"+$wlNumber+"/"));
 	_click($sfm_pg_wo.btn_editActivityType);
 	_setStrictVisibilityCheck(true);
 	_click(_link(0,_near(_span("/Activity Type/")),_in(_div("/forcePageBlockSectionEdit/"))));
-	_click(_link($ctrl_unique_values[$i]));
+	_click(_link($ctrl_unique_values[$z]));
 	_click($sfm_pg_wo.btn_wo_save);
 	_setStrictVisibilityCheck(false);
 	_click(_link($wo_number));
 	$sfm_act_createCustomWizard.clickWizardlinks($processName);
-	_wait(3000);
+	_wait(6000);
+	_selectDomain($domainName);
 	_click(_span($lineType));
-	
+	_click($sfm_pg_wo.link_arrowToEditChildLine);
+	_click($sfm_pg_wo.link_editChildLineItem);
+	_setStrictVisibilityCheck(true);
+	var $actual_list = [];
+	_click(_div("/trigger-picker/",_in(_div("/"+$dependentPicklist+"/",_in(_div("/sfm-window/"))))));
+	var $x = _count("_listItem","/.*/");
+		_log($x);
+		var $i = 0;
+		
+		for($i=0;$i<$x;$i++){
+			if(_condition(_isVisible(_listItem($i)))){
+				$actual_list.push(_getText(_listItem($i)));
+			}
+		}
+	//Removing the None option from the array.
+		var $index = $actual_list.indexOf("--None--");
+		$actual_list.splice($index,1);
+	_log($actual_list);
+	 $i = 0;$j = 0;
+	 for ($j=0;$j<$ctrl_picklist_values.length;$j++) {
+	 	if($ctrl_picklist_values[$j] === $ctrl_unique_values[$z]) {
+	 		$i = $i+1;
+	 		$expected_list.push($dep_picklist_values[$j]);
+	 	}
+	 }
+	 _assertEqualArrays($expected_list, $actual_list,"Dependent picklist values are as expected for child line when controlling picklist is not present in screen designer");
+	_click($sfm_pg_wo.btn_cancelForSfmDelivery);
+	_click($sfm_pg_wo.btn_proceedForCancel);
+	_setStrictVisibilityCheck(false);
+	_selectDomain();
+	_click($sfm_pg_wo.link_relatedListsTab);
 	
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 $RS_10425.end();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

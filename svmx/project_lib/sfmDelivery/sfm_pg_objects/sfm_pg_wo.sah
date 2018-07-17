@@ -79,7 +79,12 @@ var $sfm_pg_wo = new function sfm_pg_wo() {
     this.link_lineTypeArrow = _link(0,_near(_span("Line Type")));
     this.link_viewAllWorkDetails = _span("View AllWork Details");
     this.btn_editActivityType = _button("Edit Activity Type");
-
+    this.link_arrowToEditChildLine = _div("/x-action-col-icon x-action-/");
+    this.link_editChildLineItem = _span("Edit");
+    this.btn_cancelForSfmDelivery = _link("/Cancel/");
+    this.btn_proceedForCancel = _span("Proceed");
+    this.link_workDetailAfterCreation = _div("Work Detail");
+    
 	
 	this.openAppLauncher = function(){
 		if(_isVisible(_submit("App Launcher"))){
