@@ -1,10 +1,19 @@
 /**
  * Author	: Anand Kakhandaki
  * Reviewer	: 
- * 
+ * Pre-req	: Nothing
+ * Testcase	: $SFMDZ-156: Last Edited Column Sorting.
+ * Steps	: 
+ 				1) Login to test org and Click on last Edited column
+ 				
+ * Expt Res	:
+ 				1) verify it's sorted in numerical order.
+ 
+
+			
  */
 
-var $SFMDZ_156=_testcase("$SFMDZ-156","Launch Transaction List View - Using URL");
+var $SFMDZ_156=_testcase("$SFMDZ-156","Last Edited Column Sorting");
 $SFMDZ_156.start();
 _setSpeed($g_stepSpeed);
 	
@@ -22,13 +31,28 @@ _setSpeed($g_stepSpeed);
 	 */
 	
 	$bo_act_login.login($url, $un, $pwd);
-
 	var $homecurrentHomePageULR =$sfmrdz_act_common.LaunchListViewWindow($viewName);
 	
 	$sfmrdz_act_common.typePicklist("To create Source to Target records");
+	
+	//checking Last Edited Column in ascending Order
+	var $sortOrder="ascending";
 	_click($sfmrdz_pg_trnListView.btn_heading_lastEditedCol);
 	_wait(10000,_isVisible($sfmrdz_pg_common.btn_actionMenu));
-	var $retVal=$sfmrdz_act_common.sortLastEditedCol("TRANSACTION NAME");
+	var $retVal=$sfmrdz_act_common.sortLastEditedCol("TRANSACTION NAME",$sortOrder);
+	_assertTrue($retVal,"Last Edited Column is not sorted in "+$sortOrder+" order");
+	
+	
+	//checking Last Edited Column in descending Order
+	var $sortOrder="descending";
+	_click($sfmrdz_pg_trnListView.btn_heading_lastEditedCol);
+	_wait(10000,_isVisible($sfmrdz_pg_common.btn_actionMenu));
+	var $retVal=$sfmrdz_act_common.sortLastEditedCol("TRANSACTION NAME",$sortOrder);
+	_assertTrue($retVal,"Last Edited Column is not sorted in "+$sortOrder+" order");
+	
+	$sfmrdz_act_common.launchHomeWindow($homecurrentHomePageULR);
+	_wait(10000,_isVisible($bo_pg_home.link_home));
+	$bo_act_login.logOut();
 	
 	
 	$SFMDZ_156.end();

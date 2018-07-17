@@ -1,7 +1,13 @@
 /**
  * Author	: Anand Kakhandaki
  * Reviewer	: 
- * 
+ * Pre-req	: Nothing
+ * Testcase	: Type Filter List-Standard Transactions: Selecting 'Standard Transactions' in Type pick list and ensure that all standrd sfm are listed.
+ * Steps	: 
+ 				1) Click on Filter Option and select filter 'Standard Transactions' 
+ * Expt Res	:
+ 				1) verify only Standard SFM Transactions are displayed. 
+				2) Verify by hovering the lock icon
  */
 
 var $SFMDZ_635=_testcase("Type Filter List-Standard Transactions","Selecting 'Standard Transactions' in Type pick list and ensure that all standrd sfm are listed");

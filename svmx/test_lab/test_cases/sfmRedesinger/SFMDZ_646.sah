@@ -1,8 +1,17 @@
 /**
  * Author	: Anand Kakhandaki
  * Reviewer	: 
- * 
+ * Pre-req	: Nothing
+ * Testcase	: Type Filter List-other Transactions: Selecting 'Other Transactions' in Type pick list and ensure that all custom sfm are listed.
+ * Steps	: 
+ 				1) Login to test Org and launch Transaction List View 
+ 				2) Click on Filter Option and select filter 'Other Transaction' 
+ * Expt Res	:
+ 				1) Transaction List View should launch successfully 
+				2) verify only Custom Transactions are displayed. 
+				Verify by hovering the lock icon - Lock Icon should not be visible
  */
+
 
 var $SFMDZ_646=_testcase("Type Filter List-other Transactions","Selecting 'Other Transactions' in Type pick list and ensure that all custom sfm are listed");
 $SFMDZ_646.start();

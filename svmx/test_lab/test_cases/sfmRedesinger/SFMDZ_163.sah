@@ -1,12 +1,19 @@
-
 /**
  * Author	: Anand Kakhandaki
  * Reviewer	: 
- * 
+ * Pre-req	: Nothing
+ * Testcase	: $SFMDZ-163: Verify Recent Search after clearing cached memory
+ * Steps	: 
+ 				1) 
+ 				
+ * Expt Res	:
+ 				1) 
+ 
+			
  */
 
-var $SFMDZ_171=_testcase("$SFMDZ_171","");
-$SFMDZ_171.start();
+var $SFMDZ_163=_testcase("$SFMDZ_163","Verify Recent Search after clearing cached memory");
+$SFMDZ_163.start();
 _setSpeed($g_stepSpeed);
 
 		/**
@@ -40,4 +47,4 @@ _setSpeed($g_stepSpeed);
 		
 	
 		
-	$SFMDZ_171.end();
+	$SFMDZ_163.end();

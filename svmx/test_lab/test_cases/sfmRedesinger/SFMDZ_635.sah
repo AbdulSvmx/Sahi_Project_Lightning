@@ -1,8 +1,24 @@
 /**
  * Author	: Anand Kakhandaki
  * Reviewer	: 
- * 
+ * Pre-req	: Nothing
+ * Testcase	: Type Filter List: Type filter list on transaction view.
+ * Steps	: 
+ 				1) Click on Filter Option and verify the list of option it displays in drop-down
+ 				2) Verify if 'Show All' filter is checked
+ * Expt Res	:
+ 				1) Filter should have following options 
+						Show All
+						Recently Used (in the last 7 days) 
+						Type-To create Source to Target records.
+						Type-To create and map child lines only.
+						Type-To create and manage child lines.
+						Standard Transactions
+						Other Transactions 
+ 				2) 'Show All' filter should be checked by default and it should have blue color tick mark
+			
  */
+
 
 var $SFMDZ_635=_testcase("Type Filter List","Type filter list on transaction view");
 $SFMDZ_635.start();
@@ -13,8 +29,8 @@ _setSpeed($g_stepSpeed);
 		 */
 		
 		var $url="http://test.salesforce.com";
-		var $un="designer2@test.com";
-		var $pwd="designer@2";
+		var $un="saadat.dz2perftest@servicemax.com";
+		var $pwd="servicemax1";
 		var $viewName="transaction";
 		
 		/**

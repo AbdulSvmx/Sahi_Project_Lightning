@@ -26,7 +26,7 @@ var $sfmrdz_pg_common=new function sfmrdz_pg_common(){
 	this.btn_lastEditMouseOverDiv=_div("PopoverBody slds-popover__body");
 	this.btn_lastModItem=_div("/Last Modified By.*/");
 	this.btn_createdDate=_div("/Created By: .*/");
-	this.btn_createdBy=_div("/Created By: Ab.*/");
+	this.btn_createdBy=_div("/Created By: .*/");
 	
 	//icons
 	this.btn_lockIcon=_div("Standard SFM Transactions: Cannot be Edited");

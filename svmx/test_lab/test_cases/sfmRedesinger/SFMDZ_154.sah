@@ -1,7 +1,14 @@
 /**
  * Author	: Anand Kakhandaki
  * Reviewer	: 
- * 
+ * Pre-req	: Nothing
+ * Testcase	: Where used colummn sort: Sorting where used column and verifying secondary sort on the name column
+ * Steps	: 
+ 				1) Login to test org and Click on where used column
+ * Expt Res	: 
+ 				1) 'i' icon come first and if null exist it should be sorted 
+ 
+			
  */
 
 var $SFMDZ_154=_testcase("Where used colummn sort","Sorting where used column and verifying secondary sort on the name column");
@@ -12,8 +19,8 @@ _setSpeed($g_stepSpeed);
 		 * Global Variable declaration
 		 */
 		var $url="http://test.salesforce.com";
-		var $un="designer2@test.com";
-		var $pwd="designer@2";
+		var $un="saadat.dz2perftest@servicemax.com";
+		var $pwd="servicemax1";
 		var $viewName="transaction";
 		
 		var $Type="To create and map child lines only";

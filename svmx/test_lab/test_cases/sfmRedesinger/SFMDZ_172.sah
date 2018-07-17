@@ -1,5 +1,18 @@
+/**
+ * Author	: Anand Kakhandaki
+ * Reviewer	: 
+ * Pre-req	: Nothing
+ * Testcase	: Search Transaction: Verify Search transaction result.
+ * Steps	: 
+ 				1) Create a SFM Transaction using SVMX_Source as Source Object and SVMX_Target as target object
+ 				2) In search column type 'Unique'
+ * Expt Res	:
+ 				1) SFM should be created successfully
+ 				2) Above created SFM should be displayed in searched result
+			
+ */
 
-var $SFMDZ_172=_testcase("Search Transaction","Search the transaction");
+var $SFMDZ_172=_testcase("Search Transaction","Verify Search transaction result");
 $SFMDZ_172.start();
 _setSpeed($g_stepSpeed);
 	
@@ -8,8 +21,8 @@ _setSpeed($g_stepSpeed);
 		 */
 		
 		var $url="http://test.salesforce.com";
-		var $un="designer2@test.com";
-		var $pwd="designer@2";
+		var $un="saadat.dz2perftest@servicemax.com";
+		var $pwd="servicemax1";
 		var $viewName="transaction";
 		
 		var $trnName="Activate Contract";
