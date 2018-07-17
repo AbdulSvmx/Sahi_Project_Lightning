@@ -6,13 +6,13 @@ var $object_name = "Work Order";
 var $wo_picklist = "Order Status";
 var $processName = "RS_10418";
 var $process_to_clone = "Manage Work Order Lines - Usage";
-var $dependent_picklist = "Order Type";
+var $dependentPicklist = "Order Type";
 var $ctrl_unique_values = ["Open","Closed"];
 var $ctrl_picklist_values = ["Open","Open","Closed"];
 var $dep_picklist_values = ["Depot Repair","Field Service","Field Service"];
 var $ctr = 0;
 var $fields_array = [];
-$fields_array.push($dependent_picklist);
+$fields_array.push($dependentPicklist);
 var $currentWizardName = $wizardName[2];
 var $success_message = "Work Order was saved.";
 //Appending current timestamp to process name to make it unique.
@@ -98,11 +98,7 @@ _selectWindow();
 	_selectDomain();
 	//test from here.
 	var $wo_number = $sfm_act_createCustomWizard.createWowithdateliterals();
-	var $result = $sfm_act_lightningConfig.checkIfWizardLinkExists($processName);
-	if (!$result){
-		$sfm_act_wizards.addToWizard("Work Order",$currentWizardName,"SFM",$processName);
-	}
-    _selectDomain();
+	_selectDomain();
 	//Launch SFM delivery
 
 	$bo_act_navigation.navigateToCreatedRecordUsingGlobalSearch($wo_number);
@@ -118,12 +114,13 @@ _selectWindow();
 		_selectDomain($domainName);
 		var $actual_list = [];
 		//Verify the count of values first
-		_wait(2000);
-        _click(_div("/sfm-picklist/",_rightOf(_div($dependent_picklist))));
-		var $no_of_values = _count("_listItem", "/.*/", _under(_div($dependent_picklist)));
+		_wait(4000);
+        _click(_div("/sfm-picklist/",_rightOf(_div($dependentPicklist))));
+        _wait(1000);
+		var $no_of_values = _count("_listItem", "/.*/", _under(_div($dependentPicklist)));
 		
 		for($ctr = 1;$ctr < $no_of_values;$ctr++ ){
-			$actual_list.push(_getText(_listItem($ctr), _under(_div($dependent_picklist))));
+			$actual_list.push(_getText(_listItem($ctr), _under(_div($dependentPicklist))));
 		}
 		var $expected_list = [];
 		//Verify the values one by one.
@@ -152,7 +149,7 @@ _click(_f("main").s_label($processName));
 _click($bo_pg_sfmTransactionAndDesigner.btn_screenDesigner);
 $fields_array = [];
 $fields_array.push($wo_picklist);
-$bo_act_navigation.editHeaderScreen($fields_array,$dependent_picklist);	
+$bo_act_navigation.editHeaderScreen($fields_array,$dependentPicklist);	
 _click($bo_pg_sfmTransactionAndDesigner.btn_finalQuickSave);
 _selectDomain();
 $bo_act_navigation.navigateToCreatedRecordUsingGlobalSearch($wo_number);
@@ -162,7 +159,9 @@ var $actual_list = [];
 for(var $z=0;$z<$ctrl_unique_values.length;$z++){
 	_click(_div("/sfm-picklist/",_rightOf(_div($wo_picklist))));
 	_click(_listItem($ctrl_unique_values[$z]));
-	_click(_div("/sfm-picklist/",_rightOf(_div($dependent_picklist))));
+	_wait(1000);
+	_click(_div("/sfm-picklist/",_rightOf(_div($dependentPicklist))));
+	_wait(1000);
 	var $x = _count("_listItem","/.*/");
 	//_log($x);
 	var $i = 0;

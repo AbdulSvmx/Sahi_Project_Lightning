@@ -226,7 +226,7 @@ var $bo_act_navigation = new function bo_act_navigation() {
       * @returns boolean
       */
  	this.navigateToSfmWizard = function() { // Changes made for Lightning
- 	 this.navigateToSvmxSetup();
+ 	 //this.navigateToSvmxSetup();
  	 _selectDomain("/svmx/");
  	_click($bo_pg_servicemaxSetup.btn_serviceFlowManager);
  	_click($bo_pg_servicemaxSetup.btn_sfmWizard);
@@ -449,13 +449,65 @@ var $bo_act_navigation = new function bo_act_navigation() {
         	 return timeStamp;
 
         		  };
+
+        this.navigateServicemaxSetUpInLightening=function(){
+        	_click($bo_pg_home.link_aapLauncher);
+        	_setValue($bo_pg_home.txtbox_findAnApp,"servicemax SetUp");
+        	if(_isVisible($bo_pg_home.link_servicemaxSetUp)){
+        		_click($bo_pg_home.link_servicemaxSetUp); 
+        	}else{ 
+        		_click($bo_pg_home.link_servicemaxSetUpHome);
+        }
+        };	
+
         this.addSfmDesignerPermissionToUser = function($userName,$groupProfile){
         //This function adds the SFM Designer launching permission to the given user in the given group profile.
         	_click(_listItem($groupProfile));
         	_setValue($bo_pg_servicemaxSetup.txt_featurePermissionSearch,$userName);
         	_click($bo_pg_servicemaxSetup.btn_featurePermissionUserSearch);
         	//Click the SFM designer checkbox. Only one search result is expected as the username is unique.
-        	_click(_div("svmx-grid-checkheader[1]"));
+        	if(!_exists(_div("/svmx-grid-checkheader-checked/",_under(_div($designerType))))){
+        		_click(_div("/svmx-grid-checkheader/",_under(_div($designerType))));
+        	}
+        	
+        	_wait(3000);
+        	//Add step to click on 'Save' button as it is not visible in Lightning experience.
+        	
+        	
+        	
+        };
+        this.deleteFeaturePermissionToUser = function($userName,$groupProfile,$designerType){
+            //This function removes the specified feature permission to the given user in the given group profile.
+            //If the feature permission is already not present, then the function skips doing that.
+            //Note: $designerType should either be "SFM Designer" or "Checklist Designer" (Case sensitive)
+            	 _click($bo_pg_servicemaxSetup.btn_dropDownForGrpProfile);
+            	_click(_listItem($groupProfile));
+            	_setValue($bo_pg_servicemaxSetup.txt_featurePermissionSearch,$userName);
+            	_click($bo_pg_servicemaxSetup.btn_featurePermissionUserSearch);
+            	//Click the SFM designer checkbox. Only one search result is expected as the username is unique.
+            	if(_exists(_div("/svmx-grid-checkheader-checked/",_under(_div($designerType))))){
+            		_click(_div("/svmx-grid-checkheader-checked/",_under(_div($designerType))));
+            	}
+            	
+            	_wait(3000);
+            	//Add step to click on 'Save' button as it is not visible in Lightning experience.
+                };
+        
+        
+          this.addFeaturePermissionToUser = function($userName,$groupProfile,$designerType){
+        //This function adds the given feature permission to the given user in the given group profile.
+        //If the feature permission is already added, then the function skips doing that.
+        //Note: $designerType should either be "SFM Designer" or "Checklist Designer" (Case sensitive)
+        	 _click($bo_pg_servicemaxSetup.btn_dropDownForGrpProfile);
+        	_click(_listItem($groupProfile));
+        	_setValue($bo_pg_servicemaxSetup.txt_featurePermissionSearch,$userName);
+        	_click($bo_pg_servicemaxSetup.btn_featurePermissionUserSearch);
+        	//Click the SFM designer checkbox. Only one search result is expected as the username is unique.
+        	if(!_exists(_div("/svmx-grid-checkheader-checked/",_under(_div($designerType))))){
+        		_click(_div("/svmx-grid-checkheader/",_under(_div($designerType))));
+        	}
+        	
+        	_wait(3000);
         	//Add step to click on 'Save' button as it is not visible in Lightning experience.
         	
         	

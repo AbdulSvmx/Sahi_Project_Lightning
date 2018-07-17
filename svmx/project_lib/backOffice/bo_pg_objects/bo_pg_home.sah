@@ -38,8 +38,16 @@ var $bo_pg_home = new function bo_pg_home(){
 	this.label_serviceMaxSFMSearch = _heading2("ServiceMax SFM Search");
 	this.link_switchToLightning = _link("Switch to Lightning Experience");
 	this.link_switchToSalesforce = _link("Switch to Salesforce Classic");
-	this.circular_image = _div("/small circular/");//Added for Lightning
+	this.circular_image = _div("/small circular/");//Added for Lightning	
+	this.txtbox_findAnApp=_textbox("Find an app or item");//Added for lightening
+	this.link_servicemaxSetUp=_mark("/ServiceMax Setup/");//added for lightening
+	this.link_servicemaxSetUpHome=_span("Servicemax SetUp Home");//added for lightening
+	this.link_backToSetUpHome=_f("main").s_label("< Back To Setup Home");
+	this.link_aapLauncher=_div("App Launcher");
 };
+
+
+
 
 
 

@@ -23,7 +23,7 @@ $sfm_act_lightningConfig.switchToLightning();
 $sfm_act_navigation.navigateToSfmCustomActions();
 //$sfm_act_customActions.webServiceCustomAction($customActionObject, $actionType, $actionId, $className, $methodName,$processingMessage,$paramName, $paramValueType, $paramValue);
 $sfm_act_customActions.webServiceCustomAction($customActionObject, $actionType, $actionId, $className, $methodName, $processingMessage, $paramName, $paramValueType, $paramValue);
-$sfm_act_wizards.addToWizard($customActionObject, $wizardName, $wizardType, $actionId);
+$sfm_act_wizards.addToWizard($customActionObject, $wizardName[1], $wizardType[3], $actionId);
 
 
 //Create WO through UI for the validatiion

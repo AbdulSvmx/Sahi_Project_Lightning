@@ -80,9 +80,16 @@ var $sfm_act_lightningConfig = new function sfm_act_lightningConfig() {
 		
 		var $header_row = _getText(_row("/"+$ctrl_picklist_name+":/"));
 		var $header_list = $header_row.split(" ");
+		var $noOfSpaces = 1;
+		var $i = 0;
+		for($i=0;$i<$ctrl_picklist_name.length;$i++){
+			if($ctrl_picklist_name.charAt($i) == " "){
+				$noOfSpaces = $noOfSpaces + 1;
+			}
+		}
 		
 		var $index = $header_list.indexOf($ctrl_picklist_value);
-		var $index = $index - 2;
+		var $index = $index - $noOfSpaces;
 		_click(_cell($dep_picklist_value+"["+$index+"]"));
 		_click($sfm_pg_wo.btn_include_values);
 	};
@@ -104,7 +111,35 @@ this.logoutInLightning = function() {
 	//Added by JJ
 	//This function logs out of Salesforce in Lightning experience
 	_click($sfm_pg_wo.link_profileImageRightCorner);
+	_wait(1000);
 	_click($sfm_pg_wo.link_lightningLogout);
 	
 };
+
+this.createWorkDetailInLightning = function($recordType,$lineType){
+	//Added by JJ
+	//This function creates a work detail record in Lightning mode
+	//This returns the Work detail Line number to the calling function
+	//Please use Record type as follows
+	//**********************************
+	//"Estimate" for "Estimate of work to be performed."
+	//"Products Serviced" for "Products Serviced".
+	//"Request" for "Request/Receipt"
+	//"Usage" for "Usage/Consumption"
+	//***********************************
+
+	var $lineNumber;
+	_click($sfm_pg_wo.link_relatedListsTab);
+	_click($sfm_pg_wo.btn_newButtonForWorkDetail);
+	_click(_span("/slds-radio--faux/",_leftOf(_span("/"+$recordType+"/",_in(_div("/modal-body scrollable/"))))));
+	_click($sfm_pg_wo.btn_nextForWorkDetailRecordType);
+	_click($sfm_pg_wo.link_lineTypeArrow);
+	_click(_link($lineType));
+	_click($sfm_pg_wo.btn_wo_edit_save);
+	_wait(1000);
+	_assertVisible(_span("Work Detail was created."));
+	$lineNumber = _getText(_link("/WL-/"));
+	return $lineNumber;
+};
+
 };
