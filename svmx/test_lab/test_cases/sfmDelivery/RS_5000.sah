@@ -149,7 +149,7 @@ global objWebService(){}
 	$bo_act_navigation.navigateServicemaxSetUpInLightening();
 
 //*****Navigate to SFm Designer and create clone of Manage WO Line Usage Services transaction********
-$bo_act_navigation.navigateToSfmTransactionDesigner();
+$bo_act_navigation.navigateToSfmTransactionDesignerForWeb();
 _wait(20000);
 $bo_act_WebServices.createSFmForWebServices($sfmToBeCloned, $sfmName,$subTypePart,$subTypeActivityType,$subTypeExpenses,$subTypeTravel,$sfmTemplateSaveAsName);
 $bo_act_WebServices.enableOnChangeForChildLabelField();
@@ -172,7 +172,7 @@ $bo_act_WebServices.verifyOnChangeForChildField($enteredMinOC,$enteredOTOC,$ente
 //*****************Deleteing testdata************
 $bo_act_SFW.deleteWizards($objName,$wizardID);
 _wait(3000);
-$bo_act_navigation.navigateToSfmTransactionDesigner();
+$bo_act_navigation.navigateToSfmTransactionDesignerForWeb();
 $bo_act_SFM.deleteSFM($sfmName);
 
 _setSpeed($g_stepSpeed);
