@@ -1,10 +1,10 @@
 var $sfm_pg_wo = new function sfm_pg_wo() {
-	this.tab_all = _div("App Launcher");//Changed for lightning 21st June 2018
+	this.tab_all = _submit("App Launcher");//_div("App Launcher");//Changed for lightning 21st June 2018
 	this.btn_wo_new = _link("New");//Changed for lightning
 	this.btn_wo_continue= _submit("Continue");
 	this.btn_woStatus = _select(0,_rightOf(_label("Order Status")));
 	this.btn_wo_save = _span("Save");//Changed for lightning
-	this.link_wo = _link("Work Orders");//Changed to hit the correct Work orders link in Lightning - JJ
+	this.link_wo = _link("/Work Orders/");//Changed to hit the correct Work orders link in Lightning - JJ
 
 //	this.btn_wo_edit = _div("Edit");//Changed for Lightning.
 //	this.txt_wo_zip = _textbox("Zip");
@@ -12,23 +12,6 @@ var $sfm_pg_wo = new function sfm_pg_wo() {
 	this.btn_wo_edit = _div("Edit");//Changed for lightning
 	this.txt_wo_zip = _textbox("/part of the/",_near(_span("/Zip/",_in(_div("modal-container slds-modal__container")))));//changed for lightning for zip textbox with in edit WO modal window
 	this.btn_wo_edit_save = _span("/Save/", _rightOf(_span("Save & New"))); // new one added for lightning for save button within editWO modal window
-
-
-
-	this.assert_wizard =function($wizTitle){
-		if(_exists(_cell($wizTitle))){
-			_log("Pass");
-		}
-		else{
-			_log("Fail");
-		}
-		
-//		_assertExists(_cell($wizTitle),"Wizard Not Present");
-	};
-	this.clickTab = function($tabName){
-		_click(_link($tabName));
-//		_log("I am Here");
-	};
 	this.label_wo = _heading1("/WO-/"); //Changed for Lightning
 	this.btn_next = _span("Next"); //Added for Lightning
 	this.lkup_account = _textbox(0,_near(_span("Account[1]")));//Added for Lightning
@@ -66,12 +49,67 @@ var $sfm_pg_wo = new function sfm_pg_wo() {
 	this.link_actualInitialResp = _link(0,_rightOf(_label("Actual Initial Response")));
 	this.txt_case = _textbox("Case");
 	this.sel_orderStatus = _select(0,_rightOf(_label("Order Status")));
+	this.sel_orderType = _link(0,_near(_span("Order Type",_in(_div("/modal-container/")))));
 	
 	//Added by JJ for Object Manager navigations in Lightning.
 	this.link_lightning_setup = _div("Setup");
+	this.link_currentapp_setup = _div("Setup for current app");
 	this.link_object_manager = _span("Object Manager");
 	this.txt_quick_find = _searchbox("globalQuickfind");
 	this.link_wo_object = _link("/Work Order/");
+	this.ordertype_dependency = _tableHeader("Order Type",_under(_tableHeader("Dependent Field")));
+	this.delete_link_picklist = _link("Del",_leftOf(_tableHeader("Order Type")));
+	this.delete_link_costCategory = _link("Del",_leftOf(_tableHeader("Cost Category")));
+	this.picklist_controller = _select("controller");
+	this.picklist_dependent = _select("dependent");
+	this.btn_continue = _submit("Continue");
+	this.btn_include_values = _button("Include Values");
+	this.btn_save_dep_picklist = _submit(" Save ");
+	this.btn_new_field_dependency = _button(0,_near(_heading3("Field Dependencies")));
+	this.link_profileImageRightCorner = _div("/user-profile/");
+	this.link_lightningLogout = _link("Log Out");
 	
+//Added by JJ for SFM Delivery components . All are Lightning ready.
+	this.link_delivery_save = _link("Save");
+    this.btn_arrowNextToGetPrice = _span("/btnWrap/",_rightOf(_div("Quick SaveGet Price")));
+    this.link_launchSfmDesigner = _span("Launch SFM Designer");
+    this.btn_newButtonForWorkDetail = _link("New",_near(_heading2("/Work Details/")));
+    this.btn_nextForWorkDetailRecordType = _button("Next",_in(_div("modal-footer slds-modal__footer")));
+    this.link_relatedListsTab = _span("Related");
+    this.link_lineTypeArrow = _link(0,_near(_span("Line Type")));
+    this.link_viewAllWorkDetails = _span("View AllWork Details");
+    this.btn_editActivityType = _button("Edit Activity Type");
+    this.link_arrowToEditChildLine = _div("/x-action-col-icon x-action-/");
+    this.link_editChildLineItem = _span("Edit");
+    this.btn_cancelForSfmDelivery = _link("/Cancel/");
+    this.btn_proceedForCancel = _span("Proceed");
+    this.link_workDetailAfterCreation = _div("Work Detail");
+    
 	
+	this.openAppLauncher = function(){
+		if(_isVisible(_submit("App Launcher"))){
+			_click(_submit("App Launcher"));
+
+		}else{
+			_click(_div("App Launcher"));
+
+		}
+	};
+	this.assert_wizard =function($wizTitle){
+		if(_exists(_cell($wizTitle))){
+			_log("Pass");
+		}
+		else{
+			_log("Fail");
+		}
+		
+//		_assertExists(_cell($wizTitle),"Wizard Not Present");
+	};
+	this.clickTab = function($tabName){
+		_click(_link($tabName));
+//		_log("I am Here");
+	};
 };
+		
+
+//		_log("I am Here");};

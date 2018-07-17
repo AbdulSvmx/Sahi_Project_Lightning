@@ -1,0 +1,43 @@
+/**
+ * Author	: Anand Kakhandaki
+ * Reviewer	: 
+ * Pre-req	: Nothing
+ * Testcase	: Where used colummn sort: Sorting where used column and verifying secondary sort on the name column
+ * Steps	: 
+ 				1) Login to test org and Click on where used column
+ * Expt Res	: 
+ 				1) 'i' icon come first and if null exist it should be sorted 
+ 
+			
+ */
+
+var $SFMDZ_154=_testcase("Where used colummn sort","Sorting where used column and verifying secondary sort on the name column");
+$SFMDZ_154.start();
+_setSpeed($g_stepSpeed);
+
+		/**
+		 * Global Variable declaration
+		 */
+		var $url="http://test.salesforce.com";
+		var $un="saadat.dz2perftest@servicemax.com";
+		var $pwd="servicemax1";
+		var $viewName="transaction";
+		
+		var $Type="To create and map child lines only";
+		/**
+		 * Login to the Sandbox Org and launching Transaction list view
+		 */
+		$bo_act_login.login($url, $un, $pwd);
+		var $homecurrentHomePageULR =$sfmrdz_act_common.LaunchListViewWindow($viewName);
+
+		$sfmrdz_act_common.typePicklist("Standard SFM Transactions");
+		_click($sfmrdz_pg_trnListView.link_stdTransaction);
+		_wait(5000,_isVisible($sfmrdz_pg_common.btn_actionMenu));
+		
+		var $retVal=$sfmrdz_act_common.secondarySort();
+		_assertTrue($retVal,"Secondary sort is not working on transaction name column");
+		
+		$sfmrdz_act_common.launchHomeWindow($homecurrentHomePageULR);
+		//$bo_act_login.logOut();
+		
+$SFMDZ_154.start();

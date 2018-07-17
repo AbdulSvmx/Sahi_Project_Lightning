@@ -64,11 +64,83 @@ var $sfm_act_lightningConfig = new function sfm_act_lightningConfig() {
 		//This function navigates to the Object Manager in Lightning and then to a given object.
 		//This is Lightning specific.
 		_click($sfm_pg_wo.link_lightning_setup);
+		_click($sfm_pg_wo.link_currentapp_setup);
+		_selectWindow("Home | Salesforce");
+		_wait(3000,isVisible($sfm_pg_wo.link_object_manager));
 		_click($sfm_pg_wo.link_object_manager);
+		_selectWindow("/Object Manager/");
 		_setValue($sfm_pg_wo.txt_quick_find,$object_name);
-		_assertVisible(_link($object_name));
 		_click(_link($object_name));
 		
 		
 	};
+	this.addDependentControllingPicklistValues = function($ctrl_picklist_name,$ctrl_picklist_value,$dep_picklist_value) {
+		//Added by JJ.
+		//This function adds a dependent picklist value to the controlling picklist value.
+		
+		var $header_row = _getText(_row("/"+$ctrl_picklist_name+":/"));
+		var $header_list = $header_row.split(" ");
+		var $noOfSpaces = 1;
+		var $i = 0;
+		for($i=0;$i<$ctrl_picklist_name.length;$i++){
+			if($ctrl_picklist_name.charAt($i) == " "){
+				$noOfSpaces = $noOfSpaces + 1;
+			}
+		}
+		
+		var $index = $header_list.indexOf($ctrl_picklist_value);
+		var $index = $index - $noOfSpaces;
+		_click(_cell($dep_picklist_value+"["+$index+"]"));
+		_click($sfm_pg_wo.btn_include_values);
+	};
+
+
+this.checkIfWizardLinkExists = function($process_name){
+	_click(_link($sfm_pg_wo.link_showmore));
+	//Check if the SFM process link exists
+	if(_exists(_span($process_name))){
+		return true;
+	}
+	else {
+		return false;
+	}
+
+};
+
+this.logoutInLightning = function() {
+	//Added by JJ
+	//This function logs out of Salesforce in Lightning experience
+	_click($sfm_pg_wo.link_profileImageRightCorner);
+	_wait(1000);
+	_click($sfm_pg_wo.link_lightningLogout);
+	
+};
+
+this.createWorkDetailInLightning = function($recordType,$lineType){
+	//Added by JJ
+	//This function creates a work detail record in Lightning mode
+	//This returns the Work detail Line number to the calling function
+	//Please use Record type as follows
+	//**********************************
+	//"Estimate" for "Estimate of work to be performed."
+	//"Products Serviced" for "Products Serviced".
+	//"Request" for "Request/Receipt"
+	//"Usage" for "Usage/Consumption"
+	//***********************************
+
+	var $lineNumber;
+	_click($sfm_pg_wo.link_relatedListsTab);
+	_click($sfm_pg_wo.btn_newButtonForWorkDetail);
+	_click(_span("/slds-radio--faux/",_leftOf(_span("/"+$recordType+"/",_in(_div("/modal-body scrollable/"))))));
+	_click($sfm_pg_wo.btn_nextForWorkDetailRecordType);
+	_click($sfm_pg_wo.link_lineTypeArrow);
+	_click(_link($lineType));
+	_click($sfm_pg_wo.btn_wo_edit_save);
+	_wait(1000);
+	_assertVisible(_span("Work Detail was created."));
+	_click($sfm_pg_wo.link_workDetailAfterCreation);
+	$lineNumber = _getText(_heading1("/WL-/"));
+	return $lineNumber;
+};
+
 };

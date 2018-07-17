@@ -1,4 +1,116 @@
 
+/*
+ 
+ //Please make sure below webservices is added in apex class with version 28 before running this testcase
+ //If you are running in base org please change SVMXDEV with SVMXC
+global class objWebService{
+
+
+
+global objWebService(){}
+    
+    webservice static SVMXDEV.SFM_WrapperDef.SFM_PageData onLoad(SVMXDEV.SFM_WrapperDef.SFM_TargetRecord sfmtargetrec){
+        SVMXDEV.SFM_ServicesDef serdev = new SVMXDEV.SFM_ServicesDef();
+        map<String,List<Sobject>> detailSobjectMap = new map<String,List<Sobject>>();
+        map<String,Schema.SObjectType> Allobj = new map<String,Schema.SObjectType>();   
+        Schema.sObjectType site1 = SVMXDEV__Service_Order__c.sObjectType;       
+        Allobj.put('SVMXDEV__Service_Order__c',site1);         
+        Sobject Header = serdev.SFM_Page_GetHeaderRecord(sfmtargetrec,Allobj);
+            
+        SVMXDEV__Service_Order__c obj = (SVMXDEV__Service_Order__c) Header ;
+           
+            obj.SVMXDEV__Driving_Time__c = 120;
+            obj.SVMXDEV__Order_Type__c = 'Depot Repair';
+            obj.SVMXDEV__Zip__c = '560066';
+            obj.SVMXDEV__Is_Entitlement_Performed__c = true;
+            
+        
+        return serdev.SFM_Page_BuildResponse(sfmtargetrec,Header,detailSobjectMap);
+    }
+    webservice static SVMXDEV.SFM_WrapperDef.SFM_PageData beforeSaveOrUpdate(SVMXDEV.SFM_WrapperDef.SFM_TargetRecord sfmtargetrec){
+        SVMXDEV.SFM_ServicesDef serdev = new SVMXDEV.SFM_ServicesDef();
+        map<String,List<Sobject>> detailSobjectMap = new map<String,List<Sobject>>();
+        map<String,Schema.SObjectType> Allobj = new map<String,Schema.SObjectType>();   
+        Schema.sObjectType site1 = SVMXDEV__Service_Order__c.sObjectType;       
+        Allobj.put('SVMXDEV__Service_Order__c',site1);         
+        Sobject Header = serdev.SFM_Page_GetHeaderRecord(sfmtargetrec,Allobj);
+            
+        SVMXDEV__Service_Order__c obj = (SVMXDEV__Service_Order__c) Header ;
+       
+       
+            obj.SVMXDEV__Driving_Time__c = 60;
+            obj.SVMXDEV__Order_Type__c = 'Field Service';
+            obj.SVMXDEV__Zip__c = '560065';
+            obj.SVMXDEV__Is_Entitlement_Performed__c = false;
+            
+        
+        return serdev.SFM_Page_BuildResponse(sfmtargetrec,Header,detailSobjectMap);
+    }
+    webservice static SVMXDEV.SFM_WrapperDef.SFM_PageData afterSaveOrUpdate(SVMXDEV.SFM_WrapperDef.SFM_TargetRecord sfmtargetrec){
+        SVMXDEV.SFM_ServicesDef serdev = new SVMXDEV.SFM_ServicesDef();
+        map<String,List<Sobject>> detailSobjectMap = new map<String,List<Sobject>>();
+        map<String,Schema.SObjectType> Allobj = new map<String,Schema.SObjectType>();   
+        Schema.sObjectType site1 = SVMXDEV__Service_Order__c.sObjectType;       
+        Allobj.put('SVMXDEV__Service_Order__c',site1);         
+        Sobject Header = serdev.SFM_Page_GetHeaderRecord(sfmtargetrec,Allobj);
+            
+        SVMXDEV__Service_Order__c obj = (SVMXDEV__Service_Order__c) Header ;
+       
+       string[] Addresses = new string[]{'shashikala.kamath@servicemax.com'};
+       Messaging.SingleEmailMessage QuoteMail = new Messaging.SingleEmailMessage ();
+       QuoteMail.setSaveAsActivity(true);
+       QuoteMail.setToAddresses(Addresses);
+       QuoteMail.setReplyTo('shashikala.kamath@servicemax.com');  
+       QuoteMail.setSenderDisplayName('QA');
+       QuoteMail.setSubject('Web Service testing After Save');
+       QuoteMail.setPlainTextBody('Web Service testing After Save');
+       Messaging.sendEmail(new Messaging.SingleEmailMessage[] {QuoteMail});
+        
+        return serdev.SFM_Page_BuildResponse(sfmtargetrec,Header,detailSobjectMap);
+    }
+    
+    webservice static SVMXDEV.SFM_WrapperDef.SFM_PageData onChange(SVMXDEV.SFM_WrapperDef.SFM_TargetRecord sfmtargetrec){
+        SVMXDEV.SFM_ServicesDef serdev = new SVMXDEV.SFM_ServicesDef();
+        map<String,List<Sobject>> detailSobjectMap = new map<String,List<Sobject>>();
+        map<String,Schema.SObjectType> Allobj = new map<String,Schema.SObjectType>();   
+        Schema.sObjectType site1 = SVMXDEV__Service_Order__c.sObjectType;       
+        Allobj.put('SVMXDEV__Service_Order__c',site1);         
+        Sobject Header = serdev.SFM_Page_GetHeaderRecord(sfmtargetrec,Allobj);
+            
+        SVMXDEV__Service_Order__c obj = (SVMXDEV__Service_Order__c) Header ;
+       
+       
+            obj.SVMXDEV__Driving_Time__c = 30;
+            obj.SVMXDEV__Order_Type__c = 'Depot Repair';
+            obj.SVMXDEV__Zip__c = '560064';
+            obj.SVMXDEV__Is_Entitlement_Performed__c = true;
+            
+        
+        return serdev.SFM_Page_BuildResponse(sfmtargetrec,Header,detailSobjectMap);
+    }
+    
+    webservice static SVMXDEV.SFM_WrapperDef.SFM_PageData onExit(SVMXDEV.SFM_WrapperDef.SFM_TargetRecord sfmtargetrec){
+        SVMXDEV.SFM_ServicesDef serdev = new SVMXDEV.SFM_ServicesDef();
+        map<String,List<Sobject>> detailSobjectMap = new map<String,List<Sobject>>();
+        map<String,Schema.SObjectType> Allobj = new map<String,Schema.SObjectType>();   
+        Schema.sObjectType site1 = SVMXDEV__Service_Order__c.sObjectType;       
+        Allobj.put('SVMXDEV__Service_Order__c',site1);         
+        Sobject Header = serdev.SFM_Page_GetHeaderRecord(sfmtargetrec,Allobj);
+            
+        SVMXDEV__Service_Order__c obj = (SVMXDEV__Service_Order__c) Header ;
+       
+       
+            obj.SVMXDEV__Driving_Time__c = 15;
+            obj.SVMXDEV__Order_Type__c = 'Depot Repair';
+            obj.SVMXDEV__Zip__c = '560063';
+            obj.SVMXDEV__Is_Entitlement_Performed__c = false;
+            
+        
+        return serdev.SFM_Page_BuildResponse(sfmtargetrec,Header,detailSobjectMap);
+    }    
+}
+ 
+ */
 
 //Author:Mamata RS-4999
 	var $RS_4999 = _testcase("RS_4999", "Field level:Webservice Header Field test On Exit");
@@ -11,7 +123,7 @@
 	var $sfmTemplateSaveAsName=$bo_act_common.generateRandomName("4999Temp9");
 
 	var $objName="Work Order";
-	var $wizardname=$bo_act_common.generateRandomName("4999Wizard");
+	var $wizardname="SFM Delivery Auto";
 	var $wizardID= $wizardname;
 	var $executionMode="Interactive";
 	var $fieldActnType="SFM";
@@ -28,24 +140,24 @@
 	var $d_pwdBase="welcome-03";
 	var $wizardButtonName=$sfmName;
 	var $enteredMinOE=15;
-	var $enteredOTOE="Depot Repair-Tr";
+	var $enteredOTOE="Depot Repair";
 	var $enteredZipOE=560063;
 
 
-	$bo_act_login.login($g_url,$sfmUsn,$sfmPwd);	
-	//$bo_act_login.login($d_url, $d_unBase, $d_pwdBase);
-//$bo_act_login.login($g_url, $bac_un, $bac_pwd);
+	$bo_act_login.login($g_url, $sfmUsn, $sfmPwd);
+	$sfm_act_lightningConfig.switchToLightning();
+	$bo_act_navigation.navigateServicemaxSetUpInLightening();
 
-//*****Navgate to SFm Designer and create clone of Manage WO Line Usage Services transaction********
-$bo_act_navigation.navigateToSfmTransactionDesigner();
+//*****Navigate to SFm Designer and create clone of Manage WO Line Usage Services transaction********
+$bo_act_navigation.navigateToSfmTransactionDesignerForWeb();
+_wait(20000);
 $bo_act_WebServices.createSFmForWebServices($sfmToBeCloned, $sfmName,$subTypePart,$subTypeActivityType,$subTypeExpenses,$subTypeTravel,$sfmTemplateSaveAsName);
 $bo_act_WebServices.enableOnExit();
 
 $bo_act_WebServices.saveAndClose();
+_click($bo_pg_home.link_backToSetUpHome);
 //*******Nagigate to SFM Wizard and Create Wizard and Add Above Transaction to it**********
-$bo_act_navigation.navigateToSfmWizard();
-$bo_act_SFW.createWizardGeneralInfo($objName,$wizardname,$wizardID);
-$bo_act_SFW.createWizardStep($fieldActnType,$actnName,$executionMode);
+$sfm_act_wizards.addToWizard($objName, $wizardname, $fieldActnType, $actnName);
 
 //******Launch the SFM in delivery for WO object**************
 
@@ -55,9 +167,9 @@ _wait(30000);
 $bo_act_WebServices.verifyOnExit($enteredMinOE,$enteredOTOE,$enteredZipOE);
 
 //********Deleting test Data***************
-$bo_act_SFW.deleteWizards($objName,$wizardID);
-_wait(3000);
-$bo_act_navigation.navigateToSfmTransactionDesigner();
-$bo_act_SFM.deleteSFM($sfmName);
+//$bo_act_SFW.deleteWizards($objName,$wizardID);
+//_wait(3000);
+//$bo_act_navigation.navigateToSfmTransactionDesignerForWeb();
+//$bo_act_SFM.deleteSFM($sfmName);
 _setSpeed($g_stepSpeed);
 $RS_4999.end();

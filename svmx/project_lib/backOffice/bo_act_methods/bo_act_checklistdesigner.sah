@@ -379,4 +379,5 @@ var $bo_act_checklistdesigner = new function bo_act_checklistdesigner() {
 		
 	};
 
+
 };

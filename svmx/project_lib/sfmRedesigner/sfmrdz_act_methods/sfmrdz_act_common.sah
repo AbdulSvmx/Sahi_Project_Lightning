@@ -17,7 +17,7 @@ var $sfmrdz_act_common= new function sfmrdz_act_common(){
 		var $ListViewWindow="https://svmxdev."+$orgId+".visual.force.com/apex/SFM_Designer#/"+$viewName+"-list";
 		_log($ListViewWindow);
 		_navigateTo($ListViewWindow);
-		_wait(15000,_isVisible($sfmrdz_pg_common.btn_actionMenu));
+		_wait(30000,_isVisible($sfmrdz_pg_common.btn_actionMenu));
 		return $currentHomePageULR;
 	};
 	
@@ -43,11 +43,13 @@ var $sfmrdz_act_common= new function sfmrdz_act_common(){
 	this.searchObj=function($objName){
 		_setValue($sfmrdz_pg_common.txt_listFilter,$objName);
 		_keyPress($sfmrdz_pg_common.txt_listFilter, 13);
-		_wait(10000,_isVisible(_link($objName)));
+		_wait(10000,_isVisible($sfmrdz_pg_common.btn_actionMenu));
+		return $callBack.returnResult(!_exists($sfmrdz_pg_common.btn_msgNoResult), "\" "+$objName+" \" "+"Search");
+		
 	};
 	
+		
 
-	
 	/**
 	 * Function to select Picklist/Filter
 	 * 
@@ -67,17 +69,24 @@ var $sfmrdz_act_common= new function sfmrdz_act_common(){
 		//Collection All element under mentioned column
 		var $list=null;
 			if ($colName=="TRANSACTION NAME" || $colName=="DATA VALIDATION RULES NAME" || $colName=="Expression Name") {
+				_log("Under if loop: ");
 				$list = _collect("_link","/.*/",_under(_div($colName)));
 			}else if ($colName=="Source Object" || $colName=="TODO_TARGET_OBJECT" || $colName=="Object") {
+				_log("Under else loop: ");
 				$list = _collect("_span","/.*/",_under(_div($colName)));
-			}
-			_log($list.length);
+			}			
+		_log("No. of rows: "+$list.length);
+		//new array declaration
 		var $listName=new Array($list.length);
 		
-		//extracting element text and saving in array
-		for(var $i=0;$i<$list.length;$i++){
+		//fetching element text to array
+		for (var $i = 0; $i < $list.length; $i++) {
 			$listName[$i]=_getText($list[$i]);
-		}
+		}	
+		
+
+		// filtering array to remove space
+		$listName=$listName.filter(Boolean);
 		
 		//Generating Original copy
 		var $orgList=new Array($listName.length);
@@ -94,6 +103,7 @@ var $sfmrdz_act_common= new function sfmrdz_act_common(){
 			$linkListSorted=$linkListAscSorted.reverse();
 		}
 
+		
 		var $retVal=false;
 		for(var $i=0;$i<$linkListSorted.length;$i++){	
 			if($orgList[$i]==$linkListSorted[$i]){;
@@ -105,8 +115,8 @@ var $sfmrdz_act_common= new function sfmrdz_act_common(){
 				break;
 			}	
 		}
-		_assertTrue($retVal, "Links on "+$colName+" column are not sorted in order");
-
+		//_assertTrue($retVal, "Links on "+$colName+" column are not sorted in order");
+		return $retVal;
 	};
 	
 	/**
@@ -124,6 +134,145 @@ var $sfmrdz_act_common= new function sfmrdz_act_common(){
 		_wait(5000,_isVisible($sfmrdz_pg_common.link_clone));
 	};
 	
+	/**
+	 * Mouse Hover on column item in given row
+	 */
+	this.mouseOver=function($row,$column,$Type){
+		var $element=null;
+		if ($column=="Last Edited") {
+			$element=_div("/Text slds-text-body.*/",_near(_link($row)));
+		}else if ($column=="Status") {
+			//var $statusDiv=_div("/rt-td DataTableCell--align-center/",_near(_link($row)),_under(_parentNode(_div($column),"DIV",1)));
+			var $statusDiv=_div("/rt-td/",_near(_link($row)),_under(_parentNode(_div($column),"DIV",1)));
+			$element=_svg_icon("/slds-icon-text/",_in($statusDiv));
+		}else if ($column=="Lock") {
+			$element=_svg_icon("/slds-icon-text/",_near(_link($row)));
+		}else if ($column=="Type") {
+			//var $typeDiv=_div("/rt-td DataTableCell--align-center/",_near(_link($row)),_under(_parentNode(_div("Type","DIV",1)));
+			var $typeDiv=_parentNode(_link($row),"DIV",3);//temp as above code is not working in some org
+			if ($Type=="To create Source to Target records") {
+				$element=_svg_icon("/timesheet/",_in($typeDiv));
+			}else if ($Type=="To create and map child lines only") {
+				$element=_svg_icon("/timesheet-entry/",_in($typeDiv));
+			}else if ($Type=="To create and manage child lines") {
+				$element=_svg_icon("/timeslot/",_in($typeDiv));
+			}
+		}
+		_mouseOver($element);
+		_wait(1000,_isVisible($sfmrdz_pg_common.btn_lastEditMouseOverDiv));
+		return $callBack.returnResult(_exists($sfmrdz_pg_common.btn_lastEditMouseOverDiv), " mouse hover div on "+$column+" column for "+$row+" row not exists");
+		
+	};
+	
+	//Secondary sort fn
+	// make generic
+	this.secondarySort=function(){
+	
+		var $whereUsedList=_collect("_svg_icon","/.*/",_under(_div("Where Used")));
+		_log("No. of Rows: "+$whereUsedList.length);
+		var $linkNames=new Array($whereUsedList.length);
 
+		//extracting link text
+		for(var $i=0;$i<$whereUsedList.length;$i++){
+			$linkNames[$i]=_getText(_link("/.*/",_near($whereUsedList[$i])));
+		}
+		_log("linkName count: "+$linkNames.length);
+		
+		//creating Original array copy
+		var $orgList=new Array();
+		for(var $i=0;$i<$linkNames.length;$i++){
+			$orgList[$i]=$linkNames[$i];
+		}
+		
+		//sorting link name array
+		$linkNames=$linkNames.sort();
+		$retVal=false;
+		
+		for(var $i=0;$i<$linkNames.length;$i++){
+			if($linkNames[$i]==$orgList[$i]){
+				$retVal=true;
+			}else{
+				$retVal=false;
+				_log("element visible on secondary sort col is : "+$orgList[$i]);
+				_log("element expected on secondary sort col is : "+$linkNames[$i]);
+				break;
+			}
+		}
+		return $callBack.returnResult($retVal);
+
+	};
+	
+	/**
+	 * Last Edited Column sort
+	 */
+	
+	this.sortLastEditedCol=function($ColName,$sortOrder){
+		//collecting link elements
+		var $linkNames=_collect("_div","/.*/",_under(_parentNode(_div($ColName),"DIV",1)));
+		_log(" No. of rows:"+$linkNames.length);
+		var $lastEditedDateList=new Array();
+
+		//extracting link element names
+		for(var $i=0;$i<$linkNames.length;$i++){
+				$lastEditedDateList[$i]=_getText(_div("/slds-text-body--regular.*/",_rightOf($linkNames[$i])));
+		}
+		
+		var $datePre=null;
+		var $dateCurr=null;
+		var $datePreCode=null;
+		var $dateCurrCode=null;
+		var $retVal=true;
+
+		for(var $i=0;$i<$lastEditedDateList.length;$i++){
+			if($i==0){
+				$datePre=$lastEditedDateList[$i];
+				_log("First date: "+$datePre);
+			}else{
+				$dateCurr=$lastEditedDateList[$i];
+				
+				//fetching UNIX time codes for date
+				$datePreCode = new Date($datePre).getTime();
+				_log("datePre: "+$datePre+" & "+"datePre Code "+$datePreCode);
+				$dateCurrCode = new Date($dateCurr).getTime();
+				_log("dateCurr: "+$dateCurr+" & "+"dateCurr Code "+$dateCurrCode);
+				
+				if($sortOrder=="ascending"){
+					if($dateCurrCode > $datePreCode){
+						_log("current date: '"+$dateCurr+"' occurs after '"+$datePre);
+						$datePre=$dateCurr;
+						$dateCurr="";
+					}else if ($dateCurrCode==$datePreCode){
+						_log("current date: '"+$dateCurr+"' is same day as '"+$datePre);
+					}else{
+						$retVal=false;
+						_log("current date: '"+$dateCurr+"' occurs before '"+$datePre);
+						break;
+					};
+				}else{
+					//_log("order type: Descending");
+					if($dateCurrCode < $datePreCode){
+						_log("current date: '"+$dateCurr+"' occurs before '"+$datePre);
+						$datePre=$dateCurr;
+						$dateCurr="";
+					}else if ($dateCurrCode==$datePreCode){
+						_log("current date: '"+$dateCurr+"' is same day as '"+$datePre);
+					}else{
+						$retVal=false;
+						_log("current date: '"+$dateCurr+"' occurs after '"+$datePre);
+						break;
+					};
+				}		
+			}
+		};
+		//_log($retVal);
+		return($retVal);
+	};
+	
+	
+	
+	
+	
+	
+	
 	
 };

@@ -40,5 +40,35 @@ var $sfmrdz_act_trnListView=new function sfmrdz_act_trnListView(){
 		
 	};
 	
+	/**
+	 * Content search on transaction list view
+	 */
+	this.contentSearch=function($search){
+		$sfmrdz_act_common.searchObj($search);
+		_wait(5000);
+		var $trnLinks=_collect("_div","/rt-td DataTableCell/",_under(_parentNode(_div("TRANSACTION NAME"),"DIV",1)));
+		//var $trnLinks=_collect("_link","/.*/",_under(_div("TRANSACTION NAME")));
+		var $trnNames=new Array($trnLinks.length);
+		var $retVal=true;
+		var $rowNotContaingText=null;
+		for (var $i=0; $i<$trnLinks.length; $i++) {
+			$trnNames[$i]=_getText($trnLinks[$i]);
+
+			if ($trnNames[$i].indexOf($search)==-1) {
+				var $trnLinkRow=_parentNode(_link($trnNames[$i]),"DIV",2);
+				var $sourceObjText=_getText(_div("/rt-td.*/[2]",_in($trnLinkRow)));
+				var $TDTOText=_getText(_div("/rt-td.*/[3]",_in($trnLinkRow)));
+				var $tagText=_getText(_div("/rt-td.*/[5]",_in($trnLinkRow)));
+				if ($sourceObjText.indexOf($search)==-1 && $TDTOText.indexOf($search)==-1 && $tagText.indexOf($search)==-1) {
+					$retVal=false;
+					$rowNotContaingText=$trnNames[$i];
+					break;
+				}
+			}
+		}
+		return [$retVal,$rowNotContaingText];
+		//_assertTrue($retVal,$search+" text is not available in "+$rowNotContaingText);
+		
+	};
 	
 };

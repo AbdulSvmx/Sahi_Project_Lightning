@@ -1,0 +1,58 @@
+/**
+ * Author	: Anand Kakhandaki
+ * Reviewer	: 
+ * Pre-req	: Nothing
+ * Testcase	: Search Transaction: Verify Search transaction result.
+ * Steps	: 
+ 				1) Create a SFM Transaction using SVMX_Source as Source Object and SVMX_Target as target object
+ 				2) In search column type 'Unique'
+ * Expt Res	:
+ 				1) SFM should be created successfully
+ 				2) Above created SFM should be displayed in searched result
+			
+ */
+
+var $SFMDZ_172=_testcase("Search Transaction","Verify Search transaction result");
+$SFMDZ_172.start();
+_setSpeed($g_stepSpeed);
+	
+		/**
+		 * Global Variable declaration
+		 */
+		
+		var $url="http://test.salesforce.com";
+		var $un="saadat.dz2perftest@servicemax.com";
+		var $pwd="servicemax1";
+		var $viewName="transaction";
+		
+		var $trnName="Activate Contract";
+		var $sourceObjName="Installed Product";
+		var $targetObjName="Activity Master";
+		var $tagName="TAG Belongs to Aviation";
+		/**
+		 * Login to the Sandbox Org and launching Transaction list view
+		 */
+		$bo_act_login.login($url, $un, $pwd);
+		var $homecurrentHomePageULR=$sfmrdz_act_common.LaunchListViewWindow($viewName);
+		
+		//Transaction Search
+		var $trnRetVal=$sfmrdz_act_common.searchObj($trnName);
+		_assertExists(_link($trnName),$trnName+" is not available");
+		
+		//Source Object Search
+		var $sourceObjretVal=$sfmrdz_act_trnListView.contentSearch($sourceObjName);
+		_assertTrue($sourceObjretVal[0],$sourceObjName+" is not available");
+		
+		
+		//Target Object Search
+		var $targetObjretVal=$sfmrdz_act_trnListView.contentSearch($targetObjName);
+		_assertTrue($targetObjretVal[0],$targetObjName+" is not available");
+		
+		//Tags Search
+		var $tagObjretVal=$sfmrdz_act_trnListView.contentSearch($tagName);
+		_assertTrue($tagObjretVal[0],$tagName+" is not available");
+		
+		//$sfmrdz_act_common.launchHomeWindow($homecurrentHomePageULR);
+		//$bo_act_login.logOut();
+		
+$SFMDZ_172.end();
