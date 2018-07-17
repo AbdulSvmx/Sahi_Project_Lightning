@@ -135,9 +135,6 @@ global objWebService(){}
 	var $subTypeActivityType="Activity Type";
 	var $subTypeExpenses="Billable Qty";
 	var $subTypeTravel="Consumed From Location";
-	var $d_url="https://test.salesforce.com/";
-	var $d_unBase="noor.sharieff@Tools2.com";
-	var $d_pwdBase="welcome-03";
 	var $wizardButtonName=$sfmName;
 	var $enteredMinOE=15;
 	var $enteredOTOE="Depot Repair";
