@@ -137,7 +137,7 @@ var $sfm_act_SFM = new function sfm_act_SFM() {
 	 */	
 	this.partsMultiAdd = function($multiAdd){
 		_click(_f("main").s_richtext("Parts"));
-		_setValue(_f("main").s_textinput(0).rightOf(_f("main").uiftetextfield("Allow Multi Add Using")), "");
+		//_setValue(_f("main").s_textinput(0).rightOf(_f("main").uiftetextfield("Allow Multi Add Using")), "");
 		_setValue(_f("main").s_textinput(0).rightOf(_f("main").uiftetextfield("Allow Multi Add Using")), "Select");
 		_click(_f("main").s_label("--None--"));
 		_click(_f("main").s_button("Save[3]"));
