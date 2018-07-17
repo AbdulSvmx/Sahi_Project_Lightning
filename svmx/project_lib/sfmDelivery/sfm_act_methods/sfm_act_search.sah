@@ -116,6 +116,8 @@ var $sfm_act_search = new function sfm_search() {
 	this.addNewSearchConfig = function($searchObject){
 		_click($sfm_pg_search.btn_new);
 		_setSelected($sfm_pg_search.sel_searchObject,$searchObject);
+		_wait(8000);
+		_click(_button("Save"));
 	};
 
 	this.buildExpression = function($clicks,$exprsnVal,$sheetName){
