@@ -247,7 +247,7 @@ var $sfmrdz_act_common= new function sfmrdz_act_common(){
 					};		
 				}
 			};
-			_return($retVal);
+			return($retVal);
 		};
 	
 	

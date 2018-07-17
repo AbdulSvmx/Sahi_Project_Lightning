@@ -13,8 +13,8 @@ _setSpeed($g_stepSpeed);
 	 */
 
 	var $url="http://test.salesforce.com";
-	var $un="designer2@test.com";
-	var $pwd="designer@2";
+	var $un="saadat.dz2perftest@servicemax.com";
+	var $pwd="servicemax1";
 	var $viewName="transaction";
 	
 	/**
@@ -25,8 +25,9 @@ _setSpeed($g_stepSpeed);
 
 	var $homecurrentHomePageULR =$sfmrdz_act_common.LaunchListViewWindow($viewName);
 	
-	$sfmrdz_act_common.typePicklist("To create and manage child lines");
-	
+	$sfmrdz_act_common.typePicklist("To create Source to Target records");
+	_click($sfmrdz_pg_trnListView.btn_heading_lastEditedCol);
+	_wait(10000,_isVisible($sfmrdz_pg_common.btn_actionMenu));
 	var $retVal=$sfmrdz_act_common.sortLastEditedCol("TRANSACTION NAME");
 	
 	
