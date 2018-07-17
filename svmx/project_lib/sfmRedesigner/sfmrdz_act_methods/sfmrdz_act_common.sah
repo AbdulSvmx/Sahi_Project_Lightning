@@ -70,12 +70,14 @@ var $sfmrdz_act_common= new function sfmrdz_act_common(){
 		var $list=null;
 			if ($colName=="TRANSACTION NAME" || $colName=="DATA VALIDATION RULES NAME" || $colName=="Expression Name") {
 				_log("Under if loop: ");
-				$list = _collect("_link","/.*/",_under(_div($colName)));
+				$list = _collect("_link","/Text slds-text-body.*/",_under(_parentNode(_div($colName),"DIV",1)));
+				_log("No. of rows: "+$list.length);
 			}else if ($colName=="Source Object" || $colName=="TODO_TARGET_OBJECT" || $colName=="Object") {
 				_log("Under else loop: ");
 				$list = _collect("_span","/.*/",_under(_div($colName)));
+				_log("No. of non empty cells: "+$list.length);
 			}			
-		_log("No. of rows: "+$list.length);
+		
 		//new array declaration
 		var $listName=new Array($list.length);
 		

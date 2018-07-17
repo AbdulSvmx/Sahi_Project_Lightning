@@ -22,8 +22,8 @@ _setSpeed($g_stepSpeed);
 	 */
 
 	var $url="http://test.salesforce.com";
-	var $un="saadat.dz2perftest@servicemax.com";
-	var $pwd="servicemax1";
+	var $un="designer2@test.com";
+	var $pwd="designer@2";
 	var $viewName="transaction";
 	
 	/**
@@ -49,6 +49,6 @@ _setSpeed($g_stepSpeed);
 	
 	$sfmrdz_act_common.launchHomeWindow($homecurrentHomePageULR);
 	_wait(10000,_isVisible($bo_pg_home.link_home));
-	$bo_act_login.logOut();
+	//$bo_act_login.logOut();
 	
 $SFMDZ_150.end();
