@@ -265,11 +265,12 @@ var $bo_act_WebServices=new function bo_act_WebServices(){
 					
 				};
 					this.verifyOnChangeForChildField=function($enteredMinOC,$enteredOTOC,$enteredZipOC){
-					_click(_span("Expense"));
-					_click(_span("svmx-btn-icon svmx-sfmd-add-line-icon[1]"));
-					_click(_textbox("sfm-picklistcelleditor-1076-inputEl"));
-					_setValue(_textbox("sfm-picklistcelleditor-1076-inputEl"), "Re");
-					_click(_listItem("Repair"));
+					_click($bo_pg_webServices.clk_childLineExpenses);
+					_click($bo_pg_webServices.lnk_addChildLineExpenses);
+					_click($bo_pg_webServices.clk_fieldActivityType);
+					//_setValue($bo_pg_webServices.clk_fieldActivityType, "Re");
+					_click($bo_pg_webServices.clk_selectExpType);
+					_click($bo_pg_webServices.sel_expName);
 					_wait(10000);
 					var $drMin=_getText(_textbox("Driving Time (in Minutes):"));
 					var $orderTy=_getText(_textbox("Order Type:"));

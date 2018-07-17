@@ -10,4 +10,9 @@ var $bo_pg_webServices = new function bo_pg_webServices(){
 	this.delivery_ordType=_textbox("/sfm-picklist/");
 	this.delivery_zip=_textbox("/sfm-text/");
 	this.clk_WoInDelivery=_label("/WO/");
+	this.clk_childLineExpenses=_span("Expense");
+	this.lnk_addChildLineExpenses=_span("+ Add Expense");
+	this.clk_fieldActivityType=_div("--None--");
+	this.clk_selectExpType=_div("sfm-picklistcelleditor-1073-trigger-picker");
+	this.sel_expName=_listItem("Repair");
 };
