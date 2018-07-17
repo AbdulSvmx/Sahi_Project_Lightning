@@ -149,7 +149,7 @@ var $sfmrdz_act_common= new function sfmrdz_act_common(){
 			$element=_svg_icon("/slds-icon-text/",_near(_link($row)));
 		}else if ($column=="Type") {
 			//var $typeDiv=_div("/rt-td DataTableCell--align-center/",_near(_link($row)),_under(_parentNode(_div("Type","DIV",1)));
-			var $typeDiv=_div("/rt-td/",_near(_link($row)),_under(_parentNode(_div("Type","DIV",1)));//temp as above code is not working in some org
+			var $typeDiv=_parentNode(_link($row),"DIV",3);//temp as above code is not working in some org
 			if ($Type=="To create Source to Target records") {
 				$element=_svg_icon("/timesheet/",_in($typeDiv));
 			}else if ($Type=="To create and map child lines only") {
