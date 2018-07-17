@@ -71,7 +71,7 @@ if(_exists($sfm_pg_sfmDesigner.txt_priceAlert)){
 	_wait(10000);
 }
 _setStrictVisibilityCheck(true);
-_click($sfm_pg_sfmDesigner.btn_deliveryExtendedEditLabor);
+_click($sfm_pg_sfmDesigner.btn_deliveryExtendedEdit);
 _setStrictVisibilityCheck(false);
 _click($sfm_pg_sfmDesigner.txt_eeEdit);
 //var lineQtyVal= _getValue($sfm_pg_sfmDesigner.txt_eeLineQty);
