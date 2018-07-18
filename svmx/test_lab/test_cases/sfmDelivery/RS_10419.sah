@@ -1,5 +1,5 @@
-var $RS_10425 = _testcase("RS_10425","Verify Dependent picklist's values when Controlling picklist is present in SFM process for child line");
-$RS_10425.start();
+var $RS_10419 = _testcase("RS_10419","Verify Dependent picklist's values when Controlling picklist is present in SFM process for child line");
+$RS_10419.start();
 //Variables used
 var $object_name = "Work Detail";
 var $ctrlPicklist = "Activity Type";
@@ -132,7 +132,7 @@ for($z = 0;$z<$ctrl_unique_values.length;$z++){
 	_click($sfm_pg_wo.link_relatedListsTab);
 	
 }
-$RS_10425.end();
+$RS_10419.end();
 
 
 
