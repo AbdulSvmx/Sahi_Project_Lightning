@@ -45,6 +45,4 @@ _setSpeed($g_stepSpeed);
 		//browser cache delete - not working check for alternative code
 		_call(top.location.reload(true));
 		
-	
-		
 	$SFMDZ_163.end();

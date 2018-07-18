@@ -70,8 +70,13 @@ var $sfmrdz_act_common= new function sfmrdz_act_common(){
 		var $list=null;
 			if ($colName=="TRANSACTION NAME" || $colName=="DATA VALIDATION RULES NAME" || $colName=="Expression Name") {
 				_log("Under if loop: ");
-				$list = _collect("_link","/Text slds-text-body.*/",_under(_parentNode(_div($colName),"DIV",1)));
+				//$list = _collect("_link","/Text slds-text-body.*/",_under(_parentNode(_div($colName),"DIV",1)));
+				$list =_collect("_div","/DataTableCell--overflow/",_under(_parentNode(_div($colName),"DIV",1)));
 				_log("No. of rows: "+$list.length);
+				if ($list.length==0) {
+					_log("$list collection else loop");
+					$list = _collect("_link","/Text slds-text-body.*/",_under(_parentNode(_div($colName),"DIV",1)));
+				}
 			}else if ($colName=="Source Object" || $colName=="TODO_TARGET_OBJECT" || $colName=="Object") {
 				_log("Under else loop: ");
 				$list = _collect("_span","/.*/",_under(_div($colName)));
@@ -170,13 +175,14 @@ var $sfmrdz_act_common= new function sfmrdz_act_common(){
 	// make generic
 	this.secondarySort=function(){
 	
-		var $whereUsedList=_collect("_svg_icon","/.*/",_under(_div("Where Used")));
-		_log("No. of Rows: "+$whereUsedList.length);
+		var $whereUsedList=_collect("_svg_icon","/slds-icon-text-default.*/",_under(_parentNode($sfmrdz_pg_trnListView.btn_heading_whereUsedCol),"DIV",1));
+		_log("No. of Rows having Where used icon: "+$whereUsedList.length);
 		var $linkNames=new Array($whereUsedList.length);
 
 		//extracting link text
 		for(var $i=0;$i<$whereUsedList.length;$i++){
-			$linkNames[$i]=_getText(_link("/.*/",_near($whereUsedList[$i])));
+			$linkNames[$i]=_getText(_link("/Text slds-text-body.*/",_near($whereUsedList[$i])));
+			_log($linkNames[$i]);
 		}
 		_log("linkName count: "+$linkNames.length);
 		
@@ -210,13 +216,20 @@ var $sfmrdz_act_common= new function sfmrdz_act_common(){
 	
 	this.sortLastEditedCol=function($ColName,$sortOrder){
 		//collecting link elements
-		var $linkNames=_collect("_div","/.*/",_under(_parentNode(_div($ColName),"DIV",1)));
+		//var $linkNames=_collect("_div","/.*/",_under(_parentNode(_div($ColName),"DIV",1)));
+		//var $linkNames=_collect("_link","/Text slds-text-body.*/",_under(_parentNode(_div($ColName),"DIV",1)));
+		var $linkNames =_collect("_div","/DataTableCell--overflow/",_under(_parentNode(_div($colName),"DIV",1)));
+		_log("No. of rows: "+$list.length);
+			if ($list.length==0) {
+				_log("$list collection else loop");
+				$linkNames = _collect("_link","/Text slds-text-body.*/",_under(_parentNode(_div($colName),"DIV",1)));
+			}
 		_log(" No. of rows:"+$linkNames.length);
 		var $lastEditedDateList=new Array();
 
 		//extracting link element names
 		for(var $i=0;$i<$linkNames.length;$i++){
-				$lastEditedDateList[$i]=_getText(_div("/slds-text-body--regular.*/",_rightOf($linkNames[$i])));
+				$lastEditedDateList[$i]=_getText(_div("/slds-text-body--regular.*/",_rightOf(_div(_getText($linkNames[$i])))));
 		}
 		
 		var $datePre=null;

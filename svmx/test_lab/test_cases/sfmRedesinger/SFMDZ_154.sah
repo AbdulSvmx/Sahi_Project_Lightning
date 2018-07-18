@@ -19,8 +19,8 @@ _setSpeed($g_stepSpeed);
 		 * Global Variable declaration
 		 */
 		var $url="http://test.salesforce.com";
-		var $un="designer2@test.com";
-		var $pwd="designer@2";
+		var $un="saadat.dz2perftest@servicemax.com";
+		var $pwd="servicemax1";
 		var $viewName="transaction";
 		
 		var $Type="To create and map child lines only";
@@ -31,9 +31,8 @@ _setSpeed($g_stepSpeed);
 		var $homecurrentHomePageULR =$sfmrdz_act_common.LaunchListViewWindow($viewName);
 
 		$sfmrdz_act_common.typePicklist("Standard SFM Transactions");
-		_click($sfmrdz_pg_trnListView.link_stdTransaction);
-		_wait(5000,_isVisible($sfmrdz_pg_common.btn_actionMenu));
-		
+		_click($sfmrdz_pg_trnListView.btn_heading_whereUsedCol);
+		_wait(5000);
 		var $retVal=$sfmrdz_act_common.secondarySort();
 		_assertTrue($retVal,"Secondary sort is not working on transaction name column");
 		

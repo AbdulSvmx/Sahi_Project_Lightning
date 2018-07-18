@@ -33,12 +33,13 @@ _setSpeed($g_stepSpeed);
 	$bo_act_login.login($url, $un, $pwd);
 	var $homecurrentHomePageULR =$sfmrdz_act_common.LaunchListViewWindow($viewName);
 	
-	$sfmrdz_act_common.typePicklist("To create Source to Target records");
+	$sfmrdz_act_common.typePicklist("Standard SFM Transactions");
 	
 	//checking Last Edited Column in ascending Order
 	var $sortOrder="ascending";
 	_click($sfmrdz_pg_trnListView.btn_heading_lastEditedCol);
-	_wait(10000,_isVisible($sfmrdz_pg_common.btn_actionMenu));
+	//_wait(10000,_isVisible($sfmrdz_pg_common.btn_actionMenu));
+	_wait(5000);
 	var $retVal=$sfmrdz_act_common.sortLastEditedCol("TRANSACTION NAME",$sortOrder);
 	_assertTrue($retVal,"Last Edited Column is not sorted in "+$sortOrder+" order");
 	
@@ -50,9 +51,9 @@ _setSpeed($g_stepSpeed);
 	var $retVal=$sfmrdz_act_common.sortLastEditedCol("TRANSACTION NAME",$sortOrder);
 	_assertTrue($retVal,"Last Edited Column is not sorted in "+$sortOrder+" order");
 	
-	$sfmrdz_act_common.launchHomeWindow($homecurrentHomePageULR);
-	_wait(10000,_isVisible($bo_pg_home.link_home));
-	$bo_act_login.logOut();
+	//$sfmrdz_act_common.launchHomeWindow($homecurrentHomePageULR);
+	//_wait(10000,_isVisible($bo_pg_home.link_home));
+	//$bo_act_login.logOut();
 	
 	
 	$SFMDZ_156.end();
