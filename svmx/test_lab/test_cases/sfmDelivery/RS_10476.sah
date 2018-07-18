@@ -112,15 +112,15 @@ global objWebService(){}
  
  */
 
-//Author:Mamata RS-4999
-	var $RS_4999 = _testcase("RS_4999", "Field level:Webservice Header Field test On Exit");
-	$RS_4999.start();
+//Author:Mamata RS-10476
+	var $rs_10476 = _testcase("rs_10476", "Field level:Webservice Header Field test On Exit");
+	$rs_10476.start();
 	_setSpeed($g_stepSpeed);
 
 	var $sfmToBeCloned="Create Usage Lines from Estimates";
-	var $sfmName=$bo_act_common.generateRandomName("4999SFM");
+	var $sfmName=$bo_act_common.generateRandomName("10476SFM");
 	//change  the name of $sfmTemplateSaveAsName before execution to avoid any duplication.
-	var $sfmTemplateSaveAsName=$bo_act_common.generateRandomName("4999Temp9");
+	var $sfmTemplateSaveAsName=$bo_act_common.generateRandomName("10476Temp9");
 
 	var $objName="Work Order";
 	var $wizardname="SFM Delivery Auto";
@@ -169,4 +169,4 @@ $bo_act_WebServices.verifyOnExit($enteredMinOE,$enteredOTOE,$enteredZipOE);
 //$bo_act_navigation.navigateToSfmTransactionDesignerForWeb();
 //$bo_act_SFM.deleteSFM($sfmName);
 _setSpeed($g_stepSpeed);
-$RS_4999.end();
+$rs_10476.end();

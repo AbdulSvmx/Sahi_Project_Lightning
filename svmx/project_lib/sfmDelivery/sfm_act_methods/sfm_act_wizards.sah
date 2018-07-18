@@ -64,6 +64,7 @@ var $sfm_act_wizards = new function sfm_act_wizards() {
 		_click($sfm_pg_wizards.btn_quickSave);
 		_wait(5000,_isVisible(_span("Object")));
 		_click($sfm_pg_wizards.btn_saveClose);
+		_wait(5000,isVisible($sfm_pg_wizards.btn_stdView));
 		
 };
 	

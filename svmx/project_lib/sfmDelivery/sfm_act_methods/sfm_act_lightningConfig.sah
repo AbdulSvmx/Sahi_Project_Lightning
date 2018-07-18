@@ -96,7 +96,9 @@ var $sfm_act_lightningConfig = new function sfm_act_lightningConfig() {
 
 
 this.checkIfWizardLinkExists = function($process_name){
-	_click(_link($sfm_pg_wo.link_showmore));
+	if(_exists(_link($sfm_pg_wo.link_showmore))){
+		_click(_link($sfm_pg_wo.link_showmore));
+	}
 	//Check if the SFM process link exists
 	if(_exists(_span($process_name))){
 		return true;
@@ -138,7 +140,8 @@ this.createWorkDetailInLightning = function($recordType,$lineType){
 	_click($sfm_pg_wo.btn_wo_edit_save);
 	_wait(1000);
 	_assertVisible(_span("Work Detail was created."));
-	$lineNumber = _getText(_link("/WL-/"));
+	_click($sfm_pg_wo.link_workDetailAfterCreation);
+	$lineNumber = _getText(_heading1("/WL-/"));
 	return $lineNumber;
 };
 

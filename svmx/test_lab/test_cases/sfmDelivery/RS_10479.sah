@@ -1,14 +1,14 @@
 
 
-//Author:Mamata RS-4996
-	var $RS_4996 = _testcase("RS_4996", "Verify Web Service call before Save/Insert");
-	$RS_4996.start();
+//Author:Mamata rs_10479
+	var $rs_10479 = _testcase("rs_10479", "Verify Web Service call before Save/Insert");
+	$rs_10479.start();
 	_setSpeed($g_stepSpeed);
 
 	var $sfmToBeCloned="Create Usage Lines from Estimates";
-	var $sfmName=$bo_act_common.generateRandomName("4996SFM");
+	var $sfmName=$bo_act_common.generateRandomName("10479SFM");
 	//change  the name of $sfmTemplateSaveAsName before execution to avoid any duplication.
-	var $sfmTemplateSaveAsName=$bo_act_common.generateRandomName("4996Temp");
+	var $sfmTemplateSaveAsName=$bo_act_common.generateRandomName("10479Temp");
 
 	var $objName="Work Order";
 	var $wizardname="SFM Delivery Auto";
@@ -62,4 +62,4 @@ $bo_act_WebServices.verifyBeforeSaveUpdate($enteredMinBS,$enteredOTBS,$enteredZi
 //$bo_act_SFM.deleteSFM($sfmName);
 	_setSpeed($g_stepSpeed);
 
-$RS_4996.end();
+$rs_10479.end();

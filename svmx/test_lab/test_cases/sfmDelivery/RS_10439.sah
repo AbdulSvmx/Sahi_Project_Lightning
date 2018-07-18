@@ -9,8 +9,6 @@ var $containerNameArray = ["Order Status","Order Status",];
 var $fieldNameArray = ["Proforma Invoice Amount","Travel Rate","Rate (Pricing Rule)"];
 
 var $domainName = "/visual.force.com/";
-var $wizardName = "SFM Delivery Auto";
-var $wizardType = "SFM";
 var $wizardObject ="Work Order";
 
 var $formulaTargetObjectArray = ["Work Order","Labor"];
@@ -50,7 +48,7 @@ _click($sfm_pg_sfmDesigner.btn_deliveryLaborTab);
 _wait(3000,_isVisible($sfm_pg_sfmDesigner.btn_deliveryAddRowLabor));
 _click($sfm_pg_sfmDesigner.btn_deliveryAddRowLabor);
 _setStrictVisibilityCheck(true);
-_click($sfm_pg_sfmDesigner.btn_deliveryExtendedEditLabor);
+_click($sfm_pg_sfmDesigner.btn_deliveryExtendedEdit);
 _setStrictVisibilityCheck(false);
 _click($sfm_pg_sfmDesigner.txt_eeEdit);
 _setValue($sfm_pg_sfmDesigner.txt_eeLineQty,"5");
@@ -74,7 +72,7 @@ if(_exists($sfm_pg_sfmDesigner.txt_priceAlert)){
 }
 
 _setStrictVisibilityCheck(true);
-_click($sfm_pg_sfmDesigner.btn_deliveryExtendedEditLabor);
+_click($sfm_pg_sfmDesigner.btn_deliveryExtendedEdit);
 _setStrictVisibilityCheck(false);
 _click($sfm_pg_sfmDesigner.txt_eeEdit);
 var $laborBlp1 = parseInt(_getText($sfm_pg_sfmDesigner.txt_billingLinePrice));

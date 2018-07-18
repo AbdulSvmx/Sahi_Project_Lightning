@@ -85,6 +85,7 @@ var $bo_act_navigation = new function bo_act_navigation() {
      */this.navigateToSfmSearchDesigner = function() {
 //    	 $bo_act_navigation.navigateToSfmTransactionDesigner();
     	 this.navigateToSvmxSetup();
+    	 _selectDomain("/svmx/");
  			_click($bo_pg_servicemaxSetup.btn_serviceFlowManager);
     	 _click($bo_pg_servicemaxSetup.btn_sfmSearch);
      };

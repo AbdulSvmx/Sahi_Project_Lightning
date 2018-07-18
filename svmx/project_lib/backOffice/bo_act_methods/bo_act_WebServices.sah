@@ -3,8 +3,6 @@ var $bo_act_WebServices=new function bo_act_WebServices(){
 	this.createSFmForWebServices=function($sfmToBeCloned, $sfmName,$subTypePart,$subTypeActivityType,$subTypeExpenses,$subTypeTravel,$sfmTemplateSaveAsName){
 			_click($bo_pg_sfmTransactionAndDesigner.txt_standardSfmTransactionQuickFind);
 			_setValue($bo_pg_sfmTransactionAndDesigner.txt_standardSfmTransactionQuickFind,$sfmToBeCloned);
-			//_click(_f("main").s_checkbox("chk").leftOf(_f("main").s_label($sfmToBeCloned), 10, 10))
-			//_click(_f("main").s_checkbox("/CheckBox/").leftOf(_f("main").s_label($sfmToBeCloned),10,10));
 		if (_isVisible(_f("main").s_checkbox("/Chk/").leftOf(_f("main").s_label($sfmToBeCloned), 10, 10))) {
 			_wait(3000);
 			_click(_f("main").s_checkbox("/Chk/").leftOf(_f("main").s_label($sfmToBeCloned), 10, 10));
@@ -92,7 +90,7 @@ var $bo_act_WebServices=new function bo_act_WebServices(){
 	};			
 		
 		this.saveAndClose=function(){
-			_click(_f("main").s_button("Save & Close"));
+			_click($bo_pg_webServices.btn_saveAndClose);
 			_wait(10000);
 		};
 	
@@ -112,13 +110,11 @@ var $bo_act_WebServices=new function bo_act_WebServices(){
 				this.enableBeforeSave=function(){
 				_click($bo_pg_sfmTransactionAndDesigner.txt_sfmSavePageLayoutAsId);
 				_wait(1000);
-				_click(_f("main").s_textinput("textInput[20]"));
-				_setValue(_f("main").s_textinput("textInput[20]"),"");
-				_setValue(_f("main").s_textinput("textInput[20]"), "We");
-				_setSelected(_f("main").s_combobox(11),"Webservice");
-				
+				_click($bo_pg_webServices.picklist_webServiceBeforeSave);
+				_setValue($bo_pg_webServices.picklist_webServiceBeforeSave,"");
+				_setValue($bo_pg_webServices.picklist_webServiceBeforeSave, "We");				
 				_wait(1000);
-				_setValue(_f("main").s_textinput("txtip[1]"), "objWebService.beforeSaveOrUpdate");
+				_setValue($bo_pg_webServices.txt_webserviceClassName, "objWebService.beforeSaveOrUpdate");
 				_wait(1000);
 				_click($bo_pg_sfmTransactionAndDesigner.btn_pageLayoutSave);
 			};
@@ -129,9 +125,6 @@ var $bo_act_WebServices=new function bo_act_WebServices(){
 					_click($bo_pg_webServices.picklist_eventType);
 					_setValue($bo_pg_webServices.picklist_eventType,"");
 					_setValue($bo_pg_webServices.picklist_eventType, "We");
-					//_setSelected(_f("main").s_combobox(/[0-9]/), "Webservice");
-
-
 					//_wait(1000);
 					_click($bo_pg_webServices.txt_webServiecMethod);
 					_setValue($bo_pg_webServices.txt_webServiecMethod, "objWebService.onChange");
@@ -200,9 +193,10 @@ var $bo_act_WebServices=new function bo_act_WebServices(){
 	};
 		
 		this.verifyBeforeSaveUpdate=function($enteredMinBS,$enteredOTBS,$enteredZipBS){
-			var $drMin=_getText(_textbox("Driving Time (in Minutes):"));
-			var $orderTy=_getText(_textbox("Order Type:"));
-			var $zip=_getText(_textbox("Zip:"));
+			
+			var $drMin=_getText($bo_pg_webServices.delivery_drMin);			
+			var $orderTy=_getText($bo_pg_webServices.delivery_ordType);
+			var $zip=_getText($bo_pg_webServices.delivery_zip);
 			//var $isEntitlementPrfOL=_getText(_checkbox("x-form-cb-input"));
 		
 		
@@ -265,11 +259,12 @@ var $bo_act_WebServices=new function bo_act_WebServices(){
 					
 				};
 					this.verifyOnChangeForChildField=function($enteredMinOC,$enteredOTOC,$enteredZipOC){
-					_click(_span("Expense"));
-					_click(_span("svmx-btn-icon svmx-sfmd-add-line-icon[1]"));
-					_click(_textbox("sfm-picklistcelleditor-1076-inputEl"));
-					_setValue(_textbox("sfm-picklistcelleditor-1076-inputEl"), "Re");
-					_click(_listItem("Repair"));
+					_click($bo_pg_webServices.clk_childLineExpenses);
+					_click($bo_pg_webServices.lnk_addChildLineExpenses);
+					_click($bo_pg_webServices.clk_fieldActivityType);
+					//_setValue($bo_pg_webServices.clk_fieldActivityType, "Re");
+					_click($bo_pg_webServices.clk_selectExpType);
+					_click($bo_pg_webServices.sel_expName);
 					_wait(10000);
 					var $drMin=_getText(_textbox("Driving Time (in Minutes):"));
 					var $orderTy=_getText(_textbox("Order Type:"));

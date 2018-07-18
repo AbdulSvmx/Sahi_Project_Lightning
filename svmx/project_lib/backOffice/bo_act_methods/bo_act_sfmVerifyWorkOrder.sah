@@ -24,6 +24,7 @@ var $bo_act_sfmVerifyWorkOrder= new function bo_act_sfmVerifyWorkOrder() {
 this.verifyWizardOnWOObj=function(){
 	_selectDomain();
 	_click($bo_pg_home.link_aapLauncher);
+	_click($bo_pg_home.link_aapLauncher);
 	_setValue($bo_pg_home.txtbox_findAnApp,"Work Order");
 	//_wait(2000);
 	_click($bo_pg_sfmVerifyWorkOrder.link_workOrder);

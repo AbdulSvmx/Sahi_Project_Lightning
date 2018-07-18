@@ -12,7 +12,7 @@ if(_isVisible(_span($standardSearch))){
 	_log("Pass");
 }
 else{
-	_log("Fail");
+	_fail("Fail");
 }
 //$sfm_pg_search.verifyIfSearchVisible($standardSearch);
 $rs_5366.end();

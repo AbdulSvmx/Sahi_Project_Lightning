@@ -1,7 +1,8 @@
 
+//Author:Mamata RS-10475
 /*
- 
- //Please make sure below webservices is added in apex class with version 28 before running this testcase
+
+//Please make sure below webservices is added in apex class with version 28 before running this testcase
  //If you are running in base org please change SVMXDEV with SVMXC
 global class objWebService{
 
@@ -111,16 +112,14 @@ global objWebService(){}
 }
  
  */
-
-//Author:Mamata RS-4999
-	var $RS_4999 = _testcase("RS_4999", "Field level:Webservice Header Field test On Exit");
-	$RS_4999.start();
+	var $rs_10475 = _testcase("rs_10475", "Field level: On Change Webservice Child Field");
+	$rs_10475.start();
 	_setSpeed($g_stepSpeed);
 
 	var $sfmToBeCloned="Create Usage Lines from Estimates";
-	var $sfmName=$bo_act_common.generateRandomName("4999SFM");
+	var $sfmName=$bo_act_common.generateRandomName("10475SFM");
 	//change  the name of $sfmTemplateSaveAsName before execution to avoid any duplication.
-	var $sfmTemplateSaveAsName=$bo_act_common.generateRandomName("4999Temp9");
+	var $sfmTemplateSaveAsName=$bo_act_common.generateRandomName("10475Temp");
 
 	var $objName="Work Order";
 	var $wizardname="SFM Delivery Auto";
@@ -129,6 +128,7 @@ global objWebService(){}
 	var $fieldActnType="SFM";
 	var $actnName=$sfmName;
 	var $stndSFMName=$sfmName;
+	var $wizardSelectObjectName=$objName;
 
 	var $subTypeWO="Order Status";
 	var $subTypePart="Date Received";
@@ -136,9 +136,9 @@ global objWebService(){}
 	var $subTypeExpenses="Billable Qty";
 	var $subTypeTravel="Consumed From Location";
 	var $wizardButtonName=$sfmName;
-	var $enteredMinOE=15;
-	var $enteredOTOE="Depot Repair";
-	var $enteredZipOE=560063;
+	var $enteredMinOC=30;
+	var $enteredOTOC="Depot Repair";
+	var $enteredZipOC=560064;
 
 
 	$bo_act_login.login($g_url, $sfmUsn, $sfmPwd);
@@ -149,11 +149,14 @@ global objWebService(){}
 $bo_act_navigation.navigateToSfmTransactionDesignerForWeb();
 _wait(20000);
 $bo_act_WebServices.createSFmForWebServices($sfmToBeCloned, $sfmName,$subTypePart,$subTypeActivityType,$subTypeExpenses,$subTypeTravel,$sfmTemplateSaveAsName);
-$bo_act_WebServices.enableOnExit();
+$bo_act_WebServices.enableOnChangeForChildLabelField();
 
 $bo_act_WebServices.saveAndClose();
 _click($bo_pg_home.link_backToSetUpHome);
 //*******Nagigate to SFM Wizard and Create Wizard and Add Above Transaction to it**********
+//$bo_act_navigation.navigateToSfmWizard();
+//$bo_act_SFW.createWizardGeneralInfo($objName,$wizardname,$wizardID);
+//$bo_act_SFW.createWizardStep($fieldActnType,$actnName,$executionMode);
 $sfm_act_wizards.addToWizard($objName, $wizardname, $fieldActnType, $actnName);
 
 //******Launch the SFM in delivery for WO object**************
@@ -161,12 +164,13 @@ $sfm_act_wizards.addToWizard($objName, $wizardname, $fieldActnType, $actnName);
 $bo_act_sfmVerifyWorkOrder.verifyWizardOnWOObj($stndSFMName);
 $bo_act_sfmVerifyWorkOrder.clkOnWizard($wizardButtonName);
 _wait(30000);
-$bo_act_WebServices.verifyOnExit($enteredMinOE,$enteredOTOE,$enteredZipOE);
+$bo_act_WebServices.verifyOnChangeForChildField($enteredMinOC,$enteredOTOC,$enteredZipOC);
 
-//********Deleting test Data***************
-//$bo_act_SFW.deleteWizards($objName,$wizardID);
-//_wait(3000);
-//$bo_act_navigation.navigateToSfmTransactionDesignerForWeb();
-//$bo_act_SFM.deleteSFM($sfmName);
+//*****************Deleteing testdata************
+$bo_act_SFW.deleteWizards($objName,$wizardID);
+_wait(3000);
+$bo_act_navigation.navigateToSfmTransactionDesignerForWeb();
+$bo_act_SFM.deleteSFM($sfmName);
+
 _setSpeed($g_stepSpeed);
-$RS_4999.end();
+$rs_10475.end();
