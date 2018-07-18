@@ -9,8 +9,6 @@ var $containerNameArray = ["Order Status","Order Status",];
 var $fieldNameArray = ["Proforma Invoice Amount","Travel Rate","Rate (Pricing Rule)"];
 
 var $domainName = "/visual.force.com/";
-var $wizardName = "SFM Delivery Auto";
-var $wizardType = "SFM";
 var $wizardObject ="Work Order";
 
 var $formulaTargetObjectArray = ["Work Order","Labor"];
