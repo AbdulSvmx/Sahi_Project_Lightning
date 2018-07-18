@@ -52,6 +52,11 @@ _setSpeed($g_stepSpeed);
 		var $tagObjretVal=$sfmrdz_act_trnListView.contentSearch($tagName);
 		_assertTrue($tagObjretVal[0],$tagName+" is not available");
 		
+		//Transaction Search
+		$trnName="Activate Contract1";
+		var $sourceObjretVal=$sfmrdz_act_trnListView.contentSearch($trnName);
+		_assertExists($sfmrdz_pg_common.btn_msgNoResult,$trnName+" is not available");
+		
 		//$sfmrdz_act_common.launchHomeWindow($homecurrentHomePageULR);
 		//$bo_act_login.logOut();
 		

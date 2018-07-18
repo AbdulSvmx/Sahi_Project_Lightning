@@ -218,11 +218,11 @@ var $sfmrdz_act_common= new function sfmrdz_act_common(){
 		//collecting link elements
 		//var $linkNames=_collect("_div","/.*/",_under(_parentNode(_div($ColName),"DIV",1)));
 		//var $linkNames=_collect("_link","/Text slds-text-body.*/",_under(_parentNode(_div($ColName),"DIV",1)));
-		var $linkNames =_collect("_div","/DataTableCell--overflow/",_under(_parentNode(_div($colName),"DIV",1)));
-		_log("No. of rows: "+$list.length);
-			if ($list.length==0) {
+		var $linkNames =_collect("_div","/DataTableCell--overflow/",_under(_parentNode(_div($ColName),"DIV",1)));
+		_log("No. of rows: "+$linkNames.length);
+			if ($linkNames.length==0) {
 				_log("$list collection else loop");
-				$linkNames = _collect("_link","/Text slds-text-body.*/",_under(_parentNode(_div($colName),"DIV",1)));
+				$linkNames = _collect("_link","/Text slds-text-body.*/",_under(_parentNode(_div($ColName),"DIV",1)));
 			}
 		_log(" No. of rows:"+$linkNames.length);
 		var $lastEditedDateList=new Array();
@@ -247,9 +247,9 @@ var $sfmrdz_act_common= new function sfmrdz_act_common(){
 				
 				//fetching UNIX time codes for date
 				$datePreCode = new Date($datePre).getTime();
-				_log("datePre: "+$datePre+" & "+"datePre Code "+$datePreCode);
+				//_log("datePre: "+$datePre+" & "+"datePre Code "+$datePreCode);
 				$dateCurrCode = new Date($dateCurr).getTime();
-				_log("dateCurr: "+$dateCurr+" & "+"dateCurr Code "+$dateCurrCode);
+				//_log("dateCurr: "+$dateCurr+" & "+"dateCurr Code "+$dateCurrCode);
 				
 				if($sortOrder=="ascending"){
 					if($dateCurrCode > $datePreCode){
