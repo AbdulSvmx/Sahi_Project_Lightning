@@ -1,7 +1,7 @@
 var $rs_10473 = _testcase("RS_10473","");
 $rs_10473.start();
-var $domainName = "/visual.force.com/";
-var $sfmName = "Validate Address";
+var $sfmName = "Work Order Validate Address";
+var $wizardObject ="Work Order";
 var $woName;
 
 _setSpeed($g_stepSpeed);
@@ -9,7 +9,7 @@ $bo_act_login.login($g_url, $sfmUsn, $sfmPwd);
 $sfm_act_lightningConfig.switchToLightning();
 
 //Create WO through UI for the validatiion
-$sfm_act_createCustomWizard.createWowithoutvalues();
+$woName = $sfm_act_createCustomWizard.createWowithoutvalues();
 _selectDomain();
 
 if(_getText(_span("/field-value/",_near(_span("Zip"))))==""){
@@ -21,10 +21,16 @@ if(_getText(_span("/field-value/",_near(_span("Zip"))))==""){
 	_click($sfm_pg_wo.btn_wo_edit_save);
 	_wait(20000,isVisible($sfm_pg_wo.btn_wo_edit));
 }
-	//_selectDomain($domainName);
-	_click(_span($sfmName));
+	if($sfm_act_lightningConfig.checkIfWizardLinkExists($sfmName)){
+		_click(_span($sfmName));
+	}else{
+		$sfm_act_wizards.addToWizard($wizardObject, $wizardName[1], $wizardType[3], $sfmName);
+		_selectDomain();
+		$bo_act_navigation.navigateToCreatedRecordUsingGlobalSearch($woName);
+		_click(_span($sfmName));
+	}
 	_selectDomain();
-	_wait(20000,_isVisible($sfm_pg_wo.btn_wo_edit));
+	_wait(30000,_isVisible($sfm_pg_wo.btn_wo_edit));
 	if((_getText(_span("/field-value/",_near(_span("Longitude"))))!="") && (_getText(_span("/field-value/",_near(_span("Latitude"))))!="")){
 		_log("Pass ::: Lat and Long are updated");
 	
