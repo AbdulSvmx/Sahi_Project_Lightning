@@ -3,13 +3,7 @@ var $sfm_act_sfmDesigner = new function sfm_act_sfmDesigner() {
 	this.navToExtendedEdit = function(){
 		_wait(5000);
 		_setStrictVisibilityCheck(true);
-		if(_isVisible($sfm_pg_sfmDesigner.btn_deliveryExtendedEdit)){
-			_click($sfm_pg_sfmDesigner.btn_deliveryExtendedEdit);
-			}else if(_exists($sfm_pg_sfmDesigner.btn_deliveryExtendedEdit)){
-				_click($sfm_pg_sfmDesigner.btn_deliveryExtendedEdit);	
-				}else {
-					_doubleClick($sfm_pg_sfmDesigner.btn_deliveryExtendedEdit);
-					}
+		_click($sfm_pg_sfmDesigner.btn_deliveryExtendedEdit);
 		_click($sfm_pg_sfmDesigner.txt_eeEdit);
 		_setStrictVisibilityCheck(false);
 	};
@@ -34,13 +28,7 @@ var $sfm_act_sfmDesigner = new function sfm_act_sfmDesigner() {
 		}
 		_wait(5000);
 		_setStrictVisibilityCheck(true);
-		if(_isVisible($sfm_pg_sfmDesigner.btn_deliveryExtendedEdit)){
-					_click($sfm_pg_sfmDesigner.btn_deliveryExtendedEdit);
-		}else if(_exists($sfm_pg_sfmDesigner.btn_deliveryExtendedEdit)){
-			_click($sfm_pg_sfmDesigner.btn_deliveryExtendedEdit);			
-		}else {
-			_doubleClick($sfm_pg_sfmDesigner.btn_deliveryExtendedEdit);
-		}
+		_click($sfm_pg_sfmDesigner.btn_deliveryExtendedEdit);
 		_click($sfm_pg_sfmDesigner.txt_eeEdit);
 		_setStrictVisibilityCheck(false);	
 	};
