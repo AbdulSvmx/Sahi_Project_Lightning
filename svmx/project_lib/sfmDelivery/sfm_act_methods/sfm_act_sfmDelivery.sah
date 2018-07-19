@@ -2,10 +2,10 @@ var $sfm_act_sfmDesigner = new function sfm_act_sfmDesigner() {
 	
 	this.navToExtendedEdit = function(){
 		_wait(5000);
-		//_setStrictVisibilityCheck(true);
+		_setStrictVisibilityCheck(true);
 		_click($sfm_pg_sfmDesigner.btn_deliveryExtendedEdit);
 		_click($sfm_pg_sfmDesigner.txt_eeEdit);
-		//_setStrictVisibilityCheck(false);
+		_setStrictVisibilityCheck(false);
 	};
 	
 	this.addChildLine = function($childName){
@@ -27,10 +27,11 @@ var $sfm_act_sfmDesigner = new function sfm_act_sfmDesigner() {
 			_click($sfm_pg_sfmDesigner.btn_deliveryAddRowTravel);
 		}
 		_wait(5000);
-		//_setStrictVisibilityCheck(true);
+		_selectDomain($domainName);
+		_setStrictVisibilityCheck(true);
 		_click($sfm_pg_sfmDesigner.btn_deliveryExtendedEdit);
 		_click($sfm_pg_sfmDesigner.txt_eeEdit);
-		//_setStrictVisibilityCheck(false);	
+		_setStrictVisibilityCheck(false);	
 	};
 	
 };
