@@ -88,14 +88,24 @@ var $sfm_pg_wo = new function sfm_pg_wo() {
     
 	
 	this.openAppLauncher = function(){
+		_wait(5000,_submit("App Launcher"));
 		if(_isVisible(_submit("App Launcher"))){
 			_click(_submit("App Launcher"));
+			_wait(5000,_heading2("App Launcher"));
 
-		}else{
+		}else if(_div("App Launcher")){
 			_click(_div("App Launcher"));
+			_wait(5000,_heading2("App Launcher"));
+
+
+		}else if(_div("slds-icon-waffle")){
+			_click(_div("slds-icon-waffle"));
+			_wait(5000,_heading2("App Launcher"));
+
 
 		}
 	};
+	
 	this.assert_wizard =function($wizTitle){
 		if(_exists(_cell($wizTitle))){
 			_log("Pass");
