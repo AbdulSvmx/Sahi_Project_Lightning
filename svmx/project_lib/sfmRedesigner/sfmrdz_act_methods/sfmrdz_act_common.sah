@@ -284,6 +284,27 @@ var $sfmrdz_act_common= new function sfmrdz_act_common(){
 	};
 	
 	
+	/**
+	 * Expand the Column Size
+	 */
+	this.expdColSize=function($columnName){
+		var $parentNode=_parentNode(_div($columnName),"DIV",1);
+		var $style=_call($parentNode.getAttribute("style"));
+		$styleRead=$style.toString();
+		_log("parent Div Style attribute: "+$styleRead);
+		
+		_call($parentNode.setAttribute("style","width: 400px; flex: 400 0 auto; max-width: 400px;"));
+		_wait(2000);
+		return $styleRead;
+	};
+	
+	/**
+	 * Colapse the Column Size
+	 */
+	this.descColSize=function($columnName,$styleRead){
+		var $parentNode=_parentNode(_div($columnName),"DIV",1);
+		_call($parentNode.setAttribute("style",$styleRead));
+	};
 	
 	
 	

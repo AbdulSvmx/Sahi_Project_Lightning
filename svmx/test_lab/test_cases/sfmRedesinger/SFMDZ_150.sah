@@ -66,19 +66,22 @@ $SFMDZ_150.start();
 	_alert("Done");
 	*/
 	
-	
 	$sfmrdz_act_common.typePicklist("To create and map child lines only");
 	_wait(3000);
-	var $styleRead=(_call(_parentNode(_div("TRANSACTION NAME"),"DIV",1).getAttribute("style"))).toString();
-	_log($styleRead.toString());
 	
-	var $a=_div("rt-th DataGrid__header rt-resizable-header -sort-asc -cursor-pointer");
-		_call($a.setAttribute("style","width: 400.6px; flex: 400.6 0 auto; max-width: 400.6px;"));
+	var $parentNode=_parentNode(_div("TRANSACTION NAME"),"DIV",1);
+	var $styleRead=_call($parentNode.getAttribute("style"));
+	_log($styleRead);
+	var $test=$styleRead.toString();
+	_call($parentNode.setAttribute("style","width: 400px; flex: 400 0 auto; max-width: 400px;"));
 	_wait(2000);
+
 	$list =_collect("_link","/Text slds-text-body.*/",_under(_parentNode(_div("TRANSACTION NAME"),"DIV",1)));
 	_log($list.length);
-	_call($a.setAttribute("style",$styleRead.toString()));
 	
+	_call($parentNode.setAttribute("style",$test));
+	
+
 	
 	
 	
