@@ -24,8 +24,8 @@ _setSpeed($g_stepSpeed);
 		 * Global Variable declaration
 		 */
 		var $url="http://test.salesforce.com";
-		var $un="designer2@test.com";
-		var $pwd="designer@2";
+		var $un="saadat.dz2perftest@servicemax.com";
+		var $pwd="servicemax1";
 		var $viewName="transaction";
 
 		var $Type="To create and map child lines only";
@@ -35,7 +35,7 @@ _setSpeed($g_stepSpeed);
 		$bo_act_login.login($url, $un, $pwd);
 		var $homecurrentHomePageULR =$sfmrdz_act_common.LaunchListViewWindow($viewName);
 		
-		$sfmrdz_act_common.typePicklist($Type);
+		$sfmrdz_act_common.typePicklist("Standard SFM Transactions");
 		_wait(5000,_isVisible($sfmrdz_pg_common.btn_actionMenu));
 		
 		/**
@@ -77,6 +77,8 @@ _setSpeed($g_stepSpeed);
 		_assertTrue($sortStatus, "Links on "+$colName+" column are not sorted in order");
 	
 		
-		//$sfmrdz_act_common.launchHomeWindow($homecurrentHomePageULR);
+		$sfmrdz_act_common.launchHomeWindow($homecurrentHomePageULR);
+		_wait(10000,_isVisible($bo_pg_home.link_home));
 		//$bo_act_login.logOut();
+		
 $SFMDZ_152.end();

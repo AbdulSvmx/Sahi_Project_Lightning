@@ -79,7 +79,7 @@ var $sfmrdz_act_common= new function sfmrdz_act_common(){
 				}
 			}else if ($colName=="Source Object" || $colName=="TODO_TARGET_OBJECT" || $colName=="Object") {
 				_log("Under else loop: ");
-				$list = _collect("_span","/.*/",_under(_div($colName)));
+				$list = _collect("_span","/[a-zA-Z]+/",_under(_parentNode(_div($colName),"DIV",1)));
 				_log("No. of non empty cells: "+$list.length);
 			}			
 		
@@ -175,14 +175,14 @@ var $sfmrdz_act_common= new function sfmrdz_act_common(){
 	// make generic
 	this.secondarySort=function(){
 	
-		var $whereUsedList=_collect("_svg_icon","/slds-icon-text-default.*/",_under(_parentNode($sfmrdz_pg_trnListView.btn_heading_whereUsedCol),"DIV",1));
+		var $whereUsedList=_collect("_svg_icon","/slds-icon-text-default.*/",_under(_parentNode($sfmrdz_pg_trnListView.btn_heading_whereUsedCol,"DIV",1)));
 		_log("No. of Rows having Where used icon: "+$whereUsedList.length);
 		var $linkNames=new Array($whereUsedList.length);
 
 		//extracting link text
 		for(var $i=0;$i<$whereUsedList.length;$i++){
 			$linkNames[$i]=_getText(_link("/Text slds-text-body.*/",_near($whereUsedList[$i])));
-			_log($linkNames[$i]);
+			//_log($linkNames[$i]);
 		}
 		_log("linkName count: "+$linkNames.length);
 		

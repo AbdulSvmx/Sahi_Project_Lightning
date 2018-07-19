@@ -15,15 +15,15 @@
 
 var $SFMDZ_150=_testcase("$SFMDZ-150","Launch Transaction List View - Using URL");
 $SFMDZ_150.start();
-_setSpeed($g_stepSpeed);
+//_setSpeed($g_stepSpeed);
 	
 	/**
 	 * Global Variable declaration
 	 */
 
 	var $url="http://test.salesforce.com";
-	var $un="designer2@test.com";
-	var $pwd="designer@2";
+	var $un="saadat.dz2perftest@servicemax.com";
+	var $pwd="servicemax1";
 	var $viewName="transaction";
 	
 	/**
@@ -33,7 +33,7 @@ _setSpeed($g_stepSpeed);
 	$bo_act_login.login($url, $un, $pwd);
 
 	var $homecurrentHomePageULR =$sfmrdz_act_common.LaunchListViewWindow($viewName);
-	
+	/*
 	//Assertions on transaction list view
 	//_assertExists($sfmrdz_pg_trnListView.btn_heading_transaction);
 	_assertExists($sfmrdz_pg_common.btn_backtoSetup);
@@ -50,5 +50,37 @@ _setSpeed($g_stepSpeed);
 	$sfmrdz_act_common.launchHomeWindow($homecurrentHomePageULR);
 	_wait(10000,_isVisible($bo_pg_home.link_home));
 	//$bo_act_login.logOut();
+	*/
+	
+	
+	/*
+	$sfmrdz_act_common.typePicklist("Standard SFM Transactions");
+	_wait(3000);
+	var $a=_collect("_span","/[a-zA-Z]+/",_under(_parentNode(_div("Source Object"),"DIV",1)));
+	_alert($a.length);
+
+	for(var $i=0;$i<$a.length;$i++){
+		//_highlight($a[$i]);
+		_log(_getText($a[$i]));
+	}
+	_alert("Done");
+	*/
+	
+	
+	$sfmrdz_act_common.typePicklist("To create and map child lines only");
+	_wait(3000);
+	var $styleRead=(_call(_parentNode(_div("TRANSACTION NAME"),"DIV",1).getAttribute("style"))).toString();
+	_log($styleRead.toString());
+	
+	var $a=_div("rt-th DataGrid__header rt-resizable-header -sort-asc -cursor-pointer");
+		_call($a.setAttribute("style","width: 400.6px; flex: 400.6 0 auto; max-width: 400.6px;"));
+	_wait(2000);
+	$list =_collect("_link","/Text slds-text-body.*/",_under(_parentNode(_div("TRANSACTION NAME"),"DIV",1)));
+	_log($list.length);
+	_call($a.setAttribute("style",$styleRead.toString()));
+	
+	
+	
+	
 	
 $SFMDZ_150.end();
