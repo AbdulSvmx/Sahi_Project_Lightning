@@ -30,6 +30,7 @@ var $sfm_act_sfmDesigner = new function sfm_act_sfmDesigner() {
 		_selectDomain($domainName);
 		_setStrictVisibilityCheck(true);
 		_click($sfm_pg_sfmDesigner.btn_deliveryExtendedEdit);
+		_click($sfm_pg_sfmDesigner.btn_deliveryExtendedEdit);
 		_click($sfm_pg_sfmDesigner.txt_eeEdit);
 		_setStrictVisibilityCheck(false);	
 	};
