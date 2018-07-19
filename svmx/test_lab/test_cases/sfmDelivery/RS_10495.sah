@@ -51,11 +51,7 @@ _wait(8000,_div($sfmName));
 //Validate DVR on delivery
 
 //step 1 all true
-_click($sfm_pg_sfmDesigner.btn_deliveryPartsTab);
-_click($sfm_pg_sfmDesigner.btn_deliveryAddRowParts);
-_wait(3000);
-$sfm_act_sfmDesigner.navToExtendedEdit();
-_click($sfm_pg_sfmDesigner.txt_eeEdit);
+$$sfm_act_sfmDesigner.addChildLine("Parts");
 _setValue($sfm_pg_sfmDesigner.txt_eeLineQty,"5");
 _setValue($sfm_pg_sfmDesigner.txt_eeEstimatedPricePerUnit,"1500");
 _setValue($sfm_pg_sfmDesigner.txt_eeReferenceInformation,"Sahi DVR Validation");
@@ -76,7 +72,6 @@ if(_isVisible($sfm_pg_sfmDesigner.txt_dvrConfirmationMessage)){
 
 //step 2 one rule is false
 $sfm_act_sfmDesigner.navToExtendedEdit();
-_click($sfm_pg_sfmDesigner.txt_eeEdit);
 _setValue($sfm_pg_sfmDesigner.txt_eeLineQty,"6");
 _click($sfm_pg_sfmDesigner.btn_eeUpdate);
 _click($sfm_pg_sfmDesigner.btn_deliveryQuickSave);
