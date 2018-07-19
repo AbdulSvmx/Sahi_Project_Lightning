@@ -44,7 +44,7 @@ var $sfmrdz_act_common= new function sfmrdz_act_common(){
 		_setValue($sfmrdz_pg_common.txt_listFilter,$objName);
 		_keyPress($sfmrdz_pg_common.txt_listFilter, 13);
 		_wait(10000,_isVisible($sfmrdz_pg_common.btn_actionMenu));
-		return $callBack.returnResult(!_exists($sfmrdz_pg_common.btn_msgNoResult), "\" "+$objName+" \" "+"Search");
+		//return $callBack.returnResult(!_exists($sfmrdz_pg_common.btn_msgNoResult), "\" "+$objName+" \" "+"Search");
 		
 	};
 	

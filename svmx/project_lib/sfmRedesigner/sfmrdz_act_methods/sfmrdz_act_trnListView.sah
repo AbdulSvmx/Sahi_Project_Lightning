@@ -53,6 +53,7 @@ var $sfmrdz_act_trnListView=new function sfmrdz_act_trnListView(){
 			if ($trnLinks.length==0) {
 				_log("$trnLinks collection else loop");
 				$trnLinks = _collect("_link","/Text slds-text-body.*/",_under(_parentNode($sfmrdz_pg_trnListView.btn_heading_trnCol,"DIV",1)));
+				_log("No. of rows: "+$trnLinks.length);
 			}
 		var $trnNames=new Array($trnLinks.length);
 		var $retVal=true;

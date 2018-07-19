@@ -34,8 +34,14 @@ _setSpeed($g_stepSpeed);
 		var $linkName=new Array();
 		//collect all the div under the 'TRANSACTION NAME' column
 		//note: here i am first collecting all the div under Transaction column and selecting links then again taking div containing link so on execution if any scroll happens script will not fail
-		var $linkDivElements=_collect("_div","/.*/",_under(_parentNode(_div("TRANSACTION NAME"),"DIV",1)));
-
+		//var $linkDivElements=_collect("_div","/DataTableCell--overflow.*/",_under(_parentNode(_div("TRANSACTION NAME"),"DIV",1)));
+		var $linkDivElements =_collect("_div","/DataTableCell--overflow.*/",_under(_parentNode(_div("TRANSACTION NAME"),"DIV",1)));
+		_log("No. of rows: "+$linkDivElements.length);
+			if ($linkDivElements.length==0) {
+				_log("$linkDivElements collection else loop");
+				$linkDivElements = _collect("_link","/Text slds-text-body.*/",_under(_parentNode(_div("TRANSACTION NAME"),"DIV",1)));
+			}
+		
 		//fetching name link that div contains
 		for(var $i=0;$i<$linkDivElements.length;$i++){
 			$linkName[$i]=_getText($linkDivElements[$i]);
