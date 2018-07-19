@@ -33,7 +33,7 @@ var $messageType2 = "Confirmation";
 
 //Variables for rule 3
 var $rulename3 =$bo_act_common.generateRandomName("10490RuleExpense");
-var $ruleDescription3 ="Expense Type cannot be Entertainment.";
+var $ruleDescription3 ="Expense Type cannot be Entertainment";
 var $fieldArray3 = ["Expense Type"];
 var $conditionArray3 = ["Equals"];
 var $operandArray3 =["Value"];
