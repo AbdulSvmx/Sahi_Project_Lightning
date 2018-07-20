@@ -87,7 +87,7 @@ _setSpeed($g_stepSpeed);
 	_wait(5000,_isVisible($sfmrdz_pg_common.btn_actionMenu));
 	
 	$sfmrdz_act_common.mouseOver("Activate Preventive Maintenance Plan","Last Edited");
-	_wait(5000,_isVisible($sfmrdz_pg_common.btn_lastEditMouseOverDiv));
+	_wait(1000,_isVisible($sfmrdz_pg_common.btn_lastEditMouseOverDiv));
 	_assertExists($sfmrdz_pg_common.btn_lastEditMouseOverDiv);
 	_mouseOver($sfmrdz_pg_common.btn_createdBy);
 	_assertExists($sfmrdz_pg_common.btn_createdBy);
@@ -100,6 +100,7 @@ _setSpeed($g_stepSpeed);
 	_assertNotVisible($sfmrdz_pg_common.link_delete, "delete action link is available on ");
 
 	//$sfmrdz_act_common.launchHomeWindow($homecurrentHomePageULR);
-	//$bo_act_login.logOut();
+	//_wait(10000,_isVisible($bo_pg_home.link_home));
+	//$sfm_act_lightningConfig.logoutInLightning();
 
 $SFMDZ_171.end();

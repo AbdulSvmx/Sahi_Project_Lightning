@@ -59,6 +59,12 @@ var $sfmrdz_pg_trnListView=new function sfmrdz_pg_trnListView(){
 	this.link_createMapChildLine=_link("To create and map child lines only");
 	this.link_createManageChildLine=_span("To create and manage child lines");
 	
+	//Where Used window Items
+	this.btn_heading_whereUsedDivHeading=_heading2("/Where Used:.*/");
+	this.btn_heading_SFMUsed=_div("Below are the different areas where this transaction is being used:");
+	this.btn_heading_SFMSteps=_div("Service Flow Wizard Step");
+	this.btn_closeWindow=_button("Close");
+	
 	
 	
 	

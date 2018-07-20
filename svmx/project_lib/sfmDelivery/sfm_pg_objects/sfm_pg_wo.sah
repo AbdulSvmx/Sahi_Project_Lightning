@@ -76,7 +76,7 @@ var $sfm_pg_wo = new function sfm_pg_wo() {
     this.btn_newButtonForWorkDetail = _link("New",_near(_heading2("/Work Details/")));
     this.btn_nextForWorkDetailRecordType = _button("Next",_in(_div("modal-footer slds-modal__footer")));
     this.link_relatedListsTab = _span("Related");
-    this.link_lineTypeArrow = _link(0,_near(_span("Line Type")));
+    this.link_lineTypeArrow = _link(0,_near(_span("/Line Type/")));
     this.link_viewAllWorkDetails = _span("View AllWork Details");
     this.btn_editActivityType = _button("Edit Activity Type");
     this.link_arrowToEditChildLine = _div("/x-action-col-icon x-action-/");
@@ -84,17 +84,28 @@ var $sfm_pg_wo = new function sfm_pg_wo() {
     this.btn_cancelForSfmDelivery = _link("/Cancel/");
     this.btn_proceedForCancel = _span("Proceed");
     this.link_workDetailAfterCreation = _div("Work Detail");
+    this.btn_cancelExtendedEdit = _span("/Cancel/");
     
 	
 	this.openAppLauncher = function(){
+		_wait(5000,_submit("App Launcher"));
 		if(_isVisible(_submit("App Launcher"))){
 			_click(_submit("App Launcher"));
+			_wait(5000,_heading2("App Launcher"));
 
-		}else{
+		}else if(_div("App Launcher")){
 			_click(_div("App Launcher"));
+			_wait(5000,_heading2("App Launcher"));
+
+
+		}else if(_div("slds-icon-waffle")){
+			_click(_div("slds-icon-waffle"));
+			_wait(5000,_heading2("App Launcher"));
+
 
 		}
 	};
+	
 	this.assert_wizard =function($wizTitle){
 		if(_exists(_cell($wizTitle))){
 			_log("Pass");

@@ -45,6 +45,10 @@ _setSpeed($g_stepSpeed);
 		//browser cache delete - not working check for alternative code
 		_call(top.location.reload(true));
 		
-	
+		
+		//$sfmrdz_act_common.launchHomeWindow($homecurrentHomePageULR);
+		//_wait(10000,_isVisible($bo_pg_home.link_home));
+		//$sfm_act_lightningConfig.logoutInLightning();
+
 		
 	$SFMDZ_163.end();

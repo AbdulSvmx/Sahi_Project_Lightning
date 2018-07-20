@@ -65,5 +65,7 @@ _setSpeed($g_stepSpeed);
 
 		
 		//$sfmrdz_act_common.launchHomeWindow($homecurrentHomePageULR);
-		//$bo_act_login.logOut();
+		//_wait(10000,_isVisible($bo_pg_home.link_home));
+		//$sfm_act_lightningConfig.logoutInLightning();
+		
 $SFMDZ_635.end();

@@ -31,13 +31,13 @@ _setSpeed($g_stepSpeed);
 		var $homecurrentHomePageULR =$sfmrdz_act_common.LaunchListViewWindow($viewName);
 
 		$sfmrdz_act_common.typePicklist("Standard SFM Transactions");
-		_click($sfmrdz_pg_trnListView.link_stdTransaction);
-		_wait(5000,_isVisible($sfmrdz_pg_common.btn_actionMenu));
-		
+		_click($sfmrdz_pg_trnListView.btn_heading_whereUsedCol);
+		_wait(5000);
 		var $retVal=$sfmrdz_act_common.secondarySort();
 		_assertTrue($retVal,"Secondary sort is not working on transaction name column");
 		
 		$sfmrdz_act_common.launchHomeWindow($homecurrentHomePageULR);
-		//$bo_act_login.logOut();
+		_wait(10000,_isVisible($bo_pg_home.link_home));
+		$sfm_act_lightningConfig.logoutInLightning();
 		
 $SFMDZ_154.start();

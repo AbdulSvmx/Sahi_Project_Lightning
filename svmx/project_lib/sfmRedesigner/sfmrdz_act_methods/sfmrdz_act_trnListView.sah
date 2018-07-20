@@ -46,8 +46,15 @@ var $sfmrdz_act_trnListView=new function sfmrdz_act_trnListView(){
 	this.contentSearch=function($search){
 		$sfmrdz_act_common.searchObj($search);
 		_wait(5000);
-		var $trnLinks=_collect("_div","/rt-td DataTableCell/",_under(_parentNode(_div("TRANSACTION NAME"),"DIV",1)));
+		//var $trnLinks=_collect("_div","/rt-td DataTableCell/",_under(_parentNode(_div("TRANSACTION NAME"),"DIV",1)));
 		//var $trnLinks=_collect("_link","/.*/",_under(_div("TRANSACTION NAME")));
+		var $trnLinks =_collect("_div","/DataTableCell--overflow/",_under(_parentNode($sfmrdz_pg_trnListView.btn_heading_trnCol,"DIV",1)));
+		_log("No. of rows: "+$trnLinks.length);
+			if ($trnLinks.length==0) {
+				_log("$trnLinks collection else loop");
+				$trnLinks = _collect("_link","/Text slds-text-body.*/",_under(_parentNode($sfmrdz_pg_trnListView.btn_heading_trnCol,"DIV",1)));
+				_log("No. of rows: "+$trnLinks.length);
+			}
 		var $trnNames=new Array($trnLinks.length);
 		var $retVal=true;
 		var $rowNotContaingText=null;

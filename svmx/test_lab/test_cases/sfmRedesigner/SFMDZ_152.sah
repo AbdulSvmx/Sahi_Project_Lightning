@@ -35,7 +35,7 @@ _setSpeed($g_stepSpeed);
 		$bo_act_login.login($url, $un, $pwd);
 		var $homecurrentHomePageULR =$sfmrdz_act_common.LaunchListViewWindow($viewName);
 		
-		$sfmrdz_act_common.typePicklist($Type);
+		$sfmrdz_act_common.typePicklist("To create and map child lines only");
 		_wait(5000,_isVisible($sfmrdz_pg_common.btn_actionMenu));
 		
 		/**
@@ -78,5 +78,7 @@ _setSpeed($g_stepSpeed);
 	
 		
 		$sfmrdz_act_common.launchHomeWindow($homecurrentHomePageULR);
-		//$bo_act_login.logOut();
+		_wait(10000,_isVisible($bo_pg_home.link_home));
+		$sfm_act_lightningConfig.logoutInLightning();
+		
 $SFMDZ_152.end();
