@@ -52,7 +52,7 @@ _setSpeed($g_stepSpeed);
 
 		//Asserting all the lock icon left of each links
 		for(var $i=0;$i<$linkDivElements.length;$i++){
-			if(_assertExists(_svg_icon("/.*/",_leftOf(_div($linkName[$i]))))){
+			if(_assertExists(_svg_icon("/Icon slds-icon.*/",_leftOf(_div($linkName[$i]))))){
 				$retVal=true;
 			}else{
 				$retVal=false;
@@ -62,6 +62,8 @@ _setSpeed($g_stepSpeed);
 		}
 		_assertTrue($retVal,$nonStdTransaction+" transaction is not having lock icon");
 		
-		
+		//$sfmrdz_act_common.launchHomeWindow($homecurrentHomePageULR);
+		//_wait(10000,_isVisible($bo_pg_home.link_home));
+		//$sfm_act_lightningConfig.logoutInLightning();
 		
 $SFMDZ_635.end();

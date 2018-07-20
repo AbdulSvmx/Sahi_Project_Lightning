@@ -59,6 +59,7 @@ _setSpeed($g_stepSpeed);
 		_assertExists($sfmrdz_pg_common.btn_msgNoResult,$trnName+" is not available");
 		
 		//$sfmrdz_act_common.launchHomeWindow($homecurrentHomePageULR);
-		//$bo_act_login.logOut();
+		//_wait(10000,_isVisible($bo_pg_home.link_home));
+		//$sfm_act_lightningConfig.logoutInLightning();
 		
 $SFMDZ_172.end();

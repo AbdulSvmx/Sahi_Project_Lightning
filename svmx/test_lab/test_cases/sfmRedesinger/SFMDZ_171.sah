@@ -100,6 +100,7 @@ _setSpeed($g_stepSpeed);
 	_assertNotVisible($sfmrdz_pg_common.link_delete, "delete action link is available on ");
 
 	//$sfmrdz_act_common.launchHomeWindow($homecurrentHomePageULR);
-	//$bo_act_login.logOut();
+	//_wait(10000,_isVisible($bo_pg_home.link_home));
+	//$sfm_act_lightningConfig.logoutInLightning();
 
 $SFMDZ_171.end();

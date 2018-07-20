@@ -70,17 +70,22 @@ var $sfmrdz_act_common= new function sfmrdz_act_common(){
 		var $list=null;
 			if ($colName=="TRANSACTION NAME" || $colName=="DATA VALIDATION RULES NAME" || $colName=="Expression Name") {
 				_log("Under if loop: ");
-				//$list = _collect("_link","/Text slds-text-body.*/",_under(_parentNode(_div($colName),"DIV",1)));
+				//$sfmrdz_act_common.expdColSize($colName);
 				$list =_collect("_div","/DataTableCell--overflow/",_under(_parentNode(_div($colName),"DIV",1)));
 				_log("No. of rows: "+$list.length);
+				//$sfmrdz_act_common.descColSize($colName);
+
 				if ($list.length==0) {
 					_log("$list collection else loop");
 					$list = _collect("_link","/Text slds-text-body.*/",_under(_parentNode(_div($colName),"DIV",1)));
 				}
 			}else if ($colName=="Source Object" || $colName=="TODO_TARGET_OBJECT" || $colName=="Object") {
 				_log("Under else loop: ");
+				//$sfmrdz_act_common.expdColSize($colName);
+				_wait(3000);
 				$list = _collect("_span","/[a-zA-Z]+/",_under(_parentNode(_div($colName),"DIV",1)));
 				_log("No. of non empty cells: "+$list.length);
+				//$sfmrdz_act_common.descColSize($colName);
 			}			
 		
 		//new array declaration
@@ -174,7 +179,7 @@ var $sfmrdz_act_common= new function sfmrdz_act_common(){
 	//Secondary sort fn
 	// make generic
 	this.secondarySort=function(){
-	
+		
 		var $whereUsedList=_collect("_svg_icon","/slds-icon-text-default.*/",_under(_parentNode($sfmrdz_pg_trnListView.btn_heading_whereUsedCol,"DIV",1)));
 		_log("No. of Rows having Where used icon: "+$whereUsedList.length);
 		var $linkNames=new Array($whereUsedList.length);
@@ -182,7 +187,7 @@ var $sfmrdz_act_common= new function sfmrdz_act_common(){
 		//extracting link text
 		for(var $i=0;$i<$whereUsedList.length;$i++){
 			$linkNames[$i]=_getText(_link("/Text slds-text-body.*/",_near($whereUsedList[$i])));
-			//_log($linkNames[$i]);
+			_log($linkNames[$i]);
 		}
 		_log("linkName count: "+$linkNames.length);
 		
@@ -216,15 +221,17 @@ var $sfmrdz_act_common= new function sfmrdz_act_common(){
 	
 	this.sortLastEditedCol=function($ColName,$sortOrder){
 		//collecting link elements
-		//var $linkNames=_collect("_div","/.*/",_under(_parentNode(_div($ColName),"DIV",1)));
-		//var $linkNames=_collect("_link","/Text slds-text-body.*/",_under(_parentNode(_div($ColName),"DIV",1)));
+		//$sfmrdz_act_common.expdColSize($ColName);
 		var $linkNames =_collect("_div","/DataTableCell--overflow/",_under(_parentNode(_div($ColName),"DIV",1)));
 		_log("No. of rows: "+$linkNames.length);
 			if ($linkNames.length==0) {
 				_log("$list collection else loop");
 				$linkNames = _collect("_link","/Text slds-text-body.*/",_under(_parentNode(_div($ColName),"DIV",1)));
+				_log(" No. of rows:"+$linkNames.length);
 			}
-		_log(" No. of rows:"+$linkNames.length);
+		
+		//$sfmrdz_act_common.descColSize($ColName);
+		
 		var $lastEditedDateList=new Array();
 
 		//extracting link element names
@@ -301,9 +308,9 @@ var $sfmrdz_act_common= new function sfmrdz_act_common(){
 	/**
 	 * Colapse the Column Size
 	 */
-	this.descColSize=function($columnName,$styleRead){
+	this.descColSize=function($columnName){
 		var $parentNode=_parentNode(_div($columnName),"DIV",1);
-		_call($parentNode.setAttribute("style",$styleRead));
+		_call($parentNode.setAttribute("style","flex: 240 0 auto; width: 240px; max-width: 400px;"));
 	};
 	
 	
