@@ -81,26 +81,26 @@ if(_isVisible($sfm_pg_sfmDesigner.txt_dvrMultipleConfirmation)){
 	if(_isVisible(_div("/"+"Parts: "+$ruleDescription+"/"))){
 		_log("Pass ::: DVR Confirmation for Parts is working");
 	}else{
-		_log("Fail ::: DVR Confirmation for Parts is not working");
+		_log("Fail ::: DVR Confirmation for Parts is not working","FAILURE");
 	}
 	if(_isVisible(_div("/"+"Labor: "+$ruleDescription+"/"))){
 		_log("Pass ::: DVR Confirmation for Labor is working");
 	}else{
-		_log("Fail ::: DVR Confirmation for Labor is not working");
+		_log("Fail ::: DVR Confirmation for Labor is not working","FAILURE");
 	}
 	if(_isVisible(_div("/"+"Expenses: "+$ruleDescription+"/"))){
 		_log("Pass ::: DVR Confirmation for Expenses is working");
 	}else{
-		_log("Fail ::: DVR Confirmation for Expenses is not working");
+		_log("Fail ::: DVR Confirmation for Expenses is not working","FAILURE");
 	}
 	if(_isVisible(_div("/"+"Travel: "+$ruleDescription+"/"))){
 		_log("Pass ::: DVR Confirmation for Travel is working");
 	}else{
-		_log("Fail ::: DVR Confirmation for Travel is not working");
+		_log("Fail ::: DVR Confirmation for Travel is not working","FAILURE");
 	}
 	
 }else{
-	_log("Fail ::: DVR Confirmation is not working");
+	_log("Fail ::: DVR Confirmation is not working","FAILURE");
 }
 if(_exists($sfm_pg_sfmDesigner.txt_priceAlert)){
 	_click($sfm_pg_sfmDesigner.btn_priceAlertOk);
@@ -141,7 +141,7 @@ if(_exists($sfm_pg_sfmDesigner.txt_priceAlert)){
 	_wait(10000);
 }
 if(_isVisible($sfm_pg_sfmDesigner.txt_dvrMultipleConfirmation)){
-	_log("Fail ::: DVR is triggered when not supposed to");
+	_log("Fail ::: DVR is triggered when not supposed to","FAILURE");
 }else{
 	_log("Pass ::: DVR is not triggered as expected");
 }

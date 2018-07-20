@@ -28,10 +28,10 @@ _wait(3000);
 _selectWindow("Servicemax - Google Search");
 var $search=_getText(_textbox("Search"));
 if($search ==$paramValue ){
-	_log("Pass ::: URL based CA is working");
+	_log("Pass ::: URL based CA is working","SUCCESS");
 }
 else{
-	_log("Fail ::: URL based CA is not working");
+	_log("Fail ::: URL based CA is not working","FAILURE");
 }
 
 $rs_10456.end();

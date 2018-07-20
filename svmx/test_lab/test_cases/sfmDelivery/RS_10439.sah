@@ -87,9 +87,9 @@ _log($laborBlp2);
 _click($sfm_pg_sfmDesigner.btn_eeCancel);
 if( parseInt(_getText($sfm_pg_sfmDesigner.txt_proformaIAmt))== ($laborBlp1+$laborBlp2)){
 	
-	_log("Pass ::: SumOf rollup formula is working");
+	_log("Pass ::: SumOf rollup formula is working","SUCCESS");
 }else{
-	_log("Fail ::: SumOf rollup formula is not working");
+	_log("Fail ::: SumOf rollup formula is not working","FAILURE");
 }
 
 $rs_10439.end();
