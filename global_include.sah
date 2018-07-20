@@ -37,7 +37,7 @@ var $bac_un = "meghana.rao@servicemax.com";
 var $bac_pwd = "cloud_103";
 
 var $tech_un = "lightning_tech@gmail.com";
-var $tech_pwd = "servicemax0"
+var $tech_pwd = "servicemax0";
 
 //var $bac_un = "orgsadmin@svmx-test4.org.test4part2";
 //var $bac_pwd = "welcome-03";
@@ -48,9 +48,9 @@ var $bac_PRTpwd = "servicemax@123";
 var $group_profilename = "Cloned Profile";
 
 // Checklist Global Variables
-var $un_checklist = $bac_un// "meghana.rao@servicemax.com"; // Pointing to
+var $un_checklist = $bac_un;// "meghana.rao@servicemax.com"; // Pointing to
 							// Automation Dummy Org
-var $pwd_checklist = $bac_pwd// "cloud_102";
+var $pwd_checklist = $bac_pwd;// "cloud_102";
 var $url_checklist = "https://test.salesforce.com";
 
 // SFMD Global Variables
