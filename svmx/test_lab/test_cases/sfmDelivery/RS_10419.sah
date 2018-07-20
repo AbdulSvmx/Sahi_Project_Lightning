@@ -67,6 +67,7 @@ _closeWindow();
 _selectWindow();
 
 //Clone standard process and add the dependent picklist in the screen designer
+_setSpeed(3000);
 $sfm_act_SFM.cloneTDM016($sfmNameToBeCloned,$processName,$isCustom,$pageLayoutName, $sfmTemplate, $fieldName, $containerName);
 $bo_pg_sfmTransactionAndDesigner.deleteField($ctrlPicklist);
 _click($bo_pg_sfmTransactionAndDesigner.btn_pageLayoutSave);

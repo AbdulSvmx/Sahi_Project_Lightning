@@ -65,7 +65,7 @@ _selectDomain($domainName);
 _wait(8000,_div($sfmName));
 
 //Validate If customerDown is true then Billing type=Paid else as is
-if(_condition($sfm_pg_sfmDesigner.chk_customerDown.checked)==false){
+if(_condition($sfm_pg_sfmDesigner.chk_customerDown.checked==false)){
 	_click($sfm_pg_sfmDesigner.chk_customerDown);
 }
 
@@ -82,7 +82,7 @@ if(_getText($sfm_pg_sfmDesigner.txt_billingType)=="Paid"){
 
 //Validate If Billing type is Courtesy then check Is Entitlement performed else as is
 _wait(3000);
-if(_condition($sfm_pg_sfmDesigner.chk_customerDown.checked)==true){
+if(_condition($sfm_pg_sfmDesigner.chk_customerDown.checked==true)){
 	_click($sfm_pg_sfmDesigner.chk_customerDown);
 }
 _setValue($sfm_pg_sfmDesigner.txt_billingType,"Courtesy");

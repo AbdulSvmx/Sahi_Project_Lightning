@@ -62,8 +62,8 @@ _setSpeed($g_stepSpeed);
 		}
 		_assertTrue($retVal,$nonStdTransaction+" transaction is not having lock icon");
 		
-		//$sfmrdz_act_common.launchHomeWindow($homecurrentHomePageULR);
-		//_wait(10000,_isVisible($bo_pg_home.link_home));
-		//$sfm_act_lightningConfig.logoutInLightning();
+		$sfmrdz_act_common.launchHomeWindow($homecurrentHomePageULR);
+		_wait(10000,_isVisible($bo_pg_home.link_home));
+		$sfm_act_lightningConfig.logoutInLightning();
 		
 $SFMDZ_635.end();
