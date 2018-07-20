@@ -59,7 +59,7 @@ _click($sfm_pg_sfmDesigner.btn_eeUpdate);
 _wait(3000);
 
 //Validate that the DVR is triggering or not
-_click($sfm_pg_sfmDesigner.btn_deliveryQuickSave);
+_click($sfm_pg_sfmDesigner.btn_deliverySave);
 
 	if(_isVisible(_div("/"+"Parts: "+$ruleDescription+"/"))){
 		_log("Pass ::: DVR Error for child line is working");
@@ -73,7 +73,7 @@ _click($sfm_pg_sfmDesigner.btn_deliveryQuickSave);
 		_click(_listItem("Calibration"));
 		_click($sfm_pg_sfmDesigner.btn_eeUpdate);
 		_wait(3000);		
-	_click($sfm_pg_sfmDesigner.btn_deliveryQuickSave);
+	_click($sfm_pg_sfmDesigner.btn_deliverySave);
 	if(_isVisible(_div("/"+"Parts: "+$ruleDescription+"/"))){
 		_log("Fail ::: DVR Confirmation for child line is not working");
 	}else{

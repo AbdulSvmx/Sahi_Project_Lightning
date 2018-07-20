@@ -92,17 +92,12 @@ var $sfm_pg_wo = new function sfm_pg_wo() {
 		if(_isVisible(_submit("App Launcher"))){
 			_click(_submit("App Launcher"));
 			_wait(5000,_heading2("App Launcher"));
-
-		}else if(_div("App Launcher")){
+		}else if(_isVisible(_div("App Launcher"))){
 			_click(_div("App Launcher"));
 			_wait(5000,_heading2("App Launcher"));
-
-
-		}else if(_div("slds-icon-waffle")){
+		}else if(_isVisible(_div("slds-icon-waffle"))){
 			_click(_div("slds-icon-waffle"));
 			_wait(5000,_heading2("App Launcher"));
-
-
 		}
 	};
 	
