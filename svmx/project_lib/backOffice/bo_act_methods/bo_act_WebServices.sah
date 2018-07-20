@@ -226,7 +226,7 @@ var $bo_act_WebServices=new function bo_act_WebServices(){
 		
 		if ( $enteredMinBS== $drMin){
 				_log("Entered Driving Time  is matching with BeforeSaveUpdate Driving Time");
-		}esle{
+		}else{
 			_log("Entered Driving Time  is matching with OnLoad Driving Time","FAILURE");
 		}
 		
@@ -295,7 +295,7 @@ var $bo_act_WebServices=new function bo_act_WebServices(){
 						_log("Entered Zip is matching with On Exit Zip");
 					}else{
 						_log("Entered Zip  is matching with OnLoad Zip","FAILURE");	
-					}
+					};
 					
 				};
 					this.verifyAfterAddRecordForChildField=function($enteredMinOC,$enteredOTOC,$enteredZipOC){
@@ -308,7 +308,7 @@ var $bo_act_WebServices=new function bo_act_WebServices(){
 					_wait(10000);
 					var $drMin=_getText($bo_pg_webServices.delivery_drMin);			
 					var $orderTy=_getText($bo_pg_webServices.delivery_ordType);
-					var $zip=_getText($bo_pg_webServices.delivery_zip)
+					var $zip=_getText($bo_pg_webServices.delivery_zip);
 
 					if ( $enteredMinOC== $drMin){
 							_log("Entered Driving Time  is matching with Driving time displayed after adding record to child line");
@@ -325,7 +325,7 @@ var $bo_act_WebServices=new function bo_act_WebServices(){
 						_log("Entered Zip is matching with Zip displayed on VF page after adding child record");
 					}esle{
 						_log("Entered Zip is matching with Zip displayed on VF page after adding child record","FAILURE");
-					}
+					};
 					
 				};
 					this.verifyOnExitForChildField=function($enteredMinOC,$enteredOTOC,$enteredZipOC){
@@ -337,7 +337,7 @@ var $bo_act_WebServices=new function bo_act_WebServices(){
 					_wait(10000);
 					var $drMin=_getText($bo_pg_webServices.delivery_drMin);			
 					var $orderTy=_getText($bo_pg_webServices.delivery_ordType);
-					var $zip=_getText($bo_pg_webServices.delivery_zip)
+					var $zip=_getText($bo_pg_webServices.delivery_zip);
 
 					if ( $enteredMinOC== $drMin){
 							_log("Entered Driving Time  is matching with On Change Driving Time  after child field is updated");
@@ -354,7 +354,7 @@ var $bo_act_WebServices=new function bo_act_WebServices(){
 						
 					}else{
 						_log("Entered Zip is matching with Zip displayed on VF page after adding child record","FAILURE");
-					}			
-		}
+					}	;		
+		};
 };
 	
