@@ -1,7 +1,7 @@
-../../../test_lab/test_suites/sfmDelivery/SFMDelivery_DVRTestCases.suite
+//../../../test_lab/test_suites/sfmDelivery/SFMDelivery_DVRTestCases.suite
 //../../../test_lab/test_suites/sfmDelivery/SFMDelivery_WebServicesTestCases.suite
 ../../../test_lab/test_suites/sfmDelivery/SFMDelivery_FormulaTestCases.suite
-//../../../test_lab/test_suites/sfmDelivery/SFMDelivery_ProcessTestCases.suite
+../../../test_lab/test_suites/sfmDelivery/SFMDelivery_ProcessTestCases.suite
 
 
 //../../../test_lab/test_suites/sfmDelivery/SFMDelivery_CheckListTestCases.suite
