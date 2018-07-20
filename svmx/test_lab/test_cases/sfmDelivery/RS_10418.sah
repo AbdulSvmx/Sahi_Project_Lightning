@@ -63,7 +63,7 @@ _selectWindow();
 
 
 //Navigate to servicemax setup and setup required process.
-    $bo_act_navigation.navigateToSvmxSetup();
+    _setSpeed(3000);
 	$bo_act_navigation.navigateToSfmTransactionDesigner();
 	//_selectDomain();
 	$sfm_act_SFM.selectSFM($process_to_clone,false);

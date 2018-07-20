@@ -52,7 +52,7 @@ var $sfm_pg_wo = new function sfm_pg_wo() {
 	this.sel_orderType = _link(0,_near(_span("Order Type",_in(_div("/modal-container/")))));
 	
 	//Added by JJ for Object Manager navigations in Lightning.
-	this.link_lightning_setup = _div("Setup");
+	this.link_lightning_setup = _link("Setup");
 	this.link_currentapp_setup = _div("Setup for current app");
 	this.link_object_manager = _span("Object Manager");
 	this.txt_quick_find = _searchbox("globalQuickfind");
