@@ -110,7 +110,8 @@ for($z = 0;$z<$ctrl_unique_values.length;$z++){
 	 }
 	var $actual_list = [];
 	_click(_div("/trigger-picker/",_in(_div("/"+$dependentPicklist+"/",_in(_div("/sfm-window/"))))));
-	_click(_div("/trigger-picker/",_in(_div("/"+$dependentPicklist+"/",_in(_div("/sfm-window/"))))));
+	//in AWS, the behavior is different. There is no need to scroll down.
+	//_click(_div("/trigger-picker/",_in(_div("/"+$dependentPicklist+"/",_in(_div("/sfm-window/"))))));
 	var $x = _count("_listItem","/.*/");
 		_log($x);
 		var $i = 0;
