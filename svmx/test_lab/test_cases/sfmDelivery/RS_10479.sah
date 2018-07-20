@@ -1,4 +1,4 @@
-
+////If You are running on Dev  Org, Please make sure your webservices code is SVMXDEV instead of SVMXC. For WebService Refer Testcase(Comment Section) in Jira
 
 //Author:Mamata rs_10479
 	var $rs_10479 = _testcase("rs_10479", "Verify Web Service call before Save/Insert");
@@ -11,10 +11,10 @@
 	var $sfmTemplateSaveAsName=$bo_act_common.generateRandomName("10479Temp");
 
 	var $objName="Work Order";
-	var $wizardname="SFM Delivery Auto";
-	var $wizardID= $wizardname;
+	//var $wizardname="SFM Delivery Auto";
+	//var $wizardID= $wizardname;
 	var $executionMode="Interactive";
-	var $fieldActnType="SFM";
+	//var $fieldActnType="SFM";
 	var $actnName=$sfmName;
 	var $stndSFMName=$sfmName;
 
@@ -26,23 +26,24 @@
 	var $wizardButtonName=$sfmName;
 	var $enteredMinBS=60;
 	var $enteredOTBS="Field Service";
-	var $enteredZipBS=560065;
-
+	var $enteredZipBS=560065;	
 	$bo_act_login.login($g_url, $sfmUsn, $sfmPwd);
 	$sfm_act_lightningConfig.switchToLightning();
 	$bo_act_navigation.navigateServicemaxSetUpInLightening();
+	var $eventType="We";
+	var $method="objWebService.beforeSaveOrUpdate";
 
 //*****Navigate to SFm Designer and create clone of Manage WO Line Usage Services transaction********
 $bo_act_navigation.navigateToSfmTransactionDesignerForWeb();
 _wait(20000);
 $bo_act_WebServices.createSFmForWebServices($sfmToBeCloned, $sfmName,$subTypePart,$subTypeActivityType,$subTypeExpenses,$subTypeTravel,$sfmTemplateSaveAsName);
-$bo_act_WebServices.enableBeforeSave();
+$bo_act_WebServices.enableBeforeSave($eventType,$method);
 
 $bo_act_WebServices.saveAndClose();
 _click($bo_pg_home.link_backToSetUpHome);
 
 //*******Nagigate to SFM Wizard and Create Wizard and Add Above Transaction to it**********
-$sfm_act_wizards.addToWizard($objName, $wizardname, $fieldActnType, $actnName);
+$sfm_act_wizards.addToWizard($objName, $wizardName[1], $wizardType[1], $actnName);
 
 //******Launch the SFM in delivery for WO object**************
 
