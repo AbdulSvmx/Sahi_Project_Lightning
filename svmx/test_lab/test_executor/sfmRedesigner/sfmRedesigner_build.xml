@@ -16,7 +16,7 @@
 	
 	<target name="set_properties_chrome" depends="set_timestamp">
     	<property name="scriptDir" value="scripts/Sahi_Project_Lightning/"/>
-    	<property name="scriptName" value="svmx/test_lab/test_suites/sfmRedsigner/sfmRedesigner_all.suite"/>
+    	<property name="scriptName" value="svmx/test_lab/test_suites/sfmRedesigner/sfmRedesigner_all.suite"/>
 		<property name="browser" value="chrome"/>
 		<property name="startWith" value="desktopbrowser"/>
 		<property name="sendemail" value="false"/>
