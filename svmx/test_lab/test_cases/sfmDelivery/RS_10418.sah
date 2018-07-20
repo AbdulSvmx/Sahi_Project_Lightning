@@ -92,8 +92,6 @@ _selectWindow();
 	_click($bo_pg_sfmTransactionAndDesigner.btn_screenDesigner);
 	$bo_act_navigation.designHeaderScreen($pageLayoutName, $fields_array);
 	_click($bo_pg_sfmTransactionAndDesigner.btn_finalQuickSave);
-
-	$bo_act_navigation.navigateToSfmWizard();
 	$sfm_act_wizards.addToWizard($object_name,$currentWizardName,"SFM",$processName);
 	_selectDomain();
 	//test from here.
