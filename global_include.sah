@@ -3,6 +3,26 @@ _setXHRReadyStatesToWaitFor("2,3")
 _windowAction("resize", 1920, 1080);
 var $g_stepSpeed = 300;
 _setSpeed($g_stepSpeed);
+
+function killNewWindows() {
+	_selectWindow();
+	var $recWin = _getRecentWindow().windowTitle;
+	var $winExists = _windowExists($recWin,200);
+	_log("Recent Windows : "+$recWin+" Win Exits = "+$winExists);
+	
+	if ($winExists) {
+		try{
+			_selectWindow(""+$recWin);
+			_closeWindow();
+		}catch(e){}
+	}
+	
+	_selectWindow();
+	_focusWindow();
+
+}
+
+killNewWindows() ;
 // PLease CHANGE the Flag to decide whether Dev or Base
 var $orgtype = "Base";
 
@@ -266,5 +286,4 @@ function dumpWindowInfo() {
 	_sahi._log(s);
 }
 
-$callBack.killNewWindows();
 
