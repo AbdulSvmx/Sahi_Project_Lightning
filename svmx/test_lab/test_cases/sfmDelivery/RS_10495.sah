@@ -67,7 +67,7 @@ if(_isVisible($sfm_pg_sfmDesigner.txt_dvrConfirmationMessage)){
 	_log("Pass ::: Step 1 pass with all true");
 	}
 }else{
-	_log("Fail ::: Step 1 fail with all true");
+	_log("Fail ::: Step 1 fail with all true","FAILURE");
 }
 
 //step 2 one rule is false
@@ -81,7 +81,7 @@ if(_exists($sfm_pg_sfmDesigner.txt_priceAlert)){
 }
 
 if(_isVisible($sfm_pg_sfmDesigner.txt_dvrConfirmationMessage)){
-	_log("Fail ::: Step 2 fail with one rule as false");
+	_log("Fail ::: Step 2 fail with one rule as false","FAILURE");
 }else{
 	_log("Pass ::: Step 2 pass with one rule as false");
 	}

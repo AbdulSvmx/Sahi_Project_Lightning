@@ -32,9 +32,9 @@ if(_getText(_span("/field-value/",_near(_span("Zip"))))==""){
 	_selectDomain();
 	_wait(30000,_isVisible($sfm_pg_wo.btn_wo_edit));
 	if((_getText(_span("/field-value/",_near(_span("Longitude"))))!="") && (_getText(_span("/field-value/",_near(_span("Latitude"))))!="")){
-		_log("Pass ::: Lat and Long are updated");
+		_log("Pass ::: Lat and Long are updated","SUCCESS");
 	
    }else{
-		_log("Fail ::: Lat and Long are not updated");
+		_log("Fail ::: Lat and Long are not updated","FAILURE");
 	}
 $rs_10473.end();

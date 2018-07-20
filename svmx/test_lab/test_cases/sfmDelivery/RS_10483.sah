@@ -28,23 +28,23 @@ $sfm_act_createCustomWizard.createWowithoutvalues();
 _click(_span($actionId));
 _wait(3000);
 if(_exists($processingMessage)){
-	_log("Pass ::: Account creating under process");
+	_log("Pass ::: Account creating under process","SUCCESS");
 }else{
-	_log("Fail");
+	_log("Fail","FAILURE");
 }
 
 if(_exists($successMessage)){
-	_log("Pass ::: Account created successfully");
+	_log("Pass ::: Account created successfully","SUCCESS");
 	_selectDomain($domainName);
 	_click(_submit("Continue"));
 	_wait(5000);
 }
 
 if (_exists(_link("Create RMA from Work Order (Work Order Number: "+$woName+")"))){
-   _log("Pass ::: Handover has happened to Create RMA from Work order process");
+   _log("Pass ::: Handover has happened to Create RMA from Work order process","SUCCESS");
 }
 else{
-	_log("Fail ::: Handover has not happened to Create RMA from Work order process");
+	_log("Fail ::: Handover has not happened to Create RMA from Work order process","FAILURE");
 }
 
 $rs_10483.end();
