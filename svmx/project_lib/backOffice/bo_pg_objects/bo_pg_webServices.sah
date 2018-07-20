@@ -16,9 +16,14 @@ var $bo_pg_webServices = new function bo_pg_webServices(){
 	this.clk_selectExpType=_div("sfm-picklistcelleditor-1073-trigger-picker");
 	this.sel_expName=_listItem("Repair");
 	this.picklist_webServiceBeforeSave=_f("main").s_textinput("textInput[20]");
+	this.picklist_webServiceAfterSave=_f("main").s_textinput("textInput[22]");
 	this.txt_webserviceClassName=_f("main").s_textinput("txtip[1]");
+	this.txt_webServiceMethodAfterSave=_f("main").s_textinput("txtip[2]");
 	this.btn_saveAndClose=_f("main").s_button("Save & Close");
 	this.btn_deliverySave=_span("Save");
+	this.btn_deliveryQuickSave=_span("Quick Save");
+	this.picklist_afterAddRecordForExpenses=_f("main").s_textinput("textInput[20]");
 	
-	//this.chkbox_selectSFM1=_f("main").s_checkbox("/Chk/").leftOf(_f("main").s_label($sfmToBeCloned);
+	
+	
 };
