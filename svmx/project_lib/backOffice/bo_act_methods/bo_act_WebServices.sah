@@ -226,7 +226,7 @@ var $bo_act_WebServices=new function bo_act_WebServices(){
 		
 		if ( $enteredMinBS== $drMin){
 				_log("Entered Driving Time  is matching with BeforeSaveUpdate Driving Time");
-		}esle{
+		}else{
 			_log("Entered Driving Time  is matching with OnLoad Driving Time","FAILURE");
 		}
 		
@@ -239,7 +239,7 @@ var $bo_act_WebServices=new function bo_act_WebServices(){
 			_log("Entered Zip is matching with BeforeSaveUpdate Zip");
 		}else{
 			_log("Entered Zip  is matching with OnLoad Zip","FAILURE");
-		};
+		}
 			
 	};
 				
@@ -355,6 +355,6 @@ var $bo_act_WebServices=new function bo_act_WebServices(){
 					}else{
 						_log("Entered Zip is matching with Zip displayed on VF page after adding child record","FAILURE");
 					}			
-		}
+		};
 };
 	
