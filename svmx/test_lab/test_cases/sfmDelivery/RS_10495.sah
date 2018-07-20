@@ -51,7 +51,7 @@ _wait(8000,_div($sfmName));
 //Validate DVR on delivery
 
 //step 1 all true
-$$sfm_act_sfmDesigner.addChildLine("Parts");
+$sfm_act_sfmDesigner.addChildLine("Parts");
 _setValue($sfm_pg_sfmDesigner.txt_eeLineQty,"5");
 _setValue($sfm_pg_sfmDesigner.txt_eeEstimatedPricePerUnit,"1500");
 _setValue($sfm_pg_sfmDesigner.txt_eeReferenceInformation,"Sahi DVR Validation");

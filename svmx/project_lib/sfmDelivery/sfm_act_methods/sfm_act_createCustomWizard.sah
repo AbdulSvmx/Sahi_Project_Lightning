@@ -784,7 +784,10 @@ var $sfm_act_createCustomWizard = new function sfm_act_createCustomWizard() {
 	};
 	
 	this.clickWizardlinks = function($sfmname){
-		_click(_link($sfm_pg_wo.link_showmore));
+		if(_exists(_link($sfm_pg_wo.link_showmore))){
+			_click(_link($sfm_pg_wo.link_showmore));
+		}
+		
 		//Check if the SFM process link exists
 		_assertExists(_span($sfmname));
 		_click(_span($sfmname));
