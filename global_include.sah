@@ -3,7 +3,7 @@ _setXHRReadyStatesToWaitFor("2,3")
 _windowAction("resize", 1920, 1080);
 var $g_stepSpeed = 300;
 _setSpeed($g_stepSpeed);
-
+$callBack.killNewWindows();
 // PLease CHANGE the Flag to decide whether Dev or Base
 var $orgtype = "Base";
 
