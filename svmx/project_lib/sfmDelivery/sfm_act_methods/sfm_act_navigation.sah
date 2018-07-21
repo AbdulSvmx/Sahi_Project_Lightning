@@ -34,7 +34,7 @@ var $sfm_act_navigation = new function sfm_act_navigation() {
  	   	if(_isVisible($sfm_pg_checklistQuestionLibrary.txt_checklistQuestionLibrary)){
  	   		_log("The Quation Library displayed successfully");
  	   	}else{
- 	   	_log("The Question Library page is not loaded");
+ 	   	_log("The Question Library page is not loaded","FAILURE");
  	   	};
  	   };
  		 	     
