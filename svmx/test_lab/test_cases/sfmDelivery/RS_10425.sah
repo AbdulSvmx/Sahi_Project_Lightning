@@ -105,7 +105,7 @@ _log($expected_list);
 	_click(_div("/trigger-picker/",_in(_div("/"+$ctrlPicklist+"/",_in(_div("/sfm-window/"))))));
 	_click(_listItem($ctrl_unique_values[$z]));
 	_click(_div("/trigger-picker/",_in(_div("/"+$dependentPicklist+"/",_in(_div("/sfm-window/"))))));
-	_click(_div("/trigger-picker/",_in(_div("/"+$dependentPicklist+"/",_in(_div("/sfm-window/"))))));
+	//_click(_div("/trigger-picker/",_in(_div("/"+$dependentPicklist+"/",_in(_div("/sfm-window/"))))));
 	var $x = _count("_listItem","/.*/");
 	$x = $x - 1;
 	_log($x);
@@ -117,7 +117,7 @@ _log($expected_list);
 		}
 	}
 	_assertEqualArrays($expected_list, $actual_list,"Dependent picklist values are as expected for child line when controlling picklist is present in screen designer");
-	_click(_div("/trigger-picker/",_in(_div("/"+$ctrlPicklist+"/",_in(_div("/sfm-window/"))))));
+	//_click(_div("/trigger-picker/",_in(_div("/"+$ctrlPicklist+"/",_in(_div("/sfm-window/"))))));
 }
 _click($sfm_pg_wo.btn_cancelExtendedEdit);
 _setStrictVisibilityCheck(false);
