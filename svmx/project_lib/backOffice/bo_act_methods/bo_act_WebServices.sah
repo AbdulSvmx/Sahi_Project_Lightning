@@ -106,6 +106,7 @@ var $bo_act_WebServices=new function bo_act_WebServices(){
 				_setValue(_f("main").s_textinput("txtip"), $method);
 				_wait(1000);
 				_click($bo_pg_sfmTransactionAndDesigner.btn_pageLayoutSave);
+				_wait(6000);
 			};
 				this.enableBeforeSave=function($eventType,$method){
 				_click($bo_pg_sfmTransactionAndDesigner.txt_sfmSavePageLayoutAsId);
@@ -117,6 +118,7 @@ var $bo_act_WebServices=new function bo_act_WebServices(){
 				_setValue($bo_pg_webServices.txt_webserviceClassName, $method);
 				_wait(1000);
 				_click($bo_pg_sfmTransactionAndDesigner.btn_pageLayoutSave);
+				_wait(6000);
 			};
 			this.enableAfterSave=function($eventType,$method){
 				_click($bo_pg_sfmTransactionAndDesigner.txt_sfmSavePageLayoutAsId);
@@ -128,42 +130,46 @@ var $bo_act_WebServices=new function bo_act_WebServices(){
 				_setValue($bo_pg_webServices.txt_webServiceMethodAfterSave, $method);
 				_wait(1000);
 				_click($bo_pg_sfmTransactionAndDesigner.btn_pageLayoutSave);
+				_wait(6000);
 			};
 			
 					this.enableOnChange=function($eventType,$method){
 					_click($bo_pg_webServices.picklist_ordType);
 					_wait(1000);
-					_click($bo_pg_webServices.picklist_eventType);
-					_setValue($bo_pg_webServices.picklist_eventType,"");
-					_setValue($bo_pg_webServices.picklist_eventType, $eventType);
+					_click($bo_pg_webServices.txt_eventTypee);
+					_setValue($bo_pg_webServices.txt_eventTypee,"");
+					_setValue($bo_pg_webServices.txt_eventTypee, $eventType);
 					//_wait(1000);
 					_click($bo_pg_webServices.txt_webServiecMethod);
 					_setValue($bo_pg_webServices.txt_webServiecMethod, $method);
 					_wait(1000);
 					_click($bo_pg_sfmTransactionAndDesigner.btn_pageLayoutSave);
+					_wait(6000);
 			};			
 						this.enableOnExit=function($eventType,$method){
 							_click($bo_pg_webServices.txt_zipForWebService);
 							_wait(1000);
-							_click($bo_pg_webServices.picklist_webServiceOnchange);
-							_setValue($bo_pg_webServices.picklist_webServiceOnchange,"");
-							_setValue($bo_pg_webServices.picklist_webServiceOnchange, $eventType);
+							_click($bo_pg_webServices.txt_eventTypee);
+							_setValue($bo_pg_webServices.txt_eventTypee,"");
+							_setValue($bo_pg_webServices.txt_eventTypee, $eventType);
 							//_setSelected(_f("main").s_combobox(10),"Webservice");
 							//_wait(1000);
 							_setValue($bo_pg_webServices.txt_webServiecMethod, $method);
 							_wait(1000);
 							_click($bo_pg_sfmTransactionAndDesigner.btn_pageLayoutSave);
+							_wait(6000);
 						};						
 							this.enableOnChangeForChildLabelField=function($eventType,$method){
 								_click($bo_pg_webServices.picklist_activity_Type);
 								_wait(1000);
-								_click($bo_pg_webServices.webServiecActivityType);
-								_setValue($bo_pg_webServices.webServiecActivityType,"");
-								_setValue($bo_pg_webServices.webServiecActivityType, $eventType);
+								_click($bo_pg_webServices.txt_eventTypee);
+								_setValue($bo_pg_webServices.txt_eventTypee,"");
+								_setValue($bo_pg_webServices.txt_eventTypee, $eventType);
 								_wait(1000);
 								_setValue($bo_pg_webServices.txt_webServiecMethod,$method);
 								_wait(1000);
-								_click($bo_pg_sfmTransactionAndDesigner.btn_pageLayoutSave);								
+								_click($bo_pg_sfmTransactionAndDesigner.btn_pageLayoutSave);
+								_wait(6000);
 							};
 							this.enableAfterAddRecordForExpenses=function($eventType,$method){
 								_click($bo_pg_manageWOLineUsageForSorting.lbl_propertiesForExpenses);
@@ -174,7 +180,8 @@ var $bo_act_WebServices=new function bo_act_WebServices(){
 								_wait(1000);
 								_setValue($bo_pg_webServices.txt_webServiecMethod,$method);
 								_wait(1000);
-								_click($bo_pg_sfmTransactionAndDesigner.btn_pageLayoutSave);								
+								_click($bo_pg_sfmTransactionAndDesigner.btn_pageLayoutSave);
+								_wait(6000);
 							};
 								
 							this.enableOnExitForChildLabelField=function(){
@@ -188,7 +195,8 @@ var $bo_act_WebServices=new function bo_act_WebServices(){
 								_wait(1000);
 								_setValue(_f("main").s_textinput("txtip"), "objWebService.onExit");
 								_wait(1000);
-								_click($bo_pg_sfmTransactionAndDesigner.btn_pageLayoutSave);								
+								_click($bo_pg_sfmTransactionAndDesigner.btn_pageLayoutSave);
+								_wait(6000);
 							};
 								
 				
@@ -219,9 +227,9 @@ var $bo_act_WebServices=new function bo_act_WebServices(){
 		
 		this.verifyBeforeSaveUpdate=function($enteredMinBS,$enteredOTBS,$enteredZipBS){
 			
-			var $drMin=_getText($bo_pg_webServices.delivery_drMin);			
-			var $orderTy=_getText($bo_pg_webServices.delivery_ordType);
-			var $zip=_getText($bo_pg_webServices.delivery_zip);
+			var $drMin=_getText($bo_pg_webServices.txt_drMin);			
+			var $orderTy=_getText($bo_pg_webServices.txt_ordType);
+			var $zip=_getText($bo_pg_webServices.txt_zip);
 		
 		
 		if ( $enteredMinBS== $drMin){
@@ -233,82 +241,79 @@ var $bo_act_WebServices=new function bo_act_WebServices(){
 		if($orderTy==$enteredOTBS){
 			_log("Entered OrderType  is matching with BeforeSaveUpdate OrderType");
 		}else{
-			_log("Entered OrderType  is matching with OnLoad OrderType","FAILURE");
+			_log("Entered OrderType  is matching with BeforeSaveUpdate OrderType","FAILURE");
 		}
 		if($zip==$enteredZipBS){
 			_log("Entered Zip is matching with BeforeSaveUpdate Zip");
 		}else{
-			_log("Entered Zip  is matching with OnLoad Zip","FAILURE");
+			_log("Entered Zip  is matching with BeforeSaveUpdate Zip","FAILURE");
 		}
 			
 	};
 				
 				this.verifyOnChange=function($enteredMinOC,$enteredOTOC,$enteredZipOC,$onChangeValue){
-					_click($bo_pg_webServices.delivery_ordType);
+					_click($bo_pg_webServices.txt_ordType);
 					//_click(_listItem("Depot Repair"));
 					_click(_listItem($onChangeValue));
 					//_click(_span("Work Order"));
 					_wait(6000);
-					var $drMin=_getText($bo_pg_webServices.delivery_drMin);
+					var $drMin=_getText($bo_pg_webServices.txt_drMin);
 					
-					var $orderTy=_getText($bo_pg_webServices.delivery_ordType);
-					var $zip=_getText($bo_pg_webServices.delivery_zip);
+					var $orderTy=_getText($bo_pg_webServices.txt_ordType);
+					var $zip=_getText($bo_pg_webServices.txt_zip);
 					//var $isEntitlementPrfOL=_getText(_checkbox("x-form-cb-input"));
 
 					if ( $enteredMinOC== $drMin){
 							_log("Entered Driving Time  is matching with On Change Driving Time");
 					}else{
-						_log("Entered Driving Time  is matching with OnLoad Driving Time","FAILURE");
+						_log("Entered Driving Time  is matching with On Change Driving Time","FAILURE");
 					}
 					if($orderTy==$enteredOTOC){
 						_log("Entered OrderType  is matching with On Change OrderType");
 					}else{
-						_log("Entered OrderType  is matching with OnLoad OrderType","FAILURE");
+						_log("Entered OrderType  is matching with On Change OrderType","FAILURE");
 					}
 					if($zip==$enteredZipOC){
 						_log("Entered Zip is matching with On Change Zip");
 					}else{
-						_log("Entered Zip  is matching with OnLoad Zip","FAILURE");
+						_log("Entered Zip  is matching with On Change Zip","FAILURE");
 					}
 					
 				};				
 					this.verifyOnExit=function($enteredMinOE,$enteredOTOE,$enteredZipOE){
-					_setValue($bo_pg_webServices.delivery_zip,"");
-					_click($bo_pg_webServices.delivery_drMin);
+					_setValue($bo_pg_webServices.txt_zip,"");
+					_click($bo_pg_webServices.txt_drMin);
 					_click($bo_pg_webServices.clk_WoInDelivery);
-					var $drMin=_getText($bo_pg_webServices.delivery_drMin);
+					var $drMin=_getText($bo_pg_webServices.txt_drMin);
 					
-					var $orderTy=_getText($bo_pg_webServices.delivery_ordType);
-					var $zip=_getText($bo_pg_webServices.delivery_zip);
+					var $orderTy=_getText($bo_pg_webServices.txt_ordType);
+					var $zip=_getText($bo_pg_webServices.txt_zip);
 
 					if ( $enteredMinOE== $drMin){
 							_log("Entered Driving Time  is matching with On Exit Driving Time");
 					}else{
-						_log("Entered Driving Time  is matching with OnLoad Driving Time","FAILURE");
+						_log("Entered Driving Time  is matching with On Exit Driving Time","FAILURE");
 					}
 					if($orderTy==$enteredOTOE){
 						_log("Entered OrderType  is matching with On Exit OrderType");
 					}else{
-						_log("Entered OrderType  is matching with OnLoad OrderType","FAILURE");
+						_log("Entered OrderType  is matching with On Exit OrderType","FAILURE");
 					}
 					if($zip==$enteredZipOE){
 						_log("Entered Zip is matching with On Exit Zip");
 					}else{
-						_log("Entered Zip  is matching with OnLoad Zip","FAILURE");	
+						_log("Entered Zip  is matching with On Exit Zip","FAILURE");	
 					};
 					
 				};
 					this.verifyAfterAddRecordForChildField=function($enteredMinOC,$enteredOTOC,$enteredZipOC){
 					_click($bo_pg_webServices.clk_childLineExpenses);
 					_click($bo_pg_webServices.lnk_addChildLineExpenses);
-					//_click($bo_pg_webServices.clk_fieldActivityType);
-					//_click($bo_pg_webServices.clk_selectExpType);
-					//_click($bo_pg_webServices.sel_expName);
 					_click($bo_pg_webServices.btn_deliveryQuickSave);
 					_wait(10000);
-					var $drMin=_getText($bo_pg_webServices.delivery_drMin);			
-					var $orderTy=_getText($bo_pg_webServices.delivery_ordType);
-					var $zip=_getText($bo_pg_webServices.delivery_zip);
+					var $drMin=_getText($bo_pg_webServices.txt_drMin);			
+					var $orderTy=_getText($bo_pg_webServices.txt_ordType);
+					var $zip=_getText($bo_pg_webServices.txt_zip);
 
 					if ( $enteredMinOC== $drMin){
 							_log("Entered Driving Time  is matching with Driving time displayed after adding record to child line");
@@ -335,9 +340,9 @@ var $bo_act_WebServices=new function bo_act_WebServices(){
 					_wait(5000);
 					_click(_span("Travel"));
 					_wait(10000);
-					var $drMin=_getText($bo_pg_webServices.delivery_drMin);			
-					var $orderTy=_getText($bo_pg_webServices.delivery_ordType);
-					var $zip=_getText($bo_pg_webServices.delivery_zip);
+					var $drMin=_getText($bo_pg_webServices.txt_drMin);			
+					var $orderTy=_getText($bo_pg_webServices.txt_ordType);
+					var $zip=_getText($bo_pg_webServices.txt_zip);
 
 					if ( $enteredMinOC== $drMin){
 							_log("Entered Driving Time  is matching with On Change Driving Time  after child field is updated");
