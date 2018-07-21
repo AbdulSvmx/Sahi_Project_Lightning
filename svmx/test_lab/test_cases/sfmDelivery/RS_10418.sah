@@ -138,8 +138,8 @@ _selectWindow();
 
 		}
 	//************************************************************************************
-	//RS-10419
-_log("Starting execution of RS-10419 by adding Controlling picklist in the screen designer")
+	//RS-10417
+_log("Starting execution of RS-10417 by adding Controlling picklist in the screen designer")
 //Navigate to servicemax setup.
 $bo_act_navigation.navigateToSfmTransactionDesigner();
 $sfm_act_SFM.selectSFM($processName,true);
