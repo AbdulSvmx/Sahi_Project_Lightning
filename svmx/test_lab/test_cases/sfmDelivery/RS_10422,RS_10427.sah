@@ -73,7 +73,7 @@ _selectDomain();
 //$sfm_act_lightningConfig.switchToLightning();
 $bo_act_navigation.navigateToFeaturePermissionsPage();
 _wait(3000);
-$bo_act_navigation.addFeaturePermissionToUser($sfmUsn,$group_profilename,"SFM Designer");
+$bo_act_navigation.addFeaturePermissionToUser($sfmUsn,"Sysadmin01 Group","SFM Designer");
 
 //Yet to be completed for lightning as the page is still not certified
 //$sfm_act_lightningConfig.logoutInLightning();
