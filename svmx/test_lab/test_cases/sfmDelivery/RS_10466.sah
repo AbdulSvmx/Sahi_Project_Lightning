@@ -49,7 +49,7 @@ _selectDomain();
 _click($sfm_pg_wo.btn_wo_edit);
 var $today = new Date();
 $new_date = $sfm_act_createCustomWizard.addSubtractDates($today,7);
-_setValue($sfm_pg_wo.txt_actualInitialResponseTimeEditWo,$new_date);
+_setValue($sfm_pg_wo.txt_actualnitialResponseForEditWo,$new_date);
 _setValue($sfm_pg_wo.txt_actualInitialResponseTimeEditWo,"12:00 AM");
 _click($sfm_pg_wo.btn_wo_save);
 $sfm_act_createCustomWizard.clickWizardlinks($sfmName);
