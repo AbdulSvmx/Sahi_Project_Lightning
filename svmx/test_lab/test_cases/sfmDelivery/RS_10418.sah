@@ -107,6 +107,7 @@ _selectWindow();
 		_click(_link(0,_near(_span("/"+$wo_picklist+"/",_in(_div("/modal-container/"))))));
 		_click(_link($ctrl_unique_values[$z]));
 		_click($sfm_pg_wo.btn_wo_edit_save);
+		_wait(2000);
 		_assertVisible(_span($success_message));
 		$sfm_act_createCustomWizard.clickWizardlinks($processName);
 		_selectDomain($domainName);
@@ -143,7 +144,8 @@ _log("Starting execution of RS-10417 by adding Controlling picklist in the scree
 //Navigate to servicemax setup.
 $bo_act_navigation.navigateToSfmTransactionDesigner();
 _selectDomain();
-$sfm_act_SFM.selectSFM($processName,true);
+_click($bo_pg_sfmTransactionAndDesigner.btn_yourCustomSfmTransactions);
+_setValue($bo_pg_sfmTransactionAndDesigner.txt_yourCustomSfmTransactionsQuickFind,$processName);
 _click(_f("main").s_label($processName));
 _click($bo_pg_sfmTransactionAndDesigner.btn_screenDesigner);
 $fields_array = [];
