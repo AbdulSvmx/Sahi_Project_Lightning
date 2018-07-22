@@ -143,7 +143,7 @@ _selectWindow();
 _log("Starting execution of RS-10417 by adding Controlling picklist in the screen designer")
 //Navigate to servicemax setup.
 $sfm_act_createCustomWizard.clickWizardlinks($processName);
-_wait(5000);
+_wait(10000);
 _selectDomain($domainName);
 _click($sfm_pg_wo.btn_arrowNextToGetPrice);
 _assertVisible($sfm_pg_wo.link_launchSfmDesigner);
