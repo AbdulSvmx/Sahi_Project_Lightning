@@ -209,18 +209,18 @@ var $bo_act_WebServices=new function bo_act_WebServices(){
 		if ( $enteredMinOL== $drMin){
 				_log("Entered Driving Time  is matching with OnLoad Driving Time");
 		}else{
-				_log("Entered Driving Time  is matching with OnLoad Driving Time","FAILURE");	
+				_log("Entered Driving Time  is not matching with OnLoad Driving Time","FAILURE");	
 				}
 		
 		if($orderTy==$enteredOTOL){
 			_log("Entered OrderType  is matching with OnLoad OrderType");
 		}else{
-			_log("Entered OrderType  is matching with OnLoad OrderType","FAILURE");
+			_log("Entered OrderType  is not matching with OnLoad OrderType","FAILURE");
 		}
 		if($zip==$enteredZipOL){
 			_log("Entered Zip  is matching with OnLoad Zip");
 		}else{
-			_log("Entered Zip  is matching with OnLoad Zip","FAILURE");
+			_log("Entered Zip  is not matching with OnLoad Zip","FAILURE");
 		}
 		
 	};
@@ -235,18 +235,18 @@ var $bo_act_WebServices=new function bo_act_WebServices(){
 		if ( $enteredMinBS== $drMin){
 				_log("Entered Driving Time  is matching with BeforeSaveUpdate Driving Time");
 		}else{
-			_log("Entered Driving Time  is matching with OnLoad Driving Time","FAILURE");
+			_log("Entered Driving Time  is not matching with BeforeSaveUpdate Driving Time","FAILURE");
 		}
 		
 		if($orderTy==$enteredOTBS){
 			_log("Entered OrderType  is matching with BeforeSaveUpdate OrderType");
 		}else{
-			_log("Entered OrderType  is matching with BeforeSaveUpdate OrderType","FAILURE");
+			_log("Entered OrderType  is not matching with BeforeSaveUpdate OrderType","FAILURE");
 		}
 		if($zip==$enteredZipBS){
 			_log("Entered Zip is matching with BeforeSaveUpdate Zip");
 		}else{
-			_log("Entered Zip  is matching with BeforeSaveUpdate Zip","FAILURE");
+			_log("Entered Zip  is not matching with BeforeSaveUpdate Zip","FAILURE");
 		}
 			
 	};
@@ -266,17 +266,17 @@ var $bo_act_WebServices=new function bo_act_WebServices(){
 					if ( $enteredMinOC== $drMin){
 							_log("Entered Driving Time  is matching with On Change Driving Time");
 					}else{
-						_log("Entered Driving Time  is matching with On Change Driving Time","FAILURE");
+						_log("Entered Driving Time  is not matching with On Change Driving Time","FAILURE");
 					}
 					if($orderTy==$enteredOTOC){
 						_log("Entered OrderType  is matching with On Change OrderType");
 					}else{
-						_log("Entered OrderType  is matching with On Change OrderType","FAILURE");
+						_log("Entered OrderType  is not matching with On Change OrderType","FAILURE");
 					}
 					if($zip==$enteredZipOC){
 						_log("Entered Zip is matching with On Change Zip");
 					}else{
-						_log("Entered Zip  is matching with On Change Zip","FAILURE");
+						_log("Entered Zip  is not matching with On Change Zip","FAILURE");
 					}
 					
 				};				
@@ -292,17 +292,17 @@ var $bo_act_WebServices=new function bo_act_WebServices(){
 					if ( $enteredMinOE== $drMin){
 							_log("Entered Driving Time  is matching with On Exit Driving Time");
 					}else{
-						_log("Entered Driving Time  is matching with On Exit Driving Time","FAILURE");
+						_log("Entered Driving Time  is not matching with On Exit Driving Time","FAILURE");
 					}
 					if($orderTy==$enteredOTOE){
 						_log("Entered OrderType  is matching with On Exit OrderType");
 					}else{
-						_log("Entered OrderType  is matching with On Exit OrderType","FAILURE");
+						_log("Entered OrderType  is not matching with On Exit OrderType","FAILURE");
 					}
 					if($zip==$enteredZipOE){
 						_log("Entered Zip is matching with On Exit Zip");
 					}else{
-						_log("Entered Zip  is matching with On Exit Zip","FAILURE");	
+						_log("Entered Zip  is not matching with On Exit Zip","FAILURE");	
 					};
 					
 				};
@@ -319,17 +319,17 @@ var $bo_act_WebServices=new function bo_act_WebServices(){
 							_log("Entered Driving Time  is matching with Driving time displayed after adding record to child line");
 							
 					}else{
-						_log("Entered Driving Time  is matching with Driving time displayed after adding record to child line","FAILURE");
+						_log("Entered Driving Time  is not matching with Driving time displayed after adding record to child line","FAILURE");
 					}
 					if($orderTy==$enteredOTOC){
 						_log("Entered OrderType  is matching with  OrderType  displayed after adding child record");
 					}else{
-						_log("Entered OrderType  is matching with  OrderType  displayed after adding child record","FAILURE");
+						_log("Entered OrderType  is not matching with  OrderType  displayed after adding child record","FAILURE");
 					}
 					if($zip==$enteredZipOC){
 						_log("Entered Zip is matching with Zip displayed on VF page after adding child record");
 					}else{
-						_log("Entered Zip is matching with Zip displayed on VF page after adding child record","FAILURE");
+						_log("Entered Zip is not matching with Zip displayed on VF page after adding child record","FAILURE");
 					};
 					
 				};
@@ -345,20 +345,20 @@ var $bo_act_WebServices=new function bo_act_WebServices(){
 					var $zip=_getText($bo_pg_webServices.txt_zip);
 
 					if ( $enteredMinOC== $drMin){
-							_log("Entered Driving Time  is matching with On Change Driving Time  after child field is updated");
+							_log("Entered Driving Time  is matching with OnExit Driving Time  on child field");
 					}else{
-						_log("Entered Driving Time  is matching with Driving time displayed after adding record to child line","FAILURE");
+						_log("Entered Driving Time  is not matching with OnExit Driving Time  on child field","FAILURE");
 					}
 					if($orderTy==$enteredOTOC){
-						_log("Entered OrderType  is matching with On Change OrderType  after child field is updated");
+						_log("Entered OrderType  is matching with OnExit order type  on child field");
 					}else{
-						_log("Entered OrderType  is matching with  OrderType  displayed after adding child record","FAILURE");
+						_log("Entered OrderType  is not matching with  OnExit order type  on child field","FAILURE");
 					}
 					if($zip==$enteredZipOC){
-						_log("Entered Zip is matching with On Change Zip after child field is updated");
+						_log("Entered Zip is matching with OnExit zip on child field");
 						
 					}else{
-						_log("Entered Zip is matching with Zip displayed on VF page after adding child record","FAILURE");
+						_log("Entered Zip is not matching with OnExit zip on child field","FAILURE");
 
 					}	;		
 
