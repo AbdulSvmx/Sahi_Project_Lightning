@@ -108,7 +108,6 @@ _selectWindow();
 		_click(_link($ctrl_unique_values[$z]));
 		_click($sfm_pg_wo.btn_wo_edit_save);
 		_wait(2000);
-		_assertVisible(_span($success_message));
 		$sfm_act_createCustomWizard.clickWizardlinks($processName);
 		_selectDomain($domainName);
 		var $actual_list = [];
