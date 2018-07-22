@@ -82,6 +82,7 @@ var $sfm_pg_wo = new function sfm_pg_wo() {
 //Added by JJ for SFM Delivery components . All are Lightning ready.
 	this.link_delivery_save = _link("Save");
     this.btn_arrowNextToGetPrice = _span("/btnWrap/",_rightOf(_div("Quick SaveGet Price")));
+    this.btn_arrowNextToUserSettings = _span("/btnWrap/", _rightOf(_link("User Settings")));
     this.link_launchSfmDesigner = _span("Launch SFM Designer");
     this.btn_newButtonForWorkDetail = _link("New",_near(_heading2("/Work Details/")));
     this.btn_nextForWorkDetailRecordType = _button("Next",_in(_div("modal-footer slds-modal__footer")));

@@ -147,7 +147,7 @@ $sfm_act_createCustomWizard.clickWizardlinks($processName);
 _wait(10000);
 
 _selectDomain($domainName);
-_click($sfm_pg_wo.btn_arrowNextToGetPrice);
+_click($sfm_pg_wo.btn_arrowNextToUserSettings);
 _assertVisible($sfm_pg_wo.link_launchSfmDesigner);
 _click($sfm_pg_wo.link_launchSfmDesigner);
 _selectDomain();
