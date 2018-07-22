@@ -53,7 +53,7 @@ _click($bo_pg_home.link_backToSetUpHome);
 //$bo_act_navigation.navigateToSfmWizard();
 //$bo_act_SFW.createWizardGeneralInfo($objName,$wizardname,$wizardID);
 //$bo_act_SFW.createWizardStep($fieldActnType,$actnName,$executionMode);
-$sfm_act_wizards.addToWizard($objName, $wizardName[1], $wizardType[1], $actnName);
+$sfm_act_wizards.addToWizard1($objName, $wizardName[1], $wizardType[1], $actnName);
 
 //******Launch the SFM in delivery for WO object**************
 
