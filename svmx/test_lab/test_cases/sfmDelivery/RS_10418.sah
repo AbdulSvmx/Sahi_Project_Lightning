@@ -163,8 +163,9 @@ _selectWindow();
 $bo_act_navigation.navigateToCreatedRecordUsingGlobalSearch($wo_number);
 $sfm_act_createCustomWizard.clickWizardlinks($processName);
 _selectDomain($domainName);
-var $actual_list = [];
+
 for(var $z=0;$z<$ctrl_unique_values.length;$z++){
+	var $actual_list = [];
 	_click(_div("/sfm-picklist/",_rightOf(_div($wo_picklist))));
 	_click(_listItem($ctrl_unique_values[$z]));
 	_wait(1000);
@@ -183,6 +184,7 @@ for(var $z=0;$z<$ctrl_unique_values.length;$z++){
 	var $index = $actual_list.indexOf("--None--");
 	$actual_list.splice($index,1);
 	$i = 0;$j = 0;
+	$expected_list = [];
 	 for ($j=0;$j<$ctrl_picklist_values.length;$j++) {
 	 	if($ctrl_picklist_values[$j] === $ctrl_unique_values[$z]) {
 	 		$i = $i+1;
