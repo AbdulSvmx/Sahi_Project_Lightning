@@ -142,17 +142,21 @@ _selectWindow();
 	//RS-10417
 _log("Starting execution of RS-10417 by adding Controlling picklist in the screen designer")
 //Navigate to servicemax setup.
-$bo_act_navigation.navigateToSfmTransactionDesigner();
+$sfm_act_createCustomWizard.clickWizardlinks($processName);
+_selectDomain($domainName);
+_click($sfm_pg_wo.btn_arrowNextToGetPrice);
+_assertVisible($sfm_pg_wo.link_launchSfmDesigner);
+_click($sfm_pg_wo.link_launchSfmDesigner);
 _selectDomain();
-_click($bo_pg_sfmTransactionAndDesigner.btn_yourCustomSfmTransactions);
-_setValue($bo_pg_sfmTransactionAndDesigner.txt_yourCustomSfmTransactionsQuickFind,$processName);
-_click(_f("main").s_label($processName));
+_selectWindow("/SFM Transaction Designer/");
+_wait(10000);
 _click($bo_pg_sfmTransactionAndDesigner.btn_screenDesigner);
 $fields_array = [];
 $fields_array.push($wo_picklist);
 $bo_act_navigation.editHeaderScreen($fields_array,$dependentPicklist);	
 _click($bo_pg_sfmTransactionAndDesigner.btn_finalQuickSave);
-_selectDomain();
+_closeWindow();
+_selectWindow();
 $bo_act_navigation.navigateToCreatedRecordUsingGlobalSearch($wo_number);
 $sfm_act_createCustomWizard.clickWizardlinks($processName);
 _selectDomain($domainName);
