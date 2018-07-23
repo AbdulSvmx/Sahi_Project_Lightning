@@ -238,7 +238,7 @@ var $bo_act_navigation = new function bo_act_navigation() {
       * @returns boolean
       */
  	this.navigateToSfmWizard = function() { // Changes made for Lightning
- 	 //this.navigateToSvmxSetup();
+ 	 this.navigateToSvmxSetup();
  	 _selectDomain("/svmx/");
  	_click($bo_pg_servicemaxSetup.btn_serviceFlowManager);
  	_click($bo_pg_servicemaxSetup.btn_sfmWizard);
@@ -463,12 +463,17 @@ var $bo_act_navigation = new function bo_act_navigation() {
         		  };
 
         this.navigateServicemaxSetUpInLightening=function(){
+        	$sfm_pg_wo.openAppLauncher();
         	_click($bo_pg_home.link_aapLauncher);
+        	_wait(1000);
         	_setValue($bo_pg_home.txtbox_findAnApp,"servicemax SetUp");
-        	if(_isVisible($bo_pg_home.link_servicemaxSetUp)){
-        		_click($bo_pg_home.link_servicemaxSetUp); 
-        	}else{ 
-        		_click($bo_pg_home.link_servicemaxSetUpHome);
+        	//if(_containsText($bo_pg_home.link_servicemaxSetUpHome), "Servicemax SetUp Home"){
+        		if(_isVisible($bo_pg_home.link_servicemaxSetUpHome)){
+        		_click($bo_pg_home.link_servicemaxSetUpHome); 
+        		}else if(_isVisible($bo_pg_home.link_servicemaxSetUpHome1)){
+            		_click($bo_pg_home.link_servicemaxSetUpHome1);             	
+        	}else if(_isVisible($bo_pg_home.link_servicemaxSetUp1)){
+        		_click($bo_pg_home.link_servicemaxSetUp1)       		
         }
         };	
 

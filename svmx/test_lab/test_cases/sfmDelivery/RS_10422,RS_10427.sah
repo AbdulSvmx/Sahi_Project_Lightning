@@ -8,6 +8,7 @@ $RS_10422.start();
 var $object_name = "Work Order";
 var $Std_Sfm_process = "Create Estimates";
 var $stdProcessName = "Manage Work Order Lines - Estimates";
+var $stdProcessId = "TDM017";
 var $processName = "RS_10422";
 var $sfmNameToBeCloned = "Manage Work Order Lines - Usage";
 var $isCustom = false;
@@ -30,6 +31,7 @@ $bo_act_login.login($g_url,$sfmUsn,$sfmPwd);
 $sfm_act_lightningConfig.switchToLightning();
 
 //Clone the standard process and add it to wizard for testing with custom process.
+_setSpeed(3000);
 $sfm_act_SFM.cloneTDM016($sfmNameToBeCloned,$processName,$isCustom,$sfmTemplateSaveAsName, $sfmTemplate, $fieldName, $containerName);
 _selectDomain();
 
@@ -72,7 +74,7 @@ _selectDomain();
 //$sfm_act_lightningConfig.switchToLightning();
 $bo_act_navigation.navigateToFeaturePermissionsPage();
 _wait(3000);
-$bo_act_navigation.addFeaturePermissionToUser($sfmUsn,$group_profilename,"SFM Designer");
+$bo_act_navigation.addFeaturePermissionToUser($sfmUsn,"Sysadmin01 Group","SFM Designer");
 
 //Yet to be completed for lightning as the page is still not certified
 //$sfm_act_lightningConfig.logoutInLightning();
@@ -92,12 +94,14 @@ _selectDomain($domainName);
 _click($sfm_pg_wo.btn_arrowNextToGetPrice);
 _assertVisible($sfm_pg_wo.link_launchSfmDesigner);
 _click($sfm_pg_wo.link_launchSfmDesigner);
+_selectDomain();
 _wait(5000);
 _selectWindow("/SFM Transaction Designer/");
 _wait(10000);
-_assertVisible(_f("main").s_label($stdProcessName),"Launched process is same");
-_log("PASS:RS-10422");
-_selectDomain();
+var $actualProcessLaunched = _title();
+//_assertContainsText($stdProcessName,$actualProcessLaunched,"Launched process id should be same");
+_assertVisible(_f("main").s_label($stdProcessName));
+_log("PASS:RS-10427");
 _closeWindow();
 _selectWindow();
 _selectDomain($domainName);
@@ -113,11 +117,13 @@ _selectDomain($domainName);
 _click($sfm_pg_wo.btn_arrowNextToGetPrice);
 _assertVisible($sfm_pg_wo.link_launchSfmDesigner);
 _click($sfm_pg_wo.link_launchSfmDesigner);
+_selectDomain();
 _selectWindow("/SFM Transaction Designer/");
 _wait(10000);
+$actualProcessLaunched = _title();
+//_assertContainsText($processName,$actualProcessLaunched,"Launched process id should be same");
 _assertVisible(_f("main").s_label($processName));
-_log("PASS:10422");
-_selectDomain();
+_log("PASS:10427");
 _closeWindow();
 _selectWindow();
 _selectDomain($domainName);

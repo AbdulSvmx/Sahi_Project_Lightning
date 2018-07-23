@@ -19,6 +19,7 @@ var $bo_pg_sfmVerifyWorkOrder= new function bo_pg_sfmVerifyWorkOrder() {
 	this.fstAssnedTimeInConsole=_textbox(1,_near(_span("First Assigned DateTime"))); //Modified for Lightning
 	
 		this.link_workOrder =_mark("Work Order[1]");
+		this.link_workOrder1=_mark("Work Order")
 		this.btn_newWO=_div("New");
 		this.btn_newWOSave=_span("Save[1]");
 		this.lbl_workOrderDetailPage=_heading2("Work Order Detail");

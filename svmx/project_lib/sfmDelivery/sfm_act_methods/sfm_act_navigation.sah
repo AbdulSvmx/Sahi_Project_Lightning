@@ -24,6 +24,18 @@ var $sfm_act_navigation = new function sfm_act_navigation() {
  		_wait(3000,(_isVisible($bo_pg_servicemaxSetup.txt_checklistQuestionLibrary)));
  	     };
 
-
+ 	    this.navigateToQuestionLibrary=function(){
+ 	   	_wait(6000, _isVisible($bo_pg_home.link_serviceFlowManager));
+ 	   	_selectDomain("/svmx/");
+ 		_click($bo_pg_servicemaxSetup.btn_serviceFlowManager);
+ 	   	_wait(3000,_isVisible($bo_pg_sfmTransactionAndDesigner.link_chklistQuestionLibrary));
+ 	   	_click($bo_pg_sfmTransactionAndDesigner.link_chklistQuestionLibrary);
+ 	   	_wait(10000);
+ 	   	if(_isVisible($sfm_pg_checklistQuestionLibrary.txt_checklistQuestionLibrary)){
+ 	   		_log("The Quation Library displayed successfully");
+ 	   	}else{
+ 	   	_log("The Question Library page is not loaded","FAILURE");
+ 	   	};
+ 	   };
  		 	     
 };

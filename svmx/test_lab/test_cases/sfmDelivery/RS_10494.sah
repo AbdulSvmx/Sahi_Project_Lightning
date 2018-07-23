@@ -91,7 +91,7 @@ if(_isVisible($sfm_pg_sfmDesigner.txt_dvrMultipleConfirmation)){
 		_log("Pass ::: DVR-Error for Parts/Labor/Expenses/Travel is working");
 		}
 	}else{
-	_log("Fail ::: DVR-Error for Parts/Labor/Expenses/Travel is not working ");
+	_log("Fail ::: DVR-Error for Parts/Labor/Expenses/Travel is not working ","FAILURE");
 	}
 
 //Validate for DVR-Error when condition is false
@@ -135,7 +135,7 @@ if((_isVisible(_div("/"+"Parts: "+$ruleDescription+"/"))) ||
 		(_isVisible(_div("/"+"Expenses: "+$ruleDescription+"/")))||
 		(_isVisible(_div("/"+"Travel: "+$ruleDescription+"/")))
 		){
-	_log("Fail ::: DVR-Error is triggered");
+	_log("Fail ::: DVR-Error is triggered","FAILURE");
 	}else{
 		_log("Pass ::: DVT-Error is not triggered");
 		}

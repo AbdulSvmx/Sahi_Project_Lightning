@@ -44,7 +44,7 @@ var $sfmrdz_act_common= new function sfmrdz_act_common(){
 		_setValue($sfmrdz_pg_common.txt_listFilter,$objName);
 		_keyPress($sfmrdz_pg_common.txt_listFilter, 13);
 		_wait(10000,_isVisible($sfmrdz_pg_common.btn_actionMenu));
-		return $callBack.returnResult(!_exists($sfmrdz_pg_common.btn_msgNoResult), "\" "+$objName+" \" "+"Search");
+		//return $callBack.returnResult(!_exists($sfmrdz_pg_common.btn_msgNoResult), "\" "+$objName+" \" "+"Search");
 		
 	};
 	
@@ -70,12 +70,24 @@ var $sfmrdz_act_common= new function sfmrdz_act_common(){
 		var $list=null;
 			if ($colName=="TRANSACTION NAME" || $colName=="DATA VALIDATION RULES NAME" || $colName=="Expression Name") {
 				_log("Under if loop: ");
-				$list = _collect("_link","/.*/",_under(_div($colName)));
+				//$sfmrdz_act_common.expdColSize($colName);
+				$list =_collect("_div","/DataTableCell--overflow/",_under(_parentNode(_div($colName),"DIV",1)));
+				_log("No. of rows: "+$list.length);
+				//$sfmrdz_act_common.descColSize($colName);
+
+				if ($list.length==0) {
+					_log("$list collection else loop");
+					$list = _collect("_link","/Text slds-text-body.*/",_under(_parentNode(_div($colName),"DIV",1)));
+				}
 			}else if ($colName=="Source Object" || $colName=="TODO_TARGET_OBJECT" || $colName=="Object") {
 				_log("Under else loop: ");
-				$list = _collect("_span","/.*/",_under(_div($colName)));
+				//$sfmrdz_act_common.expdColSize($colName);
+				_wait(3000);
+				$list = _collect("_span","/[a-zA-Z]+/",_under(_parentNode(_div($colName),"DIV",1)));
+				_log("No. of non empty cells: "+$list.length);
+				//$sfmrdz_act_common.descColSize($colName);
 			}			
-		_log("No. of rows: "+$list.length);
+		
 		//new array declaration
 		var $listName=new Array($list.length);
 		
@@ -167,14 +179,15 @@ var $sfmrdz_act_common= new function sfmrdz_act_common(){
 	//Secondary sort fn
 	// make generic
 	this.secondarySort=function(){
-	
-		var $whereUsedList=_collect("_svg_icon","/.*/",_under(_div("Where Used")));
-		_log("No. of Rows: "+$whereUsedList.length);
+		
+		var $whereUsedList=_collect("_svg_icon","/slds-icon-text-default.*/",_under(_parentNode($sfmrdz_pg_trnListView.btn_heading_whereUsedCol,"DIV",1)));
+		_log("No. of Rows having Where used icon: "+$whereUsedList.length);
 		var $linkNames=new Array($whereUsedList.length);
 
 		//extracting link text
 		for(var $i=0;$i<$whereUsedList.length;$i++){
-			$linkNames[$i]=_getText(_link("/.*/",_near($whereUsedList[$i])));
+			$linkNames[$i]=_getText(_link("/Text slds-text-body.*/",_near($whereUsedList[$i])));
+			_log($linkNames[$i]);
 		}
 		_log("linkName count: "+$linkNames.length);
 		
@@ -208,13 +221,22 @@ var $sfmrdz_act_common= new function sfmrdz_act_common(){
 	
 	this.sortLastEditedCol=function($ColName,$sortOrder){
 		//collecting link elements
-		var $linkNames=_collect("_div","/.*/",_under(_parentNode(_div($ColName),"DIV",1)));
-		_log(" No. of rows:"+$linkNames.length);
+		//$sfmrdz_act_common.expdColSize($ColName);
+		var $linkNames =_collect("_div","/DataTableCell--overflow/",_under(_parentNode(_div($ColName),"DIV",1)));
+		_log("No. of rows: "+$linkNames.length);
+			if ($linkNames.length==0) {
+				_log("$list collection else loop");
+				$linkNames = _collect("_link","/Text slds-text-body.*/",_under(_parentNode(_div($ColName),"DIV",1)));
+				_log(" No. of rows:"+$linkNames.length);
+			}
+		
+		//$sfmrdz_act_common.descColSize($ColName);
+		
 		var $lastEditedDateList=new Array();
 
 		//extracting link element names
 		for(var $i=0;$i<$linkNames.length;$i++){
-				$lastEditedDateList[$i]=_getText(_div("/slds-text-body--regular.*/",_rightOf($linkNames[$i])));
+				$lastEditedDateList[$i]=_getText(_div("/slds-text-body--regular.*/",_rightOf(_div(_getText($linkNames[$i])))));
 		}
 		
 		var $datePre=null;
@@ -232,9 +254,9 @@ var $sfmrdz_act_common= new function sfmrdz_act_common(){
 				
 				//fetching UNIX time codes for date
 				$datePreCode = new Date($datePre).getTime();
-				_log("datePre: "+$datePre+" & "+"datePre Code "+$datePreCode);
+				//_log("datePre: "+$datePre+" & "+"datePre Code "+$datePreCode);
 				$dateCurrCode = new Date($dateCurr).getTime();
-				_log("dateCurr: "+$dateCurr+" & "+"dateCurr Code "+$dateCurrCode);
+				//_log("dateCurr: "+$dateCurr+" & "+"dateCurr Code "+$dateCurrCode);
 				
 				if($sortOrder=="ascending"){
 					if($dateCurrCode > $datePreCode){
@@ -269,6 +291,27 @@ var $sfmrdz_act_common= new function sfmrdz_act_common(){
 	};
 	
 	
+	/**
+	 * Expand the Column Size
+	 */
+	this.expdColSize=function($columnName){
+		var $parentNode=_parentNode(_div($columnName),"DIV",1);
+		var $style=_call($parentNode.getAttribute("style"));
+		$styleRead=$style.toString();
+		_log("parent Div Style attribute: "+$styleRead);
+		
+		_call($parentNode.setAttribute("style","width: 400px; flex: 400 0 auto; max-width: 400px;"));
+		_wait(2000);
+		return $styleRead;
+	};
+	
+	/**
+	 * Colapse the Column Size
+	 */
+	this.descColSize=function($columnName){
+		var $parentNode=_parentNode(_div($columnName),"DIV",1);
+		_call($parentNode.setAttribute("style","flex: 240 0 auto; width: 240px; max-width: 400px;"));
+	};
 	
 	
 	

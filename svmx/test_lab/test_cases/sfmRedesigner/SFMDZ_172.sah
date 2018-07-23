@@ -28,7 +28,7 @@ _setSpeed($g_stepSpeed);
 		var $trnName="Activate Contract";
 		var $sourceObjName="Installed Product";
 		var $targetObjName="Activity Master";
-		var $tagName="TAG Belongs to Aviation";
+		var $tagName="GE Digital - This is for the GE Digital";
 		/**
 		 * Login to the Sandbox Org and launching Transaction list view
 		 */
@@ -40,6 +40,7 @@ _setSpeed($g_stepSpeed);
 		_assertExists(_link($trnName),$trnName+" is not available");
 		
 		//Source Object Search
+		_wait(10000);
 		var $sourceObjretVal=$sfmrdz_act_trnListView.contentSearch($sourceObjName);
 		_assertTrue($sourceObjretVal[0],$sourceObjName+" is not available");
 		
@@ -52,7 +53,13 @@ _setSpeed($g_stepSpeed);
 		var $tagObjretVal=$sfmrdz_act_trnListView.contentSearch($tagName);
 		_assertTrue($tagObjretVal[0],$tagName+" is not available");
 		
-		//$sfmrdz_act_common.launchHomeWindow($homecurrentHomePageULR);
-		//$bo_act_login.logOut();
+		//Transaction Search
+		$trnName="Activate Contract1";
+		var $sourceObjretVal=$sfmrdz_act_common.searchObj($trnName);
+		_assertExists($sfmrdz_pg_common.btn_msgNoResult,$trnName+" is not available");
+		
+		$sfmrdz_act_common.launchHomeWindow($homecurrentHomePageULR);
+		_wait(10000,_isVisible($bo_pg_home.link_home));
+		$sfm_act_lightningConfig.logoutInLightning();
 		
 $SFMDZ_172.end();

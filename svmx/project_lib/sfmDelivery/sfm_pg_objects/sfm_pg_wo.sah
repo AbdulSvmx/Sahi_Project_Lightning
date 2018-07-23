@@ -25,6 +25,16 @@ var $sfm_pg_wo = new function sfm_pg_wo() {
 	this.btn_OK_popup = _span("OK",_in(_div("/toolbar-footer/"))); //Added by Janaki for OK button in pop up.
 	this.txt_actualRestoration = _textbox(0,_near(_span("Actual Restoration")));//Changed for Lightning
 	this.txt_actualRestorationtimebox = _textbox(1,_near(_span("Actual Restoration")));//Changed for Lightning
+	this.txt_actualnitialResponseForEditWo = _textbox(0,_near(_span("/Actual Initial Response/",_in(_div("/is-editing/")))));
+	this.txt_actualInitialResponseTimeEditWo = _textbox(1,_near(_span("/Actual Initial Response/",_in(_div("/is-editing/")))));
+	this.txt_actualOnsiteResponseForEditWo = _textbox(0,_near(_span("/Actual Onsite Response/",_in(_div("/is-editing/")))));
+	this.txt_actualOnsiteResponseTimeEditWo = _textbox(1,_near(_span("/Actual Onsite Response/",_in(_div("/is-editing/")))));
+	this.txt_actualResolutionForEditWo = _textbox(0,_near(_span("/Actual Resolution/",_in(_div("/is-editing/")))));
+	this.txt_actualResolutionEditWo = _textbox(1,_near(_span("/Actual Resolution/",_in(_div("/is-editing/")))));
+	this.txt_actualRestorationForEditWo = _textbox(0,_near(_span("/Actual Restoration/",_in(_div("/is-editing/")))));
+	this.txt_actualRestorationTimeEditWo = _textbox(1,_near(_span("/Actual Restoration/",_in(_div("/is-editing/")))));
+	
+	
 	this.cell_today = _span("Today");//Changed for Lightning
 	this.link_showmore = _link("show-link show-more-link"); //Changed for Lightning
 	this.cell_tomorrow = _cell(0,_rightOf(_cell("/todayDate/")));
@@ -52,7 +62,7 @@ var $sfm_pg_wo = new function sfm_pg_wo() {
 	this.sel_orderType = _link(0,_near(_span("Order Type",_in(_div("/modal-container/")))));
 	
 	//Added by JJ for Object Manager navigations in Lightning.
-	this.link_lightning_setup = _div("Setup");
+	this.link_lightning_setup = _link("Setup");
 	this.link_currentapp_setup = _div("Setup for current app");
 	this.link_object_manager = _span("Object Manager");
 	this.txt_quick_find = _searchbox("globalQuickfind");
@@ -72,11 +82,12 @@ var $sfm_pg_wo = new function sfm_pg_wo() {
 //Added by JJ for SFM Delivery components . All are Lightning ready.
 	this.link_delivery_save = _link("Save");
     this.btn_arrowNextToGetPrice = _span("/btnWrap/",_rightOf(_div("Quick SaveGet Price")));
+    this.btn_arrowNextToUserSettings = _span("/btnWrap/", _rightOf(_link("User Settings")));
     this.link_launchSfmDesigner = _span("Launch SFM Designer");
     this.btn_newButtonForWorkDetail = _link("New",_near(_heading2("/Work Details/")));
     this.btn_nextForWorkDetailRecordType = _button("Next",_in(_div("modal-footer slds-modal__footer")));
     this.link_relatedListsTab = _span("Related");
-    this.link_lineTypeArrow = _link(0,_near(_span("Line Type")));
+    this.link_lineTypeArrow = _link(0,_near(_span("/Line Type/")));
     this.link_viewAllWorkDetails = _span("View AllWork Details");
     this.btn_editActivityType = _button("Edit Activity Type");
     this.link_arrowToEditChildLine = _div("/x-action-col-icon x-action-/");
@@ -84,17 +95,23 @@ var $sfm_pg_wo = new function sfm_pg_wo() {
     this.btn_cancelForSfmDelivery = _link("/Cancel/");
     this.btn_proceedForCancel = _span("Proceed");
     this.link_workDetailAfterCreation = _div("Work Detail");
+    this.btn_cancelExtendedEdit = _span("/Cancel/");
     
 	
 	this.openAppLauncher = function(){
+		_wait(5000,_submit("App Launcher"));
 		if(_isVisible(_submit("App Launcher"))){
 			_click(_submit("App Launcher"));
-
-		}else{
+			_wait(5000,_heading2("App Launcher"));
+		}else if(_isVisible(_div("App Launcher"))){
 			_click(_div("App Launcher"));
-
+			_wait(5000,_heading2("App Launcher"));
+		}else if(_isVisible(_div("slds-icon-waffle"))){
+			_click(_div("slds-icon-waffle"));
+			_wait(5000,_heading2("App Launcher"));
 		}
 	};
+	
 	this.assert_wizard =function($wizTitle){
 		if(_exists(_cell($wizTitle))){
 			_log("Pass");
