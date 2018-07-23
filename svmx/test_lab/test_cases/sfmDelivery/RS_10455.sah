@@ -28,13 +28,13 @@ _wait(3000);
 if(_exists($processingMessage)){
 	_log("Pass ::: Account creating under process");
 }else{
-	_log("Fail");
+	_log("Fail","FAILURE");
 }
 
 if(_exists($successMessage)){
 	_log("Pass ::: Account created successfully");	
 }else{
-	_log("Fail ::: Account is not created");
+	_log("Fail ::: Account is not created","FAILURE");
 }
 
 $rs_10455.end();

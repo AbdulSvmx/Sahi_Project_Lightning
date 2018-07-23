@@ -65,7 +65,7 @@ _selectDomain($domainName);
 _wait(8000,_div($sfmName));
 
 //Validate If customerDown is true then Billing type=Paid else as is
-if(_condition($sfm_pg_sfmDesigner.chk_customerDown.checked==false)){
+if(_condition(($sfm_pg_sfmDesigner.chk_customerDown).checked==false)){
 	_click($sfm_pg_sfmDesigner.chk_customerDown);
 }
 
@@ -82,7 +82,7 @@ if(_getText($sfm_pg_sfmDesigner.txt_billingType)=="Paid"){
 
 //Validate If Billing type is Courtesy then check Is Entitlement performed else as is
 _wait(3000);
-if(_condition($sfm_pg_sfmDesigner.chk_customerDown.checked==true)){
+if(_condition(($sfm_pg_sfmDesigner.chk_customerDown).checked==true)){
 	_click($sfm_pg_sfmDesigner.chk_customerDown);
 }
 _setValue($sfm_pg_sfmDesigner.txt_billingType,"Courtesy");
@@ -91,8 +91,8 @@ if(_exists($sfm_pg_sfmDesigner.txt_priceAlert)){
 	_click($sfm_pg_sfmDesigner.btn_priceAlertOk);
 	_wait(10000);
 }
-if(_condition($sfm_pg_sfmDesigner.chk_isEntitlementPerformed.checked)==false){
-	_log("Fail ::: When BillingType= Courtesy, Is Entitlement Performed is not checked");
+if(_condition(($sfm_pg_sfmDesigner.chk_isEntitlementPerformed).checked)==false){
+	_log("Fail ::: When BillingType= Courtesy, Is Entitlement Performed is not checked","FAILURE");
 }
 else{
 	_log("Pass ::: When BillingType= Courtesy, Is Entitlement Performed is not checked");
@@ -116,7 +116,7 @@ if($schDate==$val){
 	_log("Pass ::: Scheduled Date is set to 1st day of the created month in next year");
 }
 else{
-	_log("Fail ::: Scheduled Date is not set to 1st day of the created month in next year");
+	_log("Fail ::: Scheduled Date is not set to 1st day of the created month in next year","FAILURE");
 }
 
 //Validate Actual onsite response= Today
@@ -125,7 +125,7 @@ if(_getText($sfm_pg_sfmDesigner.txt_actualOnsiteResponse)==$bo_act_common.curren
 	_log("Pass :::  Actual onsite response= Today ");
 	}
 else{
-	_log("Fail :::  Actual onsite response != Today");
+	_log("Fail :::  Actual onsite response != Today","FAILURE");
 }
 
 //Validate Billable Qty = Month of StartDate and Time and Billable Line price = Year of StartDate and Time
@@ -147,7 +147,7 @@ if((_getText($sfm_pg_sfmDesigner.txt_billingQty)==$curMonth) &&
 		(_getText($sfm_pg_sfmDesigner.txt_billingLinePrice)==$curDate.getFullYear())	){
 	_log("Pass ::: Billable Qty = Month of StartDate and Time and Billable Line price = Year of StartDate and Time");
 }else{
-	_log("Fail ::: Billable Qty != Month of StartDate and Time and Billable Line price != Year of StartDate and Time");
+	_log("Fail ::: Billable Qty != Month of StartDate and Time and Billable Line price != Year of StartDate and Time","FAILURE");
 }
 _click($sfm_pg_sfmDesigner.btn_eeCancel);
 $rs_10437.end();

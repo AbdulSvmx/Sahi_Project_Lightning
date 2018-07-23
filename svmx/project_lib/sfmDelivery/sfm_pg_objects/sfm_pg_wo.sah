@@ -25,6 +25,16 @@ var $sfm_pg_wo = new function sfm_pg_wo() {
 	this.btn_OK_popup = _span("OK",_in(_div("/toolbar-footer/"))); //Added by Janaki for OK button in pop up.
 	this.txt_actualRestoration = _textbox(0,_near(_span("Actual Restoration")));//Changed for Lightning
 	this.txt_actualRestorationtimebox = _textbox(1,_near(_span("Actual Restoration")));//Changed for Lightning
+	this.txt_actualnitialResponseForEditWo = _textbox(0,_near(_span("/Actual Initial Response/",_in(_div("/is-editing/")))));
+	this.txt_actualInitialResponseTimeEditWo = _textbox(1,_near(_span("/Actual Initial Response/",_in(_div("/is-editing/")))));
+	this.txt_actualOnsiteResponseForEditWo = _textbox(0,_near(_span("/Actual Onsite Response/",_in(_div("/is-editing/")))));
+	this.txt_actualOnsiteResponseTimeEditWo = _textbox(1,_near(_span("/Actual Onsite Response/",_in(_div("/is-editing/")))));
+	this.txt_actualResolutionForEditWo = _textbox(0,_near(_span("/Actual Resolution/",_in(_div("/is-editing/")))));
+	this.txt_actualResolutionEditWo = _textbox(1,_near(_span("/Actual Resolution/",_in(_div("/is-editing/")))));
+	this.txt_actualRestorationForEditWo = _textbox(0,_near(_span("/Actual Restoration/",_in(_div("/is-editing/")))));
+	this.txt_actualRestorationTimeEditWo = _textbox(1,_near(_span("/Actual Restoration/",_in(_div("/is-editing/")))));
+	
+	
 	this.cell_today = _span("Today");//Changed for Lightning
 	this.link_showmore = _link("show-link show-more-link"); //Changed for Lightning
 	this.cell_tomorrow = _cell(0,_rightOf(_cell("/todayDate/")));
@@ -72,6 +82,7 @@ var $sfm_pg_wo = new function sfm_pg_wo() {
 //Added by JJ for SFM Delivery components . All are Lightning ready.
 	this.link_delivery_save = _link("Save");
     this.btn_arrowNextToGetPrice = _span("/btnWrap/",_rightOf(_div("Quick SaveGet Price")));
+    this.btn_arrowNextToUserSettings = _span("/btnWrap/", _rightOf(_link("User Settings")));
     this.link_launchSfmDesigner = _span("Launch SFM Designer");
     this.btn_newButtonForWorkDetail = _link("New",_near(_heading2("/Work Details/")));
     this.btn_nextForWorkDetailRecordType = _button("Next",_in(_div("modal-footer slds-modal__footer")));

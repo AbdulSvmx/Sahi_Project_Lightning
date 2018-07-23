@@ -56,7 +56,7 @@ _setValue($sfm_pg_sfmDesigner.txt_acutalIntialResponse, $pastDate);
 if(_isVisible(_div("/"+$ruleDescription+"/"))){
 	_log("Pass ::: DVR on header is working");
 }else{
-	_log("Fail ::: DVR on header is not working");
+	_log("Fail ::: DVR on header is not working","FAILURE");
 }
 
 
@@ -64,7 +64,7 @@ if(_isVisible(_div("/"+$ruleDescription+"/"))){
 _setValue($sfm_pg_sfmDesigner.txt_acutalIntialResponse, $bo_act_common.currentDate("/"));
 _click($sfm_pg_sfmDesigner.btn_deliveryQuickSave);
 if(_isVisible(_div("/"+$ruleDescription+"/"))){
-	_log("Fail ::: DVR on header is triggered when not supposed to be");
+	_log("Fail ::: DVR on header is triggered when not supposed to be","FAILURE");
 }else{
 	_log("Pass ::: DVR on header is working as expected");
 }

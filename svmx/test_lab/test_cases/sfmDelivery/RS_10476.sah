@@ -47,7 +47,7 @@ $bo_act_WebServices.enableOnExit($eventType,$method);
 $bo_act_WebServices.saveAndClose();
 _click($bo_pg_home.link_backToSetUpHome);
 //*******Nagigate to SFM Wizard and Create Wizard and Add Above Transaction to it**********
-$sfm_act_wizards.addToWizard($objName, $wizardName[1], $wizardType[1], $actnName);
+$sfm_act_wizards.addToWizard1($objName, $wizardName[1], $wizardType[1], $actnName);
 
 //******Launch the SFM in delivery for WO object**************
 

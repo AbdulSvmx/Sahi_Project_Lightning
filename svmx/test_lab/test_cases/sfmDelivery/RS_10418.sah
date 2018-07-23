@@ -92,8 +92,6 @@ _selectWindow();
 	_click($bo_pg_sfmTransactionAndDesigner.btn_screenDesigner);
 	$bo_act_navigation.designHeaderScreen($pageLayoutName, $fields_array);
 	_click($bo_pg_sfmTransactionAndDesigner.btn_finalQuickSave);
-
-	$bo_act_navigation.navigateToSfmWizard();
 	$sfm_act_wizards.addToWizard($object_name,$currentWizardName,"SFM",$processName);
 	_selectDomain();
 	//test from here.
@@ -109,7 +107,7 @@ _selectWindow();
 		_click(_link(0,_near(_span("/"+$wo_picklist+"/",_in(_div("/modal-container/"))))));
 		_click(_link($ctrl_unique_values[$z]));
 		_click($sfm_pg_wo.btn_wo_edit_save);
-		_assertVisible(_span($success_message));
+		_wait(2000);
 		$sfm_act_createCustomWizard.clickWizardlinks($processName);
 		_selectDomain($domainName);
 		var $actual_list = [];
@@ -140,23 +138,33 @@ _selectWindow();
 
 		}
 	//************************************************************************************
-	//RS-10419
-_log("Starting execution of RS-10419 by adding Controlling picklist in the screen designer")
+	//RS-10417
+_log("Starting execution of RS-10417 by adding Controlling picklist in the screen designer")
 //Navigate to servicemax setup.
-$bo_act_navigation.navigateToSfmTransactionDesigner();
-$sfm_act_SFM.selectSFM($processName,true);
-_click(_f("main").s_label($processName));
+$sfm_act_createCustomWizard.clickWizardlinks($processName);
+//_execute(location.reload());
+_wait(10000);
+
+_selectDomain($domainName);
+_click($sfm_pg_wo.btn_arrowNextToUserSettings);
+_assertVisible($sfm_pg_wo.link_launchSfmDesigner);
+_click($sfm_pg_wo.link_launchSfmDesigner);
+_selectDomain();
+_selectWindow("/SFM Transaction Designer/");
+_wait(10000);
 _click($bo_pg_sfmTransactionAndDesigner.btn_screenDesigner);
 $fields_array = [];
 $fields_array.push($wo_picklist);
 $bo_act_navigation.editHeaderScreen($fields_array,$dependentPicklist);	
 _click($bo_pg_sfmTransactionAndDesigner.btn_finalQuickSave);
-_selectDomain();
+_closeWindow();
+_selectWindow();
 $bo_act_navigation.navigateToCreatedRecordUsingGlobalSearch($wo_number);
 $sfm_act_createCustomWizard.clickWizardlinks($processName);
 _selectDomain($domainName);
-var $actual_list = [];
+
 for(var $z=0;$z<$ctrl_unique_values.length;$z++){
+	var $actual_list = [];
 	_click(_div("/sfm-picklist/",_rightOf(_div($wo_picklist))));
 	_click(_listItem($ctrl_unique_values[$z]));
 	_wait(1000);
@@ -175,6 +183,7 @@ for(var $z=0;$z<$ctrl_unique_values.length;$z++){
 	var $index = $actual_list.indexOf("--None--");
 	$actual_list.splice($index,1);
 	$i = 0;$j = 0;
+	$expected_list = [];
 	 for ($j=0;$j<$ctrl_picklist_values.length;$j++) {
 	 	if($ctrl_picklist_values[$j] === $ctrl_unique_values[$z]) {
 	 		$i = $i+1;

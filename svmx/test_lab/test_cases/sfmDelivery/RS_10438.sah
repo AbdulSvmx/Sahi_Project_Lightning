@@ -49,7 +49,7 @@ if((_getText($sfm_pg_sfmDesigner.txt_scheduledDate))==$bo_act_common.currentDate
 	_log("Pass ::: ScheduledDate = Today");
 }
 else{
-	_log("Fail :::  ScheduledDate != Today");
+	_log("Fail :::  ScheduledDate != Today","FAILURE");
 }
 
 //Validate BLP=Line quantity * Line price
@@ -68,7 +68,7 @@ $sfm_act_sfmDesigner.navToExtendedEdit();
 if(_getValue($sfm_pg_sfmDesigner.txt_billingLinePrice)== ((_getValue($sfm_pg_sfmDesigner.txt_eeLineQty))*(_getValue($sfm_pg_sfmDesigner.txt_eeLinePricePerUnit)))){
 
 //if(billableLinePriceVal ==(lineQtyVal*linePriceVal)){
-	_log("Pass ::: BillagleLinePrice = LineQty*LinePricePerUnit");
+	_log("Pass ::: BillagleLinePrice = LineQty*LinePricePerUnit","SUCCESS");
 }else{
 	_log("Fail :::BillagleLinePrice != LineQty*LinePricePerUnit ","FAILURE");
 }

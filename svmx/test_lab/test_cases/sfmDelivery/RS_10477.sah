@@ -54,7 +54,7 @@ $bo_act_WebServices.saveAndClose();
 _click($bo_pg_home.link_backToSetUpHome);
 //*******Navigate to SFM Wizard and Create Wizard and Add Above Transaction to it**********
 //$bo_act_navigation.navigateToSfmWizard();
-$sfm_act_wizards.addToWizard($objName, $wizardName[1], $wizardType[1], $actnName);
+$sfm_act_wizards.addToWizard1($objName, $wizardName[1], $wizardType[1], $actnName);
 //$bo_act_SFW.createWizardGeneralInfo($objName,$wizardname,$wizardID);
 //$bo_act_SFW.createWizardStep($fieldActnType,$actnName,$executionMode);
 

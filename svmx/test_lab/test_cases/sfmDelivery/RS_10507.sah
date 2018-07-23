@@ -62,9 +62,9 @@ _wait(3000);
 _click($sfm_pg_sfmDesigner.btn_deliverySave);
 
 	if(_isVisible(_div("/"+"Parts: "+$ruleDescription+"/"))){
-		_log("Pass ::: DVR Error for child line is working");
+		_log("Pass ::: DVR Error for child line is working","SUCCESS");
 	}else{
-		_log("Fail ::: DVR Confirmation for child line is not working");
+		_log("Fail ::: DVR Confirmation for child line is not working","FAILURE");
 	}
 	
 		_click($sfm_pg_sfmDesigner.btn_deliveryPartsTab);
@@ -75,9 +75,9 @@ _click($sfm_pg_sfmDesigner.btn_deliverySave);
 		_wait(3000);		
 	_click($sfm_pg_sfmDesigner.btn_deliverySave);
 	if(_isVisible(_div("/"+"Parts: "+$ruleDescription+"/"))){
-		_log("Fail ::: DVR Confirmation for child line is not working");
+		_log("Fail ::: DVR Confirmation for child line is not working","FAILURE");
 	}else{
-		_log("Pass ::: DVR Error for child line is working");
+		_log("Pass ::: DVR Error for child line is working","SUCCESS");
 	}
 if(_exists($sfm_pg_sfmDesigner.txt_priceAlert)){
 	_click($sfm_pg_sfmDesigner.btn_priceAlertOk);
