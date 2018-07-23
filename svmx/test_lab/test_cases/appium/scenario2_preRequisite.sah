@@ -13,7 +13,7 @@ var $textTitle = $bo_act_common.generateRandomName("text");
 $searchName = $bo_act_common.generateRandomName("Search_wo");
 $searchName1 = $bo_act_common.generateRandomName("Search_acc");
 $searchName2 = $bo_act_common.generateRandomName("Search_con");
-$bo_act_login.login($g_url, $bac_un, $bac_pwd);
+$bo_act_login.login($g_url, $appiumAdminUn, $appiumAdminPwd);
 $sfm_act_lightningConfig.switchToLightning();
 $bo_act_navigation.navigateToSfmTransactionDesigner();
 _wait(6000, _isVisible($bo_pg_sfmTransactionAndDesigner.btn_newSFM));
