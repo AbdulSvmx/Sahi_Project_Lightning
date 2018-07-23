@@ -56,11 +56,11 @@ var $url_checklist = "https://test.salesforce.com";
 // SFMD Global Variables
 //var $sfmUsn = "svmx-sfdtest@svmx-sfdtest.org.sfdtest1"; // dev
 //var $sfmPwd = "servicemax3";
-//var $sfmUsn = "scarface.qa8@admin.com"; // dev
-//var $sfmPwd = "fireexit1";
+var $sfmUsn = "scarface.qa8@admin.com"; // dev
+var $sfmPwd = "fireexit1";
 
-var $sfmUsn = "sysadmin01@sfdautomation.com"; // base
-var $sfmPwd = "Maxplore4";
+//var $sfmUsn = "sysadmin01@sfdautomation.com"; // base
+//var $sfmPwd = "Maxplore4";
  var $domainName = "/svmx/";
 
  var $wizardName = ["SFMDAuto_Ltng_DVR", "SFMDAuto_Ltng_WebServices","SFMDAuto_Ltng_Process","SFMDAuto_Ltng_LookUP","SFMDAuto_Ltng_Mappings",
