@@ -344,8 +344,6 @@ function attackSelection() {
 	// Iterate and set values on all editable selections
 	for (var $i = 0; $i < $select.length; $i++) {
 try{
-		
-
 			if (_exists($select[$i])) {
 				_disableDefaultErrorLogging();
 				_maskLogs();
