@@ -15,7 +15,7 @@ var $t;
 
 runScan();
 
-_logOutput("URL Scanned " + $urlCount + 1 + " Of Total : "+ $urlArray.length);
+_logOutput("URL Scanned " + $urlCount  + " Of Total : "+ $urlArray.length);
 
 
 function runScan() {
