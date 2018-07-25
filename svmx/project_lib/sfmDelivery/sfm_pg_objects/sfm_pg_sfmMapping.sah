@@ -1,4 +1,4 @@
-var $sfm_pg_sfmMapping = new function sfm_pg_dvr() {
+var $sfm_pg_sfmMapping = new function sfm_pg_sfmMapping() {
 	
 	this.btn_mappingTab = _f("main").tab("Mapping(s)").rightOf(_f("main").tab("Qualification Criteria"));
 	this.btn_newMappingExistingRecord = _f("main").s_button("New").leftOf(_f("main").s_button("Reset").inside(_f("main").s_navigatorcontent("Value Map for Existing Records")));
