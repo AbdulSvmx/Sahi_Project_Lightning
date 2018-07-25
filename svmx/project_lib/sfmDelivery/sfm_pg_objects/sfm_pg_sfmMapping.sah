@@ -10,4 +10,6 @@ var $sfm_pg_sfmMapping = new function sfm_pg_sfmMapping() {
 	this.btn_showAllFields = _f("main").s_togglebutton("Show All Fields").inside(_f("main").s_navigatorcontent("Value Map for Existing Records"));
 	this.txt_mappingName = _f("main").s_textinput("Save this map as").inside(_f("main").s_navigatorcontent("Value Map for Existing Records"));
 	this.txt_mappingId = _f("main").s_textinput("Input ID Here").inside(_f("main").s_navigatorcontent("Value Map for Existing Records"));
+	this.txt_quickFindTxtBox = _f("main").s_textinput("filterInput").near(_f("main").s_label("Quick Find").inside(_f("main").s_navigatorcontent("Value Map for Existing Records")));
+	this.label_mapSavedMsg = _f("main").uiftetextfield("Map saved");
 };

@@ -1,4 +1,4 @@
-var $RS_10418 = _testcase("RS_10313","Verify Dependent picklist's values when Controlling picklist is not present in SFM process for header");
+var $RS_10418 = _testcase("RS_10418","Verify Dependent picklist's values when Controlling picklist is not present in SFM process for header");
 $RS_10418.start();
 
 //Variables used
@@ -15,8 +15,8 @@ var $fields_array = [];
 $fields_array.push($dependentPicklist);
 var $currentWizardName = $wizardName[2];
 var $success_message = "Work Order was saved.";
-//Appending current timestamp to process name to make it unique.
 
+//Appending current timestamp to process name to make it unique.
 var $timeStamp = $bo_act_navigation.getCurrentTimeStamp();
 $processName = $processName + "_" + $timeStamp;
 var $pageLayoutName = $processName + "pg";
