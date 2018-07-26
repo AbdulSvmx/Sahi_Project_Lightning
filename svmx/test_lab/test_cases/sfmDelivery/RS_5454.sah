@@ -1,11 +1,52 @@
 var $rs_5454 = _testcase("RS_5454","Verify Reset Expression in SFM Delivery");
 $rs_5454.start();
-$field = ["Actual Initial Response","Order Status"];
-$bo_act_login.login($g_url,$sfmUsn,$sfmPwd);
-$sfm_act_expressions.navigateToExpression();
-$sfm_act_expressions.newCustomAction("Work Order");
-$sfm_act_expressions.addRows(2);
-$sfm_act_expressions.manageExpressions5454();
-$sfm_act_expressions.verify5454();
+
+		//Login to App
+		$bo_act_login.login($g_url,$sfmUsn,$sfmPwd);
+		$sfm_act_expressions.navigateToExpression();
+		_wait(10000,_isVisible($sfm_pg_expressions.sel_object));
+		$sfm_act_expressions.newCustomAction("Work Order");
+		$sfm_act_expressions.addRows(2);
+		$sfm_act_expressions.manageExpressions5454();
+		_click($sfm_pg_expressions.btn_reset);
+		
+		//Assert reset function before save
+		_assertExists($sfm_pg_expressions.sel_comboField);
+		_assertExists(_f("SFMExpressionBuilderSWF").s_combobox("fieldCombo[1]"));
+		
+		//Add row and save expression
+		$sfm_act_expressions.addRows(2);
+		$sfm_act_expressions.manageExpressions5454();
+		var $expressionName = $bo_act_common.generateRandomName("expr");
+		_setValue($sfm_pg_expressions.txt_saveExprsn,$expressionName);
+		_setValue($sfm_pg_expressions.txt_inputId,$expressionName);
+		_click($sfm_pg_expressions.btn_save);
+		_wait(15000,_isVisible($sfm_pg_expressions.lbl_exprsnSaved));
+		
+		//Change the expression valuess
+		_setValue($sfm_pg_expressions.txt_input,"Ofline");
+		_setSelected(_f("SFMExpressionBuilderSWF").s_combobox("valuesCombo"), "Tomorrow");
+		_setSelected(_f("SFMExpressionBuilderSWF").s_combobox("valuesCombo[1]"), "Closed");
+		_setSelected(_f("SFMExpressionBuilderSWF").s_combobox("valuesCombo[2]"), "Depot Repair");
+
+		//Reset and assert
+		_click($sfm_pg_expressions.btn_reset);
+		
+		_assertEqual(_getValue($sfm_pg_expressions.sel_comboField),"Account");
+		_assertEqual(_getValue(_f("SFMExpressionBuilderSWF").s_combobox("fieldCombo[1]")),"Actual Initial Response");
+		_assertEqual(_getValue(_f("SFMExpressionBuilderSWF").s_combobox("fieldCombo[2]")),"Order Status");
+		_assertEqual(_getValue(_f("SFMExpressionBuilderSWF").s_combobox("fieldCombo[3]")),"Order Type");
+		
+		_assertEqual(_getValue($sfm_pg_expressions.sel_comboConditions),"Contains");
+		_assertEqual(_getValue(_f("SFMExpressionBuilderSWF").s_dropdownlist("conditionsCombo[1]")),"Equals");
+		_assertEqual(_getValue(_f("SFMExpressionBuilderSWF").s_dropdownlist("conditionsCombo[2]")),"Not Equal");
+		_assertEqual(_getValue(_f("SFMExpressionBuilderSWF").s_dropdownlist("conditionsCombo[3]")),"Equals");
+		
+		_assertEqual(_getValue(_f("SFMExpressionBuilderSWF").s_textinput("textip")),"Online");
+		_assertEqual(_getValue(_f("SFMExpressionBuilderSWF").s_combobox("valuesCombo")),"Today");
+		_assertEqual(_getValue(_f("SFMExpressionBuilderSWF").s_combobox("valuesCombo[1]")),"Canceled");
+		_assertEqual(_getValue(_f("SFMExpressionBuilderSWF").s_combobox("valuesCombo[2]")),"Field Service");
+		
+		//$sfm_act_expressions.verify5454();
 
 $rs_5454.end();
