@@ -340,8 +340,8 @@ var $sfm_act_Transactions = new function sfm_act_Transactions() {
 	};
 	
 	this.newSfm7017 = function() {
-		$sfmName = $bo_act_common.generateRandomName("SFM_Auto_");
-		$sfmPgLayoutName = $bo_act_common.generateRandomName("HCS_Auto_");
+		$sfmName = $bo_act_common.generateRandomName("RS_7017__");
+		$sfmPgLayoutName = $sfmName;
 		_wait(5000);
 		_click($bo_pg_sfmTransactionAndDesigner.btn_newSFM);
 		_setValue($bo_pg_sfmTransactionAndDesigner.txt_name, $sfmName);

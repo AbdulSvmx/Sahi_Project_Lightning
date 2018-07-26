@@ -53,6 +53,7 @@ _click($sfm_pg_sfmDesigner.btn_eeUpdate);
 _click($sfm_pg_sfmDesigner.btn_deliveryAddRowLabor);
 _setStrictVisibilityCheck(true);
 _click(_div("/x-sfmd-edit-icon/[1]"));
+_click(_div("/x-sfmd-edit-icon/[1]"));
 _click($sfm_pg_sfmDesigner.txt_eeEdit);
 _setStrictVisibilityCheck(false);
 _setValue($sfm_pg_sfmDesigner.txt_eeLineQty,"10");
