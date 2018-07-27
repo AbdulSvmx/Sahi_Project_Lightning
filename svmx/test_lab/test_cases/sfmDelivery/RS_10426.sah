@@ -11,6 +11,14 @@ var $ctrl_unique_values = ["Open","Closed"];
 var $ctrl_picklist_values = ["Open","Open","Closed"];
 var $dep_picklist_values = ["Depot Repair","Field Service","Field Service"];
 var $ctr = 0;
+var $sfmTemplate = "SVMXSTD: Manage WO Usage Lines";
+var $isCustom = false;
+var $ctr = 0;
+var $i = 0;
+var $success_message = "Work Order was saved.";
+var $containerName = ["Order Status","Order Status","Order Status"];
+var $fieldName=["Group Email","Age", "Account"];
+var $z = 0;
 var $fields_array = [];
 $fields_array.push($dependentPicklist);
 var $currentWizardName = $wizardName[2];
@@ -63,7 +71,7 @@ _selectWindow();
 //Navigate to servicemax setup and setup required process.
 //Clone standard process and add the dependent picklist in the screen designer
 _setSpeed(3000);
-$sfm_act_SFM.cloneTDM016($sfmNameToBeCloned,$processName,$isCustom,$pageLayoutName, $sfmTemplate, $fieldName, $containerName);
+$sfm_act_SFM.cloneTDM016($process_to_clone,$processName,$isCustom,$pageLayoutName, $sfmTemplate, $fieldName, $containerName);
 $bo_pg_sfmTransactionAndDesigner.deleteField($ctrlPicklist);
 _click($bo_pg_sfmTransactionAndDesigner.btn_pageLayoutSave);
 _click($bo_pg_sfmTransactionAndDesigner.btn_quickSave1);
@@ -101,26 +109,107 @@ _selectDomain();
 
 //Create a work order
 var $wo_number = $sfm_act_createCustomWizard.createWowithdateliterals();
+$bo_act_navigation.navigateToCreatedRecordUsingGlobalSearch($wo_number);
 
+//Launch SFM delivery and verify dependent pick list values
+var $expected_list = [];
+//Verify the values one by one.
 
+ var $i = 0;var $j = 0;
+ for ($j=0;$j<$ctrl_picklist_values.length;$j++) {
+ 	if($ctrl_picklist_values[$j] === $ctrl_unique_values[0]) {
+ 		$i = $i+1;
+ 		$expected_list.push($dep_picklist_values[$j]);
+ 	}
+ }
+for($z=0;$z<$ctrl_unique_values.length;$z++){
+	
+	//Steps to edit wo and save
+	_click($sfm_pg_wo.btn_wo_edit);
+	_click(_link(0,_near(_span("/"+$wo_picklist+"/",_in(_div("/modal-container/"))))));
+	_click(_link($ctrl_unique_values[$z]));
+	_click($sfm_pg_wo.btn_wo_edit_save);
+	_wait(2000);
+	$sfm_act_createCustomWizard.clickWizardlinks($processName);
+	_selectDomain($domainName);
+	var $actual_list = [];
+	//Verify the count of values first
+	_wait(4000);
+    _click(_div("/sfm-picklist/",_rightOf(_div($dependentPicklist))));
+    _wait(1000);
+	var $no_of_values = _count("_listItem", "/.*/", _under(_div($dependentPicklist)));
+	
+	for($ctr = 1;$ctr < $no_of_values;$ctr++ ){
+		$actual_list.push(_getText(_listItem($ctr), _under(_div($dependentPicklist))));
+	}
+	_assertEqualArrays($expected_list, $actual_list);
+	_click($sfm_pg_wo.link_delivery_save);
+	_wait(4000);
+	_selectDomain();
 
+	}
 
+//Now edit the mapping and save the changes.
+$sfm_act_createCustomWizard.clickWizardlinks($processName);
+_wait(10000);
+_selectDomain($domainName);
+_click($sfm_pg_wo.btn_arrowNextToUserSettings);
+_assertVisible($sfm_pg_wo.link_launchSfmDesigner);
+_click($sfm_pg_wo.link_launchSfmDesigner);
+_selectDomain();
+_selectWindow("/SFM Transaction Designer/");
+_wait(10000);
+_click($bo_pg_sfmTransactionAndDesigner.btn_qualifyingCriteriaAndFieldMapping);
+_click($sfm_pg_sfmMapping.btn_mappingTab);
+_click($sfm_pg_sfmMapping.btn_newMappingExistingRecord);
+_setValue($sfm_pg_sfmMapping.txt_quickFindTxtBox,$ctrlPicklist);
+_click(_f("main").s_togglebutton("I want to choose a field from the list").rightOf(_f("main").ftedatagriditemrenderer($ctrlPicklist)));
+_setSelected(_f("main").s_combobox("valuesCombo").rightOf(_f("main").ftedatagriditemrenderer($ctrlPicklist)),$ctrl_unique_values[1]);
+_click($sfm_pg_sfmMapping.btn_saveMappingExistingRecord);
+_wait(2000);
+_assertVisible($sfm_pg_sfmMapping.label_mapSavedMsg);
+_click($bo_pg_sfmTransactionAndDesigner.btn_quickSave1);
+_selectDomain();
+_closeWindow();
+_selectWindow();
+_selectDomain($domainName);
+_click($sfm_pg_wo.btn_cancelForSfmDelivery);
+_click($sfm_pg_wo.btn_proceedForCancel);
+$bo_act_navigation.navigateToCreatedRecordUsingGlobalSearch($wo_number);
+//Launch the SFM delivery again to verify if the dependent pick list value has changed as per the new mapping
+var $expected_list = [];
+//Verify the values one by one.
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+var $i = 0;var $j = 0;
+for ($j=0;$j<$ctrl_picklist_values.length;$j++) {
+	if($ctrl_picklist_values[$j] === $ctrl_unique_values[0]) {
+		$i = $i+1;
+		$expected_list.push($dep_picklist_values[$j]);
+	}
+}
+for($z=0;$z<$ctrl_unique_values.length;$z++){
+	
+	//Steps to edit wo and save
+	_click($sfm_pg_wo.btn_wo_edit);
+	_click(_link(0,_near(_span("/"+$wo_picklist+"/",_in(_div("/modal-container/"))))));
+	_click(_link($ctrl_unique_values[$z]));
+	_click($sfm_pg_wo.btn_wo_edit_save);
+	_wait(2000);
+	$sfm_act_createCustomWizard.clickWizardlinks($processName);
+	_selectDomain($domainName);
+	var $actual_list = [];
+	//Verify the count of values first
+	_wait(4000);
+  _click(_div("/sfm-picklist/",_rightOf(_div($dependentPicklist))));
+  _wait(1000);
+	var $no_of_values = _count("_listItem", "/.*/", _under(_div($dependentPicklist)));
+	
+	for($ctr = 1;$ctr < $no_of_values;$ctr++ ){
+		$actual_list.push(_getText(_listItem($ctr), _under(_div($dependentPicklist))));
+	}
+	_assertEqualArrays($expected_list, $actual_list);
+	_click($sfm_pg_wo.link_delivery_save);
+	_wait(4000);
+	_selectDomain();
+	}
 $RS_10426.end();
