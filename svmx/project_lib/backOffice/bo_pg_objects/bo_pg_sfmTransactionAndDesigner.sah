@@ -176,8 +176,9 @@ var $bo_pg_sfmTransactionAndDesigner = new function bo_pg_sfmTransactionAndDesig
      * Delete a field  from the SFM Designer page
      * @param $fieldName
      */
+    //Modified by JJ as this stopped working.
     this.deleteField = function($fieldName) {
-	_click(_f("main").s_button("closeBtn").near(_f("main").s_richtext($fieldName)));
+    	_click(_f("main").s_button("Remove this field").near(_f("main").uiftetextfield($fieldName)));
     };
     
     // Added by Harish
