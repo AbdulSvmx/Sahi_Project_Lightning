@@ -8,7 +8,7 @@ var $sfmTemplateSaveAsName = $sfmName;
 var $containerNameArray = ["Order Status","Order Status",];
 var $fieldNameArray = ["Proforma Invoice Amount","Travel Rate","Rate (Pricing Rule)"];
 
-var $domainName = "/visual.force.com/";
+//var $domainName = "/visual.force.com/";
 var $wizardObject ="Work Order";
 
 var $formulaTargetObjectArray = ["Work Order","Labor"];
