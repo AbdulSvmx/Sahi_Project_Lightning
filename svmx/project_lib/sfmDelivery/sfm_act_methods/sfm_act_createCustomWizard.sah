@@ -181,7 +181,9 @@ var $sfm_act_createCustomWizard = new function sfm_act_createCustomWizard() {
 	};
 
 	this.clickWizardBtn = function($sfmName) {
-		_click(_button($sfmName));
+		_click(_span($sfmName));
+		_selectDomain($domainName);
+		_wait(8000,_div($sfmName));
 
 	};
 	this.addProductServiced = function($part){
@@ -390,53 +392,59 @@ var $sfm_act_createCustomWizard = new function sfm_act_createCustomWizard() {
 	};
 
 	this.verify7017 = function(){
-		_selectDomain();
+		_selectDomain($domainName);
 		_setStrictVisibilityCheck(true);
 		$readOnlyAttribute = "";
-		$actualErrorMsg = "Required field is blank: Account";
+		$expectedErrorMsg = "Required field is blank: Account";
 		$readOnlyAttribute = _getAttribute($sfm_pg_wizardWindow.sel_billingType, "readonly");
 		$isReadOnlyAttribute = $readOnlyAttribute.search("readonly");
 		$expectedErrorMsg = "";
+		//verify billing type is readonly or not
 		if($isReadOnlyAttribute==-1){
-			_log("Fail");
+			_log("Fail :: Billing type is not readonly", "FAILURE");
 		}
 		else{
-			_log("Pass");
+			_log("Pass :: Billing type is readonly", "SUCCESS");
 		}
 		_click($sfm_pg_wizardWindow.btn_quickSave);
-		$expectedErrorMsg = _getText($sfm_pg_wizardWindow.errorMsg);
-		_log($expectedErrorMsg);
-		if($actualErrorMsg==$expectedErrorMsg){
-			_log("Pass");
+		//$expectedErrorMsg = _getText($sfm_pg_wizardWindow.errorMsg);
+		//_log($expectedErrorMsg);
+		//verify account is required field or not
+		if(_isVisible(_div("/"+$expectedErrorMsg+"/"))){
+			_log("Pass :: Required field on header is working");
 		}
 		else{
-			_log("Fail");
+			_log("Fail :: Required field on header is not working","FAILURE");
 		}
-		_click($sfm_pg_wizardWindow.btn_addAndSearch);
-		_click($sfm_pg_wizardWindow.icon_search);
+		_setValue($sfm_pg_wizardWindow.txt_account,"Acme");
+		
+		//check multi add
+		_click($sfm_pg_wizardWindow.link_addWorkDetail);
+		_click($sfm_pg_wizardWindow.btn_searchProduct);
 		_click($sfm_pg_wizardWindow.chk_multiSelect);
-		var $divs= _collect("_div","/.*/",_under(_div("Product Name")));
-		_log($divs.length);
-		_click($sfm_pg_wizardWindow.btn_select);
-		var $divs1= _collect("_div","/.*/",_under(_div("Part")));
-		_log($divs1.length);
+		var $divs=  _collect("_div","/grid-cell-inner/",_under(_parentNode(_span("Name"),"DIV",4)));
+		_log("No of Product = "+$divs.length);
+		_click($sfm_pg_wizardWindow.btn_addProduct);
+		
+		var $divs1= _collect("_div","/grid-cell-inner/",_under(_parentNode(_span("Part"),"DIV",4)));
+		_log("No of parts = "+$divs1.length);
 		if($divs.length==$divs1.length){
-			_log("Pass");
+			_log("Pass ::: Selected parts are added");
 		}
 		else{
-			_log("Fail");
+			_log("Fail ::: Selected parts are not added", "FAILURE");
 		}
-		var $val = 0;
-		_set($val,_count("_image", "/.*/", _under(_div("/actioncolumn/"))));
-		for(var $i=$val-2;$i<$val;$i++){
-			
-			_click(_image("gif["+$val+"]"));
+		
+		//Delete all child lines and check for delete and then save to check allow zero lines
+		for(var $i=0;$i<$divs1.length;$i++){
+			_click(_div("/x-action-col-icon/"));
+			_click(_span("Delete"));	
 		}
-		if(_count("_image", "/.*/", _under(_div("/actioncolumn/")))==0){
+		_click($sfm_pg_wizardWindow.btn_quickSave);
+		if(_isVisible(_div("/"+$expectedErrorMsg+"/"))){
 			_log("Pass");
-		}
-		else{
-			_log("Fail");
+		}else{
+			_log("Fail :::", "FAILURE");
 		}
 
 	};
@@ -730,6 +738,7 @@ var $sfm_act_createCustomWizard = new function sfm_act_createCustomWizard() {
 	//Creates work order without values in lightning.
 	//Lakshmisha- Updated the function to check for the WO link in app launcher and then click on the parent element of WO link
 	this.createWowithoutvalues = function() {
+		_selectDomain();
 		$sfm_pg_wo.openAppLauncher();
 		_wait(3000);
 		$woName = "";

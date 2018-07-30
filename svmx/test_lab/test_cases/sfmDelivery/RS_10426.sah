@@ -28,6 +28,7 @@ var $success_message = "Work Order was saved.";
 var $timeStamp = $bo_act_navigation.getCurrentTimeStamp();
 $processName = $processName + "_" + $timeStamp;
 var $pageLayoutName = $processName + "pg";
+var $mapName = $processName + "mp";
 var $myDomain = "/lightning/";
 //**************************************************************************************
 //Login and switch to lightning
@@ -92,11 +93,12 @@ if(_condition(_isVisible($bo_pg_sfmTransactionAndDesigner.btn_proceed_anyways)))
 //Set up the mapping. Order status is set to "Open"
 _click($sfm_pg_sfmMapping.btn_mappingTab);
 _click($sfm_pg_sfmMapping.btn_newMappingExistingRecord);
+_wait(6000);
 _setValue($sfm_pg_sfmMapping.txt_quickFindTxtBox,$ctrlPicklist);
 _click(_f("main").s_togglebutton("I want to choose a field from the list").rightOf(_f("main").ftedatagriditemrenderer($ctrlPicklist)));
 _setSelected(_f("main").s_combobox("valuesCombo").rightOf(_f("main").ftedatagriditemrenderer($ctrlPicklist)),$ctrl_unique_values[0]);
-_setValue($sfm_pg_sfmMapping.txt_mappingName,$processName);
-_setValue($sfm_pg_sfmMapping.txt_mappingId,$processName);
+_setValue($sfm_pg_sfmMapping.txt_mappingName,$mapName);
+_setValue($sfm_pg_sfmMapping.txt_mappingId,$mapName);
 _click($sfm_pg_sfmMapping.btn_saveMappingExistingRecord);
 _wait(2000);
 _assertVisible($sfm_pg_sfmMapping.label_mapSavedMsg);
@@ -126,7 +128,7 @@ for($z=0;$z<$ctrl_unique_values.length;$z++){
 	
 	//Steps to edit wo and save
 	_click($sfm_pg_wo.btn_wo_edit);
-	_click(_link(0,_near(_span("/"+$wo_picklist+"/",_in(_div("/modal-container/"))))));
+	_click(_link(0,_near(_span("/"+$ctrlPicklist+"/",_in(_div("/modal-container/"))))));
 	_click(_link($ctrl_unique_values[$z]));
 	_click($sfm_pg_wo.btn_wo_edit_save);
 	_wait(2000);
@@ -191,7 +193,7 @@ for($z=0;$z<$ctrl_unique_values.length;$z++){
 	
 	//Steps to edit wo and save
 	_click($sfm_pg_wo.btn_wo_edit);
-	_click(_link(0,_near(_span("/"+$wo_picklist+"/",_in(_div("/modal-container/"))))));
+	_click(_link(0,_near(_span("/"+$ctrlPicklist+"/",_in(_div("/modal-container/"))))));
 	_click(_link($ctrl_unique_values[$z]));
 	_click($sfm_pg_wo.btn_wo_edit_save);
 	_wait(2000);

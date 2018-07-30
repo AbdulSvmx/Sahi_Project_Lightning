@@ -339,8 +339,8 @@ var $sfm_act_Transactions = new function sfm_act_Transactions() {
 		_setSelected(_f("main").s_combobox("/ComboBox/").rightOf(_f("main").formitemlabel("Matching Field")),"Account ID");
 	};
 	
-	this.newSfm7017 = function() {
-		$sfmName = $bo_act_common.generateRandomName("RS_7017__");
+	this.newSfm7017 = function($sfmName) {
+		/*$sfmName = $bo_act_common.generateRandomName("RS_7017_");*/
 		$sfmPgLayoutName = $sfmName;
 		_wait(5000);
 		_click($bo_pg_sfmTransactionAndDesigner.btn_newSFM);
@@ -381,8 +381,10 @@ var $sfm_act_Transactions = new function sfm_act_Transactions() {
 		_wait(5000);
 		_setSelected($sfm_pg_screenDesigner.sel_allowMultiAdd, "Part");
 		_click($bo_pg_sfmTransactionAndDesigner.btn_pageLayoutSave);
-		_wait(3000);
+		_wait(3000, _isVisible(_f("main").label("Page saved")));
 		_click($bo_pg_sfmTransactionAndDesigner.btn_finalQuickSave);
+		_wait(2000);
+		_click($bo_pg_sfmTransactionAndDesigner.btn_saveAndclose);
 	};
 	
 	this.newsfm6877 = function($sfmName,$sfmPgLayoutName,$headersToAdd,$context,$matching){
