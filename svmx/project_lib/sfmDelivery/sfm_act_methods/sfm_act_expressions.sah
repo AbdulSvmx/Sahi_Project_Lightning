@@ -5,7 +5,7 @@ var $sfm_act_expressions = new function sfm_act_expressions() {
 		_click($bo_pg_servicemaxSetup.btn_serviceFlowManager);
 		_click($sfm_pg_expressions.tab_expression);
 		_setSpeed(3000);
-//		_wait(5000,_isVisible($sfm_pg_expressions.lbl_ConfigureExprsns));
+		_wait(15000,_isVisible($sfm_pg_expressions.sel_object));
 	};
 	
 	this.newCustomAction = function($object){
@@ -69,6 +69,31 @@ var $sfm_act_expressions = new function sfm_act_expressions() {
 	
 };
 
+	this.createExpression=function($comboField,$comboConditions,$toggleButton,$comboInput){
+		for (var $i = 0; $i < $comboField.length-2; $i++) {
+			_log("Add row: "+$i);
+			_click($sfm_pg_expressions.btn_plus);
+		}
+		var $ele=null;
+		var $eleType=null;
+		for (var $i = 1; $i <= $comboField.length; $i++) {
+			_setSelected($sfm_pg_expressions.sel_comboField.near(_f("SFMExpressionBuilderSWF").s_label("\""+$i+"\"")),$comboField[$i]);
+			
+			_setSelected($sfm_pg_expressions.sel_comboConditions.near(_f("SFMExpressionBuilderSWF").s_label("\""+$i+"\"")), $comboConditions[$i]);
+			if ($toggleButton[$i]!=="") {
+				_click($sfm_pg_expressions.btn_toggleChoose.near(_f("SFMExpressionBuilderSWF").s_label("\""+$i+"\"")));
+			}else{
+				$ele=$sfm_pg_expressions.sel_comboField.near(_f("SFMExpressionBuilderSWF").s_label("\""+$i+"\""));
+				$eleType=_exists($sfm_pg_expressions.btn_toggleChoose.rightOf($ele));
+				if ($eleType==true) {
+					_setValue($sfm_pg_expressions.txt_input.near(_f("SFMExpressionBuilderSWF").s_label("\""+$i+"\"")),$comboInput[$i]);
+				}else{
+					_setSelected($sfm_pg_expressions.btn_inputCombobox.near(_f("SFMExpressionBuilderSWF").s_label("\""+$i+"\"")),$comboInput[$i]);
+				}	
+			}	
+		}
+	};
+
 	this.manageExpressions5453 = function(){
 		_setSelected($sfm_pg_expressions.sel_comboField,"Account");
 		_setSelected($sfm_pg_expressions.sel_comboConditions, "Contains");
@@ -89,6 +114,16 @@ var $sfm_act_expressions = new function sfm_act_expressions() {
 		_setSelected(_f("SFMExpressionBuilderSWF").s_combobox("fieldCombo[6]"), "Component");
 		_setSelected(_f("SFMExpressionBuilderSWF").s_dropdownlist("conditionsCombo[6]"), "Starts With");
 		_setValue(_f("SFMExpressionBuilderSWF").s_textinput("textip[2]"), "IB");
+		
+		_setSelected(_f("SFMExpressionBuilderSWF").s_combobox("fieldCombo[7]"), "Billing Type");
+		_setSelected(_f("SFMExpressionBuilderSWF").s_dropdownlist("conditionsCombo[7]"), "Contains");
+		_setSelected(_f("SFMExpressionBuilderSWF").s_combobox("valuesCombo[4]"), "Paid");
+		_setSelected(_f("SFMExpressionBuilderSWF").s_combobox("fieldCombo[8]"), "Actual Onsite Response");
+		_setSelected(_f("SFMExpressionBuilderSWF").s_dropdownlist("conditionsCombo[8]"), "Not Equal");
+		_click(_f("SFMExpressionBuilderSWF").s_togglebutton("I want to choose a field from the list[3]"));
+		_setSelected(_f("SFMExpressionBuilderSWF").s_combobox("valuesCombo[5]"), "Yesterday");
+		_setSelected(_f("SFMExpressionBuilderSWF").s_combobox("fieldCombo[9]"), "Contact");
+		_setSelected(_f("SFMExpressionBuilderSWF").s_dropdownlist("conditionsCombo[9]"), "Is Not Null");
 		
 	};
 

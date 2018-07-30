@@ -4,8 +4,18 @@ $exprsnName = $bo_act_common.generateRandomName("Exprsn");
 $bo_act_login.login($g_url,$sfmUsn,$sfmPwd);
 $sfm_act_expressions.navigateToExpression();
 $sfm_act_expressions.newCustomAction("Work Order");
-$sfm_act_expressions.addRows(5);
+$sfm_act_expressions.addRows(8);
 $sfm_act_expressions.manageExpressions5453();
 $sfm_act_expressions.saveExprsn($exprsnName);
+_wait(15000,_assertEqual(_getValue($sfm_pg_expressions.dropdown_exprsn),$exprsnName));
 $sfm_act_expressions.deleteExprsn();
+_selectDomain();
+_call(top.location.reload(true));
+_selectDomain($domainName);
+_wait(15000,_isVisible($sfm_pg_expressions.sel_object));
+_setSelected($sfm_pg_expressions.sel_object,"Work Order");
+_wait(15000,_isEnabled($sfm_pg_expressions.dropdown_exprsn));
+_setValue($sfm_pg_expressions.dropdown_exprsn,"");
+//_assertNotExists
+//
 $rs_5453.end();
