@@ -1,0 +1,40 @@
+//Functions related to Back Office Mappings.
+
+var $bo_act_mappings = new function bo_act_mappings() {
+	
+	//This function creates a new mapping and saves the map with the given name.
+	//This is designed to work in Classic and Lightning
+	//The user should be in the 'QC and Mapping' tab before calling this function
+	
+	this.createMapping = function($pickListLabels,$pickListValues,$textLabels,$textValues,$mapName){
+		var $i = 0;
+		_selectDomain($domainName);
+		_click($sfm_pg_sfmMapping.btn_mappingTab);
+		_setSelected($sfm_pg_sfmMapping.btn_selectExistingMap,"SVMXSTD: Close Work Order");
+		_click($sfm_pg_sfmMapping.btn_newMappingExistingRecord);
+		_wait(6000);
+		_click($sfm_pg_sfmMapping.btn_toggleMapOnOff);
+		_wait(3000);
+		//First setting the picklist values
+		for($i=0;$i<pickListLabels.length;$i++){
+			_click(_f("main").s_togglebutton("I want to choose a field from the list").rightOf(_f("main").ftedatagriditemrenderer($pickListLabels[$i])));
+			_setSelected(_f("main").s_combobox("valuesCombo").rightOf(_f("main").ftedatagriditemrenderer($pickListLabels[$i])),$pickListValues[$i]);
+		}
+		_setValue($sfm_pg_sfmMapping.txt_mappingName,$mapName);
+		_setValue($sfm_pg_sfmMapping.txt_mappingId,$mapName);
+		_click($sfm_pg_sfmMapping.btn_saveAsMappingExistingRecord);
+		_wait(2000);
+		_assertVisible($sfm_pg_sfmMapping.label_mapSavedMsg);
+		_click($sfm_pg_sfmMapping.btn_toggleMapOnOff);
+		//Set all the text values
+		for($i=0;i<$textLabels.length;$i++){
+			_setValue(_f("main").s_textinput("textip").rightOf(_f("main").ftedatagriditemrenderer($textLabels[$i])),$textValues[$i]);
+		}
+		_click($sfm_pg_sfmMapping.btn_saveMappingExistingRecords);
+		_assertVisible($sfm_pg_sfmMapping.label_mapSavedMsg);
+		_click($sfm_pg_sfmMapping.btn_toggleMapOnOff);
+		_click($bo_pg_sfmTransactionAndDesigner.btn_quickSave1);
+		_selectDomain();
+		
+	};
+};
