@@ -187,23 +187,28 @@ var $sfm_act_createCustomWizard = new function sfm_act_createCustomWizard() {
 
 	};
 	this.addProductServiced = function($part){
+		_click($sfm_pg_wizardWindow.link_productServiced);
+		_click($sfm_pg_wizardWindow.btn_searchProduct);
 		_wait(3000);
-		_selectDomain();
-		_setStrictVisibilityCheck(true);
-		_click($sfm_pg_wizardWindow.btn_addRow);
-		_click($sfm_pg_wizardWindow.btn_edit);
-		_setValue($sfm_pg_wizardWindow.txt_part,$part);
-		_click(_span("/lookup_icon/",_rightOf(_label("Part:"))));
-		_doubleClick(_cell(0,_under(_div("Product Name"))));
-		_click($sfm_pg_wizardWindow.btn_update);
+		_click(_span("x-grid-checkcolumn",_under($sfm_pg_wizardWindow.chk_multiSelect)));
+		_click($sfm_pg_wizardWindow.btn_addProduct);
 		_click($sfm_pg_sfmDesigner.btn_deliveryQuickSave);
-		_wait(10000);
-		_click($sfm_pg_wizardWindow.btn_downArrow);
-		_wait(3000);
-		_click($sfm_pg_wizardWindow.btn_addWorkDetails);
-		_setStrictVisibilityCheck(false);
+		_click($sfm_pg_sfmDesigner.btn_deliveryExtendedEdit);
+		_click($sfm_pg_sfmDesigner.btn_deliveryExtendedEdit);
+		_click($sfm_pg_sfmDesigner.txt_eeAddModWorkDet);
+		_wait(5000,_isVisible($sfm_pg_sfmDesigner.btn_deliveryPartsTab));
+
+		
 	};
 	this.addParts = function($part) {
+		
+		$sfm_act_sfmDesigner.addChildLine("Parts");
+		_setStrictVisibilityCheck(true);
+		_click($sfm_pg_wizardWindow.lookup_part);
+		_click(_link("/x-component/"));
+		_click($sfm_pg_wizardWindow.btn_update);
+		_setStrictVisibilityCheck(false);
+		/*
 		_wait(5000);
 		_selectDomain();
 		_setStrictVisibilityCheck(true);
@@ -215,9 +220,17 @@ var $sfm_act_createCustomWizard = new function sfm_act_createCustomWizard() {
 		_click(_cell(0,_near(_div("Product Name"))));
 		_click(_button("Select"));
 		_click($sfm_pg_wizardWindow.btn_update);
-		_setStrictVisibilityCheck(false);
+		_setStrictVisibilityCheck(false); */
 	};
 	this.addLabor = function($part) {
+		$sfm_act_sfmDesigner.addChildLine("Labor");
+		_setStrictVisibilityCheck(true);
+		_click($sfm_pg_wizardWindow.lookup_part);
+		_click(_link("/x-component/"));
+		_click($sfm_pg_wizardWindow.btn_update);
+		_setStrictVisibilityCheck(false);
+		
+		/*
 		_click($sfm_pg_wizardWindow.tab_labor);
 		_setStrictVisibilityCheck(true);
 		_wait(3000);
@@ -232,10 +245,19 @@ var $sfm_act_createCustomWizard = new function sfm_act_createCustomWizard() {
 		_click(_button("Select"));
 		_wait(3000);
 		_click($sfm_pg_wizardWindow.btn_update);
-		_setStrictVisibilityCheck(false);
+		_setStrictVisibilityCheck(false); */
 	};
 	
 	this.addExpenses = function($expense) {
+		
+		$sfm_act_sfmDesigner.addChildLine("Expenses");
+		_setStrictVisibilityCheck(true);
+		_setValue($sfm_pg_sfmDesigner.txt_eeLineQty,"6");
+		_click($sfm_pg_sfmDesigner.txt_eeExpenseType);
+		_click(_listItem($expense));
+		_click($sfm_pg_sfmDesigner.btn_eeUpdate);
+		_setStrictVisibilityCheck(false);
+/*
 		_click($sfm_pg_wizardWindow.tab_expenses);
 		_setStrictVisibilityCheck(true);
 		_wait(3000);
@@ -243,7 +265,7 @@ var $sfm_act_createCustomWizard = new function sfm_act_createCustomWizard() {
 		_click($sfm_pg_wizardWindow.btn_edit);
 		_setValue($sfm_pg_wizardWindow.txt_expenseType,$expense);
 		_click($sfm_pg_wizardWindow.btn_update);
-		_setStrictVisibilityCheck(false);
+		_setStrictVisibilityCheck(false);*/
 	};
 	this.addTravel = function() {
 		$todayDate = new Date();
