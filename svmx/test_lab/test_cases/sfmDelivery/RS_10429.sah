@@ -10,7 +10,7 @@ $sfm_act_Transactions.newSfm10429($sfmName);
 //$bo_act_navigation.navigateToSfmWizard();
 //$sfm_act_createCustomWizard.chooseObject("Work Order");
 //$sfm_act_createCustomWizard.addManageWizSteps($wizardName[2], "SFM", $sfmName);
-$sfm_act_wizards.addToWizard("Work Order", $wizardName[2], $wizardType[1], $sfmName); 
+$sfm_act_wizards.addToWizard("Work Order", $wizardName[3], $wizardType[1], $sfmName); 
 $sfm_act_createCustomWizard.createWowithoutvalues();
 $sfm_act_createCustomWizard.clickWizardBtn($sfmName); 
 $sfm_act_createCustomWizard.verify10429();

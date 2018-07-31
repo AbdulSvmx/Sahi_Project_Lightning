@@ -1,20 +1,19 @@
-var $rs_7011 = _testcase("RS_7011","Verify source to target all SFM Process.");
-$rs_7011.start();
+var $rs_10435 = _testcase("RS_10435","Verify source to target all SFM Process.");
+$rs_10435.start();
 $woName="";
 $processName = "Add/Edit Products Serviced";
-$sfmName = $bo_act_common.generateRandomName("RS_7011_");
+$sfmName = $bo_act_common.generateRandomName("RS_10435_");
 $sfmPgLayoutName =	$sfmName;
 _setSpeed($g_stepSpeed);
 $bo_act_login.login($g_url, $sfmUsn, $sfmPwd);
-$sfm_act_lightningConfig.switchToLightning(); /*
+$sfm_act_lightningConfig.switchToLightning(); 
 $bo_act_navigation.navigateToSfmTransactionDesigner();
 $sfm_act_Transactions.cloneAndSaveProcess($processName, $sfmName, $sfmPgLayoutName);
-$sfm_act_wizards.addToWizard("Work Order", $wizardName[2], $wizardType[1], $sfmName); */
+$sfm_act_wizards.addToWizard("Work Order", $wizardName[3], $wizardType[1], $sfmName); 
 $sfm_act_createCustomWizard.createWowithoutvalues();
-//_log($woName);
-$sfm_act_createCustomWizard.clickWizardBtn("RS_7011_277201815316");
-//_selectDomain("/svmx/");
-//$sfm_act_createCustomWizard.clickWizardBtn("SFM_Auto_1142018142532");
+
+$sfm_act_createCustomWizard.clickWizardBtn($sfmName);
+
 $sfm_act_createCustomWizard.addProductServiced("Product");
 _wait(5000);
 
@@ -31,19 +30,16 @@ _click($sfm_pg_sfmDesigner.btn_deliverySave);
 _wait(10000);
 _click($sfm_pg_sfmDesigner.btn_deliverySave);
 _wait(10000);
-//$bo_act_navigation.navigateToCreatedRecordUsingGlobalSearch($woName);
 _selectDomain();
 _click($sfm_pg_sfmDesigner.link_related);
 _click($sfm_pg_sfmDesigner.link_viewAll);
 
-if((_getText(_link("/WL-/",_leftOf(_span("Products Serviced")))) ==_getText(_link("/WL-/",_rightOf(_span("Parts"))))) &&
-		(_getText(_link("/WL-/",_leftOf(_span("Products Serviced")))) ==_getText(_link("/WL-/",_rightOf(_span("Labor")))))
-		(_getText(_link("/WL-/",_leftOf(_span("Products Serviced")))) ==_getText(_link("/WL-/",_rightOf(_span("Expenses")))))
-		(_getText(_link("/WL-/",_leftOf(_span("Products Serviced")))) ==_getText(_link("/WL-/",_rightOf(_span("Travel")))))){
+if((_getText(_link("/WL/",_near(_cell("/Products Serviced/")))) ==_getText(_link("/WL-/",_rightOf(_span("Parts",_under(_span("Line Type"))))))) &&
+		(_getText(_link("/WL-/",_near(_cell("/Products Serviced/")))) ===_getText(_link("/WL-/",_rightOf(_span("Labor",_under(_span("Line Type"))))))) &&
+		(_getText(_link("/WL-/",_near(_cell("/Products Serviced/"))))===_getText(_link("/WL-/",_rightOf(_span("Expenses",_under(_span("Line Type"))))))) &&
+		(_getText(_link("/WL-/",_near(_cell("/Products Serviced/")))) ===_getText(_link("/WL-/",_rightOf(_span("Travel",_under(_span("Line Type")))))))){
 	_log("Pass ::: Linked SFM child lines are associated to main process lines ");
 }else{
 	_log("Fail ::: Linked SFM child lines are associated to main process lines","FAILURE");
 }
-
-//$sfm_act_Validations.validateTc7011();
-$rs_7011.end();
+$rs_10435.end();
