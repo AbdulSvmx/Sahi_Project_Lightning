@@ -1,5 +1,5 @@
-var $rs_5454 = _testcase("RS_5454","Verify Reset Expression in SFM Delivery");
-$rs_5454.start();
+var $rs_10458 = _testcase("RS-10458","Verify Reset Expression in SFM Delivery");
+$rs_10458.start();
 
 		//Login to App
 		$bo_act_login.login($g_url,$sfmUsn,$sfmPwd);
@@ -7,37 +7,30 @@ $rs_5454.start();
 		_wait(10000,_isVisible($sfm_pg_expressions.sel_object));
 		
 		//Create Custom Expression
-		$sfm_act_expressions.newCustomAction("Work Order");
+		var $object="Work Order";
 		var $comboField=["Account","Actual Initial Response","Order Status","Order Type"];
 		var $comboConditions=["Contains","","Not Equal",""];
 		var $comboInput=["Online","Today","Canceled","Field Service"];
-		var $toggleButton=["","I want to choose a field from the list","",""];
-		//_log("comboField "+$comboField.length);
-		$sfm_act_expressions.createExpression($comboField, $comboConditions, $toggleButton, $comboInput);
+		var $toggleButton=["","Yes","",""];
+		var $exprsnName = $bo_act_common.generateRandomName("expr");
+		$sfm_act_expressions.newCustomAction($object);
+		$sfm_act_expressions.addExpressionRows($comboField, $comboConditions, $toggleButton, $comboInput);
 		
 		//Reset before save
 		_click($sfm_pg_expressions.btn_reset);
 		
 		//Assert reset function before save
-		_assertExists($sfm_pg_expressions.sel_comboField.near(_f("SFMExpressionBuilderSWF").s_label("1")));
-		_assertExists($sfm_pg_expressions.sel_comboField.near(_f("SFMExpressionBuilderSWF").s_label("2")));
+		_assertEqual(_getValue($sfm_pg_expressions.sel_comboField.near(_f("SFMExpressionBuilderSWF").s_label("1"))),"");
+		_assertEqual(_getValue($sfm_pg_expressions.sel_comboField.near(_f("SFMExpressionBuilderSWF").s_label("2"))),"");
 		
 		//Add row and save expression
-		$sfm_act_expressions.newCustomAction("Work Order");
-		$sfm_act_expressions.createExpression($comboField, $comboConditions, $toggleButton, $comboInput);
-		var $expressionName = $bo_act_common.generateRandomName("expr");
-		_setValue($sfm_pg_expressions.txt_saveExprsn,$expressionName);
-		_setValue($sfm_pg_expressions.txt_inputId,$expressionName);
-		_click($sfm_pg_expressions.btn_save);
-		_wait(15000,_isVisible($sfm_pg_expressions.lbl_exprsnSaved));
+		$sfm_act_expressions.createCustomExpression($object, $comboField, $comboConditions, $toggleButton, $comboInput, $exprsnName);
 		
 		//Change the expression values
 		_setValue($sfm_pg_expressions.txt_input.near(_f("SFMExpressionBuilderSWF").s_label("1")),"Ofline");
 		_setSelected($sfm_pg_expressions.btn_inputCombobox.near(_f("SFMExpressionBuilderSWF").s_label("2")),"Tomorrow");
 		_setSelected($sfm_pg_expressions.btn_inputCombobox.near(_f("SFMExpressionBuilderSWF").s_label("3")),"Closed");
 		_setSelected($sfm_pg_expressions.btn_inputCombobox.near(_f("SFMExpressionBuilderSWF").s_label("4")),"Depot Repair");
-		
-
 		
 		//Reset and assert
 		_click($sfm_pg_expressions.btn_reset);
@@ -51,14 +44,11 @@ $rs_5454.start();
 		_assertEqual(_getValue($sfm_pg_expressions.sel_comboConditions.near(_f("SFMExpressionBuilderSWF").s_label("2"))),"Equals");
 		_assertEqual(_getValue($sfm_pg_expressions.sel_comboConditions.near(_f("SFMExpressionBuilderSWF").s_label("3"))),"Not Equal");
 		_assertEqual(_getValue($sfm_pg_expressions.sel_comboConditions.near(_f("SFMExpressionBuilderSWF").s_label("4"))),"Equals");
-		//_assertEqual(_getValue(_f("SFMExpressionBuilderSWF").s_dropdownlist("conditionsCombo[3]")),"Equals");
-		
 		
 		_assertEqual(_getValue($sfm_pg_expressions.txt_input.near(_f("SFMExpressionBuilderSWF").s_label("1"))),"Online");
 		_assertEqual(_getValue($sfm_pg_expressions.btn_inputCombobox.near(_f("SFMExpressionBuilderSWF").s_label("2"))),"Today");
 		_assertEqual(_getValue($sfm_pg_expressions.btn_inputCombobox.near(_f("SFMExpressionBuilderSWF").s_label("3"))),"Canceled");
 		_assertEqual(_getValue($sfm_pg_expressions.btn_inputCombobox.near(_f("SFMExpressionBuilderSWF").s_label("4"))),"Field Service");
 		
-		//$sfm_act_expressions.verify5454();
 	
-$rs_5454.end();
+$rs_10458.end();

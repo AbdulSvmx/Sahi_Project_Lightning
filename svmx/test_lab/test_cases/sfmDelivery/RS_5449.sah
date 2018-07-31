@@ -1,64 +1,69 @@
 var $rs_5449 = _testcase("RS_5449","Verify new single expression for both Header and Child and launch SFM in delivery.");
 $rs_5449.start();
-$sfmName = $bo_act_common.generateRandomName("SFM_Auto_");
-$exprsnName = $bo_act_common.generateRandomName("SFM_WO_Exprsn_");
-$exprsnName1 = $bo_act_common.generateRandomName("SFM_WD_Exprsn_");
-$sfmPgLayoutName = $bo_act_common.generateRandomName("SFM_Auto_");
-$headersToAdd = ["Order Type","Order Status"];
-$containerName = "Work Detail (Work Order)";
-$fieldName = ["Activity Type","Line Type"];
-$wizTitle = $bo_act_common.generateRandomName("SFM Wiz");
-$bo_act_login.login($g_url,$sfmUsn,$sfmPwd);
-$bo_act_navigation.navigateToSfmTransactionDesigner();
-_wait(5000);
-_click($bo_pg_sfmTransactionAndDesigner.btn_newSFM);
-_setValue($bo_pg_sfmTransactionAndDesigner.txt_name, $sfmName);
-_setValue($bo_pg_sfmTransactionAndDesigner.txt_sfmTransactionId, "");
-_setSelected($sfm_pg_screenDesigner.sel_createSFMTransaction, "as Standalone for the purpose of editing an existing record");
-_setStrictVisibilityCheck(true);
-_setValue($sfm_pg_screenDesigner.txt_targetObject,"");
-_setValue($sfm_pg_screenDesigner.txt_targetObject,"Wo");
-_wait(5000);
-_click($sfm_pg_screenDesigner.lbl_workOrder);
-_click($sfm_pg_screenDesigner.chk_workDetail);
-_click($bo_pg_sfmTransactionAndDesigner.btn_qualifyingCriteriaAndFieldMapping);
-_click(_f("main").s_label("Work Order"));
-_click(_f("main").s_button("New"));
-_click(_f("main").s_button("-"));
-_setSelected(_f("main").s_combobox("fieldCombo"), "Order Status");
-_setSelected(_f("main").s_combobox("valuesCombo"), "Open");
-_setValue(_f("main").s_textarea("msgTxt"), "This record does not qualify as the Order Status is NOT Open.");
-_setValue(_f("main").s_textinput("Save this filter as"), $exprsnName);
-_click(_f("main").s_button("Save"));
-_wait(3000);
-_click(_f("main").s_label("Work Detail (Work Order)[1]"));
-_click(_f("main").s_button("New"));
-_click(_f("main").s_button("-"));
-_setSelected(_f("main").s_combobox("fieldCombo"), "Activity Type");
-_setSelected(_f("main").s_combobox("valuesCombo"), "Installation");
-_setValue(_f("main").s_textinput("Save this filter as"), $exprsnName1);
-_click(_f("main").s_button("Save"));
-_click($bo_pg_sfmTransactionAndDesigner.btn_screenDesigner);
-_setValue($bo_pg_sfmTransactionAndDesigner.txt_sfmSavePageLayoutAs, $sfmPgLayoutName);
-_setValue($bo_pg_sfmTransactionAndDesigner.txt_sfmSavePageLayoutAsId, $sfmPgLayoutName);
-_wait(5000);
-$sfm_act_Transactions.addHeader($headersToAdd);
-for(var $i=0;$i<$fieldName.length;$i++){
-	_click(_f("main").s_datagroup("dataGroup[3]").near(_f("main").s_richtext($containerName)));
-	_setValue(_f("main").s_textinput("searchText[4]"),$fieldName[$i]);
-	if($fieldName[$i]=="Activity Type"){
-		_doubleClick(_f("main").s_label($fieldName[$i]+"[1]"));
+
+	var $sfmName = $bo_act_common.generateRandomName("SFM_Auto_");
+	var $exprsnName = $bo_act_common.generateRandomName("SFM_WO_Exprsn_");
+	var $exprsnName1 = $bo_act_common.generateRandomName("SFM_WD_Exprsn_");
+	var $sfmPgLayoutName = $bo_act_common.generateRandomName("SFM_Auto_");
+	var $headersToAdd = ["Order Type","Order Status"];
+	var $containerName = "Work Detail (Work Order)";
+	var $fieldName = ["Activity Type","Line Type"];
+	var $wizTitle = $bo_act_common.generateRandomName("SFM Wiz");
+	
+	//Login to App and navigate to sfm transaction and designer page
+	$bo_act_login.login($g_url,$sfmUsn,$sfmPwd);
+	$bo_act_navigation.navigateToSfmTransactionDesigner();
+	_wait(5000);
+	
+	//Create New SFM Transaction
+	_click($bo_pg_sfmTransactionAndDesigner.btn_newSFM);
+	_setValue($bo_pg_sfmTransactionAndDesigner.txt_name, $sfmName);
+	_setValue($bo_pg_sfmTransactionAndDesigner.txt_sfmTransactionId, "");
+	_setSelected($sfm_pg_screenDesigner.sel_createSFMTransaction, "as Standalone for the purpose of editing an existing record");
+	_setStrictVisibilityCheck(true);
+	_setValue($sfm_pg_screenDesigner.txt_targetObject,"");
+	_setValue($sfm_pg_screenDesigner.txt_targetObject,"Wo");
+	_wait(5000);
+	_click($sfm_pg_screenDesigner.lbl_workOrder);
+	_click($sfm_pg_screenDesigner.chk_workDetail);
+	_click($bo_pg_sfmTransactionAndDesigner.btn_qualifyingCriteriaAndFieldMapping);
+	_click(_f("main").s_label("Work Order"));
+	_click(_f("main").s_button("New"));
+	_click(_f("main").s_button("-"));
+	_setSelected(_f("main").s_combobox("fieldCombo"), "Order Status");
+	_setSelected(_f("main").s_combobox("valuesCombo"), "Open");
+	_setValue(_f("main").s_textarea("msgTxt"), "This record does not qualify as the Order Status is NOT Open.");
+	_setValue(_f("main").s_textinput("Save this filter as"), $exprsnName);
+	_click(_f("main").s_button("Save"));
+	_wait(3000);
+	_click(_f("main").s_label("Work Detail (Work Order)[1]"));
+	_click(_f("main").s_button("New"));
+	_click(_f("main").s_button("-"));
+	_setSelected(_f("main").s_combobox("fieldCombo"), "Activity Type");
+	_setSelected(_f("main").s_combobox("valuesCombo"), "Installation");
+	_setValue(_f("main").s_textinput("Save this filter as"), $exprsnName1);
+	_click(_f("main").s_button("Save"));
+	_click($bo_pg_sfmTransactionAndDesigner.btn_screenDesigner);
+	_setValue($bo_pg_sfmTransactionAndDesigner.txt_sfmSavePageLayoutAs, $sfmPgLayoutName);
+	_setValue($bo_pg_sfmTransactionAndDesigner.txt_sfmSavePageLayoutAsId, $sfmPgLayoutName);
+	_wait(5000);
+	$sfm_act_Transactions.addHeader($headersToAdd);
+	for(var $i=0;$i<$fieldName.length;$i++){
+		_click(_f("main").s_datagroup("dataGroup[3]").near(_f("main").s_richtext($containerName)));
+		_setValue(_f("main").s_textinput("searchText[4]"),$fieldName[$i]);
+		if($fieldName[$i]=="Activity Type"){
+			_doubleClick(_f("main").s_label($fieldName[$i]+"[1]"));
+		}
+		else{
+			_doubleClick(_f("main").s_label($fieldName[$i]));
+		}
 	}
-	else{
-		_doubleClick(_f("main").s_label($fieldName[$i]));
-	}
-}
-_click($bo_pg_sfmTransactionAndDesigner.btn_pageLayoutSave);
-_wait(3000);
-_click($bo_pg_sfmTransactionAndDesigner.btn_finalQuickSave);
-$bo_act_navigation.navigateToSfmWizard();
-$sfm_act_createCustomWizard.chooseObject("Work Order");
-$sfm_act_createCustomWizard.addManageWizSteps($wizTitle,"SFM",$sfmName,"Sysadmin01 Group");
-$sfm_act_createCustomWizard.createBlankWo();
-$sfm_act_createCustomWizard.clickWizardBtn($sfmName);
+	_click($bo_pg_sfmTransactionAndDesigner.btn_pageLayoutSave);
+	_wait(3000);
+	_click($bo_pg_sfmTransactionAndDesigner.btn_finalQuickSave);
+	$bo_act_navigation.navigateToSfmWizard();
+	$sfm_act_createCustomWizard.chooseObject("Work Order");
+	$sfm_act_createCustomWizard.addManageWizSteps($wizTitle,"SFM",$sfmName,"Sysadmin01 Group");
+	$sfm_act_createCustomWizard.createBlankWo();
+	$sfm_act_createCustomWizard.clickWizardBtn($sfmName);
 $rs_5449.start();

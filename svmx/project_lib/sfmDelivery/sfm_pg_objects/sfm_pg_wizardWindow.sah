@@ -19,7 +19,7 @@ var $sfm_pg_wizardWindow = new function sfm_pg_wizardWindow(){
 	this.btn_searchProduct = _span("Search",_in(_div("/sfm-lightninglookupslidingwindow/")));  //added for lightning
 	this.txt_account = _textbox("/svmx-text/",_near(_span("Account")));
 	this.link_productServiced = _span("+ Add Products Serviced"); //added for lightning
-	this.lookup_part= _div("/search/",_near(_span("Part")));//added for lightning - use with strictVisibility in extended edit modal window
+	this.lookup_part= _div("/search/",_near(_span("Part",_in(_div("/sfm-window/")))));//added for lightning - use with strictVisibility in extended edit modal window
 	
 	
 	

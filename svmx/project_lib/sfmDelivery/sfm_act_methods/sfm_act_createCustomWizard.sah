@@ -203,7 +203,8 @@ var $sfm_act_createCustomWizard = new function sfm_act_createCustomWizard() {
 		_setStrictVisibilityCheck(true);
 		_click($sfm_pg_wizardWindow.lookup_part);
 		_click($sfm_pg_wizardWindow.btn_searchProduct);
-		_click(_div("/x-component/",_in(_div("/sfm-lightninglookupcomponent/"))));
+		_wait(3000);
+		_click(_link("/x-component/"));
 		_wait(5000);
 		_click($sfm_pg_wizardWindow.btn_update);
 		_setStrictVisibilityCheck(false);
@@ -226,6 +227,7 @@ var $sfm_act_createCustomWizard = new function sfm_act_createCustomWizard() {
 		_setStrictVisibilityCheck(true);
 		_click($sfm_pg_wizardWindow.lookup_part);
 		_click($sfm_pg_wizardWindow.btn_searchProduct);
+		_wait(3000);
 		_click(_link("/x-component/"));
 		_click($sfm_pg_wizardWindow.btn_update);
 		_setStrictVisibilityCheck(false);
