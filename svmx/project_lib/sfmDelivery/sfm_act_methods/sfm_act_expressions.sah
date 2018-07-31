@@ -76,21 +76,30 @@ var $sfm_act_expressions = new function sfm_act_expressions() {
 		}
 		var $ele=null;
 		var $eleType=null;
+		var $index=null;
+		var $temp=null;
 		for (var $i = 1; $i <= $comboField.length; $i++) {
-			_setSelected($sfm_pg_expressions.sel_comboField.near(_f("SFMExpressionBuilderSWF").s_label("\""+$i+"\"")),$comboField[$i]);
-			
-			_setSelected($sfm_pg_expressions.sel_comboConditions.near(_f("SFMExpressionBuilderSWF").s_label("\""+$i+"\"")), $comboConditions[$i]);
-			if ($toggleButton[$i]!=="") {
-				_click($sfm_pg_expressions.btn_toggleChoose.near(_f("SFMExpressionBuilderSWF").s_label("\""+$i+"\"")));
-			}else{
-				$ele=$sfm_pg_expressions.sel_comboField.near(_f("SFMExpressionBuilderSWF").s_label("\""+$i+"\""));
-				$eleType=_exists($sfm_pg_expressions.btn_toggleChoose.rightOf($ele));
-				if ($eleType==true) {
-					_setValue($sfm_pg_expressions.txt_input.near(_f("SFMExpressionBuilderSWF").s_label("\""+$i+"\"")),$comboInput[$i]);
+			_log("$i value: "+$i);
+			$temp=$i;
+			$index=$temp-1;
+			_log("index: "+$index);
+			_setSelected($sfm_pg_expressions.sel_comboField.near(_f("SFMExpressionBuilderSWF").s_label($i.toString())),$comboField[$index]);
+			_setSelected($sfm_pg_expressions.sel_comboConditions.near(_f("SFMExpressionBuilderSWF").s_label($i.toString())), $comboConditions[$index]);
+			if ($comboConditions[$index]!=="Is Null"&&$comboConditions[$index]!=="Is Not Null") {
+				if ($toggleButton[$index]!=="") {
+					_click($sfm_pg_expressions.btn_toggleChoose.near(_f("SFMExpressionBuilderSWF").s_label($i.toString())));
+					_wait(3000);
+					_setSelected($sfm_pg_expressions.btn_inputCombobox.near(_f("SFMExpressionBuilderSWF").s_label($i.toString())),$comboInput[$index]);
 				}else{
-					_setSelected($sfm_pg_expressions.btn_inputCombobox.near(_f("SFMExpressionBuilderSWF").s_label("\""+$i+"\"")),$comboInput[$i]);
-				}	
-			}	
+					$ele=$sfm_pg_expressions.sel_comboField.near(_f("SFMExpressionBuilderSWF").s_label($i.toString()));
+					$eleType=_exists($sfm_pg_expressions.btn_toggleChoose.rightOf($ele));
+					if ($eleType==true) {
+						_setValue($sfm_pg_expressions.txt_input.near(_f("SFMExpressionBuilderSWF").s_label($i.toString())),$comboInput[$index]);
+					}else{
+						_setSelected($sfm_pg_expressions.btn_inputCombobox.near(_f("SFMExpressionBuilderSWF").s_label($i.toString())),$comboInput[$index]);
+					}	
+				}
+			}
 		}
 	};
 
