@@ -12,6 +12,8 @@ var $sfm_pg_sfmDesigner = new function sfm_pg_sfmDesigner() {
 	this.btn_deliveryHelp = _div("/toolEl/", _near(_link("Quick Save")));//Changed for Lightning
 	this.btn_deliveryClearCache = _span("Clear ServiceMax Cache");//Changed for Lightning
 	this.btn_deliveryDropdown = _span("/btnWrap/",_rightOf(_span("Get Price")));//Changed for Lightning
+	this.link_related =_span("Related");
+	this.link_viewAll= _div("View AllWork Details");
 	
 	
 	
