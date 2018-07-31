@@ -19,6 +19,66 @@ var $bo_act_SFM = new function bo_act_SFM() {
 	 * Author: Meghana Rao
 	 */
 	
+	
+	this.clnStandardSFMlookupaddition=function($sfmToBeCloned,$sfmName,$sfmTemplateSaveAsName){
+		$bo_act_navigation.navigateToSvmxSetup();
+			var $lookuplayoutName =$bo_act_common.generateRandomName("LookupLayout");
+			var $lookuplayoutId = $bo_act_common.generateRandomName("LookupLayoutID");
+		_selectDomain("/svmx/");
+		_click($bo_pg_servicemaxSetup.btn_serviceFlowManager);
+		_click($bo_pg_servicemaxSetup.btn_sfmTransactionAndDocsDesigner);
+		_click($bo_pg_sfmTransactionAndDesigner.txt_standardSfmTransactionQuickFind);
+		$sfm_act_SFM.selectSFM($sfmToBeCloned, false);
+		_click($bo_pg_sfmTransactionAndDesigner.btn_clone);
+		_wait(50000);
+		_wait(60000, _isVisible($bo_pg_sfmTransactionAndDesigner.txt_name));
+		_setValue($bo_pg_sfmTransactionAndDesigner.txt_name, $sfmName);
+		_setValue($bo_pg_sfmTransactionAndDesigner.txt_sfmTransactionId, "");
+		_setValue($bo_pg_sfmTransactionAndDesigner.txt_sfmTransactionId, $sfmName);
+		_click($bo_pg_sfmTransactionAndDesigner.btn_screenDesigner);
+		_wait(6000,_isVisible(_f("main").tab("Screen Designer")));
+		_click($bo_pg_manageWOLineUsageForSorting.sel_selHeaderOption1);
+		_wait(50000);
+		_setValue($bo_pg_manageWOLineUsageForSorting.txt_searchItem, "Product");
+		_wait(10000);
+		_doubleClick($bo_pg_manageWOLineUsageForSorting.btn_product);
+		_click($bo_pg_manageWOLineUsageForSorting.sel_selHeaderOption);
+		_setValue($bo_pg_manageWOLineUsageForSorting.txt_searchItem, "Component");
+		_doubleClick($bo_pg_manageWOLineUsageForSorting.btn_component);
+		_wait(1000);
+		_click($bo_pg_manageWOLineUsageForSorting.sel_grpparts);
+		_setValue($bo_pg_manageWOLineUsageForSorting.txt_searchItem, "IB Serial Number");
+		_doubleClick($bo_pg_manageWOLineUsageForSorting.btn_serial_number);
+		_click($bo_pg_manageWOLineUsageForSorting.sel_grpparts);
+		_click($bo_pg_manageWOLineUsageForSorting.btn_serial_num_post);
+		_click($bo_pg_manageWOLineUsageForSorting.combo_lookupcontextsource);
+		_setSelected($bo_pg_manageWOLineUsageForSorting.combo_lookupcontextsource,"Work Order");
+		_click($bo_pg_manageWOLineUsageForSorting.combo_lookupcontext);
+		_setSelected($bo_pg_manageWOLineUsageForSorting.combo_lookupcontext, "Product");
+		_click($bo_pg_manageWOLineUsageForSorting.combo_lookupmatchingfield);
+		_setSelected($bo_pg_manageWOLineUsageForSorting.combo_lookupmatchingfield, "Product");
+		_click($bo_pg_manageWOLineUsageForSorting.btn_configure_lookup);
+		_wait(10000);
+		_setSelected($bo_pg_manageWOLineUsageForSorting.combo_search, "SVMXSTD:Serial Number Lookup");
+		_wait(10000);
+		_click($bo_pg_manageWOLineUsageForSorting.chkbox_defaultlookup);
+		_setValue($bo_pg_manageWOLineUsageForSorting.txt_savethelookupas, $lookuplayoutName);
+		_setValue($bo_pg_manageWOLineUsageForSorting.txt_savethelookupId, $lookuplayoutId);
+		_click($bo_pg_manageWOLineUsageForSorting.btn_savelookup);
+		_wait(2000);
+		_click($bo_pg_manageWOLineUsageForSorting.btn_closelookup);
+		_setValue($bo_pg_sfmTransactionAndDesigner.txt_sfmSavePageLayoutAs, $sfmTemplateSaveAsName);
+		_setValue($bo_pg_sfmTransactionAndDesigner.txt_sfmSavePageLayoutAsId, $sfmTemplateSaveAsName);
+		_wait(3000);
+		_click($bo_pg_sfmTransactionAndDesigner.btn_pageLayoutSave);
+		_wait(10000);
+		_click($bo_pg_sfmTransactionAndDesigner.btn_saveAndclose);
+		_wait(2000);
+		_selectDomain();
+
+		_setSpeed($g_stepSpeed);	
+	}
+	
 	this.createstandaloneSFM = function($sfmName, $nameOfTranType, $targetObjName){ // Lightning 
 		
 		var $sfmPageLayoutName = "SVMXSTD: Create WO from IB";
@@ -123,7 +183,10 @@ var $bo_act_SFM = new function bo_act_SFM() {
 		_click($bo_pg_formDesigner.btn_addQuestionToLibraryAndForm);
 		_click($bo_pg_formDesigner.btn_closeQuestionPopUp);
 		_click($bo_pg_formDesigner.btn_quickSave);		
-	}
+	};
+	
+	
+	
 	/**
 	 * Function to create New SFM Transaction from Source Object to Create New Header and Child Record
 	 * @param $sfmName
@@ -157,7 +220,6 @@ var $bo_act_SFM = new function bo_act_SFM() {
 		//_click(_f("main").fieldrenderer("[object Object]"));
 		//_setValue($bo_pg_sfmTransactionAndDesigner.txt_sfmSavePageLayoutAs,$sfmPageLayoutName );
 			_wait(6000,_isVisible($bo_pg_sfmTransactionAndDesigner.txt_sfmSavePageLayoutAs));
-			
 		_click($bo_pg_sfmTransactionAndDesigner.btn_quickSave);
 		_click($bo_pg_sfmTransactionAndDesigner.btn_finalQuickSave);	
 			
@@ -218,7 +280,7 @@ var $bo_act_SFM = new function bo_act_SFM() {
 
 			_setSpeed($g_stepSpeed);	
 		}
-		
+
 		
 		// Author : Meghana Rao P - Cloning Standard SFM for Attachment Enable
 		

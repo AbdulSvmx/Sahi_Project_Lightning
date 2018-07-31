@@ -6,14 +6,14 @@
 var $pre_requisite= _testcase("scenario1_pre","Testing Create SFM");
 $pre_requisite.start();
 _setSpeed($g_stepSpeed);
-$bo_act_login.login($g_url, $bac_un, $bac_pwd);
+$bo_act_login.login($g_url, $appiumAdminUn, $appiumAdminPwd);
 
 
 //This will create a Standalone SFM Transaction Designer for Create Work Order for FSA.
 var $sfmName_1 = "Create New Work Order";
 var $transactiontype = "as Standalone for the purpose of creating a new record";
 var $targetObjectName = "Work Order";
-$bo_act_SFM.createstandaloneSFM($sfmName_1, $transactiontype, $targetObjectName);
+//$bo_act_SFM.createstandaloneSFM($sfmName_1, $transactiontype, $targetObjectName);
 
 
 
