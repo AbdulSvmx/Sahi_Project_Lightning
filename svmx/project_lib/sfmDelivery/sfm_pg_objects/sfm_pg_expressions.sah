@@ -27,4 +27,5 @@ var $sfm_pg_expressions = new function sfm_pg_expressions() {
 	this.txt_advanced = _f("SFMExpressionBuilderSWF").s_textinput("advTextArea");
 	this.btn_toggleChoose=_f("SFMExpressionBuilderSWF").s_togglebutton("I want to choose a field from the list");
 	this.btn_inputCombobox=_f("SFMExpressionBuilderSWF").s_combobox("valuesCombo");
+	this.btn_selectExpression=_f("SFMExpressionBuilderSWF").s_combobox("searchCombo").near(this.txt_saveExprsn);
 };
