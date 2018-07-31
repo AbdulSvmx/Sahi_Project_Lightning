@@ -4,6 +4,6 @@
 ../../../test_lab/test_suites/sfmDelivery/SFMDelivery_ProcessTestCases.suite
 ../../../test_lab/test_suites/sfmDelivery/SFMDelivery_CheckListTestCases.suite
 //../../../test_lab/test_suites/sfmDelivery/SFMDelivery_ExpressionTestCase.suite
-../../../test_lab/test_suites/sfmDelivery/SFMDelivery_LookUpTestCases.suite
+//../../../test_lab/test_suites/sfmDelivery/SFMDelivery_LookUpTestCases.suite
 //../../../test_lab/test_suites/sfmDelivery/SFMDelivery_MappingsTestCases.suite
 //../../../test_lab/test_suites/sfmDelivery/SFMDelivery_SearchTestCases.suite
