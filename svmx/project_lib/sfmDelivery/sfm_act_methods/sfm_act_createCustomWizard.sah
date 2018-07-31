@@ -192,11 +192,8 @@ var $sfm_act_createCustomWizard = new function sfm_act_createCustomWizard() {
 		_wait(3000);
 		_click(_span("x-grid-checkcolumn",_under($sfm_pg_wizardWindow.chk_multiSelect)));
 		_click($sfm_pg_wizardWindow.btn_addProduct);
-		_click($sfm_pg_sfmDesigner.btn_deliveryQuickSave);
-		_click($sfm_pg_sfmDesigner.btn_deliveryExtendedEdit);
-		_click($sfm_pg_sfmDesigner.btn_deliveryExtendedEdit);
-		_click($sfm_pg_sfmDesigner.txt_eeAddModWorkDet);
-		_wait(5000,_isVisible($sfm_pg_sfmDesigner.btn_deliveryPartsTab));
+		_click($sfm_pg_wizardWindow.btn_quickSave);
+		
 
 		
 	};
@@ -205,7 +202,9 @@ var $sfm_act_createCustomWizard = new function sfm_act_createCustomWizard() {
 		$sfm_act_sfmDesigner.addChildLine("Parts");
 		_setStrictVisibilityCheck(true);
 		_click($sfm_pg_wizardWindow.lookup_part);
-		_click(_link("/x-component/"));
+		_click($sfm_pg_wizardWindow.btn_searchProduct);
+		_click(_div("/x-component/",_in(_div("/sfm-lightninglookupcomponent/"))));
+		_wait(5000);
 		_click($sfm_pg_wizardWindow.btn_update);
 		_setStrictVisibilityCheck(false);
 		/*
@@ -226,6 +225,7 @@ var $sfm_act_createCustomWizard = new function sfm_act_createCustomWizard() {
 		$sfm_act_sfmDesigner.addChildLine("Labor");
 		_setStrictVisibilityCheck(true);
 		_click($sfm_pg_wizardWindow.lookup_part);
+		_click($sfm_pg_wizardWindow.btn_searchProduct);
 		_click(_link("/x-component/"));
 		_click($sfm_pg_wizardWindow.btn_update);
 		_setStrictVisibilityCheck(false);
@@ -268,7 +268,13 @@ var $sfm_act_createCustomWizard = new function sfm_act_createCustomWizard() {
 		_setStrictVisibilityCheck(false);*/
 	};
 	this.addTravel = function() {
-		$todayDate = new Date();
+		$sfm_act_sfmDesigner.addChildLine("Travel");
+		_setStrictVisibilityCheck(true);
+		_setValue($sfm_pg_sfmDesigner.txt_eeStartDateTime,$bo_act_common.currentDate("/"));
+		_setValue($sfm_pg_sfmDesigner.txt_eeEndDateTime,$bo_act_common.currentDate("/"));
+		_click($sfm_pg_sfmDesigner.btn_eeUpdate);
+		_setStrictVisibilityCheck(false);
+		/*$todayDate = new Date();
 		$date = $todayDate.getDate();
 		$month = $todayDate.getMonth()+1;
 		$year = $todayDate.getFullYear();
@@ -277,6 +283,7 @@ var $sfm_act_createCustomWizard = new function sfm_act_createCustomWizard() {
 //		_log($date);
 //		_log($month);
 //		_log($year);
+
 		_click($sfm_pg_wizardWindow.tab_travel);
 		_setStrictVisibilityCheck(true);
 		_wait(3000);
@@ -288,7 +295,7 @@ var $sfm_act_createCustomWizard = new function sfm_act_createCustomWizard() {
 		_wait(5000);
 		_setValue($sfm_pg_wizardWindow.txt_endDate,$currentDate);
 		_click($sfm_pg_wizardWindow.btn_update);
-		_setStrictVisibilityCheck(false);
+		_setStrictVisibilityCheck(false); */
 	};
 
 	this.saveWizard = function() {
@@ -413,7 +420,7 @@ var $sfm_act_createCustomWizard = new function sfm_act_createCustomWizard() {
 		}
 	};
 
-	this.verify7017 = function(){
+	this.verify10429 = function(){
 		_selectDomain($domainName);
 		_setStrictVisibilityCheck(true);
 		$readOnlyAttribute = "";
@@ -444,13 +451,13 @@ var $sfm_act_createCustomWizard = new function sfm_act_createCustomWizard() {
 		_click($sfm_pg_wizardWindow.link_addWorkDetail);
 		_click($sfm_pg_wizardWindow.btn_searchProduct);
 		_click($sfm_pg_wizardWindow.chk_multiSelect);
-		var $divs=  _collect("_div","/grid-cell-inner/",_under(_parentNode(_span("Name"),"DIV",4)));
-		_log("No of Product = "+$divs.length);
+		var $divs=  _count("_div","/grid-cell-inner/",_under(_parentNode(_span("Name"),"DIV",4)));
+		_log("No of Product = "+$divs);
 		_click($sfm_pg_wizardWindow.btn_addProduct);
 		
-		var $divs1= _collect("_div","/grid-cell-inner/",_under(_parentNode(_span("Part"),"DIV",4)));
-		_log("No of parts = "+$divs1.length);
-		if($divs.length==$divs1.length){
+		var $divs1= _count("_div","/grid-cell-inner/",_in(_div("/gridview/")));
+		_log("No of parts = "+$divs1);
+		if($divs==$divs1){
 			_log("Pass ::: Selected parts are added");
 		}
 		else{
@@ -458,7 +465,7 @@ var $sfm_act_createCustomWizard = new function sfm_act_createCustomWizard() {
 		}
 		
 		//Delete all child lines and check for delete and then save to check allow zero lines
-		for(var $i=0;$i<$divs1.length;$i++){
+		for(var $i=0;$i<$divs1;$i++){
 			_click(_div("/x-action-col-icon/"));
 			_click(_span("Delete"));	
 		}

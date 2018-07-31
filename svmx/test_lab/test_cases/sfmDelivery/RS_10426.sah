@@ -16,13 +16,14 @@ var $isCustom = false;
 var $ctr = 0;
 var $i = 0;
 var $success_message = "Work Order was saved.";
-var $containerName = ["Order Status","Order Status","Order Status"];
-var $fieldName=["Group Email","Age", "Account"];
+var $containerName = ["Order Status"];
+var $fieldName=["Order Type"];
 var $z = 0;
 var $fields_array = [];
 $fields_array.push($dependentPicklist);
 var $currentWizardName = $wizardName[2];
 var $success_message = "Work Order was saved.";
+var $stdMap = "SVMXSTD: Close Work Order";
 
 //Appending current timestamp to process name to make it unique.
 var $timeStamp = $bo_act_navigation.getCurrentTimeStamp();
@@ -92,9 +93,14 @@ if(_condition(_isVisible($bo_pg_sfmTransactionAndDesigner.btn_proceed_anyways)))
 
 //Set up the mapping. Order status is set to "Open"
 _click($sfm_pg_sfmMapping.btn_mappingTab);
+_setSelected($sfm_pg_sfmMapping.btn_selectExistingMap,$stdMap);
 _click($sfm_pg_sfmMapping.btn_newMappingExistingRecord);
 _wait(6000);
+
 _setValue($sfm_pg_sfmMapping.txt_quickFindTxtBox,$ctrlPicklist);
+_click($sfm_pg_sfmMapping.btn_toggleMapOnOff);
+_setValue($sfm_pg_sfmMapping.txt_quickFindTxtBox,$ctrlPicklist);
+_wait(2000);
 _click(_f("main").s_togglebutton("I want to choose a field from the list").rightOf(_f("main").ftedatagriditemrenderer($ctrlPicklist)));
 _setSelected(_f("main").s_combobox("valuesCombo").rightOf(_f("main").ftedatagriditemrenderer($ctrlPicklist)),$ctrl_unique_values[0]);
 _setValue($sfm_pg_sfmMapping.txt_mappingName,$mapName);
@@ -104,7 +110,7 @@ _wait(2000);
 _assertVisible($sfm_pg_sfmMapping.label_mapSavedMsg);
 _click($bo_pg_sfmTransactionAndDesigner.btn_quickSave1);
 _selectDomain();
-
+_setSpeed(1000);
 //Add the custom process to SFM wizard.
 $sfm_act_wizards.addToWizard($object_name,$currentWizardName,"SFM",$processName);
 _selectDomain();
@@ -155,7 +161,7 @@ for($z=0;$z<$ctrl_unique_values.length;$z++){
 $sfm_act_createCustomWizard.clickWizardlinks($processName);
 _wait(10000);
 _selectDomain($domainName);
-_click($sfm_pg_wo.btn_arrowNextToUserSettings);
+_click($sfm_pg_wo.btn_arrowNextToGetPrice);
 _assertVisible($sfm_pg_wo.link_launchSfmDesigner);
 _click($sfm_pg_wo.link_launchSfmDesigner);
 _selectDomain();
@@ -167,6 +173,8 @@ _click($sfm_pg_sfmMapping.btn_newMappingExistingRecord);
 _setValue($sfm_pg_sfmMapping.txt_quickFindTxtBox,$ctrlPicklist);
 _click(_f("main").s_togglebutton("I want to choose a field from the list").rightOf(_f("main").ftedatagriditemrenderer($ctrlPicklist)));
 _setSelected(_f("main").s_combobox("valuesCombo").rightOf(_f("main").ftedatagriditemrenderer($ctrlPicklist)),$ctrl_unique_values[1]);
+_setValue($sfm_pg_sfmMapping.txt_mappingName,$mapName);
+_setValue($sfm_pg_sfmMapping.txt_mappingId,$mapName);
 _click($sfm_pg_sfmMapping.btn_saveMappingExistingRecord);
 _wait(2000);
 _assertVisible($sfm_pg_sfmMapping.label_mapSavedMsg);
