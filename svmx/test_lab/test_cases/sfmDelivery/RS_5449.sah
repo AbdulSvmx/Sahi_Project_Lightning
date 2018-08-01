@@ -2,20 +2,49 @@ var $rs_5449 = _testcase("RS_5449","Verify new single expression for both Header
 $rs_5449.start();
 
 	var $sfmName = $bo_act_common.generateRandomName("SFM_Auto_");
-	var $exprsnName = $bo_act_common.generateRandomName("SFM_WO_Exprsn_");
-	var $exprsnName1 = $bo_act_common.generateRandomName("SFM_WD_Exprsn_");
+	var $sfmType="as Standalone for the purpose of editing an existing record";
+	var $trgHeaderObj="Work Order";
+	var $trgChildObj="Work Detail (Work Order)";
+	
+	var $headerComboField=["Order Status"];
+	var $headerComboConditions=[""]; 
+	var $headerToggleButton=[""];
+	var $headerCmboInput=["Open"];
+	var $exprsnName=$bo_act_common.generateRandomName("SFM_WO_Exprsn_");
+	var $headerExprFieldsDetails=[$headerComboField,$headerComboConditions,$headerToggleButton,$headerCmboInput,$exprsnName];
+	
+	
+	
+	var $childComboField=["Activity Type"];
+	var $childComboConditions=[""]; 
+	var $childToggleButton=[""];
+	var $childCmboInput=["Installation"];
+	var $exprsnName1=$bo_act_common.generateRandomName("SFM_WD_Exprsn_");
+	/*
+	var $exprsnName = 
+	var $exprsnName1 = 
 	var $sfmPgLayoutName = $bo_act_common.generateRandomName("SFM_Auto_");
 	var $headersToAdd = ["Order Type","Order Status"];
 	var $containerName = "Work Detail (Work Order)";
 	var $fieldName = ["Activity Type","Line Type"];
 	var $wizTitle = $bo_act_common.generateRandomName("SFM Wiz");
-	
+	*/
 	//Login to App and navigate to sfm transaction and designer page
 	$bo_act_login.login($g_url,$sfmUsn,$sfmPwd);
 	$bo_act_navigation.navigateToSfmTransactionDesigner();
 	_wait(5000);
 	
 	//Create New SFM Transaction
+	_click($bo_pg_sfmTransactionAndDesigner.btn_newSFM);
+	_wait(10000,_isVisible($sfm_pg_screenDesigner.btn_propoties));
+	$sfm_act_Transactions.sfmPropertiesPage($sfmName, $sfmName, $sfmName, $sfmType, "", "", $trgHeaderObj, $trgChildObj);
+	
+	$sfm_act_Transactions.sfmQualifyingCriteriaieldMappings($trgHeaderObj, $headerComboField, $headerComboConditions, $headerToggleButton, $headerCmboInput, $exprsnName);
+	$sfm_act_Transactions.sfmQualifyingCriteriaieldMappings
+	$sfm_act_Transactions.sfmQualifyingCriteriaieldMappings($trgChildObj, $childComboField, $childComboConditions, $childToggleButton, $childCmboInput, $exprsnName1);
+	
+	
+	/*
 	_click($bo_pg_sfmTransactionAndDesigner.btn_newSFM);
 	_setValue($bo_pg_sfmTransactionAndDesigner.txt_name, $sfmName);
 	_setValue($bo_pg_sfmTransactionAndDesigner.txt_sfmTransactionId, "");
@@ -26,6 +55,8 @@ $rs_5449.start();
 	_wait(5000);
 	_click($sfm_pg_screenDesigner.lbl_workOrder);
 	_click($sfm_pg_screenDesigner.chk_workDetail);
+	
+	
 	_click($bo_pg_sfmTransactionAndDesigner.btn_qualifyingCriteriaAndFieldMapping);
 	_click(_f("main").s_label("Work Order"));
 	_click(_f("main").s_button("New"));
@@ -66,4 +97,5 @@ $rs_5449.start();
 	$sfm_act_createCustomWizard.addManageWizSteps($wizTitle,"SFM",$sfmName,"Sysadmin01 Group");
 	$sfm_act_createCustomWizard.createBlankWo();
 	$sfm_act_createCustomWizard.clickWizardBtn($sfmName);
+	*/
 $rs_5449.start();
