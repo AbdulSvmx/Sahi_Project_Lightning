@@ -82,7 +82,7 @@ $sfm_act_SFM.cloneTDM016($process_to_clone,$processName,$isCustom,$pageLayoutNam
 $bo_pg_sfmTransactionAndDesigner.deleteField($ctrlPicklist);
 _click($bo_pg_sfmTransactionAndDesigner.btn_pageLayoutSave);
 _click($bo_pg_sfmTransactionAndDesigner.btn_quickSave1);
-_click($bo_pg_sfmTransactionAndDesigner.btn_qualificationCriteriaTab);
+_click($bo_pg_sfmTransactionAndDesigner.btn_qualifyingCriteriaAndFieldMapping);
 _click($bo_pg_sfmTransactionAndDesigner.btn_newLineForQc);
 _setSelected(_f("main").s_combobox("fieldCombo[1]"), "Order Status");
 _setSelected(_f("main").s_combobox("valuesCombo[1]"), "Closed");
@@ -158,15 +158,9 @@ _click($sfm_pg_wo.link_launchSfmDesigner);
 _selectDomain();
 _selectWindow("/SFM Transaction Designer/");
 _wait(10000);
-_click($bo_pg_sfmTransactionAndDesigner.btn_qualificationCriteriaTab);
-_click($sfm_pg_sfmMapping.btn_mappingTab);
-_setSelected($sfm_pg_sfmMapping.btn_selectExistingMap,$mapName);
-_click(_f("main").s_togglebutton("I want to choose a field from the list").rightOf(_f("main").ftedatagriditemrenderer($ctrlPicklist)));
-_setSelected(_f("main").s_combobox("valuesCombo").rightOf(_f("main").ftedatagriditemrenderer($ctrlPicklist)),$ctrl_unique_values[1]);
-_click($sfm_pg_sfmMapping.btn_saveMappingExistingRecord);
-_wait(2000);
-_assertVisible($sfm_pg_sfmMapping.label_mapSavedMsg);
-_click($bo_pg_sfmTransactionAndDesigner.btn_quickSave1);
+_click($bo_pg_sfmTransactionAndDesigner.btn_qualifyingCriteriaAndFieldMapping);
+$pickListValues = ["Closed"];
+$bo_act_mappings.editExistingFieldsInMapping($pickListLabels, $pickListValues, $textLabels, $textValues, $mapName);
 _selectDomain();
 _closeWindow();
 _selectWindow();
@@ -213,4 +207,5 @@ for($z=0;$z<$ctrl_unique_values.length;$z++){
 	_setStrictVisibilityCheck(false);
 	_selectDomain();
 	}
+$sfm_act_lightningConfig.logoutInLightning();
 $RS_10426.end();
