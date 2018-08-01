@@ -11,20 +11,14 @@ var $paramValue=$actionId;
 var $processingMessage = "Account creation under process";
 var $successMessage = "Accounts inserted sucessfully";
 
-var $wizardName = "SFM Delivery Auto";
-var $wizardType="Others";
-//var $woName="WO-00000104";
-var $domainName = "/visual.force.com/";
-
-
 _setSpeed($g_stepSpeed);
 $bo_act_login.login($g_url, $sfmUsn, $sfmPwd);
 $sfm_act_lightningConfig.switchToLightning();
 $sfm_act_navigation.navigateToSfmCustomActions();
 $sfm_act_customActions.webServiceCustomAction($customActionObject, $actionType, $actionId, $className, $methodName, $processingMessage, $paramName, $paramValueType, $paramValue);
 
-$sfm_act_wizards.addToWizard($customActionObject, $wizardName, $wizardType, $actionId,"true");
-$sfm_act_wizards.addToWizard($customActionObject, $wizardName, "SFM", "Create RMA from Work Order" );
+$sfm_act_wizards.addToWizard($customActionObject, $wizardName[1], $wizardType[3], $actionId,"true");
+$sfm_act_wizards.addToWizard($customActionObject, $wizardName[1], $wizardType[1], "Create RMA from Work Order" );
 
 
 
@@ -34,23 +28,23 @@ $sfm_act_createCustomWizard.createWowithoutvalues();
 _click(_span($actionId));
 _wait(3000);
 if(_exists($processingMessage)){
-	_log("Pass ::: Account creating under process");
+	_log("Pass ::: Account creating under process","SUCCESS");
 }else{
-	_log("Fail");
+	_log("Fail","FAILURE");
 }
 
 if(_exists($successMessage)){
-	_log("Pass ::: Account created successfully");
+	_log("Pass ::: Account created successfully","SUCCESS");
 	_selectDomain($domainName);
 	_click(_submit("Continue"));
-	_wait(5000);
+	_wait(10000);
 }
 
 if (_exists(_link("Create RMA from Work Order (Work Order Number: "+$woName+")"))){
-   _log("Pass ::: Handover has happened to Create RMA from Work order process");
+   _log("Pass ::: Handover has happened to Create RMA from Work order process","SUCCESS");
 }
 else{
-	_log("Fail ::: Handover has not happened to Create RMA from Work order process");
+	_log("Fail ::: Handover has not happened to Create RMA from Work order process","FAILURE");
 }
 
 $rs_10483.end();

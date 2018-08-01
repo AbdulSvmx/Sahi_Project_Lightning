@@ -31,6 +31,7 @@ var $sfm_act_checklistQuestionLibrary = new function sfm_act_checklistQuestionLi
 
 } ;
 
+
 this.createDateQuestion=function($questionText,$answerType,$helpURL2)
 {
 	_click($sfm_pg_checklistQuestionLibrary.btn_addQuestion);

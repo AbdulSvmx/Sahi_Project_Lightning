@@ -1,0 +1,106 @@
+/**
+ * Author	: Anand Kakhandaki
+ * Reviewer	: 
+ * Pre-req	: Nothing
+ * Testcase	: $SFMDZ_171: Verify that SFM searched result is based on applied filter.
+ * Steps	: 
+ 				1) Create a custom transaction with name 'Activate Contract Custom'
+ 				2) Click on filter option and select 'Standard SFM Transactions'
+ 				3) Search for a SFM Transaction by clicking on search bar and type 'Act' 
+ 				4) Hover Over Transaction 'Activate Contract' and check if lock icon appears 
+ 				5) Check the status of the above Transaction
+ 				6) Check the Type of Transaction by hovering on icon
+ 				7) Click on action menu and verify if 'Delete' option appear 
+ 				8) Hover over last edited column
+ * Expt Res	:
+ 				1) Transaction should be created successfully
+ 				2) Only Standard SFM Transaction should be displayed'
+ 				3) On typing 'Act' transactions should be listed which matches the keyword in Transaction Name, Source Object, Target object, and Tags.
+				4) Lock Icon should appear on hovering the transaction and tool tip should read as 'Standard SFM Transactions: Cannot be Edited'
+				5) Tool tip should appear and read 'Completed'
+				6) Tool tip should appear and read 'To Create and Manage Child Lines'
+				7) nothing
+				8) On Hover over Last Edited Date/Time column in Transaction List View "Created By, Created On, Last Edited By" fields should be displayed.
+ 
+
+			
+ */
+
+var $SFMDZ_171=_testcase("$SFMDZ_171","Verify that SFM searched result is based on applied filter");
+$SFMDZ_171.start();
+_setSpeed($g_stepSpeed);
+
+	/**
+	 * Global Variable declaration
+	 */
+
+	var $url="http://test.salesforce.com";
+	var $un="saadat.dz2perftest@servicemax.com";
+	var $pwd="servicemax1";
+	var $viewName="transaction";
+
+
+	/**
+	 * Login to the Sandbox Org and launching Transaction list view
+	 */
+	$bo_act_login.login($url, $un, $pwd);
+	var $homecurrentHomePageULR=$sfmrdz_act_common.LaunchListViewWindow($viewName);
+	
+	//Content Search
+	var $search="Contract";
+
+	var $contentSort=$sfmrdz_act_trnListView.contentSearch($search);
+	_assertTrue($contentSort[0],$search+" text is not available in "+$contentSort[1]);
+	
+	//just to avoid browser hang filtering result by standart object
+	$sfmrdz_act_common.typePicklist("Standard SFM Transactions");
+	
+	//Lock icon mouse Hover
+	$sfmrdz_act_common.mouseOver("Activate Contract", "Lock", "");
+	_assertVisible($sfmrdz_pg_common.btn_lockIcon);
+
+	//Transaction Type - To create and manage child lines
+	$sfmrdz_act_common.mouseOver("Activate Contract", "Type", "To create and manage child lines");
+	_assertVisible($sfmrdz_pg_common.btn_createManageChildLine);
+	
+	//Transaction Type - To create Source to Target records
+	$sfmrdz_act_common.mouseOver("Create Service Contract Renewal", "Type", "To create Source to Target records");
+	_assertVisible($sfmrdz_pg_common.btn_sourceToTarget);
+	
+	$sfmrdz_act_common.typePicklist("To create and map child lines only");
+	$sfmrdz_act_common.searchObj("");
+	_wait(5000,_isVisible($sfmrdz_pg_common.btn_actionMenu));
+	
+	//Transaction Type - To create Source to Target records
+	$sfmrdz_act_common.mouseOver("Create Usage Lines from Estimates", "Type", "To create and map child lines only");
+	_assertVisible($sfmrdz_pg_common.btn_createMapChildLine);
+	
+	//Status Icon mouse Hover
+	$sfmrdz_act_common.mouseOver("Create Usage Lines from Estimates", "Status", "");
+	_assertVisible($sfmrdz_pg_common.btn_completedIcon);
+	
+	//reset
+	$sfmrdz_act_common.typePicklist("Show All");
+	
+	//Last edited column mouse hover item check
+	$sfmrdz_act_common.searchObj("Activate");
+	_wait(5000,_isVisible($sfmrdz_pg_common.btn_actionMenu));
+	
+	$sfmrdz_act_common.mouseOver("Activate Preventive Maintenance Plan","Last Edited");
+	_wait(1000,_isVisible($sfmrdz_pg_common.btn_lastEditMouseOverDiv));
+	_assertExists($sfmrdz_pg_common.btn_lastEditMouseOverDiv);
+	_mouseOver($sfmrdz_pg_common.btn_createdBy);
+	_assertExists($sfmrdz_pg_common.btn_createdBy);
+	_assertExists($sfmrdz_pg_common.btn_createdDate);
+	
+	//Delete option for Standard SFM
+	$sfmrdz_act_common.searchObj("Activate Preventive Maintenance Plan");
+	_click($sfmrdz_pg_common.btn_actionMenu);
+	_wait(5000,_isVisible($sfmrdz_pg_common.link_clone));
+	_assertNotVisible($sfmrdz_pg_common.link_delete, "delete action link is available on ");
+
+	$sfmrdz_act_common.launchHomeWindow($homecurrentHomePageULR);
+	_wait(10000,_isVisible($bo_pg_home.link_home));
+	$sfm_act_lightningConfig.logoutInLightning();
+
+$SFMDZ_171.end();

@@ -1,0 +1,128 @@
+var $RS_10425 = _testcase("RS_10425","Verify Dependent picklist's values when Controlling picklist is present in SFM process for child line");
+$RS_10425.start();
+
+//Variables used
+var $object_name = "Work Detail";
+var $ctrlPicklist = "Activity Type";
+var $processName = "RS_10425";
+var $sfmNameToBeCloned = "Manage Work Order Lines - Usage";
+var $dependentPicklist = "Cost Category";
+var $ctrl_unique_values = ["Repair","Installation"];
+var $ctrl_picklist_values = ["Repair","Repair","Repair","Installation"];
+var $dep_picklist_values = ["Straight","Double Time","On Call","Double Time"];
+var $sfmTemplate = "SVMXSTD: Manage WO Usage Lines";
+var $isCustom = false;
+var $ctr = 0;
+var $i = 0;
+var $fields_array = [];
+$fields_array.push($dependentPicklist);
+var $currentWizardName = $wizardName[2];
+var $success_message = "Work Order was saved.";
+var $containerName = ["Order Status","Order Status","Order Status","Labor"];
+var $fieldName=["Group Email","Age", "Account","Cost Category"];
+var $lineType = "Labor";
+var $z = 0;
+
+//Appending current timestamp to process name to make it unique.
+var $timeStamp = $bo_act_navigation.getCurrentTimeStamp();
+$processName = $processName + "_" + $timeStamp;
+var $pageLayoutName = $processName + "pg";
+var $myDomain = "/lightning/";
+//**************************************************************************************
+//Login and switch to lightning
+//$bo_act_login.login($g_url,$bac_un,$bac_pwd);
+$bo_act_login.login($g_url,$sfmUsn,$sfmPwd);
+$sfm_act_lightningConfig.switchToLightning();
+
+//Navigate to Object manager and navigate to work detail object.
+$sfm_act_lightningConfig.navigateToObjectsInLightning($object_name);
+_selectWindow("/"+$object_name+"/");
+_click(_link("Fields & Relationships"));
+
+
+_setValue(_searchbox("globalQuickfind"),$ctrlPicklist);
+_click(_link($ctrlPicklist));
+_selectDomain($myDomain);
+
+
+//Delete existing dependencies if any and create new one.
+if (_exists(_tableHeader($dependentPicklist,_under(_tableHeader("Dependent Field")))))
+{	
+   
+	_expectConfirm($sfm_pg_wo.delete_link_costCategory);
+	_click($sfm_pg_wo.delete_link_costCategory);
+   
+}
+_click($sfm_pg_wo.btn_new_field_dependency);
+_setSelected($sfm_pg_wo.picklist_controller, $ctrlPicklist);
+_setSelected($sfm_pg_wo.picklist_dependent, $dependentPicklist);
+_click($sfm_pg_wo.btn_continue);
+for(var $i=0;$i<$ctrl_picklist_values.length;$i++){
+	$sfm_act_lightningConfig.addDependentControllingPicklistValues($ctrlPicklist,$ctrl_picklist_values[$i],$dep_picklist_values[$i]);
+}
+_expectConfirm($sfm_pg_wo.btn_save_dep_picklist);
+_click($sfm_pg_wo.btn_save_dep_picklist);
+_selectDomain();
+_closeWindow();
+_selectWindow();
+
+//Clone standard process and add the dependent picklist in the screen designer
+_setSpeed(3000);
+$sfm_act_SFM.cloneTDM016($sfmNameToBeCloned,$processName,$isCustom,$pageLayoutName, $sfmTemplate, $fieldName, $containerName);
+_click($bo_pg_sfmTransactionAndDesigner.btn_quickSave1);
+_selectDomain();
+
+//Add the custom process to SFM wizard.
+$sfm_act_wizards.addToWizard("Work Order",$currentWizardName,"SFM",$processName);
+_selectDomain();
+
+//Create Work order and then Work detail to select Activity type.
+var $wo_number = $sfm_act_createCustomWizard.createWowithdateliterals();
+var $wlNumber = $sfm_act_lightningConfig.createWorkDetailInLightning("Usage",$lineType);
+$bo_act_navigation.navigateToCreatedRecordUsingGlobalSearch($wo_number);
+
+//Launch SFM delivery and check the values of the controlling and the dependent picklists.
+
+$sfm_act_createCustomWizard.clickWizardlinks($processName);
+_wait(6000);
+_selectDomain($domainName);
+_click(_span($lineType));
+_click($sfm_pg_wo.link_arrowToEditChildLine);
+_click($sfm_pg_wo.link_editChildLineItem);
+_setStrictVisibilityCheck(true);
+for($z=0;$z<$ctrl_unique_values.length;$z++){
+	var $expected_list = [];
+ for ($j=0;$j<$ctrl_picklist_values.length;$j++) {
+	
+
+	if($ctrl_picklist_values[$j] === $ctrl_unique_values[$z]) {
+		$i = $i+1;
+		$expected_list.push($dep_picklist_values[$j]);
+	}
+ }
+_log($expected_list);
+
+	_click(_div("/trigger-picker/",_in(_div("/"+$ctrlPicklist+"/",_in(_div("/sfm-window/"))))));
+	_click(_listItem($ctrl_unique_values[$z]));
+	_click(_div("/trigger-picker/",_in(_div("/"+$dependentPicklist+"/",_in(_div("/sfm-window/"))))));
+	//_click(_div("/trigger-picker/",_in(_div("/"+$dependentPicklist+"/",_in(_div("/sfm-window/"))))));
+	var $x = _count("_listItem","/.*/");
+	$x = $x - 1;
+	_log($x);
+	_assertEqual($expected_list.length,$x);
+	var $actual_list = [];
+	for($i=0;$i<$x;$i++){
+		if(_condition(_isVisible(_listItem($expected_list[$i])))){
+			$actual_list.push(_getText(_listItem($expected_list[$i])));
+		}
+	}
+	_assertEqualArrays($expected_list, $actual_list,"Dependent picklist values are as expected for child line when controlling picklist is present in screen designer");
+	//_click(_div("/trigger-picker/",_in(_div("/"+$ctrlPicklist+"/",_in(_div("/sfm-window/"))))));
+}
+_click($sfm_pg_wo.btn_cancelExtendedEdit);
+_setStrictVisibilityCheck(false);
+_click($sfm_pg_wo.btn_cancelForSfmDelivery);
+_click($sfm_pg_wo.btn_proceedForCancel);
+_selectDomain();
+$sfm_act_lightningConfig.logoutInLightning();
+$RS_10425.end();

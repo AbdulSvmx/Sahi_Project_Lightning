@@ -23,7 +23,7 @@ var $formulaArray =["$F.TODAY()",
 
 _setSpeed($g_stepSpeed);
 $bo_act_login.login($g_url, $sfmUsn, $sfmPwd);
-$sfm_act_lightningConfig.switchToLightning();
+$sfm_act_lightningConfig.switchToLightning(); 
 
 $sfm_act_SFM.cloneTDM016($sfmNameToBeCloned, $sfmName, $isCustom, $sfmTemplateSaveAsName,$sfmTemplate, $fieldNameArray, $containerNameArray);
 $sfm_pg_formula.createFormula($formulaTargetObjectArray, $formulaTargetFieldArray, $formulaNameArray, $formulaDescriptionArray, $formulaArray);
@@ -49,18 +49,12 @@ if((_getText($sfm_pg_sfmDesigner.txt_scheduledDate))==$bo_act_common.currentDate
 	_log("Pass ::: ScheduledDate = Today");
 }
 else{
-	_log("Fail :::  ScheduledDate != Today");
+	_log("Fail :::  ScheduledDate != Today","FAILURE");
 }
 
 //Validate BLP=Line quantity * Line price
 
-_click($sfm_pg_sfmDesigner.btn_deliveryLaborTab);
-_wait(3000,_isVisible($sfm_pg_sfmDesigner.btn_deliveryAddRowLabor));
-_click($sfm_pg_sfmDesigner.btn_deliveryAddRowLabor);
-_setStrictVisibilityCheck(true);
-_click($sfm_pg_sfmDesigner.btn_deliveryExtendedEdit);
-_setStrictVisibilityCheck(false);
-_click($sfm_pg_sfmDesigner.txt_eeEdit);
+$sfm_act_sfmDesigner.addChildLine("Labor");
 _setValue($sfm_pg_sfmDesigner.txt_eeLineQty,"5");
 _setValue($sfm_pg_sfmDesigner.txt_eeLinePricePerUnit,"50");
 _click($sfm_pg_sfmDesigner.btn_eeUpdate);
@@ -70,18 +64,12 @@ if(_exists($sfm_pg_sfmDesigner.txt_priceAlert)){
 	_click($sfm_pg_sfmDesigner.btn_priceAlertOk);
 	_wait(10000);
 }
-_setStrictVisibilityCheck(true);
-_click($sfm_pg_sfmDesigner.btn_deliveryExtendedEditLabor);
-_setStrictVisibilityCheck(false);
-_click($sfm_pg_sfmDesigner.txt_eeEdit);
-//var lineQtyVal= _getValue($sfm_pg_sfmDesigner.txt_eeLineQty);
-//var linePriceVal= _getValue($sfm_pg_sfmDesigner.txt_eeLinePricePerUnit);
-//var billableLinePriceVal = _getValue($sfm_pg_sfmDesigner.txt_billingLinePrice);
+$sfm_act_sfmDesigner.navToExtendedEdit();
 if(_getValue($sfm_pg_sfmDesigner.txt_billingLinePrice)== ((_getValue($sfm_pg_sfmDesigner.txt_eeLineQty))*(_getValue($sfm_pg_sfmDesigner.txt_eeLinePricePerUnit)))){
 
 //if(billableLinePriceVal ==(lineQtyVal*linePriceVal)){
-	_log("Pass ::: BillagleLinePrice = LineQty*LinePricePerUnit");
+	_log("Pass ::: BillagleLinePrice = LineQty*LinePricePerUnit","SUCCESS");
 }else{
-	_log("Fail :::BillagleLinePrice != LineQty*LinePricePerUnit ");
+	_log("Fail :::BillagleLinePrice != LineQty*LinePricePerUnit ","FAILURE");
 }
 $rs_10438.end();

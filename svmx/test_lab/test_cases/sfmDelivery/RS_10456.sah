@@ -7,10 +7,8 @@ var $urlToLaunch="http://www.google.com/search";
 var $paramName="q";
 var $paramValueType="Value";
 var $paramValue="Servicemax";
-var $wizardName = "SFM Delivery Auto";
-var $wizardType="Others";
 var $woName;
-var $domainName = "/visual.force.com/";
+
 
 
 
@@ -20,7 +18,7 @@ $bo_act_login.login($g_url, $sfmUsn, $sfmPwd);
 $sfm_act_lightningConfig.switchToLightning();
 $sfm_act_navigation.navigateToSfmCustomActions();
 $sfm_act_customActions.urlCustomAction($customActionObject,$actionType, $actionId, $urlToLaunch, $paramName, $paramValueType, $paramValue);
-$sfm_act_wizards.addToWizard($customActionObject, $wizardName, $wizardType, $actionId);
+$sfm_act_wizards.addToWizard($customActionObject, $wizardName[1], $wizardType[3], $actionId);
 
 //Create WO through UI for the validatiion
 _selectDomain();
@@ -30,10 +28,10 @@ _wait(3000);
 _selectWindow("Servicemax - Google Search");
 var $search=_getText(_textbox("Search"));
 if($search ==$paramValue ){
-	_log("Pass ::: URL based CA is working");
+	_log("Pass ::: URL based CA is working","SUCCESS");
 }
 else{
-	_log("Fail ::: URL based CA is not working");
+	_log("Fail ::: URL based CA is not working","FAILURE");
 }
 
 $rs_10456.end();

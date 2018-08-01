@@ -46,14 +46,14 @@ _click($sfm_pg_sfmDesigner.btn_deliveryQuickSave);
 	if(_isVisible(_div("/"+$ruleDescription+"/"))){
 	_log("Pass ::: DVR confirmation on header is working");
 	}else{
-		_log("Fail ::: DVR confirmation on header is not working");
+		_log("Fail ::: DVR confirmation on header is not working","FAILURE");
 	}
 //Validate step 2 - when one condtion is false
 
 _click($sfm_pg_sfmDesigner.chk_isEntitlementPerformed);
 _click($sfm_pg_sfmDesigner.btn_deliveryQuickSave);
 	if(_isVisible(_div("/"+$ruleDescription+"/"))){
-		_log("Fail ::: DVR confirmation on header is trigerred when not to be");
+		_log("Fail ::: DVR confirmation on header is trigerred when not to be","FAILURE");
 	
 	}else{
 		_log("Pass ::: DVR confirmation on header is not trigerred as expected");

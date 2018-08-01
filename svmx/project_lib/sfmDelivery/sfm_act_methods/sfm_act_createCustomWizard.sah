@@ -181,27 +181,34 @@ var $sfm_act_createCustomWizard = new function sfm_act_createCustomWizard() {
 	};
 
 	this.clickWizardBtn = function($sfmName) {
-		_click(_button($sfmName));
+		_click(_span($sfmName));
+		_selectDomain($domainName);
+		_wait(8000,_div($sfmName));
 
 	};
 	this.addProductServiced = function($part){
+		_click($sfm_pg_wizardWindow.link_productServiced);
+		_click($sfm_pg_wizardWindow.btn_searchProduct);
 		_wait(3000);
-		_selectDomain();
-		_setStrictVisibilityCheck(true);
-		_click($sfm_pg_wizardWindow.btn_addRow);
-		_click($sfm_pg_wizardWindow.btn_edit);
-		_setValue($sfm_pg_wizardWindow.txt_part,$part);
-		_click(_span("/lookup_icon/",_rightOf(_label("Part:"))));
-		_doubleClick(_cell(0,_under(_div("Product Name"))));
-		_click($sfm_pg_wizardWindow.btn_update);
-		_click($sfm_pg_sfmDesigner.btn_deliveryQuickSave);
-		_wait(10000);
-		_click($sfm_pg_wizardWindow.btn_downArrow);
-		_wait(3000);
-		_click($sfm_pg_wizardWindow.btn_addWorkDetails);
-		_setStrictVisibilityCheck(false);
+		_click(_span("x-grid-checkcolumn",_under($sfm_pg_wizardWindow.chk_multiSelect)));
+		_click($sfm_pg_wizardWindow.btn_addProduct);
+		_click($sfm_pg_wizardWindow.btn_quickSave);
+		
+
+		
 	};
 	this.addParts = function($part) {
+		
+		$sfm_act_sfmDesigner.addChildLine("Parts");
+		_setStrictVisibilityCheck(true);
+		_click($sfm_pg_wizardWindow.lookup_part);
+		_click($sfm_pg_wizardWindow.btn_searchProduct);
+		_wait(3000);
+		_click(_link("/x-component/"));
+		_wait(5000);
+		_click($sfm_pg_wizardWindow.btn_update);
+		_setStrictVisibilityCheck(false);
+		/*
 		_wait(5000);
 		_selectDomain();
 		_setStrictVisibilityCheck(true);
@@ -213,9 +220,19 @@ var $sfm_act_createCustomWizard = new function sfm_act_createCustomWizard() {
 		_click(_cell(0,_near(_div("Product Name"))));
 		_click(_button("Select"));
 		_click($sfm_pg_wizardWindow.btn_update);
-		_setStrictVisibilityCheck(false);
+		_setStrictVisibilityCheck(false); */
 	};
 	this.addLabor = function($part) {
+		$sfm_act_sfmDesigner.addChildLine("Labor");
+		_setStrictVisibilityCheck(true);
+		_click($sfm_pg_wizardWindow.lookup_part);
+		_click($sfm_pg_wizardWindow.btn_searchProduct);
+		_wait(3000);
+		_click(_link("/x-component/"));
+		_click($sfm_pg_wizardWindow.btn_update);
+		_setStrictVisibilityCheck(false);
+		
+		/*
 		_click($sfm_pg_wizardWindow.tab_labor);
 		_setStrictVisibilityCheck(true);
 		_wait(3000);
@@ -230,10 +247,19 @@ var $sfm_act_createCustomWizard = new function sfm_act_createCustomWizard() {
 		_click(_button("Select"));
 		_wait(3000);
 		_click($sfm_pg_wizardWindow.btn_update);
-		_setStrictVisibilityCheck(false);
+		_setStrictVisibilityCheck(false); */
 	};
 	
 	this.addExpenses = function($expense) {
+		
+		$sfm_act_sfmDesigner.addChildLine("Expenses");
+		_setStrictVisibilityCheck(true);
+		_setValue($sfm_pg_sfmDesigner.txt_eeLineQty,"6");
+		_click($sfm_pg_sfmDesigner.txt_eeExpenseType);
+		_click(_listItem($expense));
+		_click($sfm_pg_sfmDesigner.btn_eeUpdate);
+		_setStrictVisibilityCheck(false);
+/*
 		_click($sfm_pg_wizardWindow.tab_expenses);
 		_setStrictVisibilityCheck(true);
 		_wait(3000);
@@ -241,10 +267,16 @@ var $sfm_act_createCustomWizard = new function sfm_act_createCustomWizard() {
 		_click($sfm_pg_wizardWindow.btn_edit);
 		_setValue($sfm_pg_wizardWindow.txt_expenseType,$expense);
 		_click($sfm_pg_wizardWindow.btn_update);
-		_setStrictVisibilityCheck(false);
+		_setStrictVisibilityCheck(false);*/
 	};
 	this.addTravel = function() {
-		$todayDate = new Date();
+		$sfm_act_sfmDesigner.addChildLine("Travel");
+		_setStrictVisibilityCheck(true);
+		_setValue($sfm_pg_sfmDesigner.txt_eeStartDateTime,$bo_act_common.currentDate("/"));
+		_setValue($sfm_pg_sfmDesigner.txt_eeEndDateTime,$bo_act_common.currentDate("/"));
+		_click($sfm_pg_sfmDesigner.btn_eeUpdate);
+		_setStrictVisibilityCheck(false);
+		/*$todayDate = new Date();
 		$date = $todayDate.getDate();
 		$month = $todayDate.getMonth()+1;
 		$year = $todayDate.getFullYear();
@@ -253,6 +285,7 @@ var $sfm_act_createCustomWizard = new function sfm_act_createCustomWizard() {
 //		_log($date);
 //		_log($month);
 //		_log($year);
+
 		_click($sfm_pg_wizardWindow.tab_travel);
 		_setStrictVisibilityCheck(true);
 		_wait(3000);
@@ -264,7 +297,7 @@ var $sfm_act_createCustomWizard = new function sfm_act_createCustomWizard() {
 		_wait(5000);
 		_setValue($sfm_pg_wizardWindow.txt_endDate,$currentDate);
 		_click($sfm_pg_wizardWindow.btn_update);
-		_setStrictVisibilityCheck(false);
+		_setStrictVisibilityCheck(false); */
 	};
 
 	this.saveWizard = function() {
@@ -389,54 +422,60 @@ var $sfm_act_createCustomWizard = new function sfm_act_createCustomWizard() {
 		}
 	};
 
-	this.verify7017 = function(){
-		_selectDomain();
+	this.verify10429 = function(){
+		_selectDomain($domainName);
 		_setStrictVisibilityCheck(true);
 		$readOnlyAttribute = "";
-		$actualErrorMsg = "Required field is blank: Account";
+		$expectedErrorMsg = "Required field is blank: Account";
 		$readOnlyAttribute = _getAttribute($sfm_pg_wizardWindow.sel_billingType, "readonly");
 		$isReadOnlyAttribute = $readOnlyAttribute.search("readonly");
 		$expectedErrorMsg = "";
+		//verify billing type is readonly or not
 		if($isReadOnlyAttribute==-1){
-			_log("Fail");
+			_log("Fail :: Billing type is not readonly", "FAILURE");
 		}
 		else{
-			_log("Pass");
+			_log("Pass :: Billing type is readonly", "SUCCESS");
 		}
 		_click($sfm_pg_wizardWindow.btn_quickSave);
-		$expectedErrorMsg = _getText($sfm_pg_wizardWindow.errorMsg);
-		_log($expectedErrorMsg);
-		if($actualErrorMsg==$expectedErrorMsg){
-			_log("Pass");
+		//$expectedErrorMsg = _getText($sfm_pg_wizardWindow.errorMsg);
+		//_log($expectedErrorMsg);
+		//verify account is required field or not
+		if(_isVisible(_div("/"+$expectedErrorMsg+"/"))){
+			_log("Pass :: Required field on header is working");
 		}
 		else{
-			_log("Fail");
+			_log("Fail :: Required field on header is not working","FAILURE");
 		}
-		_click($sfm_pg_wizardWindow.btn_addAndSearch);
-		_click($sfm_pg_wizardWindow.icon_search);
+		_setValue($sfm_pg_wizardWindow.txt_account,"Acme");
+		
+		//check multi add
+		_click($sfm_pg_wizardWindow.link_addWorkDetail);
+		_click($sfm_pg_wizardWindow.btn_searchProduct);
 		_click($sfm_pg_wizardWindow.chk_multiSelect);
-		var $divs= _collect("_div","/.*/",_under(_div("Product Name")));
-		_log($divs.length);
-		_click($sfm_pg_wizardWindow.btn_select);
-		var $divs1= _collect("_div","/.*/",_under(_div("Part")));
-		_log($divs1.length);
-		if($divs.length==$divs1.length){
-			_log("Pass");
+		var $divs=  _count("_div","/grid-cell-inner/",_under(_parentNode(_span("Name"),"DIV",4)));
+		_log("No of Product = "+$divs);
+		_click($sfm_pg_wizardWindow.btn_addProduct);
+		
+		var $divs1= _count("_div","/grid-cell-inner/",_in(_div("/gridview/")));
+		_log("No of parts = "+$divs1);
+		if($divs==$divs1){
+			_log("Pass ::: Selected parts are added");
 		}
 		else{
-			_log("Fail");
+			_log("Fail ::: Selected parts are not added", "FAILURE");
 		}
-		var $val = 0;
-		_set($val,_count("_image", "/.*/", _under(_div("/actioncolumn/"))));
-		for(var $i=$val-2;$i<$val;$i++){
-			
-			_click(_image("gif["+$val+"]"));
+		
+		//Delete all child lines and check for delete and then save to check allow zero lines
+		for(var $i=0;$i<$divs1;$i++){
+			_click(_div("/x-action-col-icon/"));
+			_click(_span("Delete"));	
 		}
-		if(_count("_image", "/.*/", _under(_div("/actioncolumn/")))==0){
+		_click($sfm_pg_wizardWindow.btn_quickSave);
+		if(_isVisible(_div("/"+$expectedErrorMsg+"/"))){
 			_log("Pass");
-		}
-		else{
-			_log("Fail");
+		}else{
+			_log("Fail :::", "FAILURE");
 		}
 
 	};
@@ -730,6 +769,7 @@ var $sfm_act_createCustomWizard = new function sfm_act_createCustomWizard() {
 	//Creates work order without values in lightning.
 	//Lakshmisha- Updated the function to check for the WO link in app launcher and then click on the parent element of WO link
 	this.createWowithoutvalues = function() {
+		_selectDomain();
 		$sfm_pg_wo.openAppLauncher();
 		_wait(3000);
 		$woName = "";
@@ -784,7 +824,10 @@ var $sfm_act_createCustomWizard = new function sfm_act_createCustomWizard() {
 	};
 	
 	this.clickWizardlinks = function($sfmname){
-		_click(_link($sfm_pg_wo.link_showmore));
+		if(_exists(_link($sfm_pg_wo.link_showmore))){
+			_click(_link($sfm_pg_wo.link_showmore));
+		}
+		
 		//Check if the SFM process link exists
 		_assertExists(_span($sfmname));
 		_click(_span($sfmname));

@@ -1,0 +1,48 @@
+/**
+ * Author	: Anand Kakhandaki
+ * Reviewer	: 
+ * Pre-req	: Nothing
+ * Testcase	: Where Used page: Verify the Where used page for standard SFM
+ * Steps	: 
+ 				1)  
+ * Expt Res	:
+ 				1) 
+ */
+
+
+var $SFMDZ_650=_testcase("Where Used page","Verify the Where used page for standard SFM");
+$SFMDZ_650.start();
+_setSpeed($g_stepSpeed);
+	
+		/**
+		 * Global Variable declaration
+		 */
+		
+		var $url="http://test.salesforce.com";
+		var $un="designer2@test.com";
+		var $pwd="designer@2";
+		var $viewName="transaction";
+		var $searchObj="Create Shipment From Work Order";
+		/**
+		 * Login to the Sandbox Org and launching Transaction list view
+		 */
+		$bo_act_login.login($url, $un, $pwd);
+		var $homecurrentHomePageULR=$sfmrdz_act_common.LaunchListViewWindow($viewName);
+		
+		$sfmrdz_act_common.typePicklist("Standard SFM Transactions");
+		$sfmrdz_act_common.searchObj($searchObj);
+		_click(_svg_icon("/Icon slds-icon/",_under(_parentNode($sfmrdz_pg_trnListView.btn_heading_whereUsedCol,"DIV",1)),_near(_link($searchObj))));
+		_wait(5000,_isVisible($sfmrdz_pg_trnListView.btn_heading_whereUsedDivHeading));
+		_assertExists($sfmrdz_pg_trnListView.btn_heading_whereUsedDivHeading);
+		_assertExists($sfmrdz_pg_trnListView.btn_heading_SFMUsed);
+		_assertExists($sfmrdz_pg_trnListView.btn_heading_SFMSteps);
+		_assertExists(_link("/Ship Product.*/"));
+		
+		_click($sfmrdz_pg_trnListView.btn_closeWindow);
+
+		$sfmrdz_act_common.launchHomeWindow($homecurrentHomePageULR);
+		_wait(10000,_isVisible($bo_pg_home.link_home));
+		$sfm_act_lightningConfig.logoutInLightning();
+
+		
+$SFMDZ_650.end();

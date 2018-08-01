@@ -1,0 +1,58 @@
+/**
+ * Author	: Anand Kakhandaki
+ * Reviewer	: 
+ * Pre-req	: Nothing
+ * Testcase	: $SFMDZ-156: Last Edited Column Sorting.
+ * Steps	: 
+ 				1) Login to test org and Click on last Edited column
+ 				
+ * Expt Res	:
+ 				1) verify it's sorted in numerical order.
+ 
+
+			
+ */
+
+var $SFMDZ_156=_testcase("$SFMDZ-156","Last Edited Column Sorting");
+$SFMDZ_156.start();
+_setSpeed($g_stepSpeed);
+	
+	/**
+	 * Global Variable declaration
+	 */
+
+	var $url="http://test.salesforce.com";
+	var $un="designer2@test.com";
+	var $pwd="designer@2";
+	var $viewName="transaction";
+	
+	/**
+	 * Login to the Sandbox Org and launching Transaction list view
+	 */
+	
+	$bo_act_login.login($url, $un, $pwd);
+	var $homecurrentHomePageULR =$sfmrdz_act_common.LaunchListViewWindow($viewName);
+	
+	$sfmrdz_act_common.typePicklist("Standard SFM Transactions");
+	
+	//checking Last Edited Column in ascending Order
+	var $sortOrder="ascending";
+	_click($sfmrdz_pg_trnListView.btn_heading_lastEditedCol);
+	_wait(10000,_isVisible($sfmrdz_pg_common.btn_actionMenu));
+	var $retVal=$sfmrdz_act_common.sortLastEditedCol("TRANSACTION NAME",$sortOrder);
+	_assertTrue($retVal,"Last Edited Column is not sorted in "+$sortOrder+" order");
+	
+	
+	//checking Last Edited Column in descending Order
+	var $sortOrder="descending";
+	_click($sfmrdz_pg_trnListView.btn_heading_lastEditedCol);
+	_wait(10000,_isVisible($sfmrdz_pg_common.btn_actionMenu));
+	var $retVal=$sfmrdz_act_common.sortLastEditedCol("TRANSACTION NAME",$sortOrder);
+	_assertTrue($retVal,"Last Edited Column is not sorted in "+$sortOrder+" order");
+	
+	$sfmrdz_act_common.launchHomeWindow($homecurrentHomePageULR);
+	_wait(10000,_isVisible($bo_pg_home.link_home));
+	$sfm_act_lightningConfig.logoutInLightning();
+	
+	
+	$SFMDZ_156.end();

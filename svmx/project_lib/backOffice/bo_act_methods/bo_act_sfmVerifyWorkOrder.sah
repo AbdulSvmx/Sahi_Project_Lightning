@@ -23,11 +23,21 @@ var $bo_act_sfmVerifyWorkOrder= new function bo_act_sfmVerifyWorkOrder() {
 
 this.verifyWizardOnWOObj=function(){
 	_selectDomain();
-	_click($bo_pg_sfmVerifyWorkOrder.img_allTab);
+	$sfm_pg_wo.openAppLauncher();
+	_click($bo_pg_home.link_aapLauncher);
+	_setValue($bo_pg_home.txtbox_findAnApp,"Work Order");
 	//_wait(2000);
+	if(_isVisible($bo_pg_sfmVerifyWorkOrder.link_workOrder)){
 	_click($bo_pg_sfmVerifyWorkOrder.link_workOrder);
+	}else if(_isVisible($bo_pg_sfmVerifyWorkOrder.link_workOrder1)){
+		_click($bo_pg_sfmVerifyWorkOrder.link_workOrder1);
+	}
 	_wait(10000);
-	_click($bo_pg_sfmVerifyWorkOrder.lnk_firstLinkWO);
+	_click($bo_pg_sfmVerifyWorkOrder.btn_newWO);
+	if(_isVisible(_div("Select a record type"))){
+		_click(_button("Next"));
+	}
+	_click($bo_pg_sfmVerifyWorkOrder.btn_newWOSave);
 };
 	
 	this.wizardButtonVerification=function($wizardname){			

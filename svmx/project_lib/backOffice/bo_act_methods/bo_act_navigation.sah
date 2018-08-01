@@ -19,7 +19,7 @@ var $bo_act_navigation = new function bo_act_navigation() {
      * @returns boolean
      * Changes made for Lightning
      */this.navigateToSvmxSetup = function() {
-	 //this.navigateToHome();
+	  this.navigateToHome();
 		if(_isVisible($bo_pg_home.link_servicemaxSetup) == true )
 		{
 			_click($bo_pg_home.link_servicemaxSetup);
@@ -27,7 +27,7 @@ var $bo_act_navigation = new function bo_act_navigation() {
 		else
 		{
 			_selectDomain();
-			_click($bo_pg_home.button_allLinks); 
+			//_click($bo_pg_home.button_allLinks); 
 			if(!_isVisible(_heading2("App Launcher"))){
 				_click($bo_pg_home.button_allLinks); 
 		
@@ -35,7 +35,7 @@ var $bo_act_navigation = new function bo_act_navigation() {
 			_wait(6000, _isVisible($bo_pg_home.link_servicemaxSetup));
 			_click($bo_pg_home.link_servicemaxSetup);
 		}
-	_wait(3000,_isVisible($bo_pg_servicemaxSetup.btn_serviceFlowManager));
+	_wait(10000,_isVisible($bo_pg_servicemaxSetup.btn_serviceFlowManager));
 	//return $callBack.returnResult(_exists($bo_pg_servicemaxSetup.btn_serviceFlowManager));
 
     };
@@ -54,6 +54,17 @@ var $bo_act_navigation = new function bo_act_navigation() {
 //	_selectDomain();
 	//return $callBack.returnResult(_exists($bo_pg_sfmTransactionAndDesigner.btn_standardSfmTransaction));
     };
+    
+    this.navigateToSfmTransactionDesignerForWeb = function() {
+   	 //this.navigateToSvmxSetup();
+	 _selectDomain("/svmx/");
+	_click($bo_pg_servicemaxSetup.btn_serviceFlowManager);
+	_click($bo_pg_servicemaxSetup.btn_sfmTransactionAndDocsDesigner);
+		 _wait(10000);	 
+	_setSpeed(3000);
+//	_selectDomain();
+	//return $callBack.returnResult(_exists($bo_pg_sfmTransactionAndDesigner.btn_standardSfmTransaction));
+   };
     
     
     /**
@@ -74,6 +85,7 @@ var $bo_act_navigation = new function bo_act_navigation() {
      */this.navigateToSfmSearchDesigner = function() {
 //    	 $bo_act_navigation.navigateToSfmTransactionDesigner();
     	 this.navigateToSvmxSetup();
+    	 _selectDomain("/svmx/");
  			_click($bo_pg_servicemaxSetup.btn_serviceFlowManager);
     	 _click($bo_pg_servicemaxSetup.btn_sfmSearch);
      };
@@ -449,13 +461,70 @@ var $bo_act_navigation = new function bo_act_navigation() {
         	 return timeStamp;
 
         		  };
+
+        this.navigateServicemaxSetUpInLightening=function(){
+        	$sfm_pg_wo.openAppLauncher();
+        	_click($bo_pg_home.link_aapLauncher);
+        	_wait(1000);
+        	_setValue($bo_pg_home.txtbox_findAnApp,"servicemax SetUp");
+        	//if(_containsText($bo_pg_home.link_servicemaxSetUpHome), "Servicemax SetUp Home"){
+        		if(_isVisible($bo_pg_home.link_servicemaxSetUpHome)){
+        		_click($bo_pg_home.link_servicemaxSetUpHome); 
+        		}else if(_isVisible($bo_pg_home.link_servicemaxSetUpHome1)){
+            		_click($bo_pg_home.link_servicemaxSetUpHome1);             	
+        	}else if(_isVisible($bo_pg_home.link_servicemaxSetUp1)){
+        		_click($bo_pg_home.link_servicemaxSetUp1)       		
+        }
+        };	
+
         this.addSfmDesignerPermissionToUser = function($userName,$groupProfile){
         //This function adds the SFM Designer launching permission to the given user in the given group profile.
         	_click(_listItem($groupProfile));
         	_setValue($bo_pg_servicemaxSetup.txt_featurePermissionSearch,$userName);
         	_click($bo_pg_servicemaxSetup.btn_featurePermissionUserSearch);
         	//Click the SFM designer checkbox. Only one search result is expected as the username is unique.
-        	_click(_div("svmx-grid-checkheader[1]"));
+        	if(!_exists(_div("/svmx-grid-checkheader-checked/",_under(_div($designerType))))){
+        		_click(_div("/svmx-grid-checkheader/",_under(_div($designerType))));
+        	}
+        	
+        	_wait(3000);
+        	//Add step to click on 'Save' button as it is not visible in Lightning experience.
+        	
+        	
+        	
+        };
+        this.deleteFeaturePermissionToUser = function($userName,$groupProfile,$designerType){
+            //This function removes the specified feature permission to the given user in the given group profile.
+            //If the feature permission is already not present, then the function skips doing that.
+            //Note: $designerType should either be "SFM Designer" or "Checklist Designer" (Case sensitive)
+            	 _click($bo_pg_servicemaxSetup.btn_dropDownForGrpProfile);
+            	_click(_listItem($groupProfile));
+            	_setValue($bo_pg_servicemaxSetup.txt_featurePermissionSearch,$userName);
+            	_click($bo_pg_servicemaxSetup.btn_featurePermissionUserSearch);
+            	//Click the SFM designer checkbox. Only one search result is expected as the username is unique.
+            	if(_exists(_div("/svmx-grid-checkheader-checked/",_under(_div($designerType))))){
+            		_click(_div("/svmx-grid-checkheader-checked/",_under(_div($designerType))));
+            	}
+            	
+            	_wait(3000);
+            	//Add step to click on 'Save' button as it is not visible in Lightning experience.
+                };
+        
+        
+          this.addFeaturePermissionToUser = function($userName,$groupProfile,$designerType){
+        //This function adds the given feature permission to the given user in the given group profile.
+        //If the feature permission is already added, then the function skips doing that.
+        //Note: $designerType should either be "SFM Designer" or "Checklist Designer" (Case sensitive)
+        	 _click($bo_pg_servicemaxSetup.btn_dropDownForGrpProfile);
+        	_click(_listItem($groupProfile));
+        	_setValue($bo_pg_servicemaxSetup.txt_featurePermissionSearch,$userName);
+        	_click($bo_pg_servicemaxSetup.btn_featurePermissionUserSearch);
+        	//Click the SFM designer checkbox. Only one search result is expected as the username is unique.
+        	if(!_exists(_div("/svmx-grid-checkheader-checked/",_under(_div($designerType))))){
+        		_click(_div("/svmx-grid-checkheader/",_under(_div($designerType))));
+        	}
+        	
+        	_wait(3000);
         	//Add step to click on 'Save' button as it is not visible in Lightning experience.
         	
         	

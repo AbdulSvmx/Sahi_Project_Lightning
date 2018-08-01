@@ -1,0 +1,225 @@
+var $RS_10426 = _testcase("RS_10426","Verify Dependent picklist's values when Controlling picklist is not present in SFM process for header but present in mapping");
+$RS_10426.start();
+
+//Variables used
+var $object_name = "Work Order";
+var $ctrlPicklist = "Order Status";
+var $processName = "RS_10426";
+var $process_to_clone = "Manage Work Order Lines - Usage";
+var $dependentPicklist = "Order Type";
+var $ctrl_unique_values = ["Open","Closed"];
+var $ctrl_picklist_values = ["Open","Open","Closed"];
+var $dep_picklist_values = ["Depot Repair","Field Service","Field Service"];
+var $ctr = 0;
+var $sfmTemplate = "SVMXSTD: Manage WO Usage Lines";
+var $isCustom = false;
+var $ctr = 0;
+var $i = 0;
+var $success_message = "Work Order was saved.";
+var $containerName = ["Order Status"];
+var $fieldName=["Order Type"];
+var $z = 0;
+var $fields_array = [];
+$fields_array.push($dependentPicklist);
+var $currentWizardName = $wizardName[2];
+var $success_message = "Work Order was saved.";
+var $stdMap = "SVMXSTD: Close Work Order";
+
+//Appending current timestamp to process name to make it unique.
+var $timeStamp = $bo_act_navigation.getCurrentTimeStamp();
+$processName = $processName + "_" + $timeStamp;
+var $pageLayoutName = $processName + "pg";
+var $mapName = $processName + "mp";
+var $myDomain = "/lightning/";
+//**************************************************************************************
+//Login and switch to lightning
+//$bo_act_login.login($g_url,$bac_un,$bac_pwd);
+$bo_act_login.login($g_url,$sfmUsn,$sfmPwd);
+$sfm_act_lightningConfig.switchToLightning();
+
+//Navigate to Object manager and navigate to work order object.
+$sfm_act_lightningConfig.navigateToObjectsInLightning($object_name);
+_selectWindow("/"+$object_name+"/");
+_click(_link("Fields & Relationships"));
+
+
+_setValue(_searchbox("globalQuickfind"),$ctrlPicklist);
+_click(_link($ctrlPicklist));
+_selectDomain($myDomain);
+
+
+//Delete existing dependencies and create new one.
+if (_exists($sfm_pg_wo.ordertype_dependency))
+{	
+   
+	_expectConfirm($sfm_pg_wo.delete_link_picklist);
+	_click($sfm_pg_wo.delete_link_picklist);
+   
+}
+_click($sfm_pg_wo.btn_new_field_dependency);
+_setSelected($sfm_pg_wo.picklist_controller,$ctrlPicklist);
+_setSelected($sfm_pg_wo.picklist_dependent,$dependentPicklist);
+_click($sfm_pg_wo.btn_continue);
+for(var $i=0;$i<$ctrl_picklist_values.length;$i++){
+	$sfm_act_lightningConfig.addDependentControllingPicklistValues($ctrlPicklist,$ctrl_picklist_values[$i],$dep_picklist_values[$i]);
+}
+
+_expectConfirm($sfm_pg_wo.btn_save_dep_picklist);
+_click($sfm_pg_wo.btn_save_dep_picklist);
+_selectDomain();
+_closeWindow();
+_selectWindow();
+
+//Navigate to servicemax setup and setup required process.
+//Clone standard process and add the dependent picklist in the screen designer
+_setSpeed(3000);
+$sfm_act_SFM.cloneTDM016($process_to_clone,$processName,$isCustom,$pageLayoutName, $sfmTemplate, $fieldName, $containerName);
+$bo_pg_sfmTransactionAndDesigner.deleteField($ctrlPicklist);
+_click($bo_pg_sfmTransactionAndDesigner.btn_pageLayoutSave);
+_click($bo_pg_sfmTransactionAndDesigner.btn_quickSave1);
+_click($bo_pg_sfmTransactionAndDesigner.btn_qualifyingCriteriaAndFieldMapping);
+_click($bo_pg_sfmTransactionAndDesigner.btn_newLineForQc);
+_setSelected(_f("main").s_combobox("fieldCombo[1]"), "Order Status");
+_setSelected(_f("main").s_combobox("valuesCombo[1]"), "Closed");
+_setValue($bo_pg_sfmTransactionAndDesigner.txt_sfmSavePageLayoutAsId, "1 OR 2");
+_setValue($bo_pg_sfmTransactionAndDesigner.txt_saveExprAs, $processName);;
+_setValue($bo_pg_sfmTransactionAndDesigner.txt_inputIdAs, $processName);
+_click(_f("main").s_button("Save As"));
+_assertVisible($bo_pg_sfmTransactionAndDesigner.label_exprSaved);
+_click($bo_pg_sfmTransactionAndDesigner.btn_quickSave1);
+if(_condition(_isVisible($bo_pg_sfmTransactionAndDesigner.btn_proceed_anyways))){
+	_click($bo_pg_sfmTransactionAndDesigner.btn_proceed_anyways);
+}
+
+//Set up the mapping. Order status is set to "Open"
+_click($sfm_pg_sfmMapping.btn_mappingTab);
+_setSelected($sfm_pg_sfmMapping.btn_selectExistingMap,$stdMap);
+_click($sfm_pg_sfmMapping.btn_newMappingExistingRecord);
+_wait(6000);
+
+_setValue($sfm_pg_sfmMapping.txt_quickFindTxtBox,$ctrlPicklist);
+_click($sfm_pg_sfmMapping.btn_toggleMapOnOff);
+_setValue($sfm_pg_sfmMapping.txt_quickFindTxtBox,$ctrlPicklist);
+_wait(2000);
+_click(_f("main").s_togglebutton("I want to choose a field from the list").rightOf(_f("main").ftedatagriditemrenderer($ctrlPicklist)));
+_setSelected(_f("main").s_combobox("valuesCombo").rightOf(_f("main").ftedatagriditemrenderer($ctrlPicklist)),$ctrl_unique_values[0]);
+_setValue($sfm_pg_sfmMapping.txt_mappingName,$mapName);
+_setValue($sfm_pg_sfmMapping.txt_mappingId,$mapName);
+_click($sfm_pg_sfmMapping.btn_saveMappingExistingRecord);
+_wait(2000);
+_assertVisible($sfm_pg_sfmMapping.label_mapSavedMsg);
+_click($bo_pg_sfmTransactionAndDesigner.btn_quickSave1);
+_selectDomain();
+_setSpeed(1000);
+//Add the custom process to SFM wizard.
+$sfm_act_wizards.addToWizard($object_name,$currentWizardName,"SFM",$processName);
+_selectDomain();
+
+//Create a work order
+var $wo_number = $sfm_act_createCustomWizard.createWowithdateliterals();
+$bo_act_navigation.navigateToCreatedRecordUsingGlobalSearch($wo_number);
+
+//Launch SFM delivery and verify dependent pick list values
+var $expected_list = [];
+//Verify the values one by one.
+
+ var $i = 0;var $j = 0;
+ for ($j=0;$j<$ctrl_picklist_values.length;$j++) {
+ 	if($ctrl_picklist_values[$j] === $ctrl_unique_values[0]) {
+ 		$i = $i+1;
+ 		$expected_list.push($dep_picklist_values[$j]);
+ 	}
+ }
+for($z=0;$z<$ctrl_unique_values.length;$z++){
+	
+	//Steps to edit wo and save
+	_click($sfm_pg_wo.btn_wo_edit);
+	_click(_link(0,_near(_span("/"+$ctrlPicklist+"/",_in(_div("/modal-container/"))))));
+	_click(_link($ctrl_unique_values[$z]));
+	_click($sfm_pg_wo.btn_wo_edit_save);
+	_wait(2000);
+	$sfm_act_createCustomWizard.clickWizardlinks($processName);
+	_selectDomain($domainName);
+	var $actual_list = [];
+	//Verify the count of values first
+	_wait(4000);
+    _click(_div("/sfm-picklist/",_rightOf(_div($dependentPicklist))));
+    _wait(1000);
+	var $no_of_values = _count("_listItem", "/.*/", _under(_div($dependentPicklist)));
+	
+	for($ctr = 1;$ctr < $no_of_values;$ctr++ ){
+		$actual_list.push(_getText(_listItem($ctr), _under(_div($dependentPicklist))));
+	}
+	_assertEqualArrays($expected_list, $actual_list);
+	_click($sfm_pg_wo.link_delivery_save);
+	_wait(4000);
+	_selectDomain();
+
+	}
+
+//Now edit the mapping and save the changes.
+$sfm_act_createCustomWizard.clickWizardlinks($processName);
+_wait(10000);
+_selectDomain($domainName);
+_click($sfm_pg_wo.btn_arrowNextToGetPrice);
+_assertVisible($sfm_pg_wo.link_launchSfmDesigner);
+_click($sfm_pg_wo.link_launchSfmDesigner);
+_selectDomain();
+_selectWindow("/SFM Transaction Designer/");
+_wait(10000);
+_click($bo_pg_sfmTransactionAndDesigner.btn_qualifyingCriteriaAndFieldMapping);
+_click($sfm_pg_sfmMapping.btn_mappingTab);
+_click($sfm_pg_sfmMapping.btn_newMappingExistingRecord);
+_setValue($sfm_pg_sfmMapping.txt_quickFindTxtBox,$ctrlPicklist);
+_click(_f("main").s_togglebutton("I want to choose a field from the list").rightOf(_f("main").ftedatagriditemrenderer($ctrlPicklist)));
+_setSelected(_f("main").s_combobox("valuesCombo").rightOf(_f("main").ftedatagriditemrenderer($ctrlPicklist)),$ctrl_unique_values[1]);
+_setValue($sfm_pg_sfmMapping.txt_mappingName,$mapName);
+_setValue($sfm_pg_sfmMapping.txt_mappingId,$mapName);
+_click($sfm_pg_sfmMapping.btn_saveMappingExistingRecord);
+_wait(2000);
+_assertVisible($sfm_pg_sfmMapping.label_mapSavedMsg);
+_click($bo_pg_sfmTransactionAndDesigner.btn_quickSave1);
+_selectDomain();
+_closeWindow();
+_selectWindow();
+_selectDomain($domainName);
+_click($sfm_pg_wo.btn_cancelForSfmDelivery);
+_click($sfm_pg_wo.btn_proceedForCancel);
+$bo_act_navigation.navigateToCreatedRecordUsingGlobalSearch($wo_number);
+//Launch the SFM delivery again to verify if the dependent pick list value has changed as per the new mapping
+var $expected_list = [];
+//Verify the values one by one.
+
+var $i = 0;var $j = 0;
+for ($j=0;$j<$ctrl_picklist_values.length;$j++) {
+	if($ctrl_picklist_values[$j] === $ctrl_unique_values[0]) {
+		$i = $i+1;
+		$expected_list.push($dep_picklist_values[$j]);
+	}
+}
+for($z=0;$z<$ctrl_unique_values.length;$z++){
+	
+	//Steps to edit wo and save
+	_click($sfm_pg_wo.btn_wo_edit);
+	_click(_link(0,_near(_span("/"+$ctrlPicklist+"/",_in(_div("/modal-container/"))))));
+	_click(_link($ctrl_unique_values[$z]));
+	_click($sfm_pg_wo.btn_wo_edit_save);
+	_wait(2000);
+	$sfm_act_createCustomWizard.clickWizardlinks($processName);
+	_selectDomain($domainName);
+	var $actual_list = [];
+	//Verify the count of values first
+	_wait(4000);
+  _click(_div("/sfm-picklist/",_rightOf(_div($dependentPicklist))));
+  _wait(1000);
+	var $no_of_values = _count("_listItem", "/.*/", _under(_div($dependentPicklist)));
+	
+	for($ctr = 1;$ctr < $no_of_values;$ctr++ ){
+		$actual_list.push(_getText(_listItem($ctr), _under(_div($dependentPicklist))));
+	}
+	_assertEqualArrays($expected_list, $actual_list);
+	_click($sfm_pg_wo.link_delivery_save);
+	_wait(4000);
+	_selectDomain();
+	}
+$RS_10426.end();

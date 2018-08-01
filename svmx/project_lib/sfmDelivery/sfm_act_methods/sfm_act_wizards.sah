@@ -64,6 +64,7 @@ var $sfm_act_wizards = new function sfm_act_wizards() {
 		_click($sfm_pg_wizards.btn_quickSave);
 		_wait(5000,_isVisible(_span("Object")));
 		_click($sfm_pg_wizards.btn_saveClose);
+		_wait(5000,isVisible($sfm_pg_wizards.btn_stdView));
 		
 };
 	
@@ -106,6 +107,24 @@ var $sfm_act_wizards = new function sfm_act_wizards() {
 	this.deleteChecklistWizard = function() {
 			_check(_checkbox(0,_leftOf($wizardName)));
 		_click($sfm_pg_wizards.btn_customDelete);	
+	};
+	
+	this.addToWizard1 = function($wizardObject, $wizardName, $wizardType, $sfmName, $handOver){
+		_selectDomain();
+		$bo_act_navigation.navigateServicemaxSetUpInLightening();
+		_selectDomain("/svmx/");
+		_click(_div("Service Flow Manager"));
+		_click(_div("SFM Wizards"));
+		_setSelected($sfm_pg_wizards.selectObject,$wizardObject);
+		_wait(3000);
+		
+		// If wizard is already present add the step else create a new wizard and then add the step
+		if(_exists(_span($wizardName))){
+			$sfm_act_wizards.editSfmWizard($wizardName, $wizardType, $sfmName, $handOver);
+		}
+		else{
+			$sfm_act_wizards.createSfmWizard($wizardName, $wizardType, $sfmName, $handOver);
+		}
 	};
 	
 	//add step/SFM to wizard
