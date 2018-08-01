@@ -39,20 +39,20 @@ var $sfm_act_SFM = new function sfm_act_SFM() {
 	 */
 	this.addFieldToScreen = function($fieldName, $containerName) {
 		for (var $i = 0; $i < $containerName.length; $i++) {
-			if ($containerName[$i] == 'Order Status') {
+			if ($containerName[$i] == 'Order Status' || $containerName[$i] == 'Work Order' ) {
 				$bo_pg_sfmTransactionAndDesigner.addField($fieldName[$i],
 						$containerName[$i]);
 			} else {
 				if($containerName[$i] == 'Parts'){
-					_setValue(_f("main").s_hscrollbar("horizontalScrollBar[2]"),"00");
+					_setValue(_f("main").s_hscrollbar("horizontalScrollBar").near(_f("main").s_richtext("Parts")),"00");
 				}else if($containerName[$i] == 'Labor'){
-					_setValue(_f("main").s_hscrollbar("horizontalScrollBar[3]"),"00");
+					_setValue(_f("main").s_hscrollbar("horizontalScrollBar").near(_f("main").s_richtext("Labor")),"00");
 				}else if($containerName[$i] == 'Expenses'){
-					_setValue(_f("main").s_hscrollbar("horizontalScrollBar[4]"),"00");
+					_setValue(_f("main").s_hscrollbar("horizontalScrollBar").near(_f("main").s_richtext("Expenses")),"00");
 				}else{
-					_setValue(_f("main").s_hscrollbar("horizontalScrollBar[5]"),"00");
+					_setValue(_f("main").s_hscrollbar("horizontalScrollBar").near(_f("main").s_richtext("Travel")),"00");
 				}				
-				_click(_f("main").s_datagroup("dataGroup[3]").near(
+				_click(_f("main").s_datagroup("dataGroup").near(
 						_f("main").s_richtext($containerName[$i])));
 				_setValue(_f("main").s_textinput("searchText[4]"),
 						$fieldName[$i]);
