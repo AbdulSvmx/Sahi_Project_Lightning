@@ -13,6 +13,9 @@ var $sfm_pg_screenDesigner = new function sfm_pg_screenDesigner(){
 	this.lbl_account= _f("main").s_label("Account");
 	this.txt_srcObject = _f("main").s_textinput("textInput");
 	this.btn_deleteRow=_f("main").s_button("Delete");
+	this.lbl_propDetail=_f("main").s_label("/Properties for Details:/");
+	this.sel_dataGrp=_f("main").s_datagroup("dataGroup");
+	this.txt_searchChildField=_f("main").s_textinput("searchText[4]");
 	
 	this.lbl_addproduct = _f("main").s_label("Product[1]"); 
 	this.btn_ConfLookup = _f("main").s_button("Configure Lookup");
@@ -32,7 +35,8 @@ var $sfm_pg_screenDesigner = new function sfm_pg_screenDesigner(){
 	this.txt_input = _f("main").s_textinput("textip");
 	this.txt_saveExprsn =_f("main").s_textinput("Save this filter as");
 	this.txt_inputId = _f("main").s_textinput("Input ID Here");
-	
+	this.txt_advExpr=_f("main").s_textinput("advTxt");
+	this.txt_errMsg=_f("main").s_textarea("msgTxt");
     
     
 	this.chk_readOnly= _f("main").s_checkbox("Read Only");

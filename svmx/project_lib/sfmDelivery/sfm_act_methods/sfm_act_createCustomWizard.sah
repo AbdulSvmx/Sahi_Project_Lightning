@@ -101,18 +101,7 @@ var $sfm_act_createCustomWizard = new function sfm_act_createCustomWizard() {
 
 	};
 
-//	Added by Safi
-	this.createWOwithOrderStatus = function($OrdrStatus){		
-		_wait(5000);
-		$sfm_pg_wo.openAppLauncher();
-		_wait(3000);
-		_click($sfm_pg_wo.link_wo);
-		_click($sfm_pg_wo.btn_wo_new);
-		_setSelected($sfm_pg_wo.btn_woStaus,$OrdrStatus);
-		_click($sfm_pg_wo.btn_wo_save);
-		_wait(5000);
 
-	};
 
 // Added by Safi	WO with values/ Create Case
 	
@@ -781,6 +770,24 @@ var $sfm_act_createCustomWizard = new function sfm_act_createCustomWizard() {
 		$woName= _getText($sfm_pg_wo.label_wo);
 		return $woName;
 		
+	};
+	
+//	Added by Safi
+	this.createWOwithOrderStatus = function($OrdrStatus){	
+		_selectDomain();
+		_wait(5000);
+		$sfm_pg_wo.openAppLauncher();
+		_wait(3000);
+		$woName = "";
+		this.clickSvmxWoLink();
+		_wait(5000,isVisible($sfm_pg_wo.btn_wo_new));
+		//_click($sfm_pg_wo.link_wo);
+		_click($sfm_pg_wo.btn_wo_new);
+		_setSelected($sfm_pg_wo.btn_woStaus,$OrdrStatus);
+		_click($sfm_pg_wo.btn_wo_save);
+		_wait(5000);
+		$woName= _getText($sfm_pg_wo.label_wo);
+		return $woName;
 	};
 	
 	//Create work order with date literals in lightning.
