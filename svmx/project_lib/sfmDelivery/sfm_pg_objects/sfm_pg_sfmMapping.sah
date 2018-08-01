@@ -1,9 +1,9 @@
 var $sfm_pg_sfmMapping = new function sfm_pg_sfmMapping() {
 	
 	this.btn_mappingTab = _f("main").tab("Mapping(s)").rightOf(_f("main").tab("Qualification Criteria"));
-	this.btn_newMappingExistingRecord = _f("main").s_button("New").leftOf(_f("main").s_button("Reset").inside(_f("main").s_navigatorcontent("Value Map for Existing Records")));
-	this.btn_saveMappingExistingRecord = _f("main").s_button("Save").leftOf(_f("main").s_button("Save As").inside(_f("main").s_navigatorcontent("Value Map for Existing Records")));
-	this.btn_saveAsMappingExistingRecord = _f("main").s_button("Save As").rightOf(_f("main").s_button("Save").inside(_f("main").s_navigatorcontent("Value Map for Existing Records")));
+	this.btn_newMappingExistingRecord = _f("main").s_button("New[2]");//Used Index as anchoring dint work during run time.
+	this.btn_saveMappingExistingRecord = _f("main").s_button("Save[2]");//Used Index as anchoring dint work during run time.
+	this.btn_saveAsMappingExistingRecord = _f("main").s_button("Save As");
 	this.btn_resetMappingExistingRecord = _f("main").s_button("Reset").rightOf(_f("main").s_button("New").inside(_f("main").s_navigatorcontent("Value Map for Existing Records")));
 	this.btn_deleteMappingExistingRecord = _f("main").s_button("Delete").rightOf(_f("main").s_button("Reset").inside(_f("main").s_navigatorcontent("Value Map for Existing Records")));
 	this.btn_showMappedFields = _f("main").s_togglebutton("Show Mapped Fields").inside(_f("main").s_navigatorcontent("Value Map for Existing Records"));
