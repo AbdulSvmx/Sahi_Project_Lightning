@@ -37,7 +37,7 @@ if(_exists($successMessage)){
 	_log("Pass ::: Account created successfully","SUCCESS");
 	_selectDomain($domainName);
 	_click(_submit("Continue"));
-	_wait(5000);
+	_wait(10000);
 }
 
 if (_exists(_link("Create RMA from Work Order (Work Order Number: "+$woName+")"))){
