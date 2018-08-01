@@ -16,6 +16,7 @@ var $bo_act_login = new function bo_act_login() {
 		/*
 		 * $url = $url || $g_url; $un = $un || $g_un; $pwd = $pwd || $g_pwd;
 		 */
+		_setSpeed($g_stepSpeed);
 		_navigateTo($url);
 		_wait(5000, _isVisible($bo_pg_login.txt_email));
 		_setValue($bo_pg_login.txt_email, $un);
