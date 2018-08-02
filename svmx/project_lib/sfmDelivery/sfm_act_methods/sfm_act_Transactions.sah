@@ -339,7 +339,7 @@ var $sfm_act_Transactions = new function sfm_act_Transactions() {
 		_setSelected(_f("main").s_combobox("/ComboBox/").rightOf(_f("main").formitemlabel("Matching Field")),"Account ID");
 	};
 	
-	this.newSfm7017 = function($sfmName) {
+	this.newSfm10429 = function($sfmName) {
 		/*$sfmName = $bo_act_common.generateRandomName("RS_7017_");*/
 		$sfmPgLayoutName = $sfmName;
 		_wait(5000);
