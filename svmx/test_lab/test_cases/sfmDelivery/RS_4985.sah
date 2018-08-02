@@ -2,10 +2,14 @@ var $rs_4985 = _testcase("RS_4985","Assign to a group and log in as same group m
 $rs_4985.start();
 $wizTitle = $bo_act_common.generateRandomName("Auto Wiz ");
 $bo_act_login.login($g_url,$sfmUsn,$sfmPwd);
+$sfm_act_wizards.addToWizard("Work Order", $wizardName[2], $wizardType[4], "Work Order Service Report","false","Cloned_DefaultGroupProfile");  
+_selectDomain();
+$sfm_act_createCustomWizard.createWowithoutvalues();
+/*
 $bo_act_navigation.navigateToSfmWizard();
 $sfm_act_createCustomWizard.chooseObject("Work Order");
 $sfm_act_createCustomWizard.addManageWizSteps($wizTitle,"Output Document","Work Order Service Report","");
-$sfm_act_createCustomWizard.createBlankWo();
-_wait(5000);
+$sfm_act_createCustomWizard.createBlankWo();*/
+_wait(5000); 
 $sfm_pg_wo.assert_wizard($wizTitle);
 $rs_4985.end();
