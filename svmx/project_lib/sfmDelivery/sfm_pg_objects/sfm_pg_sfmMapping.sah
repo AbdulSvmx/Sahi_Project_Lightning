@@ -13,5 +13,14 @@ var $sfm_pg_sfmMapping = new function sfm_pg_sfmMapping() {
 	this.txt_quickFindTxtBox = _f("main").s_textinput("filterInput").near(_f("main").s_label("Quick Find").inside(_f("main").s_navigatorcontent("Value Map for Existing Records")));
 	this.label_mapSavedMsg = _f("main").uiftetextfield("Map saved");
 	this.btn_selectExistingMap = _f("main").s_combobox("searchCombo").inside(_f("main").s_navigatorcontent("Value Map for Existing Records"));
-	this.btn_toggleMapOnOff = _f("main").s_togglebutton("Show All Fields");
+	this.btn_toggleMapOnOff = _f("main").s_togglebutton("Show All Fields").rightOf(_f("main").s_label("All"));
+	this.cmb_mappingComboBox = _f("SFMExpressionBuilderSWF").s_combobox("searchCombo").inside(_f("SFMExpressionBuilderSWF").s_navigatorcontent("Value Map For New Records"));
+	this.txt_mappingName = _f("SFMExpressionBuilderSWF").s_textinput("textInput").inside(_f("SFMExpressionBuilderSWF").s_navigatorcontent("Value Map For New Records"));
+	this.btn_deleteMappingOutsideProcess = _f("SFMExpressionBuilderSWF").s_button("Delete").inside(_f("SFMExpressionBuilderSWF").s_navigatorcontent("Value Map For New Records"));
+	this.btn_yesButtonDeleteOutsideProcess = _f("SFMExpressionBuilderSWF").button("Yes");
+	this.txt_mappingUsedWarning = _f("SFMExpressionBuilderSWF").uiftetextfield("/An error occurred when deleting the map: Cannot delete this mapping. Following the a list of entities which use this mapping:/");
+	this.btn_okButtonAfterWarning = _f("SFMExpressionBuilderSWF").button("OK");
+	this.label_mapDeleted = _f("SFMExpressionBuilderSWF").uiftetextfield("Map deleted");
+	
+	
 };
