@@ -1,4 +1,4 @@
-_setSpeed(100);
+
 //Pass the Attack Values
 var $attackTag = "<img  src=p onerror=alert(123)>";
 var $attackTagSelectionField = "/img src=p/"
@@ -6,6 +6,7 @@ var $attackTagSelectionField = "/img src=p/"
 var $urlArray = $excel.readFromCustomExcel("../xss/xss_excelData/xssData.xlsx","Sheet1", false, true)
 //var $urlArray =["https://svmxc.na40.visual.force.com/apex/SVMXC__SPM_configuration"];
 $bo_act_login.login("https://login.salesforce.com", "yadav.thyagaraj@ge.com","Svmx123#")
+_setSpeed(100);
 
 var $urlCount = 0;
 var int = 0;
