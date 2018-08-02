@@ -55,7 +55,6 @@ var $bo_act_mappings = new function bo_act_mappings() {
 		//The user should be in the 'QC and Mapping' tab before calling this function
 		//Added by JJ
 		 var $i = 0;
-		_selectDomain($domainName);
 		_click($sfm_pg_sfmMapping.btn_mappingTab);
 		_setSelected($sfm_pg_sfmMapping.btn_selectExistingMap,$mapName);
 		if($pickListLabels.length > 0){
