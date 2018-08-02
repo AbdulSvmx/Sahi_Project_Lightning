@@ -114,11 +114,11 @@ var $sfm_pg_wo = new function sfm_pg_wo() {
 	};
 	
 	this.assert_wizard =function($wizTitle){
-		if(_exists(_cell($wizTitle))){
-			_log("Pass");
+		if(_exists(_span($wizTitle))){
+			_log("Fail ::: Wizard is visible which is not assigned to the profile", "FAILURE");
 		}
 		else{
-			_log("Fail");
+			_log("Pass ::: Wizard is not visible which is not assigned to the profile");
 		}
 		
 //		_assertExists(_cell($wizTitle),"Wizard Not Present");
