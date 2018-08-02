@@ -5,6 +5,7 @@ var $sfm_pg_wo = new function sfm_pg_wo() {
 	this.btn_woStatus = _select(0,_rightOf(_label("Order Status")));
 	this.btn_wo_save = _span("Save");//Changed for lightning
 	this.link_wo = _link("/Work Orders/");//Changed to hit the correct Work orders link in Lightning - JJ
+	this.link_woStatus=_link(0,_near(_span("Order Status Current status of the service order")));
 
 //	this.btn_wo_edit = _div("Edit");//Changed for Lightning.
 //	this.txt_wo_zip = _textbox("Zip");

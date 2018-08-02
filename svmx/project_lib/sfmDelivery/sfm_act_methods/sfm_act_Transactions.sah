@@ -635,7 +635,8 @@ var $sfm_act_Transactions = new function sfm_act_Transactions() {
 				for(var $i=0;$i<$fieldName.length;$i++){
 					_click($sfm_pg_screenDesigner.sel_dataGrp.near(_f("main").s_richtext($childObj)));
 					_setValue($sfm_pg_screenDesigner.txt_searchChildField,$fieldName[$i]);
-					_doubleClick(_f("main").s_label($fieldName[$i]).near($sfm_pg_screenDesigner.txt_searchChildField));
+					_wait(2000);
+					_doubleClick(_f("main").s_label($fieldName[$i]));
 				}
 				_setStrictVisibilityCheck(false);
 			};

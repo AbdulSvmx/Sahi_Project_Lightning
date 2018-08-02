@@ -16,6 +16,8 @@ var $sfm_pg_screenDesigner = new function sfm_pg_screenDesigner(){
 	this.lbl_propDetail=_f("main").s_label("/Properties for Details:/");
 	this.sel_dataGrp=_f("main").s_datagroup("dataGroup");
 	this.txt_searchChildField=_f("main").s_textinput("searchText[4]");
+	this.lbl_erroMsgOnSFMLaunch=_div("This record does not qualify as the Order Status is NOT Open");
+	//this.lbl_erroMsgOnSFMLaunch=_div("This record does not meet the qualification criteria for this SFM Transaction");
 	
 	this.lbl_addproduct = _f("main").s_label("Product[1]"); 
 	this.btn_ConfLookup = _f("main").s_button("Configure Lookup");
