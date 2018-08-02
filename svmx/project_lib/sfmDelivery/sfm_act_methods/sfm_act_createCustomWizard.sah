@@ -782,13 +782,14 @@ var $sfm_act_createCustomWizard = new function sfm_act_createCustomWizard() {
 		this.clickSvmxWoLink();
 		_wait(5000,_isVisible($sfm_pg_wo.btn_wo_new));
 		//_click($sfm_pg_wo.link_wo);
+		_setStrictVisibilityCheck(true);
 		_click($sfm_pg_wo.btn_wo_new);
 		_click($sfm_pg_wo.link_woStatus);
 		_click(_link($OrdrStatus));
 		_click($sfm_pg_wo.btn_wo_edit_save);
 		_wait(5000);
 		//_wait(5000,_isVisible($sfm_pg_wo.label_wo));
-		_setStrictVisibilityCheck(true);
+
 		$woName= _getText($sfm_pg_wo.label_wo);
 		_log($woName);
 		_setStrictVisibilityCheck(false);

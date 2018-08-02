@@ -1,5 +1,5 @@
-var $rs_5449 = _testcase("RS_5449","Verify new single expression for both Header and Child and launch SFM in delivery.");
-$rs_5449.start();
+var $rs_10462 = _testcase("RS_10462","Verify new single expression for both Header and Child and launch SFM in delivery.");
+$rs_10462.start();
 
 	var $sfmName = $bo_act_common.generateRandomName("SFM_Auto_");
 	var $sfmType="as Standalone for the purpose of editing an existing record";
@@ -48,14 +48,15 @@ $rs_5449.start();
 	
 	$sfm_act_Transactions.screenDesigner($headersToAdd, $childToAdd, $sfmPgLayoutName, $sfmPgLayoutName);
 	
-/*	_wait(3000);
+	_wait(3000);
 	_click($bo_pg_sfmTransactionAndDesigner.btn_finalQuickSave);
 
 	var $wizardObject="Work Order";
 	var $wizardName = $bo_act_common.generateRandomName("SFM Wiz");
 	var $wizardType="SFM";
+	var $profile="";
 	var $handOver=false;
-	$sfm_act_wizards.addToWizard($wizardObject, $wizardName, $wizardType, $sfmName, $handOver);  
+	$sfm_act_wizards.addToWizard($wizardObject, $wizardName, $wizardType, $sfmName, $handOver, $profile);  
 
 	
 	var $OrdrStatus="Closed";
@@ -74,8 +75,8 @@ $rs_5449.start();
 	_setStrictVisibilityCheck(true);
 
 	$sfm_act_createCustomWizard.clickWizardBtn($sfmName);
-	_assertExists(_div($sfmName));
+	_assertExists(_div("/"+$sfmName+"/"));
 	_assertExists(_span($trgChildObj));
 	_setStrictVisibilityCheck(false);
-*/	
-$rs_5449.start();
+	
+$rs_10462.start();
