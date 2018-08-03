@@ -21,7 +21,7 @@ var $formulaDescriptionArray = ["If customerDown is true then Billing type=Paid 
                                 "Year of StartDate and Time"
                                 ];
 
-if($env=="Base"){
+if($orgtype=="Base"){
 	var $formulaArray =["$F.IF($F.EQUAL($D.Work_Order.SVMXC__Customer_Down__c,'true'),'Paid',$D.Work_Order.SVMXC__Billing_Type__c)",
 	                    "$F.IF($F.EQUAL($D.Work_Order.SVMXC__Billing_Type__c,'Courtesy'),'true',$D.Work_Order.SVMXC__Is_Entitlement_Performed__c)",
 	                    "$F.NOW()",

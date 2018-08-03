@@ -2,9 +2,9 @@
 // Precondition:: "UserTrunk" mapping should be present in org to get selected for this test case.
 var $rs_7012 = _testcase("RS_7012","Verify user trunk and current user literals in map");
 $rs_7012.start();
-var $env = "Dev";
+//var $env = "Dev";
 var $expectedSite = "";
-if($env=="Dev"){
+if($orgtype=="Dev"){
 	$expectedSite = "SVMX Bangalore";
 	
 }
