@@ -1,5 +1,5 @@
 _call(top.location.reload(true));
-_setXHRReadyStatesToWaitFor("2,3");
+_setXHRReadyStatesToWaitFor("2");
 _windowAction("resize", 1920, 1080);
 var $g_stepSpeed = 300;
 _setSpeed($g_stepSpeed);
