@@ -52,11 +52,13 @@ $rs_10462.start();
 	_click($bo_pg_sfmTransactionAndDesigner.btn_finalQuickSave);
 
 	var $wizardObject="Work Order";
-	var $wizardName = $bo_act_common.generateRandomName("SFM Wiz");
+	//var $wizardName = $bo_act_common.generateRandomName("SFM Wiz");
+	var $wizardName1 =$wizardName[6];
 	var $wizardType="SFM";
 	var $profile="";
 	var $handOver=false;
-	$sfm_act_wizards.addToWizard($wizardObject, $wizardName, $wizardType, $sfmName, $handOver, $profile);  
+	_log($wizardName1);
+	$sfm_act_wizards.addToWizard($wizardObject, $wizardName1, $wizardType, $sfmName, $handOver, $profile);  
 
 	
 	var $OrdrStatus="Closed";
