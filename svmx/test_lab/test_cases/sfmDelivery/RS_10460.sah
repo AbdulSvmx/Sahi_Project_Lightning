@@ -11,10 +11,12 @@ $rs_10460.start();
 	var $comboConditions=["Contains","","Not Equal","","Greater Than","Is Null","Starts With","Contains","Not Equal","Is Not Null"];
 	var $comboInput=["Online","Today","Canceled","Field Service","60","","IB","Paid","Yesterday",""];
 	var $toggleButton=["","I want to choose a field from the list","","","","","","","I want to choose a field from the list",""];
+	var $advExpr="";
+	var $errMsg="";
 	var $exprsnName = $bo_act_common.generateRandomName("Exprsn");
 	var $exprsnSaveAsName = $bo_act_common.generateRandomName("RenameExp");
 	
-	$sfm_act_expressions.createCustomExpression($object, $comboField, $comboConditions, $toggleButton, $comboInput, $exprsnName);
+	$sfm_act_expressions.createCustomExpression($object, $comboField, $comboConditions, $toggleButton, $comboInput, $advExpr, $errMsg, $exprsnName)
 
 	$sfm_act_expressions.saveAsExprsn($exprsnSaveAsName);
 

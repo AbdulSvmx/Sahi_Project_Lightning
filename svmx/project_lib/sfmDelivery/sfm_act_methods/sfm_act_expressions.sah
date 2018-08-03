@@ -70,7 +70,7 @@ var $sfm_act_expressions = new function sfm_act_expressions() {
 	
 };
 	
-	this.createCustomExpression=function($object,$comboField,$comboConditions,$toggleButton,$comboInput,$exprsnName){
+	this.createCustomExpression=function($object,$comboField,$comboConditions,$toggleButton,$comboInput,$advExpr,$errMsg,$exprsnName){
 		_setSelected($sfm_pg_expressions.sel_object,$object);
 		_wait(10000,_isEnabled($sfm_pg_expressions.btn_selectExpression));
 		_click($sfm_pg_expressions.btn_new);
