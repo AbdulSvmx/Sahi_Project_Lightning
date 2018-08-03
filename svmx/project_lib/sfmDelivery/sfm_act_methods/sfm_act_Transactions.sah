@@ -584,7 +584,7 @@ var $sfm_act_Transactions = new function sfm_act_Transactions() {
 				_wait(2000);
 			};
 			
-			this.sfmQualifyingCriteriaieldMappings=function($object,$ExprFieldsDetails,$mappingDetails){
+			this.sfmQualifyingCriteriaieldMappings=function($object,$ExprFieldsDetails,$mappingDetails,$addExprName){
 				//Expression fields
 				var $comboField=$ExprFieldsDetails[0];
 				var $comboConditions=$ExprFieldsDetails[1]; 
@@ -606,10 +606,13 @@ var $sfm_act_Transactions = new function sfm_act_Transactions() {
 				_wait(10000,_isVisible($sfm_pg_screenDesigner.lbl_qualifyingCriteriaMapping));
 				_click(_f("main").s_label($object).near($sfm_pg_screenDesigner.lbl_qualifyingCriteriaMapping));
 				_wait(10000,_isVisible($sfm_pg_screenDesigner.lbl_headerQualificationLabel));
-				if ($ExprFieldsDetails.length!==0) {
+				if ($ExprFieldsDetails.length!==0 && $ExprFieldsDetails!==null) {
 					this.createCustomExpression($comboField, $comboConditions, $toggleButton, $comboInput, $advExpr, $errMsg, $exprsnName);
+				}else if($addExprName.length!==0 && $addExprName!==null){
+					_setSelected($sfm_pg_expressions.btn_selectExpression,$exprsnSaveAsName);
+					_keyPress($sfm_pg_expressions.btn_selectExpression, 27);
 				}
-				if ($mappingDetails.length!==0) {
+				if ($mappingDetails.length!==0 && $mappingDetails!==null) {
 					$bo_act_mappings.createMapping($pickListLabels, $pickListValues, $textLabels, $textValues, $mapName);
 				}
 
