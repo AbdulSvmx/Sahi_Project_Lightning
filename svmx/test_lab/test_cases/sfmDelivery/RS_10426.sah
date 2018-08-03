@@ -21,7 +21,7 @@ var $fieldName=["Order Type"];
 var $z = 0;
 var $fields_array = [];
 $fields_array.push($dependentPicklist);
-var $currentWizardName = $wizardName[2];
+var $currentWizardName = $wizardName[4];
 var $success_message = "Work Order was saved.";
 var $stdMap = "SVMXSTD: Close Work Order";
 var $pickListLabels = ["Order Status"];
