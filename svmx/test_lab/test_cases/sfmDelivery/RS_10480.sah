@@ -1,5 +1,5 @@
-var $rs_4994 = _testcase("RS_4994","Assign to a group and log in as different group member.");
-$rs_4994.start();
+var $rs_10480 = _testcase("RS_10480","Assign to a group and log in as different group member.");
+$rs_10480.start();
 /* Logging in with a different group member cannot be validated because 
  * The step to add permission in addManageWizSteps function was commented out
  * while modifying the codes to run on both Dev as well as Base.
@@ -15,4 +15,4 @@ $sfm_act_createCustomWizard.addManageWizSteps($wizTitle,"Output Document","Work 
 $sfm_act_createCustomWizard.createBlankWo(); */
 _wait(1000);
 $sfm_pg_wo.assert_wizard($wizTitle);
-$rs_4994.end();
+$rs_10480.end();
