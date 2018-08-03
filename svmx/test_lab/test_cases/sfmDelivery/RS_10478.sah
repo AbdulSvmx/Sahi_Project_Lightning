@@ -7,7 +7,7 @@
 
 
 		var $sfmToBeCloned="Manage Work Order Lines - Usage";
-		var $sfmName=$bo_act_common.generateRandomName("10478SFM");
+		var $sfmName=$bo_act_common.generateRandomName("RS_10478_");
 		var $sfmTemplateSaveAsName=$bo_act_common.generateRandomName("10478Temp");
 
 		var $objName="Work Order";
