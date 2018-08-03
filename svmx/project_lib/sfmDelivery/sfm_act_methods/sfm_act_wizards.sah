@@ -61,7 +61,7 @@ var $sfm_act_wizards = new function sfm_act_wizards() {
 		_wait(6000,_heading4("Success"));
 		//if(_isVisible(_heading4("Success"))){
 			//_log("Pass");
-		if($profile !=""){
+		if($profile !="" && $profile !=null){
 			_click($sfm_pg_wizards.txt_managePermission);
 			_setSelected($sfm_pg_wizards.select_availableGrpProfiles,$profile);
 			_click($sfm_pg_wizards.btn_add);			
