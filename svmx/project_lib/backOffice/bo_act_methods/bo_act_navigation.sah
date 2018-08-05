@@ -19,7 +19,7 @@ var $bo_act_navigation = new function bo_act_navigation() {
      * @returns boolean
      * Changes made for Lightning
      */this.navigateToSvmxSetup = function() {
-	  this.navigateToHome();
+	  //this.navigateToHome();
 		if(_isVisible($bo_pg_home.link_servicemaxSetup) == true )
 		{
 			_click($bo_pg_home.link_servicemaxSetup);

@@ -87,7 +87,7 @@ _setSpeed($g_stepSpeed);
 	_wait(5000,_isVisible($sfmrdz_pg_common.btn_actionMenu));
 	
 	$sfmrdz_act_common.mouseOver("Activate Preventive Maintenance Plan","Last Edited");
-	_wait(1000,_isVisible($sfmrdz_pg_common.btn_lastEditMouseOverDiv));
+	//_wait(1000,_isVisible($sfmrdz_pg_common.btn_lastEditMouseOverDiv));
 	_assertExists($sfmrdz_pg_common.btn_lastEditMouseOverDiv);
 	_mouseOver($sfmrdz_pg_common.btn_createdBy);
 	_assertExists($sfmrdz_pg_common.btn_createdBy);

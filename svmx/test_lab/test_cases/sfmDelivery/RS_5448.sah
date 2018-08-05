@@ -1,22 +1,55 @@
 var $rs_5448 = _testcase("RS_5448","Verify the functionality of Standalone Expressions.");
 $rs_5448.start();
-$sfmName = $bo_act_common.generateRandomName("SFM_Auto_");
-$exprsnName = $bo_act_common.generateRandomName("Exprsn");
-$sfmPgLayoutName =	$bo_act_common.generateRandomName("SFM_Auto_Page");
-$processName = "Manage Work Order Lines - Usage";
-$sfmPgLayoutName =	$bo_act_common.generateRandomName("SFM_Auto_Page");
-$renamedExprsn = $bo_act_common.generateRandomName("Renamed_Expr");
-$advExprsn = "1 or 2 or 3 or 4 or 5 or 6 or 7";
-$bo_act_login.login($g_url,$sfmUsn,$sfmPwd);
-$sfm_act_expressions.navigateToExpression();
-$sfm_act_expressions.newCustomAction("Work Order");
-$sfm_act_expressions.addRows(5);
-$sfm_act_expressions.manageExpressions5453();
-$sfm_act_expressions.saveExprsn($exprsnName);
-$bo_act_navigation.navigateToSfmTransactionDesigner();
-$sfm_act_Transactions.cloneAndSaveProcess($processName, $sfmName, $sfmPgLayoutName);
-$sfm_act_expressions.modifyQualifyingCriteria($exprsnName,$renamedExprsn,$advExprsn);
-$sfm_act_expressions.navigateToExpression();
-$sfm_act_expressions.newCustomAction("Work Order");
-$sfm_act_expressions.verify5448($renamedExprsn, $advExprsn);
+	
+
+	//Login to App
+	$bo_act_login.login($g_url,$sfmUsn,$sfmPwd);
+//	$sfm_act_expressions.navigateToExpression();
+
+	
+	var $object="Work Order";
+	var $comboField=["Account","Actual Initial Response","Order Status","Order Type"];
+	var $comboConditions=["Contains","","Not Equal",""];
+	var $comboInput=["Online","Today","Canceled","Field Service"];
+	var $toggleButton=["","Yes","",""];
+	var $exprsnName = $bo_act_common.generateRandomName("expr");
+	
+	$sfm_act_expressions.createCustomExpression($object, $comboField, $comboConditions, $toggleButton, $comboInput, $exprsnName);
+
+	var $sfmNameToBeCloned="Manage Work Order Lines - Usage";
+	var $sfmName = $bo_act_common.generateRandomName("SFM_AUTO_");
+	var $isCustom=false;
+	var $sfmTemplateSaveAsName=$bo_act_common.generateRandomName("SFM_Page_");
+	var $sfmTemplate="SVMXSTD: Manage WO Usage Lines";
+	var $fieldName="";
+	var $containerName="";
+	
+	$sfm_act_SFM.cloneTDM016($sfmNameToBeCloned, $sfmName, $isCustom, $sfmTemplateSaveAsName, $sfmTemplate, $fieldName, $containerName);
+	
+	$sfm_act_Transactions.sfmQualifyingCriteriaieldMappings("Work Order", $ExprFieldsDetails, $mappingDetails);
+	_click($bo_pg_sfmTransactionAndDesigner.btn_saveAndclose);
+	
+
+
+/*
+	$sfmName = $bo_act_common.generateRandomName("SFM_Auto_");
+	$exprsnName = $bo_act_common.generateRandomName("Exprsn");
+	$sfmPgLayoutName =	$bo_act_common.generateRandomName("SFM_Auto_Page");
+	$processName = "Manage Work Order Lines - Usage";
+	$sfmPgLayoutName =	$bo_act_common.generateRandomName("SFM_Auto_Page");
+	$renamedExprsn = $bo_act_common.generateRandomName("Renamed_Expr");
+	$advExprsn = "1 or 2 or 3 or 4 or 5 or 6 or 7";
+	$bo_act_login.login($g_url,$sfmUsn,$sfmPwd);
+	$sfm_act_expressions.navigateToExpression();
+	$sfm_act_expressions.newCustomAction("Work Order");
+	$sfm_act_expressions.addRows(5);
+	$sfm_act_expressions.manageExpressions5453();
+	$sfm_act_expressions.saveExprsn($exprsnName);
+	$bo_act_navigation.navigateToSfmTransactionDesigner();
+	$sfm_act_Transactions.cloneAndSaveProcess($processName, $sfmName, $sfmPgLayoutName);
+	$sfm_act_expressions.modifyQualifyingCriteria($exprsnName,$renamedExprsn,$advExprsn);
+	$sfm_act_expressions.navigateToExpression();
+	$sfm_act_expressions.newCustomAction("Work Order");
+	$sfm_act_expressions.verify5448($renamedExprsn, $advExprsn);
+	*/
 $rs_5448.end();

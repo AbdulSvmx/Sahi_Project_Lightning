@@ -74,7 +74,7 @@ _wait(5000,_isVisible($sfm_pg_sfmDesigner.lnk_home));
 
 //add the process to wizard
 $sfm_act_wizards.addToWizard($wizardObject, $wizardName[0], $wizardType[1], $sfmName); 
-  
+   
 //Create WO through UI for the validatiion
 _selectDomain();
 $sfm_act_createCustomWizard.createWowithoutvalues();
@@ -156,6 +156,7 @@ _setValue($sfm_pg_sfmDesigner.txt_eeLineQty,"5");
 _click($sfm_pg_sfmDesigner.btn_eeUpdate);
 
 _click($sfm_pg_sfmDesigner.btn_deliveryQuickSave);
+_wait(3000);
 if(_isVisible($sfm_pg_sfmDesigner.txt_dvrMultipleConfirmation)){
 	_click($sfm_pg_sfmDesigner.txt_dvrMultipleConfirmation);
 	_click($sfm_pg_sfmDesigner.txt_dvrMultipleConfirmation);

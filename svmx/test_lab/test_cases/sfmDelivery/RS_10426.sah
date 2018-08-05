@@ -21,9 +21,14 @@ var $fieldName=["Order Type"];
 var $z = 0;
 var $fields_array = [];
 $fields_array.push($dependentPicklist);
-var $currentWizardName = $wizardName[2];
+var $currentWizardName = $wizardName[4];
 var $success_message = "Work Order was saved.";
 var $stdMap = "SVMXSTD: Close Work Order";
+var $pickListLabels = ["Order Status"];
+var $pickListValues = ["Open"];
+var $textLabels = [];
+var $textValues = [];
+
 
 //Appending current timestamp to process name to make it unique.
 var $timeStamp = $bo_act_navigation.getCurrentTimeStamp();
@@ -92,24 +97,7 @@ if(_condition(_isVisible($bo_pg_sfmTransactionAndDesigner.btn_proceed_anyways)))
 }
 
 //Set up the mapping. Order status is set to "Open"
-_click($sfm_pg_sfmMapping.btn_mappingTab);
-_setSelected($sfm_pg_sfmMapping.btn_selectExistingMap,$stdMap);
-_click($sfm_pg_sfmMapping.btn_newMappingExistingRecord);
-_wait(6000);
-
-_setValue($sfm_pg_sfmMapping.txt_quickFindTxtBox,$ctrlPicklist);
-_click($sfm_pg_sfmMapping.btn_toggleMapOnOff);
-_setValue($sfm_pg_sfmMapping.txt_quickFindTxtBox,$ctrlPicklist);
-_wait(2000);
-_click(_f("main").s_togglebutton("I want to choose a field from the list").rightOf(_f("main").ftedatagriditemrenderer($ctrlPicklist)));
-_setSelected(_f("main").s_combobox("valuesCombo").rightOf(_f("main").ftedatagriditemrenderer($ctrlPicklist)),$ctrl_unique_values[0]);
-_setValue($sfm_pg_sfmMapping.txt_mappingName,$mapName);
-_setValue($sfm_pg_sfmMapping.txt_mappingId,$mapName);
-_click($sfm_pg_sfmMapping.btn_saveMappingExistingRecord);
-_wait(2000);
-_assertVisible($sfm_pg_sfmMapping.label_mapSavedMsg);
-_click($bo_pg_sfmTransactionAndDesigner.btn_quickSave1);
-_selectDomain();
+$bo_act_mappings.createMapping($pickListLabels,$pickListValues,$textLabels,$textValues,$mapName);
 _setSpeed(1000);
 //Add the custom process to SFM wizard.
 $sfm_act_wizards.addToWizard($object_name,$currentWizardName,"SFM",$processName);
@@ -142,7 +130,7 @@ for($z=0;$z<$ctrl_unique_values.length;$z++){
 	_selectDomain($domainName);
 	var $actual_list = [];
 	//Verify the count of values first
-	_wait(4000);
+	_wait(6000);
     _click(_div("/sfm-picklist/",_rightOf(_div($dependentPicklist))));
     _wait(1000);
 	var $no_of_values = _count("_listItem", "/.*/", _under(_div($dependentPicklist)));
@@ -151,7 +139,10 @@ for($z=0;$z<$ctrl_unique_values.length;$z++){
 		$actual_list.push(_getText(_listItem($ctr), _under(_div($dependentPicklist))));
 	}
 	_assertEqualArrays($expected_list, $actual_list);
-	_click($sfm_pg_wo.link_delivery_save);
+	_setStrictVisibilityCheck(true);
+	_click($sfm_pg_wo.btn_cancelForSfmDelivery);
+	_click($sfm_pg_wo.btn_proceedForCancel);
+	_setStrictVisibilityCheck(false);
 	_wait(4000);
 	_selectDomain();
 
@@ -168,23 +159,15 @@ _selectDomain();
 _selectWindow("/SFM Transaction Designer/");
 _wait(10000);
 _click($bo_pg_sfmTransactionAndDesigner.btn_qualifyingCriteriaAndFieldMapping);
-_click($sfm_pg_sfmMapping.btn_mappingTab);
-_click($sfm_pg_sfmMapping.btn_newMappingExistingRecord);
-_setValue($sfm_pg_sfmMapping.txt_quickFindTxtBox,$ctrlPicklist);
-_click(_f("main").s_togglebutton("I want to choose a field from the list").rightOf(_f("main").ftedatagriditemrenderer($ctrlPicklist)));
-_setSelected(_f("main").s_combobox("valuesCombo").rightOf(_f("main").ftedatagriditemrenderer($ctrlPicklist)),$ctrl_unique_values[1]);
-_setValue($sfm_pg_sfmMapping.txt_mappingName,$mapName);
-_setValue($sfm_pg_sfmMapping.txt_mappingId,$mapName);
-_click($sfm_pg_sfmMapping.btn_saveMappingExistingRecord);
-_wait(2000);
-_assertVisible($sfm_pg_sfmMapping.label_mapSavedMsg);
-_click($bo_pg_sfmTransactionAndDesigner.btn_quickSave1);
+$pickListValues = ["Closed"];
+$bo_act_mappings.editExistingFieldsInMapping($pickListLabels, $pickListValues, $textLabels, $textValues, $mapName);
 _selectDomain();
 _closeWindow();
 _selectWindow();
 _selectDomain($domainName);
 _click($sfm_pg_wo.btn_cancelForSfmDelivery);
 _click($sfm_pg_wo.btn_proceedForCancel);
+_selectDomain();
 $bo_act_navigation.navigateToCreatedRecordUsingGlobalSearch($wo_number);
 //Launch the SFM delivery again to verify if the dependent pick list value has changed as per the new mapping
 var $expected_list = [];
@@ -192,7 +175,7 @@ var $expected_list = [];
 
 var $i = 0;var $j = 0;
 for ($j=0;$j<$ctrl_picklist_values.length;$j++) {
-	if($ctrl_picklist_values[$j] === $ctrl_unique_values[0]) {
+	if($ctrl_picklist_values[$j] === $ctrl_unique_values[1]) {
 		$i = $i+1;
 		$expected_list.push($dep_picklist_values[$j]);
 	}
@@ -209,7 +192,7 @@ for($z=0;$z<$ctrl_unique_values.length;$z++){
 	_selectDomain($domainName);
 	var $actual_list = [];
 	//Verify the count of values first
-	_wait(4000);
+	_wait(6000);
   _click(_div("/sfm-picklist/",_rightOf(_div($dependentPicklist))));
   _wait(1000);
 	var $no_of_values = _count("_listItem", "/.*/", _under(_div($dependentPicklist)));
@@ -218,8 +201,11 @@ for($z=0;$z<$ctrl_unique_values.length;$z++){
 		$actual_list.push(_getText(_listItem($ctr), _under(_div($dependentPicklist))));
 	}
 	_assertEqualArrays($expected_list, $actual_list);
-	_click($sfm_pg_wo.link_delivery_save);
-	_wait(4000);
+	_setStrictVisibilityCheck(true);
+	_click($sfm_pg_wo.btn_cancelForSfmDelivery);
+	_click($sfm_pg_wo.btn_proceedForCancel);
+	_setStrictVisibilityCheck(false);
 	_selectDomain();
 	}
+$sfm_act_lightningConfig.logoutInLightning();
 $RS_10426.end();

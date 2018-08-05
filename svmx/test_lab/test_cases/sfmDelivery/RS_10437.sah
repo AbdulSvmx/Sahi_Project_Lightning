@@ -8,7 +8,7 @@ var $sfmTemplateSaveAsName = $sfmName;
 var $containerNameArray = ["Order Status","Order Status","Order Status","Order Status","Order Status"];
 var $fieldNameArray = ["Customer Down","Problem Description","Is Entitlement Performed","Actual Onsite Response","Scheduled Date"];
 var $wizardObject ="Work Order";
-var $env = "Dev";
+//var $env = "Dev";
 
 var $formulaTargetObjectArray = ["Work Order","Work Order","Work Order","Work Order","Labor","Labor"];
 var $formulaTargetFieldArray = ["Billing Type","Is Entitlement Performed","Actual Onsite Response","Scheduled Date", "Billable Qty", "Billable Line Price"];
@@ -21,7 +21,7 @@ var $formulaDescriptionArray = ["If customerDown is true then Billing type=Paid 
                                 "Year of StartDate and Time"
                                 ];
 
-if($env=="Base"){
+if($orgtype=="Base"){
 	var $formulaArray =["$F.IF($F.EQUAL($D.Work_Order.SVMXC__Customer_Down__c,'true'),'Paid',$D.Work_Order.SVMXC__Billing_Type__c)",
 	                    "$F.IF($F.EQUAL($D.Work_Order.SVMXC__Billing_Type__c,'Courtesy'),'true',$D.Work_Order.SVMXC__Is_Entitlement_Performed__c)",
 	                    "$F.NOW()",
@@ -77,7 +77,7 @@ if(_exists($sfm_pg_sfmDesigner.txt_priceAlert)){
 if(_getText($sfm_pg_sfmDesigner.txt_billingType)=="Paid"){
 	_log("Pass :::CustomerDown is true and so Billing type=Paid ");
 }else{
-	_log("Fail ::: When CustomerDown is true, Billing type != Paid ");
+	_log("Fail ::: When CustomerDown is true, Billing type != Paid ","FAILURE");
 }
 
 //Validate If Billing type is Courtesy then check Is Entitlement performed else as is
