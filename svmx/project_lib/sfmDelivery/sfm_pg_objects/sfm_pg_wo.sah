@@ -97,6 +97,8 @@ var $sfm_pg_wo = new function sfm_pg_wo() {
     this.btn_proceedForCancel = _span("Proceed");
     this.link_workDetailAfterCreation = _div("Work Detail");
     this.btn_cancelExtendedEdit = _span("/Cancel/");
+    this.btn_quickSave = _span("Quick Save");
+    this.btn_okPriceNotCalculated = _span("Ok");
     
 	
 	this.openAppLauncher = function(){

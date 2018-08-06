@@ -143,5 +143,38 @@ var $sfm_act_SFM = new function sfm_act_SFM() {
 		_click(_f("main").s_button("Save[3]"));
 		_wait(3000, _isVisible(_f("main").label("Page saved")));		
 	};
+	
+	//Fill text values in SFM Lightning Delivery screen
+	this.fillHeaderTextValues = function($labelsArray,$valuesArray) {
+		var $i = 0;
+		for($i=0;$i<$labelsArray.length;$i++){
+			_setValue(_textbox(0,_near(_span($labelsArray[$i]))),$valuesArray[$i]);
+			
+		}
+		
+	};
+	
+	//Fills picklist values in SFM Lightning Delivery screen.Author: Janaki
+	this.fillHeaderPicklistValues = function($labelsArray,$valuesArray){
+		var $i = 0;
+		_selectDomain("/svmx/");
+		for($i=0;$i<$labelsArray.length;$i++){
+			_click(_div("/trigger-picker/",_near(_span($labelsArray[$i]))));
+			_click(_listItem($valuesArray[$i]));
+		}	
+	};
+	
+	//Select today for a selected Date or Date/Time field.Author: Janaki.
+	this.selectToday = function($dateTimeField){
+	_click(_div("/svmx-date/",_near(_span($dateTimeField))));
+	_click(_span("Today"));
+	};
+	//Perform Quick Save in Lightning SFM Delivery.
+	this.performQuickSave = function(){
+		_click($sfm_pg_wo.btn_quickSave);
+		if(_isVisible($sfm_pg_wo.btn_okPriceNotCalculated)){
+			_click($sfm_pg_wo.btn_okPriceNotCalculated);
+		}		
+	};
 
 };
