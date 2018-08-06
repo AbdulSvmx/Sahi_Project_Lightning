@@ -651,7 +651,7 @@ var $sfm_act_Transactions = new function sfm_act_Transactions() {
 				_wait(10000,_isVisible($sfm_pg_screenDesigner.sel_comboField.near(_f("main").s_label("1"))));
 				
 				this.sfmAddExpressionRows($comboField, $comboConditions, $toggleButton, $comboInput, $advExpr, $errMsg);
-				this.sfmSvaeExpression($exprsnName, $exprsnName, $save);
+				this.sfmSvaeExpression($exprsnName, $exprsnName, "Save");
 
 			};			
 			
