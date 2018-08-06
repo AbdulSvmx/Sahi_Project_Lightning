@@ -68,13 +68,14 @@ $bo_act_navigation.navigateToCreatedRecordUsingGlobalSearch($wo_number);
 $sfm_act_createCustomWizard.clickWizardlinks($processName);
 _wait(3000);
 _selectDomain($domainName);
+//Enter header values and hit 'Quick Save'
 $sfm_act_SFM.fillHeaderTextValues($textLabelsArrayHeader,$textValuesArrayHeader);
 $sfm_act_SFM.fillHeaderPicklistValues($picklistLabelsArrayHeader,$picklistValuesArrayHeader);
 $sfm_act_SFM.selectToday($dateTimeField);
 $sfm_act_SFM.performQuickSave();
 
-$sfm_act_sfmDesigner.addChildLine("Parts");
-//Enter header values and hit 'Quick Save'
+
+
 
 
 
