@@ -164,10 +164,52 @@ var $sfm_act_SFM = new function sfm_act_SFM() {
 		}	
 	};
 	
+	//Fill text values in Extended Edit window for given text fields (Child Line Item) Author: Janaki
+	this.fillChildTextValues = function($labelsArray,$valuesArray){
+		var $i = 0;
+		for($i=0;$i<$textLabels.length;$i++){
+			_setValue(_textbox(0,_near(_label("/"+$labelsArray[$i]+"/"))),$valuesArray[$i]);
+		}
+	};
+	
+	//Fill text area values in Extended Edit for Child Line Item. Author : Janaki.
+	this.fillChildTextArea = function($labelsArray,$valuesArray){
+		var $i = 0;
+		for($i=0;$i<$textLabels.length;$i++){
+			_setValue(_textarea(0,_near(_label("/"+$labelsArray[$i]+"/"))),$valuesArray[$i]);
+		}
+	};
+	
+	//Fill picklist values in Extended Edit for Child line item. Author : Janaki.
+	this.fillChildPicklists =  function($pickListLabels,$pickListValues){
+	var $i = 0;
+	for($i = 0;$i<$pickListLabels.length;$i++){
+		_click(_div("/trigger-picker/",_near(_label("/"+$pickListLabels[$i]+"/"))));
+		_click(_listItem($pickListValues[$i]));
+	}
+	};
+	
+	//Select checkboxes in Extended Edit window. Author : Janaki
+	//Note: Checkbox values should be true or false
+	this.selectChildCheckBox = function($checkBoxLabels,$checkBoxValues){
+		var $i = 0;
+		for($i = 0;$i<$checkBoxLabels.length;$i++){
+			if($checkBoxValues[$i] === "true"){
+				_check(_checkbox("/sfm-checkbox/",_near(_label($checkBoxLabels[$i]))));
+			
+			}
+			else if($checkBoxValues[$i] === "false"){
+				_uncheck(_checkbox("/sfm-checkbox/",_near(_label($checkBoxLabels[$i]))));
+			}
+		}		
+	};
+ 
+	
+	
 	//Select today for a selected Date or Date/Time field.Author: Janaki.
 	this.selectToday = function($dateTimeField){
 	_click(_div("/svmx-date/",_near(_span($dateTimeField))));
-	_click(_span("Today"));
+	_click($sfm_pg_wo.link_today);
 	};
 	//Perform Quick Save in Lightning SFM Delivery.
 	this.performQuickSave = function(){
@@ -176,5 +218,37 @@ var $sfm_act_SFM = new function sfm_act_SFM() {
 			_click($sfm_pg_wo.btn_okPriceNotCalculated);
 		}		
 	};
-
+//Perform Product Search in WO child lines.This takes care of Multi line add as well.
+	this.performProductSearchInChildLine = function($productName){
+		_setStrictVisibilityCheck(true);
+		_setValue(_textbox("/sfm-text/",_leftOf(_link("Search"))),$productName);
+		_click($sfm_pg_wo.btn_productSearchChildLine);
+		if(_isVisible(_span("x-grid-checkcolumn",_leftOf(_div("/"+$productName+"/"))))) {
+		  _click(span("x-grid-checkcolumn",_leftOf(_div("/"+$productName+"/"))));	
+		  _click($sfm_pg_wo.btn_addProductChildLine);
+		}
+		else {
+		 _click(_link($productName));	
+		}
+	};
+	
+//Add new child line for Parts,labor,travel and expense.
+//This function can add new child line based on the input values given.
+//The fields given here should already be given in the screen designer.
+	this.addChildLine = function($lineType,$textLabels,$textValues,$pickListLabels,$pickListValues){
+		_click(_span($lineType));
+		_click(_span("+ Add "+$lineType));
+		_setStrictVisibilityCheck(true);
+		if(_isVisible(_div("Recent Items: Products"))){
+			this.performProductSearchInChildLine($productName);
+		}
+		var $x = _count("_row", "/.*/",_in(_div("/x-grid-item-container/")));
+		$x = $x-1;
+		_log($x);
+		_click(_div("x-action-col-icon x-action-col-0  x-sfmd-edit-icon["+$x+"]"));
+		_click(_span("Edit"));
+		//Input values in Extended Edit window.
+		
+		
+	};
 };
