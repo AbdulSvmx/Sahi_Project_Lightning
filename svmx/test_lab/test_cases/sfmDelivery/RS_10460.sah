@@ -16,7 +16,7 @@ $rs_10460.start();
 	var $exprsnName = $bo_act_common.generateRandomName("Exprsn");
 	var $exprsnSaveAsName = $bo_act_common.generateRandomName("RenameExp");
 	
-	$sfm_act_expressions.createCustomExpression($object, $comboField, $comboConditions, $toggleButton, $comboInput, $advExpr, $errMsg, $exprsnName)
+	$sfm_act_expressions.createCustomExpression($object, $comboField, $comboConditions, $toggleButton, $comboInput, $advExpr, $errMsg, $exprsnName);
 
 	$sfm_act_expressions.saveAsExprsn($exprsnSaveAsName);
 
