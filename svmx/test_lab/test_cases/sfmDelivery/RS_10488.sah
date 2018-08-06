@@ -1,4 +1,4 @@
-//@author Lakshmisha
+
 var $rs_10488 = _testcase("RS_10488","");
 $rs_10488.start();
 /**
