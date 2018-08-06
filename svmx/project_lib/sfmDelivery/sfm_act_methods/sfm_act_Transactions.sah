@@ -152,7 +152,7 @@ var $sfm_act_Transactions = new function sfm_act_Transactions() {
 			_click($bo_pg_sfmTransactionAndDesigner.btn_finalQuickSave);
 
 		};	
-
+/* commented this in lightning as it is done through generic function
 		this.clonedsfm6343 = function($processName,$sfmName,$sfmPgLayoutName,$dvrRuleName){
 			$sfm_act_SFM.selectSFM($processName,false);
 			_click($bo_pg_sfmTransactionAndDesigner.btn_clone);
@@ -195,7 +195,7 @@ var $sfm_act_Transactions = new function sfm_act_Transactions() {
 			_click($bo_pg_sfmTransactionAndDesigner.btn_finalQuickSave);
 			_wait(6000);
 //			_click($bo_pg_sfmTransactionAndDesigner.lbl_backToSetupHome);
-		};
+		}; */
 		
 	this.clonedsfm5348= function($processName,$sfmName,$sfmPgLayoutName,$dvrRuleName){
 		
