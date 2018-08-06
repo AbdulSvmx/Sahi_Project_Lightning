@@ -45,7 +45,7 @@ var $tech_pwd = "servicemax0";
 var $bac_PRTun = "bhupendra.auto@upgrade.com"; // Most Used Customer
 var $bac_PRTpwd = "servicemax@123";
 //var $group_profilename = "AutoBACGroup";
-var $group_profilename = "Cloned Profile";
+var $group_profilename = "auto group profile";
 
 // Checklist Global Variables
 var $un_checklist = $bac_un;// "meghana.rao@servicemax.com"; // Pointing to
