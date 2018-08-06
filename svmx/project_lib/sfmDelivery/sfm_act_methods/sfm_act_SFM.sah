@@ -150,9 +150,10 @@ var $sfm_act_SFM = new function sfm_act_SFM() {
 		for($i=0;$i<$labelsArray.length;$i++){
 			_setValue(_textbox(0,_near(_span($labelsArray[$i]))),$valuesArray[$i]);
 			
-		}
-		
+		}	
 	};
+	
+	
 	
 	//Fills picklist values in SFM Lightning Delivery screen.Author: Janaki
 	this.fillHeaderPicklistValues = function($labelsArray,$valuesArray){
@@ -203,7 +204,21 @@ var $sfm_act_SFM = new function sfm_act_SFM() {
 			}
 		}		
 	};
- 
+	
+	//Fill values for Date/Time fields for Child Line items. Author : Janaki
+	this.fillDateTimeFields = function($dateLabels,$dateValues,$timeValues){
+		for($i = 0;$i<$dateLabels.length;$i++){
+			_setValue(_textbox("/svmx-date/",_near(_label($dateLabels[$i]))),$dateValues[$i]);	
+			_setValue(_textbox("/svmx-time/",_near(_label($dateLabels[$i]))),$timeValues[$i]);	
+		}
+	};
+	
+  //Fill values for Date fields for Child Line items. Author: Janaki
+	this.fillDateFields = function($dateLabels,$dateValues){
+		for($i = 0;$i<$dateLabels.length;$i++){
+			_setValue(_textbox("/svmx-date/",_near(_label($dateLabels[$i]))),$dateValues[$i]);		
+		}
+	};
 	
 	
 	//Select today for a selected Date or Date/Time field.Author: Janaki.
@@ -233,9 +248,11 @@ var $sfm_act_SFM = new function sfm_act_SFM() {
 	};
 	
 //Add new child line for Parts,labor,travel and expense.
+//Author: Janaki
 //This function can add new child line based on the input values given.
 //The fields given here should already be given in the screen designer.
-	this.addChildLine = function($lineType,$textLabels,$textValues,$pickListLabels,$pickListValues){
+//Pass empty array as paramater "[]" if there are no such fields in that data type that needs to be filled
+	this.addChildLine = function($lineType,$productName,$textLabels,$textValues,$pickListLabels,$pickListValues,$textAreaLabels,$textAreaValues,$checkBoxLabels,$checkBoxValues,$dateLabels,$dateValues,$dateTimeLabels,$dateTimeDateValues,$timeValues){
 		_click(_span($lineType));
 		_click(_span("+ Add "+$lineType));
 		_setStrictVisibilityCheck(true);
@@ -248,7 +265,141 @@ var $sfm_act_SFM = new function sfm_act_SFM() {
 		_click(_div("x-action-col-icon x-action-col-0  x-sfmd-edit-icon["+$x+"]"));
 		_click(_span("Edit"));
 		//Input values in Extended Edit window.
-		
-		
+		_setStrictVisibilityCheck(true);
+		//Text values first
+		if($textLabels.length > 0) {
+			this.fillChildTextValues($textLabels,$textValues);
+		}
+		//Picklist values next..
+		if($pickListLabels.length > 0){
+			this.fillChildPicklists($pickListLabels, $pickListValues);
+		}
+		//Textarea fields
+		if($textAreaLabels.length > 0){
+			this.fillChildTextArea($textAreaLabels,$textAreaValues);
+		}
+		//Checkboxes
+		if($checkBoxLabels.length > 0){
+			this.selectChildCheckBox($checkBoxLabels, $checkBoxValues)
+		}
+		//Date fields
+		if($dateLabels.length > 0){
+			this.fillDateFields($dateLabels, $dateValues);
+		}
+		//Date/Time fields
+		if($dateTimeLabels.length > 0){
+			this.fillDateTimeFields($dateTimeLabels,$dateTimeDateValues,$timeValues);
+		}					
+		_click($sfm_pg_wo.btn_updateExtEdit);	
+	};
+
+//Function to verify values based on the input arrays given
+//Returns true or false based on the verification result.
+//Text,Picklist and Date fields can be combined into a single array
+//Time field of Date/Time fields should be given as separate array with the same label
+//Text area should be given as a separate array
+//Checkboxes should be given as separate array.
+//Pass empty arrays "[]" as parameters if nothing of that data type needs to be verified.
+// Author: Janaki
+	
+
+this.verifyValuesInDelivery = function($textPicklistDateLabels,$textPicklistDateExpValues,$timeLabels,$timeExpValues,$textAreaLabels,$textAreaExpvalues,$checkBoxLabels,$checkBoxExpValues){
+	
+	 var $x = _count("_row", "/.*/",_in(_div("/x-grid-item-container/")));
+	 $x = $x-1;
+	_log($x);
+	_click(_div("x-action-col-icon x-action-col-0  x-sfmd-edit-icon["+$x+"]"));
+	_click(_span("Edit"));
+	//Call individual functions to verify values of various data types
+	var $resultList = [];
+	//First text and picklists
+	if(textPicklistDateLabels.length > 0){
+		$resultList.push(this.verifyTextPicklistValues($textPicklistDateLabels, $textPicklistDateExpValues));
+	}
+	if($timeLabels.length > 0){
+		$resultList.push(this.verifyTimeValues($timeLabels,$timeExpValues));
+	}
+	if($textAreaLabels.length > 0){
+		$resultList.push(this.verifyTextAreaValues($textAreaLabels,$textAreaExpvalues));
+	}
+	if($checkBoxLabels.length > 0){
+		$resultList.push(this.verifyCheckBoxValues($checkBoxLabels,$checkBoxExpValues));
+	}
+	//Consolidate results and send to main calling function
+	var $finalResult = $resultList.indexOf("false");
+	if($finalResult == -1){
+		return true;
+	}
+	else {
+		return false;
+	}
+};
+	
+	
+
+	this.verifyTextPicklistValues = function($textPicklistDateLabels,$textPicklistDateExpValues){
+		//Verifies text and picklist values
+		var $i = 0; var $actualList = [];
+		for($i=0;$i<$textPicklistDateLabels.length;$i++){
+		 		$actualList.push(_getValue(_textbox(0,_near(_label($textPicklistDateLabels[$i])))));
+			}
+		if(_areEqual($textPicklistDateExpValues,$actualList)){
+			_log("Text , Picklist values match");
+			return true;
+		}
+		else
+			{
+			_log("Text , Picklist values do not match");
+				return false;
+			}
+	};
+	
+	this.verifyTimeValues = function($timeLabels,$timeExpValues) {
+		var $i = 0; var $actualList = [];
+		for($i=0;$i<$timeLabels.length;$i++){
+		 		$actualList.push(_getValue(_textbox(1,_near(_label($timeLabels[$i])))));
+			}
+		if(_areEqual($textPicklistDateExpValues,$actualList)){
+			_log("Time values match");
+			return true;
+		}
+		else
+			{
+			_log("Time values do not match");
+				return false;
+			}	
+	};
+	this.verifyTextAreaValues = function($textAreaLabels,$textAreaExpvalues){
+		var $i = 0; var $actualList = [];
+		for($i=0;$i<$textAreaLabels.length;$i++){
+		 		$actualList.push(_getValue(_textarea(0,_near(_label($textAreaLabels[$i])))));
+			}
+		if(_areEqual($textPicklistDateExpValues,$actualList)){
+			_log("Text area values match");
+			return true;
+		}
+		else
+			{
+			_log("Text area values do not match");
+				return false;
+			}	
+	};
+	
+	this.verifyCheckBoxValues =  function($checkBoxLabels,$checkBoxExpValues){
+		var $i = 0; var $actualList = [];
+		var $x;
+		for($i=0;$i<$checkBoxLabels.length;$i++){
+			$x = _condition(_checkbox(0,_near(_label("Is Billable"))).checked );
+			$actualList.push($x);
+		}
+		if(_areEqual($checkBoxExpValues,$actualList)){
+			_log("CheckBox values match");
+			return true;
+		}
+		else
+			{
+			_log("Checkbox values do not match");
+				return false;
+			}	
 	};
 };

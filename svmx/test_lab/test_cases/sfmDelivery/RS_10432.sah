@@ -1,5 +1,5 @@
 var $RS_10432 = _testcase("RS_10432","Verify current record header literals in map");
-RS_10432.start();
+$RS_10432.start();
 //Variables used
 var $object_name = "Work Order";
 var $ctrlPicklist = "Order Status";
@@ -10,11 +10,10 @@ var $isCustom = false;
 var $ctr = 0;
 var $i = 0;
 var $success_message = "Work Order was saved.";
-var $containerName = ["Order Status","Order Status","Order Status","Order Status","Parts","Labor"];
-var $fieldName=["City","Estimated Duration","Country","Scheduled Date Time","Received Country","Received City"];
+var $containerName = ["Order Status","Order Status","Order Status","Order Status","Parts","Parts","Parts","Labor","Labor","Labor"];
+var $fieldName=["City","Estimated Duration","Country","Scheduled Date Time","Received Country","Line Type","Record Type ID","Received City","Line Type","Record Type ID"];
 var $z = 0;
 var $fields_array = [];
-$fields_array.push($dependentPicklist);
 var $currentWizardName = $wizardName[4];
 var $success_message = "Work Order was saved.";
 var $stdMap = "SVMXSTD: Close Work Order";
@@ -71,39 +70,37 @@ _selectDomain($domainName);
 //Enter header values and hit 'Quick Save'
 $sfm_act_SFM.fillHeaderTextValues($textLabelsArrayHeader,$textValuesArrayHeader);
 $sfm_act_SFM.fillHeaderPicklistValues($picklistLabelsArrayHeader,$picklistValuesArrayHeader);
-$sfm_act_SFM.selectToday($dateTimeField);
+$sfm_act_SFM.fillDateTimeFields(["Scheduled Date Time"],["8/6/2018"],["1:30 PM"]);
+//$sfm_act_SFM.selectToday($dateTimeField);
 $sfm_act_SFM.performQuickSave();
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-RS_10432.end();
+var $textLabels = ["Line Qty"];
+var $textValues = ["365"];
+var $pickListLabels = ["Line Type","Record Type"];
+var $pickListValues = ["Parts","Usage/Consumption"];
+var $textAreaLabels = [];
+var $textAreaValues = [];
+var $checkBoxLabels = [];
+var $checkBoxValues = [];
+var $dateLabels = [];
+var $dateValues = [];
+var $dateTimeLabels = [];
+var $dateTimeDateValues = [];
+var $timeValues = [];
+$sfm_act_SFM.addChildLine("Parts",$productName, $textLabels, $textValues, $pickListLabels, $pickListValues, $textAreaLabels, $textAreaValues, $checkBoxLabels, $checkBoxValues, $dateLabels, $dateValues, $dateTimeLabels, $dateTimeDateValues, $timeValues);
+$sfm_act_SFM.performQuickSave();
+var $textPicklistDateLabels = ["Billable Qty","Received Country"];
+var $textPicklistDateExpValues = ["45","India"];
+var $verifyResult1 = $sfm_act_SFM.verifyValuesInDelivery($textPicklistDateLabels, $textPicklistDateExpValues,[],[],[],[],[],[]);
+$pickListValues = ["Labor","Usage/Consumption"];
+$sfm_act_SFM.addChildLine("Labor",$productName,[],[], $pickListLabels, $pickListValues,[],[],[],[],[],[],[],[],[]);
+$textPicklistDateLabels = ["Start Date and Time","Received City"];
+$textPicklistDateExpValues = ["8/6/2018","Bengaluru"];
+$verifyResult2 = $sfm_act_SFM.verifyValuesInDelivery($textPicklistDateLabels,$textPicklistDateExpValues,["Start Date and Time"],["1:30 PM"],[],[],[],[]);
+$verifyResult = $verifyResult1 && $verifyResult2;
+if($verifyResult){
+	_log("PASS: Current Header literals are verified in mapping");
+}
+else {
+	_log("FAIL:Current Header literals failed in mapping");
+}
+$RS_10432.end();

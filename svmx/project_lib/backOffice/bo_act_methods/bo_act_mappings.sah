@@ -31,7 +31,9 @@ var $bo_act_mappings = new function bo_act_mappings() {
 		}
 		//Set all the text values
 		$i = 0;
-		_click($sfm_pg_sfmMapping.btn_toggleMapOnOff);
+		if($pickListLabels.length > 0) {
+		 _click($sfm_pg_sfmMapping.btn_toggleMapOnOff);
+		}
 		if($textLabels.length > 0){
 		for($i=0;$i<$textLabels.length;$i++){
 			_setValue(_f("main").s_textinput("textip").rightOf(_f("main").ftedatagriditemrenderer($textLabels[$i])),$textValues[$i]);
@@ -125,7 +127,7 @@ var $bo_act_mappings = new function bo_act_mappings() {
 		_selectDomain($domainName);
 		_setSelected($sfm_pg_sfmMapping.cmb_mappingComboBox,$mapName);
 		_wait(5000);
-		var $temp = _getValue($sfm_pg_sfmMapping.txt_mappingName);
+		var $temp = _getValue($sfm_pg_sfmMapping.txt_mappingNameInBuilder);
 		if($temp === "Use an existing map") {
 			_log("Mapping $mapName does not exist...Aborting");
 			return 0;	
