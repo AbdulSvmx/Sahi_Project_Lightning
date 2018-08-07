@@ -21,13 +21,20 @@ var $bo_act_mappings = new function bo_act_mappings() {
 			_click(_f("main").s_togglebutton("I want to choose a field from the list").rightOf(_f("main").ftedatagriditemrenderer($pickListLabels[$i])));
 			_setSelected(_f("main").s_combobox("valuesCombo").rightOf(_f("main").ftedatagriditemrenderer($pickListLabels[$i])),$pickListValues[$i]);
 		}
-		_setValue($sfm_pg_sfmMapping.txt_mappingName,$mapName);
-		_setValue($sfm_pg_sfmMapping.txt_mappingId,$mapName);
+		if($containerName === "Work Order"){
+			_setValue($sfm_pg_sfmMapping.txt_mappingNameForExisting,$mapName);
+			_setValue($sfm_pg_sfmMapping.txt_mappingIdForExisting,$mapName);
+		}
+		else {
+			_setValue($sfm_pg_sfmMapping.txt_mappingNameForNew,$mapName);
+			_setValue($sfm_pg_sfmMapping.txt_mappingIdForNew,$mapName);
+		}
+		
 		_click($sfm_pg_sfmMapping.btn_saveMappingExistingRecord);
 		if(_isVisible(_f("main").button("OK"))){
 			_click(_f("main").button("OK"));
 		}
-		_setSelected($sfm_pg_sfmMapping.btn_selectExistingMap,$mapName);
+		//_setSelected($sfm_pg_sfmMapping.btn_selectExistingMap,$mapName);
 		}
 		//Set all the text values
 		$i = 0;
@@ -42,11 +49,17 @@ var $bo_act_mappings = new function bo_act_mappings() {
 		  _click($sfm_pg_sfmMapping.btn_saveMappingExistingRecord);
 		}
 		else {
-			_setValue($sfm_pg_sfmMapping.txt_mappingName,$mapName);
-			_setValue($sfm_pg_sfmMapping.txt_mappingId,$mapName);
-			_click($sfm_pg_sfmMapping.btn_saveMappingExistingRecord);
+				if($containerName === "Work Order"){
+					_setValue($sfm_pg_sfmMapping.txt_mappingNameForExisting,$mapName);
+					_setValue($sfm_pg_sfmMapping.txt_mappingIdForExisting,$mapName);
+				}
+				else {
+						_setValue($sfm_pg_sfmMapping.txt_mappingNameForNew,$mapName);
+						_setValue($sfm_pg_sfmMapping.txt_mappingIdForNew,$mapName);
+						_click($sfm_pg_sfmMapping.btn_saveMappingExistingRecord);
+				   }
 		}
-		_setSelected($sfm_pg_sfmMapping.btn_selectExistingMap,$mapName);
+		//_setSelected($sfm_pg_sfmMapping.btn_selectExistingMap,$mapName);
 		}
 		_click($bo_pg_sfmTransactionAndDesigner.btn_quickSave1);
 		_selectDomain();
