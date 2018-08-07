@@ -229,6 +229,7 @@ var $sfm_act_SFM = new function sfm_act_SFM() {
 	//Perform Quick Save in Lightning SFM Delivery.
 	this.performQuickSave = function(){
 		_click($sfm_pg_wo.btn_quickSave);
+		_wait(3000);
 		if(_isVisible($sfm_pg_wo.btn_okPriceNotCalculated)){
 			_click($sfm_pg_wo.btn_okPriceNotCalculated);
 		}		
