@@ -110,8 +110,8 @@ _click($sfm_pg_sfmDesigner.btn_eeUpdate);
 $sfm_act_sfmDesigner.addChildLine("Travel");
 _setValue($sfm_pg_sfmDesigner.txt_eeLineQty,"6");
 _setValue($sfm_pg_sfmDesigner.txt_eeReceivedStreet,"MG Road");
-_setValue($sfm_pg_sfmDesigner.txt_eeStartDateTime,$bo_act_common.currentDate("/"));
-_setValue($sfm_pg_sfmDesigner.txt_eeEndDateTime,$bo_act_common.getPastDate("1", "/"));
+_setValue($sfm_pg_sfmDesigner.txt_eeStartDateTime,$bo_act_common.currentDate("\/"));
+_setValue($sfm_pg_sfmDesigner.txt_eeEndDateTime,$bo_act_common.getPastDate("1", "\/"));
 _click($sfm_pg_sfmDesigner.btn_eeUpdate);
 
 _click($sfm_pg_sfmDesigner.btn_deliveryQuickSave);
@@ -180,7 +180,7 @@ _click($sfm_pg_sfmDesigner.btn_eeUpdate);
 
 _click($sfm_pg_sfmDesigner.btn_deliveryTravelTab);
 $sfm_act_sfmDesigner.navToExtendedEdit();;
-_setValue($sfm_pg_sfmDesigner.txt_eeEndDateTime,$bo_act_common.currentDate("/"));
+_setValue($sfm_pg_sfmDesigner.txt_eeEndDateTime,$bo_act_common.currentDate("\/"));
 _click($sfm_pg_sfmDesigner.btn_eeUpdate);
 _click($sfm_pg_sfmDesigner.btn_deliveryQuickSave);
 	if(_isVisible(_div("/"+"Labor: "+$ruleDescription2+"/"))){
