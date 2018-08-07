@@ -99,8 +99,10 @@ var $sfm_pg_wo = new function sfm_pg_wo() {
     this.btn_cancelExtendedEdit = _span("/Cancel/");
     this.btn_quickSave = _span("Quick Save");
     this.btn_okPriceNotCalculated = _span("Ok");
-    
-	
+    this.btn_productSearchChildLine = _link("Search");
+    this.btn_addProductChildLine = _span("Add");
+    this.btn_updateExtEdit = _span("Update");
+	this.link_today = _span("Today");
 	this.openAppLauncher = function(){
 		_wait(5000,_submit("App Launcher"));
 		if(_isVisible(_submit("App Launcher"))){
