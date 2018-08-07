@@ -49,7 +49,7 @@ _wait(15000,_div("RS_10488_78201861231"));
 // check whether DVR gets triggered or not when condition is met
 _setValue($sfm_pg_sfmDesigner.txt_city,"M");
 //_click(_span("svmx-btn-icon svmx-sfmd-current-datetime-icon"));
-var $pastDate=$bo_act_common.getPastDate("1", "\/");
+var $pastDate=$bo_act_common.getPastDate("0", "\/");
 _setValue($sfm_pg_sfmDesigner.txt_acutalIntialResponse, $pastDate);
 	_click($sfm_pg_sfmDesigner.btn_deliveryQuickSave);
 
