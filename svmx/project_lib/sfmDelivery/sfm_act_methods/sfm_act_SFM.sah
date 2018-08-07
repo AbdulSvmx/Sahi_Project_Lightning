@@ -240,7 +240,7 @@ var $sfm_act_SFM = new function sfm_act_SFM() {
 		_setValue(_textbox("/sfm-text/",_leftOf(_link("Search"))),$productName);
 		_click($sfm_pg_wo.btn_productSearchChildLine);
 		if(_isVisible(_span("x-grid-checkcolumn",_leftOf(_div("/"+$productName+"/"))))) {
-		  _click(span("x-grid-checkcolumn",_leftOf(_div("/"+$productName+"/"))));	
+		  _click(_span("x-grid-checkcolumn",_leftOf(_div("/"+$productName+"/"))));	
 		  _click($sfm_pg_wo.btn_addProductChildLine);
 		}
 		else {

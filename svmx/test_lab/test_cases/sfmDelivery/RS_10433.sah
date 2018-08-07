@@ -1,0 +1,82 @@
+var $RS_10433 = _testcase("RS_10433","Verify current record literals in map");
+$RS_10433.start();
+//Variables used
+var $object_name = "Work Order";
+var $ctrlPicklist = "Order Status";
+var $processName = "RS_10433";
+var $process_to_clone = "Manage Work Order Lines - Usage";
+var $sfmTemplate = "SVMXSTD: Manage WO Usage Lines";
+var $isCustom = false;
+var $ctr = 0;
+var $i = 0;
+var $containerName = ["Order Status","Order Status","Order Status","Order Status","Order Status","Order Status"];
+var $fieldName=["City","Booked Appointment Slot","Previous Scheduled Date Time","Scheduled Date Time","Dispatch Priority","Estimated Duration"];
+var $currentWizardName = $wizardName[4];
+var $success_message = "Work Order was saved.";
+var $stdMap = "SVMXSTD: Close Work Order";
+var $pickListLabels = [];
+var $pickListValues = [];
+var $textLabels = ["City","Scheduled Date Time","Estimated Duration"];
+var $textValues = ["SVMX.CURRENTRECORD.SVMXC__City__c","SVMX.CURRENTRECORDHEADER.SVMXC__SM_Estimated_Duration__c"];
+var $inputTextLabels = ["Booked Appointment Slot","Dispatch Priority"];
+var $inputTextValues = ["Bengaluru Sahi Pro","589"];
+var $inputDateTimeLabels = ["Previous Scheduled Date Time"];
+var $inputDateValues = ["04/11/2018"];
+var $inputTimeValues = ["1:30 PM"];
+
+//Appending current timestamp to process name to make it unique.
+var $timeStamp = $bo_act_navigation.getCurrentTimeStamp();
+$processName = $processName + "_" + $timeStamp;
+var $pageLayoutName = $processName + "pg";
+var $mapName = $processName + "mp";
+
+//**************************************************************************************
+//Login and switch to lightning
+//$bo_act_login.login($g_url,$bac_un,$bac_pwd);
+$bo_act_login.login($g_url,$sfmUsn,$sfmPwd);
+$sfm_act_lightningConfig.switchToLightning();
+
+//Navigate to servicemax setup and setup required process.
+//Clone standard process and add the dependent picklist in the screen designer
+_setSpeed(3000);
+$sfm_act_SFM.cloneTDM016($process_to_clone,$processName,$isCustom,$pageLayoutName, $sfmTemplate, $fieldName, $containerName);
+_click($bo_pg_sfmTransactionAndDesigner.btn_quickSave1);
+_click($bo_pg_sfmTransactionAndDesigner.btn_qualifyingCriteriaAndFieldMapping);
+
+//Set up the mapping with SVMX.CURRENTRECORD literals for Header
+$bo_act_mappings.createMapping("Work Order",$pickListLabels,$pickListValues,$textLabels,$textValues,$mapName);
+
+_setSpeed(1000);
+//Add the custom process to SFM wizard.
+$sfm_act_wizards.addToWizard($object_name,$currentWizardName,"SFM",$processName);
+_selectDomain();
+_setSpeed(1000);
+//Create a work order
+var $wo_number = $sfm_act_createCustomWizard.createWowithdateliterals();
+$bo_act_navigation.navigateToCreatedRecordUsingGlobalSearch($wo_number);
+
+//Launch the process in SFM Delivery
+$sfm_act_createCustomWizard.clickWizardlinks($processName);
+_wait(3000);
+_selectDomain($domainName);
+
+//Enter values for Booked Appointment Slot, Previous Scheduled Date Time and Dispatch Priority
+$sfm_act_SFM.fillHeaderTextValues($inputTextLabels ,$inputTextValues);
+$sfm_act_SFM.fillDateTimeFields($inputDateTimeLabels,$inputDateValues,$inputTimeValues);
+$sfm_act_SFM.performQuickSave();
+
+//Combine text and date fields
+for($i=0;$i<$inputDateTimeLabels.length;$i++){
+	$inputTextLabels.push($inputDateTimeLabels[$i]);
+	$inputTextValues.push($inputDateValues[$i]);
+}
+//Verify values for the rest of the fields
+var $verifyResult = $sfm_act_SFM.verifyValuesInDelivery($inputTextLabels,$inputTextValues,$inputDateTimeLabels,$inputTimeValues,[],[],[],[]);
+if($verifyResult){
+	_log("PASS: Current Record literals are verified in mapping");
+}
+else {
+	_log("FAIL:Current Record literals failed in mapping");
+}
+
+$RS_10433.end();
