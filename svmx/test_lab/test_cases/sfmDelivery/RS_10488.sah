@@ -65,6 +65,8 @@ _setValue($sfm_pg_sfmDesigner.txt_acutalIntialResponse,"");
 //_setValue($sfm_pg_sfmDesigner.txt_acutalIntialResponse, $bo_act_common.currentDate("\/"));
 $sfm_act_SFM.selectToday("Actual Initial Response");
 _wait(3000);
+_getText($sfm_pg_sfmDesigner.txt_acutalIntialResponse);
+_click($sfm_pg_sfmDesigner.txt_city);
 _click($sfm_pg_sfmDesigner.btn_deliveryQuickSave);
 if(_isVisible(_div("/"+$ruleDescription+"/"))){
 	_log("Fail ::: DVR on header is triggered when not supposed to be","FAILURE");
