@@ -62,6 +62,7 @@ _wait(5000);
 
 //check whether DVR gets triggered or not when condition is  not met
 _setValue($sfm_pg_sfmDesigner.txt_acutalIntialResponse, $bo_act_common.currentDate("\/"));
+_wait(3000);
 _click($sfm_pg_sfmDesigner.btn_deliveryQuickSave);
 if(_isVisible(_div("/"+$ruleDescription+"/"))){
 	_log("Fail ::: DVR on header is triggered when not supposed to be","FAILURE");
