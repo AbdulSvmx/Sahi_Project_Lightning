@@ -44,7 +44,7 @@ $sfm_act_createCustomWizard.createWowithoutvalues();
 
 _click(_span("RS_10488_78201861231"));
 _selectDomain($domainName);
-_wait(8000,_div("RS_10488_78201861231"));
+_wait(15000,_div("RS_10488_78201861231"));
 
 // check whether DVR gets triggered or not when condition is met
 _setValue($sfm_pg_sfmDesigner.txt_city,"M");
