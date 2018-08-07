@@ -122,7 +122,7 @@ else{
 
 //Validate Actual onsite response= Today
 
-if(_getText($sfm_pg_sfmDesigner.txt_actualOnsiteResponse)==$bo_act_common.currentDate("/")){
+if(_getText($sfm_pg_sfmDesigner.txt_actualOnsiteResponse)==$bo_act_common.currentDate("\/")){
 	_log("Pass :::  Actual onsite response= Today ");
 	}
 else{

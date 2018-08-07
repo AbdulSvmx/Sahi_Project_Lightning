@@ -223,7 +223,7 @@ var $sfm_act_SFM = new function sfm_act_SFM() {
 	
 	//Select today for a selected Date or Date/Time field.Author: Janaki.
 	this.selectToday = function($dateTimeField){
-	_click(_div("/svmx-date/",_near(_span($dateTimeField))));
+	_click(_div("/trigger-picker/",_near(_span($dateTimeField))));
 	_click($sfm_pg_wo.link_today);
 	};
 	//Perform Quick Save in Lightning SFM Delivery.
