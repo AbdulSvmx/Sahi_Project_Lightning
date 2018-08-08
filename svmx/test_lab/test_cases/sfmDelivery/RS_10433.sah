@@ -71,7 +71,9 @@ for($i=0;$i<$inputDateTimeLabels.length;$i++){
 	$inputTextValues.push($inputDateValues[$i]);
 }
 //Verify values for the rest of the fields
-$inputTextLabels = $inputTextValues.push($inputDateValues);
+for($i=0;$i<$inputDateValues.length;$i++){
+	$inputTextValues.push($inputDateValues[$i]);
+}
 var $verifyResult = $sfm_act_SFM.verifyValuesInDelivery($mapTextValues,$inputTextValues,$inputDateTimeLabels,$inputTimeValues,[],[],[],[]);
 _assertTrue($verifyResult);
 if($verifyResult){
