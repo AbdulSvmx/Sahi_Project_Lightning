@@ -186,6 +186,9 @@ var $sfm_act_SFM = new function sfm_act_SFM() {
 	var $i = 0;
 	for($i = 0;$i<$pickListLabels.length;$i++){
 		_click(_div("/trigger-picker/",_near(_label("/"+$pickListLabels[$i]+"/"))));
+		if(!_isVisible(_listItem($pickListValues[$i]))) {
+			_click(_div("/trigger-picker/",_near(_label("/"+$pickListLabels[$i]+"/"))));
+		}
 		_click(_listItem($pickListValues[$i]));
 	}
 	};
@@ -291,7 +294,7 @@ var $sfm_act_SFM = new function sfm_act_SFM() {
 		if($dateTimeLabels.length > 0){
 			this.fillDateTimeFields($dateTimeLabels,$dateTimeDateValues,$timeValues);
 		}					
-		_click($sfm_pg_wo.btn_updateExtEdit);	
+	 _click($sfm_pg_wo.btn_updateExtEdit);	
 	};
 
 //Function to verify values based on the input arrays given
@@ -314,7 +317,7 @@ this.verifyValuesInDelivery = function($textPicklistDateLabels,$textPicklistDate
 	//Call individual functions to verify values of various data types
 	var $resultList = [];
 	//First text and picklists
-	if(textPicklistDateLabels.length > 0){
+	if($textPicklistDateLabels.length > 0){
 		$resultList.push(this.verifyTextPicklistValues($textPicklistDateLabels, $textPicklistDateExpValues));
 	}
 	if($timeLabels.length > 0){
@@ -343,6 +346,8 @@ this.verifyValuesInDelivery = function($textPicklistDateLabels,$textPicklistDate
 		var $i = 0; var $actualList = [];
 		for($i=0;$i<$textPicklistDateLabels.length;$i++){
 		 		$actualList.push(_getValue(_textbox(0,_near(_label($textPicklistDateLabels[$i])))));
+		 		_log("Expected Value : "+$textPicklistDateExpValues[$i]);
+		 		_log("Actual Value : "+$actualList[$i]);
 			}
 		if(_areEqual($textPicklistDateExpValues,$actualList)){
 			_log("Text , Picklist values match");
@@ -359,6 +364,8 @@ this.verifyValuesInDelivery = function($textPicklistDateLabels,$textPicklistDate
 		var $i = 0; var $actualList = [];
 		for($i=0;$i<$timeLabels.length;$i++){
 		 		$actualList.push(_getValue(_textbox(1,_near(_label($timeLabels[$i])))));
+		 		_log("Expected Value : "+$timeExpValues[$i]);
+		 		_log("Actual Value : "+$actualList[$i]);
 			}
 		if(_areEqual($textPicklistDateExpValues,$actualList)){
 			_log("Time values match");
@@ -374,6 +381,8 @@ this.verifyValuesInDelivery = function($textPicklistDateLabels,$textPicklistDate
 		var $i = 0; var $actualList = [];
 		for($i=0;$i<$textAreaLabels.length;$i++){
 		 		$actualList.push(_getValue(_textarea(0,_near(_label($textAreaLabels[$i])))));
+		 		_log("Expected Value : "+$textAreaExpvalues[$i]);
+		 		_log("Actual Value : "+$actualList[$i]);
 			}
 		if(_areEqual($textPicklistDateExpValues,$actualList)){
 			_log("Text area values match");
@@ -392,6 +401,8 @@ this.verifyValuesInDelivery = function($textPicklistDateLabels,$textPicklistDate
 		for($i=0;$i<$checkBoxLabels.length;$i++){
 			$x = _condition(_checkbox(0,_near(_label("Is Billable"))).checked );
 			$actualList.push($x);
+			_log("Expected Value : "+$checkBoxExpValues[$i]);
+	 		_log("Actual Value : "+$actualList[$i]);
 		}
 		if(_areEqual($checkBoxExpValues,$actualList)){
 			_log("CheckBox values match");
