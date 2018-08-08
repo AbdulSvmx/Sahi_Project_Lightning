@@ -106,4 +106,9 @@ if($verifyResult){
 else {
 	_log("FAIL:Current Header literals failed in mapping");
 }
+_click($sfm_pg_wo.btn_cancelForSfmDelivery);
+_click($sfm_pg_wo.btn_proceedForCancel);
+_setStrictVisibilityCheck(false);
+_selectDomain();
+$sfm_act_lightningConfig.logoutInLightning();
 $RS_10432.end();

@@ -145,4 +145,16 @@ this.createWorkDetailInLightning = function($recordType,$lineType){
 	return $lineNumber;
 };
 
+this.clearServicemaxCache = function(){
+	//This function clears servicemax cache in Lightning
+	//Author: Janaki
+	if(_isVisible($sfm_pg_wo.btn_arrowNextToGetPrice)){
+		_click($sfm_pg_wo.btn_arrowNextToGetPrice);
+	}
+	else {
+		    _click($sfm_pg_wo.btn_arrowNextToUserSettings);
+	}
+	_click($sfm_pg_wo.link_clearSvmxCache);
+	_wait(4000);
+	};
 };

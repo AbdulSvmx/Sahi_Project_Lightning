@@ -349,14 +349,16 @@ this.verifyValuesInDelivery = function($textPicklistDateLabels,$textPicklistDate
 		 		_log("Expected Value : "+$textPicklistDateExpValues[$i]);
 		 		_log("Actual Value : "+$actualList[$i]);
 			}
+		_log($textPicklistDateExpValues);
+		_log($actualList);
 		if(_areEqual($textPicklistDateExpValues,$actualList)){
 			_log("Text , Picklist values match");
 			return true;
 		}
 		else
 			{
-			_log("Text , Picklist values do not match");
-				return false;
+			 _log("Text , Picklist values do not match");
+			 return false;
 			}
 	};
 	
@@ -367,13 +369,15 @@ this.verifyValuesInDelivery = function($textPicklistDateLabels,$textPicklistDate
 		 		_log("Expected Value : "+$timeExpValues[$i]);
 		 		_log("Actual Value : "+$actualList[$i]);
 			}
+		_log($timeExpValues);
+		_log($actualList);
 		if(_areEqual($textPicklistDateExpValues,$actualList)){
 			_log("Time values match");
 			return true;
 		}
 		else
 			{
-			_log("Time values do not match");
+			    _log("Time values do not match");
 				return false;
 			}	
 	};
@@ -384,6 +388,8 @@ this.verifyValuesInDelivery = function($textPicklistDateLabels,$textPicklistDate
 		 		_log("Expected Value : "+$textAreaExpvalues[$i]);
 		 		_log("Actual Value : "+$actualList[$i]);
 			}
+		_log($textAreaExpvalues);
+		_log($actualList);
 		if(_areEqual($textPicklistDateExpValues,$actualList)){
 			_log("Text area values match");
 			return true;
@@ -404,6 +410,8 @@ this.verifyValuesInDelivery = function($textPicklistDateLabels,$textPicklistDate
 			_log("Expected Value : "+$checkBoxExpValues[$i]);
 	 		_log("Actual Value : "+$actualList[$i]);
 		}
+		_log($checkBoxExpValues);
+		_log($actualList);
 		if(_areEqual($checkBoxExpValues,$actualList)){
 			_log("CheckBox values match");
 			return true;
