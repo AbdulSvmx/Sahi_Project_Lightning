@@ -64,7 +64,7 @@ var $sfmPwd = "Maxplore4";
  var $domainName = "/svmx/";
 
  var $wizardName = ["SFMDAuto_Ltng_DVR", "SFMDAuto_Ltng_WebServices","SFMDAuto_Ltng_Process","SFMDAuto_Ltng_LookUP","SFMDAuto_Ltng_Mappings",
-                     "SFMDAuto_Ltng_Formula","SFMDAuto_Ltng_Expression"];
+                     "SFMDAuto_Ltng_Formula","SFMDAuto_Ltng_Expression","SFMAuto_Ltng_Wizards"];
  var $wizardType = ["None","SFM","Inventory","Others","Output Document"];
 
 // DC Global Variables
