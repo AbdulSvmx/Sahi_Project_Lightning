@@ -14,6 +14,13 @@ var $sfm_pg_wizardWindow = new function sfm_pg_wizardWindow(){
 	this.lkp_contact = _div("/search/",_near(_span("Contact"))); //Changed for Lightning
 	this.lbl_contactLookup = _label(0,_near(_span("/checkbox/"))); //Changed for Lightning
 	
+	this.btn_addProduct = _span("Add",_in(_div("/sfm-lightninglookupslidingwindow/"))); //added for lightning
+	this.btn_cancelProduct = _span("Cancel",_in(_div("/sfm-lightninglookupslidingwindow/")));  //added for lightning
+	this.btn_searchProduct = _span("Search",_in(_div("/sfm-lightninglookupslidingwindow/")));  //added for lightning
+	this.txt_account = _textbox("/svmx-text/",_near(_span("Account")));
+	this.link_productServiced = _span("+ Add Products Serviced"); //added for lightning
+	this.lookup_part= _div("/search/",_near(_span("Part",_in(_div("/sfm-window/")))));//added for lightning - use with strictVisibility in extended edit modal window
+	
 	
 	
 	this.txt_site=_textbox(0,_rightOf(_label("/Site/")));
@@ -36,7 +43,7 @@ var $sfm_pg_wizardWindow = new function sfm_pg_wizardWindow(){
 	this.txt_startDate= _textbox(0,_near(_label("Start Date and Time:[1]")));
 	this.txt_endDate= _textbox(0,_near(_label("End Date and Time:[1]")));
 	this.btn_save= _span("/save-icon/");
-	this.btn_quickSave= _span("/quicksave-icon/");
+	this.btn_quickSave= _span("Quick Save",_leftOf(_span("User Settings"))); //Changed for Lightning
 	this.btn_cancel= _span("Cancel");//Changed for Lightning
 //	this.lookup_autoContact= _span("/lookup_icon/",_rightOf(_label("AutoContact:")));
 	this.lookup_autoContact= _span("/lookup_icon/",_near(_label("AutoContact:")));
@@ -44,9 +51,9 @@ var $sfm_pg_wizardWindow = new function sfm_pg_wizardWindow(){
 	this.btn_select= _span("Select");
 	this.txt_autoContact = _div("/svmx-grid-cell-inner/",_under(_div("AutoContact")));
 	this.lkp_account = _div("/svmx-button/",_rightOf(_textbox(0,_rightOf(_label("Account:")))));
-	this.sel_billingType = _textbox("Billing Type:");
+	this.sel_billingType = _textbox("Billing Type"); //updated for lightning
 	this.errorMsg = _div("/error-detail/",_near(_span("Error Details")));
-	this.chk_multiSelect = _span("/svmx-column-header-text/",_leftOf(_span("Product Name")));
+	this.chk_multiSelect = _span("x-column-header-checkbox",_in(_div("/sfm-lightninglookupslidingwindow/"))); //updated for lightning
 	this.lkp_search = _textbox(1,_near(_span("/search-icon/")));
 	this.btn_bubble = _image("/bubble-icon/");
 	this.lbl_product = _div(0,_near(_label("Product Name:")));
@@ -58,7 +65,6 @@ var $sfm_pg_wizardWindow = new function sfm_pg_wizardWindow(){
 	this.btn_recentItemsCancel = _span("/Cancel/",_near(_span("Recent Items: Contacts")));
 	this.lookup_PartsOrder = _span("/lookup_icon/",_rightOf(_label("Parts Order:")));
 	this.btn_proceed = _span("Proceed");
-	this.lookup_Part = _span("/lookup_icon/",_rightOf(_label("/Part:/")));
 //	this.txt_part = _div("/svmx-grid-cell-inner/",_under(_div("Part")));
 	
 	

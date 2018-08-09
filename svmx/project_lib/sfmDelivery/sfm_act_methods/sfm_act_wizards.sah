@@ -5,7 +5,7 @@
 var $sfm_act_wizards = new function sfm_act_wizards() {
 	
 	//function to create or add step to wizard
-	this.addToWizard = function($wizardObject, $wizardName, $wizardType, $sfmName, $handOver){
+	this.addToWizard = function($wizardObject, $wizardName, $wizardType, $sfmName, $handOver, $profile, $wizardCriteria){
 		$bo_act_navigation.navigateToSvmxSetup();
 		_selectDomain("/svmx/");
 		_click(_div("Service Flow Manager"));
@@ -18,19 +18,33 @@ var $sfm_act_wizards = new function sfm_act_wizards() {
 			$sfm_act_wizards.editSfmWizard($wizardName, $wizardType, $sfmName, $handOver);
 		}
 		else{
-			$sfm_act_wizards.createSfmWizard($wizardName, $wizardType, $sfmName, $handOver);
+			$sfm_act_wizards.createSfmWizard($wizardName, $wizardType, $sfmName, $handOver, $profile, $wizardCriteria);
 		}
 	};
 	
 	
 	//function to create a new SFM wizard
-	this.createSfmWizard = function($wizardName, $wizardType, $sfmName, $handOver){
+	this.createSfmWizard = function($wizardName, $wizardType, $sfmName, $handOver, $profile, $wizardCriteria){
 		
 		_click($sfm_pg_wizards.btn_customNew);
 		_setValue($sfm_pg_wizards.txt_wizardTitle,$wizardName);
 		_setValue($sfm_pg_wizards.txt_wizardID, $wizardName);
+		if($wizardCriteria != null){
+			_setSelected($sfm_pg_wizards.btn_showCriteria,$wizardCriteria);
+			_wait(2000);
+		}
 		$sfm_act_wizards.addStepToSfmWizard($wizardType, $sfmName, $handOver);
-		_assertExists(_span($wizardName));
+		_wait(2000);
+		if($profile !="" && $profile !=null){
+			_click($sfm_pg_wizards.txt_managePermission);
+			_setSelected($sfm_pg_wizards.select_availableGrpProfiles,$profile);
+			_click($sfm_pg_wizards.btn_add);
+			_wait(2000);
+		}
+		_click($sfm_pg_wizards.btn_quickSave);
+		_wait(5000,_isVisible(_span("Object")));
+		_click($sfm_pg_wizards.btn_saveClose);
+		_wait(5000,isVisible($sfm_pg_wizards.btn_stdView));
 	};
 	
 	//function to add a step to sfm Wizard
@@ -38,13 +52,26 @@ var $sfm_act_wizards = new function sfm_act_wizards() {
 		
 		_check(_checkbox(0,_leftOf(_span($wizardName))));
 		_click($sfm_pg_wizards.btn_customEdit);	
-		$sfm_act_wizards.addStepToSfmWizard($wizardType, $sfmName, $handOver);		
+		$sfm_act_wizards.addStepToSfmWizard($wizardType, $sfmName, $handOver);	
+		_wait(2000);
+		_click($sfm_pg_wizards.btn_quickSave);
+		_wait(5000,_isVisible(_span("Object")));
+		_click($sfm_pg_wizards.btn_saveClose);
+		_wait(5000,isVisible($sfm_pg_wizards.btn_stdView));
 	};
 	
 	//function to delete SFM wizard -- to be completed, yet to capture buttons of confirmation
-	this.deleteSfmWizard = function() {
-			_check(_checkbox(0,_leftOf($wizardName)));
+	this.deleteSfmWizard = function($wizardObject,$wizardName) {
+		$bo_act_navigation.navigateToSvmxSetup();
+		_selectDomain("/svmx/");
+		_click(_div("Service Flow Manager"));
+		_click(_div("SFM Wizards"));
+		_setSelected($sfm_pg_wizards.selectObject,$wizardObject);
+		_wait(3000);
+			_check(_checkbox(0,_leftOf(_span($wizardName))));
 		_click($sfm_pg_wizards.btn_customDelete);	
+		_wait(3000);
+		_assertNotVisible(_span($wizardName),"Wizard is deleted successfully");
 	};
 	
 	//add step/SFM to wizard
@@ -61,10 +88,8 @@ var $sfm_act_wizards = new function sfm_act_wizards() {
 		_wait(6000,_heading4("Success"));
 		//if(_isVisible(_heading4("Success"))){
 			//_log("Pass");
-		_click($sfm_pg_wizards.btn_quickSave);
-		_wait(5000,_isVisible(_span("Object")));
-		_click($sfm_pg_wizards.btn_saveClose);
-		_wait(5000,isVisible($sfm_pg_wizards.btn_stdView));
+		
+
 		
 };
 	

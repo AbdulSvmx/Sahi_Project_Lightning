@@ -9,7 +9,7 @@
 	_setSpeed($g_stepSpeed);
 
 	var $sfmToBeCloned="Create Usage Lines from Estimates";
-	var $sfmName=$bo_act_common.generateRandomName("10476SFM");
+	var $sfmName=$bo_act_common.generateRandomName("RS_10476_");
 	//change  the name of $sfmTemplateSaveAsName before execution to avoid any duplication.
 	var $sfmTemplateSaveAsName=$bo_act_common.generateRandomName("10476Temp9");
 

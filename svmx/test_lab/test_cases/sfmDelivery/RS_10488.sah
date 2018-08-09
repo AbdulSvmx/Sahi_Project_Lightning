@@ -1,4 +1,4 @@
-//@author Lakshmisha
+
 var $rs_10488 = _testcase("RS_10488","");
 $rs_10488.start();
 /**
@@ -36,7 +36,7 @@ _click($sfm_pg_sfmDesigner.btn_quickSaveSFM);
 _click($sfm_pg_sfmDesigner.btn_saveSFM); 
 _wait(5000,_isVisible($sfm_pg_sfmDesigner.lnk_home));
 
-$sfm_act_wizards.addToWizard($wizardObject, $wizardName[0], $wizardType[1], $sfmName);
+$sfm_act_wizards.addToWizard($wizardObject, $wizardName[0], $wizardType[1], $sfmName); 
 
 //Create WO through UI for the validatiion
 _selectDomain();
@@ -44,12 +44,12 @@ $sfm_act_createCustomWizard.createWowithoutvalues();
 
 _click(_span($sfmName));
 _selectDomain($domainName);
-_wait(8000,_div($sfmName));
+_wait(15000,_div($sfmName));
 
 // check whether DVR gets triggered or not when condition is met
 _setValue($sfm_pg_sfmDesigner.txt_city,"M");
 //_click(_span("svmx-btn-icon svmx-sfmd-current-datetime-icon"));
-var $pastDate=$bo_act_common.getPastDate("1", "/");
+var $pastDate=$bo_act_common.getPastDate("1", "\/");
 _setValue($sfm_pg_sfmDesigner.txt_acutalIntialResponse, $pastDate);
 	_click($sfm_pg_sfmDesigner.btn_deliveryQuickSave);
 
@@ -58,10 +58,13 @@ if(_isVisible(_div("/"+$ruleDescription+"/"))){
 }else{
 	_log("Fail ::: DVR on header is not working","FAILURE");
 }
-
+_wait(5000);
 
 //check whether DVR gets triggered or not when condition is  not met
-_setValue($sfm_pg_sfmDesigner.txt_acutalIntialResponse, $bo_act_common.currentDate("/"));
+_setValue($sfm_pg_sfmDesigner.txt_acutalIntialResponse,"");
+_setValue($sfm_pg_sfmDesigner.txt_acutalIntialResponse, $bo_act_common.currentDate("\/"));
+//$sfm_act_SFM.selectToday("Actual Initial Response");
+_wait(3000);
 _click($sfm_pg_sfmDesigner.btn_deliveryQuickSave);
 if(_isVisible(_div("/"+$ruleDescription+"/"))){
 	_log("Fail ::: DVR on header is triggered when not supposed to be","FAILURE");

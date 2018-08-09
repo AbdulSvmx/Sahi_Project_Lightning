@@ -1,0 +1,16 @@
+var $rs_10481 = _testcase("RS_10481","Assign to a group and log in as same group member.");
+$rs_10481.start();
+$wizTitle = "SFMWizPermission";
+$bo_act_login.login($g_url,$sfmUsn,$sfmPwd);
+$sfm_act_wizards.addToWizard("Work Order", $wizTitle, $wizardType[4], "Work Order Service Report","false","Cloned_DefaultGroupProfile");  
+_selectDomain();
+$sfm_act_createCustomWizard.createWowithoutvalues();
+
+_wait(5000); 
+if(_exists(_span($wizTitle))){
+	_log("Pass ::: Wizard is not visible which is not assigned to the profile");
+}
+else{
+	_log("Fail ::: Wizard is visible which is not assigned to the profile", "FAILURE");
+}
+$rs_10481.end();

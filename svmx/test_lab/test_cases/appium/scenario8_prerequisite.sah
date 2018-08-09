@@ -1,0 +1,26 @@
+//Meghana Rao
+
+/*
+ * PRE Requisites to be run in the org before running other scripts - LIGHTNING CODE
+ */
+var $pre_requisite= _testcase("scenario8_pre","Source to Target , Formula, Mapping childline, Source object update");
+$pre_requisite.start();
+_setSpeed($g_stepSpeed);
+$bo_act_login.login($g_url, $appiumAdminUn, $appiumAdminPwd);
+
+// Removing Work Order from Download Criteria
+$bo_act_SFMAppPermission.workOrderDownloadCriteriachanges("My Records");
+
+// Clone TDM016 with Lookup configuration set for it
+var $sfmTemplateSaveAsName =$bo_act_common.generateRandomName("Pagelayout");
+var $sfmToBeCloned = "Manage Work Order Lines - Usage";
+var $sfmName = "Senario8_childlinesSFM";
+$bo_act_SFM.clnStandardSFMlookupaddition($sfmToBeCloned,$sfmName,$sfmTemplateSaveAsName);
+
+
+// Adding this SFM Process to the Wizard
+$targetObjectName = "Work Order";
+$wizTitle = "AutoSanity";
+$bo_act_navigation.navigateToSfmWizard();
+$sfm_act_createCustomWizard.addManageWizStepsverify($wizTitle, "SFM", $sfmName, $group_profilename, $targetObjectName);
+$pre_requisite.end();

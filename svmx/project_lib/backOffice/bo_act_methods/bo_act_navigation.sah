@@ -19,7 +19,7 @@ var $bo_act_navigation = new function bo_act_navigation() {
      * @returns boolean
      * Changes made for Lightning
      */this.navigateToSvmxSetup = function() {
-	 //this.navigateToHome();
+	  //this.navigateToHome();
 		if(_isVisible($bo_pg_home.link_servicemaxSetup) == true )
 		{
 			_click($bo_pg_home.link_servicemaxSetup);
@@ -27,7 +27,7 @@ var $bo_act_navigation = new function bo_act_navigation() {
 		else
 		{
 			_selectDomain();
-			_click($bo_pg_home.button_allLinks); 
+			//_click($bo_pg_home.button_allLinks); 
 			if(!_isVisible(_heading2("App Launcher"))){
 				_click($bo_pg_home.button_allLinks); 
 		
@@ -35,7 +35,7 @@ var $bo_act_navigation = new function bo_act_navigation() {
 			_wait(6000, _isVisible($bo_pg_home.link_servicemaxSetup));
 			_click($bo_pg_home.link_servicemaxSetup);
 		}
-	_wait(3000,_isVisible($bo_pg_servicemaxSetup.btn_serviceFlowManager));
+	_wait(10000,_isVisible($bo_pg_servicemaxSetup.btn_serviceFlowManager));
 	//return $callBack.returnResult(_exists($bo_pg_servicemaxSetup.btn_serviceFlowManager));
 
     };

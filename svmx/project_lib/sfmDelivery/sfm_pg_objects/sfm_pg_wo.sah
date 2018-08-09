@@ -5,6 +5,7 @@ var $sfm_pg_wo = new function sfm_pg_wo() {
 	this.btn_woStatus = _select(0,_rightOf(_label("Order Status")));
 	this.btn_wo_save = _span("Save");//Changed for lightning
 	this.link_wo = _link("/Work Orders/");//Changed to hit the correct Work orders link in Lightning - JJ
+	this.link_woStatus=_link(0,_near(_span("Order Status Current status of the service order")));
 
 //	this.btn_wo_edit = _div("Edit");//Changed for Lightning.
 //	this.txt_wo_zip = _textbox("Zip");
@@ -78,6 +79,7 @@ var $sfm_pg_wo = new function sfm_pg_wo() {
 	this.btn_new_field_dependency = _button(0,_near(_heading3("Field Dependencies")));
 	this.link_profileImageRightCorner = _div("/user-profile/");
 	this.link_lightningLogout = _link("Log Out");
+	this.link_currentUserName = _link("profile-link-label");
 	
 //Added by JJ for SFM Delivery components . All are Lightning ready.
 	this.link_delivery_save = _link("Save");
@@ -96,8 +98,13 @@ var $sfm_pg_wo = new function sfm_pg_wo() {
     this.btn_proceedForCancel = _span("Proceed");
     this.link_workDetailAfterCreation = _div("Work Detail");
     this.btn_cancelExtendedEdit = _span("/Cancel/");
-    
-	
+    this.btn_quickSave = _span("Quick Save");
+    this.btn_okPriceNotCalculated = _span("Ok");
+    this.btn_productSearchChildLine = _link("Search");
+    this.btn_addProductChildLine = _span("Add");
+    this.btn_updateExtEdit = _span("Update");
+	this.link_today = _span("Today");
+	this.link_clearSvmxCache = _span("Clear ServiceMax Cache");
 	this.openAppLauncher = function(){
 		_wait(5000,_submit("App Launcher"));
 		if(_isVisible(_submit("App Launcher"))){
@@ -113,11 +120,11 @@ var $sfm_pg_wo = new function sfm_pg_wo() {
 	};
 	
 	this.assert_wizard =function($wizTitle){
-		if(_exists(_cell($wizTitle))){
-			_log("Pass");
+		if(_exists(_span($wizTitle))){
+			_log("Fail ::: Wizard is visible which is not assigned to the profile", "FAILURE");
 		}
 		else{
-			_log("Fail");
+			_log("Pass ::: Wizard is not visible which is not assigned to the profile");
 		}
 		
 //		_assertExists(_cell($wizTitle),"Wizard Not Present");
