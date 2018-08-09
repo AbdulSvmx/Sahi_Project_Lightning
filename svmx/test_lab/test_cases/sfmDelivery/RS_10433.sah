@@ -17,13 +17,13 @@ var $stdMap = "SVMXSTD: Close Work Order";
 var $pickListLabels = [];
 var $pickListValues = [];
 var $textLabels = ["City","Scheduled Date Time","Estimated Duration"];
-var $textValues = ["SVMX.CURRENTRECORD.SVMXC__City__c","SVMX.CURRENTRECORDHEADER.SVMXC__SM_Estimated_Duration__c","SVMXC__Previous_Scheduled_Date_Time__c"];
+var $textValues = ["SVMX.CURRENTRECORD.SVMXC__City__c","SVMX.CURRENTRECORD.SVMXC__SM_Estimated_Duration__c","SVMX.CURRENTRECORD.SVMXC__Previous_Scheduled_Date_Time__c"];
 var $inputTextLabels = ["City","Estimated Duration"];
 var $inputTextValues = ["Bengaluru Sahi Pro","589"];
 var $inputDateTimeLabels = ["Previous Scheduled Date Time"];
 var $inputDateValues = ["04/11/2018"];
 var $inputTimeValues = ["1:30 PM"];
-var $mapTextValues = ["Booked Appointment Slot","Dispatch Priority","Scheduled Date Time"]
+var $mapTextValues = ["Booked Appointment Slot","Dispatch Priority","Scheduled Date Time"];
 //Appending current timestamp to process name to make it unique.
 var $timeStamp = $bo_act_navigation.getCurrentTimeStamp();
 $processName = $processName + "_" + $timeStamp;
@@ -64,16 +64,15 @@ _selectDomain($domainName);
 $sfm_act_SFM.fillHeaderTextValues($inputTextLabels,$inputTextValues);
 $sfm_act_SFM.fillDateTimeFields($inputDateTimeLabels,$inputDateValues,$inputTimeValues);
 $sfm_act_SFM.performQuickSave();
-
+_wait(4000);
+$sfm_act_lightningConfig.clearServicemaxCache();
 //Combine text and date fields
 for($i=0;$i<$inputDateTimeLabels.length;$i++){
 	$inputTextLabels.push($inputDateTimeLabels[$i]);
 	$inputTextValues.push($inputDateValues[$i]);
 }
 //Verify values for the rest of the fields
-for($i=0;$i<$inputDateValues.length;$i++){
-	$inputTextValues.push($inputDateValues[$i]);
-}
+$inputDateTimeLabels = ["Scheduled Date Time"];
 var $verifyResult = $sfm_act_SFM.verifyValuesInDelivery($mapTextValues,$inputTextValues,$inputDateTimeLabels,$inputTimeValues,[],[],[],[]);
 _assertTrue($verifyResult);
 if($verifyResult){

@@ -157,4 +157,13 @@ this.clearServicemaxCache = function(){
 	_click($sfm_pg_wo.link_clearSvmxCache);
 	_wait(4000);
 	};
+	
+this.openExtEditForLatestItem = function(){
+	var $x = _count("_row", "/.*/",_in(_div("/x-grid-item-container/")));
+	$x = $x-1;
+	_log($x);
+	_click(_div("x-action-col-icon x-action-col-0  x-sfmd-edit-icon["+$x+"]"));
+	_click(_span("Edit"));
+	
+};
 };

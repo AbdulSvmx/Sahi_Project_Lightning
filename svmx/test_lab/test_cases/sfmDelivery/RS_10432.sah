@@ -90,12 +90,18 @@ $sfm_act_SFM.addChildLine("Parts",$productName, $textLabels, $textValues, $pickL
 $sfm_act_SFM.performQuickSave();
 $textPicklistDateLabels = ["Billable Qty","Received Country"];
 $textPicklistDateExpValues = ["45","India"];
+var $x = _count("_row", "/.*/",_in(_div("/x-grid-item-container/")));
+$x = $x-1;
+_log($x);
+_click(_div("x-action-col-icon x-action-col-0  x-sfmd-edit-icon["+$x+"]"));
+_click(_span("Edit"));
 var $verifyResult1 = $sfm_act_SFM.verifyValuesInDelivery($textPicklistDateLabels,$textPicklistDateExpValues,[],[],[],[],[],[]);
 _click($sfm_pg_wo.btn_updateExtEdit);
 $pickListValues = ["Labor","Usage/Consumption"];
 $sfm_act_SFM.addChildLine("Labor",$productName,[],[], $pickListLabels, $pickListValues,[],[],[],[],[],[],[],[],[]);
 $textPicklistDateLabels = ["Start Date and Time","Received City"];
 $textPicklistDateExpValues = ["8/6/2018","Bengaluru"];
+$sfm_act_lightningConfig.openExtEditForLatestItem();
 $verifyResult2 = $sfm_act_SFM.verifyValuesInDelivery($textPicklistDateLabels,$textPicklistDateExpValues,["Start Date and Time"],["1:30 PM"],[],[],[],[]);
 _click($sfm_pg_wo.btn_updateExtEdit);
 $verifyResult = $verifyResult1 && $verifyResult2;
