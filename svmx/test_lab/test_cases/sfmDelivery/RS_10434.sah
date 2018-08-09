@@ -82,6 +82,9 @@ _selectWindow();
 //Clear Servicemax cache in service delivery.
 _selectDomain($domainName);
 $sfm_act_lightningConfig.clearServicemaxCache();
+//Add child line item
+
+
 
 
 

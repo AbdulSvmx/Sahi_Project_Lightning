@@ -56,9 +56,10 @@ var $bo_act_mappings = new function bo_act_mappings() {
 				else {
 						_setValue($sfm_pg_sfmMapping.txt_mappingNameForNew,$mapName);
 						_setValue($sfm_pg_sfmMapping.txt_mappingIdForNew,$mapName);
-						_click($sfm_pg_sfmMapping.btn_saveMappingExistingRecord);
+						
 				   }
 		}
+		_click($sfm_pg_sfmMapping.btn_saveMappingExistingRecord);
 		//_setSelected($sfm_pg_sfmMapping.btn_selectExistingMap,$mapName);
 		}
 		_click($bo_pg_sfmTransactionAndDesigner.btn_quickSave1);
