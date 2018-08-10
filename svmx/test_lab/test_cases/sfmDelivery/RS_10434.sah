@@ -19,6 +19,7 @@ var $pickListValues = [];
 var $textLabels = ["Closed By","Site"];
 var $textValues = ["SVMX.CURRENTUSERID","SVMX.USERTRUNK"];
 var $inventoryLocation = "Lightning Automation Location";
+var $productName = "Chrome";
 
 //Appending current timestamp to process name to make it unique.
 var $timeStamp = $bo_act_navigation.getCurrentTimeStamp();
@@ -74,6 +75,7 @@ _selectDomain();
 _wait(5000);
 _selectWindow("/SFM Transaction Designer/");
 _wait(10000);
+$textLabels = ["Closed By","Consumed From Location"];
 _click($bo_pg_sfmTransactionAndDesigner.btn_qualifyingCriteriaAndFieldMapping);
 $bo_act_mappings.createMapping("Parts",$pickListLabels,$pickListValues,$textLabels,$textValues,$mapName);
 _closeWindow();
@@ -83,7 +85,24 @@ _selectWindow();
 _selectDomain($domainName);
 $sfm_act_lightningConfig.clearServicemaxCache();
 //Add child line item
-
+$sfm_act_SFM.addChildLine("Parts",$productName, $textLabels, $textValues, $pickListLabels, $pickListValues, [],[],[],[],[],[],[],[],[]);
+$sfm_act_SFM.performQuickSave();
+$sfm_act_lightningConfig.openExtEditForLatestItem();
+$verifyResult = $sfm_act_SFM.verifyValuesInDelivery($textLabels,$expValues,[],[],[],[],[],[]);
+_click($sfm_pg_wo.btn_updateExtEdit);
+_assertTrue($verifyResult);
+if($verifyResult){
+	_log("PASS:User trunk and current user literals verified for header and child");
+}
+else {
+	_log("FAIL:User trunk and current user literals verified for header and child");
+}
+_click($sfm_pg_wo.btn_cancelForSfmDelivery);
+_click($sfm_pg_wo.btn_proceedForCancel);
+_setStrictVisibilityCheck(false);
+_selectDomain();
+$sfm_act_lightningConfig.logoutInLightning();
+$RS_10434.end();
 
 
 

@@ -90,11 +90,7 @@ $sfm_act_SFM.addChildLine("Parts",$productName, $textLabels, $textValues, $pickL
 $sfm_act_SFM.performQuickSave();
 $textPicklistDateLabels = ["Billable Qty","Received Country"];
 $textPicklistDateExpValues = ["45","India"];
-var $x = _count("_row", "/.*/",_in(_div("/x-grid-item-container/")));
-$x = $x-1;
-_log($x);
-_click(_div("x-action-col-icon x-action-col-0  x-sfmd-edit-icon["+$x+"]"));
-_click(_span("Edit"));
+$sfm_act_lightningConfig.openExtEditForLatestItem();
 var $verifyResult1 = $sfm_act_SFM.verifyValuesInDelivery($textPicklistDateLabels,$textPicklistDateExpValues,[],[],[],[],[],[]);
 _click($sfm_pg_wo.btn_updateExtEdit);
 $pickListValues = ["Labor","Usage/Consumption"];

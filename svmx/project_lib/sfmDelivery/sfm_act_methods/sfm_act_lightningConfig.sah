@@ -155,6 +155,11 @@ this.clearServicemaxCache = function(){
 		    _click($sfm_pg_wo.btn_arrowNextToUserSettings);
 	}
 	_click($sfm_pg_wo.link_clearSvmxCache);
+	_setStrictVisibilityCheck(true);
+	if(_isVisible($sfm_pg_wo.btn_proceedForCancel)){
+	   _click($sfm_pg_wo.btn_proceedForCancel);
+	}
+	_setStrictVisibilityCheck(false);
 	_wait(4000);
 	};
 	

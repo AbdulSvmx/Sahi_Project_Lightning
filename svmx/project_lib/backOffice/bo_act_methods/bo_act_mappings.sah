@@ -60,7 +60,7 @@ var $bo_act_mappings = new function bo_act_mappings() {
 				   }
 		}
 		_click($sfm_pg_sfmMapping.btn_saveMappingExistingRecord);
-		//_setSelected($sfm_pg_sfmMapping.btn_selectExistingMap,$mapName);
+		_wait(5000);
 		}
 		_click($bo_pg_sfmTransactionAndDesigner.btn_quickSave1);
 		_selectDomain();
