@@ -425,6 +425,9 @@ var $sfm_act_Transactions = new function sfm_act_Transactions() {
 		_wait(3000);
 		_click($bo_pg_sfmTransactionAndDesigner.btn_finalQuickSave);
 	};
+	
+
+	
 	this.newsfm6905 = function($sfmName,$sfmPgLayoutName){
 		_wait(5000);
 		_click($bo_pg_sfmTransactionAndDesigner.btn_newSFM);

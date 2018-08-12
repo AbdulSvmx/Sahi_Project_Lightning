@@ -21,6 +21,23 @@ var $sfm_pg_sfmDesigner = new function sfm_pg_sfmDesigner() {
 	this.btn_saveWorkDetail = _span("Save",_rightOf(_span("Save & New"))); //added for lightning
 	this.btn_cancelWorkDetail = _span("Cancel",_leftOf(_span("Save"))); //added for lightning
 	this.btn_next = _span("Next",_rightOf(_span("Cancel",_in(_div("/modal-footer/")))));//added for lightning
+	this.link_WDstartDate=_link(0, _near(_span("Start Date and Time")));
+	this.link_WDendDate=_link(0, _near(_span("End Date and Time")));
+	this.txt_WDcanceledOn=_textbox(0, _near(_span("Canceled On")));
+	this.txt_WDclosedOn=_textbox(0, _near(_span("Closed On")));
+	this.txt_WDlineQTY=_textbox(" input", _near(_span("Line Qty")));
+	this.msg_WDCreateConfirm=_span("Work Detail was created.");
+	this.link_editWD=_link("Edit",_in(_list("scrollable")));
+
+	this.newWDWindow=_parentNode(_heading2("/New Work Detail:/"),"DIV",2);
+	this.lbl_WDPart=_span("Part",_in(this.newWDWindow));
+	this.txt_WDpart=_textbox(0,_near(this.lbl_WDPart));
+	this.btn_WDNewProduct=_span("/New Product/",_near(this.lbl_WDPart));
+	
+	this.WDnewPartWindow=_parentNode(_heading2("New Product"),"DIV",2);
+	this.lbl_WDProductName=_span("Product Name",_in(this.WDnewPartWindow));
+	this.txt_newProductName=_textbox("Product Name*", _near(this.lbl_WDProductName));
+	this.btn_WDProductSave=_button("Save",_in(this.WDnewPartWindow));
 	
 	
 	

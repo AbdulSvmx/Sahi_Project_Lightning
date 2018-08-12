@@ -6,6 +6,14 @@ var $sfm_pg_wo = new function sfm_pg_wo() {
 	this.btn_wo_save = _span("Save");//Changed for lightning
 	this.link_wo = _link("/Work Orders/");//Changed to hit the correct Work orders link in Lightning - JJ
 	this.link_woStatus=_link(0,_near(_span("Order Status Current status of the service order")));
+	this.link_actualOnsiteResponse=_link("Date Picker",_near(_span("Actual Onsite Response",_in(_div("/modal-body/")))));
+	this.link_actualInitialResponse=_link("Date Picker",_near(_span("Actual Initial Response",_in(_div("/modal-body/")))));
+	this.link_actualResolution=_textbox(0,_near(_span("Actual Resolution",_in(_div("/modal-body/")))));
+	this.link_actualRestoration=_textbox(0,_near(_span("Actual Restoration",_in(_div("/modal-body/")))));
+	this.btn_editWO=_heading2("Edit Work Order");
+	
+	
+	this.btn_today=_cell("Today");
 
 //	this.btn_wo_edit = _div("Edit");//Changed for Lightning.
 //	this.txt_wo_zip = _textbox("Zip");

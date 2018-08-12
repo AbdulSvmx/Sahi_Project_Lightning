@@ -1,0 +1,184 @@
+var $rs_10464 = _testcase("RS_10464","Verify Date and Datetime literals as expressions with positive and negative flow in both Header and Child.");
+$rs_10464.start();
+	
+	//Login to App
+	$bo_act_login.login($g_url,$sfmUsn,$sfmPwd);
+	$bo_act_navigation.navigateToSfmTransactionDesigner();
+
+	//clone standard SFM
+	var $sfmNameToBeCloned="Create Usage Lines from Estimates";
+	var $sfmName=$bo_act_common.generateRandomName("rs_10464_");
+	var $sfmTemplateSaveAsName=$bo_act_common.generateRandomName("SFM_Page_");
+	var $sfmTemplate="SVMXSTD: Manage WO Usage Lines";
+	var $fieldName="";
+	var $containerName="";
+	
+	$sfm_act_SFM.cloneTDM016($sfmNameToBeCloned, $sfmName, false, $sfmTemplateSaveAsName, $sfmTemplate, $fieldName, $containerName);
+	
+	//adding qualifying criteria for parent object
+	var $comboField=["Actual Initial Response","Actual Onsite Response","Actual Resolution","Actual Restoration","Order Status"];
+	var $comboConditions=["Equals","Equals","Equals","Equals","Equals"];
+	var $toggleButton=["Yes","Yes","Yes","Yes",""];
+	var $comboInput=["Now","Today","Tomorrow","Yesterday","Open"];
+	var $advExpr="1 and ((2 or 3) and (4 or 5))";
+	var $errMsg="This record does not satisfy the qualification criteria.";
+	var $exprsnName = $bo_act_common.generateRandomName("RS_10463_expr_");
+	var $ExprFieldsDetails=[$comboField,$comboConditions,$toggleButton,$comboInput,$advExpr,$errMsg,$exprsnName];
+	$sfm_act_Transactions.sfmQualifyingCriteriaieldMappings("Work Order", $ExprFieldsDetails, "", "");
+		
+	//adding qualifying criteria for child object
+	var $childcomboField=["Start Date and Time","End Date and Time","Canceled On","Closed On","Line Qty"];
+	var $childcomboConditions=["Equals","Equals","Equals","Equals","Equals"];
+	var $childtoggleButton=["Yes","Yes","Yes","Yes",""];
+	var $childcomboInput=["Now","Today","Tomorrow","Yesterday","20"];
+	var $childadvExpr="1 and ((2 or 3) and (4 or 5))";
+	var $childerrMsg="";
+	var $childexprsnName = $bo_act_common.generateRandomName("RS_10463_expr_");
+	var $childExprFieldsDetails=[$childcomboField,$childcomboConditions,$childtoggleButton,$childcomboInput,$childadvExpr,$childerrMsg,$childexprsnName];
+	$sfm_act_Transactions.sfmQualifyingCriteriaieldMappings("Parts", $childExprFieldsDetails, "", "");
+	
+	_click($bo_pg_sfmTransactionAndDesigner.btn_saveAndclose);
+	
+	var $wizardObject="Work Order";
+	var $wizardName1 =$wizardName[6];
+	var $wizardType="SFM";
+	var $profile="";
+	var $handOver=false;
+	_log($wizardName1);
+	$sfm_act_wizards.addToWizard($wizardObject, $wizardName1, $wizardType, $sfmName, $handOver, $profile);  
+	
+
+	//create WO & WD
+	var $WO=createWO_RS10464("Open", 1, 2);
+	
+	var $WDpartName = $bo_act_common.generateRandomName("RS_10463_Part_");
+	var $WorkDetail=addWorkDetailLine("Usage/Consumption", "Parts", 20, 1, 2,$WDpartName);
+	
+	
+	$sfm_act_common.globalSearchInLightning($WO);
+	//var $sfmName="rs_10464_8820181554";
+	_setStrictVisibilityCheck(true);
+	$sfm_act_createCustomWizard.clickWizardBtn($sfmName);
+	_assertExists(_div("/"+$sfmName+"/"));
+	//_assertExists($sfm_pg_screenDesigner.link_Parts);
+	_assertExists(_div($WDpartName),_in(_div("SFMCompositeGrid1-bodyWrap")));
+	_setStrictVisibilityCheck(false);
+
+	
+	//Edit WD
+	$sfm_act_common.globalSearchInLightning($WO);
+	editWorkDetailLine($WorkDetail, 8, 6, 7);
+	
+	$sfm_act_common.globalSearchInLightning($WO);
+	_setStrictVisibilityCheck(true);
+	$sfm_act_createCustomWizard.clickWizardBtn($sfmName);
+	_assertExists(_div("/"+$sfmName+"/"));
+	_assertNotExists(_div($WDpartName),_in(_div("SFMCompositeGrid1-bodyWrap")));
+	_setStrictVisibilityCheck(false);
+	
+	
+
+	//Edit WO
+	$sfm_act_common.globalSearchInLightning($WO);
+	_click($sfm_pg_wo.btn_wo_edit);
+	_wait(5000,_isVisible($sfm_pg_wo.btn_editWO));
+	addWOfieldValue("Closed", 6, 7);
+	_click($sfm_pg_wo.btn_wo_edit_save);
+	_wait(10000,_isVisible($sfm_pg_wo.label_wo));
+	
+	$sfm_act_common.globalSearchInLightning($WO);
+	$sfm_act_createCustomWizard.clickWizardBtn($sfmName);
+	_selectDomain($domainName);
+	_wait(10000,_isVisible(_div($errMsg)));
+	_assertExists(_div($errMsg));
+	_selectDomain();
+	
+	//** function to create Work**'
+	
+function createWO_RS10464($orderStatus,$WOactualResoFD,$WOactualRestoFD){
+		_selectDomain();
+		_wait(3000);
+		$sfm_pg_wo.openAppLauncher();
+		_wait(3000);
+		$sfm_act_createCustomWizard.clickSvmxWoLink();
+		_wait(5000,_isVisible($sfm_pg_wo.btn_wo_new));
+		_setStrictVisibilityCheck(true);
+		_click($sfm_pg_wo.btn_wo_new);
+		addWOfieldValue($orderStatus, $WOactualResoFD, $WOactualRestoFD);
+		//_wait(10000);
+		_click($sfm_pg_wo.btn_wo_edit_save);
+		_wait(10000,_isVisible($sfm_pg_wo.label_wo));
+		$woName= _getText($sfm_pg_wo.label_wo);
+		_log($woName);
+		_setStrictVisibilityCheck(false);
+		return $woName;
+	};
+	
+function addWOfieldValue($orderStatus,$WOactualResoFD,$WOactualRestoFD){
+		_setStrictVisibilityCheck(true);
+		_click($sfm_pg_wo.link_woStatus);
+		_click(_link($orderStatus));
+		_click($sfm_pg_wo.link_actualInitialResponse);
+		_click($sfm_pg_wo.btn_today);
+		_click($sfm_pg_wo.link_actualOnsiteResponse);
+		_click($sfm_pg_wo.btn_today);
+		_setValue($sfm_pg_wo.link_actualResolution,$bo_act_common.getfutureDate(0, "\/", $WOactualResoFD));
+		_setValue($sfm_pg_wo.link_actualRestoration,$bo_act_common.getfutureDate(0, "\/", $WOactualRestoFD));
+		_setStrictVisibilityCheck(false);
+}
+	
+function addWorkDetailLine($recordType,$lineType,$lineQTY,$WDcancelFD, $WDcloseFD,$WDpartName){
+		_click($sfm_pg_sfmDesigner.link_related);
+		_click($sfm_pg_sfmDesigner.link_newWorkDetail);
+		_click(_span("slds-radio--faux",_leftOf(_span($recordType,_in(_div("/modal-body/"))))));
+		_click($sfm_pg_sfmDesigner.btn_next);	
+		_setStrictVisibilityCheck(true);
+		addWDfiledValues($lineType, $lineQTY, $WDcancelFD, $WDcloseFD,$WDpartName);
+		_click($sfm_pg_sfmDesigner.btn_saveWorkDetail);
+		_wait(5000,isVisible($sfm_pg_sfmDesigner.msg_WDCreateConfirm));
+		var $WorkDetailName=_getText(_link("/WL-.*/",_in(_div("/Line Number/"))));
+		_setStrictVisibilityCheck(false);
+		return $WorkDetailName;
+	}
+
+function addWDfiledValues($lineType,$lineQTY,$WDcancelFD,$WDcloseFD,$WDpartName){
+	_setStrictVisibilityCheck(true);
+	_click($sfm_pg_sfmDesigner.link_lineType);
+	_click(_link($lineType));
+	//_setValue($sfm_pg_sfmDesigner.txt_workDescription,$workDescription);
+	_click($sfm_pg_sfmDesigner.link_WDstartDate);
+	_click($sfm_pg_wo.btn_today);
+	_click($sfm_pg_sfmDesigner.link_WDendDate);
+	_click($sfm_pg_wo.btn_today);
+	_setValue($sfm_pg_sfmDesigner.txt_WDcanceledOn,$bo_act_common.getfutureDate(0, "\/", $WDcancelFD));
+	_setValue($sfm_pg_sfmDesigner.txt_WDclosedOn, $bo_act_common.getfutureDate(0, "\/", $WDcloseFD));
+	_setValue($sfm_pg_sfmDesigner.txt_WDlineQTY, $lineQTY);
+	
+	if ($WDpartName!="" && $WDpartName!==null) {
+		_click($sfm_pg_sfmDesigner.txt_WDpart);
+		_wait(3000,_isVisible($sfm_pg_sfmDesigner.btn_WDNewProduct));
+		_click($sfm_pg_sfmDesigner.btn_WDNewProduct);
+		
+		_wait(4000,_isVisible($sfm_pg_sfmDesigner.lbl_WDProductName));
+		_setValue($sfm_pg_sfmDesigner.txt_newProductName,$WDpartName);
+		_click($sfm_pg_sfmDesigner.btn_WDProductSave);
+		_wait(5000,_isVisible($sfm_pg_sfmDesigner.lbl_WDPart));
+	}
+
+	_setStrictVisibilityCheck(false);
+}
+
+function editWorkDetailLine($WorkDetail,$lineQTY,$WDcancelFD,$WDcloseFD){
+	_setStrictVisibilityCheck(true);
+	_click($sfm_pg_sfmDesigner.link_related);
+	//_click(_link($WorkDetail));
+	_wait(10000,_isVisible(_link($WorkDetail)));
+	_click(_link("/Show/", _near(_link($WorkDetail))));
+	_wait(5000,_isVisible($sfm_pg_sfmDesigner.link_editWD));
+	_click($sfm_pg_sfmDesigner.link_editWD);
+	_wait(10000,_isVisible(_heading2("Edit Work Detail")));
+	addWDfiledValues("Parts", $lineQTY,$WDcancelFD,$WDcloseFD,"");
+	_click($sfm_pg_sfmDesigner.btn_saveWorkDetail);
+	_setStrictVisibilityCheck(false);
+}
+$rs_10464.end();

@@ -53,11 +53,12 @@ this.currentDate= function ($seperator){
     return $currentDate;
 };
 
- this.getfutureDate = function($futureYear, $seperator){
+ this.getfutureDate = function($futureYear, $seperator,$futureDay){
 	var $now = new Date();
     var $monthday;// = $now.getDate();
     if ($now.getDate() < 10)
-        $monthday = "0" + $now.getDate();
+        //$monthday = "0" + $now.getDate();
+    	$monthday = $now.getDate();
     else
         $monthday = $now.getDate();
     var $month = $now.getMonth() + 1;
@@ -66,8 +67,13 @@ this.currentDate= function ($seperator){
 
     var $year = $now.getFullYear();
 	$year = $year+$futureYear;
+
+	if ($futureDay!=null && $futureDay!="") {
+		$monthday=$monthday+$futureDay;
+	}
     
      var $currentDate = $month+ $seperator +$monthday  + $seperator+$year; 
+     _log("$currentDate: "+$currentDate);
     return $currentDate;
 };
 
