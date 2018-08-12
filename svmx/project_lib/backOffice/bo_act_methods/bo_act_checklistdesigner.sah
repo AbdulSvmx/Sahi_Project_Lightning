@@ -347,7 +347,7 @@ var $bo_act_checklistdesigner = new function bo_act_checklistdesigner() {
 
 	};
 	
-	this.addQuestion = function($dataType,$questionText){
+	this.addQuestion = function($dataType,$questionText,$prefix,$pickListValue){
 		_selectDomain("/svmx/");
 		_click($bo_pg_formDesigner.tab_clickFormDesigner);
 		_click($bo_pg_formDesigner.btn_addNewQuestion);
@@ -358,18 +358,38 @@ var $bo_act_checklistdesigner = new function bo_act_checklistdesigner() {
 			_click(_f("main").uiftetextfield($dataType));
 		}
 		_setValue($bo_pg_formDesigner.lbl_questionText, $questionText);
-		var $responseSet = $bo_act_common.generateRandomName("Response Set");
+		var $responseSet = $bo_act_common.generateRandomName("ResponseSet");
 		var $answer = $bo_act_common.generateRandomName("Answer");
-		switch($dataType){
-		case "Checkbox":
-		case "Multi-select Picklist":
-		case "Picklist":
-			_setValue(_f("main").s_textinput("responseSetName"),$responseSet);
-			_setValue(_f("main").s_textinput("ansValue"),$answer);
-			break;
-		default :
-			break;
+		if($prefix==false){
+			switch($dataType){
+			case "Checkbox":
+			case "Multi-select Picklist":
+			case "Picklist":
+				_setValue(_f("main").s_textinput("responseSetName"),$responseSet);
+				_setValue(_f("main").s_textinput("ansValue"),$answer);
+				break;
+			default :
+				break;
+			}
+			
 		}
+		else{
+			switch($dataType){
+			case "Text":
+				_click(_f("main").s_checkbox("Prefill with value from Work Order"));
+				_setSelected(_f("main").s_combobox("sourceObjPickList"),$pickListValue);
+				break;
+			case "Picklist":
+				_click(_f("main").s_checkbox("Prefill with value from Work Order[1]"));
+				_setSelected(_f("main").s_combobox("sourceObjPickListMulti"),$pickListValue);
+				_setValue(_f("main").s_textinput("responseSetName"),$responseSet);
+				break;
+			default:
+				break;
+					
+			}
+			
+		}		
 		_click($bo_pg_formDesigner.btn_addQuestionToLibraryAndForm);
 		_click($bo_pg_formDesigner.btn_closeQuestionPopUp);
 		_click($bo_pg_formDesigner.btn_quickSave);

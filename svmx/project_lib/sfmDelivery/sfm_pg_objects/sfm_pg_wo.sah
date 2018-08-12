@@ -87,6 +87,7 @@ var $sfm_pg_wo = new function sfm_pg_wo() {
 	this.btn_new_field_dependency = _button(0,_near(_heading3("Field Dependencies")));
 	this.link_profileImageRightCorner = _div("/user-profile/");
 	this.link_lightningLogout = _link("Log Out");
+	this.link_currentUserName = _link("profile-link-label");
 	
 //Added by JJ for SFM Delivery components . All are Lightning ready.
 	this.link_delivery_save = _link("Save");
@@ -111,6 +112,7 @@ var $sfm_pg_wo = new function sfm_pg_wo() {
     this.btn_addProductChildLine = _span("Add");
     this.btn_updateExtEdit = _span("Update");
 	this.link_today = _span("Today");
+	this.link_clearSvmxCache = _span("Clear ServiceMax Cache");
 	this.openAppLauncher = function(){
 		_wait(5000,_submit("App Launcher"));
 		if(_isVisible(_submit("App Launcher"))){

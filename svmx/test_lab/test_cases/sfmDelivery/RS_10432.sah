@@ -58,7 +58,7 @@ _setSpeed(1000);
 //Add the custom process to SFM wizard.
 $sfm_act_wizards.addToWizard($object_name,$currentWizardName,"SFM",$processName);
 _selectDomain();
-
+_setSpeed(1000);
 //Create a work order
 var $wo_number = $sfm_act_createCustomWizard.createWowithdateliterals();
 $bo_act_navigation.navigateToCreatedRecordUsingGlobalSearch($wo_number);
@@ -76,7 +76,7 @@ $sfm_act_SFM.performQuickSave();
 var $textLabels = ["Line Qty"];
 var $textValues = ["365"];
 var $pickListLabels = ["Line Type","Record Type"];
-var $pickListValues = ["Parts","Usage/Consumption"];
+$pickListValues = ["Parts","Usage/Consumption"];
 var $textAreaLabels = [];
 var $textAreaValues = [];
 var $checkBoxLabels = [];
@@ -88,19 +88,29 @@ var $dateTimeDateValues = [];
 var $timeValues = [];
 $sfm_act_SFM.addChildLine("Parts",$productName, $textLabels, $textValues, $pickListLabels, $pickListValues, $textAreaLabels, $textAreaValues, $checkBoxLabels, $checkBoxValues, $dateLabels, $dateValues, $dateTimeLabels, $dateTimeDateValues, $timeValues);
 $sfm_act_SFM.performQuickSave();
-var $textPicklistDateLabels = ["Billable Qty","Received Country"];
-var $textPicklistDateExpValues = ["45","India"];
-var $verifyResult1 = $sfm_act_SFM.verifyValuesInDelivery($textPicklistDateLabels, $textPicklistDateExpValues,[],[],[],[],[],[]);
+$textPicklistDateLabels = ["Billable Qty","Received Country"];
+$textPicklistDateExpValues = ["45","India"];
+$sfm_act_lightningConfig.openExtEditForLatestItem();
+var $verifyResult1 = $sfm_act_SFM.verifyValuesInDelivery($textPicklistDateLabels,$textPicklistDateExpValues,[],[],[],[],[],[]);
+_click($sfm_pg_wo.btn_updateExtEdit);
 $pickListValues = ["Labor","Usage/Consumption"];
 $sfm_act_SFM.addChildLine("Labor",$productName,[],[], $pickListLabels, $pickListValues,[],[],[],[],[],[],[],[],[]);
 $textPicklistDateLabels = ["Start Date and Time","Received City"];
 $textPicklistDateExpValues = ["8/6/2018","Bengaluru"];
+$sfm_act_lightningConfig.openExtEditForLatestItem();
 $verifyResult2 = $sfm_act_SFM.verifyValuesInDelivery($textPicklistDateLabels,$textPicklistDateExpValues,["Start Date and Time"],["1:30 PM"],[],[],[],[]);
+_click($sfm_pg_wo.btn_updateExtEdit);
 $verifyResult = $verifyResult1 && $verifyResult2;
+_assertTrue($verifyResult);
 if($verifyResult){
 	_log("PASS: Current Header literals are verified in mapping");
 }
 else {
 	_log("FAIL:Current Header literals failed in mapping");
 }
+_click($sfm_pg_wo.btn_cancelForSfmDelivery);
+_click($sfm_pg_wo.btn_proceedForCancel);
+_setStrictVisibilityCheck(false);
+_selectDomain();
+$sfm_act_lightningConfig.logoutInLightning();
 $RS_10432.end();

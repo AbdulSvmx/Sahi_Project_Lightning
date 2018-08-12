@@ -145,4 +145,30 @@ this.createWorkDetailInLightning = function($recordType,$lineType){
 	return $lineNumber;
 };
 
+this.clearServicemaxCache = function(){
+	//This function clears servicemax cache in Lightning
+	//Author: Janaki
+	if(_isVisible($sfm_pg_wo.btn_arrowNextToGetPrice)){
+		_click($sfm_pg_wo.btn_arrowNextToGetPrice);
+	}
+	else {
+		    _click($sfm_pg_wo.btn_arrowNextToUserSettings);
+	}
+	_click($sfm_pg_wo.link_clearSvmxCache);
+	_setStrictVisibilityCheck(true);
+	if(_isVisible($sfm_pg_wo.btn_proceedForCancel)){
+	   _click($sfm_pg_wo.btn_proceedForCancel);
+	}
+	_setStrictVisibilityCheck(false);
+	_wait(4000);
+	};
+	
+this.openExtEditForLatestItem = function(){
+	var $x = _count("_row", "/.*/",_in(_div("/x-grid-item-container/")));
+	$x = $x-1;
+	_log($x);
+	_click(_div("x-action-col-icon x-action-col-0  x-sfmd-edit-icon["+$x+"]"));
+	_click(_span("Edit"));
+	
+};
 };

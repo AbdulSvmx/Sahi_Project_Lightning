@@ -5,11 +5,7 @@ $bo_act_login.login($g_url,$sfmUsn,$sfmPwd);
 $sfm_act_wizards.addToWizard("Work Order", $wizTitle, $wizardType[4], "Work Order Service Report","false","Cloned_DefaultGroupProfile");  
 _selectDomain();
 $sfm_act_createCustomWizard.createWowithoutvalues();
-/*
-$bo_act_navigation.navigateToSfmWizard();
-$sfm_act_createCustomWizard.chooseObject("Work Order");
-$sfm_act_createCustomWizard.addManageWizSteps($wizTitle,"Output Document","Work Order Service Report","");
-$sfm_act_createCustomWizard.createBlankWo();*/
+
 _wait(5000); 
 if(_exists(_span($wizTitle))){
 	_log("Pass ::: Wizard is not visible which is not assigned to the profile");
