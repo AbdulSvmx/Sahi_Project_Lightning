@@ -61,6 +61,8 @@ var $sfm_pg_screenDesigner = new function sfm_pg_screenDesigner(){
 	this.btn_lookupSave = _f("main").s_button("Save As[8]");
 	this.btn_lookupClose = _f("main").s_button("closeButton");
 	this.link_Parts=_link("Parts");
+	this.link_Labor=_link("Labor");
+	
 	
 	
 };

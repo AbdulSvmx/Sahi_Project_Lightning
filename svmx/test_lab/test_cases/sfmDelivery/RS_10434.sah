@@ -9,13 +9,13 @@ var $sfmTemplate = "SVMXSTD: Manage WO Usage Lines";
 var $isCustom = false;
 var $ctr = 0;
 var $i = 0;
-var $containerName = ["Order Status","Order Status","Parts","Parts","Parts","Parts"];
-var $fieldName=["Closed By","Site","Closed By","Site","Line Type","Record Type ID"];
+var $containerName = ["Order Status","Order Status","Parts","Parts","Parts"];
+var $fieldName=["Closed By","Site","Consumed From Location","Line Type","Record Type ID"];
 var $currentWizardName = $wizardName[4];
 var $success_message = "Work Order was saved.";
 var $stdMap = "SVMXSTD: Close Work Order";
-var $pickListLabels = [];
-var $pickListValues = [];
+var $pickListLabels = ["Line Type","Record Type"];
+var $pickListValues = ["Parts","Usage/Consumption"];
 var $textLabels = ["Closed By","Site"];
 var $textValues = ["SVMX.CURRENTUSERID","SVMX.USERTRUNK"];
 var $inventoryLocation = "Lightning Automation Location";
@@ -43,11 +43,12 @@ var $expValues = [$currentUser,$inventoryLocation];
 //Clone standard process and add the dependent picklist in the screen designer
 _setSpeed(3000);
 $sfm_act_SFM.cloneTDM016($process_to_clone,$processName,$isCustom,$pageLayoutName, $sfmTemplate, $fieldName, $containerName);
+$sfm_act_SFM.addUserLookupInScreenDesigner("Canceled By","Parts");
 _click($bo_pg_sfmTransactionAndDesigner.btn_quickSave1);
 _click($bo_pg_sfmTransactionAndDesigner.btn_qualifyingCriteriaAndFieldMapping);
 
 //Set up the mapping with SVMX.CURRENTRECORD literals for Header
-$bo_act_mappings.createMapping("Work Order",$pickListLabels,$pickListValues,$textLabels,$textValues,$mapName);
+$bo_act_mappings.createMapping("Work Order",[],[],$textLabels,$textValues,$mapName);
 
 _setSpeed(1000);
 //Add the custom process to SFM wizard.
@@ -75,9 +76,9 @@ _selectDomain();
 _wait(5000);
 _selectWindow("/SFM Transaction Designer/");
 _wait(10000);
-$textLabels = ["Closed By","Consumed From Location"];
+$textLabels = ["Canceled By","Consumed From Location"];
 _click($bo_pg_sfmTransactionAndDesigner.btn_qualifyingCriteriaAndFieldMapping);
-$bo_act_mappings.createMapping("Parts",$pickListLabels,$pickListValues,$textLabels,$textValues,$mapName);
+$bo_act_mappings.createMapping("Parts",[],[],$textLabels,$textValues,$mapName);
 _closeWindow();
 _selectWindow();
 
@@ -85,9 +86,12 @@ _selectWindow();
 _selectDomain($domainName);
 $sfm_act_lightningConfig.clearServicemaxCache();
 //Add child line item
+$textLabels = ["Line Qty"];
+$textValues = ["12"];
 $sfm_act_SFM.addChildLine("Parts",$productName, $textLabels, $textValues, $pickListLabels, $pickListValues, [],[],[],[],[],[],[],[],[]);
 $sfm_act_SFM.performQuickSave();
 $sfm_act_lightningConfig.openExtEditForLatestItem();
+$textLabels = ["Canceled By","Consumed From Location"];
 $verifyResult = $sfm_act_SFM.verifyValuesInDelivery($textLabels,$expValues,[],[],[],[],[],[]);
 _click($sfm_pg_wo.btn_updateExtEdit);
 _assertTrue($verifyResult);

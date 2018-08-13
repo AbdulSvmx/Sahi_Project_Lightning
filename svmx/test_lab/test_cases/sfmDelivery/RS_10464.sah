@@ -26,16 +26,27 @@ $rs_10464.start();
 	var $ExprFieldsDetails=[$comboField,$comboConditions,$toggleButton,$comboInput,$advExpr,$errMsg,$exprsnName];
 	$sfm_act_Transactions.sfmQualifyingCriteriaieldMappings("Work Order", $ExprFieldsDetails, "", "");
 		
-	//adding qualifying criteria for child object
+	//adding qualifying criteria for child object - part
 	var $childcomboField=["Start Date and Time","End Date and Time","Canceled On","Closed On","Line Qty"];
 	var $childcomboConditions=["Equals","Equals","Equals","Equals","Equals"];
 	var $childtoggleButton=["Yes","Yes","Yes","Yes",""];
 	var $childcomboInput=["Now","Today","Tomorrow","Yesterday","20"];
 	var $childadvExpr="1 and ((2 or 3) and (4 or 5))";
 	var $childerrMsg="";
-	var $childexprsnName = $bo_act_common.generateRandomName("RS_10463_expr_");
+	var $childexprsnName = $bo_act_common.generateRandomName("RS_10463_exprPart_");
 	var $childExprFieldsDetails=[$childcomboField,$childcomboConditions,$childtoggleButton,$childcomboInput,$childadvExpr,$childerrMsg,$childexprsnName];
 	$sfm_act_Transactions.sfmQualifyingCriteriaieldMappings("Parts", $childExprFieldsDetails, "", "");
+	
+	//adding qualifying criteria for child object - Labor
+	var $childcomboField=["Start Date and Time","End Date and Time","Canceled On","Closed On","Line Qty"];
+	var $childcomboConditions=["Equals","Equals","Equals","Equals","Equals"];
+	var $childtoggleButton=["Yes","Yes","Yes","Yes",""];
+	var $childcomboInput=["Now","Today","Tomorrow","Yesterday","20"];
+	var $childadvExpr="1 and ((2 or 3) and (4 or 5))";
+	var $childerrMsg="";
+	var $childexprsnName = $bo_act_common.generateRandomName("RS_10463_exprLabor_");
+	var $childExprFieldsDetails=[$childcomboField,$childcomboConditions,$childtoggleButton,$childcomboInput,$childadvExpr,$childerrMsg,$childexprsnName];
+	$sfm_act_Transactions.sfmQualifyingCriteriaieldMappings("Labor", $childExprFieldsDetails, "", "");
 	
 	_click($bo_pg_sfmTransactionAndDesigner.btn_saveAndclose);
 	
@@ -52,28 +63,37 @@ $rs_10464.start();
 	var $WO=createWO_RS10464("Open", 1, 2);
 	
 	var $WDpartName = $bo_act_common.generateRandomName("RS_10463_Part_");
-	var $WorkDetail=addWorkDetailLine("Usage/Consumption", "Parts", 20, 1, 2,$WDpartName);
+	var $WorkDetailPart=addWorkDetailLine("Usage/Consumption", "Parts", 20, 1, 2,$WDpartName);
 	
+	var $WDlaborName = $bo_act_common.generateRandomName("RS_10463_Labor_");
+	var $WorkDetailLabor=addWorkDetailLine("Usage/Consumption", "Labor", 20, 1, 2,$WDlaborName);
 	
 	$sfm_act_common.globalSearchInLightning($WO);
-	//var $sfmName="rs_10464_8820181554";
+	//var $sfmName="rs_10464_1282018111327";
 	_setStrictVisibilityCheck(true);
 	$sfm_act_createCustomWizard.clickWizardBtn($sfmName);
 	_assertExists(_div("/"+$sfmName+"/"));
 	//_assertExists($sfm_pg_screenDesigner.link_Parts);
-	_assertExists(_div($WDpartName),_in(_div("SFMCompositeGrid1-bodyWrap")));
+	_click($sfm_pg_screenDesigner.link_Parts);
+	_assertExists(_div($WDpartName,_in(_div("SFMCompositeGrid1-bodyWrap"))));
+	_click($sfm_pg_screenDesigner.link_Labor);
+	_assertExists(_div($WDlaborName,_in(_div("SFMCompositeGrid2-bodyWrap"))));
 	_setStrictVisibilityCheck(false);
+	
 
 	
 	//Edit WD
 	$sfm_act_common.globalSearchInLightning($WO);
-	editWorkDetailLine($WorkDetail, 8, 6, 7);
+	editWorkDetailLine($WorkDetailPart,"Parts", 8, 6, 7);
+	editWorkDetailLine($WorkDetailLabor,"Labor", 8, 6, 7);
 	
 	$sfm_act_common.globalSearchInLightning($WO);
 	_setStrictVisibilityCheck(true);
 	$sfm_act_createCustomWizard.clickWizardBtn($sfmName);
 	_assertExists(_div("/"+$sfmName+"/"));
 	_assertNotExists(_div($WDpartName),_in(_div("SFMCompositeGrid1-bodyWrap")));
+	_click($sfm_pg_screenDesigner.link_Labor);
+	_assertNotExists(_div($WDlaborName,_in(_div("SFMCompositeGrid2-bodyWrap"))));
 	_setStrictVisibilityCheck(false);
 	
 	
@@ -136,7 +156,12 @@ function addWorkDetailLine($recordType,$lineType,$lineQTY,$WDcancelFD, $WDcloseF
 		addWDfiledValues($lineType, $lineQTY, $WDcancelFD, $WDcloseFD,$WDpartName);
 		_click($sfm_pg_sfmDesigner.btn_saveWorkDetail);
 		_wait(5000,isVisible($sfm_pg_sfmDesigner.msg_WDCreateConfirm));
-		var $WorkDetailName=_getText(_link("/WL-.*/",_in(_div("/Line Number/"))));
+		var $WorkDetailName;
+		if ($lineType=="Parts") {
+			$WorkDetailName=_getText(_link("/WL-.*/",_in(_div("/Line Number/")),_near(_span("Parts"))));
+		}else {
+			$WorkDetailName=_getText(_link("/WL-.*/",_in(_div("/Line Number/")),_near(_span("Labor"))));
+		}
 		_setStrictVisibilityCheck(false);
 		return $WorkDetailName;
 	}
@@ -168,7 +193,7 @@ function addWDfiledValues($lineType,$lineQTY,$WDcancelFD,$WDcloseFD,$WDpartName)
 	_setStrictVisibilityCheck(false);
 }
 
-function editWorkDetailLine($WorkDetail,$lineQTY,$WDcancelFD,$WDcloseFD){
+function editWorkDetailLine($WorkDetail,$lineType,$lineQTY,$WDcancelFD,$WDcloseFD){
 	_setStrictVisibilityCheck(true);
 	_click($sfm_pg_sfmDesigner.link_related);
 	//_click(_link($WorkDetail));
@@ -177,7 +202,7 @@ function editWorkDetailLine($WorkDetail,$lineQTY,$WDcancelFD,$WDcloseFD){
 	_wait(5000,_isVisible($sfm_pg_sfmDesigner.link_editWD));
 	_click($sfm_pg_sfmDesigner.link_editWD);
 	_wait(10000,_isVisible(_heading2("Edit Work Detail")));
-	addWDfiledValues("Parts", $lineQTY,$WDcancelFD,$WDcloseFD,"");
+	addWDfiledValues($lineType, $lineQTY,$WDcancelFD,$WDcloseFD,"");
 	_click($sfm_pg_sfmDesigner.btn_saveWorkDetail);
 	_setStrictVisibilityCheck(false);
 }

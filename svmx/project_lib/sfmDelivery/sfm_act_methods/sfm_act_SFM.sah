@@ -242,8 +242,8 @@ var $sfm_act_SFM = new function sfm_act_SFM() {
 		_setStrictVisibilityCheck(true);
 		_setValue(_textbox("/sfm-text/",_leftOf(_link("Search"))),$productName);
 		_click($sfm_pg_wo.btn_productSearchChildLine);
-		if(_isVisible(_span("x-grid-checkcolumn",_leftOf(_div("/"+$productName+"/"))))) {
-		  _click(_span("x-grid-checkcolumn",_leftOf(_div("/"+$productName+"/"))));	
+		if(_isVisible(_span("/x-grid-checkcolumn/",_leftOf(_div("/"+$productName+"/"))))) {
+		  _click(_span("/x-grid-checkcolumn/",_leftOf(_div("/"+$productName+"/"))));	
 		  _click($sfm_pg_wo.btn_addProductChildLine);
 		}
 		else {
@@ -418,5 +418,16 @@ return $result;
 			    _log("Checkbox values do not match");
 				return false;
 			}	
+	};
+	this.addUserLookupInScreenDesigner = function($fieldName,$containerName){
+		//This function adds a user lookup which needs special handling in the screen designer
+		//to an existing page layout
+		_click($bo_pg_sfmTransactionAndDesigner.btn_screenDesigner);
+		_click(_f("main").s_datagroup("dataGroup").near(_f("main").s_richtext($containerName)));
+		_click(_f("main").s_label($fieldName));
+		_click($bo_pg_sfmTransactionAndDesigner.btn_addFieldToPage);
+		_click($bo_pg_sfmTransactionAndDesigner.btn_quickSave);
+		_wait(3000, _isVisible($bo_pg_sfmTransactionAndDesigner.label_pageSaved));
+		
 	};
 };
