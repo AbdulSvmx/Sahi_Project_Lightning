@@ -426,7 +426,7 @@ return $result;
 		_click(_f("main").s_datagroup("dataGroup").near(_f("main").s_richtext($containerName)));
 		_click(_f("main").s_label($fieldName));
 		_click($bo_pg_sfmTransactionAndDesigner.btn_addFieldToPage);
-		_click($bo_pg_sfmTransactionAndDesigner.btn_quickSave);
+		_click($bo_pg_sfmTransactionAndDesigner.btn_pageLayoutSave);
 		_wait(3000, _isVisible($bo_pg_sfmTransactionAndDesigner.label_pageSaved));
 		
 	};

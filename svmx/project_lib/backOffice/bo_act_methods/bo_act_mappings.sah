@@ -10,6 +10,7 @@ var $bo_act_mappings = new function bo_act_mappings() {
 	this.createMapping = function($containerName,$pickListLabels,$pickListValues,$textLabels,$textValues,$mapName){
 		var $i = 0;
 		_wait(6000);
+		_selectDomain($domainName);
 		_click($sfm_pg_sfmMapping.btn_mappingTab);
 		_click(_f("main").s_label($containerName));
 		_click($sfm_pg_sfmMapping.btn_newMappingExistingRecord);
