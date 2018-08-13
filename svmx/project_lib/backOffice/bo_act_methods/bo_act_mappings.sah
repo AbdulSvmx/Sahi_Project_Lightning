@@ -37,7 +37,7 @@ var $bo_act_mappings = new function bo_act_mappings() {
 		}
 		//Set all the text values
 		$i = 0;
-		if($pickListLabels.length > 0) {
+		if($pickListLabels.length > 0 && $textLabels.length > 0) {
 		 _click($sfm_pg_sfmMapping.btn_toggleMapOnOff);
 		}
 		if($textLabels.length > 0){
