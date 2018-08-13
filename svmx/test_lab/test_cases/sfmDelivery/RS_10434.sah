@@ -48,8 +48,8 @@ _click($bo_pg_sfmTransactionAndDesigner.btn_quickSave1);
 _click($bo_pg_sfmTransactionAndDesigner.btn_qualifyingCriteriaAndFieldMapping);
 
 //Set up the mapping with SVMX.CURRENTRECORD literals for Header
+_selectDomain($domainName);
 $bo_act_mappings.createMapping("Work Order",[],[],$textLabels,$textValues,$mapName);
-
 _setSpeed(1000);
 //Add the custom process to SFM wizard.
 $sfm_act_wizards.addToWizard($object_name,$currentWizardName,"SFM",$processName);
