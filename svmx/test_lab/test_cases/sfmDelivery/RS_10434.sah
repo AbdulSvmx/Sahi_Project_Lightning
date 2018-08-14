@@ -90,6 +90,7 @@ $textLabels = ["Line Qty"];
 $textValues = ["12"];
 $sfm_act_SFM.addChildLine("Parts",$productName, $textLabels, $textValues, $pickListLabels, $pickListValues, [],[],[],[],[],[],[],[],[]);
 $sfm_act_SFM.performQuickSave();
+$sfm_act_lightningConfig.clearServicemaxCache();
 $sfm_act_lightningConfig.openExtEditForLatestItem();
 $textLabels = ["Canceled By","Consumed From Location"];
 $verifyResult = $sfm_act_SFM.verifyValuesInDelivery($textLabels,$expValues,[],[],[],[],[],[]);
