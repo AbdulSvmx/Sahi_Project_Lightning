@@ -95,7 +95,7 @@ var $bo_act_mappings = new function bo_act_mappings() {
 		_click($sfm_pg_sfmMapping.btn_switchOnMapping);
 		_wait(1000);
 		_click($bo_pg_sfmTransactionAndDesigner.btn_quickSave1);
-		_wait(1000);
+		_wait(2000);
 	};
 	
 	this.addFieldsToExistingMapping = function($containerName,$pickListLabels,$pickListValues,$textLabels,$textValues,$mapName){
