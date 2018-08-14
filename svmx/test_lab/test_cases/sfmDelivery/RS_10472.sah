@@ -1,0 +1,31 @@
+var $RS_10472 = _testcase("RS_10472","Verify Field Map for existing records - Header");
+$RS_10472.start();
+//Variables used
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+$RS_10472.end();
