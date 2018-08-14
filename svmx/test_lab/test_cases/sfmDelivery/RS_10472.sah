@@ -1,6 +1,70 @@
 var $RS_10472 = _testcase("RS_10472","Verify Field Map for existing records - Header");
 $RS_10472.start();
 //Variables used
+var $processName = "RS_10472";
+var $process_to_clone = "Create Follow-Up Work Order from Work Order";
+var $sfmTemplate = "SVMXSTD: Manage WO Usage Lines";
+var $isCustom = false;
+var $ctr = 0;
+var $i = 0;
+var $success_message = "Work Order was saved.";
+var $containerName = [];
+var $fieldName=[];
+var $fieldsToMap = ["Account","Actual Onsite Response","Record Type Id","Clock Paused Forever","Proforma Invoice Amount","Scheduled Date","Group Email","Estimated Duration","Order Status","City","Street","Problem Description"];
+var $currentWizardName = $wizardName[4];
+var $productName = "Chrome";
+var $lineType = "Parts";
+
+//Appending current timestamp to process name to make it unique.
+var $timeStamp = $bo_act_navigation.getCurrentTimeStamp();
+$processName = $processName + "_" + $timeStamp;
+var $pageLayoutName = $processName + "pg";
+var $mapName = $processName + "mp";
+
+//**************************************************************************************
+//Login and switch to lightning
+//$bo_act_login.login($g_url,$bac_un,$bac_pwd);
+$bo_act_login.login($g_url,$sfmUsn,$sfmPwd);
+$sfm_act_lightningConfig.switchToLightning();
+
+//Navigate to servicemax setup and setup required process.
+//Clone standard process and add the dependent picklist in the screen designer
+_setSpeed(3000);
+$sfm_act_SFM.cloneTDM016($process_to_clone,$processName,$isCustom,$pageLayoutName,$sfmTemplate, $fieldName, $containerName);
+_click($bo_pg_sfmTransactionAndDesigner.btn_quickSave1);
+
+//Delete the mapped fields from the Page Layout to test the scenario of mapping without the fields in Page Layout.
+_log("Delete the mapped fields from the Page Layout to test the scenario of mapping without the fields in Page Layout");
+_click($bo_pg_sfmTransactionAndDesigner.btn_screenDesigner);
+for($i=0;$i<$fieldsToMap.length;$i++){
+	if(_isVisible(_f("main").s_button("Remove this field").near(_f("main").uiftetextfield($fieldsToMap[$i])))){
+		$bo_pg_sfmTransactionAndDesigner.deleteField($fieldsToMap[$i]);
+	}
+_click($bo_pg_sfmTransactionAndDesigner.btn_saveMap);
+_click($bo_pg_sfmTransactionAndDesigner.btn_quickSave1);
+
+//Create mapping for all possible standard data types.
+_click($bo_pg_sfmTransactionAndDesigner.btn_qualifyingCriteriaAndFieldMapping);
+$bo_act_mappings.createMapping("Work Order",$fieldsToMap,$fieldsToMap,[],[],$mapName);
+_selectDomain();
+_setSpeed(1000);
+
+//Add the custom process to SFM wizard.
+$sfm_act_wizards.addToWizard($object_name,$currentWizardName,"SFM",$processName);
+_selectDomain();
+
+var $wo_number = $sfm_act_createCustomWizard.createWowithdateliterals();
+var $wlNumber = $sfm_act_lightningConfig.createWorkDetailInLightning("Usage",$lineType);
+//Add all needed details to the parent work order
+
+$bo_act_navigation.navigateToCreatedRecordUsingGlobalSearch($wo_number);
+
+//Launch the process in SFM Delivery
+$sfm_act_createCustomWizard.clickWizardlinks($processName);
+_wait(3000);
+_selectDomain($domainName);
+
+//Verify all the values without the fields in the page layout.
 
 
 
@@ -28,4 +92,8 @@ $RS_10472.start();
 
 
 
+
+
+
+}
 $RS_10472.end();
