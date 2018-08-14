@@ -168,6 +168,7 @@ this.openExtEditForLatestItem = function(){
 	$x = $x-1;
 	_log($x);
 	_click(_div("x-action-col-icon x-action-col-0  x-sfmd-edit-icon["+$x+"]"));
+	_wait(1000);
 	_click(_span("Edit"));
 	
 };
