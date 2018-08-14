@@ -92,6 +92,7 @@ var $bo_act_mappings = new function bo_act_mappings() {
 			_wait(2000);
 			_assertVisible($sfm_pg_sfmMapping.label_mapSavedMsg);
 		}
+		_click($sfm_pg_sfmMapping.btn_switchOnMapping);
 		_click($bo_pg_sfmTransactionAndDesigner.btn_quickSave1);
 	};
 	

@@ -17,6 +17,7 @@ var $sfm_pg_sfmMapping = new function sfm_pg_sfmMapping() {
 	this.label_mapSavedMsg = _f("main").uiftetextfield("Map saved");
 	this.btn_selectExistingMap = _f("main").s_combobox("searchCombo").inside(_f("main").s_navigatorcontent("Value Map for Existing Records"));
 	this.btn_toggleMapOnOff = _f("main").s_togglebutton("Show All Fields").rightOf(_f("main").s_label("All"));
+	this.btn_switchOnMapping = _f("main").s_togglebutton("Show Mapped Fields[1]");
 	this.cmb_mappingComboBox = _f("SFMExpressionBuilderSWF").s_combobox("searchCombo").inside(_f("SFMExpressionBuilderSWF").s_navigatorcontent("Value Map For New Records"));
 	this.txt_mappingNameInBuilder = _f("SFMExpressionBuilderSWF").s_textinput("textInput").inside(_f("SFMExpressionBuilderSWF").s_navigatorcontent("Value Map For New Records"));
 	this.btn_deleteMappingOutsideProcess = _f("SFMExpressionBuilderSWF").s_button("Delete").inside(_f("SFMExpressionBuilderSWF").s_navigatorcontent("Value Map For New Records"));

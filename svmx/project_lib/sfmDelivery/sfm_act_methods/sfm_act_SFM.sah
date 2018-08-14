@@ -246,8 +246,11 @@ var $sfm_act_SFM = new function sfm_act_SFM() {
 		  _click(_span("/x-grid-checkcolumn/",_leftOf(_div("/"+$productName+"/"))));	
 		  _click($sfm_pg_wo.btn_addProductChildLine);
 		}
+		else if(_isVisible(_link($productName))){
+		 	_click(_link($productName));	
+		}
 		else {
-		 _click(_link($productName));	
+			_log("Product Search failed");
 		}
 	};
 	
