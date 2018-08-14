@@ -1,6 +1,7 @@
 var $RS_10472 = _testcase("RS_10472","Verify Field Map for existing records - Header");
 $RS_10472.start();
 //Variables used
+var $object_name = "Work Order";
 var $processName = "RS_10472";
 var $process_to_clone = "Create Follow-Up Work Order from Work Order";
 var $sfmTemplate = "SVMXSTD: Manage WO Usage Lines";
@@ -14,6 +15,7 @@ var $fieldsToMap = ["Account","Actual Onsite Response","Record Type Id","Clock P
 var $currentWizardName = $wizardName[4];
 var $productName = "Chrome";
 var $lineType = "Parts";
+var $fieldsAbsentInPage = [];
 
 //Appending current timestamp to process name to make it unique.
 var $timeStamp = $bo_act_navigation.getCurrentTimeStamp();
@@ -56,6 +58,21 @@ _selectDomain();
 var $wo_number = $sfm_act_createCustomWizard.createWowithdateliterals();
 var $wlNumber = $sfm_act_lightningConfig.createWorkDetailInLightning("Usage",$lineType);
 //Add all needed details to the parent work order
+
+//First find if all the fields are present in the current page layout. 
+//Take the list of fields that are not present.
+
+for($i=0;$i<$fieldsToMap.length;$i++){
+	if($sfm_act_lightningConfig.findIfFieldPresentInPageLayout($fieldsToMap[$i])){
+		$fieldsAbsentInPage.push($fieldsToMap[$i]);
+	}	
+}
+var $x = $fieldsAbsentInPage.indexOf("Record Type Id");
+if($x != -1) {
+		$fieldsAbsentInPage[$x] = "Record Type";
+}
+//If there are fields not present in field layout , add them in object manager.
+$sfm_act_lightningConfig.navigateToObjectsInLightning($object_name);
 
 $bo_act_navigation.navigateToCreatedRecordUsingGlobalSearch($wo_number);
 
