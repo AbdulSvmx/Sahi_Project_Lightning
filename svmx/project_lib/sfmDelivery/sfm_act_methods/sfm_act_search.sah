@@ -104,20 +104,29 @@ var $sfm_act_search = new function sfm_search() {
 		_click($sfm_pg_search.btn_objectSave);
 	};
 
-	this.newCustomSearch = function($searchName,$searchObject){
+	this.newCustomSearch = function($searchName,$searchObjects){
 		var $searchID = $searchName.toLowerCase();
 		_click($sfm_pg_search.btn_customNew);
 		_setValue($sfm_pg_search.txt_searchTitle,$searchName);
 		_setValue($sfm_pg_search.txt_searchID,$searchID);
+		_setValue(_textarea(0,_rightOf(_span("Description"))),$searchName);
 		_click($sfm_pg_search.tab_searchConfig);
-		this.addNewSearchConfig($searchObject);
+		if(_isVisible(_span($searchName))){
+			_log("Automation Search Already Added");
+		}else{
+			this.addNewSearchConfig($searchObjects);
+		}
+		
 	};
 
-	this.addNewSearchConfig = function($searchObject){
-		_click($sfm_pg_search.btn_new);
-		_setSelected($sfm_pg_search.sel_searchObject,$searchObject);
-		_wait(8000);
-		_click(_button("Save"));
+	this.addNewSearchConfig = function($searchObjects){
+		for(var $i=0;$i<$searchObjects.length;$i++){
+			_click($sfm_pg_search.btn_new);
+			_setSelected(_select($i,_near(_tableHeader("Search Object"))),$searchObjects[$i]);
+			_wait(8000);
+			_click(_button("Save"));
+			_wait(5000);
+		}
 	};
 
 	this.buildExpression = function($clicks,$exprsnVal,$sheetName){
