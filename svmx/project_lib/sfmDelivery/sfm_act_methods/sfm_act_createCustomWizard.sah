@@ -888,7 +888,7 @@ var $sfm_act_createCustomWizard = new function sfm_act_createCustomWizard() {
 		//Check if the SFM process link exists
 		_assertExists(_span($sfmname));
 		_click(_span($sfmname));
-		_wait(2000);
+		_wait(4000);
 		};
 		
 		this.addSubtractDates = function($given_date,$num_of_days) {
