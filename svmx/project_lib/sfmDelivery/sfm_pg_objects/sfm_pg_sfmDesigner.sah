@@ -33,11 +33,31 @@ var $sfm_pg_sfmDesigner = new function sfm_pg_sfmDesigner() {
 	this.lbl_WDPart=_span("Part",_in(this.newWDWindow));
 	this.txt_WDpart=_textbox(0,_near(this.lbl_WDPart));
 	this.btn_WDNewProduct=_span("/New Product/",_near(this.lbl_WDPart));
+	this.link_activityType=_link(0,_near(_span("Activity Type",_in(this.newWDWindow))));
+	this.txt_requestedCity=_textbox(0,_near(_span("Requested City",_in(this.newWDWindow))));
+	this.txt_billableQty=_textbox(0,_near(_span("Billable Qty",_in(this.newWDWindow))));
+	
+	this.lbl_WDIB=_span("IB Serial Number",_in(this.newWDWindow));
+	this.txt_IBserialNo=_textbox(0,_near(this.lbl_WDIB));
+	this.btn_WDNewIB=_span("/New Installed Product/",_near(this.lbl_WDIB));
+	
+	this.newIBWindow=_parentNode(_heading2("New Installed Product"),"DIV",2);
+	this.lbl_Product=_span("Product",_in(this.newIBWindow));
+	this.txt_Product=_textbox(0,_near(this.lbl_Product));
+	this.btn_IBsave=_button("Save",_in(this.newIBWindow));
+	this.txt_SrSlotNo=_textbox(0,_near(_span("Serial/Lot Number",_in(this.newIBWindow))));
+	this.txt_Account=_textbox(0,_near(_span("Account",_in(this.newIBWindow))));
+	this.txt_IBID=_textbox(0,_near(_span("Installed Product ID",_in(this.newIBWindow))));
+	this.link_IBStatus=_link(0,_near(_span("Status",_in(this.newIBWindow))));
+	
+	
 	
 	this.WDnewPartWindow=_parentNode(_heading2("New Product"),"DIV",2);
 	this.lbl_WDProductName=_span("Product Name",_in(this.WDnewPartWindow));
 	this.txt_newProductName=_textbox("Product Name*", _near(this.lbl_WDProductName));
 	this.btn_WDProductSave=_button("Save",_in(this.WDnewPartWindow));
+	
+	
 	
 	
 	

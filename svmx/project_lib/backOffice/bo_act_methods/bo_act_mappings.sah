@@ -17,8 +17,13 @@ var $bo_act_mappings = new function bo_act_mappings() {
 		if($pickListLabels.length > 0) {
 		//First setting the picklist values
 		for($i=0;$i<$pickListLabels.length;$i++){
-			_click(_f("main").s_togglebutton("I want to choose a field from the list").rightOf(_f("main").ftedatagriditemrenderer($pickListLabels[$i])));
-			_setSelected(_f("main").s_combobox("valuesCombo").rightOf(_f("main").ftedatagriditemrenderer($pickListLabels[$i])),$pickListValues[$i]);
+			if(_isVisible($sfm_pg_sfmMapping.tab_fieldMapForExisting)){
+				_setSelected(_f("main").s_combobox("valuesCombo").rightOf(_f("main").ftedatagriditemrenderer($pickListLabels[$i])),$pickListValues[$i]);
+			}
+			else if(_isVisible($sfm_pg_sfmMapping.tab_valueMapForExisting)){
+				_click(_f("main").s_togglebutton("I want to choose a field from the list").rightOf(_f("main").ftedatagriditemrenderer($pickListLabels[$i])));
+				_setSelected(_f("main").s_combobox("valuesCombo").rightOf(_f("main").ftedatagriditemrenderer($pickListLabels[$i])),$pickListValues[$i]);
+			}
 		}
 		if($containerName === "Work Order"){
 			_setValue($sfm_pg_sfmMapping.txt_mappingNameForExisting,$mapName);

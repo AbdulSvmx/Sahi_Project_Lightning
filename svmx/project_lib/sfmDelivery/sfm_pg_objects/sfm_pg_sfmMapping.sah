@@ -25,5 +25,6 @@ var $sfm_pg_sfmMapping = new function sfm_pg_sfmMapping() {
 	this.txt_mappingUsedWarning = _f("SFMExpressionBuilderSWF").uiftetextfield("/An error occurred when deleting the map: Cannot delete this mapping. Following the a list of entities which use this mapping:/");
 	this.btn_okButtonAfterWarning = _f("SFMExpressionBuilderSWF").button("OK");
 	this.label_mapDeleted = _f("SFMExpressionBuilderSWF").uiftetextfield("Map deleted");
-		
+	this.tab_valueMapForExisting = _f("main").tab("Value Map for Existing Records");
+	this.tab_fieldMapForExisting = _f("main").tab("Field Map For Existing Records");	
 	};
