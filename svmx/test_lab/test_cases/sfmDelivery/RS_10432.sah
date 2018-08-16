@@ -71,7 +71,7 @@ _selectDomain($domainName);
 //Enter header values and hit 'Quick Save'
 $sfm_act_SFM.fillHeaderTextValues($textLabelsArrayHeader,$textValuesArrayHeader);
 $sfm_act_SFM.fillHeaderPicklistValues($picklistLabelsArrayHeader,$picklistValuesArrayHeader);
-$sfm_act_SFM.fillDateTimeFields(["Scheduled Date Time"],["8/6/2018"],["1:30 PM"]);
+$sfm_act_SFM.fillDateTimeFields(["Scheduled Date Time"],["8/16/2018"],["1:30 PM"]);
 //$sfm_act_SFM.selectToday($dateTimeField);
 $sfm_act_SFM.performQuickSave();
 var $textLabels = ["Line Qty"];
