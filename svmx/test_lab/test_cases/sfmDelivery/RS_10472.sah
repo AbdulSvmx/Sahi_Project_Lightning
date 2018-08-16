@@ -34,9 +34,19 @@ $sfm_act_lightningConfig.switchToLightning();
 //Navigate to servicemax setup and setup required process.
 //Clone standard process and add the dependent picklist in the screen designer
 _setSpeed(3000);
-$sfm_act_SFM.cloneTDM016($process_to_clone,$processName,$isCustom,$pageLayoutName,$sfmTemplate, $fieldName, $containerName);
-_click($bo_pg_sfmTransactionAndDesigner.btn_quickSave1);
-
+$bo_act_navigation.navigateToSfmTransactionDesigner();
+$sfm_act_SFM.selectSFM($process_to_clone,false);
+_click($bo_pg_sfmTransactionAndDesigner.btn_clone);
+_wait(60000, _isVisible($bo_pg_sfmTransactionAndDesigner.txt_name));
+_setValue($bo_pg_sfmTransactionAndDesigner.txt_name, $processName);
+_setValue($bo_pg_sfmTransactionAndDesigner.txt_sfmTransactionId,$processName);
+//_click($bo_pg_sfmTransactionAndDesigner.btn_quickSave1);
+_click($bo_pg_sfmTransactionAndDesigner.btn_screenDesigner);
+_setValue($bo_pg_sfmTransactionAndDesigner.txt_sfmSavePageLayoutAs, $pageLayoutName);
+_wait(3000);
+_click($bo_pg_sfmTransactionAndDesigner.btn_pageLayoutSave);
+_wait(3000, _isVisible(_f("main").label("Page saved")));
+_wait(3000);
 //Delete the mapped fields from the Page Layout to test the scenario of mapping without the fields in Page Layout.
 _log("Delete the mapped fields from the Page Layout to test the scenario of mapping without the fields in Page Layout");
 _click($bo_pg_sfmTransactionAndDesigner.btn_screenDesigner);
@@ -44,7 +54,8 @@ for($i=0;$i<$fieldsToMap.length;$i++){
 	if(_isVisible(_f("main").s_button("Remove this field").near(_f("main").uiftetextfield($fieldsToMap[$i])))){
 		$bo_pg_sfmTransactionAndDesigner.deleteField($fieldsToMap[$i]);
 	}
-_click($bo_pg_sfmTransactionAndDesigner.btn_saveMap);
+}
+_click($bo_pg_sfmTransactionAndDesigner.btn_quickSave);
 _click($bo_pg_sfmTransactionAndDesigner.btn_quickSave1);
 
 //Create mapping for all possible standard data types.
@@ -114,7 +125,7 @@ if($res){
 else {
 	_log("FAIL: Newly created follow up order does not have values as per mapping");
 }
-
+_selectDomain();
 //Add the fields in the Screen designer
 $sfm_act_createCustomWizard.clickWizardlinks($processName);
 _selectDomain($domainName);
@@ -171,6 +182,5 @@ if($res){
 else {
 	_log("FAIL: Newly created follow up order does not have values as per mapping");
 }
-};
-
+$sfm_act_lightningConfig.logoutInLightning();
 $RS_10472.end();
