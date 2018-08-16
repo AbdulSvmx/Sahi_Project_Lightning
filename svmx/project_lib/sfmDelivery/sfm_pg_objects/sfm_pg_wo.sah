@@ -106,6 +106,8 @@ var $sfm_pg_wo = new function sfm_pg_wo() {
 	this.link_profileImageRightCorner = _div("/user-profile/");
 	this.link_lightningLogout = _link("Log Out");
 	this.link_currentUserName = _link("profile-link-label");
+	this.txt_pgLayoutQuickFind = _textbox("quickfind");
+	this.btn_pgLayoutSave = _emphasis("Save");
 	
 //Added by JJ for SFM Delivery components . All are Lightning ready.
 	this.link_delivery_save = _link("Save");
@@ -131,6 +133,9 @@ var $sfm_pg_wo = new function sfm_pg_wo() {
     this.btn_updateExtEdit = _span("Update");
 	this.link_today = _span("Today");
 	this.link_clearSvmxCache = _span("Clear ServiceMax Cache");
+	this.btn_saveEditWO = _button("Save");
+	this.btn_pencilToEditWo = _button("/Edit/");
+	
 	this.openAppLauncher = function(){
 		_wait(5000,_submit("App Launcher"));
 		if(_isVisible(_submit("App Launcher"))){

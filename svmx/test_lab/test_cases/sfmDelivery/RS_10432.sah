@@ -53,6 +53,7 @@ $textLabels = ["Received City","Start Date and Time"];
 $textValues = ["SVMX.CURRENTRECORDHEADER.SVMXC__City__c","SVMX.CURRENTRECORDHEADER.SVMXC__Scheduled_Date_Time__c"];
 $mapName = $mapName + "_2";
 //Set up the mapping with SVMX.CURRENTRECORDHEADER literals for Labor
+_selectDomain($domainName);
 $bo_act_mappings.createMapping("Labor",$pickListLabels,$pickListValues,$textLabels,$textValues,$mapName);
 _setSpeed(1000);
 //Add the custom process to SFM wizard.
@@ -70,7 +71,7 @@ _selectDomain($domainName);
 //Enter header values and hit 'Quick Save'
 $sfm_act_SFM.fillHeaderTextValues($textLabelsArrayHeader,$textValuesArrayHeader);
 $sfm_act_SFM.fillHeaderPicklistValues($picklistLabelsArrayHeader,$picklistValuesArrayHeader);
-$sfm_act_SFM.fillDateTimeFields(["Scheduled Date Time"],["8/6/2018"],["1:30 PM"]);
+$sfm_act_SFM.fillDateTimeFields(["Scheduled Date Time"],["8/16/2018"],["1:30 PM"]);
 //$sfm_act_SFM.selectToday($dateTimeField);
 $sfm_act_SFM.performQuickSave();
 var $textLabels = ["Line Qty"];

@@ -18,4 +18,7 @@ _selectDomain();
 _selectWindow("Servicemax_Conf_Prof");
 _check(_radio("True"));
 _click(_button("Save"));
+ //Added for Scenario 2--Basically Automation Search.
+$bo_act_navigation.navigateToSfmSearchDesigner();
+$sfm_act_search.newCustomSearch("Automation Search",["Account","Work Order","Case"]);
 $global_preRequisite.end();

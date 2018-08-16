@@ -97,7 +97,7 @@ if(_condition(_isVisible($bo_pg_sfmTransactionAndDesigner.btn_proceed_anyways)))
 }
 
 //Set up the mapping. Order status is set to "Open"
-$bo_act_mappings.createMapping($pickListLabels,$pickListValues,$textLabels,$textValues,$mapName);
+$bo_act_mappings.createMapping($object_name,$pickListLabels,$pickListValues,$textLabels,$textValues,$mapName);
 _setSpeed(1000);
 //Add the custom process to SFM wizard.
 $sfm_act_wizards.addToWizard($object_name,$currentWizardName,"SFM",$processName);
@@ -160,7 +160,7 @@ _selectWindow("/SFM Transaction Designer/");
 _wait(10000);
 _click($bo_pg_sfmTransactionAndDesigner.btn_qualifyingCriteriaAndFieldMapping);
 $pickListValues = ["Closed"];
-$bo_act_mappings.editExistingFieldsInMapping($pickListLabels, $pickListValues, $textLabels, $textValues, $mapName);
+$bo_act_mappings.editExistingFieldsInMapping($object_name,$pickListLabels, $pickListValues, $textLabels, $textValues, $mapName);
 _selectDomain();
 _closeWindow();
 _selectWindow();
