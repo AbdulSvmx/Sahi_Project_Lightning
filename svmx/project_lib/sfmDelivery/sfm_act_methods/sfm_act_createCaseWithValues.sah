@@ -44,6 +44,7 @@ this.selectContactlookup = function(){
 		};
 //Create new Case
 this.createCase = function($casePriority,$caseBillingType,$caseDescription,$caseOrigin ) {
+	
     $bo_act_navigation.navigateToCasesPage();
 	_click($bo_pg_Cases.btn_new);
 	//Adding values in fields
