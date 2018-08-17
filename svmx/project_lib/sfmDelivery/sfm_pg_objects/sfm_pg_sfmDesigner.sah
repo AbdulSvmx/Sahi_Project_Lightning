@@ -120,6 +120,8 @@ var $sfm_pg_sfmDesigner = new function sfm_pg_sfmDesigner() {
 	this.txt_component = _textbox(0,_near(_span("Component"))); // added for lightning
 	this.txt_city = _textbox("City",_near(_span("City")));
 	this.txt_acutalIntialResponse = _textbox(0,_near(_span("Actual Initial Response"))) ;
+	this.txt_priority = _textbox("/sfm-picklist/",_near(_div("Priority")));
+	this.txt_zip = _textbox("Zip");
 	
 	
 };
