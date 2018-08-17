@@ -3,16 +3,14 @@ $rs_10461.start();
 
 	//Login to App
 	$bo_act_login.login($g_url,$sfmUsn,$sfmPwd);
-	//$bo_act_navigation.navigateToSfmTransactionDesigner();
 	
 	//clone standard SFM
-/*	var $sfmNameToBeCloned="Create Usage Lines from Estimates";
+	var $sfmNameToBeCloned="Create Usage Lines from Estimates";
 	var $sfmName=$bo_act_common.generateRandomName("rs_10461_");
 	var $sfmTemplateSaveAsName=$bo_act_common.generateRandomName("SFM_Page_");
 	var $sfmTemplate="SVMXSTD: Manage WO Usage Lines";
 	var $fieldName="";
 	var $containerName="";
-	
 	$sfm_act_SFM.cloneTDM016($sfmNameToBeCloned, $sfmName, false, $sfmTemplateSaveAsName, $sfmTemplate, $fieldName, $containerName);
 	
 	//adding qualifying criteria for parent object
@@ -33,12 +31,13 @@ $rs_10461.start();
 	var $childcomboInput=["Installation","Mysore"];
 	var $childadvExpr="1 AND 2";
 	var $childerrMsg="";
-	var $childexprsnName = $bo_act_common.generateRandomName("RS_10463_exprPart_");
+	var $childexprsnName = $bo_act_common.generateRandomName("RS_10461_exprPart_");
 	var $childExprFieldsDetails=[$childcomboField,$childcomboConditions,$childtoggleButton,$childcomboInput,$childadvExpr,$childerrMsg,$childexprsnName];
 	$sfm_act_Transactions.sfmQualifyingCriteriaieldMappings("Parts", $childExprFieldsDetails, "", "");
 	
 	_click($bo_pg_sfmTransactionAndDesigner.btn_saveAndclose);
 	
+	//add SFM to expression Wizard
 	var $wizardObject="Work Order";
 	var $wizardName1 =$wizardName[6];
 	var $wizardType="SFM";
@@ -46,7 +45,6 @@ $rs_10461.start();
 	var $handOver=false;
 	_log($wizardName1);
 	$sfm_act_wizards.addToWizard($wizardObject, $wizardName1, $wizardType, $sfmName, $handOver, $profile);  
-
 
 	//create WO & WD
 	var $IBSerialNo = $bo_act_common.generateRandomName("RS_10461_IB_");
@@ -56,7 +54,8 @@ $rs_10461.start();
 	var $WorkDetailPartdetail=addWorkDetailLine("Usage/Consumption", "Parts", "Installation", "Mysore", "", "", $IBSerialNo,$AccountName);
 	var $WorkDetail=$WorkDetailPartdetail[0];
 	var $WorkDetailPart=$WorkDetailPartdetail[1];
-	
+
+
 	$sfm_act_common.globalSearchInLightning($WO);
 	_setStrictVisibilityCheck(true);
 	$sfm_act_createCustomWizard.clickWizardBtn($sfmName);
@@ -64,22 +63,23 @@ $rs_10461.start();
 	_click($sfm_pg_screenDesigner.link_Parts);
 	_assertExists(_div($WorkDetailPart,_in(_div("SFMCompositeGrid1-bodyWrap"))));
 	_setStrictVisibilityCheck(false);
-*/	
 	
-	//temp
-	var $sfmName="rs_10461_168201816563";
-	var $exprsnName="RS_10461_expr_1682018165837";
-	var $childexprsnName="RS_10463_exprPart_16820181707";
+	$bo_act_navigation.navigateToHome();
+	
+	$sfm_act_lightningConfig.logoutInLightning();
+	_wait(10000,_isVisible($bo_pg_login.txt_email));
+	$bo_act_login.login($g_url,$sfmUsn,$sfmPwd);
 	
 	//Update the sfm
+	_selectDomain();
 	$bo_act_navigation.navigateToSfmTransactionDesigner();
-	//_wait(10000);
+	_wait(10000);
 	$sfm_act_SFM.selectSFM($sfmName, true);
 	_wait(5000,_isVisible());
 	_click(_f("main").s_label($sfmName));
 	_wait(10000,_isVisible($sfm_pg_screenDesigner.btn_qualifyingCriteriaAndFieldMapping));
 	
-/*	_click($sfm_pg_screenDesigner.btn_qualifyingCriteriaAndFieldMapping);
+	_click($sfm_pg_screenDesigner.btn_qualifyingCriteriaAndFieldMapping);
 	_wait(10000,_isVisible($sfm_pg_screenDesigner.lbl_qualifyingCriteriaMapping));
 	_click(_f("main").s_label("Work Order").near($sfm_pg_screenDesigner.lbl_qualifyingCriteriaMapping));
 	_wait(10000,_isVisible($sfm_pg_screenDesigner.lbl_headerQualificationLabel));
@@ -91,12 +91,8 @@ $rs_10461.start();
 	var $comboInput=["","Warranty","Today"];
 	var $advExpr="(((1 and 2) or 3) and (4 or 5))";
 	var $errMsg="This record does not qualify as the Order Status is NOT Open and Order Type is NOT Field Service.";
-	//var $exprsnName = $bo_act_common.generateRandomName("RS_10461_expr_");
-	//var $ExprFieldsDetails=[$comboField,$comboConditions,$toggleButton,$comboInput,$advExpr,$errMsg,$exprsnName];
-	//$sfm_act_Transactions.sfmQualifyingCriteriaieldMappings("Work Order", $ExprFieldsDetails, "", "");
 	$sfm_act_Transactions.sfmUpdateExpression($comboField, $comboConditions, $toggleButton, $comboInput, $advExpr, $errMsg);
 	$sfm_act_Transactions.sfmSvaeExpression($exprsnName, $exprsnName, "Save");
-*/	//_click($bo_pg_sfmTransactionAndDesigner.btn_saveAndclose);
 	
 	_click($sfm_pg_screenDesigner.btn_qualifyingCriteriaAndFieldMapping);
 	_wait(10000,_isVisible($sfm_pg_screenDesigner.lbl_qualifyingCriteriaMapping));
@@ -110,72 +106,88 @@ $rs_10461.start();
 	var $childcomboInput=["1","Tomorrow","RS_10461_IB"];
 	var $childadvExpr="(((1 and 2) or 3) and (4 or 5))";
 	var $childerrMsg="";
-	//var $childexprsnName = $bo_act_common.generateRandomName("RS_10463_exprPart_");
-	//var $childExprFieldsDetails=[$childcomboField,$childcomboConditions,$childtoggleButton,$childcomboInput,$childadvExpr,$childerrMsg,$childexprsnName];
-	//$sfm_act_Transactions.sfmQualifyingCriteriaieldMappings("Parts", $childExprFieldsDetails, "", "");
 	$sfm_act_Transactions.sfmUpdateExpression($childcomboField, $childcomboConditions, $childtoggleButton, $childcomboInput, $childadvExpr, $childerrMsg);
 	
 	$sfm_act_Transactions.sfmSvaeExpression($childexprsnName, $childexprsnName, "Save");
 	_click($bo_pg_sfmTransactionAndDesigner.btn_saveAndclose);
-	
-/*
+
 	//After updating the expression
 	$sfm_act_common.globalSearchInLightning($WO);
 	_wait(10000,_isVisible($sfm_pg_wo.label_wo));
 	_click($sfm_pg_wo.btn_wo_edit);
 	_wait(5000,_isVisible($sfm_pg_wo.btn_editWO));
-	addWOfieldValue("Open", "Field Service", $AccountName, "Warranty", "Today");
+	addWOfieldValue("", "", "", "Warranty", "Today");
 	_click($sfm_pg_wo.btn_wo_edit_save);
 	_wait(10000,_isVisible($sfm_pg_wo.label_wo));
 	
+	//edit Work order Detail field
+	editWorkDetailLine($WorkDetail, "", "", "Bangalore", 3, "Today", "", "");
+	
+	$sfm_act_common.globalSearchInLightning($WO);
 	_setStrictVisibilityCheck(true);
 	$sfm_act_createCustomWizard.clickWizardBtn($sfmName);
 	_assertExists(_div("/"+$sfmName+"/"));
 	_click($sfm_pg_screenDesigner.link_Parts);
 	_assertNotExists(_div($WorkDetailPart,_in(_div("SFMCompositeGrid1-bodyWrap"))));
 	_setStrictVisibilityCheck(false);
-*/	
-	
-	
-	
-	
-	//var $WorkDetailPart=addWorkDetailLine("Usage/Consumption", "Parts", "Installation", "Mysore", 1, "Today", $IBSerialNo, $AccountName);
-	
 
-
-	/*
-
-	//Edit WD
+	//remove account and order type
 	$sfm_act_common.globalSearchInLightning($WO);
-	editWorkDetailLine($WorkDetailPart,"Parts", 8, 6, 7);
-	editWorkDetailLine($WorkDetailLabor,"Labor", 8, 6, 7);
-	
-	$sfm_act_common.globalSearchInLightning($WO);
-	_setStrictVisibilityCheck(true);
-	$sfm_act_createCustomWizard.clickWizardBtn($sfmName);
-	_assertExists(_div("/"+$sfmName+"/"));
-	_assertNotExists(_div($WDpartName),_in(_div("SFMCompositeGrid1-bodyWrap")));
-	_click($sfm_pg_screenDesigner.link_Labor);
-	_assertNotExists(_div($WDlaborName,_in(_div("SFMCompositeGrid2-bodyWrap"))));
-	_setStrictVisibilityCheck(false);
-	
-	
-	
-	//Edit WO
-	$sfm_act_common.globalSearchInLightning($WO);
+	_wait(10000,_isVisible($sfm_pg_wo.label_wo));
 	_click($sfm_pg_wo.btn_wo_edit);
 	_wait(5000,_isVisible($sfm_pg_wo.btn_editWO));
-	addWOfieldValue("Closed", 6, 7);
+	addWOfieldValue("Closed", "", "Delete", "", "");
 	_click($sfm_pg_wo.btn_wo_edit_save);
 	_wait(10000,_isVisible($sfm_pg_wo.label_wo));
 	
 	$sfm_act_common.globalSearchInLightning($WO);
+	_setStrictVisibilityCheck(true);
 	$sfm_act_createCustomWizard.clickWizardBtn($sfmName);
 	_selectDomain($domainName);
 	_wait(10000,_isVisible(_div($errMsg)));
 	_assertExists(_div($errMsg));
 	_selectDomain();
-*/
+	_setStrictVisibilityCheck(false);
+	
+	$bo_act_navigation.navigateToHome();
+	$sfm_act_lightningConfig.logoutInLightning();
+	_wait(10000);
+	$bo_act_login.login($g_url,$sfmUsn,$sfmPwd);
+	
+	//Remove Advance criteria
+	$bo_act_navigation.navigateToSfmTransactionDesigner();
+	_wait(10000);
+	//_selectDomain();
+	$sfm_act_SFM.selectSFM($sfmName, true);
+	_wait(5000,_isVisible());
+	_click(_f("main").s_label($sfmName));
+	_wait(10000,_isVisible($sfm_pg_screenDesigner.btn_qualifyingCriteriaAndFieldMapping));
+	_click($sfm_pg_screenDesigner.btn_qualifyingCriteriaAndFieldMapping);
+	_wait(10000,_isVisible($sfm_pg_screenDesigner.lbl_qualifyingCriteriaMapping));
+	_click(_f("main").s_label("Work Order").near($sfm_pg_screenDesigner.lbl_qualifyingCriteriaMapping));
+	_wait(10000,_isVisible($sfm_pg_screenDesigner.lbl_headerQualificationLabel));
+	
+	//adding qualifying criteria for parent object
+	var $comboField=[];
+	var $comboConditions=[];
+	var $toggleButton=[];
+	var $comboInput=[];
+	var $advExpr="";
+	var $errMsg="This record does not qualify as the Order Status is NOT Open and Order Type is NOT Field Service.";
+	$sfm_act_Transactions.sfmUpdateExpression($comboField, $comboConditions, $toggleButton, $comboInput, $advExpr, $errMsg);
+	$sfm_act_Transactions.sfmSvaeExpression($exprsnName, $exprsnName, "Save");
+	_click($bo_pg_sfmTransactionAndDesigner.btn_saveAndclose);
+	
+	$sfm_act_common.globalSearchInLightning($WO);
+	_setStrictVisibilityCheck(true);
+	$sfm_act_createCustomWizard.clickWizardBtn($sfmName);
+	_selectDomain($domainName);
+	_wait(10000,_isVisible(_div($errMsg)));
+	_assertExists(_div($errMsg));
+	_selectDomain();
+	_setStrictVisibilityCheck(false);
+	
+
 //** function to create Work**'
 
 		function createWO_RS10461($orderStatus,$orderType,$AccountName, $billingType,$Date1){
@@ -199,11 +211,15 @@ $rs_10461.start();
 
 		function addWOfieldValue($orderStatus,$orderType,$AccountName, $billingType,$Date1){
 			_setStrictVisibilityCheck(true);
-			_click($sfm_pg_wo.link_woStatus);
-			_click(_link($orderStatus));
-			_click($sfm_pg_wo.link_orderType);
-			_click(_link($orderType));
-			if ($AccountName!="" && $AccountName!==null) {
+			if ($orderStatus!="") {
+				_click($sfm_pg_wo.link_woStatus);
+				_click(_link($orderStatus));
+			}
+			if ($orderType!="") {
+				_click($sfm_pg_wo.link_orderType);
+				_click(_link($orderType));
+			}
+			if ($AccountName!="" && $AccountName!==null && $AccountName!=="Delete") {
 				_click($sfm_pg_wo.txt_Account);
 				_wait(3000,_isVisible($sfm_pg_wo.btn_WONewAccount));
 				_click($sfm_pg_wo.btn_WONewAccount);
@@ -212,8 +228,9 @@ $rs_10461.start();
 				_setValue($sfm_pg_wo.txt_accountName,$AccountName);
 				_click($sfm_pg_wo.btn_saveAccount);
 				_wait(5000,_isVisible($sfm_pg_wo.txt_Account));		
+			}else if ($AccountName=="Delete") {
+				_click(_link("Press Delete to Remove",_near($sfm_pg_wo.lbl_Account)));
 			}
-	
 			if ($billingType!="" && $billingType!=null) {
 				_click($sfm_pg_wo.link_billingType);
 				_click(_link($billingType));
@@ -237,7 +254,7 @@ $rs_10461.start();
 		_setStrictVisibilityCheck(true);
 		var $WDpartName=addWDfiledValues($lineType,$activityType,$requesteCity,$billableQty,$dateRequired,$IBSerialNo,$AccountName);
 		_click($sfm_pg_sfmDesigner.btn_saveWorkDetail);
-		_wait(5000,isVisible($sfm_pg_sfmDesigner.msg_WDCreateConfirm));
+		_wait(5000,_isVisible($sfm_pg_sfmDesigner.msg_WDCreateConfirm));
 		var $WorkDetailName=_getText(_link("/WL-.*/",_in(_div("/Line Number/")),_near(_span("Parts"))));
 		_setStrictVisibilityCheck(false);
 		_log("Work order detail Name: "+$WorkDetailName);
@@ -245,68 +262,71 @@ $rs_10461.start();
 	}
 
 	function addWDfiledValues($lineType,$activityType,$requesteCity,$billableQty,$dateRequired,$IBSerialNo,$AccountName){
-	_setStrictVisibilityCheck(true);
-	_click($sfm_pg_sfmDesigner.link_lineType);
-	_click(_link($lineType));
-	_click($sfm_pg_sfmDesigner.link_activityType);
-	_click(_link($activityType));
-	_setValue($sfm_pg_sfmDesigner.txt_requestedCity,$requesteCity);
-	_setValue($sfm_pg_sfmDesigner.txt_billableQty,$billableQty);
-	if ($dateRequired!="" && $dateRequired!=null) {
-		_click($sfm_pg_wo.txt_dateRequired);
-		_click($sfm_pg_wo.btn_today);
-	}	
-	var $WDpartName=null;
-	if ($IBSerialNo!="" && $IBSerialNo!==null) {
-		_click($sfm_pg_sfmDesigner.txt_WDpart);
-		_wait(3000,_isVisible($sfm_pg_sfmDesigner.btn_WDNewProduct));
-		_click($sfm_pg_sfmDesigner.btn_WDNewProduct);
-		
-		_wait(4000,_isVisible($sfm_pg_sfmDesigner.lbl_WDProductName));
-		$WDpartName="WDProduct"+$IBSerialNo;
-		_setValue($sfm_pg_sfmDesigner.txt_newProductName,$WDpartName);
-		_click($sfm_pg_sfmDesigner.btn_WDProductSave);
-		_wait(5000,_isVisible($sfm_pg_sfmDesigner.lbl_WDPart));
-		_setValue();
-		
-		
-		_click($sfm_pg_sfmDesigner.txt_IBserialNo);
-		_click($sfm_pg_sfmDesigner.btn_WDNewIB);
-		_wait(10000,_isVisible($sfm_pg_sfmDesigner.txt_Product));
-		_setValue($sfm_pg_sfmDesigner.txt_Product,$WDpartName);
-		_click(_div($WDpartName,_near($sfm_pg_sfmDesigner.lbl_Product)));
-		_setValue($sfm_pg_sfmDesigner.txt_SrSlotNo,$WDpartName);
-		_setValue($sfm_pg_sfmDesigner.txt_Account,$AccountName);
-		_click(_div($AccountName,_near(_span("Account",_in($sfm_pg_sfmDesigner.newIBWindow)))));
-		_setValue($sfm_pg_sfmDesigner.txt_IBID,$WDpartName);
-		_click($sfm_pg_sfmDesigner.link_IBStatus);
-		_click(_link("Installed",_near(_span("Status",_in($sfm_pg_sfmDesigner.newIBWindow)))));
-		_click($sfm_pg_sfmDesigner.btn_IBsave);		
-		
-	}	
-	_setStrictVisibilityCheck(false);
-	return $WDpartName;
+		_setStrictVisibilityCheck(true);
+		if ($lineType!="") {
+			_click($sfm_pg_sfmDesigner.link_lineType);
+			_click(_link($lineType));
+		}
+		if ($activityType!="") {
+			_click($sfm_pg_sfmDesigner.link_activityType);
+			_click(_link($activityType));
+		}
+		if ($requesteCity!="") {
+			_setValue($sfm_pg_sfmDesigner.txt_requestedCity,$requesteCity);
+		}
+		if ($billableQty!="") {
+			_setValue($sfm_pg_sfmDesigner.txt_billableQty,$billableQty);
+		}
+		if ($dateRequired!="" && $dateRequired!=null) {
+			_click($sfm_pg_wo.txt_dateRequired);
+			_click($sfm_pg_wo.btn_today);
+		}	
+		var $WDpartName=null;
+		if ($IBSerialNo!="" && $IBSerialNo!==null) {
+			_click($sfm_pg_sfmDesigner.txt_WDpart);
+			_wait(3000,_isVisible($sfm_pg_sfmDesigner.btn_WDNewProduct));
+			_click($sfm_pg_sfmDesigner.btn_WDNewProduct);
+			
+			_wait(4000,_isVisible($sfm_pg_sfmDesigner.lbl_WDProductName));
+			$WDpartName="WDProduct"+$IBSerialNo;
+			_setValue($sfm_pg_sfmDesigner.txt_newProductName,$WDpartName);
+			_click($sfm_pg_sfmDesigner.btn_WDProductSave);
+			_wait(5000,_isVisible($sfm_pg_sfmDesigner.lbl_WDPart));
+			_setValue();
+			
+			
+			_click($sfm_pg_sfmDesigner.txt_IBserialNo);
+			_click($sfm_pg_sfmDesigner.btn_WDNewIB);
+			_wait(10000,_isVisible($sfm_pg_sfmDesigner.txt_Product));
+			_setValue($sfm_pg_sfmDesigner.txt_Product,$WDpartName);
+			_click(_div($WDpartName,_near($sfm_pg_sfmDesigner.lbl_Product)));
+			_setValue($sfm_pg_sfmDesigner.txt_SrSlotNo,$WDpartName);
+			_setValue($sfm_pg_sfmDesigner.txt_Account,$AccountName);
+			_click(_div($AccountName,_near(_span("Account",_in($sfm_pg_sfmDesigner.newIBWindow)))));
+			_setValue($sfm_pg_sfmDesigner.txt_IBID,$WDpartName);
+			_click($sfm_pg_sfmDesigner.link_IBStatus);
+			_click(_link("Installed",_near(_span("Status",_in($sfm_pg_sfmDesigner.newIBWindow)))));
+			_click($sfm_pg_sfmDesigner.btn_IBsave);		
+			
+		}	
+		_setStrictVisibilityCheck(false);
+		return $WDpartName;
 	}
 
-	function editWorkDetailLine($WorkDetail,$lineType,$lineQTY,$WDcancelFD,$WDcloseFD){
-	_setStrictVisibilityCheck(true);
-	_click($sfm_pg_sfmDesigner.link_related);
-	//_click(_link($WorkDetail));
-	_wait(10000,_isVisible(_link($WorkDetail)));
-	_click(_link("/Show/", _near(_link($WorkDetail))));
-	_wait(5000,_isVisible($sfm_pg_sfmDesigner.link_editWD));
-	_click($sfm_pg_sfmDesigner.link_editWD);
-	_wait(10000,_isVisible(_heading2("Edit Work Detail")));
-	addWDfiledValues($lineType, $lineQTY,$WDcancelFD,$WDcloseFD,"");
-	_click($sfm_pg_sfmDesigner.btn_saveWorkDetail);
-	_setStrictVisibilityCheck(false);
+	function editWorkDetailLine($WorkDetail,$lineType,$activityType, $requesteCity, $billableQty, $dateRequired, $IBSerialNo, $AccountName){
+		_setStrictVisibilityCheck(true);
+		_click($sfm_pg_sfmDesigner.link_related);
+		//_click(_link($WorkDetail));
+		_wait(10000,_isVisible(_link($WorkDetail)));
+		_click(_link("/Show/", _near(_link($WorkDetail))));
+		_wait(5000,_isVisible($sfm_pg_sfmDesigner.link_editWD));
+		_click($sfm_pg_sfmDesigner.link_editWD);
+		_wait(10000,_isVisible(_heading2("Edit Work Detail")));
+		//addWDfiledValues($lineType, $lineQTY,$WDcancelFD,$WDcloseFD,"");
+		addWDfiledValues($lineType, $activityType, $requesteCity, $billableQty, $dateRequired, $IBSerialNo, $AccountName);
+		_click($sfm_pg_sfmDesigner.btn_saveWorkDetail);
+		_setStrictVisibilityCheck(false);
 	}
-
-
-
-
-
-
 
 
 $rs_10461.end();
