@@ -11,13 +11,14 @@ var $i = 0;
 var $success_message = "Work Order was saved.";
 var $containerName = [];
 var $fieldName=[];
-var $fieldsToMap = ["Account","Sub Status","Actual Onsite Response","Record Type Id","Clock Paused Forever","Proforma Invoice Amount","Scheduled Date","Group Email","Estimated Duration","Order Status","City","Street","Problem Description"];
+var $fieldsToMap = ["Account","Sub Status","Actual Onsite Response","Record Type ID","Clock Paused Forever","Proforma Invoice Amount","Scheduled Date","Group Email","Estimated Duration","Order Status","City","Street","Problem Description"];
 var $containerName = ["Work Order","Work Order","Work Order","Work Order","Work Order","Work Order","Work Order","Work Order","Work Order","Work Order","Work Order","Work Order","Work Order"];
 var $currentWizardName = $wizardName[4];
 var $productName = "Chrome";
 var $lineType = "Parts";
 var $fieldsAbsentInPage = [];
 var $pageLayoutForProfile = "SVMX Work Order - Admin";
+var $myDomain = "/lightning/";
 
 //Appending current timestamp to process name to make it unique.
 var $timeStamp = $bo_act_navigation.getCurrentTimeStamp();
@@ -39,6 +40,7 @@ $sfm_act_SFM.selectSFM($process_to_clone,false);
 _click($bo_pg_sfmTransactionAndDesigner.btn_clone);
 _wait(60000, _isVisible($bo_pg_sfmTransactionAndDesigner.txt_name));
 _setValue($bo_pg_sfmTransactionAndDesigner.txt_name, $processName);
+_setValue($bo_pg_sfmTransactionAndDesigner.txt_sfmTransactionId,"");
 _setValue($bo_pg_sfmTransactionAndDesigner.txt_sfmTransactionId,$processName);
 //_click($bo_pg_sfmTransactionAndDesigner.btn_quickSave1);
 _click($bo_pg_sfmTransactionAndDesigner.btn_screenDesigner);
@@ -71,29 +73,38 @@ _selectDomain();
 var $wo_number = $sfm_act_createCustomWizard.createWowithdateliterals();
 var $wlNumber = $sfm_act_lightningConfig.createWorkDetailInLightning("Usage",$lineType);
 //Add all needed details to the parent work order
-
+var $x = $fieldsToMap.indexOf("Record Type ID");
+if($x != -1) {
+		$fieldsToMap[$x] = "Record Type";
+}
 //First find if all the fields are present in the current page layout. 
 //Take the list of fields that are not present.
-
+$bo_act_navigation.navigateToCreatedRecordUsingGlobalSearch($wo_number);
 for($i=0;$i<$fieldsToMap.length;$i++){
-	if($sfm_act_lightningConfig.findIfFieldPresentInPageLayout($fieldsToMap[$i])){
+	if(!$sfm_act_lightningConfig.findIfFieldPresentInPageLayout($fieldsToMap[$i])){
 		$fieldsAbsentInPage.push($fieldsToMap[$i]);
 	}	
 }
+_log($fieldsAbsentInPage);
 //Record Type id is knows as Record Type in page layouts
-var $x = $fieldsAbsentInPage.indexOf("Record Type Id");
+var $x = $fieldsAbsentInPage.indexOf("Record Type ID");
 if($x != -1) {
 		$fieldsAbsentInPage[$x] = "Record Type";
 }
+
 //If there are fields not present in field layout , add them in object manager.
-$sfm_act_lightningConfig.navigateToObjectsInLightning($object_name);
-$sfm_act_lightningConfig.addFieldsToLightningPageLayout($object_name,$pageLayoutForProfile,$fieldsAbsentInPage);
-_closeWindow();
-_selectWindow();
+if($fieldsAbsentInPage.length > 0){
+	$sfm_act_lightningConfig.navigateToObjectsInLightning($object_name);
+	$sfm_act_lightningConfig.addFieldsToLightningPageLayout($object_name,$pageLayoutForProfile,$fieldsAbsentInPage,$myDomain);
+	_selectDomain();
+	_selectWindow("Home | Salesforce");
+	_closeWindow();
+	_selectWindow();
+}
 
 $bo_act_navigation.navigateToCreatedRecordUsingGlobalSearch($wo_number);
-var $textLabels = ["Proforma Invoice Amount","Scheduled Date","Group Email","Estimated Duration","City"];
-var $textValues = ["6600","04/21/2018","groupemail@group.com","345","Bengaluru"];
+var $textLabels = ["Proforma Invoice Amount","Scheduled Date","Estimated Duration","City"];
+var $textValues = ["6600","4/21/2018","345","Bengaluru"];
 var $pickListLabels = ["Order Status","Sub Status"];
 var $pickListValues = ["Completed","Unresolved"];
 var $textAreaLabels = ["Street","Problem Description"];
@@ -103,21 +114,27 @@ var $checkBoxValues = ["true"];
 var $dateTimeLabels = ["Actual Onsite Response"];
 var $dateTimeDateValues = ["4/11/2018"];
 var $timeValues = ["3:30 PM"];
-$sfm_act_lightningConfig.editWorkOrder($textLabels, $textValues, $pickListLabels, $pickListValues, $textAreaLabels, $textAreaValues, $checkBoxLabels, $checkBoxValues, $dateTimeLabels, $dateTimeDateValues, $timeValues);
+var $emailLabels = ["Group Email"];
+var $emailValues = ["groupemail@group.com"];
+_wait(2000);
+$sfm_act_lightningConfig.editWorkOrder($textLabels, $textValues, $pickListLabels, $pickListValues, $textAreaLabels, $textAreaValues, $checkBoxLabels, $checkBoxValues, $dateTimeLabels, $dateTimeDateValues, $timeValues,$emailLabels,$emailValues);
 
 //Launch the process in SFM Delivery
 $sfm_act_createCustomWizard.clickWizardlinks($processName);
-_wait(3000);
+_wait(8000);
 _selectDomain($domainName);
 
 //Verify all the values without the fields in the page layout.
 _click($sfm_pg_wo.link_delivery_save);
-_wait(7000,_isVisible($sfm_pg_wo.label_wo));
+_selectDomain();
+_wait(14000,_isVisible($sfm_pg_wo.label_wo));
 $childWoId= _getText($sfm_pg_wo.label_wo);
 _log("Child Work Order id "+ $childWoId);
-
+$textValues = ["$6,600.000","4/21/2018","345","Bengaluru"];
+var $lookUpLabels = ["Account"];
+var $lookUpValues = ["HCSAccountForTesting"];
 //Verify all values in the newly created Work order
-var $res = $sfm_act_lightningConfig.verifyValues($textLabels, $textValues, $pickListLabels, $pickListValues, $textAreaLabels, $textAreaValues, $checkBoxLabels, $checkBoxValues, $dateTimeLabels, $dateTimeDateValues, $timeValues);
+var $res = $sfm_act_lightningConfig.verifyValues($textLabels, $textValues, $pickListLabels, $pickListValues, $textAreaLabels, $textAreaValues, $checkBoxLabels, $checkBoxValues, $dateTimeLabels, $dateTimeDateValues, $timeValues,$emailLabels,$emailValues,$lookUpLabels,$lookUpValues);
 _assertTrue($res);
 if($res){
 	_log("PASS: Newly created follow up order has values as per mapping");
