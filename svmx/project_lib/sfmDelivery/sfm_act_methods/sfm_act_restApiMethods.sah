@@ -48,10 +48,12 @@ var $sfm_act_restApiMethods= new function sfm_act_restApiMethods() {
      // Sample Delete operation for the REST API
      $request_post = new RESTRequest();   
      $request_post.setURL("https://"+$orgInstance+".salesforce.com/services/data/v42.0/sobjects/"+$objName+"/");
-     $request_post.setHeader("Content-Type", "application/json");
-     $request_post.setBody($obJson);
      $request_post.setCredentials($username, $password);
+     $request_post.setHeader("Content-Type", "application/json");
      $request_post.setHeader("Authorization", "OAuth "+$AuthCode);
+     $request_post.setBody($obJson);
+     
+    
      $response_post = $request_post.submit($reqType);
      $respObj= JSON.parse($response_post.getBodyAsString());
      //_log($respObj);
