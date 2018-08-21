@@ -258,14 +258,36 @@ this.deletePageLayout = function($pageLayoutName){
 	}
 };
 
-this.deleteMappingFromProcess = function($mappingName){
+this.deleteMappingFromProcess = function($containerName,$mappingName){
 	//Deletes mapping created as part of test case cleanup
 	//Author: Janaki
 	_selectDomain($domainName);
 	_click($bo_pg_sfmTransactionAndDesigner.btn_qualifyingCriteriaAndFieldMapping);
 	_click($sfm_pg_sfmMapping.btn_mappingTab);
-	
-	
+	if($containerName === "Work Order" && _isVisible($sfm_pg_sfmMapping.tab_valueMapForExisting)){
+		_click($sfm_pg_sfmMapping.btn_deleteValueMappingExistingRecord);
+	}
+	else if($containerName != "Work Order" && _isVisible($sfm_pg_sfmMapping.tab_valueMapForNew)){
+		_click($sfm_pg_sfmMapping.btn_deleteValueMapNewRecord);
+	   }
+	else if (_isVisible($sfm_pg_sfmMapping.tab_fieldMapForExisting)){
+		_click($sfm_pg_sfmMapping.btn_deleteFieldMapExistingRecord);
+	}
+	if(_isVisible($bo_pg_sfmTransactionAndDesigner.btn_yes)){
+		_click($bo_pg_sfmTransactionAndDesigner.btn_yes);
+	}
+	_wait(3000);
+};
+this.deleteSfmProcess = function($processName){
+	//Deletes an SFM process as part of test case cleanup
+	//Author : Janaki
+	$bo_act_navigation.navigateToSfmTransactionDesigner();
+	$sfm_act_SFM.selectSFM($process_to_clone,false);
+	_click($bo_pg_sfmTransactionAndDesigner.btn_deleteSfmProcess);
+	if(_isVisible($bo_pg_sfmTransactionAndDesigner.btn_yes)){
+		_click($bo_pg_sfmTransactionAndDesigner.btn_yes);
+	}
+	_wait(8000);
 };
 this.editWorkOrder = function($textLabels,$textValues,$pickListLabels,$pickListValues,$textAreaLabels,$textAreaValues,$checkBoxLabels,$checkBoxValues,$dateTimeLabels,$dateTimeDateValues,$timeValues,$emailLabels,$emailValues){
 	//This function edits work order in Lightning mode

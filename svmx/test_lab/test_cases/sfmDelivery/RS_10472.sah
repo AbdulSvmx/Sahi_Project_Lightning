@@ -12,9 +12,10 @@ function cleanUp(){
 	//Delete page layout
 	$sfm_act_lightningConfig.openExistingProcess($processName);
 	$sfm_act_lightningConfig.deletePageLayout($pageLayoutName);
-	//Delete mapping,expressions / QC
-	
-	//delete process	
+	//Delete mapping,expressions / QC as per text case requirement
+	$sfm_act_lightningConfig.deleteMappingFromProcess("Work Order", $mappingName)
+	//delete process
+	$sfm_act_lightningConfig.deleteSfmProcess($processName);
 }
 var $RS_10472 = _testcase("RS_10472","Verify Field Map for existing records - Header");
 $RS_10472.start();
