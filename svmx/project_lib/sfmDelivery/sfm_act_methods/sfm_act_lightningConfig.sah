@@ -172,6 +172,24 @@ this.openExtEditForLatestItem = function(){
 	_click(_span("Edit"));
 	
 };
+this.deleteStepFromWizard = function($wizardObject,$wizardName,$processName){
+	//deletes a given step from a given wizard
+	$bo_act_navigation.navigateToSvmxSetup();
+	_selectDomain($domainName);
+	_click(_div("Service Flow Manager"));
+	_click(_div("SFM Wizards"));
+	_setSelected($sfm_pg_wizards.selectObject,$wizardObject);
+	_wait(3000);
+	_click(_checkbox(0,_leftOf(_span($wizardName))));
+	_click($sfm_pg_wo.btn_editWizardStep);
+	_click($sfm_pg_wo.btn_manageWizardSteps);
+	if(_isVisible(_span($processName))){
+		_click(_checkbox(0,_leftOf(_span($processName))));
+		_expectConfirm($sfm_pg_wo.btn_deleteStepFromWizard);
+		_click($sfm_pg_wo.btn_deleteStepFromWizard);
+		_wait(5000,_isVisible($sfm_pg_wo.msg_wizardStepDeleteSuccess));	
+	}
+};
 
 this.findIfFieldPresentInPageLayout = function($fieldName){
 	//This function checks if one field is present in the currently opened page page layout and returns true or false
@@ -217,7 +235,38 @@ this.addFieldsToLightningPageLayout = function($object_name,$pageLayoutForProfil
 	_click($sfm_pg_wo.btn_pgLayoutSave);
 	_wait(3000);	
 };
+this.openExistingProcess = function($processName){
+	//Opens the given process in SFM Designer
+	_setSpeed(3000);
+	$bo_act_navigation.navigateToSfmTransactionDesigner();
+	$sfm_act_SFM.selectSFM($process_to_clone,false);
+	_click(_f("main").s_label($processName));
+	_wait(5000);
+};
+this.deletePageLayout = function($pageLayoutName){
+	//Deletes the custom page payout created as part of test case cleanup
+	//Author:Janaki
+	_selectDomain($domainName);
+	_click($bo_pg_sfmTransactionAndDesigner.btn_screenDesigner);
+	var $actualPgLayout = _getText($bo_pg_sfmTransactionAndDesigner.txt_sfmSavePageLayoutAs);
+	if($actualPgLayout === $pageLayoutName){
+		_click($bo_pg_sfmTransactionAndDesigner.btn_deletePageLayout);
+		if(_isVisible($bo_pg_sfmTransactionAndDesigner.btn_yes)){
+			_click($bo_pg_sfmTransactionAndDesigner.btn_yes);
+		}
+		_wait(3000);
+	}
+};
 
+this.deleteMappingFromProcess = function($mappingName){
+	//Deletes mapping created as part of test case cleanup
+	//Author: Janaki
+	_selectDomain($domainName);
+	_click($bo_pg_sfmTransactionAndDesigner.btn_qualifyingCriteriaAndFieldMapping);
+	_click($sfm_pg_sfmMapping.btn_mappingTab);
+	
+	
+};
 this.editWorkOrder = function($textLabels,$textValues,$pickListLabels,$pickListValues,$textAreaLabels,$textAreaValues,$checkBoxLabels,$checkBoxValues,$dateTimeLabels,$dateTimeDateValues,$timeValues,$emailLabels,$emailValues){
 	//This function edits work order in Lightning mode
 	//Author : Janaki

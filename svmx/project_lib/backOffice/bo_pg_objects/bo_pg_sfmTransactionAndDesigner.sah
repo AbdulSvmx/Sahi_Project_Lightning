@@ -69,6 +69,7 @@ var $bo_pg_sfmTransactionAndDesigner = new function bo_pg_sfmTransactionAndDesig
 	this.btn_pageLayoutSave=_f("main").s_button("Save[3]");
 	this.btn_moveToRight=_f("main").s_button("moveRightBtn");
 	this.link_chklistQuestionLibrary=_div("Checklist Question Library");
+	this.btn_deletePageLayout = _f("main").s_button("Delete[3]");
 	
 	//This code is to click on new button on custom SFM transaction
 	this.btn_newSFMTransaction=_f("main").s_button("New SFM Transaction");//duplicate	

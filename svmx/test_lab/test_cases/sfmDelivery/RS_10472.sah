@@ -1,3 +1,21 @@
+function onScriptEnd(){
+ _selectDomain();
+ _focusWindow();
+ _takeScreenShot();
+  cleanUp();
+}
+function cleanUp(){
+	_log("Performing clean up");
+	//Delete step from wizard
+	$sfm_act_lightningConfig.deleteStepFromWizard($object_name,$currentWizardName, $processName);
+	_log("Deleting step from wizard");
+	//Delete page layout
+	$sfm_act_lightningConfig.openExistingProcess($processName);
+	$sfm_act_lightningConfig.deletePageLayout($pageLayoutName);
+	//Delete mapping,expressions / QC
+	
+	//delete process	
+}
 var $RS_10472 = _testcase("RS_10472","Verify Field Map for existing records - Header");
 $RS_10472.start();
 //Variables used
@@ -12,7 +30,7 @@ var $success_message = "Work Order was saved.";
 var $containerName = [];
 var $fieldName=[];
 var $fieldsToMap = ["Account","Sub Status","Actual Onsite Response","Record Type ID","Clock Paused Forever","Proforma Invoice Amount","Scheduled Date","Group Email","Estimated Duration","Order Status","City","Street","Problem Description"];
-var $containerName = ["Work Order","Work Order","Work Order","Work Order","Work Order","Work Order","Work Order","Work Order","Work Order","Work Order","Work Order","Work Order","Work Order"];
+var $containerName = ["Order Status","Order Status","Order Status","Order Status","Order Status","Order Status","Order Status","Order Status","Order Status","Order Status","Order Status","Order Status","Order Status"];
 var $currentWizardName = $wizardName[4];
 var $productName = "Chrome";
 var $lineType = "Parts";
@@ -130,7 +148,7 @@ _selectDomain();
 _wait(14000,_isVisible($sfm_pg_wo.label_wo));
 $childWoId= _getText($sfm_pg_wo.label_wo);
 _log("Child Work Order id "+ $childWoId);
-$textValues = ["$6,600.000","4/21/2018","345","Bengaluru"];
+$textValues = ["$6,600.000","4/21/2018","345.00","Bengaluru"];
 var $lookUpLabels = ["Account"];
 var $lookUpValues = ["HCSAccountForTesting"];
 //Verify all values in the newly created Work order
@@ -146,14 +164,14 @@ _selectDomain();
 //Add the fields in the Screen designer
 $sfm_act_createCustomWizard.clickWizardlinks($processName);
 _selectDomain($domainName);
-_click($sfm_pg_wo.btn_arrowNextToGetPrice);
+_click($sfm_pg_wo.btn_rightArrow);
 _assertVisible($sfm_pg_wo.link_launchSfmDesigner);
 _click($sfm_pg_wo.link_launchSfmDesigner);
 _selectDomain();
 _selectWindow("/SFM Transaction Designer/");
 _wait(10000);
 _click($bo_pg_sfmTransactionAndDesigner.btn_screenDesigner);
-$sfm_act_SFM.addFieldToScreen($fieldsToMap, $containerName);
+$bo_act_navigation.designHeaderScreen($pageLayoutName, $fieldsToMap);
 _click($bo_pg_sfmTransactionAndDesigner.btn_quickSave1);
 _wait(2000);
 _closeWindow();
@@ -175,6 +193,10 @@ for($i=0;$i<$dateTimeLabels.length;$i++){
 	$textPicklistDateLabels.push($dateTimeLabels[$i]);
 	$textPicklistDateExpValues.push($dateTimeDateValues[$i]);
 }
+for($i=0;$i<$lookUpLabels.length;$i++){
+	$textPicklistDateLabels.push($lookUpLabels[$i]);
+	$textPicklistDateExpValues.push($lookUpValues[$i]);
+}
 
 $verifyResult = $sfm_act_SFM.verifyValuesInDelivery($textPicklistDateLabels, $textPicklistDateExpValues, $dateTimeLabels, $timeValues,$textAreaLabels,$textAreaValues, $checkBoxLabels,checkBoxValues);
 _assertTrue($verifyResult);
@@ -188,7 +210,7 @@ else {
 //Now Save the SFM Delivery and verify the values in the newly created work order
 _click($sfm_pg_wo.link_delivery_save);
 _selectDomain();
-_wait(7000,_isVisible($sfm_pg_wo.label_wo));
+_wait(12000,_isVisible($sfm_pg_wo.label_wo));
 $childWoId= _getText($sfm_pg_wo.label_wo);
 _log("Child Work Order id "+ $childWoId);
 $res = $sfm_act_lightningConfig.verifyValues($textLabels, $textValues, $pickListLabels, $pickListValues, $textAreaLabels, $textAreaValues, $checkBoxLabels, $checkBoxValues, $dateTimeLabels, $dateTimeDateValues, $timeValues);
