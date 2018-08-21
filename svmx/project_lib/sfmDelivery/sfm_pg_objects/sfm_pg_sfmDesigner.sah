@@ -29,15 +29,16 @@ var $sfm_pg_sfmDesigner = new function sfm_pg_sfmDesigner() {
 	this.msg_WDCreateConfirm=_span("Work Detail was created.");
 	this.link_editWD=_link("Edit",_in(_list("scrollable")));
 
-	this.newWDWindow=_parentNode(_heading2("/New Work Detail:/"),"DIV",2);
-	this.lbl_WDPart=_span("Part",_in(this.newWDWindow));
+	//this.newWDWindow=_parentNode(_heading2("/New Work Detail:/"),"DIV",2);
+	this.newWDWindow=_parentNode(_heading2("/Work Detail:/"),"DIV",2);
+	this.lbl_WDPart=_span("Part",_in(_div("/modal-body/")));
 	this.txt_WDpart=_textbox(0,_near(this.lbl_WDPart));
 	this.btn_WDNewProduct=_span("/New Product/",_near(this.lbl_WDPart));
-	this.link_activityType=_link(0,_near(_span("Activity Type",_in(this.newWDWindow))));
-	this.txt_requestedCity=_textbox(0,_near(_span("Requested City",_in(this.newWDWindow))));
-	this.txt_billableQty=_textbox(0,_near(_span("Billable Qty",_in(this.newWDWindow))));
+	this.link_activityType=_link(0,_near(_span("Activity Type",_in(_div("/modal-body/")))));
+	this.txt_requestedCity=_textbox(0,_near(_span("Requested City",_in(_div("/modal-body/")))));
+	this.txt_billableQty=_textbox(0,_near(_span("Billable Qty",_in(_div("/modal-body/")))));
 	
-	this.lbl_WDIB=_span("IB Serial Number",_in(this.newWDWindow));
+	this.lbl_WDIB=_span("IB Serial Number",_in(_div("/modal-body/")));
 	this.txt_IBserialNo=_textbox(0,_near(this.lbl_WDIB));
 	this.btn_WDNewIB=_span("/New Installed Product/",_near(this.lbl_WDIB));
 	
