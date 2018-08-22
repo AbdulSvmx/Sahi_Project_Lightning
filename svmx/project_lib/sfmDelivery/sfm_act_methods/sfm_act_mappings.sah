@@ -1,0 +1,14 @@
+var $sfm_act_sfmMapping = new function sfm_act_sfmMapping() {
+	
+	this.createMappingFromMapping = function($sourceObj,$targetObj){
+		$bo_act_navigation.navigateToSvmxSetup();
+		_click($bo_pg_servicemaxSetup.btn_serviceFlowManager);
+		_click($bo_pg_servicemaxSetup.btn_sfmMappings);
+		_setSelected($sfm_pg_sfmMapping.txt_sourceObject_SFMMapping,$sourceObj);
+		_setSelected($sfm_pg_sfmMapping.txt_targetObject_SFMMapping,$targetObj);
+		_click($sfm_pg_sfmMapping.btn_new_SFMMapping);
+		
+		
+	};
+	
+};

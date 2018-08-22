@@ -215,4 +215,5 @@ var $bo_act_mappings = new function bo_act_mappings() {
 			_setStrictVisibilityCheck(false);
 			_assertVisible($sfm_pg_sfmMapping.label_mapDeleted);
 	};
+
 };

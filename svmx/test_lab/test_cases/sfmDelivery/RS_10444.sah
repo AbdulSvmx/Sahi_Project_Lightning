@@ -12,15 +12,15 @@ var $objMapping = "SVMXSTD: Case To Work Order";
 var $wizardObject ="Work Order";
 
 //variables for rest call
-$orgInstance = "cs19";
+//$orgInstance = "cs19";
 $objName= "Case";
 $obJson = "{\"SVMXC__Billing_Type__c\":\"Loan\",\"Priority\":\"High\",\"Description\":\"CaseCreatedfromRest\"}";
 $columnName = "CaseNumber";
 $filter="id";
 //create a case
-$filterValue=$sfm_act_restApiMethods.postRestApi($sfmUsn,$sfmPwd,$sfmClientId, $sfmConsumerSecret,$orgInstance,$objName,$obJson,"POST");
+$filterValue=$sfm_act_restApiMethods.postRestApi($objName,$obJson,"POST");
 //get the caseNumber
-$caseNumber =$sfm_act_restApiMethods.getRestApi($sfmUsn, $sfmPwd, $sfmClientId, $sfmConsumerSecret, $orgInstance, "GET", $objName, $columnName, $filter, $filterValue);
+$caseNumber =$sfm_act_restApiMethods.getRestApi("GET", $objName, $columnName, $filter, $filterValue);
 
 
 //login to the org
