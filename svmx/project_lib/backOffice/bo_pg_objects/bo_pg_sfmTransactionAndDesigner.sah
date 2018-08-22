@@ -66,7 +66,9 @@ var $bo_pg_sfmTransactionAndDesigner = new function bo_pg_sfmTransactionAndDesig
 	this.btn_clickDeleteButton=_f("main").s_button("Delete[4]");
 	this.PopUpMessageConformationForDelete=_f("main").button("Yes");
 	this.lbl_sfmTransactionSavedMessage=_f("main").label("SFM Transaction saved");	
-	this.btn_pageLayoutSave=_f("main").s_button("Save[3]");
+	this.btn_pageLayoutSave=_f("main").s_button("Save").rightOf(_f("main").s_textinput("Save page layout as"));
+	this.btn_pageLayoutSaveAs=_f("main").s_button("Save As").rightOf(_f("main").s_textinput("Save page layout as"));
+	this.btn_sfmpageSaveConfirmMsg=_f("main").uiftetextfield("Page saved");
 	this.btn_moveToRight=_f("main").s_button("moveRightBtn");
 	this.link_chklistQuestionLibrary=_div("Checklist Question Library");
 	
