@@ -32,5 +32,18 @@ var $sfm_pg_sfmMapping = new function sfm_pg_sfmMapping() {
 	this.tab_valueMapForNew = _f("main").s_navigatorcontent("Value Map For New Records");
 	this.txt_mappingNameFieldMap = _f("main").s_textinput("Save this map as").inside(_f("main").s_navigatorcontent("Field Map For Existing Records"));
 	this.txt_mappingIdFieldMap = _f("main").s_textinput("Input ID Here").inside(_f("main").s_navigatorcontent("Field Map For Existing Records"));
+	this.btn_deleteValueMappingExistingRecord = _f("main").s_button("Delete").inside(_f("main").s_navigatorcontent("Value Map for Existing Records"));
+	this.btn_deleteValueMapNewRecord = _f("main").s_button("Delete").inside(_f("main").s_navigatorcontent("Value Map For New Records"));
+	this.btn_deleteFieldMapExistingRecord = _f("main").s_button("Delete").inside(_f("main").s_navigatorcontent("Field Map For Existing Records"));
+
 	
+	//page objects for Configure SFM Mappings page in SFM Mapping under SFM in SVMX Setup 
+	this.txt_sourceObject_SFMMapping = _f("SFMExpressionBuilderSWF").s_combobox("sourceCombo");
+	this.txt_targetObject_SFMMapping = _f("SFMExpressionBuilderSWF").s_combobox("targetCombo");
+	this.btn_new_SFMMapping = _f("SFMExpressionBuilderSWF").s_button("New").inside(_f("SFMExpressionBuilderSWF").s_navigatorcontent("/Map For/"));
+	//this.btn_fieldMappingNew_SFMMapping  = _f("SFMExpressionBuilderSWF").s_button("/New/").inside(_f("SFMExpressionBuilderSWF").s_navigatorcontent("Field Map For Existing Records"));
+	this.tab_fieldMappingforExisting_SFMMapping = _f("SFMExpressionBuilderSWF").tab("Field Map For Existing Records");
+	this.tab_valueMappingForNew_SFMMapping = _f("SFMExpressionBuilderSWF").tab("Value Map For New Records");
+	this.btn_useExistingMap_SFMMapping = _f("SFMExpressionBuilderSWF").s_combobox("searchCombo").inside(_f("SFMExpressionBuilderSWF").s_navigatorcontent("/Map For/"));
+	this.saveMapping_SFMMapping ;
 	};

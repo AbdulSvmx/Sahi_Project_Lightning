@@ -9,15 +9,15 @@ var $sfm_act_restApiMethods= new function sfm_act_restApiMethods() {
 	 * $orgInstance like cs19 or cs21
 	 */
 
- this.getAccessToken = function($username,$password,$clientId,$consumerSecret,$orgInstance){
+ this.getAccessToken = function(){
  
 	 //Authorization endpoint
 	 var $authEndPoint = "https://test.salesforce.com/services/oauth2/token"; //THIS IS THE REST API CALL TO GET THE ACCESS TOKEN
 	 var $responseType = "token";
 	 //This is the callback URL from the connected app
-	 var $redirectURI = "https://"+$orgInstance+".lightning.force.com"; // STANDARD REDIRECT URL
+	 var $redirectURI = "https://"+$sfmOrgInstance+".lightning.force.com"; // STANDARD REDIRECT URL
 	 //Construct the URL with the required parameters
-	 var $requestURL = ""+$authEndPoint+"?grant_type=password&client_id="+$clientId+"&client_secret="+$consumerSecret+"&username="+$username+"&password="+$password+"&response_type="+$responseType+"&redirect_uri="+$redirectURI+"";
+	 var $requestURL = ""+$authEndPoint+"?grant_type=password&client_id="+$sfmClientId+"&client_secret="+$sfmConsumerSecret+"&username="+$sfmUsn+"&password="+$sfmPwd+"&response_type="+$responseType+"&redirect_uri="+$redirectURI+"";
 	// _log($requestURL);
 	//MAKING THE POST REQUEST TO GET THE ACCESS TOKEN
 	$request = new RESTRequest();
@@ -43,15 +43,17 @@ var $sfm_act_restApiMethods= new function sfm_act_restApiMethods() {
 	 * $reqType POST or DELETE 
 	 */
  
- this.postRestApi = function($username, $password, $clientId, $consumerSecret, $orgInstance,$objName,$obJson, $reqType){
-	 $AuthCode = this.getAccessToken($username, $password, $clientId, $consumerSecret, $orgInstance);
+ this.postRestApi = function($objName,$obJson, $reqType){
+	 $AuthCode = this.getAccessToken();
      // Sample Delete operation for the REST API
      $request_post = new RESTRequest();   
-     $request_post.setURL("https://"+$orgInstance+".salesforce.com/services/data/v42.0/sobjects/"+$objName+"/");
+     $request_post.setURL("https://"+$sfmOrgInstance+".salesforce.com/services/data/v42.0/sobjects/"+$objName+"/");
+     $request_post.setCredentials($sfmUsn, $sfmPwd);
      $request_post.setHeader("Content-Type", "application/json");
-     $request_post.setBody($obJson);
-     $request_post.setCredentials($username, $password);
      $request_post.setHeader("Authorization", "OAuth "+$AuthCode);
+     $request_post.setBody($obJson);
+     
+    
      $response_post = $request_post.submit($reqType);
      $respObj= JSON.parse($response_post.getBodyAsString());
      //_log($respObj);
@@ -75,14 +77,14 @@ var $sfm_act_restApiMethods= new function sfm_act_restApiMethods() {
 	 * $filter filter column
 	 * $filterValue filter value
 	 */
-this.getRestApi = function($username, $password, $clientId, $consumerSecret, $orgInstance,$reqType,$objName,$columnName,$filter, $filterValue){
-	 $AuthCode = this.getAccessToken($username, $password, $clientId, $consumerSecret, $orgInstance);
+this.getRestApi = function($reqType,$objName,$columnName,$filter, $filterValue){
+	 $AuthCode = this.getAccessToken();
 	     
 	    var $query = "Select+"+$columnName+"+from+"+$objName+"+where+"+$filter+"=+'"+$filterValue+"'";
 	          
 	    $request = new RESTRequest(); 
-	    $request.setURL("https://"+$orgInstance+".salesforce.com/services/data/v20.0/query/?q="+$query+""); // Sample to pass the values
-	    $request.setCredentials($username, $password);
+	    $request.setURL("https://"+$sfmOrgInstance+".salesforce.com/services/data/v20.0/query/?q="+$query+""); // Sample to pass the values
+	    $request.setCredentials($sfmUsn, $sfmPwd);
 	    $request.setHeader("Authorization", "OAuth "+$AuthCode);
 	    //$request1.setHeader("Content-Type", "application/json");
 	    $response = $request.submit($reqType);
