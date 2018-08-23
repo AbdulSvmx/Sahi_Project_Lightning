@@ -1,6 +1,6 @@
 var $rs_10466 = _testcase("RS_10466_Lightning","Verify Date and DateTime literals as expressions in Header.(Lightning");
 $rs_10466.start();
-$sfmName = $bo_act_common.generateRandomName("SFM_Auto_");
+$sfmName = $bo_act_common.generateRandomName("RS_10466_");
 //$sfmName = "SFM_Auto_27122017162526";
 $processName = "Create Usage Lines from Estimates";
 $sfmPgLayoutName = $bo_act_common.generateRandomName("SFM Wiz");

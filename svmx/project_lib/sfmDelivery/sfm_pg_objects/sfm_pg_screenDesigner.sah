@@ -1,4 +1,5 @@
 var $sfm_pg_screenDesigner = new function sfm_pg_screenDesigner(){
+	this.txt_saveExprsn =_f("main").s_textinput("Save this filter as");
 	this.sel_createSFMTransaction= _f("main").s_dropdownlist("purposeCombo");
 	this.lbl_targetRecordLabel=_f("main").s_label("...to create these records");
 	this.lbl_sourceRecordLabel=_f("main").s_label("Use data from...");
@@ -13,10 +14,16 @@ var $sfm_pg_screenDesigner = new function sfm_pg_screenDesigner(){
 	this.lbl_account= _f("main").s_label("Account");
 	this.txt_srcObject = _f("main").s_textinput("textInput");
 	this.btn_deleteRow=_f("main").s_button("Delete");
+	this.lbl_propDetail=_f("main").s_label("/Properties for Details:/");
+	this.sel_dataGrp=_f("main").s_datagroup("dataGroup");
+	this.txt_searchChildField=_f("main").s_textinput("searchText[4]");
+	this.lbl_erroMsgOnSFMLaunch=_div("This record does not qualify as the Order Status is NOT Open");
+	//this.lbl_erroMsgOnSFMLaunch=_div("This record does not meet the qualification criteria for this SFM Transaction");
+	this.sel_selectExpression=_f("main").s_combobox("searchCombo").near(this.txt_saveExprsn);
 	
 	this.lbl_addproduct = _f("main").s_label("Product[1]"); 
 	this.btn_ConfLookup = _f("main").s_button("Configure Lookup");
-	this.sel_LkupTemplate = _f("main").s_combobox("searchCombo[4]");
+	this.sel_LkupTemplate = _f("main").s_combobox("/searchCombo/").leftOf(_f("main").s_textinput("Save this Lookup as"));//Updated for Lightning
 	this.btn_Select = _f("main").s_button("Select");
 	this.btn_propoties=_f("main").tab("Properties");
     this.txt_sfmDescription=_f("main").s_textarea("pDescription");// added for lightning
@@ -30,9 +37,10 @@ var $sfm_pg_screenDesigner = new function sfm_pg_screenDesigner(){
 	this.btn_toggleChoose=_f("main").s_togglebutton("I want to choose a field from the list");
 	this.btn_inputCombobox=_f("main").s_combobox("valuesCombo");
 	this.txt_input = _f("main").s_textinput("textip");
-	this.txt_saveExprsn =_f("main").s_textinput("Save this filter as");
+
 	this.txt_inputId = _f("main").s_textinput("Input ID Here");
-	
+	this.txt_advExpr=_f("main").s_textinput("advTxt");
+	this.txt_errMsg=_f("main").s_textarea("msgTxt");
     
     
 	this.chk_readOnly= _f("main").s_checkbox("Read Only");
@@ -49,9 +57,18 @@ var $sfm_pg_screenDesigner = new function sfm_pg_screenDesigner(){
 	this.lkp_parts = _f("main").s_button("refBtn");
 	this.sel_rowsToDisplay = _f("main").s_combobox("noOfRec");
 	this.txt_lookupName = _f("main").s_textinput("Save this Lookup as");
-	this.txt_lookupId = _f("main").s_textinput("Input ID Here[4]");
-	this.btn_lookupSave = _f("main").s_button("Save As[8]");
+	this.txt_lookupId = _f("main").s_textinput("/Input ID Here/").rightOf(_f("main").s_textinput("Save this Lookup as"));//updated for Lightning
+	this.btn_lookupSaveAs = _f("main").s_button("Save As").rightOf(_f("main").s_textinput("Save this Lookup as"));//updated for Lightning
+	this.btn_lookupSave=_f("main").s_button("Save").rightOf(_f("main").s_textinput("Save this Lookup as"));//updated for Lightning
+	this.lbl_lookupSaveConfirmMsg=_f("main").s_richtext("Lookup Configuration saved");
+	this.lbl_lookupFilterLabel=_f("main").s_label("Optionally, create a filter to limit the records available to users in the lookup field");
+	this.btn_lookupNewRow=_f("main").s_button("/Add a row/").near(this.lbl_lookupFilterLabel);
+	this.txt_lookupAdvExpr=_f("main").s_textinput("advExpIP");
+	this.chk_lookupDefault=_f("main").s_checkbox("/.*/").near(_f("main").s_label("/Make this/"))
 	this.btn_lookupClose = _f("main").s_button("closeButton");
+	this.link_Parts=_link("Parts");
+	this.link_Labor=_link("Labor");
+	
 	
 	
 };

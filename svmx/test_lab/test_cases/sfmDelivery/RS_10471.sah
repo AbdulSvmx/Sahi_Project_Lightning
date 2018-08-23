@@ -1,0 +1,169 @@
+var $RS_10471 = _testcase("RS_10472","Verify Value Map for existing records - Header");
+$RS_10471.start();
+//Variables used
+var $objectName = "Work Order";
+var $processName = "RS_10471";
+var $process_to_clone = "Manage Work Order Lines - Usage";
+var $sfmTemplate = "SVMXSTD: Manage WO Usage Lines";
+var $isCustom = false;
+var $ctr = 0;
+var $i = 0;
+var $success_message = "Work Order was saved.";
+var $containerName = [];
+var $fieldName=[];
+var $missingStdDataTypes = ["URL","Picklist (Multi-Select)","Percent","Phone","Date","Date"];
+var $customFieldsNames = ["Automation URL","Automation multipicklist","Automation Percent","Automation Phone","Automation Date2","Automation Date3"];
+var $fieldsToMap = ["Account","Contact","Record Type ID","Clock Paused Forever","Proforma Invoice Amount","Scheduled Date","Automation Date2","Automation Date3","First Queued DateTime","Started Driving To Location Date Time","Completed Date Time","Finished Onsite Date Time","Group Email","Automation multipicklist","Estimated Duration","Automation Percent","Automation Phone","Order Status","City","Street","Problem Description","Automation URL"];
+var $containerName = ["Order Status","Order Status","Order Status","Order Status","Order Status","Order Status","Order Status","Order Status","Order Status","Order Status","Order Status","Order Status","Order Status"];
+var $currentWizardName = $wizardName[4];
+var $productName = "Chrome";
+var $lineType = "Parts";
+var $fieldsAbsentInPage = [];
+var $pageLayoutForProfile = "SVMX Work Order - Admin";
+var $myDomain = "/lightning/";
+var $multiPicklistValues = ["Multipicklist1","Multipicklist2","Multipicklist3"];
+
+//Appending current timestamp to process name to make it unique.
+var $timeStamp = $bo_act_navigation.getCurrentTimeStamp();
+$processName = $processName + "_" + $timeStamp;
+var $pageLayoutName = $processName + "pg";
+var $mapName = $processName + "mp";
+
+//**************************************************************************************
+//Login and switch to lightning
+//$bo_act_login.login($g_url,$bac_un,$bac_pwd);
+$bo_act_login.login($g_url,$sfmUsn,$sfmPwd);
+$sfm_act_lightningConfig.switchToLightning();
+
+//***************************************************************************************
+//Create custom fields if needed
+$sfm_act_lightningConfig.addCustomFields($objectName, $customFieldsNames, $missingStdDataTypes, $myDomain,$multiPicklistValues);
+_closeWindow();
+_selectWindow();
+
+//Create work order
+var $wo_number = $sfm_act_createCustomWizard.createWowithdateliterals();
+var $x = $fieldsToMap.indexOf("Record Type ID");
+if($x != -1) {
+		$fieldsToMap[$x] = "Record Type";
+}
+
+//Find missing fields in Work Order Page Layout and them to the layout
+for($i=0;$i<$fieldsToMap.length;$i++){
+	if(!$sfm_act_lightningConfig.findIfFieldPresentInPageLayout($fieldsToMap[$i])){
+		$fieldsAbsentInPage.push($fieldsToMap[$i]);
+	}	
+}
+_log($fieldsAbsentInPage);
+
+if($fieldsAbsentInPage.length > 0){
+	$sfm_act_lightningConfig.navigateToObjectsInLightning($objectName);
+	$sfm_act_lightningConfig.addFieldsToLightningPageLayout($objectName,$pageLayoutForProfile,$fieldsAbsentInPage,$myDomain);
+	_selectDomain();
+	_selectWindow("Home | Salesforce");
+	_closeWindow();
+	_selectWindow();
+}
+//Navigate to servicemax setup and setup required process.
+//Clone standard process and add the dependent picklist in the screen designer
+$sfm_act_SFM.cloneTDM016($process_to_clone,$processName,$isCustom,$pageLayoutName, $sfmTemplate, $fieldName, $containerName);
+
+_log("Delete the mapped fields from the Page Layout to test the scenario of mapping without the fields in Page Layout");
+_click($bo_pg_sfmTransactionAndDesigner.btn_screenDesigner);
+for($i=0;$i<$fieldsToMap.length;$i++){
+	if(_isVisible(_f("main").s_button("Remove this field").near(_f("main").uiftetextfield($fieldsToMap[$i])))){
+		$bo_pg_sfmTransactionAndDesigner.deleteField($fieldsToMap[$i]);
+	}
+}
+_click($bo_pg_sfmTransactionAndDesigner.btn_quickSave);
+_click($bo_pg_sfmTransactionAndDesigner.btn_quickSave1);
+
+var $x = $fieldsToMap.indexOf("Record Type ID");
+if($x != -1) {
+		$fieldsToMap[$x] = "Record Type";
+}
+var $textLabels = ["Account","Contact","Proforma Invoice Amount","Group Email","Estimated Duration","Automation Percent","Automation Phone","City","Street","Problem Description","Automation URL"];
+var $textValues = ["HCSAccountForTesting","Jason Smith","4500","group123@group.com","34","45","2345401","Bengaluru","123 somewhere somehow somewat","This washing machine stopped working","www.google.com"];
+var $picklistLabels = ["Record Type ID","Clock Paused Forever","Scheduled Date","Automation Date2","Automation Date3","First Queued DateTime","Started Driving To Location Date Time","Completed Date Time","Finished Onsite Date Time","Automation multipicklist","Order Status"];
+var $pickListValues = ["Record Type1","true","Today","Tomorrow","Yesterday","Now","Today","Tomorrow","Yesterday","Multipicklist1;Multipicklist3","Open"];
+//Create mapping for all possible standard data types.
+_click($bo_pg_sfmTransactionAndDesigner.btn_qualifyingCriteriaAndFieldMapping);
+$bo_act_mappings.createMapping("Work Order",$textLabels,$textValues,$picklistLabels,$pickListValues,$mapName);
+_selectDomain();
+_setSpeed(1000);
+
+//Add the custom process to SFM wizard.
+$sfm_act_wizards.addToWizard($object_name,$currentWizardName,"SFM",$processName);
+_selectDomain();
+
+//Navigate to created work order and launch the process
+$bo_act_navigation.navigateToCreatedRecordUsingGlobalSearch($wo_number);
+$sfm_act_createCustomWizard.clickWizardlinks($processName);
+_wait(8000);
+_selectDomain($domainName);_click($sfm_pg_wo.link_delivery_save);
+_selectDomain();
+_wait(14000,_isVisible($sfm_pg_wo.label_wo));
+
+//Verify value map in the work order.
+var $lookUpLabels = ["Account","Contact"];
+var $lookUpValues = ["HCSAccountForTesting","Jason Smith"];
+$textLabels = ["Proforma Invoice Amount","Estimated Duration","Automation Percent","Automation Phone","City"];
+$textValues = ["$4500.000","34","45","2345401","Bengaluru"];
+$pickListLabels = ["Order Status"];
+$pickListValues = ["Open"];
+$textAreaLabels = ["Street","Problem Description"];
+$textAreaValues = ["123 somewhere somehow somewat","This washing machine stopped working"];
+var $checkBoxLabels = ["Clock Paused Forever"];
+var $checkBoxValues = ["true"];
+var $emailLabels = ["Group Email"];
+var $emailValues = ["group123@group.com"];
+var $multiPickLabels = ["Automation multipicklist","Automation multipicklist"];
+var $multiPickValues = ["Multipicklist1","Multipicklist3"];
+var $urlLabels = ["Automation URL"];
+var $urlValues = ["www.google.com"];
+
+//Verify all values in the newly created Work order
+var $res = $sfm_act_lightningConfig.verifyValues($textLabels, $textValues, $pickListLabels, $pickListValues, $textAreaLabels, $textAreaValues, $checkBoxLabels, $checkBoxValues, $dateTimeLabels, $dateTimeDateValues, $timeValues,$emailLabels,$emailValues,$lookUpLabels,$lookUpValues,$multiPickLabels,$multiPickValues,$urlLabels,$urlValues);
+_assertTrue($res);
+if($res){
+	_log("PASS: Newly created follow up order has values as per mapping");
+}
+else {
+	_log("FAIL: Newly created follow up order does not have values as per mapping");
+}
+_selectDomain();
+//Add the fields in the Screen designer
+$sfm_act_createCustomWizard.clickWizardlinks($processName);
+_selectDomain($domainName);
+_click(btn_arrowNextToGetPrice);
+_assertVisible($sfm_pg_wo.link_launchSfmDesigner);
+_click($sfm_pg_wo.link_launchSfmDesigner);
+_selectDomain();
+_selectWindow("/SFM Transaction Designer/");
+_wait(10000);
+_click($bo_pg_sfmTransactionAndDesigner.btn_screenDesigner);
+$bo_act_navigation.designHeaderScreen($pageLayoutName, $fieldsToMap);
+_click($bo_pg_sfmTransactionAndDesigner.btn_quickSave1);
+_wait(2000);
+_closeWindow();
+_selectWindow();
+_selectDomain($domainName);
+$sfm_act_lightningConfig.clearServicemaxCache();
+//Verify values in SFM Delivery screen
+
+
+//Verify values in Work order
+
+
+
+
+
+
+
+
+
+
+
+
+
+$RS_10471.end();

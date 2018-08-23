@@ -1,0 +1,84 @@
+var $rs_10462 = _testcase("RS_10462","Verify new single expression for both Header and Child and launch SFM in delivery.");
+$rs_10462.start();
+
+	var $sfmName = $bo_act_common.generateRandomName("SFM_Auto_");
+	var $sfmType="as Standalone for the purpose of editing an existing record";
+	var $trgHeaderObj="Work Order";
+	var $trgChildObj="Work Detail (Work Order)";
+	
+	var $headerComboField=["Order Status"];
+	var $headerComboConditions=[""]; 
+	var $headerToggleButton=[""];
+	var $headerCmboInput=["Open"];
+	var $advExpr="";
+	var $errMsg="This record does not qualify as the Order Status is NOT Open";
+	var $exprsnName=$bo_act_common.generateRandomName("SFM_WO_Exprsn_");
+	var $headerExprFieldsDetails=[$headerComboField,$headerComboConditions,$headerToggleButton,$headerCmboInput,$advExpr,$errMsg,$exprsnName];
+	var $headerMappingDetails="";
+	
+	
+	var $childComboField=["Activity Type"];
+	var $childComboConditions=[""]; 
+	var $childToggleButton=[""];
+	var $childCmboInput=["Installation"];
+	var $childadvExpr="";
+	var $childerrMsg="";
+	var $childexprsnName=$bo_act_common.generateRandomName("SFM_WD_Exprsn_");
+	var $childExprFieldsDetails=[$childComboField,$childComboConditions,$childToggleButton,$childCmboInput,$childadvExpr,$childerrMsg,$childexprsnName];
+	var $childMappingDetails="";
+	
+	
+	//Login to App and navigate to sfm transaction and designer page
+	$bo_act_login.login($g_url,$sfmUsn,$sfmPwd);
+	$bo_act_navigation.navigateToSfmTransactionDesigner();
+	_wait(5000);
+	
+	//Create New SFM Transaction
+	_click($bo_pg_sfmTransactionAndDesigner.btn_newSFM);
+	_wait(10000,_isVisible($sfm_pg_screenDesigner.btn_propoties));
+	$sfm_act_Transactions.sfmPropertiesPage($sfmName, "", $sfmName, $sfmType, "", "", $trgHeaderObj, $trgChildObj);
+	
+	$sfm_act_Transactions.sfmQualifyingCriteriaieldMappings($trgHeaderObj, $headerExprFieldsDetails, $headerMappingDetails);
+	$sfm_act_Transactions.sfmQualifyingCriteriaieldMappings($trgChildObj, $childExprFieldsDetails, $childMappingDetails);
+	
+	var $headersToAdd = ["Order Type","Order Status"];
+	var $fieldName = ["Activity Type","Line Type","Billable Qty"];
+	var $childToAdd=[$trgChildObj,$fieldName];
+	var $sfmPgLayoutName = $bo_act_common.generateRandomName("SFM_Auto_");
+	
+	$sfm_act_Transactions.screenDesigner($headersToAdd, $childToAdd, $sfmPgLayoutName, $sfmPgLayoutName);
+	
+	_wait(5000);
+	_click($bo_pg_sfmTransactionAndDesigner.btn_finalQuickSave);
+
+	var $wizardObject="Work Order";
+	//var $wizardName = $bo_act_common.generateRandomName("SFM Wiz");
+	var $wizardName1 =$wizardName[6];
+	var $wizardType="SFM";
+	var $profile="";
+	var $handOver=false;
+	_log($wizardName1);
+	$sfm_act_wizards.addToWizard($wizardObject, $wizardName1, $wizardType, $sfmName, $handOver, $profile);  
+
+	
+	var $OrdrStatus="Closed";
+
+	$sfm_act_createCustomWizard.createWOwithOrderStatus($OrdrStatus);
+
+	
+	$sfm_act_createCustomWizard.clickWizardBtn($sfmName);
+	_selectDomain($domainName);
+	_wait(10000,_isVisible(_div($errMsg)));
+	_assertExists(_div($errMsg));
+	_selectDomain();
+	
+	$OrdrStatus="Open";
+	$sfm_act_createCustomWizard.createWOwithOrderStatus($OrdrStatus);
+	_setStrictVisibilityCheck(true);
+
+	$sfm_act_createCustomWizard.clickWizardBtn($sfmName);
+	_assertExists(_div("/"+$sfmName+"/"));
+	_assertExists(_span($trgChildObj));
+	_setStrictVisibilityCheck(false);
+	
+$rs_10462.start();

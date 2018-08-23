@@ -1,0 +1,20 @@
+//Meghana Rao
+
+/**
+ *  Scenario level Run pre-requisite before Running Scenario 8
+ */
+	_writeFile("false", $appiumPath+$sahiIntermediatoryPath, true);
+
+var $pre_requisite_1= _testcase("scenario8_beforeRun","Changing the Mobile Permissions and running this Before Test-case");
+$pre_requisite_1.start();
+_setSpeed($g_stepSpeed);
+$bo_act_login.login($g_url, $appiumAdminUn, $appiumAdminPwd);
+
+//Removing Work Order from Download Criteria
+var $valuebefore = "My Records";
+$bo_act_SFMAppPermission.workOrderDownloadCriteriachanges($valuebefore);
+_writeFile("true", $appiumPath+$sahiIntermediatoryPath, true);
+
+$pre_requisite_1.end();
+
+

@@ -19,5 +19,18 @@ var $sfm_act_common = new function sfm_act_common() {
 			}
 		}
 	};
+
 	
+	this.globalSearchInLightning=function($searchText){
+		_selectDomain();
+		_setValue(_textbox("/Search/"),$searchText);
+		_wait(2000,_isVisible(_list("lookup__list  visible")));
+		if (_isVisible(_link($searchText+"Work Order"))) {
+			_click(_link($searchText+"Work Order"));
+			_logOutput($searchText + " is found");
+		}else{
+			_logException("The value " + $searchText + "is not found");
+		}
+		_wait(10000,_isVisible($sfm_pg_wo.label_wo));
+	};
 };

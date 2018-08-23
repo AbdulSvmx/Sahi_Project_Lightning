@@ -5,6 +5,34 @@ var $sfm_pg_wo = new function sfm_pg_wo() {
 	this.btn_woStatus = _select(0,_rightOf(_label("Order Status")));
 	this.btn_wo_save = _span("Save");//Changed for lightning
 	this.link_wo = _link("/Work Orders/");//Changed to hit the correct Work orders link in Lightning - JJ
+	this.link_woStatus=_link(0,_near(_span("Order Status Current status of the service order")));
+	this.link_actualOnsiteResponse=_link("Date Picker",_near(_span("Actual Onsite Response",_in(_div("/modal-body/")))));
+	this.link_actualInitialResponse=_link("Date Picker",_near(_span("Actual Initial Response",_in(_div("/modal-body/")))));
+	this.link_actualResolution=_textbox(0,_near(_span("Actual Resolution",_in(_div("/modal-body/")))));
+	this.link_actualRestoration=_textbox(0,_near(_span("Actual Restoration",_in(_div("/modal-body/")))));
+	this.link_billingType=_link(0,_near(_span("Billing Type",_in(_div("/modal-body/")))));
+	this.link_date1=_link(0,_near(_span("Date1",_in(_div("/modal-body/")))));
+	
+	
+	
+	
+	this.btn_editWO=_heading2("Edit Work Order");
+	
+	
+	this.btn_newWOWindow=_div("/modal-body/");
+	this.link_orderType=_link(0,_near(_span("Order Type",_in(this.btn_newWOWindow))));
+	this.lbl_Account=_span("Account",_in(this.btn_newWOWindow));
+	this.txt_Account=_textbox(0,_near(this.lbl_Account));
+	this.btn_WONewAccount=_div("New Account",_near(this.lbl_Account));
+	
+	this.WOnewAccountWindow=_parentNode(_div("New Account Close this window"),"DIV",2);
+	this.lbl_accountName=_span("Account Name",_in(this.WOnewAccountWindow));
+	this.txt_accountName=_textbox(0,_near(this.lbl_accountName));
+	this.btn_saveAccount=_button("Save",_in(this.WOnewAccountWindow));
+	
+	this.btn_today=_cell("Today");
+	
+	
 
 //	this.btn_wo_edit = _div("Edit");//Changed for Lightning.
 //	this.txt_wo_zip = _textbox("Zip");
@@ -46,7 +74,7 @@ var $sfm_pg_wo = new function sfm_pg_wo() {
 	this.txt_lineQty = _textbox(0,_rightOf(_label("Line Qty")));
 	this.txt_dateCustom = _textbox(0,_rightOf(_label("Date Custom")));
 	this.txt_dateReceived = _textbox(0,_rightOf(_label("Date Received")));
-	this.txt_dateRequired = _textbox(0,_rightOf(_label("Date Required")));
+	this.txt_dateRequired = _link("/Date/",_near(_label("Date Required")));
 	this.sel_activityType = _select(0,_rightOf(_label("Activity Type")));
 	this.sel_lineType = _select(0,_rightOf(_label("*Line Type")));
 	this.link_workDetail = _link(0,_rightOf(_span("/Work Order/")));
@@ -78,11 +106,23 @@ var $sfm_pg_wo = new function sfm_pg_wo() {
 	this.btn_new_field_dependency = _button(0,_near(_heading3("Field Dependencies")));
 	this.link_profileImageRightCorner = _div("/user-profile/");
 	this.link_lightningLogout = _link("Log Out");
+	this.link_currentUserName = _link("profile-link-label");
+	this.txt_pgLayoutQuickFind = _textbox("quickfind");
+	this.btn_pgLayoutSave = _emphasis("Save");
+	this.btn_newCustomField = _button("NewCustom Field");
+	this.link_fieldsAndRelationships = _link("Fields & Relationships");
+	this.txt_quickFindFields = _searchbox("globalQuickfind");
+	this.btn_nextInAddCustomFields = _submit(" Next ");
+	this.txt_customFieldName = _textbox("MasterLabel");
+	this.btn_saveCustomField = _submit(" Save ");
+	this.radio_multiPicklist = _radio("/picklistType/",_in(_listItem("Enter values, with each value separated by a new line")));
+	this.txt_multiPickTextArea = _textarea("ptext");
 	
 //Added by JJ for SFM Delivery components . All are Lightning ready.
 	this.link_delivery_save = _link("Save");
     this.btn_arrowNextToGetPrice = _span("/btnWrap/",_rightOf(_div("Quick SaveGet Price")));
     this.btn_arrowNextToUserSettings = _span("/btnWrap/", _rightOf(_link("User Settings")));
+    this.btn_rightArrow = _span("/ x-btn-arrow-right/");
     this.link_launchSfmDesigner = _span("Launch SFM Designer");
     this.btn_newButtonForWorkDetail = _link("New",_near(_heading2("/Work Details/")));
     this.btn_nextForWorkDetailRecordType = _button("Next",_in(_div("modal-footer slds-modal__footer")));
@@ -96,7 +136,19 @@ var $sfm_pg_wo = new function sfm_pg_wo() {
     this.btn_proceedForCancel = _span("Proceed");
     this.link_workDetailAfterCreation = _div("Work Detail");
     this.btn_cancelExtendedEdit = _span("/Cancel/");
-    
+    this.btn_quickSave = _span("Quick Save");
+    this.btn_okPriceNotCalculated = _span("Ok");
+    this.btn_productSearchChildLine = _link("Search");
+    this.btn_addProductChildLine = _span("Add");
+    this.btn_updateExtEdit = _span("Update");
+	this.link_today = _span("Today");
+	this.link_clearSvmxCache = _span("Clear ServiceMax Cache");
+	this.btn_saveEditWO = _button("Save");
+	this.btn_pencilToEditWo = _button(0,_rightOf(_span("Clock Paused Forever")));
+	this.btn_editWizardStep = _submit("Edit");
+	this.btn_manageWizardSteps = _cell("Manage Wizard Steps");
+    this.btn_deleteStepFromWizard = _button("Delete");
+	this.msg_wizardStepDeleteSuccess = _div("Success:Successfully deleted the Wizard Step(s).");
 	
 	this.openAppLauncher = function(){
 		_wait(5000,_submit("App Launcher"));
@@ -113,11 +165,11 @@ var $sfm_pg_wo = new function sfm_pg_wo() {
 	};
 	
 	this.assert_wizard =function($wizTitle){
-		if(_exists(_cell($wizTitle))){
-			_log("Pass");
+		if(_exists(_span($wizTitle))){
+			_log("Fail ::: Wizard is visible which is not assigned to the profile", "FAILURE");
 		}
 		else{
-			_log("Fail");
+			_log("Pass ::: Wizard is not visible which is not assigned to the profile");
 		}
 		
 //		_assertExists(_cell($wizTitle),"Wizard Not Present");

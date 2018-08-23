@@ -4,9 +4,57 @@ var $sfm_act_createCustomWizard = new function sfm_act_createCustomWizard() {
 		_wait(3000);
 		_selectDomain("/svmx/");
 		_setSelected($sfm_pg_wizards.selectObject,$object);
-		_click($sfm_pg_wizards.btn_customNew);
+		if(_isVisible($sfm_pg_wizards.btn_customNew)){
+			_click($sfm_pg_wizards.btn_customNew);
+		}
+		else{
+			_click(_submit("New",_near(_heading2("SFM Wizard"))));
+		}
 		_selectDomain();
 	};
+	
+// Added by Meghana
+
+	this.addManageWizStepsverify = function($wizTitle,$wizStepType,$wizStepName,$profile, $object){
+		_selectDomain("/svmx/");
+		_setSelected($sfm_pg_wizards.selectObject,$object);
+		var $wizId = $wizTitle.toLowerCase().replace(/ /g, "_");
+		_wait(5000);
+		if(_isVisible(_span($wizTitle)) == false)
+		{
+		_click($sfm_pg_wizards.btn_customNew);
+		_setValue($sfm_pg_wizards.txt_wizardTitle,$wizTitle);
+		_setValue($sfm_pg_wizards.txt_wizardID,$wizId);
+		_click($sfm_pg_wizards.txt_manageWizSteps);
+		_click($sfm_pg_wizards.btn_newStep);
+		_setSelected($sfm_pg_wizards.btn_wizStepType,$wizStepType);
+		_setSelected($sfm_pg_wizards.btn_stepName,$wizStepName);
+		_click($sfm_pg_wizards.btn_saveStep);
+		_click($sfm_pg_wizards.txt_managePermission);
+		_setSelected($sfm_pg_wizards.select_availableGrpProfiles,$profile);
+		_click($sfm_pg_wizards.btn_saveClose);
+		
+		
+		}
+		else
+			{
+			
+			_click(_checkbox("/page1/",_near(_span($wizTitle))));
+			_click($sfm_pg_wizards.btn_edit);
+			_click($sfm_pg_wizards.txt_manageWizSteps);
+			_click($sfm_pg_wizards.btn_newStep);
+			_setSelected($sfm_pg_wizards.btn_wizStepType,$wizStepType);
+			_setSelected($sfm_pg_wizards.btn_stepName,$wizStepName);
+			_click($sfm_pg_wizards.btn_saveStep);
+			_click($sfm_pg_wizards.txt_managePermission);
+			_setSelected($sfm_pg_wizards.select_availableGrpProfiles,$profile);
+			_click($sfm_pg_wizards.btn_saveClose);
+			}
+		
+		
+		_selectDomain();
+	};
+	
 
 	this.addManageWizSteps = function($wizTitle,$wizStepType,$wizStepName,$profile){
 //		$title = $wizTitle;
@@ -101,18 +149,7 @@ var $sfm_act_createCustomWizard = new function sfm_act_createCustomWizard() {
 
 	};
 
-//	Added by Safi
-	this.createWOwithOrderStatus = function($OrdrStatus){		
-		_wait(5000);
-		$sfm_pg_wo.openAppLauncher();
-		_wait(3000);
-		_click($sfm_pg_wo.link_wo);
-		_click($sfm_pg_wo.btn_wo_new);
-		_setSelected($sfm_pg_wo.btn_woStaus,$OrdrStatus);
-		_click($sfm_pg_wo.btn_wo_save);
-		_wait(5000);
 
-	};
 
 // Added by Safi	WO with values/ Create Case
 	
@@ -183,7 +220,7 @@ var $sfm_act_createCustomWizard = new function sfm_act_createCustomWizard() {
 	this.clickWizardBtn = function($sfmName) {
 		_click(_span($sfmName));
 		_selectDomain($domainName);
-		_wait(8000,_div($sfmName));
+		_wait(25000,_isVisible(_div($sfmName)));
 
 	};
 	this.addProductServiced = function($part){
@@ -453,7 +490,7 @@ var $sfm_act_createCustomWizard = new function sfm_act_createCustomWizard() {
 		_click($sfm_pg_wizardWindow.link_addWorkDetail);
 		_click($sfm_pg_wizardWindow.btn_searchProduct);
 		_click($sfm_pg_wizardWindow.chk_multiSelect);
-		var $divs=  _count("_div","/grid-cell-inner/",_under(_parentNode(_span("Name"),"DIV",4)));
+		var $divs=  _count("_div","/grid-cell-inner/",_under(_parentNode(_span("/Name/"), "DIV", 4)));
 		_log("No of Product = "+$divs);
 		_click($sfm_pg_wizardWindow.btn_addProduct);
 		
@@ -469,7 +506,8 @@ var $sfm_act_createCustomWizard = new function sfm_act_createCustomWizard() {
 		//Delete all child lines and check for delete and then save to check allow zero lines
 		for(var $i=0;$i<$divs1;$i++){
 			_click(_div("/x-action-col-icon/"));
-			_click(_span("Delete"));	
+			_click(_span("Delete"));
+			_wait(2000);
 		}
 		_click($sfm_pg_wizardWindow.btn_quickSave);
 		if(_isVisible(_div("/"+$expectedErrorMsg+"/"))){
@@ -783,6 +821,30 @@ var $sfm_act_createCustomWizard = new function sfm_act_createCustomWizard() {
 		
 	};
 	
+//	Added by Safi
+	this.createWOwithOrderStatus = function($OrdrStatus){	
+		_selectDomain();
+		_wait(5000);
+		$sfm_pg_wo.openAppLauncher();
+		_wait(3000);
+		var $woName = "";
+		this.clickSvmxWoLink();
+		_wait(5000,_isVisible($sfm_pg_wo.btn_wo_new));
+		//_click($sfm_pg_wo.link_wo);
+		_setStrictVisibilityCheck(true);
+		_click($sfm_pg_wo.btn_wo_new);
+		_click($sfm_pg_wo.link_woStatus);
+		_click(_link($OrdrStatus));
+		_click($sfm_pg_wo.btn_wo_edit_save);
+		_wait(5000);
+		//_wait(5000,_isVisible($sfm_pg_wo.label_wo));
+
+		$woName= _getText($sfm_pg_wo.label_wo);
+		_log($woName);
+		_setStrictVisibilityCheck(false);
+		return $woName;
+	};
+	
 	//Create work order with date literals in lightning.
 	this.createWowithdateliterals = function()
 	{
@@ -831,6 +893,7 @@ var $sfm_act_createCustomWizard = new function sfm_act_createCustomWizard() {
 		//Check if the SFM process link exists
 		_assertExists(_span($sfmname));
 		_click(_span($sfmname));
+		_wait(4000);
 		};
 		
 		this.addSubtractDates = function($given_date,$num_of_days) {

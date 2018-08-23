@@ -1,0 +1,131 @@
+var $RS_10434 = _testcase("RS_10434","Verify user trunk and current user literals in map");
+$RS_10434.start();
+//Variables used
+var $object_name = "Work Order";
+var $ctrlPicklist = "Order Status";
+var $processName = "RS_10434";
+var $process_to_clone = "Manage Work Order Lines - Usage";
+var $sfmTemplate = "SVMXSTD: Manage WO Usage Lines";
+var $isCustom = false;
+var $ctr = 0;
+var $i = 0;
+var $containerName = ["Order Status","Order Status","Parts","Parts","Parts"];
+var $fieldName=["Closed By","Site","Consumed From Location","Line Type","Record Type ID"];
+var $currentWizardName = $wizardName[4];
+var $success_message = "Work Order was saved.";
+var $stdMap = "SVMXSTD: Close Work Order";
+var $pickListLabels = ["Line Type","Record Type"];
+var $pickListValues = ["Parts","Usage/Consumption"];
+var $textLabels = ["Closed By","Site"];
+var $textValues = ["SVMX.CURRENTUSERID","SVMX.USERTRUNK"];
+var $inventoryLocation = "Lightning Automation Location";
+var $productName = "Chrome";
+
+//Appending current timestamp to process name to make it unique.
+var $timeStamp = $bo_act_navigation.getCurrentTimeStamp();
+$processName = $processName + "_" + $timeStamp;
+var $pageLayoutName = $processName + "pg";
+var $mapName = $processName + "mp";
+
+//**************************************************************************************
+//Login and switch to lightning
+//$bo_act_login.login($g_url,$bac_un,$bac_pwd);
+$bo_act_login.login($g_url,$sfmUsn,$sfmPwd);
+$sfm_act_lightningConfig.switchToLightning();
+
+//Get current user name
+_click($sfm_pg_wo.link_profileImageRightCorner);
+var $currentUser = _getText($sfm_pg_wo.link_currentUserName);
+_click($sfm_pg_wo.link_profileImageRightCorner);
+var $expValues = [$currentUser,$inventoryLocation];
+
+//Navigate to servicemax setup and setup required process.
+//Clone standard process and add the dependent picklist in the screen designer
+_setSpeed(3000);
+$sfm_act_SFM.cloneTDM016($process_to_clone,$processName,$isCustom,$pageLayoutName, $sfmTemplate, $fieldName, $containerName);
+$sfm_act_SFM.addUserLookupInScreenDesigner("Canceled By","Parts");
+_click($bo_pg_sfmTransactionAndDesigner.btn_quickSave1);
+_click($bo_pg_sfmTransactionAndDesigner.btn_qualifyingCriteriaAndFieldMapping);
+
+//Set up the mapping with SVMX.CURRENTRECORD literals for Header
+_selectDomain($domainName);
+$bo_act_mappings.createMapping("Work Order",[],[],$textLabels,$textValues,$mapName);
+_setSpeed(1000);
+//Add the custom process to SFM wizard.
+$sfm_act_wizards.addToWizard($object_name,$currentWizardName,"SFM",$processName);
+_selectDomain();
+_setSpeed(1000);
+//Create a work order
+var $wo_number = $sfm_act_createCustomWizard.createWowithdateliterals();
+$bo_act_navigation.navigateToCreatedRecordUsingGlobalSearch($wo_number);
+
+//Launch the process in SFM Delivery
+$sfm_act_createCustomWizard.clickWizardlinks($processName);
+_wait(3000);
+_selectDomain($domainName);
+
+//Verify the values in header
+var $verifyResult = $sfm_act_SFM.verifyValuesInDelivery($textLabels,$expValues,[],[],[],[],[],[]);
+_assertTrue($verifyResult,"Following Literals are verified in header- SVMX.CURRENTUSERID and SVMX.USERTRUNK");
+
+//Create mapping for child lines by navigating to SFM Designer from Delivery.
+ $mapName = $mapName + "_2";
+_click($sfm_pg_wo.btn_arrowNextToGetPrice);
+_click($sfm_pg_wo.link_launchSfmDesigner);
+_selectDomain();
+_wait(5000);
+_selectWindow("/SFM Transaction Designer/");
+_wait(10000);
+$textLabels = ["Canceled By","Consumed From Location"];
+_click($bo_pg_sfmTransactionAndDesigner.btn_qualifyingCriteriaAndFieldMapping);
+$bo_act_mappings.createMapping("Parts",[],[],$textLabels,$textValues,$mapName);
+_closeWindow();
+_selectWindow();
+
+//Clear Servicemax cache in service delivery.
+_selectDomain($domainName);
+$sfm_act_lightningConfig.clearServicemaxCache();
+//Add child line item
+$textLabels = ["Line Qty"];
+$textValues = ["12"];
+$sfm_act_SFM.addChildLine("Parts",$productName, $textLabels, $textValues, $pickListLabels, $pickListValues, [],[],[],[],[],[],[],[],[]);
+$sfm_act_SFM.performQuickSave();
+$sfm_act_lightningConfig.clearServicemaxCache();
+$sfm_act_lightningConfig.openExtEditForLatestItem();
+_wait(2000);
+$textLabels = ["Canceled By","Consumed From Location"];
+$verifyResult = $sfm_act_SFM.verifyValuesInDelivery($textLabels,$expValues,[],[],[],[],[],[]);
+_click($sfm_pg_wo.btn_updateExtEdit);
+_assertTrue($verifyResult);
+if($verifyResult){
+	_log("PASS:User trunk and current user literals verified for header and child");
+}
+else {
+	_log("FAIL:User trunk and current user literals verified for header and child");
+}
+_click($sfm_pg_wo.btn_cancelForSfmDelivery);
+_click($sfm_pg_wo.btn_proceedForCancel);
+_setStrictVisibilityCheck(false);
+_selectDomain();
+$sfm_act_lightningConfig.logoutInLightning();
+$RS_10434.end();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+$RS_10434.end();

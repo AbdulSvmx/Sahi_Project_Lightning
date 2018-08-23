@@ -8,7 +8,6 @@ var $sfmTemplateSaveAsName = $sfmName;
 var $containerNameArray = ["Order Status","Order Status","Order Status","Order Status","Order Status"];
 var $fieldNameArray = ["Customer Down","Problem Description","Is Entitlement Performed","Actual Onsite Response","Scheduled Date"];
 var $wizardObject ="Work Order";
-var $env = "Dev";
 
 var $formulaTargetObjectArray = ["Work Order","Work Order","Work Order","Work Order","Labor","Labor"];
 var $formulaTargetFieldArray = ["Billing Type","Is Entitlement Performed","Actual Onsite Response","Scheduled Date", "Billable Qty", "Billable Line Price"];
@@ -21,7 +20,7 @@ var $formulaDescriptionArray = ["If customerDown is true then Billing type=Paid 
                                 "Year of StartDate and Time"
                                 ];
 
-if($env=="Base"){
+if($orgtype=="Base"){
 	var $formulaArray =["$F.IF($F.EQUAL($D.Work_Order.SVMXC__Customer_Down__c,'true'),'Paid',$D.Work_Order.SVMXC__Billing_Type__c)",
 	                    "$F.IF($F.EQUAL($D.Work_Order.SVMXC__Billing_Type__c,'Courtesy'),'true',$D.Work_Order.SVMXC__Is_Entitlement_Performed__c)",
 	                    "$F.NOW()",
@@ -43,7 +42,7 @@ else{
 
 _setSpeed($g_stepSpeed);
 $bo_act_login.login($g_url, $sfmUsn, $sfmPwd);
-$sfm_act_lightningConfig.switchToLightning();
+$sfm_act_lightningConfig.switchToLightning(); 
 
 $sfm_act_SFM.cloneTDM016($sfmNameToBeCloned,$sfmName,$isCustom, $sfmTemplateSaveAsName,$sfmTemplate, $fieldNameArray, $containerNameArray);
 $sfm_pg_formula.createFormula($formulaTargetObjectArray, $formulaTargetFieldArray, $formulaNameArray, $formulaDescriptionArray, $formulaArray);
@@ -77,7 +76,7 @@ if(_exists($sfm_pg_sfmDesigner.txt_priceAlert)){
 if(_getText($sfm_pg_sfmDesigner.txt_billingType)=="Paid"){
 	_log("Pass :::CustomerDown is true and so Billing type=Paid ");
 }else{
-	_log("Fail ::: When CustomerDown is true, Billing type != Paid ");
+	_log("Fail ::: When CustomerDown is true, Billing type != Paid ","FAILURE");
 }
 
 //Validate If Billing type is Courtesy then check Is Entitlement performed else as is
@@ -85,17 +84,19 @@ _wait(3000);
 if(_condition(($sfm_pg_sfmDesigner.chk_customerDown).checked==true)){
 	_click($sfm_pg_sfmDesigner.chk_customerDown);
 }
-_setValue($sfm_pg_sfmDesigner.txt_billingType,"Courtesy");
+_click($sfm_pg_sfmDesigner.txt_billingType);
+_click(_listItem("Courtesy"));
 _click($sfm_pg_sfmDesigner.btn_deliveryQuickSave);
+_wait(5000);
 if(_exists($sfm_pg_sfmDesigner.txt_priceAlert)){
 	_click($sfm_pg_sfmDesigner.btn_priceAlertOk);
 	_wait(10000);
 }
-if(_condition(($sfm_pg_sfmDesigner.chk_isEntitlementPerformed).checked)==false){
-	_log("Fail ::: When BillingType= Courtesy, Is Entitlement Performed is not checked","FAILURE");
+if(_condition(($sfm_pg_sfmDesigner.chk_isEntitlementPerformed).checked)==true){
+	_log("Pass ::: When BillingType= Courtesy, Is Entitlement Performed is checked");
 }
 else{
-	_log("Pass ::: When BillingType= Courtesy, Is Entitlement Performed is not checked");
+	_log("Fail ::: When BillingType= Courtesy, Is Entitlement Performed is not checked","FAILURE");
 }
 
 //Validate Scheduled Date should be set to 1st day of the created month in next year
@@ -121,7 +122,7 @@ else{
 
 //Validate Actual onsite response= Today
 
-if(_getText($sfm_pg_sfmDesigner.txt_actualOnsiteResponse)==$bo_act_common.currentDate("/")){
+if(_getText($sfm_pg_sfmDesigner.txt_actualOnsiteResponse)==$bo_act_common.currentDate("\/")){
 	_log("Pass :::  Actual onsite response= Today ");
 	}
 else{

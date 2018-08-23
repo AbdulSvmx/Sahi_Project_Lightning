@@ -83,7 +83,8 @@ var $sfmrdz_act_common= new function sfmrdz_act_common(){
 				_log("Under else loop: ");
 				//$sfmrdz_act_common.expdColSize($colName);
 				_wait(3000);
-				$list = _collect("_span","/[a-zA-Z]+/",_under(_parentNode(_div($colName),"DIV",1)));
+				//$list = _collect("_span","/[a-zA-Z]+/",_under(_parentNode(_div($colName),"DIV",1)));
+				$list=_collectAttributes("_span","/[a-z|A-Z]/","sahiText",_under(_parentNode(_div("Source Object")),15));
 				_log("No. of non empty cells: "+$list.length);
 				//$sfmrdz_act_common.descColSize($colName);
 			}			
@@ -171,7 +172,7 @@ var $sfmrdz_act_common= new function sfmrdz_act_common(){
 			}
 		}
 		_mouseOver($element);
-		_wait(1000,_isVisible($sfmrdz_pg_common.btn_lastEditMouseOverDiv));
+		//_wait(500,_isVisible($sfmrdz_pg_common.btn_lastEditMouseOverDiv));
 		return $callBack.returnResult(_exists($sfmrdz_pg_common.btn_lastEditMouseOverDiv), " mouse hover div on "+$column+" column for "+$row+" row not exists");
 		
 	};

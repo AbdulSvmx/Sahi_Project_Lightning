@@ -151,8 +151,72 @@ var $sfm_act_Transactions = new function sfm_act_Transactions() {
 			_wait(6000);
 			_click($bo_pg_sfmTransactionAndDesigner.btn_finalQuickSave);
 
-		};	
-
+		};
+		this.createLookUp=function($object,$lookupTempName,$fieldCombo,$conditionsCombo,$operandTypeCombo,$operandValue,$lookupAdvExpr,$lookUpName,$nearBy){
+			_setStrictVisibilityCheck(true);
+			
+			if($nearBy == 'Parts' || $nearBy == 'Labor' || $nearBy == 'Expense' || $nearBy == 'Travel'){
+				_click(_f("main").s_richtext($object).near(_f("main").s_richtext($nearBy)));
+			}else{
+				//_click(_f("main").s_textinput("txtIp").inside(_f("main").fieldrenderer($fieldName)));
+				_click(_f("main").s_textinput("txtIp").near(_f("main").uiftetextfield($object)));
+			}
+			
+			
+			_wait(5000,_isVisible(_f("main").s_label("Properties for Field: "+$object)));
+			_click($sfm_pg_screenDesigner.btn_ConfLookup);
+			_wait(10000,_isVisible($sfm_pg_screenDesigner.txt_lookupName));
+			_setSelected($sfm_pg_screenDesigner.sel_LkupTemplate,$lookupTempName);
+			_wait(10000);
+			
+			var $fieldLabel;
+			var $oprTypeCombo;
+			var $oprValFieldType;
+			var $oprValdateFieldType;
+			for(var $i=0; $i<$fieldCombo.length; $i++){
+				_click($sfm_pg_screenDesigner.btn_lookupNewRow);
+				_wait(5000);
+				var $temp=$i;
+				var $label=$temp+1;
+				$fieldLabel=_f("main").s_label($label.toString()).near($sfm_pg_screenDesigner.lbl_lookupFilterLabel);
+				_setSelected(_f("main").s_combobox("fieldCombo").near($fieldLabel),$fieldCombo[$i]);
+				_setSelected(_f("main").s_dropdownlist("conditionsCombo").near($fieldLabel),$conditionsCombo[$i]);
+				_setSelected(_f("main").s_dropdownlist("operandTypeCombo").near($fieldLabel),$operandTypeCombo[$i]);
+				
+				
+				$oprTypeCombo=_f("main").s_dropdownlist("operandTypeCombo").near($fieldLabel);
+				$oprValcomboFieldType=_f("main").s_combobox("/picklist/").rightOf($oprTypeCombo);
+				if (_exists($oprValcomboFieldType)) {
+					_setValue(_f("main").s_textinput("/textInput/").inside($oprValcomboFieldType),$operandValue[$i]);
+				}else{
+					_log("Inside else loop");
+					$oprValdateFieldType=_f("main").datefield("/date/").rightOf($oprTypeCombo);
+					if (_exists($oprValdateFieldType)) {
+						_setValue(_f("main").s_richeditabletext("/textDisplay/").inside($oprValdateFieldType),$operandValue[$i]);
+					}else{
+						_log("last else loop");
+						_setValue(_f("main").s_textinput("operandValue").near($fieldLabel),$operandValue[$i]);
+					}	
+				}
+				
+			}
+			//_wait(5000);
+			_setValue($sfm_pg_screenDesigner.txt_lookupAdvExpr,$lookupAdvExpr);
+			_click($sfm_pg_screenDesigner.chk_lookupDefault);
+			_wait(5000);
+			_setValue($sfm_pg_screenDesigner.txt_lookupName, $lookUpName);
+			_setValue($sfm_pg_screenDesigner.txt_lookupId, $lookUpName);
+			_click($sfm_pg_screenDesigner.btn_lookupSaveAs);
+			_wait(10000,_isVisible($sfm_pg_screenDesigner.lbl_lookupSaveConfirmMsg));
+			_setSelected($sfm_pg_screenDesigner.sel_LkupTemplate,$lookupTempName);
+			_wait(10000);
+			_setSelected($sfm_pg_screenDesigner.sel_LkupTemplate,$lookUpName);
+			_wait(10000);
+			_click($sfm_pg_screenDesigner.btn_Select);
+			_wait(5000);
+			_setStrictVisibilityCheck(false);
+		};
+/* commented this in lightning as it is done through generic function
 		this.clonedsfm6343 = function($processName,$sfmName,$sfmPgLayoutName,$dvrRuleName){
 			$sfm_act_SFM.selectSFM($processName,false);
 			_click($bo_pg_sfmTransactionAndDesigner.btn_clone);
@@ -195,9 +259,10 @@ var $sfm_act_Transactions = new function sfm_act_Transactions() {
 			_click($bo_pg_sfmTransactionAndDesigner.btn_finalQuickSave);
 			_wait(6000);
 //			_click($bo_pg_sfmTransactionAndDesigner.lbl_backToSetupHome);
-		};
+		}; */
 		
-	this.clonedsfm5348= function($processName,$sfmName,$sfmPgLayoutName,$dvrRuleName){
+	/* commented this in lightning as it is done through generic function
+		this.clonedsfm5348= function($processName,$sfmName,$sfmPgLayoutName,$dvrRuleName){
 		
 		$sfm_act_SFM.selectSFM($processName,false);
 		_click($bo_pg_sfmTransactionAndDesigner.btn_clone);
@@ -269,8 +334,8 @@ var $sfm_act_Transactions = new function sfm_act_Transactions() {
 		_wait(6000);
 		
 		
-	};
-	
+	}; */
+	/* commented this in lightning as it is done through generic function
 	this.clonedsfm5352= function($processName,$sfmName,$sfmPgLayoutName,$dvrRuleName){
 		$sfm_act_SFM.selectSFM($processName,false);
 		_click($bo_pg_sfmTransactionAndDesigner.btn_clone);
@@ -306,7 +371,7 @@ var $sfm_act_Transactions = new function sfm_act_Transactions() {
 		_click($bo_pg_sfmTransactionAndDesigner.btn_finalQuickSave);
 		_wait(6000);
 //		_click($bo_pg_sfmTransactionAndDesigner.lbl_backToSetupHome);
-	};
+	}; */
 
 	this.clonedsfm7012= function($processName,$sfmName,$sfmPgLayoutName,$sfmMapping){
 		$sfm_act_SFM.selectSFM($processName,false);
@@ -339,7 +404,7 @@ var $sfm_act_Transactions = new function sfm_act_Transactions() {
 		_setSelected(_f("main").s_combobox("/ComboBox/").rightOf(_f("main").formitemlabel("Matching Field")),"Account ID");
 	};
 	
-	this.newSfm7017 = function($sfmName) {
+	this.newSfm10429 = function($sfmName) {
 		/*$sfmName = $bo_act_common.generateRandomName("RS_7017_");*/
 		$sfmPgLayoutName = $sfmName;
 		_wait(5000);
@@ -425,6 +490,9 @@ var $sfm_act_Transactions = new function sfm_act_Transactions() {
 		_wait(3000);
 		_click($bo_pg_sfmTransactionAndDesigner.btn_finalQuickSave);
 	};
+	
+
+	
 	this.newsfm6905 = function($sfmName,$sfmPgLayoutName){
 		_wait(5000);
 		_click($bo_pg_sfmTransactionAndDesigner.btn_newSFM);
@@ -584,58 +652,205 @@ var $sfm_act_Transactions = new function sfm_act_Transactions() {
 				_wait(2000);
 			};
 			
-			this.sfmQualifyingCriteriaieldMappings=function($object,$comboField, $comboConditions, $toggleButton, $comboInput, $exprsnName){
+			this.sfmQualifyingCriteriaieldMappings=function($object,$ExprFieldsDetails,$mappingDetails,$addExprName){
+				//Expression fields
+				var $comboField=$ExprFieldsDetails[0];
+				var $comboConditions=$ExprFieldsDetails[1]; 
+				var $toggleButton=$ExprFieldsDetails[2];
+				var $comboInput=$ExprFieldsDetails[3];
+				var $advExpr=$ExprFieldsDetails[4];
+				var $errMsg=$ExprFieldsDetails[5];
+				var $exprsnName=$ExprFieldsDetails[6];
+				
+				//Mapping Fields
+				var $pickListLabels=$mappingDetails[0];
+				var $pickListValues=$mappingDetails[1];
+				var $textLabels=$mappingDetails[2];
+				var $textValues=$mappingDetails[3];
+				var $mapName=$mappingDetails[4];
+				
+				
 				_click($sfm_pg_screenDesigner.btn_qualifyingCriteriaAndFieldMapping);
 				_wait(10000,_isVisible($sfm_pg_screenDesigner.lbl_qualifyingCriteriaMapping));
-				_click(_f("main").s_label($object));
+				_click(_f("main").s_label($object).near($sfm_pg_screenDesigner.lbl_qualifyingCriteriaMapping));
 				_wait(10000,_isVisible($sfm_pg_screenDesigner.lbl_headerQualificationLabel));
-				this.createCustomExpression($comboField, $comboConditions, $toggleButton, $comboInput, $exprsnName);
+				if ($ExprFieldsDetails.length!==0 && $ExprFieldsDetails!==null) {
+					this.sfmCreateCustomExpression($comboField, $comboConditions, $toggleButton, $comboInput, $advExpr, $errMsg, $exprsnName);
+				}else if($addExprName.length!==0 && $addExprName!==null){
+					_setSelected($sfm_pg_screenDesigner.sel_selectExpression,$addExprName);
+					_wait(10000,_isVisible($sfm_pg_screenDesigner.sel_comboField.near(_f("main").s_label("1"))));
+					//_keyPress($sfm_pg_expressions.btn_selectExpression, 27);
+				}
+				if ($mappingDetails.length!==0 && $mappingDetails!==null) {
+					$bo_act_mappings.createMapping($pickListLabels, $pickListValues, $textLabels, $textValues, $mapName);
+				}
+
 			};
 			
-			this.createCustomExpression=function($comboField,$comboConditions,$toggleButton,$comboInput,$exprsnName){
+			this.screenDesigner=function($headersToAdd,$childToAdd,$sfmPgLayoutName,$sfmPgLayoutName){
+				var $childObj=$childToAdd[0];
+				var $fieldName=$childToAdd[1];
+				
+				_click($bo_pg_sfmTransactionAndDesigner.btn_screenDesigner);
+				_wait(10000,_isVisible($sfm_pg_screenDesigner.lbl_propDetail));
+				this.addHeader($headersToAdd);
+				this.addChildFields($childObj, $fieldName);
+				_setValue($bo_pg_sfmTransactionAndDesigner.txt_sfmSavePageLayoutAs, $sfmPgLayoutName);
+				_setValue($bo_pg_sfmTransactionAndDesigner.txt_sfmSavePageLayoutAsId, $sfmPgLayoutName);
+				_wait(5000);
+				_click($bo_pg_sfmTransactionAndDesigner.btn_pageLayoutSave);
+				_wait(10000,_isVisible($bo_pg_sfmTransactionAndDesigner.page_saved));
+				
+			};
+			
+			this.addChildFields=function($childObj,$fieldName){
+				_setStrictVisibilityCheck(true);
+				for(var $i=0;$i<$fieldName.length;$i++){
+					_click($sfm_pg_screenDesigner.sel_dataGrp.near(_f("main").s_richtext($childObj)));
+					_setValue($sfm_pg_screenDesigner.txt_searchChildField,$fieldName[$i]);
+					_wait(2000);
+					_doubleClick(_f("main").s_label($fieldName[$i]));
+				}
+				_setStrictVisibilityCheck(false);
+			};
+			
+			this.sfmCreateCustomExpression=function($comboField,$comboConditions,$toggleButton,$comboInput,$advExpr,$errMsg,$exprsnName){
 				_click($sfm_pg_screenDesigner.btn_newExpression);
 				_wait(10000,_isVisible($sfm_pg_screenDesigner.sel_comboField.near(_f("main").s_label("1"))));
-				if ($comboField.length==1) {
-					_click($sfm_pg_screenDesigner.btn_deleteRow.near(_f("main").s_label("2")));
-				}else if ($comboField.length>2) {
-					for (var $i = 0; $i < $comboField.length-2; $i++) {
-						_log("Add row: "+$i);
-						_click($sfm_pg_screenDesigner.btn_addRow);
-					}
-				}
-					var $ele=null;
-					var $eleType=null;
-					var $index=null;
-					var $temp=null;
-					for (var $i = 1; $i <= $comboField.length; $i++) {
-						_log("$i value: "+$i);
-						$temp=$i;
-						$index=$temp-1;
-						_log("index: "+$index);
-						_setSelected($sfm_pg_screenDesigner.sel_comboField.near(_f("main").s_label($i.toString())),$comboField[$index]);
-						_setSelected($sfm_pg_screenDesigner.sel_comboConditions.near(_f("main").s_label($i.toString())), $comboConditions[$index]);
-						if ($comboConditions[$index]!=="Is Null"&&$comboConditions[$index]!=="Is Not Null") {
-							if ($toggleButton[$index]!=="") {
-								_click($sfm_pg_screenDesigner.btn_toggleChoose.near(_f("main").s_label($i.toString())));
-								_wait(3000);
-								_setSelected($sfm_pg_screenDesigner.btn_inputCombobox.near(_f("main").s_label($i.toString())),$comboInput[$index]);
-							}else{
-								$ele=$sfm_pg_screenDesigner.sel_comboField.near(_f("main").s_label($i.toString()));
-								$eleType=_exists($sfm_pg_screenDesigner.btn_toggleChoose.rightOf($ele));
-								if ($eleType==true) {
-									_setValue($sfm_pg_screenDesigner.txt_input.near(_f("main").s_label($i.toString())),$comboInput[$index]);
-								}else{
-									_setSelected($sfm_pg_screenDesigner.btn_inputCombobox.near(_f("main").s_label($i.toString())),$comboInput[$index]);
-								}	
-							}
-						}
-					}
+				
+				this.sfmAddExpressionRows($comboField, $comboConditions, $toggleButton, $comboInput, $advExpr, $errMsg);
+				this.sfmSvaeExpression($exprsnName, $exprsnName, "Save");
 
-				_setValue($sfm_pg_screenDesigner.txt_saveExprsn,$exprsnName);
-				_setValue($sfm_pg_screenDesigner.txt_inputId,$exprsnName);
-				_click($bo_pg_sfmTransactionAndDesigner.btn_editExprSave);
-				_wait(3000,isVisible($bo_pg_sfmTransactionAndDesigner.label_exprSaved));
 			};			
 			
+		this.sfmSvaeExpression=function($exprsnName,$exprsnId,$save){
+			_setValue($sfm_pg_screenDesigner.txt_saveExprsn,$exprsnName);
+			_setValue($sfm_pg_screenDesigner.txt_inputId,$exprsnId);
+			if ($save=="Save As") {
+				_click($bo_pg_sfmTransactionAndDesigner.btn_editExprSaveAs);
+			}else {
+					_click($bo_pg_sfmTransactionAndDesigner.btn_editExprSave);
+			}
+			_wait(5000,isVisible($bo_pg_sfmTransactionAndDesigner.label_exprSaved));
+		};
+		
+		
+		this.sfmAddExpressionRows=function($comboField,$comboConditions,$toggleButton,$comboInput,$advExpr,$errMsg){
+			if ($comboField.length==1) {
+				_click($sfm_pg_screenDesigner.btn_deleteRow.near(_f("main").s_label("2")));
+			}else if ($comboField.length>2) {
+				for (var $i = 0; $i < $comboField.length-2; $i++) {
+					_log("Add row: "+$i);
+					_click($sfm_pg_screenDesigner.btn_addRow);
+				}
+			}
+				var $ele=null;
+				var $eleType=null;
+				var $index=null;
+				var $temp=null;
+				for (var $i = 1; $i <= $comboField.length; $i++) {
+					_log("$i value: "+$i);
+					$temp=$i;
+					$index=$temp-1;
+					_log("index: "+$index);
+					_setSelected($sfm_pg_screenDesigner.sel_comboField.near(_f("main").s_label($i.toString())),$comboField[$index]);
+					_setSelected($sfm_pg_screenDesigner.sel_comboConditions.near(_f("main").s_label($i.toString())), $comboConditions[$index]);
+					if ($comboConditions[$index]!=="Is Null"&&$comboConditions[$index]!=="Is Not Null") {
+						if ($toggleButton[$index]!=="") {
+							_click($sfm_pg_screenDesigner.btn_toggleChoose.near(_f("main").s_label($i.toString())));
+							_wait(3000);
+							_setSelected($sfm_pg_screenDesigner.btn_inputCombobox.near(_f("main").s_label($i.toString())),$comboInput[$index]);
+						}else{
+							$ele=$sfm_pg_screenDesigner.sel_comboField.near(_f("main").s_label($i.toString()));
+							$eleType=_exists($sfm_pg_screenDesigner.btn_toggleChoose.rightOf($ele));
+							if ($eleType==true) {
+								_setValue($sfm_pg_screenDesigner.txt_input.near(_f("main").s_label($i.toString())),$comboInput[$index]);
+							}else{
+								_setSelected($sfm_pg_screenDesigner.btn_inputCombobox.near(_f("main").s_label($i.toString())),$comboInput[$index]);
+							}	
+						}
+					}
+				}
+				_setValue($sfm_pg_screenDesigner.txt_advExpr,$advExpr);
+				_setValue($sfm_pg_screenDesigner.txt_errMsg,$errMsg);
+		};	
 			
+		
+		this.sfmUpdateExpression=function($comboField,$comboConditions,$toggleButton,$comboInput,$advExpr,$errMsg){
+			var $lastRow=parseInt(_getValue(_f("main").s_label("/serialNo.*/").leftOf($sfm_pg_screenDesigner.btn_addRow)));
+			_log("current Row Count: "+$lastRow);
+			var $totRow=$lastRow+$comboField.length;
+
+			for (var $i = $lastRow; $i < $totRow; $i++) {
+				_log("Add new row after: "+$i);
+				_click($sfm_pg_screenDesigner.btn_addRow);
+			}
+			
+			var $ele=null;
+			var $eleType=null;
+			var $index=null;
+			var $temp=null;
+			var $loopIndex=$lastRow;
+			for (var $i = $loopIndex+1; $i <= $totRow; $i++) {
+			_log("$i value: "+$i);
+			$temp=$i;
+			$index=$temp-$lastRow-1;
+			_log("index: "+$index);
+			_setSelected($sfm_pg_screenDesigner.sel_comboField.near(_f("main").s_label($i.toString())),$comboField[$index]);
+			_setSelected($sfm_pg_screenDesigner.sel_comboConditions.near(_f("main").s_label($i.toString())), $comboConditions[$index]);
+			if ($comboConditions[$index]!=="Is Null"&&$comboConditions[$index]!=="Is Not Null") {
+					if ($toggleButton[$index]!=="") {
+					_click($sfm_pg_screenDesigner.btn_toggleChoose.near(_f("main").s_label($i.toString())));
+					_wait(3000);
+					_setSelected($sfm_pg_screenDesigner.btn_inputCombobox.near(_f("main").s_label($i.toString())),$comboInput[$index]);
+					}else{
+						$ele=$sfm_pg_screenDesigner.sel_comboField.near(_f("main").s_label($i.toString()));
+						$eleType=_exists($sfm_pg_screenDesigner.btn_toggleChoose.rightOf($ele));
+						if ($eleType==true) {
+						_setValue($sfm_pg_screenDesigner.txt_input.near(_f("main").s_label($i.toString())),$comboInput[$index]);
+						}else{
+							_setSelected($sfm_pg_screenDesigner.btn_inputCombobox.near(_f("main").s_label($i.toString())),$comboInput[$index]);
+						}	
+					}
+				}
+			}
+					_setValue($sfm_pg_screenDesigner.txt_advExpr,$advExpr);
+					_setValue($sfm_pg_screenDesigner.txt_errMsg,$errMsg);	
+			};
+		
+			this.getExpressionValues=function($object,$exprsnName){
+				_setSelected($sfm_pg_expressions.sel_object,$object);
+				_wait(10000,_isEnabled($sfm_pg_expressions.btn_selectExpression));
+				_setSelected($sfm_pg_expressions.dropdown_exprsn,$exprsnName);
+				_wait(10000,_isVisible($sfm_pg_expressions.sel_comboField.near(_f("SFMExpressionBuilderSWF").s_label("1"))));
+				var $lastRow=parseInt(_getValue(_f("SFMExpressionBuilderSWF").s_label("/serialNo.*/").leftOf($sfm_pg_expressions.btn_plus)));
+				_log("Total row count: "+$lastRow);
+				var $index=null;
+				var $temp=null;
+				var $comboField=new Array();
+				var $comboConditions=new Array();
+				var $comboInput=new Array();
+				for(var $i = 1; $i <= $lastRow; $i++) {
+					_log("$i: "+$i);
+					$temp=$i;
+					$index=$temp-1;
+					_log("$index: "+$index);
+					//_log(typeof $index);
+					//_log(_getValue($sfm_pg_expressions.sel_comboField.near(_f("SFMExpressionBuilderSWF").s_label($i.toString()))));
+					//$testcomboField[$i]="Test";
+					$comboField[$index]=_getValue($sfm_pg_expressions.sel_comboField.near(_f("SFMExpressionBuilderSWF").s_label($i.toString())));
+					$comboConditions[$index]=_getValue($sfm_pg_expressions.sel_comboConditions.near(_f("SFMExpressionBuilderSWF").s_label($i.toString())));
+					$ele=$sfm_pg_expressions.sel_comboField.near(_f("SFMExpressionBuilderSWF").s_label($i.toString()));
+					$eleType=_exists($sfm_pg_expressions.btn_toggleChoose.rightOf($ele));
+					if ($eleType==true) {
+						$comboInput[$index]=_getValue($sfm_pg_expressions.txt_input.near(_f("SFMExpressionBuilderSWF").s_label($i.toString())),$comboInput[$index]);
+					}else{
+						$comboInput[$index]=_getValue($sfm_pg_expressions.btn_inputCombobox.near(_f("SFMExpressionBuilderSWF").s_label($i.toString())),$comboInput[$index]);
+					}
+				}
+				_log("$comboField: "+$comboField.length);
+				return [$comboField,$comboConditions,$comboInput];
+			};
+		
+		
 };

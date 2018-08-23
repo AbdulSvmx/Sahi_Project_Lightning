@@ -22,11 +22,11 @@ var $sfm_pg_wizards = new function sfm_pg_wizards() {
 	this.btn_customBackToSetupHome= _submit("Back To Setup Home[2]",_near(_heading2("Custom SFM Wizards")));
 	
 	//create SFM wizard objects
-	this.txt_wizardTitle = _textbox(0,_span(_label("Wizard Title"))); //,_rightOf(_span("Wizard Title")));
+	this.txt_wizardTitle = _textbox(0,_rightOf(_span("Wizard Title"))); //,_rightOf(_span("Wizard Title")));
 	this.txt_wizardID = _textbox(0,_rightOf(_label("Wizard ID"))); //,_rightOf(_label("Wizard ID")));
 	this.txt_wizardDescription = _textarea(0); //,_rightOf(_label("Description")));
-	this.btn_showCriteria = _select(1); //,_rightOf(_label("Criteria To Show Wizard")));
-	this.txt_activeCheckbox = _checkbox(0); //,_rightOf(_label("Active?")));
+	this.btn_showCriteria = _select(0,_rightOf(_label("Criteria To Show Wizard"))); //,_rightOf(_label("Criteria To Show Wizard")));
+	this.txt_activeCheckbox = _checkbox(0,_rightOf(_label("Active?"))); //,_rightOf(_label("Active?")));
 	
 	//tabs & buttons in Create SFM Wizard
 	this.txt_manageWizSteps = _cell("Manage Wizard Steps");
@@ -35,7 +35,7 @@ var $sfm_pg_wizards = new function sfm_pg_wizards() {
 	this.btn_quickSave = _button("Quick Save"); //,_near(_heading2("Create SFM Wizard")));
 	this.btn_saveClose = _button("Save & Close"); //,_near(_heading2("Create SFM Wizard")));
 	this.btn_cancelWizard = _button("Cancel"); //,_near(_heading2("Create SFM Wizard")));
-	
+	this.btn_edit = _submit("Edit");
 	//Manage wizard steps objects
 	this.btn_newStep = _button("New Step");
 //	this.btn_wizStepType = _select(2); //,_rightOf(_label("Wizard Step Type[1]")));
@@ -48,6 +48,7 @@ var $sfm_pg_wizards = new function sfm_pg_wizards() {
 	this.btn_stepCriteria = _select(5); //_rightOf(_label("Criteria To Enable This Step")));
 	this.btn_saveStep = _button("Save");
 	this.btn_cancleStep = _button("Cancel[1]");
+
 	
 	//Added By Harish
 	this.select_availableGrpProfiles =_select(0,_near(_cell("Available ServiceMax Group Profiles")));

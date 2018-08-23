@@ -1,0 +1,59 @@
+
+var $rs_10440 = _testcase("RS_10440","Verify source to target child SFM Process.");
+$rs_10440.start();
+$sfmNameToBeCloned = "Create Usage Lines from Estimates";
+$sfmName = $bo_act_common.generateRandomName("RS_10440_");
+$isCustom = false;
+var $sfmTemplate = "SVMXSTD: Manage WO Usage Lines";
+var $sfmTemplateSaveAsName = $sfmName;
+var $fieldName = ["Problem Description"];
+var $containerName = ["Order Status"];
+$bo_act_login.login($g_url,$sfmUsn,$sfmPwd);
+
+$sfm_act_SFM.cloneTDM016($sfmNameToBeCloned, $sfmName, $isCustom, $sfmTemplateSaveAsName, $sfmTemplate, $fieldName, $containerName);
+_click($bo_pg_sfmTransactionAndDesigner.btn_finalQuickSave);
+_setSpeed($g_stepSpeed);
+
+//add the process to wizard
+$sfm_act_wizards.addToWizard("Work Order", $wizardName[2], $wizardType[1], $sfmName);  
+
+//Create WO through UI for the validatiion
+_selectDomain();
+$sfm_act_createCustomWizard.createWowithoutvalues(); 
+//Add WD line
+addWorkDetailLine("Estimate", "Parts", "Estimate line");
+//Launch the process and validate
+_click($sfm_pg_sfmDesigner.link_details);
+$sfm_act_createCustomWizard.clickWizardBtn($sfmName);
+_click($sfm_pg_sfmDesigner.btn_deliveryPartsTab);
+_wait(5000);
+_selectDomain($domainName);
+_setStrictVisibilityCheck(true);
+_click($sfm_pg_sfmDesigner.btn_deliveryExtendedEdit);
+_click($sfm_pg_sfmDesigner.btn_deliveryExtendedEdit);
+_click($sfm_pg_sfmDesigner.txt_eeEdit);
+if(_getText(_textarea("/textarea*/",_near(_span("Work Description",_in(_div("/sfm-window/"))))))== "Estimate line"){
+	_log("Pass ::: Child of record type estimate is displayed in the process");
+}else{
+	_log("Fail ::: Child of record type estimate is not displayed with proper values");
+}
+
+
+function addWorkDetailLine($recordType,$lineType,$workDescription){
+	_click($sfm_pg_sfmDesigner.link_related);
+	_click($sfm_pg_sfmDesigner.link_newWorkDetail);
+	_click(_span("slds-radio--faux",_leftOf(_span($recordType,_in(_div("/modal-body/"))))));
+	_click($sfm_pg_sfmDesigner.btn_next);
+	_click($sfm_pg_sfmDesigner.link_lineType);
+	_click(_link($lineType));
+	_setValue($sfm_pg_sfmDesigner.txt_workDescription,$workDescription);
+	_click($sfm_pg_sfmDesigner.btn_saveWorkDetail);
+	_wait(5000,isVisible(_span("Work Detail was created.")));
+}
+
+$rs_10440.end();
+
+
+
+
+

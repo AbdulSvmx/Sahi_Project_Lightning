@@ -13,11 +13,13 @@ $bo_act_login.login($g_url, $appiumAdminUn, $appiumAdminPwd);
 var $sfmName_1 = "Create New Work Order";
 var $transactiontype = "as Standalone for the purpose of creating a new record";
 var $targetObjectName = "Work Order";
-//$bo_act_SFM.createstandaloneSFM($sfmName_1, $transactiontype, $targetObjectName);
+$bo_act_SFM.createstandaloneSFM($sfmName_1, $transactiontype, $targetObjectName);
 
 
 
 // Clone TDM016 with attachment enabled for FSA Automation
+_writeFile("false", $appiumPath+$sahiIntermediatoryPath, true);
+
 var $sfmToBeCloned = "Manage Work Order Lines - Usage";
 var $sfmName_2 = "EditWoAutoTimesstamp";
 var $sfmTemplateSaveAsName = "Pagelayout ManageWOUsageLines";
@@ -30,7 +32,8 @@ $bo_act_SFMAppPermission.set_mobileapp_permissions($profilename, $targetObjectNa
 
 
 // Adding the SFM Wizard created by cloning TDM016
-var $wizTitle = $bo_act_common.generateRandomName("SFM Wiz");
+var $wizTitle = "AutoSanity";
 $bo_act_navigation.navigateToSfmWizard();
 $sfm_act_createCustomWizard.chooseObject($targetObjectName);
 $sfm_act_createCustomWizard.addManageWizSteps($wizTitle,"SFM", $sfmName_2);
+_writeFile("true", $appiumPath+$sahiIntermediatoryPath, true);
