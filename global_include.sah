@@ -87,6 +87,8 @@ var $swatPwd = "maxpl0re";
 
 
 // Appium
+var $appiumPath = "/auto/SVMX_Catalyst/Executable";
+var $sahiIntermediatoryPath = "sahiResultCommon.txt";
 
 var $appiumAdminUn="meghana.automation@servicemax.com";
 var $appiumAdminPwd="servicemax01";

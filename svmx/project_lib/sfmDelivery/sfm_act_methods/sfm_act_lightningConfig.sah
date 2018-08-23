@@ -172,6 +172,35 @@ this.openExtEditForLatestItem = function(){
 	_click(_span("Edit"));
 	
 };
+
+
+
+this.navigateToCreateCustomObject = function(){
+	//Added by Harish CS
+	_click(_div("Setup"));
+	_click(_span("Setup[1]"));
+	_selectWindow("Home | Salesforce");
+	_click(_link("Create"));
+	_click(_span("Custom Object"));
+}
+
+this.addPermissionToCustomObject = function($searchFor,$profileName,$objectName){
+	//Added by Harish CS
+	$checkboxCount = 6;
+	_click(_div("Setup"));
+	_click(_span("Setup[1]"));
+	_selectWindow("Home | Salesforce");
+	_setValue(_searchbox("Quick Find"),$searchFor);
+	_click(_mark("Profiles"));
+	_selectDomain("cs77.salesforce.com");
+	_selectWindow();
+	_click(_span("/Edit/",_leftOf(_span($profileName))));
+	for(var $i=0;$i<$checkboxCount;$i++){
+		_click(_checkbox($i,_rightOf(_tableHeader($objectName))));
+	}
+	_click(_submit("/Save/"));
+};
+
 this.deleteStepFromWizard = function($wizardObject,$wizardName,$processName){
 	//deletes a given step from a given wizard
 	$bo_act_navigation.navigateToSvmxSetup();
@@ -190,6 +219,45 @@ this.deleteStepFromWizard = function($wizardObject,$wizardName,$processName){
 		_wait(5000,_isVisible($sfm_pg_wo.msg_wizardStepDeleteSuccess));	
 	}
 };
+
+this.addCustomFields = function($objectName,$fieldNames,$dataTypes,$myDomain,$multiPicklistValues){
+	//Function to add set of custom fields to the given object
+	//Creates only if object is already not present.
+	//Author:Janaki
+	var $i = 0;var $z = 0;
+	$sfm_act_lightningConfig.navigateToObjectsInLightning($objectName);
+	_selectWindow("/"+$objectName+"/");
+	_click($sfm_pg_wo.link_fieldsAndRelationships);
+	_selectDomain();
+	for($i=0;$i<$fieldNames.length;$i++){
+		_setValue($sfm_pg_wo.txt_quickFindFields,$fieldNames[$i]);
+		_wait(3000);
+		if(_isVisible(_div("No items to display."))){
+			_click($sfm_pg_wo.btn_newCustomField);
+			_selectDomain($myDomain);
+			_click(_radio("/dtype/",_in(_cell($dataTypes[$i]))));
+			_click($sfm_pg_wo.btn_nextInAddCustomFields);
+			_setValue($sfm_pg_wo.txt_customFieldName,$fieldNames[$i]);
+			_keyPress($sfm_pg_wo.txt_customFieldName,13);
+			//Add multi picklist values if needed
+			if($dataTypes[$i] === "Picklist (Multi-Select)"){
+				_check($sfm_pg_wo.radio_multiPicklist);
+				for($z=0;$z<$multiPicklistValues.length;$z++){
+					_type($sfm_pg_wo.txt_multiPickTextArea,$multiPicklistValues[$z]);
+					_keyPress($sfm_pg_wo.txt_multiPickTextArea,13);
+				}
+			}
+			_click($sfm_pg_wo.btn_nextInAddCustomFields);
+			_click($sfm_pg_wo.btn_nextInAddCustomFields);
+			_click($sfm_pg_wo.btn_saveCustomField);
+			_selectDomain();
+		}
+		else {
+			   _log($fieldNames[$i]+" already present in "+$objectName+" object");
+			}
+	}
+};
+	
 
 this.findIfFieldPresentInPageLayout = function($fieldName){
 	//This function checks if one field is present in the currently opened page page layout and returns true or false
@@ -239,12 +307,12 @@ this.openExistingProcess = function($processName){
 	//Opens the given process in SFM Designer
 	_setSpeed(3000);
 	$bo_act_navigation.navigateToSfmTransactionDesigner();
-	$sfm_act_SFM.selectSFM($process_to_clone,false);
+	$sfm_act_SFM.selectSFM($process_to_clone,true);
 	_click(_f("main").s_label($processName));
 	_wait(5000);
 };
 this.deletePageLayout = function($pageLayoutName){
-	//Deletes the custom page payout created as part of test case cleanup
+	//Deletes the custom page layout created as part of test case cleanup
 	//Author:Janaki
 	_selectDomain($domainName);
 	_click($bo_pg_sfmTransactionAndDesigner.btn_screenDesigner);
@@ -289,7 +357,7 @@ this.deleteSfmProcess = function($processName){
 	}
 	_wait(8000);
 };
-this.editWorkOrder = function($textLabels,$textValues,$pickListLabels,$pickListValues,$textAreaLabels,$textAreaValues,$checkBoxLabels,$checkBoxValues,$dateTimeLabels,$dateTimeDateValues,$timeValues,$emailLabels,$emailValues){
+this.editWorkOrder = function($textLabels,$textValues,$pickListLabels,$pickListValues,$textAreaLabels,$textAreaValues,$checkBoxLabels,$checkBoxValues,$dateTimeLabels,$dateTimeDateValues,$timeValues,$emailLabels,$emailValues,$multiPickLabels,$multiPickValues,$urlLabels,$urlValues){
 	//This function edits work order in Lightning mode
 	//Author : Janaki
 	//Text values and Date values can be combined into a single array
@@ -347,13 +415,25 @@ this.editWorkOrder = function($textLabels,$textValues,$pickListLabels,$pickListV
 			_setValue(_emailbox("/" + $emailLabels[$i] + "/"),$emailValues[$i]);
 		}
 	}
+   //Fill multi picklists
+	if($multiPickLabels.length > 0){
+		for($i=0;$<$multiPickLabels.length;$i++){
+			_setSelected(_select(0,_near(_span($multiPickLabels[$i]))),[$multiPickValues[$i]],true);;
+		}
+	}
+	//Fill URL fields
+	if($urlLabels.length > 0){
+		for($i=0;$<$urlLabels.length;$i++){
+			_setValue(_urlbox($urlLabels[$i]),$urlValues[$i]);
+		}
+	}
 	
 //Saving everything together
 _click($sfm_pg_wo.btn_saveEditWO);
 _wait(2000);
 };
 
-this.verifyValues = function($textLabels,$textValues,$pickListLabels,$pickListValues,$textAreaLabels,$textAreaValues,$checkBoxLabels,$checkBoxValues,$dateTimeLabels,$dateTimeDateValues,$timeValues,$emailLabels,$emailValues,$lookUpLabels,$lookUpValues){
+this.verifyValues = function($textLabels,$textValues,$pickListLabels,$pickListValues,$textAreaLabels,$textAreaValues,$checkBoxLabels,$checkBoxValues,$dateTimeLabels,$dateTimeDateValues,$timeValues,$emailLabels,$emailValues,$lookUpLabels,$lookUpValues,$multiPickLabels,$multiPickValues,$urlLabels,$urlValues){
 	//This function takes the values in a given object/record, compares with expected values
 	//and returns true/false on the basis of the results
 	//Author : Janaki
@@ -494,6 +574,49 @@ this.verifyValues = function($textLabels,$textValues,$pickListLabels,$pickListVa
 		}
 		else {
 			_log("Lookup values do not match");
+			$x = false;
+			$result = Boolean($result && $x);
+		}	
+	}
+	$actualList = [];
+	//Verify Multi picklist values
+	if($multiPickLabels.length > 0){
+		var $multiValues = _getSelectedText(_select(0,_near(_span($multiPickLabels[$i]))));
+		var $z=0;
+		for($z=0;$z<$multiValues.length;$z++){
+			$actualList.push($multiValues[$z]);
+		}
+		for($i=0;$i<$multiPickLabels.length;$i++){
+			_log("Expected date value for "+$multiPickLabels[$i]+":"+$multiPickValues[$i]);
+			_log("Actual date value for"+$multiPickLabels[$i]+":"+$actualList[$i]);
+		}
+		if(_areEqual($multiPickValues,$actualList)){
+			_log("Multi Picklist values match");
+			$x = true;
+			$result = Boolean($result && $x);
+		}
+		else {
+			_log("Multi Picklist values do not match");
+			$x = false;
+			$result = Boolean($result && $x);
+		}	
+	}
+	$actualList = [];
+	//Verify URL values
+	if($urlLabels.length > 0){
+		
+		for($i=0;$i<$urlLabels.length;$i++){
+			$actualList.push(_getText(_urlbox($urlLabels[$i])));
+			_log("Expected date value for "+$urlLabels[$i]+":"+$urlValues[$i]);
+			_log("Actual date value for"+$urlLabels[$i]+":"+$actualList[$i]);
+		}
+		if(_areEqual($urlValues,$actualList)){
+			_log("URL values match");
+			$x = true;
+			$result = Boolean($result && $x);
+		}
+		else {
+			_log("URL values do not match");
 			$x = false;
 			$result = Boolean($result && $x);
 		}	
