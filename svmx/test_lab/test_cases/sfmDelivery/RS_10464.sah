@@ -55,7 +55,6 @@ $rs_10464.start();
 	var $wizardType="SFM";
 	var $profile="";
 	var $handOver=false;
-	_log($wizardName1);
 	$sfm_act_wizards.addToWizard($wizardObject, $wizardName1, $wizardType, $sfmName, $handOver, $profile);  
 	
 
