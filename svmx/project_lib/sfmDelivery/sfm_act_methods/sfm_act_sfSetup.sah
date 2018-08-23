@@ -13,6 +13,8 @@ var $sfm_act_sfSetup = new function sfm_act_sfSetup() {
 		else if(_isVisible($sfm_pg_sfSetup.btn_caseCustomFieldNew)){
 			_click($sfm_pg_sfSetup.btn_caseCustomFieldNew);
 		}
+		_selectDomain("cs77.salesforce.com"); //Added for Lightning
+		_selectWindow(); //Added for Lightning
 		_click($sfm_pg_sfSetup.radio_text);
 		_click($sfm_pg_sfSetup.btn_next);
 		_setValue($sfm_pg_sfSetup.txt_fieldLabel,$fieldLabel);
@@ -65,11 +67,128 @@ var $sfm_act_sfSetup = new function sfm_act_sfSetup() {
 		_click($sfm_pg_sfSetup.btn_next);
 		_click($sfm_pg_sfSetup.btn_submit);
 	};
+	this.addCheckboxField = function($fieldLabel){
+		if(_isVisible($sfm_pg_sfSetup.btn_customFieldNew)){
+			_click($sfm_pg_sfSetup.btn_customFieldNew);
+		}
+		else if(_isVisible($sfm_pg_sfSetup.btn_caseCustomFieldNew)){
+			_click($sfm_pg_sfSetup.btn_caseCustomFieldNew);
+		}
+		_click($sfm_pg_sfSetup.radio_checkbox);
+		_click($sfm_pg_sfSetup.btn_next);
+		_setValue($sfm_pg_sfSetup.txt_fieldLabel,$fieldLabel);
+		_click($sfm_pg_sfSetup.btn_next);
+		_click($sfm_pg_sfSetup.btn_next);
+		_click($sfm_pg_sfSetup.btn_submit);
+	};
+	this.addCurrencyField = function($fieldLabel){
+		if(_isVisible($sfm_pg_sfSetup.btn_customFieldNew)){
+			_click($sfm_pg_sfSetup.btn_customFieldNew);
+		}
+		else if(_isVisible($sfm_pg_sfSetup.btn_caseCustomFieldNew)){
+			_click($sfm_pg_sfSetup.btn_caseCustomFieldNew);
+		}
+		_click($sfm_pg_sfSetup.radio_currency);
+		_click($sfm_pg_sfSetup.btn_next);
+		_setValue($sfm_pg_sfSetup.txt_fieldLabel,$fieldLabel);
+		_click($sfm_pg_sfSetup.btn_next);
+		_click($sfm_pg_sfSetup.btn_next);
+		_click($sfm_pg_sfSetup.btn_submit);
+	};
+	this.addDateField = function($fieldLabel){
+		if(_isVisible($sfm_pg_sfSetup.btn_customFieldNew)){
+			_click($sfm_pg_sfSetup.btn_customFieldNew);
+		}
+		else if(_isVisible($sfm_pg_sfSetup.btn_caseCustomFieldNew)){
+			_click($sfm_pg_sfSetup.btn_caseCustomFieldNew);
+		}
+		_click($sfm_pg_sfSetup.radio_date);
+		_click($sfm_pg_sfSetup.btn_next);
+		_setValue($sfm_pg_sfSetup.txt_fieldLabel,$fieldLabel);
+		_click($sfm_pg_sfSetup.btn_next);
+		_click($sfm_pg_sfSetup.btn_next);
+		_click($sfm_pg_sfSetup.btn_submit);
+	};
+	this.addEmailField = function($fieldLabel){
+		if(_isVisible($sfm_pg_sfSetup.btn_customFieldNew)){
+			_click($sfm_pg_sfSetup.btn_customFieldNew);
+		}
+		else if(_isVisible($sfm_pg_sfSetup.btn_caseCustomFieldNew)){
+			_click($sfm_pg_sfSetup.btn_caseCustomFieldNew);
+		}
+		_click($sfm_pg_sfSetup.radio_email);
+		_click($sfm_pg_sfSetup.btn_next);
+		_setValue($sfm_pg_sfSetup.txt_fieldLabel,$fieldLabel);
+		_click($sfm_pg_sfSetup.btn_next);
+		_click($sfm_pg_sfSetup.btn_next);
+		_click($sfm_pg_sfSetup.btn_submit);
+	};
+	this.addPercentField = function($fieldLabel){
+		if(_isVisible($sfm_pg_sfSetup.btn_customFieldNew)){
+			_click($sfm_pg_sfSetup.btn_customFieldNew);
+		}
+		else if(_isVisible($sfm_pg_sfSetup.btn_caseCustomFieldNew)){
+			_click($sfm_pg_sfSetup.btn_caseCustomFieldNew);
+		}
+		_click($sfm_pg_sfSetup.radio_percent);
+		_click($sfm_pg_sfSetup.btn_next);
+		_setValue($sfm_pg_sfSetup.txt_fieldLabel,$fieldLabel);
+		_click($sfm_pg_sfSetup.btn_next);
+		_click($sfm_pg_sfSetup.btn_next);
+		_click($sfm_pg_sfSetup.btn_submit);
+	};
+	this.addPhoneField = function($fieldLabel){
+		if(_isVisible($sfm_pg_sfSetup.btn_customFieldNew)){
+			_click($sfm_pg_sfSetup.btn_customFieldNew);
+		}
+		else if(_isVisible($sfm_pg_sfSetup.btn_caseCustomFieldNew)){
+			_click($sfm_pg_sfSetup.btn_caseCustomFieldNew);
+		}
+		_click($sfm_pg_sfSetup.radio_phone);
+		_click($sfm_pg_sfSetup.btn_next);
+		_setValue($sfm_pg_sfSetup.txt_fieldLabel,$fieldLabel);
+		_click($sfm_pg_sfSetup.btn_next);
+		_click($sfm_pg_sfSetup.btn_next);
+		_click($sfm_pg_sfSetup.btn_submit);
+	};
+	this.addTextAreaField = function($fieldLabel){
+		if(_isVisible($sfm_pg_sfSetup.btn_customFieldNew)){
+			_click($sfm_pg_sfSetup.btn_customFieldNew);
+		}
+		else if(_isVisible($sfm_pg_sfSetup.btn_caseCustomFieldNew)){
+			_click($sfm_pg_sfSetup.btn_caseCustomFieldNew);
+		}
+		_click($sfm_pg_sfSetup.radio_textArea);
+		_click($sfm_pg_sfSetup.btn_next);
+		_setValue($sfm_pg_sfSetup.txt_fieldLabel,$fieldLabel);
+		_click($sfm_pg_sfSetup.btn_next);
+		_click($sfm_pg_sfSetup.btn_next);
+		_click($sfm_pg_sfSetup.btn_submit);
+	};
+	this.addURLField = function($fieldLabel){
+		if(_isVisible($sfm_pg_sfSetup.btn_customFieldNew)){
+			_click($sfm_pg_sfSetup.btn_customFieldNew);
+		}
+		else if(_isVisible($sfm_pg_sfSetup.btn_caseCustomFieldNew)){
+			_click($sfm_pg_sfSetup.btn_caseCustomFieldNew);
+		}
+		_click($sfm_pg_sfSetup.radio_URL);
+		_click($sfm_pg_sfSetup.btn_next);
+		_setValue($sfm_pg_sfSetup.txt_fieldLabel,$fieldLabel);
+		_click($sfm_pg_sfSetup.btn_next);
+		_click($sfm_pg_sfSetup.btn_next);
+		_click($sfm_pg_sfSetup.btn_submit);
+	};
 	this.navigateToCustomize = function(){
 		_click($sfm_pg_sfSetup.link_salesForceSetup);
 		_setValue($sfm_pg_sfSetup.txt_quickFind,"object");
 		_click($sfm_pg_sfSetup.link_customize);
 		_click($sfm_pg_sfSetup.link_cases);
 		_click($sfm_pg_sfSetup.link_addCustomField);
+	};
+	this.createObject = function($label,$pluralLabel){
+		_setValue(_textbox("MasterLabel"),$label);
+		_setValue(_textbox("PluralLabel"),$pluralLabel);
+		_click(_submit("/Save/"));
 	};
 };
