@@ -1,3 +1,5 @@
+_writeFile("false", $appiumPath+$sahiIntermediatoryPath, true);
+
 var $global_preRequisite = _testcase("global_pre","Global Settings");
 $global_preRequisite.start();
 
@@ -62,4 +64,6 @@ $sfm_act_lightningConfig.addPermissionToCustomObject("Profiles", "Automation Ser
  //Added for Scenario 2--Create New Custom Search.
 $bo_act_navigation.navigateToSfmSearchDesigner();
 $sfm_act_search.newCustomSearch("AUTOMATION SEARCH",["Account","Work Order","Case"]);
+_writeFile("true", $appiumPath+$sahiIntermediatoryPath, true);
+
 $global_preRequisite.end();

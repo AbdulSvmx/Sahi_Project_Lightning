@@ -18,6 +18,8 @@ $bo_act_SFM.createstandaloneSFM($sfmName_1, $transactiontype, $targetObjectName)
 
 
 // Clone TDM016 with attachment enabled for FSA Automation
+_writeFile("false", $appiumPath+$sahiIntermediatoryPath, true);
+
 var $sfmToBeCloned = "Manage Work Order Lines - Usage";
 var $sfmName_2 = "EditWoAutoTimesstamp";
 var $sfmTemplateSaveAsName = "Pagelayout ManageWOUsageLines";
@@ -34,3 +36,4 @@ var $wizTitle = "AutoSanity";
 $bo_act_navigation.navigateToSfmWizard();
 $sfm_act_createCustomWizard.chooseObject($targetObjectName);
 $sfm_act_createCustomWizard.addManageWizSteps($wizTitle,"SFM", $sfmName_2);
+_writeFile("true", $appiumPath+$sahiIntermediatoryPath, true);
