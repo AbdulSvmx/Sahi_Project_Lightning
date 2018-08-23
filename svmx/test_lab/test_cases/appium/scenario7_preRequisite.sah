@@ -1,3 +1,5 @@
+	_writeFile("false", $appiumPath+$sahiIntermediatoryPath, true);
+
 var $scenario7_preRequisite = _testcase("scenario7_pre","Dynamic Response Checklist");
 $scenario7_preRequisite.start();
 _setSpeed($g_stepSpeed);
@@ -79,4 +81,6 @@ if(_getValue(_f("main").s_checkbox("Select All"))!=false){
 _click(_f("main").s_checkbox("/CheckBox/").leftOf(_f("main").s_label($sfmName),20));
 _setSelected(_f("main").s_combobox("/Combo/").rightOf(_f("main").s_label($sfmName),20),"Last Version");
 _click($bo_pg_formDesigner.btn_save_close);
+_writeFile("true", $appiumPath+$sahiIntermediatoryPath, true);
+
 $scenario7_preRequisite.end();

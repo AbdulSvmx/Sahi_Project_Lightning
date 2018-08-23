@@ -3,6 +3,8 @@
 /*
  * PRE Requisites to be run in the org before running other scripts - LIGHTNING CODE
  */
+_writeFile("false", $appiumPath+$sahiIntermediatoryPath, true);
+
 var $pre_requisite= _testcase("scenario4_pre","Creating Pre-Requisite Data in the Org");
 $pre_requisite.start();
 _setSpeed($g_stepSpeed);
@@ -33,3 +35,5 @@ var $IBnumber = $bo_act_common.generateRandomName("IBnum");
 var $IB_body = "{\"SVMXC__Company__c\": \""+$account_id+"\", \"Name\": \""+$IBname+"\", \"SVMXC__Serial_Lot_Number__c\": \""+$IBnumber+"\",\"SVMXC__Country__c\": \"India\", \"SVMXC__Site__c\": \""+$location_id+"\" }";
 
 var $IB_id = $bo_apicalls.createdata_fromAPI($IB_object,$IB_body, $access_value);
+_writeFile("true", $appiumPath+$sahiIntermediatoryPath, true);
+$pre_requisite.end();

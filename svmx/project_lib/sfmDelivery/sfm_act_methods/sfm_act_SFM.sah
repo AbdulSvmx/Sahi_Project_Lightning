@@ -334,7 +334,7 @@ var $sfm_act_SFM = new function sfm_act_SFM() {
 // Author: Janaki
 	
 
-this.verifyValuesInDelivery = function($textPicklistDateLabels,$textPicklistDateExpValues,$timeLabels,$timeExpValues,$textAreaLabels,$textAreaExpvalues,$checkBoxLabels,$checkBoxExpValues){
+this.verifyValuesInDelivery = function($textPicklistDateLabels,$textPicklistDateExpValues,$timeLabels,$timeExpValues,$textAreaLabels,$textAreaExpvalues,$checkBoxLabels,$checkBoxExpValues,$multiPickLabels,$multiPickValues){
 	
 	//Call individual functions to verify values of various data types
 	var $result = true; var $x;
@@ -356,6 +356,11 @@ this.verifyValuesInDelivery = function($textPicklistDateLabels,$textPicklistDate
 	}
 	if($checkBoxLabels.length > 0){
 		$x = this.verifyCheckBoxValues($checkBoxLabels,$checkBoxExpValues);
+		_log($x);
+		$result = Boolean($result && $x);
+	}
+	if($multiPickLabels.length > 0){
+		$x = this.verifyMultiPicklistValuesInDelivery($multiPickLabels, $multiPickValues)
 		_log($x);
 		$result = Boolean($result && $x);
 	}
@@ -445,6 +450,32 @@ return $result;
 			    _log("Checkbox values do not match");
 				return false;
 			}	
+	};
+	this.verifyMultiPicklistValuesInDelivery = function($multiPickLabels,$multiPickValues){
+		//This function verifies the given values in the multipicklists and returns
+		//true or false based on the results
+		var $i = 0; var $actualList = [];
+		var $x;
+		for($i=0;$i<$multiPickLabels.length;$i++){
+			if(_isVisible(_listItem("/"+$multiPickValues[$i]+"/",_near(_span($multiPickLabels[$i]))))){
+				$x = _getText(_listItem("/"+$multiPickValues[$i]+"/",_near(_span($multiPickLabels[$i]))));
+				$actualList.push($x);
+				_log("Expected Value for "+$multiPickLabels[$i]+": "+$multiPickLabels[$i]);
+				_log("Actual Value for "+$multiPickLabels[$i]+": "+$x);
+			}
+		}
+		_log($multiPickValues);
+		_log($actualList);
+		if(_areEqual($checkBoxExpValues,$actualList)){
+			_log("Multi Picklist values match");
+			return true;
+		}
+		else
+			{
+			    _log("Multi Picklist values do not match");
+				return false;
+			}	
+		
 	};
 	this.addUserLookupInScreenDesigner = function($fieldName,$containerName){
 		//This function adds a user lookup which needs special handling in the screen designer

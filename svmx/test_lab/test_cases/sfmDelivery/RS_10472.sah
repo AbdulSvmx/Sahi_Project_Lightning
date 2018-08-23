@@ -2,7 +2,11 @@ function onScriptEnd(){
  _selectDomain();
  _focusWindow();
  _takeScreenShot();
-  cleanUp();
+ var $a=_scriptStatus();
+ if($a=="FAILURE")
+ 	{
+	 	cleanUp();
+ 	}
 }
 function cleanUp(){
 	_log("Performing clean up");
@@ -12,10 +16,14 @@ function cleanUp(){
 	//Delete page layout
 	$sfm_act_lightningConfig.openExistingProcess($processName);
 	$sfm_act_lightningConfig.deletePageLayout($pageLayoutName);
+	_log("Page Layout "+ $pageLayoutName+ " Deleted");
 	//Delete mapping,expressions / QC as per text case requirement
-	$sfm_act_lightningConfig.deleteMappingFromProcess("Work Order", $mappingName)
+	$sfm_act_lightningConfig.deleteMappingFromProcess("Work Order", $mappingName);
+	_log("Mapping "+$mappingName+" deleted");
 	//delete process
 	$sfm_act_lightningConfig.deleteSfmProcess($processName);
+	_log("Process" +$processName+" deleted");
+	_log("Cleanup completed");
 }
 var $RS_10472 = _testcase("RS_10472","Verify Field Map for existing records - Header");
 $RS_10472.start();
@@ -136,7 +144,7 @@ var $timeValues = ["3:30 PM"];
 var $emailLabels = ["Group Email"];
 var $emailValues = ["groupemail@group.com"];
 _wait(2000);
-$sfm_act_lightningConfig.editWorkOrder($textLabels, $textValues, $pickListLabels, $pickListValues, $textAreaLabels, $textAreaValues, $checkBoxLabels, $checkBoxValues, $dateTimeLabels, $dateTimeDateValues, $timeValues,$emailLabels,$emailValues);
+$sfm_act_lightningConfig.editWorkOrder($textLabels, $textValues, $pickListLabels, $pickListValues, $textAreaLabels, $textAreaValues, $checkBoxLabels, $checkBoxValues, $dateTimeLabels, $dateTimeDateValues, $timeValues,$emailLabels,$emailValues,[],[]);
 
 //Launch the process in SFM Delivery
 $sfm_act_createCustomWizard.clickWizardlinks($processName);
@@ -153,7 +161,7 @@ $textValues = ["$6,600.000","4/21/2018","345.00","Bengaluru"];
 var $lookUpLabels = ["Account"];
 var $lookUpValues = ["HCSAccountForTesting"];
 //Verify all values in the newly created Work order
-var $res = $sfm_act_lightningConfig.verifyValues($textLabels, $textValues, $pickListLabels, $pickListValues, $textAreaLabels, $textAreaValues, $checkBoxLabels, $checkBoxValues, $dateTimeLabels, $dateTimeDateValues, $timeValues,$emailLabels,$emailValues,$lookUpLabels,$lookUpValues);
+var $res = $sfm_act_lightningConfig.verifyValues($textLabels, $textValues, $pickListLabels, $pickListValues, $textAreaLabels, $textAreaValues, $checkBoxLabels, $checkBoxValues, $dateTimeLabels, $dateTimeDateValues, $timeValues,$emailLabels,$emailValues,$lookUpLabels,$lookUpValues,[],[]);
 _assertTrue($res);
 if($res){
 	_log("PASS: Newly created follow up order has values as per mapping");
@@ -199,7 +207,7 @@ for($i=0;$i<$lookUpLabels.length;$i++){
 	$textPicklistDateExpValues.push($lookUpValues[$i]);
 }
 
-$verifyResult = $sfm_act_SFM.verifyValuesInDelivery($textPicklistDateLabels, $textPicklistDateExpValues, $dateTimeLabels, $timeValues,$textAreaLabels,$textAreaValues, $checkBoxLabels,checkBoxValues);
+$verifyResult = $sfm_act_SFM.verifyValuesInDelivery($textPicklistDateLabels, $textPicklistDateExpValues, $dateTimeLabels, $timeValues,$textAreaLabels,$textAreaValues, $checkBoxLabels,checkBoxValues,[],[]);
 _assertTrue($verifyResult);
 if($verifyResult){
 	_log("PASS:Follow up Work order values are verified in SFM Delivery");
@@ -223,4 +231,5 @@ else {
 	_log("FAIL: Newly created follow up order does not have values as per mapping");
 }
 $sfm_act_lightningConfig.logoutInLightning();
+cleanUp();
 $RS_10472.end();
