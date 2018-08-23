@@ -3,6 +3,7 @@
 /**
  * Scenario level Run pre-requisite After Running Scenario 8
  */
+	_writeFile("false", $appiumPath+$sahiIntermediatoryPath, true);
 
 var $pre_requisite_2= _testcase("scenario8_afterRun","Changing the Mobile Permissions and running this After Test-case");
 $pre_requisite_2.start();
@@ -12,6 +13,8 @@ $bo_act_login.login($g_url, $appiumAdminUn, $appiumAdminPwd);
 //Adding Work Order Back to the Download Criteria
 var $valuebefore = "All Records";
 $bo_act_SFMAppPermission.workOrderDownloadCriteriachanges($valuebefore);
-$pre_requisite_2.start();
+_writeFile("true", $appiumPath+$sahiIntermediatoryPath, true);
+
+$pre_requisite_2.end();
 
 
