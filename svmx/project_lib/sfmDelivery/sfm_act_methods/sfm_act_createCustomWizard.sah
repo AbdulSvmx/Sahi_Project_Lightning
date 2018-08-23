@@ -4,7 +4,12 @@ var $sfm_act_createCustomWizard = new function sfm_act_createCustomWizard() {
 		_wait(3000);
 		_selectDomain("/svmx/");
 		_setSelected($sfm_pg_wizards.selectObject,$object);
-		_click($sfm_pg_wizards.btn_customNew);
+		if(_isVisible($sfm_pg_wizards.btn_customNew)){
+			_click($sfm_pg_wizards.btn_customNew);
+		}
+		else{
+			_click(_submit("New",_near(_heading2("SFM Wizard"))));
+		}
 		_selectDomain();
 	};
 	

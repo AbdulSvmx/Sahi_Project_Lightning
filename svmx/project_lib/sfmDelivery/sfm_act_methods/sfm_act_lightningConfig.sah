@@ -172,4 +172,12 @@ this.openExtEditForLatestItem = function(){
 	_click(_span("Edit"));
 	
 };
+this.navigateToCreateCustomObject = function(){
+	//Added by Harish CS
+	_click(_div("Setup"));
+	_click(_span("Setup[1]"));
+	_selectWindow("Home | Salesforce");
+	_click(_link("Create"));
+	_click(_span("Custom Object"));
+}
 };
