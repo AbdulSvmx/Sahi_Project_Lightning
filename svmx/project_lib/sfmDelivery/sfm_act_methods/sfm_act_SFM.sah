@@ -20,16 +20,16 @@ var $sfm_act_SFM = new function sfm_act_SFM() {
 		_setValue($bo_pg_sfmTransactionAndDesigner.txt_name, "");
 		_setValue($bo_pg_sfmTransactionAndDesigner.txt_name, $sfmName);
 		_click($bo_pg_sfmTransactionAndDesigner.btn_screenDesigner);
-		_wait(15000);
+		_wait(5000);
 		_setSelected($bo_pg_sfmTransactionAndDesigner.sel_sfmTemplate,
 				$sfmTemplate);
 		_setValue($bo_pg_sfmTransactionAndDesigner.txt_sfmSavePageLayoutAs,
 				$sfmTemplateSaveAsName);
 		_setValue($bo_pg_sfmTransactionAndDesigner.txt_sfmSavePageLayoutAsId,
 				$sfmTemplateSaveAsName);
-		_wait(10000);
-		_click($bo_pg_sfmTransactionAndDesigner.btn_quickSave1);
-		_wait(3000);
+		_wait(5000);
+		//_click($bo_pg_sfmTransactionAndDesigner.btn_quickSave1);
+		//_wait(3000);
 		$sfm_act_SFM.addFieldToScreen($fieldName, $containerName);
 	};
 	
@@ -144,7 +144,14 @@ var $sfm_act_SFM = new function sfm_act_SFM() {
 		_wait(3000, _isVisible(_f("main").label("Page saved")));		
 	};
 	
-	//Fill text values in SFM Lightning Delivery screen
+	this.setFormFill = function($fieldName,$objMapping){
+		_click(_f("main").s_textinput("txtIp").inside(_f("main").fieldrenderer($fieldName)));
+		_setSelected(_f("main").s_combobox("/ComboBox/").rightOf(_f("main").uiftetextfield("Object Mapping")),$objMapping);
+		_click(_f("main").s_button("Save[3]"));
+		_wait(3000, _isVisible(_f("main").label("Page saved")));
+	};
+	
+	//Fill_setSelected(_f("main").s_combobox("ComboBox24974"), "SVMXSTD: Case To Work Order"); text values in SFM Lightning Delivery screen
 	this.fillHeaderTextValues = function($labelsArray,$valuesArray) {
 		var $i = 0;
 		for($i=0;$i<$labelsArray.length;$i++){
@@ -163,6 +170,21 @@ var $sfm_act_SFM = new function sfm_act_SFM() {
 			_click(_div("/trigger-picker/",_near(_span($labelsArray[$i]))));
 			_click(_listItem($valuesArray[$i]));
 		}	
+	};
+	
+	//Select checkboxes for header. Author : Janaki
+	//Note: Checkbox values should be true or false
+	this.selectHeaderCheckBox = function($checkBoxLabels,$checkBoxValues){
+		var $i = 0;
+		for($i = 0;$i<$checkBoxLabels.length;$i++){
+			if($checkBoxValues[$i] === "true"){
+				_check(_checkbox(0,_near(_label($checkBoxLabels[$i]))));
+			
+			}
+			else if($checkBoxValues[$i] === "false"){
+				_uncheck(_checkbox(0,_near(_label($checkBoxLabels[$i]))));
+			}
+		}		
 	};
 	
 	//Fill text values in Extended Edit window for given text fields (Child Line Item) Author: Janaki
@@ -407,7 +429,7 @@ return $result;
 		var $i = 0; var $actualList = [];
 		var $x;
 		for($i=0;$i<$checkBoxLabels.length;$i++){
-			$x = _condition(_checkbox(0,_near(_label("Is Billable"))).checked );
+			$x = _condition(_checkbox(0,_near(_label($checkBoxLabels[$i]))).checked );
 			$actualList.push($x);
 			_log("Expected Value for "+$checkBoxLabels[$i]+": "+$checkBoxExpValues[$i]);
 	 		_log("Actual Value for "+$checkBoxLabels[$i]+": "+$actualList[$i]);

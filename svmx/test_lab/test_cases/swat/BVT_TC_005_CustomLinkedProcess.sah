@@ -14,9 +14,9 @@ $rs_7011.start();
 
 
 		$woName="";
-		var $url="https://test.salesforce.com";
-		var $sfmUsn="shashikala.svmx@ge.com";
-		var $sfmPwd="maxpl0re";
+//		var $url="https://test.salesforce.com";
+//		var $sfmUsn_swat="shashikala.svmx@ge.com";
+//		var $sfmPwd_swat="maxpl0re";
 
 		//Variables Declarations
 		$LinkedprocessName = "Manage Work Details for Products Serviced";
@@ -30,7 +30,7 @@ $rs_7011.start();
 		
 		
 		// Creation of Linked SFM Process
-		$bo_act_login.login($url,$sfmUsn,$sfmPwd);
+		$bo_act_login.login($url,$swatUsn,$swatPwd);
 		
 		$bo_act_navigation.navigateToSfmTransactionDesigner();
 		_wait(20000,_isVisible($bo_pg_sfmTransactionAndDesigner.lbl_ServiceFlowManager));

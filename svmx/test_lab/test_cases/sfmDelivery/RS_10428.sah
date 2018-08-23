@@ -1,7 +1,7 @@
 //Mamata
 
-var $rs_7079 = _testcase("RS_7079","");
-$rs_7079.start();
+var $rs_10428 = _testcase("RS_10428","");
+$rs_10428.start();
 
 
 var $questionTextArray = ["Choose the condition of the product","When was the product serviced last?","Please enter approx Date Time when issue occured"];
@@ -29,4 +29,4 @@ $sfm_act_checklistQuestionLibrary.verifyQuestionExists($questionTextArray[2]);
  
 //Delete the created questions
 $sfm_act_checklistQuestionLibrary.deleteQuestions($questionTextArray);
-$rs_7079.end();
+$rs_10428.end();

@@ -1,49 +1,155 @@
 //Author: Safi Ahmed
-
 var $rs_7015 = _testcase("RS_7015","Verify current record literals in lookup");
 $rs_7015.start();
-$sfmName = $bo_act_common.generateRandomName("RS7015_");
-$value = $bo_act_common.generateRandomName("Text_");
-$sfmPgLayoutName =	$bo_act_common.generateRandomName("SFM_Auto_Page");
-$processName = "Manage Work Order Lines - Usage";
-$lookUpName = $bo_act_common.generateRandomName("Case_lkp_");
-$wizTitle = $bo_act_common.generateRandomName("SFM Wiz");
-$bo_act_login.login($g_url,$sfmUsn,$sfmPwd);
-$bo_act_navigation.navigateToSfmTransactionDesigner();
-$sfm_act_Transactions.clonedsfm7015($processName,$sfmName,$sfmPgLayoutName);
-$bo_act_navigation.navigateToSfmWizard();
-$sfm_act_createCustomWizard.chooseObject("Work Order");
-$sfm_act_createCustomWizard.addManageWizSteps($wizTitle, "SFM", $sfmName);
-$caseNo = $sfm_act_createCustomWizard.createCasewithFieldValues($value);
-$sfm_act_createCustomWizard.createWOwithFieldValues($value);
-$sfm_act_createCustomWizard.clickWizardBtn($sfmName);
-//$sfm_act_createCustomWizard.verify7015();
 
-// Test Case Verification 
-var $count=0;
-_selectDomain();
-_click(_span("/lookup_icon/",_rightOf(_label("Case:"))));
-_wait(3000);
-_setStrictVisibilityCheck(true);
-_click(_span("/search-icon/"));
-_wait(3000);
-var $divs= _collect("_cell","/.*/",_under(_div("Case Number")))
-	//_alert( $divs.length);
-for($i=0;$i<$divs.length;$i++){
-	if(_getText($divs[$i])!=$caseNo)
-	{
-		$count++;
-	}
+	//login to App
+	$bo_act_login.login($g_url,$sfmUsn,$sfmPwd);
+/*	$bo_act_navigation.navigateToSfmTransactionDesigner();
 	
-}
-	if($count==0){
-			_log("TestResult:: Pass");
+	//clone standard SFM
+	var $sfmNameToBeCloned="Manage Work Order Line - Usage";
+	var $sfmName=$bo_act_common.generateRandomName("rs_7015_");
+	var $sfmTemplateSaveAsName=$bo_act_common.generateRandomName("SFM_Page_");
+	var $sfmTemplate="SVMXSTD: Manage WO Usage Lines";
+	var $fieldName=["Problem Description","Priority","Preferred Start Time","Invoice Number","Case"];
+	var $containerName=["Work Order","Work Order","Work Order","Work Order","Work Order"];
+	$sfm_act_SFM.cloneTDM016($sfmNameToBeCloned, $sfmName, false, $sfmTemplateSaveAsName, $sfmTemplate, $fieldName, $containerName);
+	
+	
+	
+	$object="Case";
+	var $lookupTempName="SVMXSTD: Case Lookup";
+	var $fieldCombo=["Subject","Priority","Actual Initial Response","Case Number"];
+	var $conditionsCombo=["Equals","Equals","Equals","Equals"];
+	var $operandTypeCombo=["Value","Value","Value","Value"];
+	var $operandValue=["SVMX.CURRENTRECORD.SVMXC__Problem_Description__c","SVMX.CURRENTRECORD.SVMXC__Priority__c","SVMX.CURRENTRECORD.SVMXC__Preferred_Start_Time__c","SVMX.CURRENTRECORD.SVMXC__Invoice_Number__c"];
+	var $lookupAdvExpr="1 AND 2 AND (3 OR 4)";
+	var $lookUpName=$bo_act_common.generateRandomName("rs_7015_lookup_");
+	
+	this.createLookUp=function($object,$lookupTempName,$fieldCombo,$conditionsCombo,$operandTypeCombo,$operandValue,$lookupAdvExpr,$lookUpName){
+		_setStrictVisibilityCheck(true);
+		_click(_f("main").s_textinput("txtIp").near(_f("main").uiftetextfield($object)));
+		_wait(5000,_isVisible(_f("main").s_label("Properties for Field: "+$object)));
+		_click($sfm_pg_screenDesigner.btn_ConfLookup);
+		_wait(10000,_isVisible($sfm_pg_screenDesigner.txt_lookupName));
+		_setSelected($sfm_pg_screenDesigner.sel_LkupTemplate,$lookupTempName);
+
+		var $fieldLabel;
+		for(var $i=0; $i<$fieldCombo.length; $i++){
+			_click($sfm_pg_screenDesigner.btn_lookupNewRow);
+			_wait(5000);
+			var $temp=$i;
+			var $label=$temp+1;
+			$fieldLabel=_f("main").s_label($label.toString()).near($sfm_pg_screenDesigner.lbl_lookupFilterLabel);
+			_setSelected(_f("main").s_combobox("fieldCombo").near($fieldLabel),$fieldCombo[$i]);
+			_setSelected(_f("main").s_dropdownlist("conditionsCombo").near($fieldLabel),$conditionsCombo[$i]);
+			_setSelected(_f("main").s_dropdownlist("operandTypeCombo").near($fieldLabel),$operandTypeCombo[$i]);
+			_setValue(_f("main").s_textinput("operandValue").near($fieldLabel),$operandValue[$i]);
 		}
-		else
+		_setValue($sfm_pg_screenDesigner.txt_lookupAdvExpr,$lookupAdvExpr);
+		_click($sfm_pg_screenDesigner.chk_lookupDefault);
+		_setValue($sfm_pg_screenDesigner.txt_lookupName, $lookUpName);
+		_setValue($sfm_pg_screenDesigner.txt_lookupId, $lookUpName);
+		_click($sfm_pg_screenDesigner.btn_lookupSaveAs);
+		_wait(6000,_isVisible($sfm_pg_screenDesigner.lbl_lookupSaveConfirmMsg));
+		_click($sfm_pg_screenDesigner.btn_Select);
+		_wait(6000);
+		_setStrictVisibilityCheck(false);
+	};
+	
+	_click($bo_pg_sfmTransactionAndDesigner.btn_pageLayoutSave);
+	_wait(5000,_isVisible($bo_pg_sfmTransactionAndDesigner.btn_sfmpageSaveConfirmMsg));
+	_click($bo_pg_sfmTransactionAndDesigner.btn_saveAndclose);
+*/	
+	//variables for rest call
+	$orgInstance = "cs19";
+	$objName= "Case";
+	$obJson = "{\"Subject\":\"Problem Description\",\"Priority\":\"High\",\"SVMXC__Actual_Initial_Response__c\":\"2018-08-22\"}";
+	$columnName = "CaseNumber";
+	$filter="id";
+	//create a case
+	$filterValue=$sfm_act_restApiMethods.postRestApi($objName,$obJson,"POST");
+	//get the caseNumber
+	$caseNumber =$sfm_act_restApiMethods.getRestApi("GET", $objName, $columnName, $filter, $filterValue);
+	_log("Case number: "+$caseNumber);
+	//variables for rest call
+	$objName= "SVMXC__Service_Order__c";
+	
+
+	$obJson = "{\"SVMXC__Problem_Description__c\":\"Problem Description\",\"SVMXC__Priority__c\":\"High\",\"SVMXC__Preferred_Start_Time__c\":\"2018-08-22\",\"SVMXC__Invoice_Number__c\":\""+$caseNumber+"\"}";
+	_log("Work Order json: "+$obJson);
+	$columnName = "Name";
+	$filter="id";
+	//create a case
+	$filterValue=$sfm_act_restApiMethods.postRestApi($objName,$obJson,"POST");
+	//get the caseNumber
+	$WONumber =$sfm_act_restApiMethods.getRestApi($sfmUsn, $sfmPwd, $sfmClientId, $sfmConsumerSecret, $orgInstance, "GET", $objName, $columnName, $filter, $filterValue);
+	_log("WO number: "+$WONumber);
+	
+
+/*	
+
+	
+		
+	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+////////////////////////////////////////
+		$sfmName = $bo_act_common.generateRandomName("RS7015_");
+		$value = $bo_act_common.generateRandomName("Text_");
+		$sfmPgLayoutName =	$bo_act_common.generateRandomName("SFM_Auto_Page");
+		$processName = "Manage Work Order Lines - Usage";
+		$lookUpName = $bo_act_common.generateRandomName("Case_lkp_");
+		$wizTitle = $bo_act_common.generateRandomName("SFM Wiz");
+		$bo_act_login.login($g_url,$sfmUsn,$sfmPwd);
+		$bo_act_navigation.navigateToSfmTransactionDesigner();
+		$sfm_act_Transactions.clonedsfm7015($processName,$sfmName,$sfmPgLayoutName);
+		$bo_act_navigation.navigateToSfmWizard();
+		$sfm_act_createCustomWizard.chooseObject("Work Order");
+		$sfm_act_createCustomWizard.addManageWizSteps($wizTitle, "SFM", $sfmName);
+		$caseNo = $sfm_act_createCustomWizard.createCasewithFieldValues($value);
+		$sfm_act_createCustomWizard.createWOwithFieldValues($value);
+		$sfm_act_createCustomWizard.clickWizardBtn($sfmName);
+		//$sfm_act_createCustomWizard.verify7015();
+		
+		// Test Case Verification 
+		var $count=0;
+		_selectDomain();
+		_click(_span("/lookup_icon/",_rightOf(_label("Case:"))));
+		_wait(3000);
+		_setStrictVisibilityCheck(true);
+		_click(_span("/search-icon/"));
+		_wait(3000);
+*/
+	//var $divs= _collect("_cell","/.*/",_under(_div("Case Number")))
+/*		for($i=0;$i<$divs.length;$i++){
+			if(_getText($divs[$i])!=$caseNo)
 			{
-			_log("TestResult:: Fail");
+				$count++;
+			}
+			
 		}
-	
-
-
+			if($count==0){
+					_log("TestResult:: Pass");
+				}
+				else
+					{
+					_log("TestResult:: Fail");
+				}
+			
+		
+*/
 $rs_7015.end();

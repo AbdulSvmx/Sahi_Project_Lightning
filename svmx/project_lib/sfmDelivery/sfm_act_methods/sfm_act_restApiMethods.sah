@@ -1,0 +1,103 @@
+var $sfm_act_restApiMethods= new function sfm_act_restApiMethods() {
+	
+	/**
+	 * This method generated the access token required for restApi calls
+	 * $username org username
+	 * $password org password
+	 * $clientId org clientid generated when remoteaccess is created
+	 * $consumerSecret generated when remoteaccess is created
+	 * $orgInstance like cs19 or cs21
+	 */
+
+ this.getAccessToken = function(){
+ 
+	 //Authorization endpoint
+	 var $authEndPoint = "https://test.salesforce.com/services/oauth2/token"; //THIS IS THE REST API CALL TO GET THE ACCESS TOKEN
+	 var $responseType = "token";
+	 //This is the callback URL from the connected app
+	 var $redirectURI = "https://"+$sfmOrgInstance+".lightning.force.com"; // STANDARD REDIRECT URL
+	 //Construct the URL with the required parameters
+	 var $requestURL = ""+$authEndPoint+"?grant_type=password&client_id="+$sfmClientId+"&client_secret="+$sfmConsumerSecret+"&username="+$sfmUsn+"&password="+$sfmPwd+"&response_type="+$responseType+"&redirect_uri="+$redirectURI+"";
+	// _log($requestURL);
+	//MAKING THE POST REQUEST TO GET THE ACCESS TOKEN
+	$request = new RESTRequest();
+	$request.setURL($requestURL);
+	$response = $request.submit("post");
+	 
+	var $completeAuthCode = JSON.parse( $response.getBodyAsString()); //returns the content of the body using UTF-8 encoding	
+	//_log($completeAuthCode);
+	var $authCode = $completeAuthCode['access_token'];
+	_log("Authcode= "+$authCode);
+	return($authCode);
+ };
+ 
+	/**
+	 * This method creates/deletes the record on an object with given fields using restApi calls
+	 * $username org username
+	 * $password org password
+	 * $clientId org clientid generated when remoteaccess is created
+	 * $consumerSecret generated when remoteaccess is created
+	 * $orgInstance like cs19 or cs21
+	 * $objName object on which operation is performed
+	 * $obJson object's fields in json format
+	 * $reqType POST or DELETE 
+	 */
+ 
+ this.postRestApi = function($objName,$obJson, $reqType){
+	 $AuthCode = this.getAccessToken();
+     // Sample Delete operation for the REST API
+     $request_post = new RESTRequest();   
+     $request_post.setURL("https://"+$sfmOrgInstance+".salesforce.com/services/data/v42.0/sobjects/"+$objName+"/");
+     $request_post.setCredentials($sfmUsn, $sfmPwd);
+     $request_post.setHeader("Content-Type", "application/json");
+     $request_post.setHeader("Authorization", "OAuth "+$AuthCode);
+     $request_post.setBody($obJson);
+     
+    
+     $response_post = $request_post.submit($reqType);
+     $respObj= JSON.parse($response_post.getBodyAsString());
+     //_log($respObj);
+     $objCreated = $respObj['id'];
+     _log("Created record id = "+$objCreated);
+     return($objCreated);
+ } ;
+ 
+ 
+	/**
+	 * This method fetches the record of an object using restApi calls
+	 * $username org username
+	 * $password org password
+	 * $clientId org clientid generated when remoteaccess is created
+	 * $consumerSecret generated when remoteaccess is created
+	 * $orgInstance like cs19 or cs21
+	 * $objName object on which operation is performed
+	 * $obJson object's fields in json format
+	 * $reqType GET
+	 * $columnName column need to be fetched
+	 * $filter filter column
+	 * $filterValue filter value
+	 */
+this.getRestApi = function($reqType,$objName,$columnName,$filter, $filterValue){
+	 $AuthCode = this.getAccessToken();
+	     
+	    var $query = "Select+"+$columnName+"+from+"+$objName+"+where+"+$filter+"=+'"+$filterValue+"'";
+	          
+	    $request = new RESTRequest(); 
+	    $request.setURL("https://"+$sfmOrgInstance+".salesforce.com/services/data/v20.0/query/?q="+$query+""); // Sample to pass the values
+	    $request.setCredentials($sfmUsn, $sfmPwd);
+	    $request.setHeader("Authorization", "OAuth "+$AuthCode);
+	    //$request1.setHeader("Content-Type", "application/json");
+	    $response = $request.submit($reqType);
+	 
+	var $getData = $response.getBodyAsString(); //returns the content of the body using UTF-8 encoding
+	//var $AuthCode_data2 = $response1.getBodyAsString("ISO-8859-1");
+	var $json_value = JSON.parse($getData);
+	//_log($json_value);
+	var $objId = $json_value['records'];
+	 
+	var $strRecord = JSON.stringify($objId);
+	        var $idValue = $strRecord.replace(/\[|\]/g,"").substring($strRecord.lastIndexOf(":\"")+1,$strRecord.lastIndexOf("\"")-1);
+	        _log("Id = "+$idValue);  // The ID value is extracted.
+	        return($idValue);
+};
+};

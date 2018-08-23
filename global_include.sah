@@ -1,5 +1,5 @@
 _call(top.location.reload(true));
-_setXHRReadyStatesToWaitFor("3");
+_setXHRReadyStatesToWaitFor("2,3");
 _windowAction("resize", 1920, 1080);
 var $g_stepSpeed = 300;
 _setSpeed($g_stepSpeed);
@@ -68,6 +68,7 @@ var $sfmPwd = "Maxplore4";
  var $wizardType = ["None","SFM","Inventory","Others","Output Document"];
  var $sfmClientId ="YjkyMzJmNDUzMGNmOTYzODVlNDQ0ZjE2OTUxOTU1NDI5MGViN2I3NWU3YTFjNmY300D290000000WVC";
  var $sfmConsumerSecret = "5287076090725084260";
+ var $sfmOrgInstance = "cs19";
 
 // DC Global Variables
 var $dc_org = $orgtype;

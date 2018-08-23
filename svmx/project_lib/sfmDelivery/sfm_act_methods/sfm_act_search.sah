@@ -107,7 +107,10 @@ var $sfm_act_search = new function sfm_search() {
 	this.newCustomSearch = function($searchName,$searchObjects){
 		var $searchID = $searchName.toLowerCase();
 		_log($searchName);
-		if(_isVisible(_span($searchName))){
+		var $flag=false;
+		_set($flag,_isVisible(_span($searchName)));
+		_log($flag);
+		if($flag){
 			_log("Automation Search Already Added");
 		}else{
 			_click($sfm_pg_search.btn_customNew);

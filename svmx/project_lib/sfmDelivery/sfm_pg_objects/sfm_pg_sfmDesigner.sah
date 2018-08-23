@@ -29,15 +29,36 @@ var $sfm_pg_sfmDesigner = new function sfm_pg_sfmDesigner() {
 	this.msg_WDCreateConfirm=_span("Work Detail was created.");
 	this.link_editWD=_link("Edit",_in(_list("scrollable")));
 
-	this.newWDWindow=_parentNode(_heading2("/New Work Detail:/"),"DIV",2);
-	this.lbl_WDPart=_span("Part",_in(this.newWDWindow));
+	//this.newWDWindow=_parentNode(_heading2("/New Work Detail:/"),"DIV",2);
+	this.newWDWindow=_parentNode(_heading2("/Work Detail:/"),"DIV",2);
+	this.lbl_WDPart=_span("Part",_in(_div("/modal-body/")));
 	this.txt_WDpart=_textbox(0,_near(this.lbl_WDPart));
 	this.btn_WDNewProduct=_span("/New Product/",_near(this.lbl_WDPart));
+	this.link_activityType=_link(0,_near(_span("Activity Type",_in(_div("/modal-body/")))));
+	this.txt_requestedCity=_textbox(0,_near(_span("Requested City",_in(_div("/modal-body/")))));
+	this.txt_billableQty=_textbox(0,_near(_span("Billable Qty",_in(_div("/modal-body/")))));
+	
+	this.lbl_WDIB=_span("IB Serial Number",_in(_div("/modal-body/")));
+	this.txt_IBserialNo=_textbox(0,_near(this.lbl_WDIB));
+	this.btn_WDNewIB=_span("/New Installed Product/",_near(this.lbl_WDIB));
+	
+	this.newIBWindow=_parentNode(_heading2("New Installed Product"),"DIV",2);
+	this.lbl_Product=_span("Product",_in(this.newIBWindow));
+	this.txt_Product=_textbox(0,_near(this.lbl_Product));
+	this.btn_IBsave=_button("Save",_in(this.newIBWindow));
+	this.txt_SrSlotNo=_textbox(0,_near(_span("Serial/Lot Number",_in(this.newIBWindow))));
+	this.txt_Account=_textbox(0,_near(_span("Account",_in(this.newIBWindow))));
+	this.txt_IBID=_textbox(0,_near(_span("Installed Product ID",_in(this.newIBWindow))));
+	this.link_IBStatus=_link(0,_near(_span("Status",_in(this.newIBWindow))));
+	
+	
 	
 	this.WDnewPartWindow=_parentNode(_heading2("New Product"),"DIV",2);
 	this.lbl_WDProductName=_span("Product Name",_in(this.WDnewPartWindow));
 	this.txt_newProductName=_textbox("Product Name*", _near(this.lbl_WDProductName));
 	this.btn_WDProductSave=_button("Save",_in(this.WDnewPartWindow));
+	
+	
 	
 	
 	
@@ -99,6 +120,8 @@ var $sfm_pg_sfmDesigner = new function sfm_pg_sfmDesigner() {
 	this.txt_component = _textbox(0,_near(_span("Component"))); // added for lightning
 	this.txt_city = _textbox("City",_near(_span("City")));
 	this.txt_acutalIntialResponse = _textbox(0,_near(_span("Actual Initial Response"))) ;
+	this.txt_priority = _textbox("/sfm-picklist/",_near(_div("Priority")));
+	this.txt_zip = _textbox("Zip");
 	
 	
 };
