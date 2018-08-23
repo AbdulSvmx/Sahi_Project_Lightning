@@ -1,5 +1,5 @@
 var $rs_6958 = _testcase("RS-6958","Verify form fill functionality in child lines and in extended edit");
-$rs_6958.start();
+$rs_6958.start();/*
 
 var $mappingName = $bo_act_common.generateRandomName("Mapping");
 var $processToBeCloned = "Manage Work Order Lines - Usage";
@@ -46,7 +46,7 @@ if($workDes==$productDesc && $billableprice==$productCost[0])
 else{
 _log("Failed");
 }
-
+*/
 
 
 var $sfmNameToBeCloned = "Manage Work Order Lines - Usage";
@@ -54,8 +54,10 @@ var $sfmName = $bo_act_common.generateRandomName("RS_6958_");
 var $isCustom = false;
 var $sfmTemplate = "SVMXSTD: Manage WO Usage Lines";
 var $sfmTemplateSaveAsName = $sfmName;
-var $containerName = ["Parts","Parts","Parts"];
-var $fieldName = ["Case","Priority","Problem Description"];
+var $containerName = ["Parts","Parts","Parts",
+                      "Labor","Labor"];
+var $fieldName = ["Date Received","Case","End Date and Time",
+                  "Date Received","Case"];
 var $objMapping = "PartsToWorkDetail";
 var $wizardObject ="Work Order";
 
@@ -65,16 +67,34 @@ _setSpeed($g_stepSpeed);
 $bo_act_login.login($g_url, $sfmUsn, $sfmPwd);
 $sfm_act_lightningConfig.switchToLightning(); 
 
-//clone tmd016
+//Create mapping from Case to Work detail
+
+$sourceObj= "Case";
+$targetObj = "Work Detail";
+$mappingField = ["Work Description", "Date Received","End Date and Time"];
+$mappingValue = ["Billing Type","Actual Initial Response","Actual Initial Response"];
+//$sfm_act_sfmMapping.createMappingFromMapping($sourceObj, $targetObj,$sfmName, $mappingField, $mappingValue);
+
+
+//clone tmd016 and set form fill for case in child line
 $sfm_act_SFM.cloneTDM016($sfmNameToBeCloned,$sfmName,$isCustom, $sfmTemplateSaveAsName, $sfmTemplate, $fieldName, $containerName);
-$sfm_act_SFM.setFormFill($fieldName[0], $objMapping);
+$sfm_act_SFM.partsNotMandatory();
+$sfm_act_SFM.setFormFill($fieldName[1], "RS_6958_2382018132833","Parts");
+$sfm_act_SFM.setFormFill($fieldName[1], "RS_6958_2382018132833","Labor");
 _click($sfm_pg_sfmDesigner.btn_quickSaveSFM);
 _click($sfm_pg_sfmDesigner.btn_saveSFM); 
 
-$bo_act_navigation.navigateToSvmxSetup();
-_click($bo_pg_servicemaxSetup.btn_serviceFlowManager);
-_click($bo_pg_servicemaxSetup.btn_sfmMappings);
+//add the process to wizard
+$sfm_act_wizards.addToWizard($wizardObject, $wizardName[0], $wizardType[1], $sfmName);  
+_wait(3000); 
 
+//Create WO through UI for the validatiion
+_selectDomain();
+$sfm_act_createCustomWizard.createWowithoutvalues();
+
+_click(_span($sfmName));
+_selectDomain($domainName);
+_wait(8000,_div($sfmName));
 
 
 

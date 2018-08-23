@@ -38,12 +38,24 @@ var $sfm_pg_sfmMapping = new function sfm_pg_sfmMapping() {
 
 	
 	//page objects for Configure SFM Mappings page in SFM Mapping under SFM in SVMX Setup 
+	this.label_configureSFMMapping = _f("SFMExpressionBuilderSWF").s_label("Configure SFM Mapping");
 	this.txt_sourceObject_SFMMapping = _f("SFMExpressionBuilderSWF").s_combobox("sourceCombo");
 	this.txt_targetObject_SFMMapping = _f("SFMExpressionBuilderSWF").s_combobox("targetCombo");
 	this.btn_new_SFMMapping = _f("SFMExpressionBuilderSWF").s_button("New").inside(_f("SFMExpressionBuilderSWF").s_navigatorcontent("/Map For/"));
-	//this.btn_fieldMappingNew_SFMMapping  = _f("SFMExpressionBuilderSWF").s_button("/New/").inside(_f("SFMExpressionBuilderSWF").s_navigatorcontent("Field Map For Existing Records"));
-	this.tab_fieldMappingforExisting_SFMMapping = _f("SFMExpressionBuilderSWF").tab("Field Map For Existing Records");
-	this.tab_valueMappingForNew_SFMMapping = _f("SFMExpressionBuilderSWF").tab("Value Map For New Records");
+	this.tab_fieldMapForExisting_SFMMapping = _f("SFMExpressionBuilderSWF").tab("Field Map For Existing Records");
+	this.tab_valueMapForNew_SFMMapping = _f("SFMExpressionBuilderSWF").tab("Value Map For New Records");
 	this.btn_useExistingMap_SFMMapping = _f("SFMExpressionBuilderSWF").s_combobox("searchCombo").inside(_f("SFMExpressionBuilderSWF").s_navigatorcontent("/Map For/"));
-	this.saveMapping_SFMMapping ;
-	};
+	this.txt_mappingName_SFMMapping = _f("SFMExpressionBuilderSWF").s_textinput("Save this map as").inside(_f("SFMExpressionBuilderSWF").s_navigatorcontent("/Map For/")) ;
+	this.txt_mappingId_SFMMapping = _f("SFMExpressionBuilderSWF").s_textinput("Input ID Here").inside(_f("SFMExpressionBuilderSWF").s_navigatorcontent("/Map For/")) ;
+	this.btn_saveMapping_SFMMapping = _f("SFMExpressionBuilderSWF").s_button("Save").inside(_f("SFMExpressionBuilderSWF").s_navigatorcontent("/Map For/"));
+	this.btn_saveAsMapping_SFMMapping = _f("SFMExpressionBuilderSWF").s_button("Save As").inside(_f("SFMExpressionBuilderSWF").s_navigatorcontent("/Map For/"));
+	this.btn_resetMapping_SFMMapping = _f("SFMExpressionBuilderSWF").s_button("Reset").inside(_f("SFMExpressionBuilderSWF").s_navigatorcontent("/Map For/"));
+	this.btn_deleteMapping_SFMMapping = _f("SFMExpressionBuilderSWF").s_button("Delete").inside(_f("SFMExpressionBuilderSWF").s_navigatorcontent("/Map For/"));
+    this.label_mapSaved_SFMMapping = _f("SFMExpressionBuilderSWF").uiftetextfield("Map saved");
+    this.btn_showAllFields_SFMMapping =_f("SFMExpressionBuilderSWF").s_togglebutton("Show All Fields") ;
+    this.btn_showMappedFields_SFMMapping = _f("SFMExpressionBuilderSWF").s_togglebutton("Show Mapped Fields");
+    this.label_mapDeleted_SFMMapping = _f("SFMExpressionBuilderSWF").uiftetextfield("Map deleted");
+    this.txt_deletePopup_SFMMapping = _f("SFMExpressionBuilderSWF").uiftetextfield("This action cannot be reversed. Are you sure you want to delete this map?");
+    this.btn_deleteYes_SFMMapping = _f("SFMExpressionBuilderSWF").button("Yes");
+    this.btn_deleteNo_SFMMapping = _f("SFMExpressionBuilderSWF").button("No");
+};
