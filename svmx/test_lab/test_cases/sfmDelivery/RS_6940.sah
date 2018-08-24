@@ -1,5 +1,24 @@
 var $rs_6940 = _testcase("RS_6940","Verify Lookup auto resolve with override context in Child line");
 $rs_6940.start();
+//rs_7015_2382018153159
+//rs_7015_2382018134418
+		// Login to App
+		$bo_act_login.login($g_url,$sfmUsn,$sfmPwd);
+
+		//clone standard SFM
+		var $sfmNameToBeCloned="Manage Work Order Lines - Usage";
+		var $sfmName=$bo_act_common.generateRandomName("rs_6940_");
+		var $sfmTemplateSaveAsName=$bo_act_common.generateRandomName("SFM_Page_");
+		var $sfmTemplate="SVMXSTD: Manage WO Usage Lines";
+		var $fieldName=["Account","AutoContact"];
+		var $containerName=["Parts","Parts"];
+		$sfm_act_SFM.cloneTDM016($sfmNameToBeCloned, $sfmName, false, $sfmTemplateSaveAsName, $sfmTemplate, $fieldName, $containerName);
+		
+		
+
+
+
+
 $wizTitle = $bo_act_common.generateRandomName("SFM Wiz");
 $sfmName = $bo_act_common.generateRandomName("SFM_Auto_");
 //$sfmName = "SFM_Auto_13122017133636";
