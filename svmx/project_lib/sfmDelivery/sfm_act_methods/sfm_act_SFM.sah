@@ -143,7 +143,11 @@ var $sfm_act_SFM = new function sfm_act_SFM() {
 		_click(_f("main").s_richtext("Parts"));
 		_setValue(_f("main").s_textinput(0).rightOf(_f("main").uiftetextfield("Allow Multi Add Using")), "");
 		_setValue(_f("main").s_textinput(0).rightOf(_f("main").uiftetextfield("Allow Multi Add Using")), "Select");
-		_click(_f("main").s_label("--None--"));
+		if($multiAdd =="Case"){
+			_click(_f("main").s_label("Case[2]"));
+		}else{
+			_click(_f("main").s_label($multiAdd));
+		}
 		_click(_f("main").s_button("Save[3]"));
 		_wait(3000, _isVisible(_f("main").label("Page saved")));		
 	};
