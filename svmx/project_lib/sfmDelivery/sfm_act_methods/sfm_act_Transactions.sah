@@ -152,9 +152,17 @@ var $sfm_act_Transactions = new function sfm_act_Transactions() {
 			_click($bo_pg_sfmTransactionAndDesigner.btn_finalQuickSave);
 
 		};
-		this.createLookUp=function($object,$lookupTempName,$fieldCombo,$conditionsCombo,$operandTypeCombo,$operandValue,$lookupAdvExpr,$lookUpName){
+		this.createLookUp=function($object,$lookupTempName,$fieldCombo,$conditionsCombo,$operandTypeCombo,$operandValue,$lookupAdvExpr,$lookUpName,$nearBy){
 			_setStrictVisibilityCheck(true);
-			_click(_f("main").s_textinput("txtIp").near(_f("main").uiftetextfield($object)));
+			
+			if($nearBy == 'Parts' || $nearBy == 'Labor' || $nearBy == 'Expense' || $nearBy == 'Travel'){
+				_click(_f("main").s_richtext($object).near(_f("main").s_richtext($nearBy)));
+			}else{
+				//_click(_f("main").s_textinput("txtIp").inside(_f("main").fieldrenderer($fieldName)));
+				_click(_f("main").s_textinput("txtIp").near(_f("main").uiftetextfield($object)));
+			}
+			
+			
 			_wait(5000,_isVisible(_f("main").s_label("Properties for Field: "+$object)));
 			_click($sfm_pg_screenDesigner.btn_ConfLookup);
 			_wait(10000,_isVisible($sfm_pg_screenDesigner.txt_lookupName));
