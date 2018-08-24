@@ -64,8 +64,12 @@ var $sfm_act_SFM = new function sfm_act_SFM() {
 					_click(_f("main").s_label("Activity Type[1]"));
 					_click(_f("main").s_button("/Add Field/"));
 				}
+				else if($fieldName[$i]=="Case"){
+					_click(_f("main").s_label("Case[3]"));
+					_click(_f("main").s_button("/Add Field/"));
+				}
 				else{
-				_click(_f("main").s_label($fieldName[$i]));
+				_click(_f("main").s_label($fieldName[$i]).near(_f("main").s_button("Add Field")));
 				_click(_f("main").s_button("/Add Field/"));
 			}
 			}
@@ -144,8 +148,12 @@ var $sfm_act_SFM = new function sfm_act_SFM() {
 		_wait(3000, _isVisible(_f("main").label("Page saved")));		
 	};
 	
-	this.setFormFill = function($fieldName,$objMapping){
-		_click(_f("main").s_textinput("txtIp").inside(_f("main").fieldrenderer($fieldName)));
+	this.setFormFill = function($fieldName,$objMapping,$nearBy){
+		if($nearBy == 'Parts' || $nearBy == 'Labor' || $nearBy == 'Expense' || $nearBy == 'Travel'){
+			_click(_f("main").s_richtext($fieldName).near(_f("main").s_richtext($nearBy)));
+		}else{
+			_click(_f("main").s_textinput("txtIp").inside(_f("main").fieldrenderer($fieldName)));
+		}
 		_setSelected(_f("main").s_combobox("/ComboBox/").rightOf(_f("main").uiftetextfield("Object Mapping")),$objMapping);
 		_click(_f("main").s_button("Save[3]"));
 		_wait(3000, _isVisible(_f("main").label("Page saved")));

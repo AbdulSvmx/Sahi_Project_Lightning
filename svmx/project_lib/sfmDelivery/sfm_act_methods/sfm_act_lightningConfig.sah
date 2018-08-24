@@ -184,6 +184,22 @@ this.navigateToCreateCustomObject = function(){
 	_click(_span("Custom Object"));
 }
 
+this.addPermissionToCustomObject = function($searchFor,$profileName,$objectName){
+	//Added by Harish CS
+	$checkboxCount = 6;
+	_click(_div("Setup"));
+	_click(_span("Setup[1]"));
+	_selectWindow("Home | Salesforce");
+	_setValue(_searchbox("Quick Find"),$searchFor);
+	_click(_mark("Profiles"));
+	_selectDomain("cs77.salesforce.com");
+	_selectWindow();
+	_click(_span("/Edit/",_leftOf(_span($profileName))));
+	for(var $i=0;$i<$checkboxCount;$i++){
+		_click(_checkbox($i,_rightOf(_tableHeader($objectName))));
+	}
+	_click(_submit("/Save/"));
+};
 
 this.deleteStepFromWizard = function($wizardObject,$wizardName,$processName){
 	//deletes a given step from a given wizard
