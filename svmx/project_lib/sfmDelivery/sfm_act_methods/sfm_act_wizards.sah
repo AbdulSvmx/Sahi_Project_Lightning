@@ -78,6 +78,7 @@ var $sfm_act_wizards = new function sfm_act_wizards() {
 	this.addStepToSfmWizard = function($wizardType, $sfmName, $handOver) {
 		_click($sfm_pg_wizards.txt_manageWizSteps);
 		_click($sfm_pg_wizards.btn_newStep);
+		_wait(5000,$sfm_pg_wizards.btn_wizStepType,$wizardType);
 		_setSelected($sfm_pg_wizards.btn_wizStepType,$wizardType);
 		_setSelected($sfm_pg_wizards.btn_stepName,$sfmName);
 		_wait(3000,_label($sfmName,_rightOf(_label("Step ID[1]"))));

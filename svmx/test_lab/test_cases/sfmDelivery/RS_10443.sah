@@ -1,7 +1,7 @@
-var $rs_6958 = _testcase("RS-6958","Verify form fill functionality in child lines and in extended edit");
-$rs_6958.start();
+var $rs_10443 = _testcase("RS-10443","Verify form fill functionality in child lines and in extended edit");
+$rs_10443.start();
 
-var $sfmName = $bo_act_common.generateRandomName("RS_6958_");
+var $sfmName = $bo_act_common.generateRandomName("RS_10443_");
 var $restAccName = "Acc_"+$sfmName;
 
 //variables for rest call
@@ -71,8 +71,8 @@ $sfm_act_SFM.partsMultiAdd("Case");
 $sfm_act_Transactions.createLookUp($fieldName[1],$lookupTempName,$fieldCombo, $conditionsCombo, $operandTypeCombo, $operandValue, $lookupAdvExpr, $sfmName,"Parts");
 $sfm_act_SFM.setFormFill($fieldName[1], $sfmName,"Parts");
 $sfm_act_SFM.setFormFill($fieldName[1], $sfmName,"Labor");
-
 _click($sfm_pg_sfmDesigner.btn_quickSaveSFM);
+_wait(5000);
 _click($sfm_pg_sfmDesigner.btn_saveSFM); 
 
 //add the process to wizard
@@ -85,7 +85,7 @@ $sfm_act_createCustomWizard.createWowithoutvalues();
 
 _click(_span($sfmName));
 _selectDomain($domainName);
-_wait(8000,_div($sfmName));
+_wait(8000,_isVisible(_div($sfmName)));
 
 //add multiple parts based on multi add on case
 
@@ -97,7 +97,7 @@ _click($sfm_pg_wizardWindow.chk_multiSelect);
 _click($sfm_pg_wizardWindow.btn_addProduct);
 
 //Validate formfill in 1st Part line
-
+_wait(5000);
 _click($sfm_pg_sfmDesigner.btn_deliveryPartsTab);
 $sfm_act_sfmDesigner.navToExtendedEdit();
 
@@ -129,7 +129,7 @@ _setStrictVisibilityCheck(true);
 _click(_div("/trigger-search/",_near(_span("Case",_in(_div("/sfm-window/"))))));
 _setValue($sfm_pg_wizardWindow.txt_quickFindLookUp,$caseNumber1);
 _click($sfm_pg_wizardWindow.btn_searchProduct);
-_click(_link("00001176"));
+_click(_link($caseNumber1));
 if(_getText($sfm_pg_sfmDesigner.txt_eeReceivedCity)=="Loan" && _getText($sfm_pg_sfmDesigner.txt_eeEndDateTime)=="08/23/2018" 
 	&& _getText($sfm_pg_sfmDesigner.txt_eeDateReceived)== "08/23/2018" && (_getText($sfm_pg_sfmDesigner.txt_eeAccount) == $restAccName) ){
 	_log("Formfill for Labor line has happened as expected")	;
@@ -140,10 +140,10 @@ _click($sfm_pg_sfmDesigner.btn_eeCancel);
 _setStrictVisibilityCheck(false);
 
 _click($sfm_pg_sfmDesigner.btn_deliveryQuickSave);
-_wait(5000);
+_wait(8000);
 if(_exists($sfm_pg_sfmDesigner.txt_priceAlert)){
 	_click($sfm_pg_sfmDesigner.btn_priceAlertOk);
 	_log("Pass ::: FormFill for multiple child lines is working");
 	_wait(1000);
 }
-$rs_6958.end();
+$rs_10443.end();
