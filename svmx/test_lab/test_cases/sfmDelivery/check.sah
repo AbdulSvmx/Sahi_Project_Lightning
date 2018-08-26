@@ -1,9 +1,0 @@
-var $check = _testcase("....");
-$check.start();
-$bo_act_login.login($g_url,$bac_un,$bac_pwd);
-$sfm_act_lightningConfig.switchToLightning();
-$bo_act_navigation.navigateToSfmTransactionDesigner();
-_click($bo_pg_sfmTransactionAndDesigner.btn_newSFMTransaction);
-$bo_act_navigation.navigateToSfmTransactionDesigner();
-_click($bo_pg_sfmTransactionAndDesigner.btn_yourCustomSfmTransactions);
-$check.stop;
