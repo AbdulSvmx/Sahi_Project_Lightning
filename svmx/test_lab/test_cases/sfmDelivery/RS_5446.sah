@@ -34,7 +34,7 @@ $rs_5446.start();
 	var $valueOptions = ["Today","Tomorrow","Yesterday"];
 	var $advancedExprsn = "1 and ((2 or 3) and (4 or 5))";
 	$sfmPgLayoutName = $bo_act_common.generateRandomName("SFM Wiz");
-	$bo_act_login.login($g_url,$sfmUsn,$sfmPwd);
+	$bo_act_login.login($g_url,$sfmlUsn,$sfmlPwd);
 	
 	$bo_act_navigation.navigateToSfmTransactionDesigner();
 	$sfm_act_SFM.selectSFM($processName,false);
