@@ -7,7 +7,7 @@ $RS_10422.start();
 //Variables used
 var $object_name = "Work Order";
 var $Std_Sfm_process = "Create Estimates";
-var $stdProcessName = "Manage Work Order Lines - Estimates"
+var $stdProcessName = "Manage Work Order Lines - Estimates";
 var $stdProcessId = "TDM017";
 var $processName = "RS_10422";
 var $sfmNameToBeCloned = "Manage Work Order Lines - Usage";
