@@ -1,29 +1,19 @@
 //Author: 
-var $rs_7015 = _testcase("RS_7015","Verify current record literals in lookup");
-$rs_7015.start();
+var $rs_10431 = _testcase("RS_10431","Verify current record literals in lookup");
+$rs_10431.start();
 
 	//login to App
 	$bo_act_login.login($g_url,$sfmUsn,$sfmPwd);
 
 	//clone standard SFM
 	var $sfmNameToBeCloned="Manage Work Order Lines - Usage";
-	var $sfmName=$bo_act_common.generateRandomName("rs_7015_");
+	var $sfmName=$bo_act_common.generateRandomName("rs_10431_");
 	var $sfmTemplateSaveAsName=$bo_act_common.generateRandomName("SFM_Page_");
 	var $sfmTemplate="SVMXSTD: Manage WO Usage Lines";
 	var $fieldName=["Problem Description","Priority","Preferred Start Time","Invoice Number","Case"];
 	var $containerName=["Order Status","Order Status","Order Status","Order Status","Order Status"];
 	$sfm_act_SFM.cloneTDM016($sfmNameToBeCloned, $sfmName, false, $sfmTemplateSaveAsName, $sfmTemplate, $fieldName, $containerName);
 
-	
-/*	var $sfmName="rs_7015_2382018143034";
-	$bo_act_navigation.navigateToSfmTransactionDesigner();
-	$sfm_act_SFM.selectSFM($sfmName, true);
-	_wait(5000);
-	_click(_f("main").s_label($sfmName));
-	_wait(10000);
-	_click($bo_pg_sfmTransactionAndDesigner.btn_screenDesigner);
-	
-*/
 	$object="Case";
 	var $lookupTempName="SVMXSTD: Case Lookup";
 	var $fieldCombo=["Subject","Priority","Actual Initial Response","Case Number"];
@@ -31,7 +21,7 @@ $rs_7015.start();
 	var $operandTypeCombo=["Value","Value","Value","Value"];
 	var $operandValue=["SVMX.CURRENTRECORD.SVMXC__Problem_Description__c","SVMX.CURRENTRECORD.SVMXC__Priority__c","SVMX.CURRENTRECORD.SVMXC__Preferred_Start_Time__c","SVMX.CURRENTRECORD.SVMXC__Invoice_Number__c"];
 	var $lookupAdvExpr="1 AND 2 AND (3 OR 4)";
-	var $lookUpName=$bo_act_common.generateRandomName("rs_7015_lookup_");
+	var $lookUpName=$bo_act_common.generateRandomName("rs_10431_lookup_");
 	
 	$sfm_act_Transactions.createLookUp($object, $lookupTempName, $fieldCombo, $conditionsCombo, $operandTypeCombo, $operandValue, $lookupAdvExpr, $lookUpName);
 	
@@ -72,12 +62,7 @@ $rs_7015.start();
 	$WONumber =$sfm_act_restApiMethods.getRestApi("GET", $objName, $columnName, $filter, $filterValue);
 	_log("WO number: "+$WONumber);
 
-	/*
-	var $WONumber="WO-00003899";
-	var $sfmName="rs_7015_22820181749";
-	var $object="Case";
-	var $caseNumber="00001179";
-	*/
+
 	$sfm_act_common.globalSearchInLightning($WONumber);
 	_setStrictVisibilityCheck(true);
 	$sfm_act_createCustomWizard.clickWizardBtn($sfmName);
@@ -93,4 +78,4 @@ $rs_7015.start();
 
 
 
-$rs_7015.end();
+$rs_10431.end();

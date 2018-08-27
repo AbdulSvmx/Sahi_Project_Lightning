@@ -100,9 +100,7 @@ $rs_6940.start();
 		
 		
 		
-		_click($sfm_pg_wizardWindow.btn_addRow);
-		_click($sfm_pg_wizardWindow.btn_edit);
-		_setValue($sfm_pg_wizardWindow.txt_part,"Safari");
+
 /*		
 		var $users=["Leanne Tomlin","Howard Jones","Jason Smith","Jason David","Jon Amos","Howard White","Geoff Minor"];
 		
