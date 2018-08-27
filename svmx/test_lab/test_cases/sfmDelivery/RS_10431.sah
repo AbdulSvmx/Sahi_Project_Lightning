@@ -3,7 +3,7 @@ var $rs_10431 = _testcase("RS_10431","Verify current record literals in lookup")
 $rs_10431.start();
 
 	//login to App
-	$bo_act_login.login($g_url,$sfmUsn,$sfmPwd);
+	$bo_act_login.login($g_url,$sfmlUsn,$sfmlPwd);
 
 	//clone standard SFM
 	var $sfmNameToBeCloned="Manage Work Order Lines - Usage";

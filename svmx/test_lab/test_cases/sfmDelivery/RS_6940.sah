@@ -3,7 +3,7 @@ $rs_6940.start();
 //rs_7015_2382018153159
 //rs_7015_2382018134418
 		// Login to App
-/*		$bo_act_login.login($g_url,$sfmUsn,$sfmPwd);
+		$bo_act_login.login($g_url,$sfmlUsn,$sfmlPwd);
 
 		//clone standard SFM
 		var $sfmNameToBeCloned="Manage Work Order Lines - Usage";
@@ -36,7 +36,7 @@ $rs_6940.start();
 		var $handOver=false;
 		_log("Wizard Name: "+$wizardName1);
 		$sfm_act_wizards.addToWizard($wizardObject, $wizardName1, $wizardType, $sfmName, $handOver, $profile); 
-*/			
+			
 		//Create Account
 		var $Account=new Array();
 		$Account[0]=$bo_act_common.generateRandomName("GlobalInc_AccountRS_6940_");
@@ -49,6 +49,7 @@ $rs_6940.start();
 			$filterValue=$sfm_act_restApiMethods.postRestApi($objName,$obJson,"POST");
 			$AccountID[$i]=$filterValue;
 		}
+		_log("Account1: "+$Account[0]+" and Account2: "+$Account[1]);
 		
 		$contactNameList = ["Leanne Tomlin","Howard Jones","Jason Smith","Jason David","Jon Amos","Howard White","Geoff Minor"];
 		//Create Users
@@ -67,6 +68,10 @@ $rs_6940.start();
 			//create Account
 			$filterValue=$sfm_act_restApiMethods.postRestApi($objName,$obJson,"POST");
 			$userName[$i]=$lastName;
+		}
+
+		for (var $i = 0; $i < $userName.length; $i++) {
+			_log($userName[$i]);
 		}
 		
 		//WO creation
@@ -94,54 +99,56 @@ $rs_6940.start();
 		_click(_span("+ Add Parts"));
 		_setValue(_textbox("/sfm-text/",_near(_span("Search"))), $productName);
 		_click(_span("Search"));
-		_click(_span("/checkcolumn/",_leftOf(_div("RA_Pro1632018205842"))));
+		_click(_span("/checkcolumn/",_leftOf(_div($productName))));
 		_click(_link("Add"));
+		_wait(5000);
 		//$sfm_act_sfmDesigner.addChildLine("Parts"); 
+		
 		
 		//Assert "No matching record" DVR
 		_click(_div("/grid-cell/",_under(_parentNode(_span("Account"),"DIV",4))));
-		_wait(1000);
+		_wait(5000);
 		_setValue(_textbox("/inputEl/",_in(_div("/sfm-lookupcelleditor/"))),$Account[0]+"   ");
 		_click(_link("Quick Save"));
-		_wait(1000);
+		_wait(5000);
 		_assertExists(_div("Account: No matching record(s) found for this keyword: Account _"));
-		_wait(1000);
+		_wait(5000);
 		
 		//assert Multiple item found DVR
 		_click(_div("/grid-cell/",_under(_parentNode(_span("Account"),"DIV",4))));
-		_wait(1000);
+		_wait(5000);
 		_setValue(_textbox("/inputEl/",_in(_div("/sfm-lookupcelleditor/"))),"AccountRS_6940_");
 		_click(_link("Quick Save"));
-		_wait(1000);
+		_wait(51000);
 		_assertExists(_div("Account: Multiple items found. Click lookup icon to refine search."));
-		_wait(1000);
+		_wait(5000);
 		
 		//Select from search
 		_click(_link("AutoContact",_in(_div("Account: Multiple items found. Click lookup icon to refine search."))));
-		_wait(1000);		
+		_wait(5000);		
 		_click(_div("/trigger-search/",_in(_div("/sfm-lookupcelleditor/"))));
 		_wait(5000,_isVisible(_div("/Recent Items:/")));
 		_setValue(_textbox("/sfm-text/",_near(_span("Search"))),$Account[0]);
 		_click(_span("Search"));
 		_wait(5000,_isVisible(_link($Account[0])));
 		_click(_link($Account[0]));
-		_wait(3000);
+		_wait(5000);
 		
 		
 		//assert Multiple item found DVR on AutoContact Field
 		_click(_div("/grid-cell/",_under(_parentNode(_span("AutoContact"),"DIV",4))));
-		_wait(1000);
+		_wait(5000);
 		_setValue(_textbox("/inputEl/",_in(_div("/sfm-lookupcelleditor/"))),"Jason");
 		_click(_link("Quick Save"));
-		_wait(1000);
+		_wait(5000);
 		_assertExists(_div("AutoContact: Multiple items found. Click lookup icon to refine search."));
-		_wait(1000);
+		_wait(5000);
 		
 		
 		
 		//Select from search
 		_click(_link("AutoContact",_in(_div("AutoContact: Multiple items found. Click lookup icon to refine search."))));
-		_wait(1000);		
+		_wait(5000);		
 		_click(_div("/trigger-search/",_in(_div("/sfm-lookupcelleditor/"))));
 		_wait(5000,_isVisible(_div("/Recent Items:/")));
 		_click(_span("Search"));
@@ -149,16 +156,37 @@ $rs_6940.start();
 		_assertExist(_link($userName[2]));
 		_assertExist(_link($userName[3]));
 		_click(_link($userName[2]));
-		_wait(3000);
-		
+		_wait(5000);
+		_click(_link("Quick Save"));
+		_wait(5000);
 		if (_exists(_div("Price not calculated, because entitlement check has not been performed."))) {
 			_click(_span("Ok"));
 		}
-		_assertExist();
+		_assertEqual($userName[2],_getText(_div("/grid-cell/",_under(_parentNode(_span("AutoContact"),"DIV",4)))));
 
 		
+		//assert Multiple item found DVR
+		_click(_div("/grid-cell/",_under(_parentNode(_span("Account"),"DIV",4))));
+		_wait(5000);
+		_click(_div("/trigger-search/",_in(_div("/sfm-lookupcelleditor/"))));
+		_wait(5000,_isVisible(_div("/Recent Items:/")));
+		_setValue(_textbox("/sfm-text/",_near(_span("Search"))),$Account[1]);
+		_click(_span("Search"));
+		_wait(5000,_isVisible(_link($Account[1])));
+		_click(_link($Account[1]));
 		
-		
+		//
+		//assert Multiple item found DVR on AutoContact Field
+		_click(_div("/grid-cell/",_under(_parentNode(_span("AutoContact"),"DIV",4))));
+		_wait(5000);
+		_setValue(_textbox("/inputEl/",_in(_div("/sfm-lookupcelleditor/"))),"Howard");
+		_click(_link("Quick Save"));
+		_wait(5000);
+		if (_exists(_div("Price not calculated, because entitlement check has not been performed."))) {
+			_click(_span("Ok"));
+		}
+		_assertEqual($userName[2],_getText(_div("/grid-cell/",_under(_parentNode(_span("AutoContact"),"DIV",4)))));
+
 
 /*		
 		var $users=["Leanne Tomlin","Howard Jones","Jason Smith","Jason David","Jon Amos","Howard White","Geoff Minor"];
@@ -201,7 +229,7 @@ $sfmtemplate = "SVMXSTD: Manage WO Usage Lines";
 $accountName = ["Auto Global Inc","Auto Global Media"];
 $contactName1 = ["Leanne Tomlin","Howard Jones","Jason Smith","Jason David"];
 $contactName2 = ["Jon Amos","Howard White","Geoff Minor"];
-$bo_act_login.login($g_url,$sfmUsn,$sfmPwd);
+$bo_act_login.login($g_url,$sfmlUsn,$sfmlPwd);
 //$sfm_act_addDeleteMeth.createAccount($accountName);
 $sfm_act_addDeleteMeth.verifyAndCreateAccount("My Accounts","Auto Global Inc");
 $sfm_act_addDeleteMeth.verifyAndCreateAccount("My Accounts","Auto Global Media");
