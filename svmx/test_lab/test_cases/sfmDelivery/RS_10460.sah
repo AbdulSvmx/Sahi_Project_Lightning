@@ -3,7 +3,7 @@ $rs_10460.start();
 
 	
 	//Login to App
-	$bo_act_login.login($g_url,$sfmUsn,$sfmPwd);
+	$bo_act_login.login($g_url,$sfmlUsn,$sfmlPwd);
 	$sfm_act_expressions.navigateToExpression();
 
 	var $object="Work Order";

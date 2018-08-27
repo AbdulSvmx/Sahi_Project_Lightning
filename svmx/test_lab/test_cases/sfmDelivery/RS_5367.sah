@@ -6,7 +6,7 @@ $stepTypes = ["SFM","Output Document"];
 $stepNames = ["Manage Work Order Lines - Usage","Work Order Service Report"];
 $titles = ["SFMTDM016","OPDOC"];
 $processIds = ["SVMX_processId=TDM016","SVMX_processId=WO_ServiceReport"];
-$bo_act_login.login($g_url,$sfmUsn,$sfmPwd);
+$bo_act_login.login($g_url,$sfmlUsn,$sfmlPwd);
 $bo_act_navigation.navigateToSfmWizard();
 $sfm_act_createCustomWizard.chooseObject("Work Order");
 $sfm_act_createCustomWizard.addMultipleWizSteps($wizTitle, $stepTypes, $stepNames, $titles);

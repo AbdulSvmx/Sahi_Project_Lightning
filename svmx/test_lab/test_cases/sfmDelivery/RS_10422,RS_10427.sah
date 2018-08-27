@@ -41,7 +41,7 @@ _selectDomain();
 
 //Logout as admin and login as technician
 $sfm_act_lightningConfig.logoutInLightning();
-$bo_act_login.login($g_url,$sfmUsn,$sfmPwd);
+$bo_act_login.login($g_url,$sfmlUsn,$sfmlPwd);
 $sfm_act_lightningConfig.switchToLightning();
 
 //Launch SFM designer for standard process without adding Feature permissions

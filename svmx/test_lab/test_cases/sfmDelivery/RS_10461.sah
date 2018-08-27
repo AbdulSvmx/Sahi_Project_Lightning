@@ -2,7 +2,7 @@ var $rs_10461 = _testcase("RS_10461","Verify Editing of Advanced expression in H
 $rs_10461.start();
 
 	//Login to App
-	$bo_act_login.login($g_url,$sfmUsn,$sfmPwd);
+	$bo_act_login.login($g_url,$sfmlUsn,$sfmlPwd);
 	
 	//clone standard SFM
 	var $sfmNameToBeCloned="Create Usage Lines from Estimates";
@@ -68,7 +68,7 @@ $rs_10461.start();
 	
 	$sfm_act_lightningConfig.logoutInLightning();
 	_wait(10000,_isVisible($bo_pg_login.txt_email));
-	$bo_act_login.login($g_url,$sfmUsn,$sfmPwd);
+	$bo_act_login.login($g_url,$sfmlUsn,$sfmlPwd);
 	
 	//Update the sfm
 	_selectDomain();
@@ -152,7 +152,7 @@ $rs_10461.start();
 	$bo_act_navigation.navigateToHome();
 	$sfm_act_lightningConfig.logoutInLightning();
 	_wait(10000);
-	$bo_act_login.login($g_url,$sfmUsn,$sfmPwd);
+	$bo_act_login.login($g_url,$sfmlUsn,$sfmlPwd);
 	
 	//Remove Advance criteria
 	$bo_act_navigation.navigateToSfmTransactionDesigner();

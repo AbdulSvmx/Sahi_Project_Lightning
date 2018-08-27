@@ -7,7 +7,7 @@ $sfmPgLayoutName =	$bo_act_common.generateRandomName("SFM_Auto_Page");
 $processName = "Manage Work Order Lines - Usage";
 $lookUpName = $bo_act_common.generateRandomName("Part_lkp_");
 $wizTitle = $bo_act_common.generateRandomName("SFM Wiz");
-$bo_act_login.login($g_url,$sfmUsn,$sfmPwd);
+$bo_act_login.login($g_url,$sfmlUsn,$sfmlPwd);
 $bo_act_navigation.navigateToSfmTransactionDesigner();
 $sfm_act_Transactions.cloneAndSaveProcess($processName, $sfmName, $sfmPgLayoutName);
 $sfm_act_Transactions.addLookupDetails($lookUpName);
