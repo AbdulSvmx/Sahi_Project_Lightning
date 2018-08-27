@@ -1,5 +1,5 @@
-var $scenario_9682 = _testcase("scenario2_9682","Verify Create New - standalone create process with mapping in both offline & online mode");
-$scenario_9682.start();
+var $scenario_10570 = _testcase("scenario_10570","Verify Create New - standalone create process with mapping in both offline & online mode");
+$scenario_10570.start();
 $sfmName = $bo_act_common.generateRandomName("sfm_name_");
 $sfmNameCase = $bo_act_common.generateRandomName("sfm_caseName_");
 $sfmNameLocation = $bo_act_common.generateRandomName("sfm_location_");
@@ -108,9 +108,9 @@ $sfm_act_Transactions.addHeader($headersToAdd);
 _click(_f("main").s_button("Save[3]"));
 _wait(5000);
 _click($bo_pg_formDesigner.btn_quickSave);
-/* ***********************************************************************
- ******************************Create Wizard******************************
- *********************************************************************** */
+/* ************************************************************************
+   ******************************Create Wizard*****************************
+   ************************************************************************ */
 
 //Create Wizard for Work Order.
 $bo_act_navigation.navigateToSfmWizard();
@@ -143,4 +143,4 @@ $bo_act_SFMAppPermission.set_mobileapp_permissions("auto group profile", "Locati
 $bo_act_SFMAppPermission.set_mobileapp_permissions("auto group profile", "Installed Product", $sfmNameInstalledProduct);
 $bo_act_SFMAppPermission.set_mobileapp_permissions("auto group profile", "Auto_Custom_Object2", $sfmNameCustomObject);
 
-$scenario_9682.end();
+$scenario_10570.end();

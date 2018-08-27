@@ -6,11 +6,11 @@ var $sfm_act_sfmMapping = new function sfm_act_sfmMapping() {
 		_click($bo_pg_servicemaxSetup.btn_serviceFlowManager);
 		_wait(3000);
 		_click($bo_pg_servicemaxSetup.btn_sfmMappings);
-		_wait(3000,_isVisible($sfm_pg_sfmMapping.label_configureSFMMapping));
+		_wait(8000,_isVisible($sfm_pg_sfmMapping.label_configureSFMMapping));
 		_setSelected($sfm_pg_sfmMapping.txt_sourceObject_SFMMapping,$sourceObj);
 		_setSelected($sfm_pg_sfmMapping.txt_targetObject_SFMMapping,$targetObj);
 		_click($sfm_pg_sfmMapping.btn_new_SFMMapping);
-		_wait(3000);
+		_wait(5000);
 
 		if(_isVisible($sfm_pg_sfmMapping.tab_fieldMapForExisting_SFMMapping)){
 			for(var $i=0; $i<$mappingField.length;$i++){
@@ -23,7 +23,7 @@ var $sfm_act_sfmMapping = new function sfm_act_sfmMapping() {
 		_setValue($sfm_pg_sfmMapping.txt_mappingId_SFMMapping,"");
 		_setValue($sfm_pg_sfmMapping.txt_mappingId_SFMMapping,$mappingName);
 		_click($sfm_pg_sfmMapping.btn_saveMapping_SFMMapping);
-		_wait(5000,_isVisible($sfm_pg_sfmMapping.label_mapSaved_SFMMapping));
+		_wait(10000,_isVisible($sfm_pg_sfmMapping.label_mapSaved_SFMMapping));
 		_click($sfm_pg_sfmMapping.btn_showMappedFields_SFMMapping);
 		
 	};
