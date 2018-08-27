@@ -56,7 +56,7 @@ var $sfm_act_restApiMethods= new function sfm_act_restApiMethods() {
     
      $response_post = $request_post.submit($reqType);
      $respObj= JSON.parse($response_post.getBodyAsString());
-     //_log($respObj);
+     _log($respObj);
      $objCreated = $respObj['id'];
      _log("Created record id = "+$objCreated);
      return($objCreated);

@@ -59,10 +59,9 @@ $rs_7015.start();
 	//get the caseNumber
 	$caseNumber =$sfm_act_restApiMethods.getRestApi("GET", $objName, $columnName, $filter, $filterValue);
 	_log("Case number: "+$caseNumber);
+	
 	//variables for rest call
 	$objName= "SVMXC__Service_Order__c";
-	
-
 	$obJson = "{\"SVMXC__Problem_Description__c\":\"Problem Description\",\"SVMXC__Priority__c\":\"High\",\"SVMXC__Preferred_Start_Time__c\":\"2018-08-22\",\"SVMXC__Invoice_Number__c\":\""+$caseNumber+"\"}";
 	_log("Work Order json: "+$obJson);
 	$columnName = "Name";

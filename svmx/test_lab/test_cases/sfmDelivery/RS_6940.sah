@@ -3,7 +3,7 @@ $rs_6940.start();
 //rs_7015_2382018153159
 //rs_7015_2382018134418
 		// Login to App
-		$bo_act_login.login($g_url,$sfmUsn,$sfmPwd);
+/*		$bo_act_login.login($g_url,$sfmUsn,$sfmPwd);
 
 		//clone standard SFM
 		var $sfmNameToBeCloned="Manage Work Order Lines - Usage";
@@ -14,10 +14,124 @@ $rs_6940.start();
 		var $containerName=["Parts","Parts"];
 		$sfm_act_SFM.cloneTDM016($sfmNameToBeCloned, $sfmName, false, $sfmTemplateSaveAsName, $sfmTemplate, $fieldName, $containerName);
 		
+		//Context lookup setting up
+		_click(_f("main").s_richtext($fieldName[1]).near(_f("main").s_richtext("Parts")));
+		_setSelected(_f("main").s_combobox("/ComboBox/").rightOf(_f("main").uiftetextfield("Context Source")),"Parts");
+		_click(_f("main").s_checkbox("Override Context"));
+		_setSelected(_f("main").s_combobox("/ComboBox/").rightOf(_f("main").uiftetextfield("Context")),"Account");
+		_setSelected(_f("main").s_combobox("/ComboBox/").rightOf(_f("main").uiftetextfield("Matching Field")),"Account ID");
+		
+		//Save SFM after adding context lookup
+		_setStrictVisibilityCheck(true);
+		_click($bo_pg_sfmTransactionAndDesigner.btn_pageLayoutSave);
+		_wait(5000,_isVisible($bo_pg_sfmTransactionAndDesigner.btn_sfmpageSaveConfirmMsg));
+		_click($bo_pg_sfmTransactionAndDesigner.btn_saveAndclose);
+		_setStrictVisibilityCheck(false);
+		
+		//add sfm to wizard
+		var $wizardObject="Work Order";
+		var $wizardName1 =$wizardName[3];
+		var $wizardType="SFM";
+		var $profile="";
+		var $handOver=false;
+		_log("Wizard Name: "+$wizardName1);
+		$sfm_act_wizards.addToWizard($wizardObject, $wizardName1, $wizardType, $sfmName, $handOver, $profile); 
+*/			
+		//Create Account
+		var $Account=new Array();
+		$Account[0]=$bo_act_common.generateRandomName("AccountRS_6940_");
+		$Account[1]=$bo_act_common.generateRandomName("AccountRS_6940_");
+		$AccountID=new Array();
+		for (var $i = 0; $i < $Account.length; $i++) {
+			$objName= "Account";
+			$obJson = "{\"Name\":\""+$Account[$i]+"\"}";
+			//create Account
+			$filterValue=$sfm_act_restApiMethods.postRestApi($objName,$obJson,"POST");
+			$AccountID[$i]=$filterValue;
+		}
+		
+		$contactNameList = ["Leanne Tomlin","Howard Jones","Jason Smith","Jason David","Jon Amos","Howard White","Geoff Minor"];
+		//Create Users
+		var $lastName;
+		var $userName=new Array();
+		for (var $i = 0; $i <=6; $i++) {
+			$objName= "Contact";
+			if ($i<4) {
+				$lastName=$bo_act_common.generateRandomName($contactNameList[$i]+"_");
+				$obJson="{\"LastName\":\""+$lastName+"\",\"AccountId\":\""+$AccountID[0]+"\"}";
+			}else {
+				$lastName=$bo_act_common.generateRandomName($contactNameList[$i]+"_");
+				//_log("user: "+$lastName);
+				$obJson="{\"LastName\":\""+$lastName+"\",\"AccountId\":\""+$AccountID[1]+"\"}";
+			}
+			//create Account
+			$filterValue=$sfm_act_restApiMethods.postRestApi($objName,$obJson,"POST");
+			$userName[$i]=$lastName;
+		}
+		
+		//WO creation
+		$objName= "SVMXC__Service_Order__c";
+		$obJson = "{\"SVMXC__Order_Status__c\":\"Open\",\"SVMXC__Order_Type__c\":\"Field Service\"}";
+		$columnName = "Name";
+		$filter="id";
+		$filterValue=$sfm_act_restApiMethods.postRestApi($objName,$obJson,"POST");
+		//get the caseNumber
+		$WONumber =$sfm_act_restApiMethods.getRestApi("GET", $objName, $columnName, $filter, $filterValue);
+		_log("WO number: "+$WONumber);
+		
+		//Create Product
+		$objName= "Products";
+		$productName=$bo_act_common.generateRandomName("Pro_RS_6940_");
+		$obJson = "{\"Product Name\":\""+$productName+"\"}";
+		$filterValue=$sfm_act_restApiMethods.postRestApi($objName,$obJson,"POST");
+
+		
+		$sfm_act_common.globalSearchInLightning($WONumber);
+		_setStrictVisibilityCheck(true);
+		$sfm_act_createCustomWizard.clickWizardBtn($sfmName);
+		_wait(5000,_isVisible(_div("/"+$sfmName+"/")));
+		
+		_click(_span("+ Add Parts"));
+		_setValue(_textbox("/sfm-text/",_near(_span("Search"))), $productName);
+		_click(_span("Search"));
+		_click(_span("/checkcolumn/",_leftOf(_div("RA_Pro1632018205842"))));
+		_click(_link("Add"));
+		$sfm_act_sfmDesigner.addChildLine("Parts"); 
+		
+		
+		
+		_click($sfm_pg_wizardWindow.btn_addRow);
+		_click($sfm_pg_wizardWindow.btn_edit);
+		_setValue($sfm_pg_wizardWindow.txt_part,"Safari");
+/*		
+		var $users=["Leanne Tomlin","Howard Jones","Jason Smith","Jason David","Jon Amos","Howard White","Geoff Minor"];
+		
+		
+		
+		
+		
+		Account 1: Global Inc
+		Contact (Associate below contacts to the Global Inc account):
+		Leanne Tomlin,
+		Howard Jones,
+		Jason Smith
+		Jason David
+
+
+		Account 2: Global Media
+		Contact (Associate below contacts to the Global Media account):
+		Jon Amos,
+		Howard White,
+		Geoff Minor 
 		
 
-
-
+		
+		
+		
+		
+		
+		
+		
 
 $wizTitle = $bo_act_common.generateRandomName("SFM Wiz");
 $sfmName = $bo_act_common.generateRandomName("SFM_Auto_");
@@ -60,4 +174,5 @@ _click($sfm_pg_wizardWindow.btn_edit);
 $sfm_act_createCustomWizard.validateErrorMessage("Global", "Multiple items found",true);
 $sfm_act_createCustomWizard.validatePartialMatch();
 //$sfm_act_addDeleteMeth.deleteAccount($accountName);
+*/
 $rs_6940.end();
