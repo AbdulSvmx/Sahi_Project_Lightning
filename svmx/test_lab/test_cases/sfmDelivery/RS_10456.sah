@@ -33,5 +33,6 @@ if($search ==$paramValue ){
 else{
 	_log("Fail ::: URL based CA is not working","FAILURE");
 }
+_closeWindow();
 
 $rs_10456.end();
