@@ -70,7 +70,8 @@ $rs_10431.start();
 	
 	_click(_div("/trigger-search/",_in(_div($object))));
 	_wait(5000,_isVisible(_div("Recent Items: Cases")));
-	_setValue(_textbox("sfm-text-1259-inputEl"),$caseNumber);
+	_setValue(_textbox("/sfm-text/",_near(_span("Search"))),$caseNumber);
+	//_setValue(_textbox("sfm-text-1259-inputEl"),$caseNumber);
 	_click(_span("Search"));
 	_wait(5000);
 	_assertExists(_link($caseNumber));

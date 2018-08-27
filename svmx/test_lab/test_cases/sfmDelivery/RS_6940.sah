@@ -39,8 +39,8 @@ $rs_6940.start();
 */			
 		//Create Account
 		var $Account=new Array();
-		$Account[0]=$bo_act_common.generateRandomName("AccountRS_6940_");
-		$Account[1]=$bo_act_common.generateRandomName("AccountRS_6940_");
+		$Account[0]=$bo_act_common.generateRandomName("GlobalInc_AccountRS_6940_");
+		$Account[1]=$bo_act_common.generateRandomName("GlobalMedia_AccountRS_6940_");
 		$AccountID=new Array();
 		for (var $i = 0; $i < $Account.length; $i++) {
 			$objName= "Account";
@@ -96,7 +96,66 @@ $rs_6940.start();
 		_click(_span("Search"));
 		_click(_span("/checkcolumn/",_leftOf(_div("RA_Pro1632018205842"))));
 		_click(_link("Add"));
-		$sfm_act_sfmDesigner.addChildLine("Parts"); 
+		//$sfm_act_sfmDesigner.addChildLine("Parts"); 
+		
+		//Assert "No matching record" DVR
+		_click(_div("/grid-cell/",_under(_parentNode(_span("Account"),"DIV",4))));
+		_wait(1000);
+		_setValue(_textbox("/inputEl/",_in(_div("/sfm-lookupcelleditor/"))),$Account[0]+"   ");
+		_click(_link("Quick Save"));
+		_wait(1000);
+		_assertExists(_div("Account: No matching record(s) found for this keyword: Account _"));
+		_wait(1000);
+		
+		//assert Multiple item found DVR
+		_click(_div("/grid-cell/",_under(_parentNode(_span("Account"),"DIV",4))));
+		_wait(1000);
+		_setValue(_textbox("/inputEl/",_in(_div("/sfm-lookupcelleditor/"))),"AccountRS_6940_");
+		_click(_link("Quick Save"));
+		_wait(1000);
+		_assertExists(_div("Account: Multiple items found. Click lookup icon to refine search."));
+		_wait(1000);
+		
+		//Select from search
+		_click(_link("AutoContact",_in(_div("Account: Multiple items found. Click lookup icon to refine search."))));
+		_wait(1000);		
+		_click(_div("/trigger-search/",_in(_div("/sfm-lookupcelleditor/"))));
+		_wait(5000,_isVisible(_div("/Recent Items:/")));
+		_setValue(_textbox("/sfm-text/",_near(_span("Search"))),$Account[0]);
+		_click(_span("Search"));
+		_wait(5000,_isVisible(_link($Account[0])));
+		_click(_link($Account[0]));
+		_wait(3000);
+		
+		
+		//assert Multiple item found DVR on AutoContact Field
+		_click(_div("/grid-cell/",_under(_parentNode(_span("AutoContact"),"DIV",4))));
+		_wait(1000);
+		_setValue(_textbox("/inputEl/",_in(_div("/sfm-lookupcelleditor/"))),"Jason");
+		_click(_link("Quick Save"));
+		_wait(1000);
+		_assertExists(_div("AutoContact: Multiple items found. Click lookup icon to refine search."));
+		_wait(1000);
+		
+		
+		
+		//Select from search
+		_click(_link("AutoContact",_in(_div("AutoContact: Multiple items found. Click lookup icon to refine search."))));
+		_wait(1000);		
+		_click(_div("/trigger-search/",_in(_div("/sfm-lookupcelleditor/"))));
+		_wait(5000,_isVisible(_div("/Recent Items:/")));
+		_click(_span("Search"));
+		_wait(5000,_isVisible(_link($userName[2])));
+		_assertExist(_link($userName[2]));
+		_assertExist(_link($userName[3]));
+		_click(_link($userName[2]));
+		_wait(3000);
+		
+		if (_exists(_div("Price not calculated, because entitlement check has not been performed."))) {
+			_click(_span("Ok"));
+		}
+		_assertExist();
+
 		
 		
 		
