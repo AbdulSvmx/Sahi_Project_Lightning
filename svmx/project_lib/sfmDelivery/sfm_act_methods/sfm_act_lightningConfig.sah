@@ -298,7 +298,8 @@ this.addFieldsToLightningPageLayout = function($object_name,$pageLayoutForProfil
 	_selectDomain($myDomain);
 	for($i=0;$i<$fieldsArray.length;$i++){
 		_setValue($sfm_pg_wo.txt_pgLayoutQuickFind,$fieldsArray[$i]);
-		_dragDrop(_span($fieldsArray[$i]),_span("Information(Header visible on edit only)"));
+		var $shortName = $fieldsArray[$i].substr(0,4);
+		_dragDrop(_span("/"+$shortName+"/"),_span("Information(Header visible on edit only)"));
 	}
 	_click($sfm_pg_wo.btn_pgLayoutSave);
 	_wait(3000);	

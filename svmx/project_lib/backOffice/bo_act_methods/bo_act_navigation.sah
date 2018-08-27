@@ -455,7 +455,7 @@ var $bo_act_navigation = new function bo_act_navigation() {
         	   
         	   };
        this.getCurrentTimeStamp = function(){
-        	//This function returns the current date and time in the form - DD-MM-YYYY_HR:MIN:SEC
+        	//This function returns the current date and time in the form - DD-MM-YYYY_HR_MIN_SEC
              var stamp = new Date();
              var timeStamp = stamp.getDate() + "_" + (stamp.getMonth()+1) + "_" + stamp.getFullYear() + "_" + stamp.getHours() + "_" + stamp.getMinutes() + "_" + stamp.getSeconds();
         	 return timeStamp;
