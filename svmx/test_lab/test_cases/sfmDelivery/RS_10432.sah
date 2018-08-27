@@ -36,8 +36,7 @@ var $mapName = $processName + "mp";
 
 //**************************************************************************************
 //Login and switch to lightning
-//$bo_act_login.login($g_url,$bac_un,$bac_pwd);
-$bo_act_login.login($g_url,$sfmUsn,$sfmPwd);
+$bo_act_login.login($g_url,$sfmlUsn,$sfmlPwd);
 $sfm_act_lightningConfig.switchToLightning();
 
 //Navigate to servicemax setup and setup required process.

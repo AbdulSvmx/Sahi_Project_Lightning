@@ -14,7 +14,7 @@ var $exprsnName = $bo_act_common.generateRandomName("Header_Exprsn");
 var $advancedExprsn = "1 and ((2 or 3) and (4 or 5))";
 var $err = "This record does not satisfy the qualification criteria.";
 var $currentWizardName = $wizardName[5];
-$bo_act_login.login($g_url,$sfmUsn,$sfmPwd);
+$bo_act_login.login($g_url,$sfmlUsn,$sfmlPwd);
 $sfm_act_lightningConfig.switchToLightning();
 _setSpeed(3000);
 $bo_act_navigation.navigateToSfmTransactionDesigner();
