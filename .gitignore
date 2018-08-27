@@ -32,3 +32,4 @@ svmx/test_lab/test_suites/tempExec/janaki_temp.suite
 tuesday.sah
 svmx/test_lab/test_suites/sfmDelivery/SFMDelivery_DVRTestCases.suite
 svmx/test_lab/test_suites/tempExec/janaki_temp.suite
+svmx/test_lab/test_cases/sfmDelivery/RS_10466.sah
