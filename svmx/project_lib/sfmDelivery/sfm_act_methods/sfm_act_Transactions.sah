@@ -562,7 +562,8 @@ var $sfm_act_Transactions = new function sfm_act_Transactions() {
 	
 	this.addSearchDisplay = function($fields){
 		var $element = "";
-		var $maximum = _fetch(_f("main").s_vscrollbar(1).get("maximum"));
+		var $maximum = _fetch(_f("main").s_vscrollbar(7).get("maximum"));
+		_log($maximum);
 		var $val=0;
 		for(var $i=0;$i<$fields.length;$i++){
 			$element=_f("main").s_label($fields[$i]);
@@ -572,7 +573,7 @@ var $sfm_act_Transactions = new function sfm_act_Transactions() {
 			                                break;
 			                }else {
 			                                $val= $val+200;
-			                _call(_f("main").s_vscrollbar(1).set("value",$val));
+			                _call(_f("main").s_vscrollbar(7).set("value",$val));
 			                
 			}
 

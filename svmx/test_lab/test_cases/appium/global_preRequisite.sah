@@ -59,6 +59,7 @@ $sfm_act_sfSetup.addPhoneField($phone);
 $sfm_act_sfSetup.addTextAreaField($textArea);
 $sfm_act_sfSetup.addURLField($URL);
 
+//Adding permission to custom object
 $sfm_act_lightningConfig.addPermissionToCustomObject("Profiles", "Automation Service User","Auto_Custom_Object2");
 
  //Added for Scenario 2--Create New Custom Search.
