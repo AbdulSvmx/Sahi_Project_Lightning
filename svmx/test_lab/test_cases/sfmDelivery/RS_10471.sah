@@ -13,7 +13,7 @@ var $containerName = [];
 var $fieldName=[];
 var $missingStdDataTypes = ["URL","Picklist (Multi-Select)","Percent","Phone","Date","Date"];
 var $customFieldsNames = ["Automation URL","Automation multipicklist","Automation Percent","Automation Phone","Automation Date2","Automation Date3"];
-var $fieldsToMap = ["Account","Contact","Record Type ID","Clock Paused Forever","Proforma Invoice Amount","Scheduled Date","Automation Date2","Automation Date3","First Queued DateTime","Started Driving To Location Date Time","Completed Date Time","Finished Onsite Date Time","Group Email","Automation multipicklist","Estimated Duration","Automation Percent","Automation Phone","Order Status","City","Street","Problem Description","Automation URL"];
+var $fieldsToMap = ["Account","Contact","Record Type","Clock Paused Forever","Proforma Invoice Amount","Scheduled Date","Automation Date2","Automation Date3","First Queued DateTime","Started Driving To Location Date Time","Completed Date Time","Finished Onsite Date Time","Group Email","Automation multipicklist","Estimated Duration","Automation Percent","Automation Phone","Order Status","City","Street","Problem Description","Automation URL"];
 var $containerName = ["Order Status","Order Status","Order Status","Order Status","Order Status","Order Status","Order Status","Order Status","Order Status","Order Status","Order Status","Order Status","Order Status"];
 var $currentWizardName = $wizardName[4];
 var $productName = "Chrome";
@@ -31,7 +31,7 @@ var $mapName = $processName + "mp";
 
 //**************************************************************************************
 //Login and switch to lightning
-//$bo_act_login.login($g_url,$bac_un,$bac_pwd);
+
 $bo_act_login.login($g_url,$sfmlUsn,$sfmlPwd);
 $sfm_act_lightningConfig.switchToLightning();
 
@@ -43,10 +43,7 @@ _selectWindow();
 
 //Create work order
 var $wo_number = $sfm_act_createCustomWizard.createWowithdateliterals();
-var $x = $fieldsToMap.indexOf("Record Type ID");
-if($x != -1) {
-		$fieldsToMap[$x] = "Record Type";
-}
+
 
 //Find missing fields in Work Order Page Layout and them to the layout
 for($i=0;$i<$fieldsToMap.length;$i++){
@@ -64,6 +61,20 @@ if($fieldsAbsentInPage.length > 0){
 	_closeWindow();
 	_selectWindow();
 }
+
+
+var $x = $fieldsToMap.indexOf("Record Type");
+if($x != -1) {
+		$fieldsToMap[$x] = "Record Type ID";
+}
+
+$sfm_act_lightningConfig.logoutInLightning();
+//Login and switch to lightning
+
+$bo_act_login.login($g_url,$sfmlUsn,$sfmlPwd);
+$sfm_act_lightningConfig.switchToLightning();
+
+//**************************************************************************************************
 //Navigate to servicemax setup and setup required process.
 //Clone standard process and add the dependent picklist in the screen designer
 $sfm_act_SFM.cloneTDM016($process_to_clone,$processName,$isCustom,$pageLayoutName, $sfmTemplate, $fieldName, $containerName);
@@ -77,11 +88,13 @@ for($i=0;$i<$fieldsToMap.length;$i++){
 }
 _click($bo_pg_sfmTransactionAndDesigner.btn_quickSave);
 _click($bo_pg_sfmTransactionAndDesigner.btn_quickSave1);
-
+_selectDomain();
 var $x = $fieldsToMap.indexOf("Record Type ID");
 if($x != -1) {
 		$fieldsToMap[$x] = "Record Type";
 }
+
+
 $textLabels = ["Account","Contact","Proforma Invoice Amount","Group Email","Estimated Duration","Automation Percent","Automation Phone","City","Street","Problem Description","Automation URL"];
 $textValues = ["HCSAccountForTesting","Jason Smith","4500","group123@group.com","34","45","2345401","Bengaluru","123 somewhere somehow somewat","This washing machine stopped working","www.google.com"];
 $picklistLabels = ["Record Type ID","Clock Paused Forever","Scheduled Date","Automation Date2","Automation Date3","First Queued DateTime","Started Driving To Location Date Time","Completed Date Time","Finished Onsite Date Time","Automation multipicklist","Order Status"];

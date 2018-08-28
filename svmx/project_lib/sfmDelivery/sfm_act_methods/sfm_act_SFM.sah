@@ -30,7 +30,9 @@ var $sfm_act_SFM = new function sfm_act_SFM() {
 		_wait(5000);
 		//_click($bo_pg_sfmTransactionAndDesigner.btn_quickSave1);
 		//_wait(3000);
-		$sfm_act_SFM.addFieldToScreen($fieldName, $containerName);
+		if($fieldName.length > 0){
+			$sfm_act_SFM.addFieldToScreen($fieldName, $containerName);
+		}
 	};
 	
 	/**
