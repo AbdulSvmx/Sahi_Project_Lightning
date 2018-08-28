@@ -411,12 +411,19 @@ var $sfm_act_Transactions = new function sfm_act_Transactions() {
 	
 	
 // End Safi
-	
-	this.addLookupContext = function(){
-		_click(_f("main").s_checkbox("Override Context"));
-		_setSelected(_f("main").s_combobox("/ComboBox/").rightOf(_f("main").formitemlabel("Context")),"Account");
-//		_wait(5000);
-		_setSelected(_f("main").s_combobox("/ComboBox/").rightOf(_f("main").formitemlabel("Matching Field")),"Account ID");
+	/**
+	 * Author		:	Anand Kakhandaki
+	 * Function		:	To setup context loopup for selected field
+	 * Parameters	:	$contextSourceObj,$overrideContext,$contextObj,$matchingField
+	 * Examples		:	Refer RS_10445.sah
+	 */
+	this.addLookupContext = function($contextSourceObj,$overrideContext,$contextObj,$matchingField){
+		_setSelected($sfm_pg_sfmDesigner.sel_ContextSource,$contextSourceObj);
+		if ($overrideContext) {
+			_click($sfm_pg_sfmDesigner.chk_OverrideContext);
+		}
+		_setSelected($sfm_pg_sfmDesigner.sel_Context,$contextObj);
+		_setSelected($sfm_pg_sfmDesigner.sel_matchinField,$matchingField);
 	};
 	
 	this.newSfm10429 = function($sfmName) {

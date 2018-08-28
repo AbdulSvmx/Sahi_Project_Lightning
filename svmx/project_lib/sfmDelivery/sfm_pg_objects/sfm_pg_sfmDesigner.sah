@@ -108,9 +108,27 @@ var $sfm_pg_sfmDesigner = new function sfm_pg_sfmDesigner() {
 	this.lbl_recentItemProducts=_div("Recent Items: Products");
 	this.lbl_account=_span("Account",_in(this.window_partsSearchWindow));
 	this.txt_accountTextbox=_textbox("/inputEl/",_near(this.lbl_account));
+	this.lbl_autoContact=_span("AutoContact",_in(this.window_partsSearchWindow));
+	this.txt_autoContactTextbox=_textbox("/inputEl/",_near(this.lbl_autoContact));
+	
+	
 	
 	this.link_Update=_link("Update");
 	this.link_quickSave=_link("Quick Save");
+	
+	this.link_accountInDVR=_link("Account",_in(_div("Account: Multiple items found. Click lookup icon to refine search.")));
+	this.btn_searchIconInSFM=_div("/trigger-search/",_in(_div("/sfm-lookupcelleditor/")));
+	this.link_searchLink=_link("Search");
+	this.btn_searchTextBox=_textbox("/sfm-text/",_near(this.link_searchLink));	
+	
+	this.link_autoContactInDVR=_link("AutoContact",_in(_div("AutoContact: Multiple items found. Click lookup icon to refine search.")))
+	this.txt_autoContactTextBoxInSFM=_div("/grid-cell/",_under(_parentNode(_span("AutoContact"),"DIV",4)));
+	
+	this.sel_ContextSource=_f("main").s_combobox("/ComboBox/").rightOf(_f("main").uiftetextfield("Context Source"));
+	this.chk_OverrideContext=_f("main").s_checkbox("Override Context");
+	this.sel_Context=_f("main").s_combobox("/ComboBox/").rightOf(_f("main").uiftetextfield("Context"));
+	this.sel_matchinField=_f("main").s_combobox("/ComboBox/").rightOf(_f("main").uiftetextfield("Matching Field"));
+	
 	
 	//Extended edit page objects --Labor
 	
