@@ -500,4 +500,46 @@ return $result;
 		_wait(3000, _isVisible($bo_pg_sfmTransactionAndDesigner.label_pageSaved));
 		
 	};
+	
+	/**
+	 * Author		:	Anand Kakhandaki
+	 * Function		:	To search and add items on header object lookup field
+	 * Parameters	:	$object= Name of object on the header. Ex: case on the Work order 
+	 * 					$searchObject= Name of the item need to be searched
+	 * Returns		: 	Nothing
+	 * Example		: 	Refer RS_10431.sah for funtion usage
+	 */
+	this.searchAndAddHeaderField=function($object,$searchObject){
+		this.searchHeaderField($object, $searchObject);
+		_click(_link($searchObject));
+		_wait();
+		var $appendedValue=_getText(_textbox("/inputEl/",_near(_span($object))));
+		if ($appendedValue==$searchObject) {
+			_log("Pass");
+		}else{
+			_log("fail");
+		}
+	};
+	
+	/**
+	 * Author		:	Anand Kakhandaki
+	 * Function		:	To search items on header object lookup field
+	 * Parameters	:	$object= Name of object on the header. Ex: case on the Work order 
+	 * 					$searchObject= Name of the item need to be searched
+	 * Returns		: 	Nothing
+	 * Example		: 	Refer RS_10431.sah for funtion usage
+	 */
+	this.searchHeaderField=function($object,$searchObject){
+		_click(_div("/trigger-search/",_in(_div($object))));
+		_wait(5000,_isVisible($sfm_pg_wizards.lbl_searchWindowLabel));
+		_setValue($sfm_pg_wizards.txt_searchObj,$searchObject);
+		_click($sfm_pg_wizards.btn_objectSearch);
+		_wait(5000,_isVisible(_link($searchObject)));
+		if (_exists(_link($searchObject))) {
+			_log("Pass");
+		}
+		else{
+			_log("Fail");
+		}
+	};
 };
