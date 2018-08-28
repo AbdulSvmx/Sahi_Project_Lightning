@@ -93,11 +93,42 @@ var $sfm_pg_sfmDesigner = new function sfm_pg_sfmDesigner() {
 	this.txt_eeReceivedStreet = _textarea(0,_near(_span("Received Street",_in(_div("/sfm-window/")))));//Changed for Lightning
 	this.btn_eeUpdate = _span("Update",_in(_div("/sfm-window/"))); //Changed for Lightning;
 	this.btn_eeCancel = _span("/Cancel/",_in(_div("/sfm-window/"))); //Changed for Lightning;
+	this.txt_eeDateReceived = _textbox("/svmx-date/",_near(_span("Date Received",_in(_div("/sfm-window/")))));
 
 	this.txt_eeEstimatedPricePerUnit= _textbox(0,_near(_span("/Estimated Price Per Unit/",_in(_div("/sfm-window/")))));//Changed for Lightning
 	this.txt_eeReceivedCity =_textbox("Received City",_in(_div("/sfm-window/")));//Changed for Lightning
 	this.txt_eeReferenceInformation =_textarea(0,_near(_span("Reference Information",_in(_div("/sfm-window/"))))); //Changed for Lightning
 	this.txt_eeActivityType = _textbox("/sfm-picklist/",_near(_span("Activity Type",_in(_div("/sfm-window/"))))); //Changed for Lightning -- this needs to clicked and then click on the list item to set activity type
+	this.txt_eeAccount = _textbox("/svmx-text/",_near(_span("Account",_in(_div("/sfm-window/"))))); //added for lightning
+	
+	this.window_partsSearchWindow=_parentNode(_div("Parts"),"DIV",5);
+	this.lbl_part=_span("Part",_in(this.window_partsSearchWindow));
+	this.txt_partTextbox=_textbox("/inputEl/",_near(this.lbl_part));
+	this.searchPartIcon=_div("/trigger-search/",_near(this.lbl_part));
+	this.lbl_recentItemProducts=_div("Recent Items: Products");
+	this.lbl_account=_span("Account",_in(this.window_partsSearchWindow));
+	this.txt_accountTextbox=_textbox("/inputEl/",_near(this.lbl_account));
+	this.lbl_autoContact=_span("AutoContact",_in(this.window_partsSearchWindow));
+	this.txt_autoContactTextbox=_textbox("/inputEl/",_near(this.lbl_autoContact));
+	
+	
+	
+	this.link_Update=_link("Update");
+	this.link_quickSave=_link("Quick Save");
+	
+	this.link_accountInDVR=_link("Account",_in(_div("Account: Multiple items found. Click lookup icon to refine search.")));
+	this.btn_searchIconInSFM=_div("/trigger-search/",_in(_div("/sfm-lookupcelleditor/")));
+	this.link_searchLink=_link("Search");
+	this.btn_searchTextBox=_textbox("/sfm-text/",_near(this.link_searchLink));	
+	
+	this.link_autoContactInDVR=_link("AutoContact",_in(_div("AutoContact: Multiple items found. Click lookup icon to refine search.")))
+	this.txt_autoContactTextBoxInSFM=_div("/grid-cell/",_under(_parentNode(_span("AutoContact"),"DIV",4)));
+	
+	this.sel_ContextSource=_f("main").s_combobox("/ComboBox/").rightOf(_f("main").uiftetextfield("Context Source"));
+	this.chk_OverrideContext=_f("main").s_checkbox("Override Context");
+	this.sel_Context=_f("main").s_combobox("/ComboBox/").rightOf(_f("main").uiftetextfield("Context"));
+	this.sel_matchinField=_f("main").s_combobox("/ComboBox/").rightOf(_f("main").uiftetextfield("Matching Field"));
+	
 	
 	//Extended edit page objects --Labor
 	

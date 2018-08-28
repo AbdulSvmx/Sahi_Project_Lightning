@@ -4,7 +4,7 @@ $searchName = $bo_act_common.generateRandomName("OnlineSecondLevelNavigation_");
 $searchObject = "Work Order";
 $exprsnVal = "";
 $sheetName = "rs_6344";
-$bo_act_login.login($g_url,$sfmUsn,$sfmPwd);
+$bo_act_login.login($g_url,$sfmlUsn,$sfmlPwd);
 $caseId = $sfm_act_createCustomWizard.createCase();
 $workOrder = $sfm_act_createCustomWizard.createWoFor6344($caseId);
 _log($workOrder);

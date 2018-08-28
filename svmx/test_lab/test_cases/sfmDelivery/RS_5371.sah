@@ -14,7 +14,7 @@ $clicks = 6;
 $exprsnVal = "";
 $sheetName = "rs_5371";
 $workOrder = "";
-$bo_act_login.login($g_url,$sfmUsn,$sfmPwd);
+$bo_act_login.login($g_url,$sfmlUsn,$sfmlPwd);
 $workOrder = $sfm_act_createCustomWizard.createWoFor5371();
 $bo_act_navigation.navigateToSfmSearchDesigner();
 $sfm_act_search.newCustomSearch($searchName,$searchObject);

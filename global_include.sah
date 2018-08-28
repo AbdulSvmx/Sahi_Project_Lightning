@@ -69,6 +69,9 @@ var $sfmPwd = "Maxplore4";
  var $sfmClientId ="YjkyMzJmNDUzMGNmOTYzODVlNDQ0ZjE2OTUxOTU1NDI5MGViN2I3NWU3YTFjNmY300D290000000WVC";
  var $sfmConsumerSecret = "5287076090725084260";
  var $sfmOrgInstance = "cs19";
+ 
+ var $sfmlUsn = "sfdl_auto@automation.com";
+ var $sfmlPwd ="Maxplore2";
 
 // DC Global Variables
 var $dc_org = $orgtype;
@@ -87,7 +90,7 @@ var $swatPwd = "maxpl0re";
 
 
 // Appium
-var $appiumPath = "/auto/SVMX_Catalyst/Executable";
+var $appiumPath = "/auto/SVMX_Catalyst/Executable/";
 var $sahiIntermediatoryPath = "sahiResultCommon.txt";
 
 var $appiumAdminUn="meghana.automation@servicemax.com";

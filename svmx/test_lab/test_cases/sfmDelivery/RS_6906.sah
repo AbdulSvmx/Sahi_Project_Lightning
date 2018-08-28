@@ -8,7 +8,7 @@ $processName = "Manage Work Order Lines - Usage";
 $containerName = ["Parts","Parts"];
 $fieldName = ["Account","AutoContact"];
 $sfmtemplate = "SVMXSTD: Manage WO Usage Lines";
-$bo_act_login.login($g_url,$sfmUsn,$sfmPwd);
+$bo_act_login.login($g_url,$sfmlUsn,$sfmlPwd);
 $bo_act_navigation.navigateToSfmTransactionDesigner();
 $sfm_act_SFM.cloneTDM016($processName, $sfmName, false, $sfmPgLayoutName,$sfmtemplate, $fieldName, $containerName);
 _click($bo_pg_sfmTransactionAndDesigner.btn_finalQuickSave);

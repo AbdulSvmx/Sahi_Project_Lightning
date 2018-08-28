@@ -152,6 +152,21 @@ var $sfm_act_Transactions = new function sfm_act_Transactions() {
 			_click($bo_pg_sfmTransactionAndDesigner.btn_finalQuickSave);
 
 		};
+		
+		/**
+		 * Author		:	Anand Kakhandaki
+		 * Function		: 	This function setup lookup for selected object
+		 * Parameter	:	$object=Name of the object on which lookup need to be configured
+		 * 					$lookupTempName = Any existing standard lookup Name
+		 * 					$fieldCombo = Array of search object fields name/Api name(if servicemax fields)
+		 * 					$conditionsCombo = Array of conditions
+		 * 					$operandTypeCombo = Array of Operand type
+		 * 					$operandValue = Array of Operand type
+		 * 					$lookupAdvExpr = Advance Expression
+		 * 					$lookUpName = lookup name
+		 * 					$nearBy = name of child object where object lookup is to configure. if case field is in part childline please select Parts
+		 * Example		: 	Refer RS_10431 for function usage
+		 */
 		this.createLookUp=function($object,$lookupTempName,$fieldCombo,$conditionsCombo,$operandTypeCombo,$operandValue,$lookupAdvExpr,$lookUpName,$nearBy){
 			_setStrictVisibilityCheck(true);
 			
@@ -396,12 +411,19 @@ var $sfm_act_Transactions = new function sfm_act_Transactions() {
 	
 	
 // End Safi
-	
-	this.addLookupContext = function(){
-		_click(_f("main").s_checkbox("Override Context"));
-		_setSelected(_f("main").s_combobox("/ComboBox/").rightOf(_f("main").formitemlabel("Context")),"Account");
-//		_wait(5000);
-		_setSelected(_f("main").s_combobox("/ComboBox/").rightOf(_f("main").formitemlabel("Matching Field")),"Account ID");
+	/**
+	 * Author		:	Anand Kakhandaki
+	 * Function		:	To setup context loopup for selected field
+	 * Parameters	:	$contextSourceObj,$overrideContext,$contextObj,$matchingField
+	 * Examples		:	Refer RS_10445.sah
+	 */
+	this.addLookupContext = function($contextSourceObj,$overrideContext,$contextObj,$matchingField){
+		_setSelected($sfm_pg_sfmDesigner.sel_ContextSource,$contextSourceObj);
+		if ($overrideContext) {
+			_click($sfm_pg_sfmDesigner.chk_OverrideContext);
+		}
+		_setSelected($sfm_pg_sfmDesigner.sel_Context,$contextObj);
+		_setSelected($sfm_pg_sfmDesigner.sel_matchinField,$matchingField);
 	};
 	
 	this.newSfm10429 = function($sfmName) {
