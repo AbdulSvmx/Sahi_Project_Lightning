@@ -47,8 +47,6 @@
 	        </sequential>
 	    </target>
 
-	   <!-- <target name="runchrome" depends="runtestschrome">
-	    </target>-->
 	
 	<target name="set_properties_chrome" depends="set_timestamp">
     	<property name="scriptDir" value="scripts/Sahi_Project_Lightning/"/>
