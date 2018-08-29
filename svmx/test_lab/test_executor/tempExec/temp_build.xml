@@ -35,7 +35,7 @@
 	                    <http url="http://localhost:9999/_s_/spr/blank.htm"/>
 	                </waitfor>
 	                <antcall target="runtestschrome"/>
-	            	   <!-- <antcall target="stopandfail"/>-->
+	            	   <antcall target="stopandfail"/>
 	            </sequential>
 	        </parallel>
 	    </target>
