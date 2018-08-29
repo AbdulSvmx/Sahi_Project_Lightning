@@ -94,9 +94,9 @@
 			threads="${threads}"
 			jsCodeCoverage="${jsCodeCoverage}">
 			<!-- Offline reports -->
-			<report type="junit" logdir="C://var//lib//jenkins//workspace//sahi_executions//logs//junit"/>	
-			<report type="html" logdir="C://var//lib//jenkins//workspace//sahi_executions//logs//html"/>
-			<report type="excel" logdir="C://var//lib//jenkins//workspace//sahi_executions//logs//excel"/>		
+			<report type="junit" logdir="C://var//lib//jenkins//workspace//sahi_executions_workbench//logs//junit"/>	
+			<report type="html" logdir="C://var//lib//jenkins//workspace//sahi_executions_workbench//logs//html"/>
+			<report type="excel" logdir="C://var//lib//jenkins//workspace//sahi_executions_workbench//logs//excel"/>		
 			</sahi>
 		<antcall target="retryfailedchrome"/>
 			</target>
@@ -122,7 +122,7 @@
 					threads="1"
 					jsCodeCoverage="${jsCodeCoverage}">
 					<!-- Offline reports -->
-					<report type="html" logdir="C://var//lib//jenkins//workspace//sahi_executions//logs//html//retry"/>
+					<report type="html" logdir="C://var//lib//jenkins//workspace//sahi_executions_workbench//logs//html//retry"/>
 				</sahi>
 				<antcall target="stopandfail"/>
 			</target>
