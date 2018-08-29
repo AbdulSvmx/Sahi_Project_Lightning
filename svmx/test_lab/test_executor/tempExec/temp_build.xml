@@ -34,8 +34,8 @@
 	                <waitfor maxwait="1" maxwaitunit="minute" checkevery="100">
 	                    <http url="http://localhost:9999/_s_/spr/blank.htm"/>
 	                </waitfor>
-	                <antcall target="runchrome"/>
-	                <antcall target="stopandfail"/>
+	                <antcall target="runtestschrome"/>
+	            	   <antcall target="stopandfail"/>
 	            </sequential>
 	        </parallel>
 	    </target>
@@ -47,8 +47,6 @@
 	        </sequential>
 	    </target>
 
-	    <target name="runchrome" depends="runtestschrome">
-	    </target>
 	
 	<target name="set_properties_chrome" depends="set_timestamp">
     	<property name="scriptDir" value="scripts/Sahi_Project_Lightning/"/>
@@ -67,8 +65,8 @@
 		<property name="singlesession" value="true"/>
 		<property name="threads" value="1"/>
 		<property name="showPeriodicSummary" value="true"/>
-		<property name="failedSuiteName" value="op_demo_failed_${browser}.suite"/>
-		<property name="failedSuite" value="svmx/test_lab/test_suites/optimax/${failedSuiteName}"/>
+		<property name="failedSuiteName" value="temp_failed_${browser}.suite"/>
+		<property name="failedSuite" value="svmx/test_lab/test_suites/temp/${failedSuiteName}"/>
 		<property name="jsCodeCoverage" value="false"/>
 	</target>
 
@@ -94,9 +92,9 @@
 			threads="${threads}"
 			jsCodeCoverage="${jsCodeCoverage}">
 			<!-- Offline reports -->
-			<report type="junit" logdir="C://var//lib//jenkins//workspace//sahi_executions//logs//junit"/>	
-			<report type="html" logdir="C://var//lib//jenkins//workspace//sahi_executions//logs//html"/>
-			<report type="excel" logdir="C://var//lib//jenkins//workspace//sahi_executions//logs//excel"/>		
+			<report type="junit" logdir="C://var//lib//jenkins//workspace//sahi_executions_workbench//logs//junit"/>	
+			<report type="html" logdir="C://var//lib//jenkins//workspace//sahi_executions_workbench//logs//html"/>
+			<report type="excel" logdir="C://var//lib//jenkins//workspace//sahi_executions_workbench//logs//excel"/>		
 			</sahi>
 		<antcall target="retryfailedchrome"/>
 			</target>
@@ -122,9 +120,11 @@
 					threads="1"
 					jsCodeCoverage="${jsCodeCoverage}">
 					<!-- Offline reports -->
-					<report type="html" logdir="C://var//lib//jenkins//workspace//sahi_executions//logs//html//retry"/>
+					<report type="html" logdir="C://var//lib//jenkins//workspace//sahi_executions_workbench//logs//html//retry"/>
 				</sahi>
+				<antcall target="stopandfail"/>
 				<antcall target="failsahichrome"/>
+				
 			</target>
 
 		    <target name="failsahichrome" depends="set_properties_chrome" if="sahi.retry.failed.${browser}">

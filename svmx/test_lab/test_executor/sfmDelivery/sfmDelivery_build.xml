@@ -34,8 +34,8 @@
 	                <waitfor maxwait="1" maxwaitunit="minute" checkevery="100">
 	                    <http url="http://localhost:9999/_s_/spr/blank.htm"/>
 	                </waitfor>
-	                <antcall target="runchrome"/>
-	                <antcall target="stopandfail"/>
+	                <antcall target="runtestschrome"/>
+	            	   <antcall target="stopandfail"/>
 	            </sequential>
 	        </parallel>
 	    </target>
@@ -47,8 +47,7 @@
 	        </sequential>
 	    </target>
 
-	    <target name="runchrome" depends="runtestschrome">
-	    </target>
+	
 	
 	<target name="set_properties_chrome" depends="set_timestamp">
     	<property name="scriptDir" value="scripts/Sahi_Project_Lightning/"/>
@@ -124,6 +123,7 @@
 							<!-- Offline reports -->
 							<report type="html" logdir="C://var//lib//jenkins//workspace//sahi_executions//logs//html//retry"/>
 						</sahi>
+						<antcall target="stopandfail"/>
 						<antcall target="failsahichrome"/>
 					</target>
 
