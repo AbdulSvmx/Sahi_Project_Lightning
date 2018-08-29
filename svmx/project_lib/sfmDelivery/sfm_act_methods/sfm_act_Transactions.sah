@@ -839,7 +839,15 @@ var $sfm_act_Transactions = new function sfm_act_Transactions() {
 					_setValue($sfm_pg_screenDesigner.txt_advExpr,$advExpr);
 					_setValue($sfm_pg_screenDesigner.txt_errMsg,$errMsg);	
 			};
-		
+			
+			/**
+			 * Author		:	Anand Kakhandaki
+			 * Function		: 	To get expression's row values created on the selected object
+			 * Parameter	:	$$object = Name of object on which expression is created
+			 * 					$exprsnName = Name of Expression
+			 * Returns		:	Retiurns the array of combofiled's, condtion's and input value's array
+			 * Example		:	Refer RS_10458.sah file for function usage
+			 */
 			this.getExpressionValues=function($object,$exprsnName){
 				_setSelected($sfm_pg_expressions.sel_object,$object);
 				_wait(10000,_isEnabled($sfm_pg_expressions.btn_selectExpression));

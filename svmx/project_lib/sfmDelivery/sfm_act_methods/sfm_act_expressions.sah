@@ -8,6 +8,12 @@ var $sfm_act_expressions = new function sfm_act_expressions() {
 		_wait(15000,_isVisible($sfm_pg_expressions.sel_object));
 	};
 	
+	/**
+	 * Author		:	Anand Kakhandaki
+	 * Function		: 	To select Object and click on new button in the create new expression page
+	 * Parameter	:	$object: Object name on which expression need to create
+	 * Example		:	Refer RS_10458.sah file for function usage
+	 */
 	this.newCustomAction = function($object){
 		_setSelected($sfm_pg_expressions.sel_object,$object);
 		_click($sfm_pg_expressions.btn_new);
@@ -69,7 +75,19 @@ var $sfm_act_expressions = new function sfm_act_expressions() {
 
 	
 };
-	
+	/**
+	 * Author		:	Anand Kakhandaki
+	 * Function		: 	To create expression on the selected object
+	 * Parameter	:	$object = name of object on which expression need to be created
+	 * 					$comboField = Array of fields name
+	 * 					$comboConditions = Array of Condition
+	 * 					$toggleButton = Array of Yes/"", If need to click on toggle button the pass yes else just pass ""
+	 * 					$comboInput = Array of Input value
+	 * 					$advExpr = Advance expression
+	 * 					$errMsg = Error message
+	 * 					$exprsnName = Name of the expression
+	 * Example		:	Refer RS_10458.sah file for function usage
+	 */
 	this.createCustomExpression=function($object,$comboField,$comboConditions,$toggleButton,$comboInput,$advExpr,$errMsg,$exprsnName){
 		_setSelected($sfm_pg_expressions.sel_object,$object);
 		_wait(10000,_isEnabled($sfm_pg_expressions.btn_selectExpression));
@@ -81,10 +99,18 @@ var $sfm_act_expressions = new function sfm_act_expressions() {
 	};
 
 
-
+	/**
+	 * Author		:	Anand Kakhandaki
+	 * Function		: 	To add row to expression on the selected object
+	 * Parameter	:	$comboField = Array of fields name
+	 * 					$comboConditions = Array of Condition
+	 * 					$toggleButton = Array of Yes/"", If need to click on toggle button the pass yes else just pass ""
+	 * 					$comboInput = Array of Input value
+	 * Example		:	Refer RS_10458.sah file for function usage
+	 */
 	this.addExpressionRows=function($comboField,$comboConditions,$toggleButton,$comboInput){
 		for (var $i = 0; $i < $comboField.length-2; $i++) {
-			_log("Add row: "+$i);
+			//_log("Add row: "+$i);
 			_click($sfm_pg_expressions.btn_plus);
 		}
 		var $ele=null;
@@ -92,10 +118,10 @@ var $sfm_act_expressions = new function sfm_act_expressions() {
 		var $index=null;
 		var $temp=null;
 		for (var $i = 1; $i <= $comboField.length; $i++) {
-			_log("$i value: "+$i);
+			//_log("$i value: "+$i);
 			$temp=$i;
 			$index=$temp-1;
-			_log("index: "+$index);
+			//_log("index: "+$index);
 			_setSelected($sfm_pg_expressions.sel_comboField.near(_f("SFMExpressionBuilderSWF").s_label($i.toString())),$comboField[$index]);
 			_setSelected($sfm_pg_expressions.sel_comboConditions.near(_f("SFMExpressionBuilderSWF").s_label($i.toString())), $comboConditions[$index]);
 			if ($comboConditions[$index]!=="Is Null"&&$comboConditions[$index]!=="Is Not Null") {
