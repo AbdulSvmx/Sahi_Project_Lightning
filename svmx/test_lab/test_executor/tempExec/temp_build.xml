@@ -129,7 +129,6 @@
 
 		    <target name="failsahichrome" depends="set_properties_chrome" if="sahi.retry.failed.${browser}">
 		        <fail message="Sahi tests failed on browser ${browser}!"/>
-		    	<antcall target="stopandfail"/>
 		    </target>		
 </project>
 
