@@ -35,7 +35,7 @@
 	                    <http url="http://localhost:9999/_s_/spr/blank.htm"/>
 	                </waitfor>
 	                <antcall target="runtestschrome"/>
-	                <antcall target="stopandfail"/>
+	            	   <!-- <antcall target="stopandfail"/>-->
 	            </sequential>
 	        </parallel>
 	    </target>
@@ -67,8 +67,8 @@
 		<property name="singlesession" value="true"/>
 		<property name="threads" value="1"/>
 		<property name="showPeriodicSummary" value="true"/>
-		<property name="failedSuiteName" value="op_demo_failed_${browser}.suite"/>
-		<property name="failedSuite" value="svmx/test_lab/test_suites/optimax/${failedSuiteName}"/>
+		<property name="failedSuiteName" value="temp_failed_${browser}.suite"/>
+		<property name="failedSuite" value="svmx/test_lab/test_suites/temp/${failedSuiteName}"/>
 		<property name="jsCodeCoverage" value="false"/>
 	</target>
 
@@ -124,7 +124,7 @@
 					<!-- Offline reports -->
 					<report type="html" logdir="C://var//lib//jenkins//workspace//sahi_executions//logs//html//retry"/>
 				</sahi>
-				<antcall target="failsahichrome"/>
+				<antcall target="stopandfail"/>
 			</target>
 
 		    <target name="failsahichrome" depends="set_properties_chrome" if="sahi.retry.failed.${browser}">
