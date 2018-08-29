@@ -56,8 +56,7 @@ $rs_10464.start();
 	var $profile="";
 	var $handOver=false;
 	$sfm_act_wizards.addToWizard($wizardObject, $wizardName1, $wizardType, $sfmName, $handOver, $profile);  
-	
-
+		
 	//create WO & WD
 	var $WO=createWO_RS10464("Open", 1, 2);
 	
@@ -68,11 +67,9 @@ $rs_10464.start();
 	var $WorkDetailLabor=addWorkDetailLine("Usage/Consumption", "Labor", 20, 1, 2,$WDlaborName);
 	
 	$sfm_act_common.globalSearchInLightning($WO);
-	//var $sfmName="rs_10464_1282018111327";
 	_setStrictVisibilityCheck(true);
 	$sfm_act_createCustomWizard.clickWizardBtn($sfmName);
 	_assertExists(_div("/"+$sfmName+"/"));
-	//_assertExists($sfm_pg_screenDesigner.link_Parts);
 	_click($sfm_pg_screenDesigner.link_Parts);
 	_assertExists(_div($WDpartName,_in(_div("SFMCompositeGrid1-bodyWrap"))));
 	_click($sfm_pg_screenDesigner.link_Labor);
@@ -83,8 +80,8 @@ $rs_10464.start();
 	
 	//Edit WD
 	$sfm_act_common.globalSearchInLightning($WO);
-	editWorkDetailLine($WorkDetailPart,"Parts", 8, 6, 7);
-	editWorkDetailLine($WorkDetailLabor,"Labor", 8, 6, 7);
+	editWorkDetailLine($WorkDetailPart,"Parts", 8, 3, 3);
+	editWorkDetailLine($WorkDetailLabor,"Labor", 8, 3, 3);
 	
 	$sfm_act_common.globalSearchInLightning($WO);
 	_setStrictVisibilityCheck(true);
@@ -96,7 +93,6 @@ $rs_10464.start();
 	_setStrictVisibilityCheck(false);
 	
 	
-
 	//Edit WO
 	$sfm_act_common.globalSearchInLightning($WO);
 	_click($sfm_pg_wo.btn_wo_edit);
@@ -113,7 +109,6 @@ $rs_10464.start();
 	_selectDomain();
 	
 	//** function to create Work**'
-	
 function createWO_RS10464($orderStatus,$WOactualResoFD,$WOactualRestoFD){
 		_selectDomain();
 		_wait(3000);
@@ -154,7 +149,7 @@ function addWorkDetailLine($recordType,$lineType,$lineQTY,$WDcancelFD, $WDcloseF
 		_setStrictVisibilityCheck(true);
 		addWDfiledValues($lineType, $lineQTY, $WDcancelFD, $WDcloseFD,$WDpartName);
 		_click($sfm_pg_sfmDesigner.btn_saveWorkDetail);
-		_wait(5000,isVisible($sfm_pg_sfmDesigner.msg_WDCreateConfirm));
+		_wait(15000,_isVisible($sfm_pg_sfmDesigner.msg_WDCreateConfirm));
 		var $WorkDetailName;
 		if ($lineType=="Parts") {
 			$WorkDetailName=_getText(_link("/WL-.*/",_in(_div("/Line Number/")),_near(_span("Parts"))));

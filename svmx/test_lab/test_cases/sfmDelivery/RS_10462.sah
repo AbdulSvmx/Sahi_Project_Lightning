@@ -31,7 +31,7 @@ $rs_10462.start();
 	//Login to App and navigate to sfm transaction and designer page
 	$bo_act_login.login($g_url,$sfmlUsn,$sfmlPwd);
 	$bo_act_navigation.navigateToSfmTransactionDesigner();
-	_wait(5000);
+	_wait(15000,_isVisible($bo_pg_sfmTransactionAndDesigner.btn_newSFM));
 	
 	//Create New SFM Transaction
 	_click($bo_pg_sfmTransactionAndDesigner.btn_newSFM);
@@ -50,9 +50,8 @@ $rs_10462.start();
 	
 	_wait(5000);
 	_click($bo_pg_sfmTransactionAndDesigner.btn_finalQuickSave);
-
+	
 	var $wizardObject="Work Order";
-	//var $wizardName = $bo_act_common.generateRandomName("SFM Wiz");
 	var $wizardName1 =$wizardName[6];
 	var $wizardType="SFM";
 	var $profile="";
@@ -62,10 +61,8 @@ $rs_10462.start();
 
 	
 	var $OrdrStatus="Closed";
-
 	$sfm_act_createCustomWizard.createWOwithOrderStatus($OrdrStatus);
 
-	
 	$sfm_act_createCustomWizard.clickWizardBtn($sfmName);
 	_selectDomain($domainName);
 	_wait(10000,_isVisible(_div($errMsg)));
