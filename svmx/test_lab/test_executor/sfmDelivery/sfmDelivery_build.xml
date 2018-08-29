@@ -14,7 +14,7 @@
 	</target>
 	
 	  <target name="start" >
-	        <exec dir="C:\Sahi_v701\userdata\bin" executable="cmd">
+	        <exec dir="C:\auto\sahi_pro\userdata\bin" executable="cmd">
 	        <arg line="/c start_dashboard.bat"/>
 	    </exec>
 	    </target>
