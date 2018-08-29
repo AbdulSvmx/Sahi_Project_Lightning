@@ -13,6 +13,28 @@
         </tstamp>
 	</target>
 	
+	   <target name="startrun" description="start the server and run sahi tests">
+	        <parallel>
+	            <antcall target="start"/>
+	            <sequential>
+	                <waitfor maxwait="1" maxwaitunit="minute" checkevery="100">
+	                    <http url="http://localhost:9999/_s_/spr/blank.htm"/>
+	                </waitfor>
+	                <antcall target="runchrome"/>
+	                <antcall target="stopandfail"/>
+	            </sequential>
+	        </parallel>
+	    </target>
+
+	    <target name="stopandfail">
+	        <sequential>
+	            <antcall target="stopsahi"/>
+	            <antcall target="failsahi"/>
+	        </sequential>
+	    </target>
+
+	    <target name="runchrome" depends="runtestschrome">
+	    </target>
 	
 	<target name="set_properties_chrome" depends="set_timestamp">
     	<property name="scriptDir" value="scripts/Sahi_Project_Lightning/"/>
