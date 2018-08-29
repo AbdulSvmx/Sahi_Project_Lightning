@@ -30,7 +30,7 @@ var $bo_pg_sfmTransactionAndDesigner = new function bo_pg_sfmTransactionAndDesig
 	this.txt_mapID = _f("main").s_textinput("Input ID Here[2]");
 	this.btn_saveMap = _f("main").s_button("Save[2]");
 
-	 this.txt_standardSfmTransactionQuickFind= _f("main").s_textinput("/searchText/").near(_f("main").tab("Your Custom SFM Transactions")); //updated with relative index to properly identify quick find in standard transactions
+	 this.txt_standardSfmTransactionQuickFind= _f("main").s_textinput("/searchText/").near(_f("main").tab("Standard SFM Transactions")); //updated with relative index to properly identify quick find in standard transactions
     this.btn_standardSfmTransaction= _f("main").tab("Standard SFM Transactions");
     //this.btn_yourCustomSfmTransactions = _f("main").tab("Your Custom Sjavascript:void(0)FM Transactions");
     this.btn_yourCustomSfmTransactions = _f("main").tab("Your Custom SFM Transactions");
@@ -51,7 +51,7 @@ var $bo_pg_sfmTransactionAndDesigner = new function bo_pg_sfmTransactionAndDesig
 	this.txt_sfmSaveTemplateLayoutID=_f("main").s_textinput("Input ID Here[4]");//for OPDoc Template
     this.txt_sfmSavePageLayoutAsId = _f("main").s_textinput("advTxt");
     this.btn_addFieldToPage = _f("main").s_button("Add Field to Page");
-    this.txt_quickFindField = _f("main").s_textinput("searchText").near(_f("main").s_button("Add Field to Page"));
+    this.txt_quickFindField = _f("main").s_textinput("searchText").near(_f("main").s_button("/Add Field/"));
     this.btn_quickSave = _f("main").s_button("Save As[3]");
     this.btn_quickSave1 = _f("main").s_button("Quick Save");
     this.btn_saveAndclose = _f("main").s_button("Save & Close");
@@ -182,6 +182,9 @@ var $bo_pg_sfmTransactionAndDesigner = new function bo_pg_sfmTransactionAndDesig
     //Modified by JJ as this stopped working.
     this.deleteField = function($fieldName) {
     	_click(_f("main").s_button("Remove this field").near(_f("main").uiftetextfield($fieldName)));
+    };
+    this.deleteChildField = function($fieldName){
+    	_click(_f("main").s_button("closeBtn").near(_f("main").s_richtext($fieldName)));
     };
     
     // Added by Harish

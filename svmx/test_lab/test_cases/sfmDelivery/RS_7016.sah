@@ -15,7 +15,7 @@ $pickListValue = "a\nb\nc\nd";
  $sfmName = $bo_act_common.generateRandomName("SFM_Auto_");
  $containerName = ["Work Order"];
  $headersToAdd = ["Case"];
-$bo_act_login.login($g_url,$sfmUsn,$sfmPwd);
+$bo_act_login.login($g_url,$sfmlUsn,$sfmlPwd);
 //$sfm_act_sfSetup.navigateToWoObject();
 //$sfm_act_sfSetup.addCustomTextField($textBox,20);
 //$sfm_act_sfSetup.addCustomPickListField($pickList,$pickListValue);

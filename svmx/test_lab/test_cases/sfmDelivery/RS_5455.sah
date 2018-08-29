@@ -1,7 +1,7 @@
 var $rs_5455 = _testcase("RS_5455","Verify Advanced expression on multiple child tabs");
 $rs_5455.start();
 	$sfmName = $bo_act_common.generateRandomName("SFM_Auto_");
-	$bo_act_login.login($g_url,$sfmUsn,$sfmPwd);
+	$bo_act_login.login($g_url,$sfmlUsn,$sfmlPwd);
 	$bo_act_navigation.navigateToSfmTransactionDesigner();
 	_wait(6000, _isVisible($bo_pg_sfmTransactionAndDesigner.btn_newSFM));
 	_click($bo_pg_sfmTransactionAndDesigner.btn_newSFM);

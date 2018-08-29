@@ -8,7 +8,7 @@ $sfmPgLayoutName =	$bo_act_common.generateRandomName("SFM_Auto_Page");
 $headersToAdd = ["Parts"];
 $lookUpName = $bo_act_common.generateRandomName("Part_lkp_");
 $wizTitle = $bo_act_common.generateRandomName("SFM Wiz");
-$bo_act_login.login($g_url,$sfmUsn,$sfmPwd);
+$bo_act_login.login($g_url,$sfmlUsn,$sfmlPwd);
 $sfm_act_lightningConfig.switchToLightning();
 $bo_act_navigation.navigateToSfmTransactionDesigner();
 _click($bo_pg_sfmTransactionAndDesigner.btn_newSFM);

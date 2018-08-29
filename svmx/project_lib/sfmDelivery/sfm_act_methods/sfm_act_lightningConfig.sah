@@ -184,6 +184,22 @@ this.navigateToCreateCustomObject = function(){
 	_click(_span("Custom Object"));
 }
 
+this.addPermissionToCustomObject = function($searchFor,$profileName,$objectName){
+	//Added by Harish CS
+	$checkboxCount = 6;
+	_click(_div("Setup"));
+	_click(_span("Setup[1]"));
+	_selectWindow("Home | Salesforce");
+	_setValue(_searchbox("Quick Find"),$searchFor);
+	_click(_mark("Profiles"));
+	_selectDomain("cs77.salesforce.com");
+	_selectWindow();
+	_click(_span("/Edit/",_leftOf(_span($profileName))));
+	for(var $i=0;$i<$checkboxCount;$i++){
+		_click(_checkbox($i,_rightOf(_tableHeader($objectName))));
+	}
+	_click(_submit("/Save/"));
+};
 
 this.deleteStepFromWizard = function($wizardObject,$wizardName,$processName){
 	//deletes a given step from a given wizard
@@ -282,7 +298,8 @@ this.addFieldsToLightningPageLayout = function($object_name,$pageLayoutForProfil
 	_selectDomain($myDomain);
 	for($i=0;$i<$fieldsArray.length;$i++){
 		_setValue($sfm_pg_wo.txt_pgLayoutQuickFind,$fieldsArray[$i]);
-		_dragDrop(_span($fieldsArray[$i]),_span("Information(Header visible on edit only)"));
+		var $shortName = $fieldsArray[$i].substr(0,4);
+		_dragDrop(_span("/"+$shortName+"/"),_span("Information(Header visible on edit only)"));
 	}
 	_click($sfm_pg_wo.btn_pgLayoutSave);
 	_wait(3000);	

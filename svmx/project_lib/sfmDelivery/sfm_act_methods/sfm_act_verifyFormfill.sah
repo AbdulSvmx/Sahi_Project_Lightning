@@ -1,5 +1,5 @@
 //Function to verify formfill in SFM Delivery(Classic)
-
+/* it is done through generic function and validation is done in testcase itself
 var $sfm_act_verifySFDFormfill = new function sfm_act_verifySFDFormfill(){
 	this.verifyFormfill = function($caseNo) {
 		 _click(_span(1,_rightOf(_label("Case:"))));
@@ -39,3 +39,4 @@ var $sfm_act_verifySFDFormfill = new function sfm_act_verifySFDFormfill(){
 	
 	};
 	
+*/

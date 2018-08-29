@@ -24,7 +24,7 @@ var $wizardButtonName=$sfmName;
 
 //*************Login to Servicemax App***********
 //$bo_act_login.login($g_url, $bac_un,$bac_pwd);
-$bo_act_login.login($g_url,$sfmUsn,$sfmPwd);
+$bo_act_login.login($g_url,$sfmlUsn,$sfmlPwd);
 
 //*****Navgate to SFm Designer and create a new SFM of type source to Target All ********
 			$bo_act_navigation.navigateToSfmTransactionDesigner();

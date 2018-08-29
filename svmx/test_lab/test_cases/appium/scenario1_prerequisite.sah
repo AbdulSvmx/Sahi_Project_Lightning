@@ -3,6 +3,8 @@
 /*
  * PRE Requisites to be run in the org before running other scripts - LIGHTNING CODE
  */
+_writeFile("false", $appiumPath+$sahiIntermediatoryPath, true);
+
 var $pre_requisite= _testcase("scenario1_pre","Testing Create SFM");
 $pre_requisite.start();
 _setSpeed($g_stepSpeed);
