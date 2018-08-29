@@ -93,7 +93,7 @@ $sfm_act_lightningConfig.clearServicemaxCache();
 $sfm_act_lightningConfig.openExtEditForLatestItem();
 _wait(2000);
 $textLabels = ["Canceled By","Consumed From Location"];
-$verifyResult = $sfm_act_SFM.verifyValuesInDelivery($textLabels,$expValues,[],[],[],[],[],[]);
+$verifyResult = $sfm_act_SFM.verifyValuesInDelivery($textLabels,$expValues,[],[],[],[],[],[],[],[]);
 _click($sfm_pg_wo.btn_updateExtEdit);
 _assertTrue($verifyResult);
 if($verifyResult){

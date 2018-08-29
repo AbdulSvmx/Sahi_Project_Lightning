@@ -72,7 +72,7 @@ for($i=0;$i<$inputDateTimeLabels.length;$i++){
 }
 //Verify values for the rest of the fields
 $inputDateTimeLabels = ["Scheduled Date Time"];
-var $verifyResult = $sfm_act_SFM.verifyValuesInDelivery($mapTextValues,$inputTextValues,$inputDateTimeLabels,$inputTimeValues,[],[],[],[]);
+var $verifyResult = $sfm_act_SFM.verifyValuesInDelivery($mapTextValues,$inputTextValues,$inputDateTimeLabels,$inputTimeValues,[],[],[],[],[],[]);
 _assertTrue($verifyResult);
 if($verifyResult){
 	_log("PASS: Current Record literals are verified in mapping");

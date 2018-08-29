@@ -15,7 +15,7 @@ var $bo_act_mappings = new function bo_act_mappings() {
 		if(_isVisible($sfm_pg_sfmMapping.tab_fieldMapForExisting)){
 			_click($sfm_pg_sfmMapping.btn_newButtonFieldMap);
 		}
-		else if(_isVisible($sfm_pg_sfmMapping.tab_valueMapForExisting)){
+		else if(_isVisible($sfm_pg_sfmMapping.tab_valueMapForExisting)||_isVisible($sfm_pg_sfmMapping.tab_valueMapForNew)){
 			_click($sfm_pg_sfmMapping.btn_newMappingExistingRecord);
 		}
 		
@@ -26,9 +26,21 @@ var $bo_act_mappings = new function bo_act_mappings() {
 			if(_isVisible($sfm_pg_sfmMapping.tab_fieldMapForExisting)){
 				_setSelected(_f("main").s_combobox("valuesCombo").rightOf(_f("main").ftedatagriditemrenderer($pickListLabels[$i])),$pickListValues[$i]);
 			}
-			else if(_isVisible($sfm_pg_sfmMapping.tab_valueMapForExisting)){
+			else if(_isVisible($sfm_pg_sfmMapping.tab_valueMapForExisting)||_isVisible($sfm_pg_sfmMapping.tab_valueMapForNew)){
 				_click(_f("main").s_togglebutton("I want to choose a field from the list").rightOf(_f("main").ftedatagriditemrenderer($pickListLabels[$i])));
-				_setSelected(_f("main").s_combobox("valuesCombo").rightOf(_f("main").ftedatagriditemrenderer($pickListLabels[$i])),$pickListValues[$i]);
+				//Special handling for look up fields
+				if(_isVisible(_f("main").s_button("Search and Select").rightOf(_f("main").ftedatagriditemrenderer($pickListLabels[$i])))){
+					_click(_f("main").s_button("Search and Select").rightOf(_f("main").ftedatagriditemrenderer($pickListLabels[$i])));
+				   	_setStrictVisibilityCheck(true);
+					_setValue(_f("main").s_textinput("lookUpSearchField"),$pickListValues[$i]);
+					_click($sfm_pg_sfmMapping.lkp_insideMapping);
+					_click(_f("main").ftedatagriditemrenderer($pickListValues[$i]));
+					_click($sfm_pg_sfmMapping.btn_selectForLookup);
+					_setStrictVisibilityCheck(false);
+				}
+				else{
+						_setSelected(_f("main").s_combobox("valuesCombo").rightOf(_f("main").ftedatagriditemrenderer($pickListLabels[$i])),$pickListValues[$i]);
+				}
 			}
 		}
 		if($containerName === "Work Order" && _isVisible($sfm_pg_sfmMapping.tab_valueMapForExisting)){
@@ -96,6 +108,10 @@ var $bo_act_mappings = new function bo_act_mappings() {
 		}
 		_wait(5000);
 		}
+	_wait(3000);
+	_setStrictVisibilityCheck(true);
+	_click($sfm_pg_sfmMapping.btn_switchOnMapping);
+	_setStrictVisibilityCheck(false);
 	_click($bo_pg_sfmTransactionAndDesigner.btn_quickSave1);
 	_selectDomain();
 		
@@ -117,7 +133,7 @@ var $bo_act_mappings = new function bo_act_mappings() {
 				if(_isVisible($sfm_pg_sfmMapping.tab_fieldMapForExisting)){
 					_click($sfm_pg_sfmMapping.btn_saveFieldMap);
 				}
-				else if(_isVisible($sfm_pg_sfmMapping.tab_valueMapForExisting)){
+				else if(_isVisible($sfm_pg_sfmMapping.tab_valueMapForExisting)||_isVisible($sfm_pg_sfmMapping.tab_valueMapForNew)){
 					_click($sfm_pg_sfmMapping.btn_saveMappingExistingRecord);
 				}
 				_wait(2000);
@@ -131,13 +147,15 @@ var $bo_act_mappings = new function bo_act_mappings() {
 			if(_isVisible($sfm_pg_sfmMapping.tab_fieldMapForExisting)){
 				_click($sfm_pg_sfmMapping.btn_saveFieldMap);
 			}
-			else if(_isVisible($sfm_pg_sfmMapping.tab_valueMapForExisting)){
+			else if(_isVisible($sfm_pg_sfmMapping.tab_valueMapForExisting)||_isVisible($sfm_pg_sfmMapping.tab_valueMapForNew)){
 				_click($sfm_pg_sfmMapping.btn_saveMappingExistingRecord);
 			}
 			_wait(2000);
 			_assertVisible($sfm_pg_sfmMapping.label_mapSavedMsg);
 		}
+		_setStrictVisibilityCheck(true);
 		_click($sfm_pg_sfmMapping.btn_switchOnMapping);
+		_setStrictVisibilityCheck(false);
 		_wait(1000);
 		_click($bo_pg_sfmTransactionAndDesigner.btn_quickSave1);
 		_wait(2000);

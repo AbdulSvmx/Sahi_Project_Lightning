@@ -88,25 +88,20 @@ for($i=0;$i<$fieldsToMap.length;$i++){
 }
 _click($bo_pg_sfmTransactionAndDesigner.btn_quickSave);
 _click($bo_pg_sfmTransactionAndDesigner.btn_quickSave1);
-_selectDomain();
-var $x = $fieldsToMap.indexOf("Record Type ID");
-if($x != -1) {
-		$fieldsToMap[$x] = "Record Type";
-}
 
 
-$textLabels = ["Account","Contact","Proforma Invoice Amount","Group Email","Estimated Duration","Automation Percent","Automation Phone","City","Street","Problem Description","Automation URL"];
-$textValues = ["HCSAccountForTesting","Jason Smith","4500","group123@group.com","34","45","2345401","Bengaluru","123 somewhere somehow somewat","This washing machine stopped working","www.google.com"];
-$picklistLabels = ["Record Type ID","Clock Paused Forever","Scheduled Date","Automation Date2","Automation Date3","First Queued DateTime","Started Driving To Location Date Time","Completed Date Time","Finished Onsite Date Time","Automation multipicklist","Order Status"];
-$pickListValues = ["Record Type1","true","Today","Tomorrow","Yesterday","Now","Today","Tomorrow","Yesterday","Multipicklist1;Multipicklist3","Open"];
+$textLabels = ["Account","Contact","Proforma Invoice Amount","Group Email","Estimated Duration","Automation Percent","Automation Phone","City","Street","Problem Description","Automation URL","Automation multipicklist"];
+$textValues = ["HCSAccountForTesting","Jason Smith","4500","group123@group.com","34","45","2345401","Bengaluru","123 somewhere somehow somewat","This washing machine stopped working","www.google.com","Multipicklist1;Multipicklist3"];
+$picklistLabels = ["Record Type ID","Clock Paused Forever","Scheduled Date","Automation Date2","Automation Date3","First Queued DateTime","Started Driving To Location Date Time","Completed Date Time","Finished Onsite Date Time","Order Status"];
+$pickListValues = ["Record Type1","true","Today","Tomorrow","Yesterday","Now","Today","Tomorrow","Yesterday","Open"];
 //Create mapping for all possible standard data types.
 _click($bo_pg_sfmTransactionAndDesigner.btn_qualifyingCriteriaAndFieldMapping);
-$bo_act_mappings.createMapping("Work Order",$textLabels,$textValues,$picklistLabels,$pickListValues,$mapName);
+$bo_act_mappings.createMapping("Work Order",$picklistLabels,$pickListValues,$textLabels,$textValues,$mapName);
 _selectDomain();
 _setSpeed(1000);
 
 //Add the custom process to SFM wizard.
-$sfm_act_wizards.addToWizard($object_name,$currentWizardName,"SFM",$processName);
+$sfm_act_wizards.addToWizard($objectName,$currentWizardName,"SFM",$processName);
 _selectDomain();
 
 //Navigate to created work order and launch the process
@@ -114,7 +109,7 @@ $bo_act_navigation.navigateToCreatedRecordUsingGlobalSearch($wo_number);
 $sfm_act_createCustomWizard.clickWizardlinks($processName);
 _wait(8000);
 //Setting up the date literal values
-var current = new Date();
+var $current = new Date();
 var $todayDate = current.getMonth()+1 + "/" + current.getDate() + "/" + current.getFullYear();
 var $tomorrowDate = $sfm_act_createCustomWizard.addSubtractDates($current,1);
 var $yesterdayDate = $sfm_act_createCustomWizard.addSubtractDates($current,-1);
