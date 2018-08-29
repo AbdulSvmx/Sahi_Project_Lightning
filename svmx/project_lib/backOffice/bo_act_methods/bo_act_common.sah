@@ -63,13 +63,25 @@ this.currentDate= function ($seperator){
         $monthday = $now.getDate();
     var $month = $now.getMonth() + 1;
     if ($month < 10)
-        $month = "0" + $month;
+        //$month = "0" + $month;
 
     var $year = $now.getFullYear();
 	$year = $year+$futureYear;
 
 	if ($futureDay!=null && $futureDay!="") {
 		$monthday=$monthday+$futureDay;
+		
+		//if adding date make month to next month below logic works
+		var $nowAdd=new Date();
+		$nowAdd.setDate($monthday);
+		var $monthdayAdd=$nowAdd.getDate();
+		
+		var $monthAdd=$nowAdd.getMonth()+1;
+		
+		if ($monthAdd>$month) {
+			$monthday=$monthdayAdd;
+			$month=$monthAdd;
+		}
 	}
     
      var $currentDate = $month+ $seperator +$monthday  + $seperator+$year; 

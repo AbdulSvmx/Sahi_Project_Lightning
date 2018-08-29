@@ -16,7 +16,6 @@ $rs_10462.start();
 	var $headerExprFieldsDetails=[$headerComboField,$headerComboConditions,$headerToggleButton,$headerCmboInput,$advExpr,$errMsg,$exprsnName];
 	var $headerMappingDetails="";
 	
-	
 	var $childComboField=["Activity Type"];
 	var $childComboConditions=[""]; 
 	var $childToggleButton=[""];
@@ -45,7 +44,6 @@ $rs_10462.start();
 	var $fieldName = ["Activity Type","Line Type","Billable Qty"];
 	var $childToAdd=[$trgChildObj,$fieldName];
 	var $sfmPgLayoutName = $bo_act_common.generateRandomName("SFM_Auto_");
-	
 	$sfm_act_Transactions.screenDesigner($headersToAdd, $childToAdd, $sfmPgLayoutName, $sfmPgLayoutName);
 	
 	_wait(5000);
@@ -58,7 +56,6 @@ $rs_10462.start();
 	var $handOver=false;
 	_log($wizardName1);
 	$sfm_act_wizards.addToWizard($wizardObject, $wizardName1, $wizardType, $sfmName, $handOver, $profile);  
-
 	
 	var $OrdrStatus="Closed";
 	$sfm_act_createCustomWizard.createWOwithOrderStatus($OrdrStatus);
