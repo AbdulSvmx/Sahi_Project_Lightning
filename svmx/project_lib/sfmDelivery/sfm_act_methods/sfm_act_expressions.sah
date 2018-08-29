@@ -45,6 +45,12 @@ var $sfm_act_expressions = new function sfm_act_expressions() {
 		}
 	};
 	
+	/**
+	 * Author		:	Anand Kakhandaki
+	 * Function		: 	To save expression as new
+	 * Parameter	:	$saveAsName = name of expression 
+	 * Example		:	Refer RS_10460.sah file for function usage
+	 */
 	this.saveAsExprsn = function($saveAsName){
 		_setValue($sfm_pg_expressions.txt_saveExprsn,$saveAsName);
 		_setValue($sfm_pg_expressions.txt_inputId,$saveAsName);
