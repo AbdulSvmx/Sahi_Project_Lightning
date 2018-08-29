@@ -4,7 +4,7 @@
  * Copyright Tyto Software Pvt. Ltd.
  */
 -->
-<project name="demo" default="runtestschrome">
+<project name="demo" default="startrun">
 	<taskdef name="sahi" classname="net.sf.sahi.ant.RunSahiTask" classpath="/auto/sahi_pro/lib/ant-sahi.jar"/>
 	
 	<target name="set_timestamp">
