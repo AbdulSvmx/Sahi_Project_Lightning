@@ -124,7 +124,7 @@
 					<!-- Offline reports -->
 					<report type="html" logdir="C://var//lib//jenkins//workspace//sahi_executions//logs//html//retry"/>
 				</sahi>
-				
+				<antcall target="failsahichrome"/>
 			</target>
 
 		    <target name="failsahichrome" depends="set_properties_chrome" if="sahi.retry.failed.${browser}">
