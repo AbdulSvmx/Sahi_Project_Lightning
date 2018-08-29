@@ -13,6 +13,20 @@
         </tstamp>
 	</target>
 	
+	  <target name="start" >
+	        <exec dir="C:\Sahi_v701\userdata\bin" executable="cmd">
+	        <arg line="/c start_dashboard.bat"/>
+	    </exec>
+	    </target>
+
+	    <target name="stopsahi" description="stop sahi server">
+	        <sahi stop="true" sahihost="localhost" sahiport="9999"/>
+	    </target>
+
+	    <target name="failsahi" if="sahi.failed">
+	        <fail message="Sahi tests failed!"/>
+	    </target>
+	
 	   <target name="startrun" description="start the server and run sahi tests">
 	        <parallel>
 	            <antcall target="start"/>
