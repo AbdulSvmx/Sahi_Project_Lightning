@@ -418,7 +418,10 @@ var $sfm_act_Transactions = new function sfm_act_Transactions() {
 	 * Examples		:	Refer RS_10445.sah
 	 */
 	this.addLookupContext = function($contextSourceObj,$overrideContext,$contextObj,$matchingField){
-		_setSelected($sfm_pg_sfmDesigner.sel_ContextSource,$contextSourceObj);
+		//$contextSourceObj is not available for header object
+		if ($contextSourceObj!=null && $contextSourceObj!="") {
+			_setSelected($sfm_pg_sfmDesigner.sel_ContextSource,$contextSourceObj);
+		}
 		if ($overrideContext) {
 			_click($sfm_pg_sfmDesigner.chk_OverrideContext);
 		}
