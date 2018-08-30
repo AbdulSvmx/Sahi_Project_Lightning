@@ -82,14 +82,15 @@ var $sfm_act_SFM = new function sfm_act_SFM() {
 
 	this.selectSFM = function($sfmName, $isCustom) {
 		if ($isCustom) {
-			_wait(10000);
 			_setStrictVisibilityCheck(true);
+			_wait(15000,_isVisible($bo_pg_sfmTransactionAndDesigner.btn_yourCustomSfmTransactions));
 			_click($bo_pg_sfmTransactionAndDesigner.btn_yourCustomSfmTransactions);
 			_setValue(
 					$bo_pg_sfmTransactionAndDesigner.txt_yourCustomSfmTransactionsQuickFind,
 					$sfmName);
 
 		} else {
+			_wait(15000,_isVisible($bo_pg_sfmTransactionAndDesigner.txt_standardSfmTransactionQuickFind));
 			_setValue($bo_pg_sfmTransactionAndDesigner.txt_standardSfmTransactionQuickFind,
 					$sfmName);
 		}

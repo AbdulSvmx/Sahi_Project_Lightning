@@ -12,7 +12,6 @@ $rs_10464.start();
 	var $sfmTemplate="SVMXSTD: Manage WO Usage Lines";
 	var $fieldName="";
 	var $containerName="";
-	
 	$sfm_act_SFM.cloneTDM016($sfmNameToBeCloned, $sfmName, false, $sfmTemplateSaveAsName, $sfmTemplate, $fieldName, $containerName);
 	
 	//adding qualifying criteria for parent object
@@ -56,10 +55,9 @@ $rs_10464.start();
 	var $profile="";
 	var $handOver=false;
 	$sfm_act_wizards.addToWizard($wizardObject, $wizardName1, $wizardType, $sfmName, $handOver, $profile);  
-	
-
+		
 	//create WO & WD
-	var $WO=createWO_RS10464("Open", 1, 2);
+	var $WO=createWO_RS10464("Open", 3, 4);
 	
 	var $WDpartName = $bo_act_common.generateRandomName("RS_10463_Part_");
 	var $WorkDetailPart=addWorkDetailLine("Usage/Consumption", "Parts", 20, 1, 2,$WDpartName);
@@ -67,12 +65,11 @@ $rs_10464.start();
 	var $WDlaborName = $bo_act_common.generateRandomName("RS_10463_Labor_");
 	var $WorkDetailLabor=addWorkDetailLine("Usage/Consumption", "Labor", 20, 1, 2,$WDlaborName);
 	
+	//Assert SFM is launched and able to view childlines
 	$sfm_act_common.globalSearchInLightning($WO);
-	//var $sfmName="rs_10464_1282018111327";
 	_setStrictVisibilityCheck(true);
 	$sfm_act_createCustomWizard.clickWizardBtn($sfmName);
 	_assertExists(_div("/"+$sfmName+"/"));
-	//_assertExists($sfm_pg_screenDesigner.link_Parts);
 	_click($sfm_pg_screenDesigner.link_Parts);
 	_assertExists(_div($WDpartName,_in(_div("SFMCompositeGrid1-bodyWrap"))));
 	_click($sfm_pg_screenDesigner.link_Labor);
@@ -83,9 +80,10 @@ $rs_10464.start();
 	
 	//Edit WD
 	$sfm_act_common.globalSearchInLightning($WO);
-	editWorkDetailLine($WorkDetailPart,"Parts", 8, 6, 7);
-	editWorkDetailLine($WorkDetailLabor,"Labor", 8, 6, 7);
+	editWorkDetailLine($WorkDetailPart,"Parts", 8, 8, 9);
+	editWorkDetailLine($WorkDetailLabor,"Labor", 8, 8, 9);
 	
+	//Assert SFM is launched but childlines should not be visible
 	$sfm_act_common.globalSearchInLightning($WO);
 	_setStrictVisibilityCheck(true);
 	$sfm_act_createCustomWizard.clickWizardBtn($sfmName);
@@ -96,7 +94,6 @@ $rs_10464.start();
 	_setStrictVisibilityCheck(false);
 	
 	
-
 	//Edit WO
 	$sfm_act_common.globalSearchInLightning($WO);
 	_click($sfm_pg_wo.btn_wo_edit);
@@ -105,6 +102,7 @@ $rs_10464.start();
 	_click($sfm_pg_wo.btn_wo_edit_save);
 	_wait(10000,_isVisible($sfm_pg_wo.label_wo));
 	
+	//Assert sfm should not be launched
 	$sfm_act_common.globalSearchInLightning($WO);
 	$sfm_act_createCustomWizard.clickWizardBtn($sfmName);
 	_selectDomain($domainName);
@@ -113,7 +111,6 @@ $rs_10464.start();
 	_selectDomain();
 	
 	//** function to create Work**'
-	
 function createWO_RS10464($orderStatus,$WOactualResoFD,$WOactualRestoFD){
 		_selectDomain();
 		_wait(3000);
@@ -154,7 +151,7 @@ function addWorkDetailLine($recordType,$lineType,$lineQTY,$WDcancelFD, $WDcloseF
 		_setStrictVisibilityCheck(true);
 		addWDfiledValues($lineType, $lineQTY, $WDcancelFD, $WDcloseFD,$WDpartName);
 		_click($sfm_pg_sfmDesigner.btn_saveWorkDetail);
-		_wait(5000,isVisible($sfm_pg_sfmDesigner.msg_WDCreateConfirm));
+		_wait(15000,_isVisible($sfm_pg_sfmDesigner.msg_WDCreateConfirm));
 		var $WorkDetailName;
 		if ($lineType=="Parts") {
 			$WorkDetailName=_getText(_link("/WL-.*/",_in(_div("/Line Number/")),_near(_span("Parts"))));

@@ -16,7 +16,6 @@ $rs_10462.start();
 	var $headerExprFieldsDetails=[$headerComboField,$headerComboConditions,$headerToggleButton,$headerCmboInput,$advExpr,$errMsg,$exprsnName];
 	var $headerMappingDetails="";
 	
-	
 	var $childComboField=["Activity Type"];
 	var $childComboConditions=[""]; 
 	var $childToggleButton=[""];
@@ -31,7 +30,7 @@ $rs_10462.start();
 	//Login to App and navigate to sfm transaction and designer page
 	$bo_act_login.login($g_url,$sfmlUsn,$sfmlPwd);
 	$bo_act_navigation.navigateToSfmTransactionDesigner();
-	_wait(5000);
+	_wait(15000,_isVisible($bo_pg_sfmTransactionAndDesigner.btn_newSFM));
 	
 	//Create New SFM Transaction
 	_click($bo_pg_sfmTransactionAndDesigner.btn_newSFM);
@@ -45,27 +44,22 @@ $rs_10462.start();
 	var $fieldName = ["Activity Type","Line Type","Billable Qty"];
 	var $childToAdd=[$trgChildObj,$fieldName];
 	var $sfmPgLayoutName = $bo_act_common.generateRandomName("SFM_Auto_");
-	
 	$sfm_act_Transactions.screenDesigner($headersToAdd, $childToAdd, $sfmPgLayoutName, $sfmPgLayoutName);
 	
 	_wait(5000);
 	_click($bo_pg_sfmTransactionAndDesigner.btn_finalQuickSave);
-
+	
 	var $wizardObject="Work Order";
-	//var $wizardName = $bo_act_common.generateRandomName("SFM Wiz");
 	var $wizardName1 =$wizardName[6];
 	var $wizardType="SFM";
 	var $profile="";
 	var $handOver=false;
 	_log($wizardName1);
 	$sfm_act_wizards.addToWizard($wizardObject, $wizardName1, $wizardType, $sfmName, $handOver, $profile);  
-
 	
 	var $OrdrStatus="Closed";
-
 	$sfm_act_createCustomWizard.createWOwithOrderStatus($OrdrStatus);
 
-	
 	$sfm_act_createCustomWizard.clickWizardBtn($sfmName);
 	_selectDomain($domainName);
 	_wait(10000,_isVisible(_div($errMsg)));
