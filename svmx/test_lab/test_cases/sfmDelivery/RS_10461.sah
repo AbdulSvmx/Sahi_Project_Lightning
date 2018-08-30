@@ -2,9 +2,8 @@ var $rs_10461 = _testcase("RS_10461","Verify Editing of Advanced expression in H
 $rs_10461.start();
 
 	//Login to App
-	$bo_act_login.login($g_url,$sfmlPwd,$sfmlPwd);
+	$bo_act_login.login($g_url,$sfmlUsn,$sfmlPwd);
 
-	
 	//clone standard SFM
 	var $sfmNameToBeCloned="Create Usage Lines from Estimates";
 	var $sfmName=$bo_act_common.generateRandomName("rs_10461_");
@@ -56,7 +55,7 @@ $rs_10461.start();
 	var $WorkDetail=$WorkDetailPartdetail[0];
 	var $WorkDetailPart=$WorkDetailPartdetail[1];
 
-
+	//Assert SFM transaction is launched and childline display
 	$sfm_act_common.globalSearchInLightning($WO);
 	_setStrictVisibilityCheck(true);
 	$sfm_act_createCustomWizard.clickWizardBtn($sfmName);
@@ -65,13 +64,14 @@ $rs_10461.start();
 	_assertExists(_div($WorkDetailPart,_in(_div("SFMCompositeGrid1-bodyWrap"))));
 	_setStrictVisibilityCheck(false);
 	
+	//Logout and login: this is code is added due to limitation of sahi.
+	//Limitation: we cann't perform action on transaction page twice in single login
 	$bo_act_navigation.navigateToHome();
-	
 	$sfm_act_lightningConfig.logoutInLightning();
 	_wait(10000,_isVisible($bo_pg_login.txt_email));
 	$bo_act_login.login($g_url,$sfmlUsn,$sfmlPwd);
 	
-	//Update the sfm
+	//Update the SFM Transaction
 	_selectDomain();
 	$bo_act_navigation.navigateToSfmTransactionDesigner();
 	_wait(10000);
@@ -85,7 +85,7 @@ $rs_10461.start();
 	_click(_f("main").s_label("Work Order").near($sfm_pg_screenDesigner.lbl_qualifyingCriteriaMapping));
 	_wait(10000,_isVisible($sfm_pg_screenDesigner.lbl_headerQualificationLabel));
 	
-	//adding qualifying criteria for parent object
+	//adding qualification criteria for parent object
 	var $comboField=["Account","Billing Type","Date1"];
 	var $comboConditions=["Is Not Null","Equals","Equals"];
 	var $toggleButton=["","",""];

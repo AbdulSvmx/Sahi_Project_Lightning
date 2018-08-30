@@ -713,7 +713,6 @@ var $sfm_act_Transactions = new function sfm_act_Transactions() {
 				var $textValues=$mappingDetails[3];
 				var $mapName=$mappingDetails[4];
 				
-				
 				_click($sfm_pg_screenDesigner.btn_qualifyingCriteriaAndFieldMapping);
 				_wait(10000,_isVisible($sfm_pg_screenDesigner.lbl_qualifyingCriteriaMapping));
 				_click(_f("main").s_label($object).near($sfm_pg_screenDesigner.lbl_qualifyingCriteriaMapping));
