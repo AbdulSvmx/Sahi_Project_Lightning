@@ -160,7 +160,7 @@ $textValues = ["$6,600.000","4/21/2018","345.00","Bengaluru"];
 var $lookUpLabels = ["Account"];
 var $lookUpValues = ["HCSAccountForTesting"];
 //Verify all values in the newly created Work order
-var $res = $sfm_act_lightningConfig.verifyValues($textLabels, $textValues, $pickListLabels, $pickListValues, $textAreaLabels, $textAreaValues, $checkBoxLabels, $checkBoxValues, $dateTimeLabels, $dateTimeDateValues, $timeValues,$emailLabels,$emailValues,$lookUpLabels,$lookUpValues,[],[]);
+var $res = $sfm_act_lightningConfig.verifyValues($textLabels, $textValues, $pickListLabels, $pickListValues, $textAreaLabels, $textAreaValues, $checkBoxLabels, $checkBoxValues, $dateTimeLabels, $dateTimeDateValues, $timeValues,$emailLabels,$emailValues,$lookUpLabels,$lookUpValues,[],[],[],[],[],[]);
 _assertTrue($res);
 if($res){
 	_log("PASS: Newly created follow up order has values as per mapping");
