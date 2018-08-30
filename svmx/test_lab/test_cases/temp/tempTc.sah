@@ -1,0 +1,19 @@
+
+var $tempTc = _testcase("$tempTc","$tempTc");
+$tempTc.start();
+	_setSpeed($g_stepSpeed);
+	
+	var $objectName = "Work Order";
+	var $fieldName = "Order Status";
+	var $operator = "Equals";
+	var $fieldName1 = "Order Type";
+	var $workOrderNo;
+	
+	$bo_act_login.login("https://test.salesforce.com",$g_un, $g_pwd);
+
+	
+
+	$tempTc.end();
+ 
+
+

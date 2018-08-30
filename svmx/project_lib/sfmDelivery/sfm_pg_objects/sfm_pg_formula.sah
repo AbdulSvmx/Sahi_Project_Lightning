@@ -44,7 +44,8 @@ var $sfm_pg_formula = new function sfm_pg_formula() {
 			}
 			else{		 
 				 _wait(2000, _isVisible($sfm_pg_formula.formulaSaved));
-				 _click($sfm_pg_formula.btn_addToProcess);	
+				 _click($sfm_pg_formula.btn_addToProcess);
+				 _wait(3000);
 			}
 		}
 		/*_setSelected($sfm_pg_formula.txt_targetObject,$formulaTargetObject);

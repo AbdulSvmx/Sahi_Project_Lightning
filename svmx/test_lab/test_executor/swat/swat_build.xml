@@ -4,7 +4,7 @@
  * Copyright Tyto Software Pvt. Ltd.
  */
 -->
-<project name="demo" default="runtestschrome">
+<project name="demo" default="startrun">
 	<taskdef name="sahi" classname="net.sf.sahi.ant.RunSahiTask" classpath="/auto/sahi_pro/lib/ant-sahi.jar"/>
 	
 	<target name="set_timestamp">
@@ -12,6 +12,40 @@
             <format property="ts" pattern="yyyy_MM_dd__HH_mm_ss" locale="en, IN"/>
         </tstamp>
 	</target>
+	
+	  <target name="start" >
+	        <exec dir="C:\auto\sahi_pro\userdata\bin" executable="cmd">
+	        <arg line="/c start_dashboard.bat"/>
+	    </exec>
+	    </target>
+
+	    <target name="stopsahi" description="stop sahi server">
+	        <sahi stop="true" sahihost="localhost" sahiport="9999"/>
+	    </target>
+
+	    <target name="failsahi" if="sahi.failed">
+	        <fail message="Sahi tests failed!"/>
+	    </target>
+	
+	   <target name="startrun" description="start the server and run sahi tests">
+	        <parallel>
+	            <antcall target="start"/>
+	            <sequential>
+	                <waitfor maxwait="1" maxwaitunit="minute" checkevery="100">
+	                    <http url="http://localhost:9999/_s_/spr/blank.htm"/>
+	                </waitfor>
+	                <antcall target="runtestschrome"/>
+	            	   <antcall target="stopandfail"/>
+	            </sequential>
+	        </parallel>
+	    </target>
+
+	    <target name="stopandfail">
+	        <sequential>
+	            <antcall target="stopsahi"/>
+	            <antcall target="failsahi"/>
+	        </sequential>
+	    </target>
 	
 	
 	<target name="set_properties_chrome" depends="set_timestamp">
@@ -88,6 +122,7 @@
 							<!-- Offline reports -->
 							<report type="html" logdir="C://var//lib//jenkins//workspace//sahi_executions//logs//html//retry"/>
 						</sahi>
+						<antcall target="stopandfail"/>
 						<antcall target="failsahichrome"/>
 					</target>
 

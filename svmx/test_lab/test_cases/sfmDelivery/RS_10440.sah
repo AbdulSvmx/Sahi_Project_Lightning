@@ -8,7 +8,7 @@ var $sfmTemplate = "SVMXSTD: Manage WO Usage Lines";
 var $sfmTemplateSaveAsName = $sfmName;
 var $fieldName = ["Problem Description"];
 var $containerName = ["Order Status"];
-$bo_act_login.login($g_url,$sfmUsn,$sfmPwd);
+$bo_act_login.login($g_url,$sfmlUsn,$sfmlPwd);
 
 $sfm_act_SFM.cloneTDM016($sfmNameToBeCloned, $sfmName, $isCustom, $sfmTemplateSaveAsName, $sfmTemplate, $fieldName, $containerName);
 _click($bo_pg_sfmTransactionAndDesigner.btn_finalQuickSave);

@@ -27,7 +27,7 @@ var $sfmTemplateSaveAsName = $processName + "pg";
 
 //Login as admin and switch to lightning
 //$bo_act_login.login($g_url,$bac_un,$bac_pwd);
-$bo_act_login.login($g_url,$sfmUsn,$sfmPwd);
+$bo_act_login.login($g_url,$sfmlUsn,$sfmlPwd);
 $sfm_act_lightningConfig.switchToLightning();
 
 //Clone the standard process and add it to wizard for testing with custom process.
@@ -41,7 +41,7 @@ _selectDomain();
 
 //Logout as admin and login as technician
 $sfm_act_lightningConfig.logoutInLightning();
-$bo_act_login.login($g_url,$sfmUsn,$sfmPwd);
+$bo_act_login.login($g_url,$sfmlUsn,$sfmlPwd);
 $sfm_act_lightningConfig.switchToLightning();
 
 //Launch SFM designer for standard process without adding Feature permissions
@@ -74,7 +74,7 @@ _selectDomain();
 //$sfm_act_lightningConfig.switchToLightning();
 $bo_act_navigation.navigateToFeaturePermissionsPage();
 _wait(3000);
-$bo_act_navigation.addFeaturePermissionToUser($sfmUsn,"Sysadmin01 Group","SFM Designer");
+$bo_act_navigation.addFeaturePermissionToUser($sfmlUsn,"Cloned_DefaultGroupProfile","SFM Designer");
 
 //Yet to be completed for lightning as the page is still not certified
 //$sfm_act_lightningConfig.logoutInLightning();

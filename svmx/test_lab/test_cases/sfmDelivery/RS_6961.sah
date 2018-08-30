@@ -5,7 +5,7 @@ $sfmName = $bo_act_common.generateRandomName("SFM_Auto_");
 $sfmPgLayoutName = $bo_act_common.generateRandomName("SFM_Auto_Page");
 $headersToAdd = ["Account"];
 $wizTitle = $bo_act_common.generateRandomName("SFM Wiz");
-$bo_act_login.login($g_url,$sfmUsn,$sfmPwd);
+$bo_act_login.login($g_url,$sfmlUsn,$sfmlPwd);
 $bo_act_navigation.navigateToSfmTransactionDesigner();
 //_setSpeed($g_stepSpeed);
 _wait(6000, _isVisible($bo_pg_sfmTransactionAndDesigner.btn_newSFM));

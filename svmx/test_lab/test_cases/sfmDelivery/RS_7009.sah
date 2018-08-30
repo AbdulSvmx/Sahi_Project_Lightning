@@ -5,7 +5,7 @@ var $sfmName = $bo_act_common.generateRandomName("SFM_Auto_");
 var $sfmPgLayoutName = $bo_act_common.generateRandomName("SFM_Auto_Page");
 var $wizTitle = $bo_act_common.generateRandomName("SFM Wiz");
 //var $sfmPwd = "maxplore2";
-$bo_act_login.login($g_url,$sfmUsn,$sfmPwd);
+$bo_act_login.login($g_url,$sfmlUsn,$sfmlPwd);
 $accToAdd = ["Account1150"];
 
 //Clone the Standard Multi-source SFM Process - Create Service Contract from Account

@@ -10,7 +10,7 @@ $sfmPgLayoutName =	$bo_act_common.generateRandomName("SFM_Auto_Page");
 $wizTitle = $bo_act_common.generateRandomName("SFM Wiz");
 $context = "Account";
 $matching = "Account ID";
-$bo_act_login.login($g_url,$sfmUsn,$sfmPwd);
+$bo_act_login.login($g_url,$sfmlUsn,$sfmlPwd);
 $sfm_act_addDeleteMeth.verifyAndCreateAccount("Auto Global Inc");
 $sfm_act_addDeleteMeth.verifyAndCreateAccount("Auto Global Media");
 //$sfm_act_addDeleteMeth.createAccount($accountName);
