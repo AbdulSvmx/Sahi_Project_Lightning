@@ -419,7 +419,9 @@ this.editWorkOrder = function($textLabels,$textValues,$pickListLabels,$pickListV
    //Fill multi picklists
 	if($multiPickLabels.length > 0){
 		for($i=0;$<$multiPickLabels.length;$i++){
-			_setSelected(_select(0,_near(_span($multiPickLabels[$i]))),[$multiPickValues[$i]],true);
+			//This call resets the multi select picklist.
+			_call(_select(0,_near(_label($multiPickLabels[$i]))).selectedIndex=-1);
+			_setSelected(_select(0,_near(_label($multiPickLabels[$i]))),[$multiPickValues[$i]],true);
 		}
 	}
 	//Fill URL fields
