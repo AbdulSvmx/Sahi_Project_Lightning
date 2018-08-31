@@ -112,6 +112,14 @@ var $sfm_pg_sfmDesigner = new function sfm_pg_sfmDesigner() {
 	this.txt_autoContactTextbox=_textbox("/inputEl/",_near(this.lbl_autoContact));
 	
 	
+	//header fields
+	this.lbl_headerAccount=_div("Account");
+	this.txt_headerAccount=_textbox("/inputEl/",_in(this.lbl_headerAccount));
+	this.btn_headerAccountSearchIcon=_div("/trigger-search/",_in(this.lbl_headerAccount));
+	this.lbl_headerContact=_div("Contact");
+	this.txt_headerContact=_textbox("/inputEl/",_in(this.lbl_headerContact));
+	this.link_ContactInDVR=_link("Contact",_in(_div("Contact: Multiple items found. Click lookup icon to refine search.")));
+	this.btn_headerContactsearchIcon=_div("/trigger-search/",_in(this.lbl_headerContact));
 	
 	this.link_Update=_link("Update");
 	this.link_quickSave=_link("Quick Save");
@@ -120,14 +128,15 @@ var $sfm_pg_sfmDesigner = new function sfm_pg_sfmDesigner() {
 	this.btn_searchIconInSFM=_div("/trigger-search/",_in(_div("/sfm-lookupcelleditor/")));
 	this.link_searchLink=_link("Search");
 	this.btn_searchTextBox=_textbox("/sfm-text/",_near(this.link_searchLink));	
+	this.link_accountInDVRNoMatch=_link("Account",_in(_div("Account: Multiple items found. Click lookup icon to refine search.")));
 	
-	this.link_autoContactInDVR=_link("AutoContact",_in(_div("AutoContact: Multiple items found. Click lookup icon to refine search.")))
+	this.link_autoContactInDVR=_link("AutoContact",_in(_div("AutoContact: Multiple items found. Click lookup icon to refine search.")));
 	this.txt_autoContactTextBoxInSFM=_div("/grid-cell/",_under(_parentNode(_span("AutoContact"),"DIV",4)));
 	
 	this.sel_ContextSource=_f("main").s_combobox("/ComboBox/").rightOf(_f("main").uiftetextfield("Context Source"));
 	this.chk_OverrideContext=_f("main").s_checkbox("Override Context");
 	this.sel_Context=_f("main").s_combobox("/ComboBox/").rightOf(_f("main").uiftetextfield("Context"));
-	this.sel_matchinField=_f("main").s_combobox("/ComboBox/").rightOf(_f("main").uiftetextfield("Matching Field"));
+	this.sel_matchinField=_f("main").s_combobox("/ComboBox/").near(_f("main").uiftetextfield("Matching Field"));
 	
 	
 	//Extended edit page objects --Labor

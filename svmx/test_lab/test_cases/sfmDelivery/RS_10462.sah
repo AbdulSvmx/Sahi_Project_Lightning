@@ -75,4 +75,5 @@ $rs_10462.start();
 	_assertExists(_span($trgChildObj));
 	_setStrictVisibilityCheck(false);
 	
+	$sfm_act_lightningConfig.logoutInLightning();
 $rs_10462.start();

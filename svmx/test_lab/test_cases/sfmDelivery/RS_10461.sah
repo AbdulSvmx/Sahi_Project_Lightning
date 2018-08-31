@@ -188,6 +188,8 @@ $rs_10461.start();
 	_selectDomain();
 	_setStrictVisibilityCheck(false);
 	
+	
+	$sfm_act_lightningConfig.logoutInLightning();
 
 //** function to create Work**'
 
