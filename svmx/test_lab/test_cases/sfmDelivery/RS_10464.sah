@@ -110,6 +110,9 @@ $rs_10464.start();
 	_assertExists(_div($errMsg));
 	_selectDomain();
 	
+	
+	$sfm_act_lightningConfig.logoutInLightning();
+	
 	//** function to create Work**'
 function createWO_RS10464($orderStatus,$WOactualResoFD,$WOactualRestoFD){
 		_selectDomain();

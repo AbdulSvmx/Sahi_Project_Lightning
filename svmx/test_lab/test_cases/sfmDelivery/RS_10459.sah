@@ -33,5 +33,6 @@ $rs_10459.start();
 	
 	_assertNotExists($sfm_pg_expressions.sel_comboField.near(_f("SFMExpressionBuilderSWF").s_label("1")), "Delete Expression is failed");
 	
+	$sfm_act_lightningConfig.logoutInLightning();
 	
 $rs_10459.end();
