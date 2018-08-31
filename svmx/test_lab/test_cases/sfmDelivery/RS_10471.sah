@@ -121,6 +121,12 @@ if($p > 12){
 else {
 	var $now = $current.getHours()+":"+$current.getMinutes()+" AM";
 }
+_log("Value for now is "+$now);
+//Removing preceding zeros in date fields to validate in work order object.
+$todayDate = $sfm_act_lightningConfig.removePrecedingZeroInDate($todayDate);
+$tomorrowDate = $sfm_act_lightningConfig.removePrecedingZeroInDate($tomorrowDate);
+$yesterdayDate = $sfm_act_lightningConfig.removePrecedingZeroInDate($yesterdayDate);
+
 _selectDomain($domainName);
 _click($sfm_pg_wo.link_delivery_save);
 _wait(3000);
@@ -141,7 +147,7 @@ $pickListValues = ["Open"];
 $textAreaLabels = ["Street","Problem Description"];
 $textAreaValues = ["123 somewhere somehow somewat","This washing machine stopped working"];
 var $checkBoxLabels = ["Clock Paused Forever"];
-var $checkBoxValues = ["true"];
+var $checkBoxValues = [true];
 var $emailLabels = ["Group Email"];
 var $emailValues = ["group123@group.com"];
 var $multiPickLabels = ["Automation multipicklist","Automation multipicklist"];
@@ -184,27 +190,41 @@ $sfm_act_lightningConfig.clearServicemaxCache();
 var $current = new Date();
 var $todayDate = $current.getMonth()+1 + "/" + $current.getDate() + "/" + $current.getFullYear();
 var $tomorrowDate = $sfm_act_createCustomWizard.addSubtractDates($current,1);
-_log($tomorrowDate);
-var $yesterdayDate = $sfm_act_createCustomWizard.addSubtractDates($current,-1);
-//Setting up the date literal values
-var $current = new Date();
-var $todayDate = $current.getMonth()+1 + "/" + $current.getDate() + "/" + $current.getFullYear();
-var $tomorrowDate = $sfm_act_createCustomWizard.addSubtractDates($current,1);
 var $yesterdayDate = $sfm_act_createCustomWizard.addSubtractDates($current,-1);
 //Calculating current time
 var $p = $current.getHours();
 if($p > 12){
+	var $now = $current.getHours()-12+":"+$current.getMinutes()+" PM";
+}
+else {
+	var $now = $current.getHours()+":"+$current.getMinutes()+" AM";
+}
+
+//Calculating current time
+
+var $p = $current.getHours();
+if($p > 12){
 	if($current.getMinutes < 10){
-		var $min = "0"+$current.getMinutes;
+		var $min = "0"+$current.getMinutes();
+	}
+	else if($current.getMinutes >= 10){
+		var $min = $current.getMinutes();
 	}
 	var $now = $current.getHours()-12+":"+$min+" PM";
 }
 else {
+	if($current.getMinutes < 10){
+		var $min = "0"+$current.getMinutes();
+	}
+	if($current.getMinutes >= 10){
+		var $min = $current.getMinutes();
+	}
 	var $now = $current.getHours()+":"+$min+" AM";
 }
+_log("Value for now is "+$now);
 //Verify values in SFM Delivery screen
 var $deliveryTextPickLabels = ["Account","Contact","Proforma Invoice Amount","Scheduled Date","Automation Date2","Automation Date3","First Queued DateTime","Started Driving To Location Date Time","Completed Date Time","Finished Onsite Date Time","Group Email","Estimated Duration","Automation Percent","Automation Phone","City","Automation URL"];
-var $deliveryTextPickValues =["HCSAccountForTesting","Lightning Contact","$4500.000",$todayDate,$tomorrowDate,$yesterdayDate,$todayDate,$todayDate,$tomorrowDate,$yesterdayDate,"group123@group.com","34.00","45","235401","Bengaluru","www.google.com"];
+var $deliveryTextPickValues =["HCSAccountForTesting","Lightning Contact","4500",$todayDate,$tomorrowDate,$yesterdayDate,$todayDate,$todayDate,$tomorrowDate,$yesterdayDate,"group123@group.com","34","45","235401","Bengaluru","www.google.com"];
 var $deliveryTimeLabels = ["First Queued DateTime","Started Driving To Location Date Time","Completed Date Time","Finished Onsite Date Time"];
 var $deliveryTimeValues = [$now,"12:00 AM","12:00 AM","12:00 AM"];
 //Verify same values in Work order after saving
@@ -215,8 +235,8 @@ _wait(3000);
 if(_isVisible($sfm_pg_wo.btn_okPriceNotCalculated)){
 	_click($sfm_pg_wo.btn_okPriceNotCalculated);
 }
-_assertTrue(verifyResult);
-if($res){
+_assertTrue($verifyResult);
+if($verifyResult){
 	_log("PASS: Work order has values as per value mapping for existing records for Header in delivery");
 }
 else {
@@ -225,6 +245,19 @@ else {
 
 _selectDomain();
 _wait(14000,_isVisible($sfm_pg_wo.label_wo));
+//Setting up the date literal values
+var $current = new Date();
+var $todayDate = $current.getMonth()+1 + "/" + $current.getDate() + "/" + $current.getFullYear();
+var $tomorrowDate = $sfm_act_createCustomWizard.addSubtractDates($current,1);
+var $yesterdayDate = $sfm_act_createCustomWizard.addSubtractDates($current,-1);
+//Calculating current time
+var $p = $current.getHours();
+if($p > 12){
+	var $now = $current.getHours()-12+":"+$current.getMinutes()+" PM";
+}
+else {
+	var $now = $current.getHours()+":"+$current.getMinutes()+" AM";
+}
 var $res = $sfm_act_lightningConfig.verifyValues($textLabels, $textValues, $pickListLabels, $pickListValues, $textAreaLabels, $textAreaValues, $checkBoxLabels, $checkBoxValues, $dateTimeLabels, $dateTimeDateValues, $timeValues,$emailLabels,$emailValues,$lookUpLabels,$lookUpValues,$multiPickLabels,$multiPickValues,$urlLabels,$urlValues,$telephoneLabels,$telephoneValues);
 _assertTrue($res);
 if($res){

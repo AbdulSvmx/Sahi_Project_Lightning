@@ -898,8 +898,21 @@ var $sfm_act_createCustomWizard = new function sfm_act_createCustomWizard() {
 			//This function adds or subtracts calendar days from a given date and returns in the
 			//form of MM/DD/YYYY
 			var $result_date = new Date($given_date);
+			var $monthString; var $dateString;
 	        $result_date.setDate($given_date.getDate()+$num_of_days);
-	        $result_date = ($result_date.getMonth()+1) + "/" + $result_date.getDate() + "/" + $result_date.getFullYear();
+	        if(($result_date.getMonth()+1) <10){
+	        	$monthString = "0"+($result_date.getMonth()+1);
+	        }
+	        else {
+	        	$monthString = $result_date.getMonth()+1;
+	        }
+	        if($result_date.getDate() < 10){
+	        	$dateString = "0"+$result_date.getDate();
+	        }
+	        else{
+	        	$dateString = $result_date.getDate();
+	        }
+	        $result_date = $monthString + "/" + $dateString + "/" + $result_date.getFullYear();
 	        return $result_date;
 		};
 		this.clickSvmxWoLink = function() {
