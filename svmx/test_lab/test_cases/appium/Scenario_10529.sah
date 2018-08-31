@@ -6,7 +6,9 @@ var $isCustom = false;
 var $sfmTemplate = "SVMXSTD: Manage WO Usage Lines";
 var $sfmTemplateSaveAsName = $bo_act_common.generateRandomName("SFM_Temp_Name_");
 var $headersToAdd = ["Work Order Number","Account","City","Contact","Country","Order Type","Product","Site","Problem Description"];
-var $lkpName = $bo_act_common.generateRandomName("SFM_lkp_Name_");
+var $lkpName = $bo_act_common.generateRandomName("Contact_lkp_Name_");
+var $lkpName01 = $bo_act_common.generateRandomName("Site_lkp_Name_");
+var $lkpName02 = $bo_act_common.generateRandomName("Parts_lkp_Name_");
 $bo_act_login.login($g_url, $appiumAdminUn, $appiumAdminPwd);
 $sfm_act_lightningConfig.switchToLightning();
 _wait(5000);
@@ -25,13 +27,34 @@ _setValue($bo_pg_sfmTransactionAndDesigner.txt_sfmSavePageLayoutAs,$sfmTemplateS
 _setValue($bo_pg_sfmTransactionAndDesigner.txt_sfmSavePageLayoutAsId,$sfmTemplateSaveAsName);
 _wait(5000);
 $sfm_act_Transactions.addHeader($headersToAdd);
-_click(_f("main").s_button("Save[3]"));
 //_click(_f("main").fieldrenderer("Account"));
 _click(_f("main").fieldrenderer("Contact"));
 _click(_f("main").s_button("Configure Lookup"));
-_setSelected(_f("main").s_combobox("searchCombo[4]"), "SVMXSTD: IB Lookup");
+_setSelected(_f("main").s_combobox("searchCombo[4]"), "SVMXSTD: Contact Lookup");
 _setValue(_f("main").s_textinput("Save this Lookup as"), $lkpName);
 _setValue(_f("main").s_textinput("Input ID Here[4]"), $lkpName);
+_click(_f("main").s_button("Add a row[1]"));
+for(var $i=0;$i<2;$i++){
+	_click(_f("main").s_button("+[1]"));
+}
+var $fields = ["Mailing Country","Last Name","Account ID"];
+var $conditions = ["Equals","Contains","Is Not Null"];
+for(var $j=1;$j<=3;$j++){
+	$k = $j-1;
+	_wait(2000);
+	_setSelected(_f("main").s_combobox("fieldCombo["+$j+"]"), $fields[$k]);
+	_setSelected(_f("main").s_dropdownlist("conditionsCombo["+$j+"]"), $conditions[$k]);
+}
+_setValue(_f("main").s_textinput("operandValue"), "Italy");
+_setValue(_f("main").s_textinput("operandValue[1]"), "Servicem");
+_setValue(_f("main").s_textinput("advExpIP"),"(1 AND 2) OR 3");
 _click(_f("main").s_button("Save As[8]"));
-//_click(_f("main").fieldrenderer("Site"));
+_click(_f("main").s_button("Select"));
+_wait(3000);
+//_click(_f("main").s_button("Save[3]"));
+_click(_f("main").fieldrenderer("Site"));
+_setSelected(_f("main").s_combobox("searchCombo[4]"), "SVMXSTD: Location Lookup");
+_setValue(_f("main").s_textinput("Save this Lookup as"), $lkpName01);
+_setValue(_f("main").s_textinput("Input ID Here[4]"), $lkpName01);
+_click(_f("main").s_button("Add a row[1]"));
 $scenario_10529.end();
