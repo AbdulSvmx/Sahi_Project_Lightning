@@ -136,7 +136,7 @@ var $sfm_pg_sfmDesigner = new function sfm_pg_sfmDesigner() {
 	this.sel_ContextSource=_f("main").s_combobox("/ComboBox/").rightOf(_f("main").uiftetextfield("Context Source"));
 	this.chk_OverrideContext=_f("main").s_checkbox("Override Context");
 	this.sel_Context=_f("main").s_combobox("/ComboBox/").rightOf(_f("main").uiftetextfield("Context"));
-	this.sel_matchinField=_f("main").s_combobox("/ComboBox/").rightOf(_f("main").uiftetextfield("Matching Field"));
+	this.sel_matchinField=_f("main").s_combobox("/ComboBox/").near(_f("main").uiftetextfield("Matching Field"));
 	
 	
 	//Extended edit page objects --Labor
