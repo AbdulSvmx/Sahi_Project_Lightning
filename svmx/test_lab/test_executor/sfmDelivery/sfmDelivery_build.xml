@@ -64,9 +64,9 @@
 		<property name="host" value="localhost"/>
 		<property name="port" value="9999"/>
 		<property name="singlesession" value="false"/>
-		<property name="threads" value="5"/>
+		<property name="threads" value="1"/>
 		<property name="showPeriodicSummary" value="true"/>
-		<property name="failedSuiteName" value="op_demo_failed_${browser}.suite"/>
+		<property name="failedSuiteName" value="sfmDelivery_all_failed_${browser}.suite"/>
 		<property name="failedSuite" value="svmx/test_lab/test_suites/sfmDelivery/${failedSuiteName}"/>
 		<property name="jsCodeCoverage" value="false"/>
 	</target>
@@ -124,7 +124,7 @@
 							<report type="html" logdir="C://var//lib//jenkins//workspace//sahi_executions//logs//html//retry"/>
 						</sahi>
 						<antcall target="stopandfail"/>
-						<!--<antcall target="failsahichrome"/>-->
+						<antcall target="failsahichrome"/>
 					</target>
 
 				    <target name="failsahichrome" depends="set_properties_chrome" if="sahi.retry.failed.${browser}">
