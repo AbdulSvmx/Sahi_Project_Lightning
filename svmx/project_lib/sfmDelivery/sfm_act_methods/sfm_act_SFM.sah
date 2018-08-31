@@ -82,14 +82,15 @@ var $sfm_act_SFM = new function sfm_act_SFM() {
 
 	this.selectSFM = function($sfmName, $isCustom) {
 		if ($isCustom) {
-			_wait(10000);
 			_setStrictVisibilityCheck(true);
+			_wait(15000,_isVisible($bo_pg_sfmTransactionAndDesigner.btn_yourCustomSfmTransactions));
 			_click($bo_pg_sfmTransactionAndDesigner.btn_yourCustomSfmTransactions);
 			_setValue(
 					$bo_pg_sfmTransactionAndDesigner.txt_yourCustomSfmTransactionsQuickFind,
 					$sfmName);
 
 		} else {
+			_wait(15000,_isVisible($bo_pg_sfmTransactionAndDesigner.txt_standardSfmTransactionQuickFind));
 			_setValue($bo_pg_sfmTransactionAndDesigner.txt_standardSfmTransactionQuickFind,
 					$sfmName);
 		}
@@ -468,29 +469,44 @@ return $result;
 	this.verifyMultiPicklistValuesInDelivery = function($multiPickLabels,$multiPickValues){
 		//This function verifies the given values in the multipicklists and returns
 		//true or false based on the results
-		var $i = 0; var $actualList = [];
-		var $x;
+		var $i = 0;
+		var $uniqueMulti = [];var $actualList = [];
+		//find out the unique list of multi picklists
 		for($i=0;$i<$multiPickLabels.length;$i++){
-			if(_isVisible(_listItem("/"+$multiPickValues[$i]+"/",_near(_span($multiPickLabels[$i]))))){
-				$x = _getText(_listItem("/"+$multiPickValues[$i]+"/",_near(_span($multiPickLabels[$i]))));
-				$actualList.push($x);
-				_log("Expected Value for "+$multiPickLabels[$i]+": "+$multiPickLabels[$i]);
-				_log("Actual Value for "+$multiPickLabels[$i]+": "+$x);
+			if($uniqueMulti.indexOf($multiPickLabels[$i]) == -1){
+				$uniqueMulti.push($multiPickLabels[$i]);
 			}
 		}
-		_log($multiPickValues);
-		_log($actualList);
-		if(_areEqual($checkBoxExpValues,$actualList)){
-			_log("Multi Picklist values match");
-			return true;
+		_log($uniqueMulti);
+		var $j=0;var $z=0;var $result = true;var $x;
+		for($i=0;$i<$uniqueMulti.length;$i++){
+			var $actualList = [];
+			var $currentMultiValues = [];
+			for($j=0;$j<$multiPickValues.length;$j++){
+				if($multiPickLabels[$j] == $uniqueMulti[$i]){
+						$currentMultiValues.push($multiPickValues[$j]);
+				}
+			}
+			for($z=0;$z<$currentMultiValues.length;$z++){
+				if(_isVisible(_div($currentMultiValues[$z],_near(_span($uniqueMulti[$i]))))){
+					$actualList.push($currentMultiValues[$z]);
+				}
+			 }
+			if(_areEqual($currentMultiValues,$actualList)){
+				_log("Multi Picklist values for "+$uniqueMulti[$i]+" match");
+				$x = true;
+				$result = Boolean($result && $x);
+			}
+			else
+				{
+				    _log("Multi Picklist values for "+$uniqueMulti[$i]+"do not match");
+				    $x = false;
+					$result = Boolean($result && $x);
+				}		
+			
 		}
-		else
-			{
-			    _log("Multi Picklist values do not match");
-				return false;
-			}	
-		
-	};
+return $result;	
+};
 	this.addUserLookupInScreenDesigner = function($fieldName,$containerName){
 		//This function adds a user lookup which needs special handling in the screen designer
 		//to an existing page layout
