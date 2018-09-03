@@ -5,7 +5,7 @@
  */
 	_writeFile("false", $appiumPath+$sahiIntermediatoryPath, true);
 
-var $pre_requisite_2= _testcase("scenario8_afterRun","Changing the Mobile Permissions and running this After Test-case");
+var $pre_requisite_2= _testcase("setDownloadCriteriaWoToAllRecords","Changing the Mobile Permissions and running this After Test-case");
 $pre_requisite_2.start();
 var $appiumPath = "/auto/SVMX_Catalyst/Executable"
 _setSpeed($g_stepSpeed);
@@ -22,12 +22,14 @@ $pre_requisite_2.end();
 
 
 if(_isVisible(_div("Success:Mobile Configuration saved successfully for the selected profile"))) {
+	
+	_writeFile("true", $appiumPath+$sahiIntermediatoryPath, true);
 	_log("Pass");
-	_writeFile("true", $appiumPath+"sahResultCommon.txt", true);
 
 
 } else {
 	
+	
+	_writeFile("false", $appiumPath+$sahiIntermediatoryPath, true);
 	_fail("Fail");
-	_writeFile("false", $appiumPath+"sahResultCommon.txt", true);
 }
