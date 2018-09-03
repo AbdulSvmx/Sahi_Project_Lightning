@@ -7,7 +7,6 @@
 
 var $pre_requisite_2= _testcase("setDownloadCriteriaWoToAllRecords","Changing the Mobile Permissions and running this After Test-case");
 $pre_requisite_2.start();
-var $appiumPath = "/auto/SVMX_Catalyst/Executable"
 _setSpeed($g_stepSpeed);
 
 
@@ -16,11 +15,8 @@ $bo_act_login.login($g_url, $appiumAdminUn, $appiumAdminPwd);
 //Adding Work Order Back to the Download Criteria
 var $valuebefore = "All Records";
 $bo_act_SFMAppPermission.workOrderDownloadCriteriachanges($valuebefore);
-_writeFile("true", $appiumPath+$sahiIntermediatoryPath, true);
 
-$pre_requisite_2.end();
-
-
+_wait(3000,_isVisible(_div("Success:Mobile Configuration saved successfully for the selected profile")));
 if(_isVisible(_div("Success:Mobile Configuration saved successfully for the selected profile"))) {
 	
 	_writeFile("true", $appiumPath+$sahiIntermediatoryPath, true);
@@ -33,3 +29,6 @@ if(_isVisible(_div("Success:Mobile Configuration saved successfully for the sele
 	_writeFile("false", $appiumPath+$sahiIntermediatoryPath, true);
 	_fail("Fail");
 }
+
+
+$pre_requisite_2.end();
