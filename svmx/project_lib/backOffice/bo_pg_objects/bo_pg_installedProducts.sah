@@ -17,7 +17,8 @@ var $bo_pg_installedProducts = new function bo_pg_installedProducts(){
 	this.btn_delete = _button("Delete");
 	this.btn_continue = _submit("Continue");
 	this.txt_city = _textbox("/City/", _near(_div("/modal-header/")));//Modified for lightning
-	
+	this.txt_location = _textbox("/Location/", _near(_div("/modal-header/")));
+	this.txt_loplevel = _textbox("/Top-Level/", _near(_div("/modal-header/")));
 	this.btn_createWorkOrder = _button("/Create Work Order/");
 	this.btn_sfmSave = _link("Save");
 	this.txt_workOrderNumber = _paragraph("Work Order");

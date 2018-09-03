@@ -23,7 +23,7 @@ var $sfm_pg_screenDesigner = new function sfm_pg_screenDesigner(){
 	
 	this.lbl_addproduct = _f("main").s_label("Product[1]"); 
 	this.btn_ConfLookup = _f("main").s_button("Configure Lookup");
-	this.sel_LkupTemplate = _f("main").s_combobox("searchCombo[4]");
+	this.sel_LkupTemplate = _f("main").s_combobox("/searchCombo/").leftOf(_f("main").s_textinput("Save this Lookup as"));//Updated for Lightning
 	this.btn_Select = _f("main").s_button("Select");
 	this.btn_propoties=_f("main").tab("Properties");
     this.txt_sfmDescription=_f("main").s_textarea("pDescription");// added for lightning
@@ -57,9 +57,18 @@ var $sfm_pg_screenDesigner = new function sfm_pg_screenDesigner(){
 	this.lkp_parts = _f("main").s_button("refBtn");
 	this.sel_rowsToDisplay = _f("main").s_combobox("noOfRec");
 	this.txt_lookupName = _f("main").s_textinput("Save this Lookup as");
-	this.txt_lookupId = _f("main").s_textinput("Input ID Here[4]");
-	this.btn_lookupSave = _f("main").s_button("Save As[8]");
+	this.txt_lookupId = _f("main").s_textinput("/Input ID Here/").rightOf(_f("main").s_textinput("Save this Lookup as"));//updated for Lightning
+	this.btn_lookupSaveAs = _f("main").s_button("Save As").rightOf(_f("main").s_textinput("Save this Lookup as"));//updated for Lightning
+	this.btn_lookupSave=_f("main").s_button("Save").rightOf(_f("main").s_textinput("Save this Lookup as"));//updated for Lightning
+	this.lbl_lookupSaveConfirmMsg=_f("main").s_richtext("Lookup Configuration saved");
+	this.lbl_lookupFilterLabel=_f("main").s_label("Optionally, create a filter to limit the records available to users in the lookup field");
+	this.btn_lookupNewRow=_f("main").s_button("/Add a row/").near(this.lbl_lookupFilterLabel);
+	this.txt_lookupAdvExpr=_f("main").s_textinput("advExpIP");
+	this.chk_lookupDefault=_f("main").s_checkbox("/.*/").near(_f("main").s_label("/Make this/"))
 	this.btn_lookupClose = _f("main").s_button("closeButton");
+	this.link_Parts=_link("Parts");
+	this.link_Labor=_link("Labor");
+	
 	
 	
 };

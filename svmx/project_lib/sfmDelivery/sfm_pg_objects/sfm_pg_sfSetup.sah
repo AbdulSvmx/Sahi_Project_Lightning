@@ -3,7 +3,7 @@ var $sfm_pg_sfSetup = new function sfm_pg_sfSetup() {
 	this.txt_quickFind = _textbox("setupSearch");
 	this.link_objects = _link("Objects",_near(_link("Create")));
 	this.link_woObject = _link("Work Order[2]");
-	this.btn_customFieldNew = _button("/New/",_near(_heading3("Custom Fields & Relationships")));
+	this.btn_customFieldNew = _button("NewCustom Field");
 	this.radio_text = _radio("Text");
 	this.radio_number = _radio("Number");
 	this.radio_pickList = _radio("Picklist (Multi-Select)");
@@ -19,5 +19,14 @@ var $sfm_pg_sfSetup = new function sfm_pg_sfSetup() {
 	this.link_cases = _link("Cases");
 	this.link_addCustomField = _link("Add a custom field to cases");
 	this.btn_caseCustomFieldNew = _button("/New/",_near(_heading3("Case Custom Fields & Relationships")));
+	this.radio_currency = _radio("Currency");
+	this.radio_checkbox = _radio("Checkbox");
+	this.radio_date = _radio("Date");
+	this.radio_email = _radio("Email");
+	this.radio_percent = _radio("Percent");
+	this.radio_phone = _radio("Phone");
+	this.radio_textArea = _radio("Text Area");
+	this.radio_URL = _radio("URL");
+	
 		
 };

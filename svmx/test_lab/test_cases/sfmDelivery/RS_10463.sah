@@ -3,9 +3,10 @@ $rs_10463.start();
 	
 
 	//Login to App
-	$bo_act_login.login($g_url,$sfmUsn,$sfmPwd);
+	$bo_act_login.login($g_url,$sfmlUsn,$sfmlPwd);
 	$sfm_act_expressions.navigateToExpression();
 
+	//Create Custom expression
 	var $object="Work Order";
 	var $comboField=["Account","Actual Initial Response","Order Status","Order Type"];
 	var $comboConditions=["Contains","Equals","Not Equal","Equals"];
@@ -14,9 +15,9 @@ $rs_10463.start();
 	var $advExpr="";
 	var $errMsg="";
 	var $exprsnName = $bo_act_common.generateRandomName("RS_10463_expr_");
-	
 	$sfm_act_expressions.createCustomExpression($object, $comboField, $comboConditions, $toggleButton, $comboInput, $advExpr, $errMsg, $exprsnName);
 
+	//Clone TDM016
 	var $sfmNameToBeCloned="Manage Work Order Lines - Usage";
 	var $sfmName = $bo_act_common.generateRandomName("RS_10463_");
 	var $isCustom=false;
@@ -24,19 +25,16 @@ $rs_10463.start();
 	var $sfmTemplate="SVMXSTD: Manage WO Usage Lines";
 	var $fieldName="";
 	var $containerName="";
-	
 	$sfm_act_SFM.cloneTDM016($sfmNameToBeCloned, $sfmName, $isCustom, $sfmTemplateSaveAsName, $sfmTemplate, $fieldName, $containerName);
 	
+	//Add expression created to SFM
 	$sfm_act_Transactions.sfmQualifyingCriteriaieldMappings($object, "", "", $exprsnName);
 	
-	//$sfm_act_Transactions.sfmCreateCustomExpression($comboField, $comboConditions, $toggleButton, $comboInput, $advExpr, $errMsg, $exprsnName);
-	
+	//Update expression with more fields
 	var $addcomboField=["Driving Time (in Minutes)","Country"];
 	var $addcomboConditions=["Greater Than","Is Null"];
 	var $addcomboInput=["60",""];
 	var $addtoggleButton=["",""];
-
-
 	$sfm_act_Transactions.sfmUpdateExpression($addcomboField, $addcomboConditions, $addtoggleButton, $addcomboInput, "", "");
 	$sfm_act_Transactions.sfmSvaeExpression($exprsnName, $exprsnName, "Save");
 	_click($bo_pg_sfmTransactionAndDesigner.btn_saveAndclose);
@@ -46,19 +44,19 @@ $rs_10463.start();
 	var $finalcomboConditions=$comboConditions.concat($addcomboConditions);
 	var $finalcomboInput=$comboInput.concat($addcomboInput);
 	
-	var $object="Work Order";
-	var $exprsnName="RS_10463_expr_38201818213";
 	
 	$sfm_act_expressions.navigateToExpression();
 	var $getExprDetails=$sfm_act_Transactions.getExpressionValues($object, $exprsnName);
 	var $retcomboField=$getExprDetails[0];
 	var $retcomboConditions=$getExprDetails[1];
-	var $comboInput=$getExprDetails[2];
+	var $retcomboInput=$getExprDetails[2];
 	
 	for (var $i = 0; $i < $getExprDetails.length; $i++) {
 		_assertEqual($retcomboField[$i],$finalcomboField[$i]);
 		_assertEqual($retcomboConditions[$i],$finalcomboConditions[$i]);
-		_assertEqual($comboInput[$i],$finalcomboInput[$i]);
+		_assertEqual($retcomboInput[$i],$finalcomboInput[$i]);
 	}
+	
+	$sfm_act_lightningConfig.logoutInLightning();
 
 $rs_10463.end();

@@ -21,6 +21,44 @@ var $sfm_pg_sfmDesigner = new function sfm_pg_sfmDesigner() {
 	this.btn_saveWorkDetail = _span("Save",_rightOf(_span("Save & New"))); //added for lightning
 	this.btn_cancelWorkDetail = _span("Cancel",_leftOf(_span("Save"))); //added for lightning
 	this.btn_next = _span("Next",_rightOf(_span("Cancel",_in(_div("/modal-footer/")))));//added for lightning
+	this.link_WDstartDate=_link(0, _near(_span("Start Date and Time")));
+	this.link_WDendDate=_link(0, _near(_span("End Date and Time")));
+	this.txt_WDcanceledOn=_textbox(0, _near(_span("Canceled On")));
+	this.txt_WDclosedOn=_textbox(0, _near(_span("Closed On")));
+	this.txt_WDlineQTY=_textbox(" input", _near(_span("Line Qty")));
+	this.msg_WDCreateConfirm=_span("Work Detail was created.");
+	this.link_editWD=_link("Edit",_in(_list("scrollable")));
+
+	//this.newWDWindow=_parentNode(_heading2("/New Work Detail:/"),"DIV",2);
+	this.newWDWindow=_parentNode(_heading2("/Work Detail:/"),"DIV",2);
+	this.lbl_WDPart=_span("Part",_in(_div("/modal-body/")));
+	this.txt_WDpart=_textbox(0,_near(this.lbl_WDPart));
+	this.btn_WDNewProduct=_span("/New Product/",_near(this.lbl_WDPart));
+	this.link_activityType=_link(0,_near(_span("Activity Type",_in(_div("/modal-body/")))));
+	this.txt_requestedCity=_textbox(0,_near(_span("Requested City",_in(_div("/modal-body/")))));
+	this.txt_billableQty=_textbox(0,_near(_span("Billable Qty",_in(_div("/modal-body/")))));
+	
+	this.lbl_WDIB=_span("IB Serial Number",_in(_div("/modal-body/")));
+	this.txt_IBserialNo=_textbox(0,_near(this.lbl_WDIB));
+	this.btn_WDNewIB=_span("/New Installed Product/",_near(this.lbl_WDIB));
+	
+	this.newIBWindow=_parentNode(_heading2("New Installed Product"),"DIV",2);
+	this.lbl_Product=_span("Product",_in(this.newIBWindow));
+	this.txt_Product=_textbox(0,_near(this.lbl_Product));
+	this.btn_IBsave=_button("Save",_in(this.newIBWindow));
+	this.txt_SrSlotNo=_textbox(0,_near(_span("Serial/Lot Number",_in(this.newIBWindow))));
+	this.txt_Account=_textbox(0,_near(_span("Account",_in(this.newIBWindow))));
+	this.txt_IBID=_textbox(0,_near(_span("Installed Product ID",_in(this.newIBWindow))));
+	this.link_IBStatus=_link(0,_near(_span("Status",_in(this.newIBWindow))));
+	
+	
+	
+	this.WDnewPartWindow=_parentNode(_heading2("New Product"),"DIV",2);
+	this.lbl_WDProductName=_span("Product Name",_in(this.WDnewPartWindow));
+	this.txt_newProductName=_textbox("Product Name*", _near(this.lbl_WDProductName));
+	this.btn_WDProductSave=_button("Save",_in(this.WDnewPartWindow));
+	
+	
 	
 	
 	
@@ -55,11 +93,51 @@ var $sfm_pg_sfmDesigner = new function sfm_pg_sfmDesigner() {
 	this.txt_eeReceivedStreet = _textarea(0,_near(_span("Received Street",_in(_div("/sfm-window/")))));//Changed for Lightning
 	this.btn_eeUpdate = _span("Update",_in(_div("/sfm-window/"))); //Changed for Lightning;
 	this.btn_eeCancel = _span("/Cancel/",_in(_div("/sfm-window/"))); //Changed for Lightning;
+	this.txt_eeDateReceived = _textbox("/svmx-date/",_near(_span("Date Received",_in(_div("/sfm-window/")))));
 
 	this.txt_eeEstimatedPricePerUnit= _textbox(0,_near(_span("/Estimated Price Per Unit/",_in(_div("/sfm-window/")))));//Changed for Lightning
 	this.txt_eeReceivedCity =_textbox("Received City",_in(_div("/sfm-window/")));//Changed for Lightning
 	this.txt_eeReferenceInformation =_textarea(0,_near(_span("Reference Information",_in(_div("/sfm-window/"))))); //Changed for Lightning
 	this.txt_eeActivityType = _textbox("/sfm-picklist/",_near(_span("Activity Type",_in(_div("/sfm-window/"))))); //Changed for Lightning -- this needs to clicked and then click on the list item to set activity type
+	this.txt_eeAccount = _textbox("/svmx-text/",_near(_span("Account",_in(_div("/sfm-window/"))))); //added for lightning
+	
+	this.window_partsSearchWindow=_parentNode(_div("Parts"),"DIV",5);
+	this.lbl_part=_span("Part",_in(this.window_partsSearchWindow));
+	this.txt_partTextbox=_textbox("/inputEl/",_near(this.lbl_part));
+	this.searchPartIcon=_div("/trigger-search/",_near(this.lbl_part));
+	this.lbl_recentItemProducts=_div("Recent Items: Products");
+	this.lbl_account=_span("Account",_in(this.window_partsSearchWindow));
+	this.txt_accountTextbox=_textbox("/inputEl/",_near(this.lbl_account));
+	this.lbl_autoContact=_span("AutoContact",_in(this.window_partsSearchWindow));
+	this.txt_autoContactTextbox=_textbox("/inputEl/",_near(this.lbl_autoContact));
+	
+	
+	//header fields
+	this.lbl_headerAccount=_div("Account");
+	this.txt_headerAccount=_textbox("/inputEl/",_in(this.lbl_headerAccount));
+	this.btn_headerAccountSearchIcon=_div("/trigger-search/",_in(this.lbl_headerAccount));
+	this.lbl_headerContact=_div("Contact");
+	this.txt_headerContact=_textbox("/inputEl/",_in(this.lbl_headerContact));
+	this.link_ContactInDVR=_link("Contact",_in(_div("Contact: Multiple items found. Click lookup icon to refine search.")));
+	this.btn_headerContactsearchIcon=_div("/trigger-search/",_in(this.lbl_headerContact));
+	
+	this.link_Update=_link("Update");
+	this.link_quickSave=_link("Quick Save");
+	
+	this.link_accountInDVR=_link("Account",_in(_div("Account: Multiple items found. Click lookup icon to refine search.")));
+	this.btn_searchIconInSFM=_div("/trigger-search/",_in(_div("/sfm-lookupcelleditor/")));
+	this.link_searchLink=_link("Search");
+	this.btn_searchTextBox=_textbox("/sfm-text/",_near(this.link_searchLink));	
+	this.link_accountInDVRNoMatch=_link("Account",_in(_div("Account: Multiple items found. Click lookup icon to refine search.")));
+	
+	this.link_autoContactInDVR=_link("AutoContact",_in(_div("AutoContact: Multiple items found. Click lookup icon to refine search.")));
+	this.txt_autoContactTextBoxInSFM=_div("/grid-cell/",_under(_parentNode(_span("AutoContact"),"DIV",4)));
+	
+	this.sel_ContextSource=_f("main").s_combobox("/ComboBox/").rightOf(_f("main").uiftetextfield("Context Source"));
+	this.chk_OverrideContext=_f("main").s_checkbox("Override Context");
+	this.sel_Context=_f("main").s_combobox("/ComboBox/").rightOf(_f("main").uiftetextfield("Context"));
+	this.sel_matchinField=_f("main").s_combobox("/ComboBox/").near(_f("main").uiftetextfield("Matching Field"));
+	
 	
 	//Extended edit page objects --Labor
 	
@@ -82,6 +160,8 @@ var $sfm_pg_sfmDesigner = new function sfm_pg_sfmDesigner() {
 	this.txt_component = _textbox(0,_near(_span("Component"))); // added for lightning
 	this.txt_city = _textbox("City",_near(_span("City")));
 	this.txt_acutalIntialResponse = _textbox(0,_near(_span("Actual Initial Response"))) ;
+	this.txt_priority = _textbox("/sfm-picklist/",_near(_div("Priority")));
+	this.txt_zip = _textbox("Zip");
 	
 	
 };

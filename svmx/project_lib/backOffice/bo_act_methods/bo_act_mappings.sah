@@ -9,28 +9,60 @@ var $bo_act_mappings = new function bo_act_mappings() {
 	
 	this.createMapping = function($containerName,$pickListLabels,$pickListValues,$textLabels,$textValues,$mapName){
 		var $i = 0;
-		_selectDomain($domainName);
 		_wait(6000);
 		_click($sfm_pg_sfmMapping.btn_mappingTab);
 		_click(_f("main").s_label($containerName));
-		_click($sfm_pg_sfmMapping.btn_newMappingExistingRecord);
+		if(_isVisible($sfm_pg_sfmMapping.tab_fieldMapForExisting)){
+			_click($sfm_pg_sfmMapping.btn_newButtonFieldMap);
+		}
+		else if(_isVisible($sfm_pg_sfmMapping.tab_valueMapForExisting)||_isVisible($sfm_pg_sfmMapping.tab_valueMapForNew)){
+			_click($sfm_pg_sfmMapping.btn_newMappingExistingRecord);
+		}
+		
 		_wait(6000);
 		if($pickListLabels.length > 0) {
 		//First setting the picklist values
 		for($i=0;$i<$pickListLabels.length;$i++){
-			_click(_f("main").s_togglebutton("I want to choose a field from the list").rightOf(_f("main").ftedatagriditemrenderer($pickListLabels[$i])));
-			_setSelected(_f("main").s_combobox("valuesCombo").rightOf(_f("main").ftedatagriditemrenderer($pickListLabels[$i])),$pickListValues[$i]);
+			if(_isVisible($sfm_pg_sfmMapping.tab_fieldMapForExisting)){
+				_setSelected(_f("main").s_combobox("valuesCombo").rightOf(_f("main").ftedatagriditemrenderer($pickListLabels[$i])),$pickListValues[$i]);
+			}
+			else if(_isVisible($sfm_pg_sfmMapping.tab_valueMapForExisting)||_isVisible($sfm_pg_sfmMapping.tab_valueMapForNew)){
+				_click(_f("main").s_togglebutton("I want to choose a field from the list").rightOf(_f("main").ftedatagriditemrenderer($pickListLabels[$i])));
+				//Special handling for look up fields
+				if(_isVisible(_f("main").s_button("Search and Select").rightOf(_f("main").ftedatagriditemrenderer($pickListLabels[$i])))){
+					_click(_f("main").s_button("Search and Select").rightOf(_f("main").ftedatagriditemrenderer($pickListLabels[$i])));
+				   	_setStrictVisibilityCheck(true);
+					_setValue(_f("main").s_textinput("lookUpSearchField"),$pickListValues[$i]);
+					_click($sfm_pg_sfmMapping.lkp_insideMapping);
+					_click(_f("main").ftedatagriditemrenderer($pickListValues[$i]));
+					_click($sfm_pg_sfmMapping.btn_selectForLookup);
+					_setStrictVisibilityCheck(false);
+				}
+				else{
+						_setSelected(_f("main").s_combobox("valuesCombo").rightOf(_f("main").ftedatagriditemrenderer($pickListLabels[$i])),$pickListValues[$i]);
+				}
+			}
 		}
-		if($containerName === "Work Order"){
+		if($containerName === "Work Order" && _isVisible($sfm_pg_sfmMapping.tab_valueMapForExisting)){
 			_setValue($sfm_pg_sfmMapping.txt_mappingNameForExisting,$mapName);
 			_setValue($sfm_pg_sfmMapping.txt_mappingIdForExisting,$mapName);
 		}
-		else {
-			_setValue($sfm_pg_sfmMapping.txt_mappingNameForNew,$mapName);
-			_setValue($sfm_pg_sfmMapping.txt_mappingIdForNew,$mapName);
+		else if($containerName != "Work Order" && _isVisible($sfm_pg_sfmMapping.tab_valueMapForNew)){
+				_setValue($sfm_pg_sfmMapping.txt_mappingNameForNew,$mapName);
+				_setValue($sfm_pg_sfmMapping.txt_mappingIdForNew,$mapName);
+				
+		   }
+		else if (_isVisible($sfm_pg_sfmMapping.tab_fieldMapForExisting)){
+			_setValue($sfm_pg_sfmMapping.txt_mappingNameFieldMap,$mapName);
+			_setValue($sfm_pg_sfmMapping.txt_mappingIdFieldMap,$mapName);
+		}
+		if(_isVisible($sfm_pg_sfmMapping.tab_fieldMapForExisting)){
+			_click($sfm_pg_sfmMapping.btn_saveFieldMap);
+		}
+		else if(_isVisible($sfm_pg_sfmMapping.tab_valueMapForExisting)){
+			_click($sfm_pg_sfmMapping.btn_saveMappingExistingRecord);
 		}
 		
-		_click($sfm_pg_sfmMapping.btn_saveMappingExistingRecord);
 		if(_isVisible(_f("main").button("OK"))){
 			_click(_f("main").button("OK"));
 		}
@@ -38,7 +70,7 @@ var $bo_act_mappings = new function bo_act_mappings() {
 		}
 		//Set all the text values
 		$i = 0;
-		if($pickListLabels.length > 0) {
+		if($pickListLabels.length > 0 && $textLabels.length > 0) {
 		 _click($sfm_pg_sfmMapping.btn_toggleMapOnOff);
 		}
 		if($textLabels.length > 0){
@@ -46,23 +78,42 @@ var $bo_act_mappings = new function bo_act_mappings() {
 			_setValue(_f("main").s_textinput("textip").rightOf(_f("main").ftedatagriditemrenderer($textLabels[$i])),$textValues[$i]);
 		}
 		if($pickListLabels.length > 0){
-		  _click($sfm_pg_sfmMapping.btn_saveMappingExistingRecord);
+			if(_isVisible($sfm_pg_sfmMapping.tab_fieldMapForExisting)){
+				_click($sfm_pg_sfmMapping.btn_saveFieldMap);
+			}
+			else if(_isVisible($sfm_pg_sfmMapping.tab_valueMapForExisting)){
+				_click($sfm_pg_sfmMapping.btn_saveMappingExistingRecord);
+			}
 		}
 		else {
-				if($containerName === "Work Order"){
+				if($containerName === "Work Order" && _isVisible($sfm_pg_sfmMapping.tab_valueMapForExisting)){
 					_setValue($sfm_pg_sfmMapping.txt_mappingNameForExisting,$mapName);
 					_setValue($sfm_pg_sfmMapping.txt_mappingIdForExisting,$mapName);
 				}
-				else {
+				else if($containerName != "Work Order" && _isVisible($sfm_pg_sfmMapping.tab_valueMapForNew)){
 						_setValue($sfm_pg_sfmMapping.txt_mappingNameForNew,$mapName);
 						_setValue($sfm_pg_sfmMapping.txt_mappingIdForNew,$mapName);
-						_click($sfm_pg_sfmMapping.btn_saveMappingExistingRecord);
+						
 				   }
+				else if (_isVisible($sfm_pg_sfmMapping.tab_fieldMapForExisting)){
+					_setValue($sfm_pg_sfmMapping.txt_mappingNameFieldMap,$mapName);
+					_setValue($sfm_pg_sfmMapping.txt_mappingIdFieldMap,$mapName);
+				}
 		}
-		//_setSelected($sfm_pg_sfmMapping.btn_selectExistingMap,$mapName);
+		if(_isVisible($sfm_pg_sfmMapping.tab_fieldMapForExisting)){
+			_click($sfm_pg_sfmMapping.btn_saveFieldMap);
 		}
-		_click($bo_pg_sfmTransactionAndDesigner.btn_quickSave1);
-		_selectDomain();
+		else if(_isVisible($sfm_pg_sfmMapping.tab_valueMapForExisting)){
+			_click($sfm_pg_sfmMapping.btn_saveMappingExistingRecord);
+		}
+		_wait(5000);
+		}
+	_wait(3000);
+	_setStrictVisibilityCheck(true);
+	_click($sfm_pg_sfmMapping.btn_switchOnMapping);
+	_setStrictVisibilityCheck(false);
+	_click($bo_pg_sfmTransactionAndDesigner.btn_quickSave1);
+	_selectDomain();
 		
 	};
 	
@@ -79,7 +130,12 @@ var $bo_act_mappings = new function bo_act_mappings() {
 		if($pickListLabels.length > 0){
 			for($i=0;$i<$pickListLabels.length;$i++){
 				_setSelected(_f("main").s_combobox("valuesCombo").rightOf(_f("main").ftedatagriditemrenderer($pickListLabels[$i])),$pickListValues[$i]);
-				_click($sfm_pg_sfmMapping.btn_saveMappingExistingRecord);
+				if(_isVisible($sfm_pg_sfmMapping.tab_fieldMapForExisting)){
+					_click($sfm_pg_sfmMapping.btn_saveFieldMap);
+				}
+				else if(_isVisible($sfm_pg_sfmMapping.tab_valueMapForExisting)||_isVisible($sfm_pg_sfmMapping.tab_valueMapForNew)){
+					_click($sfm_pg_sfmMapping.btn_saveMappingExistingRecord);
+				}
 				_wait(2000);
 				_assertVisible($sfm_pg_sfmMapping.label_mapSavedMsg);
 			}
@@ -88,11 +144,21 @@ var $bo_act_mappings = new function bo_act_mappings() {
 			for($i=0;$i<$textLabels.length;$i++){
 				_setValue(_f("main").s_textinput("textip").rightOf(_f("main").ftedatagriditemrenderer($textLabels[$i])),$textValues[$i]);
 			}
-			_click($sfm_pg_sfmMapping.btn_saveMappingExistingRecord);
+			if(_isVisible($sfm_pg_sfmMapping.tab_fieldMapForExisting)){
+				_click($sfm_pg_sfmMapping.btn_saveFieldMap);
+			}
+			else if(_isVisible($sfm_pg_sfmMapping.tab_valueMapForExisting)||_isVisible($sfm_pg_sfmMapping.tab_valueMapForNew)){
+				_click($sfm_pg_sfmMapping.btn_saveMappingExistingRecord);
+			}
 			_wait(2000);
 			_assertVisible($sfm_pg_sfmMapping.label_mapSavedMsg);
 		}
+		_setStrictVisibilityCheck(true);
+		_click($sfm_pg_sfmMapping.btn_switchOnMapping);
+		_setStrictVisibilityCheck(false);
+		_wait(1000);
 		_click($bo_pg_sfmTransactionAndDesigner.btn_quickSave1);
+		_wait(2000);
 	};
 	
 	this.addFieldsToExistingMapping = function($containerName,$pickListLabels,$pickListValues,$textLabels,$textValues,$mapName){
@@ -111,7 +177,12 @@ var $bo_act_mappings = new function bo_act_mappings() {
 					for($i=0;$i<$pickListLabels.length;$i++){
 						_click(_f("main").s_togglebutton("I want to choose a field from the list").rightOf(_f("main").ftedatagriditemrenderer($pickListLabels[$i])));
 						_setSelected(_f("main").s_combobox("valuesCombo").rightOf(_f("main").ftedatagriditemrenderer($pickListLabels[$i])),$pickListValues[$i]);
-						_click($sfm_pg_sfmMapping.btn_saveMappingExistingRecord);
+						if(_isVisible($sfm_pg_sfmMapping.tab_fieldMapForExisting)){
+							_click($sfm_pg_sfmMapping.btn_saveFieldMap);
+						}
+						else if(_isVisible($sfm_pg_sfmMapping.tab_valueMapForExisting)){
+							_click($sfm_pg_sfmMapping.btn_saveMappingExistingRecord);
+						}
 						_wait(2000);
 						_assertVisible($sfm_pg_sfmMapping.label_mapSavedMsg);
 					}
@@ -120,7 +191,12 @@ var $bo_act_mappings = new function bo_act_mappings() {
 					for($i=0;$i<$textLabels.length;$i++){
 						_setValue(_f("main").s_textinput("textip").rightOf(_f("main").ftedatagriditemrenderer($textLabels[$i])),$textValues[$i]);
 					}
-					_click($sfm_pg_sfmMapping.btn_saveMappingExistingRecord);
+					if(_isVisible($sfm_pg_sfmMapping.tab_fieldMapForExisting)){
+						_click($sfm_pg_sfmMapping.btn_saveFieldMap);
+					}
+					else if(_isVisible($sfm_pg_sfmMapping.tab_valueMapForExisting)){
+						_click($sfm_pg_sfmMapping.btn_saveMappingExistingRecord);
+					}
 					_wait(2000);
 					_assertVisible($sfm_pg_sfmMapping.label_mapSavedMsg);
 				}
@@ -157,4 +233,5 @@ var $bo_act_mappings = new function bo_act_mappings() {
 			_setStrictVisibilityCheck(false);
 			_assertVisible($sfm_pg_sfmMapping.label_mapDeleted);
 	};
+
 };

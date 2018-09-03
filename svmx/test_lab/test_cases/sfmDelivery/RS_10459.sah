@@ -3,7 +3,7 @@ $rs_10459.start();
 	
 	
 	//Login to App
-	$bo_act_login.login($g_url,$sfmUsn,$sfmPwd);
+	$bo_act_login.login($g_url,$sfmlUsn,$sfmlPwd);
 	$sfm_act_expressions.navigateToExpression();
 	
 	//Create Custom Expression
@@ -33,5 +33,6 @@ $rs_10459.start();
 	
 	_assertNotExists($sfm_pg_expressions.sel_comboField.near(_f("SFMExpressionBuilderSWF").s_label("1")), "Delete Expression is failed");
 	
+	$sfm_act_lightningConfig.logoutInLightning();
 	
 $rs_10459.end();

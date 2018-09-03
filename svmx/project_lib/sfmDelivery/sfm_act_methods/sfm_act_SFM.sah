@@ -20,17 +20,19 @@ var $sfm_act_SFM = new function sfm_act_SFM() {
 		_setValue($bo_pg_sfmTransactionAndDesigner.txt_name, "");
 		_setValue($bo_pg_sfmTransactionAndDesigner.txt_name, $sfmName);
 		_click($bo_pg_sfmTransactionAndDesigner.btn_screenDesigner);
-		_wait(15000);
+		_wait(5000);
 		_setSelected($bo_pg_sfmTransactionAndDesigner.sel_sfmTemplate,
 				$sfmTemplate);
 		_setValue($bo_pg_sfmTransactionAndDesigner.txt_sfmSavePageLayoutAs,
 				$sfmTemplateSaveAsName);
 		_setValue($bo_pg_sfmTransactionAndDesigner.txt_sfmSavePageLayoutAsId,
 				$sfmTemplateSaveAsName);
-		_wait(10000);
+		_wait(5000);
 		_click($bo_pg_sfmTransactionAndDesigner.btn_quickSave1);
 		_wait(3000);
-		$sfm_act_SFM.addFieldToScreen($fieldName, $containerName);
+		if($fieldName.length > 0){
+			$sfm_act_SFM.addFieldToScreen($fieldName, $containerName);
+		}
 	};
 	
 	/**
@@ -54,19 +56,23 @@ var $sfm_act_SFM = new function sfm_act_SFM() {
 				}				
 				_click(_f("main").s_datagroup("dataGroup").near(
 						_f("main").s_richtext($containerName[$i])));
-				_setValue(_f("main").s_textinput("searchText[4]"),
-						$fieldName[$i]);
+				//_setValue(_f("main").s_textinput("searchText[4]"),$fieldName[$i]);
+				_setValue($bo_pg_sfmTransactionAndDesigner.txt_quickFindField, $fieldName[$i]);
 				if($fieldName[$i]=="AutoContact"){
 					_doubleClick($sfm_pg_screenDesigner.lbl_autoContact);
-					$sfm_act_Transactions.addLookupContext();
+					//$sfm_act_Transactions.addLookupContext();
 				}
 				else if($fieldName[$i]=="Activity Type"){
 					_click(_f("main").s_label("Activity Type[1]"));
-					_click(_f("main").s_button("Add Field"));
+					_click(_f("main").s_button("/Add Field/"));
+				}
+				else if($fieldName[$i]=="Case"){
+					_click(_f("main").s_label("Case[3]"));
+					_click(_f("main").s_button("/Add Field/"));
 				}
 				else{
-				_click(_f("main").s_label($fieldName[$i]));
-				_click(_f("main").s_button("Add Field"));
+				_click(_f("main").s_label($fieldName[$i]).near(_f("main").s_button("Add Field")));
+				_click(_f("main").s_button("/Add Field/"));
 			}
 			}
 		}
@@ -76,14 +82,15 @@ var $sfm_act_SFM = new function sfm_act_SFM() {
 
 	this.selectSFM = function($sfmName, $isCustom) {
 		if ($isCustom) {
-			_wait(10000);
 			_setStrictVisibilityCheck(true);
+			_wait(15000,_isVisible($bo_pg_sfmTransactionAndDesigner.btn_yourCustomSfmTransactions));
 			_click($bo_pg_sfmTransactionAndDesigner.btn_yourCustomSfmTransactions);
 			_setValue(
 					$bo_pg_sfmTransactionAndDesigner.txt_yourCustomSfmTransactionsQuickFind,
 					$sfmName);
 
 		} else {
+			_wait(15000,_isVisible($bo_pg_sfmTransactionAndDesigner.txt_standardSfmTransactionQuickFind));
 			_setValue($bo_pg_sfmTransactionAndDesigner.txt_standardSfmTransactionQuickFind,
 					$sfmName);
 		}
@@ -139,12 +146,27 @@ var $sfm_act_SFM = new function sfm_act_SFM() {
 		_click(_f("main").s_richtext("Parts"));
 		_setValue(_f("main").s_textinput(0).rightOf(_f("main").uiftetextfield("Allow Multi Add Using")), "");
 		_setValue(_f("main").s_textinput(0).rightOf(_f("main").uiftetextfield("Allow Multi Add Using")), "Select");
-		_click(_f("main").s_label("--None--"));
+		if($multiAdd =="Case"){
+			_click(_f("main").s_label("Case[2]"));
+		}else{
+			_click(_f("main").s_label($multiAdd));
+		}
 		_click(_f("main").s_button("Save[3]"));
 		_wait(3000, _isVisible(_f("main").label("Page saved")));		
 	};
 	
-	//Fill text values in SFM Lightning Delivery screen
+	this.setFormFill = function($fieldName,$objMapping,$nearBy){
+		if($nearBy == 'Parts' || $nearBy == 'Labor' || $nearBy == 'Expense' || $nearBy == 'Travel'){
+			_click(_f("main").s_richtext($fieldName).near(_f("main").s_richtext($nearBy)));
+		}else{
+			_click(_f("main").s_textinput("txtIp").inside(_f("main").fieldrenderer($fieldName)));
+		}
+		_setSelected(_f("main").s_combobox("/ComboBox/").rightOf(_f("main").uiftetextfield("Object Mapping")),$objMapping);
+		_click(_f("main").s_button("Save[3]"));
+		_wait(3000, _isVisible(_f("main").label("Page saved")));
+	};
+	
+	//Fill_setSelected(_f("main").s_combobox("ComboBox24974"), "SVMXSTD: Case To Work Order"); text values in SFM Lightning Delivery screen
 	this.fillHeaderTextValues = function($labelsArray,$valuesArray) {
 		var $i = 0;
 		for($i=0;$i<$labelsArray.length;$i++){
@@ -163,6 +185,21 @@ var $sfm_act_SFM = new function sfm_act_SFM() {
 			_click(_div("/trigger-picker/",_near(_span($labelsArray[$i]))));
 			_click(_listItem($valuesArray[$i]));
 		}	
+	};
+	
+	//Select checkboxes for header. Author : Janaki
+	//Note: Checkbox values should be true or false
+	this.selectHeaderCheckBox = function($checkBoxLabels,$checkBoxValues){
+		var $i = 0;
+		for($i = 0;$i<$checkBoxLabels.length;$i++){
+			if($checkBoxValues[$i] === "true"){
+				_check(_checkbox(0,_near(_label($checkBoxLabels[$i]))));
+			
+			}
+			else if($checkBoxValues[$i] === "false"){
+				_uncheck(_checkbox(0,_near(_label($checkBoxLabels[$i]))));
+			}
+		}		
 	};
 	
 	//Fill text values in Extended Edit window for given text fields (Child Line Item) Author: Janaki
@@ -242,12 +279,16 @@ var $sfm_act_SFM = new function sfm_act_SFM() {
 		_setStrictVisibilityCheck(true);
 		_setValue(_textbox("/sfm-text/",_leftOf(_link("Search"))),$productName);
 		_click($sfm_pg_wo.btn_productSearchChildLine);
-		if(_isVisible(_span("x-grid-checkcolumn",_leftOf(_div("/"+$productName+"/"))))) {
-		  _click(_span("x-grid-checkcolumn",_leftOf(_div("/"+$productName+"/"))));	
+		_wait(2000);
+		if(_isVisible(_span("/x-grid-checkcolumn/",_leftOf(_div("/"+$productName+"/"))))) {
+		  _click(_span("/x-grid-checkcolumn/",_leftOf(_div("/"+$productName+"/"))));	
 		  _click($sfm_pg_wo.btn_addProductChildLine);
 		}
+		else if(_isVisible(_link($productName))){
+		 	_click(_link($productName));	
+		}
 		else {
-		 _click(_link($productName));	
+			_log("Product Search failed");
 		}
 	};
 	
@@ -267,6 +308,7 @@ var $sfm_act_SFM = new function sfm_act_SFM() {
 		$x = $x-1;
 		_log($x);
 		_click(_div("x-action-col-icon x-action-col-0  x-sfmd-edit-icon["+$x+"]"));
+		_wait(1000);
 		_click(_span("Edit"));
 		//Input values in Extended Edit window.
 		_setStrictVisibilityCheck(true);
@@ -307,36 +349,38 @@ var $sfm_act_SFM = new function sfm_act_SFM() {
 // Author: Janaki
 	
 
-this.verifyValuesInDelivery = function($textPicklistDateLabels,$textPicklistDateExpValues,$timeLabels,$timeExpValues,$textAreaLabels,$textAreaExpvalues,$checkBoxLabels,$checkBoxExpValues){
+this.verifyValuesInDelivery = function($textPicklistDateLabels,$textPicklistDateExpValues,$timeLabels,$timeExpValues,$textAreaLabels,$textAreaExpvalues,$checkBoxLabels,$checkBoxExpValues,$multiPickLabels,$multiPickValues){
 	
-	 var $x = _count("_row", "/.*/",_in(_div("/x-grid-item-container/")));
-	 $x = $x-1;
-	_log($x);
-	_click(_div("x-action-col-icon x-action-col-0  x-sfmd-edit-icon["+$x+"]"));
-	_click(_span("Edit"));
 	//Call individual functions to verify values of various data types
-	var $resultList = [];
+	var $result = true; var $x;
 	//First text and picklists
 	if($textPicklistDateLabels.length > 0){
-		$resultList.push(this.verifyTextPicklistValues($textPicklistDateLabels, $textPicklistDateExpValues));
+		$x = this.verifyTextPicklistValues($textPicklistDateLabels, $textPicklistDateExpValues);
+		_log($x);
+		$result = Boolean($result && $x);
 	}
 	if($timeLabels.length > 0){
-		$resultList.push(this.verifyTimeValues($timeLabels,$timeExpValues));
+		$x = this.verifyTimeValues($timeLabels,$timeExpValues);
+		_log($x);
+		$result = Boolean($result && $x);
 	}
 	if($textAreaLabels.length > 0){
-		$resultList.push(this.verifyTextAreaValues($textAreaLabels,$textAreaExpvalues));
+		$x = this.verifyTextAreaValues($textAreaLabels,$textAreaExpvalues);
+		_log($x);
+		$result = Boolean($result && $x);
 	}
 	if($checkBoxLabels.length > 0){
-		$resultList.push(this.verifyCheckBoxValues($checkBoxLabels,$checkBoxExpValues));
+		$x = this.verifyCheckBoxValues($checkBoxLabels,$checkBoxExpValues);
+		_log($x);
+		$result = Boolean($result && $x);
 	}
-	//Consolidate results and send to main calling function
-	var $finalResult = $resultList.indexOf("false");
-	if($finalResult == -1){
-		return true;
+	if($multiPickLabels.length > 0){
+		$x = this.verifyMultiPicklistValuesInDelivery($multiPickLabels, $multiPickValues)
+		_log($x);
+		$result = Boolean($result && $x);
 	}
-	else {
-		return false;
-	}
+_log($result);
+return $result;
 };
 	
 	
@@ -346,17 +390,19 @@ this.verifyValuesInDelivery = function($textPicklistDateLabels,$textPicklistDate
 		var $i = 0; var $actualList = [];
 		for($i=0;$i<$textPicklistDateLabels.length;$i++){
 		 		$actualList.push(_getValue(_textbox(0,_near(_label($textPicklistDateLabels[$i])))));
-		 		_log("Expected Value : "+$textPicklistDateExpValues[$i]);
-		 		_log("Actual Value : "+$actualList[$i]);
+		 		_log("Expected Value for "+$textPicklistDateLabels[$i]+": "+$textPicklistDateExpValues[$i]);
+		 		_log("Actual Value for "+$textPicklistDateLabels[$i]+": "+$actualList[$i]);
 			}
+		_log($textPicklistDateExpValues);
+		_log($actualList);
 		if(_areEqual($textPicklistDateExpValues,$actualList)){
 			_log("Text , Picklist values match");
 			return true;
 		}
 		else
 			{
-			_log("Text , Picklist values do not match");
-				return false;
+			 _log("Text , Picklist values do not match");
+			 return false;
 			}
 	};
 	
@@ -364,16 +410,18 @@ this.verifyValuesInDelivery = function($textPicklistDateLabels,$textPicklistDate
 		var $i = 0; var $actualList = [];
 		for($i=0;$i<$timeLabels.length;$i++){
 		 		$actualList.push(_getValue(_textbox(1,_near(_label($timeLabels[$i])))));
-		 		_log("Expected Value : "+$timeExpValues[$i]);
-		 		_log("Actual Value : "+$actualList[$i]);
+		 		_log("Expected Value for "+$timeLabels[$i]+": "+$timeExpValues[$i]);
+		 		_log("Actual Value for "+$timeLabels[$i]+": "+$actualList[$i]);
 			}
-		if(_areEqual($textPicklistDateExpValues,$actualList)){
+		_log($timeExpValues);
+		_log($actualList);
+		if(_areEqual($timeExpValues,$actualList)){
 			_log("Time values match");
 			return true;
 		}
 		else
 			{
-			_log("Time values do not match");
+			    _log("Time values do not match");
 				return false;
 			}	
 	};
@@ -381,16 +429,18 @@ this.verifyValuesInDelivery = function($textPicklistDateLabels,$textPicklistDate
 		var $i = 0; var $actualList = [];
 		for($i=0;$i<$textAreaLabels.length;$i++){
 		 		$actualList.push(_getValue(_textarea(0,_near(_label($textAreaLabels[$i])))));
-		 		_log("Expected Value : "+$textAreaExpvalues[$i]);
-		 		_log("Actual Value : "+$actualList[$i]);
+		 		_log("Expected Value for "+$textAreaLabels[$i]+": "+$textAreaExpvalues[$i]);
+		 		_log("Actual Value for "+$textAreaLabels[$i]+": "+$actualList[$i]);
 			}
-		if(_areEqual($textPicklistDateExpValues,$actualList)){
+		_log($textAreaExpvalues);
+		_log($actualList);
+		if(_areEqual($textAreaExpvalues,$actualList)){
 			_log("Text area values match");
 			return true;
 		}
 		else
 			{
-			_log("Text area values do not match");
+				_log("Text area values do not match");
 				return false;
 			}	
 	};
@@ -399,19 +449,115 @@ this.verifyValuesInDelivery = function($textPicklistDateLabels,$textPicklistDate
 		var $i = 0; var $actualList = [];
 		var $x;
 		for($i=0;$i<$checkBoxLabels.length;$i++){
-			$x = _condition(_checkbox(0,_near(_label("Is Billable"))).checked );
+			$x = _condition(_checkbox(0,_near(_label($checkBoxLabels[$i]))).checked );
 			$actualList.push($x);
-			_log("Expected Value : "+$checkBoxExpValues[$i]);
-	 		_log("Actual Value : "+$actualList[$i]);
+			_log("Expected Value for "+$checkBoxLabels[$i]+": "+$checkBoxExpValues[$i]);
+	 		_log("Actual Value for "+$checkBoxLabels[$i]+": "+$actualList[$i]);
 		}
+		_log($checkBoxExpValues);
+		_log($actualList);
 		if(_areEqual($checkBoxExpValues,$actualList)){
 			_log("CheckBox values match");
 			return true;
 		}
 		else
 			{
-			_log("Checkbox values do not match");
+			    _log("Checkbox values do not match");
 				return false;
 			}	
+	};
+	this.verifyMultiPicklistValuesInDelivery = function($multiPickLabels,$multiPickValues){
+		//This function verifies the given values in the multipicklists and returns
+		//true or false based on the results
+		var $i = 0;
+		var $uniqueMulti = [];var $actualList = [];
+		//find out the unique list of multi picklists
+		for($i=0;$i<$multiPickLabels.length;$i++){
+			if($uniqueMulti.indexOf($multiPickLabels[$i]) == -1){
+				$uniqueMulti.push($multiPickLabels[$i]);
+			}
+		}
+		_log($uniqueMulti);
+		var $j=0;var $z=0;var $result = true;var $x;
+		for($i=0;$i<$uniqueMulti.length;$i++){
+			var $actualList = [];
+			var $currentMultiValues = [];
+			for($j=0;$j<$multiPickValues.length;$j++){
+				if($multiPickLabels[$j] == $uniqueMulti[$i]){
+						$currentMultiValues.push($multiPickValues[$j]);
+				}
+			}
+			for($z=0;$z<$currentMultiValues.length;$z++){
+				if(_isVisible(_div($currentMultiValues[$z],_near(_span($uniqueMulti[$i]))))){
+					$actualList.push($currentMultiValues[$z]);
+				}
+			 }
+			if(_areEqual($currentMultiValues,$actualList)){
+				_log("Multi Picklist values for "+$uniqueMulti[$i]+" match");
+				$x = true;
+				$result = Boolean($result && $x);
+			}
+			else
+				{
+				    _log("Multi Picklist values for "+$uniqueMulti[$i]+"do not match");
+				    $x = false;
+					$result = Boolean($result && $x);
+				}		
+			
+		}
+return $result;	
+};
+	this.addUserLookupInScreenDesigner = function($fieldName,$containerName){
+		//This function adds a user lookup which needs special handling in the screen designer
+		//to an existing page layout
+		_click($bo_pg_sfmTransactionAndDesigner.btn_screenDesigner);
+		_click(_f("main").s_datagroup("dataGroup").near(_f("main").s_richtext($containerName)));
+		_click(_f("main").s_label($fieldName));
+		_click($bo_pg_sfmTransactionAndDesigner.btn_addFieldToPage);
+		_click($bo_pg_sfmTransactionAndDesigner.btn_pageLayoutSave);
+		_wait(3000, _isVisible($bo_pg_sfmTransactionAndDesigner.label_pageSaved));
+		
+	};
+	
+	/**
+	 * Author		:	Anand Kakhandaki
+	 * Function		:	To search and add items on header object lookup field
+	 * Parameters	:	$object= Name of object on the header. Ex: case on the Work order 
+	 * 					$searchObject= Name of the item need to be searched
+	 * Returns		: 	Nothing
+	 * Example		: 	Refer RS_10431.sah for funtion usage
+	 */
+	this.searchAndAddHeaderField=function($object,$searchObject){
+		this.searchHeaderField($object, $searchObject);
+		_click(_link($searchObject));
+		_wait();
+		var $appendedValue=_getText(_textbox("/inputEl/",_near(_span($object))));
+		if ($appendedValue==$searchObject) {
+			_log("Pass");
+		}else{
+			_log("fail");
+		}
+	};
+	
+	/**
+	 * Author		:	Anand Kakhandaki
+	 * Function		:	To search items on header object lookup field
+	 * Parameters	:	$object= Name of object on the header. Ex: case on the Work order 
+	 * 					$searchObject= Name of the item need to be searched
+	 * Returns		: 	Nothing
+	 * Example		: 	Refer RS_10431.sah for funtion usage
+	 */
+	this.searchHeaderField=function($object,$searchObject){
+		_click(_div("/trigger-search/",_in(_div($object))));
+		_wait(5000,_isVisible($sfm_pg_wizards.lbl_searchWindowLabel));
+		_setValue($sfm_pg_wizards.txt_searchObj,$searchObject);
+		_click($sfm_pg_wizards.btn_objectSearch);
+		_wait(5000,_isVisible(_link($searchObject)));
+		if (_exists(_link($searchObject))) {
+			_log("Pass");
+		}
+		else{
+			_log("Fail");
+		}
 	};
 };

@@ -30,7 +30,7 @@ var $bo_pg_sfmTransactionAndDesigner = new function bo_pg_sfmTransactionAndDesig
 	this.txt_mapID = _f("main").s_textinput("Input ID Here[2]");
 	this.btn_saveMap = _f("main").s_button("Save[2]");
 
-	 this.txt_standardSfmTransactionQuickFind= _f("main").s_textinput("/searchText/").near(_f("main").tab("Your Custom SFM Transactions")); //updated with relative index to properly identify quick find in standard transactions
+	 this.txt_standardSfmTransactionQuickFind= _f("main").s_textinput("/searchText/").near(_f("main").tab("Standard SFM Transactions")); //updated with relative index to properly identify quick find in standard transactions
     this.btn_standardSfmTransaction= _f("main").tab("Standard SFM Transactions");
     //this.btn_yourCustomSfmTransactions = _f("main").tab("Your Custom Sjavascript:void(0)FM Transactions");
     this.btn_yourCustomSfmTransactions = _f("main").tab("Your Custom SFM Transactions");
@@ -51,7 +51,7 @@ var $bo_pg_sfmTransactionAndDesigner = new function bo_pg_sfmTransactionAndDesig
 	this.txt_sfmSaveTemplateLayoutID=_f("main").s_textinput("Input ID Here[4]");//for OPDoc Template
     this.txt_sfmSavePageLayoutAsId = _f("main").s_textinput("advTxt");
     this.btn_addFieldToPage = _f("main").s_button("Add Field to Page");
-    this.txt_quickFindField = _f("main").s_textinput("searchText").near(_f("main").s_button("Add Field to Page"));
+    this.txt_quickFindField = _f("main").s_textinput("searchText").near(_f("main").s_button("/Add Field/"));
     this.btn_quickSave = _f("main").s_button("Save As[3]");
     this.btn_quickSave1 = _f("main").s_button("Quick Save");
     this.btn_saveAndclose = _f("main").s_button("Save & Close");
@@ -66,10 +66,13 @@ var $bo_pg_sfmTransactionAndDesigner = new function bo_pg_sfmTransactionAndDesig
 	this.btn_clickDeleteButton=_f("main").s_button("Delete[4]");
 	this.PopUpMessageConformationForDelete=_f("main").button("Yes");
 	this.lbl_sfmTransactionSavedMessage=_f("main").label("SFM Transaction saved");	
-	this.btn_pageLayoutSave=_f("main").s_button("Save[3]");
+	this.btn_pageLayoutSave=_f("main").s_button("/Save/").near(_f("main").s_textinput("Save page layout as"));
+	this.btn_pageLayoutSaveAs=_f("main").s_button("Save As").rightOf(_f("main").s_textinput("Save page layout as"));
+	this.btn_sfmpageSaveConfirmMsg=_f("main").uiftetextfield("Page saved");
 	this.btn_moveToRight=_f("main").s_button("moveRightBtn");
 	this.link_chklistQuestionLibrary=_div("Checklist Question Library");
-	
+	this.btn_deletePageLayout = _f("main").s_button("Delete[3]");
+	this.btn_deleteSfmProcess = _f("main").s_button("Delete").rightOf(_f("main").s_button("Clone"));
 	//This code is to click on new button on custom SFM transaction
 	this.btn_newSFMTransaction=_f("main").s_button("New SFM Transaction");//duplicate	
 	//This function is to select a checklist SFM time from drop down
@@ -168,7 +171,7 @@ var $bo_pg_sfmTransactionAndDesigner = new function bo_pg_sfmTransactionAndDesig
   this.addField = function($fieldName, $containerName) {
 	_click(_f("main").fieldrenderer("[object Object]").near(_f("main").formitemlabel($containerName)));
 	_setValue($bo_pg_sfmTransactionAndDesigner.txt_quickFindField, $fieldName);
-	_click(_f("main").s_label($fieldName));
+	_click(_f("main").s_label($fieldName).near($bo_pg_sfmTransactionAndDesigner.btn_addFieldToPage));
 	_click($bo_pg_sfmTransactionAndDesigner.btn_addFieldToPage);
     };
 
@@ -179,6 +182,9 @@ var $bo_pg_sfmTransactionAndDesigner = new function bo_pg_sfmTransactionAndDesig
     //Modified by JJ as this stopped working.
     this.deleteField = function($fieldName) {
     	_click(_f("main").s_button("Remove this field").near(_f("main").uiftetextfield($fieldName)));
+    };
+    this.deleteChildField = function($fieldName){
+    	_click(_f("main").s_button("closeBtn").near(_f("main").s_richtext($fieldName)));
     };
     
     // Added by Harish
@@ -196,4 +202,6 @@ var $bo_pg_sfmTransactionAndDesigner = new function bo_pg_sfmTransactionAndDesig
     this.txt_saveExprAs = _f("main").s_textinput("Save this filter as");
     this.btn_editExprSaveAs = _f("main").s_button("Save As"); // This button is in SFM "Qualifying Criteria and Field Mappings" tab
     this.txt_inputIdAs = _f("main").s_textinput("Input ID Here");
+    this.btn_addFieldToPage = _f("main").s_button("/Add Field/");
+    this.label_pageSaved = _f("main").label("Page saved");
 };

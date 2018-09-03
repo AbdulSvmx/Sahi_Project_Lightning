@@ -3,6 +3,7 @@
 /**
  *  Scenario level Run pre-requisite before Running Scenario 8
  */
+	_writeFile("false", $appiumPath+$sahiIntermediatoryPath, true);
 
 var $pre_requisite_1= _testcase("scenario8_beforeRun","Changing the Mobile Permissions and running this Before Test-case");
 $pre_requisite_1.start();
@@ -13,6 +14,7 @@ $bo_act_login.login($g_url, $appiumAdminUn, $appiumAdminPwd);
 //Removing Work Order from Download Criteria
 var $valuebefore = "My Records";
 $bo_act_SFMAppPermission.workOrderDownloadCriteriachanges($valuebefore);
+
 _wait(10000);
 _selectDomain("/svmx/");
 if(_isVisible(_div("Success:Mobile Configuration saved successfully for the selected profile")) == true) 
@@ -25,6 +27,11 @@ if(_isVisible(_div("Success:Mobile Configuration saved successfully for the sele
 else {
 	_writeFile("false", $appiumPath+"sahResultCommon.txt", true);
 	_fail("Fail");
+
+_writeFile("true", $appiumPath+$sahiIntermediatoryPath, true);
+
+$pre_requisite_1.end();
+
 
 }
 _selectDomain();

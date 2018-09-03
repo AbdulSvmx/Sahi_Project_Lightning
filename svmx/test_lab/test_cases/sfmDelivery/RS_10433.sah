@@ -17,13 +17,13 @@ var $stdMap = "SVMXSTD: Close Work Order";
 var $pickListLabels = [];
 var $pickListValues = [];
 var $textLabels = ["City","Scheduled Date Time","Estimated Duration"];
-var $textValues = ["SVMX.CURRENTRECORD.SVMXC__City__c","SVMX.CURRENTRECORDHEADER.SVMXC__SM_Estimated_Duration__c"];
-var $inputTextLabels = ["Booked Appointment Slot","Dispatch Priority"];
+var $textValues = ["SVMX.CURRENTRECORD.SVMXC__City__c","SVMX.CURRENTRECORD.SVMXC__SM_Estimated_Duration__c","SVMX.CURRENTRECORD.SVMXC__Previous_Scheduled_Date_Time__c"];
+var $inputTextLabels = ["City","Estimated Duration"];
 var $inputTextValues = ["Bengaluru Sahi Pro","589"];
 var $inputDateTimeLabels = ["Previous Scheduled Date Time"];
 var $inputDateValues = ["04/11/2018"];
 var $inputTimeValues = ["1:30 PM"];
-
+var $mapTextValues = ["Booked Appointment Slot","Dispatch Priority","Scheduled Date Time"];
 //Appending current timestamp to process name to make it unique.
 var $timeStamp = $bo_act_navigation.getCurrentTimeStamp();
 $processName = $processName + "_" + $timeStamp;
@@ -32,8 +32,7 @@ var $mapName = $processName + "mp";
 
 //**************************************************************************************
 //Login and switch to lightning
-//$bo_act_login.login($g_url,$bac_un,$bac_pwd);
-$bo_act_login.login($g_url,$sfmUsn,$sfmPwd);
+$bo_act_login.login($g_url,$sfmlUsn,$sfmlPwd);
 $sfm_act_lightningConfig.switchToLightning();
 
 //Navigate to servicemax setup and setup required process.
@@ -44,7 +43,7 @@ _click($bo_pg_sfmTransactionAndDesigner.btn_quickSave1);
 _click($bo_pg_sfmTransactionAndDesigner.btn_qualifyingCriteriaAndFieldMapping);
 
 //Set up the mapping with SVMX.CURRENTRECORD literals for Header
-$bo_act_mappings.createMapping("Work Order",$pickListLabels,$pickListValues,$textLabels,$textValues,$mapName);
+$bo_act_mappings.createMapping("Work Order",$pickListLabels,$pickListValues,$mapTextValues,$textValues,$mapName);
 
 _setSpeed(1000);
 //Add the custom process to SFM wizard.
@@ -61,22 +60,29 @@ _wait(3000);
 _selectDomain($domainName);
 
 //Enter values for Booked Appointment Slot, Previous Scheduled Date Time and Dispatch Priority
-$sfm_act_SFM.fillHeaderTextValues($inputTextLabels ,$inputTextValues);
+$sfm_act_SFM.fillHeaderTextValues($inputTextLabels,$inputTextValues);
 $sfm_act_SFM.fillDateTimeFields($inputDateTimeLabels,$inputDateValues,$inputTimeValues);
 $sfm_act_SFM.performQuickSave();
-
+_wait(4000);
+$sfm_act_lightningConfig.clearServicemaxCache();
 //Combine text and date fields
 for($i=0;$i<$inputDateTimeLabels.length;$i++){
 	$inputTextLabels.push($inputDateTimeLabels[$i]);
 	$inputTextValues.push($inputDateValues[$i]);
 }
 //Verify values for the rest of the fields
-var $verifyResult = $sfm_act_SFM.verifyValuesInDelivery($inputTextLabels,$inputTextValues,$inputDateTimeLabels,$inputTimeValues,[],[],[],[]);
+$inputDateTimeLabels = ["Scheduled Date Time"];
+var $verifyResult = $sfm_act_SFM.verifyValuesInDelivery($mapTextValues,$inputTextValues,$inputDateTimeLabels,$inputTimeValues,[],[],[],[],[],[]);
+_assertTrue($verifyResult);
 if($verifyResult){
 	_log("PASS: Current Record literals are verified in mapping");
 }
 else {
 	_log("FAIL:Current Record literals failed in mapping");
 }
-
+_click($sfm_pg_wo.btn_cancelForSfmDelivery);
+_click($sfm_pg_wo.btn_proceedForCancel);
+_setStrictVisibilityCheck(false);
+_selectDomain();
+$sfm_act_lightningConfig.logoutInLightning();
 $RS_10433.end();

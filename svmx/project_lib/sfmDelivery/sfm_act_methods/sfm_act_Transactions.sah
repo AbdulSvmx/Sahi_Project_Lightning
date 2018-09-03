@@ -151,7 +151,86 @@ var $sfm_act_Transactions = new function sfm_act_Transactions() {
 			_wait(6000);
 			_click($bo_pg_sfmTransactionAndDesigner.btn_finalQuickSave);
 
-		};	
+		};
+		
+		/**
+		 * Author		:	Anand Kakhandaki
+		 * Function		: 	This function setup lookup for selected object
+		 * Parameter	:	$object=Name of the object on which lookup need to be configured
+		 * 					$lookupTempName = Any existing standard lookup Name
+		 * 					$fieldCombo = Array of search object fields name/Api name(if servicemax fields)
+		 * 					$conditionsCombo = Array of conditions
+		 * 					$operandTypeCombo = Array of Operand type
+		 * 					$operandValue = Array of Operand type
+		 * 					$lookupAdvExpr = Advance Expression
+		 * 					$lookUpName = lookup name
+		 * 					$nearBy = name of child object where object lookup is to configure. if case field is in part childline please select Parts
+		 * Example		: 	Refer RS_10431 for function usage
+		 */
+		this.createLookUp=function($object,$lookupTempName,$fieldCombo,$conditionsCombo,$operandTypeCombo,$operandValue,$lookupAdvExpr,$lookUpName,$nearBy){
+			_setStrictVisibilityCheck(true);
+			
+			if($nearBy == 'Parts' || $nearBy == 'Labor' || $nearBy == 'Expense' || $nearBy == 'Travel'){
+				_click(_f("main").s_richtext($object).near(_f("main").s_richtext($nearBy)));
+			}else{
+				//_click(_f("main").s_textinput("txtIp").inside(_f("main").fieldrenderer($fieldName)));
+				_click(_f("main").s_textinput("txtIp").near(_f("main").uiftetextfield($object)));
+			}
+			
+			
+			_wait(5000,_isVisible(_f("main").s_label("Properties for Field: "+$object)));
+			_click($sfm_pg_screenDesigner.btn_ConfLookup);
+			_wait(10000,_isVisible($sfm_pg_screenDesigner.txt_lookupName));
+			_setSelected($sfm_pg_screenDesigner.sel_LkupTemplate,$lookupTempName);
+			_wait(10000);
+			
+			var $fieldLabel;
+			var $oprTypeCombo;
+			var $oprValFieldType;
+			var $oprValdateFieldType;
+			for(var $i=0; $i<$fieldCombo.length; $i++){
+				_click($sfm_pg_screenDesigner.btn_lookupNewRow);
+				_wait(5000);
+				var $temp=$i;
+				var $label=$temp+1;
+				$fieldLabel=_f("main").s_label($label.toString()).near($sfm_pg_screenDesigner.lbl_lookupFilterLabel);
+				_setSelected(_f("main").s_combobox("fieldCombo").near($fieldLabel),$fieldCombo[$i]);
+				_setSelected(_f("main").s_dropdownlist("conditionsCombo").near($fieldLabel),$conditionsCombo[$i]);
+				_setSelected(_f("main").s_dropdownlist("operandTypeCombo").near($fieldLabel),$operandTypeCombo[$i]);
+				
+				
+				$oprTypeCombo=_f("main").s_dropdownlist("operandTypeCombo").near($fieldLabel);
+				$oprValcomboFieldType=_f("main").s_combobox("/picklist/").rightOf($oprTypeCombo);
+				if (_exists($oprValcomboFieldType)) {
+					_setValue(_f("main").s_textinput("/textInput/").inside($oprValcomboFieldType),$operandValue[$i]);
+				}else{
+					_log("Inside else loop");
+					$oprValdateFieldType=_f("main").datefield("/date/").rightOf($oprTypeCombo);
+					if (_exists($oprValdateFieldType)) {
+						_setValue(_f("main").s_richeditabletext("/textDisplay/").inside($oprValdateFieldType),$operandValue[$i]);
+					}else{
+						_log("last else loop");
+						_setValue(_f("main").s_textinput("operandValue").near($fieldLabel),$operandValue[$i]);
+					}	
+				}
+				
+			}
+			//_wait(5000);
+			_setValue($sfm_pg_screenDesigner.txt_lookupAdvExpr,$lookupAdvExpr);
+			_click($sfm_pg_screenDesigner.chk_lookupDefault);
+			_wait(5000);
+			_setValue($sfm_pg_screenDesigner.txt_lookupName, $lookUpName);
+			_setValue($sfm_pg_screenDesigner.txt_lookupId, $lookUpName);
+			_click($sfm_pg_screenDesigner.btn_lookupSaveAs);
+			_wait(10000,_isVisible($sfm_pg_screenDesigner.lbl_lookupSaveConfirmMsg));
+			_setSelected($sfm_pg_screenDesigner.sel_LkupTemplate,$lookupTempName);
+			_wait(10000);
+			_setSelected($sfm_pg_screenDesigner.sel_LkupTemplate,$lookUpName);
+			_wait(10000);
+			_click($sfm_pg_screenDesigner.btn_Select);
+			_wait(5000);
+			_setStrictVisibilityCheck(false);
+		};
 /* commented this in lightning as it is done through generic function
 		this.clonedsfm6343 = function($processName,$sfmName,$sfmPgLayoutName,$dvrRuleName){
 			$sfm_act_SFM.selectSFM($processName,false);
@@ -332,18 +411,28 @@ var $sfm_act_Transactions = new function sfm_act_Transactions() {
 	
 	
 // End Safi
-	
-	this.addLookupContext = function(){
-		_click(_f("main").s_checkbox("Override Context"));
-		_setSelected(_f("main").s_combobox("/ComboBox/").rightOf(_f("main").formitemlabel("Context")),"Account");
-//		_wait(5000);
-		_setSelected(_f("main").s_combobox("/ComboBox/").rightOf(_f("main").formitemlabel("Matching Field")),"Account ID");
+	/**
+	 * Author		:	Anand Kakhandaki
+	 * Function		:	To setup context loopup for selected field
+	 * Parameters	:	$contextSourceObj,$overrideContext,$contextObj,$matchingField
+	 * Examples		:	Refer RS_10445.sah
+	 */
+	this.addLookupContext = function($contextSourceObj,$overrideContext,$contextObj,$matchingField){
+		//$contextSourceObj is not available for header object
+		if ($contextSourceObj!=null && $contextSourceObj!="") {
+			_setSelected($sfm_pg_sfmDesigner.sel_ContextSource,$contextSourceObj);
+		}
+		if ($overrideContext) {
+			_click($sfm_pg_sfmDesigner.chk_OverrideContext);
+		}
+		_setSelected($sfm_pg_sfmDesigner.sel_Context,$contextObj);
+		_setSelected($sfm_pg_sfmDesigner.sel_matchinField,$matchingField);
 	};
 	
 	this.newSfm10429 = function($sfmName) {
 		/*$sfmName = $bo_act_common.generateRandomName("RS_7017_");*/
 		$sfmPgLayoutName = $sfmName;
-		_wait(5000);
+		_wait(10000);
 		_click($bo_pg_sfmTransactionAndDesigner.btn_newSFM);
 		_setValue($bo_pg_sfmTransactionAndDesigner.txt_name, $sfmName);
 		_setValue($bo_pg_sfmTransactionAndDesigner.txt_sfmTransactionId, "");
@@ -426,6 +515,9 @@ var $sfm_act_Transactions = new function sfm_act_Transactions() {
 		_wait(3000);
 		_click($bo_pg_sfmTransactionAndDesigner.btn_finalQuickSave);
 	};
+	
+
+	
 	this.newsfm6905 = function($sfmName,$sfmPgLayoutName){
 		_wait(5000);
 		_click($bo_pg_sfmTransactionAndDesigner.btn_newSFM);
@@ -495,7 +587,8 @@ var $sfm_act_Transactions = new function sfm_act_Transactions() {
 	
 	this.addSearchDisplay = function($fields){
 		var $element = "";
-		var $maximum = _fetch(_f("main").s_vscrollbar(1).get("maximum"));
+		var $maximum = _fetch(_f("main").s_vscrollbar(7).get("maximum"));
+		_log($maximum);
 		var $val=0;
 		for(var $i=0;$i<$fields.length;$i++){
 			$element=_f("main").s_label($fields[$i]);
@@ -505,7 +598,7 @@ var $sfm_act_Transactions = new function sfm_act_Transactions() {
 			                                break;
 			                }else {
 			                                $val= $val+200;
-			                _call(_f("main").s_vscrollbar(1).set("value",$val));
+			                _call(_f("main").s_vscrollbar(7).set("value",$val));
 			                
 			}
 
@@ -565,8 +658,20 @@ var $sfm_act_Transactions = new function sfm_act_Transactions() {
 			_setValue(_f("main").s_textarea("msgTxt"), $err);
 			};
 			
-
 			
+			/**
+			 * Author		:	Anand Kakhandaki
+			 * Function		: 	To create SFM transacion and add value to property page
+			 * Parameter	:	$sfmName=sfm name
+			 * 					$sfmID=sfm id
+			 * 					$sfmDescription=descriptio
+			 * 					$sfmType=sfm type
+			 * 					$srcHeaderObj=Source header object name
+			 * 					$srcChildObj=source child object name
+			 * 					$trgHeaderObj = target  header object name
+			 * 					$trgChildObj = target child object name
+			 * Example		:	Refer RS_10458.sah file for function usage
+			 */
 			this.sfmPropertiesPage=function($sfmName,$sfmID,$sfmDescription,$sfmType,$srcHeaderObj,$srcChildObj,$trgHeaderObj,$trgChildObj){
 				_click($sfm_pg_screenDesigner.btn_propoties);
 				_wait(10000,_isVisible($bo_pg_sfmTransactionAndDesigner.txt_name));
@@ -585,6 +690,15 @@ var $sfm_act_Transactions = new function sfm_act_Transactions() {
 				_wait(2000);
 			};
 			
+			/**
+			 * Author		:	Anand Kakhandaki
+			 * Function		: 	To add qualification criteria and mapping to sfm object
+			 * Parameter	:	$object = object name
+			 * 					$ExprFieldsDetails = Array of expression fields details
+			 * 					$mappingDetails = Array of mapping fields details
+			 * 					$addExprName = Name of Expression created in the outside of sfm
+			 * Example		:	Refer RS_10462.sah file for function usage
+			 */
 			this.sfmQualifyingCriteriaieldMappings=function($object,$ExprFieldsDetails,$mappingDetails,$addExprName){
 				//Expression fields
 				var $comboField=$ExprFieldsDetails[0];
@@ -601,7 +715,6 @@ var $sfm_act_Transactions = new function sfm_act_Transactions() {
 				var $textLabels=$mappingDetails[2];
 				var $textValues=$mappingDetails[3];
 				var $mapName=$mappingDetails[4];
-				
 				
 				_click($sfm_pg_screenDesigner.btn_qualifyingCriteriaAndFieldMapping);
 				_wait(10000,_isVisible($sfm_pg_screenDesigner.lbl_qualifyingCriteriaMapping));
@@ -620,6 +733,14 @@ var $sfm_act_Transactions = new function sfm_act_Transactions() {
 
 			};
 			
+			/**
+			 * Author		:	Anand Kakhandaki
+			 * Function		: 	To add fields to screen designer
+			 * Parameter	:	$headersToAdd = fields to add to header
+			 * 					$childToAdd = fields to add to child
+			 * 					$sfmPgLayoutName = page layout name
+			 * Example		:	Refer RS_10462.sah file for function usage
+			 */
 			this.screenDesigner=function($headersToAdd,$childToAdd,$sfmPgLayoutName,$sfmPgLayoutName){
 				var $childObj=$childToAdd[0];
 				var $fieldName=$childToAdd[1];
@@ -655,7 +776,15 @@ var $sfm_act_Transactions = new function sfm_act_Transactions() {
 				this.sfmSvaeExpression($exprsnName, $exprsnName, "Save");
 
 			};			
-			
+
+		/**
+		* Author		:	Anand Kakhandaki
+		* Function		: 	To add fields to screen designer
+		* Parameter		:	$$exprsnName = Expression name
+		* 					$exprsnId = Expression ID
+		* 					$save = Save or SaveAs
+		* Example		:	Refer RS_10463.sah file for function usage
+		*/
 		this.sfmSvaeExpression=function($exprsnName,$exprsnId,$save){
 			_setValue($sfm_pg_screenDesigner.txt_saveExprsn,$exprsnName);
 			_setValue($sfm_pg_screenDesigner.txt_inputId,$exprsnId);
@@ -664,7 +793,7 @@ var $sfm_act_Transactions = new function sfm_act_Transactions() {
 			}else {
 					_click($bo_pg_sfmTransactionAndDesigner.btn_editExprSave);
 			}
-			_wait(3000,isVisible($bo_pg_sfmTransactionAndDesigner.label_exprSaved));
+			_wait(5000,isVisible($bo_pg_sfmTransactionAndDesigner.label_exprSaved));
 		};
 		
 		
@@ -708,7 +837,17 @@ var $sfm_act_Transactions = new function sfm_act_Transactions() {
 				_setValue($sfm_pg_screenDesigner.txt_errMsg,$errMsg);
 		};	
 			
-		
+		/**
+		 * Author		:	Anand Kakhandaki
+		 * Function		: 	To Update the existing expression in SFM
+		 * Parameter	:	$comboField = Array of fields name
+		 * 					$comboConditions = Array of Condition
+		 * 					$toggleButton = Array of Yes/"", If need to click on toggle button the pass yes else just pass ""
+		 * 					$comboInput = Array of Input value
+		 * 					$advExpr = Advance expression
+		 * 					$errMsg = Error message
+		 * Example		:	Refer RS_10463.sah file for function usage
+		 */
 		this.sfmUpdateExpression=function($comboField,$comboConditions,$toggleButton,$comboInput,$advExpr,$errMsg){
 			var $lastRow=parseInt(_getValue(_f("main").s_label("/serialNo.*/").leftOf($sfm_pg_screenDesigner.btn_addRow)));
 			_log("current Row Count: "+$lastRow);
@@ -750,7 +889,15 @@ var $sfm_act_Transactions = new function sfm_act_Transactions() {
 					_setValue($sfm_pg_screenDesigner.txt_advExpr,$advExpr);
 					_setValue($sfm_pg_screenDesigner.txt_errMsg,$errMsg);	
 			};
-		
+			
+			/**
+			 * Author		:	Anand Kakhandaki
+			 * Function		: 	To get expression's row values created on the selected object
+			 * Parameter	:	$$object = Name of object on which expression is created
+			 * 					$exprsnName = Name of Expression
+			 * Returns		:	Retiurns the array of combofiled's, condtion's and input value's array
+			 * Example		:	Refer RS_10458.sah file for function usage
+			 */
 			this.getExpressionValues=function($object,$exprsnName){
 				_setSelected($sfm_pg_expressions.sel_object,$object);
 				_wait(10000,_isEnabled($sfm_pg_expressions.btn_selectExpression));
