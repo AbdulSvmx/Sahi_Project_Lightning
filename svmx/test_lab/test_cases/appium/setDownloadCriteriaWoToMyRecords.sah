@@ -21,13 +21,13 @@ _wait(3000,_div("Success:Mobile Configuration saved successfully for the selecte
 if(_isVisible(_div("Success:Mobile Configuration saved successfully for the selected profile"))) 
 {
 	
-	_writeFile("true", $appiumPath+"sahResultCommon.txt", true);
+	_writeFile("true", $appiumPath+$sahiIntermediatoryPath, true);
 	_log("Pass");
 
 
 } 
 else {
-	_writeFile("false", $appiumPath+"sahResultCommon.txt", true);
+	_writeFile("false", $appiumPath+$sahiIntermediatoryPath, true);
 	_fail("Fail");
 
 
