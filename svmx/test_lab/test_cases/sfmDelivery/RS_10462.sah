@@ -47,7 +47,8 @@ $rs_10462.start();
 	$sfm_act_Transactions.screenDesigner($headersToAdd, $childToAdd, $sfmPgLayoutName, $sfmPgLayoutName);
 	
 	_wait(5000);
-	_click($bo_pg_sfmTransactionAndDesigner.btn_finalQuickSave);
+	//_click($bo_pg_sfmTransactionAndDesigner.btn_finalQuickSave);
+	_click($bo_pg_sfmTransactionAndDesigner.btn_saveAndclose);
 	
 	var $wizardObject="Work Order";
 	var $wizardName1 =$wizardName[6];
