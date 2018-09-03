@@ -1,60 +1,82 @@
 var RS_10554_mapping = _testcase("RS_10554_mapping","Verify field map for new header record & existing child record");
 RS_10554_mapping.start();
-//Variables used
-
+//Variables use
 //var $mappingsName = $bo_act_common.generateRandomName("sfm_mapping_name_");
 var $mappingsName = "sfm_mapping_name_2882018161924";
 var $sfmNameToBeCloned = "Create Work Order from Installed Product";
 var $sfmName = $bo_act_common.generateRandomName("RS_10554_");
-var $isCustom = false;
-var $sfmTemplate = "SVMXSTD: Create WO from IB";
-var $sfmTemplateSaveAsName = $bo_act_common.generateRandomName("RS_10554_temp_");
-var $headersToAdd = ["Account","Scheduled Date","Order Type","Product","Component","Scheduled Date Time"];
-var $lkpName = $bo_act_common.generateRandomName("lkp_name");
-var $fields = ["Contact","Top-Level"];
-var $wizTitle = $bo_act_common.generateRandomName("Wiz_Title_");
+var $isCustom = true;
+var $objName="Work Order"
+var $sorceobj="Installed Product"
+var $sfmTemplate = "--None--";
+var $sfmTemplateSaveAsName = $bo_act_common.generateRandomName("RS_10554_Temp");
+var $headersToAdd = ["Account","Product","Scheduled Date Time","Scheduled Date","Order Type","Component"];
+var $childObj="Parts";
+var $fieldName=["Part","Date Required"];
+
+var $containerName="Work Order";
+$sourceObj= "Installed Product";
+$targetObj = "Work Order";
+$mappingField = ["Component","Order Type","Product","Scheduled Date","Scheduled Date Time"];
+$mappingValue = ["Record ID","Field Service","Product","Date Installed","Last Modified Date"];
+
+var $mapName="RS_10554_mappings";
+var $mapName_chid="RS_10554_mappings_child";
+
+//var $lkpName = $bo_act_common.generateRandomName("lkp_name");
+//var $fields = ["Contact","Top-Level"];
+//var $wizTitle = $bo_act_common.generateRandomName("Wiz_Title_");
 $bo_act_login.login($g_url, $appiumAdminUn, $appiumAdminPwd);
 $sfm_act_lightningConfig.switchToLightning();
-//$bo_act_navigation.navigatetoSFMMaps();
-//_setSelected(_f("SFMExpressionBuilderSWF").s_combobox("sourceCombo"), "Installed Product");
-//_setSelected(_f("SFMExpressionBuilderSWF").s_combobox("targetCombo"), "Work Order");
-//_click(_f("SFMExpressionBuilderSWF").s_button("New"));
-//_setSelected(_f("SFMExpressionBuilderSWF").s_combobox(0).rightOf(_f("SFMExpressionBuilderSWF").ftedatagriditemrenderer("/Account/")),"Account");
-//_setSelected(_f("SFMExpressionBuilderSWF").s_combobox(0).rightOf(_f("SFMExpressionBuilderSWF").ftedatagriditemrenderer("/City/")),"City");
-//_setSelected(_f("SFMExpressionBuilderSWF").s_combobox(0).rightOf(_f("SFMExpressionBuilderSWF").ftedatagriditemrenderer("/Component/")),"Component");
-//_setSelected(_f("SFMExpressionBuilderSWF").s_combobox(0).rightOf(_f("SFMExpressionBuilderSWF").ftedatagriditemrenderer("/Contact/")),"Contact");
-//_setSelected(_f("SFMExpressionBuilderSWF").s_combobox(0).rightOf(_f("SFMExpressionBuilderSWF").ftedatagriditemrenderer("/Country/")),"Country");
-//_setSelected(_f("SFMExpressionBuilderSWF").s_combobox(0).rightOf(_f("SFMExpressionBuilderSWF").ftedatagriditemrenderer("/Order Type/")),"Service Contract Exchange Type");
-//_setSelected(_f("SFMExpressionBuilderSWF").s_combobox(0).rightOf(_f("SFMExpressionBuilderSWF").ftedatagriditemrenderer("/Product/")),"Product");
-//_setSelected(_f("SFMExpressionBuilderSWF").s_combobox(0).rightOf(_f("SFMExpressionBuilderSWF").ftedatagriditemrenderer("/Site/")),"Location");
-//_setSelected(_f("SFMExpressionBuilderSWF").s_combobox(0).rightOf(_f("SFMExpressionBuilderSWF").ftedatagriditemrenderer("/Top-Level/")),"Top-Level");
-//_setSelected(_f("SFMExpressionBuilderSWF").s_combobox(0).rightOf(_f("SFMExpressionBuilderSWF").ftedatagriditemrenderer("/Zip/")),"Zip");
-//_setValue(_f("SFMExpressionBuilderSWF").s_textinput("Save this map as"), $mappingsName);		
-//_setValue(_f("SFMExpressionBuilderSWF").s_textinput("Input ID Here"), $mappingsName);
-//_click(_f("SFMExpressionBuilderSWF").s_button("Save"));
-//_wait(5000);
+
+
+//create mapping
+
+$sourceObj= "Installed Product";
+$targetObj = "Work Order";
+$mappingField = ["Account","Order Type","Component","Product","Scheduled Date","Scheduled Date Time"];
+$mappingValue = ["Account","Status","Record ID","Product","Date Installed","Last Modified Date"];
+$sfm_act_sfmMapping.createMappingFromMapping($sourceObj, $targetObj,$mapName, $mappingField, $mappingValue);
+
+$sourceObj= "Installed Product";
+$targetObj = "Work Detail";
+$mappingField = ["Part","Date Required"];
+$mappingValue = ["Product","Date Installed"];
+$sfm_act_sfmMapping.createMappingFromMapping($sourceObj, $targetObj,$mapName_chid, $mappingField, $mappingValue);
+//_setSelected(_f("main").s_combobox("/ComboBox/").rightOf(_f("main").uiftetextfield("Object Mapping")),$mappingsName);
+
+
+
 $bo_act_navigation.navigateToSfmTransactionDesigner();
 _wait(10000);
-$sfm_act_SFM.selectSFM($sfmNameToBeCloned, $isCustom);
-_click($bo_pg_sfmTransactionAndDesigner.btn_clone);
-_wait(50000, _isVisible($bo_pg_sfmTransactionAndDesigner.txt_name));
+_click(_f("main").s_button("New SFM Transaction"));
 _setValue($bo_pg_sfmTransactionAndDesigner.txt_name, $sfmName);
-_setValue($bo_pg_sfmTransactionAndDesigner.txt_sfmTransactionId, "");
+
 _setValue($bo_pg_sfmTransactionAndDesigner.txt_sfmTransactionId, $sfmName);
-_click($bo_pg_sfmTransactionAndDesigner.btn_screenDesigner);    
+
+$bo_act_SFM.toCreateTheserecordDetails($sorceobj,$objName);
+_wait(3000);
+
+_click(_f("main").tab("Qualifying Criteria and Field Mappings"));
+_setSelected(_f("main").s_combobox("/searchcombo/").rightOf(_f("main").uiftetextfield("Object Mapping")),$mapName)
+
+
+/*
+_click($bo_pg_sfmTransactionAndDesigner.btn_screenDesigner);
 _wait(5000);
 _setSelected($bo_pg_sfmTransactionAndDesigner.sel_sfmTemplate,$sfmTemplate);
 _setValue($bo_pg_sfmTransactionAndDesigner.txt_sfmSavePageLayoutAs,$sfmTemplateSaveAsName);
 _setValue($bo_pg_sfmTransactionAndDesigner.txt_sfmSavePageLayoutAsId,$sfmTemplateSaveAsName);
 _wait(5000);
-
-
 $sfm_act_Transactions.addHeader($headersToAdd);
-_click(_f("main").s_button("Save[3]"));
+$sfm_act_Transactions.addChildFields($childObj,$fieldName);
+ _click(_f("main").s_button("Save[3]"));
 _wait(5000);
+*/
+
+//_setSelected(_f("main").s_combobox("/ComboBox/").rightOf(_f("main").uiftetextfield("Object Mapping")),$mappingsName)
+//_click($bo_pg_formDesigner.btn_quickSave);
 /*
-_setSelected(_f("main").s_combobox("/ComboBox/").rightOf(_f("main").uiftetextfield("Object Mapping")),$mappingsName)
-_click($bo_pg_formDesigner.btn_quickSave);
 _click(_f("main").s_button("Configure Lookup"));
 _setSelected(_f("main").s_combobox("searchCombo[4]"), "SVMXSTD: IB Lookup");
 _setValue(_f("main").s_textinput("Save this Lookup as"), $lkpName);
@@ -77,4 +99,5 @@ $sfm_act_createCustomWizard.addManageWizSteps($wizTitle,"SFM",$sfmName);
 //_click(_div("/Edit/",_near(_span($iBName01))));
 */
 RS_10554_mapping.end();
+
 
