@@ -16,7 +16,7 @@ $bo_act_login.login($g_url, $appiumAdminUn, $appiumAdminPwd);
 var $valuebefore = "All Records";
 $bo_act_SFMAppPermission.workOrderDownloadCriteriachanges($valuebefore);
 
-_wait(3000,_isVisible(_div("Success:Mobile Configuration saved successfully for the selected profile")));
+_wait(5000,_isVisible(_div("Success:Mobile Configuration saved successfully for the selected profile")));
 if(_isVisible(_div("Success:Mobile Configuration saved successfully for the selected profile"))) {
 	
 	_writeFile("true", $appiumPath+$sahiIntermediatoryPath, true);
