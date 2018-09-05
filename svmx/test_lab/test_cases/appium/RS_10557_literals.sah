@@ -1,0 +1,96 @@
+var RS_10557_mapping = _testcase("RS_10554_mapping","Verify field map for new header record & existing child record");
+RS_10557_mapping.start();
+
+//_writeFile("false", $appiumPath+$sahiIntermediatoryPath, true);
+
+var $sfmNameToBeCloned = "Create Work Order from Installed Product";
+//var $sfmName = $bo_act_common.generateRandomName("RS_10557_");
+var $sfmName="RS_10557_592018151910";
+var $isCustom = true;
+var $objName="Work Order"
+var $sorceobj="Installed Product"
+	var $part="Parts";
+	var $labor="Labor";
+var $sfmTemplate = "--None--";
+var $sfmTemplateSaveAsName = $bo_act_common.generateRandomName("RS_10557_Temp");
+var $headersToAdd = ["Component","Site","Scheduled Date Time"];
+var $childObj="Parts";
+var $fieldName=["To Location"];
+
+var $childObjlabor="Labor";
+var $fieldNamelabor=["Start Date and Time"];
+
+
+var $mapName_part="RS_10557_map_part_Auto";
+var $mapName_labor="RS_10557_map_labor_Auto";
+
+var $wizardObject="Installed Product";
+var $wizardName="Automation IB Wizard";
+var $wizardType="SFM";
+var $profile="auto group profile";
+var $handOver="false";
+var $wizardCriteria=null;
+
+	$bo_act_login.login($g_url, $appiumAdminUn, $appiumAdminPwd);
+$sfm_act_lightningConfig.switchToLightning();
+
+//$mappingField = ["Account","Order Type","Component","Product","Scheduled Date","Scheduled Date Time"];
+//$mappingValue = ["Account","Field Service","Record ID","Product","Date Installed","Last Modified Date"];
+
+$textLabels_parts = ["To Location"];
+$textValues_parts = ["SVMX.CURRENTRECORDHEADER.SVMXC__Site__c"];
+
+$textLabels_labor = ["Start Date and Time"];
+$textValues_labor = ["SVMX.CURRENTRECORDHEADER.SVMXC__Scheduled_Date_Time__c"];
+
+var $containerName_parts="Parts";
+var $containerName_labor="Labor";
+	
+var $mappingField_parts=[];var $mappingField_labor=[];var $mappingValue_parts=[];var $mappingValue_labor=[];
+
+
+/*$bo_act_navigation.navigateToSfmTransactionDesigner();
+_wait(10000);
+_click(_f("main").s_button("New SFM Transaction"));
+_setValue($bo_pg_sfmTransactionAndDesigner.txt_name, $sfmName);
+
+_setValue($bo_pg_sfmTransactionAndDesigner.txt_sfmTransactionId, $sfmName);
+
+$bo_act_SFM.toCreateTheserecordDetails($sorceobj,$objName,$part,$labor);
+//create mapping
+_click(_f("main").tab("Qualifying Criteria and Field Mappings"));
+_wait(2000);
+$bo_act_mappings.createvalueMappingnewrecords($containerName_parts,$mappingField_parts,$mappingValue_parts,$textLabels_parts,$textValues_parts,$mapName_part);
+_wait(3000);
+_selectDomain($domainName);
+$bo_act_mappings.createvalueMappingnewrecords($containerName_labor,$mappingField_labor,$mappingValue_labor,$textLabels_labor,$textValues_labor,$mapName_labor);
+_wait(3000);
+
+
+_click($bo_pg_sfmTransactionAndDesigner.btn_screenDesigner);
+_wait(5000);
+_setSelected($bo_pg_sfmTransactionAndDesigner.sel_sfmTemplate,$sfmTemplate);
+_setValue($bo_pg_sfmTransactionAndDesigner.txt_sfmSavePageLayoutAs,$sfmTemplateSaveAsName);
+_setValue($bo_pg_sfmTransactionAndDesigner.txt_sfmSavePageLayoutAsId,$sfmTemplateSaveAsName);
+_wait(5000);
+
+
+$sfm_act_Transactions.addHeader($headersToAdd);
+$sfm_act_Transactions.addChildFields($childObj,$fieldName);
+_click(_f("main").s_richtext("Parts"));
+_click(_f("main").s_checkbox("Allow New"));
+_wait(3000);
+$sfm_act_Transactions.addChildFields($childObjlabor,$fieldNamelabor);
+_click(_f("main").s_richtext("Labor"));
+_click(_f("main").s_checkbox("Allow New"));
+ _click(_f("main").s_button("Save[3]"));
+_wait(5000);
+_click(_f("main").s_button("Quick Save"));*/
+
+$sfm_act_wizards.addToWizard($wizardObject,$wizardName, $wizardType,$sfmName,$handOver,$profile,$wizardCriteria);  
+
+
+
+RS_10557_mapping.end();
+
+
