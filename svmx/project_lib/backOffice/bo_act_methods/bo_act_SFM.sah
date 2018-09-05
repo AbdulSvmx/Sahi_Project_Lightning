@@ -443,19 +443,38 @@ var $bo_act_SFM = new function bo_act_SFM() {
 								
 							}
 								
-								this.toCreateTheserecordDetails=function(){
-									_click(_f("main").s_textinput("textInput[1]"));
-									_setValue(_f("main").s_textinput("textInput[1]"),"");
-									_setValue(_f("main").s_textinput("textInput[1]"),$objName);			
-									_setSelected(_f("main").s_combobox("objCombo1[1]"), $objName);
-									_wait(3000);
-									_click($bo_pg_sfmTransactionAndDesigner.btn_popUpOK);
+							this.toCreateTheserecordDetails=function($sorceobj,$objName,$part,$labor){
+								if($sorceobj!=null)
+									{
+									_click(_f("main").s_textinput("textInput"));
+									_setValue(_f("main").s_textinput("textInput"), "");
+									_setValue(_f("main").s_textinput("textInput"), $sorceobj);
+									_setSelected(_f("main").s_combobox("objCombo1"),$sorceobj);
+									}
+								_click(_f("main").s_textinput("textInput[1]"));
+								_setValue(_f("main").s_textinput("textInput[1]"),"");
+								_setValue(_f("main").s_textinput("textInput[1]"),$objName);			
+								_setSelected(_f("main").s_combobox("objCombo1[1]"), $objName);
+								_wait(3000);
+								_click($bo_pg_sfmTransactionAndDesigner.btn_popUpOK);
+								_wait(2000);
+								_click(_f("main").s_checkbox("Work Detail (Work Order)"));
+								_click(_f("main").s_textinput("aliasName[27]"));
+								_setValue(_f("main").s_textinput("/aliasName/").rightOf(_f("main").s_checkbox("Work Detail (Work Order)")), $part);
+								if($labor!=null)
+									{
 									_wait(2000);
-									_click(_f("main").s_checkbox("Work Detail (Work Order)"));
-									_click(_f("main").s_textinput("aliasName[27]"));
-									_setValue(_f("main").s_textinput("aliasName[27]"),"parts");
-								}
-							this.addFieldToChildSection=function(){
+									_click(_f("main").s_button("+"));
+									//_click(_f("main").s_checkbox("Work Detail (Work Order)"));
+									_click(_f("main").s_textinput("aliasName[52]"));
+									//_setValue(_f("main").s_textinput("aliasName[52]").rightOf(_f("main").s_checkbox("Work Detail (Work Order)")), $labor);
+									_setValue(_f("main").s_textinput("aliasName[52]"),$labor);
+									}
+							
+							
+							};
+								
+								this.addFieldToChildSection=function(){
 							_click(_f("main").s_datagroup("dataGroup[3]"));
 							_click(_f("main").s_textinput("searchText[4]"));
 							_setValue(_f("main").s_textinput("searchText[4]"),"Billable Qty");
