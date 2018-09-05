@@ -22,9 +22,15 @@ var $bo_act_login = new function bo_act_login() {
 		_setValue($bo_pg_login.txt_email, $un);
 		_setValue($bo_pg_login.txt_password, $pwd);
 		_click($bo_pg_login.btn_login);
-		//_wait(30000);
-		_wait(10000, _isVisible($bo_pg_home.link_home));
-		return $callBack.returnResult(_exists($bo_pg_home.link_home), "login");
+		_wait(3000);
+		$sfm_act_lightningConfig.switchToLightning();
+		_wait(10000, _exists($bo_pg_home.link_home));
+
+		if(_exists($bo_pg_home.link_home)){
+			return true;
+		}else{
+			return false;
+		}
 		_call(top.location.reload(true));
 
 
