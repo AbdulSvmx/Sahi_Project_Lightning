@@ -93,7 +93,9 @@ var $bo_pg_sfmTransactionAndDesigner = new function bo_pg_sfmTransactionAndDesig
 	this.lbl_partObj=_f("main").s_label("Parts[4]");
 	this.lbl_partField=_f("main").s_label("Part");
 	this.img_add=_f("main").s_button(">[1]");
-
+	this.lbl_childlineparts = _f("main").s_richtext("Parts");
+	this.lbl_childlinelabor = _f("main").s_richtext("Labor");
+	this.combo_allowzerolines = _f("main").s_combobox("/ComboBox/").rightOf(_f("main").uiftetextfield("Allow Zero Lines"));
 	this.lbl_laborObj=_f("main").s_label("Labor[4]");
 	this.lbl_activityTypeField=_f("main").s_label("Activity Type");
 	this.lbl_expenseObj=_f("main").s_label("Expense[3]");

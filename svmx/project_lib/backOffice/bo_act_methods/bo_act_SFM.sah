@@ -315,6 +315,41 @@ var $bo_act_SFM = new function bo_act_SFM() {
 		};
 		
 		
+		// Author : Meghana Rao - Cloning the SFM Process for Zero Lines 
+		this.clnStandardSFM_zerolines=function($sfmToBeCloned,$sfmName,$sfmTemplateSaveAsName){ // Lightning Changes
+			$bo_act_navigation.navigateToSvmxSetup();
+			_selectDomain("/svmx/");
+			_click($bo_pg_servicemaxSetup.btn_serviceFlowManager);
+			_wait(10000);
+			_click($bo_pg_servicemaxSetup.btn_sfmTransactionAndDocsDesigner);
+			_click($bo_pg_sfmTransactionAndDesigner.txt_standardSfmTransactionQuickFind);
+			$sfm_act_SFM.selectSFM($sfmToBeCloned, false);
+			_click($bo_pg_sfmTransactionAndDesigner.btn_clone);
+			_wait(3000);
+			_wait(60000, _isVisible($bo_pg_sfmTransactionAndDesigner.txt_name));
+			_setValue($bo_pg_sfmTransactionAndDesigner.txt_name, $sfmName);
+			_setValue($bo_pg_sfmTransactionAndDesigner.txt_sfmTransactionId, "");
+			_setValue($bo_pg_sfmTransactionAndDesigner.txt_sfmTransactionId, $sfmName);
+			_click($bo_pg_sfmTransactionAndDesigner.btn_screenDesigner);
+			_wait(6000,_isVisible(_f("main").tab("Screen Designer")));
+			_setValue($bo_pg_sfmTransactionAndDesigner.txt_sfmSavePageLayoutAs, $sfmTemplateSaveAsName);
+			_setValue($bo_pg_sfmTransactionAndDesigner.txt_sfmSavePageLayoutAsId, $sfmTemplateSaveAsName);
+			_wait(3000);
+			//Warning for Parts Allow Zero Lines
+			_click($bo_pg_sfmTransactionAndDesigner.lbl_childlineparts);
+			_setSelected($bo_pg_sfmTransactionAndDesigner.combo_allowzerolines,"Warn");
+			// Dis Allow the Labor for Allow Zero Lines
+			_click($bo_pg_sfmTransactionAndDesigner.lbl_childlinelabor);
+			_setSelected($bo_pg_sfmTransactionAndDesigner.combo_allowzerolines,"Disallow");
+			_click($bo_pg_sfmTransactionAndDesigner.btn_pageLayoutSave);
+			_wait(10000);
+			_click($bo_pg_sfmTransactionAndDesigner.btn_saveAndclose);
+			_wait(2000);
+			_selectDomain();
+			_setSpeed($g_stepSpeed);	
+		};
+		
+		
 		this.deleteSFM=function($sfmName){
 			$bo_act_navigation.navigateToSfmTransactionDesigner();
 			_click($bo_pg_sfmTransactionAndDesigner.btn_yourCustomSfmTransactions);
