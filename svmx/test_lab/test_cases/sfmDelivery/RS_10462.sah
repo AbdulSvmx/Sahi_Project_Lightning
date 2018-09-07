@@ -46,7 +46,7 @@ $rs_10462.start();
 	var $sfmPgLayoutName = $bo_act_common.generateRandomName("SFM_Auto_");
 	$sfm_act_Transactions.screenDesigner($headersToAdd, $childToAdd, $sfmPgLayoutName, $sfmPgLayoutName);
 	
-	_wait(5000);
+	_wait(10000);
 	//_click($bo_pg_sfmTransactionAndDesigner.btn_finalQuickSave);
 	_click($bo_pg_sfmTransactionAndDesigner.btn_saveAndclose);
 	

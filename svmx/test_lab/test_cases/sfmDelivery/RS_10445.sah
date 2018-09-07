@@ -63,7 +63,7 @@ $rs_10445.start();
 		$sfm_act_SFM.partsMultiAdd("--None--");
 		
 		//Context lookup setting up on Work Order Header object
-		_click(_f("main").s_textinput("/*./").near(_f("main").uiftetextfield("Contact")));
+		_click(_f("main").s_textinput("/.*/").near(_f("main").uiftetextfield("Contact")));
 		$sfm_act_Transactions.addLookupContext("", true,"Account", "Account ID");
 		
 		//Context lookup setting up on Parts childline
@@ -93,6 +93,7 @@ $rs_10445.start();
 		
 		$sfm_act_sfmDesigner.addChildLine("Parts");
 		
+		_log("Part childline validation: Start");
 		//***Part childline validation***//
 		//Assert "No matching record" DVR
 		_wait(10000,_isVisible($sfm_pg_sfmDesigner.txt_partTextbox));
@@ -177,7 +178,8 @@ $rs_10445.start();
 		_wait(10000);
 		_assertEqual($userName[5],_getText($sfm_pg_sfmDesigner.txt_autoContactTextBoxInSFM));
 		_setStrictVisibilityCheck(false);
-
+		_log("Part childline validation: End");
+		_log("Work Order Header validation: Start");
 		//***Work Order Header validation***//
 		
 		//Assert "No matching record" DVR
