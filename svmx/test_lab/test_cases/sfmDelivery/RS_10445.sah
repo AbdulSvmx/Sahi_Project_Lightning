@@ -62,7 +62,7 @@ $rs_10445.start();
 		//remove multiadd for part childline
 		$sfm_act_SFM.partsMultiAdd("--None--");
 		
-		//Context lookup setting up on Work Order Header object
+		//Context lookup setting up on Work Order Header objectt
 		_click(_f("main").s_textinput("/.*/").near(_f("main").uiftetextfield("Contact")));
 		$sfm_act_Transactions.addLookupContext("", true,"Account", "Account ID");
 		
