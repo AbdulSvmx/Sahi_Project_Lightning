@@ -16,12 +16,11 @@ var $sfmToBeCloned = "Manage Work Order Lines - Usage";
 var $sfmName_2 = "SFMProcessforRS_10516";
 var $sfmTemplateSaveAsName = "Page"+$randomnumber+"";
 var $targetObjectName = "Work Order";
-//$bo_act_SFM.clnStandardSFM_zerolines($sfmToBeCloned, $sfmName_2, $sfmTemplateSaveAsName);
+$bo_act_SFM.clnStandardSFM_zerolines($sfmToBeCloned, $sfmName_2, $sfmTemplateSaveAsName);
 
 
 // Adding the SFM Wizard created by cloning TDM016
 var $wizTitle = "AutoRegression";
 $bo_act_navigation.navigateToSfmWizard();
-//$sfm_act_createCustomWizard.chooseObject($targetObjectName);
 $sfm_act_createCustomWizard.addManageWizStepsaddnew($wizTitle,"SFM", $sfmName_2, $targetObjectName);
 _writeFile("true", $appiumPath+$sahiIntermediatoryPath, true);
