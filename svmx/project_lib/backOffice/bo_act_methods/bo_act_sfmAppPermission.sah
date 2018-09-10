@@ -79,7 +79,7 @@ var $bo_act_SFMAppPermission = new function bo_act_SFMAppPermission() {
 		{
 			_click($bo_pg_sfmAppPermissionD.btn_addnewdownloacriteria);
 			// Need to add Work Order to the Tab
-			
+			// PENDING - Identifying the object is an issue
 		}
 		_click($bo_pg_sfmAppPermissionD.btn_configsave);
 	};

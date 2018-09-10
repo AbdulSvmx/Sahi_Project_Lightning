@@ -8,13 +8,13 @@ var $pre_requisite= _testcase("scenario_10553"," Verify Addition of lines and na
 $pre_requisite.start();
 _setSpeed($g_stepSpeed);
 $bo_act_login.login($g_url, $appiumAdminUn, $appiumAdminPwd);
-//var $randomnumber = $bo_act_common.generateRandomName("Layout");
-//
-//
-//// Setup App Permissions for Mobile App for the SFM Process created
-//var $profilename = $group_profilename;
-//$bo_act_SFMAppPermission.workOrderSynchronizeapplicationdata("600");
-//$bo_act_SFMAppPermission.addnewobjectdownloacriteria("Work Order");
+var $randomnumber = $bo_act_common.generateRandomName("Layout");
+
+
+// Setup App Permissions for Mobile App for the SFM Process created
+var $profilename = $group_profilename;
+$bo_act_SFMAppPermission.workOrderSynchronizeapplicationdata("600");
+$bo_act_SFMAppPermission.addnewobjectdownloacriteria("Work Order");
 
 
 // Technician's Group Wide profile setting of SET019 - None
