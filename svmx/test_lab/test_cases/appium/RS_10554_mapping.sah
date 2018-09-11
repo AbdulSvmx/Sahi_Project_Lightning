@@ -10,7 +10,7 @@ var $objName="Work Order"
 var $sorceobj="Installed Product"
 var $sfmTemplate = "--None--";
 var $sfmTemplateSaveAsName = $bo_act_common.generateRandomName("RS_10554_Temp");
-var $headersToAdd = ["Account","Product","Scheduled Date Time","Scheduled Date","Order Type","Component"];
+var $headersToAdd = ["Account","Product","Scheduled Date Time","Scheduled Date","Component"];
 var $childObj="Parts";
 var $fieldName=["Part","Date Required"];
 
@@ -20,20 +20,21 @@ $targetObj = "Work Order";
 //$mappingField = ["Component","Order Type","Product","Scheduled Date","Scheduled Date Time"];
 //$mappingValue = ["Record ID","Field Service","Product","Date Installed","Last Modified Date"];
 
-var $mapName="RS_10554_map_header_Auto1";
-var $mapName_chid="RS_10554_map_child_Auto1";
-
+var $mapName=$bo_act_common.generateRandomName("RS_10554_WO");
+var $mapName_chid=$bo_act_common.generateRandomName("RS_10554_Part");
+var $part="Parts"
+	var $labor=null;
 var $wizardObject="Installed Product";
 var $wizardName="Automation IB Wizard";
-var $wizardType="sfm";
+var $wizardType="SFM";
 var $profile="auto group profile";
 var $handOver="false";
 var $wizardCriteria=null;
 	$bo_act_login.login($g_url, $appiumAdminUn, $appiumAdminPwd);
 $sfm_act_lightningConfig.switchToLightning();
 
-$mappingField = ["Account","Order Type","Component","Product","Scheduled Date","Scheduled Date Time"];
-$mappingValue = ["Account","Field Service","Record ID","Product","Date Installed","Last Modified Date"];
+$mappingField = ["Account","Component","Product","Scheduled Date","Scheduled Date Time"];
+$mappingValue = ["Account","Record ID","Product","Date Installed","Last Modified Date"];
 
 $mappingField_child = ["Date Required","Part"];
 $mappingValue_child = ["Date Installed","Product"];
@@ -48,7 +49,7 @@ _setValue($bo_pg_sfmTransactionAndDesigner.txt_name, $sfmName);
 
 _setValue($bo_pg_sfmTransactionAndDesigner.txt_sfmTransactionId, $sfmName);
 
-$bo_act_SFM.toCreateTheserecordDetails($sorceobj,$objName);
+$bo_act_SFM.toCreateTheserecordDetails($sorceobj,$objName,$part,$labor);
 _wait(3000);
 
 _click($bo_pg_sfmTransactionAndDesigner.btn_screenDesigner);
@@ -60,23 +61,29 @@ _wait(5000);
 
 
 $sfm_act_Transactions.addHeader($headersToAdd);
+_wait(5000);
 $sfm_act_Transactions.addChildFields($childObj,$fieldName);
  _click(_f("main").s_button("Save[3]"));
 _wait(5000);
 
-_click(_f("main").tab("Qualifying Criteria and Field Mappings"));
-//_click($bo_pg_sfmTransactionAndDesigner.btn_qualifyingCriteriaAndFieldMapping);
-$bo_act_mappings.createMapping($containerName,$mappingField,$mappingValue,$textLabels,$textValues,$mapName);
-//_click(_f("main").tab("Qualifying Criteria and Field Mappings"));
-_wait(5000);
 
-_selectDomain($domainName);
+
+
+_click(_f("main").tab("Qualifying Criteria and Field Mappings"));
+
 $bo_act_mappings.createMapping($containerName_child,$mappingField_child,$mappingValue_child,$textLabels,$textValues,$mapName_chid);
 _wait(5000);
 
+_selectDomain($domainName);
+_click(_f("main").tab("Source Object Update"));
+_click(_f("main").tab("Qualifying Criteria and Field Mappings"));
+$bo_act_mappings.createMapping($containerName,$mappingField,$mappingValue,$textLabels,$textValues,$mapName);
+_wait(5000);
+_selectDomain($domainName);
+_click(_f("main").s_button("Save & Close"));
+
 $sfm_act_wizards.addToWizard($wizardObject,$wizardName, $wizardType,$sfmName,$handOver,$profile,$wizardCriteria);  
 
-//_click(_f("main").s_button("Save & Close"));
 //_writeFile("true", $appiumPath+$sahiIntermediatoryPath, true);
 
 

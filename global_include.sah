@@ -276,4 +276,9 @@ function dumpWindowInfo() {
 	}
 	s += "</pre>";
 	_sahi._log(s);
+	
+	
+	
+	
 }
+
