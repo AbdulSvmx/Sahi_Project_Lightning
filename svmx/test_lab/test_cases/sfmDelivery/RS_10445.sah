@@ -11,7 +11,7 @@ $rs_10445.start();
 		for (var $i = 0; $i < $Account.length; $i++) {
 			$objName= "Account";
 			$obJson = "{\"Name\":\""+$Account[$i]+"\"}";
-			$filterValue=$sfm_act_restApiMethods.postRestApi($objName,$obJson,"POST");
+			$filterValue=$sfm_act_restApiMethods.postRestApi($sfmlUsn,$sfmlPwd,$sfmClientId,$sfmConsumerSecret,$sfmOrgInstance,$objName,$obJson,"POST");
 			$AccountID[$i]=$filterValue;
 		}
 		_log("Account1: "+$Account[0]+" and Account2: "+$Account[1]);
@@ -29,7 +29,7 @@ $rs_10445.start();
 				$lastName=$bo_act_common.generateRandomName($contactNameList[$i]+"_");
 				$obJson="{\"LastName\":\""+$lastName+"\",\"AccountId\":\""+$AccountID[1]+"\"}";
 			}
-			$filterValue=$sfm_act_restApiMethods.postRestApi($objName,$obJson,"POST");
+			$filterValue=$sfm_act_restApiMethods.postRestApi($sfmlUsn,$sfmlPwd,$sfmClientId,$sfmConsumerSecret,$sfmOrgInstance,$objName,$obJson,"POST");
 			$userName[$i]=$lastName;
 		}		
 		//create Work orders
@@ -37,15 +37,15 @@ $rs_10445.start();
 		$obJson = "{\"SVMXC__Order_Status__c\":\"Open\",\"SVMXC__Order_Type__c\":\"Field Service\"}";
 		$columnName = "Name";
 		$filter="id";
-		$filterValue=$sfm_act_restApiMethods.postRestApi($objName,$obJson,"POST");
-		$WONumber =$sfm_act_restApiMethods.getRestApi("GET", $objName, $columnName, $filter, $filterValue);
+		$filterValue=$sfm_act_restApiMethods.postRestApi($sfmlUsn,$sfmlPwd,$sfmClientId,$sfmConsumerSecret,$sfmOrgInstance,$objName,$obJson,"POST");
+		$WONumber =$sfm_act_restApiMethods.getRestApi($sfmlUsn,$sfmlPwd,$sfmClientId,$sfmConsumerSecret,$sfmOrgInstance,"GET", $objName, $columnName, $filter, $filterValue);
 		_log("WO number: "+$WONumber);
 
 		//Create Product
 		$objName= "Product2";
 		$productName=$bo_act_common.generateRandomName("Pro_RS_10445_");
 		$obJson = "{\"Name\":\""+$productName+"\"}";
-		$filterValue=$sfm_act_restApiMethods.postRestApi($objName,$obJson,"POST");
+		$filterValue=$sfm_act_restApiMethods.postRestApi($sfmlUsn,$sfmlPwd,$sfmClientId,$sfmConsumerSecret,$sfmOrgInstance,$objName,$obJson,"POST");
 
 		// Login to App
 		$bo_act_login.login($g_url,$sfmlUsn,$sfmlPwd);

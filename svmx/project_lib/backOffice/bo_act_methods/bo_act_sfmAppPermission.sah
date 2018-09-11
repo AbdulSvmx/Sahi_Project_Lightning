@@ -24,7 +24,7 @@ var $bo_act_SFMAppPermission = new function bo_act_SFMAppPermission() {
 		_click($bo_pg_sfmAppPermissionD.btn_add_selected);
 		_click($bo_pg_sfmAppPermissionD.btn_save);
 		_wait(10000);
-		_assertEqual(true, _isVisible());
+		//_assertEqual(true, _isVisible());
 		_selectDomain();
 		
 	};

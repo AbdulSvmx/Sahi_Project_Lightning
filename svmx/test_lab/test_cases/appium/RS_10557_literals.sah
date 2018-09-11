@@ -5,12 +5,12 @@ RS_10557_mapping.start();
 
 var $sfmNameToBeCloned = "Create Work Order from Installed Product";
 //var $sfmName = $bo_act_common.generateRandomName("RS_10557_");
-var $sfmName="RS_10557_592018151910";
+var $sfmName="RS_10557_592018205141";
 var $isCustom = true;
 var $objName="Work Order"
 var $sorceobj="Installed Product"
-	var $part="Parts";
-	var $labor="Labor";
+var $part="Parts";
+var $labor="Labor";
 var $sfmTemplate = "--None--";
 var $sfmTemplateSaveAsName = $bo_act_common.generateRandomName("RS_10557_Temp");
 var $headersToAdd = ["Component","Site","Scheduled Date Time"];
@@ -21,8 +21,8 @@ var $childObjlabor="Labor";
 var $fieldNamelabor=["Start Date and Time"];
 
 
-var $mapName_part="RS_10557_map_part_Auto";
-var $mapName_labor="RS_10557_map_labor_Auto";
+var $mapName_part=$bo_act_common.generateRandomName("RS_10554_part");
+var $mapName_labor=$bo_act_common.generateRandomName("RS_10554_labor");
 
 var $wizardObject="Installed Product";
 var $wizardName="Automation IB Wizard";
@@ -31,11 +31,9 @@ var $profile="auto group profile";
 var $handOver="false";
 var $wizardCriteria=null;
 
-	$bo_act_login.login($g_url, $appiumAdminUn, $appiumAdminPwd);
+$bo_act_login.login($g_url, $appiumAdminUn, $appiumAdminPwd);
 $sfm_act_lightningConfig.switchToLightning();
 
-//$mappingField = ["Account","Order Type","Component","Product","Scheduled Date","Scheduled Date Time"];
-//$mappingValue = ["Account","Field Service","Record ID","Product","Date Installed","Last Modified Date"];
 
 $textLabels_parts = ["To Location"];
 $textValues_parts = ["SVMX.CURRENTRECORDHEADER.SVMXC__Site__c"];
@@ -49,7 +47,7 @@ var $containerName_labor="Labor";
 var $mappingField_parts=[];var $mappingField_labor=[];var $mappingValue_parts=[];var $mappingValue_labor=[];
 
 
-/*$bo_act_navigation.navigateToSfmTransactionDesigner();
+$bo_act_navigation.navigateToSfmTransactionDesigner();
 _wait(10000);
 _click(_f("main").s_button("New SFM Transaction"));
 _setValue($bo_pg_sfmTransactionAndDesigner.txt_name, $sfmName);
@@ -85,11 +83,21 @@ _click(_f("main").s_richtext("Labor"));
 _click(_f("main").s_checkbox("Allow New"));
  _click(_f("main").s_button("Save[3]"));
 _wait(5000);
-_click(_f("main").s_button("Quick Save"));*/
+_click(_f("main").s_button("Quick Save"));
 
 $sfm_act_wizards.addToWizard($wizardObject,$wizardName, $wizardType,$sfmName,$handOver,$profile,$wizardCriteria);  
 
+//create a standalone process to create a new installed product
 
+var $createsfmName = "Create New Installed Product Automation sahi";
+var $transactiontype = "as Standalone for the purpose of creating a new record";
+var $targetObjectName = "Installed Product";
+var $ExistingsfmPageLayoutName="SVMXSTD: View/Create Installed Product";
+$bo_act_SFM.createstandaloneSFMProcess($createsfmName, $transactiontype, $targetObjectName,$ExistingsfmPageLayoutName);
+
+//Setup App Permissions for Mobile App for the SFM Process created
+var $profilename = $group_profilename;
+$bo_act_SFMAppPermission.set_mobileapp_permissions($profilename, $targetObjectName, $createsfmName);
 
 RS_10557_mapping.end();
 
