@@ -46,9 +46,9 @@ $rs_10431.start();
 	$columnName = "CaseNumber";
 	$filter="id";
 	//create a case
-	$filterValue=$sfm_act_restApiMethods.postRestApi($objName,$obJson,"POST");
+	$filterValue=$sfm_act_restApiMethods.postRestApi($sfmlUsn,$sfmlPwd,$sfmClientId,$sfmConsumerSecret,$sfmOrgInstance,$objName,$obJson,"POST");
 	//get the caseNumber
-	$caseNumber =$sfm_act_restApiMethods.getRestApi("GET", $objName, $columnName, $filter, $filterValue);
+	$caseNumber =$sfm_act_restApiMethods.getRestApi($sfmlUsn,$sfmlPwd,$sfmClientId,$sfmConsumerSecret,$sfmOrgInstance,"GET", $objName, $columnName, $filter, $filterValue);
 	_log("Case number: "+$caseNumber);
 	
 	//Create Work order using below variables 
@@ -58,9 +58,9 @@ $rs_10431.start();
 	$columnName = "Name";
 	$filter="id";
 	//create a case
-	$filterValue=$sfm_act_restApiMethods.postRestApi($objName,$obJson,"POST");
+	$filterValue=$sfm_act_restApiMethods.postRestApi($sfmlUsn,$sfmlPwd,$sfmClientId,$sfmConsumerSecret,$sfmOrgInstance,$objName,$obJson,"POST");
 	//get the caseNumber
-	$WONumber =$sfm_act_restApiMethods.getRestApi("GET", $objName, $columnName, $filter, $filterValue);
+	$WONumber =$sfm_act_restApiMethods.getRestApi($sfmlUsn,$sfmlPwd,$sfmClientId,$sfmConsumerSecret,$sfmOrgInstance,"GET", $objName, $columnName, $filter, $filterValue);
 	_log("WO number: "+$WONumber);
 
 	$sfm_act_common.globalSearchInLightning($WONumber);

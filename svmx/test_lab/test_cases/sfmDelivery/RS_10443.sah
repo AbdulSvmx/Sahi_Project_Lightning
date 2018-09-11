@@ -12,7 +12,7 @@ $obJson = "{\"Name\":\""+$restAccName+"\"}";
 $columnName = "Name";
 $filter="id";
 //create an account
-$account=$sfm_act_restApiMethods.postRestApi($objName,$obJson,"POST");
+$account=$sfm_act_restApiMethods.postRestApi($sfmlUsn,$sfmlPwd,$sfmClientId,$sfmConsumerSecret,$sfmOrgInstance,$objName,$obJson,"POST");
 //get the caseNumber
 
 
@@ -21,13 +21,13 @@ $obJson = "{\"AccountId\":\""+$account+"\",\"SVMXC__Billing_Type__c\":\"Loan\",\
 $columnName = "CaseNumber";
 $filter="id";
 //create  case with above created account and other parameters
-$filterValue1=$sfm_act_restApiMethods.postRestApi($objName,$obJson,"POST");
+$filterValue1=$sfm_act_restApiMethods.postRestApi($sfmlUsn,$sfmlPwd,$sfmClientId,$sfmConsumerSecret,$sfmOrgInstance,$objName,$obJson,"POST");
 //get the caseNumber
-$caseNumber1 =$sfm_act_restApiMethods.getRestApi("GET", $objName, $columnName, $filter, $filterValue1);
+$caseNumber1 =$sfm_act_restApiMethods.getRestApi($sfmlUsn,$sfmlPwd,$sfmClientId,$sfmConsumerSecret,$sfmOrgInstance,"GET", $objName, $columnName, $filter, $filterValue1);
 
-$filterValue2=$sfm_act_restApiMethods.postRestApi($objName,$obJson,"POST");
+$filterValue2=$sfm_act_restApiMethods.postRestApi($sfmlUsn,$sfmlPwd,$sfmClientId,$sfmConsumerSecret,$sfmOrgInstance,$objName,$obJson,"POST");
 //get the caseNumber
-$caseNumber2 =$sfm_act_restApiMethods.getRestApi("GET", $objName, $columnName, $filter, $filterValue2);
+$caseNumber2 =$sfm_act_restApiMethods.getRestApi($sfmlUsn,$sfmlPwd,$sfmClientId,$sfmConsumerSecret,$sfmOrgInstance,"GET", $objName, $columnName, $filter, $filterValue2);
 
 var $sfmNameToBeCloned = "Manage Work Order Lines - Usage";
 
