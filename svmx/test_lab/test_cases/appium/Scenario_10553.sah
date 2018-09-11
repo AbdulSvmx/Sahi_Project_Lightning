@@ -1,7 +1,7 @@
 //Meghana Rao
 
 /*
- * Verify Addition of lines and navigation on linked SFM process
+ * Verify Addition of lines and navigation on linked SFM process- RS-10553
  */
 _writeFile("false", $appiumPath+$sahiIntermediatoryPath, true);
 var $pre_requisite= _testcase("scenario_10553"," Verify Addition of lines and navigation on linked SFM process");
@@ -9,7 +9,10 @@ $pre_requisite.start();
 _setSpeed($g_stepSpeed);
 $bo_act_login.login($g_url, $appiumAdminUn, $appiumAdminPwd);
 var $randomnumber = $bo_act_common.generateRandomName("Layout");
-
+var $sfmName = "SFM Process for RS-10553";
+var $qualifyingCriteria = "SVMXSTD: Products Serviced Records";
+var $sfmMaps = "SVMXSTD: Add Products Serviced";
+var $pagelayout = "SVMXSTD: Add/Edit Products Serviced";
 
 // Setup App Permissions for Mobile App for the SFM Process created
 var $profilename = $group_profilename;
@@ -19,3 +22,14 @@ $bo_act_SFMAppPermission.addnewobjectdownloacriteria("Work Order");
 
 // Technician's Group Wide profile setting of SET019 - None
 $bo_act_configurationProfiles.editGroupProfileForPicklistSettings($group_profilename,"ServiceMax iPad Client", "Synchronization", "SET019", "None");
+$bo_act_navigation.navigateToSfmTransactionDesigner();
+$bo_act_SFM.addsfmproductsserviced("Work Order",$sfmName,$qualifyingCriteria,$sfmMaps,$pagelayout);
+
+// Adding this SFM Designer to the Wizard
+var $wizTitle = "AutoRegression";
+var $targetObjectName = "Work Order";
+$bo_act_navigation.navigateToSfmWizard();
+$sfm_act_createCustomWizard.addManageWizStepsverify($wizTitle, "SFM", $sfmName, $group_profilename, $targetObjectName);
+
+_writeFile("true", $appiumPath+$sahiIntermediatoryPath, true);
+$pre_requisite.end();
