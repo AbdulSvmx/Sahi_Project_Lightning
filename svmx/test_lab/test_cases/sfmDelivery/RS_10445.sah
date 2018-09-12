@@ -91,7 +91,7 @@ $rs_10445.start();
 		$sfm_act_createCustomWizard.clickWizardBtn($sfmName);
 		_wait(5000,_isVisible(_div("/"+$sfmName+"/")));
 		
-		$sfm_act_sfmDesigner.addChildLine("Parts");
+		
 		
 		
 		_log("Work Order Header validation: Start");
@@ -166,6 +166,8 @@ $rs_10445.start();
 		
 		
 		//*********************
+		$sfm_act_sfmDesigner.addChildLine("Parts");
+		
 		_log("Part childline validation: Start");
 		//***Part childline validation***//
 		//Assert "No matching record" DVR
