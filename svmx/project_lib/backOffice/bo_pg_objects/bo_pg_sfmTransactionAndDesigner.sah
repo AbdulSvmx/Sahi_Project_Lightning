@@ -85,10 +85,17 @@ var $bo_pg_sfmTransactionAndDesigner = new function bo_pg_sfmTransactionAndDesig
 	this.combo_CTRecord = _f("main").s_combobox("objCombo1[1]");	
 	this.childSource_chkBox = _f("main").s_checkbox("Work Detail (Work Order)");		
 	this.childCTRecord_chkBox = _f("main").s_checkbox("Work Detail (Work Order)[1]");	
+	this.childcheckbox_workorder = _f("main").s_checkbox("Work Detail (Work Order)");
+	this.tab_qualifyingcriteria_maps = _f("main").tab("Qualifying Criteria and Field Mappings");
+	this.lbl_productserviced = _f("main").s_label("Products Serviced");
+	this.tab_advancedOptions = _f("main").tab("Advanced Options");
+	this.btn_addtoSFMProcess = _f("main").s_button("Add[3]");
 	//Drop Down List in Qualifying Criteria and Field Mappings
 	this.dropDownList = _f("main").s_dropdownlist("objCombo");
 	this.selectExistingPageLayout=_f("main").s_combobox("searchCombo[3]");
 	this.tab_advancedOptions=_f("main").tab("Advanced Options");
+	this.btn_linkedprocess = _f("main").tab("Linked Process");
+	this.btn_manage_workdetailsproductserviced = _f("main").s_label("Manage Work Details for Products Serviced");
 	this.lbl_sorting=_f("main").tab("Sorting");
 	this.lbl_partObj=_f("main").s_label("Parts[4]");
 	this.lbl_partField=_f("main").s_label("Part");
@@ -110,6 +117,7 @@ var $bo_pg_sfmTransactionAndDesigner = new function bo_pg_sfmTransactionAndDesig
 	this.clkNewMapID=_f("main").s_textinput("Input ID Here[1]");
 	this.clkMapSave=_f("main").s_button("Save[1]");
 	this.QCFieldMapQuickFind=_f("main").s_textinput("filterInput").rightOf(_f("main").s_label("Quick Find"),10,10);
+	this.txtworkdetailaliasname = _f("main").s_textinput("/aliasName/").near(_f("main").s_checkbox("Work Detail (Work Order)"));
 
 	this.btn_advanced_options = _f("main").tab("Advanced Options");
 	this.chkbox_work_order = _f("main").s_checkbox("Work Order");

@@ -349,6 +349,42 @@ var $bo_act_SFM = new function bo_act_SFM() {
 			_setSpeed($g_stepSpeed);	
 		};
 		
+		// Added by Meghana
+		this.addsfmproductsserviced = function($targetobject, $sfmName, $qualificationCriteria, $fldMap, $screendesigner){
+			_selectDomain("/svmx/");
+			_wait(5000);
+			_click($bo_pg_sfmTransactionAndDesigner.btn_newSFM);
+			_setValue($bo_pg_sfmTransactionAndDesigner.txt_name, $sfmName);
+			_setValue($bo_pg_sfmTransactionAndDesigner.txt_sfmTransactionId, "");
+			_setSelected($sfm_pg_screenDesigner.sel_createSFMTransaction, "as Standalone for the purpose of editing an existing record");
+			_setStrictVisibilityCheck(true);
+			_setSelected($bo_pg_sfmTransactionAndDesigner.combo_CTRecord,$targetobject);
+			_setValue($bo_pg_sfmTransactionAndDesigner.txtworkdetailaliasname, "Products Serviced");
+			_click($bo_pg_sfmTransactionAndDesigner.childcheckbox_workorder);
+			_wait(5000);
+			_click($bo_pg_sfmTransactionAndDesigner.tab_qualifyingcriteria_maps);
+			_click($bo_pg_sfmTransactionAndDesigner.lbl_productserviced);
+			_wait(5000);
+			this.selectOpenWOInQC($qualificationCriteria);
+			_click(_f("main").tab("Mapping(s)"));
+			_setSelected(_f("main").s_combobox("searchCombo[2]"), $fldMap);
+			_wait(5000);
+			// Adding the Screen Designer
+			_wait(6000,_isVisible(_f("main").tab("Screen Designer")));
+			_click(_f("main").tab("Screen Designer"));
+			
+			//_setSelected($bo_pg_sfmTransactionAndDesigner.selectExistingPageLayout,$pageLayout);
+			_setSelected(_f("main").s_combobox("searchCombo[3]"), $screendesigner);
+			_wait(5000);
+			_click($bo_pg_sfmTransactionAndDesigner.tab_advancedOptions);
+			_click($bo_pg_sfmTransactionAndDesigner.btn_linkedprocess);
+			_doubleClick(_f("main").s_label("Products Serviced[3]"));
+			_click($bo_pg_sfmTransactionAndDesigner.btn_manage_workdetailsproductserviced);
+			_click($bo_pg_sfmTransactionAndDesigner.btn_addtoSFMProcess);
+			_click($bo_pg_sfmTransactionAndDesigner.btn_saveAndclose);
+			_wait(5000);
+			_selectDomain();
+		};
 		
 		this.deleteSFM=function($sfmName){
 			$bo_act_navigation.navigateToSfmTransactionDesigner();
@@ -677,4 +713,54 @@ var $bo_act_SFM = new function bo_act_SFM() {
 														_setValue(_f("main").s_textinput("helpUrl"),$urlName);
 														_click(_f("main").s_button("Add to Library and Form"));
 													}
+
+													this.createstandaloneSFMProcess = function($sfmName, $nameOfTranType, $targetObjName,$ExistingsfmPageLayoutName){ // Lightning 
+														
+														
+														
+														$bo_act_navigation.navigateToSvmxSetup();
+														var $pagelayoutName = $bo_act_common.generateRandomName("PAG_");
+														var $pagelayoutId = $bo_act_common.generateRandomName("PAGID");
+														_selectDomain("/svmx/");
+														
+														_click($bo_pg_servicemaxSetup.btn_serviceFlowManager);
+														_click($bo_pg_servicemaxSetup.btn_sfmTransactionAndDocsDesigner);
+														_wait(60000,_isVisible($bo_pg_sfmTransactionAndDesigner.btn_newSFMTransaction));
+														_wait(10000);
+														_click($bo_pg_sfmTransactionAndDesigner.btn_newSFMTransaction);
+														_wait(30000,_isVisible($bo_pg_sfmTransactionAndDesigner.txt_name));
+														_setValue($bo_pg_sfmTransactionAndDesigner.txt_name,$sfmName);
+														_click($bo_pg_sfmTransactionAndDesigner.txt_sfmTransactionId);
+														
+														_setSelected($bo_pg_sfmTransactionAndDesigner.lbl_checklistOb,$nameOfTranType);
+														_setSelected($bo_pg_sfmTransactionAndDesigner.combo_CTRecord,$targetObjName);
+														_click($bo_pg_sfmTransactionAndDesigner.btn_screenDesigner);
+														
+														_setSelected($bo_pg_sfmTransactionAndDesigner.selectExistingPageLayout,$ExistingsfmPageLayoutName);
+														_wait(10000);
+														
+														_setValue($bo_pg_manageWOLineUsageForSorting.txt_pagelayoutName, $pagelayoutName);
+														_setValue($bo_pg_manageWOLineUsageForSorting.txt_pagelayoutID, $pagelayoutId);
+														_click($bo_pg_manageWOLineUsageForSorting.btn_save_as);
+														_wait(10000);
+														_click($bo_pg_sfmTransactionAndDesigner.btn_quickSave1);
+														_wait(10000);
+														_click($bo_pg_sfmTransactionAndDesigner.btn_saveAndclose);
+														_selectDomain();
+														
+														
+													};
+
+
+
+
+
+
+
+
+
+
 };
+
+
+

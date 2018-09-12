@@ -24,7 +24,7 @@ var $bo_act_SFMAppPermission = new function bo_act_SFMAppPermission() {
 		_click($bo_pg_sfmAppPermissionD.btn_add_selected);
 		_click($bo_pg_sfmAppPermissionD.btn_save);
 		_wait(10000);
-		_assertEqual(true, _isVisible());
+		//_assertEqual(true, _isVisible());
 		_selectDomain();
 		
 	};
@@ -45,7 +45,46 @@ var $bo_act_SFMAppPermission = new function bo_act_SFMAppPermission() {
 		_click($bo_pg_sfmAppPermissionD.btn_configsave);
 
 		
-	}
+	};
+	
+	// For Synchronization Settings - Synchronize application data once every  - 600 minutes
+	this.workOrderSynchronizeapplicationdata = function($minutes){
+		$bo_act_navigation.navigateToSvmxSetup();
+		_selectDomain("/svmx/");
+		_click($bo_pg_sfmAppPermissionD.btn_mobile_configuration);
+		_setSelected($bo_pg_sfmAppPermissionD.picklist_profileselection, $group_profilename);
+		_click($bo_pg_sfmAppPermissionD.chkbox_selectprofile);
+		_click($bo_pg_sfmAppPermissionD.btn_edit);
+		
+		_click($bo_pg_sfmAppPermissionD.btn_synchronizationsettings);
+		_setValue($bo_pg_sfmAppPermissionD.txt_synchronizeonceevery, $minutes);
+		
+		// To verify if Work Order is added to Download Criteria	
+		_click($bo_pg_sfmAppPermissionD.btn_configsave);
+
+		
+	};
+	
+	this.addnewobjectdownloacriteria = function($objectname)
+	{
+		$bo_act_navigation.navigateToSvmxSetup();
+		_selectDomain("/svmx/");
+		_click($bo_pg_sfmAppPermissionD.btn_mobile_configuration);
+		_setSelected($bo_pg_sfmAppPermissionD.picklist_profileselection, $group_profilename);
+		_click($bo_pg_sfmAppPermissionD.chkbox_selectprofile);
+		_click($bo_pg_sfmAppPermissionD.btn_edit);
+		
+		_click($bo_pg_sfmAppPermissionD.btn_downloadcriteriatab);
+		if(_isVisible(_cell($objectname))==false)
+		{
+			_click($bo_pg_sfmAppPermissionD.btn_addnewdownloacriteria);
+			// Need to add Work Order to the Tab
+			// PENDING - Identifying the object is an issue
+		}
+		_click($bo_pg_sfmAppPermissionD.btn_configsave);
+	};
+	
+	
 	this.setSFMAppPermission = function($searchText,$isOnlineHideRequired,$isOnlineRequired){
 	_click($bo_pg_sfmAppPermissionD.combo_listItemProcessType);
 	_click($bo_pg_sfmAppPermission.combo_selectObject);

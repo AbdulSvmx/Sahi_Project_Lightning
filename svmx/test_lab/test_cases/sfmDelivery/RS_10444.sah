@@ -18,9 +18,9 @@ $obJson = "{\"SVMXC__Billing_Type__c\":\"Loan\",\"Priority\":\"High\",\"Descript
 $columnName = "CaseNumber";
 $filter="id";
 //create a case
-$filterValue=$sfm_act_restApiMethods.postRestApi($objName,$obJson,"POST");
+$filterValue=$sfm_act_restApiMethods.postRestApi($sfmlUsn,$sfmlPwd,$sfmClientId,$sfmConsumerSecret,$sfmOrgInstance,$objName,$obJson,"POST");
 //get the caseNumber
-$caseNumber =$sfm_act_restApiMethods.getRestApi("GET", $objName, $columnName, $filter, $filterValue);
+$caseNumber =$sfm_act_restApiMethods.getRestApi($sfmlUsn,$sfmlPwd,$sfmClientId,$sfmConsumerSecret,$sfmOrgInstance,"GET", $objName, $columnName, $filter, $filterValue);
 
 
 //login to the org
