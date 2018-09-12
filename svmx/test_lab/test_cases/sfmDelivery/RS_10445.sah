@@ -207,7 +207,8 @@ $rs_10445.start();
 		_click(_link($Account[0]));
 		_wait(15000);
 		
-		_click($sfm_pg_sfmDesigner.txt_headerAccount);
+		_click($sfm_pg_sfmDesigner.link_quickSave);
+		_wait(5000);
 		//assert Multiple item found DVR on AutoContact Field
 		$sfm_act_sfmDesigner.navToExtendedEdit();
 		_wait(10000,_isVisible($sfm_pg_sfmDesigner.txt_partTextbox));
