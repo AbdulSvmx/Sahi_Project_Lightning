@@ -62,7 +62,7 @@ $sfm_act_lightningConfig.switchToLightning();
 //Clone standard process and add the dependent picklist in the screen designer
 _setSpeed(3000);
 $bo_act_navigation.navigateToSfmTransactionDesigner();
-$sfm_act_SFM.selectSFM($process_to_clone,false);
+$sfm_act_SFM.selectSFM($process_to_clone,$isCustom);
 _click($bo_pg_sfmTransactionAndDesigner.btn_clone);
 _wait(60000, _isVisible($bo_pg_sfmTransactionAndDesigner.txt_name));
 _setValue($bo_pg_sfmTransactionAndDesigner.txt_name, $processName);
