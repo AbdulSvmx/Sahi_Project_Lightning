@@ -18,7 +18,7 @@ var $pickListLabels = ["Line Type","Record Type"];
 var $pickListValues = ["Parts","Usage/Consumption"];
 var $textLabels = ["Closed By","Site"];
 var $textValues = ["SVMX.CURRENTUSERID","SVMX.USERTRUNK"];
-var $inventoryLocation = "Lightning Automation Location";
+var $inventoryLocation = "Bangalore East";
 var $productName = "Chrome";
 
 //Appending current timestamp to process name to make it unique.
@@ -64,7 +64,7 @@ _wait(3000);
 _selectDomain($domainName);
 
 //Verify the values in header
-var $verifyResult = $sfm_act_SFM.verifyValuesInDelivery($textLabels,$expValues,[],[],[],[],[],[]);
+var $verifyResult = $sfm_act_SFM.verifyValuesInDelivery($textLabels,$expValues,[],[],[],[],[],[],[],[]);
 _assertTrue($verifyResult,"Following Literals are verified in header- SVMX.CURRENTUSERID and SVMX.USERTRUNK");
 
 //Create mapping for child lines by navigating to SFM Designer from Delivery.
