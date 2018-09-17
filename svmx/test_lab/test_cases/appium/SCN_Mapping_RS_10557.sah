@@ -1,11 +1,11 @@
-var RS_10557_mapping = _testcase("RS_10554_mapping","Verify field map for new header record & existing child record");
+var RS_10557_mapping = _testcase("RS_10557_mapping","SCN_Child_Mapping_RS-10557 Verify SVMX literals in source to target process");
 RS_10557_mapping.start();
 
 //_writeFile("false", $appiumPath+$sahiIntermediatoryPath, true);
 
 var $sfmNameToBeCloned = "Create Work Order from Installed Product";
 //var $sfmName = $bo_act_common.generateRandomName("RS_10557_");
-var $sfmName="RS_10557_592018205141";
+var $sfmName="RS_10557_Child_Mapping";
 var $isCustom = true;
 var $objName="Work Order"
 var $sorceobj="Installed Product"
@@ -21,8 +21,8 @@ var $childObjlabor="Labor";
 var $fieldNamelabor=["Start Date and Time"];
 
 
-var $mapName_part=$bo_act_common.generateRandomName("RS_10554_part");
-var $mapName_labor=$bo_act_common.generateRandomName("RS_10554_labor");
+var $mapName_part=$bo_act_common.generateRandomName("RS_10557_part");
+var $mapName_labor=$bo_act_common.generateRandomName("RS_10557_labor");
 
 var $wizardObject="Installed Product";
 var $wizardName="Automation IB Wizard";
