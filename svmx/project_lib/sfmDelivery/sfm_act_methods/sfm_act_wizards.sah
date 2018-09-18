@@ -11,7 +11,7 @@ var $sfm_act_wizards = new function sfm_act_wizards() {
 		_click(_div("Service Flow Manager"));
 		_click(_div("SFM Wizards"));
 		_setSelected($sfm_pg_wizards.selectObject,$wizardObject);
-		_wait(3000);
+		_wait(6000);
 		
 		// If wizard is already present add the step else create a new wizard and then add the step
 		if(_exists(_span($wizardName))){

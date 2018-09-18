@@ -34,6 +34,87 @@ var $sfm_act_SFM = new function sfm_act_SFM() {
 			$sfm_act_SFM.addFieldToScreen($fieldName, $containerName);
 		}
 	};
+this.dvrScenario5 = function($sfmNameToBeCloned, $sfmName, $isCustom,
+			 $sfmTemplateSaveAsName,$sfmTemplate, $fieldName, $containerName) 
+			 {
+		$bo_act_navigation.navigateToSfmTransactionDesigner();
+		_click($bo_pg_sfmTransactionAndDesigner.btn_yourCustomSfmTransactions);
+		_setValue($bo_pg_sfmTransactionAndDesigner.lbl_searchSFM, $sfmName);
+		_wait(10000);
+		
+		_setStrictVisibilityCheck(false);
+		_setStrictVisibilityCheck(true);
+//		
+		
+		if (_isVisible(_f("main").s_checkbox("/chk/i").leftOf(_f("main").s_label($sfmName), 10, 10))) {
+			_log("Process exists successfully")
+			//_click(_f("main").s_checkbox("/chk/i").leftOf(_f("main").s_label($sfmNameToBeCloned), 10, 10));
+			
+		} else if (_isVisible(_f("main").s_checkbox(2).leftOf(_f("main").s_label($sfmName), 10, 10))) {
+			_log("Process exists successfully")
+			
+			
+			} else{
+				
+				$bo_act_navigation.navigateToSfmTransactionDesigner();
+//				_setSpeed($g_stepSpeed);
+				_wait(10000);
+					 
+				_setSpeed(3000);
+				
+				//$sfm_act_SFM.selectSFM($sfmNameToBeCloned, $isCustom);
+
+				_setValue($bo_pg_sfmTransactionAndDesigner.txt_standardSfmTransactionQuickFind,
+						$sfmNameToBeCloned);
+				_setStrictVisibilityCheck(false);
+				_setStrictVisibilityCheck(true);
+//				
+				 
+				if (_isVisible(_f("main").s_checkbox("/chk/i").leftOf(_f("main").s_label($sfmNameToBeCloned), 10, 10))) {
+					_wait(3000);
+					_click(_f("main").s_checkbox("/chk/i").leftOf(_f("main").s_label($sfmNameToBeCloned), 10, 10));
+
+				} else if (_isVisible(_f("main").s_checkbox(2).leftOf(_f("main").s_label($sfmNameToBeCloned), 10, 10))) {
+					_wait(3000);
+					_click(_f("main").s_checkbox(2).leftOf(_f("main").s_label($sfmNameToBeCloned), 10, 10));
+
+				} else {
+					_click(_f("main").s_checkbox("/CheckBox/").leftOf(_f("main").s_label($sfmNameToBeCloned), 10, 10));
+				}
+				 _setStrictVisibilityCheck(false);
+
+				
+				_click($bo_pg_sfmTransactionAndDesigner.btn_clone);
+				_wait(50000, _isVisible($bo_pg_sfmTransactionAndDesigner.txt_name));
+				_setValue($bo_pg_sfmTransactionAndDesigner.txt_name, "");
+				_setValue($bo_pg_sfmTransactionAndDesigner.txt_name, $sfmName);
+				_setValue($bo_pg_sfmTransactionAndDesigner.txt_sfmTransactionId, "");
+				_setValue($bo_pg_sfmTransactionAndDesigner.txt_sfmTransactionId, $sfmName);
+				_setValue($bo_pg_sfmTransactionAndDesigner.txt_name, "");
+				_setValue($bo_pg_sfmTransactionAndDesigner.txt_name, $sfmName);
+				_click($bo_pg_sfmTransactionAndDesigner.btn_screenDesigner);
+				_wait(5000);
+				_setSelected($bo_pg_sfmTransactionAndDesigner.sel_sfmTemplate,
+						$sfmTemplate);
+				_setValue($bo_pg_sfmTransactionAndDesigner.txt_sfmSavePageLayoutAs,
+						$sfmTemplateSaveAsName);
+				_setValue($bo_pg_sfmTransactionAndDesigner.txt_sfmSavePageLayoutAsId,
+						$sfmTemplateSaveAsName);
+				_wait(5000);
+			
+		//$sfm_act_SFM.addFieldToScreen($fieldName, $containerName);
+		//$sfm_act_SFM.partsNotMandatory();
+		//$sfm_act_SFM.partsMultiAdd("--None--");
+
+		//create Data validation rule
+		 }
+		 	
+		
+		_setStrictVisibilityCheck(false);
+		
+	};
+	
+
 	
 	/**
 	 * Based on the number of items passed in array(ContainerName), fields gets added to either header or child

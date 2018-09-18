@@ -1,4 +1,5 @@
 _call(top.location.reload(true));
+_call(top.localStorage.clear());
 _setXHRReadyStatesToWaitFor("2,3");
 _windowAction("resize", 1920, 1080);
 var $g_stepSpeed = 300;
@@ -98,6 +99,12 @@ var $appiumAdminPwd="servicemax01";
 
 var $appiumTechUn="autotech@part1.com";
 var $appiumTechPwd="servicemax01";
+
+//THIS IS SPECIFIC TO A GIVEN ORG - DONOT TOUCH
+var $appiumclient_id = "3MVG9ifmAKCHISbZGXS_tYaEGdq5pFNz6ZhYTkrLMlM9toUZC8UIDIt.2R4KYqLXKL5yc8HjHPh5NYoUERETS";
+var $appiumclient_secret = "3810777216167697283";
+var $appiumorginstance = "cs77";
+
 
 // ==== Reference addition module START ====
 // Include the salesforce js files to enable sforce API calls
@@ -276,4 +283,9 @@ function dumpWindowInfo() {
 	}
 	s += "</pre>";
 	_sahi._log(s);
+	
+	
+	
+	
 }
+

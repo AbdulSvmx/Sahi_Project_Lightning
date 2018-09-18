@@ -34,7 +34,7 @@ $rs_10462.start();
 	
 	//Create New SFM Transaction
 	_click($bo_pg_sfmTransactionAndDesigner.btn_newSFM);
-	_wait(10000,_isVisible($sfm_pg_screenDesigner.btn_propoties));
+	_wait(25000,_isVisible($sfm_pg_screenDesigner.btn_propoties));
 	$sfm_act_Transactions.sfmPropertiesPage($sfmName, "", $sfmName, $sfmType, "", "", $trgHeaderObj, $trgChildObj);
 	
 	$sfm_act_Transactions.sfmQualifyingCriteriaieldMappings($trgHeaderObj, $headerExprFieldsDetails, $headerMappingDetails);
@@ -46,8 +46,9 @@ $rs_10462.start();
 	var $sfmPgLayoutName = $bo_act_common.generateRandomName("SFM_Auto_");
 	$sfm_act_Transactions.screenDesigner($headersToAdd, $childToAdd, $sfmPgLayoutName, $sfmPgLayoutName);
 	
-	_wait(5000);
-	_click($bo_pg_sfmTransactionAndDesigner.btn_finalQuickSave);
+	_wait(15000);
+	//_click($bo_pg_sfmTransactionAndDesigner.btn_finalQuickSave);
+	_click($bo_pg_sfmTransactionAndDesigner.btn_saveAndclose);
 	
 	var $wizardObject="Work Order";
 	var $wizardName1 =$wizardName[6];

@@ -1,0 +1,9 @@
+var $initFlex = _testcase("initFlex","Initialize flex");
+$initFlex.start();
+
+	//Login to App
+	$bo_act_login.login($g_url,$sfmlUsn,$sfmlPwd);
+	$bo_act_navigation.navigateToSfmTransactionDesigner();
+
+
+$initFlex.end();
