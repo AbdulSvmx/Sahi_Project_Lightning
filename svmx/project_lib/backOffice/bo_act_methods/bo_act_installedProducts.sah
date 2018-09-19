@@ -9,7 +9,7 @@ var $bo_act_installedProduct = new function bo_act_installedProduct() {
 	 */
 	this.createInstalledProduct = function($productName,$accountName,$contactName,$date) { // Modified for Lightning - Meghana
 		var $serialNum = $bo_act_common.generateRandomName("Ser");
-		var $IBName = $bo_act_common.generateRandomName("IB_");
+		var $IBName = $bo_act_common.generateRandomName("Auto_IB");
 		_setStrictVisibilityCheck(true);
 		$bo_act_navigation.navigateToInstalledProductPage();
 		 _wait(5000,_isVisible($bo_pg_installedProducts.btn_new));

@@ -6,29 +6,37 @@ var $bo_act_warrantyTerms = new function bo_act_warrantyTerms() {
 	/**
 	 * Create a Warranty Terms
 	 * 
-	 * @param $warranty Terms Name
+	 * @param $warranty Terms Name - Changes made for Salesforce Lightning
 	 */
+	
 	this.createWarrantyTerms = function($exchangeType,$materialPercentCovered,$durationOfMaterialCoverage,$unitOfTimeForMaterialCoverage,$laborPercentCovered,$durationOflaborCoverage,$unitOfTimeForlaborCoverage,$expensesPercentCovered,$durationOfExpensesCoverage,$unitOfTimeForExpensesCoverage,$coverageEffectiveFrom) {
 		var $warrantyName = $bo_act_common.generateRandomName("warn");
 		$bo_act_navigation.navigateToWarrantyTermsPage();
 		_click($bo_pg_warrantyTerms.btn_new);
 		
 		_setValue($bo_pg_warrantyTerms.txt_templateName, $warrantyName);
-		_setSelected($bo_pg_warrantyTerms.sel_exchangeType, $exchangeType);
+		//_setSelected($bo_pg_warrantyTerms.sel_exchangeType, $exchangeType);
 		//_setSelected($bo_pg_warrantyTerms.sel_templateType, $templateType);
 		
 		_setValue($bo_pg_warrantyTerms.txt_materialPercentCovered, $materialPercentCovered);
 		_setValue($bo_pg_warrantyTerms.txt_durationOfMaterialCoverage, $durationOfMaterialCoverage);
-		_setSelected($bo_pg_warrantyTerms.sel_unitOfTimeForMaterialCoverage, $unitOfTimeForMaterialCoverage);
+		_click($bo_pg_warrantyTerms.sel_unitOfTimeForMaterialCoverage);
+		_click($unitOfTimeForMaterialCoverage);
 		
 		_setValue($bo_pg_warrantyTerms.txt_laborPercentCovered, $laborPercentCovered);
 		_setValue($bo_pg_warrantyTerms.txt_durationOfLaborCoverage, $durationOflaborCoverage);
-		_setSelected($bo_pg_warrantyTerms.sel_unitOfTimeForLaborCoverage, $unitOfTimeForlaborCoverage);
+		_click($bo_pg_warrantyTerms.sel_unitOfTimeForLaborCoverage);
+		_click($unitOfTimeForMaterialCoverage);
+	
 		
 		_setValue($bo_pg_warrantyTerms.txt_expensesPercentCovered, $expensesPercentCovered);
 		_setValue($bo_pg_warrantyTerms.txt_durationOfExpensesCoverage, $durationOfExpensesCoverage);
-		_setSelected($bo_pg_warrantyTerms.sel_unitOfTimeForExpensesCoverage, $unitOfTimeForExpensesCoverage);
+		_click($bo_pg_warrantyTerms.sel_unitOfTimeForExpensesCoverage);
+		_click($unitOfTimeForExpensesCoverage);
 		
+		
+		
+		_setStrictVisibilityCheck(true);
 		_click($bo_pg_warrantyTerms.btn_save);
 		_assertNotVisible(_div("/Error: Invalid Data/"));
 		_wait(30000, _isVisible($warrantyName));

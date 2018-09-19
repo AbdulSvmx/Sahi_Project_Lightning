@@ -1,23 +1,22 @@
 
 
 var $bo_pg_warrantyTerms = new function bo_pg_warrantyTerms(){
-	this.btn_new = _button(" New ");
+	this.btn_new = _div(" New ");
 	this.txt_templateName = _textbox("/Template Name/");
 	this.sel_exchangeType = _select(0,_rightOf(_label("Exchange Type")));
 	//this.sel_templateType = _select(0,_rightOf(_label("Template Type")));
 	
-	this.txt_materialPercentCovered = _textbox("Material % Covered");
-	this.txt_durationOfMaterialCoverage = _textbox("Duration of Material Coverage");
-	this.sel_unitOfTimeForMaterialCoverage = _select(0,_rightOf(_label("Unit of Time for Material Coverage")));
+	this.txt_materialPercentCovered = _textbox("Material % Covered A number between 1 and 100 indicating the percentage of coverage on parts");
+	this.txt_durationOfMaterialCoverage = _textbox("Duration of Material Coverage A number indicating the duration of coverage for parts");
+	this.sel_unitOfTimeForMaterialCoverage = _link("--None--",_near(_span("Unit of Time for Material Coverage",_near(_heading2("New Warranty Terms")))));
+
+	this.txt_laborPercentCovered = _textbox("Labor % Covered A number between 1 and 100 indicating the percentage of coverage on labor");
+	this.txt_durationOfLaborCoverage = _textbox("Duration of Labor Coverage A number indicating the duration of coverage for labor.");
+	this.sel_unitOfTimeForLaborCoverage = _link("--None--",_near(_span("Unit of Time for Labor Coverage",_near(_heading2("New Warranty Terms")))));
 	
-	this.txt_laborPercentCovered = _textbox("Labor % Covered");
-	this.txt_durationOfLaborCoverage = _textbox("Duration of Labor Coverage");
-	this.sel_unitOfTimeForLaborCoverage = _select(0,_rightOf(_label("Unit of Time for Labor Coverage")));
-	
-	this.txt_expensesPercentCovered = _textbox("Expenses % Covered");
-	this.txt_durationOfExpensesCoverage = _textbox("Duration of Expenses Coverage");
-	this.sel_unitOfTimeForExpensesCoverage = _select(0,_rightOf(_label("Unit of Time for Expenses Coverage")));
-	
+	this.txt_expensesPercentCovered = _textbox("Expenses % Covered A number between 1 and 100 indicating the percentage of coverage on expenses");
+	this.txt_durationOfExpensesCoverage = _textbox("Duration of Expenses Coverage A number indicating the duration of coverage for expenses");
+	this.sel_unitOfTimeForExpensesCoverage = _link("--None--",_near(_span("Unit of Time for Expenses Coverage",_near(_heading2("New Warranty Terms")))));
 	this.btn_save = _submit(" Save ");
 	
 	//Object for configuring Coverage "Effective From" in Warranty Terms
@@ -30,7 +29,7 @@ var $bo_pg_warrantyTerms = new function bo_pg_warrantyTerms(){
 	//Objects for Applicable product
 	this.btn_newApplicableProduct = _button("New Applicable Product");
 	this.txt_product = _textbox("/\\*Product|^Product/");
-	this.btn_save = _submit(" Save ");
+	this.btn_save = _span("Save");
 	
 	// Click on the Warranty Terms on Applicable Product Detail Page
 	this.clickOnWarranty = function($warrantyName){
