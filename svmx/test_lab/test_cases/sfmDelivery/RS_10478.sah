@@ -32,6 +32,7 @@
 
 		$bo_act_login.login($g_url, $sfmlUsn,$sfmlPwd);
 		$sfm_act_lightningConfig.switchToLightning();
+		_wait(15000);
 		$bo_act_navigation.navigateServicemaxSetUpInLightening();
 
 	//*****Navigate to SFm Designer and create clone of Manage WO Line Usage Services transaction********

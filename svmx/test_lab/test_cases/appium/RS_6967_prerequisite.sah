@@ -8,13 +8,20 @@ _writeFile("false", $appiumPath+$sahiIntermediatoryPath, true);
 var $rs_10490 = _testcase("RS_6967_prerequisite","");
 $rs_10490.start();
 var $sfmNameToBeCloned = "Manage Work Order Lines - Usage";
-//var $sfmName = $bo_act_common.generateRandomName("scenario5");
 var $sfmName = "RS_6967Sample";
 var $isCustom = false;
 var $sfmTemplate = "SVMXSTD: Manage WO Usage Lines";
 var $sfmTemplateSaveAsName = "RS_6967SampleTemp1";
-var $containerName = ["Order Status","Order Status","Order Status","Order Status",];
-var $fieldName = ["RS_6967_AutoChkBx","RS_6967_Automation_DateTime","RS_6967_Automation_Number","RS_6967_Automation_Text"];
+var $containerName = ["Order Status","Order Status","Order Status","Order Status","Order Status","Parts","Parts","Parts","Parts"];
+var $fieldName = ["RS_6967_AutoChkBx",
+                  "Auto_Date1",
+                  "RS_6967_Automation_DateTime",
+                  "RS_6967_Automation_Number",        
+                  "RS_6967_AvgPartsPrice",
+                  "RS_6967_AutoActivityMonth",
+                  "RS_6967_AutoActivityYear",
+                  "RS_6967_AutoDiscountLinePrice",
+                  "RS_6967_AutoCalLinePrice"];
 
 var $wizardObject ="Work Order";
 var $wizardName="AutoRegression";
@@ -23,18 +30,23 @@ var $profile="auto group profile";
 var $handOver="false";
 var $wizardCriteria=null;
 
-var $formulaTargetObjectArray = ["Work Order","Work Order","Work Order","Work Order","Work Order"];
-var $formulaTargetFieldArray = ["RS_6967_AutoChkBx", "RS_6967_Automation_DateTime","RS_6967_Automation_Number","Billing Type","RS_6967_Automation_Text"];
-var $formulaNameArray = ["WO_RS_6967_AutoChkBx", "WO_RS_6967_Automation_DateTime","WO_RS_6967_Automation_Number","WO_Billing Type","WO_RS_6967_Automation_Text"];
-var $formulaDescriptionArray = ["WO_RS_6967_AutoChkBx description", "WO_RS_6967_Automation_DateTime description","WO_RS_6967_Automation_Number description","WO_Billing Type description","WO_RS_6967_Automation_Text description"];
+var $formulaTargetObjectArray = ["Work Order","Work Order","Work Order","Work Order","Work Order","Work Order","Parts","Parts","Parts","Parts"];
+var $formulaTargetFieldArray = ["RS_6967_AutoChkBx", "Auto_Date1","RS_6967_Automation_DateTime","RS_6967_Automation_Number","Billing Type","RS_6967_AvgPartsPrice","RS_6967_AutoActivityMonth","RS_6967_AutoActivityYear","RS_6967_AutoDiscountLinePrice","RS_6967_AutoCalLinePrice"];
+var $formulaNameArray = ["WO_RS_6967_AutoChkBx", "WO_RS_6967_Auto_Date1","WO_RS_6967_Automation_DateTime","WO_RS_6967_Automation_Number","WO_RS_6967_Billing Type","WO_RS_6967_AvgPartsPrice","WO_RS_6967_AutoActivityMonth","WO_RS_6967_AutoActivityYear","WO_RS_6967_AutoDiscountLinePrice","WO_RS_6967_AutoCalLinePrice"];
+var $formulaDescriptionArray = ["WO_RS_6967_AutoChkBx description", "WO_Auto_Date1 description","WO_RS_6967_Automation_DateTime description","WO_RS_6967_Automation_Number description","WO_Billing Type description","WO_RS_6967_AvgPartsPrice description","WO_RS_6967_AutoActivityMonth description","WO_RS_6967_AutoActivityYear","WO_RS_6967_AutoDiscountLinePrice","WO_RS_6967_AutoCalLinePrice"];
 
 
-var $formulaArray =["$F.IF($F.EQUAL($D.Work_Order.SVMXC__Billing_Type__c,'Contract'), $D.Work_Order.RS_6967_AutoChkBx__c, 'true')",
+var $formulaArray =["$F.IF($F.EQUAL($D.Work_Order.SVMXC__Billing_Type__c,'Contract'), $D.Work_Order.RS_6967_AutoChkBx__c, 'true')",     
                     "$F.DATE($F.YEAR($D.Work_Order.CreatedDate)+1, $F.MONTH($D.Work_Order.CreatedDate), 1)",
-                    "$F.YEAR($D.Labor.SVMXC__Start_Date_and_Time__c)",
-                    "$F.IF($F.EQUAL($D.Work_Order.SVMXC__Customer_Down__c,'true'), $D.Work_Order.SVMXC__Billing_Type__c, 'Paid')",
-                    "$F.MONTH($D.Labor.SVMXC__Start_Date_and_Time__c)"
-                    ];
+                    "$F.NOW()",
+                    "$F.DATEDIFF($D.Work_Order.SVMXC__Completed_Date_Time__c, $D.Work_Order.SVMXC__Actual_Initial_Response__c, 'INDAYS')",
+                    "$F.IF($F.EQUAL($D.Work_Order.SVMXC__Billing_Type__c,'Contract'), $D.Work_Order.RS_6967_AutoChkBx__c, 'true')",
+                    "$F.AVGOF($D.Parts, 'RS_6967_AutoDiscountLinePrice__c') ",     
+                    "$F.MONTH($D.Parts.SVMXC__Start_Date_and_Time__c) ",
+                    "$F.YEAR($D.Parts.SVMXC__Start_Date_and_Time__c)",
+                    "$F.IF($F.LESSTHANEQUAL($D.Parts.RS_6967_AutoDiscountLinePrice__c, 10.4), 10.5, $D.Parts.RS_6967_AutoDiscountLinePrice__c)",   
+                    "$F.MULTIPLY($D.Parts.SVMXC__Actual_Quantity2__c, $D. Parts.SVMXC__Actual_Price2__c) "
+                   ];
 
  
 _setSpeed($g_stepSpeed);
