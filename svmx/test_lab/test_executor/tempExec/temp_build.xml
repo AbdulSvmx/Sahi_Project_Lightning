@@ -62,7 +62,7 @@
 		<property name="baseURL" value="http://test.salesforce.com"/>
 		<property name="host" value="localhost"/>
 		<property name="port" value="9999"/>
-		<property name="singlesession" value="false"/>
+		<property name="singlesession" value="true"/>
 		<property name="threads" value="1"/>
 		<property name="showPeriodicSummary" value="true"/>
 		<property name="failedSuiteName" value="temp_failed_${browser}.suite"/>
