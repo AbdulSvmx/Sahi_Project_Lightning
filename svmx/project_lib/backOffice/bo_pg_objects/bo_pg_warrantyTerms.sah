@@ -1,7 +1,7 @@
 
 
 var $bo_pg_warrantyTerms = new function bo_pg_warrantyTerms(){
-	this.btn_new = _div(" New ");
+	this.btn_new = _div("New");
 	this.txt_templateName = _textbox("/Template Name/");
 	this.sel_exchangeType = _select(0,_rightOf(_label("Exchange Type")));
 	//this.sel_templateType = _select(0,_rightOf(_label("Template Type")));
@@ -28,9 +28,9 @@ var $bo_pg_warrantyTerms = new function bo_pg_warrantyTerms(){
 	
 	//Objects for Applicable product
 	this.btn_newApplicableProduct = _button("New Applicable Product");
-	this.txt_product = _textbox("/\\*Product|^Product/");
+	this.txt_product = _textbox("Product Product covered by the template. Is a lookup to an existing product in Salesforce*");
 	this.btn_save = _span("Save");
-	
+	this.btn_related = _span("Related");
 	// Click on the Warranty Terms on Applicable Product Detail Page
 	this.clickOnWarranty = function($warrantyName){
 		
@@ -46,7 +46,7 @@ var $bo_pg_warrantyTerms = new function bo_pg_warrantyTerms(){
 	 */
 	this.selectWarranty = function($warrantyName){
 		
-	_click(_radio(0,_leftOf(_link($warrantyName,_near(_div("Template Name"))))));
+	_click(_radio("/Checkbox/",_leftOf(_link($warrantyName,_near(_div("Template Name")))))); // Changes made for Lightning
 	
 	};
 	

@@ -24,8 +24,17 @@ var $bo_pg_servicePricebooks = new function bo_pg_servicePricebooks(){
 	this.chk_activateServicePriceBook = _checkbox("Active");
 	this.link_navigateBackToServicePriceBook = _link("/Standard Service Price Book/", _near(_heading2("Service Pricebook Entry Detail")));
 	this.link_related = _span("Related");
+	this.txt_activityIdmain = _textbox("/svmx-text/", _near(_label("Activity Id:")));
+	this.btn_select_icon1 = _image("svmx-action-col-icon svmx-action-col-0   svmx-sfmd-edit-icon");
+	this.btn_select_icon2 = _image("svmx-action-col-icon svmx-action-col-0   svmx-sfmd-edit-icon[1]");
+	this.lkup_activityId = _span("svmx-btn-icon svmx_lookup_icon");
+	this.txt_activityId = _textbox("/sfm-text-/",_near(_span("Recent Items: Activity Master")));
+	this.picklist_unit = _textbox("/sfm-picklist-/", _near(_label("Unit:")));
+	this.txt_regular_rate = _textbox("/svmx-number/", _near(_label("Regular Rate:")));
+	this.btn_update = _span("Update");
+	this.btn_searchicon = _span("svmx-btn-icon svmx-sfmd-search-icon");
 	
-	
+
 	this.clickOnServicePriceBookEntry = function($ServicePricebooksEntryNumber){
 		
 		_click(_link($ServicePricebooksEntryNumber,_near(_heading3("Service Pricebook Entry"))));

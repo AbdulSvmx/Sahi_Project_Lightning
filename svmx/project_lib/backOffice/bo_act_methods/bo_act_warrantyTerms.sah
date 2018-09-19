@@ -21,25 +21,34 @@ var $bo_act_warrantyTerms = new function bo_act_warrantyTerms() {
 		_setValue($bo_pg_warrantyTerms.txt_materialPercentCovered, $materialPercentCovered);
 		_setValue($bo_pg_warrantyTerms.txt_durationOfMaterialCoverage, $durationOfMaterialCoverage);
 		_click($bo_pg_warrantyTerms.sel_unitOfTimeForMaterialCoverage);
-		_click($unitOfTimeForMaterialCoverage);
+		_setStrictVisibilityCheck(true);
+		_click(_link($unitOfTimeForMaterialCoverage,_in(_list("scrollable"))));
+		_setStrictVisibilityCheck(false);
+
+
 		
 		_setValue($bo_pg_warrantyTerms.txt_laborPercentCovered, $laborPercentCovered);
 		_setValue($bo_pg_warrantyTerms.txt_durationOfLaborCoverage, $durationOflaborCoverage);
 		_click($bo_pg_warrantyTerms.sel_unitOfTimeForLaborCoverage);
-		_click($unitOfTimeForMaterialCoverage);
+		_setStrictVisibilityCheck(true);
+		_click(_link($unitOfTimeForlaborCoverage,_in(_list("scrollable"))));
+		_setStrictVisibilityCheck(false);
+
 	
 		
 		_setValue($bo_pg_warrantyTerms.txt_expensesPercentCovered, $expensesPercentCovered);
 		_setValue($bo_pg_warrantyTerms.txt_durationOfExpensesCoverage, $durationOfExpensesCoverage);
 		_click($bo_pg_warrantyTerms.sel_unitOfTimeForExpensesCoverage);
-		_click($unitOfTimeForExpensesCoverage);
+		_setStrictVisibilityCheck(true);
+		_click(_link($unitOfTimeForExpensesCoverage,_in(_list("scrollable"))));
+		_setStrictVisibilityCheck(false);
 		
 		
 		
 		_setStrictVisibilityCheck(true);
 		_click($bo_pg_warrantyTerms.btn_save);
 		_assertNotVisible(_div("/Error: Invalid Data/"));
-		_wait(30000, _isVisible($warrantyName));
+		_wait(30000, _isVisible(_span($warrantyName)));
 		_logOutput($warrantyName+ " Warranty Terms is created");
 		
 		//Actions for configuring Coverage "Effective From" in Warranty Terms
@@ -54,18 +63,30 @@ var $bo_act_warrantyTerms = new function bo_act_warrantyTerms() {
 		_click($bo_pg_warrantyTerms.btn_close);
 		_selectWindow();
 		_call(top.location.reload());
-		_wait(30000, _isVisible(_div("/__Date_Installed__c/")));
+		_wait(30000);
+		_call(top.location.reload());
+		_wait(30000, _isVisible(_span("/__Date_Installed__c/")));
 		
 		return $warrantyName;
 	};
 	
-	//Function for Applicable product
+	//Function for Applicable product - Changes made For Lightning
 	this.createApplicableProducts = function($product_Name, $warrantyName) {
-		_click($bo_pg_warrantyTerms.btn_newApplicableProduct);
-		_setValue($bo_pg_warrantyTerms.txt_product, $product_Name);
+		
+		_click($bo_pg_warrantyTerms.btn_related);
+		_wait(1000);
+		_setStrictVisibilityCheck(true);
+		_click($bo_pg_warrantyTerms.btn_new);
+		if(_isVisible($bo_pg_warrantyTerms.txt_product)==false)
+		{
+			_click($bo_pg_warrantyTerms.btn_new);
+		}
+		_click($bo_pg_warrantyTerms.txt_product);
+		_setValue($bo_pg_warrantyTerms.txt_product,$product_Name);
+		_click(_mark($product_Name));
 		_click($bo_pg_warrantyTerms.btn_save);
 		_assertNotVisible(_div("/Error: Invalid Data/"));
-		$bo_pg_warrantyTerms.clickOnWarranty($warrantyName);
+		//$bo_pg_warrantyTerms.clickOnWarranty($warrantyName);
 		//return $callBack.returnResult([_isVisible($product_Name), "Applicable Product created",$product_Name] );
 		
 	};
@@ -73,10 +94,13 @@ var $bo_act_warrantyTerms = new function bo_act_warrantyTerms() {
 	//Function for create Warranty
 	this.createWarranty = function($warrantyName) {
 		_selectDomain("/svmx/");
+		_wait(10000, _isVisible($bo_pg_warrantyTerms.btn_cretaeWarrantySFM));
 		_click($bo_pg_warrantyTerms.btn_cretaeWarrantySFM);
-		_selectDomain();
+		_wait(10000);
 		$bo_pg_warrantyTerms.selectWarranty($warrantyName);
 		_click($bo_pg_warrantyTerms.btn_cretaeWarranty);
+		_wait(10000);
+		_selectDomain();
 		
 		//return $callBack.returnResult([_isVisible($$warrantyName), "Warranty Name created",$$warrantyName] );
 	};
