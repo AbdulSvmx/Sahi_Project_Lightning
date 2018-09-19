@@ -11,7 +11,10 @@ var $bo_act_login = new function bo_act_login() {
 	 * @param $pwd
 	 */
 	this.login = function($url, $un, $pwd) {
-		
+		_call(top.location.reload(true));
+
+		_call(top.localStorage.clear());
+
 		// Setting default values
 		/*
 		 * $url = $url || $g_url; $un = $un || $g_un; $pwd = $pwd || $g_pwd;
@@ -31,7 +34,6 @@ var $bo_act_login = new function bo_act_login() {
 		}else{
 			return false;
 		}
-		_call(top.location.reload(true));
 
 
 		// Need to return

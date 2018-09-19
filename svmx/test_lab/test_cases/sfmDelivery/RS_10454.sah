@@ -24,7 +24,7 @@ var $receivedStreet="Mysuru";
 _setSpeed($g_stepSpeed);
 $bo_act_login.login($g_url, $sfmlUsn,$sfmlPwd);
 $sfm_act_lightningConfig.switchToLightning();  
-
+_wait(15000);
 
 //clone tmd016, make parts field not mandatory and multi add for parts disabled
 $sfm_act_SFM.cloneTDM016($sfmNameToBeCloned,$sfmName,$isCustom, $sfmTemplateSaveAsName,$sfmTemplate,$fieldName1, $containerName);

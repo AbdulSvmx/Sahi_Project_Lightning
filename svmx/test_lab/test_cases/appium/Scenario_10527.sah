@@ -1,7 +1,8 @@
 var $scenario_10527 = _testcase("scenario_10527","Verify Lookup Context");
 $scenario_10527.start();
 var $sfmNameToBeCloned = "Manage Work Order Lines - Usage";
-var $sfmName = $bo_act_common.generateRandomName("RS_5344_");
+//var $sfmName = $bo_act_common.generateRandomName("RS_5344_");
+var $sfmName = "AutoReg10529";
 var $isCustom = false;
 var $sfmTemplate = "SVMXSTD: Manage WO Usage Lines";
 var $sfmTemplateSaveAsName = $bo_act_common.generateRandomName("SFM_Temp_Name_");
@@ -9,6 +10,7 @@ var $headersToAdd = ["Account","Country","Contact"];
 var $fieldName = ["Account","Requested Country"];
 var $containerName = ["Parts","Parts"];
 var $wizTitle = $bo_act_common.generateRandomName("SFM_Wiz_Title_");
+
 $bo_act_login.login($g_url, $appiumAdminUn, $appiumAdminPwd);
 $sfm_act_lightningConfig.switchToLightning();
 $sfm_act_SFM.cloneTDM016($sfmNameToBeCloned, $sfmName, $isCustom,$sfmTemplateSaveAsName, $sfmTemplate, $fieldName, $containerName);
@@ -28,7 +30,7 @@ _setSelected($sfm_pg_sfmDesigner.sel_matchinField,"Account ID");
 _click(_f("main").s_button("Save[3]"));
 _wait(3000);
 _click($bo_pg_sfmTransactionAndDesigner.btn_finalQuickSave);
-$bo_act_navigation.navigateToSfmWizard();
-$sfm_act_createCustomWizard.chooseObject("Work Order");
-$sfm_act_createCustomWizard.addManageWizSteps($wizTitle,"SFM",$sfmName);
+//$bo_act_navigation.navigateToSfmWizard();
+//$sfm_act_createCustomWizard.chooseObject("Work Order");
+//$sfm_act_createCustomWizard.addManageWizSteps($wizTitle,"SFM",$sfmName);
 $scenario_10527.end();

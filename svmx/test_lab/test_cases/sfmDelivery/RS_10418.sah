@@ -26,7 +26,7 @@ var $myDomain = "/lightning/";
 //$bo_act_login.login($g_url,$bac_un,$bac_pwd);
 $bo_act_login.login($g_url,$sfmlUsn,$sfmlPwd);
 $sfm_act_lightningConfig.switchToLightning();
-
+_wait(15000);
 
 //Navigate to Object manager and navigate to work order object.
 $sfm_act_lightningConfig.navigateToObjectsInLightning($object_name);

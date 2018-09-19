@@ -29,7 +29,7 @@ var $sfmTemplateSaveAsName = $processName + "pg";
 //$bo_act_login.login($g_url,$bac_un,$bac_pwd);
 $bo_act_login.login($g_url,$sfmlUsn,$sfmlPwd);
 $sfm_act_lightningConfig.switchToLightning();
-
+_wait(15000);
 //Clone the standard process and add it to wizard for testing with custom process.
 _setSpeed(3000);
 $sfm_act_SFM.cloneTDM016($sfmNameToBeCloned,$processName,$isCustom,$sfmTemplateSaveAsName, $sfmTemplate, $fieldName, $containerName);
