@@ -28,8 +28,7 @@ $wizTitle = "AutoSanity";
 $bo_act_navigation.navigateToSfmWizard();
 $sfm_act_createCustomWizard.addManageWizStepsverify($wizTitle, "SFM", $sfmName, $group_profilename, $targetObjectName);
 
-
-	_writeFile("true", $appiumPath+$sahiIntermediatoryPath, true);
+_writeFile("true", $appiumPath+$sahiIntermediatoryPath, true);
 
 
 $pre_requisite.end();

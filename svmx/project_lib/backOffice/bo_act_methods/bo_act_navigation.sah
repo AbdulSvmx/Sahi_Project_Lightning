@@ -204,6 +204,16 @@ var $bo_act_navigation = new function bo_act_navigation() {
     	_click(_link("/"+$recordToBeSearch+"/",_near(_heading1("Search Results"))));
         };
         
+        // Added by Meghana - Global Search for Work Order
+        this.navigateToCreatedRecordUsingGlobalSearchWO = function($recordToBeSearch){
+        	_click(_link("Home"));
+        	_setValue(_textbox("Search Salesforce"),$recordToBeSearch);
+        	_keyPress(_textbox("Search Salesforce"),13);
+        	_wait(3000, _isVisible($recordToBeSearch));
+        	_click(_mark($recordToBeSearch));
+            };
+        
+        
      this.navigateToFeaturePermissionsPage = function() {
     	 $bo_act_navigation.navigateToSvmxSetup();
 		_selectDomain("/svmx/");
