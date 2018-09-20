@@ -35,6 +35,7 @@ var $restIBName = $bo_act_common.generateRandomName("IB10538");
 $pre_requisite.start();
 _setSpeed($g_stepSpeed);
 $bo_act_login.login($g_url, $appiumAdminUn, $appiumAdminPwd);
+$sfm_act_lightningConfig.switchToLightning();
 /**
 * Create Account, Contact, Location, Product and Installed Product - API
 */
@@ -113,8 +114,12 @@ $filter="id";
 var $WoID=$sfm_act_restApiMethods.postRestApi($appiumAdminUn,$appiumAdminPwd,$appiumclient_id,$appiumclient_secret,$appiumorginstance,$objNameWO,$obJsonWO,"POST");
 //get the Work Order Name
 $WOName =$sfm_act_restApiMethods.getRestApi($appiumAdminUn,$appiumAdminPwd,$appiumclient_id,$appiumclient_secret,$appiumorginstance,"GET", $objNameWO, $columnName, $filter, $WoID);
+
 _log($WOName);
+_wait(30000);
+_call(top.location.reload());
 $bo_act_navigation.navigateToCreatedRecordUsingGlobalSearch($WOName);
+$bo_act_interactiveEntitlement_WO.performInteractiveEntitlementWO_UsingWarranty($WOName, $warrantyName);
 _writeFile("true", $appiumPath+$sahiIntermediatoryPath, true);
 
 $pre_requisite.end();
