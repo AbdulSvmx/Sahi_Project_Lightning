@@ -120,6 +120,8 @@ _wait(30000);
 _call(top.location.reload());
 $bo_act_navigation.navigateToCreatedRecordUsingGlobalSearch($WOName);
 $bo_act_interactiveEntitlement_WO.performInteractiveEntitlementWO_UsingWarranty($WOName, $warrantyName);
+// To write the WorkOrder Number into the Test Data for Appium Side to pick it up
+$excel.insertUnderColumn("/auto/SVMX_Catalyst/fsaautomation/resources/TestData.xlsx", "TestData", "Data1",$WOName , "34");
 _writeFile("true", $appiumPath+$sahiIntermediatoryPath, true);
 
 $pre_requisite.end();
