@@ -61,7 +61,7 @@ var $bo_pg_interactiveEntitlement_CaseAndWO = new function bo_pg_interactiveEnti
 		
 	this.selectWarrantyOnCheckEntmPage = function($warrantyName){
 				
-		_click(_checkbox("/EVER_CaseEntitlement/", _near(_div("Apply Selection"))));
+		_click(_checkbox("/EVER_CaseEntitlement/", _near((_link($warrantyName)))));
 				  
 		};
 	
