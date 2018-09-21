@@ -1,0 +1,65 @@
+var RS_10525 = _testcase("RS_10525","SCN_Calendar_6_RS-10525 Verify multi-day & all-day events on FSA client");
+RS_10525.start();
+
+
+/*var $objName;
+var $obJson;
+var $columnName;*/
+
+var $restAccName="A10525_SCN1";
+var $EventSub="Eventfor1hr";
+var $techname="a240t000000GglLAAS";
+	
+
+$objName= "Account";
+$obJson = "{\"Name\":\""+$restAccName+"\"}"; 
+$columnName = "Name";
+$filter="id";
+//create an account
+$account=$sfm_act_restApiMethods.postRestApi($appiumAdminUn,$appiumAdminPwd,$appiumclient_id,$appiumclient_secret,$appiumorginstance,$objName,$obJson,"POST");
+//get the caseNumber
+_log($account);
+
+
+$objName= "SVMXC__Service_Order__c";
+$obJson = "{\"SVMXC__Company__c\":\""+$account+"\",\"SVMXC__Order_Status__c\":\"Open\",\"SVMXC__Order_Type__c\":\"Field Service\",\"SVMXC__Group_Member__c\":\""+$techname+"\"}";	
+$columnName = "Name";
+$filter="id";
+//create  wo with above created account and other parameters
+$workorderid=$sfm_act_restApiMethods.postRestApi($appiumAdminUn,$appiumAdminPwd,$appiumclient_id,$appiumclient_secret,$appiumorginstance,$objName,$obJson,"POST");
+//get the wo
+$WOname =$sfm_act_restApiMethods.getRestApi($appiumAdminUn,$appiumAdminPwd,$appiumclient_id,$appiumclient_secret,$appiumorginstance,"GET", $objName, $columnName, $filter, $workorderid);
+_log($WOname);
+
+var $now = new Date();
+_log( $now ); // shows current date/time
+
+$now.setHours(15,30,00,00);
+_log( $now );
+
+
+var $new=new Date($now.toString().split('IST')[0]+' GMT').toISOString().split('.')[0];//GMT timing
+_log( $new );
+
+
+var $add1hr=($now.getHours())+1;
+_log($add1hr);
+var $set1hr = new Date();
+$set1hr.setHours($add1hr,30,00,00);
+var $new1=new Date($set1hr.toString().split('IST')[0]+' GMT').toISOString().split('.')[0];//GMT timing
+_log($new1);
+
+
+
+$objName= "SVMXC__SVMX_Event__c";
+$obJson = "{\"Name\":\""+$EventSub+"\",\"SVMXC__Service_Order__c\":\""+$workorderid+"\",\"SVMXC__Technician__c\":\""+$techname+"\",\"SVMXC__StartDateTime__c\":\""+$new+"\",\"SVMXC__EndDateTime__c\":\""+$new1+"\",\"SVMXC__WhatId__c\":\""+$workorderid+"\"}";	
+$columnName = "Name";
+$filter="id";
+//create  wo with above created account and other parameters
+$eventid=$sfm_act_restApiMethods.postRestApi($appiumAdminUn,$appiumAdminPwd,$appiumclient_id,$appiumclient_secret,$appiumorginstance,$objName,$obJson,"POST");
+//get the wo
+$eventname =$sfm_act_restApiMethods.getRestApi($appiumAdminUn,$appiumAdminPwd,$appiumclient_id,$appiumclient_secret,$appiumorginstance,"GET", $objName, $columnName, $filter, $workorderid);
+_log($eventname);
+
+RS_10525.end();
+
