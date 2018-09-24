@@ -89,6 +89,10 @@ $productid2=$sfm_act_restApiMethods.postRestApi($appiumAdminUn,$appiumAdminPwd,$
 $Productname2 =$sfm_act_restApiMethods.getRestApi($appiumAdminUn,$appiumAdminPwd,$appiumclient_id,$appiumclient_secret,$appiumorginstance,"GET", $objNameP2, $columnName, $filter, $productid2);
 _log($Productname2);
 
+_call(top.location.reload());
+_wait(30000);
+_call(top.location.reload());
+
 //Add Standard Price to the Product
 $bo_act_navigation.navigateToCreatedRecordUsingGlobalSearch($Productname1);
 // Add standard price for the product
@@ -114,9 +118,9 @@ _log($accountName);
 
 // Create Service Contract
 var $objNameSCON= "SVMXC__Service_Contract__c";
-var $restName = $bo_act_common.generateRandomName("");
+var $SCONName = $bo_act_common.generateRandomName("AutoScon");
 
-$obJsonSCON = "{\"SVMXC__Company__c\":\""+$accountID+"\", \"SVMXC__Start_Date__c\":\""+$startdate+"\", \"SVMXC__End_Date__c\":\""+$endDate+"\", \"SVMXC__Active__c\":\"true\"}"; 
+$obJsonSCON = "{\"SVMXC__Company__c\":\""+$accountID+"\", \"SVMXC__Start_Date__c\":\""+$startdate+"\", \"SVMXC__End_Date__c\":\""+$endDate+"\", \"SVMXC__Active__c\":\"true\", \"Name\":\""+$SCONName+"\"}"; 
 $columnName = "Name";
 $filter="id";
 //create the Service Contract
