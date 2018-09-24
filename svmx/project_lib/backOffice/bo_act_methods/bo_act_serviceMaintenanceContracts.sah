@@ -145,7 +145,7 @@ this.addPartsPricingToServiceContract = function($sconName, $prodName1, $pricePe
 	_click($bo_pg_serviceMaintenanceContracts.btn_sfmnewPartsPricing);
 	_setValue($bo_pg_serviceMaintenanceContracts.txt_defaultpricing,"Standard Price Book");
 	_click($bo_pg_serviceMaintenanceContracts.lkup_defaultpricing);
-	_setStrictVisbilityCheck(true);
+	_setStrictVisibilityCheck(true);
 	// For Parts Pricing
 	_click($bo_pg_serviceMaintenanceContracts.btn_addnewpartspricingvalue);
 	_click($bo_pg_serviceMaintenanceContracts.btn_add_line_partspricing);
