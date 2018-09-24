@@ -24,159 +24,127 @@ var $expensesPercentCovered = 50;
 var $durationOfCoverage = 5;
 var $seperator = "/";
 var $pre_requisite= _testcase("scenario_10539","Verify Get Price calculation online mode- SCON (Service Contract)");
-//
-//var $restAccName="A10539_Auto";
-//var $restcontactfirstname="C10539_";
-//var $restcontactlastname="Auto";
-//var $restproductname1=$bo_act_common.generateRandomName("P10539");
-//var $restproductname2=$bo_act_common.generateRandomName("P10539");
-//var $restlocationname="L10539_Auto";
-//var $restIBName = $bo_act_common.generateRandomName("IB10539");
+
+var $restAccName="A10539_Auto";
+var $restcontactfirstname="C10539_";
+var $restcontactlastname="Auto";
+var $restproductname1=$bo_act_common.generateRandomName("P10539");
+var $restproductname2=$bo_act_common.generateRandomName("P10539");
+var $restlocationname="L10539_Auto";
+var $restIBName = $bo_act_common.generateRandomName("IB10539");
 
 $pre_requisite.start();
 _setSpeed($g_stepSpeed);
 $bo_act_login.login($g_url, $appiumAdminUn, $appiumAdminPwd);
 $sfm_act_lightningConfig.switchToLightning();
 
-//var $now = new Date();
-//_log( $now ); // shows current date/time
-//var $startdate=new Date($now.toString().split('IST')[0]+' GMT').toISOString().split('.')[0];//GMT timing
-//_log( $startdate );
-//
-//var $set1hr = new Date();
-//$add1yr=($set1hr.getFullYear())+1;
-//$set1hr.setFullYear($add1yr);
-//_log($add1yr);
-//var $endDate=new Date($set1hr.toString().split('IST')[0]+' GMT').toISOString().split('.')[0];//GMT timing
-//_log($endDate);
-///**
-//* Create Account, Contact, Location, Product and Installed Product - API
-//*/
-//
-////
-////
-////// Create a Contact 
-////
-////$objName2= "Contact";
-////$obJson = "{\"AccountId\":\""+$accountID+"\",\"FirstName\":\""+$restcontactfirstname+"\",\"LastName\":\""+$restcontactlastname+"\"}";
-////$columnName = "Name";
-////$filter="id";
-//////create  case with above created account and other parameters
-////$contactid=$sfm_act_restApiMethods.postRestApi($appiumAdminUn,$appiumAdminPwd,$appiumclient_id,$appiumclient_secret,$appiumorginstance,$objName2,$obJson,"POST");
-//////get the caseNumber
-////$contactname =$sfm_act_restApiMethods.getRestApi($appiumAdminUn,$appiumAdminPwd,$appiumclient_id,$appiumclient_secret,$appiumorginstance,"GET", $objName2, $columnName, $filter, $contactid);
-////_log($contactname);
-////
-////
-////// Create Product
-////
-////$objName3= "Product2";
-////$obJson = "{\"Name\":\""+$restproductname+"\",\"IsActive\":\"true\" }";
-////$columnName = "Name";
-////$filter="id";
-//////create  case with above created account and other parameters
-////$productid=$sfm_act_restApiMethods.postRestApi($appiumAdminUn,$appiumAdminPwd,$appiumclient_id,$appiumclient_secret,$appiumorginstance,$objName3,$obJson,"POST");
-//////get the Product
-////$Productname =$sfm_act_restApiMethods.getRestApi($appiumAdminUn,$appiumAdminPwd,$appiumclient_id,$appiumclient_secret,$appiumorginstance,"GET", $objName3, $columnName, $filter, $productid);
-////_log($Productname);
-////
-//////Create Installed Product
-////
-////$objName4= "SVMXC__Installed_Product__c";
-////$obJson = "{\"Name\":\""+$restIBName+"\",\"SVMXC__Product__c\":\""+$productid+"\", \"SVMXC__Status__c\":\"Installed\", \"SVMXC__Company__c\":\""+$accountID+"\", \"SVMXC__Contact__c\":\""+$contactid+"\",  \"SVMXC__Date_Installed__c\":\""+$currentdate+"\"}";
-////$columnName = "Name";
-////$filter="id";
-//////create  case with above created account and other parameters
-////$IbID=$sfm_act_restApiMethods.postRestApi($appiumAdminUn,$appiumAdminPwd,$appiumclient_id,$appiumclient_secret,$appiumorginstance,$objName4,$obJson,"POST");
-//////get the Installed Product
-////$IBName =$sfm_act_restApiMethods.getRestApi($appiumAdminUn,$appiumAdminPwd,$appiumclient_id,$appiumclient_secret,$appiumorginstance,"GET", $objName4, $columnName, $filter, $IbID);
-////_log($IBName);
-//
-//
-///**
-//* Create Service Type with QC - Available Services 1
-//*/
-//var $trackedOn = "Work Order";
-//var $dataType = "Number";
-//var $qualifyingCriteria = "SVMXSTD: Not closed work orders";
-//var $serviceType = $bo_act_servicesTypes.createServicesTypes($trackedOn, $dataType, $qualifyingCriteria);
-//
-//
-///**
-//* Create Service Type with QC - Available Services 2
-//*/
-//var $trackedOn = "Work Order";
-//var $dataType = "Number";
-//var $qualifyingCriteria = "SVMXSTD: Closed Work Orders";
-//var $serviceType = $bo_act_servicesTypes.createServicesTypes($trackedOn, $dataType, $qualifyingCriteria);
-//
-////Create Product
-//
-//$objNameP1= "Product2";
-//$obJson = "{\"Name\":\""+$restproductname1+"\",\"IsActive\":\"true\" }";
-//$columnName = "Name";
-//$filter="id";
-////create  case with above created account and other parameters
-//$productid1=$sfm_act_restApiMethods.postRestApi($appiumAdminUn,$appiumAdminPwd,$appiumclient_id,$appiumclient_secret,$appiumorginstance,$objName3,$obJson,"POST");
-////get the Product
-//$Productname1 =$sfm_act_restApiMethods.getRestApi($appiumAdminUn,$appiumAdminPwd,$appiumclient_id,$appiumclient_secret,$appiumorginstance,"GET", $objNameP1, $columnName, $filter, $productid1);
-//_log($Productname1);
-//
-//$objNameP2= "Product2";
-//$obJson = "{\"Name\":\""+$restproductname1+"\",\"IsActive\":\"true\" }";
-//$columnName = "Name";
-//$filter="id";
-////create  case with above created account and other parameters
-//$productid2=$sfm_act_restApiMethods.postRestApi($appiumAdminUn,$appiumAdminPwd,$appiumclient_id,$appiumclient_secret,$appiumorginstance,$objName3,$obJson,"POST");
-////get the Product
-//$Productname2 =$sfm_act_restApiMethods.getRestApi($appiumAdminUn,$appiumAdminPwd,$appiumclient_id,$appiumclient_secret,$appiumorginstance,"GET", $objNameP2, $columnName, $filter, $productid2);
-//_log($Productname2);
-//
-////Add Standard Price to the Product
-//$bo_act_navigation.navigateToCreatedRecordUsingGlobalSearch($Productname1);
-//// Add standard price for the product
-//var $standardPriceValue1 = 2500;
-//$bo_act_products.addStandardPriceForProduct($Productname1, $standardPriceValue1);
-//
-////Add standard price for the product
-//$bo_act_navigation.navigateToCreatedRecordUsingGlobalSearch($Productname2);
-//var $standardPriceValue2 = 3000;
-//$bo_act_products.addStandardPriceForProduct($Productname2, $standardPriceValue2);
-//
-//$objName1= "Account";
-//var $restName = $bo_act_common.generateRandomName("");
-//$obJson = "{\"Name\":\"Auto"+$restAccName+"\"}"; 
-//$columnName = "Name";
-//$filter="id";
-////create an account
-//var $accountID=$sfm_act_restApiMethods.postRestApi($appiumAdminUn,$appiumAdminPwd,$appiumclient_id,$appiumclient_secret,$appiumorginstance,$objName1,$obJson,"POST");
-////get the caseNumber
-//_log($accountID);
-//$accountName =$sfm_act_restApiMethods.getRestApi($appiumAdminUn,$appiumAdminPwd,$appiumclient_id,$appiumclient_secret,$appiumorginstance,"GET", $objName1, $columnName, $filter, $accountID);
-//_log($accountName);
-//
-//// Create Service Contract
-//var $objNameSCON= "SVMXC__Service_Contract__c";
-//var $restName = $bo_act_common.generateRandomName("");
-//
-//$obJsonSCON = "{\"SVMXC__Company__c\":\""+$accountID+"\", \"SVMXC__Start_Date__c\":\""+$startdate+"\", \"SVMXC__End_Date__c\":\""+$endDate+"\", \"SVMXC__Active__c\":\"true\"}"; 
-//$columnName = "Name";
-//$filter="id";
-////create the Service Contract
-//
-//var $SCONID=$sfm_act_restApiMethods.postRestApi($appiumAdminUn,$appiumAdminPwd,$appiumclient_id,$appiumclient_secret,$appiumorginstance,$objNameSCON,$obJsonSCON,"POST");
-////get the Work Order Name
-//$SconName =$sfm_act_restApiMethods.getRestApi($appiumAdminUn,$appiumAdminPwd,$appiumclient_id,$appiumclient_secret,$appiumorginstance,"GET", $objNameSCON, $columnName, $filter, $SCONID);
+var $now = new Date();
+_log( $now ); // shows current date/time
+var $startdate=new Date($now.toString().split('IST')[0]+' GMT').toISOString().split('.')[0];//GMT timing
+_log( $startdate );
 
+var $set1hr = new Date();
+$add1yr=($set1hr.getFullYear())+1;
+$set1hr.setFullYear($add1yr);
+_log($add1yr);
+var $endDate=new Date($set1hr.toString().split('IST')[0]+' GMT').toISOString().split('.')[0];//GMT timing
+_log($endDate);
+
+/**
+* Create Service Type with QC - Available Services 1
+*/
+var $trackedOn = "Work Order";
+var $dataType = "Number";
+var $qualifyingCriteria = "SVMXSTD: Not closed work orders";
+var $serviceType1 = $bo_act_servicesTypes.createServicesTypes($trackedOn, $dataType, $qualifyingCriteria);
+
+
+/**
+* Create Service Type with QC - Available Services 2
+*/
+var $trackedOn = "Work Order";
+var $dataType = "Number";
+var $qualifyingCriteria = "SVMXSTD: Closed Work Orders";
+var $serviceType2 = $bo_act_servicesTypes.createServicesTypes($trackedOn, $dataType, $qualifyingCriteria);
+
+//Create Product
+
+$objNameP1= "Product2";
+$obJson = "{\"Name\":\""+$restproductname1+"1\",\"IsActive\":\"true\" }";
+$columnName = "Name";
+$filter="id";
+//create  case with above created account and other parameters
+$productid1=$sfm_act_restApiMethods.postRestApi($appiumAdminUn,$appiumAdminPwd,$appiumclient_id,$appiumclient_secret,$appiumorginstance,$objNameP1,$obJson,"POST");
+//get the Product
+$Productname1 =$sfm_act_restApiMethods.getRestApi($appiumAdminUn,$appiumAdminPwd,$appiumclient_id,$appiumclient_secret,$appiumorginstance,"GET", $objNameP1, $columnName, $filter, $productid1);
+_log($Productname1);
+
+$objNameP2= "Product2";
+$obJson = "{\"Name\":\""+$restproductname1+"2\",\"IsActive\":\"true\" }";
+$columnName = "Name";
+$filter="id";
+//create  case with above created account and other parameters
+$productid2=$sfm_act_restApiMethods.postRestApi($appiumAdminUn,$appiumAdminPwd,$appiumclient_id,$appiumclient_secret,$appiumorginstance,$objNameP2,$obJson,"POST");
+//get the Product
+$Productname2 =$sfm_act_restApiMethods.getRestApi($appiumAdminUn,$appiumAdminPwd,$appiumclient_id,$appiumclient_secret,$appiumorginstance,"GET", $objNameP2, $columnName, $filter, $productid2);
+_log($Productname2);
+
+//Add Standard Price to the Product
+$bo_act_navigation.navigateToCreatedRecordUsingGlobalSearch($Productname1);
+// Add standard price for the product
+var $standardPriceValue1 = 2500;
+$bo_act_products.addStandardPriceForProduct($Productname1, $standardPriceValue1);
+
+//Add standard price for the product
+$bo_act_navigation.navigateToCreatedRecordUsingGlobalSearch($Productname2);
+var $standardPriceValue2 = 3000;
+$bo_act_products.addStandardPriceForProduct($Productname2, $standardPriceValue2);
+
+$objName1= "Account";
+var $restName = $bo_act_common.generateRandomName("");
+$obJson = "{\"Name\":\"Auto"+$restAccName+"\"}"; 
+$columnName = "Name";
+$filter="id";
+//create an account
+var $accountID=$sfm_act_restApiMethods.postRestApi($appiumAdminUn,$appiumAdminPwd,$appiumclient_id,$appiumclient_secret,$appiumorginstance,$objName1,$obJson,"POST");
+//get the caseNumber
+_log($accountID);
+$accountName =$sfm_act_restApiMethods.getRestApi($appiumAdminUn,$appiumAdminPwd,$appiumclient_id,$appiumclient_secret,$appiumorginstance,"GET", $objName1, $columnName, $filter, $accountID);
+_log($accountName);
+
+// Create Service Contract
+var $objNameSCON= "SVMXC__Service_Contract__c";
+var $restName = $bo_act_common.generateRandomName("");
+
+$obJsonSCON = "{\"SVMXC__Company__c\":\""+$accountID+"\", \"SVMXC__Start_Date__c\":\""+$startdate+"\", \"SVMXC__End_Date__c\":\""+$endDate+"\", \"SVMXC__Active__c\":\"true\"}"; 
+$columnName = "Name";
+$filter="id";
+//create the Service Contract
+
+var $SCONID=$sfm_act_restApiMethods.postRestApi($appiumAdminUn,$appiumAdminPwd,$appiumclient_id,$appiumclient_secret,$appiumorginstance,$objNameSCON,$obJsonSCON,"POST");
+//get the Work Order Name
+$SconName =$sfm_act_restApiMethods.getRestApi($appiumAdminUn,$appiumAdminPwd,$appiumclient_id,$appiumclient_secret,$appiumorginstance,"GET", $objNameSCON, $columnName, $filter, $SCONID);
+_wait(30000);
+_call(top.location.reload());
 // Add Parts Pricing to the Scon
-//Add Parts Pricing To Service Contract 
 var $pricePerUnit = 1000;
-var $SconName = "SCON Test";
-var $Productname1 = "P105382192018223810";
 $bo_act_navigation.navigateToCreatedRecordUsingGlobalSearch($SconName);
-//$bo_act_serviceMaintenanceContracts.addPartsPricingToServiceContract($SconName, $Productname1, $pricePerUnit);
-$bo_act_serviceMaintenanceContracts.addLaborPricingToServiceContract_onlyLabor($SconName,"Installation","Per Hour", "20", "600", "0");
-$bo_act_serviceMaintenanceContracts.addLaborPricingToServiceContract_onlyLabor($SconName,"Repair","Flat Rate", "20", "600", "2");
+// Add parts pricing
+$bo_act_serviceMaintenanceContracts.addPartsPricingToServiceContract($SconName, $Productname1, $pricePerUnit, "15",$Productname2);
+
+//// Add labor Pricing
+$bo_act_serviceMaintenanceContracts.addLaborPricingToServiceContract_onlyLabor($SconName,"Installation","Per Hour", "10", "600", 0);
+$bo_act_serviceMaintenanceContracts.addLaborPricingToServiceContract_onlyLabor($SconName,"Repair","Flat Rate", "20", "600", 2);
+
+//Add Expense Pricing
+
+$bo_act_serviceMaintenanceContracts.addExpensePricingToServiceContract("Food-Breakfast", "Flat Rate", "50", 0);
+$bo_act_serviceMaintenanceContracts.addExpensePricingToServiceContract("Gas", "Per Unit", "80", 2);
+$bo_act_serviceMaintenanceContracts.addExpensePricingToServiceContract("Airfare", "Discount%", "10", 4);
+
+// Add Travel Pricing
+$bo_act_serviceMaintenanceContracts.addTravelPolicywithoutDefault("Flat Rate", "800", serviceType1, 0);
+$bo_act_serviceMaintenanceContracts.addTravelPolicywithoutDefault("Per Hour", "150",serviceType2 , 2);
 
 
 // To create Warranty Terms

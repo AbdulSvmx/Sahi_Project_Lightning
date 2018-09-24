@@ -18,6 +18,10 @@ var $bo_act_servicesTypes = new function bo_act_servicesTypes() {
 	    _click($bo_pg_servicesTypes.btn_activeServiceType);
 	    _setValue($bo_pg_servicesTypes.txt_qualifyingCriteria, $qualifyingCriteria);
 	    _click($bo_pg_servicesTypes.lkp_qualifyingcriteria);
+	    if(_isVisible(_div($qualifyingCriteria))==true)
+	    {
+	    	_doubleClick(_div($qualifyingCriteria));
+	    }
 	    _click($bo_pg_servicesTypes.btn_saveServiceType);
 	    _selectDomain();
 		_wait(15000, _isVisible($bo_pg_servicesTypes.txt_availableServiceDetail));
