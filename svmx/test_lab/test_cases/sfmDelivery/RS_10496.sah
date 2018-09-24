@@ -37,7 +37,7 @@ _selectDomain();
 $sfm_act_createCustomWizard.createWowithoutvalues();
 
 _click(_span($sfmName));
-_selectDomain($domainName);
+_selectDomain($g_domain);
 _wait(8000,_div($sfmName));
 
 //Validate DVR

@@ -57,7 +57,7 @@ $bo_act_navigation.navigateToCreatedRecordUsingGlobalSearch($wo_number);
 //Launch the process in SFM Delivery
 $sfm_act_createCustomWizard.clickWizardlinks($processName);
 _wait(3000);
-_selectDomain($domainName);
+_selectDomain($g_domain);
 
 //Enter values for Booked Appointment Slot, Previous Scheduled Date Time and Dispatch Priority
 $sfm_act_SFM.fillHeaderTextValues($inputTextLabels,$inputTextValues);

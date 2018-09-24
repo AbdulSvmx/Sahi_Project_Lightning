@@ -188,7 +188,7 @@ var $bo_act_mappings = new function bo_act_mappings() {
 		//Container Name should be "Work Order" or "Parts" or "Labor" or "Expense" or "Travel"
 		//Added by JJ
 		var $i = 0;
-		_selectDomain($domainName);	
+		_selectDomain($g_domain);	
 		_click($sfm_pg_sfmMapping.btn_mappingTab);
 		_click(_f("main").s_label($containerName));
 		_setSelected(_f("main").s_combobox("searchCombo").inside(_f("main").s_navigatorcontent("Value Map for Existing Records")),$mapName);
@@ -233,7 +233,7 @@ var $bo_act_mappings = new function bo_act_mappings() {
 		//This function takes care of logging the process id in which the mapping is used (If applicable)
 		//Added by JJ
 		$bo_act_navigation.navigatetoSFMMaps();
-		_selectDomain($domainName);
+		_selectDomain($g_domain);
 		_setSelected($sfm_pg_sfmMapping.cmb_mappingComboBox,$mapName);
 		_wait(5000);
 		var $temp = _getValue($sfm_pg_sfmMapping.txt_mappingNameInBuilder);

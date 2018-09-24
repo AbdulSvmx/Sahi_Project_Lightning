@@ -48,7 +48,7 @@ $sfm_act_lightningConfig.switchToLightning();
 var $wo_number = $sfm_act_createCustomWizard.createWowithdateliterals();
 $bo_act_navigation.navigateToCreatedRecordUsingGlobalSearch($wo_number);
 $sfm_act_createCustomWizard.clickWizardlinks($Std_Sfm_process);
-_selectDomain($domainName);
+_selectDomain($g_domain);
 _click($sfm_pg_wo.btn_arrowNextToGetPrice);
 //_assertNotVisible($sfm_pg_wo.link_launchSfmDesigner);
 _log("PASS:RS-10427");
@@ -57,7 +57,7 @@ _selectDomain();
 
 //Launch custom process without adding feature permissions
 $sfm_act_createCustomWizard.clickWizardlinks($processName);
-_selectDomain($domainName);
+_selectDomain($g_domain);
 _click($sfm_pg_wo.btn_arrowNextToGetPrice);
 //_assertNotVisible($sfm_pg_wo.link_launchSfmDesigner);
 _log("PASS:RS-10427");
@@ -90,7 +90,7 @@ $bo_act_navigation.navigateToCreatedRecordUsingGlobalSearch($wo_number);
 
 //Launch Standard process and launch SFM designer
 $sfm_act_createCustomWizard.clickWizardlinks($Std_Sfm_process);
-_selectDomain($domainName);
+_selectDomain($g_domain);
 _click($sfm_pg_wo.btn_arrowNextToGetPrice);
 _assertVisible($sfm_pg_wo.link_launchSfmDesigner);
 _click($sfm_pg_wo.link_launchSfmDesigner);
@@ -104,7 +104,7 @@ _assertVisible(_f("main").s_label($stdProcessName));
 _log("PASS:RS-10427");
 _closeWindow();
 _selectWindow();
-_selectDomain($domainName);
+_selectDomain($g_domain);
 _click($sfm_pg_wo.link_delivery_save);
 if(_exists($sfm_pg_wo.btn_OK_popup)){
 	_click($sfm_pg_wo.btn_OK_popup);
@@ -113,7 +113,7 @@ _selectDomain();
 
 //Launch custom process and launch SFM designer
 $sfm_act_createCustomWizard.clickWizardlinks($processName);
-_selectDomain($domainName);
+_selectDomain($g_domain);
 _click($sfm_pg_wo.btn_arrowNextToGetPrice);
 _assertVisible($sfm_pg_wo.link_launchSfmDesigner);
 _click($sfm_pg_wo.link_launchSfmDesigner);
@@ -126,7 +126,7 @@ _assertVisible(_f("main").s_label($processName));
 _log("PASS:10427");
 _closeWindow();
 _selectWindow();
-_selectDomain($domainName);
+_selectDomain($g_domain);
 _click($sfm_pg_wo.link_delivery_save);
 if(_exists($sfm_pg_wo.btn_OK_popup)){
 	_click($sfm_pg_wo.btn_OK_popup);

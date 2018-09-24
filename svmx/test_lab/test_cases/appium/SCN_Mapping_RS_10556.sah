@@ -111,7 +111,7 @@ $pickListValues = ["Empowerment","true","Today","Tomorrow","C10556_ Auto"];
 
 _click($bo_pg_sfmTransactionAndDesigner.btn_qualifyingCriteriaAndFieldMapping);
 $bo_act_mappings.createMapping("Work Order",$picklistLabels,$pickListValues,$textLabels,$textValues,$mapName);
-_selectDomain($domainName);
+_selectDomain($g_domain);
 $textLabelspart = ["Closed By","Canceled By","Line Price Per Unit","Line Qty","To Location","Work Description"];
 $textValuespart = ["SVMX.CURRENTUSERID","SVMX.OWNER","SVMX.CURRENTRECORDHEADER.Currency__c","17","SVMX.USERTRUNK","Verifying Value Map for New Child Record (text)"];
 $picklistLabelspart = ["Date Required","Start Date and Time","Is Billable","Line Type","Record Type ID","Part"];

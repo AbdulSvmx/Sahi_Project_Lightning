@@ -24,7 +24,7 @@ $rs_10459.start();
 	//Search expression and assert Deleted object
 	_selectDomain();
 	_call(top.location.reload(true));
-	_selectDomain($domainName);
+	_selectDomain($g_domain);
 	_wait(15000,_isVisible($sfm_pg_expressions.sel_object));
 	_setSelected($sfm_pg_expressions.sel_object,$object);
 	_wait(15000,_isEnabled($sfm_pg_expressions.btn_selectExpression));

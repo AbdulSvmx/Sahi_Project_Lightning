@@ -148,7 +148,7 @@ $sfm_act_lightningConfig.editWorkOrder($textLabels, $textValues, $pickListLabels
 //Launch the process in SFM Delivery
 $sfm_act_createCustomWizard.clickWizardlinks($processName);
 _wait(8000);
-_selectDomain($domainName);
+_selectDomain($g_domain);
 
 //Verify all the values without the fields in the page layout.
 _click($sfm_pg_wo.link_delivery_save);
@@ -171,7 +171,7 @@ else {
 _selectDomain();
 //Add the fields in the Screen designer
 $sfm_act_createCustomWizard.clickWizardlinks($processName);
-_selectDomain($domainName);
+_selectDomain($g_domain);
 _click($sfm_pg_wo.btn_rightArrow);
 _assertVisible($sfm_pg_wo.link_launchSfmDesigner);
 _click($sfm_pg_wo.link_launchSfmDesigner);
@@ -184,7 +184,7 @@ _click($bo_pg_sfmTransactionAndDesigner.btn_quickSave1);
 _wait(2000);
 _closeWindow();
 _selectWindow();
-_selectDomain($domainName);
+_selectDomain($g_domain);
 $sfm_act_lightningConfig.clearServicemaxCache();
 //Verifying values in SFM Delivery
 var $textPicklistDateLabels = [];

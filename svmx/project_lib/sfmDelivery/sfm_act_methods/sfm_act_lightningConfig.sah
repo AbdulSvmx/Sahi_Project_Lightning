@@ -205,7 +205,7 @@ this.addPermissionToCustomObject = function($searchFor,$profileName,$objectName)
 this.deleteStepFromWizard = function($wizardObject,$wizardName,$processName){
 	//deletes a given step from a given wizard
 	$bo_act_navigation.navigateToSvmxSetup();
-	_selectDomain($domainName);
+	_selectDomain($g_domain);
 	_click(_div("Service Flow Manager"));
 	_click(_div("SFM Wizards"));
 	_setSelected($sfm_pg_wizards.selectObject,$wizardObject);
@@ -316,7 +316,7 @@ this.openExistingProcess = function($processName){
 this.deletePageLayout = function($pageLayoutName){
 	//Deletes the custom page layout created as part of test case cleanup
 	//Author:Janaki
-	_selectDomain($domainName);
+	_selectDomain($g_domain);
 	_click($bo_pg_sfmTransactionAndDesigner.btn_screenDesigner);
 	var $actualPgLayout = _getText($bo_pg_sfmTransactionAndDesigner.txt_sfmSavePageLayoutAs);
 	if($actualPgLayout === $pageLayoutName){
@@ -331,7 +331,7 @@ this.deletePageLayout = function($pageLayoutName){
 this.deleteMappingFromProcess = function($containerName,$mappingName){
 	//Deletes mapping created as part of test case cleanup
 	//Author: Janaki
-	_selectDomain($domainName);
+	_selectDomain($g_domain);
 	_click($bo_pg_sfmTransactionAndDesigner.btn_qualifyingCriteriaAndFieldMapping);
 	_click($sfm_pg_sfmMapping.btn_mappingTab);
 	if($containerName === "Work Order" && _isVisible($sfm_pg_sfmMapping.tab_valueMapForExisting)){
