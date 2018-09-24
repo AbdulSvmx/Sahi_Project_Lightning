@@ -337,10 +337,13 @@ var $bo_act_navigation = new function bo_act_navigation() {
       */
      this.navigateToServiceType = function() {
  	 this.navigateToSvmxSetup();
+ 	 _selectDomain("/svmx/");
  	_click($bo_pg_servicemaxSetup.btn_warrantiesAndServiceContracts);
  	_click($bo_pg_servicemaxSetup.btn_services);
+ 	_selectDomain();
  	_wait(1000);
 	_call(top.location.reload());
+	
      };
      
      this.navigateToWorkOrdersTab = function(){
