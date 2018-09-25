@@ -164,7 +164,8 @@ _log($contactname);
 //Create Work Order and then Check Entitltment For it
 $objNameWO= "SVMXC__Service_Order__c";
 var $restName = $bo_act_common.generateRandomName("");
-$obJsonWO = "{\"SVMXC__Company__c\":\""+$accountID+"\", \"SVMXC__Contact__c\":\""+$contactid+"\"}"; 
+
+$obJsonWO = "{\"SVMXC__Company__c\":\""+$accountID+"\", \"SVMXC__Contact__c\":\""+$contactid+"\",\"SVMXC__Product__c\":\""+$accountID+"\" }"; 
 $columnName = "Name";
 $filter="id";
 //create an account
@@ -176,11 +177,11 @@ _log($WOName);
 _wait(30000);
 _call(top.location.reload());
 $bo_act_navigation.navigateToCreatedRecordUsingGlobalSearchWO($WOName);
-$bo_act_interactiveEntitlement_WO.performInteractiveEntitlementWO_UsingWarranty($WOName,$warrantyName);
+$bo_act_interactiveEntitlement_WO.performInteractiveEntitlementWOSCON_Account($WOName,$SCONName);
 // To write the WorkOrder Number into the Test Data for Appium Side to pick it up
-$excel.insertUnderColumn("/auto/SVMX_Catalyst/fsaautomation/resources/TestData.xlsx", "TestData", "Data1",$WOName , "34");
-$excel.insertUnderColumn("/auto/SVMX_Catalyst/fsaautomation/resources/TestData.xlsx", "TestData", "Data2",$Productname,"34");
-$excel.insertUnderColumn("/auto/SVMX_Catalyst/fsaautomation/resources/TestData.xlsx", "TestData", "Data3",$accountName , "34");
+$excel.insertUnderColumn("/auto/SVMX_Catalyst/fsaautomation/resources/TestData.xlsx", "TestData", "Data1",$WOName , "36");
+$excel.insertUnderColumn("/auto/SVMX_Catalyst/fsaautomation/resources/TestData.xlsx", "TestData", "Data2",$Productname1,"36");
+$excel.insertUnderColumn("/auto/SVMX_Catalyst/fsaautomation/resources/TestData.xlsx", "TestData", "Data3",$Productname2 , "36");
+$excel.insertUnderColumn("/auto/SVMX_Catalyst/fsaautomation/resources/TestData.xlsx", "TestData", "Data4", $SCONName, "36");
 _writeFile("true", $appiumPath+$sahiIntermediatoryPath, true);
-
 $pre_requisite.end();
