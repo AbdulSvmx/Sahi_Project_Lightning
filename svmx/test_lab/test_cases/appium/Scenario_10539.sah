@@ -165,7 +165,7 @@ _log($contactname);
 $objNameWO= "SVMXC__Service_Order__c";
 var $restName = $bo_act_common.generateRandomName("");
 
-$obJsonWO = "{\"SVMXC__Company__c\":\""+$accountID+"\", \"SVMXC__Contact__c\":\""+$contactid+"\",\"SVMXC__Product__c\":\""+$accountID+"\" }"; 
+$obJsonWO = "{\"SVMXC__Company__c\":\""+$accountID+"\", \"SVMXC__Contact__c\":\""+$contactid+"\",\"SVMXC__Product__c\":\""+$productid1+"\" }"; 
 $columnName = "Name";
 $filter="id";
 //create an account
