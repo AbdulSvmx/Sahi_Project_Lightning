@@ -359,13 +359,13 @@ this.deleteSfmProcess = function($processName){
 	}
 	_wait(8000);
 };
-this.editWorkOrder = function($textLabels,$textValues,$pickListLabels,$pickListValues,$textAreaLabels,$textAreaValues,$checkBoxLabels,$checkBoxValues,$dateTimeLabels,$dateTimeDateValues,$timeValues,$emailLabels,$emailValues,$multiPickLabels,$multiPickValues,$urlLabels,$urlValues){
+this.editWorkOrder = function($textLabels,$textValues,$pickListLabels,$pickListValues,$textAreaLabels,$textAreaValues,$checkBoxLabels,$checkBoxValues,$dateTimeLabels,$dateTimeDateValues,$timeValues,$emailLabels,$emailValues,$multiPickLabels,$multiPickValues,$urlLabels,$urlValues,$telephoneLabels,$telephoneValues){
 	//This function edits work order in Lightning mode
 	//Author : Janaki
 	//Text values and Date values can be combined into a single array
 	
 	//Click any of the pencil icons to open edit mode
-	//_focus($sfm_pg_wo.btn_pencilToEditWo);
+	
 	_setStrictVisibilityCheck(true);
 	_wait(6000);
 	_call(_span("Clock Paused Forever").scrollIntoView());
@@ -431,6 +431,14 @@ this.editWorkOrder = function($textLabels,$textValues,$pickListLabels,$pickListV
 			_setValue(_urlbox($urlLabels[$i]),$urlValues[$i]);
 		}
 	}
+	//Fill Telephone number values.
+if($telephoneLabels.length > 0){
+		
+	for($i=0;$i<$telephoneLabels.length;$i++){
+		_setValue(_telephonebox($telephoneLabels[$i]),$telephoneValues[$i]);
+	}
+}
+	
 	
 //Saving everything together
 _click($sfm_pg_wo.btn_saveEditWO);
