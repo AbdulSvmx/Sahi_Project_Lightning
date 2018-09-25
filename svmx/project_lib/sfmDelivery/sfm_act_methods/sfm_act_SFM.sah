@@ -159,6 +159,7 @@ this.dvrScenario5 = function($sfmNameToBeCloned, $sfmName, $isCustom,
 		}
 		_click($bo_pg_sfmTransactionAndDesigner.btn_quickSave);
 		_wait(3000, _isVisible(_f("main").label("Page saved")));
+		_click($bo_pg_sfmTransactionAndDesigner.btn_quickSave1);
 	};
 
 	this.selectSFM = function($sfmName, $isCustom) {

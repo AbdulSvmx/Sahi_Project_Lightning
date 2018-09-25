@@ -510,8 +510,11 @@ var $bo_act_navigation = new function bo_act_navigation() {
         	}
         	
         	_wait(3000);
-        	//Add step to click on 'Save' button as it is not visible in Lightning experience.
-        	
+        	_click($bo_pg_servicemaxSetup.btn_saveFeaturePermissionPage);
+        	_setStrictVisibilityCheck(true);
+        	_assertVisible($bo_pg_servicemaxSetup.msg_FeaturePermission);
+        	_click($bo_pg_servicemaxSetup.btn_okAfterFeaturePermissionSave);
+        	_setStrictVisibilityCheck(false);    	
         	
         	
         };
@@ -529,11 +532,16 @@ var $bo_act_navigation = new function bo_act_navigation() {
             	}
             	
             	_wait(3000);
-            	//Add step to click on 'Save' button as it is not visible in Lightning experience.
+            	_click($bo_pg_servicemaxSetup.btn_saveFeaturePermissionPage);
+            	_setStrictVisibilityCheck(true);
+            	_assertVisible($bo_pg_servicemaxSetup.msg_FeaturePermission);
+            	_click($bo_pg_servicemaxSetup.btn_okAfterFeaturePermissionSave);
+            	_setStrictVisibilityCheck(false);    	
                 };
         
         
           this.addFeaturePermissionToUser = function($userName,$groupProfile,$designerType){
+        //Author:Janaki
         //This function adds the given feature permission to the given user in the given group profile.
         //If the feature permission is already added, then the function skips doing that.
         //Note: $designerType should either be "SFM Designer" or "Checklist Designer" (Case sensitive)
@@ -547,9 +555,10 @@ var $bo_act_navigation = new function bo_act_navigation() {
         	}
         	
         	_wait(3000);
-        	//Add step to click on 'Save' button as it is not visible in Lightning experience.
-        	
-        	
-        	
+        	_click($bo_pg_servicemaxSetup.btn_saveFeaturePermissionPage);
+        	_setStrictVisibilityCheck(true);
+        	_assertVisible($bo_pg_servicemaxSetup.msg_FeaturePermission);
+        	_click($bo_pg_servicemaxSetup.btn_okAfterFeaturePermissionSave);
+        	_setStrictVisibilityCheck(false);    	
         };
 };

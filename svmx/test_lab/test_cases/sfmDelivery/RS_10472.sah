@@ -38,12 +38,14 @@ var $i = 0;
 var $success_message = "Work Order was saved.";
 var $containerName = [];
 var $fieldName=[];
-var $fieldsToMap = ["Account","Sub Status","Actual Onsite Response","Record Type ID","Clock Paused Forever","Proforma Invoice Amount","Scheduled Date","Group Email","Estimated Duration","Order Status","City","Street","Problem Description"];
+var $fieldsToMap = ["Account","Sub Status","Actual Onsite Response","Record Type ID","Clock Paused Forever","Proforma Invoice Amount","Scheduled Date","Group Email","Estimated Duration","Order Status","City","Street","Problem Description","Automation multipicklist","Automation Percent","Automation Phone","Automation URL"];
 var $containerName = ["Order Status","Order Status","Order Status","Order Status","Order Status","Order Status","Order Status","Order Status","Order Status","Order Status","Order Status","Order Status","Order Status"];
 var $currentWizardName = $wizardName[4];
 var $productName = "Chrome";
 var $lineType = "Parts";
 var $fieldsAbsentInPage = [];
+var $missingStdDataTypes = ["URL","Picklist (Multi-Select)","Percent","Phone"];
+var $customFieldsNames = ["Automation URL","Automation multipicklist","Automation Percent","Automation Phone"];
 var $pageLayoutForProfile = "SVMX Work Order - Admin";
 var $myDomain = "/lightning/";
 
@@ -58,8 +60,49 @@ var $mapName = $processName + "mp";
 $bo_act_login.login($g_url,$sfmlUsn,$sfmlPwd);
 $sfm_act_lightningConfig.switchToLightning();
 _wait(15000);
+
+//Create custom fields if needed
+$sfm_act_lightningConfig.addCustomFields($objectName, $customFieldsNames, $missingStdDataTypes, $myDomain,$multiPicklistValues);
+_closeWindow();
+_selectWindow();
+
+//Create work order
+var $wo_number = $sfm_act_createCustomWizard.createWowithdateliterals();
+
+
+//Find missing fields in Work Order Page Layout and them to the layout
+for($i=0;$i<$fieldsToMap.length;$i++){
+	if(!$sfm_act_lightningConfig.findIfFieldPresentInPageLayout($fieldsToMap[$i])){
+		$fieldsAbsentInPage.push($fieldsToMap[$i]);
+	}	
+}
+_log($fieldsAbsentInPage);
+
+if($fieldsAbsentInPage.length > 0){
+	$sfm_act_lightningConfig.navigateToObjectsInLightning($objectName);
+	$sfm_act_lightningConfig.addFieldsToLightningPageLayout($objectName,$pageLayoutForProfile,$fieldsAbsentInPage,$myDomain);
+	_selectDomain();
+	_selectWindow("Home | Salesforce");
+	_closeWindow();
+	_selectWindow();
+}
+
+
+var $x = $fieldsToMap.indexOf("Record Type");
+if($x != -1) {
+		$fieldsToMap[$x] = "Record Type ID";
+}
+
+$sfm_act_lightningConfig.logoutInLightning();
+//Login and switch to lightning
+
+$bo_act_login.login($g_url,$sfmlUsn,$sfmlPwd);
+$sfm_act_lightningConfig.switchToLightning();
+
+//**************************************************************************************************
+
 //Navigate to servicemax setup and setup required process.
-//Clone standard process and add the dependent picklist in the screen designer
+
 _setSpeed(3000);
 $bo_act_navigation.navigateToSfmTransactionDesigner();
 $sfm_act_SFM.selectSFM($process_to_clone,$isCustom);

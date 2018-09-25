@@ -1,4 +1,4 @@
-var $RS_10471 = _testcase("RS_10472","Verify Value Map for existing records - Header");
+var $RS_10471 = _testcase("RS_10471","Verify Value Map for existing records - Header");
 $RS_10471.start();
 //Variables used
 var $objectName = "Work Order";
