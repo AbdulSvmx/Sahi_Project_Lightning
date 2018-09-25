@@ -147,21 +147,24 @@ $bo_act_serviceMaintenanceContracts.addExpensePricingToServiceContract("Gas", "P
 $bo_act_serviceMaintenanceContracts.addExpensePricingToServiceContract("Airfare", "Discount%", "10", 4);
 
 // Add Travel Pricing
-$bo_act_serviceMaintenanceContracts.addTravelPolicywithoutDefault("Flat Rate", "800", serviceType1, 0);
-$bo_act_serviceMaintenanceContracts.addTravelPolicywithoutDefault("Per Hour", "150",serviceType2 , 2);
+$bo_act_serviceMaintenanceContracts.addTravelPolicywithoutDefault("Flat Rate", "800", $serviceType1, 0);
+$bo_act_serviceMaintenanceContracts.addTravelPolicywithoutDefault("Per Hour", "150",$serviceType2 , 2);
 
-
-// To create Warranty Terms
-var $warrantyName = $bo_act_warrantyTerms.createWarrantyTerms($exchangeType[0],"30","1","Years","20","1","Years","10","1","Years",$coverageEffectiveFrom[1]);
-$bo_act_warrantyTerms.createApplicableProducts($restproductname, $warrantyName); //Create Applicable product for warranty Terms
-$bo_act_navigation.navigateToCreatedRecordUsingGlobalSearch($IBName); 	//Navigate to Installed Product Page using global search
-$bo_act_warrantyTerms.createWarranty($warrantyName);
+$objName2= "Contact";
+$obJson = "{\"AccountId\":\""+$accountID+"\",\"FirstName\":\""+$restcontactfirstname+"\",\"LastName\":\""+$restcontactlastname+"\"}";
+$columnName = "Name";
+$filter="id";
+//create  case with above created account and other parameters
+$contactid=$sfm_act_restApiMethods.postRestApi($appiumAdminUn,$appiumAdminPwd,$appiumclient_id,$appiumclient_secret,$appiumorginstance,$objName2,$obJson,"POST");
+//get the caseNumber
+$contactname =$sfm_act_restApiMethods.getRestApi($appiumAdminUn,$appiumAdminPwd,$appiumclient_id,$appiumclient_secret,$appiumorginstance,"GET", $objName2, $columnName, $filter, $contactid);
+_log($contactname);
 
 
 //Create Work Order and then Check Entitltment For it
 $objNameWO= "SVMXC__Service_Order__c";
 var $restName = $bo_act_common.generateRandomName("");
-$obJsonWO = "{\"SVMXC__Component__c\":\""+$IbID+"\", \"SVMXC__Company__c\":\""+$accountID+"\", \"SVMXC__Contact__c\":\""+$contactid+"\"}"; 
+$obJsonWO = "{\"SVMXC__Company__c\":\""+$accountID+"\", \"SVMXC__Contact__c\":\""+$contactid+"\"}"; 
 $columnName = "Name";
 $filter="id";
 //create an account
@@ -178,7 +181,6 @@ $bo_act_interactiveEntitlement_WO.performInteractiveEntitlementWO_UsingWarranty(
 $excel.insertUnderColumn("/auto/SVMX_Catalyst/fsaautomation/resources/TestData.xlsx", "TestData", "Data1",$WOName , "34");
 $excel.insertUnderColumn("/auto/SVMX_Catalyst/fsaautomation/resources/TestData.xlsx", "TestData", "Data2",$Productname,"34");
 $excel.insertUnderColumn("/auto/SVMX_Catalyst/fsaautomation/resources/TestData.xlsx", "TestData", "Data3",$accountName , "34");
-$excel.insertUnderColumn("/auto/SVMX_Catalyst/fsaautomation/resources/TestData.xlsx", "TestData", "Data4",$IBName , "34");
 _writeFile("true", $appiumPath+$sahiIntermediatoryPath, true);
 
 $pre_requisite.end();
