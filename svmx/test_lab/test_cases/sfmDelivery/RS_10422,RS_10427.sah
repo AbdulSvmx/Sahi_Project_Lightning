@@ -48,6 +48,7 @@ $sfm_act_lightningConfig.switchToLightning();
 var $wo_number = $sfm_act_createCustomWizard.createWowithdateliterals();
 $bo_act_navigation.navigateToCreatedRecordUsingGlobalSearch($wo_number);
 $sfm_act_createCustomWizard.clickWizardlinks($Std_Sfm_process);
+_wait(10000);
 _selectDomain($g_domain);
 _click($sfm_pg_wo.btn_arrowNextToGetPrice);
 //_assertNotVisible($sfm_pg_wo.link_launchSfmDesigner);
@@ -57,6 +58,7 @@ _selectDomain();
 
 //Launch custom process without adding feature permissions
 $sfm_act_createCustomWizard.clickWizardlinks($processName);
+_wait(10000);
 _selectDomain($g_domain);
 _click($sfm_pg_wo.btn_arrowNextToGetPrice);
 //_assertNotVisible($sfm_pg_wo.link_launchSfmDesigner);
@@ -76,10 +78,9 @@ $bo_act_navigation.navigateToFeaturePermissionsPage();
 _wait(3000);
 $bo_act_navigation.addFeaturePermissionToUser($sfmlUsn,"Cloned_DefaultGroupProfile","SFM Designer");
 
-//Yet to be completed for lightning as the page is still not certified
 //$sfm_act_lightningConfig.logoutInLightning();
 //If Launch SFM designer feature permission is already present, remove it before logging in as technician
-//$bo_act_navigation.deleteFeaturePermissionToUser($tech_un, $group_profilename,"SFM Designer");
+//$bo_act_navigation.addFeaturePermissionToUser($tech_un, $group_profilename,"SFM Designer");
 //_selectDomain();
 //$bo_act_login.login($g_url,$tech_un,$tech_pwd);
 //$sfm_act_lightningConfig.switchToLightning();
@@ -91,6 +92,7 @@ $bo_act_navigation.navigateToCreatedRecordUsingGlobalSearch($wo_number);
 //Launch Standard process and launch SFM designer
 $sfm_act_createCustomWizard.clickWizardlinks($Std_Sfm_process);
 _selectDomain($g_domain);
+_wait(10000);
 _click($sfm_pg_wo.btn_arrowNextToGetPrice);
 _assertVisible($sfm_pg_wo.link_launchSfmDesigner);
 _click($sfm_pg_wo.link_launchSfmDesigner);
@@ -113,6 +115,7 @@ _selectDomain();
 
 //Launch custom process and launch SFM designer
 $sfm_act_createCustomWizard.clickWizardlinks($processName);
+_wait(10000);
 _selectDomain($g_domain);
 _click($sfm_pg_wo.btn_arrowNextToGetPrice);
 _assertVisible($sfm_pg_wo.link_launchSfmDesigner);
