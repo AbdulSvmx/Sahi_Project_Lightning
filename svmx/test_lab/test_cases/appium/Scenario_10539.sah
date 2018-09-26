@@ -64,7 +64,7 @@ var $serviceType1 = $bo_act_servicesTypes.createServicesTypes($trackedOn, $dataT
 */
 var $trackedOn = "Work Order";
 var $dataType = "Number";
-var $qualifyingCriteria = "SVMXSTD: Closed Work Orders";
+var $qualifyingCriteria = "SVMXSTD: Open Work Orders";
 var $serviceType2 = $bo_act_servicesTypes.createServicesTypes($trackedOn, $dataType, $qualifyingCriteria);
 
 //Create Product
@@ -137,7 +137,7 @@ $bo_act_navigation.navigateToCreatedRecordUsingGlobalSearch($SconName);
 $bo_act_serviceMaintenanceContracts.addPartsPricingToServiceContract($SconName, $Productname1, $pricePerUnit, "15",$Productname2);
 
 //// Add labor Pricing
-$bo_act_serviceMaintenanceContracts.addLaborPricingToServiceContract_onlyLabor($SconName,"Installation","Per Hour", "10", "600", 0);
+$bo_act_serviceMaintenanceContracts.addLaborPricingToServiceContract_onlyLabor($SconName,"Installation","Per Hour", "10", "500", 0);
 $bo_act_serviceMaintenanceContracts.addLaborPricingToServiceContract_onlyLabor($SconName,"Repair","Flat Rate", "20", "600", 2);
 
 //Add Expense Pricing
