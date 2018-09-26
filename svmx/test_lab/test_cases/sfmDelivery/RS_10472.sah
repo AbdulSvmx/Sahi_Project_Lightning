@@ -1,13 +1,13 @@
-function onScriptEnd(){
- _selectDomain();
- _focusWindow();
- _takeScreenShot();
- var $a=_scriptStatus();
- if($a=="FAILURE")
- 	{
-	 	cleanUp();
- 	}
-}
+//function onScriptEnd(){
+ //_selectDomain();
+ //_focusWindow();
+ //_takeScreenShot();
+ //var $a=_scriptStatus();
+ //if($a=="FAILURE")
+ 	//{
+	 //	cleanUp();
+ 	//}
+//}
 function cleanUp(){
 	_log("Performing clean up");
 	//Delete step from wizard
@@ -150,30 +150,6 @@ var $x = $fieldsToMap.indexOf("Record Type ID");
 if($x != -1) {
 		$fieldsToMap[$x] = "Record Type";
 }
-//First find if all the fields are present in the current page layout. 
-//Take the list of fields that are not present.
-$bo_act_navigation.navigateToCreatedRecordUsingGlobalSearch($wo_number);
-for($i=0;$i<$fieldsToMap.length;$i++){
-	if(!$sfm_act_lightningConfig.findIfFieldPresentInPageLayout($fieldsToMap[$i])){
-		$fieldsAbsentInPage.push($fieldsToMap[$i]);
-	}	
-}
-_log($fieldsAbsentInPage);
-//Record Type id is knows as Record Type in page layouts
-var $x = $fieldsAbsentInPage.indexOf("Record Type ID");
-if($x != -1) {
-		$fieldsAbsentInPage[$x] = "Record Type";
-}
-
-//If there are fields not present in field layout , add them in object manager.
-if($fieldsAbsentInPage.length > 0){
-	$sfm_act_lightningConfig.navigateToObjectsInLightning($objectName);
-	$sfm_act_lightningConfig.addFieldsToLightningPageLayout($objectName,$pageLayoutForProfile,$fieldsAbsentInPage,$myDomain);
-	_selectDomain();
-	_selectWindow("Home | Salesforce");
-	_closeWindow();
-	_selectWindow();
-}
 
 $bo_act_navigation.navigateToCreatedRecordUsingGlobalSearch($wo_number);
 var $textLabels = ["Proforma Invoice Amount","Scheduled Date","Estimated Duration","City","Automation Percent"];
@@ -206,6 +182,10 @@ _selectDomain($g_domain);
 //Verify all the values without the fields in the page layout.
 _click($sfm_pg_wo.link_delivery_save);
 _selectDomain();
+_call(top.location.reload());
+_selectDomain($g_domain);
+_click($sfm_pg_wo.link_delivery_save);
+_selectDomain();
 _wait(14000,_isVisible($sfm_pg_wo.label_wo));
 $childWoId= _getText($sfm_pg_wo.label_wo);
 _log("Child Work Order id "+ $childWoId);
@@ -220,6 +200,10 @@ if($res){
 }
 else {
 	_log("FAIL: Newly created follow up order does not have values as per mapping");
+}
+var $x = $fieldsToMap.indexOf("Record Type");
+if($x != -1) {
+		$fieldsToMap[$x] = "Record Type ID";
 }
 _selectDomain();
 //Add the fields in the Screen designer
@@ -271,7 +255,7 @@ for($i=0;$i<$emailLabels.length;$i++){
 	$textPicklistDateExpValues.push($emailValues[$i]);
 }
 
-$verifyResult = $sfm_act_SFM.verifyValuesInDelivery($textPicklistDateLabels,$textPicklistDateExpValues,$timeLabels,$timeExpValues,$textAreaLabels,$textAreaExpvalues,$checkBoxLabels,$checkBoxValues,$multiPickLabels,$multiPickValues);
+$verifyResult = $sfm_act_SFM.verifyValuesInDelivery($textPicklistDateLabels,$textPicklistDateExpValues,$dateTimeLabels,$timeValues,$textAreaLabels,$textAreaValues,$checkBoxLabels,$checkBoxValues,$multiPickLabels,$multiPickValues);
 _assertTrue($verifyResult);
 if($verifyResult){
 	_log("PASS:Follow up Work order values are verified in SFM Delivery");
@@ -281,6 +265,10 @@ else {
 }
 
 //Now Save the SFM Delivery and verify the values in the newly created work order
+_click($sfm_pg_wo.link_delivery_save);
+_selectDomain();
+_call(top.location.reload());
+_selectDomain($g_domain);
 _click($sfm_pg_wo.link_delivery_save);
 _selectDomain();
 _wait(12000,_isVisible($sfm_pg_wo.label_wo));

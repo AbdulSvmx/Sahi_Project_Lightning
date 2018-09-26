@@ -419,15 +419,37 @@ this.editWorkOrder = function($textLabels,$textValues,$pickListLabels,$pickListV
 	}
    //Fill multi picklists
 	if($multiPickLabels.length > 0){
-		for($i=0;$<$multiPickLabels.length;$i++){
-			//This call resets the multi select picklist.
-			_call(_select(0,_near(_label($multiPickLabels[$i]))).selectedIndex=-1);
-			_setSelected(_select(0,_near(_label($multiPickLabels[$i]))),[$multiPickValues[$i]],true);
+		var $uniqueMulti = [];
+		//find out the unique list of multi picklists
+		for($i=0;$i<$multiPickLabels.length;$i++){
+			if($uniqueMulti.indexOf($multiPickLabels[$i]) == -1){
+				$uniqueMulti.push($multiPickLabels[$i]);
+			}
 		}
+		_log($uniqueMulti);
+		var $j=0;var $p=0;
+		for($i=0;$i<$uniqueMulti.length;$i++){
+			var $actualList = [];
+			var $currentMultiValues = [];
+			for($j=0;$j<$multiPickValues.length;$j++){
+				if($multiPickLabels[$j] == $uniqueMulti[$i]){
+						$currentMultiValues.push($multiPickValues[$j]);
+					
+				}
+			}
+			_log($currentMultiValues);
+			for($p=0;$p<$currentMultiValues.length;$p++){
+				_click(_span($currentMultiValues[$p],_near(_div($uniqueMulti[$i]))));
+				_keyDown(_span($currentMultiValues[$p]),39,"CTRL");
+			}
+		
+			
+			_setStrictVisibilityCheck(true);
 	}
+}
 	//Fill URL fields
 	if($urlLabels.length > 0){
-		for($i=0;$<$urlLabels.length;$i++){
+		for($i=0;$i<$urlLabels.length;$i++){
 			_setValue(_urlbox($urlLabels[$i]),$urlValues[$i]);
 		}
 	}
