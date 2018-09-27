@@ -1,6 +1,6 @@
 
 var $pre_requisite= _testcase("scenario_10532","Rs-10532 Verify GetPrice Work order is not covered under Warranty or SCON.");
-
+_writeFile("false", $appiumPath+$sahiIntermediatoryPath, true);
 $pre_requisite.start();
 _setSpeed($g_stepSpeed);
 $bo_act_login.login($g_url, $appiumAdminUn, $appiumAdminPwd);
@@ -51,7 +51,7 @@ _log($IBID);
 // Create Work Order from the API
 $objNameWO= "SVMXC__Service_Order__c";
 var $restName = $bo_act_common.generateRandomName("");
-$obJsonWO = "{\"SVMXC__Component__c\":\""+$IBID+"\", \"SVMXC__Company__c\":\""+$AccountID+"\", \"SVMXC__Contact__c\":\""+$contactid+"\"}"; 
+$obJsonWO = "{\"SVMXC__Component__c\":\""+$IBID+"\", \"SVMXC__Company__c\":\""+$AccountID+"\", \"SVMXC__Contact__c\":\""+$contactid+"\",\"SVMXC__Billing_Type__c\":\"Loan\" }"; 
 $columnName = "Name";
 $filter="id";
 //create an account
@@ -63,9 +63,11 @@ _log($WOName);
 // Entitlement of the Work Order with Incident not Covered
 _wait(30000);
 _call(top.location.reload());
+var $WOName = "WO-00002770";
 $bo_act_navigation.navigateToCreatedRecordUsingGlobalSearchWO($WOName);
 $bo_act_interactiveEntitlement_WO.performInteractiveEntitlementWO_IncidentNotCovered($WOName);
 
 
 //To write the WorkOrder Number into the Test Data for Appium Side to pick it up
-$excel.insertUnderColumn("/auto/SVMX_Catalyst/fsaautomation/resources/TestData.xlsx", "TestData", "Data1",$WOName , "34");
+$excel.insertUnderColumn("/auto/SVMX_Catalyst/fsaautomation/resources/TestData.xlsx", "TestData", "Data1",$WOName ,"38");
+_writeFile("true", $appiumPath+$sahiIntermediatoryPath, true);
