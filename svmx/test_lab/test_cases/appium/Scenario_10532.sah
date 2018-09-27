@@ -51,7 +51,7 @@ _log($IBID);
 // Create Work Order from the API
 $objNameWO= "SVMXC__Service_Order__c";
 var $restName = $bo_act_common.generateRandomName("");
-$obJsonWO = "{\"SVMXC__Component__c\":\""+$IBID+"\", \"SVMXC__Company__c\":\""+$AccountID+"\", \"SVMXC__Contact__c\":\""+$contactid+"\",\"SVMXC__Billing_Type__c\":\"Loan\" }"; 
+$obJsonWO = "{\"SVMXC__Component__c\":\""+$IBID+"\", \"SVMXC__Company__c\":\""+$AccountID+"\", \"SVMXC__Contact__c\":\""+$contactid+"\",\"SVMXC__Billing_Type__c\":\"Loan\"}"; 
 $columnName = "Name";
 $filter="id";
 //create an account
@@ -63,7 +63,6 @@ _log($WOName);
 // Entitlement of the Work Order with Incident not Covered
 _wait(30000);
 _call(top.location.reload());
-var $WOName = "WO-00002770";
 $bo_act_navigation.navigateToCreatedRecordUsingGlobalSearchWO($WOName);
 $bo_act_interactiveEntitlement_WO.performInteractiveEntitlementWO_IncidentNotCovered($WOName);
 
