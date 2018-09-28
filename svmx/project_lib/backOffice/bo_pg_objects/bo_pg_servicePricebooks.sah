@@ -33,6 +33,8 @@ var $bo_pg_servicePricebooks = new function bo_pg_servicePricebooks(){
 	this.txt_regular_rate = _textbox("/svmx-number/", _near(_label("Regular Rate:")));
 	this.btn_update = _span("Update");
 	this.btn_searchicon = _span("svmx-btn-icon svmx-sfmd-search-icon");
+	this.txt_activity = _textbox("/svmx-text/", _near(_label("Activity:")));
+	this.txt_minimumlabor_inmins = _textbox("svmx-form-field svmx-form-required-field svmx-form-text svmx-form-invalid-field svmx-form-focus svmx-field-form-focus svmx-field-default-form-focus");
 	
 
 	this.clickOnServicePriceBookEntry = function($ServicePricebooksEntryNumber){

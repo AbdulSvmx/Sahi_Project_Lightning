@@ -47,7 +47,7 @@ _click($bo_pg_sfmTransactionAndDesigner.btn_quickSave1);
 _click($bo_pg_sfmTransactionAndDesigner.btn_qualifyingCriteriaAndFieldMapping);
 
 //Set up the mapping with SVMX.CURRENTRECORD literals for Header
-_selectDomain($domainName);
+_selectDomain($g_domain);
 $bo_act_mappings.createMapping("Work Order",[],[],$textLabels,$textValues,$mapName);
 _setSpeed(1000);
 //Add the custom process to SFM wizard.
@@ -61,7 +61,7 @@ $bo_act_navigation.navigateToCreatedRecordUsingGlobalSearch($wo_number);
 //Launch the process in SFM Delivery
 $sfm_act_createCustomWizard.clickWizardlinks($processName);
 _wait(3000);
-_selectDomain($domainName);
+_selectDomain($g_domain);
 
 //Verify the values in header
 var $verifyResult = $sfm_act_SFM.verifyValuesInDelivery($textLabels,$expValues,[],[],[],[],[],[],[],[]);
@@ -82,7 +82,7 @@ _closeWindow();
 _selectWindow();
 
 //Clear Servicemax cache in service delivery.
-_selectDomain($domainName);
+_selectDomain($g_domain);
 $sfm_act_lightningConfig.clearServicemaxCache();
 //Add child line item
 $textLabels = ["Line Qty"];

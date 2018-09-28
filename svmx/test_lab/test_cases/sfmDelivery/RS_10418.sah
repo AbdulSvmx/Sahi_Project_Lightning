@@ -109,7 +109,7 @@ _selectWindow();
 		_click($sfm_pg_wo.btn_wo_edit_save);
 		_wait(2000);
 		$sfm_act_createCustomWizard.clickWizardlinks($processName);
-		_selectDomain($domainName);
+		_selectDomain($g_domain);
 		var $actual_list = [];
 		//Verify the count of values first
 		_wait(4000);
@@ -145,7 +145,7 @@ $sfm_act_createCustomWizard.clickWizardlinks($processName);
 //_execute(location.reload());
 _wait(10000);
 
-_selectDomain($domainName);
+_selectDomain($g_domain);
 _click($sfm_pg_wo.btn_arrowNextToUserSettings);
 _assertVisible($sfm_pg_wo.link_launchSfmDesigner);
 _click($sfm_pg_wo.link_launchSfmDesigner);
@@ -161,7 +161,7 @@ _closeWindow();
 _selectWindow();
 $bo_act_navigation.navigateToCreatedRecordUsingGlobalSearch($wo_number);
 $sfm_act_createCustomWizard.clickWizardlinks($processName);
-_selectDomain($domainName);
+_selectDomain($g_domain);
 
 for(var $z=0;$z<$ctrl_unique_values.length;$z++){
 	var $actual_list = [];

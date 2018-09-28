@@ -51,9 +51,26 @@ var $bo_pg_serviceMaintenanceContracts = new function bo_pg_serviceMaintenanceCo
 	this.txt_pricePerUnit	= _textbox("Price Per Unit");
 	this.chk_active	= _checkbox("Active");
 	this.link_ServiceContractOnPartsPricing = _link(0,_rightOf(_cell("Service Contract")));
-	
+	this.txt_defaultpricing = _textbox("/svmx-text-/", _near(_label("Default Parts Price Book:")));
+	this.lkup_defaultpricing = _span("/svmx-button-/", _near(_label("Default Parts Price Book:")));
+	this.btn_addnewpartspricingvalue = _span("svmx-btn-icon svmx-sfmd-add-line-icon");
+	this.btn_add_line_partspricing = _image("svmx-action-col-icon svmx-action-col-0   svmx-sfmd-edit-icon");
+	this.txt_product_value = _textbox("/svmx-text-/", _near(_label("Product:")));
+	this.lkup_productvalue = _span("/svmx-button-/", _near(_label("Product:")));
+	this.txt_price_perunit = _textbox("/svmx-number/", _near(_label("Price Per Unit:")));
+	this.btn_update = _span("Update");
+	this.tab_partsdiscount = _span("Parts Discount");
+	this.btn_add_new_parts_discount = _span("svmx-btn-icon svmx-sfmd-add-line-icon");
+	this.btn_add_line_parts_discount = _image("svmx-action-col-icon svmx-action-col-0   svmx-sfmd-edit-icon");
+	this.number_discount = _textbox("/svmx-number/", _near(_label("Discount %:")));
+	this.btn_activecheckbox = _button("Active:");
+	this.btn_save = _span("Save");
+
 	
 	//Objects for Part/Labor Pricing in Scon
+	this.txt_servicePriceBook = _textbox("/svmx-text-/", _near(_label("Service Pricebook:")));
+	this.lkup_serviceprocebook = _span("/svmx-button-/", _near(_label("Service Pricebook:")));
+	
 	this.btn_sfmLaborPricing = _button("Labor Pricing");
 	this.btn_sfmPartPricing = _button("New Parts Pricing");
 	this.btn_sfmnewPartsPricing = _button("Parts Pricing");
@@ -75,22 +92,25 @@ var $bo_pg_serviceMaintenanceContracts = new function bo_pg_serviceMaintenanceCo
 	//this.txt_regularRateLaborPricing = _textbox(0,_rightOf(_label("Regular Rate:")));
 	this.txt_regularRateLaborPricing = _textbox(0,_rightOf(_label("Regular Rate:",_near(_span("Update")))));
 	this.btn_updateLaborPricing = _span("Update");
-	this.btn_saveLaborPricing = _span("/sfmd-save-icon/");
+	this.btn_saveLaborPricing = _span("Save");
 	this.btn_quickSaveLaborPricing = _span("/sfmd-quicksave-icon/");
 	
 	//Objects for Expense Pricing and Travel Policy  in Scon
 	this.btn_sfmExpensePricing = _button("Expense Pricing");
-	this.btn_expensePricingTab = _span("Expense Pricing");
-	this.txt_expenseType = _textbox("Expense Type:",_near(_span("Update")));
-	this.txt_expenseRateType = _textbox("Rate Type:",_near(_span("Update")));
-	this.txt_expenseRate = _textbox(0,_rightOf(_label("Rate:",_near(_span("Update")))));
+	this.btn_expensePricingTab = _span("/sfmd-add-line-icon/");
+	this.txt_expenseType = _textbox("Expense Type:");
+	this.txt_expenseRateType = _textbox("Rate Type:");
+	this.txt_expenseRate = _textbox("/svmx-number/",_near(_label("Rate:")));
 	//Objects for Travel Policy
 	this.btn_sfmTravelPolicy = _button("Travel Policy");
-	this.btn_travelPolicyTab = _span("Travel Policy");
-	this.txt_travelPolicyUnit = _textbox("Unit:",_near(_span("Update")));
+	this.btn_travelPolicyTab = _span("svmx-btn-icon svmx-sfmd-add-line-icon");
+	this.txt_travelPolicyUnit = _textbox("/svmx-text-/", _near(_label("Unit:")));
+	this.picklist_travelpolicy = _textbox("Unit:");
 	this.txt_travelRoundingType = _textbox("Rounding Type (Travel):");
 	this.txt_defaultTravelPrice = _textbox(0,_rightOf(_label("Default Travel Price:")));
 	this.txt_defaultTravelUnit = _textbox("Default Travel Unit:",_rightOf(_label("Default Travel Unit:")));
+	this.txt_servicetype_value = _textbox("/svmx-text-/", _near(_label("Service Type:")));
+	this.lkup_servicetype = _span("/svmx-button-/", _near(_label("Service Type:")));
 	//Object For Mileage Tier
 	this.btn_travelPolicyMileageTierTab = _span("Mileage Tier");
 	this.txt_travelPolicyTierName = _textbox("Tier Name:",_near(_span("Update")));

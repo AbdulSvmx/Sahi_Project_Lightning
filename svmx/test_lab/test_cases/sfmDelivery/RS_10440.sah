@@ -27,7 +27,7 @@ _click($sfm_pg_sfmDesigner.link_details);
 $sfm_act_createCustomWizard.clickWizardBtn($sfmName);
 _click($sfm_pg_sfmDesigner.btn_deliveryPartsTab);
 _wait(5000);
-_selectDomain($domainName);
+_selectDomain($g_domain);
 _setStrictVisibilityCheck(true);
 _click($sfm_pg_sfmDesigner.btn_deliveryExtendedEdit);
 _click($sfm_pg_sfmDesigner.btn_deliveryExtendedEdit);

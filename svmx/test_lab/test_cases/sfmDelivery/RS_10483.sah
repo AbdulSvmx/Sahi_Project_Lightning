@@ -35,7 +35,7 @@ if(_exists($processingMessage)){
 
 if(_exists($successMessage)){
 	_log("Pass ::: Account created successfully","SUCCESS");
-	_selectDomain($domainName);
+	_selectDomain($g_domain);
 	_click(_submit("Continue"));
 	_wait(25000);
 }

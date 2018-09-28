@@ -79,12 +79,12 @@ _click(_f("main").tab("Qualifying Criteria and Field Mappings"));
 $bo_act_mappings.createMapping($containerName_child,$mappingField_child,$mappingValue_child,$textLabels,$textValues,$mapName_chid);
 _wait(5000);
 
-_selectDomain($domainName);
+_selectDomain($g_domain);
 _click(_f("main").tab("Source Object Update"));
 _click(_f("main").tab("Qualifying Criteria and Field Mappings"));
 $bo_act_mappings.createMapping($containerName,$mappingField,$mappingValue,$textLabels,$textValues,$mapName);
 _wait(5000);
-_selectDomain($domainName);
+_selectDomain($g_domain);
 _click(_f("main").s_button("Save & Close"));
 
 $sfm_act_wizards.addToWizard($wizardObject,$wizardName, $wizardType,$sfmName,$handOver,$profile,$wizardCriteria);  

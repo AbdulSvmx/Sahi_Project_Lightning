@@ -65,7 +65,7 @@ _click(_f("main").tab("Qualifying Criteria and Field Mappings"));
 _wait(2000);
 $bo_act_mappings.createvalueMappingnewrecords($containerName_parts,$mappingField_parts,$mappingValue_parts,$textLabels_parts,$textValues_parts,$mapName_part);
 _wait(3000);
-_selectDomain($domainName);
+_selectDomain($g_domain);
 $bo_act_mappings.createvalueMappingnewrecords($containerName_labor,$mappingField_labor,$mappingValue_labor,$textLabels_labor,$textValues_labor,$mapName_labor);
 _wait(3000);
 

@@ -1,4 +1,4 @@
-var $RS_10471 = _testcase("RS_10472","Verify Value Map for existing records - Header");
+var $RS_10471 = _testcase("RS_10471","Verify Value Map for existing records - Header");
 $RS_10471.start();
 //Variables used
 var $objectName = "Work Order";
@@ -140,7 +140,7 @@ $todayDate = $sfm_act_lightningConfig.removePrecedingZeroInDate($todayDate);
 $tomorrowDate = $sfm_act_lightningConfig.removePrecedingZeroInDate($tomorrowDate);
 $yesterdayDate = $sfm_act_lightningConfig.removePrecedingZeroInDate($yesterdayDate);
 
-_selectDomain($domainName);
+_selectDomain($g_domain);
 _click($sfm_pg_wo.link_delivery_save);
 _wait(3000);
 if(_isVisible($sfm_pg_wo.btn_okPriceNotCalculated)){
@@ -184,7 +184,7 @@ else {
 _selectDomain();
 //Add the fields in the Screen designer
 $sfm_act_createCustomWizard.clickWizardlinks($processName);
-_selectDomain($domainName);
+_selectDomain($g_domain);
 _click($sfm_pg_wo.btn_arrowNextToGetPrice);
 _assertVisible($sfm_pg_wo.link_launchSfmDesigner);
 _click($sfm_pg_wo.link_launchSfmDesigner);
@@ -197,7 +197,7 @@ _click($bo_pg_sfmTransactionAndDesigner.btn_quickSave1);
 _wait(2000);
 _closeWindow();
 _selectWindow();
-_selectDomain($domainName);
+_selectDomain($g_domain);
 $sfm_act_lightningConfig.clearServicemaxCache();
 //Setting up the date literal values
 var $current = new Date();
@@ -237,7 +237,7 @@ var $deliveryTextPickValues =["HCSAccountForTesting","Lightning Contact","4500",
 var $deliveryTimeLabels = ["First Queued DateTime","Started Driving To Location Date Time","Completed Date Time","Finished Onsite Date Time"];
 var $deliveryTimeValues = [$now,"12:00 AM","12:00 AM","12:00 AM"];
 //Verify same values in Work order after saving
-_selectDomain($domainName);
+_selectDomain($g_domain);
 var $verifyResult = $sfm_act_SFM.verifyValuesInDelivery($deliveryTextPickLabels, $deliveryTextPickValues, $deliveryTimeLabels, $deliveryTimeValues, $textAreaLabels, $textAreaValues, $checkBoxLabels, $checkBoxValues, $multiPickLabels, $multiPickValues);
 _click($sfm_pg_wo.link_delivery_save);
 _wait(3000);

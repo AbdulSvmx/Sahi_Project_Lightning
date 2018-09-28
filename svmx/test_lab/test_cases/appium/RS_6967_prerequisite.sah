@@ -4,14 +4,14 @@
  * PRE Requisites to be run in the org before running other scripts - LIGHTNING CODE
  */
 _writeFile("false", $appiumPath+$sahiIntermediatoryPath, true);
-
-var $rs_10490 = _testcase("RS_6967_prerequisite","");
-$rs_10490.start();
+var $bProcessStatus = false;
+var $rs_10552 = _testcase("RS_10552_prerequisite","");
+$rs_10552.start();
 var $sfmNameToBeCloned = "Manage Work Order Lines - Usage";
-var $sfmName = "RS_6967Sample";
+var $sfmName = "RS_10552Sample";
 var $isCustom = false;
 var $sfmTemplate = "SVMXSTD: Manage WO Usage Lines";
-var $sfmTemplateSaveAsName = "RS_6967SampleTemp1";
+var $sfmTemplateSaveAsName = "RS_10552Sample";
 var $containerName = ["Order Status","Order Status","Order Status","Order Status","Order Status","Parts","Parts","Parts","Parts"];
 var $fieldName = ["RS_6967_AutoChkBx",
                   "Auto_Date1",
@@ -32,15 +32,15 @@ var $wizardCriteria=null;
 
 var $formulaTargetObjectArray = ["Work Order","Work Order","Work Order","Work Order","Work Order","Work Order","Parts","Parts","Parts","Parts"];
 var $formulaTargetFieldArray = ["RS_6967_AutoChkBx", "Auto_Date1","RS_6967_Automation_DateTime","RS_6967_Automation_Number","Billing Type","RS_6967_AvgPartsPrice","RS_6967_AutoActivityMonth","RS_6967_AutoActivityYear","RS_6967_AutoDiscountLinePrice","RS_6967_AutoCalLinePrice"];
-var $formulaNameArray = ["WO_RS_6967_AutoChkBx", "WO_RS_6967_Auto_Date1","WO_RS_6967_Automation_DateTime","WO_RS_6967_Automation_Number","WO_RS_6967_Billing Type","WO_RS_6967_AvgPartsPrice","WO_RS_6967_AutoActivityMonth","WO_RS_6967_AutoActivityYear","WO_RS_6967_AutoDiscountLinePrice","WO_RS_6967_AutoCalLinePrice"];
-var $formulaDescriptionArray = ["WO_RS_6967_AutoChkBx description", "WO_Auto_Date1 description","WO_RS_6967_Automation_DateTime description","WO_RS_6967_Automation_Number description","WO_Billing Type description","WO_RS_6967_AvgPartsPrice description","WO_RS_6967_AutoActivityMonth description","WO_RS_6967_AutoActivityYear","WO_RS_6967_AutoDiscountLinePrice","WO_RS_6967_AutoCalLinePrice"];
+var $formulaNameArray = ["WO_RS_10552_AutoChkBx", "WO_RS_10552_Auto_Date1","WO_RS_10552_Automation_DateTime","WO_RS_10552_Automation_Number","WO_RS_10552_Billing Type","WO_RS_10552_AvgPartsPrice","WO_RS_10552_AutoActivityMonth","WO_RS_10552_AutoActivityYear","WO_RS_10552_AutoDiscountLinePrice","WO_RS_10552_AutoCalLinePrice"];
+var $formulaDescriptionArray = ["WO_RS_10552_AutoChkBx description", "WO_Auto_10552 description","WO_RS_10552_Automation_DateTime description","WO_RS_10552_Automation_Number description","WO_Billing Type description","WO_RS_10552_AvgPartsPrice description","WO_RS_10552_AutoActivityMonth description","WO_RS_10552_AutoActivityYear","WO_RS_10552_AutoDiscountLinePrice","WO_RS_10552_AutoCalLinePrice"];
 
 
 var $formulaArray =["$F.IF($F.EQUAL($D.Work_Order.SVMXC__Billing_Type__c,'Contract'), $D.Work_Order.RS_6967_AutoChkBx__c, 'true')",     
                     "$F.DATE($F.YEAR($D.Work_Order.CreatedDate)+1, $F.MONTH($D.Work_Order.CreatedDate), 1)",
                     "$F.NOW()",
                     "$F.DATEDIFF($D.Work_Order.SVMXC__Completed_Date_Time__c, $D.Work_Order.SVMXC__Actual_Initial_Response__c, 'INDAYS')",
-                    "$F.IF($F.EQUAL($D.Work_Order.SVMXC__Billing_Type__c,'Contract'), $D.Work_Order.RS_6967_AutoChkBx__c, 'true')",
+                    "$F.IF($F.EQUAL($D.Work_Order.SVMXC__Customer_Down__c,'true'), $D.Work_Order.SVMXC__Billing_Type__c, 'Paid')",
                     "$F.AVGOF($D.Parts, 'RS_6967_AutoDiscountLinePrice__c') ",     
                     "$F.MONTH($D.Parts.SVMXC__Start_Date_and_Time__c) ",
                     "$F.YEAR($D.Parts.SVMXC__Start_Date_and_Time__c)",
@@ -55,18 +55,20 @@ $sfm_act_lightningConfig.switchToLightning();
 
 
 //clone tmd016
-$sfm_act_SFM.dvrScenario5($sfmNameToBeCloned,$sfmName,$isCustom, $sfmTemplateSaveAsName, $sfmTemplate, $fieldName, $containerName);
+$bProcessStatus=$sfm_act_SFM.dvrScenario5($sfmNameToBeCloned,$sfmName,$isCustom, $sfmTemplateSaveAsName, $sfmTemplate, $fieldName, $containerName,$bProcessStatus);
+
+if($bProcessStatus==true){
 $sfm_act_SFM.addFieldToScreen($fieldName, $containerName);
-
-
 $sfm_pg_formula.createFormula($formulaTargetObjectArray, $formulaTargetFieldArray, $formulaNameArray, $formulaDescriptionArray, $formulaArray);
-
-
 _click($sfm_pg_sfmDesigner.btn_quickSaveSFM);
 _click($sfm_pg_sfmDesigner.btn_saveSFM); 
 _wait(3000,_isVisible($sfm_pg_sfmDesigner.lnk_home));
 
 //add the process to wizard 
 $sfm_act_wizards.addToWizard($wizardObject,$wizardName, $wizardType,$sfmName,$handOver,$profile,$wizardCriteria);
-
+}
+else
+{
+	_log("As process exists, process creation is not required");
+}
 _writeFile("true", $appiumPath+$sahiIntermediatoryPath, true);
