@@ -7,7 +7,8 @@ var $bo_pg_sfmAppPermissionD= new function bo_pg_sfmAppPermissionD(){
 	this.btn_select_object = _textbox("Select Object:");
 	this.chkbox_creatework_order = "svmx-grid-row-checker";
 	this.btn_add_selected = _span("Add selected");
-	this.btn_save = _span("Save[1]");
+	this.btn_save[1] = _span("Save[1]");
+	this.btn_save = _span("Save");
 	// Done
 	this.txt_focusProcessType=_textbox("label");
 	this.sel_processTypeWizard=_listItem("SFM Wizards");

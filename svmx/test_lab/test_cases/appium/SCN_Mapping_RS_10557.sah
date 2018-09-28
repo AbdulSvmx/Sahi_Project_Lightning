@@ -7,8 +7,8 @@ var $sfmNameToBeCloned = "Create Work Order from Installed Product";
 //var $sfmName = $bo_act_common.generateRandomName("RS_10557_");
 var $sfmName="RS_10557_Child_Mapping";
 var $isCustom = true;
-var $objName="Work Order"
-var $sorceobj="Installed Product"
+var $objName="Work Order";
+var $sorceobj="Installed Product";
 var $part="Parts";
 var $labor="Labor";
 var $sfmTemplate = "--None--";
@@ -34,7 +34,7 @@ var $wizardCriteria=null;
 $bo_act_login.login($g_url, $appiumAdminUn, $appiumAdminPwd);
 $sfm_act_lightningConfig.switchToLightning();
 
-
+/*
 $textLabels_parts = ["To Location"];
 $textValues_parts = ["SVMX.CURRENTRECORDHEADER.SVMXC__Site__c"];
 
@@ -47,6 +47,11 @@ var $containerName_labor="Labor";
 var $mappingField_parts=[];var $mappingField_labor=[];var $mappingValue_parts=[];var $mappingValue_labor=[];
 
 
+
+var $value =$sfm_act_SFM.checkprocessexists($sfmName,$isCustom);//to check process exists or not
+_log($value);
+//if the process value is false (process not exists) then create the process
+if($value==false){
 $bo_act_navigation.navigateToSfmTransactionDesigner();
 _wait(10000);
 _click(_f("main").s_button("New SFM Transaction"));
@@ -86,6 +91,8 @@ _wait(5000);
 _click(_f("main").s_button("Quick Save"));
 
 $sfm_act_wizards.addToWizard($wizardObject,$wizardName, $wizardType,$sfmName,$handOver,$profile,$wizardCriteria);  
+}
+
 
 //create a standalone process to create a new installed product
 
@@ -93,12 +100,24 @@ var $createsfmName = "Create New Installed Product Automation sahi";
 var $transactiontype = "as Standalone for the purpose of creating a new record";
 var $targetObjectName = "Installed Product";
 var $ExistingsfmPageLayoutName="SVMXSTD: View/Create Installed Product";
+
+var $value =$sfm_act_SFM.checkprocessexists($createsfmName,true);//to check process exists or not
+_log($value);
+//if the process value is false (process not exists) then create the process
+if($value==false){
 $bo_act_SFM.createstandaloneSFMProcess($createsfmName, $transactiontype, $targetObjectName,$ExistingsfmPageLayoutName);
 
 //Setup App Permissions for Mobile App for the SFM Process created
 var $profilename = $group_profilename;
 $bo_act_SFMAppPermission.set_mobileapp_permissions($profilename, $targetObjectName, $createsfmName);
+}
+*/
 
+var $createsfmName = "Create New Installed Product Automation sahi";
+var $transactiontype = "as Standalone for the purpose of creating a new record";
+var $targetObjectName = "Installed Product";
+var $profilename = $group_profilename;
+$bo_act_SFMAppPermission.set_mobileapp_permissions($profilename, $targetObjectName, $createsfmName);
 RS_10557_mapping.end();
 
 

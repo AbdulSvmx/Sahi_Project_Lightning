@@ -39,10 +39,18 @@ $mappingValue = ["Account","Record ID","Product","Date Installed","Last Modified
 $mappingField_child = ["Date Required","Part"];
 $mappingValue_child = ["Date Installed","Product"];
 var $containerName="Work Order";
-var $containerName_child="Parts"
+var $containerName_child="Parts";
 var $textLabels=[];
 var $textValues=[];
-$bo_act_navigation.navigateToSfmTransactionDesigner();
+
+var $value=true;
+ 
+$value =$sfm_act_SFM.checkprocessexists($sfmName,$isCustom);//to check process exists or not
+_log($value);
+//if the process value is false (process not exists) then create the process
+if($value==false){
+
+	$bo_act_navigation.navigateToSfmTransactionDesigner();
 _wait(10000);
 _click(_f("main").s_button("New SFM Transaction"));
 _setValue($bo_pg_sfmTransactionAndDesigner.txt_name, $sfmName);
@@ -66,9 +74,6 @@ $sfm_act_Transactions.addChildFields($childObj,$fieldName);
  _click(_f("main").s_button("Save[3]"));
 _wait(5000);
 
-
-
-
 _click(_f("main").tab("Qualifying Criteria and Field Mappings"));
 
 $bo_act_mappings.createMapping($containerName_child,$mappingField_child,$mappingValue_child,$textLabels,$textValues,$mapName_chid);
@@ -83,6 +88,8 @@ _selectDomain($domainName);
 _click(_f("main").s_button("Save & Close"));
 
 $sfm_act_wizards.addToWizard($wizardObject,$wizardName, $wizardType,$sfmName,$handOver,$profile,$wizardCriteria);  
+
+}
 
 //_writeFile("true", $appiumPath+$sahiIntermediatoryPath, true);
 

@@ -1,0 +1,167 @@
+var RS_10511 = _testcase("RS_10511","SVerify if events & their related records are removed from FSA app when events are re-assigned to another user (or) deleted from server.");
+RS_10511.start();
+
+
+/*
+
+var $picklistValue="Salesforce Event";
+
+var $profile = "Cloned_Default";
+var $module = "Common";
+var $subModule = "Global Settings";
+var $setting = "GBL025";
+$bo_act_login.login($g_url, $appiumAdminUn, $appiumAdminPwd);
+$sfm_act_lightningConfig.switchToLightning();
+//Setting the value for salesforce event
+$bo_act_configurationProfiles.editGlobalProfileForPicklistSettings($profile,$module,$subModule,$setting,$picklistValue);
+
+
+var $restAccName="A10511_SFDC_Event";
+var $EventSub="A10511_SFDC_Event1";
+var $techname="a240t000000GglLAAS";
+	
+
+$objName= "Account";
+$obJson = "{\"Name\":\""+$restAccName+"\"}"; 
+$columnName = "Name";
+$filter="id";
+//create an account
+$account=$sfm_act_restApiMethods.postRestApi($appiumAdminUn,$appiumAdminPwd,$appiumclient_id,$appiumclient_secret,$appiumorginstance,$objName,$obJson,"POST");
+//get the caseNumber
+_log($account);
+
+//Create WO1 for SFDC event1
+$objName= "SVMXC__Service_Order__c";
+$obJson = "{\"SVMXC__Company__c\":\""+$account+"\",\"SVMXC__Order_Status__c\":\"Open\",\"SVMXC__Order_Type__c\":\"Field Service\",\"SVMXC__Group_Member__c\":\""+$techname+"\"}";	
+$columnName = "Name";
+$filter="id";
+
+$workorderid=$sfm_act_restApiMethods.postRestApi($appiumAdminUn,$appiumAdminPwd,$appiumclient_id,$appiumclient_secret,$appiumorginstance,$objName,$obJson,"POST");
+//get the wo
+$WOname =$sfm_act_restApiMethods.getRestApi($appiumAdminUn,$appiumAdminPwd,$appiumclient_id,$appiumclient_secret,$appiumorginstance,"GET", $objName, $columnName, $filter, $workorderid);
+_log($WOname);
+
+var $now = new Date();
+_log( $now ); // shows current date/time
+
+$now.setHours(15,30,00,00);
+_log( $now );
+
+
+var $new=new Date($now.toString().split('IST')[0]+' GMT').toISOString().split('.')[0];//GMT timing
+_log( $new );
+
+
+var $add1hr=($now.getHours())+1;
+_log($add1hr);
+var $set1hr = new Date();
+$set1hr.setHours($add1hr,30,00,00);
+var $new1=new Date($set1hr.toString().split('IST')[0]+' GMT').toISOString().split('.')[0];//GMT timing
+_log($new1);
+
+// To crete one hr SFDC event1
+
+$objName= "SVMXC__SVMX_Event__c";
+$obJson = "{\"Name\":\""+$EventSub+"\",\"SVMXC__Service_Order__c\":\""+$workorderid+"\",\"SVMXC__Technician__c\":\""+$techname+"\",\"SVMXC__StartDateTime__c\":\""+$new+"\",\"SVMXC__EndDateTime__c\":\""+$new1+"\",\"SVMXC__WhatId__c\":\""+$workorderid+"\"}";	
+$columnName = "Name";
+$filter="id";
+
+$eventid=$sfm_act_restApiMethods.postRestApi($appiumAdminUn,$appiumAdminPwd,$appiumclient_id,$appiumclient_secret,$appiumorginstance,$objName,$obJson,"POST");
+//get the event name
+$eventname =$sfm_act_restApiMethods.getRestApi($appiumAdminUn,$appiumAdminPwd,$appiumclient_id,$appiumclient_secret,$appiumorginstance,"GET", $objName, $columnName, $filter, $eventid);
+_log($eventname);
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+//Create WO2 for SFDC event2
+$objName= "SVMXC__Service_Order__c";
+$obJson = "{\"SVMXC__Company__c\":\""+$account+"\",\"SVMXC__Order_Status__c\":\"Open\",\"SVMXC__Order_Type__c\":\"Field Service\",\"SVMXC__Group_Member__c\":\""+$techname+"\"}";	
+$columnName = "Name";
+$filter="id";
+
+$workorderid=$sfm_act_restApiMethods.postRestApi($appiumAdminUn,$appiumAdminPwd,$appiumclient_id,$appiumclient_secret,$appiumorginstance,$objName,$obJson,"POST");
+//get the wo
+$WOname =$sfm_act_restApiMethods.getRestApi($appiumAdminUn,$appiumAdminPwd,$appiumclient_id,$appiumclient_secret,$appiumorginstance,"GET", $objName, $columnName, $filter, $workorderid);
+_log($WOname);
+
+var $now = new Date();
+_log( $now ); // shows current date/time
+
+$now.setHours(17,30,00,00);
+_log( $now );
+
+
+var $new=new Date($now.toString().split('IST')[0]+' GMT').toISOString().split('.')[0];//GMT timing
+_log( $new );
+
+
+var $add1hr=($now.getHours())+1;
+_log($add1hr);
+var $set1hr = new Date();
+$set1hr.setHours($add1hr,30,00,00);
+var $new1=new Date($set1hr.toString().split('IST')[0]+' GMT').toISOString().split('.')[0];//GMT timing
+_log($new1);
+
+// To crete one hr SFDC event2
+
+$objName= "SVMXC__SVMX_Event__c";
+$obJson = "{\"Name\":\"A10511_SFDC_Event2\",\"SVMXC__Service_Order__c\":\""+$workorderid+"\",\"SVMXC__Technician__c\":\""+$techname+"\",\"SVMXC__StartDateTime__c\":\""+$new+"\",\"SVMXC__EndDateTime__c\":\""+$new1+"\",\"SVMXC__WhatId__c\":\""+$workorderid+"\"}";	
+$columnName = "Name";
+$filter="id";
+
+$eventid=$sfm_act_restApiMethods.postRestApi($appiumAdminUn,$appiumAdminPwd,$appiumclient_id,$appiumclient_secret,$appiumorginstance,$objName,$obJson,"POST");
+//get the event name
+$eventname =$sfm_act_restApiMethods.getRestApi($appiumAdminUn,$appiumAdminPwd,$appiumclient_id,$appiumclient_secret,$appiumorginstance,"GET", $objName, $columnName, $filter, $eventid);
+_log($eventname);
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+//Create WO3 for SFDC event3
+$objName= "SVMXC__Service_Order__c";
+$obJson = "{\"SVMXC__Company__c\":\""+$account+"\",\"SVMXC__Order_Status__c\":\"Open\",\"SVMXC__Order_Type__c\":\"Field Service\",\"SVMXC__Group_Member__c\":\""+$techname+"\"}";	
+$columnName = "Name";
+$filter="id";
+
+$workorderid=$sfm_act_restApiMethods.postRestApi($appiumAdminUn,$appiumAdminPwd,$appiumclient_id,$appiumclient_secret,$appiumorginstance,$objName,$obJson,"POST");
+//get the wo
+$WOname =$sfm_act_restApiMethods.getRestApi($appiumAdminUn,$appiumAdminPwd,$appiumclient_id,$appiumclient_secret,$appiumorginstance,"GET", $objName, $columnName, $filter, $workorderid);
+_log($WOname);
+
+var $now = new Date();
+_log( $now ); // shows current date/time
+
+$now.setHours(19,30,00,00);
+_log( $now );
+
+
+var $new=new Date($now.toString().split('IST')[0]+' GMT').toISOString().split('.')[0];//GMT timing
+_log( $new );
+
+
+var $add1hr=($now.getHours())+1;
+_log($add1hr);
+var $set1hr = new Date();
+$set1hr.setHours($add1hr,30,00,00);
+var $new1=new Date($set1hr.toString().split('IST')[0]+' GMT').toISOString().split('.')[0];//GMT timing
+_log($new1);
+
+// To crete one hr SFDC event2
+
+$objName= "SVMXC__SVMX_Event__c";
+$obJson = "{\"Name\":\"A10511_SFDC_Event3\",\"SVMXC__Service_Order__c\":\""+$workorderid+"\",\"SVMXC__Technician__c\":\""+$techname+"\",\"SVMXC__StartDateTime__c\":\""+$new+"\",\"SVMXC__EndDateTime__c\":\""+$new1+"\",\"SVMXC__WhatId__c\":\""+$workorderid+"\"}";	
+$columnName = "Name";
+$filter="id";
+
+$eventid=$sfm_act_restApiMethods.postRestApi($appiumAdminUn,$appiumAdminPwd,$appiumclient_id,$appiumclient_secret,$appiumorginstance,$objName,$obJson,"POST");
+//get the event name
+$eventname =$sfm_act_restApiMethods.getRestApi($appiumAdminUn,$appiumAdminPwd,$appiumclient_id,$appiumclient_secret,$appiumorginstance,"GET", $objName, $columnName, $filter, $eventid);
+_log($eventname);
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+*/
+
+$bo_act_login.login($g_url, $appiumAdminUn, $appiumAdminPwd);
+$sfm_act_lightningConfig.switchToLightning();
+
+ var $value =$sfm_act_SFM.checkprocessexists("RS-10554-mapping",true);
+ _log($value);
+
+RS_10511.end();
