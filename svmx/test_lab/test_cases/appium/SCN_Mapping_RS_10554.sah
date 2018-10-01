@@ -6,8 +6,8 @@ RS_10554_mapping.start();
 var $sfmNameToBeCloned = "Create Work Order from Installed Product";
 var $sfmName = "RS_10554_field_mapping";
 var $isCustom = true;
-var $objName="Work Order"
-var $sorceobj="Installed Product"
+var $objName="Work Order";
+var $sorceobj="Installed Product";
 var $sfmTemplate = "--None--";
 var $sfmTemplateSaveAsName = $bo_act_common.generateRandomName("RS_10554_Temp");
 var $headersToAdd = ["Account","Product","Scheduled Date Time","Scheduled Date","Component"];
@@ -17,12 +17,10 @@ var $fieldName=["Part","Date Required"];
 var $containerName="Work Order";
 $sourceObj= "Installed Product";
 $targetObj = "Work Order";
-//$mappingField = ["Component","Order Type","Product","Scheduled Date","Scheduled Date Time"];
-//$mappingValue = ["Record ID","Field Service","Product","Date Installed","Last Modified Date"];
 
 var $mapName=$bo_act_common.generateRandomName("RS_10554_WO");
 var $mapName_chid=$bo_act_common.generateRandomName("RS_10554_Part");
-var $part="Parts"
+var $part="Parts";
 	var $labor=null;
 var $wizardObject="Installed Product";
 var $wizardName="Automation IB Wizard";

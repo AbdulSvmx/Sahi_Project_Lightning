@@ -652,8 +652,6 @@ return $result;
 		_setValue($bo_pg_sfmTransactionAndDesigner.lbl_searchSFM, $sfmName);
 		_wait(10000);
 		
-		_setStrictVisibilityCheck(false);
-		_setStrictVisibilityCheck(true);
 //		
 		
 		if (_isVisible(_f("main").s_checkbox("/chk/i").leftOf(_f("main").s_label($sfmName), 10, 10))) {
@@ -662,6 +660,10 @@ return $result;
 			
 		} else if (_isVisible(_f("main").s_checkbox(2).leftOf(_f("main").s_label($sfmName), 10, 10))) {
 			_log("Process exists successfully")
+			return true;
+		}
+		else if (_isVisible(_f("main").s_checkbox(2).leftOf(_f("main").s_label($sfmName+"[1]"), 10, 10))) {
+			_log("Process exists successfully");
 			return true;
 		}
 		else{

@@ -34,7 +34,7 @@ var $wizardCriteria=null;
 $bo_act_login.login($g_url, $appiumAdminUn, $appiumAdminPwd);
 $sfm_act_lightningConfig.switchToLightning();
 
-/*
+
 $textLabels_parts = ["To Location"];
 $textValues_parts = ["SVMX.CURRENTRECORDHEADER.SVMXC__Site__c"];
 
@@ -111,13 +111,7 @@ $bo_act_SFM.createstandaloneSFMProcess($createsfmName, $transactiontype, $target
 var $profilename = $group_profilename;
 $bo_act_SFMAppPermission.set_mobileapp_permissions($profilename, $targetObjectName, $createsfmName);
 }
-*/
 
-var $createsfmName = "Create New Installed Product Automation sahi";
-var $transactiontype = "as Standalone for the purpose of creating a new record";
-var $targetObjectName = "Installed Product";
-var $profilename = $group_profilename;
-$bo_act_SFMAppPermission.set_mobileapp_permissions($profilename, $targetObjectName, $createsfmName);
 RS_10557_mapping.end();
 
 

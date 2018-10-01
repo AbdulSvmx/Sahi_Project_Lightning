@@ -681,8 +681,8 @@ if($telephoneLabels.length > 0){
 		
 		for($i=0;$i<$telephoneLabels.length;$i++){
 			$actualList.push(_getText(_telephonebox($telephoneLabels[$i])));
-			_log("Expected date value for "+$telephoneLabels[$i]+":"+$telephoneValues[$i]);
-			_log("Actual date value for"+$telephoneLabels[$i]+":"+$actualList[$i]);
+			_log("Expected value for "+$telephoneLabels[$i]+":"+$telephoneValues[$i]);
+			_log("Actual value for"+$telephoneLabels[$i]+":"+$actualList[$i]);
 		}
 		if(_areEqual($telephoneValues,$actualList)){
 			_log("Telephone values match");
