@@ -531,7 +531,7 @@ var $sfm_act_createCustomWizard = new function sfm_act_createCustomWizard() {
 		_log("No of Product = "+$divs);
 		_click($sfm_pg_wizardWindow.btn_addProduct);
 		
-		var $divs1= _count("_div","/grid-cell-inner/",_in(_div("/gridview/")));
+		var $divs1= _count("_div","/grid-cell-inner/",_in(_div("/grid-view/")));
 		_log("No of parts = "+$divs1);
 		if($divs==$divs1){
 			_log("Pass ::: Selected parts are added");
