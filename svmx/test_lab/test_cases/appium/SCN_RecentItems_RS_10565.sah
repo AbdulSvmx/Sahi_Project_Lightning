@@ -17,11 +17,11 @@ $bo_act_login.login($g_url, $appiumAdminUn, $appiumAdminPwd);
 $sfm_act_lightningConfig.switchToLightning();
 
 
-var $createsfmName = "Create New Custom object ";
+var $createsfmName = "Create New Custom object";
 var $transactiontype = "as Standalone for the purpose of creating a new record";
 var $targetObjectName = "Auto_Custom_Object2";
 var $ExistingsfmPageLayoutName="";
-var $pagelayoutName="Customobject_SD";
+var $pagelayoutName="Custom_object_SD";
 var	$pagelayoutId=$pagelayoutName;
 
 var $value =$sfm_act_SFM.checkprocessexists($createsfmName,true);//to check process exists or not
@@ -51,7 +51,7 @@ var $targetObjectName = "Auto_Custom_Object2";
 var $ExistingsfmPageLayoutName="";
 var $pagelayoutName="Customobject_SD_view";
 var	$pagelayoutId=$pagelayoutName;
-var $value =$sfm_act_SFM.checkprocessexists($createsfmName,true);//to check process exists or not
+var $value =$sfm_act_SFM.checkprocessexists($viewsfmName,true);//to check process exists or not
 _log($value);
 //if the process value is false (process not exists) then create the process
 if($value==false){

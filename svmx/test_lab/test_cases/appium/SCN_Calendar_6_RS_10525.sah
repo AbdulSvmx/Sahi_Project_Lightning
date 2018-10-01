@@ -58,7 +58,7 @@ $filter="id";
 
 $eventid=$sfm_act_restApiMethods.postRestApi($appiumAdminUn,$appiumAdminPwd,$appiumclient_id,$appiumclient_secret,$appiumorginstance,$objName,$obJson,"POST");
 //get the wo
-$eventname =$sfm_act_restApiMethods.getRestApi($appiumAdminUn,$appiumAdminPwd,$appiumclient_id,$appiumclient_secret,$appiumorginstance,"GET", $objName, $columnName, $filter, $workorderid);
+$eventname =$sfm_act_restApiMethods.getRestApi($appiumAdminUn,$appiumAdminPwd,$appiumclient_id,$appiumclient_secret,$appiumorginstance,"GET", $objName, $columnName, $filter, $eventid);
 _log($eventname);
 
 
