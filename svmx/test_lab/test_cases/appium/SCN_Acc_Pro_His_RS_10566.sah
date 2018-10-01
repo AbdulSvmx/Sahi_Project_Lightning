@@ -26,6 +26,10 @@ var $wizardCriteria=null;
 $bo_act_login.login($g_url, $appiumAdminUn, $appiumAdminPwd);
 $sfm_act_lightningConfig.switchToLightning();
 //clone tmd016
+var $value =$sfm_act_SFM.checkprocessexists($sfmName,true);//to check process exists or not
+_log($value);
+//if the process value is false (process not exists) then create the process
+if($value==false){
 
 
 $sfm_act_SFM.cloneTDM016($sfmNameToBeCloned,$sfmName,$isCustom, $sfmTemplateSaveAsName, $sfmTemplate,$fieldName,$containerName);
@@ -43,7 +47,7 @@ $bo_act_mappings.createMapping("Work Order",$picklistLabels,$pickListValues,[],[
 $sfm_act_wizards.addToWizard($wizardObject,$wizardName, $wizardType,$sfmName,$handOver,$profile,$wizardCriteria);  
 
 
-
+}
 
 
 RS_10566.end();

@@ -644,4 +644,33 @@ return $result;
 			_log("Fail");
 		}
 	};
+	
+	this.checkprocessexists=function($sfmName, $isCustom) 
+			 {
+		$bo_act_navigation.navigateToSfmTransactionDesigner();
+		_click($bo_pg_sfmTransactionAndDesigner.btn_yourCustomSfmTransactions);
+		_setValue($bo_pg_sfmTransactionAndDesigner.lbl_searchSFM, $sfmName);
+		_wait(10000);
+		
+//		
+		
+		if (_isVisible(_f("main").s_checkbox("/chk/i").leftOf(_f("main").s_label($sfmName), 10, 10))) {
+			_log("Process exists successfully")
+			return true;
+			
+		} else if (_isVisible(_f("main").s_checkbox(2).leftOf(_f("main").s_label($sfmName), 10, 10))) {
+			_log("Process exists successfully")
+			return true;
+		}
+		else if (_isVisible(_f("main").s_checkbox(2).leftOf(_f("main").s_label($sfmName+"[1]"), 10, 10))) {
+			_log("Process exists successfully");
+			return true;
+		}
+		else{
+			return false;
+		}
+			
+		};
+			
+	
 };

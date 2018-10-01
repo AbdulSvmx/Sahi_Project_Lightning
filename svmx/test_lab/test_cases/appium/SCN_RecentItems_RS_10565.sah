@@ -17,20 +17,23 @@ $bo_act_login.login($g_url, $appiumAdminUn, $appiumAdminPwd);
 $sfm_act_lightningConfig.switchToLightning();
 
 
-var $createsfmName = "Create New Custom object ";
+var $createsfmName = "Create New Custom object";
 var $transactiontype = "as Standalone for the purpose of creating a new record";
 var $targetObjectName = "Auto_Custom_Object2";
 var $ExistingsfmPageLayoutName="";
-var $pagelayoutName="Customobject_SD";
+var $pagelayoutName="Custom_object_SD";
 var	$pagelayoutId=$pagelayoutName;
-//$bo_act_SFM.createstandaloneSFMProcess($createsfmName, $transactiontype, $targetObjectName,$ExistingsfmPageLayoutName);
 
+var $value =$sfm_act_SFM.checkprocessexists($createsfmName,true);//to check process exists or not
+_log($value);
+//if the process value is false (process not exists) then create the process
+if($value==false){
 $bo_act_SFM.Createcustomobjectnewrecord($createsfmName,$transactiontype,$targetObjectName,$pagelayoutName,$headersToAdd,$pagelayoutId);
 
 //Setup App Permissions for Mobile App for the SFM Process created
 var $profilename = $group_profilename;
 $bo_act_SFMAppPermission.set_mobileapp_permissions($profilename, $targetObjectName, $createsfmName);
-
+}
 /*var $targetObjectName_contact="Contact";
 var $createsfmName_contact="Create New Contact(for an existing account)";
 $bo_act_SFMAppPermission.set_mobileapp_permissions($profilename, $targetObjectName_contact, $createsfmName_contact);
@@ -40,6 +43,7 @@ var $createsfmName_wo="Create New Work Order";
 $bo_act_SFMAppPermission.set_mobileapp_permissions($profilename, $targetObjectName_wo, $createsfmName_wo);
 */
 
+
 //Create a view process for custom object
 var $viewsfmName = "View Custom Object";
 var $transactiontype = "to view a header record with/without its child records";
@@ -47,6 +51,10 @@ var $targetObjectName = "Auto_Custom_Object2";
 var $ExistingsfmPageLayoutName="";
 var $pagelayoutName="Customobject_SD_view";
 var	$pagelayoutId=$pagelayoutName;
+var $value =$sfm_act_SFM.checkprocessexists($viewsfmName,true);//to check process exists or not
+_log($value);
+//if the process value is false (process not exists) then create the process
+if($value==false){
 $bo_act_SFM.Createcustomobjectnewrecord($viewsfmName,$transactiontype,$targetObjectName,$pagelayoutName,$headersToAdd,$pagelayoutId);
 
 
@@ -67,6 +75,7 @@ _click(_span("Save"));
 _wait(10000);
 //_assertEqual(true, _isVisible());
 _selectDomain();
+}
 
 /*//add new object to download criteria
 var $targetObjectName = "Auto_Custom_Object2";
