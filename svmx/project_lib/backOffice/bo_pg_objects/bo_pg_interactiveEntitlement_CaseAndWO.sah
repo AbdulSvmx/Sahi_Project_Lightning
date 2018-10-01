@@ -43,6 +43,7 @@ var $bo_pg_interactiveEntitlement_CaseAndWO = new function bo_pg_interactiveEnti
 	this.chk_settingMatchContact_CasePage = _checkbox(0,_rightOf(_span("Match Contact")));
 	this.chk_settingMatchAccounts_CasePage = _checkbox(0,_rightOf(_span("Match Accounts")));
 	this.radio_account = _radio("Account");
+	
 
     this.selectWarrantyOrContractCasePage = function($SconName){
 		
