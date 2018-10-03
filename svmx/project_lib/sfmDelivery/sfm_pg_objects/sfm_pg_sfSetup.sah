@@ -1,6 +1,6 @@
 var $sfm_pg_sfSetup = new function sfm_pg_sfSetup() {
 	this.link_salesForceSetup = _link("Setup");
-	this.txt_quickFind = _textbox("setupSearch");
+	this.txt_quickFind = _searchbox("Quick Find");
 	this.link_objects = _link("Objects",_near(_link("Create")));
 	this.link_woObject = _link("Work Order[2]");
 	this.btn_customFieldNew = _button("NewCustom Field");
@@ -27,6 +27,7 @@ var $sfm_pg_sfSetup = new function sfm_pg_sfSetup() {
 	this.radio_phone = _radio("Phone");
 	this.radio_textArea = _radio("Text Area");
 	this.radio_URL = _radio("URL");
+	this.btn_setup = _span("Setup[1]");
 	
 		
 };
