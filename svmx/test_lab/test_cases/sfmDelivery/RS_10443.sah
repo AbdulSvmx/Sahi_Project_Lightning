@@ -48,7 +48,7 @@ var $conditionsCombo=["Equals","Equals"];
 var $operandTypeCombo=["Value","Value"];
 var $operandValue=[$caseNumber1,$caseNumber2];
 var $lookupAdvExpr="1 OR 2";
-
+var $lookupFilterDetails=[$fieldCombo,$conditionsCombo,$operandTypeCombo,$operandValue,$lookupAdvExpr];
 
 //login to the org
 _setSpeed($g_stepSpeed);
@@ -68,7 +68,9 @@ $sfm_act_sfmMapping.createMappingFromMapping($sourceObj, $targetObj,$sfmName, $m
 $sfm_act_SFM.cloneTDM016($sfmNameToBeCloned,$sfmName,$isCustom, $sfmTemplateSaveAsName, $sfmTemplate, $fieldName, $containerName);
 $sfm_act_SFM.partsNotMandatory();
 $sfm_act_SFM.partsMultiAdd("Case");
-$sfm_act_Transactions.createLookUp($fieldName[1],$lookupTempName,$fieldCombo, $conditionsCombo, $operandTypeCombo, $operandValue, $lookupAdvExpr, $sfmName,"Parts");
+
+$sfm_act_Transactions.createLookUp($fieldName[1], $lookupTempName, "", $lookupFilterDetails, $sfmName,"Parts");
+
 $sfm_act_SFM.setFormFill($fieldName[1], $sfmName,"Parts");
 $sfm_act_SFM.setFormFill($fieldName[1], $sfmName,"Labor");
 _click($sfm_pg_sfmDesigner.btn_quickSaveSFM);

@@ -1,0 +1,25 @@
+//Author: Anand Kakhandaki
+var $rs_formDesigner = _testcase("RS_formDesigner","Verify current record literals in lookup");
+$rs_formDesigner.start();
+
+	//Login to App and navigate to sfm transaction and designer page
+	$bo_act_login.login($g_url,$sfmlUsn,$sfmlPwd);
+	_wait(15000);
+	$bo_act_navigation.navigateToSfmTransactionDesigner();
+	_wait(15000,_isVisible($bo_pg_sfmTransactionAndDesigner.btn_newSFM));
+
+	//Create New SFM Transaction
+	_click($bo_pg_sfmTransactionAndDesigner.btn_newSFM);
+	_wait(25000,_isVisible($sfm_pg_screenDesigner.btn_propoties));
+
+	$sfmName=$bo_act_common.generateRandomName("SFMCheckList_");
+	$sfmType="to generate a Checklist/Survey type of Process";
+	$srcHeaderOb="Work Order";
+	_selectDomain($g_domain);
+	$sfm_act_Transactions.sfmPropertiesPage($sfmName, "", "", $sfmType, $srcHeaderObj, "", "", "");
+	
+	_click(_f("main").tab("Form Designer"));
+	_f("main").s_button("Add a section");
+	
+	
+$rs_formDesigner.end();
