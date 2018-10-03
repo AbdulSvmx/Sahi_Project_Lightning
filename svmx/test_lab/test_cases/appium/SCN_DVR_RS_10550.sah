@@ -1,0 +1,164 @@
+_writeFile("false", $appiumPath+$sahiIntermediatoryPath, true);
+var $scenario_10577 = _testcase("scenario_10550","DataValidation RULES ");
+$scenario_10577.start();
+var $wizardObject ="Work Order";
+var $wizardName="AutoRegression";
+var $wizardType="SFM";
+var $profile="auto group profile";
+var $handOver="false";
+var $wizardCriteria=null;
+var $sfmNameToBeCloned = "Manage Work Order Lines - Usage";
+var $sfmName = "AUTO_RS10550_DVR";
+var $isCustom = false;
+var $sfmTemplate = "SVMXSTD: Manage WO Usage Lines";
+var $sfmTemplateSaveAsName = $sfmName;
+var $containerName = ["Order Status","Order Status","Order Status","Order Status","Order Status","Order Status","Order Status","Order Status","Order Status"];
+var $fieldName = ["Problem Description","Is Entitlement Performed","Auto_Date1","Auto_Date2","Scheduled Date","Scheduled Date Time","No Of Times Assigned","Account","Partner Account"];
+
+var $wizardObject ="Work Order";
+
+
+//Variables for rule 1
+var $targetObject1="Work Order";
+//var $rulename =$bo_act_common.generateRandomName("10490RuleAll_");
+var $rulename1 ="AUTO_RS10550_Picklist";
+var $ruleDescription1 ="Billing Type cannot be Loan";
+var $fieldArray1 = ["Billing Type"];
+var $conditionArray1 = ["Equals"];
+var $operandArray1 =["Value"];
+var $valueArray1 =["Loan"];
+var $advExpr1= "1";
+var $messageType1 = "Error";
+
+
+var $targetObject2="Work Order";
+var $rulename2 ="AUTO_RS10550_Boolean";
+var $ruleDescription2 ="Is Entitlement Performed has to be true.";
+var $fieldArray2 = ["Is Entitlement Performed"];
+var $conditionArray2 = ["Equals"];
+var $operandArray2 =["Function"];
+var $valueArray2 =["false"];
+var $advExpr2= "1";
+var $messageType2 = "Confirmation";
+
+
+var $rulename3 ="AUTO_RS10550_TextArea";
+var $targetObject3="Work Order";
+var $ruleDescription3 ="Problem Description cannot be Null.";
+var $fieldArray3 = ["Problem Description"];
+var $conditionArray3 = ["Is Null"];
+var $operandArray3 = "";
+var $valueArray3 = ""; 
+var $advExpr3= "1";
+var $messageType3 = "Error";
+
+
+var $rulename4 ="AUTO_RS10550_Date";
+var $targetObject4="Work Order";
+var $ruleDescription4 ="Auto_Date1 cannot be greater than Auto_Date2";
+var $fieldArray4 = ["Auto_Date1",];
+var $conditionArray4 = ["Greater Than"];
+var $operandArray4 =["Field"];
+var $valueArray4 =["Auto_Date2"];
+var $advExpr4= "1";
+var $messageType4 = "Error";
+
+
+var $rulename5 ="AUTO_RS10550_DateTimeLiteral";
+var $targetObject5="Work Order";
+var $ruleDescription5 ="Scheduled_DateTime cannot be Today";
+var $fieldArray5 = ["Scheduled Date Time"];
+var $conditionArray5 = ["Equals"];
+var $operandArray5 =["Function"];
+var $valueArray5 =["Today"];
+var $advExpr5= "1";
+var $messageType5 = "Error";
+
+
+var $rulename6 ="AUTO_RS10550_NUMBER_ADVANCEDVR";
+var $targetObject6="Work Order";
+var $ruleDescription6 ="Number1 cannot be anything between 100 and 200. Also number 302 is not allowed";
+var $fieldArray6 = ["No Of Times Assigned","No Of Times Assigned","No Of Times Assigned"];
+var $conditionArray6 = ["Less Than","Greater Than", "Equals"];
+var $operandArray6 =["Value","Value","Value"];
+var $valueArray6 =["200","100","302"];
+var $advExpr6= "(1 AND 2) OR 3";
+var $messageType6 = "Error";
+
+var $rulename7 ="AUTO_RS10550_LookUp";
+var $targetObject7="Work Order";
+var $ruleDescription7 ="Account cannot be same as Partner Account";
+var $fieldArray7 = ["Account",];
+var $conditionArray7 = ["Equals"];
+var $operandArray7 =["Field"];
+var $valueArray7 =["Partner Account"];
+var $advExpr7= "1";
+var $messageType7 = "Error";
+
+var $rulename8 ="AUTO_RS10550_DateLiteral";
+var $targetObject8="Work Order";
+var $ruleDescription8 ="Scheduled Date cannot be Today or Yesterday or Tommorow";
+var $fieldArray8 = ["Scheduled Date","Scheduled Date","Scheduled Date"];
+var $conditionArray8 = ["Equal","Equal", "Equal"];
+var $operandArray8 =["Function","Function","Function"];
+var $valueArray8 =["Today","Yesterday","Tomorrow"];
+var $advExpr8= "1 OR 2 OR 3";
+var $messageType8 = "Error";
+
+var $targetObject9="Work Detail (Work Order)";
+var $rulename9 ="AUTO_RS_10550_parts1";
+var $ruleDescription9 ="Line Qty has to be more than 2 and WD cannot be Null";
+var $fieldArray9 = ["Line Qty","Work Description"];
+var $conditionArray9 = ["Less Than", "Is Null"];
+var $operandArray9 =["Value",  ""];
+var $valueArray9 =["2",  ""];
+var $advExpr9= "1 AND 2";
+var $messageType9 = "Error";
+
+var $targetObject10="Work Detail (Work Order)";
+var $rulename10 ="AUTO_RS_10550_parts2";
+var $ruleDescription10 ="Line Price is Less than 2000";
+var $fieldArray10 = ["Line Price Per Unit"];
+var $conditionArray10 = ["Less Than"];
+var $operandArray10 =["Value"];
+var $valueArray10 =["2000"];
+var $advExpr10= "1";
+var $messageType10 = "Confirmation";
+
+
+_setSpeed($g_stepSpeed);
+$bo_act_login.login($g_url, $appiumAdminUn, $appiumAdminPwd);
+$sfm_act_lightningConfig.switchToLightning(); 
+
+//clone tmd016
+$sfm_act_SFM.cloneTDM016($sfmNameToBeCloned,$sfmName,$isCustom, $sfmTemplateSaveAsName, $sfmTemplate, $fieldName, $containerName);
+
+_click(_f("main").uiftetextfield("Problem Description"));
+_click(_f("main").s_checkbox("Required"));
+_click(_f("main").s_button("Save[3]"));
+_click($sfm_pg_sfmDesigner.btn_quickSaveSFM);
+$sfm_pg_dvr.newRule($targetObject1, $rulename1, $ruleDescription1, $fieldArray1, $conditionArray1, $operandArray1, $valueArray1, $advExpr1, $messageType1);
+$sfm_pg_dvr.newRule($targetObject2, $rulename2, $ruleDescription2, $fieldArray2, $conditionArray2, $operandArray2, $valueArray2, $advExpr2, $messageType2);
+$sfm_pg_dvr.newRule($targetObject3, $rulename3, $ruleDescription3, $fieldArray3, $conditionArray3, $operandArray3, $valueArray3, $advExpr3, $messageType3);
+$sfm_pg_dvr.newRule($targetObject4, $rulename4, $ruleDescription4, $fieldArray4, $conditionArray4, $operandArray4, $valueArray4, $advExpr4, $messageType4);
+$sfm_pg_dvr.newRule($targetObject5, $rulename5, $ruleDescription5, $fieldArray5, $conditionArray5, $operandArray5, $valueArray5, $advExpr5, $messageType5);
+$sfm_pg_dvr.newRule($targetObject6, $rulename6, $ruleDescription6, $fieldArray6, $conditionArray6, $operandArray6, $valueArray6, $advExpr6, $messageType6);
+$sfm_pg_dvr.newRule($targetObject7, $rulename7, $ruleDescription7, $fieldArray7, $conditionArray7, $operandArray7, $valueArray7, $advExpr7, $messageType7);
+$sfm_pg_dvr.newRule($targetObject8, $rulename8, $ruleDescription8, $fieldArray8, $conditionArray8, $operandArray8, $valueArray8, $advExpr8, $messageType8);
+$sfm_pg_dvr.newRule($targetObject9, $rulename9, $ruleDescription9, $fieldArray9, $conditionArray9, $operandArray9, $valueArray9, $advExpr9, $messageType9);
+$sfm_pg_dvr.newRule($targetObject10, $rulename10, $ruleDescription10, $fieldArray10, $conditionArray10, $operandArray10, $valueArray10, $advExpr10, $messageType10);
+
+_click($sfm_pg_sfmDesigner.btn_quickSaveSFM);
+_click($sfm_pg_sfmDesigner.btn_saveSFM); 
+//$sfm_act_SFM.partsNotMandatory();
+
+_wait(3000,_isVisible($sfm_pg_sfmDesigner.lnk_home));
+
+//add the process to wizard 
+$sfm_act_wizards.addToWizard($wizardObject,$wizardName, $wizardType,$sfmName,$handOver,$profile,$wizardCriteria);
+
+_writeFile("true", $appiumPath+$sahiIntermediatoryPath, true);
+
+
+
+

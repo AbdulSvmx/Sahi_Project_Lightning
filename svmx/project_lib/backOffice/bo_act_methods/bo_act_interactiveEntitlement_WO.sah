@@ -25,9 +25,7 @@ var $bo_act_interactiveEntitlement_WO = new function bo_act_interactiveEntitleme
 
 	};
 	
-	this.performInteractiveEntitlementWO_IncidentNotCovered = function($WO_Number) { // Modified for Lightning - Meghana. Please dont change it
-	
-		$bo_act_workOrders.checkEntitlement($WO_Number);
+	this.performInteractiveEntitlementWO_IncidentNotCovered = function() { // Modified for Lightning - Meghana. Please dont change it
 		_selectDomain("/svmx/");
 		for (var $i = 0; $i < 25; $i++) {
 			if (_isVisible($bo_pg_interactiveEntitlement_CaseAndWO.btn_checkEntitlement)) {
@@ -35,22 +33,20 @@ var $bo_act_interactiveEntitlement_WO = new function bo_act_interactiveEntitleme
 			}
 
 			else {
+				_selectDomain();
 				_call(top.location.reload());
-				_wait(10000, _isVisible($bo_pg_interactiveEntitlement_CaseAndWO.btn_checkEntitlement));
-
+				_selectDomain("/svmx/");
+				//_wait(60000, _isVisible($bo_pg_interactiveEntitlement_CaseAndWO.btn_checkEntitlement));
 			}
 			
 		_selectDomain();
 		}
-
+		_selectDomain("/svmx/");
 		_click($bo_pg_interactiveEntitlement_CaseAndWO.btn_checkEntitlement);
-		
-		this.clickCheckEntitlement();
 		_wait(10000, _isVisible($bo_pg_interactiveEntitlement_CaseAndWO.chk_IncidentNotCovered));
 		_click($bo_pg_interactiveEntitlement_CaseAndWO.chk_IncidentNotCovered);
 		_click($bo_pg_interactiveEntitlement_CaseAndWO.btn_saveEntitlementPSLine);
 		_selectDomain();
-		_wait(15000, _isVisible($bo_pg_workOrders.btn_details));
 	};
 
 	/**
@@ -82,6 +78,84 @@ var $bo_act_interactiveEntitlement_WO = new function bo_act_interactiveEntitleme
 		_wait(15000, _isVisible($bo_pg_workOrders.txt_workOrderDetails));
 		
 	};
+	/**
+	 * Perform interactive Entitlement using the SCON with account
+	 */
+	this.performInteractiveEntitlementWOSCON_Account = function($WO_Number, $sconName) {
+
+		_selectDomain("/svmx/");
+		var $url;
+		for (var $i = 0; $i < 25; $i++) {
+
+			if (_isVisible($bo_pg_interactiveEntitlement_CaseAndWO.btn_checkEntitlement)) {
+				break;
+			}
+
+			else {
+				_selectDomain();
+				_call(top.location.reload());
+				_selectDomain("/svmx/");
+				_wait(10000, _isVisible($bo_pg_interactiveEntitlement_CaseAndWO.btn_checkEntitlement));
+			}
+			
+		}
+		
+		_click($bo_pg_interactiveEntitlement_CaseAndWO.btn_checkEntitlement);
+		this.clickCheckEntitlement();
+		_setStrictVisibilityCheck(true);
+		// To move to Settings and Set it to Account and Remove Match Contact
+		_click($bo_pg_interactiveEntitlement_CaseAndWO.btn_settings);
+		_click($bo_pg_interactiveEntitlement_CaseAndWO.chk_settingMatchContact_CasePage);
+		_click($bo_pg_interactiveEntitlement_CaseAndWO.radio_account);
+		_click($bo_pg_interactiveEntitlement_CaseAndWO.btn_EntitlementTabCase);
+		_click($bo_pg_interactiveEntitlement_CaseAndWO.btn_checkEntitlement_WO);
+		_wait(10000);
+		$bo_pg_interactiveEntitlement_CaseAndWO.selectSConOnCheckEntmPage($sconName);
+		_click($bo_pg_interactiveEntitlement_CaseAndWO.btn_saveEntitlementPSLine);
+		_selectDomain();
+		_setStrictVisibilityCheck();
+		
+	};
+	
+	
+	// Create a Warranty with no Account and no Contact
+	 this.performInteractiveEntitlement_NoAccountNoContact = function($WO_Number, $warrantyName){
+		 
+			_selectDomain("/svmx/");
+			var $url;
+			for (var $i = 0; $i < 25; $i++) {
+
+				if (_isVisible($bo_pg_interactiveEntitlement_CaseAndWO.btn_checkEntitlement)) {
+					break;
+				}
+
+				else {
+					_selectDomain();
+					_call(top.location.reload());
+					_selectDomain("/svmx/");
+					_wait(10000, _isVisible($bo_pg_interactiveEntitlement_CaseAndWO.btn_checkEntitlement));
+				}
+				
+			}
+			
+			_click($bo_pg_interactiveEntitlement_CaseAndWO.btn_checkEntitlement);
+			this.clickCheckEntitlement();
+			_setStrictVisibilityCheck(true);
+			// To move to Settings and Set it to Account and Remove Match Contact
+			_click($bo_pg_interactiveEntitlement_CaseAndWO.btn_settings);
+			_click($bo_pg_interactiveEntitlement_CaseAndWO.chk_settingMatchContact_CasePage);
+			_click($bo_pg_interactiveEntitlement_CaseAndWO.chk_settingMatchAccounts_CasePage);
+			_click($bo_pg_interactiveEntitlement_CaseAndWO.btn_EntitlementTabCase);
+			_click($bo_pg_interactiveEntitlement_CaseAndWO.btn_checkEntitlement_WO);
+			_wait(10000);
+			_domain("/svmx/")._click(_checkbox("/EVER_CaseEntitlement/", _near((_link($warrantyName)))));
+			_click($bo_pg_interactiveEntitlement_CaseAndWO.btn_saveEntitlementPSLine);
+			_selectDomain();
+			_setStrictVisibilityCheck();
+		 
+	 };
+	
+	
 
 	/**
 	 * Perform Interactive Entitlement WO Using Warranty Terms
@@ -90,6 +164,7 @@ var $bo_act_interactiveEntitlement_WO = new function bo_act_interactiveEntitleme
 	this.performInteractiveEntitlementWO_UsingWarranty = function($WO_Number, $warrantyName) {
 
 		$bo_act_workOrders.checkEntitlement($WO_Number);
+		_selectDomain("/svmx/");
 		for (var $i = 0; $i < 25; $i++) {
 			if (_isVisible($bo_pg_interactiveEntitlement_CaseAndWO.btn_checkEntitlement)) {
 				break;
@@ -100,14 +175,22 @@ var $bo_act_interactiveEntitlement_WO = new function bo_act_interactiveEntitleme
 				_wait(10000, _isVisible($bo_pg_interactiveEntitlement_CaseAndWO.btn_checkEntitlement));
 
 			}
+		
 		}
 		_click($bo_pg_interactiveEntitlement_CaseAndWO.btn_checkEntitlement);
-		this.clickCheckEntitlement();
-
-		$bo_pg_interactiveEntitlement_CaseAndWO.selectWarrantyOnCheckEntmPage($warrantyName);
+		//this.clickCheckEntitlement();
+		_wait(1000);
+		_domain("/svmx/")._click(_checkbox("/EVER_CaseEntitlement/", _near((_link($warrantyName)))));
+		if(_isChecked(_checkbox("/EVER_CaseEntitlement/", _near(_label("Incident Not Covered"))))==true)
+		{
+			_click(_checkbox("/EVER_CaseEntitlement/", _near(_label("Incident Not Covered"))));
+		}
 		_click($bo_pg_interactiveEntitlement_CaseAndWO.btn_saveEntitlementPSLine);
-		_wait(15000, _isVisible($bo_pg_workOrders.txt_workOrderDetails));
 
+		//_wait(15000, _isVisible($bo_pg_workOrders.txt_workOrderDetails));
+		_selectDomain();
+		_wait(20000);
+		_call(top.location.reload());
 	};
 
 	/**
@@ -136,7 +219,7 @@ var $bo_act_interactiveEntitlement_WO = new function bo_act_interactiveEntitleme
 		_click($bo_pg_interactiveEntitlement_CaseAndWO.btn_applySelection);
 		_click($bo_pg_interactiveEntitlement_CaseAndWO.btn_saveEntitlementPSLine);
 		_click($bo_pg_interactiveEntitlement_CaseAndWO.btn_cancelEntitlementPSLinePage);
-
+		_selectDomain();
 		_wait(15000, _isVisible($bo_pg_workOrders.txt_workOrderDetails));
 
 	};

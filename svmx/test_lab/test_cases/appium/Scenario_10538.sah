@@ -1,0 +1,133 @@
+//Meghana Rao
+
+/*
+ * PRE Requisites to be run in the org before running other scripts - LIGHTNING CODE
+ */
+_writeFile("false", $appiumPath+$sahiIntermediatoryPath, true);
+//Pre - Condition Test Data
+function GetFormattedDate() {
+    var todayTime = new Date();
+    var month = todayTime .getMonth();
+    var day = todayTime .getDate();
+    var year = todayTime .getFullYear();
+    return year + "-" + month + "-" + day;
+}
+var $currentdate = GetFormattedDate();
+var $productFamily = ["--None--","GeneralSolution","AdvSolution","Accessory", "Storage"];
+var $productCode = "";
+var $exchangeType = ["--None--","Advance Exchange","Return Exchange"];
+var $unitOfTimeForCoverage = ["--None--","Days","Weeks","Months","Years"];
+var $coverageEffectiveFrom = ["--None--","Date Installed","Date Ordered","Date Shipped","Last Activity Date","Last Date Shipped","Warranty Start Date","Warranty End Date"];
+var $materialPercentCovered = 10;
+var $laborPercentCovered = 55;
+var $expensesPercentCovered = 50;
+var $durationOfCoverage = 5;
+var $seperator = "/";
+var $pre_requisite= _testcase("scenario_10538","Verify Get Price calculation online mode- Warranty");
+
+var $restAccName="A10538_Auto";
+var $restcontactfirstname="C10538_";
+var $restcontactlastname="Auto";
+var $restproductname=$bo_act_common.generateRandomName("P10538");
+var $restlocationname="L10538_Auto";
+var $restIBName = $bo_act_common.generateRandomName("IB10538");
+
+$pre_requisite.start();
+_setSpeed($g_stepSpeed);
+$bo_act_login.login($g_url, $appiumAdminUn, $appiumAdminPwd);
+$sfm_act_lightningConfig.switchToLightning();
+/**
+* Create Account, Contact, Location, Product and Installed Product - API
+*/
+$objName1= "Account";
+var $restName = $bo_act_common.generateRandomName("");
+$obJson = "{\"Name\":\"Auto"+$restAccName+"\"}"; 
+$columnName = "Name";
+$filter="id";
+//create an account
+var $accountID=$sfm_act_restApiMethods.postRestApi($appiumAdminUn,$appiumAdminPwd,$appiumclient_id,$appiumclient_secret,$appiumorginstance,$objName1,$obJson,"POST");
+//get the caseNumber
+_log($accountID);
+$accountName =$sfm_act_restApiMethods.getRestApi($appiumAdminUn,$appiumAdminPwd,$appiumclient_id,$appiumclient_secret,$appiumorginstance,"GET", $objName1, $columnName, $filter, $accountID);
+_log($accountName);
+
+
+// Create a Contact 
+
+$objName2= "Contact";
+$obJson = "{\"AccountId\":\""+$accountID+"\",\"FirstName\":\""+$restcontactfirstname+"\",\"LastName\":\""+$restcontactlastname+"\"}";
+$columnName = "Name";
+$filter="id";
+//create  case with above created account and other parameters
+$contactid=$sfm_act_restApiMethods.postRestApi($appiumAdminUn,$appiumAdminPwd,$appiumclient_id,$appiumclient_secret,$appiumorginstance,$objName2,$obJson,"POST");
+//get the caseNumber
+$contactname =$sfm_act_restApiMethods.getRestApi($appiumAdminUn,$appiumAdminPwd,$appiumclient_id,$appiumclient_secret,$appiumorginstance,"GET", $objName2, $columnName, $filter, $contactid);
+_log($contactname);
+
+
+// Create Product
+
+$objName3= "Product2";
+$obJson = "{\"Name\":\""+$restproductname+"\",\"IsActive\":\"true\" }";
+$columnName = "Name";
+$filter="id";
+//create  case with above created account and other parameters
+$productid=$sfm_act_restApiMethods.postRestApi($appiumAdminUn,$appiumAdminPwd,$appiumclient_id,$appiumclient_secret,$appiumorginstance,$objName3,$obJson,"POST");
+//get the Product
+$Productname =$sfm_act_restApiMethods.getRestApi($appiumAdminUn,$appiumAdminPwd,$appiumclient_id,$appiumclient_secret,$appiumorginstance,"GET", $objName3, $columnName, $filter, $productid);
+_log($Productname);
+
+//Create Installed Product
+
+$objName4= "SVMXC__Installed_Product__c";
+$obJson = "{\"Name\":\""+$restIBName+"\",\"SVMXC__Product__c\":\""+$productid+"\", \"SVMXC__Status__c\":\"Installed\", \"SVMXC__Company__c\":\""+$accountID+"\", \"SVMXC__Contact__c\":\""+$contactid+"\",  \"SVMXC__Date_Installed__c\":\""+$currentdate+"\"}";
+$columnName = "Name";
+$filter="id";
+//create  case with above created account and other parameters
+$IbID=$sfm_act_restApiMethods.postRestApi($appiumAdminUn,$appiumAdminPwd,$appiumclient_id,$appiumclient_secret,$appiumorginstance,$objName4,$obJson,"POST");
+//get the Installed Product
+$IBName =$sfm_act_restApiMethods.getRestApi($appiumAdminUn,$appiumAdminPwd,$appiumclient_id,$appiumclient_secret,$appiumorginstance,"GET", $objName4, $columnName, $filter, $IbID);
+_log($IBName);
+
+//Edit a Service Proce Book
+$bo_act_servicePricebooks.editStandardServicePricebooks_noproduct("Standard Service Price Book", "Per Hour", "Installation","1000");
+
+$bo_act_servicePricebooks.editStandardServicePricebooks_noproduc1("Standard Service Price Book", "Flat Rate", "Repair","2000");
+
+// Add Standard Price to the Product
+$bo_act_navigation.navigateToCreatedRecordUsingGlobalSearch($Productname);
+var $standardPriceValue = 10000;
+$bo_act_products.addStandardPriceForProduct($Productname, $standardPriceValue);
+
+
+// To create Warranty Terms
+var $warrantyName = $bo_act_warrantyTerms.createWarrantyTerms($exchangeType[0],"30","1","Years","20","1","Years","10","1","Years",$coverageEffectiveFrom[1]);
+$bo_act_warrantyTerms.createApplicableProducts($restproductname, $warrantyName); //Create Applicable product for warranty Terms
+$bo_act_navigation.navigateToCreatedRecordUsingGlobalSearch($IBName); 	//Navigate to Installed Product Page using global search
+$bo_act_warrantyTerms.createWarranty($warrantyName);
+
+
+//Create Work Order and then Check Entitltment For it
+$objNameWO= "SVMXC__Service_Order__c";
+var $restName = $bo_act_common.generateRandomName("");
+$obJsonWO = "{\"SVMXC__Component__c\":\""+$IbID+"\", \"SVMXC__Company__c\":\""+$accountID+"\", \"SVMXC__Contact__c\":\""+$contactid+"\"}"; 
+$columnName = "Name";
+$filter="id";
+//create an account
+var $WoID=$sfm_act_restApiMethods.postRestApi($appiumAdminUn,$appiumAdminPwd,$appiumclient_id,$appiumclient_secret,$appiumorginstance,$objNameWO,$obJsonWO,"POST");
+//get the Work Order Name
+$WOName =$sfm_act_restApiMethods.getRestApi($appiumAdminUn,$appiumAdminPwd,$appiumclient_id,$appiumclient_secret,$appiumorginstance,"GET", $objNameWO, $columnName, $filter, $WoID);
+
+_log($WOName);
+_wait(30000);
+_call(top.location.reload());
+$bo_act_navigation.navigateToCreatedRecordUsingGlobalSearchWO($WOName);
+$bo_act_interactiveEntitlement_WO.performInteractiveEntitlementWO_UsingWarranty($WOName,$warrantyName);
+// To write the WorkOrder Number into the Test Data for Appium Side to pick it up
+$excel.insertUnderColumn("/auto/SVMX_Catalyst/fsaautomation/resources/TestData.xlsx", "TestData", "Data1",$WOName , "34");
+$excel.insertUnderColumn("/auto/SVMX_Catalyst/fsaautomation/resources/TestData.xlsx", "TestData", "Data2",$Productname,"34");
+$excel.insertUnderColumn("/auto/SVMX_Catalyst/fsaautomation/resources/TestData.xlsx", "TestData", "Data3",$accountName , "34");
+$excel.insertUnderColumn("/auto/SVMX_Catalyst/fsaautomation/resources/TestData.xlsx", "TestData", "Data4",$IBName , "34");
+_writeFile("true", $appiumPath+$sahiIntermediatoryPath, true);
+
+$pre_requisite.end();

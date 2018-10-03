@@ -35,7 +35,7 @@ var $sfm_act_SFM = new function sfm_act_SFM() {
 		}
 	};
 this.dvrScenario5 = function($sfmNameToBeCloned, $sfmName, $isCustom,
-			 $sfmTemplateSaveAsName,$sfmTemplate, $fieldName, $containerName) 
+			 $sfmTemplateSaveAsName,$sfmTemplate, $fieldName, $containerName,$bProcessStatus) 
 			 {
 		$bo_act_navigation.navigateToSfmTransactionDesigner();
 		_click($bo_pg_sfmTransactionAndDesigner.btn_yourCustomSfmTransactions);
@@ -47,15 +47,17 @@ this.dvrScenario5 = function($sfmNameToBeCloned, $sfmName, $isCustom,
 //		
 		
 		if (_isVisible(_f("main").s_checkbox("/chk/i").leftOf(_f("main").s_label($sfmName), 10, 10))) {
-			_log("Process exists successfully")
+			_log("Process exists successfully");
+			$bProcessStatus = false;
 			//_click(_f("main").s_checkbox("/chk/i").leftOf(_f("main").s_label($sfmNameToBeCloned), 10, 10));
 			
 		} else if (_isVisible(_f("main").s_checkbox(2).leftOf(_f("main").s_label($sfmName), 10, 10))) {
-			_log("Process exists successfully")
-			
+			_log("Process does not exists ");
+			$bProcessStatus = true;
 			
 			} else{
-				
+				_log("Process does not exists ");
+				$bProcessStatus = true;
 				$bo_act_navigation.navigateToSfmTransactionDesigner();
 //				_setSpeed($g_stepSpeed);
 				_wait(10000);
@@ -112,9 +114,9 @@ this.dvrScenario5 = function($sfmNameToBeCloned, $sfmName, $isCustom,
 		
 		_setStrictVisibilityCheck(false);
 		
+		return $bProcessStatus;
 	};
 	
-
 	
 	/**
 	 * Based on the number of items passed in array(ContainerName), fields gets added to either header or child
@@ -159,6 +161,7 @@ this.dvrScenario5 = function($sfmNameToBeCloned, $sfmName, $isCustom,
 		}
 		_click($bo_pg_sfmTransactionAndDesigner.btn_quickSave);
 		_wait(3000, _isVisible(_f("main").label("Page saved")));
+		_click($bo_pg_sfmTransactionAndDesigner.btn_quickSave1);
 	};
 
 	this.selectSFM = function($sfmName, $isCustom) {
@@ -641,4 +644,33 @@ return $result;
 			_log("Fail");
 		}
 	};
+	
+	this.checkprocessexists=function($sfmName, $isCustom) 
+			 {
+		$bo_act_navigation.navigateToSfmTransactionDesigner();
+		_click($bo_pg_sfmTransactionAndDesigner.btn_yourCustomSfmTransactions);
+		_setValue($bo_pg_sfmTransactionAndDesigner.lbl_searchSFM, $sfmName);
+		_wait(10000);
+		
+//		
+		
+		if (_isVisible(_f("main").s_checkbox("/chk/i").leftOf(_f("main").s_label($sfmName), 10, 10))) {
+			_log("Process exists successfully")
+			return true;
+			
+		} else if (_isVisible(_f("main").s_checkbox(2).leftOf(_f("main").s_label($sfmName), 10, 10))) {
+			_log("Process exists successfully")
+			return true;
+		}
+		else if (_isVisible(_f("main").s_checkbox(2).leftOf(_f("main").s_label($sfmName+"[1]"), 10, 10))) {
+			_log("Process exists successfully");
+			return true;
+		}
+		else{
+			return false;
+		}
+			
+		};
+			
+	
 };

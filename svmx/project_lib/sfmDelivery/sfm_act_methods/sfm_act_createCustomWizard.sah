@@ -256,7 +256,7 @@ var $sfm_act_createCustomWizard = new function sfm_act_createCustomWizard() {
 
 	this.clickWizardBtn = function($sfmName) {
 		_click(_span($sfmName));
-		_selectDomain($domainName);
+		_selectDomain($g_domain);
 		_wait(25000,_isVisible(_div($sfmName)));
 
 	};
@@ -497,7 +497,7 @@ var $sfm_act_createCustomWizard = new function sfm_act_createCustomWizard() {
 	};
 
 	this.verify10429 = function(){
-		_selectDomain($domainName);
+		_selectDomain($g_domain);
 		_setStrictVisibilityCheck(true);
 		$readOnlyAttribute = "";
 		$expectedErrorMsg = "Required field is blank: Account";
@@ -527,11 +527,11 @@ var $sfm_act_createCustomWizard = new function sfm_act_createCustomWizard() {
 		_click($sfm_pg_wizardWindow.link_addWorkDetail);
 		_click($sfm_pg_wizardWindow.btn_searchProduct);
 		_click($sfm_pg_wizardWindow.chk_multiSelect);
-		var $divs=  _count("_div","/grid-cell-inner/",_under(_parentNode(_span("/Name/"), "DIV", 4)));
+		var $divs=  _count("_div","/grid-cell-inner/",_under(_parentNode(_span("/Name/",_near(_div("Product search"))), "DIV", 4)));
 		_log("No of Product = "+$divs);
 		_click($sfm_pg_wizardWindow.btn_addProduct);
 		
-		var $divs1= _count("_div","/grid-cell-inner/",_in(_div("/gridview/")));
+		var $divs1= _count("_div","/grid-cell-inner/",_in(_div("/grid-view/")));
 		_log("No of parts = "+$divs1);
 		if($divs==$divs1){
 			_log("Pass ::: Selected parts are added");
@@ -854,6 +854,7 @@ var $sfm_act_createCustomWizard = new function sfm_act_createCustomWizard() {
 		_click($sfm_pg_wo.btn_wo_edit_save);
 		_wait(10000,_isVisible($sfm_pg_wo.label_wo)); 
 		$woName= _getText($sfm_pg_wo.label_wo);
+		_log($woName);
 		return $woName;
 		
 	};

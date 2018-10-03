@@ -32,7 +32,7 @@ var $myDomain = "/lightning/";
 //$bo_act_login.login($g_url,$bac_un,$bac_pwd);
 $bo_act_login.login($g_url,$sfmlUsn,$sfmlPwd);
 $sfm_act_lightningConfig.switchToLightning();
-
+_wait(15000);
 //Navigate to Object manager and navigate to work detail object.
 $sfm_act_lightningConfig.navigateToObjectsInLightning($object_name);
 _selectWindow("/"+$object_name+"/");
@@ -98,7 +98,7 @@ for($z = 0;$z<$ctrl_unique_values.length;$z++){
 	_click(_link($wo_number));
 	$sfm_act_createCustomWizard.clickWizardlinks($processName);
 	_wait(6000);
-	_selectDomain($domainName);
+	_selectDomain($g_domain);
 	_click(_span($lineType));
 	_click($sfm_pg_wo.link_arrowToEditChildLine);
 	_click($sfm_pg_wo.link_editChildLineItem);

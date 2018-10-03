@@ -205,7 +205,7 @@ this.addPermissionToCustomObject = function($searchFor,$profileName,$objectName)
 this.deleteStepFromWizard = function($wizardObject,$wizardName,$processName){
 	//deletes a given step from a given wizard
 	$bo_act_navigation.navigateToSvmxSetup();
-	_selectDomain($domainName);
+	_selectDomain($g_domain);
 	_click(_div("Service Flow Manager"));
 	_click(_div("SFM Wizards"));
 	_setSelected($sfm_pg_wizards.selectObject,$wizardObject);
@@ -316,7 +316,7 @@ this.openExistingProcess = function($processName){
 this.deletePageLayout = function($pageLayoutName){
 	//Deletes the custom page layout created as part of test case cleanup
 	//Author:Janaki
-	_selectDomain($domainName);
+	_selectDomain($g_domain);
 	_click($bo_pg_sfmTransactionAndDesigner.btn_screenDesigner);
 	var $actualPgLayout = _getText($bo_pg_sfmTransactionAndDesigner.txt_sfmSavePageLayoutAs);
 	if($actualPgLayout === $pageLayoutName){
@@ -331,7 +331,7 @@ this.deletePageLayout = function($pageLayoutName){
 this.deleteMappingFromProcess = function($containerName,$mappingName){
 	//Deletes mapping created as part of test case cleanup
 	//Author: Janaki
-	_selectDomain($domainName);
+	_selectDomain($g_domain);
 	_click($bo_pg_sfmTransactionAndDesigner.btn_qualifyingCriteriaAndFieldMapping);
 	_click($sfm_pg_sfmMapping.btn_mappingTab);
 	if($containerName === "Work Order" && _isVisible($sfm_pg_sfmMapping.tab_valueMapForExisting)){
@@ -359,13 +359,13 @@ this.deleteSfmProcess = function($processName){
 	}
 	_wait(8000);
 };
-this.editWorkOrder = function($textLabels,$textValues,$pickListLabels,$pickListValues,$textAreaLabels,$textAreaValues,$checkBoxLabels,$checkBoxValues,$dateTimeLabels,$dateTimeDateValues,$timeValues,$emailLabels,$emailValues,$multiPickLabels,$multiPickValues,$urlLabels,$urlValues){
+this.editWorkOrder = function($textLabels,$textValues,$pickListLabels,$pickListValues,$textAreaLabels,$textAreaValues,$checkBoxLabels,$checkBoxValues,$dateTimeLabels,$dateTimeDateValues,$timeValues,$emailLabels,$emailValues,$multiPickLabels,$multiPickValues,$urlLabels,$urlValues,$telephoneLabels,$telephoneValues){
 	//This function edits work order in Lightning mode
 	//Author : Janaki
 	//Text values and Date values can be combined into a single array
 	
 	//Click any of the pencil icons to open edit mode
-	//_focus($sfm_pg_wo.btn_pencilToEditWo);
+	
 	_setStrictVisibilityCheck(true);
 	_wait(6000);
 	_call(_span("Clock Paused Forever").scrollIntoView());
@@ -419,18 +419,48 @@ this.editWorkOrder = function($textLabels,$textValues,$pickListLabels,$pickListV
 	}
    //Fill multi picklists
 	if($multiPickLabels.length > 0){
-		for($i=0;$<$multiPickLabels.length;$i++){
-			//This call resets the multi select picklist.
-			_call(_select(0,_near(_label($multiPickLabels[$i]))).selectedIndex=-1);
-			_setSelected(_select(0,_near(_label($multiPickLabels[$i]))),[$multiPickValues[$i]],true);
+		var $uniqueMulti = [];
+		//find out the unique list of multi picklists
+		for($i=0;$i<$multiPickLabels.length;$i++){
+			if($uniqueMulti.indexOf($multiPickLabels[$i]) == -1){
+				$uniqueMulti.push($multiPickLabels[$i]);
+			}
 		}
+		_log($uniqueMulti);
+		var $j=0;var $p=0;
+		for($i=0;$i<$uniqueMulti.length;$i++){
+			var $actualList = [];
+			var $currentMultiValues = [];
+			for($j=0;$j<$multiPickValues.length;$j++){
+				if($multiPickLabels[$j] == $uniqueMulti[$i]){
+						$currentMultiValues.push($multiPickValues[$j]);
+					
+				}
+			}
+			_log($currentMultiValues);
+			for($p=0;$p<$currentMultiValues.length;$p++){
+				_click(_span($currentMultiValues[$p],_near(_div($uniqueMulti[$i]))));
+				_keyDown(_span($currentMultiValues[$p]),39,"CTRL");
+			}
+		
+			
+			_setStrictVisibilityCheck(true);
 	}
+}
 	//Fill URL fields
 	if($urlLabels.length > 0){
-		for($i=0;$<$urlLabels.length;$i++){
+		for($i=0;$i<$urlLabels.length;$i++){
 			_setValue(_urlbox($urlLabels[$i]),$urlValues[$i]);
 		}
 	}
+	//Fill Telephone number values.
+if($telephoneLabels.length > 0){
+		
+	for($i=0;$i<$telephoneLabels.length;$i++){
+		_setValue(_telephonebox($telephoneLabels[$i]),$telephoneValues[$i]);
+	}
+}
+	
 	
 //Saving everything together
 _click($sfm_pg_wo.btn_saveEditWO);
@@ -606,7 +636,7 @@ this.verifyValues = function($textLabels,$textValues,$pickListLabels,$pickListVa
 	}
 		_log($currentMultiValues);
 		_setStrictVisibilityCheck(true);
-		var $collect = _collect("_listItem", "/.*/", _in(_list("/selected-list/",_rightOf(_div("/"+$uniqueMulti[$i]+"/")))));
+		var $collect = _collect("_listItem", "/.*/", _in(_list("/selected-list/",_near(_div("/"+$uniqueMulti[$i]+"/")))));
 		var $p = 0;var $actualList = [];
 		for($p=0;$p<$collect.length;$p++){
 			$actualList.push(_getText($collect[$p]));
@@ -651,8 +681,8 @@ if($telephoneLabels.length > 0){
 		
 		for($i=0;$i<$telephoneLabels.length;$i++){
 			$actualList.push(_getText(_telephonebox($telephoneLabels[$i])));
-			_log("Expected date value for "+$telephoneLabels[$i]+":"+$telephoneValues[$i]);
-			_log("Actual date value for"+$telephoneLabels[$i]+":"+$actualList[$i]);
+			_log("Expected value for "+$telephoneLabels[$i]+":"+$telephoneValues[$i]);
+			_log("Actual value for"+$telephoneLabels[$i]+":"+$actualList[$i]);
 		}
 		if(_areEqual($telephoneValues,$actualList)){
 			_log("Telephone values match");

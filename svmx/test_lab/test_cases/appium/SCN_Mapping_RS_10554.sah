@@ -6,8 +6,8 @@ RS_10554_mapping.start();
 var $sfmNameToBeCloned = "Create Work Order from Installed Product";
 var $sfmName = "RS_10554_field_mapping";
 var $isCustom = true;
-var $objName="Work Order"
-var $sorceobj="Installed Product"
+var $objName="Work Order";
+var $sorceobj="Installed Product";
 var $sfmTemplate = "--None--";
 var $sfmTemplateSaveAsName = $bo_act_common.generateRandomName("RS_10554_Temp");
 var $headersToAdd = ["Account","Product","Scheduled Date Time","Scheduled Date","Component"];
@@ -17,12 +17,10 @@ var $fieldName=["Part","Date Required"];
 var $containerName="Work Order";
 $sourceObj= "Installed Product";
 $targetObj = "Work Order";
-//$mappingField = ["Component","Order Type","Product","Scheduled Date","Scheduled Date Time"];
-//$mappingValue = ["Record ID","Field Service","Product","Date Installed","Last Modified Date"];
 
 var $mapName=$bo_act_common.generateRandomName("RS_10554_WO");
 var $mapName_chid=$bo_act_common.generateRandomName("RS_10554_Part");
-var $part="Parts"
+var $part="Parts";
 	var $labor=null;
 var $wizardObject="Installed Product";
 var $wizardName="Automation IB Wizard";
@@ -39,10 +37,18 @@ $mappingValue = ["Account","Record ID","Product","Date Installed","Last Modified
 $mappingField_child = ["Date Required","Part"];
 $mappingValue_child = ["Date Installed","Product"];
 var $containerName="Work Order";
-var $containerName_child="Parts"
+var $containerName_child="Parts";
 var $textLabels=[];
 var $textValues=[];
-$bo_act_navigation.navigateToSfmTransactionDesigner();
+
+var $value=true;
+ 
+$value =$sfm_act_SFM.checkprocessexists($sfmName,$isCustom);//to check process exists or not
+_log($value);
+//if the process value is false (process not exists) then create the process
+if($value==false){
+
+	$bo_act_navigation.navigateToSfmTransactionDesigner();
 _wait(10000);
 _click(_f("main").s_button("New SFM Transaction"));
 _setValue($bo_pg_sfmTransactionAndDesigner.txt_name, $sfmName);
@@ -66,23 +72,22 @@ $sfm_act_Transactions.addChildFields($childObj,$fieldName);
  _click(_f("main").s_button("Save[3]"));
 _wait(5000);
 
-
-
-
 _click(_f("main").tab("Qualifying Criteria and Field Mappings"));
 
 $bo_act_mappings.createMapping($containerName_child,$mappingField_child,$mappingValue_child,$textLabels,$textValues,$mapName_chid);
 _wait(5000);
 
-_selectDomain($domainName);
+_selectDomain($g_domain);
 _click(_f("main").tab("Source Object Update"));
 _click(_f("main").tab("Qualifying Criteria and Field Mappings"));
 $bo_act_mappings.createMapping($containerName,$mappingField,$mappingValue,$textLabels,$textValues,$mapName);
 _wait(5000);
-_selectDomain($domainName);
+_selectDomain($g_domain);
 _click(_f("main").s_button("Save & Close"));
 
 $sfm_act_wizards.addToWizard($wizardObject,$wizardName, $wizardType,$sfmName,$handOver,$profile,$wizardCriteria);  
+
+}
 
 //_writeFile("true", $appiumPath+$sahiIntermediatoryPath, true);
 

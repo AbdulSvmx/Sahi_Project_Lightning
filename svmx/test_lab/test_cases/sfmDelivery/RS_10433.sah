@@ -34,7 +34,7 @@ var $mapName = $processName + "mp";
 //Login and switch to lightning
 $bo_act_login.login($g_url,$sfmlUsn,$sfmlPwd);
 $sfm_act_lightningConfig.switchToLightning();
-
+_wait(15000);
 //Navigate to servicemax setup and setup required process.
 //Clone standard process and add the dependent picklist in the screen designer
 _setSpeed(3000);
@@ -57,7 +57,7 @@ $bo_act_navigation.navigateToCreatedRecordUsingGlobalSearch($wo_number);
 //Launch the process in SFM Delivery
 $sfm_act_createCustomWizard.clickWizardlinks($processName);
 _wait(3000);
-_selectDomain($domainName);
+_selectDomain($g_domain);
 
 //Enter values for Booked Appointment Slot, Previous Scheduled Date Time and Dispatch Priority
 $sfm_act_SFM.fillHeaderTextValues($inputTextLabels,$inputTextValues);
