@@ -930,7 +930,6 @@ var $sfm_act_Transactions = new function sfm_act_Transactions() {
 				}
 				_log("$comboField: "+$comboField.length);
 				return [$comboField,$comboConditions,$comboInput];
-			};
-		
+			};	
 		
 };
