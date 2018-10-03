@@ -19,25 +19,140 @@ $rs_formDesigner.start();
 	$sfm_act_Transactions.sfmPropertiesPage($sfmName, "", "", $sfmType, $srcHeaderObj, "", "", "");
 	
 	//create new Section
-	_click(_f("main").tab("Form Designer"));
-	_f("main").s_button("Add a section");
-	
+	_click($sfm_pg_formDesigner.tab_formDesigner);
 	
 	
 	//Edit Section Properties
-	_f("main").s_button("editBtn").near(_f("main").s_richeditabletext("Click to edit title"));
+
 	
-	//Editing Info section
-	_click(_f("main").tab("Information"));
-	_setValue(_f("main").s_textinput(0).near(_f("main").s_label("Name*")),"Test");
-	_setValue(_f("main").s_textarea(0).near(_f("main").s_label("Description")),"Twetsgd");
-	_setValue(_f("main").s_textinput(0).near(_f("main").s_label("Help URL")),"http://salesforce.com/doc");
+	/**
+	 * Author		:	Anand Kakhandaki
+	 * Function		: 	To Edit checklist section 
+	 * Parameter	:	$sectionName=section name
+	 * Example		:	Refer _ _ _ _ file for function usage
+	 */
+	this.editSection=funtion($sectionName){
+		click(_f("main").s_button("editBtn").near(_f("main").s_richeditabletext($sectionName)));
+		_wait(5000,_isVisible(this.txt_sectionName));
+	}
 	
-	//Entry criteria
+	/**
+	 * Author		:	Anand Kakhandaki
+	 * Function		: 	To Edit checklist section details
+	 * Parameter	:	$name=section name
+	 * 					$description=Section description
+	 * 					$url=help URL
+	 * Example		:	Refer _ _ _ _ file for function usage
+	 */
+	this.editSectionInformation=function($name,$description,$url){
+		_setValue(this.txt_sectionName,$name);
+		_setValue(this.txt_sectionDescription,$description);
+		_setValue(this.txt_helpURL,$url);
+	};
+	
+	
+
+	
+	//Entry criteria tab objects
 	this.div_entryCriteria=_f("main").tab("Entry Criteria");
-	_click(div_entryCriteria);
+	this.sel_searchEntryCriteria=_f("main").s_combobox("/searchCombo/").near(this.div_entryCriteria);
+	this.txt_saveAsTextField=_f("main").s_textinput("/Save this filter as/").near(this.sel_searchEntryCriteria);
+	this.txt_saveAsIDTextField=_f("main").s_textinput("/Input ID Here/").near(this.sel_searchEntryCriteria);
+	this.btn_saveEntryCriteria=_f("main").s_button("/saveBtn/").near(this.sel_searchEntryCriteria);
+	this.btn_newEntryCriteriaFilter=_f("main").s_button("/New/").near(this.sel_searchEntryCriteria);
+	this.btn_reset=_f("main").s_button("/Reset/").s_button("/New/").near(this.sel_searchEntryCriteria);
+	this.btn_delete=_f("main").s_button("/Delete/").s_button("/New/").near(this.sel_searchEntryCriteria);
+	
+	this.btn_applySectionWindow=_f("main").s_button("/Apply/").near(this.div_entryCriteria);
+	this.btn_cancelSectionWindow=_f("main").s_button("/Cancel/").near(this.div_entryCriteria);
+	this.btn_entryCriteriaDeleteRow=_f("main").s_button("Delete");
+
+
+
+	
+	
+	
+	
+	
+	this.setEntryCriteria=function($existingEntryCriteria,$criteriaDetails){
+			var $comboField=$criteriaDetails[0];
+			var $comboConditions=$criteriaDetails[1]; 
+			var $toggleButton=$criteriaDetails[2];
+			var $comboInput=$criteriaDetails[3];
+			var $advExpr=$criteriaDetails[4];
+			var $exprsnName=$criteriaDetails[5];
+			
+		//check if Entry criteria is available already
+		if ($existingEntryCriteria!=="" && $existingEntryCriteria!==null) {
+			_setSelected(this.sel_searchEntryCriteria,$existingEntryCriteria);
+		}else{
+			if ($comboField.length==1) {
+				_click($sfm_pg_screenDesigner.btn_deleteRow.near(_f("main").s_label("2")));
+			}else if ($comboField.length>2) {
+				for (var $i = 0; $i < $comboField.length-2; $i++) {
+					_log("Add row: "+$i);
+					_click($sfm_pg_screenDesigner.btn_addRow);
+					}
+				}
+		
+			var $ele=null;
+			var $eleType=null;
+			var $index=null;
+			var $temp=null;
+			var $rowNumber=null;
+			for (var $i = 1; $i <= $comboField.length; $i++) {
+				_log("$i value: "+$i);
+				$temp=$i;
+				$index=$temp-1;
+				_log("index: "+$index);
+				$rowNumber=_f("main").s_label($i.toString()).near(this.div_entryCriteria);
+				_setSelected($sfm_pg_screenDesigner.sel_comboField.near($rowNumber),$comboField[$index]);
+				_setSelected($sfm_pg_screenDesigner.sel_comboConditions.near($rowNumber), $comboConditions[$index]);
+				if ($comboConditions[$index]!=="Is Null"&&$comboConditions[$index]!=="Is Not Null") {
+					if ($toggleButton[$index]!=="") {
+						_click($sfm_pg_screenDesigner.btn_toggleChoose.near($rowNumber));
+						_wait(3000);
+						_setSelected($sfm_pg_screenDesigner.btn_inputCombobox.near($rowNumber),$comboInput[$index]);
+					}else{
+						$ele=$sfm_pg_screenDesigner.sel_comboField.near($rowNumber);
+						$eleType=_exists($sfm_pg_screenDesigner.btn_toggleChoose.rightOf($ele));
+						if ($eleType==true) {
+							_setValue($sfm_pg_screenDesigner.txt_input.near($rowNumber),$comboInput[$index]);
+						}else{
+							_setSelected($sfm_pg_screenDesigner.btn_inputCombobox.near($rowNumber),$comboInput[$index]);
+						}	
+					}
+				}
+			}
+			_setValue($sfm_pg_screenDesigner.txt_advExpr,$advExpr);
+			
+		}
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+	};
+	
+	_click(this.div_entryCriteria);
 	//Entry criteria - selecting from exiting
-	this.sel_searchEntryCriteria=_f("main").s_combobox("/searchCombo/").near(div_entryCriteria);
+
 	_setSelected(sel_searchEntryCriteria,"rs_101_test");
 	_f("main").s_textinput("/Save this filter as/").near();
 	

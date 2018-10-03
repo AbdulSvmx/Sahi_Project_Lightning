@@ -1,0 +1,17 @@
+var $sfm_pg_formDesigner = new function sfm_pg_formDesigner() {
+	
+	this.tab_formDesigner=_f("main").tab("Form Designer");
+	this.btn_addSection=_f("main").s_button("Add a section");
+	
+	//Editing Info section
+	this.btn_editSection=_f("main").s_button("editBtn");
+	this.div_information=_click(_f("main").tab("Information"));
+	this.label_sectionName=_f("main").s_label("Name*");
+	this.txt_sectionName=_f("main").s_textinput(0).near(this.label_sectionName);
+	this.label_sectionDescription=_f("main").s_label("Description");
+	this.txt_sectionDescription=_f("main").s_textarea(0).near(this.label_sectionDescription);
+	this.label_helpURL=_f("main").s_label("Help URL");
+	this.txt_helpURL=_f("main").s_textinput(0).near(this.label_helpURL);
+
+};
+
