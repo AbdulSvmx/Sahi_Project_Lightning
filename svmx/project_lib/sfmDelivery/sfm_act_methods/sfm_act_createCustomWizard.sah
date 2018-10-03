@@ -527,7 +527,7 @@ var $sfm_act_createCustomWizard = new function sfm_act_createCustomWizard() {
 		_click($sfm_pg_wizardWindow.link_addWorkDetail);
 		_click($sfm_pg_wizardWindow.btn_searchProduct);
 		_click($sfm_pg_wizardWindow.chk_multiSelect);
-		var $divs=  _count("_div","/grid-cell-inner/",_under(_parentNode(_span("/Name/"), "DIV", 4)));
+		var $divs=  _count("_div","/grid-cell-inner/",_under(_parentNode(_span("/Name/",_near(_div("Product search"))), "DIV", 4)));
 		_log("No of Product = "+$divs);
 		_click($sfm_pg_wizardWindow.btn_addProduct);
 		
