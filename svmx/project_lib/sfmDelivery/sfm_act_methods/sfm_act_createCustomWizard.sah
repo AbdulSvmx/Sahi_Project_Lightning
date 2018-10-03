@@ -917,6 +917,7 @@ var $sfm_act_createCustomWizard = new function sfm_act_createCustomWizard() {
         _click(_link("Field Service"));
         
 		_click($sfm_pg_wo.btn_wo_edit_save);
+		_wait(3000);
 		 $woId= _getText($sfm_pg_wo.label_wo);
 		return $woId;
 	};
@@ -963,6 +964,22 @@ var $sfm_act_createCustomWizard = new function sfm_act_createCustomWizard() {
 				_click(_link("Work Orders[1]"));
 			 }
 };
+
+	this.addWizStepWithoutName = function($wizStepType,$wizStepName,$profile){
+		
+		_click($sfm_pg_wizards.txt_manageWizSteps);
+		_click($sfm_pg_wizards.btn_newStep);
+		_setSelected($sfm_pg_wizards.btn_wizStepType,$wizStepType);
+		_setSelected($sfm_pg_wizards.btn_stepName,$wizStepName);
+		_click($sfm_pg_wizards.btn_saveStep);
+		_click($sfm_pg_wizards.txt_managePermission);
+		_setSelected($sfm_pg_wizards.select_availableGrpProfiles,$profile);
+//		_click($sfm_pg_wizards.btn_add);
+		_click($sfm_pg_wizards.btn_saveClose);
+		_selectDomain();
+
+		
+	};
 	  
 
 	

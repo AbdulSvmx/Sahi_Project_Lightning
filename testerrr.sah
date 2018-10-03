@@ -1,0 +1,15 @@
+_click(_div("Setup"));
+_click(_div("Setup[1]"));
+_selectWindow("Home | Salesforce");
+_setValue(_searchbox("914:0"), "apex classes");
+_selectDomain("cs77.salesforce.com");
+_click(_div("acSizeLimitMessageWrapper"));
+_click(_span("O"));
+_click(_span("T"));
+_selectWindow("Apex Classes | Salesforce");
+_setValue(_searchbox("914:0"), "Apex Classes");
+_click(_mark("Apex Classes"));
+_click(_mark("Apex Classes"));
+_selectDomain("cs77.salesforce.com");
+_selectWindow();
+_click(_span("T"));
