@@ -18,8 +18,32 @@ $rs_formDesigner.start();
 	_selectDomain($g_domain);
 	$sfm_act_Transactions.sfmPropertiesPage($sfmName, "", "", $sfmType, $srcHeaderObj, "", "", "");
 	
+	//create new Section
 	_click(_f("main").tab("Form Designer"));
 	_f("main").s_button("Add a section");
+	
+	
+	
+	//Edit Section Properties
+	_f("main").s_button("editBtn").near(_f("main").s_richeditabletext("Click to edit title"));
+	
+	//Editing Info section
+	_click(_f("main").tab("Information"));
+	_setValue(_f("main").s_textinput(0).near(_f("main").s_label("Name*")),"Test");
+	_setValue(_f("main").s_textarea(0).near(_f("main").s_label("Description")),"Twetsgd");
+	_setValue(_f("main").s_textinput(0).near(_f("main").s_label("Help URL")),"http://salesforce.com/doc");
+	
+	//Entry criteria
+	this.div_entryCriteria=_f("main").tab("Entry Criteria");
+	_click(div_entryCriteria);
+	//Entry criteria - selecting from exiting
+	this.sel_searchEntryCriteria=_f("main").s_combobox("/searchCombo/").near(div_entryCriteria);
+	_setSelected(sel_searchEntryCriteria,"rs_101_test");
+	_f("main").s_textinput("/Save this filter as/").near();
+	
+	
+	
+	_click(_f("main").tab("Exit Criteria"));
 	
 	
 $rs_formDesigner.end();
