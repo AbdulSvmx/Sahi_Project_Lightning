@@ -917,6 +917,7 @@ var $sfm_act_createCustomWizard = new function sfm_act_createCustomWizard() {
         _click(_link("Field Service"));
         
 		_click($sfm_pg_wo.btn_wo_edit_save);
+		_wait(3000);
 		 $woId= _getText($sfm_pg_wo.label_wo);
 		return $woId;
 	};
