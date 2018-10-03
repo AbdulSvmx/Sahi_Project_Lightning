@@ -121,7 +121,7 @@ var $bo_act_mappings = new function bo_act_mappings() {
 		else if(_isVisible($sfm_pg_sfmMapping.tab_valueMapForNew))
 			{
 			_click($sfm_pg_sfmMapping.btn_saveMappingExistingRecord);
-			_click($sfm_pg_sfmMapping.btn_switchOnMapping);
+			//_click($sfm_pg_sfmMapping.btn_switchOnMapping);
 			}
 		_wait(5000);
 		}
@@ -177,7 +177,7 @@ var $bo_act_mappings = new function bo_act_mappings() {
 		_click($sfm_pg_sfmMapping.btn_switchOnMapping);
 		_setStrictVisibilityCheck(false);
 		_wait(1000);
-		//_click($bo_pg_sfmTransactionAndDesigner.btn_quickSave1);
+		_click($bo_pg_sfmTransactionAndDesigner.btn_quickSave1);
 		_wait(2000);
 	};
 	
