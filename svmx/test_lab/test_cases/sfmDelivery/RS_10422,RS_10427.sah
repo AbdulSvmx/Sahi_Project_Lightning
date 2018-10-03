@@ -76,7 +76,7 @@ _selectDomain();
 //$sfm_act_lightningConfig.switchToLightning();
 $bo_act_navigation.navigateToFeaturePermissionsPage();
 _wait(3000);
-$bo_act_navigation.addFeaturePermissionToUser($sfmlUsn,"Cloned_DefaultGroupProfile","SFM Designer");
+$bo_act_navigation.addFeaturePermissionToUser($sfmlUsn,"Clone Default Group Profile","SFM Designer");
 
 //$sfm_act_lightningConfig.logoutInLightning();
 //If Launch SFM designer feature permission is already present, remove it before logging in as technician
