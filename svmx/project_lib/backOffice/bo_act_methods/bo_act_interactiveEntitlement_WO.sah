@@ -118,6 +118,43 @@ var $bo_act_interactiveEntitlement_WO = new function bo_act_interactiveEntitleme
 	};
 	
 	
+	// Create a Warranty with no Account and no Contact
+	 this.performInteractiveEntitlement_NoAccountNoContact = function($WO_Number, $warrantyName){
+		 
+			_selectDomain("/svmx/");
+			var $url;
+			for (var $i = 0; $i < 25; $i++) {
+
+				if (_isVisible($bo_pg_interactiveEntitlement_CaseAndWO.btn_checkEntitlement)) {
+					break;
+				}
+
+				else {
+					_selectDomain();
+					_call(top.location.reload());
+					_selectDomain("/svmx/");
+					_wait(10000, _isVisible($bo_pg_interactiveEntitlement_CaseAndWO.btn_checkEntitlement));
+				}
+				
+			}
+			
+			_click($bo_pg_interactiveEntitlement_CaseAndWO.btn_checkEntitlement);
+			this.clickCheckEntitlement();
+			_setStrictVisibilityCheck(true);
+			// To move to Settings and Set it to Account and Remove Match Contact
+			_click($bo_pg_interactiveEntitlement_CaseAndWO.btn_settings);
+			_click($bo_pg_interactiveEntitlement_CaseAndWO.chk_settingMatchContact_CasePage);
+			_click($bo_pg_interactiveEntitlement_CaseAndWO.chk_settingMatchAccounts_CasePage);
+			_click($bo_pg_interactiveEntitlement_CaseAndWO.btn_EntitlementTabCase);
+			_click($bo_pg_interactiveEntitlement_CaseAndWO.btn_checkEntitlement_WO);
+			_wait(10000);
+			_domain("/svmx/")._click(_checkbox("/EVER_CaseEntitlement/", _near((_link($warrantyName)))));
+			_click($bo_pg_interactiveEntitlement_CaseAndWO.btn_saveEntitlementPSLine);
+			_selectDomain();
+			_setStrictVisibilityCheck();
+		 
+	 };
+	
 	
 
 	/**
