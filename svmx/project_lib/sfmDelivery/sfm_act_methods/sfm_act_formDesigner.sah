@@ -122,4 +122,11 @@ var $sfm_act_formDesigner = new function sfm_act_formDesigner() {
 		_assertNotExists(_f("main").s_label($question).near(_f("main").s_richeditabletext($sectionName)));
 	};
 	
+	
+	
+	
+	_click(_f("main").s_richeditabletext("T2"));
+	_mouseOver(_f("main").s_label("Are you aware of problem"));
+	_click(_f("main").s_button("Add question to form"));
+
 };
