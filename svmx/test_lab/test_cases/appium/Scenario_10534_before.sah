@@ -17,11 +17,11 @@ $sfm_act_lightningConfig.switchToLightning();
 
 
 var $data_excel = _readExcelFile("/auto/SVMX_Catalyst/fsaautomation/resources/TestData.xlsx","TestData",true);
-var $AccountName = $data_excel[34]["Data3"];
+var $AccountName = $data_excel[42]["Data3"];
 _log($AccountName);
-var $IBName = $data_excel[34]["Data4"];
+var $IBName = $data_excel[42]["Data4"];
 _log($IBName);
-var $ProductName = $data_excel[34]["Data2"];
+var $ProductName = $data_excel[42]["Data2"];
 _log($ProductName);
 
 
@@ -85,7 +85,7 @@ $bo_act_navigation.navigateToCreatedRecordUsingGlobalSearchWO($WOName);
 $bo_act_interactiveEntitlement_WO.performInteractiveEntitlement_NoAccountNoContact($WOName,$WarrantyName);
 
 //To write the WorkOrder Number into the Test Data for Appium Side to pick it up
-$excel.insertUnderColumn("/auto/SVMX_Catalyst/fsaautomation/resources/TestData.xlsx", "TestData", "Data1",$WOName ,"48");
+$excel.insertUnderColumn("/auto/SVMX_Catalyst/fsaautomation/resources/TestData.xlsx", "TestData", "Data1",$WOName ,"56");
 _writeFile("true", $appiumPath+$sahiIntermediatoryPath, true);
 
 $pre_requisite.end();

@@ -45,6 +45,7 @@ var $bo_act_SFMAppPermission = new function bo_act_SFMAppPermission() {
 		_click($bo_pg_sfmAppPermissionD.chkbox_workorder);
 		_setSelected($bo_pg_sfmAppPermissionD.picklist_records, $recordsvalue);
 		_click($bo_pg_sfmAppPermissionD.btn_configsave);
+		_selectDomain();
 
 		
 	};
