@@ -132,6 +132,7 @@ for($i=0;$i<$fieldsToMap.length;$i++){
 }
 _click($bo_pg_sfmTransactionAndDesigner.btn_saveMap);
 _wait(5000);
+_assertVisible(_f("main").label("Page saved"));
 _click($bo_pg_sfmTransactionAndDesigner.btn_quickSave1);
 _wait(3000);
 
