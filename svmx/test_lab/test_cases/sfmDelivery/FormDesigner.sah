@@ -4,7 +4,7 @@ $rs_formDesigner.start();
 
 $bo_act_common.getfutureDate(0, "\/", 60);
 
-/*
+
 	//Login to App and navigate to sfm transaction and designer page
 	$bo_act_login.login($g_url,$sfmlUsn,$sfmlPwd);
 	_wait(15000);
@@ -47,5 +47,5 @@ $bo_act_common.getfutureDate(0, "\/", 60);
 	//_f("main").s_textinput("/Save this filter as/").near();
 	
 	
-*/	
+	
 $rs_formDesigner.end();
