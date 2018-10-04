@@ -117,7 +117,37 @@ this.dvrScenario5 = function($sfmNameToBeCloned, $sfmName, $isCustom,
 		return $bProcessStatus;
 	};
 	
-	
+	this.sfmProcessCheck = function($sfmName,$bProcessStatus) 
+			 {
+		$bo_act_navigation.navigateToSfmTransactionDesigner();
+		_click($bo_pg_sfmTransactionAndDesigner.btn_yourCustomSfmTransactions);
+		_setValue($bo_pg_sfmTransactionAndDesigner.lbl_searchSFM, $sfmName);
+		_wait(10000);
+		
+		_setStrictVisibilityCheck(false);
+		_setStrictVisibilityCheck(true);
+		
+		
+		if (_isVisible(_f("main").s_checkbox("/chk/i").leftOf(_f("main").s_label($sfmName), 10, 10))) {
+			_log("Process exists successfully");
+			$bProcessStatus = true;
+			//_click(_f("main").s_checkbox("/chk/i").leftOf(_f("main").s_label($sfmNameToBeCloned), 10, 10));
+			
+		} else if (_isVisible(_f("main").s_checkbox(2).leftOf(_f("main").s_label($sfmName), 10, 10))) {
+			_log("Process does not exists ");
+			$bProcessStatus = false;
+			
+			} else{
+				_log("Process does not exists ");
+				$bProcessStatus = false;
+		 }
+		 	
+		
+		_setStrictVisibilityCheck(false);
+		
+		return $bProcessStatus;
+	};
+
 	/**
 	 * Based on the number of items passed in array(ContainerName), fields gets added to either header or child
 	 * If Container is Order Status then field is added to header otherwise to Child lines
