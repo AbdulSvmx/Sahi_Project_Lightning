@@ -28,7 +28,7 @@ var $bo_pg_sfmTransactionAndDesigner = new function bo_pg_sfmTransactionAndDesig
 	//this.btn_select = _f("main").s_button("Select");
 	this.txt_mappingName = _f("main").s_textinput("Save this map as[1]");
 	this.txt_mapID = _f("main").s_textinput("Input ID Here[2]");
-	this.btn_saveMap = _f("main").s_button("Save[2]");
+	this.btn_saveMap = _f("main").s_button("Save[3]");
 
 	 this.txt_standardSfmTransactionQuickFind= _f("main").s_textinput("/searchText/").near(_f("main").tab("Standard SFM Transactions")); //updated with relative index to properly identify quick find in standard transactions
     this.btn_standardSfmTransaction= _f("main").tab("Standard SFM Transactions");

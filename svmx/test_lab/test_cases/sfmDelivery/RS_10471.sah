@@ -194,6 +194,7 @@ _wait(12000);
 _click($bo_pg_sfmTransactionAndDesigner.btn_screenDesigner);
 _wait(5000);
 $bo_act_navigation.designHeaderScreen($pageLayoutName, $fieldsToMap);
+_wait(2000);
 _click($bo_pg_sfmTransactionAndDesigner.btn_quickSave1);
 _wait(2000);
 _closeWindow();

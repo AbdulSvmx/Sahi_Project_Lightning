@@ -55,23 +55,15 @@ this.currentDate= function ($seperator){
 
  this.getfutureDate = function($futureYear, $seperator,$futureDay){
 	var $now = new Date();
-    var $monthday;// = $now.getDate();
-    if ($now.getDate() < 10)
-    	//below code is commented bec on lightning date field accept 4-mar-2018 as 4/3/2018, but in classis it was 04/03/2018, 0 was mandatory
-        //$monthday = "0" + $now.getDate();
-    	$monthday = $now.getDate();
-    //else
-        //$monthday = $now.getDate();
-    var $month = $now.getMonth() + 1;
-    if ($month < 10)
-        //$month = "0" + $month;
-
+    var $monthday=$now.getDate();
+    
     var $year = $now.getFullYear();
 	$year = $year+$futureYear;
-	_log("$year: "+$year);
-	if ($futureDay!=null && $futureDay!="") {
+	
+    var $month = $now.getMonth() + 1;
+
+	if ($futureDay!==null && $futureDay!=="") {
 		$monthday=$monthday+$futureDay;
-		
 		//if adding date make month to next month below logic works
 		var $nowAdd=new Date();
 		$nowAdd.setDate($monthday);
