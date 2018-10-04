@@ -1,0 +1,100 @@
+//Lakshmi BS
+
+/*
+ * PRE Requisites to be run in the org before running other scripts - LIGHTNING CODE
+ */
+_writeFile("false", $appiumPath+$sahiIntermediatoryPath, true);
+var $rs_10540 = _testcase("RS_10462","Verify new single expression for both Header and Child and launch SFM in delivery.");
+	$rs_10540.start();
+	var $bProcessStatus = false;
+	var $sfmName = "RS_10540_Process";
+	var $sfmType="from Source Object to create new header and child records";
+	var $srcHeaderObj="Installed Product";
+	var $srcChildObj="";
+	var $trgHeaderObj="Auto_Custom_Object10540";
+	var $trgChildObj="Auto_Custom_Object10540";
+	
+	var $headerComboField=["Order Status"];
+	var $headerComboConditions=[""]; 
+	var $headerToggleButton=[""];
+	var $headerCmboInput=["Open"];
+	var $advExpr="";
+	var $errMsg="This record does not qualify as the Order Status is NOT Open";
+	var $exprsnName=$bo_act_common.generateRandomName("SFM_WO_Exprsn_");
+	var $headerExprFieldsDetails=[$headerComboField,$headerComboConditions,$headerToggleButton,$headerCmboInput,$advExpr,$errMsg,$exprsnName];
+	var $headerMappingDetails="";
+	
+	var $childComboField=["Activity Type"];
+	var $childComboConditions=[""]; 
+	var $childToggleButton=[""];
+	var $childCmboInput=["Installation"];
+	var $childadvExpr="";
+	var $childerrMsg="";
+	var $childexprsnName=$bo_act_common.generateRandomName("SFM_WD_Exprsn_");
+	var $childExprFieldsDetails=[$childComboField,$childComboConditions,$childToggleButton,$childCmboInput,$childadvExpr,$childerrMsg,$childexprsnName];
+	var $childMappingDetails="";
+	
+	
+	//Login to App and navigate to sfm transaction and designer page
+	_setSpeed($g_stepSpeed);
+	$bo_act_login.login($g_url, $appiumAdminUn, $appiumAdminPwd);
+	$sfm_act_lightningConfig.switchToLightning(); 
+	
+	//Check for the process if exists
+	//$bProcessStatus=$sfm_act_SFM.sfmProcessCheck($sfmName);
+	
+	if($bProcessStatus==false){
+	$bo_act_navigation.navigateToSfmTransactionDesigner();
+	_wait(15000,_isVisible($bo_pg_sfmTransactionAndDesigner.btn_newSFM));
+	
+	
+	
+	
+	//Create New SFM Transaction
+	_click($bo_pg_sfmTransactionAndDesigner.btn_newSFM);
+	_wait(25000,_isVisible($sfm_pg_screenDesigner.btn_propoties));
+	$sfm_act_Transactions.sfmPropertiesPage($sfmName, "", $sfmName, $sfmType, $srcHeaderObj, $srcChildObj, $trgHeaderObj, $trgChildObj);
+	
+	$sfm_act_Transactions.sfmQualifyingCriteriaieldMappings($trgHeaderObj, $headerExprFieldsDetails, $headerMappingDetails);
+	$sfm_act_Transactions.sfmQualifyingCriteriaieldMappings($trgChildObj, $childExprFieldsDetails, $childMappingDetails);
+	
+	var $headersToAdd = ["Order Type","Order Status"];
+	var $fieldName = ["Activity Type","Line Type","Billable Qty"];
+	var $childToAdd=[$trgChildObj,$fieldName];
+	var $sfmPgLayoutName = $bo_act_common.generateRandomName("SFM_Auto_");
+	$sfm_act_Transactions.screenDesigner($headersToAdd, $childToAdd, $sfmPgLayoutName, $sfmPgLayoutName);
+	
+	_wait(15000);
+	//_click($bo_pg_sfmTransactionAndDesigner.btn_finalQuickSave);
+	_click($bo_pg_sfmTransactionAndDesigner.btn_saveAndclose);
+	
+	var $wizardObject="Work Order";
+	var $wizardName1 =$wizardName[6];
+	var $wizardType="SFM";
+	var $profile="";
+	var $handOver=false;
+	_log($wizardName1);
+	$sfm_act_wizards.addToWizard($wizardObject, $wizardName1, $wizardType, $sfmName, $handOver, $profile);  
+	
+	var $OrdrStatus="Closed";
+	$sfm_act_createCustomWizard.createWOwithOrderStatus($OrdrStatus);
+
+	$sfm_act_createCustomWizard.clickWizardBtn($sfmName);
+	_selectDomain($g_domain);
+	_wait(10000,_isVisible(_div($errMsg)));
+	_assertExists(_div($errMsg));
+	_selectDomain();
+	
+	$OrdrStatus="Open";
+	$sfm_act_createCustomWizard.createWOwithOrderStatus($OrdrStatus);
+	_setStrictVisibilityCheck(true);
+
+	$sfm_act_createCustomWizard.clickWizardBtn($sfmName);
+	_assertExists(_div("/"+$sfmName+"/"));
+	_assertExists(_span($trgChildObj));
+	_setStrictVisibilityCheck(false);
+	
+	$sfm_act_lightningConfig.logoutInLightning();
+	}
+$rs_10540.start();
+_writeFile("true", $appiumPath+$sahiIntermediatoryPath, true);
