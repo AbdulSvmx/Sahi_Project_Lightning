@@ -33,8 +33,7 @@ _click(_f("main").s_label("Work Order"));
 //_setSelected(_f("main").s_combobox("objCombo1").near(_f("main").s_label("Make Checklist Available On:")),$srcHeaderObj);
 _wait(10000);
 //$sfm_act_Transactions.sfmPropertiesPage($sfmName, "", $sfmName, $sfmType,$srcHeaderObj); */
-_selectDomain("/svmx/");
-$sfm_pg_sourceObjectUpdate.createSOU($souObject,$field, $condition, $operand, $value);
+$sfm_pg_sourceObjectUpdate.createSOU($souObject,$field, $condition, $operand, $value,"Checklist");
 
 /*_setSpeed($g_stepSpeed);
 
