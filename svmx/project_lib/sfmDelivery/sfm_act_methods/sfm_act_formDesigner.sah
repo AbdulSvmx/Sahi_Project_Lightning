@@ -122,11 +122,17 @@ var $sfm_act_formDesigner = new function sfm_act_formDesigner() {
 		_assertNotExists(_f("main").s_label($question).near(_f("main").s_richeditabletext($sectionName)));
 	};
 	
+	/**
+	 * Author		:	Anand Kakhandaki
+	 * Function		: 	To Add question to specified section
+	 * Parameter	:	$sectionName=Question name
+	 * 					$question=Question text
+	 * Example		:	Refer _ _ _ _ file for function usage
+	 */
+	this.addQuestionToSection=function($sectionName,$question){
+		_click(_f("main").s_richeditabletext($sectionName));
+		_mouseOver(_f("main").s_label($question));
+		_click($sfm_pg_formDesigner.btn_addQuestion.near(_f("main").s_label($question)));
+	};
 	
-	
-	
-	_click(_f("main").s_richeditabletext("T2"));
-	_mouseOver(_f("main").s_label("Are you aware of problem"));
-	_click(_f("main").s_button("Add question to form"));
-
 };
