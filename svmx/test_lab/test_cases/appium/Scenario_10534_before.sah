@@ -13,7 +13,7 @@ _setSpeed($g_stepSpeed);
 $bo_act_login.login($g_url, $appiumAdminUn, $appiumAdminPwd);
 $sfm_act_lightningConfig.switchToLightning();
 // Removing Work Order from Download Criteria
-//$bo_act_SFMAppPermission.workOrderDownloadCriteriachanges("My Records");
+$bo_act_SFMAppPermission.workOrderDownloadCriteriachanges("My Records");
 
 
 var $data_excel = _readExcelFile("/auto/SVMX_Catalyst/fsaautomation/resources/TestData.xlsx","TestData",true);
@@ -21,6 +21,7 @@ var $AccountName = $data_excel[42]["Data3"];
 _log($AccountName);
 var $IBName = $data_excel[42]["Data4"];
 _log($IBName);
+
 var $ProductName = $data_excel[42]["Data2"];
 _log($ProductName);
 
@@ -113,8 +114,8 @@ var $WoID2=$sfm_act_restApiMethods.postRestApi($appiumAdminUn,$appiumAdminPwd,$a
 $WOName2 =$sfm_act_restApiMethods.getRestApi($appiumAdminUn,$appiumAdminPwd,$appiumclient_id,$appiumclient_secret,$appiumorginstance,"GET", $objNameWO, $columnName, $filter, $WoID2);
 _log($WOName2);
 
-
 _wait(30000);
+$bo_act_navigation.navigateToHome();
 _call(top.location.reload());
 $bo_act_navigation.navigateToCreatedRecordUsingGlobalSearchWO($WOName2);
 $bo_act_interactiveEntitlement_WO.performInteractiveEntitlementWOSCON_Account($WOName2, $SCONName);
