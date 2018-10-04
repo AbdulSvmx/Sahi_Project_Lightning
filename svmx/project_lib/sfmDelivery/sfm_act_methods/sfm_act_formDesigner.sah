@@ -1,4 +1,4 @@
-var $SFM_45 = new function SFM_45() {
+var $sfm_act_formDesigner = new function sfm_act_formDesigner() {
 	
 	
 	/**
@@ -7,10 +7,10 @@ var $SFM_45 = new function SFM_45() {
 	 * Parameter	:	$sectionName=section name
 	 * Example		:	Refer _ _ _ _ file for function usage
 	 */
-	this.editSection=funtion($sectionName){
-		_click($sfm_pg_formDesigner.near(_f("main").s_richeditabletext($sectionName)));
-		_wait(5000,_isVisible(this.txt_sectionName));
-	}
+	this.editSection= function($sectionName){
+		_click($sfm_pg_formDesigner.btn_editSection.near(_f("main").s_richeditabletext($sectionName)));
+		_wait(5000,_isVisible($sfm_pg_formDesigner.tab_entryCriteria));
+	};
 	
 	/**
 	 * Author		:	Anand Kakhandaki
@@ -21,9 +21,105 @@ var $SFM_45 = new function SFM_45() {
 	 * Example		:	Refer _ _ _ _ file for function usage
 	 */
 	this.editSectionInformation=function($name,$description,$url){
-		_setValue(this.txt_sectionName,$name);
-		_setValue(this.txt_sectionDescription,$description);
-		_setValue(this.txt_helpURL,$url);
+		_setValue($sfm_pg_formDesigner.txt_sectionName,$name);
+		_setValue($sfm_pg_formDesigner.txt_sectionDescription,$description);
+		_setValue($sfm_pg_formDesigner.txt_helpURL,$url);
+	};
+	
+	/**
+	 * Author		:	Anand Kakhandaki
+	 * Function		: 	To Create Entry criteria for checklist section
+	 * Parameter	:	$existingEntryCriteria=existing entry criteria name
+	 * 					$criteriaDetails=details of entry criteria
+	 * Example		:	Refer _ _ _ _ file for function usage
+	 */
+	this.createEntryCriteria=function($existingEntryCriteria,$criteriaDetails){
+		_click($sfm_pg_formDesigner.tab_entryCriteria);
+		this.setEntryCriteria($existingEntryCriteria, $criteriaDetails);
+		_click($sfm_pg_formDesigner.btn_applySectionWindow);
+		_wait(10000,_isVisible($sfm_pg_formDesigner.label_saveEditSectionMsg));
+		_click($sfm_pg_formDesigner.btn_entryCriteriaApplyButton);
+	};
+	
+	
+	/**
+	 * Author		:	Anand Kakhandaki
+	 * Function		: 	To set Entry criteria for checklist section
+	 * Parameter	:	$existingEntryCriteria=existing entry criteria name
+	 * 					$criteriaDetails=details of entry criteria
+	 * Example		:	Refer _ _ _ _ file for function usage
+	 */
+	this.setEntryCriteria=function($existingEntryCriteria,$criteriaDetails){
+		var $comboField=$criteriaDetails[0];
+		var $comboConditions=$criteriaDetails[1]; 
+		var $toggleButton=$criteriaDetails[2];
+		var $comboInput=$criteriaDetails[3];
+		var $advExpr=$criteriaDetails[4];
+		var $criteriaName=$criteriaDetails[5];
+		
+	//check if Entry criteria is available already
+	if ($existingEntryCriteria!=="" && $existingEntryCriteria!==null) {
+		_setSelected(this.sel_searchEntryCriteria,$existingEntryCriteria);
+	}else{
+		_click($sfm_pg_formDesigner.btn_newEntryCriteriaFilter);
+		_wait(5000,_isVisible($sfm_pg_screenDesigner.btn_addRow));
+		if ($comboField.length==1) {
+			_click($sfm_pg_screenDesigner.btn_deleteRow.near(_f("main").s_label("2")));
+		}else if ($comboField.length>2) {
+			for (var $i = 0; $i < $comboField.length-2; $i++) {
+				_log("Add row: "+$i);
+				_click($sfm_pg_screenDesigner.btn_addRow);
+				}
+			}
+	
+		var $ele=null;
+		var $eleType=null;
+		var $index=null;
+		var $temp=null;
+		var $rowNumber=null;
+		for (var $i = 1; $i <= $comboField.length; $i++) {
+			_log("$i value: "+$i);
+			$temp=$i;
+			$index=$temp-1;
+			_log("index: "+$index);
+			$rowNumber=_f("main").s_label($i.toString()).near(this.div_entryCriteria);
+			_setSelected($sfm_pg_screenDesigner.sel_comboField.near($rowNumber),$comboField[$index]);
+			_setSelected($sfm_pg_screenDesigner.sel_comboConditions.near($rowNumber), $comboConditions[$index]);
+			if ($comboConditions[$index]!=="Is Null"&&$comboConditions[$index]!=="Is Not Null") {
+				if ($toggleButton[$index]!=="") {
+					_click($sfm_pg_screenDesigner.btn_toggleChoose.near($rowNumber));
+					_wait(3000);
+					_setSelected($sfm_pg_screenDesigner.btn_inputCombobox.near($rowNumber),$comboInput[$index]);
+				}else{
+					$ele=$sfm_pg_screenDesigner.sel_comboField.near($rowNumber);
+					$eleType=_exists($sfm_pg_screenDesigner.btn_toggleChoose.rightOf($ele));
+					if ($eleType==true) {
+						_setValue($sfm_pg_screenDesigner.txt_input.near($rowNumber),$comboInput[$index]);
+					}else{
+						_setSelected($sfm_pg_screenDesigner.btn_inputCombobox.near($rowNumber),$comboInput[$index]);
+					}	
+				}
+			}
+		}
+		_setValue($sfm_pg_screenDesigner.txt_advExpr,$advExpr);
+		_setValue($sfm_pg_formDesigner.txt_saveAsTextField,$criteriaName);
+		_setValue($sfm_pg_formDesigner.txt_saveAsIDTextField,$criteriaName);
+		_click($sfm_pg_formDesigner.btn_saveEntryCriteria);
+		_wait(10000,_isVisible($sfm_pg_formDesigner.label_saveEntryCriteriaMsg));
+		}
+	};
+	
+	/**
+	 * Author		:	Anand Kakhandaki
+	 * Function		: 	To remove question from specified section
+	 * Parameter	:	$question=Question text
+	 * 					$sectionName=Question name
+	 * Example		:	Refer _ _ _ _ file for function usage
+	 */
+	this.removeQuestionFromSection=function($question,$sectionName){
+		_click($sfm_pg_formDesigner.btn_removeQuestion.near(_f("main").s_label($question).near(_f("main").s_richeditabletext($sectionName))));
+		_wait(10000);
+		_assertNotExists(_f("main").s_label($question).near(_f("main").s_richeditabletext($sectionName)));
 	};
 	
 };
