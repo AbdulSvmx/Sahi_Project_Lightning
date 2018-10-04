@@ -22,8 +22,10 @@ $rs_10431.start();
 	var $operandTypeCombo=["Value","Value","Value","Value"];
 	var $operandValue=["SVMX.CURRENTRECORD.SVMXC__Problem_Description__c","SVMX.CURRENTRECORD.SVMXC__Priority__c","SVMX.CURRENTRECORD.SVMXC__Preferred_Start_Time__c","SVMX.CURRENTRECORD.SVMXC__Invoice_Number__c"];
 	var $lookupAdvExpr="1 AND 2 AND (3 OR 4)";
+	var $lookupFilterDetails=[$fieldCombo,$conditionsCombo,$operandTypeCombo,$operandValue,$lookupAdvExpr];
 	var $lookUpName=$bo_act_common.generateRandomName("rs_10431_lookup_");
-	$sfm_act_Transactions.createLookUp($object, $lookupTempName, $fieldCombo, $conditionsCombo, $operandTypeCombo, $operandValue, $lookupAdvExpr, $lookUpName);
+	
+	$sfm_act_Transactions.createLookUp($object, $lookupTempName, "", $lookupFilterDetails, $lookUpName,"");
 	
 	_setStrictVisibilityCheck(true);
 	_click($bo_pg_sfmTransactionAndDesigner.btn_pageLayoutSave);

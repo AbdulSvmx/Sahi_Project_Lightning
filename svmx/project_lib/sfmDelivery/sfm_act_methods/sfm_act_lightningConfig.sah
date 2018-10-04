@@ -636,7 +636,7 @@ this.verifyValues = function($textLabels,$textValues,$pickListLabels,$pickListVa
 	}
 		_log($currentMultiValues);
 		_setStrictVisibilityCheck(true);
-		var $collect = _collect("_listItem", "/.*/", _in(_list("/selected-list/",_rightOf(_div("/"+$uniqueMulti[$i]+"/")))));
+		var $collect = _collect("_listItem", "/.*/", _in(_list("/selected-list/",_near(_div("/"+$uniqueMulti[$i]+"/")))));
 		var $p = 0;var $actualList = [];
 		for($p=0;$p<$collect.length;$p++){
 			$actualList.push(_getText($collect[$p]));

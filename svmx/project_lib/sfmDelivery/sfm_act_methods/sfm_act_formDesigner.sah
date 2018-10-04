@@ -1,0 +1,29 @@
+var $SFM_45 = new function SFM_45() {
+	
+	
+	/**
+	 * Author		:	Anand Kakhandaki
+	 * Function		: 	To Edit checklist section 
+	 * Parameter	:	$sectionName=section name
+	 * Example		:	Refer _ _ _ _ file for function usage
+	 */
+	this.editSection=funtion($sectionName){
+		_click($sfm_pg_formDesigner.near(_f("main").s_richeditabletext($sectionName)));
+		_wait(5000,_isVisible(this.txt_sectionName));
+	}
+	
+	/**
+	 * Author		:	Anand Kakhandaki
+	 * Function		: 	To Edit checklist section details
+	 * Parameter	:	$name=section name
+	 * 					$description=Section description
+	 * 					$url=help URL
+	 * Example		:	Refer _ _ _ _ file for function usage
+	 */
+	this.editSectionInformation=function($name,$description,$url){
+		_setValue(this.txt_sectionName,$name);
+		_setValue(this.txt_sectionDescription,$description);
+		_setValue(this.txt_helpURL,$url);
+	};
+	
+};

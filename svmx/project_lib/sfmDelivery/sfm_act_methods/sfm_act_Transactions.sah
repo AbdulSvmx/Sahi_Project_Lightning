@@ -167,7 +167,7 @@ var $sfm_act_Transactions = new function sfm_act_Transactions() {
 		 * 					$nearBy = name of child object where object lookup is to configure. if case field is in part childline please select Parts
 		 * Example		: 	Refer RS_10431 for function usage
 		 */
-		this.createLookUp=function($object,$lookupTempName,$fieldCombo,$conditionsCombo,$operandTypeCombo,$operandValue,$lookupAdvExpr,$lookUpName,$nearBy){
+		this.createLookUp=function($object,$lookupTempName,$lookupFieldsToAdd, $lookupFilterDetails,$lookUpName,$nearBy){
 			_setStrictVisibilityCheck(true);
 			
 			if($nearBy == 'Parts' || $nearBy == 'Labor' || $nearBy == 'Expense' || $nearBy == 'Travel'){
@@ -177,14 +177,45 @@ var $sfm_act_Transactions = new function sfm_act_Transactions() {
 				_click(_f("main").s_textinput("txtIp").near(_f("main").uiftetextfield($object)));
 			}
 			
-			
 			_wait(5000,_isVisible(_f("main").s_label("Properties for Field: "+$object)));
 			_click($sfm_pg_screenDesigner.btn_ConfLookup);
 			_wait(10000,_isVisible($sfm_pg_screenDesigner.txt_lookupName));
-			_setSelected($sfm_pg_screenDesigner.sel_LkupTemplate,$lookupTempName);
+			if ($lookupTempName!="" && $lookupTempName!=null) {
+				_setSelected($sfm_pg_screenDesigner.sel_LkupTemplate,$lookupTempName);
+			}
 			_wait(10000);
 			
-			var $fieldLabel;
+			var $fieldNameList=new Array;
+			var $addToSearchList=new Array;
+			var $addToDisplayList=new Array;
+			var $addToBubbleList=new Array;
+			//Add fields to lookup search page, display, and bubble
+			if ($lookupFieldsToAdd!=null && $lookupFieldsToAdd!="") {
+				$fieldNameList=$lookupFieldsToAdd[0];
+				$addToSearchList=$lookupFieldsToAdd[1];
+				$addToDisplayList=$lookupFieldsToAdd[2];
+				$addToBubbleList=$lookupFieldsToAdd[3];
+				
+				for (var $i = 0; $i < $fieldNameList.length; $i++) {
+					if ($addToSearchList[i]==true) {
+						_click(_f("main").s_button("/Button1/").near(_f("main").s_label($fieldNameList[i])));
+					}
+					if ($addToDisplayList[i]==true) {
+						_click(_f("main").s_button("/Button2/").near(_f("main").s_label($fieldNameList[i])));
+					}
+					if ($addToBubbleList==true) {
+						_click(_f("main").s_button("/Button3/").near(_f("main").s_label($fieldNameList[i])));
+					}
+				}
+			}
+			
+			var $fieldCombo=$lookupFilterDetails[0];
+			var $conditionsCombo=$lookupFilterDetails[1];
+			var $operandTypeCombo=$lookupFilterDetails[2];
+			var $operandValue=$lookupFilterDetails[3];
+			var $lookupAdvExpr=$lookupFilterDetails[4];
+			
+			var $fieldLabeRowNo;
 			var $oprTypeCombo;
 			var $oprValFieldType;
 			var $oprValdateFieldType;
@@ -193,13 +224,12 @@ var $sfm_act_Transactions = new function sfm_act_Transactions() {
 				_wait(5000);
 				var $temp=$i;
 				var $label=$temp+1;
-				$fieldLabel=_f("main").s_label($label.toString()).near($sfm_pg_screenDesigner.lbl_lookupFilterLabel);
-				_setSelected(_f("main").s_combobox("fieldCombo").near($fieldLabel),$fieldCombo[$i]);
-				_setSelected(_f("main").s_dropdownlist("conditionsCombo").near($fieldLabel),$conditionsCombo[$i]);
-				_setSelected(_f("main").s_dropdownlist("operandTypeCombo").near($fieldLabel),$operandTypeCombo[$i]);
+				$fieldLabeRowNo=_f("main").s_label($label.toString()).near($sfm_pg_screenDesigner.lbl_lookupFilterLabel);
+				_setSelected(_f("main").s_combobox("fieldCombo").near($fieldLabeRowNo),$fieldCombo[$i]);
+				_setSelected(_f("main").s_dropdownlist("conditionsCombo").near($fieldLabeRowNo),$conditionsCombo[$i]);
+				_setSelected(_f("main").s_dropdownlist("operandTypeCombo").near($fieldLabeRowNo),$operandTypeCombo[$i]);
 				
-				
-				$oprTypeCombo=_f("main").s_dropdownlist("operandTypeCombo").near($fieldLabel);
+				$oprTypeCombo=_f("main").s_dropdownlist("operandTypeCombo").near($fieldLabeRowNo);
 				$oprValcomboFieldType=_f("main").s_combobox("/picklist/").rightOf($oprTypeCombo);
 				if (_exists($oprValcomboFieldType)) {
 					_setValue(_f("main").s_textinput("/textInput/").inside($oprValcomboFieldType),$operandValue[$i]);
@@ -210,7 +240,7 @@ var $sfm_act_Transactions = new function sfm_act_Transactions() {
 						_setValue(_f("main").s_richeditabletext("/textDisplay/").inside($oprValdateFieldType),$operandValue[$i]);
 					}else{
 						_log("last else loop");
-						_setValue(_f("main").s_textinput("operandValue").near($fieldLabel),$operandValue[$i]);
+						_setValue(_f("main").s_textinput("operandValue").near($fieldLabeRowNo),$operandValue[$i]);
 					}	
 				}
 				
@@ -683,11 +713,18 @@ var $sfm_act_Transactions = new function sfm_act_Transactions() {
 					_setSelected($sfm_pg_screenDesigner.sel_sourceHeaderObject,$srcHeaderObj);
 					_wait(10000,_isVisible(_f("main").s_checkbox($srcChildObj).near($sfm_pg_screenDesigner.lbl_sourceRecordLabel)));
 					_click(_f("main").s_checkbox($srcChildObj).near($sfm_pg_screenDesigner.lbl_sourceRecordLabel));
-				} 
+				}else if ($sfmType=="to generate a Checklist/Survey type of Process") {
+					//Work order selection is not working as it taking some random value
+					//_setSelected($sfm_pg_screenDesigner.sel_checkListAvaialble,$srcHeaderObj);
+					_setValue($sfm_pg_screenDesigner.txt_checkListAvaialble,"Wo");
+					_wait(500);
+					_click($sfm_pg_screenDesigner.lbl_workOrder);
+				} else{
 					_setSelected($sfm_pg_screenDesigner.sel_targetHeaderObject,$trgHeaderObj);
 					_wait(10000,_isVisible(_f("main").s_checkbox($trgChildObj)));
 					_click(_f("main").s_checkbox($trgChildObj).near($sfm_pg_screenDesigner.lbl_targetRecordLabel));
 				_wait(2000);
+				}
 			};
 			
 			/**
