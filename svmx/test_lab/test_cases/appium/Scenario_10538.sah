@@ -124,10 +124,10 @@ _call(top.location.reload());
 $bo_act_navigation.navigateToCreatedRecordUsingGlobalSearchWO($WOName);
 $bo_act_interactiveEntitlement_WO.performInteractiveEntitlementWO_UsingWarranty($WOName,$warrantyName);
 // To write the WorkOrder Number into the Test Data for Appium Side to pick it up
-$excel.insertUnderColumn("/auto/SVMX_Catalyst/fsaautomation/resources/TestData.xlsx", "TestData", "Data1",$WOName , "34");
-$excel.insertUnderColumn("/auto/SVMX_Catalyst/fsaautomation/resources/TestData.xlsx", "TestData", "Data2",$Productname,"34");
-$excel.insertUnderColumn("/auto/SVMX_Catalyst/fsaautomation/resources/TestData.xlsx", "TestData", "Data3",$accountName , "34");
-$excel.insertUnderColumn("/auto/SVMX_Catalyst/fsaautomation/resources/TestData.xlsx", "TestData", "Data4",$IBName , "34");
+$excel.insertUnderColumn("/auto/SVMX_Catalyst/fsaautomation/resources/TestData.xlsx", "TestData", "Data1",$WOName , "42");
+$excel.insertUnderColumn("/auto/SVMX_Catalyst/fsaautomation/resources/TestData.xlsx", "TestData", "Data2",$Productname,"42");
+$excel.insertUnderColumn("/auto/SVMX_Catalyst/fsaautomation/resources/TestData.xlsx", "TestData", "Data3",$accountName , "42");
+$excel.insertUnderColumn("/auto/SVMX_Catalyst/fsaautomation/resources/TestData.xlsx", "TestData", "Data4",$IBName , "42");
 _writeFile("true", $appiumPath+$sahiIntermediatoryPath, true);
 
 $pre_requisite.end();
