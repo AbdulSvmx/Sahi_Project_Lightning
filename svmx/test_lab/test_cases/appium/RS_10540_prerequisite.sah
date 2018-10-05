@@ -9,7 +9,8 @@ var $rs_10540 = _testcase("RS_10462","Verify new single expression for both Head
 	var $bProcessStatus = false;
 	var $sfmName = "RS_10540_Process";
 	var $sfmType="from Source Object to create new header and child records";
-	var $srcHeaderObj="Installed Product";
+	var $srcHeaderTxt = "Ins";
+	var $srcHeaderObj="Product";
 	var $srcChildObj="";
 	var $trgHeaderObj="Auto_Custom_Object10540";
 	var $trgChildObj="Auto_Custom_Object10540";
@@ -53,9 +54,10 @@ var $rs_10540 = _testcase("RS_10462","Verify new single expression for both Head
 	//Create New SFM Transaction
 	_click($bo_pg_sfmTransactionAndDesigner.btn_newSFM);
 	_wait(25000,_isVisible($sfm_pg_screenDesigner.btn_propoties));
-	$sfm_act_Transactions.sfmPropertiesPage($sfmName, "", $sfmName, $sfmType, $srcHeaderObj, $srcChildObj, $trgHeaderObj, $trgChildObj);
+	$sfm_act_Transactions.sfmProperties($sfmName, "", $sfmName, $sfmType,$srcHeaderTxt ,$srcHeaderObj, $srcChildObj, $trgHeaderObj, $trgChildObj);
 	
 	$sfm_act_Transactions.sfmQualifyingCriteriaieldMappings($trgHeaderObj, $headerExprFieldsDetails, $headerMappingDetails);
+	
 	$sfm_act_Transactions.sfmQualifyingCriteriaieldMappings($trgChildObj, $childExprFieldsDetails, $childMappingDetails);
 	
 	var $headersToAdd = ["Order Type","Order Status"];

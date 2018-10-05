@@ -203,7 +203,7 @@ _selectDomain($g_domain);
 $sfm_act_lightningConfig.clearServicemaxCache();
 //Setting up the date literal values
 var $current = new Date();
-var $todayDate = $current.getMonth()+1 + "/" + $current.getDate() + "/" + $current.getFullYear();
+var $todayDate = $sfm_act_createCustomWizard.addSubtractDates($current,0);
 var $tomorrowDate = $sfm_act_createCustomWizard.addSubtractDates($current,1);
 var $yesterdayDate = $sfm_act_createCustomWizard.addSubtractDates($current,-1);
 //Calculating current time

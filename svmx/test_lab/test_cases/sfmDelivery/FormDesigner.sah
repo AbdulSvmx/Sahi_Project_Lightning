@@ -2,7 +2,7 @@
 var $rs_formDesigner = _testcase("RS_formDesigner","Verify current record literals in lookup");
 $rs_formDesigner.start();
 
-$bo_act_common.getfutureDate(0, "\/", 60);
+
 
 
 	//Login to App and navigate to sfm transaction and designer page

@@ -3,6 +3,8 @@ var $sfm_pg_formDesigner = new function sfm_pg_formDesigner() {
 	this.tab_formDesigner=_f("main").tab("Form Designer");
 	this.btn_addSection=_f("main").s_button("Add a section");
 	this.btn_removeQuestion=_f("main").s_button("/Remove Question/");
+	this.btn_addQuestion=_f("main").s_button("Add question to form");
+	this.txt_searchQuestion=_f("main").s_textinput("searchText").near(_f("main").s_label("Question List"));
 	
 	//.near(_f("main").s_label("What is time"))
 	
