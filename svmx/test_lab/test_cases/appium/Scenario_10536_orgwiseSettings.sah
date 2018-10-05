@@ -16,9 +16,9 @@ $sfm_act_lightningConfig.switchToLightning();
 //Changing the Setting values
 var $module = "Entitlement Verification";
 var $submodule = "Work Order Entitlement VF";
-//$bo_act_configurationProfiles.editGroupProfileForBooleanSettings($group_profilename,$module,$submodule, "SET024", true);
-//$bo_act_configurationProfiles.editGroupProfileForBooleanSettings($group_profilename,$module,$submodule, "SET025", true);
-//$bo_act_configurationProfiles.editGroupProfileForBooleanSettings($group_profilename,$module,$submodule, "SET026", true);
+$bo_act_configurationProfiles.editGroupProfileForBooleanSettings($group_profilename,$module,$submodule, "SET024", true);
+$bo_act_configurationProfiles.editGroupProfileForBooleanSettings($group_profilename,$module,$submodule, "SET025", true);
+$bo_act_configurationProfiles.editGroupProfileForBooleanSettings($group_profilename,$module,$submodule, "SET026", true);
 
 
 var $wizardTitleName = "AutoRegression";
