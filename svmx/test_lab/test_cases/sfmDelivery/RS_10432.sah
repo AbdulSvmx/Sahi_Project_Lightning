@@ -96,7 +96,7 @@ _click($sfm_pg_wo.btn_updateExtEdit);
 $pickListValues = ["Labor","Usage/Consumption"];
 $sfm_act_SFM.addChildLine("Labor",$productName,[],[], $pickListLabels, $pickListValues,[],[],[],[],[],[],[],[],[]);
 $textPicklistDateLabels = ["Start Date and Time","Received City"];
-$textPicklistDateExpValues = ["8/6/2018","Bengaluru"];
+$textPicklistDateExpValues = ["08/6/2018","Bengaluru"];
 $sfm_act_lightningConfig.openExtEditForLatestItem();
 $verifyResult2 = $sfm_act_SFM.verifyValuesInDelivery($textPicklistDateLabels,$textPicklistDateExpValues,["Start Date and Time"],["1:30 PM"],[],[],[],[],[],[]);
 _click($sfm_pg_wo.btn_updateExtEdit);
