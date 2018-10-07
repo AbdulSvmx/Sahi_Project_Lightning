@@ -30,41 +30,41 @@ var $bo_act_WebServices=new function bo_act_WebServices(){
 			_wait(1000);
 			
 			_click($bo_pg_manageWOLineUsageForSorting.sel_selHeaderOption1);
-			_click($bo_pg_manageWOLineUsageForSorting.txt_searchItem);
+			//_click($bo_pg_manageWOLineUsageForSorting.txt_searchItem);
 			_setValue($bo_pg_manageWOLineUsageForSorting.txt_searchItem,"Order Type");
 			_doubleClick($bo_pg_manageWOLineUsageForSorting.lbl_orderType);
 			_wait(1000);
 			
 			_click($bo_pg_manageWOLineUsageForSorting.sel_selHeaderOption2);
-			_click($bo_pg_manageWOLineUsageForSorting.txt_searchItem);
+			//_click($bo_pg_manageWOLineUsageForSorting.txt_searchItem);
 			_setValue($bo_pg_manageWOLineUsageForSorting.txt_searchItem,"Zip");
 			_doubleClick($bo_pg_manageWOLineUsageForSorting.lbl_zip);
 			_wait(1000);
 			
 			_click($bo_pg_manageWOLineUsageForSorting.sel_selHeaderOption3);
-			_click($bo_pg_manageWOLineUsageForSorting.txt_searchItem);
+			//_click($bo_pg_manageWOLineUsageForSorting.txt_searchItem);
 			_setValue($bo_pg_manageWOLineUsageForSorting.txt_searchItem,"Is Entitlement Performed");
 			_doubleClick($bo_pg_manageWOLineUsageForSorting.lbl_isEntitlementPrform);
 			_wait(1000);
 			_click($bo_pg_manageWOLineUsageForSorting.sel_grpPart);
-			_click($bo_pg_manageWOLineUsageForSorting.txt_searchItem);
+			//_click($bo_pg_manageWOLineUsageForSorting.txt_searchItem);
 			_setValue($bo_pg_manageWOLineUsageForSorting.txt_searchItem,$subTypePart);
 			_doubleClick($bo_pg_manageWOLineUsageForSorting.lbl_dateReceived);
 			_wait(3000);
 			
 			_click($bo_pg_manageWOLineUsageForSorting.sel_grpExpenses);
-			_click($bo_pg_manageWOLineUsageForSorting.txt_searchItem);
+			//_click($bo_pg_manageWOLineUsageForSorting.txt_searchItem);
 			_setValue($bo_pg_manageWOLineUsageForSorting.txt_searchItem,$subTypeActivityType);
 			_doubleClick($bo_pg_manageWOLineUsageForSorting.lbl_activityType);
 			//_doubleClick($bo_pg_manageWOLineUsageForSorting.lbl_activityType);
 			_wait(3000);
 			_click($bo_pg_manageWOLineUsageForSorting.sel_grpExpenses);
-			_click($bo_pg_manageWOLineUsageForSorting.txt_searchItem);
+			//_click($bo_pg_manageWOLineUsageForSorting.txt_searchItem);
 			_setValue($bo_pg_manageWOLineUsageForSorting.txt_searchItem,$subTypeExpenses);
 			_doubleClick($bo_pg_manageWOLineUsageForSorting.lbl_billableQty);
 			_wait(3000);
 			_click($bo_pg_manageWOLineUsageForSorting.sel_grpTravel);
-			_click($bo_pg_manageWOLineUsageForSorting.txt_searchItem);
+			//_click($bo_pg_manageWOLineUsageForSorting.txt_searchItem);
 			_setValue($bo_pg_manageWOLineUsageForSorting.txt_searchItem,$subTypeTravel);
 			_doubleClick($bo_pg_manageWOLineUsageForSorting.lbl_ConsumedFromLocation);
 			_setValue($bo_pg_sfmTransactionAndDesigner.txt_sfmSavePageLayoutAs, $sfmTemplateSaveAsName);
