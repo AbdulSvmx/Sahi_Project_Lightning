@@ -132,10 +132,9 @@ var $sfm_act_formDesigner = new function sfm_act_formDesigner() {
 	this.addQuestionToSection=function($sectionName,$question){
 		_click(_f("main").s_richeditabletext($sectionName));
 		_setValue($sfm_pg_formDesigner.txt_searchQuestion, $question);
-		_mouseOver(_f("main").s_label($question+"[1]"));
+		//_mouseOver(_f("main").s_label($question+"[1]"));
+		_mouseOver(_f("main").questionlisttreeitemrendererm($question));
 		_click($sfm_pg_formDesigner.btn_addQuestion.near(_f("main").s_label($question)));
 	};
-	
-	
 	
 };

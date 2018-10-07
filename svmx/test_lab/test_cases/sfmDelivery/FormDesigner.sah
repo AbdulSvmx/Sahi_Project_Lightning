@@ -4,7 +4,7 @@ $rs_formDesigner.start();
 
 
 
-
+/*
 	//Login to App and navigate to sfm transaction and designer page
 	$bo_act_login.login($g_url,$sfmlUsn,$sfmlPwd);
 	_wait(15000);
@@ -48,4 +48,29 @@ $rs_formDesigner.start();
 	
 	
 	
+	//*********************
+	this.tab_exitCriteria=_f("main").tab("Exit Criteria");
+	this.sel_questionSelect=_f("main").s_dropdownlist(0).near(_f("main").s_label("Question"));
+	this.btn_addQuestion=_f("main").linkbutton("+Add Answer");
+	_getValue(_f("main").s_label("1").near(_f("main").s_label("Evaluation")));
+	
+	
+	_f("main").s_dropdownlist("evaluationCombo")
+	_f("main").s_dropdownlist("operandTypeCombo")
+	_f("main").s_richeditabletext("textDisplay[54]")
+	_f("main").datefield("date")
+	_f("main").s_dropdownlist("sectionListCombo")
+	_f("main").s_button("Delete[7]")
+		_f("main").s_button("Remove Question[1]")
+
+	
+	
+	
+	
+	_setSelected(sel_questionSelect,$question);
+	
+	
+	
+	
+	*/
 $rs_formDesigner.end();
