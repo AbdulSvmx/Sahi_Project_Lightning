@@ -78,7 +78,7 @@ $productid1=$sfm_act_restApiMethods.postRestApi($appiumAdminUn,$appiumAdminPwd,$
 //get the Product
 $Productname1 =$sfm_act_restApiMethods.getRestApi($appiumAdminUn,$appiumAdminPwd,$appiumclient_id,$appiumclient_secret,$appiumorginstance,"GET", $objNameP1, $columnName, $filter, $productid1);
 _log($Productname1);
-
+//
 $objNameP2= "Product2";
 $obJson = "{\"Name\":\""+$restproductname1+"2\",\"IsActive\":\"true\" }";
 $columnName = "Name";

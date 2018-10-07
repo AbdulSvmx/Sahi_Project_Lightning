@@ -34,7 +34,7 @@ var $sfm_act_SFM = new function sfm_act_SFM() {
 			$sfm_act_SFM.addFieldToScreen($fieldName, $containerName);
 		}
 	};
-this.dvrScenario5 = function($sfmNameToBeCloned, $sfmName, $isCustom,
+	this.dvrScenario5 = function($sfmNameToBeCloned, $sfmName, $isCustom,
 			 $sfmTemplateSaveAsName,$sfmTemplate, $fieldName, $containerName,$bProcessStatus) 
 			 {
 		$bo_act_navigation.navigateToSfmTransactionDesigner();
@@ -52,8 +52,8 @@ this.dvrScenario5 = function($sfmNameToBeCloned, $sfmName, $isCustom,
 			//_click(_f("main").s_checkbox("/chk/i").leftOf(_f("main").s_label($sfmNameToBeCloned), 10, 10));
 			
 		} else if (_isVisible(_f("main").s_checkbox(2).leftOf(_f("main").s_label($sfmName), 10, 10))) {
-			_log("Process does not exists ");
-			$bProcessStatus = true;
+			_log("Process does  exists ");
+			$bProcessStatus = false;
 			
 			} else{
 				_log("Process does not exists ");

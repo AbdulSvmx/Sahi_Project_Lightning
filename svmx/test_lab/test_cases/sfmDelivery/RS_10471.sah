@@ -260,27 +260,6 @@ _wait(14000,_isVisible($sfm_pg_wo.label_wo));
 $todayDate = $sfm_act_lightningConfig.removePrecedingZeroInDate($todayDate);
 $tomorrowDate = $sfm_act_lightningConfig.removePrecedingZeroInDate($tomorrowDate);
 $yesterdayDate = $sfm_act_lightningConfig.removePrecedingZeroInDate($yesterdayDate);
-var $p = $current.getHours();
-var $min = $current.getMinutes();
-if($p >= 12){
-	if($min < 10){
-		$min = "0"+$min;
-	}
-	else if($min >= 10){
-		 $min = $current.getMinutes();
-	}
-	var $now = $current.getHours()-12+":"+$min+" PM";
-}
-else {
-	if($min < 10){
-		$min = "0"+$min;
-	}
-	if($min >= 10){
-		 $min = $current.getMinutes();
-	}
-	var $now = $current.getHours()+":"+$min+" AM";
-}
-_log("Value for now is "+$now);
 var $res = $sfm_act_lightningConfig.verifyValues($textLabels, $textValues, $pickListLabels, $pickListValues, $textAreaLabels, $textAreaValues, $checkBoxLabels, $checkBoxValues, $dateTimeLabels, $dateTimeDateValues, $timeValues,$emailLabels,$emailValues,$lookUpLabels,$lookUpValues,$multiPickLabels,$multiPickValues,$urlLabels,$urlValues,$telephoneLabels,$telephoneValues);
 _assertTrue($res);
 if($res){
