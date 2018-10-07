@@ -231,7 +231,9 @@ var $bo_act_WebServices=new function bo_act_WebServices(){
 			var $orderTy=_getText($bo_pg_webServices.txt_ordType);
 			var $zip=_getText($bo_pg_webServices.txt_zip);
 		
-		
+		_log("Drive Time: "+$drMin);
+		_log("Order type: "+$orderTy);
+		_log("Zip: "+$zip);
 		if ( $enteredMinBS== $drMin){
 				_log("Entered Driving Time  is matching with BeforeSaveUpdate Driving Time");
 		}else{
