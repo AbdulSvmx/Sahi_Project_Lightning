@@ -726,6 +726,50 @@ var $sfm_act_Transactions = new function sfm_act_Transactions() {
 				_wait(2000);
 				}
 			};
+
+			/**
+			 * Author		:	Lakshmi BS
+			 * Function		: 	To create SFM transacion and add value to property page
+			 * Parameter	:	$sfmName=sfm name
+			 * 					$sfmID=sfm id
+			 * 					$sfmDescription=descriptio
+			 * 					$sfmType=sfm type
+			 * 					$srcHeaderObj=Source header object name
+			 * 					$srcChildObj=source child object name
+			 * 					$trgHeaderObj = target  header object name
+			 * 					$trgChildObj = target child object name
+			 * Example		:	Refer RS_10540.sah file for function usage
+			 */
+			this.sfmProperties=function($sfmName,$sfmID,$sfmDescription,$sfmType,$srcHeaderObj,$srcChildObj,$trgHeaderObj,$trgChildObj){
+				_click($sfm_pg_screenDesigner.btn_propoties);
+				_wait(10000,_isVisible($bo_pg_sfmTransactionAndDesigner.txt_name));
+				_setValue($bo_pg_sfmTransactionAndDesigner.txt_name, $sfmName);
+				_setValue($bo_pg_sfmTransactionAndDesigner.txt_sfmTransactionId, $sfmID);
+				_setValue($sfm_pg_screenDesigner.txt_sfmDescription,$sfmDescription);
+				_setSelected($sfm_pg_screenDesigner.sel_createSFMTransaction,$sfmType);
+				if ($sfmType=="from Source Object to create new header and child records" || $sfmType=="from Source Object to create new child records only") {
+						
+					
+					_setValue(_f("main").s_textinput("textInput"),"In");
+					_setSelected(_f("main").s_combobox("objCombo1").inside(_f("main").s_panel("Use data from...")),"Installed Product");
+					_click(_f("main").s_checkbox("Installed Product (Parent)"));
+				}else if ($sfmType=="to generate a Checklist/Survey type of Process") {
+					//Work order selection is not working as it taking some random value
+					//_setSelected($sfm_pg_screenDesigner.sel_checkListAvaialble,$srcHeaderObj);
+					_setValue($sfm_pg_screenDesigner.txt_checkListAvaialble,"Wo");
+					_wait(500);
+					_click($sfm_pg_screenDesigner.lbl_workOrder);
+				} else{
+					_setSelected($sfm_pg_screenDesigner.sel_targetHeaderObject,$trgHeaderObj);
+					_wait(10000,_isVisible(_f("main").s_checkbox($trgChildObj)));
+					_click(_f("main").s_checkbox($trgChildObj).near($sfm_pg_screenDesigner.lbl_targetRecordLabel));
+				_wait(2000);
+				}
+				
+				_setSelected($sfm_pg_screenDesigner.sel_targetHeaderObject,$trgHeaderObj);
+				_wait(10000,_isVisible(_f("main").s_checkbox($trgChildObj)));
+				_click(_f("main").s_checkbox($trgChildObj).near($sfm_pg_screenDesigner.lbl_targetRecordLabel));
+			};
 			
 			/**
 			 * Author		:	Anand Kakhandaki
