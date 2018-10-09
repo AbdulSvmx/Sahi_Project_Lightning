@@ -239,7 +239,12 @@ this.addCustomFields = function($objectName,$fieldNames,$dataTypes,$myDomain,$mu
 			_click(_radio("/dtype/",_in(_cell($dataTypes[$i]))));
 			_click($sfm_pg_wo.btn_nextInAddCustomFields);
 			_setValue($sfm_pg_wo.txt_customFieldName,$fieldNames[$i]);
-			_keyPress($sfm_pg_wo.txt_customFieldName,13);
+			_
+
+			
+			
+			
+			($sfm_pg_wo.txt_customFieldName,13);
 			//Add multi picklist values if needed
 			if($dataTypes[$i] === "Picklist (Multi-Select)"){
 				_check($sfm_pg_wo.radio_multiPicklist);
