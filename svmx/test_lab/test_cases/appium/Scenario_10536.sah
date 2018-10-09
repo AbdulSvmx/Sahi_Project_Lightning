@@ -32,6 +32,8 @@ $filter="Name";
 $SCONID =$sfm_act_restApiMethods.getRestApi($appiumAdminUn,$appiumAdminPwd,$appiumclient_id,$appiumclient_secret,$appiumorginstance,"GET", $objNameSCON, $columnName, $filter, $SCONName);
 _log($SCONID);
 
+
+
 // To get the Account 10538 ID
 $objNameAcc= "Account";
 $columnName = "Id";
@@ -62,7 +64,7 @@ _log($IBName);
 
 // To create a Covered Product with IB Name and Product name from above
 $objNameCP= "SVMXC__Service_Contract_Products__c";
-$obJson = "{\"SVMXC__Product__c\":\""+$ProductID+"\", \"SVMXC__Installed_Product__c\":\""+$IbID+"\"}";
+$obJson = "{\"SVMXC__Product__c\":\""+$ProductID+"\", \"SVMXC__Installed_Product__c\":\""+$IbID+"\",\"SVMXC__Service_Contract__c\":\""+$SCONID+"\" }";
 $columnName = "Name";
 $filter="id";
 //create  case with above created account and other parameters
@@ -74,7 +76,9 @@ _log($CPID);
 
 
 $objName2= "Contact";
-$obJson = "{\"AccountId\":\""+$accountID+"\",\"FirstName\":\""+$restcontactfirstname+"\",\"LastName\":\""+$restcontactlastname+"\"}";
+var $restcontactfirstname="C10536_";
+var $restcontactlastname="Auto";
+$obJson = "{\"AccountId\":\""+$Acc10538ID+"\",\"FirstName\":\""+$restcontactfirstname+"\",\"LastName\":\""+$restcontactlastname+"\"}";
 $columnName = "Name";
 $filter="id";
 //create  case with above created account and other parameters
@@ -106,7 +110,19 @@ $WOName =$sfm_act_restApiMethods.getRestApi($appiumAdminUn,$appiumAdminPwd,$appi
 _wait(30000);
 _call(top.location.reload());
 $bo_act_navigation.navigateToCreatedRecordUsingGlobalSearchWO($WOName);
-$bo_act_interactiveEntitlement_WO.performInteractiveEntitlementWO_UsingWarranty($WOName,$warrantyName);
+$bo_act_interactiveEntitlement_WO.performInteractiveEntitlementWO_UsingWarranty($WOName,$WarrantyName);
+
+
+// To add a Product Serviced Work Detail to the Work Order
+
+$objNameWD= "SVMXC__Service_Order_Line__c";
+$obJson = "{\"RecordType\":{\"Name\":\"Products Serviced\"},\"SVMXC__Service_Order__c\":\""+$WoID+"\"}";
+$columnName = "Name";
+$filter="id";
+//create  case with above created account and other parameters
+$WDID=$sfm_act_restApiMethods.postRestApi($appiumAdminUn,$appiumAdminPwd,$appiumclient_id,$appiumclient_secret,$appiumorginstance,$objNameWD,$obJson,"POST");
+_log($WDID);
+
 _writeFile("true", $appiumPath+$sahiIntermediatoryPath, true);
 
 $pre_requisite.end();
