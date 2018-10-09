@@ -128,7 +128,7 @@ _click($sfm_pg_sfmDesigner.btn_eeCancel);
 //add labor line and validate form fill
 $sfm_act_sfmDesigner.addChildLine("Labor");
 _setStrictVisibilityCheck(true);
-_click(_div("/trigger-search/",_near(_span("Case",_in(_div("/sfm-window/"))))));
+_click(_div("/trigger-search/",_near(_span("Case",_near(_div("Labor"))))));
 _setValue($sfm_pg_wizardWindow.txt_quickFindLookUp,$caseNumber1);
 _click($sfm_pg_wizardWindow.btn_searchProduct);
 _click(_link($caseNumber1));
@@ -138,14 +138,14 @@ if(_getText($sfm_pg_sfmDesigner.txt_eeReceivedCity)=="Loan" && _getText($sfm_pg_
 }else {
 	_log("Formfill for Labor line has not happened as expected","FAILURE");
 }
-_click($sfm_pg_sfmDesigner.btn_eeCancel);
+_click($sfm_pg_sfmDesigner.btn_eeUpdate);
 _setStrictVisibilityCheck(false);
 
-_click($sfm_pg_sfmDesigner.btn_deliveryQuickSave);
+_click($sfm_pg_sfmDesigner.btn_deliverySave);
 _wait(8000);
 if(_exists($sfm_pg_sfmDesigner.txt_priceAlert)){
 	_click($sfm_pg_sfmDesigner.btn_priceAlertOk);
 	_log("Pass ::: FormFill for multiple child lines is working");
-	_wait(1000);
+	_wait(10000,_isVisible($sfm_pg_wo.label_wo));
 }
 $rs_10443.end();

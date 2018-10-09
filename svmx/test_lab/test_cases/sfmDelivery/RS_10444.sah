@@ -77,7 +77,7 @@ _wait(5000);
 if(_exists($sfm_pg_sfmDesigner.txt_priceAlert)){
 	_click($sfm_pg_sfmDesigner.btn_priceAlertOk);
 	_log("Pass ::: Saved successfully");
-	_wait(1000,_isVisible($sfm_pg_wo.label_wo));
+	_wait(10000,_isVisible($sfm_pg_wo.label_wo));
 }
 _selectDomain();
 _assertEqual($accountName,_getText(_link(0,_near(_span("Account")))),"Formfill for field that was not in screen has not happened");
