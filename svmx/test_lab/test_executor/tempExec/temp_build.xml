@@ -66,7 +66,7 @@
 		<property name="threads" value="1"/>
 		<property name="showPeriodicSummary" value="true"/>
 		<property name="failedSuiteName" value="temp_failed_${browser}.suite"/>
-		<property name="failedSuite" value="svmx/test_lab/test_suites/temp/${failedSuiteName}"/>
+		<property name="failedSuite" value="svmx/test_lab/test_suites/tempExec/${failedSuiteName}"/>
 		<property name="jsCodeCoverage" value="false"/>
 	</target>
 
