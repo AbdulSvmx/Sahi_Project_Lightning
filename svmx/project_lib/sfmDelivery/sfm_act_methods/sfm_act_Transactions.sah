@@ -737,7 +737,6 @@ var $sfm_act_Transactions = new function sfm_act_Transactions() {
 					_click(_f("main").s_checkbox($trgChildObj).near($sfm_pg_screenDesigner.lbl_targetRecordLabel));
 				_wait(2000);
 				}
-				_selectDomain();
 			};
 
 			/**
