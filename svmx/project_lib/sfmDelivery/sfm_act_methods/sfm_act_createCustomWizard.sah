@@ -930,12 +930,13 @@ var $sfm_act_createCustomWizard = new function sfm_act_createCustomWizard() {
 		//Check if the SFM process link exists
 		_assertExists(_span($sfmname));
 		_click(_span($sfmname));
-		_wait(4000);
+		_wait(10000);
 		};
 		
 		this.addSubtractDates = function($given_date,$num_of_days) {
 			//This function adds or subtracts calendar days from a given date and returns in the
 			//form of MM/DD/YYYY
+			//Author: Janaki.
 			var $result_date = new Date($given_date);
 			var $monthString; var $dateString;
 	        $result_date.setDate($given_date.getDate()+$num_of_days);

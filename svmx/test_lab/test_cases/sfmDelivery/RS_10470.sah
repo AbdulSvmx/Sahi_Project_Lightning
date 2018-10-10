@@ -133,27 +133,7 @@ var $current = new Date();
 var $todayDate = $current.getMonth()+1 + "/" + $current.getDate() + "/" + $current.getFullYear();
 var $tomorrowDate = $sfm_act_createCustomWizard.addSubtractDates($current,1);
 var $yesterdayDate = $sfm_act_createCustomWizard.addSubtractDates($current,-1);
-//Calculating current time
-var $p = $current.getHours();
-var $min = $current.getMinutes();
-if($p >= 12){
-	if($min < 10){
-		$min = "0"+$min;
-	}
-	else if($min >= 10){
-		 $min = $current.getMinutes();
-	}
-	var $now = $current.getHours()-12+":"+$min+" PM";
-}
-else {
-	if($min < 10){
-		$min = "0"+$min;
-	}
-	if($min >= 10){
-		 $min = $current.getMinutes();
-	}
-	var $now = $current.getHours()+":"+$min+" AM";
-}
+var $now = $sfm_act_lightningConfig.calculateNow();
 _log("Value for now is "+$now);
 //Removing preceding zeros in date fields to validate in work order object.
 $todayDate = $sfm_act_lightningConfig.removePrecedingZeroInDate($todayDate);
@@ -213,7 +193,7 @@ _selectDomain();
 _selectWindow("/SFM Transaction Designer/");
 _wait(12000);
 _click($bo_pg_sfmTransactionAndDesigner.btn_screenDesigner);
-_wait(5000);
+_wait(10000);
 $bo_act_navigation.designHeaderScreen($pageLayoutName, $fieldsToMap);
 _click($bo_pg_sfmTransactionAndDesigner.btn_quickSave1);
 _wait(2000);
@@ -228,26 +208,7 @@ var $tomorrowDate = $sfm_act_createCustomWizard.addSubtractDates($current,1);
 var $yesterdayDate = $sfm_act_createCustomWizard.addSubtractDates($current,-1);
 //Calculating current time
 
-var $p = $current.getHours();
-var $min = $current.getMinutes();
-if($p >= 12){
-	if($min < 10){
-		$min = "0"+$min;
-	}
-	else if($min >= 10){
-		 $min = $current.getMinutes();
-	}
-	var $now = $current.getHours()-12+":"+$min+" PM";
-}
-else {
-	if($min < 10){
-		$min = "0"+$min;
-	}
-	if($min >= 10){
-		 $min = $current.getMinutes();
-	}
-	var $now = $current.getHours()+":"+$min+" AM";
-}
+var $now = $sfm_act_lightningConfig.calculateNow();
 _log("Value for now is "+$now);
 //Verify values in SFM Delivery screen
 var $current = new Date();
