@@ -81,8 +81,8 @@ var $bo_act_workOrders = new function bo_act_workOrders() {
 	};
 	
 	this.checkEntitlementPS = function($workOrderNumber){
-		$bo_act_navigation.navigateToWorkOrdersTab();
-		_click(_link($workOrderNumber));
+		//$bo_act_navigation.navigateToWorkOrdersTab();
+		//_click(_link($workOrderNumber));
 		_selectDomain("/svmx/");
 		_click($bo_pg_workOrders.btn_SFWCheckEntitlementPS);
 		_selectDomain();

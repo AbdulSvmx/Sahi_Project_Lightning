@@ -6,7 +6,13 @@ var $bo_pg_interactiveEntitlement_CaseAndWO = new function bo_pg_interactiveEnti
 	 */
 	this.txt_checkEntitlement_WOPage = _div("Check Entitlement: Work Order");
 	this.btn_checkEntitlement = _button("/Check Entitlement/");//_button("/Check Entitlement/");
+	this.btn_chkEntitlementPS = _span("Check Entitlement");
 	this.btn_settings = _cell("Settings");
+	this.btn_settingsPS = _span("Settings");
+	this.btn_matchContactsPS = _button("Match Contact");
+	this.btn_entitleusingAccount = _button("Account");
+	this.btn_apply = _span("Apply");
+	this.btn_selectwarrantyorScon = _div("Select for Contract/Warranty options");
 	
 	// Click Installed Product on Check Entitlement PS line Page
 	this.clickOnInstalledProduct = function($IBName){
@@ -24,6 +30,7 @@ var $bo_pg_interactiveEntitlement_CaseAndWO = new function bo_pg_interactiveEnti
 	
 	this.btn_applySelection = _span("Apply Selection");
 	this.btn_saveEntitlementPSLine = _button("Save Entitlement");
+	this.btn_saveEntitltmentPS = _span("Save Entitlement");
 	this.btn_cancelEntitlementPSLinePage = _span("Cancel");
 	
 	/**
