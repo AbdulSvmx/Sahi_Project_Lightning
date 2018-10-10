@@ -703,6 +703,7 @@ var $sfm_act_Transactions = new function sfm_act_Transactions() {
 			 * Example		:	Refer RS_10458.sah file for function usage
 			 */
 			this.sfmPropertiesPage=function($sfmName,$sfmID,$sfmDescription,$sfmType,$srcHeaderObj,$srcChildObj,$trgHeaderObj,$trgChildObj){
+				_selectDomain($g_domain);
 				_click($sfm_pg_screenDesigner.btn_propoties);
 				_wait(10000,_isVisible($bo_pg_sfmTransactionAndDesigner.txt_name));
 				_setValue($bo_pg_sfmTransactionAndDesigner.txt_name, $sfmName);
@@ -710,9 +711,20 @@ var $sfm_act_Transactions = new function sfm_act_Transactions() {
 				_setValue($sfm_pg_screenDesigner.txt_sfmDescription,$sfmDescription);
 				_setSelected($sfm_pg_screenDesigner.sel_createSFMTransaction,$sfmType);
 				if ($sfmType=="from Source Object to create new header and child records" || $sfmType=="from Source Object to create new child records only") {
+					if($srcHeaderObj=='Work Order'){
+						_setValue($sfm_pg_screenDesigner.txt_sourceRecordText,"Wo");
+						_wait(500);
+						_click($sfm_pg_screenDesigner.lbl_workOrder);
+					}else{
 					_setSelected($sfm_pg_screenDesigner.sel_sourceHeaderObject,$srcHeaderObj);
+					}
 					_wait(10000,_isVisible(_f("main").s_checkbox($srcChildObj).near($sfm_pg_screenDesigner.lbl_sourceRecordLabel)));
 					_click(_f("main").s_checkbox($srcChildObj).near($sfm_pg_screenDesigner.lbl_sourceRecordLabel));
+					_setSelected($sfm_pg_screenDesigner.sel_targetHeaderObject,$trgHeaderObj);
+					_wait(10000,_isVisible(_f("main").s_checkbox($trgChildObj)));
+					_click(_f("main").s_checkbox($trgChildObj).near($sfm_pg_screenDesigner.lbl_targetRecordLabel));
+				    _wait(2000);
+					
 				}else if ($sfmType=="to generate a Checklist/Survey type of Process") {
 					//Work order selection is not working as it taking some random value
 					//_setSelected($sfm_pg_screenDesigner.sel_checkListAvaialble,$srcHeaderObj);
@@ -725,6 +737,7 @@ var $sfm_act_Transactions = new function sfm_act_Transactions() {
 					_click(_f("main").s_checkbox($trgChildObj).near($sfm_pg_screenDesigner.lbl_targetRecordLabel));
 				_wait(2000);
 				}
+				_selectDomain();
 			};
 
 			/**
