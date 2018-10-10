@@ -3,8 +3,6 @@ var $rs_formDesigner = _testcase("RS_formDesigner","Verify current record litera
 $rs_formDesigner.start();
 
 
-
-/*
 	//Login to App and navigate to sfm transaction and designer page
 	$bo_act_login.login($g_url,$sfmlUsn,$sfmlPwd);
 	_wait(15000);
@@ -15,18 +13,92 @@ $rs_formDesigner.start();
 	_click($bo_pg_sfmTransactionAndDesigner.btn_newSFM);
 	_wait(25000,_isVisible($sfm_pg_screenDesigner.btn_propoties));
 
+	//Create checklist process
 	var $sfmName=$bo_act_common.generateRandomName("SFMCheckList_");
 	var $sfmType="to generate a Checklist/Survey type of Process";
 	var $srcHeaderObj="Work Order";
 	_selectDomain($g_domain);
 	$sfm_act_Transactions.sfmPropertiesPage($sfmName, "", "", $sfmType, $srcHeaderObj, "", "", "");
 	
-	//create new Section
+	//Checklist - Form Designer
 	_click($sfm_pg_formDesigner.tab_formDesigner);
 	
-	$sfm_act_formDesigner.editSection("Checklist Section Title");
-	$sfm_act_formDesigner.editSectionInformation("Disassemble System", "Disassemble System", "http://google.com/doc");
+	var $sectionName1="Disassemble System";
+	var $sectionName2="Replace Hardisc";
 	
+	//edit default section
+	$sfm_act_formDesigner.editSection("Checklist Section Title");
+	$sfm_act_formDesigner.editSectionInformation($sectionName1, $sectionName1, "http://google.com/doc");
+	_click($sfm_pg_formDesigner.btn_applySectionWindow);
+	_wait(3000,_isVisible($sfm_pg_formDesigner.label_saveEditSectionMsg));
+	_click($sfm_pg_formDesigner.btn_cancelSectionWindow);
+	
+	
+	//Create new section
+	$sfm_act_formDesigner.createNewSection();
+	$sfm_act_formDesigner.editSection("Checklist Section Title");
+	$sfm_act_formDesigner.editSectionInformation($sectionName2, $sectionName2, "http://google.com/ReplaceHardiscdoc");
+	_click($sfm_pg_formDesigner.btn_applySectionWindow);
+	_wait(3000,_isVisible($sfm_pg_formDesigner.label_saveEditSectionMsg));
+	_click($sfm_pg_formDesigner.btn_cancelSectionWindow);
+	
+
+	//Adding question to section
+	var $questionNames=["i36-Date-01","i36-DateTime-01","Test-Number-01"];
+	$sfm_act_formDesigner.addQuestionToSection($sectionName1, $questionNames[0]);
+	$sfm_act_formDesigner.addQuestionToSection($sectionName1, $questionNames[1]);
+	$sfm_act_formDesigner.addQuestionToSection($sectionName1, "T3");
+	$sfm_act_formDesigner.addQuestionToSection($sectionName1, "Test-Number-01");
+	
+	//Add Validation
+	var $dvrName=$bo_act_common.generateRandomName("dvrName_");
+	var $dvrID=$dvrName;
+	var $comboField=["Equals","Not Equal"];
+	var $operandType=["Value","Function"];
+	var $answer=["10/10/2018","Today"];
+	var $advExpr="1 AND 2";
+	var $errorMsg="This not qualify the criteria";
+	var $dvrExpressionDetails=[$comboField,$operandType,$answer,$advExpr,$errorMsg];
+
+	$sfm_act_formDesigner.editQuestionInSection($sectionName1, $questionNames[0]);
+	$sfm_act_formDesigner.dataValidationOnCheckListQuestion($dvrName, $dvrID, $dvrExpressionDetails);
+	_click($sfm_pg_formDesigner.tab_questionDetails);
+	_click($sfm_pg_formDesigner.btn_dvrSave);
+	_wait(3000);
+	
+	//Adding Exist criteria
+	var $questionType=["Date","Date/Time","Number"];
+	
+	//criteria for "i36-Date-01"
+	var $comboField=["Equals","Not Equal"];
+	var $operandType=["Value","Function"];
+	var $answer=["10/10/2018","Today"];
+	var $skipTo=["2-"+$sectionName2,"2-"+$sectionName2];
+	var $criteriaDetails1=[$comboField,$operandType,$answer,$skipTo];
+	
+	
+	//criteria for "i36-DateTime-01"
+	var $comboField=["Greater Than","Greater or Equal To"];
+	var $operandType=["Value","Function"];
+	var $answer=["10/10/2018","Tomorrow"];
+	var $skipTo=["2-"+$sectionName2,"2-"+$sectionName2];
+	var $criteriaDetails2=[$comboField,$operandType,$answer,$skipTo];
+	
+	//criteria for "Test-Number-01"
+	var $comboField=["Less Than","Less or Equal To"];
+	var $operandType=["Value","Value"];
+	var $answer=["100","200"];
+	var $skipTo=["2-"+$sectionName2,"2-"+$sectionName2];
+	var $criteriaDetails3=[$comboField,$operandType,$answer,$skipTo];
+	
+	var $criteriaDetails=[$criteriaDetails1,$criteriaDetails2,$criteriaDetails3];
+	
+	$sfm_act_formDesigner.editSection($sectionName1);
+	$sfm_act_formDesigner.addExistCriteria();
+	$sfm_act_formDesigner.addQuesToExistCriteriaTab($questionNames, $questionType, $criteriaDetails);
+	
+	/*	
+	//Adding Entry criteria
 	var $comboField=["Account","Contact","Account Picklist"];
 	var $comboConditions=["Is Null","Is Not Null","Equals"]; 
 	var $toggleButton=["","",""];
@@ -34,43 +106,20 @@ $rs_formDesigner.start();
 	var $advExpr="1 AND 2 AND 3";
 	var $criteriaName=$bo_act_common.generateRandomName("SFMCheckListEC_");
 	var $criteriaDetails=[$comboField,$comboConditions,$toggleButton,$comboInput,$advExpr,$criteriaName];
-	
+
+	$sfm_act_formDesigner.editSection($sectionName1);
 	$sfm_act_formDesigner.createEntryCriteria("", $criteriaDetails);
 	_click($sfm_pg_formDesigner.btn_cancelSectionWindow);
 	
 	$sfm_act_formDesigner.removeQuestionFromSection("Disassemble System", "Checklist Section Title");
-	
+	*/
 	//_click($sfm_pg_formDesigner.div_entryCriteria);
 	//Entry criteria - selecting from exiting
 
 	//_setSelected(sel_searchEntryCriteria,"rs_101_test");
 	//_f("main").s_textinput("/Save this filter as/").near();
 	
-	
-	
-	//*********************
-	this.tab_exitCriteria=_f("main").tab("Exit Criteria");
-	this.sel_questionSelect=_f("main").s_dropdownlist(0).near(_f("main").s_label("Question"));
-	this.btn_addQuestion=_f("main").linkbutton("+Add Answer");
-	_getValue(_f("main").s_label("1").near(_f("main").s_label("Evaluation")));
-	
-	
-	_f("main").s_dropdownlist("evaluationCombo")
-	_f("main").s_dropdownlist("operandTypeCombo")
-	_f("main").s_richeditabletext("textDisplay[54]")
-	_f("main").datefield("date")
-	_f("main").s_dropdownlist("sectionListCombo")
-	_f("main").s_button("Delete[7]")
-		_f("main").s_button("Remove Question[1]")
 
 	
 	
-	
-	
-	_setSelected(sel_questionSelect,$question);
-	
-	
-	
-	
-	*/
 $rs_formDesigner.end();

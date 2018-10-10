@@ -829,10 +829,11 @@ var $sfm_act_Transactions = new function sfm_act_Transactions() {
 			/**
 			 * Author		:	Anand Kakhandaki
 			 * Function		: 	To add fields to screen designer
-			 * Parameter	:	$headersToAdd = fields to add to header
+			 * Parameter	:	$headersToAdd = Array of fields to add to header
 			 * 					$childToAdd = fields to add to child
 			 * 					$sfmPgLayoutName = page layout name
 			 * Example		:	Refer RS_10462.sah file for function usage
+			 * Note			: Please dont use 
 			 */
 			this.screenDesigner=function($headersToAdd,$childToAdd,$sfmPgLayoutName,$sfmPgLayoutName){
 				var $childObj=$childToAdd[0];
