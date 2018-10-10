@@ -88,10 +88,7 @@ var $sfm_act_wizards = new function sfm_act_wizards() {
 		_click($sfm_pg_wizards.btn_saveStep);
 		_wait(6000,_heading4("Success"));
 		//if(_isVisible(_heading4("Success"))){
-			//_log("Pass");
-		
-
-		
+			//_log("Pass");	
 };
 	
  
