@@ -1,4 +1,4 @@
-var $rs_6877 = _testcase("RS_10499","Verify Lookup Context Header to header.");
+var $rs_10499 = _testcase("RS_10499","Verify Lookup Context Header to header.");
 $rs_10499.start();
 
 		//Pre_Requesite
