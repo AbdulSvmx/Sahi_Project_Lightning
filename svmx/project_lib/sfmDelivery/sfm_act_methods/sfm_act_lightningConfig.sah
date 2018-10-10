@@ -718,4 +718,40 @@ this.removePrecedingZeroInDate =  function($dateValue){
 	var $correctDate = $y[0]+"/"+$y[1]+"/"+$y[2];
 	return $correctDate;	
 };
+
+
+this.calculateNow = function(){
+	//Calculating current time and returns in the form of HH:MM AM/PM
+	//Author: Janaki
+	var $p = $current.getHours();
+	var $min = $current.getMinutes();
+	if($p >= 12){
+		if($min < 10){
+			$min = "0"+$min;
+		}
+		else if($min >= 10){
+			 $min = $current.getMinutes();
+		}
+		var $now = $current.getHours()-12+":"+$min+" PM";
+	}
+	else if($p == 12){
+		if($min < 10){
+			$min = "0"+$min;
+		}
+		else if($min >= 10){
+			 $min = $current.getMinutes();
+		}
+		var $now = $current.getHours()+":"+$min+" PM";
+	}
+	else {
+		if($min < 10){
+			$min = "0"+$min;
+		}
+		if($min >= 10){
+			 $min = $current.getMinutes();
+		}
+		var $now = $current.getHours()+":"+$min+" AM";
+	}
+ return $now;
+};
 };
