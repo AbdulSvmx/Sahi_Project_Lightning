@@ -57,8 +57,9 @@ $rs_formDesigner.start();
 	var $operandType=["Value","Function"];
 	var $answer=["10/10/2018","Today"];
 	var $advExpr="1 AND 2";
+	var $msfType="Error";
 	var $errorMsg="This not qualify the criteria";
-	var $dvrExpressionDetails=[$comboField,$operandType,$answer,$advExpr,$errorMsg];
+	var $dvrExpressionDetails=[$comboField,$operandType,$answer,$advExpr,$msfType, $errorMsg];
 
 	$sfm_act_formDesigner.editQuestionInSection($sectionName1, $questionNames[0]);
 	$sfm_act_formDesigner.dataValidationOnCheckListQuestion($dvrName, $dvrID, $dvrExpressionDetails);

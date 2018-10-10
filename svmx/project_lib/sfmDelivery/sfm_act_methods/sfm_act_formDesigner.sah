@@ -299,12 +299,13 @@ var $sfm_act_formDesigner = new function sfm_act_formDesigner() {
 		$operandType=$dvrExpressionDetails[1];
 		$answer=$dvrExpressionDetails[2];
 		$advExpr=$dvrExpressionDetails[3];
-		$errorMsg=$dvrExpressionDetails[4];
-		this.addDVRExpressions($comboField, $operandType, $answer, $advExpr, $errorMsg);
+		$msfType=$dvrExpressionDetails[4];
+		$errorMsg=$dvrExpressionDetails[5];
+		this.addDVRExpressions($comboField, $operandType, $answer, $advExpr, $msfType, $errorMsg);
 		
 	};
 	
-	this.addDVRExpressions=function($comboField, $operandType, $answer, $advExpr, $errorMsg){
+	this.addDVRExpressions=function($comboField, $operandType, $answer, $advExpr, $msfType, $errorMsg){
 		//_log("$comboField.length: "+$comboField.length);
 		if ($comboField.length>1) {
 			for (var $i = 0; $i < $comboField.length-1; $i++) {
@@ -329,10 +330,11 @@ var $sfm_act_formDesigner = new function sfm_act_formDesigner() {
 					_log("Inside Value");
 					_setValue($sfm_pg_formDesigner.txt_dvrAnsValue.near($rowNo),$answer[$index]);
 				}else {
-					_setValue($sfm_pg_formDesigner.sel_ansPicklist.near($rowNo),$answer[$index]);
+					_setSelected($sfm_pg_formDesigner.sel_ansPicklist.near($rowNo),$answer[$index]);
 				}
 			}
 			_setValue($sfm_pg_formDesigner.txt_dvrAdvExpr,$advExpr);
-			_setValue($sfm_pg_formDesigner.txt_dvrAdvExpr,$errorMsg);
+			_setSelected($sfm_pg_formDesigner.sel_dvrMsgType,$msfType);
+			_setValue($sfm_pg_formDesigner.txt_dvrErrorMsg,$errorMsg);
 	};
 };
