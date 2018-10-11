@@ -147,7 +147,23 @@ var $sfm_act_SFM = new function sfm_act_SFM() {
 		
 		return $bProcessStatus;
 	};
-
+	
+	/**
+	 * Author		:	Anand Kakhandaki
+	 * Function		:	To edit custom process
+	 * Parameters	:	$sfmName: Process name
+	 * Examples		:	Refer RS_10499.sah
+	 */
+	this.editCustomProcess=function($sfmName){
+		$bo_act_navigation.navigateToSfmTransactionDesigner();
+		_wait(20000,_isVisible($bo_pg_sfmTransactionAndDesigner.btn_yourCustomSfmTransactions));
+		_click($bo_pg_sfmTransactionAndDesigner.btn_yourCustomSfmTransactions);
+		_setValue($bo_pg_sfmTransactionAndDesigner.lbl_searchSFM, $sfmName);
+		_wait(10000);
+		_click(_f("main").s_label($sfmName).near(_f("main").processlistitemrenderer($sfmName)));
+		_wait(20000,_isVisible($sfm_pg_screenDesigner.btn_propoties));
+	};
+	
 	/**
 	 * Based on the number of items passed in array(ContainerName), fields gets added to either header or child
 	 * If Container is Order Status then field is added to header otherwise to Child lines
