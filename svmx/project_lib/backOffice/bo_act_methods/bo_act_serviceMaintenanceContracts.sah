@@ -164,7 +164,7 @@ this.addPartsPricingToServiceContract = function($sconName, $prodName1, $pricePe
 	_setValue($bo_pg_serviceMaintenanceContracts.txt_product_value, $prodName2);
 	_click($bo_pg_serviceMaintenanceContracts.lkup_productvalue);
 	_setValue($bo_pg_serviceMaintenanceContracts.number_discount,$discountvalue);
-	_click($bo_pg_serviceMaintenanceContracts.btn_activecheckbox);
+	//_click($bo_pg_serviceMaintenanceContracts.btn_activecheckbox);
 
 	_click($bo_pg_serviceMaintenanceContracts.btn_update);
 	_click($bo_pg_serviceMaintenanceContracts.btn_save);

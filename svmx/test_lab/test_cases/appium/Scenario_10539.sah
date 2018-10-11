@@ -25,7 +25,7 @@ var $durationOfCoverage = 5;
 var $seperator = "/";
 var $pre_requisite= _testcase("scenario_10539","Verify Get Price calculation online mode- SCON (Service Contract)");
 
-var $restAccName="A10539_Auto";
+
 var $restcontactfirstname="C10539_";
 var $restcontactlastname="Auto";
 var $restproductname1=$bo_act_common.generateRandomName("P10539");
@@ -106,7 +106,7 @@ $bo_act_products.addStandardPriceForProduct($Productname2, $standardPriceValue2)
 
 $objName1= "Account";
 var $restName = $bo_act_common.generateRandomName("");
-$obJson = "{\"Name\":\"Auto"+$restAccName+"\"}"; 
+$obJson = "{\"Name\":\"Auto_10539"+$restName+"\"}"; 
 $columnName = "Name";
 $filter="id";
 //create an account
@@ -179,10 +179,10 @@ _call(top.location.reload());
 $bo_act_navigation.navigateToCreatedRecordUsingGlobalSearchWO($WOName);
 $bo_act_interactiveEntitlement_WO.performInteractiveEntitlementWOSCON_Account($WOName,$SCONName);
 // To write the WorkOrder Number into the Test Data for Appium Side to pick it up
-$excel.insertUnderColumn("/auto/SVMX_Catalyst/fsaautomation/resources/TestData.xlsx", "TestData", "Data1",$WOName , "44");
-$excel.insertUnderColumn("/auto/SVMX_Catalyst/fsaautomation/resources/TestData.xlsx", "TestData", "Data2",$Productname1,"44");
-$excel.insertUnderColumn("/auto/SVMX_Catalyst/fsaautomation/resources/TestData.xlsx", "TestData", "Data3",$Productname2 , "44");
-$excel.insertUnderColumn("/auto/SVMX_Catalyst/fsaautomation/resources/TestData.xlsx", "TestData", "Data4", $SCONName, "44");
-$excel.insertUnderColumn("/auto/SVMX_Catalyst/fsaautomation/resources/TestData.xlsx", "TestData", "Data5", $accountName, "44");
+$excel.insertUnderColumn("/auto/SVMX_Catalyst/fsaautomation/resources/TestData.xlsx", "RS_10539", "Data1",$WOName , "2");
+$excel.insertUnderColumn("/auto/SVMX_Catalyst/fsaautomation/resources/TestData.xlsx", "RS_10539", "Data2",$Productname1,"2");
+$excel.insertUnderColumn("/auto/SVMX_Catalyst/fsaautomation/resources/TestData.xlsx", "RS_10539", "Data3",$Productname2 , "2");
+$excel.insertUnderColumn("/auto/SVMX_Catalyst/fsaautomation/resources/TestData.xlsx", "RS_10539", "Data4", $SCONName, "2");
+$excel.insertUnderColumn("/auto/SVMX_Catalyst/fsaautomation/resources/TestData.xlsx", "RS_10539", "Data5", $accountName, "2");
 _writeFile("true", $appiumPath+$sahiIntermediatoryPath, true);
 $pre_requisite.end();
