@@ -11,12 +11,13 @@ $pre_requisite.start();
 
 _setSpeed($g_stepSpeed);
 
-var $data_excel = _readExcelFile("/auto/SVMX_Catalyst/fsaautomation/resources/TestData.xlsx","TestData",true);
-var $Product2Name = $data_excel[44]["Data3"];
-var $Product10538Name = $data_excel[42]["Data2"];
-var $SCONName = $data_excel[44]["Data4"];
-var $Acc10539Name = $data_excel[44]["Data5"];
-var $IB10538Name = $data_excel[42]["Data4"];
+var $data_excel_10538 = _readExcelFile("/auto/SVMX_Catalyst/fsaautomation/resources/TestData.xlsx","RS_10538",true);
+var $data_excel_10539 = _readExcelFile("/auto/SVMX_Catalyst/fsaautomation/resources/TestData.xlsx","RS_10539",true);
+var $Product2Name = $data_excel_10539[2]["Data3"];
+var $Product10538Name = $data_excel_10538[2]["Data2"];
+var $SCONName = $data_excel_10539[2]["Data4"];
+var $Acc10539Name = $data_excel_10539[2]["Data5"];
+var $IB10538Name = $data_excel_10538[2]["Data4"];
 $bo_act_login.login($g_url, $appiumAdminUn, $appiumAdminPwd);
 $sfm_act_lightningConfig.switchToLightning();
 
@@ -103,7 +104,7 @@ _call(top.location.reload());
 $bo_act_navigation.navigateToCreatedRecordUsingGlobalSearchWO($WOName);
 $bo_act_interactiveEntitlement_WO.performInteractiveEntitlementPSLinesWarranty($WOName, $WarrantyName);
 
-$excel.insertUnderColumn("/auto/SVMX_Catalyst/fsaautomation/resources/TestData.xlsx", "TestData", "Data1",$WOName ,"58");
+$excel.insertUnderColumn("/auto/SVMX_Catalyst/fsaautomation/resources/TestData.xlsx", "RS_10537", "Data1",$WOName ,"2");
 
 //Changing the Setting values
 var $module = "Entitlement Verification";
