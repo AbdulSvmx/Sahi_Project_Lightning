@@ -42,12 +42,11 @@ $rs_10499.start();
 		$filterValue=$sfm_act_restApiMethods.postRestApi($sfmlUsn,$sfmlPwd,$sfmClientId,$sfmConsumerSecret,$sfmOrgInstance,$objName,$obJson,"POST");
 		$WONumber =$sfm_act_restApiMethods.getRestApi($sfmlUsn,$sfmlPwd,$sfmClientId,$sfmConsumerSecret,$sfmOrgInstance,"GET", $objName, $columnName, $filter, $filterValue);
 		_log("WO number: "+$WONumber);
-		
 
 		// Login to App
 		$bo_act_login.login($g_url,$sfmlUsn,$sfmlPwd);
 		
-/*		//clone standard SFM
+		//clone standard SFM
 		var $sfmNameToBeCloned="Manage Work Order Lines - Usage";
 		var $sfmName=$bo_act_common.generateRandomName("rs_10499_");
 		var $sfmTemplateSaveAsName=$bo_act_common.generateRandomName("SFM_Page_");
@@ -74,41 +73,32 @@ $rs_10499.start();
 		var $handOver=false;
 		_log("Wizard Name: "+$wizardName1);
 		$sfm_act_wizards.addToWizard($wizardObject, $wizardName1, $wizardType, $sfmName, $handOver, $profile); 
-*/				
-		var $sfmName="rs_10499_10102018222524";
+			
 		//Search WO and launch SFM
 		RS10449_searchWOandLaunchSFM($WONumber,$sfmName);
-	
 		
 		//***Work Order Header validation***//
 		//Assert context override function enable
 		_wait(3000,_isVisible($sfm_pg_sfmDesigner.txt_headerAccount));
 		_setValue($sfm_pg_sfmDesigner.txt_headerAccount,$Account[0]);
 		_click($sfm_pg_sfmDesigner.link_quickSave);
+		_wait(2000);
 		if (_exists(_div("Price not calculated, because entitlement check has not been performed."))) {
 			_click(_span("Ok"));
 		}
 		_wait(10000);
 		_click($sfm_pg_sfmDesigner.btn_headerContactsearchIcon);
 		_assertContainsText("/"+$Account[0]+"/",$sfm_pg_sfmDesigner.label_contextOverride);
-		
-		//_click($sfm_pg_sfmDesigner.link_searchLink);
-		//_wait(5000,_isVisible(_link($userName[0])));
-		this.RS10449_searchContact("");
-		
+		RS10449_searchContact("");
 		for (var $i = 0; $i < $userName.length-2; $i++) {
 			_assertExists(_link($userName[$i]));
 		}
-		
-		this.RS10449_searchContact($userName[3]);
+		RS10449_searchContact($userName[3]);
 		_assertExists($sfm_pg_sfmDesigner.btn_noRecordMSG);
 		
 		//Uncheck context override checkbox
 		_click($sfm_pg_sfmDesigner.btn_contextOverride);
-		
-		this.RS10449_searchContact($userName[3]);
-		
-
+		RS10449_searchContact($userName[3]);
 		_assertExists(_link($userName[3]));
 		_click($sfm_pg_sfmDesigner.btn_cancelContactWindow);
 /*		
@@ -118,9 +108,9 @@ $rs_10499.start();
 		_wait(5000,_isVisible(_div("/search/")));
 		//_assertEqual("/Empty/",_getText($sfm_pg_sfmDesigner.label_contextOverride));
 		_assertContainsText("/Empty/",$sfm_pg_sfmDesigner.label_contextOverride);
-		this.RS10449_searchContact($userName[3]);
+		RS10449_searchContact($userName[3]);
 		_assertExists(_link($userName[3]));
-		this.RS10449_searchContact($userName[0]);
+		RS10449_searchContact($userName[0]);
 		_assertNotExists(_link($userName[0]));
 		_click($sfm_pg_sfmDesigner.btn_cancelContactWindow);
 */		
@@ -142,29 +132,26 @@ $rs_10499.start();
 		RS10499_saveSFM();
 		
 		//search WO and launch the SFM
-		this.RS10449_searchWOandLaunchSFM($WONumber,$sfmName);
+		RS10449_searchWOandLaunchSFM($WONumber,$sfmName);
 	
 		//Assert No Override context functionality
 		_wait(3000,_isVisible($sfm_pg_sfmDesigner.txt_headerAccount));
 		_setValue($sfm_pg_sfmDesigner.txt_headerAccount,$Account[0]);
 		_click($sfm_pg_sfmDesigner.link_quickSave);
+		_wait(2000);
 		if (_exists(_div("Price not calculated, because entitlement check has not been performed."))) {
 			_click(_span("Ok"));
 		}
 		_wait(10000);
 		_click($sfm_pg_sfmDesigner.btn_headerContactsearchIcon);
 		_assertNotExists($sfm_pg_sfmDesigner.label_contextOverride);
-		
-		//_click($sfm_pg_sfmDesigner.link_searchLink);
-		//_wait(5000,_isVisible(_link($userName[0])));
-		this.RS10449_searchContact("");
-		
+		RS10449_searchContact("");
 		for (var $i = 0; $i < $userName.length-2; $i++) {
 			_assertExists(_link($userName[$i]));
 		}
 		
 		
-this.RS10499_saveSFM=function(){
+function RS10499_saveSFM(){
 	_setStrictVisibilityCheck(true);
 	_click($bo_pg_sfmTransactionAndDesigner.btn_pageLayoutSave);
 	_wait(5000,_isVisible($bo_pg_sfmTransactionAndDesigner.btn_sfmpageSaveConfirmMsg));
@@ -172,14 +159,14 @@ this.RS10499_saveSFM=function(){
 	_setStrictVisibilityCheck(false);
 };		
 
-this.RS10449_searchContact=function($contactName){
+function RS10449_searchContact($contactName){
 	_setValue($sfm_pg_sfmDesigner.btn_searchTextBox,$contactName);
 	_click($sfm_pg_sfmDesigner.link_searchLink);
 	_wait(5000,_isVisible(_link($contactName)));
 };
 
 //Search WO and launch SFM
-this.RS10449_searchWOandLaunchSFM=function($WONumber,$sfmName){
+function RS10449_searchWOandLaunchSFM($WONumber,$sfmName){
 	$sfm_act_common.globalSearchInLightning($WONumber);
 	_setStrictVisibilityCheck(true);
 	$sfm_act_createCustomWizard.clickWizardBtn($sfmName);
