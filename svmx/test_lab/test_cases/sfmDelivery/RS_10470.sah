@@ -3,7 +3,7 @@ $RS_10470.start();
 //Variables used
 var $objectName = "Work Order";
 var $processName = "RS_10470";
-var $process_to_clone = "Create Follow-Up Work Order from Work Order";
+var $process_to_clone = "Create New Support Case";
 var $sfmTemplate = "SVMXSTD: Manage WO Usage Lines";
 var $isCustom = false;
 var $ctr = 0;
@@ -22,6 +22,7 @@ var $customFieldsNames = ["Automation URL","Automation multipicklist","Automatio
 var $pageLayoutForProfile = "SVMX Work Order - Admin";
 var $myDomain = "/lightning/";
 var $multiPicklistValues = ["Multipicklist1","Multipicklist2","Multipicklist3"];
+var $tempFields = ["Age"];
 
 //Appending current timestamp to process name to make it unique.
 var $timeStamp = $bo_act_navigation.getCurrentTimeStamp();
@@ -88,11 +89,15 @@ _wait(60000, _isVisible($bo_pg_sfmTransactionAndDesigner.txt_name));
 _setValue($bo_pg_sfmTransactionAndDesigner.txt_name, $processName);
 _setValue($bo_pg_sfmTransactionAndDesigner.txt_sfmTransactionId,"");
 _setValue($bo_pg_sfmTransactionAndDesigner.txt_sfmTransactionId,$processName);
+_setSelected($bo_pg_sfmTransactionAndDesigner.list_objComboBox,$objectName);
+if(_isVisible($bo_pg_sfmTransactionAndDesigner.btn_popUpOK)){
+	_click($bo_pg_sfmTransactionAndDesigner.btn_popUpOK);
+}
 _click($bo_pg_sfmTransactionAndDesigner.btn_screenDesigner);
-_setValue($bo_pg_sfmTransactionAndDesigner.txt_sfmSavePageLayoutAs, $pageLayoutName);
-_wait(3000);
-_click($bo_pg_sfmTransactionAndDesigner.btn_pageLayoutSave);
-_wait(3000, _isVisible(_f("main").label("Page saved")));
+$bo_act_navigation.designHeaderScreen($pageLayoutName,$tempFields);
+_wait(2000);
+_click($bo_pg_sfmTransactionAndDesigner.btn_quickSave1);
+
 _wait(3000);
 //Delete the mapped fields from the Page Layout to test the scenario of mapping without the fields in Page Layout.
 _log("Delete the mapped fields from the Page Layout to test the scenario of mapping without the fields in Page Layout");
@@ -111,7 +116,7 @@ $picklistLabels = ["Account","Contact","Record Type ID","Clock Paused Forever","
 $pickListValues = ["HCSAccountForTesting","Lightning Contact","Record Type1","true","Today","Tomorrow","Yesterday","Now","Today","Tomorrow","Yesterday","Open"];
 //Create mapping for all possible standard data types.
 _click($bo_pg_sfmTransactionAndDesigner.btn_qualifyingCriteriaAndFieldMapping);
-$bo_act_mappings.createMapping("Work Order",$picklistLabels,$pickListValues,$textLabels,$textValues,$mapName);
+$bo_act_mappings.createMapping($objectName,$picklistLabels,$pickListValues,$textLabels,$textValues,$mapName);
 _selectDomain();
 _setSpeed(1000);
 
@@ -128,27 +133,7 @@ var $current = new Date();
 var $todayDate = $current.getMonth()+1 + "/" + $current.getDate() + "/" + $current.getFullYear();
 var $tomorrowDate = $sfm_act_createCustomWizard.addSubtractDates($current,1);
 var $yesterdayDate = $sfm_act_createCustomWizard.addSubtractDates($current,-1);
-//Calculating current time
-var $p = $current.getHours();
-var $min = $current.getMinutes();
-if($p >= 12){
-	if($min < 10){
-		$min = "0"+$min;
-	}
-	else if($min >= 10){
-		 $min = $current.getMinutes();
-	}
-	var $now = $current.getHours()-12+":"+$min+" PM";
-}
-else {
-	if($min < 10){
-		$min = "0"+$min;
-	}
-	if($min >= 10){
-		 $min = $current.getMinutes();
-	}
-	var $now = $current.getHours()+":"+$min+" AM";
-}
+var $now = $sfm_act_lightningConfig.calculateNow();
 _log("Value for now is "+$now);
 //Removing preceding zeros in date fields to validate in work order object.
 $todayDate = $sfm_act_lightningConfig.removePrecedingZeroInDate($todayDate);
@@ -163,7 +148,8 @@ if(_isVisible($sfm_pg_wo.btn_okPriceNotCalculated)){
 }	
 _selectDomain();
 _wait(14000,_isVisible($sfm_pg_wo.label_wo));
-
+$childWoId= _getText($sfm_pg_wo.label_wo);
+_log("New Work Order id "+ $childWoId);
 
 //Verify value map in the work order.
 var $lookUpLabels = ["Account","Contact"];
@@ -200,14 +186,14 @@ _selectDomain();
 //Add the fields in the Screen designer
 $sfm_act_createCustomWizard.clickWizardlinks($processName);
 _selectDomain($g_domain);
-_click($sfm_pg_wo.btn_arrowNextToGetPrice);
+_click($sfm_pg_wo.btn_arrowNextToUserSettings);
 _assertVisible($sfm_pg_wo.link_launchSfmDesigner);
 _click($sfm_pg_wo.link_launchSfmDesigner);
 _selectDomain();
 _selectWindow("/SFM Transaction Designer/");
 _wait(12000);
 _click($bo_pg_sfmTransactionAndDesigner.btn_screenDesigner);
-_wait(5000);
+_wait(10000);
 $bo_act_navigation.designHeaderScreen($pageLayoutName, $fieldsToMap);
 _click($bo_pg_sfmTransactionAndDesigner.btn_quickSave1);
 _wait(2000);
@@ -217,35 +203,16 @@ _selectDomain($g_domain);
 $sfm_act_lightningConfig.clearServicemaxCache();
 //Setting up the date literal values
 var $current = new Date();
-var $todayDate = $current.getMonth()+1 + "/" + $current.getDate() + "/" + $current.getFullYear();
+var $todayDate = $sfm_act_createCustomWizard.addSubtractDates($current,0);
 var $tomorrowDate = $sfm_act_createCustomWizard.addSubtractDates($current,1);
 var $yesterdayDate = $sfm_act_createCustomWizard.addSubtractDates($current,-1);
 //Calculating current time
 
-var $p = $current.getHours();
-var $min = $current.getMinutes();
-if($p >= 12){
-	if($min < 10){
-		$min = "0"+$min;
-	}
-	else if($min >= 10){
-		 $min = $current.getMinutes();
-	}
-	var $now = $current.getHours()-12+":"+$min+" PM";
-}
-else {
-	if($min < 10){
-		$min = "0"+$min;
-	}
-	if($min >= 10){
-		 $min = $current.getMinutes();
-	}
-	var $now = $current.getHours()+":"+$min+" AM";
-}
+var $now = $sfm_act_lightningConfig.calculateNow();
 _log("Value for now is "+$now);
 //Verify values in SFM Delivery screen
 var $current = new Date();
-var $todayDate = $current.getMonth()+1 + "/" + $current.getDate() + "/" + $current.getFullYear();
+var $todayDate = $sfm_act_createCustomWizard.addSubtractDates($current,0);
 var $tomorrowDate = $sfm_act_createCustomWizard.addSubtractDates($current,1);
 var $yesterdayDate = $sfm_act_createCustomWizard.addSubtractDates($current,-1);
 var $deliveryTextPickLabels = ["Account","Contact","Proforma Invoice Amount","Scheduled Date","Automation Date2","Automation Date3","First Queued DateTime","Started Driving To Location Date Time","Completed Date Time","Finished Onsite Date Time","Group Email","Estimated Duration","Automation Percent","Automation Phone","City","Automation URL"];
@@ -274,6 +241,7 @@ _wait(14000,_isVisible($sfm_pg_wo.label_wo));
 $todayDate = $sfm_act_lightningConfig.removePrecedingZeroInDate($todayDate);
 $tomorrowDate = $sfm_act_lightningConfig.removePrecedingZeroInDate($tomorrowDate);
 $yesterdayDate = $sfm_act_lightningConfig.removePrecedingZeroInDate($yesterdayDate);
+$timeValues =[$now,"12:00 AM","12:00 AM","12:00 AM"];
 var $res = $sfm_act_lightningConfig.verifyValues($textLabels, $textValues, $pickListLabels, $pickListValues, $textAreaLabels, $textAreaValues, $checkBoxLabels, $checkBoxValues, $dateTimeLabels, $dateTimeDateValues, $timeValues,$emailLabels,$emailValues,$lookUpLabels,$lookUpValues,$multiPickLabels,$multiPickValues,$urlLabels,$urlValues,$telephoneLabels,$telephoneValues);
 _assertTrue($res);
 if($res){

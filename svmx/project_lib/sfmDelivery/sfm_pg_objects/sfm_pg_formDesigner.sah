@@ -4,6 +4,7 @@ var $sfm_pg_formDesigner = new function sfm_pg_formDesigner() {
 	this.btn_addSection=_f("main").s_button("Add a section");
 	this.btn_removeQuestion=_f("main").s_button("/Remove Question/");
 	this.btn_addQuestion=_f("main").s_button("Add question to form");
+	this.txt_searchQuestion=_f("main").s_textinput("searchText").near(_f("main").s_label("Question List"));
 	
 	//.near(_f("main").s_label("What is time"))
 	
@@ -37,11 +38,40 @@ var $sfm_pg_formDesigner = new function sfm_pg_formDesigner() {
 	this.btn_entryCriteriaApplyButton=_f("main").s_togglebutton("Apply/Remove Entry Criteria");
 	this.label_saveEntryCriteriaMsg=_f("main").uiftetextfield("Entry Criteria Map Saved Successfully");
 	
-	//Exit criteria tab objects
+	
+	
+	//Exit Criteria Tab general objects
 	this.tab_exitCriteria=_f("main").tab("Exit Criteria");
+	this.label_evaluation=_f("main").s_label("Evaluation");
+	this.sel_questionSelect=_f("main").s_dropdownlist(0);
+	this.link_addAnswer=_f("main").linkbutton("+Add Answer");
+	this.link_addQuestion=_f("main").linkbutton("+Add Question");
+	this.btn_applyRemove=_f("main").s_togglebutton("Apply/Remove Exit criteria");
 	
+	//Date question fields
+	this.sel_comboFiled=_f("main").s_dropdownlist("evaluationCombo");
+	this.sel_operandType=_f("main").s_dropdownlist("operandTypeCombo");
+	this.sel_ansPicklist=_f("main").s_combobox("picklist");
+	this.sel_skipToSection=_f("main").s_dropdownlist("sectionListCombo");
+	this.txt_ansTextValue=_f("main").s_textinput("operandValue");
 	
+	//Edit Question
+	this.btn_editQuestion=_f("main").s_button("Edit Question");
+	this.tab_dataValidation=_f("main").tab("Data Validation");
+	this.label_dvrExpr=_f("main").s_label("Expressions").near(this.tab_dataValidation);
 	
+	//DVR page
+	this.txt_dvrName=_f("main").s_textinput("validationName");
+	this.txt_dvrID=_f("main").s_textinput("validationId");
+	this.sel_dvrComboField=_f("main").s_dropdownlist("conditionsCombo");
+	//this.txt_dvrAnsValue=_f("main").s_textinput("textInput");
+	this.txt_dvrAnsValue=_f("main").s_richeditabletext("textDisplay");
+	this.btn_dvrAddRow=_f("main").s_button("Add a row");
+	this.txt_dvrAdvExpr=_f("main").s_textinput("advExpIP");
+	this.sel_dvrMsgType=_f("main").s_dropdownlist("msgType");
+	this.txt_dvrErrorMsg=_f("main").s_textarea("message");
+	this.tab_questionDetails=_f("main").tab("Question Details");
+	this.btn_dvrSave=_f("main").s_button("Save").near(this.tab_questionDetails);
 	
 	this.label_saveEditSectionMsg=_f("main").uiftetextfield("Please save SFM Transaction to save changes");
 };

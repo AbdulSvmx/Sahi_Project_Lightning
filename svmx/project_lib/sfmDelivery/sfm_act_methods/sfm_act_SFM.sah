@@ -34,7 +34,7 @@ var $sfm_act_SFM = new function sfm_act_SFM() {
 			$sfm_act_SFM.addFieldToScreen($fieldName, $containerName);
 		}
 	};
-this.dvrScenario5 = function($sfmNameToBeCloned, $sfmName, $isCustom,
+	this.dvrScenario5 = function($sfmNameToBeCloned, $sfmName, $isCustom,
 			 $sfmTemplateSaveAsName,$sfmTemplate, $fieldName, $containerName,$bProcessStatus) 
 			 {
 		$bo_act_navigation.navigateToSfmTransactionDesigner();
@@ -52,8 +52,8 @@ this.dvrScenario5 = function($sfmNameToBeCloned, $sfmName, $isCustom,
 			//_click(_f("main").s_checkbox("/chk/i").leftOf(_f("main").s_label($sfmNameToBeCloned), 10, 10));
 			
 		} else if (_isVisible(_f("main").s_checkbox(2).leftOf(_f("main").s_label($sfmName), 10, 10))) {
-			_log("Process does not exists ");
-			$bProcessStatus = true;
+			_log("Process does  exists ");
+			$bProcessStatus = false;
 			
 			} else{
 				_log("Process does not exists ");
@@ -147,7 +147,23 @@ this.dvrScenario5 = function($sfmNameToBeCloned, $sfmName, $isCustom,
 		
 		return $bProcessStatus;
 	};
-
+	
+	/**
+	 * Author		:	Anand Kakhandaki
+	 * Function		:	To edit custom process
+	 * Parameters	:	$sfmName: Process name
+	 * Examples		:	Refer RS_10499.sah
+	 */
+	this.editCustomProcess=function($sfmName){
+		$bo_act_navigation.navigateToSfmTransactionDesigner();
+		_wait(20000,_isVisible($bo_pg_sfmTransactionAndDesigner.btn_yourCustomSfmTransactions));
+		_click($bo_pg_sfmTransactionAndDesigner.btn_yourCustomSfmTransactions);
+		_setValue($bo_pg_sfmTransactionAndDesigner.lbl_searchSFM, $sfmName);
+		_wait(10000);
+		_click(_f("main").s_label($sfmName).near(_f("main").processlistitemrenderer($sfmName)));
+		_wait(20000,_isVisible($sfm_pg_screenDesigner.btn_propoties));
+	};
+	
 	/**
 	 * Based on the number of items passed in array(ContainerName), fields gets added to either header or child
 	 * If Container is Order Status then field is added to header otherwise to Child lines
@@ -606,6 +622,8 @@ return $result;
 					$actualList.push($currentMultiValues[$z]);
 				}
 			 }
+			_log("Expected values for "+$uniqueMulti[$i]+" "+$currentMultiValues);
+			_log("Actual values for "+$uniqueMulti[$i]+" "+$actualList);
 			if(_areEqual($currentMultiValues,$actualList)){
 				_log("Multi Picklist values for "+$uniqueMulti[$i]+" match");
 				$x = true;
