@@ -25,7 +25,7 @@ var $durationOfCoverage = 5;
 var $seperator = "/";
 var $pre_requisite= _testcase("scenario_10539","Verify Get Price calculation online mode- SCON (Service Contract)");
 
-var $restAccName="A10539_Auto";
+
 var $restcontactfirstname="C10539_";
 var $restcontactlastname="Auto";
 var $restproductname1=$bo_act_common.generateRandomName("P10539");
@@ -106,7 +106,7 @@ $bo_act_products.addStandardPriceForProduct($Productname2, $standardPriceValue2)
 
 $objName1= "Account";
 var $restName = $bo_act_common.generateRandomName("");
-$obJson = "{\"Name\":\"Auto"+$restAccName+"\"}"; 
+$obJson = "{\"Name\":\"Auto_10539"+$restName+"\"}"; 
 $columnName = "Name";
 $filter="id";
 //create an account
