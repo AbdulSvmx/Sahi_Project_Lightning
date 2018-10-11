@@ -1,0 +1,104 @@
+var $RS_10544 = _testcase("RS_10544", "Verify Source Object update");
+$RS_10544.start();
+
+var $sfmName = $bo_act_common.generateRandomName("RS_10544_");
+var $sfmPgLayoutName = $bo_act_common.generateRandomName("RS_10540_View_Layout");
+var $ProcessStatus = false;
+
+
+//var $sfmNameToBeCloned = "Create Follow-Up Work Order from Work Order";
+var $isCustom = false;
+var $sfmTemplate = "SVMXSTD: Manage WO Usage Lines";
+var $containerName = ["Order Status","Order Status","Order Status","Order Status","Order Status","Order Status"];
+var $headersToAdd = ["Scheduled Date Time","Priority","Account","Problem Description","Order Status","Billing Type"];
+var $sorceobj="Work Order";
+var $srcHeaderObj="Work Order";
+var $trgHeaderObj="Work Order";
+var $srcChildObj="Work Detail (Work Order)";
+var $trgChildObj="Work Detail (Work Order)";
+var $trgChildObj1="Parts";
+
+//var $fieldName = ["Problem Description"];
+
+var $targetObject="Work Order";
+var $rulename =$sfmName;
+var $childToAdd ="Parts";
+
+//var $headersToAdd = ["Order Type","Order Status"];
+var $fieldName = ["Activity Type","Line Type","Billable Qty"];
+var $childToAdd=[$trgChildObj1,$fieldName];
+
+
+var $sfmName = $bo_act_common.generateRandomName("ZDelete_RS_10544_");
+var $sfmType="from Source Object to create new header and child records";
+
+
+//var $fieldpart = ["Billable Qty","Billing Information","Date Received","Received City","Received Country","Start Date and Time","Part","Is Billable"];
+//var $conditionpart= ["Set","Set","Set","Set","Set","Set","Set","Set"];
+//var $operandpart = ["Value","Value","Function","Value","Value","Function","Value","Value"];
+//var $valuepart = ["2","Long Text area Source Object Updated","Text source Object Updated","India","true"];
+//var $souObjectpart  = "Work Order";
+
+
+
+//Source Object update for header
+var $field = ["Account","Billing Type","Problem Description","Scheduled Date","Scheduled Date Time","No Of Times Assigned", "URL","Email","Phone","Is Entitlement Performed"];
+var $condition= ["Set","Set","Set","Set","Set","Set","Set","Set","Set","Set"];
+var $operand = ["Field","Function","Value","Function","Function","Value","Value","Value","Value","Function"];
+var $value = ["Account","Warranty","Source Object Updated","Today","Tomorrow","2","www.servicemax.com","automation@qa.com","9886098860","true"];
+var $souObject  = "Work Order";
+
+
+//Source object update for child
+var $cfield = ["Billable Qty","Billing Information","Date Received","Received City","Received Country","Start Date and Time", "Part","Is Billable"];
+var $ccondition= ["Set","Set","Set","Set","Set","Set","Set","Set"];
+var $coperand = ["Value","Value","Function","Value","Function","Function","Field","Function"];
+var $cvalue = ["2","Long Text area Source Object Updated","Today","Text source Object Updated","India","Tomorrow","Part","true"];
+var $csouObject  = "Parts";
+
+
+//Login to App and navigate to sfm transaction and designer page
+_setSpeed($g_stepSpeed);
+$bo_act_login.login($g_url, $appiumAdminUn, $appiumAdminPwd);
+$sfm_act_lightningConfig.switchToLightning(); 
+
+//Check for the process if exists
+$ProcessStatus=$sfm_act_SFM.sfmProcessCheck($sfmName);
+
+if($ProcessStatus==false){
+$bo_act_navigation.navigateToSfmTransactionDesigner();
+_wait(15000,_isVisible($bo_pg_sfmTransactionAndDesigner.btn_newSFM));
+
+
+//Create New SFM Transaction
+_click($bo_pg_sfmTransactionAndDesigner.btn_newSFM);
+_wait(25000,_isVisible($sfm_pg_screenDesigner.btn_propoties));
+
+$sfm_act_Transactions.sfmPropertiesPage($sfmName, "", $sfmName, $sfmType,$srcHeaderObj, $srcChildObj, $trgHeaderObj, $trgChildObj);
+//_setValue(_f("main").s_textinput("Work Detail (Work Order)").near(_f("main").s_panel("...to create these records")),"Parts");
+_setValue(_f("main").s_textinput("/aliasName/").rightOf(_f("main").s_checkbox("Work Detail (Work Order)[1]")),"Parts");
+
+_click(_f("main").tab("Qualifying Criteria and Field Mappings"));
+_wait(10000);
+//_setSelected(_f("main").s_dropdownlist("objCombo"), "Work Order");
+_setStrictVisibilityCheck(true);
+_click(_f("main").s_label("Parts"));
+_setSelected(_f("main").s_dropdownlist("objCombo").leftOf(_f("main").s_label("Parts")), "Work Detail (Work Order)");
+
+$sfm_act_Transactions.screenDesigner($headersToAdd,$childToAdd,$sfmPgLayoutName,$sfmPgLayoutName);
+_click($sfm_pg_sfmDesigner.btn_quickSaveSFM);
+
+_wait(15000);
+//Creating SOU for Header
+$sfm_pg_sourceObjectUpdate.createSOU($souObject,$field, $condition, $operand, $value,"Others");
+
+//Creating SOU for child
+$sfm_pg_sourceObjectUpdate.createSOU($csouObject,$cfield, $ccondition, $coperand, $cvalue,"Others");
+
+//_click($bo_pg_sfmTransactionAndDesigner.btn_finalQuickSave);
+_click($bo_pg_sfmTransactionAndDesigner.btn_saveAndclose);
+
+
+_setSpeed($g_stepSpeed);
+
+}

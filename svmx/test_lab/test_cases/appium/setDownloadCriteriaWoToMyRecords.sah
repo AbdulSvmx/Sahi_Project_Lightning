@@ -16,8 +16,7 @@ $bo_act_SFMAppPermission.workOrderDownloadCriteriachanges($valuebefore);
 
 _wait(10000);
 _selectDomain("/svmx/");
-_wait(5000,_div("Success:Mobile Configuration saved successfully for the selected profile"));
-
+_wait(15000,_div("Success:Mobile Configuration saved successfully for the selected profile"));
 if(_isVisible(_div("Success:Mobile Configuration saved successfully for the selected profile"))) 
 {
 	
