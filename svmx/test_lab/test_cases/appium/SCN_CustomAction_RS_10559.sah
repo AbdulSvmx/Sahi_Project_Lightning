@@ -63,5 +63,5 @@ _selectDomain("/svmx/");
 _setSelected($sfm_pg_wizards.selectObject,"Work Order");
 $bo_act_navigation.editWizard("AutoRegression");
 $sfm_act_createCustomWizard.addWizStepWithoutName("Others", $wizTitle, $profile);
-$sfm_act_createCustomWizard.addWizStepWithoutName("Others", $wizTitle1, $profile)
+$sfm_act_createCustomWizard.addWizStepWithoutName("Others", $wizTitle1, $profile);
 $scenario_10559.end();
