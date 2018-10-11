@@ -103,6 +103,14 @@ _call(top.location.reload());
 $bo_act_navigation.navigateToCreatedRecordUsingGlobalSearchWO($WOName);
 $bo_act_interactiveEntitlement_WO.performInteractiveEntitlementPSLinesWarranty($WOName, $WarrantyName);
 
+$excel.insertUnderColumn("/auto/SVMX_Catalyst/fsaautomation/resources/TestData.xlsx", "TestData", "Data1",$WOName ,"58");
+
+//Changing the Setting values
+var $module = "Entitlement Verification";
+var $submodule = "Work Order Entitlement VF";
+$bo_act_configurationProfiles.editGroupProfileForBooleanSettings($group_profilename,$module,$submodule, "SET024", false);
+$bo_act_configurationProfiles.editGroupProfileForBooleanSettings($group_profilename,$module,$submodule, "SET025", false);
+$bo_act_configurationProfiles.editGroupProfileForBooleanSettings($group_profilename,$module,$submodule, "SET026", false);
 _writeFile("true", $appiumPath+$sahiIntermediatoryPath, true);
 
 $pre_requisite.end();
