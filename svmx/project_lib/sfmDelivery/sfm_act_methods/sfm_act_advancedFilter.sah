@@ -1,9 +1,0 @@
-var $sfm_act_advancedFilter = new function sfm_act_advancedFilter() {
-	
-	this.deleteAdvancedFilter = function($val){
-		_click(_f("main").s_button("/Delete/").near(_f("main").ftedatagriditemrenderer($val)));
-		_wait(5000);
-		_click(_f("main").button("Yes"));
-	};
-	
-};
