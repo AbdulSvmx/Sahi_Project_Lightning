@@ -51,7 +51,11 @@ var $sfm_pg_sourceObjectUpdate = new function sfm_pg_sourceObjectUpdate(){
 			if($processType=='Checklist'){
 				_setSelected(_f("main").s_dropdownlist("operandTypeCombo"+"["+$i+"]"),$operand[$i]);
 				if($operand[$i]=='Value'){
+					if(_getValue(_f("main").s_combobox("valuesCombo"+"["+$i+"]"))!=""){
+						_setSelected(_f("main").s_combobox("valuesCombo"+"["+$i+"]"),$value[$i]);
+					}else{
 					_setValue(_f("main").s_textinput("textInput").rightOf(_f("main").s_dropdownlist("operandTypeCombo"+"["+$i+"]")),$value[$i]);
+					}
 				}else{
 					_setSelected(_f("main").s_combobox("valuesCombo"+"["+$i+"]"),$value[$i]);
 				}
