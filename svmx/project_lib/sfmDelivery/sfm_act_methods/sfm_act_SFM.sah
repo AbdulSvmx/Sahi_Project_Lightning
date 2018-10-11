@@ -160,7 +160,7 @@ var $sfm_act_SFM = new function sfm_act_SFM() {
 		_click($bo_pg_sfmTransactionAndDesigner.btn_yourCustomSfmTransactions);
 		_setValue($bo_pg_sfmTransactionAndDesigner.lbl_searchSFM, $sfmName);
 		_wait(10000);
-		_click(_click(_f("main").s_label($sfmName).near(_f("main").processlistitemrenderer($sfmName))));
+		_click(_f("main").s_label($sfmName).near(_f("main").processlistitemrenderer($sfmName)));
 		_wait(20000,_isVisible($sfm_pg_screenDesigner.btn_propoties));
 	};
 	

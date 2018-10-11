@@ -126,6 +126,7 @@ var $bo_pg_sfmTransactionAndDesigner = new function bo_pg_sfmTransactionAndDesig
 	this.selectComboBox = function($elementName,$elementItemName){
 	_setSelected(_f("main").s_combobox($elementName), $elementItemName);
 	
+	this.txt_contactOnHeader=_f("main").s_textinput("/.*/").near(_f("main").uiftetextfield("Contact"));
 	
 
 		
