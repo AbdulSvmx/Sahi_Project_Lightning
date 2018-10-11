@@ -4,16 +4,16 @@
  * PRE Requisites to be run in the org before running other scripts - LIGHTNING CODE
  */
 _writeFile("false", $appiumPath+$sahiIntermediatoryPath, true);
-var $rs_10540 = _testcase("RS_10540","Verify new single expression for both Header and Child and launch SFM in delivery.");
+var $rs_10540 = _testcase("RS_10541","SCN_SourcetoTarget2_RS-10541 Verify Source to target Process from IB to Case");
 	$rs_10540.start();
 	var $bProcessStatus = false;
-	var $sfmName = "RS_10540_Process123";
+	var $sfmName = "RS_10541_Process";
 	var $sfmType="from Source Object to create new header and child records";
 	var $srcHeaderTxt = "Ins";
 	var $srcHeaderObj="Installed Product";
 	var $srcChildObj="";
-	var $trgHeaderObj="Auto_Custom_Object10540";
-	var $trgChildObj="Auto_Custom_Object10540";
+	var $trgHeaderObj="Case";
+	var $trgChildObj="";
 	
 	var $headerComboField=["Country"];
 	var $headerComboConditions=["Equals"]; 
@@ -21,18 +21,16 @@ var $rs_10540 = _testcase("RS_10540","Verify new single expression for both Head
 	var $headerCmboInput=["Italy"];
 	var $advExpr="";
 	var $errMsg="Country should be Italy";
-	var $exprsnName=$bo_act_common.generateRandomName("SFM_WO_Exprsn_");
+	var $exprsnName="RS_10541_QC";
 	var $headerExprFieldsDetails=[$headerComboField,$headerComboConditions,$headerToggleButton,$headerCmboInput,$advExpr,$errMsg,$exprsnName];
 	
-	var $pickListLabels=["Auto_Custom_Object10540 Name","Auto_Text10540"];
-	var $pickListValues=["Installed Product ID","City"];
+	var $pickListLabels=["Subject","Account ID"];
+	var $pickListValues=["Installed Product ID","Account"];
 	var $textLabels=[];
 	var $textValues=[];
-	var $mapName="RS_10540_Mapping123";
+	var $mapName="RS_10541_Mapping";
 	
-	var $headerMappingDetails=[$pickListLabels, $pickListValues, $textLabels, $textValues, $mapName];
-	
-	
+	var $headerMappingDetails=[$srcHeaderObj,$pickListLabels, $pickListValues, $textLabels, $textValues, $mapName];
 	
 	
 	//Login to App and navigate to sfm transaction and designer page
@@ -41,7 +39,7 @@ var $rs_10540 = _testcase("RS_10540","Verify new single expression for both Head
 	$sfm_act_lightningConfig.switchToLightning(); 
 	
 	//Check for the process if exists
-	//$bProcessStatus=$sfm_act_SFM.sfmProcessCheck($sfmName);
+	$bProcessStatus=$sfm_act_SFM.sfmProcessCheck($sfmName);
 	
 	if($bProcessStatus==false){
 	$bo_act_navigation.navigateToSfmTransactionDesigner();
@@ -51,55 +49,19 @@ var $rs_10540 = _testcase("RS_10540","Verify new single expression for both Head
 	_click($bo_pg_sfmTransactionAndDesigner.btn_newSFM);
 	_wait(25000,_isVisible($sfm_pg_screenDesigner.btn_propoties));
 	
-	
 	$sfm_act_Transactions.sfmPropertiesPage($sfmName, "", $sfmName, $sfmType,$srcHeaderObj, $srcChildObj, $trgHeaderObj, $trgChildObj);
-	$sfm_act_Transactions.sfmQualifyingCriteriaieldMappings($srcHeaderObj, $headerExprFieldsDetails, $headerMappingDetails);
 	
-	
-	var $headersToAdd = ["Auto_Number10540","Auto_Text10540","Number_10540"];
-	var $fieldName = [""];
-	var $childToAdd=[];
-	var $sfmPgLayoutName = $bo_act_common.generateRandomName("RS_10540_");
+	var $headersToAdd = ["Account ID","Subject"];
+	var $fieldName = ["",""];
+	var $childToAdd=["",""];
+	var $sfmPgLayoutName = $bo_act_common.generateRandomName("RS_10541_Layout");
 	$sfm_act_Transactions.screenDesigner($headersToAdd, $childToAdd, $sfmPgLayoutName, $sfmPgLayoutName);
-	
-	_wait(15000);
-	//_click($bo_pg_sfmTransactionAndDesigner.btn_finalQuickSave);
-	_click($bo_pg_sfmTransactionAndDesigner.btn_saveAndclose);
-	
-	//Creation of View Process _________________________________________
-	
-	$sfmName = "RS_10540_ViewProcess123";
-	$sfmType="to view a header record with/without its child records";
-	$srcHeaderTxt = "";
-	$srcHeaderObj="";
-	$srcChildObj="";
-	$trgHeaderObj="Auto_Custom_Object10540";
-	$trgChildObj="Auto_Custom_Object10540";
-	
-	$bo_act_navigation.navigateToSfmTransactionDesigner();
-	_wait(15000,_isVisible($bo_pg_sfmTransactionAndDesigner.btn_newSFM));
-	
-	//Create New SFM Transaction
-	_click($bo_pg_sfmTransactionAndDesigner.btn_newSFM);
-	_wait(25000,_isVisible($sfm_pg_screenDesigner.btn_propoties));
-	
-	
-	$sfm_act_Transactions.sfmProperties($sfmName, "", $sfmName, $sfmType,$srcHeaderObj, $srcChildObj, $trgHeaderObj, $trgChildObj);
 	$sfm_act_Transactions.sfmQualifyingCriteriaieldMappings($srcHeaderObj, $headerExprFieldsDetails, $headerMappingDetails);
-	
-	
-	var $headersToAdd = ["Auto_Number10540","Auto_Text10540","Number_10540"];
-	var $fieldName = [""];
-	var $childToAdd=[];
-	var $sfmPgLayoutName = $bo_act_common.generateRandomName("RS_10540_View_Layout");
-	$sfm_act_Transactions.screenDesigner($headersToAdd, $childToAdd, $sfmPgLayoutName, $sfmPgLayoutName);
-	
-	_wait(15000);
-	//_click($bo_pg_sfmTransactionAndDesigner.btn_finalQuickSave);
-	_click($bo_pg_sfmTransactionAndDesigner.btn_saveAndclose);
-	
-	
-	
+		
+	_wait(5000);
+
+	_wait(3000,_isVisible($sfm_pg_sfmDesigner.lnk_home));
+	_click($sfm_pg_sfmDesigner.lnk_home);
 	
 	var $wizardObject="Installed Product";
 	var $wizardName1 ="Automation IB Wizard";
@@ -108,9 +70,47 @@ var $rs_10540 = _testcase("RS_10540","Verify new single expression for both Head
 	var $handOver=false;
 	_log($wizardName1);
 	$sfm_act_wizards.addToWizard($wizardObject, $wizardName1, $wizardType, $sfmName, $handOver, $profile);  
+	
 	}
+	/*
+//Creation of View Process _________________________________________
 	
+	$sfmName = "RS_10541_ViewProcess";
+	$sfmType="to view a header record with/without its child records";
+	$srcHeaderTxt = "";
+	$srcHeaderObj="Installed Product";
+	$srcChildObj="";
+	$trgHeaderObj="Case";
+	$trgChildObj="";
 	
+	//Check for the process if exists
+	$bProcessStatus=$sfm_act_SFM.sfmProcessCheck($sfmName);
+	if($bProcessStatus==false){
+		
+	$bo_act_navigation.navigateToSfmTransactionDesigner();
+	_wait(15000,_isVisible($bo_pg_sfmTransactionAndDesigner.btn_newSFM));
+		
+	//Create New SFM Transaction
+	_click($bo_pg_sfmTransactionAndDesigner.btn_newSFM);
+	_wait(25000,_isVisible($sfm_pg_screenDesigner.btn_propoties));
+	$sfm_act_Transactions.sfmPropertiesPage($sfmName, "", $sfmName, $sfmType,$srcHeaderObj, $srcChildObj, $trgHeaderObj, $trgChildObj);
+		
+	var $headersToAdd = ["Auto_Number10540","Auto_Text10540"];
+	var $fieldName = ["",""];
+	var $childToAdd=["",""];
+	var $sfmPgLayoutName = $bo_act_common.generateRandomName("RS_10540_View");
+	$sfm_act_Transactions.screenDesigner($headersToAdd, $childToAdd, $sfmPgLayoutName, $sfmPgLayoutName);
+	
+	//Create New SFM Transaction
+	_wait(15000);
+	_selectDomain($g_domain);
+	_click($sfm_pg_sfmDesigner.btn_quickSaveSFM);
+	_click($sfm_pg_sfmDesigner.btn_saveSFM); 
+	_selectDomain();
+	_wait(3000,_isVisible($sfm_pg_sfmDesigner.lnk_home));
+
+	
+	}*/
 	
 	$sfm_act_lightningConfig.logoutInLightning();
 	
