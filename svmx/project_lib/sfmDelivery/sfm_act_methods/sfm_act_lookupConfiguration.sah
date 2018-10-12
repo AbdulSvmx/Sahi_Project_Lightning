@@ -1,0 +1,22 @@
+var $sfm_act_lookupConfiguration = new function sfm_act_lookupConfiguration() {
+	
+	this.deleteAdvancedFilter = function($val){
+		_click(_f("main").s_button("/Delete/").near(_f("main").ftedatagriditemrenderer($val)));
+		_wait(5000);
+		_click(_f("main").button("YES"));
+	};
+	
+	this.addLkpDetails = function($standardLkp, $lkpName){
+		_setSelected(_f("main").s_combobox("searchCombo[4]"), $standardLkp);
+		_setValue(_f("main").s_textinput("Save this Lookup as"), $lkpName);
+		_setValue(_f("main").s_textinput("Input ID Here[4]"), $lkpName);
+		
+	};
+	
+	this.addObject = function($objName, $filterName,$desc){
+		_setSelected(_f("main").s_combobox("objCombo"), $objName);
+		_setValue(_f("main").s_textinput("filterName"), $filterName);
+		_setValue(_f("main").s_textarea("description"), $desc);
+		
+	};
+};

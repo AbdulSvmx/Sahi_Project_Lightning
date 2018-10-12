@@ -2,6 +2,7 @@ var $scenario_10558 = _testcase("scenario_10558","Verify custom action URL funct
 $scenario_10558.start();
 var $actionTitle = $bo_act_common.generateRandomName("Auto_Action_Url");
 var $wizTitle = $bo_act_common.generateRandomName("Auto_Action_Wiz");
+var $profile="auto group profile";
 $bo_act_login.login($g_url, $appiumAdminUn, $appiumAdminPwd);
 $sfm_act_lightningConfig.switchToLightning();
 _wait(5000);
@@ -22,5 +23,5 @@ $bo_act_navigation.navigateToSfmWizard();
 _selectDomain("/svmx/");
 _setSelected($sfm_pg_wizards.selectObject,"Work Order");
 $bo_act_navigation.editWizard("AutoRegression");
-$sfm_act_createCustomWizard.addManageWizSteps($wizTitle,"Others",$actionTitle);
+$sfm_act_createCustomWizard.addWizStepWithoutName("Others", $wizTitle, $profile);
 $scenario_10558.end();

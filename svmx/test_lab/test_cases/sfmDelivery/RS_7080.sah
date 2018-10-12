@@ -6,10 +6,10 @@ var $sfmType="to generate a Checklist/Survey type of Process";
 var $srcHeaderObj="Work Order";
 //var $trgChildObj="Work Detail (Work Order)";
 
-var $field = ["Account","Actual Initial Response","Proforma Invoice","Problem Description"];
-var $condition= ["Set","Set","Set","Set"];
-var $operand = ["Field","Function","Value","Question"];
-var $value = ["Account","Now","abcd","Are you aware of problem"];
+var $field = ["Billing Type","Scheduled Date","Proforma Invoice","Problem Description","Order Type"];
+var $condition= ["Set","Set","Set","Set","Set"];
+var $operand = ["Field","Function","Value","Question","Value"];
+var $value = ["Status","Today","abcd","AUTO_What is the ScheduledDatetime?","Depot Repair"];
 var $souObject  = "Work Order";
 
 _setSpeed($g_stepSpeed);/*
