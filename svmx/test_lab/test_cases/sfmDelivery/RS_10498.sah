@@ -13,7 +13,7 @@ var $containerName = [];
 var $fieldName=[];
 var $missingStdDataTypes = ["URL","Picklist (Multi-Select)","Percent","Phone","Date","Date","Email"];
 var $customFieldsNames = ["Automation Child URL","Automation Child multipicklist","Automation Child Percent","Automation Child Phone","Automation Child Date2","Automation Child Date3","Automation Child Email"];
-var $fieldsToMap = ["Account","Record Type","Use Price From Pricebook/Contract","Billable Line Price","Date Received","Automation Child Date2","Automation Child Date3","Start Date and Time","End Date and Time","Closed On","Canceled On","Automation Child Email","Automation Child multipicklist","Billable Qty","Automation Child Percent","Automation Child Phone","Activity Type","Received City","Received Street","Reference Information","Automation Child URL"];
+var $fieldsToMap = ["Account","Record Type","Include in Quote","Billable Line Price","Date Received","Automation Child Date2","Automation Child Date3","Start Date and Time","End Date and Time","Closed On","Canceled On","Automation Child Email","Automation Child multipicklist","Billable Qty","Automation Child Percent","Automation Child Phone","Activity Type","Received City","Received Street","Reference Information","Automation Child URL"];
 var $containerName = ["Parts","Parts","Parts","Parts","Parts","Parts","Parts","Parts","Parts","Parts","Parts","Parts"];
 var $currentWizardName = $wizardName[4];
 var $productName = "Chrome";
@@ -26,10 +26,10 @@ var $tempFields = ["Age"];
 var $initialChildFields = ["Line Type","Record Type ID","Line Number"];
 var $initalChildContainers = [$lineType,$lineType,$lineType];
 var $initialChildValues = [$lineType,"Usage/Consumption"];
-var $additionalFields = ["Account","Use Price From Pricebook/Contract","Billable Line Price","Date Received","Automation Child Date2","Automation Child Date3","Start Date and Time","End Date and Time","Closed On","Canceled On","Automation Child Email","Automation Child multipicklist","Billable Qty","Automation Child Percent","Automation Child Phone","Activity Type","Received City","Received Street","Reference Information","Automation Child URL"];
+var $additionalFields = ["Account","Include in Quote","Billable Line Price","Date Received","Automation Child Date2","Automation Child Date3","Start Date and Time","End Date and Time","Closed On","Canceled On","Automation Child Email","Automation Child multipicklist","Billable Qty","Automation Child Percent","Automation Child Phone","Activity Type","Received City","Received Street","Reference Information","Automation Child URL"];
 
 //Appending current timestamp to process name to make it unique.
-var $timeStamp = $bo_act_navigation.getCurrentTimeStamp();
+var $timeStamp = $bo_act_navigation.getCurrentTimeStamp(); 
 $processName = $processName + "_" + $timeStamp;
 var $pageLayoutName = $processName + "pg";
 var $mapName = $processName + "mp";
@@ -103,7 +103,7 @@ _click($bo_pg_sfmTransactionAndDesigner.btn_quickSave1);
 
 $textLabels = ["Billable Line Price","Automation Child Email","Billable Qty","Automation Child Percent","Automation Child Phone","Received City","Received Street","Reference Information","Automation Child URL","Automation Child multipicklist"];
 $textValues = ["4500","group123@group.com","34.00","45","2345401","Bengaluru","123 somewhere somehow somewat","This washing machine stopped working","www.google.com","Multipicklist1;Multipicklist3"];
-$picklistLabels = ["Account","Record Type ID","Use Price From Pricebook/Contract","Date Received","Automation Child Date2","Automation Child Date3","Start Date and Time","End Date and Time","Closed On","Canceled On","Activity Type"];
+$picklistLabels = ["Account","Record Type ID","Include in Quote","Date Received","Automation Child Date2","Automation Child Date3","Start Date and Time","End Date and Time","Closed On","Canceled On","Activity Type"];
 $pickListValues = ["HCSAccountForTesting","Record Type1","true","Today","Tomorrow","Yesterday","Now","Today","Tomorrow","Yesterday","Calibration"];
 //Create mapping for all possible standard data types.
 _click($bo_pg_sfmTransactionAndDesigner.btn_qualifyingCriteriaAndFieldMapping);
@@ -159,7 +159,7 @@ $pickListLabels = ["Activity Type"];
 $pickListValues = ["Calibration"];
 $textAreaLabels = ["Received Street","Reference Information"];
 $textAreaValues = ["123 somewhere somehow somewat","This washing machine stopped working"];
-var $checkBoxLabels = ["Use Price From Pricebook/Contract"];
+var $checkBoxLabels = ["Include in Quote"];
 var $checkBoxValues = [true];
 var $emailLabels = ["Automation Child Email"];
 var $emailValues = ["group123@group.com"];
@@ -186,7 +186,7 @@ _selectDomain();
 $bo_act_navigation.navigateToCreatedRecordUsingGlobalSearch($wo_number);
 $sfm_act_createCustomWizard.clickWizardlinks($processName);
 _selectDomain($g_domain);
-_click($sfm_pg_wo.btn_arrowNextToGetPrice);
+_click($sfm_pg_wo.btn_arrowNextToUserSettings);
 _assertVisible($sfm_pg_wo.link_launchSfmDesigner);
 _click($sfm_pg_wo.link_launchSfmDesigner);
 _selectDomain();

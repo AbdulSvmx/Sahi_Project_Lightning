@@ -537,7 +537,7 @@ this.verifyValues = function($textLabels,$textValues,$pickListLabels,$pickListVa
 	$actualList = [];
 	if($checkBoxLabels.length > 0){
 		for($i=0;$i<$checkBoxLabels.length;$i++){
-			$actualList.push(_condition(_checkbox($checkBoxLabels[$i]).checked));
+			$actualList.push(_getAttribute(_checkbox("/"+$checkBoxLabels[$i]+"/"),"checked"));
 			_log("Expected value for "+$checkBoxLabels[$i]+":"+$checkBoxValues[$i]);
 			_log("Actual value for"+$checkBoxLabels[$i]+":"+$actualList[$i]);
 		}
@@ -747,7 +747,12 @@ this.calculateNow = function(){
 		if($min >= 10){
 			 $min = $current.getMinutes();
 		}
-		var $now = $current.getHours()+":"+$min+" AM";
+		if($current.getHours() == 0){
+			var $now = "12" +":"+$min+" AM";
+		}
+		else {
+			var $now = $current.getHours()+":"+$min+" AM";
+		}
 	}
  return $now;
 };

@@ -204,7 +204,7 @@ var $bo_act_navigation = new function bo_act_navigation() {
     	_keyPress(_textbox("Search Salesforce"),13);
     	if(_isVisible(_link("/"+$recordToBeSearch+"/"))==true)
     	{
-    		_click(_link("/"+$recordToBeSearch+"/"));
+    		_click(_link($recordToBeSearch));
     		_wait(3000);
     	
     	}
