@@ -969,17 +969,19 @@ var $sfm_act_createCustomWizard = new function sfm_act_createCustomWizard() {
 	this.addWizStepWithoutName = function($wizStepType,$wizStepName,$profile){
 		
 		_click($sfm_pg_wizards.txt_manageWizSteps);
-		_click($sfm_pg_wizards.btn_newStep);
-		_setSelected($sfm_pg_wizards.btn_wizStepType,$wizStepType);
-		_setSelected($sfm_pg_wizards.btn_stepName,$wizStepName);
-		_click($sfm_pg_wizards.btn_saveStep);
-		_click($sfm_pg_wizards.txt_managePermission);
-		_setSelected($sfm_pg_wizards.select_availableGrpProfiles,$profile);
-//		_click($sfm_pg_wizards.btn_add);
-		_click($sfm_pg_wizards.btn_saveClose);
-		_selectDomain();
-
-		
+		if(_isVisible(_span($wizStepName))){
+			_log("Process already added to wizard");
+		}
+		else{
+			_click($sfm_pg_wizards.btn_newStep);
+			_setSelected($sfm_pg_wizards.btn_wizStepType,$wizStepType);
+			_setSelected($sfm_pg_wizards.btn_stepName,$wizStepName);
+			_click($sfm_pg_wizards.btn_saveStep);
+			_click($sfm_pg_wizards.txt_managePermission);
+			_setSelected($sfm_pg_wizards.select_availableGrpProfiles,$profile);
+			_click($sfm_pg_wizards.btn_saveClose);
+			_selectDomain();
+		}	
 	};
 	  
 
