@@ -20,7 +20,7 @@ $rs_10452.start();
 			$objName= "Contact";
 			$lastName=$bo_act_common.generateRandomName($contactNameList[$i]+"_");
 			if ($i<$contactNameList.length-1) {
-				$obJson="{\"LastName\":\""+$lastName+"\",\"Account\":\""+$AccountID+"\",\"Contact_Picklist__c\":\""+$contactPicklistValue+"\"}";
+				$obJson="{\"LastName\":\""+$lastName+"\",\"AccountId\":\""+$AccountID+"\",\"Contact_Picklist__c\":\""+$contactPicklistValue+"\"}";
 			}else {
 				$obJson="{\"LastName\":\""+$lastName+"\",\"Title\":\""+$title+"\"}";
 			}
@@ -28,7 +28,7 @@ $rs_10452.start();
 			_log($lastName);
 			$userName[$i]=$lastName;
 		};	
-/*
+
 		//create Work orders
 		$objName= "SVMXC__Service_Order__c";
 		$obJson = "{\"SVMXC__Order_Status__c\":\"Open\",\"SVMXC__Order_Type__c\":\"Field Service\"}";
@@ -79,7 +79,7 @@ $rs_10452.start();
 		
 		//***Work Order Header validation***/
 		//Assert context override function enabled
-/*		_wait(3000,_isVisible($sfm_pg_sfmDesigner.lbl_headerContact));
+		_wait(3000,_isVisible($sfm_pg_sfmDesigner.lbl_headerContact));
 		_click($sfm_pg_sfmDesigner.txt_accountPicklist);
 		_click(_listItem($contactPicklistValue));
 		_click($sfm_pg_sfmDesigner.btn_headerContactsearchIcon);
@@ -91,7 +91,7 @@ $rs_10452.start();
 	
 		
 		//** Adding ChildLine **/
-/*		$sfm_act_sfmDesigner.addChildLine("Parts");
+		$sfm_act_sfmDesigner.addChildLine("Parts");
 		_wait(10000,_isVisible($sfm_pg_sfmDesigner.txt_partTextbox));
 		_click($sfm_pg_sfmDesigner.btn_searchautoContactIcon);
 		_assertContainsText("/"+$contactPicklistValue+"/",$sfm_pg_sfmDesigner.label_contextOverride);
@@ -174,9 +174,6 @@ $rs_10452.start();
 //		_assertNotExists(_link($userName[1]));
 		_click($sfm_pg_sfmDesigner.btn_cancelContactWindow);
 		
-		
-
-		
 	
 function RS10499_saveSFM(){
 	_setStrictVisibilityCheck(true);
@@ -199,5 +196,5 @@ function RS10449_searchWOandLaunchSFM($WONumber,$sfmName){
 	$sfm_act_createCustomWizard.clickWizardBtn($sfmName);
 	_wait(5000,_isVisible(_div("/"+$sfmName+"/")));
 }
-*/
+
 $rs_10452.end();
