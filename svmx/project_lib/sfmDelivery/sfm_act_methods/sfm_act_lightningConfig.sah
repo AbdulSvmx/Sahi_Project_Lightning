@@ -239,9 +239,6 @@ this.addCustomFields = function($objectName,$fieldNames,$dataTypes,$myDomain,$mu
 			_click(_radio("/dtype/",_in(_cell($dataTypes[$i]))));
 			_click($sfm_pg_wo.btn_nextInAddCustomFields);
 			_setValue($sfm_pg_wo.txt_customFieldName,$fieldNames[$i]);
-			_
-
-			
 			
 			
 			($sfm_pg_wo.txt_customFieldName,13);
@@ -477,7 +474,7 @@ this.verifyValues = function($textLabels,$textValues,$pickListLabels,$pickListVa
 	//and returns true/false on the basis of the results
 	//Author : Janaki
 	_setStrictVisibilityCheck(true);
-	_call(_span("Clock Paused Forever").scrollIntoView());
+	//_call(_span("Clock Paused Forever").scrollIntoView());
 	_click($sfm_pg_wo.btn_pencilToEditWo);
 	var $i = 0;
 	var $result = true;
@@ -754,4 +751,19 @@ this.calculateNow = function(){
 	}
  return $now;
 };
+this.getWorkDetailNumber = function(){
+	//This function gets the Line number of the Work Detail record
+	//Returns Work Detail Line number in the form of WL-*********
+	//Note: This function assumes Line Number field is present in the page layout
+	//Author : Janaki
+	$sfm_act_lightningConfig.openExtEditForLatestItem();
+	_wait(2000);
+	_setStrictVisibilityCheck(true);
+	var $wlNum = _getText(_textbox(0,_near(_label("Line Number"))));
+	_click($sfm_pg_wo.btn_updateExtEdit);
+	_setStrictVisibilityCheck(false);
+	_log("Created Work Detail is "+$wlNum);
+	return $wlNum;
+};
+
 };
