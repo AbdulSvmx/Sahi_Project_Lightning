@@ -23,9 +23,10 @@ var $pageLayoutForProfile = "SVMX Work Details Usage - Admin";
 var $myDomain = "/lightning/";
 var $multiPicklistValues = ["Multipicklist1","Multipicklist2","Multipicklist3"];
 var $tempFields = ["Age"];
-var $initialChildFields = ["Line Type","Record Type ID"];
-var $initalChildContainers = [$lineType,$lineType];
+var $initialChildFields = ["Line Type","Record Type ID","Line Number"];
+var $initalChildContainers = [$lineType,$lineType,$lineType];
 var $initialChildValues = [$lineType,"Usage/Consumption"];
+var $additionalFields = ["Account","Use Price From Pricebook/Contract","Billable Line Price","Date Received","Automation Child Date2","Automation Child Date3","Start Date and Time","End Date and Time","Closed On","Canceled On","Automation Child Email","Automation Child multipicklist","Billable Qty","Automation Child Percent","Automation Child Phone","Activity Type","Received City","Received Street","Reference Information","Automation Child URL"];
 
 //Appending current timestamp to process name to make it unique.
 var $timeStamp = $bo_act_navigation.getCurrentTimeStamp();
@@ -93,8 +94,9 @@ _click($bo_pg_sfmTransactionAndDesigner.btn_newPageLayout);
 $bo_act_navigation.designHeaderScreen($pageLayoutName,$tempFields);
 _wait(2000);
 $bo_act_navigation.designChildScreen($pageLayoutName, $initialChildFields, $initalChildContainers);
-_click(_f("main").s_checkbox("Allow New"));
-_click(_f("main").s_checkbox("Allow Delete"));
+_click(_f("main").s_richtext($lineType));
+_click($bo_pg_sfmTransactionAndDesigner.chkbx_allowNew);
+_click($bo_pg_sfmTransactionAndDesigner.chkbx_allowDelete);
 _click($bo_pg_sfmTransactionAndDesigner.btn_savePage);
 _click($bo_pg_sfmTransactionAndDesigner.btn_quickSave1);
 
@@ -126,14 +128,16 @@ var $yesterdayDate = $sfm_act_createCustomWizard.addSubtractDates($current,-1);
 $todayDate = $sfm_act_lightningConfig.removePrecedingZeroInDate($todayDate);
 $tomorrowDate = $sfm_act_lightningConfig.removePrecedingZeroInDate($tomorrowDate);
 $yesterdayDate = $sfm_act_lightningConfig.removePrecedingZeroInDate($yesterdayDate);
+
+//Add Child Line and verify the value map.
+$initialChildFields = ["Line Type","Record Type"];
+_selectDomain($g_domain);
+$sfm_act_SFM.addChildLine($lineType,$productName,[],[],$initialChildFields,$initialChildValues,[],[],[],[],[],[],[],[],[]);
 //Calculating current time
 var $p = $current.getHours();
 var $min = $current.getMinutes();
 var $now = $sfm_act_lightningConfig.calculateNow();
 _log("Value for now is "+$now);
-//Add Child Line and verify the value map.
-$initialChildFields = ["Line Type","Record Type"];
-$sfm_act_SFM.addChildLine($lineType,$productName,[],[],$initialChildFields,$initialChildValues,[],[],[],[],[],[],[],[],[]);
 $sfm_act_SFM.performQuickSave();
 var $lineNum = $sfm_act_lightningConfig.getWorkDetailNumber();
 _log("Created Work Detail is "+$lineNum);
@@ -146,11 +150,11 @@ _wait(6000);
 _selectDomain();
 $bo_act_navigation.navigateToCreatedRecordUsingGlobalSearch($lineNum);
 
-//Verify value map in the work order.
+//Verify value map in the work detail.
 var $lookUpLabels = ["Account"];
 var $lookUpValues = ["HCSAccountForTesting"];
 $textLabels = ["Billable Line Price","Billable Qty","Automation Child Percent","Received City","Date Received","Automation Child Date2","Automation Child Date3"];
-$textValues = ["$4,500.000","34.00","45%","Bengaluru",$todayDate,$tomorrowDate,$yesterdayDate];
+$textValues = ["$4,500.000","34.0000","45%","Bengaluru",$todayDate,$tomorrowDate,$yesterdayDate];
 $pickListLabels = ["Activity Type"];
 $pickListValues = ["Calibration"];
 $textAreaLabels = ["Received Street","Reference Information"];
@@ -210,6 +214,9 @@ var $now = $sfm_act_lightningConfig.calculateNow();
 _log("Value for now is "+$now);
 //Add Child Line and verify the value map.
 $sfm_act_SFM.addChildLine("Parts",$productName, $textLabels, $textValues, $pickListLabels, $pickListValues, [],[],[],[],[],[],[],[],[]);
+//Calculating current time
+var $now = $sfm_act_lightningConfig.calculateNow();
+_log("Value for now is "+$now);
 $sfm_act_SFM.performQuickSave();
 var $lineNum = $sfm_act_lightningConfig.getWorkDetailNumber();
 _log("Created Work Detail is "+$lineNum);

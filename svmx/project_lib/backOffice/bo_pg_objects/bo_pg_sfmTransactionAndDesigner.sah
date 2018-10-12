@@ -122,6 +122,8 @@ var $bo_pg_sfmTransactionAndDesigner = new function bo_pg_sfmTransactionAndDesig
 	this.list_objComboBox = _f("main").s_combobox("objCombo1").inside(_f("main").s_panel("...to create these records"));
 	this.txtworkdetailaliasname = _f("main").s_textinput("/aliasName/").near(_f("main").s_checkbox("Work Detail (Work Order)"));
 	this.txt_contactOnHeader=_f("main").s_textinput("/.*/").near(_f("main").uiftetextfield("Contact"));
+	this.chkbx_allowNew = _f("main").s_checkbox("Allow New");
+	this.chkbx_allowDelete = _f("main").s_checkbox("Allow Delete");
 	
 	this.btn_advanced_options = _f("main").tab("Advanced Options");
 	this.chkbox_work_order = _f("main").s_checkbox("Work Order");
