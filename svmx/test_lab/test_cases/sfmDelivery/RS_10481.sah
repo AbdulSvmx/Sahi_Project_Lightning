@@ -8,7 +8,7 @@ $sfm_act_createCustomWizard.createWowithoutvalues();
 
 _wait(5000); 
 if(_exists(_span($wizTitle))){
-	_log("Pass ::: Wizard is not visible which is not assigned to the profile");
+	_log("Pass ::: Wizard is visible which is assigned to the profile");
 }
 else{
 	_log("Fail ::: Wizard is visible which is not assigned to the profile", "FAILURE");
