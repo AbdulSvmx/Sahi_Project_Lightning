@@ -108,8 +108,12 @@ var $sfm_pg_sfmDesigner = new function sfm_pg_sfmDesigner() {
 	this.lbl_recentItemProducts=_div("Recent Items: Products");
 	this.lbl_account=_span("Account",_in(this.window_partsSearchWindow));
 	this.txt_accountTextbox=_textbox("/inputEl/",_near(this.lbl_account));
+	this.btn_searchAccountIcon=_div("/trigger-search/").near(this.lbl_account);
 	this.lbl_autoContact=_span("AutoContact",_in(this.window_partsSearchWindow));
 	this.txt_autoContactTextbox=_textbox("/inputEl/",_near(this.lbl_autoContact));
+	this.btn_searchautoContactIcon=_div("/trigger-search/",_near(this.lbl_autoContact));
+	this.link_cancelPartSearch=_link("Cancel",_in(this.window_partsSearchWindow));
+
 	
 	
 	//header fields
