@@ -138,16 +138,20 @@ $bo_act_serviceMaintenanceContracts.addPartsPricingToServiceContract($SconName, 
 
 //// Add labor Pricing
 $bo_act_serviceMaintenanceContracts.addLaborPricingToServiceContract_onlyLabor($SconName,"Installation","Per Hour", "10", "500", 0);
+_wait(20000);
 $bo_act_serviceMaintenanceContracts.addLaborPricingToServiceContract_onlyLabor($SconName,"Repair","Flat Rate", "20", "600", 2);
 
 //Add Expense Pricing
 
 $bo_act_serviceMaintenanceContracts.addExpensePricingToServiceContract("Food-Breakfast", "Flat Rate", "50", 0);
+_wait(20000);
 $bo_act_serviceMaintenanceContracts.addExpensePricingToServiceContract("Gas", "Per Unit", "80", 2);
+_wait(20000);
 $bo_act_serviceMaintenanceContracts.addExpensePricingToServiceContract("Airfare", "Discount%", "10", 4);
 
 // Add Travel Pricing
 $bo_act_serviceMaintenanceContracts.addTravelPolicywithoutDefault("Flat Rate", "800", $serviceType1, 0);
+_wait(20000);
 $bo_act_serviceMaintenanceContracts.addTravelPolicywithoutDefault("Per Hour", "150",$serviceType2 , 2);
 
 $objName2= "Contact";
@@ -172,7 +176,6 @@ $filter="id";
 var $WoID=$sfm_act_restApiMethods.postRestApi($appiumAdminUn,$appiumAdminPwd,$appiumclient_id,$appiumclient_secret,$appiumorginstance,$objNameWO,$obJsonWO,"POST");
 //get the Work Order Name
 $WOName =$sfm_act_restApiMethods.getRestApi($appiumAdminUn,$appiumAdminPwd,$appiumclient_id,$appiumclient_secret,$appiumorginstance,"GET", $objNameWO, $columnName, $filter, $WoID);
-
 _log($WOName);
 _wait(30000);
 _call(top.location.reload());
