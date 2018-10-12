@@ -42,6 +42,7 @@ var $bo_pg_sfmTransactionAndDesigner = new function bo_pg_sfmTransactionAndDesig
     this.btn_qualifyingCriteriaAndFieldMapping = _f("main").tab("Qualifying Criteria and Field Mappings");
     this.btn_screenDesigner = _f("main").tab("Screen Designer");
     this.btn_templateDesigner =  _f("main").tab("Template Designer");
+    this.btn_newPageLayout = _f("main").s_button("New[3]");
     this.lbl_workOrder = _f("main").s_richtext("Work Order");
     this.sel_sfmTemplate = _f("main").s_combobox("searchCombo[3]");
     this.sel_sfmTemplateforOpDoc = _f("main").s_combobox("searchCombo[4]");//for OPDoc Template

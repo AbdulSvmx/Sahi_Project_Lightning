@@ -120,6 +120,8 @@ var $sfm_pg_sfmDesigner = new function sfm_pg_sfmDesigner() {
 	this.txt_headerContact=_textbox("/inputEl/",_in(this.lbl_headerContact));
 	this.link_ContactInDVR=_link("Contact",_in(_div("Contact: Multiple items found. Click lookup icon to refine search.")));
 	this.btn_headerContactsearchIcon=_div("/trigger-search/",_in(this.lbl_headerContact));
+	this.txt_accountPicklist=_textbox(0,_near(_span("Account Picklist")));
+	this.txt_headerCity=_textbox(0,_near(_span("City")));
 	
 	
 	this.link_Update=_link("Update");
@@ -130,7 +132,7 @@ var $sfm_pg_sfmDesigner = new function sfm_pg_sfmDesigner() {
 	this.link_searchLink=_link("Search");
 	this.btn_searchTextBox=_textbox("/sfm-text/",_near(this.link_searchLink));	
 	this.link_accountInDVRNoMatch=_link("Account",_in(_div("Account: Multiple items found. Click lookup icon to refine search.")));
-	this.label_contextOverride=_label("/Limit search to Account:/");
+	this.label_contextOverride=_label("/Limit search to/");
 	this.btn_contextOverride=_checkbox(0,_near(this.label_contextOverride));
 	this.btn_cancelContactWindow=_click(_link("Cancel",_near(_div("/CancelAdd/"))));
 	this.btn_noRecordMSG=_div("No matching record(s) found for this keyword");

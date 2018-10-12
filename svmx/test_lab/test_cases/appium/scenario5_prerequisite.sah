@@ -43,7 +43,7 @@ $sfm_act_lightningConfig.switchToLightning();
 
 
 //clone tmd016
-$sfm_act_SFM.dvrScenario5($sfmNameToBeCloned,$sfmName,$isCustom, $sfmTemplateSaveAsName, $sfmTemplate, $fieldName, $containerName,$bProcessStatus);
+$bProcessStatus=$sfm_act_SFM.dvrScenario5($sfmNameToBeCloned,$sfmName,$isCustom, $sfmTemplateSaveAsName, $sfmTemplate, $fieldName, $containerName,$bProcessStatus);
 
 if($bProcessStatus==true){
 $sfm_pg_dvr.newRule($targetObject, $rulename, $ruleDescription, $fieldArray, $conditionArray, $operandArray, $valueArray, $advExpr, $messageType);
