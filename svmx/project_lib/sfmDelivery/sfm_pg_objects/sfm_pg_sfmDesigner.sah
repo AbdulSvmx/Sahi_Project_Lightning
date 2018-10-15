@@ -116,6 +116,9 @@ var $sfm_pg_sfmDesigner = new function sfm_pg_sfmDesigner() {
 	this.link_cancelPartSearch=_link("Cancel",_in(this.window_partsSearchWindow));
 	this.lbl_case=_span("Case",_in(this.window_partsSearchWindow));
 	this.link_searchCaseIcon=_div("/trigger-search/",_near(this.lbl_case));
+	this.link_updatePartsSearch=_link("Update",_in(window_partsSearchWindow));
+	this.btn_bubble=_link("/.*/",_in(_div("/celleditor/")));
+	this.btn_bubbleDiv=_div("/lightningtooltip/");
 	
 	
 	//header fields

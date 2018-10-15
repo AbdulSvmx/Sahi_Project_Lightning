@@ -6,10 +6,13 @@ $rs_10449.start();
 		//Create Product
 		$objName= "Product2";
 		var $productName=new Array;
-		var $productNameReg="Pro_RS_10449_";
+		//var $productCode=new Array;
+		var $productNameReg="PN_RS10449_";
+		//var $productCodeReg="PC_RS10449_";
 		for (var $i = 0; $i < 5; $i++) {
 			$productName[$i]=$bo_act_common.generateRandomName($productNameReg);
-			$obJson = "{\"Name\":\""+$productName+"\",\"ProductCode\":\""+$productName+"\",\"SVMXC__Product_Line__c\":\"Storage\",\"SVMXC__Product_Type__c\":\"Consumable\"}";
+			//$productCode[$i]=$bo_act_common.generateRandomName($productCodeReg);
+			$obJson = "{\"Name\":\""+$productName[$i]+"\",\"ProductCode\":\""+$productName[$i]+"\",\"SVMXC__Product_Line__c\":\"Storage\",\"SVMXC__Product_Type__c\":\"Consumable\"}";
 			$filterValue=$sfm_act_restApiMethods.postRestApi($sfmlUsn,$sfmlPwd,$sfmClientId,$sfmConsumerSecret,$sfmOrgInstance,$objName,$obJson,"POST");
 			_log($productName[$i]);
 		}
@@ -50,7 +53,7 @@ $rs_10449.start();
 		$addToSearchList=[true];
 		$addToDisplayList=[true];
 		$addToBubbleList=[true];
-		var $noOfRecords=20;
+		var $noOfRecords=50;
 		var $lookupFieldsToAdd=[$fieldNameList,$addToSearchList,$addToDisplayList,$addToBubbleList];
 		var $lookUpName=$bo_act_common.generateRandomName("rs_10449_lookup_");
 		$sfm_act_Transactions.createLookUp($object, $lookupTempName, "", "", $lookUpName,"Parts",$noOfRecords);
@@ -77,30 +80,36 @@ $rs_10449.start();
 		_wait(5000,_isVisible($sfm_pg_sfmDesigner.lbl_recentItemProducts));
 		_setValue($sfm_pg_sfmDesigner.btn_searchTextBox,$productNameReg);
 		_click($sfm_pg_sfmDesigner.link_searchLink);
-		var $fieldsName=["Name","ProductCode","SVMXC__Product_Line__c","SVMXC__Product_Type__c"];
+		var $fieldsName=["Name","ProductCode","SVMXC__Product_Line__c"];
+		//Column assertion
 		for (var $i = 0; $i < array.length; $i++) {
-			_assertExists(_span($fieldsName[$i],_in(_parentNode(_div("Recent Items: Products"),"DIV",5))));
+			_assertExists(_span($fieldsName[$i],_in($sfm_pg_sfmDesigner.window_ProductSearchWindow)));
+		}
+		//object assertion
+		for (var $i = 0; $i < array.length; $i++) {
+			_assertExists(_link($productName[$i],_in($sfm_pg_sfmDesigner.window_ProductSearchWindow)));
 		}
 		
-		
-		
-		
-		
-		
-		
-		
-		//,$productNameReg
-		
-		
-		_click($sfm_pg_sfmDesigner.link_searchCaseIcon);
+		//Product line based Search
+		_setValue($sfm_pg_sfmDesigner.btn_searchTextBox,"Storage");
 		_click($sfm_pg_sfmDesigner.link_searchLink);
-		_wait(5000,_isVisible(_link($caseNumber)));
-		_assertExists(_link($caseNumber));
+		for (var $i = 0; $i < array.length; $i++) {
+			_assertExists(_link($productName[$i],_in($sfm_pg_sfmDesigner.window_ProductSearchWindow)));
+		}
+		_click(_link($productName[0],_in($sfm_pg_sfmDesigner.window_ProductSearchWindow)));
+		_click($sfm_pg_sfmDesigner.link_updatePartsSearch);
+		_wait(5000);
 		
+		//Bubble assert
+		_click(_cell($productName[0]));
+		_click($sfm_pg_sfmDesigner.btn_bubble);
+		_wait(3000,_isVisible($sfm_pg_sfmDesigner.btn_bubbleDiv));
 		
+		_assertExists(_div($fieldsName[0]+":"+$productName[0]));
+		_assertExists(_div($fieldsName[1]+":"+$productName[0]));
+		_assertExists(_div($fieldsName[1]+":Storage"));
 		
-		
-		
+
 		
 		
 		
