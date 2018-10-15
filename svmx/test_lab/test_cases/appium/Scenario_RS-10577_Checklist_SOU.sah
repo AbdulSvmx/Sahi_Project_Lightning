@@ -1,0 +1,90 @@
+	_writeFile("false", $appiumPath+$sahiIntermediatoryPath, true);
+var $scenario_10577 = _testcase("scenario_10577","SCN_Checklist_1_RS-10577_Verify Source Object Update in Checklists");
+$scenario_10577.start();
+var $targetObjectName = "Work Order";
+var $wizardObject ="Work Order";
+var $wizardName = ["AutoRegression"];
+var $wizardType = ["None","SFM","Inventory","Others","Output Document"];
+var $ProcessStatus = false;
+var $sfmNameToBeCloned = "Manage Work Order Lines - Usage";
+//var $sfmName = "1SAHI_Checklist_Edit_WO_PROCESS";
+var $isCustom = false;
+var $sfmTemplate = "SVMXSTD: Manage WO Usage Lines";
+var $sfmTemplateSaveAsName = $sfmName;
+var $containerName = ["Order Status","Order Status","Order Status","Order Status","Order Status","Order Status"];
+var $fieldName = ["Proforma Invoice","Scheduled Date","Scheduled Date Time","No Of Times Queued","No Of Times Assigned","Priority"];
+
+
+var $wizardObject ="Work Order";
+var $wizardName="AutoRegression";
+var $wizardType="SFM";
+var $profile="auto group profile";
+var $handOver="false";
+var $wizardCriteria=null;
+
+_setSpeed($g_stepSpeed);
+$bo_act_login.login($g_url, $appiumAdminUn, $appiumAdminPwd);
+$sfm_act_lightningConfig.switchToLightning(); 
+
+/*
+//clone tmd016
+$sfm_act_SFM.cloneTDM016($sfmNameToBeCloned,$sfmName,$isCustom, $sfmTemplateSaveAsName, $sfmTemplate, $fieldName, $containerName);
+//$sfm_act_SFM.partsNotMandatory();
+//$sfm_act_SFM.partsMultiAdd("--None--");
+_click($sfm_pg_sfmDesigner.btn_quickSaveSFM);
+_click($sfm_pg_sfmDesigner.btn_saveSFM); 
+_wait(3000,_isVisible($sfm_pg_sfmDesigner.lnk_home));
+$sfm_act_wizards.addToWizard($wizardObject, $wizardName[0], $wizardType[1], $sfmName);  */
+
+var $sfmName = "SahiChecklist1-vt_FifV12";
+$bo_act_login.login($g_url, $appiumAdminUn, $appiumAdminPwd);
+$sfm_act_lightningConfig.switchToLightning();
+//Check for the process if exists
+$ProcessStatus=$sfm_act_SFM.sfmProcessCheck($sfmName);
+
+if($ProcessStatus==false){
+
+$bo_act_navigation.navigateToSfmTransactionDesigner();
+_wait(10000);
+_click($bo_pg_sfmTransactionAndDesigner.btn_newSFM);
+_wait(3000);
+_setValue($bo_pg_sfmTransactionAndDesigner.txt_name, $sfmName	);
+_setValue($bo_pg_sfmTransactionAndDesigner.txt_sfmTransactionId, "");
+_setSelected($sfm_pg_screenDesigner.sel_createSFMTransaction, "to generate a Checklist/Survey type of Process");
+_setStrictVisibilityCheck(true);
+_setValue($sfm_pg_screenDesigner.txt_srcObject,"");
+_setValue($sfm_pg_screenDesigner.txt_srcObject,"Wo");
+_wait(5000);
+_click($sfm_pg_screenDesigner.lbl_workOrder);
+_click($bo_pg_sfmTransactionAndDesigner.btn_qualifyingCriteriaAndFieldMapping);
+_click($bo_pg_sfmTransactionAndDesigner.btn_mappings);
+_click($bo_pg_sfmTransactionAndDesigner.btn_mappings);
+_setValue(_f("main").s_textinput("/textInput/").near(_f("main").tab("Field Map For Existing Records")),"SVMX");
+_click(_f("main").s_label("SVMXSTD: Map Work Order to Checklist"));
+//$bo_act_checklistdesigner.addQuestion("Text", "What is the Work Order Number?", true,"Work Order Number");
+//$bo_act_checklistdesigner.addQuestion("Text", "AUTO_Which City you are from?", true,"City");
+//$bo_act_checklistdesigner.addQuestion("Picklist", "AUTO_What is the Order Status?", true,"Order Status");
+//$bo_act_checklistdesigner.addQuestion("Number", "AUTO_What is the IdleTime?", true,"Idle Time (in Minutes)");
+//$bo_act_checklistdesigner.addQuestion("Date", "AUTO_What is the Scheduled Date?", true,"Scheduled Date");
+$bo_act_checklistdesigner.addQuestion("Date Time", "AUTO_What is the ScheduledDatetime?", true,"Scheduled Date Time");
+
+_wait(5000);
+
+//Source Object update
+var $field = ["Billing Type","Scheduled Date","Scheduled Date Time","Proforma Invoice", "No Of Times Assigned"];
+var $condition= ["Set","Set","Set","Set","Set"];
+var $operand = ["Value","Function","Question","Value","Value"];
+var $value = ["Loan","Today","AUTO_What is the ScheduledDatetime?","Source Object Updated","2"];
+var $souObject  = "Work Order";
+//Creating SOU for Header
+$sfm_pg_sourceObjectUpdate.createSOU($souObject,$field, $condition, $operand, $value,"Checklist");
+
+//Setup App Permissions for Mobile App for the SFM Process created
+var $profilename = $group_profilename;
+//$bo_act_SFMAppPermission.set_mobileapp_permissions($profilename, $targetObjectName, $sfmName);
+
+$bo_act_SFMAppPermission.set_mobileapp_permissions_generic($profilename, $targetObjectName, $sfmName, "Checklist");
+
+}
+_writeFile("true", $appiumPath+$sahiIntermediatoryPath, true);
+$scenario_10577.end();

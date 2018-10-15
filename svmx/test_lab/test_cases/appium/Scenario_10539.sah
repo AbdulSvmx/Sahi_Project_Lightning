@@ -25,7 +25,7 @@ var $durationOfCoverage = 5;
 var $seperator = "/";
 var $pre_requisite= _testcase("scenario_10539","Verify Get Price calculation online mode- SCON (Service Contract)");
 
-var $restAccName="A10539_Auto";
+
 var $restcontactfirstname="C10539_";
 var $restcontactlastname="Auto";
 var $restproductname1=$bo_act_common.generateRandomName("P10539");
@@ -55,7 +55,7 @@ _log($endDate);
 */
 var $trackedOn = "Work Order";
 var $dataType = "Number";
-var $qualifyingCriteria = "SVMXSTD: Not closed work orders";
+var $qualifyingCriteria = "SVMXSTD: To Identify Work Orders with Downtime details";
 var $serviceType1 = $bo_act_servicesTypes.createServicesTypes($trackedOn, $dataType, $qualifyingCriteria);
 
 
@@ -78,7 +78,7 @@ $productid1=$sfm_act_restApiMethods.postRestApi($appiumAdminUn,$appiumAdminPwd,$
 //get the Product
 $Productname1 =$sfm_act_restApiMethods.getRestApi($appiumAdminUn,$appiumAdminPwd,$appiumclient_id,$appiumclient_secret,$appiumorginstance,"GET", $objNameP1, $columnName, $filter, $productid1);
 _log($Productname1);
-
+//
 $objNameP2= "Product2";
 $obJson = "{\"Name\":\""+$restproductname1+"2\",\"IsActive\":\"true\" }";
 $columnName = "Name";
@@ -106,7 +106,7 @@ $bo_act_products.addStandardPriceForProduct($Productname2, $standardPriceValue2)
 
 $objName1= "Account";
 var $restName = $bo_act_common.generateRandomName("");
-$obJson = "{\"Name\":\"Auto"+$restAccName+"\"}"; 
+$obJson = "{\"Name\":\"Auto_10539"+$restName+"\"}"; 
 $columnName = "Name";
 $filter="id";
 //create an account
@@ -138,16 +138,20 @@ $bo_act_serviceMaintenanceContracts.addPartsPricingToServiceContract($SconName, 
 
 //// Add labor Pricing
 $bo_act_serviceMaintenanceContracts.addLaborPricingToServiceContract_onlyLabor($SconName,"Installation","Per Hour", "10", "500", 0);
+_wait(20000);
 $bo_act_serviceMaintenanceContracts.addLaborPricingToServiceContract_onlyLabor($SconName,"Repair","Flat Rate", "20", "600", 2);
 
 //Add Expense Pricing
 
 $bo_act_serviceMaintenanceContracts.addExpensePricingToServiceContract("Food-Breakfast", "Flat Rate", "50", 0);
+_wait(20000);
 $bo_act_serviceMaintenanceContracts.addExpensePricingToServiceContract("Gas", "Per Unit", "80", 2);
+_wait(20000);
 $bo_act_serviceMaintenanceContracts.addExpensePricingToServiceContract("Airfare", "Discount%", "10", 4);
 
 // Add Travel Pricing
 $bo_act_serviceMaintenanceContracts.addTravelPolicywithoutDefault("Flat Rate", "800", $serviceType1, 0);
+_wait(20000);
 $bo_act_serviceMaintenanceContracts.addTravelPolicywithoutDefault("Per Hour", "150",$serviceType2 , 2);
 
 $objName2= "Contact";
@@ -165,23 +169,23 @@ _log($contactname);
 $objNameWO= "SVMXC__Service_Order__c";
 var $restName = $bo_act_common.generateRandomName("");
 
-$obJsonWO = "{\"SVMXC__Company__c\":\""+$accountID+"\", \"SVMXC__Contact__c\":\""+$contactid+"\",\"SVMXC__Product__c\":\""+$productid1+"\" }"; 
+$obJsonWO = "{\"SVMXC__Company__c\":\""+$accountID+"\", \"SVMXC__Contact__c\":\""+$contactid+"\",\"SVMXC__Product__c\":\""+$productid1+"\",\"SVMXC__Order_Type__c\":\"Field Service\"}"; 
 $columnName = "Name";
 $filter="id";
 //create an account
 var $WoID=$sfm_act_restApiMethods.postRestApi($appiumAdminUn,$appiumAdminPwd,$appiumclient_id,$appiumclient_secret,$appiumorginstance,$objNameWO,$obJsonWO,"POST");
 //get the Work Order Name
 $WOName =$sfm_act_restApiMethods.getRestApi($appiumAdminUn,$appiumAdminPwd,$appiumclient_id,$appiumclient_secret,$appiumorginstance,"GET", $objNameWO, $columnName, $filter, $WoID);
-
 _log($WOName);
 _wait(30000);
 _call(top.location.reload());
 $bo_act_navigation.navigateToCreatedRecordUsingGlobalSearchWO($WOName);
 $bo_act_interactiveEntitlement_WO.performInteractiveEntitlementWOSCON_Account($WOName,$SCONName);
 // To write the WorkOrder Number into the Test Data for Appium Side to pick it up
-$excel.insertUnderColumn("/auto/SVMX_Catalyst/fsaautomation/resources/TestData.xlsx", "TestData", "Data1",$WOName , "36");
-$excel.insertUnderColumn("/auto/SVMX_Catalyst/fsaautomation/resources/TestData.xlsx", "TestData", "Data2",$Productname1,"36");
-$excel.insertUnderColumn("/auto/SVMX_Catalyst/fsaautomation/resources/TestData.xlsx", "TestData", "Data3",$Productname2 , "36");
-$excel.insertUnderColumn("/auto/SVMX_Catalyst/fsaautomation/resources/TestData.xlsx", "TestData", "Data4", $SCONName, "36");
+$excel.insertUnderColumn("/auto/SVMX_Catalyst/fsaautomation/resources/TestData.xlsx", "RS_10539", "Data1",$WOName , "2");
+$excel.insertUnderColumn("/auto/SVMX_Catalyst/fsaautomation/resources/TestData.xlsx", "RS_10539", "Data2",$Productname1,"2");
+$excel.insertUnderColumn("/auto/SVMX_Catalyst/fsaautomation/resources/TestData.xlsx", "RS_10539", "Data3",$Productname2 , "2");
+$excel.insertUnderColumn("/auto/SVMX_Catalyst/fsaautomation/resources/TestData.xlsx", "RS_10539", "Data4", $SCONName, "2");
+$excel.insertUnderColumn("/auto/SVMX_Catalyst/fsaautomation/resources/TestData.xlsx", "RS_10539", "Data5", $accountName, "2");
 _writeFile("true", $appiumPath+$sahiIntermediatoryPath, true);
 $pre_requisite.end();

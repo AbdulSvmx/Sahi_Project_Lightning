@@ -1,6 +1,7 @@
 var $sfm_pg_sfmMapping = new function sfm_pg_sfmMapping() {
 	
 	this.btn_mappingTab = _f("main").tab("Mapping(s)").rightOf(_f("main").tab("Qualification Criteria"));
+	this.btn_mappingTabWithoutQcTab = _f("main").tab("Mapping(s)");
 	this.btn_newMappingExistingRecord = _f("main").s_button("New[2]");//Used Index as anchoring dint work during run time.
 	this.btn_newButtonFieldMap = _f("main").s_button("New[1]");//Anchoring doesnt work for mapping.
 	this.btn_saveFieldMap = _f("main").s_button("Save[1]");

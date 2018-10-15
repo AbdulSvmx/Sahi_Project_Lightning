@@ -196,13 +196,16 @@ var $bo_act_navigation = new function bo_act_navigation() {
     	};
     	
     //Changed by Janaki to Lightning flow.
+    	//Note: Search results is not displayed now. So removed heading1 anchor.
+    	//Please do not change
     	this.navigateToCreatedRecordUsingGlobalSearch = function($recordToBeSearch){
     	_click(_link("Home"));
     	_setValue(_textbox("Search Salesforce"),$recordToBeSearch);
     	_keyPress(_textbox("Search Salesforce"),13);
-    	if(_isVisible(_link("/"+$recordToBeSearch+"/",_near(_heading1("Search Results"))))==true)
+    	if(_isVisible(_link("/"+$recordToBeSearch+"/"))==true)
     	{
-    	_click(_link("/"+$recordToBeSearch+"/",_near(_heading1("Search Results"))));
+    		_click(_link($recordToBeSearch));
+    		_wait(3000);
     	
     	}
     	else
@@ -288,6 +291,7 @@ var $bo_act_navigation = new function bo_act_navigation() {
     
 	this.navigateToSfmCustomAction = function() {
 		 this.navigateToSvmxSetup();
+		 _selectDomain("/svmx/");
 		_click($bo_pg_servicemaxSetup.btn_serviceFlowManager);
 		_click($bo_pg_servicemaxSetup.btn_sfmCustomAction);
 		_wait(3000);
@@ -464,6 +468,27 @@ var $bo_act_navigation = new function bo_act_navigation() {
     			_assertExists($bo_pg_sfmTransactionAndDesigner.page_saved);
     	   
     	   };
+    //Function to edit child screen page layout.
+    	   this.designChildScreen = function($pg_layout_name,$fields_array,$containers_array){
+        	   var $i = 0;
+        	   _wait(5000);
+        	   for($i=0;$i<$fields_array.length;$i++){
+        		   if(_isVisible(_f("main").s_hscrollbar("horizontalScrollBar").near(_f("main").s_richtext($containers_array[$i])))){
+        			   _setValue(_f("main").s_hscrollbar("horizontalScrollBar").near(_f("main").s_richtext($containers_array[$i])),"00");
+        		   }
+        		   _click(_f("main").s_datagroup("dataGroup").near(_f("main").s_richtext($containers_array[$i])));
+        			_setValue(_f("main").s_textinput("searchText[4]"), $fields_array[$i]);
+        			if(_isVisible(_f("main").s_label($fields_array[$i]))){
+        				_doubleClick(_f("main").s_label($fields_array[$i]));
+        			}
+        			else {
+        					_click(_f("main").s_datagroup("dataGroup").near(_f("main").s_richtext($containers_array[$i])));
+        			}
+        	   }
+        			_setValue($bo_pg_sfmTransactionAndDesigner.txt_sfmSavePageLayoutAs, $pg_layout_name);
+        			_click($bo_pg_sfmTransactionAndDesigner.btn_pageLayoutSave);
+        			_assertExists($bo_pg_sfmTransactionAndDesigner.page_saved);
+        	 };
     //Function to edit existing screen designer.
     	   this.editHeaderScreen = function($fields_array,$containerName){
         	   var $i = 0;
@@ -561,4 +586,15 @@ var $bo_act_navigation = new function bo_act_navigation() {
         	_click($bo_pg_servicemaxSetup.btn_okAfterFeaturePermissionSave);
         	_setStrictVisibilityCheck(false);    	
         };
+        
+        this.editWizard = function($wizID){
+        	_set($isExists,_isVisible(_span($wizID)));
+        	if($isExists){
+        		_click(_checkbox(0,_leftOf(_span($wizID))));
+        		_click(_submit("Edit"));
+        	}
+        	
+        };
+   
+        
 };

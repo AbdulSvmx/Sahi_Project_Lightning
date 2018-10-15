@@ -25,7 +25,7 @@ function cleanUp(){
 	_log("Process" +$processName+" deleted");
 	_log("Cleanup completed");
 }
-var $RS_10472 = _testcase("RS_10472","Verify Field Map for existing records - Header");
+var $RS_10472 = _testcase("RS_10472","Verify Field Map for new records - Header");
 $RS_10472.start();
 //Variables used
 var $objectName = "Work Order";
@@ -131,7 +131,10 @@ for($i=0;$i<$fieldsToMap.length;$i++){
 	}
 }
 _click($bo_pg_sfmTransactionAndDesigner.btn_saveMap);
+_wait(5000);
+_assertVisible(_f("main").label("Page saved"));
 _click($bo_pg_sfmTransactionAndDesigner.btn_quickSave1);
+_wait(3000);
 
 //Create mapping for all possible standard data types.
 _click($bo_pg_sfmTransactionAndDesigner.btn_qualifyingCriteriaAndFieldMapping);

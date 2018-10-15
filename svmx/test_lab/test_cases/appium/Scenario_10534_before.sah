@@ -1,0 +1,126 @@
+//Meghana Rao
+
+/*
+ * PRE Requisites to be run in the org before running other scripts - LIGHTNING CODE
+ */
+_writeFile("false", $appiumPath+$sahiIntermediatoryPath, true);
+
+
+var $pre_requisite= _testcase("scenario10534_before","SCN_GetPrice_4_RS-10534 Verify getPrice on DOD action");
+$pre_requisite.start();
+
+_setSpeed($g_stepSpeed);
+$bo_act_login.login($g_url, $appiumAdminUn, $appiumAdminPwd);
+$sfm_act_lightningConfig.switchToLightning();
+// Removing Work Order from Download Criteria
+$bo_act_SFMAppPermission.workOrderDownloadCriteriachanges("My Records");
+
+
+var $data_excel = _readExcelFile("/auto/SVMX_Catalyst/fsaautomation/resources/TestData.xlsx","TestData",true);
+var $AccountName = $data_excel[42]["Data3"];
+_log($AccountName);
+var $IBName = $data_excel[42]["Data4"];
+_log($IBName);
+
+var $ProductName = $data_excel[42]["Data2"];
+_log($ProductName);
+
+var $AccountName2 = $data_excel[44]["Data5"];
+var $SCONName =  $data_excel[44]["Data4"];
+//Accessing the Account
+$objNameAccount= "Account";
+$columnName = "Id";
+$filter="Name";
+$AccountID =$sfm_act_restApiMethods.getRestApi($appiumAdminUn,$appiumAdminPwd,$appiumclient_id,$appiumclient_secret,$appiumorginstance,"GET", $objNameAccount, $columnName, $filter, $AccountName);
+_log($AccountID);
+
+
+//Create a Contact 
+var $restcontactfirstname="C10538_";
+var $restcontactlastname="Auto";
+$objName2= "Contact";
+$obJson = "{\"AccountId\":\""+$AccountID+"\",\"FirstName\":\""+$restcontactfirstname+"\",\"LastName\":\""+$restcontactlastname+"\"}";
+$columnName = "Name";
+$filter="id";
+//create  case with above created account and other parameters
+$contactid=$sfm_act_restApiMethods.postRestApi($appiumAdminUn,$appiumAdminPwd,$appiumclient_id,$appiumclient_secret,$appiumorginstance,$objName2,$obJson,"POST");
+//get the caseNumber
+$contactname =$sfm_act_restApiMethods.getRestApi($appiumAdminUn,$appiumAdminPwd,$appiumclient_id,$appiumclient_secret,$appiumorginstance,"GET", $objName2, $columnName, $filter, $contactid);
+_log($contactname);
+
+
+// Accessing the Product
+$objNameIB= "SVMXC__Installed_Product__c";
+$columnName = "Id";
+$filter="Name";
+$IBID =$sfm_act_restApiMethods.getRestApi($appiumAdminUn,$appiumAdminPwd,$appiumclient_id,$appiumclient_secret,$appiumorginstance,"GET", $objNameIB, $columnName, $filter, $IBName);
+_log($IBID);
+
+// To get the warranty for the IB
+
+$objNameWarranty= "SVMXC__Warranty__c";
+$columnName = "Name";
+$filter="SVMXC__Installed_Product__c";
+$WarrantyName =$sfm_act_restApiMethods.getRestApi($appiumAdminUn,$appiumAdminPwd,$appiumclient_id,$appiumclient_secret,$appiumorginstance,"GET", $objNameWarranty, $columnName, $filter,$IBID);
+_log($WarrantyName);
+
+
+
+//Create Work Order from the API
+$objNameWO= "SVMXC__Service_Order__c";
+var $restName = $bo_act_common.generateRandomName("");
+$obJsonWO = "{\"SVMXC__Component__c\":\""+$IBID+"\", \"SVMXC__Company__c\":\""+$AccountID+"\", \"SVMXC__Contact__c\":\""+$contactid+"\"}"; 
+$columnName = "Name";
+$filter="id";
+
+//create a Work Order
+var $WoID=$sfm_act_restApiMethods.postRestApi($appiumAdminUn,$appiumAdminPwd,$appiumclient_id,$appiumclient_secret,$appiumorginstance,$objNameWO,$obJsonWO,"POST");
+//get the Work Order Name
+$WOName =$sfm_act_restApiMethods.getRestApi($appiumAdminUn,$appiumAdminPwd,$appiumclient_id,$appiumclient_secret,$appiumorginstance,"GET", $objNameWO, $columnName, $filter, $WoID);
+_log($WOName);
+
+
+//Entitlement of the Work Order with Incident not Covered
+_wait(30000);
+_call(top.location.reload());
+$bo_act_navigation.navigateToCreatedRecordUsingGlobalSearchWO($WOName);
+$bo_act_interactiveEntitlement_WO.performInteractiveEntitlement_NoAccountNoContact($WOName,$WarrantyName);
+
+//To write the WorkOrder Number into the Test Data for Appium Side to pick it up
+$excel.insertUnderColumn("/auto/SVMX_Catalyst/fsaautomation/resources/TestData.xlsx", "TestData", "Data1",$WOName ,"56");
+
+// To Create Work Order for SCON 
+$objNameAccount= "Account";
+$columnName = "Id";
+$filter="Name";
+$AccountID2 =$sfm_act_restApiMethods.getRestApi($appiumAdminUn,$appiumAdminPwd,$appiumclient_id,$appiumclient_secret,$appiumorginstance,"GET", $objNameAccount, $columnName, $filter, $AccountName2);
+_log($AccountID2);
+
+$objNameAccount= "SVMXC__Service_Contract__c";
+$columnName = "Id";
+$filter="Name";
+$SconID =$sfm_act_restApiMethods.getRestApi($appiumAdminUn,$appiumAdminPwd,$appiumclient_id,$appiumclient_secret,$appiumorginstance,"GET", $objNameAccount, $columnName, $filter, $SCONName);
+_log($SconID);
+
+$objNameWO= "SVMXC__Service_Order__c";
+var $restName = $bo_act_common.generateRandomName("");
+$obJsonWO = "{\"SVMXC__Company__c\":\""+$AccountID2+"\", \"SVMXC__Contact__c\":\""+$contactid+"\"}"; 
+$columnName = "Name";
+$filter="id";
+
+//create a Work Order
+var $WoID2=$sfm_act_restApiMethods.postRestApi($appiumAdminUn,$appiumAdminPwd,$appiumclient_id,$appiumclient_secret,$appiumorginstance,$objNameWO,$obJsonWO,"POST");
+//get the Work Order Name
+$WOName2 =$sfm_act_restApiMethods.getRestApi($appiumAdminUn,$appiumAdminPwd,$appiumclient_id,$appiumclient_secret,$appiumorginstance,"GET", $objNameWO, $columnName, $filter, $WoID2);
+_log($WOName2);
+
+_wait(30000);
+$bo_act_navigation.navigateToHome();
+_call(top.location.reload());
+$bo_act_navigation.navigateToCreatedRecordUsingGlobalSearchWO($WOName2);
+$bo_act_interactiveEntitlement_WO.performInteractiveEntitlementWOSCON_Account($WOName2, $SCONName);
+
+$excel.insertUnderColumn("/auto/SVMX_Catalyst/fsaautomation/resources/TestData.xlsx", "TestData", "Data2",$WOName2 ,"56");
+_writeFile("true", $appiumPath+$sahiIntermediatoryPath, true);
+
+$pre_requisite.end();

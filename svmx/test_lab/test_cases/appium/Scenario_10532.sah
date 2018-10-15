@@ -54,7 +54,7 @@ var $restName = $bo_act_common.generateRandomName("");
 $obJsonWO = "{\"SVMXC__Component__c\":\""+$IBID+"\", \"SVMXC__Company__c\":\""+$AccountID+"\", \"SVMXC__Contact__c\":\""+$contactid+"\",\"SVMXC__Billing_Type__c\":\"Loan\"}"; 
 $columnName = "Name";
 $filter="id";
-//create an account
+//create a Work Order
 var $WoID=$sfm_act_restApiMethods.postRestApi($appiumAdminUn,$appiumAdminPwd,$appiumclient_id,$appiumclient_secret,$appiumorginstance,$objNameWO,$obJsonWO,"POST");
 //get the Work Order Name
 $WOName =$sfm_act_restApiMethods.getRestApi($appiumAdminUn,$appiumAdminPwd,$appiumclient_id,$appiumclient_secret,$appiumorginstance,"GET", $objNameWO, $columnName, $filter, $WoID);
