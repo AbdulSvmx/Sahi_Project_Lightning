@@ -471,13 +471,19 @@ var $bo_act_navigation = new function bo_act_navigation() {
     //Function to edit child screen page layout.
     	   this.designChildScreen = function($pg_layout_name,$fields_array,$containers_array){
         	   var $i = 0;
+        	   _wait(5000);
         	   for($i=0;$i<$fields_array.length;$i++){
         		   if(_isVisible(_f("main").s_hscrollbar("horizontalScrollBar").near(_f("main").s_richtext($containers_array[$i])))){
         			   _setValue(_f("main").s_hscrollbar("horizontalScrollBar").near(_f("main").s_richtext($containers_array[$i])),"00");
         		   }
         		   _click(_f("main").s_datagroup("dataGroup").near(_f("main").s_richtext($containers_array[$i])));
         			_setValue(_f("main").s_textinput("searchText[4]"), $fields_array[$i]);
-        			_doubleClick(_f("main").s_label($fields_array[$i]));
+        			if(_isVisible(_f("main").s_label($fields_array[$i]))){
+        				_doubleClick(_f("main").s_label($fields_array[$i]));
+        			}
+        			else {
+        					_click(_f("main").s_datagroup("dataGroup").near(_f("main").s_richtext($containers_array[$i])));
+        			}
         	   }
         			_setValue($bo_pg_sfmTransactionAndDesigner.txt_sfmSavePageLayoutAs, $pg_layout_name);
         			_click($bo_pg_sfmTransactionAndDesigner.btn_pageLayoutSave);

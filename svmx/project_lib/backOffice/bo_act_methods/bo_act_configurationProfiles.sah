@@ -47,6 +47,7 @@ var $bo_act_configurationProfiles = new function bo_act_configurationProfiles() 
 		_click(_checkbox(0,_leftOf(_span($profile))));
 		_click(_submit("Edit"));
 		_setSelected(_select(0,_rightOf(_label("Select Module"))),$Module);
+		_wait(3000);
 		_setSelected(_select(0,_rightOf(_label("Select Submodule"))),$SubModule);
 		_click(_link("Edit",_leftOf(_span($Setting))));
 		_selectDomain();
@@ -57,7 +58,6 @@ var $bo_act_configurationProfiles = new function bo_act_configurationProfiles() 
 		_wait(3000);
 		_click($bo_pg_configurationProfiles.btn_popUpClose);
 		_selectDomain("/svmx/");
-		_wait(3000);
 		_click(_button("Refresh"));
 		_wait(3000); 
 		_click($bo_pg_configurationProfiles.btn_save);
