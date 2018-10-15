@@ -1,5 +1,5 @@
-var $rs_6911 = _testcase("RS_6911","Verify Lookup configuration for Search, Display, Bubble, No of records to display.");
-$rs_6911.start();
+var $rs_10449 = _testcase("RS_10449","Verify Lookup configuration for Search, Display, Bubble, No of records to display.");
+$rs_10449.start();
 
 
 		//Pre_Requesite
@@ -94,6 +94,7 @@ $rs_6911.start();
 		
 		
 		
+		
 
 
 function RS10449_saveSFM(){
@@ -127,5 +128,5 @@ $sfm_act_createCustomWizard.validateSearch("Desktop", "Product Line");
 $sfm_act_createCustomWizard.validateSearch($value, "Product Name");
 $sfm_act_createCustomWizard.validateBubbleText($value);
 */
-$rs_6911.end();
+$rs_10449.end();
 

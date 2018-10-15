@@ -53,8 +53,8 @@ var $sfm_pg_wizards = new function sfm_pg_wizards() {
 	this.lbl_searchWindowLabel=_div("/Recent Items:/");
 	this.btn_objectSearch=_span("Search");
 	this.txt_searchObj=_textbox("/sfm-text/",_near(this.btn_objectSearch));
-	this.div_searchWindow=_parentNode(_div("Recent Items: Cases"),"DIV",5);
-	this.btn_cancelCaseWindow=_span("Cancel",_in(div_searchWindow));
+	this.div_searchWindow = _parentNode(_div("Recent Items: Cases"),"DIV",5);
+	this.btn_cancelCaseWindow=_span("Cancel",_in(this.div_searchWindow));
 
 	
 	//Added By Harish
