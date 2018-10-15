@@ -1,7 +1,7 @@
 var RS_10554_mapping = _testcase("RS_10554_mapping","SCN_Mapping_RS-10554 Verify field map for new header record & existing child record");
 RS_10554_mapping.start();
 
-//_writeFile("false", $appiumPath+$sahiIntermediatoryPath, true);
+_writeFile("false", $appiumPath+$sahiIntermediatoryPath, true);
 
 var $sfmNameToBeCloned = "Create Work Order from Installed Product";
 var $sfmName = "RS_10554_field_mapping";
@@ -34,8 +34,8 @@ $sfm_act_lightningConfig.switchToLightning();
 $mappingField = ["Account","Component","Product","Scheduled Date","Scheduled Date Time"];
 $mappingValue = ["Account","Record ID","Product","Date Installed","Last Modified Date"];
 
-$mappingField_child = ["Date Required","Part"];
-$mappingValue_child = ["Date Installed","Product"];
+$mappingField_child = ["Date Required","Part","Record Type ID"];
+$mappingValue_child = ["Date Installed","Product","--None--"];
 var $containerName="Work Order";
 var $containerName_child="Parts";
 var $textLabels=[];
@@ -89,7 +89,7 @@ $sfm_act_wizards.addToWizard($wizardObject,$wizardName, $wizardType,$sfmName,$ha
 
 }
 
-//_writeFile("true", $appiumPath+$sahiIntermediatoryPath, true);
+_writeFile("true", $appiumPath+$sahiIntermediatoryPath, true);
 
 
 RS_10554_mapping.end();

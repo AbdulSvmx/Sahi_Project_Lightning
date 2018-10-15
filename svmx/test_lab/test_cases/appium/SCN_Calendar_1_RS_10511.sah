@@ -1,6 +1,7 @@
 var RS_10511 = _testcase("RS_10511","SVerify if events & their related records are removed from FSA app when events are re-assigned to another user (or) deleted from server.");
 RS_10511.start();
 
+_writeFile("false", $appiumPath+$sahiIntermediatoryPath, true);
 
 var $picklistValue="Salesforce Event";
 
@@ -13,11 +14,12 @@ $sfm_act_lightningConfig.switchToLightning();
 //Setting the value for salesforce event
 $bo_act_configurationProfiles.editGlobalProfileForPicklistSettings($profile,$module,$subModule,$setting,$picklistValue);
 
+_selectWindow("");
 
 var $restAccName="A10511_SFDC_Event";
 var $EventSub="A10511_SFDC_Event1";
-var $techname="a240t000000GglLAAS";
-	
+var $techname=$appiumTechId;
+var $salesforceuserid=$appiumsfdcuserId;
 
 $objName= "Account";
 $obJson = "{\"Name\":\""+$restAccName+"\"}"; 
@@ -39,6 +41,7 @@ $workorderid=$sfm_act_restApiMethods.postRestApi($appiumAdminUn,$appiumAdminPwd,
 $WOname =$sfm_act_restApiMethods.getRestApi($appiumAdminUn,$appiumAdminPwd,$appiumclient_id,$appiumclient_secret,$appiumorginstance,"GET", $objName, $columnName, $filter, $workorderid);
 _log($WOname);
 
+
 var $now = new Date();
 _log( $now ); // shows current date/time
 
@@ -59,9 +62,9 @@ _log($new1);
 
 // To crete one hr SFDC event1
 
-$objName= "SVMXC__SVMX_Event__c";
-$obJson = "{\"Name\":\""+$EventSub+"\",\"SVMXC__Service_Order__c\":\""+$workorderid+"\",\"SVMXC__Technician__c\":\""+$techname+"\",\"SVMXC__StartDateTime__c\":\""+$new+"\",\"SVMXC__EndDateTime__c\":\""+$new1+"\",\"SVMXC__WhatId__c\":\""+$workorderid+"\"}";	
-$columnName = "Name";
+$objName= "Event";
+$obJson = "{\"Subject\":\""+$EventSub+"\",\"WhatId\":\""+$workorderid+"\",\"OwnerId\":\""+$salesforceuserid+"\",\"StartDateTime\":\""+$new+"\",\"EndDateTime\":\""+$new1+"\"}";	
+$columnName = "Subject";
 $filter="id";
 
 $eventid=$sfm_act_restApiMethods.postRestApi($appiumAdminUn,$appiumAdminPwd,$appiumclient_id,$appiumclient_secret,$appiumorginstance,$objName,$obJson,"POST");
@@ -102,9 +105,9 @@ _log($new1);
 
 // To crete one hr SFDC event2
 
-$objName= "SVMXC__SVMX_Event__c";
-$obJson = "{\"Name\":\"A10511_SFDC_Event2\",\"SVMXC__Service_Order__c\":\""+$workorderid+"\",\"SVMXC__Technician__c\":\""+$techname+"\",\"SVMXC__StartDateTime__c\":\""+$new+"\",\"SVMXC__EndDateTime__c\":\""+$new1+"\",\"SVMXC__WhatId__c\":\""+$workorderid+"\"}";	
-$columnName = "Name";
+$objName= "Event";
+$obJson = "{\"Subject\":\"A10511_SFDC_Event2\",\"WhatId\":\""+$workorderid+"\",\"OwnerId\":\""+$salesforceuserid+"\",\"StartDateTime\":\""+$new+"\",\"EndDateTime\":\""+$new1+"\"}";	
+$columnName = "Subject";
 $filter="id";
 
 $eventid=$sfm_act_restApiMethods.postRestApi($appiumAdminUn,$appiumAdminPwd,$appiumclient_id,$appiumclient_secret,$appiumorginstance,$objName,$obJson,"POST");
@@ -144,9 +147,9 @@ _log($new1);
 
 // To crete one hr SFDC event3
 
-$objName= "SVMXC__SVMX_Event__c";
-$obJson = "{\"Name\":\"A10511_SFDC_Event3\",\"SVMXC__Service_Order__c\":\""+$workorderid+"\",\"SVMXC__Technician__c\":\""+$techname+"\",\"SVMXC__StartDateTime__c\":\""+$new+"\",\"SVMXC__EndDateTime__c\":\""+$new1+"\",\"SVMXC__WhatId__c\":\""+$workorderid+"\"}";	
-$columnName = "Name";
+$objName= "Event";
+$obJson = "{\"Subject\":\"A10511_SFDC_Event3\",\"WhatId\":\""+$workorderid+"\",\"OwnerId\":\""+$salesforceuserid+"\",\"StartDateTime\":\""+$new+"\",\"EndDateTime\":\""+$new1+"\"}";	
+$columnName = "Subject";
 $filter="id";
 
 $eventid=$sfm_act_restApiMethods.postRestApi($appiumAdminUn,$appiumAdminPwd,$appiumclient_id,$appiumclient_secret,$appiumorginstance,$objName,$obJson,"POST");
@@ -156,7 +159,9 @@ _log($eventname);
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-$bo_act_configurationProfiles.editGlobalProfileForPicklistSettings($profile,$module,$subModule,$setting,"Servicemax Event");
+_selectDomain();
+
+$bo_act_configurationProfiles.editGlobalProfileForPicklistSettings($profile,$module,$subModule,$setting,"ServiceMax Event");
 
 var $restAccName="A10511_SVMX_Event";
 var $EventSub="A10511_SVMX_Event1";
@@ -298,6 +303,6 @@ $eventid=$sfm_act_restApiMethods.postRestApi($appiumAdminUn,$appiumAdminPwd,$app
 $eventname =$sfm_act_restApiMethods.getRestApi($appiumAdminUn,$appiumAdminPwd,$appiumclient_id,$appiumclient_secret,$appiumorginstance,"GET", $objName, $columnName, $filter, $eventid);
 _log($eventname);
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
+_writeFile("true", $appiumPath+$sahiIntermediatoryPath, true);
 
 RS_10511.end();

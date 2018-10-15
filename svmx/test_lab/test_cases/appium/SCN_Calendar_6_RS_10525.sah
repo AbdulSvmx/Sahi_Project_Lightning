@@ -1,6 +1,6 @@
 var RS_10525 = _testcase("RS_10525","SCN_Calendar_6_RS-10525 Verify multi-day & all-day events on FSA client");
 RS_10525.start();
-
+_writeFile("false", $appiumPath+$sahiIntermediatoryPath, true);
 
 /*var $objName;
 var $obJson;
@@ -61,6 +61,7 @@ $eventid=$sfm_act_restApiMethods.postRestApi($appiumAdminUn,$appiumAdminPwd,$app
 $eventname =$sfm_act_restApiMethods.getRestApi($appiumAdminUn,$appiumAdminPwd,$appiumclient_id,$appiumclient_secret,$appiumorginstance,"GET", $objName, $columnName, $filter, $eventid);
 _log($eventname);
 
+_writeFile("true", $appiumPath+$sahiIntermediatoryPath, true);
 
 
 RS_10525.end();

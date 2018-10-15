@@ -95,10 +95,12 @@ var $appiumPath = "/auto/SVMX_Catalyst/Executable/";
 var $sahiIntermediatoryPath = "sahiResultCommon.txt";
 
 var $appiumAdminUn="meghana.automation@servicemax.com";
-var $appiumAdminPwd="servicemax01";
+var $appiumAdminPwd="servicemax1";
 
 var $appiumTechUn="autotech@part1.com";
 var $appiumTechPwd="servicemax01";
+var $appiumTechId="a240t000000GglLAAS";
+var $appiumsfdcuserId="0050t000001FkqI";
 
 //THIS IS SPECIFIC TO A GIVEN ORG - DONOT TOUCH
 var $appiumclient_id = "3MVG9ifmAKCHISbZGXS_tYaEGdq5pFNz6ZhYTkrLMlM9toUZC8UIDIt.2R4KYqLXKL5yc8HjHPh5NYoUERETS";
