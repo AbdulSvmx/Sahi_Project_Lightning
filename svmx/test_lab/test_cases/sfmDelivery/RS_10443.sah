@@ -70,7 +70,7 @@ $sfm_act_SFM.cloneTDM016($sfmNameToBeCloned,$sfmName,$isCustom, $sfmTemplateSave
 $sfm_act_SFM.partsNotMandatory();
 $sfm_act_SFM.partsMultiAdd("Case");
 
-$sfm_act_Transactions.createLookUp($fieldName[1], $lookupTempName, "", $lookupFilterDetails, $sfmName,"Parts");
+$sfm_act_Transactions.createLookUp($fieldName[1], $lookupTempName, "", $lookupFilterDetails, $sfmName,"Parts","");
 
 $sfm_act_SFM.setFormFill($fieldName[1], $sfmName,"Parts");
 $sfm_act_SFM.setFormFill($fieldName[1], $sfmName,"Labor");

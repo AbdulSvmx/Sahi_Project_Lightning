@@ -113,7 +113,8 @@ var $sfm_pg_sfmDesigner = new function sfm_pg_sfmDesigner() {
 	this.txt_autoContactTextbox=_textbox("/inputEl/",_near(this.lbl_autoContact));
 	this.btn_searchautoContactIcon=_div("/trigger-search/",_near(this.lbl_autoContact));
 	this.link_cancelPartSearch=_link("Cancel",_in(this.window_partsSearchWindow));
-
+	this.lbl_case=_span("Case",_in(this.window_partsSearchWindow));
+	this.link_searchCaseIcon=_div("/trigger-search/",_near(this.lbl_case));
 	
 	
 	//header fields

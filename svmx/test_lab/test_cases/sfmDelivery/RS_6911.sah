@@ -1,5 +1,110 @@
 var $rs_6911 = _testcase("RS_6911","Verify Lookup configuration for Search, Display, Bubble, No of records to display.");
 $rs_6911.start();
+
+
+		//Pre_Requesite
+		//Create Product
+		$objName= "Product2";
+		var $productName=new Array;
+		for (var $i = 0; $i < 5; $i++) {
+			$productName[$i]=$bo_act_common.generateRandomName("Pro_RS_10449_");
+			$obJson = "{\"Name\":\""+$productName+"\",\"ProductCode\":\""+$productName+"\",\"SVMXC__Product_Line__c\":\"Storage\",\"SVMXC__Product_Type__c\":\"Consumable\"}";
+			$filterValue=$sfm_act_restApiMethods.postRestApi($sfmlUsn,$sfmlPwd,$sfmClientId,$sfmConsumerSecret,$sfmOrgInstance,$objName,$obJson,"POST");
+			_log($productName[$i]);
+		}
+
+		//create Work orders
+		$objName= "SVMXC__Service_Order__c";
+		$obJson = "{\"SVMXC__Order_Status__c\":\"Open\",\"SVMXC__Order_Type__c\":\"Field Service\"}";
+		$columnName = "Name";
+		$filter="id";
+		$filterValue=$sfm_act_restApiMethods.postRestApi($sfmlUsn,$sfmlPwd,$sfmClientId,$sfmConsumerSecret,$sfmOrgInstance,$objName,$obJson,"POST");
+		$WONumber =$sfm_act_restApiMethods.getRestApi($sfmlUsn,$sfmlPwd,$sfmClientId,$sfmConsumerSecret,$sfmOrgInstance,"GET", $objName, $columnName, $filter, $filterValue);
+		_log("WO number: "+$WONumber);
+
+		
+		// Login to App
+		$bo_act_login.login($g_url,$sfmlUsn,$sfmlPwd);
+		
+		//clone standard SFM
+		var $sfmNameToBeCloned="Manage Work Order Lines - Usage";
+		var $sfmName=$bo_act_common.generateRandomName("rs_10449_");
+		var $sfmTemplateSaveAsName=$bo_act_common.generateRandomName("SFM_Page_");
+		var $sfmTemplate="SVMXSTD: Manage WO Usage Lines";
+		var $fieldName=["Account","Contact"];
+		var $containerName=["Order Status","Order Status"];
+		$sfm_act_SFM.cloneTDM016($sfmNameToBeCloned, $sfmName, false, $sfmTemplateSaveAsName, $sfmTemplate, $fieldName, $containerName);
+		
+		//Remove multi-add for part childline
+		$sfm_act_SFM.partsMultiAdd("--None--");
+		
+		//Context lookup setup on Work Order Header object
+		_setValue($bo_pg_sfmTransactionAndDesigner.btn_scrollbar.near(_f("main").s_richtext("Parts")),"00");
+		_click($bo_pg_sfmTransactionAndDesigner.txt_partOnChild);
+		
+		//create lookup for case object in header
+		$object="Part";
+		var $lookupTempName="SVMXSTD: Product Lookup";
+		$fieldNameList=["Product Type"];
+		$addToSearchList=[true];
+		$addToDisplayList=[true];
+		$addToBubbleList=[true];
+		var $noOfRecords=20;
+		var $lookupFieldsToAdd=[$fieldNameList,$addToSearchList,$addToDisplayList,$addToBubbleList];
+		var $lookUpName=$bo_act_common.generateRandomName("rs_10449_lookup_");
+		$sfm_act_Transactions.createLookUp($object, $lookupTempName, "", "", $lookUpName,"Parts",$noOfRecords);
+		
+		//Save SFM after adding context lookup
+		RS10449_saveSFM();
+		
+		//add sfm to wizard
+		var $wizardObject="Work Order";
+		var $wizardName1 =$wizardName[3];
+		var $wizardType="SFM";
+		var $profile="";
+		var $handOver=false;
+		_log("Wizard Name: "+$wizardName1);
+		$sfm_act_wizards.addToWizard($wizardObject, $wizardName1, $wizardType, $sfmName, $handOver, $profile); 
+			
+		//Search WO and launch SFM
+		RS10449_searchWOandLaunchSFM($WONumber,$sfmName);
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+
+
+function RS10449_saveSFM(){
+	_setStrictVisibilityCheck(true);
+	_click($bo_pg_sfmTransactionAndDesigner.btn_pageLayoutSave);
+	_wait(5000,_isVisible($bo_pg_sfmTransactionAndDesigner.btn_sfmpageSaveConfirmMsg));
+	_click($bo_pg_sfmTransactionAndDesigner.btn_saveAndclose);
+	_setStrictVisibilityCheck(false);
+};		
+
+/*
 $sfmName = $bo_act_common.generateRandomName("SFM_Auto_");
 //$sfmName = "SFM_Auto_44201811021";
 $value = "Dell";
@@ -21,5 +126,6 @@ $sfm_act_createCustomWizard.verify6911();
 $sfm_act_createCustomWizard.validateSearch("Desktop", "Product Line");
 $sfm_act_createCustomWizard.validateSearch($value, "Product Name");
 $sfm_act_createCustomWizard.validateBubbleText($value);
+*/
 $rs_6911.end();
 

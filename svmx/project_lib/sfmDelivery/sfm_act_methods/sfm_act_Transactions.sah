@@ -167,7 +167,7 @@ var $sfm_act_Transactions = new function sfm_act_Transactions() {
 		 * 					$nearBy = name of child object where object lookup is to configure. if case field is in part childline please select Parts
 		 * Example		: 	Refer RS_10431 for function usage
 		 */
-		this.createLookUp=function($object,$lookupTempName,$lookupFieldsToAdd, $lookupFilterDetails,$lookUpName,$nearBy){
+		this.createLookUp=function($object,$lookupTempName,$lookupFieldsToAdd, $lookupFilterDetails,$lookUpName,$nearBy,$noOfRecords){
 			_setStrictVisibilityCheck(true);
 			
 			if($nearBy == 'Parts' || $nearBy == 'Labor' || $nearBy == 'Expense' || $nearBy == 'Travel'){
@@ -180,7 +180,8 @@ var $sfm_act_Transactions = new function sfm_act_Transactions() {
 			_wait(5000,_isVisible(_f("main").s_label("Properties for Field: "+$object)));
 			_click($sfm_pg_screenDesigner.btn_ConfLookup);
 			_wait(10000,_isVisible($sfm_pg_screenDesigner.txt_lookupName));
-			if ($lookupTempName!="" && $lookupTempName!=null) {
+			_log($lookupTempName);
+			if ($lookupTempName!=="" && $lookupTempName!==null) {
 				_setSelected($sfm_pg_screenDesigner.sel_LkupTemplate,$lookupTempName);
 			}
 			_wait(10000);
@@ -208,7 +209,7 @@ var $sfm_act_Transactions = new function sfm_act_Transactions() {
 					}
 				}
 			}
-			
+			if ($lookupFilterDetails!==null && $lookupFilterDetails!=="") {
 			var $fieldCombo=$lookupFilterDetails[0];
 			var $conditionsCombo=$lookupFilterDetails[1];
 			var $operandTypeCombo=$lookupFilterDetails[2];
@@ -245,10 +246,18 @@ var $sfm_act_Transactions = new function sfm_act_Transactions() {
 				}
 				
 			}
-			//_wait(5000);
-			_setValue($sfm_pg_screenDesigner.txt_lookupAdvExpr,$lookupAdvExpr);
-			_click($sfm_pg_screenDesigner.chk_lookupDefault);
 			_wait(5000);
+			_setValue($sfm_pg_screenDesigner.txt_lookupAdvExpr,$lookupAdvExpr);
+			}
+			var $cond=_getValue(_f("main").s_checkbox("/.*/").near(_f("main").s_label("/Make this/")));
+			if ($cond=="true") {
+				_click($sfm_pg_screenDesigner.chk_lookupDefault);
+			}
+			_wait(5000);
+			if ($noOfRecords!==null && $noOfRecords!=="") {
+				_setSelected($sfm_pg_screenDesigner.sel_noOfRecords,$noOfRecords);
+				_wait(1000);
+			}
 			_setValue($sfm_pg_screenDesigner.txt_lookupName, $lookUpName);
 			_setValue($sfm_pg_screenDesigner.txt_lookupId, $lookUpName);
 			_click($sfm_pg_screenDesigner.btn_lookupSaveAs);

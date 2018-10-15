@@ -196,7 +196,8 @@ var $sfm_act_SFM = new function sfm_act_SFM() {
 					_click(_f("main").s_button("/Add Field/"));
 				}
 				else if($fieldName[$i]=="Case"){
-					_click(_f("main").s_label("Case[3]"));
+					//_click(_f("main").s_label("Case[3]"));//please check below code, if not working uncomment this and remove below code.
+					_click(_f("main").s_label("Case").near(_f("main").s_textinput("Case")));
 					_click(_f("main").s_button("/Add Field/"));
 				}
 				else{
