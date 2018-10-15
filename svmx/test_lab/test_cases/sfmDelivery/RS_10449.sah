@@ -79,7 +79,7 @@ $rs_10449.start();
 		_click($sfm_pg_sfmDesigner.link_searchLink);
 		var $fieldsName=["Name","ProductCode","SVMXC__Product_Line__c","SVMXC__Product_Type__c"];
 		for (var $i = 0; $i < array.length; $i++) {
-			
+			_assertExists(_span($fieldsName[$i],_in(_parentNode(_div("Recent Items: Products"),"DIV",5))));
 		}
 		
 		
