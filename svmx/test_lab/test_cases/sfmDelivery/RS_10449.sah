@@ -1,14 +1,18 @@
-var $rs_6911 = _testcase("RS_6911","Verify Lookup configuration for Search, Display, Bubble, No of records to display.");
-$rs_6911.start();
+var $rs_10449 = _testcase("RS_10449","Verify Lookup configuration for Search, Display, Bubble, No of records to display.");
+$rs_10449.start();
 
 
 		//Pre_Requesite
 		//Create Product
 		$objName= "Product2";
 		var $productName=new Array;
+		//var $productCode=new Array;
+		var $productNameReg="PN_RS10449_";
+		//var $productCodeReg="PC_RS10449_";
 		for (var $i = 0; $i < 5; $i++) {
-			$productName[$i]=$bo_act_common.generateRandomName("Pro_RS_10449_");
-			$obJson = "{\"Name\":\""+$productName+"\",\"ProductCode\":\""+$productName+"\",\"SVMXC__Product_Line__c\":\"Storage\",\"SVMXC__Product_Type__c\":\"Consumable\"}";
+			$productName[$i]=$bo_act_common.generateRandomName($productNameReg);
+			//$productCode[$i]=$bo_act_common.generateRandomName($productCodeReg);
+			$obJson = "{\"Name\":\""+$productName[$i]+"\",\"ProductCode\":\""+$productName[$i]+"\",\"SVMXC__Product_Line__c\":\"Storage\",\"SVMXC__Product_Type__c\":\"Consumable\"}";
 			$filterValue=$sfm_act_restApiMethods.postRestApi($sfmlUsn,$sfmlPwd,$sfmClientId,$sfmConsumerSecret,$sfmOrgInstance,$objName,$obJson,"POST");
 			_log($productName[$i]);
 		}
@@ -49,7 +53,7 @@ $rs_6911.start();
 		$addToSearchList=[true];
 		$addToDisplayList=[true];
 		$addToBubbleList=[true];
-		var $noOfRecords=20;
+		var $noOfRecords=50;
 		var $lookupFieldsToAdd=[$fieldNameList,$addToSearchList,$addToDisplayList,$addToBubbleList];
 		var $lookUpName=$bo_act_common.generateRandomName("rs_10449_lookup_");
 		$sfm_act_Transactions.createLookUp($object, $lookupTempName, "", "", $lookUpName,"Parts",$noOfRecords);
@@ -69,9 +73,43 @@ $rs_6911.start();
 		//Search WO and launch SFM
 		RS10449_searchWOandLaunchSFM($WONumber,$sfmName);
 		
+		//** Adding ChildLine **/
+		$sfm_act_sfmDesigner.addChildLine("Parts");
+		_wait(10000,_isVisible($sfm_pg_sfmDesigner.txt_partTextbox));
+		_click($sfm_pg_sfmDesigner.searchPartIcon);
+		_wait(5000,_isVisible($sfm_pg_sfmDesigner.lbl_recentItemProducts));
+		_setValue($sfm_pg_sfmDesigner.btn_searchTextBox,$productNameReg);
+		_click($sfm_pg_sfmDesigner.link_searchLink);
+		var $fieldsName=["Name","ProductCode","SVMXC__Product_Line__c"];
+		//Column assertion
+		for (var $i = 0; $i < array.length; $i++) {
+			_assertExists(_span($fieldsName[$i],_in($sfm_pg_sfmDesigner.window_ProductSearchWindow)));
+		}
+		//object assertion
+		for (var $i = 0; $i < array.length; $i++) {
+			_assertExists(_link($productName[$i],_in($sfm_pg_sfmDesigner.window_ProductSearchWindow)));
+		}
 		
+		//Product line based Search
+		_setValue($sfm_pg_sfmDesigner.btn_searchTextBox,"Storage");
+		_click($sfm_pg_sfmDesigner.link_searchLink);
+		for (var $i = 0; $i < array.length; $i++) {
+			_assertExists(_link($productName[$i],_in($sfm_pg_sfmDesigner.window_ProductSearchWindow)));
+		}
+		_click(_link($productName[0],_in($sfm_pg_sfmDesigner.window_ProductSearchWindow)));
+		_click($sfm_pg_sfmDesigner.link_updatePartsSearch);
+		_wait(5000);
 		
+		//Bubble assert
+		_click(_cell($productName[0]));
+		_click($sfm_pg_sfmDesigner.btn_bubble);
+		_wait(3000,_isVisible($sfm_pg_sfmDesigner.btn_bubbleDiv));
 		
+		_assertExists(_div($fieldsName[0]+":"+$productName[0]));
+		_assertExists(_div($fieldsName[1]+":"+$productName[0]));
+		_assertExists(_div($fieldsName[1]+":Storage"));
+		
+
 		
 		
 		
@@ -127,5 +165,5 @@ $sfm_act_createCustomWizard.validateSearch("Desktop", "Product Line");
 $sfm_act_createCustomWizard.validateSearch($value, "Product Name");
 $sfm_act_createCustomWizard.validateBubbleText($value);
 */
-$rs_6911.end();
+$rs_10449.end();
 

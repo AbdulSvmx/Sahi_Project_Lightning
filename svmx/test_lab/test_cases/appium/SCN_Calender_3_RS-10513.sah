@@ -1,6 +1,6 @@
 var RS_10513 = _testcase("RS_10513","Verify creation/reschedule events from server and FSA App");
 RS_10513.start();
-
+_writeFile("false", $appiumPath+$sahiIntermediatoryPath, true);
 var $profile = "Cloned_Default";
 var $module = "Common";
 var $subModule = "Global Settings";
@@ -113,5 +113,5 @@ _log($eventname);
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-
+_writeFile("true", $appiumPath+$sahiIntermediatoryPath, true);
 RS_10513.end();
