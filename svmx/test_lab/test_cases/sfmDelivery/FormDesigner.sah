@@ -98,7 +98,7 @@ $rs_formDesigner.start();
 	$sfm_act_formDesigner.addExistCriteria();
 	$sfm_act_formDesigner.addQuesToExistCriteriaTab($questionNames, $questionType, $criteriaDetails);
 	
-	/*	
+		
 	//Adding Entry criteria
 	var $comboField=["Account","Contact","Account Picklist"];
 	var $comboConditions=["Is Null","Is Not Null","Equals"]; 
@@ -113,7 +113,7 @@ $rs_formDesigner.start();
 	_click($sfm_pg_formDesigner.btn_cancelSectionWindow);
 	
 	$sfm_act_formDesigner.removeQuestionFromSection("Disassemble System", "Checklist Section Title");
-	*/
+	
 	//_click($sfm_pg_formDesigner.div_entryCriteria);
 	//Entry criteria - selecting from exiting
 
