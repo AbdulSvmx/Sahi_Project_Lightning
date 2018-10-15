@@ -180,8 +180,10 @@ var $sfm_act_SFM = new function sfm_act_SFM() {
 					_setValue(_f("main").s_hscrollbar("horizontalScrollBar").near(_f("main").s_richtext("Labor")),"00");
 				}else if($containerName[$i] == 'Expenses'){
 					_setValue(_f("main").s_hscrollbar("horizontalScrollBar").near(_f("main").s_richtext("Expenses")),"00");
-				}else{
+				}else if($containerName[$i] == 'Travel'){
 					_setValue(_f("main").s_hscrollbar("horizontalScrollBar").near(_f("main").s_richtext("Travel")),"00");
+				}else{
+					//do nothing
 				}				
 				_click(_f("main").s_datagroup("dataGroup").near(
 						_f("main").s_richtext($containerName[$i])));
