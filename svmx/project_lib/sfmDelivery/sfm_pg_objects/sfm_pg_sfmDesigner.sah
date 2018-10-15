@@ -8,7 +8,7 @@ var $sfm_pg_sfmDesigner = new function sfm_pg_sfmDesigner() {
 	this.btn_deliverySave = _span("Save",_rightOf(_span("Cancel")));//Changed for Lightning
 	this.btn_deliveryCancel = _span("Cancel",_leftOf(_span("Save")));//Changed for Lightning
 	this.btn_deliveryGetPrice = _span("Get Price",_rightOf(_span("Quick Save"))); //Changed for Lightning
-	this.btn_deliveryUserSettings = _span("User Settings"); //Changed for Lightning
+	this.btn_deliveryUserSettings = _span("User Settings"); //Changwindow_partsSearchWindowed for Lightning
 	this.btn_deliveryHelp = _div("/toolEl/", _near(_link("Quick Save")));//Changed for Lightning
 	this.btn_deliveryClearCache = _span("Clear ServiceMax Cache");//Changed for Lightning
 	this.btn_deliveryDropdown = _span("/btnWrap/",_rightOf(_span("Get Price")));//Changed for Lightning
@@ -106,10 +106,19 @@ var $sfm_pg_sfmDesigner = new function sfm_pg_sfmDesigner() {
 	this.txt_partTextbox=_textbox("/inputEl/",_near(this.lbl_part));
 	this.searchPartIcon=_div("/trigger-search/",_near(this.lbl_part));
 	this.lbl_recentItemProducts=_div("Recent Items: Products");
+	this.window_ProductSearchWindow=_parentNode(this.lbl_recentItemProducts,"DIV",5);
 	this.lbl_account=_span("Account",_in(this.window_partsSearchWindow));
 	this.txt_accountTextbox=_textbox("/inputEl/",_near(this.lbl_account));
+	this.btn_searchAccountIcon=_div("/trigger-search/",_near(this.lbl_account));
 	this.lbl_autoContact=_span("AutoContact",_in(this.window_partsSearchWindow));
 	this.txt_autoContactTextbox=_textbox("/inputEl/",_near(this.lbl_autoContact));
+	this.btn_searchautoContactIcon=_div("/trigger-search/",_near(this.lbl_autoContact));
+	this.link_cancelPartSearch=_link("Cancel",_in(this.window_partsSearchWindow));
+	this.lbl_case=_span("Case",_in(this.window_partsSearchWindow));
+	this.link_searchCaseIcon=_div("/trigger-search/",_near(this.lbl_case));
+	this.link_updatePartsSearch=_link("Update",_in(this.window_partsSearchWindow));
+	this.btn_bubble=_link("/.*/",_in(_div("/celleditor/")));
+	this.btn_bubbleDiv=_div("/lightningtooltip/");
 	
 	
 	//header fields

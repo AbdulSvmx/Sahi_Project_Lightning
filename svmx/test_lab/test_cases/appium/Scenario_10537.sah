@@ -21,6 +21,11 @@ var $IB10538Name = $data_excel_10538[2]["Data4"];
 $bo_act_login.login($g_url, $appiumAdminUn, $appiumAdminPwd);
 $sfm_act_lightningConfig.switchToLightning();
 
+var $module = "Entitlement Verification";
+var $submodule = "Work Order Entitlement VF";
+
+
+
 // To get the Account 10539 ID
 $objNameAcc= "Account";
 $columnName = "Id";
@@ -102,7 +107,7 @@ _log($WDName);
 _wait(30000);
 _call(top.location.reload());
 $bo_act_navigation.navigateToCreatedRecordUsingGlobalSearchWO($WOName);
-$bo_act_interactiveEntitlement_WO.performInteractiveEntitlementPSLinesWarranty($WOName, $WarrantyName);
+$bo_act_interactiveEntitlement_WO.performInteractiveEntitlementPSLinesSCON($WOName, $SCONName);
 
 $excel.insertUnderColumn("/auto/SVMX_Catalyst/fsaautomation/resources/TestData.xlsx", "RS_10537", "Data1",$WOName ,"2");
 

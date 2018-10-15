@@ -1,9 +1,11 @@
 var $sfm_act_lookupConfiguration = new function sfm_act_lookupConfiguration() {
 	
 	this.deleteAdvancedFilter = function($val){
-		_click(_f("main").s_button("/Delete/").near(_f("main").ftedatagriditemrenderer($val)));
-		_wait(5000);
-		_click(_f("main").button("YES"));
+		if(_isVisible(_f("main").s_button("/Delete/").near(_f("main").ftedatagriditemrenderer($val)))){
+			_click(_f("main").s_button("/Delete/").near(_f("main").ftedatagriditemrenderer($val)));
+			_wait(5000);
+			_click(_f("main").button("YES"));
+		}
 	};
 	
 	this.addLkpDetails = function($standardLkp, $lkpName){

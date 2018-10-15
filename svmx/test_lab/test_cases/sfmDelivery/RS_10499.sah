@@ -74,12 +74,16 @@ $rs_10499.start();
 		_log("Wizard Name: "+$wizardName1);
 		$sfm_act_wizards.addToWizard($wizardObject, $wizardName1, $wizardType, $sfmName, $handOver, $profile); 
 			
+		//remove below code
+		//var $sfmName="rs_10499_1510201865856";
+			
+			
 		//Search WO and launch SFM
 		RS10449_searchWOandLaunchSFM($WONumber,$sfmName);
 		
 		//***Work Order Header validation***//
 		//Assert context override function enable
-		_wait(3000,_isVisible($sfm_pg_sfmDesigner.txt_headerAccount));
+		_wait(5000,_isVisible($sfm_pg_sfmDesigner.txt_headerAccount));
 		_setValue($sfm_pg_sfmDesigner.txt_headerAccount,$Account[0]);
 		_click($sfm_pg_sfmDesigner.link_quickSave);
 		_wait(2000);
