@@ -430,6 +430,7 @@ var $sfm_act_SFM = new function sfm_act_SFM() {
 	this.addChildLine = function($lineType,$productName,$textLabels,$textValues,$pickListLabels,$pickListValues,$textAreaLabels,$textAreaValues,$checkBoxLabels,$checkBoxValues,$dateLabels,$dateValues,$dateTimeLabels,$dateTimeDateValues,$timeValues){
 		_click(_span($lineType));
 		_click(_span("+ Add "+$lineType));
+		_wait(2000);
 		_setStrictVisibilityCheck(true);
 		if(_isVisible(_div("Recent Items: Products"))){
 			this.performProductSearchInChildLine($productName);
@@ -618,7 +619,7 @@ return $result;
 				}
 			}
 			for($z=0;$z<$currentMultiValues.length;$z++){
-				if(_isVisible(_div($currentMultiValues[$z],_near(_span($uniqueMulti[$i]))))){
+				if(_isVisible(_div($currentMultiValues[$z],_near(_label($uniqueMulti[$i]))))){
 					$actualList.push($currentMultiValues[$z]);
 				}
 			 }
