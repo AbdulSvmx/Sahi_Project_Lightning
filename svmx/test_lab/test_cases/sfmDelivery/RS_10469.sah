@@ -1,0 +1,10 @@
+var $RS_10469 = _testcase("RS_10498","Verify Field Map for existing records - Child");
+$RS_10469.start();
+//Variables used
+var $objectName = "Work Detail";
+var $processName = "RS_10469";
+var $process_to_clone = "Manage Work Order Lines - Usage";
+var $sfmTemplate = "SVMXSTD: Manage WO Usage Lines";
+var $isCustom = false;
+var $ctr = 0;
+var $i = 0;
