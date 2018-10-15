@@ -38,11 +38,11 @@ $rs_6911.start();
 		//Remove multi-add for part childline
 		$sfm_act_SFM.partsMultiAdd("--None--");
 		
-		//Context lookup setup on Work Order Header object
+		//Context lookup setup on Parts Child object
 		_setValue($bo_pg_sfmTransactionAndDesigner.btn_scrollbar.near(_f("main").s_richtext("Parts")),"00");
 		_click($bo_pg_sfmTransactionAndDesigner.txt_partOnChild);
 		
-		//create lookup for case object in header
+		//create lookup for part object in Child
 		$object="Part";
 		var $lookupTempName="SVMXSTD: Product Lookup";
 		$fieldNameList=["Product Type"];
