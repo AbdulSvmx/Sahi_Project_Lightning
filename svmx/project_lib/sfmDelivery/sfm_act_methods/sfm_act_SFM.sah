@@ -439,6 +439,7 @@ var $sfm_act_SFM = new function sfm_act_SFM() {
 		var $x = _count("_row", "/.*/",_in(_div("/x-grid-item-container/")));
 		$x = $x-1;
 		_log($x);
+		_call(_div("x-action-col-icon x-action-col-0  x-sfmd-edit-icon["+$x+"]").scrollIntoView());
 		_click(_div("x-action-col-icon x-action-col-0  x-sfmd-edit-icon["+$x+"]"));
 		_wait(1000);
 		_click(_span("Edit"));

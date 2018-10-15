@@ -13,7 +13,7 @@ var $containerName = [];
 var $fieldName=[];
 var $missingStdDataTypes = ["URL","Picklist (Multi-Select)","Percent","Phone","Date","Date","Email"];
 var $customFieldsNames = ["Automation ChildURL","Automation Childmultipicklist","Automation ChildPercent","Automation ChildPhone","Automation ChildDate2","Automation ChildDate3","Automation ChildEmail"];
-var $fieldsToMap = ["Account","Record Type","Include in Quote","Billable Line Price","Date Received","Automation ChildDate2","Automation ChildDate3","Start Date and Time","End Date and Time","Closed On","Canceled On","Automation ChildEmail","Automation Childmultipicklist","Billable Qty","Automation ChildPercent","Automation ChildPhone","Activity Type","Received City","Received Street","Reference Information","Automation ChildURL"];
+var $fieldsToMap = ["Account","Record Type","Include in Quote","Billable Line Price","Date Received","Automation ChildDate2","Automation ChildDate3","Start Date and Time","End Date and Time","Closed On","Canceled On","Automation ChildEmail","Automation Childmultipicklist","Billable Qty","Automation ChildPercent","Automation ChildPhone","Cost Category","Received City","Received Street","Reference Information","Automation ChildURL"];
 var $containerName = ["Parts","Parts","Parts","Parts","Parts","Parts","Parts","Parts","Parts","Parts","Parts","Parts","Parts","Parts","Parts","Parts","Parts","Parts","Parts","Parts","Parts"];
 var $currentWizardName = $wizardName[4];
 var $productName = "Chrome";
@@ -26,7 +26,7 @@ var $tempFields = ["Age"];
 var $initialChildFields = ["Line Type","Record Type ID","Line Number"];
 var $initalChildContainers = [$lineType,$lineType,$lineType];
 var $initialChildValues = [$lineType,"Usage/Consumption"];
-var $additionalFields = ["Include in Quote","Account","Billable Line Price","Date Received","Automation ChildDate2","Automation ChildDate3","Start Date and Time","End Date and Time","Closed On","Canceled On","Automation ChildEmail","Automation Childmultipicklist","Billable Qty","Automation ChildPercent","Automation ChildPhone","Activity Type","Received City","Received Street","Reference Information","Automation ChildURL"];
+var $additionalFields = ["Include in Quote","Account","Billable Line Price","Date Received","Automation ChildDate2","Automation ChildDate3","Start Date and Time","End Date and Time","Closed On","Canceled On","Automation ChildEmail","Automation Childmultipicklist","Billable Qty","Automation ChildPercent","Automation ChildPhone","Cost Category","Received City","Received Street","Reference Information","Automation ChildURL"];
 
 //Appending current timestamp to process name to make it unique.
 var $timeStamp = $bo_act_navigation.getCurrentTimeStamp(); 
@@ -103,8 +103,8 @@ _click($bo_pg_sfmTransactionAndDesigner.btn_quickSave1);
 
 $textLabels = ["Billable Line Price","Automation ChildEmail","Billable Qty","Automation ChildPercent","Automation ChildPhone","Received City","Received Street","Reference Information","Automation ChildURL","Automation Childmultipicklist"];
 $textValues = ["4500","group123@group.com","34.00","45","2345401","Bengaluru","123 somewhere somehow somewat","This washing machine stopped working","www.google.com","Multipicklist1;Multipicklist3"];
-$picklistLabels = ["Account","Record Type ID","Include in Quote","Date Received","Automation ChildDate2","Automation ChildDate3","Start Date and Time","End Date and Time","Closed On","Canceled On","Activity Type"];
-$pickListValues = ["HCSAccountForTesting","Record Type1","true","Today","Tomorrow","Yesterday","Now","Today","Tomorrow","Yesterday","Calibration"];
+$picklistLabels = ["Account","Record Type ID","Include in Quote","Date Received","Automation ChildDate2","Automation ChildDate3","Start Date and Time","End Date and Time","Closed On","Canceled On","Cost Category"];
+$pickListValues = ["HCSAccountForTesting","Record Type1","true","Today","Tomorrow","Yesterday","Now","Today","Tomorrow","Yesterday","Straight"];
 //Create mapping for all possible standard data types.
 _click($bo_pg_sfmTransactionAndDesigner.btn_qualifyingCriteriaAndFieldMapping);
 $bo_act_mappings.createMapping($lineType,$picklistLabels,$pickListValues,$textLabels,$textValues,$mapName);
@@ -155,8 +155,8 @@ var $lookUpLabels = ["Account"];
 var $lookUpValues = ["HCSAccountForTesting"];
 $textLabels = ["Billable Line Price","Billable Qty","Automation ChildPercent","Received City","Date Received","Automation ChildDate2","Automation ChildDate3"];
 $textValues = ["$4,500.000","34.0000","45%","Bengaluru",$todayDate,$tomorrowDate,$yesterdayDate];
-$pickListLabels = ["Activity Type"];
-$pickListValues = ["Calibration"];
+$pickListLabels = ["Cost Category"];
+$pickListValues = ["Straight"];
 $textAreaLabels = ["Received Street","Reference Information"];
 $textAreaValues = ["123 somewhere somehow somewat","This washing machine stopped working"];
 var $checkBoxLabels = ["Include in Quote"];
