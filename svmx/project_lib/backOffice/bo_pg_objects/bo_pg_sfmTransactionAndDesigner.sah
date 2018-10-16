@@ -126,6 +126,8 @@ var $bo_pg_sfmTransactionAndDesigner = new function bo_pg_sfmTransactionAndDesig
 	this.txt_autoContactChild=_f("main").s_richtext("AutoContact").near(_f("main").s_richtext("Parts"));
 	this.btn_scrollbar=_f("main").s_hscrollbar("horizontalScrollBar");
 	this.txt_partOnChild=_f("main").s_textinput("lblData").near(_f("main").s_richtext("Part"));
+	this.chk_readOnly = _f("main").s_checkbox("Read Only").near(_f("main").s_label("/Properties for Field/"));
+	this.chk_required= _f("main").s_checkbox("Read Only").near(_f("main").s_label("/Properties for Field/"));
 	
 	
 	
