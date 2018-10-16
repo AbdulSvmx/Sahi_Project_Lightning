@@ -17,7 +17,7 @@ $rs_10449.start();
 			_log($productName[$i]);
 		}
 
-/*		//create Work orders
+		//create Work orders
 		$objName= "SVMXC__Service_Order__c";
 		$obJson = "{\"SVMXC__Order_Status__c\":\"Open\",\"SVMXC__Order_Type__c\":\"Field Service\"}";
 		$columnName = "Name";
@@ -25,12 +25,12 @@ $rs_10449.start();
 		$filterValue=$sfm_act_restApiMethods.postRestApi($sfmlUsn,$sfmlPwd,$sfmClientId,$sfmConsumerSecret,$sfmOrgInstance,$objName,$obJson,"POST");
 		$WONumber =$sfm_act_restApiMethods.getRestApi($sfmlUsn,$sfmlPwd,$sfmClientId,$sfmConsumerSecret,$sfmOrgInstance,"GET", $objName, $columnName, $filter, $filterValue);
 		_log("WO number: "+$WONumber);
-*/
-		var $WONumber="WO-00005940";
+
+
 		// Login to App
 		$bo_act_login.login($g_url,$sfmlUsn,$sfmlPwd);
 		
-/*		//clone standard SFM
+		//clone standard SFM
 		var $sfmNameToBeCloned="Manage Work Order Lines - Usage";
 		var $sfmName=$bo_act_common.generateRandomName("rs_10449_");
 		var $sfmTemplateSaveAsName=$bo_act_common.generateRandomName("SFM_Page_");
@@ -69,9 +69,8 @@ $rs_10449.start();
 		var $handOver=false;
 		_log("Wizard Name: "+$wizardName1);
 		$sfm_act_wizards.addToWizard($wizardObject, $wizardName1, $wizardType, $sfmName, $handOver, $profile); 
-*/			
-		//temp code
-		var $sfmName="rs_10449_15102018151121";
+			
+
 		
 		//Search WO and launch SFM
 		RS10449_searchWOandLaunchSFM($WONumber,$sfmName);
