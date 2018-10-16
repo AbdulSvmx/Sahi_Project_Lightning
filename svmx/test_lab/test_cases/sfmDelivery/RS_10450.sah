@@ -107,7 +107,6 @@ $rs_10450.start();
 
 
 
-
 function RS10450_saveSFM(){
 _setStrictVisibilityCheck(true);
 _click($bo_pg_sfmTransactionAndDesigner.btn_pageLayoutSave);
