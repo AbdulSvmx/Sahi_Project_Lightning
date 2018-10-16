@@ -278,15 +278,16 @@ var $sfm_act_SFM = new function sfm_act_SFM() {
 	 */	
 	this.partsMultiAdd = function($multiAdd){
 		_click(_f("main").s_richtext("Parts"));
-		_setValue(_f("main").s_textinput(0).rightOf(_f("main").uiftetextfield("Allow Multi Add Using")), "");
+		_setSelected(_f("main").s_combobox("/ComboBox/").near(_f("main").uiftetextfield("Allow Multi Add Using")),$multiAdd);
+		/*_setValue(_f("main").s_textinput(0).rightOf(_f("main").uiftetextfield("Allow Multi Add Using")), "");
 		_setValue(_f("main").s_textinput(0).rightOf(_f("main").uiftetextfield("Allow Multi Add Using")), "Select");
 		if($multiAdd =="Case"){
 			_click(_f("main").s_label("Case[2]"));
 		}else{
 			_click(_f("main").s_label($multiAdd));
-		}
-		_click(_f("main").s_button("Save[3]"));
-		_wait(3000, _isVisible(_f("main").label("Page saved")));		
+		}*/
+		_click($bo_pg_sfmTransactionAndDesigner.btn_savePage);
+		_wait(3000, _isVisible($bo_pg_sfmTransactionAndDesigner.label_pageSaved));		
 	};
 	
 	this.setFormFill = function($fieldName,$objMapping,$nearBy){
@@ -296,8 +297,8 @@ var $sfm_act_SFM = new function sfm_act_SFM() {
 			_click(_f("main").s_textinput("txtIp").inside(_f("main").fieldrenderer($fieldName)));
 		}
 		_setSelected(_f("main").s_combobox("/ComboBox/").rightOf(_f("main").uiftetextfield("Object Mapping")),$objMapping);
-		_click(_f("main").s_button("Save[3]"));
-		_wait(3000, _isVisible(_f("main").label("Page saved")));
+		_click($bo_pg_sfmTransactionAndDesigner.btn_savePage);
+		_wait(3000, _isVisible($bo_pg_sfmTransactionAndDesigner.label_pageSaved));
 	};
 	
 	//Fill_setSelected(_f("main").s_combobox("ComboBox24974"), "SVMXSTD: Case To Work Order"); text values in SFM Lightning Delivery screen
