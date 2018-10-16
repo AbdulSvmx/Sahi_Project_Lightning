@@ -40,7 +40,7 @@ $workorderid=$sfm_act_restApiMethods.postRestApi($appiumAdminUn,$appiumAdminPwd,
 //get the wo
 $WOname =$sfm_act_restApiMethods.getRestApi($appiumAdminUn,$appiumAdminPwd,$appiumclient_id,$appiumclient_secret,$appiumorginstance,"GET", $objName, $columnName, $filter, $workorderid);
 _log($WOname);
-
+$excel.insertUnderColumn("/auto/SVMX_Catalyst/fsaautomation/resources/TestData.xlsx", "RS_10511", "Data3",$WOname ,"2");
 
 var $now = new Date();
 _log( $now ); // shows current date/time
@@ -84,18 +84,16 @@ $workorderid=$sfm_act_restApiMethods.postRestApi($appiumAdminUn,$appiumAdminPwd,
 //get the wo
 $WOname =$sfm_act_restApiMethods.getRestApi($appiumAdminUn,$appiumAdminPwd,$appiumclient_id,$appiumclient_secret,$appiumorginstance,"GET", $objName, $columnName, $filter, $workorderid);
 _log($WOname);
+$excel.insertUnderColumn("/auto/SVMX_Catalyst/fsaautomation/resources/TestData.xlsx", "RS_10511", "Data4",$WOname ,"2");
 
 var $now = new Date();
 _log( $now ); // shows current date/time
-
 $now.setHours(16,30,00,00);
 _log( $now );
 
 
 var $new=new Date($now.toString().split('IST')[0]+' GMT').toISOString().split('.')[0];//GMT timing
 _log( $new );
-
-
 var $add1hr=($now.getHours())+1;
 _log($add1hr);
 var $set1hr = new Date();
@@ -126,6 +124,7 @@ $workorderid=$sfm_act_restApiMethods.postRestApi($appiumAdminUn,$appiumAdminPwd,
 //get the wo
 $WOname =$sfm_act_restApiMethods.getRestApi($appiumAdminUn,$appiumAdminPwd,$appiumclient_id,$appiumclient_secret,$appiumorginstance,"GET", $objName, $columnName, $filter, $workorderid);
 _log($WOname);
+$excel.insertUnderColumn("/auto/SVMX_Catalyst/fsaautomation/resources/TestData.xlsx", "RS_10511", "Data5",$WOname ,"2");
 
 var $now = new Date();
 _log( $now ); // shows current date/time
@@ -187,6 +186,7 @@ $workorderid=$sfm_act_restApiMethods.postRestApi($appiumAdminUn,$appiumAdminPwd,
 //get the wo
 $WOname =$sfm_act_restApiMethods.getRestApi($appiumAdminUn,$appiumAdminPwd,$appiumclient_id,$appiumclient_secret,$appiumorginstance,"GET", $objName, $columnName, $filter, $workorderid);
 _log($WOname);
+$excel.insertUnderColumn("/auto/SVMX_Catalyst/fsaautomation/resources/TestData.xlsx", "RS_10511", "Data6",$WOname ,"2");
 
 var $now = new Date();
 _log( $now ); // shows current date/time
@@ -230,6 +230,7 @@ $workorderid=$sfm_act_restApiMethods.postRestApi($appiumAdminUn,$appiumAdminPwd,
 //get the wo
 $WOname =$sfm_act_restApiMethods.getRestApi($appiumAdminUn,$appiumAdminPwd,$appiumclient_id,$appiumclient_secret,$appiumorginstance,"GET", $objName, $columnName, $filter, $workorderid);
 _log($WOname);
+$excel.insertUnderColumn("/auto/SVMX_Catalyst/fsaautomation/resources/TestData.xlsx", "RS_10511", "Data7",$WOname ,"2");
 
 var $now = new Date();
 _log( $now ); // shows current date/time
@@ -272,6 +273,7 @@ $workorderid=$sfm_act_restApiMethods.postRestApi($appiumAdminUn,$appiumAdminPwd,
 //get the wo
 $WOname =$sfm_act_restApiMethods.getRestApi($appiumAdminUn,$appiumAdminPwd,$appiumclient_id,$appiumclient_secret,$appiumorginstance,"GET", $objName, $columnName, $filter, $workorderid);
 _log($WOname);
+$excel.insertUnderColumn("/auto/SVMX_Catalyst/fsaautomation/resources/TestData.xlsx", "RS_10511", "Data8",$WOname ,"2");
 
 var $now = new Date();
 _log( $now ); // shows current date/time

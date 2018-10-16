@@ -827,11 +827,12 @@ var $sfm_act_Transactions = new function sfm_act_Transactions() {
 				var $exprsnName=$ExprFieldsDetails[6];
 				
 				//Mapping Fields
-				var $pickListLabels=$mappingDetails[0];
-				var $pickListValues=$mappingDetails[1];
-				var $textLabels=$mappingDetails[2];
-				var $textValues=$mappingDetails[3];
-				var $mapName=$mappingDetails[4];
+				var $containerName=$mappingDetails[0];
+				var $pickListLabels=$mappingDetails[1];
+				var $pickListValues=$mappingDetails[2];
+				var $textLabels=$mappingDetails[3];
+				var $textValues=$mappingDetails[4];
+				var $mapName=$mappingDetails[5];
 				
 				_click($sfm_pg_screenDesigner.btn_qualifyingCriteriaAndFieldMapping);
 				_wait(10000,_isVisible($sfm_pg_screenDesigner.lbl_qualifyingCriteriaMapping));
@@ -845,10 +846,11 @@ var $sfm_act_Transactions = new function sfm_act_Transactions() {
 					//_keyPress($sfm_pg_expressions.btn_selectExpression, 27);
 				}
 				if ($mappingDetails.length!==0 && $mappingDetails!==null) {
-					$bo_act_mappings.createMapping($pickListLabels, $pickListValues, $textLabels, $textValues, $mapName);
+					$bo_act_mappings.createMapping($containerName, $pickListLabels, $pickListValues, $textLabels, $textValues, $mapName);
 				}
 
 			};
+			
 			
 			/**
 			 * Author		:	Anand Kakhandaki
