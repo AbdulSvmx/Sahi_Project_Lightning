@@ -14,7 +14,7 @@ var $sfm_pg_wizardWindow = new function sfm_pg_wizardWindow(){
 	this.lkp_contact = _div("/search/",_near(_span("Contact"))); //Changed for Lightning
 	this.lbl_contactLookup = _label(0,_near(_span("/checkbox/"))); //Changed for Lightning
 	this.txt_caseLookup = _div("/trigger-search/",_near(_span("Case"))); // added for lightning
-	this.txt_quickFindLookUp = _textbox(1,__leftOf(_link("Search",_in(_div("/sfm-lightninglookupslidingwindow/"))))); // added for lightning
+	this.txt_quickFindLookUp = _textbox("/sfm-text/",__leftOf(_link("Search",_in(_div("/sfm-lightninglookupslidingwindow/"))))); // added for lightning
 	
 	this.btn_addProduct = _span("Add",_in(_div("/sfm-lightninglookupslidingwindow/"))); //added for lightning
 	this.btn_cancelProduct = _span("Cancel",_in(_div("/sfm-lightninglookupslidingwindow/")));  //added for lightning
