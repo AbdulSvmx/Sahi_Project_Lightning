@@ -2,9 +2,6 @@ var RS_10525 = _testcase("RS_10525","SCN_Calendar_6_RS-10525 Verify multi-day & 
 RS_10525.start();
 _writeFile("false", $appiumPath+$sahiIntermediatoryPath, true);
 
-/*var $objName;
-var $obJson;
-var $columnName;*/
 
 var $restAccName="A10525_SCN1";
 var $EventSub="Eventfor1hr";
@@ -61,6 +58,8 @@ $eventid=$sfm_act_restApiMethods.postRestApi($appiumAdminUn,$appiumAdminPwd,$app
 $eventname =$sfm_act_restApiMethods.getRestApi($appiumAdminUn,$appiumAdminPwd,$appiumclient_id,$appiumclient_secret,$appiumorginstance,"GET", $objName, $columnName, $filter, $eventid);
 _log($eventname);
 
+
+$excel.insertUnderColumn("/auto/SVMX_Catalyst/fsaautomation/resources/TestData.xlsx", "RS_10525", "Data4",$WOname ,"2");
 _writeFile("true", $appiumPath+$sahiIntermediatoryPath, true);
 
 
