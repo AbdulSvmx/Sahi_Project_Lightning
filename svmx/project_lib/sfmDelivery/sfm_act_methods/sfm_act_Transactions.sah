@@ -163,17 +163,18 @@ var $sfm_act_Transactions = new function sfm_act_Transactions() {
 		 * Example		: 	Refer _ _ _  for function usage
 		 */
 		this.lookUpScrollIntoView=function($field){
+			_log($field);
 			_call($bo_pg_sfmTransactionAndDesigner.scroll_filedScroll.set("value",0));
 			var $maximum =  _fetch($bo_pg_sfmTransactionAndDesigner.scroll_filedScroll.get("maximum"));
 			var $fieldName= _f("main").s_label($field);
 			var $i=0;
 			while($i< $maximum){
-				if(_isVisible($fieldName)){
+				if(_isVisible(_f("main").s_label($field))){
 					//_click($el);
 					break;
 				}
 				else {
-					$i= $i+200;
+					$i= $i+100;
 					_call($bo_pg_sfmTransactionAndDesigner.scroll_filedScroll.set("value",$i));
 				}
 			}
@@ -225,16 +226,20 @@ var $sfm_act_Transactions = new function sfm_act_Transactions() {
 				$addToBubbleList=$lookupFieldsToAdd[3];
 				
 				for (var $i = 0; $i < $fieldNameList.length; $i++) {
-					this.lookUpScrollIntoView($fieldNameList[i]);
+					_log($fieldNameList[$i]);
+					this.lookUpScrollIntoView($fieldNameList[$i]);
 					
-					if ($addToSearchList[i]==true) {
-						_click(_f("main").s_button("/Button1/").near(_f("main").s_label($fieldNameList[i])));
+					if ($addToSearchList[$i]==true) {
+						_log("inside Button1");
+						_click(_f("main").s_button("/Button1/").near(_f("main").s_label($fieldNameList[$i])));
 					}
-					if ($addToDisplayList[i]==true) {
-						_click(_f("main").s_button("/Button2/").near(_f("main").s_label($fieldNameList[i])));
+					if ($addToDisplayList[$i]==true) {
+						_log("inside Button2");
+						_click(_f("main").s_button("/Button2/").near(_f("main").s_label($fieldNameList[$i])));
 					}
-					if ($addToBubbleList==true) {
-						_click(_f("main").s_button("/Button3/").near(_f("main").s_label($fieldNameList[i])));
+					if ($addToBubbleList[$i]==true) {
+						_log("inside Button3");
+						_click(_f("main").s_button("/Button3/").near(_f("main").s_label($fieldNameList[$i])));
 					}
 				}
 			}
@@ -262,7 +267,8 @@ var $sfm_act_Transactions = new function sfm_act_Transactions() {
 				$oprTypeCombo=_f("main").s_dropdownlist("operandTypeCombo").near($fieldLabeRowNo);
 				$oprValcomboFieldType=_f("main").s_combobox("/picklist/").rightOf($oprTypeCombo);
 				if (_exists($oprValcomboFieldType)) {
-					_setValue(_f("main").s_textinput("/textInput/").inside($oprValcomboFieldType),$operandValue[$i]);
+					//_setValue(_f("main").s_textinput("/textInput/").inside($oprValcomboFieldType),$operandValue[$i]);
+					_setSelected($oprValcomboFieldType,$operandValue[$i]);
 				}else{
 					_log("Inside else loop");
 					$oprValdateFieldType=_f("main").datefield("/date/").rightOf($oprTypeCombo);

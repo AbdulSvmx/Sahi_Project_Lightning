@@ -7,11 +7,11 @@ $rs_10448.start();
 		$objName= "SVMXC__RMA_Shipment_Order__c";
 		for (var $i = 0; $i < 4; $i++) {
 			if ($i==0) {
-				$obJson = "{\"SVMXC__Expected_Receive_Date__c\":\""+getToday()+"\",\"SVMXC__Billing_Type__c\":\"Loan\",\"RecordTypeId\":\""+012290000004Ri2AAE+"\"}";
+				$obJson = "{\"SVMXC__Expected_Receive_Date__c\":\""+getToday()+"\",\"SVMXC__Billing_Type__c\":\"Loan\",\"RecordTypeId\":\"012290000004Ri2AAE\"}";
 			}else if ($i==1) {
-				$obJson = "{\"SVMXC__Expected_Receive_Date__c\":\""+getToday()+"\",\"SVMXC__Billing_Type__c\":\"Contract\",\"RecordTypeId\":\""+012290000004Ri3AAE+"\"}";
+				$obJson = "{\"SVMXC__Expected_Receive_Date__c\":\""+getToday()+"\",\"SVMXC__Billing_Type__c\":\"Contract\",\"RecordTypeId\":\"012290000004Ri3AAE\"}";
 			}else {
-				$obJson = "{\"SVMXC__Expected_Receive_Date__c\":\""+getToday()+"\",\"SVMXC__Billing_Type__c\":\"Contract\",\"RecordTypeId\":\""+012290000004Ri2AAE+"\"}";
+				$obJson = "{\"SVMXC__Expected_Receive_Date__c\":\""+getToday()+"\",\"SVMXC__Billing_Type__c\":\"Contract\",\"RecordTypeId\":\"012290000004Ri2AAE\"}";
 			}
 			$columnName = "Name";
 			$filter="id";
@@ -24,7 +24,7 @@ $rs_10448.start();
 		
 		//Create Work order using below variables 
 		$objName= "SVMXC__Service_Order__c";
-		$obJson = "{\"SVMXC__Problem_Description__c\":\"Problem Description\",\"SVMXC__Priority__c\":\"High\",\"SVMXC__Preferred_Start_Time__c\":\"2018-08-22\",\"SVMXC__Invoice_Number__c\":\""+$caseNumber+"\"}";
+		$obJson = "{\"SVMXC__Problem_Description__c\":\"Problem Description\",\"SVMXC__Priority__c\":\"High\"}";
 		_log("Work Order json: "+$obJson);
 		$columnName = "Name";
 		$filter="id";
@@ -69,21 +69,8 @@ $rs_10448.start();
 		
 		$sfm_act_Transactions.createLookUp($object, $lookupTempName, $lookupFieldsToAdd, $lookupFilterDetails, $lookUpName,"","");
 		
-		
-		//create lookup for case object in Child
-		$object="Case";
-		var $lookupTempName="SVMXSTD: Case Lookup";
-		var $fieldCombo=["Subject","Priority","Actual Initial Response","Case Number"];
-		var $conditionsCombo=["Equals","Equals","Equals","Equals"];
-		var $operandTypeCombo=["Value","Value","Value","Value"];
-		var $operandValue=["SVMX.CURRENTRECORDHEADER.SVMXC__Problem_Description__c","SVMX.CURRENTRECORDHEADER.SVMXC__Priority__c","SVMX.CURRENTRECORDHEADER.SVMXC__Preferred_Start_Time__c","SVMX.CURRENTRECORDHEADER.SVMXC__Invoice_Number__c"];
-		var $lookupAdvExpr="1 AND 2 AND (3 OR 4)";
-		var $lookupFilterDetails=[$fieldCombo,$conditionsCombo,$operandTypeCombo,$operandValue,$lookupAdvExpr];
-		var $lookUpName=$bo_act_common.generateRandomName("rs_10448_lookup_");
-		$sfm_act_Transactions.createLookUp($object, $lookupTempName, "", $lookupFilterDetails, $lookUpName,"Parts","");
-		
 		//Save SFM after adding context lookup
-		RS10499_saveSFM();
+		RS10448_saveSFM();
 		
 		//Add sfm to lookup wizard
 		var $wizardObject="Work Order";
@@ -94,12 +81,9 @@ $rs_10448.start();
 		_log("Wizard Name: "+$wizardName1);
 		$sfm_act_wizards.addToWizard($wizardObject, $wizardName1, $wizardType, $sfmName, $handOver, $profile);  
 		
-
-		
 		//Search WO and launch SFM
-		RS104_searchWOandLaunchSFM($WONumber,$sfmName);
+		RS10448_searchWOandLaunchSFM($WONumber,$sfmName);
 		
-	
 		//search and assert the case on work order
 		$sfm_act_SFM.searchHeaderField("Parts Order", "");
 		for (var $i = 0; $i < $partOrderNumber.length; $i++) {
@@ -124,10 +108,10 @@ $rs_10448.start();
 		$sfm_act_Transactions.deleteLookUpFiltersAndSave("Parts Order","",$lookUpName);
 		
 		//Save SFM after adding context lookup
-		RS10499_saveSFM();
+		RS10448_saveSFM();
 
 		//Search WO and launch SFM
-		RS104_searchWOandLaunchSFM($WONumber,$sfmName);
+		RS10448_searchWOandLaunchSFM($WONumber,$sfmName);
 		
 		//search and assert the case on work order
 		$sfm_act_SFM.searchHeaderField("Parts Order", "");
