@@ -370,7 +370,7 @@ this.editWorkOrder = function($textLabels,$textValues,$pickListLabels,$pickListV
 	
 	_setStrictVisibilityCheck(true);
 	_wait(6000);
-	_call(_span("Clock Paused Forever").scrollIntoView());
+	//_call(_span("Clock Paused Forever").scrollIntoView());
     _click($sfm_pg_wo.btn_pencilToEditWo);
 	var $i = 0;
 	//Fill text values 
