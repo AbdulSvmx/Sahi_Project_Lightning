@@ -189,7 +189,10 @@ var $sfm_act_SFM = new function sfm_act_SFM() {
 						_f("main").s_richtext($containerName[$i])));
 				//_setValue(_f("main").s_textinput("searchText[4]"),$fieldName[$i]);
 				_setValue($bo_pg_sfmTransactionAndDesigner.txt_quickFindField, $fieldName[$i]);
-				if($fieldName[$i]=="AutoContact"){
+				_click(_f("main").s_label(0).near(_f("main").s_textinput($fieldName[$i])));
+				_click(_f("main").s_button("/Add Field/"));
+
+/*				if($fieldName[$i]=="AutoContact"){
 					_doubleClick($sfm_pg_screenDesigner.lbl_autoContact);
 					//$sfm_act_Transactions.addLookupContext();
 				}
@@ -206,7 +209,9 @@ var $sfm_act_SFM = new function sfm_act_SFM() {
 				_click(_f("main").s_label($fieldName[$i]).near(_f("main").s_textinput($fieldName[$i])));//please check below code, if not working uncomment this and remove below code.
 				//_click(_f("main").s_label($fieldName[$i]).near(_f("main").s_button("Add Field")));
 				_click(_f("main").s_button("/Add Field/"));
+								
 			}
+*/
 			}
 		}
 		_click($bo_pg_sfmTransactionAndDesigner.btn_quickSave);

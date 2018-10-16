@@ -76,11 +76,7 @@ $rs_10450.start();
 		//Search WO and launch SFM
 		RS10450_searchWOandLaunchSFM($WONumber,$sfmName);
 
-		
-		
-		
-		
-		
+		_wait(10000,_isVisible($sfm_pg_sfmDesigner.btn_deliveryPartsTab));
 		$sfm_act_sfmDesigner.addChildLine("Parts");
 		_wait(10000,_isVisible($sfm_pg_sfmDesigner.txt_partTextbox));
 		_click($sfm_pg_sfmDesigner.btn_searchAccountIcon);

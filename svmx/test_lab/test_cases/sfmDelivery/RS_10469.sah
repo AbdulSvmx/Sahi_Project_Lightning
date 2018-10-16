@@ -14,7 +14,9 @@ var $tempFields = ["Age"];
 var $initialChildFields = ["Line Type","Record Type ID","Line Number"];
 var $initalChildContainers = [$lineType,$lineType,$lineType];
 var $initialChildValues = [$lineType,"Usage/Consumption"];
-
+var $missingStdDataTypes = ["URL","Picklist (Multi-Select)","Percent","Phone","Date","Email"];
+var $customFieldsNames = ["Automation ChildURL","Automation Childmultipicklist","Automation ChildPercent","Automation ChildPhone","Automation ChildDate2","Automation ChildEmail"];
+var $fieldsToMap = ["Account","Record Type","Include in Quote","Billable Line Price","Date Received","Start Date and Time","Automation ChildEmail","Automation Childmultipicklist","Billable Qty","Automation ChildPercent","Automation ChildPhone","Cost Category","Received City","Received Street","Reference Information","Automation ChildURL"];
 //Appending current timestamp to process name to make it unique.
 var $timeStamp = $bo_act_navigation.getCurrentTimeStamp(); 
 $processName = $processName + "_" + $timeStamp;
@@ -32,6 +34,54 @@ _wait(15000);
 $sfm_act_lightningConfig.addCustomFields($objectName, $customFieldsNames, $missingStdDataTypes, $myDomain,$multiPicklistValues);
 _closeWindow();
 _selectWindow();
+//Create work order
+var $wo_number = $sfm_act_createCustomWizard.createWowithdateliterals();
+var $sourceWlNumber = $sfm_act_lightningConfig.createWorkDetailInLightning("Usage",$lineType);
+
+//Enter values for Source child in order to verify field mapping at target child
+var $textLabels = ["Billable Line Price","Date Received","Billable Qty","Received City","Automation ChildPercent"];
+var $textValues = ["6600","4/21/2018","345","Bengaluru","44"];
+var $pickListLabels = ["Order Status","Sub Status"];
+var $pickListValues = ["Completed","Unresolved"];
+var $textAreaLabels = ["Received Street","Reference Information"];
+var $textAreaValues = ["123 somestreet,walnut corner","This machines gets stuck while printing"];
+var $checkBoxLabels = ["Include in Quote"];
+var $checkBoxValues = ["true"];
+var $dateTimeLabels = ["Start Date and Time"];
+var $dateTimeDateValues = ["4/11/2018"];
+var $timeValues = ["3:30 PM"];
+var $emailLabels = ["Automation ChildEmail"];
+var $emailValues = ["groupemail@group.com"];
+var $multiPickLabels = ["Automation Childmultipicklistt","Automation Childmultipicklist"];
+var $multiPickValues = ["Multipicklist1","Multipicklist3"];
+var $urlLabels = ["Automation ChildURL"];
+var $urlValues = ["www.google.com"];
+var $telephoneLabels = ["Automation ChildPhone"];
+var $telephoneValues = ["2345407"];
+
+
+//Find missing fields in Work Order Page Layout and them to the layout
+for($i=0;$i<$fieldsToMap.length;$i++){
+	if(!$sfm_act_lightningConfig.findIfFieldPresentInPageLayout($fieldsToMap[$i])){
+		$fieldsAbsentInPage.push($fieldsToMap[$i]);
+	}	
+}
+_log($fieldsAbsentInPage);
+
+if($fieldsAbsentInPage.length > 0){
+	$sfm_act_lightningConfig.navigateToObjectsInLightning($objectName);
+	$sfm_act_lightningConfig.addFieldsToLightningPageLayout($objectName,$pageLayoutForProfile,$fieldsAbsentInPage,$myDomain);
+	_selectDomain();
+	_selectWindow("Home | Salesforce");
+	_closeWindow();
+	_selectWindow();
+}
+
+$sfm_act_lightningConfig.logoutInLightning();
+//Login and switch to lightning
+
+$bo_act_login.login($g_url,$sfmlUsn,$sfmlPwd);
+$sfm_act_lightningConfig.switchToLightning();
 
 //**************************************************************************************************
 //Navigate to servicemax setup and setup required process.
@@ -68,5 +118,33 @@ _click($bo_pg_sfmTransactionAndDesigner.btn_qualifyingCriteriaAndFieldMapping);
 $bo_act_mappings.createMapping("Work Order",[],[],[],[],$mapName);
 _selectDomain();
 _setSpeed(1000);
+
+//Add the custom process to SFM wizard.
+$sfm_act_wizards.addToWizard("Work Order",$currentWizardName,"SFM",$processName);
+_selectDomain();
+
+//Navigate to created work order and launch the process
+$bo_act_navigation.navigateToCreatedRecordUsingGlobalSearch($wo_number);
+$sfm_act_createCustomWizard.clickWizardlinks($processName);
+_wait(8000);
+
+_click($sfm_pg_wo.link_delivery_save);
+_selectDomain();
+_wait(14000,_isVisible($sfm_pg_wo.label_wo));
+var $childWoId= _getText($sfm_pg_wo.label_wo);
+_log("Child Work Order id "+ $childWoId);
+
+//Get Work Detail number to perform verification
+var $targetLineNumber = $sfm_act_lightningConfig.getWorkDetailNumberFromWO();
+_log("Work detail created as Target child is "+$targetLineNumber);
+_click(_link($targetLineNumber));
+_wait(6000);
+
+//Verify values for Target line created
+
+
+
+
+
 
 
