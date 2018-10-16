@@ -186,6 +186,7 @@ _selectDomain();
 //Add the fields in the Screen designer
 $sfm_act_createCustomWizard.clickWizardlinks($processName);
 _selectDomain($g_domain);
+_wait(20000);
 _click($sfm_pg_wo.btn_arrowNextToUserSettings);
 _assertVisible($sfm_pg_wo.link_launchSfmDesigner);
 _click($sfm_pg_wo.link_launchSfmDesigner);
