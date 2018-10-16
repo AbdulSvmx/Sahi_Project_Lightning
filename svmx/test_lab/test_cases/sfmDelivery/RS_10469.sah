@@ -1,10 +1,72 @@
 var $RS_10469 = _testcase("RS_10498","Verify Field Map for existing records - Child");
 $RS_10469.start();
 //Variables used
-var $objectName = "Work Detail";
+var $objectName = "Work Order";
+var $childObject = "Work Detail";
 var $processName = "RS_10469";
-var $process_to_clone = "Manage Work Order Lines - Usage";
+var $process_to_clone = "Create Follow-Up Work Order from Work Order";
 var $sfmTemplate = "SVMXSTD: Manage WO Usage Lines";
 var $isCustom = false;
+var $lineType = "Parts";
 var $ctr = 0;
 var $i = 0;
+var $tempFields = ["Age"];
+var $initialChildFields = ["Line Type","Record Type ID","Line Number"];
+var $initalChildContainers = [$lineType,$lineType,$lineType];
+var $initialChildValues = [$lineType,"Usage/Consumption"];
+
+//Appending current timestamp to process name to make it unique.
+var $timeStamp = $bo_act_navigation.getCurrentTimeStamp(); 
+$processName = $processName + "_" + $timeStamp;
+var $pageLayoutName = $processName + "pg";
+var $mapName = $processName + "mp";
+
+//**************************************************************************************
+//Login and switch to lightning
+
+$bo_act_login.login($g_url,$sfmlUsn,$sfmlPwd);
+$sfm_act_lightningConfig.switchToLightning();
+_wait(15000);
+//***************************************************************************************
+//Create custom fields if needed
+$sfm_act_lightningConfig.addCustomFields($objectName, $customFieldsNames, $missingStdDataTypes, $myDomain,$multiPicklistValues);
+_closeWindow();
+_selectWindow();
+
+//**************************************************************************************************
+//Navigate to servicemax setup and setup required process.
+//Clone standard process and add the dependent picklist in the screen designer
+$bo_act_navigation.navigateToSfmTransactionDesigner();
+$sfm_act_SFM.selectSFM($process_to_clone,$isCustom);
+_click($bo_pg_sfmTransactionAndDesigner.btn_clone);
+_wait(60000, _isVisible($bo_pg_sfmTransactionAndDesigner.txt_name));
+_setValue($bo_pg_sfmTransactionAndDesigner.txt_name, $processName);
+_setValue($bo_pg_sfmTransactionAndDesigner.txt_sfmTransactionId,"");
+_setValue($bo_pg_sfmTransactionAndDesigner.txt_sfmTransactionId,$processName);
+_setSelected($bo_pg_sfmTransactionAndDesigner.list_objComboBox,$childObject);
+if(_isVisible($bo_pg_sfmTransactionAndDesigner.btn_popUpOK)){
+	_click($bo_pg_sfmTransactionAndDesigner.btn_popUpOK);
+}
+_click($bo_pg_sfmTransactionAndDesigner.list_sourceChild);
+_click($bo_pg_sfmTransactionAndDesigner.list_targetChild);
+_setValue($bo_pg_sfmTransactionAndDesigner.text_targetChildAlias,"Parts");
+_setSelected($bo_pg_sfmTransactionAndDesigner.list_childMappingCombo,"Work Detail (Work Order)");
+_click($bo_pg_sfmTransactionAndDesigner.btn_screenDesigner);
+_wait(6000);
+_click($bo_pg_sfmTransactionAndDesigner.btn_newPageLayout);
+$bo_act_navigation.designHeaderScreen($pageLayoutName,$tempFields);
+_wait(2000);
+$bo_act_navigation.designChildScreen($pageLayoutName, $initialChildFields, $initalChildContainers);
+_click(_f("main").s_richtext($lineType));
+_click($bo_pg_sfmTransactionAndDesigner.chkbx_allowNew);
+_click($bo_pg_sfmTransactionAndDesigner.chkbx_allowDelete);
+_click($bo_pg_sfmTransactionAndDesigner.btn_savePage);
+_click($bo_pg_sfmTransactionAndDesigner.btn_quickSave1);
+
+//Create mapping for all possible standard data types.
+_click($bo_pg_sfmTransactionAndDesigner.btn_qualifyingCriteriaAndFieldMapping);
+$bo_act_mappings.createMapping("Work Order",[],[],[],[],$mapName);
+_selectDomain();
+_setSpeed(1000);
+
+

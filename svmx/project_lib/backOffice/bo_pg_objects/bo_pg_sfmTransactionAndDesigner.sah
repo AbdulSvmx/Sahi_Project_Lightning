@@ -229,6 +229,10 @@ var $bo_pg_sfmTransactionAndDesigner = new function bo_pg_sfmTransactionAndDesig
     this.btn_newPageLayout = _f("main").s_button("New[3]");
     this.label_costCategory = _f("main").s_label("Cost Category[1]");
     this.label_account = _f("main").s_label("Account[1]");
+    this.list_sourceChild = _f("main").s_checkbox("Work Detail (Work Order)").inside(_f("main").s_panel("Use data from..."));
+    this.list_targetChild = _f("main").s_checkbox("Work Detail (Work Order)").inside(_f("main").s_panel("...to create these records"));
+    this.text_targetChildAlias = _f("main").s_textinput("aliasName").rightOf(_f("main").s_checkbox("Work Detail (Work Order)").inside(_f("main").s_panel("...to create these records")));
+    this.list_childMappingCombo = _f("main").s_dropdownlist("objCombo");
     
     
 
