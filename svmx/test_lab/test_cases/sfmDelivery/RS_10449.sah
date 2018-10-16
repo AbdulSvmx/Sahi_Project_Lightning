@@ -1,6 +1,10 @@
 var $rs_10449 = _testcase("RS_10449","Verify Lookup configuration for Search, Display, Bubble, No of records to display.");
 $rs_10449.start();
 
+/**
+* Note: Use below script to clear product created
+ * delete[SELECT Name FROM Product2 WHERE Name LIKE 'PN_RS10449_%' limit 10000];
+ */
 
 		//Pre_Requesite
 		//Create Product
