@@ -1,7 +1,38 @@
 var $rs_10448 = _testcase("RS_10448","Verify Lookup prefilter using data types - Date Literal, Picklist and Record Type");
 $rs_10448.start();
-
-
+		
+		//pre-req
+		//Create Parts Order using below variables
+		var $partOrderNumber=new Array;
+		$objName= "SVMXC__RMA_Shipment_Order__c";
+		for (var $i = 0; $i < 4; $i++) {
+			if ($i==0) {
+				$obJson = "{\"SVMXC__Expected_Receive_Date__c\":\""+getToday()+"\",\"SVMXC__Billing_Type__c\":\"Loan\",\"RecordTypeId\":\""+012290000004Ri2AAE+"\"}";
+			}else if ($i==1) {
+				$obJson = "{\"SVMXC__Expected_Receive_Date__c\":\""+getToday()+"\",\"SVMXC__Billing_Type__c\":\"Contract\",\"RecordTypeId\":\""+012290000004Ri3AAE+"\"}";
+			}else {
+				$obJson = "{\"SVMXC__Expected_Receive_Date__c\":\""+getToday()+"\",\"SVMXC__Billing_Type__c\":\"Contract\",\"RecordTypeId\":\""+012290000004Ri2AAE+"\"}";
+			}
+			$columnName = "Name";
+			$filter="id";
+			//create a case
+			$filterValue=$sfm_act_restApiMethods.postRestApi($sfmlUsn,$sfmlPwd,$sfmClientId,$sfmConsumerSecret,$sfmOrgInstance,$objName,$obJson,"POST");
+			//get the caseNumber
+			$partOrderNumber[$i] =$sfm_act_restApiMethods.getRestApi($sfmlUsn,$sfmlPwd,$sfmClientId,$sfmConsumerSecret,$sfmOrgInstance,"GET", $objName, $columnName, $filter, $filterValue);
+			_log("Parts Order number: "+$partOrderNumber[$i]);
+		}
+		
+		//Create Work order using below variables 
+		$objName= "SVMXC__Service_Order__c";
+		$obJson = "{\"SVMXC__Problem_Description__c\":\"Problem Description\",\"SVMXC__Priority__c\":\"High\",\"SVMXC__Preferred_Start_Time__c\":\"2018-08-22\",\"SVMXC__Invoice_Number__c\":\""+$caseNumber+"\"}";
+		_log("Work Order json: "+$obJson);
+		$columnName = "Name";
+		$filter="id";
+		//create a case
+		$filterValue=$sfm_act_restApiMethods.postRestApi($sfmlUsn,$sfmlPwd,$sfmClientId,$sfmConsumerSecret,$sfmOrgInstance,$objName,$obJson,"POST");
+		//get the caseNumber
+		$WONumber =$sfm_act_restApiMethods.getRestApi($sfmlUsn,$sfmlPwd,$sfmClientId,$sfmConsumerSecret,$sfmOrgInstance,"GET", $objName, $columnName, $filter, $filterValue);
+		_log("WO number: "+$WONumber);
 		//login to App
 		$bo_act_login.login($g_url,$sfmlUsn,$sfmlPwd);
 		
@@ -63,39 +94,7 @@ $rs_10448.start();
 		_log("Wizard Name: "+$wizardName1);
 		$sfm_act_wizards.addToWizard($wizardObject, $wizardName1, $wizardType, $sfmName, $handOver, $profile);  
 		
-		//Create Parts Order using below variables
-		var $partOrderNumber=new Array;
-		$objName= "SVMXC__RMA_Shipment_Order__c";
-		for (var $i = 0; $i < 4; $i++) {
-			if ($i==0) {
-				$obJson = "{\"SVMXC__Expected_Receive_Date__c\":\""+getToday()+"\",\"SVMXC__Billing_Type__c\":\"Loan\",\"RecordTypeId\":\""+012290000004Ri2AAE+"\"}";
-			}else if ($i==1) {
-				$obJson = "{\"SVMXC__Expected_Receive_Date__c\":\""+getToday()+"\",\"SVMXC__Billing_Type__c\":\"Contract\",\"RecordTypeId\":\""+012290000004Ri3AAE+"\"}";
-			}else {
-				$obJson = "{\"SVMXC__Expected_Receive_Date__c\":\""+getToday()+"\",\"SVMXC__Billing_Type__c\":\"Contract\",\"RecordTypeId\":\""+012290000004Ri2AAE+"\"}";
-			}
-			$columnName = "Name";
-			$filter="id";
-			//create a case
-			$filterValue=$sfm_act_restApiMethods.postRestApi($sfmlUsn,$sfmlPwd,$sfmClientId,$sfmConsumerSecret,$sfmOrgInstance,$objName,$obJson,"POST");
-			//get the caseNumber
-			$partOrderNumber[$i] =$sfm_act_restApiMethods.getRestApi($sfmlUsn,$sfmlPwd,$sfmClientId,$sfmConsumerSecret,$sfmOrgInstance,"GET", $objName, $columnName, $filter, $filterValue);
-			_log("Parts Order number: "+$partOrderNumber[$i]);
-		}
-		
-		
-		
-		//Create Work order using below variables 
-		$objName= "SVMXC__Service_Order__c";
-		$obJson = "{\"SVMXC__Problem_Description__c\":\"Problem Description\",\"SVMXC__Priority__c\":\"High\",\"SVMXC__Preferred_Start_Time__c\":\"2018-08-22\",\"SVMXC__Invoice_Number__c\":\""+$caseNumber+"\"}";
-		_log("Work Order json: "+$obJson);
-		$columnName = "Name";
-		$filter="id";
-		//create a case
-		$filterValue=$sfm_act_restApiMethods.postRestApi($sfmlUsn,$sfmlPwd,$sfmClientId,$sfmConsumerSecret,$sfmOrgInstance,$objName,$obJson,"POST");
-		//get the caseNumber
-		$WONumber =$sfm_act_restApiMethods.getRestApi($sfmlUsn,$sfmlPwd,$sfmClientId,$sfmConsumerSecret,$sfmOrgInstance,"GET", $objName, $columnName, $filter, $filterValue);
-		_log("WO number: "+$WONumber);
+
 		
 		//Search WO and launch SFM
 		RS104_searchWOandLaunchSFM($WONumber,$sfmName);
@@ -122,37 +121,21 @@ $rs_10448.start();
 		$sfm_act_SFM.editCustomProcess($sfmName);
 		_click($bo_pg_sfmTransactionAndDesigner.btn_screenDesigner);
 		_wait(10000,_isVisible($bo_pg_sfmTransactionAndDesigner.txt_contactOnHeader));
-		$sfm_act_Transactions.
-
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		_click($bo_pg_sfmTransactionAndDesigner.txt_contactOnHeader);
-		$sfm_act_Transactions.addLookupContext("", true,"Account", "Account ID");
+		$sfm_act_Transactions.deleteLookUpFiltersAndSave("Parts Order","",$lookUpName);
 		
 		//Save SFM after adding context lookup
 		RS10499_saveSFM();
+
+		//Search WO and launch SFM
+		RS104_searchWOandLaunchSFM($WONumber,$sfmName);
 		
-		//search WO and launch the SFM
-		RS10499_searchWOandLaunchSFM($WONumber,$sfmName);
-
-
-
-
+		//search and assert the case on work order
+		$sfm_act_SFM.searchHeaderField("Parts Order", "");
+		for (var $i = 0; $i < $partOrderNumber.length; $i++) {
+			_assertExists(_link($partOrderNumber[$i]));
+		}
+		
+		
 
 function RS10448_saveSFM(){
 	_setStrictVisibilityCheck(true);
