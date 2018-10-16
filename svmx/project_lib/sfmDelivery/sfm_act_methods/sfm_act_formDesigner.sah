@@ -295,6 +295,7 @@ var $sfm_act_formDesigner = new function sfm_act_formDesigner() {
 		var $answer;
 		var $advExpr;
 		var $errorMsg;
+		var $questionType;
 		//add Expression to DVR
 		$comboField=$dvrExpressionDetails[0];
 		$operandType=$dvrExpressionDetails[1];
@@ -302,11 +303,12 @@ var $sfm_act_formDesigner = new function sfm_act_formDesigner() {
 		$advExpr=$dvrExpressionDetails[3];
 		$msfType=$dvrExpressionDetails[4];
 		$errorMsg=$dvrExpressionDetails[5];
-		this.addDVRExpressions($comboField, $operandType, $answer, $advExpr, $msfType, $errorMsg);
+		$questionType=$dvrExpressionDetails[6];
+		this.addDVRExpressions($comboField, $operandType, $answer, $advExpr, $msfType, $errorMsg,$questionType);
 		
 	};
 	
-	this.addDVRExpressions=function($comboField, $operandType, $answer, $advExpr, $msfType, $errorMsg){
+	this.addDVRExpressions=function($comboField, $operandType, $answer, $advExpr, $msfType, $errorMsg,$questionType){
 		//_log("$comboField.length: "+$comboField.length);
 		if ($comboField.length>1) {
 			for (var $i = 0; $i < $comboField.length-1; $i++) {
@@ -329,7 +331,12 @@ var $sfm_act_formDesigner = new function sfm_act_formDesigner() {
 				_setSelected($sfm_pg_formDesigner.sel_operandType.near($rowNo),$operandType[$index]);
 				if ($operandType[$index]=="Value") {
 					_log("Inside Value");
-					_setValue($sfm_pg_formDesigner.txt_dvrAnsValue.near($rowNo),$answer[$index]);
+					if ($questionType=="Number") {
+						_setValue($sfm_pg_formDesigner.txt_dvrNumberAnsValue.near($rowNo),$answer[$index]);
+					}else {
+						_setValue($sfm_pg_formDesigner.txt_dvrDateAnsValue .near($rowNo),$answer[$index]);
+					}
+					
 				}else {
 					_setSelected($sfm_pg_formDesigner.sel_ansPicklist.near($rowNo),$answer[$index]);
 				}
