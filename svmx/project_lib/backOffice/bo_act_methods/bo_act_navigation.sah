@@ -481,11 +481,11 @@ var $bo_act_navigation = new function bo_act_navigation() {
         		   			_setValue(_f("main").s_textinput("searchText[4]"), $fields_array[$i]);
         		   			_doubleClick($bo_pg_sfmTransactionAndDesigner.label_account);
         		   	}
-        		   	else if($fields_array[$i] == "Cost Category"){
-        		   		_click(_f("main").s_datagroup("dataGroup").near(_f("main").s_richtext($containers_array[$i])));
-        		   		_setValue(_f("main").s_textinput("searchText[4]"), $fields_array[$i]);
-    		   			_doubleClick($bo_pg_sfmTransactionAndDesigner.label_costCategory);
-        		   	}
+        		   	//else if($fields_array[$i] == "Cost Category"){
+        		   		//_click(_f("main").s_datagroup("dataGroup").near(_f("main").s_richtext($containers_array[$i])));
+        		   	//	_setValue(_f("main").s_textinput("searchText[4]"), $fields_array[$i]);
+    		   			//_doubleClick($bo_pg_sfmTransactionAndDesigner.label_costCategory);
+        		   	//}
         		   	else {
         		   		_click(_f("main").s_datagroup("dataGroup").near(_f("main").s_richtext($containers_array[$i])));
         				_setValue(_f("main").s_textinput("searchText[4]"), $fields_array[$i]);

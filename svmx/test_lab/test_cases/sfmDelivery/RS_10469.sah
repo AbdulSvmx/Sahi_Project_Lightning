@@ -1,10 +1,119 @@
 var $RS_10469 = _testcase("RS_10498","Verify Field Map for existing records - Child");
 $RS_10469.start();
 //Variables used
-var $objectName = "Work Detail";
+var $objectName = "Work Order";
+var $childObject = "Work Detail";
 var $processName = "RS_10469";
-var $process_to_clone = "Manage Work Order Lines - Usage";
+var $process_to_clone = "Create Follow-Up Work Order from Work Order";
 var $sfmTemplate = "SVMXSTD: Manage WO Usage Lines";
 var $isCustom = false;
+var $lineType = "Parts";
 var $ctr = 0;
 var $i = 0;
+var $tempFields = ["Age"];
+var $initialChildFields = ["Line Type","Record Type ID","Line Number"];
+var $initalChildContainers = [$lineType,$lineType,$lineType];
+var $initialChildValues = [$lineType,"Usage/Consumption"];
+var $missingStdDataTypes = ["URL","Picklist (Multi-Select)","Percent","Phone","Date","Email"];
+var $customFieldsNames = ["Automation ChildURL","Automation Childmultipicklist","Automation ChildPercent","Automation ChildPhone","Automation ChildDate2","Automation ChildEmail"];
+
+//Appending current timestamp to process name to make it unique.
+var $timeStamp = $bo_act_navigation.getCurrentTimeStamp(); 
+$processName = $processName + "_" + $timeStamp;
+var $pageLayoutName = $processName + "pg";
+var $mapName = $processName + "mp";
+
+//**************************************************************************************
+//Login and switch to lightning
+
+$bo_act_login.login($g_url,$sfmlUsn,$sfmlPwd);
+$sfm_act_lightningConfig.switchToLightning();
+_wait(15000);
+//***************************************************************************************
+//Create custom fields if needed
+$sfm_act_lightningConfig.addCustomFields($objectName, $customFieldsNames, $missingStdDataTypes, $myDomain,$multiPicklistValues);
+_closeWindow();
+_selectWindow();
+//Create work order
+var $wo_number = $sfm_act_createCustomWizard.createWowithdateliterals();
+var $wlNumber = $sfm_act_lightningConfig.createWorkDetailInLightning("Usage",$lineType);
+//Find missing fields in Work Order Page Layout and them to the layout
+for($i=0;$i<$fieldsToMap.length;$i++){
+	if(!$sfm_act_lightningConfig.findIfFieldPresentInPageLayout($fieldsToMap[$i])){
+		$fieldsAbsentInPage.push($fieldsToMap[$i]);
+	}	
+}
+_log($fieldsAbsentInPage);
+
+if($fieldsAbsentInPage.length > 0){
+	$sfm_act_lightningConfig.navigateToObjectsInLightning($objectName);
+	$sfm_act_lightningConfig.addFieldsToLightningPageLayout($objectName,$pageLayoutForProfile,$fieldsAbsentInPage,$myDomain);
+	_selectDomain();
+	_selectWindow("Home | Salesforce");
+	_closeWindow();
+	_selectWindow();
+}
+
+$sfm_act_lightningConfig.logoutInLightning();
+//Login and switch to lightning
+
+$bo_act_login.login($g_url,$sfmlUsn,$sfmlPwd);
+$sfm_act_lightningConfig.switchToLightning();
+
+//**************************************************************************************************
+//Navigate to servicemax setup and setup required process.
+//Clone standard process and add the dependent picklist in the screen designer
+$bo_act_navigation.navigateToSfmTransactionDesigner();
+$sfm_act_SFM.selectSFM($process_to_clone,$isCustom);
+_click($bo_pg_sfmTransactionAndDesigner.btn_clone);
+_wait(60000, _isVisible($bo_pg_sfmTransactionAndDesigner.txt_name));
+_setValue($bo_pg_sfmTransactionAndDesigner.txt_name, $processName);
+_setValue($bo_pg_sfmTransactionAndDesigner.txt_sfmTransactionId,"");
+_setValue($bo_pg_sfmTransactionAndDesigner.txt_sfmTransactionId,$processName);
+_setSelected($bo_pg_sfmTransactionAndDesigner.list_objComboBox,$childObject);
+if(_isVisible($bo_pg_sfmTransactionAndDesigner.btn_popUpOK)){
+	_click($bo_pg_sfmTransactionAndDesigner.btn_popUpOK);
+}
+_click($bo_pg_sfmTransactionAndDesigner.list_sourceChild);
+_click($bo_pg_sfmTransactionAndDesigner.list_targetChild);
+_setValue($bo_pg_sfmTransactionAndDesigner.text_targetChildAlias,"Parts");
+_setSelected($bo_pg_sfmTransactionAndDesigner.list_childMappingCombo,"Work Detail (Work Order)");
+_click($bo_pg_sfmTransactionAndDesigner.btn_screenDesigner);
+_wait(6000);
+_click($bo_pg_sfmTransactionAndDesigner.btn_newPageLayout);
+$bo_act_navigation.designHeaderScreen($pageLayoutName,$tempFields);
+_wait(2000);
+$bo_act_navigation.designChildScreen($pageLayoutName, $initialChildFields, $initalChildContainers);
+_click(_f("main").s_richtext($lineType));
+_click($bo_pg_sfmTransactionAndDesigner.chkbx_allowNew);
+_click($bo_pg_sfmTransactionAndDesigner.chkbx_allowDelete);
+_click($bo_pg_sfmTransactionAndDesigner.btn_savePage);
+_click($bo_pg_sfmTransactionAndDesigner.btn_quickSave1);
+
+//Create mapping for all possible standard data types.
+_click($bo_pg_sfmTransactionAndDesigner.btn_qualifyingCriteriaAndFieldMapping);
+$bo_act_mappings.createMapping("Work Order",[],[],[],[],$mapName);
+_selectDomain();
+_setSpeed(1000);
+
+//Add the custom process to SFM wizard.
+$sfm_act_wizards.addToWizard("Work Order",$currentWizardName,"SFM",$processName);
+_selectDomain();
+
+//Navigate to created work order and launch the process
+$bo_act_navigation.navigateToCreatedRecordUsingGlobalSearch($wo_number);
+$sfm_act_createCustomWizard.clickWizardlinks($processName);
+_wait(8000);
+
+_click($sfm_pg_wo.link_delivery_save);
+_selectDomain();
+_wait(14000,_isVisible($sfm_pg_wo.label_wo));
+var $childWoId= _getText($sfm_pg_wo.label_wo);
+_log("Child Work Order id "+ $childWoId);
+
+
+
+
+
+
+

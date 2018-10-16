@@ -1,0 +1,174 @@
+var $rs_10450 = _testcase("RS_10450","Verify Lookup Context Child to Child.");
+$rs_10450.start();
+
+
+
+		//Pre_Requesite
+		//Create Account
+		$Account=$bo_act_common.generateRandomName("Acme_10450_");
+		$objName= "Account";
+		$obJson = "{\"Name\":\""+$Account+"\"}";
+		$filterValue=$sfm_act_restApiMethods.postRestApi($sfmlUsn,$sfmlPwd,$sfmClientId,$sfmConsumerSecret,$sfmOrgInstance,$objName,$obJson,"POST");
+		$AccountID=$filterValue;
+		_log("Account: "+$Account);
+		
+		//Create Contact for above created account
+		var $contactPicklistValue="Acme";
+		var $title="Bangalore";
+		$contactNameList = ["Leanne Tomlin","Howard Jones","James Smith"];
+		var $lastName;
+		var $userName=new Array();
+		for (var $i = 0; $i <$contactNameList.length; $i++) {
+			$objName= "Contact";
+			$lastName=$bo_act_common.generateRandomName($contactNameList[$i]+"_");
+			if ($i<$contactNameList.length-1) {
+				$obJson="{\"LastName\":\""+$lastName+"\",\"AccountId\":\""+$AccountID+"\"}";
+			}else {
+				$obJson="{\"LastName\":\""+$lastName+"\"}";
+			}
+			$filterValue=$sfm_act_restApiMethods.postRestApi($sfmlUsn,$sfmlPwd,$sfmClientId,$sfmConsumerSecret,$sfmOrgInstance,$objName,$obJson,"POST");
+			_log($lastName);
+			$userName[$i]=$lastName;
+		};	
+		
+		//create Work orders
+		$objName= "SVMXC__Service_Order__c";
+		$obJson = "{\"SVMXC__Order_Status__c\":\"Open\",\"SVMXC__Order_Type__c\":\"Field Service\"}";
+		$columnName = "Name";
+		$filter="id";
+		$filterValue=$sfm_act_restApiMethods.postRestApi($sfmlUsn,$sfmlPwd,$sfmClientId,$sfmConsumerSecret,$sfmOrgInstance,$objName,$obJson,"POST");
+		$WONumber =$sfm_act_restApiMethods.getRestApi($sfmlUsn,$sfmlPwd,$sfmClientId,$sfmConsumerSecret,$sfmOrgInstance,"GET", $objName, $columnName, $filter, $filterValue);
+		_log("WO number: "+$WONumber);
+		
+		// Login to App
+		$bo_act_login.login($g_url,$sfmlUsn,$sfmlPwd);
+		
+		//clone standard SFM
+		var $sfmNameToBeCloned="Manage Work Order Lines - Usage";
+		var $sfmName=$bo_act_common.generateRandomName("rs_10450_");
+		var $sfmTemplateSaveAsName=$bo_act_common.generateRandomName("SFM_Page_");
+		var $sfmTemplate="SVMXSTD: Manage WO Usage Lines";
+		var $fieldName=["Account","AutoContact"];
+		var $containerName=["Parts","Parts"];
+		$sfm_act_SFM.cloneTDM016($sfmNameToBeCloned, $sfmName, false, $sfmTemplateSaveAsName, $sfmTemplate, $fieldName, $containerName);
+		
+		//Remove multi-add for part childline
+		$sfm_act_SFM.partsMultiAdd("--None--");
+		
+	
+		//Context lookup setup on Part childline object
+		_click($bo_pg_sfmTransactionAndDesigner.txt_autoContactChild);
+		$sfm_act_Transactions.addLookupContext("Parts", true,"Account","Account ID");
+		
+		
+		//Save SFM after adding context lookup
+		RS10450_saveSFM();
+		
+		//add sfm to wizard
+		var $wizardObject="Work Order";
+		var $wizardName1 =$wizardName[3];
+		var $wizardType="SFM";
+		var $profile="";
+		var $handOver=false;
+		_log("Wizard Name: "+$wizardName1);
+		$sfm_act_wizards.addToWizard($wizardObject, $wizardName1, $wizardType, $sfmName, $handOver, $profile); 
+			
+		//Search WO and launch SFM
+		RS10450_searchWOandLaunchSFM($WONumber,$sfmName);
+
+		_wait(10000,_isVisible($sfm_pg_sfmDesigner.btn_deliveryPartsTab));
+		$sfm_act_sfmDesigner.addChildLine("Parts");
+		_wait(10000,_isVisible($sfm_pg_sfmDesigner.txt_partTextbox));
+		_click($sfm_pg_sfmDesigner.btn_searchAccountIcon);
+		RS10450_searchContact($Account);
+		_click(_link($Account));
+		_click($sfm_pg_sfmDesigner.btn_searchautoContactIcon);
+		_assertContainsText("/"+$Account+"/",$sfm_pg_sfmDesigner.label_contextOverride);
+		RS10450_searchContact($userName[0]);
+		_assertExists(_link($userName[0]));
+		RS10450_searchContact($userName[2]);
+		_assertNotExists(_link($userName[2]));
+		_click($sfm_pg_sfmDesigner.btn_cancelContactWindow);
+		
+		
+		_wait(10000,_isVisible($sfm_pg_sfmDesigner.txt_partTextbox));
+		_setValue($sfm_pg_sfmDesigner.txt_accountTextbox,"");
+		_click($sfm_pg_sfmDesigner.btn_searchautoContactIcon);
+		//_assertContainsText("/Empty/",$sfm_pg_sfmDesigner.label_contextOverride);
+		RS10450_searchContact($userName[2]);
+		_assertExists(_link($userName[2]));
+		RS10450_searchContact($userName[1]);
+		//_assertNotExists(_link($userName[1]));
+		_click($sfm_pg_sfmDesigner.btn_cancelContactWindow);
+
+
+
+function RS10450_saveSFM(){
+_setStrictVisibilityCheck(true);
+_click($bo_pg_sfmTransactionAndDesigner.btn_pageLayoutSave);
+_wait(5000,_isVisible($bo_pg_sfmTransactionAndDesigner.btn_sfmpageSaveConfirmMsg));
+_click($bo_pg_sfmTransactionAndDesigner.btn_saveAndclose);
+_setStrictVisibilityCheck(false);
+};		
+
+function RS10450_searchContact($contactName){
+_setValue($sfm_pg_sfmDesigner.btn_searchTextBox,$contactName);
+_click($sfm_pg_sfmDesigner.link_searchLink);
+_wait(5000,_isVisible(_link($contactName)));
+};
+
+//Search WO and launch SFM
+function RS10450_searchWOandLaunchSFM($WONumber,$sfmName){
+$sfm_act_common.globalSearchInLightning($WONumber);
+_setStrictVisibilityCheck(true);
+$sfm_act_createCustomWizard.clickWizardBtn($sfmName);
+_wait(5000,_isVisible(_div("/"+$sfmName+"/")));
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
+$wizTitle = $bo_act_common.generateRandomName("SFM Wiz");
+$sfmName = $bo_act_common.generateRandomName("SFM_Auto_");
+//$sfmName = "SFM_Auto_1220181634";
+$sfmPgLayoutName =	$bo_act_common.generateRandomName("SFM_Auto_Page");
+$processName = "Manage Work Order Lines - Usage";
+$containerName = ["Parts","Parts"];
+$fieldName = ["Account","AutoContact"];
+$sfmtemplate = "SVMXSTD: Manage WO Usage Lines";
+$bo_act_login.login($g_url,$sfmlUsn,$sfmlPwd);
+$bo_act_navigation.navigateToSfmTransactionDesigner();
+$sfm_act_SFM.cloneTDM016($processName, $sfmName, false, $sfmPgLayoutName,$sfmtemplate, $fieldName, $containerName);
+_click($bo_pg_sfmTransactionAndDesigner.btn_finalQuickSave);
+_wait(5000);
+$bo_act_navigation.navigateToSfmWizard();
+$sfm_act_createCustomWizard.chooseObject("Work Order");
+$sfm_act_createCustomWizard.addManageWizSteps($wizTitle,"SFM",$sfmName);
+$woName=$sfm_act_createCustomWizard.createBlankWo();
+$sfm_act_createCustomWizard.clickWizardBtn($sfmName);
+$sfm_act_createCustomWizard.verify6906("Acme");
+_setValue($sfm_pg_wizardWindow.lkp_search,"");
+_click($sfm_pg_wizardWindow.icon_search);
+_click($sfm_pg_wizardWindow.lkp_autoContact);
+_click($sfm_pg_wizardWindow.icon_search);
+$sfm_act_createCustomWizard.verifyAccountsPresent("");
+*/
+$rs_10450.end();
