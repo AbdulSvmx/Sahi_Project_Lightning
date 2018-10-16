@@ -46,8 +46,8 @@ $rs_10452.start();
 		var $sfmName=$bo_act_common.generateRandomName("rs_10499_");
 		var $sfmTemplateSaveAsName=$bo_act_common.generateRandomName("SFM_Page_");
 		var $sfmTemplate="SVMXSTD: Manage WO Usage Lines";
-		var $fieldName=["Account","Contact","Account Picklist","City","AutoContact"];
-		var $containerName=["Order Status","Order Status","Order Status","Order Status","Parts"];
+		var $fieldName=["Account","Contact","Account Picklist","City","Account","AutoContact"];
+		var $containerName=["Order Status","Order Status","Order Status","Order Status","Parts","Parts"];
 		$sfm_act_SFM.cloneTDM016($sfmNameToBeCloned, $sfmName, false, $sfmTemplateSaveAsName, $sfmTemplate, $fieldName, $containerName);
 		
 		//Remove multi-add for part childline
@@ -129,6 +129,8 @@ $rs_10452.start();
 		_wait(10000,_isVisible($bo_pg_sfmTransactionAndDesigner.txt_contactOnHeader));
 		_click($bo_pg_sfmTransactionAndDesigner.txt_contactOnHeader);
 		$sfm_act_Transactions.addLookupContext("", false,"City", "Title");
+		_click($bo_pg_sfmTransactionAndDesigner.txt_autoContactChild);
+		$sfm_act_Transactions.addLookupContext("Parts", false,"Account","Account ID");
 		
 		
 		
@@ -148,7 +150,30 @@ $rs_10452.start();
 		_assertExists(_link($userName[2]));
 		_click($sfm_pg_sfmDesigner.btn_cancelContactWindow);
 		
-	
+		$sfm_act_sfmDesigner.addChildLine("Parts");
+		_wait(10000,_isVisible($sfm_pg_sfmDesigner.txt_partTextbox));
+		_click($sfm_pg_sfmDesigner.btn_searchAccountIcon);
+		RS10449_searchContact($Account);
+		_click(_link($Account));
+		_click($sfm_pg_sfmDesigner.btn_searchautoContactIcon);
+		_assertContainsText("/"+$Account+"/",$sfm_pg_sfmDesigner.label_contextOverride);
+		RS10449_searchContact($userName[0]);
+		_assertExists(_link($userName[0]));
+		RS10449_searchContact($userName[2]);
+		_assertNotExists(_link($userName[2]));
+		_click($sfm_pg_sfmDesigner.btn_cancelContactWindow);
+
+		
+		_wait(10000,_isVisible($sfm_pg_sfmDesigner.txt_partTextbox));
+		_setValue($sfm_pg_sfmDesigner.txt_accountTextbox,"");
+		_click($sfm_pg_sfmDesigner.btn_searchautoContactIcon);
+//		_assertContainsText("/Empty/",$sfm_pg_sfmDesigner.label_contextOverride);
+		RS10449_searchContact($userName[2]);
+		_assertExists(_link($userName[2]));
+		RS10449_searchContact($userName[1]);
+//		_assertNotExists(_link($userName[1]));
+		_click($sfm_pg_sfmDesigner.btn_cancelContactWindow);
+		
 	
 function RS10499_saveSFM(){
 	_setStrictVisibilityCheck(true);
