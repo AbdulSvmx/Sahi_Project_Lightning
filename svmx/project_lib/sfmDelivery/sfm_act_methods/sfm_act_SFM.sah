@@ -294,6 +294,30 @@ var $sfm_act_SFM = new function sfm_act_SFM() {
 		_click($bo_pg_sfmTransactionAndDesigner.btn_savePage);
 		_wait(3000, _isVisible($bo_pg_sfmTransactionAndDesigner.label_pageSaved));		
 	};
+	/**
+	 * This function is select/unselect a field read only/required
+	 * Eg : 10429.sah  
+	 */	
+	this.setReadOnlyOrRequired = function($object,$attribute,$value){
+		_click(_f("main").uiftetextfield($object));
+		if($attribute=='Read Only'){
+			if(_getValue($bo_pg_sfmTransactionAndDesigner.chk_readOnly)== $value){
+				//do nothing
+			}else{
+				_click($bo_pg_sfmTransactionAndDesigner.chk_readOnly);
+			}
+			
+		}else{
+			if(_getValue($bo_pg_sfmTransactionAndDesigner.chk_required)== $value){
+				//do nothing
+			}else{
+				_click($bo_pg_sfmTransactionAndDesigner.chk_required);
+			}
+			
+		}
+		_click($bo_pg_sfmTransactionAndDesigner.btn_pageLayoutSave);
+		_wait(3000, _isVisible($bo_pg_sfmTransactionAndDesigner.page_saved));
+	}
 	
 	this.setFormFill = function($fieldName,$objMapping,$nearBy){
 		if($nearBy == 'Parts' || $nearBy == 'Labor' || $nearBy == 'Expense' || $nearBy == 'Travel'){

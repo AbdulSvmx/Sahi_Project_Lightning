@@ -153,6 +153,33 @@ var $sfm_act_Transactions = new function sfm_act_Transactions() {
 
 		};
 		
+
+		
+		/**
+		 * Author		:	Anand Kakhandaki
+		 * Function		: 	To scroll in lookup field list
+		 * Parameter	:	$field=Name of field
+		 * 					
+		 * Example		: 	Refer _ _ _  for function usage
+		 */
+		this.lookUpScrollIntoView=function($field){
+			_call($bo_pg_sfmTransactionAndDesigner.scroll_filedScroll.set("value",0));
+			var $maximum =  _fetch($bo_pg_sfmTransactionAndDesigner.scroll_filedScroll.get("maximum"));
+			var $fieldName= _f("main").s_label($field);
+			var $i=0;
+			while($i< $maximum){
+				if(_isVisible($fieldName)){
+					//_click($el);
+					break;
+				}
+				else {
+					$i= $i+200;
+					_call($bo_pg_sfmTransactionAndDesigner.scroll_filedScroll.set("value",$i));
+				}
+			}
+		};
+
+		
 		/**
 		 * Author		:	Anand Kakhandaki
 		 * Function		: 	This function setup lookup for selected object
@@ -198,6 +225,8 @@ var $sfm_act_Transactions = new function sfm_act_Transactions() {
 				$addToBubbleList=$lookupFieldsToAdd[3];
 				
 				for (var $i = 0; $i < $fieldNameList.length; $i++) {
+					this.lookUpScrollIntoView($fieldNameList[i]);
+					
 					if ($addToSearchList[i]==true) {
 						_click(_f("main").s_button("/Button1/").near(_f("main").s_label($fieldNameList[i])));
 					}
@@ -270,6 +299,58 @@ var $sfm_act_Transactions = new function sfm_act_Transactions() {
 			_wait(5000);
 			_setStrictVisibilityCheck(false);
 		};
+		
+		/**
+		 * Author		:	Anand Kakhandaki
+		 * Function		: 	To Delete lookup filters and save 
+		 * Parameter	:	$object=Name of the object on which lookup configured
+		 * 					$lookupTempName = Name of lookup to delete
+		 * 
+		 * Example		: 	Refer _ _ _ for function usage
+		 */
+		this.deleteLookUpFiltersAndSave=function($object,$nearBy,$lookupTempName){
+			this.deleteLookUpFiltersRow($object,$nearBy,$lookupTempName);
+			_wait(3000);
+			_click($sfm_pg_screenDesigner.btn_lookupSave);
+			_wait(10000,_isVisible($sfm_pg_screenDesigner.lbl_lookupSaveConfirmMsg));
+			_click($sfm_pg_screenDesigner.btn_Select);
+			_wait(5000);
+		};
+		
+		/**
+		 * Author		:	Anand Kakhandaki
+		 * Function		: 	To Delete lookup filters 
+		 * Parameter	:	$object=Name of the object on which lookup configured
+		 * 					$lookupTempName = Name of lookup to delete
+		 * 
+		 * Example		: 	Refer _ _ _ for function usage
+		 */
+		this.deleteLookUpFiltersRow=function($object,$nearBy,$lookupTempName){
+			_setStrictVisibilityCheck(true);
+			if($nearBy == 'Parts' || $nearBy == 'Labor' || $nearBy == 'Expense' || $nearBy == 'Travel'){
+				_click(_f("main").s_richtext($object).near(_f("main").s_richtext($nearBy)));
+			}else{
+				//_click(_f("main").s_textinput("txtIp").inside(_f("main").fieldrenderer($fieldName)));
+				_click(_f("main").s_textinput("txtIp").near(_f("main").uiftetextfield($object)));
+			}
+			
+			_wait(5000,_isVisible(_f("main").s_label("Properties for Field: "+$object)));
+			_click($sfm_pg_screenDesigner.btn_ConfLookup);
+			_wait(10000,_isVisible($sfm_pg_screenDesigner.txt_lookupName));
+			_log($lookupTempName);
+			if ($lookupTempName!=="" && $lookupTempName!==null) {
+				_setSelected($sfm_pg_screenDesigner.sel_LkupTemplate,$lookupTempName);
+			}
+			_wait(10000);
+			
+			var $addRow=_f("main").s_button("Add a row").near($sfm_pg_screenDesigner.lbl_lookupFilterLabel);
+			var $comboField=$sfm_pg_screenDesigner.sel_comboField.near($addRow);
+			var $lastRow=_getValue(_f("main").s_label(0).near($comboField));
+			for (var $i = 0; $i < $lastRow; $i++) {
+				_click($sfm_pg_screenDesigner.btn_deleteRow.near($addRow));
+			};			
+		};
+		
 /* commented this in lightning as it is done through generic function
 		this.clonedsfm6343 = function($processName,$sfmName,$sfmPgLayoutName,$dvrRuleName){
 			$sfm_act_SFM.selectSFM($processName,false);
