@@ -771,4 +771,15 @@ this.getWorkDetailNumber = function(){
 	return $wlNum;
 };
 
+this.getWorkDetailNumberFromWO = function() {
+	//This function fetches the latest work detail number from any work order
+	//Returns Work Detail Line number in the form of WL-*********
+	//Author : Janaki
+	_click($sfm_pg_wo.link_relatedListsTab);
+	var $wDetailNum = _getText($sfm_pg_wo.link_workDetail);
+	return $wDetailNum;
+	
+	
+};
+
 };
