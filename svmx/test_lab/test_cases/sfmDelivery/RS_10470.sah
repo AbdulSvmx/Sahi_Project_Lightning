@@ -155,7 +155,7 @@ _log("New Work Order id "+ $childWoId);
 var $lookUpLabels = ["Account","Contact"];
 var $lookUpValues = ["HCSAccountForTesting","Lightning Contact"];
 $textLabels = ["Proforma Invoice Amount","Estimated Duration","Automation Percent","City","Scheduled Date","Automation Date2","Automation Date3"];
-$textValues = ["$4,500.000","78.00","45%","Bengaluru",$todayDate,$tomorrowDate,$yesterdayDate];
+$textValues = ["$6,600.000","78.00","45%","Bengaluru",$todayDate,$tomorrowDate,$yesterdayDate];
 $pickListLabels = ["Order Status"];
 $pickListValues = ["Open"];
 $textAreaLabels = ["Street","Problem Description"];
