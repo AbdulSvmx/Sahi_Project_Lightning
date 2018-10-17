@@ -133,9 +133,10 @@ _log($WDID);
 _wait(30000);
 _call(top.location.reload());
 $bo_act_navigation.navigateToCreatedRecordUsingGlobalSearchWO($WOName);
-$bo_act_interactiveEntitlement_WO.performInteractiveEntitlementPSLinesSCON($WOName, $SCONName);
+$bo_act_interactiveEntitlement_WO.performInteractiveEntitlementPSLines($WOName, $SCONName,$IBName);
 
 $excel.insertUnderColumn("/auto/SVMX_Catalyst/fsaautomation/resources/TestData.xlsx", "RS_10536", "Data1",$WOName ,"2");
+$excel.insertUnderColumn("/auto/SVMX_Catalyst/fsaautomation/resources/TestData.xlsx", "RS_10539", "Data6", $IBName, "2");
 _writeFile("true", $appiumPath+$sahiIntermediatoryPath, true);
 
 $pre_requisite.end();

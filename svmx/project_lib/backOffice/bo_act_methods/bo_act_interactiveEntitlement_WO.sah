@@ -184,10 +184,10 @@ var $bo_act_interactiveEntitlement_WO = new function bo_act_interactiveEntitleme
 	
 	
 	/**
-	 * Perform Entitlement for PS Lines for SCON on the Work Order - for PS Lines Only
+	 * Perform Entitlement for PS Lines for Work Order - for PS Lines Only
 	 */
 	
-	this.performInteractiveEntitlementPSLinesSCON= function($WO_Number, $SCONName) {
+	this.performInteractiveEntitlementPSLines= function($WO_Number, $ValueName, $IBName) {
 
 		$bo_act_workOrders.checkEntitlementPS($WO_Number);
 		_selectDomain("/svmx/");
@@ -212,8 +212,9 @@ var $bo_act_interactiveEntitlement_WO = new function bo_act_interactiveEntitleme
 		_click($bo_pg_interactiveEntitlement_CaseAndWO.btn_matchContactsPS);
 		_click($bo_pg_interactiveEntitlement_CaseAndWO.btn_matchAccountPS);
 		_click($bo_pg_interactiveEntitlement_CaseAndWO.btn_apply);
-		_click($bo_pg_interactiveEntitlement_CaseAndWO.btn_selectwarrantyorScon);
-		_click(_div("/svmx-grid-radioheader/", _near(_link($SCONName)))); 
+		_click($bo_pg_interactiveEntitlement_CaseAndWO.btn_chkEntitlementPS);
+		_click(_div($IBName));
+		_click(_div("/svmx-grid-radioheader/", _near(_link($ValueName)))); 
 		_click($bo_pg_interactiveEntitlement_CaseAndWO.btn_applySelection);
 		_click($bo_pg_interactiveEntitlement_CaseAndWO.btn_saveEntitltmentPS);
 		_selectDomain();

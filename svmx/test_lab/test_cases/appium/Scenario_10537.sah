@@ -107,7 +107,7 @@ _log($WDName);
 _wait(30000);
 _call(top.location.reload());
 $bo_act_navigation.navigateToCreatedRecordUsingGlobalSearchWO($WOName);
-$bo_act_interactiveEntitlement_WO.performInteractiveEntitlementPSLinesSCON($WOName, $SCONName);
+$bo_act_interactiveEntitlement_WO.performInteractiveEntitlementPSLines($WOName, $WarrantyName, $IB10538Name);
 
 $excel.insertUnderColumn("/auto/SVMX_Catalyst/fsaautomation/resources/TestData.xlsx", "RS_10537", "Data1",$WOName ,"2");
 
