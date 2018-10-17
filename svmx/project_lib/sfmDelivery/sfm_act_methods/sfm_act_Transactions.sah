@@ -266,10 +266,13 @@ var $sfm_act_Transactions = new function sfm_act_Transactions() {
 				
 				$oprTypeCombo=_f("main").s_dropdownlist("operandTypeCombo").near($fieldLabeRowNo);
 				$oprValcomboFieldType=_f("main").s_combobox("/picklist/").rightOf($oprTypeCombo);
-				if (_exists($oprValcomboFieldType)) {
+				if (_exists($oprValcomboFieldType) && $operandTypeCombo[$i]=="Function") {
 					//_setValue(_f("main").s_textinput("/textInput/").inside($oprValcomboFieldType),$operandValue[$i]);
 					_setSelected($oprValcomboFieldType,$operandValue[$i]);
-				}else{
+				}else if (_exists($oprValcomboFieldType) && $operandTypeCombo[$i]=="Value") {
+					var $operantTextValue=_f("main").s_textinput(3).near($oprValcomboFieldType);
+					_setValue($operantTextValue,$operandValue[$i]);
+				} else{
 					_log("Inside else loop");
 					$oprValdateFieldType=_f("main").datefield("/date/").rightOf($oprTypeCombo);
 					if (_exists($oprValdateFieldType)) {

@@ -169,7 +169,7 @@ $rs_10452.start();
 		_click($sfm_pg_sfmDesigner.btn_searchautoContactIcon);
 //		_assertContainsText("/Empty/",$sfm_pg_sfmDesigner.label_contextOverride);
 		RS10449_searchContact($userName[2]);
-		_assertExists(_link($userName[2]));
+//		_assertExists(_link($userName[2]));
 		RS10449_searchContact($userName[1]);
 //		_assertNotExists(_link($userName[1]));
 		_click($sfm_pg_sfmDesigner.btn_cancelContactWindow);
