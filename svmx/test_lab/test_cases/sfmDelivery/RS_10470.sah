@@ -3,7 +3,7 @@ $RS_10470.start();
 //Variables used
 var $objectName = "Work Order";
 var $processName = "RS_10470";
-var $process_to_clone = "Create Follow-Up Work Order from Work Order";
+var $process_to_clone = "Create New Support Case";
 var $sfmTemplate = "SVMXSTD: Manage WO Usage Lines";
 var $isCustom = false;
 var $ctr = 0;

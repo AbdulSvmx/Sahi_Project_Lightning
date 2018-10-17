@@ -91,14 +91,16 @@ $sfm_act_lightningConfig.switchToLightning();
 //**************************************************************************************************
 //Navigate to servicemax setup and setup required process.
 //Create new process from scratch
+_setSpeed(3000);
 $bo_act_navigation.navigateToSfmTransactionDesigner();
-_click($bo_pg_sfmTransactionAndDesigner.btn_newSFM);
+$sfm_act_SFM.selectSFM($process_to_clone,$isCustom);
+_click($bo_pg_sfmTransactionAndDesigner.btn_clone);
 _wait(2000);
 _wait(60000, _isVisible($bo_pg_sfmTransactionAndDesigner.txt_name));
 _setValue($bo_pg_sfmTransactionAndDesigner.txt_name, $processName);
 _setValue($bo_pg_sfmTransactionAndDesigner.txt_sfmTransactionId,"");
 _setValue($bo_pg_sfmTransactionAndDesigner.txt_sfmTransactionId,$processName);
-_setSelected($bo_pg_sfmTransactionAndDesigner.list_objComboBox,$objectName);
+//_setSelected($bo_pg_sfmTransactionAndDesigner.list_objComboBox,$objectName);
 if(_isVisible($bo_pg_sfmTransactionAndDesigner.btn_popUpOK)){
 	_click($bo_pg_sfmTransactionAndDesigner.btn_popUpOK);
 }
@@ -106,7 +108,7 @@ _click($bo_pg_sfmTransactionAndDesigner.list_sourceChild);
 _click($bo_pg_sfmTransactionAndDesigner.list_targetChild);
 _setValue($bo_pg_sfmTransactionAndDesigner.text_targetChildAlias,"Parts");
 _click($bo_pg_sfmTransactionAndDesigner.btn_qualifyingCriteriaAndFieldMapping);
-_setSelected($bo_pg_sfmTransactionAndDesigner.list_childMappingCombo,"Work Detail (Work Order)");
+_setSelected($bo_pg_sfmTransactionAndDesigner.list_childMappingCombo,"Work Detail (Case)");
 _click($bo_pg_sfmTransactionAndDesigner.btn_screenDesigner);
 _wait(6000);
 _click($bo_pg_sfmTransactionAndDesigner.btn_newPageLayout);
