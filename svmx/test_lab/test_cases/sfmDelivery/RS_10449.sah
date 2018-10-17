@@ -51,16 +51,17 @@ $rs_10449.start();
 		_click($bo_pg_sfmTransactionAndDesigner.txt_partOnChild);
 		
 		//create lookup for part object in Child
-		$object="Part";
+		var $object="Part";
 		var $lookupTempName="SVMXSTD: Product Lookup";
-		$fieldNameList=["Product Type"];
-		$addToSearchList=[true];
-		$addToDisplayList=[true];
-		$addToBubbleList=[true];
-		var $noOfRecords=50;
+		var $fieldNameList=["Product Type"];
+		var $addToSearchList=[true];
+		var $addToDisplayList=[true];
+		var $addToBubbleList=[true];
 		var $lookupFieldsToAdd=[$fieldNameList,$addToSearchList,$addToDisplayList,$addToBubbleList];
+		var $noOfRecords=50;
 		var $lookUpName=$bo_act_common.generateRandomName("rs_10449_lookup_");
-		$sfm_act_Transactions.createLookUp($object, $lookupTempName, "", "", $lookUpName,"Parts",$noOfRecords);
+		
+		$sfm_act_Transactions.createLookUp($object, $lookupTempName, $lookupFieldsToAdd, "", $lookUpName,"Parts",$noOfRecords);
 		
 		//Save SFM after adding context lookup
 		RS10449_saveSFM();
@@ -86,7 +87,7 @@ $rs_10449.start();
 		_wait(5000,_isVisible($sfm_pg_sfmDesigner.lbl_recentItemProducts));
 		_setValue($sfm_pg_sfmDesigner.btn_searchTextBox,$productNameReg);
 		_click($sfm_pg_sfmDesigner.link_searchLink);
-		var $fieldsName=["Name","ProductCode","SVMXC__Product_Line__c"];
+		var $fieldsName=["Product Name","Product Code","Product Line","Product Type"];
 		//Column assertion
 		for (var $i = 0; $i < $fieldsName.length; $i++) {
 			//_assertExists(_span($fieldsName[$i],_in($sfm_pg_sfmDesigner.window_ProductSearchWindow)));
@@ -118,29 +119,6 @@ $rs_10449.start();
 		_assertExists(_div($fieldsName[0]+":"+$productName[0]));
 		_assertExists(_div($fieldsName[1]+":"+$productName[0]));
 		_assertExists(_div($fieldsName[2]+":Storage"));
-		
-
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
 		
 
 
