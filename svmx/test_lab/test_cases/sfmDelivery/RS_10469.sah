@@ -4,7 +4,7 @@ $RS_10469.start();
 var $objectName = "Work Order";
 var $childObject = "Work Detail";
 var $processName = "RS_10469";
-var $process_to_clone = "Create Follow-Up Work Order from Work Order";
+var $process_to_clone = "Create a New Work Order from Location";
 var $sfmTemplate = "SVMXSTD: Manage WO Usage Lines";
 var $isCustom = false;
 var $lineType = "Parts";
@@ -90,15 +90,15 @@ $sfm_act_lightningConfig.switchToLightning();
 
 //**************************************************************************************************
 //Navigate to servicemax setup and setup required process.
-//Clone standard process and add the dependent picklist in the screen designer
+//Create new process from scratch
 $bo_act_navigation.navigateToSfmTransactionDesigner();
-$sfm_act_SFM.selectSFM($process_to_clone,$isCustom);
-_click($bo_pg_sfmTransactionAndDesigner.btn_clone);
+_click($bo_pg_sfmTransactionAndDesigner.btn_newSFM);
+_wait(2000);
 _wait(60000, _isVisible($bo_pg_sfmTransactionAndDesigner.txt_name));
 _setValue($bo_pg_sfmTransactionAndDesigner.txt_name, $processName);
 _setValue($bo_pg_sfmTransactionAndDesigner.txt_sfmTransactionId,"");
 _setValue($bo_pg_sfmTransactionAndDesigner.txt_sfmTransactionId,$processName);
-//_setSelected($bo_pg_sfmTransactionAndDesigner.list_objComboBox,$childObject);
+_setSelected($bo_pg_sfmTransactionAndDesigner.list_objComboBox,$objectName);
 if(_isVisible($bo_pg_sfmTransactionAndDesigner.btn_popUpOK)){
 	_click($bo_pg_sfmTransactionAndDesigner.btn_popUpOK);
 }

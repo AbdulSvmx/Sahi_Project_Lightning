@@ -3,7 +3,7 @@ $RS_10470.start();
 //Variables used
 var $objectName = "Work Order";
 var $processName = "RS_10470";
-var $process_to_clone = "Create New Support Case";
+var $process_to_clone = "Create Follow-Up Work Order from Work Order";
 var $sfmTemplate = "SVMXSTD: Manage WO Usage Lines";
 var $isCustom = false;
 var $ctr = 0;
@@ -130,7 +130,7 @@ $sfm_act_createCustomWizard.clickWizardlinks($processName);
 _wait(8000);
 //Setting up the date literal values
 var $current = new Date();
-var $todayDate = $current.getMonth()+1 + "/" + $current.getDate() + "/" + $current.getFullYear();
+var $todayDate = $sfm_act_createCustomWizard.addSubtractDates($current,0);
 var $tomorrowDate = $sfm_act_createCustomWizard.addSubtractDates($current,1);
 var $yesterdayDate = $sfm_act_createCustomWizard.addSubtractDates($current,-1);
 var $now = $sfm_act_lightningConfig.calculateNow();
