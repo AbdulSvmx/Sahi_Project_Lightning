@@ -722,7 +722,7 @@ this.calculateNow = function(){
 	//Author: Janaki
 	var $p = $current.getHours();
 	var $min = $current.getMinutes();
-	if($p >= 12){
+	if($p > 12){
 		if($min < 10){
 			$min = "0"+$min;
 		}
