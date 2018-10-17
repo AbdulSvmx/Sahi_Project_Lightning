@@ -71,7 +71,7 @@ _log($ProductID);
 
 //To create a Work ORder
 $objNameWO= "SVMXC__Service_Order__c";
-$obJsonWO = "{\"SVMXC__Company__c\":\""+$Acc10539ID+"\", \"SVMXC__Contact__c\":\""+$contactid+"\", \"SVMXC__Product__c\":\""+$ProductID+"\"}"; 
+$obJsonWO = "{\"SVMXC__Company__c\":\""+$Acc10539ID+"\", \"SVMXC__Contact__c\":\""+$contactid+"\"}"; 
 $columnName = "Name";
 $filter="id";
 var $WoID=$sfm_act_restApiMethods.postRestApi($appiumAdminUn,$appiumAdminPwd,$appiumclient_id,$appiumclient_secret,$appiumorginstance,$objNameWO,$obJsonWO,"POST");
