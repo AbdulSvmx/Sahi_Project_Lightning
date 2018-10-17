@@ -159,7 +159,7 @@ var $standardPriceValue = 750;
 $bo_act_products.addStandardPriceForProduct($Productname10531, $standardPriceValue);
 
 
-$excel.insertUnderColumn("/auto/SVMX_Catalyst/fsaautomation/resources/TestData.xlsx", "RS_10531", "Data1",$WOName ,"2");
+$excel.insertUnderColumn("/auto/SVMX_Catalyst/fsaautomation/resources/TestData.xlsx", "RS_10531", "Data1",$WOName,"2");
 $excel.insertUnderColumn("/auto/SVMX_Catalyst/fsaautomation/resources/TestData.xlsx", "RS_10531", "Data2",$Productname10531 ,"2");
 
 _writeFile("true", $appiumPath+$sahiIntermediatoryPath, true);
