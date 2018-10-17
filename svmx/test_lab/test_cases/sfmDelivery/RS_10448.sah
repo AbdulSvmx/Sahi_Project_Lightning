@@ -93,7 +93,7 @@ $rs_10448.start();
 			if ($i<$partOrderNumber.length-2) {
 				_assertExists(_link($partOrderNumber[$i]));
 			}else {
-				_assertNotExists($sfm_pg_sfmDesigner.btn_noRecordMSG);
+				_assertExists($sfm_pg_sfmDesigner.btn_noRecordMSG);
 				
 			}
 		}
