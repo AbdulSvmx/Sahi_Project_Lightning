@@ -90,12 +90,11 @@ $rs_10449.start();
 		var $fieldsName=["Product Name","Product Code","Product Line","Product Type"];
 		//Column assertion
 		for (var $i = 0; $i < $fieldsName.length; $i++) {
-			//_assertExists(_span($fieldsName[$i],_in($sfm_pg_sfmDesigner.window_ProductSearchWindow)));
 			_assertExists(_span($fieldsName[$i]));
 		}
 		//object assertion
 		for (var $i = 0; $i < $productName.length; $i++) {
-			//_assertExists(_link($productName[$i],_in($sfm_pg_sfmDesigner.window_ProductSearchWindow)));
+			RS10449_searchObject($productName[$i]);
 			_assertExists(_link($productName[$i]));
 		}
 		
@@ -103,10 +102,9 @@ $rs_10449.start();
 		_setValue($sfm_pg_sfmDesigner.btn_searchTextBox,"Storage");
 		_click($sfm_pg_sfmDesigner.link_searchLink);
 		for (var $i = 0; $i < $productName.length; $i++) {
-			//_assertExists(_link($productName[$i],_in($sfm_pg_sfmDesigner.window_ProductSearchWindow)));
+			RS10449_searchObject($productName[$i]);
 			_assertExists(_link($productName[$i]));
 		}
-		//_click(_link($productName[0],_in($sfm_pg_sfmDesigner.window_ProductSearchWindow)));
 		_click(_link($productName[0]));
 		_click($sfm_pg_sfmDesigner.link_updatePartsSearch);
 		_wait(5000);
@@ -135,6 +133,13 @@ function RS10449_searchWOandLaunchSFM($WONumber,$sfmName){
 	$sfm_act_createCustomWizard.clickWizardBtn($sfmName);
 	_wait(5000,_isVisible(_div("/"+$sfmName+"/")));
 }
+
+function RS10449_searchObject($object){
+	_wait(5000,_isVisible($sfm_pg_sfmDesigner.btn_searchTextBox));
+	_setValue($sfm_pg_sfmDesigner.btn_searchTextBox,$object);
+	_click($sfm_pg_sfmDesigner.link_searchLink);
+	_wait(5000,_isVisible(_link($object)));
+};	
 
 
 /*
