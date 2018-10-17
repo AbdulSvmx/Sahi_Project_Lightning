@@ -230,16 +230,16 @@ var $sfm_act_Transactions = new function sfm_act_Transactions() {
 					this.lookUpScrollIntoView($fieldNameList[$i]);
 					
 					if ($addToSearchList[$i]==true) {
-						_log("inside Button1");
-						_click(_f("main").s_button("/Button1/").near(_f("main").s_label($fieldNameList[$i])));
+						_log("inside search field list");
+						_click(_f("main").s_button("/Add to search field list/").near(_f("main").s_label($fieldNameList[$i])));
 					}
 					if ($addToDisplayList[$i]==true) {
-						_log("inside Button2");
-						_click(_f("main").s_button("/Button2/").near(_f("main").s_label($fieldNameList[$i])));
+						_log("inside Add to result field list");
+						_click(_f("main").s_button("/Add to result field list/").near(_f("main").s_label($fieldNameList[$i])));
 					}
 					if ($addToBubbleList[$i]==true) {
-						_log("inside Button3");
-						_click(_f("main").s_button("/Button3/").near(_f("main").s_label($fieldNameList[$i])));
+						_log("inside Add to bubble field list");
+						_click(_f("main").s_button("/Add to bubble field list/").near(_f("main").s_label($fieldNameList[$i])));
 					}
 				}
 			}

@@ -1,6 +1,7 @@
 var $rs_10448 = _testcase("RS_10448","Verify Lookup prefilter using data types - Date Literal, Picklist and Record Type");
 $rs_10448.start();
-		
+	
+		//delete[SELECT Name FROM SVMXC__Service_Order__c limit 10000];
 		//pre-req
 		//Create Parts Order using below variables
 		var $partOrderNumber=new Array;
@@ -62,10 +63,11 @@ $rs_10448.start();
 		var $lookUpName=$bo_act_common.generateRandomName("rs_10448_lookup_");
 		
 		//lookup fields to add details
-		$addToSearchList=[false,true,true];
-		$addToDisplayList=[true,true,true];
-		$addToBubbleList=[true,true,true];
-		var $lookupFieldsToAdd=[$fieldCombo,$addToSearchList,$addToDisplayList,$addToBubbleList];
+		var $fieldNameList=["Order Number","Expected Receipt Date","Billing Type","Record Type ID"];
+		var $addToSearchList=[true,false,true,true];
+		var $addToDisplayList=[true, true,true,true];
+		var $addToBubbleList=[true, true,true,true];
+		var $lookupFieldsToAdd=[$fieldNameList,$addToSearchList,$addToDisplayList,$addToBubbleList];
 		
 		$sfm_act_Transactions.createLookUp($object, $lookupTempName, $lookupFieldsToAdd, $lookupFilterDetails, $lookUpName,"","");
 		
