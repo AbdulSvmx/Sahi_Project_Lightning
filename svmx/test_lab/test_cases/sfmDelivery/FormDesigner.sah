@@ -23,33 +23,6 @@ $rs_formDesigner.start();
 	//Checklist - Form Designer
 	_click($sfm_pg_formDesigner.tab_formDesigner);
 	
-	
-	$bo_act_checklistdesigner.addQuestion($dataType, $questionText, $prefix, $pickListValue)
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	var $sectionName1="Disassemble System";
 	var $sectionName2="Replace Hardisc";
 	
@@ -69,7 +42,151 @@ $rs_formDesigner.start();
 	_wait(3000,_isVisible($sfm_pg_formDesigner.label_saveEditSectionMsg));
 	_click($sfm_pg_formDesigner.btn_cancelSectionWindow);
 	
+	///////////// Question - Date //////////////////
+	//create Date Question in section - PreFill
+	var $queType="Date";
+	var $queName=$bo_act_common.generateRandomName("ch_date_");
+	var $helpURL="http://google.com/Doc";
+	var $tag="ch_date_-01";
+	var $addToLibAndForm=true;
+	var $queCommonDetails=[$queType,$queName,$helpURL,$tag,$addToLibAndForm];
+	
+	var $preFillFromWO=true;
+	var $defaultAnsType="";
+	var $defaultVal="Date1";
+	var $queSpecificDetails=[$preFillFromWO,$defaultAnsType,$defaultVal];
+	$sfm_act_formDesigner.createCheckListQuestion($sectionName1, $queCommonDetails, $queSpecificDetails);
+	
+	
+	//create Date Question in section - Value
+	var $queType="Date";
+	var $queName=$bo_act_common.generateRandomName("ch_date_");
+	var $helpURL="http://google.com/Doc";
+	var $tag="ch_date_-01";
+	var $addToLibAndForm=true;
+	var $queCommonDetails=[$queType,$queName,$helpURL,$tag,$addToLibAndForm];
+	
+	var $preFillFromWO=false;
+	var $defaultAnsType="Value";
+	var $defaultVal="10/18/2020";
+	var $queSpecificDetails=[$preFillFromWO,$defaultAnsType,$defaultVal];
+	$sfm_act_formDesigner.createCheckListQuestion($sectionName1, $queCommonDetails, $queSpecificDetails);
+	
+	//create Date Question in section - Function
+	var $queType="Date";
+	var $queName=$bo_act_common.generateRandomName("ch_date_");
+	var $helpURL="http://google.com/Doc";
+	var $tag="ch_date_-01";
+	var $addToLibAndForm=true;
+	var $queCommonDetails=[$queType,$queName,$helpURL,$tag,$addToLibAndForm];
+	
+	var $preFillFromWO=false;
+	var $defaultAnsType="Function";
+	var $defaultVal="Today";
+	var $queSpecificDetails=[$preFillFromWO,$defaultAnsType,$defaultVal];
+	$sfm_act_formDesigner.createCheckListQuestion($sectionName1, $queCommonDetails, $queSpecificDetails);
+	
+	
+	///////////// Question - Number //////////////////
+	//create Number Question in section - preFill
+	var $queType="Number";
+	var $queName=$bo_act_common.generateRandomName("ch_Number_");
+	var $helpURL="http://google.com/Doc";
+	var $tag="ch_Number_-01";
+	var $addToLibAndForm=true;
+	var $queCommonDetails=[$queType,$queName,$helpURL,$tag,$addToLibAndForm];
+	
+	var $preFillFromWO=true;
+	var $defaultVal="Time To Assignx";
+	var $queSpecificDetails=[$preFillFromWO,$defaultAnsType,$defaultVal];
+	$sfm_act_formDesigner.createCheckListQuestion($sectionName1, $queCommonDetails, $queSpecificDetails);
+	
+	
+	//create Number Question in section - No PreFill
+	var $queType="Number";
+	var $queName=$bo_act_common.generateRandomName("ch_Number_");
+	var $helpURL="http://google.com/Doc";
+	var $tag="ch_Number_-01";
+	var $addToLibAndForm=true;
+	var $queCommonDetails=[$queType,$queName,$helpURL,$tag,$addToLibAndForm];
+	
+	var $preFillFromWO=false;
+	var $defaultVal="12112";
+	var $queSpecificDetails=[$preFillFromWO,$defaultAnsType,$defaultVal];
+	$sfm_act_formDesigner.createCheckListQuestion($sectionName1, $queCommonDetails, $queSpecificDetails);
+	
+	///////////// Question -  Attachment//////////////////
+	//create Attachment Question in section - 
+	var $queType="Attachment";
+	var $queName=$bo_act_common.generateRandomName("ch_Attachment_");
+	var $helpURL="http://google.com/Doc";
+	var $tag="ch_Attachment_-01";
+	var $addToLibAndForm=true;
+	var $queCommonDetails=[$queType,$queName,$helpURL,$tag,$addToLibAndForm];
+	
+	var $includeINOPDOC=true;
+	var $descReq=true;
+	var $queSpecificDetails=[$includeINOPDOC,$descReq];
+	$sfm_act_formDesigner.createCheckListQuestion($sectionName1, $queCommonDetails, $queSpecificDetails);
+	
+	
+	///////////// Question - Checkbox //////////////////
+	//create Checkbox Question in section - response Set
+	var $queType="Checkbox";
+	var $queName=$bo_act_common.generateRandomName("ch_Checkbox_");
+	var $helpURL="http://google.com/Doc";
+	var $tag="ch_Checkbox_-01";
+	var $addToLibAndForm=true;
+	var $queCommonDetails=[$queType,$queName,$helpURL,$tag,$addToLibAndForm];
+	
+	
+	var $responseSet="Create New";
+	var $responseSetName=$bo_act_common.generateRandomName("ch_resSet_");
+	var $ansValueSet=["FSA","Back Office","DC2.0"];
+	var $default=[false,true,false];
+	var $chkQueDetails=[$responseSet,$responseSetName,$ansValueSet,$default];
+	$sfm_act_formDesigner.createCheckListQuestion($sectionName1, $queCommonDetails, $queSpecificDetails);
+	
+	
+	///////////// Question - Picklist //////////////////
+	//create Picklist Question in section - preFill without response set
+	var $queType="Picklist";
+	var $queName=$bo_act_common.generateRandomName("ch_Picklist_");
+	var $helpURL="http://google.com/Doc";
+	var $tag="ch_Picklist_-01";
+	var $addToLibAndForm=true;
+	var $queCommonDetails=[$queType,$queName,$helpURL,$tag,$addToLibAndForm];
+	
+	
+	var $preFillFromWO=true;
+	var $responseSet="";
+	var $responseSetName;
+	var $ansValueSet;
+	var $default;
+	var $picklistQueDetails=[$preFillFromWO,$responseSet,$responseSetName,$ansValueSet,$default]
+	$sfm_act_formDesigner.createCheckListQuestion($sectionName1, $queCommonDetails, $queSpecificDetails);
+	
 
+	//create Picklist Question in section - No preFill and with response set
+	var $queType="Picklist";
+	var $queName=$bo_act_common.generateRandomName("ch_Picklist_");
+	var $helpURL="http://google.com/Doc";
+	var $tag="ch_Picklist_-01";
+	var $addToLibAndForm=true;
+	var $queCommonDetails=[$queType,$queName,$helpURL,$tag,$addToLibAndForm];
+	
+	
+	var $preFillFromWO=true;
+	var $responseSet="Create New";
+	var $responseSetName=$bo_act_common.generateRandomName("ch_respSet_");;
+	var $ansValueSet=["PS","PQT","Classis App"];
+	var $default=[false, true, false];
+	var $picklistQueDetails=[$preFillFromWO,$responseSet,$responseSetName,$ansValueSet,$default];
+	$sfm_act_formDesigner.createCheckListQuestion($sectionName1, $queCommonDetails, $queSpecificDetails);
+	
+/*
+	
+	
 	//Adding question to section
 	var $questionNames=["i36-Date-01","i36-DateTime-01","Test-Number-01"];
 	$sfm_act_formDesigner.addQuestionToSection($sectionName1, $questionNames[0]);
@@ -148,7 +265,7 @@ $rs_formDesigner.start();
 	//_setSelected(sel_searchEntryCriteria,"rs_101_test");
 	//_f("main").s_textinput("/Save this filter as/").near();
 	
-
+*/
 	
 	
 $rs_formDesigner.end();

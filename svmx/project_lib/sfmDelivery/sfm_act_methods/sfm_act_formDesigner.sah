@@ -47,21 +47,37 @@ var $sfm_act_formDesigner = new function sfm_act_formDesigner() {
 	 * Example		:	Refer _ _ _ _ file for function usage
 	 */
 	this.createCheckListQuestion=function($sectionName,$queCommonDetails,$queSpecificDetails){
-
-		//var $queCommonDetails=[$queType,$queName,$helpURL,$tag,$addToLibAndForm];
 		var $queType=$queCommonDetails[0];
-		var $queName=$queCommonDetails[1];
-		var $helpURL=$queCommonDetails[2];
-		var $tag=$queCommonDetails[3];
-		var $addToLibAndForm=$queCommonDetails[4];
 		
 		_setStrictVisibilityCheck(true);
 		_selectDomain($g_domain);
 		_click(_f("main").s_richeditabletext($sectionName));
 		_click($sfm_pg_formDesigner.btn_addNewQuestion);
 		_click(_f("main").uiftetextfield($queType));
+		
+		//adding question details
+		this.addEditCheckListQuestionDetails($queCommonDetails, $queSpecificDetails);
+		_click($sfm_pg_formDesigner.btn_closeChkWindow);
+		_setStrictVisibilityCheck(false);
+	};
+	
+	this.editCheckListQuestion=function($sectionName,$queCommonDetails,$queSpecificDetails){
+		_selectDomain($g_domain);
+		var $queName=$queCommonDetails[1];
+		this.editQuestionInSection($sectionName, $queName);
+		this.addEditCheckListQuestion($queCommonDetails, $queSpecificDetails)
+		
+	};
+	
+	
+	this.addEditCheckListQuestionDetails=function($queCommonDetails, $queSpecificDetails){
+		var $queType=$queCommonDetails[0];
+		var $queName=$queCommonDetails[1];
+		var $helpURL=$queCommonDetails[2];
+		var $tag=$queCommonDetails[3];
+		var $addToLibAndForm=$queCommonDetails[4];
+		
 		_wait(2000,_isVisible($sfm_pg_formDesigner.tab_questionDetails));
-
 		//Common fields
 		_setValue($sfm_pg_formDesigner.txt_queName,$queName);
 		_setValue($sfm_pg_formDesigner.txt_helpURL,$helpURL);
@@ -86,7 +102,6 @@ var $sfm_act_formDesigner = new function sfm_act_formDesigner() {
 		}
 		
 	};
-	
 	
 	/**
 	 * Author		:	Anand Kakhandaki
@@ -126,8 +141,7 @@ var $sfm_act_formDesigner = new function sfm_act_formDesigner() {
 		var $ansValueSet=$chkQueDetails[2];
 		var $default=$chkQueDetails[3];
 		
-		_setSelected($sfm_pg_formDesigner.sel_responseSet, $responseSet);
-		if ($responseSet!=="Create New") {
+		if ($responseSet=="Create New") {
 			_setValue($sfm_pg_formDesigner.txt_responseSetName, $responseSetName);
 			for (var $i = 0; $i < $ansValueSet.length; $i++) {
 				var $ansField=null;
@@ -143,6 +157,8 @@ var $sfm_act_formDesigner = new function sfm_act_formDesigner() {
 					_click($sfm_pg_formDesigner.btn_default.near($ansField));
 				}
 			}
+		}else {
+			_setSelected($sfm_pg_formDesigner.sel_responseSet, $responseSet);
 		}
 	};
 	
@@ -220,8 +236,8 @@ var $sfm_act_formDesigner = new function sfm_act_formDesigner() {
 			_setSelected($sfm_pg_formDesigner.sel_sourceFieldinNumberQue, $defaultVal);
 		}
 	
-		_setSelected($sfm_pg_formDesigner.sel_responseSet, $responseSet);//Create New
-		if ($responseSet!=="Create New") {
+		//Create New
+		if ($responseSet=="Create New") {
 			_setValue($sfm_pg_formDesigner.txt_responseSetName, $responseSetName);
 			for (var $i = 0; $i < $ansValueSet.length; $i++) {
 				var $ansField=null;
@@ -237,6 +253,8 @@ var $sfm_act_formDesigner = new function sfm_act_formDesigner() {
 					_click($sfm_pg_formDesigner.btn_default.near($ansField));
 				}
 			}
+		}else {
+			_setSelected($sfm_pg_formDesigner.sel_responseSet, $responseSet);
 		}
 	};
 	
