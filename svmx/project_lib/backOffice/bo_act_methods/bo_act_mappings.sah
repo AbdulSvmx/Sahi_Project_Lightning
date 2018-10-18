@@ -19,9 +19,8 @@ var $bo_act_mappings = new function bo_act_mappings() {
 		}
 		_click(_f("main").s_label($containerName));
 		_click(_f("main").tab($mapType));
-		if((_isVisible($sfm_pg_sfmMapping.tab_fieldMapForExisting) && !(_isVisible($sfm_pg_sfmMapping.tab_valueMapForNew)))
-
-)		{
+		if((_isVisible($sfm_pg_sfmMapping.tab_fieldMapForExisting) && !(_isVisible($sfm_pg_sfmMapping.tab_valueMapForNew))))		
+		{
 			_click($sfm_pg_sfmMapping.btn_newButtonFieldMap);
 		}
 		else if(_isVisible($sfm_pg_sfmMapping.tab_valueMapForExisting)||_isVisible($sfm_pg_sfmMapping.tab_valueMapForNew)){
@@ -30,10 +29,9 @@ var $bo_act_mappings = new function bo_act_mappings() {
 		else if(_isVisible($sfm_pg_sfmMapping.tab_fieldMapForExisting)&&_isVisible($sfm_pg_sfmMapping.tab_valueMapForNew)&& $mapType == "Field Map For Existing Records"){
 			_click($sfm_pg_sfmMapping.btn_newButtonFieldMap);
 		}
-		else if(_isVisible($sfm_pg_sfmMapping.tab_fieldMapForExisting)&&_isVisible($sfm_pg_sfmMapping.tab_valueMapForNew)&&$mapType == "Value Map For New Records"){
+		else if(_isVisible($sfm_pg_sfmMapping.tab_fieldMapForExisting)&&_isVisible($sfm_pg_sfmMapping.tab_valueMapForNew)&& $mapType == "Value Map For New Records"){
 			_click($sfm_pg_sfmMapping.btn_newMappingExistingRecord);
 		}
-		
 		
 		_wait(6000);
 		if($pickListLabels.length > 0) {
@@ -79,10 +77,16 @@ var $bo_act_mappings = new function bo_act_mappings() {
 			_setValue($sfm_pg_sfmMapping.txt_mappingIdForNew,$mapName);	
 			
 	   }
+		else if(_isVisible($sfm_pg_sfmMapping.tab_fieldMapForExisting)&&_isVisible($sfm_pg_sfmMapping.tab_valueMapForNew)&&$mapType == "Field Map For Existing Records"){
+			_click($sfm_pg_sfmMapping.btn_saveFieldMap);
+		}
+		else if(_isVisible($sfm_pg_sfmMapping.tab_fieldMapForExisting)&&_isVisible($sfm_pg_sfmMapping.tab_valueMapForNew)&&$mapType == "Value Map For New Records"){
+			_click($sfm_pg_sfmMapping.btn_saveMappingExistingRecord);
+		}
 		if(_isVisible($sfm_pg_sfmMapping.tab_fieldMapForExisting) && !_isVisible($sfm_pg_sfmMapping.tab_valueMapForNew)){
 			_click($sfm_pg_sfmMapping.btn_saveFieldMap);
 		}
-		else if(_isVisible($sfm_pg_sfmMapping.tab_valueMapForExisting)){
+		else if(_isVisible($sfm_pg_sfmMapping.tab_valueMapForExisting) || _isVisible($sfm_pg_sfmMapping.tab_valueMapForNew)){
 			_click($sfm_pg_sfmMapping.btn_saveMappingExistingRecord);
 		}
 		else if(_isVisible($sfm_pg_sfmMapping.tab_valueMapForNew) && !_isVisible($sfm_pg_sfmMapping.tab_fieldMapForExisting))
@@ -96,8 +100,6 @@ var $bo_act_mappings = new function bo_act_mappings() {
 		else if(_isVisible($sfm_pg_sfmMapping.tab_fieldMapForExisting)&&_isVisible($sfm_pg_sfmMapping.tab_valueMapForNew)&&$mapType == "Value Map For New Records"){
 			_click($sfm_pg_sfmMapping.btn_saveMappingExistingRecord);
 		}
-		_wait(5000);
-		
 		if(_isVisible(_f("main").button("OK"))){
 			_click(_f("main").button("OK"));
 		}
@@ -161,8 +163,11 @@ var $bo_act_mappings = new function bo_act_mappings() {
 		}
 		_wait(5000);
 		}
+	
 	_wait(3000);
 	_setStrictVisibilityCheck(true);
+	_click(_f("main").s_button("Save").inside(_f("main").s_navigatorcontent($mapType)));
+	_wait(5000);
 	_wait(3000);
 
 	//_click($sfm_pg_sfmMapping.btn_switchOnMapping);
@@ -171,7 +176,7 @@ var $bo_act_mappings = new function bo_act_mappings() {
 	_click($bo_pg_sfmTransactionAndDesigner.btn_quickSave1);
 	_selectDomain();
 		
-	};
+};
 	
 	this.editExistingFieldsInMapping = function($containerName,$pickListLabels,$pickListValues,$textLabels,$textValues,$mapName){
 		//This function edits an existing mapping and saves the map with the same name.

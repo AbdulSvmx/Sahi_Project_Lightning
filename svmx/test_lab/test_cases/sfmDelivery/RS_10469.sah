@@ -127,7 +127,7 @@ _click($bo_pg_sfmTransactionAndDesigner.btn_quickSave1);
 
 //Create mapping for all possible standard data types.
 _click($bo_pg_sfmTransactionAndDesigner.btn_qualifyingCriteriaAndFieldMapping);
-$bo_act_mappings.createMapping("Work Detail (Work Order)",$mapType,[$fieldsToMap[0]],[$fieldsToMap[0]],[],[],$mapName);
+$bo_act_mappings.createMapping("Parts",$mapType,[$fieldsToMap[0]],[$fieldsToMap[0]],[],[],$mapName);
 _selectDomain();
 _setSpeed(1000);
 

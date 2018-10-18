@@ -441,8 +441,8 @@ this.editWorkOrder = function($textLabels,$textValues,$pickListLabels,$pickListV
 			}
 			_log($currentMultiValues);
 			for($p=0;$p<$currentMultiValues.length;$p++){
-				_click(_span($currentMultiValues[$p],_near(_div($uniqueMulti[$i]))));
-				_keyDown(_span($currentMultiValues[$p]),39,"CTRL");
+				_click(_span($currentMultiValues[$p],_in(_div("/Available/"),_near(_div("/"+$uniqueMulti[$i]+"/")))));
+				_call(_button("Move selection to Chosen").click());
 			}
 		
 			
