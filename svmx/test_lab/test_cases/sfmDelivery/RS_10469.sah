@@ -11,8 +11,11 @@ var $lineType = "Parts";
 var $fieldsAbsentInPage = [];
 var $ctr = 0;
 var $i = 0;
+var $currentWizardName = $wizardName[4];
+var $pageLayoutForProfile = "SVMX Work Details Usage - Admin";
 var $myDomain = "/lightning/";
 var $tempFields = ["Age"];
+var $mapType = "Field Map For Existing Records";
 var $multiPicklistValues = ["Multipicklist1","Multipicklist2","Multipicklist3"];
 var $initialChildFields = ["Line Type","Record Type ID","Line Number"];
 var $initalChildContainers = [$lineType,$lineType,$lineType];
@@ -100,15 +103,16 @@ _wait(60000, _isVisible($bo_pg_sfmTransactionAndDesigner.txt_name));
 _setValue($bo_pg_sfmTransactionAndDesigner.txt_name, $processName);
 _setValue($bo_pg_sfmTransactionAndDesigner.txt_sfmTransactionId,"");
 _setValue($bo_pg_sfmTransactionAndDesigner.txt_sfmTransactionId,$processName);
-//_setSelected($bo_pg_sfmTransactionAndDesigner.list_objComboBox,$objectName);
+_setSelected($bo_pg_sfmTransactionAndDesigner.list_sourceHeaderList,$objectName);
 if(_isVisible($bo_pg_sfmTransactionAndDesigner.btn_popUpOK)){
 	_click($bo_pg_sfmTransactionAndDesigner.btn_popUpOK);
 }
 _click($bo_pg_sfmTransactionAndDesigner.list_sourceChild);
 _click($bo_pg_sfmTransactionAndDesigner.list_targetChild);
 _setValue($bo_pg_sfmTransactionAndDesigner.text_targetChildAlias,"Parts");
+_click($bo_pg_sfmTransactionAndDesigner.chkbx_targetChild2);
 _click($bo_pg_sfmTransactionAndDesigner.btn_qualifyingCriteriaAndFieldMapping);
-_setSelected($bo_pg_sfmTransactionAndDesigner.list_childMappingCombo,"Work Detail (Case)");
+_setSelected($bo_pg_sfmTransactionAndDesigner.list_childMappingCombo,"Work Detail (Work Order)");
 _click($bo_pg_sfmTransactionAndDesigner.btn_screenDesigner);
 _wait(6000);
 _click($bo_pg_sfmTransactionAndDesigner.btn_newPageLayout);
@@ -123,7 +127,7 @@ _click($bo_pg_sfmTransactionAndDesigner.btn_quickSave1);
 
 //Create mapping for all possible standard data types.
 _click($bo_pg_sfmTransactionAndDesigner.btn_qualifyingCriteriaAndFieldMapping);
-$bo_act_mappings.createMapping("Work Detail (Work Order)",[],[],[],[],$mapName);
+$bo_act_mappings.createMapping("Work Detail (Work Order)",$mapType,[$fieldsToMap[0]],[$fieldsToMap[0]],[],[],$mapName);
 _selectDomain();
 _setSpeed(1000);
 

@@ -118,6 +118,7 @@ var $bo_pg_sfmTransactionAndDesigner = new function bo_pg_sfmTransactionAndDesig
 	this.clkNewMapID=_f("main").s_textinput("Input ID Here[1]");
 	this.clkMapSave=_f("main").s_button("Save[1]");
 	this.QCFieldMapQuickFind=_f("main").s_textinput("filterInput").rightOf(_f("main").s_label("Quick Find"),10,10);
+	this.list_sourceHeaderList = _f("main").s_combobox("objCombo1").inside_f("main").s_label("Use data from...");
 	this.list_objComboBox = _f("main").s_combobox("objCombo1").inside(_f("main").s_panel("...to create these records"));
 	this.txtworkdetailaliasname = _f("main").s_textinput("/aliasName/").near(_f("main").s_checkbox("Work Detail (Work Order)"));
 	this.txt_contactOnHeader=_f("main").s_textinput("/.*/").near(_f("main").uiftetextfield("Contact").near(_f("main").s_richtext("Work Order")));
@@ -237,8 +238,9 @@ var $bo_pg_sfmTransactionAndDesigner = new function bo_pg_sfmTransactionAndDesig
     this.list_sourceChild = _f("main").s_checkbox("Work Detail (Work Order)").inside(_f("main").s_panel("Use data from..."));
     this.list_targetChild = _f("main").s_checkbox("Work Detail (Work Order)").inside(_f("main").s_panel("...to create these records"));
     this.text_targetChildAlias = _f("main").s_textinput("aliasName").rightOf(_f("main").s_checkbox("Work Detail (Work Order)").inside(_f("main").s_panel("...to create these records")));
-    this.list_childMappingCombo = _f("main").s_dropdownlist("objCombo");
-    
+    this.list_childMappingCombo = _f("main").s_dropdownlist("objCombo").inside(_f("main").s_list("mapList"));
+    this.list_sourceHeaderList = _f("main").s_combobox("objCombo1").inside(_f("main").s_panel("Use data from..."));
+    this.chkbx_targetChild2 = _f("main").s_checkbox("Work Detail (Work Order)[2]");//index used as _count logic does not work in flex.written to Sahi Support.
     
 
 };
