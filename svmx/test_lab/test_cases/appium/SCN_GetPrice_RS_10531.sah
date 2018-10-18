@@ -21,10 +21,11 @@ var $IB10539Name =  $data_excel_10539[2]["Data6"];
 $bo_act_login.login($g_url, $appiumAdminUn, $appiumAdminPwd);
 $sfm_act_lightningConfig.switchToLightning();
 
-
-$bo_act_configurationProfiles.editGroupProfileForBooleanSettings($admin_group_profile,$module,$submodule, "SET024", true);
-$bo_act_configurationProfiles.editGroupProfileForBooleanSettings($admin_group_profile,$module,$submodule, "SET025", true);
-$bo_act_configurationProfiles.editGroupProfileForBooleanSettings($admin_group_profile,$module,$submodule, "SET026", true);
+var $module = "Entitlement Verification";
+var $submodule = "Work Order Entitlement VF";
+//$bo_act_configurationProfiles.editGroupProfileForBooleanSettings($admin_group_profile,$module,$submodule, "SET024", true);
+//$bo_act_configurationProfiles.editGroupProfileForBooleanSettings($admin_group_profile,$module,$submodule, "SET025", true);
+//$bo_act_configurationProfiles.editGroupProfileForBooleanSettings($admin_group_profile,$module,$submodule, "SET026", true);
 
 // to get the IBID fpr 10538
 
@@ -156,18 +157,18 @@ $Productname10531 =$sfm_act_restApiMethods.getRestApi($appiumAdminUn,$appiumAdmi
 _log($Productname10531);
 
 //Add Standard Price to the Product
-_wait(50000);
+_wait(30000);
 $bo_act_navigation.navigateToCreatedRecordUsingGlobalSearch($Productname10531);
 
 
 var $standardPriceValue = 750;
 $bo_act_products.addStandardPriceForProduct($Productname10531, $standardPriceValue);
 
+_wait(20000);
 
 $excel.insertUnderColumn("/auto/SVMX_Catalyst/fsaautomation/resources/TestData.xlsx", "RS_10531", "Data1",$WOName,"2");
 $excel.insertUnderColumn("/auto/SVMX_Catalyst/fsaautomation/resources/TestData.xlsx", "RS_10531", "Data2",$Productname10531 ,"2");
-var $module = "Entitlement Verification";
-var $submodule = "Work Order Entitlement VF";
+
 $bo_act_configurationProfiles.editGroupProfileForBooleanSettings($admin_group_profile,$module,$submodule, "SET024", false);
 $bo_act_configurationProfiles.editGroupProfileForBooleanSettings($admin_group_profile,$module,$submodule, "SET025", false);
 $bo_act_configurationProfiles.editGroupProfileForBooleanSettings($admin_group_profile,$module,$submodule, "SET026", false);
