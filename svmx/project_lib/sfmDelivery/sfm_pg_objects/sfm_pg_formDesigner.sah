@@ -74,6 +74,42 @@ var $sfm_pg_formDesigner = new function sfm_pg_formDesigner() {
 	this.tab_questionDetails=_f("main").tab("Question Details");
 	this.btn_dvrSave=_f("main").s_button("Save").near(this.tab_questionDetails);
 	
+	
+	//Create Checklsit Objects
+	this.btn_addNewQuestion=_f("main").s_button("Add new question");
+	this.txt_queName=_f("main").s_textinput("questionText");
+	this.txt_helpURL=_f("main").s_textinput("helpUrl");
+	this.txt_tag=_f("main").uitextfield(0).near(_f("main").s_label("Tags"));
+	this.btn_addToLib=_f("main").s_button("Add to Library Only");
+	this.btn_addToLibAndForm=_f("main").s_button("Add to Library and Form");
+	
+	//attachment
+	this.btn_includeINPDOC=_f("main").s_checkbox("Include in Output Document");
+	this.btn_descReq=_f("main").s_checkbox("Description required");
+	
+	//Checkbox
+	this.label_ansValue=_f("main").s_label("Answer Values");
+	this.btn_addAns=_f("main").s_button("Add an Answer");
 	this.label_saveEditSectionMsg=_f("main").uiftetextfield("Please save SFM Transaction to save changes");
+	this.btn_default=_f("main").s_checkbox("Default");
+	this.txt_responseSetName=_f("main").s_textinput("responseSetName");
+	this.sel_responseSet=_f("main").s_dropdownlist("responseSet");
+	
+	//Date
+	this.btn_preFill=_f("main").s_checkbox("Prefill with value from Work Order");
+	this.sel_sourceField=_f("main").s_combobox("sourceObjPickList");
+	this.sel_defaultAnsType=_f("main").s_dropdownlist("operandTypeCombo");
+	this.txt_dateField=_f("main").s_richeditabletext("/textDisplay/").near(_f("main").mxftetextinput(0));
+	this.sel_dateFunction=_f("main").s_combobox("picklist");
+	
+	//Number
+	this.txt_defaultAns=_f("main").s_textinput("defaultResponseIdTxtInp");
+	
+	//picklsit
+	this.btn_preFillinNumberQue=_f("main").s_checkbox("Prefill with value from Work Order").near(sel_responseSet);
+	this.sel_sourceFieldinNumberQue=_f("main").s_combobox("sourceObjPickListMulti");
+	
+	
+	
 };
 

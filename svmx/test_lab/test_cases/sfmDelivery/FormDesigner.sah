@@ -23,6 +23,33 @@ $rs_formDesigner.start();
 	//Checklist - Form Designer
 	_click($sfm_pg_formDesigner.tab_formDesigner);
 	
+	
+	$bo_act_checklistdesigner.addQuestion($dataType, $questionText, $prefix, $pickListValue)
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	var $sectionName1="Disassemble System";
 	var $sectionName2="Replace Hardisc";
 	

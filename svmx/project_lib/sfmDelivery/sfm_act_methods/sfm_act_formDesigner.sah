@@ -37,6 +37,178 @@ var $sfm_act_formDesigner = new function sfm_act_formDesigner() {
 		_setValue($sfm_pg_formDesigner.txt_helpURL,$url);
 	};
 	
+	
+	/**
+	 * Author		:	Anand Kakhandaki
+	 * Function		: 	To Create CheckList Question
+	 * Parameter	:	$sectionName=Section name
+	 * 					$queCommonDetails=Array of $queType,$queName,$helpURL,$tag,$addToLibAndForm details
+	 * 					$queSpecificDetails=Array of details needed for specific question
+	 * Example		:	Refer _ _ _ _ file for function usage
+	 */
+	this.createCheckListQuestion=function($sectionName,$queCommonDetails,$queSpecificDetails){
+
+		//var $queCommonDetails=[$queType,$queName,$helpURL,$tag,$addToLibAndForm];
+		var $queType=$queCommonDetails[0];
+		var $queName=$queCommonDetails[1];
+		var $helpURL=$queCommonDetails[2];
+		var $tag=$queCommonDetails[3];
+		var $addToLibAndForm=$queCommonDetails[4];
+		
+		_setStrictVisibilityCheck(true);
+		_selectDomain($g_domain);
+		_click(_f("main").s_richeditabletext($sectionName));
+		_click($sfm_pg_formDesigner.btn_addNewQuestion);
+		_click(_f("main").uiftetextfield($queType));
+		_wait(2000,_isVisible($sfm_pg_formDesigner.tab_questionDetails));
+
+		//Common fields
+		_setValue($sfm_pg_formDesigner.txt_queName,$queName);
+		_setValue($sfm_pg_formDesigner.txt_helpURL,$helpURL);
+		_setValue(_setValue($sfm_pg_formDesigner.txt_tag,$tag));
+		
+		if ($queType=="Attachment") {
+			this.createAttachementQue($queSpecificDetails);
+		}else if ($queType=="Checkbox" || $queType=="Multi-select Picklist" ) {
+			this.createCheckBoxQue($queSpecificDetails);
+		}else if ($queType=="Date"||$queType=="Date Time") {
+			this.createDateQue($queSpecificDetails);
+		}else if ($queType=="Picklist"||$queType=="Radio Button") {
+			this.createPicklistQue($queSpecificDetails);
+		}else if ($queType=="Number"||$queType=="Text") {
+			this.createNumberQue($queSpecificDetails);
+		}
+		_wait(5000);
+		if ($addToLibAndForm==true) {
+			_click($sfm_pg_formDesigner.btn_addToLibAndForm);
+		}else {
+			_click($sfm_pg_formDesigner.btn_addToLib);
+		}
+		
+	};
+	
+	
+	/**
+	 * Author		:	Anand Kakhandaki
+	 * Function		: 	To Create CheckList Question
+	 * Parameter	:	$attQueDetails=Array of $includeINOPDOC,$descReq details in true/false
+	 * 
+	 * Example		:	Refer _ _ _ _ file for function usage
+	 */
+	this.createAttachementQue=function($attQueDetails){
+		//attachment parameter
+		//$attQueDetails=[$includeINOPDOC,$descReq]
+		var $includeINOPDOC=$attQueDetails[0];
+		var $descReq=$attQueDetails[1];
+
+		if ($includeINOPDOC==false) {
+			_click($sfm_pg_formDesigner.btn_includeINPDOC);
+		}
+		if ($descReq==false) {
+			_click($sfm_pg_formDesigner.btn_descReq);
+		}
+	};
+	
+	/**
+	 * Author		:	Anand Kakhandaki
+	 * Function		: 	To Create CheckList Question
+	 * Parameter	:	$attQueDetails=Array of $responseSet,$responseSetName,$ansValueSet,$default
+	 * 				:   $responseSet=Name of already available Response set name
+	 * 				:   
+	 * 				:
+	 * 				:
+	 * Example		:	Refer _ _ _ _ file for function usage
+	 */
+	this.createCheckBoxQue=function($chkQueDetails){
+		//$chkQueDetails=[$responseSet,$responseSetName,$ansValueSet,$default]
+		var $responseSet=$chkQueDetails[0];
+		var $responseSetName=$chkQueDetails[1];
+		var $ansValueSet=$chkQueDetails[2];
+		var $default=$chkQueDetails[3];
+		
+		_setSelected($sfm_pg_formDesigner.sel_responseSet, $responseSet);
+		if ($responseSet!=="Create New") {
+			_setValue($sfm_pg_formDesigner.txt_responseSetName, $responseSetName);
+			for (var $i = 0; $i < $ansValueSet.length; $i++) {
+				var $ansField=null;
+				if ($i==0) {
+					$ansField=_f("main").s_textinput("/ansValue/").near($sfm_pg_formDesigner.label_ansValue);
+					_setValue($ansField,$ansValueSet[$i]);	
+				}else{
+					_click($sfm_pg_formDesigner.btn_addAns);
+					$ansField=_f("main").s_textinput("ansValue["+$i+"]").near($sfm_pg_formDesigner.label_ansValue);
+					_setValue($ansField,$ansValueSet[$i]);	
+				}
+				if ($default[$i]==true) {
+					_click($sfm_pg_formDesigner.btn_default.near($ansField));
+				}
+			}
+		}
+	};
+	
+	this.createDateQue=function($dateQueDetails){
+		var $preFillFromWO=$dateQueDetails[0];
+		var $defaultAnsType=$dateQueDetails[1];
+		var $defaultVal=$dateQueDetails[2];
+	
+		if ($preFillFromWO==true) {
+			_click($sfm_pg_formDesigner.btn_preFill);
+			_setSelected($sfm_pg_formDesigner.sel_sourceField, $defaultVal);
+		}else {
+			_setSelected($sfm_pg_formDesigner.sel_defaultAnsType,$defaultAnsType);
+			if ($defaultAnsType=="Value") {
+				_setValue($sfm_pg_formDesigner.txt_dateField,$defaultVal);
+			}else {
+				_setSelected($sfm_pg_formDesigner.sel_dateFunction, $defaultVal);
+			}
+		}
+	};
+	
+	this.createNumberQue=function($numberQueDetails){
+		var $preFillFromWO=$numberQueDetails[0];
+		var $defaultVal=$dateQueDetails[2];
+		
+		if ($preFillFromWO==true) {
+			_click($sfm_pg_formDesigner.btn_preFill);
+			_setSelected($sfm_pg_formDesigner.sel_sourceField, $defaultVal);
+		}else {
+			_setValue($sfm_pg_formDesigner.txt_defaultAns,$defaultVal);
+		}
+	};
+	
+	this.createPicklistQue=function($picklistQueDetails){
+		var $preFillFromWO=$picklistQueDetails[0];
+		var $responseSet=$chkQueDetails[1];
+		var $responseSetName=$chkQueDetails[2];
+		var $ansValueSet=$chkQueDetails[3];
+		var $default=$chkQueDetails[4];
+		
+		if ($preFillFromWO==true) {
+			_click($sfm_pg_formDesigner.btn_preFillinNumberQue);
+			_setSelected($sfm_pg_formDesigner.sel_sourceFieldinNumberQue, $defaultVal);
+		}
+	
+		_setSelected($sfm_pg_formDesigner.sel_responseSet, $responseSet);//Create New
+		if ($responseSet!=="Create New") {
+			_setValue($sfm_pg_formDesigner.txt_responseSetName, $responseSetName);
+			for (var $i = 0; $i < $ansValueSet.length; $i++) {
+				var $ansField=null;
+				if ($i==0) {
+					$ansField=_f("main").s_textinput("/ansValue/").near($sfm_pg_formDesigner.label_ansValue);
+					_setValue($ansField,$ansValueSet[$i]);	
+				}else{
+					_click($sfm_pg_formDesigner.btn_addAns);
+					$ansField=_f("main").s_textinput("ansValue["+$i+"]").near($sfm_pg_formDesigner.label_ansValue);
+					_setValue($ansField,$ansValueSet[$i]);	
+				}
+				if ($default[$i]==true) {
+					_click($sfm_pg_formDesigner.btn_default.near($ansField));
+				}
+			}
+		}
+	};
+	
+	
 	/**
 	 * Author		:	Anand Kakhandaki
 	 * Function		: 	To Create Entry criteria for checklist section
