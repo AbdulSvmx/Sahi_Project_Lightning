@@ -25,7 +25,7 @@ function cleanUp(){
 	_log("Process" +$processName+" deleted");
 	_log("Cleanup completed");
 }
-var $RS_10472 = _testcase("RS_10472","Verify Field Map for new records - Header");
+var $RS_10472 = _testcase("RS_10472","Verify Field Map for existing records - Header");
 $RS_10472.start();
 //Variables used
 var $objectName = "Work Order";
@@ -49,6 +49,7 @@ var $customFieldsNames = ["Automation URL","Automation multipicklist","Automatio
 var $pageLayoutForProfile = "SVMX Work Order - Admin";
 var $myDomain = "/lightning/";
 var $multiPicklistValues = ["Multipicklist1","Multipicklist2","Multipicklist3"];
+var $mapType = "Field Map For Existing Records";
 
 //Appending current timestamp to process name to make it unique.
 var $timeStamp = $bo_act_navigation.getCurrentTimeStamp();
@@ -138,7 +139,7 @@ _wait(3000);
 
 //Create mapping for all possible standard data types.
 _click($bo_pg_sfmTransactionAndDesigner.btn_qualifyingCriteriaAndFieldMapping);
-$bo_act_mappings.createMapping("Work Order",$fieldsToMap,$fieldsToMap,[],[],$mapName);
+$bo_act_mappings.createMapping("Work Order",$mapType,$fieldsToMap,$fieldsToMap,[],[],$mapName);
 _selectDomain();
 _setSpeed(1000);
 

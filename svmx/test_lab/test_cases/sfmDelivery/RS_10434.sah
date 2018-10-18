@@ -20,6 +20,7 @@ var $textLabels = ["Closed By","Site"];
 var $textValues = ["SVMX.CURRENTUSERID","SVMX.USERTRUNK"];
 var $inventoryLocation = "Bangalore East";
 var $productName = "Chrome";
+var $mapType = "Value Map for Existing Records";
 
 //Appending current timestamp to process name to make it unique.
 var $timeStamp = $bo_act_navigation.getCurrentTimeStamp();
@@ -48,7 +49,7 @@ _click($bo_pg_sfmTransactionAndDesigner.btn_qualifyingCriteriaAndFieldMapping);
 
 //Set up the mapping with SVMX.CURRENTRECORD literals for Header
 _selectDomain($g_domain);
-$bo_act_mappings.createMapping("Work Order",[],[],$textLabels,$textValues,$mapName);
+$bo_act_mappings.createMapping("Work Order",$mapType,[],[],$textLabels,$textValues,$mapName);
 _setSpeed(1000);
 //Add the custom process to SFM wizard.
 $sfm_act_wizards.addToWizard($object_name,$currentWizardName,"SFM",$processName);
@@ -76,8 +77,9 @@ _wait(5000);
 _selectWindow("/SFM Transaction Designer/");
 _wait(10000);
 $textLabels = ["Canceled By","Consumed From Location"];
+$mapType = "Value Map for New Records";
 _click($bo_pg_sfmTransactionAndDesigner.btn_qualifyingCriteriaAndFieldMapping);
-$bo_act_mappings.createMapping("Parts",[],[],$textLabels,$textValues,$mapName);
+$bo_act_mappings.createMapping("Parts",$mapType,[],[],$textLabels,$textValues,$mapName);
 _closeWindow();
 _selectWindow();
 
