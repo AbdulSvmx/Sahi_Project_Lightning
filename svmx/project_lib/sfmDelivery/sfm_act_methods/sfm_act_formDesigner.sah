@@ -202,7 +202,7 @@ var $sfm_act_formDesigner = new function sfm_act_formDesigner() {
 	this.createNumberQue=function($numberQueDetails){
 		//$numberQueDetails=[$preFillFromWO,$defaultVal]
 		var $preFillFromWO=$numberQueDetails[0];
-		var $defaultVal=$dateQueDetails[2];
+		var $defaultVal=$numberQueDetails[1];
 		
 		if ($preFillFromWO==true) {
 			_click($sfm_pg_formDesigner.btn_preFill);
@@ -226,10 +226,10 @@ var $sfm_act_formDesigner = new function sfm_act_formDesigner() {
 	this.createPicklistQue=function($picklistQueDetails){
 		//$picklistQueDetails=[$preFillFromWO,$responseSet,$responseSetName,$ansValueSet,$default]
 		var $preFillFromWO=$picklistQueDetails[0];
-		var $responseSet=$chkQueDetails[1];
-		var $responseSetName=$chkQueDetails[2];
-		var $ansValueSet=$chkQueDetails[3];
-		var $default=$chkQueDetails[4];
+		var $responseSet=$picklistQueDetails[1];
+		var $responseSetName=$picklistQueDetails[2];
+		var $ansValueSet=$picklistQueDetails[3];
+		var $default=$picklistQueDetails[4];
 		
 		if ($preFillFromWO==true) {
 			_click($sfm_pg_formDesigner.btn_preFillinNumberQue);

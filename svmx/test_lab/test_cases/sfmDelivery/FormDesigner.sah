@@ -56,7 +56,7 @@ $rs_formDesigner.start();
 	var $defaultVal="Date1";
 	var $queSpecificDetails=[$preFillFromWO,$defaultAnsType,$defaultVal];
 	$sfm_act_formDesigner.createCheckListQuestion($sectionName1, $queCommonDetails, $queSpecificDetails);
-	
+/*	
 	
 	//create Date Question in section - Value
 	var $queType="Date";
