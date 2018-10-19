@@ -167,7 +167,7 @@ var $bo_act_mappings = new function bo_act_mappings() {
 			else if(_isVisible($sfm_pg_sfmMapping.tab_fieldMapForExisting)&&_isVisible($sfm_pg_sfmMapping.tab_valueMapForNew)&&$mapType == "Field Map For Existing Records"){
 				_click($sfm_pg_sfmMapping.btn_saveFieldMap);
 			}
-			else if(_isVisible($sfm_pg_sfmMapping.tab_fieldMapForExisting)&&_isVisible($sfm_pg_sfmMapping.tab_valueMapForNew)&&$mapType == "Value Map For New Records"){
+			else if(_isVisible($sfm_pg_sfmMapping.tab_fieldMapForExisting)&&_isVisible($sfm_pg_sfmMapping.tab_valueMapForNew)&&$mapType == "Value Map for New Records"){
 				_click($sfm_pg_sfmMapping.btn_saveMappingExistingRecord);
 			}
 			_wait(5000);
@@ -253,7 +253,7 @@ var $bo_act_mappings = new function bo_act_mappings() {
 		_selectDomain($g_domain);	
 		_click($sfm_pg_sfmMapping.btn_mappingTab);
 		_click(_f("main").s_label($containerName));
-		_setSelected(_f("main").s_combobox("searchCombo").inside(_f("main").s_navigatorcontent("Value Map for Existing Records")),$mapName);
+		_setSelected(_f("main").s_combobox("searchCombo").inside(_f("main").s_navigatorcontent($mapType)),$mapName);
 		_click($sfm_pg_sfmMapping.btn_toggleMapOnOff);
 		if($pickListLabels.length > 0){
 					for($i=0;$i<$pickListLabels.length;$i++){
