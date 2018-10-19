@@ -28,7 +28,7 @@ var $pickListLabels = ["Order Status"];
 var $pickListValues = ["Open"];
 var $textLabels = [];
 var $textValues = [];
-var $mapType = "Value Map for Existing Records";
+var $mapType = "Value Map For Existing Records";
 
 
 //Appending current timestamp to process name to make it unique.
