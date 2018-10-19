@@ -1006,7 +1006,17 @@ var $sfm_act_Transactions = new function sfm_act_Transactions() {
 			_wait(5000,isVisible($bo_pg_sfmTransactionAndDesigner.label_exprSaved));
 		};
 		
-		
+		/**
+		* Author		:	Anand Kakhandaki
+		* Function		: 	To add expression rows
+		* Parameter		:	$comboField = 
+		* 					$comboConditions = 
+		* 					$toggleButton = 
+		* 					$comboInput=
+		* 					$advExpr=
+		* 					$errMsg=
+		* Example		:	Refer RS_10463.sah file for function usage
+		*/
 		this.sfmAddExpressionRows=function($comboField,$comboConditions,$toggleButton,$comboInput,$advExpr,$errMsg){
 			if ($comboField.length==1) {
 				_click($sfm_pg_screenDesigner.btn_deleteRow.near(_f("main").s_label("2")));
