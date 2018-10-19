@@ -20,7 +20,7 @@ var $textLabels = ["Closed By","Site"];
 var $textValues = ["SVMX.CURRENTUSERID","SVMX.USERTRUNK"];
 var $inventoryLocation = "Bangalore East";
 var $productName = "Chrome";
-var $mapType = "Value Map For Existing Records";
+var $mapType = "Value Map for Existing Records";
 
 //Appending current timestamp to process name to make it unique.
 var $timeStamp = $bo_act_navigation.getCurrentTimeStamp();

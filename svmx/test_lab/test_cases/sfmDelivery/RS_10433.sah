@@ -24,7 +24,7 @@ var $inputDateTimeLabels = ["Previous Scheduled Date Time"];
 var $inputDateValues = ["04/11/2018"];
 var $inputTimeValues = ["1:30 PM"];
 var $mapTextValues = ["Booked Appointment Slot","Dispatch Priority","Scheduled Date Time"];
-var $mapType = "Value Map For Existing Records";
+var $mapType = "Value Map for Existing Records";
 //Appending current timestamp to process name to make it unique.
 var $timeStamp = $bo_act_navigation.getCurrentTimeStamp();
 $processName = $processName + "_" + $timeStamp;
