@@ -152,26 +152,27 @@ var $bo_act_mappings = new function bo_act_mappings() {
 				_setValue($sfm_pg_sfmMapping.txt_mappingIdForNew,$mapName);
 			}
 				
-	}
-		if(_isVisible($sfm_pg_sfmMapping.tab_fieldMapForExisting) && !_isVisible($sfm_pg_sfmMapping.tab_valueMapForNew)){
-			_click($sfm_pg_sfmMapping.btn_saveFieldMap);
-		}
-		else if(_isVisible($sfm_pg_sfmMapping.tab_valueMapForExisting)){
-			_click($sfm_pg_sfmMapping.btn_saveMappingExistingRecord);
-		}
-		else if(_isVisible($sfm_pg_sfmMapping.tab_valueMapForNew) && !_isVisible($sfm_pg_sfmMapping.tab_fieldMapForExisting))
-			{
-			_click($sfm_pg_sfmMapping.btn_saveMappingExistingRecord);
-			//_click($sfm_pg_sfmMapping.btn_switchOnMapping);
+	
+			if(_isVisible($sfm_pg_sfmMapping.tab_fieldMapForExisting) && !_isVisible($sfm_pg_sfmMapping.tab_valueMapForNew)){
+				_click($sfm_pg_sfmMapping.btn_saveFieldMap);
 			}
-		else if(_isVisible($sfm_pg_sfmMapping.tab_fieldMapForExisting)&&_isVisible($sfm_pg_sfmMapping.tab_valueMapForNew)&&$mapType == "Field Map For Existing Records"){
-			_click($sfm_pg_sfmMapping.btn_saveFieldMap);
+			else if(_isVisible($sfm_pg_sfmMapping.tab_valueMapForExisting)){
+				_click($sfm_pg_sfmMapping.btn_saveMappingExistingRecord);
+			}
+			else if(_isVisible($sfm_pg_sfmMapping.tab_valueMapForNew) && !_isVisible($sfm_pg_sfmMapping.tab_fieldMapForExisting))
+				{
+				_click($sfm_pg_sfmMapping.btn_saveMappingExistingRecord);
+				//_click($sfm_pg_sfmMapping.btn_switchOnMapping);
+				}
+			else if(_isVisible($sfm_pg_sfmMapping.tab_fieldMapForExisting)&&_isVisible($sfm_pg_sfmMapping.tab_valueMapForNew)&&$mapType == "Field Map For Existing Records"){
+				_click($sfm_pg_sfmMapping.btn_saveFieldMap);
+			}
+			else if(_isVisible($sfm_pg_sfmMapping.tab_fieldMapForExisting)&&_isVisible($sfm_pg_sfmMapping.tab_valueMapForNew)&&$mapType == "Value Map For New Records"){
+				_click($sfm_pg_sfmMapping.btn_saveMappingExistingRecord);
+			}
+			_wait(5000);
 		}
-		else if(_isVisible($sfm_pg_sfmMapping.tab_fieldMapForExisting)&&_isVisible($sfm_pg_sfmMapping.tab_valueMapForNew)&&$mapType == "Value Map For New Records"){
-			_click($sfm_pg_sfmMapping.btn_saveMappingExistingRecord);
-		}
-		_wait(5000);
-		}
+	}
 	
 	_wait(3000);
 	_setStrictVisibilityCheck(true);
