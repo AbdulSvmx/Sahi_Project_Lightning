@@ -59,8 +59,8 @@ var $bo_act_mappings = new function bo_act_mappings() {
 				}
 			}
 		}
-		_setValue(_f("main").s_textinput("Save this map as").inside(_f("main").s_navigatorcontent($mapType),$mapName));
-		_setValue(_f("main").s_textinput("Input ID Here").inside(_f("main").s_navigatorcontent($mapType),$mapName));
+		_setValue(_f("main").s_textinput("Save this map as").inside(_f("main").s_navigatorcontent($mapType)),$mapName);
+		_setValue(_f("main").s_textinput("Input ID Here").inside(_f("main").s_navigatorcontent($mapType)),$mapName);
 		
 		_click(_f("main").s_button("Save").inside(_f("main").s_navigatorcontent($mapType)));
 		if(_isVisible(_f("main").button("OK"))){
@@ -89,8 +89,8 @@ var $bo_act_mappings = new function bo_act_mappings() {
 			}
 			else {
 				
-					_setValue(_f("main").s_textinput("Save this map as").inside(_f("main").s_navigatorcontent($mapType),$mapName));
-					_setValue(_f("main").s_textinput("Input ID Here").inside(_f("main").s_navigatorcontent($mapType),$mapName));
+					_setValue(_f("main").s_textinput("Save this map as").inside(_f("main").s_navigatorcontent($mapType)),$mapName);
+					_setValue(_f("main").s_textinput("Input ID Here").inside(_f("main").s_navigatorcontent($mapType)),$mapName);
 					_click(_f("main").s_button("Save").inside(_f("main").s_navigatorcontent($mapType)));
 					_wait(5000);
 		}
