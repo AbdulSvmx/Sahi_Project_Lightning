@@ -89,7 +89,7 @@ _setSelected(_f("main").s_combobox("valuesCombo[1]"), "Closed");
 _setValue($bo_pg_sfmTransactionAndDesigner.txt_sfmSavePageLayoutAsId, "1 OR 2");
 _setValue($bo_pg_sfmTransactionAndDesigner.txt_saveExprAs, $processName);;
 _setValue($bo_pg_sfmTransactionAndDesigner.txt_inputIdAs, $processName);
-_click(_f("main").s_button("Save As"));
+_click($bo_pg_sfmTransactionAndDesigner.button_saveAsQcTab);
 _assertVisible($bo_pg_sfmTransactionAndDesigner.label_exprSaved);
 _click($bo_pg_sfmTransactionAndDesigner.btn_quickSave1);
 if(_condition(_isVisible($bo_pg_sfmTransactionAndDesigner.btn_proceed_anyways))){
