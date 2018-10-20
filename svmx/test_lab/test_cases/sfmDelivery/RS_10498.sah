@@ -26,7 +26,7 @@ var $tempFields = ["Age"];
 var $initialChildFields = ["Line Type","Record Type ID","Line Number"];
 var $initalChildContainers = [$lineType,$lineType,$lineType];
 var $initialChildValues = [$lineType,"Usage/Consumption"];
-var $additionalFields = ["Include in Quote","Account","Billable Line Price","Date Received","Automation ChildDate2","Automation ChildDate3","Start Date and Time","End Date and Time","Closed On","Canceled On","Automation ChildEmail","Automation Childmultipicklist","Billable Qty","Automation ChildPercent","Automation ChildPhone","Cost Category","Received City","Received Street","Reference Information","Automation ChildURL"];
+var $additionalFields = ["Include in Quote","Account","Billable Line Price","Date Received","Automation ChildDate3","Automation ChildDate2","Start Date and Time","End Date and Time","Closed On","Canceled On","Automation ChildEmail","Automation Childmultipicklist","Billable Qty","Automation ChildPercent","Automation ChildPhone","Cost Category","Received City","Received Street","Reference Information","Automation ChildURL"];
 var $mapType = "Value Map For New Records";
 
 //Appending current timestamp to process name to make it unique.
