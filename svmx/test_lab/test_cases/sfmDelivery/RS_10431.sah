@@ -80,6 +80,7 @@ $rs_10431.start();
 	$WONumber =$sfm_act_restApiMethods.getRestApi($sfmlUsn,$sfmlPwd,$sfmClientId,$sfmConsumerSecret,$sfmOrgInstance,"GET", $objName, $columnName, $filter, $filterValue);
 	_log("WO number: "+$WONumber);
 
+
 	$sfm_act_common.globalSearchInLightning($WONumber);
 	_setStrictVisibilityCheck(true);
 	$sfm_act_createCustomWizard.clickWizardBtn($sfmName);
