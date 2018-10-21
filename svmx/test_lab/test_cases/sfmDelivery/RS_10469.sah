@@ -4,7 +4,7 @@ $RS_10469.start();
 var $objectName = "Work Order";
 var $childObject = "Work Detail";
 var $processName = "RS_10469";
-var $process_to_clone = "Create a New Work Order from Location";
+var $process_to_clone = "Create Follow-Up Work Order from Work Order";
 var $sfmTemplate = "SVMXSTD: Manage WO Usage Lines";
 var $isCustom = false;
 var $lineType = "Parts";
@@ -15,6 +15,7 @@ var $currentWizardName = $wizardName[4];
 var $pageLayoutForProfile = "SVMX Work Details Usage - Admin";
 var $myDomain = "/lightning/";
 var $tempFields = ["Age"];
+var $lineType = "Parts";
 var $mapType = "Field Map For Existing Records";
 var $multiPicklistValues = ["Multipicklist1","Multipicklist2","Multipicklist3"];
 var $initialChildFields = ["Line Type","Record Type ID","Line Number"];
@@ -103,16 +104,16 @@ _wait(60000, _isVisible($bo_pg_sfmTransactionAndDesigner.txt_name));
 _setValue($bo_pg_sfmTransactionAndDesigner.txt_name, $processName);
 _setValue($bo_pg_sfmTransactionAndDesigner.txt_sfmTransactionId,"");
 _setValue($bo_pg_sfmTransactionAndDesigner.txt_sfmTransactionId,$processName);
-_setSelected($bo_pg_sfmTransactionAndDesigner.list_sourceHeaderList,$objectName);
+//_setSelected($bo_pg_sfmTransactionAndDesigner.list_sourceHeaderList,$objectName);
 if(_isVisible($bo_pg_sfmTransactionAndDesigner.btn_popUpOK)){
 	_click($bo_pg_sfmTransactionAndDesigner.btn_popUpOK);
 }
 _click($bo_pg_sfmTransactionAndDesigner.list_sourceChild);
 _click($bo_pg_sfmTransactionAndDesigner.list_targetChild);
-_setValue($bo_pg_sfmTransactionAndDesigner.text_targetChildAlias,"Parts");
-_click($bo_pg_sfmTransactionAndDesigner.chkbx_targetChild2);
+_setValue($bo_pg_sfmTransactionAndDesigner.text_targetChildAlias,$lineType);
+//_click($bo_pg_sfmTransactionAndDesigner.chkbx_targetChild2);
 _click($bo_pg_sfmTransactionAndDesigner.btn_qualifyingCriteriaAndFieldMapping);
-_setSelected($bo_pg_sfmTransactionAndDesigner.list_childMappingCombo,"Work Detail (Work Order)");
+_setSelected(_setSelected(_f("main").s_dropdownlist(1).near(_f("main").s_label($lineType)),"Work Detail (Work Order)"));
 _click($bo_pg_sfmTransactionAndDesigner.btn_screenDesigner);
 _wait(6000);
 _click($bo_pg_sfmTransactionAndDesigner.btn_newPageLayout);
@@ -127,7 +128,7 @@ _click($bo_pg_sfmTransactionAndDesigner.btn_quickSave1);
 
 //Create mapping for all possible standard data types.
 _click($bo_pg_sfmTransactionAndDesigner.btn_qualifyingCriteriaAndFieldMapping);
-$bo_act_mappings.createMapping("Parts",$mapType,[$fieldsToMap[0]],[$fieldsToMap[0]],[],[],$mapName);
+$bo_act_mappings.createMapping($lineType,$mapType,[$fieldsToMap[0]],[$fieldsToMap[0]],[],[],$mapName);
 _selectDomain();
 _setSpeed(1000);
 
