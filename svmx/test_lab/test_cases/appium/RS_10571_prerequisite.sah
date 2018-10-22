@@ -1,0 +1,74 @@
+var $scenario_10571 = _testcase("scenario_10571"," Verify finalize button & target object update");
+$scenario_10571.start();
+var $sfmName = "10571_sample_test";
+var $sfmNameToBeCloned = "Work Order Service Report";
+var $isCustom = false;
+var $fieldArr = ["Scheduled Date","Scheduled Date Time","Number"];
+var $fieldArr1 = ["Set","Set","Increase"];
+var $profile="auto group profile";
+$bo_act_login.login($g_url, $appiumAdminUn, $appiumAdminPwd);
+$sfm_act_lightningConfig.switchToLightning();
+_wait(5000);
+$bo_act_navigation.navigateToSfmTransactionDesigner();
+_setStrictVisibilityCheck(true);
+_wait(3000);
+_click($bo_pg_sfmTransactionAndDesigner.btn_yourCustomSfmTransactions);
+_setValue($bo_pg_sfmTransactionAndDesigner.txt_yourCustomSfmTransactionsQuickFind,$sfmName);
+_set($var,_isVisible(_f("main").s_label($sfmName)));
+if($var){
+	_log("Process already present");
+}
+else{
+	_wait(3000);
+	_click(_f("main").tab("Standard SFM Transactions"));
+	$sfm_act_SFM.selectSFM($sfmNameToBeCloned, $isCustom);
+	_click($bo_pg_sfmTransactionAndDesigner.btn_clone);
+	_wait(50000, _isVisible($bo_pg_sfmTransactionAndDesigner.txt_name));
+	_setValue($bo_pg_sfmTransactionAndDesigner.txt_name, $sfmName);
+	_setValue($bo_pg_sfmTransactionAndDesigner.txt_sfmTransactionId, "");
+	_setValue($bo_pg_sfmTransactionAndDesigner.txt_sfmTransactionId, $sfmName);
+	$sfm_act_SFM.addTemplateDesigner("Work Order Service Report");
+	$sfm_act_SFM.addTargetObjectUpdate("3");
+	$sfm_act_SFM.addFields("Problem Description", "Set", "Test Target Object Update Functionality");
+	for(var $i=0;$i<$fieldArr.length;$i++){
+		var $j = $i+1;
+		_click(_f("main").s_label("Click to add field"));
+		_setValue(_f("main").s_textinput("searchText[4]"),$fieldArr[$i]);
+		_doubleClick(_f("main").s_label($fieldArr[$i]));
+		_setSelected(_f("main").s_dropdownlist("conditionsCombo["+$j+"]"),$fieldArr1[$i]);
+	}
+	_click(_f("main").s_togglebutton("I want to enter a specific value for this field"));
+	_setValue(_f("main").s_richeditabletext("/textDisplay/").rightOf(_f("main").s_label("Scheduled Date")),"01/01/2019");
+	_click(_f("main").s_togglebutton("/I want to choose a field from the list/").rightOf(_f("main").s_label("Scheduled Date Time")));
+	_setSelected(_f("main").s_combobox("valuesCombo"),"Now");
+	_setValue(_f("main").s_textinput("textip[1]"),"10");
+	_wait(3000);
+	_click($bo_pg_sfmTransactionAndDesigner.btn_finalQuickSave);
+}
+$bo_act_navigation.navigateToSfmWizard();
+_selectDomain("/svmx/");
+_setSelected($sfm_pg_wizards.selectObject,"Work Order");
+_wait(3000);
+$bo_act_navigation.editWizard("AutoRegression");
+$sfm_act_createCustomWizard.addWizStepWithoutName("Output Document", $sfmName, $profile);
+$bo_act_navigation.navigateToSfmTransactionDesigner();
+_setStrictVisibilityCheck(true);
+_wait(3000);
+$scenario_10571.end();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
