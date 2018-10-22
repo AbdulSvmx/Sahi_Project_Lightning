@@ -719,6 +719,40 @@ return $result;
 		}
 			
 		};
+		
+	this.addTemplateDesigner = function($stdTemplate){
+		_click($bo_pg_sfmTransactionAndDesigner.templateDesigner);
+		_wait(2000);
+		_setSelected($bo_pg_sfmTransactionAndDesigner.select_template, $stdTemplate);
+		_setValue($bo_pg_sfmTransactionAndDesigner.txt_tempName,"Tester33");
+		_setValue($bo_pg_sfmTransactionAndDesigner.txt_tempId,"Tester33");
+		_click($bo_pg_sfmTransactionAndDesigner.btn_templateSaveAs);
+		_wait(3000);
+		if(_isVisible($bo_pg_sfmTransactionAndDesigner.lbl_templateSave)){
+			_log("Pass");
+		}
+		else{
+			_fail("Fail::Template not Saved");
+		}
+	};
+	
+	this.addTargetObjectUpdate = function($clicks){
+		_click($bo_pg_sfmTransactionAndDesigner.targetObjectUpdate);
+		_click(_f("main").s_label("Work Order[2]"));
+		_click(_f("main").s_button("Add a row"));
+		for(var $i=0;$i<$clicks;$i++){
+			_click(_f("main").s_button("+"));
+		}
+	};
+	
+	this.addFields = function($field,$condition,$value){
+		_click(_f("main").s_label("Click to add field"));
+		_setValue(_f("main").s_textinput("searchText[4]"),$field);
+		_doubleClick(_f("main").s_label($field));
+		_setSelected(_f("main").s_dropdownlist("conditionsCombo"),$condition);
+		_setValue(_f("main").s_textinput("textip"),$value);
+		
+	};
 			
 	
 };

@@ -3,10 +3,11 @@ $scenario_10530.start();
 
 var $sfmNameToBeCloned = "Manage Work Order Lines - Usage";
 var $isCustom = false;
-var $sfmName = "10530_lkp_proc1";
+var $sfmName = "10530_lkp_proc11110";
 var $sfmTemplate = "SVMXSTD: Manage WO Usage Lines";
 var $sfmTemplateSaveAsName = $bo_act_common.generateRandomName("SFM_Temp_Name_");
 var $headersToAdd = ["Work Order Number","Account","City","Contact","Country","Order Type","Product","Site","Problem Description"];
+//var $headersToAdd = ["Product"];
 var $profile="auto group profile";
 var $lkpName = $bo_act_common.generateRandomName("Product_lkp_Name_");
 var $lkpName1 = $bo_act_common.generateRandomName("Part_lkp_Name_");
@@ -44,8 +45,7 @@ else{
 	$sfm_act_lookupConfiguration.addLkpDetails("SVMXSTD: Product Lookup", $lkpName);
 	_click(_f("main").tab("Advanced Filter"));
 	_wait(5000);
-
-	$sfm_act_lookupConfiguration.deleteAdvancedFilter("Product Stock (Product)");
+	$sfm_act_lookupConfiguration.deleteAdvancedFilter();
 	_wait(5000);
 	$sfm_act_lookupConfiguration.addObject("Product Stock (Product)", "USERTRUNK", "USERTRUNK");
 	_setSelected(_f("main").s_combobox("fieldCombo[1]"), "Location");
@@ -59,7 +59,7 @@ else{
 	$sfm_act_lookupConfiguration.addLkpDetails("SVMXSTD: Product Lookup", $lkpName1);
 	_click(_f("main").tab("Advanced Filter"));
 	_wait(5000);
-	$sfm_act_lookupConfiguration.deleteAdvancedFilter("Product Stock (Product)");
+	$sfm_act_lookupConfiguration.deleteAdvancedFilter();
 	_wait(5000);
 	$sfm_act_lookupConfiguration.addObject("Installed Product (Product)", "Complex Filter", "Complex Filter");
 	_setSelected(_f("main").s_combobox("fieldCombo[1]"), "Record Type ID");
