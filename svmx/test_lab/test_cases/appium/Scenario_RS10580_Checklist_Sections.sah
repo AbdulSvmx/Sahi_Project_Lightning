@@ -1,0 +1,178 @@
+	_writeFile("false", $appiumPath+$sahiIntermediatoryPath, true);
+var $scenario_10580 = _testcase("scenario_10580","SCN_Checklist_1_RS-10580_Verify Sections Checklists");
+$scenario_10580.start();
+
+//question
+
+var $ProcessStatus=false;
+var $wizardObject ="Work Order";
+var $sfmName = "Auto_10580_ChecklistSections_trail123";
+var $questionNames1=["Number Should not be greater than 100","Section One Question One","Section One Question Two","Section One Question Three"];
+var $questionNames2 = ["Section Two Warning","Section Two Question One","Section Two Question Two","Section Two Question Three"];
+var $questionNames3=  ["Section Three Error","Section Three Warning","Section Three Question One","Section Three Question Two","Section Three Question Three"];
+var $questionNames4 = ["Section Four Question Three","Section Four Question Two","Section Four Question One"];
+
+
+var $sectionName1 = "Section One";
+var $sectionName2 = "Section Two";
+var $sectionName3 = "Section Three";
+var $sectionName4 = "Section Four";	
+
+//variables for exit criteria
+var $exitQuestionName = ["Number Should not be greater than 100"];
+var $questionType=["Number"];
+var $comboField=["Less Than"];
+var $operandType=["Value"];
+var $answer=["20"];
+var $skipTo=["3-"+$sectionName3];
+var $criteriaDetails1=[$comboField,$operandType,$answer,$skipTo];
+var $criteriaDetails=[$criteriaDetails1];
+
+var $targetObjectName = "Work Order";
+
+//Entry Criteria variables
+var $comboField=["Priority"];
+var $comboConditions=["Equals"]; 
+var $toggleButton=[""];
+var $comboInput=["High"];
+var $advExpr="";
+var $criteriaName=$bo_act_common.generateRandomName("SFMCheckListEC_");
+var $criteriaDetails=[$comboField,$comboConditions,$toggleButton,$comboInput,$advExpr,$criteriaName];
+
+
+$bo_act_login.login($g_url, $appiumAdminUn, $appiumAdminPwd);
+$sfm_act_lightningConfig.switchToLightning();
+$ProcessStatus=$sfm_act_SFM.sfmProcessCheck($sfmName);
+_wait(10000);
+if($ProcessStatus==false){
+
+$bo_act_navigation.navigateToSfmTransactionDesigner();
+_wait(15000);
+_click($bo_pg_sfmTransactionAndDesigner.btn_newSFM);
+_wait(3000);
+_setValue($bo_pg_sfmTransactionAndDesigner.txt_name, $sfmName);
+_setValue($bo_pg_sfmTransactionAndDesigner.txt_sfmTransactionId, "");
+_setSelected($sfm_pg_screenDesigner.sel_createSFMTransaction, "to generate a Checklist/Survey type of Process");
+_setStrictVisibilityCheck(true);
+_setValue($sfm_pg_screenDesigner.txt_srcObject,"");
+_setValue($sfm_pg_screenDesigner.txt_srcObject,"Wo");
+_wait(5000);
+_click($sfm_pg_screenDesigner.lbl_workOrder);
+_click($bo_pg_sfmTransactionAndDesigner.btn_qualifyingCriteriaAndFieldMapping);
+_click($bo_pg_sfmTransactionAndDesigner.btn_mappings);
+_click($bo_pg_sfmTransactionAndDesigner.btn_mappings);
+_setValue(_f("main").s_textinput("/textInput/").near(_f("main").tab("Field Map For Existing Records")),"SVMX");
+_click(_f("main").s_label("SVMXSTD: Map Work Order to Checklist"));
+//$bo_act_checklistdesigner.addQuestion("Text", "What is the Work Order Number?", true,"Work Order Number");
+_wait(10000);
+_selectDomain("/svmx/");
+_click($bo_pg_formDesigner.tab_clickFormDesigner);
+
+
+//edit default section and renameing to section One
+_selectDomain("/svmx/");
+$sfm_act_formDesigner.editSection("Checklist Section Title");
+$sfm_act_formDesigner.editSectionInformation($sectionName1, $sectionName1, "http://google.com");
+_click($sfm_pg_formDesigner.btn_applySectionWindow);
+_wait(3000,_isVisible($sfm_pg_formDesigner.label_saveEditSectionMsg));
+_click($sfm_pg_formDesigner.btn_cancelSectionWindow);
+
+//Create Section Two
+$sfm_act_formDesigner.createNewSection();
+$sfm_act_formDesigner.editSection("Checklist Section Title");
+$sfm_act_formDesigner.editSectionInformation($sectionName2, $sectionName2, "http://google.com");
+_click($sfm_pg_formDesigner.btn_applySectionWindow);
+_wait(3000,_isVisible($sfm_pg_formDesigner.label_saveEditSectionMsg));
+_click($sfm_pg_formDesigner.btn_cancelSectionWindow);
+
+//Create Section Three
+$sfm_act_formDesigner.createNewSection();
+$sfm_act_formDesigner.editSection("Checklist Section Title");
+$sfm_act_formDesigner.editSectionInformation($sectionName3, $sectionName3, "http://google.com");
+_click($sfm_pg_formDesigner.btn_applySectionWindow);
+_wait(3000,_isVisible($sfm_pg_formDesigner.label_saveEditSectionMsg));
+_click($sfm_pg_formDesigner.btn_cancelSectionWindow);
+
+//Create Section Four
+$sfm_act_formDesigner.createNewSection();
+$sfm_act_formDesigner.editSection("Checklist Section Title");
+$sfm_act_formDesigner.editSectionInformation($sectionName4, $sectionName4, "http://google.com");
+_click($sfm_pg_formDesigner.btn_applySectionWindow);
+_wait(3000,_isVisible($sfm_pg_formDesigner.label_saveEditSectionMsg));
+_click($sfm_pg_formDesigner.btn_cancelSectionWindow);
+
+//Adding question to sectionOne
+$sfm_act_formDesigner.addQuestionToSection($sectionName1, $questionNames1[0]);
+$sfm_act_formDesigner.addQuestionToSection($sectionName1, $questionNames1[1]);
+$sfm_act_formDesigner.addQuestionToSection($sectionName1, $questionNames1[2]);
+$sfm_act_formDesigner.addQuestionToSection($sectionName1, $questionNames1[3]);
+
+//Adding question to sectionTwo
+$sfm_act_formDesigner.addQuestionToSection($sectionName2, $questionNames2[0]);
+$sfm_act_formDesigner.addQuestionToSection($sectionName2, $questionNames2[1]);
+$sfm_act_formDesigner.addQuestionToSection($sectionName2, $questionNames2[2]);
+$sfm_act_formDesigner.addQuestionToSection($sectionName2, $questionNames2[3]);
+
+//Adding question to sectionThree
+$sfm_act_formDesigner.addQuestionToSection($sectionName3, $questionNames3[0]);
+$sfm_act_formDesigner.addQuestionToSection($sectionName3, $questionNames3[1]);
+$sfm_act_formDesigner.addQuestionToSection($sectionName3, $questionNames3[2]);
+$sfm_act_formDesigner.addQuestionToSection($sectionName3, $questionNames3[3]);
+$sfm_act_formDesigner.addQuestionToSection($sectionName3, $questionNames3[4]);
+
+//Adding question to sectionFour
+$sfm_act_formDesigner.addQuestionToSection($sectionName4, $questionNames4[0]);
+$sfm_act_formDesigner.addQuestionToSection($sectionName4, $questionNames4[1]);
+$sfm_act_formDesigner.addQuestionToSection($sectionName4, $questionNames4[2]);
+_wait(5000);
+
+//Adding Exit Criteria - -While stablization make it generic function
+$sfm_act_formDesigner.editSection($sectionName1);
+$sfm_act_formDesigner.addExistCriteria();
+$sfm_act_formDesigner.addQuesToExistCriteriaTab($exitQuestionName, $questionType, $criteriaDetails);
+//$sfm_act_formDesigner.setExitCriteriaOnNumberQuestion($exitQuestionName, $questionType, $criteriaDetails);
+//var $exitlabel= _f("main").s_navigatorcontent("Exit Criteria");
+//_click(_f("main").s_button("Apply")).near($exitlabel);
+_click(_f("main").s_button("saveBtnExit"));
+_click($bo_pg_formDesigner.btn_closeQuestionPopUp);
+_wait(3000);
+
+
+//Adding Entry criteria-While stablization make it generic function
+
+$sfm_act_formDesigner.editSection($sectionName1);
+$sfm_act_formDesigner.createEntryCriteria("", $criteriaDetails);
+//var $entrylabel=_f("main").s_navigatorcontent("Entry Criteria");
+_click(_f("main").s_button("saveBtnEntry"));
+_wait(5000);
+//_click($sfm_pg_formDesigner.btn_cancelSectionWindow);
+_click($bo_pg_formDesigner.btn_closeQuestionPopUp);
+_click($bo_pg_sfmTransactionAndDesigner.btn_saveAndclose);
+_wait(5000);
+
+
+_click($bo_pg_sfmTransactionAndDesigner.btn_saveAndclose);
+
+
+
+//Source object update
+//Sou Variables
+var $field = ["Billing Type","Scheduled Date","Scheduled Date Time","Proforma Invoice", "No Of Times Assigned"];
+var $condition= ["Set","Set","Set","Set","Set"];
+var $operand = ["Value","Function","Question","Value","Value"];
+var $value = ["Loan","Today","AUTO_What is the ScheduledDatetime?","Source Object Updated","2"];
+var $souObject  = "Work Order";
+
+
+
+var $profilename = $group_profilename;
+//$bo_act_SFMAppPermission.set_mobileapp_permissions($profilename, $targetObjectName, $sfmName);
+
+$bo_act_SFMAppPermission.set_mobileapp_permissions_generic($profilename, $targetObjectName, $sfmName, "Checklist");
+
+
+_wait(5000);
+
+}
+_writeFile("true", $appiumPath+$sahiIntermediatoryPath, true);
+$scenario_10577.end();
