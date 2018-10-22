@@ -139,12 +139,16 @@ var $bo_pg_sfmTransactionAndDesigner = new function bo_pg_sfmTransactionAndDesig
 	this.chkbox_work_order = _f("main").s_checkbox("Work Order");
 	this.selectComboBox = function($elementName,$elementItemName){
 	_setSelected(_f("main").s_combobox($elementName), $elementItemName);
-	
-	
-	
-
-		
 		};
+		
+		this.templateDesigner = _f("main").tab("Template Designer");
+		this.select_template = _f("main").s_combobox("searchCombo[4]");
+		this.btn_templateSave = _f("main").s_button("Save[4]");
+		this.lbl_templateSave = _f("main").uiftetextfield("Template saved");
+		this.targetObjectUpdate = _f("main").tab("Target Object Update");
+		this.btn_templateSaveAs = _f("main").s_button("Save As[4]");
+		this.txt_tempName = _f("main").s_textinput("Save template as");
+		this.txt_tempId = _f("main").s_textinput("Input ID Here[4]");
 		
 		//Enter the name of checklist type SFM transaction
 	this.setSfmName=function($sfmName){

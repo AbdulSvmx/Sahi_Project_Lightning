@@ -113,7 +113,10 @@ _click($bo_pg_sfmTransactionAndDesigner.list_targetChild);
 _setValue($bo_pg_sfmTransactionAndDesigner.text_targetChildAlias,$lineType);
 //_click($bo_pg_sfmTransactionAndDesigner.chkbx_targetChild2);
 _click($bo_pg_sfmTransactionAndDesigner.btn_qualifyingCriteriaAndFieldMapping);
-_setSelected(_setSelected(_f("main").s_dropdownlist(1).near(_f("main").s_label($lineType)),"Work Detail (Work Order)"));
+
+_setSelected(_f("main").s_dropdownlist(1).near(_f("main").s_label($lineType)),"Work Detail (Work Order)");
+
+
 _click($bo_pg_sfmTransactionAndDesigner.btn_screenDesigner);
 _wait(6000);
 _click($bo_pg_sfmTransactionAndDesigner.btn_newPageLayout);
@@ -212,6 +215,8 @@ else {
 }
 
 $sfm_act_lightningConfig.logoutInLightning();
+
+
 $RS_10469.end();
 
 

@@ -1,0 +1,139 @@
+	_writeFile("false", $appiumPath+$sahiIntermediatoryPath, true);
+var $scenario_10587 = _testcase("scenario_10585","SCN_Checklist_1_RS-10587_Verify Checklist OPDOC Firsrt version, last version and all version");
+$scenario_10587.start();
+
+var $profilename = $group_profilename;
+var $ProcessStatus=false;
+var $wizardObject ="Work Order";
+//checklist variables versions
+var $sfmName1 = "SCN_ChecklistOPDOC_3_RS-10587_allversions_trail1";
+var $sfmName2= "SCN_ChecklistOPDOC_3_RS-10587_firstversion_trail1";
+var $sfmName3= "SCN_ChecklistOPDOC_3_RS-10587_lastversion_trail1";
+
+$checklists = ["SCN_ChecklistOPDOC_3_RS-10587_allversions_trail1","SCN_ChecklistOPDOC_3_RS-10587_firstversion_trail1","SCN_ChecklistOPDOC_3_RS-10587_lastversion_trail1"];
+$checklistversion = ["All Versions","First Version","Last Version"];
+
+//Variables required for OPDOC Process
+var $value = _readFile("/auto/sahi_pro/userdata/scripts/Sahi_Project_Lightning/scenario7.txt");
+var $templateName = $bo_act_common.generateRandomName("SFM_Auto_Template_");
+var $sfmName4 = $bo_act_common.generateRandomName("SFM_Auto_");
+var $wizardObject="Work Order";
+var $wizardName="AutoRegression";
+var $wizardType="Output Document";
+var $profilename = $group_profilename;
+var $handOver="false";
+var $wizardCriteria=null;
+var $selectallChecklist = "false";
+var $includeskippedSection="true";
+
+//Login
+$bo_act_login.login($g_url, $appiumAdminUn, $appiumAdminPwd);
+$sfm_act_lightningConfig.switchToLightning();
+
+$ProcessStatus=$sfm_act_SFM.sfmProcessCheck($sfmName);
+_wait(10000);
+if($ProcessStatus==false){
+
+	//Creationg of first checklist all verions
+	$bo_act_navigation.navigateToSfmTransactionDesigner();
+	_wait(10000);
+	_click($bo_pg_sfmTransactionAndDesigner.btn_newSFM);
+	_wait(3000);
+	_setValue($bo_pg_sfmTransactionAndDesigner.txt_name, $sfmName1);
+	_setValue($bo_pg_sfmTransactionAndDesigner.txt_sfmTransactionId, "");
+	_setSelected($sfm_pg_screenDesigner.sel_createSFMTransaction, "to generate a Checklist/Survey type of Process");
+	_setStrictVisibilityCheck(true);
+	_setValue($sfm_pg_screenDesigner.txt_srcObject,"");
+	_setValue($sfm_pg_screenDesigner.txt_srcObject,"Wo");
+	_wait(5000);
+	_click($sfm_pg_screenDesigner.lbl_workOrder);
+	_click($bo_pg_sfmTransactionAndDesigner.btn_qualifyingCriteriaAndFieldMapping);
+	_click($bo_pg_sfmTransactionAndDesigner.btn_mappings);
+	_click($bo_pg_sfmTransactionAndDesigner.btn_mappings);
+	_setValue(_f("main").s_textinput("/textInput/").near(_f("main").tab("Field Map For Existing Records")),"SVMX");
+	_click(_f("main").s_label("SVMXSTD: Map Work Order to Checklist"));
+	$bo_act_checklistdesigner.addQuestion("Text", "10587 AllVersion Question", false,"");
+	_wait(5000);
+	_click($bo_pg_sfmTransactionAndDesigner.btn_saveAndclose);
+	
+	//creation of second checklist first Version
+	$bo_act_navigation.navigateToSfmTransactionDesigner();
+	_wait(10000);
+	_click($bo_pg_sfmTransactionAndDesigner.btn_newSFM);
+	_wait(3000);
+	_setValue($bo_pg_sfmTransactionAndDesigner.txt_name, $sfmName2);
+	_setValue($bo_pg_sfmTransactionAndDesigner.txt_sfmTransactionId, "");
+	_setSelected($sfm_pg_screenDesigner.sel_createSFMTransaction, "to generate a Checklist/Survey type of Process");
+	_setStrictVisibilityCheck(true);
+	_setValue($sfm_pg_screenDesigner.txt_srcObject,"");
+	_setValue($sfm_pg_screenDesigner.txt_srcObject,"Wo");
+	_wait(5000);
+	_click($sfm_pg_screenDesigner.lbl_workOrder);
+	_click($bo_pg_sfmTransactionAndDesigner.btn_qualifyingCriteriaAndFieldMapping);
+	_click($bo_pg_sfmTransactionAndDesigner.btn_mappings);
+	_click($bo_pg_sfmTransactionAndDesigner.btn_mappings);
+	_setValue(_f("main").s_textinput("/textInput/").near(_f("main").tab("Field Map For Existing Records")),"SVMX");
+	_click(_f("main").s_label("SVMXSTD: Map Work Order to Checklist"));
+	$bo_act_checklistdesigner.addQuestion("Text", "10587 FirstVersion Question", false,"");
+	_wait(5000);
+	_click($bo_pg_sfmTransactionAndDesigner.btn_saveAndclose);
+	
+	//Creation of third checklist Last versions
+	$bo_act_navigation.navigateToSfmTransactionDesigner();
+	_wait(10000);
+	_click($bo_pg_sfmTransactionAndDesigner.btn_newSFM);
+	_wait(3000);
+	_setValue($bo_pg_sfmTransactionAndDesigner.txt_name, $sfmName3);
+	_setValue($bo_pg_sfmTransactionAndDesigner.txt_sfmTransactionId, "");
+	_setSelected($sfm_pg_screenDesigner.sel_createSFMTransaction, "to generate a Checklist/Survey type of Process");
+	_setStrictVisibilityCheck(true);
+	_setValue($sfm_pg_screenDesigner.txt_srcObject,"");
+	_setValue($sfm_pg_screenDesigner.txt_srcObject,"Wo");
+	_wait(5000);
+	_click($sfm_pg_screenDesigner.lbl_workOrder);
+	_click($bo_pg_sfmTransactionAndDesigner.btn_qualifyingCriteriaAndFieldMapping);
+	_click($bo_pg_sfmTransactionAndDesigner.btn_mappings);
+	_click($bo_pg_sfmTransactionAndDesigner.btn_mappings);
+	_setValue(_f("main").s_textinput("/textInput/").near(_f("main").tab("Field Map For Existing Records")),"SVMX");
+	_click(_f("main").s_label("SVMXSTD: Map Work Order to Checklist"));
+	$bo_act_checklistdesigner.addQuestion("Text", "10587 LastVersion Question", false,"");
+	_wait(5000);
+	_click($bo_pg_sfmTransactionAndDesigner.btn_saveAndclose);
+	
+//-----------------------------------------------Creation OF OPDOC with first,last,all Versions----------------------------------
+
+$bo_act_navigation.navigateToSfmTransactionDesigner();
+_wait(10000);
+_click($bo_pg_sfmTransactionAndDesigner.btn_newSFM);
+_wait(3000);
+_setValue($bo_pg_sfmTransactionAndDesigner.txt_name, $sfmName4);
+_setValue($bo_pg_sfmTransactionAndDesigner.txt_sfmTransactionId, "");
+_setSelected($sfm_pg_screenDesigner.sel_createSFMTransaction, "to generate an Output Document for a header record with/without its child records");
+_setStrictVisibilityCheck(true);
+_setValue($sfm_pg_screenDesigner.txt_targetObject,"");
+_setValue($sfm_pg_screenDesigner.txt_targetObject,"Wo");
+_wait(5000);
+_click($sfm_pg_screenDesigner.lbl_workOrder);
+_click(_f("main").s_checkbox("Checklist (Work Order)"));
+_click(_f("main").tab("Template Designer"));
+_setValue(_f("main").s_textinput("Save template as"),$templateName);
+_setValue(_f("main").s_textinput("Input ID Here[4]"),$templateName);
+_click(_span("Source"));
+_setValue(_textarea("cke_source cke_enable_context_menu"),$value);
+_setStrictVisibilityCheck(true);
+_click(_f("main").s_button("Save[4]"));
+//_click(_f("main").s_button("Save").inside(_f("main").tabnavigator("tabNav")));
+_wait(6000);
+//function of adding the versions first,last and all versions for the checklsits in opdoc
+$sfm_pg_advancedOptions.AdvancedOptionsChecklist($selectallChecklist, $includeskippedSection,$checklists,$checklistversion);
+_click($bo_pg_sfmTransactionAndDesigner.btn_saveAndclose);
+_wait(10000);
+
+$sfm_act_wizards.addToWizard($wizardObject,$wizardName, $wizardType,$sfmName4,$handOver,$profilename,$wizardCriteria);  
+
+_writeFile("true", $appiumPath+$sahiIntermediatoryPath, true);
+
+}
+
+
+$scenario_10587.end();

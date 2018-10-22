@@ -1,0 +1,173 @@
+	_writeFile("false", $appiumPath+$sahiIntermediatoryPath, true);
+var $scenario_10585 = _testcase("scenario_10585","SCN_Checklist_1_RS-10585_Verify Checklist OPDOC skipped Sections");
+$scenario_10585.start();
+
+var $profilename = $group_profilename;
+var $ProcessStatus=false;
+var $wizardObject ="Work Order";
+var $sfmName = "Auto_10585_ChecklistOPDOCVT";
+var $questionNames1=["What is the Work Order Number?","Number Should not be greater than 100"];
+var $questionNames2 = ["Section Two Question One"];
+var $questionNames3=  ["Section Three Question One"];
+var $sectionName1 = "Section One";
+var $sectionName2 = "Section Two";
+var $sectionName3 = "Section Three";
+
+//variables for exit criteria
+var $exitQuestionName = ["Number Should not be greater than 100"];
+var $questionType=["Number"];
+var $comboField=["Less Than"];
+var $operandType=["Value"];
+var $answer=["20"];
+var $skipTo=["3-"+$sectionName3];
+var $criteriaDetails1=[$comboField,$operandType,$answer,$skipTo];
+var $targetObjectName = "Work Order";
+var $criteriaDetails=[$criteriaDetails1];
+
+
+//variables for entry criteria
+var $comboFielde=["Priority"];
+var $comboConditionse=["Equals"]; 
+var $toggleButtone=[""];
+var $comboInpute=["High"];
+var $advExpre="";
+var $criteriaNamee=$bo_act_common.generateRandomName("SFMCheckListEC_");
+var $criteriaDetailsentry=[$comboFielde,$comboConditionse,$toggleButtone,$comboInpute,$advExpre,$criteriaNamee];
+
+//Variables required for OPDOC Process
+var $value = _readFile("/auto/sahi_pro/userdata/scripts/Sahi_Project_Lightning/scenario7.txt");
+var $templateName = $bo_act_common.generateRandomName("SFM_Auto_Template_");
+var $sfmName1 = $bo_act_common.generateRandomName("SFM_Auto_");
+var $wizardObject="Work Order";
+var $wizardName="AutoRegression";
+var $wizardType="Output Document";
+var $profilename = $group_profilename;
+var $handOver="false";
+var $wizardCriteria=null;
+
+//Login
+$bo_act_login.login($g_url, $appiumAdminUn, $appiumAdminPwd);
+$sfm_act_lightningConfig.switchToLightning();
+
+
+//Checking if process exists or not.
+$ProcessStatus=$sfm_act_SFM.sfmProcessCheck($sfmName);
+
+if($ProcessStatus==false){
+
+$bo_act_navigation.navigateToSfmTransactionDesigner();
+_wait(15000);
+_click($bo_pg_sfmTransactionAndDesigner.btn_newSFM);
+_wait(3000);
+_setValue($bo_pg_sfmTransactionAndDesigner.txt_name, $sfmName);
+_setValue($bo_pg_sfmTransactionAndDesigner.txt_sfmTransactionId, "");
+_setSelected($sfm_pg_screenDesigner.sel_createSFMTransaction, "to generate a Checklist/Survey type of Process");
+_setStrictVisibilityCheck(true);
+_setValue($sfm_pg_screenDesigner.txt_srcObject,"");
+_setValue($sfm_pg_screenDesigner.txt_srcObject,"Wo");
+_wait(5000);
+_click($sfm_pg_screenDesigner.lbl_workOrder);
+_click($bo_pg_sfmTransactionAndDesigner.btn_qualifyingCriteriaAndFieldMapping);
+_click($bo_pg_sfmTransactionAndDesigner.btn_mappings);
+_click($bo_pg_sfmTransactionAndDesigner.btn_mappings);
+_setValue(_f("main").s_textinput("/textInput/").near(_f("main").tab("Field Map For Existing Records")),"SVMX");
+_click(_f("main").s_label("SVMXSTD: Map Work Order to Checklist"));
+//$bo_act_checklistdesigner.addQuestion("Text", "What is the Work Order Number?", true,"Work Order Number");
+_wait(10000);
+_selectDomain("/svmx/");
+_click($bo_pg_formDesigner.tab_clickFormDesigner);
+
+//edit default section and renaming to section One
+_selectDomain("/svmx/");
+$sfm_act_formDesigner.editSection("Checklist Section Title");
+$sfm_act_formDesigner.editSectionInformation($sectionName1, $sectionName1, "http://google.com");
+_click($sfm_pg_formDesigner.btn_applySectionWindow);
+_wait(3000,_isVisible($sfm_pg_formDesigner.label_saveEditSectionMsg));
+_click($sfm_pg_formDesigner.btn_cancelSectionWindow);
+
+//Create Section Two
+$sfm_act_formDesigner.createNewSection();
+$sfm_act_formDesigner.editSection("Checklist Section Title");
+$sfm_act_formDesigner.editSectionInformation($sectionName2, $sectionName2, "http://google.com");
+_click($sfm_pg_formDesigner.btn_applySectionWindow);
+_wait(3000,_isVisible($sfm_pg_formDesigner.label_saveEditSectionMsg));
+_click($sfm_pg_formDesigner.btn_cancelSectionWindow);
+
+//Create Section Three
+$sfm_act_formDesigner.createNewSection();
+$sfm_act_formDesigner.editSection("Checklist Section Title");
+$sfm_act_formDesigner.editSectionInformation($sectionName3, $sectionName3, "http://google.com");
+_click($sfm_pg_formDesigner.btn_applySectionWindow);
+_wait(3000,_isVisible($sfm_pg_formDesigner.label_saveEditSectionMsg));
+_click($sfm_pg_formDesigner.btn_cancelSectionWindow);
+
+//Adding question to sectionOne
+$sfm_act_formDesigner.addQuestionToSection($sectionName1, $questionNames1[0]);
+$sfm_act_formDesigner.addQuestionToSection($sectionName1, $questionNames1[1]);
+
+//Adding question to sectionTwo
+$sfm_act_formDesigner.addQuestionToSection($sectionName2, $questionNames2[0]);
+
+//Adding question to sectionThree
+$sfm_act_formDesigner.addQuestionToSection($sectionName3, $questionNames3[0]);
+_wait(5000);
+
+//Adding Exit Criteria
+$sfm_act_formDesigner.editSection($sectionName1);
+$sfm_act_formDesigner.addExistCriteria();
+$sfm_act_formDesigner.addQuesToExistCriteriaTab($exitQuestionName, $questionType, $criteriaDetails);
+_click(_f("main").s_button("saveBtnExit"));
+_click($bo_pg_formDesigner.btn_closeQuestionPopUp);
+_wait(3000);
+
+//Adding Entry criteria
+$sfm_act_formDesigner.editSection($sectionName1);
+$sfm_act_formDesigner.createEntryCriteria("", $criteriaDetailsentry);
+_click(_f("main").s_button("saveBtnEntry"));
+_wait(5000);
+//_click($sfm_pg_formDesigner.btn_cancelSectionWindow);
+_click($bo_pg_formDesigner.btn_closeQuestionPopUp);
+_click($bo_pg_sfmTransactionAndDesigner.btn_saveAndclose);
+_wait(5000);
+//$bo_act_SFMAppPermission.set_mobileapp_permissions($profilename, $targetObjectName, $sfmName);
+$bo_act_SFMAppPermission.set_mobileapp_permissions_generic($profilename, $targetObjectName, $sfmName, "Checklist");
+_wait(5000);
+//-----------------------Creating OPDOC----------------------------
+
+$bo_act_navigation.navigateToSfmTransactionDesigner();
+_wait(10000);
+_click($bo_pg_sfmTransactionAndDesigner.btn_newSFM);
+_wait(3000);
+_setValue($bo_pg_sfmTransactionAndDesigner.txt_name, $sfmName1);
+_setValue($bo_pg_sfmTransactionAndDesigner.txt_sfmTransactionId, "");
+_setSelected($sfm_pg_screenDesigner.sel_createSFMTransaction, "to generate an Output Document for a header record with/without its child records");
+_setStrictVisibilityCheck(true);
+_setValue($sfm_pg_screenDesigner.txt_targetObject,"");
+_setValue($sfm_pg_screenDesigner.txt_targetObject,"Wo");
+_wait(5000);
+_click($sfm_pg_screenDesigner.lbl_workOrder);
+_click(_f("main").s_checkbox("Checklist (Work Order)"));
+_click(_f("main").tab("Template Designer"));
+_setValue(_f("main").s_textinput("Save template as"),$templateName);
+_setValue(_f("main").s_textinput("Input ID Here[4]"),$templateName);
+_click(_span("Source"));
+_setValue(_textarea("cke_source cke_enable_context_menu"),$value);
+_click(_f("main").s_button("Save[4]"));
+//_click(_f("main").s_button("Save").inside(_f("main").tabnavigator("tabNav")));
+_wait(6000);
+_click($bo_pg_sfmTransactionAndDesigner.btn_saveAndclose);
+_wait(10000);
+
+$sfm_act_wizards.addToWizard($wizardObject,$wizardName, $wizardType,$sfmName1,$handOver,$profilename,$wizardCriteria);  
+
+_writeFile("true", $appiumPath+$sahiIntermediatoryPath, true);
+
+}
+
+
+
+
+
+
+
+$scenario_10585.end();

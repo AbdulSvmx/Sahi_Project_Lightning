@@ -1,12 +1,14 @@
 var $sfm_act_lookupConfiguration = new function sfm_act_lookupConfiguration() {
 	
-	this.deleteAdvancedFilter = function($val){
-		if(_isVisible(_f("main").s_button("/Delete/").near(_f("main").ftedatagriditemrenderer($val)))){
-			_click(_f("main").s_button("/Delete/").near(_f("main").ftedatagriditemrenderer($val)));
-			_wait(5000);
-			_click(_f("main").button("YES"));
-		}
-	};
+	this.deleteAdvancedFilter = function(){
+//		if(_isVisible(_f("main").s_button("/Delete/").near(_f("main").ftedatagriditemrenderer($val)))){
+//			_click(_f("main").s_button("/Delete/").near(_f("main").ftedatagriditemrenderer($val)));
+//			_wait(5000);
+//			_focus(_f("main").button("YES"));
+//			_click(_f("main").button("YES"));
+			_click(_f("main").s_button("/Delete/[1]").inside(_f("main").datagrid("filterGrid")));
+			_click(_f("main").button("Yes"));
+		};
 	
 	this.addLkpDetails = function($standardLkp, $lkpName){
 		_setSelected(_f("main").s_combobox("searchCombo[4]"), $standardLkp);
