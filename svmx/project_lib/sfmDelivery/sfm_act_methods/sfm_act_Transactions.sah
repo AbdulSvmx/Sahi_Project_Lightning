@@ -162,10 +162,11 @@ var $sfm_act_Transactions = new function sfm_act_Transactions() {
 		 * 					
 		 * Example		: 	Refer _ _ _  for function usage
 		 */
-		this.lookUpScrollIntoView=function($field){
+		this.lookUpScrollIntoView=function($field,$element){
 			_log($field);
-			_call($bo_pg_sfmTransactionAndDesigner.scroll_filedScroll.set("value",0));
-			var $maximum =  _fetch($bo_pg_sfmTransactionAndDesigner.scroll_filedScroll.get("maximum"));
+			//_call($bo_pg_sfmTransactionAndDesigner.scroll_filedScroll.set("value",0));
+			_call($element.set("value",0));
+			var $maximum =  _fetch($element.get("maximum"));
 			var $fieldName= _f("main").s_label($field);
 			var $i=0;
 			while($i< $maximum){
@@ -175,7 +176,7 @@ var $sfm_act_Transactions = new function sfm_act_Transactions() {
 				}
 				else {
 					$i= $i+100;
-					_call($bo_pg_sfmTransactionAndDesigner.scroll_filedScroll.set("value",$i));
+					_call($element.set("value",$i));
 				}
 			}
 		};
