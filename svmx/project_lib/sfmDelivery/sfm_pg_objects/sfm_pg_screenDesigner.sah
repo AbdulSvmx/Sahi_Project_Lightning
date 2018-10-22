@@ -72,7 +72,7 @@ var $sfm_pg_screenDesigner = new function sfm_pg_screenDesigner(){
 	this.btn_lookupClose = _f("main").s_button("closeButton");
 	this.link_Parts=_link("Parts");
 	this.link_Labor=_link("Labor");
-	
+	this.sel_noOfRecords=_f("main").s_combobox("noOfRec");
 	
 	
 };

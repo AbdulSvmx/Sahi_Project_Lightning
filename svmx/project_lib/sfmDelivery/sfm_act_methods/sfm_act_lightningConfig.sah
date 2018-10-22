@@ -370,7 +370,7 @@ this.editWorkOrder = function($textLabels,$textValues,$pickListLabels,$pickListV
 	
 	_setStrictVisibilityCheck(true);
 	_wait(6000);
-	_call(_span("Clock Paused Forever").scrollIntoView());
+	//_call(_span("Clock Paused Forever").scrollIntoView());
     _click($sfm_pg_wo.btn_pencilToEditWo);
 	var $i = 0;
 	//Fill text values 
@@ -441,8 +441,8 @@ this.editWorkOrder = function($textLabels,$textValues,$pickListLabels,$pickListV
 			}
 			_log($currentMultiValues);
 			for($p=0;$p<$currentMultiValues.length;$p++){
-				_click(_span($currentMultiValues[$p],_near(_div($uniqueMulti[$i]))));
-				_keyDown(_span($currentMultiValues[$p]),39,"CTRL");
+				_click(_span($currentMultiValues[$p],_in(_div("/Available/"),_near(_div("/"+$uniqueMulti[$i]+"/")))));
+				_call(_button("Move selection to Chosen").click());
 			}
 		
 			
@@ -537,7 +537,7 @@ this.verifyValues = function($textLabels,$textValues,$pickListLabels,$pickListVa
 	$actualList = [];
 	if($checkBoxLabels.length > 0){
 		for($i=0;$i<$checkBoxLabels.length;$i++){
-			$actualList.push(_condition(_checkbox($checkBoxLabels[$i]).checked));
+			$actualList.push(_getAttribute(_checkbox("/"+$checkBoxLabels[$i]+"/"),"checked"));
 			_log("Expected value for "+$checkBoxLabels[$i]+":"+$checkBoxValues[$i]);
 			_log("Actual value for"+$checkBoxLabels[$i]+":"+$actualList[$i]);
 		}
@@ -722,7 +722,7 @@ this.calculateNow = function(){
 	//Author: Janaki
 	var $p = $current.getHours();
 	var $min = $current.getMinutes();
-	if($p >= 12){
+	if($p > 12){
 		if($min < 10){
 			$min = "0"+$min;
 		}
@@ -747,7 +747,12 @@ this.calculateNow = function(){
 		if($min >= 10){
 			 $min = $current.getMinutes();
 		}
-		var $now = $current.getHours()+":"+$min+" AM";
+		if($current.getHours() == 0){
+			var $now = "12" +":"+$min+" AM";
+		}
+		else {
+			var $now = $current.getHours()+":"+$min+" AM";
+		}
 	}
  return $now;
 };
@@ -764,6 +769,17 @@ this.getWorkDetailNumber = function(){
 	_setStrictVisibilityCheck(false);
 	_log("Created Work Detail is "+$wlNum);
 	return $wlNum;
+};
+
+this.getWorkDetailNumberFromWO = function() {
+	//This function fetches the latest work detail number from any work order
+	//Returns Work Detail Line number in the form of WL-*********
+	//Author : Janaki
+	_click($sfm_pg_wo.link_relatedListsTab);
+	var $wDetailNum = _getText($sfm_pg_wo.link_workDetail);
+	return $wDetailNum;
+	
+	
 };
 
 };

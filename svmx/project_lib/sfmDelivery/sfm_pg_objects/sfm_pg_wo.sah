@@ -127,6 +127,7 @@ var $sfm_pg_wo = new function sfm_pg_wo() {
     this.btn_newButtonForWorkDetail = _link("New",_near(_heading2("/Work Details/")));
     this.btn_nextForWorkDetailRecordType = _button("Next",_in(_div("modal-footer slds-modal__footer")));
     this.link_relatedListsTab = _span("Related");
+    this.link_workDetail = _link(0,_near(_tableHeader("Line Number")));
     this.link_lineTypeArrow = _link(0,_near(_span("/Line Type/")));
     this.link_viewAllWorkDetails = _span("View AllWork Details");
     this.btn_editActivityType = _button("Edit Activity Type");

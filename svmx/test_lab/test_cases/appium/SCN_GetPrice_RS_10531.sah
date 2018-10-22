@@ -1,0 +1,177 @@
+//Meghana Rao
+
+/*
+ * PRE Requisites to be run in the org before running other scripts - LIGHTNING CODE
+ */
+_writeFile("false", $appiumPath+$sahiIntermediatoryPath, true);
+
+
+var $pre_requisite= _testcase("scenario10531","Verify the GetPrice when one PS line entitled with warranty & other with SCON but WO is not entitled");
+$pre_requisite.start();
+
+_setSpeed($g_stepSpeed);
+
+var $data_excel_10538 = _readExcelFile("/auto/SVMX_Catalyst/fsaautomation/resources/TestData.xlsx","RS_10538",true);
+var $data_excel_10539 = _readExcelFile("/auto/SVMX_Catalyst/fsaautomation/resources/TestData.xlsx","RS_10539",true);
+var $Acc10539Name = $data_excel_10539[2]["Data5"];
+var $Product10538Name = $data_excel_10538[2]["Data2"];
+var $SCONName = $data_excel_10539[2]["Data4"];
+var $IB10538Name = $data_excel_10538[2]["Data4"];
+var $IB10539Name =  $data_excel_10539[2]["Data6"];
+$bo_act_login.login($g_url, $appiumAdminUn, $appiumAdminPwd);
+$sfm_act_lightningConfig.switchToLightning();
+
+var $module = "Entitlement Verification";
+var $submodule = "Work Order Entitlement VF";
+$bo_act_configurationProfiles.editGroupProfileForBooleanSettings($admin_group_profile,$module,$submodule, "SET024", true);
+$bo_act_configurationProfiles.editGroupProfileForBooleanSettings($admin_group_profile,$module,$submodule, "SET025", true);
+$bo_act_configurationProfiles.editGroupProfileForBooleanSettings($admin_group_profile,$module,$submodule, "SET026", true);
+
+// to get the IBID fpr 10538
+
+$objNameIB= "SVMXC__Installed_Product__c";
+$columnName = "Id";
+$filter="Name";
+$IB10538ID =$sfm_act_restApiMethods.getRestApi($appiumAdminUn,$appiumAdminPwd,$appiumclient_id,$appiumclient_secret,$appiumorginstance,"GET", $objNameIB, $columnName, $filter, $IB10538Name);
+_log($IB10538ID);
+
+
+// to get the IBID for 10539
+
+$objNameIB= "SVMXC__Installed_Product__c";
+$columnName = "Id";
+$filter="Name";
+$IB10539ID =$sfm_act_restApiMethods.getRestApi($appiumAdminUn,$appiumAdminPwd,$appiumclient_id,$appiumclient_secret,$appiumorginstance,"GET", $objNameIB, $columnName, $filter, $IB10539Name);
+_log($IB10539ID);
+
+// To get the Account 10539 ID
+$objNameAcc= "Account";
+$columnName = "Id";
+$filter="Name";
+$Acc10539ID =$sfm_act_restApiMethods.getRestApi($appiumAdminUn,$appiumAdminPwd,$appiumclient_id,$appiumclient_secret,$appiumorginstance,"GET", $objNameAcc, $columnName, $filter, $Acc10539Name);
+_log($Acc10539ID);
+
+
+// To create a Contact
+
+$objName2= "Contact";
+var $restcontactfirstname="C10531_";
+var $restcontactlastname="Auto";
+$obJson = "{\"AccountId\":\""+$Acc10539ID+"\",\"FirstName\":\""+$restcontactfirstname+"\",\"LastName\":\""+$restcontactlastname+"\"}";
+$columnName = "Name";
+$filter="id";
+//create  case with above created account and other parameters
+$contactid=$sfm_act_restApiMethods.postRestApi($appiumAdminUn,$appiumAdminPwd,$appiumclient_id,$appiumclient_secret,$appiumorginstance,$objName2,$obJson,"POST");
+//get the caseNumber
+$contactname =$sfm_act_restApiMethods.getRestApi($appiumAdminUn,$appiumAdminPwd,$appiumclient_id,$appiumclient_secret,$appiumorginstance,"GET", $objName2, $columnName, $filter, $contactid);
+_log($contactname);
+
+$objNameProduct= "Product2";
+$columnName = "Id";
+$filter="Name";
+$ProductID =$sfm_act_restApiMethods.getRestApi($appiumAdminUn,$appiumAdminPwd,$appiumclient_id,$appiumclient_secret,$appiumorginstance,"GET", $objNameProduct, $columnName, $filter, $Product10538Name);
+_log($ProductID);
+
+
+
+//To create a Work ORder
+$objNameWO= "SVMXC__Service_Order__c";
+$obJsonWO = "{\"SVMXC__Company__c\":\""+$Acc10539ID+"\", \"SVMXC__Contact__c\":\""+$contactid+"\",\"SVMXC__Billing_Type__c\":\"Loan\"}"; 
+$columnName = "Name";
+$filter="id";
+var $WoID=$sfm_act_restApiMethods.postRestApi($appiumAdminUn,$appiumAdminPwd,$appiumclient_id,$appiumclient_secret,$appiumorginstance,$objNameWO,$obJsonWO,"POST");
+//get the Work Order Name
+$WOName =$sfm_act_restApiMethods.getRestApi($appiumAdminUn,$appiumAdminPwd,$appiumclient_id,$appiumclient_secret,$appiumorginstance,"GET", $objNameWO, $columnName, $filter, $WoID);
+
+
+
+$objNameWarranty= "SVMXC__Warranty__c";
+$columnName = "Name";
+$filter="SVMXC__Installed_Product__c";
+$WarrantyName =$sfm_act_restApiMethods.getRestApi($appiumAdminUn,$appiumAdminPwd,$appiumclient_id,$appiumclient_secret,$appiumorginstance,"GET", $objNameWarranty, $columnName, $filter,$IB10538ID);
+_log($WarrantyName);
+
+
+
+
+// To add a Product Serviced Work Detail to the Work Order for IB10538
+
+$objNameWD= "SVMXC__Service_Order_Line__c";
+$obJson = "{\"RecordType\":{\"Name\":\"Products Serviced\"},\"SVMXC__Service_Order__c\":\""+$WoID+"\",\"SVMXC__Serial_Number__c\":\""+$IB10538ID+"\" }";
+$columnName = "Name";
+$filter="id";
+//create  case with above created account and other parameters
+$WDID1=$sfm_act_restApiMethods.postRestApi($appiumAdminUn,$appiumAdminPwd,$appiumclient_id,$appiumclient_secret,$appiumorginstance,$objNameWD,$obJson,"POST");
+_log($WDID1);
+
+$objNameWD= "SVMXC__Service_Order_Line__c";
+$columnName = "Name";
+$filter="Id";
+$WDName1 =$sfm_act_restApiMethods.getRestApi($appiumAdminUn,$appiumAdminPwd,$appiumclient_id,$appiumclient_secret,$appiumorginstance,"GET", $objNameWD, $columnName, $filter,$WDID1);
+_log($WDName1);
+
+
+
+//To add a Product Serviced Work Detail to the Work Order for IB10539
+
+$objNameWD= "SVMXC__Service_Order_Line__c";
+$obJson = "{\"RecordType\":{\"Name\":\"Products Serviced\"},\"SVMXC__Service_Order__c\":\""+$WoID+"\", \"SVMXC__Serial_Number__c\":\""+$IB10539ID+"\" }";
+$columnName = "Name";
+$filter="id";
+//create  case with above created account and other parameters
+$WDID2=$sfm_act_restApiMethods.postRestApi($appiumAdminUn,$appiumAdminPwd,$appiumclient_id,$appiumclient_secret,$appiumorginstance,$objNameWD,$obJson,"POST");
+_log($WDID2);
+
+$objNameWD= "SVMXC__Service_Order_Line__c";
+$columnName = "Name";
+$filter="Id";
+$WDName2 =$sfm_act_restApiMethods.getRestApi($appiumAdminUn,$appiumAdminPwd,$appiumclient_id,$appiumclient_secret,$appiumorginstance,"GET", $objNameWD, $columnName, $filter,$WDID2);
+_log($WDName2);
+
+
+// PS Lines Entitlement for Work Details IB10539
+_wait(30000);
+_call(top.location.reload());
+$bo_act_navigation.navigateToCreatedRecordUsingGlobalSearchWO($WOName);
+$bo_act_interactiveEntitlement_WO.performInteractiveEntitlementPSLines($WOName, $SCONName,$IB10539Name);
+
+
+//PS Lines Entitlement for Work Details IB10538
+_wait(30000);
+_call(top.location.reload());
+$bo_act_navigation.navigateToCreatedRecordUsingGlobalSearchWO($WOName);
+$bo_act_interactiveEntitlement_WO.performInteractiveEntitlementPSLines($WOName, $WarrantyName ,$IB10538Name);
+
+
+// Creating a Product 10531 and Adding standard Pricebook 750
+
+$objName3= "Product2";
+var $restproductname = $bo_act_common.generateRandomName("P10531");
+$obJson = "{\"Name\":\""+$restproductname+"\",\"IsActive\":\"true\" }";
+$columnName = "Name";
+$filter="id";
+//create  case with above created account and other parameters
+$productid=$sfm_act_restApiMethods.postRestApi($appiumAdminUn,$appiumAdminPwd,$appiumclient_id,$appiumclient_secret,$appiumorginstance,$objName3,$obJson,"POST");
+//get the Product
+$Productname10531 =$sfm_act_restApiMethods.getRestApi($appiumAdminUn,$appiumAdminPwd,$appiumclient_id,$appiumclient_secret,$appiumorginstance,"GET", $objName3, $columnName, $filter, $productid);
+_log($Productname10531);
+
+//Add Standard Price to the Product
+_wait(30000);
+$bo_act_navigation.navigateToCreatedRecordUsingGlobalSearch($Productname10531);
+
+
+var $standardPriceValue = 750;
+$bo_act_products.addStandardPriceForProduct($Productname10531, $standardPriceValue);
+
+_wait(20000);
+
+$excel.insertUnderColumn("/auto/SVMX_Catalyst/fsaautomation/resources/TestData.xlsx", "RS_10531", "Data1",$WOName,"2");
+$excel.insertUnderColumn("/auto/SVMX_Catalyst/fsaautomation/resources/TestData.xlsx", "RS_10531", "Data2",$Productname10531 ,"2");
+
+$bo_act_configurationProfiles.editGroupProfileForBooleanSettings($admin_group_profile,$module,$submodule, "SET024", false);
+$bo_act_configurationProfiles.editGroupProfileForBooleanSettings($admin_group_profile,$module,$submodule, "SET025", false);
+$bo_act_configurationProfiles.editGroupProfileForBooleanSettings($admin_group_profile,$module,$submodule, "SET026", false);
+_writeFile("true", $appiumPath+$sahiIntermediatoryPath, true);
+
+$pre_requisite.end();

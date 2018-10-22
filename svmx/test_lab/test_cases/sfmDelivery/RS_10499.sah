@@ -74,12 +74,16 @@ $rs_10499.start();
 		_log("Wizard Name: "+$wizardName1);
 		$sfm_act_wizards.addToWizard($wizardObject, $wizardName1, $wizardType, $sfmName, $handOver, $profile); 
 			
+		//remove below code
+		//var $sfmName="rs_10499_1510201865856";
+			
+			
 		//Search WO and launch SFM
-		RS10449_searchWOandLaunchSFM($WONumber,$sfmName);
+		RS10499_searchWOandLaunchSFM($WONumber,$sfmName);
 		
 		//***Work Order Header validation***//
 		//Assert context override function enable
-		_wait(3000,_isVisible($sfm_pg_sfmDesigner.txt_headerAccount));
+		_wait(5000,_isVisible($sfm_pg_sfmDesigner.txt_headerAccount));
 		_setValue($sfm_pg_sfmDesigner.txt_headerAccount,$Account[0]);
 		_click($sfm_pg_sfmDesigner.link_quickSave);
 		_wait(2000);
@@ -89,16 +93,16 @@ $rs_10499.start();
 		_wait(10000);
 		_click($sfm_pg_sfmDesigner.btn_headerContactsearchIcon);
 		_assertContainsText("/"+$Account[0]+"/",$sfm_pg_sfmDesigner.label_contextOverride);
-		RS10449_searchContact("");
+		RS10499_searchContact("");
 		for (var $i = 0; $i < $userName.length-2; $i++) {
 			_assertExists(_link($userName[$i]));
 		}
-		RS10449_searchContact($userName[3]);
+		RS10499_searchContact($userName[3]);
 		_assertExists($sfm_pg_sfmDesigner.btn_noRecordMSG);
 		
 		//Uncheck context override checkbox
 		_click($sfm_pg_sfmDesigner.btn_contextOverride);
-		RS10449_searchContact($userName[3]);
+		RS10499_searchContact($userName[3]);
 		_assertExists(_link($userName[3]));
 		_click($sfm_pg_sfmDesigner.btn_cancelContactWindow);
 /*		
@@ -108,9 +112,9 @@ $rs_10499.start();
 		_wait(5000,_isVisible(_div("/search/")));
 		//_assertEqual("/Empty/",_getText($sfm_pg_sfmDesigner.label_contextOverride));
 		_assertContainsText("/Empty/",$sfm_pg_sfmDesigner.label_contextOverride);
-		RS10449_searchContact($userName[3]);
+		RS10499_searchContact($userName[3]);
 		_assertExists(_link($userName[3]));
-		RS10449_searchContact($userName[0]);
+		RS10499_searchContact($userName[0]);
 		_assertNotExists(_link($userName[0]));
 		_click($sfm_pg_sfmDesigner.btn_cancelContactWindow);
 */		
@@ -132,7 +136,7 @@ $rs_10499.start();
 		RS10499_saveSFM();
 		
 		//search WO and launch the SFM
-		RS10449_searchWOandLaunchSFM($WONumber,$sfmName);
+		RS10499_searchWOandLaunchSFM($WONumber,$sfmName);
 	
 		//Assert No Override context functionality
 		_wait(3000,_isVisible($sfm_pg_sfmDesigner.txt_headerAccount));
@@ -145,7 +149,7 @@ $rs_10499.start();
 		_wait(10000);
 		_click($sfm_pg_sfmDesigner.btn_headerContactsearchIcon);
 		_assertNotExists($sfm_pg_sfmDesigner.label_contextOverride);
-		RS10449_searchContact("");
+		RS10499_searchContact("");
 		for (var $i = 0; $i < $userName.length-2; $i++) {
 			_assertExists(_link($userName[$i]));
 		}
@@ -159,14 +163,14 @@ function RS10499_saveSFM(){
 	_setStrictVisibilityCheck(false);
 };		
 
-function RS10449_searchContact($contactName){
+function RS10499_searchContact($contactName){
 	_setValue($sfm_pg_sfmDesigner.btn_searchTextBox,$contactName);
 	_click($sfm_pg_sfmDesigner.link_searchLink);
 	_wait(5000,_isVisible(_link($contactName)));
 };
 
 //Search WO and launch SFM
-function RS10449_searchWOandLaunchSFM($WONumber,$sfmName){
+function RS10499_searchWOandLaunchSFM($WONumber,$sfmName){
 	$sfm_act_common.globalSearchInLightning($WONumber);
 	_setStrictVisibilityCheck(true);
 	$sfm_act_createCustomWizard.clickWizardBtn($sfmName);

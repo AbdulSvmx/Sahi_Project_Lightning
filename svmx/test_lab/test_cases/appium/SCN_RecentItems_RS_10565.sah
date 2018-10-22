@@ -1,7 +1,7 @@
 var RS_10565 = _testcase("RS_10565","SCN_Recent Items_RS-10565 Verify Recent Items tab");
 RS_10565.start();
 
-//_writeFile("false", $appiumPath+$sahiIntermediatoryPath, true);
+_writeFile("false", $appiumPath+$sahiIntermediatoryPath, true);
 
 
 var $wizardObject="Work Order";
@@ -21,7 +21,7 @@ var $createsfmName = "Create New Custom object";
 var $transactiontype = "as Standalone for the purpose of creating a new record";
 var $targetObjectName = "Auto_Custom_Object2";
 var $ExistingsfmPageLayoutName="";
-var $pagelayoutName="Custom_object_SD";
+var $pagelayoutName=$bo_act_common.generateRandomName("Custom_object_SD");
 var	$pagelayoutId=$pagelayoutName;
 
 var $value =$sfm_act_SFM.checkprocessexists($createsfmName,true);//to check process exists or not
@@ -49,7 +49,7 @@ var $viewsfmName = "View Custom Object";
 var $transactiontype = "to view a header record with/without its child records";
 var $targetObjectName = "Auto_Custom_Object2";
 var $ExistingsfmPageLayoutName="";
-var $pagelayoutName="Customobject_SD_view";
+var $pagelayoutName=$bo_act_common.generateRandomName("Customobject_SD_view");
 var	$pagelayoutId=$pagelayoutName;
 var $value =$sfm_act_SFM.checkprocessexists($viewsfmName,true);//to check process exists or not
 _log($value);
@@ -81,7 +81,7 @@ _selectDomain();
 var $targetObjectName = "Auto_Custom_Object2";
 $bo_act_SFMAppPermission.addnewobjectdownloacriteria($targetObjectName);
 */
-
+_writeFile("true", $appiumPath+$sahiIntermediatoryPath, true);
 
 RS_10565.end();
 

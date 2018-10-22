@@ -86,12 +86,11 @@ var $bo_act_products = new function bo_act_products() {
 		//_click($bo_pg_products.btn_related_list);
 		_setStrictVisibilityCheck(true);
 		_click(_span("/Related/"));
-		if(_isVisible($bo_pg_products.btn_addStandardPrice)==true)
-		{
+	
 		_click($bo_pg_products.btn_addStandardPrice);
 		_setValue($bo_pg_products.txt_enterStandardPrice, $standardPriceValue);
 		_click($bo_pg_products.btn_saveStandardPrice);
-		}
+		
 		
 	};
 	

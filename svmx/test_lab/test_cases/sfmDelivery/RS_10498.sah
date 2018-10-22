@@ -12,9 +12,9 @@ var $success_message = "Work Order was saved.";
 var $containerName = [];
 var $fieldName=[];
 var $missingStdDataTypes = ["URL","Picklist (Multi-Select)","Percent","Phone","Date","Date","Email"];
-var $customFieldsNames = ["Automation Child URL","Automation Child multipicklist","Automation Child Percent","Automation Child Phone","Automation Child Date2","Automation Child Date3","Automation Child Email"];
-var $fieldsToMap = ["Account","Record Type","Use Price From Pricebook/Contract","Billable Line Price","Date Received","Automation Child Date2","Automation Child Date3","Start Date and Time","End Date and Time","Closed On","Canceled On","Automation Child Email","Automation Child multipicklist","Billable Qty","Automation Child Percent","Automation Child Phone","Activity Type","Received City","Received Street","Reference Information","Automation Child URL"];
-var $containerName = ["Parts","Parts","Parts","Parts","Parts","Parts","Parts","Parts","Parts","Parts","Parts","Parts"];
+var $customFieldsNames = ["Automation ChildURL","Automation Childmultipicklist","Automation ChildPercent","Automation ChildPhone","Automation ChildDate2","Automation ChildDate3","Automation ChildEmail"];
+var $fieldsToMap = ["Account","Record Type","Include in Quote","Billable Line Price","Date Received","Automation ChildDate2","Automation ChildDate3","Start Date and Time","End Date and Time","Closed On","Canceled On","Automation ChildEmail","Automation Childmultipicklist","Billable Qty","Automation ChildPercent","Automation ChildPhone","Cost Category","Received City","Received Street","Reference Information","Automation ChildURL"];
+var $containerName = ["Parts","Parts","Parts","Parts","Parts","Parts","Parts","Parts","Parts","Parts","Parts","Parts","Parts","Parts","Parts","Parts","Parts","Parts","Parts","Parts","Parts"];
 var $currentWizardName = $wizardName[4];
 var $productName = "Chrome";
 var $lineType = "Parts";
@@ -26,10 +26,11 @@ var $tempFields = ["Age"];
 var $initialChildFields = ["Line Type","Record Type ID","Line Number"];
 var $initalChildContainers = [$lineType,$lineType,$lineType];
 var $initialChildValues = [$lineType,"Usage/Consumption"];
-var $additionalFields = ["Account","Use Price From Pricebook/Contract","Billable Line Price","Date Received","Automation Child Date2","Automation Child Date3","Start Date and Time","End Date and Time","Closed On","Canceled On","Automation Child Email","Automation Child multipicklist","Billable Qty","Automation Child Percent","Automation Child Phone","Activity Type","Received City","Received Street","Reference Information","Automation Child URL"];
+var $additionalFields = ["Include in Quote","Account","Billable Line Price","Date Received","Automation ChildDate3","Automation ChildDate2","Start Date and Time","End Date and Time","Closed On","Canceled On","Automation ChildEmail","Automation Childmultipicklist","Billable Qty","Automation ChildPercent","Automation ChildPhone","Cost Category","Received City","Received Street","Reference Information","Automation ChildURL"];
+var $mapType = "Value Map For New Records";
 
 //Appending current timestamp to process name to make it unique.
-var $timeStamp = $bo_act_navigation.getCurrentTimeStamp();
+var $timeStamp = $bo_act_navigation.getCurrentTimeStamp(); 
 $processName = $processName + "_" + $timeStamp;
 var $pageLayoutName = $processName + "pg";
 var $mapName = $processName + "mp";
@@ -101,13 +102,13 @@ _click($bo_pg_sfmTransactionAndDesigner.btn_savePage);
 _click($bo_pg_sfmTransactionAndDesigner.btn_quickSave1);
 
 
-$textLabels = ["Billable Line Price","Automation Child Email","Billable Qty","Automation Child Percent","Automation Child Phone","Received City","Received Street","Reference Information","Automation Child URL","Automation Child multipicklist"];
+$textLabels = ["Billable Line Price","Automation ChildEmail","Billable Qty","Automation ChildPercent","Automation ChildPhone","Received City","Received Street","Reference Information","Automation ChildURL","Automation Childmultipicklist"];
 $textValues = ["4500","group123@group.com","34.00","45","2345401","Bengaluru","123 somewhere somehow somewat","This washing machine stopped working","www.google.com","Multipicklist1;Multipicklist3"];
-$picklistLabels = ["Account","Record Type ID","Use Price From Pricebook/Contract","Date Received","Automation Child Date2","Automation Child Date3","Start Date and Time","End Date and Time","Closed On","Canceled On","Activity Type"];
-$pickListValues = ["HCSAccountForTesting","Record Type1","true","Today","Tomorrow","Yesterday","Now","Today","Tomorrow","Yesterday","Calibration"];
+$picklistLabels = ["Account","Record Type ID","Include in Quote","Date Received","Automation ChildDate2","Automation ChildDate3","Start Date and Time","End Date and Time","Closed On","Canceled On","Cost Category"];
+$pickListValues = ["HCSAccountForTesting","Record Type1","true","Today","Tomorrow","Yesterday","Now","Today","Tomorrow","Yesterday","Straight"];
 //Create mapping for all possible standard data types.
 _click($bo_pg_sfmTransactionAndDesigner.btn_qualifyingCriteriaAndFieldMapping);
-$bo_act_mappings.createMapping($lineType,$picklistLabels,$pickListValues,$textLabels,$textValues,$mapName);
+$bo_act_mappings.createMapping($lineType,$mapType,$picklistLabels,$pickListValues,$textLabels,$textValues,$mapName);
 _selectDomain();
 _setSpeed(1000);
 
@@ -153,21 +154,21 @@ $bo_act_navigation.navigateToCreatedRecordUsingGlobalSearch($lineNum);
 //Verify value map in the work detail.
 var $lookUpLabels = ["Account"];
 var $lookUpValues = ["HCSAccountForTesting"];
-$textLabels = ["Billable Line Price","Billable Qty","Automation Child Percent","Received City","Date Received","Automation Child Date2","Automation Child Date3"];
+$textLabels = ["Billable Line Price","Billable Qty","Automation ChildPercent","Received City","Date Received","Automation ChildDate2","Automation ChildDate3"];
 $textValues = ["$4,500.000","34.0000","45%","Bengaluru",$todayDate,$tomorrowDate,$yesterdayDate];
-$pickListLabels = ["Activity Type"];
-$pickListValues = ["Calibration"];
+$pickListLabels = ["Cost Category"];
+$pickListValues = ["Straight"];
 $textAreaLabels = ["Received Street","Reference Information"];
 $textAreaValues = ["123 somewhere somehow somewat","This washing machine stopped working"];
-var $checkBoxLabels = ["Use Price From Pricebook/Contract"];
+var $checkBoxLabels = ["Include in Quote"];
 var $checkBoxValues = [true];
-var $emailLabels = ["Automation Child Email"];
+var $emailLabels = ["Automation ChildEmail"];
 var $emailValues = ["group123@group.com"];
-var $multiPickLabels = ["Automation Child multipicklist","Automation Child multipicklist"];
+var $multiPickLabels = ["Automation Childmultipicklist","Automation Childmultipicklist"];
 var $multiPickValues = ["Multipicklist1","Multipicklist3"];
-var $telephoneLabels = ["Automation Child Phone"];
+var $telephoneLabels = ["Automation ChildPhone"];
 var $telephoneValues = ["2345401"];
-var $urlLabels = ["Automation Child URL"];
+var $urlLabels = ["Automation ChildURL"];
 var $urlValues = ["www.google.com"];
 var $dateTimeLabels = ["Start Date and Time","End Date and Time","Closed On","Canceled On"];
 var $dateTimeDateValues = [$todayDate,$todayDate,$tomorrowDate,$yesterdayDate];
@@ -186,7 +187,7 @@ _selectDomain();
 $bo_act_navigation.navigateToCreatedRecordUsingGlobalSearch($wo_number);
 $sfm_act_createCustomWizard.clickWizardlinks($processName);
 _selectDomain($g_domain);
-_click($sfm_pg_wo.btn_arrowNextToGetPrice);
+_click($sfm_pg_wo.btn_arrowNextToUserSettings);
 _assertVisible($sfm_pg_wo.link_launchSfmDesigner);
 _click($sfm_pg_wo.link_launchSfmDesigner);
 _selectDomain();
@@ -194,9 +195,7 @@ _selectWindow("/SFM Transaction Designer/");
 _wait(20000);
 _click($bo_pg_sfmTransactionAndDesigner.btn_screenDesigner);
 _wait(5000);
-for($i=0;$i<$fieldsToMap.length;$i++){
-	$bo_act_navigation.designChildScreen($pg_layout_name,$fieldsToMap,$containerName);
-}
+$bo_act_navigation.designChildScreen($pageLayoutName,$additionalFields,$containerName);
 _wait(2000);
 _click($bo_pg_sfmTransactionAndDesigner.btn_quickSave1);
 _wait(2000);
@@ -213,18 +212,15 @@ var $yesterdayDate = $sfm_act_createCustomWizard.addSubtractDates($current,-1);
 var $now = $sfm_act_lightningConfig.calculateNow();
 _log("Value for now is "+$now);
 //Add Child Line and verify the value map.
-$sfm_act_SFM.addChildLine("Parts",$productName, $textLabels, $textValues, $pickListLabels, $pickListValues, [],[],[],[],[],[],[],[],[]);
-//Calculating current time
-var $now = $sfm_act_lightningConfig.calculateNow();
-_log("Value for now is "+$now);
+$sfm_act_SFM.addChildLine($lineType,$productName,[],[],$initialChildFields,$initialChildValues,[],[],[],[],[],[],[],[],[]);
 $sfm_act_SFM.performQuickSave();
 var $lineNum = $sfm_act_lightningConfig.getWorkDetailNumber();
 _log("Created Work Detail is "+$lineNum);
 //Verifying values in SFM Delivery
 $sfm_act_lightningConfig.openExtEditForLatestItem();
 _wait(2000);
-var $deliveryTextPickLabels = ["Account","Billable Line Price","Date Received","Automation Child Date2","Automation Child Date3","Start Date and Time","End Date and Time","Closed On","Canceled On","Automation Child Email","Billable Qty","Automation Child Percent","Automation Child Phone","Received City","Automation Child URL"];
-var $deliveryTextPickValues =["HCSAccountForTesting","4500",$todayDate,$tomorrowDate,$yesterdayDate,$todayDate,$todayDate,$tomorrowDate,$yesterdayDate,"group123@group.com","34","45","235401","Bengaluru","www.google.com"];
+var $deliveryTextPickLabels = ["Account","Billable Line Price","Date Received","Automation ChildDate2","Automation ChildDate3","Start Date and Time","End Date and Time","Closed On","Canceled On","Automation ChildEmail","Billable Qty","Automation ChildPercent","Automation ChildPhone","Received City","Automation ChildURL"];
+var $deliveryTextPickValues =["HCSAccountForTesting","4500",$todayDate,$tomorrowDate,$yesterdayDate,$todayDate,$todayDate,$tomorrowDate,$yesterdayDate,"group123@group.com","34","45","2345401","Bengaluru","www.google.com"];
 var $deliveryTimeLabels = ["Start Date and Time","End Date and Time","Closed On","Canceled On"];
 var $deliveryTimeValues = [$now,"12:00 AM","12:00 AM","12:00 AM"];
 var $verifyResult = $sfm_act_SFM.verifyValuesInDelivery($deliveryTextPickLabels,$deliveryTextPickValues,$deliveryTimeLabels,$deliveryTimeValues,$textAreaLabels,$textAreaValues,$checkBoxLabels,$checkBoxValues,$multiPickLabels,$multiPickValues);
@@ -246,7 +242,7 @@ if(_isVisible($sfm_pg_wo.btn_okPriceNotCalculated)){
 _wait(6000);
 _selectDomain();
 $bo_act_navigation.navigateToCreatedRecordUsingGlobalSearch($lineNum);
-_//Removing preceding zeros in date fields to validate in work order object.
+//Removing preceding zeros in date fields to validate in work order object.
 $todayDate = $sfm_act_lightningConfig.removePrecedingZeroInDate($todayDate);
 $tomorrowDate = $sfm_act_lightningConfig.removePrecedingZeroInDate($tomorrowDate);
 $yesterdayDate = $sfm_act_lightningConfig.removePrecedingZeroInDate($yesterdayDate);

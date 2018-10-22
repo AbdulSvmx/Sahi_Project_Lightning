@@ -11,13 +11,19 @@ $pre_requisite.start();
 
 _setSpeed($g_stepSpeed);
 
-var $data_excel = _readExcelFile("/auto/SVMX_Catalyst/fsaautomation/resources/TestData.xlsx","TestData",true);
-var $Product2Name = $data_excel[44]["Data3"];
-var $SCONName = $data_excel[44]["Data4"];
-var $Acc10538Name = $data_excel[42]["Data3"];
-var $IB10538Name = $data_excel[42]["Data4"];
+var $data_excel_10539 = _readExcelFile("/auto/SVMX_Catalyst/fsaautomation/resources/TestData.xlsx","RS_10539",true);
+var $Product2Name = $data_excel_10539[2]["Data3"];
+var $SCONName = $data_excel_10539[2]["Data4"];
+var $data_excel_10538 = _readExcelFile("/auto/SVMX_Catalyst/fsaautomation/resources/TestData.xlsx","RS_10538",true);
+var $Acc10538Name = $data_excel_10538[2]["Data3"];
+var $IB10538Name = $data_excel_10538[2]["Data4"];
 $bo_act_login.login($g_url, $appiumAdminUn, $appiumAdminPwd);
 $sfm_act_lightningConfig.switchToLightning();
+var $module = "Entitlement Verification";
+var $submodule = "Work Order Entitlement VF";
+$bo_act_configurationProfiles.editGroupProfileForBooleanSettings($admin_group_profile,$module,$submodule, "SET024", true);
+$bo_act_configurationProfiles.editGroupProfileForBooleanSettings($admin_group_profile,$module,$submodule, "SET025", true);
+$bo_act_configurationProfiles.editGroupProfileForBooleanSettings($admin_group_profile,$module,$submodule, "SET026", true);
 // to get the Product2 ID
 $objNameProduct= "Product2";
 $columnName = "Id";
@@ -110,19 +116,28 @@ $WOName =$sfm_act_restApiMethods.getRestApi($appiumAdminUn,$appiumAdminPwd,$appi
 _wait(30000);
 _call(top.location.reload());
 $bo_act_navigation.navigateToCreatedRecordUsingGlobalSearchWO($WOName);
-$bo_act_interactiveEntitlement_WO.performInteractiveEntitlementWO_UsingWarranty($WOName,$WarrantyName);
+$bo_act_interactiveEntitlement_WO.performInteractiveEntitlementWO_UsingWarrantyPSLines($WOName, $WarrantyName);
 
 
 // To add a Product Serviced Work Detail to the Work Order
 
 $objNameWD= "SVMXC__Service_Order_Line__c";
-$obJson = "{\"RecordType\":{\"Name\":\"Products Serviced\"},\"SVMXC__Service_Order__c\":\""+$WoID+"\"}";
+$obJson = "{\"RecordType\":{\"Name\":\"Products Serviced\"},\"SVMXC__Service_Order__c\":\""+$WoID+"\", \"SVMXC__Serial_Number__c\":\""+$IbID+"\"}";
 $columnName = "Name";
 $filter="id";
 //create  case with above created account and other parameters
 $WDID=$sfm_act_restApiMethods.postRestApi($appiumAdminUn,$appiumAdminPwd,$appiumclient_id,$appiumclient_secret,$appiumorginstance,$objNameWD,$obJson,"POST");
 _log($WDID);
 
+
+_wait(30000);
+_call(top.location.reload());
+$bo_act_navigation.navigateToCreatedRecordUsingGlobalSearchWO($WOName);
+$bo_act_interactiveEntitlement_WO.performInteractiveEntitlementPSLines($WOName, $SCONName,$IBName);
+
+
+$excel.insertUnderColumn("/auto/SVMX_Catalyst/fsaautomation/resources/TestData.xlsx", "RS_10536", "Data1",$WOName ,"2");
+$excel.insertUnderColumn("/auto/SVMX_Catalyst/fsaautomation/resources/TestData.xlsx", "RS_10539", "Data6", $IBName, "2");
 _writeFile("true", $appiumPath+$sahiIntermediatoryPath, true);
 
 $pre_requisite.end();

@@ -28,6 +28,7 @@ var $pickListLabels = ["Order Status"];
 var $pickListValues = ["Open"];
 var $textLabels = [];
 var $textValues = [];
+var $mapType = "Value Map for Existing Records";
 
 
 //Appending current timestamp to process name to make it unique.
@@ -88,7 +89,7 @@ _setSelected(_f("main").s_combobox("valuesCombo[1]"), "Closed");
 _setValue($bo_pg_sfmTransactionAndDesigner.txt_sfmSavePageLayoutAsId, "1 OR 2");
 _setValue($bo_pg_sfmTransactionAndDesigner.txt_saveExprAs, $processName);;
 _setValue($bo_pg_sfmTransactionAndDesigner.txt_inputIdAs, $processName);
-_click(_f("main").s_button("Save As"));
+_click($bo_pg_sfmTransactionAndDesigner.button_saveAsQcTab);
 _assertVisible($bo_pg_sfmTransactionAndDesigner.label_exprSaved);
 _click($bo_pg_sfmTransactionAndDesigner.btn_quickSave1);
 if(_condition(_isVisible($bo_pg_sfmTransactionAndDesigner.btn_proceed_anyways))){
@@ -96,7 +97,7 @@ if(_condition(_isVisible($bo_pg_sfmTransactionAndDesigner.btn_proceed_anyways)))
 }
 
 //Set up the mapping. Order status is set to "Open"
-$bo_act_mappings.createMapping($object_name,$pickListLabels,$pickListValues,$textLabels,$textValues,$mapName);
+$bo_act_mappings.createMapping($object_name,$mapType,$pickListLabels,$pickListValues,$textLabels,$textValues,$mapName);
 _setSpeed(1000);
 //Add the custom process to SFM wizard.
 $sfm_act_wizards.addToWizard($object_name,$currentWizardName,"SFM",$processName);

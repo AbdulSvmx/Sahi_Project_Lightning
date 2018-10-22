@@ -37,6 +37,228 @@ var $sfm_act_formDesigner = new function sfm_act_formDesigner() {
 		_setValue($sfm_pg_formDesigner.txt_helpURL,$url);
 	};
 	
+	
+	/**
+	 * Author		:	Anand Kakhandaki
+	 * Function		: 	To Create CheckList Question
+	 * Parameter	:	$sectionName=Section name
+	 * 					$queCommonDetails=Array of $queType,$queName,$helpURL,$tag,$addToLibAndForm details
+	 * 					$queSpecificDetails=Array of details needed for specific question
+	 * Example		:	Refer _ _ _ _ file for function usage
+	 */
+	this.createCheckListQuestion=function($sectionName,$queCommonDetails,$queSpecificDetails){
+		var $queType=$queCommonDetails[0];
+		
+		_setStrictVisibilityCheck(true);
+		_selectDomain($g_domain);
+		_click(_f("main").s_richeditabletext($sectionName));
+		_click($sfm_pg_formDesigner.btn_addNewQuestion);
+		_click(_f("main").uiftetextfield($queType));
+		
+		//adding question details
+		this.addEditCheckListQuestionDetails($queCommonDetails, $queSpecificDetails);
+		_click($sfm_pg_formDesigner.btn_closeChkWindow);
+		_setStrictVisibilityCheck(false);
+	};
+	
+	this.editCheckListQuestion=function($sectionName,$queCommonDetails,$queSpecificDetails){
+		_selectDomain($g_domain);
+		var $queName=$queCommonDetails[1];
+		this.editQuestionInSection($sectionName, $queName);
+		this.addEditCheckListQuestion($queCommonDetails, $queSpecificDetails)
+		
+	};
+	
+	
+	this.addEditCheckListQuestionDetails=function($queCommonDetails, $queSpecificDetails){
+		var $queType=$queCommonDetails[0];
+		var $queName=$queCommonDetails[1];
+		var $helpURL=$queCommonDetails[2];
+		var $tag=$queCommonDetails[3];
+		var $addToLibAndForm=$queCommonDetails[4];
+		
+		_wait(2000,_isVisible($sfm_pg_formDesigner.tab_questionDetails));
+		//Common fields
+		_setValue($sfm_pg_formDesigner.txt_queName,$queName);
+		_setValue($sfm_pg_formDesigner.txt_helpURL,$helpURL);
+		_setValue(_setValue($sfm_pg_formDesigner.txt_tag,$tag));
+		
+		if ($queType=="Attachment") {
+			this.createAttachementQue($queSpecificDetails);
+		}else if ($queType=="Checkbox" || $queType=="Multi-select Picklist" ) {
+			this.createCheckBoxQue($queSpecificDetails);
+		}else if ($queType=="Date"||$queType=="Date Time") {
+			this.createDateQue($queSpecificDetails);
+		}else if ($queType=="Picklist"||$queType=="Radio Button") {
+			this.createPicklistQue($queSpecificDetails);
+		}else if ($queType=="Number"||$queType=="Text") {
+			this.createNumberQue($queSpecificDetails);
+		}
+		_wait(5000);
+		if ($addToLibAndForm==true) {
+			_click($sfm_pg_formDesigner.btn_addToLibAndForm);
+		}else {
+			_click($sfm_pg_formDesigner.btn_addToLib);
+		}
+		
+	};
+	
+	/**
+	 * Author		:	Anand Kakhandaki
+	 * Function		: 	To Create CheckList Question -Attachment type
+	 * Parameter	:	$attQueDetails=Array of $includeINOPDOC,$descReq details in true/false
+	 * 
+	 * Example		:	Refer _ _ _ _ file for function usage
+	 */
+	this.createAttachementQue=function($attQueDetails){
+		//attachment parameter
+		//$attQueDetails=[$includeINOPDOC,$descReq]
+		var $includeINOPDOC=$attQueDetails[0];
+		var $descReq=$attQueDetails[1];
+
+		if ($includeINOPDOC==false) {
+			_click($sfm_pg_formDesigner.btn_includeINPDOC);
+		}
+		if ($descReq==false) {
+			_click($sfm_pg_formDesigner.btn_descReq);
+		}
+	};
+	
+	/**
+	 * Author		:	Anand Kakhandaki
+	 * Function		: 	To Create CheckList Question - Checkbox / Multi-select Picklist type
+	 * Parameter	:	$attQueDetails=Array of $responseSet,$responseSetName,$ansValueSet,$default
+	 * 				:   $responseSet=Name of already available Response set name
+	 * 				:   $responseSetName= New Response set name
+	 * 				:   $ansValueSet=Array of answer values
+	 * 				:   $default=Array containing detail to select value as default or not in true/false format
+	 * Example		:	Refer _ _ _ _ file for function usage
+	 */
+	this.createCheckBoxQue=function($chkQueDetails){
+		//$chkQueDetails=[$responseSet,$responseSetName,$ansValueSet,$default]
+		var $responseSet=$chkQueDetails[0];
+		var $responseSetName=$chkQueDetails[1];
+		var $ansValueSet=$chkQueDetails[2];
+		var $default=$chkQueDetails[3];
+		
+		if ($responseSet=="Create New") {
+			_setValue($sfm_pg_formDesigner.txt_responseSetName, $responseSetName);
+			for (var $i = 0; $i < $ansValueSet.length; $i++) {
+				var $ansField=null;
+				if ($i==0) {
+					$ansField=_f("main").s_textinput("/ansValue/").near($sfm_pg_formDesigner.label_ansValue);
+					_setValue($ansField,$ansValueSet[$i]);	
+				}else{
+					_click($sfm_pg_formDesigner.btn_addAns);
+					$ansField=_f("main").s_textinput("ansValue["+$i+"]").near($sfm_pg_formDesigner.label_ansValue);
+					_setValue($ansField,$ansValueSet[$i]);	
+				}
+				if ($default[$i]==true) {
+					_click($sfm_pg_formDesigner.btn_default.near($ansField));
+				}
+			}
+		}else {
+			_setSelected($sfm_pg_formDesigner.sel_responseSet, $responseSet);
+		}
+	};
+	
+	
+	/**
+	 * Author		:	Anand Kakhandaki
+	 * Function		: 	To Create CheckList Question - Date / Date Time Type
+	 * Parameter	:	$dateQueDetails=Array of $preFillFromWO,$defaultAnsType,$defaultVal
+	 * 				:   $preFillFromWO= prefill from WO in true/false format
+	 * 				:   $defaultAnsType= if no preFill, what is Ans type in Value/Function
+	 * 				:   $defaultVal=Ans value. Ex source field name if prefill selected, or date if value selected or today if function selected
+	 * Example		:	Refer _ _ _ _ file for function usage
+	 */
+	this.createDateQue=function($dateQueDetails){
+		//$dateQueDetails=[$preFillFromWO,$defaultAnsType,$defaultVal];
+		var $preFillFromWO=$dateQueDetails[0];
+		var $defaultAnsType=$dateQueDetails[1];
+		var $defaultVal=$dateQueDetails[2];
+	
+		if ($preFillFromWO==true) {
+			_click($sfm_pg_formDesigner.btn_preFill);
+			_setSelected($sfm_pg_formDesigner.sel_sourceField, $defaultVal);
+		}else {
+			_setSelected($sfm_pg_formDesigner.sel_defaultAnsType,$defaultAnsType);
+			if ($defaultAnsType=="Value") {
+				_setValue($sfm_pg_formDesigner.txt_dateField,$defaultVal);
+			}else {
+				_setSelected($sfm_pg_formDesigner.sel_dateFunction, $defaultVal);
+			}
+		}
+	};
+	
+	/**
+	 * Author		:	Anand Kakhandaki
+	 * Function		: 	To Create CheckList Question - Number / Text Type
+	 * Parameter	:	$numberQueDetails=Array of $preFillFromWO,$defaultVal
+	 * 				:   $preFillFromWO= prefill from WO in true/false format
+	 * 				:   $defaultVal=Ans value. Ex source field name if prefill selected, or text value
+	 * Example		:	Refer _ _ _ _ file for function usage
+	 */
+	this.createNumberQue=function($numberQueDetails){
+		//$numberQueDetails=[$preFillFromWO,$defaultVal]
+		var $preFillFromWO=$numberQueDetails[0];
+		var $defaultVal=$numberQueDetails[1];
+		
+		if ($preFillFromWO==true) {
+			_click($sfm_pg_formDesigner.btn_preFill);
+			_setSelected($sfm_pg_formDesigner.sel_sourceField, $defaultVal);
+		}else {
+			_setValue($sfm_pg_formDesigner.txt_defaultAns,$defaultVal);
+		}
+	};
+	
+	/**
+	 * Author		:	Anand Kakhandaki
+	 * Function		: 	To Create CheckList Question - Picklist / Radio Button Type
+	 * Parameter	:	$$picklistQueDetails=Array of $preFillFromWO,$responseSet,$responseSetName,$ansValueSet,$default
+	 * 				:   $preFillFromWO= prefill from WO in true/false format
+	 * 				:   $responseSet=Name of already available Response set name
+	 * 				:   $responseSetName= New Response set name
+	 * 				:   $ansValueSet=Array of answer values
+	 * 				:   $default=Array containing detail to select value as default or not in true/false format
+	 * Example		:	Refer _ _ _ _ file for function usage
+	 */
+	this.createPicklistQue=function($picklistQueDetails){
+		//$picklistQueDetails=[$preFillFromWO,$responseSet,$responseSetName,$ansValueSet,$default]
+		var $preFillFromWO=$picklistQueDetails[0];
+		var $responseSet=$picklistQueDetails[1];
+		var $responseSetName=$picklistQueDetails[2];
+		var $ansValueSet=$picklistQueDetails[3];
+		var $default=$picklistQueDetails[4];
+		
+		if ($preFillFromWO==true) {
+			_click($sfm_pg_formDesigner.btn_preFillinNumberQue);
+			_setSelected($sfm_pg_formDesigner.sel_sourceFieldinNumberQue, $defaultVal);
+		}
+	
+		//Create New
+		if ($responseSet=="Create New") {
+			_setValue($sfm_pg_formDesigner.txt_responseSetName, $responseSetName);
+			for (var $i = 0; $i < $ansValueSet.length; $i++) {
+				var $ansField=null;
+				if ($i==0) {
+					$ansField=_f("main").s_textinput("/ansValue/").near($sfm_pg_formDesigner.label_ansValue);
+					_setValue($ansField,$ansValueSet[$i]);	
+				}else{
+					_click($sfm_pg_formDesigner.btn_addAns);
+					$ansField=_f("main").s_textinput("ansValue["+$i+"]").near($sfm_pg_formDesigner.label_ansValue);
+					_setValue($ansField,$ansValueSet[$i]);	
+				}
+				if ($default[$i]==true) {
+					_click($sfm_pg_formDesigner.btn_default.near($ansField));
+				}
+			}
+		}else {
+			_setSelected($sfm_pg_formDesigner.sel_responseSet, $responseSet);
+		}
+	};
+	
+	
 	/**
 	 * Author		:	Anand Kakhandaki
 	 * Function		: 	To Create Entry criteria for checklist section
@@ -47,6 +269,7 @@ var $sfm_act_formDesigner = new function sfm_act_formDesigner() {
 	this.createEntryCriteria=function($existingEntryCriteria,$criteriaDetails){
 		_click($sfm_pg_formDesigner.tab_entryCriteria);
 		this.setEntryCriteria($existingEntryCriteria, $criteriaDetails);
+		_click($sfm_pg_formDesigner.btn_applyRemove);
 		_click($sfm_pg_formDesigner.btn_applySectionWindow);
 		_wait(10000,_isVisible($sfm_pg_formDesigner.label_saveEditSectionMsg));
 		_click($sfm_pg_formDesigner.btn_entryCriteriaApplyButton);
@@ -294,6 +517,7 @@ var $sfm_act_formDesigner = new function sfm_act_formDesigner() {
 		var $answer;
 		var $advExpr;
 		var $errorMsg;
+		var $questionType;
 		//add Expression to DVR
 		$comboField=$dvrExpressionDetails[0];
 		$operandType=$dvrExpressionDetails[1];
@@ -301,11 +525,12 @@ var $sfm_act_formDesigner = new function sfm_act_formDesigner() {
 		$advExpr=$dvrExpressionDetails[3];
 		$msfType=$dvrExpressionDetails[4];
 		$errorMsg=$dvrExpressionDetails[5];
-		this.addDVRExpressions($comboField, $operandType, $answer, $advExpr, $msfType, $errorMsg);
+		$questionType=$dvrExpressionDetails[6];
+		this.addDVRExpressions($comboField, $operandType, $answer, $advExpr, $msfType, $errorMsg,$questionType);
 		
 	};
 	
-	this.addDVRExpressions=function($comboField, $operandType, $answer, $advExpr, $msfType, $errorMsg){
+	this.addDVRExpressions=function($comboField, $operandType, $answer, $advExpr, $msfType, $errorMsg,$questionType){
 		//_log("$comboField.length: "+$comboField.length);
 		if ($comboField.length>1) {
 			for (var $i = 0; $i < $comboField.length-1; $i++) {
@@ -328,7 +553,12 @@ var $sfm_act_formDesigner = new function sfm_act_formDesigner() {
 				_setSelected($sfm_pg_formDesigner.sel_operandType.near($rowNo),$operandType[$index]);
 				if ($operandType[$index]=="Value") {
 					_log("Inside Value");
-					_setValue($sfm_pg_formDesigner.txt_dvrAnsValue.near($rowNo),$answer[$index]);
+					if ($questionType=="Number") {
+						_setValue($sfm_pg_formDesigner.txt_dvrNumberAnsValue.near($rowNo),$answer[$index]);
+					}else {
+						_setValue($sfm_pg_formDesigner.txt_dvrDateAnsValue .near($rowNo),$answer[$index]);
+					}
+					
 				}else {
 					_setSelected($sfm_pg_formDesigner.sel_ansPicklist.near($rowNo),$answer[$index]);
 				}

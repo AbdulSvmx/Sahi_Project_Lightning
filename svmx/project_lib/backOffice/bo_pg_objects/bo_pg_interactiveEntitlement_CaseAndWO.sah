@@ -10,6 +10,7 @@ var $bo_pg_interactiveEntitlement_CaseAndWO = new function bo_pg_interactiveEnti
 	this.btn_settings = _cell("Settings");
 	this.btn_settingsPS = _span("Settings");
 	this.btn_matchContactsPS = _button("Match Contact");
+	this.btn_matchAccountPS  = _button("Match Accounts");
 	this.btn_entitleusingAccount = _button("Account");
 	this.btn_apply = _span("Apply");
 	this.btn_selectwarrantyorScon = _div("Select for Contract/Warranty options");
