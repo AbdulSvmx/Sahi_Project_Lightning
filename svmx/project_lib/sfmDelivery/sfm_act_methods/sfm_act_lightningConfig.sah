@@ -781,5 +781,15 @@ this.getWorkDetailNumberFromWO = function() {
 	
 	
 };
+this.navigateToLatestWorkDetail = function() {
+	//This function navigates to work detail (Child line items) after
+	//save in a source to target process when the line number is unknown.
+	//Author: Janaki
+	var $x = _count("_span","/WL-/",_near(_span("Line Number")));
+	_log($x);
+	$x = $x-1;
+	_click(_link("/WL-/",_near(_span("slds-row-number slds-text-body--small slds-text-color--weak["+$x+"]"))));
+	_wait(2000);
+};
 
 };
