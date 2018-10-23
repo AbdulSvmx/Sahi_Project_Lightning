@@ -6,17 +6,18 @@ var $profilename = $group_profilename;
 var $ProcessStatus=false;
 var $wizardObject ="Work Order";
 //checklist variables versions
-var $sfmName1 = "SCN_ChecklistOPDOC_3_RS-10587_allversions_trail1";
-var $sfmName2= "SCN_ChecklistOPDOC_3_RS-10587_firstversion_trail1";
-var $sfmName3= "SCN_ChecklistOPDOC_3_RS-10587_lastversion_trail1";
+var $sfmName1 = "SCN_ChecklistOPDOC_3_RS-10587_allversions";
+var $sfmName2= "SCN_ChecklistOPDOC_3_RS-10587_firstversion";
+var $sfmName3= "SCN_ChecklistOPDOC_3_RS-10587_lastversion";
 
-$checklists = ["SCN_ChecklistOPDOC_3_RS-10587_allversions_trail1","SCN_ChecklistOPDOC_3_RS-10587_firstversion_trail1","SCN_ChecklistOPDOC_3_RS-10587_lastversion_trail1"];
+$checklists = ["SCN_ChecklistOPDOC_3_RS-10587_allversions","SCN_ChecklistOPDOC_3_RS-10587_firstversion","SCN_ChecklistOPDOC_3_RS-10587_lastversion"];
 $checklistversion = ["All Versions","First Version","Last Version"];
 
 //Variables required for OPDOC Process
 var $value = _readFile("/auto/sahi_pro/userdata/scripts/Sahi_Project_Lightning/scenario7.txt");
 var $templateName = $bo_act_common.generateRandomName("SFM_Auto_Template_");
-var $sfmName4 = $bo_act_common.generateRandomName("SFM_Auto_");
+//var $sfmName4 = $bo_act_common.generateRandomName("SFM_Auto_");
+var $sfmName4 = "Auto_SCN_ChecklistOPDOC_3_RS-10587";
 var $wizardObject="Work Order";
 var $wizardName="AutoRegression";
 var $wizardType="Output Document";
@@ -30,13 +31,13 @@ var $includeskippedSection="true";
 $bo_act_login.login($g_url, $appiumAdminUn, $appiumAdminPwd);
 $sfm_act_lightningConfig.switchToLightning();
 
-$ProcessStatus=$sfm_act_SFM.sfmProcessCheck($sfmName);
+$ProcessStatus=$sfm_act_SFM.checkCustomProcess($sfmName);
 _wait(10000);
 if($ProcessStatus==false){
 
 	//Creationg of first checklist all verions
 	$bo_act_navigation.navigateToSfmTransactionDesigner();
-	_wait(10000);
+	_wait(15000);
 	_click($bo_pg_sfmTransactionAndDesigner.btn_newSFM);
 	_wait(3000);
 	_setValue($bo_pg_sfmTransactionAndDesigner.txt_name, $sfmName1);
@@ -103,7 +104,7 @@ if($ProcessStatus==false){
 //-----------------------------------------------Creation OF OPDOC with first,last,all Versions----------------------------------
 
 $bo_act_navigation.navigateToSfmTransactionDesigner();
-_wait(10000);
+_wait(15000);
 _click($bo_pg_sfmTransactionAndDesigner.btn_newSFM);
 _wait(3000);
 _setValue($bo_pg_sfmTransactionAndDesigner.txt_name, $sfmName4);
@@ -127,7 +128,7 @@ _wait(6000);
 //function of adding the versions first,last and all versions for the checklsits in opdoc
 $sfm_pg_advancedOptions.AdvancedOptionsChecklist($selectallChecklist, $includeskippedSection,$checklists,$checklistversion);
 _click($bo_pg_sfmTransactionAndDesigner.btn_saveAndclose);
-_wait(10000);
+_wait(15000);
 
 $sfm_act_wizards.addToWizard($wizardObject,$wizardName, $wizardType,$sfmName4,$handOver,$profilename,$wizardCriteria);  
 

@@ -178,7 +178,7 @@ var $sfm_act_SFM = new function sfm_act_SFM() {
 		if (_isVisible(_f("main").s_label($sfmName).near(_f("main").processlistitemrenderer($sfmName)))) {
 			$retVal=true;
 		}else {
-			$retVal=true;
+			$retVal=false;
 		}
 		return $retVal;
 	};

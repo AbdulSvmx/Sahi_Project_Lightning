@@ -6,7 +6,7 @@ $scenario_10580.start();
 
 var $ProcessStatus=false;
 var $wizardObject ="Work Order";
-var $sfmName = "Auto_10580_ChecklistSections_trail123";
+var $sfmName = "Auto_10580_ChecklistSections";
 var $questionNames1=["Number Should not be greater than 100","Section One Question One","Section One Question Two","Section One Question Three"];
 var $questionNames2 = ["Section Two Warning","Section Two Question One","Section Two Question Two","Section Two Question Three"];
 var $questionNames3=  ["Section Three Error","Section Three Warning","Section Three Question One","Section Three Question Two","Section Three Question Three"];
@@ -18,6 +18,9 @@ var $sectionName2 = "Section Two";
 var $sectionName3 = "Section Three";
 var $sectionName4 = "Section Four";	
 
+
+
+
 //variables for exit criteria
 var $exitQuestionName = ["Number Should not be greater than 100"];
 var $questionType=["Number"];
@@ -26,7 +29,9 @@ var $operandType=["Value"];
 var $answer=["20"];
 var $skipTo=["3-"+$sectionName3];
 var $criteriaDetails1=[$comboField,$operandType,$answer,$skipTo];
-var $criteriaDetails=[$criteriaDetails1];
+var $criteriaDetailsv=[$criteriaDetails1];
+
+//var $criteriaDetails=[$criteriaDetails1];
 
 var $targetObjectName = "Work Order";
 
@@ -42,8 +47,8 @@ var $criteriaDetails=[$comboField,$comboConditions,$toggleButton,$comboInput,$ad
 
 $bo_act_login.login($g_url, $appiumAdminUn, $appiumAdminPwd);
 $sfm_act_lightningConfig.switchToLightning();
-$ProcessStatus=$sfm_act_SFM.sfmProcessCheck($sfmName);
-_wait(10000);
+$ProcessStatus=$sfm_act_SFM.checkCustomProcess($sfmName);
+_wait(5000);
 if($ProcessStatus==false){
 
 $bo_act_navigation.navigateToSfmTransactionDesigner();
@@ -63,7 +68,6 @@ _click($bo_pg_sfmTransactionAndDesigner.btn_mappings);
 _click($bo_pg_sfmTransactionAndDesigner.btn_mappings);
 _setValue(_f("main").s_textinput("/textInput/").near(_f("main").tab("Field Map For Existing Records")),"SVMX");
 _click(_f("main").s_label("SVMXSTD: Map Work Order to Checklist"));
-//$bo_act_checklistdesigner.addQuestion("Text", "What is the Work Order Number?", true,"Work Order Number");
 _wait(10000);
 _selectDomain("/svmx/");
 _click($bo_pg_formDesigner.tab_clickFormDesigner);
@@ -129,10 +133,7 @@ _wait(5000);
 //Adding Exit Criteria - -While stablization make it generic function
 $sfm_act_formDesigner.editSection($sectionName1);
 $sfm_act_formDesigner.addExistCriteria();
-$sfm_act_formDesigner.addQuesToExistCriteriaTab($exitQuestionName, $questionType, $criteriaDetails);
-//$sfm_act_formDesigner.setExitCriteriaOnNumberQuestion($exitQuestionName, $questionType, $criteriaDetails);
-//var $exitlabel= _f("main").s_navigatorcontent("Exit Criteria");
-//_click(_f("main").s_button("Apply")).near($exitlabel);
+$sfm_act_formDesigner.addQuesToExistCriteriaTab($exitQuestionName, $questionType, $criteriaDetailsv);
 _click(_f("main").s_button("saveBtnExit"));
 _click($bo_pg_formDesigner.btn_closeQuestionPopUp);
 _wait(3000);
@@ -151,20 +152,6 @@ _click($bo_pg_sfmTransactionAndDesigner.btn_saveAndclose);
 _wait(5000);
 
 
-_click($bo_pg_sfmTransactionAndDesigner.btn_saveAndclose);
-
-
-
-//Source object update
-//Sou Variables
-var $field = ["Billing Type","Scheduled Date","Scheduled Date Time","Proforma Invoice", "No Of Times Assigned"];
-var $condition= ["Set","Set","Set","Set","Set"];
-var $operand = ["Value","Function","Question","Value","Value"];
-var $value = ["Loan","Today","AUTO_What is the ScheduledDatetime?","Source Object Updated","2"];
-var $souObject  = "Work Order";
-
-
-
 var $profilename = $group_profilename;
 //$bo_act_SFMAppPermission.set_mobileapp_permissions($profilename, $targetObjectName, $sfmName);
 
@@ -175,4 +162,4 @@ _wait(5000);
 
 }
 _writeFile("true", $appiumPath+$sahiIntermediatoryPath, true);
-$scenario_10577.end();
+$scenario_10580.end();

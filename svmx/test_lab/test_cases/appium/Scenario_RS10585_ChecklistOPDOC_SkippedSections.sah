@@ -51,8 +51,7 @@ $sfm_act_lightningConfig.switchToLightning();
 
 
 //Checking if process exists or not.
-$ProcessStatus=$sfm_act_SFM.sfmProcessCheck($sfmName);
-
+$ProcessStatus=$sfm_act_SFM.checkCustomProcess($sfmName);
 if($ProcessStatus==false){
 
 $bo_act_navigation.navigateToSfmTransactionDesigner();
@@ -135,7 +134,7 @@ _wait(5000);
 //-----------------------Creating OPDOC----------------------------
 
 $bo_act_navigation.navigateToSfmTransactionDesigner();
-_wait(10000);
+_wait(15000);
 _click($bo_pg_sfmTransactionAndDesigner.btn_newSFM);
 _wait(3000);
 _setValue($bo_pg_sfmTransactionAndDesigner.txt_name, $sfmName1);
