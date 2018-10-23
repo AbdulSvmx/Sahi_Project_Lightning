@@ -228,7 +228,7 @@ var $sfm_act_Transactions = new function sfm_act_Transactions() {
 				
 				for (var $i = 0; $i < $fieldNameList.length; $i++) {
 					_log($fieldNameList[$i]);
-					this.lookUpScrollIntoView($fieldNameList[$i]);
+					this.lookUpScrollIntoView($fieldNameList[$i],$bo_pg_sfmTransactionAndDesigner.scroll_filedScroll);
 					
 					if ($addToSearchList[$i]==true) {
 						_log("inside search field list");
