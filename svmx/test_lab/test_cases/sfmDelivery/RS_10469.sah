@@ -4,7 +4,7 @@ $RS_10469.start();
 var $objectName = "Work Order";
 var $childObject = "Work Detail";
 var $processName = "RS_10469";
-var $process_to_clone = "Create Follow-Up Work Order from Work Order";
+var $process_to_clone = "Create Quote from Work Order";
 var $sfmTemplate = "SVMXSTD: Manage WO Usage Lines";
 var $isCustom = false;
 var $lineType = "Parts";
@@ -114,7 +114,7 @@ _setValue($bo_pg_sfmTransactionAndDesigner.text_targetChildAlias,$lineType);
 //_click($bo_pg_sfmTransactionAndDesigner.chkbx_targetChild2);
 _click($bo_pg_sfmTransactionAndDesigner.btn_qualifyingCriteriaAndFieldMapping);
 
-_setSelected(_f("main").s_dropdownlist(1).near(_f("main").s_label($lineType)),"Work Detail (Work Order)");
+_setSelected(_f("main").s_dropdownlist("objCombo").near(_f("main").s_label("Work Order")),"Work Detail (Work Order)");
 
 
 _click($bo_pg_sfmTransactionAndDesigner.btn_screenDesigner);
