@@ -20,7 +20,6 @@ var $sfm_pg_sourceObjectUpdate = new function sfm_pg_sourceObjectUpdate(){
 	
 	
 	/**
-	 * Author		:	Lakshmisha S.N
 	 * Function		: 	To create source object update on the selected source object
 	 * Parameter	:	$souObject = Source object
 	 * 					$field = Field to be updated

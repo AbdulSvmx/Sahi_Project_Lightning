@@ -330,6 +330,13 @@ var $sfm_act_SFM = new function sfm_act_SFM() {
 		_wait(3000, _isVisible($bo_pg_sfmTransactionAndDesigner.page_saved));
 	}
 	
+	/**
+	 * This function is set form fill on a field
+	 * $fieldName - field on which formfill to be set
+	 * $objMapping - name of the mapping
+	 * $nearBy - near which the object is present
+	 * Eg : 10444.sah  
+	 */	
 	this.setFormFill = function($fieldName,$objMapping,$nearBy){
 		if($nearBy == 'Parts' || $nearBy == 'Labor' || $nearBy == 'Expense' || $nearBy == 'Travel'){
 			_click(_f("main").s_richtext($fieldName).near(_f("main").s_richtext($nearBy)));
