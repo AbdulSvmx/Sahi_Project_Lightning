@@ -269,9 +269,10 @@ var $sfm_act_Transactions = new function sfm_act_Transactions() {
 				$oprValcomboFieldType=_f("main").s_combobox("/picklist/").rightOf($oprTypeCombo);
 				
 				if ($operandTypeCombo[$i]=="Value") {
-					if (_exists($oprValcomboFieldType)) {
+					if (_exists($oprValcomboFieldType) && ($operandValue[$i].includes("SVMX.CURRENTRECORD")==false)) {
 						_setSelected($oprValcomboFieldType,$operandValue[$i]);
 					}else {
+						var $operantTextValue=_f("main").s_textinput(3).near($oprTypeCombo);
 						_setValue($operantTextValue,$operandValue[$i]);
 					}
 				}else {
