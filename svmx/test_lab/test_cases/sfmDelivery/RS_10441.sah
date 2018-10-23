@@ -111,7 +111,7 @@ if(_isVisible($bo_pg_sfmTransactionAndDesigner.btn_popUpOK)){
 }
 _click($bo_pg_sfmTransactionAndDesigner.list_sourceChild);
 _click($bo_pg_sfmTransactionAndDesigner.list_targetChild);
-_setValue($bo_pg_sfmTransactionAndDesigner.text_targetChildAlias,"Parts");
+_setValue($bo_pg_sfmTransactionAndDesigner.text_targetChildAlias,$lineType);
 _click($bo_pg_sfmTransactionAndDesigner.chkbx_targetChild2);
 _click($bo_pg_sfmTransactionAndDesigner.btn_qualifyingCriteriaAndFieldMapping);
 _setSelected($bo_pg_sfmTransactionAndDesigner.list_childMappingCombo,"Work Detail (Work Order)");
