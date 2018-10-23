@@ -267,7 +267,17 @@ var $sfm_act_Transactions = new function sfm_act_Transactions() {
 				
 				$oprTypeCombo=_f("main").s_dropdownlist("operandTypeCombo").near($fieldLabeRowNo);
 				$oprValcomboFieldType=_f("main").s_combobox("/picklist/").rightOf($oprTypeCombo);
-				if ((_exists($oprValcomboFieldType) && $operandTypeCombo[$i]=="Function") || $fieldCombo[$i]=="Record Type ID") {
+				
+				if ($operandTypeCombo[$i]=="Value") {
+					if (_exists($oprValcomboFieldType)) {
+						_setSelected($oprValcomboFieldType,$operandValue[$i]);
+					}else {
+						_setValue($operantTextValue,$operandValue[$i]);
+					}
+				}else {
+					_setSelected($oprValcomboFieldType,$operandValue[$i]);
+				}
+/*				if ((_exists($oprValcomboFieldType) && $operandTypeCombo[$i]=="Function") || $fieldCombo[$i]=="Record Type ID") {
 					//_setValue(_f("main").s_textinput("/textInput/").inside($oprValcomboFieldType),$operandValue[$i]);
 					_setSelected($oprValcomboFieldType,$operandValue[$i]);
 				}else if (_exists($oprValcomboFieldType) && $operandTypeCombo[$i]=="Value") {
@@ -283,7 +293,7 @@ var $sfm_act_Transactions = new function sfm_act_Transactions() {
 						_setValue(_f("main").s_textinput("operandValue").near($fieldLabeRowNo),$operandValue[$i]);
 					}	
 				}
-				
+*/				
 			}
 			_wait(5000);
 			_setValue($sfm_pg_screenDesigner.txt_lookupAdvExpr,$lookupAdvExpr);
