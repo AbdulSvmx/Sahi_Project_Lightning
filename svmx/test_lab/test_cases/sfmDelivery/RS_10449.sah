@@ -105,6 +105,7 @@ $rs_10449.start();
 			RS10449_searchObject($productName[$i]);
 			_assertExists(_link($productName[$i]));
 		}
+		RS10449_searchObject($productName[0]);
 		_click(_link($productName[0]));
 		_click($sfm_pg_sfmDesigner.link_updatePartsSearch);
 		_wait(5000);
