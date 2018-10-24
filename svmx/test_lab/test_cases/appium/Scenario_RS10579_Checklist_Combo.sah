@@ -4,7 +4,7 @@ $scenario_10579.start();
 
 var $ProcessStatus=false;
 var $wizardObject ="Work Order";
-var $sfmName = "Auto_10579_Checklist_trailVT";
+var $sfmName = "Auto_10579_Checklist";
 var $questionNames1=["Date should not be Today","Number Should not be greater than 100","Question Three"];
 var $questionNames2 = ["Question One section two","Question two Section two"];
 var $questionNames3=  ["Section Three q1","Section Three q 2"];
@@ -21,11 +21,22 @@ var $operandType=["Value"];
 var $answer=["20"];
 var $skipTo=["3-"+$sectionName3];
 var $criteriaDetails1=[$comboField,$operandType,$answer,$skipTo];
+var $criteriaDetailsv=[$criteriaDetails1];
 var $targetObjectName = "Work Order";
 
 
-//Sou Variables
+//Adding Entry criteria
+var $comboField=["Priority"];
+var $comboConditions=["Equals"]; 
+var $toggleButton=[""];
+var $comboInput=["High"];
+var $advExpr="";
+var $criteriaName=$bo_act_common.generateRandomName("SFMCheckListEC_");
+var $criteriaDetails=[$comboField,$comboConditions,$toggleButton,$comboInput,$advExpr,$criteriaName];
 
+
+
+//Sou Variables
 
 var $field = ["Billing Type","Problem Description"];
 var $condition= ["Set","Set"];
@@ -73,22 +84,10 @@ var $dvrExpressionDetails2=[$comboField2,$operandType2,$answer2,$advExpr2,$msfTy
 
 
 
-//Adding Entry criteria
-var $comboField=["Priority"];
-var $comboConditions=["Equals"]; 
-var $toggleButton=[""];
-var $comboInput=["High"];
-var $advExpr="";
-var $criteriaName=$bo_act_common.generateRandomName("SFMCheckListEC_");
-var $criteriaDetails=[$comboField,$comboConditions,$toggleButton,$comboInput,$advExpr,$criteriaName];
-
-
-
 $bo_act_login.login($g_url, $appiumAdminUn, $appiumAdminPwd);
 $sfm_act_lightningConfig.switchToLightning();
 
-$ProcessStatus=$sfm_act_SFM.sfmProcessCheck($sfmName);
-
+$ProcessStatus=$sfm_act_SFM.checkCustomProcess($sfmName);
 if($ProcessStatus==false){
 
 $bo_act_navigation.navigateToSfmTransactionDesigner();
@@ -198,7 +197,7 @@ $sfm_act_formDesigner.addQuestionToSection($sectionName2, $questionNames2[0]);
 $sfm_act_formDesigner.addQuestionToSection($sectionName2, $questionNames2[1]);
 _wait(3000);
 _click(_f("main").s_button("Edit Question").near(_f("main").s_label($questionNames2[1]).near(_f("main").s_richeditabletext($sectionName2))));
-_setValue(_f("main").s_textinput("helpUrl"),"http://www.google.com");
+_setValue(_f("main").s_textinput("helpUrl"),"https://www.ge.com/");
 _click($sfm_pg_formDesigner.btn_dvrSave);
 
 //Adding question to sectionThree
@@ -208,7 +207,7 @@ $sfm_act_formDesigner.addQuestionToSection($sectionName3, $questionNames3[1]);
 //-------------------------------------------------------
 
 //Adding Exit Criteria
-var $criteriaDetailsv=[$criteriaDetails1];
+
 $sfm_act_formDesigner.editSection($sectionName1);
 $sfm_act_formDesigner.addExistCriteria();
 $sfm_act_formDesigner.addQuesToExistCriteriaTab($exitQuestionName, $questionType, $criteriaDetailsv);
@@ -231,7 +230,7 @@ _wait(5000);
 //Source object update
 _wait(15000);
 //Creating SOU
-$sfm_pg_sourceObjectUpdate.createSOU($souObject,$field, $condition, $operand, $value,"Others");
+$sfm_pg_sourceObjectUpdate.createSOU($souObject,$field, $condition, $operand, $value,"Checklist");
 
 _click($bo_pg_sfmTransactionAndDesigner.btn_saveAndclose);
 _wait(5000);
