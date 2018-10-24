@@ -1,0 +1,14 @@
+	_writeFile("false", $appiumPath+$sahiIntermediatoryPath, true);
+var $scenario_10569 = _testcase("scenario_10569","Scheduled Data Sync Setting back to 10000 mins for datasync");
+$scenario_10569.start();
+
+_setSpeed($g_stepSpeed);
+$bo_act_login.login($g_url, $appiumAdminUn, $appiumAdminPwd);
+$sfm_act_lightningConfig.switchToLightning(); 
+
+var $minutes = "10000";
+
+//$bo_act_SFMAppPermission.workOrderSynchronizeapplicationdata($minutes);
+$bo_act_SFMAppPermission.workOrderSynchronizeapplicationdata($minutes);
+_writeFile("true", $appiumPath+$sahiIntermediatoryPath, true);
+$scenario_10569.end();
