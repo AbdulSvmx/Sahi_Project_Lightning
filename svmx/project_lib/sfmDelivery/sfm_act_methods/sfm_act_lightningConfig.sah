@@ -239,7 +239,7 @@ this.addCustomFields = function($objectName,$fieldNames,$dataTypes,$myDomain,$mu
 			_click(_radio("/dtype/",_in(_cell($dataTypes[$i]))));
 			_click($sfm_pg_wo.btn_nextInAddCustomFields);
 			if($dataTypes[$i] === "Lookup Relationship"){
-				_setSelected(_select(0,_near(_label("*Related To"))),$lookupType);
+				_setSelected(_select(0,_near(_label("*Related To"))),$lookupType[$i]);
 				_click($sfm_pg_wo.btn_nextInAddCustomFields);
 			}
 			
