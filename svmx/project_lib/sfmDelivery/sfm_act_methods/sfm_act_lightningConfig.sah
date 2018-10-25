@@ -241,6 +241,7 @@ this.addCustomFields = function($objectName,$fieldNames,$dataTypes,$myDomain,$mu
 			if($dataTypes[$i] === "Lookup Relationship"){
 				_setSelected(_select(0,_near(_label("*Related To"))),$lookupType[$i]);
 				_click($sfm_pg_wo.btn_nextInAddCustomFields);
+				_click($sfm_pg_wo.btn_nextInAddCustomFields);
 			}
 			
 			_setValue($sfm_pg_wo.txt_customFieldName,$fieldNames[$i]);
