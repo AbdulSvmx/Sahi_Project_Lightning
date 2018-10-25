@@ -1,0 +1,31 @@
+//Lakshmi BS
+
+/*
+ * PRE Requisites to be run in the org before running other scripts - LIGHTNING CODE
+ */
+_writeFile("false", $appiumPath+$sahiIntermediatoryPath, true);
+var $rs_10562 = _testcase("SCN_SelfDispatch_RS_10562  Verify Self Dispatch of Work Orders");
+	$rs_10562.start();
+	var $bProcessStatus = false;
+	
+	//Login to App and navigate to sfm transaction and designer page
+	_setSpeed($g_stepSpeed);
+	$bo_act_login.login($g_url, $appiumAdminUn, $appiumAdminPwd);
+	$sfm_act_lightningConfig.switchToLightning(); 
+	
+	
+	
+	var $wizardObject="Work Order";
+	var $wizardName1 ="AutoRegression";
+	var $wizardType="SFM";
+	var $sfmName="Create New Event From Work Order[1]";
+	var $handOver=false;
+	var $profile="";
+	var $wizardCriteria="";
+	var $stepID="WO_SVMXEVT_001";
+	
+	_log($wizardName1);
+	$sfm_act_wizards.addToWizard($wizardObject, $wizardName1, $wizardType, $sfmName, $handOver, $profile, $wizardCriteria,$stepID);  
+	
+$rs_10562.end();
+_writeFile("true", $appiumPath+$sahiIntermediatoryPath, true);
