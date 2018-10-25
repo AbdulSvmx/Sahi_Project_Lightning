@@ -221,7 +221,7 @@ this.deleteStepFromWizard = function($wizardObject,$wizardName,$processName){
 	}
 };
 
-this.addCustomFields = function($objectName,$fieldNames,$dataTypes,$myDomain,$multiPicklistValues){
+this.addCustomFields = function($objectName,$fieldNames,$dataTypes,$myDomain,$multiPicklistValues,$lookupType){
 	//Function to add set of custom fields to the given object
 	//Creates only if object is already not present.
 	//Author:Janaki
@@ -238,12 +238,14 @@ this.addCustomFields = function($objectName,$fieldNames,$dataTypes,$myDomain,$mu
 			_selectDomain($myDomain);
 			_click(_radio("/dtype/",_in(_cell($dataTypes[$i]))));
 			_click($sfm_pg_wo.btn_nextInAddCustomFields);
+			if($dataTypes[$i] === "Lookup Relationship"){
+				_setSelected(_select(0,_near(_label("*Related To"))),$lookupType);
+				_click($sfm_pg_wo.btn_nextInAddCustomFields);
+			}
+			
 			_setValue($sfm_pg_wo.txt_customFieldName,$fieldNames[$i]);
-			
-			
-			($sfm_pg_wo.txt_customFieldName,13);
 			//Add multi picklist values if needed
-			if($dataTypes[$i] === "Picklist (Multi-Select)"){
+			if($dataTypes[$i] === "Picklist (Multi-Select)" || $dataTypes[$i] === "Picklist"){
 				_check($sfm_pg_wo.radio_multiPicklist);
 				for($z=0;$z<$multiPicklistValues.length;$z++){
 					_type($sfm_pg_wo.txt_multiPickTextArea,$multiPicklistValues[$z]);
