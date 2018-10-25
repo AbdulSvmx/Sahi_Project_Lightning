@@ -116,9 +116,6 @@ $bo_act_interactiveEntitlement_WO.performInteractiveEntitlementPSLines($WOName, 
 
 $excel.insertUnderColumn("/auto/SVMX_Catalyst/fsaautomation/resources/TestData.xlsx", "RS_10537", "Data1",$WOName ,"2");
 
-//Changing the Setting values
-var $module = "Entitlement Verification";
-var $submodule = "Work Order Entitlement VF";
 
 _writeFile("true", $appiumPath+$sahiIntermediatoryPath, true);
 

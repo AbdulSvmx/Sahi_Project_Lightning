@@ -182,6 +182,10 @@ $WOName =$sfm_act_restApiMethods.getRestApi($appiumAdminUn,$appiumAdminPwd,$appi
 _wait(30000);
 _call(top.location.reload());
 $bo_act_navigation.navigateToCreatedRecordUsingGlobalSearchWO($WOName);
-$bo_act_interactiveEntitlement_WO.performInteractiveEntitlement_NoAccountNoContact($WO_Number, $WarrantyName);
+$bo_act_interactiveEntitlement_WO.performInteractiveEntitlement_NoAccountNoContact($WOName, $WarrantyName);
+
+
+$excel.insertUnderColumn("/auto/SVMX_Catalyst/fsaautomation/resources/TestData.xlsx", "RS_10533", "Data1",$WOName ,"2");
+_writeFile("true", $appiumPath+$sahiIntermediatoryPath, true);
 
 $pre_requisite.end();
