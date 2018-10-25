@@ -171,4 +171,18 @@ function RS10448_search($objectName){
 	_wait(5000,_isVisible(_link($objectName)));
 };
 
+function RS1052_checkAndAddField_ContactPicklist(){
+	var $objectName = "Work Order";
+	var $fieldNames = ["Parts Order"];
+	var $dataTypes = ["Lookup Relationship"];
+	var $myDomain = "/lightning/";
+	var $multiPicklistValues = [""];
+	var $lookupType=["Parts Order"];
+	//Create custom fields if needed
+	$sfm_act_lightningConfig.addCustomFields($objectName, $fieldNames, $dataTypes, $myDomain, $multiPicklistValues, $lookupType);
+	_closeWindow();
+	_selectWindow();
+}
+
+
 $rs_10448.end();
