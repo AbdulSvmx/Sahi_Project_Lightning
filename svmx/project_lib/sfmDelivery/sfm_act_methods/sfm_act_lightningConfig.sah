@@ -232,7 +232,7 @@ this.addCustomFields = function($objectName,$fieldNames,$dataTypes,$myDomain,$mu
 	_selectDomain();
 	for($i=0;$i<$fieldNames.length;$i++){
 		_setValue($sfm_pg_wo.txt_quickFindFields,$fieldNames[$i]);
-		_wait(3000);
+		_wait(15000);
 		if(_isVisible(_div("No items to display."))){
 			_click($sfm_pg_wo.btn_newCustomField);
 			_selectDomain($myDomain);
