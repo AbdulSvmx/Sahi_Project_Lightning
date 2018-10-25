@@ -192,19 +192,15 @@ var $sfm_act_SFM = new function sfm_act_SFM() {
 			if ($containerName[$i] == 'Order Status') {
 				//$bo_pg_sfmTransactionAndDesigner.addField($fieldName[$i],$containerName[$i]);
 				_click(_f("main").fieldrenderer("[object Object]").near(_f("main").formitemlabel($containerName[$i])));
-			} else if($containerName[$i] == 'Parts'){
-				_setValue(_f("main").s_hscrollbar("horizontalScrollBar").near(_f("main").s_richtext("Parts")),"00");
-				_click(_f("main").s_datagroup("dataGroup").near(_f("main").s_richtext($containerName[$i])));
-			}else if($containerName[$i] == 'Labor'){
-				_setValue(_f("main").s_hscrollbar("horizontalScrollBar").near(_f("main").s_richtext("Labor")),"00");
-				_click(_f("main").s_datagroup("dataGroup").near(_f("main").s_richtext($containerName[$i])));
-			}else if($containerName[$i] == 'Expenses'){
-				_setValue(_f("main").s_hscrollbar("horizontalScrollBar").near(_f("main").s_richtext("Expenses")),"00");
-				_click(_f("main").s_datagroup("dataGroup").near(_f("main").s_richtext($containerName[$i])));
-			}else if($containerName[$i] == 'Travel'){
-				_setValue(_f("main").s_hscrollbar("horizontalScrollBar").near(_f("main").s_richtext("Travel")),"00");
-				_click(_f("main").s_datagroup("dataGroup").near(_f("main").s_richtext($containerName[$i])));
-			}				
+			} else if($containerName[$i] == 'Parts' || $containerName[$i] == 'Labor' || $containerName[$i] == 'Expenses' || $containerName[$i] == 'Travel'  ){
+				if(_isVisible(_f("main").s_hscrollbar("horizontalScrollBar").near(_f("main").s_richtext($containerName[$i])))){
+					_setValue(_f("main").s_hscrollbar("horizontalScrollBar").near(_f("main").s_richtext($containerName[$i])),"00");
+				    }
+					_click(_f("main").s_datagroup("dataGroup").near(_f("main").s_richtext($containerName[$i])));
+				}
+			else{
+				_click(_f("main").s_datagroup("dataGroup").near(_f("main").s_richtext($containerName[$i])));				
+				}
 			//Below logic is used for selecting object from multi match list	
 			_setValue($bo_pg_sfmTransactionAndDesigner.txt_quickFindField, $fieldName[$i]);
 			var $elementName=$fieldName[$i];

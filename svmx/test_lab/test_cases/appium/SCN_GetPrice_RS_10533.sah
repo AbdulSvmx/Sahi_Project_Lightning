@@ -1,0 +1,114 @@
+//Meghana Rao
+
+/*
+ * PRE Requisites to be run in the org before running other scripts - LIGHTNING CODE
+ */
+_writeFile("false", $appiumPath+$sahiIntermediatoryPath, true);
+
+
+var $pre_requisite= _testcase("scenario10533","Verify getPrice when header is entitled with warranty & PS line is entitled with SCON");
+$pre_requisite.start();
+
+_setSpeed($g_stepSpeed);
+
+var $data_excel_10538 = _readExcelFile("/auto/SVMX_Catalyst/fsaautomation/resources/TestData.xlsx","RS_10538",true);
+var $data_excel_10539 = _readExcelFile("/auto/SVMX_Catalyst/fsaautomation/resources/TestData.xlsx","RS_10539",true);
+var $Product2Name = $data_excel_10539[2]["Data3"];
+var $Product10538Name = $data_excel_10538[2]["Data2"];
+var $SCONName = $data_excel_10539[2]["Data4"];
+var $Acc10539Name = $data_excel_10539[2]["Data5"];
+var $IB10538Name = $data_excel_10538[2]["Data4"];
+$bo_act_login.login($g_url, $appiumAdminUn, $appiumAdminPwd);
+$sfm_act_lightningConfig.switchToLightning();
+
+// To create a Custom PriceBook
+$objName_custom= "Pricebook2";
+var $name=$bo_act_common.generateRandomName("PriceBook10533");
+$obJson = "{\"Name\":\""+$name+"\",\"IsActive\":\"true\"}";
+$columnName = "Name";
+$filter="id";
+//create  case with above created account and other parameters
+$pricebookID=$sfm_act_restApiMethods.postRestApi($appiumAdminUn,$appiumAdminPwd,$appiumclient_id,$appiumclient_secret,$appiumorginstance,$objName_custom,$obJson,"POST");
+//get the caseNumber
+$pricebookName =$sfm_act_restApiMethods.getRestApi($appiumAdminUn,$appiumAdminPwd,$appiumclient_id,$appiumclient_secret,$appiumorginstance,"GET", $objName_custom, $columnName, $filter, $pricebookID);
+_log($pricebookName);
+
+
+// To create Custom Service PriceBook
+
+$objName_customservice= "SVMXC__Service_Pricebook__c";
+var $name=$bo_act_common.generateRandomName("ServicePriceBook10533");
+$obJson = "{\"Name\":\""+$name+"\",\"SVMXC__Active__c\":\"true\"}";
+$columnName = "Name";
+$filter="id";
+//create  case with above created account and other parameters
+$ServicepricebookID=$sfm_act_restApiMethods.postRestApi($appiumAdminUn,$appiumAdminPwd,$appiumclient_id,$appiumclient_secret,$appiumorginstance,$objName_customservice,$obJson,"POST");
+//get the caseNumber
+$ServicepricebookName =$sfm_act_restApiMethods.getRestApi($appiumAdminUn,$appiumAdminPwd,$appiumclient_id,$appiumclient_secret,$appiumorginstance,"GET", $objName_customservice, $columnName, $filter, $ServicepricebookID);
+_log($ServicepricebookName);
+
+
+// To check if the Activity Type of Clean Up and Collabration is available
+
+
+// To get the Account 10539 ID
+$objNameActivityMaster= "SVMXC__Activity_Master__c";
+$columnName = "Name";
+$filter="SVMXC__Activity_Type__c";
+$ActivityNameCleanUp =$sfm_act_restApiMethods.getRestApi($appiumAdminUn,$appiumAdminPwd,$appiumclient_id,$appiumclient_secret,$appiumorginstance,"GET", $objNameActivityMaster, $columnName, $filter, "Cleanup");
+_log($ActivityNameCleanUp);
+
+$ActivityNameCallibration =$sfm_act_restApiMethods.getRestApi($appiumAdminUn,$appiumAdminPwd,$appiumclient_id,$appiumclient_secret,$appiumorginstance,"GET", $objNameActivityMaster, $columnName, $filter, "Calibration");
+_log($ActivityNameCallibration);
+
+if($ActivityNameCleanUp == "")
+{
+
+	$objName_acitivityMaster= "SVMXC__Activity_Master__c";
+	var $description="ActivityMasterCleanup";
+	$obJson = "{\"SVMXC__Description__c\":\""+$description+"\",\"SVMXC__Activity_Type__c\":\"Cleanup\"}";
+	$columnName = "Name";
+	$filter="id";
+	//create  case with above created account and other parameters
+	$CleanupID=$sfm_act_restApiMethods.postRestApi($appiumAdminUn,$appiumAdminPwd,$appiumclient_id,$appiumclient_secret,$appiumorginstance,$objName_acitivityMaster,$obJson,"POST");
+	//get the caseNumber
+	$CleanupName =$sfm_act_restApiMethods.getRestApi($appiumAdminUn,$appiumAdminPwd,$appiumclient_id,$appiumclient_secret,$appiumorginstance,"GET", $objName_acitivityMaster, $columnName, $filter, $CleanupID);
+	_log($CleanupName);
+	
+}
+
+
+
+if($ActivityNameCallibration == "")
+{
+
+	$objName_acitivityMaster= "SVMXC__Activity_Master__c";
+	var $description="ActivityMasterCleanup";
+	$obJson = "{\"SVMXC__Description__c\":\""+$description+"\",\"SVMXC__Activity_Type__c\":\"Calibration\"}";
+	$columnName = "Name";
+	$filter="id";
+	//create  case with above created account and other parameters
+	$CalibrationID=$sfm_act_restApiMethods.postRestApi($appiumAdminUn,$appiumAdminPwd,$appiumclient_id,$appiumclient_secret,$appiumorginstance,$objName_acitivityMaster,$obJson,"POST");
+	//get the caseNumber
+	$CalibrationName =$sfm_act_restApiMethods.getRestApi($appiumAdminUn,$appiumAdminPwd,$appiumclient_id,$appiumclient_secret,$appiumorginstance,"GET", $objName_acitivityMaster, $columnName, $filter, $CalibrationID);
+	_log($CalibrationName);
+	
+}
+
+// To set the Settings for the Configuration Profile
+var $module = "Work Order";
+var $submodule = "Create Work Order Lines VF";
+$bo_act_configurationProfiles.editGroupProfileForTextSettings($group_profilename,$module,$submodule, "SET006", $pricebookName);
+$bo_act_configurationProfiles.editGroupProfileForTextSettings($group_profilename,$module,$submodule, "SET018", $ServicepricebookName);
+$bo_act_configurationProfiles.editGroupProfileForBooleanSettings($group_profilename,$module,$submodule, "SET005", true);
+$bo_act_configurationProfiles.editGroupProfileForBooleanSettings($group_profilename,$module,$submodule, "SET010", true);
+
+
+//Edit a Service Price Book
+$bo_act_navigation.navigateToHome();
+$bo_act_servicePricebooks.editStandardServicePricebooks_noproduct($ServicepricebookName, "Per Hour", "Calibration","1500");
+$bo_act_servicePricebooks.editStandardServicePricebooks_noproduc1($ServicepricebookName, "Flat Rate", "Cleanup","3000");
+
+_writeFile("true", $appiumPath+$sahiIntermediatoryPath, true);
+
+$pre_requisite.end();

@@ -5,7 +5,7 @@ $scenario_10585.start();
 var $profilename = $group_profilename;
 var $ProcessStatus=false;
 var $wizardObject ="Work Order";
-var $sfmName = "Auto_10585_ChecklistOPDOCVT";
+var $sfmName = "Auto_10585_ChecklistOPDOC1";
 var $questionNames1=["What is the Work Order Number?","Number Should not be greater than 100"];
 var $questionNames2 = ["Section Two Question One"];
 var $questionNames3=  ["Section Three Question One"];
@@ -37,7 +37,8 @@ var $criteriaDetailsentry=[$comboFielde,$comboConditionse,$toggleButtone,$comboI
 //Variables required for OPDOC Process
 var $value = _readFile("/auto/sahi_pro/userdata/scripts/Sahi_Project_Lightning/scenario7.txt");
 var $templateName = $bo_act_common.generateRandomName("SFM_Auto_Template_");
-var $sfmName1 = $bo_act_common.generateRandomName("SFM_Auto_");
+//var $sfmName1 = $bo_act_common.generateRandomName("SFM_Auto_");
+var $sfmName1 ="Auto_RS10585_ChecklistOPDOC_InProgOP1";
 var $wizardObject="Work Order";
 var $wizardName="AutoRegression";
 var $wizardType="Output Document";
@@ -127,7 +128,7 @@ _wait(5000);
 //_click($sfm_pg_formDesigner.btn_cancelSectionWindow);
 _click($bo_pg_formDesigner.btn_closeQuestionPopUp);
 _click($bo_pg_sfmTransactionAndDesigner.btn_saveAndclose);
-_wait(5000);
+_wait(15000);
 //$bo_act_SFMAppPermission.set_mobileapp_permissions($profilename, $targetObjectName, $sfmName);
 $bo_act_SFMAppPermission.set_mobileapp_permissions_generic($profilename, $targetObjectName, $sfmName, "Checklist");
 _wait(5000);
