@@ -243,7 +243,7 @@ this.addCustomFields = function($objectName,$fieldNames,$dataTypes,$myDomain,$mu
 			
 			($sfm_pg_wo.txt_customFieldName,13);
 			//Add multi picklist values if needed
-			if($dataTypes[$i] === "Picklist (Multi-Select)"){
+			if($dataTypes[$i] === "Picklist (Multi-Select)" || $dataTypes[$i] === "Picklist"){
 				_check($sfm_pg_wo.radio_multiPicklist);
 				for($z=0;$z<$multiPicklistValues.length;$z++){
 					_type($sfm_pg_wo.txt_multiPickTextArea,$multiPicklistValues[$z]);
