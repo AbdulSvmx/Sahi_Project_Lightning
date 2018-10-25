@@ -1,7 +1,7 @@
 //Meghana Rao
 
 /*
- * PRE Requisites to be run in the org before running other scripts - LIGHTNING CODE
+ * Verify Price calculated for workdetail lines for different record type (with custom pricebooks)
  */
 _writeFile("false", $appiumPath+$sahiIntermediatoryPath, true);
 
@@ -12,14 +12,41 @@ $pre_requisite.start();
 _setSpeed($g_stepSpeed);
 
 var $data_excel_10538 = _readExcelFile("/auto/SVMX_Catalyst/fsaautomation/resources/TestData.xlsx","RS_10538",true);
-var $data_excel_10539 = _readExcelFile("/auto/SVMX_Catalyst/fsaautomation/resources/TestData.xlsx","RS_10539",true);
-var $Product2Name = $data_excel_10539[2]["Data3"];
-var $Product10538Name = $data_excel_10538[2]["Data2"];
-var $SCONName = $data_excel_10539[2]["Data4"];
-var $Acc10539Name = $data_excel_10539[2]["Data5"];
+var $Acc10538Name = $data_excel_10538[2]["Data3"];
 var $IB10538Name = $data_excel_10538[2]["Data4"];
 $bo_act_login.login($g_url, $appiumAdminUn, $appiumAdminPwd);
 $sfm_act_lightningConfig.switchToLightning();
+
+
+
+//To get the Account 10538 ID
+$objNameAcc= "Account";
+$columnName = "Id";
+$filter="Name";
+$Acc10538ID =$sfm_act_restApiMethods.getRestApi($appiumAdminUn,$appiumAdminPwd,$appiumclient_id,$appiumclient_secret,$appiumorginstance,"GET", $objNameAcc, $columnName, $filter, $Acc10538Name);
+_log($Acc10538ID);
+
+
+//To create a Contact
+$objName2= "Contact";
+var $restcontactfirstname="C10533_";
+var $restcontactlastname="Auto";
+$obJson = "{\"AccountId\":\""+$Acc10538ID+"\",\"FirstName\":\""+$restcontactfirstname+"\",\"LastName\":\""+$restcontactlastname+"\"}";
+$columnName = "Name";
+$filter="id";
+//create  case with above created account and other parameters
+$contactid=$sfm_act_restApiMethods.postRestApi($appiumAdminUn,$appiumAdminPwd,$appiumclient_id,$appiumclient_secret,$appiumorginstance,$objName2,$obJson,"POST");
+//get the caseNumber
+$contactname =$sfm_act_restApiMethods.getRestApi($appiumAdminUn,$appiumAdminPwd,$appiumclient_id,$appiumclient_secret,$appiumorginstance,"GET", $objName2, $columnName, $filter, $contactid);
+_log($contactname);
+
+
+//To get the IB 10538 ID
+$objNameIB= "SVMXC__Installed_Product__c";
+$columnName = "Id";
+$filter="Name";
+$IB10538ID =$sfm_act_restApiMethods.getRestApi($appiumAdminUn,$appiumAdminPwd,$appiumclient_id,$appiumclient_secret,$appiumorginstance,"GET", $objNameIB, $columnName, $filter, $IB10538Name);
+_log($IB10538ID);
 
 // To create a Custom PriceBook
 $objName_custom= "Pricebook2";
@@ -100,8 +127,8 @@ var $module = "Work Order";
 var $submodule = "Create Work Order Lines VF";
 $bo_act_configurationProfiles.editGroupProfileForTextSettings($group_profilename,$module,$submodule, "SET006", $pricebookName);
 $bo_act_configurationProfiles.editGroupProfileForTextSettings($group_profilename,$module,$submodule, "SET018", $ServicepricebookName);
-$bo_act_configurationProfiles.editGroupProfileForBooleanSettings($group_profilename,$module,$submodule, "SET005", true);
-$bo_act_configurationProfiles.editGroupProfileForBooleanSettings($group_profilename,$module,$submodule, "SET010", true);
+//$bo_act_configurationProfiles.editGroupProfileForBooleanSettings($group_profilename,$module,$submodule, "SET005", true);
+//$bo_act_configurationProfiles.editGroupProfileForBooleanSettings($group_profilename,$module,$submodule, "SET010", true);
 
 
 //Edit a Service Price Book
@@ -109,6 +136,56 @@ $bo_act_navigation.navigateToHome();
 $bo_act_servicePricebooks.editStandardServicePricebooks_noproduct($ServicepricebookName, "Per Hour", "Calibration","1500");
 $bo_act_servicePricebooks.editStandardServicePricebooks_noproduc1($ServicepricebookName, "Flat Rate", "Cleanup","3000");
 
+
+// Create a Product and add a standard price book
+
+$objName3= "Product2";
+var $restproductname = $bo_act_common.generateRandomName("P10533");
+$obJson = "{\"Name\":\""+$restproductname+"\",\"IsActive\":\"true\" }";
+$columnName = "Name";
+$filter="id";
+//create  case with above created account and other parameters
+$productid=$sfm_act_restApiMethods.postRestApi($appiumAdminUn,$appiumAdminPwd,$appiumclient_id,$appiumclient_secret,$appiumorginstance,$objName3,$obJson,"POST");
+//get the Product
+$Productname10533 =$sfm_act_restApiMethods.getRestApi($appiumAdminUn,$appiumAdminPwd,$appiumclient_id,$appiumclient_secret,$appiumorginstance,"GET", $objName3, $columnName, $filter, $productid);
+_log($Productname10533);
+
+//Add Standard Price to the Product
+_wait(30000);
+$bo_act_navigation.navigateToCreatedRecordUsingGlobalSearch($Productname10533);
+
+
+var $standardPriceValue = 500;
+$bo_act_products.addStandardPriceForProduct($Productname10533, $standardPriceValue);
+
+// Adding Custom Price book to the Product
+$bo_act_navigation.navigateToCreatedRecordUsingGlobalSearch($Productname10533);
+$bo_act_products.addCustomPriceBook($Productname10533, "700", $pricebookName);
+_writeFile("true", $appiumPath+$sahiIntermediatoryPath, true);
+
+
+// To get the Warranty Name from the IB10538
+$objNameWarranty= "SVMXC__Warranty__c";
+$columnName = "Name";
+$filter="SVMXC__Installed_Product__c";
+$WarrantyName =$sfm_act_restApiMethods.getRestApi($appiumAdminUn,$appiumAdminPwd,$appiumclient_id,$appiumclient_secret,$appiumorginstance,"GET", $objNameWarranty, $columnName, $filter,$IB10538ID);
+_log($WarrantyName);
+
+//To create a Work ORder
+$objNameWO= "SVMXC__Service_Order__c";
+$obJsonWO = "{\"SVMXC__Company__c\":\""+$Acc10538ID+"\", \"SVMXC__Contact__c\":\""+$contactid+"\", \"SVMXC__Component__c\":\""+$IB10538ID+"\"}"; 
+$columnName = "Name";
+$filter="id";
+var $WoID=$sfm_act_restApiMethods.postRestApi($appiumAdminUn,$appiumAdminPwd,$appiumclient_id,$appiumclient_secret,$appiumorginstance,$objNameWO,$obJsonWO,"POST");
+//get the Work Order Name
+$WOName =$sfm_act_restApiMethods.getRestApi($appiumAdminUn,$appiumAdminPwd,$appiumclient_id,$appiumclient_secret,$appiumorginstance,"GET", $objNameWO, $columnName, $filter, $WoID);
+_wait(30000);
+_call(top.location.reload());
+$bo_act_navigation.navigateToCreatedRecordUsingGlobalSearchWO($WOName);
+$bo_act_interactiveEntitlement_WO.performInteractiveEntitlement_NoAccountNoContact($WOName, $WarrantyName);
+
+
+$excel.insertUnderColumn("/auto/SVMX_Catalyst/fsaautomation/resources/TestData.xlsx", "RS_10533", "Data1",$WOName ,"2");
 _writeFile("true", $appiumPath+$sahiIntermediatoryPath, true);
 
 $pre_requisite.end();
