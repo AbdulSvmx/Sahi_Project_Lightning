@@ -1,7 +1,8 @@
 var $rs_10448 = _testcase("RS_10448","Verify Lookup prefilter using data types - Date Literal, Picklist and Record Type");
 $rs_10448.start();
 
-
+	//delete[SELECT Name FROM SVMXC__RMA_Shipment_Order__c limit 10000];
+	//pre-req
 		var RecordTypeId=new Array;
 		var $recTypeName=["Shipment","RMA"];
 		
@@ -16,9 +17,6 @@ $rs_10448.start();
 			RecordTypeId[$n]=$partOrderNumber;
 		}
 
-
-		//delete[SELECT Name FROM SVMXC__RMA_Shipment_Order__c limit 10000];
-		//pre-req
 		//Create Parts Order using below variables
 		var $partOrderNumber=new Array;
 		$objName= "SVMXC__RMA_Shipment_Order__c";
