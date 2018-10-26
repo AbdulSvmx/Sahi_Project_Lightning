@@ -197,6 +197,7 @@ $bo_act_interactiveEntitlement_WO.performInteractiveEntitlement_NoAccountNoConta
 
 
 $excel.insertUnderColumn("/auto/SVMX_Catalyst/fsaautomation/resources/TestData.xlsx", "RS_10533", "Data1",$WOName ,"2");
+$excel.insertUnderColumn("/auto/SVMX_Catalyst/fsaautomation/resources/TestData.xlsx", "RS_10533", "Data2",$Productname10533 ,"2");
 _writeFile("true", $appiumPath+$sahiIntermediatoryPath, true);
 
 $pre_requisite.end();
