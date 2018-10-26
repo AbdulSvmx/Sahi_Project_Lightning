@@ -29,7 +29,7 @@ $bo_act_SFM.addsfmproductsserviced("Work Order",$sfmName,$qualifyingCriteria,$sf
 var $wizTitle = "AutoRegression";
 var $targetObjectName = "Work Order";
 $bo_act_navigation.navigateToSfmWizard();
-$sfm_act_createCustomWizard.addManageWizStepsverify($wizTitle, "SFM", $sfmName, $group_profilename, $targetObjectName);
+$sfm_act_createCustomWizard.addManageWizStepsverify($wizTitle, "SFM", $sfmName, $targetObjectName);
 
 _writeFile("true", $appiumPath+$sahiIntermediatoryPath, true);
 $pre_requisite.end();

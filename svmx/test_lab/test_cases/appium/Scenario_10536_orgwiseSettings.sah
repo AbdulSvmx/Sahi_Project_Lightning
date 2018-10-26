@@ -30,6 +30,8 @@ $bo_act_navigation.navigateToHome();
 $bo_act_navigation.navigateServicemaxSetUpInLightening();
 $bo_act_navigation.navigateToSfmWizard();
 $bo_act_SFW.createWizardGeneralInfo("Work Order", $wizardTitleName, $wizardIDName);
+
+
 $bo_act_SFW.addCustomActionToWizard($fieldActnType, $actnName);
 $bo_act_SFW.quickSaveSFWizard();
 _writeFile("true", $appiumPath+$sahiIntermediatoryPath, true);

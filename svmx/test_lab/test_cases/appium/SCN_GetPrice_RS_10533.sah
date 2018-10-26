@@ -16,6 +16,15 @@ var $Acc10538Name = $data_excel_10538[2]["Data3"];
 var $IB10538Name = $data_excel_10538[2]["Data4"];
 $bo_act_login.login($g_url, $appiumAdminUn, $appiumAdminPwd);
 $sfm_act_lightningConfig.switchToLightning();
+
+
+var $sfmName = "Manage Work Order Lines - Estimates";
+var $wizTitle = "AutoRegression";
+var $targetObjectName = "Work Order";
+$bo_act_navigation.navigateToSfmWizard();
+$sfm_act_createCustomWizard.addManageWizStepsverify($wizTitle, "SFM", $sfmName, $targetObjectName);
+
+
 var $module = "Entitlement Verification";
 var $submodule = "Work Order Entitlement VF";
 $bo_act_configurationProfiles.editGroupProfileForBooleanSettings($admin_group_profile,$module,$submodule, "SET024", false);
