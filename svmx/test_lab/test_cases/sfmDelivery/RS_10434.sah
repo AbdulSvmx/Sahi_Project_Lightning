@@ -18,7 +18,7 @@ var $pickListLabels = ["Line Type","Record Type"];
 var $pickListValues = ["Parts","Usage/Consumption"];
 var $textLabels = ["Closed By","Site"];
 var $textValues = ["SVMX.CURRENTUSERID","SVMX.USERTRUNK"];
-var $inventoryLocation = "Bangalore East";
+var $inventoryLocation = "Lightning Automation Location";
 var $productName = "Chrome";
 var $mapType = "Value Map for Existing Records";
 
