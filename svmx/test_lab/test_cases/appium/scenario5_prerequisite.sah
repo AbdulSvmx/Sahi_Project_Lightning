@@ -31,7 +31,7 @@ var $advExpr= "1";
 var $messageType = "Error";
 
 var $wizardObject="Work Order";
-var $wizardName="AutoRegression";
+var $wizardName="AutoSanity";
 var $wizardType="SFM";
 var $profile="auto group profile";
 var $handOver="false";
