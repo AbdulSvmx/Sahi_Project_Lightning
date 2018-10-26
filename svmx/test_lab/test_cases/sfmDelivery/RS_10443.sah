@@ -18,7 +18,7 @@ $accountName =$sfm_act_restApiMethods.getRestApi($sfmlUsn,$sfmlPwd,$sfmClientId,
 
 
 var $objName1= "Case";
-var $obJson1 = "{\"AccountId\":\""+$account+"\",\"SVMXC__Billing_Type__c\":\"Loan\",\"SVMXC__Scheduled_Date__c\":\"2018-08-23\",\"SVMXC__Actual_Initial_Response__c\":\"2018-08-23T00:00:00.000Z\"}";
+var $obJson1 = "{\"AccountId\":\""+$account+"\",\"SVMXDEV__Billing_Type__c\":\"Loan\",\"SVMXDEV__Scheduled_Date__c\":\"2018-08-23\",\"SVMXDEV__Actual_Initial_Response__c\":\"2018-08-23T00:00:00.000Z\"}";
 var $columnName1 = "CaseNumber";
 var $filter1="id";
 //create  case with above created account and other parameters

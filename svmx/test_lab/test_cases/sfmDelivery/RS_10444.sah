@@ -25,7 +25,7 @@ $accountName =$sfm_act_restApiMethods.getRestApi($sfmlUsn,$sfmlPwd,$sfmClientId,
 
 //get the caseNumber
 $objName1= "Case";
-$obJson1 = "{\"AccountId\":\""+$account+"\",\"SVMXC__Billing_Type__c\":\"Loan\",\"Priority\":\"High\",\"Description\":\"CaseCreatedfromRest\"}";
+$obJson1 = "{\"AccountId\":\""+$account+"\",\"SVMXDEV__Billing_Type__c\":\"Loan\",\"Priority\":\"High\",\"Description\":\"CaseCreatedfromRest\"}";
 $columnName1 = "CaseNumber";
 $filter1="id";
 //create a case
@@ -67,7 +67,7 @@ _click(_link($caseNumber,_in(_div("/sfm-lightninglookupslidingwindow/"))));
 //Validate form fill on billing type/problem description/priority fields
 $obj= JSON.parse($obJson1);
 _assertEqual($obj["Priority"], _getText($sfm_pg_sfmDesigner.txt_priority));
-_assertEqual($obj["SVMXC__Billing_Type__c"],_getText($sfm_pg_sfmDesigner.txt_billingType));
+_assertEqual($obj["SVMXDEV__Billing_Type__c"],_getText($sfm_pg_sfmDesigner.txt_billingType));
 _assertEqual($obj["Description"],_getText($sfm_pg_sfmDesigner.txt_problemDescription));
 
 //save the process and validate for formfill for fields which are not in screen designer -- RS-10423

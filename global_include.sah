@@ -65,15 +65,25 @@ var $sfmUsn = "sysadmin01@sfdautomation.com"; // base
 var $sfmPwd = "Maxplore4";
  var $g_domain = "/svmx/";
 
+ 
+
  var $wizardName = ["SFMDAuto_Ltng_DVR", "SFMDAuto_Ltng_WebServices","SFMDAuto_Ltng_Process","SFMDAuto_Ltng_LookUP","SFMDAuto_Ltng_Mappings",
                      "SFMDAuto_Ltng_Formula","SFMDAuto_Ltng_Expression","SFMAuto_Ltng_Wizards"];
  var $wizardType = ["None","SFM","Inventory","Others","Output Document"];
- var $sfmClientId ="YjkyMzJmNDUzMGNmOTYzODVlNDQ0ZjE2OTUxOTU1NDI5MGViN2I3NWU3YTFjNmY300D290000000WVC";
- var $sfmConsumerSecret = "5287076090725084260";
- var $sfmOrgInstance = "cs19";
+
+ //dev org credentials
+ var $sfmlUsn = "scarface.qa8@admin.com";
+ var $sfmlPwd ="fireexit1";
+ var $sfmClientId ="3MVG9_7ddP9KqTzch21szrgYIfzQnUMZVsivQJ2gRJp09TI8IDWTMXN_LaUostaQT9hdma6X5N6ZrLwwpju3F";
+ var $sfmConsumerSecret = "3960053550438003199";
+ var $sfmOrgInstance = "cs10"; 
  
+ /* commenting base org details to run in dev org
  var $sfmlUsn = "sfdl_auto@automation.com";
  var $sfmlPwd ="Maxplore2";
+ var $sfmClientId ="YjkyMzJmNDUzMGNmOTYzODVlNDQ0ZjE2OTUxOTU1NDI5MGViN2I3NWU3YTFjNmY300D290000000WVC";
+ var $sfmConsumerSecret = "5287076090725084260";
+ var $sfmOrgInstance = "cs19"; */
 
 // DC Global Variables
 var $dc_org = $orgtype;

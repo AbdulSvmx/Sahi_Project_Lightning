@@ -10,8 +10,8 @@ $sfm_act_lightningConfig.switchToLightning();
 
 //variables for rest call
 //$orgInstance = "cs19";
-$objName= "SVMXC__Service_Order__c";
-$obJson = "{\"SVMXC__Zip__c\":\"560001\",\"SVMXC__Order_Status__c\":\"Open\",\"SVMXC__Problem_Description__c\":\"WOCreatedfromRest\"}";
+$objName= "SVMXDEV__Service_Order__c";
+$obJson = "{\"SVMXDEV__Zip__c\":\"560001\",\"SVMXDEV__Order_Status__c\":\"Open\",\"SVMXDEV__Problem_Description__c\":\"WOCreatedfromRest\"}";
 $columnName = "Name";
 $filter="id";
 //create a case

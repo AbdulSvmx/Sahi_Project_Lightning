@@ -18,8 +18,8 @@ var $formulaDescriptionArray = ["Proforma Invoice Amount=Sum of labor's billing 
                                 "BLP=Line quantity * Line price"
                                 ];
 
-var $formulaArray =["$F.SUMOF($D.Labor,'SVMXC__Billable_Line_Price__c')",
-                    "$F.MULTIPLY($D.Labor.SVMXC__Actual_Quantity2__c,$D.Labor.SVMXC__Actual_Price2__c)"
+var $formulaArray =["$F.SUMOF($D.Labor,'SVMXDEV__Billable_Line_Price__c')",
+                    "$F.MULTIPLY($D.Labor.SVMXDEV__Actual_Quantity2__c,$D.Labor.SVMXDEV__Actual_Price2__c)"
                     ];
 
 _setSpeed($g_stepSpeed);

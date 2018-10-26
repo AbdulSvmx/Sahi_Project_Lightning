@@ -13,9 +13,9 @@ $rs_10462.start();
 	var $woStatus=["Open","Closed"];
 	var $WONumber=new Array;
 	var $openWOID;
-	$objName= "SVMXC__Service_Order__c";
+	$objName= "SVMXDEV__Service_Order__c";
 	for (var $i = 0; $i < $woStatus.length; $i++) {
-		$obJson = "{\"SVMXC__Order_Status__c\":\""+$woStatus[$i]+"\",\"SVMXC__Order_Type__c\":\"Field Service\"}";
+		$obJson = "{\"SVMXDEV__Order_Status__c\":\""+$woStatus[$i]+"\",\"SVMXDEV__Order_Type__c\":\"Field Service\"}";
 		$columnName = "Name";
 		$filter="id";
 		$filterValue=$sfm_act_restApiMethods.postRestApi($sfmlUsn,$sfmlPwd,$sfmClientId,$sfmConsumerSecret,$sfmOrgInstance,$objName,$obJson,"POST");
@@ -29,8 +29,8 @@ $rs_10462.start();
 	}
 	
 	//Create WD(parts) under Open WO
-	$objName= "SVMXC__Service_Order_Line__c";
-	$obJson = "{\"SVMXC__Line_Type__c\":\"Parts\",\"SVMXC__Activity_Type__c\":\"Installation\",\"SVMXC__Product__c\":\""+$filterPValue+"\",\"SVMXC__Service_Order__c\":\""+$openWOID+"\"}";
+	$objName= "SVMXDEV__Service_Order_Line__c";
+	$obJson = "{\"SVMXDEV__Line_Type__c\":\"Parts\",\"SVMXDEV__Activity_Type__c\":\"Installation\",\"SVMXDEV__Product__c\":\""+$filterPValue+"\",\"SVMXDEV__Service_Order__c\":\""+$openWOID+"\"}";
 	$columnName = "Name";
 	$filter="id";
 	$filterValue=$sfm_act_restApiMethods.postRestApi($sfmlUsn,$sfmlPwd,$sfmClientId,$sfmConsumerSecret,$sfmOrgInstance,$objName,$obJson,"POST");
