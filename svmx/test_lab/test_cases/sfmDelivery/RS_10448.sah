@@ -1,18 +1,32 @@
 var $rs_10448 = _testcase("RS_10448","Verify Lookup prefilter using data types - Date Literal, Picklist and Record Type");
 $rs_10448.start();
-	
-		//delete[SELECT Name FROM SVMXC__RMA_Shipment_Order__c limit 10000];
-		//pre-req
+
+	//delete[SELECT Name FROM SVMXC__RMA_Shipment_Order__c limit 10000];
+	//pre-req
+		var RecordTypeId=new Array;
+		var $recTypeName=["Shipment","RMA"];
+		
+		for (var $n = 0; $n < $recTypeName.length; $n++) {
+			$objName="RecordType";
+			$filter=["DeveloperName","SobjectType"];
+			$filterValue=[$recTypeName[$n],"SVMXC__RMA_Shipment_Order__c"];
+			$columnName = "id";
+			//create a case
+			$partOrderNumber =$sfm_act_restApiMethods.getRestApi($sfmlUsn,$sfmlPwd,$sfmClientId,$sfmConsumerSecret,$sfmOrgInstance,"GET", $objName, $columnName, $filter, $filterValue);
+			_log("Record Type ID: "+$partOrderNumber);
+			RecordTypeId[$n]=$partOrderNumber;
+		}
+
 		//Create Parts Order using below variables
 		var $partOrderNumber=new Array;
 		$objName= "SVMXC__RMA_Shipment_Order__c";
 		for (var $i = 0; $i < 4; $i++) {
 			if ($i==0) {
-				$obJson = "{\"SVMXC__Expected_Receive_Date__c\":\""+getToday()+"\",\"SVMXC__Billing_Type__c\":\"Loan\",\"RecordTypeId\":\"012290000004Ri2AAE\"}";
+				$obJson = "{\"SVMXC__Expected_Receive_Date__c\":\""+getToday()+"\",\"SVMXC__Billing_Type__c\":\"Loan\",\"RecordTypeId\":\""+RecordTypeId[1]+"\"}";
 			}else if ($i==1) {
-				$obJson = "{\"SVMXC__Expected_Receive_Date__c\":\""+getToday()+"\",\"SVMXC__Billing_Type__c\":\"Contract\",\"RecordTypeId\":\"012290000004Ri3AAE\"}";
+				$obJson = "{\"SVMXC__Expected_Receive_Date__c\":\""+getToday()+"\",\"SVMXC__Billing_Type__c\":\"Contract\",\"RecordTypeId\":\""+RecordTypeId[0]+"\"}";
 			}else {
-				$obJson = "{\"SVMXC__Expected_Receive_Date__c\":\""+getToday()+"\",\"SVMXC__Billing_Type__c\":\"Contract\",\"RecordTypeId\":\"012290000004Ri2AAE\"}";
+				$obJson = "{\"SVMXC__Expected_Receive_Date__c\":\""+getToday()+"\",\"SVMXC__Billing_Type__c\":\"Contract\",\"RecordTypeId\":\""+RecordTypeId[1]+"\"}";
 			}
 			$columnName = "Name";
 			$filter="id";
@@ -156,5 +170,19 @@ function RS10448_search($objectName){
 	_click($sfm_pg_sfmDesigner.link_searchLink);
 	_wait(5000,_isVisible(_link($objectName)));
 };
+
+function RS1052_checkAndAddField_ContactPicklist(){
+	var $objectName = "Work Order";
+	var $fieldNames = ["Parts Order"];
+	var $dataTypes = ["Lookup Relationship"];
+	var $myDomain = "/lightning/";
+	var $multiPicklistValues = [""];
+	var $lookupType=["Parts Order"];
+	//Create custom fields if needed
+	$sfm_act_lightningConfig.addCustomFields($objectName, $fieldNames, $dataTypes, $myDomain, $multiPicklistValues, $lookupType);
+	_closeWindow();
+	_selectWindow();
+}
+
 
 $rs_10448.end();

@@ -1,7 +1,7 @@
 var $rs_10445 = _testcase("RS_10445","Verify Lookup auto resolve with override context in Child line");
 $rs_10445.start();
 
-	
+
 		//Pre_Requesite
 		//Create Account
 		var $Account=new Array();
@@ -50,6 +50,9 @@ $rs_10445.start();
 		// Login to App
 		$bo_act_login.login($g_url,$sfmlUsn,$sfmlPwd);
 
+		//Check Field and Update-AutoContact Lookup in WD
+		RS10445_checkAndAddField_AutoContact();
+
 		//clone standard SFM
 		var $sfmNameToBeCloned="Manage Work Order Lines - Usage";
 		var $sfmName=$bo_act_common.generateRandomName("rs_10445_");
@@ -95,7 +98,7 @@ $rs_10445.start();
 		
 		
 		_log("Work Order Header validation: Start");
-		//***Work Order Header validation***//
+		//***Work Order Header validation***/
 		
 		//Assert "No matching record" DVR
 		_wait(3000,_isVisible($sfm_pg_sfmDesigner.txt_headerAccount));
@@ -169,7 +172,7 @@ $rs_10445.start();
 		$sfm_act_sfmDesigner.addChildLine("Parts");
 		
 		_log("Part childline validation: Start");
-		//***Part childline validation***//
+		//***Part childline validation***/
 		//Assert "No matching record" DVR
 		_wait(10000,_isVisible($sfm_pg_sfmDesigner.txt_partTextbox));
 		_setValue($sfm_pg_sfmDesigner.txt_partTextbox,$productName);
@@ -262,6 +265,17 @@ $rs_10445.start();
 		
 		//*****************
 
-
+function RS10445_checkAndAddField_AutoContact(){
+	var $objectName = "Work Detail";
+	var $fieldNames = ["AutoContact"];
+	var $dataTypes = ["Lookup Relationship"];
+	var $myDomain = "/lightning/";
+	var $multiPicklistValues = [""];
+	var $lookupType=["Contact"];
+	//Create custom fields if needed
+	$sfm_act_lightningConfig.addCustomFields($objectName, $fieldNames, $dataTypes, $myDomain, $multiPicklistValues, $lookupType);
+	_closeWindow();
+	_selectWindow();
+}
 		
 $rs_10445.end();

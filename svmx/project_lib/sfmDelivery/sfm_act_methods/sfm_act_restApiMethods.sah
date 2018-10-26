@@ -79,9 +79,15 @@ var $sfm_act_restApiMethods= new function sfm_act_restApiMethods() {
 	 */
 this.getRestApi = function($usnName, $usnPwd, $orgClientId, $orgConsumerSecret,$orgInstance,$reqType,$objName,$columnName,$filter, $filterValue){
 	 $AuthCode = this.getAccessToken($usnName, $usnPwd, $orgClientId, $orgConsumerSecret,$orgInstance);
-	     
-	    var $query = "Select+"+$columnName+"+from+"+$objName+"+where+"+$filter+"=+'"+$filterValue+"'";
-	          
+	   
+	 var $query;
+	 if (typeof $filter!='string') {
+		 $query = "Select+"+$columnName+"+from+"+$objName+"+where+"+$filter[0]+"=+'"+$filterValue[0]+"'+"+"AND+"+$filter[1]+"=+'"+$filterValue[1]+"'";
+	}else {
+		 $query = "Select+"+$columnName+"+from+"+$objName+"+where+"+$filter+"=+'"+$filterValue+"'";
+	}
+   
+	    _log($query);
 	    $request = new RESTRequest(); 
 	    $request.setURL("https://"+$orgInstance+".salesforce.com/services/data/v20.0/query/?q="+$query+""); // Sample to pass the values
 	    $request.setCredentials($usnName, $usnPwd);

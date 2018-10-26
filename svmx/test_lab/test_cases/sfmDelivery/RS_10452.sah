@@ -41,6 +41,9 @@ $rs_10452.start();
 		// Login to App
 		$bo_act_login.login($g_url,$sfmlUsn,$sfmlPwd);
 		
+		RS1052_checkAndAddField_AccountPicklist();
+		RS1052_checkAndAddField_ContactPicklist();	
+		
 		//clone standard SFM
 		var $sfmNameToBeCloned="Manage Work Order Lines - Usage";
 		var $sfmName=$bo_act_common.generateRandomName("rs_10499_");
@@ -195,6 +198,31 @@ function RS10449_searchWOandLaunchSFM($WONumber,$sfmName){
 	_setStrictVisibilityCheck(true);
 	$sfm_act_createCustomWizard.clickWizardBtn($sfmName);
 	_wait(5000,_isVisible(_div("/"+$sfmName+"/")));
+}
+
+function RS1052_checkAndAddField_AccountPicklist(){
+	var $objectName = "Work Order";
+	var $fieldNames = ["Account Picklist"];
+	var $dataTypes = ["Picklist"];
+	var $myDomain = "/lightning/";
+	var $multiPicklistValues = ["Acme","ServiceMax","SalesForce"];
+	var $lookupType=[""];
+	//Create custom fields if needed
+	$sfm_act_lightningConfig.addCustomFields($objectName, $fieldNames, $dataTypes, $myDomain, $multiPicklistValues, $lookupType);
+	_closeWindow();
+	_selectWindow();
+}
+function RS1052_checkAndAddField_ContactPicklist(){
+	var $objectName = "Contact";
+	var $fieldNames = ["Contact Picklist"];
+	var $dataTypes = ["Picklist"];
+	var $myDomain = "/lightning/";
+	var $multiPicklistValues = ["Acme","ServiceMax","SalesForce"];
+	var $lookupType=[""];
+	//Create custom fields if needed
+	$sfm_act_lightningConfig.addCustomFields($objectName, $fieldNames, $dataTypes, $myDomain, $multiPicklistValues, $lookupType);
+	_closeWindow();
+	_selectWindow();
 }
 
 $rs_10452.end();

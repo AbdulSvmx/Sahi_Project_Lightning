@@ -52,39 +52,44 @@ var $sfm_act_createCustomWizard = new function sfm_act_createCustomWizard() {
 	};
 // Added by Meghana
 
-	this.addManageWizStepsverify = function($wizTitle,$wizStepType,$wizStepName,$profile, $object){
+	this.addManageWizStepsverify = function($wizTitle,$wizStepType,$wizStepName,$object){
 		_selectDomain("/svmx/");
 		_setSelected($sfm_pg_wizards.selectObject,$object);
 		var $wizId = $wizTitle.toLowerCase().replace(/ /g, "_");
 		_wait(5000);
+	
 		if(_isVisible(_span($wizTitle)) == false)
 		{
 		_click($sfm_pg_wizards.btn_customNew);
 		_setValue($sfm_pg_wizards.txt_wizardTitle,$wizTitle);
 		_setValue($sfm_pg_wizards.txt_wizardID,$wizId);
 		_click($sfm_pg_wizards.txt_manageWizSteps);
+		_wait(1000);
+		_log(_span($wizStepName));
+		if(_isVisible(_span($wizStepName)) == false)
+		{
 		_click($sfm_pg_wizards.btn_newStep);
 		_setSelected($sfm_pg_wizards.btn_wizStepType,$wizStepType);
 		_setSelected($sfm_pg_wizards.btn_stepName,$wizStepName);
 		_click($sfm_pg_wizards.btn_saveStep);
-		_click($sfm_pg_wizards.txt_managePermission);
-		_setSelected($sfm_pg_wizards.select_availableGrpProfiles,$profile);
+		}
 		_click($sfm_pg_wizards.btn_saveClose);
-		
 		
 		}
 		else
 			{
-			
 			_click(_checkbox("/page1/",_near(_span($wizTitle))));
 			_click($sfm_pg_wizards.btn_edit);
 			_click($sfm_pg_wizards.txt_manageWizSteps);
+			if(_isVisible(_span($wizStepName)) == false)
+			{
 			_click($sfm_pg_wizards.btn_newStep);
 			_setSelected($sfm_pg_wizards.btn_wizStepType,$wizStepType);
 			_setSelected($sfm_pg_wizards.btn_stepName,$wizStepName);
 			_click($sfm_pg_wizards.btn_saveStep);
-			_click($sfm_pg_wizards.txt_managePermission);
-			_setSelected($sfm_pg_wizards.select_availableGrpProfiles,$profile);
+				
+			}
+			
 			_click($sfm_pg_wizards.btn_saveClose);
 			}
 		
