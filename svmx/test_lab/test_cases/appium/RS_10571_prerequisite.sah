@@ -1,9 +1,10 @@
+_writeFile("false", $appiumPath+$sahiIntermediatoryPath, true);
 var $scenario_10571 = _testcase("scenario_10571"," Verify finalize button & target object update");
 $scenario_10571.start();
 var $sfmName = "10571_sample_test";
 var $sfmNameToBeCloned = "Work Order Service Report";
 var $isCustom = false;
-var $fieldArr = ["Scheduled Date","Scheduled Date Time","Number"];
+var $fieldArr = ["Scheduled Date","Scheduled Date Time","No Of Times Assigned"];
 var $fieldArr1 = ["Set","Set","Increase"];
 var $profile="auto group profile";
 $bo_act_login.login($g_url, $appiumAdminUn, $appiumAdminPwd);
@@ -55,6 +56,7 @@ $bo_act_navigation.navigateToSfmTransactionDesigner();
 _setStrictVisibilityCheck(true);
 _wait(3000);
 $scenario_10571.end();
+_writeFile("true", $appiumPath+$sahiIntermediatoryPath, true);
 
 
 

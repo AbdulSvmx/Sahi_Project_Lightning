@@ -1,0 +1,15 @@
+var $sfm_pg_customAction = new function sfm_pg_customAction() {
+	
+	this.btn_userDefinedCustomAction = _submit("/New/",_near(_heading2("User-defined Custom Actions")));
+	this.sel_actionType = _select(0,_rightOf(_label("Action Type")));
+	this.txt_actionTitle = _textbox(0,_rightOf(_label("Action Title")));
+	this.txt_actionID = _textbox(0,_rightOf(_label("Action ID")));
+	this.txt_className = _textbox(0,_rightOf(_label("Class Name")));
+	this.txt_methodName = _textbox(0,_rightOf(_label("Method Name")));
+	this.btn_add = _button("Add");
+	this.txt_paramName = _textbox(0,_near(_div("Parameter Name")));
+	this.sel_paramValType = _select(0,_near(_div("Parameter Value Type")));
+	this.sel_paramVal = _select(1,_near(_div("Parameter Value")));
+	this.btn_saveAndCloseCustomAction = _submit("Save & Close");
+	
+};
