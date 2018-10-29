@@ -162,10 +162,11 @@ var $sfm_act_Transactions = new function sfm_act_Transactions() {
 		 * 					
 		 * Example		: 	Refer _ _ _  for function usage
 		 */
-		this.lookUpScrollIntoView=function($field){
+		this.lookUpScrollIntoView=function($field,$element){
 			_log($field);
-			_call($bo_pg_sfmTransactionAndDesigner.scroll_filedScroll.set("value",0));
-			var $maximum =  _fetch($bo_pg_sfmTransactionAndDesigner.scroll_filedScroll.get("maximum"));
+			//_call($bo_pg_sfmTransactionAndDesigner.scroll_filedScroll.set("value",0));
+			_call($element.set("value",0));
+			var $maximum =  _fetch($element.get("maximum"));
 			var $fieldName= _f("main").s_label($field);
 			var $i=0;
 			while($i< $maximum){
@@ -175,7 +176,7 @@ var $sfm_act_Transactions = new function sfm_act_Transactions() {
 				}
 				else {
 					$i= $i+100;
-					_call($bo_pg_sfmTransactionAndDesigner.scroll_filedScroll.set("value",$i));
+					_call($element.set("value",$i));
 				}
 			}
 		};
@@ -227,7 +228,7 @@ var $sfm_act_Transactions = new function sfm_act_Transactions() {
 				
 				for (var $i = 0; $i < $fieldNameList.length; $i++) {
 					_log($fieldNameList[$i]);
-					this.lookUpScrollIntoView($fieldNameList[$i]);
+					this.lookUpScrollIntoView($fieldNameList[$i],$bo_pg_sfmTransactionAndDesigner.scroll_filedScroll);
 					
 					if ($addToSearchList[$i]==true) {
 						_log("inside search field list");
@@ -266,7 +267,19 @@ var $sfm_act_Transactions = new function sfm_act_Transactions() {
 				
 				$oprTypeCombo=_f("main").s_dropdownlist("operandTypeCombo").near($fieldLabeRowNo);
 				$oprValcomboFieldType=_f("main").s_combobox("/picklist/").rightOf($oprTypeCombo);
-				if ((_exists($oprValcomboFieldType) && $operandTypeCombo[$i]=="Function") || $fieldCombo[$i]=="Record Type ID") {
+				
+				if ($operandTypeCombo[$i]=="Value") {
+					_log("final testing: "+$operandValue[$i]+" "+$operandValue[$i].includes("SVMX.CURRENTRECORD"));
+					if (_exists($oprValcomboFieldType) && ($operandValue[$i].includes("SVMX.CURRENTRECORD")==false)) {
+						_setSelected($oprValcomboFieldType,$operandValue[$i]);
+					}else {
+						var $operantTextValue=_f("main").s_textinput(3).near($oprTypeCombo);
+						_setValue($operantTextValue,$operandValue[$i]);
+					}
+				}else {
+					_setSelected($oprValcomboFieldType,$operandValue[$i]);
+				}
+/*				if ((_exists($oprValcomboFieldType) && $operandTypeCombo[$i]=="Function") || $fieldCombo[$i]=="Record Type ID") {
 					//_setValue(_f("main").s_textinput("/textInput/").inside($oprValcomboFieldType),$operandValue[$i]);
 					_setSelected($oprValcomboFieldType,$operandValue[$i]);
 				}else if (_exists($oprValcomboFieldType) && $operandTypeCombo[$i]=="Value") {
@@ -282,7 +295,7 @@ var $sfm_act_Transactions = new function sfm_act_Transactions() {
 						_setValue(_f("main").s_textinput("operandValue").near($fieldLabeRowNo),$operandValue[$i]);
 					}	
 				}
-				
+*/				
 			}
 			_wait(5000);
 			_setValue($sfm_pg_screenDesigner.txt_lookupAdvExpr,$lookupAdvExpr);
@@ -831,7 +844,7 @@ var $sfm_act_Transactions = new function sfm_act_Transactions() {
 					_wait(500);
 					_click($sfm_pg_screenDesigner.lbl_workOrder);
 				} 
-				
+	/*			
 				if($trgHeaderObj!=null && $srcHeaderObj=='Installed Product' )
 					{
 					_setSelected($sfm_pg_screenDesigner.sel_targetHeaderObject,$trgHeaderObj);
@@ -849,8 +862,7 @@ var $sfm_act_Transactions = new function sfm_act_Transactions() {
 				    _wait(2000);
 					}
 				
-					
-				
+		*/		
 				
 			};
 			/**
@@ -918,12 +930,13 @@ var $sfm_act_Transactions = new function sfm_act_Transactions() {
 				
 				//Mapping Fields
 				var $containerName=$mappingDetails[0];
-				var $pickListLabels=$mappingDetails[1];
-				var $pickListValues=$mappingDetails[2];
-				var $textLabels=$mappingDetails[3];
-				var $textValues=$mappingDetails[4];
-				var $mapName=$mappingDetails[5];
-				
+				var $mapType=$mappingDetails[1];
+				var $pickListLabels=$mappingDetails[2];
+				var $pickListValues=$mappingDetails[3];
+				var $textLabels=$mappingDetails[4];
+				var $textValues=$mappingDetails[5];
+				var $mapName=$mappingDetails[6];
+
 				_click($sfm_pg_screenDesigner.btn_qualifyingCriteriaAndFieldMapping);
 				_wait(10000,_isVisible($sfm_pg_screenDesigner.lbl_qualifyingCriteriaMapping));
 				_click(_f("main").s_label($object).near($sfm_pg_screenDesigner.lbl_qualifyingCriteriaMapping));
@@ -936,9 +949,8 @@ var $sfm_act_Transactions = new function sfm_act_Transactions() {
 					//_keyPress($sfm_pg_expressions.btn_selectExpression, 27);
 				}
 				if ($mappingDetails.length!==0 && $mappingDetails!==null) {
-					$bo_act_mappings.createMapping($containerName, $pickListLabels, $pickListValues, $textLabels, $textValues, $mapName);
+					$bo_act_mappings.createMapping($containerName,$mapType,$pickListLabels, $pickListValues, $textLabels, $textValues, $mapName);
 				}
-
 			};
 			
 			

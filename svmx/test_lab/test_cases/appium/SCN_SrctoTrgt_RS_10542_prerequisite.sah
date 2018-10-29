@@ -24,13 +24,14 @@ var $rs_10540 = _testcase("RS_10542","SCN_SourcetoTarget3_RS-10542 Verify Source
 	var $exprsnName="RS_10542_QC";
 	var $headerExprFieldsDetails=[$headerComboField,$headerComboConditions,$headerToggleButton,$headerCmboInput,$advExpr,$errMsg,$exprsnName];
 	
+	var $mapType ="Field Map For Existing Records";
 	var $pickListLabels=["Component","Scheduled Date"];
 	var $pickListValues=["Record ID","Date Installed"];
 	var $textLabels=[];
 	var $textValues=[];
 	var $mapName="RS_10542_Mapping";
 	
-	var $headerMappingDetails=[$srcHeaderObj,$pickListLabels, $pickListValues, $textLabels, $textValues, $mapName];
+	var $headerMappingDetails=[$srcHeaderObj,$mapType,$pickListLabels, $pickListValues, $textLabels, $textValues, $mapName];
 	
 	
 	//Login to App and navigate to sfm transaction and designer page
@@ -54,7 +55,7 @@ var $rs_10540 = _testcase("RS_10542","SCN_SourcetoTarget3_RS-10542 Verify Source
 	var $headersToAdd = ["Account","Component","Scheduled Date"];
 	var $fieldName = ["",""];
 	var $childToAdd=["",""];
-	var $sfmPgLayoutName = $bo_act_common.generateRandomName("RS_10542_Layout");
+	var $sfmPgLayoutName = "RS_10542_Layout";
 	$sfm_act_Transactions.screenDesigner($headersToAdd, $childToAdd, $sfmPgLayoutName, $sfmPgLayoutName);
 	$sfm_act_Transactions.sfmQualifyingCriteriaieldMappings($srcHeaderObj, $headerExprFieldsDetails, $headerMappingDetails);
 		

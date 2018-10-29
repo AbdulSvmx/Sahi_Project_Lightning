@@ -66,6 +66,7 @@ var $bo_act_configurationProfiles = new function bo_act_configurationProfiles() 
 		// Changes made for Lightning
 		this.editGroupProfileForTextSettings = function($groupProfileName, $Module, $SubModule, $Setting, $settingValue) {
 			$bo_act_navigation.navigateToConfigurationProfilesPage();
+			 _selectDomain("/svmx/");
 			 _wait(1000);
 			 _check(_checkbox(0,_leftOf(_span($groupProfileName))));
 			 _click($bo_pg_configurationProfiles.btn_editForGrp);

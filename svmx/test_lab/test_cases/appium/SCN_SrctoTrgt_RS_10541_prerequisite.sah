@@ -24,13 +24,14 @@ var $rs_10540 = _testcase("RS_10541","SCN_SourcetoTarget2_RS-10541 Verify Source
 	var $exprsnName="RS_10541_QC";
 	var $headerExprFieldsDetails=[$headerComboField,$headerComboConditions,$headerToggleButton,$headerCmboInput,$advExpr,$errMsg,$exprsnName];
 	
+	var $mapType ="Field Map For Existing Records";
 	var $pickListLabels=["Subject","Account ID"];
 	var $pickListValues=["Installed Product ID","Account"];
 	var $textLabels=[];
 	var $textValues=[];
 	var $mapName="RS_10541_Mapping";
 	
-	var $headerMappingDetails=[$srcHeaderObj,$pickListLabels, $pickListValues, $textLabels, $textValues, $mapName];
+	var $headerMappingDetails=[$srcHeaderObj,$mapType,$pickListLabels, $pickListValues, $textLabels, $textValues, $mapName];
 	
 	
 	//Login to App and navigate to sfm transaction and designer page
@@ -54,7 +55,7 @@ var $rs_10540 = _testcase("RS_10541","SCN_SourcetoTarget2_RS-10541 Verify Source
 	var $headersToAdd = ["Account ID","Subject"];
 	var $fieldName = ["",""];
 	var $childToAdd=["",""];
-	var $sfmPgLayoutName = $bo_act_common.generateRandomName("RS_10541_Layout");
+	var $sfmPgLayoutName = "RS_10541_Layout";
 	$sfm_act_Transactions.screenDesigner($headersToAdd, $childToAdd, $sfmPgLayoutName, $sfmPgLayoutName);
 	$sfm_act_Transactions.sfmQualifyingCriteriaieldMappings($srcHeaderObj, $headerExprFieldsDetails, $headerMappingDetails);
 		

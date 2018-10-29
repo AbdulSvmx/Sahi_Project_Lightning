@@ -143,7 +143,7 @@ var $sfm_pg_sfmDesigner = new function sfm_pg_sfmDesigner() {
 	this.link_accountInDVRNoMatch=_link("Account",_in(_div("Account: Multiple items found. Click lookup icon to refine search.")));
 	this.label_contextOverride=_label("/Limit search to/");
 	this.btn_contextOverride=_checkbox(0,_near(this.label_contextOverride));
-	this.btn_cancelContactWindow=_click(_link("Cancel",_near(_div("/CancelAdd/"))));
+	this.btn_cancelContactWindow=_link("Cancel",_near(_div("/CancelAdd/")));
 	this.btn_noRecordMSG=_div("No matching record(s) found for this keyword");
 	
 	this.link_autoContactInDVR=_link("AutoContact",_in(_div("AutoContact: Multiple items found. Click lookup icon to refine search.")));

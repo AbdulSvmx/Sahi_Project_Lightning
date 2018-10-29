@@ -1,0 +1,250 @@
+	_writeFile("false", $appiumPath+$sahiIntermediatoryPath, true);
+var $scenario_10579 = _testcase("scenario_10579","SCN_Checklist_1_RS-10579_Verify Sections,DVR,SOU Help URL in Checklists");
+$scenario_10579.start();
+
+var $ProcessStatus=false;
+var $wizardObject ="Work Order";
+var $sfmName = "Auto_10579_Checklist";
+var $questionNames1=["Date should not be Today","Number Should not be greater than 100","Question Three"];
+var $questionNames2 = ["Question One section two","Question two Section two"];
+var $questionNames3=  ["Section Three q1","Section Three q 2"];
+var $exitQuestionName = ["Number Should not be greater than 100"];
+var $sectionName1 = "Section One";
+var $sectionName2 = "Section Two";
+var $sectionName3 = "Section Three";
+var $sectionName4 = "Section Four";	
+
+//variables for exit criteria
+var $questionType=["Number"];
+var $comboField=["Less Than"];
+var $operandType=["Value"];
+var $answer=["20"];
+var $skipTo=["3-"+$sectionName3];
+var $criteriaDetails1=[$comboField,$operandType,$answer,$skipTo];
+var $criteriaDetailsv=[$criteriaDetails1];
+var $targetObjectName = "Work Order";
+
+
+//Adding Entry criteria
+var $comboField=["Priority"];
+var $comboConditions=["Equals"]; 
+var $toggleButton=[""];
+var $comboInput=["High"];
+var $advExpr="";
+var $criteriaName=$bo_act_common.generateRandomName("SFMCheckListEC_");
+var $criteriaDetails=[$comboField,$comboConditions,$toggleButton,$comboInput,$advExpr,$criteriaName];
+
+
+
+//Sou Variables
+
+var $field = ["Billing Type","Problem Description"];
+var $condition= ["Set","Set"];
+var $operand = ["Value","Value"];
+var $value = ["Paid","Souce Object Update Sucess"];
+var $souObject  = "Work Order";
+
+//Qualification criteria 
+var $trgHeaderObj="Work Order";
+var $headerComboField=["Order Status"];
+var $headerComboConditions=[""]; 
+var $headerToggleButton=[""];
+var $headerCmboInput=["Open"];
+var $advExpr="";
+var $errMsg="This record does not qualify as the Order Status is NOT Open";
+var $exprsnName=$bo_act_common.generateRandomName("SFM_WO_Exprsn_");
+var $headerExprFieldsDetails=[$headerComboField,$headerComboConditions,$headerToggleButton,$headerCmboInput,$advExpr,$errMsg,$exprsnName];
+var $headerMappingDetails="";
+
+
+//Adding DVR Questions to the Section
+var $dvrName1=$bo_act_common.generateRandomName("dvrName_");
+var $dvrID1=$dvrName1;
+var $comboField1=["Equals"];
+var $operandType1=["Function"];
+var $answer1=["Today"];
+var $advExpr1="";
+var $sfmType1="Error";
+var $errorMsg1="Date Should not be Today";
+var $questionType1 = "Date";
+var $dvrExpressionDetails1=[$comboField1,$operandType1,$answer1,$advExpr1,$sfmType1, $errorMsg1,$questionType1];
+
+
+//DVR 2 
+var $dvrName2=$bo_act_common.generateRandomName("dvrName_");
+var $dvrID2=$dvrName2;
+var $comboField2=["Greater Than"];
+var $operandType2=["Value"];
+var $answer2=["100"];
+var $advExpr2="";
+var $msfType2="Error";
+var $errorMsg2="Number cannot be greater than 100";
+var $questionType2 = "Number";
+var $dvrExpressionDetails2=[$comboField2,$operandType2,$answer2,$advExpr2,$msfType2, $errorMsg2,$questionType2];
+
+
+
+$bo_act_login.login($g_url, $appiumAdminUn, $appiumAdminPwd);
+$sfm_act_lightningConfig.switchToLightning();
+
+$ProcessStatus=$sfm_act_SFM.checkCustomProcess($sfmName);
+if($ProcessStatus==false){
+
+$bo_act_navigation.navigateToSfmTransactionDesigner();
+_wait(15000);
+_click($bo_pg_sfmTransactionAndDesigner.btn_newSFM);
+_wait(3000);
+_setValue($bo_pg_sfmTransactionAndDesigner.txt_name, $sfmName);
+_setValue($bo_pg_sfmTransactionAndDesigner.txt_sfmTransactionId, "");
+_setSelected($sfm_pg_screenDesigner.sel_createSFMTransaction, "to generate a Checklist/Survey type of Process");
+_setStrictVisibilityCheck(true);
+_setValue($sfm_pg_screenDesigner.txt_srcObject,"");
+_setValue($sfm_pg_screenDesigner.txt_srcObject,"Wo");
+_wait(5000);
+_click($sfm_pg_screenDesigner.lbl_workOrder);
+_click($bo_pg_sfmTransactionAndDesigner.btn_qualifyingCriteriaAndFieldMapping);
+_click($bo_pg_sfmTransactionAndDesigner.btn_mappings);
+_click($bo_pg_sfmTransactionAndDesigner.btn_mappings);
+_setValue(_f("main").s_textinput("/textInput/").near(_f("main").tab("Field Map For Existing Records")),"SVMX");
+_click(_f("main").s_label("SVMXSTD: Map Work Order to Checklist"));
+
+//Setting Qualification Criteria to Order Status = Open
+
+$sfm_act_Transactions.sfmQualifyingCriteriaieldMappings($trgHeaderObj, $headerExprFieldsDetails, $headerMappingDetails);
+
+_wait(10000);
+_selectDomain("/svmx/");
+_click($bo_pg_formDesigner.tab_clickFormDesigner);
+
+
+//Question One section two
+//$bo_act_checklistdesigner.addQuestion("Text",Question Three,false,"");
+$bo_act_checklistdesigner.addQuestion("Date", "Date should not be Today", false,"");
+$bo_act_checklistdesigner.addQuestion("Number", "Number Should not be greater than 100", false,"");
+$bo_act_checklistdesigner.addQuestion("Text", "Question One section two", false,"");
+$bo_act_checklistdesigner.addQuestion("Text", "Question two Section two", false,"");
+$bo_act_checklistdesigner.addQuestion("Text", "Section Three q1", false,"");
+$bo_act_checklistdesigner.addQuestion("Text", "Section Three q2", false,"");
+
+
+$sfm_act_formDesigner.removeQuestionFromSection("Date should not be Today", "Checklist Section Title");
+_wait(3000);
+$sfm_act_formDesigner.removeQuestionFromSection("Number Should not be greater than 100", "Checklist Section Title");
+_wait(3000);
+$sfm_act_formDesigner.removeQuestionFromSection("Question One section two", "Checklist Section Title");
+_wait(3000);
+$sfm_act_formDesigner.removeQuestionFromSection("Question two Section two", "Checklist Section Title");
+_wait(3000);
+$sfm_act_formDesigner.removeQuestionFromSection("Section Three q1", "Checklist Section Title");
+_wait(3000);
+$sfm_act_formDesigner.removeQuestionFromSection("Section Three q2", "Checklist Section Title");
+_wait(3000);
+
+
+//edit default section and renaming to section One
+_selectDomain("/svmx/");
+$sfm_act_formDesigner.editSection("Checklist Section Title");
+$sfm_act_formDesigner.editSectionInformation($sectionName1, $sectionName1, "http://google.com");
+_click($sfm_pg_formDesigner.btn_applySectionWindow);
+_wait(3000,_isVisible($sfm_pg_formDesigner.label_saveEditSectionMsg));
+_click($sfm_pg_formDesigner.btn_cancelSectionWindow);
+
+//Create Section Two
+$sfm_act_formDesigner.createNewSection();
+$sfm_act_formDesigner.editSection("Checklist Section Title");
+$sfm_act_formDesigner.editSectionInformation($sectionName2, $sectionName2, "http://google.com");
+_click($sfm_pg_formDesigner.btn_applySectionWindow);
+_wait(3000,_isVisible($sfm_pg_formDesigner.label_saveEditSectionMsg));
+_click($sfm_pg_formDesigner.btn_cancelSectionWindow);
+
+//Create Section Three
+$sfm_act_formDesigner.createNewSection();
+$sfm_act_formDesigner.editSection("Checklist Section Title");
+$sfm_act_formDesigner.editSectionInformation($sectionName3, $sectionName3, "http://google.com");
+_click($sfm_pg_formDesigner.btn_applySectionWindow);
+_wait(3000,_isVisible($sfm_pg_formDesigner.label_saveEditSectionMsg));
+_click($sfm_pg_formDesigner.btn_cancelSectionWindow);
+
+_wait(5000);
+
+
+//Adding question to sectionOne  with DVR
+$sfm_act_formDesigner.addQuestionToSection($sectionName1, $questionNames1[0]);
+//$bo_act_checklistdesigner.addQuestion("Date","Date DVRVS",false,"");
+_wait(5000);
+_selectDomain($g_domain); 
+$sfm_act_formDesigner.editQuestionInSection($sectionName1, $questionNames1[0]);
+$sfm_act_formDesigner.dataValidationOnCheckListQuestion($dvrName1, $dvrID1, $dvrExpressionDetails1);
+_click($sfm_pg_formDesigner.tab_questionDetails);
+_click($sfm_pg_formDesigner.btn_dvrSave);
+_wait(3000);
+
+//Adding question to sectionOne with DVR 2
+$sfm_act_formDesigner.addQuestionToSection($sectionName1, $questionNames1[1]);
+//$bo_act_checklistdesigner.addQuestion("Date","Date DVRVS",false,"");
+_wait(5000);
+_selectDomain($g_domain); 
+$sfm_act_formDesigner.editQuestionInSection($sectionName1, $questionNames1[1]);
+$sfm_act_formDesigner.dataValidationOnCheckListQuestion($dvrName2, $dvrID2, $dvrExpressionDetails2);
+_click($sfm_pg_formDesigner.tab_questionDetails);
+_click($sfm_pg_formDesigner.btn_dvrSave);
+_wait(3000);
+
+$sfm_act_formDesigner.addQuestionToSection($sectionName1, $questionNames1[2]);
+
+//Adding question to sectionTwo
+$sfm_act_formDesigner.addQuestionToSection($sectionName2, $questionNames2[0]);
+$sfm_act_formDesigner.addQuestionToSection($sectionName2, $questionNames2[1]);
+_wait(3000);
+_click(_f("main").s_button("Edit Question").near(_f("main").s_label($questionNames2[1]).near(_f("main").s_richeditabletext($sectionName2))));
+_setValue(_f("main").s_textinput("helpUrl"),"https://www.ge.com/");
+_click($sfm_pg_formDesigner.btn_dvrSave);
+
+//Adding question to sectionThree
+$sfm_act_formDesigner.addQuestionToSection($sectionName3, $questionNames3[0]);
+$sfm_act_formDesigner.addQuestionToSection($sectionName3, $questionNames3[1]);
+
+//-------------------------------------------------------
+
+//Adding Exit Criteria
+
+$sfm_act_formDesigner.editSection($sectionName1);
+$sfm_act_formDesigner.addExistCriteria();
+$sfm_act_formDesigner.addQuesToExistCriteriaTab($exitQuestionName, $questionType, $criteriaDetailsv);
+//$sfm_act_formDesigner.setExitCriteriaOnNumberQuestion($exitQuestionName, $questionType, $criteriaDetails);
+_click(_f("main").s_button("saveBtnExit"));
+_click($bo_pg_formDesigner.btn_closeQuestionPopUp);
+_wait(3000);
+
+//Entry Criteria
+$sfm_act_formDesigner.editSection($sectionName1);
+$sfm_act_formDesigner.createEntryCriteria("", $criteriaDetails);
+//var $entrylabel=_f("main").s_navigatorcontent("Entry Criteria");
+_click(_f("main").s_button("saveBtnEntry"));
+_wait(5000);
+//_click($sfm_pg_formDesigner.btn_cancelSectionWindow);
+_click($bo_pg_formDesigner.btn_closeQuestionPopUp);
+//_click($bo_pg_sfmTransactionAndDesigner.btn_saveAndclose);
+_wait(5000);
+
+//Source object update
+_wait(15000);
+//Creating SOU
+$sfm_pg_sourceObjectUpdate.createSOU($souObject,$field, $condition, $operand, $value,"Checklist");
+
+_click($bo_pg_sfmTransactionAndDesigner.btn_saveAndclose);
+_wait(5000);
+
+
+//_click($bo_pg_sfmTransactionAndDesigner.btn_saveAndclose);
+var $profilename = $group_profilename;
+//$bo_act_SFMAppPermission.set_mobileapp_permissions($profilename, $targetObjectName, $sfmName);
+
+$bo_act_SFMAppPermission.set_mobileapp_permissions_generic($profilename, $targetObjectName, $sfmName, "Checklist");
+
+
+_wait(5000);
+
+}
+_writeFile("true", $appiumPath+$sahiIntermediatoryPath, true);
+$scenario_10579.end();

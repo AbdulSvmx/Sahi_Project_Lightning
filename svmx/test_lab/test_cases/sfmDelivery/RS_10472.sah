@@ -175,8 +175,10 @@ var $urlLabels = ["Automation URL"];
 var $urlValues = ["www.google.com"];
 var $telephoneLabels = ["Automation Phone"];
 var $telephoneValues = ["2345407"];
+var $lookUpLabels = ["Account"];
+var $lookUpValues = ["HCSAccountForTesting"];
 _wait(2000);
-$sfm_act_lightningConfig.editWorkOrder($textLabels, $textValues, $pickListLabels, $pickListValues, $textAreaLabels, $textAreaValues, $checkBoxLabels, $checkBoxValues, $dateTimeLabels, $dateTimeDateValues, $timeValues,$emailLabels,$emailValues,$multiPickLabels,$multiPickValues,$urlLabels,$urlValues,$telephoneLabels,$telephoneValues);
+$sfm_act_lightningConfig.editWorkOrder($textLabels, $textValues, $pickListLabels, $pickListValues, $textAreaLabels, $textAreaValues, $checkBoxLabels, $checkBoxValues, $dateTimeLabels, $dateTimeDateValues, $timeValues,$emailLabels,$emailValues,$multiPickLabels,$multiPickValues,$urlLabels,$urlValues,$telephoneLabels,$telephoneValues,$lookUpLabels,$lookUpValues);
 
 //Launch the process in SFM Delivery
 $sfm_act_createCustomWizard.clickWizardlinks($processName);

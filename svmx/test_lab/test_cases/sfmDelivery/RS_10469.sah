@@ -4,7 +4,7 @@ $RS_10469.start();
 var $objectName = "Work Order";
 var $childObject = "Work Detail";
 var $processName = "RS_10469";
-var $process_to_clone = "Create Follow-Up Work Order from Work Order";
+var $process_to_clone = "Create Quote from Work Order";
 var $sfmTemplate = "SVMXSTD: Manage WO Usage Lines";
 var $isCustom = false;
 var $lineType = "Parts";
@@ -35,10 +35,11 @@ var $mapName = $processName + "mp";
 //**************************************************************************************
 //Login and switch to lightning
 
-$bo_act_login.login($g_url,$sfmlUsn,$sfmlPwd);
+$bo_act_login.login($g_url,"sfdl_auto@automation.com","Maxplore2");
 $sfm_act_lightningConfig.switchToLightning();
 _wait(15000);
 //***************************************************************************************
+
 //Create custom fields if needed
 $sfm_act_lightningConfig.addCustomFields($childObject, $customFieldsNames, $missingStdDataTypes, $myDomain,$multiPicklistValues);
 _closeWindow();
@@ -64,8 +65,8 @@ if($fieldsAbsentInPage.length > 0){
 }
 
 //Enter values for Source child in order to verify field mapping at target child
-var $textLabels = ["Billable Line Price","Date Received","Billable Qty","Received City","Automation ChildPercent"];
-var $textValues = ["6600","4/21/2018","345","Bengaluru","44"];
+var $textLabels = ["Billable Line Price","Date Received","Billable Qty","Received City","Automation ChildPercent","Account"];
+var $textValues = ["6600","4/21/2018","345","Bengaluru","44","HCSAccountForTesting"];
 var $pickListLabels = ["Activity Type"];
 var $pickListValues = ["Calibration"];
 var $textAreaLabels = ["Received Street","Reference Information"];
@@ -83,13 +84,15 @@ var $urlLabels = ["Automation ChildURL"];
 var $urlValues = ["www.google.com"];
 var $telephoneLabels = ["Automation ChildPhone"];
 var $telephoneValues = ["2345407"];
+var $lookUpLabels = ["Account"];
+var $lookUpValues = ["HCSAccountForTesting"];
 
-$sfm_act_lightningConfig.editWorkOrder($textLabels, $textValues, $pickListLabels, $pickListValues, $textAreaLabels, $textAreaValues, $checkBoxLabels, $checkBoxValues, $dateTimeLabels, $dateTimeDateValues, $timeValues,$emailLabels,$emailValues,$multiPickLabels,$multiPickValues,$urlLabels,$urlValues,$telephoneLabels,$telephoneValues);
-
+$sfm_act_lightningConfig.editWorkOrder($textLabels, $textValues, $pickListLabels, $pickListValues, $textAreaLabels, $textAreaValues, $checkBoxLabels, $checkBoxValues, $dateTimeLabels, $dateTimeDateValues, $timeValues,$emailLabels,$emailValues,$multiPickLabels,$multiPickValues,$urlLabels,$urlValues,$telephoneLabels,$telephoneValues,$lookUpLabels,$lookUpValues);
+_wait(3000);
 $sfm_act_lightningConfig.logoutInLightning();
 //Login and switch to lightning
 
-$bo_act_login.login($g_url,$sfmlUsn,$sfmlPwd);
+$bo_act_login.login($g_url,"sfdl_auto@automation.com","Maxplore2");
 $sfm_act_lightningConfig.switchToLightning();
 
 //**************************************************************************************************
@@ -104,7 +107,7 @@ _wait(60000, _isVisible($bo_pg_sfmTransactionAndDesigner.txt_name));
 _setValue($bo_pg_sfmTransactionAndDesigner.txt_name, $processName);
 _setValue($bo_pg_sfmTransactionAndDesigner.txt_sfmTransactionId,"");
 _setValue($bo_pg_sfmTransactionAndDesigner.txt_sfmTransactionId,$processName);
-//_setSelected($bo_pg_sfmTransactionAndDesigner.list_sourceHeaderList,$objectName);
+_setSelected($bo_pg_sfmTransactionAndDesigner.list_targetHeaderList,$objectName);
 if(_isVisible($bo_pg_sfmTransactionAndDesigner.btn_popUpOK)){
 	_click($bo_pg_sfmTransactionAndDesigner.btn_popUpOK);
 }
@@ -113,7 +116,10 @@ _click($bo_pg_sfmTransactionAndDesigner.list_targetChild);
 _setValue($bo_pg_sfmTransactionAndDesigner.text_targetChildAlias,$lineType);
 //_click($bo_pg_sfmTransactionAndDesigner.chkbx_targetChild2);
 _click($bo_pg_sfmTransactionAndDesigner.btn_qualifyingCriteriaAndFieldMapping);
-_setSelected(_setSelected(_f("main").s_dropdownlist(1).near(_f("main").s_label($lineType)),"Work Detail (Work Order)"));
+_click(_f("main").s_dropdownlist("objCombo").near(_f("main").s_label("Parts")));
+_setSelected(_f("main").s_dropdownlist("objCombo").near(_f("main").s_label("Parts")),"Work Detail (Work Order)");
+
+
 _click($bo_pg_sfmTransactionAndDesigner.btn_screenDesigner);
 _wait(6000);
 _click($bo_pg_sfmTransactionAndDesigner.btn_newPageLayout);
@@ -140,7 +146,7 @@ _selectDomain();
 $bo_act_navigation.navigateToCreatedRecordUsingGlobalSearch($wo_number);
 $sfm_act_createCustomWizard.clickWizardlinks($processName);
 _wait(8000);
-
+_selectDomain($g_domain);
 _click($sfm_pg_wo.link_delivery_save);
 _selectDomain();
 _wait(14000,_isVisible($sfm_pg_wo.label_wo));
@@ -154,8 +160,8 @@ _click(_link($targetLineNumber));
 _wait(6000);
 
 //Verify values for Target line created
-$textValues = ["$6,600.000","4/21/2018","345.00","Bengaluru","44%"];
-$textValues[$temp] = "4/21/2018";
+$textLabels = ["Billable Line Price","Date Received","Billable Qty","Received City","Automation ChildPercent"];
+$textValues = ["$6,600.000","4/21/2018","345.0000","Bengaluru","44%"];
 $dateTimeDateValues = ["4/11/2018"];
 $res = $sfm_act_lightningConfig.verifyValues($textLabels, $textValues, $pickListLabels, $pickListValues, $textAreaLabels, $textAreaValues, $checkBoxLabels, $checkBoxValues, $dateTimeLabels, $dateTimeDateValues, $timeValues,$emailLabels,$emailValues,$lookUpLabels,$lookUpValues,$multiPickLabels,$multiPickValues,$urlLabels,$urlValues,$telephoneLabels,$telephoneValues);
 _assertTrue($res);
@@ -170,7 +176,7 @@ else {
 $bo_act_navigation.navigateToCreatedRecordUsingGlobalSearch($wo_number);
 $sfm_act_createCustomWizard.clickWizardlinks($processName);
 _selectDomain($g_domain);
-_click($sfm_pg_wo.btn_arrowNextToUserSettings);
+_click($sfm_pg_wo.btn_arrowNextToClearCache);
 _assertVisible($sfm_pg_wo.link_launchSfmDesigner);
 _click($sfm_pg_wo.link_launchSfmDesigner);
 _selectDomain();
@@ -199,9 +205,6 @@ _click(_link($targetLineNumber));
 _wait(6000);
 
 //Verify values for Target line created
-$textValues = ["$6,600.000","4/21/2018","345.00","Bengaluru","44%"];
-$textValues[$temp] = "4/21/2018";
-$dateTimeDateValues = ["4/11/2018"];
 $res = $sfm_act_lightningConfig.verifyValues($textLabels, $textValues, $pickListLabels, $pickListValues, $textAreaLabels, $textAreaValues, $checkBoxLabels, $checkBoxValues, $dateTimeLabels, $dateTimeDateValues, $timeValues,$emailLabels,$emailValues,$lookUpLabels,$lookUpValues,$multiPickLabels,$multiPickValues,$urlLabels,$urlValues,$telephoneLabels,$telephoneValues);
 _assertTrue($res);
 if($res){
@@ -212,6 +215,8 @@ else {
 }
 
 $sfm_act_lightningConfig.logoutInLightning();
+
+
 $RS_10469.end();
 
 

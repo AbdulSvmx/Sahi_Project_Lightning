@@ -4,7 +4,7 @@
  * PRE Requisites to be run in the org before running other scripts - LIGHTNING CODE
  */
 _writeFile("false", $appiumPath+$sahiIntermediatoryPath, true);
-var $rs_10540 = _testcase("SCN_SourcetoTarget1_RS-10540 Verify Source to target process from IB to custom Object");
+var $rs_10540 = _testcase("SCN_SourcetoTarget1_RS-10540  Verify Source to target process from IB to custom Object");
 	$rs_10540.start();
 	var $bProcessStatus = false;
 	var $sfmName = "RS_10540_Process";
@@ -24,13 +24,14 @@ var $rs_10540 = _testcase("SCN_SourcetoTarget1_RS-10540 Verify Source to target 
 	var $exprsnName="RS_10540_QC";
 	var $headerExprFieldsDetails=[$headerComboField,$headerComboConditions,$headerToggleButton,$headerCmboInput,$advExpr,$errMsg,$exprsnName];
 	
+	var $mapType ="Field Map For Existing Records";
 	var $pickListLabels=["Auto_Custom_Object10540 Name","Auto_Text10540"];
 	var $pickListValues=["Installed Product ID","City"];
 	var $textLabels=[];
 	var $textValues=[];
 	var $mapName="RS_10540_Mapping";
 	
-	var $headerMappingDetails=[$srcHeaderObj,$pickListLabels, $pickListValues, $textLabels, $textValues, $mapName];
+	var $headerMappingDetails=[$srcHeaderObj,$mapType,$pickListLabels, $pickListValues, $textLabels, $textValues, $mapName];
 	
 	
 	

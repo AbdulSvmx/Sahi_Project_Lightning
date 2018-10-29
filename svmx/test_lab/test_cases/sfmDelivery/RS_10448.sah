@@ -1,18 +1,32 @@
 var $rs_10448 = _testcase("RS_10448","Verify Lookup prefilter using data types - Date Literal, Picklist and Record Type");
 $rs_10448.start();
-	
-		//delete[SELECT Name FROM SVMXC__RMA_Shipment_Order__c limit 10000];
-		//pre-req
+
+	//delete[SELECT Name FROM SVMXDEV__RMA_Shipment_Order__c limit 10000];
+	//pre-req
+		var RecordTypeId=new Array;
+		var $recTypeName=["Shipment","RMA"];
+		
+		for (var $n = 0; $n < $recTypeName.length; $n++) {
+			$objName="RecordType";
+			$filter=["DeveloperName","SobjectType"];
+			$filterValue=[$recTypeName[$n],"SVMXDEV__RMA_Shipment_Order__c"];
+			$columnName = "id";
+			//create a case
+			$partOrderNumber =$sfm_act_restApiMethods.getRestApi($sfmlUsn,$sfmlPwd,$sfmClientId,$sfmConsumerSecret,$sfmOrgInstance,"GET", $objName, $columnName, $filter, $filterValue);
+			_log("Record Type ID: "+$partOrderNumber);
+			RecordTypeId[$n]=$partOrderNumber;
+		}
+
 		//Create Parts Order using below variables
 		var $partOrderNumber=new Array;
-		$objName= "SVMXC__RMA_Shipment_Order__c";
+		$objName= "SVMXDEV__RMA_Shipment_Order__c";
 		for (var $i = 0; $i < 4; $i++) {
 			if ($i==0) {
-				$obJson = "{\"SVMXC__Expected_Receive_Date__c\":\""+getToday()+"\",\"SVMXC__Billing_Type__c\":\"Loan\",\"RecordTypeId\":\"012290000004Ri2AAE\"}";
+				$obJson = "{\"SVMXDEV__Expected_Receive_Date__c\":\""+getToday()+"\",\"SVMXDEV__Billing_Type__c\":\"Loan\",\"RecordTypeId\":\""+RecordTypeId[1]+"\"}";
 			}else if ($i==1) {
-				$obJson = "{\"SVMXC__Expected_Receive_Date__c\":\""+getToday()+"\",\"SVMXC__Billing_Type__c\":\"Contract\",\"RecordTypeId\":\"012290000004Ri3AAE\"}";
+				$obJson = "{\"SVMXDEV__Expected_Receive_Date__c\":\""+getToday()+"\",\"SVMXDEV__Billing_Type__c\":\"Contract\",\"RecordTypeId\":\""+RecordTypeId[0]+"\"}";
 			}else {
-				$obJson = "{\"SVMXC__Expected_Receive_Date__c\":\""+getToday()+"\",\"SVMXC__Billing_Type__c\":\"Contract\",\"RecordTypeId\":\"012290000004Ri2AAE\"}";
+				$obJson = "{\"SVMXDEV__Expected_Receive_Date__c\":\""+getToday()+"\",\"SVMXDEV__Billing_Type__c\":\"Contract\",\"RecordTypeId\":\""+RecordTypeId[1]+"\"}";
 			}
 			$columnName = "Name";
 			$filter="id";
@@ -24,8 +38,8 @@ $rs_10448.start();
 		}
 		
 		//Create Work order using below variables 
-		$objName= "SVMXC__Service_Order__c";
-		$obJson = "{\"SVMXC__Problem_Description__c\":\"Problem Description\",\"SVMXC__Priority__c\":\"High\"}";
+		$objName= "SVMXDEV__Service_Order__c";
+		$obJson = "{\"SVMXDEV__Problem_Description__c\":\"Problem Description\",\"SVMXDEV__Priority__c\":\"High\"}";
 		_log("Work Order json: "+$obJson);
 		$columnName = "Name";
 		$filter="id";
@@ -157,83 +171,18 @@ function RS10448_search($objectName){
 	_wait(5000,_isVisible(_link($objectName)));
 };
 
-
-
-/*
-// Pre-Condition: Should have atleast 1 Part Order with the Pre-filter mentioned.
-$sfmName = $bo_act_common.generateRandomName("SFM_Auto_");
-//$sfmName = "SFM_Auto_1220187946";
-$sfmPgLayoutName =	$bo_act_common.generateRandomName("SFM_Auto_Page");
-$headersToAdd = ["Parts"];
-$lookUpName = $bo_act_common.generateRandomName("Part_lkp_");
-$wizTitle = $bo_act_common.generateRandomName("SFM Wiz");
-$bo_act_login.login($g_url,$sfmlUsn,$sfmlPwd);
-$sfm_act_lightningConfig.switchToLightning();
-$bo_act_navigation.navigateToSfmTransactionDesigner();
-_click($bo_pg_sfmTransactionAndDesigner.btn_newSFM);
-_wait(10000);
-_setValue($bo_pg_sfmTransactionAndDesigner.txt_name, $sfmName);
-_setValue($bo_pg_sfmTransactionAndDesigner.txt_sfmTransactionId, "");
-_setSelected($sfm_pg_screenDesigner.sel_createSFMTransaction, "as Standalone for the purpose of editing an existing record");
-_setStrictVisibilityCheck(true);
-_setValue($sfm_pg_screenDesigner.txt_targetObject,"");
-_setValue($sfm_pg_screenDesigner.txt_targetObject,"Wo");
-_wait(5000);
-_click($sfm_pg_screenDesigner.lbl_workOrder);
-_click($bo_pg_sfmTransactionAndDesigner.btn_screenDesigner);
-_setValue($bo_pg_sfmTransactionAndDesigner.txt_sfmSavePageLayoutAs, $sfmPgLayoutName);
-_setValue($bo_pg_sfmTransactionAndDesigner.txt_sfmSavePageLayoutAsId, $sfmPgLayoutName);
-_wait(10000);
-$sfm_act_Transactions.addHeader($headersToAdd);
-_click(_f("main").s_button("Configure Lookup"));
-_wait(5000);
-_setValue($sfm_pg_screenDesigner.txt_lookupName, $lookUpName);
-_setValue($sfm_pg_screenDesigner.txt_lookupId, "");
-_setValue($sfm_pg_screenDesigner.txt_lookupId, $lookUpName);
-_click(_f("main").s_button("Add a row"));
-var $fields = ["Expected Receipt Date","Billing Type","Record Type ID"];
-var $fields1 = ["Account","Billing Type","Record Type ID"];
-_setSelected(_f("main").s_combobox("fieldCombo"), $fields[0]);
-_setSelected(_f("main").s_dropdownlist("operandTypeCombo"), "Function");
-var $clicks = 2;
-for(var $i=1;$i<=$clicks;$i++){
-	var $j = $i-1;
-	_click(_f("main").s_button("+"));
-	_setSelected(_f("main").s_combobox("fieldCombo["+$i+"]"), $fields[$i]);
-}
-_setValue(_f("main").s_textinput("advExpIP"), "(1 and 2) or 3");
-$sfm_act_Transactions.addSearchDisplay($fields1);
-_click(_f("main").s_button("Save[4]"));
-_wait(3000);
-_click($sfm_pg_screenDesigner.btn_lookupClose);
-_click($bo_pg_sfmTransactionAndDesigner.btn_pageLayoutSave);
-_wait(3000);
-_click($bo_pg_sfmTransactionAndDesigner.btn_finalQuickSave);
-$bo_act_navigation.navigateToSfmWizard();
-$sfm_act_createCustomWizard.chooseObject("Work Order");
-$sfm_act_createCustomWizard.addManageWizSteps($wizTitle,"SFM",$sfmName);
-$woName=$sfm_act_createCustomWizard.createBlankWo();
-_log($woName);
-$sfm_act_createCustomWizard.clickWizardBtn($sfmName);
-_selectDomain();
-_setStrictVisibilityCheck(true);
-_click($sfm_pg_wizardWindow.lookup_PartsOrder);
-_click($sfm_pg_wizardWindow.icon_search);
-var $divs= _collect("_div","/.*/ /*",_under(_div("Record Type ID")));
-/*var $count = 0;
-for(var $i=0;$i<$divs.length-1;$i++){
-	if(_getText($divs[$i])!="RMA"&&_getText($divs[$i])!=""){
-		$count++;
-	}
-}
-if($count==0){
-	_log("Pass");
-}
-else{
-	_log("Fail");
+function RS1052_checkAndAddField_ContactPicklist(){
+	var $objectName = "Work Order";
+	var $fieldNames = ["Parts Order"];
+	var $dataTypes = ["Lookup Relationship"];
+	var $myDomain = "/lightning/";
+	var $multiPicklistValues = [""];
+	var $lookupType=["Parts Order"];
+	//Create custom fields if needed
+	$sfm_act_lightningConfig.addCustomFields($objectName, $fieldNames, $dataTypes, $myDomain, $multiPicklistValues, $lookupType);
+	_closeWindow();
+	_selectWindow();
 }
 
 
-
-*/
 $rs_10448.end();

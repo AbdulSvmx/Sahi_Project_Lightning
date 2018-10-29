@@ -166,6 +166,23 @@ var $sfm_act_SFM = new function sfm_act_SFM() {
 		_wait(20000,_isVisible($sfm_pg_screenDesigner.btn_propoties));
 	};
 	
+	
+	this.checkCustomProcess=function($sfmName){
+		var $retVal=null;
+		$bo_act_navigation.navigateToSfmTransactionDesigner();
+		_wait(20000,_isVisible($bo_pg_sfmTransactionAndDesigner.btn_yourCustomSfmTransactions));
+		_click($bo_pg_sfmTransactionAndDesigner.btn_yourCustomSfmTransactions);
+		_setValue($bo_pg_sfmTransactionAndDesigner.lbl_searchSFM, $sfmName);
+		
+		_wait(10000);
+		if (_isVisible(_f("main").s_label($sfmName).near(_f("main").processlistitemrenderer($sfmName)))) {
+			$retVal=true;
+		}else {
+			$retVal=false;
+		}
+		return $retVal;
+	};
+	
 	/**
 	 * Based on the number of items passed in array(ContainerName), fields gets added to either header or child
 	 * If Container is Order Status then field is added to header otherwise to Child lines
@@ -175,19 +192,15 @@ var $sfm_act_SFM = new function sfm_act_SFM() {
 			if ($containerName[$i] == 'Order Status') {
 				//$bo_pg_sfmTransactionAndDesigner.addField($fieldName[$i],$containerName[$i]);
 				_click(_f("main").fieldrenderer("[object Object]").near(_f("main").formitemlabel($containerName[$i])));
-			} else if($containerName[$i] == 'Parts'){
-				_setValue(_f("main").s_hscrollbar("horizontalScrollBar").near(_f("main").s_richtext("Parts")),"00");
-				_click(_f("main").s_datagroup("dataGroup").near(_f("main").s_richtext($containerName[$i])));
-			}else if($containerName[$i] == 'Labor'){
-				_setValue(_f("main").s_hscrollbar("horizontalScrollBar").near(_f("main").s_richtext("Labor")),"00");
-				_click(_f("main").s_datagroup("dataGroup").near(_f("main").s_richtext($containerName[$i])));
-			}else if($containerName[$i] == 'Expenses'){
-				_setValue(_f("main").s_hscrollbar("horizontalScrollBar").near(_f("main").s_richtext("Expenses")),"00");
-				_click(_f("main").s_datagroup("dataGroup").near(_f("main").s_richtext($containerName[$i])));
-			}else if($containerName[$i] == 'Travel'){
-				_setValue(_f("main").s_hscrollbar("horizontalScrollBar").near(_f("main").s_richtext("Travel")),"00");
-				_click(_f("main").s_datagroup("dataGroup").near(_f("main").s_richtext($containerName[$i])));
-			}				
+			} else if($containerName[$i] == 'Parts' || $containerName[$i] == 'Labor' || $containerName[$i] == 'Expenses' || $containerName[$i] == 'Travel'  ){
+				if(_isVisible(_f("main").s_hscrollbar("horizontalScrollBar").near(_f("main").s_richtext($containerName[$i])))){
+					_setValue(_f("main").s_hscrollbar("horizontalScrollBar").near(_f("main").s_richtext($containerName[$i])),"00");
+				    }
+					_click(_f("main").s_datagroup("dataGroup").near(_f("main").s_richtext($containerName[$i])));
+				}
+			else{
+				_click(_f("main").s_datagroup("dataGroup").near(_f("main").s_richtext($containerName[$i])));				
+				}
 			//Below logic is used for selecting object from multi match list	
 			_setValue($bo_pg_sfmTransactionAndDesigner.txt_quickFindField, $fieldName[$i]);
 			var $elementName=$fieldName[$i];
@@ -313,6 +326,13 @@ var $sfm_act_SFM = new function sfm_act_SFM() {
 		_wait(3000, _isVisible($bo_pg_sfmTransactionAndDesigner.page_saved));
 	}
 	
+	/**
+	 * This function is set form fill on a field
+	 * $fieldName - field on which formfill to be set
+	 * $objMapping - name of the mapping
+	 * $nearBy - near which the object is present
+	 * Eg : 10444.sah  
+	 */	
 	this.setFormFill = function($fieldName,$objMapping,$nearBy){
 		if($nearBy == 'Parts' || $nearBy == 'Labor' || $nearBy == 'Expense' || $nearBy == 'Travel'){
 			_click(_f("main").s_richtext($fieldName).near(_f("main").s_richtext($nearBy)));

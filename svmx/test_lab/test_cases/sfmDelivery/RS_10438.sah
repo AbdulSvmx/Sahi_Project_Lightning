@@ -18,7 +18,7 @@ var $formulaDescriptionArray = ["Schdeuled Date=Today",
                                 ];
 
 var $formulaArray =["$F.TODAY()",
-                    "$F.MULTIPLY($D.Labor.SVMXC__Actual_Quantity2__c,$D.Labor.SVMXC__Actual_Price2__c)"
+                    "$F.MULTIPLY($D.Labor.SVMXDEV__Actual_Quantity2__c,$D.Labor.SVMXDEV__Actual_Price2__c)"
                     ];
 
 _setSpeed($g_stepSpeed);

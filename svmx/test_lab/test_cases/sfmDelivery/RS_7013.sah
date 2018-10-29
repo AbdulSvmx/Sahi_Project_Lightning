@@ -4,9 +4,9 @@
 //Below Mapping should be created manually before executing the testcase 
 /*7013mapping=
 
-Actual Initial Response=SVMX.CURRENTRECORD.SVMXC__Actual_Resolution__c;
-City=SVMX.CURRENTRECORD.SVMXC__Invoice_Number__c
-Time To Resolve(In Minutes)=SVMX.CURRENTRECORD.SVMXC__Idle_Time__c
+Actual Initial Response=SVMX.CURRENTRECORD.SVMXDEV__Actual_Resolution__c;
+City=SVMX.CURRENTRECORD.SVMXDEV__Invoice_Number__c
+Time To Resolve(In Minutes)=SVMX.CURRENTRECORD.SVMXDEV__Idle_Time__c
 
 Above six fields should be added to workorder page layout before launching the wizard in delivery)
 */

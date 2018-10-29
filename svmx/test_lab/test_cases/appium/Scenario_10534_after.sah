@@ -13,7 +13,7 @@ _setSpeed($g_stepSpeed);
 $bo_act_login.login($g_url, $appiumAdminUn, $appiumAdminPwd);
 
 // Removing Work Order from Download Criteria
-$bo_act_SFMAppPermission.workOrderDownloadCriteriachanges("My Records");
+$bo_act_SFMAppPermission.workOrderDownloadCriteriachanges("All Records");
 
 _writeFile("true", $appiumPath+$sahiIntermediatoryPath, true);
 

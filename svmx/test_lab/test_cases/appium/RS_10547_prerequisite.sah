@@ -2,4 +2,15 @@ var $scenario_10547 = _testcase("scenario_10547","Verify Picklist,Dependent Pick
 $scenario_10547.start();
 $bo_act_login.login($g_url, $appiumAdminUn, $appiumAdminPwd);
 $sfm_act_lightningConfig.switchToLightning();
+
+
+
+// To create Record Types for the Object
+
+var $objectname = "Work Order";
+var $RecordTypeName1 = "WO-001";
+var $RecordTypeName2 = "WO-002";
+var $RecordTypeName3 = "WO-003";
+
+$sfm_act_lightningConfig.addRecordType_object($objectname,$RecordTypeName1);
 $scenario_10547.end();
