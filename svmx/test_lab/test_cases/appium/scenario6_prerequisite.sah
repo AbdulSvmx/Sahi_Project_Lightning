@@ -32,7 +32,7 @@ var $formulaDescription="Scenario6 formula";
 var $formula="$F.TODAY()";
 
 var $wizardObject="Case";
-var $wizardName="Auto_Regression_Case";
+var $wizardName="AutoSanity";
 var $wizardType="SFM";
 var $profile="auto group profile";
 var $handOver="false";

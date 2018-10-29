@@ -53,7 +53,11 @@ var $sfm_act_formDesigner = new function sfm_act_formDesigner() {
 		_selectDomain($g_domain);
 		_click(_f("main").s_richeditabletext($sectionName));
 		_click($sfm_pg_formDesigner.btn_addNewQuestion);
-		_click(_f("main").uiftetextfield($queType));
+		if ($queType=="Text") {
+			_click(_f("main").uiftetextfield($queType+"[1]"));
+		}else{
+			_click(_f("main").uiftetextfield($queType));
+		}
 		
 		//adding question details
 		this.addEditCheckListQuestionDetails($queCommonDetails, $queSpecificDetails);
@@ -146,11 +150,11 @@ var $sfm_act_formDesigner = new function sfm_act_formDesigner() {
 			for (var $i = 0; $i < $ansValueSet.length; $i++) {
 				var $ansField=null;
 				if ($i==0) {
-					$ansField=_f("main").s_textinput("/ansValue/").near($sfm_pg_formDesigner.label_ansValue);
+					$ansField=_f("main").s_textinput("/ansValue/").near($sfm_pg_formDesigner.btn_addAns);
 					_setValue($ansField,$ansValueSet[$i]);	
 				}else{
 					_click($sfm_pg_formDesigner.btn_addAns);
-					$ansField=_f("main").s_textinput("ansValue["+$i+"]").near($sfm_pg_formDesigner.label_ansValue);
+					$ansField=_f("main").s_textinput("ansValue["+$i+"]").near($sfm_pg_formDesigner.btn_addAns);
 					_setValue($ansField,$ansValueSet[$i]);	
 				}
 				if ($default[$i]==true) {
@@ -180,6 +184,7 @@ var $sfm_act_formDesigner = new function sfm_act_formDesigner() {
 	
 		if ($preFillFromWO==true) {
 			_click($sfm_pg_formDesigner.btn_preFill);
+			_wait(5000);
 			_setSelected($sfm_pg_formDesigner.sel_sourceField, $defaultVal);
 		}else {
 			_setSelected($sfm_pg_formDesigner.sel_defaultAnsType,$defaultAnsType);
@@ -206,6 +211,7 @@ var $sfm_act_formDesigner = new function sfm_act_formDesigner() {
 		
 		if ($preFillFromWO==true) {
 			_click($sfm_pg_formDesigner.btn_preFill);
+			_wait(3000);
 			_setSelected($sfm_pg_formDesigner.sel_sourceField, $defaultVal);
 		}else {
 			_setValue($sfm_pg_formDesigner.txt_defaultAns,$defaultVal);
@@ -226,14 +232,17 @@ var $sfm_act_formDesigner = new function sfm_act_formDesigner() {
 	this.createPicklistQue=function($picklistQueDetails){
 		//$picklistQueDetails=[$preFillFromWO,$responseSet,$responseSetName,$ansValueSet,$default]
 		var $preFillFromWO=$picklistQueDetails[0];
-		var $responseSet=$picklistQueDetails[1];
-		var $responseSetName=$picklistQueDetails[2];
-		var $ansValueSet=$picklistQueDetails[3];
-		var $default=$picklistQueDetails[4];
+		var $defaultVal=$picklistQueDetails[1];
+		var $responseSet=$picklistQueDetails[2];
+		var $responseSetName=$picklistQueDetails[3];
+		var $ansValueSet=$picklistQueDetails[4];
+		var $default=$picklistQueDetails[5];
 		
 		if ($preFillFromWO==true) {
 			_click($sfm_pg_formDesigner.btn_preFillinNumberQue);
+			_wait(3000);
 			_setSelected($sfm_pg_formDesigner.sel_sourceFieldinNumberQue, $defaultVal);
+			_setValue($sfm_pg_formDesigner.txt_responseSetName, $responseSetName)
 		}
 	
 		//Create New
@@ -242,15 +251,15 @@ var $sfm_act_formDesigner = new function sfm_act_formDesigner() {
 			for (var $i = 0; $i < $ansValueSet.length; $i++) {
 				var $ansField=null;
 				if ($i==0) {
-					$ansField=_f("main").s_textinput("/ansValue/").near($sfm_pg_formDesigner.label_ansValue);
+					$ansField=_f("main").s_textinput("/ansValue/").near($sfm_pg_formDesigner.btn_addAns);
 					_setValue($ansField,$ansValueSet[$i]);	
 				}else{
 					_click($sfm_pg_formDesigner.btn_addAns);
-					$ansField=_f("main").s_textinput("ansValue["+$i+"]").near($sfm_pg_formDesigner.label_ansValue);
+					$ansField=_f("main").s_textinput("ansValue["+$i+"]").near($sfm_pg_formDesigner.btn_addAns);
 					_setValue($ansField,$ansValueSet[$i]);	
 				}
 				if ($default[$i]==true) {
-					_click($sfm_pg_formDesigner.btn_default.near($ansField));
+					_click($sfm_pg_formDesigner.btn_defaultRadioButton.near($ansField));
 				}
 			}
 		}else {

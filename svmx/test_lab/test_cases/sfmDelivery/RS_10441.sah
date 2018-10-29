@@ -62,7 +62,7 @@ var $textLabels = ["City"];
 var $textValues = ["Bengaluru"];
 var $pickListLabels = ["Order Status"];
 var $pickListValues = ["Completed"];
-$sfm_act_lightningConfig.editWorkOrder($textLabels, $textValues, $pickListLabels, $pickListValues, [], [], [], [], [], [], [],[],[],[],[],[],[],[],[]);
+$sfm_act_lightningConfig.editWorkOrder($textLabels, $textValues, $pickListLabels, $pickListValues, [], [], [], [], [], [], [],[],[],[],[],[],[],[],[],[],[]);
 var $sourceWlNumber = $sfm_act_lightningConfig.createWorkDetailInLightning("Usage",$lineType);
 $fieldsAbsentInPage = [];
 $pageLayoutForProfile = "SVMX Work Details Usage - Admin";
