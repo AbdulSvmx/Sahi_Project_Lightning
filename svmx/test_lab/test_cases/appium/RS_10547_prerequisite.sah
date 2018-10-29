@@ -12,5 +12,5 @@ var $RecordTypeName1 = "WO-001";
 var $RecordTypeName2 = "WO-002";
 var $RecordTypeName3 = "WO-003";
 
-$sfm_act_lightningConfig.addRecordType_object($objectname,$RecordTypeName1);
+$sfm_act_lightningConfig.addRecordType_object($objectname, $RecordTypeName1, "System Administrator", "SVMX Work Order - Admin");
 $scenario_10547.end();

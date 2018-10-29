@@ -39,10 +39,30 @@ var $sfm_act_lightningConfig = new function sfm_act_lightningConfig() {
 		}
 	};
 	
-	// To add a Record Type to the Object
-	this.addRecordType_object = function($objectname, $RecordTypeName){
+	// To add a Record Type to the Object passed to the Function
+	this.addRecordType_object = function($objectname, $RecordTypeName, $profileName, $pageLayoutName){
 		
 		this.navigateToObjectsInLightning($objectname);
+		//_selectDomain("popup:Work Order | Salesforce");
+		_selectWindow("Work Order | Salesforce");
+		_click($bo_pg_home.btn_recordtypes);
+		_click($bo_pg_home.btn_newrecordtype);
+		_selectDomain("/salesforce/");
+		_setValue($bo_pg_home.txt_recordtypelabel, $RecordTypeName);
+		_setValue($bo_pg_home.txt_recordtypename, $RecordTypeName);
+		if(_isChecked($bo_pg_home.chkbox_selectallprofiles)==true)
+		{
+			_click($bo_pg_home.chkbox_selectallprofiles);
+		}
+		
+		_click(_checkbox(0, _near(_tableHeader($profileName))));
+		
+		_click($bo_pg_home.btn_next);
+		_setSelected(_select(0), $pageLayoutName);
+		_click($bo_pg_home.btn_save);
+		_selectDomain();
+		_selectWindow();
+	
 		
 		
 	};
@@ -78,8 +98,8 @@ var $sfm_act_lightningConfig = new function sfm_act_lightningConfig() {
 		_click($sfm_pg_wo.link_object_manager);
 		_selectWindow("/Object Manager/");
 		_setValue($sfm_pg_wo.txt_quick_find,$object_name);
-		_click(_link($object_name));
-		
+		_click(_link($object_name));	
+
 		
 	};
 	this.addDependentControllingPicklistValues = function($ctrl_picklist_name,$ctrl_picklist_value,$dep_picklist_value) {
