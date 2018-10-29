@@ -17,7 +17,7 @@ $bo_act_configurationProfiles.editGlobalProfileForPicklistSettings($profile,$mod
 _selectWindow("");
 
 var $restAccName="A10511_SFDC_Event";
-var $EventSub="A10511_SFDC_Event1";
+var $EventSub="A10511_SFDC_Event1";	
 var $techname=$appiumTechId;
 var $salesforceuserid=$appiumsfdcuserId;
 
