@@ -38,6 +38,14 @@ var $sfm_act_lightningConfig = new function sfm_act_lightningConfig() {
 			}
 		}
 	};
+	
+	// To add a Record Type to the Object
+	this.addRecordType_object = function($objectname, $RecordTypeName){
+		
+		this.navigateToObjectsInLightning($objectname);
+		
+		
+	};
 	this.switchToLightning = function(){
 		if(_isVisible($bo_pg_home.link_switchToLightning)==true){
 			_click($bo_pg_home.link_switchToLightning);
