@@ -72,18 +72,18 @@ var $sfmPwd = "Maxplore4";
  var $wizardType = ["None","SFM","Inventory","Others","Output Document"];
 
  //dev org credentials
-/* var $sfmlUsn = "scarface.qa8@admin.com";
+ var $sfmlUsn = "scarface.qa8@admin.com";
  var $sfmlPwd ="fireexit1";
  var $sfmClientId ="3MVG9_7ddP9KqTzch21szrgYIfzQnUMZVsivQJ2gRJp09TI8IDWTMXN_LaUostaQT9hdma6X5N6ZrLwwpju3F";
  var $sfmConsumerSecret = "3960053550438003199";
  var $sfmOrgInstance = "cs10"; 
- */
+ /*
 //  commenting base org details to run in dev org
  var $sfmlUsn = "sfdl_auto@automation.com";
  var $sfmlPwd ="Maxplore2";
  var $sfmClientId ="YjkyMzJmNDUzMGNmOTYzODVlNDQ0ZjE2OTUxOTU1NDI5MGViN2I3NWU3YTFjNmY300D290000000WVC";
  var $sfmConsumerSecret = "5287076090725084260";
- var $sfmOrgInstance = "cs19"; 
+ var $sfmOrgInstance = "cs19"; */
 
 // DC Global Variables
 var $dc_org = $orgtype;
