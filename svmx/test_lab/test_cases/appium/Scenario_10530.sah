@@ -1,3 +1,4 @@
+_writeFile("false", $appiumPath+$sahiIntermediatoryPath, true);
 var $scenario_10530 = _testcase("scenario_10530","Verify Advanced filter in Lookups");
 $scenario_10530.start();
 
@@ -84,3 +85,4 @@ _wait(3000);
 $bo_act_navigation.editWizard("AutoRegression");
 $sfm_act_createCustomWizard.addWizStepWithoutName("SFM", $sfmName, $profile);
 $scenario_10530.end();
+_writeFile("true", $appiumPath+$sahiIntermediatoryPath, true);
