@@ -48,7 +48,7 @@ $BVT_TC_001_SFMSearch.start();
 	$bo_act_navigation.navigateToSfmSearchDesigner();
 	
 	var $searchItem = $swat_act_sfmSearch.createSfmSearch($objectName, $fieldName, $operator, $fieldName1);
-	_click(_submit("Back To Setup Home[1]"));
+	//_click(_submit("Back To Setup Home[1]"));
 	
 	
 	
@@ -61,7 +61,10 @@ $BVT_TC_001_SFMSearch.start();
 	$WONumber =$sfm_act_restApiMethods.getRestApi($sfmlUsn,$sfmlPwd,$sfmClientId,$sfmConsumerSecret,$sfmOrgInstance,"GET", $objName, $columnName, $filter, $filterValue);
 	_log("WO number: "+$WONumber);
 	
-	$swat_act_sfmSearch.launchSfmSearch($searchItem, $WONumber);
+	$bo_act_navigation.navigateToObject("ServiceMax SFM Search");
+	var $maxLength = _click("SearchId:SFMSearchFrm1:j_id2").;
+	
+	// $swat_act_sfmSearch.launchSfmSearch($searchItem, $WONumber);
 	
 	/*
 	// Creation of case, account,contact,product,IBName

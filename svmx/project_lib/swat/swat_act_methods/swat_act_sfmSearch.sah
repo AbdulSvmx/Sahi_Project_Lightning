@@ -92,7 +92,7 @@ var $swat_act_sfmSearch = new function swat_act_sfmSearch() {
 		
 		//_click($bo_pg_home.link_home);
 		
-		_click(_span("Home"));
+		//_click(_span("Home"));
 		if(_condition($bo_pg_home.label_serviceMaxSFMSearch == null))
 			{
 			$bo_act_navigation.navigateToSetUpAndSearchfromUserNavlabel("Home Page Layouts");
