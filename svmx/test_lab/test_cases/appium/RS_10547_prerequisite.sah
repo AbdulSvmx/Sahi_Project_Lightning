@@ -21,9 +21,9 @@ var $RecordTypeName2 = "WO_002";
 var $RecordTypeName3 = "WO_003";
 
 
-$sfm_act_lightningConfig.addRecordType_object($objectName, $RecordTypeName1, $profileName, $pageLayout);
-$sfm_act_lightningConfig.addRecordType_object($objectName, $RecordTypeName2, $profileName, $pageLayout);
-$sfm_act_lightningConfig.addRecordType_object($objectName, $RecordTypeName3, $profileName, $pageLayout);
+//$sfm_act_lightningConfig.addRecordType_object($objectName, $RecordTypeName1, $profileName, $pageLayout);
+//$sfm_act_lightningConfig.addRecordType_object($objectName, $RecordTypeName2, $profileName, $pageLayout);
+//$sfm_act_lightningConfig.addRecordType_object($objectName, $RecordTypeName3, $profileName, $pageLayout);
 
 // To create a Controlling picklist
 
@@ -35,48 +35,58 @@ var $controllingPicklistValues = ["CP-011","CP-012","CP-013","CP-014" ,"CP-021"]
 var $dep_picklist_value = ["DP-0111","DP-0112","DP-0121","DP-0131","DP-0132"];
 var $lookupType=[""];
 //Create custom fields if needed
-$sfm_act_lightningConfig.addCustomFields($objectName, $fieldNames1, $dataTypes, $myDomain, $controllingPicklistValues, $lookupType);
+//$sfm_act_lightningConfig.addCustomFields($objectName, $fieldNames1, $dataTypes, $myDomain, $controllingPicklistValues, $lookupType);
 
 
 // to add a dependent Picklist Value
-$sfm_act_lightningConfig.addCustomFields($objectName, $fieldNames2, $dataTypes, $myDomain, $dep_picklist_value, $lookupType);
+//$sfm_act_lightningConfig.addCustomFields($objectName, $fieldNames2, $dataTypes, $myDomain, $dep_picklist_value, $lookupType);
 
-
+//==========================================================================================================================
 // To add control and the deopendent picklist values - Single values to the Parent Picklist
-var $ctrl_picklist_name = "controlling picklist" ;
-var $dependent_picklist_name = "dependent picklist";
-
-$sfm_act_lightningConfig.navigateToObjectsInLightning($objectName);
-_selectWindow("/"+$objectName+"/");
-_click(_link("Fields & Relationships"));
-_setValue(_searchbox("globalQuickfind"),$ctrl_picklist_name);
-_click(_link($ctrl_picklist_name));
-_selectDomain($myDomain);
-//Delete existing dependencies if any and create new one.
-if (_exists(_tableHeader($dependent_picklist_name,_under(_tableHeader("Dependent Field")))))
-{	
-   
-	_expectConfirm($sfm_pg_wo.delete_link_costCategory);
-	_click($sfm_pg_wo.delete_link_costCategory);
-   
-}
-_click($sfm_pg_wo.btn_new_field_dependency);
-_setSelected($sfm_pg_wo.picklist_controller, $ctrl_picklist_name);
-_setSelected($sfm_pg_wo.picklist_dependent, $dependent_picklist_name);
-_click($sfm_pg_wo.btn_continue);
-for(var $i=0;$i<$controllingPicklistValues.length;$i++){
-	$sfm_act_lightningConfig.addDependentControlling_manyvalues($ctrl_picklist_name,$controllingPicklistValues[$i],$dep_picklist_value[$i]);
-}
-
-_expectConfirm($sfm_pg_wo.btn_save_dep_picklist);
-_click($sfm_pg_wo.btn_save_dep_picklist);
-_closeWindow();
+//var $ctrl_picklist_name = "controlling picklist" ;
+//var $dependent_picklist_name = "dependent picklist";
+//
+//$sfm_act_lightningConfig.navigateToObjectsInLightning($objectName);
+//_selectWindow("/"+$objectName+"/");
+//_click(_link("Fields & Relationships"));
+//_setValue(_searchbox("globalQuickfind"),$ctrl_picklist_name);
+//_click(_link($ctrl_picklist_name));
+//_selectDomain($myDomain);
+////Delete existing dependencies if any and create new one.
+//if (_exists(_tableHeader($dependent_picklist_name,_under(_tableHeader("Dependent Field")))))
+//{	
+//   
+//	_expectConfirm($sfm_pg_wo.delete_link_costCategory);
+//	_click($sfm_pg_wo.delete_link_costCategory);
+//   
+//}
+//_click($sfm_pg_wo.btn_new_field_dependency);
+//_setSelected($sfm_pg_wo.picklist_controller, $ctrl_picklist_name);
+//_setSelected($sfm_pg_wo.picklist_dependent, $dependent_picklist_name);
+//_click($sfm_pg_wo.btn_continue);
+//for(var $i=0;$i<$controllingPicklistValues.length;$i++){
+//	$sfm_act_lightningConfig.addDependentControllingPicklistValues($ctrl_picklist_name,$controllingPicklistValues[$i],$dep_picklist_value[$i]);
+//}
+//
+//_expectConfirm($sfm_pg_wo.btn_save_dep_picklist);
+//_click($sfm_pg_wo.btn_save_dep_picklist);
+//_closeWindow();
 
 //============================================================================================================================
 // To Add the Custom picklist values to the Record Type
-var $fieldvalues1 = ["CP-011","CP-012"];
-$sfm_act_lightningConfig.navigateToObjectsInLightning($objectName);
-$sfm_act_lightningConfig.addpicklistfields_recordtpyes($ctrl_picklist_name, $fieldvalues1, $objectName, $myDomain, $RecordTypeName1);
+//var $fieldvalues1 = ["CP-011","CP-012"];
+//$sfm_act_lightningConfig.navigateToObjectsInLightning($objectName);
+//$sfm_act_lightningConfig.addpicklistfields_recordtpyes($ctrl_picklist_name, $fieldvalues1, $objectName, $myDomain, $RecordTypeName1);
+
+//============================================================================================================================
 
 
+//clone standard SFM
+var $sfmNameToBeCloned="Manage Work Order Lines - Usage";
+var $sfmName=$bo_act_common.generateRandomName("rs_10547_");
+var $sfmTemplateSaveAsName=$bo_act_common.generateRandomName("SFM_Page_10547");
+var $sfmTemplate="SVMXSTD: Manage WO Usage Lines";
+var $fieldName=["Work Order Number","controlling picklist","dependent picklist"];
+var $containerName=["Order Status","Order Status","Order Status"];
+$sfm_act_SFM.cloneTDM016($sfmNameToBeCloned, $sfmName, false, $sfmTemplateSaveAsName, $sfmTemplate, $fieldName, $containerName);
 $scenario_10547.end();
