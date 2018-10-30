@@ -5,7 +5,7 @@ $scenario_10586.start();
 var $ProcessStatus=false;
 var $profilename = $group_profilename;
 var $wizardObject ="Work Order";
-var $sfmName = "Auto_10586_ChecklistOPDOC_DynamicRes1";
+var $sfmName = "Trail1Auto_10586_ChecklistOPDOC_DynamicRes1";
 
 //Questions for checklist
 
@@ -51,9 +51,8 @@ var $wizardCriteria=null;
 $bo_act_login.login($g_url, $appiumAdminUn, $appiumAdminPwd);
 $sfm_act_lightningConfig.switchToLightning();
 
-/*$ProcessStatus=$sfm_act_SFM.sfmProcessCheck($sfmName);
-
-if($ProcessStatus==false){*/
+$ProcessStatus=$sfm_act_SFM.checkCustomProcess($sfmName);
+if($ProcessStatus==false){
 
 $bo_act_navigation.navigateToSfmTransactionDesigner();
 _wait(15000);
@@ -89,19 +88,19 @@ $sfm_act_formDesigner.createCheckListQuestion($sectionName, $queCommonDetails, $
 _wait(15000);
 
 
-/*//Adding the Static Text Question
+//Adding the Static Text Question
 //var $defaultAnsType1 = "";
-var $preFillFromWO1=true;
+var $preFillFromWO1=false;
+var $defaultVal1="Static Answer";
 var $queSpecificDetails1=[$preFillFromWO1,$defaultVal1];
 var $sectionName1="Checklist Section Title";
 var $queCommonDetails1=["Text","Text Static Question","http://www.google.com","",true];
-var $preFillFromWO1=false;
-var $defaultVal1="Static Answer";
 var $queSpecificDetails=[$preFillFromWO1,$defaultVal1];
 $sfm_act_formDesigner.createCheckListQuestion($sectionName1, $queCommonDetails1, $queSpecificDetails1);
-_wait(15000);*/
+_wait(15000);
 
-/*//create Static Picklist Question in section - No preFill and with response set
+///create Static Picklist Question in section - No preFill and with response set
+
 var $sectionName2="Checklist Section Title";
 var $queType2="Picklist";
 var $queName2="Picklist Static Question";
@@ -113,10 +112,10 @@ var $preFillFromWO2=false;
 var $responseSet2="Create New";
 var $responseSetName2=$bo_act_common.generateRandomName("ch_respSet_");;
 var $ansValueSet2=["PicklOne","PickTwo","PickThree"];
-var $default2=[true, false, false];
-var $picklistQueDetails2=[$preFillFromWO2,$responseSet2,$responseSetName2,$ansValueSet2,$default2];
-//var $queSpecificDetails=[$preFillFromWO,$defaultAnsType,$defaultVal];
-$sfm_act_formDesigner.createCheckListQuestion($sectionName2, $queCommonDetails2, $picklistQueDetails2);*/
+var $defaultval2=[true, false, false];
+var $default2;
+var $picklistQueDetails2=[$preFillFromWO2,$default2,$responseSet2,$responseSetName2,$ansValueSet2,$defaultval2];
+$sfm_act_formDesigner.createCheckListQuestion($sectionName2, $queCommonDetails2, $picklistQueDetails2);
 
 
 //create Static Radio Button Question in section - No preFill and with response set
@@ -131,8 +130,9 @@ var $preFillFromWO3=false;
 var $responseSet3="Create New";
 var $responseSetName3=$bo_act_common.generateRandomName("ch_respSet_");;
 var $ansValueSet3=["RadioOne","RadioTwo","RadioThree"];
-var $default3=[true, false, false];
-var $picklistQueDetails3=[$preFillFromWO3,$responseSet3,$responseSetName3,$ansValueSet3,$default3];
+var $defaultval3=[true, false, false];
+var $default3;
+var $picklistQueDetails3=[$preFillFromWO3,$default3,$responseSet3,$responseSetName3,$ansValueSet3,$defaultval3];
 $sfm_act_formDesigner.createCheckListQuestion($sectionName3, $queCommonDetails3, $picklistQueDetails3);
 _wait(5000);
 
@@ -147,8 +147,9 @@ var $queCommonDetails4=[$queType4,$queName4,$helpURL4,$tag4,$addToLibAndForm4];
 var $responseSet4="Create New";
 var $responseSetName4=$bo_act_common.generateRandomName("ch_resSet_");
 var $ansValueSet4=["CheckBoxOne","CheckBoxTwo","CheckBoxThree"];
-var $default4=[true,false,false];
-var $chkQueDetails4=[$responseSet4,$responseSetName4,$ansValueSet4,$default4];
+var $defaultval4=[true,false,false];
+
+var $chkQueDetails4=[$responseSet4,$responseSetName4,$ansValueSet4,$defaultval4];
 $sfm_act_formDesigner.createCheckListQuestion($sectionName4, $queCommonDetails4, $chkQueDetails4);
 _wait(5000);
 
@@ -163,8 +164,8 @@ var $queCommonDetails5=[$queType5,$queName5,$helpURL5,$tag5,$addToLibAndForm5];
 var $responseSet5="Create New";
 var $responseSetName5=$bo_act_common.generateRandomName("ch_resSet_");
 var $ansValueSet5=["MultiOn","MultiTwo","MultiThree"];
-var $default5=[true,true,fase];
-var $chkQueDetails5=[$responseSet5,$responseSetName5,$ansValueSet5,$default5];
+var $defaultval5=[true,true,false];
+var $chkQueDetails5=[$responseSet5,$responseSetName5,$ansValueSet5,$defaultval5];
 $sfm_act_formDesigner.createCheckListQuestion($sectionName5, $queCommonDetails5, $chkQueDetails5);
 _wait(5000);
 
@@ -322,7 +323,7 @@ $sfm_act_wizards.addToWizard($wizardObject,$wizardName, $wizardType,$sfmName1,$h
 
 _writeFile("true", $appiumPath+$sahiIntermediatoryPath, true);
 */
-//}
+}
 
 
 $scenario_10586.end();
