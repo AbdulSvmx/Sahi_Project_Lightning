@@ -126,8 +126,7 @@ var $sfm_act_lightningConfig = new function sfm_act_lightningConfig() {
 		_click($sfm_pg_wo.btn_include_values);
 	};
 
-// To add Dependent Field to Controlling fields in sets of values - MEGHANA 
-	
+// To add Dependent Field to Controlling fields in sets of values - MEGHANA  - This is not complete (DONOT USE)
 	this.addDependentControlling_manyvalues = function($ctrl_picklist_name,$ctrl_picklist_value,$dep_picklist_value) {
 		//Added by JJ.
 		//This function adds a dependent picklist value to the controlling picklist value.
@@ -151,7 +150,6 @@ var $sfm_act_lightningConfig = new function sfm_act_lightningConfig() {
 	};
 
 // To go to the Work Order Record Type and add the fields
-	
 	this.addpicklistfields_recordtpyes = function($fieldname, $fieldvalues, $objectName, $myDomain, $recordtypename){
 		_selectWindow("/"+$objectName+"/");
 		_click($bo_pg_home.btn_recordtypes);
@@ -161,7 +159,7 @@ var $sfm_act_lightningConfig = new function sfm_act_lightningConfig() {
 			_selectDomain("/"+$myDomain+"/");
 			_click(_link("/Edit/",_leftOf(_tableHeader($fieldname))));
 			for($i=0;$i<$fieldvalues.length;$i++){
-				_select()
+				
 			}
 			
 		}
