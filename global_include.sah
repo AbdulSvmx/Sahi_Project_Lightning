@@ -112,6 +112,9 @@ var $appiumTechUn="autotech@part1.com";
 var $appiumTechPwd="servicemax01";
 var $appiumTechId="a240t000000GglLAAS";
 var $appiumsfdcuserId="0050t000001FkqI";
+var $profileName = "System Administrator";
+var $pageLayout = "SVMX Work Order - Admin";
+
 
 //THIS IS SPECIFIC TO A GIVEN ORG - DONOT TOUCH
 var $appiumclient_id = "3MVG9ifmAKCHISbZGXS_tYaEGdq5pFNz6ZhYTkrLMlM9toUZC8UIDIt.2R4KYqLXKL5yc8HjHPh5NYoUERETS";
