@@ -9,6 +9,6 @@ $sfm_act_lightningConfig.switchToLightning();
 var $minutes = "10000";
 
 //$bo_act_SFMAppPermission.workOrderSynchronizeapplicationdata($minutes);
-$bo_act_SFMAppPermission.workOrderSynchronizeapplicationdata($minutes);
+$bo_act_SFMAppPermission.scheduledDataSync($minutes);
 _writeFile("true", $appiumPath+$sahiIntermediatoryPath, true);
 $scenario_10569.end();

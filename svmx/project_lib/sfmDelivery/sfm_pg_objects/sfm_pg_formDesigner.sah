@@ -101,7 +101,7 @@ var $sfm_pg_formDesigner = new function sfm_pg_formDesigner() {
 	this.btn_preFill=_f("main").s_checkbox("Prefill with value from Work Order");
 	this.sel_sourceField=_f("main").s_combobox("sourceObjPickList");
 	this.sel_defaultAnsType=_f("main").s_dropdownlist("operandTypeCombo");
-	this.txt_dateField=_f("main").s_richeditabletext("/textDisplay/").near(_f("main").mxftetextinput(0));
+	this.txt_dateField=_f("main").s_richeditabletext("/textDisplay/").near(_f("main").s_dropdownlist("operandTypeCombo"));
 	this.sel_dateFunction=_f("main").s_combobox("picklist");
 	
 	//Number
