@@ -43,8 +43,27 @@ $BVT_TC_001_SFMSearch.start();
 	var $fieldName1 = "Order Type";
 	var $workOrderNo;
 	
-	$bo_act_login.login("https://test.salesforce.com","lohithaadmin@dcfull.com", "maxpl0re4");
+	$bo_act_login.login("https://test.salesforce.com","shashikala.svmx@ge.com", "maxpl0re2");
 
+	$bo_act_navigation.navigateToSfmSearchDesigner();
+	
+	var $searchItem = $swat_act_sfmSearch.createSfmSearch($objectName, $fieldName, $operator, $fieldName1);
+	_click(_submit("Back To Setup Home[1]"));
+	
+	
+	
+	//create Work orders
+	$objName= "SVMXDEV__Service_Order__c";
+	$obJson = "{\"SVMXDEV__Order_Status__c\":\"Open\",\"SVMXDEV__Order_Type__c\":\"Field Service\"}";
+	$columnName = "Name";
+	$filter="id";
+	$filterValue=$sfm_act_restApiMethods.postRestApi($sfmlUsn,$sfmlPwd,$sfmClientId,$sfmConsumerSecret,$sfmOrgInstance,$objName,$obJson,"POST");
+	$WONumber =$sfm_act_restApiMethods.getRestApi($sfmlUsn,$sfmlPwd,$sfmClientId,$sfmConsumerSecret,$sfmOrgInstance,"GET", $objName, $columnName, $filter, $filterValue);
+	_log("WO number: "+$WONumber);
+	
+	$swat_act_sfmSearch.launchSfmSearch($searchItem, $WONumber);
+	
+	/*
 	// Creation of case, account,contact,product,IBName
 	var $caseNumber = $bo_act_Cases.createCase("New", "High", "Email");
 	var $accountName = $bo_act_accounts.createAccount();
@@ -62,11 +81,16 @@ $BVT_TC_001_SFMSearch.start();
 	$excel.insertUnderColumn("/Swat_excelData/swatdata.xlsx",  "runData", "Product", $productName, 1);
 	$excel.insertUnderColumn("/Swat_excelData/swatdata.xlsx",  "runData", "InstalledProduct", $IBName, 1);
 	
-	var $searchItem = $swat_act_sfmSearch.createSfmSearch($objectName, $fieldName, $operator, $fieldName1);
+	//create WO
+	var $IBSerialNumber = $bo_act_common.generateRandomName("RS_10461_IB_");
+	var $AccountName= $bo_act_common.generateRandomName("RS_10461_Account_");
+	
+	var $WorkOrderNumber=createWO_RS10461("Open", "Field Service", $AccountName, "", "");
 	
 	
+	*/
 	//	Creation of SFM Search and validation //
-	$swat_act_sfmSearch.launchSfmSearch($searchItem, $workOrderNo);
+	//$swat_act_sfmSearch.launchSfmSearch($searchItem, $workOrderNo);
 
 	
 //	//deleting data
