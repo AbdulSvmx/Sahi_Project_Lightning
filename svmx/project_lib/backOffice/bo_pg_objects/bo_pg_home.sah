@@ -49,6 +49,7 @@ var $bo_pg_home = new function bo_pg_home(){
 	this.link_serviceFlowManager=_div("Service Flow Manager");
 	// Added by Meghana for Lightning
 	this.btn_recordtypes = _link("Record Types");
+	
 	this.btn_newrecordtype = _button("NewRecord Type");
 	this.txt_recordtypelabel = _textbox("*Record Type Label");
 	this.txt_recordtypename = _textbox("*Record Type Name");
