@@ -9,7 +9,7 @@ var $bo_act_SFMAppPermission = new function bo_act_SFMAppPermission() {
  * This Function is to set Permissions for the SFM Process created
  */
 	
-	this.set_mobileapp_permissions = function($profilename , $objectname , $processname){ // Lightning addition
+	this.set_mobileapp_permissions = function($profilename , $objectname , $processname,$removeprocess){ // Lightning addition
 		$bo_act_navigation.navigateToSvmxSetup();
 		$bo_act_navigation.navigatetoMobileOfflinePermission();
 		_selectDomain("/svmx/");
@@ -23,7 +23,15 @@ var $bo_act_SFMAppPermission = new function bo_act_SFMAppPermission() {
 		_click($bo_pg_sfmAppPermissionD.btn_select_object);
 		_click(_listItem($objectname));
 		_click(_div($bo_pg_sfmAppPermissionD.chkbox_creatework_order,_leftOf(_div($processname))));
-		_click($bo_pg_sfmAppPermissionD.btn_add_selected);
+		if($removeprocess==true)
+			{
+			_click($bo_pg_sfmAppPermissionD.btn_remove_selected);
+			}
+		else
+			{
+			_click($bo_pg_sfmAppPermissionD.btn_add_selected);
+			}
+		
 		_click($bo_pg_sfmAppPermissionD.btn_save);
 		_wait(10000);
 		//_assertEqual(true, _isVisible());
