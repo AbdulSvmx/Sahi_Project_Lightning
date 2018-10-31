@@ -2,7 +2,7 @@ var $scenario_10527 = _testcase("scenario_10527","Verify Lookup Context");
 $scenario_10527.start();
 var $sfmNameToBeCloned = "Manage Work Order Lines - Usage";
 //var $sfmName = $bo_act_common.generateRandomName("RS_5344_");
-var $sfmName = "AutoReg10529";
+var $sfmName = "AutoReg10529qqqqqqwwwww1111";
 var $isCustom = false;
 var $sfmTemplate = "SVMXSTD: Manage WO Usage Lines";
 var $sfmTemplateSaveAsName = $bo_act_common.generateRandomName("SFM_Temp_Name_");

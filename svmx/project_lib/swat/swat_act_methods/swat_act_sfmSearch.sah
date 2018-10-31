@@ -14,7 +14,7 @@ var $swat_act_sfmSearch = new function swat_act_sfmSearch() {
 	{
 		var $searchTitle = $bo_act_common.generateRandomName("Search");
 		var $searchId = $bo_act_common.generateRandomName("SearchId");
-        $bo_act_navigation.navigateToSfmSearchInDesigner();
+        //$bo_act_navigation.navigateToSfmSearchInDesigner();
 		_click($swat_pg_sfmSearch.btn_new);
 		
 		//General Info		
@@ -70,9 +70,11 @@ var $swat_act_sfmSearch = new function swat_act_sfmSearch() {
 		
 		//Click on Save button
 		_click($swat_pg_sfmSearch.btn_save);
+		_wait(8000);
 		
 		//Click on save and close
 		_click($swat_pg_sfmSearch.btn_save_and_close);
+		_wait(8000);
 		
 		return($searchTitle);
 	};
@@ -88,8 +90,9 @@ var $swat_act_sfmSearch = new function swat_act_sfmSearch() {
 	this.launchSfmSearch = function($searchItem,$workOrderNo)
 	{
 		
-		_click($bo_pg_home.link_home);
+		//_click($bo_pg_home.link_home);
 		
+		_click(_span("Home"));
 		if(_condition($bo_pg_home.label_serviceMaxSFMSearch == null))
 			{
 			$bo_act_navigation.navigateToSetUpAndSearchfromUserNavlabel("Home Page Layouts");

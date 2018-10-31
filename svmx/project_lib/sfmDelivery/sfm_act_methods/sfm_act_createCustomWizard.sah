@@ -57,8 +57,8 @@ var $sfm_act_createCustomWizard = new function sfm_act_createCustomWizard() {
 		_setSelected($sfm_pg_wizards.selectObject,$object);
 		var $wizId = $wizTitle.toLowerCase().replace(/ /g, "_");
 		_wait(5000);
-	
-		if(_isVisible(_span($wizTitle)) == false)
+		_log(_isVisible(_span($wizTitle)));
+		if(_isVisible(_span($wizTitle))==false)
 		{
 		_click($sfm_pg_wizards.btn_customNew);
 		_setValue($sfm_pg_wizards.txt_wizardTitle,$wizTitle);
@@ -71,13 +71,14 @@ var $sfm_act_createCustomWizard = new function sfm_act_createCustomWizard() {
 		_click($sfm_pg_wizards.btn_newStep);
 		_setSelected($sfm_pg_wizards.btn_wizStepType,$wizStepType);
 		_setSelected($sfm_pg_wizards.btn_stepName,$wizStepName);
+		_wait(20000);
 		_click($sfm_pg_wizards.btn_saveStep);
 		}
 		_click($sfm_pg_wizards.btn_saveClose);
 		
 		}
 		else
-			{
+		{
 			_click(_checkbox("/page1/",_near(_span($wizTitle))));
 			_click($sfm_pg_wizards.btn_edit);
 			_click($sfm_pg_wizards.txt_manageWizSteps);
@@ -86,6 +87,7 @@ var $sfm_act_createCustomWizard = new function sfm_act_createCustomWizard() {
 			_click($sfm_pg_wizards.btn_newStep);
 			_setSelected($sfm_pg_wizards.btn_wizStepType,$wizStepType);
 			_setSelected($sfm_pg_wizards.btn_stepName,$wizStepName);
+			_wait(20000);
 			_click($sfm_pg_wizards.btn_saveStep);
 				
 			}
@@ -856,6 +858,9 @@ var $sfm_act_createCustomWizard = new function sfm_act_createCustomWizard() {
 		this.clickSvmxWoLink();
 		_wait(5000,isVisible($sfm_pg_wo.btn_wo_new));
 		_click($sfm_pg_wo.btn_wo_new);
+		if(_isVisible($sfm_pg_wo.btn_next)){
+			_click($sfm_pg_wo.btn_next);
+		} 
 		_click($sfm_pg_wo.btn_wo_edit_save);
 		_wait(10000,_isVisible($sfm_pg_wo.label_wo)); 
 		$woName= _getText($sfm_pg_wo.label_wo);

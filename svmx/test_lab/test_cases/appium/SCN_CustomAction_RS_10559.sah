@@ -1,9 +1,10 @@
 var $scenario_10559 = _testcase("scenario_10559","Verify custom action web service functionality on header & child");
 $scenario_10559.start();
-var $actionTitle = $bo_act_common.generateRandomName("Auto_Action_Url");
-var $actionTitle1 = $bo_act_common.generateRandomName("Auto_Action_Url");
+var $actionTitle = "10559_Action";
+var $actionTitleChild = "10559_Action_Child";
 var $wizTitle = $bo_act_common.generateRandomName("Auto_Action_Wiz");
 var $wizTitle1 = $bo_act_common.generateRandomName("Auto_Action_Wiz");
+var $profile="auto group profile";
 $bo_act_login.login($g_url, $appiumAdminUn, $appiumAdminPwd);
 $sfm_act_lightningConfig.switchToLightning();
 _wait(5000);
@@ -36,32 +37,25 @@ else{
 }
 $bo_act_navigation.navigateToSfmCustomAction();
 _setSelected(_select("/ManageAction/",_rightOf(_span("Manage Custom Actions for"))),"Work Order");
-_click(_submit("/New/",_near(_heading2("User-defined Custom Actions"))));
-_setSelected(_select(0,_rightOf(_label("Action Type"))),"Web Service");
-_setValue(_textbox(0,_rightOf(_label("Action Title"))),$actionTitle);
-_setValue(_textbox(0,_rightOf(_label("Action ID"))),$actionTitle);
-_setValue(_rightClick(_textbox(0,_rightOf(_label("Class Name")))),"TestCustomActionHeader");
-_setValue(_rightClick(_textbox(0,_rightOf(_label("Method Name")))),"editWORecord");
-_click(_button("Add"));
-_setValue(_textbox(0,_near(_div("Parameter Name"))),"SVMX_RECORDID");
-_setSelected(_select(0,_near(_div("Parameter Value Type"))),"Field Name");
-_setSelected(_select(1,_near(_div("Parameter Value"))),"Record ID");
-_click(_submit("Save & Close"));
-_click(_submit("/New/",_near(_heading2("User-defined Custom Actions"))));
-_setSelected(_select(0,_rightOf(_label("Action Type"))),"Web Service");
-_setValue(_textbox(0,_rightOf(_label("Action Title"))),$actionTitle1);
-_setValue(_textbox(0,_rightOf(_label("Action ID"))),$actionTitle1);
-_setValue(_rightClick(_textbox(0,_rightOf(_label("Class Name")))),"TestCustomActionChild");
-_setValue(_rightClick(_textbox(0,_rightOf(_label("Method Name")))),"editWORecord");
-_click(_button("Add"));
-_setValue(_textbox(0,_near(_div("Parameter Name"))),"SVMX_RECORDID");
-_setSelected(_select(0,_near(_div("Parameter Value Type"))),"Field Name");
-_setSelected(_select(1,_near(_div("Parameter Value"))),"Record ID");
-_click(_submit("Save & Close"));
+if(_isVisible(_span($actionTitle,_under(_heading2("User-defined Custom Actions"))))){
+	_log($actionTitle+" is already present");
+}
+else{
+	$sfm_act_customActions.createWebServiceAction("Web Service", $actionTitle, "TestCustomActionHeader", "editWORecord", "SVMX_RECORDID", "Field Name", "Record ID");
+}
+if(_isVisible(_span($actionTitleChild,_under(_heading2("User-defined Custom Actions"))))){
+	_log($actionTitleChild+" is already present");
+}
+else{
+	$sfm_act_customActions.createWebServiceAction("Web Service", $actionTitleChild, "TestCustomActionChild", "editWORecord", "SVMX_RECORDID", "Field Name", "Record ID")
+}
+
 $bo_act_navigation.navigateToSfmWizard();
 _selectDomain("/svmx/");
 _setSelected($sfm_pg_wizards.selectObject,"Work Order");
+_wait(10000);
 $bo_act_navigation.editWizard("AutoRegression");
-$sfm_act_createCustomWizard.addWizStepWithoutName("Others", $wizTitle, $profile);
-$sfm_act_createCustomWizard.addWizStepWithoutName("Others", $wizTitle1, $profile);
+$sfm_act_createCustomWizard.addWizStepWithoutName("Others", $actionTitle, $profile);
+$bo_act_navigation.editWizard("AutoRegression");
+$sfm_act_createCustomWizard.addWizStepWithoutName("Others", $actionTitleChild, $profile);
 $scenario_10559.end();
