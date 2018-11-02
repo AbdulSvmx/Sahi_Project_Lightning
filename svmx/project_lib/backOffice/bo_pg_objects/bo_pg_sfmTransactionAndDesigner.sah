@@ -129,6 +129,7 @@ var $bo_pg_sfmTransactionAndDesigner = new function bo_pg_sfmTransactionAndDesig
 	this.txt_partOnChild=_f("main").s_textinput("lblData").near(_f("main").s_richtext("Part"));
 	this.chk_readOnly = _f("main").s_checkbox("Read Only").near(_f("main").s_label("/Properties for Field/"));
 	this.chk_required= _f("main").s_checkbox("Read Only").near(_f("main").s_label("/Properties for Field/"));
+	this.btn_pageLayoutSave3 = _f("main").s_button("Save[3]");
 	
 	
 	//Lookup fields values

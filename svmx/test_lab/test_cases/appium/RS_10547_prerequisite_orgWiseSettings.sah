@@ -21,9 +21,9 @@ var $RecordTypeName2 = "WO_002";
 var $RecordTypeName3 = "WO_003";
 
 
-$sfm_act_lightningConfig.addRecordType_object($objectName, $RecordTypeName1, $profileName, $pageLayout);
-$sfm_act_lightningConfig.addRecordType_object($objectName, $RecordTypeName2, $profileName, $pageLayout);
-$sfm_act_lightningConfig.addRecordType_object($objectName, $RecordTypeName3, $profileName, $pageLayout);
+	$sfm_act_lightningConfig.addRecordType_object($objectName, $RecordTypeName1, $profileName, $pageLayout);
+	$sfm_act_lightningConfig.addRecordType_object($objectName, $RecordTypeName2, $profileName, $pageLayout);
+	$sfm_act_lightningConfig.addRecordType_object($objectName, $RecordTypeName3, $profileName, $pageLayout);
 
 // To create a Controlling picklist
 
@@ -41,8 +41,8 @@ $sfm_act_lightningConfig.addCustomFields($objectName, $fieldNames1, $dataTypes, 
 // to add a dependent Picklist Value
 $sfm_act_lightningConfig.addCustomFields($objectName, $fieldNames2, $dataTypes, $myDomain, $dep_picklist_value, $lookupType);
 
-//==========================================================================================================================
-// To add control and the deopendent picklist values - Single values to the Parent Picklist
+//===================================================================================================================================
+//To add control and the deopendent picklist values - Single values to the Parent Picklist
 var $ctrl_picklist_name = "controlling picklist" ;
 var $dependent_picklist_name = "dependent picklist";
 
@@ -72,7 +72,7 @@ _expectConfirm($sfm_pg_wo.btn_save_dep_picklist);
 _click($sfm_pg_wo.btn_save_dep_picklist);
 _closeWindow();
 
-//============================================================================================================================
+//=============================================================================================================================
 //To Add the Custom picklist values to the Record Type
 var $fieldvalues1 = ["CP-011","CP-012"];
 var $fieldvalues2 = ["CP-013"];
@@ -93,7 +93,7 @@ _closeWindow();
 var $sfmNameToBeCloned="Manage Work Order Lines - Usage";
 var $sfmName="RS_10547CustomPicklistUI";
 var $sfmTemplateSaveAsName=$bo_act_common.generateRandomName("SFM_10547");
-var $sfmTemplate="SVMXSTD: Manage WO Usage Lines";
+var $sfmTemplate="SVMXSTD: Manage WO Usage Lines2";
 var $fieldName=["Work Order Number","controlling picklist","dependent picklist"];
 var $containerName=["Order Status","Order Status","Order Status"];
 $sfm_act_SFM.cloneTDM016($sfmNameToBeCloned, $sfmName, false, $sfmTemplateSaveAsName, $sfmTemplate, $fieldName, $containerName);
@@ -108,3 +108,29 @@ var $wizardCriteria=null;
 $bo_act_navigation.navigateToSfmWizard();
 
 $sfm_act_createCustomWizard.addManageWizStepsverify($wizardName, $wizardType, $sfmName, $objectName);
+
+//=================================================================================================================================
+
+// To create a Work Order from IB and then add fields to it.
+
+var $sfmNameToBeCloned="Create Work Order from Installed Product";
+var $sfmName2="RS_10547CreateWOfromIB";
+var $sfmTemplateSaveAsName=$bo_act_common.generateRandomName("SFM_10547WOIB");
+var $sfmTemplate="RS_10547CreateWOfromIB";
+var $fieldName=["Record Type ID","controlling picklist","dependent picklist"];
+var $containerName=["Work Order","Work Order","Work Order"];
+$bo_act_navigation.navigateToSfmTransactionDesigner();
+$sfm_act_createProcess.cloneSFM_addfields($sfmNameToBeCloned, $sfmName2,false, $sfmTemplate, $sfmTemplateSaveAsName, $fieldName);
+
+//==================================================================================================================================
+
+var $objectname2 = "Installed Product";
+var $wizardName="Automation IB Wizard";
+var $wizardType="SFM";
+var $profile="auto group profile";
+var $handOver="false";
+//add the process to wizard 
+$bo_act_navigation.navigateToSfmWizard();
+$sfm_act_createCustomWizard.addManageWizStepsverify($wizardName, $wizardType, $sfmName2, $objectname2);
+
+$scenario_10547.end();
