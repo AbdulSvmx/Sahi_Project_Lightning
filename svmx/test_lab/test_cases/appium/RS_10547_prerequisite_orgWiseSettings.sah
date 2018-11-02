@@ -90,13 +90,13 @@ _closeWindow();
 
 //clone standard SFM
 
-var $sfmNameToBeCloned="Manage Work Order Lines - Usage";
+var $sfmNameToBeCloned1="Manage Work Order Lines - Usage";
 var $sfmName="RS_10547CustomPicklistUI";
 var $sfmTemplateSaveAsName=$bo_act_common.generateRandomName("SFM_10547");
 var $sfmTemplate="SVMXSTD: Manage WO Usage Lines2";
 var $fieldName=["Work Order Number","controlling picklist","dependent picklist"];
-var $containerName=["Order Status","Order Status","Order Status"];
-$sfm_act_SFM.cloneTDM016($sfmNameToBeCloned, $sfmName, false, $sfmTemplateSaveAsName, $sfmTemplate, $fieldName, $containerName);
+$bo_act_navigation.navigateToSfmTransactionDesigner();
+$sfm_act_createProcess.cloneSFM_addfields($sfmNameToBeCloned1, $sfmName,false, $sfmTemplate, $sfmTemplateSaveAsName, $fieldName);
 
 //=================================================================================================================================
 var $wizardName="AutoRegression";
