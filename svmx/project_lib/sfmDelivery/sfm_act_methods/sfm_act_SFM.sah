@@ -36,6 +36,8 @@ var $sfm_act_SFM = new function sfm_act_SFM() {
 			$sfm_act_SFM.addFieldToScreen($fieldName, $containerName);
 		}
 	};
+
+	
 		this.dvrScenario5 = function($sfmNameToBeCloned, $sfmName, $isCustom,
 			 $sfmTemplateSaveAsName,$sfmTemplate, $fieldName, $containerName,$bProcessStatus) 
 			 {
@@ -229,6 +231,10 @@ var $sfm_act_SFM = new function sfm_act_SFM() {
 		_click($bo_pg_sfmTransactionAndDesigner.btn_quickSave1);
 	};
 	
+	
+
+		
+
 	
 	this.selectSFM = function($sfmName, $isCustom) {
 		if ($isCustom) {
