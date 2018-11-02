@@ -1,0 +1,88 @@
+var RS_10565 = _testcase("RS_10565","SCN_Recent Items_RS-10565 Verify Recent Items tab");
+RS_10565.start();
+
+_writeFile("false", $appiumPath+$sahiIntermediatoryPath, true);
+
+
+var $wizardObject="Work Order";
+var $wizardName="AutoRegression";
+var $wizardType="SFM";
+var $profile="auto group profile";
+var $handOver="false";
+var $wizardCriteria=null;
+
+var $headersToAdd = ["Auto_number_c","Auto_PickList_c","Auto_TextBox_c","AutoC_checkBox_c","AutoC_currency_c","AutoC_date_c","AutoC_dateTime_c","AutoC_email_c","AutoC_percent_c","AutoC_phone_c","AutoC_textArea_c","AutoC_URL_c"];
+
+$bo_act_login.login($g_url, $appiumAdminUn, $appiumAdminPwd);
+$sfm_act_lightningConfig.switchToLightning();
+
+
+var $createsfmName = "Create New Custom object";
+var $transactiontype = "as Standalone for the purpose of creating a new record";
+var $targetObjectName = "Auto_Custom_Object2";
+var $ExistingsfmPageLayoutName="";
+var $pagelayoutName=$bo_act_common.generateRandomName("Custom_object_SD");
+var	$pagelayoutId=$pagelayoutName;
+
+var $value =$sfm_act_SFM.checkprocessexists($createsfmName,true);//to check process exists or not
+_log($value);
+//if the process value is false (process not exists) then create the process
+if($value==false){
+$bo_act_SFM.Createcustomobjectnewrecord($createsfmName,$transactiontype,$targetObjectName,$pagelayoutName,$headersToAdd,$pagelayoutId);
+
+//Setup App Permissions for Mobile App for the SFM Process created
+var $profilename = $group_profilename;
+$bo_act_SFMAppPermission.set_mobileapp_permissions($profilename, $targetObjectName, $createsfmName);
+}
+/*var $targetObjectName_contact="Contact";
+var $createsfmName_contact="Create New Contact(for an existing account)";
+$bo_act_SFMAppPermission.set_mobileapp_permissions($profilename, $targetObjectName_contact, $createsfmName_contact);
+
+var $targetObjectName_wo="Work Order";
+var $createsfmName_wo="Create New Work Order";
+$bo_act_SFMAppPermission.set_mobileapp_permissions($profilename, $targetObjectName_wo, $createsfmName_wo);
+*/
+
+
+//Create a view process for custom object
+var $viewsfmName = "View Custom Object";
+var $transactiontype = "to view a header record with/without its child records";
+var $targetObjectName = "Auto_Custom_Object2";
+var $ExistingsfmPageLayoutName="";
+var $pagelayoutName=$bo_act_common.generateRandomName("Customobject_SD_view");
+var	$pagelayoutId=$pagelayoutName;
+var $value =$sfm_act_SFM.checkprocessexists($viewsfmName,true);//to check process exists or not
+_log($value);
+//if the process value is false (process not exists) then create the process
+if($value==false){
+$bo_act_SFM.Createcustomobjectnewrecord($viewsfmName,$transactiontype,$targetObjectName,$pagelayoutName,$headersToAdd,$pagelayoutId);
+
+
+//Setup App Permissions for Mobile App for the SFM view Process created
+$bo_act_navigation.navigateToSvmxSetup();
+$bo_act_navigation.navigatetoMobileOfflinePermission();
+_selectDomain("/svmx/");
+_click($bo_pg_sfmAppPermissionD.txt_profile_selection);
+_click(_listItem($profilename));
+_wait(10000);
+_click($bo_pg_sfmAppPermissionD.btn_view);
+_wait(10000);
+_click($bo_pg_sfmAppPermissionD.btn_select_object);
+_click(_listItem($targetObjectName));
+_click(_div($bo_pg_sfmAppPermissionD.chkbox_creatework_order,_leftOf(_div($viewsfmName))));
+_click($bo_pg_sfmAppPermissionD.btn_add_selected);
+_click(_span("Save"));
+_wait(10000);
+//_assertEqual(true, _isVisible());
+_selectDomain();
+}
+
+/*//add new object to download criteria
+var $targetObjectName = "Auto_Custom_Object2";
+$bo_act_SFMAppPermission.addnewobjectdownloacriteria($targetObjectName);
+*/
+_writeFile("true", $appiumPath+$sahiIntermediatoryPath, true);
+
+RS_10565.end();
+
+

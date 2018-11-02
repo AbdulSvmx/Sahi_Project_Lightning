@@ -81,4 +81,19 @@ var $sfm_act_customActions = new function sfm_act_customActions() {
 		
 	};
 	
+	this.createWebServiceAction = function($actionType,$actionTitle,$className,$methodName,$paramName,$paramValType,$paramVal){
+		_click($sfm_pg_customAction.btn_userDefinedCustomAction);
+		_setSelected($sfm_pg_customAction.sel_actionType,$actionType);
+		_setValue($sfm_pg_customAction.txt_actionTitle,$actionTitle);
+		_setValue($sfm_pg_customAction.txt_actionID,$actionTitle);
+		_setValue($sfm_pg_customAction.txt_className,$className);
+		_setValue($sfm_pg_customAction.txt_methodName,$methodName);
+		_click($sfm_pg_customAction.btn_add);
+		_setValue($sfm_pg_customAction.txt_paramName,$paramName);
+		_setSelected($sfm_pg_customAction.sel_paramValType,$paramValType);
+		_setSelected($sfm_pg_customAction.sel_paramVal,$paramVal);
+		_click($sfm_pg_customAction.btn_saveAndCloseCustomAction);
+		
+	};
+	
 };

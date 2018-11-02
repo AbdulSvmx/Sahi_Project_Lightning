@@ -28,7 +28,7 @@ var $bo_pg_sfmTransactionAndDesigner = new function bo_pg_sfmTransactionAndDesig
 	//this.btn_select = _f("main").s_button("Select");
 	this.txt_mappingName = _f("main").s_textinput("Save this map as[1]");
 	this.txt_mapID = _f("main").s_textinput("Input ID Here[2]");
-	this.btn_saveMap = _f("main").s_button("Save[2]");
+	this.btn_saveMap = _f("main").s_button("Save[3]");
 
 	 this.txt_standardSfmTransactionQuickFind= _f("main").s_textinput("/searchText/").near(_f("main").tab("Standard SFM Transactions")); //updated with relative index to properly identify quick find in standard transactions
     this.btn_standardSfmTransaction= _f("main").tab("Standard SFM Transactions");
@@ -52,14 +52,15 @@ var $bo_pg_sfmTransactionAndDesigner = new function bo_pg_sfmTransactionAndDesig
     this.txt_sfmSavePageLayoutAsId = _f("main").s_textinput("advTxt");
     this.btn_addFieldToPage = _f("main").s_button("Add Field to Page");
     this.txt_quickFindField = _f("main").s_textinput("searchText").near(_f("main").s_button("/Add Field/"));
-    this.btn_quickSave = _f("main").s_button("Save As[3]");
+    this.btn_quickSave = _f("main").s_button("Save As").rightOf(_f("main").s_textinput("/Save page layout as/"));
+    this.btn_savePage = _f("main").s_button("Save").rightOf(_f("main").s_textinput("/Save page layout as/"));
     this.btn_quickSave1 = _f("main").s_button("Quick Save");
     this.btn_saveAndclose = _f("main").s_button("Save & Close");
     this.alert_sfm = _f("main").alert("Please enter a unique Page Name The page ID you have entered already exists. Please enter a unique ID");
     this.btn_ok = _f("main").button("OK");
     this.btn_backToList = _f("main").s_button("Back To List");
     this.btn_yes = _f("main").button("Yes");
-    this.btn_newSFM=_f("main").s_button("New SFM Transaction");
+    this.btn_newSFM=_f("main").s_button("New SFM Transaction").near(_f("main").tab("Standard SFM Transactions"));
 	this.btn_finalQuickSave = _f("main").s_button("Quick Save");
 	this.alert_proceedAnyway=_f("main").button("Proceed Anyway");	
 	this.lbl_searchSFM=_f("main").s_textinput("searchText[3]");
@@ -85,15 +86,24 @@ var $bo_pg_sfmTransactionAndDesigner = new function bo_pg_sfmTransactionAndDesig
 	this.combo_CTRecord = _f("main").s_combobox("objCombo1[1]");	
 	this.childSource_chkBox = _f("main").s_checkbox("Work Detail (Work Order)");		
 	this.childCTRecord_chkBox = _f("main").s_checkbox("Work Detail (Work Order)[1]");	
+	this.childcheckbox_workorder = _f("main").s_checkbox("Work Detail (Work Order)");
+	this.tab_qualifyingcriteria_maps = _f("main").tab("Qualifying Criteria and Field Mappings");
+	this.lbl_productserviced = _f("main").s_label("Products Serviced");
+	this.tab_advancedOptions = _f("main").tab("Advanced Options");
+	this.btn_addtoSFMProcess = _f("main").s_button("Add[3]");
 	//Drop Down List in Qualifying Criteria and Field Mappings
 	this.dropDownList = _f("main").s_dropdownlist("objCombo");
 	this.selectExistingPageLayout=_f("main").s_combobox("searchCombo[3]");
 	this.tab_advancedOptions=_f("main").tab("Advanced Options");
+	this.btn_linkedprocess = _f("main").tab("Linked Process");
+	this.btn_manage_workdetailsproductserviced = _f("main").s_label("Manage Work Details for Products Serviced");
 	this.lbl_sorting=_f("main").tab("Sorting");
 	this.lbl_partObj=_f("main").s_label("Parts[4]");
 	this.lbl_partField=_f("main").s_label("Part");
 	this.img_add=_f("main").s_button(">[1]");
-
+	this.lbl_childlineparts = _f("main").s_richtext("Parts");
+	this.lbl_childlinelabor = _f("main").s_richtext("Labor");
+	this.combo_allowzerolines = _f("main").s_combobox("/ComboBox/").rightOf(_f("main").uiftetextfield("Allow Zero Lines"));
 	this.lbl_laborObj=_f("main").s_label("Labor[4]");
 	this.lbl_activityTypeField=_f("main").s_label("Activity Type");
 	this.lbl_expenseObj=_f("main").s_label("Expense[3]");
@@ -108,15 +118,38 @@ var $bo_pg_sfmTransactionAndDesigner = new function bo_pg_sfmTransactionAndDesig
 	this.clkNewMapID=_f("main").s_textinput("Input ID Here[1]");
 	this.clkMapSave=_f("main").s_button("Save[1]");
 	this.QCFieldMapQuickFind=_f("main").s_textinput("filterInput").rightOf(_f("main").s_label("Quick Find"),10,10);
-
+	this.list_sourceHeaderList = _f("main").s_combobox("objCombo1").inside_f("main").s_label("Use data from...");
+	this.list_objComboBox = _f("main").s_combobox("objCombo1").inside(_f("main").s_panel("...to create these records"));
+	this.txtworkdetailaliasname = _f("main").s_textinput("/aliasName/").near(_f("main").s_checkbox("Work Detail (Work Order)"));
+	this.txt_contactOnHeader=_f("main").s_textinput("/.*/").near(_f("main").uiftetextfield("Contact").near(_f("main").s_richtext("Work Order")));
+	this.chkbx_allowNew = _f("main").s_checkbox("Allow New");
+	this.chkbx_allowDelete = _f("main").s_checkbox("Allow Delete");
+	this.txt_autoContactChild=_f("main").s_richtext("AutoContact").near(_f("main").s_richtext("Parts"));
+	this.btn_scrollbar=_f("main").s_hscrollbar("horizontalScrollBar");
+	this.txt_partOnChild=_f("main").s_textinput("lblData").near(_f("main").s_richtext("Part"));
+	this.chk_readOnly = _f("main").s_checkbox("Read Only").near(_f("main").s_label("/Properties for Field/"));
+	this.chk_required= _f("main").s_checkbox("Read Only").near(_f("main").s_label("/Properties for Field/"));
+	this.btn_pageLayoutSave3 = _f("main").s_button("Save[3]");
+	
+	
+	//Lookup fields values
+	this.scroll_filedScroll=_f("main").s_vscrollbar(0).near(_f("main").s_label("Fields"));
+	
+	
 	this.btn_advanced_options = _f("main").tab("Advanced Options");
 	this.chkbox_work_order = _f("main").s_checkbox("Work Order");
 	this.selectComboBox = function($elementName,$elementItemName){
 	_setSelected(_f("main").s_combobox($elementName), $elementItemName);
-	
-
-		
 		};
+		
+		this.templateDesigner = _f("main").tab("Template Designer");
+		this.select_template = _f("main").s_combobox("searchCombo[4]");
+		this.btn_templateSave = _f("main").s_button("Save[4]");
+		this.lbl_templateSave = _f("main").uiftetextfield("Template saved");
+		this.targetObjectUpdate = _f("main").tab("Target Object Update");
+		this.btn_templateSaveAs = _f("main").s_button("Save As[4]");
+		this.txt_tempName = _f("main").s_textinput("Save template as");
+		this.txt_tempId = _f("main").s_textinput("Input ID Here[4]");
 		
 		//Enter the name of checklist type SFM transaction
 	this.setSfmName=function($sfmName){
@@ -204,4 +237,18 @@ var $bo_pg_sfmTransactionAndDesigner = new function bo_pg_sfmTransactionAndDesig
     this.txt_inputIdAs = _f("main").s_textinput("Input ID Here");
     this.btn_addFieldToPage = _f("main").s_button("/Add Field/");
     this.label_pageSaved = _f("main").label("Page saved");
+    this.button_saveAsQcTab = _f("main").s_button("Save As").inside(_f("main").s_navigatorcontent("Qualification Criteria"));
+    this.btn_newPageLayout = _f("main").s_button("New[3]");
+    this.label_costCategory = _f("main").s_label("Cost Category[1]");
+    this.label_account = _f("main").s_label("Account[1]");
+    this.label_activityType = _f("main").s_label("Activity Type[4]");
+    this.list_sourceChild = _f("main").s_checkbox("Work Detail (Work Order)").inside(_f("main").s_panel("Use data from..."));
+    this.list_targetChild = _f("main").s_checkbox("Work Detail (Work Order)").inside(_f("main").s_panel("...to create these records"));
+    this.text_targetChildAlias = _f("main").s_textinput("aliasName").rightOf(_f("main").s_checkbox("Work Detail (Work Order)").inside(_f("main").s_panel("...to create these records")));
+    this.list_childMappingCombo = _f("main").s_dropdownlist("objCombo").near(_f("main").s_label("Parts"));
+    this.list_sourceHeaderList = _f("main").s_combobox("objCombo1").inside(_f("main").s_panel("Use data from..."));
+    this.list_targetHeaderList = _f("main").s_combobox("objCombo1").inside(_f("main").s_panel("...to create these records"));
+    this.chkbx_targetChild2 = _f("main").s_checkbox("Work Detail (Work Order)[2]");//index used as _count logic does not work in flex.written to Sahi Support.
+    
+
 };

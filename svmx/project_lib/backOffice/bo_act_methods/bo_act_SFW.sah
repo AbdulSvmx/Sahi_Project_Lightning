@@ -37,6 +37,8 @@ var $bo_act_SFW = new function bo_act_SFW() {
 	};
 		this.addCustomActionToWizard=function($fieldActnType,$actnName, $customwizardTitle){ // Changes made for Lightning
 		_wait(10000);
+		_selectDomain("/svmx/");
+
 		_click($bo_pg_sfmWizard.tab_wizardStep);
 		_wait(10000);
 		_click($bo_pg_sfmWizard.btn_newWizardStep);
@@ -45,16 +47,41 @@ var $bo_act_SFW = new function bo_act_SFW() {
 		_wait(1000);
 		_setSelected($bo_pg_sfmWizard.sel_wizardFieldType,$fieldActnType);
 		_wait(30000);
+		if(_isVisible(_span($actnName))==false)
+		{
 		_setSelected($bo_pg_sfmWizard.sel_wizardObjectType,$actnName);
-		
 		//_assertVisible(_label($actnName));
 		_wait(3000);
 		_wait(2000);
 		__setValue($bo_pg_sfmWizard.txt_customwizard_title, $customwizardTitle);
 		_wait(2000);
 		_click($bo_pg_sfmWizard.btn_saveWizardStep);
-			_wait(6000);	
+		_wait(6000);	
+		}
+		_selectDomain();
 		};
+		
+		this.addCustomActionToWizard_existingWizard=function($fieldActnType,$actnName, $customwizardTitle){ // Changes made for Lightning
+			_wait(10000);
+			_click($bo_pg_sfmWizard.tab_wizardStep);
+			_wait(10000);
+			_click($bo_pg_sfmWizard.btn_newWizardStep);
+			_wait(10000);
+			_assertVisible($bo_pg_sfmWizard.lbl_verifyNewWizardSection);
+			_wait(1000);
+			_setSelected($bo_pg_sfmWizard.sel_wizardFieldType,$fieldActnType);
+			_wait(30000);
+			_setSelected($bo_pg_sfmWizard.sel_wizardObjectType,$actnName);
+			
+			//_assertVisible(_label($actnName));
+			_wait(3000);
+			_wait(2000);
+			__setValue($bo_pg_sfmWizard.txt_customwizard_title, $customwizardTitle);
+			_wait(2000);
+			_click($bo_pg_sfmWizard.btn_saveWizardStep);
+				_wait(6000);	
+			};
+		
 			this.selWizardStatusAsInactive=function($wizardStatus){
 				_selectDomain("/svmx/");
 				_setSelected($bo_pg_sfmWizard.sel_wizardStatus,$wizardStatus);
@@ -102,13 +129,22 @@ var $bo_act_SFW = new function bo_act_SFW() {
 		
 	this.createWizardGeneralInfo=function($objName,$wizardname,$wizardID){ // Changes made for Lightning
 	_selectDomain("/svmx/");
+	
 	_setSelected($bo_pg_sfmWizard.sel_objPrevMaintPlan,$objName	);
 	_wait(3000);
 	_assertVisible($bo_pg_sfmWizard.lbl_verifyCustWizardSection);
+	if(_isVisible(_span($wizardname))==false)
+	{
 	_click($bo_pg_sfmWizard.btn_clickNewCustomWizard);
 	_wait(30000,_isVisible($bo_pg_sfmWizard.txt_wizardName));
 	_setValue($bo_pg_sfmWizard.txt_wizardName,$wizardname);
 	_setValue($bo_pg_sfmWizard.txt_wizardID,$wizardID);
+	}
+	else
+		{
+		_click(_checkbox(0,_leftOf (_span($wizardname))));
+		_click($bo_pg_sfmWizard.btn_clickEdit);
+		}
 	_selectDomain();
 };
 

@@ -20,13 +20,14 @@ var $stdMap = "SVMXSTD: Close Work Order";
 var $pickListLabels = [];
 var $pickListValues = [];
 var $textLabels = ["Received Country","Billable Qty"];
-var $textValues = ["SVMX.CURRENTRECORDHEADER.SVMXC__Country__c","SVMX.CURRENTRECORDHEADER.SVMXC__SM_Estimated_Duration__c"];
+var $textValues = ["SVMX.CURRENTRECORDHEADER.SVMXDEV__Country__c","SVMX.CURRENTRECORDHEADER.SVMXDEV__SM_Estimated_Duration__c"];
 var $textLabelsArrayHeader = ["City","Estimated Duration"];
 var $textValuesArrayHeader = ["Bengaluru","45"];
 var $picklistLabelsArrayHeader = ["Country"];
 var $picklistValuesArrayHeader = ["India"];
 var $dateTimeField = "Scheduled Date Time";
 var $productName = "Chrome";
+var $mapType = "Value Map for New Records";
 
 //Appending current timestamp to process name to make it unique.
 var $timeStamp = $bo_act_navigation.getCurrentTimeStamp();
@@ -38,7 +39,7 @@ var $mapName = $processName + "mp";
 //Login and switch to lightning
 $bo_act_login.login($g_url,$sfmlUsn,$sfmlPwd);
 $sfm_act_lightningConfig.switchToLightning();
-
+_wait(15000);
 //Navigate to servicemax setup and setup required process.
 //Clone standard process and add the dependent picklist in the screen designer
 _setSpeed(3000);
@@ -47,13 +48,13 @@ _click($bo_pg_sfmTransactionAndDesigner.btn_quickSave1);
 _click($bo_pg_sfmTransactionAndDesigner.btn_qualifyingCriteriaAndFieldMapping);
 
 //Set up the mapping with SVMX.CURRENTRECORDHEADER literals for Parts
-$bo_act_mappings.createMapping("Parts",$pickListLabels,$pickListValues,$textLabels,$textValues,$mapName);
+$bo_act_mappings.createMapping("Parts",$mapType,$pickListLabels,$pickListValues,$textLabels,$textValues,$mapName);
 $textLabels = ["Received City","Start Date and Time"];
-$textValues = ["SVMX.CURRENTRECORDHEADER.SVMXC__City__c","SVMX.CURRENTRECORDHEADER.SVMXC__Scheduled_Date_Time__c"];
+$textValues = ["SVMX.CURRENTRECORDHEADER.SVMXDEV__City__c","SVMX.CURRENTRECORDHEADER.SVMXDEV__Scheduled_Date_Time__c"];
 $mapName = $mapName + "_2";
 //Set up the mapping with SVMX.CURRENTRECORDHEADER literals for Labor
-_selectDomain($domainName);
-$bo_act_mappings.createMapping("Labor",$pickListLabels,$pickListValues,$textLabels,$textValues,$mapName);
+_selectDomain($g_domain);
+$bo_act_mappings.createMapping("Labor",$mapType,$pickListLabels,$pickListValues,$textLabels,$textValues,$mapName);
 _setSpeed(1000);
 //Add the custom process to SFM wizard.
 $sfm_act_wizards.addToWizard($object_name,$currentWizardName,"SFM",$processName);
@@ -66,7 +67,7 @@ $bo_act_navigation.navigateToCreatedRecordUsingGlobalSearch($wo_number);
 //Launch the process in SFM Delivery
 $sfm_act_createCustomWizard.clickWizardlinks($processName);
 _wait(3000);
-_selectDomain($domainName);
+_selectDomain($g_domain);
 //Enter header values and hit 'Quick Save'
 $sfm_act_SFM.fillHeaderTextValues($textLabelsArrayHeader,$textValuesArrayHeader);
 $sfm_act_SFM.fillHeaderPicklistValues($picklistLabelsArrayHeader,$picklistValuesArrayHeader);
@@ -91,14 +92,14 @@ $sfm_act_SFM.performQuickSave();
 $textPicklistDateLabels = ["Billable Qty","Received Country"];
 $textPicklistDateExpValues = ["45","India"];
 $sfm_act_lightningConfig.openExtEditForLatestItem();
-var $verifyResult1 = $sfm_act_SFM.verifyValuesInDelivery($textPicklistDateLabels,$textPicklistDateExpValues,[],[],[],[],[],[]);
+var $verifyResult1 = $sfm_act_SFM.verifyValuesInDelivery($textPicklistDateLabels,$textPicklistDateExpValues,[],[],[],[],[],[],[],[]);
 _click($sfm_pg_wo.btn_updateExtEdit);
 $pickListValues = ["Labor","Usage/Consumption"];
 $sfm_act_SFM.addChildLine("Labor",$productName,[],[], $pickListLabels, $pickListValues,[],[],[],[],[],[],[],[],[]);
 $textPicklistDateLabels = ["Start Date and Time","Received City"];
-$textPicklistDateExpValues = ["8/6/2018","Bengaluru"];
+$textPicklistDateExpValues = ["08/16/2018","Bengaluru"];
 $sfm_act_lightningConfig.openExtEditForLatestItem();
-$verifyResult2 = $sfm_act_SFM.verifyValuesInDelivery($textPicklistDateLabels,$textPicklistDateExpValues,["Start Date and Time"],["1:30 PM"],[],[],[],[]);
+$verifyResult2 = $sfm_act_SFM.verifyValuesInDelivery($textPicklistDateLabels,$textPicklistDateExpValues,["Start Date and Time"],["1:30 PM"],[],[],[],[],[],[]);
 _click($sfm_pg_wo.btn_updateExtEdit);
 $verifyResult = $verifyResult1 && $verifyResult2;
 _assertTrue($verifyResult);

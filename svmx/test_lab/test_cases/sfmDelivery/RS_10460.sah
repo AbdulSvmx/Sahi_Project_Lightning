@@ -31,5 +31,6 @@ $rs_10460.start();
 	_assertEqual(_getValue($sfm_pg_expressions.btn_selectExpression),$exprsnSaveAsName);
 	_assertEqual(_getValue($sfm_pg_expressions.sel_comboField.near(_f("SFMExpressionBuilderSWF").s_label("1"))), "Account");
 
+	$sfm_act_lightningConfig.logoutInLightning();
 	
 $rs_10460.end();

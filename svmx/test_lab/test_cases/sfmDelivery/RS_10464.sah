@@ -3,7 +3,6 @@ $rs_10464.start();
 	
 	//Login to App
 	$bo_act_login.login($g_url,$sfmlUsn,$sfmlPwd);
-	$bo_act_navigation.navigateToSfmTransactionDesigner();
 
 	//clone standard SFM
 	var $sfmNameToBeCloned="Create Usage Lines from Estimates";
@@ -105,10 +104,13 @@ $rs_10464.start();
 	//Assert sfm should not be launched
 	$sfm_act_common.globalSearchInLightning($WO);
 	$sfm_act_createCustomWizard.clickWizardBtn($sfmName);
-	_selectDomain($domainName);
+	_selectDomain($g_domain);
 	_wait(10000,_isVisible(_div($errMsg)));
 	_assertExists(_div($errMsg));
 	_selectDomain();
+	
+	
+	$sfm_act_lightningConfig.logoutInLightning();
 	
 	//** function to create Work**'
 function createWO_RS10464($orderStatus,$WOactualResoFD,$WOactualRestoFD){

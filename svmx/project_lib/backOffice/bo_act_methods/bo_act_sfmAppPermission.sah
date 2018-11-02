@@ -9,10 +9,12 @@ var $bo_act_SFMAppPermission = new function bo_act_SFMAppPermission() {
  * This Function is to set Permissions for the SFM Process created
  */
 	
-	this.set_mobileapp_permissions = function($profilename , $objectname , $processname){ // Lightning addition
+	this.set_mobileapp_permissions = function($profilename , $objectname , $processname,$removeprocess){ // Lightning addition
 		$bo_act_navigation.navigateToSvmxSetup();
 		$bo_act_navigation.navigatetoMobileOfflinePermission();
 		_selectDomain("/svmx/");
+		_wait(5000);
+		_setStrictVisibilityCheck(true);
 		_click($bo_pg_sfmAppPermissionD.txt_profile_selection);
 		_click(_listItem($profilename));
 		_wait(10000);
@@ -21,13 +23,59 @@ var $bo_act_SFMAppPermission = new function bo_act_SFMAppPermission() {
 		_click($bo_pg_sfmAppPermissionD.btn_select_object);
 		_click(_listItem($objectname));
 		_click(_div($bo_pg_sfmAppPermissionD.chkbox_creatework_order,_leftOf(_div($processname))));
-		_click($bo_pg_sfmAppPermissionD.btn_add_selected);
+		if($removeprocess==true)
+			{
+			_click($bo_pg_sfmAppPermissionD.btn_remove_selected);
+			}
+		else
+			{
+			_click($bo_pg_sfmAppPermissionD.btn_add_selected);
+			}
+		
 		_click($bo_pg_sfmAppPermissionD.btn_save);
 		_wait(10000);
-		_assertEqual(true, _isVisible());
+		//_assertEqual(true, _isVisible());
 		_selectDomain();
 		
 	};
+	
+	
+	/**
+	 *VT
+	 * This Function is to set Permissions for the SFM Process created
+	 * $profilename = name of the profile
+	 * $objectname = Work Order, Installed Product etc 
+	 * $processname = The SFM Process name
+	 * $processType = Checklist Or Create Process
+	 * 
+	 */
+		
+		this.set_mobileapp_permissions_generic = function($profilename, $objectname , $processname, $processtype){ // Lightning addition
+			$bo_act_navigation.navigateToSvmxSetup();
+			$bo_act_navigation.navigatetoMobileOfflinePermission();
+			_selectDomain("/svmx/");
+			_wait(5000);
+			_setStrictVisibilityCheck(true);
+			_click($bo_pg_sfmAppPermissionD.txt_profile_selection);
+			_click(_listItem($profilename));
+			_wait(10000);		
+			if ($processtype=="Checklist") {
+				_click($bo_pg_sfmAppPermissionD.btn_checklists);
+			} else {
+				_click($bo_pg_sfmAppPermissionD.btn_create);
+			}
+			_wait(10000);
+			_click($bo_pg_sfmAppPermissionD.btn_select_object);
+			_click(_listItem($objectname));
+			_click(_div($bo_pg_sfmAppPermissionD.chkbox_creatework_order,_leftOf(_div($processname))));
+			_click($bo_pg_sfmAppPermissionD.btn_add_selected);
+			_click($bo_pg_sfmAppPermissionD.btn_save);
+			_wait(10000);
+			//_assertEqual(true, _isVisible());
+			_selectDomain();
+			
+		};
+	
 	
 	/**
 	 * Author : Meghana Rao
@@ -43,9 +91,69 @@ var $bo_act_SFMAppPermission = new function bo_act_SFMAppPermission() {
 		_click($bo_pg_sfmAppPermissionD.chkbox_workorder);
 		_setSelected($bo_pg_sfmAppPermissionD.picklist_records, $recordsvalue);
 		_click($bo_pg_sfmAppPermissionD.btn_configsave);
+		_selectDomain();
 
 		
-	}
+	};
+	
+	// For Synchronization Settings - Synchronize application data once every  - 600 minutes
+	this.workOrderSynchronizeapplicationdata = function($minutes){
+		$bo_act_navigation.navigateToSvmxSetup();
+		_selectDomain("/svmx/");
+		_click($bo_pg_sfmAppPermissionD.btn_mobile_configuration);
+		_setSelected($bo_pg_sfmAppPermissionD.picklist_profileselection, $group_profilename);
+		_click($bo_pg_sfmAppPermissionD.chkbox_selectprofile);
+		_click($bo_pg_sfmAppPermissionD.btn_edit);
+		
+		_click($bo_pg_sfmAppPermissionD.btn_synchronizationsettings);
+		_setValue($bo_pg_sfmAppPermissionD.txt_synchronizeonceevery, $minutes);
+		
+		// To verify if Work Order is added to Download Criteria	
+		_click($bo_pg_sfmAppPermissionD.btn_configsave);
+
+		
+	};
+	
+	
+	// For Synchronization Settings - scheduled Data Sync settings.
+	this.scheduledDataSync = function($minutes){
+		$bo_act_navigation.navigateToSvmxSetup();
+		_selectDomain("/svmx/");
+		_click($bo_pg_sfmAppPermissionD.btn_mobile_configuration);
+		_setSelected($bo_pg_sfmAppPermissionD.picklist_profileselection, $group_profilename);
+		_click($bo_pg_sfmAppPermissionD.chkbox_selectprofile);
+		_click($bo_pg_sfmAppPermissionD.btn_edit);
+		
+		_click($bo_pg_sfmAppPermissionD.btn_synchronizationsettings);
+	//	_setValue($bo_pg_sfmAppPermissionD.txt_synchronizeonceevery, $minutes);
+		_setValue($bo_pg_sfmAppPermissionD.txt_ScheduledDataSync, $minutes);
+		// To verify if Work Order is added to Download Criteria	
+		_click($bo_pg_sfmAppPermissionD.btn_configsave);
+
+		
+	};
+	
+	
+	this.addnewobjectdownloacriteria = function($objectname)
+	{
+		$bo_act_navigation.navigateToSvmxSetup();
+		_selectDomain("/svmx/");
+		_click($bo_pg_sfmAppPermissionD.btn_mobile_configuration);
+		_setSelected($bo_pg_sfmAppPermissionD.picklist_profileselection, $group_profilename);
+		_click($bo_pg_sfmAppPermissionD.chkbox_selectprofile);
+		_click($bo_pg_sfmAppPermissionD.btn_edit);
+		
+		_click($bo_pg_sfmAppPermissionD.btn_downloadcriteriatab);
+		if(_isVisible(_cell($objectname))==false)
+		{
+			_click($bo_pg_sfmAppPermissionD.btn_addnewdownloacriteria);
+			// Need to add Work Order to the Tab
+			// PENDING - Identifying the object is an issue
+		}
+		_click($bo_pg_sfmAppPermissionD.btn_configsave);
+	};
+	
+	
 	this.setSFMAppPermission = function($searchText,$isOnlineHideRequired,$isOnlineRequired){
 	_click($bo_pg_sfmAppPermissionD.combo_listItemProcessType);
 	_click($bo_pg_sfmAppPermission.combo_selectObject);
@@ -195,11 +303,8 @@ var $bo_act_SFMAppPermission = new function bo_act_SFMAppPermission() {
 			_log("Custom object is not in the list");
 			
 };
-			
-				
-			}
+		
 
-
-	
+	};
 	
 }

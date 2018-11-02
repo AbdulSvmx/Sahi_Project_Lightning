@@ -21,12 +21,12 @@ var $formulaDescriptionArray = ["If customerDown is true then Billing type=Paid 
                                 ];
 
 if($orgtype=="Base"){
-	var $formulaArray =["$F.IF($F.EQUAL($D.Work_Order.SVMXC__Customer_Down__c,'true'),'Paid',$D.Work_Order.SVMXC__Billing_Type__c)",
-	                    "$F.IF($F.EQUAL($D.Work_Order.SVMXC__Billing_Type__c,'Courtesy'),'true',$D.Work_Order.SVMXC__Is_Entitlement_Performed__c)",
+	var $formulaArray =["$F.IF($F.EQUAL($D.Work_Order.SVMXDEV__Customer_Down__c,'true'),'Paid',$D.Work_Order.SVMXDEV__Billing_Type__c)",
+	                    "$F.IF($F.EQUAL($D.Work_Order.SVMXDEV__Billing_Type__c,'Courtesy'),'true',$D.Work_Order.SVMXDEV__Is_Entitlement_Performed__c)",
 	                    "$F.NOW()",
 	                    "$F.DATE($F.YEAR($D.Work_Order.CreatedDate)+1, $F.MONTH($D.Work_Order.CreatedDate), 1)",
-	                    "$F.MONTH($D.Labor.SVMXC__Start_Date_and_Time__c)",
-	                    "$F.YEAR($D.Labor.SVMXC__Start_Date_and_Time__c)"
+	                    "$F.MONTH($D.Labor.SVMXDEV__Start_Date_and_Time__c)",
+	                    "$F.YEAR($D.Labor.SVMXDEV__Start_Date_and_Time__c)"
 	                    ];
 }
 
@@ -43,7 +43,7 @@ else{
 _setSpeed($g_stepSpeed);
 $bo_act_login.login($g_url, $sfmlUsn, $sfmlPwd);
 $sfm_act_lightningConfig.switchToLightning(); 
-
+_wait(15000);
 $sfm_act_SFM.cloneTDM016($sfmNameToBeCloned,$sfmName,$isCustom, $sfmTemplateSaveAsName,$sfmTemplate, $fieldNameArray, $containerNameArray);
 $sfm_pg_formula.createFormula($formulaTargetObjectArray, $formulaTargetFieldArray, $formulaNameArray, $formulaDescriptionArray, $formulaArray);
 _wait(3000);
@@ -60,7 +60,7 @@ _selectDomain();
 $sfm_act_createCustomWizard.createWowithoutvalues();
 
 _click(_span($sfmName));
-_selectDomain($domainName);
+_selectDomain($g_domain);
 _wait(8000,_div($sfmName));
 
 //Validate If customerDown is true then Billing type=Paid else as is

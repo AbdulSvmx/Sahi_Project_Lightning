@@ -1,0 +1,101 @@
+var $sfm_pg_advancedOptions = new function sfm_pg_advancedOptions() {
+
+	this.tab_advancedOptions = _f("main").tab("Advanced Options");
+	this.tab_checklistAdvancedOptions = _f("main").tab("Checklists");
+	this.chk_selectAll = _f("main").s_checkbox("Select All");
+	this.chk_includeskippedsection = _f("main").s_checkbox("checklistCheckBox");
+	this.chk_checklistcheckbox =_f("main").s_checkbox("/CheckBox/");
+	this.sel_checklistVersionCombo=_f("main").s_combobox("/Combo/");
+	this.scroll_advcheclist = _f("main").vscrollbar("/VScrollBar/");
+	this.scroll_btn = _f("main").button(2);
+	/*
+	 * Vinod Tharavath Function to set First,Last and All Version of checklists along with include skipped sections
+	 * 
+	 * $selectallChecklist = true or false -to select all checklists
+	 * $includeskippedSection = true will check include skippedsection
+	 * $checklistversion[] = First Version , Last Version , All Versions
+	 * $checklist[]= The checklistsNames of which version needs to be set.
+	 * 
+	 * 
+	 * Function usage example 
+	 * $selectallChecklist = "false";
+	 * $includeskippedSection="true";
+	 * $checklists = ["Auto_10578_ChecklistDVR1","Auto_10579_Checklist_trail123","Auto_10580_ChecklisSections122"];
+	 * $checklistversion = ["Last Version","First Version","All Versions"];
+	 * $sfm_pg_advancedOptions.AdvancedOptionsChecklist($selectallChecklist, $includeskippedSection,$checklists,$checklistversion);
+	 * 
+	 */
+	this.AdvancedOptionsChecklist = function($selectallChecklist,
+			$includeskippedSection, $checklists, $checklistversion) {
+
+		_click($sfm_pg_advancedOptions.tab_advancedOptions);
+		_wait(5000, _isVisible($sfm_pg_advancedOptions.tab_checklistAdvancedOptions));
+		_click($sfm_pg_advancedOptions.tab_checklistAdvancedOptions);
+
+		if ($selectallChecklist == "false") {
+			_click($sfm_pg_advancedOptions.chk_selectAll);
+		} 
+		else{}
+	
+		if ($includeskippedSection == "true") {
+			_click($sfm_pg_advancedOptions.chk_includeskippedsection);
+		} else {}
+
+		for (var $i = 0; $i < $checklists.length; $i++) {
+			//to scroll and find the checlist to be selected
+		$sfm_pg_advancedOptions.ScrollAdvancedOptionsChecklist($checklists[$i]);
+				
+			switch ($checklistversion[$i]) {
+			
+			case "All Versions":
+				
+				_click(_f("main").s_checkbox("/CheckBox/").leftOf(
+						_f("main").s_label($checklists[$i]), 20));
+				_setSelected(_f("main").s_combobox("/Combo/").rightOf(
+						_f("main").s_label($checklists[$i]), 20), "All Versions");
+				break;
+			case "Last Version":
+				_click(_f("main").s_checkbox("/CheckBox/").leftOf(
+						_f("main").s_label($checklists[$i]), 20));
+				_setSelected(_f("main").s_combobox("/Combo/").rightOf(
+						_f("main").s_label($checklists[$i]), 20), "Last Version");
+				break;
+			case "First Version":
+				_click(_f("main").s_checkbox("/CheckBox/").leftOf(
+						_f("main").s_label($checklists[$i]), 20));
+				_setSelected(_f("main").s_combobox("/Combo/").rightOf(
+						_f("main").s_label($checklists[$i]), 20), "First Version");
+				break;
+			default:
+				break;
+		
+
+				}
+			}
+
+	};
+
+	//Function to scroll and select the checklist.
+	this.ScrollAdvancedOptionsChecklist=function($checklistName){
+		//_log($field);
+
+		for($i=1;$i<100;$i++){
+
+			if(_isVisible(_f("main").s_label($checklistName))){
+
+				break;
+
+			}
+
+			else{ _click(_f("main").button(2));
+
+			}
+
+		}
+
+	};
+
+	;
+	
+
+};

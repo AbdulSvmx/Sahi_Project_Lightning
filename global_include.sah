@@ -1,4 +1,5 @@
 _call(top.location.reload(true));
+_call(top.localStorage.clear());
 _setXHRReadyStatesToWaitFor("2,3");
 _windowAction("resize", 1920, 1080);
 var $g_stepSpeed = 300;
@@ -46,6 +47,7 @@ var $bac_PRTun = "bhupendra.auto@upgrade.com"; // Most Used Customer
 var $bac_PRTpwd = "servicemax@123";
 //var $group_profilename = "AutoBACGroup";
 var $group_profilename = "auto group profile";
+var $admin_group_profile = "Get Price Group Profile";
 
 // Checklist Global Variables
 var $un_checklist = $bac_un;// "meghana.rao@servicemax.com"; // Pointing to
@@ -61,17 +63,27 @@ var $url_checklist = "https://test.salesforce.com";
 
 var $sfmUsn = "sysadmin01@sfdautomation.com"; // base
 var $sfmPwd = "Maxplore4";
- var $domainName = "/svmx/";
+ var $g_domain = "/svmx/";
+
+ 
 
  var $wizardName = ["SFMDAuto_Ltng_DVR", "SFMDAuto_Ltng_WebServices","SFMDAuto_Ltng_Process","SFMDAuto_Ltng_LookUP","SFMDAuto_Ltng_Mappings",
                      "SFMDAuto_Ltng_Formula","SFMDAuto_Ltng_Expression","SFMAuto_Ltng_Wizards"];
  var $wizardType = ["None","SFM","Inventory","Others","Output Document"];
- var $sfmClientId ="YjkyMzJmNDUzMGNmOTYzODVlNDQ0ZjE2OTUxOTU1NDI5MGViN2I3NWU3YTFjNmY300D290000000WVC";
- var $sfmConsumerSecret = "5287076090725084260";
- var $sfmOrgInstance = "cs19";
- 
+
+ //dev org credentials
+ var $sfmlUsn = "scarface.qa8@admin.com";
+ var $sfmlPwd ="fireexit1";
+ var $sfmClientId ="3MVG9_7ddP9KqTzch21szrgYIfzQnUMZVsivQJ2gRJp09TI8IDWTMXN_LaUostaQT9hdma6X5N6ZrLwwpju3F";
+ var $sfmConsumerSecret = "3960053550438003199";
+ var $sfmOrgInstance = "cs10"; 
+ /*
+//  commenting base org details to run in dev org
  var $sfmlUsn = "sfdl_auto@automation.com";
  var $sfmlPwd ="Maxplore2";
+ var $sfmClientId ="YjkyMzJmNDUzMGNmOTYzODVlNDQ0ZjE2OTUxOTU1NDI5MGViN2I3NWU3YTFjNmY300D290000000WVC";
+ var $sfmConsumerSecret = "5287076090725084260";
+ var $sfmOrgInstance = "cs19"; */
 
 // DC Global Variables
 var $dc_org = $orgtype;
@@ -94,10 +106,21 @@ var $appiumPath = "/auto/SVMX_Catalyst/Executable/";
 var $sahiIntermediatoryPath = "sahiResultCommon.txt";
 
 var $appiumAdminUn="meghana.automation@servicemax.com";
-var $appiumAdminPwd="servicemax01";
+var $appiumAdminPwd="servicemax1";
 
 var $appiumTechUn="autotech@part1.com";
 var $appiumTechPwd="servicemax01";
+var $appiumTechId="a240t000000GglLAAS";
+var $appiumsfdcuserId="0050t000001FkqI";
+var $profileName = "System Administrator";
+var $pageLayout = "SVMX Work Order - Admin";
+
+
+//THIS IS SPECIFIC TO A GIVEN ORG - DONOT TOUCH
+var $appiumclient_id = "3MVG9ifmAKCHISbZGXS_tYaEGdq5pFNz6ZhYTkrLMlM9toUZC8UIDIt.2R4KYqLXKL5yc8HjHPh5NYoUERETS";
+var $appiumclient_secret = "3810777216167697283";
+var $appiumorginstance = "cs77";
+
 
 // ==== Reference addition module START ====
 // Include the salesforce js files to enable sforce API calls
@@ -276,4 +299,9 @@ function dumpWindowInfo() {
 	}
 	s += "</pre>";
 	_sahi._log(s);
+	
+	
+	
+	
 }
+

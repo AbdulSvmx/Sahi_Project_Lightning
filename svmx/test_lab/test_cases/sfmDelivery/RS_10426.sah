@@ -28,6 +28,7 @@ var $pickListLabels = ["Order Status"];
 var $pickListValues = ["Open"];
 var $textLabels = [];
 var $textValues = [];
+var $mapType = "Value Map for Existing Records";
 
 
 //Appending current timestamp to process name to make it unique.
@@ -40,7 +41,7 @@ var $myDomain = "/lightning/";
 //Login and switch to lightning
 $bo_act_login.login($g_url,$sfmlUsn,$sfmlPwd);
 $sfm_act_lightningConfig.switchToLightning();
-
+_wait(15000);
 //Navigate to Object manager and navigate to work order object.
 $sfm_act_lightningConfig.navigateToObjectsInLightning($object_name);
 _selectWindow("/"+$object_name+"/");
@@ -88,7 +89,7 @@ _setSelected(_f("main").s_combobox("valuesCombo[1]"), "Closed");
 _setValue($bo_pg_sfmTransactionAndDesigner.txt_sfmSavePageLayoutAsId, "1 OR 2");
 _setValue($bo_pg_sfmTransactionAndDesigner.txt_saveExprAs, $processName);;
 _setValue($bo_pg_sfmTransactionAndDesigner.txt_inputIdAs, $processName);
-_click(_f("main").s_button("Save As"));
+_click($bo_pg_sfmTransactionAndDesigner.button_saveAsQcTab);
 _assertVisible($bo_pg_sfmTransactionAndDesigner.label_exprSaved);
 _click($bo_pg_sfmTransactionAndDesigner.btn_quickSave1);
 if(_condition(_isVisible($bo_pg_sfmTransactionAndDesigner.btn_proceed_anyways))){
@@ -96,7 +97,7 @@ if(_condition(_isVisible($bo_pg_sfmTransactionAndDesigner.btn_proceed_anyways)))
 }
 
 //Set up the mapping. Order status is set to "Open"
-$bo_act_mappings.createMapping($object_name,$pickListLabels,$pickListValues,$textLabels,$textValues,$mapName);
+$bo_act_mappings.createMapping($object_name,$mapType,$pickListLabels,$pickListValues,$textLabels,$textValues,$mapName);
 _setSpeed(1000);
 //Add the custom process to SFM wizard.
 $sfm_act_wizards.addToWizard($object_name,$currentWizardName,"SFM",$processName);
@@ -126,7 +127,7 @@ for($z=0;$z<$ctrl_unique_values.length;$z++){
 	_click($sfm_pg_wo.btn_wo_edit_save);
 	_wait(2000);
 	$sfm_act_createCustomWizard.clickWizardlinks($processName);
-	_selectDomain($domainName);
+	_selectDomain($g_domain);
 	var $actual_list = [];
 	//Verify the count of values first
 	_wait(6000);
@@ -150,7 +151,7 @@ for($z=0;$z<$ctrl_unique_values.length;$z++){
 //Now edit the mapping and save the changes.
 $sfm_act_createCustomWizard.clickWizardlinks($processName);
 _wait(10000);
-_selectDomain($domainName);
+_selectDomain($g_domain);
 _click($sfm_pg_wo.btn_arrowNextToGetPrice);
 _assertVisible($sfm_pg_wo.link_launchSfmDesigner);
 _click($sfm_pg_wo.link_launchSfmDesigner);
@@ -163,7 +164,7 @@ $bo_act_mappings.editExistingFieldsInMapping($object_name,$pickListLabels, $pick
 _selectDomain();
 _closeWindow();
 _selectWindow();
-_selectDomain($domainName);
+_selectDomain($g_domain);
 _click($sfm_pg_wo.btn_cancelForSfmDelivery);
 _click($sfm_pg_wo.btn_proceedForCancel);
 _selectDomain();
@@ -188,7 +189,7 @@ for($z=0;$z<$ctrl_unique_values.length;$z++){
 	_click($sfm_pg_wo.btn_wo_edit_save);
 	_wait(2000);
 	$sfm_act_createCustomWizard.clickWizardlinks($processName);
-	_selectDomain($domainName);
+	_selectDomain($g_domain);
 	var $actual_list = [];
 	//Verify the count of values first
 	_wait(6000);

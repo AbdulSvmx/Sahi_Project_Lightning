@@ -16,7 +16,7 @@ var $accountID_Fetch = $op_act_sForceApiCall.sForceQuery($un, $pwd, $query_accou
 var $accountID1 ;
 $accountID1 = $accountID_Fetch[0].Id;
 
-$excel.insertUnderColumn("../../analytics/an_excleData/MTTC_data.xlsx", "Sheet1", "Account", ""+$accountID1+"","1");
+$excel.insertUnderColumn("../../analytics/an_excleData/MTTC_data.xlsx", "Sheet1", "Account", ""+$accountID1+"","4");
 
 
 var $create_account2 = "Account ac1 = new Account (Name = 'Apple Automative', Type = 'Customer');insert ac1;";

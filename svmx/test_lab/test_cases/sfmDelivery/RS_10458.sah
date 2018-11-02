@@ -49,6 +49,6 @@ $rs_10458.start();
 			_assertEqual($retcomboConditions[$i],$comboConditions[$i]);
 			_assertEqual($comboInput[$i],$comboInput[$i]);
 		}
-		
+		$sfm_act_lightningConfig.logoutInLightning();
 	
 $rs_10458.end();

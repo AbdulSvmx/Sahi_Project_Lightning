@@ -1,7 +1,6 @@
 var $rs_10492 = _testcase("RS_10492","Verify Advanced Data validation rule");
 $rs_10492.start(); 
 $sfmName = $bo_act_common.generateRandomName("RS_10492_");
-$sfmPgLayoutName =	$sfmName
 var $sfmNameToBeCloned = "Create Usage Lines from Estimates";
 var $isCustom = false;
 var $sfmTemplate = "SVMXSTD: Manage WO Usage Lines";
@@ -40,7 +39,7 @@ _selectDomain();
 $sfm_act_createCustomWizard.createWowithoutvalues();
 
 _click(_span($sfmName));
-_selectDomain($domainName);
+_selectDomain($g_domain);
 _wait(15000,_div($sfmName));
 
 // check for DVR when 1 and 2 are true

@@ -5,26 +5,26 @@
 var $sfm_act_wizards = new function sfm_act_wizards() {
 	
 	//function to create or add step to wizard
-	this.addToWizard = function($wizardObject, $wizardName, $wizardType, $sfmName, $handOver, $profile, $wizardCriteria){
+	this.addToWizard = function($wizardObject, $wizardName, $wizardType, $sfmName, $handOver, $profile, $wizardCriteria,$stepID){
 		$bo_act_navigation.navigateToSvmxSetup();
 		_selectDomain("/svmx/");
 		_click(_div("Service Flow Manager"));
 		_click(_div("SFM Wizards"));
 		_setSelected($sfm_pg_wizards.selectObject,$wizardObject);
-		_wait(3000);
+		_wait(6000);
 		
 		// If wizard is already present add the step else create a new wizard and then add the step
 		if(_exists(_span($wizardName))){
-			$sfm_act_wizards.editSfmWizard($wizardName, $wizardType, $sfmName, $handOver);
+			$sfm_act_wizards.editSfmWizard($wizardName, $wizardType, $sfmName, $handOver,$stepID);
 		}
 		else{
-			$sfm_act_wizards.createSfmWizard($wizardName, $wizardType, $sfmName, $handOver, $profile, $wizardCriteria);
+			$sfm_act_wizards.createSfmWizard($wizardName, $wizardType, $sfmName, $handOver, $profile, $wizardCriteria,$stepID);
 		}
 	};
 	
 	
 	//function to create a new SFM wizard
-	this.createSfmWizard = function($wizardName, $wizardType, $sfmName, $handOver, $profile, $wizardCriteria){
+	this.createSfmWizard = function($wizardName, $wizardType, $sfmName, $handOver, $profile, $wizardCriteria,$stepID){
 		
 		_click($sfm_pg_wizards.btn_customNew);
 		_setValue($sfm_pg_wizards.txt_wizardTitle,$wizardName);
@@ -33,7 +33,7 @@ var $sfm_act_wizards = new function sfm_act_wizards() {
 			_setSelected($sfm_pg_wizards.btn_showCriteria,$wizardCriteria);
 			_wait(2000);
 		}
-		$sfm_act_wizards.addStepToSfmWizard($wizardType, $sfmName, $handOver);
+		$sfm_act_wizards.addStepToSfmWizard($wizardType, $sfmName, $handOver,$stepID);
 		_wait(2000);
 		if($profile !="" && $profile !=null){
 			_click($sfm_pg_wizards.txt_managePermission);
@@ -48,11 +48,11 @@ var $sfm_act_wizards = new function sfm_act_wizards() {
 	};
 	
 	//function to add a step to sfm Wizard
-	this.editSfmWizard = function($wizardName, $wizardType, $sfmName, $handOver ) {
+	this.editSfmWizard = function($wizardName, $wizardType, $sfmName, $handOver,$stepID ) {
 		
 		_check(_checkbox(0,_leftOf(_span($wizardName))));
 		_click($sfm_pg_wizards.btn_customEdit);	
-		$sfm_act_wizards.addStepToSfmWizard($wizardType, $sfmName, $handOver);	
+		$sfm_act_wizards.addStepToSfmWizard($wizardType, $sfmName, $handOver,$stepID);	
 		_wait(2000);
 		_click($sfm_pg_wizards.btn_quickSave);
 		_wait(5000,_isVisible(_span("Object")));
@@ -75,21 +75,29 @@ var $sfm_act_wizards = new function sfm_act_wizards() {
 	};
 	
 	//add step/SFM to wizard
-	this.addStepToSfmWizard = function($wizardType, $sfmName, $handOver) {
+	this.addStepToSfmWizard = function($wizardType, $sfmName, $handOver,$stepID) {
 		_click($sfm_pg_wizards.txt_manageWizSteps);
-		_click($sfm_pg_wizards.btn_newStep);
-		_wait(5000,$sfm_pg_wizards.btn_wizStepType,$wizardType);
-		_setSelected($sfm_pg_wizards.btn_wizStepType,$wizardType);
-		_setSelected($sfm_pg_wizards.btn_stepName,$sfmName);
-		_wait(3000,_label($sfmName,_rightOf(_label("Step ID[1]"))));
-		if(($handOver=='true') && (_isChecked($sfm_pg_wizards.btn_checkboxHandover).toString()=='false')){
-			_check($sfm_pg_wizards.btn_checkboxHandover);			
-		}
-		_click($sfm_pg_wizards.btn_saveStep);
-		_wait(6000,_heading4("Success"));
-		//if(_isVisible(_heading4("Success"))){
-			//_log("Pass");
 		
+		
+		if(_isVisible(_span($stepID))||_isVisible(_cell($stepID)))
+		{
+		_log($stepID+" process is already added in the wizard");
+		}
+	else{
+		_log($stepID+" process is not added in the wizard");
+	_click($sfm_pg_wizards.btn_newStep);
+	_wait(5000,$sfm_pg_wizards.btn_wizStepType,$wizardType);
+	_setSelected($sfm_pg_wizards.btn_wizStepType,$wizardType);
+	_setSelected($sfm_pg_wizards.btn_stepName,$sfmName);
+	_wait(3000,_label($sfmName,_rightOf(_label("Step ID[1]"))));
+	if(($handOver=='true') && (_isChecked($sfm_pg_wizards.btn_checkboxHandover).toString()=='false')){
+		_check($sfm_pg_wizards.btn_checkboxHandover);			
+	}
+	_click($sfm_pg_wizards.btn_saveStep);
+	_wait(6000,_heading4("Success"));
+	//if(_isVisible(_heading4("Success"))){
+		//_log("Pass");	
+	}
 
 		
 };

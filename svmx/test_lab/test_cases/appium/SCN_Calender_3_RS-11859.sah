@@ -1,0 +1,117 @@
+var RS_11859 = _testcase("RS_11859","Verify creation/reschedule of SFDC events from server and FSA App");
+RS_11859.start();
+_writeFile("false", $appiumPath+$sahiIntermediatoryPath, true);
+var $profile = "Cloned_Default";
+var $module = "Common";
+var $subModule = "Global Settings";
+var $setting = "GBL025";
+
+$bo_act_login.login($g_url, $appiumAdminUn, $appiumAdminPwd);
+$sfm_act_lightningConfig.switchToLightning();
+
+$bo_act_configurationProfiles.editGlobalProfileForPicklistSettings($profile,$module,$subModule,$setting,"Salesforce Event");
+
+var $restAccName="A11859_SFDC_Event";
+var $EventSub="A11859_SFDC_Event1";
+var $techname=$appiumTechId;//Add to global 
+var $salesforceuserid=$appiumsfdcuserId;	
+
+$objName= "Account";
+$obJson = "{\"Name\":\""+$restAccName+"\"}"; 
+$columnName = "Name";
+$filter="id";
+//create an account
+$account=$sfm_act_restApiMethods.postRestApi($appiumAdminUn,$appiumAdminPwd,$appiumclient_id,$appiumclient_secret,$appiumorginstance,$objName,$obJson,"POST");
+//get the caseNumber
+_log($account);
+
+//Create WO1 for SFDC event1
+$objName= "SVMXC__Service_Order__c";
+$obJson = "{\"SVMXC__Company__c\":\""+$account+"\",\"SVMXC__Order_Status__c\":\"Open\",\"SVMXC__Order_Type__c\":\"Field Service\",\"SVMXC__Group_Member__c\":\""+$techname+"\"}";	
+$columnName = "Name";
+$filter="id";
+
+$workorderid=$sfm_act_restApiMethods.postRestApi($appiumAdminUn,$appiumAdminPwd,$appiumclient_id,$appiumclient_secret,$appiumorginstance,$objName,$obJson,"POST");
+//get the wo
+$WOname =$sfm_act_restApiMethods.getRestApi($appiumAdminUn,$appiumAdminPwd,$appiumclient_id,$appiumclient_secret,$appiumorginstance,"GET", $objName, $columnName, $filter, $workorderid);
+_log($WOname);
+$excel.insertUnderColumn("/auto/SVMX_Catalyst/fsaautomation/resources/TestData.xlsx", "RS_11859", "Data3",$WOname ,"2");
+
+var $now = new Date();
+_log( $now ); // shows current date/time
+$now.setHours(15,30,00,00);
+_log( $now );
+var $new=new Date($now.toString().split('IST')[0]+' GMT').toISOString().split('.')[0];//GMT timing
+_log( $new );
+
+
+var $add2days=($now.getDate())+2;
+_log("@@@@@@@@@@@@@@@"+$add2days);
+var $set2days = new Date();
+$set2days.setDate($add2days);
+$set2days.setHours(15,30,00,00);
+var $new1=new Date($set2days.toString().split('IST')[0]+' GMT').toISOString().split('.')[0];//GMT timing
+_log($new1);
+
+
+// To crete one hr SVMX event1
+
+$objName= "Event";
+$obJson = "{\"Subject\":\""+$EventSub+"\",\"WhatId\":\""+$workorderid+"\",\"OwnerId\":\""+$salesforceuserid+"\",\"StartDateTime\":\""+$new+"\",\"EndDateTime\":\""+$new1+"\"}";	
+$columnName = "Subject";
+$filter="id";
+
+$eventid=$sfm_act_restApiMethods.postRestApi($appiumAdminUn,$appiumAdminPwd,$appiumclient_id,$appiumclient_secret,$appiumorginstance,$objName,$obJson,"POST");
+//get the event name
+$eventname =$sfm_act_restApiMethods.getRestApi($appiumAdminUn,$appiumAdminPwd,$appiumclient_id,$appiumclient_secret,$appiumorginstance,"GET", $objName, $columnName, $filter, $eventid);
+_log($eventname);
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+//Create WO2 for SVMX event2
+$objName= "SVMXC__Service_Order__c";
+$obJson = "{\"SVMXC__Company__c\":\""+$account+"\",\"SVMXC__Order_Status__c\":\"Open\",\"SVMXC__Order_Type__c\":\"Field Service\",\"SVMXC__Group_Member__c\":\""+$techname+"\"}";	
+$columnName = "Name";
+$filter="id";
+
+$workorderid=$sfm_act_restApiMethods.postRestApi($appiumAdminUn,$appiumAdminPwd,$appiumclient_id,$appiumclient_secret,$appiumorginstance,$objName,$obJson,"POST");
+//get the wo
+$WOname =$sfm_act_restApiMethods.getRestApi($appiumAdminUn,$appiumAdminPwd,$appiumclient_id,$appiumclient_secret,$appiumorginstance,"GET", $objName, $columnName, $filter, $workorderid);
+_log($WOname);
+$excel.insertUnderColumn("/auto/SVMX_Catalyst/fsaautomation/resources/TestData.xlsx", "RS_11859", "Data4",$WOname ,"2");
+
+var $now = new Date();
+_log( $now ); // shows current date/time
+$now.setHours(15,30,00,00);
+_log( $now );
+var $new=new Date($now.toString().split('IST')[0]+' GMT').toISOString().split('.')[0];//GMT timing
+_log( $new );
+
+//$now.getDay()
+var $add14days=($now.getDate()+14);
+_log("@@@@@@@@@@@@@@@@"+$add14days);
+
+var $set14days = new Date();
+$set14days.setDate($add14days);
+$set14days.setHours(15,30,00,00);
+var $new1=new Date($set14days.toString().split('IST')[0]+' GMT').toISOString().split('.')[0];//GMT timing
+_log($new1);
+
+ //To crete one hr SVMX event2
+
+$objName= "Event";
+$obJson = "{\"Subject\":\"A11859_SFDC_Event2\",\"WhatId\":\""+$workorderid+"\",\"OwnerId\":\""+$salesforceuserid+"\",\"StartDateTime\":\""+$new+"\",\"EndDateTime\":\""+$new1+"\"}";	
+$columnName = "Subject";
+$filter="id";
+
+$eventid=$sfm_act_restApiMethods.postRestApi($appiumAdminUn,$appiumAdminPwd,$appiumclient_id,$appiumclient_secret,$appiumorginstance,$objName,$obJson,"POST");
+//get the event name
+$eventname =$sfm_act_restApiMethods.getRestApi($appiumAdminUn,$appiumAdminPwd,$appiumclient_id,$appiumclient_secret,$appiumorginstance,"GET", $objName, $columnName, $filter, $eventid);
+_log($eventname);
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+_writeFile("true", $appiumPath+$sahiIntermediatoryPath, true);
+
+RS_11859.end();

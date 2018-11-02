@@ -1,0 +1,135 @@
+	_writeFile("false", $appiumPath+$sahiIntermediatoryPath, true);
+var $scenario_10577 = _testcase("scenario_10578","SCN_Checklist_1_RS-10577_Verify DVR Checklists");
+$scenario_10577.start();
+
+//question
+
+var $ProcessStatus=false;
+var $wizardObject ="Work Order";
+var $sfmName = "Auto_10578_ChecklistDVR";
+var $questionNames=["Date DVRVS","DateTime DVR","Confirmation DVR number cannot be 10","Advanced Expression DVR"];
+var $sectionName = "Checklist Section Title";
+
+//DVR 1 variables
+var $dvrName=$bo_act_common.generateRandomName("dvrName_");
+var $dvrID=$dvrName;
+var $comboField=["Equals","Greater Than","Equals"];
+var $operandType=["Function","Function","Value"];
+var $answer=["Today",  "Tomorrow", "06/08/2018"];
+var $advExpr="1 OR 2 OR 3";
+var $msfType="Error";
+var $errorMsg="Date Should not be Today, Or Greater than Tomorrow or 8th June 2018.";
+var $questionType = "Date";
+var $dvrExpressionDetails=[$comboField,$operandType,$answer,$advExpr,$msfType, $errorMsg,$questionType];
+
+
+//DVR 2 variables
+var $dvrName2=$bo_act_common.generateRandomName("dvrName_");
+var $dvrID2=$dvrName2;
+
+//DVR 3 variables
+var $dvrName3=$bo_act_common.generateRandomName("dvrName_");
+var $dvrID3=$dvrName3;
+var $comboField3=["Equals"];
+var $operandType3=["Value"];
+var $answer3=["10"];
+var $advExpr3="";
+var $msfType3="Confirmation";
+var $errorMsg3="Number Cannot be 10";
+var $questionType3 = "Number";
+var $dvrExpressionDetails3=[$comboField3,$operandType3,$answer3,$advExpr3,$msfType3, $errorMsg3,$questionType3];
+
+//DVR 4 variables
+var $dvrName4=$bo_act_common.generateRandomName("dvrName_");
+var $dvrID4=$dvrName4;
+var $comboField4=["Equals","Equals","Less Than"];
+var $operandType4=["Value","Value","Value"];
+var $answer4=["10","100","200"];
+var $advExpr4="(1 OR 2) AND 3";
+var $msfType4="Error";
+var $errorMsg4="Advanced DVR value should be more than 200";
+var $questionType4 = "Number";
+var $dvrExpressionDetails4=[$comboField4,$operandType4,$answer4,$advExpr4,$msfType4, $errorMsg4,$questionType4];
+
+$bo_act_login.login($g_url, $appiumAdminUn, $appiumAdminPwd);
+$sfm_act_lightningConfig.switchToLightning();
+
+$ProcessStatus=$sfm_act_SFM.checkCustomProcess($sfmName);
+if($ProcessStatus==false){
+
+$bo_act_navigation.navigateToSfmTransactionDesigner();
+_wait(15000);
+_click($bo_pg_sfmTransactionAndDesigner.btn_newSFM);
+_wait(3000);
+_setValue($bo_pg_sfmTransactionAndDesigner.txt_name, $sfmName);
+_setValue($bo_pg_sfmTransactionAndDesigner.txt_sfmTransactionId, "");
+_setSelected($sfm_pg_screenDesigner.sel_createSFMTransaction, "to generate a Checklist/Survey type of Process");
+_setStrictVisibilityCheck(true);
+_setValue($sfm_pg_screenDesigner.txt_srcObject,"");
+_setValue($sfm_pg_screenDesigner.txt_srcObject,"Wo");
+_wait(5000);
+_click($sfm_pg_screenDesigner.lbl_workOrder);
+/*_click($bo_pg_sfmTransactionAndDesigner.btn_qualifyingCriteriaAndFieldMapping);
+_click($bo_pg_sfmTransactionAndDesigner.btn_mappings);
+_click($bo_pg_sfmTransactionAndDesigner.btn_mappings);
+_setValue(_f("main").s_textinput("/textInput/").near(_f("main").tab("Field Map For Existing Records")),"SVMX");
+_click(_f("main").s_label("SVMXSTD: Map Work Order to Checklist"));*/
+//$bo_act_checklistdesigner.addQuestion("Text", "What is the Work Order Number?", true,"Work Order Number");
+
+//Add Validation
+$bo_act_checklistdesigner.addQuestion("Date","Date DVRVS",false,"");
+_wait(5000);
+_selectDomain($g_domain); 
+$sfm_act_formDesigner.editQuestionInSection($sectionName, $questionNames[0]);
+$sfm_act_formDesigner.dataValidationOnCheckListQuestion($dvrName, $dvrID, $dvrExpressionDetails);
+_click($sfm_pg_formDesigner.tab_questionDetails);
+_click($sfm_pg_formDesigner.btn_dvrSave);
+_wait(3000);
+
+///-------------Adding Second Question-----------------------------------------
+
+$bo_act_checklistdesigner.addQuestion("Date Time","DateTime DVR",false,"");
+_wait(5000);
+_selectDomain($g_domain); 
+$sfm_act_formDesigner.editQuestionInSection($sectionName, $questionNames[1]);
+$sfm_act_formDesigner.dataValidationOnCheckListQuestion($dvrName2, $dvrID2, $dvrExpressionDetails,$questionType);
+_click($sfm_pg_formDesigner.tab_questionDetails);
+_click($sfm_pg_formDesigner.btn_dvrSave);
+_wait(3000);
+
+//------------Adding Third Question--------------------------------------------
+
+$bo_act_checklistdesigner.addQuestion("Number","Confirmation DVR number cannot be 10",false,"");
+_wait(5000);
+_selectDomain($g_domain); 
+$sfm_act_formDesigner.editQuestionInSection($sectionName, $questionNames[2]);
+$sfm_act_formDesigner.dataValidationOnCheckListQuestion($dvrName3, $dvrID3, $dvrExpressionDetails3);
+_click($sfm_pg_formDesigner.tab_questionDetails);
+_click($sfm_pg_formDesigner.btn_dvrSave);
+_wait(3000);
+
+//------------Adding Fourth Question-------------------------------------------
+
+
+$bo_act_checklistdesigner.addQuestion("Number","Advanced Expression DVR",false,"");
+_wait(5000);
+_selectDomain($g_domain); 
+$sfm_act_formDesigner.editQuestionInSection($sectionName, $questionNames[3]);
+$sfm_act_formDesigner.dataValidationOnCheckListQuestion($dvrName4, $dvrID4, $dvrExpressionDetails4);
+_click($sfm_pg_formDesigner.tab_questionDetails);
+_click($sfm_pg_formDesigner.btn_dvrSave);
+
+_click($bo_pg_sfmTransactionAndDesigner.btn_saveAndclose);
+
+_wait(5000);
+
+//Setup App Permissions for Mobile App for the SFM Process created
+var $profilename = $group_profilename;
+var $targetObjectName = "Work Order";
+//$bo_act_SFMAppPermission.set_mobileapp_permissions($profilename, $targetObjectName, $sfmName);
+
+$bo_act_SFMAppPermission.set_mobileapp_permissions_generic($profilename, $targetObjectName, $sfmName, "Checklist");
+
+}
+_writeFile("true", $appiumPath+$sahiIntermediatoryPath, true);
+$scenario_10577.end();

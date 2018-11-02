@@ -153,6 +153,35 @@ var $sfm_act_Transactions = new function sfm_act_Transactions() {
 
 		};
 		
+
+		
+		/**
+		 * Author		:	Anand Kakhandaki
+		 * Function		: 	To scroll in lookup field list
+		 * Parameter	:	$field=Name of field
+		 * 					
+		 * Example		: 	Refer _ _ _  for function usage
+		 */
+		this.lookUpScrollIntoView=function($field,$element){
+			_log($field);
+			//_call($bo_pg_sfmTransactionAndDesigner.scroll_filedScroll.set("value",0));
+			_call($element.set("value",0));
+			var $maximum =  _fetch($element.get("maximum"));
+			var $fieldName= _f("main").s_label($field);
+			var $i=0;
+			while($i< $maximum){
+				if(_isVisible(_f("main").s_label($field))){
+					//_click($el);
+					break;
+				}
+				else {
+					$i= $i+100;
+					_call($element.set("value",$i));
+				}
+			}
+		};
+
+		
 		/**
 		 * Author		:	Anand Kakhandaki
 		 * Function		: 	This function setup lookup for selected object
@@ -167,7 +196,7 @@ var $sfm_act_Transactions = new function sfm_act_Transactions() {
 		 * 					$nearBy = name of child object where object lookup is to configure. if case field is in part childline please select Parts
 		 * Example		: 	Refer RS_10431 for function usage
 		 */
-		this.createLookUp=function($object,$lookupTempName,$fieldCombo,$conditionsCombo,$operandTypeCombo,$operandValue,$lookupAdvExpr,$lookUpName,$nearBy){
+		this.createLookUp=function($object,$lookupTempName,$lookupFieldsToAdd, $lookupFilterDetails,$lookUpName,$nearBy,$noOfRecords){
 			_setStrictVisibilityCheck(true);
 			
 			if($nearBy == 'Parts' || $nearBy == 'Labor' || $nearBy == 'Expense' || $nearBy == 'Travel'){
@@ -177,14 +206,52 @@ var $sfm_act_Transactions = new function sfm_act_Transactions() {
 				_click(_f("main").s_textinput("txtIp").near(_f("main").uiftetextfield($object)));
 			}
 			
-			
 			_wait(5000,_isVisible(_f("main").s_label("Properties for Field: "+$object)));
 			_click($sfm_pg_screenDesigner.btn_ConfLookup);
 			_wait(10000,_isVisible($sfm_pg_screenDesigner.txt_lookupName));
-			_setSelected($sfm_pg_screenDesigner.sel_LkupTemplate,$lookupTempName);
+			_log($lookupTempName);
+			if ($lookupTempName!=="" && $lookupTempName!==null) {
+				_setSelected($sfm_pg_screenDesigner.sel_LkupTemplate,$lookupTempName);
+			}
 			_wait(10000);
 			
-			var $fieldLabel;
+			var $fieldNameList=new Array;
+			var $addToSearchList=new Array;
+			var $addToDisplayList=new Array;
+			var $addToBubbleList=new Array;
+			//Add fields to lookup search page, display, and bubble
+			if ($lookupFieldsToAdd!=null && $lookupFieldsToAdd!="") {
+				$fieldNameList=$lookupFieldsToAdd[0];
+				$addToSearchList=$lookupFieldsToAdd[1];
+				$addToDisplayList=$lookupFieldsToAdd[2];
+				$addToBubbleList=$lookupFieldsToAdd[3];
+				
+				for (var $i = 0; $i < $fieldNameList.length; $i++) {
+					_log($fieldNameList[$i]);
+					this.lookUpScrollIntoView($fieldNameList[$i],$bo_pg_sfmTransactionAndDesigner.scroll_filedScroll);
+					
+					if ($addToSearchList[$i]==true) {
+						_log("inside search field list");
+						_click(_f("main").s_button("/Add to search field list/").near(_f("main").s_label($fieldNameList[$i])));
+					}
+					if ($addToDisplayList[$i]==true) {
+						_log("inside Add to result field list");
+						_click(_f("main").s_button("/Add to result field list/").near(_f("main").s_label($fieldNameList[$i])));
+					}
+					if ($addToBubbleList[$i]==true) {
+						_log("inside Add to bubble field list");
+						_click(_f("main").s_button("/Add to bubble field list/").near(_f("main").s_label($fieldNameList[$i])));
+					}
+				}
+			}
+			if ($lookupFilterDetails!==null && $lookupFilterDetails!=="") {
+			var $fieldCombo=$lookupFilterDetails[0];
+			var $conditionsCombo=$lookupFilterDetails[1];
+			var $operandTypeCombo=$lookupFilterDetails[2];
+			var $operandValue=$lookupFilterDetails[3];
+			var $lookupAdvExpr=$lookupFilterDetails[4];
+			
+			var $fieldLabeRowNo;
 			var $oprTypeCombo;
 			var $oprValFieldType;
 			var $oprValdateFieldType;
@@ -193,32 +260,55 @@ var $sfm_act_Transactions = new function sfm_act_Transactions() {
 				_wait(5000);
 				var $temp=$i;
 				var $label=$temp+1;
-				$fieldLabel=_f("main").s_label($label.toString()).near($sfm_pg_screenDesigner.lbl_lookupFilterLabel);
-				_setSelected(_f("main").s_combobox("fieldCombo").near($fieldLabel),$fieldCombo[$i]);
-				_setSelected(_f("main").s_dropdownlist("conditionsCombo").near($fieldLabel),$conditionsCombo[$i]);
-				_setSelected(_f("main").s_dropdownlist("operandTypeCombo").near($fieldLabel),$operandTypeCombo[$i]);
+				$fieldLabeRowNo=_f("main").s_label($label.toString()).near($sfm_pg_screenDesigner.lbl_lookupFilterLabel);
+				_setSelected(_f("main").s_combobox("fieldCombo").near($fieldLabeRowNo),$fieldCombo[$i]);
+				_setSelected(_f("main").s_dropdownlist("conditionsCombo").near($fieldLabeRowNo),$conditionsCombo[$i]);
+				_setSelected(_f("main").s_dropdownlist("operandTypeCombo").near($fieldLabeRowNo),$operandTypeCombo[$i]);
 				
-				
-				$oprTypeCombo=_f("main").s_dropdownlist("operandTypeCombo").near($fieldLabel);
+				$oprTypeCombo=_f("main").s_dropdownlist("operandTypeCombo").near($fieldLabeRowNo);
 				$oprValcomboFieldType=_f("main").s_combobox("/picklist/").rightOf($oprTypeCombo);
-				if (_exists($oprValcomboFieldType)) {
-					_setValue(_f("main").s_textinput("/textInput/").inside($oprValcomboFieldType),$operandValue[$i]);
-				}else{
+				
+				if ($operandTypeCombo[$i]=="Value") {
+					_log("final testing: "+$operandValue[$i]+" "+$operandValue[$i].includes("SVMX.CURRENTRECORD"));
+					if (_exists($oprValcomboFieldType) && ($operandValue[$i].includes("SVMX.CURRENTRECORD")==false)) {
+						_setSelected($oprValcomboFieldType,$operandValue[$i]);
+					}else {
+						var $operantTextValue=_f("main").s_textinput(3).near($oprTypeCombo);
+						_setValue($operantTextValue,$operandValue[$i]);
+					}
+				}else {
+					_setSelected($oprValcomboFieldType,$operandValue[$i]);
+				}
+/*				if ((_exists($oprValcomboFieldType) && $operandTypeCombo[$i]=="Function") || $fieldCombo[$i]=="Record Type ID") {
+					//_setValue(_f("main").s_textinput("/textInput/").inside($oprValcomboFieldType),$operandValue[$i]);
+					_setSelected($oprValcomboFieldType,$operandValue[$i]);
+				}else if (_exists($oprValcomboFieldType) && $operandTypeCombo[$i]=="Value") {
+					var $operantTextValue=_f("main").s_textinput(3).near($oprValcomboFieldType);
+					_setValue($operantTextValue,$operandValue[$i]);
+				} else{
 					_log("Inside else loop");
 					$oprValdateFieldType=_f("main").datefield("/date/").rightOf($oprTypeCombo);
 					if (_exists($oprValdateFieldType)) {
 						_setValue(_f("main").s_richeditabletext("/textDisplay/").inside($oprValdateFieldType),$operandValue[$i]);
 					}else{
 						_log("last else loop");
-						_setValue(_f("main").s_textinput("operandValue").near($fieldLabel),$operandValue[$i]);
+						_setValue(_f("main").s_textinput("operandValue").near($fieldLabeRowNo),$operandValue[$i]);
 					}	
 				}
-				
+*/				
 			}
-			//_wait(5000);
-			_setValue($sfm_pg_screenDesigner.txt_lookupAdvExpr,$lookupAdvExpr);
-			_click($sfm_pg_screenDesigner.chk_lookupDefault);
 			_wait(5000);
+			_setValue($sfm_pg_screenDesigner.txt_lookupAdvExpr,$lookupAdvExpr);
+			}
+			var $cond=_getValue(_f("main").s_checkbox("/.*/").near(_f("main").s_label("/Make this/")));
+			if ($cond=="true") {
+				_click($sfm_pg_screenDesigner.chk_lookupDefault);
+			}
+			_wait(5000);
+			if ($noOfRecords!==null && $noOfRecords!=="") {
+				_setSelected($sfm_pg_screenDesigner.sel_noOfRecords,$noOfRecords);
+				_wait(1000);
+			}
 			_setValue($sfm_pg_screenDesigner.txt_lookupName, $lookUpName);
 			_setValue($sfm_pg_screenDesigner.txt_lookupId, $lookUpName);
 			_click($sfm_pg_screenDesigner.btn_lookupSaveAs);
@@ -231,6 +321,58 @@ var $sfm_act_Transactions = new function sfm_act_Transactions() {
 			_wait(5000);
 			_setStrictVisibilityCheck(false);
 		};
+		
+		/**
+		 * Author		:	Anand Kakhandaki
+		 * Function		: 	To Delete lookup filters and save 
+		 * Parameter	:	$object=Name of the object on which lookup configured
+		 * 					$lookupTempName = Name of lookup to delete
+		 * 
+		 * Example		: 	Refer _ _ _ for function usage
+		 */
+		this.deleteLookUpFiltersAndSave=function($object,$nearBy,$lookupTempName){
+			this.deleteLookUpFiltersRow($object,$nearBy,$lookupTempName);
+			_wait(3000);
+			_click($sfm_pg_screenDesigner.btn_lookupSave);
+			_wait(10000,_isVisible($sfm_pg_screenDesigner.lbl_lookupSaveConfirmMsg));
+			_click($sfm_pg_screenDesigner.btn_Select);
+			_wait(5000);
+		};
+		
+		/**
+		 * Author		:	Anand Kakhandaki
+		 * Function		: 	To Delete lookup filters 
+		 * Parameter	:	$object=Name of the object on which lookup configured
+		 * 					$lookupTempName = Name of lookup to delete
+		 * 
+		 * Example		: 	Refer _ _ _ for function usage
+		 */
+		this.deleteLookUpFiltersRow=function($object,$nearBy,$lookupTempName){
+			_setStrictVisibilityCheck(true);
+			if($nearBy == 'Parts' || $nearBy == 'Labor' || $nearBy == 'Expense' || $nearBy == 'Travel'){
+				_click(_f("main").s_richtext($object).near(_f("main").s_richtext($nearBy)));
+			}else{
+				//_click(_f("main").s_textinput("txtIp").inside(_f("main").fieldrenderer($fieldName)));
+				_click(_f("main").s_textinput("txtIp").near(_f("main").uiftetextfield($object)));
+			}
+			
+			_wait(5000,_isVisible(_f("main").s_label("Properties for Field: "+$object)));
+			_click($sfm_pg_screenDesigner.btn_ConfLookup);
+			_wait(10000,_isVisible($sfm_pg_screenDesigner.txt_lookupName));
+			_log($lookupTempName);
+			if ($lookupTempName!=="" && $lookupTempName!==null) {
+				_setSelected($sfm_pg_screenDesigner.sel_LkupTemplate,$lookupTempName);
+			}
+			_wait(10000);
+			
+			var $addRow=_f("main").s_button("Add a row").near($sfm_pg_screenDesigner.lbl_lookupFilterLabel);
+			var $comboField=$sfm_pg_screenDesigner.sel_comboField.near($addRow);
+			var $lastRow=_getValue(_f("main").s_label(0).near($comboField));
+			for (var $i = 0; $i < $lastRow; $i++) {
+				_click($sfm_pg_screenDesigner.btn_deleteRow.near($addRow));
+			};			
+		};
+		
 /* commented this in lightning as it is done through generic function
 		this.clonedsfm6343 = function($processName,$sfmName,$sfmPgLayoutName,$dvrRuleName){
 			$sfm_act_SFM.selectSFM($processName,false);
@@ -418,7 +560,10 @@ var $sfm_act_Transactions = new function sfm_act_Transactions() {
 	 * Examples		:	Refer RS_10445.sah
 	 */
 	this.addLookupContext = function($contextSourceObj,$overrideContext,$contextObj,$matchingField){
-		_setSelected($sfm_pg_sfmDesigner.sel_ContextSource,$contextSourceObj);
+		//$contextSourceObj is not available for header object
+		if ($contextSourceObj!=null && $contextSourceObj!="") {
+			_setSelected($sfm_pg_sfmDesigner.sel_ContextSource,$contextSourceObj);
+		}
 		if ($overrideContext) {
 			_click($sfm_pg_sfmDesigner.chk_OverrideContext);
 		}
@@ -656,7 +801,7 @@ var $sfm_act_Transactions = new function sfm_act_Transactions() {
 			};
 			
 			
-			/**
+				/**
 			 * Author		:	Anand Kakhandaki
 			 * Function		: 	To create SFM transacion and add value to property page
 			 * Parameter	:	$sfmName=sfm name
@@ -670,6 +815,7 @@ var $sfm_act_Transactions = new function sfm_act_Transactions() {
 			 * Example		:	Refer RS_10458.sah file for function usage
 			 */
 			this.sfmPropertiesPage=function($sfmName,$sfmID,$sfmDescription,$sfmType,$srcHeaderObj,$srcChildObj,$trgHeaderObj,$trgChildObj){
+				_selectDomain($g_domain);
 				_click($sfm_pg_screenDesigner.btn_propoties);
 				_wait(10000,_isVisible($bo_pg_sfmTransactionAndDesigner.txt_name));
 				_setValue($bo_pg_sfmTransactionAndDesigner.txt_name, $sfmName);
@@ -677,14 +823,90 @@ var $sfm_act_Transactions = new function sfm_act_Transactions() {
 				_setValue($sfm_pg_screenDesigner.txt_sfmDescription,$sfmDescription);
 				_setSelected($sfm_pg_screenDesigner.sel_createSFMTransaction,$sfmType);
 				if ($sfmType=="from Source Object to create new header and child records" || $sfmType=="from Source Object to create new child records only") {
+					if($srcHeaderObj=='Work Order'){
+						_setValue($sfm_pg_screenDesigner.txt_sourceRecordText,"Wo");
+						_wait(500);
+						_click($sfm_pg_screenDesigner.lbl_workOrder);
+					}else if($srcHeaderObj=='Installed Product'){
+						_setValue(_f("main").s_textinput("textInput"),"In");
+						_setSelected(_f("main").s_combobox("objCombo1").inside(_f("main").s_panel("Use data from...")),"Installed Product");
+						_click(_f("main").s_checkbox("Installed Product (Parent)"));
+					}
+					else{
 					_setSelected($sfm_pg_screenDesigner.sel_sourceHeaderObject,$srcHeaderObj);
+					}
+					
+					
+				}else if ($sfmType=="to generate a Checklist/Survey type of Process") {
+					//Work order selection is not working as it taking some random value
+					//_setSelected($sfm_pg_screenDesigner.sel_checkListAvaialble,$srcHeaderObj);
+					_setValue($sfm_pg_screenDesigner.txt_checkListAvaialble,"Wo");
+					_wait(500);
+					_click($sfm_pg_screenDesigner.lbl_workOrder);
+				} 
+	/*			
+				if($trgHeaderObj!=null && $srcHeaderObj=='Installed Product' )
+					{
+					_setSelected($sfm_pg_screenDesigner.sel_targetHeaderObject,$trgHeaderObj);
+					_wait(10000,_isVisible(_f("main").s_checkbox($trgChildObj)));
+				
+					}
+				
+				else
+					{
 					_wait(10000,_isVisible(_f("main").s_checkbox($srcChildObj).near($sfm_pg_screenDesigner.lbl_sourceRecordLabel)));
 					_click(_f("main").s_checkbox($srcChildObj).near($sfm_pg_screenDesigner.lbl_sourceRecordLabel));
-				} 
+					_setSelected($sfm_pg_screenDesigner.sel_targetHeaderObject,$trgHeaderObj);
+					_wait(10000,_isVisible(_f("main").s_checkbox($trgChildObj)));
+					_click(_f("main").s_checkbox($trgChildObj).near($sfm_pg_screenDesigner.lbl_targetRecordLabel));
+				    _wait(2000);
+					}
+				
+		*/		
+				
+			};
+			/**
+			 * Author		:	Lakshmi BS
+			 * Function		: 	To create SFM transacion and add value to property page
+			 * Parameter	:	$sfmName=sfm name
+			 * 					$sfmID=sfm id
+			 * 					$sfmDescription=descriptio
+			 * 					$sfmType=sfm type
+			 * 					$srcHeaderObj=Source header object name
+			 * 					$srcChildObj=source child object name
+			 * 					$trgHeaderObj = target  header object name
+			 * 					$trgChildObj = target child object name
+			 * Example		:	Refer RS_10540.sah file for function usage
+			 */
+			this.sfmProperties=function($sfmName,$sfmID,$sfmDescription,$sfmType,$srcHeaderObj,$srcChildObj,$trgHeaderObj,$trgChildObj){
+				_click($sfm_pg_screenDesigner.btn_propoties);
+				_wait(10000,_isVisible($bo_pg_sfmTransactionAndDesigner.txt_name));
+				_setValue($bo_pg_sfmTransactionAndDesigner.txt_name, $sfmName);
+				_setValue($bo_pg_sfmTransactionAndDesigner.txt_sfmTransactionId, $sfmID);
+				_setValue($sfm_pg_screenDesigner.txt_sfmDescription,$sfmDescription);
+				_setSelected($sfm_pg_screenDesigner.sel_createSFMTransaction,$sfmType);
+				if ($sfmType=="from Source Object to create new header and child records" || $sfmType=="from Source Object to create new child records only") {
+						
+					
+					_setValue(_f("main").s_textinput("textInput"),"In");
+					_setSelected(_f("main").s_combobox("objCombo1").inside(_f("main").s_panel("Use data from...")),"Installed Product");
+					_click(_f("main").s_checkbox("Installed Product (Parent)"));
+				}else if ($sfmType=="to generate a Checklist/Survey type of Process") {
+					//Work order selection is not working as it taking some random value
+					//_setSelected($sfm_pg_screenDesigner.sel_checkListAvaialble,$srcHeaderObj);
+					_setValue($sfm_pg_screenDesigner.txt_checkListAvaialble,"Wo");
+					_wait(500);
+					_click($sfm_pg_screenDesigner.lbl_workOrder);
+				} else{
 					_setSelected($sfm_pg_screenDesigner.sel_targetHeaderObject,$trgHeaderObj);
 					_wait(10000,_isVisible(_f("main").s_checkbox($trgChildObj)));
 					_click(_f("main").s_checkbox($trgChildObj).near($sfm_pg_screenDesigner.lbl_targetRecordLabel));
 				_wait(2000);
+				}
+				
+				_setSelected($sfm_pg_screenDesigner.sel_targetHeaderObject,$trgHeaderObj);
+				_wait(10000,_isVisible(_f("main").s_checkbox($trgChildObj)));
+				_click(_f("main").s_checkbox($trgChildObj).near($sfm_pg_screenDesigner.lbl_targetRecordLabel));
 			};
 			
 			/**
@@ -707,13 +929,14 @@ var $sfm_act_Transactions = new function sfm_act_Transactions() {
 				var $exprsnName=$ExprFieldsDetails[6];
 				
 				//Mapping Fields
-				var $pickListLabels=$mappingDetails[0];
-				var $pickListValues=$mappingDetails[1];
-				var $textLabels=$mappingDetails[2];
-				var $textValues=$mappingDetails[3];
-				var $mapName=$mappingDetails[4];
-				
-				
+				var $containerName=$mappingDetails[0];
+				var $mapType=$mappingDetails[1];
+				var $pickListLabels=$mappingDetails[2];
+				var $pickListValues=$mappingDetails[3];
+				var $textLabels=$mappingDetails[4];
+				var $textValues=$mappingDetails[5];
+				var $mapName=$mappingDetails[6];
+
 				_click($sfm_pg_screenDesigner.btn_qualifyingCriteriaAndFieldMapping);
 				_wait(10000,_isVisible($sfm_pg_screenDesigner.lbl_qualifyingCriteriaMapping));
 				_click(_f("main").s_label($object).near($sfm_pg_screenDesigner.lbl_qualifyingCriteriaMapping));
@@ -726,18 +949,19 @@ var $sfm_act_Transactions = new function sfm_act_Transactions() {
 					//_keyPress($sfm_pg_expressions.btn_selectExpression, 27);
 				}
 				if ($mappingDetails.length!==0 && $mappingDetails!==null) {
-					$bo_act_mappings.createMapping($pickListLabels, $pickListValues, $textLabels, $textValues, $mapName);
+					$bo_act_mappings.createMapping($containerName,$mapType,$pickListLabels, $pickListValues, $textLabels, $textValues, $mapName);
 				}
-
 			};
+			
 			
 			/**
 			 * Author		:	Anand Kakhandaki
 			 * Function		: 	To add fields to screen designer
-			 * Parameter	:	$headersToAdd = fields to add to header
+			 * Parameter	:	$headersToAdd = Array of fields to add to header
 			 * 					$childToAdd = fields to add to child
 			 * 					$sfmPgLayoutName = page layout name
 			 * Example		:	Refer RS_10462.sah file for function usage
+			 * Note			: Please dont use 
 			 */
 			this.screenDesigner=function($headersToAdd,$childToAdd,$sfmPgLayoutName,$sfmPgLayoutName){
 				var $childObj=$childToAdd[0];
@@ -794,7 +1018,17 @@ var $sfm_act_Transactions = new function sfm_act_Transactions() {
 			_wait(5000,isVisible($bo_pg_sfmTransactionAndDesigner.label_exprSaved));
 		};
 		
-		
+		/**
+		* Author		:	Anand Kakhandaki
+		* Function		: 	To add expression rows
+		* Parameter		:	$comboField = 
+		* 					$comboConditions = 
+		* 					$toggleButton = 
+		* 					$comboInput=
+		* 					$advExpr=
+		* 					$errMsg=
+		* Example		:	Refer RS_10463.sah file for function usage
+		*/
 		this.sfmAddExpressionRows=function($comboField,$comboConditions,$toggleButton,$comboInput,$advExpr,$errMsg){
 			if ($comboField.length==1) {
 				_click($sfm_pg_screenDesigner.btn_deleteRow.near(_f("main").s_label("2")));
@@ -928,7 +1162,6 @@ var $sfm_act_Transactions = new function sfm_act_Transactions() {
 				}
 				_log("$comboField: "+$comboField.length);
 				return [$comboField,$comboConditions,$comboInput];
-			};
-		
+			};	
 		
 };

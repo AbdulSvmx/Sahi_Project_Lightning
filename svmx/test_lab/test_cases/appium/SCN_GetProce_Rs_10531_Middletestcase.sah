@@ -1,0 +1,32 @@
+//Meghana Rao
+
+/*
+ * PRE Requisites to be run in the org before running other scripts - LIGHTNING CODE
+ */
+_writeFile("false", $appiumPath+$sahiIntermediatoryPath, true);
+
+
+var $pre_requisite= _testcase("scenario10531","Verify the GetPrice when one PS line entitled with warranty & other with SCON but WO is not entitled");
+$pre_requisite.start();
+
+_setSpeed($g_stepSpeed);
+
+var $data_excel_10531 = _readExcelFile("/auto/SVMX_Catalyst/fsaautomation/resources/TestData.xlsx","RS_10531",true);
+var $WOName = $data_excel_10531[2]["Data1"];
+
+$bo_act_login.login($g_url, $appiumAdminUn, $appiumAdminPwd);
+$sfm_act_lightningConfig.switchToLightning();
+
+
+_wait(30000);
+_call(top.location.reload());
+$bo_act_navigation.navigateToCreatedRecordUsingGlobalSearchWO($WOName);
+$bo_act_interactiveEntitlement_WO.performInteractiveEntitlementWO_IncidentNotCovered();
+
+
+_writeFile("true", $appiumPath+$sahiIntermediatoryPath, true);
+
+$pre_requisite.end();
+
+
+

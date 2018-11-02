@@ -13,9 +13,7 @@ var $sfm_act_createCustomWizard = new function sfm_act_createCustomWizard() {
 		_selectDomain();
 	};
 	
-// Added by Meghana
-
-	this.addManageWizStepsverify = function($wizTitle,$wizStepType,$wizStepName,$profile, $object){
+	this.addManageWizStepsaddnew = function($wizTitle,$wizStepType,$wizStepName,$object){
 		_selectDomain("/svmx/");
 		_setSelected($sfm_pg_wizards.selectObject,$object);
 		var $wizId = $wizTitle.toLowerCase().replace(/ /g, "_");
@@ -46,8 +44,54 @@ var $sfm_act_createCustomWizard = new function sfm_act_createCustomWizard() {
 			_setSelected($sfm_pg_wizards.btn_wizStepType,$wizStepType);
 			_setSelected($sfm_pg_wizards.btn_stepName,$wizStepName);
 			_click($sfm_pg_wizards.btn_saveStep);
-			_click($sfm_pg_wizards.txt_managePermission);
-			_setSelected($sfm_pg_wizards.select_availableGrpProfiles,$profile);
+			_click($sfm_pg_wizards.btn_saveClose);
+			}
+		
+		
+		_selectDomain();
+	};
+// Added by Meghana
+
+	this.addManageWizStepsverify = function($wizTitle,$wizStepType,$wizStepName,$object){
+		_selectDomain("/svmx/");
+		_setSelected($sfm_pg_wizards.selectObject,$object);
+		var $wizId = $wizTitle.toLowerCase().replace(/ /g, "_");
+		_wait(5000);
+		_log(_isVisible(_span($wizTitle)));
+		if(_isVisible(_span($wizTitle))==false)
+		{
+		_click($sfm_pg_wizards.btn_customNew);
+		_setValue($sfm_pg_wizards.txt_wizardTitle,$wizTitle);
+		_setValue($sfm_pg_wizards.txt_wizardID,$wizId);
+		_click($sfm_pg_wizards.txt_manageWizSteps);
+		_wait(1000);
+		_log(_span($wizStepName));
+		if(_isVisible(_span($wizStepName)) == false)
+		{
+		_click($sfm_pg_wizards.btn_newStep);
+		_setSelected($sfm_pg_wizards.btn_wizStepType,$wizStepType);
+		_setSelected($sfm_pg_wizards.btn_stepName,$wizStepName);
+		_wait(20000);
+		_click($sfm_pg_wizards.btn_saveStep);
+		}
+		_click($sfm_pg_wizards.btn_saveClose);
+		
+		}
+		else
+		{
+			_click(_checkbox("/page1/",_near(_span($wizTitle))));
+			_click($sfm_pg_wizards.btn_edit);
+			_click($sfm_pg_wizards.txt_manageWizSteps);
+			if(_isVisible(_span($wizStepName)) == false)
+			{
+			_click($sfm_pg_wizards.btn_newStep);
+			_setSelected($sfm_pg_wizards.btn_wizStepType,$wizStepType);
+			_setSelected($sfm_pg_wizards.btn_stepName,$wizStepName);
+			_wait(20000);
+			_click($sfm_pg_wizards.btn_saveStep);
+				
+			}
+			
 			_click($sfm_pg_wizards.btn_saveClose);
 			}
 		
@@ -219,7 +263,7 @@ var $sfm_act_createCustomWizard = new function sfm_act_createCustomWizard() {
 
 	this.clickWizardBtn = function($sfmName) {
 		_click(_span($sfmName));
-		_selectDomain($domainName);
+		_selectDomain($g_domain);
 		_wait(25000,_isVisible(_div($sfmName)));
 
 	};
@@ -460,7 +504,7 @@ var $sfm_act_createCustomWizard = new function sfm_act_createCustomWizard() {
 	};
 
 	this.verify10429 = function(){
-		_selectDomain($domainName);
+		_selectDomain($g_domain);
 		_setStrictVisibilityCheck(true);
 		$readOnlyAttribute = "";
 		$expectedErrorMsg = "Required field is blank: Account";
@@ -490,11 +534,11 @@ var $sfm_act_createCustomWizard = new function sfm_act_createCustomWizard() {
 		_click($sfm_pg_wizardWindow.link_addWorkDetail);
 		_click($sfm_pg_wizardWindow.btn_searchProduct);
 		_click($sfm_pg_wizardWindow.chk_multiSelect);
-		var $divs=  _count("_div","/grid-cell-inner/",_under(_parentNode(_span("/Name/"), "DIV", 4)));
+		var $divs=  _count("_div","/grid-cell-inner/",_under(_parentNode(_span("/Name/",_near(_div("Product search"))), "DIV", 4)));
 		_log("No of Product = "+$divs);
 		_click($sfm_pg_wizardWindow.btn_addProduct);
 		
-		var $divs1= _count("_div","/grid-cell-inner/",_in(_div("/gridview/")));
+		var $divs1= _count("_div","/grid-cell-inner/",_in(_div("/grid-view/")));
 		_log("No of parts = "+$divs1);
 		if($divs==$divs1){
 			_log("Pass ::: Selected parts are added");
@@ -814,9 +858,13 @@ var $sfm_act_createCustomWizard = new function sfm_act_createCustomWizard() {
 		this.clickSvmxWoLink();
 		_wait(5000,isVisible($sfm_pg_wo.btn_wo_new));
 		_click($sfm_pg_wo.btn_wo_new);
+		if(_isVisible($sfm_pg_wo.btn_next)){
+			_click($sfm_pg_wo.btn_next);
+		} 
 		_click($sfm_pg_wo.btn_wo_edit_save);
 		_wait(10000,_isVisible($sfm_pg_wo.label_wo)); 
 		$woName= _getText($sfm_pg_wo.label_wo);
+		_log($woName);
 		return $woName;
 		
 	};
@@ -850,10 +898,12 @@ var $sfm_act_createCustomWizard = new function sfm_act_createCustomWizard() {
 		$sfm_pg_wo.openAppLauncher();
 		_wait(3000);
 		$sfm_act_createCustomWizard.clickSvmxWoLink();
+		//_setStrictVisibilityCheck(true);
 		_click($sfm_pg_wo.btn_wo_new);
 		if(_isVisible($sfm_pg_wo.btn_next)){
 			_click($sfm_pg_wo.btn_next);
 		}
+		//_setStrictVisibilityCheck(false);
 		_click($sfm_pg_wo.txt_actualOnsiteResponse);
 		_click($sfm_pg_wo.cell_today);
 		_click($sfm_pg_wo.txt_actualInitialResponse);
@@ -879,6 +929,7 @@ var $sfm_act_createCustomWizard = new function sfm_act_createCustomWizard() {
         _click(_link("Field Service"));
         
 		_click($sfm_pg_wo.btn_wo_edit_save);
+		_wait(3000);
 		 $woId= _getText($sfm_pg_wo.label_wo);
 		return $woId;
 	};
@@ -891,15 +942,29 @@ var $sfm_act_createCustomWizard = new function sfm_act_createCustomWizard() {
 		//Check if the SFM process link exists
 		_assertExists(_span($sfmname));
 		_click(_span($sfmname));
-		_wait(4000);
+		_wait(10000);
 		};
 		
 		this.addSubtractDates = function($given_date,$num_of_days) {
 			//This function adds or subtracts calendar days from a given date and returns in the
 			//form of MM/DD/YYYY
+			//Author: Janaki.
 			var $result_date = new Date($given_date);
+			var $monthString; var $dateString;
 	        $result_date.setDate($given_date.getDate()+$num_of_days);
-	        $result_date = ($result_date.getMonth()+1) + "/" + $result_date.getDate() + "/" + $result_date.getFullYear();
+	        if(($result_date.getMonth()+1) <10){
+	        	$monthString = "0"+($result_date.getMonth()+1);
+	        }
+	        else {
+	        	$monthString = $result_date.getMonth()+1;
+	        }
+	        if($result_date.getDate() < 10){
+	        	$dateString = "0"+$result_date.getDate();
+	        }
+	        else{
+	        	$dateString = $result_date.getDate();
+	        }
+	        $result_date = $monthString + "/" + $dateString + "/" + $result_date.getFullYear();
 	        return $result_date;
 		};
 		this.clickSvmxWoLink = function() {
@@ -912,6 +977,25 @@ var $sfm_act_createCustomWizard = new function sfm_act_createCustomWizard() {
 				_click(_link("Work Orders[1]"));
 			 }
 };
+
+	this.addWizStepWithoutName = function($wizStepType,$wizStepName,$profile){
+		
+		_click($sfm_pg_wizards.txt_manageWizSteps);
+		if(_isVisible(_span($wizStepName))){
+			_log("Process already added to wizard");
+		}
+		else{
+			_click($sfm_pg_wizards.btn_newStep);
+			_setSelected($sfm_pg_wizards.btn_wizStepType,$wizStepType);
+			_setSelected($sfm_pg_wizards.btn_stepName,$wizStepName);
+			_click($sfm_pg_wizards.btn_saveStep);
+//			_click($sfm_pg_wizards.txt_managePermission);
+//			_setSelected($sfm_pg_wizards.select_availableGrpProfiles,$profile);
+//			_click(_image("Add"));
+			_click($sfm_pg_wizards.btn_saveClose);
+			_selectDomain();
+		}	
+	};
 	  
 
 	

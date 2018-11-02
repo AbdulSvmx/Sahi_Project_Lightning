@@ -20,6 +20,7 @@ var $textLabels = ["Closed By","Site"];
 var $textValues = ["SVMX.CURRENTUSERID","SVMX.USERTRUNK"];
 var $inventoryLocation = "Lightning Automation Location";
 var $productName = "Chrome";
+var $mapType = "Value Map for Existing Records";
 
 //Appending current timestamp to process name to make it unique.
 var $timeStamp = $bo_act_navigation.getCurrentTimeStamp();
@@ -31,7 +32,7 @@ var $mapName = $processName + "mp";
 //Login and switch to lightning
 $bo_act_login.login($g_url,$sfmlUsn,$sfmlPwd);
 $sfm_act_lightningConfig.switchToLightning();
-
+_wait(15000);
 //Get current user name
 _click($sfm_pg_wo.link_profileImageRightCorner);
 var $currentUser = _getText($sfm_pg_wo.link_currentUserName);
@@ -47,8 +48,8 @@ _click($bo_pg_sfmTransactionAndDesigner.btn_quickSave1);
 _click($bo_pg_sfmTransactionAndDesigner.btn_qualifyingCriteriaAndFieldMapping);
 
 //Set up the mapping with SVMX.CURRENTRECORD literals for Header
-_selectDomain($domainName);
-$bo_act_mappings.createMapping("Work Order",[],[],$textLabels,$textValues,$mapName);
+_selectDomain($g_domain);
+$bo_act_mappings.createMapping("Work Order",$mapType,[],[],$textLabels,$textValues,$mapName);
 _setSpeed(1000);
 //Add the custom process to SFM wizard.
 $sfm_act_wizards.addToWizard($object_name,$currentWizardName,"SFM",$processName);
@@ -61,10 +62,10 @@ $bo_act_navigation.navigateToCreatedRecordUsingGlobalSearch($wo_number);
 //Launch the process in SFM Delivery
 $sfm_act_createCustomWizard.clickWizardlinks($processName);
 _wait(3000);
-_selectDomain($domainName);
+_selectDomain($g_domain);
 
 //Verify the values in header
-var $verifyResult = $sfm_act_SFM.verifyValuesInDelivery($textLabels,$expValues,[],[],[],[],[],[]);
+var $verifyResult = $sfm_act_SFM.verifyValuesInDelivery($textLabels,$expValues,[],[],[],[],[],[],[],[]);
 _assertTrue($verifyResult,"Following Literals are verified in header- SVMX.CURRENTUSERID and SVMX.USERTRUNK");
 
 //Create mapping for child lines by navigating to SFM Designer from Delivery.
@@ -76,13 +77,14 @@ _wait(5000);
 _selectWindow("/SFM Transaction Designer/");
 _wait(10000);
 $textLabels = ["Canceled By","Consumed From Location"];
+$mapType = "Value Map for New Records";
 _click($bo_pg_sfmTransactionAndDesigner.btn_qualifyingCriteriaAndFieldMapping);
-$bo_act_mappings.createMapping("Parts",[],[],$textLabels,$textValues,$mapName);
+$bo_act_mappings.createMapping("Parts",$mapType,[],[],$textLabels,$textValues,$mapName);
 _closeWindow();
 _selectWindow();
 
 //Clear Servicemax cache in service delivery.
-_selectDomain($domainName);
+_selectDomain($g_domain);
 $sfm_act_lightningConfig.clearServicemaxCache();
 //Add child line item
 $textLabels = ["Line Qty"];

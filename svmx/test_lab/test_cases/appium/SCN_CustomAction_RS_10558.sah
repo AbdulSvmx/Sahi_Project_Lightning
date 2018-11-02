@@ -1,0 +1,35 @@
+var $scenario_10558 = _testcase("scenario_10558","Verify custom action URL functionality");
+$scenario_10558.start();
+var $actionTitle = "10558_Action";
+var $wizTitle = "10558_Action";
+var $profile="auto group profile";
+$bo_act_login.login($g_url, $appiumAdminUn, $appiumAdminPwd);
+$sfm_act_lightningConfig.switchToLightning();
+_wait(5000);
+$bo_act_navigation.navigateToSfmCustomAction();
+_setSelected(_select("/ManageAction/",_rightOf(_span("Manage Custom Actions for"))),"Work Order");
+//Add If Here
+if(_isVisible(_span($actionTitle,_under(_heading2("User-defined Custom Actions"))))){
+	_log("Action is already present");
+}
+else{
+	_click(_submit("/New/",_near(_heading2("User-defined Custom Actions"))));
+	_setSelected(_select(0,_rightOf(_label("Action Type"))),"URL");
+	_setValue(_textbox(0,_rightOf(_label("Action Title"))),$actionTitle);
+	_setValue(_textbox(0,_rightOf(_label("Action ID"))),$actionTitle);
+	_setValue(_textbox(0,_rightOf(_label("URL To Launch"))),"www.motogp.com");
+	_click(_button("Add"));
+	_setValue(_textbox(0,_near(_div("Parameter Name"))),"record");
+	_setSelected(_select(0,_near(_div("Parameter Value Type"))),"Field Name");
+	_wait(5000);
+	_setSelected(_select(1,_near(_div("Parameter Value"))),"Work Order Number");
+	_click(_submit("Save & Close"));
+	
+}
+$bo_act_navigation.navigateToSfmWizard();
+_selectDomain("/svmx/");
+_setSelected($sfm_pg_wizards.selectObject,"Work Order");
+_wait(6000);
+$bo_act_navigation.editWizard("AutoRegression");
+$sfm_act_createCustomWizard.addWizStepWithoutName("Others", $wizTitle, $profile);
+$scenario_10558.end();

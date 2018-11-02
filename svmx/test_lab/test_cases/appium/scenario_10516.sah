@@ -1,0 +1,26 @@
+//Meghana Rao
+
+/*
+ * PRE Requisites to be create the SFM Process for childlines for Zero Lines
+ */
+_writeFile("false", $appiumPath+$sahiIntermediatoryPath, true);
+
+var $pre_requisite= _testcase("scn_rs10516_regression","Testing Create SFM for Allow Zero Lines");
+$pre_requisite.start();
+_setSpeed($g_stepSpeed);
+$bo_act_login.login($g_url, $appiumAdminUn, $appiumAdminPwd);
+
+var $randomnumber = $bo_act_common.generateRandomName("Layout");
+// Clone TDM016 with attachment enabled for FSA Automation and add the Zero Lines Scenarios
+var $sfmToBeCloned = "Manage Work Order Lines - Usage";
+var $sfmName_2 = "SFMProcessforRS_10516";
+var $sfmTemplateSaveAsName = "Page"+$randomnumber+"";
+var $targetObjectName = "Work Order";
+$bo_act_SFM.clnStandardSFM_zerolines($sfmToBeCloned, $sfmName_2, $sfmTemplateSaveAsName);
+
+
+// Adding the SFM Wizard created by cloning TDM016
+var $wizTitle = "AutoRegression";
+$bo_act_navigation.navigateToSfmWizard();
+$sfm_act_createCustomWizard.addManageWizStepsaddnew($wizTitle,"SFM", $sfmName_2, $targetObjectName);
+_writeFile("true", $appiumPath+$sahiIntermediatoryPath, true);

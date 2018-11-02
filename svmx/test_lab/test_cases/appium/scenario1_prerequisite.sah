@@ -20,7 +20,6 @@ $bo_act_SFM.createstandaloneSFM($sfmName_1, $transactiontype, $targetObjectName)
 
 
 // Clone TDM016 with attachment enabled for FSA Automation
-_writeFile("false", $appiumPath+$sahiIntermediatoryPath, true);
 
 var $sfmToBeCloned = "Manage Work Order Lines - Usage";
 var $sfmName_2 = "EditWoAutoTimesstamp";

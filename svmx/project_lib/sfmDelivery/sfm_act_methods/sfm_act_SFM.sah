@@ -17,22 +17,172 @@ var $sfm_act_SFM = new function sfm_act_SFM() {
 		_setValue($bo_pg_sfmTransactionAndDesigner.txt_name, $sfmName);
 		_setValue($bo_pg_sfmTransactionAndDesigner.txt_sfmTransactionId, "");
 		_setValue($bo_pg_sfmTransactionAndDesigner.txt_sfmTransactionId, $sfmName);
-		_setValue($bo_pg_sfmTransactionAndDesigner.txt_name, "");
-		_setValue($bo_pg_sfmTransactionAndDesigner.txt_name, $sfmName);
+//		_setValue($bo_pg_sfmTransactionAndDesigner.txt_name, "");
+//		_setValue($bo_pg_sfmTransactionAndDesigner.txt_name, $sfmName);
 		_click($bo_pg_sfmTransactionAndDesigner.btn_screenDesigner);
 		_wait(5000);
 		_setSelected($bo_pg_sfmTransactionAndDesigner.sel_sfmTemplate,
 				$sfmTemplate);
+		_wait(10000);
 		_setValue($bo_pg_sfmTransactionAndDesigner.txt_sfmSavePageLayoutAs,
 				$sfmTemplateSaveAsName);
 		_setValue($bo_pg_sfmTransactionAndDesigner.txt_sfmSavePageLayoutAsId,
 				$sfmTemplateSaveAsName);
-		_wait(5000);
-		//_click($bo_pg_sfmTransactionAndDesigner.btn_quickSave1);
-		//_wait(3000);
+		_click($bo_pg_sfmTransactionAndDesigner.btn_quickSave);
+		_wait(10000);
+		_click($bo_pg_sfmTransactionAndDesigner.btn_quickSave1);
+		_wait(10000);
 		if($fieldName.length > 0){
 			$sfm_act_SFM.addFieldToScreen($fieldName, $containerName);
 		}
+	};
+
+	
+		this.dvrScenario5 = function($sfmNameToBeCloned, $sfmName, $isCustom,
+			 $sfmTemplateSaveAsName,$sfmTemplate, $fieldName, $containerName,$bProcessStatus) 
+			 {
+		$bo_act_navigation.navigateToSfmTransactionDesigner();
+		_click($bo_pg_sfmTransactionAndDesigner.btn_yourCustomSfmTransactions);
+		_setValue($bo_pg_sfmTransactionAndDesigner.lbl_searchSFM, $sfmName);
+		_wait(10000);
+		
+		_setStrictVisibilityCheck(false);
+		_setStrictVisibilityCheck(true);
+//		
+		
+		if (_isVisible(_f("main").s_checkbox("/chk/i").leftOf(_f("main").s_label($sfmName), 10, 10))) {
+			_log("Process exists successfully");
+			$bProcessStatus = false;
+			//_click(_f("main").s_checkbox("/chk/i").leftOf(_f("main").s_label($sfmNameToBeCloned), 10, 10));
+			
+		} else if (_isVisible(_f("main").s_checkbox(2).leftOf(_f("main").s_label($sfmName), 10, 10))) {
+			_log("Process does  exists ");
+			$bProcessStatus = false;
+			
+			} else{
+				_log("Process does not exists ");
+				$bProcessStatus = true;
+				$bo_act_navigation.navigateToSfmTransactionDesigner();
+//				_setSpeed($g_stepSpeed);
+				_wait(10000);
+					 
+				_setSpeed(3000);
+				
+				//$sfm_act_SFM.selectSFM($sfmNameToBeCloned, $isCustom);
+
+				_setValue($bo_pg_sfmTransactionAndDesigner.txt_standardSfmTransactionQuickFind,
+						$sfmNameToBeCloned);
+				_setStrictVisibilityCheck(false);
+				_setStrictVisibilityCheck(true);
+//				
+				 
+				if (_isVisible(_f("main").s_checkbox("/chk/i").leftOf(_f("main").s_label($sfmNameToBeCloned), 10, 10))) {
+					_wait(3000);
+					_click(_f("main").s_checkbox("/chk/i").leftOf(_f("main").s_label($sfmNameToBeCloned), 10, 10));
+
+				} else if (_isVisible(_f("main").s_checkbox(2).leftOf(_f("main").s_label($sfmNameToBeCloned), 10, 10))) {
+					_wait(3000);
+					_click(_f("main").s_checkbox(2).leftOf(_f("main").s_label($sfmNameToBeCloned), 10, 10));
+
+				} else {
+					_click(_f("main").s_checkbox("/CheckBox/").leftOf(_f("main").s_label($sfmNameToBeCloned), 10, 10));
+				}
+				 _setStrictVisibilityCheck(false);
+
+				
+				_click($bo_pg_sfmTransactionAndDesigner.btn_clone);
+				_wait(50000, _isVisible($bo_pg_sfmTransactionAndDesigner.txt_name));
+				_setValue($bo_pg_sfmTransactionAndDesigner.txt_name, "");
+				_setValue($bo_pg_sfmTransactionAndDesigner.txt_name, $sfmName);
+				_setValue($bo_pg_sfmTransactionAndDesigner.txt_sfmTransactionId, "");
+				_setValue($bo_pg_sfmTransactionAndDesigner.txt_sfmTransactionId, $sfmName);
+				_setValue($bo_pg_sfmTransactionAndDesigner.txt_name, "");
+				_setValue($bo_pg_sfmTransactionAndDesigner.txt_name, $sfmName);
+				_click($bo_pg_sfmTransactionAndDesigner.btn_screenDesigner);
+				_wait(5000);
+				_setSelected($bo_pg_sfmTransactionAndDesigner.sel_sfmTemplate,
+						$sfmTemplate);
+				_setValue($bo_pg_sfmTransactionAndDesigner.txt_sfmSavePageLayoutAs,
+						$sfmTemplateSaveAsName);
+				_setValue($bo_pg_sfmTransactionAndDesigner.txt_sfmSavePageLayoutAsId,
+						$sfmTemplateSaveAsName);
+				_wait(5000);
+			
+		//$sfm_act_SFM.addFieldToScreen($fieldName, $containerName);
+		//$sfm_act_SFM.partsNotMandatory();
+		//$sfm_act_SFM.partsMultiAdd("--None--");
+
+		//create Data validation rule
+		 }
+		 	
+		
+		_setStrictVisibilityCheck(false);
+		
+		return $bProcessStatus;
+	};
+	
+	this.sfmProcessCheck = function($sfmName,$bProcessStatus) 
+			 {
+		$bo_act_navigation.navigateToSfmTransactionDesigner();
+		_click($bo_pg_sfmTransactionAndDesigner.btn_yourCustomSfmTransactions);
+		_setValue($bo_pg_sfmTransactionAndDesigner.lbl_searchSFM, $sfmName);
+		_wait(10000);
+		
+		_setStrictVisibilityCheck(false);
+		_setStrictVisibilityCheck(true);
+		
+		
+		if (_isVisible(_f("main").s_checkbox("/chk/i").leftOf(_f("main").s_label($sfmName), 10, 10))) {
+			_log("Process exists successfully");
+			$bProcessStatus = true;
+			//_click(_f("main").s_checkbox("/chk/i").leftOf(_f("main").s_label($sfmNameToBeCloned), 10, 10));
+			
+		} else if (_isVisible(_f("main").s_checkbox(2).leftOf(_f("main").s_label($sfmName), 10, 10))) {
+			_log("Process does  exists ");
+			$bProcessStatus = true;
+			
+		}
+		else{
+				_log("Process does not exists ");
+				$bProcessStatus = false;
+		 }
+		 	
+		
+		_setStrictVisibilityCheck(false);
+		
+		return $bProcessStatus;
+	};
+	/**
+	 * Author		:	Anand Kakhandaki
+	 * Function		:	To edit custom process
+	 * Parameters	:	$sfmName: Process name
+	 * Examples		:	Refer RS_10499.sah
+	 */
+	this.editCustomProcess=function($sfmName){
+		$bo_act_navigation.navigateToSfmTransactionDesigner();
+		_wait(20000,_isVisible($bo_pg_sfmTransactionAndDesigner.btn_yourCustomSfmTransactions));
+		_click($bo_pg_sfmTransactionAndDesigner.btn_yourCustomSfmTransactions);
+		_setValue($bo_pg_sfmTransactionAndDesigner.lbl_searchSFM, $sfmName);
+		_wait(10000);
+		_click(_f("main").s_label($sfmName).near(_f("main").processlistitemrenderer($sfmName)));
+		_wait(20000,_isVisible($sfm_pg_screenDesigner.btn_propoties));
+	};
+	
+	
+	this.checkCustomProcess=function($sfmName){
+		var $retVal=null;
+		$bo_act_navigation.navigateToSfmTransactionDesigner();
+		_wait(20000,_isVisible($bo_pg_sfmTransactionAndDesigner.btn_yourCustomSfmTransactions));
+		_click($bo_pg_sfmTransactionAndDesigner.btn_yourCustomSfmTransactions);
+		_setValue($bo_pg_sfmTransactionAndDesigner.lbl_searchSFM, $sfmName);
+		
+		_wait(10000);
+		if (_isVisible(_f("main").s_label($sfmName).near(_f("main").processlistitemrenderer($sfmName)))) {
+			$retVal=true;
+		}else {
+			$retVal=false;
+		}
+		return $retVal;
 	};
 	
 	/**
@@ -40,56 +190,63 @@ var $sfm_act_SFM = new function sfm_act_SFM() {
 	 * If Container is Order Status then field is added to header otherwise to Child lines
 	 */
 	this.addFieldToScreen = function($fieldName, $containerName) {
-		for (var $i = 0; $i < $containerName.length; $i++) {
-			if ($containerName[$i] == 'Order Status' || $containerName[$i] == 'Work Order' ) {
-				$bo_pg_sfmTransactionAndDesigner.addField($fieldName[$i],
-						$containerName[$i]);
-			} else {
-				if($containerName[$i] == 'Parts'){
-					_setValue(_f("main").s_hscrollbar("horizontalScrollBar").near(_f("main").s_richtext("Parts")),"00");
-				}else if($containerName[$i] == 'Labor'){
-					_setValue(_f("main").s_hscrollbar("horizontalScrollBar").near(_f("main").s_richtext("Labor")),"00");
-				}else if($containerName[$i] == 'Expenses'){
-					_setValue(_f("main").s_hscrollbar("horizontalScrollBar").near(_f("main").s_richtext("Expenses")),"00");
-				}else{
-					_setValue(_f("main").s_hscrollbar("horizontalScrollBar").near(_f("main").s_richtext("Travel")),"00");
-				}				
-				_click(_f("main").s_datagroup("dataGroup").near(
-						_f("main").s_richtext($containerName[$i])));
-				//_setValue(_f("main").s_textinput("searchText[4]"),$fieldName[$i]);
-				_setValue($bo_pg_sfmTransactionAndDesigner.txt_quickFindField, $fieldName[$i]);
-				if($fieldName[$i]=="AutoContact"){
-					_doubleClick($sfm_pg_screenDesigner.lbl_autoContact);
-					//$sfm_act_Transactions.addLookupContext();
+		for (var $i = 0; $i < $fieldName.length; $i++) {
+			if ($containerName[$i] == 'Order Status') {
+				//$bo_pg_sfmTransactionAndDesigner.addField($fieldName[$i],$containerName[$i]);
+				_click(_f("main").fieldrenderer("[object Object]").near(_f("main").formitemlabel($containerName[$i])));
+			} else if($containerName[$i] == 'Parts' || $containerName[$i] == 'Labor' || $containerName[$i] == 'Expenses' || $containerName[$i] == 'Travel'  ){
+				if(_isVisible(_f("main").s_hscrollbar("horizontalScrollBar").near(_f("main").s_richtext($containerName[$i])))){
+					_setValue(_f("main").s_hscrollbar("horizontalScrollBar").near(_f("main").s_richtext($containerName[$i])),"00");
+				    }
+					_click(_f("main").s_datagroup("dataGroup").near(_f("main").s_richtext($containerName[$i])));
 				}
-				else if($fieldName[$i]=="Activity Type"){
-					_click(_f("main").s_label("Activity Type[1]"));
-					_click(_f("main").s_button("/Add Field/"));
+			else{
+				_click(_f("main").s_datagroup("dataGroup").near(_f("main").s_richtext($containerName[$i])));				
 				}
-				else if($fieldName[$i]=="Case"){
-					_click(_f("main").s_label("Case[3]"));
-					_click(_f("main").s_button("/Add Field/"));
+			//Below logic is used for selecting object from multi match list	
+			_setValue($bo_pg_sfmTransactionAndDesigner.txt_quickFindField, $fieldName[$i]);
+			var $elementName=$fieldName[$i];
+				var $find=true;
+				var $k=0;
+				var $element=null;
+				while ($find) {
+//					_log("search element name: "+$elementName);
+					if ($k==0) {
+						$element=_getValue(_f("main").s_label($elementName).near(_f("main").s_textinput($elementName)));
+					}else{
+						$element=_getValue(_f("main").s_label("/"+$elementName+"/["+$k+"]").near(_f("main").s_textinput($elementName)));
+					}
+//					_log("$element: "+$element);
+					if ($elementName===$element) {
+						$find=false;
+						_click(_f("main").s_label($k).near(_f("main").s_textinput($elementName)));
+					}else {
+						$k++;
+					}
 				}
-				else{
-				_click(_f("main").s_label($fieldName[$i]).near(_f("main").s_button("Add Field")));
 				_click(_f("main").s_button("/Add Field/"));
-			}
-			}
 		}
-		_click($bo_pg_sfmTransactionAndDesigner.btn_quickSave);
-		_wait(3000, _isVisible(_f("main").label("Page saved")));
+		_click($bo_pg_sfmTransactionAndDesigner.btn_pageLayoutSave);
+		_wait(3000, _isVisible($bo_pg_sfmTransactionAndDesigner.lbl_pageLayoutSaved));
+		_click($bo_pg_sfmTransactionAndDesigner.btn_quickSave1);
 	};
+	
+	
 
+		
+
+	
 	this.selectSFM = function($sfmName, $isCustom) {
 		if ($isCustom) {
-			_wait(10000);
 			_setStrictVisibilityCheck(true);
+			_wait(15000,_isVisible($bo_pg_sfmTransactionAndDesigner.btn_yourCustomSfmTransactions));
 			_click($bo_pg_sfmTransactionAndDesigner.btn_yourCustomSfmTransactions);
 			_setValue(
 					$bo_pg_sfmTransactionAndDesigner.txt_yourCustomSfmTransactionsQuickFind,
 					$sfmName);
 
 		} else {
+			_wait(15000,_isVisible($bo_pg_sfmTransactionAndDesigner.txt_standardSfmTransactionQuickFind));
 			_setValue($bo_pg_sfmTransactionAndDesigner.txt_standardSfmTransactionQuickFind,
 					$sfmName);
 		}
@@ -143,17 +300,49 @@ var $sfm_act_SFM = new function sfm_act_SFM() {
 	 */	
 	this.partsMultiAdd = function($multiAdd){
 		_click(_f("main").s_richtext("Parts"));
-		_setValue(_f("main").s_textinput(0).rightOf(_f("main").uiftetextfield("Allow Multi Add Using")), "");
+		_setSelected(_f("main").s_combobox("/ComboBox/").near(_f("main").uiftetextfield("Allow Multi Add Using")),$multiAdd);
+		/*_setValue(_f("main").s_textinput(0).rightOf(_f("main").uiftetextfield("Allow Multi Add Using")), "");
 		_setValue(_f("main").s_textinput(0).rightOf(_f("main").uiftetextfield("Allow Multi Add Using")), "Select");
 		if($multiAdd =="Case"){
 			_click(_f("main").s_label("Case[2]"));
 		}else{
 			_click(_f("main").s_label($multiAdd));
-		}
-		_click(_f("main").s_button("Save[3]"));
-		_wait(3000, _isVisible(_f("main").label("Page saved")));		
+		}*/
+		_click($bo_pg_sfmTransactionAndDesigner.btn_savePage);
+		_wait(3000, _isVisible($bo_pg_sfmTransactionAndDesigner.label_pageSaved));		
 	};
+	/**
+	 * This function is select/unselect a field read only/required
+	 * Eg : 10429.sah  
+	 */	
+	this.setReadOnlyOrRequired = function($object,$attribute,$value){
+		_click(_f("main").uiftetextfield($object));
+		if($attribute=='Read Only'){
+			if(_getValue($bo_pg_sfmTransactionAndDesigner.chk_readOnly)== $value){
+				//do nothing
+			}else{
+				_click($bo_pg_sfmTransactionAndDesigner.chk_readOnly);
+			}
+			
+		}else{
+			if(_getValue($bo_pg_sfmTransactionAndDesigner.chk_required)== $value){
+				//do nothing
+			}else{
+				_click($bo_pg_sfmTransactionAndDesigner.chk_required);
+			}
+			
+		}
+		_click($bo_pg_sfmTransactionAndDesigner.btn_pageLayoutSave);
+		_wait(3000, _isVisible($bo_pg_sfmTransactionAndDesigner.page_saved));
+	}
 	
+	/**
+	 * This function is set form fill on a field
+	 * $fieldName - field on which formfill to be set
+	 * $objMapping - name of the mapping
+	 * $nearBy - near which the object is present
+	 * Eg : 10444.sah  
+	 */	
 	this.setFormFill = function($fieldName,$objMapping,$nearBy){
 		if($nearBy == 'Parts' || $nearBy == 'Labor' || $nearBy == 'Expense' || $nearBy == 'Travel'){
 			_click(_f("main").s_richtext($fieldName).near(_f("main").s_richtext($nearBy)));
@@ -161,8 +350,8 @@ var $sfm_act_SFM = new function sfm_act_SFM() {
 			_click(_f("main").s_textinput("txtIp").inside(_f("main").fieldrenderer($fieldName)));
 		}
 		_setSelected(_f("main").s_combobox("/ComboBox/").rightOf(_f("main").uiftetextfield("Object Mapping")),$objMapping);
-		_click(_f("main").s_button("Save[3]"));
-		_wait(3000, _isVisible(_f("main").label("Page saved")));
+		_click($bo_pg_sfmTransactionAndDesigner.btn_savePage);
+		_wait(3000, _isVisible($bo_pg_sfmTransactionAndDesigner.label_pageSaved));
 	};
 	
 	//Fill_setSelected(_f("main").s_combobox("ComboBox24974"), "SVMXSTD: Case To Work Order"); text values in SFM Lightning Delivery screen
@@ -299,6 +488,7 @@ var $sfm_act_SFM = new function sfm_act_SFM() {
 	this.addChildLine = function($lineType,$productName,$textLabels,$textValues,$pickListLabels,$pickListValues,$textAreaLabels,$textAreaValues,$checkBoxLabels,$checkBoxValues,$dateLabels,$dateValues,$dateTimeLabels,$dateTimeDateValues,$timeValues){
 		_click(_span($lineType));
 		_click(_span("+ Add "+$lineType));
+		_wait(2000);
 		_setStrictVisibilityCheck(true);
 		if(_isVisible(_div("Recent Items: Products"))){
 			this.performProductSearchInChildLine($productName);
@@ -306,6 +496,8 @@ var $sfm_act_SFM = new function sfm_act_SFM() {
 		var $x = _count("_row", "/.*/",_in(_div("/x-grid-item-container/")));
 		$x = $x-1;
 		_log($x);
+		_call(_div("x-action-col-icon x-action-col-0  x-sfmd-edit-icon["+$x+"]").scrollIntoView());
+		_click(_div("x-action-col-icon x-action-col-0  x-sfmd-edit-icon["+$x+"]"));
 		_click(_div("x-action-col-icon x-action-col-0  x-sfmd-edit-icon["+$x+"]"));
 		_wait(1000);
 		_click(_span("Edit"));
@@ -468,29 +660,46 @@ return $result;
 	this.verifyMultiPicklistValuesInDelivery = function($multiPickLabels,$multiPickValues){
 		//This function verifies the given values in the multipicklists and returns
 		//true or false based on the results
-		var $i = 0; var $actualList = [];
-		var $x;
+		var $i = 0;
+		var $uniqueMulti = [];var $actualList = [];
+		//find out the unique list of multi picklists
 		for($i=0;$i<$multiPickLabels.length;$i++){
-			if(_isVisible(_listItem("/"+$multiPickValues[$i]+"/",_near(_span($multiPickLabels[$i]))))){
-				$x = _getText(_listItem("/"+$multiPickValues[$i]+"/",_near(_span($multiPickLabels[$i]))));
-				$actualList.push($x);
-				_log("Expected Value for "+$multiPickLabels[$i]+": "+$multiPickLabels[$i]);
-				_log("Actual Value for "+$multiPickLabels[$i]+": "+$x);
+			if($uniqueMulti.indexOf($multiPickLabels[$i]) == -1){
+				$uniqueMulti.push($multiPickLabels[$i]);
 			}
 		}
-		_log($multiPickValues);
-		_log($actualList);
-		if(_areEqual($checkBoxExpValues,$actualList)){
-			_log("Multi Picklist values match");
-			return true;
+		_log($uniqueMulti);
+		var $j=0;var $z=0;var $result = true;var $x;
+		for($i=0;$i<$uniqueMulti.length;$i++){
+			var $actualList = [];
+			var $currentMultiValues = [];
+			for($j=0;$j<$multiPickValues.length;$j++){
+				if($multiPickLabels[$j] == $uniqueMulti[$i]){
+						$currentMultiValues.push($multiPickValues[$j]);
+				}
+			}
+			for($z=0;$z<$currentMultiValues.length;$z++){
+				if(_isVisible(_div($currentMultiValues[$z],_near(_label($uniqueMulti[$i]))))){
+					$actualList.push($currentMultiValues[$z]);
+				}
+			 }
+			_log("Expected values for "+$uniqueMulti[$i]+" "+$currentMultiValues);
+			_log("Actual values for "+$uniqueMulti[$i]+" "+$actualList);
+			if(_areEqual($currentMultiValues,$actualList)){
+				_log("Multi Picklist values for "+$uniqueMulti[$i]+" match");
+				$x = true;
+				$result = Boolean($result && $x);
+			}
+			else
+				{
+				    _log("Multi Picklist values for "+$uniqueMulti[$i]+"do not match");
+				    $x = false;
+					$result = Boolean($result && $x);
+				}		
+			
 		}
-		else
-			{
-			    _log("Multi Picklist values do not match");
-				return false;
-			}	
-		
-	};
+return $result;	
+};
 	this.addUserLookupInScreenDesigner = function($fieldName,$containerName){
 		//This function adds a user lookup which needs special handling in the screen designer
 		//to an existing page layout
@@ -544,4 +753,67 @@ return $result;
 			_log("Fail");
 		}
 	};
+	
+	this.checkprocessexists=function($sfmName, $isCustom) 
+			 {
+		$bo_act_navigation.navigateToSfmTransactionDesigner();
+		_click($bo_pg_sfmTransactionAndDesigner.btn_yourCustomSfmTransactions);
+		_setValue($bo_pg_sfmTransactionAndDesigner.lbl_searchSFM, $sfmName);
+		_wait(10000);
+		
+//		
+		
+		if (_isVisible(_f("main").s_checkbox("/chk/i").leftOf(_f("main").s_label($sfmName), 10, 10))) {
+			_log("Process exists successfully")
+			return true;
+			
+		} else if (_isVisible(_f("main").s_checkbox(2).leftOf(_f("main").s_label($sfmName), 10, 10))) {
+			_log("Process exists successfully")
+			return true;
+		}
+		else if (_isVisible(_f("main").s_checkbox(2).leftOf(_f("main").s_label($sfmName+"[1]"), 10, 10))) {
+			_log("Process exists successfully");
+			return true;
+		}
+		else{
+			return false;
+		}
+			
+		};
+		
+	this.addTemplateDesigner = function($stdTemplate){
+		_click($bo_pg_sfmTransactionAndDesigner.templateDesigner);
+		_wait(2000);
+		_setSelected($bo_pg_sfmTransactionAndDesigner.select_template, $stdTemplate);
+		_setValue($bo_pg_sfmTransactionAndDesigner.txt_tempName,"Tester33");
+		_setValue($bo_pg_sfmTransactionAndDesigner.txt_tempId,"Tester33");
+		_click($bo_pg_sfmTransactionAndDesigner.btn_templateSaveAs);
+		_wait(3000);
+		if(_isVisible($bo_pg_sfmTransactionAndDesigner.lbl_templateSave)){
+			_log("Pass");
+		}
+		else{
+			_fail("Fail::Template not Saved");
+		}
+	};
+	
+	this.addTargetObjectUpdate = function($clicks){
+		_click($bo_pg_sfmTransactionAndDesigner.targetObjectUpdate);
+		_click(_f("main").s_label("Work Order[2]"));
+		_click(_f("main").s_button("Add a row"));
+		for(var $i=0;$i<$clicks;$i++){
+			_click(_f("main").s_button("+"));
+		}
+	};
+	
+	this.addFields = function($field,$condition,$value){
+		_click(_f("main").s_label("Click to add field"));
+		_setValue(_f("main").s_textinput("searchText[4]"),$field);
+		_doubleClick(_f("main").s_label($field));
+		_setSelected(_f("main").s_dropdownlist("conditionsCombo"),$condition);
+		_setValue(_f("main").s_textinput("textip"),$value);
+		
+	};
+			
+	
 };

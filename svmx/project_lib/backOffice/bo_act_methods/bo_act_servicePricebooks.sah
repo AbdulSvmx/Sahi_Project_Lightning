@@ -62,7 +62,60 @@ var $bo_act_servicePricebooks = new function bo_act_servicePricebooks() {
 	 	_logOutput($ServicePricebooksEntryNumber+ " Service Pricebooks Entry is created");
 	    return $ServicePricebooksEntryNumber;
 	};
-
+	
+	// Edit ServicePriceBook without Acitivity Product
+	
+	this.editStandardServicePricebooks_noproduct = function($PriceBookName,$unit,$activityID,$regularRate){
+		// Made changes for Lightning - please donot change this
+		 $bo_act_navigation.navigateToServicePricebooks();
+		 _wait(2000);
+		 _setStrictVisibilityCheck(true);
+		 $bo_pg_servicePricebooks.clickOnServicePriceBook($PriceBookName);
+		 _selectDomain("/svmx/");
+		 _click($bo_pg_servicePricebooks.btn_sfmEditServicePricebook);
+		 _wait(60000, _isVisible(_label("Pricebook Name:")) );
+		 if(_isVisible(_div($activityID))==false)
+		{
+		 _click($bo_pg_servicePricebooks.btn_addSingleLaborLine);
+		 _click($bo_pg_servicePricebooks.btn_select_icon1);
+		 _setValue($bo_pg_servicePricebooks.txt_activityIdmain, $activityID);
+		 _click($bo_pg_servicePricebooks.lkup_activityId);
+		 _setValue($bo_pg_servicePricebooks.picklist_unit,$unit);
+		 _setValue($bo_pg_servicePricebooks.txt_regular_rate, $regularRate);
+		 _click($bo_pg_servicePricebooks.btn_update);
+	     _click($bo_pg_servicePricebooks.btn_saveServicePricebookEntry);
+	     _assertNotVisible(_span("Review the errors on this page."));
+	     _wait(30000,_isVisible(_span("Standard Service Price Book")));
+		}
+		 
+		 _selectDomain();
+	};
+	this.editStandardServicePricebooks_noproduc1 = function($PriceBookName,$unit,$activityID,$regularRate){
+		// Made changes for Lightning - please donot change this
+		 $bo_act_navigation.navigateToServicePricebooks();
+		 _wait(2000);
+		 _setStrictVisibilityCheck(true);
+		 $bo_pg_servicePricebooks.clickOnServicePriceBook($PriceBookName);
+		 _selectDomain("/svmx/");
+		
+		 _click($bo_pg_servicePricebooks.btn_sfmEditServicePricebook);
+		 _wait(60000, _isVisible(_label("Pricebook Name:")) );
+		 if(_isVisible(_div($activityID))==false)
+			{
+		 _click($bo_pg_servicePricebooks.btn_addSingleLaborLine);
+		 _click($bo_pg_servicePricebooks.btn_select_icon2);
+		 _setValue($bo_pg_servicePricebooks.txt_activityIdmain, $activityID);
+		 _click($bo_pg_servicePricebooks.lkup_activityId);
+		 _setValue($bo_pg_servicePricebooks.picklist_unit,$unit);
+		 _setValue($bo_pg_servicePricebooks.txt_regular_rate, $regularRate);
+		 _click($bo_pg_servicePricebooks.btn_update);
+	     _click($bo_pg_servicePricebooks.btn_saveServicePricebookEntry);
+	     _assertNotVisible(_span("Review the errors on this page."));
+	     _wait(30000,_isVisible(_span("Standard Service Price Book")));
+	    	}
+		 _selectDomain();
+	};
+	
 	this.deleteStandardServicePricebooksEntry = function($PriceBookName, $ServicePricebooksEntryNumber){
 		 $bo_act_navigation.navigateToServicePricebooks();
 		 $bo_pg_servicePricebooks.clickOnServicePriceBook($PriceBookName);

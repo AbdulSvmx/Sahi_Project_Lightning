@@ -51,7 +51,7 @@ $bo_act_sfmVerifyWorkOrder.verifyWizardOnWOObj($stndSFMName);
 $bo_act_sfmVerifyWorkOrder.clkOnWizard($wizardButtonName);
 _wait(30000);
 _click($bo_pg_webServices.btn_deliveryQuickSave);
-_wait(3000);
+_wait(10000);
 
 $bo_act_WebServices.verifyBeforeSaveUpdate($enteredMinBS,$enteredOTBS,$enteredZipBS);
 

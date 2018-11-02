@@ -8,7 +8,7 @@ var $sfm_pg_sfmDesigner = new function sfm_pg_sfmDesigner() {
 	this.btn_deliverySave = _span("Save",_rightOf(_span("Cancel")));//Changed for Lightning
 	this.btn_deliveryCancel = _span("Cancel",_leftOf(_span("Save")));//Changed for Lightning
 	this.btn_deliveryGetPrice = _span("Get Price",_rightOf(_span("Quick Save"))); //Changed for Lightning
-	this.btn_deliveryUserSettings = _span("User Settings"); //Changed for Lightning
+	this.btn_deliveryUserSettings = _span("User Settings"); //Changwindow_partsSearchWindowed for Lightning
 	this.btn_deliveryHelp = _div("/toolEl/", _near(_link("Quick Save")));//Changed for Lightning
 	this.btn_deliveryClearCache = _span("Clear ServiceMax Cache");//Changed for Lightning
 	this.btn_deliveryDropdown = _span("/btnWrap/",_rightOf(_span("Get Price")));//Changed for Lightning
@@ -106,11 +106,31 @@ var $sfm_pg_sfmDesigner = new function sfm_pg_sfmDesigner() {
 	this.txt_partTextbox=_textbox("/inputEl/",_near(this.lbl_part));
 	this.searchPartIcon=_div("/trigger-search/",_near(this.lbl_part));
 	this.lbl_recentItemProducts=_div("Recent Items: Products");
+	this.window_ProductSearchWindow=_parentNode(this.lbl_recentItemProducts,"DIV",5);
 	this.lbl_account=_span("Account",_in(this.window_partsSearchWindow));
 	this.txt_accountTextbox=_textbox("/inputEl/",_near(this.lbl_account));
+	this.btn_searchAccountIcon=_div("/trigger-search/",_near(this.lbl_account));
 	this.lbl_autoContact=_span("AutoContact",_in(this.window_partsSearchWindow));
 	this.txt_autoContactTextbox=_textbox("/inputEl/",_near(this.lbl_autoContact));
+	this.btn_searchautoContactIcon=_div("/trigger-search/",_near(this.lbl_autoContact));
+	this.link_cancelPartSearch=_link("Cancel",_in(this.window_partsSearchWindow));
+	this.lbl_case=_span("Case",_in(this.window_partsSearchWindow));
+	this.link_searchCaseIcon=_div("/trigger-search/",_near(this.lbl_case));
+	this.link_updatePartsSearch=_link("Update",_in(this.window_partsSearchWindow));
+	this.btn_bubble=_link("/.*/",_in(_div("/celleditor/")));
+	this.btn_bubbleDiv=_div("/lightningtooltip/");
 	
+	
+	//header fields
+	this.lbl_headerAccount=_div("Account");
+	this.txt_headerAccount=_textbox("/inputEl/",_in(this.lbl_headerAccount));
+	this.btn_headerAccountSearchIcon=_div("/trigger-search/",_in(this.lbl_headerAccount));
+	this.lbl_headerContact=_div("Contact");
+	this.txt_headerContact=_textbox("/inputEl/",_in(this.lbl_headerContact));
+	this.link_ContactInDVR=_link("Contact",_in(_div("Contact: Multiple items found. Click lookup icon to refine search.")));
+	this.btn_headerContactsearchIcon=_div("/trigger-search/",_in(this.lbl_headerContact));
+	this.txt_accountPicklist=_textbox(0,_near(_span("Account Picklist")));
+	this.txt_headerCity=_textbox(0,_near(_span("City")));
 	
 	
 	this.link_Update=_link("Update");
@@ -120,14 +140,19 @@ var $sfm_pg_sfmDesigner = new function sfm_pg_sfmDesigner() {
 	this.btn_searchIconInSFM=_div("/trigger-search/",_in(_div("/sfm-lookupcelleditor/")));
 	this.link_searchLink=_link("Search");
 	this.btn_searchTextBox=_textbox("/sfm-text/",_near(this.link_searchLink));	
+	this.link_accountInDVRNoMatch=_link("Account",_in(_div("Account: Multiple items found. Click lookup icon to refine search.")));
+	this.label_contextOverride=_label("/Limit search to/");
+	this.btn_contextOverride=_checkbox(0,_near(this.label_contextOverride));
+	this.btn_cancelContactWindow=_link("Cancel",_near(_div("/CancelAdd/")));
+	this.btn_noRecordMSG=_div("No matching record(s) found for this keyword");
 	
-	this.link_autoContactInDVR=_link("AutoContact",_in(_div("AutoContact: Multiple items found. Click lookup icon to refine search.")))
+	this.link_autoContactInDVR=_link("AutoContact",_in(_div("AutoContact: Multiple items found. Click lookup icon to refine search.")));
 	this.txt_autoContactTextBoxInSFM=_div("/grid-cell/",_under(_parentNode(_span("AutoContact"),"DIV",4)));
 	
 	this.sel_ContextSource=_f("main").s_combobox("/ComboBox/").rightOf(_f("main").uiftetextfield("Context Source"));
 	this.chk_OverrideContext=_f("main").s_checkbox("Override Context");
 	this.sel_Context=_f("main").s_combobox("/ComboBox/").rightOf(_f("main").uiftetextfield("Context"));
-	this.sel_matchinField=_f("main").s_combobox("/ComboBox/").rightOf(_f("main").uiftetextfield("Matching Field"));
+	this.sel_matchinField=_f("main").s_combobox("/ComboBox/").near(_f("main").uiftetextfield("Matching Field"));
 	
 	
 	//Extended edit page objects --Labor

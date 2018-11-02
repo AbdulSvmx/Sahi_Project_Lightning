@@ -1,4 +1,4 @@
-var $RS_10471 = _testcase("RS_10472","Verify Value Map for existing records - Header");
+var $RS_10471 = _testcase("RS_10471","Verify Value Map for existing records - Header");
 $RS_10471.start();
 //Variables used
 var $objectName = "Work Order";
@@ -22,6 +22,7 @@ var $fieldsAbsentInPage = [];
 var $pageLayoutForProfile = "SVMX Work Order - Admin";
 var $myDomain = "/lightning/";
 var $multiPicklistValues = ["Multipicklist1","Multipicklist2","Multipicklist3"];
+var $mapType = "Value Map for Existing Records";
 
 //Appending current timestamp to process name to make it unique.
 var $timeStamp = $bo_act_navigation.getCurrentTimeStamp();
@@ -34,7 +35,7 @@ var $mapName = $processName + "mp";
 
 $bo_act_login.login($g_url,$sfmlUsn,$sfmlPwd);
 $sfm_act_lightningConfig.switchToLightning();
-
+_wait(15000);
 //***************************************************************************************
 //Create custom fields if needed
 $sfm_act_lightningConfig.addCustomFields($objectName, $customFieldsNames, $missingStdDataTypes, $myDomain,$multiPicklistValues);
@@ -90,13 +91,13 @@ _click($bo_pg_sfmTransactionAndDesigner.btn_quickSave);
 _click($bo_pg_sfmTransactionAndDesigner.btn_quickSave1);
 
 
-$textLabels = ["Account","Contact","Proforma Invoice Amount","Group Email","Estimated Duration","Automation Percent","Automation Phone","City","Street","Problem Description","Automation URL","Automation multipicklist"];
-$textValues = ["HCSAccountForTesting","Jason Smith","4500","group123@group.com","34","45","2345401","Bengaluru","123 somewhere somehow somewat","This washing machine stopped working","www.google.com","Multipicklist1;Multipicklist3"];
-$picklistLabels = ["Record Type ID","Clock Paused Forever","Scheduled Date","Automation Date2","Automation Date3","First Queued DateTime","Started Driving To Location Date Time","Completed Date Time","Finished Onsite Date Time","Order Status"];
-$pickListValues = ["Record Type1","true","Today","Tomorrow","Yesterday","Now","Today","Tomorrow","Yesterday","Open"];
+$textLabels = ["Proforma Invoice Amount","Group Email","Estimated Duration","Automation Percent","Automation Phone","City","Street","Problem Description","Automation URL","Automation multipicklist"];
+$textValues = ["4500","group123@group.com","34.00","45","2345401","Bengaluru","123 somewhere somehow somewat","This washing machine stopped working","www.google.com","Multipicklist1;Multipicklist3"];
+$picklistLabels = ["Account","Contact","Record Type ID","Clock Paused Forever","Scheduled Date","Automation Date2","Automation Date3","First Queued DateTime","Started Driving To Location Date Time","Completed Date Time","Finished Onsite Date Time","Order Status"];
+$pickListValues = ["HCSAccountForTesting","Lightning Contact","Record Type1","true","Today","Tomorrow","Yesterday","Now","Today","Tomorrow","Yesterday","Open"];
 //Create mapping for all possible standard data types.
 _click($bo_pg_sfmTransactionAndDesigner.btn_qualifyingCriteriaAndFieldMapping);
-$bo_act_mappings.createMapping("Work Order",$picklistLabels,$pickListValues,$textLabels,$textValues,$mapName);
+$bo_act_mappings.createMapping("Work Order",$mapType,$picklistLabels,$pickListValues,$textLabels,$textValues,$mapName);
 _selectDomain();
 _setSpeed(1000);
 
@@ -110,44 +111,51 @@ $sfm_act_createCustomWizard.clickWizardlinks($processName);
 _wait(8000);
 //Setting up the date literal values
 var $current = new Date();
-var $todayDate = current.getMonth()+1 + "/" + current.getDate() + "/" + current.getFullYear();
+var $todayDate = $sfm_act_createCustomWizard.addSubtractDates($current,0);
 var $tomorrowDate = $sfm_act_createCustomWizard.addSubtractDates($current,1);
 var $yesterdayDate = $sfm_act_createCustomWizard.addSubtractDates($current,-1);
 //Calculating current time
-var $p = $current.getHours();
-if($p > 12){
-	var $now = $current.getHours()-12+":"+$current.getMinutes()+" PM";
-}
-else {
-	var $now = $current.getHours()+":"+$current.getMinutes()+" AM";
-}
-_selectDomain($domainName);_click($sfm_pg_wo.link_delivery_save);
+var $now = $sfm_act_lightningConfig.calculateNow();
+_log("Value for now is "+$now);
+//Removing preceding zeros in date fields to validate in work order object.
+$todayDate = $sfm_act_lightningConfig.removePrecedingZeroInDate($todayDate);
+$tomorrowDate = $sfm_act_lightningConfig.removePrecedingZeroInDate($tomorrowDate);
+$yesterdayDate = $sfm_act_lightningConfig.removePrecedingZeroInDate($yesterdayDate);
+
+_selectDomain($g_domain);
+_click($sfm_pg_wo.link_delivery_save);
+_wait(3000);
+if(_isVisible($sfm_pg_wo.btn_okPriceNotCalculated)){
+	_click($sfm_pg_wo.btn_okPriceNotCalculated);
+}	
 _selectDomain();
 _wait(14000,_isVisible($sfm_pg_wo.label_wo));
 
 
 //Verify value map in the work order.
 var $lookUpLabels = ["Account","Contact"];
-var $lookUpValues = ["HCSAccountForTesting","Jason Smith"];
-$textLabels = ["Proforma Invoice Amount","Estimated Duration","Automation Percent","Automation Phone","City","Scheduled Date","Automation Date2","Automation Date3"];
-$textValues = ["$4500.000","34","45","2345401","Bengaluru",$todayDate,$tomorrowDate,$yesterdayDate];
+var $lookUpValues = ["HCSAccountForTesting","Lightning Contact"];
+$textLabels = ["Proforma Invoice Amount","Estimated Duration","Automation Percent","City","Scheduled Date","Automation Date2","Automation Date3"];
+$textValues = ["$4,500.000","34.00","45%","Bengaluru",$todayDate,$tomorrowDate,$yesterdayDate];
 $pickListLabels = ["Order Status"];
 $pickListValues = ["Open"];
 $textAreaLabels = ["Street","Problem Description"];
 $textAreaValues = ["123 somewhere somehow somewat","This washing machine stopped working"];
 var $checkBoxLabels = ["Clock Paused Forever"];
-var $checkBoxValues = ["true"];
+var $checkBoxValues = [true];
 var $emailLabels = ["Group Email"];
 var $emailValues = ["group123@group.com"];
 var $multiPickLabels = ["Automation multipicklist","Automation multipicklist"];
 var $multiPickValues = ["Multipicklist1","Multipicklist3"];
+var $telephoneLabels = ["Automation Phone"];
+var $telephoneValues = ["2345401"];
 var $urlLabels = ["Automation URL"];
 var $urlValues = ["www.google.com"];
 var $dateTimeLabels = ["First Queued DateTime","Started Driving To Location Date Time","Completed Date Time","Finished Onsite Date Time"];
 var $dateTimeDateValues = [$todayDate,$todayDate,$tomorrowDate,$yesterdayDate];
 var $timeValues =[$now,"12:00 AM","12:00 AM","12:00 AM"];
 //Verify all values in the newly created Work order
-var $res = $sfm_act_lightningConfig.verifyValues($textLabels, $textValues, $pickListLabels, $pickListValues, $textAreaLabels, $textAreaValues, $checkBoxLabels, $checkBoxValues, $dateTimeLabels, $dateTimeDateValues, $timeValues,$emailLabels,$emailValues,$lookUpLabels,$lookUpValues,$multiPickLabels,$multiPickValues,$urlLabels,$urlValues);
+var $res = $sfm_act_lightningConfig.verifyValues($textLabels, $textValues, $pickListLabels, $pickListValues, $textAreaLabels, $textAreaValues, $checkBoxLabels, $checkBoxValues, $dateTimeLabels, $dateTimeDateValues, $timeValues,$emailLabels,$emailValues,$lookUpLabels,$lookUpValues,$multiPickLabels,$multiPickValues,$urlLabels,$urlValues,$telephoneLabels,$telephoneValues);
 _assertTrue($res);
 if($res){
 	_log("PASS: Work order has values as per value mapping for existing records for Header");
@@ -158,51 +166,51 @@ else {
 _selectDomain();
 //Add the fields in the Screen designer
 $sfm_act_createCustomWizard.clickWizardlinks($processName);
-_selectDomain($domainName);
-_click(btn_arrowNextToGetPrice);
+_selectDomain($g_domain);
+_click($sfm_pg_wo.btn_arrowNextToGetPrice);
 _assertVisible($sfm_pg_wo.link_launchSfmDesigner);
 _click($sfm_pg_wo.link_launchSfmDesigner);
 _selectDomain();
 _selectWindow("/SFM Transaction Designer/");
-_wait(10000);
+_wait(12000);
 _click($bo_pg_sfmTransactionAndDesigner.btn_screenDesigner);
+_wait(5000);
 $bo_act_navigation.designHeaderScreen($pageLayoutName, $fieldsToMap);
+_wait(2000);
 _click($bo_pg_sfmTransactionAndDesigner.btn_quickSave1);
 _wait(2000);
 _closeWindow();
 _selectWindow();
-_selectDomain($domainName);
+_selectDomain($g_domain);
 $sfm_act_lightningConfig.clearServicemaxCache();
 //Setting up the date literal values
-var current = new Date();
-var $todayDate = current.getMonth()+1 + "/" + current.getDate() + "/" + current.getFullYear();
-var $tomorrowDate = $sfm_act_createCustomWizard.addSubtractDates($current,1);
-_log($tomorrowDate);
-var $yesterdayDate = $sfm_act_createCustomWizard.addSubtractDates($current,-1);
-//Setting up the date literal values
-var current = new Date();
-var $todayDate = current.getMonth()+1 + "/" + current.getDate() + "/" + current.getFullYear();
+var $current = new Date();
+var $todayDate = $sfm_act_createCustomWizard.addSubtractDates($current,0);
 var $tomorrowDate = $sfm_act_createCustomWizard.addSubtractDates($current,1);
 var $yesterdayDate = $sfm_act_createCustomWizard.addSubtractDates($current,-1);
 //Calculating current time
-var $p = $current.getHours();
-if($p > 12){
-	var $now = $current.getHours()-12+":"+$current.getMinutes()+" PM";
-}
-else {
-	var $now = $current.getHours()+":"+$current.getMinutes()+" AM";
-}
+
+var $now = $sfm_act_lightningConfig.calculateNow();
+_log("Value for now is "+$now);
 //Verify values in SFM Delivery screen
+var $current = new Date();
+var $todayDate = $sfm_act_createCustomWizard.addSubtractDates($current,0);
+var $tomorrowDate = $sfm_act_createCustomWizard.addSubtractDates($current,1);
+var $yesterdayDate = $sfm_act_createCustomWizard.addSubtractDates($current,-1);
 var $deliveryTextPickLabels = ["Account","Contact","Proforma Invoice Amount","Scheduled Date","Automation Date2","Automation Date3","First Queued DateTime","Started Driving To Location Date Time","Completed Date Time","Finished Onsite Date Time","Group Email","Estimated Duration","Automation Percent","Automation Phone","City","Automation URL"];
-var $deliveryTextPickValues =["HCSAccountForTesting","Jason Smith","$4500.000",$todayDate,$tomorrowDate,$yesterdayDate,$todayDate,$todayDate,$tomorrowDate,$yesterdayDate,"group123@group.com","34","45","2345401","Bengaluru","www.google.com"];
+var $deliveryTextPickValues =["HCSAccountForTesting","Lightning Contact","4500",$todayDate,$tomorrowDate,$yesterdayDate,$todayDate,$todayDate,$tomorrowDate,$yesterdayDate,"group123@group.com","34","45","235401","Bengaluru","www.google.com"];
 var $deliveryTimeLabels = ["First Queued DateTime","Started Driving To Location Date Time","Completed Date Time","Finished Onsite Date Time"];
 var $deliveryTimeValues = [$now,"12:00 AM","12:00 AM","12:00 AM"];
 //Verify same values in Work order after saving
-_selectDomain($domainName);
+_selectDomain($g_domain);
 var $verifyResult = $sfm_act_SFM.verifyValuesInDelivery($deliveryTextPickLabels, $deliveryTextPickValues, $deliveryTimeLabels, $deliveryTimeValues, $textAreaLabels, $textAreaValues, $checkBoxLabels, $checkBoxValues, $multiPickLabels, $multiPickValues);
 _click($sfm_pg_wo.link_delivery_save);
-_assertTrue(verifyResult);
-if($res){
+_wait(3000);
+if(_isVisible($sfm_pg_wo.btn_okPriceNotCalculated)){
+	_click($sfm_pg_wo.btn_okPriceNotCalculated);
+}
+_assertTrue($verifyResult);
+if($verifyResult){
 	_log("PASS: Work order has values as per value mapping for existing records for Header in delivery");
 }
 else {
@@ -211,7 +219,12 @@ else {
 
 _selectDomain();
 _wait(14000,_isVisible($sfm_pg_wo.label_wo));
-var $res = $sfm_act_lightningConfig.verifyValues($textLabels, $textValues, $pickListLabels, $pickListValues, $textAreaLabels, $textAreaValues, $checkBoxLabels, $checkBoxValues, $dateTimeLabels, $dateTimeDateValues, $timeValues,$emailLabels,$emailValues,$lookUpLabels,$lookUpValues,$multiPickLabels,$multiPickValues,$urlLabels,$urlValues);
+//Removing preceding zeros in date fields to validate in work order object.
+$todayDate = $sfm_act_lightningConfig.removePrecedingZeroInDate($todayDate);
+$tomorrowDate = $sfm_act_lightningConfig.removePrecedingZeroInDate($tomorrowDate);
+$yesterdayDate = $sfm_act_lightningConfig.removePrecedingZeroInDate($yesterdayDate);
+$timeValues =[$now,"12:00 AM","12:00 AM","12:00 AM"];
+var $res = $sfm_act_lightningConfig.verifyValues($textLabels, $textValues, $pickListLabels, $pickListValues, $textAreaLabels, $textAreaValues, $checkBoxLabels, $checkBoxValues, $dateTimeLabels, $dateTimeDateValues, $timeValues,$emailLabels,$emailValues,$lookUpLabels,$lookUpValues,$multiPickLabels,$multiPickValues,$urlLabels,$urlValues,$telephoneLabels,$telephoneValues);
 _assertTrue($res);
 if($res){
 	_log("PASS: Work order has values as per value mapping for existing records for Header");

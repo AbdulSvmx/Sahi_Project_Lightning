@@ -1,0 +1,27 @@
+var RS_10514 = _testcase("RS_10514","Verify creation/reschedule of SFDC events from server and FSA App");
+RS_10514.start();
+_writeFile("false", $appiumPath+$sahiIntermediatoryPath, true);
+var $profile = "Cloned_Default";
+var $module = "Common";
+var $subModule = "Global Settings";
+var $setting = "GBL025";
+var $picklistValue="ServiceMax Event";
+
+$bo_act_login.login($g_url, $appiumAdminUn, $appiumAdminPwd);
+$sfm_act_lightningConfig.switchToLightning();
+$bo_act_configurationProfiles.editGlobalProfileForPicklistSettings($profile,$module,$subModule,$setting,$picklistValue);
+
+
+var $profilename = $group_profilename;
+var $targetObjectName="Event";
+var $createsfmName="Create New Event";
+var $removeprocess=true;
+_selectWindow("");
+
+$bo_act_SFMAppPermission.set_mobileapp_permissions($profilename, $targetObjectName, $createsfmName,$removeprocess);
+
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+_writeFile("true", $appiumPath+$sahiIntermediatoryPath, true);
+
+RS_10514.end();

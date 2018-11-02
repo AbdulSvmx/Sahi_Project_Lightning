@@ -10,17 +10,28 @@ var $containerName = ["Order Status","Order Status","Order Status"];
 var $fieldName = ["Case","Priority","Problem Description"];
 var $objMapping = "SVMXSTD: Case To Work Order";
 var $wizardObject ="Work Order";
+var $restAccName = "Acc_"+$sfmName;
 
 //variables for rest call
 //$orgInstance = "cs19";
-$objName= "Case";
-$obJson = "{\"SVMXC__Billing_Type__c\":\"Loan\",\"Priority\":\"High\",\"Description\":\"CaseCreatedfromRest\"}";
-$columnName = "CaseNumber";
+$objName= "Account";
+$obJson = "{\"Name\":\""+$restAccName+"\"}"; 
+$columnName = "Name";
 $filter="id";
-//create a case
-$filterValue=$sfm_act_restApiMethods.postRestApi($objName,$obJson,"POST");
+//create an account
+$account=$sfm_act_restApiMethods.postRestApi($sfmlUsn,$sfmlPwd,$sfmClientId,$sfmConsumerSecret,$sfmOrgInstance,$objName,$obJson,"POST");
+$accountName =$sfm_act_restApiMethods.getRestApi($sfmlUsn,$sfmlPwd,$sfmClientId,$sfmConsumerSecret,$sfmOrgInstance,"GET", $objName, $columnName, $filter, $account);
+
+
 //get the caseNumber
-$caseNumber =$sfm_act_restApiMethods.getRestApi("GET", $objName, $columnName, $filter, $filterValue);
+$objName1= "Case";
+$obJson1 = "{\"AccountId\":\""+$account+"\",\"SVMXDEV__Billing_Type__c\":\"Loan\",\"Priority\":\"High\",\"Description\":\"CaseCreatedfromRest\"}";
+$columnName1 = "CaseNumber";
+$filter1="id";
+//create a case
+$filterValue=$sfm_act_restApiMethods.postRestApi($sfmlUsn,$sfmlPwd,$sfmClientId,$sfmConsumerSecret,$sfmOrgInstance,$objName1,$obJson1,"POST");
+//get the caseNumber
+$caseNumber =$sfm_act_restApiMethods.getRestApi($sfmlUsn,$sfmlPwd,$sfmClientId,$sfmConsumerSecret,$sfmOrgInstance,"GET", $objName1, $columnName1, $filter1, $filterValue);
 
 
 //login to the org
@@ -32,6 +43,7 @@ $sfm_act_lightningConfig.switchToLightning();
 $sfm_act_SFM.cloneTDM016($sfmNameToBeCloned,$sfmName,$isCustom, $sfmTemplateSaveAsName, $sfmTemplate, $fieldName, $containerName);
 $sfm_act_SFM.setFormFill($fieldName[0], $objMapping);
 _click($sfm_pg_sfmDesigner.btn_quickSaveSFM);
+_wait(2000);
 _click($sfm_pg_sfmDesigner.btn_saveSFM); 
 
 //add the process to wizard
@@ -43,7 +55,7 @@ _selectDomain();
 $sfm_act_createCustomWizard.createWowithoutvalues();
 
 _click(_span($sfmName));
-_selectDomain($domainName);
+_selectDomain($g_domain);
 _wait(8000,_div($sfmName));
 
 //select a case to validate form fill
@@ -53,10 +65,22 @@ _click($sfm_pg_wizardWindow.btn_searchProduct);
 _click(_link($caseNumber,_in(_div("/sfm-lightninglookupslidingwindow/"))));
 
 //Validate form fill on billing type/problem description/priority fields
-$obj= JSON.parse($obJson);
+$obj= JSON.parse($obJson1);
 _assertEqual($obj["Priority"], _getText($sfm_pg_sfmDesigner.txt_priority));
-_assertEqual($obj["SVMXC__Billing_Type__c"],_getText($sfm_pg_sfmDesigner.txt_billingType));
+_assertEqual($obj["SVMXDEV__Billing_Type__c"],_getText($sfm_pg_sfmDesigner.txt_billingType));
 _assertEqual($obj["Description"],_getText($sfm_pg_sfmDesigner.txt_problemDescription));
+
+//save the process and validate for formfill for fields which are not in screen designer -- RS-10423
+_setValue(_textbox("/svmx-text/",_near(_span("Case"))),$caseNumber);
+_click($sfm_pg_sfmDesigner.btn_deliverySave);
+_wait(5000);
+if(_exists($sfm_pg_sfmDesigner.txt_priceAlert)){
+	_click($sfm_pg_sfmDesigner.btn_priceAlertOk);
+	_log("Pass ::: Saved successfully");
+	_wait(10000,_isVisible($sfm_pg_wo.label_wo));
+}
+_selectDomain();
+_assertEqual($accountName,_getText(_link(0,_near(_span("Account")))),"Formfill for field that was not in screen has not happened");
 
 $rs_10444.end();
 		

@@ -51,10 +51,12 @@ $rs_10463.start();
 	var $retcomboConditions=$getExprDetails[1];
 	var $retcomboInput=$getExprDetails[2];
 	
-	for (var $i = 0; $i < $getExprDetails.length; $i++) {
+	for (var $i = 0; $i < $retcomboField.length; $i++) {
 		_assertEqual($retcomboField[$i],$finalcomboField[$i]);
 		_assertEqual($retcomboConditions[$i],$finalcomboConditions[$i]);
 		_assertEqual($retcomboInput[$i],$finalcomboInput[$i]);
 	}
+	
+	$sfm_act_lightningConfig.logoutInLightning();
 
 $rs_10463.end();
