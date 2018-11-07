@@ -150,18 +150,26 @@ var $sfm_act_lightningConfig = new function sfm_act_lightningConfig() {
 	};
 
 // To go to the Work Order Record Type and add the fields
-	this.addpicklistfields_recordtpyes = function($fieldname, $fieldvalues, $objectName, $myDomain, $recordtypename){
-		_selectWindow("/"+$objectName+"/");
-		_click($bo_pg_home.btn_recordtypes);
+	this.addpicklistfields_recordtpyes = function($fieldname,$fieldvalues, $fieldvalues1, $objectName, $myDomain, $recordtypename){
 		if(_isVisible(_span($recordtypename))==true)
 		{
 			_click(_span($recordtypename));
-			_selectDomain("/"+$myDomain+"/");
+			_selectDomain($myDomain);
+			$action1 = "Remove";
+			$action2 = "Add";
+			
 			_click(_link("/Edit/",_leftOf(_tableHeader($fieldname))));
-			for($i=0;$i<$fieldvalues.length;$i++){
-				
+			for(var $i=0;$i<$fieldvalues.length;$i++)
+				{
+					this.removefieldsfrompicklist($fieldvalues[$i], $action1);
+				}
+			
+			for(var $i=0;$i<$fieldvalues1.length;$i++)
+			{
+				this.addfieldstopicklist($fieldvalues1[$i], $action2);
 			}
 			
+			_click($sfm_pg_wo.btn_saveCustomField);	
 		}
 		
 		
@@ -180,6 +188,18 @@ this.checkIfWizardLinkExists = function($process_name){
 
 };
 
+// To remove the fields from the record type picklist values
+
+this.removefieldsfrompicklist = function($valuename , $action){
+		_setSelected(_select("duel_select_1"),$valuename);
+		_click(_image($action));
+};
+
+// To add the fields into the record type checklist values
+this.addfieldstopicklist = function($valuename , $action){
+	_setSelected(_select("duel_select_0"),$valuename);
+	_click(_image($action));
+};
 this.logoutInLightning = function() {
 	//Added by JJ
 	//This function logs out of Salesforce in Lightning experience

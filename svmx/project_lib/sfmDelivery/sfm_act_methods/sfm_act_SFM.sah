@@ -36,6 +36,8 @@ var $sfm_act_SFM = new function sfm_act_SFM() {
 			$sfm_act_SFM.addFieldToScreen($fieldName, $containerName);
 		}
 	};
+
+	
 		this.dvrScenario5 = function($sfmNameToBeCloned, $sfmName, $isCustom,
 			 $sfmTemplateSaveAsName,$sfmTemplate, $fieldName, $containerName,$bProcessStatus) 
 			 {
@@ -209,7 +211,11 @@ var $sfm_act_SFM = new function sfm_act_SFM() {
 				var $element=null;
 				while ($find) {
 //					_log("search element name: "+$elementName);
-					$element=_getValue(_f("main").s_label("/"+$elementName+"/["+$k+"]").near(_f("main").s_textinput($elementName)));
+					if ($k==0) {
+						$element=_getValue(_f("main").s_label($elementName).near(_f("main").s_textinput($elementName)));
+					}else{
+						$element=_getValue(_f("main").s_label("/"+$elementName+"/["+$k+"]").near(_f("main").s_textinput($elementName)));
+					}
 //					_log("$element: "+$element);
 					if ($elementName===$element) {
 						$find=false;
@@ -225,6 +231,10 @@ var $sfm_act_SFM = new function sfm_act_SFM() {
 		_click($bo_pg_sfmTransactionAndDesigner.btn_quickSave1);
 	};
 	
+	
+
+		
+
 	
 	this.selectSFM = function($sfmName, $isCustom) {
 		if ($isCustom) {

@@ -65,6 +65,14 @@ var $sfm_act_formDesigner = new function sfm_act_formDesigner() {
 		_setStrictVisibilityCheck(false);
 	};
 	
+	/**
+	 * Author		:	Anand Kakhandaki
+	 * Function		: 	To Edit CheckList Question
+	 * Parameter	:	$sectionName=Section name
+	 * 					$queCommonDetails=Array of $queType,$queName,$helpURL,$tag,$addToLibAndForm details
+	 * 					$queSpecificDetails=Array of details needed for specific question
+	 * Example		:	Refer _ _ _ _ file for function usage
+	 */	
 	this.editCheckListQuestion=function($sectionName,$queCommonDetails,$queSpecificDetails){
 		_selectDomain($g_domain);
 		var $queName=$queCommonDetails[1];
@@ -73,7 +81,13 @@ var $sfm_act_formDesigner = new function sfm_act_formDesigner() {
 		
 	};
 	
-	
+		/**
+	 * Author		:	Anand Kakhandaki
+	 * Function		: 	To Add/Edit CheckList Question
+	 * Parameter	:	$queCommonDetails=Array of $queType,$queName,$helpURL,$tag,$addToLibAndForm details
+	 * 					$queSpecificDetails=Array of details needed for specific question
+	 * Example		:	Refer _ _ _ _ file for function usage
+	 */
 	this.addEditCheckListQuestionDetails=function($queCommonDetails, $queSpecificDetails){
 		var $queType=$queCommonDetails[0];
 		var $queName=$queCommonDetails[1];
