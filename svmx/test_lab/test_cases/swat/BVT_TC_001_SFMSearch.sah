@@ -62,51 +62,25 @@ $BVT_TC_001_SFMSearch.start();
 	_log("WO number: "+$WONumber);
 	
 	$bo_act_navigation.navigateToObject("ServiceMax SFM Search");
-	var $maxLength = _click("SearchId:SFMSearchFrm1:j_id2").;
-	
-	// $swat_act_sfmSearch.launchSfmSearch($searchItem, $WONumber);
-	
-	/*
-	// Creation of case, account,contact,product,IBName
-	var $caseNumber = $bo_act_Cases.createCase("New", "High", "Email");
-	var $accountName = $bo_act_accounts.createAccount();
-	var $contactName = $bo_act_contacts.createContact($accountName);
-	var $productName = $bo_act_products.createProduct();
-	var $IBName = $bo_act_installedProduct.createInstalledProduct($productName, $accountName, $contactName);
-	$workOrderNo = $swat_act_workOrders.createWorkOrder($caseNumber, $accountName,$contactName, $IBName, "Open", "High", "Field Service");
-
-	
-
-	//Write to data to excel for run time usage
-	$excel.insertUnderColumn("/Swat_excelData/swatdata.xlsx",  "runData", "Case", $caseNumber, 1);
-	$excel.insertUnderColumn("/Swat_excelData/swatdata.xlsx",  "runData", "Account", $accountName, 1);
-	$excel.insertUnderColumn("/Swat_excelData/swatdata.xlsx",  "runData", "Contact", $contactName, 1);
-	$excel.insertUnderColumn("/Swat_excelData/swatdata.xlsx",  "runData", "Product", $productName, 1);
-	$excel.insertUnderColumn("/Swat_excelData/swatdata.xlsx",  "runData", "InstalledProduct", $IBName, 1);
-	
-	//create WO
-	var $IBSerialNumber = $bo_act_common.generateRandomName("RS_10461_IB_");
-	var $AccountName= $bo_act_common.generateRandomName("RS_10461_Account_");
-	
-	var $WorkOrderNumber=createWO_RS10461("Open", "Field Service", $AccountName, "", "");
 	
 	
-	*/
-	//	Creation of SFM Search and validation //
-	//$swat_act_sfmSearch.launchSfmSearch($searchItem, $workOrderNo);
-
+	_selectDomain($g_domain);
+	_setSelected(_select(0,_near(_span("Choose Search"))),$searchItem);
+	_click(_link("Go"));
+	_selectDomain();
+	_setValue(_textbox("/svmx-text/",_near(_button("Go"))),$WONumber);
+	_click(_button("Go"));
+	//_click(_div("/radio/",_near(_link($WONumber))));
+	_click(_link($WONumber));
+	_selectWindow($WONumber+" | Salesforce");
+	//_closeWindow();
+	//_assertExists(_div("/sfm-wizard-tab/"));
+	//_selectWindow($WONumber | "/Salesforce/");
+	//_selectDomain("/popup/");
+	_assertExists(_heading1($WONumber));
+	_closeWindow();
 	
-//	//deleting data
-//	$bo_act_installedProduct.deleteInstalledProduct($IBName);
-//	$bo_act_Cases.deleteCases($caseNumber);
-//	$bo_act_accounts.deleteAccount($accountName);
-//	$bo_act_contacts.deleteContact($contactName);
-//	$swat_act_workOrders.deleteWorkOrder($workOrderNo);
-//	
 	
-	
-	// $bo_act_login.logOut();
-
 $BVT_TC_001_SFMSearch.end();
  
 
