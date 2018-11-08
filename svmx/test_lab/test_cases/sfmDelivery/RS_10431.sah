@@ -4,7 +4,7 @@ $rs_10431.start();
 
 	//login to App
 	$bo_act_login.login($g_url,$sfmlUsn,$sfmlPwd);
-
+	$sfm_act_lightningConfig.switchToLightning(); 
 	//clone standard SFM
 	var $sfmNameToBeCloned="Manage Work Order Lines - Usage";
 	var $sfmName=$bo_act_common.generateRandomName("rs_10431_");
@@ -23,7 +23,7 @@ $rs_10431.start();
 	var $fieldCombo=["Subject","Priority","Actual Initial Response","Case Number"];
 	var $conditionsCombo=["Equals","Equals","Equals","Equals"];
 	var $operandTypeCombo=["Value","Value","Value","Value"];
-	var $operandValue=["SVMX.CURRENTRECORD.SVMXDEV__Problem_Description__c","SVMX.CURRENTRECORD.SVMXDEV__Priority__c","SVMX.CURRENTRECORD.SVMXDEV__Preferred_Start_Time__c","SVMX.CURRENTRECORD.SVMXDEV__Invoice_Number__c"];
+	var $operandValue=["SVMX.CURRENTRECORD."+$orgnamespace+"__Problem_Description__c","SVMX.CURRENTRECORD."+$orgnamespace+"__Priority__c","SVMX.CURRENTRECORD."+$orgnamespace+"__Preferred_Start_Time__c","SVMX.CURRENTRECORD."+$orgnamespace+"__Invoice_Number__c"];
 	var $lookupAdvExpr="1 AND 2 AND (3 OR 4)";
 	var $lookupFilterDetails=[$fieldCombo,$conditionsCombo,$operandTypeCombo,$operandValue,$lookupAdvExpr];
 	var $lookUpName=$bo_act_common.generateRandomName("rs_10431_lookup_");
@@ -36,7 +36,7 @@ $rs_10431.start();
 	var $fieldCombo=["Subject","Priority","Actual Initial Response","Case Number"];
 	var $conditionsCombo=["Equals","Equals","Equals","Equals"];
 	var $operandTypeCombo=["Value","Value","Value","Value"];
-	var $operandValue=["SVMX.CURRENTRECORDHEADER.SVMXDEV__Problem_Description__c","SVMX.CURRENTRECORDHEADER.SVMXDEV__Priority__c","SVMX.CURRENTRECORDHEADER.SVMXDEV__Preferred_Start_Time__c","SVMX.CURRENTRECORDHEADER.SVMXDEV__Invoice_Number__c"];
+	var $operandValue=["SVMX.CURRENTRECORDHEADER."+$orgnamespace+"__Problem_Description__c","SVMX.CURRENTRECORDHEADER."+$orgnamespace+"__Priority__c","SVMX.CURRENTRECORDHEADER."+$orgnamespace+"__Preferred_Start_Time__c","SVMX.CURRENTRECORDHEADER."+$orgnamespace+"__Invoice_Number__c"];
 	var $lookupAdvExpr="1 AND 2 AND (3 OR 4)";
 	var $lookupFilterDetails=[$fieldCombo,$conditionsCombo,$operandTypeCombo,$operandValue,$lookupAdvExpr];
 	var $lookUpName=$bo_act_common.generateRandomName("rs_10431_lookup_");
@@ -59,7 +59,7 @@ $rs_10431.start();
 	
 	//Create Case using below variables  
 	$objName= "Case";
-	$obJson = "{\"Subject\":\"Problem Description\",\"Priority\":\"High\",\"SVMXDEV__Actual_Initial_Response__c\":\"2018-08-22\"}";
+	$obJson = "{\"Subject\":\"Problem Description\",\"Priority\":\"High\",\""+$orgnamespace+"__Actual_Initial_Response__c\":\"2018-08-22\"}";
 	$columnName = "CaseNumber";
 	$filter="id";
 	//create a case
@@ -69,8 +69,8 @@ $rs_10431.start();
 	_log("Case number: "+$caseNumber);
 	
 	//Create Work order using below variables 
-	$objName= "SVMXDEV__Service_Order__c";
-	$obJson = "{\"SVMXDEV__Problem_Description__c\":\"Problem Description\",\"SVMXDEV__Priority__c\":\"High\",\"SVMXDEV__Preferred_Start_Time__c\":\"2018-08-22\",\"SVMXDEV__Invoice_Number__c\":\""+$caseNumber+"\"}";
+	$objName= $orgnamespace+"__Service_Order__c";
+	$obJson = "{\""+$orgnamespace+"__Problem_Description__c\":\"Problem Description\",\""+$orgnamespace+"__Priority__c\":\"High\",\""+$orgnamespace+"__Preferred_Start_Time__c\":\"2018-08-22\",\""+$orgnamespace+"__Invoice_Number__c\":\""+$caseNumber+"\"}";
 	_log("Work Order json: "+$obJson);
 	$columnName = "Name";
 	$filter="id";

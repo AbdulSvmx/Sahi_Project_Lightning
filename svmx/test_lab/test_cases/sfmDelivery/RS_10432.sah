@@ -20,7 +20,7 @@ var $stdMap = "SVMXSTD: Close Work Order";
 var $pickListLabels = [];
 var $pickListValues = [];
 var $textLabels = ["Received Country","Billable Qty"];
-var $textValues = ["SVMX.CURRENTRECORDHEADER.SVMXDEV__Country__c","SVMX.CURRENTRECORDHEADER.SVMXDEV__SM_Estimated_Duration__c"];
+var $textValues = ["SVMX.CURRENTRECORDHEADER."+$orgnamespace+"__Country__c","SVMX.CURRENTRECORDHEADER."+$orgnamespace+"__SM_Estimated_Duration__c"];
 var $textLabelsArrayHeader = ["City","Estimated Duration"];
 var $textValuesArrayHeader = ["Bengaluru","45"];
 var $picklistLabelsArrayHeader = ["Country"];
@@ -50,7 +50,7 @@ _click($bo_pg_sfmTransactionAndDesigner.btn_qualifyingCriteriaAndFieldMapping);
 //Set up the mapping with SVMX.CURRENTRECORDHEADER literals for Parts
 $bo_act_mappings.createMapping("Parts",$mapType,$pickListLabels,$pickListValues,$textLabels,$textValues,$mapName);
 $textLabels = ["Received City","Start Date and Time"];
-$textValues = ["SVMX.CURRENTRECORDHEADER.SVMXDEV__City__c","SVMX.CURRENTRECORDHEADER.SVMXDEV__Scheduled_Date_Time__c"];
+$textValues = ["SVMX.CURRENTRECORDHEADER."+$orgnamespace+"__City__c","SVMX.CURRENTRECORDHEADER."+$orgnamespace+"__Scheduled_Date_Time__c"];
 $mapName = $mapName + "_2";
 //Set up the mapping with SVMX.CURRENTRECORDHEADER literals for Labor
 _selectDomain($g_domain);

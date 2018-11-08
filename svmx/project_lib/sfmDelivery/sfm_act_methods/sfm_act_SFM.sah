@@ -17,8 +17,8 @@ var $sfm_act_SFM = new function sfm_act_SFM() {
 		_setValue($bo_pg_sfmTransactionAndDesigner.txt_name, $sfmName);
 		_setValue($bo_pg_sfmTransactionAndDesigner.txt_sfmTransactionId, "");
 		_setValue($bo_pg_sfmTransactionAndDesigner.txt_sfmTransactionId, $sfmName);
-//		_setValue($bo_pg_sfmTransactionAndDesigner.txt_name, "");
-//		_setValue($bo_pg_sfmTransactionAndDesigner.txt_name, $sfmName);
+		_setValue($bo_pg_sfmTransactionAndDesigner.txt_name, "");
+		_setValue($bo_pg_sfmTransactionAndDesigner.txt_name, $sfmName);
 		_click($bo_pg_sfmTransactionAndDesigner.btn_screenDesigner);
 		_wait(5000);
 		_setSelected($bo_pg_sfmTransactionAndDesigner.sel_sfmTemplate,
