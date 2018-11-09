@@ -165,7 +165,7 @@ _log($Productname10533);
 _wait(30000);
 $bo_act_navigation.navigateToCreatedRecordUsingGlobalSearch($Productname10533);
 
-
+_wait(15000);
 var $standardPriceValue = 500;
 $bo_act_products.addStandardPriceForProduct($Productname10533, $standardPriceValue);
 
@@ -194,7 +194,6 @@ _wait(30000);
 _call(top.location.reload());
 $bo_act_navigation.navigateToCreatedRecordUsingGlobalSearchWO($WOName);
 $bo_act_interactiveEntitlement_WO.performInteractiveEntitlement_NoAccountNoContact($WOName, $WarrantyName);
-
 
 $excel.insertUnderColumn("/auto/SVMX_Catalyst/fsaautomation/resources/TestData.xlsx", "RS_10533", "Data1",$WOName ,"2");
 $excel.insertUnderColumn("/auto/SVMX_Catalyst/fsaautomation/resources/TestData.xlsx", "RS_10533", "Data2",$Productname10533 ,"2");
