@@ -21,12 +21,12 @@ var $formulaDescriptionArray = ["If customerDown is true then Billing type=Paid 
                                 ];
 
 if($orgtype=="Base"){
-	var $formulaArray =["$F.IF($F.EQUAL($D.Work_Order.SVMXDEV__Customer_Down__c,'true'),'Paid',$D.Work_Order.SVMXDEV__Billing_Type__c)",
-	                    "$F.IF($F.EQUAL($D.Work_Order.SVMXDEV__Billing_Type__c,'Courtesy'),'true',$D.Work_Order.SVMXDEV__Is_Entitlement_Performed__c)",
+	var $formulaArray =["$F.IF($F.EQUAL($D.Work_Order.SVMXC__Customer_Down__c,'true'),'Paid',$D.Work_Order.SVMXC__Billing_Type__c)",
+	                    "$F.IF($F.EQUAL($D.Work_Order.SVMXC__Billing_Type__c,'Courtesy'),'true',$D.Work_Order.SVMXC__Is_Entitlement_Performed__c)",
 	                    "$F.NOW()",
 	                    "$F.DATE($F.YEAR($D.Work_Order.CreatedDate)+1, $F.MONTH($D.Work_Order.CreatedDate), 1)",
-	                    "$F.MONTH($D.Labor.SVMXDEV__Start_Date_and_Time__c)",
-	                    "$F.YEAR($D.Labor.SVMXDEV__Start_Date_and_Time__c)"
+	                    "$F.MONTH($D.Labor.SVMXC__Start_Date_and_Time__c)",
+	                    "$F.YEAR($D.Labor.SVMXC__Start_Date_and_Time__c)"
 	                    ];
 }
 
