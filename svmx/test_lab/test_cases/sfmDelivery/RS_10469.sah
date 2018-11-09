@@ -13,7 +13,7 @@ var $ctr = 0;
 var $i = 0;
 var $currentWizardName = $wizardName[4];
 var $pageLayoutForProfile = "SVMX Work Details Usage - Admin";
-//var $myDomain = "/lightning/";
+//var $sfd_myDomain = "/lightning/";
 var $tempFields = ["Age"];
 var $lineType = "Parts";
 var $mapType = "Field Map For Existing Records";
@@ -41,7 +41,7 @@ _wait(15000);
 //***************************************************************************************
 
 //Create custom fields if needed
-$sfm_act_lightningConfig.addCustomFields($childObject, $customFieldsNames, $missingStdDataTypes, $myDomain,$multiPicklistValues);
+$sfm_act_lightningConfig.addCustomFields($childObject, $customFieldsNames, $missingStdDataTypes, $sfd_myDomain,$multiPicklistValues);
 _closeWindow();
 _selectWindow();
 //Create work order
@@ -57,7 +57,7 @@ _log($fieldsAbsentInPage);
 
 if($fieldsAbsentInPage.length > 0){
 	$sfm_act_lightningConfig.navigateToObjectsInLightning($childObject);
-	$sfm_act_lightningConfig.addFieldsToLightningPageLayout($childObject,$pageLayoutForProfile,$fieldsAbsentInPage,$myDomain);
+	$sfm_act_lightningConfig.addFieldsToLightningPageLayout($childObject,$pageLayoutForProfile,$fieldsAbsentInPage,$sfd_myDomain);
 	_selectDomain();
 	_selectWindow("Home | Salesforce");
 	_closeWindow();
