@@ -36,7 +36,7 @@ var $timeStamp = $bo_act_navigation.getCurrentTimeStamp();
 $processName = $processName + "_" + $timeStamp;
 var $pageLayoutName = $processName + "pg";
 var $mapName = $processName + "mp";
-var $myDomain = "/lightning/";
+//var $sfd_myDomain = "/lightning/";
 //**************************************************************************************
 //Login and switch to lightning
 $bo_act_login.login($g_url,$sfmlUsn,$sfmlPwd);
@@ -50,7 +50,7 @@ _click(_link("Fields & Relationships"));
 
 _setValue(_searchbox("globalQuickfind"),$ctrlPicklist);
 _click(_link($ctrlPicklist));
-_selectDomain($myDomain);
+_selectDomain($sfd_myDomain);
 
 
 //Delete existing dependencies and create new one.

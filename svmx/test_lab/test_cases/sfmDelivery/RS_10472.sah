@@ -47,7 +47,7 @@ var $fieldsAbsentInPage = [];
 var $missingStdDataTypes = ["URL","Picklist (Multi-Select)","Percent","Phone"];
 var $customFieldsNames = ["Automation URL","Automation multipicklist","Automation Percent","Automation Phone"];
 var $pageLayoutForProfile = "SVMX Work Order - Admin";
-var $myDomain = "/lightning/";
+//var $myDomain = "/lightning/";
 var $multiPicklistValues = ["Multipicklist1","Multipicklist2","Multipicklist3"];
 var $mapType = "Field Map For Existing Records";
 

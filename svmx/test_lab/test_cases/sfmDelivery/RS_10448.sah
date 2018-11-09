@@ -175,7 +175,7 @@ function RS1052_checkAndAddField_ContactPicklist(){
 	var $objectName = "Work Order";
 	var $fieldNames = ["Parts Order"];
 	var $dataTypes = ["Lookup Relationship"];
-	var $myDomain = "/lightning/";
+	//var $myDomain = "/lightning/";
 	var $multiPicklistValues = [""];
 	var $lookupType=["Parts Order"];
 	//Create custom fields if needed

@@ -269,11 +269,11 @@ function RS10445_checkAndAddField_AutoContact(){
 	var $objectName = "Work Detail";
 	var $fieldNames = ["AutoContact"];
 	var $dataTypes = ["Lookup Relationship"];
-	var $myDomain = "/lightning/";
+	//var $sfd_myDomain = "/lightning/";
 	var $multiPicklistValues = [""];
 	var $lookupType=["Contact"];
 	//Create custom fields if needed
-	$sfm_act_lightningConfig.addCustomFields($objectName, $fieldNames, $dataTypes, $myDomain, $multiPicklistValues, $lookupType);
+	$sfm_act_lightningConfig.addCustomFields($objectName, $fieldNames, $dataTypes, $sfd_myDomain, $multiPicklistValues, $lookupType);
 	_closeWindow();
 	_selectWindow();
 }

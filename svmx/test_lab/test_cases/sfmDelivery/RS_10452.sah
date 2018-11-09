@@ -204,7 +204,7 @@ function RS1052_checkAndAddField_AccountPicklist(){
 	var $objectName = "Work Order";
 	var $fieldNames = ["Account Picklist"];
 	var $dataTypes = ["Picklist"];
-	var $myDomain = "/lightning/";
+	//var $myDomain = "/lightning/";
 	var $multiPicklistValues = ["Acme","ServiceMax","SalesForce"];
 	var $lookupType=[""];
 	//Create custom fields if needed
@@ -216,7 +216,7 @@ function RS1052_checkAndAddField_ContactPicklist(){
 	var $objectName = "Contact";
 	var $fieldNames = ["Contact Picklist"];
 	var $dataTypes = ["Picklist"];
-	var $myDomain = "/lightning/";
+	//var $myDomain = "/lightning/";
 	var $multiPicklistValues = ["Acme","ServiceMax","SalesForce"];
 	var $lookupType=[""];
 	//Create custom fields if needed
