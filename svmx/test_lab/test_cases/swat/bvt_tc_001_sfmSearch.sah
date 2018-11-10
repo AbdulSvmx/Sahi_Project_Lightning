@@ -5,9 +5,6 @@
 //
 //Author	:- 	Shashikala Kamath
 //Reviewer	:- 	
-//Pre-Req	:-	
-//				1. Create Case, Account, Contact, Product, Installed Base.
-// 				2. Create WO with "Order status=Open", "Priority=High", "Type=Field Service"
 //
 //Steps		:-	
 //				1. Navigate to Servicemax SetUp> Service Flow Manager> SFM Search.
@@ -33,8 +30,8 @@
 ///////////////////////////////////
 */
 
-var $BVT_TC_001_SFMSearch = _testcase("$BVT_TC_001_SFMSearch","Create SFM Search in configuration screen");
-$BVT_TC_001_SFMSearch.start();
+var $bvt_tc_001_sfmSearch = _testcase("$bvt_tc_001_sfmSearch","Create SFM Search in configuration screen");
+$bvt_tc_001_sfmSearch.start();
 	_setSpeed($g_stepSpeed);
 	
 	var $objectName = "Work Order";
@@ -81,7 +78,7 @@ $BVT_TC_001_SFMSearch.start();
 	_closeWindow();
 	
 	
-$BVT_TC_001_SFMSearch.end();
+	$bvt_tc_001_sfmSearch.end();
  
 
 
