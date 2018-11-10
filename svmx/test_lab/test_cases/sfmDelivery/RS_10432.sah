@@ -27,7 +27,7 @@ var $picklistLabelsArrayHeader = ["Country"];
 var $picklistValuesArrayHeader = ["India"];
 var $dateTimeField = "Scheduled Date Time";
 var $productName = "Chrome";
-var $mapType = "Value Map for New Records";
+var $mapType = "Value Map For New Records";
 
 //Appending current timestamp to process name to make it unique.
 var $timeStamp = $bo_act_navigation.getCurrentTimeStamp();

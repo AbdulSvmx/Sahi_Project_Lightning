@@ -77,7 +77,7 @@ _wait(5000);
 _selectWindow("/SFM Transaction Designer/");
 _wait(10000);
 $textLabels = ["Canceled By","Consumed From Location"];
-$mapType = "Value Map for New Records";
+$mapType = "Value Map For New Records";
 _click($bo_pg_sfmTransactionAndDesigner.btn_qualifyingCriteriaAndFieldMapping);
 $bo_act_mappings.createMapping("Parts",$mapType,[],[],$textLabels,$textValues,$mapName);
 _closeWindow();
