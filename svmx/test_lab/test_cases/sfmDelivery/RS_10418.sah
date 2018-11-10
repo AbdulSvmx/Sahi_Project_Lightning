@@ -20,7 +20,7 @@ var $success_message = "Work Order was saved.";
 var $timeStamp = $bo_act_navigation.getCurrentTimeStamp();
 $processName = $processName + "_" + $timeStamp;
 var $pageLayoutName = $processName + "pg";
-var $myDomain = "/lightning/";
+//var $sfd_myDomain = "/lightning/";
 //**************************************************************************************
 //Login and switch to lightning
 //$bo_act_login.login($g_url,$bac_un,$bac_pwd);
@@ -36,7 +36,7 @@ _click(_link("Fields & Relationships"));
 
 _setValue(_searchbox("globalQuickfind"),$wo_picklist);
 _click(_link($wo_picklist));
-_selectDomain($myDomain);
+_selectDomain($sfd_myDomain);
 
 
 //Delete existing dependencies and create new one.

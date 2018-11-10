@@ -72,11 +72,12 @@ var $sfmPwd = "Maxplore4";
  var $wizardType = ["None","SFM","Inventory","Others","Output Document"];
 
  //dev org credentials
- var $sfmlUsn = "scarface.qa8@admin.com";
- var $sfmlPwd ="fireexit1";
- var $sfmClientId ="3MVG9_7ddP9KqTzch21szrgYIfzQnUMZVsivQJ2gRJp09TI8IDWTMXN_LaUostaQT9hdma6X5N6ZrLwwpju3F";
- var $sfmConsumerSecret = "3960053550438003199";
- var $sfmOrgInstance = "cs10"; 
+ var $sfmlUsn = "safi.svmxdev@regression-test.com";
+ var $sfmlPwd ="servicemax1";
+ var $sfmClientId ="3MVG9srSPoex34FUKHjdsODAqpexFPIW4JUCjGfaUoIjg95C_v65Fk_l7u_y3uFckDQKFa2n_2WYeBRqk26EA";
+ var $sfmConsumerSecret = "917176404891042449";
+ var $sfmOrgInstance = "cs53"; 
+ var $sfd_myDomain = "/sfd-auto/";
  /*
 //  commenting base org details to run in dev org
  var $sfmlUsn = "sfdl_auto@automation.com";

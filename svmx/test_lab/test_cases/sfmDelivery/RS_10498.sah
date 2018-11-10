@@ -20,7 +20,7 @@ var $productName = "Chrome";
 var $lineType = "Parts";
 var $fieldsAbsentInPage = [];
 var $pageLayoutForProfile = "SVMX Work Details Usage - Admin";
-var $myDomain = "/lightning/";
+//var $sfd_myDomain = "/lightning/";
 var $multiPicklistValues = ["Multipicklist1","Multipicklist2","Multipicklist3"];
 var $tempFields = ["Age"];
 var $initialChildFields = ["Line Type","Record Type ID","Line Number"];
@@ -43,7 +43,7 @@ $sfm_act_lightningConfig.switchToLightning();
 _wait(15000);
 //***************************************************************************************
 //Create custom fields if needed
-$sfm_act_lightningConfig.addCustomFields($objectName, $customFieldsNames, $missingStdDataTypes, $myDomain,$multiPicklistValues);
+$sfm_act_lightningConfig.addCustomFields($objectName, $customFieldsNames, $missingStdDataTypes, $sfd_myDomain,$multiPicklistValues);
 _closeWindow();
 _selectWindow();
 
@@ -60,7 +60,7 @@ _log($fieldsAbsentInPage);
 
 if($fieldsAbsentInPage.length > 0){
 	$sfm_act_lightningConfig.navigateToObjectsInLightning($objectName);
-	$sfm_act_lightningConfig.addFieldsToLightningPageLayout($objectName,$pageLayoutForProfile,$fieldsAbsentInPage,$myDomain);
+	$sfm_act_lightningConfig.addFieldsToLightningPageLayout($objectName,$pageLayoutForProfile,$fieldsAbsentInPage,$sfd_myDomain);
 	_selectDomain();
 	_selectWindow("Home | Salesforce");
 	_closeWindow();

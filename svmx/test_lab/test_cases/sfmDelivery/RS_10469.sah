@@ -13,7 +13,7 @@ var $ctr = 0;
 var $i = 0;
 var $currentWizardName = $wizardName[4];
 var $pageLayoutForProfile = "SVMX Work Details Usage - Admin";
-var $myDomain = "/lightning/";
+//var $sfd_myDomain = "/lightning/";
 var $tempFields = ["Age"];
 var $lineType = "Parts";
 var $mapType = "Field Map For Existing Records";
@@ -21,8 +21,8 @@ var $multiPicklistValues = ["Multipicklist1","Multipicklist2","Multipicklist3"];
 var $initialChildFields = ["Line Type","Record Type ID","Line Number"];
 var $initalChildContainers = [$lineType,$lineType,$lineType];
 var $initialChildValues = [$lineType,"Usage/Consumption"];
-var $missingStdDataTypes = ["URL","Picklist (Multi-Select)","Percent","Phone","Date","Email"];
-var $customFieldsNames = ["Automation ChildURL","Automation Childmultipicklist","Automation ChildPercent","Automation ChildPhone","Automation ChildDate2","Automation ChildEmail"];
+var $missingStdDataTypes = ["URL","Picklist (Multi-Select)","Percent","Phone","Date","Date","Email"];
+var $customFieldsNames = ["Automation ChildURL","Automation Childmultipicklist","Automation ChildPercent","Automation ChildPhone","Automation ChildDate2","Automation ChildDate3","Automation ChildEmail"];
 var $fieldsToMap = ["Account","Record Type","Include in Quote","Billable Line Price","Date Received","Start Date and Time","Automation ChildEmail","Automation Childmultipicklist","Billable Qty","Automation ChildPercent","Automation ChildPhone","Activity Type","Received City","Received Street","Reference Information","Automation ChildURL"];
 var $additionalFields = ["Include in Quote","Account","Billable Line Price","Date Received","Automation ChildDate2","Automation ChildDate3","Start Date and Time","End Date and Time","Closed On","Canceled On","Automation ChildEmail","Automation Childmultipicklist","Billable Qty","Automation ChildPercent","Automation ChildPhone","Cost Category","Received City","Received Street","Reference Information","Automation ChildURL"];
 $containerName = [$lineType,$lineType,$lineType,$lineType,$lineType,$lineType,$lineType,$lineType,$lineType,$lineType,$lineType,$lineType,$lineType,$lineType,$lineType,$lineType,$lineType,$lineType,$lineType,$lineType,$lineType];
@@ -41,7 +41,7 @@ _wait(15000);
 //***************************************************************************************
 
 //Create custom fields if needed
-$sfm_act_lightningConfig.addCustomFields($childObject, $customFieldsNames, $missingStdDataTypes, $myDomain,$multiPicklistValues);
+$sfm_act_lightningConfig.addCustomFields($childObject, $customFieldsNames, $missingStdDataTypes, $sfd_myDomain,$multiPicklistValues);
 _closeWindow();
 _selectWindow();
 //Create work order
@@ -57,7 +57,7 @@ _log($fieldsAbsentInPage);
 
 if($fieldsAbsentInPage.length > 0){
 	$sfm_act_lightningConfig.navigateToObjectsInLightning($childObject);
-	$sfm_act_lightningConfig.addFieldsToLightningPageLayout($childObject,$pageLayoutForProfile,$fieldsAbsentInPage,$myDomain);
+	$sfm_act_lightningConfig.addFieldsToLightningPageLayout($childObject,$pageLayoutForProfile,$fieldsAbsentInPage,$sfd_myDomain);
 	_selectDomain();
 	_selectWindow("Home | Salesforce");
 	_closeWindow();
