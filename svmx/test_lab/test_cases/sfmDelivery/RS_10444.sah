@@ -33,6 +33,9 @@ $filterValue=$sfm_act_restApiMethods.postRestApi($sfmlUsn,$sfmlPwd,$sfmClientId,
 //get the caseNumber
 $caseNumber =$sfm_act_restApiMethods.getRestApi($sfmlUsn,$sfmlPwd,$sfmClientId,$sfmConsumerSecret,$sfmOrgInstance,"GET", $objName1, $columnName1, $filter1, $filterValue);
 
+//Create WO through REST API
+var $woNumber = $sfm_act_createCustomWizard.createBlankWoFromRest($sfmlUsn, $sfmlPwd, $sfmClientId, $sfmConsumerSecret, $sfmOrgInstance);
+
 
 //login to the org
 _setSpeed($g_stepSpeed);
@@ -50,13 +53,9 @@ _click($sfm_pg_sfmDesigner.btn_saveSFM);
 $sfm_act_wizards.addToWizard($wizardObject, $wizardName[3], $wizardType[1], $sfmName);  
 _wait(3000); 
 
-//Create WO through UI for the validatiion
-_selectDomain();
-$sfm_act_createCustomWizard.createWowithoutvalues();
-
-_click(_span($sfmName));
-_selectDomain($g_domain);
-_wait(8000,_div($sfmName));
+//Navigate to the WO for validation
+$bo_act_navigation.navigateToCreatedRecordUsingGlobalSearch($woNumber);
+$sfm_act_createCustomWizard.clickWizardBtn($sfmName);
 
 //select a case to validate form fill
 _click($sfm_pg_wizardWindow.txt_caseLookup);

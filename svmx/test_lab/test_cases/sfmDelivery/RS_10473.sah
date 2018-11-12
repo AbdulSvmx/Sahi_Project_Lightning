@@ -1,4 +1,4 @@
-var $rs_10473 = _testcase("RS_10473","");
+var $rs_10473 = _testcase("RS_10473","Verify Custom Actions: Out of The Box (OOTB) check");
 $rs_10473.start();
 var $sfmName = "Work Order Validate Address";
 var $wizardObject ="Work Order";

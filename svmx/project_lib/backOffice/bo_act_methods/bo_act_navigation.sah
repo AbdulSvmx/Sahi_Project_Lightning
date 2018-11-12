@@ -244,6 +244,7 @@ var $bo_act_navigation = new function bo_act_navigation() {
     	//Note: Search results is not displayed now. So removed heading1 anchor.
     	//Please do not change
     	this.navigateToCreatedRecordUsingGlobalSearch = function($recordToBeSearch){
+    		_selectDomain();
     	_click(_link("Home"));
     	_setValue(_textbox("Search Salesforce"),$recordToBeSearch);
     	_keyPress(_textbox("Search Salesforce"),13);

@@ -10,7 +10,8 @@ var $containerName = ["Order Status"];
 var $fieldName = ["Scheduled Date"];
 var $wizardCriteria = "EXPR002-SVMXSTD: Open Work Orders";
 var $wizardObject ="Work Order";
-
+//Create WO through REST API
+var $woNumber = $sfm_act_createCustomWizard.createBlankWoFromRest($sfmlUsn, $sfmlPwd, $sfmClientId, $sfmConsumerSecret, $sfmOrgInstance);
 
 _setSpeed($g_stepSpeed);
 $bo_act_login.login($g_url, $sfmlUsn,$sfmlPwd);
@@ -19,9 +20,8 @@ _wait(15000);
 $sfm_act_wizards.addToWizard($wizardObject, $wizardName[7], $wizardType[1],$sfmName,false,null,$wizardCriteria );  
  
 
-//Create WO with OrderStatus as closed through UI for the validatiion
-_selectDomain();
-$sfm_act_createCustomWizard.createWOwithOrderStatus("Closed");
+//Navigate to the WO for validation
+$bo_act_navigation.navigateToCreatedRecordUsingGlobalSearch($woNumber);
 
 //Check for Wizard visibility when criteria is not met
 _assertNotVisible(_span($wizardName[7]),$wizardName[7]+" is not visbile when criteria is not met");  
