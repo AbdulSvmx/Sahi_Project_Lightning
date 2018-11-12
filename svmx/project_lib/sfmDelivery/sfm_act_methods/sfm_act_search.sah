@@ -180,7 +180,23 @@ this.checkSearchandAdd = function($searchName){
 		return bSearchStatus;
 	};
 		
-
+this.addDisplayFields = function($displayObjects,$displayFields)
+	{
+		var $i=0;
+		var $j=2;
+		for($i=1;$i<$displayFields.length;$i++)
+		{
+		_click($sfm_pg_search.btn_addRowDisplayFields);
+		_wait(10000);
+		_setSelected(_select(0,_near(_cell($j.toString(),_near($sfm_pg_search.txt_ChooseDisplayFields)))),$displayObjects[$i]);
+		_setSelected(_select(1,_near(_cell($j.toString(),_near($sfm_pg_search.txt_ChooseDisplayFields)))),$displayFields[$i]);
+		$j++;
+		}
+		
+		_click($sfm_pg_search.btn_objectSave);
+		_wait(8000);
+		
+	};
 	this.addResultsToDisplay = function($clicks,$sheetName){
 		$selectData = $excel.readFromCustomExcel("../sfmDelivery/sfmDelivery_excelData/data.xlsx", $sheetName,"","");
 //		_log($selectData);
