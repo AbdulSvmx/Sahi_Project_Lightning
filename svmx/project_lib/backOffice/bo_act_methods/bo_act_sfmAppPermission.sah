@@ -136,6 +136,7 @@ var $bo_act_SFMAppPermission = new function bo_act_SFMAppPermission() {
 	
 	this.addnewobjectdownloacriteria = function($objectname)
 	{
+		$bo_act_navigation.navigateToHome();
 		$bo_act_navigation.navigateToSvmxSetup();
 		_selectDomain("/svmx/");
 		_click($bo_pg_sfmAppPermissionD.btn_mobile_configuration);
