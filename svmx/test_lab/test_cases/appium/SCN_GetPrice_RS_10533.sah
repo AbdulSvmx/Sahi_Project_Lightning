@@ -138,8 +138,8 @@ var $module = "Work Order";
 var $submodule = "Create Work Order Lines VF";
 $bo_act_configurationProfiles.editGroupProfileForTextSettings($group_profilename,$module,$submodule, "SET006", $pricebookName);
 $bo_act_configurationProfiles.editGroupProfileForTextSettings($group_profilename,$module,$submodule, "SET018", $ServicepricebookName);
-//$bo_act_configurationProfiles.editGroupProfileForBooleanSettings($group_profilename,$module,$submodule, "SET005", true);
-//$bo_act_configurationProfiles.editGroupProfileForBooleanSettings($group_profilename,$module,$submodule, "SET010", true);
+$bo_act_configurationProfiles.editGroupProfileForBooleanSettings($group_profilename,$module,$submodule, "SET005", true);
+$bo_act_configurationProfiles.editGroupProfileForBooleanSettings($group_profilename,$module,$submodule, "SET010", true);
 
 
 //Edit a Service Price Book
