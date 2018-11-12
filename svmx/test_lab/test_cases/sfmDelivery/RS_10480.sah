@@ -5,14 +5,14 @@ $rs_10480.start();
  * while modifying the codes to run on both Dev as well as Base.
  */
 $wizTitle = $bo_act_common.generateRandomName("SFMWizPermission_");
+//Create WO through REST API
+var $woNumber = $sfm_act_createCustomWizard.createBlankWoFromRest($sfmlUsn, $sfmlPwd, $sfmClientId, $sfmConsumerSecret, $sfmOrgInstance);
+
 $bo_act_login.login($g_url,$sfmlUsn,$sfmlPwd);
 $sfm_act_wizards.addToWizard("Work Order", $wizTitle, $wizardType[4], "Work Order Service Report","false","Default Group Profile");  
-_selectDomain();
-$sfm_act_createCustomWizard.createWowithoutvalues();
-/*$bo_act_navigation.navigateToSfmWizard();
-$sfm_act_createCustomWizard.chooseObject("Work Order");
-$sfm_act_createCustomWizard.addManageWizSteps($wizTitle,"Output Document","Work Order Service Report","Default Group Profile");
-$sfm_act_createCustomWizard.createBlankWo(); */
+//Navigate to the WO for validation
+$bo_act_navigation.navigateToCreatedRecordUsingGlobalSearch($woNumber);
+
 _wait(1000);
 $sfm_pg_wo.assert_wizard($wizTitle);
 $rs_10480.end();

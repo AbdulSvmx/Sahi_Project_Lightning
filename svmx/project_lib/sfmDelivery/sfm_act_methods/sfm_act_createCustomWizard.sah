@@ -869,6 +869,17 @@ var $sfm_act_createCustomWizard = new function sfm_act_createCustomWizard() {
 		
 	};
 	
+	this.createBlankWoFromRest = function($sfmdUsn, $sfmdPwd,$sfmClientId,$sfmConsumerSecret,$sfmOrgInstance){
+		var $objName= $orgnamespace+"__Service_Order__c";
+		var $obJson = "{\""+$orgnamespace+"__Zip__c\":\"560001\"}";  
+		var $columnName = "Name";
+		var $filter="id";
+		//create an WO through restapi
+		var $WoID = $sfm_act_restApiMethods.postRestApi($sfmdUsn, $sfmdPwd,$sfmClientId,$sfmConsumerSecret,$sfmOrgInstance,$objName,$obJson,"POST");
+		var $WONo =$sfm_act_restApiMethods.getRestApi($sfmdUsn, $sfmdPwd,$sfmClientId,$sfmConsumerSecret,$sfmOrgInstance,"GET", $objName, $columnName, $filter, $WoID);
+		return $WONo;
+	};
+	
 //	Added by Safi
 	this.createWOwithOrderStatus = function($OrdrStatus){	
 		_selectDomain();
