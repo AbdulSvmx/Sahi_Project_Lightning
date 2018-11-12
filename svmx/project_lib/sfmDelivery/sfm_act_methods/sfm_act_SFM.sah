@@ -212,6 +212,7 @@ var $sfm_act_SFM = new function sfm_act_SFM() {
 				}
 			//Below logic is used for selecting object from multi match list	
 			_setValue($bo_pg_sfmTransactionAndDesigner.txt_quickFindField, $fieldName[$i]);
+			/*
 			var $elementName=$fieldName[$i];
 				var $find=true;
 				var $k=0;
@@ -231,7 +232,10 @@ var $sfm_act_SFM = new function sfm_act_SFM() {
 						$k++;
 					}
 				}
-				_click(_f("main").s_button("/Add Field/"));
+				*/
+			
+			_click(_f("main").s_label($fieldName[$i]).near(_f("main").s_textinput($fieldName[$i])));
+			_click(_f("main").s_button("/Add Field/"));
 		}
 		_click($bo_pg_sfmTransactionAndDesigner.btn_pageLayoutSave);
 		_wait(3000, _isVisible($bo_pg_sfmTransactionAndDesigner.lbl_pageLayoutSaved));
