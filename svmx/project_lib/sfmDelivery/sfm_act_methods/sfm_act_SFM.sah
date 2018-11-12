@@ -121,6 +121,13 @@ var $sfm_act_SFM = new function sfm_act_SFM() {
 		return $bProcessStatus;
 	};
 	
+	**
+	 * Author		:	Lakshmi BS
+	 * Function		:	To search and check custom process
+	 * Parameters	:	$sfmName: Process name
+	 * Examples		:	Refer RS_10543.sah
+	 */
+	
 	this.sfmProcessCheck = function($sfmName,$bProcessStatus) 
 			 {
 		$bo_act_navigation.navigateToSfmTransactionDesigner();
