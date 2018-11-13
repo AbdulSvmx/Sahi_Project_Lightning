@@ -71,9 +71,62 @@ _click(_f("main").s_label("SVMXSTD: Map Work Order to Checklist"));
 //$bo_act_checklistdesigner.addQuestion("Text", "What is the Work Order Number?", true,"Work Order Number");
 $bo_act_checklistdesigner.addQuestion("Text", "AUTO_Which City you are from?", true,"City");
 $bo_act_checklistdesigner.addQuestion("Picklist", "AUTO_What is the Order Status?", true,"Order Status");
-$bo_act_checklistdesigner.addQuestion("Number", "AUTO_What is the IdleTime?", true,"Idle Time (in Minutes)");
-$bo_act_checklistdesigner.addQuestion("Date", "AUTO_What is the Scheduled Date?", true,"Scheduled Date");
-$bo_act_checklistdesigner.addQuestion("Date Time", "AUTO_What is the ScheduledDatetime?", true,"Scheduled Date Time");
+
+var $queType10="Number";
+var $queName10="AUTO_What is the IdleTime?";
+var $sectionName10="Checklist Section Title";
+
+var $helpURL10="http://google.com/Doc";
+var $tag10="ch_Number_-01";
+var $addToLibAndForm10=true;
+var $queCommonDetails10=[$queType10,$queName10,$helpURL10,$tag10,$addToLibAndForm10];
+
+var $preFillFromWO10=true;
+var $defaultVal10="Idle Time (in Minutes)";
+var $queSpecificDetails10=[$preFillFromWO10,$defaultVal10];
+$sfm_act_formDesigner.createCheckListQuestion($sectionName10, $queCommonDetails10, $queSpecificDetails10);
+
+
+//$bo_act_checklistdesigner.addQuestion("Number", "AUTO_What is the IdleTime?", true,"Idle Time (in Minutes)");
+
+
+//create Date Question in section - PreFill
+var $queType9="Date Time";
+var $sectionName9="Checklist Section Title";
+
+var $queName9="AUTO_What is the ScheduledDatetime?";
+var $helpURL9="http://google.com/Doc";
+var $tag9="ch_date_-01";
+var $addToLibAndForm9=true;
+var $queCommonDetails9=[$queType9,$queName9,$helpURL9,$tag9,$addToLibAndForm9];
+
+var $preFillFromWO9=true;
+var $defaultAnsType9="";
+var $defaultVal9="Scheduled Date Time";
+var $queSpecificDetails9=[$preFillFromWO9,$defaultAnsType9,$defaultVal9];
+$sfm_act_formDesigner.createCheckListQuestion($sectionName9, $queCommonDetails9, $queSpecificDetails9);
+
+
+//$bo_act_checklistdesigner.addQuestion("Date", "AUTO_What is the Scheduled Date?", true,"Scheduled Date");
+
+
+//create Date Question in section - PreFill
+var $queType8="Date";
+var $sectionName8="Checklist Section Title";
+
+var $queName8="AUTO_What is the Scheduled Date?";
+var $helpURL8="http://google.com/Doc";
+var $tag8="ch_date_-01";
+var $addToLibAndForm8=true;
+var $queCommonDetails8=[$queType8,$queName8,$helpURL8,$tag8,$addToLibAndForm8];
+
+var $preFillFromWO8=true;
+var $defaultAnsType8="";
+var $defaultVal8="Scheduled Date";
+var $queSpecificDetails8=[$preFillFromWO8,$defaultAnsType8,$defaultVal8];
+$sfm_act_formDesigner.createCheckListQuestion($sectionName8, $queCommonDetails8, $queSpecificDetails8);
+
+//$bo_act_checklistdesigner.addQuestion("Date Time", "AUTO_What is the ScheduledDatetime?", true,"Scheduled Date Time");
 
 _wait(5000);
 
