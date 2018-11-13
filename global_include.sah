@@ -6,7 +6,7 @@ var $g_stepSpeed = 300;
 _setSpeed($g_stepSpeed);
 
 // PLease CHANGE the Flag to decide whether Dev or Base
-var $orgtype = "Base";
+var $orgtype = "Dev";
 
 if ($orgtype == "Dev") {
 	var $orgnamespace = "SVMXDEV";
@@ -72,20 +72,20 @@ var $sfmPwd = "Maxplore4";
  var $wizardType = ["None","SFM","Inventory","Others","Output Document"];
 
  //dev org credentials 
- /*
+ 
  var $sfmlUsn = "safi.svmxdev@regression-test.com";
  var $sfmlPwd ="servicemax1";
  var $sfmClientId ="3MVG9srSPoex34FUKHjdsODAqpbdJxlgnt_zgMhdj8b37sDH0lZ_TL64TnDoxnRHLOmtP6HvKluYrdt3VJKc3";
  var $sfmConsumerSecret = "106093921577812496";
  var $sfmOrgInstance = "cs53"; 
  var $sfd_myDomain = "/sfd-auto/"; 
-*/
+ /*
 //  commenting base org details to run in dev org
  var $sfmlUsn = "sfdl_auto@automation.com";
  var $sfmlPwd ="Maxplore2";
  var $sfmClientId ="YjkyMzJmNDUzMGNmOTYzODVlNDQ0ZjE2OTUxOTU1NDI5MGViN2I3NWU3YTFjNmY300D290000000WVC";
  var $sfmConsumerSecret = "5287076090725084260";
- var $sfmOrgInstance = "cs19";  
+ var $sfmOrgInstance = "cs19";  */
 
 // DC Global Variables
 var $dc_org = $orgtype;
