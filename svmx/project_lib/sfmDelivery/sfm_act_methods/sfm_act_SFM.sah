@@ -210,10 +210,11 @@ var $sfm_act_SFM = new function sfm_act_SFM() {
 			else{
 				_click(_f("main").s_datagroup("dataGroup").near(_f("main").s_richtext($containerName[$i])));				
 				}
-			//Below logic is used for selecting object from multi match list	
 			_setValue($bo_pg_sfmTransactionAndDesigner.txt_quickFindField, $fieldName[$i]);
 
+			//Below logic is used for selecting object from multi match list
 			var $elementName=$fieldName[$i];
+			var $searchString=null;
 			if($elementName.includes("\(")){
 				$searchString=$elementName.substring(0,$elementName.indexOf("\("));
 				_log($searchString);
