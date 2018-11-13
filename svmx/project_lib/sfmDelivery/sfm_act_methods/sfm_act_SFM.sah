@@ -212,19 +212,21 @@ var $sfm_act_SFM = new function sfm_act_SFM() {
 				}
 			//Below logic is used for selecting object from multi match list	
 			_setValue($bo_pg_sfmTransactionAndDesigner.txt_quickFindField, $fieldName[$i]);
-			/*
+
 			var $elementName=$fieldName[$i];
+			if($elementName.includes("\(")){
+				$searchString=$elementName.substring(0,$elementName.indexOf("\("));
+				_log($searchString);
+			}else{
+				$searchString=$elementName;
+			}
 				var $find=true;
 				var $k=0;
 				var $element=null;
-				while ($find) {
-//					_log("search element name: "+$elementName);
-					if ($k==0) {
-						$element=_getValue(_f("main").s_label($elementName).near(_f("main").s_textinput($elementName)));
-					}else{
-						$element=_getValue(_f("main").s_label("/"+$elementName+"/["+$k+"]").near(_f("main").s_textinput($elementName)));
-					}
-//					_log("$element: "+$element);
+				while ($find && $k<10) {
+					_log("search element name: "+$elementName);
+					$element=_getValue(_f("main").s_label("/"+$searchString+"/["+$k+"]").near(_f("main").s_textinput($elementName)));
+					_log("$element: "+$element);
 					if ($elementName===$element) {
 						$find=false;
 						_click(_f("main").s_label($k).near(_f("main").s_textinput($elementName)));
@@ -232,9 +234,6 @@ var $sfm_act_SFM = new function sfm_act_SFM() {
 						$k++;
 					}
 				}
-				*/
-			
-			_click(_f("main").s_label($fieldName[$i]).near(_f("main").s_textinput($fieldName[$i])));
 			_click(_f("main").s_button("/Add Field/"));
 		}
 		_click($bo_pg_sfmTransactionAndDesigner.btn_pageLayoutSave);
