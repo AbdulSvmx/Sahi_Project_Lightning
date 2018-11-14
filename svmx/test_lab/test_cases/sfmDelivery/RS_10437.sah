@@ -11,7 +11,7 @@ var $wizardObject ="Work Order";
 
 var $formulaTargetObjectArray = ["Work Order","Work Order","Work Order","Work Order","Labor","Labor"];
 var $formulaTargetFieldArray = ["Billing Type","Is Entitlement Performed","Actual Onsite Response","Scheduled Date", "Billable Qty", "Billable Line Price"];
-var $formulaNameArray = [$sfmName+"BillingTypeFormula",$sfmName+"IsEntitlementPerformedFormula",$sfmName+"ActualOnsiteResponseEqNow",$sfmName+"ScheduledDateUpdate", $sfmName+"MonthFormula", $sfmName+"YearFormula"];
+var $formulaNameArray = [$sfmName+"BillingTypeFormula",$sfmName+"IsEntlPerfFormula",$sfmName+"ActualOnsiteResponseEqNow",$sfmName+"ScheduledDateUpdate", $sfmName+"MonthFormula", $sfmName+"YearFormula"];
 var $formulaDescriptionArray = ["If customerDown is true then Billing type=Paid else as is",
                                 "If Billing type is Courtesy then check Is Entitlement performed else as is",
                                 "Actual Onsite Response Equals Now",
