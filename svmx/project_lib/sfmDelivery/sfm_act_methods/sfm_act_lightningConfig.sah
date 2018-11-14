@@ -357,7 +357,8 @@ this.addCustomFields = function($objectName,$fieldNames,$dataTypes,$myDomain,$mu
 			}
 		
 	}
-	_closeWindow();
+_closeWindow();
+_selectWindow();
 };
 
 

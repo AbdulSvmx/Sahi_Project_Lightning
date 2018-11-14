@@ -41,7 +41,7 @@ _click(_link("Fields & Relationships"));
 
 _setValue(_searchbox("globalQuickfind"),$ctrlPicklist);
 _click(_link($ctrlPicklist));
-_selectDomain($sfd_sfd_myDomain);
+_selectDomain($sfd_myDomain);
 
 
 //Delete existing dependencies if any and create new one.

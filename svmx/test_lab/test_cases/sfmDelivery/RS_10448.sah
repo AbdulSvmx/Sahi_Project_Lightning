@@ -180,8 +180,7 @@ function RS1052_checkAndAddField_ContactPicklist(){
 	var $lookupType=["Parts Order"];
 	//Create custom fields if needed
 	$sfm_act_lightningConfig.addCustomFields($objectName, $fieldNames, $dataTypes, $sfd_myDomain, $multiPicklistValues, $lookupType);
-	_closeWindow();
-	_selectWindow();
+	
 }
 
 

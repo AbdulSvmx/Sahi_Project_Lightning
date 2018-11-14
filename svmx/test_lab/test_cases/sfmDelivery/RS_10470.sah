@@ -39,8 +39,7 @@ _wait(15000);
 
 //Create custom fields if needed
 $sfm_act_lightningConfig.addCustomFields($objectName, $customFieldsNames, $missingStdDataTypes, $sfd_myDomain,$multiPicklistValues);
-_closeWindow();
-_selectWindow();
+
 
 //Create work order
 var $wo_number = $sfm_act_createCustomWizard.createWowithdateliterals();

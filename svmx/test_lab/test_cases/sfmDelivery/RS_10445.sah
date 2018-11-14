@@ -274,8 +274,7 @@ function RS10445_checkAndAddField_AutoContact(){
 	var $lookupType=["Contact"];
 	//Create custom fields if needed
 	$sfm_act_lightningConfig.addCustomFields($objectName, $fieldNames, $dataTypes, $sfd_myDomain, $multiPicklistValues, $lookupType);
-	_closeWindow();
-	_selectWindow();
+	
 }
 		
 $rs_10445.end();
