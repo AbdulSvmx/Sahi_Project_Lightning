@@ -8,8 +8,9 @@ _setSpeed($g_stepSpeed);
 // PLease CHANGE the Flag to decide whether Dev or Base
 var $orgtype = "Base";
 
+var $orgnamespace;
 if ($orgtype == "Dev") {
-	var $orgnamespace = "SVMXDEV";
+	$orgnamespace = "SVMXDEV";
 } else {
 	$orgnamespace = "SVMXC";
 }
