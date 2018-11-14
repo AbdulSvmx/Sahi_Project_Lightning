@@ -208,7 +208,7 @@ function RS1052_checkAndAddField_AccountPicklist(){
 	var $multiPicklistValues = ["Acme","ServiceMax","SalesForce"];
 	var $lookupType=[""];
 	//Create custom fields if needed
-	$sfm_act_lightningConfig.addCustomFields($objectName, $fieldNames, $dataTypes, $myDomain, $multiPicklistValues, $lookupType);
+	$sfm_act_lightningConfig.addCustomFields($objectName, $fieldNames, $dataTypes, $sfd_myDomain, $multiPicklistValues, $lookupType);
 	_closeWindow();
 	_selectWindow();
 }
@@ -220,7 +220,7 @@ function RS1052_checkAndAddField_ContactPicklist(){
 	var $multiPicklistValues = ["Acme","ServiceMax","SalesForce"];
 	var $lookupType=[""];
 	//Create custom fields if needed
-	$sfm_act_lightningConfig.addCustomFields($objectName, $fieldNames, $dataTypes, $myDomain, $multiPicklistValues, $lookupType);
+	$sfm_act_lightningConfig.addCustomFields($objectName, $fieldNames, $dataTypes, $sfd_myDomain, $multiPicklistValues, $lookupType);
 	_closeWindow();
 	_selectWindow();
 }
