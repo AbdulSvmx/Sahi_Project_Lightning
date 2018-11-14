@@ -8,8 +8,9 @@ _setSpeed($g_stepSpeed);
 // PLease CHANGE the Flag to decide whether Dev or Base
 var $orgtype = "Base";
 
+var $orgnamespace;
 if ($orgtype == "Dev") {
-	var $orgnamespace = "SVMXDEV";
+	$orgnamespace = "SVMXDEV";
 } else {
 	$orgnamespace = "SVMXC";
 }
@@ -70,20 +71,22 @@ var $sfmPwd = "Maxplore4";
  var $wizardName = ["SFMDAuto_Ltng_DVR", "SFMDAuto_Ltng_WebServices","SFMDAuto_Ltng_Process","SFMDAuto_Ltng_LookUP","SFMDAuto_Ltng_Mappings",
                      "SFMDAuto_Ltng_Formula","SFMDAuto_Ltng_Expression","SFMAuto_Ltng_Wizards"];
  var $wizardType = ["None","SFM","Inventory","Others","Output Document"];
-
- //dev org credentials
- var $sfmlUsn = "scarface.qa8@admin.com";
- var $sfmlPwd ="fireexit1";
- var $sfmClientId ="3MVG9_7ddP9KqTzch21szrgYIfzQnUMZVsivQJ2gRJp09TI8IDWTMXN_LaUostaQT9hdma6X5N6ZrLwwpju3F";
- var $sfmConsumerSecret = "3960053550438003199";
- var $sfmOrgInstance = "cs10"; 
- /*
+/*
+ //dev org credentials 
+  var $sfmlUsn = "safi.svmxdev@regression-test.com";
+ var $sfmlPwd ="servicemax1";
+ var $sfmClientId ="3MVG9srSPoex34FUKHjdsODAqpbdJxlgnt_zgMhdj8b37sDH0lZ_TL64TnDoxnRHLOmtP6HvKluYrdt3VJKc3";
+ var $sfmConsumerSecret = "106093921577812496";
+ var $sfmOrgInstance = "cs53"; 
+ var $sfd_myDomain = "/sfd-auto/";  */
+ 
 //  commenting base org details to run in dev org
  var $sfmlUsn = "sfdl_auto@automation.com";
  var $sfmlPwd ="Maxplore2";
  var $sfmClientId ="YjkyMzJmNDUzMGNmOTYzODVlNDQ0ZjE2OTUxOTU1NDI5MGViN2I3NWU3YTFjNmY300D290000000WVC";
  var $sfmConsumerSecret = "5287076090725084260";
- var $sfmOrgInstance = "cs19"; */
+ var $sfmOrgInstance = "cs19"; 
+ var $sfd_myDomain = "/lightning/";
 
 // DC Global Variables
 var $dc_org = $orgtype;
@@ -99,8 +102,15 @@ var $swatUrl = "https://test.salesforce.com";
 var $swatUsn = "shashikala.svmx@ge.com";
 var $swatPwd = "maxpl0re";
 
+/**
+ * buildorg = "The org which needs to be Run in the Build Machine"- PLEASE KEEP IT DEFAULT WHEN CHECKING IN
+ * 
+ */
+var $appiumOrg = "buildorg12";
+if($appiumOrg.toLowerCase() != "buildorg")
+	{
 
-
+// This is all for the Local runs while Coding.
 // Appium
 var $appiumPath = "/auto/SVMX_Catalyst/Executable/";
 var $sahiIntermediatoryPath = "sahiResultCommon.txt";
@@ -120,6 +130,33 @@ var $pageLayout = "SVMX Work Order - Admin";
 var $appiumclient_id = "3MVG9ifmAKCHISbZGXS_tYaEGdq5pFNz6ZhYTkrLMlM9toUZC8UIDIt.2R4KYqLXKL5yc8HjHPh5NYoUERETS";
 var $appiumclient_secret = "3810777216167697283";
 var $appiumorginstance = "cs77";
+	
+}
+
+else{
+//===================================================================================================================
+// This is for the Second Org of Automation - DONOT CHANGE OR DELETE IT
+
+var $appiumPath = "/auto/SVMX_Catalyst/Executable/";
+var $sahiIntermediatoryPath = "sahiResultCommon.txt";
+
+var $appiumAdminUn="auto-admin@svmx.com";
+var $appiumAdminPwd="Svmx1234";
+
+var $appiumTechUn="auto-tech@svmx.com";
+var $appiumTechPwd="Svmx123#";
+var $appiumTechId="0053D000001Owg7QAC";
+var $appiumsfdcuserId="0053D000001OwGEQA0";
+var $profileName = "System Administrator";
+var $pageLayout = "SVMX Work Order - Admin";
+
+
+//THIS IS SPECIFIC TO A GIVEN ORG - DONOT TOUCH
+var $appiumclient_id = "3MVG9PE4xB9wtoY.10PTFz5.VceC4AJFQ5XrOS_MNf21tgdoArfeI1.o9LTRzahT4OeyEvVn.1i4Ii0cTWwlC";
+var $appiumclient_secret = "5328712246005014352";
+var $appiumorginstance = "cs70";
+	}
+
 
 
 // ==== Reference addition module START ====

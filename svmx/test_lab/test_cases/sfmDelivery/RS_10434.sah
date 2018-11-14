@@ -9,8 +9,8 @@ var $sfmTemplate = "SVMXSTD: Manage WO Usage Lines";
 var $isCustom = false;
 var $ctr = 0;
 var $i = 0;
-var $containerName = ["Order Status","Order Status","Parts","Parts","Parts"];
-var $fieldName=["Closed By","Site","Consumed From Location","Line Type","Record Type ID"];
+var $containerName = ["Order Status","Order Status","Parts","Parts","Parts","Parts"];
+var $fieldName=["Closed By","Site","Consumed From Location","Line Type","Record Type ID","Canceled By"];
 var $currentWizardName = $wizardName[4];
 var $success_message = "Work Order was saved.";
 var $stdMap = "SVMXSTD: Close Work Order";
@@ -43,7 +43,7 @@ var $expValues = [$currentUser,$inventoryLocation];
 //Clone standard process and add the dependent picklist in the screen designer
 _setSpeed(3000);
 $sfm_act_SFM.cloneTDM016($process_to_clone,$processName,$isCustom,$pageLayoutName, $sfmTemplate, $fieldName, $containerName);
-$sfm_act_SFM.addUserLookupInScreenDesigner("Canceled By","Parts");
+//$sfm_act_SFM.addUserLookupInScreenDesigner("Canceled By","Parts");
 _click($bo_pg_sfmTransactionAndDesigner.btn_quickSave1);
 _click($bo_pg_sfmTransactionAndDesigner.btn_qualifyingCriteriaAndFieldMapping);
 
@@ -77,7 +77,7 @@ _wait(5000);
 _selectWindow("/SFM Transaction Designer/");
 _wait(10000);
 $textLabels = ["Canceled By","Consumed From Location"];
-$mapType = "Value Map for New Records";
+$mapType = "Value Map For New Records";
 _click($bo_pg_sfmTransactionAndDesigner.btn_qualifyingCriteriaAndFieldMapping);
 $bo_act_mappings.createMapping("Parts",$mapType,[],[],$textLabels,$textValues,$mapName);
 _closeWindow();

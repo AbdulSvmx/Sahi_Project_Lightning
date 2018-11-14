@@ -357,7 +357,8 @@ this.addCustomFields = function($objectName,$fieldNames,$dataTypes,$myDomain,$mu
 			}
 		
 	}
-	_closeWindow();
+_closeWindow();
+_selectWindow();
 };
 
 
@@ -878,25 +879,6 @@ this.getWorkDetailNumber = function(){
 	return $wlNum;
 };
 
-this.getWorkDetailNumberFromWO = function() {
-	//This function fetches the latest work detail number from any work order
-	//Returns Work Detail Line number in the form of WL-*********
-	//Author : Janaki
-	_click($sfm_pg_wo.link_relatedListsTab);
-	var $wDetailNum = _getText($sfm_pg_wo.link_workDetail);
-	return $wDetailNum;
-	
-	
-};
-this.navigateToLatestWorkDetail = function() {
-	//This function navigates to work detail (Child line items) after
-	//save in a source to target process when the line number is unknown.
-	//Author: Janaki
-	var $x = _count("_span","/WL-/",_near(_span("Line Number")));
-	_log($x);
-	$x = $x-1;
-	_click(_link("/WL-/",_near(_span("slds-row-number slds-text-body--small slds-text-color--weak["+$x+"]"))));
-	_wait(2000);
-};
+
 
 };

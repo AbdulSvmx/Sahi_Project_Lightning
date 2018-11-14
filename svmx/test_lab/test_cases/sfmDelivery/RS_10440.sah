@@ -8,6 +8,10 @@ var $sfmTemplate = "SVMXSTD: Manage WO Usage Lines";
 var $sfmTemplateSaveAsName = $sfmName;
 var $fieldName = ["Problem Description"];
 var $containerName = ["Order Status"];
+
+//Create WO through REST API
+var $woNumber = $sfm_act_createCustomWizard.createBlankWoFromRest($sfmlUsn, $sfmlPwd, $sfmClientId, $sfmConsumerSecret, $sfmOrgInstance);
+
 $bo_act_login.login($g_url,$sfmlUsn,$sfmlPwd);
 
 $sfm_act_SFM.cloneTDM016($sfmNameToBeCloned, $sfmName, $isCustom, $sfmTemplateSaveAsName, $sfmTemplate, $fieldName, $containerName);
@@ -17,9 +21,9 @@ _setSpeed($g_stepSpeed);
 //add the process to wizard
 $sfm_act_wizards.addToWizard("Work Order", $wizardName[2], $wizardType[1], $sfmName);  
 
-//Create WO through UI for the validatiion
-_selectDomain();
-$sfm_act_createCustomWizard.createWowithoutvalues(); 
+//Navigate to the WO for validation
+$bo_act_navigation.navigateToCreatedRecordUsingGlobalSearch($woNumber);
+
 //Add WD line
 addWorkDetailLine("Estimate", "Parts", "Estimate line");
 //Launch the process and validate

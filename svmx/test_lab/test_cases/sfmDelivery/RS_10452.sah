@@ -30,8 +30,8 @@ $rs_10452.start();
 		};	
 
 		//create Work orders
-		$objName= "SVMXDEV__Service_Order__c";
-		$obJson = "{\"SVMXDEV__Order_Status__c\":\"Open\",\"SVMXDEV__Order_Type__c\":\"Field Service\"}";
+		$objName= $orgnamespace+"__Service_Order__c";
+		$obJson = "{\""+$orgnamespace+"__Order_Status__c\":\"Open\",\""+$orgnamespace+"__Order_Type__c\":\"Field Service\"}";
 		$columnName = "Name";
 		$filter="id";
 		$filterValue=$sfm_act_restApiMethods.postRestApi($sfmlUsn,$sfmlPwd,$sfmClientId,$sfmConsumerSecret,$sfmOrgInstance,$objName,$obJson,"POST");
@@ -204,25 +204,26 @@ function RS1052_checkAndAddField_AccountPicklist(){
 	var $objectName = "Work Order";
 	var $fieldNames = ["Account Picklist"];
 	var $dataTypes = ["Picklist"];
-	var $myDomain = "/lightning/";
+	//var $myDomain = "/lightning/";
 	var $multiPicklistValues = ["Acme","ServiceMax","SalesForce"];
 	var $lookupType=[""];
 	//Create custom fields if needed
-	$sfm_act_lightningConfig.addCustomFields($objectName, $fieldNames, $dataTypes, $myDomain, $multiPicklistValues, $lookupType);
-	_closeWindow();
-	_selectWindow();
+
+	$sfm_act_lightningConfig.addCustomFields($objectName, $fieldNames, $dataTypes, $sfd_myDomain, $multiPicklistValues, $lookupType);
+	
 }
 function RS1052_checkAndAddField_ContactPicklist(){
 	var $objectName = "Contact";
 	var $fieldNames = ["Contact Picklist"];
 	var $dataTypes = ["Picklist"];
-	var $myDomain = "/lightning/";
+	//var $myDomain = "/lightning/";
 	var $multiPicklistValues = ["Acme","ServiceMax","SalesForce"];
 	var $lookupType=[""];
 	//Create custom fields if needed
-	$sfm_act_lightningConfig.addCustomFields($objectName, $fieldNames, $dataTypes, $myDomain, $multiPicklistValues, $lookupType);
-	_closeWindow();
-	_selectWindow();
+
+	$sfm_act_lightningConfig.addCustomFields($objectName, $fieldNames, $dataTypes, $sfd_myDomain, $multiPicklistValues, $lookupType);
+	
+
 }
 
 $rs_10452.end();

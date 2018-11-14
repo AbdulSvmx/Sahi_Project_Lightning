@@ -9,7 +9,7 @@
 ///////////////////////////////////
 * */
 
-var $BVT_TC_002_SFW_with_standard_Wiz_steps = _testcase("$BVT_TC_002_SFW_with_standard_Wiz_steps", 
+var $bvt_tc_002_SFW_with_standard_wiz_steps = _testcase("bvt_tc_002_SFW_with_standard_wiz_steps", 
 		"Configure the SFW to include standard SFMs and launch the same in delivery");
 $BVT_TC_002_SFW_with_standard_Wiz_steps.start();
 _setSpeed($g_stepSpeed);
@@ -275,4 +275,4 @@ _setSpeed($g_stepSpeed);
 	_wait(15000,_isVisible($bo_pg_workOrders.txt_workOrderDetails));
 	_assertVisible(_cell("Edit | View | Del", _near(_heading3("Notes & Attachments"))),"Service Report is attached to Work Order: ");
 
-$BVT_TC_002_SFW_with_standard_Wiz_steps.end();
+$bvt_tc_002_SFW_with_standard_wiz_steps.end();

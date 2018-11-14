@@ -28,6 +28,8 @@ var $sfm_pg_sfmDesigner = new function sfm_pg_sfmDesigner() {
 	this.txt_WDlineQTY=_textbox(" input", _near(_span("Line Qty")));
 	this.msg_WDCreateConfirm=_span("Work Detail was created.");
 	this.link_editWD=_link("Edit",_in(_list("scrollable")));
+	this.btn_advFilterIcon=_div("/sfm-filter-icon/");
+	this.btn_myTrunkStock=_checkbox("SVMXSTD:Limit Items to My Trunk Stock");
 
 	//this.newWDWindow=_parentNode(_heading2("/New Work Detail:/"),"DIV",2);
 	this.newWDWindow=_parentNode(_heading2("/Work Detail:/"),"DIV",2);
