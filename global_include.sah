@@ -8,10 +8,11 @@ _setSpeed($g_stepSpeed);
 // PLease CHANGE the Flag to decide whether Dev or Base
 var $orgtype = "Base";
 
+var $orgnamespace;
 if ($orgtype == "Dev") {
-	var $orgnamespace = "SVMXDEV";
+	$orgnamespace = "SVMXDEV";
 } else {
-	$orgnamespace = "SVMXC";
+	var $orgnamespace = "SVMXC";
 }
 
 // Add All Global Variables here
@@ -105,7 +106,7 @@ var $swatPwd = "maxpl0re";
  * buildorg = "The org which needs to be Run in the Build Machine"- PLEASE KEEP IT DEFAULT WHEN CHECKING IN
  * 
  */
-var $appiumOrg = "buildorg1";
+var $appiumOrg = "buildorg12";
 if($appiumOrg.toLowerCase() != "buildorg")
 	{
 
@@ -140,7 +141,7 @@ var $appiumPath = "/auto/SVMX_Catalyst/Executable/";
 var $sahiIntermediatoryPath = "sahiResultCommon.txt";
 
 var $appiumAdminUn="auto-admin@svmx.com";
-var $appiumAdminPwd="Svmx123#";
+var $appiumAdminPwd="Svmx1234";
 
 var $appiumTechUn="auto-tech@svmx.com";
 var $appiumTechPwd="Svmx123#";

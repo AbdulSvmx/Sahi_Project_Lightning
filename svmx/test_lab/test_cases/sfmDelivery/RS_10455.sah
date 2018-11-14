@@ -25,18 +25,8 @@ $sfm_act_wizards.addToWizard($customActionObject, $wizardName[1], $wizardType[3]
 
 //Navigate to the WO for validation
 $bo_act_navigation.navigateToCreatedRecordUsingGlobalSearch($woNumber);
+_wait(25000,_isVisible(_span($wizardName[1])));
 _click(_span($actionId));
-_wait(3000);
-if(_exists(_div($processingMessage))){
-	_log("Pass ::: Account creating under process");
-}else{
-	_log("Fail","FAILURE");
-}
-
-if(_exists(_div($successMessage))){
-	_log("Pass ::: Account created successfully");	
-}else{
-	_log("Fail ::: Account is not created","FAILURE");
-}
-
+_selectDomain($g_domain);
+_assertExists(_div($successMessage),"Accounts are not created through CA webservice");
 $rs_10455.end();
