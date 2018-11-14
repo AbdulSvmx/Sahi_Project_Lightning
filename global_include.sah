@@ -11,7 +11,7 @@ var $orgtype = "Base";
 if ($orgtype == "Dev") {
 	var $orgnamespace = "SVMXDEV";
 } else {
-	$orgnamespace = "SVMXC";
+	var $orgnamespace = "SVMXC";
 }
 
 // Add All Global Variables here
