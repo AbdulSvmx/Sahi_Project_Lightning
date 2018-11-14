@@ -51,7 +51,7 @@ _click($sfm_pg_sfmDesigner.btn_saveSFM);
 
 //add the process to wizard
 $sfm_act_wizards.addToWizard($wizardObject, $wizardName[3], $wizardType[1], $sfmName);  
-_wait(3000); 
+_wait(3000);  
 
 //Navigate to the WO for validation
 $bo_act_navigation.navigateToCreatedRecordUsingGlobalSearch($woNumber);
@@ -66,7 +66,8 @@ _click(_link($caseNumber,_in(_div("/sfm-lightninglookupslidingwindow/"))));
 //Validate form fill on billing type/problem description/priority fields
 $obj= JSON.parse($obJson1);
 _assertEqual($obj["Priority"], _getText($sfm_pg_sfmDesigner.txt_priority));
-_assertEqual($obj[$orgnamespace+"__Billing_Type__c"],_getText($sfm_pg_sfmDesigner.txt_billingType));
+var $billingType = $orgnamespace+"__Billing_Type__c";
+_assertEqual($obj[$billingType],_getText($sfm_pg_sfmDesigner.txt_billingType));
 _assertEqual($obj["Description"],_getText($sfm_pg_sfmDesigner.txt_problemDescription));
 
 //save the process and validate for formfill for fields which are not in screen designer -- RS-10423

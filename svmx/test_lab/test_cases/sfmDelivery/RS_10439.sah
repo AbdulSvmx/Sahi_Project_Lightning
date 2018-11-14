@@ -6,7 +6,7 @@ var $isCustom = false;
 var $sfmTemplate = "SVMXSTD: Manage WO Usage Lines";
 var $sfmTemplateSaveAsName = $sfmName;
 var $containerNameArray = ["Order Status","Order Status",];
-var $fieldNameArray = ["Proforma Invoice Amount","Travel Rate","Rate (Pricing Rule)"];
+var $fieldNameArray = ["Proforma Invoice Amount","Travel Rate"];
 
 //var $g_domain = "/visual.force.com/";
 var $wizardObject ="Work Order";
