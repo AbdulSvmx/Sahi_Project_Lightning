@@ -1,0 +1,33 @@
+var $scenario_10563_edit = _testcase("scenario_10563","Verify changes in SFM processes, Opdoc processes, SFM searches after config sync");
+$scenario_10563_edit.start();
+
+var $sfmName = "Auto_Reg_10563";
+var $headersToAdd = ["City","Country"];
+var $searchName = "WO SEARCH";
+var $searchObjects = ["Work Order","Case"];
+$bo_act_login.login($g_url, $appiumAdminUn, $appiumAdminPwd);
+$sfm_act_lightningConfig.switchToLightning();
+_wait(5000);
+//Edit Process
+$bo_act_navigation.navigateToSfmTransactionDesigner();
+_setStrictVisibilityCheck(true);
+_click($bo_pg_sfmTransactionAndDesigner.btn_yourCustomSfmTransactions);
+_setValue($bo_pg_sfmTransactionAndDesigner.txt_yourCustomSfmTransactionsQuickFind,$sfmName);
+_set($var,_isVisible(_f("main").s_label($sfmName)));
+if($var){
+	_log("Process available continue editing...");
+	_click(_f("main").s_label($sfmName));
+	_click($sfm_pg_screenDesigner.tab_screenDesigner);
+	$sfm_act_Transactions.addHeader($headersToAdd);
+	_click(_f("main").s_button("Save[3]"));
+	_click($bo_pg_sfmTransactionAndDesigner.btn_saveAndclose);
+}
+else{
+	_fail("Fail::Process not available for editing");
+}
+//Edit Search
+$bo_act_navigation.navigateToSfmSearchDesigner();
+$sfm_act_search.editSearchObjects($searchName);
+$sfm_act_search.addNewSearchConfig($searchObjects);
+
+$scenario_10563_edit.end();
