@@ -105,7 +105,7 @@ var $swatPwd = "maxpl0re";
  * buildorg = "The org which needs to be Run in the Build Machine"- PLEASE KEEP IT DEFAULT WHEN CHECKING IN
  * 
  */
-var $appiumOrg = "buildorg";
+var $appiumOrg = "buildorg12";
 if($appiumOrg.toLowerCase() != "buildorg")
 	{
 
