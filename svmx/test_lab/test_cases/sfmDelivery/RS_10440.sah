@@ -1,63 +1,349 @@
-
-var $rs_10440 = _testcase("RS_10440","Verify source to target child SFM Process.");
-$rs_10440.start();
-$sfmNameToBeCloned = "Create Usage Lines from Estimates";
-$sfmName = $bo_act_common.generateRandomName("RS_10440_");
-$isCustom = false;
+var $RS_10440 = _testcase("RS_10440","Field and Value maps for Source to Target Child SFM process");
+$RS_10440.start();
+//Variables used
+var $objectName = "Work Order";
+var $childObject = "Work Detail";
+var $processName = "RS_10440";
+var $process_to_clone = "Create Usage Lines from Estimates";
 var $sfmTemplate = "SVMXSTD: Manage WO Usage Lines";
-var $sfmTemplateSaveAsName = $sfmName;
-var $fieldName = ["Problem Description"];
-var $containerName = ["Order Status"];
+var $isCustom = false;
+var $ctr = 0;
+var $i = 0;
+var $fieldsAbsentInPage = [];
+var $lineType = "Parts";
+var $initialChildFields = ["Line Type","Record Type ID","Line Number"];
+var $initalChildContainers = [$lineType,$lineType,$lineType];
+var $initialChildValues = [$lineType,"Usage/Consumption"];
+var $productName = "Chrome";
+var $additonalFields = ["Is Billable","Line Qty","Use Price From Pricebook/Contract","Date Received","Activity Type","Include in Quote","Start Date and Time","Billable Line Price"];
+var $containerName = [$lineType,$lineType,$lineType,$lineType,$lineType,$lineType,$lineType,$lineType];
+var $fieldsToMap = ["Is Billable","Line Qty","Use Price From Pricebook/Contract","Line Type","Date Received","Activity Type","Include in Quote","Start Date and Time","Billable Line Price"];
+var $pageLayoutForProfile = "SVMX Work Details Estimate - Admin";
+//Appending current timestamp to process name to make it unique.
+var $timeStamp = $bo_act_navigation.getCurrentTimeStamp();
+$processName = $processName + "_" + $timeStamp;
+var $pageLayoutName = $processName + "pg";
+var $mapName = $processName + "mp";
+var $tempFields = ["Age"];
+var $currentWizardName = $wizardName[4];
 
-//Create WO through REST API
-var $woNumber = $sfm_act_createCustomWizard.createBlankWoFromRest($sfmlUsn, $sfmlPwd, $sfmClientId, $sfmConsumerSecret, $sfmOrgInstance);
-
+//**************************************************************************************
+//Login and switch to lightning
 $bo_act_login.login($g_url,$sfmlUsn,$sfmlPwd);
+$sfm_act_lightningConfig.switchToLightning();
+_wait(15000);
 
-$sfm_act_SFM.cloneTDM016($sfmNameToBeCloned, $sfmName, $isCustom, $sfmTemplateSaveAsName, $sfmTemplate, $fieldName, $containerName);
-_click($bo_pg_sfmTransactionAndDesigner.btn_finalQuickSave);
-_setSpeed($g_stepSpeed);
+//Create work order and sort related lists
+var $wo_number = $sfm_act_createCustomWizard.createWowithdateliterals();
+$sfm_act_lightningConfig.navigateToObjectsInLightning($objectName);
+_selectWindow("/"+$objectName+"/");
+$sfm_act_lightningConfig.sortRelatedList("Work Details", "Line Number", "Ascending","SVMX Work Order - Admin");
+_closeWindow();
+_selectWindow();
+var $x = $fieldsToMap.indexOf("Record Type ID");
+if($x != -1) {
+		$fieldsToMap[$x] = "Record Type";
+}
 
-//add the process to wizard
-$sfm_act_wizards.addToWizard("Work Order", $wizardName[2], $wizardType[1], $sfmName);  
+//Find missing fields in Work Order Page Layout and them to the layout
+for($i=0;$i<$fieldsToMap.length;$i++){
+	if(!$sfm_act_lightningConfig.findIfFieldPresentInPageLayout($fieldsToMap[$i])){
+		$fieldsAbsentInPage.push($fieldsToMap[$i]);
+	}	
+}
+_log($fieldsAbsentInPage);
 
-//Navigate to the WO for validation
-$bo_act_navigation.navigateToCreatedRecordUsingGlobalSearch($woNumber);
+if($fieldsAbsentInPage.length > 0){
+	$sfm_act_lightningConfig.navigateToObjectsInLightning($objectName);
+	$sfm_act_lightningConfig.addFieldsToLightningPageLayout($objectName,$pageLayoutForProfile,$fieldsAbsentInPage,$sfd_myDomain);
+	_selectDomain();
+	_selectWindow("Home | Salesforce");
+	_closeWindow();
+	_selectWindow();
+}
 
-//Add WD line
-addWorkDetailLine("Estimate", "Parts", "Estimate line");
-//Launch the process and validate
-_click($sfm_pg_sfmDesigner.link_details);
-$sfm_act_createCustomWizard.clickWizardBtn($sfmName);
-_click($sfm_pg_sfmDesigner.btn_deliveryPartsTab);
-_wait(5000);
+
+var $x = $fieldsToMap.indexOf("Record Type");
+if($x != -1) {
+		$fieldsToMap[$x] = "Record Type ID";
+}
+
+
+//Enter values for Source child in order to verify field mapping at target child
+var $textLabels = ["Billable Line Price","Date Received"];
+var $textValues = ["6600","4/21/2018"];
+var $pickListLabels = ["Activity Type"];
+var $pickListValues = ["Calibration"];
+var $textAreaLabels = [];
+var $textAreaValues = [];
+var $checkBoxLabels = ["Include in Quote"];
+var $checkBoxValues = ["true"];
+var $dateTimeLabels = ["Start Date and Time"];
+var $dateTimeDateValues = ["4/11/2018"];
+var $timeValues = ["3:30 PM"];
+var $emailLabels = [];
+var $emailValues = [];
+var $multiPickLabels = [];
+var $multiPickValues = [];
+var $urlLabels = [];
+var $urlValues = [];
+var $telephoneLabels = [];
+var $telephoneValues = [];
+var $lookUpLabels = [];
+var $lookUpValues = [];
+
+
+$bo_act_navigation.navigateToCreatedRecordUsingGlobalSearch($sourceWlNumber);
+$sfm_act_lightningConfig.editWorkOrder($textLabels, $textValues, $pickListLabels, $pickListValues, $textAreaLabels, $textAreaValues, $checkBoxLabels, $checkBoxValues, $dateTimeLabels, $dateTimeDateValues, $timeValues,$emailLabels,$emailValues,$multiPickLabels,$multiPickValues,$urlLabels,$urlValues,$telephoneLabels,$telephoneValues,$lookUpLabels,$lookUpValues);
+
+$sfm_act_lightningConfig.logoutInLightning();
+//Login and switch to lightning
+$bo_act_login.login($g_url,$sfmlUsn,$sfmlPwd);
+$sfm_act_lightningConfig.switchToLightning();
+_wait(15000);
+
+//**************************************************************************************************
+
+//Navigate to servicemax setup and setup required process.
+//Create new process from scratch
+_setSpeed(3000);
+$bo_act_navigation.navigateToSfmTransactionDesigner();
+$sfm_act_SFM.selectSFM($process_to_clone,$isCustom);
+_click($bo_pg_sfmTransactionAndDesigner.btn_clone);
+_wait(2000);
+_wait(60000, _isVisible($bo_pg_sfmTransactionAndDesigner.txt_name));
+_setValue($bo_pg_sfmTransactionAndDesigner.txt_name, $processName);
+_setValue($bo_pg_sfmTransactionAndDesigner.txt_sfmTransactionId,"");
+_setValue($bo_pg_sfmTransactionAndDesigner.txt_sfmTransactionId,$processName);
+
+_click($bo_pg_sfmTransactionAndDesigner.btn_screenDesigner);
+_wait(6000);
+_setSelected($bo_pg_sfmTransactionAndDesigner.sel_sfmTemplate,$sfmTemplate);
+_wait(6000);
+_click($bo_pg_sfmTransactionAndDesigner.btn_newPageLayout);
+_click($bo_pg_sfmTransactionAndDesigner.txt_firstChildSection); 
+_setValue($bo_pg_sfmTransactionAndDesigner.txt_sectionName,$lineType);
+$bo_act_navigation.designHeaderScreen($pageLayoutName,$tempFields);
+_wait(2000);
+$bo_act_navigation.designChildScreen($pageLayoutName, $initialChildFields, $initalChildContainers);
+_click(_f("main").s_richtext($lineType));
+_click($bo_pg_sfmTransactionAndDesigner.chkbx_allowNew);
+_click($bo_pg_sfmTransactionAndDesigner.chkbx_allowDelete);
+_click($bo_pg_sfmTransactionAndDesigner.btn_savePage);
+_click($bo_pg_sfmTransactionAndDesigner.btn_quickSave1);
+
+//This process is cloned from a standard process and hence standard maps are used.
+
+//Add the custom process to SFM wizard.
+$sfm_act_wizards.addToWizard("Work Order",$currentWizardName,"SFM",$processName);
+
+//Navigate to created work order and launch the process
+$bo_act_navigation.navigateToCreatedRecordUsingGlobalSearch($wo_number);
+//Launch the process in SFM Delivery
+
+//Launch the process in SFM Delivery
+$sfm_act_createCustomWizard.clickWizardlinks($processName);
+_wait(8000);
 _selectDomain($g_domain);
-_setStrictVisibilityCheck(true);
-_click($sfm_pg_sfmDesigner.btn_deliveryExtendedEdit);
-_click($sfm_pg_sfmDesigner.btn_deliveryExtendedEdit);
-_click($sfm_pg_sfmDesigner.txt_eeEdit);
-if(_getText(_textarea("/textarea*/",_near(_span("Work Description",_in(_div("/sfm-window/"))))))== "Estimate line"){
-	_log("Pass ::: Child of record type estimate is displayed in the process");
-}else{
-	_log("Fail ::: Child of record type estimate is not displayed with proper values");
+
+$sfm_act_SFM.addChildLine($lineType,$productName,[],[], [], [],[],[],[],[],[],[],[],[],[]);
+_click($sfm_pg_wo.link_delivery_save);
+_selectDomain();
+_wait(14000,_isVisible($sfm_pg_wo.label_wo));
+
+//Get the line number of existing child line and verify value map for new records in child line
+$sfm_act_lightningConfig.navigateToLatestWorkDetail();
+var $targetLineNumber = _getText(_heading2("/WL-/"));
+_log("Work detail created as Target child is "+$targetLineNumber);
+
+//Verify values for Target line created
+var $textLabels = ["Line Qty"];
+var $textValues = ["1.0000"];
+var $pickListLabels = ["Line Type"];
+var $pickListValues = [$lineType];
+var $checkBoxLabels = ["Is Billable","Use Price From Pricebook/Contract"];
+var $checkBoxValues = [true,true];
+var $res1 = $sfm_act_lightningConfig.verifyValues($textLabels, $textValues, $pickListLabels, $pickListValues, [], [], $checkBoxLabels, $checkBoxValues, [], [], [],[],[],[],[],[],[],[],[],[],[]);
+var $recType = $sfm_act_lightningConfig.getRecordType();
+if($recType === "Usage/Consumption"){
+	var $res2 = true;
+}
+else {
+	var $res2 = false;
+}
+if($res1 && $res2){
+	var $res = true;
+}
+_assertTrue($res);
+if($res){
+	_log("PASS: Value map for new records in Child has values as per value mapping in a source -> target child only process (fields not present in screen");
+}
+else {
+	_log("FAIL:Value map for new records in Child does not have values as per value mapping in a source -> target child only process (fields not present in screen");
 }
 
 
-function addWorkDetailLine($recordType,$lineType,$workDescription){
-	_click($sfm_pg_sfmDesigner.link_related);
-	_click($sfm_pg_sfmDesigner.link_newWorkDetail);
-	_click(_span("slds-radio--faux",_leftOf(_span($recordType,_in(_div("/modal-body/"))))));
-	_click($sfm_pg_sfmDesigner.btn_next);
-	_click($sfm_pg_sfmDesigner.link_lineType);
-	_click(_link($lineType));
-	_setValue($sfm_pg_sfmDesigner.txt_workDescription,$workDescription);
-	_click($sfm_pg_sfmDesigner.btn_saveWorkDetail);
-	_wait(5000,isVisible(_span("Work Detail was created.")));
+//Verify field map for existing records
+
+$bo_act_navigation.navigateToCreatedRecordUsingGlobalSearch($sourceWlNumber);
+var $textLabels = ["Billable Line Price","Date Received"];
+var $textValues = ["6,600.000","4/21/2018"];
+var $pickListLabels = ["Activity Type"];
+var $pickListValues = ["Calibration"];
+var $textAreaLabels = [];
+var $textAreaValues = [];
+var $checkBoxLabels = ["Include in Quote"];
+var $checkBoxValues = ["true"];
+var $dateTimeLabels = ["Start Date and Time"];
+var $dateTimeDateValues = ["4/11/2018"];
+var $timeValues = ["3:30 PM"];
+var $emailLabels = [];
+var $emailValues = [];
+var $multiPickLabels = [];
+var $multiPickValues = [];
+var $urlLabels = [];
+var $urlValues = [];
+var $telephoneLabels = [];
+var $telephoneValues = [];
+var $lookUpLabels = [];
+var $lookUpValues = [];
+var $res1 = $sfm_act_lightningConfig.verifyValues($textLabels, $textValues, $pickListLabels, $pickListValues, $textAreaLabels, $textAreaValues, $checkBoxLabels, $checkBoxValues, $dateTimeLabels, $dateTimeDateValues, $timeValues, $emailLabels, $emailValues, $lookUpLabels, $lookUpValues, $multiPickLabels, $multiPickValues, $urlLabels, $urlValues, $telephoneLabels, $telephoneValues);
+var $recType = $sfm_act_lightningConfig.getRecordType();
+if($recType === "Estimate"){
+	var $res2 = true;
+}
+else {
+	var $res2 = false;
+}
+if($res1 && $res2){
+	var $res = true;
+}
+else {
+	var $res = false;
+}
+_assertTrue($res);
+if($res){
+	_log("PASS: Field map for existing records in Child has values as per value mapping in a source ) -> target child only process (fields not present in screen");
+}
+else {
+	_log("FAIL:Field map for new records in Child does not have values as per value mapping in a source -> target child only process (fields not present in screen");
 }
 
-$rs_10440.end();
+//Adding the respective fields in the Screen Designer tab.
+$bo_act_navigation.navigateToCreatedRecordUsingGlobalSearch($wo_number);
+//Launch the process in SFM Delivery
+$sfm_act_createCustomWizard.clickWizardlinks($processName);
+_wait(8000);
+_selectDomain($g_domain);
+_assertVisible($sfm_pg_wo.link_launchSfmDesigner);
+_click($sfm_pg_wo.link_launchSfmDesigner);
+_selectDomain();
+_selectWindow("/SFM Transaction Designer/");
+_wait(20000);
+_click($bo_pg_sfmTransactionAndDesigner.btn_screenDesigner);
+_wait(5000);
+$bo_act_navigation.designChildScreen($pageLayoutName,$additonalFields,$containerName);
+_wait(2000);
+_click($bo_pg_sfmTransactionAndDesigner.btn_quickSave1);
+_wait(2000);
+_selectDomain();
+_closeWindow();
+_selectWindow();
+_selectDomain($g_domain);
+$sfm_act_lightningConfig.clearServicemaxCache();
+$sfm_act_SFM.addChildLine($lineType,$productName,[],[], [], [],[],[],[],[],[],[],[],[],[]);
+//Verify value map in delivery for the newly added child line item
+$textLabels =["Line Qty","Line Type","Record Type"];
+$textValues = ["1",$lineType,"Usage/Consumption"];
+$checkBoxLabels = ["Is Billable","Use Price From Pricebook"];
+$checkBoxValues = [true,true];
+$sfm_act_lightningConfig.openExtEditForLatestItem();
+$res = $sfm_act_SFM.verifyValuesInDelivery($textLabels, $textValues, [], [], [], [], $checkBoxLabels, $checkBoxValues, [], []);
+_click($sfm_pg_wo.link_delivery_save);
+_selectDomain();
+_wait(14000,_isVisible($sfm_pg_wo.label_wo));
+_assertTrue($res);
+if($res){
+	_log("PASS: Value map for new records in Child has values as per value mapping in a source ) -> target child only process (fields not present in screen");
+}
+else {
+	_log("FAIL:Value map for new records in Child does not have values as per value mapping in a source -> target child only process (fields not present in screen");
+}
+$sfm_act_lightningConfig.navigateToLatestWorkDetail();
+var $targetLineNumber = _getText(_heading2("/WL-/"));
+_log("Work detail created as Target child is "+$targetLineNumber);
+//Verify value map for the new child record
+$textLabels =["Line Qty"];
+$textValues = ["1.0000"];
+$pickListLabels =["Line Type"];
+$pickListValues = [$lineType];
+$checkBoxLabels = ["Is Billable","Use Price From Pricebook/Contract"];
+$checkBoxValues = [true,true];
+var $res1 = $sfm_act_lightningConfig.verifyValues($textLabels, $textValues, [], [], [], [], $checkBoxLabels, $checkBoxValues, [], [], [],[],[],[],[],[],[],[],[],[],[]);
+var $recType = $sfm_act_lightningConfig.getRecordType();
+if($recType === "Usage/Consumption"){
+	var $res2 = true;
+}
+else {
+	var $res2 = false;
+}
+if($res1 && $res2){
+	var $res = true;
+}
+else{
+	var $res = false;
+}
+_assertTrue($res);
+if($res){
+	_log("PASS: Value map for new records in Child has values as per value mapping in a source -> target child only process (fields not present in screen");
+}
+else {
+	_log("FAIL:Value map for new records in Child does not have values as per value mapping in a source -> target child only process (fields not present in screen");
+}
 
+//Verify field map for existing child records
+$bo_act_navigation.navigateToCreatedRecordUsingGlobalSearch($sourceWlNumber);
+var $textLabels = ["Billable Line Price","Date Received"];
+var $textValues = ["6,600.000","4/21/2018"];
+var $pickListLabels = ["Activity Type"];
+var $pickListValues = ["Calibration"];
+var $textAreaLabels = [];
+var $textAreaValues = [];
+var $checkBoxLabels = ["Include in Quote"];
+var $checkBoxValues = ["true"];
+var $dateTimeLabels = ["Start Date and Time"];
+var $dateTimeDateValues = ["4/11/2018"];
+var $timeValues = ["3:30 PM"];
+var $emailLabels = [];
+var $emailValues = [];
+var $multiPickLabels = [];
+var $multiPickValues = [];
+var $urlLabels = [];
+var $urlValues = [];
+var $telephoneLabels = [];
+var $telephoneValues = [];
+var $lookUpLabels = [];
+var $lookUpValues = [];
+var $res1 = $sfm_act_lightningConfig.verifyValues($textLabels, $textValues, $pickListLabels, $pickListValues, $textAreaLabels, $textAreaValues, $checkBoxLabels, $checkBoxValues, $dateTimeLabels, $dateTimeDateValues, $timeValues, $emailLabels, $emailValues, $lookUpLabels, $lookUpValues, $multiPickLabels, $multiPickValues, $urlLabels, $urlValues, $telephoneLabels, $telephoneValues);
+var $recType = $sfm_act_lightningConfig.getRecordType();
+if($recType === "Estimate"){
+	var $res2 = true;
+}
+else {
+	var $res2 = false;
+}
+if($res1 && $res2){
+	var $res = true;
+}
+else{
+	var $res = false;
+}
+_assertTrue($res);
+if($res){
+	_log("PASS: Field map for existing records in Child has values as per value mapping in a source ) -> target child only process (fields not present in screen");
+}
+else {
+	_log("FAIL:Field map for new records in Child does not have values as per value mapping in a source -> target child only process (fields not present in screen");
+}
 
-
-
-
+$RS_10440.end();
