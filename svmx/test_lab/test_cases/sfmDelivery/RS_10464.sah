@@ -189,6 +189,14 @@ $rs_10464.start();
 	$sfm_act_lightningConfig.logoutInLightning();
 	
 	//** function to create Work**'
+function getDBDate($futureYear, $seperator,$futureDay){
+	var $retDate=$bo_act_common.getfutureDate($futureYear, $seperator, $futureDay);
+	var $dateDetails=$retDate.split("-");
+	var $retDate=$dateDetails[2]+$seperator+$dateDetails[0]+$seperator+$dateDetails[1];
+	//_log("Formated Date: "+$retDate);
+	return $retDate;
+}
+
 function createWO_RS10464($orderStatus,$WOactualResoFD,$WOactualRestoFD){
 		_selectDomain();
 		_wait(3000);
