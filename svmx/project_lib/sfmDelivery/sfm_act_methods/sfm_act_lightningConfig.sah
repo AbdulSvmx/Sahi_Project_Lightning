@@ -226,12 +226,14 @@ this.createWorkDetailInLightning = function($recordType,$lineType){
 	var $lineNumber;
 	_click($sfm_pg_wo.link_relatedListsTab);
 	_click($sfm_pg_wo.btn_newButtonForWorkDetail);
-	_click(_span("/slds-radio--faux/",_leftOf(_span("/"+$recordType+"/",_in(_div("/modal-body scrollable/"))))));
+	_setStrictVisibilityCheck(true);
+	_click(_span("/slds-radio--faux/",_leftOf(_span($recordType))));
 	_click($sfm_pg_wo.btn_nextForWorkDetailRecordType);
 	_click($sfm_pg_wo.link_lineTypeArrow);
 	_click(_link($lineType));
 	_click($sfm_pg_wo.btn_wo_edit_save);
 	_wait(500);
+	_setStrictVisibilityCheck(false);
 	_assertVisible(_span("Work Detail was created."));
 	_click($sfm_pg_wo.link_workDetailAfterCreation);
 	$lineNumber = _getText(_heading1("/WL-/"));
