@@ -1,6 +1,6 @@
 var $rs_10448 = _testcase("RS_10448","Verify Lookup prefilter using data types - Date Literal, Picklist and Record Type");
 $rs_10448.start();
-
+/*
 	//delete[SELECT Name FROM SVMXDEV__RMA_Shipment_Order__c limit 10000];
 	//pre-req
 		var RecordTypeId=new Array;
@@ -36,9 +36,9 @@ $rs_10448.start();
 			$partOrderNumber[$i] =$sfm_act_restApiMethods.getRestApi($sfmlUsn,$sfmlPwd,$sfmClientId,$sfmConsumerSecret,$sfmOrgInstance,"GET", $objName, $columnName, $filter, $filterValue);
 			_log("Parts Order number: "+$partOrderNumber[$i]);
 		}
-		
+	*/	
 		//Create Work order using below variables 
-		$objName= +$orgnamespace+"__Service_Order__c";
+		$objName= $orgnamespace+"__Service_Order__c";
 		$obJson = "{\""+$orgnamespace+"__Problem_Description__c\":\"Problem Description\",\""+$orgnamespace+"__Priority__c\":\"High\"}";
 		_log("Work Order json: "+$obJson);
 		$columnName = "Name";
@@ -50,7 +50,7 @@ $rs_10448.start();
 		_log("WO number: "+$WONumber);
 		//login to App
 		$bo_act_login.login($g_url,$sfmlUsn,$sfmlPwd);
-		
+/*		
 		//clone standard SFM
 		var $sfmNameToBeCloned="Manage Work Order Lines - Usage";
 		var $sfmName=$bo_act_common.generateRandomName("rs_10448_");
@@ -182,6 +182,6 @@ function RS1052_checkAndAddField_ContactPicklist(){
 	$sfm_act_lightningConfig.addCustomFields($objectName, $fieldNames, $dataTypes, $sfd_myDomain, $multiPicklistValues, $lookupType);
 	
 }
-
+*/
 
 $rs_10448.end();
