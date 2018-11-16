@@ -150,10 +150,6 @@ $rs_10464.start();
 	_assertNotExists(_div($wdPartName[3],_in(_div("SFMCompositeGrid2-bodyWrap"))));
 	_setStrictVisibilityCheck(false);
 	
-
-
-	
-	
 	$sfm_act_lightningConfig.logoutInLightning();
 	
 	//** function to create Work**'
