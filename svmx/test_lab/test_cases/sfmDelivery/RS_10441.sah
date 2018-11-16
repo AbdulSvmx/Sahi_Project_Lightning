@@ -45,7 +45,7 @@ $sfm_act_lightningConfig.navigateToObjectsInLightning($objectName);
 _selectWindow("/"+$objectName+"/");
 _wait(5000);
 $sfm_act_lightningConfig.sortRelatedList("Work Details", "Line Number", "Ascending","SVMX Work Order - Admin");
-_selectWindow("Home | Salesforce");
+//_selectWindow("Home | Salesforce");
 _closeWindow();
 _selectWindow();
 
@@ -61,6 +61,7 @@ if($fieldsAbsentInPage.length > 0){
 	$sfm_act_lightningConfig.navigateToObjectsInLightning($objectName);
 	$sfm_act_lightningConfig.addFieldsToLightningPageLayout($objectName,$pageLayoutForProfile,$fieldsAbsentInPage);
 	_selectDomain();
+	_selectWindow("Home | Salesforce");
 	_closeWindow();
 	_selectWindow();
 }
@@ -88,6 +89,7 @@ if($fieldsAbsentInPage.length > 0){
 	$sfm_act_lightningConfig.navigateToObjectsInLightning($childObject);
 	$sfm_act_lightningConfig.addFieldsToLightningPageLayout($childObject,$pageLayoutForProfile,$fieldsAbsentInPage,$sfd_myDomain);
 	_selectDomain();
+	_selectWindow("Home | Salesforce");
 	_closeWindow();
 	_selectWindow();
 }
