@@ -38,12 +38,14 @@ var $wo_number = $sfm_act_createCustomWizard.createWowithdateliterals();
 $sfm_act_lightningConfig.navigateToObjectsInLightning($objectName);
 _selectWindow("/"+$objectName+"/");
 $sfm_act_lightningConfig.sortRelatedList("Work Details", "Line Number", "Ascending","SVMX Work Order - Admin");
+_selectWindow("Home | Salesforce");
 _closeWindow();
 _selectWindow();
 var $x = $fieldsToMap.indexOf("Record Type ID");
 if($x != -1) {
 		$fieldsToMap[$x] = "Record Type";
 }
+var $sourceWlNumber = $sfm_act_lightningConfig.createWorkDetailInLightning("Estimate",$lineType);
 
 //Find missing fields in Work Order Page Layout and them to the layout
 for($i=0;$i<$fieldsToMap.length;$i++){
@@ -54,8 +56,8 @@ for($i=0;$i<$fieldsToMap.length;$i++){
 _log($fieldsAbsentInPage);
 
 if($fieldsAbsentInPage.length > 0){
-	$sfm_act_lightningConfig.navigateToObjectsInLightning($objectName);
-	$sfm_act_lightningConfig.addFieldsToLightningPageLayout($objectName,$pageLayoutForProfile,$fieldsAbsentInPage,$sfd_myDomain);
+	$sfm_act_lightningConfig.navigateToObjectsInLightning($childObject);
+	$sfm_act_lightningConfig.addFieldsToLightningPageLayout($childObject,$pageLayoutForProfile,$fieldsAbsentInPage,$sfd_myDomain);
 	_selectDomain();
 	_selectWindow("Home | Salesforce");
 	_closeWindow();
@@ -153,7 +155,7 @@ _wait(14000,_isVisible($sfm_pg_wo.label_wo));
 
 //Get the line number of existing child line and verify value map for new records in child line
 $sfm_act_lightningConfig.navigateToLatestWorkDetail();
-var $targetLineNumber = _getText(_heading2("/WL-/"));
+var $targetLineNumber = _getText(_span("/WL-/"));
 _log("Work detail created as Target child is "+$targetLineNumber);
 
 //Verify values for Target line created
