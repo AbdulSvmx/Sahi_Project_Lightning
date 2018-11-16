@@ -402,7 +402,7 @@ this.addFieldsToLightningPageLayout = function($object_name,$pageLayoutForProfil
 	_selectWindow("/"+$object_name+"/");
 	_click(_link("Page Layouts"));
 	_click(_link($pageLayoutForProfile));
-	_selectDomain($myDomain);
+	_selectDomain($sfd_myDomain);
 	for($i=0;$i<$fieldsArray.length;$i++){
 		_setValue($sfm_pg_wo.txt_pgLayoutQuickFind,$fieldsArray[$i]);
 		var $shortName = $fieldsArray[$i].substr(0,4);
