@@ -88,7 +88,6 @@ if($fieldsAbsentInPage.length > 0){
 	$sfm_act_lightningConfig.navigateToObjectsInLightning($childObject);
 	$sfm_act_lightningConfig.addFieldsToLightningPageLayout($childObject,$pageLayoutForProfile,$fieldsAbsentInPage,$sfd_myDomain);
 	_selectDomain();
-	_selectWindow("Home | Salesforce");
 	_closeWindow();
 	_selectWindow();
 }
