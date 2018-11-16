@@ -92,7 +92,7 @@ $rs_10464.start();
 	var $comboConditions=["Equals","Equals","Equals","Equals","Equals"];
 	var $toggleButton=["Yes","Yes","Yes","Yes",""];
 	var $comboInput=["Now","Today","Tomorrow","Yesterday","Open"];
-	var $advExpr="1 and ((2 or 3) and (4 or 5))";
+	var $advExpr="1 AND ((2 OR 3) AND (4 OR 5))";
 	var $errMsg="This record does not satisfy the qualification criteria.";
 	var $exprsnName = $bo_act_common.generateRandomName("RS_10463_expr_");
 	var $ExprFieldsDetails=[$comboField,$comboConditions,$toggleButton,$comboInput,$advExpr,$errMsg,$exprsnName];
@@ -103,7 +103,7 @@ $rs_10464.start();
 	var $childcomboConditions=["Equals","Equals","Equals","Equals","Equals","Equals"];
 	var $childtoggleButton=["Yes","Yes","Yes","Yes","",""];
 	var $childcomboInput=["Now","Today","Tomorrow","Yesterday","20","Parts"];
-	var $childadvExpr="1 and ((2 or 3) and (4 or 5)) AND 6";
+	var $childadvExpr="1 AND ((2 OR 3) AND (4 OR 5)) AND 6";
 	var $childerrMsg="";
 	var $childexprsnName = $bo_act_common.generateRandomName("RS_10463_exprPart_");
 	var $childExprFieldsDetails=[$childcomboField,$childcomboConditions,$childtoggleButton,$childcomboInput,$childadvExpr,$childerrMsg,$childexprsnName];
@@ -114,7 +114,7 @@ $rs_10464.start();
 	var $childcomboConditions=["Equals","Equals","Equals","Equals","Equals","Equals"];
 	var $childtoggleButton=["Yes","Yes","Yes","Yes","",""];
 	var $childcomboInput=["Now","Today","Tomorrow","Yesterday","20","Labor"];
-	var $childadvExpr="1 and ((2 or 3) and (4 or 5)) AND 6";
+	var $childadvExpr="1 AND ((2 OR 3) AND (4 OR 5)) AND 6";
 	var $childerrMsg="";
 	var $childexprsnName = $bo_act_common.generateRandomName("RS_10463_exprLabor_");
 	var $childExprFieldsDetails=[$childcomboField,$childcomboConditions,$childtoggleButton,$childcomboInput,$childadvExpr,$childerrMsg,$childexprsnName];
@@ -129,15 +129,7 @@ $rs_10464.start();
 	var $handOver=false;
 	$sfm_act_wizards.addToWizard($wizardObject, $wizardName1, $wizardType, $sfmName, $handOver, $profile);  
 		
-/*	//create WO & WD
-	var $WO=createWO_RS10464("Open", 3, 4);
-	
-	var $WDpartName = $bo_act_common.generateRandomName("RS_10463_Part_");
-	var $WorkDetailPart=addWorkDetailLine("Usage/Consumption", "Parts", 20, 1, 2,$WDpartName);
-	
-	var $WDlaborName = $bo_act_common.generateRandomName("RS_10463_Labor_");
-	var $WorkDetailLabor=addWorkDetailLine("Usage/Consumption", "Labor", 20, 1, 2,$WDlaborName);
-*/	
+
 	//Assert SFM is launched and able to view childlines
 	$sfm_act_common.globalSearchInLightning($WONumber[0]);
 	_setStrictVisibilityCheck(true);
@@ -145,38 +137,13 @@ $rs_10464.start();
 	_assertExists(_div("/"+$sfmName+"/"));
 	_click($sfm_pg_screenDesigner.link_Parts);
 	_assertExists(_div($wdPartName[0],_in(_div("SFMCompositeGrid1-bodyWrap"))));
-	_assertExists(_div($wdPartName[2],_in(_div("SFMCompositeGrid1-bodyWrap"))));
+	_assertNotExists(_div($wdPartName[2],_in(_div("SFMCompositeGrid1-bodyWrap"))));
 	_click($sfm_pg_screenDesigner.link_Labor);
 	_assertExists(_div($wdPartName[1],_in(_div("SFMCompositeGrid2-bodyWrap"))));
-	_assertExists(_div($wdPartName[3],_in(_div("SFMCompositeGrid2-bodyWrap"))));
+	_assertNotExists(_div($wdPartName[3],_in(_div("SFMCompositeGrid2-bodyWrap"))));
 	_setStrictVisibilityCheck(false);
 	
-/*
-	
-	//Edit WD
-	$sfm_act_common.globalSearchInLightning($WO);
-	editWorkDetailLine($WorkDetailPart,"Parts", 8, 8, 9);
-	editWorkDetailLine($WorkDetailLabor,"Labor", 8, 8, 9);
-	
-	//Assert SFM is launched but childlines should not be visible
-	$sfm_act_common.globalSearchInLightning($WO);
-	_setStrictVisibilityCheck(true);
-	$sfm_act_createCustomWizard.clickWizardBtn($sfmName);
-	_assertExists(_div("/"+$sfmName+"/"));
-	_assertNotExists(_div($WDpartName),_in(_div("SFMCompositeGrid1-bodyWrap")));
-	_click($sfm_pg_screenDesigner.link_Labor);
-	_assertNotExists(_div($WDlaborName,_in(_div("SFMCompositeGrid2-bodyWrap"))));
-	_setStrictVisibilityCheck(false);
-	
-	
-	//Edit WO
-	$sfm_act_common.globalSearchInLightning($WO);
-	_click($sfm_pg_wo.btn_wo_edit);
-	_wait(5000,_isVisible($sfm_pg_wo.btn_editWO));
-	addWOfieldValue("Closed", 6, 7);
-	_click($sfm_pg_wo.btn_wo_edit_save);
-	_wait(10000,_isVisible($sfm_pg_wo.label_wo));
-*/	
+
 	//Assert sfm should not be launched
 	$sfm_act_common.globalSearchInLightning($WONumber[1]);
 	$sfm_act_createCustomWizard.clickWizardBtn($sfmName);
