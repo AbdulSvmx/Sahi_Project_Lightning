@@ -58,7 +58,7 @@ for($i=0;$i<$fieldsToMapHeader.length;$i++){
 _log($fieldsAbsentInPage);
 
 if($fieldsAbsentInPage.length > 0){
-	$sfm_act_lightningConfig.navigateToObjectsInClassic($objectName);
+	$sfm_act_lightningConfig.navigateToObjectsInLightning($objectName);
 	$sfm_act_lightningConfig.addFieldsToLightningPageLayout($objectName,$pageLayoutForProfile,$fieldsAbsentInPage);
 	_selectDomain();
 	_closeWindow();

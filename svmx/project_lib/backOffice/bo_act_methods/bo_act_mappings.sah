@@ -34,7 +34,10 @@ var $bo_act_mappings = new function bo_act_mappings() {
 		}	
 		if($pickListLabels.length > 0) {	
 			for($i=0;$i<$pickListLabels.length;$i++){
-				_click(_f("main").s_togglebutton("I want to choose a field from the list").rightOf(_f("main").ftedatagriditemrenderer($pickListLabels[$i])));
+				if($mapType.includes("Value Map")){
+					_click(_f("main").s_togglebutton("I want to choose a field from the list").rightOf(_f("main").ftedatagriditemrenderer($pickListLabels[$i])));
+				}
+				
 				//Special handling for look up fields
 				if(_isVisible(_f("main").s_button("Search and Select").rightOf(_f("main").ftedatagriditemrenderer($pickListLabels[$i])))){
 					_click(_f("main").s_button("Search and Select").rightOf(_f("main").ftedatagriditemrenderer($pickListLabels[$i])));
