@@ -148,12 +148,14 @@ $bo_act_mappings.createMapping($objectName,$mapType,$fieldsToMapHeader,$fieldsTo
 
 //Create field mapping for existing records for child
 $mapName = $processName + "mp2";
+_selectDomain($g_domain);
 _click($bo_pg_sfmTransactionAndDesigner.btn_qualifyingCriteriaAndFieldMapping);
 $bo_act_mappings.createMapping($lineType,$mapType,$fieldsToMapChild,$fieldsToMapChild,[],[],$mapName);
 
 //Create value mapping for new records for child
 $mapName = $processName + "mp3";
 $mapType = "Value Map For New Records";
+_selectDomain($g_domain);
 _click($bo_pg_sfmTransactionAndDesigner.btn_qualifyingCriteriaAndFieldMapping);
 $bo_act_mappings.createMapping($lineType,$mapType,[],[],$valueMapChild,$valueMapChildValues,$mapName);
 
