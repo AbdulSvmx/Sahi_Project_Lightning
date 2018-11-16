@@ -36,7 +36,7 @@ var $timeStamp = $bo_act_navigation.getCurrentTimeStamp();
 $processName = $processName + "_" + $timeStamp;
 var $pageLayoutName = $processName + "pg";
 var $mapName = $processName + "mp";
-var $myDomain = "/lightning/";
+//var $sfd_myDomain = "/lightning/";
 //**************************************************************************************
 //Login and switch to lightning
 $bo_act_login.login($g_url,$sfmlUsn,$sfmlPwd);
@@ -50,7 +50,7 @@ _click(_link("Fields & Relationships"));
 
 _setValue(_searchbox("globalQuickfind"),$ctrlPicklist);
 _click(_link($ctrlPicklist));
-_selectDomain($myDomain);
+_selectDomain($sfd_myDomain);
 
 
 //Delete existing dependencies and create new one.
@@ -160,7 +160,7 @@ _selectWindow("/SFM Transaction Designer/");
 _wait(10000);
 _click($bo_pg_sfmTransactionAndDesigner.btn_qualifyingCriteriaAndFieldMapping);
 $pickListValues = ["Closed"];
-$bo_act_mappings.editExistingFieldsInMapping($object_name,$pickListLabels, $pickListValues, $textLabels, $textValues, $mapName);
+$bo_act_mappings.editExistingFieldsInMapping($object_name,$mapType,$pickListLabels, $pickListValues, $textLabels, $textValues, $mapName);
 _selectDomain();
 _closeWindow();
 _selectWindow();

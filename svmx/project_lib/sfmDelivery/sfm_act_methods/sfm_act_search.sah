@@ -117,20 +117,40 @@ var $sfm_act_search = new function sfm_search() {
 			_setValue($sfm_pg_search.txt_searchTitle,$searchName);
 			_setValue($sfm_pg_search.txt_searchID,$searchID);
 //			_setValue(_textarea(0,_rightOf(_span("Description"))),$searchName);
-			_click($sfm_pg_search.tab_searchConfig);
 			this.addNewSearchConfig($searchObjects);
 		}
 		
 	};
 
 	this.addNewSearchConfig = function($searchObjects){
+		_click($sfm_pg_search.tab_searchConfig);
 		for(var $i=0;$i<$searchObjects.length;$i++){
+			_wait(10000);
 			_click($sfm_pg_search.btn_new);
 			_setSelected(_select($i,_near(_tableHeader("Search Object"))),$searchObjects[$i]);
 			_wait(8000);
-			_click(_button("Save"));
+			_click($sfm_pg_search.btn_objectSave);
 			_wait(5000);
 		}
+	};
+	
+	this.editCustomSearch = function($searchName){
+		var $searchID = $searchName.toLowerCase();
+		var $flag=false;
+		_set($flag,_isVisible(_span($searchName)));
+		if($flag){
+			_click(_checkbox(0,_leftOf(_span($searchName))));
+			_click($sfm_pg_search.btn_customEdit);
+			_setValue($sfm_pg_search.txt_searchTitle,$searchName1);
+			_setValue($sfm_pg_search.txt_searchID,$searchID);
+			_click($sfm_pg_search.btn_quickSave);
+		}
+		
+	};
+	
+	this.editSearchObjects = function($searchName){
+			_click(_checkbox(0,_leftOf(_span($searchName))));
+			_click($sfm_pg_search.btn_customEdit);
 	};
 
 	this.buildExpression = function($clicks,$exprsnVal,$sheetName){
@@ -160,7 +180,85 @@ var $sfm_act_search = new function sfm_search() {
 		}
 		_setValue($sfm_pg_search.txt_advancedExprsn, $exprsnVal);
 	};
+	
+	/**
+	 * Author		:	Lakshmi BS
+	 * Function		: 	To check if search is there else create search
+	 * Parameter	:	$searchName = Search name to search				
+	 * Example		:	Refer RS_10543.sah file for function usage
+	 *
+	 */
 
+this.checkSearchandAdd = function($searchName){
+		var bSearchStatus = false;
+		if(_isVisible(_span($searchName))==true)
+		{
+			_log("Search already exists. No need to add new search.");
+			bSearchStatus = true;
+		}else{
+			_log("Search does not exists, thus need to create search");
+			_click($sfm_pg_search.btn_customNew);
+			_setValue($sfm_pg_search.txt_searchTitle,$searchName);
+			_setValue($sfm_pg_search.txt_searchID,$searchName);
+			_click($sfm_pg_search.tab_searchConfig);
+			
+			bSearchStatus = false;
+		}
+		
+		return bSearchStatus;
+	};
+	
+	
+	/**
+	 * Author		:	Lakshmi BS
+	 * Function		: 	To add display fields in search.
+	 * Parameter	:	$displayObjects = Object to display
+	 * 			        $displayFields = Field to display for the object
+	 * Example		:	Refer RS_10543.sah file for function usage
+	 */
+	this.addDisplayFields = function($displayObjects,$displayFields)
+	{
+		var $i=0;
+		var $j=2;
+		for($i=1;$i<$displayFields.length;$i++)
+		{
+		_click($sfm_pg_search.btn_addRowDisplayFields);
+		_wait(10000);
+		_setSelected(_select(0,_near(_cell($j.toString(),_near($sfm_pg_search.txt_ChooseDisplayFields)))),$displayObjects[$i]);
+		_wait(3000);
+		_setSelected(_select(1,_near(_cell($j.toString(),_near($sfm_pg_search.txt_ChooseDisplayFields)))),$displayFields[$i]);
+		$j++;
+		_wait(3000);
+		}
+		
+	};
+	
+	/**
+	 * Author		:	Lakshmi BS
+	 * Function		: 	To add search fields 
+	 * Parameter	:	$$searchObjects = Object to display
+	 * 			        $$searchFields = Field to display for the object
+	 * Example		:	Refer RS_10543.sah file for function usage
+	 */
+	this.addSearchFields = function($searchObjects,$searchFields)
+	{
+		var $i=0;
+		var $j=2;
+		for($i=1;$i<$searchFields.length;$i++)
+		{
+		_click($sfm_pg_search.btn_addRowSearchFields);
+		_wait(10000);
+		_setSelected(_select(0,_near(_cell($j.toString(),_near($sfm_pg_search.btn_addRowSearchFields)))),$searchObjects[$i]);
+		_wait(3000);
+		_setSelected(_select(1,_near(_cell($j.toString(),_near($sfm_pg_search.btn_addRowSearchFields)))),$searchFields[$i]);
+		$j++;
+		_wait(3000);
+		}
+	};
+	
+	
+	
+	
 	this.addResultsToDisplay = function($clicks,$sheetName){
 		$selectData = $excel.readFromCustomExcel("../sfmDelivery/sfmDelivery_excelData/data.xlsx", $sheetName,"","");
 //		_log($selectData);
@@ -189,4 +287,8 @@ var $sfm_act_search = new function sfm_search() {
 		}
 		_click($sfm_pg_search.btn_objectSave);	
 	};
+
+
+
+
 };

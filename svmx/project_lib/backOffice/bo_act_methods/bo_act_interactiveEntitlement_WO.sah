@@ -324,7 +324,7 @@ var $bo_act_interactiveEntitlement_WO = new function bo_act_interactiveEntitleme
 		}
 		_click($bo_pg_interactiveEntitlement_CaseAndWO.btn_checkEntitlement);
 		//this.clickCheckEntitlement();
-		_wait(1000);
+		_wait(30000);
 		_domain("/svmx/")._click(_checkbox("/EVER_CaseEntitlement/", _near((_link($warrantyName)))));
 		if(_isChecked(_checkbox("/EVER_CaseEntitlement/", _near(_label("Incident Not Covered"))))==true)
 		{
