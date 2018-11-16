@@ -38,6 +38,7 @@ $mappingField_child = ["Date Required","Part","Record Type ID"];
 $mappingValue_child = ["Date Installed","Product","--None--"];
 var $containerName="Work Order";
 var $containerName_child="Parts";
+var $mapTypechild="Field Map For Existing Records";
 var $textLabels=[];
 var $textValues=[];
 
@@ -74,13 +75,14 @@ _wait(5000);
 
 _click(_f("main").tab("Qualifying Criteria and Field Mappings"));
 
-$bo_act_mappings.createMapping($containerName_child,$mappingField_child,$mappingValue_child,$textLabels,$textValues,$mapName_chid);
+$bo_act_mappings.createMapping($containerName_child,$mapTypechild,$mappingField_child,$mappingValue_child,$textLabels,$textValues,$mapName_chid);
+
 _wait(5000);
 
 _selectDomain($g_domain);
 _click(_f("main").tab("Source Object Update"));
 _click(_f("main").tab("Qualifying Criteria and Field Mappings"));
-$bo_act_mappings.createMapping($containerName,$mappingField,$mappingValue,$textLabels,$textValues,$mapName);
+$bo_act_mappings.createMapping($containerName,$mapTypechild,$mappingField,$mappingValue,$textLabels,$textValues,$mapName);
 _wait(5000);
 _selectDomain($g_domain);
 _click(_f("main").s_button("Save & Close"));
