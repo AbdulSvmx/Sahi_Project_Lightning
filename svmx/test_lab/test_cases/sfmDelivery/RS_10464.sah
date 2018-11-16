@@ -128,7 +128,14 @@ $rs_10464.start();
 	var $profile="";
 	var $handOver=false;
 	$sfm_act_wizards.addToWizard($wizardObject, $wizardName1, $wizardType, $sfmName, $handOver, $profile);  
-		
+	
+	//Assert sfm should not be launched
+	$sfm_act_common.globalSearchInLightning($WONumber[1]);
+	$sfm_act_createCustomWizard.clickWizardBtn($sfmName);
+	_selectDomain($g_domain);
+	_wait(10000,_isVisible(_div($errMsg)));
+	_assertExists(_div($errMsg));
+	_selectDomain();
 
 	//Assert SFM is launched and able to view childlines
 	$sfm_act_common.globalSearchInLightning($WONumber[0]);
@@ -144,13 +151,7 @@ $rs_10464.start();
 	_setStrictVisibilityCheck(false);
 	
 
-	//Assert sfm should not be launched
-	$sfm_act_common.globalSearchInLightning($WONumber[1]);
-	$sfm_act_createCustomWizard.clickWizardBtn($sfmName);
-	_selectDomain($g_domain);
-	_wait(10000,_isVisible(_div($errMsg)));
-	_assertExists(_div($errMsg));
-	_selectDomain();
+
 	
 	
 	$sfm_act_lightningConfig.logoutInLightning();
