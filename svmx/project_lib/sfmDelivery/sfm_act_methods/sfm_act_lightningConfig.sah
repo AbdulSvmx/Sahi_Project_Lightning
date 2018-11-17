@@ -933,8 +933,10 @@ this.sortRelatedList = function($relatedList,$sortingField,$order,$pageLayoutFor
 this.getRecordType = function(){
 	//This function returns the record type of the record created
 	//Author: Janaki
-	var $x = _getText(_span(1,_near(_span("Record Type"))));
+	_setStrictVisibilityCheck(true);
+	var $x = _getText(_div(1,_near(_span("/Record Type/"))));
 	var $y = $x.replace(" Change Record Type","");
 	return $y;
+	_setStrictVisibilityCheck(false);
 };
 };

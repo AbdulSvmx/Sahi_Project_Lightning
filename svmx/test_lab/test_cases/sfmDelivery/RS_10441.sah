@@ -23,8 +23,12 @@ var $initalChildContainers = [$lineType,$lineType,$lineType,$lineType,$lineType]
 var $initialChildValues = [$lineType,"Usage/Consumption"];
 var $fieldsToMapHeader = ["Order Status","City"];
 var $fieldsToMapChild = ["Received City","Date Received"];
+var $current = new Date();
+var $todayDate =  $sfm_act_createCustomWizard.addSubtractDates($current,0);
 var $valueMapChild = ["Received City","Date Received"];
-var $valueMapChildValues = ["Srinagar from value map","12/25/2018"];
+var $valueMapChildValues = ["Srinagar from value map",$todayDate];
+var $valueMapChildPick = ["Date Received"];
+var $valueMapChildPickValues = ["Today"];
 $containerName = [$lineType,$lineType,$lineType,$lineType,$lineType,$lineType,$lineType,$lineType,$lineType,$lineType,$lineType,$lineType,$lineType,$lineType,$lineType,$lineType,$lineType,$lineType,$lineType,$lineType,$lineType];
 //Appending current timestamp to process name to make it unique.
 var $timeStamp = $bo_act_navigation.getCurrentTimeStamp(); 
@@ -95,8 +99,10 @@ if($fieldsAbsentInPage.length > 0){
 }
 //Provide values in work detail to validate field map for existing records in child.
 _log("Provide values in work detail to validate field map for existing records in child.");
-$textValues = ["Mysuru","4/21/2018"];
-$sfm_act_lightningConfig.editWorkOrder(["Received City","Date Received"] ,["Mysuru","4/21/2018"], [], [], [], [], [], [], [], [], [],[],[],[],[],[],[],[],[],[],[]);
+var $current = new Date();
+var $todayDate =  $sfm_act_createCustomWizard.addSubtractDates($current,0);
+$textValues = ["Mysuru",$todayDate];
+$sfm_act_lightningConfig.editWorkOrder(["Received City","Date Received"] ,["Mysuru",$todayDate], [], [], [], [], [], [], [], [], [],[],[],[],[],[],[],[],[],[],[]);
 $sfm_act_lightningConfig.logoutInLightning();
 //Login and switch to lightning
 $bo_act_login.login($g_url,$sfmlUsn,$sfmlPwd);
@@ -157,7 +163,7 @@ $mapName = $processName + "mp3";
 $mapType = "Value Map For New Records";
 _selectDomain($g_domain);
 _click($bo_pg_sfmTransactionAndDesigner.btn_qualifyingCriteriaAndFieldMapping);
-$bo_act_mappings.createMapping($lineType,$mapType,[],[],$valueMapChild,$valueMapChildValues,$mapName);
+$bo_act_mappings.createMapping($lineType,$mapType,$valueMapChildPick,$valueMapChildPickValues,$valueMapChild,$valueMapChildValues,$mapName);
 
 _selectDomain();
 _setSpeed(1000);
@@ -241,7 +247,7 @@ $bo_act_navigation.navigateToCreatedRecordUsingGlobalSearch($wlNumber);
 $textLabels = ["Received City"];
 $textValues = ["Mysuru"];
 var $dateTimeLabels = ["Date Received"];
-var $dateTimeDateValues = ["4/21/2018"];
+var $dateTimeDateValues = [$todayDate];
 $res = $sfm_act_lightningConfig.verifyValues($textLabels, $textValues, [], [], [], [], [], [], $dateTimeLabels, $dateTimeDateValues, [],[],[],[],[],[],[],[],[],[],[]);
 _assertTrue($res);
 if($res){

@@ -15,7 +15,7 @@ var $initialChildFields = ["Line Type","Record Type ID","Line Number"];
 var $initalChildContainers = [$lineType,$lineType,$lineType];
 var $initialChildValues = [$lineType,"Usage/Consumption"];
 var $productName = "Chrome";
-var $additonalFields = ["Is Billable","Line Qty","Use Price From Pricebook/Contract","Date Received","Activity Type","Include in Quote","Start Date and Time","Billable Line Price"];
+var $additonalFields = ["Is Billable","Line Qty","Use Price From Pricebook/Contract","Date Received","Include in Quote","Start Date and Time","Billable Line Price"];
 var $containerName = [$lineType,$lineType,$lineType,$lineType,$lineType,$lineType,$lineType,$lineType];
 var $fieldsToMap = ["Is Billable","Line Qty","Use Price From Pricebook/Contract","Line Type","Date Received","Activity Type","Include in Quote","Start Date and Time","Billable Line Price"];
 var $pageLayoutForProfile = "SVMX Work Details Estimate - Admin";
@@ -26,6 +26,8 @@ var $pageLayoutName = $processName + "pg";
 var $mapName = $processName + "mp";
 var $tempFields = ["Age"];
 var $currentWizardName = $wizardName[4];
+var $res = true;
+var $res2 = true;
 
 //**************************************************************************************
 //Login and switch to lightning
@@ -170,13 +172,13 @@ var $checkBoxValues = [true,true];
 var $res1 = $sfm_act_lightningConfig.verifyValues($textLabels, $textValues, $pickListLabels, $pickListValues, [], [], $checkBoxLabels, $checkBoxValues, [], [], [],[],[],[],[],[],[],[],[],[],[]);
 var $recType = $sfm_act_lightningConfig.getRecordType();
 if($recType === "Usage/Consumption"){
-	var $res2 = true;
+	 $res2 = true;
 }
 else {
-	var $res2 = false;
+	 $res2 = false;
 }
 if($res1 && $res2){
-	var $res = true;
+	 $res = true;
 }
 _assertTrue($res);
 if($res){
@@ -214,16 +216,16 @@ var $lookUpValues = [];
 var $res1 = $sfm_act_lightningConfig.verifyValues($textLabels, $textValues, $pickListLabels, $pickListValues, $textAreaLabels, $textAreaValues, $checkBoxLabels, $checkBoxValues, $dateTimeLabels, $dateTimeDateValues, $timeValues, $emailLabels, $emailValues, $lookUpLabels, $lookUpValues, $multiPickLabels, $multiPickValues, $urlLabels, $urlValues, $telephoneLabels, $telephoneValues);
 var $recType = $sfm_act_lightningConfig.getRecordType();
 if($recType === "Estimate"){
-	var $res2 = true;
+	 $res2 = true;
 }
 else {
-	var $res2 = false;
+	 $res2 = false;
 }
 if($res1 && $res2){
-	var $res = true;
+	 $res = true;
 }
 else {
-	var $res = false;
+	 	$res = false;
 }
 _assertTrue($res);
 if($res){
@@ -239,6 +241,7 @@ $bo_act_navigation.navigateToCreatedRecordUsingGlobalSearch($wo_number);
 $sfm_act_createCustomWizard.clickWizardlinks($processName);
 _wait(8000);
 _selectDomain($g_domain);
+_click($sfm_pg_wo.btn_arrowNextToClearCache);
 _assertVisible($sfm_pg_wo.link_launchSfmDesigner);
 _click($sfm_pg_wo.link_launchSfmDesigner);
 _selectDomain();
@@ -248,6 +251,7 @@ _click($bo_pg_sfmTransactionAndDesigner.btn_screenDesigner);
 _wait(5000);
 $bo_act_navigation.designChildScreen($pageLayoutName,$additonalFields,$containerName);
 _wait(2000);
+$sfm_act_SFM.addFieldToScreen(["Activity Type"], [$lineType]);
 _click($bo_pg_sfmTransactionAndDesigner.btn_quickSave1);
 _wait(2000);
 _selectDomain();
@@ -259,7 +263,7 @@ $sfm_act_SFM.addChildLine($lineType,$productName,[],[], [], [],[],[],[],[],[],[]
 //Verify value map in delivery for the newly added child line item
 $textLabels =["Line Qty","Line Type","Record Type"];
 $textValues = ["1",$lineType,"Usage/Consumption"];
-$checkBoxLabels = ["Is Billable","Use Price From Pricebook"];
+$checkBoxLabels = ["Is Billable","Use Price From Pricebook/Contract"];
 $checkBoxValues = [true,true];
 $sfm_act_lightningConfig.openExtEditForLatestItem();
 $res = $sfm_act_SFM.verifyValuesInDelivery($textLabels, $textValues, [], [], [], [], $checkBoxLabels, $checkBoxValues, [], []);
@@ -286,16 +290,16 @@ $checkBoxValues = [true,true];
 var $res1 = $sfm_act_lightningConfig.verifyValues($textLabels, $textValues, [], [], [], [], $checkBoxLabels, $checkBoxValues, [], [], [],[],[],[],[],[],[],[],[],[],[]);
 var $recType = $sfm_act_lightningConfig.getRecordType();
 if($recType === "Usage/Consumption"){
-	var $res2 = true;
+	 $res2 = true;
 }
 else {
-	var $res2 = false;
+	 	$res2 = false;
 }
 if($res1 && $res2){
-	var $res = true;
+		$res = true;
 }
 else{
-	var $res = false;
+		$res = false;
 }
 _assertTrue($res);
 if($res){
@@ -308,7 +312,7 @@ else {
 //Verify field map for existing child records
 $bo_act_navigation.navigateToCreatedRecordUsingGlobalSearch($sourceWlNumber);
 var $textLabels = ["Billable Line Price","Date Received"];
-var $textValues = ["6,600.000","4/21/2018"];
+var $textValues = ["$6,600.000","4/21/2018"];
 var $pickListLabels = ["Activity Type"];
 var $pickListValues = ["Calibration"];
 var $textAreaLabels = [];
@@ -331,16 +335,16 @@ var $lookUpValues = [];
 var $res1 = $sfm_act_lightningConfig.verifyValues($textLabels, $textValues, $pickListLabels, $pickListValues, $textAreaLabels, $textAreaValues, $checkBoxLabels, $checkBoxValues, $dateTimeLabels, $dateTimeDateValues, $timeValues, $emailLabels, $emailValues, $lookUpLabels, $lookUpValues, $multiPickLabels, $multiPickValues, $urlLabels, $urlValues, $telephoneLabels, $telephoneValues);
 var $recType = $sfm_act_lightningConfig.getRecordType();
 if($recType === "Estimate"){
-	var $res2 = true;
+	 $res2 = true;
 }
 else {
-	var $res2 = false;
+	  $res2 = false;
 }
 if($res1 && $res2){
-	var $res = true;
+	$res = true;
 }
 else{
-	var $res = false;
+	$res = false;
 }
 _assertTrue($res);
 if($res){
