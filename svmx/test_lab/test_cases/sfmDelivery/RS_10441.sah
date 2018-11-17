@@ -101,8 +101,8 @@ if($fieldsAbsentInPage.length > 0){
 _log("Provide values in work detail to validate field map for existing records in child.");
 var $current = new Date();
 var $todayDate =  $sfm_act_createCustomWizard.addSubtractDates($current,0);
-$textValues = ["Mysuru",$todayDate];
-$sfm_act_lightningConfig.editWorkOrder(["Received City","Date Received"] ,["Mysuru",$todayDate], [], [], [], [], [], [], [], [], [],[],[],[],[],[],[],[],[],[],[]);
+$textValues = ["Mysuru","11/11/2018"];
+$sfm_act_lightningConfig.editWorkOrder(["Received City","Date Received"] ,["Mysuru","11/11/2018"], [], [], [], [], [], [], [], [], [],[],[],[],[],[],[],[],[],[],[]);
 $sfm_act_lightningConfig.logoutInLightning();
 //Login and switch to lightning
 $bo_act_login.login($g_url,$sfmlUsn,$sfmlPwd);
@@ -190,7 +190,8 @@ if($res){
 else {
 	_log("FAIL: Field map for existing records in header does not have values as per value mapping in SFM Delivery before process save");
 }
-
+var $childLineFill = ["Line Type","Record Type"];
+var $childLineValues = [$lineType,];
 $sfm_act_SFM.addChildLine($lineType,$productName,[],[],$initialChildFields,$initialChildValues,[],[],[],[],[],[],[],[],[]);
 $sfm_act_lightningConfig.clearServicemaxCache();
 $sfm_act_lightningConfig.openExtEditForLatestItem();
