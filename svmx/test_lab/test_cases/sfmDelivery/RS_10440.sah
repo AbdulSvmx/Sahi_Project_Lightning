@@ -169,7 +169,7 @@ var $pickListLabels = ["Line Type"];
 var $pickListValues = [$lineType];
 var $checkBoxLabels = ["Is Billable","Use Price From Pricebook"];
 var $checkBoxValues = [true,true];
-var $res1 = $sfm_act_lightningConfig.verifyValues($textLabels, $textValues, $pickListLabels, $pickListValues, [], [], $checkBoxLabels, $checkBoxValues, [], [], [],[],[],[],[],[],[],[],[],[],[]);
+$res1 = $sfm_act_lightningConfig.verifyValues($textLabels, $textValues, $pickListLabels, $pickListValues, [], [], $checkBoxLabels, $checkBoxValues, [], [], [],[],[],[],[],[],[],[],[],[],[]);
 var $recType = $sfm_act_lightningConfig.getRecordType();
 if($recType === "Usage/Consumption"){
 	 $res2 = true;
@@ -193,7 +193,7 @@ else {
 
 $bo_act_navigation.navigateToCreatedRecordUsingGlobalSearch($sourceWlNumber);
 var $textLabels = ["Billable Line Price","Date Received"];
-var $textValues = ["6,600.000","4/21/2018"];
+var $textValues = ["$6,600.000","4/21/2018"];
 var $pickListLabels = ["Activity Type"];
 var $pickListValues = ["Calibration"];
 var $textAreaLabels = [];
@@ -213,7 +213,7 @@ var $telephoneLabels = [];
 var $telephoneValues = [];
 var $lookUpLabels = [];
 var $lookUpValues = [];
-var $res1 = $sfm_act_lightningConfig.verifyValues($textLabels, $textValues, $pickListLabels, $pickListValues, $textAreaLabels, $textAreaValues, $checkBoxLabels, $checkBoxValues, $dateTimeLabels, $dateTimeDateValues, $timeValues, $emailLabels, $emailValues, $lookUpLabels, $lookUpValues, $multiPickLabels, $multiPickValues, $urlLabels, $urlValues, $telephoneLabels, $telephoneValues);
+$res1 = $sfm_act_lightningConfig.verifyValues($textLabels, $textValues, $pickListLabels, $pickListValues, $textAreaLabels, $textAreaValues, $checkBoxLabels, $checkBoxValues, $dateTimeLabels, $dateTimeDateValues, $timeValues, $emailLabels, $emailValues, $lookUpLabels, $lookUpValues, $multiPickLabels, $multiPickValues, $urlLabels, $urlValues, $telephoneLabels, $telephoneValues);
 var $recType = $sfm_act_lightningConfig.getRecordType();
 if($recType === "Estimate"){
 	 $res2 = true;
@@ -287,7 +287,7 @@ $pickListLabels =["Line Type"];
 $pickListValues = [$lineType];
 $checkBoxLabels = ["Is Billable","Use Price From Pricebook"];
 $checkBoxValues = [true,true];
-var $res1 = $sfm_act_lightningConfig.verifyValues($textLabels, $textValues, [], [], [], [], $checkBoxLabels, $checkBoxValues, [], [], [],[],[],[],[],[],[],[],[],[],[]);
+$res1 = $sfm_act_lightningConfig.verifyValues($textLabels, $textValues, [], [], [], [], $checkBoxLabels, $checkBoxValues, [], [], [],[],[],[],[],[],[],[],[],[],[]);
 var $recType = $sfm_act_lightningConfig.getRecordType();
 if($recType === "Usage/Consumption"){
 	 $res2 = true;
@@ -332,7 +332,7 @@ var $telephoneLabels = [];
 var $telephoneValues = [];
 var $lookUpLabels = [];
 var $lookUpValues = [];
-var $res1 = $sfm_act_lightningConfig.verifyValues($textLabels, $textValues, $pickListLabels, $pickListValues, $textAreaLabels, $textAreaValues, $checkBoxLabels, $checkBoxValues, $dateTimeLabels, $dateTimeDateValues, $timeValues, $emailLabels, $emailValues, $lookUpLabels, $lookUpValues, $multiPickLabels, $multiPickValues, $urlLabels, $urlValues, $telephoneLabels, $telephoneValues);
+$res1 = $sfm_act_lightningConfig.verifyValues($textLabels, $textValues, $pickListLabels, $pickListValues, $textAreaLabels, $textAreaValues, $checkBoxLabels, $checkBoxValues, $dateTimeLabels, $dateTimeDateValues, $timeValues, $emailLabels, $emailValues, $lookUpLabels, $lookUpValues, $multiPickLabels, $multiPickValues, $urlLabels, $urlValues, $telephoneLabels, $telephoneValues);
 var $recType = $sfm_act_lightningConfig.getRecordType();
 if($recType === "Estimate"){
 	 $res2 = true;

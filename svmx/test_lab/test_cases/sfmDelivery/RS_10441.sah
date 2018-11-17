@@ -25,8 +25,8 @@ var $fieldsToMapHeader = ["Order Status","City"];
 var $fieldsToMapChild = ["Received City","Date Received"];
 var $current = new Date();
 var $todayDate =  $sfm_act_createCustomWizard.addSubtractDates($current,0);
-var $valueMapChild = ["Received City","Date Received"];
-var $valueMapChildValues = ["Srinagar from value map",$todayDate];
+var $valueMapChild = ["Received City"];
+var $valueMapChildValues = ["Srinagar from value map"];
 var $valueMapChildPick = ["Date Received"];
 var $valueMapChildPickValues = ["Today"];
 $containerName = [$lineType,$lineType,$lineType,$lineType,$lineType,$lineType,$lineType,$lineType,$lineType,$lineType,$lineType,$lineType,$lineType,$lineType,$lineType,$lineType,$lineType,$lineType,$lineType,$lineType,$lineType];
@@ -194,6 +194,10 @@ else {
 $sfm_act_SFM.addChildLine($lineType,$productName,[],[],$initialChildFields,$initialChildValues,[],[],[],[],[],[],[],[],[]);
 $sfm_act_lightningConfig.clearServicemaxCache();
 $sfm_act_lightningConfig.openExtEditForLatestItem();
+$current = new Date();
+$todayDate =  $sfm_act_createCustomWizard.addSubtractDates($current,0);
+$valueMapChild.push("Date Received");
+$valueMapChildValues.push($todayDate);
 var $res = $sfm_act_SFM.verifyValuesInDelivery($valueMapChild, $valueMapChildValues, [], [], [], [], [], [], [], []);
 _click($sfm_pg_wo.btn_updateExtEdit);
 _assertTrue($res);
@@ -226,14 +230,14 @@ else {
 //Get Work Detail number to perform verification
 //Get the line number of existing child line and verify value map for new records in child line
 $sfm_act_lightningConfig.navigateToLatestWorkDetail();
-var $targetLineNumber = _getText(_heading2("/WL-/"));
+var $targetLineNumber = _getText(_span("/WL-/"));
 _log("Work detail created as Target child is "+$targetLineNumber);
 
 //Verify value map for new child records after process save
 $textLabels = ["Received City"];
 $textValues = ["Srinagar from value map"];
 var $dateTimeLabels = ["Date Received"];
-var $dateTimeDateValues = ["12/25/2018"];
+var $dateTimeDateValues = [$todayDate];
 $res = $sfm_act_lightningConfig.verifyValues($textLabels, $textValues, [], [], [], [], [], [], $dateTimeLabels, $dateTimeDateValues, [],[],[],[],[],[],[],[],[],[],[]);
 if($res){
 	_log("PASS: Value map for new records in Child has values as per value mapping in SFM Delivery after process save");
