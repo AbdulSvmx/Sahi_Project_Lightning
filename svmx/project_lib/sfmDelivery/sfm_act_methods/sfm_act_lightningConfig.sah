@@ -894,7 +894,16 @@ this.navigateToLatestWorkDetail = function(){
 	_click(_link("/WL-/["+$x+"]"));
 
 };
+this.navigateToNthWorkDetail = function($number){
+	//This function navigates to work detail (Child line items) after
+	//save in a source to target process when the line number is unknown.
+	//Author: Janaki
+	_click($sfm_pg_wo.link_relatedListsTab);
+	_click($sfm_pg_wo.btn_viewAllWorkDetails);
+	var $x = $number - 1;
+	_click(_link("/WL-/["+$x+"]"));
 
+};
 this.sortRelatedList = function($relatedList,$sortingField,$order,$pageLayoutForProfile){
 	//This function sets the option to sort the items of the related list in the required order
 	//Parameters: $relatedList - Name of the related list
