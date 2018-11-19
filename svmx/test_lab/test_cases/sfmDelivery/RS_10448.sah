@@ -9,7 +9,7 @@ $rs_10448.start();
 		for (var $n = 0; $n < $recTypeName.length; $n++) {
 			$objName="RecordType";
 			$filter=["DeveloperName","SobjectType"];
-			$filterValue=[$recTypeName[$n],"SVMXDEV__RMA_Shipment_Order__c"];
+			$filterValue=[$recTypeName[$n],$orgnamespace+"__RMA_Shipment_Order__c"];
 			$columnName = "id";
 			//create a case
 			$partOrderNumber =$sfm_act_restApiMethods.getRestApi($sfmlUsn,$sfmlPwd,$sfmClientId,$sfmConsumerSecret,$sfmOrgInstance,"GET", $objName, $columnName, $filter, $filterValue);
@@ -19,14 +19,14 @@ $rs_10448.start();
 
 		//Create Parts Order using below variables
 		var $partOrderNumber=new Array;
-		$objName= "SVMXDEV__RMA_Shipment_Order__c";
+		$objName= $orgnamespace+"__RMA_Shipment_Order__c";
 		for (var $i = 0; $i < 4; $i++) {
 			if ($i==0) {
-				$obJson = "{\"SVMXDEV__Expected_Receive_Date__c\":\""+getToday()+"\",\"SVMXDEV__Billing_Type__c\":\"Loan\",\"RecordTypeId\":\""+RecordTypeId[1]+"\"}";
+				$obJson = "{\""+$orgnamespace+"__Expected_Receive_Date__c\":\""+getToday()+"\",\""+$orgnamespace+"__Billing_Type__c\":\"Loan\",\"RecordTypeId\":\""+RecordTypeId[1]+"\"}";
 			}else if ($i==1) {
-				$obJson = "{\"SVMXDEV__Expected_Receive_Date__c\":\""+getToday()+"\",\"SVMXDEV__Billing_Type__c\":\"Contract\",\"RecordTypeId\":\""+RecordTypeId[0]+"\"}";
+				$obJson = "{\""+$orgnamespace+"__Expected_Receive_Date__c\":\""+getToday()+"\",\""+$orgnamespace+"__Billing_Type__c\":\"Contract\",\"RecordTypeId\":\""+RecordTypeId[0]+"\"}";
 			}else {
-				$obJson = "{\"SVMXDEV__Expected_Receive_Date__c\":\""+getToday()+"\",\"SVMXDEV__Billing_Type__c\":\"Contract\",\"RecordTypeId\":\""+RecordTypeId[1]+"\"}";
+				$obJson = "{\""+$orgnamespace+"__Expected_Receive_Date__c\":\""+getToday()+"\",\""+$orgnamespace+"__Billing_Type__c\":\"Contract\",\"RecordTypeId\":\""+RecordTypeId[1]+"\"}";
 			}
 			$columnName = "Name";
 			$filter="id";
@@ -36,10 +36,10 @@ $rs_10448.start();
 			$partOrderNumber[$i] =$sfm_act_restApiMethods.getRestApi($sfmlUsn,$sfmlPwd,$sfmClientId,$sfmConsumerSecret,$sfmOrgInstance,"GET", $objName, $columnName, $filter, $filterValue);
 			_log("Parts Order number: "+$partOrderNumber[$i]);
 		}
-		
+
 		//Create Work order using below variables 
-		$objName= "SVMXDEV__Service_Order__c";
-		$obJson = "{\"SVMXDEV__Problem_Description__c\":\"Problem Description\",\"SVMXDEV__Priority__c\":\"High\"}";
+		$objName= $orgnamespace+"__Service_Order__c";
+		$obJson = "{\""+$orgnamespace+"__Problem_Description__c\":\"Problem Description\",\""+$orgnamespace+"__Priority__c\":\"High\"}";
 		_log("Work Order json: "+$obJson);
 		$columnName = "Name";
 		$filter="id";
@@ -50,7 +50,7 @@ $rs_10448.start();
 		_log("WO number: "+$WONumber);
 		//login to App
 		$bo_act_login.login($g_url,$sfmlUsn,$sfmlPwd);
-		
+	
 		//clone standard SFM
 		var $sfmNameToBeCloned="Manage Work Order Lines - Usage";
 		var $sfmName=$bo_act_common.generateRandomName("rs_10448_");

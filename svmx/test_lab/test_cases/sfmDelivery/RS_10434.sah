@@ -43,6 +43,7 @@ var $expValues = [$currentUser,$inventoryLocation];
 //Clone standard process and add the dependent picklist in the screen designer
 _setSpeed(3000);
 $sfm_act_SFM.cloneTDM016($process_to_clone,$processName,$isCustom,$pageLayoutName, $sfmTemplate, $fieldName, $containerName);
+$bo_act_navigation.designHeaderScreen($pageLayoutName,"Site");
 //$sfm_act_SFM.addUserLookupInScreenDesigner("Canceled By","Parts");
 _click($bo_pg_sfmTransactionAndDesigner.btn_quickSave1);
 _click($bo_pg_sfmTransactionAndDesigner.btn_qualifyingCriteriaAndFieldMapping);
