@@ -23,8 +23,12 @@ var $initalChildContainers = [$lineType,$lineType,$lineType,$lineType,$lineType]
 var $initialChildValues = [$lineType,"Usage/Consumption"];
 var $fieldsToMapHeader = ["Order Status","City"];
 var $fieldsToMapChild = ["Received City","Date Received"];
-var $valueMapChild = ["Received City","Date Received"];
-var $valueMapChildValues = ["Srinagar from value map","12/25/2018"];
+var $current = new Date();
+var $todayDate =  $sfm_act_createCustomWizard.addSubtractDates($current,0);
+var $valueMapChild = ["Received City"];
+var $valueMapChildValues = ["Srinagar from value map"];
+var $valueMapChildPick = ["Date Received"];
+var $valueMapChildPickValues = ["Today"];
 $containerName = [$lineType,$lineType,$lineType,$lineType,$lineType,$lineType,$lineType,$lineType,$lineType,$lineType,$lineType,$lineType,$lineType,$lineType,$lineType,$lineType,$lineType,$lineType,$lineType,$lineType,$lineType];
 //Appending current timestamp to process name to make it unique.
 var $timeStamp = $bo_act_navigation.getCurrentTimeStamp(); 
@@ -95,8 +99,10 @@ if($fieldsAbsentInPage.length > 0){
 }
 //Provide values in work detail to validate field map for existing records in child.
 _log("Provide values in work detail to validate field map for existing records in child.");
-$textValues = ["Mysuru","4/21/2018"];
-$sfm_act_lightningConfig.editWorkOrder(["Received City","Date Received"] ,["Mysuru","4/21/2018"], [], [], [], [], [], [], [], [], [],[],[],[],[],[],[],[],[],[],[]);
+var $current = new Date();
+var $todayDate =  $sfm_act_createCustomWizard.addSubtractDates($current,0);
+$textValues = ["Mysuru","11/11/2018"];
+$sfm_act_lightningConfig.editWorkOrder(["Received City","Date Received"] ,["Mysuru","11/11/2018"], [], [], [], [], [], [], [], [], [],[],[],[],[],[],[],[],[],[],[]);
 $sfm_act_lightningConfig.logoutInLightning();
 //Login and switch to lightning
 $bo_act_login.login($g_url,$sfmlUsn,$sfmlPwd);
@@ -148,14 +154,16 @@ $bo_act_mappings.createMapping($objectName,$mapType,$fieldsToMapHeader,$fieldsTo
 
 //Create field mapping for existing records for child
 $mapName = $processName + "mp2";
+_selectDomain($g_domain);
 _click($bo_pg_sfmTransactionAndDesigner.btn_qualifyingCriteriaAndFieldMapping);
 $bo_act_mappings.createMapping($lineType,$mapType,$fieldsToMapChild,$fieldsToMapChild,[],[],$mapName);
 
 //Create value mapping for new records for child
 $mapName = $processName + "mp3";
 $mapType = "Value Map For New Records";
+_selectDomain($g_domain);
 _click($bo_pg_sfmTransactionAndDesigner.btn_qualifyingCriteriaAndFieldMapping);
-$bo_act_mappings.createMapping($lineType,$mapType,[],[],$valueMapChild,$valueMapChildValues,$mapName);
+$bo_act_mappings.createMapping($lineType,$mapType,$valueMapChildPick,$valueMapChildPickValues,$valueMapChild,$valueMapChildValues,$mapName);
 
 _selectDomain();
 _setSpeed(1000);
@@ -182,10 +190,15 @@ if($res){
 else {
 	_log("FAIL: Field map for existing records in header does not have values as per value mapping in SFM Delivery before process save");
 }
-
+var $childLineFill = ["Line Type","Record Type"];
+var $childLineValues = [$lineType,];
 $sfm_act_SFM.addChildLine($lineType,$productName,[],[],$initialChildFields,$initialChildValues,[],[],[],[],[],[],[],[],[]);
 $sfm_act_lightningConfig.clearServicemaxCache();
 $sfm_act_lightningConfig.openExtEditForLatestItem();
+$current = new Date();
+$todayDate =  $sfm_act_createCustomWizard.addSubtractDates($current,0);
+$valueMapChild.push("Date Received");
+$valueMapChildValues.push($todayDate);
 var $res = $sfm_act_SFM.verifyValuesInDelivery($valueMapChild, $valueMapChildValues, [], [], [], [], [], [], [], []);
 _click($sfm_pg_wo.btn_updateExtEdit);
 _assertTrue($res);
@@ -218,14 +231,14 @@ else {
 //Get Work Detail number to perform verification
 //Get the line number of existing child line and verify value map for new records in child line
 $sfm_act_lightningConfig.navigateToLatestWorkDetail();
-var $targetLineNumber = _getText(_heading2("/WL-/"));
+var $targetLineNumber = _getText(_span("/WL-/"));
 _log("Work detail created as Target child is "+$targetLineNumber);
 
 //Verify value map for new child records after process save
 $textLabels = ["Received City"];
 $textValues = ["Srinagar from value map"];
 var $dateTimeLabels = ["Date Received"];
-var $dateTimeDateValues = ["12/25/2018"];
+var $dateTimeDateValues = [$todayDate];
 $res = $sfm_act_lightningConfig.verifyValues($textLabels, $textValues, [], [], [], [], [], [], $dateTimeLabels, $dateTimeDateValues, [],[],[],[],[],[],[],[],[],[],[]);
 if($res){
 	_log("PASS: Value map for new records in Child has values as per value mapping in SFM Delivery after process save");
@@ -239,7 +252,7 @@ $bo_act_navigation.navigateToCreatedRecordUsingGlobalSearch($wlNumber);
 $textLabels = ["Received City"];
 $textValues = ["Mysuru"];
 var $dateTimeLabels = ["Date Received"];
-var $dateTimeDateValues = ["4/21/2018"];
+var $dateTimeDateValues = [$todayDate];
 $res = $sfm_act_lightningConfig.verifyValues($textLabels, $textValues, [], [], [], [], [], [], $dateTimeLabels, $dateTimeDateValues, [],[],[],[],[],[],[],[],[],[],[]);
 _assertTrue($res);
 if($res){

@@ -15,7 +15,7 @@ var $initialChildFields = ["Line Type","Record Type ID","Line Number"];
 var $initalChildContainers = [$lineType,$lineType,$lineType];
 var $initialChildValues = [$lineType,"Usage/Consumption"];
 var $productName = "Chrome";
-var $additonalFields = ["Is Billable","Line Qty","Use Price From Pricebook/Contract","Date Received","Activity Type","Include in Quote","Start Date and Time","Billable Line Price"];
+var $additonalFields = ["Is Billable","Line Qty","Use Price From Pricebook/Contract","Date Received","Include in Quote","Start Date and Time","Billable Line Price"];
 var $containerName = [$lineType,$lineType,$lineType,$lineType,$lineType,$lineType,$lineType,$lineType];
 var $fieldsToMap = ["Is Billable","Line Qty","Use Price From Pricebook/Contract","Line Type","Date Received","Activity Type","Include in Quote","Start Date and Time","Billable Line Price"];
 var $pageLayoutForProfile = "SVMX Work Details Estimate - Admin";
@@ -26,6 +26,8 @@ var $pageLayoutName = $processName + "pg";
 var $mapName = $processName + "mp";
 var $tempFields = ["Age"];
 var $currentWizardName = $wizardName[4];
+var $res = true;
+var $res2 = true;
 
 //**************************************************************************************
 //Login and switch to lightning
@@ -38,12 +40,14 @@ var $wo_number = $sfm_act_createCustomWizard.createWowithdateliterals();
 $sfm_act_lightningConfig.navigateToObjectsInLightning($objectName);
 _selectWindow("/"+$objectName+"/");
 $sfm_act_lightningConfig.sortRelatedList("Work Details", "Line Number", "Ascending","SVMX Work Order - Admin");
+_selectWindow("Home | Salesforce");
 _closeWindow();
 _selectWindow();
 var $x = $fieldsToMap.indexOf("Record Type ID");
 if($x != -1) {
 		$fieldsToMap[$x] = "Record Type";
 }
+var $sourceWlNumber = $sfm_act_lightningConfig.createWorkDetailInLightning("Estimate",$lineType);
 
 //Find missing fields in Work Order Page Layout and them to the layout
 for($i=0;$i<$fieldsToMap.length;$i++){
@@ -54,8 +58,8 @@ for($i=0;$i<$fieldsToMap.length;$i++){
 _log($fieldsAbsentInPage);
 
 if($fieldsAbsentInPage.length > 0){
-	$sfm_act_lightningConfig.navigateToObjectsInLightning($objectName);
-	$sfm_act_lightningConfig.addFieldsToLightningPageLayout($objectName,$pageLayoutForProfile,$fieldsAbsentInPage,$sfd_myDomain);
+	$sfm_act_lightningConfig.navigateToObjectsInLightning($childObject);
+	$sfm_act_lightningConfig.addFieldsToLightningPageLayout($childObject,$pageLayoutForProfile,$fieldsAbsentInPage,$sfd_myDomain);
 	_selectDomain();
 	_selectWindow("Home | Salesforce");
 	_closeWindow();
@@ -152,8 +156,10 @@ _selectDomain();
 _wait(14000,_isVisible($sfm_pg_wo.label_wo));
 
 //Get the line number of existing child line and verify value map for new records in child line
+var $number = _count("_link","/WL-/");
+$number = $number-1;
 $sfm_act_lightningConfig.navigateToLatestWorkDetail();
-var $targetLineNumber = _getText(_heading2("/WL-/"));
+var $targetLineNumber = _getText(_span("/WL-/"));
 _log("Work detail created as Target child is "+$targetLineNumber);
 
 //Verify values for Target line created
@@ -161,18 +167,18 @@ var $textLabels = ["Line Qty"];
 var $textValues = ["1.0000"];
 var $pickListLabels = ["Line Type"];
 var $pickListValues = [$lineType];
-var $checkBoxLabels = ["Is Billable","Use Price From Pricebook/Contract"];
+var $checkBoxLabels = ["Is Billable","Use Price From Pricebook"];
 var $checkBoxValues = [true,true];
-var $res1 = $sfm_act_lightningConfig.verifyValues($textLabels, $textValues, $pickListLabels, $pickListValues, [], [], $checkBoxLabels, $checkBoxValues, [], [], [],[],[],[],[],[],[],[],[],[],[]);
+$res1 = $sfm_act_lightningConfig.verifyValues($textLabels, $textValues, $pickListLabels, $pickListValues, [], [], $checkBoxLabels, $checkBoxValues, [], [], [],[],[],[],[],[],[],[],[],[],[]);
 var $recType = $sfm_act_lightningConfig.getRecordType();
 if($recType === "Usage/Consumption"){
-	var $res2 = true;
+	 $res2 = true;
 }
 else {
-	var $res2 = false;
+	 $res2 = false;
 }
 if($res1 && $res2){
-	var $res = true;
+	 $res = true;
 }
 _assertTrue($res);
 if($res){
@@ -187,7 +193,7 @@ else {
 
 $bo_act_navigation.navigateToCreatedRecordUsingGlobalSearch($sourceWlNumber);
 var $textLabels = ["Billable Line Price","Date Received"];
-var $textValues = ["6,600.000","4/21/2018"];
+var $textValues = ["$6,600.000","4/21/2018"];
 var $pickListLabels = ["Activity Type"];
 var $pickListValues = ["Calibration"];
 var $textAreaLabels = [];
@@ -207,19 +213,19 @@ var $telephoneLabels = [];
 var $telephoneValues = [];
 var $lookUpLabels = [];
 var $lookUpValues = [];
-var $res1 = $sfm_act_lightningConfig.verifyValues($textLabels, $textValues, $pickListLabels, $pickListValues, $textAreaLabels, $textAreaValues, $checkBoxLabels, $checkBoxValues, $dateTimeLabels, $dateTimeDateValues, $timeValues, $emailLabels, $emailValues, $lookUpLabels, $lookUpValues, $multiPickLabels, $multiPickValues, $urlLabels, $urlValues, $telephoneLabels, $telephoneValues);
+$res1 = $sfm_act_lightningConfig.verifyValues($textLabels, $textValues, $pickListLabels, $pickListValues, $textAreaLabels, $textAreaValues, $checkBoxLabels, $checkBoxValues, $dateTimeLabels, $dateTimeDateValues, $timeValues, $emailLabels, $emailValues, $lookUpLabels, $lookUpValues, $multiPickLabels, $multiPickValues, $urlLabels, $urlValues, $telephoneLabels, $telephoneValues);
 var $recType = $sfm_act_lightningConfig.getRecordType();
 if($recType === "Estimate"){
-	var $res2 = true;
+	 $res2 = true;
 }
 else {
-	var $res2 = false;
+	 $res2 = false;
 }
 if($res1 && $res2){
-	var $res = true;
+	 $res = true;
 }
 else {
-	var $res = false;
+	 	$res = false;
 }
 _assertTrue($res);
 if($res){
@@ -235,6 +241,7 @@ $bo_act_navigation.navigateToCreatedRecordUsingGlobalSearch($wo_number);
 $sfm_act_createCustomWizard.clickWizardlinks($processName);
 _wait(8000);
 _selectDomain($g_domain);
+_click($sfm_pg_wo.btn_arrowNextToClearCache);
 _assertVisible($sfm_pg_wo.link_launchSfmDesigner);
 _click($sfm_pg_wo.link_launchSfmDesigner);
 _selectDomain();
@@ -244,6 +251,7 @@ _click($bo_pg_sfmTransactionAndDesigner.btn_screenDesigner);
 _wait(5000);
 $bo_act_navigation.designChildScreen($pageLayoutName,$additonalFields,$containerName);
 _wait(2000);
+$sfm_act_SFM.addFieldToScreen(["Activity Type"], [$lineType]);
 _click($bo_pg_sfmTransactionAndDesigner.btn_quickSave1);
 _wait(2000);
 _selectDomain();
@@ -255,7 +263,7 @@ $sfm_act_SFM.addChildLine($lineType,$productName,[],[], [], [],[],[],[],[],[],[]
 //Verify value map in delivery for the newly added child line item
 $textLabels =["Line Qty","Line Type","Record Type"];
 $textValues = ["1",$lineType,"Usage/Consumption"];
-$checkBoxLabels = ["Is Billable","Use Price From Pricebook"];
+$checkBoxLabels = ["Is Billable","Use Price From Pricebook/Contract"];
 $checkBoxValues = [true,true];
 $sfm_act_lightningConfig.openExtEditForLatestItem();
 $res = $sfm_act_SFM.verifyValuesInDelivery($textLabels, $textValues, [], [], [], [], $checkBoxLabels, $checkBoxValues, [], []);
@@ -270,28 +278,28 @@ else {
 	_log("FAIL:Value map for new records in Child does not have values as per value mapping in a source -> target child only process (fields not present in screen");
 }
 $sfm_act_lightningConfig.navigateToLatestWorkDetail();
-var $targetLineNumber = _getText(_heading2("/WL-/"));
+var $targetLineNumber = _getText(_span("/WL-/"));
 _log("Work detail created as Target child is "+$targetLineNumber);
 //Verify value map for the new child record
 $textLabels =["Line Qty"];
 $textValues = ["1.0000"];
 $pickListLabels =["Line Type"];
 $pickListValues = [$lineType];
-$checkBoxLabels = ["Is Billable","Use Price From Pricebook/Contract"];
+$checkBoxLabels = ["Is Billable","Use Price From Pricebook"];
 $checkBoxValues = [true,true];
-var $res1 = $sfm_act_lightningConfig.verifyValues($textLabels, $textValues, [], [], [], [], $checkBoxLabels, $checkBoxValues, [], [], [],[],[],[],[],[],[],[],[],[],[]);
+$res1 = $sfm_act_lightningConfig.verifyValues($textLabels, $textValues, [], [], [], [], $checkBoxLabels, $checkBoxValues, [], [], [],[],[],[],[],[],[],[],[],[],[]);
 var $recType = $sfm_act_lightningConfig.getRecordType();
 if($recType === "Usage/Consumption"){
-	var $res2 = true;
+	 $res2 = true;
 }
 else {
-	var $res2 = false;
+	 	$res2 = false;
 }
 if($res1 && $res2){
-	var $res = true;
+		$res = true;
 }
 else{
-	var $res = false;
+		$res = false;
 }
 _assertTrue($res);
 if($res){
@@ -304,7 +312,7 @@ else {
 //Verify field map for existing child records
 $bo_act_navigation.navigateToCreatedRecordUsingGlobalSearch($sourceWlNumber);
 var $textLabels = ["Billable Line Price","Date Received"];
-var $textValues = ["6,600.000","4/21/2018"];
+var $textValues = ["$6,600.000","4/21/2018"];
 var $pickListLabels = ["Activity Type"];
 var $pickListValues = ["Calibration"];
 var $textAreaLabels = [];
@@ -324,19 +332,19 @@ var $telephoneLabels = [];
 var $telephoneValues = [];
 var $lookUpLabels = [];
 var $lookUpValues = [];
-var $res1 = $sfm_act_lightningConfig.verifyValues($textLabels, $textValues, $pickListLabels, $pickListValues, $textAreaLabels, $textAreaValues, $checkBoxLabels, $checkBoxValues, $dateTimeLabels, $dateTimeDateValues, $timeValues, $emailLabels, $emailValues, $lookUpLabels, $lookUpValues, $multiPickLabels, $multiPickValues, $urlLabels, $urlValues, $telephoneLabels, $telephoneValues);
+$res1 = $sfm_act_lightningConfig.verifyValues($textLabels, $textValues, $pickListLabels, $pickListValues, $textAreaLabels, $textAreaValues, $checkBoxLabels, $checkBoxValues, $dateTimeLabels, $dateTimeDateValues, $timeValues, $emailLabels, $emailValues, $lookUpLabels, $lookUpValues, $multiPickLabels, $multiPickValues, $urlLabels, $urlValues, $telephoneLabels, $telephoneValues);
 var $recType = $sfm_act_lightningConfig.getRecordType();
 if($recType === "Estimate"){
-	var $res2 = true;
+	 $res2 = true;
 }
 else {
-	var $res2 = false;
+	  $res2 = false;
 }
 if($res1 && $res2){
-	var $res = true;
+	$res = true;
 }
 else{
-	var $res = false;
+	$res = false;
 }
 _assertTrue($res);
 if($res){
