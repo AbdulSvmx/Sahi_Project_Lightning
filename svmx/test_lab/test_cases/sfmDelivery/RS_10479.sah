@@ -1,65 +1,51 @@
 ////If You are running on Dev  Org, Please make sure your webservices code is SVMXDEV instead of SVMXC. For WebService Refer Testcase(Comment Section) in Jira
 
-//Author:Mamata rs_10479
-	var $rs_10479 = _testcase("rs_10479", "Verify Web Service call before Save/Insert");
-	$rs_10479.start();
-	_setSpeed($g_stepSpeed);
+var $RS_10479 = _testcase("RS_10479", "Verify Web Service call before Save/Insert");
+$rs_10479.start();
+var $sfmNameToBeCloned = "Manage Work Order Lines - Usage";
+var $sfmName=$bo_act_common.generateRandomName("RS_4996_");
+var $isCustom = false;
+var $sfmTemplate = "SVMXSTD: Manage WO Usage Lines";
+var $sfmTemplateSaveAsName = $sfmName;
+var $containerName = ["Order Status","Order Status","Order Status","Order Status"];
+var $fieldName=["Order Type","Zip","Is Entitlement Performed","Driving Time (in Minutes)"];
+var $webServiceObject = "Work Order";
+var $event = "Before Save/Update";
+var $eventType = "Webservice";
+var $methodName = "objWebService.beforeSaveOrUpdate";
+var $wizardObject ="Work Order";
 
-	var $sfmToBeCloned="Manage Work Order Lines - Usage";
-	var $sfmName=$bo_act_common.generateRandomName("RS_10479_");
-	//change  the name of $sfmTemplateSaveAsName before execution to avoid any duplication.
-	var $sfmTemplateSaveAsName=$bo_act_common.generateRandomName("10479Temp");
+//Create WO through REST API
+var $woNumber = $sfm_act_createCustomWizard.createBlankWoFromRest($sfmlUsn, $sfmlPwd, $sfmClientId, $sfmConsumerSecret, $sfmOrgInstance);
 
-	var $objName="Work Order";
-	//var $wizardname="SFM Delivery Auto";
-	//var $wizardID= $wizardname;
-	var $executionMode="Interactive";
-	//var $fieldActnType="SFM";
-	var $actnName=$sfmName;
-	var $stndSFMName=$sfmName;
+//login
+_setSpeed($g_stepSpeed);
+$bo_act_login.login($g_url, $sfmlUsn, $sfmlPwd); 
 
-	var $subTypeWO="Order Status";
-	var $subTypePart="Date Received";
-	var $subTypeActivityType="Activity Type";
-	var $subTypeExpenses="Billable Qty";
-	var $subTypeTravel="Consumed From Location";
-	var $wizardButtonName=$sfmName;
-	var $enteredMinBS=60;
-	var $enteredOTBS="Field Service";
-	var $enteredZipBS=560065;	
-	$bo_act_login.login($g_url,$sfmlUsn,$sfmlPwd);
-	$sfm_act_lightningConfig.switchToLightning();
-	$bo_act_navigation.navigateServicemaxSetUpInLightening();
-	var $eventType="We";
-	var $method="objWebService.beforeSaveOrUpdate";
+//clone Source to Target Child Process
+$sfm_act_SFM.cloneTDM016($sfmNameToBeCloned,$sfmName,$isCustom, $sfmTemplateSaveAsName,$sfmTemplate,$fieldName, $containerName);
+$sfm_act_SFM.setWebservice($webServiceObject, $event, $eventType, $methodName);
+_click($sfm_pg_sfmDesigner.btn_saveSFM); 
 
-//*****Navigate to SFm Designer and create clone of Manage WO Line Usage Services transaction********
-$bo_act_navigation.navigateToSfmTransactionDesignerForWeb();
-_wait(20000);
-$bo_act_WebServices.createSFmForWebServices($sfmToBeCloned, $sfmName,$subTypePart,$subTypeActivityType,$subTypeExpenses,$subTypeTravel,$sfmTemplateSaveAsName);
-$bo_act_WebServices.enableBeforeSave($eventType,$method);
+//add the process to wizard
+$sfm_act_wizards.addToWizard($wizardObject, $wizardName[1], $wizardType[1], $sfmName);  
 
-$bo_act_WebServices.saveAndClose();
-_click($bo_pg_home.link_backToSetUpHome);
+//Navigate to the WO for validation
+$bo_act_navigation.navigateToCreatedRecordUsingGlobalSearch($woNumber);
 
-//*******Nagigate to SFM Wizard and Create Wizard and Add Above Transaction to it**********
-$sfm_act_wizards.addToWizard1($objName, $wizardName[1], $wizardType[1], $actnName);
+$sfm_act_createCustomWizard.clickWizardBtn($sfmName);
 
-//******Launch the SFM in delivery for WO object**************
-
-$bo_act_sfmVerifyWorkOrder.verifyWizardOnWOObj($stndSFMName);
-$bo_act_sfmVerifyWorkOrder.clkOnWizard($wizardButtonName);
-_wait(30000);
-_click($bo_pg_webServices.btn_deliveryQuickSave);
-_wait(10000);
-
-$bo_act_WebServices.verifyBeforeSaveUpdate($enteredMinBS,$enteredOTBS,$enteredZipBS);
-
-//********Deleting test Data***************
-//$bo_act_SFW.deleteWizards($objName,$wizardID);
-
-//$bo_act_navigation.navigateToSfmTransactionDesigner();
-//$bo_act_SFM.deleteSFM($sfmName);
-	_setSpeed($g_stepSpeed);
+//Validate in delivery after clicking quick save
+//_setValue($sfm_pg_sfmDesigner.txt_orderType,"Depot Repair");
+_check($sfm_pg_sfmDesigner.chk_isEntitlementPerformed);
+_click($sfm_pg_sfmDesigner.btn_deliveryQuickSave);
+if(_isVisible($sfm_pg_sfmDesigner.txt_priceAlert)){
+	_click($sfm_pg_sfmDesigner.btn_priceAlertOk);
+}
+_wait(15000);
+_assertEqual("Field Service", _getText($sfm_pg_sfmDesigner.txt_orderType), "Order type is not updated");
+_assertEqual("560065",_getText($sfm_pg_sfmDesigner.txt_zip),"Zip is not updated");
+_assertEqual("60",_getText($sfm_pg_sfmDesigner.txt_drivingTime),"Driving time is not updated");
+_assertFalse(_isChecked($sfm_pg_sfmDesigner.chk_isEntitlementPerformed),"Is Entitlement Performed is not unchecked");
 
 $rs_10479.end();

@@ -1,79 +1,47 @@
-/*
 
-/
- //If You are running on Dev  Org, Please make sure your webservices code is SVMXDEV instead of SVMXC. For WebService Refer Testcase(Comment Section) in Jira
- */
+var $RS_10477 = _testcase("RS_10477", "Verify Web Service call On Change");
+$RS_10477.start();
+var $sfmNameToBeCloned = "Manage Work Order Lines - Usage";
+var $sfmName=$bo_act_common.generateRandomName("RS_10477_");
+var $isCustom = false;
+var $sfmTemplate = "SVMXSTD: Manage WO Usage Lines";
+var $sfmTemplateSaveAsName = $sfmName;
+var $containerName = ["Order Status","Order Status","Order Status","Order Status"];
+var $fieldName=["Order Type","Zip","Is Entitlement Performed","Driving Time (in Minutes)"];
+var $webServiceObject ="Order Status" ;
+var $event = "On Change";
+var $eventType = "Webservice";
+var $methodName = "objWebService.onChange";
+var $wizardObject ="Work Order";
 
 
-//Author:Mamata RS-10477
-	var $rs_10477 = _testcase("rs_10477", "Verify Web Service call On Change");
-	$rs_10477.start();
-	_setSpeed($g_stepSpeed);
 
-	var $sfmToBeCloned="Create Usage Lines from Estimates";
-	var $sfmName=$bo_act_common.generateRandomName("RS_10477_");
-	//change  the name of $sfmTemplateSaveAsName before execution to avoid any duplication.
-	var $sfmTemplateSaveAsName=$bo_act_common.generateRandomName("10477Temp");
+//Create WO through REST API
+var $woNumber = $sfm_act_createCustomWizard.createBlankWoFromRest($sfmlUsn, $sfmlPwd, $sfmClientId, $sfmConsumerSecret, $sfmOrgInstance);
 
-	var $objName="Work Order";
-	//var $wizardname="SFM Delivery Auto";
-	//var $wizardID= $wizardname;
-	var $executionMode="Interactive";
-	//var $fieldActnType="SFM";
-	var $actnName=$sfmName;
-	var $stndSFMName=$sfmName;
-
-	var $subTypeWO="Order Status";
-	var $subTypePart="Date Received";
-	var $subTypeActivityType="Activity Type";
-	var $subTypeExpenses="Billable Qty";
-	var $subTypeTravel="Consumed From Location";
-	var $d_url="https://test.salesforce.com/";
-	var $d_unBase="noor.sharieff@Tools2.com";
-	var $d_pwdBase="welcome-03";
-	var $wizardButtonName=$sfmName;
-	var $enteredMinOC=30;
-	var $enteredOTOC="Depot Repair";
-	var $enteredZipOC=560064;
-	var $onChangeValue="Field Service";
-	var $eventType="We";
-	var $method="objWebService.onChange";
-
-		
-	$bo_act_login.login($g_url, $sfmlUsn,$sfmlPwd);
-	$sfm_act_lightningConfig.switchToLightning();
-	$bo_act_navigation.navigateServicemaxSetUpInLightening();
-
-//*****Navigate to SFm Designer and create clone of Manage WO Line Usage Services transaction********
-$bo_act_navigation.navigateToSfmTransactionDesignerForWeb();
-_wait(20000);
-$bo_act_WebServices.createSFmForWebServices($sfmToBeCloned, $sfmName,$subTypePart,$subTypeActivityType,$subTypeExpenses,$subTypeTravel,$sfmTemplateSaveAsName);
-$bo_act_WebServices.enableOnChange($eventType,$method);
-
-$bo_act_WebServices.saveAndClose();
-_click($bo_pg_home.link_backToSetUpHome);
-//*******Navigate to SFM Wizard and Create Wizard and Add Above Transaction to it**********
-//$bo_act_navigation.navigateToSfmWizard();
-$sfm_act_wizards.addToWizard1($objName, $wizardName[1], $wizardType[1], $actnName);
-//$bo_act_SFW.createWizardGeneralInfo($objName,$wizardname,$wizardID);
-//$bo_act_SFW.createWizardStep($fieldActnType,$actnName,$executionMode);
-
-//******Launch the SFM in delivery for WO object**************
-
-$bo_act_sfmVerifyWorkOrder.verifyWizardOnWOObj($stndSFMName);
-$bo_act_sfmVerifyWorkOrder.clkOnWizard($wizardButtonName);
-_wait(30000);
-$bo_act_WebServices.verifyOnChange($enteredMinOC,$enteredOTOC,$enteredZipOC,$onChangeValue);
-//********Deleting test Data***************
-/*
-$bo_act_navigation.navigateServicemaxSetUpInLightening();
-$bo_act_SFW.deleteWizards($objName,$wizardID);
-
-*/
-//_wait(6000);
-//$bo_act_navigation.navigateServicemaxSetUpInLightening();
-//$bo_act_navigation.navigateToSfmTransactionDesignerForWeb();
-//$bo_act_SFM.deleteSFM($sfmName);
-
+//login
 _setSpeed($g_stepSpeed);
-$rs_10477.end();
+$bo_act_login.login($g_url, $sfmlUsn, $sfmlPwd); 
+
+//clone Source to Target Child Process
+$sfm_act_SFM.cloneTDM016($sfmNameToBeCloned,$sfmName,$isCustom, $sfmTemplateSaveAsName,$sfmTemplate,$fieldName, $containerName);
+$sfm_act_SFM.setWebservice($webServiceObject, $event, $eventType, $methodName);
+_click($sfm_pg_sfmDesigner.btn_saveSFM); 
+
+//add the process to wizard
+$sfm_act_wizards.addToWizard($wizardObject, $wizardName[1], $wizardType[1], $sfmName);  
+
+//Navigate to the WO for validation
+$bo_act_navigation.navigateToCreatedRecordUsingGlobalSearch($woNumber);
+
+$sfm_act_createCustomWizard.clickWizardBtn($sfmName);
+
+//Validate in delivery after changing order status
+//_setValue($sfm_pg_sfmDesigner.txt_orderType,"Field Service");
+//_setValue($sfm_pg_sfmDesigner.txt_orderStatus,"Closed");
+_wait(3000);
+_assertEqual("Depot Repair", _getText($sfm_pg_sfmDesigner.txt_orderType), "Order type is not updated");
+_assertEqual("560064",_getText($sfm_pg_sfmDesigner.txt_zip),"Zip is not updated");
+_assertEqual("30",_getText($sfm_pg_sfmDesigner.txt_drivingTime),"Driving time is not updated");
+_assertTrue(_isChecked($sfm_pg_sfmDesigner.chk_isEntitlementPerformed),"Is Entitlement Performed is not checked");
+$RS_10477.end();
