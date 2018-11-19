@@ -1,4 +1,4 @@
-//Author: Safi Ahmed
+//Author: Anand Kakhandaki
 var $rs_10447 = _testcase("RS_10447","Verify Lookup advanced filter - User Trunk literal");
 $rs_10447.start();
 
