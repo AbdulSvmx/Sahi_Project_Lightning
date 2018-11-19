@@ -198,7 +198,7 @@ _selectWindow("/SFM Transaction Designer/");
 _wait(20000);
 _click($bo_pg_sfmTransactionAndDesigner.btn_screenDesigner);
 _wait(5000);
-$sfm_act_SFM.addFieldToScreen($pageLayoutName,$additonalFields,$containerName);
+$sfm_act_SFM.addFieldToScreen($additonalFields,$containerName);
 _wait(2000);
 _click($bo_pg_sfmTransactionAndDesigner.btn_quickSave1);
 _wait(2000);
