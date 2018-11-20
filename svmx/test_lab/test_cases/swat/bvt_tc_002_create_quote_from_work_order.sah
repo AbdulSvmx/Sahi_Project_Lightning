@@ -1,0 +1,58 @@
+var $bvt_tc_002_create_quote_from_work_order = _testcase("bvt_tc_002_create_quote_from_work_order","Verify the functionality of SFM type - from Source Object to create new header and child records");
+
+$bvt_tc_002_create_quote_from_work_order.start();
+
+var $sfmName = "Create Quote from Work Order";
+var $wizardObject ="Work Order";
+var $woNumber;
+
+_setSpeed($g_stepSpeed);
+$bo_act_login.login($g_url,$swat_un,$swat_pwd );
+$sfm_act_lightningConfig.switchToLightning();
+
+//Create WO through REST API ******
+var $woNumber = $sfm_act_createCustomWizard.createBlankWoFromRest($sfmlUsn, $sfmlPwd, $sfmClientId, $sfmConsumerSecret, $sfmOrgInstance);
+
+//add the process to wizard
+$sfm_act_wizards.addToWizard($wizardObject, $wizardName[0], $wizardType[1], $sfmName);  
+_wait(3000); 
+
+//Navigate to the WO for validation
+$bo_act_navigation.navigateToCreatedRecordUsingGlobalSearch($woNumber);
+$sfm_act_createCustomWizard.clickWizardBtn($sfmName);
+
+//DVR validation on delivery
+//add line to Parts
+$sfm_act_sfmDesigner.addChildLine("Parts");
+_setValue($sfm_pg_sfmDesigner.txt_eeLineQty,"6");
+_setValue($sfm_pg_sfmDesigner.txt_eeReceivedStreet,"MG Road");
+_click($sfm_pg_sfmDesigner.btn_eeUpdate);
+
+//add line to Labor
+$sfm_act_sfmDesigner.addChildLine("Labor");
+_setValue($sfm_pg_sfmDesigner.txt_eeLineQty,"6");
+_setValue($sfm_pg_sfmDesigner.txt_eeReceivedStreet,"MG Road");
+_click($sfm_pg_sfmDesigner.txt_eeActivityType);
+_click(_listItem("Service"));
+_click($sfm_pg_sfmDesigner.btn_eeUpdate);
+
+//add line to Expenses
+$sfm_act_sfmDesigner.addChildLine("Expenses");
+_setValue($sfm_pg_sfmDesigner.txt_eeLineQty,"6");
+_setValue($sfm_pg_sfmDesigner.txt_eeReceivedStreet,"MG Road");
+_click($sfm_pg_sfmDesigner.txt_eeExpenseType);
+_click(_listItem("Entertainment"));
+_click($sfm_pg_sfmDesigner.btn_eeUpdate);
+
+//add line to Travel
+$sfm_act_sfmDesigner.addChildLine("Travel");
+_setValue($sfm_pg_sfmDesigner.txt_eeLineQty,"6");
+_setValue($sfm_pg_sfmDesigner.txt_eeReceivedStreet,"MG Road");
+_setValue($sfm_pg_sfmDesigner.txt_eeStartDateTime,$bo_act_common.currentDate("\/"));
+_setValue($sfm_pg_sfmDesigner.txt_eeEndDateTime,$bo_act_common.getPastDate("1", "\/"));
+_click($sfm_pg_sfmDesigner.btn_eeUpdate);
+
+_click($sfm_pg_sfmDesigner.btn_deliveryQuickSave);
+
+
+$bvt_tc_002_create_quote_from_work_order.end();
