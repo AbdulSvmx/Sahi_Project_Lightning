@@ -50,8 +50,13 @@ $bvt_tc_001_sfmSearch.start();
 	
 	
 	//create Work orders
-	$objName= "SVMXDEV__Service_Order__c";
-	$obJson = "{\"SVMXDEV__Order_Status__c\":\"Open\",\"SVMXDEV__Order_Type__c\":\"Field Service\"}";
+	//$objName= "SVMXDEV__Service_Order__c";
+	//$obJson = "{\"SVMXDEV__Order_Status__c\":\"Open\",\"SVMXDEV__Order_Type__c\":\"Field Service\"}";
+	
+	
+	$objName= "SVMXC__Service_Order__c";
+	$obJson = "{\"SVMXC__Order_Status__c\":\"Open\",\"SVMXC__Order_Type__c\":\"Field Service\"}";
+	
 	$columnName = "Name";
 	$filter="id";
 	$filterValue=$sfm_act_restApiMethods.postRestApi($sfmlUsn,$sfmlPwd,$sfmClientId,$sfmConsumerSecret,$sfmOrgInstance,$objName,$obJson,"POST");
@@ -66,7 +71,9 @@ $bvt_tc_001_sfmSearch.start();
 	_click(_link("Go"));
 	_selectDomain();
 	_setValue(_textbox("/svmx-text/",_near(_button("Go"))),$WONumber);
+	_wait(5000);
 	_click(_button("Go"));
+	_wait(5000);
 	//_click(_div("/radio/",_near(_link($WONumber))));
 	_click(_link($WONumber));
 	_selectWindow($WONumber+" | Salesforce");
