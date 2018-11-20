@@ -45,7 +45,32 @@ else{
 }
 //*****Add AUTOMATION SEARCH*****
 $bo_act_navigation.navigateToSfmSearchDesigner();
-$sfm_act_search.newCustomSearch($searchName, $searchObjects);
+_set($flag,_isVisible(_span($searchName)));
+_log($flag);
+if($flag){
+	$sfm_act_search.editSearchObjects($searchName);
+	_click($sfm_pg_search.tab_searchConfig);
+	var $txtbox= _collect("_textbox","/.*/",_under(_tableHeader("Result Section Title")));
+	var $noOfObj = $txtbox.length;
+	_log($noOfObj);
+	if($noOfObj>1){
+		for (var $i=$noOfObj-1; $i>=0; $i--) {
+			if(_getText($txtbox[$i])!="Work Orders"){
+				_click(_checkbox(0,_leftOf(_textbox({value:_getText($txtbox[$i])}))));
+				_wait(3000);
+				_click(_button("Delete"));
+			}
+		}
+		
+	}
+}
+else{
+	_click($sfm_pg_search.btn_customNew);
+	_setValue($sfm_pg_search.txt_searchTitle,$searchName);
+	_setValue($sfm_pg_search.txt_searchID,$searchID);
+	this.addNewSearchConfig($searchObjects);
+}
+//$sfm_act_search.newCustomSearch($searchName, $searchObjects);
 //*****Add OPDOC for a header Record*****
 $bo_act_navigation.navigateToSfmTransactionDesigner();
 _setStrictVisibilityCheck(true);
