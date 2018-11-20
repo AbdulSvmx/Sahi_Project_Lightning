@@ -40,7 +40,7 @@ $sfm_act_createCustomWizard.clickWizardBtn($sfmName);
 _check($sfm_pg_sfmDesigner.chk_isEntitlementPerformed);
 _setValue($sfm_pg_sfmDesigner.txt_zip,"");
 _click($sfm_pg_sfmDesigner.txt_drivingTime);
-_wait(3000);
+_wait(5000);
 _assertEqual("Depot Repair", _getText($sfm_pg_sfmDesigner.txt_orderType), "Order type is not updated");
 _assertEqual("560063",_getText($sfm_pg_sfmDesigner.txt_zip),"Zip is not updated");
 _assertEqual("15",_getText($sfm_pg_sfmDesigner.txt_drivingTime),"Driving time is not updated");

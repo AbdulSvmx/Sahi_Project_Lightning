@@ -37,9 +37,9 @@ $bo_act_navigation.navigateToCreatedRecordUsingGlobalSearch($woNumber);
 $sfm_act_createCustomWizard.clickWizardBtn($sfmName);
 
 //Validate in delivery after changing order status
-//_setValue($sfm_pg_sfmDesigner.txt_orderType,"Field Service");
-//_setValue($sfm_pg_sfmDesigner.txt_orderStatus,"Closed");
-_wait(3000);
+_click(_textbox("Order Status"));
+_click(_listItem("Closed"));
+_wait(5000);
 _assertEqual("Depot Repair", _getText($sfm_pg_sfmDesigner.txt_orderType), "Order type is not updated");
 _assertEqual("560064",_getText($sfm_pg_sfmDesigner.txt_zip),"Zip is not updated");
 _assertEqual("30",_getText($sfm_pg_sfmDesigner.txt_drivingTime),"Driving time is not updated");

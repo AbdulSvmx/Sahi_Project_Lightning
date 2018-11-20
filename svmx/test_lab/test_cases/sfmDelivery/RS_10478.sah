@@ -1,4 +1,4 @@
-	var $RS_10478 = _testcase("RS_10478", "Verify Web Service call After Save/Insert.");
+	var $RS_10478 = _testcase("RS_10478", "Verify Web Service call After Save/Insert");
 	$RS_10478.start();
 	var $sfmNameToBeCloned = "Manage Work Order Lines - Usage";
 	var $sfmName=$bo_act_common.generateRandomName("RS_10478_");
@@ -34,7 +34,8 @@
 	$sfm_act_createCustomWizard.clickWizardBtn($sfmName);
 
 	// Validate in delivery after clicking quick save
-	//_setValue($sfm_pg_sfmDesigner.txt_orderType,"Depot Repair");
+	_click($sfm_pg_sfmDesigner.txt_orderType);
+	_click(_listItem("Depot Repair"));
 	_check($sfm_pg_sfmDesigner.chk_isEntitlementPerformed);
 	_click($sfm_pg_sfmDesigner.btn_deliveryQuickSave);
 	if(_isVisible($sfm_pg_sfmDesigner.txt_priceAlert)){
