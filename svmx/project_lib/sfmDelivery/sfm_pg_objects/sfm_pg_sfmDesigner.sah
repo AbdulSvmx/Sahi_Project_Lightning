@@ -85,6 +85,7 @@ var $sfm_pg_sfmDesigner = new function sfm_pg_sfmDesigner() {
 	this.txt_orderType = _textbox("Order Type",_near(_span("Order Type"))); // Added for lightning
 	this.txt_problemDescription = _textarea(0,_near(_span("Problem Description"))); // Added for lightning
 	this.txt_invoiceNumber =_textbox("Invoice Number",_near(_span("Invoice Number"))) ; // Added for lightning
+	this.txt_drivingTime = _textbox("Driving Time (in Minutes)");
 
 	
 	//Extended edit page objects --Parts

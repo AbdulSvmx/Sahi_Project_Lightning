@@ -191,9 +191,8 @@ else {
 	_log("FAIL: Field map for existing records in header does not have values as per value mapping in SFM Delivery before process save");
 }
 var $childLineFill = ["Line Type","Record Type"];
-var $childLineValues = [$lineType,];
-$sfm_act_SFM.addChildLine($lineType,$productName,[],[],$initialChildFields,$initialChildValues,[],[],[],[],[],[],[],[],[]);
-$sfm_act_lightningConfig.clearServicemaxCache();
+$initialChildValues = [$lineType,"Usage/Consumption"];
+$sfm_act_SFM.addChildLine($lineType,$productName,[],[],$childLineFill,$initialChildValues,[],[],[],[],[],[],[],[],[]);
 $sfm_act_lightningConfig.openExtEditForLatestItem();
 $current = new Date();
 $todayDate =  $sfm_act_createCustomWizard.addSubtractDates($current,0);

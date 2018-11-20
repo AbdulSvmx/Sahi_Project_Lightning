@@ -2,21 +2,21 @@
 ///////////////////////////////////{
 //
 //Author	:- 	Shashikala Kamath
-//Reviewer	:- 	Anand Kakhandaki
+//Reviewer	:- 	Anand Kakhandaki, Lakshmisha 
 //Pre-Req	:-	
 //Steps		:-	
 //
 ///////////////////////////////////
-* */
+*/
 
 var $bvt_tc_002_SFW_with_standard_wiz_steps = _testcase("bvt_tc_002_SFW_with_standard_wiz_steps", 
-		"Configure the SFW to include standard SFMs and launch the same in delivery");
-$BVT_TC_002_SFW_with_standard_Wiz_steps.start();
+		"Configure the SFW to include standard SFMs only");
+$bvt_tc_002_SFW_with_standard_wiz_steps.start();
 _setSpeed($g_stepSpeed);
 
 	//Pre - Condition 
-	$bo_act_login.login("https://test.salesforce.com","shashikala.svmx@ge.com", "maxpl0re");
-
+	$bo_act_login.login($g_url,$swat_un,$swat_pwd );
+	
 	var $wizardSelectObjectName = "Work Order";
 	var $wizardTitleName = $bo_act_common.generateRandomName("SFWTitle");
 	var $wizardIDName = $bo_act_common.generateRandomName("SFWId");
@@ -274,5 +274,8 @@ _setSpeed($g_stepSpeed);
 	
 	_wait(15000,_isVisible($bo_pg_workOrders.txt_workOrderDetails));
 	_assertVisible(_cell("Edit | View | Del", _near(_heading3("Notes & Attachments"))),"Service Report is attached to Work Order: ");
+
+
+*/
 
 $bvt_tc_002_SFW_with_standard_wiz_steps.end();
