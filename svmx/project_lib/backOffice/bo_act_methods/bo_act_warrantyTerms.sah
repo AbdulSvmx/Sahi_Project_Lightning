@@ -96,7 +96,7 @@ var $bo_act_warrantyTerms = new function bo_act_warrantyTerms() {
 		_selectDomain("/svmx/");
 		_wait(10000, _isVisible($bo_pg_warrantyTerms.btn_cretaeWarrantySFM));
 		_click($bo_pg_warrantyTerms.btn_cretaeWarrantySFM);
-		_wait(10000);
+		_wait(20000);
 		$bo_pg_warrantyTerms.selectWarranty($warrantyName);
 		_click($bo_pg_warrantyTerms.btn_cretaeWarranty);
 		_wait(10000);
