@@ -251,7 +251,7 @@ $bo_act_navigation.navigateToCreatedRecordUsingGlobalSearch($wlNumber);
 $textLabels = ["Received City"];
 $textValues = ["Mysuru"];
 var $dateTimeLabels = ["Date Received"];
-var $dateTimeDateValues = [$todayDate];
+var $dateTimeDateValues = ["11/11/2018"];
 $res = $sfm_act_lightningConfig.verifyValues($textLabels, $textValues, [], [], [], [], [], [], $dateTimeLabels, $dateTimeDateValues, [],[],[],[],[],[],[],[],[],[],[]);
 _assertTrue($res);
 if($res){

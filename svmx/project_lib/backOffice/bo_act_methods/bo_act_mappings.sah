@@ -29,13 +29,13 @@ var $bo_act_mappings = new function bo_act_mappings() {
 			
 				_wait(3000);
 				
-					_setValue(_f("main").s_textinput("textip").rightOf(_f("main").ftedatagriditemrenderer($textLabels[$i])), $textValues[$i]);
+					_setValue(_f("main").s_textinput("textip").rightOf(_f("main").ftedatagriditemrenderer($textLabels[$i])).inside(_f("main").s_navigatorcontent($mapType)), $textValues[$i]);
 			}
 		}	
 		if($pickListLabels.length > 0) {	
 			for($i=0;$i<$pickListLabels.length;$i++){
 				if($mapType.includes("Value Map")){
-					_click(_f("main").s_togglebutton("I want to choose a field from the list").rightOf(_f("main").ftedatagriditemrenderer($pickListLabels[$i])));
+					_click(_f("main").s_togglebutton("I want to choose a field from the list").rightOf(_f("main").ftedatagriditemrenderer($pickListLabels[$i])).inside(_f("main").s_navigatorcontent($mapType)));
 				}
 				
 				//Special handling for look up fields
@@ -49,7 +49,7 @@ var $bo_act_mappings = new function bo_act_mappings() {
 					_setStrictVisibilityCheck(false);
 				}
 				else{
-						_setSelected(_f("main").s_combobox("valuesCombo").rightOf(_f("main").ftedatagriditemrenderer($pickListLabels[$i])),$pickListValues[$i]);
+						_setSelected(_f("main").s_combobox("valuesCombo").rightOf(_f("main").ftedatagriditemrenderer($pickListLabels[$i])).inside(_f("main").s_navigatorcontent($mapType)),$pickListValues[$i]);
 				}
 			}
 		}

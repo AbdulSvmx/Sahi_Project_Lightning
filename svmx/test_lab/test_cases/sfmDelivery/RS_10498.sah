@@ -48,7 +48,7 @@ $sfm_act_lightningConfig.addCustomFields($objectName, $customFieldsNames, $missi
 
 //Create work order
 var $wo_number = $sfm_act_createCustomWizard.createWowithdateliterals();
-var $wlNumber = $sfm_act_lightningConfig.createWorkDetailInLightning("Usage",$lineType);
+var $wl_number = $sfm_act_lightningConfig.createWorkDetailInLightning("Usage/Consumption", $lineType);
 //Find missing fields in Work Order Page Layout and them to the layout
 for($i=0;$i<$fieldsToMap.length;$i++){
 	if(!$sfm_act_lightningConfig.findIfFieldPresentInPageLayout($fieldsToMap[$i])){
