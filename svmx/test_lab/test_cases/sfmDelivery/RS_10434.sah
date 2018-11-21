@@ -50,6 +50,11 @@ _click($bo_pg_sfmTransactionAndDesigner.btn_qualifyingCriteriaAndFieldMapping);
 //Set up the mapping with SVMX.CURRENTRECORD literals for Header
 _selectDomain($g_domain);
 $bo_act_mappings.createMapping("Work Order",$mapType,[],[],$textLabels,$textValues,$mapName);
+//Create mapping for child lines by navigating to SFM Designer from Delivery.
+$mapName = $mapName + "_2";
+$textLabels = ["Canceled By","Consumed From Location"];
+$mapType = "Value Map For New Records";
+$bo_act_mappings.createMapping("Parts",$mapType,[],[],$textLabels,$textValues,$mapName);
 _setSpeed(1000);
 //Add the custom process to SFM wizard.
 $sfm_act_wizards.addToWizard($object_name,$currentWizardName,"SFM",$processName);
@@ -67,21 +72,6 @@ _selectDomain($g_domain);
 //Verify the values in header
 var $verifyResult = $sfm_act_SFM.verifyValuesInDelivery($textLabels,$expValues,[],[],[],[],[],[],[],[]);
 _assertTrue($verifyResult,"Following Literals are verified in header- SVMX.CURRENTUSERID and SVMX.USERTRUNK");
-
-//Create mapping for child lines by navigating to SFM Designer from Delivery.
- $mapName = $mapName + "_2";
-_click($sfm_pg_wo.btn_arrowNextToGetPrice);
-_click($sfm_pg_wo.link_launchSfmDesigner);
-_selectDomain();
-_wait(5000);
-_selectWindow("/SFM Transaction Designer/");
-_wait(10000);
-$textLabels = ["Canceled By","Consumed From Location"];
-$mapType = "Value Map For New Records";
-_click($bo_pg_sfmTransactionAndDesigner.btn_qualifyingCriteriaAndFieldMapping);
-$bo_act_mappings.createMapping("Parts",$mapType,[],[],$textLabels,$textValues,$mapName);
-_closeWindow();
-_selectWindow();
 
 //Clear Servicemax cache in service delivery.
 _selectDomain($g_domain);
