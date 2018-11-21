@@ -59,8 +59,8 @@ $bvt_tc_001_sfmSearch.start();
 	$obJson = "{\""+$orgnamespace+"__Order_Status__c\":\"Open\",\""+$orgnamespace+"__Order_Type__c\":\"Field Service\"}";
 	$columnName = "Name";
 	$filter="id";
-	$filterValue=$sfm_act_restApiMethods.postRestApi($sfmlUsn,$sfmlPwd,$sfmClientId,$sfmConsumerSecret,$sfmOrgInstance,$objName,$obJson,"POST");
-	$WONumber =$sfm_act_restApiMethods.getRestApi($sfmlUsn,$sfmlPwd,$sfmClientId,$sfmConsumerSecret,$sfmOrgInstance,"GET", $objName, $columnName, $filter, $filterValue);
+	$filterValue=$sfm_act_restApiMethods.postRestApi($swat_un,$swat_pwd,$swat_ClientId,$swat_ConsumerSecret,$swat_OrgInstance,$objName,$obJson,"POST");
+	$WONumber =$sfm_act_restApiMethods.getRestApi($swat_un,$swat_pwd,$swat_ClientId,$swat_ConsumerSecret,$swat_OrgInstance,"GET", $objName, $columnName, $filter, $filterValue);
 	_log("WO number: "+$WONumber);
 	
 	$bo_act_navigation.navigateToObject("ServiceMax SFM Search");

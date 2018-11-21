@@ -1,0 +1,6 @@
+
+var $bvt_tc_006_generate_document = _testcase("bvt_tc_006_generate_document","Verify the functionality of SFM type - to generate output document for header records with / without its child records");
+
+$bvt_tc_006_generate_document.start();
+
+$bvt_tc_006_generate_document.end();

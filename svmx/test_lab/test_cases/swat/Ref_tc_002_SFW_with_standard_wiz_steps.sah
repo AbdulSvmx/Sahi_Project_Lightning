@@ -276,6 +276,5 @@ _setSpeed($g_stepSpeed);
 	_assertVisible(_cell("Edit | View | Del", _near(_heading3("Notes & Attachments"))),"Service Report is attached to Work Order: ");
 
 
-*/
 
 $bvt_tc_002_SFW_with_standard_wiz_steps.end();
