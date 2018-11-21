@@ -1,10 +1,10 @@
 var $scenario_10570 = _testcase("scenario_10570","Verify Create New - standalone create process with mapping in both offline & online mode");
 $scenario_10570.start();
-$sfmName = $bo_act_common.generateRandomName("sfm_name_");
-$sfmNameCase = $bo_act_common.generateRandomName("sfm_caseName_");
-$sfmNameLocation = $bo_act_common.generateRandomName("sfm_location_");
-$sfmNameInstalledProduct = $bo_act_common.generateRandomName("sfm_IB_");
-$sfmNameCustomObject = $bo_act_common.generateRandomName("sfm_customObject_");
+$sfmName = "SFM_10570";
+$sfmNameCase = "SFM_Case_10570";
+$sfmNameLocation = "SFM_Loc_10570";
+$sfmNameInstalledProduct = "SFM_IB_10570";
+$sfmNameCustomObject = "SFM_CO_10570";
 $wizTitle = $bo_act_common.generateRandomName("SFM Wiz");
 $wizTitle1 = $bo_act_common.generateRandomName("SFM Wiz");
 $wizTitle2 = $bo_act_common.generateRandomName("SFM Wiz");
@@ -12,7 +12,8 @@ $wizTitle3 = $bo_act_common.generateRandomName("SFM Wiz");
 $wizTitle4 = $bo_act_common.generateRandomName("SFM Wiz");
 $sfmTemplateSaveAsName = $bo_act_common.generateRandomName("SFM_Temp_");
 $sfmMappingName = $bo_act_common.generateRandomName("SFM_Mapping_");
-$headersToAdd = ["AutoC_date_c228201812211","AutoC_dateTime_c2282018122057","Auto_PickList_c2282018122054","Auto_TextBox_c2282018122051","AutoC_textArea_c228201812218"];
+$headersToAdd = ["AutoC_date_c","AutoC_dateTime_c","Auto_PickList_c","Auto_TextBox_c","AutoC_textArea_c"];
+var $profile= "auto group profile";
 	
 $bo_act_login.login($g_url, $appiumAdminUn, $appiumAdminPwd);
 $sfm_act_lightningConfig.switchToLightning();
@@ -22,6 +23,13 @@ $sfm_act_lightningConfig.switchToLightning();
 
 $bo_act_navigation.navigateToSfmTransactionDesigner();
 _wait(10000);
+_click($bo_pg_sfmTransactionAndDesigner.btn_yourCustomSfmTransactions);
+_setValue($bo_pg_sfmTransactionAndDesigner.txt_yourCustomSfmTransactionsQuickFind,$sfmName);
+_set($var,_isVisible(_f("main").s_label($sfmName)));
+if($var){
+	_log("Process already present");
+}
+else{
 // Target Object: Work Order
 _click($bo_pg_sfmTransactionAndDesigner.btn_newSFM);
 _wait(3000);
@@ -48,6 +56,13 @@ _setSelected($bo_pg_sfmTransactionAndDesigner.sel_sfmTemplate,"SVMXSTD: Manage W
 _click($bo_pg_formDesigner.btn_quickSave);
 _click($bo_pg_sfmTransactionAndDesigner.btn_backToList);
 _click(_f("main").button("Yes"));
+}
+_setValue($bo_pg_sfmTransactionAndDesigner.txt_yourCustomSfmTransactionsQuickFind,$sfmNameCase);
+_set($var,_isVisible(_f("main").s_label($sfmNameCase)));
+if($var){
+	_log("Process Case already present");
+}
+else{
 // Target Object: Case
 _click($bo_pg_sfmTransactionAndDesigner.btn_newSFM);
 _wait(3000);
@@ -62,6 +77,13 @@ _setSelected($bo_pg_sfmTransactionAndDesigner.sel_sfmTemplate,"SVMXSTD: View/Cre
 _click($bo_pg_formDesigner.btn_quickSave);
 _click($bo_pg_sfmTransactionAndDesigner.btn_backToList);
 _click(_f("main").button("Yes"));
+}
+_setValue($bo_pg_sfmTransactionAndDesigner.txt_yourCustomSfmTransactionsQuickFind,$sfmNameLocation);
+_set($var,_isVisible(_f("main").s_label($sfmNameLocation)));
+if($var){
+	_log("Process Location already present");
+}
+else{
 // Target Object: Location
 _click($bo_pg_sfmTransactionAndDesigner.btn_newSFM);
 _wait(3000);
@@ -76,6 +98,13 @@ _setSelected($bo_pg_sfmTransactionAndDesigner.sel_sfmTemplate,"SVMXSTD: View/Cre
 _click($bo_pg_formDesigner.btn_quickSave);
 _click($bo_pg_sfmTransactionAndDesigner.btn_backToList);
 _click(_f("main").button("Yes"));
+}
+_setValue($bo_pg_sfmTransactionAndDesigner.txt_yourCustomSfmTransactionsQuickFind,$sfmNameInstalledProduct);
+_set($var,_isVisible(_f("main").s_label($sfmNameInstalledProduct)));
+if($var){
+	_log("Process IB already present");
+}
+else{
 // Target Object: Installed Product
 _click($bo_pg_sfmTransactionAndDesigner.btn_newSFM);
 _wait(3000);
@@ -90,6 +119,13 @@ _setSelected($bo_pg_sfmTransactionAndDesigner.sel_sfmTemplate,"SVMXSTD: View/Cre
 _click($bo_pg_formDesigner.btn_quickSave);
 _click($bo_pg_sfmTransactionAndDesigner.btn_backToList);
 _click(_f("main").button("Yes"));
+}
+_setValue($bo_pg_sfmTransactionAndDesigner.txt_yourCustomSfmTransactionsQuickFind,$sfmNameCustomObject);
+_set($var,_isVisible(_f("main").s_label($sfmNameCustomObject)));
+if($var){
+	_log("Process Custom Object already present");
+}
+else{
 // Target Object: Auto_Custom_Object2
 _click($bo_pg_sfmTransactionAndDesigner.btn_newSFM);
 _wait(3000);
@@ -108,30 +144,43 @@ $sfm_act_Transactions.addHeader($headersToAdd);
 _click(_f("main").s_button("Save[3]"));
 _wait(5000);
 _click($bo_pg_formDesigner.btn_quickSave);
+}
 /* ************************************************************************
    ******************************Create Wizard*****************************
    ************************************************************************ */
 
-//Create Wizard for Work Order.
+////Create Wizard for Work Order.
 $bo_act_navigation.navigateToSfmWizard();
-$sfm_act_createCustomWizard.chooseObject("Work Order");
-$sfm_act_createCustomWizard.addManageWizSteps($wizTitle, "SFM", $sfmName);
-//Create Wizard for Case.
-//$bo_act_navigation.navigateToSfmWizard();
-$sfm_act_createCustomWizard.chooseObject("Case");
-$sfm_act_createCustomWizard.addManageWizSteps($wizTitle1, "SFM", $sfmNameCase);
-//Create Wizard for Location.
-//$bo_act_navigation.navigateToSfmWizard();
-$sfm_act_createCustomWizard.chooseObject("Location");
-$sfm_act_createCustomWizard.addManageWizSteps($wizTitle2, "SFM", $sfmNameLocation);
-//Create Wizard for Installed Product.
-//$bo_act_navigation.navigateToSfmWizard();
-$sfm_act_createCustomWizard.chooseObject("Installed Product");
-$sfm_act_createCustomWizard.addManageWizSteps($wizTitle3, "SFM", $sfmNameInstalledProduct);
-//Create Wizard for Custom Object.
-//$bo_act_navigation.navigateToSfmWizard();
-$sfm_act_createCustomWizard.chooseObject("Auto_Custom_Object2");
-$sfm_act_createCustomWizard.addManageWizSteps($wizTitle4, "SFM", $sfmNameCustomObject);
+_selectDomain("/svmx/");
+_setSelected($sfm_pg_wizards.selectObject,"Work Order");
+_wait(10000);
+$bo_act_navigation.editWizard("AutoRegression");
+$sfm_act_createCustomWizard.addWizStepWithoutName("SFM", $sfmName, $profile);
+$bo_act_navigation.navigateToSfmWizard();
+_selectDomain("/svmx/");
+_setSelected($sfm_pg_wizards.selectObject,"Installed Product");
+_wait(10000);
+$bo_act_navigation.editWizard("Automation IB Wizard");
+$sfm_act_createCustomWizard.addWizStepWithoutName("SFM", $sfmNameInstalledProduct, $profile);
+$bo_act_navigation.navigateToSfmWizard();
+_selectDomain("/svmx/");
+_setSelected($sfm_pg_wizards.selectObject,"Case");
+_wait(10000);
+$bo_act_navigation.editWizard("AutoWizard");
+$sfm_act_createCustomWizard.addWizStepWithoutName("SFM", $sfmNameCase, $profile);
+$bo_act_navigation.navigateToSfmWizard();
+_selectDomain("/svmx/");
+_setSelected($sfm_pg_wizards.selectObject,"Location");
+_wait(10000);
+$bo_act_navigation.editWizard("AutoLocWiz");
+$sfm_act_createCustomWizard.addWizStepWithoutName("SFM", $sfmNameLocation, $profile);
+$bo_act_navigation.navigateToSfmWizard();
+_selectDomain("/svmx/");
+_setSelected($sfm_pg_wizards.selectObject,"Auto_Custom_Object2");
+_wait(10000);
+$bo_act_navigation.editWizard("AutomationCustomWiz");
+$sfm_act_createCustomWizard.addWizStepWithoutName("SFM", $sfmNameCustomObject, $profile);
+
 
 /* **********************************************************************************
    ****************************Add Permission to Process*****************************

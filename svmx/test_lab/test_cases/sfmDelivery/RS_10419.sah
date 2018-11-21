@@ -82,7 +82,7 @@ _selectDomain();
 
 //Create Work order and then Work detail to select Activity type.
 var $wo_number = $sfm_act_createCustomWizard.createWowithdateliterals();
-var $wlNumber = $sfm_act_lightningConfig.createWorkDetailInLightning("Usage",$lineType);
+var $wlNumber = $sfm_act_lightningConfig.createWorkDetailInLightning("Usage/Consumption",$lineType);
 $bo_act_navigation.navigateToCreatedRecordUsingGlobalSearch($wo_number);
 //Select Activity Type and check the SFM delivery.
 for($z = 0;$z<$ctrl_unique_values.length;$z++){
