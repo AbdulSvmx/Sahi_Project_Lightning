@@ -85,7 +85,7 @@ for($i=0;$i<$fieldsToMap.length;$i++){
 		$bo_pg_sfmTransactionAndDesigner.deleteField($fieldsToMap[$i]);
 	}
 }
-_click($bo_pg_sfmTransactionAndDesigner.btn_quickSave);
+_click($bo_pg_sfmTransactionAndDesigner.btn_savePage);
 _click($bo_pg_sfmTransactionAndDesigner.btn_quickSave1);
 
 
