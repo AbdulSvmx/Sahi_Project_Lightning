@@ -234,11 +234,9 @@ var $targetLineNumber = _getText(_span("/WL-/"));
 _log("Work detail created as Target child is "+$targetLineNumber);
 
 //Verify value map for new child records after process save
-$textLabels = ["Received City"];
-$textValues = ["Srinagar from value map"];
-var $dateTimeLabels = ["Date Received"];
-var $dateTimeDateValues = [$todayDate];
-$res = $sfm_act_lightningConfig.verifyValues($textLabels, $textValues, [], [], [], [], [], [], $dateTimeLabels, $dateTimeDateValues, [],[],[],[],[],[],[],[],[],[],[]);
+$textLabels = ["Received City","Date Received"];
+$textValues = ["Srinagar from value map",$todayDate];
+$res = $sfm_act_lightningConfig.verifyValues($textLabels, $textValues, [], [], [], [], [], [], [], [], [],[],[],[],[],[],[],[],[],[],[]);
 if($res){
 	_log("PASS: Value map for new records in Child has values as per value mapping in SFM Delivery after process save");
 }
@@ -248,11 +246,9 @@ else {
 
 //Verify field maps for the existing records for child.
 $bo_act_navigation.navigateToCreatedRecordUsingGlobalSearch($wlNumber);
-$textLabels = ["Received City"];
-$textValues = ["Mysuru"];
-var $dateTimeLabels = ["Date Received"];
-var $dateTimeDateValues = ["11/11/2018"];
-$res = $sfm_act_lightningConfig.verifyValues($textLabels, $textValues, [], [], [], [], [], [], $dateTimeLabels, $dateTimeDateValues, [],[],[],[],[],[],[],[],[],[],[]);
+$textLabels = ["Received City","Date Received"];
+$textValues = ["Srinagar from value map",$todayDate];
+$res = $sfm_act_lightningConfig.verifyValues($textLabels, $textValues, [], [], [], [], [], [], [], [], [],[],[],[],[],[],[],[],[],[],[]);
 _assertTrue($res);
 if($res){
 	_log("PASS: Field map for existing values in Child has values as per field mapping");
