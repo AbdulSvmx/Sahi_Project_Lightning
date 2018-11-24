@@ -21,18 +21,37 @@ _wait(3000);
 $bo_act_navigation.navigateToCreatedRecordUsingGlobalSearch($woNumber);
 $sfm_act_createCustomWizard.clickWizardBtn($sfmName);
 
-//DVR validation on delivery
+
+//_click($sfm_pg_wizardWindow.lookup_account);
+_setValue($sfm_pg_sfmDesigner.txt_headerAccount,"Acme");
+//_click($sfm_pg_wizardWindow.lookup_contact);
+_setValue($sfm_pg_sfmDesigner.txt_headerContact,"Acme Contact");
+_click(_textbox(0,_near(_span("Status"))));
+_click(_listItem("Presented"));
+_setValue(_textbox(0,_near(_span("Valid Until"))),"11/23/2019");
+
+// Create a product 
+$objName= "Product2";
+$productName=$bo_act_common.generateRandomName("Prod_RS5338_");
+$obJson = "{\"Name\":\""+$productName+"\",\"ProductCode\":\""+$productName+"\",\"IsActive\":\"true\"}";
+$proID=$sfm_act_restApiMethods.postRestApi($swat_un, $swat_pwd, $swat_ClientId, $swat_ConsumerSecret, $swat_OrgInstance,$objName,$obJson,"POST");
+_log($productName); 
 //add line to Parts
 $sfm_act_sfmDesigner.addChildLine("Parts");
-
-_setValue($sfm_pg_sfmDesigner.txt_eeLineQty,"6");
-
-/*  *******************
-_setValue($sfm_pg_sfmDesigner.txt_eeReceivedStreet,"MG Road");
-_click($sfm_pg_sfmDesigner.btn_eeUpdate);
-
+// Fill Product, Qty, Unit price thru extended edit
+// Add one more Part line
+// Similarly add 2 Labor line with Qty and Unit Price
 //add line to Labor
-$sfm_act_sfmDesigner.addChildLine("Labor");
+ //$sfm_act_sfmDesigner.addChildLine("Labor");
+// Add 2 Expense line with Qty and Unit Price
+//add line to Expenses
+//$sfm_act_sfmDesigner.addChildLine("Expenses");
+
+//_click($sfm_pg_sfmDesigner.btn_deliverySave);
+
+
+
+/*
 
 _setValue($sfm_pg_sfmDesigner.txt_eeLineQty,"6");
 _setValue($sfm_pg_sfmDesigner.txt_eeReceivedStreet,"MG Road");
@@ -40,8 +59,7 @@ _click($sfm_pg_sfmDesigner.txt_eeActivityType);
 _click(_listItem("Service"));
 _click($sfm_pg_sfmDesigner.btn_eeUpdate);
 
-//add line to Expenses
-$sfm_act_sfmDesigner.addChildLine("Expenses");
+
 
 _setValue($sfm_pg_sfmDesigner.txt_eeLineQty,"6");
 _setValue($sfm_pg_sfmDesigner.txt_eeReceivedStreet,"MG Road");
@@ -49,17 +67,7 @@ _click($sfm_pg_sfmDesigner.txt_eeExpenseType);
 _click(_listItem("Entertainment"));
 _click($sfm_pg_sfmDesigner.btn_eeUpdate);
 
-//add line to Travel
-$sfm_act_sfmDesigner.addChildLine("Travel");
-
-_setValue($sfm_pg_sfmDesigner.txt_eeLineQty,"6");
-_setValue($sfm_pg_sfmDesigner.txt_eeReceivedStreet,"MG Road");
-_setValue($sfm_pg_sfmDesigner.txt_eeStartDateTime,$bo_act_common.currentDate("\/"));
-_setValue($sfm_pg_sfmDesigner.txt_eeEndDateTime,$bo_act_common.getPastDate("1", "\/"));
-_click($sfm_pg_sfmDesigner.btn_eeUpdate);
 
 */
-_click($sfm_pg_sfmDesigner.btn_deliveryQuickSave);
-
 
 $bvt_tc_002_create_quote_from_work_order.end();

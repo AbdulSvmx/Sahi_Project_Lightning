@@ -1,11 +1,10 @@
 
-_include("sfmDelivery/RS_10444.sah");
 var $bvt_tc_012_formFill = _testcase("bvt_tc_012_formFill","Verify the functionality of Formfill");
 
 $bvt_tc_012_formFill.start();
 
 var $sfmNameToBeCloned = "Manage Work Order Lines - Usage";
-var $sfmName = $bo_act_common.generateRandomName("RS_10444_");
+var $sfmName = $bo_act_common.generateRandomName("swat_tc012_FormFill");
 var $isCustom = false;
 var $sfmTemplate = "SVMXSTD: Manage WO Usage Lines";
 var $sfmTemplateSaveAsName = $sfmName;
@@ -22,8 +21,8 @@ $obJson = "{\"Name\":\""+$restAccName+"\"}";
 $columnName = "Name";
 $filter="id";
 //create an account
-$account=$sfm_act_restApiMethods.postRestApi($sfmlUsn,$sfmlPwd,$sfmClientId,$sfmConsumerSecret,$sfmOrgInstance,$objName,$obJson,"POST");
-$accountName =$sfm_act_restApiMethods.getRestApi($sfmlUsn,$sfmlPwd,$sfmClientId,$sfmConsumerSecret,$sfmOrgInstance,"GET", $objName, $columnName, $filter, $account);
+$account=$sfm_act_restApiMethods.postRestApi($swat_un, $swat_pwd, $swat_ClientId, $swat_ConsumerSecret, $swat_OrgInstance,$objName,$obJson,"POST");
+$accountName =$sfm_act_restApiMethods.getRestApi($swat_un, $swat_pwd, $swat_ClientId, $swat_ConsumerSecret, $swat_OrgInstance,"GET", $objName, $columnName, $filter, $account);
 
 
 //get the caseNumber
@@ -32,17 +31,17 @@ $obJson1 = "{\"AccountId\":\""+$account+"\",\""+$orgnamespace+"__Billing_Type__c
 $columnName1 = "CaseNumber";
 $filter1="id";
 //create a case
-$filterValue=$sfm_act_restApiMethods.postRestApi($sfmlUsn,$sfmlPwd,$sfmClientId,$sfmConsumerSecret,$sfmOrgInstance,$objName1,$obJson1,"POST");
+$filterValue=$sfm_act_restApiMethods.postRestApi($swat_un, $swat_pwd, $swat_ClientId, $swat_ConsumerSecret, $swat_OrgInstance,$objName1,$obJson1,"POST");
 //get the caseNumber
-$caseNumber =$sfm_act_restApiMethods.getRestApi($sfmlUsn,$sfmlPwd,$sfmClientId,$sfmConsumerSecret,$sfmOrgInstance,"GET", $objName1, $columnName1, $filter1, $filterValue);
+$caseNumber =$sfm_act_restApiMethods.getRestApi($swat_un, $swat_pwd, $swat_ClientId, $swat_ConsumerSecret, $swat_OrgInstance,"GET", $objName1, $columnName1, $filter1, $filterValue);
 
 //Create WO through REST API
-var $woNumber = $sfm_act_createCustomWizard.createBlankWoFromRest($sfmlUsn, $sfmlPwd, $sfmClientId, $sfmConsumerSecret, $sfmOrgInstance);
+var $woNumber = $sfm_act_createCustomWizard.createBlankWoFromRest($swat_un, $swat_pwd, $swat_ClientId, $swat_ConsumerSecret, $swat_OrgInstance);
 
 
 //login to the org
 _setSpeed($g_stepSpeed);
-$bo_act_login.login($g_url, $sfmlUsn,$sfmlPwd);
+$bo_act_login.login($g_url, $swat_un,$swat_pwd);
 $sfm_act_lightningConfig.switchToLightning(); 
 
 //clone tmd016
@@ -51,6 +50,7 @@ $sfm_act_SFM.setFormFill($fieldName[0], $objMapping);
 _click($sfm_pg_sfmDesigner.btn_quickSaveSFM);
 _wait(2000);
 _click($sfm_pg_sfmDesigner.btn_saveSFM); 
+_wait(3000);
 
 //add the process to wizard
 $sfm_act_wizards.addToWizard($wizardObject, $wizardName[3], $wizardType[1], $sfmName);  

@@ -22,12 +22,21 @@ var $g_un = "bhupen@back17.com";// "bhupendra.s@dev.tool2.com";
 var $g_pwd = "smax@123";
 
 //All SWAT Parameters here
-var $swat_un = "shashikala.svmx@ge.com";
+/* var $swat_un = "shashikala.svmx@ge.com";
 var $swat_pwd = "maxpl0re2";
 var $swat_ClientId ="3MVG99E3Ry5mh4zpoRo8OgqPbqoqdWqWuDrwuPohH..J4zUrQMnuf3StIK1uvUnsQ4r09Pmcm4KYYRllMEtSr";
 var $swat_ConsumerSecret = "5656136115450032367";
 var $swat_OrgInstance = "CS67"; 
 var $swat_sfd_myDomain = "/lightning/";
+*/
+
+var $swat_un = "spr18admin@servicemax.com";
+var $swat_pwd = "svmx7878";
+var $swat_ClientId ="3MVG97wqanbUM37LzeBbGUBMWjgPWHSaGp8c4N7lXR8L2Yh9aP73aatczn4hCg3LF4RtiFVRWdEK5j8vDwig7";
+var $swat_ConsumerSecret = "4137202259126192964";
+var $swat_OrgInstance = "CS66"; 
+var $swat_sfd_myDomain = "/lightning/";
+
 
 // THIS IS SPECIFIC TO A GIVEN ORG - DONOT TOUCH
 var $client_id = "3MVG9zZht._ZaMulZsbNptzpIDmNd6xyt0zAOuNU_dtpTTg4DHSn9UmdBySUZS3_VOGeiWttaj3moLMuLIrje";
