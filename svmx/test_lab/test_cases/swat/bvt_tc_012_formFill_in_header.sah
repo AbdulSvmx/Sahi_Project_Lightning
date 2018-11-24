@@ -1,7 +1,7 @@
+//Author	:- 	Shashikala Kamath
+var $bvt_tc_012_formFill_in_header = _testcase("bvt_tc_012_formFill_in_header.","Verify the functionality of Formfill in header");
 
-var $bvt_tc_012_formFill = _testcase("bvt_tc_012_formFill","Verify the functionality of Formfill");
-
-$bvt_tc_012_formFill.start();
+$bvt_tc_012_formFill_in_header.start();
 
 var $sfmNameToBeCloned = "Manage Work Order Lines - Usage";
 var $sfmName = $bo_act_common.generateRandomName("swat_tc012_FormFill");
@@ -86,4 +86,4 @@ _selectDomain();
 _assertEqual($accountName,_getText(_link(0,_near(_span("Account")))),"Formfill for field that was not in screen has not happened");
 
 
-$bvt_tc_012_formFill.end();
+$bvt_tc_012_formFill_in_header.end();

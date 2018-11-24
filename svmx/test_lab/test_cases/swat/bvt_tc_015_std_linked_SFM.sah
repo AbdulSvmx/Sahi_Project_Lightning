@@ -1,0 +1,8 @@
+//Author	:- 	Shashikala Kamath
+var $bvt_tc_015_std_linked_SFM = _testcase("bvt_tc_015_std_linked_SFM","Verify the functionality of standard Linked SFM");
+
+$bvt_tc_015_std_linked_SFM.start();
+
+
+
+$bvt_tc_015_std_linked_SFM.end();
