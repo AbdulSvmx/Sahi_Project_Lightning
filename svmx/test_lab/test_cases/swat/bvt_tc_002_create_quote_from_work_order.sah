@@ -33,13 +33,13 @@ _click(_listItem("Presented"));
 _setValue(_textbox(0,_near(_span("Valid Until"))),"11/23/2019");
 
 // Create a product 
-$objName= "Product2";
-$productName=$bo_act_common.generateRandomName("Prod_RS5338_");
-$obJson = "{\"Name\":\""+$productName+"\",\"ProductCode\":\""+$productName+"\",\"IsActive\":\"true\"}";
-$proID=$sfm_act_restApiMethods.postRestApi($swat_un, $swat_pwd, $swat_ClientId, $swat_ConsumerSecret, $swat_OrgInstance,$objName,$obJson,"POST");
-_log($productName); 
+//$objName= "Product2";
+//$productName=$bo_act_common.generateRandomName("Prod_RS5338_");
+//$obJson = "{\"Name\":\""+$productName+"\",\"ProductCode\":\""+$productName+"\",\"IsActive\":\"true\"}";
+//$proID=$sfm_act_restApiMethods.postRestApi($swat_un, $swat_pwd, $swat_ClientId, $swat_ConsumerSecret, $swat_OrgInstance,$objName,$obJson,"POST");
+//_log($productName); 
 //add line to Parts
-$sfm_act_sfmDesigner.addChildLine("Parts");
+//$sfm_act_sfmDesigner.addChildLine("Parts");
 // Fill Product, Qty, Unit price thru extended edit
 // Add one more Part line
 // Similarly add 2 Labor line with Qty and Unit Price
@@ -48,8 +48,15 @@ $sfm_act_sfmDesigner.addChildLine("Parts");
 // Add 2 Expense line with Qty and Unit Price
 //add line to Expenses
 //$sfm_act_sfmDesigner.addChildLine("Expenses");
+_wait(3000);
+//_wait(8000,_isVisible($sfm_pg_sfmDesigner.btn_deliveryPartsTab));
+$sfm_act_createCustomWizard.addParts("Compaq");
+$sfm_act_createCustomWizard.addLabor("Compaq");
+$sfm_act_createCustomWizard.addExpenses("Airfare");
+_click($sfm_pg_sfmDesigner.btn_deliverySave);
+_wait(10000);
 
-//_click($sfm_pg_sfmDesigner.btn_deliverySave);
+_click($sfm_pg_sfmDesigner.btn_deliverySave);
 
 
 
