@@ -10,7 +10,7 @@ var $sfm_act_sfmDesigner = new function sfm_act_sfmDesigner() {
 		_setStrictVisibilityCheck(false);
 	};
 	
-	this.addChildLine = function($childName){
+	this.addChildLine = function($childName,$product){
 		if($childName == 'Parts'){
 			_click($sfm_pg_sfmDesigner.btn_deliveryPartsTab);
 			_wait(5000,_isVisible($sfm_pg_sfmDesigner.btn_deliveryAddRowParts));
@@ -27,6 +27,13 @@ var $sfm_act_sfmDesigner = new function sfm_act_sfmDesigner() {
 			_click($sfm_pg_sfmDesigner.btn_deliveryTravelTab);
 			_wait(3000,_isVisible($sfm_pg_sfmDesigner.btn_deliveryAddRowTravel));
 			_click($sfm_pg_sfmDesigner.btn_deliveryAddRowTravel);
+		}
+		if (_exists($sfm_pg_sfmDesigner.link_searchLink) && $childName==='Parts') {
+			_setValue($sfm_pg_sfmDesigner.btn_searchTextBox,$product);
+			_click($sfm_pg_sfmDesigner.link_searchLink);
+			_click(_span("/checkcolumn/",_near(_div($product))));
+			_click($sfm_pg_sfmDesigner.btn_addWindow);
+			_wait(3000);
 		}
 		_wait(10000);
 		_selectDomain($g_domain);

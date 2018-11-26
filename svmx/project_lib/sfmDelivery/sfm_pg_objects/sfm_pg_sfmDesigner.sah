@@ -123,6 +123,10 @@ var $sfm_pg_sfmDesigner = new function sfm_pg_sfmDesigner() {
 	this.btn_bubble=_link("/.*/",_in(_div("/celleditor/")));
 	this.btn_bubbleDiv=_div("/lightningtooltip/");
 	
+	//Labor child line
+	this.window_partsSearchWindowInLabor=_parentNode(_div("Labor"),"DIV",5);
+	this.lbl_partInLabor=_span("Part",_in(this.window_partsSearchWindowInLabor));
+	this.txt_partTextboxInLabor=_textbox("/inputEl/",_near(this.lbl_partInLabor));
 	
 	//header fields
 	this.lbl_headerAccount=_div("Account");
@@ -147,6 +151,7 @@ var $sfm_pg_sfmDesigner = new function sfm_pg_sfmDesigner() {
 	this.label_contextOverride=_label("/Limit search to/");
 	this.btn_contextOverride=_checkbox(0,_near(this.label_contextOverride));
 	this.btn_cancelContactWindow=_link("Cancel",_near(_div("/CancelAdd/")));
+	this.btn_addWindow=_link("Add",_near(_div("/CancelAdd/")));
 	this.btn_noRecordMSG=_div("No matching record(s) found for this keyword");
 	
 	this.link_autoContactInDVR=_link("AutoContact",_in(_div("AutoContact: Multiple items found. Click lookup icon to refine search.")));
