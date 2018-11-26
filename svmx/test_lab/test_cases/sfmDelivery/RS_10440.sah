@@ -193,7 +193,7 @@ else {
 
 $bo_act_navigation.navigateToCreatedRecordUsingGlobalSearch($sourceWlNumber);
 var $textLabels = ["Billable Line Price","Date Received"];
-var $textValues = ["6,600.000","4/21/2018"];
+var $textValues = ["$6,600.000","4/21/2018"];
 var $pickListLabels = ["Activity Type"];
 var $pickListValues = ["Calibration"];
 var $textAreaLabels = [];
