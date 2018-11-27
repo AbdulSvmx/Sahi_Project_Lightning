@@ -10,11 +10,11 @@ var $mapName = $processName + "mpWO";
 var $mapNamepart = $processName + "mpPart";
 
 var $sfmNameToBeCloned = "Manage Work Order Lines - Usage";
-var $sfmName = $bo_act_common.generateRandomName("RS_10556_");
+var $sfmName = "RS_10556_mapping";
 //var $sfmName="RS_10556_592018205141";
 var $isCustom = false;
 var $sfmTemplate = "SVMXSTD: Manage WO Usage Lines";
-var $sfmTemplateSaveAsName = $sfmName+"Temp";
+var $sfmTemplateSaveAsName = $sfmName+$timeStamp;
 var $containerName = ["Order Status","Order Status","Order Status","Order Status","Order Status","Order Status","Order Status","Order Status","Order Status","Order Status","Order Status","Order Status","Order Status","Parts","Parts","Parts","Parts","Parts","Parts","Parts"];
 var $fieldName = ["Work Order Number","Contact","Customer Down","Scheduled Date","Scheduled Date Time","Problem Description","Email","URL","Number","Phone","Currency","Site","Closed By","Record Type ID","Line Type","Date Required","Start Date and Time","To Location","Closed By","Canceled By"];
 //var $mapName = $processName + "mp";
@@ -76,12 +76,8 @@ $Locationname =$sfm_act_restApiMethods.getRestApi($appiumAdminUn,$appiumAdminPwd
 //get the tech record id
 $objName= "SVMXC__Service_Group_Members__c";
 $obJson = "{\"SVMXC__Inventory_Location__c\":\""+$locationid+"\"}";
-$techname="MG_road";
-$columnName = "Id";
 $filter="Name";
-$techid="a240t000000GglLAAS";	
-// $techid =$sfm_act_restApiMethods.getRestApi($appiumAdminUn,$appiumAdminPwd,$appiumclient_id,$appiumclient_secret,$appiumorginstance,"GET", $objName, $columnName, $filter,$techname);
-_log($techid);
+$techid=$appiumTechId;	
 //update the tech record
 $filterValue1=$sfm_act_restApiMethods.updateRestApi($appiumAdminUn,$appiumAdminPwd,$appiumclient_id,$appiumclient_secret,$appiumorginstance,$objName,$obJson,"PATCH",$techid);
 
@@ -96,11 +92,38 @@ $workorderid=$sfm_act_restApiMethods.postRestApi($appiumAdminUn,$appiumAdminPwd,
 //get the caseNumber
 $WOname =$sfm_act_restApiMethods.getRestApi($appiumAdminUn,$appiumAdminPwd,$appiumclient_id,$appiumclient_secret,$appiumorginstance,"GET", $objName, $columnName, $filter, $workorderid);
 
+$excel.insertUnderColumn("/auto/SVMX_Catalyst/fsaautomation/resources/TestData.xlsx", "RS_10511", "Data3",$WOname ,"2");
 
-$bo_act_login.login($g_url, $appiumAdminUn, $appiumAdminPwd);
-$sfm_act_lightningConfig.switchToLightning();
+var $now = new Date();
+_log( $now ); // shows current date/time
+$now.setHours(19,30,00,00);
+_log( $now );
+var $new=new Date($now.toString().split('IST')[0]+' GMT').toISOString().split('.')[0];//GMT timing
+_log( $new );
+var $add1hr=($now.getHours())+1;
+_log($add1hr);
+var $set1hr = new Date();
+$set1hr.setHours($add1hr,30,00,00);
+var $new1=new Date($set1hr.toString().split('IST')[0]+' GMT').toISOString().split('.')[0];//GMT timing
+_log($new1);
+
+// To crete one hr svmx event
+var $techname=$appiumTechId;
+$objName= "SVMXC__SVMX_Event__c";
+$obJson = "{\"Name\":\"Event_10556\",\"SVMXC__Service_Order__c\":\""+$workorderid+"\",\"SVMXC__Technician__c\":\""+$techname+"\",\"SVMXC__StartDateTime__c\":\""+$new+"\",\"SVMXC__EndDateTime__c\":\""+$new1+"\",\"SVMXC__WhatId__c\":\""+$workorderid+"\"}";	
+$columnName = "Name";
+$filter="id";
+
+$eventid=$sfm_act_restApiMethods.postRestApi($appiumAdminUn,$appiumAdminPwd,$appiumclient_id,$appiumclient_secret,$appiumorginstance,$objName,$obJson,"POST");
+//get the event name
+$eventname =$sfm_act_restApiMethods.getRestApi($appiumAdminUn,$appiumAdminPwd,$appiumclient_id,$appiumclient_secret,$appiumorginstance,"GET", $objName, $columnName, $filter, $eventid);
+_log($eventname);
+
 //clone tmd016
-
+$value =$sfm_act_SFM.checkprocessexists($sfmName,$isCustom);//to check process exists or not
+_log($value);
+//if the process value is false (process not exists) then create the process
+if($value==false){
 
 $sfm_act_SFM.cloneTDM016($sfmNameToBeCloned,$sfmName,$isCustom, $sfmTemplateSaveAsName, $sfmTemplate,$fieldName,$containerName);
 
@@ -127,7 +150,7 @@ $sfm_act_wizards.addToWizard($wizardObject,$wizardName, $wizardType,$sfmName,$ha
 
 
 
-
+}
 
 RS_10556_mapping.end();
 
