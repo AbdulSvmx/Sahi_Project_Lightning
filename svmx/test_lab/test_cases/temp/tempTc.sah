@@ -9,7 +9,7 @@ $tempTc.start();
 	var $fieldName1 = "Order Type";
 	var $workOrderNo;
 	
-	$bo_act_login.login("https://test.salesforce.com",java.lang.System.getenv("${jenkins_browser_name}"), $g_pwd);
+	$bo_act_login.login("https://test.salesforce.com",java.lang.System.getenv("jenkins_browser_name"), $g_pwd);
 
 	
 
