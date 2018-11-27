@@ -1,4 +1,0 @@
-_setValue(_f("main").s_textinput("textInput[62]"), "SVMX");
-_setSelected(_f("main").s_dropdownlist("operandTypeCombo"), "Function");
-_setSelected(_f("main").s_dropdownlist("operandTypeCombo"), "Value");
-_setSelected(_f("main").s_combobox("picklist"), "SVMX");
