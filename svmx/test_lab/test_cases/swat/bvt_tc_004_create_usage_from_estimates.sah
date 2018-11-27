@@ -1,6 +1,37 @@
-
+//Author	:- 	Shashikala Kamath
 var $bvt_tc_004_create_usage_from_estimates = _testcase("bvt_tc_004_create_usage_from_estimates","Verify the functionality of SFM type - from Source Object to create new child records only");
 
 $bvt_tc_004_create_usage_from_estimates.start();
+var $sfmName = "Create Usage Lines from Estimates";
+var $wizardObject ="Work Order";
+var $woNumber;
+_setSpeed($g_stepSpeed);
+$bo_act_login.login($g_url,$swat_un,$swat_pwd );
+$sfm_act_lightningConfig.switchToLightning();
+
+//Create WO through REST API ******
+var $woNumber = $sfm_act_createCustomWizard.createBlankWoFromRest($swat_un, $swat_pwd, $swat_ClientId, $swat_ConsumerSecret, $swat_OrgInstance);
+
+//add the process to wizard
+$sfm_act_wizards.addToWizard($wizardObject, $wizardName[0], $wizardType[1], $sfmName);  
+_wait(3000); 
+
+//Navigate to the WO for validation
+$bo_act_navigation.navigateToCreatedRecordUsingGlobalSearch($woNumber);
+$sfm_act_createCustomWizard.clickWizardBtn($sfmName);
+
+_click(_textbox(0,_near(_span("Order Status"))));
+_click(_listItem("Open"));
+
+_click(_textbox(0,_near(_span("Billing Type"))));
+_click(_listItem("Paid"));
+
+$sfm_act_createCustomWizard.addParts("Compaq");
+$sfm_act_createCustomWizard.addLabor("Compaq");
+$sfm_act_createCustomWizard.addExpenses("Airfare");
+_click($sfm_pg_sfmDesigner.btn_deliverySave);
+_wait(10000);
+
+_click($sfm_pg_sfmDesigner.btn_deliverySave);
 
 $bvt_tc_004_create_usage_from_estimates.end();

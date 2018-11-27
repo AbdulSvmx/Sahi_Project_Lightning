@@ -122,7 +122,7 @@ $yesterdayDate = $sfm_act_lightningConfig.removePrecedingZeroInDate($yesterdayDa
 
 _selectDomain($g_domain);
 _click($sfm_pg_wo.link_delivery_save);
-_wait(3000);
+_wait(9000);
 if(_isVisible($sfm_pg_wo.btn_okPriceNotCalculated)){
 	_click($sfm_pg_wo.btn_okPriceNotCalculated);
 }	
@@ -196,14 +196,14 @@ var $todayDate = $sfm_act_createCustomWizard.addSubtractDates($current,0);
 var $tomorrowDate = $sfm_act_createCustomWizard.addSubtractDates($current,1);
 var $yesterdayDate = $sfm_act_createCustomWizard.addSubtractDates($current,-1);
 var $deliveryTextPickLabels = ["Account","Proforma Invoice Amount","Scheduled Date","Automation Date2","Automation Date3","First Queued DateTime","Started Driving To Location Date Time","Completed Date Time","Finished Onsite Date Time","Group Email","Estimated Duration","Automation Percent","Automation Phone","City","Automation URL"];
-var $deliveryTextPickValues =["HCSAccountForTesting","4500",$todayDate,$tomorrowDate,$yesterdayDate,$todayDate,$todayDate,$tomorrowDate,$yesterdayDate,"group123@group.com","34","45","235401","Bengaluru","www.google.com"];
+var $deliveryTextPickValues =["HCSAccountForTesting","4500",$todayDate,$tomorrowDate,$yesterdayDate,$todayDate,$todayDate,$tomorrowDate,$yesterdayDate,"group123@group.com","34","45","2345401","Bengaluru","www.google.com"];
 var $deliveryTimeLabels = ["First Queued DateTime","Started Driving To Location Date Time","Completed Date Time","Finished Onsite Date Time"];
 var $deliveryTimeValues = [$now,"12:00 AM","12:00 AM","12:00 AM"];
 //Verify same values in Work order after saving
 _selectDomain($g_domain);
 var $verifyResult = $sfm_act_SFM.verifyValuesInDelivery($deliveryTextPickLabels, $deliveryTextPickValues, $deliveryTimeLabels, $deliveryTimeValues, $textAreaLabels, $textAreaValues, $checkBoxLabels, $checkBoxValues, $multiPickLabels, $multiPickValues);
 _click($sfm_pg_wo.link_delivery_save);
-_wait(3000);
+_wait(9000);
 if(_isVisible($sfm_pg_wo.btn_okPriceNotCalculated)){
 	_click($sfm_pg_wo.btn_okPriceNotCalculated);
 }

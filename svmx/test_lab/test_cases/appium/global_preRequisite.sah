@@ -64,7 +64,7 @@ $sfm_act_lightningConfig.addPermissionToCustomObject("Profiles", "Automation Ser
 
  //Added for Scenario 2--Create New Custom Search.
 $bo_act_navigation.navigateToSfmSearchDesigner();
-$sfm_act_search.newCustomSearch("AUTOMATION SEARCH",["Account","Work Order","Case"]);
+$sfm_act_search.newCustomSearch("AUTOMATION SEARCH",["Account","Work Order","Case","Installed Product"]);
 _writeFile("true", $appiumPath+$sahiIntermediatoryPath, true);
 
 $global_preRequisite.end();

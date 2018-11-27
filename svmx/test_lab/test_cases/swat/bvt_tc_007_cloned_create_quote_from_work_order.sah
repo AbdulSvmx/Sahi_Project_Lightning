@@ -1,8 +1,18 @@
-var $bvt_tc_002_create_quote_from_work_order = _testcase("bvt_tc_002_create_quote_from_work_order","Verify the functionality of SFM type - from Source Object to create new header and child records");
+//Author	:- 	Shashikala Kamath
 
-$bvt_tc_002_create_quote_from_work_order.start();
+var $bvt_tc_007_cloned_create_quote_from_work_order = _testcase("bvt_tc_007_cloned_create_quote_from_work_order","Verify the functionality of SFM type - from Source Object to create new header and child records");
 
-var $sfmName = "Create Quote from Work Order";
+$bvt_tc_007_cloned_create_quote_from_work_order.start();
+
+var $sfmNameToBeCloned = "Create Quote from Work Order";
+var $sfmName = $bo_act_common.generateRandomName("swat_cloned_source_to_target_all_");
+var $isCustom = false;
+var $sfmTemplate = "SVMXSTD: Create Quote from WO";
+var $sfmTemplateSaveAsName = $sfmName;
+//var $containerName = ["Order Status","Parts","Labor","Expenses"];
+//var $fieldName = ["Scheduled Date","Received Street","Received Street","Received Street"];
+
+
 var $wizardObject ="Work Order";
 var $woNumber;
 
@@ -11,7 +21,11 @@ $bo_act_login.login($g_url,$swat_un,$swat_pwd );
 $sfm_act_lightningConfig.switchToLightning();
 
 //Create WO through REST API ******
-var $woNumber = $sfm_act_createCustomWizard.createBlankWoFromRest($sfmlUsn, $sfmlPwd, $sfmClientId, $sfmConsumerSecret, $sfmOrgInstance);
+var $woNumber = $sfm_act_createCustomWizard.createBlankWoFromRest($swat_un, $swat_pwd, $swat_ClientId, $swat_ConsumerSecret, $swat_OrgInstance);
+
+//$sfm_act_SFM.cloneTDM016($sfmNameToBeCloned,$sfmName,$isCustom, $sfmTemplateSaveAsName, $sfmTemplate, $fieldName, $containerName);
+$sfm_act_SFM.partsNotMandatory();
+$sfm_act_SFM.partsMultiAdd("--None--");
 
 //add the process to wizard
 $sfm_act_wizards.addToWizard($wizardObject, $wizardName[0], $wizardType[1], $sfmName);  
@@ -24,6 +38,9 @@ $sfm_act_createCustomWizard.clickWizardBtn($sfmName);
 //DVR validation on delivery
 //add line to Parts
 $sfm_act_sfmDesigner.addChildLine("Parts");
+
+
+
 /*  *******************
 _setValue($sfm_pg_sfmDesigner.txt_eeLineQty,"6");
 _setValue($sfm_pg_sfmDesigner.txt_eeReceivedStreet,"MG Road");
@@ -57,7 +74,7 @@ _setValue($sfm_pg_sfmDesigner.txt_eeEndDateTime,$bo_act_common.getPastDate("1", 
 _click($sfm_pg_sfmDesigner.btn_eeUpdate);
 
 */
-_click($sfm_pg_sfmDesigner.btn_deliveryQuickSave);
+//_click($sfm_pg_sfmDesigner.btn_deliveryQuickSave);
 
 
-$bvt_tc_002_create_quote_from_work_order.end();
+$bvt_tc_007_cloned_create_quote_from_work_order.end();
