@@ -41,6 +41,7 @@ _setValue($sfm_pg_sfmDesigner.txt_headerContact,"Acme Contact");
 _click(_textbox(0,_near(_span("Status"))));
 _click(_listItem("Presented"));
 _setValue(_textbox(0,_near(_span("Valid Until"))),"11/23/2019");
+
 $sfm_act_sfmDesigner.addChildLine("Parts",$productName);
 _setValue(_textbox(0, _near(_span("Qty[1]"))), "2");
 _setValue(_textbox(0, _near(_span("Unit Price[1]"))), "2000");
