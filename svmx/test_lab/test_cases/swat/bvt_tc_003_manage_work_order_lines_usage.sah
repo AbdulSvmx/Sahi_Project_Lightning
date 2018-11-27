@@ -4,6 +4,13 @@ var $bvt_tc_003_manage_work_order_lines_usage = _testcase("bvt_tc_003_manage_wor
 
 $bvt_tc_003_manage_work_order_lines_usage.start();
 
+//Create Product
+$objName= "Product2";
+$productName=$bo_act_common.generateRandomName("swat_Prod_");
+$obJson = "{\"Name\":\""+$productName+"\",\"ProductCode\":\""+$productName+"\",\""+$orgnamespace+"__Product_Line__c\":\"Storage\",\""+$orgnamespace+"__Product_Type__c\":\"Consumable\"}";
+$filterValue=$sfm_act_restApiMethods.postRestApi($swat_un, $swat_pwd, $swat_ClientId, $swat_ConsumerSecret, $swat_OrgInstance,$objName,$obJson,"POST");
+_log($productName);
+
 var $sfmName = "Manage Work Order Lines - Usage";
 var $wizardObject ="Work Order";
 var $woNumber;
@@ -28,11 +35,32 @@ _click(_listItem("Open"));
 _click(_textbox(0,_near(_span("Billing Type"))));
 _click(_listItem("Paid"));
 
-$sfm_act_createCustomWizard.addParts("Compaq");
-$sfm_act_createCustomWizard.addLabor("Compaq");
-$sfm_act_createCustomWizard.addExpenses("Airfare");
-_click($sfm_pg_sfmDesigner.btn_deliverySave);
-_wait(10000);
+$sfm_act_sfmDesigner.addChildLine("Parts",$productName);
+_wait(3000);
+
+//_click(_span("Ok"));
+//_wait(1000);
+_click(_span("Update"));
+
+//_wait(2000);
+//_click(_span("Ok"));
+
+$sfm_act_sfmDesigner.addChildLine("Labor");
+_setValue(_textbox(0, _near(_span("Line Qty[2]"))), "3");
+//_setValue(_textbox(0, _near(_span("Unit Price[2]"))), "3000");
+_click(_span("Update"));
+
+//$sfm_act_sfmDesigner.addChildLine("Expenses");
+//_click(_textbox(0,_near(_span("Expense Type"))));
+//_click(_listItem("Airfare"));
+//_setValue(_textbox(0, _near(_span("Line Qty[3]"))), "4");
+//_click(_span("Update"));
+
+$sfm_act_sfmDesigner.addChildLine("Travel");
+_setValue(_textbox(0, _near(_span("Line Qty[3]"))), "5");
+
+_click(_span("Update"));
+
 
 _click($sfm_pg_sfmDesigner.btn_deliverySave);
 
