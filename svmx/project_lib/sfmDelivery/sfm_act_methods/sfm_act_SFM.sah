@@ -17,8 +17,8 @@ var $sfm_act_SFM = new function sfm_act_SFM() {
 		_setValue($bo_pg_sfmTransactionAndDesigner.txt_name, $sfmName);
 		_setValue($bo_pg_sfmTransactionAndDesigner.txt_sfmTransactionId, "");
 		_setValue($bo_pg_sfmTransactionAndDesigner.txt_sfmTransactionId, $sfmName);
-		_setValue($bo_pg_sfmTransactionAndDesigner.txt_name, "");
-		_setValue($bo_pg_sfmTransactionAndDesigner.txt_name, $sfmName);
+//		_setValue($bo_pg_sfmTransactionAndDesigner.txt_name, "");
+//		_setValue($bo_pg_sfmTransactionAndDesigner.txt_name, $sfmName);
 		_click($bo_pg_sfmTransactionAndDesigner.btn_screenDesigner);
 		_wait(5000);
 		_setSelected($bo_pg_sfmTransactionAndDesigner.sel_sfmTemplate,
@@ -238,7 +238,7 @@ var $sfm_act_SFM = new function sfm_act_SFM() {
 			_click(_f("main").s_button("/Add Field/"));
 		}
 		_click($bo_pg_sfmTransactionAndDesigner.btn_pageLayoutSave);
-		_wait(3000, _isVisible($bo_pg_sfmTransactionAndDesigner.lbl_pageLayoutSaved));
+		_wait(3000, _isVisible($bo_pg_sfmTransactionAndDesigner.label_pageSaved));
 		_click($bo_pg_sfmTransactionAndDesigner.btn_quickSave1);
 	};
 	
@@ -825,6 +825,29 @@ return $result;
 		_setValue(_f("main").s_textinput("textip"),$value);
 		
 	};
+	
+	/**
+	 * This function is set webservice on a header/child base on the parameter passed
+	 * $object - Object on which webservice is to be enabled. Work Order for header/Parts incase of Parts and so on
+	 * $event - On Load or Before Save/Update or After Save/Update or On Change or After Add Record
+	 * $eventType - Webservice/JavaScript
+	 * $methodName - webservice name along with class name
+	 * Eg : 10479.sah  
+	 */	
+	this.setWebservice = function($object, $event, $eventType, $methodName ){
+		if($object=='Work Order'){
+			_click($bo_pg_sfmTransactionAndDesigner.txt_sfmSavePageLayoutAsId);
+		}else if($object=='Parts' || $object=='Labor' || $object=='Expenses' || $object=='Travel'){
+			_click(_f("main").s_richtext($object));
+		}else{
+			_click(_f("main").uiftetextfield($object));
+		}
+		_setSelected(_f("main").s_combobox("/ComboBox/").under(_f("main").uiftetextfield($event)), $eventType);
+		_wait(2000);
+		_setValue(_f("main").s_textinput("/txtip/").under(_f("main").uiftetextfield($event)),$methodName);
+		_click($bo_pg_sfmTransactionAndDesigner.btn_pageLayoutSave);
+		_wait(3000, _isVisible($bo_pg_sfmTransactionAndDesigner.label_pageSaved));
+	   };
 			
 	
 };

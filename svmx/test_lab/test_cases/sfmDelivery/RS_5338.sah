@@ -1,0 +1,138 @@
+var $RS_5338 = _testcase("RS_5338","Verify Opdoc generation");
+$RS_5338.start();
+			
+			//Pre_Requesite
+			//Create Product
+			$objName= "Product2";
+			$productName=$bo_act_common.generateRandomName("Prod_RS5338_");
+			$obJson = "{\"Name\":\""+$productName+"\",\"ProductCode\":\""+$productName+"\",\"IsActive\":\"true\"}";
+			$proID=$sfm_act_restApiMethods.postRestApi($sfmlUsn,$sfmlPwd,$sfmClientId,$sfmConsumerSecret,$sfmOrgInstance,$objName,$obJson,"POST");
+			_log($productName);
+
+			//create Work orders
+			$objName= $orgnamespace+"__Service_Order__c";
+			$obJson = "{\""+$orgnamespace+"__Order_Status__c\":\"Open\",\""+$orgnamespace+"__Order_Type__c\":\"Field Service\",\""+$orgnamespace+"__Product__c\":\""+$proID+"\",\""+$orgnamespace+"__Billing_Type__c\":\"Loan\",\""+$orgnamespace+"__Priority__c\":\"High\",\""+$orgnamespace+"__Is_Entitlement_Performed__c\":\"true\"}";
+			$columnName = "Name";
+			$filter="id";
+			$filterValue=$sfm_act_restApiMethods.postRestApi($sfmlUsn,$sfmlPwd,$sfmClientId,$sfmConsumerSecret,$sfmOrgInstance,$objName,$obJson,"POST");
+			$WONumber =$sfm_act_restApiMethods.getRestApi($sfmlUsn,$sfmlPwd,$sfmClientId,$sfmConsumerSecret,$sfmOrgInstance,"GET", $objName, $columnName, $filter, $filterValue);
+			_log("WO number: "+$WONumber);
+			
+			//Standard Price book ID
+			$objName="Pricebook2";
+			$filter="Name";
+			$filterValue="Standard+Price+Book";
+			$columnName = "id";
+			$spbID =$sfm_act_restApiMethods.getRestApi($sfmlUsn,$sfmlPwd,$sfmClientId,$sfmConsumerSecret,$sfmOrgInstance,"GET", $objName, $columnName, $filter, $filterValue);
+			_log("Standard Pricebook ID: "+$spbID);
+			
+			//Create Standard Pricebook entry
+			$objName= "PricebookEntry";
+			$pricebookEntryName=$productName;
+			$obJson = "{\"Product2Id\":\""+$proID+"\",\"Pricebook2Id\":\""+$spbID+"\",\"IsActive\":\"true\",\"UnitPrice\":\"100\"}";
+			$spbentryID=$sfm_act_restApiMethods.postRestApi($sfmlUsn,$sfmlPwd,$sfmClientId,$sfmConsumerSecret,$sfmOrgInstance,$objName,$obJson,"POST");
+			_log("PricebookEntry ID: "+$spbentryID);
+			
+			//Activity master record
+			$objName=$orgnamespace+"__Activity_Master__c";
+			$filter=$orgnamespace+"__Activity_Type__c";
+			$filterValue="Repair";
+			$columnName = "id";
+			$actMasterID =$sfm_act_restApiMethods.getRestApi($sfmlUsn,$sfmlPwd,$sfmClientId,$sfmConsumerSecret,$sfmOrgInstance,"GET", $objName, $columnName, $filter, $filterValue);
+			_log("Activity_Master ID: "+$actMasterID);
+			if ($actMasterID==null || $actMasterID=="") {
+				$obJson = "{\""+$orgnamespace+"__Activity_Type__c\":\"Repair\"}";
+				$actMasterID=$sfm_act_restApiMethods.postRestApi($sfmlUsn,$sfmlPwd,$sfmClientId,$sfmConsumerSecret,$sfmOrgInstance,$objName,$obJson,"POST");
+			}
+			_log("Activity_Master ID: "+$actMasterID);
+
+			//Create MasterActivity Product
+			$objName= $orgnamespace+"__Activity_Product__c";
+			$obJson = "{\""+$orgnamespace+"__Activity__c\":\""+$actMasterID+"\",\""+$orgnamespace+"__Product__c\":\""+$proID+"\"}";
+			$apID=$sfm_act_restApiMethods.postRestApi($sfmlUsn,$sfmlPwd,$sfmClientId,$sfmConsumerSecret,$sfmOrgInstance,$objName,$obJson,"POST");
+			_log("Activity_Product ID: "+$apID);
+
+			//Standard service price book ID
+			$objName=$orgnamespace+"__Service_Pricebook__c";
+			$filter="Name";
+			$filterValue="Standard+Service+Price+Book";
+			$columnName = "id";
+			$sspbID =$sfm_act_restApiMethods.getRestApi($sfmlUsn,$sfmlPwd,$sfmClientId,$sfmConsumerSecret,$sfmOrgInstance,"GET", $objName, $columnName, $filter, $filterValue);
+			_log("Standard Service Pricebook ID: "+$sspbID);
+			
+			$objName= $orgnamespace+"__Service_Pricebook_Entry__c";
+			$obJson = "{\""+$orgnamespace+"__Activity_Product__c\":\""+$apID+"\",\""+$orgnamespace+"__Entry_Type__c\":\"Labor\",\""+$orgnamespace+"__Price_Book__c\":\""+$sspbID+"\",\""+$orgnamespace+"__Regular_Rate__c\":\"300\",\""+$orgnamespace+"__Unit__c\":\"Flat Rate\"}";
+			$filterValue=$sfm_act_restApiMethods.postRestApi($sfmlUsn,$sfmlPwd,$sfmClientId,$sfmConsumerSecret,$sfmOrgInstance,$objName,$obJson,"POST");			
+			_log("Service_Pricebook_Entry ID: "+$filterValue);
+			
+			// Login to App
+			$bo_act_login.login($g_url,$sfmlUsn,$sfmlPwd);
+			
+			
+			//add SFM to expression Wizard
+			var $wizardObject="Work Order";
+			var $wizardName1 =$wizardName[7];
+			var $wizardType="SFM";
+			var $profile="";
+			var $handOver=false;
+			$sfm_act_wizards.addToWizard($wizardObject, $wizardName1, $wizardType, "Manage Work Order Lines - Usage", $handOver, $profile);
+
+			var $wizardType="Output Document";
+			$sfm_act_wizards.addToWizard($wizardObject, $wizardName1, $wizardType, "Work Order Service Report", $handOver, $profile); 
+			
+			RS5338_searchWOandLaunchSFM($WONumber,"Manage Work Order Lines - Usage");
+			
+
+			//adding parts to process
+			$sfm_act_sfmDesigner.addChildLine("Parts",$productName);
+			_wait(10000,_isVisible($sfm_pg_sfmDesigner.txt_partTextbox));
+			_setValue($sfm_pg_sfmDesigner.txt_eeLineQty,3);
+			_setValue($sfm_pg_sfmDesigner.txt_eeLinePricePerUnit,200);
+			_click($sfm_pg_sfmDesigner.link_Update);
+			 
+			
+			
+			$sfm_act_sfmDesigner.addChildLine("Labor");
+			_wait(10000,_isVisible($sfm_pg_sfmDesigner.txt_partTextboxInLabor));
+			_setValue($sfm_pg_sfmDesigner.txt_partTextboxInLabor,$productName);
+			var $today=$bo_act_common.getfutureDate(0,"/",0);
+			_setValue($sfm_pg_sfmDesigner.txt_eeStartDateTime,$today);
+			var $tomorrow=$bo_act_common.getfutureDate(0,"/",3);
+			_setValue($sfm_pg_sfmDesigner.txt_eeEndDateTime,$tomorrow);
+			_click($sfm_pg_sfmDesigner.txt_eeActivityType);
+			_click(_listItem("Repair"));
+			_setValue($sfm_pg_sfmDesigner.txt_eeLinePricePerUnit,200);
+			_click($sfm_pg_sfmDesigner.link_Update);			
+			_click($sfm_pg_sfmDesigner.btn_deliverySave);			
+			
+			RS5338_searchWOandLaunchSFM($WONumber,"Work Order Service Report");
+			_wait(10000,_isVisible($sfm_pg_wizards.btn_saveStep));
+			var $partUnderPartsSection=_cell($productName,_near(_tableHeader("Part",_near(_tableHeader("Parts Used")))));
+			var $partUnderLaborsSection=_cell($productName,_near(_tableHeader("Part",_near(_tableHeader("Labor Details")))));
+			_assertExists($partUnderPartsSection);
+			_assertExists($partUnderLaborsSection);
+			_assertContainsText("300",_cell(1,_near(_cell("Total",_near($partUnderPartsSection)))));
+			_assertContainsText("200",_cell(1,_near(_cell("Total",_near($partUnderLaborsSection)))));
+			
+			_click($sfm_pg_wizards.btn_saveStep);
+			_wait(20000,_isVisible(_link($WONumber)));
+			_click(_link($WONumber));
+			_wait(3000);
+			_click($sfm_pg_sfmDesigner.link_related);
+			//_wait(10000);
+			//_assertExists(_link("/WO_ServiceReport/",_near(_heading3("Notes & Attachments"))));
+			
+
+
+//Search WO and launch SFM
+function RS5338_searchWOandLaunchSFM($WONumber,$sfmName){
+$sfm_act_common.globalSearchInLightning($WONumber);
+_wait(10000);
+_setStrictVisibilityCheck(true);
+$sfm_act_createCustomWizard.clickWizardBtn($sfmName);
+_wait(5000,_isVisible(_div("/"+$sfmName+"/")));
+}
+
+
+
+$RS_5338.end();

@@ -10,7 +10,7 @@ var $swat_act_sfmSearch = new function swat_act_sfmSearch() {
 	 *
 	 * The following function creates Search Configuration
 	 */
-	this.createSfmSearch = function($objectName,$fieldName,$operator,$fieldName1)
+	this.createSfmSearch = function($objectName,$fieldName,$operator,$fieldName1,$textValue, $textValue1,$advancedExpression)
 	{
 		var $searchTitle = $bo_act_common.generateRandomName("Search");
 		var $searchId = $bo_act_common.generateRandomName("SearchId");
@@ -33,15 +33,15 @@ var $swat_act_sfmSearch = new function swat_act_sfmSearch() {
 		   always apply on this object's records */
 		_setSelected($swat_pg_sfmSearch.picklist_fieldName,$fieldName);
 		_setSelected($swat_pg_sfmSearch.picklist_operator,$operator);
-		_setValue($swat_pg_sfmSearch.txt_value,"Open");
+		_setValue($swat_pg_sfmSearch.txt_value,$textValue);
 		
 		_click($swat_pg_sfmSearch.btn_add);
 		_setSelected($swat_pg_sfmSearch.picklist_fieldName1,$fieldName1);
 		_setSelected($swat_pg_sfmSearch.picklist_operator1,$operator);
-		_setValue($swat_pg_sfmSearch.txt_value1,"Field Service");
+		_setValue($swat_pg_sfmSearch.txt_value1,$textValue1);
 		
 		//Advanced Expression
-		_setValue($swat_pg_sfmSearch.txt_advanced_expression,"1 AND 2");
+		_setValue($swat_pg_sfmSearch.txt_advanced_expression,$advancedExpression);
 		
 		// Choose one or more fields to be displayed in the search result
 		_click($swat_pg_sfmSearch.btn_add2);

@@ -38,24 +38,29 @@ $bvt_tc_001_sfmSearch.start();
 	var $fieldName = "Order Status";
 	var $operator = "Equals";
 	var $fieldName1 = "Order Type";
+	var $textValue = "Open";
+	var $textValue1 = "Field Service";
+	var $advancedExpression = "1 AND 2";
 	var $workOrderNo;
 	
-	$bo_act_login.login("https://test.salesforce.com","shashikala.svmx@ge.com", "maxpl0re2");
+	$bo_act_login.login($g_url,$swat_un,$swat_pwd );
 
 	$bo_act_navigation.navigateToSfmSearchDesigner();
 	
-	var $searchItem = $swat_act_sfmSearch.createSfmSearch($objectName, $fieldName, $operator, $fieldName1);
+	var $searchItem = $swat_act_sfmSearch.createSfmSearch($objectName, $fieldName, $operator, $fieldName1, $textValue, $textValue1,$advancedExpression);
 	//_click(_submit("Back To Setup Home[1]"));
-	
-	
-	
 	//create Work orders
-	$objName= "SVMXDEV__Service_Order__c";
-	$obJson = "{\"SVMXDEV__Order_Status__c\":\"Open\",\"SVMXDEV__Order_Type__c\":\"Field Service\"}";
+	//$objName= "SVMXDEV__Service_Order__c";
+	//$obJson = "{\"SVMXDEV__Order_Status__c\":\"Open\",\"SVMXDEV__Order_Type__c\":\"Field Service\"}";
+	
+	//Create WO through REST API ******
+	
+	$objName= $orgnamespace+"__Service_Order__c";
+	$obJson = "{\""+$orgnamespace+"__Order_Status__c\":\"Open\",\""+$orgnamespace+"__Order_Type__c\":\"Field Service\"}";
 	$columnName = "Name";
 	$filter="id";
-	$filterValue=$sfm_act_restApiMethods.postRestApi($sfmlUsn,$sfmlPwd,$sfmClientId,$sfmConsumerSecret,$sfmOrgInstance,$objName,$obJson,"POST");
-	$WONumber =$sfm_act_restApiMethods.getRestApi($sfmlUsn,$sfmlPwd,$sfmClientId,$sfmConsumerSecret,$sfmOrgInstance,"GET", $objName, $columnName, $filter, $filterValue);
+	$filterValue=$sfm_act_restApiMethods.postRestApi($swat_un,$swat_pwd,$swat_ClientId,$swat_ConsumerSecret,$swat_OrgInstance,$objName,$obJson,"POST");
+	$WONumber =$sfm_act_restApiMethods.getRestApi($swat_un,$swat_pwd,$swat_ClientId,$swat_ConsumerSecret,$swat_OrgInstance,"GET", $objName, $columnName, $filter, $filterValue);
 	_log("WO number: "+$WONumber);
 	
 	$bo_act_navigation.navigateToObject("ServiceMax SFM Search");
@@ -66,7 +71,9 @@ $bvt_tc_001_sfmSearch.start();
 	_click(_link("Go"));
 	_selectDomain();
 	_setValue(_textbox("/svmx-text/",_near(_button("Go"))),$WONumber);
+	_wait(5000);
 	_click(_button("Go"));
+	_wait(5000);
 	//_click(_div("/radio/",_near(_link($WONumber))));
 	_click(_link($WONumber));
 	_selectWindow($WONumber+" | Salesforce");

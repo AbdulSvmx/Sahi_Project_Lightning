@@ -95,7 +95,44 @@ var $bo_act_SFMAppPermission = new function bo_act_SFMAppPermission() {
 
 		
 	};
+	
+	this.workOrderDownloadCriteriachangesgeneral = function($recordsvalue, $objectname){
+		$bo_act_navigation.navigateToSvmxSetup();
+		_selectDomain("/svmx/");
+		_click($bo_pg_sfmAppPermissionD.btn_mobile_configuration);
+		_setSelected($bo_pg_sfmAppPermissionD.picklist_profileselection, $group_profilename);
+		_click($bo_pg_sfmAppPermissionD.chkbox_selectprofile);
+		_click($bo_pg_sfmAppPermissionD.btn_edit);
+		_click($bo_pg_sfmAppPermissionD.btn_downloadcriteriatab);
+		if(_isVisible(_cell($objectname))==false)
+		{
+			_click(_button($bo_pg_sfmAppPermissionD.btn_addnewdownloacriteria));
+			// NEED TO COMPLETE THIS
+		}
+		_click($bo_pg_sfmAppPermissionD.chkbox_workorder);
+		_setSelected($bo_pg_sfmAppPermissionD.picklist_records, $recordsvalue);
+		_click($bo_pg_sfmAppPermissionD.btn_configsave);
+		_selectDomain();
 
+		
+	};
+	
+	
+	/**
+	 * To add a Download Criteria condition to the Object
+	 */
+	this.addnewDownloadCriteriaCondition = function($objectname, $conditionname){
+		$bo_act_navigation.navigateToSvmxSetup();
+		_selectDomain("/svmx/");
+		_click($bo_pg_sfmAppPermissionD.btn_mobile_configuration);
+		_setSelected($bo_pg_sfmAppPermissionD.picklist_profileselection, $group_profilename);
+		_click($bo_pg_sfmAppPermissionD.chkbox_selectprofile);
+		_click($bo_pg_sfmAppPermissionD.btn_edit);
+		_click($bo_pg_sfmAppPermissionD.btn_downloadcriteriatab);
+		_setSelected(_select("/SVMX_FORM/",_near(_cell($objectname))), $conditionname);
+		_click($bo_pg_sfmAppPermissionD.btn_configsave);
+		_selectDomain();			
+	};
 /**
 	 * Author : Lakshmi BS
 	 */

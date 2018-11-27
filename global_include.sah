@@ -21,6 +21,23 @@ var $g_url = "https://test.salesforce.com/";
 var $g_un = "bhupen@back17.com";// "bhupendra.s@dev.tool2.com";
 var $g_pwd = "smax@123";
 
+//All SWAT Parameters here
+/* var $swat_un = "shashikala.svmx@ge.com";
+var $swat_pwd = "maxpl0re2";
+var $swat_ClientId ="3MVG99E3Ry5mh4zpoRo8OgqPbqoqdWqWuDrwuPohH..J4zUrQMnuf3StIK1uvUnsQ4r09Pmcm4KYYRllMEtSr";
+var $swat_ConsumerSecret = "5656136115450032367";
+var $swat_OrgInstance = "CS67"; 
+var $swat_sfd_myDomain = "/lightning/";
+*/
+
+var $swat_un = "spr18admin@servicemax.com";
+var $swat_pwd = "svmx7878";
+var $swat_ClientId ="3MVG97wqanbUM37LzeBbGUBMWjgPWHSaGp8c4N7lXR8L2Yh9aP73aatczn4hCg3LF4RtiFVRWdEK5j8vDwig7";
+var $swat_ConsumerSecret = "4137202259126192964";
+var $swat_OrgInstance = "CS66"; 
+var $swat_sfd_myDomain = "/lightning/";
+
+
 // THIS IS SPECIFIC TO A GIVEN ORG - DONOT TOUCH
 var $client_id = "3MVG9zZht._ZaMulZsbNptzpIDmNd6xyt0zAOuNU_dtpTTg4DHSn9UmdBySUZS3_VOGeiWttaj3moLMuLIrje";
 var $client_secret = "1938983484606764552";
@@ -82,7 +99,7 @@ var $sfmPwd = "Maxplore4";
  
 //  commenting base org details to run in dev org
  var $sfmlUsn = "sfdl_auto@automation.com";
- var $sfmlPwd ="Maxplore2";
+ var $sfmlPwd ="Maxplore3";
  var $sfmClientId ="YjkyMzJmNDUzMGNmOTYzODVlNDQ0ZjE2OTUxOTU1NDI5MGViN2I3NWU3YTFjNmY300D290000000WVC";
  var $sfmConsumerSecret = "5287076090725084260";
  var $sfmOrgInstance = "cs19"; 
@@ -100,7 +117,7 @@ var $dc_dispatName = "Deepa Aut 17 Base Admin";
 // SWAT Global Variables
 var $swatUrl = "https://test.salesforce.com";
 var $swatUsn = "shashikala.svmx@ge.com";
-var $swatPwd = "maxpl0re";
+var $swatPwd = "maxpl0re2";
 
 /**
  * buildorg = "The org which needs to be Run in the Build Machine"- PLEASE KEEP IT DEFAULT WHEN CHECKING IN

@@ -1,26 +1,27 @@
-var $RS_10476 = _testcase("RS_10476", "Field level:Webservice Header Field test On Exit");
-$RS_10476.start();
+//Author	:- 	Shashikala Kamath
+var $bvt_tc_01114_webService_afterSave = _testcase("bvt_tc_01114_webService_afterSave","Verify Web Service call After Save");
+
+$bvt_tc_01114_webService_afterSave.start();
+
 var $sfmNameToBeCloned = "Manage Work Order Lines - Usage";
-var $sfmName=$bo_act_common.generateRandomName("RS_10476_");
+var $sfmName=$bo_act_common.generateRandomName("RS_10479_");
 var $isCustom = false;
 var $sfmTemplate = "SVMXSTD: Manage WO Usage Lines";
 var $sfmTemplateSaveAsName = $sfmName;
 var $containerName = ["Order Status","Order Status","Order Status","Order Status"];
 var $fieldName=["Order Type","Zip","Is Entitlement Performed","Driving Time (in Minutes)"];
-var $webServiceObject ="Zip" ;
-var $event = "On Exit";
+var $webServiceObject = "Work Order";
+var $event = "Before Save/Update";
 var $eventType = "Webservice";
-var $methodName = "objWebService.onExit";
+var $methodName = "objWebService.beforeSaveOrUpdate";
 var $wizardObject ="Work Order";
 
-
-
 //Create WO through REST API
-var $woNumber = $sfm_act_createCustomWizard.createBlankWoFromRest($sfmlUsn, $sfmlPwd, $sfmClientId, $sfmConsumerSecret, $sfmOrgInstance);
+var $woNumber = $sfm_act_createCustomWizard.createBlankWoFromRest($swat_un, $swat_pwd, $swat_ClientId, $swat_ConsumerSecret, $swat_OrgInstance);
 
 //login
 _setSpeed($g_stepSpeed);
-$bo_act_login.login($g_url, $sfmlUsn, $sfmlPwd); 
+$bo_act_login.login($g_url, $swat_un, $swat_pwd); 
 
 //clone Source to Target Child Process
 $sfm_act_SFM.cloneTDM016($sfmNameToBeCloned,$sfmName,$isCustom, $sfmTemplateSaveAsName,$sfmTemplate,$fieldName, $containerName);
@@ -35,14 +36,19 @@ $bo_act_navigation.navigateToCreatedRecordUsingGlobalSearch($woNumber);
 
 $sfm_act_createCustomWizard.clickWizardBtn($sfmName);
 
-//Validate in delivery on exit form zip to any other field
-//_setValue($sfm_pg_sfmDesigner.txt_orderType,"Field Service");
+// Validate in delivery after clicking quick save
+_click($sfm_pg_sfmDesigner.txt_orderType);
+_click(_listItem("Depot Repair"));
 _check($sfm_pg_sfmDesigner.chk_isEntitlementPerformed);
-_setValue($sfm_pg_sfmDesigner.txt_zip,"");
-_click($sfm_pg_sfmDesigner.txt_drivingTime);
-_wait(5000);
-_assertEqual("Depot Repair", _getText($sfm_pg_sfmDesigner.txt_orderType), "Order type is not updated");
-_assertEqual("560063",_getText($sfm_pg_sfmDesigner.txt_zip),"Zip is not updated");
-_assertEqual("15",_getText($sfm_pg_sfmDesigner.txt_drivingTime),"Driving time is not updated");
+_click($sfm_pg_sfmDesigner.btn_deliveryQuickSave);
+if(_isVisible($sfm_pg_sfmDesigner.txt_priceAlert)){
+	_click($sfm_pg_sfmDesigner.btn_priceAlertOk);
+}
+_wait(15000);
+_assertEqual("Field Service", _getText($sfm_pg_sfmDesigner.txt_orderType), "Order type is not updated");
+_assertEqual("560061",_getText($sfm_pg_sfmDesigner.txt_zip),"Zip is not updated");
+_assertEqual("40",_getText($sfm_pg_sfmDesigner.txt_drivingTime),"Driving time is not updated");
 _assertFalse(_isChecked($sfm_pg_sfmDesigner.chk_isEntitlementPerformed),"Is Entitlement Performed is not unchecked");
-$RS_10476.end();
+
+
+$bvt_tc_01114_webService_afterSave.end();

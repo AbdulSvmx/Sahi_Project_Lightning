@@ -1,0 +1,82 @@
+//Meghana Rao
+
+/*
+ * PRE Requisites to be run in the org before running other scripts - LIGHTNING CODE
+ */
+_writeFile("false", $appiumPath+$sahiIntermediatoryPath, true);
+//Pre - Condition Test Data
+function GetFormattedDate() {
+    var todayTime = new Date();
+    var month = todayTime .getMonth();
+    var day = todayTime .getDate();
+    var year = todayTime .getFullYear();
+    return year + "-" + month + "-" + day;
+}
+
+var $pre_requisite= _testcase("scenario_10551","Verify Download Criteria, Advanced Download Criteria");
+
+var $restAccName="A10551_Auto";
+var $restcontactfirstname="C10551_";
+var $restcontactlastname="Auto";
+var $restproductname=$bo_act_common.generateRandomName("P10551");
+var $restlocationname="L10551_Auto";
+var $restIBName = $bo_act_common.generateRandomName("IB10551");
+
+$pre_requisite.start();
+_setSpeed($g_stepSpeed);
+$bo_act_login.login($g_url, $appiumAdminUn, $appiumAdminPwd);
+$sfm_act_lightningConfig.switchToLightning();
+
+
+// FOR DOWNLOAD CRITERIA
+/** 
+ * Create Custom Expression for Work Order Object where Priority = High
+ */
+//$sfm_act_expressions.navigateToExpression();
+var $object="Work Order";
+var $comboField=["Priority","Order Status"];
+var $comboConditions=["Equals","Equals"];
+var $comboInput=["High","Open"];
+var $toggleButton=["",""];
+var $advExpr="";
+var $errMsg="";
+var $exprsnNameWO = "RS-10551ExpressionWO";
+var $exprsnSaveAsNameWO ="RS-10551ExpressionWO";
+
+//$sfm_act_expressions.createCustomExpression($object, $comboField, $comboConditions, $toggleButton, $comboInput, $advExpr, $errMsg, $exprsnNameWO);
+
+/**
+ * Create Custom Expression for Account Object 
+ * Industry = Machinery
+ * BillingCity = Bangalore
+ * 
+ */
+var $object="Account";
+var $comboField=["Industry","Billing City"];
+var $comboConditions=["Equals","Equals"];
+var $comboInput=["Machinery","Bangalore"];
+var $toggleButton=["",""];
+var $advExpr="(1 OR 2)";
+var $errMsg="";
+var $exprsnNameAcc = "RS-10551ExpressionAccount";
+var $exprsnSaveAsNameAcc ="RS-10551ExpressioAccount";
+
+//$sfm_act_expressions.createCustomExpression($object, $comboField, $comboConditions, $toggleButton, $comboInput, $advExpr, $errMsg, $exprsnNameAcc);
+
+/**
+ * Adding the Expressions to the Download Criteria of the Profile
+ */
+
+// To add download Criteria Condition for the Work Order object
+$bo_act_SFMAppPermission.addnewDownloadCriteriaCondition("Work Order", $exprsnNameWO);
+$bo_act_SFMAppPermission.addnewDownloadCriteriaCondition("Account", $exprsnNameAcc);
+
+
+// To Add the Custom Object to the Download Criteria
+
+
+// FOR ADVANCED DOWNLOAD CRITERIA
+_writeFile("true", $appiumPath+$sahiIntermediatoryPath, true);
+
+
+$pre_requisite.end();

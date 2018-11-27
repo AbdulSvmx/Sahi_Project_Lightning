@@ -1,0 +1,6 @@
+//Author	:- 	Shashikala Kamath
+var $bvt_tc_003_manage_work_order_lines_usage = _testcase("bvt_tc_003_manage_work_order_lines_usage","Verify the functionality of SFM type - as Standalone for the purpose of editing an existing record");
+
+$bvt_tc_003_manage_work_order_lines_usage.start();
+
+$bvt_tc_003_manage_work_order_lines_usage.end();

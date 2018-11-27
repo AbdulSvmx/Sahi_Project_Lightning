@@ -1,31 +1,32 @@
+//Author	:- 	Shashikala Kamath
+var $bvt_tc_014_webService_afterAddRecord = _testcase("bvt_tc_014_webService_afterAddRecord","Verify Web Service call at Record level: After Add Record");
 
-var $RS_10477 = _testcase("RS_10477", "Verify Web Service call On Change");
-$RS_10477.start();
+$bvt_tc_014_webService_afterAddRecord.start();
+
 var $sfmNameToBeCloned = "Manage Work Order Lines - Usage";
-var $sfmName=$bo_act_common.generateRandomName("RS_10477_");
+var $sfmName=$bo_act_common.generateRandomName("swat_WS_");
 var $isCustom = false;
 var $sfmTemplate = "SVMXSTD: Manage WO Usage Lines";
 var $sfmTemplateSaveAsName = $sfmName;
 var $containerName = ["Order Status","Order Status","Order Status","Order Status"];
 var $fieldName=["Order Type","Zip","Is Entitlement Performed","Driving Time (in Minutes)"];
-var $webServiceObject ="Order Status" ;
-var $event = "On Change";
+var $webServiceObject ="Parts" ;
+var $event = "After Add Record";
 var $eventType = "Webservice";
-var $methodName = "objWebService.onChange";
+var $methodName = "objWebService.afterAddRecord";
 var $wizardObject ="Work Order";
 
-
-
 //Create WO through REST API
-var $woNumber = $sfm_act_createCustomWizard.createBlankWoFromRest($sfmlUsn, $sfmlPwd, $sfmClientId, $sfmConsumerSecret, $sfmOrgInstance);
+var $woNumber = $sfm_act_createCustomWizard.createBlankWoFromRest($swat_un, $swat_pwd, $swat_ClientId, $swat_ConsumerSecret, $swat_OrgInstance);
 
 //login
 _setSpeed($g_stepSpeed);
-$bo_act_login.login($g_url, $sfmlUsn, $sfmlPwd); 
+$bo_act_login.login($g_url, $swat_un, $swat_pwd); 
 
 //clone Source to Target Child Process
 $sfm_act_SFM.cloneTDM016($sfmNameToBeCloned,$sfmName,$isCustom, $sfmTemplateSaveAsName,$sfmTemplate,$fieldName, $containerName);
 $sfm_act_SFM.setWebservice($webServiceObject, $event, $eventType, $methodName);
+$sfm_act_SFM.partsMultiAdd("--None--");
 _click($sfm_pg_sfmDesigner.btn_saveSFM); 
 
 //add the process to wizard
@@ -35,13 +36,15 @@ $sfm_act_wizards.addToWizard($wizardObject, $wizardName[1], $wizardType[1], $sfm
 $bo_act_navigation.navigateToCreatedRecordUsingGlobalSearch($woNumber);
 
 $sfm_act_createCustomWizard.clickWizardBtn($sfmName);
+_setValue($sfm_pg_sfmDesigner.txt_zip,"");
 
-//Validate in delivery after changing order status
-_click(_textbox("Order Status"));
-_click(_listItem("Closed"));
+//Validate in delivery after changing adding a part
+_click($sfm_pg_sfmDesigner.btn_deliveryAddRowParts);
 _wait(5000);
 _assertEqual("Depot Repair", _getText($sfm_pg_sfmDesigner.txt_orderType), "Order type is not updated");
-_assertEqual("560064",_getText($sfm_pg_sfmDesigner.txt_zip),"Zip is not updated");
-_assertEqual("30",_getText($sfm_pg_sfmDesigner.txt_drivingTime),"Driving time is not updated");
+_assertEqual("560001",_getText($sfm_pg_sfmDesigner.txt_zip),"Zip is not updated");
+_assertEqual("31",_getText($sfm_pg_sfmDesigner.txt_drivingTime),"Driving time is not updated");
 _assertTrue(_isChecked($sfm_pg_sfmDesigner.chk_isEntitlementPerformed),"Is Entitlement Performed is not checked");
-$RS_10477.end();
+
+
+$bvt_tc_014_webService_afterAddRecord.end();

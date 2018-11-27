@@ -249,6 +249,8 @@ var $bo_pg_sfmTransactionAndDesigner = new function bo_pg_sfmTransactionAndDesig
     this.list_sourceHeaderList = _f("main").s_combobox("objCombo1").inside(_f("main").s_panel("Use data from..."));
     this.list_targetHeaderList = _f("main").s_combobox("objCombo1").inside(_f("main").s_panel("...to create these records"));
     this.chkbx_targetChild2 = _f("main").s_checkbox("Work Detail (Work Order)[2]");//index used as _count logic does not work in flex.written to Sahi Support.
+    this.txt_firstChildSection =  _f("main").s_richtext("titleDisplay").near(_f("main").s_datagroup("dataGroup[3]"));
+	this.txt_sectionName = _f("main").s_textinput(0).inside(_f("main").form("User Actions"));
     
 
 };
