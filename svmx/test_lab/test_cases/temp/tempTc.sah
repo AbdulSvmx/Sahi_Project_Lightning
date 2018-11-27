@@ -2,18 +2,28 @@
 var $tempTc = _testcase("$tempTc","$tempTc");
 $tempTc.start();
 	_setSpeed($g_stepSpeed);
-	
-	var $objectName = "Work Order";
-	var $fieldName = "Order Status";
-	var $operator = "Equals";
-	var $fieldName1 = "Order Type";
-	var $workOrderNo;
-	
-	$bo_act_login.login("https://test.salesforce.com",java.lang.System.getenv("jenkins_browser_name"), $g_pwd);
 
-	
 
-	$tempTc.end();
+	//Use jenkins varaibles
+	var $runPackageBuild = java.lang.System.getenv("Run_Package_Build");
+	var $un = java.lang.System.getenv("pkg_un");
+	var $pwd = java.lang.System.getenv("pkg_pwd");
+	var $packageCode = java.lang.System.getenv("pkg_packageCode");
+
+	if ($runPackageBuild == true) {
+	$bo_act_login.login("https://test.salesforce.com", $un, $pwd);
+	
+	_log("$runPackageBuild : ", $runPackageBuild);
+
+	_log("$packageCode : ", $packageCode);
+} else {
+	_log("$runPackageBuild : ", $runPackageBuild);
+
+	_log("$packageCode : ", $packageCode);
+
+}
+
+$tempTc.end();
  
 
 
