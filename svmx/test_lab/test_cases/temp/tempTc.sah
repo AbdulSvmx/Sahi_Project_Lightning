@@ -10,16 +10,16 @@ $tempTc.start();
 	var $pwd = java.lang.System.getenv("pkg_pwd");
 	var $packageCode = java.lang.System.getenv("pkg_packageCode");
 
-	if ($runPackageBuild == true) {
+	if ($runPackageBuild == "Yes") {
 	$bo_act_login.login("https://test.salesforce.com", $un, $pwd);
 	
-	_log("$runPackageBuild : ", $runPackageBuild);
+	_log("$runPackageBuild : "+$runPackageBuild);
 
-	_log("$packageCode : ", $packageCode);
+	_log("$packageCode : "+$packageCode);
 } else {
-	_log("$runPackageBuild : ", $runPackageBuild);
+	_log("$runPackageBuild : "+ $runPackageBuild);
 
-	_log("$packageCode : ", $packageCode);
+	_log("$packageCode : "+ $packageCode);
 
 }
 
