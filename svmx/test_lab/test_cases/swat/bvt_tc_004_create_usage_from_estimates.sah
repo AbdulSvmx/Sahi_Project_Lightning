@@ -43,8 +43,12 @@ $sfm_act_sfmDesigner.addChildLine("Labor");
 _setValue(_textbox(0, _near(_span("Line Qty[2]"))), "3");
 _click(_span("Update"));
 
+$sfm_act_sfmDesigner.addChildLine("Expenses");
+_setValue(_textbox(0, _near(_span("Line Qty[3]"))), "4");
+_click(_span("Update"));
+
 $sfm_act_sfmDesigner.addChildLine("Travel");
-_setValue(_textbox(0, _near(_span("Line Qty[3]"))), "5");
+_setValue(_textbox(0, _near(_span("Line Qty[4]"))), "5");
 
 _click(_span("Update"));
 
