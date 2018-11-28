@@ -3,14 +3,37 @@
 var $scenario7_preRequisite = _testcase("scenario7_pre","Dynamic Response Checklist");
 $scenario7_preRequisite.start();
 _setSpeed($g_stepSpeed);
-var $sfmName = $bo_act_common.generateRandomName("SFM_Auto_");
+var $sfmName = "Sanity7_checklist";
+var $wizardObject="Work Order";
+var $wizardName="AutoRegression";
+var $wizardType="Output Document";
+var $profilename = $group_profilename;
+var $handOver="false";
+var $wizardCriteria=null;
+var $selectallChecklist = "false";
+var $includeskippedSection="true";
+$checklists = ["Sanity7_checklist"];
+$checklistversion = ["Last Version"];
+var $targetObjectName = "Work Order";
+
 var $templateName = $bo_act_common.generateRandomName("SFM_Auto_Template_");
 $bo_act_login.login($g_url, $appiumAdminUn, $appiumAdminPwd);
 $sfm_act_lightningConfig.switchToLightning();
+
+$ProcessStatus=$sfm_act_SFM.checkCustomProcess($sfmName);
+if($ProcessStatus==false){
+	
+
 $bo_act_navigation.navigateToSfmTransactionDesigner();
+
+
 _wait(10000);
+
+
 _click($bo_pg_sfmTransactionAndDesigner.btn_newSFM);
 _wait(3000);
+
+
 _setValue($bo_pg_sfmTransactionAndDesigner.txt_name, $sfmName);
 _setValue($bo_pg_sfmTransactionAndDesigner.txt_sfmTransactionId, "");
 _setSelected($sfm_pg_screenDesigner.sel_createSFMTransaction, "to generate a Checklist/Survey type of Process");
@@ -32,7 +55,7 @@ _click(_f("main").s_checkbox("Required[2]"));
 $bo_act_checklistdesigner.addQuestion("Text", "Which Division are you from ? default Answer:SVMX", false,"");
 _click($bo_pg_formDesigner.btn_save_close);
 _wait(6000);
-var $sfmName1 = $bo_act_common.generateRandomName("SFM_Auto_");
+var $sfmName1 = "Checklist_OPDOC";
 _click($bo_pg_sfmTransactionAndDesigner.btn_newSFM);
 _wait(3000);
 _setValue($bo_pg_sfmTransactionAndDesigner.txt_name, $sfmName1);
@@ -44,10 +67,38 @@ _setValue($sfm_pg_screenDesigner.txt_targetObject,"Wo");
 _wait(5000);
 _click($sfm_pg_screenDesigner.lbl_workOrder);
 _click(_f("main").s_checkbox("Checklist (Work Order)"));
+
+_wait(3000);
+
+
+_click(_f("main").tab("Template Designer"));
+_setValue(_f("main").s_textinput("Save template as"),$templateName);
+_setValue(_f("main").s_textinput("Input ID Here[4]"),$templateName);
+_click(_span("Source"));
+var $value = _readFile("/auto/sahi_pro/userdata/scripts/Sahi_Project_Lightning/scenario7.txt");
+_setValue(_textarea("cke_source cke_enable_context_menu"),$value);
+_click(_f("main").s_button("Save[4]"));
+/*_click(_f("main").tab("Advanced Options"));
+_click(_f("main").tab("Checklists"));
+if(_getValue(_f("main").s_checkbox("Select All"))!=false){
+	_click(_f("main").s_checkbox("Select All"));
+}
+_click(_f("main").s_checkbox("/CheckBox/").leftOf(_f("main").s_label($sfmName),20));
+_setSelected(_f("main").s_combobox("/Combo/").rightOf(_f("main").s_label($sfmName),20),"Last Version");*/
+
+_wait(6000);
+//_wait(6000);
+//function of adding the versions first,last and all versions for the checklsits in opdoc
+$sfm_pg_advancedOptions.AdvancedOptionsChecklist($selectallChecklist, $includeskippedSection,$checklists,$checklistversion);
+//_click($bo_pg_sfmTransactionAndDesigner.btn_saveAndclose);
+//_click($bo_pg_sfmTransactionAndDesigner.btn_saveAndclose);
+_click($bo_pg_formDesigner.btn_quickSave);
+//_click($bo_pg_formDesigner.btn_quickSave);
 _click(_f("main").tab("Target Object Update"));
 _click(_f("main").s_label("/Work Order/").near(_f("main").s_label("Target objects used in this SFM Transaction")));
 _click(_f("main").s_button("Add a row"));
 _click(_f("main").s_label("Click to add field"));
+_setValue($sfm_pg_sourceObjectUpdate.txt_quickFindSOU,"Billing Type");
 _doubleClick(_f("main").s_label("Billing Type"));
 _setSelected(_f("main").s_combobox("valuesCombo"), "Contract");
 _click(_f("main").s_button("Add a row"));
@@ -66,21 +117,25 @@ while($val<$maximum){
 	}
 _doubleClick(_f("main").s_label("Problem Description"));
 _setValue(_f("main").s_textinput("textip"),"Target Object Update");
-_click(_f("main").tab("Template Designer"));
-_setValue(_f("main").s_textinput("Save template as"),$templateName);
-_setValue(_f("main").s_textinput("Input ID Here[4]"),$templateName);
-_click(_span("Source"));
-var $value = _readFile("/auto/sahi_pro/userdata/scripts/Sahi_Project_Lightning/scenario7.txt");
-_setValue(_textarea("cke_source cke_enable_context_menu"),$value);
-_click(_f("main").s_button("Save[4]"));
-_click(_f("main").tab("Advanced Options"));
-_click(_f("main").tab("Checklists"));
-if(_getValue(_f("main").s_checkbox("Select All"))!=false){
-	_click(_f("main").s_checkbox("Select All"));
+
+_wait(9000);
+_click($bo_pg_sfmTransactionAndDesigner.btn_saveAndclose);
+
+//Adding opdoc to wizard
+$sfm_act_wizards.addToWizard($wizardObject,$wizardName, $wizardType,$sfmName1,$handOver,$profilename,$wizardCriteria);  
+
+
+
+//Setup App Permissions for Mobile App for the SFM Process created
+
+//$bo_act_SFMAppPermission.set_mobileapp_permissions($profilename, $targetObjectName, $sfmName);
+
+$bo_act_SFMAppPermission.set_mobileapp_permissions_generic($profilename, $targetObjectName, $sfmName, "Checklist");
+
+
+//Adding to Wizard
 }
-_click(_f("main").s_checkbox("/CheckBox/").leftOf(_f("main").s_label($sfmName),20));
-_setSelected(_f("main").s_combobox("/Combo/").rightOf(_f("main").s_label($sfmName),20),"Last Version");
-_click($bo_pg_formDesigner.btn_save_close);
+
 _writeFile("true", $appiumPath+$sahiIntermediatoryPath, true);
 
 $scenario7_preRequisite.end();

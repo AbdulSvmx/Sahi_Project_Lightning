@@ -3,20 +3,18 @@ _writeFile("false", $appiumPath+$sahiIntermediatoryPath, true);
 var $scenario2_preRequisite = _testcase("scenario2_pre","Explore Checklist");
 $scenario2_preRequisite.start();
 _setSpeed($g_stepSpeed);
-var $sfmName = $bo_act_common.generateRandomName("SFM_Auto_");
-var $checkboxTitle = $bo_act_common.generateRandomName("checkbox");
-var $dateTitle = $bo_act_common.generateRandomName("date");
-var $dateTimeTitle = $bo_act_common.generateRandomName("dateTime");
-var $multiSelectTitle = $bo_act_common.generateRandomName("multiSelect");
-var $numberTitle = $bo_act_common.generateRandomName("number");
-var $picklistTitle = $bo_act_common.generateRandomName("picklist");
-var $radioBtnTitle = $bo_act_common.generateRandomName("radioBtn");
-var $textTitle = $bo_act_common.generateRandomName("text");
-//$searchName = $bo_act_common.generateRandomName("Search_wo");
-//$searchName1 = $bo_act_common.generateRandomName("Search_acc");
-//$searchName2 = $bo_act_common.generateRandomName("Search_con");
+var $targetObjectName = "Work Order";
+var $sfmName = "Sanity2_Checklist";
+var $dateTitle = "Date Question";
+var $dateTimeTitle = "DateTime Question";
+var $numberTitle = "Number Question";
+var $textTitle = "Test Question";
+
 $bo_act_login.login($g_url, $appiumAdminUn, $appiumAdminPwd);
 $sfm_act_lightningConfig.switchToLightning();
+
+$ProcessStatus=$sfm_act_SFM.checkCustomProcess($sfmName);
+if($ProcessStatus==false){
 $bo_act_navigation.navigateToSfmTransactionDesigner();
 _wait(10000);
 _click($bo_pg_sfmTransactionAndDesigner.btn_newSFM);
@@ -33,15 +31,95 @@ _click($bo_pg_sfmTransactionAndDesigner.btn_qualifyingCriteriaAndFieldMapping);
 _click($bo_pg_sfmTransactionAndDesigner.btn_mappings);
 _setValue(_f("main").s_textinput("/textInput/").near(_f("main").tab("Field Map For Existing Records")),"SVMX");
 _click(_f("main").s_label("SVMXSTD: Map Work Order to Checklist"));
-$bo_act_checklistdesigner.addQuestion("Checkbox",$checkboxTitle,false,"");
-//$bo_act_checklistdesigner.addQuestion("Text",$textTitle,false,"");
+//$bo_act_checklistdesigner.addQuestion("Checkbox",$checkboxTitle,false,"");
+
+///create Static Picklist Question in section - No preFill and with response set
+
+var $sectionName2="Checklist Section Title";
+var $queType2="Picklist";
+var $queName2="Picklist Question";
+var $helpURL2="http://google.com/Doc";
+var $tag2="ch_Picklist_-01";
+var $addToLibAndForm2=true;
+var $queCommonDetails2=[$queType2,$queName2,$helpURL2,$tag2,$addToLibAndForm2];
+var $preFillFromWO2=false;
+var $responseSet2="Create New";
+var $responseSetName2=$bo_act_common.generateRandomName("ch_respSet_");;
+var $ansValueSet2=["PicklOne","PickTwo","PickThree"];
+var $defaultval2=[true, false, false];
+var $default2;
+var $picklistQueDetails2=[$preFillFromWO2,$default2,$responseSet2,$responseSetName2,$ansValueSet2,$defaultval2];
+$sfm_act_formDesigner.createCheckListQuestion($sectionName2, $queCommonDetails2, $picklistQueDetails2);
+
+
+//create Static Radio Button Question in section - No preFill and with response set
+var $sectionName3="Checklist Section Title";
+var $queType3="Radio Button";
+var $queName3="RadioButton Question";
+var $helpURL3="http://google.com/Doc";
+var $tag3="ch_Picklist_-01";
+var $addToLibAndForm3=true;
+var $queCommonDetails3=[$queType3,$queName3,$helpURL3,$tag3,$addToLibAndForm3];
+var $preFillFromWO3=false;
+var $responseSet3="Create New";
+var $responseSetName3=$bo_act_common.generateRandomName("ch_respSet_");;
+var $ansValueSet3=["RadioOne","RadioTwo","RadioThree"];
+var $defaultval3=[true, false, false];
+var $default3;
+var $picklistQueDetails3=[$preFillFromWO3,$default3,$responseSet3,$responseSetName3,$ansValueSet3,$defaultval3];
+$sfm_act_formDesigner.createCheckListQuestion($sectionName3, $queCommonDetails3, $picklistQueDetails3);
+_wait(5000);
+
+//create Static Checkbox Question in section - response Set
+var $queType4="Checkbox";
+var $sectionName4="Checklist Section Title";
+var $queName4="Checkbox Question";
+var $helpURL4="http://google.com/Doc";
+var $tag4="ch_Checkbox_-01";
+var $addToLibAndForm4=true;
+var $queCommonDetails4=[$queType4,$queName4,$helpURL4,$tag4,$addToLibAndForm4];
+var $responseSet4="Create New";
+var $responseSetName4=$bo_act_common.generateRandomName("ch_resSet_");
+var $ansValueSet4=["CheckBoxOne","CheckBoxTwo","CheckBoxThree"];
+var $defaultval4=[true,false,false];
+
+var $chkQueDetails4=[$responseSet4,$responseSetName4,$ansValueSet4,$defaultval4];
+$sfm_act_formDesigner.createCheckListQuestion($sectionName4, $queCommonDetails4, $chkQueDetails4);
+_wait(5000);
+
+//create Static Multi Picklist Question in section - response Set
+var $queType5="Multi-select Picklist";
+var $sectionName5="Checklist Section Title";
+var $queName5="MultiPicklist Question";
+var $helpURL5="http://google.com/Doc";
+var $tag5="ch_Checkbox_-01";
+var $addToLibAndForm5=true;
+var $queCommonDetails5=[$queType5,$queName5,$helpURL5,$tag5,$addToLibAndForm5];
+var $responseSet5="Create New";
+var $responseSetName5=$bo_act_common.generateRandomName("ch_resSet_");
+var $ansValueSet5=["MultiOn","MultiTwo","MultiThree"];
+var $defaultval5=[true,true,false];
+var $chkQueDetails5=[$responseSet5,$responseSetName5,$ansValueSet5,$defaultval5];
+$sfm_act_formDesigner.createCheckListQuestion($sectionName5, $queCommonDetails5, $chkQueDetails5);
+_wait(5000);
+
+$bo_act_checklistdesigner.addQuestion("Text",$textTitle,false,"");
 //$bo_act_checklistdesigner.addQuestion("Picklist",$picklistTitle,false,"");
 //$bo_act_checklistdesigner.addQuestion("Multi-select Picklist",$multiSelectTitle,false,"");
-//$bo_act_checklistdesigner.addQuestion("Date Time",$dateTimeTitle,false,"");
-//$bo_act_checklistdesigner.addQuestion("Date",$dateTitle,false,"");
-//$bo_act_checklistdesigner.addQuestion("Number",$numberTitle,false,"");
+$bo_act_checklistdesigner.addQuestion("Date Time",$dateTimeTitle,false,"");
+$bo_act_checklistdesigner.addQuestion("Date",$dateTitle,false,"");
+$bo_act_checklistdesigner.addQuestion("Number",$numberTitle,false,"");
 //$bo_act_checklistdesigner.addQuestion("Radio Button",$radioBtnTitle,false,"");
 //$bo_act_navigation.navigateToSfmSearchDesigner();
+
+//Setup App Permissions for Mobile App for the SFM Process created
+var $profilename = $group_profilename;
+//$bo_act_SFMAppPermission.set_mobileapp_permissions($profilename, $targetObjectName, $sfmName);
+
+$bo_act_SFMAppPermission.set_mobileapp_permissions_generic($profilename, $targetObjectName, $sfmName, "Checklist");
+
+}
+
 //$sfm_act_search.newCustomSearch($searchName,"Work Order");
 //_wait(3000);
 //_click(_button("Save & Close"));

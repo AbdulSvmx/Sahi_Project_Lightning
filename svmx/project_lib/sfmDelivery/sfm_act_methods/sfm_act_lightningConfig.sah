@@ -573,7 +573,7 @@ if($lookUpLabels.length > 0){
 			_click(_span("deleteIcon",_near(_span($lookUpLabels[$i]))));
 		}
 		_setValue(_textbox("/"+$lookUpLabels[$i]+"/"),$lookUpValues[$i]);
-		_keyPress(_textbox($lookUpLabels[$i]),13);
+		_keyPress(_textbox("/"+$lookUpLabels[$i]+"/"),13);
 		_click(_link($lookUpValues[$i]));
 	}
 }

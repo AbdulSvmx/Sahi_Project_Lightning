@@ -247,7 +247,7 @@ else {
 //Verify field maps for the existing records for child.
 $bo_act_navigation.navigateToCreatedRecordUsingGlobalSearch($wlNumber);
 $textLabels = ["Received City","Date Received"];
-$textValues = ["Srinagar from value map",$todayDate];
+$textValues = ["Mysuru","11/11/2018"];
 $res = $sfm_act_lightningConfig.verifyValues($textLabels, $textValues, [], [], [], [], [], [], [], [], [],[],[],[],[],[],[],[],[],[],[]);
 _assertTrue($res);
 if($res){

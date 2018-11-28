@@ -4,6 +4,16 @@ var $bvt_tc_002_create_quote_from_work_order = _testcase("bvt_tc_002_create_quot
 
 $bvt_tc_002_create_quote_from_work_order.start();
 
+
+
+		//Create Product
+		$objName= "Product2";
+		$productName=$bo_act_common.generateRandomName("swat_Prod_");
+		$obJson = "{\"Name\":\""+$productName+"\",\"ProductCode\":\""+$productName+"\",\""+$orgnamespace+"__Product_Line__c\":\"Storage\",\""+$orgnamespace+"__Product_Type__c\":\"Consumable\"}";
+		$filterValue=$sfm_act_restApiMethods.postRestApi($swat_un, $swat_pwd, $swat_ClientId, $swat_ConsumerSecret, $swat_OrgInstance,$objName,$obJson,"POST");
+		_log($productName);
+
+
 var $sfmName = "Create Quote from Work Order";
 var $wizardObject ="Work Order";
 var $woNumber;
@@ -32,51 +42,21 @@ _click(_textbox(0,_near(_span("Status"))));
 _click(_listItem("Presented"));
 _setValue(_textbox(0,_near(_span("Valid Until"))),"11/23/2019");
 
-// Create a product 
-//$objName= "Product2";
-//$productName=$bo_act_common.generateRandomName("Prod_RS5338_");
-//$obJson = "{\"Name\":\""+$productName+"\",\"ProductCode\":\""+$productName+"\",\"IsActive\":\"true\"}";
-//$proID=$sfm_act_restApiMethods.postRestApi($swat_un, $swat_pwd, $swat_ClientId, $swat_ConsumerSecret, $swat_OrgInstance,$objName,$obJson,"POST");
-//_log($productName); 
-//add line to Parts
-//$sfm_act_sfmDesigner.addChildLine("Parts");
-// Fill Product, Qty, Unit price thru extended edit
-// Add one more Part line
-// Similarly add 2 Labor line with Qty and Unit Price
-//add line to Labor
- //$sfm_act_sfmDesigner.addChildLine("Labor");
-// Add 2 Expense line with Qty and Unit Price
-//add line to Expenses
-//$sfm_act_sfmDesigner.addChildLine("Expenses");
-_wait(3000);
-//_wait(8000,_isVisible($sfm_pg_sfmDesigner.btn_deliveryPartsTab));
-$sfm_act_createCustomWizard.addParts("Compaq");
-$sfm_act_createCustomWizard.addLabor("Compaq");
-$sfm_act_createCustomWizard.addExpenses("Airfare");
-_click($sfm_pg_sfmDesigner.btn_deliverySave);
-_wait(10000);
+$sfm_act_sfmDesigner.addChildLine("Parts",$productName);
+_setValue(_textbox(0, _near(_span("Qty[1]"))), "2");
+_setValue(_textbox(0, _near(_span("Unit Price[1]"))), "2000");
+_click(_span("Update"));
+
+$sfm_act_sfmDesigner.addChildLine("Labor");
+_setValue(_textbox(0, _near(_span("Qty[2]"))), "3");
+_setValue(_textbox(0, _near(_span("Unit Price[2]"))), "3000");
+_click(_span("Update"));
+
+$sfm_act_sfmDesigner.addChildLine("Expense");
+_setValue(_textbox(0, _near(_span("Qty[3]"))), "4");
+_setValue(_textbox(0, _near(_span("Unit Price[3]"))), "4000");
+_click(_span("Update"));
 
 _click($sfm_pg_sfmDesigner.btn_deliverySave);
-
-
-
-/*
-
-_setValue($sfm_pg_sfmDesigner.txt_eeLineQty,"6");
-_setValue($sfm_pg_sfmDesigner.txt_eeReceivedStreet,"MG Road");
-_click($sfm_pg_sfmDesigner.txt_eeActivityType);
-_click(_listItem("Service"));
-_click($sfm_pg_sfmDesigner.btn_eeUpdate);
-
-
-
-_setValue($sfm_pg_sfmDesigner.txt_eeLineQty,"6");
-_setValue($sfm_pg_sfmDesigner.txt_eeReceivedStreet,"MG Road");
-_click($sfm_pg_sfmDesigner.txt_eeExpenseType);
-_click(_listItem("Entertainment"));
-_click($sfm_pg_sfmDesigner.btn_eeUpdate);
-
-
-*/
 
 $bvt_tc_002_create_quote_from_work_order.end();
