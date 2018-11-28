@@ -4,14 +4,12 @@ var $bvt_tc_002_create_quote_from_work_order = _testcase("bvt_tc_002_create_quot
 
 $bvt_tc_002_create_quote_from_work_order.start();
 
-
-
-		//Create Product
-		$objName= "Product2";
-		$productName=$bo_act_common.generateRandomName("swat_Prod_");
-		$obJson = "{\"Name\":\""+$productName+"\",\"ProductCode\":\""+$productName+"\",\""+$orgnamespace+"__Product_Line__c\":\"Storage\",\""+$orgnamespace+"__Product_Type__c\":\"Consumable\"}";
-		$filterValue=$sfm_act_restApiMethods.postRestApi($swat_un, $swat_pwd, $swat_ClientId, $swat_ConsumerSecret, $swat_OrgInstance,$objName,$obJson,"POST");
-		_log($productName);
+//Create Product
+$objName= "Product2";
+$productName=$bo_act_common.generateRandomName("swat_Prod_");
+$obJson = "{\"Name\":\""+$productName+"\",\"ProductCode\":\""+$productName+"\",\""+$orgnamespace+"__Product_Line__c\":\"Storage\",\""+$orgnamespace+"__Product_Type__c\":\"Consumable\"}";
+$filterValue=$sfm_act_restApiMethods.postRestApi($swat_un, $swat_pwd, $swat_ClientId, $swat_ConsumerSecret, $swat_OrgInstance,$objName,$obJson,"POST");
+_log($productName);
 
 
 var $sfmName = "Create Quote from Work Order";
