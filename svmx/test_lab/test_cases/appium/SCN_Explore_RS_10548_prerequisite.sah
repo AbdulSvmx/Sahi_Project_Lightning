@@ -16,6 +16,10 @@ var $rs_10548 = _testcase("SCN_Explore_4_RS-10548 Verify fields displayed & fiel
 	var $searchObjects1 = ["Work Order", "Work Order","Work Order - Site"];
 	var $searchFields1 = ["Work Order Number","Country","Account"];
 	
+	var $sortObjects1 = ["Work Order"];
+	var $sortFields1 = ["Work Order Number"];
+	var $sortOrder = "Descending";
+
 	//Login to App and navigate to sfm transaction and designer page
 	_setSpeed($g_stepSpeed);
 	$bo_act_login.login($g_url, $appiumAdminUn, $appiumAdminPwd);
@@ -33,7 +37,11 @@ var $rs_10548 = _testcase("SCN_Explore_4_RS-10548 Verify fields displayed & fiel
 		_setSelected(_select(0,_near(_cell("1",_near(_tableHeader("Search Object"))))),$searchObject1);
 		_wait(8000);
 		$sfm_act_search.addDisplayFields($displayObjects1, $displayFields1);
+		_wait(3000);
 		$sfm_act_search.addSearchFields($searchObjects1, $searchFields1);
+		_wait(3000);
+		$sfm_act_search.sortSearchFields($sortObjects1, $sortFields1, $sortOrder);	
+		
 		
 		//Save the search
 		_click($sfm_pg_search.btn_objectSave);
@@ -42,7 +50,7 @@ var $rs_10548 = _testcase("SCN_Explore_4_RS-10548 Verify fields displayed & fiel
 		_wait(8000);
 	}	
 		// Removing Work Order from Download Criteria
-		$bo_act_SFMAppPermission.setDownloadCriteriaOwnShipType("My Records",$bo_pg_sfmAppPermissionD.chkbox_workorder);
+		$bo_act_SFMAppPermission.setDownloadCriteriaOwnShipType("All Records",$bo_pg_sfmAppPermissionD.chkbox_workorder);
 		_wait(8000);
 		
 	

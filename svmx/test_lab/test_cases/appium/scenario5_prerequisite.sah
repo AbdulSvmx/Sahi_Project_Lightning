@@ -5,14 +5,13 @@
  */
 _writeFile("false", $appiumPath+$sahiIntermediatoryPath, true);
 var $bProcessStatus = false;
-var $rs_10490 = _testcase("scenario5_prerequisite","");
-$rs_10490.start();
+var $san_SCENARIO5 = _testcase("scenario5_prerequisite","");
+$san_SCENARIO5.start();
 var $sfmNameToBeCloned = "Manage Work Order Lines - Usage";
-//var $sfmName = $bo_act_common.generateRandomName("scenario5");
 var $sfmName = "SanityScenario5";
 var $isCustom = false;
 var $sfmTemplate = "SVMXSTD: Manage WO Usage Lines";
-var $sfmTemplateSaveAsName = "SanityScenario5Temp1";
+var $sfmTemplateSaveAsName = "SanityScenario5";
 var $containerName = ["Order Status","Parts","Labor","Expenses","Travel"];
 var $fieldName = ["Scheduled Date","Received Street","Received Street","Received Street","Received Street"];
 
@@ -20,7 +19,6 @@ var $wizardObject ="Work Order";
 
 //Variables for rule 1
 var $targetObject="Work Order";
-//var $rulename =$bo_act_common.generateRandomName("10490RuleAll_");
 var $rulename ="SanityScenario5";
 var $ruleDescription ="Rule is billing type cannot be loan";
 var $fieldArray = ["Billing Type"];
@@ -42,6 +40,7 @@ $bo_act_login.login($g_url, $appiumAdminUn, $appiumAdminPwd);
 $sfm_act_lightningConfig.switchToLightning(); 
 
 
+
 //clone tmd016
 $bProcessStatus=$sfm_act_SFM.dvrScenario5($sfmNameToBeCloned,$sfmName,$isCustom, $sfmTemplateSaveAsName, $sfmTemplate, $fieldName, $containerName,$bProcessStatus);
 
@@ -59,4 +58,6 @@ else
 {
 	_log("As process exists, process creation is not required");
 }
+
+$san_SCENARIO5.end();
 _writeFile("true", $appiumPath+$sahiIntermediatoryPath, true);
