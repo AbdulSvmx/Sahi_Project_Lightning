@@ -10,10 +10,10 @@ var $rs_10548 = _testcase("SCN_Explore_4_RS-10548 Verify fields displayed & fiel
 	var $searchName = "RS_10548 Multi Field WO Search";
 	
 	var $searchObject1 = "Work Order";
-	var $displayObjects1 = ["Work Order", "Work Order", "Work Order - Account"];
+	var $displayObjects1 = ["Work Order", "Work Order", "Work Order"];
 	var $displayFields1 = ["Work Order Number","Billing Type","Billing City"];
 
-	var $searchObjects1 = ["Work Order", "Work Order","Work Order - Site"];
+	var $searchObjects1 = ["Work Order", "Work Order","Work Order"];
 	var $searchFields1 = ["Work Order Number","Country","Account"];
 	
 	var $sortObjects1 = ["Work Order"];
