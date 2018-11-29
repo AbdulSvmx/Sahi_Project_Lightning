@@ -28,7 +28,7 @@ var $wizardType="SFM";
 var $profile="auto group profile";
 var $handOver="false";
 var $wizardCriteria=null;
-	$bo_act_login.login($g_url, $appiumAdminUn, $appiumAdminPwd);
+$bo_act_login.login($g_url, $appiumAdminUn, $appiumAdminPwd);
 $sfm_act_lightningConfig.switchToLightning();
 
 $mappingField = ["Account","Component","Product","Scheduled Date","Scheduled Date Time","Record ID","Record Type ID"];
