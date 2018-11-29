@@ -216,7 +216,7 @@ $workorderid5=$sfm_act_restApiMethods.postRestApi($appiumAdminUn,$appiumAdminPwd
 //get the wo
 $WOname5 =$sfm_act_restApiMethods.getRestApi($appiumAdminUn,$appiumAdminPwd,$appiumclient_id,$appiumclient_secret,$appiumorginstance,"GET", $objName, $columnName, $filter, $workorderid5);
 _log($WOname5);
-$excel.insertUnderColumn("/auto/SVMX_Catalyst/fsaautomation/resources/TestData.xlsx", "RS_10515", "Data5",$WOname7 ,"2");
+$excel.insertUnderColumn("/auto/SVMX_Catalyst/fsaautomation/resources/TestData.xlsx", "RS_10515", "Data5",$WOname5 ,"2");
 
 var $now = new Date();
 _log( $now ); // shows current date/time
