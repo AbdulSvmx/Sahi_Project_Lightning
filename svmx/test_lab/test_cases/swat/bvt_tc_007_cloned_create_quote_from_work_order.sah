@@ -1,80 +1,71 @@
 //Author	:- 	Shashikala Kamath
 
 var $bvt_tc_007_cloned_create_quote_from_work_order = _testcase("bvt_tc_007_cloned_create_quote_from_work_order","Verify the functionality of SFM type - from Source Object to create new header and child records");
-
 $bvt_tc_007_cloned_create_quote_from_work_order.start();
-
-var $sfmNameToBeCloned = "Create Quote from Work Order";
-var $sfmName = $bo_act_common.generateRandomName("swat_cloned_source_to_target_all_");
-var $isCustom = false;
-var $sfmTemplate = "SVMXSTD: Create Quote from WO";
-var $sfmTemplateSaveAsName = $sfmName;
-//var $containerName = ["Order Status","Parts","Labor","Expenses"];
-//var $fieldName = ["Scheduled Date","Received Street","Received Street","Received Street"];
-
-
-var $wizardObject ="Work Order";
-var $woNumber;
-
 _setSpeed($g_stepSpeed);
-$bo_act_login.login($g_url,$swat_un,$swat_pwd );
-$sfm_act_lightningConfig.switchToLightning();
 
-//Create WO through REST API ******
-var $woNumber = $sfm_act_createCustomWizard.createBlankWoFromRest($swat_un, $swat_pwd, $swat_ClientId, $swat_ConsumerSecret, $swat_OrgInstance);
-
-//$sfm_act_SFM.cloneTDM016($sfmNameToBeCloned,$sfmName,$isCustom, $sfmTemplateSaveAsName, $sfmTemplate, $fieldName, $containerName);
-$sfm_act_SFM.partsNotMandatory();
-$sfm_act_SFM.partsMultiAdd("--None--");
-
-//add the process to wizard
-$sfm_act_wizards.addToWizard($wizardObject, $wizardName[0], $wizardType[1], $sfmName);  
-_wait(3000); 
-
-//Navigate to the WO for validation
-$bo_act_navigation.navigateToCreatedRecordUsingGlobalSearch($woNumber);
-$sfm_act_createCustomWizard.clickWizardBtn($sfmName);
-
-//DVR validation on delivery
-//add line to Parts
-$sfm_act_sfmDesigner.addChildLine("Parts");
+	//Create Product
+	$objName= "Product2";
+	$productName=$bo_act_common.generateRandomName("swat_Prod_");
+	$obJson = "{\"Name\":\""+$productName+"\",\"ProductCode\":\""+$productName+"\",\""+$orgnamespace+"__Product_Line__c\":\"Storage\",\""+$orgnamespace+"__Product_Type__c\":\"Consumable\"}";
+	$filterValue=$sfm_act_restApiMethods.postRestApi($swat_un, $swat_pwd, $swat_ClientId, $swat_ConsumerSecret, $swat_OrgInstance,$objName,$obJson,"POST");
+	_log($productName);
 
 
+		var $sfmNameToBeCloned = "Create Quote from Work Order";
+		var $sfmName = $bo_act_common.generateRandomName("swat_cloned_source_to_target_all_");
+		var $isCustom = false;
+		var $sfmTemplate = "SVMXSTD: Create Quote from WO";
+		var $sfmTemplateSaveAsName = $sfmName;
+		var $containerName = [];
+		var $fieldName = [];
+		var $wizardObject ="Work Order";
+		var $woNumber;
 
-/*  *******************
-_setValue($sfm_pg_sfmDesigner.txt_eeLineQty,"6");
-_setValue($sfm_pg_sfmDesigner.txt_eeReceivedStreet,"MG Road");
-_click($sfm_pg_sfmDesigner.btn_eeUpdate);
+	$bo_act_login.login($g_url,$swat_un,$swat_pwd );
+	$sfm_act_lightningConfig.switchToLightning();
 
-//add line to Labor
+	//Create WO through REST API ******
+	var $woNumber = $sfm_act_createCustomWizard.createBlankWoFromRest($swat_un, $swat_pwd, $swat_ClientId, $swat_ConsumerSecret, $swat_OrgInstance);
+
+	$sfm_act_SFM.cloneTDM016($sfmNameToBeCloned,$sfmName,$isCustom, $sfmTemplateSaveAsName, $sfmTemplate, $fieldName, $containerName);
+	_click($bo_pg_sfmTransactionAndDesigner.btn_saveAndclose);
+	
+	//add the process to wizard
+	$sfm_act_wizards.addToWizard($wizardObject, $wizardName[0], $wizardType[1], $sfmName);  
+	_wait(3000); 
+
+	//Navigate to the WO for validation
+	$bo_act_navigation.navigateToCreatedRecordUsingGlobalSearch($woNumber);
+	$sfm_act_createCustomWizard.clickWizardBtn($sfmName);
+
+	//DVR validation on delivery
+	//add line to Parts
+	//$sfm_act_sfmDesigner.addChildLine("Parts");
+
+//_click($sfm_pg_wizardWindow.lookup_account);
+_setValue($sfm_pg_sfmDesigner.txt_headerAccount,"Acme");
+//_click($sfm_pg_wizardWindow.lookup_contact);
+_setValue($sfm_pg_sfmDesigner.txt_headerContact,"Acme Contact");
+_click(_textbox(0,_near(_span("Status"))));
+_click(_listItem("Presented"));
+_setValue(_textbox(0,_near(_span("Valid Until"))),"11/23/2019");
+
+$sfm_act_sfmDesigner.addChildLine("Parts",$productName);
+_setValue(_textbox(0, _near(_span("Qty[1]"))), "2");
+_setValue(_textbox(0, _near(_span("Unit Price[1]"))), "2000");
+_click(_span("Update"));
+
 $sfm_act_sfmDesigner.addChildLine("Labor");
+_setValue(_textbox(0, _near(_span("Qty[2]"))), "3");
+_setValue(_textbox(0, _near(_span("Unit Price[2]"))), "3000");
+_click(_span("Update"));
 
-_setValue($sfm_pg_sfmDesigner.txt_eeLineQty,"6");
-_setValue($sfm_pg_sfmDesigner.txt_eeReceivedStreet,"MG Road");
-_click($sfm_pg_sfmDesigner.txt_eeActivityType);
-_click(_listItem("Service"));
-_click($sfm_pg_sfmDesigner.btn_eeUpdate);
+$sfm_act_sfmDesigner.addChildLine("Expense");
+_setValue(_textbox(0, _near(_span("Qty[3]"))), "4");
+_setValue(_textbox(0, _near(_span("Unit Price[3]"))), "4000");
+_click(_span("Update"));
 
-//add line to Expenses
-$sfm_act_sfmDesigner.addChildLine("Expenses");
-
-_setValue($sfm_pg_sfmDesigner.txt_eeLineQty,"6");
-_setValue($sfm_pg_sfmDesigner.txt_eeReceivedStreet,"MG Road");
-_click($sfm_pg_sfmDesigner.txt_eeExpenseType);
-_click(_listItem("Entertainment"));
-_click($sfm_pg_sfmDesigner.btn_eeUpdate);
-
-//add line to Travel
-$sfm_act_sfmDesigner.addChildLine("Travel");
-
-_setValue($sfm_pg_sfmDesigner.txt_eeLineQty,"6");
-_setValue($sfm_pg_sfmDesigner.txt_eeReceivedStreet,"MG Road");
-_setValue($sfm_pg_sfmDesigner.txt_eeStartDateTime,$bo_act_common.currentDate("\/"));
-_setValue($sfm_pg_sfmDesigner.txt_eeEndDateTime,$bo_act_common.getPastDate("1", "\/"));
-_click($sfm_pg_sfmDesigner.btn_eeUpdate);
-
-*/
-//_click($sfm_pg_sfmDesigner.btn_deliveryQuickSave);
-
+_click($sfm_pg_sfmDesigner.btn_deliverySave);
 
 $bvt_tc_007_cloned_create_quote_from_work_order.end();

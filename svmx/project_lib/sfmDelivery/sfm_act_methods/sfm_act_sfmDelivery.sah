@@ -22,7 +22,11 @@ var $sfm_act_sfmDesigner = new function sfm_act_sfmDesigner() {
 		}else if($childName == 'Expenses'){
 			_click($sfm_pg_sfmDesigner.btn_deliveryExpenseTab);
 			_wait(3000,_isVisible($sfm_pg_sfmDesigner.btn_deliveryAddRowExpenses));
-			_click($sfm_pg_sfmDesigner.btn_deliveryAddRowExpenses);			
+			_click($sfm_pg_sfmDesigner.btn_deliveryAddRowExpenses);	
+		}else if($childName == 'Expense'){
+			_click($sfm_pg_sfmDesigner.btn_deliveryExpenTab);
+			_wait(3000,_isVisible($sfm_pg_sfmDesigner.btn_deliveryAddRowExpense));
+			_click($sfm_pg_sfmDesigner.btn_deliveryAddRowExpense);		
 		}else{
 			_click($sfm_pg_sfmDesigner.btn_deliveryTravelTab);
 			_wait(3000,_isVisible($sfm_pg_sfmDesigner.btn_deliveryAddRowTravel));

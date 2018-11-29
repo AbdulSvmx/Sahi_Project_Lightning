@@ -3,6 +3,7 @@ _writeFile("false", $appiumPath+$sahiIntermediatoryPath, true);
 var $scenario2_preRequisite = _testcase("scenario2_pre","Explore Checklist");
 $scenario2_preRequisite.start();
 _setSpeed($g_stepSpeed);
+var $targetObjectName = "Work Order";
 var $sfmName = "Sanity2_Checklist";
 var $dateTitle = "Date Question";
 var $dateTimeTitle = "DateTime Question";
@@ -110,6 +111,12 @@ $bo_act_checklistdesigner.addQuestion("Date",$dateTitle,false,"");
 $bo_act_checklistdesigner.addQuestion("Number",$numberTitle,false,"");
 //$bo_act_checklistdesigner.addQuestion("Radio Button",$radioBtnTitle,false,"");
 //$bo_act_navigation.navigateToSfmSearchDesigner();
+
+//Setup App Permissions for Mobile App for the SFM Process created
+var $profilename = $group_profilename;
+//$bo_act_SFMAppPermission.set_mobileapp_permissions($profilename, $targetObjectName, $sfmName);
+
+$bo_act_SFMAppPermission.set_mobileapp_permissions_generic($profilename, $targetObjectName, $sfmName, "Checklist");
 
 }
 
