@@ -50,11 +50,11 @@ _setValue(_textbox(0, _near(_span("Line Qty[2]"))), "3");
 //_setValue(_textbox(0, _near(_span("Unit Price[2]"))), "3000");
 _click(_span("Update"));
 
-//$sfm_act_sfmDesigner.addChildLine("Expenses");
-//_click(_textbox(0,_near(_span("Expense Type"))));
-//_click(_listItem("Airfare"));
-//_setValue(_textbox(0, _near(_span("Line Qty[3]"))), "4");
-//_click(_span("Update"));
+$sfm_act_sfmDesigner.addChildLine("Expenses");
+_click(_textbox(0,_near(_span("Expense Type"))));
+_click(_listItem("Airfare"));
+_setValue(_textbox(0, _near(_span("Line Qty[4]"))), "4");
+_click(_span("Update"));
 
 $sfm_act_sfmDesigner.addChildLine("Travel");
 _setValue(_textbox(0, _near(_span("Line Qty[3]"))), "5");
