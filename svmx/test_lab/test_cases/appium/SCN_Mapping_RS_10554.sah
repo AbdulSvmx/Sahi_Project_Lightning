@@ -25,7 +25,7 @@ var $part="Parts";
 var $wizardObject="Installed Product";
 var $wizardName="Automation IB Wizard";
 var $wizardType="SFM";
-var $profile="auto group profile";
+var $profile=$group_profilename;
 var $handOver="false";
 var $wizardCriteria=null;
 $bo_act_login.login($g_url, $appiumAdminUn, $appiumAdminPwd);

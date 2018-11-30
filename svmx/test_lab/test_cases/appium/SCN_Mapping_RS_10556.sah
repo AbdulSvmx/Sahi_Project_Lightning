@@ -15,18 +15,17 @@ var $sfmName = "RS_10556_mapping";
 var $isCustom = false;
 var $sfmTemplate = "SVMXSTD: Manage WO Usage Lines";
 var $sfmTemplateSaveAsName = $sfmName+$processName;
-//var $containerName = ["Order Status","Order Status","Order Status","Order Status","Order Status","Order Status","Order Status","Order Status","Order Status","Order Status","Order Status","Order Status","Order Status","Parts","Parts","Parts","Parts","Parts","Parts","Parts"];
-//var $fieldName = ["Work Order Number","Contact","Customer Down","Scheduled Date","Scheduled Date Time","Problem Description","Email","URL","Number","Phone","Currency","Site","Closed By","Record Type ID","Line Type","Date Required","Start Date and Time","To Location","Closed By","Canceled By"];
-//var $mapName = $processName + "mp";
+var $containerName = ["Order Status","Order Status","Order Status","Order Status","Order Status","Order Status","Order Status","Order Status","Order Status","Order Status","Order Status","Order Status","Order Status","Parts","Parts","Parts","Parts","Parts","Parts","Parts"];
+var $fieldName = ["Work Order Number","Contact","Customer Down","Scheduled Date","Scheduled Date Time","Problem Description","Email","URL","Number","Phone","Currency","Site","Closed By","Record Type ID","Line Type","Date Required","Start Date and Time","To Location","Closed By","Canceled By"];
+var $mapName = $processName + "mp";
 
-var $containerName = [];
-var $fieldName = [];
+
 
 
 var $wizardObject="Work Order";
 var $wizardName="AutoRegression";
 var $wizardType="SFM";
-var $profile="auto group profile";
+var $profile=$group_profilename;
 var $handOver="false";
 var $wizardCriteria=null;
 
@@ -36,7 +35,7 @@ var $restcontactlastname="Auto";
 var $restproductname="P10556_Auto";
 var $restlocationname="L10556_Auto";
 
-/*$objName= "Account";
+$objName= "Account";
 $obJson = "{\"Name\":\""+$restAccName+"\"}"; 
 $columnName = "Name";
 $filter="id";
@@ -120,19 +119,19 @@ $filter="id";
 $eventid=$sfm_act_restApiMethods.postRestApi($appiumAdminUn,$appiumAdminPwd,$appiumclient_id,$appiumclient_secret,$appiumorginstance,$objName,$obJson,"POST");
 //get the event name
 $eventname =$sfm_act_restApiMethods.getRestApi($appiumAdminUn,$appiumAdminPwd,$appiumclient_id,$appiumclient_secret,$appiumorginstance,"GET", $objName, $columnName, $filter, $eventid);
-_log($eventname);*/
+_log($eventname);
 
 
 $bo_act_login.login($g_url, $appiumAdminUn, $appiumAdminPwd);
 $sfm_act_lightningConfig.switchToLightning();
 //***********************************************************************************************************************//
-/*var $objectName="Work Order";
+var $objectName="Work Order";
 var $customFieldsNames = ["Currency","Email","Number","Phone","URL"];
 var $missingStdDataTypes=["Currency(18, 0)","Email","Number(18, 0)","Phone","URL"];
 var $multiPicklistValues=[];
 //Create custom fields if needed
 $sfm_act_lightningConfig.addCustomFields($objectName, $customFieldsNames, $missingStdDataTypes, $sfd_myDomain,$multiPicklistValues);
-*/
+
 
 //***********************************************************************************************************************//
 $value =$sfm_act_SFM.checkprocessexists($sfmName,$isCustom);//to check process exists or not
