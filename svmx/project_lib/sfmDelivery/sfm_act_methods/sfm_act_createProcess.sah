@@ -87,6 +87,14 @@ this.cloneSFM_addfields = function($sfmNameToBeCloned, $sfmName, $isCustom, $sfm
 	_click($bo_pg_sfmTransactionAndDesigner.btn_saveAndclose);
 	_wait(3000);
 };
-}
+
+this.searchCustomSfm = function(){
+	_click($bo_pg_sfmTransactionAndDesigner.btn_yourCustomSfmTransactions);
+	_setValue($bo_pg_sfmTransactionAndDesigner.txt_yourCustomSfmTransactionsQuickFind,$sfmName);
+	_set($var,_isVisible(_f("main").s_label($sfmName)));
+	return $var;
+	
+};
+};
 	
 

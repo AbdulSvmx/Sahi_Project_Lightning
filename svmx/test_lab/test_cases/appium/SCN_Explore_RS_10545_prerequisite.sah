@@ -4,10 +4,10 @@
  * PRE Requisites to be run in the org before running other scripts - LIGHTNING CODE
  */
 _writeFile("false", $appiumPath+$sahiIntermediatoryPath, true);
-var $rs_10543 = _testcase("SCN_Explore_RS-10543  Verify the pagination view & DOD of a record on SFM search.");
-	$rs_10543.start();
+var $rs_10545 = _testcase("SCN_Explore_RS-10545 Verify the pagination view & DOD of a record on SFM search.");
+	$rs_10545.start();
 	var $bSearchStatus = false;
-	var $searchName = "RS_10543 SFM Search for Multi Page View";
+	var $searchName = "RS_10545 SFM Search for Multi Page View";
 	
 	var $searchObject1 = "Work Order";
 	var $displayObjects1 = ["Work Order", "Work Order"];
@@ -16,6 +16,8 @@ var $rs_10543 = _testcase("SCN_Explore_RS-10543  Verify the pagination view & DO
 	var $searchObject2 = "Case";
 	var $displayObjects2 = ["Case", "Case"];
 	var $displayFields2 = ["Case Number","Billing Type"];
+	
+	
 	
 	var $sfmName = "Add/Edit Case Lines";
 	var $wizardObject="Case";
@@ -46,8 +48,7 @@ var $rs_10543 = _testcase("SCN_Explore_RS-10543  Verify the pagination view & DO
 		_setSelected(_select(0,_near(_cell("1",_near(_tableHeader("Search Object"))))),$searchObject1);
 		_wait(8000);
 		$sfm_act_search.addDisplayFields($displayObjects1, $displayFields1);
-		_click($sfm_pg_search.btn_objectSave);
-		_wait(8000);
+		
 		//Search object configuration for Contact	
 		_click($sfm_pg_search.btn_new);
 		_wait(8000);
@@ -73,5 +74,5 @@ var $rs_10543 = _testcase("SCN_Explore_RS-10543  Verify the pagination view & DO
 		
 	
 	
-$rs_10543.end();
+$rs_10545.end();
 _writeFile("true", $appiumPath+$sahiIntermediatoryPath, true);

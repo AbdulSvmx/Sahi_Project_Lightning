@@ -1,0 +1,72 @@
+//Lakshmi BS
+
+/*
+ * PRE Requisites to be run in the org before running other scripts - LIGHTNING CODE
+ */
+_writeFile("false", $appiumPath+$sahiIntermediatoryPath, true);
+var $rs_10549 = _testcase("SCN_Explore_RS-10549 Verify if the SFM search is displayed for configured profile.");
+	$rs_10549.start();
+	var $bSearchStatus = false;
+	var $searchName = "RS_10549 Multi Field WO Search";
+	var $searchObject1 = "Work Order";
+	var $searchObject2 = "Contact";
+	var $searchObject3 = "Product";
+	var $searchObject4 = "Account";
+	
+	
+	//Login to App and navigate to sfm transaction and designer page
+	_setSpeed($g_stepSpeed);
+	$bo_act_login.login($g_url, $appiumAdminUn, $appiumAdminPwd);
+	$sfm_act_lightningConfig.switchToLightning(); 
+	$bo_act_navigation.navigateToSfmSearchDesigner();
+	
+	$bSearchStatus=$sfm_act_search.checkSearchandAdd($searchName);
+	
+	if($bSearchStatus==false)
+	{
+		//Search object configuration for Work Order
+		_click($sfm_pg_search.btn_new);
+		_wait(8000);
+		//_setSelected(_select(0,_near(_tableHeader("Search Object"))),$searchObject1);
+		_setSelected(_select(0,_near(_cell("1",_near(_tableHeader("Search Object"))))),$searchObject1);
+		_wait(8000);
+		_click($sfm_pg_search.btn_objectSave);
+		_wait(8000);
+		
+		//Search object configuration for Contact	
+		_click($sfm_pg_search.btn_new);
+		_wait(8000);
+		_setSelected(_select(0,_near(_cell("2",_near(_tableHeader("Search Object"))))),$searchObject2);
+		_wait(8000);
+		_click($sfm_pg_search.btn_objectSave);
+		_wait(8000);
+		
+		//Search object configuration for Product	
+		_click($sfm_pg_search.btn_new);
+		_wait(8000);
+		_setSelected(_select(0,_near(_cell("3",_near(_tableHeader("Search Object"))))),$searchObject3);
+		_wait(8000);
+		_click($sfm_pg_search.btn_objectSave);
+		_wait(8000);
+		
+		//Search object configuration for Account	
+		_click($sfm_pg_search.btn_new);
+		_wait(8000);
+		_setSelected(_select(0,_near(_cell("4",_near(_tableHeader("Search Object"))))),$searchObject4);
+		_wait(8000);
+		_click($sfm_pg_search.btn_objectSave);
+		_wait(8000);
+		
+		
+		//Save the search
+		_click($sfm_pg_search.btn_save);
+		_wait(8000);
+	}	
+		
+		
+		
+		
+	
+	
+$rs_10549.end();
+_writeFile("true", $appiumPath+$sahiIntermediatoryPath, true);
