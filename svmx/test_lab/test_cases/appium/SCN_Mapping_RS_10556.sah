@@ -93,7 +93,7 @@ $filter="id";
 $workorderid=$sfm_act_restApiMethods.postRestApi($appiumAdminUn,$appiumAdminPwd,$appiumclient_id,$appiumclient_secret,$appiumorginstance,$objName,$obJson,"POST");
 //get the WO number
 $WOname =$sfm_act_restApiMethods.getRestApi($appiumAdminUn,$appiumAdminPwd,$appiumclient_id,$appiumclient_secret,$appiumorginstance,"GET", $objName, $columnName, $filter, $workorderid);
-$excel.insertUnderColumn("/auto/SVMX_Catalyst/fsaautomation/resources/TestData.xlsx", "RS_10556", "Data4",$WOname ,"2");
+//$excel.insertUnderColumn("/auto/SVMX_Catalyst/fsaautomation/resources/TestData.xlsx", "RS_10556", "Data4",$WOname ,"2");
 
 //no need to create an event
 var $now = new Date();
@@ -110,7 +110,7 @@ var $new1=new Date($set1hr.toString().split('IST')[0]+' GMT').toISOString().spli
 _log($new1);
 
 // To crete one hr svmx event
-var $techname=$appiumTechId;
+/*var $techname=$appiumTechId;
 $objName= "SVMXC__SVMX_Event__c";
 $obJson = "{\"Name\":\"Event_10556\",\"SVMXC__Service_Order__c\":\""+$workorderid+"\",\"SVMXC__Technician__c\":\""+$techname+"\",\"SVMXC__StartDateTime__c\":\""+$new+"\",\"SVMXC__EndDateTime__c\":\""+$new1+"\",\"SVMXC__WhatId__c\":\""+$workorderid+"\"}";	
 $columnName = "Name";
@@ -119,7 +119,7 @@ $filter="id";
 $eventid=$sfm_act_restApiMethods.postRestApi($appiumAdminUn,$appiumAdminPwd,$appiumclient_id,$appiumclient_secret,$appiumorginstance,$objName,$obJson,"POST");
 //get the event name
 $eventname =$sfm_act_restApiMethods.getRestApi($appiumAdminUn,$appiumAdminPwd,$appiumclient_id,$appiumclient_secret,$appiumorginstance,"GET", $objName, $columnName, $filter, $eventid);
-_log($eventname);
+_log($eventname);*/
 
 
 $bo_act_login.login($g_url, $appiumAdminUn, $appiumAdminPwd);
