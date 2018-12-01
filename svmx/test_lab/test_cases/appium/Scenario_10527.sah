@@ -1,7 +1,9 @@
 var $scenario_10527 = _testcase("scenario_10527","Verify Lookup Context");
 $scenario_10527.start();
+/*****************************************
+ *********Initializing Variables**********
+ *****************************************/
 var $sfmNameToBeCloned = "Manage Work Order Lines - Usage";
-//var $sfmName = $bo_act_common.generateRandomName("RS_5344_");
 var $sfmName = "Auto_Reg_10527";
 var $isCustom = false;
 var $sfmTemplate = "SVMXSTD: Manage WO Usage Lines";
@@ -11,14 +13,14 @@ var $fieldName = ["Account","Requested Country"];
 var $containerName = ["Parts","Parts"];
 var $wizTitle = $bo_act_common.generateRandomName("SFM_Wiz_Title_");
 var $profile= "auto group profile";
-
+/*****************************************
+ ***************Add Process***************
+ *****************************************/
 $bo_act_login.login($g_url, $appiumAdminUn, $appiumAdminPwd);
 $sfm_act_lightningConfig.switchToLightning();
 $bo_act_navigation.navigateToSfmTransactionDesigner();
 _wait(10000);
-_click($bo_pg_sfmTransactionAndDesigner.btn_yourCustomSfmTransactions);
-_setValue($bo_pg_sfmTransactionAndDesigner.txt_yourCustomSfmTransactionsQuickFind,$sfmName);
-_set($var,_isVisible(_f("main").s_label($sfmName)));
+var $var = $sfm_act_createProcess.searchCustomSfm($sfmName);
 if($var){
 	_log("Process already present");
 }
@@ -29,7 +31,6 @@ _click(_f("main").s_datagroup("dataGroup").near(_f("main").s_richtext("Parts")))
 _setValue($bo_pg_sfmTransactionAndDesigner.txt_quickFindField, "Contact");
 _click(_f("main").s_label("Contact[1]"));
 _click(_f("main").s_button("/Add Field/"));
-//$sfm_act_Transactions.addLookupContext("Parts", "true", "Account", "Account ID");
 _click($sfm_pg_sfmDesigner.chk_OverrideContext);
 _setSelected($sfm_pg_sfmDesigner.sel_Context,"Account");
 _setSelected($sfm_pg_sfmDesigner.sel_matchinField,"Account ID");
@@ -41,6 +42,9 @@ _click(_f("main").s_button("Save[3]"));
 _wait(3000);
 _click($bo_pg_sfmTransactionAndDesigner.btn_finalQuickSave);
 }
+/***************************************************
+ ***************Add Process to Wizard***************
+ ***************************************************/
 $bo_act_navigation.navigateToSfmWizard();
 _selectDomain("/svmx/");
 _setSelected($sfm_pg_wizards.selectObject,"Work Order");

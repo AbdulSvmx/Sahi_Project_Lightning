@@ -76,7 +76,7 @@ var $sfm_pg_search = new function sfm_pg_search(){
 	this.txt_ChooseDisplayFields = _span("Choose one or more fields to be displayed in the search result");
 	this.btn_addRowSearchFields = _imageSubmitButton("table4AddRow");
 	this.txt_ChooseSearchFields = _span("Choose one or more fields on which search is applied");
-	
+	this.btn_addRowSortFields = _imageSubmitButton("table5AddRow");
 
 //	this.verifyIfSearchVisible= function($standardSearch){
 //		_log("I am Here");

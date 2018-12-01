@@ -1,0 +1,16 @@
+var $sfm_act_sfmMapping = new function sfm_act_sfmMapping(){
+	
+	this.addNewMapping = function($srcObj,$targetObj,$mappingFields,$mappingValues,$mappingsName){
+		_setSelected($sfm_pg_sfmMapping.txt_sourceObject_SFMMapping, $srcObj);
+		_setSelected($sfm_pg_sfmMapping.txt_targetObject_SFMMapping, $targetObj);
+		_click($sfm_pg_sfmMapping.btn_new);
+		for(var $i=0;$i<$mappingFields.length;$i++){
+			_setSelected(_f("SFMExpressionBuilderSWF").s_combobox(0).rightOf(_f("SFMExpressionBuilderSWF").ftedatagriditemrenderer("/"+$mappingFields[$i]+"/")),$mappingValues[$i]);
+		}
+		_setValue($sfm_pg_sfmMapping.txt_mappingName, $mappingsName);		
+		_setValue($sfm_pg_sfmMapping.txt_mappingId, $mappingsName);
+		_click($sfm_pg_sfmMapping.btn_save);
+		
+	};
+	
+};

@@ -47,11 +47,11 @@ var $sfm_act_SFM = new function sfm_act_SFM() {
 		_setStrictVisibilityCheck(true);
 //		
 		
-		if (_isVisible(_f("main").s_checkbox("/chk/i").leftOf(_f("main").s_label($sfmName), 10, 10))) {
+		if (_isVisible(_f("main").s_label($sfmName).inside(_f("main").s_navigatorcontent("Your Custom SFM Transactions")))) {
 			_log("Process exists successfully");
 			$bProcessStatus = false;
 			//_click(_f("main").s_checkbox("/chk/i").leftOf(_f("main").s_label($sfmNameToBeCloned), 10, 10));
-			
+		
 		} else if (_isVisible(_f("main").s_checkbox(2).leftOf(_f("main").s_label($sfmName), 10, 10))) {
 			_log("Process does  exists ");
 			$bProcessStatus = false;
@@ -136,11 +136,11 @@ var $sfm_act_SFM = new function sfm_act_SFM() {
 		_setStrictVisibilityCheck(true);
 		
 		
-		if (_isVisible(_f("main").s_checkbox("/chk/i").leftOf(_f("main").s_label($sfmName), 10, 10))) {
+		if (_isVisible(_f("main").s_label($sfmName).inside(_f("main").s_navigatorcontent("Your Custom SFM Transactions")))) {
 			_log("Process exists successfully");
 			$bProcessStatus = true;
 			//_click(_f("main").s_checkbox("/chk/i").leftOf(_f("main").s_label($sfmNameToBeCloned), 10, 10));
-			
+					
 		} else if (_isVisible(_f("main").s_checkbox(2).leftOf(_f("main").s_label($sfmName), 10, 10))) {
 			_log("Process does  exists ");
 			$bProcessStatus = true;

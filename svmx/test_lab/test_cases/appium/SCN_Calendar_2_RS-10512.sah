@@ -40,12 +40,13 @@ _selectWindow("");
 _selectDomain();
 
 
-var $groupProfileName="auto group profile";
+var $groupProfileName=$group_profilename;
 var $Module="ServiceMax iPad Client";
 var $SubModule="Calendar";
 var $Setting="SET005";
 var $settingValue="{Subject}\n{SVMXC__Service_Order__c}\nService Duration: {DurationInMinutes__c}\nStartDateTime: {StartDateTime}\nEndDateTime: {EndDateTime}";
 $bo_act_configurationProfiles.editGroupProfileForTextSettings($groupProfileName, $Module, $SubModule, $Setting, $settingValue,false);
+
 _selectWindow("");
 _selectDomain();
 
@@ -275,6 +276,13 @@ _selectWindow("");
 
 _selectDomain();
 $bo_act_configurationProfiles.editGlobalProfileForPicklistSettings($profile,$module,$subModule,$setting,"ServiceMax Event");
+
+//reverting back the setting
+$bo_act_configurationProfiles.editGroupProfileForTextSettings($groupProfileName, $Module, $SubModule, "SET005", "",false);
+_selectDomain();
+$bo_act_configurationProfiles.editGroupProfileForTextSettings($groupProfileName, $Module, $SubModule, "SET006", "",false);
+
+
 
 _writeFile("true", $appiumPath+$sahiIntermediatoryPath, true);
 

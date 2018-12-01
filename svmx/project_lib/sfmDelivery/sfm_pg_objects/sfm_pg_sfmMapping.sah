@@ -63,4 +63,9 @@ var $sfm_pg_sfmMapping = new function sfm_pg_sfmMapping() {
     this.txt_deletePopup_SFMMapping = _f("SFMExpressionBuilderSWF").uiftetextfield("This action cannot be reversed. Are you sure you want to delete this map?");
     this.btn_deleteYes_SFMMapping = _f("SFMExpressionBuilderSWF").button("Yes");
     this.btn_deleteNo_SFMMapping = _f("SFMExpressionBuilderSWF").button("No");
+    
+    this.btn_new  = _f("SFMExpressionBuilderSWF").s_button("New");
+    this.txt_mappingName = _f("SFMExpressionBuilderSWF").s_textinput("Save this map as");
+    this.txt_mappingId	= _f("SFMExpressionBuilderSWF").s_textinput("Input ID Here");
+    this.btn_save = _f("SFMExpressionBuilderSWF").s_button("Save");
 };

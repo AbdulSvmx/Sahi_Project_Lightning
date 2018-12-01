@@ -16,29 +16,21 @@ var $mappingFields = ["Account","City","Component", "Contact", "Country","Order 
 var $mappingValues = ["Account","City","Record ID", "Contact", "Country", "Service Contract Exchange Type", "Product", "Location", "Top-Level", "Zip"];
 var $wizTitle = "Auto_Regression_Wiz";
 var $profile="auto group profile";
+var $srcObj = "Installed Product";
+var $targetObj = "Work Order";
 $bo_act_login.login($g_url, $appiumAdminUn, $appiumAdminPwd);
 $sfm_act_lightningConfig.switchToLightning();
 /*****************************************
  ***************Add Mapping***************
  *****************************************/
 $bo_act_navigation.navigatetoSFMMaps();
-_setSelected(_f("SFMExpressionBuilderSWF").s_combobox("sourceCombo"), "Installed Product");
-_setSelected(_f("SFMExpressionBuilderSWF").s_combobox("targetCombo"), "Work Order");
-_click(_f("SFMExpressionBuilderSWF").s_button("New"));
-for(var $i=0;$i<$mappingFields.length;$i++){
-	_setSelected(_f("SFMExpressionBuilderSWF").s_combobox(0).rightOf(_f("SFMExpressionBuilderSWF").ftedatagriditemrenderer("/"+$mappingFields[$i]+"/")),$mappingValues[$i]);
-}
-_setValue(_f("SFMExpressionBuilderSWF").s_textinput("Save this map as"), $mappingsName);		
-_setValue(_f("SFMExpressionBuilderSWF").s_textinput("Input ID Here"), $mappingsName);
-_click(_f("SFMExpressionBuilderSWF").s_button("Save"));
+$sfm_act_sfmMapping.addNewMapping($srcObj, $targetObj, $mappingFields, $mappingValues, $mappingsName);
 /*****************************************
  ***************Add Process***************
  *****************************************/
 $bo_act_navigation.navigateToSfmTransactionDesigner();
 _wait(10000);
-_click($bo_pg_sfmTransactionAndDesigner.btn_yourCustomSfmTransactions);
-_setValue($bo_pg_sfmTransactionAndDesigner.txt_yourCustomSfmTransactionsQuickFind,$sfmName);
-_set($var,_isVisible(_f("main").s_label($sfmName)));
+var $var = $sfm_act_createProcess.searchCustomSfm($sfmName);
 if($var){
 	_log("Process already present");
 }
