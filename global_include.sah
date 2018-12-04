@@ -105,6 +105,7 @@ var $sfmPwd = "Maxplore4";
  var $sfmOrgInstance = "cs19"; 
  var $sfd_myDomain = "/lightning/";
 
+ 
 // DC Global Variables
 var $dc_org = $orgtype;
 var $dc_package = "17.999";
