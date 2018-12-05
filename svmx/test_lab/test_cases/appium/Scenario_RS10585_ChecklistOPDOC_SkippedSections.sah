@@ -5,7 +5,7 @@ $scenario_10585.start();
 var $profilename = $group_profilename;
 var $ProcessStatus=false;
 var $wizardObject ="Work Order";
-var $sfmName = "Auto_10585_ChecklistOPDOC1";
+var $sfmName = "Auto_10585_ChecklistOPDOC";
 var $questionNames1=["What is the Work Order Number?","Number Should not be greater than 100"];
 var $questionNames2 = ["Section Two Question One"];
 var $questionNames3=  ["Section Three Question One"];
@@ -38,7 +38,7 @@ var $criteriaDetailsentry=[$comboFielde,$comboConditionse,$toggleButtone,$comboI
 var $value = _readFile("/auto/sahi_pro/userdata/scripts/Sahi_Project_Lightning/scenario7.txt");
 var $templateName = $bo_act_common.generateRandomName("SFM_Auto_Template_");
 //var $sfmName1 = $bo_act_common.generateRandomName("SFM_Auto_");
-var $sfmName1 ="Auto_RS10585_ChecklistOPDOC_InProgOP1";
+var $sfmName1 ="Auto_RS10585_ChecklistOPDOC_InProgOP";
 var $wizardObject="Work Order";
 var $wizardName="AutoRegression";
 var $wizardType="Output Document";
@@ -101,16 +101,50 @@ _click($sfm_pg_formDesigner.btn_applySectionWindow);
 _wait(3000,_isVisible($sfm_pg_formDesigner.label_saveEditSectionMsg));
 _click($sfm_pg_formDesigner.btn_cancelSectionWindow);
 
-//Adding question to sectionOne
-$sfm_act_formDesigner.addQuestionToSection($sectionName1, $questionNames1[0]);
-$sfm_act_formDesigner.addQuestionToSection($sectionName1, $questionNames1[1]);
+					//Section One Questions
+//var $questionNames1=["What is the Work Order Number?","Number Should not be greater than 100"];
 
-//Adding question to sectionTwo
-$sfm_act_formDesigner.addQuestionToSection($sectionName2, $questionNames2[0]);
 
-//Adding question to sectionThree
-$sfm_act_formDesigner.addQuestionToSection($sectionName3, $questionNames3[0]);
-_wait(5000);
+//Adding the Question1 Text Question to Section One
+var $preFillFromWO1=false;
+var $defaultVal1="";
+var $queSpecificDetails1=[$preFillFromWO1,$defaultVal1];
+var $sectionName11=$sectionName1;
+var $queCommonDetails1=["Text","What is the Work Order Number?","http://www.google.com","",true];
+var $queSpecificDetails1=[$preFillFromWO1,$defaultVal1];
+$sfm_act_formDesigner.createCheckListQuestion($sectionName11, $queCommonDetails1, $queSpecificDetails1);
+
+var $preFillFromWO2=false;
+var $defaultVal2="";
+var $queSpecificDetails2=[$preFillFromWO2,$defaultVal2];
+var $sectionName12=$sectionName1;
+var $queCommonDetails2=["Number","Number Should not be greater than 100","http://www.google.com","",true];
+var $queSpecificDetails2=[$preFillFromWO2,$defaultVal2];
+$sfm_act_formDesigner.createCheckListQuestion($sectionName12, $queCommonDetails2, $queSpecificDetails2);
+
+
+					//Section Two Questions
+//var $questionNames2 = ["Section Two Question One"];
+
+var $preFillFromWO3=false;
+var $defaultVal3="";
+var $queSpecificDetails3=[$preFillFromWO3,$defaultVal3];
+var $sectionName13=$sectionName2;
+var $queCommonDetails3=["Text","Section Two Question One","http://www.google.com","",true];
+var $queSpecificDetails3=[$preFillFromWO3,$defaultVal3];
+$sfm_act_formDesigner.createCheckListQuestion($sectionName13, $queCommonDetails3, $queSpecificDetails3);
+
+
+					// Section Three Questions 
+//var $questionNames3=  ["Section Three Question One"];
+
+var $preFillFromWO4=false;
+var $defaultVal4="";
+var $queSpecificDetails4=[$preFillFromWO4,$defaultVal4];
+var $sectionName14=$sectionName3;
+var $queCommonDetails4=["Text","Section Three Question One","http://www.google.com","",true];
+var $queSpecificDetails4=[$preFillFromWO4,$defaultVal4];
+$sfm_act_formDesigner.createCheckListQuestion($sectionName14, $queCommonDetails4, $queSpecificDetails4);
 
 //Adding Exit Criteria
 $sfm_act_formDesigner.editSection($sectionName1);
@@ -129,7 +163,6 @@ _wait(5000);
 _click($bo_pg_formDesigner.btn_closeQuestionPopUp);
 _click($bo_pg_sfmTransactionAndDesigner.btn_saveAndclose);
 _wait(15000);
-//$bo_act_SFMAppPermission.set_mobileapp_permissions($profilename, $targetObjectName, $sfmName);
 $bo_act_SFMAppPermission.set_mobileapp_permissions_generic($profilename, $targetObjectName, $sfmName, "Checklist");
 _wait(5000);
 //-----------------------Creating OPDOC----------------------------
