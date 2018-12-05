@@ -15,24 +15,20 @@ $WONumber =$sfm_act_restApiMethods.getRestApi($swat_un,$swat_pwd,$swat_ClientId,
 _log("WO number: "+$WONumber);
 
 
-
-
-
 // Login to App
 $bo_act_login.login($g_url,$swat_un,$swat_pwd);
 
 
-//add SFM to expression Wizard
+
 var $wizardObject="Work Order";
 var $wizardName1 =$wizardName[7];
-var $wizardType="SFM";
+//var $wizardType="SFM";
 var $profile="";
 var $handOver=false;
 //$sfm_act_wizards.addToWizard($wizardObject, $wizardName1, $wizardType, "Manage Work Order Lines - Usage", $handOver, $profile);
 
 var $wizardType="Output Document";
 $sfm_act_wizards.addToWizard($wizardObject, $wizardName1, $wizardType, "Work Order Service Report", $handOver, $profile); 
-
 
 
 swat_searchWOandLaunchSFM($WONumber,"Work Order Service Report");
