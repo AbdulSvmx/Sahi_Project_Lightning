@@ -98,13 +98,14 @@ var $sfmPwd = "Maxplore4";
  var $sfd_myDomain = "/sfd-auto/";  */
  
 //  commenting base org details to run in dev org
- var $sfmlUsn = "sfdl_auto@automation.com";
- var $sfmlPwd ="Maxplore3";
- var $sfmClientId ="YjkyMzJmNDUzMGNmOTYzODVlNDQ0ZjE2OTUxOTU1NDI5MGViN2I3NWU3YTFjNmY300D290000000WVC";
- var $sfmConsumerSecret = "5287076090725084260";
- var $sfmOrgInstance = "cs19"; 
- var $sfd_myDomain = "/lightning/";
+ var $sfmlUsn = "sfmdelivery@automation.com";
+ var $sfmlPwd ="svmx12345";
+ var $sfmClientId ="3MVG9Yb5IgqnkB4qStZ2NyI2.As4EeBsSuH8TiAJWkUsGqFT6KdVV7T0p2WY60IEDxYhm3MBF88r9zYYG09OQ";
+ var $sfmConsumerSecret = "8810837502286704103";
+ var $sfmOrgInstance = "CS95"; 
+ var $sfd_myDomain = "/multifull/";
 
+ 
 // DC Global Variables
 var $dc_org = $orgtype;
 var $dc_package = "17.999";

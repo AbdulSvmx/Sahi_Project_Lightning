@@ -18,9 +18,6 @@ var $sectionName2 = "Section Two";
 var $sectionName3 = "Section Three";
 var $sectionName4 = "Section Four";	
 
-
-
-
 //variables for exit criteria
 var $exitQuestionName = ["Number Should not be greater than 100"];
 var $questionType=["Number"];
@@ -43,6 +40,60 @@ var $comboInput=["High"];
 var $advExpr="";
 var $criteriaName=$bo_act_common.generateRandomName("SFMCheckListEC_");
 var $criteriaDetails=[$comboField,$comboConditions,$toggleButton,$comboInput,$advExpr,$criteriaName];
+
+
+
+//DVR Error
+var $dvrName2=$bo_act_common.generateRandomName("dvrName_");
+var $dvrID2=$dvrName2;
+var $comboField2=["Greater Than"];
+var $operandType2=["Value"];
+var $answer2=["100"];
+var $advExpr2="";
+var $msfType2="Error";
+var $errorMsg2="Number cannot be greater than 100";
+var $questionType2 = "Number";
+var $dvrExpressionDetails2=[$comboField2,$operandType2,$answer2,$advExpr2,$msfType2, $errorMsg2,$questionType2];
+
+
+var $dvrName4=$bo_act_common.generateRandomName("dvrName_");
+var $dvrID4=$dvrName4;
+var $comboField4=["Greater Than"];
+var $operandType4=["Value"];
+var $answer4=["100"];
+var $advExpr4="";
+var $msfType4="Error";
+var $errorMsg4="Number cannot be greater than 100";
+var $questionType4 = "Number";
+var $dvrExpressionDetails4=[$comboField4,$operandType4,$answer4,$advExpr4,$msfType4, $errorMsg4,$questionType4];
+
+
+
+//DVR Confirmation
+var $dvrName3=$bo_act_common.generateRandomName("dvrName_");
+var $dvrID3=$dvrName3;
+var $comboField3=["Equals"];
+var $operandType3=["Value"];
+var $answer3=["10"];
+var $advExpr3="";
+var $msfType3="Confirmation";
+var $errorMsg3="Number Cannot be 10";
+var $questionType3 = "Number";
+var $dvrExpressionDetails3=[$comboField3,$operandType3,$answer3,$advExpr3,$msfType3, $errorMsg3,$questionType3];
+
+
+//DVR Confirmation
+var $dvrName5=$bo_act_common.generateRandomName("dvrName_");
+var $dvrID5=$dvrName5;
+var $comboField5=["Equals"];
+var $operandType5=["Value"];
+var $answer5=["10"];
+var $advExpr5="";
+var $msfType5="Confirmation";
+var $errorMsg5="Number Cannot be 10";
+var $questionType5 = "Number";
+var $dvrExpressionDetails5=[$comboField5,$operandType5,$answer5,$advExpr5,$msfType5, $errorMsg5,$questionType5];
+
 
 
 $bo_act_login.login($g_url, $appiumAdminUn, $appiumAdminPwd);
@@ -105,30 +156,192 @@ _click($sfm_pg_formDesigner.btn_applySectionWindow);
 _wait(3000,_isVisible($sfm_pg_formDesigner.label_saveEditSectionMsg));
 _click($sfm_pg_formDesigner.btn_cancelSectionWindow);
 
-//Adding question to sectionOne
-$sfm_act_formDesigner.addQuestionToSection($sectionName1, $questionNames1[0]);
-$sfm_act_formDesigner.addQuestionToSection($sectionName1, $questionNames1[1]);
-$sfm_act_formDesigner.addQuestionToSection($sectionName1, $questionNames1[2]);
-$sfm_act_formDesigner.addQuestionToSection($sectionName1, $questionNames1[3]);
 
-//Adding question to sectionTwo
-$sfm_act_formDesigner.addQuestionToSection($sectionName2, $questionNames2[0]);
-$sfm_act_formDesigner.addQuestionToSection($sectionName2, $questionNames2[1]);
-$sfm_act_formDesigner.addQuestionToSection($sectionName2, $questionNames2[2]);
-$sfm_act_formDesigner.addQuestionToSection($sectionName2, $questionNames2[3]);
+							//Creating Section One Questions
 
-//Adding question to sectionThree
-$sfm_act_formDesigner.addQuestionToSection($sectionName3, $questionNames3[0]);
-$sfm_act_formDesigner.addQuestionToSection($sectionName3, $questionNames3[1]);
-$sfm_act_formDesigner.addQuestionToSection($sectionName3, $questionNames3[2]);
-$sfm_act_formDesigner.addQuestionToSection($sectionName3, $questionNames3[3]);
-$sfm_act_formDesigner.addQuestionToSection($sectionName3, $questionNames3[4]);
+//var $questionNames1=["Number Should not be greater than 100","Section One Question One","Section One Question Two","Section One Question Three"];
+//Adding the Static Number Question to Section 1
 
-//Adding question to sectionFour
-$sfm_act_formDesigner.addQuestionToSection($sectionName4, $questionNames4[0]);
-$sfm_act_formDesigner.addQuestionToSection($sectionName4, $questionNames4[1]);
-$sfm_act_formDesigner.addQuestionToSection($sectionName4, $questionNames4[2]);
-_wait(5000);
+var $preFillFromWO=true;
+var $defaultVal="";
+var $queSpecificDetails=[$preFillFromWO,$defaultVal];
+var $sectionNamev=$sectionName1;
+var $queCommonDetails=["Number","Number Should not be greater than 100","http://www.google.com","",true];
+var $preFillFromWO=false;
+var $defaultVal="";
+var $queSpecificDetails=[$preFillFromWO,$defaultVal];
+$sfm_act_formDesigner.createCheckListQuestion($sectionNamev, $queCommonDetails, $queSpecificDetails);
+_wait(15000);
+$sfm_act_formDesigner.editQuestionInSection($sectionNamev, $questionNames1[0]);
+$sfm_act_formDesigner.dataValidationOnCheckListQuestion($dvrName2, $dvrID2, $dvrExpressionDetails2);
+_click($sfm_pg_formDesigner.tab_questionDetails);
+_click($sfm_pg_formDesigner.btn_dvrSave);
+_wait(3000);
+
+
+//Adding the Question1 Text Question to Section One
+var $preFillFromWO1=false;
+var $defaultVal1="";
+var $queSpecificDetails1=[$preFillFromWO1,$defaultVal1];
+var $sectionName11=$sectionName1;
+var $queCommonDetails1=["Text","Section One Question One","http://www.google.com","",true];
+var $queSpecificDetails1=[$preFillFromWO1,$defaultVal1];
+$sfm_act_formDesigner.createCheckListQuestion($sectionName11, $queCommonDetails1, $queSpecificDetails1);
+
+
+//Adding the Question2 Text Question to Section One
+var $preFillFromWO2=false;
+var $defaultVal2="";
+var $queSpecificDetails2=[$preFillFromWO2,$defaultVal2];
+var $sectionName02=$sectionName1;
+var $queCommonDetails2=["Text","Section One Question Two","http://www.google.com","",true];
+var $queSpecificDetails2=[$preFillFromWO2,$defaultVal2];
+$sfm_act_formDesigner.createCheckListQuestion($sectionName02, $queCommonDetails2, $queSpecificDetails2);
+
+
+//Adding the Question3 Text Question to Section One
+var $preFillFromWO3=false;
+var $defaultVal3="";
+var $queSpecificDetails3=[$preFillFromWO3,$defaultVal3];
+var $sectionName03=$sectionName1;
+var $queCommonDetails3=["Text","Section One Question Three","http://www.google.com","",true];
+var $queSpecificDetails3=[$preFillFromWO3,$defaultVal3];
+$sfm_act_formDesigner.createCheckListQuestion($sectionName03, $queCommonDetails3, $queSpecificDetails3);
+
+
+								//Section two Questions
+
+//var $questionNames2 = ["Section Two Warning","Section Two Question One","Section Two Question Two","Section Two Question Three"];
+
+//Adding the Question1 Text Question to Section Two
+var $preFillFromWO4=false;
+var $defaultVal4="";
+var $queSpecificDetails4=[$preFillFromWO4,$defaultVal4];
+var $sectionName4=$sectionName2;
+var $queCommonDetails4=["Number","Section Two Warning","http://www.google.com","",true];
+var $queSpecificDetails4=[$preFillFromWO4,$defaultVal4];
+$sfm_act_formDesigner.createCheckListQuestion($sectionName4, $queCommonDetails4, $queSpecificDetails4);
+_wait(3000);
+$sfm_act_formDesigner.editQuestionInSection($sectionName2, $questionNames2[0]);
+$sfm_act_formDesigner.dataValidationOnCheckListQuestion($dvrName3, $dvrID3, $dvrExpressionDetails3);
+_click($sfm_pg_formDesigner.tab_questionDetails);
+_click($sfm_pg_formDesigner.btn_dvrSave);
+_wait(3000);
+
+//Adding the Question2 Text Question to Section Two
+var $preFillFromWO5=false;
+var $defaultVal5="";
+var $queSpecificDetails5=[$preFillFromWO5,$defaultVal5];
+var $sectionName5=$sectionName2;
+var $queCommonDetails5=["Text","Section Two Question One","http://www.google.com","",true];
+var $queSpecificDetails5=[$preFillFromWO5,$defaultVal5];
+$sfm_act_formDesigner.createCheckListQuestion($sectionName5, $queCommonDetails5, $queSpecificDetails5);
+
+//Adding the Question3 Text Question to Section Two
+var $preFillFromWO6=false;
+var $defaultVal6="";
+var $queSpecificDetails6=[$preFillFromWO6,$defaultVal6];
+var $sectionName6=$sectionName2;
+var $queCommonDetails6=["Text","Section Two Question Two","http://www.google.com","",true];
+var $queSpecificDetails6=[$preFillFromWO6,$defaultVal6];
+$sfm_act_formDesigner.createCheckListQuestion($sectionName6, $queCommonDetails6, $queSpecificDetails6);
+
+//Adding the Question3 Text Question to Section Two
+var $preFillFromWO7=false;
+var $defaultVal7="";
+var $queSpecificDetails7=[$preFillFromWO7,$defaultVal7];
+var $sectionName7=$sectionName2;
+var $queCommonDetails7=["Text","Section Two Question Three","http://www.google.com","",true];
+var $queSpecificDetails7=[$preFillFromWO7,$defaultVal7];
+$sfm_act_formDesigner.createCheckListQuestion($sectionName7, $queCommonDetails7, $queSpecificDetails7);
+
+
+									//Section Three Questions
+//var $questionNames3=  ["Section Three Error","Section Three Warning","Section Three Question One","Section Three Question Two","Section Three Question Three"];
+
+var $preFillFromWO7=false;
+var $defaultVal7="";
+var $queSpecificDetails7=[$preFillFromWO7,$defaultVal7];
+var $sectionName7=$sectionName3;
+var $queCommonDetails7=["Number","Section Three Error","http://www.google.com","",true];
+var $queSpecificDetails7=[$preFillFromWO7,$defaultVal7];
+$sfm_act_formDesigner.createCheckListQuestion($sectionName7, $queCommonDetails7, $queSpecificDetails7);
+$sfm_act_formDesigner.editQuestionInSection($sectionName3, $questionNames3[0]);
+$sfm_act_formDesigner.dataValidationOnCheckListQuestion($dvrName4, $dvrID4, $dvrExpressionDetails4);
+_click($sfm_pg_formDesigner.tab_questionDetails);
+_click($sfm_pg_formDesigner.btn_dvrSave);
+_wait(3000);
+
+var $preFillFromWO8=false;
+var $defaultVal8="";
+var $queSpecificDetails8=[$preFillFromWO8,$defaultVal8];
+var $sectionName8=$sectionName3;
+var $queCommonDetails8=["Number","Section Three Warning","http://www.google.com","",true];
+var $queSpecificDetails8=[$preFillFromWO8,$defaultVal8];
+$sfm_act_formDesigner.createCheckListQuestion($sectionName8, $queCommonDetails8, $queSpecificDetails8);
+
+$sfm_act_formDesigner.editQuestionInSection($sectionName3, $questionNames3[1]);
+$sfm_act_formDesigner.dataValidationOnCheckListQuestion($dvrName5, $dvrID5, $dvrExpressionDetails5);
+_click($sfm_pg_formDesigner.tab_questionDetails);
+_click($sfm_pg_formDesigner.btn_dvrSave);
+_wait(3000);
+
+var $preFillFromWO9=false;
+var $defaultVal9="";
+var $queSpecificDetails9=[$preFillFromWO9,$defaultVal9];
+var $sectionName9=$sectionName3;
+var $queCommonDetails9=["Text","Section Three Question One","http://www.google.com","",true];
+var $queSpecificDetails9=[$preFillFromWO9,$defaultVal9];
+$sfm_act_formDesigner.createCheckListQuestion($sectionName9, $queCommonDetails9, $queSpecificDetails9);
+
+var $preFillFromW10=false;
+var $defaultVal10="";
+var $queSpecificDetails10=[$preFillFromW10,$defaultVal10];
+var $sectionName10=$sectionName3;
+var $queCommonDetails10=["Text","Section Three Question Two","http://www.google.com","",true];
+var $queSpecificDetails10=[$preFillFromW10,$defaultVal10];
+$sfm_act_formDesigner.createCheckListQuestion($sectionName10, $queCommonDetails10, $queSpecificDetails10);
+
+var $preFillFromW11=false;
+var $defaultVal11="";
+var $queSpecificDetails11=[$preFillFromW11,$defaultVal11];
+var $sectionName11=$sectionName3;
+var $queCommonDetails11=["Text","Section Three Question Three","http://www.google.com","",true];
+var $queSpecificDetails11=[$preFillFromW11,$defaultVal11];
+$sfm_act_formDesigner.createCheckListQuestion($sectionName11, $queCommonDetails11, $queSpecificDetails11);
+
+
+
+ 									//Section 4 Questions
+//var $questionNames4 = ["Section Four Question Three","Section Four Question Two","Section Four Question One"];
+
+var $preFillFromW12=false;
+var $defaultVal12="";
+var $queSpecificDetails12=[$preFillFromW12,$defaultVal12];
+var $sectionName12=$sectionName4;
+var $queCommonDetails12=["Text","Section Four Question Three","http://www.google.com","",true];
+var $queSpecificDetails12=[$preFillFromW12,$defaultVal12];
+$sfm_act_formDesigner.createCheckListQuestion($sectionName12, $queCommonDetails12, $queSpecificDetails12);
+
+
+var $preFillFromW13=false;
+var $defaultVal13="";
+var $queSpecificDetails13=[$preFillFromW13,$defaultVal13];
+var $sectionName13=$sectionName3;
+var $queCommonDetails13=["Text","Section Four Question Two","http://www.google.com","",true];
+var $queSpecificDetails13=[$preFillFromW13,$defaultVal13];
+$sfm_act_formDesigner.createCheckListQuestion($sectionName13, $queCommonDetails13, $queSpecificDetails13);
+
+
+var $preFillFromW14=false;
+var $defaultVal14="";
+var $queSpecificDetails14=[$preFillFromW14,$defaultVal14];
+var $sectionName14=$sectionName3;
+var $queCommonDetails14=["Text","Section Four Question One","http://www.google.com","",true];
+var $queSpecificDetails14=[$preFillFromW14,$defaultVal14];
+$sfm_act_formDesigner.createCheckListQuestion($sectionName14, $queCommonDetails14, $queSpecificDetails14);
+
+
 
 //Adding Exit Criteria - -While stablization make it generic function
 $sfm_act_formDesigner.editSection($sectionName1);
@@ -149,7 +362,7 @@ _wait(5000);
 //_click($sfm_pg_formDesigner.btn_cancelSectionWindow);
 _click($bo_pg_formDesigner.btn_closeQuestionPopUp);
 _click($bo_pg_sfmTransactionAndDesigner.btn_saveAndclose);
-_wait(5000);
+_wait(6000);
 
 
 var $profilename = $group_profilename;
