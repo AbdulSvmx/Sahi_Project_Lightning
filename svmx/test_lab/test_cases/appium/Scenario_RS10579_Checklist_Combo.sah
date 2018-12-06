@@ -18,7 +18,7 @@ var $sectionName4 = "Section Four";
 var $questionType=["Number"];
 var $comboField=["Less Than"];
 var $operandType=["Value"];
-var $answer=["20"];
+var $answer=["100"];
 var $skipTo=["3-"+$sectionName3];
 var $criteriaDetails1=[$comboField,$operandType,$answer,$skipTo];
 var $criteriaDetailsv=[$criteriaDetails1];
@@ -205,7 +205,7 @@ var $preFillFromWO5=false;
 var $defaultVal5="";
 var $queSpecificDetails5=[$preFillFromWO5,$defaultVal5];
 var $sectionName5=$sectionName2;
-var $queCommonDetails5=["Text","Question One section two","http://www.google.com","",true];
+var $queCommonDetails5=["Text","Question One section two","","",true];
 var $queSpecificDetails5=[$preFillFromWO5,$defaultVal5];
 $sfm_act_formDesigner.createCheckListQuestion($sectionName5, $queCommonDetails5, $queSpecificDetails5);
 
@@ -216,7 +216,7 @@ var $preFillFromWO7=false;
 var $defaultVal7="";
 var $queSpecificDetails7=[$preFillFromWO7,$defaultVal7];
 var $sectionName7=$sectionName2;
-var $queCommonDetails7=["Text","Question two Section two","http://www.google.com","",true];
+var $queCommonDetails7=["Attachment","Question two Section two","https://www.ge.com/","",true];
 var $queSpecificDetails7=[$preFillFromWO7,$defaultVal7];
 $sfm_act_formDesigner.createCheckListQuestion($sectionName7, $queCommonDetails7, $queSpecificDetails7);
 
