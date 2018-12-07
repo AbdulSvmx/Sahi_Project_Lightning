@@ -40,6 +40,7 @@ var $fieldName = ["Date Received","Case","End Date and Time","Received City",
                   "Date Received","Case","Received City"];
 var $objMapping = "PartsToWorkDetail";
 var $wizardObject ="Work Order";
+$sfd_swatDomain = "/swatspr18/";
 
 //variables to configure lookup
 var $lookupTempName="SVMXSTD: Case Lookup";
@@ -59,16 +60,18 @@ $bo_act_login.login($g_url, $swat_un,$swat_pwd);
 $sfm_act_lightningConfig.switchToLightning(); 
 _wait(15000);
 //Create custom fields if needed
-$sfm_act_lightningConfig.addCustomFields("Work Detail", ["Account"], ["Lookup Relationship"], $sfd_myDomain,[],["Account"]);
+$sfm_act_lightningConfig.addCustomFields("Work Detail", ["Account"], ["Lookup Relationship"], $sfd_swatDomain,[],["Account"]);
 
-
+_selectDomain();
 //Create mapping from Case to Work detail
 
 $sourceObj= "Case";
 $targetObj = "Work Detail";
+$mappingName = $sfmName+"map";
 $mappingField = ["Received City", "Date Received","End Date and Time","Account"];
 $mappingValue = ["Billing Type","Scheduled Date","Actual Initial Response","Account ID"];
-$sfm_act_sfmMapping.createMappingFromMapping($sourceObj, $targetObj,$sfmName, $mappingField, $mappingValue);
+
+$sfm_act_sfmMapping.createMappingFromMapping($sourceObj,$targetObj,$mappingName,$mappingField,$mappingValue);
 
 
 //clone tmd016 and set form fill for case in child line

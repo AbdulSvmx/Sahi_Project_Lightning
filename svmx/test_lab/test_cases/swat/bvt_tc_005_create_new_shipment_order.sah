@@ -21,7 +21,7 @@ $sfm_act_lightningConfig.switchToLightning();
 var $poNumber = $sfm_act_createCustomWizard.createBlankPoFromRest($swat_un, $swat_pwd, $swat_ClientId, $swat_ConsumerSecret, $swat_OrgInstance);
 
 //add the process to wizard
-$sfm_act_wizards.addToWizard($wizardObject, $wizardName[0], $wizardType[1], $sfmName);  
+$sfm_act_wizards.addToWizard($wizardObject, "SFMDAuto_Ltng_PO", $wizardType[1], $sfmName);  
 _wait(3000); 
 
 //Navigate to the PO for validation

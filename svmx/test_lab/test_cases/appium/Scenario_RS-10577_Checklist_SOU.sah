@@ -68,19 +68,19 @@ _click($bo_pg_sfmTransactionAndDesigner.btn_mappings);
 _click($bo_pg_sfmTransactionAndDesigner.btn_mappings);
 _setValue(_f("main").s_textinput("/textInput/").near(_f("main").tab("Field Map For Existing Records")),"SVMX");
 _click(_f("main").s_label("SVMXSTD: Map Work Order to Checklist"));
+_click(_f("main").tab("Form Designer"));
+_wait(3000);
 //$bo_act_checklistdesigner.addQuestion("Text", "What is the Work Order Number?", true,"Work Order Number");
 $bo_act_checklistdesigner.addQuestion("Text", "AUTO_Which City you are from?", true,"City");
 $bo_act_checklistdesigner.addQuestion("Picklist", "AUTO_What is the Order Status?", true,"Order Status");
-
+_wait(3000);
 var $queType10="Number";
 var $queName10="AUTO_What is the IdleTime?";
 var $sectionName10="Checklist Section Title";
-
 var $helpURL10="http://google.com/Doc";
 var $tag10="ch_Number_-01";
 var $addToLibAndForm10=true;
 var $queCommonDetails10=[$queType10,$queName10,$helpURL10,$tag10,$addToLibAndForm10];
-
 var $preFillFromWO10=true;
 var $defaultVal10="Idle Time (in Minutes)";
 var $queSpecificDetails10=[$preFillFromWO10,$defaultVal10];

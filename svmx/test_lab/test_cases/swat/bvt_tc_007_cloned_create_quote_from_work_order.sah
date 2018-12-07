@@ -1,6 +1,6 @@
 //Author	:- 	Shashikala Kamath
 
-var $bvt_tc_007_cloned_create_quote_from_work_order = _testcase("bvt_tc_007_cloned_create_quote_from_work_order","Verify the functionality of SFM type - from Source Object to create new header and child records");
+var $bvt_tc_007_cloned_create_quote_from_work_order = _testcase("bvt_tc_007_cloned_create_quote_from_work_order","Verify the functionality of cloned SFM type - from Source Object to create new header and child records");
 $bvt_tc_007_cloned_create_quote_from_work_order.start();
 _setSpeed($g_stepSpeed);
 

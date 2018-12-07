@@ -213,6 +213,7 @@ var $sfm_act_SFM = new function sfm_act_SFM() {
 			var $elementName=$fieldName[$i];
 			var $searchString=null;
 			if($elementName.includes("\(")){
+				
 				$searchString=$elementName.substring(0,$elementName.indexOf("\("));
 				_log($searchString);
 			}else{

@@ -3,6 +3,7 @@ var $scenario_10587 = _testcase("scenario_10585","SCN_Checklist_1_RS-10587_Verif
 $scenario_10587.start();
 
 var $profilename = $group_profilename;
+var $targetObjectName = "Work Order";
 var $ProcessStatus=false;
 var $wizardObject ="Work Order";
 //checklist variables versions
@@ -31,7 +32,7 @@ var $includeskippedSection="true";
 $bo_act_login.login($g_url, $appiumAdminUn, $appiumAdminPwd);
 $sfm_act_lightningConfig.switchToLightning();
 
-$ProcessStatus=$sfm_act_SFM.checkCustomProcess($sfmName);
+$ProcessStatus=$sfm_act_SFM.checkCustomProcess($sfmName1);
 _wait(10000);
 if($ProcessStatus==false){
 
@@ -100,6 +101,13 @@ if($ProcessStatus==false){
 	$bo_act_checklistdesigner.addQuestion("Text", "10587 LastVersion Question", false,"");
 	_wait(5000);
 	_click($bo_pg_sfmTransactionAndDesigner.btn_saveAndclose);
+	$bo_act_SFMAppPermission.set_mobileapp_permissions_generic($profilename, $targetObjectName, $sfmName1, "Checklist");
+	$bo_act_SFMAppPermission.set_mobileapp_permissions_generic($profilename, $targetObjectName, $sfmName2, "Checklist");
+	$bo_act_SFMAppPermission.set_mobileapp_permissions_generic($profilename, $targetObjectName, $sfmName3, "Checklist");
+
+	
+
+	
 	
 //-----------------------------------------------Creation OF OPDOC with first,last,all Versions----------------------------------
 

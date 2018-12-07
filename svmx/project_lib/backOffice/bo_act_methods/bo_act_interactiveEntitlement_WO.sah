@@ -215,6 +215,7 @@ var $bo_act_interactiveEntitlement_WO = new function bo_act_interactiveEntitleme
 		_click($bo_pg_interactiveEntitlement_CaseAndWO.btn_apply);
 		_click($bo_pg_interactiveEntitlement_CaseAndWO.btn_chkEntitlementPS);
 		_click(_div($IBName));
+		_wait(2000);
 		_click(_div("/svmx-grid-radioheader/", _near(_link($ValueName)))); 
 		_click($bo_pg_interactiveEntitlement_CaseAndWO.btn_applySelection);
 		_click($bo_pg_interactiveEntitlement_CaseAndWO.btn_saveEntitltmentPS);
