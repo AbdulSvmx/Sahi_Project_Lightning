@@ -127,6 +127,23 @@ this.updateRestApi = function($usnName, $usnPwd, $orgClientId, $orgConsumerSecre
     _log("updated record id = "+$objCreated);
     return($objCreated);*/
 } ;
+this.upsertRecordsRestApi = function($usnName, $usnPwd, $orgClientId, $orgConsumerSecret,$orgInstance,$objName,$filterFieldName,$filterFieldValue,$obJson){
+	//This function checks whether a record satifying the given filter criteria is present or not.
+	//A new record is created only if the record is not existing
+	
+	var $result = this.getRestApi($usnName, $usnPwd, $orgClientId, $orgConsumerSecret, $orgInstance, "GET", $objName, "Id", $filterFieldName, $filterFieldValue);
+	var $id;
+	_log($result);
+	
+	if ($result=="") {
+		
+		$id = this.postRestApi($usnName, $usnPwd, $orgClientId, $orgConsumerSecret, $orgInstance, $objName, $obJson, "POST");
+		_log("Record of type "+$objName+"Created with Id"+$id);
+	}
+	else {
+		_log("Record already exists at "+$result);
+	}
 
+};
 
 };
