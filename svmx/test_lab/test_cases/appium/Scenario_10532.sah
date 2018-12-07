@@ -6,14 +6,16 @@ _setSpeed($g_stepSpeed);
 $bo_act_login.login($g_url, $appiumAdminUn, $appiumAdminPwd);
 $sfm_act_lightningConfig.switchToLightning();
 
-var $data_excel = _readExcelFile("/auto/SVMX_Catalyst/fsaautomation/resources/TestData.xlsx","TestData",true);
-var $AccountName = $data_excel[34]["Data3"];
-_log($AccountName);
-var $IBName = $data_excel[34]["Data4"];
-_log($IBName);
-var $ProductName = $data_excel[34]["Data2"];
-_log($ProductName);
 
+
+
+var $data_excel_10539 = _readExcelFile("/auto/SVMX_Catalyst/fsaautomation/resources/TestData.xlsx","RS_10539",true);
+var $AccountName = $data_excel_10539[2]["Data5"];
+var $data_excel_10538 = _readExcelFile("/auto/SVMX_Catalyst/fsaautomation/resources/TestData.xlsx","RS_10538",true);
+var $IBName = $data_excel_10538[2]["Data4"];
+_log($IBName);
+var $ProductName = $data_excel_10538[2]["Data2"];
+_log($ProductName);
 // Accessing the Account
 $objNameAccount= "Account";
 $columnName = "Id";
