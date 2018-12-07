@@ -15,7 +15,7 @@ var $headersToAdd = ["Auto_number_c","Auto_PickList_c","Auto_TextBox_c","AutoC_c
 
 $bo_act_login.login($g_url, $appiumAdminUn, $appiumAdminPwd);
 $sfm_act_lightningConfig.switchToLightning();
-
+///////////////////////////////////////////////////////////////
 
 var $createsfmName = "Create New Custom object";
 var $transactiontype = "as Standalone for the purpose of creating a new record";
@@ -81,6 +81,12 @@ _selectDomain();
 var $targetObjectName = "Auto_Custom_Object2";
 $bo_act_SFMAppPermission.addnewobjectdownloacriteria($targetObjectName);
 */
+
+
+
+
+
+//////////////////////////////////////////////////////////////////////////////////////////
 _writeFile("true", $appiumPath+$sahiIntermediatoryPath, true);
 
 RS_10565.end();

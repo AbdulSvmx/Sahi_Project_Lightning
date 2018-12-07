@@ -37,10 +37,10 @@ $sfm_act_SFM.cloneTDM016($sfmNameToBeCloned,$sfmName,$isCustom, $sfmTemplateSave
 
 $picklistLabels = ["Closed On","Order Status"];
 $pickListValues = ["Now","Closed"];
-
+var $mapTypechild="Value Map for Existing Records";
 _click($bo_pg_sfmTransactionAndDesigner.btn_qualifyingCriteriaAndFieldMapping);
 
-$bo_act_mappings.createMapping("Work Order",$picklistLabels,$pickListValues,[],[],$mapName);
+$bo_act_mappings.createMapping("Work Order",$mapTypechild,$picklistLabels,$pickListValues,[],[],$mapName);
 
 
 

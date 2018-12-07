@@ -123,7 +123,7 @@ var $swatPwd = "maxpl0re2";
  * buildorg = "The org which needs to be Run in the Build Machine"- PLEASE KEEP IT DEFAULT WHEN CHECKING IN
  * 
  */
-var $appiumOrg = "buildorg1";
+var $appiumOrg = "buildorg";
 if($appiumOrg.toLowerCase() != "buildorg")
 	{
 
@@ -162,7 +162,7 @@ var $appiumAdminPwd="Svmx1234";
 
 var $appiumTechUn="auto-tech@svmx.com";
 var $appiumTechPwd="Svmx123#";
-var $appiumTechId="0053D000001Owg7QAC";
+var $appiumTechId="a263D000000AagdQAC";
 var $appiumsfdcuserId="0053D000001OwGEQA0";
 var $profileName = "System Administrator";
 var $pageLayout = "SVMX Work Order - Admin";
