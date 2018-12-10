@@ -276,12 +276,12 @@ _selectWindow("");
 
 _selectDomain();
 $bo_act_configurationProfiles.editGlobalProfileForPicklistSettings($profile,$module,$subModule,$setting,"ServiceMax Event");
-
+/*
 //reverting back the setting
 $bo_act_configurationProfiles.editGroupProfileForTextSettings($groupProfileName, $Module, $SubModule, "SET005", "",false);
 _selectDomain();
 $bo_act_configurationProfiles.editGroupProfileForTextSettings($groupProfileName, $Module, $SubModule, "SET006", "",false);
-
+*/
 
 
 _writeFile("true", $appiumPath+$sahiIntermediatoryPath, true);
