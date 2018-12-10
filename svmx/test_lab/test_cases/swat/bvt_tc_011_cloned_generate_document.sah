@@ -83,6 +83,4 @@ _wait(5000,_isVisible(_div("/"+$sfmName+"/")));
 
 
 
-
-
 $bvt_tc_011_cloned_generate_document.end();
