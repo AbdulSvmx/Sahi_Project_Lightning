@@ -164,7 +164,7 @@ $bo_act_configurationProfiles.editGlobalProfileForPicklistSettings($profile,$mod
 
 var $restAccName="A10511_SVMX_Event";
 var $EventSub="A10511_SVMX_Event1";
-var $techname="a240t000000GglLAAS";//Add to global 
+var $techname=$appiumTechId;//Add to global 
 	
 
 $objName= "Account";
