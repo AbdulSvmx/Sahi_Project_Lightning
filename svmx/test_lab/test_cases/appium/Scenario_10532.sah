@@ -70,5 +70,5 @@ $bo_act_interactiveEntitlement_WO.performInteractiveEntitlementWO_IncidentNotCov
 
 
 //To write the WorkOrder Number into the Test Data for Appium Side to pick it up
-$excel.insertUnderColumn("/auto/SVMX_Catalyst/fsaautomation/resources/TestData.xlsx", "TestData", "Data1",$WOName ,"38");
+$excel.insertUnderColumn("/auto/SVMX_Catalyst/fsaautomation/resources/TestData.xlsx", "RS_10532", "Data1",$WOName ,"2");
 _writeFile("true", $appiumPath+$sahiIntermediatoryPath, true);
