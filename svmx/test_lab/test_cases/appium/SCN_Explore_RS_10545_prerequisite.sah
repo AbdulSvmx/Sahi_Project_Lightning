@@ -7,26 +7,92 @@ _writeFile("false", $appiumPath+$sahiIntermediatoryPath, true);
 var $rs_10545 = _testcase("SCN_Explore_RS-10545 Verify the pagination view & DOD of a record on SFM search.");
 	$rs_10545.start();
 	var $bSearchStatus = false;
-	var $searchName = "RS_10545 SFM Search for Multi Page View";
+	var $searchName = "RS_10545 Multi Field WO Search2";
 	
 	var $searchObject1 = "Work Order";
-	var $displayObjects1 = ["Work Order", "Work Order"];
-	var $displayFields1 = ["Work Order Number","Billing Type"];
+	var $filterFields1 = ["Priority", "Account", "Number"];
+	var $filterOperators1 = ["Not Equal","Is Not Null","Greater Than"];
+	var $filterValue1 = ["High", "","46"];
+	var $filterExp1 = "1 OR (2 AND 3)";
+	
+	var $searchObject2 = "Account";
+	var $filterFields2 = ["Billing City"];
+	var $filterOperators2 = ["Equals"];
+	var $filterValue2 = ["Bangalore"];
+	var $filterExp2 = "";
+	
+	var $searchObject3 = "Location";
+	var $filterFields3 = ["Stocking Location","Country"];
+	var $filterOperators3 = ["Equals","Not Equal"];
+	var $filterValue3 = ["True","India"];
+	var $filterExp3 = "1 AND 2";
+	
+	
+	var $searchObject4 = "Work Order";
+	var $filterFields4 = ["Site"];
+	var $filterOperators4 = ["Equals"];
+	var $filterValue4 = ["SVMX.USERTRUNK"];
+	var $filterExp4 = "";
+	
+	var $searchObject5 = "Work Order";
+	var $filterFields5 = ["Scheduled Date Time"];
+	var $filterOperators5 = ["Less or Equal To"];
+	var $filterValue5 = ["TOMORROW"];
+	var $filterExp5 = "";
+	
+	var $searchObject6 = "Work Order";
+	var $filterFields6 = ["Last Modified By ID"];
+	var $filterOperators6 = ["Equals"];
+	var $filterValue6 = ["SVMX.CURRENTUSERID"];
+	var $filterExp6 = "";
+	
+	
+	var $displayObjects2 = ["Account", "Account"];
+	var $displayFields2 = ["Account Name","Account Number"];
+	
+	
+	var $sortObjects1 = ["Work Order"];
+	var $sortFields1 = ["Work Order Number"];
+	var $sortOrder1 = "Descending";
+	
+	
+	var $sortObjects2 = ["Account"];
+	var $sortFields2 = ["Account Name"];
+	var $sortOrder2 = "Descending";
+	
+	var $sortObjects3 = ["Location"];
+	var $sortFields3 = ["Location Name"];
+	var $sortOrder3 = "Descending";
 
-	var $searchObject2 = "Case";
-	var $displayObjects2 = ["Case", "Case"];
-	var $displayFields2 = ["Case Number","Billing Type"];
+	
+	var $sfmName1 = "Create Service Contract From Account";
+	var $wizardObject1="Account";
+	var $wizardName1="Auto_Regression_Account";
+	var $wizardType1="SFM";
+	var $profile1="auto group profile";
+	var $handOver1="false";
+	var $wizardCriteria1=null;
+	var $stepID1="SCON_CR_SC_Account";
 	
 	
+	var $sfmName2 = "Create a New Work Order from Location";
+	var $wizardObject2="Location";
+	var $wizardName2="Auto_Regression_Location";
+	var $wizardType2="SFM";
+	var $profile2="auto group profile";
+	var $handOver2="false";
+	var $wizardCriteria2=null;
+	var $stepID2="LOC-TDM001";
 	
-	var $sfmName = "Add/Edit Case Lines";
-	var $wizardObject="Case";
-	var $wizardName="Auto_Regression_Case";
-	var $wizardType="SFM";
-	var $profile="auto group profile";
-	var $handOver="false";
-	var $wizardCriteria=null;
-	var $stepID="SVMXSTD_SFM_CASE_LINE_001";
+	
+	var $sfmName3 = "AUTO_EDIT_WORKORDER";
+	var $wizardObject3="Work Order";
+	var $wizardName3="Auto_Regression";
+	var $wizardType3="SFM";
+	var $profile3="auto group profile";
+	var $handOver3="false";
+	var $wizardCriteria3=null;
+	var $stepID3="AUTO_EDIT_WORKORDER";
 	
 	//Login to App and navigate to sfm transaction and designer page
 	_setSpeed($g_stepSpeed);
@@ -47,14 +113,107 @@ var $rs_10545 = _testcase("SCN_Explore_RS-10545 Verify the pagination view & DOD
 		//_setSelected(_select(0,_near(_tableHeader("Search Object"))),$searchObject1);
 		_setSelected(_select(0,_near(_cell("1",_near(_tableHeader("Search Object"))))),$searchObject1);
 		_wait(8000);
-		$sfm_act_search.addDisplayFields($displayObjects1, $displayFields1);
+		$sfm_act_search.addFilterCriteria($filterFields1, $filterOperators1,$filterValue1,$filterExp1);
+		_wait(3000);
+		$sfm_act_search.sortSearchFields($sortObjects1, $sortFields1, $sortOrder1);	
+		_wait(3000);
+		_click($sfm_pg_search.btn_objectSave);
+		_wait(8000);
+		_click($sfm_pg_search.btn_save);
+		_wait(10000);
+		_click(_checkbox(0,_leftOf(_span($searchName))));
+		_click($sfm_pg_search.btn_customEdit);
+		_wait(8000);
+		_click($sfm_pg_search.tab_searchConfig);
+		_wait(8000);
+
 		
-		//Search object configuration for Contact	
+		//Search object configuration for Account	
 		_click($sfm_pg_search.btn_new);
 		_wait(8000);
 		_setSelected(_select(0,_near(_cell("2",_near(_tableHeader("Search Object"))))),$searchObject2);
 		_wait(8000);
-		$sfm_act_search.addDisplayFields($displayObjects2, $displayFields2);	
+		$sfm_act_search.addFilterCriteria($filterFields2, $filterOperators2,$filterValue2,$filterExp2);
+		_wait(3000);
+		$sfm_act_search.addDisplayFields($displayObjects2, $displayFields2);
+		_wait(8000);
+		$sfm_act_search.sortSearchFields($sortObjects2, $sortFields2, $sortOrder2);	
+		_wait(3000);
+		_click($sfm_pg_search.btn_objectSave);
+		_wait(8000);
+		_click($sfm_pg_search.btn_save);
+		_wait(10000);
+		_click(_checkbox(0,_leftOf(_span($searchName))));
+		_click($sfm_pg_search.btn_customEdit);
+		_wait(8000);
+		_click($sfm_pg_search.tab_searchConfig);
+		_wait(8000);
+		
+		//Search object configuration for Location	
+		_click($sfm_pg_search.btn_new);
+		_wait(8000);
+		_setSelected(_select(0,_near(_cell("3",_near(_tableHeader("Search Object"))))),$searchObject3);
+		_wait(8000);
+		$sfm_act_search.addFilterCriteria($filterFields3, $filterOperators3,$filterValue3,$filterExp3);
+		_wait(3000);
+		$sfm_act_search.sortSearchFields($sortObjects3, $sortFields3, $sortOrder3);	
+		_wait(3000);
+		_click($sfm_pg_search.btn_objectSave);
+		_wait(8000);
+		_click($sfm_pg_search.btn_save);
+		_wait(10000);
+		_click(_checkbox(0,_leftOf(_span($searchName))));
+		_click($sfm_pg_search.btn_customEdit);
+		_wait(8000);
+		_click($sfm_pg_search.tab_searchConfig);
+		_wait(8000);
+		
+		//Search object configuration for Work Orders (DATE LITERALS)	
+		_click($sfm_pg_search.btn_new);
+		_wait(8000);
+		_setSelected(_select(0,_near(_cell("4",_near(_tableHeader("Search Object"))))),$searchObject5);
+		_wait(8000);
+		_setValue(_textbox(0,_near(_cell("4"))), "Work Orders (DATE LITERALS)");
+		_wait(8000);
+		$sfm_act_search.addFilterCriteria($filterFields5, $filterOperators5,$filterValue5,$filterExp5);
+		_wait(8000);
+		$sfm_act_search.sortSearchFields($sortObjects1, $sortFields1, $sortOrder1);	
+		_wait(3000);
+		_click($sfm_pg_search.btn_objectSave);
+		_wait(8000);
+		_click($sfm_pg_search.btn_save);
+		_wait(10000);
+		_click(_checkbox(0,_leftOf(_span($searchName))));
+		_click($sfm_pg_search.btn_customEdit);
+		_wait(8000);
+		_click($sfm_pg_search.tab_searchConfig);
+		_wait(8000);
+		
+		//Search object configuration for Work Orders (USERTRUNK)
+		_click($sfm_pg_search.btn_new);
+		_wait(8000);
+		_setSelected(_select(0,_near(_cell("5",_near(_tableHeader("Search Object"))))),$searchObject4);
+		_wait(8000);
+		_setValue(_textbox(0,_near(_cell("5"))), "Work Orders (USERTRUNK)");
+		$sfm_act_search.addFilterCriteria($filterFields4, $filterOperators4,$filterValue4,$filterExp4);
+		_wait(3000);
+		_click($sfm_pg_search.btn_objectSave);
+		_wait(8000);
+		
+		
+		
+		//Search object configuration for Work Orders (CURRENTUSERID)
+		_click($sfm_pg_search.btn_new);
+		_wait(8000);
+		_setSelected(_select(0,_near(_cell("6",_near(_tableHeader("Search Object"))))),$searchObject6);
+		_wait(8000);
+		_setValue(_textbox(0,_near(_cell("6"))), "Work Orders (CURRENTUSERID)");
+		
+		_wait(8000);
+		$sfm_act_search.addFilterCriteria($filterFields6, $filterOperators6,$filterValue6,$filterExp6);
+		_wait(3000);
+	//	_click($sfm_pg_search.btn_objectSave);
+		_wait(8000);
 		
 		//Save the search
 		_click($sfm_pg_search.btn_save);
@@ -62,17 +221,28 @@ var $rs_10545 = _testcase("SCN_Explore_RS-10545 Verify the pagination view & DOD
 	}	
 		
 		//add the process to wizard 
-		$sfm_act_wizards.addToWizard($wizardObject,$wizardName, $wizardType,$sfmName,$handOver,$profile,$wizardCriteria,$stepID);
+		$sfm_act_wizards.addToWizard($wizardObject1,$wizardName1, $wizardType1,$sfmName1,$handOver1,$profile1,$wizardCriteria1,$stepID1);
 		_wait(8000);
+		
+		//add the process to wizard 
+		$sfm_act_wizards.addToWizard($wizardObject2,$wizardName2, $wizardType2,$sfmName2,$handOver2,$profile2,$wizardCriteria2,$stepID2);
+		_wait(8000);
+		
+		//add the process to wizard 
+		$sfm_act_wizards.addToWizard($wizardObject3,$wizardName3, $wizardType3,$sfmName3,$handOver3,$profile3,$wizardCriteria3,$stepID3);
+		_wait(8000);
+		
+		
 		
 		// Removing Work Order from Download Criteria
-		$bo_act_SFMAppPermission.setDownloadCriteriaOwnShipType("My Records",$bo_pg_sfmAppPermissionD.chkbox_workorder);
+		$bo_act_SFMAppPermission.setDownloadCriteriaOwnShipType("All Records",$bo_pg_sfmAppPermissionD.chkbox_workorder);
 		_wait(8000);
 		// Removing Case from Download Criteria
-		$bo_act_SFMAppPermission.setDownloadCriteriaOwnShipType("My Records",$bo_pg_sfmAppPermissionD.chkbox_case);
+		$bo_act_SFMAppPermission.setDownloadCriteriaOwnShipType("All Records",$bo_pg_sfmAppPermissionD.chkbox_account);
 		_wait(8000);
 		
-	
+		$bo_act_SFMAppPermission.setDownloadCriteriaOwnShipType("All Records",$bo_pg_sfmAppPermissionD.chkbox_location);
+		_wait(8000);
 	
 $rs_10545.end();
 _writeFile("true", $appiumPath+$sahiIntermediatoryPath, true);
