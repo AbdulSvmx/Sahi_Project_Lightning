@@ -315,7 +315,25 @@ this.checkSearchandAdd = function($searchName){
 		_click($sfm_pg_search.btn_objectSave);	
 	};
 
+	this.selectObjectWithinSearch = function($resultSectionTitle){
+		//This function selects an object of the basis of the given result section title in the
+		//Search configuration page
+		//Author: Janaki
+		var $x = _collect("_textbox","/RsltTitle/");
+		var $i=0;var $temp;
+		for($i =0;$i<$x.length;$i++){
+				$temp = _getText($x[$i]);
+				if($temp === $resultSectionTitle){
+					_check(_checkbox(0,_leftOf($x[$i])));
+					_wait(5000);
+				}
+				else{
+					_uncheck(_checkbox(0,_leftOf($x[$i])));
+					_wait(3000);
+				}
+		}
 
+	};
 
 
 };
