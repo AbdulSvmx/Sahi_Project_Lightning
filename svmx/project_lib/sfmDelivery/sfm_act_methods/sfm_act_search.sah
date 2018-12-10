@@ -184,8 +184,7 @@ var $sfm_act_search = new function sfm_search() {
 	
 	
 
-	
-	/**
+/**
 	 * Author		:	Lakshmi BS
 	 * Function		: 	To check if search is there else create search
 	 * Parameter	:	$searchName = Search name to search				
@@ -212,6 +211,38 @@ this.checkSearchandAdd = function($searchName){
 		return bSearchStatus;
 	};
 	
+	
+	/**
+	 * Author		:	Lakshmi BS
+	 * Function		: 	To add display fields in search.
+	 * Parameter	:	$displayObjects = Object to display
+	 * 			        $displayFields = Field to display for the object
+	 * Example		:	Refer RS_10543.sah file for function usage
+	 */
+	this.addFilterCriteria = function($fieldNames,$operators, $values,$exp)
+	{
+		var $i=0;
+		var $j=1;
+		for($i=0;$i<$fieldNames.length;$i++)
+		{
+		
+		_setSelected(_select(0,_near(_cell($j.toString(),_near($sfm_pg_search.txt_ChooseFilterFields)))),$fieldNames[$i]);
+		_wait(3000);
+		_setSelected(_select(1,_near(_cell($j.toString(),_near($sfm_pg_search.txt_ChooseFilterFields)))),$operators[$i]);
+		_wait(3000);
+		
+		_setValue(_textbox(0,_near(_cell($j.toString(),_near($sfm_pg_search.txt_ChooseFilterFields)))), $values[$i]);
+		
+		if($i<$fieldNames.length-1){
+		_click($sfm_pg_search.btn_addFilterCriteria);
+		_wait(10000);}
+		$j++;
+		_wait(3000);
+		}
+		_setValue(_textbox(0,_near(_span("Advanced Expression"))), $exp);
+		
+		
+	};
 	
 	/**
 	 * Author		:	Lakshmi BS
@@ -272,6 +303,8 @@ this.checkSearchandAdd = function($searchName){
 		_log("into thw function");
 		var $i=0;
 		var $j=1;
+		
+		
 		for($i=0;$i<$sortFields.length;$i++)
 		{
 			_log("into thw function");
@@ -287,6 +320,7 @@ this.checkSearchandAdd = function($searchName){
 		_wait(3000);
 		}
 	};
+
 	
 	this.addResultsToDisplay = function($clicks,$sheetName){
 		$selectData = $excel.readFromCustomExcel("../sfmDelivery/sfmDelivery_excelData/data.xlsx", $sheetName,"","");
