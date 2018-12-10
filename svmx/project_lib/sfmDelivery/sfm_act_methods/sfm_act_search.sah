@@ -183,6 +183,8 @@ var $sfm_act_search = new function sfm_search() {
 	
 	
 	
+
+	
 	/**
 	 * Author		:	Lakshmi BS
 	 * Function		: 	To check if search is there else create search
