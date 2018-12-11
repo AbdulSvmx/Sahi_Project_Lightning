@@ -7,7 +7,7 @@ _writeFile("false", $appiumPath+$sahiIntermediatoryPath, true);
 var $rs_10549 = _testcase("SCN_Explore_RS-10549 Verify if the SFM search is displayed for configured profile.");
 	$rs_10549.start();
 	var $bSearchStatus = false;
-	var $searchName = "RS_10549 Multi Field WO Search1";
+	var $searchName = "RS_10549 Multi Field WO Search";
 	var $searchObject1 = "Work Order";
 	var $searchObject2 = "Contact";
 	var $searchObject3 = "Product";
@@ -38,25 +38,14 @@ var $rs_10549 = _testcase("SCN_Explore_RS-10549 Verify if the SFM search is disp
 	var $wizardCriteria1=null;
 	var $stepID1="SCON_CR_SC_Account";
 	
-	
-	var $sfmName2 = "Create a New Work Order from Location";
-	var $wizardObject2="Location";
-	var $wizardName2="Auto_Regression_Location";
+	var $sfmName2 = "AUTO_EDIT_WORKORDER";
+	var $wizardObject2="Work Order";
+	var $wizardName2="Auto_Regression";
 	var $wizardType2="SFM";
 	var $profile2="auto group profile";
 	var $handOver2="false";
 	var $wizardCriteria2=null;
-	var $stepID2="LOC-TDM001";
-	
-	
-	var $sfmName3 = "AUTO_EDIT_WORKORDER";
-	var $wizardObject3="Work Order";
-	var $wizardName3="Auto_Regression";
-	var $wizardType3="SFM";
-	var $profile3="auto group profile";
-	var $handOver3="false";
-	var $wizardCriteria3=null;
-	var $stepID3="AUTO_EDIT_WORKORDER";
+	var $stepID2="AUTO_EDIT_WORKORDER";
 	
 	//Login to App and navigate to sfm transaction and designer page
 	_setSpeed($g_stepSpeed);
@@ -139,12 +128,9 @@ var $rs_10549 = _testcase("SCN_Explore_RS-10549 Verify if the SFM search is disp
 	$sfm_act_wizards.addToWizard($wizardObject1,$wizardName1, $wizardType1,$sfmName1,$handOver1,$profile1,$wizardCriteria1,$stepID1);
 	_wait(8000);
 	
-	//add the process to wizard 
-	$sfm_act_wizards.addToWizard($wizardObject2,$wizardName2, $wizardType2,$sfmName2,$handOver2,$profile2,$wizardCriteria2,$stepID2);
-	_wait(8000);
 	
 	//add the process to wizard 
-	$sfm_act_wizards.addToWizard($wizardObject3,$wizardName3, $wizardType3,$sfmName3,$handOver3,$profile3,$wizardCriteria3,$stepID3);
+	$sfm_act_wizards.addToWizard($wizardObject2,$wizardName2, $wizardType2,$sfmName2,$handOver2,$profile2,$wizardCriteria2,$stepID2);
 	_wait(8000);
 	
 	
