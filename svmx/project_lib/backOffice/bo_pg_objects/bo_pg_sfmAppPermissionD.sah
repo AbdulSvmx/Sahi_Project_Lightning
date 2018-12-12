@@ -38,6 +38,9 @@ var $bo_pg_sfmAppPermissionD= new function bo_pg_sfmAppPermissionD(){
 	this.txt_ScheduledDataSync = _textbox("Synchronize application data once every (includes events, tasks, and related data)");
 
 	this.chkbox_workorder = _checkbox("/on/",_near(_cell("Work Order")));
+this.chkbox_account = _checkbox("/on/",_near(_cell("Account")));
+	this.chkbox_location = _checkbox("/on/",_near(_cell("Location")));
+	
 	this.picklist_records = _select("j_id0:SVMX_FORM:mainBlock:j_id97:CriteriaBlock:CriteriaSection:ExpTable1:0:j_id191");
 	this.btn_configsave = _button("Save");
 	this.chkbox_case = _checkbox("/on/",_near(_cell("Case")));
