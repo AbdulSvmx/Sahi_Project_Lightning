@@ -312,6 +312,7 @@ function onScriptErrorDefault($e) {
 			// screenshot too.
 			_lockWindow();
 			_focusWindow();
+			_selectDomain();
 			_takePageScreenShot();
 			_unlockWindow();
 		}
@@ -334,6 +335,7 @@ function onScriptFailureDefault($e) {
 			// screenshot too.
 			_lockWindow();
 			_focusWindow();
+			_selectDomain();
 			_takePageScreenShot();
 			_unlockWindow();
 		}
