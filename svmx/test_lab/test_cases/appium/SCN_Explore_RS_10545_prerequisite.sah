@@ -7,7 +7,7 @@ _writeFile("false", $appiumPath+$sahiIntermediatoryPath, true);
 var $rs_10545 = _testcase("SCN_Explore_RS-10545 Verify the pagination view & DOD of a record on SFM search.");
 	$rs_10545.start();
 	var $bSearchStatus = false;
-	var $searchName = "RS_10545 Multi Field WO Search2";
+	var $searchName = "RS_10545 Multi Field WO Search";
 	
 	var $searchObject1 = "Work Order";
 	var $filterFields1 = ["Priority", "Account", "Number"];
