@@ -5,6 +5,11 @@
 var $sfmrdz_pg_common=new function sfmrdz_pg_common(){
 	
 	
+	//Salesforce Home Page items
+	this.btn_appLauncher=_div("App Launcher");
+	this.txt_searchApp=_textbox("/Search apps/");
+	this.link_newDesigner=_link("/New Designer/");
+	
 	this.txt_listFilter=_textbox("ListFilter");
 	this.txt_listViewPicklist=_textbox("/slds-combobox__input/");
 	this.btn_backtoSetup=_button("Back To Setup Home");
