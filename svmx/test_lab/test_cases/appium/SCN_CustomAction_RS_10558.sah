@@ -4,7 +4,7 @@ var $actionTitle = "10558_Action";
 var $wizTitle = "10558_Action";
 var $profile="auto group profile";
 $bo_act_login.login($g_url, $appiumAdminUn, $appiumAdminPwd);
-$sfm_act_lightningConfig.switchToLightning();
+
 _wait(5000);
 $bo_act_navigation.navigateToSfmCustomAction();
 _setSelected(_select("/ManageAction/",_rightOf(_span("Manage Custom Actions for"))),"Work Order");

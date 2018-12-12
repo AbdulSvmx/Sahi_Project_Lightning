@@ -5,7 +5,7 @@ $sfmName= $bo_act_common.generateRandomName("RS_10429_");
 var $woNumber = $sfm_act_createCustomWizard.createBlankWoFromRest($sfmlUsn, $sfmlPwd, $sfmClientId, $sfmConsumerSecret, $sfmOrgInstance);
 
 $bo_act_login.login($g_url,$sfmlUsn,$sfmlPwd);
-$sfm_act_lightningConfig.switchToLightning(); 
+ 
 _wait(15000);
 $bo_act_navigation.navigateToSfmTransactionDesigner();
 $sfm_act_Transactions.newSfm10429($sfmName);

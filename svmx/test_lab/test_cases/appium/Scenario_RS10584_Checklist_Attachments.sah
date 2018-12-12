@@ -15,7 +15,7 @@ $checklistversion = ["All Versions","First Version","Last Version"];
 
 //Login
 $bo_act_login.login($g_url, $appiumAdminUn, $appiumAdminPwd);
-$sfm_act_lightningConfig.switchToLightning();
+
 
 $ProcessStatus=$sfm_act_SFM.checkCustomProcess($sfmName);
 _wait(10000);

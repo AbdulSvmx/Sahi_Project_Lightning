@@ -7,7 +7,7 @@ var $subModule = "Global Settings";
 var $setting = "GBL025";
 
 $bo_act_login.login($g_url, $appiumAdminUn, $appiumAdminPwd);
-$sfm_act_lightningConfig.switchToLightning();
+
 
 $bo_act_configurationProfiles.editGlobalProfileForPicklistSettings($profile,$module,$subModule,$setting,"ServiceMax Event");
 

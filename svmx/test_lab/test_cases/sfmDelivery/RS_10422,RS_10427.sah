@@ -28,7 +28,7 @@ var $sfmTemplateSaveAsName = $processName + "pg";
 //Login as admin and switch to lightning
 //$bo_act_login.login($g_url,$bac_un,$bac_pwd);
 $bo_act_login.login($g_url,$sfmlUsn,$sfmlPwd);
-$sfm_act_lightningConfig.switchToLightning();
+
 _wait(15000);
 //Clone the standard process and add it to wizard for testing with custom process.
 _setSpeed(3000);
@@ -42,7 +42,7 @@ _selectDomain();
 //Logout as admin and login as technician
 $sfm_act_lightningConfig.logoutInLightning();
 $bo_act_login.login($g_url,$sfmlUsn,$sfmlPwd);
-$sfm_act_lightningConfig.switchToLightning();
+
 
 //Launch SFM designer for standard process without adding Feature permissions
 var $wo_number = $sfm_act_createCustomWizard.createWowithdateliterals();
@@ -73,7 +73,7 @@ _selectDomain();
 //by logging in as admin.
 //$sfm_act_lightningConfig.logoutInLightning();
 //$bo_act_login.login($g_url,$bac_un,$bac_pwd);
-//$sfm_act_lightningConfig.switchToLightning();
+//
 $bo_act_navigation.navigateToFeaturePermissionsPage();
 _wait(3000);
 $bo_act_navigation.addFeaturePermissionToUser($sfmlUsn,"Clone Default Group Profile","SFM Designer");
@@ -83,7 +83,7 @@ $bo_act_navigation.addFeaturePermissionToUser($sfmlUsn,"Clone Default Group Prof
 //$bo_act_navigation.addFeaturePermissionToUser($tech_un, $group_profilename,"SFM Designer");
 //_selectDomain();
 //$bo_act_login.login($g_url,$tech_un,$tech_pwd);
-//$sfm_act_lightningConfig.switchToLightning();
+//
 
 //Launch standard process after adding feature permissions.
 _selectDomain();

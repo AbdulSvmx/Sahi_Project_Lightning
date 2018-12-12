@@ -9,7 +9,7 @@
 var $scenario_10547 = _testcase("scenario_10547","Verify Picklist,Dependent Picklist and Recordtype Dependent Picklist");
 $scenario_10547.start();
 $bo_act_login.login($g_url, $appiumAdminUn, $appiumAdminPwd);
-$sfm_act_lightningConfig.switchToLightning();
+
 
 
 //
