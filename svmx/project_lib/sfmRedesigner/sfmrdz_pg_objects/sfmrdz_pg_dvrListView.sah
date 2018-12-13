@@ -8,7 +8,7 @@ var $sfmrdz_pg_dvrListView = new function sfmrdz_pg_dvrListView(){
 	this.btn_newDVR=_button("New Validation Rule");
 	
 	
-	this.btn_heading_dvrNameCol=_div("DATA VALIDATION RULES NAME");
+	this.btn_heading_dvrNameCol=_div("DATA VALIDATION RULE NAME");
 	this.btn_heading_objCol=_div("Object");
 	this.btn_heading_typeCol=_div("Type");
 	this.btn_heading_whereUsedCol=_div("Where Used");
