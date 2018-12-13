@@ -30,14 +30,15 @@ _setSpeed($g_stepSpeed);
 		
 		var $url="http://test.salesforce.com";
 		var $un="saadat.dz2perftest@servicemax.com";
-		var $pwd="servicemax1";
-		var $viewName="transaction";
+		var $pwd="servicemax3";
+		var $viewName="Transactions";
 		
 		/**
 		 * Login to the Sandbox Org and launching Transaction list view
 		 */
 		$bo_act_login.login($url, $un, $pwd);
-		var $homecurrentHomePageULR=$sfmrdz_act_common.LaunchListViewWindow($viewName);
+		//var $homecurrentHomePageULR=$sfmrdz_act_common.LaunchListViewWindow($viewName);
+		$sfmrdz_act_common.launchListView($viewName);
 
 		_assertEqual("Show All",_getText($sfmrdz_pg_trnListView.link_showAll),"Default text in type filter is not Show All");
 		
@@ -59,13 +60,17 @@ _setSpeed($g_stepSpeed);
 		_assertVisible($sfmrdz_pg_trnListView.btn_trnNameAscSort);
 		
 		//Page refresh
+		_selectDomain();
 		_call(top.location.reload(true));
+		
+		
+		$sfmrdz_act_common.launchListView($viewName);
 		_wait(30000, _isVisible($sfmrdz_pg_common.btn_actionMenu));
 		_assertEqual("Show All",_getText($sfmrdz_pg_trnListView.link_showAll),"Default text in type filter is not Show All");
 
 		
-		$sfmrdz_act_common.launchHomeWindow($homecurrentHomePageULR);
-		_wait(10000,_isVisible($bo_pg_home.link_home));
+		//$sfmrdz_act_common.launchHomeWindow($homecurrentHomePageULR);
+		//_wait(10000,_isVisible($bo_pg_home.link_home));
 		$sfm_act_lightningConfig.logoutInLightning();
 		
 $SFMDZ_635.end();
