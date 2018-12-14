@@ -10,9 +10,9 @@ var $orgtype = "Base";
 
 var $orgnamespace;
 if ($orgtype == "Dev") {
-	$orgnamespace = "SVMXDEV";
+		$orgnamespace = "SVMXDEV";
 } else {
-	$orgnamespace = "SVMXC";
+		$orgnamespace = "SVMXC";
 }
 
 // Add All Global Variables here
@@ -69,7 +69,6 @@ var $admin_group_profile = "Get Price Group Profile";
 
 // Checklist Global Variables
 var $un_checklist = $bac_un;// "meghana.rao@servicemax.com"; // Pointing to
-							// Automation Dummy Org
 var $pwd_checklist = $bac_pwd;// "cloud_102";
 var $url_checklist = "https://test.salesforce.com";
 
