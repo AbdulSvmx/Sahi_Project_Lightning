@@ -2,7 +2,7 @@
  * Author	: Anand Kakhandaki
  * Modified by : Mohammad Saadat
  * Reviewer	: 
- * Pre-req	: Nothing
+ * Pre-req	: Nothing.
  * Testcase	: $SFMDZ_171: Verify that SFM searched result is based on applied filter.
  * Steps	: 
  				1) Create a custom transaction with name 'Activate Contract Custom'

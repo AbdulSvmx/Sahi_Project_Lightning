@@ -1,7 +1,7 @@
 /*
 * Author	: Mohammad Saadat 
  * Reviewer	: 
- * Pre-req	: Not Applicable
+ * Pre-req	: Not Applicable.
  * Testcase	: SFMDZ-609: Launch DVR List View - Using URL
  * Steps	: Launch DVR List View - Using URL
  * Expt Res	: DVR List View should launch successfully by verifying:
