@@ -1,5 +1,6 @@
 /**
  * Author	: Anand Kakhandaki
+ * Modified by : Mohammad Saadat
  * Reviewer	: 
  * Pre-req	: Nothing
  * Testcase	: $SFMDZ_171: Verify that SFM searched result is based on applied filter.
@@ -36,15 +37,16 @@ _setSpeed($g_stepSpeed);
 
 	var $url="http://test.salesforce.com";
 	var $un="saadat.dz2perftest@servicemax.com";
-	var $pwd="servicemax1";
-	var $viewName="transaction";
+	var $pwd="servicemax3";
+	var $viewName="Transactions";
 
 
 	/**
 	 * Login to the Sandbox Org and launching Transaction list view
 	 */
 	$bo_act_login.login($url, $un, $pwd);
-	var $homecurrentHomePageULR=$sfmrdz_act_common.LaunchListViewWindow($viewName);
+	//var $homecurrentHomePageULR=$sfmrdz_act_common.LaunchListViewWindow($viewName);
+	$sfmrdz_act_common.launchListView($viewName);
 	
 	//Content Search
 	var $search="Contract";
@@ -99,8 +101,7 @@ _setSpeed($g_stepSpeed);
 	_wait(5000,_isVisible($sfmrdz_pg_common.link_clone));
 	_assertNotVisible($sfmrdz_pg_common.link_delete, "delete action link is available on ");
 
-	$sfmrdz_act_common.launchHomeWindow($homecurrentHomePageULR);
-	_wait(10000,_isVisible($bo_pg_home.link_home));
+	
 	$sfm_act_lightningConfig.logoutInLightning();
 
 $SFMDZ_171.end();
