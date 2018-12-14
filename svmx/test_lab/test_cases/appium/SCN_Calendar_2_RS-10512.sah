@@ -9,7 +9,7 @@ var $module = "Common";
 var $subModule = "Global Settings";
 var $setting = "GBL025";
 $bo_act_login.login($g_url, $appiumAdminUn, $appiumAdminPwd);
-$sfm_act_lightningConfig.switchToLightning();
+
 //Setting the value for servicemax event
 $bo_act_configurationProfiles.editGlobalProfileForPicklistSettings($profile,$module,$subModule,$setting,$picklistValue);
 _selectWindow("");
@@ -276,12 +276,12 @@ _selectWindow("");
 
 _selectDomain();
 $bo_act_configurationProfiles.editGlobalProfileForPicklistSettings($profile,$module,$subModule,$setting,"ServiceMax Event");
-
+/*
 //reverting back the setting
 $bo_act_configurationProfiles.editGroupProfileForTextSettings($groupProfileName, $Module, $SubModule, "SET005", "",false);
 _selectDomain();
 $bo_act_configurationProfiles.editGroupProfileForTextSettings($groupProfileName, $Module, $SubModule, "SET006", "",false);
-
+*/
 
 
 _writeFile("true", $appiumPath+$sahiIntermediatoryPath, true);

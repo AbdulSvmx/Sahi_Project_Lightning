@@ -130,7 +130,7 @@ var $sfm_act_SFM = new function sfm_act_SFM() {
 		$bo_act_navigation.navigateToSfmTransactionDesigner();
 		_click($bo_pg_sfmTransactionAndDesigner.btn_yourCustomSfmTransactions);
 		_setValue($bo_pg_sfmTransactionAndDesigner.lbl_searchSFM, $sfmName);
-		_wait(10000);
+		_wait(20000);
 		
 		_setStrictVisibilityCheck(false);
 		_setStrictVisibilityCheck(true);
@@ -212,7 +212,7 @@ var $sfm_act_SFM = new function sfm_act_SFM() {
 			//Below logic is used for selecting object from multi match list
 			var $elementName=$fieldName[$i];
 			var $searchString=null;
-			if($elementName.includes("\(")){md
+			if($elementName.includes("\(")){
 				
 				$searchString=$elementName.substring(0,$elementName.indexOf("\("));
 				_log($searchString);

@@ -25,7 +25,7 @@ _log($productName);
 	var $woNumber;
 	
 	$bo_act_login.login($g_url,$swat_un,$swat_pwd );
-	$sfm_act_lightningConfig.switchToLightning();
+	
 
 	//Create WO through REST API ******
 	var $woNumber = $sfm_act_createCustomWizard.createBlankWoFromRest($swat_un, $swat_pwd, $swat_ClientId, $swat_ConsumerSecret, $swat_OrgInstance);

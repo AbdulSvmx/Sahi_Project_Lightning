@@ -15,7 +15,7 @@ $rs_10466.start();
 	var $err = "This record does not satisfy the qualification criteria.";
 	var $currentWizardName = $wizardName[5];
 	$bo_act_login.login($g_url,$sfmlUsn,$sfmlPwd);
-	$sfm_act_lightningConfig.switchToLightning();
+	
 	_wait(15000);
 	_setSpeed(3000);
 	$bo_act_navigation.navigateToSfmTransactionDesigner();

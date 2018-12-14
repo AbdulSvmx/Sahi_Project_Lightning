@@ -32,7 +32,7 @@ var $res2 = true;
 //**************************************************************************************
 //Login and switch to lightning
 $bo_act_login.login($g_url,$sfmlUsn,$sfmlPwd);
-$sfm_act_lightningConfig.switchToLightning();
+
 _wait(15000);
 
 //Create work order and sort related lists
@@ -103,7 +103,7 @@ $sfm_act_lightningConfig.editWorkOrder($textLabels, $textValues, $pickListLabels
 $sfm_act_lightningConfig.logoutInLightning();
 //Login and switch to lightning
 $bo_act_login.login($g_url,$sfmlUsn,$sfmlPwd);
-$sfm_act_lightningConfig.switchToLightning();
+
 _wait(15000);
 
 //**************************************************************************************************

@@ -52,7 +52,7 @@ var $questionType4 = "Number";
 var $dvrExpressionDetails4=[$comboField4,$operandType4,$answer4,$advExpr4,$msfType4, $errorMsg4,$questionType4];
 
 $bo_act_login.login($g_url, $appiumAdminUn, $appiumAdminPwd);
-$sfm_act_lightningConfig.switchToLightning();
+
 
 $ProcessStatus=$sfm_act_SFM.checkCustomProcess($sfmName);
 if($ProcessStatus==false){

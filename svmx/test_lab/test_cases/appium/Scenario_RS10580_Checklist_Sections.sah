@@ -28,6 +28,20 @@ var $skipTo=["3-"+$sectionName3];
 var $criteriaDetails1=[$comboField,$operandType,$answer,$skipTo];
 var $criteriaDetailsv=[$criteriaDetails1];
 
+
+//variable for exit criteria for section2 
+
+
+var $exitQuestionName2 = ["Section Two Question One"];
+var $questionType2=["Text"];
+var $comboField2=["Contains"];
+var $operandType2=["Value"];
+var $answer2=["jump"];
+var $skipTo2=["4-"+$sectionName4];
+var $criteriaDetails2=[$comboField2,$operandType2,$answer2,$skipTo2];
+var $criteriaDetailsvt=[$criteriaDetails2];
+
+
 //var $criteriaDetails=[$criteriaDetails1];
 
 var $targetObjectName = "Work Order";
@@ -97,7 +111,7 @@ var $dvrExpressionDetails5=[$comboField5,$operandType5,$answer5,$advExpr5,$msfTy
 
 
 $bo_act_login.login($g_url, $appiumAdminUn, $appiumAdminPwd);
-$sfm_act_lightningConfig.switchToLightning();
+
 $ProcessStatus=$sfm_act_SFM.checkCustomProcess($sfmName);
 _wait(5000);
 if($ProcessStatus==false){
@@ -217,10 +231,10 @@ $sfm_act_formDesigner.createCheckListQuestion($sectionName03, $queCommonDetails3
 var $preFillFromWO4=false;
 var $defaultVal4="";
 var $queSpecificDetails4=[$preFillFromWO4,$defaultVal4];
-var $sectionName4=$sectionName2;
+var $sectionName44=$sectionName2;
 var $queCommonDetails4=["Number","Section Two Warning","http://www.google.com","",true];
 var $queSpecificDetails4=[$preFillFromWO4,$defaultVal4];
-$sfm_act_formDesigner.createCheckListQuestion($sectionName4, $queCommonDetails4, $queSpecificDetails4);
+$sfm_act_formDesigner.createCheckListQuestion($sectionName44, $queCommonDetails4, $queSpecificDetails4);
 _wait(3000);
 $sfm_act_formDesigner.editQuestionInSection($sectionName2, $questionNames2[0]);
 $sfm_act_formDesigner.dataValidationOnCheckListQuestion($dvrName3, $dvrID3, $dvrExpressionDetails3);
@@ -327,7 +341,7 @@ $sfm_act_formDesigner.createCheckListQuestion($sectionName12, $queCommonDetails1
 var $preFillFromW13=false;
 var $defaultVal13="";
 var $queSpecificDetails13=[$preFillFromW13,$defaultVal13];
-var $sectionName13=$sectionName3;
+var $sectionName13=$sectionName4;
 var $queCommonDetails13=["Text","Section Four Question Two","http://www.google.com","",true];
 var $queSpecificDetails13=[$preFillFromW13,$defaultVal13];
 $sfm_act_formDesigner.createCheckListQuestion($sectionName13, $queCommonDetails13, $queSpecificDetails13);
@@ -336,17 +350,28 @@ $sfm_act_formDesigner.createCheckListQuestion($sectionName13, $queCommonDetails1
 var $preFillFromW14=false;
 var $defaultVal14="";
 var $queSpecificDetails14=[$preFillFromW14,$defaultVal14];
-var $sectionName14=$sectionName3;
+var $sectionName14=$sectionName4;
 var $queCommonDetails14=["Text","Section Four Question One","http://www.google.com","",true];
 var $queSpecificDetails14=[$preFillFromW14,$defaultVal14];
 $sfm_act_formDesigner.createCheckListQuestion($sectionName14, $queCommonDetails14, $queSpecificDetails14);
 
 
+	
+							//Adding Exit Criteria - for section1
 
-//Adding Exit Criteria - -While stablization make it generic function
 $sfm_act_formDesigner.editSection($sectionName1);
 $sfm_act_formDesigner.addExistCriteria();
 $sfm_act_formDesigner.addQuesToExistCriteriaTab($exitQuestionName, $questionType, $criteriaDetailsv);
+_click(_f("main").s_button("saveBtnExit"));
+_click($bo_pg_formDesigner.btn_closeQuestionPopUp);
+_wait(3000);
+
+
+							//Adding Exit Crtieria for Section two
+
+$sfm_act_formDesigner.editSection($sectionName2);
+$sfm_act_formDesigner.addExistCriteria();
+$sfm_act_formDesigner.addQuesToExistCriteriaTab($exitQuestionName2, $questionType2, $criteriaDetailsvt);
 _click(_f("main").s_button("saveBtnExit"));
 _click($bo_pg_formDesigner.btn_closeQuestionPopUp);
 _wait(3000);

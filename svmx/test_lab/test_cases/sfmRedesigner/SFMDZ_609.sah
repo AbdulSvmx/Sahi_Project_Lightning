@@ -1,0 +1,48 @@
+/*
+* Author	: Mohammad Saadat 
+ * Reviewer	: 
+ * Pre-req	: Not Applicable.
+ * Testcase	: SFMDZ-609: Launch DVR List View - Using URL
+ * Steps	: Launch DVR List View - Using URL
+ * Expt Res	: DVR List View should launch successfully by verifying:
+				a) Check - 'Data Validation Rule' is displayed on table Header
+				b) 'Back To Setup Home' is displayed
+				c) 'Help' option is displayed
+				d) Verify all 5 columns are displayed i.e. DVR Name, Object, Type, WhereUsed and Last Edited
+				e) Check if 'New Validation Rule' button appears.*/
+
+var SFMDZ_609 = _testcase("Launch DVR List View - Using URL");
+SFMDZ_609.start();
+
+
+/**
+ * Global Variable declaration
+.*/
+
+var $url="http://test.salesforce.com";
+var $un="saadat.dz2perftest@servicemax.com";
+var $pwd="servicemax3";
+var $viewName="Data Validation Rules";
+
+/*Login to the sandox */
+$bo_act_login.login($url, $un, $pwd);
+_wait("5000");
+
+/* Launch the DVR list View */
+$sfmrdz_act_common.launchListView($viewName);
+
+
+// Checking the Existance of the page elements in the DVR page
+//_assertExists($sfmrdz_pg_dvrListView.btn_Heading_DVR);
+_assertExists($sfmrdz_pg_dvrListView.btn_heading_objCol);
+_assertExists($sfmrdz_pg_dvrListView.btn_heading_typeCol);
+_assertExists($sfmrdz_pg_dvrListView.btn_heading_whereUsedCol);
+_assertExists($sfmrdz_pg_dvrListView.btn_heading_lastEditedCol);
+_assertExists($sfmrdz_pg_dvrListView.btn_heading_dvrNameCol);
+_assertExists($sfmrdz_pg_dvrListView.btn_newDVR);
+
+//Log Out of Sandbox Org 
+$sfm_act_lightningConfig.logoutInLightning();
+
+
+SFMDZ_609.end(); 

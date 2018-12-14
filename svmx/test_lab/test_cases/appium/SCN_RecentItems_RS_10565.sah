@@ -14,8 +14,8 @@ var $wizardCriteria=null;
 var $headersToAdd = ["Auto_number_c","Auto_PickList_c","Auto_TextBox_c","AutoC_checkBox_c","AutoC_currency_c","AutoC_date_c","AutoC_dateTime_c","AutoC_email_c","AutoC_percent_c","AutoC_phone_c","AutoC_textArea_c","AutoC_URL_c"];
 
 $bo_act_login.login($g_url, $appiumAdminUn, $appiumAdminPwd);
-$sfm_act_lightningConfig.switchToLightning();
 
+///////////////////////////////////////////////////////////////
 
 var $createsfmName = "Create New Custom object";
 var $transactiontype = "as Standalone for the purpose of creating a new record";
@@ -81,6 +81,12 @@ _selectDomain();
 var $targetObjectName = "Auto_Custom_Object2";
 $bo_act_SFMAppPermission.addnewobjectdownloacriteria($targetObjectName);
 */
+
+
+
+
+
+//////////////////////////////////////////////////////////////////////////////////////////
 _writeFile("true", $appiumPath+$sahiIntermediatoryPath, true);
 
 RS_10565.end();

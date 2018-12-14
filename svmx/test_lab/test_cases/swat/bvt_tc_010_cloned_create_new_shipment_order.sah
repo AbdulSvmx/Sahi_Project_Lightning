@@ -24,7 +24,7 @@ _log($productName);
 	var $poNumber;
 	
 	$bo_act_login.login($g_url,$swat_un,$swat_pwd );
-	$sfm_act_lightningConfig.switchToLightning();
+	
 
 	//Create PO through REST API ******
 	var $poNumber = $sfm_act_createCustomWizard.createBlankPoFromRest($swat_un, $swat_pwd, $swat_ClientId, $swat_ConsumerSecret, $swat_OrgInstance);

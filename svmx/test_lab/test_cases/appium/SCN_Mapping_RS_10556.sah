@@ -93,7 +93,7 @@ $filter="id";
 $workorderid=$sfm_act_restApiMethods.postRestApi($appiumAdminUn,$appiumAdminPwd,$appiumclient_id,$appiumclient_secret,$appiumorginstance,$objName,$obJson,"POST");
 //get the WO number
 $WOname =$sfm_act_restApiMethods.getRestApi($appiumAdminUn,$appiumAdminPwd,$appiumclient_id,$appiumclient_secret,$appiumorginstance,"GET", $objName, $columnName, $filter, $workorderid);
-//$excel.insertUnderColumn("/auto/SVMX_Catalyst/fsaautomation/resources/TestData.xlsx", "RS_10556", "Data4",$WOname ,"2");
+$excel.insertUnderColumn("/auto/SVMX_Catalyst/fsaautomation/resources/TestData.xlsx", "RS_10556", "Data4",$WOname ,"2");
 
 //no need to create an event
 var $now = new Date();
@@ -110,7 +110,7 @@ var $new1=new Date($set1hr.toString().split('IST')[0]+' GMT').toISOString().spli
 _log($new1);
 
 // To crete one hr svmx event
-/*var $techname=$appiumTechId;
+var $techname=$appiumTechId;
 $objName= "SVMXC__SVMX_Event__c";
 $obJson = "{\"Name\":\"Event_10556\",\"SVMXC__Service_Order__c\":\""+$workorderid+"\",\"SVMXC__Technician__c\":\""+$techname+"\",\"SVMXC__StartDateTime__c\":\""+$new+"\",\"SVMXC__EndDateTime__c\":\""+$new1+"\",\"SVMXC__WhatId__c\":\""+$workorderid+"\"}";	
 $columnName = "Name";
@@ -119,19 +119,19 @@ $filter="id";
 $eventid=$sfm_act_restApiMethods.postRestApi($appiumAdminUn,$appiumAdminPwd,$appiumclient_id,$appiumclient_secret,$appiumorginstance,$objName,$obJson,"POST");
 //get the event name
 $eventname =$sfm_act_restApiMethods.getRestApi($appiumAdminUn,$appiumAdminPwd,$appiumclient_id,$appiumclient_secret,$appiumorginstance,"GET", $objName, $columnName, $filter, $eventid);
-_log($eventname);*/
+_log($eventname);
 
 
 $bo_act_login.login($g_url, $appiumAdminUn, $appiumAdminPwd);
-$sfm_act_lightningConfig.switchToLightning();
+
 //***********************************************************************************************************************//
-var $objectName="Work Order";
+/*var $objectName="Work Order";
 var $customFieldsNames = ["Currency","Email","Number","Phone","URL"];
 var $missingStdDataTypes=["Currency(18, 0)","Email","Number(18, 0)","Phone","URL"];
 var $multiPicklistValues=[];
 //Create custom fields if needed
 $sfm_act_lightningConfig.addCustomFields($objectName, $customFieldsNames, $missingStdDataTypes, $sfd_myDomain,$multiPicklistValues);
-
+*/
 
 //***********************************************************************************************************************//
 $value =$sfm_act_SFM.checkprocessexists($sfmName,$isCustom);//to check process exists or not
@@ -146,9 +146,7 @@ $textValues = ["SVMX.CURRENTUSERID","46.91","testsample@gmail.com","11.11","9902
 $picklistLabels = ["Billing Type","Customer Down","Scheduled Date","Scheduled Date Time","Contact"];
 $pickListValues = ["Empowerment","true","Today","Tomorrow","C10556_ Auto"];
 var $Maptype="Value Map for Existing Records";
-_click($bo_pg_sfmTransactionAndDesigner.btn_qualifyingCriteriaAndFieldMapping);
-$bo_act_mappings.createMapping("Work Order",$Maptype,$picklistLabels,$pickListValues,$textLabels,$textValues,$mapName);
-_selectDomain($g_domain);
+
 
 $textLabelspart = ["Closed By","Canceled By","Line Price Per Unit","Line Qty","To Location","Work Description"];
 $textValuespart = ["SVMX.CURRENTUSERID","SVMX.OWNER","SVMX.CURRENTRECORDHEADER.Currency__c","17","SVMX.USERTRUNK","Verifying Value Map for New Child Record (text)"];
@@ -158,8 +156,11 @@ var $Maptypeparts="Value Map For New Records";
 //_setSpeed(3000);
 _click($bo_pg_sfmTransactionAndDesigner.btn_qualifyingCriteriaAndFieldMapping);
 $bo_act_mappings.createMapping("Parts",$Maptypeparts,$picklistLabelspart,$pickListValuespart,$textLabelspart,$textValuespart,$mapNamepart);
+_selectDomain($g_domain);
 
-
+_click($bo_pg_sfmTransactionAndDesigner.btn_qualifyingCriteriaAndFieldMapping);
+$bo_act_mappings.createMapping("Work Order",$Maptype,$picklistLabels,$pickListValues,$textLabels,$textValues,$mapName);
+_selectDomain($g_domain);
 
 
 $sfm_act_wizards.addToWizard($wizardObject,$wizardName, $wizardType,$sfmName,$handOver,$profile,$wizardCriteria);  

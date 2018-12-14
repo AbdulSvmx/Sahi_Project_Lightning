@@ -1,0 +1,29 @@
+
+//Suite Level setup for basic test data
+//Product
+
+var $obJson = "{\"Name\":\"Chrome\"}";
+var $objName = "Product2";
+var $filterFieldName = "Name";
+var $filterFieldValue = "Chrome";
+
+$sfm_act_restApiMethods.upsertRecordsRestApi($sfmlUsn,$sfmlPwd, $sfmClientId, $sfmConsumerSecret, $sfmOrgInstance, $objName, $filterFieldName, $filterFieldValue, $obJson);
+
+//Account
+var $obJson = "{\"Name\":\"HCSAccountForTesting\"}";
+var $objName = "Account";
+var $filterFieldName = "Name";
+var $filterFieldValue = "HCSAccountForTesting";
+
+$sfm_act_restApiMethods.upsertRecordsRestApi($sfmlUsn,$sfmlPwd, $sfmClientId, $sfmConsumerSecret, $sfmOrgInstance, $objName, $filterFieldName, $filterFieldValue, $obJson);
+
+//Contact
+var $obJson = "{\"FirstName\":\"Lightning\",\"LastName\":\"Contact\"}";
+var $objName = "Contact";
+var $filterFieldName = "Name";
+var $filterFieldValue = "LightningContact";
+
+$sfm_act_restApiMethods.upsertRecordsRestApi($sfmlUsn,$sfmlPwd, $sfmClientId, $sfmConsumerSecret, $sfmOrgInstance, $objName, $filterFieldName, $filterFieldValue, $obJson);
+
+
+

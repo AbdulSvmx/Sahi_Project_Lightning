@@ -7,13 +7,13 @@
 var $sfmrdz_pg_expListView =  new function sfmrdz_pg_expListView(){
 	
 	this.btn_heading_expression=_div("Expressions");
-	this.btn_heading_expressionCol=_div("Expression Name");
+	this.btn_heading_expressionCol=_div("EXPRESSION NAME");
 	this.btn_heading_objectCol=_div("Object");
 	this.btn_heading_whereUsedCol=_div("Where Used");
 	this.btn_heading_lastEdited=_div("Last Edited");
 	
 	this.btn_newExpr=_button("New Expression");	
-	this.btn_heading_sfmExprHome=_div("SFM Transaction & Docs DesignerHome");
+	this.btn_heading_sfmExprHome=_div("SFM Transaction & Docs Designer");
 	
 	
 	//Confirmation message items on delete window 

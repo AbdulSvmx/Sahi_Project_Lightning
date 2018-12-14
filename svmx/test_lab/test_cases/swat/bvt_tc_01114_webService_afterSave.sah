@@ -4,7 +4,7 @@ var $bvt_tc_01114_webService_afterSave = _testcase("bvt_tc_01114_webService_afte
 $bvt_tc_01114_webService_afterSave.start();
 
 var $sfmNameToBeCloned = "Manage Work Order Lines - Usage";
-var $sfmName=$bo_act_common.generateRandomName("RS_10479_");
+var $sfmName=$bo_act_common.generateRandomName("swat_WS_afterSave_");
 var $isCustom = false;
 var $sfmTemplate = "SVMXSTD: Manage WO Usage Lines";
 var $sfmTemplateSaveAsName = $sfmName;
@@ -46,8 +46,8 @@ if(_isVisible($sfm_pg_sfmDesigner.txt_priceAlert)){
 }
 _wait(15000);
 _assertEqual("Field Service", _getText($sfm_pg_sfmDesigner.txt_orderType), "Order type is not updated");
-_assertEqual("560061",_getText($sfm_pg_sfmDesigner.txt_zip),"Zip is not updated");
-_assertEqual("40",_getText($sfm_pg_sfmDesigner.txt_drivingTime),"Driving time is not updated");
+_assertEqual("560065",_getText($sfm_pg_sfmDesigner.txt_zip),"Zip is not updated");
+_assertEqual("60",_getText($sfm_pg_sfmDesigner.txt_drivingTime),"Driving time is not updated");
 _assertFalse(_isChecked($sfm_pg_sfmDesigner.chk_isEntitlementPerformed),"Is Entitlement Performed is not unchecked");
 
 

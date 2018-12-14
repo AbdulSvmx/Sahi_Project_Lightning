@@ -38,7 +38,7 @@ var $rs_10540 = _testcase("SCN_SourcetoTarget1_RS-10540  Verify Source to target
 	//Login to App and navigate to sfm transaction and designer page
 	_setSpeed($g_stepSpeed);
 	$bo_act_login.login($g_url, $appiumAdminUn, $appiumAdminPwd);
-	$sfm_act_lightningConfig.switchToLightning(); 
+	 
 	
 	//Check for the process if exists
 	$bProcessStatus=$sfm_act_SFM.sfmProcessCheck($sfmName);
