@@ -50,7 +50,7 @@ var $rs_10549 = _testcase("SCN_Explore_RS-10549 Verify if the SFM search is disp
 	//Login to App and navigate to sfm transaction and designer page
 	_setSpeed($g_stepSpeed);
 	$bo_act_login.login($g_url, $appiumAdminUn, $appiumAdminPwd);
-	 
+	$sfm_act_lightningConfig.switchToLightning(); 
 	$bo_act_navigation.navigateToSfmSearchDesigner();
 	
 	$bSearchStatus=$sfm_act_search.checkSearchandAdd($searchName);
@@ -134,7 +134,6 @@ var $rs_10549 = _testcase("SCN_Explore_RS-10549 Verify if the SFM search is disp
 	_wait(8000);
 	
 	
-	
 	// Removing Work Order from Download Criteria
 	$bo_act_SFMAppPermission.setDownloadCriteriaOwnShipType("All Records",$bo_pg_sfmAppPermissionD.chkbox_workorder);
 	_wait(8000);
@@ -142,10 +141,11 @@ var $rs_10549 = _testcase("SCN_Explore_RS-10549 Verify if the SFM search is disp
 	$bo_act_SFMAppPermission.setDownloadCriteriaOwnShipType("All Records",$bo_pg_sfmAppPermissionD.chkbox_account);
 	_wait(8000);
 	
-	$bo_act_SFMAppPermission.setDownloadCriteriaOwnShipType("All Records",$bo_pg_sfmAppPermissionD.chkbox_location);
+	$bo_act_SFMAppPermission.setDownloadCriteriaOwnShipType("All Records",$bo_pg_sfmAppPermissionD.chkbox_product);
 	_wait(8000);
 		
-		
+	$bo_act_SFMAppPermission.setDownloadCriteriaOwnShipType("All Records",$bo_pg_sfmAppPermissionD.chkbox_contact);
+	_wait(8000);	
 	
 	
 $rs_10549.end();
