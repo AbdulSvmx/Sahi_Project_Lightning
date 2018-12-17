@@ -16,11 +16,16 @@ var $sfmrdz_pg_dvrListView = new function sfmrdz_pg_dvrListView(){
 	
 	
 	//DVR Filter Drop down items
-	this.sel_dvrFilterList= _list("Menu__list slds-dropdown__list");
+	//this.sel_dvrFilterList= _list("Menu__list slds-dropdown__list");
+	//this.sel_dvrFilterList= _div("/Wrapper slds-size--block/");
+	this.sel_dvrFilterList=_textbox("/Input Picklist__input/");
 	this.btn_defaultViews=_span("DEFAULT VIEWS");
 	this.link_showAll=_link("Show All");
 	this.link_recentlyUsed=_link("Recently Used");
-	this.link_stdExpression=_link("Standard Expression");
+	this.link_stdExpression=_link("TL:Standard Validation Rule");
+	this.link_otherExpression=_link("TL:Other Validation Rule");
+	this.link_errorTypeExpression=_link("TODO_Tag_Error_Type");
+	this.link_warningTypeExpression=_link("TODO_Tag_Warning_Type");
 	
 
 };
