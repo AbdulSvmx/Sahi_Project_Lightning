@@ -17,7 +17,7 @@ var $sfmrdz_pg_common=new function sfmrdz_pg_common(){
 	this.btn_msgNoResult=_div("No results have been found.");
 	this.btn_actionMenu=_button("/slds-button Button--type-icon-border/");
 	
-	//Action menu items
+	//Action menu items 
 	this.link_clone=_link("Clone");
 	this.link_delete=_link("Delete");
 	
