@@ -71,7 +71,7 @@ $mappingName = $sfmName+"map";
 $mappingField = ["Received City", "Date Received","End Date and Time","Account"];
 $mappingValue = ["Billing Type","Scheduled Date","Actual Initial Response","Account ID"];
 
-$sfm_act_sfmMapping.createMappingFromMapping($sourceObj,$targetObj,$mappingName,$mappingField,$mappingValue);
+$sfm_act_mappings.createMappingFromMapping($sourceObj,$targetObj,$mappingName,$mappingField,$mappingValue);
 
 
 //clone tmd016 and set form fill for case in child line

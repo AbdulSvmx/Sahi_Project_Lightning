@@ -1,4 +1,4 @@
-var $sfm_act_sfmMapping = new function sfm_act_sfmMapping() {
+var $sfm_act_mappings = new function sfm_act_mappings() {
 
 	this.createMappingFromMapping = function($sourceObj,$targetObj,$mappingName,$mappingField,$mappingValue){
 		$bo_act_navigation.navigateToSvmxSetup();
