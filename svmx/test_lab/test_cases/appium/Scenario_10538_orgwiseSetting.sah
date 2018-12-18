@@ -25,7 +25,7 @@ $bo_act_configurationProfiles.editGroupProfileForBooleanSettings($group_profilen
 // Changing the Text value for the Settings
 $bo_act_configurationProfiles.editGroupProfileForTextSettings($group_profilename,$module,$submodule, "SET004", "Standard Price Book");
 $bo_act_configurationProfiles.editGroupProfileForTextSettings($group_profilename,$module,$submodule, "SET016", "Warranty,Contract");
-$bo_act_configurationProfiles.editGroupProfileForTextSettings($group_profilename,$module,$submodule, "SET017", "Standard Price Book");
+$bo_act_configurationProfiles.editGroupProfileForTextSettings($group_profilename,$module,$submodule, "SET017", "Standard Service Price Book");
 
 
 // Adding the Objects to Download Criteria
