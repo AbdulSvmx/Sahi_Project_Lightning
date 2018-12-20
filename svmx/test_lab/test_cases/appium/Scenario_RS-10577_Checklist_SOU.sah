@@ -22,10 +22,10 @@ var $wizardCriteria=null;
 
 
 //Sou Variables
-var $field = ["Billing Type","Scheduled Date","Scheduled Date Time","Proforma Invoice", "No Of Times Assigned"];
-var $condition= ["Set","Set","Set","Set","Set"];
-var $operand = ["Value","Function","Question","Value","Value"];
-var $value = ["Loan","Today","AUTO_What is the ScheduledDatetime?","Source Object Updated","2"];
+var $field = ["Is Entitlement Performed","Billing Type","Scheduled Date","Scheduled Date Time","Proforma Invoice", "No Of Times Assigned"];
+var $condition= ["Set","Set","Set","Set","Set","Set"];
+var $operand = ["Value","Value","Function","Question","Value","Value"];
+var $value = ["true","Loan","Today","AUTO_What is the ScheduledDatetime?","Source Object Updated","2"];
 var $souObject  = "Work Order";
 
 _setSpeed($g_stepSpeed);
