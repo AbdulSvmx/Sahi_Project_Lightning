@@ -24,7 +24,7 @@ $bo_act_configurationProfiles.editGroupProfileForTextSettings($groupProfileName,
 _selectDomain();
 $bo_act_configurationProfiles.editGroupProfileForTextSettings($groupProfileName, "ServiceMax iPad Client", "Calendar", "SET006", "",false);
 _selectDomain();
-
+_wait(5000);
 $bo_act_SFMAppPermission.set_mobileapp_permissions($profilename, $targetObjectName, $createsfmName,$removeprocess);
 
 
