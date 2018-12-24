@@ -34,7 +34,7 @@ var $mapName = $processName + "mp";
 //**************************************************************************************
 //Login and switch to lightning
 $bo_act_login.login($g_url,$sfmlUsn,$sfmlPwd);
-$sfm_act_lightningConfig.switchToLightning();
+
 _wait(15000);
 
 //Create custom fields if needed
@@ -75,7 +75,7 @@ $sfm_act_lightningConfig.logoutInLightning();
 //Login and switch to lightning
 
 $bo_act_login.login($g_url,$sfmlUsn,$sfmlPwd);
-$sfm_act_lightningConfig.switchToLightning();
+
 
 //**************************************************************************************************
 

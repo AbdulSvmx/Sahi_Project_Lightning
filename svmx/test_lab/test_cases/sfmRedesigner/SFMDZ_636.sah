@@ -1,0 +1,70 @@
+/**
+ * Author	: Abhishek Nadig
+ * Reviewer	: 
+ * Pre-req	: Nothing
+ * Testcase	: Type Filter List: Type filter list on Expression view.
+ * Steps	: 
+ 				1) Click on Filter Option and verify the list of option it displays in drop-down
+ 				2) Verify if 'Show All' filter is checked
+ * Expt Res	:
+ 				1) Filter should have following options 
+						standard filters are displayed:
+						Show All
+						Recently Used (in the last 7 days) 
+						Standard Expression
+						Other Expression
+ 				2) 'Show All' filter should be checked by default and it should have blue color tick mark
+			
+ */
+
+
+var $SFMDZ_636=_testcase("Type Filter List","Type filter list on Expression view");
+$SFMDZ_636.start();
+_setSpeed($g_stepSpeed);
+	
+		/**
+		 * Global Variable declaration
+		 */
+		
+		var $url="http://test.salesforce.com";
+		var $un="saadat.dz2perftest@servicemax.com";
+		var $pwd="servicemax3";
+		var $viewName="Expressions";
+		
+		/**
+		 * Login to the Sandbox Org and launching Transaction list view
+		 */
+		$bo_act_login.login($url, $un, $pwd);
+		
+		$sfmrdz_act_common.launchListView($viewName);
+
+		_assertEqual("Show All",_getText($sfmrdz_pg_expListView.link_showAll),"Default text in type filter is not Show All");
+		
+		_click($sfmrdz_pg_common.txt_listViewPicklist);
+		_mouseOver($sfmrdz_pg_expListView.link_showAll);
+
+		//Assertion on the type pick list menu items & mouseOver to keep Dropdown stay long time for assertion
+		_assertVisible($sfmrdz_pg_expListView.btn_pickListMenu);
+		_assertVisible($sfmrdz_pg_expListView.btn_heading_defaultView);
+		_assertVisible($sfmrdz_pg_expListView.link_showAll);
+		_mouseOver($sfmrdz_pg_expListView.link_recent);
+		_assertVisible($sfmrdz_pg_expListView.link_recent);
+		_assertVisible($sfmrdz_pg_expListView.link_stdExpression);
+		_assertVisible($sfmrdz_pg_expListView.link_otherExp);
+		
+		
+		//Page refresh
+		_selectDomain();
+		_call(top.location.reload(true));
+		
+		
+		$sfmrdz_act_common.launchListView($viewName);
+		_wait(30000, _isVisible($sfmrdz_pg_common.btn_actionMenu));
+		_assertEqual("Show All",_getText($sfmrdz_pg_expListView.link_showAll),"Default text in type filter is not Show All");
+
+		
+		//$sfmrdz_act_common.launchHomeWindow($homecurrentHomePageULR);
+		//_wait(10000,_isVisible($bo_pg_home.link_home));
+		$sfm_act_lightningConfig.logoutInLightning();
+		
+	$SFMDZ_636.end();

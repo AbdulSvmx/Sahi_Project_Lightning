@@ -111,7 +111,7 @@ var $dvrExpressionDetails5=[$comboField5,$operandType5,$answer5,$advExpr5,$msfTy
 
 
 $bo_act_login.login($g_url, $appiumAdminUn, $appiumAdminPwd);
-$sfm_act_lightningConfig.switchToLightning();
+
 $ProcessStatus=$sfm_act_SFM.checkCustomProcess($sfmName);
 _wait(5000);
 if($ProcessStatus==false){

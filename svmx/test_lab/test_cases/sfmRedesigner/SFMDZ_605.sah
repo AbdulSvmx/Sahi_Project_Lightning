@@ -1,0 +1,79 @@
+/**
+ * Author	: Abhishek Nadig
+ * Reviewer	: 
+ * Pre-req	: Nothing.
+ * Testcase	: $SFMDZ_605: Verify that SFM searched result is based on applied filter.
+ * Steps	: 
+ 				a. Search for a  Expression  by clicking on search bar and type 'Act' 
+				b. Hover Over Expression 'Activate Preventive Maintenance Plan Only' and check if lock icon appears 
+				c. Click on action menu and verify if 'Delete' option appear 
+				d. Hover over last edited column.
+				e. SFMDZ_621 - Verify "Contain" search by giving keyword which matches middle/last characters of  Expression Name and Object.
+ * Expt Res	:
+ 				a. On typing 'Act' Expression should be listed which matches the keyword.
+				b. Lock Icon should appear on hovering the Expression and tool tip should read as 'Standard Expression : Cannot be Edited'
+				c.'Delete' option should not appear in action menu
+				d) On Hover over Last Edited Date/Time column in Expression List View "Created By, Created On, Last Edited By" fields should be displayed.
+ 
+
+			
+ */
+
+var $SFMDZ_605=_testcase("$SFMDZ_605","Verify that SFM searched result is based on applied filter");
+$SFMDZ_605.start();
+_setSpeed($g_stepSpeed);
+
+	/**
+	 * Global Variable declaration
+	 */
+
+	var $url="http://test.salesforce.com";
+	var $un="saadat.dz2perftest@servicemax.com";
+	var $pwd="servicemax3";
+	var $viewName="Expressions";
+
+
+	/**
+	 * Login to the Sandbox Org and launching Expression list view
+	 */
+	$bo_act_login.login($url, $un, $pwd);
+	
+	$sfmrdz_act_common.launchListView($viewName);
+	
+	//Content Search
+	var $search="Contract";
+
+	var $contentSort=$sfmrdz_act_expListView.contentSearch($search);
+	_assertTrue($contentSort[0],$search+" text is not available in "+$contentSort[1]);
+	
+	//just to avoid browser hang filtering result by standart object
+	$sfmrdz_act_common.typePicklist("Standard Expression");
+	
+	//Lock icon mouse Hover
+	$sfmrdz_act_common.mouseOver("SVMXSTD: Active Service Contracts Only", "Lock", "");
+	_assertVisible($sfmrdz_pg_common.btn_lockIcon);
+
+	//reset
+	$sfmrdz_act_common.typePicklist("Show All");
+	
+	//Last edited column mouse hover item check
+	$sfmrdz_act_common.searchObj("Active");
+	_wait(5000,_isVisible($sfmrdz_pg_common.btn_actionMenu));
+	
+	$sfmrdz_act_common.mouseOver("SVMXSTD: Active Preventive Maintenance Plans Only","Last Edited");
+	//_wait(1000,_isVisible($sfmrdz_pg_common.btn_lastEditMouseOverDiv));
+	_assertExists($sfmrdz_pg_common.btn_lastEditMouseOverDiv);
+	_mouseOver($sfmrdz_pg_common.btn_createdBy);
+	_assertExists($sfmrdz_pg_common.btn_createdBy);
+	_assertExists($sfmrdz_pg_common.btn_createdDate);
+	
+	//Delete option for Standard SFM
+	$sfmrdz_act_common.searchObj("SVMXSTD: Active Preventive Maintenance Plans Only");
+	_click($sfmrdz_pg_common.btn_actionMenu);
+	_wait(5000,_isVisible($sfmrdz_pg_common.link_clone));
+	_assertNotVisible($sfmrdz_pg_common.link_delete, "delete action link is available on ");
+
+	
+	$sfm_act_lightningConfig.logoutInLightning();
+
+$SFMDZ_605.end();

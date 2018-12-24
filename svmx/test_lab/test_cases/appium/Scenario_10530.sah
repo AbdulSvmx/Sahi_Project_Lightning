@@ -14,7 +14,7 @@ var $lkpName = $bo_act_common.generateRandomName("Product_lkp_Name_");
 var $lkpName1 = $bo_act_common.generateRandomName("Part_lkp_Name_");
 
 $bo_act_login.login($g_url, $appiumAdminUn, $appiumAdminPwd);
-$sfm_act_lightningConfig.switchToLightning();
+
 _wait(5000);
 $bo_act_navigation.navigateToSfmTransactionDesigner();
 _setStrictVisibilityCheck(true);

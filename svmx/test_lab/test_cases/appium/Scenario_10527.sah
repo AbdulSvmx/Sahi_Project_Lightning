@@ -17,7 +17,7 @@ var $profile= "auto group profile";
  ***************Add Process***************
  *****************************************/
 $bo_act_login.login($g_url, $appiumAdminUn, $appiumAdminPwd);
-$sfm_act_lightningConfig.switchToLightning();
+
 $bo_act_navigation.navigateToSfmTransactionDesigner();
 _wait(10000);
 var $var = $sfm_act_createProcess.searchCustomSfm($sfmName);

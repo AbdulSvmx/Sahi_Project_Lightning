@@ -7,20 +7,43 @@
 var $sfmrdz_pg_expListView =  new function sfmrdz_pg_expListView(){
 	
 	this.btn_heading_expression=_div("Expressions");
-	this.btn_heading_expressionCol=_div("Expression Name");
+	this.btn_heading_expressionCol=_div("EXPRESSION NAME");
 	this.btn_heading_objectCol=_div("Object");
 	this.btn_heading_whereUsedCol=_div("Where Used");
 	this.btn_heading_lastEdited=_div("Last Edited");
 	
 	this.btn_newExpr=_button("New Expression");	
-	this.btn_heading_sfmExprHome=_div("SFM Transaction & Docs DesignerHome");
+	this.btn_heading_sfmExprHome=_div("SFM Transaction & Docs Designer");
 	
 	
 	//Confirmation message items on delete window 
+	this.heading_confirmationAlert=_heading2("Are you sure you want to delete this Expression?");
+	this.heading_usedExpMessage=_div("Below are the different areas where this transaction is being used:");
 	
-	//Confirmation message items on tranction window
+	
+	//Confirmation message items on Expression window
+	this.btn_expDeleteSucessMsg=_heading2("Expression COMM001_TAG052");
+	//this.btn_closeExpDeleteSucessMsg=_button("Close",_near(this.$btn_trnDeleteSucessMsg));
 	
 	
 	//Clone Window items
+	
+	//Type Picklist items
+	this.btn_heading_defaultView=_span("DEFAULT VIEWS");
+	this.btn_pickListMenu=_div("/Menu Picklist__menu/");
+	this.link_showAll=_link("Show All");
+	this.link_recent=_link("Recently Used");
+	this.link_stdExpression=_link("Standard Expression");
+	this.link_otherExp=_link("Other Expression");
+		
+	//Where Used window Items
+	this.btn_heading_whereUsedDivHeading=_heading2("/Where Used:.*/");
+	this.btn_heading_SFMUsed=_div("Below are the different areas where this transaction is being used:");
+	this.btn_heading_SFMSteps=_div("Service Flow Wizard Step");
+	this.btn_closeWindow=_button("Close");
+	
+	
+	
+	
 	
 };

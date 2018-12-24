@@ -26,17 +26,18 @@ var $bo_act_login = new function bo_act_login() {
 		_setValue($bo_pg_login.txt_password, $pwd);
 		_click($bo_pg_login.btn_login);
 		_wait(3000);
-		$sfm_act_lightningConfig.switchToLightning();
+		
 		_wait(10000, _exists($bo_pg_home.link_home));
-
-		if(_exists($bo_pg_home.link_home)){
-			return true;
-		}else{
-			return false;
+		//Switch to Classic if not.
+		_selectDomain();
+		var $url;
+		_set($url, window.location.href);
+		_log($url);
+		if(!$url.includes("lightning.force.com")){
+			if(_isVisible($bo_pg_home.link_switchToLightning)==true){
+				_click($bo_pg_home.link_switchToLightning);
+			 }
 		}
-
-
-		// Need to return
 	};
 	
 

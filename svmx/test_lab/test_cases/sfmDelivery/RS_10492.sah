@@ -25,7 +25,7 @@ var $woNumber = $sfm_act_createCustomWizard.createBlankWoFromRest($sfmlUsn, $sfm
 //login
 _setSpeed($g_stepSpeed);
 $bo_act_login.login($g_url,$sfmlUsn,$sfmlPwd);
-$sfm_act_lightningConfig.switchToLightning(); 
+ 
 
 // clone the process
 $sfm_act_SFM.cloneTDM016($sfmNameToBeCloned,$sfmName,$isCustom, $sfmName,$sfmTemplate, $fieldName, $containerName);

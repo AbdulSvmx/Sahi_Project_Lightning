@@ -1,5 +1,6 @@
 /**
  * Author	: Anand Kakhandaki
+ * Modified by : Abhishek Nadig
  * Reviewer	: 
  * Pre-req	: Nothing
  * Testcase	: SFMDZ-150: Launch Transaction List View - Using URL
@@ -23,8 +24,8 @@ $SFMDZ_150.start();
 
 	var $url="http://test.salesforce.com";
 	var $un="saadat.dz2perftest@servicemax.com";
-	var $pwd="servicemax1";
-	var $viewName="transaction";
+	var $pwd="servicemax3";
+	var $viewName="Transactions";
 	
 	/**
 	 * Login to the Sandbox Org and launching Transaction list view
@@ -32,7 +33,9 @@ $SFMDZ_150.start();
 	
 	$bo_act_login.login($url, $un, $pwd);
 
-	var $homecurrentHomePageULR =$sfmrdz_act_common.LaunchListViewWindow($viewName);
+	//var $homecurrentHomePageULR =$sfmrdz_act_common.LaunchListViewWindow($viewName);
+	
+	$sfmrdz_act_common.launchListView($viewName);
 	
 	//Assertions on transaction list view
 	//_assertExists($sfmrdz_pg_trnListView.btn_heading_transaction);
@@ -47,8 +50,8 @@ $SFMDZ_150.start();
 	_assertExists($sfmrdz_pg_trnListView.btn_heading_statusCol);
 	_assertExists($sfmrdz_pg_trnListView.btn_heading_lastEditedCol);
 	
-	$sfmrdz_act_common.launchHomeWindow($homecurrentHomePageULR);
-	_wait(10000,_isVisible($bo_pg_home.link_home));
+	//$sfmrdz_act_common.launchHomeWindow($homecurrentHomePageULR);
+	//_wait(10000,_isVisible($bo_pg_home.link_home));
 	$sfm_act_lightningConfig.logoutInLightning();
 	
 	

@@ -8,7 +8,7 @@ var $setting = "GBL025";
 var $picklistValue="ServiceMax Event";
 
 $bo_act_login.login($g_url, $appiumAdminUn, $appiumAdminPwd);
-$sfm_act_lightningConfig.switchToLightning();
+
 $bo_act_configurationProfiles.editGlobalProfileForPicklistSettings($profile,$module,$subModule,$setting,$picklistValue);
 
 _selectWindow("");
