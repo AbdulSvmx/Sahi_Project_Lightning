@@ -1,0 +1,48 @@
+/*
+* Author	: Mohammad Saadat 
+ * Reviewer	: 
+ * Pre-req	: Not Applicable
+ * Testcase	: SFMDZ-610: Launch Mapping List View
+ * Steps	: Launch DVR List View - Using URL
+ * Expt Res	: Mapping List View should launch successfully by verifying:
+				a) Check - 'Mapping' is displayed on table Header
+				b) 'Back To Setup Home' is displayed
+				c) 'Help' option is displayed
+				d) Verify all 5 columns are displayed i.e. Mapping Name, Source Object, Target Object,  WhereUsed and Last Edited
+				e) Check if 'New Mapping' button appears.*/
+															
+
+var SFMDZ_610 = _testcase("Launch Mapping List View");
+SFMDZ_610.start();
+
+
+/**
+ * Global Variable declaration
+.*/
+
+var $url="http://test.salesforce.com";
+var $un="saadat.dz2perftest@servicemax.com";
+var $pwd="servicemax3";
+var $viewName="Mappings";
+
+/*Login to the sandox */
+$bo_act_login.login($url, $un, $pwd);
+_wait("5000");
+
+/* Launch the DVR list View */
+$sfmrdz_act_common.launchListView($viewName);
+
+
+// Checking the Existance of the page elements in the Mapping page
+_assertExists($sfmrdz_pg_mappingListView.btn_heading_mappingCol);
+_assertExists($sfmrdz_pg_mappingListView.btn_heading_sourceObj);
+_assertExists($sfmrdz_pg_mappingListView.btn_heading_targetObj);
+_assertExists($sfmrdz_pg_mappingListView.btn_whereUsedCol);
+_assertExists($sfmrdz_pg_mappingListView.btn_lastEditedCol);
+_assertExists($sfmrdz_pg_mappingListView.btn_newMapping);
+
+//Log Out of Sandbox Org 
+$sfm_act_lightningConfig.logoutInLightning();
+
+
+SFMDZ_610.end(); 

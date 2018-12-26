@@ -5,14 +5,14 @@
 var $sfmrdz_pg_mappingListView=new function sfmrdz_pg_mappingListView(){
 	
 	this.btn_heading_mapping=_div("Mapping");
-	this.btn_heading_mappingCol=_div("TODO_TAG NAME");
+	this.btn_heading_mappingCol=_div("MAPPING NAME");
 	this.btn_heading_sourceObj=_div("Source Object");
-	this.btn_heading_TDTOCol=_div("TODO_TARGET_OBJECT");
+	this.btn_heading_targetObj=_div("Target Object");
 	this.btn_whereUsedCol=_div("Where Used");
 	this.btn_lastEditedCol=_div("Last Edited");
 	
 	
-	this.btn_newMapping=_button("New TODO_TAG");
+	this.btn_newMapping=_button("New Mapping");
 	
 	this.btn_heading_sfmMappingHome=_div("SFM Transaction & Docs DesignerHome");
 	this.btn_sfmMappingHomeIcon=_div("/slds-media__figure/");
