@@ -1,0 +1,62 @@
+/*
+ * Author	: Mohammad Saadat
+ * Reviewer	: 
+ * Pre-req	: Nothing
+ * Testcase	: Type Filter List: Type filter list on Mapping List view.
+ * Steps	: 
+ 				1) Click on Filter Option and verify the list of option it displays in drop-down
+ 				2) Verify if 'Show All' filter is checked
+ * Expt Res	:
+ 				1) Filter should have following options 
+				Show All
+				Recently Used 
+				Standard Mappings
+				Other Mappings
+				2) 'Show All' filter should be checked by default and it should have blue color tick mark*/
+
+
+var $SFMDZ_638=_testcase("Type Filter List","Type filter list on Mapping List view");
+$SFMDZ_638.start();
+_setSpeed($g_stepSpeed);
+
+/**
+ * Global Variable declaration
+ */
+
+var $url="http://test.salesforce.com";
+var $un="saadat.dz2perftest@servicemax.com";
+var $pwd="servicemax3";
+var $viewName="Mappings";
+
+/**
+ * Login to the Sandbox Org and launching Transaction list view
+ */
+$bo_act_login.login($url, $un, $pwd);
+_wait(5000);
+$sfmrdz_act_common.launchListView($viewName);
+
+_assertEqual("Show All",_getText($sfmrdz_pg_mappingListView.link_showAll),"Validating Show All text in filter drop down");
+_click($sfmrdz_pg_mappingListView.sel_mappingFilterList);
+_mouseOver($sfmrdz_pg_mappingListView.link_showAll);
+
+//Assertion on the type pick list menu items & mouseOver to keep Dropdown stay long time for assertion
+_assertVisible($sfmrdz_pg_mappingListView.link_recentlyUsed);
+_assertVisible($sfmrdz_pg_mappingListView.link_stdMappings);
+_assertVisible($sfmrdz_pg_mappingListView.link_otherMappings);
+
+
+//Page refresh
+_selectDomain();
+_call(top.location.reload(true));
+
+
+$sfmrdz_act_common.launchListView($viewName);
+_wait(30000, _isVisible($sfmrdz_pg_mappingListView.btn_newMapping));
+_assertEqual("Show All",_getText($sfmrdz_pg_mappingListView.link_showAll),"Validating Show All text in filter drop down");
+
+
+//_wait(10000,_isVisible($bo_pg_home.link_home));
+$sfm_act_lightningConfig.logoutInLightning();
+
+$SFMDZ_638.end();
+
