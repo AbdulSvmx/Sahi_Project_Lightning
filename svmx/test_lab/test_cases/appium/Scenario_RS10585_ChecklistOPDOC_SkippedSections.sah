@@ -37,14 +37,34 @@ var $criteriaDetailsentry=[$comboFielde,$comboConditionse,$toggleButtone,$comboI
 //Variables required for OPDOC Process
 var $value = _readFile("/auto/sahi_pro/userdata/scripts/Sahi_Project_Lightning/scenario7.txt");
 var $templateName = $bo_act_common.generateRandomName("SFM_Auto_Template_");
+var $templateName1 = $bo_act_common.generateRandomName("SFM_Auto_Template_");
+
 //var $sfmName1 = $bo_act_common.generateRandomName("SFM_Auto_");
 var $sfmName1 ="Auto_RS10585_ChecklistOPDOC_InProgOP";
+var $sfmName2 ="Auto_RS10585_ChecklistOPDOC_InProgOP2";
 var $wizardObject="Work Order";
 var $wizardName="AutoRegression";
 var $wizardType="Output Document";
 var $profilename = $group_profilename;
 var $handOver="false";
 var $wizardCriteria=null;
+
+
+//advanced options
+
+var $selectallChecklist = "false";
+var $includeskippedSection="false";
+var $checklists = ["Auto_10585_ChecklistOPDOC"];
+var $checklistversion = ["All Versions"];
+
+
+//advanced options for includeskipped
+
+var $selectallChecklist1 = "false";
+var $includeskippedSection1="true";
+var $checklists1 = ["Auto_10585_ChecklistOPDOC"];
+var $checklistversion1 = ["All Versions"];
+
 
 //Login
 $bo_act_login.login($g_url, $appiumAdminUn, $appiumAdminPwd);
@@ -188,10 +208,45 @@ _setValue(_textarea("cke_source cke_enable_context_menu"),$value);
 _click(_f("main").s_button("Save[4]"));
 //_click(_f("main").s_button("Save").inside(_f("main").tabnavigator("tabNav")));
 _wait(6000);
+$sfm_pg_advancedOptions.AdvancedOptionsChecklist($selectallChecklist, $includeskippedSection,$checklists,$checklistversion);
+
 _click($bo_pg_sfmTransactionAndDesigner.btn_saveAndclose);
 _wait(10000);
 
-$sfm_act_wizards.addToWizard($wizardObject,$wizardName, $wizardType,$sfmName1,$handOver,$profilename,$wizardCriteria);  
+//-----------------------Creating OPDOC with include skipped sections----------------------------
+
+$bo_act_navigation.navigateToSfmTransactionDesigner();
+_wait(15000);
+_click($bo_pg_sfmTransactionAndDesigner.btn_newSFM);
+_wait(3000);
+_setValue($bo_pg_sfmTransactionAndDesigner.txt_name, $sfmName2);
+_setValue($bo_pg_sfmTransactionAndDesigner.txt_sfmTransactionId, "");
+_setSelected($sfm_pg_screenDesigner.sel_createSFMTransaction, "to generate an Output Document for a header record with/without its child records");
+_setStrictVisibilityCheck(true);
+_setValue($sfm_pg_screenDesigner.txt_targetObject,"");
+_setValue($sfm_pg_screenDesigner.txt_targetObject,"Wo");
+_wait(5000);
+_click($sfm_pg_screenDesigner.lbl_workOrder);
+_click(_f("main").s_checkbox("Checklist (Work Order)"));
+_click(_f("main").tab("Template Designer"));
+_setValue(_f("main").s_textinput("Save template as"),$templateName1);
+_setValue(_f("main").s_textinput("Input ID Here[4]"),$templateName1);
+_click(_span("Source"));
+_setValue(_textarea("cke_source cke_enable_context_menu"),$value);
+_click(_f("main").s_button("Save[4]"));
+//_click(_f("main").s_button("Save").inside(_f("main").tabnavigator("tabNav")));
+_wait(6000);
+$sfm_pg_advancedOptions.AdvancedOptionsChecklist($selectallChecklist1, $includeskippedSection1,$checklists1,$checklistversion1);
+
+_click($bo_pg_sfmTransactionAndDesigner.btn_saveAndclose);
+_wait(10000);
+
+
+
+$sfm_act_wizards.addToWizard($wizardObject,$wizardName, $wizardType,$sfmName1,$handOver,$profilename,$wizardCriteria); 
+_wait(10000);
+$sfm_act_wizards.addToWizard($wizardObject,$wizardName, $wizardType,$sfmName2,$handOver,$profilename,$wizardCriteria);  
+
 
 _writeFile("true", $appiumPath+$sahiIntermediatoryPath, true);
 
