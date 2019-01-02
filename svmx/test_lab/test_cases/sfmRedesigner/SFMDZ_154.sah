@@ -20,7 +20,7 @@ _setSpeed($g_stepSpeed);
 		 */
 		var $url="http://test.salesforce.com";
 		var $un="saadat.dz2perftest@servicemax.com";
-		var $pwd="servicemax1";
+		var $pwd="servicemax4";
 		var $viewName="transaction";
 		
 		var $Type="To create and map child lines only";
