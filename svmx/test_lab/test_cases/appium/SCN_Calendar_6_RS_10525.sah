@@ -5,7 +5,7 @@ _writeFile("false", $appiumPath+$sahiIntermediatoryPath, true);
 //servicemax event 
 var $restAccName="A10525_SCN1";
 var $EventSub="Eventfor1hr";
-var $techname="a240t000000GglLAAS";
+var $techname=$appiumTechId;
 	
 
 $objName= "Account";

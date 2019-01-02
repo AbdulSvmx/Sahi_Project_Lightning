@@ -8,7 +8,7 @@ var $profile = "Cloned_Default";
 var $module = "SFM Transaction Manager";
 var $ProcessStatus = false;
 $bo_act_login.login($g_url, $appiumAdminUn, $appiumAdminPwd);
-$sfm_act_lightningConfig.switchToLightning();
+
 
 /*--------------------------------------GLOBAL EDIT SEARCH---------------------------------------*/
 var $wizardObject ="Work Order";

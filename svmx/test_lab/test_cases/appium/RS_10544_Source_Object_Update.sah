@@ -18,6 +18,16 @@ var $srcChildObj="Work Detail (Work Order)";
 var $trgChildObj="Work Detail (Work Order)";
 var $trgChildObj1="Parts";
 
+
+//
+var $wizardObject ="Work Order";
+var $wizardName="AutoRegression";
+var $wizardType="SFM";
+var $profilename = $group_profilename;
+var $profile=$group_profilename;
+var $handOver="false";
+var $wizardCriteria=null;
+
 //var $fieldName = ["Problem Description"];
 
 var $targetObject="Work Order";
@@ -29,7 +39,7 @@ var $fieldName = ["Activity Type","Line Type","Billable Qty"];
 var $childToAdd=[$trgChildObj1,$fieldName];
 
 
-var $sfmName = $bo_act_common.generateRandomName("ZDelete_RS_10544_");
+var $sfmName = "Auto_RS_10544_SOU";
 var $sfmType="from Source Object to create new header and child records";
 
 
@@ -60,7 +70,7 @@ var $csouObject  = "Parts";
 //Login to App and navigate to sfm transaction and designer page
 _setSpeed($g_stepSpeed);
 $bo_act_login.login($g_url, $appiumAdminUn, $appiumAdminPwd);
-$sfm_act_lightningConfig.switchToLightning(); 
+ 
 
 //Check for the process if exists
 $ProcessStatus=$sfm_act_SFM.sfmProcessCheck($sfmName);
@@ -97,6 +107,9 @@ $sfm_pg_sourceObjectUpdate.createSOU($csouObject,$cfield, $ccondition, $coperand
 
 //_click($bo_pg_sfmTransactionAndDesigner.btn_finalQuickSave);
 _click($bo_pg_sfmTransactionAndDesigner.btn_saveAndclose);
+
+//add the process to wizard 
+$sfm_act_wizards.addToWizard($wizardObject,$wizardName, $wizardType,$sfmName,$handOver,$profile,$wizardCriteria);
 
 
 _setSpeed($g_stepSpeed);

@@ -16,7 +16,7 @@ $headersToAdd = ["AutoC_date_c","AutoC_dateTime_c","Auto_PickList_c","Auto_TextB
 var $profile= "auto group profile";
 	
 $bo_act_login.login($g_url, $appiumAdminUn, $appiumAdminPwd);
-$sfm_act_lightningConfig.switchToLightning();
+
 /* ***********************************************************************
    ****************************Create Process*****************************
    *********************************************************************** */

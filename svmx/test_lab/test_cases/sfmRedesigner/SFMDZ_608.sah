@@ -1,0 +1,53 @@
+/**
+ * Author	: Abhishek Nadig
+ * Reviewer	: 
+ * Pre-req	: Nothing
+ * Testcase	: SFMDZ-608: Launch Expressions List View - Using URL
+ * Steps	: Launch Expressions List View - Using URL
+ * Expt Res	: Expressions List View should launch successfully by verifying:
+				a) Check - 'Expressions' is displayed on table Header
+				b) 'Back To Setup Home' is displayed
+				c) 'Help' option is displayed
+				d) Verify all 4 columns are displayed i.e. Expressions Name, Object, WhereUsed and Last Edited
+				e) Check if 'New Expressions' button appears.
+			
+ */
+
+var $SFMDZ_608=_testcase("$SFMDZ-608: Launch Expressions List View - Using URL");
+$SFMDZ_608.start();
+//_setSpeed($g_stepSpeed);
+	
+	/**
+	 * Global Variable declaration
+	 */
+
+	var $url="http://test.salesforce.com";
+	var $un="saadat.dz2perftest@servicemax.com";
+	var $pwd="servicemax4";
+	var $viewName="Expressions";
+	
+	/**
+	 * Login to the Sandbox Org and launching Transaction list view
+	 */
+	
+	$bo_act_login.login($url, $un, $pwd);
+
+	$sfmrdz_act_common.launchListView($viewName);
+	
+	//Assertions on transaction list view
+	//_assertExists($sfmrdz_pg_trnListView.btn_heading_transaction);
+	_assertExists($sfmrdz_pg_common.btn_backtoSetup);
+	_assertExists($sfmrdz_pg_common.btn_help);
+	//_assertExists($sfmrdz_pg_expListView.btn_heading_expression);
+	_assertExists($sfmrdz_pg_expListView.btn_heading_expressionCol);
+	_assertExists($sfmrdz_pg_expListView.btn_heading_sfmExprHome);
+	_assertExists($sfmrdz_pg_expListView.btn_heading_objectCol);
+	_assertExists($sfmrdz_pg_expListView.btn_heading_lastEdited);
+	_assertExists($sfmrdz_pg_expListView.btn_heading_whereUsedCol);
+	_assertExists($sfmrdz_pg_expListView.btn_newExpr);
+		
+	
+	//Log Out of Sandbox Org
+	$sfm_act_lightningConfig.logoutInLightning();
+	
+$SFMDZ_608.end();

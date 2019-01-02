@@ -9,11 +9,18 @@ var $module = "Common";
 var $subModule = "Global Settings";
 var $setting = "GBL025";
 $bo_act_login.login($g_url, $appiumAdminUn, $appiumAdminPwd);
-$sfm_act_lightningConfig.switchToLightning();
+
 //Setting the value for servicemax event
 $bo_act_configurationProfiles.editGlobalProfileForPicklistSettings($profile,$module,$subModule,$setting,$picklistValue);
 _selectWindow("");
 _selectDomain();
+
+var $groupProfileName=$group_profilename;
+//reverting back the setting
+$bo_act_configurationProfiles.editGroupProfileForTextSettings($groupProfileName, "ServiceMax iPad Client", "Calendar", "SET005", "",false);
+_selectDomain();
+$bo_act_configurationProfiles.editGroupProfileForTextSettings($groupProfileName, "ServiceMax iPad Client", "Calendar", "SET006", "",false);
+
 
 
 
@@ -216,7 +223,7 @@ $workorderid5=$sfm_act_restApiMethods.postRestApi($appiumAdminUn,$appiumAdminPwd
 //get the wo
 $WOname5 =$sfm_act_restApiMethods.getRestApi($appiumAdminUn,$appiumAdminPwd,$appiumclient_id,$appiumclient_secret,$appiumorginstance,"GET", $objName, $columnName, $filter, $workorderid5);
 _log($WOname5);
-$excel.insertUnderColumn("/auto/SVMX_Catalyst/fsaautomation/resources/TestData.xlsx", "RS_10515", "Data5",$WOname5 ,"2");
+$excel.insertUnderColumn("/auto/SVMX_Catalyst/fsaautomation/resources/TestData.xlsx", "RS_10515", "Data7",$WOname5 ,"2");
 
 var $now = new Date();
 _log( $now ); // shows current date/time

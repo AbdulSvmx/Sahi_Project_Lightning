@@ -1,0 +1,44 @@
+var $sfmrdz_act_mappingListView = new function sfmrdzmappingListView()
+{
+	
+	/**
+	 * Content search on Mapping list view
+	 */
+	this.contentSearch=function($search){
+		$sfmrdz_act_common.searchObj($search);
+		_wait(5000);
+		
+		var $mappingLinks =_collect("_div","/DataTableCell--overflow/",_under(_parentNode($sfmrdz_pg_mappingListView.btn_heading_mappingCol,"DIV",1)));
+		_log("No. of rows: "+$mappingLinks.length);
+			if ($mappingLinks.length==0) {
+				_log("$mappingLinks collection else loop");
+				$mappingLinks = _collect("_link","/Text slds-text-body.*/",_under(_parentNode($sfmrdz_pg_mappingListView.btn_heading_mappingCol,"DIV",1)));
+				_log("No. of rows: "+$mappingLinks.length);
+			}
+		var $mappingNames=new Array($mappingLinks.length);
+		var $retVal=true;
+		var $rowNotContaingText=null;
+		for (var $i=0; $i<$mappingLinks.length; $i++) {
+			$mappingNames[$i]=_getText($mappingLinks[$i]);
+
+			if ($mappingNames[$i].indexOf($search)==-1) {
+				var $MappingLinkRow=_parentNode(_link($mappingNames[$i]),"DIV",2);
+				var $objText=_getText(_div("/rt-td.*/[2]",_in($MappingLinkRow)));
+				//var $TDTOText=_getText(_div("/rt-td.*/[3]",_in($MappingLinkRow)));
+				//var $tagText=_getText(_div("/rt-td.*/[5]",_in($MappingLinkRow)));
+				if ($objText.indexOf($search)==-1) {
+					$retVal=false;
+					$rowNotContaingText=$mappingNames[$i];
+					break;
+				}
+			}
+		}
+		return [$retVal,$rowNotContaingText];
+		//_assertTrue($retVal,$search+" text is not available in "+$rowNotContaingText);
+		
+	};
+	
+	
+};
+
+

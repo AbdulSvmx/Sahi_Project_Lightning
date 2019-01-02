@@ -394,7 +394,7 @@ _setStrictVisibilityCheck(false);
 return $result;
 };
 
-this.addFieldsToLightningPageLayout = function($object_name,$pageLayoutForProfile,$fieldsArray,$myDomain){
+this.addFieldsToLightningPageLayout = function($object_name,$pageLayoutForProfile,$fieldsArray,$sfd_myDomain){
 	//This function adds the given fields to the given Lightning component layout
 	//Example: Missing fields in Work order page layout
 	//Author: Janaki

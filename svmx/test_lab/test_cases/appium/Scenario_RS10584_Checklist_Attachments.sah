@@ -15,7 +15,7 @@ $checklistversion = ["All Versions","First Version","Last Version"];
 
 //Login
 $bo_act_login.login($g_url, $appiumAdminUn, $appiumAdminPwd);
-$sfm_act_lightningConfig.switchToLightning();
+
 
 $ProcessStatus=$sfm_act_SFM.checkCustomProcess($sfmName);
 _wait(10000);
@@ -71,7 +71,7 @@ if($ProcessStatus==false){
 	var $queSpecificDetails2=[$preFillFromWO2,$defaultAnsType2,$defaultVal2];
 	$sfm_act_formDesigner.createCheckListQuestion($sectionName2, $queCommonDetails2, $queSpecificDetails2);
 	
-	//	//create Attachment Question in section - No PreFill
+/*	//	//create Attachment Question in section - No PreFill
 	var $queType3="Attachment";
 	var $sectionName3="Checklist Section Title";
 	var $queName3="AttachmentQuestion3";
@@ -182,7 +182,7 @@ if($ProcessStatus==false){
 	var $defaultAnsType10="";
 	var $defaultVal10="";
 	var $queSpecificDetails10=[$preFillFromWO10,$defaultAnsType10,$defaultVal10];
-	$sfm_act_formDesigner.createCheckListQuestion($sectionName10, $queCommonDetails10, $queSpecificDetails10);	
+	$sfm_act_formDesigner.createCheckListQuestion($sectionName10, $queCommonDetails10, $queSpecificDetails10);	*/
 	_wait(5000);
 	_click($bo_pg_sfmTransactionAndDesigner.btn_saveAndclose);
 	

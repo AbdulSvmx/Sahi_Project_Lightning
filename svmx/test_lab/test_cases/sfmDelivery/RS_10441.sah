@@ -39,7 +39,7 @@ var $mapName = $processName + "mp";
 //**************************************************************************************
 //Login and switch to lightning
 $bo_act_login.login($g_url,$sfmlUsn,$sfmlPwd);
-$sfm_act_lightningConfig.switchToLightning();
+
 _wait(15000);
 
 //Create work order
@@ -106,7 +106,7 @@ $sfm_act_lightningConfig.editWorkOrder(["Received City","Date Received"] ,["Mysu
 $sfm_act_lightningConfig.logoutInLightning();
 //Login and switch to lightning
 $bo_act_login.login($g_url,$sfmlUsn,$sfmlPwd);
-$sfm_act_lightningConfig.switchToLightning();
+
 _wait(15000)
 //**************************************************************************************************
 //Navigate to servicemax setup and setup required process.

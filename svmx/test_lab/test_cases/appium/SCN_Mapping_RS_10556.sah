@@ -123,7 +123,7 @@ _log($eventname);
 
 
 $bo_act_login.login($g_url, $appiumAdminUn, $appiumAdminPwd);
-$sfm_act_lightningConfig.switchToLightning();
+
 //***********************************************************************************************************************//
 /*var $objectName="Work Order";
 var $customFieldsNames = ["Currency","Email","Number","Phone","URL"];

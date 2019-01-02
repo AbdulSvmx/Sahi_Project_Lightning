@@ -19,7 +19,7 @@ var $SCONName = $data_excel_10539[2]["Data4"];
 var $IB10538Name = $data_excel_10538[2]["Data4"];
 var $IB10539Name =  $data_excel_10539[2]["Data6"];
 $bo_act_login.login($g_url, $appiumAdminUn, $appiumAdminPwd);
-$sfm_act_lightningConfig.switchToLightning();
+
 
 var $module = "Entitlement Verification";
 var $submodule = "Work Order Entitlement VF";

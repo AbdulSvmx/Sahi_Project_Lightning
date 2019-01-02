@@ -14,7 +14,7 @@ var $lkpName01 = "Site_lkp_Name_10529";
 var $lkpName02 = "Parts_lkp_Name_10529";
 var $profile="auto group profile";
 $bo_act_login.login($g_url, $appiumAdminUn, $appiumAdminPwd);
-$sfm_act_lightningConfig.switchToLightning();
+
 _wait(5000);
 $bo_act_navigation.navigateToSfmTransactionDesigner();
 _wait(10000);

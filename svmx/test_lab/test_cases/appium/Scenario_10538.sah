@@ -35,7 +35,7 @@ var $restIBName = $bo_act_common.generateRandomName("IB10538");
 $pre_requisite.start();
 _setSpeed($g_stepSpeed);
 $bo_act_login.login($g_url, $appiumAdminUn, $appiumAdminPwd);
-$sfm_act_lightningConfig.switchToLightning();
+
 
 var $module = "Entitlement Verification";
 var $submodule = "Work Order Entitlement VF";
@@ -94,7 +94,7 @@ $IbID=$sfm_act_restApiMethods.postRestApi($appiumAdminUn,$appiumAdminPwd,$appium
 $IBName =$sfm_act_restApiMethods.getRestApi($appiumAdminUn,$appiumAdminPwd,$appiumclient_id,$appiumclient_secret,$appiumorginstance,"GET", $objName4, $columnName, $filter, $IbID);
 _log($IBName);
 
-//Edit a Service Proce Book
+//Edit a Service Price Book
 $bo_act_servicePricebooks.editStandardServicePricebooks_noproduct("Standard Service Price Book", "Per Hour", "Installation","1000");
 
 $bo_act_servicePricebooks.editStandardServicePricebooks_noproduc1("Standard Service Price Book", "Flat Rate", "Repair","2000");

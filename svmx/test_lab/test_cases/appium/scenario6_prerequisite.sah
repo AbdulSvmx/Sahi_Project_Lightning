@@ -40,7 +40,7 @@ var $stepID="SanityScenario6";
 
 _setSpeed($g_stepSpeed);
 $bo_act_login.login($g_url, $appiumAdminUn, $appiumAdminPwd);
-$sfm_act_lightningConfig.switchToLightning(); 
+ 
 
 
 $bProcessStatus=$sfm_act_SFM.dvrScenario5($sfmNameToBeCloned, $sfmName, $isCustom, $sfmTemplateSaveAsName, $sfmTemplate, $fieldName, $containerName,$bProcessStatus);

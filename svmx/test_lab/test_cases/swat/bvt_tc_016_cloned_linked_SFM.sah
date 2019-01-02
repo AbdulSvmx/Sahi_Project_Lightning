@@ -13,7 +13,7 @@ var $woNumber = $sfm_act_createCustomWizard.createBlankWoFromRest($swat_un, $swa
 
 _setSpeed($g_stepSpeed);
 $bo_act_login.login($g_url, $swat_un,$swat_pwd);
-$sfm_act_lightningConfig.switchToLightning(); 
+ 
 _wait(15000);
 $bo_act_navigation.navigateToSfmTransactionDesigner();
 $sfm_act_Transactions.cloneAndSaveProcess($processName, $sfmName, $sfmPgLayoutName);

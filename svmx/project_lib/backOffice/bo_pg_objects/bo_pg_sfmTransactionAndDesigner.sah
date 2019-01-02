@@ -33,7 +33,8 @@ var $bo_pg_sfmTransactionAndDesigner = new function bo_pg_sfmTransactionAndDesig
 	 this.txt_standardSfmTransactionQuickFind= _f("main").s_textinput("/searchText/").near(_f("main").tab("Standard SFM Transactions")); //updated with relative index to properly identify quick find in standard transactions
     this.btn_standardSfmTransaction= _f("main").tab("Standard SFM Transactions");
     //this.btn_yourCustomSfmTransactions = _f("main").tab("Your Custom Sjavascript:void(0)FM Transactions");
-    this.btn_yourCustomSfmTransactions = _f("main").tab("Your Custom SFM Transactions");
+     this.btn_yourCustomSfmTransactions = _f("main").tab("Your Custom SFM Transactions").near(_f("main").s_label("Service Flow Manager"));
+   
     this.txt_yourCustomSfmTransactionsQuickFind = _f("main").s_textinput("/searchText/").inside(_f("main").s_navigatorcontent("Your Custom SFM Transactions"));//updated with relative index to properly identify quick find in custom transactions
     this.btn_clone = _f("main").s_button("Clone");
     this.txt_name = _f("main").s_textinput("pName");

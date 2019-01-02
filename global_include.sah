@@ -10,9 +10,9 @@ var $orgtype = "Base";
 
 var $orgnamespace;
 if ($orgtype == "Dev") {
-	$orgnamespace = "SVMXDEV";
+            $orgnamespace = "SVMXDEV";
 } else {
-	$orgnamespace = "SVMXC";
+            $orgnamespace = "SVMXC";
 }
 
 // Add All Global Variables here
@@ -69,7 +69,6 @@ var $admin_group_profile = "Get Price Group Profile";
 
 // Checklist Global Variables
 var $un_checklist = $bac_un;// "meghana.rao@servicemax.com"; // Pointing to
-							// Automation Dummy Org
 var $pwd_checklist = $bac_pwd;// "cloud_102";
 var $url_checklist = "https://test.salesforce.com";
 
@@ -81,39 +80,49 @@ var $url_checklist = "https://test.salesforce.com";
 
 var $sfmUsn = "sysadmin01@sfdautomation.com"; // base
 var $sfmPwd = "Maxplore4";
- var $g_domain = "/svmx/";
+var $g_domain = "/svmx/";
 
- 
 
- var $wizardName = ["SFMDAuto_Ltng_DVR", "SFMDAuto_Ltng_WebServices","SFMDAuto_Ltng_Process","SFMDAuto_Ltng_LookUP","SFMDAuto_Ltng_Mappings",
+
+var $wizardName = ["SFMDAuto_Ltng_DVR", "SFMDAuto_Ltng_WebServices","SFMDAuto_Ltng_Process","SFMDAuto_Ltng_LookUP","SFMDAuto_Ltng_Mappings",
                      "SFMDAuto_Ltng_Formula","SFMDAuto_Ltng_Expression","SFMAuto_Ltng_Wizards", "swat_WebServices_Custom_Action"];
- var $wizardType = ["None","SFM","Inventory","Others","Output Document"];
+var $wizardType = ["None","SFM","Inventory","Others","Output Document"];
 /*
- //dev org credentials 
+//dev org credentials 
   var $sfmlUsn = "safi.svmxdev@regression-test.com";
- var $sfmlPwd ="servicemax1";
- var $sfmClientId ="3MVG9srSPoex34FUKHjdsODAqpbdJxlgnt_zgMhdj8b37sDH0lZ_TL64TnDoxnRHLOmtP6HvKluYrdt3VJKc3";
- var $sfmConsumerSecret = "106093921577812496";
- var $sfmOrgInstance = "cs53"; 
+var $sfmlPwd ="servicemax1";
+var $sfmClientId ="3MVG9srSPoex34FUKHjdsODAqpbdJxlgnt_zgMhdj8b37sDH0lZ_TL64TnDoxnRHLOmtP6HvKluYrdt3VJKc3";
+var $sfmConsumerSecret = "106093921577812496";
+var $sfmOrgInstance = "cs53"; 
  var $sfd_myDomain = "/sfd-auto/";  */
- 
+
 //  Track org details
- /*
- var $sfmlUsn = "sfmdelivery@automation.com";
- var $sfmlPwd ="svmx12345";
- var $sfmClientId ="3MVG9Yb5IgqnkB4qStZ2NyI2.As4EeBsSuH8TiAJWkUsGqFT6KdVV7T0p2WY60IEDxYhm3MBF88r9zYYG09OQ";
- var $sfmConsumerSecret = "8810837502286704103";
- var $sfmOrgInstance = "CS95"; 
+/*
+var $sfmlUsn = "sfmdelivery@automation.com";
+var $sfmlPwd ="svmx12345";
+var $sfmClientId ="3MVG9Yb5IgqnkB4qStZ2NyI2.As4EeBsSuH8TiAJWkUsGqFT6KdVV7T0p2WY60IEDxYhm3MBF88r9zYYG09OQ";
+var $sfmConsumerSecret = "8810837502286704103";
+var $sfmOrgInstance = "CS95"; 
  var $sfd_myDomain = "/multifull/";
- */
+*/
 //These are the Automation org details
 //comment them to run in Track org.
- var $sfmlUsn = "sfdl_auto@automation.com";
- var $sfmlPwd ="Maxplore3";
- var $sfmClientId ="YjkyMzJmNDUzMGNmOTYzODVlNDQ0ZjE2OTUxOTU1NDI5MGViN2I3NWU3YTFjNmY300D290000000WVC";
- var $sfmConsumerSecret = "5287076090725084260";
- var $sfmOrgInstance = "cs19"; 
+/*
+var $sfmlUsn = "sfdl_auto@automation.com";
+var $sfmlPwd ="Maxplore3";
+var $sfmClientId ="YjkyMzJmNDUzMGNmOTYzODVlNDQ0ZjE2OTUxOTU1NDI5MGViN2I3NWU3YTFjNmY300D290000000WVC";
+var $sfmConsumerSecret = "5287076090725084260";
+var $sfmOrgInstance = "cs19"; 
  var $sfd_myDomain = "/lightning/";
+ */
+
+//Track team org values
+var $sfmlUsn = "safi.svmxc@regression-test.com";
+var $sfmlPwd ="servicemax1";
+var $sfmClientId ="3MVG9bx.kiqxiA6axf4G7MErRe22WHQqN2fKkf6_EUBnqeNF0.ZsFTuPQFqr.iFWOKUw8WuumMy1f4SqQ0Qxd";
+var $sfmConsumerSecret = "2054334165758985535";
+var $sfmOrgInstance = "CS26"; 
+ var $sfd_myDomain = "/sfdlightning/";
  
 // DC Global Variables
 var $dc_org = $orgtype;
@@ -130,12 +139,12 @@ var $swatUsn = "shashikala.svmx@ge.com";
 var $swatPwd = "maxpl0re2";
 
 /**
- * buildorg = "The org which needs to be Run in the Build Machine"- PLEASE KEEP IT DEFAULT WHEN CHECKING IN
- * 
+* buildorg = "The org which needs to be Run in the Build Machine"- PLEASE KEEP IT DEFAULT WHEN CHECKING IN
+* 
  */
 var $appiumOrg = "buildorg";
 if($appiumOrg.toLowerCase() != "buildorg")
-	{
+      {
 
 // This is all for the Local runs while Coding.
 // Appium
@@ -157,32 +166,32 @@ var $pageLayout = "SVMX Work Order - Admin";
 var $appiumclient_id = "3MVG9ifmAKCHISbZGXS_tYaEGdq5pFNz6ZhYTkrLMlM9toUZC8UIDIt.2R4KYqLXKL5yc8HjHPh5NYoUERETS";
 var $appiumclient_secret = "3810777216167697283";
 var $appiumorginstance = "cs77";
-	
+      
 }
 
 else{
 //===================================================================================================================
 // This is for the Second Org of Automation - DONOT CHANGE OR DELETE IT
 
-var $appiumPath = "/auto/SVMX_Catalyst/Executable/";
-var $sahiIntermediatoryPath = "sahiResultCommon.txt";
+      var $appiumPath = "/auto/SVMX_Catalyst/Executable/";
+      var $sahiIntermediatoryPath = "sahiResultCommon.txt";
 
-var $appiumAdminUn="auto-admin@svmx.com";
-var $appiumAdminPwd="Svmx1234";
+      var $appiumAdminUn="auto-admin@svmx.com";
+      var $appiumAdminPwd="Svmx1234";
 
-var $appiumTechUn="auto-tech@svmx.com";
-var $appiumTechPwd="Svmx123#";
-var $appiumTechId="a263D000000AagdQAC";
-var $appiumsfdcuserId="0053D000001OwGEQA0";
-var $profileName = "System Administrator";
-var $pageLayout = "SVMX Work Order - Admin";
+      var $appiumTechUn="auto-tech@svmx.com";
+      var $appiumTechPwd="Svmx1234";
+      var $appiumTechId="a263D000000AagdQAC";
+      var $appiumsfdcuserId="0053D000001Owg7QAC";
+      var $profileName = "System Administrator";
+      var $pageLayout = "SVMX Work Order - Admin";
 
 
-//THIS IS SPECIFIC TO A GIVEN ORG - DONOT TOUCH
-var $appiumclient_id = "3MVG9PE4xB9wtoY.10PTFz5.VceC4AJFQ5XrOS_MNf21tgdoArfeI1.o9LTRzahT4OeyEvVn.1i4Ii0cTWwlC";
-var $appiumclient_secret = "5328712246005014352";
-var $appiumorginstance = "cs70";
-	}
+      //THIS IS SPECIFIC TO A GIVEN ORG - DONOT TOUCH
+      var $appiumclient_id = "3MVG9PE4xB9wtoY.10PTFz5.VceC4AJFQ5XrOS_MNf21tgdoArfeI1.o9LTRzahT4OeyEvVn.1i4Ii0cTWwlC";
+      var $appiumclient_secret = "5328712246005014352";
+      var $appiumorginstance = "cs70";
+            }
 
 
 
@@ -190,17 +199,17 @@ var $appiumorginstance = "cs70";
 // Include the salesforce js files to enable sforce API calls
 init_sForce_api();
 function init_sForce_api() {
-	// <browser>
-	
-	var script = document.createElement('script');
-	script.type = 'text/javascript';
-	script.src = '/soap/ajax/39.0/connection.js';
-	document.head.appendChild(script);
-	var script1 = document.createElement('script');
-	script1.type = 'text/javascript';
-	script1.src = '/soap/ajax/39.0/apex.js';
-	document.head.appendChild(script1);
-	// </browser>
+      // <browser>
+      
+      var script = document.createElement('script');
+      script.type = 'text/javascript';
+      script.src = '/soap/ajax/39.0/connection.js';
+      document.head.appendChild(script);
+      var script1 = document.createElement('script');
+      script1.type = 'text/javascript';
+      script1.src = '/soap/ajax/39.0/apex.js';
+      document.head.appendChild(script1);
+      // </browser>
 }
 
 // Normalizing the paths to work both on MAC and Windows
@@ -210,9 +219,9 @@ var $g_normalizedUserDir = _userDataDir().replace(/\\/g, "/");
 // path
 // ===== Start of paths ====//
 var $g_projectLibPath = $g_normalizedUserDir
-		+ "/scripts/Sahi_Project_Lightning/svmx/project_lib";
+            + "/scripts/Sahi_Project_Lightning/svmx/project_lib";
 var $g_utilitiesPath = $g_normalizedUserDir
-		+ "/scripts/Sahi_Project_Lightning/svmx/utilities_lib";
+            + "/scripts/Sahi_Project_Lightning/svmx/utilities_lib";
 // ===== End of paths ====
 
 var $g_referancePath = $g_normalizedUserDir;
@@ -226,146 +235,147 @@ var $global_referenceAdded = false;
 // This should execute only once across all the suites
 if ($global_referenceAdded === false) {
 
-	// Add all the paths from where we need to fetch reference files
-	// _log("Getting references from dir : " + $g_projectLibPath);
-	recursiveGetReferenceFiles($g_projectLibPath);
-	// _log("Getting references from dir : " + $g_utilitiesPath);
-	recursiveGetReferenceFiles($g_utilitiesPath);
-	_log("File Array Count = " + $g_includeFilesArray.length);
-	for (var $i = 0; $i < $g_includeFilesArray.length; $i++) {
-		try {
-			_include($g_includeFilesArray[$i]);
-		} catch ($e) {
-			_log("Reference Exception : " + $e);
-		}
-		;
-	}
+      // Add all the paths from where we need to fetch reference files
+      // _log("Getting references from dir : " + $g_projectLibPath);
+      recursiveGetReferenceFiles($g_projectLibPath);
+      // _log("Getting references from dir : " + $g_utilitiesPath);
+      recursiveGetReferenceFiles($g_utilitiesPath);
+      _log("File Array Count = " + $g_includeFilesArray.length);
+      for (var $i = 0; $i < $g_includeFilesArray.length; $i++) {
+            try {
+                  _include($g_includeFilesArray[$i]);
+            } catch ($e) {
+                  _log("Reference Exception : " + $e);
+            }
+            ;
+      }
 
-	// Set the flag to true to prevent duplicate addition of references
-	$global_referenceAdded = true;
+      // Set the flag to true to prevent duplicate addition of references
+      $global_referenceAdded = true;
 }
 
 // recursively traverses $filePath while adding files (with full path) ending in
 // ".sah" to $g_includeFilesArray
 function recursiveGetReferenceFiles($filePath) {
-	var fileList = getFilesAndFolders($filePath);
+      var fileList = getFilesAndFolders($filePath);
 
-	if (fileList) {
-		fileList
-				.forEach(function pushToArrayIfFile(fileOrFolder, index) {
-					var $fileOrFolderPath = $filePath + "/" + fileOrFolder;
+      if (fileList) {
+            fileList
+                        .forEach(function pushToArrayIfFile(fileOrFolder, index) {
+                              var $fileOrFolderPath = $filePath + "/" + fileOrFolder;
 
-					if ($fileOrFolderPath.substr($fileOrFolderPath.length - 4) === ".sah") {
-						$g_includeFilesArray.push($fileOrFolderPath);
-					} else {
-						recursiveGetReferenceFiles($fileOrFolderPath);
-					}
-				});
-	}
+                              if ($fileOrFolderPath.substr($fileOrFolderPath.length - 4) === ".sah") {
+                                    $g_includeFilesArray.push($fileOrFolderPath);
+                              } else {
+                                    recursiveGetReferenceFiles($fileOrFolderPath);
+                              }
+                        });
+      }
 }
 
 // returns an array of files and folders for the given $filePath and .DS_Store
 // files will not be included
 function getFilesAndFolders($filePath) {
-	try {
-		var $files = new java.io.File($filePath);
-		// array of files and directory
-		var $fileList = $files.list();
+      try {
+            var $files = new java.io.File($filePath);
+            // array of files and directory
+            var $fileList = $files.list();
 
-		// remove files and folders that start with "." this is mainly to remove
-		// .DS_Store files on macs
-		$fileList.forEach(function removeDots(element, index) {
-			if (element.charAt(0) === ".") {
-				$fileList.splice(index, 1);
-			}
-		});
+            // remove files and folders that start with "." this is mainly to remove
+            // .DS_Store files on macs
+            $fileList.forEach(function removeDots(element, index) {
+                  if (element.charAt(0) === ".") {
+                        $fileList.splice(index, 1);
+                  }
+            });
 
-		return $fileList;
-	} catch ($e) {
-		Packages.java.lang.System.out.println("FILE EXCEPTION : " + $e);
-	}
+            return $fileList;
+      } catch ($e) {
+            Packages.java.lang.System.out.println("FILE EXCEPTION : " + $e);
+      }
 }
 
 // ==== Reference addition module END ====
 
 function onScriptError($e) {
-	return onScriptErrorDefault($e);
+      return onScriptErrorDefault($e);
 }
 function onScriptFailure($e) {
-	onScriptFailureDefault($e);
+      onScriptFailureDefault($e);
 }
 
 function onScriptErrorDefault($e) {
-	if ($e.isBrowserNotResponding) {
-		if (!_isPhantomJS()) {
-			_takeScreenShot();
-			dumpWindowInfo();
-		}
-	}
+      if ($e.isBrowserNotResponding) {
+            if (!_isPhantomJS()) {
+                  _takeScreenShot();
+                  dumpWindowInfo();
+            }
+      }
 
-	else {
-		if (_sahi.isAndroid() || _sahi.isWindows() || _sahi.isApplet()
-				|| _sahi.isJava()) {
-			_takeScreenShot();
-		} else {
-			// _takeScreenShot(); // uncomment this if you want a full desktop
-			// screenshot too.
-			_lockWindow();
-			_focusWindow();
-			_takePageScreenShot();
-			_unlockWindow();
-		}
-	}
-	return false;
+      else {
+            if (_sahi.isAndroid() || _sahi.isWindows() || _sahi.isApplet()
+                        || _sahi.isJava()) {
+                  _takeScreenShot();
+            } else {
+                  // _takeScreenShot(); // uncomment this if you want a full desktop
+                  // screenshot too.
+                  _lockWindow();
+                  _focusWindow();
+                  _selectDomain();
+                  _takePageScreenShot();
+                  _unlockWindow();
+            }
+      }
+      return false;
 }
 
 function onScriptFailureDefault($e) {
-	if ($e.isBrowserNotResponding) {
-		if (!_isPhantomJS()) {
-			_takeScreenShot();
-			dumpWindowInfo();
-		}
-	} else {
-		if (_sahi.isAndroid() || _sahi.isWindows() || _sahi.isApplet()
-				|| _sahi.isJava()) {
-			_takeScreenShot();
-		} else {
-			// _takeScreenShot(); // uncomment this if you want a full desktop
-			// screenshot too.
-			_lockWindow();
-			_focusWindow();
-			_takePageScreenShot();
-			_unlockWindow();
-		}
-	}
+      if ($e.isBrowserNotResponding) {
+            if (!_isPhantomJS()) {
+                  _takeScreenShot();
+                  dumpWindowInfo();
+            }
+      } else {
+            if (_sahi.isAndroid() || _sahi.isWindows() || _sahi.isApplet()
+                        || _sahi.isJava()) {
+                  _takeScreenShot();
+            } else {
+                  // _takeScreenShot(); // uncomment this if you want a full desktop
+                  // screenshot too.
+                  _lockWindow();
+                  _focusWindow();
+                  _selectDomain();
+                  _takePageScreenShot();
+                  _unlockWindow();
+            }
+      }
 }
 
 function dumpWindowInfo() {
-	var s = "<pre>";
-	var info = _getWindows();
-	for (var i = 0; i < info.length; i++) {
-		var w = info[i];
-		s += "\n-------------------\nWindow " + i + ":\n-------";
-		s += "\n  windowName: " + w.windowName;
-		s += "\n  derivedName:" + w.derivedName;
-		s += "\n  windowTitle:" + w.windowTitle;
-		s += "\n  windowURL:" + w.windowURL;
-		s += "\n  wasOpened:" + w.wasOpened + " ("
-				+ (w.wasOpened == 1 ? "popup window" : "base window") + ")";
-		s += "\n  domain:" + w.domain;
-		var initDate = new Date(parseFloat(w.initialTime));
-		var lastDate = new Date(parseFloat(w.lastTime));
-		var currentDate = new Date();
-		s += "\n  initialTime:" + initDate.toUTCString();
-		s += "\n  lastTime:" + lastDate.toUTCString();
-		s += "\n  currentTime:" + currentDate.toUTCString();
-		s += "\n  Last communication:" + (currentDate - lastDate) + " ms ago";
-	}
-	s += "</pre>";
-	_sahi._log(s);
-	
-	
-	
-	
+      var s = "<pre>";
+      var info = _getWindows();
+      for (var i = 0; i < info.length; i++) {
+            var w = info[i];
+            s += "\n-------------------\nWindow " + i + ":\n-------";
+            s += "\n  windowName: " + w.windowName;
+            s += "\n  derivedName:" + w.derivedName;
+            s += "\n  windowTitle:" + w.windowTitle;
+            s += "\n  windowURL:" + w.windowURL;
+            s += "\n  wasOpened:" + w.wasOpened + " ("
+                        + (w.wasOpened == 1 ? "popup window" : "base window") + ")";
+            s += "\n  domain:" + w.domain;
+            var initDate = new Date(parseFloat(w.initialTime));
+            var lastDate = new Date(parseFloat(w.lastTime));
+            var currentDate = new Date();
+            s += "\n  initialTime:" + initDate.toUTCString();
+            s += "\n  lastTime:" + lastDate.toUTCString();
+            s += "\n  currentTime:" + currentDate.toUTCString();
+            s += "\n  Last communication:" + (currentDate - lastDate) + " ms ago";
+      }
+      s += "</pre>";
+      _sahi._log(s);
+      
+      
+      
+      
 }
-

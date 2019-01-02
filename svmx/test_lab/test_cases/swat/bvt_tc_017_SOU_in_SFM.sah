@@ -1,6 +1,99 @@
 //Author	:- 	Shashikala Kamath
-var $bvt_tc_003_manage_work_order_lines_usage = _testcase("bvt_tc_003_manage_work_order_lines_usage","Verify the functionality of SFM type - as Standalone for the purpose of editing an existing record");
+var $bvt_tc_017_SOU_in_SFM = _testcase("bvt_tc_017_SOU_in_SFM","Verify the functionality of SOU in SFM");
 
-$bvt_tc_003_manage_work_order_lines_usage.start();
+$bvt_tc_017_SOU_in_SFM.start();
 
-$bvt_tc_003_manage_work_order_lines_usage.end();
+	_setSpeed($g_stepSpeed);
+
+	//Create Product
+	$objName= "Product2";
+	$productName=$bo_act_common.generateRandomName("swat_Prod_");
+	$obJson = "{\"Name\":\""+$productName+"\",\"ProductCode\":\""+$productName+"\",\""+$orgnamespace+"__Product_Line__c\":\"Storage\",\""+$orgnamespace+"__Product_Type__c\":\"Consumable\"}";
+	$filterValue=$sfm_act_restApiMethods.postRestApi($swat_un, $swat_pwd, $swat_ClientId, $swat_ConsumerSecret, $swat_OrgInstance,$objName,$obJson,"POST");
+	_log($productName);
+
+
+	var $sfmNameToBeCloned = "Create Quote from Work Order";
+	var $sfmName = $bo_act_common.generateRandomName("swat_SOU_");
+	var $isCustom = false;
+	var $sfmTemplate = "SVMXSTD: Create Quote from WO";
+	var $sfmTemplateSaveAsName = $sfmName;
+	var $containerName = [];
+	var $fieldName = [];
+	var $wizardObject ="Work Order";
+	var $woNumber;
+	
+	// Variables of SOU
+	//Source Object update for header
+	//var $field = ["Account","Billing Type","Problem Description","Scheduled Date","Scheduled Date Time","No Of Times Assigned", "URL","Email","Phone","Is Entitlement Performed"];
+	//var $condition= ["Set","Set","Set","Set","Set","Set","Set","Set","Set","Set"];
+	//var $operand = ["Field","Function","Value","Function","Function","Value","Value","Value","Value","Function"];
+	//var $value = ["Account","Warranty","Source Object Updated","Today","Tomorrow","2","www.servicemax.com","automation@qa.com","9886098860","true"];
+	var $field = ["Problem Description"];
+	var $condition= ["Set"];
+	var $operand = ["Value"];
+	var $value = ["Source Object Updated"];
+	
+	
+	var $souObject  = "Work Order";
+	var $processType="SFM Transactions";
+	
+	//Source object update for child
+	//var $cfield = ["Billable Qty","Billing Information","Date Received","Received City","Received Country","Start Date and Time", "Part","Is Billable"];
+	//var $ccondition= ["Set","Set","Set","Set","Set","Set","Set","Set"];
+	//var $coperand = ["Value","Value","Function","Value","Function","Function","Field","Function"];
+	//var $cvalue = ["2","Long Text area Source Object Updated","Today","Text source Object Updated","India","Tomorrow","Part","true"];
+	var $csouObject  = "Parts";
+	
+	var $cfield = ["Billable Qty","Billing Information"];
+	var $ccondition= ["Set","Set"];
+	var $coperand = ["Value","Value"];
+	var $cvalue = ["2","Long Text area Source Object Updated"];
+
+
+$bo_act_login.login($g_url,$swat_un,$swat_pwd );
+
+
+//Create WO through REST API ******
+var $woNumber = $sfm_act_createCustomWizard.createBlankWoFromRest($swat_un, $swat_pwd, $swat_ClientId, $swat_ConsumerSecret, $swat_OrgInstance);
+
+$sfm_act_SFM.cloneTDM016($sfmNameToBeCloned,$sfmName,$isCustom, $sfmTemplateSaveAsName, $sfmTemplate, $fieldName, $containerName);
+
+$sfm_pg_sourceObjectUpdate.createSOU($souObject, $field, $condition, $operand, $value, $processType);
+
+$sfm_pg_sourceObjectUpdate.createSOU($csouObject, $cfield, $ccondition, $coperand, $cvalue, $processType);
+
+_click($bo_pg_sfmTransactionAndDesigner.btn_saveAndclose);
+
+//add the process to wizard
+$sfm_act_wizards.addToWizard($wizardObject, $wizardName[0], $wizardType[1], $sfmName);  
+_wait(3000); 
+
+//Navigate to the WO for validation
+$bo_act_navigation.navigateToCreatedRecordUsingGlobalSearch($woNumber);
+$sfm_act_createCustomWizard.clickWizardBtn($sfmName);
+
+//DVR validation on delivery
+//add line to Parts
+//$sfm_act_sfmDesigner.addChildLine("Parts");
+
+//_click($sfm_pg_wizardWindow.lookup_account);
+_setValue($sfm_pg_sfmDesigner.txt_headerAccount,"Acme");
+//_click($sfm_pg_wizardWindow.lookup_contact);
+_setValue($sfm_pg_sfmDesigner.txt_headerContact,"Acme Contact");
+_click(_textbox(0,_near(_span("Status"))));
+_click(_listItem("Presented"));
+_setValue(_textbox(0,_near(_span("Valid Until"))),"11/23/2019");
+
+$sfm_act_sfmDesigner.addChildLine("Parts",$productName);
+_setValue(_textbox(0, _near(_span("Qty[1]"))), "2");
+_setValue(_textbox(0, _near(_span("Unit Price[1]"))), "2000");
+_click(_span("Update"));
+
+_click($sfm_pg_sfmDesigner.btn_deliverySave);
+_wait(10000);
+
+$bo_act_navigation.navigateToCreatedRecordUsingGlobalSearch($woNumber);
+_assertExists(_span("Source Object Updated"));
+
+$bvt_tc_017_SOU_in_SFM.end();

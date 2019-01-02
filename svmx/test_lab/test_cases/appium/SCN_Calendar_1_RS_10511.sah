@@ -10,7 +10,7 @@ var $module = "Common";
 var $subModule = "Global Settings";
 var $setting = "GBL025";
 $bo_act_login.login($g_url, $appiumAdminUn, $appiumAdminPwd);
-$sfm_act_lightningConfig.switchToLightning();
+
 //Setting the value for salesforce event
 $bo_act_configurationProfiles.editGlobalProfileForPicklistSettings($profile,$module,$subModule,$setting,$picklistValue);
 
@@ -164,7 +164,7 @@ $bo_act_configurationProfiles.editGlobalProfileForPicklistSettings($profile,$mod
 
 var $restAccName="A10511_SVMX_Event";
 var $EventSub="A10511_SVMX_Event1";
-var $techname="a240t000000GglLAAS";//Add to global 
+var $techname=$appiumTechId;//Add to global 
 	
 
 $objName= "Account";
