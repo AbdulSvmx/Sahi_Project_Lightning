@@ -13,6 +13,7 @@ var $sfm_act_SFM = new function sfm_act_SFM() {
 
 		_click($bo_pg_sfmTransactionAndDesigner.btn_clone);
 		_wait(50000, _isVisible($bo_pg_sfmTransactionAndDesigner.txt_name));
+		_wait(10000);
 		_setValue($bo_pg_sfmTransactionAndDesigner.txt_name, "");
 		_setValue($bo_pg_sfmTransactionAndDesigner.txt_name, $sfmName);
 		_setValue($bo_pg_sfmTransactionAndDesigner.txt_sfmTransactionId, "");

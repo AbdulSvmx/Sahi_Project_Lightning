@@ -67,4 +67,6 @@ $bo_act_navigation.navigateToSfmSearchDesigner();
 $sfm_act_search.newCustomSearch("AUTOMATION SEARCH",["Account","Work Order","Case","Installed Product"]);
 _writeFile("true", $appiumPath+$sahiIntermediatoryPath, true);
 
+//Added for 10527
+
 $global_preRequisite.end();

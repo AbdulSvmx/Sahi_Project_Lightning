@@ -1,0 +1,51 @@
+global class TestCustomActionHeader
+{
+    webservice static SVMXC.INTF_WebServicesDef.INTF_Response editWORecord(SVMXC.INTF_WebServicesDef.INTF_Request request)
+    {
+        system.debug(LoggingLevel.WARN, 'req is = ' + request);
+        SVMXC.SFMTransactionSync sfmAction = new SVMXC.SFMTransactionSync();
+        SVMXC.INTF_WebServicesDef.INTF_Response response = new SVMXC.INTF_WebServicesDef.INTF_Response(); 
+        try{
+            response = sfmAction.updateRecord(request, response);
+            response = (new TestCustomActionHeader()).updateWO(request, response);
+            response = sfmAction.getRecord(response);
+            
+            system.debug(LoggingLevel.WARN, 'Final response is = ' + response); 
+            return response;
+        } 
+        catch(Exception ex) {
+            response.message = ex.getMessage();
+            response.success = false;
+            response.messageType = 'ERROR';
+            return response;
+        }
+    }
+    
+    //Update work order
+    public SVMXC.INTF_WebServicesDef.INTF_Response updateWO(SVMXC.INTF_WebServicesDef.INTF_Request request, SVMXC.INTF_WebServicesDef.INTF_Response response)
+    {
+        system.debug(LoggingLevel.WARN, 'Request for customCodeToUpdate is = ' + request); 
+        String recordId; 
+        for(SVMXC.INTF_WebServicesDef.SVMXMap objSVXMMap : request.valueMap){ 
+            if(objSVXMMap.key == 'SVMX_RECORDID') 
+                recordId = objSVXMMap.value;
+        }
+             
+        SVMXC__Service_Order__c objWO = [Select Id, Name, OwnerId from SVMXC__Service_Order__c where Id=:recordId];
+        objWO.OwnerId = UserInfo.getUserId();    
+        objWO.SVMXC__State__c = 'Nottingham Shire';        
+        objWO.SVMXC__Country__c = 'United Kingdom';        
+        objWO.SVMXC__Completed_Date_Time__c = system.now();                      
+        Update objWO;
+           
+        SVMXC.INTF_WebServicesDef.SVMXMap sObj = new SVMXC.INTF_WebServicesDef.SVMXMap();
+        sObj.record = objWO;
+        
+        response.valueMap.add(sObj);
+
+        response.message = 'Work Order updated';
+        response.success = true;
+        response.messageType = 'INFO';
+        return response;
+    }
+}
