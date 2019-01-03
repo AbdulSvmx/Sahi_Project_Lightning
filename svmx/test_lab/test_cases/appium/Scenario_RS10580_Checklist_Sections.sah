@@ -21,24 +21,30 @@ var $sectionName4 = "Section Four";
 //variables for exit criteria
 var $exitQuestionName = ["Number Should not be greater than 100"];
 var $questionType=["Number"];
-var $comboField=["Less Than","Equals"];
-var $operandType=["Value","Value"];
-var $answer=["20","50"];
-var $skipTo=["3-"+$sectionName3,"4-"+$sectionName4];
+var $comboField=["Less Than"];
+var $operandType=["Value"];
+var $answer=["20"];
+var $skipTo=["3-"+$sectionName3];
 var $criteriaDetails1=[$comboField,$operandType,$answer,$skipTo];
-var $criteriaDetailsv=[$criteriaDetails1];
+//var $criteriaDetailsv=[$criteriaDetails1];
 
 
-//exit criteria question2
-var $exitQuestionNameq2 = ["Section One Question One"];
-var $questionTypeq2=["Text"];
-var $comboFieldq2=["Equals"];
-var $operandTypeq2=["Value"];
-var $answerq2=["Jump"];
-var $skipToq2=["3-"+$sectionName3,];
-var $criteriaDetails1q2=[$comboFieldq2,$operandTypeq2,$answerq2,$skipToq2];
-var $criteriaDetailsvq2=[$criteriaDetails1q2];
+//variable for exit criteria for section2 
 
+
+var $exitQuestionName2 = ["Section Two Question One"];
+var $questionType2=["Text"];
+var $comboField2=["Contains"];
+var $operandType2=["Value"];
+var $answer2=["jump"];
+var $skipTo2=["4-"+$sectionName4];
+var $criteriaDetails2=[$comboField2,$operandType2,$answer2,$skipTo2];
+//var $criteriaDetailsvt=[$criteriaDetails2];
+
+
+var $questionNames=["Number Should not be greater than 100","Section Two Question One"];
+var $questionType=["Number","Text"];
+var $criteriaDetailList=[$criteriaDetails1,$criteriaDetails2];
 
 //variable for exit criteria for section2 
 
