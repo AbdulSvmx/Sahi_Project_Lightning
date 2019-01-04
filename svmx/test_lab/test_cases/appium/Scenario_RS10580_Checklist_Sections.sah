@@ -21,18 +21,18 @@ var $sectionName4 = "Section Four";
 //variables for exit criteria
 var $exitQuestionName = ["Number Should not be greater than 100"];
 var $questionType=["Number"];
-var $comboField=["Less Than"];
-var $operandType=["Value"];
-var $answer=["20"];
-var $skipTo=["3-"+$sectionName3];
+var $comboField=["Less Than","Equals"];
+var $operandType=["Value","Value"];
+var $answer=["20","50"];
+var $skipTo=["3-"+$sectionName3,"3-"+$sectionName3];
 var $criteriaDetails1=[$comboField,$operandType,$answer,$skipTo];
 //var $criteriaDetailsv=[$criteriaDetails1];
 
-var $exitQuestionNameq2 = ["Section One Question One"];
+var $exitQuestionNameq2 = ["Number Should not be greater than 100"];
 var $questionTypeq2=["Text"];
-var $comboFieldq2=["Contains"];
+var $comboFieldq2=["Equals"];
 var $operandTypeq2=["Value"];
-var $answerq2=["jump"];
+var $answerq2=["Jump"];
 var $skipToq2=["4-"+$sectionName4];
 var $criteriaDetailsq2=[$comboFieldq2,$operandTypeq2,$answerq2,$skipToq2];
 //var $criteriaDetailsvt=[$criteriaDetails2];
