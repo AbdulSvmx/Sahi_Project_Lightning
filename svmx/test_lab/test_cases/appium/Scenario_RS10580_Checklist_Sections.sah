@@ -26,8 +26,21 @@ var $operandType=["Value"];
 var $answer=["20"];
 var $skipTo=["3-"+$sectionName3];
 var $criteriaDetails1=[$comboField,$operandType,$answer,$skipTo];
-var $criteriaDetailsv=[$criteriaDetails1];
+//var $criteriaDetailsv=[$criteriaDetails1];
 
+var $exitQuestionNameq2 = ["Section One Question One"];
+var $questionTypeq2=["Text"];
+var $comboFieldq2=["Contains"];
+var $operandTypeq2=["Value"];
+var $answerq2=["jump"];
+var $skipToq2=["4-"+$sectionName4];
+var $criteriaDetailsq2=[$comboFieldq2,$operandTypeq2,$answerq2,$skipToq2];
+//var $criteriaDetailsvt=[$criteriaDetails2];
+
+
+var $questionNames=["Number Should not be greater than 100","Section One Question One"];
+var $questionTypes=["Number","Text"];
+var $criteriaDetailList=[$criteriaDetails1,$criteriaDetailsq2];
 
 //variable for exit criteria for section2 
 
@@ -110,14 +123,14 @@ var $dvrExpressionDetails5=[$comboField5,$operandType5,$answer5,$advExpr5,$msfTy
 
 
 
-$bo_act_login.login($g_url, $appiumAdminUn, $appiumAdminPwd);
 
+$bo_act_login.login($g_url, $appiumAdminUn, $appiumAdminPwd);
 $ProcessStatus=$sfm_act_SFM.checkCustomProcess($sfmName);
 _wait(5000);
 if($ProcessStatus==false){
 
 $bo_act_navigation.navigateToSfmTransactionDesigner();
-_wait(15000);
+
 _click($bo_pg_sfmTransactionAndDesigner.btn_newSFM);
 _wait(3000);
 _setValue($bo_pg_sfmTransactionAndDesigner.txt_name, $sfmName);
@@ -190,7 +203,7 @@ $sfm_act_formDesigner.editQuestionInSection($sectionNamev, $questionNames1[0]);
 $sfm_act_formDesigner.dataValidationOnCheckListQuestion($dvrName2, $dvrID2, $dvrExpressionDetails2);
 _click($sfm_pg_formDesigner.tab_questionDetails);
 _click($sfm_pg_formDesigner.btn_dvrSave);
-_wait(3000);
+_wait(15000);
 
 
 //Adding the Question1 Text Question to Section One
@@ -361,9 +374,13 @@ $sfm_act_formDesigner.createCheckListQuestion($sectionName14, $queCommonDetails1
 
 $sfm_act_formDesigner.editSection($sectionName1);
 $sfm_act_formDesigner.addExistCriteria();
-$sfm_act_formDesigner.addQuesToExistCriteriaTab($exitQuestionName, $questionType, $criteriaDetailsv);
+$sfm_act_formDesigner.addQuesToExistCriteriaTab($questionNames, $questionTypes, $criteriaDetailList);
+_setStrictVisibilityCheck(true);
+_wait(3000);
 _click(_f("main").s_button("saveBtnExit"));
+_wait(3000);
 _click($bo_pg_formDesigner.btn_closeQuestionPopUp);
+_setStrictVisibilityCheck(false);
 _wait(3000);
 
 
@@ -371,9 +388,13 @@ _wait(3000);
 
 $sfm_act_formDesigner.editSection($sectionName2);
 $sfm_act_formDesigner.addExistCriteria();
-$sfm_act_formDesigner.addQuesToExistCriteriaTab($exitQuestionName2, $questionType2, $criteriaDetailsvt);
+$sfm_act_formDesigner.addQuesToExistCriteriaTab($exitQuestionName2, $questionType2,$criteriaDetailsvt);
+_wait(3000);
+_setStrictVisibilityCheck(true);
 _click(_f("main").s_button("saveBtnExit"));
+_wait(3000);
 _click($bo_pg_formDesigner.btn_closeQuestionPopUp);
+_setStrictVisibilityCheck(false);
 _wait(3000);
 
 
