@@ -55,7 +55,7 @@ var $sfm_act_lightningConfig = new function sfm_act_lightningConfig() {
 		{
 			_click($bo_pg_home.chkbox_selectallprofiles);
 		}
-		
+		 
 		_click(_checkbox(0, _near(_tableHeader($profileName))));
 		
 		_click($bo_pg_home.btn_next);
@@ -940,5 +940,30 @@ this.getRecordType = function(){
 	var $y = $x.replace(" Change Record Type","");
 	return $y;
 	_setStrictVisibilityCheck(false);
+};
+this.addLookupField = function($fieldName){
+	
+	_click(_link("Fields & Relationships"));
+	_setValue(_searchbox("globalQuickfind"), $fieldName);
+	if(_isVisible(_span($fieldName)))
+		{
+		_log("Field already added");
+		}
+	else{
+		_click(_button("NewCustom Field"));
+		_selectDomain("cs70.salesforce.com");
+		_selectWindow();
+		_check(_radio("Lookup Relationship"));
+		_click(_submit(" Next "));
+		_setSelected(_select(0,_rightOf(_label("/Related To/"))), $fieldName);
+		_click(_submit(" Next "));
+		_setValue(_textbox("MasterLabel"), $fieldName);
+		_click(_submit(" Next "));
+		_click(_submit(" Next "));
+		_click(_submit(" Next "));
+		_click(_submit(" Save "));
+
+	}
+	
 };
 };
