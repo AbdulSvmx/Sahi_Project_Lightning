@@ -44,10 +44,10 @@ var $currentWizardName = $wizardName[4];
 var $productName = "Chrome";
 var $lineType = "Parts";
 var $fieldsAbsentInPage = [];
-var $missingStdDataTypes = ["URL","Picklist (Multi-Select)","Percent","Phone"];
-var $customFieldsNames = ["Automation URL","Automation multipicklist","Automation Percent","Automation Phone"];
+var $missingStdDataTypes = ["URL","Picklist (Multi-Select)","Percent","Phone","Date","Date"];
+var $customFieldsNames = ["Automation URL","Automation multipicklist","Automation Percent","Automation Phone","Automation Date2","Automation Date3"];
 var $pageLayoutForProfile = "SVMX Work Order - Admin";
-var $myDomain = "/lightning/";
+//var $sfd_myDomain = "/lightning/";
 var $multiPicklistValues = ["Multipicklist1","Multipicklist2","Multipicklist3"];
 var $mapType = "Field Map For Existing Records";
 
@@ -60,13 +60,12 @@ var $mapName = $processName + "mp";
 //**************************************************************************************
 //Login and switch to lightning
 $bo_act_login.login($g_url,$sfmlUsn,$sfmlPwd);
-$sfm_act_lightningConfig.switchToLightning();
+
 _wait(15000);
 
 //Create custom fields if needed
-$sfm_act_lightningConfig.addCustomFields($objectName, $customFieldsNames, $missingStdDataTypes, $myDomain,$multiPicklistValues);
-_closeWindow();
-_selectWindow();
+$sfm_act_lightningConfig.addCustomFields($objectName, $customFieldsNames, $missingStdDataTypes, $sfd_myDomain,$multiPicklistValues);
+
 
 //Create work order
 var $wo_number = $sfm_act_createCustomWizard.createWowithdateliterals();
@@ -85,7 +84,7 @@ _log($fieldsAbsentInPage);
 
 if($fieldsAbsentInPage.length > 0){
 	$sfm_act_lightningConfig.navigateToObjectsInLightning($objectName);
-	$sfm_act_lightningConfig.addFieldsToLightningPageLayout($objectName,$pageLayoutForProfile,$fieldsAbsentInPage,$myDomain);
+	$sfm_act_lightningConfig.addFieldsToLightningPageLayout($objectName,$pageLayoutForProfile,$fieldsAbsentInPage,$sfd_myDomain);
 	_selectDomain();
 	_selectWindow("Home | Salesforce");
 	_closeWindow();
@@ -102,7 +101,7 @@ $sfm_act_lightningConfig.logoutInLightning();
 //Login and switch to lightning
 
 $bo_act_login.login($g_url,$sfmlUsn,$sfmlPwd);
-$sfm_act_lightningConfig.switchToLightning();
+
 
 //**************************************************************************************************
 
@@ -148,7 +147,7 @@ $sfm_act_wizards.addToWizard($objectName,$currentWizardName,"SFM",$processName);
 _selectDomain();
 
 var $wo_number = $sfm_act_createCustomWizard.createWowithdateliterals();
-var $wlNumber = $sfm_act_lightningConfig.createWorkDetailInLightning("Usage",$lineType);
+var $wlNumber = $sfm_act_lightningConfig.createWorkDetailInLightning("Usage/Consumption",$lineType);
 //Add all needed details to the parent work order
 var $x = $fieldsToMap.indexOf("Record Type ID");
 if($x != -1) {

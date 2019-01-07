@@ -1,0 +1,18 @@
+//Author	:- 	Shashikala Kamath
+var $bvt_tc_022_serviceMax_setup_home_navigate = _testcase("bvt_tc_022_serviceMax_setup_home_navigate","Verify the navigation in ServiceMax Setup Home");
+
+$bvt_tc_022_serviceMax_setup_home_navigate.start();
+
+_setSpeed($g_stepSpeed);
+$bo_act_login.login($g_url,$swat_un,$swat_pwd );
+$bo_act_navigation.navigateToSvmxSetup();
+//_click($bo_pg_servicemaxSetup.btn_appAdministration);
+_click($bo_pg_servicemaxSetup.btn_Modules);
+
+
+
+//$bo_act_navigation.navigate_to_servicemaxSetup_buttons();
+//$bo_act_navigation.navigateMobileAndOffline("TechGroupProfile", "Download Criteria","Work Order", "Account", "Case", "Contact", "Product");
+
+
+$bvt_tc_022_serviceMax_setup_home_navigate.end();

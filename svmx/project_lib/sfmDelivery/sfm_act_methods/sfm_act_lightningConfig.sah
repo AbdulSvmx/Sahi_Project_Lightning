@@ -55,7 +55,7 @@ var $sfm_act_lightningConfig = new function sfm_act_lightningConfig() {
 		{
 			_click($bo_pg_home.chkbox_selectallprofiles);
 		}
-		
+		 
 		_click(_checkbox(0, _near(_tableHeader($profileName))));
 		
 		_click($bo_pg_home.btn_next);
@@ -95,9 +95,10 @@ var $sfm_act_lightningConfig = new function sfm_act_lightningConfig() {
 		//Added by JJ
 		//This function navigates to the Object Manager in Lightning and then to a given object.
 		//This is Lightning specific.
-		_selectWindow("Home | Salesforce");
+		
 		_click($sfm_pg_wo.link_lightning_setup);
 		_click($sfm_pg_wo.link_currentapp_setup);
+		_selectWindow("Home | Salesforce");
 		_wait(3000,isVisible($sfm_pg_wo.link_object_manager));
 		_click($sfm_pg_wo.link_object_manager);
 		_selectWindow("/Object Manager/");
@@ -225,12 +226,14 @@ this.createWorkDetailInLightning = function($recordType,$lineType){
 	var $lineNumber;
 	_click($sfm_pg_wo.link_relatedListsTab);
 	_click($sfm_pg_wo.btn_newButtonForWorkDetail);
-	_click(_span("/slds-radio--faux/",_leftOf(_span("/"+$recordType+"/",_in(_div("/modal-body scrollable/"))))));
+	_setStrictVisibilityCheck(true);
+	_click(_span("/slds-radio--faux/",_leftOf(_span($recordType))));
 	_click($sfm_pg_wo.btn_nextForWorkDetailRecordType);
 	_click($sfm_pg_wo.link_lineTypeArrow);
 	_click(_link($lineType));
 	_click($sfm_pg_wo.btn_wo_edit_save);
 	_wait(500);
+	_setStrictVisibilityCheck(false);
 	_assertVisible(_span("Work Detail was created."));
 	_click($sfm_pg_wo.link_workDetailAfterCreation);
 	$lineNumber = _getText(_heading1("/WL-/"));
@@ -319,6 +322,7 @@ this.addCustomFields = function($objectName,$fieldNames,$dataTypes,$myDomain,$mu
 	var $i = 0;var $z = 0;
 	$sfm_act_lightningConfig.navigateToObjectsInLightning($objectName);
 	_selectWindow("/"+$objectName+"/");
+	
 	_click($sfm_pg_wo.link_fieldsAndRelationships);
 	_selectDomain();
 	for($i=0;$i<$fieldNames.length;$i++){
@@ -357,7 +361,8 @@ this.addCustomFields = function($objectName,$fieldNames,$dataTypes,$myDomain,$mu
 			}
 		
 	}
-	_closeWindow();
+_closeWindow();
+_selectWindow();
 };
 
 
@@ -389,7 +394,7 @@ _setStrictVisibilityCheck(false);
 return $result;
 };
 
-this.addFieldsToLightningPageLayout = function($object_name,$pageLayoutForProfile,$fieldsArray,$myDomain){
+this.addFieldsToLightningPageLayout = function($object_name,$pageLayoutForProfile,$fieldsArray,$sfd_myDomain){
 	//This function adds the given fields to the given Lightning component layout
 	//Example: Missing fields in Work order page layout
 	//Author: Janaki
@@ -397,7 +402,7 @@ this.addFieldsToLightningPageLayout = function($object_name,$pageLayoutForProfil
 	_selectWindow("/"+$object_name+"/");
 	_click(_link("Page Layouts"));
 	_click(_link($pageLayoutForProfile));
-	_selectDomain($myDomain);
+	_selectDomain($sfd_myDomain);
 	for($i=0;$i<$fieldsArray.length;$i++){
 		_setValue($sfm_pg_wo.txt_pgLayoutQuickFind,$fieldsArray[$i]);
 		var $shortName = $fieldsArray[$i].substr(0,4);
@@ -564,9 +569,11 @@ if($telephoneLabels.length > 0){
 //Fill Lookup Values
 if($lookUpLabels.length > 0){
 	for($i=0;$i<$lookUpLabels.length;$i++){
-		_click(_textbox($lookUpLabels[$i]));
-		_setValue(_textbox($lookUpLabels[$i]),$lookUpValues[$i]);
-		_keyPress(_textbox($lookUpLabels[$i]),13);
+		if(_isVisible(_span("deleteIcon",_near(_span($lookUpLabels[$i]))))){
+			_click(_span("deleteIcon",_near(_span($lookUpLabels[$i]))));
+		}
+		_setValue(_textbox("/"+$lookUpLabels[$i]+"/"),$lookUpValues[$i]);
+		_keyPress(_textbox("/"+$lookUpLabels[$i]+"/"),13);
 		_click(_link($lookUpValues[$i]));
 	}
 }
@@ -878,25 +885,85 @@ this.getWorkDetailNumber = function(){
 	return $wlNum;
 };
 
-this.getWorkDetailNumberFromWO = function() {
-	//This function fetches the latest work detail number from any work order
-	//Returns Work Detail Line number in the form of WL-*********
-	//Author : Janaki
-	_click($sfm_pg_wo.link_relatedListsTab);
-	var $wDetailNum = _getText($sfm_pg_wo.link_workDetail);
-	return $wDetailNum;
-	
-	
-};
-this.navigateToLatestWorkDetail = function() {
+this.navigateToLatestWorkDetail = function(){
 	//This function navigates to work detail (Child line items) after
 	//save in a source to target process when the line number is unknown.
 	//Author: Janaki
-	var $x = _count("_span","/WL-/",_near(_span("Line Number")));
-	_log($x);
+	_click($sfm_pg_wo.link_relatedListsTab);
+	_click($sfm_pg_wo.btn_viewAllWorkDetails);
+	var $x = _count("_link","/WL-/");
 	$x = $x-1;
-	_click(_link("/WL-/",_near(_span("slds-row-number slds-text-body--small slds-text-color--weak["+$x+"]"))));
-	_wait(2000);
+	_click(_link("/WL-/["+$x+"]"));
+
+};
+this.navigateToNthWorkDetail = function($number){
+	//This function navigates to work detail (Child line items) after
+	//save in a source to target process when the line number is unknown.
+	//Author: Janaki
+	_click($sfm_pg_wo.link_relatedListsTab);
+	_click($sfm_pg_wo.btn_viewAllWorkDetails);
+	var $x = $number - 1;
+	_click(_link("/WL-/["+$x+"]"));
+
+};
+this.sortRelatedList = function($relatedList,$sortingField,$order,$pageLayoutForProfile){
+	//This function sets the option to sort the items of the related list in the required order
+	//Parameters: $relatedList - Name of the related list
+	//$sortingField - field on the basis of which sorting will be performed
+	//$order - "Ascending" Or "Descending"
+	//Author: Janaki
+	
+	_click(_link("Page Layouts"));
+	_click(_link($pageLayoutForProfile));
+	_selectDomain($sfd_myDomain);
+	_click($sfm_pg_wo.btn_relatedLists);
+	_click(_div("/properties/",_near(_cell($relatedList))));
+	_click($sfm_pg_wo.txt_sortingRelatedList);
+	_click(_div($sortingField));
+	if($order === "Descending"){
+		_click($sfm_pg_wo.radio_descending);
+	}
+	else if($order === "Ascending"){
+		_click($sfm_pg_wo.radio_ascending);
+	}
+	_click($sfm_pg_wo.btn_okaddColumnToRelatedList);
+	_click($sfm_pg_wo.btn_savePageLayout);
+	_wait(3000);
+	_selectDomain();
 };
 
+this.getRecordType = function(){
+	//This function returns the record type of the record created
+	//Author: Janaki
+	_setStrictVisibilityCheck(true);
+	var $x = _getText(_div(1,_near(_span("/Record Type/"))));
+	var $y = $x.replace(" Change Record Type","");
+	return $y;
+	_setStrictVisibilityCheck(false);
+};
+this.addLookupField = function($fieldName){
+	
+	_click(_link("Fields & Relationships"));
+	_setValue(_searchbox("globalQuickfind"), $fieldName);
+	if(_isVisible(_span($fieldName)))
+		{
+		_log("Field already added");
+		}
+	else{
+		_click(_button("NewCustom Field"));
+		_selectDomain("cs70.salesforce.com");
+		_selectWindow();
+		_check(_radio("Lookup Relationship"));
+		_click(_submit(" Next "));
+		_setSelected(_select(0,_rightOf(_label("/Related To/"))), $fieldName);
+		_click(_submit(" Next "));
+		_setValue(_textbox("MasterLabel"), $fieldName);
+		_click(_submit(" Next "));
+		_click(_submit(" Next "));
+		_click(_submit(" Next "));
+		_click(_submit(" Save "));
+
+	}
+	
+};
 };

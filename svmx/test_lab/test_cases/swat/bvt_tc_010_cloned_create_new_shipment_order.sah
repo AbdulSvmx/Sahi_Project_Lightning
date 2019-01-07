@@ -1,0 +1,47 @@
+//Author	:- 	Shashikala Kamath
+var $bvt_tc_010_cloned_create_new_shipment_order = _testcase("bvt_tc_010_cloned_create_new_shipment_order","Verify the functionality of cloned SFM type - as Standalone for the purpose of creating a new record");
+
+$bvt_tc_010_cloned_create_new_shipment_order.start();
+
+_setSpeed($g_stepSpeed);
+
+//Create Product
+$objName= "Product2";
+$productName=$bo_act_common.generateRandomName("swat_Prod_");
+$obJson = "{\"Name\":\""+$productName+"\",\"ProductCode\":\""+$productName+"\",\""+$orgnamespace+"__Product_Line__c\":\"Storage\",\""+$orgnamespace+"__Product_Type__c\":\"Consumable\"}";
+$filterValue=$sfm_act_restApiMethods.postRestApi($swat_un, $swat_pwd, $swat_ClientId, $swat_ConsumerSecret, $swat_OrgInstance,$objName,$obJson,"POST");
+_log($productName);
+
+
+	var $sfmNameToBeCloned = "Create New Shipment Order";
+	var $sfmName = $bo_act_common.generateRandomName("swat_cloned_standalone_create_");
+	var $isCustom = false;
+	var $sfmTemplate = "SVMXSTD: New iPad Shipment";
+	var $sfmTemplateSaveAsName = $sfmName;
+	var $containerName = [];
+	var $fieldName = [];
+	var $wizardObject ="Parts Order";
+	var $poNumber;
+	
+	$bo_act_login.login($g_url,$swat_un,$swat_pwd );
+	
+
+	//Create PO through REST API ******
+	var $poNumber = $sfm_act_createCustomWizard.createBlankPoFromRest($swat_un, $swat_pwd, $swat_ClientId, $swat_ConsumerSecret, $swat_OrgInstance);
+
+	
+	$sfm_act_SFM.cloneTDM016($sfmNameToBeCloned,$sfmName,$isCustom, $sfmTemplateSaveAsName, $sfmTemplate, $fieldName, $containerName);
+	_click($bo_pg_sfmTransactionAndDesigner.btn_saveAndclose);
+
+	//add the process to wizard
+	$sfm_act_wizards.addToWizard($wizardObject, "SFMDAuto_Ltng_PO", $wizardType[1], $sfmName);  
+	_wait(3000); 
+
+	//Navigate to the PO for validation
+	$bo_act_navigation.navigateToCreatedRecordUsingGlobalSearch($poNumber);
+	$sfm_act_createCustomWizard.clickWizardBtn($sfmName);
+	
+	_setValue(_textbox(0, _near(_span("To Zip"))), "560001");
+	_click($sfm_pg_sfmDesigner.btn_deliverySave);
+
+$bvt_tc_010_cloned_create_new_shipment_order.end();

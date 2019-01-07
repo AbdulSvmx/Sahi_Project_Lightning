@@ -64,12 +64,18 @@ var $bo_act_configurationProfiles = new function bo_act_configurationProfiles() 
 		_wait(3000);
 		};
 		// Changes made for Lightning
-		this.editGroupProfileForTextSettings = function($groupProfileName, $Module, $SubModule, $Setting, $settingValue) {
+		this.editGroupProfileForTextSettings = function($groupProfileName, $Module, $SubModule, $Setting, $settingValue,orgsetting) {
 			$bo_act_navigation.navigateToConfigurationProfilesPage();
 			 _selectDomain("/svmx/");
 			 _wait(1000);
 			 _check(_checkbox(0,_leftOf(_span($groupProfileName))));
+			 if(orgsetting==true)
+				 {
+				 _click(_submit("Edit"));
+				 }
+			 else{
 			 _click($bo_pg_configurationProfiles.btn_editForGrp);
+			 }
 			 _wait(3000);
 			 _setSelected($bo_pg_configurationProfiles.sel_selectModule,$Module);
 			 _wait(3000);

@@ -13,26 +13,24 @@ var $sfm_act_SFM = new function sfm_act_SFM() {
 
 		_click($bo_pg_sfmTransactionAndDesigner.btn_clone);
 		_wait(50000, _isVisible($bo_pg_sfmTransactionAndDesigner.txt_name));
+		_wait(10000);
 		_setValue($bo_pg_sfmTransactionAndDesigner.txt_name, "");
 		_setValue($bo_pg_sfmTransactionAndDesigner.txt_name, $sfmName);
 		_setValue($bo_pg_sfmTransactionAndDesigner.txt_sfmTransactionId, "");
 		_setValue($bo_pg_sfmTransactionAndDesigner.txt_sfmTransactionId, $sfmName);
-//		_setValue($bo_pg_sfmTransactionAndDesigner.txt_name, "");
-//		_setValue($bo_pg_sfmTransactionAndDesigner.txt_name, $sfmName);
+		_setValue($bo_pg_sfmTransactionAndDesigner.txt_name, "");
+		_setValue($bo_pg_sfmTransactionAndDesigner.txt_name, $sfmName);
 		_click($bo_pg_sfmTransactionAndDesigner.btn_screenDesigner);
 		_wait(5000);
-		_setSelected($bo_pg_sfmTransactionAndDesigner.sel_sfmTemplate,
-				$sfmTemplate);
-		_wait(10000);
-		_setValue($bo_pg_sfmTransactionAndDesigner.txt_sfmSavePageLayoutAs,
-				$sfmTemplateSaveAsName);
-		_setValue($bo_pg_sfmTransactionAndDesigner.txt_sfmSavePageLayoutAsId,
-				$sfmTemplateSaveAsName);
-		_click($bo_pg_sfmTransactionAndDesigner.btn_quickSave);
-		_wait(10000);
-		_click($bo_pg_sfmTransactionAndDesigner.btn_quickSave1);
-		_wait(10000);
-		if($fieldName.length > 0){
+		if ($sfmTemplateSaveAsName.length!==0) {
+			_setSelected($bo_pg_sfmTransactionAndDesigner.sel_sfmTemplate, $sfmTemplate);
+			_wait(10000);
+			_setValue($bo_pg_sfmTransactionAndDesigner.txt_sfmSavePageLayoutAs, $sfmTemplateSaveAsName);
+			_setValue($bo_pg_sfmTransactionAndDesigner.txt_sfmSavePageLayoutAsId, $sfmTemplateSaveAsName);
+			_click($bo_pg_sfmTransactionAndDesigner.btn_quickSave);
+			_wait(10000);
+		}
+		if ($fieldName.length!==0) {
 			$sfm_act_SFM.addFieldToScreen($fieldName, $containerName);
 		}
 	};
@@ -50,11 +48,11 @@ var $sfm_act_SFM = new function sfm_act_SFM() {
 		_setStrictVisibilityCheck(true);
 //		
 		
-		if (_isVisible(_f("main").s_checkbox("/chk/i").leftOf(_f("main").s_label($sfmName), 10, 10))) {
+		if (_isVisible(_f("main").s_label($sfmName).inside(_f("main").s_navigatorcontent("Your Custom SFM Transactions")))) {
 			_log("Process exists successfully");
 			$bProcessStatus = false;
 			//_click(_f("main").s_checkbox("/chk/i").leftOf(_f("main").s_label($sfmNameToBeCloned), 10, 10));
-			
+		
 		} else if (_isVisible(_f("main").s_checkbox(2).leftOf(_f("main").s_label($sfmName), 10, 10))) {
 			_log("Process does  exists ");
 			$bProcessStatus = false;
@@ -121,22 +119,29 @@ var $sfm_act_SFM = new function sfm_act_SFM() {
 		return $bProcessStatus;
 	};
 	
+	/**
+	 * Author		:	Lakshmi BS
+	 * Function		:	To search and check custom process
+	 * Parameters	:	$sfmName: Process name
+	 * Examples		:	Refer RS_10543.sah
+	 */
+	
 	this.sfmProcessCheck = function($sfmName,$bProcessStatus) 
 			 {
 		$bo_act_navigation.navigateToSfmTransactionDesigner();
 		_click($bo_pg_sfmTransactionAndDesigner.btn_yourCustomSfmTransactions);
 		_setValue($bo_pg_sfmTransactionAndDesigner.lbl_searchSFM, $sfmName);
-		_wait(10000);
+		_wait(20000);
 		
 		_setStrictVisibilityCheck(false);
 		_setStrictVisibilityCheck(true);
 		
 		
-		if (_isVisible(_f("main").s_checkbox("/chk/i").leftOf(_f("main").s_label($sfmName), 10, 10))) {
+		if (_isVisible(_f("main").s_label($sfmName).inside(_f("main").s_navigatorcontent("Your Custom SFM Transactions")))) {
 			_log("Process exists successfully");
 			$bProcessStatus = true;
 			//_click(_f("main").s_checkbox("/chk/i").leftOf(_f("main").s_label($sfmNameToBeCloned), 10, 10));
-			
+					
 		} else if (_isVisible(_f("main").s_checkbox(2).leftOf(_f("main").s_label($sfmName), 10, 10))) {
 			_log("Process does  exists ");
 			$bProcessStatus = true;
@@ -203,20 +208,25 @@ var $sfm_act_SFM = new function sfm_act_SFM() {
 			else{
 				_click(_f("main").s_datagroup("dataGroup").near(_f("main").s_richtext($containerName[$i])));				
 				}
-			//Below logic is used for selecting object from multi match list	
 			_setValue($bo_pg_sfmTransactionAndDesigner.txt_quickFindField, $fieldName[$i]);
+
+			//Below logic is used for selecting object from multi match list
 			var $elementName=$fieldName[$i];
+			var $searchString=null;
+			if($elementName.includes("\(")){
+				
+				$searchString=$elementName.substring(0,$elementName.indexOf("\("));
+				_log($searchString);
+			}else{
+				$searchString=$elementName;
+			}
 				var $find=true;
 				var $k=0;
 				var $element=null;
-				while ($find) {
-//					_log("search element name: "+$elementName);
-					if ($k==0) {
-						$element=_getValue(_f("main").s_label($elementName).near(_f("main").s_textinput($elementName)));
-					}else{
-						$element=_getValue(_f("main").s_label("/"+$elementName+"/["+$k+"]").near(_f("main").s_textinput($elementName)));
-					}
-//					_log("$element: "+$element);
+				while ($find && $k<10) {
+					_log("search element name: "+$elementName);
+					$element=_getValue(_f("main").s_label("/"+$searchString+"/["+$k+"]").near(_f("main").s_textinput($elementName)));
+					_log("$element: "+$element);
 					if ($elementName===$element) {
 						$find=false;
 						_click(_f("main").s_label($k).near(_f("main").s_textinput($elementName)));
@@ -224,10 +234,10 @@ var $sfm_act_SFM = new function sfm_act_SFM() {
 						$k++;
 					}
 				}
-				_click(_f("main").s_button("/Add Field/"));
+			_click(_f("main").s_button("/Add Field/"));
 		}
 		_click($bo_pg_sfmTransactionAndDesigner.btn_pageLayoutSave);
-		_wait(3000, _isVisible($bo_pg_sfmTransactionAndDesigner.lbl_pageLayoutSaved));
+		_wait(3000, _isVisible($bo_pg_sfmTransactionAndDesigner.label_pageSaved));
 		_click($bo_pg_sfmTransactionAndDesigner.btn_quickSave1);
 	};
 	
@@ -814,6 +824,29 @@ return $result;
 		_setValue(_f("main").s_textinput("textip"),$value);
 		
 	};
+	
+	/**
+	 * This function is set webservice on a header/child base on the parameter passed
+	 * $object - Object on which webservice is to be enabled. Work Order for header/Parts incase of Parts and so on
+	 * $event - On Load or Before Save/Update or After Save/Update or On Change or After Add Record
+	 * $eventType - Webservice/JavaScript
+	 * $methodName - webservice name along with class name
+	 * Eg : 10479.sah  
+	 */	
+	this.setWebservice = function($object, $event, $eventType, $methodName ){
+		if($object=='Work Order'){
+			_click($bo_pg_sfmTransactionAndDesigner.txt_sfmSavePageLayoutAsId);
+		}else if($object=='Parts' || $object=='Labor' || $object=='Expenses' || $object=='Travel'){
+			_click(_f("main").s_richtext($object));
+		}else{
+			_click(_f("main").uiftetextfield($object));
+		}
+		_setSelected(_f("main").s_combobox("/ComboBox/").under(_f("main").uiftetextfield($event)), $eventType);
+		_wait(2000);
+		_setValue(_f("main").s_textinput("/txtip/").under(_f("main").uiftetextfield($event)),$methodName);
+		_click($bo_pg_sfmTransactionAndDesigner.btn_pageLayoutSave);
+		_wait(3000, _isVisible($bo_pg_sfmTransactionAndDesigner.label_pageSaved));
+	   };
 			
 	
 };

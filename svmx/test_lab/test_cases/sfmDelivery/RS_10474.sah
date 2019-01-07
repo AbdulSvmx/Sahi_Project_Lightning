@@ -10,36 +10,34 @@ var $containerName = ["Order Status"];
 var $fieldName = ["Scheduled Date"];
 var $wizardCriteria = "EXPR002-SVMXSTD: Open Work Orders";
 var $wizardObject ="Work Order";
-
+//Create WO through REST API
+var $woNumber = $sfm_act_createCustomWizard.createBlankWoFromRest($sfmlUsn, $sfmlPwd, $sfmClientId, $sfmConsumerSecret, $sfmOrgInstance);
 
 _setSpeed($g_stepSpeed);
 $bo_act_login.login($g_url, $sfmlUsn,$sfmlPwd);
-$sfm_act_lightningConfig.switchToLightning(); 
+ 
 _wait(15000);
 $sfm_act_wizards.addToWizard($wizardObject, $wizardName[7], $wizardType[1],$sfmName,false,null,$wizardCriteria );  
  
 
-//Create WO with OrderStatus as closed through UI for the validatiion
-_selectDomain();
-$sfm_act_createCustomWizard.createWOwithOrderStatus("Closed");
+//Navigate to the WO for validation
+$bo_act_navigation.navigateToCreatedRecordUsingGlobalSearch($woNumber);
 
-//Check for Wizard visibility when criteria is not met
-_assertNotVisible(_span($wizardName[7]),$wizardName[7]+" is not visbile when criteria is not met");  
+//Check for Wizard visibility when criteria is  met
+_assertVisible(_span($wizardName[7]),$wizardName[7]+" is not visbile when criteria is met");
 _wait(3000);
 
-//Change the WO status to open and then check whether wizard is visible or not --RS-10482
-
+//Change the WO status to Closed and then check whether wizard is visible or not --RS-10482
 _click($sfm_pg_wo.btn_wo_edit);
 _wait(3000);
 _click(_link(0,_near(_span("/Order Status/",_in(_div("modal-container slds-modal__container"))))));
-_click(_link("Open"));
+_click(_link("Closed"));
 _click($sfm_pg_wo.btn_wo_edit_save);
 _wait(20000,isVisible($sfm_pg_wo.btn_wo_edit));
-
-_assertVisible(_span($wizardName[7]),$wizardName[7]+" is visbile when criteria is met");
+//Check for Wizard visibility when criteria is not met
+_assertNotVisible(_span($wizardName[7]),$wizardName[7]+" is visbile when criteria is not met");  
 _wait(3000);
 
 //delete the above created wizard
 $sfm_act_wizards.deleteSfmWizard($wizardObject,$wizardName[7]);
-
 $rs_10474.end();

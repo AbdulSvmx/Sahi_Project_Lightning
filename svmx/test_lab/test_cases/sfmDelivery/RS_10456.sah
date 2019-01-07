@@ -1,4 +1,4 @@
-var $rs_10456 = _testcase("RS_10456","");
+var $rs_10456 = _testcase("RS_10456","Verify URL based Execution through SFM Custom Action");
 $rs_10456.start();
 var $customActionObject = "Work Order";
 var $actionType="URL";
@@ -9,20 +9,19 @@ var $paramValueType="Value";
 var $paramValue="Servicemax";
 var $woName;
 
-
-
-
+//Create WO through REST API
+var $woNumber = $sfm_act_createCustomWizard.createBlankWoFromRest($sfmlUsn, $sfmlPwd, $sfmClientId, $sfmConsumerSecret, $sfmOrgInstance);
 
 _setSpeed($g_stepSpeed);
 $bo_act_login.login($g_url, $sfmlUsn,$sfmlPwd);
-$sfm_act_lightningConfig.switchToLightning();
+
 $sfm_act_navigation.navigateToSfmCustomActions();
 $sfm_act_customActions.urlCustomAction($customActionObject,$actionType, $actionId, $urlToLaunch, $paramName, $paramValueType, $paramValue);
 $sfm_act_wizards.addToWizard($customActionObject, $wizardName[1], $wizardType[3], $actionId);
 
-//Create WO through UI for the validatiion
-_selectDomain();
-$sfm_act_createCustomWizard.createWowithoutvalues();
+//Navigate to the WO for validation
+$bo_act_navigation.navigateToCreatedRecordUsingGlobalSearch($woNumber);
+
 _click(_span($actionId));
 _wait(3000);
 _selectWindow("Servicemax - Google Search");

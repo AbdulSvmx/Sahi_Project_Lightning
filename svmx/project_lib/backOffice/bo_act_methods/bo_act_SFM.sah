@@ -64,9 +64,9 @@ var $bo_act_SFM = new function bo_act_SFM() {
 		_click($bo_pg_manageWOLineUsageForSorting.chkbox_defaultlookup);
 		_setValue($bo_pg_manageWOLineUsageForSorting.txt_savethelookupas, $lookuplayoutName);
 		_setValue($bo_pg_manageWOLineUsageForSorting.txt_savethelookupId, $lookuplayoutId);
-		_click($bo_pg_manageWOLineUsageForSorting.btn_savelookup);
-		_wait(2000);
-		_click($bo_pg_manageWOLineUsageForSorting.btn_closelookup);
+		_click($sfm_pg_screenDesigner.btn_lookupSave);
+		_wait(3000);
+		_click($sfm_pg_screenDesigner.btn_lookupClose);
 		_setValue($bo_pg_sfmTransactionAndDesigner.txt_sfmSavePageLayoutAs, $sfmTemplateSaveAsName);
 		_setValue($bo_pg_sfmTransactionAndDesigner.txt_sfmSavePageLayoutAsId, $sfmTemplateSaveAsName);
 		_wait(3000);

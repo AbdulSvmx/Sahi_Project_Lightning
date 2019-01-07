@@ -9,8 +9,8 @@ var $sfmTemplate = "SVMXSTD: Manage WO Usage Lines";
 var $isCustom = false;
 var $ctr = 0;
 var $i = 0;
-var $containerName = ["Order Status","Order Status","Parts","Parts","Parts"];
-var $fieldName=["Closed By","Site","Consumed From Location","Line Type","Record Type ID"];
+var $containerName = ["Order Status","Parts","Parts","Parts","Parts"];
+var $fieldName=["Closed By","Consumed From Location","Line Type","Record Type ID","Canceled By"];
 var $currentWizardName = $wizardName[4];
 var $success_message = "Work Order was saved.";
 var $stdMap = "SVMXSTD: Close Work Order";
@@ -31,7 +31,7 @@ var $mapName = $processName + "mp";
 //**************************************************************************************
 //Login and switch to lightning
 $bo_act_login.login($g_url,$sfmlUsn,$sfmlPwd);
-$sfm_act_lightningConfig.switchToLightning();
+
 _wait(15000);
 //Get current user name
 _click($sfm_pg_wo.link_profileImageRightCorner);
@@ -43,13 +43,18 @@ var $expValues = [$currentUser,$inventoryLocation];
 //Clone standard process and add the dependent picklist in the screen designer
 _setSpeed(3000);
 $sfm_act_SFM.cloneTDM016($process_to_clone,$processName,$isCustom,$pageLayoutName, $sfmTemplate, $fieldName, $containerName);
-$sfm_act_SFM.addUserLookupInScreenDesigner("Canceled By","Parts");
+$bo_act_navigation.designHeaderScreen($pageLayoutName, ["Site"]);
 _click($bo_pg_sfmTransactionAndDesigner.btn_quickSave1);
 _click($bo_pg_sfmTransactionAndDesigner.btn_qualifyingCriteriaAndFieldMapping);
 
 //Set up the mapping with SVMX.CURRENTRECORD literals for Header
 _selectDomain($g_domain);
 $bo_act_mappings.createMapping("Work Order",$mapType,[],[],$textLabels,$textValues,$mapName);
+//Create mapping for child lines by navigating to SFM Designer from Delivery.
+$mapName = $mapName + "_2";
+$textLabels = ["Canceled By","Consumed From Location"];
+$mapType = "Value Map For New Records";
+$bo_act_mappings.createMapping("Parts",$mapType,[],[],$textLabels,$textValues,$mapName);
 _setSpeed(1000);
 //Add the custom process to SFM wizard.
 $sfm_act_wizards.addToWizard($object_name,$currentWizardName,"SFM",$processName);
@@ -65,23 +70,9 @@ _wait(3000);
 _selectDomain($g_domain);
 
 //Verify the values in header
+$textLabels = ["Closed By","Site"];
 var $verifyResult = $sfm_act_SFM.verifyValuesInDelivery($textLabels,$expValues,[],[],[],[],[],[],[],[]);
 _assertTrue($verifyResult,"Following Literals are verified in header- SVMX.CURRENTUSERID and SVMX.USERTRUNK");
-
-//Create mapping for child lines by navigating to SFM Designer from Delivery.
- $mapName = $mapName + "_2";
-_click($sfm_pg_wo.btn_arrowNextToGetPrice);
-_click($sfm_pg_wo.link_launchSfmDesigner);
-_selectDomain();
-_wait(5000);
-_selectWindow("/SFM Transaction Designer/");
-_wait(10000);
-$textLabels = ["Canceled By","Consumed From Location"];
-$mapType = "Value Map for New Records";
-_click($bo_pg_sfmTransactionAndDesigner.btn_qualifyingCriteriaAndFieldMapping);
-$bo_act_mappings.createMapping("Parts",$mapType,[],[],$textLabels,$textValues,$mapName);
-_closeWindow();
-_selectWindow();
 
 //Clear Servicemax cache in service delivery.
 _selectDomain($g_domain);
@@ -91,7 +82,8 @@ $textLabels = ["Line Qty"];
 $textValues = ["12"];
 $sfm_act_SFM.addChildLine("Parts",$productName, $textLabels, $textValues, $pickListLabels, $pickListValues, [],[],[],[],[],[],[],[],[]);
 $sfm_act_SFM.performQuickSave();
-$sfm_act_lightningConfig.clearServicemaxCache();
+_wait(3000);
+//$sfm_act_lightningConfig.clearServicemaxCache();
 $sfm_act_lightningConfig.openExtEditForLatestItem();
 _wait(2000);
 $textLabels = ["Canceled By","Consumed From Location"];

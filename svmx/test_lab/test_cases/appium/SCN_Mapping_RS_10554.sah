@@ -25,19 +25,20 @@ var $part="Parts";
 var $wizardObject="Installed Product";
 var $wizardName="Automation IB Wizard";
 var $wizardType="SFM";
-var $profile="auto group profile";
+var $profile=$group_profilename;
 var $handOver="false";
 var $wizardCriteria=null;
-	$bo_act_login.login($g_url, $appiumAdminUn, $appiumAdminPwd);
-$sfm_act_lightningConfig.switchToLightning();
+$bo_act_login.login($g_url, $appiumAdminUn, $appiumAdminPwd);
 
-$mappingField = ["Account","Component","Product","Scheduled Date","Scheduled Date Time"];
-$mappingValue = ["Account","Record ID","Product","Date Installed","Last Modified Date"];
+
+$mappingField = ["Account","Component","Product","Scheduled Date","Scheduled Date Time","Record ID","Record Type ID"];
+$mappingValue = ["Account","Record ID","Product","Date Installed","Last Modified Date","--None--","--None--"];
 
 $mappingField_child = ["Date Required","Part","Record Type ID"];
 $mappingValue_child = ["Date Installed","Product","--None--"];
 var $containerName="Work Order";
 var $containerName_child="Parts";
+var $mapTypechild="Field Map For Existing Records";
 var $textLabels=[];
 var $textValues=[];
 
@@ -74,13 +75,14 @@ _wait(5000);
 
 _click(_f("main").tab("Qualifying Criteria and Field Mappings"));
 
-$bo_act_mappings.createMapping($containerName_child,$mappingField_child,$mappingValue_child,$textLabels,$textValues,$mapName_chid);
+$bo_act_mappings.createMapping($containerName_child,$mapTypechild,$mappingField_child,$mappingValue_child,$textLabels,$textValues,$mapName_chid);
+
 _wait(5000);
 
 _selectDomain($g_domain);
 _click(_f("main").tab("Source Object Update"));
 _click(_f("main").tab("Qualifying Criteria and Field Mappings"));
-$bo_act_mappings.createMapping($containerName,$mappingField,$mappingValue,$textLabels,$textValues,$mapName);
+$bo_act_mappings.createMapping($containerName,$mapTypechild,$mappingField,$mappingValue,$textLabels,$textValues,$mapName);
 _wait(5000);
 _selectDomain($g_domain);
 _click(_f("main").s_button("Save & Close"));

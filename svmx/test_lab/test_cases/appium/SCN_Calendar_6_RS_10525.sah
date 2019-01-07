@@ -2,10 +2,10 @@ var RS_10525 = _testcase("RS_10525","SCN_Calendar_6_RS-10525 Verify multi-day & 
 RS_10525.start();
 _writeFile("false", $appiumPath+$sahiIntermediatoryPath, true);
 
-
+//servicemax event 
 var $restAccName="A10525_SCN1";
 var $EventSub="Eventfor1hr";
-var $techname="a240t000000GglLAAS";
+var $techname=$appiumTechId;
 	
 
 $objName= "Account";

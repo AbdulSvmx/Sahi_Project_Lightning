@@ -71,8 +71,21 @@ var $sfm_pg_search = new function sfm_pg_search(){
 	
 	this.txt_value = _textbox(0,_near(_div("Field Name")));
 	
-	this.btn_addRowResult = _imageSubmitButton("table3AddRow");
 	
+	
+	this.btn_edit = _button("Edit");
+	this.btn_addFilterCriteria = _imageSubmitButton("table2AddRow");
+	this.txt_ChooseFilterFields = _span("Optional: Using the expression builder below, define a filter criteria to always apply on this object's records");
+	
+	this.btn_addRowResult = _imageSubmitButton("table3AddRow");
+	this.btn_addRowDisplayFields = _imageSubmitButton("table3AddRow");
+	this.txt_ChooseDisplayFields = _span("Choose one or more fields to be displayed in the search result");
+	this.btn_addRowSearchFields = _imageSubmitButton("table4AddRow");
+	this.txt_ChooseSearchFields = _span("Choose one or more fields on which search is applied");
+	this.btn_addRowSortFields = _imageSubmitButton("table5AddRow");
+	
+	
+
 //	this.verifyIfSearchVisible= function($standardSearch){
 //		_log("I am Here");
 //		if(_isVisible(_span($standardSearch))){

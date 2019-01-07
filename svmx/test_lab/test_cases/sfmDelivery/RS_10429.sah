@@ -1,10 +1,11 @@
 var $rs_10429 = _testcase("RS_10429","Verify Read only, Mandatory, Allow, Delete and multi add in SFM Delivery.");
 $rs_10429.start();
 $sfmName= $bo_act_common.generateRandomName("RS_10429_");
-//$sfmName= "SFM_Auto_612201713435";
-//$wizTitle = $bo_act_common.generateRandomName("SFM Wiz");
+//Create WO through REST API
+var $woNumber = $sfm_act_createCustomWizard.createBlankWoFromRest($sfmlUsn, $sfmlPwd, $sfmClientId, $sfmConsumerSecret, $sfmOrgInstance);
+
 $bo_act_login.login($g_url,$sfmlUsn,$sfmlPwd);
-$sfm_act_lightningConfig.switchToLightning(); 
+ 
 _wait(15000);
 $bo_act_navigation.navigateToSfmTransactionDesigner();
 $sfm_act_Transactions.newSfm10429($sfmName);
@@ -12,7 +13,9 @@ $sfm_act_Transactions.newSfm10429($sfmName);
 //$sfm_act_createCustomWizard.chooseObject("Work Order");
 //$sfm_act_createCustomWizard.addManageWizSteps($wizardName[2], "SFM", $sfmName);
 $sfm_act_wizards.addToWizard("Work Order", $wizardName[2], $wizardType[1], $sfmName); 
-$sfm_act_createCustomWizard.createWowithoutvalues();
-$sfm_act_createCustomWizard.clickWizardBtn($sfmName); 
+//Navigate to the WO for validation
+$bo_act_navigation.navigateToCreatedRecordUsingGlobalSearch($woNumber);
+$sfm_act_createCustomWizard.clickWizardBtn($sfmName);
+
 $sfm_act_createCustomWizard.verify10429();
 $rs_10429.end();

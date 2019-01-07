@@ -20,10 +20,13 @@ var $advExpr= "";
 var $messageType = "Error";
 var $wizardObject ="Work Order";
 
+//Create WO through REST API
+var $woNumber = $sfm_act_createCustomWizard.createBlankWoFromRest($sfmlUsn, $sfmlPwd, $sfmClientId, $sfmConsumerSecret, $sfmOrgInstance);
+
 //login
 _setSpeed($g_stepSpeed);
 $bo_act_login.login($g_url,$sfmlUsn,$sfmlPwd);
-$sfm_act_lightningConfig.switchToLightning(); 
+ 
 
 // clone the process
 $sfm_act_SFM.cloneTDM016($sfmNameToBeCloned,$sfmName,$isCustom, $sfmName,$sfmTemplate, $fieldName, $containerName);
@@ -35,13 +38,9 @@ _click($sfm_pg_sfmDesigner.btn_saveSFM);
 
 $sfm_act_wizards.addToWizard($wizardObject, $wizardName[0], $wizardType[1], $sfmName);  
 
-//create WO for the validation
-_selectDomain();
-$sfm_act_createCustomWizard.createWowithoutvalues();
-
-_click(_span($sfmName));
-_selectDomain($g_domain);
-_wait(8000,_div($sfmName));
+//Navigate to the WO for validation
+$bo_act_navigation.navigateToCreatedRecordUsingGlobalSearch($woNumber);
+$sfm_act_createCustomWizard.clickWizardBtn($sfmName);
 
 //validate for dvr when billing type is empowerment
 _click($sfm_pg_sfmDesigner.txt_billingType);

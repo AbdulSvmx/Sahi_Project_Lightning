@@ -1,4 +1,4 @@
-	_writeFile("false", $appiumPath+$sahiIntermediatoryPath, true);
+_writeFile("false", $appiumPath+$sahiIntermediatoryPath, true);
 var $scenario_10579 = _testcase("scenario_10579","SCN_Checklist_1_RS-10579_Verify Sections,DVR,SOU Help URL in Checklists");
 $scenario_10579.start();
 
@@ -18,7 +18,7 @@ var $sectionName4 = "Section Four";
 var $questionType=["Number"];
 var $comboField=["Less Than"];
 var $operandType=["Value"];
-var $answer=["20"];
+var $answer=["100"];
 var $skipTo=["3-"+$sectionName3];
 var $criteriaDetails1=[$comboField,$operandType,$answer,$skipTo];
 var $criteriaDetailsv=[$criteriaDetails1];
@@ -85,7 +85,7 @@ var $dvrExpressionDetails2=[$comboField2,$operandType2,$answer2,$advExpr2,$msfTy
 
 
 $bo_act_login.login($g_url, $appiumAdminUn, $appiumAdminPwd);
-$sfm_act_lightningConfig.switchToLightning();
+
 
 $ProcessStatus=$sfm_act_SFM.checkCustomProcess($sfmName);
 if($ProcessStatus==false){
@@ -116,31 +116,6 @@ _wait(10000);
 _selectDomain("/svmx/");
 _click($bo_pg_formDesigner.tab_clickFormDesigner);
 
-
-//Question One section two
-//$bo_act_checklistdesigner.addQuestion("Text",Question Three,false,"");
-$bo_act_checklistdesigner.addQuestion("Date", "Date should not be Today", false,"");
-$bo_act_checklistdesigner.addQuestion("Number", "Number Should not be greater than 100", false,"");
-$bo_act_checklistdesigner.addQuestion("Text", "Question One section two", false,"");
-$bo_act_checklistdesigner.addQuestion("Text", "Question two Section two", false,"");
-$bo_act_checklistdesigner.addQuestion("Text", "Section Three q1", false,"");
-$bo_act_checklistdesigner.addQuestion("Text", "Section Three q2", false,"");
-
-
-$sfm_act_formDesigner.removeQuestionFromSection("Date should not be Today", "Checklist Section Title");
-_wait(3000);
-$sfm_act_formDesigner.removeQuestionFromSection("Number Should not be greater than 100", "Checklist Section Title");
-_wait(3000);
-$sfm_act_formDesigner.removeQuestionFromSection("Question One section two", "Checklist Section Title");
-_wait(3000);
-$sfm_act_formDesigner.removeQuestionFromSection("Question two Section two", "Checklist Section Title");
-_wait(3000);
-$sfm_act_formDesigner.removeQuestionFromSection("Section Three q1", "Checklist Section Title");
-_wait(3000);
-$sfm_act_formDesigner.removeQuestionFromSection("Section Three q2", "Checklist Section Title");
-_wait(3000);
-
-
 //edit default section and renaming to section One
 _selectDomain("/svmx/");
 $sfm_act_formDesigner.editSection("Checklist Section Title");
@@ -167,11 +142,36 @@ _click($sfm_pg_formDesigner.btn_cancelSectionWindow);
 
 _wait(5000);
 
+//Adding the Static Text Question
+//var $defaultAnsType1 = "";
+var $preFillFromWO1=false;
+var $defaultVal1="";
+var $queSpecificDetails1=[$preFillFromWO1,$defaultVal1];
+var $sectionName1=$sectionName1;
+var $queCommonDetails1=["Text","Question Three","http://www.google.com","",true];
+var $queSpecificDetails1=[$preFillFromWO1,$defaultVal1];
+$sfm_act_formDesigner.createCheckListQuestion($sectionName1, $queCommonDetails1, $queSpecificDetails1);
+_wait(15000);
+
+//create Date Static Question in Section One - 
+var $queType6="Date";
+var $sectionName6=$sectionName1;
+var $queName6="Date should not be Today";
+var $helpURL6="http://google.com/Doc";
+var $tag6="ch_date_-01";
+var $addToLibAndForm6=true;
+var $queCommonDetails6=[$queType6,$queName6,$helpURL6,$tag6,$addToLibAndForm6];
+var $preFillFromWO6=false;
+var $defaultAnsType6="Value";
+var $defaultVal6="";
+var $queSpecificDetails6=[$preFillFromWO6,$defaultAnsType6,$defaultVal6];
+$sfm_act_formDesigner.createCheckListQuestion($sectionName6, $queCommonDetails6, $queSpecificDetails6);
+_wait(5000);
 
 //Adding question to sectionOne  with DVR
-$sfm_act_formDesigner.addQuestionToSection($sectionName1, $questionNames1[0]);
+//$sfm_act_formDesigner.addQuestionToSection($sectionName1, $questionNames1[0]);
 //$bo_act_checklistdesigner.addQuestion("Date","Date DVRVS",false,"");
-_wait(5000);
+//_wait(5000);
 _selectDomain($g_domain); 
 $sfm_act_formDesigner.editQuestionInSection($sectionName1, $questionNames1[0]);
 $sfm_act_formDesigner.dataValidationOnCheckListQuestion($dvrName1, $dvrID1, $dvrExpressionDetails1);
@@ -179,30 +179,71 @@ _click($sfm_pg_formDesigner.tab_questionDetails);
 _click($sfm_pg_formDesigner.btn_dvrSave);
 _wait(3000);
 
-//Adding question to sectionOne with DVR 2
-$sfm_act_formDesigner.addQuestionToSection($sectionName1, $questionNames1[1]);
-//$bo_act_checklistdesigner.addQuestion("Date","Date DVRVS",false,"");
-_wait(5000);
-_selectDomain($g_domain); 
+
+//Adding the Static Number Question to Section 1
+//var $defaultAnsType ="";
+var $preFillFromWO=true;
+var $queSpecificDetails=[$preFillFromWO,$defaultVal];
+var $sectionName=$sectionName1;
+var $queCommonDetails=["Number","Number Should not be greater than 100","http://www.google.com","",true];
+var $preFillFromWO=false;
+var $defaultVal="";
+var $queSpecificDetails=[$preFillFromWO,$defaultVal];
+$sfm_act_formDesigner.createCheckListQuestion($sectionName, $queCommonDetails, $queSpecificDetails);
+_wait(15000);
 $sfm_act_formDesigner.editQuestionInSection($sectionName1, $questionNames1[1]);
 $sfm_act_formDesigner.dataValidationOnCheckListQuestion($dvrName2, $dvrID2, $dvrExpressionDetails2);
 _click($sfm_pg_formDesigner.tab_questionDetails);
 _click($sfm_pg_formDesigner.btn_dvrSave);
 _wait(3000);
+//$sfm_act_formDesigner.addQuestionToSection($sectionName1, $questionNames1[2]);
 
-$sfm_act_formDesigner.addQuestionToSection($sectionName1, $questionNames1[2]);
 
-//Adding question to sectionTwo
-$sfm_act_formDesigner.addQuestionToSection($sectionName2, $questionNames2[0]);
-$sfm_act_formDesigner.addQuestionToSection($sectionName2, $questionNames2[1]);
-_wait(3000);
-_click(_f("main").s_button("Edit Question").near(_f("main").s_label($questionNames2[1]).near(_f("main").s_richeditabletext($sectionName2))));
-_setValue(_f("main").s_textinput("helpUrl"),"https://www.ge.com/");
-_click($sfm_pg_formDesigner.btn_dvrSave);
+//Adding the Static Text Question to Section two
+//var $defaultAnsType1 = "";
+var $preFillFromWO5=false;
+var $defaultVal5="";
+var $queSpecificDetails5=[$preFillFromWO5,$defaultVal5];
+var $sectionName5=$sectionName2;
+var $queCommonDetails5=["Text","Question One section two","","",true];
+var $queSpecificDetails5=[$preFillFromWO5,$defaultVal5];
+$sfm_act_formDesigner.createCheckListQuestion($sectionName5, $queCommonDetails5, $queSpecificDetails5);
 
-//Adding question to sectionThree
-$sfm_act_formDesigner.addQuestionToSection($sectionName3, $questionNames3[0]);
-$sfm_act_formDesigner.addQuestionToSection($sectionName3, $questionNames3[1]);
+
+//Adding the Static Text Question in section 2
+//var $defaultAnsType1 = "";
+var $preFillFromWO7=false;
+var $defaultVal7="";
+var $queSpecificDetails7=[$preFillFromWO7,$defaultVal7];
+var $sectionName7=$sectionName2;
+var $queCommonDetails7=["Attachment","Question two Section two","https://www.ge.com/","",true];
+var $queSpecificDetails7=[$preFillFromWO7,$defaultVal7];
+$sfm_act_formDesigner.createCheckListQuestion($sectionName7, $queCommonDetails7, $queSpecificDetails7);
+
+
+
+//Adding the Static Text Question in section 3
+//var $defaultAnsType1 = "";
+var $preFillFromWO8=false;
+var $defaultVal8="";
+var $queSpecificDetails8=[$preFillFromWO8,$defaultVal8];
+var $sectionName8=$sectionName3;
+var $queCommonDetails8=["Text","Section Three q1","http://www.google.com","",true];
+var $queSpecificDetails8=[$preFillFromWO8,$defaultVal8];
+$sfm_act_formDesigner.createCheckListQuestion($sectionName8, $queCommonDetails8, $queSpecificDetails8);
+
+
+
+//Adding the Static Text Question in section3
+//var $defaultAnsType1 = "";
+var $preFillFromWO9=false;
+var $defaultVal9="";
+var $queSpecificDetails9=[$preFillFromWO9,$defaultVal9];
+var $sectionName9=$sectionName3;
+var $queCommonDetails9=["Text","Section Three q 2","http://www.google.com","",true];
+var $queSpecificDetails9=[$preFillFromWO9,$defaultVal9];
+$sfm_act_formDesigner.createCheckListQuestion($sectionName9, $queCommonDetails9, $queSpecificDetails9);
+
 
 //-------------------------------------------------------
 
@@ -229,6 +270,8 @@ _wait(5000);
 
 //Source object update
 _wait(15000);
+
+
 //Creating SOU
 $sfm_pg_sourceObjectUpdate.createSOU($souObject,$field, $condition, $operand, $value,"Checklist");
 

@@ -16,19 +16,24 @@ $bo_act_login.login($g_url, $appiumAdminUn, $appiumAdminPwd);
 var $valuebefore = "All Records";
 $bo_act_SFMAppPermission.workOrderDownloadCriteriachanges($valuebefore);
 
-_wait(15000,_isVisible(_div("Success:Mobile Configuration saved successfully for the selected profile")));
-if(_isVisible(_div("Success:Mobile Configuration saved successfully for the selected profile"))) {
+
+
+_selectDomain("/svmx/");
+_wait(15000,_div("Success:Mobile Configuration saved successfully for the selected profile"));
+if(_isVisible(_div("Success:Mobile Configuration saved successfully for the selected profile"))) 
+{
 	
 	_writeFile("true", $appiumPath+$sahiIntermediatoryPath, true);
 	_log("Pass");
 
 
-} else {
-	
-	
+} 
+else {
 	_writeFile("false", $appiumPath+$sahiIntermediatoryPath, true);
 	_fail("Fail");
-}
 
+
+}
+_selectDomain();
 
 $pre_requisite_2.end();

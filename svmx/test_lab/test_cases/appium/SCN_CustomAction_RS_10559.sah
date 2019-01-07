@@ -6,7 +6,7 @@ var $wizTitle = $bo_act_common.generateRandomName("Auto_Action_Wiz");
 var $wizTitle1 = $bo_act_common.generateRandomName("Auto_Action_Wiz");
 var $profile="auto group profile";
 $bo_act_login.login($g_url, $appiumAdminUn, $appiumAdminPwd);
-$sfm_act_lightningConfig.switchToLightning();
+
 _wait(5000);
 _click($sfm_pg_sfSetup.link_salesForceSetup);
 _click($sfm_pg_sfSetup.btn_setup);

@@ -73,6 +73,16 @@ var $sfm_pg_screenDesigner = new function sfm_pg_screenDesigner(){
 	this.link_Parts=_link("Parts");
 	this.link_Labor=_link("Labor");
 	this.sel_noOfRecords=_f("main").s_combobox("noOfRec");
+	this.tab_screenDesigner = _f("main").tab("Screen Designer");
+	this.chkbox_workDetail = _f("main").s_checkbox("Work Detail (Work Order)");
+	//Template Designer
+	this.tab_templateDesigner = _f("main").tab("Template Designer");
+	this.txt_templateName = _f("main").s_textinput("Save template as");
+	this.txt_templateId = _f("main").s_textinput("/Input ID Here/").rightOf(_f("main").s_textinput("Save template as"));
+	this.txtArea_template = _textarea("cke_source cke_enable_context_menu");
+//	this.btn_templateSave = _f("main").s_button("/Save/").rightOf(_f("main").s_textinput("Save template as"));
+	this.btn_templateSave = _f("main").s_button("Save[4]");
+	this.btn_source = _span("Source");
 	
 	
 };

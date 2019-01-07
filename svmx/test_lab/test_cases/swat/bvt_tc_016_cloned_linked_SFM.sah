@@ -1,0 +1,54 @@
+//Author	:- 	Shashikala Kamath
+var $bvt_tc_016_cloned_linked_SFM = _testcase("bvt_tc_016_cloned_linked_SFM","Verify the functionality of cloned Linked SFM");
+
+$bvt_tc_016_cloned_linked_SFM.start();
+
+$woName="";
+$processName = "Add/Edit Products Serviced";
+$sfmName = $bo_act_common.generateRandomName("swat_cloned_linked_SFM");
+$sfmPgLayoutName =	$sfmName;
+
+//Create WO through REST API
+var $woNumber = $sfm_act_createCustomWizard.createBlankWoFromRest($swat_un, $swat_pwd, $swat_ClientId, $swat_ConsumerSecret, $swat_OrgInstance);
+
+_setSpeed($g_stepSpeed);
+$bo_act_login.login($g_url, $swat_un,$swat_pwd);
+ 
+_wait(15000);
+$bo_act_navigation.navigateToSfmTransactionDesigner();
+$sfm_act_Transactions.cloneAndSaveProcess($processName, $sfmName, $sfmPgLayoutName);
+$sfm_act_wizards.addToWizard("Work Order", $wizardName[2], $wizardType[1], $sfmName);
+
+//Navigate to the WO for validation
+$bo_act_navigation.navigateToCreatedRecordUsingGlobalSearch($woNumber);
+$sfm_act_createCustomWizard.clickWizardBtn($sfmName);
+
+$sfm_act_createCustomWizard.addProductServiced("Product");
+_wait(5000);
+
+_click($sfm_pg_sfmDesigner.btn_deliveryExtendedEdit);
+_click($sfm_pg_sfmDesigner.btn_deliveryExtendedEdit);
+_click($sfm_pg_sfmDesigner.txt_eeAddModWorkDet);
+_wait(8000,_isVisible($sfm_pg_sfmDesigner.btn_deliveryPartsTab));
+
+$sfm_act_createCustomWizard.addParts("Compaq");
+$sfm_act_createCustomWizard.addLabor("Compaq");
+$sfm_act_createCustomWizard.addExpenses("Airfare");
+$sfm_act_createCustomWizard.addTravel();
+_click($sfm_pg_sfmDesigner.btn_deliverySave);
+_wait(10000);
+_click($sfm_pg_sfmDesigner.btn_deliverySave);
+_wait(10000);
+_selectDomain();
+_click($sfm_pg_sfmDesigner.link_related);
+_click($sfm_pg_sfmDesigner.link_viewAll);
+
+if((_getText(_link("/WL/",_near(_cell("/Products Serviced/")))) ==_getText(_link("/WL-/",_rightOf(_span("Parts",_under(_span("Line Type"))))))) &&
+		(_getText(_link("/WL-/",_near(_cell("/Products Serviced/")))) ===_getText(_link("/WL-/",_rightOf(_span("Labor",_under(_span("Line Type"))))))) &&
+		(_getText(_link("/WL-/",_near(_cell("/Products Serviced/"))))===_getText(_link("/WL-/",_rightOf(_span("Expenses",_under(_span("Line Type"))))))) &&
+		(_getText(_link("/WL-/",_near(_cell("/Products Serviced/")))) ===_getText(_link("/WL-/",_rightOf(_span("Travel",_under(_span("Line Type")))))))){
+	_log("Pass ::: Linked SFM child lines are associated to main process lines ");
+}else{
+	_log("Fail ::: Linked SFM child lines are associated to main process lines","FAILURE");
+}+
+$bvt_tc_016_cloned_linked_SFM.end();

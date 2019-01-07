@@ -1,0 +1,169 @@
+//Author	:- 	Shashikala Kamath
+var $bvt_tc_0112_formFill_in_child = _testcase("bvt_tc_0112_formFill_in_child.","Verify the functionality of Formfill in child line");
+
+$bvt_tc_0112_formFill_in_child.start();
+var $sfmName = $bo_act_common.generateRandomName("swat_formfill_in_child_line");
+var $restAccName = "Acc_"+$sfmName;
+
+
+var $objName= "Account";
+var $obJson = "{\"Name\":\""+$restAccName+"\"}"; 
+var $columnName = "Name";
+var $filter="id";
+//create an account
+var $account=$sfm_act_restApiMethods.postRestApi($swat_un, $swat_pwd, $swat_ClientId, $swat_ConsumerSecret, $swat_OrgInstance,$objName,$obJson,"POST");
+$accountName =$sfm_act_restApiMethods.getRestApi($swat_un, $swat_pwd, $swat_ClientId, $swat_ConsumerSecret, $swat_OrgInstance,"GET", $objName, $columnName, $filter, $account);
+//get the caseNumber
+
+
+var $objName1= "Case";
+var $obJson1 = "{\"AccountId\":\""+$account+"\",\""+$orgnamespace+"__Billing_Type__c\":\"Loan\",\""+$orgnamespace+"__Scheduled_Date__c\":\"2018-08-23\",\""+$orgnamespace+"__Actual_Initial_Response__c\":\"2018-08-23T00:00:00.000Z\"}";
+var $columnName1 = "CaseNumber";
+var $filter1="id";
+//create  case with above created account and other parameters
+var $filterValue1=$sfm_act_restApiMethods.postRestApi($swat_un, $swat_pwd, $swat_ClientId, $swat_ConsumerSecret, $swat_OrgInstance,$objName1,$obJson1,"POST");
+//get the caseNumber
+var $caseNumber1 =$sfm_act_restApiMethods.getRestApi($swat_un, $swat_pwd, $swat_ClientId, $swat_ConsumerSecret, $swat_OrgInstance,"GET", $objName1, $columnName1, $filter1, $filterValue1);
+
+var $filterValue2=$sfm_act_restApiMethods.postRestApi($swat_un, $swat_pwd, $swat_ClientId, $swat_ConsumerSecret, $swat_OrgInstance,$objName1,$obJson1,"POST");
+//get the caseNumber
+var $caseNumber2 =$sfm_act_restApiMethods.getRestApi($swat_un, $swat_pwd, $swat_ClientId, $swat_ConsumerSecret, $swat_OrgInstance,"GET", $objName1, $columnName1, $filter1, $filterValue2);
+
+var $sfmNameToBeCloned = "Manage Work Order Lines - Usage";
+
+var $isCustom = false;
+var $sfmTemplate = "SVMXSTD: Manage WO Usage Lines";
+var $sfmTemplateSaveAsName = $sfmName;
+var $containerName = ["Parts","Parts","Parts","Parts",
+                      "Labor","Labor","Labor"];
+var $fieldName = ["Date Received","Case","End Date and Time","Received City",
+                  "Date Received","Case","Received City"];
+var $objMapping = "PartsToWorkDetail";
+var $wizardObject ="Work Order";
+$sfd_swatDomain = "/swatspr18/";
+
+//variables to configure lookup
+var $lookupTempName="SVMXSTD: Case Lookup";
+var $fieldCombo=["Case Number","Case Number"];
+var $conditionsCombo=["Equals","Equals"];
+var $operandTypeCombo=["Value","Value"];
+var $operandValue=[$caseNumber1,$caseNumber2];
+var $lookupAdvExpr="1 OR 2";
+var $lookupFilterDetails=[$fieldCombo,$conditionsCombo,$operandTypeCombo,$operandValue,$lookupAdvExpr];
+
+//Create WO through REST API
+var $woNumber = $sfm_act_createCustomWizard.createBlankWoFromRest($swat_un, $swat_pwd, $swat_ClientId, $swat_ConsumerSecret, $swat_OrgInstance);
+
+//login to the org
+_setSpeed($g_stepSpeed);
+$bo_act_login.login($g_url, $swat_un,$swat_pwd);
+ 
+_wait(15000);
+//Create custom fields if needed
+$sfm_act_lightningConfig.addCustomFields("Work Detail", ["Account"], ["Lookup Relationship"], $sfd_swatDomain,[],["Account"]);
+
+_selectDomain();
+//Create mapping from Case to Work detail
+
+$sourceObj= "Case";
+$targetObj = "Work Detail";
+$mappingName = $sfmName+"map";
+$mappingField = ["Received City", "Date Received","End Date and Time","Account"];
+$mappingValue = ["Billing Type","Scheduled Date","Actual Initial Response","Account ID"];
+
+$sfm_act_mappings.createMappingFromMapping($sourceObj,$targetObj,$mappingName,$mappingField,$mappingValue);
+
+
+//clone tmd016 and set form fill for case in child line
+$sfm_act_SFM.cloneTDM016($sfmNameToBeCloned,$sfmName,$isCustom, $sfmTemplateSaveAsName, $sfmTemplate, $fieldName, $containerName);
+$sfm_act_SFM.partsNotMandatory();
+$sfm_act_SFM.partsMultiAdd("Case");
+
+$sfm_act_Transactions.createLookUp($fieldName[1], $lookupTempName, "", $lookupFilterDetails, $sfmName,"Parts","");
+
+$sfm_act_SFM.setFormFill($fieldName[1], $sfmName,"Parts");
+$sfm_act_SFM.setFormFill($fieldName[1], $sfmName,"Labor");
+_click($sfm_pg_sfmDesigner.btn_quickSaveSFM);
+_wait(5000);
+_click($sfm_pg_sfmDesigner.btn_saveSFM); 
+
+//add the process to wizard
+$sfm_act_wizards.addToWizard($wizardObject, $wizardName[3], $wizardType[1], $sfmName);  
+_wait(3000);  
+
+//Navigate to the WO for validation
+$bo_act_navigation.navigateToCreatedRecordUsingGlobalSearch($woNumber);
+$sfm_act_createCustomWizard.clickWizardBtn($sfmName);
+
+//add multiple parts based on multi add on case
+
+_click($sfm_pg_sfmDesigner.btn_deliveryPartsTab);
+_wait(5000,_isVisible($sfm_pg_sfmDesigner.btn_deliveryAddRowParts));
+_click($sfm_pg_sfmDesigner.btn_deliveryAddRowParts);
+_click($sfm_pg_wizardWindow.btn_searchProduct);
+_click($sfm_pg_wizardWindow.chk_multiSelect);
+_click($sfm_pg_wizardWindow.btn_addProduct);
+
+//Validate formfill in 1st Part line
+_wait(5000);
+_click($sfm_pg_sfmDesigner.btn_deliveryPartsTab);
+$sfm_act_sfmDesigner.navToExtendedEdit();
+
+if(_getText($sfm_pg_sfmDesigner.txt_eeReceivedCity)=="Loan" && _getText($sfm_pg_sfmDesigner.txt_eeEndDateTime)=="08/23/2018" 
+	&& _getText($sfm_pg_sfmDesigner.txt_eeDateReceived)== "08/23/2018" ){
+	_log("Formfill for 1st line has happened as expected")	;
+}else {
+	_log("Formfill for 1st line has not happened as expected","FAILURE");
+}
+_click($sfm_pg_sfmDesigner.btn_eeCancel);
+
+//Validate formfill in 2nd Part line
+_setStrictVisibilityCheck(true);
+_click(_div("/x-action-col-icon x-action-/[1]"));
+_click(_div("/x-action-col-icon x-action-/[1]"));
+_click($sfm_pg_sfmDesigner.txt_eeEdit);
+_setStrictVisibilityCheck(false);
+if(_getText($sfm_pg_sfmDesigner.txt_eeReceivedCity)=="Loan" && _getText($sfm_pg_sfmDesigner.txt_eeEndDateTime)=="08/23/2018" 
+	&& _getText($sfm_pg_sfmDesigner.txt_eeDateReceived)== "08/23/2018" ){
+	_log("Formfill for 2nd line has happened as expected")	;
+}else {
+	_log("Formfill for 2nd line has not happened as expected","FAILURE");
+}
+_click($sfm_pg_sfmDesigner.btn_eeCancel);
+
+//add labor line and validate form fill
+$sfm_act_sfmDesigner.addChildLine("Labor");
+_setStrictVisibilityCheck(true);
+_click(_div("/trigger-search/",_near(_span("Case",_near(_div("Labor"))))));
+_setValue($sfm_pg_wizardWindow.txt_quickFindLookUp,$caseNumber1);
+_click($sfm_pg_wizardWindow.btn_searchProduct);
+_click(_link($caseNumber1));
+if(_getText($sfm_pg_sfmDesigner.txt_eeReceivedCity)=="Loan" && _getText($sfm_pg_sfmDesigner.txt_eeEndDateTime)=="08/23/2018" 
+	&& _getText($sfm_pg_sfmDesigner.txt_eeDateReceived)== "08/23/2018"  ){
+	_log("Formfill for Labor line has happened as expected")	;
+}else {
+	_log("Formfill for Labor line has not happened as expected","FAILURE");
+}
+_click($sfm_pg_sfmDesigner.btn_eeUpdate);
+_setStrictVisibilityCheck(false);
+
+_click($sfm_pg_sfmDesigner.btn_deliverySave);
+_wait(8000);
+if(_exists($sfm_pg_sfmDesigner.txt_priceAlert)){
+	_click($sfm_pg_sfmDesigner.btn_priceAlertOk);
+	_log("Pass ::: FormFill for multiple child lines is working");
+	_wait(10000,_isVisible($sfm_pg_wo.label_wo));
+}
+
+//Validate form fill where fields is not present in screen designer in WL lines
+
+_selectDomain();
+_click($sfm_pg_sfmDesigner.link_related);
+_click($sfm_pg_sfmDesigner.link_viewAll);
+_click(_link("/WL/"));
+_assertEqual($accountName,_getText(_link(0, _near(_div("Account")))),"Formfill for WL field that was not in screen has not happened");
+
+
+
+
+$bvt_tc_0112_formFill_in_child.end();

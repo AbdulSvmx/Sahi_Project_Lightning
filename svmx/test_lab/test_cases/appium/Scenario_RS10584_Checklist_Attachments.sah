@@ -1,0 +1,198 @@
+	_writeFile("false", $appiumPath+$sahiIntermediatoryPath, true);
+var $scenario_10584 = _testcase("scenario_10584","SCN_Checklist_1_RS-10584_ChecklistAttachments");
+$scenario_10584.start();
+
+var $profilename = $group_profilename;
+var $ProcessStatus=false;
+var $wizardObject ="Work Order";
+var $targetObjectName = "Work Order";
+//checklist variables versions
+var $sfmName = "SCN_Checklist_Attachment";
+
+$checklists = ["SCN_ChecklistOPDOC_3_RS-10587_allversions","SCN_ChecklistOPDOC_3_RS-10587_firstversion","SCN_ChecklistOPDOC_3_RS-10587_lastversion"];
+$checklistversion = ["All Versions","First Version","Last Version"];
+
+
+//Login
+$bo_act_login.login($g_url, $appiumAdminUn, $appiumAdminPwd);
+
+
+$ProcessStatus=$sfm_act_SFM.checkCustomProcess($sfmName);
+_wait(10000);
+if($ProcessStatus==false){
+
+	//Creationg of first checklist all verions
+	$bo_act_navigation.navigateToSfmTransactionDesigner();
+	_wait(15000);
+	_click($bo_pg_sfmTransactionAndDesigner.btn_newSFM);
+	_wait(3000);
+	_setValue($bo_pg_sfmTransactionAndDesigner.txt_name, $sfmName);
+	_setValue($bo_pg_sfmTransactionAndDesigner.txt_sfmTransactionId, "");
+	_setSelected($sfm_pg_screenDesigner.sel_createSFMTransaction, "to generate a Checklist/Survey type of Process");
+	_setStrictVisibilityCheck(true);
+	_setValue($sfm_pg_screenDesigner.txt_srcObject,"");
+	_setValue($sfm_pg_screenDesigner.txt_srcObject,"Wo");
+	_wait(5000);
+	_click($sfm_pg_screenDesigner.lbl_workOrder);
+	_click($bo_pg_sfmTransactionAndDesigner.btn_qualifyingCriteriaAndFieldMapping);
+	_click($bo_pg_sfmTransactionAndDesigner.btn_mappings);
+	_click($bo_pg_sfmTransactionAndDesigner.btn_mappings);
+	_setValue(_f("main").s_textinput("/textInput/").near(_f("main").tab("Field Map For Existing Records")),"SVMX");
+	_click(_f("main").s_label("SVMXSTD: Map Work Order to Checklist"));
+	_wait(10000);
+	_selectDomain("/svmx/");
+	_click($bo_pg_formDesigner.tab_clickFormDesigner);
+	
+	//	//create Attachment Question in section - No PreFill
+	var $queType1="Attachment";
+	var $sectionName1="Checklist Section Title";
+	var $queName1="AttachmentQuestion1";
+	var $helpURL1="http://google.com/Doc";
+	var $tag1="Attachment";
+	var $addToLibAndForm1=true;
+	var $queCommonDetails1=[$queType1,$queName1,$helpURL1,$tag1,$addToLibAndForm1];
+	var $preFillFromWO1=false;
+	var $defaultAnsType1="";
+	var $defaultVal1="";
+	var $queSpecificDetails1=[$preFillFromWO1,$defaultAnsType1,$defaultVal1];
+	$sfm_act_formDesigner.createCheckListQuestion($sectionName1, $queCommonDetails1, $queSpecificDetails1);
+	
+	//c	//create Attachment Question in section - No PreFill
+	var $queType2="Attachment";
+	var $sectionName2="Checklist Section Title";
+	var $queName2="AttachmentQuestion2";
+	var $helpURL2="http://google.com/Doc";
+	var $tag2="Attachment";
+	var $addToLibAndForm2=true;
+	var $queCommonDetails2=[$queType2,$queName2,$helpURL2,$tag2,$addToLibAndForm2];
+	var $preFillFromWO2=false;
+	var $defaultAnsType2="";
+	var $defaultVal2="";
+	var $queSpecificDetails2=[$preFillFromWO2,$defaultAnsType2,$defaultVal2];
+	$sfm_act_formDesigner.createCheckListQuestion($sectionName2, $queCommonDetails2, $queSpecificDetails2);
+	
+/*	//	//create Attachment Question in section - No PreFill
+	var $queType3="Attachment";
+	var $sectionName3="Checklist Section Title";
+	var $queName3="AttachmentQuestion3";
+	var $helpURL3="http://google.com/Doc";
+	var $tag3="Attachment";
+	var $addToLibAndForm3=true;
+	var $queCommonDetails3=[$queType3,$queName3,$helpURL3,$tag3,$addToLibAndForm3];
+	var $preFillFromWO3=false;
+	var $defaultAnsType3="";
+	var $defaultVal3="";
+	var $queSpecificDetails3=[$preFillFromWO3,$defaultAnsType3,$defaultVal3];
+	$sfm_act_formDesigner.createCheckListQuestion($sectionName3, $queCommonDetails3, $queSpecificDetails3);
+	
+	//	//create Attachment Question in section - No PreFill
+	var $queType4="Attachment";
+	var $sectionName4="Checklist Section Title";
+	var $queName4="AttachmentQuestion4";
+	var $helpURL4="http://google.com/Doc";
+	var $tag4="Attachment";
+	var $addToLibAndForm4=true;
+	var $queCommonDetails4=[$queType4,$queName4,$helpURL4,$tag4,$addToLibAndForm4];
+	var $preFillFromWO4=false;
+	var $defaultAnsType4="";
+	var $defaultVal4="";
+	var $queSpecificDetails4=[$preFillFromWO4,$defaultAnsType4,$defaultVal4];
+	$sfm_act_formDesigner.createCheckListQuestion($sectionName4, $queCommonDetails4, $queSpecificDetails4);
+	
+	//	//create Attachment Question in section - No PreFill
+	var $queType5="Attachment";
+	var $sectionName5="Checklist Section Title";
+	var $queName5="AttachmentQuestion5";
+	var $helpURL5="http://google.com/Doc";
+	var $tag5="Attachment";
+	var $addToLibAndForm5=true;
+	var $queCommonDetails5=[$queType5,$queName5,$helpURL5,$tag5,$addToLibAndForm5];
+	var $preFillFromWO5=false;
+	var $defaultAnsType5="";
+	var $defaultVal5="";
+	var $queSpecificDetails5=[$preFillFromWO5,$defaultAnsType5,$defaultVal5];
+	$sfm_act_formDesigner.createCheckListQuestion($sectionName5, $queCommonDetails5, $queSpecificDetails5);
+	
+	//	//create Attachment Question in section - No PreFill
+	var $queType6="Attachment";
+	var $sectionName6="Checklist Section Title";
+	var $queName6="AttachmentQuestion6";
+	var $helpURL6="http://google.com/Doc";
+	var $tag6="Attachment";
+	var $addToLibAndForm6=true;
+	var $queCommonDetails6=[$queType6,$queName6,$helpURL6,$tag6,$addToLibAndForm6];
+	var $preFillFromWO6=false;
+	var $defaultAnsType6="";
+	var $defaultVal6="";
+	var $queSpecificDetails6=[$preFillFromWO6,$defaultAnsType6,$defaultVal6];
+	$sfm_act_formDesigner.createCheckListQuestion($sectionName6, $queCommonDetails6, $queSpecificDetails6);
+	
+	//	//create Attachment Question in section - No PreFill
+	var $queType7="Attachment";
+	var $sectionName7="Checklist Section Title";
+	var $queName7="AttachmentQuestion7";
+	var $helpURL7="http://google.com/Doc";
+	var $tag7="Attachment";
+	var $addToLibAndForm7=true;
+	var $queCommonDetails7=[$queType7,$queName7,$helpURL7,$tag7,$addToLibAndForm7];
+	var $preFillFromWO7=false;
+	var $defaultAnsType7="";
+	var $defaultVal7="";
+	var $queSpecificDetails7=[$preFillFromWO7,$defaultAnsType7,$defaultVal7];
+	$sfm_act_formDesigner.createCheckListQuestion($sectionName7, $queCommonDetails7, $queSpecificDetails7);
+	
+	//	//create Attachment Question in section - No PreFill
+	var $queType8="Attachment";
+	var $sectionName8="Checklist Section Title";
+	var $queName8="AttachmentQuestion8";
+	var $helpURL8="http://google.com/Doc";
+	var $tag8="Attachment";
+	var $addToLibAndForm8=true;
+	var $queCommonDetails8=[$queType8,$queName8,$helpURL8,$tag8,$addToLibAndForm8];
+	var $preFillFromWO8=false;
+	var $defaultAnsType8="";
+	var $defaultVal8="";
+	var $queSpecificDetails8=[$preFillFromWO8,$defaultAnsType8,$defaultVal8];
+	$sfm_act_formDesigner.createCheckListQuestion($sectionName8, $queCommonDetails8, $queSpecificDetails8);
+	
+	//	//create Attachment Question in section - No PreFill
+	var $queType9="Attachment";
+	var $sectionName9="Checklist Section Title";
+	var $queName9="AttachmentQuestion9";
+	var $helpURL9="http://google.com/Doc";
+	var $tag9="Attachment";
+	var $addToLibAndForm9=true;
+	var $queCommonDetails9=[$queType9,$queName9,$helpURL9,$tag9,$addToLibAndForm9];
+	var $preFillFromWO9=false;
+	var $defaultAnsType9="";
+	var $defaultVal9="";
+	var $queSpecificDetails9=[$preFillFromWO9,$defaultAnsType9,$defaultVal9];
+	$sfm_act_formDesigner.createCheckListQuestion($sectionName9, $queCommonDetails9, $queSpecificDetails9);
+	
+	
+	//create Attachment Question in section - No PreFill
+	var $queType10="Attachment";
+	var $sectionName10="Checklist Section Title";
+	var $queName10="AttachmentQuestion10";
+	var $helpURL10="http://google.com/Doc";
+	var $tag10="Attachment";
+	var $addToLibAndForm10=true;
+	var $queCommonDetails10=[$queType10,$queName10,$helpURL10,$tag10,$addToLibAndForm10];
+	var $preFillFromWO10=false;
+	var $defaultAnsType10="";
+	var $defaultVal10="";
+	var $queSpecificDetails10=[$preFillFromWO10,$defaultAnsType10,$defaultVal10];
+	$sfm_act_formDesigner.createCheckListQuestion($sectionName10, $queCommonDetails10, $queSpecificDetails10);	*/
+	_wait(5000);
+	_click($bo_pg_sfmTransactionAndDesigner.btn_saveAndclose);
+	
+
+//$sfm_act_wizards.addToWizard($wizardObject,$wizardName, $wizardType,$sfmName4,$handOver,$profilename,$wizardCriteria);  
+	$bo_act_SFMAppPermission.set_mobileapp_permissions_generic($profilename, $targetObjectName, $sfmName, "Checklist");
+
+_writeFile("true", $appiumPath+$sahiIntermediatoryPath, true);
+
+}
+
+
+$scenario_10584.end();

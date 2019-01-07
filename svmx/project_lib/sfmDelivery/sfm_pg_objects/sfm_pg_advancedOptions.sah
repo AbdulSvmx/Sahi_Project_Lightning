@@ -78,7 +78,6 @@ var $sfm_pg_advancedOptions = new function sfm_pg_advancedOptions() {
 	//Function to scroll and select the checklist.
 	this.ScrollAdvancedOptionsChecklist=function($checklistName){
 		//_log($field);
-
 		for($i=1;$i<100;$i++){
 
 			if(_isVisible(_f("main").s_label($checklistName))){
@@ -87,7 +86,7 @@ var $sfm_pg_advancedOptions = new function sfm_pg_advancedOptions() {
 
 			}
 
-			else{ _click(_f("main").button(2));
+			else{ _click(_f("main").button(2).near(_f("main").s_richeditabletext("Include skipped sections")));
 
 			}
 

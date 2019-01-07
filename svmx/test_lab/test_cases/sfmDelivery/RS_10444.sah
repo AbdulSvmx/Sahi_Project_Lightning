@@ -25,7 +25,7 @@ $accountName =$sfm_act_restApiMethods.getRestApi($sfmlUsn,$sfmlPwd,$sfmClientId,
 
 //get the caseNumber
 $objName1= "Case";
-$obJson1 = "{\"AccountId\":\""+$account+"\",\"SVMXDEV__Billing_Type__c\":\"Loan\",\"Priority\":\"High\",\"Description\":\"CaseCreatedfromRest\"}";
+$obJson1 = "{\"AccountId\":\""+$account+"\",\""+$orgnamespace+"__Billing_Type__c\":\"Loan\",\"Priority\":\"High\",\"Description\":\"CaseCreatedfromRest\"}";
 $columnName1 = "CaseNumber";
 $filter1="id";
 //create a case
@@ -33,11 +33,14 @@ $filterValue=$sfm_act_restApiMethods.postRestApi($sfmlUsn,$sfmlPwd,$sfmClientId,
 //get the caseNumber
 $caseNumber =$sfm_act_restApiMethods.getRestApi($sfmlUsn,$sfmlPwd,$sfmClientId,$sfmConsumerSecret,$sfmOrgInstance,"GET", $objName1, $columnName1, $filter1, $filterValue);
 
+//Create WO through REST API
+var $woNumber = $sfm_act_createCustomWizard.createBlankWoFromRest($sfmlUsn, $sfmlPwd, $sfmClientId, $sfmConsumerSecret, $sfmOrgInstance);
+
 
 //login to the org
 _setSpeed($g_stepSpeed);
 $bo_act_login.login($g_url, $sfmlUsn,$sfmlPwd);
-$sfm_act_lightningConfig.switchToLightning(); 
+ 
 
 //clone tmd016
 $sfm_act_SFM.cloneTDM016($sfmNameToBeCloned,$sfmName,$isCustom, $sfmTemplateSaveAsName, $sfmTemplate, $fieldName, $containerName);
@@ -48,15 +51,11 @@ _click($sfm_pg_sfmDesigner.btn_saveSFM);
 
 //add the process to wizard
 $sfm_act_wizards.addToWizard($wizardObject, $wizardName[3], $wizardType[1], $sfmName);  
-_wait(3000); 
+_wait(3000);  
 
-//Create WO through UI for the validatiion
-_selectDomain();
-$sfm_act_createCustomWizard.createWowithoutvalues();
-
-_click(_span($sfmName));
-_selectDomain($g_domain);
-_wait(8000,_div($sfmName));
+//Navigate to the WO for validation
+$bo_act_navigation.navigateToCreatedRecordUsingGlobalSearch($woNumber);
+$sfm_act_createCustomWizard.clickWizardBtn($sfmName);
 
 //select a case to validate form fill
 _click($sfm_pg_wizardWindow.txt_caseLookup);
@@ -67,7 +66,8 @@ _click(_link($caseNumber,_in(_div("/sfm-lightninglookupslidingwindow/"))));
 //Validate form fill on billing type/problem description/priority fields
 $obj= JSON.parse($obJson1);
 _assertEqual($obj["Priority"], _getText($sfm_pg_sfmDesigner.txt_priority));
-_assertEqual($obj["SVMXDEV__Billing_Type__c"],_getText($sfm_pg_sfmDesigner.txt_billingType));
+var $billingType = $orgnamespace+"__Billing_Type__c";
+_assertEqual($obj[$billingType],_getText($sfm_pg_sfmDesigner.txt_billingType));
 _assertEqual($obj["Description"],_getText($sfm_pg_sfmDesigner.txt_problemDescription));
 
 //save the process and validate for formfill for fields which are not in screen designer -- RS-10423

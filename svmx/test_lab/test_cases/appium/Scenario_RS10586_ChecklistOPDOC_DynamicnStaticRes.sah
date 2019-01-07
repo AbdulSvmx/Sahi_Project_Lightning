@@ -5,27 +5,31 @@ $scenario_10586.start();
 var $ProcessStatus=false;
 var $profilename = $group_profilename;
 var $wizardObject ="Work Order";
-var $sfmName = "Trail1Auto_10586_ChecklistOPDOC_DynamicRes1";
-
+var $sfmName = "Auto_10586_ChecklistOPDOC_DynamicRes";
+var $targetObjectName = "Work Order";
 
 //Variables required for OPDOC Process
 var $value = _readFile("/auto/sahi_pro/userdata/scripts/Sahi_Project_Lightning/scenario7.txt");
 var $templateName = $bo_act_common.generateRandomName("SFM_Auto_Template_");
-var $sfmName1 = $bo_act_common.generateRandomName("DELETE_SFM_Auto_");
+var $sfmName1 = "OPDOC_10586_ChecklistOPDOC_DynamicRes";
 var $wizardObject="Work Order";
 var $wizardName="AutoRegression";
 var $wizardType="Output Document";
-var $profilename = $group_profilename;
+var x = $group_profilename;
 var $handOver="false";
 var $wizardCriteria=null;
 
 $bo_act_login.login($g_url, $appiumAdminUn, $appiumAdminPwd);
-$sfm_act_lightningConfig.switchToLightning();
+
+
 
 $ProcessStatus=$sfm_act_SFM.checkCustomProcess($sfmName);
 if($ProcessStatus==false){
 
 $bo_act_navigation.navigateToSfmTransactionDesigner();
+
+
+
 _wait(15000);
 _click($bo_pg_sfmTransactionAndDesigner.btn_newSFM);
 _wait(3000);
@@ -134,7 +138,7 @@ var $addToLibAndForm5=true;
 var $queCommonDetails5=[$queType5,$queName5,$helpURL5,$tag5,$addToLibAndForm5];
 var $responseSet5="Create New";
 var $responseSetName5=$bo_act_common.generateRandomName("ch_resSet_");
-var $ansValueSet5=["MultiOn","MultiTwo","MultiThree"];
+var $ansValueSet5=["MultiOne","MultiTwo","MultiThree"];
 var $defaultval5=[true,true,false];
 var $chkQueDetails5=[$responseSet5,$responseSetName5,$ansValueSet5,$defaultval5];
 $sfm_act_formDesigner.createCheckListQuestion($sectionName5, $queCommonDetails5, $chkQueDetails5);
@@ -148,7 +152,6 @@ var $helpURL6="http://google.com/Doc";
 var $tag6="ch_date_-01";
 var $addToLibAndForm6=true;
 var $queCommonDetails6=[$queType6,$queName6,$helpURL6,$tag6,$addToLibAndForm6];
-
 var $preFillFromWO6=false;
 var $defaultAnsType6="Value";
 var $defaultVal6="01/01/2018";
@@ -211,7 +214,7 @@ $sfm_act_formDesigner.createCheckListQuestion($sectionName9, $queCommonDetails9,
 ///////////// Question - Number //////////////////
 //create Number Question in section - preFill
 var $queType10="Number";
-var $queName10="No Of Times Assigned";
+var $queName10="Dynamic Number from No Of Times Assigned";
 var $sectionName10="Checklist Section Title";
 
 var $helpURL10="http://google.com/Doc";
@@ -230,7 +233,11 @@ $bo_act_checklistdesigner.addQuestion("Text", "Dynamic Text From Proforma Invoic
 
 
 _click($bo_pg_sfmTransactionAndDesigner.btn_saveAndclose);
-_wait(10000);
+
+$bo_act_SFMAppPermission.set_mobileapp_permissions_generic($profilename, $targetObjectName, $sfmName, "Checklist");
+
+
+_wait(10000); 
 
 //-----------------------Creating OPDOC----------------------------
 

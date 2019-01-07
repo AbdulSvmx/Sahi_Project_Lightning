@@ -15,7 +15,7 @@ var $data_excel_10538 = _readExcelFile("/auto/SVMX_Catalyst/fsaautomation/resour
 var $Acc10538Name = $data_excel_10538[2]["Data3"];
 var $IB10538Name = $data_excel_10538[2]["Data4"];
 $bo_act_login.login($g_url, $appiumAdminUn, $appiumAdminPwd);
-$sfm_act_lightningConfig.switchToLightning();
+
 
 
 var $sfmName = "Manage Work Order Lines - Estimates";
@@ -138,8 +138,8 @@ var $module = "Work Order";
 var $submodule = "Create Work Order Lines VF";
 $bo_act_configurationProfiles.editGroupProfileForTextSettings($group_profilename,$module,$submodule, "SET006", $pricebookName);
 $bo_act_configurationProfiles.editGroupProfileForTextSettings($group_profilename,$module,$submodule, "SET018", $ServicepricebookName);
-//$bo_act_configurationProfiles.editGroupProfileForBooleanSettings($group_profilename,$module,$submodule, "SET005", true);
-//$bo_act_configurationProfiles.editGroupProfileForBooleanSettings($group_profilename,$module,$submodule, "SET010", true);
+$bo_act_configurationProfiles.editGroupProfileForBooleanSettings($group_profilename,$module,$submodule, "SET005", true);
+$bo_act_configurationProfiles.editGroupProfileForBooleanSettings($group_profilename,$module,$submodule, "SET010", true);
 
 
 //Edit a Service Price Book
@@ -165,7 +165,7 @@ _log($Productname10533);
 _wait(30000);
 $bo_act_navigation.navigateToCreatedRecordUsingGlobalSearch($Productname10533);
 
-
+_wait(15000);
 var $standardPriceValue = 500;
 $bo_act_products.addStandardPriceForProduct($Productname10533, $standardPriceValue);
 
@@ -194,7 +194,6 @@ _wait(30000);
 _call(top.location.reload());
 $bo_act_navigation.navigateToCreatedRecordUsingGlobalSearchWO($WOName);
 $bo_act_interactiveEntitlement_WO.performInteractiveEntitlement_NoAccountNoContact($WOName, $WarrantyName);
-
 
 $excel.insertUnderColumn("/auto/SVMX_Catalyst/fsaautomation/resources/TestData.xlsx", "RS_10533", "Data1",$WOName ,"2");
 $excel.insertUnderColumn("/auto/SVMX_Catalyst/fsaautomation/resources/TestData.xlsx", "RS_10533", "Data2",$Productname10533 ,"2");

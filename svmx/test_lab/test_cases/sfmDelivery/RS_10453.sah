@@ -20,9 +20,12 @@ var $wizardObject ="Work Order";
 var $fieldName = ["No Of Times Assigned"];
 //var $containerName = "Order Status";
 
+//Create WO through REST API
+var $woNumber = $sfm_act_createCustomWizard.createBlankWoFromRest($sfmlUsn, $sfmlPwd, $sfmClientId, $sfmConsumerSecret, $sfmOrgInstance);
+
 _setSpeed($g_stepSpeed);
 $bo_act_login.login($g_url,$sfmlUsn,$sfmlPwd);
-$sfm_act_lightningConfig.switchToLightning(); 
+ 
 _wait(15000);
 
 $sfm_act_SFM.cloneTDM016($sfmNameToBeCloned,$sfmName,$isCustom, $sfmName, $sfmTemplate, $fieldName, $containerName);
@@ -32,13 +35,9 @@ _click($sfm_pg_sfmDesigner.btn_saveSFM);
 
 $sfm_act_wizards.addToWizard($wizardObject, $wizardName[0], $wizardType[1], $sfmName);  
 
-//create WO for the validation
-_selectDomain();
-$sfm_act_createCustomWizard.createWowithoutvalues();
-
-_click(_span($sfmName));
-_selectDomain($g_domain);
-_wait(8000,_div($sfmName));
+//Navigate to the WO for validation
+$bo_act_navigation.navigateToCreatedRecordUsingGlobalSearch($woNumber);
+$sfm_act_createCustomWizard.clickWizardBtn($sfmName);
 
 
 //enter 45 for no of times assigned and check for confirmation after save

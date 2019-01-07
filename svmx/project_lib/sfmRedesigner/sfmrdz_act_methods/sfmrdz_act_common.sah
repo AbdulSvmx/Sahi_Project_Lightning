@@ -5,6 +5,8 @@
 
 var $sfmrdz_act_common= new function sfmrdz_act_common(){
 	
+	
+	
 	/**
 	 * Function to launch the list views
 	 * change wait based on $viewName
@@ -20,6 +22,26 @@ var $sfmrdz_act_common= new function sfmrdz_act_common(){
 		_wait(30000,_isVisible($sfmrdz_pg_common.btn_actionMenu));
 		return $currentHomePageULR;
 	};
+	
+	
+	/**
+	 * Function to Launch List View by passing the list view name
+	 * Author - Abhishek Nadig
+	 */
+	this.launchListView=function ($viewName){
+		//_selectDomain("/svmx/");
+		_click($sfmrdz_pg_common.btn_appLauncher);
+		_click($sfmrdz_pg_common.txt_searchApp);
+		_setValue($sfmrdz_pg_common.txt_searchApp,"New Designer");
+		_wait(3000);
+		_click($sfmrdz_pg_common.link_newDesigner);	
+		_wait(3000);
+		_selectDomain("/svmx/");
+		_highlight(_link($viewName));
+		_click(_link($viewName));
+	};
+	
+	
 	
 	/**
 	 * Function to launch the home viw
@@ -79,7 +101,7 @@ var $sfmrdz_act_common= new function sfmrdz_act_common(){
 					_log("$list collection else loop");
 					$list = _collect("_link","/Text slds-text-body.*/",_under(_parentNode(_div($colName),"DIV",1)));
 				}
-			}else if ($colName=="Source Object" || $colName=="TODO_TARGET_OBJECT" || $colName=="Object") {
+			}else if ($colName=="Source Object" || $colName=="Target Object" || $colName=="Object") {
 				_log("Under else loop: ");
 				//$sfmrdz_act_common.expdColSize($colName);
 				_wait(3000);

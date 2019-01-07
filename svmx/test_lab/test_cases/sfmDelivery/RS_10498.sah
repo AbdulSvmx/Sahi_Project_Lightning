@@ -8,25 +8,26 @@ var $sfmTemplate = "SVMXSTD: Manage WO Usage Lines";
 var $isCustom = false;
 var $ctr = 0;
 var $i = 0;
+var $lineType = "Parts";
 var $success_message = "Work Order was saved.";
 var $containerName = [];
 var $fieldName=[];
-var $missingStdDataTypes = ["URL","Picklist (Multi-Select)","Percent","Phone","Date","Date","Email"];
-var $customFieldsNames = ["Automation ChildURL","Automation Childmultipicklist","Automation ChildPercent","Automation ChildPhone","Automation ChildDate2","Automation ChildDate3","Automation ChildEmail"];
-var $fieldsToMap = ["Account","Record Type","Include in Quote","Billable Line Price","Date Received","Automation ChildDate2","Automation ChildDate3","Start Date and Time","End Date and Time","Closed On","Canceled On","Automation ChildEmail","Automation Childmultipicklist","Billable Qty","Automation ChildPercent","Automation ChildPhone","Cost Category","Received City","Received Street","Reference Information","Automation ChildURL"];
-var $containerName = ["Parts","Parts","Parts","Parts","Parts","Parts","Parts","Parts","Parts","Parts","Parts","Parts","Parts","Parts","Parts","Parts","Parts","Parts","Parts","Parts","Parts"];
+var $missingStdDataTypes = ["URL","Picklist (Multi-Select)","Percent","Phone","Date","Date","Email","Lookup Relationship"];
+var $lookupValues = [,,,,,,,"Account"];
+var $customFieldsNames = ["Automation ChildURL","Automation Childmultipicklist","Automation ChildPercent","Automation ChildPhone","Automation ChildDate2","Automation ChildDate3","Automation ChildEmail","Account"];
+var $fieldsToMap = ["Account","Record Type","Include in Quote","Billable Line Price","Date Received","Automation ChildDate2","Automation ChildDate3","Start Date and Time","End Date and Time","Closed On","Canceled On","Automation ChildEmail","Automation Childmultipicklist","Billable Qty","Automation ChildPercent","Automation ChildPhone","Activity Type","Received City","Received Street","Reference Information","Automation ChildURL"];
 var $currentWizardName = $wizardName[4];
 var $productName = "Chrome";
-var $lineType = "Parts";
 var $fieldsAbsentInPage = [];
 var $pageLayoutForProfile = "SVMX Work Details Usage - Admin";
-var $myDomain = "/lightning/";
+//var $sfd_myDomain = "/lightning/";
 var $multiPicklistValues = ["Multipicklist1","Multipicklist2","Multipicklist3"];
 var $tempFields = ["Age"];
 var $initialChildFields = ["Line Type","Record Type ID","Line Number"];
 var $initalChildContainers = [$lineType,$lineType,$lineType];
 var $initialChildValues = [$lineType,"Usage/Consumption"];
-var $additionalFields = ["Include in Quote","Account","Billable Line Price","Date Received","Automation ChildDate3","Automation ChildDate2","Start Date and Time","End Date and Time","Closed On","Canceled On","Automation ChildEmail","Automation Childmultipicklist","Billable Qty","Automation ChildPercent","Automation ChildPhone","Cost Category","Received City","Received Street","Reference Information","Automation ChildURL"];
+var $additionalFields = ["Include in Quote","Account","Billable Line Price","Date Received","Automation ChildDate3","Automation ChildDate2","Start Date and Time","End Date and Time","Closed On","Canceled On","Automation ChildEmail","Automation Childmultipicklist","Billable Qty","Automation ChildPercent","Automation ChildPhone","Activity Type","Received City","Received Street","Reference Information","Automation ChildURL"];
+var $containerName = [$lineType,$lineType,$lineType,$lineType,$lineType,$lineType,$lineType,$lineType,$lineType,$lineType,$lineType,$lineType,$lineType,$lineType,$lineType,$lineType,$lineType,$lineType,$lineType,$lineType,$lineType];
 var $mapType = "Value Map For New Records";
 
 //Appending current timestamp to process name to make it unique.
@@ -39,17 +40,15 @@ var $mapName = $processName + "mp";
 //Login and switch to lightning
 
 $bo_act_login.login($g_url,$sfmlUsn,$sfmlPwd);
-$sfm_act_lightningConfig.switchToLightning();
+
 _wait(15000);
 //***************************************************************************************
 //Create custom fields if needed
-$sfm_act_lightningConfig.addCustomFields($objectName, $customFieldsNames, $missingStdDataTypes, $myDomain,$multiPicklistValues);
-_closeWindow();
-_selectWindow();
+$sfm_act_lightningConfig.addCustomFields($objectName, $customFieldsNames, $missingStdDataTypes, $sfd_myDomain,$multiPicklistValues,$lookupValues);
 
 //Create work order
 var $wo_number = $sfm_act_createCustomWizard.createWowithdateliterals();
-var $wlNumber = $sfm_act_lightningConfig.createWorkDetailInLightning("Usage",$lineType);
+var $wl_number = $sfm_act_lightningConfig.createWorkDetailInLightning("Usage/Consumption", $lineType);
 //Find missing fields in Work Order Page Layout and them to the layout
 for($i=0;$i<$fieldsToMap.length;$i++){
 	if(!$sfm_act_lightningConfig.findIfFieldPresentInPageLayout($fieldsToMap[$i])){
@@ -60,7 +59,7 @@ _log($fieldsAbsentInPage);
 
 if($fieldsAbsentInPage.length > 0){
 	$sfm_act_lightningConfig.navigateToObjectsInLightning($objectName);
-	$sfm_act_lightningConfig.addFieldsToLightningPageLayout($objectName,$pageLayoutForProfile,$fieldsAbsentInPage,$myDomain);
+	$sfm_act_lightningConfig.addFieldsToLightningPageLayout($objectName,$pageLayoutForProfile,$fieldsAbsentInPage,$sfd_myDomain);
 	_selectDomain();
 	_selectWindow("Home | Salesforce");
 	_closeWindow();
@@ -77,7 +76,7 @@ $sfm_act_lightningConfig.logoutInLightning();
 //Login and switch to lightning
 
 $bo_act_login.login($g_url,$sfmlUsn,$sfmlPwd);
-$sfm_act_lightningConfig.switchToLightning();
+
 
 //**************************************************************************************************
 //Navigate to servicemax setup and setup required process.
@@ -104,8 +103,8 @@ _click($bo_pg_sfmTransactionAndDesigner.btn_quickSave1);
 
 $textLabels = ["Billable Line Price","Automation ChildEmail","Billable Qty","Automation ChildPercent","Automation ChildPhone","Received City","Received Street","Reference Information","Automation ChildURL","Automation Childmultipicklist"];
 $textValues = ["4500","group123@group.com","34.00","45","2345401","Bengaluru","123 somewhere somehow somewat","This washing machine stopped working","www.google.com","Multipicklist1;Multipicklist3"];
-$picklistLabels = ["Account","Record Type ID","Include in Quote","Date Received","Automation ChildDate2","Automation ChildDate3","Start Date and Time","End Date and Time","Closed On","Canceled On","Cost Category"];
-$pickListValues = ["HCSAccountForTesting","Record Type1","true","Today","Tomorrow","Yesterday","Now","Today","Tomorrow","Yesterday","Straight"];
+$picklistLabels = ["Account","Record Type ID","Include in Quote","Date Received","Automation ChildDate2","Automation ChildDate3","Start Date and Time","End Date and Time","Closed On","Canceled On","Activity Type"];
+$pickListValues = ["HCSAccountForTesting","Record Type1","true","Today","Tomorrow","Yesterday","Now","Today","Tomorrow","Yesterday","Calibration"];
 //Create mapping for all possible standard data types.
 _click($bo_pg_sfmTransactionAndDesigner.btn_qualifyingCriteriaAndFieldMapping);
 $bo_act_mappings.createMapping($lineType,$mapType,$picklistLabels,$pickListValues,$textLabels,$textValues,$mapName);
@@ -156,8 +155,8 @@ var $lookUpLabels = ["Account"];
 var $lookUpValues = ["HCSAccountForTesting"];
 $textLabels = ["Billable Line Price","Billable Qty","Automation ChildPercent","Received City","Date Received","Automation ChildDate2","Automation ChildDate3"];
 $textValues = ["$4,500.000","34.0000","45%","Bengaluru",$todayDate,$tomorrowDate,$yesterdayDate];
-$pickListLabels = ["Cost Category"];
-$pickListValues = ["Straight"];
+$pickListLabels = ["Activity Type"];
+$pickListValues = ["Calibration"];
 $textAreaLabels = ["Received Street","Reference Information"];
 $textAreaValues = ["123 somewhere somehow somewat","This washing machine stopped working"];
 var $checkBoxLabels = ["Include in Quote"];
@@ -195,7 +194,7 @@ _selectWindow("/SFM Transaction Designer/");
 _wait(20000);
 _click($bo_pg_sfmTransactionAndDesigner.btn_screenDesigner);
 _wait(5000);
-$bo_act_navigation.designChildScreen($pageLayoutName,$additionalFields,$containerName);
+$sfm_act_SFM.addFieldToScreen($additionalFields,$containerName);
 _wait(2000);
 _click($bo_pg_sfmTransactionAndDesigner.btn_quickSave1);
 _wait(2000);

@@ -26,12 +26,12 @@ var $z = 0;
 var $timeStamp = $bo_act_navigation.getCurrentTimeStamp();
 $processName = $processName + "_" + $timeStamp;
 var $pageLayoutName = $processName + "pg";
-var $myDomain = "/lightning/";
+//var $sfd_myDomain = "/lightning/";
 //**************************************************************************************
 //Login and switch to lightning
 //$bo_act_login.login($g_url,$bac_un,$bac_pwd);
 $bo_act_login.login($g_url,$sfmlUsn,$sfmlPwd);
-$sfm_act_lightningConfig.switchToLightning();
+
 _wait(15000);
 //Navigate to Object manager and navigate to work detail object.
 $sfm_act_lightningConfig.navigateToObjectsInLightning($object_name);
@@ -41,7 +41,7 @@ _click(_link("Fields & Relationships"));
 
 _setValue(_searchbox("globalQuickfind"),$ctrlPicklist);
 _click(_link($ctrlPicklist));
-_selectDomain($myDomain);
+_selectDomain($sfd_myDomain);
 
 
 //Delete existing dependencies if any and create new one.
@@ -82,7 +82,7 @@ _selectDomain();
 
 //Create Work order and then Work detail to select Activity type.
 var $wo_number = $sfm_act_createCustomWizard.createWowithdateliterals();
-var $wlNumber = $sfm_act_lightningConfig.createWorkDetailInLightning("Usage",$lineType);
+var $wlNumber = $sfm_act_lightningConfig.createWorkDetailInLightning("Usage/Consumption",$lineType);
 $bo_act_navigation.navigateToCreatedRecordUsingGlobalSearch($wo_number);
 //Select Activity Type and check the SFM delivery.
 for($z = 0;$z<$ctrl_unique_values.length;$z++){

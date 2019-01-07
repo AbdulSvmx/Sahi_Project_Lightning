@@ -9,7 +9,7 @@ var $module = "SFM Transaction Manager";
 var $subModule = "SFM Transaction Delivery Engine";
 var $setting = "SET001";
 $bo_act_login.login($g_url, $appiumAdminUn, $appiumAdminPwd);
-$sfm_act_lightningConfig.switchToLightning();
+
 $bo_act_navigation.navigateToConfigurationProfilesPage();
 _wait(10000);
 _selectDomain("/svmx/");
@@ -64,7 +64,17 @@ $sfm_act_lightningConfig.addPermissionToCustomObject("Profiles", "Automation Ser
 
  //Added for Scenario 2--Create New Custom Search.
 $bo_act_navigation.navigateToSfmSearchDesigner();
-$sfm_act_search.newCustomSearch("AUTOMATION SEARCH",["Account","Work Order","Case"]);
+$sfm_act_search.newCustomSearch("AUTOMATION SEARCH",["Account","Work Order","Case","Installed Product"]);
 _writeFile("true", $appiumPath+$sahiIntermediatoryPath, true);
+
+//Added for 10527
+$sfm_act_lightningConfig.switchToLightning();
+$objName = "Work Detail";
+$sfm_act_lightningConfig.navigateToObjectsInLightning($objName);
+_selectWindow($objName+" | Salesforce");
+_wait(3000);
+$sfm_act_lightningConfig.addLookupField("Account");
+_wait(3000);
+$sfm_act_lightningConfig.addLookupField("Contact");
 
 $global_preRequisite.end();

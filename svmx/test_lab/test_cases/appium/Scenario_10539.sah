@@ -36,7 +36,13 @@ var $restIBName = $bo_act_common.generateRandomName("IB10539");
 $pre_requisite.start();
 _setSpeed($g_stepSpeed);
 $bo_act_login.login($g_url, $appiumAdminUn, $appiumAdminPwd);
-$sfm_act_lightningConfig.switchToLightning();
+
+
+var $module = "Entitlement Verification";
+var $submodule = "Work Order Entitlement VF";
+$bo_act_configurationProfiles.editGroupProfileForBooleanSettings($admin_group_profile,$module,$submodule, "SET024", false);
+$bo_act_configurationProfiles.editGroupProfileForBooleanSettings($admin_group_profile,$module,$submodule, "SET025", false);
+$bo_act_configurationProfiles.editGroupProfileForBooleanSettings($admin_group_profile,$module,$submodule, "SET026", false);
 
 var $now = new Date();
 _log( $now ); // shows current date/time

@@ -38,6 +38,41 @@ var $sfmrdz_act_dvrListView = new function sfmrdz_act_dvrListView(){
 		
 	};
 
-	
+	/**
+	 * Content search on DVR list view
+	 */
+	this.contentSearch=function($search){
+		$sfmrdz_act_common.searchObj($search);
+		_wait(5000);
+		
+		var $dvrLinks =_collect("_div","/DataTableCell--overflow/",_under(_parentNode($sfmrdz_pg_dvrListView.btn_heading_dvrNameCol,"DIV",1)));
+		_log("No. of rows: "+$dvrLinks.length);
+			if ($dvrLinks.length==0) {
+				_log("$dvrLinks collection else loop");
+				$dvrLinks = _collect("_link","/Text slds-text-body.*/",_under(_parentNode($sfmrdz_pg_dvrListView.btn_heading_dvrNameCol,"DIV",1)));
+				_log("No. of rows: "+$dvrLinks.length);
+			}
+		var $dvrNames=new Array($dvrLinks.length);
+		var $retVal=true;
+		var $rowNotContaingText=null;
+		for (var $i=0; $i<$dvrLinks.length; $i++) {
+			$dvrNames[$i]=_getText($dvrLinks[$i]);
+
+			if ($dvrNames[$i].indexOf($search)==-1) {
+				var $dvrLinkRow=_parentNode(_link($dvrNames[$i]),"DIV",2);
+				var $objText=_getText(_div("/rt-td.*/[2]",_in($dvrLinkRow)));
+				//var $TDTOText=_getText(_div("/rt-td.*/[3]",_in($dvrLinkRow)));
+				//var $tagText=_getText(_div("/rt-td.*/[5]",_in($dvrLinkRow)));
+				if ($objText.indexOf($search)==-1) {
+					$retVal=false;
+					$rowNotContaingText=$dvrNames[$i];
+					break;
+				}
+			}
+		}
+		return [$retVal,$rowNotContaingText];
+		//_assertTrue($retVal,$search+" text is not available in "+$rowNotContaingText);
+		
+	};
 	
 };

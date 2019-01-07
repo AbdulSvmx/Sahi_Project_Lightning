@@ -844,7 +844,7 @@ var $sfm_act_Transactions = new function sfm_act_Transactions() {
 					_wait(500);
 					_click($sfm_pg_screenDesigner.lbl_workOrder);
 				} 
-	/*			
+				
 				if($trgHeaderObj!=null && $srcHeaderObj=='Installed Product' )
 					{
 					_setSelected($sfm_pg_screenDesigner.sel_targetHeaderObject,$trgHeaderObj);
@@ -862,7 +862,7 @@ var $sfm_act_Transactions = new function sfm_act_Transactions() {
 				    _wait(2000);
 					}
 				
-		*/		
+				
 				
 			};
 			/**
@@ -1163,5 +1163,41 @@ var $sfm_act_Transactions = new function sfm_act_Transactions() {
 				_log("$comboField: "+$comboField.length);
 				return [$comboField,$comboConditions,$comboInput];
 			};	
-		
+			
+			this.addNewProcess =  function($procName,$procType,$tgtObj){
+				_click($bo_pg_sfmTransactionAndDesigner.btn_newSFM);
+				_setValue($bo_pg_sfmTransactionAndDesigner.txt_name, $procName);
+				_setValue($bo_pg_sfmTransactionAndDesigner.txt_sfmTransactionId, "");
+				_setSelected($sfm_pg_screenDesigner.sel_createSFMTransaction,$procType);
+				_setStrictVisibilityCheck(true);
+				_setValue($sfm_pg_screenDesigner.txt_targetObject,"");
+				_setValue($sfm_pg_screenDesigner.txt_targetObject,"Wo");
+				_wait(5000);
+				_click($sfm_pg_screenDesigner.lbl_workOrder);
+//				_click($sfm_pg_screenDesigner.chkbox_workDetail);
+				_click(_f("main").s_checkbox($tgtObj));
+			};
+			
+			this.addNewScreenDesigner = function($sfmTemplate,$sfmTemplateSaveAsName){
+				_click($sfm_pg_screenDesigner.tab_screenDesigner);
+				_wait(8000);
+				_setSelected($bo_pg_sfmTransactionAndDesigner.sel_sfmTemplate,$sfmTemplate);
+				_wait(10000);
+				_setValue($bo_pg_sfmTransactionAndDesigner.txt_sfmSavePageLayoutAs,$sfmTemplateSaveAsName);
+				_setValue($bo_pg_sfmTransactionAndDesigner.txt_sfmSavePageLayoutAsId,$sfmTemplateSaveAsName);
+				_click(_f("main").s_button("Save As[3]"));
+				_click($bo_pg_formDesigner.btn_quickSave);
+				
+			};
+			
+			this.addNewTemplateDesigner = function($sfmTemplate,$template){
+				_click($sfm_pg_screenDesigner.tab_templateDesigner);
+				_setValue($sfm_pg_screenDesigner.txt_templateName,$sfmTemplate);
+				_setValue($sfm_pg_screenDesigner.txt_templateId,$sfmTemplate);
+				_click($sfm_pg_screenDesigner.btn_source);
+				_setValue($sfm_pg_screenDesigner.txtArea_template,$template);
+				_click($sfm_pg_screenDesigner.btn_templateSave);
+				_wait(6000);
+				_click($bo_pg_sfmTransactionAndDesigner.btn_saveAndclose);
+			};
 };

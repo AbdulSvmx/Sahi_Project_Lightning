@@ -28,6 +28,9 @@ var $sfm_pg_sfmDesigner = new function sfm_pg_sfmDesigner() {
 	this.txt_WDlineQTY=_textbox(" input", _near(_span("Line Qty")));
 	this.msg_WDCreateConfirm=_span("Work Detail was created.");
 	this.link_editWD=_link("Edit",_in(_list("scrollable")));
+	this.btn_advFilterIcon=_div("/sfm-filter-icon/");
+	this.btn_myTrunkStock=_checkbox("SVMXSTD:Limit Items to My Trunk Stock");
+	this.txt_NotesAndAttachments=_span("Notes & Attachments");
 
 	//this.newWDWindow=_parentNode(_heading2("/New Work Detail:/"),"DIV",2);
 	this.newWDWindow=_parentNode(_heading2("/Work Detail:/"),"DIV",2);
@@ -66,10 +69,13 @@ var $sfm_pg_sfmDesigner = new function sfm_pg_sfmDesigner() {
 	this.btn_deliveryPartsTab = _span("Parts");
 	this.btn_deliveryLaborTab = _span("Labor");
 	this.btn_deliveryExpenseTab = _span("Expenses");
+	this.btn_deliveryExpenTab = _span("Expense");// Applicable for Src to Tar all process
 	this.btn_deliveryTravelTab = _span("Travel");
 	this.btn_deliveryAddRowParts = _span("+ Add Parts");//Changed for Lightning;
 	this.btn_deliveryAddRowLabor = _span("+ Add Labor");//Changed for Lightning;
 	this.btn_deliveryAddRowExpenses = _span("+ Add Expenses");//Changed for Lightning;
+	this.btn_deliveryAddRowExpense = _span("+ Add Expense");// Applicable for Src to Tar all process
+	
 	this.btn_deliveryAddRowTravel = _span("+ Add Travel");//Changed for Lightning;
 	this.btn_deliveryAddMultiParts = _span("svmx-btn-icon svmx-sfmd-multi-add-line-icon");
 	this.btn_deliveryAddChildRow = _div("sfm-button-1193");
@@ -83,6 +89,7 @@ var $sfm_pg_sfmDesigner = new function sfm_pg_sfmDesigner() {
 	this.txt_orderType = _textbox("Order Type",_near(_span("Order Type"))); // Added for lightning
 	this.txt_problemDescription = _textarea(0,_near(_span("Problem Description"))); // Added for lightning
 	this.txt_invoiceNumber =_textbox("Invoice Number",_near(_span("Invoice Number"))) ; // Added for lightning
+	this.txt_drivingTime = _textbox("Driving Time (in Minutes)");
 
 	
 	//Extended edit page objects --Parts
@@ -120,6 +127,10 @@ var $sfm_pg_sfmDesigner = new function sfm_pg_sfmDesigner() {
 	this.btn_bubble=_link("/.*/",_in(_div("/celleditor/")));
 	this.btn_bubbleDiv=_div("/lightningtooltip/");
 	
+	//Labor child line
+	this.window_partsSearchWindowInLabor=_parentNode(_div("Labor"),"DIV",5);
+	this.lbl_partInLabor=_span("Part",_in(this.window_partsSearchWindowInLabor));
+	this.txt_partTextboxInLabor=_textbox("/inputEl/",_near(this.lbl_partInLabor));
 	
 	//header fields
 	this.lbl_headerAccount=_div("Account");
@@ -144,6 +155,7 @@ var $sfm_pg_sfmDesigner = new function sfm_pg_sfmDesigner() {
 	this.label_contextOverride=_label("/Limit search to/");
 	this.btn_contextOverride=_checkbox(0,_near(this.label_contextOverride));
 	this.btn_cancelContactWindow=_link("Cancel",_near(_div("/CancelAdd/")));
+	this.btn_addWindow=_link("Add",_near(_div("/CancelAdd/")));
 	this.btn_noRecordMSG=_div("No matching record(s) found for this keyword");
 	
 	this.link_autoContactInDVR=_link("AutoContact",_in(_div("AutoContact: Multiple items found. Click lookup icon to refine search.")));
