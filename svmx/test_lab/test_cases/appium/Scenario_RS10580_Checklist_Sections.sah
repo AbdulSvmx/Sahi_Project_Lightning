@@ -28,7 +28,7 @@ var $skipTo=["3-"+$sectionName3,"3-"+$sectionName3];
 var $criteriaDetails1=[$comboField,$operandType,$answer,$skipTo];
 //var $criteriaDetailsv=[$criteriaDetails1];
 
-var $exitQuestionNameq2 = ["Number Should not be greater than 100"];
+var $exitQuestionNameq2 = ["Section One Question One"];
 var $questionTypeq2=["Text"];
 var $comboFieldq2=["Equals"];
 var $operandTypeq2=["Value"];
