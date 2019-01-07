@@ -126,8 +126,6 @@ $eventname =$sfm_act_restApiMethods.getRestApi($appiumAdminUn,$appiumAdminPwd,$a
 _log($eventname);
 
 
-$bo_act_login.login($g_url, $appiumAdminUn, $appiumAdminPwd);
-
 //***********************************************************************************************************************//
 /*var $objectName="Work Order";
 var $customFieldsNames = ["Currency","Email","Number","Phone","URL"];
