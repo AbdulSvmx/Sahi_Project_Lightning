@@ -443,6 +443,13 @@ var $sfm_act_formDesigner = new function sfm_act_formDesigner() {
 				var $answer=$criteriaDetails[2];
 				var $skipTo=$criteriaDetails[3];
 				this.setExitCriteriaOnDateQuestion($questionId, $comboField, $operandType, $answer, $skipTo);
+			}else {
+				$criteriaDetails=$criteriaDetailList[$i];
+				var $comboField=$criteriaDetails[0];
+				var $operandType=$criteriaDetails[1];
+				var $answer=$criteriaDetails[2];
+				var $skipTo=$criteriaDetails[3];
+				this.setExitCriteriaOnDateQuestion($questionId, $comboField, $operandType, $answer, $skipTo);
 			}
 			
 		}
