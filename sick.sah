@@ -1,0 +1,9 @@
+$bo_act_login.login($g_url, $appiumAdminUn, $appiumAdminPwd);
+$sfm_act_lightningConfig.switchToLightning();
+$sfm_act_lightningConfig.navigateToCreateCustomObject();
+_selectDomain("cs77.salesforce.com");
+_selectWindow();
+$sfm_act_sfSetup.createObject($label, $label);
+_selectDomain();
+_selectWindow($label+" | Salesforce");
+_click(_link("Fields & Relationships"));

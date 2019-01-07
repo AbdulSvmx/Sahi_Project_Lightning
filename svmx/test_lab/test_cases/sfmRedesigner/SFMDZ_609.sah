@@ -21,7 +21,7 @@ SFMDZ_609.start();
 
 var $url="http://test.salesforce.com";
 var $un="saadat.dz2perftest@servicemax.com";
-var $pwd="servicemax3";
+var $pwd="servicemax4";
 var $viewName="Data Validation Rules";
 
 /*Login to the sandox */

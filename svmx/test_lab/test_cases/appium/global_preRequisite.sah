@@ -67,4 +67,14 @@ $bo_act_navigation.navigateToSfmSearchDesigner();
 $sfm_act_search.newCustomSearch("AUTOMATION SEARCH",["Account","Work Order","Case","Installed Product"]);
 _writeFile("true", $appiumPath+$sahiIntermediatoryPath, true);
 
+//Added for 10527
+$sfm_act_lightningConfig.switchToLightning();
+$objName = "Work Detail";
+$sfm_act_lightningConfig.navigateToObjectsInLightning($objName);
+_selectWindow($objName+" | Salesforce");
+_wait(3000);
+$sfm_act_lightningConfig.addLookupField("Account");
+_wait(3000);
+$sfm_act_lightningConfig.addLookupField("Contact");
+
 $global_preRequisite.end();

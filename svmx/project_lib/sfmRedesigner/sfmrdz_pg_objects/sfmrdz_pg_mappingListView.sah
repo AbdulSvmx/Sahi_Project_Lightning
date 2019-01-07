@@ -5,17 +5,23 @@
 var $sfmrdz_pg_mappingListView=new function sfmrdz_pg_mappingListView(){
 	
 	this.btn_heading_mapping=_div("Mapping");
-	this.btn_heading_mappingCol=_div("TODO_TAG NAME");
+	this.btn_heading_mappingCol=_div("MAPPING NAME");
 	this.btn_heading_sourceObj=_div("Source Object");
-	this.btn_heading_TDTOCol=_div("TODO_TARGET_OBJECT");
+	this.btn_heading_targetObj=_div("Target Object");
 	this.btn_whereUsedCol=_div("Where Used");
 	this.btn_lastEditedCol=_div("Last Edited");
+	this.sel_mappingFilterList=_textbox("/Input Picklist__input/");
 	
 	
-	this.btn_newMapping=_button("New TODO_TAG");
-	
+	this.btn_newMapping=_button("New Mapping");
 	this.btn_heading_sfmMappingHome=_div("SFM Transaction & Docs DesignerHome");
 	this.btn_sfmMappingHomeIcon=_div("/slds-media__figure/");
+	
+	//Filter Menu option items on the mapping list view screen
+	this.link_showAll=_link("Show All");
+	this.link_recentlyUsed=_link("Recently Used");
+	this.link_stdMappings=_link("Standard Mappings");
+	this.link_otherMappings=_link("Other Mappings");
 	
 	
 	//Confirmation message items on delete window

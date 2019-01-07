@@ -8,9 +8,9 @@ var $sfmName = "Auto_Reg_10527";
 var $isCustom = false;
 var $sfmTemplate = "SVMXSTD: Manage WO Usage Lines";
 var $sfmTemplateSaveAsName = $bo_act_common.generateRandomName("SFM_Temp_Name_");
-var $headersToAdd = ["Account","Country","Contact"];
-var $fieldName = ["Account","Requested Country"];
-var $containerName = ["Parts","Parts"];
+var $headersToAdd = ["Account","Country","Site","Contact"];
+var $fieldName = ["Account","Requested Country","To Location"];
+var $containerName = ["Parts","Parts","Parts"];
 var $wizTitle = $bo_act_common.generateRandomName("SFM_Wiz_Title_");
 var $profile= "auto group profile";
 /*****************************************
@@ -38,8 +38,22 @@ $sfm_act_Transactions.addHeader($headersToAdd);
 _click($sfm_pg_sfmDesigner.chk_OverrideContext);
 _setSelected($sfm_pg_sfmDesigner.sel_Context,"Account");
 _setSelected($sfm_pg_sfmDesigner.sel_matchinField,"Account ID");
-_click(_f("main").s_button("Save[3]"));
 _wait(3000);
+_click(_f("main").fieldrenderer("Site"));
+_setSelected($sfm_pg_sfmDesigner.sel_Context,"Country");
+_setSelected($sfm_pg_sfmDesigner.sel_matchinField,"Country");
+//_click(_f("main").s_button("Save[3]"));
+_wait(10000);
+_click(_f("main").s_richtext("To Location"));
+_wait(15000);
+_log("I am Here");
+_setSelected(_f("main").s_combobox("/ComboBox/").rightOf(_f("main").uiftetextfield("Context Source")),"Work Order")
+_wait(60000);
+_click(_f("main").s_combobox("/ComboBox/").near(_f("main").uiftetextfield("Context")));
+_wait(60000);
+_setSelected(_f("main").s_combobox("/ComboBox/").near(_f("main").uiftetextfield("Context")),"Country");
+_setSelected(_f("main").s_combobox("/ComboBox/").rightOf(_f("main").uiftetextfield("Matching Field")),"Country");
+_click(_f("main").s_button("Save[3]"));
 _click($bo_pg_sfmTransactionAndDesigner.btn_finalQuickSave);
 }
 /***************************************************
