@@ -1,7 +1,9 @@
 var RS_10556_mapping = _testcase("RS_10556_mapping","SCN_Mapping_RS-10556 Verify value map for existing header record & new child record along with SVMX & Date literals");
 RS_10556_mapping.start();
 
-//_writeFile("false", $appiumPath+$sahiIntermediatoryPath, true);
+_writeFile("false", $appiumPath+$sahiIntermediatoryPath, true);
+
+
 var $processName = "RS_10556_SVMX_literals";
 var $timeStamp = $bo_act_navigation.getCurrentTimeStamp();
 $processName = $processName + "_" + $timeStamp;
@@ -34,6 +36,8 @@ var $restcontactfirstname="C10556_";
 var $restcontactlastname="Auto";
 var $restproductname="P10556_Auto";
 var $restlocationname="L10556_Auto";
+
+$bo_act_login.login($g_url, $appiumAdminUn, $appiumAdminPwd);
 
 $objName= "Account";
 $obJson = "{\"Name\":\""+$restAccName+"\"}"; 
@@ -95,7 +99,7 @@ $workorderid=$sfm_act_restApiMethods.postRestApi($appiumAdminUn,$appiumAdminPwd,
 $WOname =$sfm_act_restApiMethods.getRestApi($appiumAdminUn,$appiumAdminPwd,$appiumclient_id,$appiumclient_secret,$appiumorginstance,"GET", $objName, $columnName, $filter, $workorderid);
 $excel.insertUnderColumn("/auto/SVMX_Catalyst/fsaautomation/resources/TestData.xlsx", "RS_10556", "Data4",$WOname ,"2");
 
-//no need to create an event
+
 var $now = new Date();
 _log( $now ); // shows current date/time
 $now.setHours(19,30,00,00);
@@ -134,6 +138,7 @@ $sfm_act_lightningConfig.addCustomFields($objectName, $customFieldsNames, $missi
 */
 
 //***********************************************************************************************************************//
+var $value=null;
 $value =$sfm_act_SFM.checkprocessexists($sfmName,$isCustom);//to check process exists or not
 _log($value);
 //if the process value is false (process not exists) then create the process
@@ -168,7 +173,7 @@ $sfm_act_wizards.addToWizard($wizardObject,$wizardName, $wizardType,$sfmName,$ha
 
 
 }
-
+_writeFile("true", $appiumPath+$sahiIntermediatoryPath, true);
 RS_10556_mapping.end();
 
 
