@@ -46,7 +46,7 @@ var $criteriaDetailList=[$criteriaDetails1,$criteriaDetailsq2];
 
 
 var $exitQuestionName2 = ["Section Two Question One"];
-var $questionType2=["Text"];
+var $questionType2ex=["Text"];
 var $comboField2=["Contains"];
 var $operandType2=["Value"];
 var $answer2=["jump"];
@@ -388,7 +388,7 @@ _wait(3000);
 
 $sfm_act_formDesigner.editSection($sectionName2);
 $sfm_act_formDesigner.addExistCriteria();
-$sfm_act_formDesigner.addQuesToExistCriteriaTab($exitQuestionName2, $questionType2,$criteriaDetailsvt);
+$sfm_act_formDesigner.addQuesToExistCriteriaTab($exitQuestionName2, $questionType2ex,$criteriaDetailsvt);
 _wait(3000);
 _setStrictVisibilityCheck(true);
 _click(_f("main").s_button("saveBtnExit"));
