@@ -18,6 +18,13 @@ var $createsfmName="Create New Event";
 var $removeprocess=true;
 _selectWindow("");
 
+var $groupProfileName=$group_profilename;
+//reverting back the setting
+$bo_act_configurationProfiles.editGroupProfileForTextSettings($groupProfileName, "ServiceMax iPad Client", "Calendar", "SET005", "",false);
+_selectDomain();
+$bo_act_configurationProfiles.editGroupProfileForTextSettings($groupProfileName, "ServiceMax iPad Client", "Calendar", "SET006", "",false);
+_selectDomain();
+_wait(5000);
 $bo_act_SFMAppPermission.set_mobileapp_permissions($profilename, $targetObjectName, $createsfmName,$removeprocess);
 
 

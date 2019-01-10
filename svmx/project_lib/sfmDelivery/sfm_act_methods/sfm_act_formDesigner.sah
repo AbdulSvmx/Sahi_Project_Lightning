@@ -292,10 +292,10 @@ var $sfm_act_formDesigner = new function sfm_act_formDesigner() {
 	this.createEntryCriteria=function($existingEntryCriteria,$criteriaDetails){
 		_click($sfm_pg_formDesigner.tab_entryCriteria);
 		this.setEntryCriteria($existingEntryCriteria, $criteriaDetails);
-		_click($sfm_pg_formDesigner.btn_applyRemove);
+		_click($sfm_pg_formDesigner.btn_appyRemoveEntry);
 		_click($sfm_pg_formDesigner.btn_applySectionWindow);
 		_wait(10000,_isVisible($sfm_pg_formDesigner.label_saveEditSectionMsg));
-		_click($sfm_pg_formDesigner.btn_entryCriteriaApplyButton);
+		//_click($sfm_pg_formDesigner.btn_entryCriteriaApplyButton);
 	};
 	
 	
@@ -443,11 +443,18 @@ var $sfm_act_formDesigner = new function sfm_act_formDesigner() {
 				var $answer=$criteriaDetails[2];
 				var $skipTo=$criteriaDetails[3];
 				this.setExitCriteriaOnDateQuestion($questionId, $comboField, $operandType, $answer, $skipTo);
+			}else {
+				$criteriaDetails=$criteriaDetailList[$i];
+				var $comboField=$criteriaDetails[0];
+				var $operandType=$criteriaDetails[1];
+				var $answer=$criteriaDetails[2];
+				var $skipTo=$criteriaDetails[3];
+				this.setExitCriteriaOnDateQuestion($questionId, $comboField, $operandType, $answer, $skipTo);
 			}
 			
 		}
 		_wait(3000);
-		_click($sfm_pg_formDesigner.btn_applyRemove);
+		_click($sfm_pg_formDesigner.btn_applyRemoveExit);
 		_wait(2000);
 	};
 	
