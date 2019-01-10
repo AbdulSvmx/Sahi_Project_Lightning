@@ -5,7 +5,7 @@ var $sfmName = "Auto_Reg_10563";
 var $sfmName1 = "Auto_OPDOC_10563";
 var $templateName = $bo_act_common.generateRandomName("Auto_Template_10563");
 var $templateName1 = $bo_act_common.generateRandomName("Auto_Template_10563");
-var $template = _readFile("/auto/sahi_pro/userdata/scripts/Sahi_Project_Lightning/scenario10563.txt");
+var $template = _readFile("/auto/sahi_pro_8.0/userdata/scripts/Sahi_Project_Lightning/scenario10563.txt");
 var $tgtObj =  "Work Detail (Work Order)";
 var $tgtObj1 =  "Checklist (Work Order)";
 var $sfmTemplate = "SVMXSTD: Work Order and Estimates";
@@ -15,6 +15,7 @@ var $searchName = "WO SEARCH";
 var $procType = "as Standalone for the purpose of creating a new record";
 var $procType1 = "to generate an Output Document for a header record with/without its child records";
 var $profile="auto group profile";
+var $searchID = "WO_SEARCH";
 
 //*****Login*****
 $bo_act_login.login($g_url, $appiumAdminUn, $appiumAdminPwd);
@@ -63,12 +64,14 @@ if($flag){
 		}
 		
 	}
+	_wait(8000);
+	_click($sfm_pg_search.btn_objectSave);
 }
 else{
 	_click($sfm_pg_search.btn_customNew);
 	_setValue($sfm_pg_search.txt_searchTitle,$searchName);
 	_setValue($sfm_pg_search.txt_searchID,$searchID);
-	this.addNewSearchConfig($searchObjects);
+	$sfm_act_search.addNewSearchConfig($searchObjects);
 }
 //$sfm_act_search.newCustomSearch($searchName, $searchObjects);
 //*****Add OPDOC for a header Record*****
