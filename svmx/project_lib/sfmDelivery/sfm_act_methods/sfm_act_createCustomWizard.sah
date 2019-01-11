@@ -1003,7 +1003,7 @@ var $sfm_act_createCustomWizard = new function sfm_act_createCustomWizard() {
 };
 
 	this.addWizStepWithoutName = function($wizStepType,$wizStepName,$profile){
-		
+		_selectDomain("/svmx/");
 		_click($sfm_pg_wizards.txt_manageWizSteps);
 		if(_isVisible(_span($wizStepName))){
 			_log("Process already added to wizard");
