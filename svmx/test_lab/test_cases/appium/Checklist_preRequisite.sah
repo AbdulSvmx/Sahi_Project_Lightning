@@ -26,7 +26,7 @@ $bo_act_SFMAppPermission.otherSettingsChecklist($downloadinprogress,$enablecheck
 //enabling checklist
 $bo_act_configurationProfiles.editGlobalProfileForBooleanSettings($module,$subModule,$setting,$value);
 
-/*
+
 
 --------------------------------------GLOBAL EDIT SEARCH---------------------------------------
 var $wizardObject ="Work Order";
@@ -56,6 +56,6 @@ $sfm_act_wizards.addToWizard($wizardObject, $wizardName, $wizardType[1], $sfmNam
 _wait(5000);
 _writeFile("true", $appiumPath+$sahiIntermediatoryPath, true);
 
-}*/
+}
 
 $Checklist_preRequisite.end();
