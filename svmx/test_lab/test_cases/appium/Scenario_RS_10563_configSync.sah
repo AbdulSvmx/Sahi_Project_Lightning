@@ -1,10 +1,9 @@
 _writeFile("false", $appiumPath+$sahiIntermediatoryPath, true);
-
 var $scenario_10563 = _testcase("scenario_10563","Verify changes in SFM processes, Opdoc processes, SFM searches after config sync");
 $scenario_10563.start();
 
-var $sfmName = "Auto_Reg_10563";
-var $sfmName1 = "Auto_OPDOC_10563";
+var $sfmName = "Auto_Reg_10563uuuuuu";
+var $sfmName1 = "Auto_OPDOC_10563uuuu";
 var $templateName = $bo_act_common.generateRandomName("Auto_Template_10563");
 var $templateName1 = $bo_act_common.generateRandomName("Auto_Template_10563");
 var $template = _readFile("/auto/sahi_pro_8.0/userdata/scripts/Sahi_Project_Lightning/scenario10563.txt");
@@ -13,11 +12,11 @@ var $tgtObj1 =  "Checklist (Work Order)";
 var $sfmTemplate = "SVMXSTD: Work Order and Estimates";
 var $sfmTemplateSaveAsName = $bo_act_common.generateRandomName("SFM_Temp_Name_");
 var $searchObjects = ["Work Order"];
-var $searchName = "WO SEARCH";
+var $searchName = "WO SEARCHuuuuu";
 var $procType = "as Standalone for the purpose of creating a new record";
 var $procType1 = "to generate an Output Document for a header record with/without its child records";
 var $profile="auto group profile";
-var $searchID = "WO_SEARCH";
+var $searchID = "WO_SEARCHuuuuuu";
 
 //*****Login*****
 $bo_act_login.login($g_url, $appiumAdminUn, $appiumAdminPwd);
@@ -96,4 +95,5 @@ _wait(6000);
 $bo_act_navigation.editWizard("AutoRegression");
 $sfm_act_createCustomWizard.addWizStepWithoutName("SFM", $sfmName, $profile);
 $sfm_act_createCustomWizard.addWizStepWithoutName("Output Document", $sfmName1, $profile);
+_writeFile("true", $appiumPath+$sahiIntermediatoryPath, true);
 $scenario_10563.end();

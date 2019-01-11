@@ -1,6 +1,6 @@
 _writeFile("false", $appiumPath+$sahiIntermediatoryPath, true);
+var $scenario_10563_edit = _testcase("scenario_10563_edit","Verify changes in SFM processes, Opdoc processes, SFM searches after config sync");
 
-var $scenario_10563_edit = _testcase("scenario_10563","Verify changes in SFM processes, Opdoc processes, SFM searches after config sync");
 $scenario_10563_edit.start();
 
 var $sfmName = "Auto_Reg_10563";
@@ -31,5 +31,5 @@ else{
 $bo_act_navigation.navigateToSfmSearchDesigner();
 $sfm_act_search.editSearchObjects($searchName);
 $sfm_act_search.addNewSearchConfig($searchObjects);
-
+_writeFile("true", $appiumPath+$sahiIntermediatoryPath, true);
 $scenario_10563_edit.end();
