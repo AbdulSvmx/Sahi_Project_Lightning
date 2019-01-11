@@ -1,6 +1,7 @@
+_writeFile("false", $appiumPath+$sahiIntermediatoryPath, true);
+
 var RS_10525 = _testcase("RS_10525","SCN_Calendar_6_RS-10525 Verify multi-day & all-day events on FSA client");
 RS_10525.start();
-_writeFile("false", $appiumPath+$sahiIntermediatoryPath, true);
 
 //servicemax event 
 var $restAccName="A10525_SCN1";

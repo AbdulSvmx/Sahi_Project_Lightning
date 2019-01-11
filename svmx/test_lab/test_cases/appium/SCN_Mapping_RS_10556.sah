@@ -1,7 +1,8 @@
+
+_writeFile("false", $appiumPath+$sahiIntermediatoryPath, true);
 var RS_10556_mapping = _testcase("RS_10556_mapping","SCN_Mapping_RS-10556 Verify value map for existing header record & new child record along with SVMX & Date literals");
 RS_10556_mapping.start();
 
-_writeFile("false", $appiumPath+$sahiIntermediatoryPath, true);
 
 
 var $processName = "RS_10556_SVMX_literals";

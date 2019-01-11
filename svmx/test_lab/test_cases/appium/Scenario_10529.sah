@@ -1,3 +1,5 @@
+_writeFile("false", $appiumPath+$sahiIntermediatoryPath, true);
+
 var $scenario_10529 = _testcase("scenario_10529","Verify lookup filter");
 $scenario_10529.start();
 /*****************************************

@@ -1,3 +1,5 @@
+
+_writeFile("false", $appiumPath+$sahiIntermediatoryPath, true);
 var $scenario_10559 = _testcase("scenario_10559","Verify custom action web service functionality on header & child");
 $scenario_10559.start();
 var $actionTitle = "10559_Action";

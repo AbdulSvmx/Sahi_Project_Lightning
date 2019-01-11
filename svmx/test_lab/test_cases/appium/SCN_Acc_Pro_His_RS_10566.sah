@@ -1,7 +1,7 @@
+_writeFile("false", $appiumPath+$sahiIntermediatoryPath, true);
+
 var RS_10566 = _testcase("RS_10566","SCN_Account/Product History_RS-10566 Verify Product and Account History records display");
 RS_10566.start();
-
-_writeFile("false", $appiumPath+$sahiIntermediatoryPath, true);
 
 
 var $sfmNameToBeCloned = "Manage Work Order Lines - Usage";

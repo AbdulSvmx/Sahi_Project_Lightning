@@ -1,7 +1,8 @@
+
+_writeFile("false", $appiumPath+$sahiIntermediatoryPath, true);
 var RS_10565 = _testcase("RS_10565","SCN_Recent Items_RS-10565 Verify Recent Items tab");
 RS_10565.start();
 
-_writeFile("false", $appiumPath+$sahiIntermediatoryPath, true);
 
 
 var $wizardObject="Work Order";

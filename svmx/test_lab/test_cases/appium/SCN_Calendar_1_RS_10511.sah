@@ -1,7 +1,8 @@
+_writeFile("false", $appiumPath+$sahiIntermediatoryPath, true);
+
 var RS_10511 = _testcase("RS_10511","SVerify if events & their related records are removed from FSA app when events are re-assigned to another user (or) deleted from server.");
 RS_10511.start();
 
-_writeFile("false", $appiumPath+$sahiIntermediatoryPath, true);
 
 var $picklistValue="Salesforce Event";
 
