@@ -1,6 +1,7 @@
+
+_writeFile("false", $appiumPath+$sahiIntermediatoryPath, true);
 var RS_10514 = _testcase("RS_10514","Verify creation/reschedule of SFDC events from server and FSA App");
 RS_10514.start();
-_writeFile("false", $appiumPath+$sahiIntermediatoryPath, true);
 var $profile = "Cloned_Default";
 var $module = "Common";
 var $subModule = "Global Settings";

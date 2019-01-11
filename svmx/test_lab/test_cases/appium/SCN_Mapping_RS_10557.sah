@@ -1,7 +1,8 @@
+
+_writeFile("false", $appiumPath+$sahiIntermediatoryPath, true);
 var RS_10557_mapping = _testcase("RS_10557_mapping","SCN_Child_Mapping_RS-10557 Verify SVMX literals in source to target process");
 RS_10557_mapping.start();
 
-_writeFile("false", $appiumPath+$sahiIntermediatoryPath, true);
 
 var $sfmNameToBeCloned = "Create Work Order from Installed Product";
 //var $sfmName = $bo_act_common.generateRandomName("RS_10557_");

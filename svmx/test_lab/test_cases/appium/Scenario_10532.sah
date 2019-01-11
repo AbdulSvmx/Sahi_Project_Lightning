@@ -1,3 +1,4 @@
+_writeFile("false", $appiumPath+$sahiIntermediatoryPath, true);
 
 var $pre_requisite= _testcase("scenario_10532","Rs-10532 Verify GetPrice Work order is not covered under Warranty or SCON.");
 _writeFile("false", $appiumPath+$sahiIntermediatoryPath, true);
