@@ -48,14 +48,14 @@ $bvt_tc_023_TOU_in_SFM.start();
 	_click($bo_pg_sfmTransactionAndDesigner.btn_saveAndclose);
 
 	var $wizardObject="Work Order";
-	var $wizardName1 =$wizardName[7];
+	var $wizardName_swat1 =$wizardName_swat[7];
 	//var $wizardType="SFM";
 	var $profile="";
 	var $handOver=false;
-	//$sfm_act_wizards.addToWizard($wizardObject, $wizardName1, $wizardType, "Manage Work Order Lines - Usage", $handOver, $profile);
+	//$sfm_act_wizards.addToWizard($wizardObject, $wizardName_swat1, $wizardType, "Manage Work Order Lines - Usage", $handOver, $profile);
 
 	var $wizardType="Output Document";
-	$sfm_act_wizards.addToWizard($wizardObject, $wizardName1, $wizardType, $processName, $handOver, $profile); 
+	$sfm_act_wizards.addToWizard($wizardObject, $wizardName_swat1, $wizardType, $processName, $handOver, $profile); 
 
 
 	swat_searchWOandLaunchSFM($WONumber,$processName);
