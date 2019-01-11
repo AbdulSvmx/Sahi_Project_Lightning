@@ -4,13 +4,31 @@ var $Checklist_preRequisite = _testcase("Checklist_pre","Checklist PreRequisites
 $Checklist_preRequisite.start();
 
 //Setting Permissions
-var $profile = "Cloned_Default";
-var $module = "SFM Transaction Manager";
+var $profilename = "Cloned_Default";
+//var $module = "SFM Transaction Manager";
 var $ProcessStatus = false;
+var $module = "Common";
+var $subModule = "Global Settings";
+var $setting = "GBL029";
+var $value=true;
+
+$downloadinprogress =true;
+$enablechecklist=true;
+$downloadcompletedchecklist=true;
+$locationtracking = false;
+
+_setSpeed($g_stepSpeed);
+
+//set downloadinprogress,enablechecklist and downloadcompleted checklist to true
 $bo_act_login.login($g_url, $appiumAdminUn, $appiumAdminPwd);
+$bo_act_SFMAppPermission.otherSettingsChecklist($downloadinprogress,$enablechecklist,$downloadcompletedchecklist,$locationtracking);
 
+//enabling checklist
+$bo_act_configurationProfiles.editGlobalProfileForBooleanSettings($module,$subModule,$setting,$value);
 
-/*--------------------------------------GLOBAL EDIT SEARCH---------------------------------------*/
+/*
+
+--------------------------------------GLOBAL EDIT SEARCH---------------------------------------
 var $wizardObject ="Work Order";
 var $wizardName = "AutoRegression"
 var $wizardType = ["None","SFM","Inventory","Others","Output Document"];
@@ -38,5 +56,6 @@ $sfm_act_wizards.addToWizard($wizardObject, $wizardName, $wizardType[1], $sfmNam
 _wait(5000);
 _writeFile("true", $appiumPath+$sahiIntermediatoryPath, true);
 
-}
+}*/
+
 $Checklist_preRequisite.end();

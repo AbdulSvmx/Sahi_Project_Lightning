@@ -6,7 +6,7 @@ $scenario_10580.start();
 
 var $ProcessStatus=false;
 var $wizardObject ="Work Order";
-var $sfmName = "Auto_10580_ChecklistSections";
+var $sfmName = "Automation_10580_ChecklistSections";
 var $questionNames1=["Number Should not be greater than 100","Section One Question One","Section One Question Two","Section One Question Three"];
 var $questionNames2 = ["Section Two Warning","Section Two Question One","Section Two Question Two","Section Two Question Three"];
 var $questionNames3=  ["Section Three Error","Section Three Warning","Section Three Question One","Section Three Question Two","Section Three Question Three"];
