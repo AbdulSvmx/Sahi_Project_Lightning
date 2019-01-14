@@ -9,7 +9,7 @@ var $sfm_act_SFM = new function sfm_act_SFM() {
 		$bo_act_navigation.navigateToSfmTransactionDesigner();
 //		_setSpeed($g_stepSpeed);
 		_wait(10000);
-		$sfm_act_SFM.selectSFM($sfmNameToBeCloned, $isCustom);
+		$sfm_act_SFM.selectSFM($sfmNameToBeCloned,$isCustom);
 
 		_click($bo_pg_sfmTransactionAndDesigner.btn_clone);
 		_wait(50000, _isVisible($bo_pg_sfmTransactionAndDesigner.txt_name));
@@ -246,7 +246,7 @@ var $sfm_act_SFM = new function sfm_act_SFM() {
 		
 
 	
-	this.selectSFM = function($sfmName, $isCustom) {
+	this.selectSFM = function($sfmName,$isCustom) {
 		if ($isCustom) {
 			_setStrictVisibilityCheck(true);
 			_wait(15000,_isVisible($bo_pg_sfmTransactionAndDesigner.btn_yourCustomSfmTransactions));
