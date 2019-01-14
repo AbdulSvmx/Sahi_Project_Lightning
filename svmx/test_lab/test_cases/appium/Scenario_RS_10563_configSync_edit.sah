@@ -20,8 +20,12 @@ if($var){
 	_log("Process available continue editing...");
 	_click(_f("main").s_label($sfmName));
 	_click($sfm_pg_screenDesigner.tab_screenDesigner);
+	_wait(8000);
+	_setSelected($bo_pg_sfmTransactionAndDesigner.sel_sfmTemplate,"SFM_Proc_10563");
+	_wait(10000);
 	$sfm_act_Transactions.addHeader($headersToAdd);
 	_click(_f("main").s_button("Save[3]"));
+	_wait(10000);
 	_click($bo_pg_sfmTransactionAndDesigner.btn_saveAndclose);
 }
 else{
