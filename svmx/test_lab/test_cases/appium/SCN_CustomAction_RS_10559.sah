@@ -21,18 +21,14 @@ _click(_mark("Apex Classes"));
 _selectDomain("/salesforce.com/");
 _selectWindow();
 _click(_span("T"));
-_wait(5000);
-//_log(_isVisible(_link("TestCustomActionChild")));
-//_set($i,_isVisible(_link("TestCustomActionChild")));
-//_log($i);
+_wait(8000);
 if(_isVisible(_link("TestCustomActionChild"))){
 	_log("TestCustomActionChild is already visible");
 }
 else{
 	$sfm_act_sfSetup.addApexClass($fileName, $prof);
+	_click(_link("Back to List: Installed Package"));
 }
-//_set($j,_isVisible(_link("TestCustomActionHeader")));
-//_log($j);
 if(_isVisible(_link("TestCustomActionHeader"))){
 	_log("TestCustomActionHeader is already visible");
 }
