@@ -34,4 +34,5 @@ _setSelected($sfm_pg_wizards.selectObject,"Work Order");
 _wait(6000);
 $bo_act_navigation.editWizard("AutoRegression");
 $sfm_act_createCustomWizard.addWizStepWithoutName("Others", $wizTitle, $profile);
+_writeFile("true", $appiumPath+$sahiIntermediatoryPath, true);
 $scenario_10558.end();
