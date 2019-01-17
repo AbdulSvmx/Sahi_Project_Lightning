@@ -43,6 +43,7 @@ if($ProcessStatus==false){
 	_wait(3000);
 	_setValue($bo_pg_sfmTransactionAndDesigner.txt_name, $sfmName1);
 	_setValue($bo_pg_sfmTransactionAndDesigner.txt_sfmTransactionId, "");
+	_setValue($bo_pg_sfmTransactionAndDesigner.txt_sfmdescription,$sfmName1);	
 	_setSelected($sfm_pg_screenDesigner.sel_createSFMTransaction, "to generate a Checklist/Survey type of Process");
 	_setStrictVisibilityCheck(true);
 	_setValue($sfm_pg_screenDesigner.txt_srcObject,"");
@@ -65,6 +66,7 @@ if($ProcessStatus==false){
 	_wait(3000);
 	_setValue($bo_pg_sfmTransactionAndDesigner.txt_name, $sfmName2);
 	_setValue($bo_pg_sfmTransactionAndDesigner.txt_sfmTransactionId, "");
+	_setValue($bo_pg_sfmTransactionAndDesigner.txt_sfmdescription,$sfmName2);	
 	_setSelected($sfm_pg_screenDesigner.sel_createSFMTransaction, "to generate a Checklist/Survey type of Process");
 	_setStrictVisibilityCheck(true);
 	_setValue($sfm_pg_screenDesigner.txt_srcObject,"");
@@ -87,6 +89,7 @@ if($ProcessStatus==false){
 	_wait(3000);
 	_setValue($bo_pg_sfmTransactionAndDesigner.txt_name, $sfmName3);
 	_setValue($bo_pg_sfmTransactionAndDesigner.txt_sfmTransactionId, "");
+	_setValue($bo_pg_sfmTransactionAndDesigner.txt_sfmdescription,$sfmName3);	
 	_setSelected($sfm_pg_screenDesigner.sel_createSFMTransaction, "to generate a Checklist/Survey type of Process");
 	_setStrictVisibilityCheck(true);
 	_setValue($sfm_pg_screenDesigner.txt_srcObject,"");

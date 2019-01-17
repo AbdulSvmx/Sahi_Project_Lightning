@@ -34,5 +34,5 @@ _wait(5000);
 _click(_f("main").s_button("Save[3]"));
 _wait(3000);
 _click(_f("main").s_button("Quick Save"));
-$scenario_10530_edit.end();
 _writeFile("true", $appiumPath+$sahiIntermediatoryPath, true);
+$scenario_10530_edit.end();
