@@ -1,0 +1,923 @@
+<html xmlns:util="in.co.sahi.util.XSLUtils">
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<script type="text/javascript">
+		var useDBURL = '';
+		var timer = 1;
+		var g_visibleNetWorkActivityDivs = [];
+		var g_networkActivityIFrames = [];
+		var desktopAutomationEnabled = false;
+        var mobileAutomationEnabled = false;
+        var browserAutomationEnabled = false;
+        
+        function checkForEnabledAddons(){
+	        desktopAutomationEnabled = ("true" == sahiSendToServer('/_s_/dyn/Configuration_isDesktopAutomationEnabled'));
+        //	mobileAutomationEnabled = ("true" == sahiSendToServer('/_s_/dyn/Configuration_isMobileAutomationEnabled'));
+	        browserAutomationEnabled = ("true" ==sahiSendToServer('/_s_/dyn/Configuration_isBrowserAutomationEnabled'));
+        }
+		
+		
+		var openedElement = new Array();
+		var cookieHashMap = {};
+		
+		function enableDisableAutoRefresh(autoRefresh){
+			var isAutoRefreshEnable = autoRefresh.checked;
+			if(isAutoRefreshEnable){
+				createCookie("auto_refresh","true",1);
+				refreshPage();
+				autoRefresh.title = "Disable Auto Refresh";
+			} else{
+				createCookie("auto_refresh","false",1);
+				autoRefresh.title = "Enable Auto Refresh";
+				if(timer) clearTimeout(timer);
+			}
+		}
+		
+		function refreshPage(){
+			if(useDBURL == "false") return;
+			var isAutoRefreshCookieEnable = (readCookie("auto_refresh") == "true");
+			if(isAutoRefreshCookieEnable) timer = setTimeout(function(){ window.location.reload(); }, 2000);
+		}
+		refreshPage();
+		
+		function hideImage(i){i.style.display='none';}
+        function attachFn(d){ d.getElementsByTagName('DIV')[0].onclick = function () {showHideDiv(d);}	} 
+        function getInnerDiv(d){var els = d.getElementsByTagName('DIV'); for (var i=0; i<els.length;i++) {if (els[i].className == 'GROUP_INNER') return els[i];}}
+        function showHideDiv(groupDiv){
+        	var stepsDiv = getInnerDiv(groupDiv);
+        	var els = document.getElementsByTagName('DIV');
+        	for(var i = 0; i < els.length; i++){
+        		if (els[i] == stepsDiv){
+        			if(stepsDiv.style.display == 'block'){
+        				removeFromCookieArray(i);
+        				stepsDiv.style.display = 'none';
+        				changeIconToPlus(groupDiv);
+        				break;
+        			}else{
+        				stepsDiv.style.display = 'block';
+        				addToCookieArray(i);
+        				changeIconToMinus(groupDiv);
+        				break;
+        			}
+        		}	
+        	}
+        }; 
+        
+        function changeIconToMinus(groupDiv){
+        	if(groupDiv.className.indexOf("GROUP_LABEL") == 0){
+        		if(groupDiv.innerHTML.indexOf("[+]" == 0)){
+        			groupDiv.innerHTML = groupDiv.innerHTML.replace("[+]", "[-]");
+        		}
+        	}
+        	else{
+        		var div = getGroupLabelDiv(groupDiv);
+        		if(div){
+        			div.innerHTML = div.innerHTML.replace("[+]", "[-]");
+        		}
+        	}
+        }
+        
+        function changeIconToPlus(groupDiv){
+        	if(groupDiv.className.indexOf("GROUP_LABEL") == 0){
+        		if(groupDiv.innerHTML.indexOf("[-]" == 0)){
+        			groupDiv.innerHTML = groupDiv.innerHTML.replace("[-]", "[+]");
+        		}
+        	}
+        	else{
+        		var div = getGroupLabelDiv(groupDiv);
+        		if(div){
+        			div.innerHTML = div.innerHTML.replace("[-]", "[+]");
+        		}
+        	}
+        }
+        
+        function getGroupLabelDiv(groupDiv){
+        	var div = groupDiv.getElementsByTagName("DIV");
+        	for(var i=0;i<div.length;i++){
+        		if(div[i].className.indexOf("GROUP_LABEL") == 0){
+        			return div[i];
+        		}
+        	}
+        }
+        
+        function showHideNetworkActivity(el, scriptId, stepId){
+        	var plus = "Show Network Activity";
+        	var minus = "Hide Network Activity";
+        	if(el.innerHTML == plus){
+        		showNetworkActivity(el, scriptId, stepId, minus, true);
+        	} else {
+        		hideNetworkActivity(el, stepId, plus);
+        	}
+        }
+        
+        function addNetworkActivityIFrame(scriptId, stepId) {
+        	if(document.getElementById('harInfo' + stepId).innerHTML == ""){
+        		var html = "<iframe onload=\"setAutoHeight('harIFrame" + stepId +"')\" id=\"harIFrame" + stepId +"\" src=\"/_s_/dyn/pro/HARViewer_viewHARLogs?scriptReportId=" + scriptId + "&stepId=" + stepId + "\" style=\"width:100%;\"  frameborder=\"0\" />";
+        		document.getElementById('harInfo' + stepId).innerHTML = html;
+        		g_networkActivityIFrames.push(document.getElementById("harIFrame" + stepId));
+        	}
+        }
+        
+        function addAllNetworkActivityIFrame(withNetworkActivity, addToCookie) {
+        	for (var i=0; i<g_visibleNetWorkActivityDivs.length; i++) {
+        		var div = g_visibleNetWorkActivityDivs[i];
+        		var stepId = div.id.substring("networkActivityLink".length);
+        		addNetworkActivityIFrame(scriptReportId, stepId)
+        	}
+        	if(addToCookie) createOrDeleteCookie("includeNetworkActivity", withNetworkActivity)
+        	
+        	var showFailed = document.getElementById("showAllOrFail").checked;
+        	if (showFailed) window.setTimeout("showHideFailure(true);", 50);
+        }
+        
+        function showNetworkActivity(el, scriptId, stepId, minus, addToCookie) {
+        	addNetworkActivityIFrame(scriptId, stepId);
+        	el.innerHTML = minus;
+        	el.title = minus;
+        	document.getElementById('harInfo' + stepId).style.display = "block";
+        	if(addToCookie){
+	        	var divs = document.getElementsByTagName('DIV');
+	        	for(var i = 0; i < divs.length; i++){
+	        		var div = divs[i];
+	        		if (div == el){
+	        			addToCookieArray(i);
+	        		}
+	        	}
+        	}
+        }
+        
+        function hideNetworkActivity(el, stepId, plus) {
+        	el.innerHTML = plus;
+        	el.title = plus;
+        	document.getElementById('harInfo' + stepId).style.display = "none";
+        	var divs = document.getElementsByTagName('DIV');
+        	for(var i = 0; i < divs.length; i++){
+        		var div = divs[i];
+        		if (div == el){
+        			removeFromCookieArray(i);
+        		}
+        	}
+        }
+        
+        function showAllNetworkActivity() {
+        	for(var i=0; i<g_visibleNetWorkActivityDivs.length; i++){
+        		var div = g_visibleNetWorkActivityDivs[i];
+        		showNetworkActivityForAssociatedDiv(div, true)
+        	}
+        }
+        
+        function showNetworkActivityForAssociatedDiv(div, addtoCookie){
+        	var minus = "Hide Network Activity";
+       		var divId = div.id;
+       		var stepId = divId.substring("networkActivityLink".length);
+       		showNetworkActivity(div, scriptReportId, stepId, minus, addtoCookie);
+        }
+        
+        function hideAllNetworkActivity() {
+        	var plus = "Show Network Activity";
+        	for(var i=0; i<g_visibleNetWorkActivityDivs.length; i++){
+        		var div = g_visibleNetWorkActivityDivs[i];
+        		var divId = div.id;
+        		var stepId = divId.substring("networkActivityLink".length);
+        		hideNetworkActivity(div, stepId, plus);
+        	}
+        }
+        
+        function expandAll(isExcel){
+	        if(isExcel == "true"){
+	        	ignoregroup_showHideAll(true);
+	        }
+	        var allDiv = document.getElementsByTagName('DIV');
+        	for(var i=0; i<allDiv.length; i++){
+        		if(allDiv[i].className.indexOf("GROUP_INNER") != -1){
+       				allDiv[i].style.display = "block";
+        			addToCookieArray(i);
+        			var iconDiv = allDiv[i].parentNode.children[0];
+					if(iconDiv.className.indexOf("GROUP_LABEL") == 0){
+						iconDiv.innerHTML = iconDiv.innerHTML.replace("[+]", "[-]");
+					}
+        		}
+        	}
+        	if(isWithNetworkActivity()) showAllNetworkActivity();
+        }
+        
+        function isWithNetworkActivity() {
+        	return (useDBURL == "true" && document.getElementById("withNetworkActivity").checked);
+        }
+        
+        function isGroupInnerContainsFailure(innerGroup){
+        	var divs = innerGroup.getElementsByTagName("div");
+        	for(var i=0; i<divs.length; i++){
+        		var div = divs[i];
+        		var inHTML = div.innerHTML.toLowerCase();
+        		if(div.className.toLowerCase() == "failure" || div.className.toLowerCase() == "error" ) return true;
+        		if (isWithNetworkActivity() && isNetworkActivityFailed(div)) return true;
+        	}
+        	return false;
+        }
+        
+        function collapseAll(isExcel){
+        	if(isExcel == "true"){
+	        	ignoregroup_showHideAll(false);
+	        }
+	        var allDiv = document.getElementsByTagName('DIV');
+        	for(var i=0; i<allDiv.length; i++){
+        		if(allDiv[i].className.indexOf("GROUP_INNER") != -1){
+        			allDiv[i].style.display = "none";
+        			removeFromCookieArray(i);
+        			var iconDiv = allDiv[i].parentNode.children[0];
+					if(iconDiv.className.indexOf("GROUP_LABEL") == 0){
+						iconDiv.innerHTML = iconDiv.innerHTML.replace("[-]", "[+]");
+					}
+        		}
+        	}
+        	if(isWithNetworkActivity()) hideAllNetworkActivity();
+        }
+        
+        function applyCookieToShowHideLogs(){
+        	var showFailedOnlyCookieValue = readCookie("showFailedOnlySteps");
+			var includeNetworkActivityCookieValue = readCookie("includeNetworkActivity");
+			if(includeNetworkActivityCookieValue){
+				var includeNetworkActivityCookieArray = eval("("+includeNetworkActivityCookieValue+")");
+				for(var i = 0; i < includeNetworkActivityCookieArray.length; i++){
+					var scriptReportIDFromCookie = includeNetworkActivityCookieArray[i];
+					if(scriptReportIDFromCookie == scriptReportID){
+						document.getElementById("withNetworkActivity").checked = true;
+						addAllNetworkActivityIFrame(true);
+					}
+        		}
+			}
+			if(showFailedOnlyCookieValue){
+				var showFailedOnlyCookieArray = eval("("+showFailedOnlyCookieValue+")");
+				for(var i = 0; i < showFailedOnlyCookieArray.length; i++){
+					var scriptReportIDFromCookie = showFailedOnlyCookieArray[i];
+					if(scriptReportIDFromCookie == scriptReportID){
+						//if(i == 0){
+							var showAllOrFail = document.getElementById("showAllOrFail");
+							showAllOrFail.checked = true;
+							showAllOrFail.title = "Show all";
+						//}
+						window.setTimeout("showHideFailure(true);", 500);
+					}
+        		}
+			}
+        }
+        
+        function setNetworkActivityLinks(){
+			var xmlhttp;
+			if (window.XMLHttpRequest){ // code for IE7+, Firefox, Chrome, Opera, Safari
+				xmlhttp=new XMLHttpRequest();
+			} else {// code for IE6, IE5
+				xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+  			}
+  			xmlhttp.onreadystatechange = function() {
+				if (this.readyState==4 && this.status==200) {
+			    	var steps = xmlhttp.responseText;
+			    	steps = steps.substring(1,steps.lastIndexOf("]"));
+			    	steps = steps.split(", ");
+			    	for(i = 0; i < steps.length; i++){
+			    		try{
+			    			var div = document.getElementById('networkActivityLink' + steps[i]);
+			    			div.style.display = 'block';
+			    			g_visibleNetWorkActivityDivs.push(div);
+			    		}catch(err){
+			    		}
+			    	}
+			    	if (g_visibleNetWorkActivityDivs.length == 0) {
+						document.getElementById("withNetworkActivity").style.display = "none";
+					}
+					applyCookieToShowHideLogs();
+			    }
+			}
+  			xmlhttp.open("GET","/_s_/dyn/pro/HARViewer_getStepsWithNetworkActivity?scriptReportId=" + scriptReportID ,true);
+			xmlhttp.send();
+		}
+        function setAutoHeight(id){
+        	return;
+			var newheight;
+			if(document.getElementById(id)){
+				newheight=document.getElementById(id).contentWindow.document.body.scrollHeight;
+			}
+			document.getElementById(id).style.height= (newheight) + "px";
+		}
+		
+		
+        
+		function markStatus(d) {d.getElementsByTagName('DIV')[0].className += (d.innerHTML.indexOf('<!--SAHI_TESTCASE_FAIL_MARKER-->') == -1) ? ' SUCCESS' : ' FAILURE'};
+		function addToCookieArray(element){
+			openedElement.push(element)
+		}
+		function removeFromCookieArray(element){
+			removeByValue(openedElement,element)
+		}
+		function removeByValue(arr, val) {
+			for ( var i = 0; i < arr.length; i++) {
+				if (arr[i] == val) {
+					arr.splice(i, 1);
+					break;
+				}
+			}
+		}
+		function getUrlQueryString(name){
+		   if(name=(new RegExp('[?&]'+encodeURIComponent(name)+'=([^&]*)')).exec(location.search))
+		      return decodeURIComponent(name[1]);
+		}
+		function highlightUrl(url){
+			expandAll(false);
+			var scriptReportId = getUrlQueryString("id");
+			var stepId = getUrlQueryString("stepId");
+			var networkActivityLinkId = "networkActivityLink"+stepId;
+			showHideNetworkActivity(document.getElementById(networkActivityLinkId),scriptReportId,stepId);
+			
+			var iframe =document.getElementById("harInfo"+stepId).getElementsByTagName("iframe")[0];
+			iframe.onload = function() {
+ 				  var doc = iframe.contentDocument || iframe.contentWindow.document;
+			  var row = doc.getElementById(encodeURIComponent("netAct_"+url));	
+			  row.className = 'HIGHLIGHT';								
+			 	
+ 				};					
+			location.href = "#toScrollTo_" + stepId;
+		}
+		
+		function highlightStep(stepId){
+			var scriptReportId = getUrlQueryString("id");
+			var stepId = getUrlQueryString("stepId");
+			var el = document.getElementById("toScrollTo_" + stepId);
+			if (el) el.className = 'HIGHLIGHT';	
+			location.href = "#toScrollTo_" + stepId;
+		}
+		
+		function changeUIBasedOnAvailableModes(){
+			if(browserAutomationEnabled){
+		       var options = document.querySelectorAll(".forWeb");
+		          for (var i = 0; i < options.length; i++) {
+			        options[i].style.display = "";
+			      }
+            }
+		}
+		
+		function onLoad(){
+			if(useDBURL == "true"){
+		        var autoRefreshCheckbox = document.getElementById('auto_refresh'); 
+		        var cookieValueForAutoReferesh = readCookie("auto_refresh");
+		        if(cookieValueForAutoReferesh == "true"){
+		        	autoRefreshCheckbox.checked = true;
+		        	autoRefreshCheckbox.title = "Disable Auto Refresh";
+		        } else{
+		        	autoRefreshCheckbox.checked = false;
+		        	autoRefreshCheckbox.title = "Enable Auto Refresh";
+		        }
+		    checkForEnabledAddons();
+	        }
+	        var divs = document.getElementsByTagName('DIV');
+	        for (var i=0; i<divs.length; i++){
+	        	var d = divs[i]; 
+	        	if (d.className == 'GROUP') { attachFn(d); markStatus(d);} 
+	        }
+	        fixImagePaths();
+	        showStackTraceMessages();
+			var cookieValue = readCookie("OpenedElement");
+			if(cookieValue){
+				cookieHashMap = eval("("+cookieValue+")");
+				openedElement=cookieHashMap[scriptReportID];
+				if (!openedElement) openedElement = [];
+				delete cookieHashMap[scriptReportID];
+				var els = document.getElementsByTagName('DIV');
+				for(var i = 0; i < openedElement.length; i++){
+					var div = els[openedElement[i]];
+					if(div.className == "networkActivity"){
+						showNetworkActivityForAssociatedDiv(div);
+					} else{
+						div.style.display = 'block';
+						var iconDiv = div.parentNode.children[0];
+						if(iconDiv.className.indexOf("GROUP_LABEL") == 0){
+							iconDiv.innerHTML = iconDiv.innerHTML.replace("[+]", "[-]");
+						}
+					}
+        		}
+			}
+			try {
+				if (useDBURL == "true") setNetworkActivityLinks();
+			} catch (e) {}
+			
+			var url = getUrlQueryString("url");
+			if(url){
+				highlightUrl(url);
+			}  else {
+				var stepId = getUrlQueryString("stepId"); 
+				if(stepId!=undefined) highlightStep(stepId);
+			}
+			if (useDBURL == "true") showLogoutIfUserLoggedIn();
+			if(auto_refresh) 
+			setTimeout(function(){ window.scrollTo(0,document.body.scrollHeight); }, 1);
+			
+			changeUIBasedOnAvailableModes();
+			
+		}
+		
+		function onUnload(){
+	
+			var count = 0;
+			var firstElement;
+			for(firstElement in cookieHashMap){
+				break;
+			}
+			for(var j in cookieHashMap){
+				count++;
+			}
+			if(count == 10){
+				delete cookieHashMap[firstElement];
+			}
+			cookieHashMap[scriptReportID] = openedElement;
+			var cookieValue = getJSON(cookieHashMap);
+			createCookie("OpenedElement", cookieValue, 1);
+		}
+		function getJSON(o) {
+			var s = "{";
+			for (var i in o) {
+				s += "'" + i + "':[" + o[i] + "],"
+			}
+			s += "}";
+			return s;
+		}
+		function createCookie(name,value,days)
+		{
+			if (days) {
+				var date = new Date();
+				date.setTime(date.getTime()+(days*24*60*60*1000));
+				var expires = "; expires="+date.toGMTString();
+			}
+			else var expires = "";
+			document.cookie = name+"="+value+expires+"; path=/";
+		}
+		
+		function readCookie(name)
+		{
+			var nameEQ = name + "=";
+			var ca = document.cookie.split(';');
+			for(var i=0;i < ca.length;i++)
+			{
+				var c = ca[i];
+				c = c.replace(/[,][}]$/,'}');
+				while (c.charAt(0)==' ') c = c.substring(1,c.length);
+				if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length,c.length);
+			}
+			return null;
+		}
+		function fixImagePaths(){
+			if (location.href.indexOf("_s_") != -1) return;
+			var imgs = document.getElementsByTagName('IMG'); 
+	        for (var i=0; i<imgs.length; i++){
+	        	var img = imgs[i]; 	        	
+ 				if (img.src.indexOf("Log_viewLogs/images") != -1) {
+ 					img.src = makeRelative(img.src);
+ 					if (img.parentNode.tagName.toLowerCase() == "a") {
+ 						img.parentNode.href = makeRelative(img.parentNode.href);
+ 					}
+ 				}
+	        }
+		}
+		function makeRelative(s){
+			var ix = s.indexOf("/images/"); 
+			if (ix != -1) {
+				s = s.substring(ix+1);
+			}
+			return s;
+		}
+		function showStackTraceMessages() { 
+			var els = document.getElementsByClassName("FAILURE_ST");
+			for (var i=0; i<els.length; i++) {
+				if (els[i].tagName == "DIV") {
+					try {
+						els[i].innerHTML = showStackTraceMessage(els[i].innerHTML);
+					} catch (e){}
+				}
+			}
+		}
+		function trim(s) {
+			return s.replace(/^\s*/, '').replace(/\s*$/, '')
+		} 
+		function showStackTraceMessage(message) {
+			var hasStackTrace = false;
+			message = message.replace("_STACKTRACE_", "\n");
+			var noparse = false;
+			if (message.indexOf("_NOPARSE_") != -1) {
+				noparse = true;
+				message = message.replace("_NOPARSE_", "");
+			}
+			var paths = message.split("\n");
+			var length = paths.length;
+			var s = "";
+			for (var i=0;i<length;i++) {
+				var path = trim(paths[i]);
+				if (path == "") continue;
+				var re = /^\s*at /;
+				if (path.match(re)) {
+					hasStackTrace = true;
+					var path = paths[i].replace(re, "").replace('/\s*$/', '').replace(/\\\\/g, "\\");
+					var fnName = "";
+					if (path.indexOf(" ") != -1) fnName = path.substring(path.indexOf(" "), path.length);
+					if (fnName != "") path = path.substring(0, path.length - fnName.length);
+					var link = "";
+					if( path != ""){
+						var onClick = "/_s_/dyn/Log_highlight?href=" + path + (noparse ? "" : "&parsed=true") + "#selected";
+						link = "at: <a style='text-decoration:underline' href=" + onClick + "> (" + path.replace(/&n=/g, ' ') + ")</a> <b>" + fnName + "</b>";
+					}else{
+						link = "at: (<b>" + fnName + "</b>)";
+					}
+					s += link;
+				} else {
+					s += path;
+				}
+				if (i != length-1) {
+					s += "</br>";
+				}
+			}
+			if (hasStackTrace) {
+				s = "<div style='background-color:#222;color:white'>" + s + "</div>";
+			}
+			return s;
+		}
+		function addImages(screenShots){
+			var images = screenShots.split(",");
+			var msg =  "<table class='imgcompare'><tr><td>Expected</td><td>Actual</td><td>Difference</td></tr><tr>" +
+						"<td class='imgcell'><img width='300px' src='/_s_/dyn/Log_viewLogs/images/" + images[0] + "' style='cursor:pointer' onclick='window.open(this.src)'></td>" + 
+						"<td class='imgcell'><img width='300px' src='/_s_/dyn/Log_viewLogs/images/"+images[1]+"' style='cursor:pointer' onclick='window.open(this.src)'></td>" +
+						"<td class='imgcell'><img width='300px' src='/_s_/dyn/Log_viewLogs/images/"+images[2]+"' style='cursor:pointer' onclick='window.open(this.src)'></td>" +
+						"</tr></table>";
+			document.write(msg);
+		}
+		
+		function addArtifacts(artifacts, scriptReportId, label, useDBURL){
+			if(artifacts == '' || artifacts == 'null'){
+				var msg = '<div style="padding-left:0px;" class="CUSTOM1">';
+				msg += "No file matched!";
+			}
+			else{
+				var artifactAr = artifacts.split(",");
+				var msg =  '<div>';
+				for(var i=0; i<artifactAr.length; i++){
+					var artifact = artifactAr[i];
+					var artifactName = getArtifactName(artifact, scriptReportId);
+					if (useDBURL) {
+						msg += '<a class="artifact-link" href="/_s_/dyn/Log_viewLogs/images/' + artifact +  '" style="margin:0px 10px 0px 0px;padding:0px" target="_blank">' + artifactName + '</a>';
+					} else {
+						msg += '<a class="artifact-link" href="images/' + artifact +  '" style="margin:0px 10px 0px 0px;padding:0px" target="_blank">' + artifactName + '</a>';
+					}
+				}
+				addArtifactRowInScriptSummaryTable(msg, label);
+				createArtifactsList(artifacts);
+			}
+			msg += '</div>';
+			document.write(msg.replace('<div>', '<div style="padding-left:0px;">'));
+		}
+		
+		function getArtifactName(artifact, scriptReportId){
+			var artifactName = artifact.replace(scriptReportId, "");
+			artifactName = artifactName.replace(/^_\d+_/,"");
+			return artifactName;	
+		}
+		
+		var artifactsList = "";
+		function createArtifactsList(artifacts) {
+			if (artifactsList == "") artifactsList += artifacts;
+			else artifactsList += ","+artifacts;
+		}
+		function modifyArtifactName(artifact, scriptReportId, suffixEnabled) {
+			var name = getArtifactName(artifact, scriptReportId);
+			if (!suffixEnabled) return name;
+			var id = artifact.replace(name, "").replace(/_$/, "");
+			var nameWithoutExtension = name.substring(0, name.lastIndexOf("."));
+			var modifiedName = name.replace(nameWithoutExtension, nameWithoutExtension+"_"+id);
+			return modifiedName;
+		}
+		function createDownloadLink(artifacts, scriptReportId, suffixEnabled){
+			var artifactAr = artifacts.split(",");
+			var downloadArtifactsLink = document.getElementById('downloadArtifacts');
+			var href = downloadArtifactsLink.href;
+			var artifactsName = "&artifactsName=";
+			for(var i=0; i<artifactAr.length; i++){
+				var artifact = artifactAr[i];
+				if(artifact == "") continue;
+				
+				if(i != 0) {
+					href += ",";
+					artifactsName += ",";
+				}
+				artifactsName += modifyArtifactName(artifact, scriptReportId, suffixEnabled);
+				href += artifact;
+			}
+			href += artifactsName;
+			downloadArtifactsLink.href = href;
+		}
+		
+		function addArtifactRowInScriptSummaryTable(msg, label){
+			var outputLowerRowStyle = document.getElementById("scriptSummaryOutputLowerRow").style;
+			if(outputLowerRowStyle.display == "none"){
+				outputLowerRowStyle.display = "table-row";
+			}
+			var scriptSummaryTable = document.getElementById("scriptSummaryTable").getElementsByTagName("tbody")[0];
+			var row = document.createElement("tr");
+			row.innerHTML = "<td colspan='9' style='text-align:left'>Artifact: " + label + msg + "</td>";
+			scriptSummaryTable.appendChild(row);
+		}
+		
+		function appendOutputRowInScriptSummaryTable(label){
+			var scriptSummaryOutput = document.getElementById("scriptSummaryOutput");
+			var outputRowStyle = scriptSummaryOutput.parentNode.style;
+			if(outputRowStyle.display == "none"){
+				outputRowStyle.display = "table-row";
+			}
+			var outputUpperRowStyle = document.getElementById("scriptSummaryOutputUpperRow").style;
+			if(outputUpperRowStyle.display == "none"){
+				outputUpperRowStyle.display = "table-row";
+			}
+			else label = " " + label; 
+			scriptSummaryOutput.innerHTML += label; 
+		}
+        
+        </script>
+<style>
+					div{padding:3px;}
+					a{text-decoration:none;color:white;}
+					a.INFO{color:black;}
+					a.START,a.STOP{color:black;font-weight:bold;}
+					div.INFO{background-color:white;}
+					div.IMAGE{background-color:white;}
+					div.SUCCESS{background-color:green;color:white;word-break: break-all;}
+					div.FAILURE,div.ERROR{background-color:red;color:white;word-break: break-all;}
+					a.IMAGE, a.CUSTOM, a.CUSTOM2, a.CUSTOM4{color:black}
+					div.CUSTOM{background-color:yellow;}
+					div.CUSTOM1{background-color:orange;}
+					div.CUSTOM2{background-color:#EFEFEF;}
+					div.CUSTOM3{background-color:green;}
+					div.CUSTOM4{background-color:violet;}
+					div.CUSTOM5{background-color:indigo;}
+					div.networkActivity{float:right;width:200px;color:#ccc;cursor:pointer;display:none;padding:0px;}
+					a.SCRIPT{text-decoration:underline;}
+					span.extra{color:#CCC;margin-left:20px;}
+					div.SKIPPED{background-color:#eed;}
+					a.SKIPPED{color:gray;}
+					tr.step_SUCCESS{background-color:lightgreen;color:black;}
+					tr.step_FAILURE{background-color:red;color:white;}
+					div.GROUP {padding:0px;}
+					div.GROUP_LABEL {font-weight: bold;cursor:pointer; padding:5px;border-top:5px solid white}
+					div.GROUP_INNER{padding:10px;display:none;border:1px solid gray;}
+				
+					table.summary {border-top:1px solid gray;border-spacing:0px;border-collapse:collapse;}
+					table.summary td{border-bottom:1px solid gray;border-left:1px solid
+					gray;padding:5px;text-align:right;border-right:1px solid
+					gray;}
+					td a.SCRIPT{float:left;}
+					tr.FAILURE{background-color:red;color:white;}
+					tr.SUCCESS{background-color:green;color:white;}
+					a{color:white;}
+					
+					body *{font-family:verdana;font-size:10pt;}
+					body {margin:10px; background-color:lightyellow;}
+					
+					tr.step_SUCCESS{background-color:lightgreen;color:black;}
+					tr.step_FAILURE{background-color:red;color:white;}
+					
+					#navbar a{color: blue;}
+					#navbar {padding:2px;border:1px solid white;border-bottom:1px solid gray;padding:1px}
+					
+					.HIGHLIGHT{background-color:brown;}
+					.HIGHLIGHT a{color:white;}
+					#stepsDiv {margin:0px; padding:0px;}
+					#stepsDiv A IMG {box-shadow: 10px 10px 5px #888888;padding:10px;border: 1px solid #ccc;}
+					table.imgcompare {border:1px solid #ccc;margin-top:15px;background-color:#efefef}
+					.imgcompare td{vertical-align:top;xcolor:white;padding:10px 20px;}
+					td.imgcell {vertical-align:top;padding-bottom:30px;}
+					td.imgcell img{mxargin:20px;border: 1px solid #ccc;box-shadow: 10px 10px 5px #888888}
+					a.OUTPUT{color:black;}
+					a.ARTIFACT{color:black;}
+					.artifact-link{
+						color: blue;
+						text-decoration: underline;
+					}
+					.artifact-link:visited{
+						color: brown;
+						text-decoration: underline;
+					}
+					.placeHolderParent .output{
+						padding-left:3px;
+					}
+					.hide-div{
+						display:none !important;
+					}
+				</style>
+<title>setDownloadCriteriaWoToAllRecords.sah</title>
+</head>
+<body onunload="onUnload()" onload="onLoad()">
+<script type="text/javascript">
+			var scriptReportID = 'setDownloadCriteriaWoToAllRecords_chrome__a2e4e62f0bd72044500a9dd0d1871b549644'; 
+			var currentTimestamp = null;
+			
+			var scriptstatus = 'FAILURE';
+			if(scriptstatus != "null"  || readCookie("auto_refresh") != "true") {
+				clearTimeout(timer);
+			}
+			else var auto_refresh = true;
+		</script><span>
+<h2>
+				Script Name: setDownloadCriteriaWoToAllRecords.sah</h2>
+</span>
+<table id="scriptSummaryTable" class="summary" style="background-color:white;margin-top:20px;width:800px;">
+<tr>
+<td>Test</td><td>Total Steps</td><td>Failures</td><td>Errors</td><td>Success Rate</td><td>Time Taken</td><td>Node</td><td>Load</td><td class="forWeb" style="display:none">Browser</td>
+</tr>
+<tr class="FAILURE">
+<td>setDownloadCriteriaWoToAllRecords.sah</td><td>1</td><td>0</td><td>1</td><td>0
+							%
+						</td><td>00:00:32 864</td><td>localhost:9999</td><td>-1</td><td class="forWeb" style="display:none">chrome</td>
+</tr>
+<tr>
+<td colspan="9" style="text-align:left">Report Id: setDownloadCriteriaWoToAllRecords_chrome__82d2b223018f404b000af380157a5f976e7b | </td>
+</tr>
+<tr id="scriptSummaryOutputUpperRow" style="display:none;background-color:lightyellow;border:0px;">
+<td colspan="9" style="border-right:none;border-left:none;"></td>
+</tr>
+<tr style="display:none">
+<td colspan="9" style="text-align:left" id="scriptSummaryOutput">Output: </td>
+</tr>
+<tr id="scriptSummaryOutputLowerRow" style="display:none;background-color:lightyellow;border:0px;">
+<td colspan="9" style="border-right:none;border-left:none;"></td>
+</tr>
+</table>
+<table id="testCaseSummaryTable" class="summary" style="display:none;background-color:white;margin-top:20px;width:350px;">
+<tr>
+<td>Total Test Cases</td><td>Passed</td><td>Failed</td><td>Success Rate</td>
+</tr>
+<tr class="SUCCESS">
+<td>0</td><td>0</td><td>0</td><td>
+							0%
+						</td>
+</tr>
+</table>
+<table class="summary" style="background-color:white;margin-top:20px;width:700px;"></table>
+<div id="stepsDiv">
+<br>
+<div style="padding:10px;background-color:white;border:1px solid #ddd;">
+<div class="START">
+<a class="START">Starting script</a><a style="padding:10px; font-size:11px; color:black; text-decoration:underline;" href="javascript:void(0)" onclick="javascript:expandAll('false'); return false;">Expand All</a><a style="color:black; font-size:11px; text-decoration:underline;" href="javascript:void(0)" onclick="javascript:collapseAll('false'); return false;">Collapse All</a>
+			|
+			<label for="showAllOrFail" id="label_showAllOrFail">Show Failed</label><input type="checkbox" title="Show failed" id="showAllOrFail" style="margin-left:10px;vertical-align:middle;" href="javascript:void(0)" onchange="Javascript:expandAll('false'); showHideFailure(this.checked, true); return false;">
+</div>
+<script>
+			
+			function showHideFailure(showFailOnly, createCookie){
+				var showAllOrFail = document.getElementById("showAllOrFail");
+				var labelShowAllOrFail = document.getElementById("label_showAllOrFail");
+				if(showFailOnly) {
+					showAllOrFail.title = "Show all";
+					labelShowAllOrFail.innerHTML = "Show all"
+				} else{
+					showAllOrFail.title = "Show failed";
+					labelShowAllOrFail.innerHTML = "Show failed"
+				}
+				showFailOnlyDivs(showFailOnly);
+				showFailOnlyNetworkActivity(showFailOnly);
+				if(createCookie) createOrDeleteCookieforShowFailedOnlySteps(showFailOnly);
+			}
+			
+			function showFailOnlyNetworkActivity(showFailOnly) {
+				for (var i=0; i<g_networkActivityIFrames.length; i++) {
+					var iframe = g_networkActivityIFrames[i];
+					if (showFailOnly) {
+						iframe.contentWindow.showFailed();
+					} else {
+						iframe.contentWindow.showAll();
+					}
+				}
+			}
+			
+			function createOrDeleteCookieforShowFailedOnlySteps(showFailOnly){
+				createOrDeleteCookie("showFailedOnlySteps", showFailOnly);
+			}
+			
+			function createOrDeleteCookie(cookieName, b){
+				var showFailedOnlyCookieValue = readCookie(cookieName);
+				if(showFailedOnlyCookieValue){
+					var showFailedOnlyCookieArray = eval("("+showFailedOnlyCookieValue+")");
+					if(b){
+						for(var i=0; i<showFailedOnlyCookieArray.length; i++){
+							if(scriptReportId == showFailedOnlyCookieArray[i]) break;
+							else if(i == showFailedOnlyCookieArray.length - 1) showFailedOnlyCookieArray.push(scriptReportId);
+						}
+						if(showFailedOnlyCookieArray.length == 0) showFailedOnlyCookieArray.push(scriptReportId);
+					} else{
+						removeByValue(showFailedOnlyCookieArray, scriptReportId);
+					}
+				} else if(b){
+					var showFailedOnlyCookieArray = [scriptReportId];
+				}
+				createCookie(cookieName, getJSONFromArray(showFailedOnlyCookieArray), 1);
+			}
+			
+			function getJSONFromArray(ar){
+				var json = "[";
+				for(var i=0; i<ar.length; i++){
+					json += "'" + ar[i] + "'";
+					if(i != ar.length-1) json += ",";
+				}
+				json += "]";
+				return json;
+			}
+			
+			function showFailOnlyDivs(showFailOnly){
+				var allDivs = document.getElementsByTagName("div");
+				for(var i=0; i<allDivs.length; i++){
+					removeCSSClass(allDivs[i], "hide-div");
+				}
+				if(showFailOnly){
+					var divs = getAllNonFailureDivs();
+					for(var i=0; i<divs.length; i++){
+						addCSSClass(divs[i], "hide-div");
+					}
+				}
+			}
+			
+			function addCSSClass(el, cls){
+				if(!el.className || el.className == "") el.className += cls;
+				else el.className += " " + cls;
+			}
+			
+			function hasClass(el, cls) {
+			    return el.className.match(new RegExp('(\\s|^)' + cls + '(\\s|$)'));
+			}
+			function removeCSSClass(el, cls) {
+			    if (hasClass(el, cls)) {
+			        var reg = new RegExp('(\\s|^)' + cls + '(\\s|$)');
+			        el.className = trim(el.className.replace(reg, ' '));
+			    }
+			}
+			
+			function getAllNonFailureDivs(){
+				var allDivs = document.getElementsByTagName("div");
+				var divs = [];
+				
+				for(var i=0; i<allDivs.length; i++){
+					var div = allDivs[i];
+					var inHTML=div.innerHTML.toLowerCase();
+					var cls = div.className.toLowerCase();
+					
+					if (cls.indexOf("group_label") != -1 && (inHTML.indexOf("onscripterrordefault") != -1 || inHTML.indexOf("onscriptfailuredefault") != -1) ) {
+							var errorDivs = allDivs[i-1].getElementsByTagName("div");
+							i += errorDivs.length-1;
+
+					} else {
+						if(cls.indexOf("group_inner") != -1){
+							if(!isGroupInnerContainsFailure(div)) divs.push(div);
+						}else if(cls.indexOf("info") != -1 || cls.indexOf("success") != -1 || cls.indexOf("custom") != -1 || cls.indexOf("artifact") != -1 || cls.indexOf("output") != -1 || cls.indexOf("image") != -1) {
+							if (isWithNetworkActivity()) {
+								if(cls.indexOf("group_label") != -1 && !isNetworkActivityFailed(allDivs[i+1])) {
+									divs.push(div);
+								}else if (!isNetworkActivityFailed(div) && cls.indexOf("group_label") == -1) {
+									divs.push(div);
+								}
+							} else {
+								divs.push(div);
+							}
+						}
+					}
+				}
+				return divs;
+			}
+			
+			function isNetworkActivityFailed(div) {
+				var iframes = div.getElementsByTagName("iframe");
+				if (iframes.length > 0) {
+					var isFailed = iframes[0].contentWindow.isNetworkActivityFailed();
+					if(isFailed) return isFailed;
+				}
+				return false;
+			}
+			
+			
+		</script><script>
+			scriptReportId = "setDownloadCriteriaWoToAllRecords_chrome__a2e4e62f0bd72044500a9dd0d1871b549644";
+		</script><script>var prevTimestamp = '1547958929571';</script>
+<div id="toScrollTo_1" class="ERROR">
+<div id="networkActivityLink1" class="networkActivity" onclick="showHideNetworkActivity(this, 'setDownloadCriteriaWoToAllRecords_chrome__a2e4e62f0bd72044500a9dd0d1871b549644', '1')" title="Show Network Activity">Show Network Activity</div>
+<span title="scripts/Sahi_Project_Lightning/svmx/test_lab/test_cases/appium/setDownloadCriteriaWoToAllRecords.sah&amp;n=6">_writeFile("false", $appiumPath + $sahiIntermediatoryPath, true)</span><script>var currentTimestamp = '1547958962432';</script><span class="extra">
+								[<script>document.write(currentTimestamp - prevTimestamp);
+								prevTimestamp = currentTimestamp;</script> ms]  
+								[10:06:02.432 AM]
+						</span>
+<div class="FAILURE_ST">"$appiumPath" is not defined.</div>
+<div id="harInfo1" style="display:none"></div>
+</div>
+<script>
+			var suffixEnabled = true;
+			//if(useDBURL == 'true') createDownloadLink(artifactsList, scriptReportId, suffixEnabled);
+		</script>
+<div class="STOP">
+<a class="STOP">Stopping script</a>
+</div>
+</div>
+<style>div.GROUP_LABEL {display:block;}</style>
+</div>
+</body>
+</html>
