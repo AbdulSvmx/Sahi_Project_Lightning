@@ -21,7 +21,7 @@ _click(_mark("Apex Classes"));
 _selectDomain("/salesforce.com/");
 _selectWindow();
 _click(_span("T"));
-_wait(8000);
+_wait(12000);
 if(_isVisible(_link("TestCustomActionChild"))){
 	_log("TestCustomActionChild is already visible");
 }
