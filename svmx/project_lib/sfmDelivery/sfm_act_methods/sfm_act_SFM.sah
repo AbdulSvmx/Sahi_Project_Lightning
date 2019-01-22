@@ -257,6 +257,7 @@ var $sfm_act_SFM = new function sfm_act_SFM() {
 					$sfmName);
 
 		} else {
+			_setStrictVisibilityCheck(true);
 			_wait(15000,_isVisible($bo_pg_sfmTransactionAndDesigner.txt_standardSfmTransactionQuickFind));
 			_setValue($bo_pg_sfmTransactionAndDesigner.txt_standardSfmTransactionQuickFind,$sfmName);
 		}
