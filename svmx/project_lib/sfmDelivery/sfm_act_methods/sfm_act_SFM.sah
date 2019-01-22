@@ -7,7 +7,7 @@ var $sfm_act_SFM = new function sfm_act_SFM() {
 	this.cloneTDM016 = function($sfmNameToBeCloned, $sfmName, $isCustom,
 			 $sfmTemplateSaveAsName,$sfmTemplate, $fieldName, $containerName) {
 		$bo_act_navigation.navigateToSfmTransactionDesigner();
-//		_setSpeed($g_stepSpeed);
+		_setSpeed($g_stepSpeed);
 		_wait(10000);
 		$sfm_act_SFM.selectSFM($sfmNameToBeCloned,$isCustom);
 
@@ -196,10 +196,15 @@ var $sfm_act_SFM = new function sfm_act_SFM() {
 	 */
 	this.addFieldToScreen = function($fieldName, $containerName) {
 		for (var $i = 0; $i < $fieldName.length; $i++) {
-			if ($containerName[$i] == 'Order Status' || $containerName[$i] == 'Account' ) {
+			if ($containerName[$i] == 'Order Status' ) {
+				_click(_f("main").fieldrenderer("[object Object]").near(_f("main").formitemlabel($containerName[$i])));
 				//$bo_pg_sfmTransactionAndDesigner.addField($fieldName[$i],$containerName[$i]);
+				//_click(_f("main").fieldrenderer("[object Object]").near(_f("main").s_richtext($containerName[$i])));
+			} else if($containerName[$i] == 'Account' )
+				{
 				_click(_f("main").fieldrenderer("[object Object]").near(_f("main").s_richtext($containerName[$i])));
-			} else if($containerName[$i] == 'Parts' || $containerName[$i] == 'Labor' || $containerName[$i] == 'Expenses' || $containerName[$i] == 'Travel'  ){
+			}
+else if($containerName[$i] == 'Parts' || $containerName[$i] == 'Labor' || $containerName[$i] == 'Expenses' || $containerName[$i] == 'Travel'  ){
 				if(_isVisible(_f("main").s_hscrollbar("horizontalScrollBar").near(_f("main").s_richtext($containerName[$i])))){
 					_setValue(_f("main").s_hscrollbar("horizontalScrollBar").near(_f("main").s_richtext($containerName[$i])),"00");
 				    }
@@ -256,9 +261,9 @@ var $sfm_act_SFM = new function sfm_act_SFM() {
 					$sfmName);
 
 		} else {
+			_setStrictVisibilityCheck(true);
 			_wait(15000,_isVisible($bo_pg_sfmTransactionAndDesigner.txt_standardSfmTransactionQuickFind));
-			_setValue($bo_pg_sfmTransactionAndDesigner.txt_standardSfmTransactionQuickFind,
-					$sfmName);
+			_setValue($bo_pg_sfmTransactionAndDesigner.txt_standardSfmTransactionQuickFind,$sfmName);
 		}
 		_setStrictVisibilityCheck(false);
 //		_setStrictVisibilityCheck(true);
