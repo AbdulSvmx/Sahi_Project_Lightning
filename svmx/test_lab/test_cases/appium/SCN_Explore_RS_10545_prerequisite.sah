@@ -27,7 +27,6 @@ var $rs_10545 = _testcase("SCN_Explore_RS-10545 Verify the pagination view & DOD
 	var $filterValue3 = ["True","India"];
 	var $filterExp3 = "1 AND 2";
 	
-	
 	var $searchObject4 = "Work Order";
 	var $filterFields4 = ["Site"];
 	var $filterOperators4 = ["Equals"];
@@ -100,8 +99,6 @@ var $rs_10545 = _testcase("SCN_Explore_RS-10545 Verify the pagination view & DOD
 	$sfm_act_lightningConfig.switchToLightning(); 
 	$bo_act_navigation.navigateToSfmSearchDesigner();
 	
-	//Check for the process if exists
-	//$bProcessStatus=$sfm_act_SFM.sfmProcessCheck($sfmName);
 	
 	$bSearchStatus=$sfm_act_search.checkSearchandAdd($searchName);
 	
