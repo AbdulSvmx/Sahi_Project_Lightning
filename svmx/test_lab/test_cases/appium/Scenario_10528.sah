@@ -14,6 +14,7 @@ var $sfmTemplateSaveAsName = $bo_act_common.generateRandomName("SFM_Temp_Name_")
 var $headersToAdd = ["Account","City","Contact","Country","Order Type","Product","Site","Top-Level","Zip","Component"];
 var $lkpName = $bo_act_common.generateRandomName("lkp_name");
 var $fields = ["Contact","Top-Level"];
+// Account, Installed Product ID, Contact, Product, Location & Top-level
 var $mappingFields = ["Account","City","Component", "Contact", "Country","Order Type", "Product", "Site", "Top-Level", "Zip"];
 var $mappingValues = ["Account","City","Record ID", "Contact", "Country", "Service Contract Exchange Type", "Product", "Location", "Top-Level", "Zip"];
 var $wizTitle = "Auto_Regression_Wiz";
