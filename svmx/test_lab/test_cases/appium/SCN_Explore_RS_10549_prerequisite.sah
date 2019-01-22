@@ -52,7 +52,6 @@ var $rs_10549 = _testcase("SCN_Explore_RS-10549 Verify if the SFM search is disp
 	$bo_act_login.login($g_url, $appiumAdminUn, $appiumAdminPwd);
 	$sfm_act_lightningConfig.switchToLightning(); 
 	$bo_act_navigation.navigateToSfmSearchDesigner();
-	
 	$bSearchStatus=$sfm_act_search.checkSearchandAdd($searchName);
 	
 	if($bSearchStatus==false)
@@ -60,7 +59,6 @@ var $rs_10549 = _testcase("SCN_Explore_RS-10549 Verify if the SFM search is disp
 		//Search object configuration for Work Order
 		_click($sfm_pg_search.btn_new);
 		_wait(8000);
-		//_setSelected(_select(0,_near(_tableHeader("Search Object"))),$searchObject1);
 		_setSelected(_select(0,_near(_cell("1",_near(_tableHeader("Search Object"))))),$searchObject1);
 		_wait(8000);
 		
@@ -124,15 +122,70 @@ var $rs_10549 = _testcase("SCN_Explore_RS-10549 Verify if the SFM search is disp
 		
 		
 	}	
+	
+	
+	
+	
+//Creation of View Process _________________________________________
+	
+	$sfmName = "RS_10549_AccountViewProcess";
+	$sfmType="to view a header record with/without its child records";
+	$srcHeaderTxt = "";
+	$srcHeaderObj="Account";
+	$srcChildObj="";
+	$trgHeaderObj="";
+	$trgChildObj="";
+	
+	
+	//Check for the process if exists
+	$bProcessStatus=$sfm_act_SFM.sfmProcessCheck($sfmName);
+	if($bProcessStatus==false){
+		
+	$bo_act_navigation.navigateToSfmTransactionDesigner();
+	_wait(15000,_isVisible($bo_pg_sfmTransactionAndDesigner.btn_newSFM));
+		
+	//Create New SFM Transaction
+	_click($bo_pg_sfmTransactionAndDesigner.btn_newSFM);
+	_wait(25000,_isVisible($sfm_pg_screenDesigner.btn_propoties));
+	$sfm_act_Transactions.sfmPropertiesPage($sfmName, "", $sfmName, $sfmType,$srcHeaderObj, $srcChildObj, $trgHeaderObj, $trgChildObj);
+		
+	var $sfmPgLayoutName = "RS_10549_AccViewProcess";
+	var $containerName = ["Account","Account"];
+	var $fieldName =  ["Account Name","Billing City"];
+	
+	//Add screen designer page
+	_click($bo_pg_sfmTransactionAndDesigner.btn_screenDesigner);
+	_setSelected($bo_pg_sfmTransactionAndDesigner.sel_sfmTemplate, "--None--");
+	_wait(10000);
+	_setValue($bo_pg_sfmTransactionAndDesigner.txt_sfmSavePageLayoutAs, $sfmPgLayoutName);
+	_setValue($bo_pg_sfmTransactionAndDesigner.txt_sfmSavePageLayoutAsId, $sfmPgLayoutName);
+	_click($bo_pg_sfmTransactionAndDesigner.btn_quickSave);
+	
+	//Add fields to screen designer
+	_selectWindow();
+	$sfm_act_SFM.addFieldToScreen($fieldName, $containerName);
+	
+	//Create New SFM Transaction
+	_wait(15000);
+	_selectDomain($g_domain);
+	_click($sfm_pg_sfmDesigner.btn_quickSaveSFM);
+	_click($sfm_pg_sfmDesigner.btn_saveSFM); 
+	_selectDomain();
+	
+	//Set permissions for Account
+	var $profilename = $group_profilename;
+	var $srcHeaderObj = "Account";
+	
+	$bo_act_SFMAppPermission.set_mobileapp_permissions_generic($profilename, $srcHeaderObj, $sfmName, "View");
+}
+	
 		
 	$sfm_act_wizards.addToWizard($wizardObject1,$wizardName1, $wizardType1,$sfmName1,$handOver1,$profile1,$wizardCriteria1,$stepID1);
 	_wait(8000);
 	
-	
 	//add the process to wizard 
 	$sfm_act_wizards.addToWizard($wizardObject2,$wizardName2, $wizardType2,$sfmName2,$handOver2,$profile2,$wizardCriteria2,$stepID2);
 	_wait(8000);
-	
 	
 	// Removing Work Order from Download Criteria
 	$bo_act_SFMAppPermission.setDownloadCriteriaOwnShipType("All Records",$bo_pg_sfmAppPermissionD.chkbox_workorder);

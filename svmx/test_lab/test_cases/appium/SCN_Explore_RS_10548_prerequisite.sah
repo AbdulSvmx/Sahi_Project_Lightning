@@ -10,10 +10,10 @@ var $rs_10548 = _testcase("SCN_Explore_4_RS-10548 Verify fields displayed & fiel
 	var $searchName = "RS_10548 Multi Field WO Search";
 	
 	var $searchObject1 = "Work Order";
-	var $displayObjects1 = ["Work Order", "Work Order", "Work Order - Account"];
-	var $displayFields1 = ["Work Order Number","Billing Type","Billing City"];
+	var $displayObjects1 = ["Work Order",  "Work Order - Account","Work Order"];
+	var $displayFields1 = ["Work Order Number","Billing City","Priority"];
 
-	var $searchObjects1 = ["Work Order", "Work Order","Work Order"];
+	var $searchObjects1 = ["Work Order", "Work Order - Site","Work Order"];
 	var $searchFields1 = ["Work Order Number","Country","Account"];
 	
 	var $sortObjects1 = ["Work Order"];
@@ -52,6 +52,11 @@ var $rs_10548 = _testcase("SCN_Explore_4_RS-10548 Verify fields displayed & fiel
 		// Removing Work Order from Download Criteria
 		$bo_act_SFMAppPermission.setDownloadCriteriaOwnShipType("All Records",$bo_pg_sfmAppPermissionD.chkbox_workorder);
 		_wait(8000);
+		
+		$bo_act_SFMAppPermission.setDownloadCriteriaOwnShipType("All Records",$bo_pg_sfmAppPermissionD.chkbox_location);
+		_wait(8000);	
+		$bo_act_SFMAppPermission.setDownloadCriteriaOwnShipType("All Records",$bo_pg_sfmAppPermissionD.chkbox_account);
+		_wait(8000);	
 		
 	
 $rs_10548.end();

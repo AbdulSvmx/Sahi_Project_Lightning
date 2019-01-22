@@ -1,3 +1,5 @@
+_writeFile("false", $appiumPath+$sahiIntermediatoryPath, true);
+
 var $scenario_10528 = _testcase("scenario_10528","Verify form fill");
 $scenario_10528.start();
 /*****************************************
@@ -5,7 +7,7 @@ $scenario_10528.start();
  *****************************************/
 var $mappingsName = "Auto_Map_10528";
 var $sfmNameToBeCloned = "Manage Work Order Lines - Usage";
-var $sfmName = "AutoReg10528_ss";
+var $sfmName = "AutoReg10528";
 var $isCustom = false;
 var $sfmTemplate = "SVMXSTD: Manage WO Usage Lines";
 var $sfmTemplateSaveAsName = $bo_act_common.generateRandomName("SFM_Temp_Name_");
@@ -76,4 +78,5 @@ _setSelected($sfm_pg_wizards.selectObject,"Work Order");
 _wait(3000);
 $bo_act_navigation.editWizard("AutoRegression");
 $sfm_act_createCustomWizard.addWizStepWithoutName("SFM", $sfmName, $profile);
+_writeFile("true", $appiumPath+$sahiIntermediatoryPath, true);
 $scenario_10528.end();

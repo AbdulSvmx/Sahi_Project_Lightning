@@ -88,7 +88,7 @@ _wait(5000);
 _click($sfm_pg_sfmDesigner.btn_saveSFM); 
 
 //add the process to wizard
-$sfm_act_wizards.addToWizard($wizardObject, $wizardName[3], $wizardType[1], $sfmName);  
+$sfm_act_wizards.addToWizard($wizardObject, $wizardName_swat[3], $wizardType[1], $sfmName);  
 _wait(3000);  
 
 //Navigate to the WO for validation

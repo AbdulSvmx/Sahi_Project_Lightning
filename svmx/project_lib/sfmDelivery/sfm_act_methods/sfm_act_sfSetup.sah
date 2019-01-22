@@ -191,4 +191,18 @@ var $sfm_act_sfSetup = new function sfm_act_sfSetup() {
 		_setValue(_textbox("PluralLabel"),$pluralLabel);
 		_click(_submit("/Save/"));
 	};
+	this.addApexClass = function($fileName,$profile){
+		
+		_click(_submit("New"));
+		var $value = _readFile($fileName);
+		_setValue(_textarea("textarea"),$value);
+		_click(_button("Save"));
+		_wait(5000);
+		_click(_submit("Security"));
+		_setSelected(_select("duel_select_0"), [$profile]);
+		_click(_image("Add"));
+		_wait(3000);
+		_click(_button("Save"));
+		
+	};
 };
