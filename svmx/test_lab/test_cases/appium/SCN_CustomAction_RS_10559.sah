@@ -8,8 +8,8 @@ var $wizTitle = $bo_act_common.generateRandomName("Auto_Action_Wiz");
 var $wizTitle1 = $bo_act_common.generateRandomName("Auto_Action_Wiz");
 var $profile="auto group profile";
 var $prof="Automation Service User";
-var $fileName = "/auto/sahi_pro/userdata/scripts/Sahi_Project_Lightning/TestCustomActionChild.txt";
-var $fileName1 = "/auto/sahi_pro/userdata/scripts/Sahi_Project_Lightning/TestCustomActionHeader.txt";
+var $fileName = "/auto/sahi_pro/userdata/scripts/Sahi_Project_Lightning/svmx/test_lab/test_cases/appium/appium_txtData/TestCustomActionChild.txt";
+var $fileName1 = "//auto/sahi_pro/userdata/scripts/Sahi_Project_Lightning/svmx/test_lab/test_cases/appium/appium_txtData/TestCustomActionHeader.txt";
 $bo_act_login.login($g_url, $appiumAdminUn, $appiumAdminPwd);
 
 _wait(5000);
@@ -21,7 +21,7 @@ _click(_mark("Apex Classes"));
 _selectDomain("/salesforce.com/");
 _selectWindow();
 _click(_span("T"));
-_wait(8000);
+_wait(12000);
 if(_isVisible(_link("TestCustomActionChild"))){
 	_log("TestCustomActionChild is already visible");
 }
