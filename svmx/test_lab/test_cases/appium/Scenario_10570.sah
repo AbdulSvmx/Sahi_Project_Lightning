@@ -151,7 +151,7 @@ _click($bo_pg_formDesigner.btn_quickSave);
    ******************************Create Wizard*****************************
    ************************************************************************ */
 
-////Create Wizard for Work Order.
+//Create Wizard for Work Order.
 $bo_act_navigation.navigateToSfmWizard();
 _selectDomain("/svmx/");
 _setSelected($sfm_pg_wizards.selectObject,"Work Order");
