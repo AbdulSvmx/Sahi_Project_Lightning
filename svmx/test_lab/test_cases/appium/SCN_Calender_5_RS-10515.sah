@@ -1,7 +1,8 @@
+
+_writeFile("false", $appiumPath+$sahiIntermediatoryPath, true);
 var RS_10515 = _testcase("RS_10515","SCN_Calender_5_RS-10515_Verify UI on calendar for FSA Client");
 RS_10515.start();
 
-_writeFile("false", $appiumPath+$sahiIntermediatoryPath, true);
 
 var $picklistValue="ServiceMax Event";
 var $profile = "Cloned_Default";

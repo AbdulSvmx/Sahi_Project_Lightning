@@ -32,7 +32,7 @@ _setSpeed($g_stepSpeed);
 	_click($bo_pg_sfmTransactionAndDesigner.btn_saveAndclose);
 	
 	//add the process to wizard
-	$sfm_act_wizards.addToWizard($wizardObject, $wizardName[0], $wizardType[1], $sfmName);  
+	$sfm_act_wizards.addToWizard($wizardObject, $wizardName_swat[0], $wizardType[1], $sfmName);  
 	_wait(3000); 
 
 	//Navigate to the WO for validation

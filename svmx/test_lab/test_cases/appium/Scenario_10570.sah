@@ -1,3 +1,5 @@
+_writeFile("false", $appiumPath+$sahiIntermediatoryPath, true);
+
 var $scenario_10570 = _testcase("scenario_10570","Verify Create New - standalone create process with mapping in both offline & online mode");
 $scenario_10570.start();
 $sfmName = "SFM_10570";
@@ -149,7 +151,7 @@ _click($bo_pg_formDesigner.btn_quickSave);
    ******************************Create Wizard*****************************
    ************************************************************************ */
 
-////Create Wizard for Work Order.
+//Create Wizard for Work Order.
 $bo_act_navigation.navigateToSfmWizard();
 _selectDomain("/svmx/");
 _setSelected($sfm_pg_wizards.selectObject,"Work Order");

@@ -19,7 +19,7 @@ $bo_act_login.login($g_url, $swat_un,$swat_pwd);
 
 $sfm_act_navigation.navigateToSfmCustomActions();
 $sfm_act_customActions.urlCustomAction($customActionObject,$actionType, $actionId, $urlToLaunch, $paramName, $paramValueType, $paramValue);
-$sfm_act_wizards.addToWizard($customActionObject, $wizardName[1], $wizardType[3], $actionId);
+$sfm_act_wizards.addToWizard($customActionObject, $wizardName_swat[1], $wizardType[3], $actionId);
 
 //Navigate to the WO for validation
 $bo_act_navigation.navigateToCreatedRecordUsingGlobalSearch($woNumber);

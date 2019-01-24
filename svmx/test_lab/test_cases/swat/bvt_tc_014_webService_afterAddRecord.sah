@@ -30,7 +30,7 @@ $sfm_act_SFM.partsMultiAdd("--None--");
 _click($sfm_pg_sfmDesigner.btn_saveSFM); 
 
 //add the process to wizard
-$sfm_act_wizards.addToWizard($wizardObject, $wizardName[1], $wizardType[1], $sfmName);  
+$sfm_act_wizards.addToWizard($wizardObject, $wizardName_swat[1], $wizardType[1], $sfmName);  
 
 //Navigate to the WO for validation
 $bo_act_navigation.navigateToCreatedRecordUsingGlobalSearch($woNumber);

@@ -33,7 +33,12 @@ var $bo_pg_sfmAppPermissionD= new function bo_pg_sfmAppPermissionD(){
 	this.chkbox_selectprofile = _checkbox("Select Profile");
 	this.btn_edit = _button("Edit");
 	this.btn_downloadcriteriatab = _cell("Download Criteria");
+	this.btn_othersettings = _cell("Other Settings");
 	this.btn_synchronizationsettings = _cell("Synchronization Settings");
+	this.chk_downloadinprogress = _span("Download In Progress Checklists");
+	this.chk_enablechecklists = _span("Enable Checklists");
+	this.chk_enablelocationtracking = _span("Enable Location Tracking");	
+	this.chk_downloadcompletedchecklist = _span("Download Completed Checklists");
 	this.txt_synchronizeonceevery = _textbox("Synchronize configuration once every (except iPhone app)");
 	this.txt_ScheduledDataSync = _textbox("Synchronize application data once every (includes events, tasks, and related data)");
 

@@ -1,3 +1,5 @@
+_writeFile("false", $appiumPath+$sahiIntermediatoryPath, true);
+
 var $scenario_10527 = _testcase("scenario_10527","Verify Lookup Context");
 $scenario_10527.start();
 /*****************************************
@@ -65,4 +67,5 @@ _setSelected($sfm_pg_wizards.selectObject,"Work Order");
 _wait(10000);
 $bo_act_navigation.editWizard("AutoRegression");
 $sfm_act_createCustomWizard.addWizStepWithoutName("SFM", $sfmName, $profile);
+_writeFile("true", $appiumPath+$sahiIntermediatoryPath, true);
 $scenario_10527.end();

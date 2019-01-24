@@ -6,7 +6,7 @@ $scenario_10580.start();
 
 var $ProcessStatus=false;
 var $wizardObject ="Work Order";
-var $sfmName = "Auto_10580_ChecklistSections";
+var $sfmName = "Automation_10580_ChecklistSections";
 var $questionNames1=["Number Should not be greater than 100","Section One Question One","Section One Question Two","Section One Question Three"];
 var $questionNames2 = ["Section Two Warning","Section Two Question One","Section Two Question Two","Section Two Question Three"];
 var $questionNames3=  ["Section Three Error","Section Three Warning","Section Three Question One","Section Three Question Two","Section Three Question Three"];
@@ -46,7 +46,7 @@ var $criteriaDetailList=[$criteriaDetails1,$criteriaDetailsq2];
 
 
 var $exitQuestionName2 = ["Section Two Question One"];
-var $questionType2=["Text"];
+var $questionType2ex=["Text"];
 var $comboField2=["Contains"];
 var $operandType2=["Value"];
 var $answer2=["jump"];
@@ -388,7 +388,7 @@ _wait(3000);
 
 $sfm_act_formDesigner.editSection($sectionName2);
 $sfm_act_formDesigner.addExistCriteria();
-$sfm_act_formDesigner.addQuesToExistCriteriaTab($exitQuestionName2, $questionType2,$criteriaDetailsvt);
+$sfm_act_formDesigner.addQuesToExistCriteriaTab($exitQuestionName2, $questionType2ex,$criteriaDetailsvt);
 _wait(3000);
 _setStrictVisibilityCheck(true);
 _click(_f("main").s_button("saveBtnExit"));

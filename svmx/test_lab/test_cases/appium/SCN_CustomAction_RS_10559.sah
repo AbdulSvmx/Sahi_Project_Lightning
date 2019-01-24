@@ -1,3 +1,5 @@
+
+_writeFile("false", $appiumPath+$sahiIntermediatoryPath, true);
 var $scenario_10559 = _testcase("scenario_10559","Verify custom action web service functionality on header & child");
 $scenario_10559.start();
 var $actionTitle = "10559_Action";
@@ -5,6 +7,9 @@ var $actionTitleChild = "10559_Action_Child";
 var $wizTitle = $bo_act_common.generateRandomName("Auto_Action_Wiz");
 var $wizTitle1 = $bo_act_common.generateRandomName("Auto_Action_Wiz");
 var $profile="auto group profile";
+var $prof="Automation Service User";
+var $fileName = "/auto/sahi_pro/userdata/scripts/Sahi_Project_Lightning/svmx/test_lab/test_cases/appium/appium_txtData/TestCustomActionChild.txt";
+var $fileName1 = "//auto/sahi_pro/userdata/scripts/Sahi_Project_Lightning/svmx/test_lab/test_cases/appium/appium_txtData/TestCustomActionHeader.txt";
 $bo_act_login.login($g_url, $appiumAdminUn, $appiumAdminPwd);
 
 _wait(5000);
@@ -13,27 +18,22 @@ _click($sfm_pg_sfSetup.btn_setup);
 _selectWindow("Home | Salesforce");
 _setValue($sfm_pg_sfSetup.txt_quickFind,"Apex Classes");
 _click(_mark("Apex Classes"));
-_selectDomain("cs77.salesforce.com");
+_selectDomain("/salesforce.com/");
 _selectWindow();
 _click(_span("T"));
+_wait(12000);
 if(_isVisible(_link("TestCustomActionChild"))){
 	_log("TestCustomActionChild is already visible");
 }
 else{
-	_click(_submit("New"));
-	var $value = _readFile("/auto/sahi_pro/userdata/scripts/Sahi_Project_Lightning/TestCustomActionChild.txt");
-	_setValue(_textarea("textarea"),$value);
-	_click(_button("Cancel"));
-	
+	$sfm_act_sfSetup.addApexClass($fileName, $prof);
+	_click(_link("Back to List: Installed Package"));
 }
 if(_isVisible(_link("TestCustomActionHeader"))){
 	_log("TestCustomActionHeader is already visible");
 }
 else{
-	_click(_submit("New"));
-	var $value1 = _readFile("/auto/sahi_pro/userdata/scripts/Sahi_Project_Lightning/TestCustomActionHeader.txt");
-	_setValue(_textarea("textarea"),$value1);
-	_click(_button("Save"));
+	$sfm_act_sfSetup.addApexClass($fileName1, $prof);
 }
 $bo_act_navigation.navigateToSfmCustomAction();
 _setSelected(_select("/ManageAction/",_rightOf(_span("Manage Custom Actions for"))),"Work Order");
@@ -58,4 +58,6 @@ $bo_act_navigation.editWizard("AutoRegression");
 $sfm_act_createCustomWizard.addWizStepWithoutName("Others", $actionTitle, $profile);
 $bo_act_navigation.editWizard("AutoRegression");
 $sfm_act_createCustomWizard.addWizStepWithoutName("Others", $actionTitleChild, $profile);
+
+_writeFile("true", $appiumPath+$sahiIntermediatoryPath, true);
 $scenario_10559.end();

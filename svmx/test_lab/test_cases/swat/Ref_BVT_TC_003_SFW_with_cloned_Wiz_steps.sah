@@ -42,7 +42,7 @@ _setSpeed($g_stepSpeed);
 	
 	var $IBName = $bo_act_installedProduct.createInstalledProduct($productName,$accountName,$contactName);
 	
-	//var $wizardName = "Swat Smoke Test BVT_TC_003";
+	//var $wizardName_swat = "Swat Smoke Test BVT_TC_003";
 	var $isCustom = false;
 	
 	var $wizardIDName = $bo_act_common.generateRandomName("Swat Smoke Test BVT_TC_003");

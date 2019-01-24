@@ -5,6 +5,7 @@
  * Creating Record Types for the Object
  * Creating SFM Process with the fields created.
  */
+_writeFile("false", $appiumPath+$sahiIntermediatoryPath, true);
 
 var $scenario_10547 = _testcase("scenario_10547","Verify Picklist,Dependent Picklist and Recordtype Dependent Picklist");
 $scenario_10547.start();

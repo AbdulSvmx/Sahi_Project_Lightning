@@ -1,0 +1,78 @@
+/**
+ * Author	: Ajay Kumar B
+ * Reviewer	: 
+ * Pre-req	: Nothing
+ * Testcase	: 
+ * Steps	: 
+ 				1)  
+ * Expt Res	:
+ 				1) 
+ */
+
+var $SFMDZ_54_Smoke1_CreateExpression = _testcase("SFMDZ_54_Smoke1_CreateExpression.sah","Create a Expression");
+$SFMDZ_54_Smoke1_CreateExpression.start();
+_setSpeed($g_stepSpeed);
+
+/**
+ * Global Variable declaration
+ */
+
+//var $url="http://test.salesforce.com";
+//var $un="saadat.dz2perftest@servicemax.com";
+//var $pwd="servicemax4";
+var $viewName="Expressions";
+
+/**
+ * Login to the Sandbox Org and launching Transaction list view
+**/
+
+$bo_act_login.login($sfmdz_url, $sfmdz_un, $sfmdz_pwd);
+
+//SFM Designer Landing Page - Set up Home Page
+$sfmrdz_act_common.launchListView($viewName);
+
+//Assertions on transaction list view
+
+_assertExists($sfmrdz_pg_common.btn_backtoSetup);
+_assertExists($sfmrdz_pg_common.btn_help);
+
+_click($sfmrdz_pg_editorsPage.btn_NewExpression);
+
+//New Expression Page
+_assertExists($sfmrdz_pg_editorsPage.headertext_Heading_Expressions);
+_assertExists($sfmrdz_pg_editorsPage.treenavigation_ExpressionsNewExpressions);
+_click($sfmrdz_pg_editorsPage.container_UntitledExpression_EditIcon);
+//$sfmrdz_act_common.clickActionMenu($sfmrdz_pg_editorsPage.container_UntitledExpression_EditIcon);
+_setValue($sfmrdz_pg_editorsPage.textbox_Title,"New Designer 2.0 AJ");
+_setValue($sfmrdz_pg_editorsPage.textarea_Description,"Test Expression Flow AJ");
+
+_click($sfmrdz_pg_editorsPage.textbox_ExpressionObject_Dropdown);
+_setValue($sfmrdz_pg_editorsPage.textbox_ObjectName_Filter,"SVMXDEV__Service_Order__c");
+_click($sfmrdz_pg_editorsPage.listitem_ObjectName_FirstRecord);
+
+_click($sfmrdz_pg_editorsPage.textbox_ObjectFieldNames_Dropdown);
+_setValue($sfmrdz_pg_editorsPage.textbox_ObjectFieldNames_Filter,"SVMXDEV__case__c");
+_click($sfmrdz_pg_editorsPage.listitem_FieldName_FirstRecord);
+
+_click($sfmrdz_pg_editorsPage.textbox_Comparision_Dropdown);
+$sfmrdz_act_common.selectPicklistvalue("ObjectNamePicklist","Contains");
+
+
+
+//_setSelected($sfmrdz_pg_editorsPage.listitem_FieldComparision_AllRecords,"Contains");
+_setValue($sfmrdz_pg_editorsPage.textbox_Field_Telephonebox,"1223334444");
+_click($sfmrdz_pg_editorsPage.btn_Save);
+_assertVisible($sfmrdz_pg_editorsPage.labelmsg_successMsg);
+_click($sfmrdz_pg_editorsPage.btn_Cancel);
+_setValue($sfmrdz_pg_editorsPage.textbox_SearchFilter,"New Designer 2.0 AJ");
+_assertExists($sfmrdz_pg_editorsPage.link_FirstRecord);
+_logOutput("Expression Created Succesfully");
+
+//_click($sfmrdz_pg_editorsPage.labelmsg_closeIcon);
+//_click($sfmrdz_pg_editorsPage.Button_delete_Icon);
+//_click($sfmrdz_pg_editorsPage.btn_Save);
+//_assertVisible($sfmrdz_pg_editorsPage.labelmsg_successMsg)
+//_wait(10000,_isVisible($bo_pg_home.link_home));
+$sfm_act_lightningConfig.logoutInLightning();
+		
+$SFMDZ_54_Smoke1_CreateExpression.end();

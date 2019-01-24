@@ -61,7 +61,10 @@ var $bo_act_SFMAppPermission = new function bo_act_SFMAppPermission() {
 			_wait(10000);		
 			if ($processtype=="Checklist") {
 				_click($bo_pg_sfmAppPermissionD.btn_checklists);
-			} else {
+			}else if($processtype=="View"){
+				_click($bo_pg_sfmAppPermissionD.btn_view);
+			} 
+			else {
 				_click($bo_pg_sfmAppPermissionD.btn_create);
 			}
 			_wait(10000);
@@ -385,5 +388,59 @@ var $bo_act_SFMAppPermission = new function bo_act_SFMAppPermission() {
 		
 
 	};
+
+	/*
+	 * Author : Vinod tharavath
+	 */
+	this.otherSettingsChecklist = function($downloadinprogress,$enablechecklist,$downloadcompletedchecklist,$locationtracking) {
+		$bo_act_navigation.navigateToSvmxSetup();
+		_selectDomain("/svmx/");
+		_click($bo_pg_sfmAppPermissionD.btn_mobile_configuration);
+		_wait(9000);
+		_setSelected($bo_pg_sfmAppPermissionD.picklist_profileselection,
+				$group_profilename);
+		_click($bo_pg_sfmAppPermissionD.chkbox_selectprofile);
+		_wait(17000, $bo_pg_sfmAppPermissionD.btn_edit);
+
+		_click($bo_pg_sfmAppPermissionD.btn_edit);
+		_wait(5000);
+		_click($bo_pg_sfmAppPermissionD.btn_othersettings);
+
+		if ($downloadinprogress == true) {
+			_check(_checkbox(0,_rightOf($bo_pg_sfmAppPermissionD.chk_downloadinprogress)));
+		} else {
+			_uncheck(_checkbox(0,_rightOf($bo_pg_sfmAppPermissionD.chk_downloadinprogress)));
+		}
+
+		if ($enablechecklist == true) {
+			_check(_checkbox(0,_rightOf($bo_pg_sfmAppPermissionD.chk_enablechecklists)));
+		} else {
+			_uncheck(_checkbox(0,_rightOf($bo_pg_sfmAppPermissionD.chk_enablechecklists)));
+
+		}
+		if($downloadcompletedchecklist==true){
+			_check(_checkbox(0,_rightOf($bo_pg_sfmAppPermissionD.chk_downloadcompletedchecklist)));
+
+		}
+		else{
+			_uncheck(_checkbox(0,_rightOf($bo_pg_sfmAppPermissionD.chk_downloadcompletedchecklist)));
+
+		}	
+		
+		if($locationtracking==true)
+			{
+			_check(_checkbox(0,_rightOf($bo_pg_sfmAppPermissionD.chk_enablelocationtracking)));
+
+			}
+		else
+			{
+			_uncheck(_checkbox(0,_rightOf($bo_pg_sfmAppPermissionD.chk_enablelocationtracking)));
+
+			}
+
+		_click($bo_pg_sfmAppPermissionD.btn_configsave);
+
+	}
+
 	
 }

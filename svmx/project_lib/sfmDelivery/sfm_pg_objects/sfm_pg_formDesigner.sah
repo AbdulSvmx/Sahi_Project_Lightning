@@ -47,6 +47,8 @@ var $sfm_pg_formDesigner = new function sfm_pg_formDesigner() {
 	this.link_addAnswer=_f("main").linkbutton("+Add Answer");
 	this.link_addQuestion=_f("main").linkbutton("+Add Question");
 	this.btn_applyRemove=_f("main").s_togglebutton("Apply/Remove Exit criteria");
+	this.btn_appyRemoveEntry =_f("main").s_togglebutton("mapUnMapBtnEntry");
+	this.btn_applyRemoveExit =_f("main").s_togglebutton("mapUnMapBtnExit");
 	
 	//Date question fields
 	this.sel_comboFiled=_f("main").s_dropdownlist("evaluationCombo");
