@@ -77,4 +77,7 @@ $sfm_act_lightningConfig.addLookupField("Account");
 _wait(3000);
 $sfm_act_lightningConfig.addLookupField("Contact");
 
+//Added for 10530
+$bo_act_SFMAppPermission.addNewObjAndOwnershipType("Product Stock", "All Records");
+
 $global_preRequisite.end();

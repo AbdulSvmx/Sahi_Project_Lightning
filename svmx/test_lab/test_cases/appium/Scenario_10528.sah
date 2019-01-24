@@ -5,79 +5,81 @@ $scenario_10528.start();
 /*****************************************
  *********Initializing Variables**********
  *****************************************/
-var $mappingsName = "Auto_Map_10528";
-var $sfmNameToBeCloned = "Manage Work Order Lines - Usage";
-var $sfmName = "AutoReg10528";
-var $isCustom = false;
-var $sfmTemplate = "SVMXSTD: Manage WO Usage Lines";
-var $sfmTemplateSaveAsName = $bo_act_common.generateRandomName("SFM_Temp_Name_");
-var $headersToAdd = ["Account","City","Contact","Country","Order Type","Product","Site","Top-Level","Zip","Component"];
-var $lkpName = $bo_act_common.generateRandomName("lkp_name");
-var $fields = ["Contact","Top-Level"];
-// Account, Installed Product ID, Contact, Product, Location & Top-level
-var $mappingFields = ["Account","City","Component", "Contact", "Country","Order Type", "Product", "Site", "Top-Level", "Zip"];
-var $mappingValues = ["Account","City","Record ID", "Contact", "Country", "Service Contract Exchange Type", "Product", "Location", "Top-Level", "Zip"];
-var $wizTitle = "Auto_Regression_Wiz";
-var $profile="auto group profile";
-var $srcObj = "Installed Product";
-var $targetObj = "Work Order";
+//var $mappingsName = "Auto_Map_10528";
+//var $sfmNameToBeCloned = "Manage Work Order Lines - Usage";
+//var $sfmName = "AutoReg10528";
+//var $isCustom = false;
+//var $sfmTemplate = "SVMXSTD: Manage WO Usage Lines";
+//var $sfmTemplateSaveAsName = $bo_act_common.generateRandomName("SFM_Temp_Name_");
+//var $headersToAdd = ["Account","City","Contact","Country","Order Type","Product","Site","Top-Level","Zip","Component"];
+//var $lkpName = $bo_act_common.generateRandomName("lkp_name");
+//var $fields = ["Contact","Top-Level"];
+//// Account, Installed Product ID, Contact, Product, Location & Top-level
+//var $mappingFields = ["Account","City","Component", "Contact", "Country","Order Type", "Product", "Site", "Top-Level", "Zip"];
+//var $mappingValues = ["Account","City","Record ID", "Contact", "Country", "Service Contract Exchange Type", "Product", "Location", "Top-Level", "Zip"];
+//var $wizTitle = "Auto_Regression_Wiz";
+//var $profile="auto group profile";
+//var $srcObj = "Installed Product";
+//var $targetObj = "Work Order";
 $bo_act_login.login($g_url, $appiumAdminUn, $appiumAdminPwd);
+$bo_act_SFMAppPermission.addNewObjAndOwnershipType("Activity Product", "All Records");
+
 
 /*****************************************
  ***************Add Mapping***************
  *****************************************/
-$bo_act_navigation.navigatetoSFMMaps();
-$sfm_act_sfmMapping.addNewMapping($srcObj, $targetObj, $mappingFields, $mappingValues, $mappingsName);
+//$bo_act_navigation.navigatetoSFMMaps();
+//$sfm_act_sfmMapping.addNewMapping($srcObj, $targetObj, $mappingFields, $mappingValues, $mappingsName);
 /*****************************************
  ***************Add Process***************
  *****************************************/
-$bo_act_navigation.navigateToSfmTransactionDesigner();
-_wait(10000);
-var $var = $sfm_act_createProcess.searchCustomSfm($sfmName);
-if($var){
-	_log("Process already present");
-}
-else{
-	_click(_f("main").tab("Standard SFM Transactions"));
-	$sfm_act_SFM.selectSFM($sfmNameToBeCloned, $isCustom);
-	_click($bo_pg_sfmTransactionAndDesigner.btn_clone);
-	_wait(50000, _isVisible($bo_pg_sfmTransactionAndDesigner.txt_name));
-	_wait(10000);
-	_setValue($bo_pg_sfmTransactionAndDesigner.txt_name, $sfmName);
-	_setValue($bo_pg_sfmTransactionAndDesigner.txt_sfmTransactionId, "");
-	_setValue($bo_pg_sfmTransactionAndDesigner.txt_sfmTransactionId, $sfmName);
-	_click($bo_pg_sfmTransactionAndDesigner.btn_screenDesigner);
-	_wait(5000);
-	_setSelected($bo_pg_sfmTransactionAndDesigner.sel_sfmTemplate,$sfmTemplate);
-	_setValue($bo_pg_sfmTransactionAndDesigner.txt_sfmSavePageLayoutAs,$sfmTemplateSaveAsName);
-	_setValue($bo_pg_sfmTransactionAndDesigner.txt_sfmSavePageLayoutAsId,$sfmTemplateSaveAsName);
-	_wait(5000);
-	$sfm_act_Transactions.addHeader($headersToAdd);
-	_wait(5000);
-	_setSelected(_f("main").s_combobox("/ComboBox/").rightOf(_f("main").uiftetextfield("Object Mapping")),$mappingsName);
-	_wait(5000);
-	_click(_f("main").s_button("Configure Lookup"));
-	_setSelected(_f("main").s_combobox("searchCombo[4]"), "SVMXSTD: IB Lookup");
-	_setValue(_f("main").s_textinput("Save this Lookup as"), $lkpName);
-	_setValue(_f("main").s_textinput("Input ID Here[4]"), $lkpName);
-	_click(_f("main").s_button("Save As[8]"));
-	$sfm_act_Transactions.addSearchDisplay($fields);
-	_click(_f("main").s_button("Save[4]"));
-	_wait(3000);
-	_click($sfm_pg_screenDesigner.btn_lookupClose);
-	_click(_f("main").s_button("Save As[3]"));
-	_wait(5000);
-	_click($bo_pg_sfmTransactionAndDesigner.btn_finalQuickSave);
-}
+//$bo_act_navigation.navigateToSfmTransactionDesigner();
+//_wait(10000);
+//var $var = $sfm_act_createProcess.searchCustomSfm($sfmName);
+//if($var){
+//	_log("Process already present");
+//}
+//else{
+//	_click(_f("main").tab("Standard SFM Transactions"));
+//	$sfm_act_SFM.selectSFM($sfmNameToBeCloned, $isCustom);
+//	_click($bo_pg_sfmTransactionAndDesigner.btn_clone);
+//	_wait(50000, _isVisible($bo_pg_sfmTransactionAndDesigner.txt_name));
+//	_wait(10000);
+//	_setValue($bo_pg_sfmTransactionAndDesigner.txt_name, $sfmName);
+//	_setValue($bo_pg_sfmTransactionAndDesigner.txt_sfmTransactionId, "");
+//	_setValue($bo_pg_sfmTransactionAndDesigner.txt_sfmTransactionId, $sfmName);
+//	_click($bo_pg_sfmTransactionAndDesigner.btn_screenDesigner);
+//	_wait(5000);
+//	_setSelected($bo_pg_sfmTransactionAndDesigner.sel_sfmTemplate,$sfmTemplate);
+//	_setValue($bo_pg_sfmTransactionAndDesigner.txt_sfmSavePageLayoutAs,$sfmTemplateSaveAsName);
+//	_setValue($bo_pg_sfmTransactionAndDesigner.txt_sfmSavePageLayoutAsId,$sfmTemplateSaveAsName);
+//	_wait(5000);
+//	$sfm_act_Transactions.addHeader($headersToAdd);
+//	_wait(5000);
+//	_setSelected(_f("main").s_combobox("/ComboBox/").rightOf(_f("main").uiftetextfield("Object Mapping")),$mappingsName);
+//	_wait(5000);
+//	_click(_f("main").s_button("Configure Lookup"));
+//	_setSelected(_f("main").s_combobox("searchCombo[4]"), "SVMXSTD: IB Lookup");
+//	_setValue(_f("main").s_textinput("Save this Lookup as"), $lkpName);
+//	_setValue(_f("main").s_textinput("Input ID Here[4]"), $lkpName);
+//	_click(_f("main").s_button("Save As[8]"));
+//	$sfm_act_Transactions.addSearchDisplay($fields);
+//	_click(_f("main").s_button("Save[4]"));
+//	_wait(3000);
+//	_click($sfm_pg_screenDesigner.btn_lookupClose);
+//	_click(_f("main").s_button("Save As[3]"));
+//	_wait(5000);
+//	_click($bo_pg_sfmTransactionAndDesigner.btn_finalQuickSave);
+//}
 
 /***************************************************
  ***************Add Process to Wizard***************
  ***************************************************/
-$bo_act_navigation.navigateToSfmWizard();
-_selectDomain("/svmx/");
-_setSelected($sfm_pg_wizards.selectObject,"Work Order");
-_wait(3000);
-$bo_act_navigation.editWizard("AutoRegression");
-$sfm_act_createCustomWizard.addWizStepWithoutName("SFM", $sfmName, $profile);
-_writeFile("true", $appiumPath+$sahiIntermediatoryPath, true);
+//$bo_act_navigation.navigateToSfmWizard();
+//_selectDomain("/svmx/");
+//_setSelected($sfm_pg_wizards.selectObject,"Work Order");
+//_wait(3000);
+//$bo_act_navigation.editWizard("AutoRegression");
+//$sfm_act_createCustomWizard.addWizStepWithoutName("SFM", $sfmName, $profile);
+//_writeFile("true", $appiumPath+$sahiIntermediatoryPath, true);
 $scenario_10528.end();
