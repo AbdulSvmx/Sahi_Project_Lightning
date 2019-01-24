@@ -455,9 +455,11 @@ var $bo_act_SFMAppPermission = new function bo_act_SFMAppPermission() {
 		if(_isVisible(_cell($objectname))==false)
 		{
 			_click($bo_pg_sfmAppPermissionD.btn_addDownloadCriteria);
+			if(_exists(_option($objectname , _in($bo_pg_sfmAppPermissionD.sel_objName)))){
 				_setSelected($bo_pg_sfmAppPermissionD.sel_objName,$objectname);
 				_click(($bo_pg_sfmAppPermissionD.btn_addDownloadCriteria));
 				_setSelected($bo_pg_sfmAppPermissionD.sel_OwnershipType,$ownerShipType);
+			}
 			
 		}
 		_click($bo_pg_sfmAppPermissionD.btn_configsave);
