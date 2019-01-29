@@ -194,7 +194,7 @@ _selectDomain();
 _wait(14000,_isVisible($sfm_pg_wo.label_wo));
 $childWoId= _getText($sfm_pg_wo.label_wo);
 _log("Child Work Order id "+ $childWoId);
-$textValues = ["$6,600.000","4/21/2018","345.00","Bengaluru","44%"];
+$textValues = ["6,600.000","4/21/2018","345.00","Bengaluru","44%"];
 var $lookUpLabels = ["Account"];
 var $lookUpValues = ["HCSAccountForTesting"];
 //Verify all values in the newly created Work order
@@ -279,14 +279,10 @@ else {
 //Now Save the SFM Delivery and verify the values in the newly created work order
 _click($sfm_pg_wo.link_delivery_save);
 _selectDomain();
-_call(top.location.reload());
-_selectDomain($g_domain);
-_click($sfm_pg_wo.link_delivery_save);
-_selectDomain();
 _wait(12000,_isVisible($sfm_pg_wo.label_wo));
 $childWoId= _getText($sfm_pg_wo.label_wo);
 _log("Child Work Order id "+ $childWoId);
-$textValues = ["$6,600.000","4/21/2018","345.00","Bengaluru","44%"];
+$textValues = ["6,600.000","4/21/2018","345.00","Bengaluru","44%"];
 $textValues[$temp] = "4/21/2018";
 $dateTimeDateValues = ["4/11/2018"];
 $res = $sfm_act_lightningConfig.verifyValues($textLabels, $textValues, $pickListLabels, $pickListValues, $textAreaLabels, $textAreaValues, $checkBoxLabels, $checkBoxValues, $dateTimeLabels, $dateTimeDateValues, $timeValues,$emailLabels,$emailValues,$lookUpLabels,$lookUpValues,$multiPickLabels,$multiPickValues,$urlLabels,$urlValues,$telephoneLabels,$telephoneValues);
