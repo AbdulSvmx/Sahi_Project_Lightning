@@ -164,7 +164,7 @@ _log("Work detail created as Target child is "+$targetLineNumber);
 
 //Verify values for Target line created
 var $textLabels = ["Line Qty"];
-var $textValues = ["1.0000"];
+var $textValues = ["1"];
 var $pickListLabels = ["Line Type"];
 var $pickListValues = [$lineType];
 var $checkBoxLabels = ["Is Billable","Use Price From Pricebook"];
@@ -193,7 +193,7 @@ else {
 
 $bo_act_navigation.navigateToCreatedRecordUsingGlobalSearch($sourceWlNumber);
 var $textLabels = ["Billable Line Price","Date Received"];
-var $textValues = ["$6,600.000","4/21/2018"];
+var $textValues = ["6,600.000","4/21/2018"];
 var $pickListLabels = ["Activity Type"];
 var $pickListValues = ["Calibration"];
 var $textAreaLabels = [];
@@ -282,7 +282,7 @@ var $targetLineNumber = _getText(_span("/WL-/"));
 _log("Work detail created as Target child is "+$targetLineNumber);
 //Verify value map for the new child record
 $textLabels =["Line Qty"];
-$textValues = ["1.0000"];
+$textValues = ["1"];
 $pickListLabels =["Line Type"];
 $pickListValues = [$lineType];
 $checkBoxLabels = ["Is Billable","Use Price From Pricebook"];
@@ -312,7 +312,7 @@ else {
 //Verify field map for existing child records
 $bo_act_navigation.navigateToCreatedRecordUsingGlobalSearch($sourceWlNumber);
 var $textLabels = ["Billable Line Price","Date Received"];
-var $textValues = ["$6,600.000","4/21/2018"];
+var $textValues = ["6,600.000","4/21/2018"];
 var $pickListLabels = ["Activity Type"];
 var $pickListValues = ["Calibration"];
 var $textAreaLabels = [];
