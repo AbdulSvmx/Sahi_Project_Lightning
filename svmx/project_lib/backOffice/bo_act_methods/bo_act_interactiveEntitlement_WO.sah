@@ -246,9 +246,10 @@ var $bo_act_interactiveEntitlement_WO = new function bo_act_interactiveEntitleme
 			
 		}
 		
-		
+		_selectDomain();
 		_call(top.location.reload());
 		_wait(20000);
+		_selectDomain("/svmx/");
 		_click($bo_pg_interactiveEntitlement_CaseAndWO.btn_checkEntitlement);
 		//this.clickCheckEntitlement();
 		_setStrictVisibilityCheck(true);
