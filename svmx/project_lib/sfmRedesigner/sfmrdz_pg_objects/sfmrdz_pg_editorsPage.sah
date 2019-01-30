@@ -32,6 +32,8 @@ var $sfmrdz_pg_editorsPage = new function sfmrdz_pg_editorsPage(){
     this.listitem_FieldComparision_AllRecords = _div("Menu Picklist__menu slds-listbox Menu--size-x-small PicklistFactory__menu Menu--size-block Menu--isVisible Menu--notShowOnHover react-slds-no-hover-popup slds-dropdown");
     this.textbox_Field_Value = _textbox("Input Picklist__input slds-input slds-combobox__input[3]");
     this.textbox_Field_Telephonebox = _textbox("expressionRows[0].fieldValue");
+    
+    this.textbox_CaseType_Value =_textbox("Input Picklist__input slds-input slds-combobox__input[4]");
 
     //this.textbox_Field_Telephonebox = _textbox("Input slds-input[2]");
    

@@ -17,16 +17,16 @@ _setSpeed($g_stepSpeed);
  * Global Variable declaration
  */
 
-//var $url="http://test.salesforce.com";
-//var $un="saadat.dz2perftest@servicemax.com";
-//var $pwd="servicemax4";
+var $url="https://test.salesforce.com";
+var $un="saadat.dz2perftest@servicemax.com";
+var $pwd="servicemax4";
 var $viewName="Expressions";
 
 /**
  * Login to the Sandbox Org and launching Transaction list view
 **/
 
-$bo_act_login.login($sfmdz_url, $sfmdz_un, $sfmdz_pwd);
+$bo_act_login.login($url, $un, $pwd);
 
 //SFM Designer Landing Page - Set up Home Page
 $sfmrdz_act_common.launchListView($viewName);
@@ -47,20 +47,25 @@ _setValue($sfmrdz_pg_editorsPage.textbox_Title,"New Designer 2.0 AJ");
 _setValue($sfmrdz_pg_editorsPage.textarea_Description,"Test Expression Flow AJ");
 
 _click($sfmrdz_pg_editorsPage.textbox_ExpressionObject_Dropdown);
-_setValue($sfmrdz_pg_editorsPage.textbox_ObjectName_Filter,"SVMXDEV__Service_Order__c");
-_click($sfmrdz_pg_editorsPage.listitem_ObjectName_FirstRecord);
+$sfmrdz_act_common.selectPicklistvalue("ObjectNamePicklist","CaseCase");
+//_setValue($sfmrdz_pg_editorsPage.textbox_ObjectName_Filter,"SVMXDEV__Service_Order__c");
+//_click($sfmrdz_pg_editorsPage.listitem_ObjectName_FirstRecord);
 
 _click($sfmrdz_pg_editorsPage.textbox_ObjectFieldNames_Dropdown);
-_setValue($sfmrdz_pg_editorsPage.textbox_ObjectFieldNames_Filter,"SVMXDEV__case__c");
-_click($sfmrdz_pg_editorsPage.listitem_FieldName_FirstRecord);
+$sfmrdz_act_common.selectPicklistvalue("FieldNamePicklist","Case TypeType");
+//_setValue($sfmrdz_pg_editorsPage.textbox_ObjectFieldNames_Filter,"SVMXDEV__case__c");
+//_click($sfmrdz_pg_editorsPage.listitem_FieldName_FirstRecord);
 
 _click($sfmrdz_pg_editorsPage.textbox_Comparision_Dropdown);
-$sfmrdz_act_common.selectPicklistvalue("ObjectNamePicklist","Contains");
+$sfmrdz_act_common.selectPicklistvalue("OperatorPicklist","Contains");
+
+_click($sfmrdz_pg_editorsPage.textbox_CaseType_Value);
+$sfmrdz_act_common.selectPicklistvalue("CaseTypePicklist","Question");
 
 
 
 //_setSelected($sfmrdz_pg_editorsPage.listitem_FieldComparision_AllRecords,"Contains");
-_setValue($sfmrdz_pg_editorsPage.textbox_Field_Telephonebox,"1223334444");
+//_setValue($sfmrdz_pg_editorsPage.textbox_Field_Telephonebox,"1223334444");
 _click($sfmrdz_pg_editorsPage.btn_Save);
 _assertVisible($sfmrdz_pg_editorsPage.labelmsg_successMsg);
 _click($sfmrdz_pg_editorsPage.btn_Cancel);
