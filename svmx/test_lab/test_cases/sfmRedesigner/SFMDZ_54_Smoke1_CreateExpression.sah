@@ -43,24 +43,45 @@ _assertExists($sfmrdz_pg_editorsPage.headertext_Heading_Expressions);
 _assertExists($sfmrdz_pg_editorsPage.treenavigation_ExpressionsNewExpressions);
 _click($sfmrdz_pg_editorsPage.container_UntitledExpression_EditIcon);
 //$sfmrdz_act_common.clickActionMenu($sfmrdz_pg_editorsPage.container_UntitledExpression_EditIcon);
+//_focus($sfmrdz_pg_editorsPage.textbox_Title);
 _setValue($sfmrdz_pg_editorsPage.textbox_Title,"New Designer 2.0 AJ");
+//Click TAB button
+//_keyPress(element, 9);
+//_removeFocus($sfmrdz_pg_editorsPage.textbox_Title);
 _setValue($sfmrdz_pg_editorsPage.textarea_Description,"Test Expression Flow AJ");
 
 _click($sfmrdz_pg_editorsPage.textbox_ExpressionObject_Dropdown);
-$sfmrdz_act_common.selectPicklistvalue("ObjectNamePicklist","CaseCase");
+_click($sfmrdz_pg_editorsPage.TD_ExpressionObject);
+
+
+
+//$sfmrdz_act_common.selectPicklistvalue("ObjectNamePicklist","CaseCase");
+//_wait(2000);
 //_setValue($sfmrdz_pg_editorsPage.textbox_ObjectName_Filter,"SVMXDEV__Service_Order__c");
+//_wait(2000);
 //_click($sfmrdz_pg_editorsPage.listitem_ObjectName_FirstRecord);
 
+//_wait(2000);
+
 _click($sfmrdz_pg_editorsPage.textbox_ObjectFieldNames_Dropdown);
-$sfmrdz_act_common.selectPicklistvalue("FieldNamePicklist","Case TypeType");
+_click($sfmrdz_pg_editorsPage.TD_ExpressionFieldObject);
+//$sfmrdz_act_common.selectPicklistvalue("FieldNamePicklist","Case TypeType");
+//_wait(2000);
 //_setValue($sfmrdz_pg_editorsPage.textbox_ObjectFieldNames_Filter,"SVMXDEV__case__c");
+//_wait(2000);
 //_click($sfmrdz_pg_editorsPage.listitem_FieldName_FirstRecord);
+//_wait(2000);
 
 _click($sfmrdz_pg_editorsPage.textbox_Comparision_Dropdown);
-$sfmrdz_act_common.selectPicklistvalue("OperatorPicklist","Contains");
+_click($sfmrdz_pg_editorsPage.TD_OperatorObject);
+
+//$sfmrdz_act_common.selectPicklistvalue("OperatorPicklist","Contains");
 
 _click($sfmrdz_pg_editorsPage.textbox_CaseType_Value);
-$sfmrdz_act_common.selectPicklistvalue("CaseTypePicklist","Question");
+_click($sfmrdz_pg_editorsPage.TD_CaseTypeObject);
+
+
+//$sfmrdz_act_common.selectPicklistvalue("CaseTypePicklist","Question");
 
 
 
@@ -69,8 +90,10 @@ $sfmrdz_act_common.selectPicklistvalue("CaseTypePicklist","Question");
 _click($sfmrdz_pg_editorsPage.btn_Save);
 _assertVisible($sfmrdz_pg_editorsPage.labelmsg_successMsg);
 _click($sfmrdz_pg_editorsPage.btn_Cancel);
+_wait(2000);
 _setValue($sfmrdz_pg_editorsPage.textbox_SearchFilter,"New Designer 2.0 AJ");
-_assertExists($sfmrdz_pg_editorsPage.link_FirstRecord);
+_assertContainsText ("New Designer 2.0 AJ", _div("rt-td DataGrid__cell DataTableCell--overflow"), "Expected Text Exists")
+//_assertExists($sfmrdz_pg_editorsPage.link_FirstRecord);
 _logOutput("Expression Created Succesfully");
 
 //_click($sfmrdz_pg_editorsPage.labelmsg_closeIcon);

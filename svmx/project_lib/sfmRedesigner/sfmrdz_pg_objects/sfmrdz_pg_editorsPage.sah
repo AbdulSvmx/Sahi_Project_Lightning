@@ -55,6 +55,14 @@ var $sfmrdz_pg_editorsPage = new function sfmrdz_pg_editorsPage(){
 	this.textbox_SearchFilter = _textbox("ListFilter");
 	this.link_FirstRecord = _link("Text slds-text-body--regular slds-text-align--left slds-text-color--default slds-truncate NameCell__title-color");
 	
+	// Test Data
+	this.TD_ExpressionObject = _span("Case");
+	this.TD_ExpressionFieldObject = _span("Case Type");
+	this.TD_OperatorObject = _span("Equals");
+	this.TD_CaseTypeObject = _span("Problem");
+	
+	
+	
 	
 	
 };
