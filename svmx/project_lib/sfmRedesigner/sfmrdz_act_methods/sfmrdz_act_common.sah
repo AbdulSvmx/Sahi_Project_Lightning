@@ -32,7 +32,7 @@ var $sfmrdz_act_common= new function sfmrdz_act_common(){
 		//_selectDomain("/svmx/");
 		_click($sfmrdz_pg_common.btn_appLauncher);
 		_click($sfmrdz_pg_common.txt_searchApp);
-		_setValue($sfmrdz_pg_common.txt_searchApp,"New Designer");
+		_setValue($sfmrdz_pg_common.txt_searchApp,"SFM New Designer");
 		_wait(3000);
 		_click($sfmrdz_pg_common.link_newDesigner);	
 		_wait(3000);
@@ -51,7 +51,7 @@ var $sfmrdz_act_common= new function sfmrdz_act_common(){
 	 * Ex: $ObjectNamePicklist,$FieldNamePicklist, $OperatorPicklist
 	 * 
 	 */
-	this.d=function($DOMObject,$value){
+	this.selectPicklistvalue=function($DOMObject,$value){
 	var $links = null;	var $Arraylen;var $LinkName;
 	
 		if ($DOMObject == "ObjectNamePicklist")
@@ -65,6 +65,11 @@ var $sfmrdz_act_common= new function sfmrdz_act_common(){
 		//_log("Entered to collect all OPERATORS"); 
 		$links = _collect("_link","/.*/", _in(_list("Menu__list slds-dropdown__list[2]")));			
 	}	
+	else if($DOMObject == "CaseTypePicklist"){
+		//_log("Entered to collect all OPERATORS"); 
+		$links = _collect("_link","/.*/", _in(_list("Menu__list slds-dropdown__list[4]")));			
+	}	
+		
 		$Arraylen = $links.length;
 		
 		for(var $i=0;$i<$Arraylen;$i++){
