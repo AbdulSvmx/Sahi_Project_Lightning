@@ -1,12 +1,13 @@
 _writeFile("false", $appiumPath+$sahiIntermediatoryPath, true);
 var $scenario_10571 = _testcase("scenario_10571"," Verify finalize button & target object update");
 $scenario_10571.start();
-var $sfmName = "10571_sample_test";
+var $sfmName = "Auto_Regression_10571";
 var $sfmNameToBeCloned = "Work Order Service Report";
 var $isCustom = false;
-var $fieldArr = ["Scheduled Date","Scheduled Date Time","No Of Times Assigned"];
+var $fieldArr = ["Scheduled Date","Scheduled Date Time","Number"];
 var $fieldArr1 = ["Set","Set","Increase"];
 var $profile="auto group profile";
+var $tempName="Auto_Temp_10571";
 $bo_act_login.login($g_url, $appiumAdminUn, $appiumAdminPwd);
 
 _wait(5000);
@@ -28,7 +29,7 @@ else{
 	_setValue($bo_pg_sfmTransactionAndDesigner.txt_name, $sfmName);
 	_setValue($bo_pg_sfmTransactionAndDesigner.txt_sfmTransactionId, "");
 	_setValue($bo_pg_sfmTransactionAndDesigner.txt_sfmTransactionId, $sfmName);
-	$sfm_act_SFM.addTemplateDesigner("Work Order Service Report");
+	$sfm_act_SFM.addTemplateDesigner($tempName);
 	$sfm_act_SFM.addTargetObjectUpdate("3");
 	$sfm_act_SFM.addFields("Problem Description", "Set", "Test Target Object Update Functionality");
 	for(var $i=0;$i<$fieldArr.length;$i++){
@@ -52,9 +53,6 @@ _setSelected($sfm_pg_wizards.selectObject,"Work Order");
 _wait(3000);
 $bo_act_navigation.editWizard("AutoRegression");
 $sfm_act_createCustomWizard.addWizStepWithoutName("Output Document", $sfmName, $profile);
-$bo_act_navigation.navigateToSfmTransactionDesigner();
-_setStrictVisibilityCheck(true);
-_wait(3000);
 $scenario_10571.end();
 _writeFile("true", $appiumPath+$sahiIntermediatoryPath, true);
 
