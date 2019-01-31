@@ -35,7 +35,7 @@ var $sfmrdz_act_common= new function sfmrdz_act_common(){
 		_setValue($sfmrdz_pg_common.txt_searchApp,"SFM New Designer");
 		_wait(3000);
 		//_focus($sfmrdz_pg_common.link_newDesigner); // - Ajay 1/28
-		_click($sfmrdz_pg_common.link_newDesigner);	// - Ajay 1/30
+		_click($sfmrdz_pg_common.link_newDesigner);	// - Ajayb 1/30
 		_wait(3000);
 		_selectDomain("/svmx/");
 		_wait(3000);

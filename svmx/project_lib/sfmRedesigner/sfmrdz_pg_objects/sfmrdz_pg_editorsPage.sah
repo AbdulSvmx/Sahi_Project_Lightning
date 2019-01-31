@@ -24,8 +24,7 @@ var $sfmrdz_pg_editorsPage = new function sfmrdz_pg_editorsPage(){
 		
 	this.textbox_ObjectFieldNames_Dropdown = _textbox("Input Picklist__input slds-input slds-combobox__input[1]");
 	this.textbox_ObjectFieldNames_Filter = _textbox("menu-filter[1]");
-	// May not require below object
-	//this.listitem_FieldName_AllRecords = _div("Menu Picklist__menu slds-listbox Menu--size-small PicklistFactory__menu Menu--size-block Menu--isVisible Menu--notShowOnHover react-slds-no-hover-popup slds-dropdown");
+	
 	this.listitem_FieldName_FirstRecord = _div("Text slds-text-body--regular slds-text-align--left slds-text-color--weak MenuItem__secondary[172]");
         
     this.textbox_Comparision_Dropdown  = _textbox("Input Picklist__input slds-input slds-combobox__input[2]");
