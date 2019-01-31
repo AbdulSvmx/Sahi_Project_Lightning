@@ -108,21 +108,21 @@ var $sfmOrgInstance = "CS95";
 //These are the Automation org details
 //comment them to run in Track org.
 
-var $sfmlUsn = "sfdl_auto@automation.com";
+/*var $sfmlUsn = "sfdl_auto@automation.com";
 var $sfmlPwd ="Maxplore3";
 var $sfmClientId ="YjkyMzJmNDUzMGNmOTYzODVlNDQ0ZjE2OTUxOTU1NDI5MGViN2I3NWU3YTFjNmY300D290000000WVC";
 var $sfmConsumerSecret = "5287076090725084260";
 var $sfmOrgInstance = "cs19"; 
- var $sfd_myDomain = "/lightning/";
+ var $sfd_myDomain = "/lightning/";*/
  
 
-/*//Track team org values
+//Track team org values
 var $sfmlUsn = "safi.svmxc@regression-test.com";
 var $sfmlPwd ="servicemax1";
 var $sfmClientId ="3MVG9bx.kiqxiA6axf4G7MErRe22WHQqN2fKkf6_EUBnqeNF0.ZsFTuPQFqr.iFWOKUw8WuumMy1f4SqQ0Qxd";
 var $sfmConsumerSecret = "2054334165758985535";
 var $sfmOrgInstance = "CS26"; 
- var $sfd_myDomain = "/sfdlightning/";*/
+ var $sfd_myDomain = "/sfdlightning/";
  
  
 // DC Global Variables
