@@ -188,5 +188,5 @@ $bo_act_SFMAppPermission.set_mobileapp_permissions("auto group profile", "Case",
 $bo_act_SFMAppPermission.set_mobileapp_permissions("auto group profile", "Location", $sfmNameLocation);
 $bo_act_SFMAppPermission.set_mobileapp_permissions("auto group profile", "Installed Product", $sfmNameInstalledProduct);
 $bo_act_SFMAppPermission.set_mobileapp_permissions("auto group profile", "Auto_Custom_Object2", $sfmNameCustomObject);
-
+_writeFile("true", $appiumPath+$sahiIntermediatoryPath, true);
 $scenario_10570.end();
