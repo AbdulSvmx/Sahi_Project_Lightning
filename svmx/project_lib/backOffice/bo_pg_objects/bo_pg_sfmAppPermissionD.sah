@@ -43,13 +43,16 @@ var $bo_pg_sfmAppPermissionD= new function bo_pg_sfmAppPermissionD(){
 	this.txt_ScheduledDataSync = _textbox("Synchronize application data once every (includes events, tasks, and related data)");
 
 	this.chkbox_workorder = _checkbox("/on/",_near(_cell("Work Order")));
-this.chkbox_account = _checkbox("/on/",_near(_cell("Account")));
+    this.chkbox_account = _checkbox("/on/",_near(_cell("Account")));
 	this.chkbox_location = _checkbox("/on/",_near(_cell("Location")));
 	this.chkbox_product = _checkbox("/on/",_near(_cell("Product")));
 	this.chkbox_contact = _checkbox("/on/",_near(_cell("Contact")));
 	this.picklist_records = _select("j_id0:SVMX_FORM:mainBlock:j_id97:CriteriaBlock:CriteriaSection:ExpTable1:0:j_id191");
 	this.btn_configsave = _button("Save");
 	this.chkbox_case = _checkbox("/on/",_near(_cell("Case")));
+	this.btn_addDownloadCriteria = _button("/Add/",_in(_table("rich-tabpanel")));
+	this.sel_objName = _select("/SVMX_FORM:/",_under(_tableHeader("Object Name")));
+	this.sel_OwnershipType = _select("/SVMX_FORM:/",_under(_tableHeader("Ownership Type")),_rightOf(_cell("Product Stock")));
 	
 	this.selProcessTypeInSFMAppPermission=function($processType){
 		_click(_textbox("label"));

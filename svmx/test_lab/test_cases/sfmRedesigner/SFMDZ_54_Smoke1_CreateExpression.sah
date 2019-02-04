@@ -1,0 +1,80 @@
+/**
+ * Author	: Ajay Kumar B 
+ * Reviewer	: 
+ * Pre-req	: Nothing
+ * Testcase	: 
+ * Steps	: 
+ 				1)  
+ * Expt Res	:
+ 				2) .
+ */
+
+var $SFMDZ_54_Smoke1_CreateExpression = _testcase("SFMDZ_54_Smoke1_CreateExpression.sah","Create a Expression");
+$SFMDZ_54_Smoke1_CreateExpression.start();
+_setSpeed($g_stepSpeed);
+
+/**
+ * Global Variable declaration
+ */
+
+var $url="https://test.salesforce.com";
+var $un="saadat.dz2perftest@servicemax.com";
+var $pwd="servicemax4";
+var $viewName="Expressions";
+
+/**
+ * Login to the Sandbox Org and launching Transaction list view
+**/
+
+$bo_act_login.login($url, $un, $pwd);
+
+//SFM Designer Landing Page - Set up Home Page
+$sfmrdz_act_common.launchListView($viewName);
+
+//Assertions on transaction list view
+
+_assertExists($sfmrdz_pg_common.btn_backtoSetup);
+_assertExists($sfmrdz_pg_common.btn_help);
+
+_click($sfmrdz_pg_editorsPage.btn_NewExpression);
+
+//New Expression Creation Page
+_assertExists($sfmrdz_pg_editorsPage.headertext_Heading_Expressions);
+_assertExists($sfmrdz_pg_editorsPage.treenavigation_ExpressionsNewExpressions);
+_click($sfmrdz_pg_editorsPage.container_UntitledExpression_EditIcon);
+
+_setValue($sfmrdz_pg_editorsPage.textbox_Title,"New Designer AJ");
+//Click TAB button
+//_keyPress(element, 9);
+//_removeFocus($sfmrdz_pg_editorsPage.textbox_Title);
+_setValue($sfmrdz_pg_editorsPage.textarea_Description,"Test Expression Flow AJ");
+
+_click($sfmrdz_pg_editorsPage.textbox_ExpressionObject_Dropdown);
+_click($sfmrdz_pg_editorsPage.TD_ExpressionObject);
+_wait(1000);
+_click($sfmrdz_pg_editorsPage.textbox_ObjectFieldNames_Dropdown);
+_click($sfmrdz_pg_editorsPage.TD_ExpressionFieldObject);
+
+_click($sfmrdz_pg_editorsPage.textbox_Comparision_Dropdown);
+_click($sfmrdz_pg_editorsPage.TD_OperatorObject);
+
+//$sfmrdz_act_common.selectPicklistvalue("OperatorPicklist","Contains");
+
+_click($sfmrdz_pg_editorsPage.textbox_CaseType_Value);
+_click($sfmrdz_pg_editorsPage.TD_CaseTypeObject);
+
+
+_click($sfmrdz_pg_editorsPage.btn_Save);
+_assertVisible($sfmrdz_pg_editorsPage.labelmsg_successMsg);
+
+_click($sfmrdz_pg_editorsPage.btn_Cancel);
+_wait(2000);
+
+_setValue($sfmrdz_pg_editorsPage.textbox_SearchFilter,"New Designer AJ");
+_assertContainsText ("New Designer AJ", _div("rt-td DataGrid__cell DataTableCell--overflow"), "Expected Text Exists");
+
+_logOutput("Expression Created Succesfully");
+
+$sfm_act_lightningConfig.logoutInLightning();
+		
+$SFMDZ_54_Smoke1_CreateExpression.end();

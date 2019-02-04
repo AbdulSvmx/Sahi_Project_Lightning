@@ -796,13 +796,13 @@ return $result;
 			
 		};
 		
-	this.addTemplateDesigner = function($stdTemplate){
+	this.addTemplateDesigner = function($tempName){
 		_click($bo_pg_sfmTransactionAndDesigner.templateDesigner);
 		_wait(2000);
-		_setSelected($bo_pg_sfmTransactionAndDesigner.select_template, $stdTemplate);
-		_setValue($bo_pg_sfmTransactionAndDesigner.txt_tempName,"Tester33");
-		_setValue($bo_pg_sfmTransactionAndDesigner.txt_tempId,"Tester33");
-		_click($bo_pg_sfmTransactionAndDesigner.btn_templateSaveAs);
+//		_setSelected($bo_pg_sfmTransactionAndDesigner.select_template, $stdTemplate);
+		_setValue($bo_pg_sfmTransactionAndDesigner.txt_tempName,$tempName);
+		_setValue($bo_pg_sfmTransactionAndDesigner.txt_tempId,$tempName);
+		_click($bo_pg_sfmTransactionAndDesigner.btn_templateSave);
 		_wait(3000);
 		if(_isVisible($bo_pg_sfmTransactionAndDesigner.lbl_templateSave)){
 			_log("Pass");

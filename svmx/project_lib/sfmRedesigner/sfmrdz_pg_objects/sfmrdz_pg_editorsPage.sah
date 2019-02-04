@@ -1,0 +1,67 @@
+/**
+ <> * Editors view page object repository - AJAY * <>
+ **/
+
+var $sfmrdz_pg_editorsPage = new function sfmrdz_pg_editorsPage(){
+	
+	this.btn_NewExpression = _span("New Expression");
+	//Expression Header Items 
+	this.headertext_Heading_Expressions = _heading1("Expressions");	
+	this.btn_BackToSetUpHome = _button("Back To Setup Home");	
+	
+	
+	this.link_navigation_Expressions = _link("Expressions");
+	this.treenavigation_ExpressionsNewExpressions = _list("BreadCrumbs slds-breadcrumb slds-list--horizontal EditorHeader__nav");
+		
+	// New Expression page
+	this.container_UntitledExpression_EditIcon = _div("EditContainer");	
+	this.textbox_Title = _textbox("expressionName");
+	this.textarea_Description = _textarea("entityDescription");
+	
+	this.textbox_ExpressionObject_Dropdown = _textbox("expressionObject");
+	this.textbox_ObjectName_Filter = _textbox("menu-filter");
+	this.listitem_ObjectName_FirstRecord = _div("Text slds-text-body--regular slds-text-align--left slds-text-color--weak MenuItem__secondary");
+		
+	this.textbox_ObjectFieldNames_Dropdown = _textbox("Input Picklist__input slds-input slds-combobox__input[1]");
+	this.textbox_ObjectFieldNames_Filter = _textbox("menu-filter[1]");
+	
+	this.listitem_FieldName_FirstRecord = _div("Text slds-text-body--regular slds-text-align--left slds-text-color--weak MenuItem__secondary[172]");
+        
+    this.textbox_Comparision_Dropdown  = _textbox("Input Picklist__input slds-input slds-combobox__input[2]");
+    this.listitem_FieldComparision_AllRecords = _div("Menu Picklist__menu slds-listbox Menu--size-x-small PicklistFactory__menu Menu--size-block Menu--isVisible Menu--notShowOnHover react-slds-no-hover-popup slds-dropdown");
+    this.textbox_Field_Value = _textbox("Input Picklist__input slds-input slds-combobox__input[3]");
+    this.textbox_Field_Telephonebox = _textbox("expressionRows[0].fieldValue");
+    
+    this.textbox_CaseType_Value =_textbox("Input Picklist__input slds-input slds-combobox__input[4]");
+
+    //this.textbox_Field_Telephonebox = _textbox("Input slds-input[2]");
+   
+    this.textbox_Field_LookUp = _textbox("Input slds-input[1]");
+    this.textbox_Field_FirstRecord = _div("Text slds-text-body--regular slds-text-align--left slds-text-color--weak MenuItem__secondary[229]");
+    this.textbox_Field_Date = _textbox("expressionRows[0].fieldValue-date");
+    this.btn_FieldCurrentDate_Today = _button("Today");
+    
+    this.Button_delete_Icon = _button("Button slds-button Button--type-icon-bare slds-button--icon-bare slds-button_icon-bare slds-button--icon-small");
+   
+	this.btn_RefreshMetaData = _button("Refresh Metadata");
+	this.btn_Cancel = _span("Cancel");
+	this.btn_Save = _span("Save");
+	this.lbl_AdvncedExpression = _label("TL:Advanced Expression");
+	this.textarea_AdvncedExpression = _textarea("advancedExpression");	
+	this.labelmsg_successMsg = _heading2("slds-text-heading--small");
+	this.labelmsg_closeIcon = _button("Button Alert__close slds-notify__close slds-button Button--type-icon-inverse slds-button--icon-inverse slds-button_icon-inverse");
+	
+	this.textbox_SearchFilter = _textbox("ListFilter");
+	this.link_FirstRecord = _link("Text slds-text-body--regular slds-text-align--left slds-text-color--default slds-truncate NameCell__title-color");
+	
+	// Test Data
+	this.TD_ExpressionObject = _span("Case");
+	this.TD_ExpressionFieldObject = _span("Case Type");
+	this.TD_OperatorObject = _span("Equals");
+	this.TD_CaseTypeObject = _span("Problem");
+	
+	
+	
+	
+	
+};

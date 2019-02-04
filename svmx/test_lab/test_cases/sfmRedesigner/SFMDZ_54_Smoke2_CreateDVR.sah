@@ -1,0 +1,77 @@
+/**
+ * Author	: Ajay Kumar B 
+ * Reviewer	: 
+ * Pre-req	: Nothing
+ * Testcase	: Create a new Data Validation Rule flow.
+ * Steps	: Vanilla Flow with all Verification and Validation*			 
+ * Expt Res	: New DVR should be Created. 				
+**/
+
+var $SFMDZ_54_Smoke2_CreateDVR = _testcase("SFMDZ_54_Smoke2_CreateDVR.sah","Create a DVR");
+$SFMDZ_54_Smoke2_CreateDVR.start();
+_setSpeed($g_stepSpeed);
+
+/**
+ * Global Variable declaration
+ */
+
+var $url="https://test.salesforce.com";
+var $un="saadat.dz2perftest@servicemax.com";
+var $pwd="servicemax4";
+var $viewName="Data Validation Rules";
+
+/**
+ * Login to the Sandbox Org and launching Transaction list view
+**/
+
+$bo_act_login.login($url, $un, $pwd);
+
+//SFM Designer Landing Page - Set up Home Page
+$sfmrdz_act_common.launchListView($viewName);
+
+//Assertions on transaction list view
+
+_assertExists($sfmrdz_pg_common.btn_backtoSetup);
+_assertExists($sfmrdz_pg_common.btn_help);
+
+_click($sfmrdz_pg_editorsPage.btn_NewDVR);
+
+//New Expression Creation Page
+_assertContainsText("Data Validation Rules",$sfmrdz_pg_editorsPage.headertext_Heading_DVR, "Expected Text");
+_assertExists($sfmrdz_pg_editorsPage.treenavigation_DVRNewDVR);
+_click($sfmrdz_pg_editorsPage.container_UntitledExpression_EditIcon);
+
+_setValue($sfmrdz_pg_editorsPage.textbox_Title,"New Designer New DVR");
+_setValue($sfmrdz_pg_editorsPage.textarea_Description,"Test DVR Flow AJ");
+
+_click($sfmrdz_pg_editorsPage.textbox_ExpressionObject_Dropdown);
+_click($sfmrdz_pg_editorsPage.TD_ExpressionObject);
+_wait(1000);
+_click($sfmrdz_pg_editorsPage.textbox_ObjectFieldNames_Dropdown);
+_click($sfmrdz_pg_editorsPage.TD_ExpressionFieldObject);
+
+_click($sfmrdz_pg_editorsPage.textbox_Comparision_Dropdown);
+_click($sfmrdz_pg_editorsPage.TD_OperatorObject);
+
+$sfmrdz_act_common.selectPicklistvalue("OperatorPicklist","Contains");
+
+_click($sfmrdz_pg_editorsPage.textbox_CaseType_Value);
+_click($sfmrdz_pg_editorsPage.TD_CaseTypeObject);
+
+_setValue($sfmrdz_pg_editorsPage.textarea_dvrMsg,"DVR Default Message");
+
+_click($sfmrdz_pg_editorsPage.btn_Save);
+_assertVisible($sfmrdz_pg_editorsPage.labelmsg_successMsg);
+
+_click($sfmrdz_pg_editorsPage.btn_Cancel);
+_wait(2000);
+
+_setValue($sfmrdz_pg_editorsPage.textbox_SearchFilter,"New Designer New DVR");
+_highlight($sfmrdz_pg_editorsPage.link_SearchResults);
+_assertContainsText ("New Designer New DVR",$sfmrdz_pg_editorsPage.link_SearchResults, "Expected Text Exists");
+
+_logOutput("DVR Created Succesfully");
+
+$sfm_act_lightningConfig.logoutInLightning();
+		
+$SFMDZ_54_Smoke2_CreateDVR.end();
