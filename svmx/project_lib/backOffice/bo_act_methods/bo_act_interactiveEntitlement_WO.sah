@@ -102,7 +102,7 @@ var $bo_act_interactiveEntitlement_WO = new function bo_act_interactiveEntitleme
 			}
 		}
 		_click($bo_pg_interactiveEntitlement_CaseAndWO.btn_chkEntitlementPS);
-		//this.clickCheckEntitlement();
+		this.clickCheckEntitlement();
 		_click($bo_pg_interactiveEntitlement_CaseAndWO.btn_settingsPS);
 		_click($bo_pg_interactiveEntitlement_CaseAndWO.btn_matchContactsPS);
 		_click($bo_pg_interactiveEntitlement_CaseAndWO.btn_entitleusingAccount);
@@ -172,7 +172,7 @@ var $bo_act_interactiveEntitlement_WO = new function bo_act_interactiveEntitleme
 			}
 		}
 		_click($bo_pg_interactiveEntitlement_CaseAndWO.btn_chkEntitlementPS);
-		//this.clickCheckEntitlement();
+		this.clickCheckEntitlement();
 		_click($bo_pg_interactiveEntitlement_CaseAndWO.btn_settingsPS);
 		_click($bo_pg_interactiveEntitlement_CaseAndWO.btn_apply);
 		_click($bo_pg_interactiveEntitlement_CaseAndWO.btn_chkEntitlementPS);
@@ -254,6 +254,7 @@ var $bo_act_interactiveEntitlement_WO = new function bo_act_interactiveEntitleme
 		//this.clickCheckEntitlement();
 		_setStrictVisibilityCheck(true);
 		// To move to Settings and Set it to Account and Remove Match Contact
+		_wait(20000);
 		_click($bo_pg_interactiveEntitlement_CaseAndWO.btn_settings);
 		_click($bo_pg_interactiveEntitlement_CaseAndWO.chk_settingMatchContact_CasePage);
 		_click($bo_pg_interactiveEntitlement_CaseAndWO.radio_account);
@@ -263,7 +264,7 @@ var $bo_act_interactiveEntitlement_WO = new function bo_act_interactiveEntitleme
 		$bo_pg_interactiveEntitlement_CaseAndWO.selectSConOnCheckEntmPage($sconName);
 		_click($bo_pg_interactiveEntitlement_CaseAndWO.btn_saveEntitlementPSLine);
 		_selectDomain();
-		_setStrictVisibilityCheck();
+		_setStrictVisibilityCheck();    
 		
 	};
 	
@@ -328,7 +329,7 @@ var $bo_act_interactiveEntitlement_WO = new function bo_act_interactiveEntitleme
 		
 		}
 		_click($bo_pg_interactiveEntitlement_CaseAndWO.btn_checkEntitlement);
-		//this.clickCheckEntitlement();
+		this.clickCheckEntitlement();
 		_wait(30000);
 		_domain("/svmx/")._click(_checkbox("/EVER_CaseEntitlement/", _near((_link($warrantyName)))));
 		if(_isChecked(_checkbox("/EVER_CaseEntitlement/", _near(_label("Incident Not Covered"))))==true)
