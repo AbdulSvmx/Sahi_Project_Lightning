@@ -74,8 +74,8 @@ var $url_checklist = "https://test.salesforce.com";
 
 // SFMD Global Variables
 //dev credentials
-//var $sfmUsn = "svmx-sfdtest@svmx-sfdtest.org.sfdtest1"; // dev
-//var $sfmPwd = "servicemax3";
+//var $sfmlUsn = "svmx-sfdtest@svmx-sfdtest.org.sfdtest1"; // dev
+//var $sfmlPwd = "servicemax3";
 //var $sfmClientId ="YjkyMzJmNDUzMGNmOTYzODVlNDQ0ZjE2OTUxOTU1NDI5MGViN2I3NWU3YTFjNmY300D4F0000008iwP";
 //var $sfmConsumerSecret = "939409183430414665";
 //var $sfmOrgInstance = "cs93";
