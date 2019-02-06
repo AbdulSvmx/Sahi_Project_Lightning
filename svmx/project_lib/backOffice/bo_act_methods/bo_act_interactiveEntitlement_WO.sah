@@ -58,7 +58,7 @@ var $bo_act_interactiveEntitlement_WO = new function bo_act_interactiveEntitleme
 	this.performInteractiveEntitlementWO_UsingScon = function($WO_Number, $sconName) {
 
 		$bo_act_workOrders.checkEntitlement($WO_Number);
-		var $url;
+		_selectDomain("/svmx/");
 		for (var $i = 0; $i < 25; $i++) {
 
 			if (_isVisible($bo_pg_interactiveEntitlement_CaseAndWO.btn_checkEntitlement)) {
@@ -66,12 +66,16 @@ var $bo_act_interactiveEntitlement_WO = new function bo_act_interactiveEntitleme
 			}
 
 			else {
+				_selectDomain();
 				_call(top.location.reload());
-				_wait(10000, _isVisible($bo_pg_interactiveEntitlement_CaseAndWO.btn_checkEntitlement));
+				_selectDomain("/svmx/");
+				_wait(20000, _isVisible($bo_pg_interactiveEntitlement_CaseAndWO.btn_checkEntitlement));
+
 				
 
 			}
 		}
+		_selectDomain("/svmx/");
 		_click($bo_pg_interactiveEntitlement_CaseAndWO.btn_checkEntitlement);
 		this.clickCheckEntitlement();
 
@@ -102,6 +106,7 @@ var $bo_act_interactiveEntitlement_WO = new function bo_act_interactiveEntitleme
 
 			}
 		}
+		_selectDomain("/svmx/");
 		_click($bo_pg_interactiveEntitlement_CaseAndWO.btn_chkEntitlementPS);
 		//this.clickCheckEntitlement();
 		_wait(20000);
@@ -140,7 +145,7 @@ var $bo_act_interactiveEntitlement_WO = new function bo_act_interactiveEntitleme
 
 			}
 		}
-
+		_selectDomain("/svmx/");
 		_click($bo_pg_interactiveEntitlement_CaseAndWO.btn_chkEntitlementPS);
 		_click($bo_pg_interactiveEntitlement_CaseAndWO.btn_selectwarrantyorScon);
 		_click(_div("/svmx-grid-radioheader/", _near(_link($WarrantyName)))); 
@@ -240,13 +245,17 @@ var $bo_act_interactiveEntitlement_WO = new function bo_act_interactiveEntitleme
 			}
 
 			else {
+				_selectDomain();
 				_call(top.location.reload());
+				_selectDomain("/svmx/");
 				_wait(20000, _isVisible($bo_pg_interactiveEntitlement_CaseAndWO.btn_checkEntitlement));
 
 			}
 		
 		}
+	
 		_setStrictVisibilityCheck(true);
+		_selectDomain("/svmx/");
 		_click($bo_pg_interactiveEntitlement_CaseAndWO.btn_checkEntitlement);
 		this.clickCheckEntitlement();
 		// To move to Settings and Set it to Account and Remove Match Contact
@@ -275,16 +284,20 @@ var $bo_act_interactiveEntitlement_WO = new function bo_act_interactiveEntitleme
 				}
 
 				else {
+					_selectDomain();
 					_call(top.location.reload());
+					_selectDomain("/svmx/");
 					_wait(20000, _isVisible($bo_pg_interactiveEntitlement_CaseAndWO.btn_checkEntitlement));
+
 
 				}
 			
 			}
+			
 			_setStrictVisibilityCheck(true);
+			_selectDomain("/svmx/");
 			_click($bo_pg_interactiveEntitlement_CaseAndWO.btn_checkEntitlement);
 			this.clickCheckEntitlement();
-
 			// To move to Settings and Set it to Account and Remove Match Contact
 			_click($bo_pg_interactiveEntitlement_CaseAndWO.btn_settings);
 			_click($bo_pg_interactiveEntitlement_CaseAndWO.chk_settingMatchContact_CasePage);
@@ -314,13 +327,18 @@ var $bo_act_interactiveEntitlement_WO = new function bo_act_interactiveEntitleme
 			}
 
 			else {
+				_selectDomain();
 				_call(top.location.reload());
+				_selectDomain("/svmx/");
 				_wait(20000, _isVisible($bo_pg_interactiveEntitlement_CaseAndWO.btn_checkEntitlement));
+
 
 			}
 		
 		}
+		
 		_setStrictVisibilityCheck(true);
+		_selectDomain("/svmx/");
 		_click($bo_pg_interactiveEntitlement_CaseAndWO.btn_checkEntitlement);
 		this.clickCheckEntitlement();
 		_wait(30000);
@@ -351,12 +369,16 @@ var $bo_act_interactiveEntitlement_WO = new function bo_act_interactiveEntitleme
 			}
 
 			else {
+				_selectDomain();
 				_call(top.location.reload());
+				_selectDomain("/svmx/");
 				_wait(20000, _isVisible($bo_pg_interactiveEntitlement_CaseAndWO.btn_checkEntitlement));
+
 
 			}
 		
 		}
+		_selectDomain("/svmx/");
 		_setStrictVisibilityCheck(true);
 		_click($bo_pg_interactiveEntitlement_CaseAndWO.btn_checkEntitlement);
 		this.clickCheckEntitlement();
@@ -373,8 +395,5 @@ var $bo_act_interactiveEntitlement_WO = new function bo_act_interactiveEntitleme
 	
 	
 	// Perform Entilement for Work Order using SCON - PS Lines
-	
-	
-	
 	
 };
