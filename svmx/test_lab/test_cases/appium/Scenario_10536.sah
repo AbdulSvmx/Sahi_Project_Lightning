@@ -113,6 +113,15 @@ var $WoID=$sfm_act_restApiMethods.postRestApi($appiumAdminUn,$appiumAdminPwd,$ap
 $WOName =$sfm_act_restApiMethods.getRestApi($appiumAdminUn,$appiumAdminPwd,$appiumclient_id,$appiumclient_secret,$appiumorginstance,"GET", $objNameWO, $columnName, $filter, $WoID);
 
 
+$objNameWD= "SVMXC__Service_Order_Line__c";
+$obJson = "{\"RecordType\":{\"Name\":\"Products Serviced\"},\"SVMXC__Service_Order__c\":\""+$WoID+"\", \"SVMXC__Serial_Number__c\":\""+$IbID+"\"}";
+$columnName = "Name";
+$filter="id";
+//create  case with above created account and other parameters
+$WDID=$sfm_act_restApiMethods.postRestApi($appiumAdminUn,$appiumAdminPwd,$appiumclient_id,$appiumclient_secret,$appiumorginstance,$objNameWD,$obJson,"POST");
+_log($WDID);
+
+
 _wait(30000);
 _call(top.location.reload());
 $bo_act_navigation.navigateToCreatedRecordUsingGlobalSearchWO($WOName);
@@ -121,13 +130,7 @@ $bo_act_interactiveEntitlement_WO.performInteractiveEntitlementWO_UsingWarrantyP
 
 // To add a Product Serviced Work Detail to the Work Order
 
-$objNameWD= "SVMXC__Service_Order_Line__c";
-$obJson = "{\"RecordType\":{\"Name\":\"Products Serviced\"},\"SVMXC__Service_Order__c\":\""+$WoID+"\", \"SVMXC__Serial_Number__c\":\""+$IbID+"\"}";
-$columnName = "Name";
-$filter="id";
-//create  case with above created account and other parameters
-$WDID=$sfm_act_restApiMethods.postRestApi($appiumAdminUn,$appiumAdminPwd,$appiumclient_id,$appiumclient_secret,$appiumorginstance,$objNameWD,$obJson,"POST");
-_log($WDID);
+
 
 
 _wait(30000);
