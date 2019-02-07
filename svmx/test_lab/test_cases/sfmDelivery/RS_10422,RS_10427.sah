@@ -35,7 +35,7 @@ $bo_act_login.login($g_url,$sfmlUsn,$sfmlPwd);
 //$sfm_act_SFM.cloneTDM016($sfmNameToBeCloned,$processName,$isCustom,$sfmTemplateSaveAsName, $sfmTemplate, $fieldName, $containerName);
 //_selectDomain();
 //clone tmd016
-$sfm_act_SFM.cloneTDM016($sfmNameToBeCloned,$sfmName,$isCustom, $sfmTemplateSaveAsName, $sfmTemplate, $fieldName, $containerName);
+$sfm_act_SFM.cloneTDM016($sfmNameToBeCloned,$processName,$isCustom, $sfmTemplateSaveAsName, $sfmTemplate, $fieldName, $containerName);
 _selectDomain();
 
 //Add the custom process to SFM wizard.

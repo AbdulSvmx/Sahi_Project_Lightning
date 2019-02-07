@@ -7,14 +7,9 @@ $sfmNameCase = "SFM_Case_10570";
 $sfmNameLocation = "SFM_Loc_10570";
 $sfmNameInstalledProduct = "SFM_IB_10570";
 $sfmNameCustomObject = "SFM_CO_10570";
-$wizTitle = $bo_act_common.generateRandomName("SFM Wiz");
-$wizTitle1 = $bo_act_common.generateRandomName("SFM Wiz");
-$wizTitle2 = $bo_act_common.generateRandomName("SFM Wiz");
-$wizTitle3 = $bo_act_common.generateRandomName("SFM Wiz");
-$wizTitle4 = $bo_act_common.generateRandomName("SFM Wiz");
 $sfmTemplateSaveAsName = $bo_act_common.generateRandomName("SFM_Temp_");
 $sfmMappingName = $bo_act_common.generateRandomName("SFM_Mapping_");
-$headersToAdd = ["AutoC_date_c","AutoC_dateTime_c","Auto_PickList_c","Auto_TextBox_c","AutoC_textArea_c"];
+$headersToAdd = ["AutoC_date_c","AutoC_dateTime_c","Auto_PickList_c","Auto_TextBox_c","AutoC_textArea_c","Auto_Custom_Object2 Name"];
 var $profile= "auto group profile";
 	
 $bo_act_login.login($g_url, $appiumAdminUn, $appiumAdminPwd);
@@ -193,5 +188,5 @@ $bo_act_SFMAppPermission.set_mobileapp_permissions("auto group profile", "Case",
 $bo_act_SFMAppPermission.set_mobileapp_permissions("auto group profile", "Location", $sfmNameLocation);
 $bo_act_SFMAppPermission.set_mobileapp_permissions("auto group profile", "Installed Product", $sfmNameInstalledProduct);
 $bo_act_SFMAppPermission.set_mobileapp_permissions("auto group profile", "Auto_Custom_Object2", $sfmNameCustomObject);
-
+_writeFile("true", $appiumPath+$sahiIntermediatoryPath, true);
 $scenario_10570.end();

@@ -70,11 +70,27 @@ var $WoID=$sfm_act_restApiMethods.postRestApi($appiumAdminUn,$appiumAdminPwd,$ap
 //get the Work Order Name
 $WOName =$sfm_act_restApiMethods.getRestApi($appiumAdminUn,$appiumAdminPwd,$appiumclient_id,$appiumclient_secret,$appiumorginstance,"GET", $objNameWO, $columnName, $filter, $WoID);
 
+
+
+$objNameWD= "SVMXC__Service_Order_Line__c";
+$obJson = "{\"RecordType\":{\"Name\":\"Products Serviced\"},\"SVMXC__Service_Order__c\":\""+$WoID+"\",\"SVMXC__Product__c\":\""+$ProductID+"\", \"SVMXC__Serial_Number__c\":\""+$IB10538ID+"\" }";
+$columnName = "Name";
+$filter="id";
+//create  case with above created account and other parameters
+$WDID=$sfm_act_restApiMethods.postRestApi($appiumAdminUn,$appiumAdminPwd,$appiumclient_id,$appiumclient_secret,$appiumorginstance,$objNameWD,$obJson,"POST");
+_log($WDID);
+
+$objNameWD= "SVMXC__Service_Order_Line__c";
+$columnName = "Name";
+$filter="Id";
+$WDName =$sfm_act_restApiMethods.getRestApi($appiumAdminUn,$appiumAdminPwd,$appiumclient_id,$appiumclient_secret,$appiumorginstance,"GET", $objNameWD, $columnName, $filter,$WDID);
+_log($WDName);
+
+
 _wait(30000);
 _call(top.location.reload());
 $bo_act_navigation.navigateToCreatedRecordUsingGlobalSearchWO($WOName);
 $bo_act_interactiveEntitlement_WO.performInteractiveEntitlementWO_UsingSconPSLines($WOName, $SCONName);
-
 
 
 //To get the IB 10538 ID
@@ -91,23 +107,6 @@ $WarrantyName =$sfm_act_restApiMethods.getRestApi($appiumAdminUn,$appiumAdminPwd
 _log($WarrantyName);
 
 
-
-
-// To add a Product Serviced Work Detail to the Work Order
-
-$objNameWD= "SVMXC__Service_Order_Line__c";
-$obJson = "{\"RecordType\":{\"Name\":\"Products Serviced\"},\"SVMXC__Service_Order__c\":\""+$WoID+"\",\"SVMXC__Product__c\":\""+$ProductID+"\", \"SVMXC__Serial_Number__c\":\""+$IB10538ID+"\" }";
-$columnName = "Name";
-$filter="id";
-//create  case with above created account and other parameters
-$WDID=$sfm_act_restApiMethods.postRestApi($appiumAdminUn,$appiumAdminPwd,$appiumclient_id,$appiumclient_secret,$appiumorginstance,$objNameWD,$obJson,"POST");
-_log($WDID);
-
-$objNameWD= "SVMXC__Service_Order_Line__c";
-$columnName = "Name";
-$filter="Id";
-$WDName =$sfm_act_restApiMethods.getRestApi($appiumAdminUn,$appiumAdminPwd,$appiumclient_id,$appiumclient_secret,$appiumorginstance,"GET", $objNameWD, $columnName, $filter,$WDID);
-_log($WDName);
 
 _wait(30000);
 _call(top.location.reload());

@@ -73,40 +73,21 @@ var $pwd_checklist = $bac_pwd;// "cloud_102";
 var $url_checklist = "https://test.salesforce.com";
 
 // SFMD Global Variables
-//var $sfmUsn = "svmx-sfdtest@svmx-sfdtest.org.sfdtest1"; // dev
-//var $sfmPwd = "servicemax3";
-//var $sfmUsn = "scarface.qa8@admin.com"; // dev
-//var $sfmPwd = "fireexit1";
-
-var $sfmUsn = "sysadmin01@sfdautomation.com"; // base
-var $sfmPwd = "Maxplore4";
-var $g_domain = "/svmx/";
+//dev credentials
+//var $sfmlUsn = "svmx-sfdtest@svmx-sfdtest.org.sfdtest1"; // dev
+//var $sfmlPwd = "servicemax3";
+//var $sfmClientId ="YjkyMzJmNDUzMGNmOTYzODVlNDQ0ZjE2OTUxOTU1NDI5MGViN2I3NWU3YTFjNmY300D4F0000008iwP";
+//var $sfmConsumerSecret = "939409183430414665";
+//var $sfmOrgInstance = "cs93";
+//var $sfd_myDomain = "/lightning/";
 
 
 
 var $wizardName = ["SFMDAuto_Ltng_DVR", "SFMDAuto_Ltng_WebServices","SFMDAuto_Ltng_Process","SFMDAuto_Ltng_LookUP","SFMDAuto_Ltng_Mappings",
                      "SFMDAuto_Ltng_Formula","SFMDAuto_Ltng_Expression","SFMAuto_Ltng_Wizards", "swat_WebServices_Custom_Action"];
 var $wizardType = ["None","SFM","Inventory","Others","Output Document"];
-/*
-//dev org credentials 
-  var $sfmlUsn = "safi.svmxdev@regression-test.com";
-var $sfmlPwd ="servicemax1";
-var $sfmClientId ="3MVG9srSPoex34FUKHjdsODAqpbdJxlgnt_zgMhdj8b37sDH0lZ_TL64TnDoxnRHLOmtP6HvKluYrdt3VJKc3";
-var $sfmConsumerSecret = "106093921577812496";
-var $sfmOrgInstance = "cs53"; 
- var $sfd_myDomain = "/sfd-auto/";  */
 
-//  Track org details
-/*
-var $sfmlUsn = "sfmdelivery@automation.com";
-var $sfmlPwd ="svmx12345";
-var $sfmClientId ="3MVG9Yb5IgqnkB4qStZ2NyI2.As4EeBsSuH8TiAJWkUsGqFT6KdVV7T0p2WY60IEDxYhm3MBF88r9zYYG09OQ";
-var $sfmConsumerSecret = "8810837502286704103";
-var $sfmOrgInstance = "CS95"; 
- var $sfd_myDomain = "/multifull/";
-*/
-//These are the Automation org details
-//comment them to run in Track org.
+//These are the Automation base org details comment them to run in Track org.
 
 var $sfmlUsn = "sfdl_auto@automation.com";
 var $sfmlPwd ="Maxplore3";
@@ -116,14 +97,6 @@ var $sfmOrgInstance = "cs19";
  var $sfd_myDomain = "/lightning/";
  
 
-/*//Track team org values
-var $sfmlUsn = "safi.svmxc@regression-test.com";
-var $sfmlPwd ="servicemax1";
-var $sfmClientId ="3MVG9bx.kiqxiA6axf4G7MErRe22WHQqN2fKkf6_EUBnqeNF0.ZsFTuPQFqr.iFWOKUw8WuumMy1f4SqQ0Qxd";
-var $sfmConsumerSecret = "2054334165758985535";
-var $sfmOrgInstance = "CS26"; 
- var $sfd_myDomain = "/sfdlightning/";
- */
  
 // DC Global Variables
 var $dc_org = $orgtype;
