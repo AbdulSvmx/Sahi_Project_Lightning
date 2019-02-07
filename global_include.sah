@@ -95,7 +95,7 @@ var $sfmClientId ="YjkyMzJmNDUzMGNmOTYzODVlNDQ0ZjE2OTUxOTU1NDI5MGViN2I3NWU3YTFjN
 var $sfmConsumerSecret = "5287076090725084260";
 var $sfmOrgInstance = "cs19"; 
  var $sfd_myDomain = "/lightning/";
- 
+ var $g_domain = "/svmx/";
 
  
 // DC Global Variables
