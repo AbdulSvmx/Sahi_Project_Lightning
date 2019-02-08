@@ -21,9 +21,9 @@ $bo_act_login.login($g_url, $appiumAdminUn, $appiumAdminPwd);
 
 var $module = "Entitlement Verification";
 var $submodule = "Work Order Entitlement VF";
-//$bo_act_configurationProfiles.editGroupProfileForBooleanSettings($admin_group_profile,$module,$submodule, "SET024", true);
-//$bo_act_configurationProfiles.editGroupProfileForBooleanSettings($admin_group_profile,$module,$submodule, "SET025", true);
-//$bo_act_configurationProfiles.editGroupProfileForBooleanSettings($admin_group_profile,$module,$submodule, "SET026", true);
+$bo_act_configurationProfiles.editGroupProfileForBooleanSettings($admin_group_profile,$module,$submodule, "SET024", true);
+$bo_act_configurationProfiles.editGroupProfileForBooleanSettings($admin_group_profile,$module,$submodule, "SET025", true);
+$bo_act_configurationProfiles.editGroupProfileForBooleanSettings($admin_group_profile,$module,$submodule, "SET026", true);
 // to get the Product2 ID
 $objNameProduct= "Product2";
 $columnName = "Id";
