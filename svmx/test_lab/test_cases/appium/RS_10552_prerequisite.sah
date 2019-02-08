@@ -8,20 +8,21 @@ var $bProcessStatus = false;
 var $rs_10552 = _testcase("RS_10552_prerequisite","");
 $rs_10552.start();
 var $sfmNameToBeCloned = "Manage Work Order Lines - Usage";
-var $sfmName = "RS_10552Sample";
+var $sfmName = "RS_10552ProcessPage";
 var $isCustom = false;
 var $sfmTemplate = "SVMXSTD: Manage WO Usage Lines";
 var $sfmTemplateSaveAsName = "RS_10552Sample";
-var $containerName = ["Order Status","Order Status","Order Status","Order Status","Order Status","Parts","Parts","Parts","Parts"];
-var $fieldName = ["RS_6967_AutoChkBx",
+var $containerName = ["Order Status","Order Status","Order Status","Order Status","Order Status","Order Status","Parts","Parts","Parts","Parts"];
+var $fieldName = ["RS_10552_AutoChkBx",
                   "Auto_Date1",
-                  "RS_6967_Automation_DateTime",
-                  "RS_6967_Automation_Number",        
-                  "RS_6967_AvgPartsPrice",
-                  "RS_6967_AutoActivityMonth",
-                  "RS_6967_AutoActivityYear",
-                  "RS_6967_AutoDiscountLinePrice",
-                  "RS_6967_AutoCalLinePrice"];
+                  "RS_10552_Automation_DateTime",
+                  "RS_10552_Automation_Number",        
+                  "RS_10552_AvgPartsPrice",
+                  "Customer Down",
+                  "RS_10552_AutoActivityMonth",
+                  "RS_10552_AutoActivityYear",
+                  "RS_10552_AutoDiscountLinePrice",
+                  "RS_10552_AutoCalLinePrice"];
 
 var $wizardObject ="Work Order";
 var $wizardName="AutoRegression";
@@ -31,20 +32,20 @@ var $handOver="false";
 var $wizardCriteria=null;
 
 var $formulaTargetObjectArray = ["Work Order","Work Order","Work Order","Work Order","Work Order","Work Order","Parts","Parts","Parts","Parts"];
-var $formulaTargetFieldArray = ["RS_6967_AutoChkBx", "Auto_Date1","RS_6967_Automation_DateTime","RS_6967_Automation_Number","Billing Type","RS_6967_AvgPartsPrice","RS_6967_AutoActivityMonth","RS_6967_AutoActivityYear","RS_6967_AutoDiscountLinePrice","RS_6967_AutoCalLinePrice"];
-var $formulaNameArray = ["WO_RS_10552_AutoChkBx", "WO_RS_10552_Auto_Date1","WO_RS_10552_Automation_DateTime","WO_RS_10552_Automation_Number","WO_RS_10552_Billing Type","WO_RS_10552_AvgPartsPrice","WO_RS_10552_AutoActivityMonth","WO_RS_10552_AutoActivityYear","WO_RS_10552_AutoDiscountLinePrice","WO_RS_10552_AutoCalLinePrice"];
-var $formulaDescriptionArray = ["WO_RS_10552_AutoChkBx description", "WO_Auto_10552 description","WO_RS_10552_Automation_DateTime description","WO_RS_10552_Automation_Number description","WO_Billing Type description","WO_RS_10552_AvgPartsPrice description","WO_RS_10552_AutoActivityMonth description","WO_RS_10552_AutoActivityYear","WO_RS_10552_AutoDiscountLinePrice","WO_RS_10552_AutoCalLinePrice"];
+var $formulaTargetFieldArray = ["RS_10552_AutoChkBx", "Auto_Date1","RS_10552_Automation_DateTime","RS_10552_Automation_Number","Order Status","RS_10552_AvgPartsPrice","RS_10552_AutoActivityMonth","RS_10552_AutoActivityYear","RS_10552_AutoDiscountLinePrice","RS_10552_AutoCalLinePrice"];
+var $formulaNameArray = ["WO_RS_10552_AutoChkBx", "WO_RS_10552_Auto_Date1","WO_RS_10552_Automation_DateTime","WO_RS_10552_Automation_Number","WO_RS_10552_Order Status","WO_RS_10552_AvgPartsPrice","WO_RS_10552_AutoActivityMonth","WO_RS_10552_AutoActivityYear","WO_RS_10552_AutoDiscountLinePrice","WO_RS_10552_AutoCalLinePrice"];
+var $formulaDescriptionArray = ["WO_RS_10552_AutoChkBx description", "WO_Auto_10552 description","WO_RS_10552_Automation_DateTime description","WO_RS_10552_Automation_Number description","WO_Order Status description","WO_RS_10552_AvgPartsPrice description","WO_RS_10552_AutoActivityMonth description","WO_RS_10552_AutoActivityYear","WO_RS_10552_AutoDiscountLinePrice","WO_RS_10552_AutoCalLinePrice"];
 
 
-var $formulaArray =["$F.IF($F.EQUAL($D.Work_Order.SVMXC__Billing_Type__c,'Contract'), $D.Work_Order.RS_6967_AutoChkBx__c, 'true')",     
+var $formulaArray =["$F.IF($F.EQUAL($D.Work_Order.SVMXC__Billing_Type__c,'Contract'), $D.Work_Order.RS_10552_AutoChkBx__c, 'true')",     
                     "$F.DATE($F.YEAR($D.Work_Order.CreatedDate)+1, $F.MONTH($D.Work_Order.CreatedDate), 1)",
                     "$F.NOW()",
                     "$F.DATEDIFF($D.Work_Order.SVMXC__Completed_Date_Time__c, $D.Work_Order.SVMXC__Actual_Initial_Response__c, 'INDAYS')",
-                    "$F.IF($F.EQUAL($D.Work_Order.SVMXC__Customer_Down__c,'true'), $D.Work_Order.SVMXC__Billing_Type__c, 'Paid')",
-                    "$F.AVGOF($D.Parts, 'RS_6967_AutoDiscountLinePrice__c') ",     
+                    "$F.IF($F.EQUAL($D.Work_Order.SVMXC__Customer_Down__c,'true'), $D.Work_Order.SVMXC__Order_Status__c, 'Open')",
+                    "$F.AVGOF($D.Parts, 'RS_10552_AutoDiscountLinePrice__c') ",     
                     "$F.MONTH($D.Parts.SVMXC__Start_Date_and_Time__c) ",
                     "$F.YEAR($D.Parts.SVMXC__Start_Date_and_Time__c)",
-                    "$F.IF($F.LESSTHANEQUAL($D.Parts.RS_6967_AutoDiscountLinePrice__c, 10.4), 10.5, $D.Parts.RS_6967_AutoDiscountLinePrice__c)",   
+                    "$F.IF($F.LESSTHANEQUAL($D.Parts.RS_10552_AutoDiscountLinePrice__c, 10.4), 10.5, $D.Parts.RS_10552_AutoDiscountLinePrice__c)",   
                     "$F.MULTIPLY($D.Parts.SVMXC__Actual_Quantity2__c, $D. Parts.SVMXC__Actual_Price2__c) "
                    ];
 
@@ -58,9 +59,24 @@ $bo_act_login.login($g_url, $appiumAdminUn, $appiumAdminPwd);
 $bProcessStatus=$sfm_act_SFM.dvrScenario5($sfmNameToBeCloned,$sfmName,$isCustom, $sfmTemplateSaveAsName, $sfmTemplate, $fieldName, $containerName,$bProcessStatus);
 
 if($bProcessStatus==true){
+	$sfmPgLayoutName="RS_10552ProcessPage";
+//_setSelected($bo_pg_sfmTransactionAndDesigner.sel_sfmTemplate, "--None--");
+_wait(10000);
+_setValue($bo_pg_sfmTransactionAndDesigner.txt_sfmSavePageLayoutAs, $sfmPgLayoutName);
+_setValue($bo_pg_sfmTransactionAndDesigner.txt_sfmSavePageLayoutAsId, $sfmPgLayoutName);
+_click($bo_pg_sfmTransactionAndDesigner.btn_quickSave);
+_wait(3000);
 $sfm_act_SFM.addFieldToScreen($fieldName, $containerName);
+
+
+
+_click($sfm_pg_sfmDesigner.btn_quickSaveSFM);
+_wait(3000);
+
+
 $sfm_pg_formula.createFormula($formulaTargetObjectArray, $formulaTargetFieldArray, $formulaNameArray, $formulaDescriptionArray, $formulaArray);
 _click($sfm_pg_sfmDesigner.btn_quickSaveSFM);
+_wait(3000);
 _click($sfm_pg_sfmDesigner.btn_saveSFM); 
 _wait(3000,_isVisible($sfm_pg_sfmDesigner.lnk_home));
 
@@ -71,4 +87,7 @@ else
 {
 	_log("As process exists, process creation is not required");
 }
+//$sfm_act_wizards.addToWizard($wizardObject,$wizardName, $wizardType,$sfmName,$handOver,$profile,$wizardCriteria);
+
+
 _writeFile("true", $appiumPath+$sahiIntermediatoryPath, true);
