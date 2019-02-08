@@ -130,6 +130,7 @@ var $bo_act_interactiveEntitlement_WO = new function bo_act_interactiveEntitleme
 
 		$bo_act_workOrders.checkEntitlementPS($WO_Number);
 		_selectDomain("/svmx/");
+		_setStrictVisibilityCheck(true);
 		for (var $i = 0; $i < 25; $i++) {
 
 			if (_isVisible($bo_pg_interactiveEntitlement_CaseAndWO.btn_chkEntitlementPS)) {
@@ -201,6 +202,7 @@ var $bo_act_interactiveEntitlement_WO = new function bo_act_interactiveEntitleme
 
 		$bo_act_workOrders.checkEntitlementPS($WO_Number);
 		_selectDomain("/svmx/");
+		_setStrictVisibilityCheck(true);
 		for (var $i = 0; $i < 25; $i++) {
 
 			if (_isVisible($bo_pg_interactiveEntitlement_CaseAndWO.btn_chkEntitlementPS)) {
@@ -220,7 +222,7 @@ var $bo_act_interactiveEntitlement_WO = new function bo_act_interactiveEntitleme
 		_setStrictVisibilityCheck(true);
 		_selectDomain("/svmx/");
 		_click($bo_pg_interactiveEntitlement_CaseAndWO.btn_chkEntitlementPS);
-		this.clickCheckEntitlement();
+		_wait(15000);
 		_click($bo_pg_interactiveEntitlement_CaseAndWO.btn_settingsPS);
 		_click($bo_pg_interactiveEntitlement_CaseAndWO.btn_matchContactsPS);
 		_click($bo_pg_interactiveEntitlement_CaseAndWO.btn_matchAccountPS);
@@ -242,6 +244,7 @@ var $bo_act_interactiveEntitlement_WO = new function bo_act_interactiveEntitleme
 	this.performInteractiveEntitlementWOSCON_Account = function($WO_Number, $sconName) {
 
 		_selectDomain("/svmx/");
+		_setStrictVisibilityCheck(true);
 		for (var $i = 0; $i < 25; $i++) {
 			if (_isVisible($bo_pg_interactiveEntitlement_CaseAndWO.btn_checkEntitlement)) {
 				break;
@@ -281,6 +284,7 @@ var $bo_act_interactiveEntitlement_WO = new function bo_act_interactiveEntitleme
 	 this.performInteractiveEntitlement_NoAccountNoContact = function($WO_Number, $warrantyName){
 		 
 			_selectDomain("/svmx/");
+			_setStrictVisibilityCheck(true);
 			for (var $i = 0; $i < 25; $i++) {
 				if (_isVisible($bo_pg_interactiveEntitlement_CaseAndWO.btn_checkEntitlement)) {
 					break;
@@ -324,6 +328,7 @@ var $bo_act_interactiveEntitlement_WO = new function bo_act_interactiveEntitleme
 	this.performInteractiveEntitlementWO_UsingWarranty = function($WO_Number, $warrantyName) {
 		$bo_act_workOrders.checkEntitlement($WO_Number);
 		_selectDomain("/svmx/");
+		_setStrictVisibilityCheck(true);
 		for (var $i = 0; $i < 25; $i++) {
 			if (_isVisible($bo_pg_interactiveEntitlement_CaseAndWO.btn_checkEntitlement)) {
 				break;
