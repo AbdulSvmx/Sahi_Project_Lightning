@@ -8,7 +8,7 @@ var $bProcessStatus = false;
 var $rs_10552 = _testcase("RS_10552_prerequisite","");
 $rs_10552.start();
 var $sfmNameToBeCloned = "Manage Work Order Lines - Usage";
-var $sfmName = "RS_10552ProcessPage";
+var $sfmName = "RS_10552Process";
 var $isCustom = false;
 var $sfmTemplate = "SVMXSTD: Manage WO Usage Lines";
 var $sfmTemplateSaveAsName = "RS_10552Sample";
