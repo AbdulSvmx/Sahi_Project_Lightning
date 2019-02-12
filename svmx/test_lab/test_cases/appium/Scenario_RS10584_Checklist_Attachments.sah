@@ -28,6 +28,7 @@ if($ProcessStatus==false){
 	_wait(3000);
 	_setValue($bo_pg_sfmTransactionAndDesigner.txt_name, $sfmName);
 	_setValue($bo_pg_sfmTransactionAndDesigner.txt_sfmTransactionId, "");
+	_setValue($bo_pg_sfmTransactionAndDesigner.txt_sfmdescription,$sfmName);	
 	_setSelected($sfm_pg_screenDesigner.sel_createSFMTransaction, "to generate a Checklist/Survey type of Process");
 	_setStrictVisibilityCheck(true);
 	_setValue($sfm_pg_screenDesigner.txt_srcObject,"");

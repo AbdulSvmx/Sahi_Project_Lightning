@@ -59,7 +59,12 @@ $filter="Name";
 $ProductID =$sfm_act_restApiMethods.getRestApi($appiumAdminUn,$appiumAdminPwd,$appiumclient_id,$appiumclient_secret,$appiumorginstance,"GET", $objNameProduct, $columnName, $filter, $Product10538Name);
 _log($ProductID);
 
-
+//To get the IB 10538 ID
+$objNameIB= "SVMXC__Installed_Product__c";
+$columnName = "Id";
+$filter="Name";
+$IB10538ID =$sfm_act_restApiMethods.getRestApi($appiumAdminUn,$appiumAdminPwd,$appiumclient_id,$appiumclient_secret,$appiumorginstance,"GET", $objNameIB, $columnName, $filter, $IB10538Name);
+_log($IB10538ID);
 
 //To create a Work ORder
 $objNameWO= "SVMXC__Service_Order__c";
@@ -93,12 +98,7 @@ $bo_act_navigation.navigateToCreatedRecordUsingGlobalSearchWO($WOName);
 $bo_act_interactiveEntitlement_WO.performInteractiveEntitlementWO_UsingSconPSLines($WOName, $SCONName);
 
 
-//To get the IB 10538 ID
-$objNameIB= "SVMXC__Installed_Product__c";
-$columnName = "Id";
-$filter="Name";
-$IB10538ID =$sfm_act_restApiMethods.getRestApi($appiumAdminUn,$appiumAdminPwd,$appiumclient_id,$appiumclient_secret,$appiumorginstance,"GET", $objNameIB, $columnName, $filter, $IB10538Name);
-_log($IB10538ID);
+
 
 $objNameWarranty= "SVMXC__Warranty__c";
 $columnName = "Name";
